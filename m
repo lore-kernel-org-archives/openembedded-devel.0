@@ -1,34 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RAie3-00047R-5K
+	(envelope-from <martin.jansa@gmail.com>) id 1RAie7-0003wN-UF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Oct 2011 15:33:23 +0200
-Received: by eya25 with SMTP id 25so3011503eya.6
+	Mon, 03 Oct 2011 15:33:28 +0200
+Received: by mail-gy0-f175.google.com with SMTP id 8so3333738gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Oct 2011 06:27:47 -0700 (PDT)
+	Mon, 03 Oct 2011 06:27:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=trBQwHz1THrTVtc8bfXoeDQwcNpGV/RhRi4iI3rTrbA=;
-	b=l+LExdGIjiqIsu0jryLhcrp8bBGtT0vgBTigRRFGZlNXA7A9CK74R5A5liu5jMHouD
-	BbRbp6V7zYsPMgVLNuyLe6mvEfbl/a7ojWKAQxVxxuzZd7dIW5SMie8dDQPnM/WzG5eZ
-	yt/k0mPiQIaDildJj40tMX1OmcbspsdChnip0=
-Received: by 10.223.14.133 with SMTP id g5mr9594242faa.69.1317648466661;
-	Mon, 03 Oct 2011 06:27:46 -0700 (PDT)
+	bh=qZCk+N0c0J9ECMYSnkYuzhYJJatvw09Sfw5TMjDfS44=;
+	b=f52+LFxtG2ySV4imR4s0KWr8thMw+Ts8WfluIrfbJQ2L5EvbD7un1pTZGsp0/0kokx
+	sgtii3YG2GWJm6TrrRnbOQsC9+n7QrYMQIB3B2m1LbkgMk2/OKf21A1hzL8BOUjDxbLE
+	PljSjITT0sA5PLNogZ+0LJ5YGLuPAZtgkU3SU=
+Received: by 10.223.64.66 with SMTP id d2mr178770fai.116.1317648474916;
+	Mon, 03 Oct 2011 06:27:54 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f10sm21273969fac.14.2011.10.03.06.27.44
+	by mx.google.com with ESMTPS id b10sm21301310fam.1.2011.10.03.06.27.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Oct 2011 06:27:45 -0700 (PDT)
+	Mon, 03 Oct 2011 06:27:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Oct 2011 15:27:01 +0200
-Message-Id: <5a86285187b42a97a93f46b52e40eb804cf59ea9.1317648011.git.Martin.Jansa@gmail.com>
+Date: Mon,  3 Oct 2011 15:27:02 +0200
+Message-Id: <24cafb2072e1d5c6f6afbdb40ff5a829f909a612.1317648011.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.7
 In-Reply-To: <ebe115dd156cf69f5e7fb7076816c5faa3748ce6.1317648011.git.Martin.Jansa@gmail.com>
 References: <ebe115dd156cf69f5e7fb7076816c5faa3748ce6.1317648011.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1317648011.git.Martin.Jansa@gmail.com>
 References: <cover.1317648011.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCHv2 03/25] xf86-video-omapfb: merged to oe-core
+Subject: [meta-oe][meta-efl][PATCHv2 04/25] xserver-xorg: drop 1.10.2 and use xserver-xf86-lite-1.11.0 from oe-core instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,479 +42,476 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2011 13:33:23 -0000
+X-List-Received-Date: Mon, 03 Oct 2011 13:33:28 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../xf86-video-omapfb/0001-blacklist-tv-out.patch  |   28 --
- ...virtual-size-when-configuring-framebuffer.patch |   26 --
- .../xf86-video-omapfb/0003-force-plain-mode.patch  |   26 --
- .../0004-Attempt-to-fix-VRFB.patch                 |  320 --------------------
- .../xorg-driver/xf86-video-omapfb_git.bb           |   27 --
- 5 files changed, 0 insertions(+), 427 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0001-blacklist-tv-out.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0003-force-plain-mode.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0004-Attempt-to-fix-VRFB.patch
- delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb
+ .../xorg-xserver/xorg-xserver-common.inc           |  126 --------------------
+ .../50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch |   61 ----------
+ ...ack-assume-pixman-supports-overlapped-blt.patch |   14 --
+ .../hack-fbdev-ignore-return-mode.patch            |   39 ------
+ .../xserver-xorg-1.10.2/randr-support.patch        |  102 ----------------
+ .../replace-pkgconfig-sdkdir-poking.patch          |   33 -----
+ .../xorg-xserver/xserver-xorg_1.10.2.bb            |   33 -----
+ 7 files changed, 0 insertions(+), 408 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xorg-xserver-common.inc
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-assume-pixman-supports-overlapped-blt.patch
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-fbdev-ignore-return-mode.patch
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/randr-support.patch
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/replace-pkgconfig-sdkdir-poking.patch
+ delete mode 100644 meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.2.bb
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0001-blacklist-tv-out.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0001-blacklist-tv-out.patch
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xorg-xserver-common.inc b/meta-oe/recipes-graphics/xorg-xserver/xorg-xserver-common.inc
 deleted file mode 100644
-index 5ac3b7a..0000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0001-blacklist-tv-out.patch
+index 0b4a854..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xorg-xserver-common.inc
 +++ /dev/null
-@@ -1,28 +0,0 @@
--From 05efb061f1945425d214ff6b6050883e6d8633bf Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 26 Jan 2011 13:21:12 +0100
--Subject: [PATCH 1/3] blacklist tv out
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- src/omapfb-output-dss.c |    4 ++++
-- 1 files changed, 4 insertions(+), 0 deletions(-)
--
--diff --git a/src/omapfb-output-dss.c b/src/omapfb-output-dss.c
--index 6cc52de..83cb711 100644
----- a/src/omapfb-output-dss.c
--+++ b/src/omapfb-output-dss.c
--@@ -205,6 +205,10 @@ OMAPFBDSSOutputDetect (xf86OutputPtr output)
-- 	if(ofb->timings[idx][0] == '\0')
-- 		return XF86OutputStatusDisconnected;
-- 
--+	// Hack to disable the tv out
--+	if (strncmp(output->name, "tv", 2) == 0)
--+		return XF86OutputStatusDisconnected;
--+
-- 	return XF86OutputStatusConnected;
-- }
-- 
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch
-deleted file mode 100644
-index 41d5f13..0000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 316f31253902eb3567ef62faf52b3f0a5d6b0c93 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 26 Jan 2011 13:27:20 +0100
--Subject: [PATCH 2/3] Revert "Set virtual size when configuring framebuffer"
--
--This reverts commit 2653ef07883fbd1a5e7025f9300cf89b79ba429a.
-----
-- src/omapfb-crtc.c |    2 --
-- 1 files changed, 0 insertions(+), 2 deletions(-)
--
--diff --git a/src/omapfb-crtc.c b/src/omapfb-crtc.c
--index 9aaa52f..d321a5a 100644
----- a/src/omapfb-crtc.c
--+++ b/src/omapfb-crtc.c
--@@ -98,8 +98,6 @@ OMAPFBCrtcCommitChangeMode (xf86CrtcPtr crtc)
-- 	v = ofb->state_info;
-- 	v.xres = mode->HDisplay;
-- 	v.yres = mode->VDisplay;
---	v.xres_virtual = crtc->scrn->virtualX;
---	v.yres_virtual = crtc->scrn->virtualY;
-- 	v.activate = FB_ACTIVATE_NOW;
-- 	v.pixclock = KHZ2PICOS(mode->Clock ? mode->Clock : 56000);
-- 	v.left_margin = mode->HTotal - mode->HSyncEnd;
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0003-force-plain-mode.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0003-force-plain-mode.patch
-deleted file mode 100644
-index 06eeca9..0000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0003-force-plain-mode.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From b7acfade1ac15332ebfd24d4bf02b466858c8cf8 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 26 Jan 2011 13:20:20 +0100
--Subject: [PATCH 3/3] force 'plain' mode
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- src/omapfb-driver.c |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/src/omapfb-driver.c b/src/omapfb-driver.c
--index 018e040..48aa09c 100644
----- a/src/omapfb-driver.c
--+++ b/src/omapfb-driver.c
--@@ -326,7 +326,7 @@ OMAPFBPreInit(ScrnInfoPtr pScrn, int flags)
-- 	OMAPFBProbeController(ofb->ctrl_name);
-- 
-- 	/* Do we have the DSS kernel API? */
---	if (stat(SYSFS_DSS_DIR, &st) == 0) {
--+	if (0) { //stat(SYSFS_DSS_DIR, &st) == 0) {
-- 		ofb->dss = TRUE;
-- 	} else {
-- 		ofb->dss = FALSE;
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0004-Attempt-to-fix-VRFB.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0004-Attempt-to-fix-VRFB.patch
-deleted file mode 100644
-index 4d2ecd3..0000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb/0004-Attempt-to-fix-VRFB.patch
-+++ /dev/null
-@@ -1,320 +0,0 @@
--From 9f034f7a83751e4d1bbff6dd742d54bd96d38230 Mon Sep 17 00:00:00 2001
--From: Eino-Ville Talvala <talvala@stanford.edu>
--Date: Tue, 23 Aug 2011 18:37:01 +0200
--Subject: [PATCH] Attempt to fix VRFB Signed-off-by: Sebastian Krzyszkowiak
-- <dos@dosowisko.net>
--
-----
-- src/image-format-conversions.c |    4 +-
-- src/image-format-conversions.h |    2 +-
-- src/omapfb-driver.c            |   28 +++++++++++++--
-- src/omapfb-xv-blizzard.c       |    1 +
-- src/omapfb-xv-generic.c        |   72 +++++++++++++++++++++++++++++++--------
-- src/omapfb-xv.c                |    3 ++
-- 6 files changed, 88 insertions(+), 22 deletions(-)
--
--diff --git a/src/image-format-conversions.c b/src/image-format-conversions.c
--index dcefa9b..d43427d 100644
----- a/src/image-format-conversions.c
--+++ b/src/image-format-conversions.c
--@@ -38,13 +38,13 @@
-- #include "image-format-conversions.h"
-- 
-- /* Basic line-based copy for packed formats */
---void packed_line_copy(int w, int h, int stride, uint8_t *src, uint8_t *dest)
--+void packed_line_copy(int w, int h, int src_stride, int dst_stride, uint8_t *src, uint8_t *dest)
-- {
-- 	int i;
-- 	int len = w * 2;
-- 	for (i = 0; i < h; i++)
-- 	{
---		memcpy(dest + i * len, src + i * stride, len);
--+		memcpy(dest + i * dst_stride, src + i * src_stride, len);
-- 	}
-- }
-- 
--diff --git a/src/image-format-conversions.h b/src/image-format-conversions.h
--index 584896a..ba7caf2 100644
----- a/src/image-format-conversions.h
--+++ b/src/image-format-conversions.h
--@@ -27,7 +27,7 @@
-- #include <stdint.h>
-- 
-- /* Basic line-based copy for packed formats */
---void packed_line_copy(int w, int h, int stride, uint8_t *src, uint8_t *dest);
--+void packed_line_copy(int w, int h, int src_stride, int dst_stride, uint8_t *src, uint8_t *dest);
-- 
-- /* Basic C implementation of YV12/I420 to UYVY conversion */
-- void uv12_to_uyvy(int w, int h, int y_pitch, int uv_pitch, uint8_t *y_p, uint8_t *u_p, uint8_t *v_p, uint8_t *dest);
--diff --git a/src/omapfb-driver.c b/src/omapfb-driver.c
--index 48aa09c..07989f5 100644
----- a/src/omapfb-driver.c
--+++ b/src/omapfb-driver.c
--@@ -66,6 +66,7 @@
-- #define OMAPFB_VERSION 1000
-- #define OMAPFB_DRIVER_NAME "OMAPFB"
-- #define OMAPFB_NAME "omapfb"
--+#define ENFORCE_MODES
-- 
-- static Bool OMAPFBProbe(DriverPtr drv, int flags);
-- static Bool OMAPFBPreInit(ScrnInfoPtr pScrn, int flags);
--@@ -105,11 +106,13 @@ static SymTabRec OMAPFBChipsets[] = {
-- typedef enum {
-- 	OPTION_ACCELMETHOD,
-- 	OPTION_FB,
--+	OPTION_ROTATE,
-- } FBDevOpts;
-- 
-- static const OptionInfoRec OMAPFBOptions[] = {
-- 	{ OPTION_ACCELMETHOD,	"AccelMethod",	OPTV_STRING,	{0},	FALSE },
-- 	{ OPTION_FB,		"fb",		OPTV_STRING,	{0},	FALSE },
--+	{ OPTION_ROTATE,	"rotation",	OPTV_STRING,	{0},	FALSE },
-- 	{ -1,			NULL,		OPTV_NONE,	{0},	FALSE }
-- };
-- 
--@@ -286,6 +289,7 @@ OMAPFBPreInit(ScrnInfoPtr pScrn, int flags)
-- {
-- 	OMAPFBPtr ofb;
-- 	EntityInfoPtr pEnt;
--+	char *rotate;
-- 	rgb zeros = { 0, 0, 0 };
-- 	struct stat st;
-- 
--@@ -379,6 +383,8 @@ OMAPFBPreInit(ScrnInfoPtr pScrn, int flags)
-- 	pScrn->progClock = TRUE;
-- 	pScrn->chipset   = "omapfb";
-- 	
--+	xf86DrvMsg(pScrn->scrnIndex, X_INFO, "Rotate test version 0.02\n");
--+	
-- 	/* Start with configured virtual size */
-- 	pScrn->virtualX = pScrn->display->virtualX;
-- 	pScrn->virtualY = pScrn->display->virtualY;
--@@ -496,12 +502,21 @@ OMAPFBScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-- 	ofb->CloseScreen = pScreen->CloseScreen;
-- 	pScreen->CloseScreen = OMAPFBCloseScreen;
-- 
--+	/* Enforce the default mode (this is silly I guess) */
--+#ifdef ENFORCE_MODES
--+	//xf86DrvMsg(pScrn->scrnIndex, X_INFO, "Enforcing modes\n");
--+	//set_mode(ofb, &ofb->default_mode);
--+	//pScrn->displayWidth = ofb->fixed_info.line_length /
--+	//  (ofb->state_info.bits_per_pixel>>3); //ofb->state_info.xres;
--+#endif
--+
-- 	/* Map our framebuffer memory */
--+	ofb->mem_info.size = ofb->fixed_info.line_length * ofb->state_info.yres;
-- 	ofb->fb = mmap (NULL, ofb->mem_info.size,
-- 	                PROT_READ | PROT_WRITE, MAP_SHARED,
-- 	                ofb->fd, 0);
---	if (ofb->fb == NULL) {
---		xf86DrvMsg(scrnIndex, X_ERROR, "Mapping framebuffer memory failed\n");
--+	if (ofb->fb == MAP_FAILED) {
--+		xf86DrvMsg(scrnIndex, X_ERROR, "Mapping framebuffer memory failed, wanted %d bytes.\n", ofb->mem_info.size);
-- 		return FALSE;
-- 	}
-- 
--@@ -578,8 +593,13 @@ OMAPFBScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-- 	} else if (!ofb->dss) {
-- 
-- 		ofb->plane_info.enabled = 1;
---		ofb->plane_info.out_width = ofb->state_info.xres;
---		ofb->plane_info.out_height = ofb->state_info.yres;
--+		if (ofb->state_info.rotate == 0 || ofb->state_info.rotate == 2) {
--+			ofb->plane_info.out_width = ofb->state_info.xres;
--+			ofb->plane_info.out_height = ofb->state_info.yres;
--+		} else {
--+			ofb->plane_info.out_width = ofb->state_info.yres;
--+			ofb->plane_info.out_height = ofb->state_info.xres;
--+		}
-- 
-- 		if (ioctl (ofb->fd, OMAPFB_SETUP_PLANE, &ofb->plane_info)) {
-- 			xf86DrvMsg(scrnIndex, X_ERROR,
--diff --git a/src/omapfb-xv-blizzard.c b/src/omapfb-xv-blizzard.c
--index 406ffc6..b71d2aa 100644
----- a/src/omapfb-xv-blizzard.c
--+++ b/src/omapfb-xv-blizzard.c
--@@ -220,6 +220,7 @@ int OMAPFBXVPutImageBlizzard (ScrnInfoPtr pScrn,
-- 			packed_line_copy(src_w & ~3,
-- 			                 src_h & ~3,
-- 			                 ((src_w + 1) & ~1) * 2,
--+					 ofb->port->fixed_info.line_length,
-- 			                 (uint8_t*)buf,
-- 			                 (uint8_t*)ofb->port->fb);
-- 			break;
--diff --git a/src/omapfb-xv-generic.c b/src/omapfb-xv-generic.c
--index e6f89fe..b33f344 100644
----- a/src/omapfb-xv-generic.c
--+++ b/src/omapfb-xv-generic.c
--@@ -62,7 +62,7 @@ int OMAPXVAllocPlane(ScrnInfoPtr pScrn)
-- {
-- 	OMAPFBPtr ofb = OMAPFB(pScrn);
-- 
---	/* The memory size is already set in OMAPFBXVQueryImageAttributes */
--+	/* The memory size is already set before we get here */
-- 	if (ioctl(ofb->port->fd, OMAPFB_SETUP_MEM, &ofb->port->mem_info) != 0) {
-- 		xf86DrvMsg(pScrn->scrnIndex, X_ERROR,
-- 		           "Failed to allocate video plane memory\n");
--@@ -73,19 +73,20 @@ int OMAPXVAllocPlane(ScrnInfoPtr pScrn)
-- 	ofb->port->fb = mmap (NULL, ofb->port->mem_info.size,
-- 	                PROT_READ | PROT_WRITE, MAP_SHARED,
-- 	                ofb->port->fd, 0);
---	if (ofb->port->fb == NULL) {
--+	if (ofb->port->fb == MAP_FAILED) {
-- 		xf86DrvMsg(pScrn->scrnIndex, X_ERROR,
-- 		           "Mapping video memory failed\n");
-- 		return XvBadAlloc;
-- 	}
-- 
-- 	/* Update the state info */
--+	/* Let's not - it's bad
-- 	if (ioctl (ofb->port->fd, FBIOGET_VSCREENINFO, &ofb->port->state_info))
-- 	{
-- 		xf86Msg(X_ERROR, "%s: Reading state info failed\n", __FUNCTION__);
-- 		return XvBadAlloc;
-- 	}
---
--+	*/
-- 	return Success;
-- }
-- 
--@@ -93,6 +94,7 @@ int OMAPXVAllocPlane(ScrnInfoPtr pScrn)
-- int OMAPXVSetupVideoPlane(ScrnInfoPtr pScrn)
-- {
-- 	OMAPFBPtr ofb = OMAPFB(pScrn);
--+	int ret;
-- 
-- 	if (ioctl (ofb->port->fd, FBIOPUT_VSCREENINFO, &ofb->port->state_info))
-- 	{
--@@ -104,6 +106,31 @@ int OMAPXVSetupVideoPlane(ScrnInfoPtr pScrn)
-- 		xf86Msg(X_ERROR, "%s: Reading state info failed\n", __FUNCTION__);
-- 		return XvBadAlloc;
-- 	}
--+	/* Changing rotation/nonstd flags can change the fixed info! */
--+	if (ioctl (ofb->port->fd, FBIOGET_FSCREENINFO, &ofb->port->fixed_info))
--+	{
--+		xf86Msg(X_ERROR, "%s: Reading state info failed\n", __FUNCTION__);
--+		return XvBadAlloc;
--+	}
--+	/* Correct fixed info requires recalculation of needed memory */
--+	ofb->port->mem_info.size = ofb->port->fixed_info.line_length * ofb->port->state_info.yres;
--+
--+	/* Allocate buffer memory */
--+	ret = OMAPXVAllocPlane(pScrn);
--+	if (ret != Success)
--+		return ret;
--+
--+	/* Workaround for reset of mode after memory allo */
--+	if (ioctl (ofb->port->fd, FBIOPUT_VSCREENINFO, &ofb->port->state_info))
--+	{
--+		xf86Msg(X_ERROR, "%s: setting state info failed\n", __FUNCTION__);
--+		return XvBadAlloc;
--+	}
--+	if (ioctl (ofb->port->fd, FBIOGET_VSCREENINFO, &ofb->port->state_info))
--+	{
--+		xf86Msg(X_ERROR, "%s: Reading state info failed\n", __FUNCTION__);
--+		return XvBadAlloc;
--+	}
-- 
-- 	if(ioctl(ofb->port->fd, OMAPFB_SETUP_PLANE,
-- 	   &ofb->port->plane_info) != 0) {
--@@ -124,6 +151,8 @@ int OMAPFBXVPutImageGeneric (ScrnInfoPtr pScrn,
--                              DrawablePtr pDraw)
-- {
-- 	OMAPFBPtr ofb = OMAPFB(pScrn);
--+	short drw_temp;
--+	short rot_xres, rot_yres;
-- 
-- 	if (!ofb->port->plane_info.enabled
-- 	 || ofb->port->update_window.x != src_x
--@@ -163,13 +192,6 @@ int OMAPFBXVPutImageGeneric (ScrnInfoPtr pScrn,
-- 			return Success;
-- 		}
-- 
---		/* If we don't have the plane running, enable it */
---		if (!ofb->port->plane_info.enabled) {
---			ret = OMAPXVAllocPlane(pScrn);
---			if (ret != Success)
---				return ret;
---		}
---
-- 		/* Set up the state info, xres and yres will be used for
-- 		 * scaling to the values in the plane info struct
-- 		 */
--@@ -179,12 +201,31 @@ int OMAPFBXVPutImageGeneric (ScrnInfoPtr pScrn,
-- 		ofb->port->state_info.yres_virtual = 0;
-- 		ofb->port->state_info.xoffset = 0;
-- 		ofb->port->state_info.yoffset = 0;
---		ofb->port->state_info.rotate = 0;
--+		//ofb->port->state_info.rotate = 0;
-- 		ofb->port->state_info.grayscale = 0;
-- 		ofb->port->state_info.activate = FB_ACTIVATE_NOW;
-- 		ofb->port->state_info.bits_per_pixel = 0;
-- 		ofb->port->state_info.nonstd = xv_to_omapfb_format(image);
-- 
--+		/* Plane info does not rotate with state_info */
--+		if (ofb->port->state_info.rotate == 1 ||
--+		  ofb->port->state_info.rotate == 3) {
--+			drw_temp = drw_x;
--+			drw_x = drw_y;
--+			drw_y = drw_temp;
--+
--+			drw_temp = drw_w;
--+			drw_w = drw_h;
--+			drw_h = drw_temp;
--+
--+			rot_xres = ofb->port->state_info.yres;
--+			rot_yres = ofb->port->state_info.xres;
--+		} else {
--+			rot_xres = ofb->port->state_info.xres;
--+			rot_yres = ofb->port->state_info.yres;
--+		}
--+
--+
-- 		/* Set up the video plane info */
-- 		ofb->port->plane_info.enabled = 1;
-- 		ofb->port->plane_info.pos_x = drw_x;
--@@ -193,13 +234,13 @@ int OMAPFBXVPutImageGeneric (ScrnInfoPtr pScrn,
-- 		ofb->port->plane_info.out_height = drw_h & ~15;
-- 
-- 		/* Cap output to screen size */
---		if (ofb->port->plane_info.out_width > ofb->state_info.xres) {
--+		if (ofb->port->plane_info.out_width > rot_xres) {
-- 			ofb->port->plane_info.pos_x = 0;
---			ofb->port->plane_info.out_width = ofb->state_info.xres;
--+			ofb->port->plane_info.out_width = rot_xres;
-- 		}
---		if (ofb->port->plane_info.out_height > ofb->state_info.yres) {
--+		if (ofb->port->plane_info.out_height > rot_yres) {
-- 			ofb->port->plane_info.pos_y = 0;
---			ofb->port->plane_info.out_height = ofb->state_info.yres;
--+			ofb->port->plane_info.out_height = rot_yres;
-- 		}
-- 
-- 		ret = OMAPXVSetupVideoPlane(pScrn);
--@@ -223,6 +264,7 @@ int OMAPFBXVPutImageGeneric (ScrnInfoPtr pScrn,
-- 			packed_line_copy(src_w & ~15,
-- 			                 src_h & ~15,
-- 			                 ((src_w + 1) & ~1) * 2,
--+			                 ofb->port->fixed_info.line_length,
-- 			                 (uint8_t*)buf,
-- 			                 (uint8_t*)ofb->port->fb);
-- 			break;
--diff --git a/src/omapfb-xv.c b/src/omapfb-xv.c
--index 1df651e..0fee2c6 100644
----- a/src/omapfb-xv.c
--+++ b/src/omapfb-xv.c
--@@ -169,8 +169,11 @@ static int OMAPFBXVQueryImageAttributes (ScrnInfoPtr pScrn,
-- 	h = *height;
-- 
-- 	w = (w + 1) & ~1;
--+
--+	/* Can't calculate these here - don't know line length
-- 	ofb->port->mem_info.size = w << 1;
-- 	ofb->port->mem_info.size *= h;
--+	*/
-- 
-- 	return size;
-- }
---- 
--1.7.5.4
--
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb
-deleted file mode 100644
-index a73b5e6..0000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--require recipes-graphics/xorg-driver/xorg-driver-common.inc
--
--DESCRIPTION = "X.Org X server -- OMAP display driver"
--PV = "0.1.1+${PR}+gitr${SRCREV}"
--PR = "r16"
--
+@@ -1,126 +0,0 @@
+-HOMEPAGE = "http://www.x.org"
+-SECTION = "x11/base"
 -LICENSE = "MIT-X"
--LIC_FILES_CHKSUM = "file://src/omapfb-driver.c;beginline=1;endline=30;md5=a44c2a37e04d1c2c5f0313afb493f833"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3dd2bbe3563837f80ed8926b06c1c353"
 -
--SRC_URI = "git://git.pingu.fi/xf86-video-omapfb;protocol=http \
--           file://0001-blacklist-tv-out.patch \
--           file://0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch \
--           file://0003-force-plain-mode.patch \
--           file://0004-Attempt-to-fix-VRFB.patch \
--          "
+-INC_PR = "r21"
 -
--SRCREV_pn-${PN} = "28c006c94e57ea71df11ec4fff79d7ffcfc4860f"
--S = "${WORKDIR}/git"
+-# xf86-*-* packages depend on an X server built with the xfree86 DDX
+-# so we have a virtual to represent that:
+-PROVIDES = "virtual/xserver-xf86"
 -
--EXTRA_OECONF_armv7a = " --enable-neon "
+-# Other packages tend to just care that there is *an* X server:
+-PROVIDES += "virtual/xserver"
 -
--# Use overlay 2 on omap3 to enable other apps to use overlay 1 (e.g. dmai or omapfbplay)
--do_compile_prepend_armv7a () {
--        sed -i -e s:fb1:fb2:g ${S}/src/omapfb-xv.c
+-# Config manager for xserver, options are: hal, udev, empty (for configuration in xorg.conf)
+-DISTRO_XORG_CONFIG_MANAGER ?= "udev"
+-
+-# default none, enabled by DISTRO_XORG_CONFIG_MANAGER setting
+-CONFIG_MANAGER_OPTION += "${@['--disable-config-hal','--enable-config-hal',''][bb.data.getVar('DISTRO_XORG_CONFIG_MANAGER',d) in ['hal']]}"
+-CONFIG_MANAGER_OPTION += "${@['--disable-config-udev','--enable-config-udev',''][bb.data.getVar('DISTRO_XORG_CONFIG_MANAGER',d) in ['udev']]}"
+-
+-DEPENDS = "fontconfig freetype flex-native liblbxutil kbproto \ 
+-xf86driproto drm glproto randrproto renderproto fixesproto damageproto \
+-xcmiscproto xextproto xproto xf86miscproto xf86vidmodeproto xf86bigfontproto \
+-scrnsaverproto bigreqsproto resourceproto fontsproto inputproto \
+-xf86dgaproto videoproto compositeproto trapproto recordproto dmxproto \
+-resourceproto xineramaproto xtrans evieext libxkbfile libxfont libxau \
+-libfontenc libxdmcp libxxf86vm libxaw libxmu libxt libxpm libxext libx11 \
+-libxkbui libxxf86misc libxi libdmx libxtst libxres virtual/libgl libxcalibrate \
+-libxv ${DISTRO_XORG_CONFIG_MANAGER}"
+-
+-RRECOMMENDS_${PN} = "libpciaccess"
+-
+-XORG_PN = "xorg-server"
+-SRC_URI = "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${PV}.tar.bz2"
+-
+-S = "${WORKDIR}/${XORG_PN}-${PV}"
+-
+-inherit autotools pkgconfig glx-use-tls
+-
+-EXTRA_OECONF += " --enable-xcalibrate \
+-                  --enable-kdrive \
+-                  --enable-xephyr \
+-                  --disable-xfbdev \
+-                  --disable-xnest \
+-                  --disable-kdrive-vesa \
+-                  --with-default-font-path="${datadir}/fonts/X11/misc" \
+-                  ac_cv_file__usr_share_sgml_X11_defs_ent=no"
+-
+-# CONFIG_MANAGER_OPTION is used only in recipes which support those options
+-
+-EXTRA_OECONF_append_arm = " ac_cv_header_linux_apm_bios_h=no "
+-
+-PACKAGES =+ "xserver-security-policy"
+-FILES_xserver-security-policy += "${libdir}/xserver/SecurityPolicy"
+-RRECOMMENDS_${PN} += "xserver-security-policy xkeyboard-config rgb xserver-xf86-config"
+-
+-PACKAGES =+ "${PN}-sdl ${PN}-fbdev ${PN}-xprint ${PN}-xvfb ${PN}-utils ${PN}-xephyr"
+-
+-RDEPENDS_${PN}-xvfb += "xkeyboard-config"
+-
+-FILES_${PN}-fbdev = "${bindir}/Xfbdev"
+-FILES_${PN}-sdl = "${bindir}/Xsdl"
+-FILES_${PN}-xprint = "${libdir}/X11/xserver/*/print"
+-FILES_${PN}-xvfb = "${bindir}/Xvfb"
+-FILES_${PN}-utils = "${bindir}/scanpci ${bindir}/pcitweak ${bindir}/ioport ${bindir}/in[bwl] ${bindir}/out[bwl] ${bindir}/mmap[rw] ${bindir}/gtf ${bindir}/getconfig ${bindir}/getconfig.pl"
+-FILES_${PN} = "${bindir} ${libdir}/X11/Options ${libdir}/X11/Cards ${libdir}/X11/getconfig ${libdir}/X11/etc ${libdir}/modules/*.so ${libdir}/xorg/modules/*.so /etc/X11 ${libdir}/xorg/protocol.txt ${datadir}/X11/xorg.conf.d"
+-FILES_${PN}-doc += "${libdir}/X11/doc ${datadir}/X11/xkb/compiled/README.compiled"
+-FILES_${PN}-xephyr = "${bindir}/Xephyr"
+-
+-FILES_${PN}-dbg += "${libdir}/xorg/modules/.debug \
+-                    ${libdir}/xorg/modules/*/.debug \
+-                    ${libdir}/xorg/modules/*/*/.debug \
+-                   "
+-
+-# Split out some modules and extensions from the main package
+-# These aren't needed for basic operations and only take up space:
+-#  32.0k   libdri.so
+-#  336.0k  libglx.so
+-#  1360k   libint10.so
+-#  180.0k  libwfb.so
+-#  320.0k  libxaa.so
+-#  124.0k  libxf1bpp.so
+-#  84.0k   libxf4bpp.so
+-#          librecord.so
+-#          libextmod.so
+-#          libdbe.so
+-
+-PACKAGES =+ "${PN}-extension-dri \
+-             ${PN}-extension-dri2 \
+-             ${PN}-extension-glx \
+-             ${PN}-extension-record \
+-             ${PN}-extension-extmod \
+-             ${PN}-extension-dbe \
+-             ${PN}-module-libint10 \
+-             ${PN}-module-libafb \
+-             ${PN}-module-libwfb  \
+-             ${PN}-module-libmfb \
+-             ${PN}-module-libcfb \
+-             ${PN}-module-xaa \
+-             ${PN}-module-libxf1bpp \
+-             ${PN}-module-libxf4bpp"
+-
+-
+-FILES_${PN}-extension-dri = "${libdir}/xorg/modules/extensions/libdri.so"
+-FILES_${PN}-extension-dri2 = "${libdir}/xorg/modules/extensions/libdri2.so"
+-FILES_${PN}-extension-glx = "${libdir}/xorg/modules/extensions/libglx.so"
+-FILES_${PN}-extension-record = "${libdir}/xorg/modules/extensions/librecord.so"
+-FILES_${PN}-extension-extmod = "${libdir}/xorg/modules/extensions/libextmod.so"
+-FILES_${PN}-extension-dbe = "${libdir}/xorg/modules/extensions/libdbe.so"
+-FILES_${PN}-module-libint10 = "${libdir}/xorg/modules/libint10.so"
+-FILES_${PN}-module-libafb = "${libdir}/xorg/modules/libafb.so"
+-FILES_${PN}-module-libwfb = "${libdir}/xorg/modules/libwfb.so"
+-FILES_${PN}-module-libmfb = "${libdir}/xorg/modules/libmfb.so"
+-FILES_${PN}-module-libcfb = "${libdir}/xorg/modules/libcfb.so"
+-FILES_${PN}-module-xaa = "${libdir}/xorg/modules/libxaa.so"
+-FILES_${PN}-module-libxf1bpp = "${libdir}/xorg/modules/libxf1bpp.so"
+-FILES_${PN}-module-libxf4bpp = "${libdir}/xorg/modules/libxf4bpp.so"
+-
+-PACKAGES =+ "${PN}-multimedia-modules"
+-
+-FILES_${PN}-multimedia-modules = "${libdir}/xorg/modules/multimedia/*drv*"
+-
+-do_install_append () {
+-	ln -sf ${datadir}/fonts/X11 ${D}/${libdir}/X11/fonts
+-}
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch
+deleted file mode 100644
+index 2c4078a..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-From 50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd Mon Sep 17 00:00:00 2001
+-From: Aaron Plattner <aplattner@nvidia.com>
+-Date: Tue, 24 May 2011 23:02:42 +0000
+-Subject: randr: check rotated virtual size limits correctly
+-
+-Commit d1107918d4626268803b54033a07405122278e7f introduced checks to
+-the RandR path that cause RRSetScreenConfig requests to fail if the
+-size is too large.  Unfortunately, when RandR 1.1 rotation is enabled
+-it compares the rotated screen dimensions to the unrotated limits,
+-which causes 90- and 270-degree rotation to fail unless your screen
+-happens to be square:
+-
+-  X Error of failed request:  BadValue (integer parameter out of range for operation)
+-    Major opcode of failed request:  153 (RANDR)
+-    Minor opcode of failed request:  2 (RRSetScreenConfig)
+-    Value in failed request:  0x780
+-    Serial number of failed request:  14
+-    Current serial number in output stream:  14
+-
+-Fix this by moving the check above the code that swaps the dimensions
+-based on the rotation.
+-
+-Signed-off-by: Aaron Plattner <aplattner@nvidia.com>
+-Reviewed-by: Jeremy Huddleston <jeremyhu@apple.com>
+-Tested-by: Robert Hooker <robert.hooker@canonical.com>
+-Tested-by: Kent Baxley <kent.baxley@canonical.com>
+-Signed-off-by: Keith Packard <keithp@keithp.com>
+-(cherry picked from commit b6c7b9b2f39e970cedb6bc1e073f901e28cb0fa3)
+----
+-diff --git a/randr/rrscreen.c b/randr/rrscreen.c
+-index 1bc1a9e..da6d48d 100644
+---- a/randr/rrscreen.c
+-+++ b/randr/rrscreen.c
+-@@ -910,12 +910,6 @@ ProcRRSetScreenConfig (ClientPtr client)
+-      */
+-     width = mode->mode.width;
+-     height = mode->mode.height;
+--    if (rotation & (RR_Rotate_90|RR_Rotate_270))
+--    {
+--	width = mode->mode.height;
+--	height = mode->mode.width;
+--    }
+--
+-     if (width < pScrPriv->minWidth || pScrPriv->maxWidth < width) {
+- 	client->errorValue = width;
+- 	free(pData);
+-@@ -927,6 +921,12 @@ ProcRRSetScreenConfig (ClientPtr client)
+- 	return BadValue;
+-     }
+- 
+-+    if (rotation & (RR_Rotate_90|RR_Rotate_270))
+-+    {
+-+	width = mode->mode.height;
+-+	height = mode->mode.width;
+-+    }
+-+
+-     if (width != pScreen->width || height != pScreen->height)
+-     {
+- 	int	c;
+---
+-cgit v0.8.3-6-g21f6
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-assume-pixman-supports-overlapped-blt.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-assume-pixman-supports-overlapped-blt.patch
+deleted file mode 100644
+index a947582..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-assume-pixman-supports-overlapped-blt.patch
++++ /dev/null
+@@ -1,14 +0,0 @@
+-diff --git a/fb/fbcopy.c b/fb/fbcopy.c
+-index 07eb663..ba394b7 100644
+---- a/fb/fbcopy.c
+-+++ b/fb/fbcopy.c
+-@@ -91,8 +91,7 @@ fbCopyNtoN (DrawablePtr	pSrcDrawable,
+-     while (nbox--)
+-     {
+- #ifndef FB_ACCESS_WRAPPER /* pixman_blt() doesn't support accessors yet */
+--	if (pm == FB_ALLONES && alu == GXcopy && !reverse &&
+--	    !upsidedown)
+-+	if (pm == FB_ALLONES && alu == GXcopy)
+- 	{
+- 	    if (!pixman_blt ((uint32_t *)src, (uint32_t *)dst, srcStride, dstStride, srcBpp, dstBpp,
+- 			     (pbox->x1 + dx + srcXoff),
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-fbdev-ignore-return-mode.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-fbdev-ignore-return-mode.patch
+deleted file mode 100644
+index d3661cb..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/hack-fbdev-ignore-return-mode.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-Ugly hack that prevents server termination with xf86-video-fbdev-0.4.1
+-(and probably other) while returning from chvt or resume on some
+-hardware (e. g. zaurus).
+-
+-Correct fix would require debugging of fbdev mode during LeaveVT and
+-EnterVT.
+-
+-This patch may cause staying in incorrect or corrupted display mode
+-after EnterVT, but on man affected devices it does not cause any visible
+-problems.
+-
+-Hacked code is never called on properly written drivers.
+-
+-Devices affected and testers involved for future patch removal:
+-Sharp Zaurus (spitz/akita): Stanislav Brabec <utx@penguin.cz>
+-
+-See also:
+-https://bugzilla.redhat.com/show_bug.cgi?id=238451
+-
+-The bug (first line indicates that your device is affected):
+-
+-(EE) FBDEV(0): FBIOPUT_VSCREENINFO succeeded but modified mode
+-
+-Fatal server error:
+-EnterVT failed for screen 0
+-
+-Index: xorg-server-1.7.3/hw/xfree86/fbdevhw/fbdevhw.c
+-===================================================================
+---- xorg-server-1.7.3.orig/hw/xfree86/fbdevhw/fbdevhw.c
+-+++ xorg-server-1.7.3/hw/xfree86/fbdevhw/fbdevhw.c
+-@@ -571,7 +571,7 @@ fbdevHWSetMode(ScrnInfoPtr pScrn, Displa
+- #if DEBUG
+- 		print_fbdev_mode("returned", &set_var);
+- #endif
+--		return FALSE;
+-+		/* return FALSE; UGLY HACK to allow return from chvt */
+- 	}
+- 
+- 	if (!check)
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/randr-support.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/randr-support.patch
+deleted file mode 100644
+index 632a64c..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/randr-support.patch
++++ /dev/null
+@@ -1,102 +0,0 @@
+-diff -ur xorg-server-1.10.1.901//hw/xfree86/common/xf86Xinput.c git/xorg-server-1.10.1.901//hw/xfree86/common/xf86Xinput.c
+---- xorg-server-1.10.1.901//hw/xfree86/common/xf86Xinput.c	2011-04-28 09:25:00.000000000 +0200
+-+++ git/xorg-server-1.10.1.901//hw/xfree86/common/xf86Xinput.c	2011-05-19 00:31:01.178439874 +0200
+-@@ -99,6 +99,8 @@
+- 		return;								\
+- 	}
+- 
+-+#define RR_Rotate_All    (RR_Rotate_0|RR_Rotate_90|RR_Rotate_180|RR_Rotate_270)
+-+
+- EventListPtr xf86Events = NULL;
+- 
+- static int
+-@@ -1408,4 +1410,73 @@
+-     EnableDevice(dev, TRUE);
+- }
+- 
+-+/* Taken from evdev-properties.h. */
+-+#define EVDEV_PROP_SWAP_AXES "Evdev Axes Swap"
+-+#define EVDEV_PROP_INVERT_AXES "Evdev Axis Inversion"
+-+
+-+/* This is a hack until we get device -> CRTC association. */
+-+void
+-+xf86InputRotationNotify(Rotation rotation)
+-+{
+-+    DeviceIntPtr dev;
+-+    //LocalDevicePtr local;
+-+    int ret;
+-+    int swap_axes = 0;
+-+    CARD8 invert[2] = { 0, 0 };
+-+    static Atom prop_swap = 0, prop_invert = 0;
+-+    static int atom_generation = -1;
+-+    
+-+    if (atom_generation != serverGeneration) {
+-+        prop_swap = 0;
+-+        prop_invert = 0;
+-+    }
+-+
+-+    switch (rotation & RR_Rotate_All) {
+-+    case RR_Rotate_0:
+-+        swap_axes = 1;
+-+        invert[0] = 0;
+-+        invert[1] = 0;
+-+        break;
+-+    case RR_Rotate_90:
+-+        swap_axes = 0;
+-+        invert[0] = 0;
+-+        invert[1] = 1;
+-+        break;
+-+    case RR_Rotate_180:
+-+        swap_axes = 1;
+-+        invert[0] = 1;
+-+        invert[1] = 1;
+-+        break;
+-+    case RR_Rotate_270:
+-+        swap_axes = 0;
+-+        invert[0] = 1;
+-+        invert[1] = 0;
+-+        break;
+-+    }
+-+
+-+    if (!prop_swap)
+-+        prop_swap = MakeAtom(EVDEV_PROP_SWAP_AXES,
+-+                             strlen(EVDEV_PROP_SWAP_AXES), TRUE);
+-+    if (!prop_invert)
+-+        prop_invert = MakeAtom(EVDEV_PROP_INVERT_AXES,
+-+                               strlen(EVDEV_PROP_INVERT_AXES), TRUE);
+-+
+-+    for (dev = inputInfo.devices; dev; dev = dev->next) {
+-+        //local = dev->public.devicePrivate;
+-+        ret = XIChangeDeviceProperty(dev, prop_swap, XA_INTEGER, 8,
+-+                                     PropModeReplace, 1, &swap_axes, FALSE);
+-+        if (ret != Success) {
+-+            xf86Msg(X_ERROR, "Changing swap_xy property failed!\n");
+-+            continue;
+-+        }
+-+        ret = XIChangeDeviceProperty(dev, prop_invert, XA_INTEGER, 8,
+-+                                     PropModeReplace, 2, invert, FALSE);
+-+        if (ret != Success) {
+-+            xf86Msg(X_ERROR, "Changing invert property failed!\n");
+-+            continue;
+-+        }
+-+    }
+-+}
+-+
+-+
+- /* end of xf86Xinput.c */
+-diff -ur xorg-server-1.10.1.901//hw/xfree86/modes/xf86Crtc.c git/xorg-server-1.10.1.901//hw/xfree86/modes/xf86Crtc.c
+---- xorg-server-1.10.1.901//hw/xfree86/modes/xf86Crtc.c	2011-04-28 09:25:00.000000000 +0200
+-+++ git/xorg-server-1.10.1.901//hw/xfree86/modes/xf86Crtc.c	2011-05-19 00:23:16.244383998 +0200
+-@@ -389,6 +389,12 @@
+-     if (didLock)
+- 	crtc->funcs->unlock (crtc);
+- 
+-+    /*
+-+     * Rotate Touchscreen
+-+     */
+-+    xf86InputRotationNotify(crtc->rotation);
+-+
+-+    
+-     return ret;
+- }
+- 
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/replace-pkgconfig-sdkdir-poking.patch b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/replace-pkgconfig-sdkdir-poking.patch
+deleted file mode 100644
+index 3967c4c..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg-1.10.2/replace-pkgconfig-sdkdir-poking.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-configury forces pkg-config to poke for sdkdir variable which 
+-pkg-config happily returns but does not prepend sysroot to it
+-since thats only done for includes and libs. This then gets -I
+-prepended and added to CFLAGS. Guess what gcc cross gripes
+-about including host includes in cross builds but does not bail
+-out the build but it does not escape the wrath of our oe's
+-QA checks and rightly so. We replace use of sdkdir with 
+---cflags-only-I which returns the include paths correctly
+-pointing inside sysroot and not at the host includes and plus
+-includedir if you look inside the .pc file is assigned sdkdir
+-anyway so we do not lose anything
+-
+-This m4 macro is included in other packages e.g. xf86-video-fbdev
+-which dont build on hosts which have installation of
+-xorg-xserver-dev because it gets this include poisoning
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-Upstream-status: Pending
+-
+-Index: xorg-server-1.10.1/xorg-server.m4
+-===================================================================
+---- xorg-server-1.10.1.orig/xorg-server.m4
+-+++ xorg-server-1.10.1/xorg-server.m4
+-@@ -31,7 +31,7 @@ dnl
+- AC_DEFUN([XORG_DRIVER_CHECK_EXT],[
+- 	AC_REQUIRE([PKG_PROG_PKG_CONFIG])
+- 	SAVE_CFLAGS="$CFLAGS"
+--	CFLAGS="$CFLAGS -I`$PKG_CONFIG --variable=sdkdir xorg-server`"
+-+	CFLAGS="$CFLAGS `$PKG_CONFIG --cflags-only-I xorg-server`"
+- 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+- #include "xorg-server.h"
+- #if !defined $1
+diff --git a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.2.bb b/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.2.bb
+deleted file mode 100644
+index 1d88364..0000000
+--- a/meta-oe/recipes-graphics/xorg-xserver/xserver-xorg_1.10.2.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-# Assign it here, since the hal->udev transition happens post 1.7 in angstrom
+-DISTRO_XORG_CONFIG_MANAGER_angstrom = "udev"
+-
+-require xorg-xserver-common.inc
+-LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
+-
+-DESCRIPTION = "the X.Org X server"
+-DEPENDS += "mesa-dri pixman libpciaccess openssl dri2proto glproto font-util-native"
+-PE = "2"
+-PR = "${INC_PR}.1"
+-
+-SRC_URI += " \
+-            file://50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch \
+-            file://randr-support.patch \
+-            file://hack-fbdev-ignore-return-mode.patch \
+-            file://hack-assume-pixman-supports-overlapped-blt.patch \
+-            file://replace-pkgconfig-sdkdir-poking.patch \
+-           "
+-SRC_URI[md5sum] = "c9ba50bd44ea70da51f13100336a5484"
+-SRC_URI[sha256sum] = "65264f6640568b9db8d738aec1ddd036c3ae21b7ba05b98d006759d11a72792c"
+-
+-do_install_prepend() {
+-        mkdir -p ${D}/${libdir}/X11/fonts
 -}
 -
--CFLAGS += " -I${STAGING_INCDIR}/xorg "
+-# The NVidia driver requires Xinerama support in the X server. Ion uses it.
+-PACKAGE_ARCH_ion = "${MACHINE_ARCH}"
+-XINERAMA = "${@['--disable-xinerama','--enable-xinerama'][bb.data.getVar('MACHINE',d) in ['ion']]}"
+-
+-EXTRA_OECONF += " ${CONFIG_MANAGER_OPTION} ${XINERAMA} --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
+-EXTRA_OECONF += " --enable-dri2 --disable-unit-tests --disable-docs --disable-devel-docs"
+-
+-export LDFLAGS += " -ldl "
 -- 
 1.7.7
 
