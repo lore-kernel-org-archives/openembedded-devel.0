@@ -1,34 +1,34 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RAier-0004Yv-LG
+	(envelope-from <martin.jansa@gmail.com>) id 1RAif3-0004mF-KI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Oct 2011 15:34:13 +0200
-Received: by yxj17 with SMTP id 17so3397593yxj.6
+	Mon, 03 Oct 2011 15:34:26 +0200
+Received: by gyg8 with SMTP id 8so3335061gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Oct 2011 06:28:41 -0700 (PDT)
+	Mon, 03 Oct 2011 06:28:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=8g4U/IvpjsvFD4+J/ukhI+1dOw9tGdxlQzNzJElrHwU=;
-	b=xt5bmjMJIaU3S/oE8kitjMLYdXeVgPO7saf0jyWfgRsB+0/9cdKUjYaYLKuST7cYNI
-	yWOKlvThH3Kl4gUVMaAg9k73lraBCQiQLRzx9tJPqXUDVIcHH3Mjeryn7NYC9Xwu2tgo
-	ZV5Av9FJWZeIPLXszFNouBEmAXb9kdDGhhEVQ=
-Received: by 10.223.49.213 with SMTP id w21mr9332663faf.44.1317648520427;
-	Mon, 03 Oct 2011 06:28:40 -0700 (PDT)
+	bh=IhR+/Zu3ZgivSfIC1SyERNO/1nKC5MjJUsIrjGIpT2w=;
+	b=HiJiiX3rmhz22tEDc7rr/bPd7rq1PNmqAci7lPjAU8IFuDPgIolTGadf+TUDfFbT1L
+	fMy+9h00vPFLbJnhV+wMQFiWlbn7RARhrdD9CJuBbasYza9eLMnhna06/sCx6/QZV9G7
+	Gi2B2U1orWseM7xmgu2KJqT2O3meAkoevgbS8=
+Received: by 10.223.11.23 with SMTP id r23mr5831908far.38.1317648529325;
+	Mon, 03 Oct 2011 06:28:49 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k26sm21277434fab.12.2011.10.03.06.28.38
+	by mx.google.com with ESMTPS id b10sm21303961fam.1.2011.10.03.06.28.46
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Oct 2011 06:28:39 -0700 (PDT)
+	Mon, 03 Oct 2011 06:28:47 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Oct 2011 15:27:08 +0200
-Message-Id: <2dc14f15dc5d730c78a4de37634004c776370e15.1317648011.git.Martin.Jansa@gmail.com>
+Date: Mon,  3 Oct 2011 15:27:09 +0200
+Message-Id: <63b2e6b9d4a04f7e9aa1c78d162830409626afe5.1317648011.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.7
 In-Reply-To: <ebe115dd156cf69f5e7fb7076816c5faa3748ce6.1317648011.git.Martin.Jansa@gmail.com>
 References: <ebe115dd156cf69f5e7fb7076816c5faa3748ce6.1317648011.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1317648011.git.Martin.Jansa@gmail.com>
 References: <cover.1317648011.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCHv2 10/25] glib-2.0: drop 2.29.3+git from meta-oe, there should be 2.30.0 in oe-core
+Subject: [meta-oe][meta-efl][PATCHv2 11/25] gdbus-binding-tool: drop from meta-oe, superseeded by glib-2.30.0 where it's included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,508 +42,547 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2011 13:34:14 -0000
-
-* see http://lists.linuxtogo.org/pipermail/openembedded-core/2011-September/010447.html
+X-List-Received-Date: Mon, 03 Oct 2011 13:34:26 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/glib-2.0/glib-2.0.inc         |    6 -
- ...003-gatomic-proper-pointer-get-cast.patch.patch |   28 -----
- .../0005-glib-mkenums-interpreter.patch.patch      |   25 -----
- .../60_wait-longer-for-threads-to-die.patch        |   33 ------
- .../glib-2.0/glib-2.0/configure-libtool.patch      |   38 -------
- .../glib-2.0/glib-2.0/g_once_init_enter.patch      |   24 -----
- .../glib-2.0/glib-2.0/glib-gettextize-dir.patch    |   24 -----
- .../recipes-core/glib-2.0/glib-2.0/no-iconv.patch  |  104 --------------------
- .../glib-2.0/remove.test.for.qsort_r.patch         |   54 ----------
- meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb      |   32 ------
- meta-oe/recipes-core/glib-2.0/glib.inc             |   38 -------
- 11 files changed, 0 insertions(+), 406 deletions(-)
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0.inc
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/configure-libtool.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/g_once_init_enter.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/glib-gettextize-dir.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/no-iconv.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glib.inc
+ .../gdbus-binding-tool/gdbus-binding-tool/COPYING  |  482 --------------------
+ .../gdbus-binding-tool/gdbus-binding-tool_git.bb   |   37 --
+ 2 files changed, 0 insertions(+), 519 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool/COPYING
+ delete mode 100644 meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool_git.bb
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0.inc b/meta-oe/recipes-core/glib-2.0/glib-2.0.inc
+diff --git a/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool/COPYING b/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool/COPYING
 deleted file mode 100644
-index ccbbd2b..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0.inc
+index bf50f20..0000000
+--- a/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool/COPYING
 +++ /dev/null
-@@ -1,6 +0,0 @@
+@@ -1,482 +0,0 @@
+-		  GNU LIBRARY GENERAL PUBLIC LICENSE
+-		       Version 2, June 1991
 -
--python () {
--    import bb
--    if bb.data.getVar("USE_NLS", d, 1) == "no":
--        raise bb.parse.SkipPackage("${PN} requires native language support.")
--}
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
+- Copyright (C) 1991 Free Software Foundation, Inc.
+-    		    59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+- Everyone is permitted to copy and distribute verbatim copies
+- of this license document, but changing it is not allowed.
+-
+-[This is the first released version of the library GPL.  It is
+- numbered 2 because it goes with version 2 of the ordinary GPL.]
+-
+-			    Preamble
+-
+-  The licenses for most software are designed to take away your
+-freedom to share and change it.  By contrast, the GNU General Public
+-Licenses are intended to guarantee your freedom to share and change
+-free software--to make sure the software is free for all its users.
+-
+-  This license, the Library General Public License, applies to some
+-specially designated Free Software Foundation software, and to any
+-other libraries whose authors decide to use it.  You can use it for
+-your libraries, too.
+-
+-  When we speak of free software, we are referring to freedom, not
+-price.  Our General Public Licenses are designed to make sure that you
+-have the freedom to distribute copies of free software (and charge for
+-this service if you wish), that you receive source code or can get it
+-if you want it, that you can change the software or use pieces of it
+-in new free programs; and that you know you can do these things.
+-
+-  To protect your rights, we need to make restrictions that forbid
+-anyone to deny you these rights or to ask you to surrender the rights.
+-These restrictions translate to certain responsibilities for you if
+-you distribute copies of the library, or if you modify it.
+-
+-  For example, if you distribute copies of the library, whether gratis
+-or for a fee, you must give the recipients all the rights that we gave
+-you.  You must make sure that they, too, receive or can get the source
+-code.  If you link a program with the library, you must provide
+-complete object files to the recipients so that they can relink them
+-with the library, after making changes to the library and recompiling
+-it.  And you must show them these terms so they know their rights.
+-
+-  Our method of protecting your rights has two steps: (1) copyright
+-the library, and (2) offer you this license which gives you legal
+-permission to copy, distribute and/or modify the library.
+-
+-  Also, for each distributor's protection, we want to make certain
+-that everyone understands that there is no warranty for this free
+-library.  If the library is modified by someone else and passed on, we
+-want its recipients to know that what they have is not the original
+-version, so that any problems introduced by others will not reflect on
+-the original authors' reputations.
+-
+-  Finally, any free program is threatened constantly by software
+-patents.  We wish to avoid the danger that companies distributing free
+-software will individually obtain patent licenses, thus in effect
+-transforming the program into proprietary software.  To prevent this,
+-we have made it clear that any patent must be licensed for everyone's
+-free use or not licensed at all.
+-
+-  Most GNU software, including some libraries, is covered by the ordinary
+-GNU General Public License, which was designed for utility programs.  This
+-license, the GNU Library General Public License, applies to certain
+-designated libraries.  This license is quite different from the ordinary
+-one; be sure to read it in full, and don't assume that anything in it is
+-the same as in the ordinary license.
+-
+-  The reason we have a separate public license for some libraries is that
+-they blur the distinction we usually make between modifying or adding to a
+-program and simply using it.  Linking a program with a library, without
+-changing the library, is in some sense simply using the library, and is
+-analogous to running a utility program or application program.  However, in
+-a textual and legal sense, the linked executable is a combined work, a
+-derivative of the original library, and the ordinary General Public License
+-treats it as such.
+-
+-  Because of this blurred distinction, using the ordinary General
+-Public License for libraries did not effectively promote software
+-sharing, because most developers did not use the libraries.  We
+-concluded that weaker conditions might promote sharing better.
+-
+-  However, unrestricted linking of non-free programs would deprive the
+-users of those programs of all benefit from the free status of the
+-libraries themselves.  This Library General Public License is intended to
+-permit developers of non-free programs to use free libraries, while
+-preserving your freedom as a user of such programs to change the free
+-libraries that are incorporated in them.  (We have not seen how to achieve
+-this as regards changes in header files, but we have achieved it as regards
+-changes in the actual functions of the Library.)  The hope is that this
+-will lead to faster development of free libraries.
+-
+-  The precise terms and conditions for copying, distribution and
+-modification follow.  Pay close attention to the difference between a
+-"work based on the library" and a "work that uses the library".  The
+-former contains code derived from the library, while the latter only
+-works together with the library.
+-
+-  Note that it is possible for a library to be covered by the ordinary
+-General Public License rather than by this special one.
+-
+-		  GNU LIBRARY GENERAL PUBLIC LICENSE
+-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+-
+-  0. This License Agreement applies to any software library which
+-contains a notice placed by the copyright holder or other authorized
+-party saying it may be distributed under the terms of this Library
+-General Public License (also called "this License").  Each licensee is
+-addressed as "you".
+-
+-  A "library" means a collection of software functions and/or data
+-prepared so as to be conveniently linked with application programs
+-(which use some of those functions and data) to form executables.
+-
+-  The "Library", below, refers to any such software library or work
+-which has been distributed under these terms.  A "work based on the
+-Library" means either the Library or any derivative work under
+-copyright law: that is to say, a work containing the Library or a
+-portion of it, either verbatim or with modifications and/or translated
+-straightforwardly into another language.  (Hereinafter, translation is
+-included without limitation in the term "modification".)
+-
+-  "Source code" for a work means the preferred form of the work for
+-making modifications to it.  For a library, complete source code means
+-all the source code for all modules it contains, plus any associated
+-interface definition files, plus the scripts used to control compilation
+-and installation of the library.
+-
+-  Activities other than copying, distribution and modification are not
+-covered by this License; they are outside its scope.  The act of
+-running a program using the Library is not restricted, and output from
+-such a program is covered only if its contents constitute a work based
+-on the Library (independent of the use of the Library in a tool for
+-writing it).  Whether that is true depends on what the Library does
+-and what the program that uses the Library does.
+-  
+-  1. You may copy and distribute verbatim copies of the Library's
+-complete source code as you receive it, in any medium, provided that
+-you conspicuously and appropriately publish on each copy an
+-appropriate copyright notice and disclaimer of warranty; keep intact
+-all the notices that refer to this License and to the absence of any
+-warranty; and distribute a copy of this License along with the
+-Library.
+-
+-  You may charge a fee for the physical act of transferring a copy,
+-and you may at your option offer warranty protection in exchange for a
+-fee.
+-
+-  2. You may modify your copy or copies of the Library or any portion
+-of it, thus forming a work based on the Library, and copy and
+-distribute such modifications or work under the terms of Section 1
+-above, provided that you also meet all of these conditions:
+-
+-    a) The modified work must itself be a software library.
+-
+-    b) You must cause the files modified to carry prominent notices
+-    stating that you changed the files and the date of any change.
+-
+-    c) You must cause the whole of the work to be licensed at no
+-    charge to all third parties under the terms of this License.
+-
+-    d) If a facility in the modified Library refers to a function or a
+-    table of data to be supplied by an application program that uses
+-    the facility, other than as an argument passed when the facility
+-    is invoked, then you must make a good faith effort to ensure that,
+-    in the event an application does not supply such function or
+-    table, the facility still operates, and performs whatever part of
+-    its purpose remains meaningful.
+-
+-    (For example, a function in a library to compute square roots has
+-    a purpose that is entirely well-defined independent of the
+-    application.  Therefore, Subsection 2d requires that any
+-    application-supplied function or table used by this function must
+-    be optional: if the application does not supply it, the square
+-    root function must still compute square roots.)
+-
+-These requirements apply to the modified work as a whole.  If
+-identifiable sections of that work are not derived from the Library,
+-and can be reasonably considered independent and separate works in
+-themselves, then this License, and its terms, do not apply to those
+-sections when you distribute them as separate works.  But when you
+-distribute the same sections as part of a whole which is a work based
+-on the Library, the distribution of the whole must be on the terms of
+-this License, whose permissions for other licensees extend to the
+-entire whole, and thus to each and every part regardless of who wrote
+-it.
+-
+-Thus, it is not the intent of this section to claim rights or contest
+-your rights to work written entirely by you; rather, the intent is to
+-exercise the right to control the distribution of derivative or
+-collective works based on the Library.
+-
+-In addition, mere aggregation of another work not based on the Library
+-with the Library (or with a work based on the Library) on a volume of
+-a storage or distribution medium does not bring the other work under
+-the scope of this License.
+-
+-  3. You may opt to apply the terms of the ordinary GNU General Public
+-License instead of this License to a given copy of the Library.  To do
+-this, you must alter all the notices that refer to this License, so
+-that they refer to the ordinary GNU General Public License, version 2,
+-instead of to this License.  (If a newer version than version 2 of the
+-ordinary GNU General Public License has appeared, then you can specify
+-that version instead if you wish.)  Do not make any other change in
+-these notices.
+-
+-  Once this change is made in a given copy, it is irreversible for
+-that copy, so the ordinary GNU General Public License applies to all
+-subsequent copies and derivative works made from that copy.
+-
+-  This option is useful when you wish to copy part of the code of
+-the Library into a program that is not a library.
+-
+-  4. You may copy and distribute the Library (or a portion or
+-derivative of it, under Section 2) in object code or executable form
+-under the terms of Sections 1 and 2 above provided that you accompany
+-it with the complete corresponding machine-readable source code, which
+-must be distributed under the terms of Sections 1 and 2 above on a
+-medium customarily used for software interchange.
+-
+-  If distribution of object code is made by offering access to copy
+-from a designated place, then offering equivalent access to copy the
+-source code from the same place satisfies the requirement to
+-distribute the source code, even though third parties are not
+-compelled to copy the source along with the object code.
+-
+-  5. A program that contains no derivative of any portion of the
+-Library, but is designed to work with the Library by being compiled or
+-linked with it, is called a "work that uses the Library".  Such a
+-work, in isolation, is not a derivative work of the Library, and
+-therefore falls outside the scope of this License.
+-
+-  However, linking a "work that uses the Library" with the Library
+-creates an executable that is a derivative of the Library (because it
+-contains portions of the Library), rather than a "work that uses the
+-library".  The executable is therefore covered by this License.
+-Section 6 states terms for distribution of such executables.
+-
+-  When a "work that uses the Library" uses material from a header file
+-that is part of the Library, the object code for the work may be a
+-derivative work of the Library even though the source code is not.
+-Whether this is true is especially significant if the work can be
+-linked without the Library, or if the work is itself a library.  The
+-threshold for this to be true is not precisely defined by law.
+-
+-  If such an object file uses only numerical parameters, data
+-structure layouts and accessors, and small macros and small inline
+-functions (ten lines or less in length), then the use of the object
+-file is unrestricted, regardless of whether it is legally a derivative
+-work.  (Executables containing this object code plus portions of the
+-Library will still fall under Section 6.)
+-
+-  Otherwise, if the work is a derivative of the Library, you may
+-distribute the object code for the work under the terms of Section 6.
+-Any executables containing that work also fall under Section 6,
+-whether or not they are linked directly with the Library itself.
+-
+-  6. As an exception to the Sections above, you may also compile or
+-link a "work that uses the Library" with the Library to produce a
+-work containing portions of the Library, and distribute that work
+-under terms of your choice, provided that the terms permit
+-modification of the work for the customer's own use and reverse
+-engineering for debugging such modifications.
+-
+-  You must give prominent notice with each copy of the work that the
+-Library is used in it and that the Library and its use are covered by
+-this License.  You must supply a copy of this License.  If the work
+-during execution displays copyright notices, you must include the
+-copyright notice for the Library among them, as well as a reference
+-directing the user to the copy of this License.  Also, you must do one
+-of these things:
+-
+-    a) Accompany the work with the complete corresponding
+-    machine-readable source code for the Library including whatever
+-    changes were used in the work (which must be distributed under
+-    Sections 1 and 2 above); and, if the work is an executable linked
+-    with the Library, with the complete machine-readable "work that
+-    uses the Library", as object code and/or source code, so that the
+-    user can modify the Library and then relink to produce a modified
+-    executable containing the modified Library.  (It is understood
+-    that the user who changes the contents of definitions files in the
+-    Library will not necessarily be able to recompile the application
+-    to use the modified definitions.)
+-
+-    b) Accompany the work with a written offer, valid for at
+-    least three years, to give the same user the materials
+-    specified in Subsection 6a, above, for a charge no more
+-    than the cost of performing this distribution.
+-
+-    c) If distribution of the work is made by offering access to copy
+-    from a designated place, offer equivalent access to copy the above
+-    specified materials from the same place.
+-
+-    d) Verify that the user has already received a copy of these
+-    materials or that you have already sent this user a copy.
+-
+-  For an executable, the required form of the "work that uses the
+-Library" must include any data and utility programs needed for
+-reproducing the executable from it.  However, as a special exception,
+-the source code distributed need not include anything that is normally
+-distributed (in either source or binary form) with the major
+-components (compiler, kernel, and so on) of the operating system on
+-which the executable runs, unless that component itself accompanies
+-the executable.
+-
+-  It may happen that this requirement contradicts the license
+-restrictions of other proprietary libraries that do not normally
+-accompany the operating system.  Such a contradiction means you cannot
+-use both them and the Library together in an executable that you
+-distribute.
+-
+-  7. You may place library facilities that are a work based on the
+-Library side-by-side in a single library together with other library
+-facilities not covered by this License, and distribute such a combined
+-library, provided that the separate distribution of the work based on
+-the Library and of the other library facilities is otherwise
+-permitted, and provided that you do these two things:
+-
+-    a) Accompany the combined library with a copy of the same work
+-    based on the Library, uncombined with any other library
+-    facilities.  This must be distributed under the terms of the
+-    Sections above.
+-
+-    b) Give prominent notice with the combined library of the fact
+-    that part of it is a work based on the Library, and explaining
+-    where to find the accompanying uncombined form of the same work.
+-
+-  8. You may not copy, modify, sublicense, link with, or distribute
+-the Library except as expressly provided under this License.  Any
+-attempt otherwise to copy, modify, sublicense, link with, or
+-distribute the Library is void, and will automatically terminate your
+-rights under this License.  However, parties who have received copies,
+-or rights, from you under this License will not have their licenses
+-terminated so long as such parties remain in full compliance.
+-
+-  9. You are not required to accept this License, since you have not
+-signed it.  However, nothing else grants you permission to modify or
+-distribute the Library or its derivative works.  These actions are
+-prohibited by law if you do not accept this License.  Therefore, by
+-modifying or distributing the Library (or any work based on the
+-Library), you indicate your acceptance of this License to do so, and
+-all its terms and conditions for copying, distributing or modifying
+-the Library or works based on it.
+-
+-  10. Each time you redistribute the Library (or any work based on the
+-Library), the recipient automatically receives a license from the
+-original licensor to copy, distribute, link with or modify the Library
+-subject to these terms and conditions.  You may not impose any further
+-restrictions on the recipients' exercise of the rights granted herein.
+-You are not responsible for enforcing compliance by third parties to
+-this License.
+-
+-  11. If, as a consequence of a court judgment or allegation of patent
+-infringement or for any other reason (not limited to patent issues),
+-conditions are imposed on you (whether by court order, agreement or
+-otherwise) that contradict the conditions of this License, they do not
+-excuse you from the conditions of this License.  If you cannot
+-distribute so as to satisfy simultaneously your obligations under this
+-License and any other pertinent obligations, then as a consequence you
+-may not distribute the Library at all.  For example, if a patent
+-license would not permit royalty-free redistribution of the Library by
+-all those who receive copies directly or indirectly through you, then
+-the only way you could satisfy both it and this License would be to
+-refrain entirely from distribution of the Library.
+-
+-If any portion of this section is held invalid or unenforceable under any
+-particular circumstance, the balance of the section is intended to apply,
+-and the section as a whole is intended to apply in other circumstances.
+-
+-It is not the purpose of this section to induce you to infringe any
+-patents or other property right claims or to contest validity of any
+-such claims; this section has the sole purpose of protecting the
+-integrity of the free software distribution system which is
+-implemented by public license practices.  Many people have made
+-generous contributions to the wide range of software distributed
+-through that system in reliance on consistent application of that
+-system; it is up to the author/donor to decide if he or she is willing
+-to distribute software through any other system and a licensee cannot
+-impose that choice.
+-
+-This section is intended to make thoroughly clear what is believed to
+-be a consequence of the rest of this License.
+-
+-  12. If the distribution and/or use of the Library is restricted in
+-certain countries either by patents or by copyrighted interfaces, the
+-original copyright holder who places the Library under this License may add
+-an explicit geographical distribution limitation excluding those countries,
+-so that distribution is permitted only in or among countries not thus
+-excluded.  In such case, this License incorporates the limitation as if
+-written in the body of this License.
+-
+-  13. The Free Software Foundation may publish revised and/or new
+-versions of the Library General Public License from time to time.
+-Such new versions will be similar in spirit to the present version,
+-but may differ in detail to address new problems or concerns.
+-
+-Each version is given a distinguishing version number.  If the Library
+-specifies a version number of this License which applies to it and
+-"any later version", you have the option of following the terms and
+-conditions either of that version or of any later version published by
+-the Free Software Foundation.  If the Library does not specify a
+-license version number, you may choose any version ever published by
+-the Free Software Foundation.
+-
+-  14. If you wish to incorporate parts of the Library into other free
+-programs whose distribution conditions are incompatible with these,
+-write to the author to ask for permission.  For software which is
+-copyrighted by the Free Software Foundation, write to the Free
+-Software Foundation; we sometimes make exceptions for this.  Our
+-decision will be guided by the two goals of preserving the free status
+-of all derivatives of our free software and of promoting the sharing
+-and reuse of software generally.
+-
+-			    NO WARRANTY
+-
+-  15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
+-WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
+-EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
+-OTHER PARTIES PROVIDE THE LIBRARY "AS IS" WITHOUT WARRANTY OF ANY
+-KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+-PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+-LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME
+-THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+-
+-  16. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+-WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
+-AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU
+-FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
+-CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+-LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+-FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+-DAMAGES.
+-
+-		     END OF TERMS AND CONDITIONS
+-
+-           How to Apply These Terms to Your New Libraries
+-
+-  If you develop a new library, and you want it to be of the greatest
+-possible use to the public, we recommend making it free software that
+-everyone can redistribute and change.  You can do so by permitting
+-redistribution under these terms (or, alternatively, under the terms of the
+-ordinary General Public License).
+-
+-  To apply these terms, attach the following notices to the library.  It is
+-safest to attach them to the start of each source file to most effectively
+-convey the exclusion of warranty; and each file should have at least the
+-"copyright" line and a pointer to where the full notice is found.
+-
+-    <one line to give the library's name and a brief idea of what it does.>
+-    Copyright (C) <year>  <name of author>
+-
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Library General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+-
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-    Library General Public License for more details.
+-
+-    You should have received a copy of the GNU Library General Public
+-    License along with this library; if not, write to the 
+-    Free Software Foundation, Inc., 59 Temple Place - Suite 330, 
+-    Boston, MA  02111-1307  USA.
+-
+-Also add information on how to contact you by electronic and paper mail.
+-
+-You should also get your employer (if you work as a programmer) or your
+-school, if any, to sign a "copyright disclaimer" for the library, if
+-necessary.  Here is a sample; alter the names:
+-
+-  Yoyodyne, Inc., hereby disclaims all copyright interest in the
+-  library `Frob' (a library for tweaking knobs) written by James Random Hacker.
+-
+-  <signature of Ty Coon>, 1 April 1990
+-  Ty Coon, President of Vice
+-
+-That's all there is to it!
+diff --git a/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool_git.bb b/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool_git.bb
 deleted file mode 100644
-index ad1ca12..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/0003-gatomic-proper-pointer-get-cast.patch.patch
+index 715a7a9..0000000
+--- a/meta-oe/recipes-devtools/gdbus-binding-tool/gdbus-binding-tool_git.bb
 +++ /dev/null
-@@ -1,28 +0,0 @@
--From 3d371334d5668bcd02a38ff99884bd343c244d68 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 18 Jun 2011 23:51:35 +0200
--Subject: [PATCH 3/7] gatomic-proper-pointer-get-cast.patch
+@@ -1,37 +0,0 @@
+-DESCRIPTION = "gdbus-binding-tool is used to generate C code for interacting with remote objects using D-Bus."
+-DEPENDS = "glib-2.0 libffi python-argparse gdbus-binding-tool-native"
+-DEPENDS_virtclass-native = "glib-2.0-native libffi-native python-argparse-native"
+-RDEPENDS_${PN} = "glib-2.0-utils"
+-# taken from glib where this is supposed to be moved later
+-LICENSE = "LGPLv2+ & BSD & public domain"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
 -
--Upstream-Status: Unknown
+-PR = "r2"
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- glib/gatomic.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
+-inherit autotools pkgconfig
 -
--diff --git a/glib/gatomic.h b/glib/gatomic.h
--index ddd39b8..b758142 100644
----- a/glib/gatomic.h
--+++ b/glib/gatomic.h
--@@ -70,7 +70,7 @@ void     g_atomic_pointer_set                  (volatile gpointer G_GNUC_MAY_ALI
--   (g_atomic_int_set) ((volatile gint G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
-- # define g_atomic_pointer_get(atomic) \
--  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
---  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic)))
--+  (g_atomic_pointer_get) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void G_GNUC_MAY_ALIAS *) (atomic)))
-- # define g_atomic_pointer_set(atomic, newval) \
--  ((void) sizeof (gchar [sizeof (*(atomic)) == sizeof (gpointer) ? 1 : -1]), \
--   (g_atomic_pointer_set) ((volatile gpointer G_GNUC_MAY_ALIAS *) (volatile void *) (atomic), (newval)))
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
-deleted file mode 100644
-index 6780330..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/0005-glib-mkenums-interpreter.patch.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From a8e5c4a808e7f8572bd5023645a6cb4386b9aff8 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 18 Jun 2011 23:52:17 +0200
--Subject: [PATCH 5/7] don't leak buildpaths into perl hashbang
--
--Upstream-Status: Unknown
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- gobject/glib-mkenums.in |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/gobject/glib-mkenums.in b/gobject/glib-mkenums.in
--index 6372245..b486fe9 100755
----- a/gobject/glib-mkenums.in
--+++ b/gobject/glib-mkenums.in
--@@ -1,4 +1,4 @@
---#! @PERL_PATH@
--+#! /usr/bin/env perl
-- 
-- use warnings;
-- use File::Basename;
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
-deleted file mode 100644
-index b65a474..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/60_wait-longer-for-threads-to-die.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--copy from OE, said to borrow from Ubuntu. Not in glib-2.0 upstream yet. Add for sanity.
--Added to poky by Kevin Tian <kevin.tian@intel.com>, 06/25/2010
--Rebased for glib-2.27.3 by Dongxiao Xu <dongxiao.xu@intel.com>, 11/16/2010
--
--Upstream-Status: Inappropriate [patches for test code]
--
--diff -ruN glib-2.27.3-orig/tests/threadpool-test.c glib-2.27.3/tests/threadpool-test.c
----- glib-2.27.3-orig/tests/threadpool-test.c	2009-04-01 07:04:21.000000000 +0800
--+++ glib-2.27.3/tests/threadpool-test.c	2010-11-16 12:28:09.002172678 +0800
--@@ -5,8 +5,8 @@
-- 
-- #include <glib.h>
-- 
---#define DEBUG_MSG(x)
---/* #define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");  */
--+/* #define DEBUG_MSG(x) */
--+#define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");
-- 
-- #define WAIT                5    /* seconds */
-- #define MAX_THREADS         10
--@@ -124,10 +124,10 @@
--    DEBUG_MSG (("[unused] stopping unused threads"));
--    g_thread_pool_stop_unused_threads ();
-- 
---   DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
--+   DEBUG_MSG (("[unused] waiting FIVE second for threads to die"));
-- 
--    /* Some time for threads to die. */
---   g_usleep (G_USEC_PER_SEC);
--+   g_usleep (5 * G_USEC_PER_SEC);
-- 
--    DEBUG_MSG (("[unused] stopped idle threads, %d remain, %d threads still exist",
-- 	       g_thread_pool_get_num_unused_threads (),
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/configure-libtool.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/configure-libtool.patch
-deleted file mode 100644
-index c21e378..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/configure-libtool.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--# Poky renames libtool to $host_alias-libtool.
--# ./$host_alias-libtool isn't created until after configure runs with libtool >= 2.2.2
--# so we can't call # it at this point. We can safely assume a version is available
--# from PATH though
--# Rebased to glib-2.27.3 by Dongxiao Xu <dongxiao.xu@intel.com>
--
--Upstream-Status: Inappropriate [configuration]
--
--diff -ruN glib-2.27.3-orig/configure.ac glib-2.27.3/configure.ac
----- glib-2.27.3-orig/configure.ac	2010-11-03 11:02:05.000000000 +0800
--+++ glib-2.27.3/configure.ac	2010-11-16 12:38:12.610485990 +0800
--@@ -1385,7 +1385,7 @@
--   G_MODULE_LDFLAGS=
-- else
--   export SED
---  G_MODULE_LDFLAGS=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
--+  G_MODULE_LDFLAGS=`(./$host_alias-libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
-- fi
-- dnl G_MODULE_IMPL= don't reset, so cmd-line can override
-- G_MODULE_NEED_USCORE=0
--@@ -1450,7 +1450,7 @@
-- 	LDFLAGS="$LDFLAGS $G_MODULE_LDFLAGS"
-- dnl *** check for OSF1/5.0 RTLD_GLOBAL brokenness
-- 	echo "void glib_plugin_test(void) { }" > plugin.c
---	${SHELL} ./libtool --mode=compile ${CC} -shared \
--+	${SHELL} ./$host_alias-libtool --mode=compile ${CC} -shared \
-- 		-export-dynamic -o plugin.o plugin.c 2>&1 >/dev/null
-- 	AC_CACHE_CHECK([for RTLD_GLOBAL brokenness],
-- 		glib_cv_rtldglobal_broken,[
--@@ -1524,7 +1524,7 @@
-- 
-- AC_MSG_CHECKING(for the suffix of module shared libraries)
-- export SED
---shrext_cmds=`./libtool --config | grep '^shrext_cmds='`
--+shrext_cmds=`./$host_alias-libtool --config | grep '^shrext_cmds='`
-- eval $shrext_cmds
-- module=yes eval std_shrext=$shrext_cmds
-- # chop the initial dot
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/g_once_init_enter.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/g_once_init_enter.patch
-deleted file mode 100644
-index 2eaa19b..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/g_once_init_enter.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--fix g_once_init_enter compile failure
--
--Kernelshark trips over a compile bug in glib-2.0 addressed by Open Embedded
--back in the 2.22 timeframe. It appears to still be present in 2.27.
--
--http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg005
--
--Signed-off-by: Darren Hart <dvhart@linux.intel.com>
--
--Upstream-Status: Pending
--
--Index: glib-2.27.5/glib/gthread.h
--===================================================================
----- glib-2.27.5.orig/glib/gthread.h
--+++ glib-2.27.5/glib/gthread.h
--@@ -344,7 +344,7 @@ void                    g_once_init_leav
-- G_INLINE_FUNC gboolean
-- g_once_init_enter (volatile gsize *value_location)
-- {
---  if G_LIKELY ((gpointer) g_atomic_pointer_get (value_location) != NULL)
--+  if G_LIKELY ((gpointer) g_atomic_pointer_get ((volatile gpointer *)value_location) != NULL)
--     return FALSE;
--   else
--     return g_once_init_enter_impl (value_location);
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/glib-gettextize-dir.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/glib-gettextize-dir.patch
-deleted file mode 100644
-index ee43511..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/glib-gettextize-dir.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--# an very old patch cherry-picked in every glib-2.0 patch directory. The earliest container
--# for it is 2.6.5 in OE. The earliest commit for it is c8e5702127e507e82e6f68a4b8c546803accea9d
--# in OE side which ports from previous bitkeeper SCM. In OE side it's only used til 2.12.4.
--#
--# keep it since it's always cleaner to not hardcode destination path. Use @datadir@ is more
--# portable here. mark for upstream
--#
--# by Kevin Tian <kevin.tian@intel.com>, 06/25/2010
--# Rebased by Dongxiao Xu <dongxiao.xu@intel.com>, 11/16/2010
--
--Upstream-Status: Inappropriate [configuration]
--
--diff -ruN glib-2.27.3-orig/glib-gettextize.in glib-2.27.3/glib-gettextize.in
----- glib-2.27.3-orig/glib-gettextize.in	2009-04-01 07:04:20.000000000 +0800
--+++ glib-2.27.3/glib-gettextize.in	2010-11-16 12:55:06.874605916 +0800
--@@ -52,7 +52,7 @@
-- datadir=@datadir@
-- datarootdir=@datarootdir@
-- 
---gettext_dir=$prefix/share/glib-2.0/gettext
--+gettext_dir=@datadir@/glib-2.0/gettext
-- 
-- while test $# -gt 0; do
--   case "$1" in
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/no-iconv.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/no-iconv.patch
-deleted file mode 100644
-index cca57d4..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/no-iconv.patch
-+++ /dev/null
-@@ -1,104 +0,0 @@
--We provide dummy implementation of iconv functionality if it does not find
--iconv which will be case with uclibc. We remove the check for iconv in configure
--
--This is needed when libintl and libiconv is not available. It wont have any
--impact on case when they are available.
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--
--Index: glib-2.26.1/glib/gconvert.c
--===================================================================
----- glib-2.26.1.orig/glib/gconvert.c
--+++ glib-2.26.1/glib/gconvert.c
--@@ -23,7 +23,7 @@
-- #include "config.h"
-- #include "glibconfig.h"
-- 
---#ifndef G_OS_WIN32
--+#if !defined G_OS_WIN32 && defined HAVE_ICONV_H
-- #include <iconv.h>
-- #endif
-- #include <errno.h>
--@@ -65,6 +65,28 @@
-- #error GNU libiconv not in use but included iconv.h is from libiconv
-- #endif
-- 
--+#ifndef HAVE_ICONV_H
--+typedef void *iconv_t;
--+
--+iconv_t iconv_open(const char *tocode, const char *fromcode)
--+{
--+	return (iconv_t)(-1);
--+}
--+
--+int iconv_close(iconv_t cd)
--+{
--+	free(cd);
--+
--+	return 0;
--+}
--+size_t iconv (iconv_t __cd, char **__inbuf,
--+                     size_t *__inbytesleft,
--+                     char **__outbuf,
--+                     size_t *__outbytesleft)
--+{
--+	return 0;
--+}
--+#endif
-- 
-- /**
--  * SECTION:conversions
--Index: glib-2.26.1/configure.ac
--===================================================================
----- glib-2.26.1.orig/configure.ac
--+++ glib-2.26.1/configure.ac
--@@ -373,46 +373,8 @@ dnl *** Tests for iconv ***
-- dnl ***********************
-- dnl
-- dnl We do this before the gettext checks, to avoid distortion
---
---dnl On Windows we use a native implementation
---
---if test x"$glib_native_win32" = xyes; then
---  with_libiconv=native
---else
---  AC_ARG_WITH(libiconv,
---	      [AC_HELP_STRING([--with-libiconv=@<:@no/gnu/native@:>@],
---			      [use the libiconv library])],,
---	      [with_libiconv=maybe])
---
---  found_iconv=no
---  case $with_libiconv in
---    maybe)
---      # Check in the C library first
---      AC_CHECK_FUNC(iconv_open, [with_libiconv=no; found_iconv=yes])
---      # Check if we have GNU libiconv
---      if test $found_iconv = "no"; then
---	AC_CHECK_LIB(iconv, libiconv_open, [with_libiconv=gnu; found_iconv=yes])
---      fi
---      # Check if we have a iconv in -liconv, possibly from vendor
---      if test $found_iconv = "no"; then
---	AC_CHECK_LIB(iconv, iconv_open, [with_libiconv=native; found_iconv=yes])
---      fi
---      ;;
---    no)
---      AC_CHECK_FUNC(iconv_open, [with_libiconv=no; found_iconv=yes])
---      ;;
---    gnu|yes)
---      AC_CHECK_LIB(iconv, libiconv_open, [with_libiconv=gnu; found_iconv=yes])
---      ;;
---    native)
---      AC_CHECK_LIB(iconv, iconv_open, [with_libiconv=native; found_iconv=yes])
---      ;;
---  esac
---
---  if test "x$found_iconv" = "xno" ; then
---     AC_MSG_ERROR([*** No iconv() implementation found in C library or libiconv])
---  fi
---fi
--+found_iconv=yes
--+with_libiconv=no
-- 
-- gl_GLIBC21
-- AC_ARG_ENABLE(iconv-cache, 
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch b/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
-deleted file mode 100644
-index 3300eb0..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0/remove.test.for.qsort_r.patch
-+++ /dev/null
-@@ -1,54 +0,0 @@
--while cross compiling we cannot execute run tests
--
--diff --git a/configure.ac b/configure.ac
--index 378b082..3f2a8d3 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -580,46 +580,7 @@ AC_FUNC_VPRINTF
-- AC_FUNC_ALLOCA
-- AC_CHECK_FUNCS(mmap posix_memalign memalign valloc fsync pipe2)
-- AC_CHECK_FUNCS(atexit on_exit timegm gmtime_r)
---# BSD has a qsort_r with wrong argument order
---AC_CACHE_CHECK([for qsort_r], glib_cv_have_qsort_r, [
---AC_RUN_IFELSE([AC_LANG_SOURCE([[
---#define _GNU_SOURCE
---#include <stdlib.h>
---
---static int
---cmp (const void *a, const void *b, void *c)
---{
---  const int *ia = a;
---  const int *ib = b;
---
---  if (*ia < *ib)
---    return -1;
---  else if (*ia > *ib)
---    return 1;
---  else
---    return 0;
---}
---
---int
---main (int argc, char **argv)
---{
---  int arr[3] = { 1, 2, 0 };
---  int d = 3;
---
---  qsort_r (arr, 3, sizeof (int), cmp, &d);
---
---  if (arr[0] == 0 && arr[1] == 1 && arr[2] == 2)
---    return 0;
---  else
---    return 1;
---}]])],[glib_cv_have_qsort_r=yes],[glib_cv_have_qsort_r=no])])
---
---if test $glib_cv_have_qsort_r = yes ; then
---  AC_MSG_RESULT([yes])
---    AC_DEFINE(HAVE_QSORT_R, 1, [Define to 1 if you have the 'qsort_r' function])
---else
---  AC_MSG_RESULT([no])
---fi
--+AC_DEFINE(HAVE_QSORT_R, 1, [Define to 1 if you have the 'qsort_r' function])
-- 
-- AC_CHECK_SIZEOF(char)
-- AC_CHECK_SIZEOF(short)
-diff --git a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb b/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
-deleted file mode 100644
-index 34fcaf6..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib-2.0_git.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--require glib.inc
--
--PE = "1"
--PR = "r1"
--
--DEFAULT_PREFERENCE = "-1"
--
--DEPENDS += "libffi python-argparse-native"
--DEPENDS_virtclass-native += "libffi-native python-argparse-native"
--
--SRC_URI = "git://git.gnome.org/glib;protocol=git;branch=master \
--           file://configure-libtool.patch \
--           file://60_wait-longer-for-threads-to-die.patch \
--           file://g_once_init_enter.patch \
--           file://remove.test.for.qsort_r.patch \
--          "
--SRCREV = "d97cbc6731deab137770bc0fe9c69b06f689f5b4"
--PV = "2.29.3+gitr${SRCPV}"
+-SRC_URI = "git://anongit.freedesktop.org/~david/${BPN};protocol=git;branch=master \
+-           file://COPYING"
+-SRCREV = "286f4eaf48ea79821be5a4e6bf493566b156faa4"
+-PV = "0.1+gitr${SRCPV}"
 -S = "${WORKDIR}/git"
 -
--# Only apply this patch for target recipe on uclibc
--SRC_URI_append_libc-uclibc = " ${@['', 'file://no-iconv.patch']['${PN}' == '${BPN}']}"
+-do_configure() {
+-  # missing ${topdir}/gtk-doc.make and --disable-gtk-doc* is not enough
+-  sed -i '/^doc\/Makefile/d' ${S}/configure.ac
+-  sed -i 's/SUBDIRS = src doc/SUBDIRS = src/g' ${S}/Makefile.am
 -
--SRC_URI_append_virtclass-native = " file://glib-gettextize-dir.patch"
--BBCLASSEXTEND = "native"
+-  # cannot execute target binary, so use staged native
+-  sed -i "s#\$(top_builddir)/src/gdbus-codegen#${STAGING_BINDIR_NATIVE}/gdbus-codegen#g" ${S}/src/Makefile.am
 -
--do_configure_prepend() {
--  # missing ${topdir}/gtk-doc.make and --disable-gtk-doc* is not enough, because it calls gtkdocize (not provided by gtk-doc-native)
--  sed -i '/^docs/d' ${S}/configure.ac
--  sed -i 's/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po docs/SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po/g' ${S}/Makefile.am
--  sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
+-  autotools_do_configure
 -}
-diff --git a/meta-oe/recipes-core/glib-2.0/glib.inc b/meta-oe/recipes-core/glib-2.0/glib.inc
-deleted file mode 100644
-index 0800c85..0000000
---- a/meta-oe/recipes-core/glib-2.0/glib.inc
-+++ /dev/null
-@@ -1,38 +0,0 @@
--SUMMARY = "A general-purpose utility library"
--DESCRIPTION = "GLib is a general-purpose utility library, which provides many useful data types, macros, type conversions, string utilities, file utilities, a main loop abstraction, and so on."
--# pcre is under BSD;
--# docs/reference/COPYING is with a 'public domai'-like license!
--LICENSE = "LGPLv2+ & BSD & PD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
--                    file://glib/glib.h;startline=4;endline=17;md5=a4332fe58b076f29d07c9c066d2967b6 \
--                    file://gmodule/COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
--                    file://gmodule/gmodule.h;startline=4;endline=17;md5=76ab161b37202cd004073c42fac276ed \
--                    file://glib/pcre/COPYING;md5=266ebc3ff74ee9ce6fad65577667c0f4 \
--                    file://glib/pcre/pcre.h;startline=11;endline=35;md5=ce867cf87ebbd2bb55e980d90328390d \
--                    file://docs/reference/COPYING;md5=f51a5100c17af6bae00735cd791e1fcc"
--BUGTRACKER = "http://bugzilla.gnome.org"
--SECTION = "libs"
+-do_configure_virtclass-native() {
+-  # missing ${topdir}/gtk-doc.make and --disable-gtk-doc* is not enough
+-  sed -i '/^doc\/Makefile/d' ${S}/configure.ac
+-  sed -i 's/SUBDIRS = src doc/SUBDIRS = src/g' ${S}/Makefile.am
 -
--require glib-2.0.inc
+-  autotools_do_configure
+-}
 -
--DEPENDS = "glib-2.0-native gtk-doc-native zip dbus"
--DEPENDS_virtclass-native = "gtk-doc-native pkgconfig-native gettext-native dbus-native"
--DEPENDS_virtclass-nativesdk = "libtool-nativesdk"
--PACKAGES =+ "${PN}-utils "
--
--LEAD_SONAME = "libglib-2.0.*"
--FILES_${PN}-utils = "${bindir}/*"
--
--inherit autotools pkgconfig gettext
--
--S = "${WORKDIR}/glib-${PV}"
--
--EXTRA_OECONF = "--disable-debug --enable-included-printf=no"
--EXTRA_OECONF_virtclass-native = ""
--EXTRA_OECONF_linuxstdbase = "--enable-included-printf=no"
--
--FILES_${PN} = "${libdir}/lib*${SOLIBS} ${sysconfdir}/bash_completion.d ${datadir}/glib-2.0/schemas"
--FILES_${PN}-dev += "${libdir}/glib-2.0/include"
--FILES_${PN}-dbg += "${datadir}/glib-2.0/gdb ${datadir}/gdb"
--
--ARM_INSTRUCTION_SET = "arm"
+-BBCLASSEXTEND = "native"
 -- 
 1.7.7
 
