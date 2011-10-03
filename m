@@ -1,37 +1,29 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RAo2l-0007nP-GW
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RAo7L-0007vL-BK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Oct 2011 21:19:16 +0200
-Received: by ggnq1 with SMTP id q1so437113ggn.6
+	Mon, 03 Oct 2011 21:23:59 +0200
+Received: by vwe42 with SMTP id 42so3331387vwe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Oct 2011 12:13:42 -0700 (PDT)
+	Mon, 03 Oct 2011 12:18:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=qEalsmdPmzeYn/m6f51xWG4ohCccT5Y2joci2D9xpp0=;
-	b=nRuKaohB4OQ0Ou1lh1rfFQOc6+XpfswxYHaQ0VPAAasvKaWaVggdoR0t5Vakhsi8bS
-	01jJBPrM6+uCtT7Hw/KE0lTb0kHgM7lyLrJmJSHHnJBQrsyWXn04d/L1SchyE1wDXIUx
-	ZOyJghiAWmmeGRfqrvFPXoTP7J31X3aTjebL0=
-Received: by 10.100.53.11 with SMTP id b11mr147023ana.34.1317669222140;
-	Mon, 03 Oct 2011 12:13:42 -0700 (PDT)
-Received: from [172.23.2.133] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id o17sm13960833anj.3.2011.10.03.12.13.40
-	(version=SSLv3 cipher=OTHER); Mon, 03 Oct 2011 12:13:41 -0700 (PDT)
-Message-ID: <4E8A0963.9020209@gmail.com>
-Date: Mon, 03 Oct 2011 12:13:39 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=djhVHqfO4Tzg7QDOpLWO2qw/Fi2UEIk4L+VTIJJZD/c=;
+	b=L4pusbZ+h1/6SAPYHlmnjjYlrIAxfG85+qJzONvpDxPHhAVVKlU2gPspBL1PCOzm/m
+	fcqP9CMMEEW3p7lb0T0ai70zDebFzal2He8OEX5Hjyzl1U/wKQQ4hhPfGV9pX8hl8/B7
+	3Eaqq0qarV9xXaJfreeCId8xPzdxObFkqHsQM=
 MIME-Version: 1.0
+Received: by 10.52.34.80 with SMTP id x16mr352403vdi.88.1317669505887; Mon, 03
+	Oct 2011 12:18:25 -0700 (PDT)
+Received: by 10.52.188.200 with HTTP; Mon, 3 Oct 2011 12:18:25 -0700 (PDT)
+In-Reply-To: <CA+YB3raZav1oAG8dgQoGq7c5qfa+by_miOxqzcm_ROUNRhj0-w@mail.gmail.com>
+References: <CA+YB3raZav1oAG8dgQoGq7c5qfa+by_miOxqzcm_ROUNRhj0-w@mail.gmail.com>
+Date: Mon, 3 Oct 2011 21:18:25 +0200
+Message-ID: <CACW_hTYZbeWvWy-naFdvo0xh9mX1Amq1Fa9+kf=j8msYzYPMCQ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20110929092859.GB5030@jama.jama.net>
-	<1317304678-27094-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAMKF1spa2wDNGzmOxPPhxEKKyHGo1RxjLEkNasfk8vP+65PFFg@mail.gmail.com>
-	<20110929142643.GD5030@jama.jama.net>
-In-Reply-To: <20110929142643.GD5030@jama.jama.net>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH] gcc-4.6: drop/update few patches from gcc-4_6-branch-linaro-backports.inc
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: OE TSC meeting 11 August 2011 (re-send)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,16 +37,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2011 19:19:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 03 Oct 2011 19:23:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 9/29/2011 7:26 AM, Martin Jansa wrote:
-> Thanks, I'll try your patch.. not sure why I haven't seen it on ML (or
-> was it sent just now? - if yes, can you please send such patch at the
-> same time as patch for oe-core? so people willing to test it can do it
-> before applying oe-core patch?).
+Any chance on also getting a resend of the sep 1 minutes?
 
-I serialised it. Since it could have confused more.
-
+Frans
 
