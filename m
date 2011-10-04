@@ -1,36 +1,27 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RB7Vs-0007s5-9Q
+	(envelope-from <denis@denix.org>) id 1RB8E6-00006F-GE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Oct 2011 18:06:36 +0200
-Received: by qyk10 with SMTP id 10so3729834qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Oct 2011 09:01:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=dqrwje9bwBpVqWH9qN8D+xzA2Z4yO7aMP7bBcwKDAqE=;
-	b=glvirnFzHbCAIt4Bd3KYr+3gVjrvHnZIy8ReGknXH8ZFyL05g5wdUCif3QSaIZQkn+
-	2tiU7PsvZ1JfqswzVKS6xH9CPpZ5KHhyqfLeJXGdruix67+eqSBv8yOXQxRG2H8Z0k0y
-	snQsp+IT6z5YA55QBFf61EyJqihthA8sC2jW4=
-Received: by 10.68.38.8 with SMTP id c8mr10590106pbk.42.1317744061779;
-	Tue, 04 Oct 2011 09:01:01 -0700 (PDT)
-Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net.
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id ml4sm66282256pbc.0.2011.10.04.09.00.58
-	(version=SSLv3 cipher=OTHER); Tue, 04 Oct 2011 09:00:59 -0700 (PDT)
-Message-ID: <4E8B2DB8.5060300@gmail.com>
-Date: Tue, 04 Oct 2011 09:00:56 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Tue, 04 Oct 2011 18:52:18 +0200
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LSJ00IFUVWHR6M2@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	04 Oct 2011 11:46:05 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id ED95F14AF5D; Tue,
+	04 Oct 2011 12:45:52 -0400 (EDT)
+Date: Tue, 04 Oct 2011 12:45:52 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1317025740-2398-1-git-send-email-eyalr@ti.com>
-	<EC51CDB0807A51469E0C9CB8CF72D65F033369C80A@dnce02.ent.ti.com>
-In-Reply-To: <EC51CDB0807A51469E0C9CB8CF72D65F033369C80A@dnce02.ent.ti.com>
-Cc: Eyal Reizer <eyalreizer@googlemail.com>
-Subject: Re: [PATCH] hostapd: update to use a newer commit
+Message-id: <20111004164552.GA23650@denix.org>
+References: <1317025776-2433-1-git-send-email-eyalr@ti.com>
+	<EC51CDB0807A51469E0C9CB8CF72D65F033369C809@dnce02.ent.ti.com>
+	<4E8B2D57.6060004@gmail.com>
+MIME-version: 1.0
+In-reply-to: <4E8B2D57.6060004@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] wpa_supplicant update to use a newer commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +35,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Oct 2011 16:06:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 Oct 2011 16:52:18 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 10/3/2011 11:47 PM, Reizer, Eyal wrote:
-> Ping on this patch.
-
-rebase it against oe-core and send to oe-core ml
-
+On Tue, Oct 04, 2011 at 08:59:19AM -0700, Khem Raj wrote:
+> On 10/3/2011 11:47 PM, Reizer, Eyal wrote:
+>> Ping on this patch.
+>>
 >
-> Best Regards,
-> Eyal Reizer
->
->> -----Original Message-----
->> From: Eyal Reizer [mailto:eyalreizer@googlemail.com]
->> Sent: Monday, September 26, 2011 11:29 AM
->> To: openembedded-devel@lists.openembedded.org
->> Cc: Reizer, Eyal
->> Subject: [PATCH] hostapd: update to use a newer commit
+> I would suggest to rebase this patch against openembedded-core
+> and resubmit
+
+Nothing prevents these changes to be submitted to oe-core, but they were 
+meant to eventually get into 2011.03-maintenance branch.
+
+-- 
+Denys
+
+
+>>> -----Original Message-----
+>>> From: Eyal Reizer [mailto:eyalreizer@googlemail.com]
+>>> Sent: Monday, September 26, 2011 11:30 AM
+>>> To: openembedded-devel@lists.openembedded.org
+>>> Cc: Reizer, Eyal
+>>> Subject: [PATCH] wpa_supplicant update to use a newer commit
+>>>
+>>> Signed-off-by: Eyal Reizer<eyalr@ti.com>
+>>> ---
+>>>   recipes/wpa-supplicant/wpa-supplicant_git.bb |    2 +-
+>>>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/recipes/wpa-supplicant/wpa-supplicant_git.bb
+>>> b/recipes/wpa-supplicant/wpa-supplicant_git.bb
+>>> index 8f6971e..7408808 100644
+>>> --- a/recipes/wpa-supplicant/wpa-supplicant_git.bb
+>>> +++ b/recipes/wpa-supplicant/wpa-supplicant_git.bb
+>>> @@ -1,6 +1,6 @@
+>>>   require wpa-supplicant-0.7.inc
+>>>
+>>> -SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
+>>> +SRCREV = "83fa07226debc2f7082b6ccd62dbb1cd47c30472"
+>>>   PR = "r0"
+>>>   PV = "0.7.3+0.8.0-rc"
+>>>   PR_append = "+gitr${SRCPV}"
+>>> --
+>>> 1.7.0.4
 >>
->> Signed-off-by: Eyal Reizer<eyalr@ti.com>
->> ---
->>   recipes/hostap/hostap-daemon_git.bb |    2 +-
->>   1 files changed, 1 insertions(+), 1 deletions(-)
 >>
->> diff --git a/recipes/hostap/hostap-daemon_git.bb
->> b/recipes/hostap/hostap-daemon_git.bb
->> index cf0e6e9..bdbde1a 100644
->> --- a/recipes/hostap/hostap-daemon_git.bb
->> +++ b/recipes/hostap/hostap-daemon_git.bb
->> @@ -3,7 +3,7 @@ DESCRIPTION = "User space daemon for extended IEEE
->> 802.11 management"
->>   require hostap-daemon-0.7.inc
->>
->>   PR = "r0"
->> -SRCREV = "b8fb017272ed4794339978c9fbc0e74571a44728"
->> +SRCREV = "83fa07226debc2f7082b6ccd62dbb1cd47c30472"
->>   PV = "0.7.3+0.8.0-rc"
->>   PR_append = "gitr${SRCPV}"
->>   FILESPATHPKG =. "hostap-daemon-git:"
->> --
->> 1.7.0.4
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
 
 
