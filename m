@@ -1,26 +1,30 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>) id 1RBwvE-00033Z-29
+	(envelope-from <gavinswanson@gmail.com>) id 1RBx2G-0003HB-1i
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 01:00:12 +0200
-Received: by iadx2 with SMTP id x2so3857422iad.6
+	Fri, 07 Oct 2011 01:07:28 +0200
+Received: by yxj17 with SMTP id 17so3164206yxj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Oct 2011 15:54:35 -0700 (PDT)
+	Thu, 06 Oct 2011 16:01:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=qGxKBpB1xDmlAudYguP/7R1OI/aTVUfYZprKsFCeibs=;
-	b=lCAl3u6Nd4Alssk/cqNDdrHlpJxYyW9kGvNxOP6k/u7DKFalVqRujmlL0VJMqATtpX
-	3wTQoxU7Pf5G2SfDeslOUPA7nogJX4HlWU+grEka7dDSyDgqXTtOgYWRy9C6S2GqZklL
-	gsd1OWRstnRPvtbdRjQg3g8uTJ63Wo9Dxe7uQ=
-MIME-Version: 1.0
-Received: by 10.42.155.133 with SMTP id u5mr8234094icw.8.1317941675405; Thu,
-	06 Oct 2011 15:54:35 -0700 (PDT)
-Received: by 10.42.226.7 with HTTP; Thu, 6 Oct 2011 15:54:35 -0700 (PDT)
-Date: Thu, 6 Oct 2011 15:54:35 -0700
-Message-ID: <CAHQecY6vYtpDnzZR43NHq=Dt7ZugXJA2P4_qgVxfDehmjVDHWA@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=kUj5TLiVc4T233BWVToqYNDwg751mYdiSIhH4CBHrSk=;
+	b=j9vpTdpiVg8j3I7iG4BIQM5Uyx/aL7qEbzIEhApDVRAADJ2xdxD9aro/0Rw4UBaefg
+	AOhbY8cIO00EtAo85KPPHdTGLDFeblDFTlRiKMNTB3QZ0LYLP7zSCNthcTAvPgm2UKdK
+	3qL4HRGdz7pBsfkrfsC2BF/51pRifiiDAeI00=
+Received: by 10.68.72.73 with SMTP id b9mr2763599pbv.100.1317942110892;
+	Thu, 06 Oct 2011 16:01:50 -0700 (PDT)
+Received: from localhost.localdomain (53.sub-75-210-17.myvzw.com.
+	[75.210.17.53])
+	by mx.google.com with ESMTPS id ki1sm24183468pbb.3.2011.10.06.16.01.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 06 Oct 2011 16:01:49 -0700 (PDT)
+From: gavinswanson@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: server outage for wiki
+Date: Thu,  6 Oct 2011 16:01:36 -0700
+Message-Id: <1317942096-32057-1-git-send-email-gavinswanson@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] Added ImageMagick 6.7.2-3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,13 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2011 23:00:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 06 Oct 2011 23:07:28 -0000
 
-I need to take the wiki offline for about 1/2hr.
+From: Gavin Swanson <gavinswanson@gmail.com>
 
-to fix some server errors that are causing issues.
+---
+ recipes/imagemagick/imagemagick_6.7.2-3.bb |   36 ++++++++++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/imagemagick/imagemagick_6.7.2-3.bb
 
-0000UTC 7OCT2011
+diff --git a/recipes/imagemagick/imagemagick_6.7.2-3.bb b/recipes/imagemagick/imagemagick_6.7.2-3.bb
+new file mode 100644
+index 0000000..14746c9
+--- /dev/null
++++ b/recipes/imagemagick/imagemagick_6.7.2-3.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION = "ImageMagick is an image convertion tools"
++SECTION = "console/utils"
++LICENSE = "GPL"
++# FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
++DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
++
++PR = "r1"
++
++SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}.tar.bz2 \
++#           file://PerlMagic_MakePatch;apply=yes \
++          "
++
++IMVER = "6.7.2-3"
++
++S = "${WORKDIR}/ImageMagick-${IMVER}"
++
++inherit autotools binconfig pkgconfig
++
++EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
++
++FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
++                ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
++                ${libdir}/ImageMagick-${IMVER}/config/ \
++                ${datadir}/ImageMagick-${IMVER}"
++
++FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
++
++FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
++
++BBCLASSEXTEND = "native"
++
++LEAD_SONAME = "libMagickCore.so.*"
++
++
++SRC_URI[md5sum] = "62e12090d2d385f4800c06f58f477bea"
++SRC_URI[sha256sum] = "50fe6e1af9e900e5d4bef45879a3a7e15512bb9ab3dbbafb521825359cb6d2c7"
+-- 
+1.7.1
+
 
 
