@@ -1,27 +1,26 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1RBbej-0006Dk-Fz
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RBbnH-0006NN-SG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Oct 2011 02:17:46 +0200
-Received: from server ([unknown] [173.74.34.213]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LSM00A6M8FXPYZ0@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	05 Oct 2011 18:11:57 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 26EC5D; Wed, 05 Oct 2011 18:11:52 -0500
-Received: from [192.168.254.24] by rkmorris.us with HTTP; Wed,
-	05 Oct 2011 18:11:50 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Wed, 05 Oct 2011 18:11:50 -0500
-X-Mailer: Axigen WebMail
+	Thu, 06 Oct 2011 02:26:35 +0200
+Received: (qmail invoked by alias); 06 Oct 2011 00:21:00 -0000
+Received: from p4FDF0233.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.2.51]
+	by mail.gmx.net (mp045) with SMTP; 06 Oct 2011 02:21:00 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/oNFxAO0joDEExkcNiCTI1fPAtORC6h/dxa740KW
+	yQzCuYuJC5aCfM
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1317856310993021500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-Subject: Getting Started
+Date: Thu, 6 Oct 2011 02:25:07 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-96.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1317856310993021500@rkmorris.us>
+In-Reply-To: <1317856310993021500@rkmorris.us>
+MIME-Version: 1.0
+Message-Id: <201110060225.07746.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: Getting Started
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2011 00:17:47 -0000
-Content-type: text/plain
-Content-transfer-encoding: quoted-printable
-Content-disposition: inline
+X-List-Received-Date: Thu, 06 Oct 2011 00:26:36 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hi,
-
-My apologies in advance for what is likely a stupid question, but I have be=
-en working with OpenEmbedded for a while, with some level of success (and s=
-ome pain ... :-)), but it really seems that the current information on the =
-Wiki site related to Getting Started (http://www.openembedded.org/wiki/Gett=
-ing_started) is out of date.
-
-I have checked out the git repository, and it really seems that the newer "=
-core" and "meta" trees are being updated regularly (and not the old openemb=
-edded tree), but I'm not sure how to use them to get builds working. This i=
-s likely just ignorance on my part, but is there any info out there of how =
-to work with the new structure?
-
-Thanks in advance for any pointers that you have!
-
-... Russell
-
+On Thursday, October 06, 2011 01:11:50 AM Russell Morris wrote:
+> Hi,
+> 
+> My apologies in advance for what is likely a stupid question, but I have been working with OpenEmbedded for a while, with some level of success (and some pain ... :-)), but it really seems that the current information on the Wiki site related to Getting Started (http://www.openembedded.org/wiki/Getting_started) is out of date.
+> 
+> I have checked out the git repository, and it really seems that the newer "core" and "meta" trees are being updated regularly (and not the old openembedded tree), but I'm not sure how to use them to get builds working. This is likely just ignorance on my part, but is there any info out there of how to work with the new structure?
+> 
+> Thanks in advance for any pointers that you have!
+> 
+> ... Russell
+> 
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/angstrom-layers/tree/README
+http://sakrah.homelinux.org/blog/2011/03/using-openembedded-core-to-build-angstrom-for-qemu/
 
 
