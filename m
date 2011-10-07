@@ -1,36 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.opencsw.org ([82.220.5.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RCAcg-0007JJ-TR for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 15:37:59 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RCAXH-0006rE-Ac for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 15:32:23 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2011 15:32:23 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <attila@kinali.ch>) id 1RCB4N-0000Wi-E6
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Oct 2011 16:06:35 +0200
+Received: from chise.local.aotag.ch (gs84.art-of-technology.ch
+	[212.126.160.84])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.opencsw.org (Postfix) with ESMTPSA id A979AE5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2011 15:32:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri,  7 Oct 2011 15:53:55 +0200 (CEST)
+Date: Fri, 7 Oct 2011 15:53:55 +0200
+From: Attila Kinali <attila@kinali.ch>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 07 Oct 2011 15:32:10 +0200
-Message-ID: <j6mv0q$mfa$1@dough.gmane.org>
-References: <1317937797-27434-1-git-send-email-schnitzeltony@gmx.de>
-	<j6mjm3$31n$1@dough.gmane.org>
-	<201110071523.31166.schnitzeltony@gmx.de>
+Message-Id: <20111007155355.b7dbb67d.attila@kinali.ch>
+Organization: GEHIRN
+X-Mailer: Sylpheed 3.1.0 (GTK+ 2.24.4; i686-pc-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0) Gecko/20110922 Thunderbird/7.0
-In-Reply-To: <201110071523.31166.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-xfce] ristretto: Add inital recipe for version 0.1.0
+Subject: use of kpartx in contrib/angstrom/omap3-mkcard.sh is suboptimal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,59 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2011 13:37:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 07 Oct 2011 14:06:36 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Moin
 
-Op 07-10-11 15:23, Andreas Müller schreef:
-> On Friday, October 07, 2011 12:18:43 PM Koen Kooi wrote:
->> Op 06-10-11 23:49, Andreas Müller schreef:
->>> 
->>> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
->>> .../recipes-apps/ristretto/ristretto_0.1.0.bb      |   17 
->>> +++++++++++++++++ 1 files changed, 17 insertions(+), 0 deletions(-) 
->>> create mode 100644 
->>> meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb
->>> 
->>> diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb 
->>> b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb new file mode 
->>> 100644 index 0000000..0b9cca0 --- /dev/null +++ 
->>> b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb @@ -0,0 +1,17 
->>> @@ +DESCRIPTION = "Image-viewer application" +HOMEPAGE = 
->>> "http://goodies.xfce.org/projects/applications/ristretto" +SECTION =
->>>  "x11/application" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM = 
->>> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +DEPENDS = 
->>> "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo" + +PR
->>> = "r0"
->> 
->> Please drop that one. OE-core will be moving away from using PR, so 
->> adding new ones isn't going to help, especially when r0 is the default 
->> value.
->> 
-> We had that one - sorry. What is planned?
+the script contrib/angstrom/omap3-mkcard.sh uses kpartx to create the
+device files for the partitions just created, if kpartx is available.
+Unfortunately, kpartx does not work here as intended, it binds the
+device files in a way that prevents the script from running properly
+(mkfs fails due to the "partition in use" check, as kpartx makes
+the kernel to keep them in use). As most systems do not have
+kpartx installed, this bug isn't triggered for most people.
+(kpartx is only needed if you want to create "partiton device files"
+for block devices that are not usually partitioned, like lvm volumes or
+disk images)
 
-Have OE/bitbake automatically detect if a PR change is needed
+The right thing to do would be to use sfdisk to reload the partition
+table and let udev handle the rest. (Actually this isn't really necessary,
+as sfdisk reloads the partition table anyways after writing the changes)
 
-> 
-> Regarding ristretto: Seems this version will soon have a successor so 
-> I'll wait for that with the update.
-> 
-> Andreas
-> 
-> _______________________________________________ Openembedded-devel 
-> mailing list Openembedded-devel@lists.openembedded.org 
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+--- omap3-mkcard.sh.orig        2011-10-07 15:52:57.000000000 +0200
++++ omap3-mkcard.sh     2011-10-07 15:29:49.000000000 +0200
+@@ -33,9 +33,10 @@
+ sleep 1
+ 
+ 
+-if [ -x `which kpartx` ]; then
+-       kpartx -a ${DRIVE}
+-fi
++#if [ -x `which kpartx` ]; then
++#      kpartx -a ${DRIVE}
++#fi
++sfdisk -R $DRIVE
+ 
+ # handle various device names.
+ # note something like fdisk -l /dev/loop0 | egrep -E '^/dev' | cut -d' ' -f1 
 
-iD8DBQFOjv9aMkyGM64RGpERAvX7AJ9dTIAk8CsmWIsGz1Pv1attvnlQlgCgtIMj
-dkOK7dPbPnLmXVUti0K2VsE=
-=Ol70
------END PGP SIGNATURE-----
 
+			Attila Kinali
+
+-- 
+The trouble with you, Shev, is you don't say anything until you've saved
+up a whole truckload of damned heavy brick arguments and then you dump
+them all out and never look at the bleeding body mangled beneath the heap
+		-- Tirin, The Dispossessed, U. Le Guin
 
 
