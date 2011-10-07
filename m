@@ -1,26 +1,34 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1RCCgD-0008Uh-6g
+	(envelope-from <tom.rini@gmail.com>) id 1RCCki-0000U4-De
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 17:49:45 +0200
-Received: by gyg8 with SMTP id 8so3850884gyg.6
+	Fri, 07 Oct 2011 17:54:25 +0200
+Received: by pzd13 with SMTP id 13so10425256pzd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2011 08:44:07 -0700 (PDT)
+	Fri, 07 Oct 2011 08:48:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=0TuiSy6geg5Mz7QYKVwjvnlWNh74y+pINYY+KjwxJPo=;
-	b=fE3otfl2Yb/gyaCpzv6057hX/oabErErdFLEv+qYJODqt4Vy1a5tX4n3OJN4eHEEdp
-	cFQg5WZ0YCpu6bJo7QpXjgEU7yal4TOMMcKLB0vUOKJ8WBH/Lp4Nbc9wSOL3Lj/Q55uQ
-	MyqiisDZhVWBmszqlugAieJxUtEVqXSYa+7js=
-MIME-Version: 1.0
-Received: by 10.236.77.233 with SMTP id d69mr10681305yhe.84.1318002247482;
-	Fri, 07 Oct 2011 08:44:07 -0700 (PDT)
-Received: by 10.236.209.97 with HTTP; Fri, 7 Oct 2011 08:44:07 -0700 (PDT)
-Date: Fri, 7 Oct 2011 11:44:07 -0400
-Message-ID: <CAOd_LFzBDzxOVnXmkap7dtvwSsozOAVR3HZ6qXSU81gqzxiJWA@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: ijs recipe questions
+	h=references:in-reply-to:mime-version:content-type:message-id
+	:content-transfer-encoding:from:subject:date:to:x-pgp-agent:x-mailer;
+	bh=vVOxbmngGwdrOX9ezvzRgxDsA5r5fJ378xz1v1zctRQ=;
+	b=C2/Pgg86FfSCrvnXbc+ugep2+ia8kNW/deeyu2WR9uuNwQF/FJAMxY2akRcynI1BKG
+	v73l/AQcCg+b60FJo/Yr1WIsAKmOFkD2T5A5MzSvg1j1H1wn8YLOViesl/wkanW0s2HZ
+	NcuC8vFNfRoHmCYWHQdJm0f53fM1JWEC9VYbI=
+Received: by 10.68.8.195 with SMTP id t3mr14790995pba.107.1318002526348;
+	Fri, 07 Oct 2011 08:48:46 -0700 (PDT)
+Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id e7sm32484130pbq.1.2011.10.07.08.48.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 07 Oct 2011 08:48:45 -0700 (PDT)
+References: <20111007041336.GC26170@denix.org>
+In-Reply-To: <20111007041336.GC26170@denix.org>
+Mime-Version: 1.0 (Apple Message framework v1084)
+Message-Id: <5C7B4134-3E21-41DF-867B-CD8C305A9C30@gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+Date: Fri, 7 Oct 2011 08:48:38 -0700
+To: openembedded-devel@lists.openembedded.org
+X-Pgp-Agent: GPGMail 1.3.3
+X-Mailer: Apple Mail (2.1084)
+Subject: Re: [2011.03-maintenance] Pull request 20111006
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,49 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2011 15:49:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Oct 2011 15:54:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm trying to port the ijs recipe from oe to meta-oe.  This is what I
-have so far:
+On Oct 6, 2011, at 9:13 PM, Denys Dmytriyenko wrote:
 
-DESCRIPTION = "Inkjet driver from linuxprinting.org"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README;md5=6f2f06909c6fd797a9521cd23168ecd0"
-HOMEPAGE = "http://www.linuxprinting.org/ijs/"
+> Tom,
+>=20
+> Please pull these 3 commits, that update wireless stuff and are quite
+> trivial - new version for iw and updated SRCREVs for wpa_supplicant =
+and
+> hostapd. All are cherry-picked from oe.dev.
+>=20
+> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+>  Branch: 2011.03-maintenance
+>  Browse: =
+http://arago-project.org/git/people/?p=3Ddenix/openembedded.git;a=3Dshortl=
+og;h=3Drefs/heads/2011.03-maintenance
 
-SRC_URI = "http://www.linuxprinting.org/ijs/download/ijs-${PV}.tar.bz2"
+Applied, thanks.
 
-inherit autotools pkgconfig
+- --=20
+Tom
 
-INSANE_SKIP_${PN} = "dev-so"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-EXTRA_OECONF = " --enable-shared "
-
-SRC_URI[md5sum] = "896fdcb7a01c586ba6eb81398ea3f6e9"
-SRC_URI[sha256sum] =
-"11a5f5084488c480f3ff5a24d64d7147bb64272bf60a0ba51330a56c5b50cab9"
-
-PACKAGES =+ "ijs-bin"
-FILES_ijs-bin = "${bindir}/*"
-FILES_${PN} += "${libdir}/*.so"
-
-However, it does not seem like I should need the following lines:
-INSANE_SKIP_${PN} = "dev-so"  (otherwise, complains about symlinks in
-not dev/dgb, etc package)
-FILES_${PN} += "${libdir}/*.so"  (otherwise it puts the so files in
-the dev package)
-
-What is the best way to convince OE to package the libraries and not
-complain about the so links?
-
-Thanks,
-Cliff
-
--- 
-=================
-http://bec-systems.com
+iEYEARECAAYFAk6PH1cACgkQdZngf2G4WwOkkQCfbCMP7eSByI3bw7C/ntmdx9HM
+1UgAn2u+ylHlfX7XCnyWlDHwn0bkZTRd
+=3Dcb0u
+-----END PGP SIGNATURE-----
 
 
