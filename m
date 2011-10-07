@@ -1,26 +1,35 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RCAQ6-00073U-3e
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 15:24:58 +0200
-Received: (qmail invoked by alias); 07 Oct 2011 13:19:20 -0000
-Received: from p4FDF0403.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.4.3]
-	by mail.gmx.net (mp068) with SMTP; 07 Oct 2011 15:19:20 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19l+k99FzJlautv6/WUSAvJOXybLafwqb9QH0RlQb
-	mEyNl8W7wpR4gU
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RCAcg-0007JJ-TR for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Oct 2011 15:37:59 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RCAXH-0006rE-Ac for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Oct 2011 15:32:23 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Oct 2011 15:32:23 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Oct 2011 15:32:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 7 Oct 2011 15:23:30 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-96.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 07 Oct 2011 15:32:10 +0200
+Message-ID: <j6mv0q$mfa$1@dough.gmane.org>
 References: <1317937797-27434-1-git-send-email-schnitzeltony@gmx.de>
 	<j6mjm3$31n$1@dough.gmane.org>
-In-Reply-To: <j6mjm3$31n$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201110071523.31166.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
+	<201110071523.31166.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0) Gecko/20110922 Thunderbird/7.0
+In-Reply-To: <201110071523.31166.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
 Subject: Re: [meta-xfce] ristretto: Add inital recipe for version 0.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,38 +44,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2011 13:24:58 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Oct 2011 13:37:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Friday, October 07, 2011 12:18:43 PM Koen Kooi wrote:
-> Op 06-10-11 23:49, Andreas M=C3=BCller schreef:
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de> ---
-> > .../recipes-apps/ristretto/ristretto_0.1.0.bb      |   17
-> > +++++++++++++++++ 1 files changed, 17 insertions(+), 0 deletions(-)
-> > create mode 100644 meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb
-> >
-> > diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb
-> > b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb new file mode
-> > 100644 index 0000000..0b9cca0 --- /dev/null +++
-> > b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb @@ -0,0 +1,17 @@
-> > +DESCRIPTION =3D "Image-viewer application" +HOMEPAGE =3D
-> > "http://goodies.xfce.org/projects/applications/ristretto" +SECTION =3D
-> > "x11/application" +LICENSE =3D "GPLv2" +LIC_FILES_CHKSUM =3D
-> > "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae19f" +DEPENDS =3D "l=
-ibexif
-> > gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo" + +PR =3D "r0"
->=20
-> Please drop that one. OE-core will be moving away from using PR, so adding
-> new ones isn't going to help, especially when r0 is the default value.
->=20
-We had that one - sorry. What is planned?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Regarding ristretto: Seems this version will soon have a successor so I'll =
-wait for that with the update.
+Op 07-10-11 15:23, Andreas Müller schreef:
+> On Friday, October 07, 2011 12:18:43 PM Koen Kooi wrote:
+>> Op 06-10-11 23:49, Andreas Müller schreef:
+>>> 
+>>> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
+>>> .../recipes-apps/ristretto/ristretto_0.1.0.bb      |   17 
+>>> +++++++++++++++++ 1 files changed, 17 insertions(+), 0 deletions(-) 
+>>> create mode 100644 
+>>> meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb
+>>> 
+>>> diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb 
+>>> b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb new file mode 
+>>> 100644 index 0000000..0b9cca0 --- /dev/null +++ 
+>>> b/meta-xfce/recipes-apps/ristretto/ristretto_0.1.0.bb @@ -0,0 +1,17 
+>>> @@ +DESCRIPTION = "Image-viewer application" +HOMEPAGE = 
+>>> "http://goodies.xfce.org/projects/applications/ristretto" +SECTION =
+>>>  "x11/application" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM = 
+>>> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +DEPENDS = 
+>>> "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo" + +PR
+>>> = "r0"
+>> 
+>> Please drop that one. OE-core will be moving away from using PR, so 
+>> adding new ones isn't going to help, especially when r0 is the default 
+>> value.
+>> 
+> We had that one - sorry. What is planned?
 
-Andreas
+Have OE/bitbake automatically detect if a PR change is needed
+
+> 
+> Regarding ristretto: Seems this version will soon have a successor so 
+> I'll wait for that with the update.
+> 
+> Andreas
+> 
+> _______________________________________________ Openembedded-devel 
+> mailing list Openembedded-devel@lists.openembedded.org 
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFOjv9aMkyGM64RGpERAvX7AJ9dTIAk8CsmWIsGz1Pv1attvnlQlgCgtIMj
+dkOK7dPbPnLmXVUti0K2VsE=
+=Ol70
+-----END PGP SIGNATURE-----
+
 
 
