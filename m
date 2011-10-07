@@ -1,30 +1,23 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gavinswanson@gmail.com>) id 1RBx2G-0003HB-1i
+	(envelope-from <denis@denix.org>) id 1RC1uD-00081F-Jy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 01:07:28 +0200
-Received: by yxj17 with SMTP id 17so3164206yxj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Oct 2011 16:01:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=kUj5TLiVc4T233BWVToqYNDwg751mYdiSIhH4CBHrSk=;
-	b=j9vpTdpiVg8j3I7iG4BIQM5Uyx/aL7qEbzIEhApDVRAADJ2xdxD9aro/0Rw4UBaefg
-	AOhbY8cIO00EtAo85KPPHdTGLDFeblDFTlRiKMNTB3QZ0LYLP7zSCNthcTAvPgm2UKdK
-	3qL4HRGdz7pBsfkrfsC2BF/51pRifiiDAeI00=
-Received: by 10.68.72.73 with SMTP id b9mr2763599pbv.100.1317942110892;
-	Thu, 06 Oct 2011 16:01:50 -0700 (PDT)
-Received: from localhost.localdomain (53.sub-75-210-17.myvzw.com.
-	[75.210.17.53])
-	by mx.google.com with ESMTPS id ki1sm24183468pbb.3.2011.10.06.16.01.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 06 Oct 2011 16:01:49 -0700 (PDT)
-From: gavinswanson@gmail.com
+	Fri, 07 Oct 2011 06:19:29 +0200
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LSO007NFH2OEC70@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	06 Oct 2011 23:13:42 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 87E5314AF5D; Fri,
+	07 Oct 2011 00:13:36 -0400 (EDT)
+Date: Fri, 07 Oct 2011 00:13:36 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Oct 2011 16:01:36 -0700
-Message-Id: <1317942096-32057-1-git-send-email-gavinswanson@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] Added ImageMagick 6.7.2-3
+Message-id: <20111007041336.GC26170@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: [2011.03-maintenance] Pull request 20111006
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,59 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2011 23:07:28 -0000
+X-List-Received-Date: Fri, 07 Oct 2011 04:19:29 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-From: Gavin Swanson <gavinswanson@gmail.com>
+Tom,
 
+Please pull these 3 commits, that update wireless stuff and are quite
+trivial - new version for iw and updated SRCREVs for wpa_supplicant and
+hostapd. All are cherry-picked from oe.dev.
+
+Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+  Branch: 2011.03-maintenance
+  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+
+Thanks,
+    Denys Dmytriyenko <denys@ti.com>
 ---
- recipes/imagemagick/imagemagick_6.7.2-3.bb |   36 ++++++++++++++++++++++++++++
- 1 files changed, 36 insertions(+), 0 deletions(-)
- create mode 100644 recipes/imagemagick/imagemagick_6.7.2-3.bb
 
-diff --git a/recipes/imagemagick/imagemagick_6.7.2-3.bb b/recipes/imagemagick/imagemagick_6.7.2-3.bb
-new file mode 100644
-index 0000000..14746c9
---- /dev/null
-+++ b/recipes/imagemagick/imagemagick_6.7.2-3.bb
-@@ -0,0 +1,36 @@
-+DESCRIPTION = "ImageMagick is an image convertion tools"
-+SECTION = "console/utils"
-+LICENSE = "GPL"
-+# FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
-+DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
-+
-+PR = "r1"
-+
-+SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}.tar.bz2 \
-+#           file://PerlMagic_MakePatch;apply=yes \
-+          "
-+
-+IMVER = "6.7.2-3"
-+
-+S = "${WORKDIR}/ImageMagick-${IMVER}"
-+
-+inherit autotools binconfig pkgconfig
-+
-+EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
-+
-+FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
-+                ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
-+                ${libdir}/ImageMagick-${IMVER}/config/ \
-+                ${datadir}/ImageMagick-${IMVER}"
-+
-+FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
-+
-+FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
-+
-+BBCLASSEXTEND = "native"
-+
-+LEAD_SONAME = "libMagickCore.so.*"
-+
-+
-+SRC_URI[md5sum] = "62e12090d2d385f4800c06f58f477bea"
-+SRC_URI[sha256sum] = "50fe6e1af9e900e5d4bef45879a3a7e15512bb9ab3dbbafb521825359cb6d2c7"
--- 
-1.7.1
+The following changes since commit 56a79a34b0461dae629e7aedb7d9e4d0e6137743:
+  Philip Balister (1):
+        uhd : Update SRCREV to head of master branch.
+
+Eyal Reizer (3):
+  iw: build version 0.9.22 from git sources
+  wpa_supplicant update to use a newer commit
+  hostapd: update to use a newer commit
+
+ recipes/hostap/hostap-daemon_git.bb          |    5 +--
+ recipes/iw/iw_git.bb                         |   27 ++++++++++++++++++++++++++
+ recipes/wpa-supplicant/wpa-supplicant_git.bb |    6 +---
+ 3 files changed, 31 insertions(+), 7 deletions(-)
+ create mode 100644 recipes/iw/iw_git.bb
 
 
 
