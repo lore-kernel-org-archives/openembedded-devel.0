@@ -1,28 +1,26 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RCBWs-0002uF-Kf
+	(envelope-from <cliff.brake@gmail.com>) id 1RCCgD-0008Uh-6g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2011 16:36:02 +0200
-Received: from ad.chargestorm.se (85.231.30.150) by STOEXHUB01.domain01.net
-	(10.12.10.1) with Microsoft SMTP Server (TLS) id 8.3.137.0;
-	Fri, 7 Oct 2011 16:30:24 +0200
-Date: Fri, 7 Oct 2011 16:30:40 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20111007143026.GA5934@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <cover.1316616945.git.Imran_Mehmood@mentor.com>
-	<j5em9g$3pd$1@dough.gmane.org> <4E89AF1F.3040107@mentor.com>
-	<4E8F096F.5040003@mentor.com>
+	Fri, 07 Oct 2011 17:49:45 +0200
+Received: by gyg8 with SMTP id 8so3850884gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Oct 2011 08:44:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=0TuiSy6geg5Mz7QYKVwjvnlWNh74y+pINYY+KjwxJPo=;
+	b=fE3otfl2Yb/gyaCpzv6057hX/oabErErdFLEv+qYJODqt4Vy1a5tX4n3OJN4eHEEdp
+	cFQg5WZ0YCpu6bJo7QpXjgEU7yal4TOMMcKLB0vUOKJ8WBH/Lp4Nbc9wSOL3Lj/Q55uQ
+	MyqiisDZhVWBmszqlugAieJxUtEVqXSYa+7js=
 MIME-Version: 1.0
-In-Reply-To: <4E8F096F.5040003@mentor.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v3 0/2] pull request for twm and xclock recipes
+Received: by 10.236.77.233 with SMTP id d69mr10681305yhe.84.1318002247482;
+	Fri, 07 Oct 2011 08:44:07 -0700 (PDT)
+Received: by 10.236.209.97 with HTTP; Fri, 7 Oct 2011 08:44:07 -0700 (PDT)
+Date: Fri, 7 Oct 2011 11:44:07 -0400
+Message-ID: <CAOd_LFzBDzxOVnXmkap7dtvwSsozOAVR3HZ6qXSU81gqzxiJWA@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: ijs recipe questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,62 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2011 14:36:02 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Oct 2011 15:49:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Imran Mehmood <imran_mehmood@mentor.com> [111007 16:15]:
-> On 10/03/2011 05:48 PM, Imran Mehmood wrote:
-> > hi koen,
+Hello,
 
-> > On 09/22/2011 11:57 AM, Koen Kooi wrote:
-> >> -----BEGIN PGP SIGNED MESSAGE-----
-> >> Hash: SHA1
+I'm trying to port the ijs recipe from oe to meta-oe.  This is what I
+have so far:
 
-> >> Op 22-09-11 08:31, Mehmood, Imran schreef:
-> >>> From: Imran Mehmood<Imran_Mehmood@mentor.com>
+DESCRIPTION = "Inkjet driver from linuxprinting.org"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://README;md5=6f2f06909c6fd797a9521cd23168ecd0"
+HOMEPAGE = "http://www.linuxprinting.org/ijs/"
 
-> >>> The following changes since commit
-> >>> 94a25d92b4d0e9379caaab127ccac1a94e9e4d28: Imran Mehmood (1): cramfs: 
-> >>> Adds
-> >>> cvs version recipe (initial recipe)
-> >> That isn't in meta-oe, so I can't pull your git tree. I'll grab the 
-> >> patches
-> >> from patchwork for now, but in the future please use a clean tree for 
-> >> pull
-> >> requests
+SRC_URI = "http://www.linuxprinting.org/ijs/download/ijs-${PV}.tar.bz2"
 
-> > Sorry for much delayed response I was busy with some other issues. I 
-> > fixed the warning messages with xclock but before sending the patch 
-> > again just wanted to clear a confusion regarding your response below.
+inherit autotools pkgconfig
 
-> > I passed 94a25d92b4d0e9379caaab127ccac1a94e9e4d28 to 
-> > create-pull-request script with -r because I wanted to create pull 
-> > request for all commits on my branch, made after this one. If its 
-> > wrong whats the right way or thing to do? I mean
+INSANE_SKIP_${PN} = "dev-so"
 
-In order to make it easy for everyone to pull from your git tree, the
-pull request should be based on a commit that is in the upstream git
-tree.
+EXTRA_OECONF = " --enable-shared "
 
-In other words, the error/problem with your pull request was that you
-had created a branch, then commit X-number of patches to that branch.
-However, you only used the latest Y-patches (with Y being less than X)
-in your pull-request.
+SRC_URI[md5sum] = "896fdcb7a01c586ba6eb81398ea3f6e9"
+SRC_URI[sha256sum] =
+"11a5f5084488c480f3ff5a24d64d7147bb64272bf60a0ba51330a56c5b50cab9"
 
-A better approach would have been to create a new branch, cherry-pick
-the Y-patches that you wanted to upstream into this new branch. And
-finally, create a pull request for this new branch.
+PACKAGES =+ "ijs-bin"
+FILES_ijs-bin = "${bindir}/*"
+FILES_${PN} += "${libdir}/*.so"
 
-Cheers,
-Anders
+However, it does not seem like I should need the following lines:
+INSANE_SKIP_${PN} = "dev-so"  (otherwise, complains about symlinks in
+not dev/dgb, etc package)
+FILES_${PN} += "${libdir}/*.so"  (otherwise it puts the so files in
+the dev package)
 
-> >  what commit id should I pass to the script? Please explain a bit more 
-> > in detail so that I can prepare next patch as per requirements.
+What is the best way to convince OE to package the libraries and not
+complain about the so links?
 
+Thanks,
+Cliff
 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+=================
+http://bec-systems.com
 
 
