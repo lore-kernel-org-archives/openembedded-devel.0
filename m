@@ -1,31 +1,24 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1RDO88-0008Ro-De
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RDOfk-0000de-Ex
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Oct 2011 00:15:28 +0200
-Received: by wwf10 with SMTP id 10so3999089wwf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Oct 2011 15:09:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=nBselBaOw8n6tTM7LNuNHtcuqBb7mM+CuNaubEUL2xA=;
-	b=hlKMkJGdWoJ0evDywaJgMdjGZAG41G4wYrihHD7sDSRj4lO1Zg3VUbT7yFyuWfEy4/
-	QqiiFptsv3H1K5iF2ZOVEkeQPLqW2+yhh3+vj0yJX7VWNcvkKU+VqUJ+B6TfPauDhKcr
-	cRpc6Bp1meCSyjXJpxlzsdKRRTR/RlMmW9/0A=
-Received: by 10.216.230.83 with SMTP id i61mr7547277weq.54.1318284587234; Mon,
-	10 Oct 2011 15:09:47 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.160.80 with HTTP; Mon, 10 Oct 2011 15:09:27 -0700 (PDT)
-In-Reply-To: <4E9363B3.4020905@telia.com>
-References: <4E9363B3.4020905@telia.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 10 Oct 2011 15:09:27 -0700
-X-Google-Sender-Auth: mYXVRWF2hdmCNCLPgtO72ax_26E
-Message-ID: <CABcZANkeEheFWKVn3HSTgvdOWeuFW7ZCHPRxkzRO-t5dcpL8Ww@mail.gmail.com>
+	Tue, 11 Oct 2011 00:50:12 +0200
+Received: (qmail invoked by alias); 10 Oct 2011 22:44:31 -0000
+Received: from p4FDF1933.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.25.51]
+	by mail.gmx.net (mp050) with SMTP; 11 Oct 2011 00:44:31 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1//mhNKuhz/RqWyf7aetG8kAC4Uejt+4h1fh3Ik+M
+	gwTbFqgsOSgpWK
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: psyco-dist not supported on 64 bit Linux - What to do?
+Date: Tue, 11 Oct 2011 00:48:58 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+MIME-Version: 1.0
+Message-Id: <201110110048.58769.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe] bitbake udev fails at parse ( util-linux-blkid missing )
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2011 22:15:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Oct 2011 22:50:12 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 10, 2011 at 2:29 PM, Ulf Samuelsson
-<ulf_samuelsson@telia.com> wrote:
-> psyco-dist will not run on a 64 bit linux.
-> The guys behind psyco-dist recommends the use of PyPy
->
-> What is the recommendation for 64 bit linux?
->
-> Just run without JIT?
-> Don't run on a 64 bit linux?
-> Anything else?
+Hi
 
-Python works fine as is. You're welcome to attempt use of pypy, but
-last time I tried there were a couple hiccups and the performance
-benefit wasn't particularly substantial.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+with latest pulls I get after pseudo pre run:
+
+OE Build Configuration:
+BB_VERSION        = "1.13.3"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "overo"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "v2011.10-core"
+TUNE_FEATURES     = "armv7a vfp neon cortexa8"
+TARGET_FPU        = "vfp-neon"
+meta-angstrom     = "master:4f06c3f0376e0704210a2e61005748f168369d07"
+meta-oe           
+meta-efl          
+meta-gpe          
+meta-gnome        
+meta-xfce         = "master:9278fe715d5eebd16af1a2d20a92255744913dbb"
+meta-texasinstruments = "master:7a45605f91536519a53e6f18dedee5f1f62d88e0"
+meta-efikamx      = "master:2ef47fdd4e8232d766c0c63d9427253ee56e31d0"
+meta-nslu2        = "master:9080394ae0a040dd7b05ac49f9480e4d71631b55"
+meta-htc          
+meta-nokia        
+meta-openmoko     
+meta-palm         = "master:7d12d5c09a5303952c2ffa22aa2f0274025f9fc2"
+meta-sugarbay     
+meta-crownbay     
+meta-emenlow      
+meta-fishriver    
+meta-jasperforest 
+meta-n450         = "master:e0e52850cf5f84fb4ee1bfa15571aaf61e068450"
+meta              = "master:4732222c46652951e66aae377631f4a361179d8f"
+meta-freescale    = "master:8716233e1c13e8c49096c4606f836275ee22009a"
+meta-gumstix      = "master:d721d7815c7f4706401f4cef9c1f0a535e056d08"
+
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing RPROVIDES 'util-linux-blkid' (but /home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes-core/udev/udev_173.bb RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'util-linux-blkid' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['util-linux-blkid']
+ERROR: Required build target 'udev' has no buildable providers.
+Missing or unbuildable dependency chain was: ['udev', 'util-linux-blkid']
+
+Could somebody take care please?
+
+Andreas
 
 
