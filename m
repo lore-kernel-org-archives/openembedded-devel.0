@@ -1,24 +1,20 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RDMje-0004Rn-6V
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RDNSt-0007Be-43
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Oct 2011 22:46:06 +0200
-Received: (qmail invoked by alias); 10 Oct 2011 20:40:25 -0000
-Received: from p4FDF1933.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.25.51]
-	by mail.gmx.net (mp062) with SMTP; 10 Oct 2011 22:40:25 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/QvU1rLGTQ/YhqwbcOn4yFz5Qhx27tIMYbnAIiYS
-	TJN4olV2tfOHEu
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Oct 2011 22:44:50 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
+	Mon, 10 Oct 2011 23:32:51 +0200
+Received: from [10.175.196.247] (83.227.57.13) by smtp-out21.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 4E79D85B0076AA20 for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Oct 2011 23:24:19 +0200
+Message-ID: <4E936282.3030505@telia.com>
+Date: Mon, 10 Oct 2011 23:24:18 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (Windows NT 5.1;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Message-Id: <201110102244.51216.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe] Networkmanager help (and other issues?)
+To: openembedded-devel@lists.openembedded.org
+Subject: psyco-dist not supported on 64 bit Linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,92 +28,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2011 20:46:06 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 10 Oct 2011 21:32:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi
+psyco-dist will not run on a 64 bit linux.
+The guys behind psyco-dist recommends the use of PyPy
 
-I am working on a xfce-image (see below) in angstrom environment with networkmanager / nm-applet taking care of network/wlan settings. Currently I have no display manager. In very old oe-classic times I used 'slim' - but a try caused kernel panic. That one needs some alignment for systemd I think - but this is another issue.
+What is the recommendation for 64 bit linux?
 
-So I login to console and call 'startxfce4'. Without futher preparations neither networkmanager nor nm-applet are started properly.
-I took a look around and found a workaround by entering the following two commands before 'startxfce4':
+Just run without JIT?
+Don't run on a 64 bit linux?
+Anything else?
 
-1. dbus-launch --config-file=/etc/dbus-1/system.conf
-2. /etc/init.d/Networkmanager start
-
-As a side-effect I discovered that after calling 1. the 'shutdown' and 'restart' options are enabled when logging of from xfce-session.
-
-Now my questions:
-
-* What steps are required to save me from entering the two commands?
-* Is this a dbus or a systemd or a missing display-manager issue?
-
-Hints appreciated
-
-Andreas
-
-diff --git a/recipes-angstrom/images/xfce-base-image.bb b/recipes-angstrom/images/xfce-base-image.bb
-new file mode 100644
-index 0000000..2fea779
---- /dev/null
-+++ b/recipes-angstrom/images/xfce-base-image.bb
-@@ -0,0 +1,53 @@
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+PR = "r0"
-+
-+require systemd-image.bb
-+
-+# conman conflicts with networkmanager so remove here
-+CONMANPKGS = ""
-+
-+export IMAGE_BASENAME = "xfce-base-image"
-+
-+IMAGE_INSTALL += " \
-+    task-base-extended \
-+    task-xserver \
-+    task-xfce-base \
-+    \
-+    xfwm4-theme-daloa \
-+    xfwm4-theme-kokodi \
-+    xfwm4-theme-moheli \
-+    xfwm4-theme-sassandra \
-+    xfwm4-theme-stoneage \
-+    xfwm4-theme-therapy \
-+    xfwm4-theme-tyrex \
-+    xfwm4-theme-wallis \
-+    \
-+    xfce4-appfinder \ 
-+    xfce4-screenshooter \
-+    midori \
-+    ristretto \
-+    gedit \
-+    \
-+    gtk-xfce-engine \
-+    \
-+    gvfs \
-+    gvfsd-ftp gvfsd-sftp gvfsd-trash \
-+    \
-+    iso-codes mime-support consolekit \
-+    upower udisks \
-+    \
-+    network-manager-applet networkmanager \
-+    \
-+    xserver-common \
-+    ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-common \
-+    gnome-icon-theme \
-+"
-+
-+#    slim
-+#    udev-extra-rules
-+#    orage
-+#    xserver-nodm-init
-+
-+
-+inherit image
 -- 
-1.7.4.4
+Best Regards
+Ulf Samuelsson
+
 
 
