@@ -1,31 +1,31 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1RDNiE-0007ZG-Ms
+	(envelope-from <kergoth@gmail.com>) id 1RDO88-0008Ro-De
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Oct 2011 23:48:42 +0200
-Received: from server ([unknown] [173.74.34.213]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LSV005SDDN9VZN0@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	10 Oct 2011 16:42:45 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 14B3D4; Mon, 10 Oct 2011 16:42:38 -0500
-Received: from [192.168.254.24] by rkmorris.us with HTTP; Mon,
-	10 Oct 2011 16:42:36 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Mon, 10 Oct 2011 16:42:36 -0500
-X-Mailer: Axigen WebMail
+	Tue, 11 Oct 2011 00:15:28 +0200
+Received: by wwf10 with SMTP id 10so3999089wwf.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Oct 2011 15:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=nBselBaOw8n6tTM7LNuNHtcuqBb7mM+CuNaubEUL2xA=;
+	b=hlKMkJGdWoJ0evDywaJgMdjGZAG41G4wYrihHD7sDSRj4lO1Zg3VUbT7yFyuWfEy4/
+	QqiiFptsv3H1K5iF2ZOVEkeQPLqW2+yhh3+vj0yJX7VWNcvkKU+VqUJ+B6TfPauDhKcr
+	cRpc6Bp1meCSyjXJpxlzsdKRRTR/RlMmW9/0A=
+Received: by 10.216.230.83 with SMTP id i61mr7547277weq.54.1318284587234; Mon,
+	10 Oct 2011 15:09:47 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.160.80 with HTTP; Mon, 10 Oct 2011 15:09:27 -0700 (PDT)
+In-Reply-To: <4E9363B3.4020905@telia.com>
+References: <4E9363B3.4020905@telia.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 10 Oct 2011 15:09:27 -0700
+X-Google-Sender-Auth: mYXVRWF2hdmCNCLPgtO72ax_26E
+Message-ID: <CABcZANkeEheFWKVn3HSTgvdOWeuFW7ZCHPRxkzRO-t5dcpL8Ww@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1318282956780285500@rkmorris.us>
-In-reply-to: <20111006082154.GA21093@mi.fu-berlin.de>
-References: <1317856310993021500@rkmorris.us>
-	<20111006082154.GA21093@mi.fu-berlin.de>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Getting Started
+Subject: Re: psyco-dist not supported on 64 bit Linux - What to do?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,62 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2011 21:48:42 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 Oct 2011 22:15:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Thanks so much for the pointers folks - very much appreciated!
-Take care,... Russell
-
-
-On Thu, 10/06/2011 03:21 AM, Henning Heinold <heinold@inf.fu-berlin.de> wr=
-ote:
-> On Wed, Oct 05, 2011 at 06:11:50PM -0500, Russell Morris wrote:
-> > Hi,
-> >=20
-> > My apologies in advance for what is likely a stupid question, but I ha=
-ve been working with OpenEmbedded for a while, with some level of success (=
-and some pain ... :-)), but it really seems that the current information on=
- the Wiki site related to Getting Started (http://www.openembedded.org/wiki=
-/Getting_started) is out of date.
-> >=20
-> > I have checked out the git repository, and it really seems that the ne=
-wer "core" and "meta" trees are being updated regularly (and not the old op=
-enembedded tree), but I'm not sure how to use them to get builds working. T=
-his is likely just ignorance on my part, but is there any info out there of=
- how to work with the new structure?
-> >=20
-> > Thanks in advance for any pointers that you have!
-> >=20
-> > ... Russell
->=20
-> Hi Russel,
->=20
-> oe-core is described here too
->=20
-> http://www.openembedded.org/wiki/Oe-core
->=20
-> Bye Henning
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Mon, Oct 10, 2011 at 2:29 PM, Ulf Samuelsson
+<ulf_samuelsson@telia.com> wrote:
+> psyco-dist will not run on a 64 bit linux.
+> The guys behind psyco-dist recommends the use of PyPy
 >
-From ulf_samuelsson@telia.com Mon Oct 10 23:59:11 2011
-Received: from smtprelay-h22.telenor.se ([195.54.99.197])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RDNsM-0007m5-NH
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Oct 2011 23:59:10 +0200
-Received: from iph3.telenor.se (iph3.telenor.se [195.54.127.134])
-	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 9B06AEAF59
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Oct 2011 23:29:24 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApguANZik05T4zkNPGdsb2JhbAAMN4k8kASOfgEBAQE3g=
-kRAPRYYAwIBAgExJwgBAcFQh0MEk3eRVA
-X-IronPort-AV: E
+> What is the recommendation for 64 bit linux?
+>
+> Just run without JIT?
+> Don't run on a 64 bit linux?
+> Anything else?
+
+Python works fine as is. You're welcome to attempt use of pypy, but
+last time I tried there were a couple hiccups and the performance
+benefit wasn't particularly substantial.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
+
+
