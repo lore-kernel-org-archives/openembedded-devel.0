@@ -1,25 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RDlUI-0004ak-JD
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1RDmFi-0005hP-Iu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 01:11:54 +0200
-Received: (qmail invoked by alias); 11 Oct 2011 23:06:12 -0000
-Received: from p5B0A3D7B.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.61.123]
-	by mail.gmx.net (mp035) with SMTP; 12 Oct 2011 01:06:12 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19HSi8dE8BHCmQSrrrhB4MYGVU7OAlWoAPWV3H5oh
-	TYKDtQsOBC/5Av
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-core@lists.openembedded.org
-Date: Wed, 12 Oct 2011 01:10:38 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
+	Wed, 12 Oct 2011 02:00:54 +0200
+Received: by ywf7 with SMTP id 7so141692ywf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Oct 2011 16:55:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=gJTFdOOIApUzeSJ5CNlJFqzHw61oIvJhbLA6ALBa82I=;
+	b=oL+OwkXQxNWoteEl3Rga5APs7jbOm5nQoJ/UYPlgZKzr5dByEQ0ZX31FZY6q65yUNH
+	f/Xx75pRHAuk78qNQoccQALFmsg1zSDY6xIPFEPOumcNT9pY9Dn/UB11iaU7x3ReoGsR
+	ejG0I8IsJLdQbev+tSB0TUi/ZN+mtQ/S5ZjoY=
+Received: by 10.68.8.195 with SMTP id t3mr49351195pba.107.1318377310071; Tue,
+	11 Oct 2011 16:55:10 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201110120110.38951.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: oe parse fails
+Received: by 10.68.49.129 with HTTP; Tue, 11 Oct 2011 16:54:40 -0700 (PDT)
+In-Reply-To: <201110120100.15523.schnitzeltony@gmx.de>
+References: <201110120100.15523.schnitzeltony@gmx.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Oct 2011 16:54:40 -0700
+Message-ID: <CAMKF1sqgWAfNbL+W1Ge3gOHXdHoZQ9e_rO+jEKRSpapH+C1ZRw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] home for pdf-viewers / meta-office?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,21 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2011 23:11:54 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Oct 2011 00:00:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Angstrom environment / fresh pull / clean tmp dir -> error
+On Tue, Oct 11, 2011 at 4:00 PM, Andreas M=C3=BCller <schnitzeltony@gmx.de>=
+ wrote:
+> I would like to have a pdf-viewer in my image.
+> Since I can not find evince & epdfview ( did I oversee something? ) I am =
+looking for a suited place for them: How about a new meta-office layer with=
+in meta-oe?
 
-Pseudo is not present but is required, building this first before the main build
-NOTE: angstrom DOES NOT support libiconv because the eglibc provided iconv library is used                                                                                                        | ETA:  00:00:34
-NOTE: angstrom DOES NOT support libiconv because the eglibc provided iconv library is used
-NOTE: angstrom DOES NOT support gconf-dbus because gconf-dbus has been merged back into main GConf                                                                                                | ETA:  00:00:34
-NOTE: angstrom DOES NOT support gconf-dbus-native because gconf-dbus has been merged back into main GConf
-ERROR: Could not include required file recipes-graphics/xorg-xserver/xserver-xf86-dri-lite.inc##############################################################                                      | ETA:  00:00:09
-ERROR: Command execution failed: Exited with 1
-
-Andreas
+I think it would be better if there could be separated based on gtk or
+qt as well.
+>
+> Andreas
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
