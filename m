@@ -1,31 +1,32 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RDiaR-00034i-Mr
+	(envelope-from <otavio.salvador@gmail.com>) id 1RDie9-0003E0-5a
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Oct 2011 22:06:03 +0200
-Received: by wwf10 with SMTP id 10so5373104wwf.0
+	Tue, 11 Oct 2011 22:09:53 +0200
+Received: by wwf27 with SMTP id 27so9089188wwf.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 13:00:22 -0700 (PDT)
+	Tue, 11 Oct 2011 13:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=lSA578ROYlIwuu2NC9ggLtfgFsAxb5TJX5/ngRofsQw=;
-	b=kNlvEo54Y/GjEthEFX6X69D+gvC/mmT/pojRpLuVngUAty/8JNM3/I0+XJATpeUyEY
-	MgqKe39YmSi9RSFQh2Ck7m83V2HsdP3cger7qPQXgshFM95hYKCYkFjRM/E5B/dHSfbH
-	bgGOUVO3YrjDW5YlfBcsp2OfTmFgoSOknSA54=
+	bh=Fj7H3Gtl5cSchqr1lknfIsC+fSbDzR5n6yWps6zh/N8=;
+	b=IAGiAKo0lUqEKKvOOTCNQKZN2qPgnLFH01kpVst6rSpxVmPUmQog+mcVSMMUu+m/No
+	mcHpC2epXPSqmxTe9f1hs894AyB2TgG8fVyM87hqyfG/aAJ9CJ2pZh3o1fqQC2WNhXww
+	fIh1/n0R3mjc3/b2dPvFdYTsi8SX7XqJ79vQ8=
 MIME-Version: 1.0
-Received: by 10.216.158.140 with SMTP id q12mr8290179wek.8.1318363221854; Tue,
-	11 Oct 2011 13:00:21 -0700 (PDT)
+Received: by 10.216.166.70 with SMTP id f48mr1583957wel.38.1318363451432; Tue,
+	11 Oct 2011 13:04:11 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.216.93.138 with HTTP; Tue, 11 Oct 2011 13:00:21 -0700 (PDT)
-In-Reply-To: <j726u5$8ta$1@dough.gmane.org>
+Received: by 10.216.93.138 with HTTP; Tue, 11 Oct 2011 13:04:11 -0700 (PDT)
+In-Reply-To: <CAP9ODKoNWxn0yt8yc0sy0yyCKiH4LCSYUsibTA_4kX24cV7j=w@mail.gmail.com>
 References: <cover.1318362324.git.otavio@ossystems.com.br>
 	<2d40bd35a2ecf2ac49a66a09656c7319aa811c98.1318362324.git.otavio@ossystems.com.br>
 	<j726u5$8ta$1@dough.gmane.org>
-Date: Tue, 11 Oct 2011 17:00:21 -0300
-X-Google-Sender-Auth: bRRaQXdmXXTishQbl6RZhDNo1wA
-Message-ID: <CAP9ODKoNWxn0yt8yc0sy0yyCKiH4LCSYUsibTA_4kX24cV7j=w@mail.gmail.com>
+	<CAP9ODKoNWxn0yt8yc0sy0yyCKiH4LCSYUsibTA_4kX24cV7j=w@mail.gmail.com>
+Date: Tue, 11 Oct 2011 17:04:11 -0300
+X-Google-Sender-Auth: LKdzYuL1Kt14VaRBsTUhoGe2uN8
+Message-ID: <CAP9ODKoxwRrbF-mhZtV-4UX=eieRLb+Sy2iff=qT8vWsLiEy=w@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 1/1] xserver-nodm-init: exit 1 only if systemd is installed
@@ -42,16 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2011 20:06:03 -0000
+X-List-Received-Date: Tue, 11 Oct 2011 20:09:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 11, 2011 at 16:54, Koen Kooi <koen@dominion.thruhere.net> wrote=
-:
-> While you're at it, please change it to ${base_bindir}
+On Tue, Oct 11, 2011 at 17:00, Otavio Salvador <otavio@ossystems.com.br> wr=
+ote:
+> On Tue, Oct 11, 2011 at 16:54, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+>> While you're at it, please change it to ${base_bindir}
+>
+> I can do it but don't you want to do that and amend it? If you prefer
+> I can send a new patch but dunno if it is worth it.
 
-I can do it but don't you want to do that and amend it? If you prefer
-I can send a new patch but dunno if it is worth it.
+I fixed it on my github branch, you can pull it from there fixed.
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
