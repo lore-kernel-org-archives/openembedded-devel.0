@@ -1,29 +1,22 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vita.preskovsky@gmail.com>) id 1RDYPz-0008I1-KC
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Oct 2011 11:14:35 +0200
-Received: by gyg8 with SMTP id 8so6378688gyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 02:08:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=4JDz6GIoV4uXp4GKc0xPkD8oWYwdQ0eC2e1ni9TTzPM=;
-	b=aKmg3yNnEMzAQ1I3+/v3jwBwjkcEsbU4zk2t4SJqN8tnxPrDFsYVEmCBuMZml3v6bo
-	49a9Ew22yYoBiam2QMFz+fG4OBYKi7T0ADLwgXUayNyPBD3f4r4ZrkoBOSrAp2bI2kR8
-	Ig4a8x2Yc9KUVIg7en0InCXxTM62AcSA0vtG0=
-Received: by 10.236.165.102 with SMTP id d66mr3993059yhl.2.1318324133978;
-	Tue, 11 Oct 2011 02:08:53 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id l42sm30336495yhj.12.2011.10.11.02.08.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Oct 2011 02:08:53 -0700 (PDT)
-From: Vita Preskovsky <vita.preskovsky@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RDdSw-0007xB-1d for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Oct 2011 16:37:58 +0200
+Received: from f053040232.adsl.alicedsl.de ([78.53.40.232]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RDdNV-00074P-2e; Tue, 11 Oct 2011 14:32:21 +0000
+Message-ID: <1318343515.14384.8.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Oct 2011 11:08:42 +0200
-Message-Id: <1318324122-16951-1-git-send-email-vitap@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
+Date: Tue, 11 Oct 2011 16:31:55 +0200
+In-Reply-To: <1318324122-16951-1-git-send-email-vitap@ti.com>
+References: <1318324122-16951-1-git-send-email-vitap@ti.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +30,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2011 09:14:35 -0000
+X-List-Received-Date: Tue, 11 Oct 2011 14:37:58 -0000
+X-Groupsio-MsgNum: 34635
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Q2SG22psPGDAJGM9dPRU"
 
-Signed-off-by: Vita Preskovsky <vitap@ti.com>
----
- recipes/bluez/bluez4_4.95.bb |   30 ++++++++++++++++++++++++++++++
- 1 files changed, 30 insertions(+), 0 deletions(-)
- create mode 100644 recipes/bluez/bluez4_4.95.bb
+--=-Q2SG22psPGDAJGM9dPRU
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/bluez/bluez4_4.95.bb b/recipes/bluez/bluez4_4.95.bb
-new file mode 100644
-index 0000000..a682d6a
---- /dev/null
-+++ b/recipes/bluez/bluez4_4.95.bb
-@@ -0,0 +1,30 @@
-+require bluez4.inc
-+SRC_URI = "\
-+  http://www.kernel.org/pub/linux/bluetooth/bluez-${PV}.tar.gz \
-+  file://bluetooth.conf \
-+"
-+
-+SRC_URI[md5sum] = "341294b2849a04a4afff5c96bfbf30b2"
-+SRC_URI[sha256sum] = "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0ce6bebd27fa4120f6"
-+
-+DEFAULT_PREFERENCE = "-1"
-+DEFAULT_PREFERENCE_angstrom = "1"
-+
-+DEPENDS += "libsndfile1"
-+
-+PR = "${INC_PR}.0"
-+
-+# Not all distros have a recent enough udev
-+BTUDEV = " --disable-udevrules"
-+BTUDEV_angstrom = " --enable-udevrules"
-+BTUDEV_shr = " --enable-udevrules"
-+
-+EXTRA_OECONF += "${BTUDEV}"
-+do_configure_append(){
-+	echo "#define LIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE" >> ${S}/config.h
-+}
-+
-+FILES_${PN}-dbg += "\
-+  ${base_libdir}/udev/.debug \
-+  ${libdir}/*/.debug \
-+"
--- 
-1.7.0.4
+Dear Vita,
 
 
+thank you for your patch.
 
+Am Dienstag, den 11.10.2011, 11:08 +0200 schrieb Vita Preskovsky:
+
+Using
+
+        bluez4: Add version 4.95
+
+as the commit summary would be cleaner. Use `git commit --amend` to
+change that.
+
+Additionally you should elaborate more in the commit message what the
+patch is doing.
+
+1. Have you tested it? Is it just an upgrade because of or does version
+4.91 in the repository have any short comings so that it should be
+removed?
+
+> Signed-off-by: Vita Preskovsky <vitap@ti.com>
+> ---
+>  recipes/bluez/bluez4_4.95.bb |   30 ++++++++++++++++++++++++++++++
+>  1 files changed, 30 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/bluez/bluez4_4.95.bb
+>=20
+> diff --git a/recipes/bluez/bluez4_4.95.bb b/recipes/bluez/bluez4_4.95.bb
+> new file mode 100644
+> index 0000000..a682d6a
+> --- /dev/null
+> +++ b/recipes/bluez/bluez4_4.95.bb
+> @@ -0,0 +1,30 @@
+> +require bluez4.inc
+> +SRC_URI =3D "\
+> +  http://www.kernel.org/pub/linux/bluetooth/bluez-${PV}.tar.gz \
+
+2. As far as I know kernel.org after the compromise presently does not
+provide that archive. So the recipe will not build unless there is a
+mirror somewhere. Do you know of a mirror?
+
+> +  file://bluetooth.conf \
+> +"
+> +
+> +SRC_URI[md5sum] =3D "341294b2849a04a4afff5c96bfbf30b2"
+> +SRC_URI[sha256sum] =3D "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0c=
+e6bebd27fa4120f6"
+> +
+> +DEFAULT_PREFERENCE =3D "-1"
+
+3. Why?
+
+> +DEFAULT_PREFERENCE_angstrom =3D "1"
+
+4. Have you talked to the =C8=A6ngstr=C3=B6m maintainers?
+
+> +
+> +DEPENDS +=3D "libsndfile1"
+> +
+> +PR =3D "${INC_PR}.0"
+> +
+> +# Not all distros have a recent enough udev
+> +BTUDEV =3D " --disable-udevrules"
+> +BTUDEV_angstrom =3D " --enable-udevrules"
+> +BTUDEV_shr =3D " --enable-udevrules"
+> +
+> +EXTRA_OECONF +=3D "${BTUDEV}"
+> +do_configure_append(){
+> +	echo "#define LIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE" >> ${S}/conf=
+ig.h
+> +}
+> +
+> +FILES_${PN}-dbg +=3D "\
+> +  ${base_libdir}/udev/.debug \
+> +  ${libdir}/*/.debug \
+> +"
+
+Otherwise this recipe looks good. Is it planned for branch
+2011.03-maintenance?
+
+
+Thanks,
+
+Paul
+
+--=-Q2SG22psPGDAJGM9dPRU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk6UU1sACgkQPX1aK2wOHVg1BACfTOMvNdT24lbO9mmWekrwapRN
+kY8An3y4ROZd+gyhtlbJY4h40kWsSYjB
+=FoxH
+-----END PGP SIGNATURE-----
+
+--=-Q2SG22psPGDAJGM9dPRU--
