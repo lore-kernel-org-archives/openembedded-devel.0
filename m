@@ -1,34 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RDiVN-0002u6-An for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Oct 2011 22:00:49 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RDiPr-00033a-NK for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Oct 2011 21:55:07 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 21:55:07 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RDiaR-00034i-Mr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Oct 2011 22:06:03 +0200
+Received: by wwf10 with SMTP id 10so5373104wwf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 21:55:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 11 Oct 2011 21:54:45 +0200
-Message-ID: <j726u5$8ta$1@dough.gmane.org>
+	Tue, 11 Oct 2011 13:00:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=lSA578ROYlIwuu2NC9ggLtfgFsAxb5TJX5/ngRofsQw=;
+	b=kNlvEo54Y/GjEthEFX6X69D+gvC/mmT/pojRpLuVngUAty/8JNM3/I0+XJATpeUyEY
+	MgqKe39YmSi9RSFQh2Ck7m83V2HsdP3cger7qPQXgshFM95hYKCYkFjRM/E5B/dHSfbH
+	bgGOUVO3YrjDW5YlfBcsp2OfTmFgoSOknSA54=
+MIME-Version: 1.0
+Received: by 10.216.158.140 with SMTP id q12mr8290179wek.8.1318363221854; Tue,
+	11 Oct 2011 13:00:21 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.216.93.138 with HTTP; Tue, 11 Oct 2011 13:00:21 -0700 (PDT)
+In-Reply-To: <j726u5$8ta$1@dough.gmane.org>
 References: <cover.1318362324.git.otavio@ossystems.com.br>
 	<2d40bd35a2ecf2ac49a66a09656c7319aa811c98.1318362324.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0) Gecko/20110922 Thunderbird/7.0
-In-Reply-To: <2d40bd35a2ecf2ac49a66a09656c7319aa811c98.1318362324.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3.2
+	<j726u5$8ta$1@dough.gmane.org>
+Date: Tue, 11 Oct 2011 17:00:21 -0300
+X-Google-Sender-Auth: bRRaQXdmXXTishQbl6RZhDNo1wA
+Message-ID: <CAP9ODKoNWxn0yt8yc0sy0yyCKiH4LCSYUsibTA_4kX24cV7j=w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 1/1] xserver-nodm-init: exit 1 only if systemd is installed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,49 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2011 20:00:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Oct 2011 20:06:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Oct 11, 2011 at 16:54, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+> While you're at it, please change it to ${base_bindir}
 
-Op 11-10-11 21:46, Otavio Salvador schreef:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> --- 
-> .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |   10 ++++------ 1
-> files changed, 4 insertions(+), 6 deletions(-)
-> 
-> diff --git
-> a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-> b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb 
-> index d4a6b97..87079a6 100644 ---
-> a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb +++
-> b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb @@
-> -3,7 +3,7 @@ LICENSE = "GPLv2" LIC_FILES_CHKSUM =
-> "file://COPYING;md5=751419260aa954499f7abaabaa882bbe" SECTION = "x11"
-> 
-> -PR = "r9" +PR = "r10"
-> 
-> SRC_URI = "file://xserver-nodm \ file://xserver-nodm.service \ @@ -31,12
-> +31,10 @@ INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ." 
-> INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
-> 
-> pkg_postinst_${PN}_append () { -    # can't do this offline -    if [
-> "x$D" != "x" ]; then -        exit 1 -    fi - if [ -e /bin/systemctl ] ;
-> then +        # can't do this offline +        [ "x$D" != "x" ] && exit
-> 1 + systemctl enable xserver-nodm.service fi }
+I can do it but don't you want to do that and amend it? If you prefer
+I can send a new patch but dunno if it is worth it.
 
-While you're at it, please change it to ${base_bindir}
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOlJ8EMkyGM64RGpERAjlwAKCryf1VfXEmdAFFj7tcyIc553EragCcDxx5
-XG3FrZa5JCfCy8IHpJ6UZ1k=
-=dU6H
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
