@@ -1,34 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RDv8m-00005k-BJ
+	(envelope-from <msprathap@ti.com>) id 1RDvh0-0001K8-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 11:30:20 +0200
-Received: by mail-bw0-f47.google.com with SMTP id 11so705782bke.6
+	Wed, 12 Oct 2011 12:05:42 +0200
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9C9wequ005195
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 02:24:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=5I5rgmY0XXMFoLVOJqSh7ifmVnm+tAMvirITHu00XnI=;
-	b=JEMen1WiF2sZ/UMw5hvxqy9Zhe5G4qGW3CrZcYxS41e7oKn6lrDZP6EJm6L/MdGFRt
-	NPkKQ5E33S5G1MgJsU86p2BOWNGpd49JctlMX3UHuNfLQe2wU5/z6N6BcVUIIodJANlj
-	wuuTbZFhnWHKNdDVyqZMq3IUEfBUhCkh/BgR8=
-Received: by 10.204.139.21 with SMTP id c21mr788180bku.63.1318411479895;
-	Wed, 12 Oct 2011 02:24:39 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id u10sm1388473bkv.3.2011.10.12.02.24.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 12 Oct 2011 02:24:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Oct 2011 11:24:22 +0200
-Message-Id: <75ad3df1683ae38e7cb33f3849a09994f20ecbbe.1318411412.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.7
-In-Reply-To: <1126404121c5f4f21439ca69ca6aaa6ea6821c91.1318411412.git.Martin.Jansa@gmail.com>
-References: <1126404121c5f4f21439ca69ca6aaa6ea6821c91.1318411412.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1318411412.git.Martin.Jansa@gmail.com>
-References: <cover.1318411412.git.Martin.Jansa@gmail.com>
-Subject: [meta-handheld 2/2] linux: bump SRCREV for 3.1.0-rc9 and use repo on kernel.org again
+	Wed, 12 Oct 2011 04:58:42 -0500
+Received: from dbde71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9C9wcOu022897
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 15:28:39 +0530 (IST)
+Received: from dbde02.ent.ti.com ([172.24.170.145]) by dbde71.ent.ti.com
+	([172.24.170.149]) with mapi; Wed, 12 Oct 2011 15:28:39 +0530
+From: "Srinivas, Prathap" <msprathap@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 12 Oct 2011 15:27:11 +0530
+Thread-Topic: Patches to add support for TI Linux Graphics SDK release
+	04.04.00.02
+Thread-Index: AcyIxU/u7cA2Qp7dR964/F+LGrR2/g==
+Message-ID: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Patches to add support for TI Linux Graphics SDK release 04.04.00.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +41,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 09:30:20 -0000
+X-List-Received-Date: Wed, 12 Oct 2011 10:05:42 -0000
+X-Groupsio-MsgNum: 34675
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_003_5A47E75E594F054BAF48C5E4FC4B92AB038595A123dbde02enttico_"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-kernel/linux/linux-git.inc |    7 +++----
- 1 files changed, 3 insertions(+), 4 deletions(-)
+--_003_5A47E75E594F054BAF48C5E4FC4B92AB038595A123dbde02enttico_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes-kernel/linux/linux-git.inc b/recipes-kernel/linux/linux-git.inc
-index 91aeb7f..1e92e8d 100644
---- a/recipes-kernel/linux/linux-git.inc
-+++ b/recipes-kernel/linux/linux-git.inc
-@@ -1,11 +1,10 @@
--KERNEL_RELEASE = "3.1.0-rc6"
-+KERNEL_RELEASE = "3.1.0-rc9"
- OLD_KERNEL_RELEASE = "3.0.99"
- PV = "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
- 
--SRCREV = "b6fd41e29dea9c6753b1843a77e50433e6123bcb"
-+SRCREV = "65112dccf8a113737684366349d7f9ec373ddc47"
- 
--#git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
--SRC_URI = "git://github.com/torvalds/linux.git;protocol=git;branch=master \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git;protocol=git;branch=master \
-            file://defconfig"
- S = "${WORKDIR}/git"
- 
--- 
-1.7.7
+Hi All,
+Attached are the patches for adding TI Linux Graphics SDK 04.04.00.02 Relea=
+se support in OE. Please include these patches in the OE.
+
+Details of patches -
+1) 0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch - Adds s=
+upport for TI Linux graphics SDK release 04.04.00.02
+2) 0002-Fix-for-library-linking-isssue-with-graphics-SDK.patch - Fix to lin=
+k the appropriate graphics user library with TI Linux graphics SDK release =
+04.04.00.02.
+
+Since I am sending through outlook, the patches may get mangled. So I am at=
+taching the patches.
+
+Thanks,
+Prathap.
 
 
+--_003_5A47E75E594F054BAF48C5E4FC4B92AB038595A123dbde02enttico_
+Content-Type: application/octet-stream;
+	name="0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch"
+Content-Description: 0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch
+Content-Disposition: attachment;
+	filename="0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch";
+	size=4995; creation-date="Wed, 12 Oct 2011 14:41:11 GMT";
+	modification-date="Tue, 11 Oct 2011 11:04:26 GMT"
+Content-Transfer-Encoding: base64
 
+RnJvbSBhMTFmMWFlNGMwN2QwOWJlODliZTQ5ZjkwOTQyMDdhYmRkYWQ4NTRlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBQcmF0aGFwIE0gUyA8bXNwcmF0aGFwQHRpLmNvbT4KRGF0ZTog
+TW9uLCAxMCBPY3QgMjAxMSAxNTowOTo0NiArMDUzMApTdWJqZWN0OiBbUEFUQ0ggMS8yXSBsaWJn
+bGVzLW9tYXAzXzQuMDQuMDAuMDI6IGFkZGVkIHN1cHBvcnQgZm9yIGdyYXBoaWNzIHNkayAwNC4w
+NC4wMC4wMgoKKiBhZGRlZCBzdXBwb3J0IHNneCBkZGsgMS42LjE2LjQxMTcKKiBpbmNsdWRlZCB2
+aWRlbyBkcml2ZXIgYXMgcGFydCBvZiB0aGUga2VybmVsIGZvciBhY2Nlc3NpbmcgdGhlIGZiZGV2
+CiAgaW4gdGhlIHNneCBkcml2ZXIKClNpZ25lZC1vZmYtYnk6IFByYXRoYXAgTSBTIDxtc3ByYXRo
+YXBAdGkuY29tPgotLS0KIGNsYXNzZXMva2VybmVsLmJiY2xhc3MgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgICAgMiArLQogLi4uL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzXzQu
+MDQuMDAuMDIuYmIgICAgfCAgIDI5ICsrKysrKysrKysrKysKIC4uLi9vbWFwMy1zZ3gtbW9kdWxl
+c18xLjYuMTYuNDExNy5iYiAgICAgICAgICAgICAgIHwgICA0NCArKysrKysrKysrKysrKysrKysr
+KwogMyBmaWxlcyBjaGFuZ2VkLCA3NCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9ucygtKQogY3Jl
+YXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDNfNC4w
+NC4wMC4wMi5iYgogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL29t
+YXAzLXNneC1tb2R1bGVzXzEuNi4xNi40MTE3LmJiCgpkaWZmIC0tZ2l0IGEvY2xhc3Nlcy9rZXJu
+ZWwuYmJjbGFzcyBiL2NsYXNzZXMva2VybmVsLmJiY2xhc3MKaW5kZXggMDEwOWNlNi4uYmY3MzFl
+NiAxMDA2NDQKLS0tIGEvY2xhc3Nlcy9rZXJuZWwuYmJjbGFzcworKysgYi9jbGFzc2VzL2tlcm5l
+bC5iYmNsYXNzCkBAIC0xNjgsNyArMTY4LDcgQEAgc3lzcm9vdF9zdGFnZV9hbGxfYXBwZW5kKCkg
+ewogCW1rZGlyIC1wICRrZXJuZWxkaXIvaW5jbHVkZS9hc20tZ2VuZXJpYwogCWNwIC1mUiBpbmNs
+dWRlL2FzbS1nZW5lcmljLyogJGtlcm5lbGRpci9pbmNsdWRlL2FzbS1nZW5lcmljLwogCi0JZm9y
+IGVudHJ5IGluIGRyaXZlcnMvY3J5cHRvIGRyaXZlcnMvbWVkaWEgaW5jbHVkZS9nZW5lcmF0ZWQg
+aW5jbHVkZS9saW51eCBpbmNsdWRlL25ldCBpbmNsdWRlL3BjbWNpYSBpbmNsdWRlL21lZGlhIGlu
+Y2x1ZGUvYWNwaSBpbmNsdWRlL3NvdW5kIGluY2x1ZGUvdmlkZW8gaW5jbHVkZS9zY3NpIGluY2x1
+ZGUvdHJhY2UgaW5jbHVkZS9tdGQgaW5jbHVkZS9yZG1hIGluY2x1ZGUvZHJtIGluY2x1ZGUveGVu
+IGNyeXB0by9vY2Y7IGRvCisJZm9yIGVudHJ5IGluIGRyaXZlcnMvY3J5cHRvIGRyaXZlcnMvbWVk
+aWEgZHJpdmVycy92aWRlbyBkcml2ZXJzL2dwdSBkcml2ZXJzL2Jhc2UgaW5jbHVkZS9nZW5lcmF0
+ZWQgaW5jbHVkZS9saW51eCBpbmNsdWRlL25ldCBpbmNsdWRlL3BjbWNpYSBpbmNsdWRlL21lZGlh
+IGluY2x1ZGUvYWNwaSBpbmNsdWRlL3NvdW5kIGluY2x1ZGUvdmlkZW8gaW5jbHVkZS9zY3NpIGlu
+Y2x1ZGUvdHJhY2UgaW5jbHVkZS9tdGQgaW5jbHVkZS9yZG1hIGluY2x1ZGUvZHJtIGluY2x1ZGUv
+eGVuIGNyeXB0by9vY2Y7IGRvCiAJCWlmIFsgLWQgJGVudHJ5IF07IHRoZW4KIAkJCW1rZGlyIC1w
+ICRrZXJuZWxkaXIvJGVudHJ5CiAJCQljcCAtZlIgJGVudHJ5LyogJGtlcm5lbGRpci8kZW50cnkv
+CmRpZmYgLS1naXQgYS9yZWNpcGVzL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzXzQuMDQu
+MDAuMDIuYmIgYi9yZWNpcGVzL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzXzQuMDQuMDAu
+MDIuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uYzUwNjJjMQotLS0gL2Rl
+di9udWxsCisrKyBiL3JlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDNfNC4wNC4w
+MC4wMi5iYgpAQCAtMCwwICsxLDI5IEBACitCSU5MT0NBVElPTl9vbWFwMyAgPSAiJHtTfS9nZnhf
+cmVsX2VzMy54IgorQklOTE9DQVRJT05fdGk4MTZ4ID0gIiR7U30vZ2Z4X3JlbF9lczYueCIKKwor
+RVMyTE9DQVRJT04gPSAiJHtTfS9nZnhfcmVsX2VzMi54IgorRVMzTE9DQVRJT04gPSAiJHtTfS9n
+ZnhfcmVsX2VzMy54IgorRVM1TE9DQVRJT04gPSAiJHtTfS9nZnhfcmVsX2VzNS54IgorRVM2TE9D
+QVRJT04gPSAiJHtTfS9nZnhfcmVsX2VzNi54IgorCityZXF1aXJlIGxpYmdsZXMtb21hcDMuaW5j
+CisKKyMgZG93bmxvYWQgcmVxdWlyZWQgYmluYXJ5IGRpc3RyaWJ1dGlvbiBmcm9tOgorIyBodHRw
+Oi8vc29mdHdhcmUtZGwudGkuY29tL2RzcHMvZHNwc19wdWJsaWNfc3cvc2RvX3NiL3RhcmdldGNv
+bnRlbnQvZ2Z4c2RrL2xhdGVzdC9pbmRleF9GRFMuaHRtbAorIyBzZWUgbGliZ2xlcy1vbWFwMy5p
+bmMgZm9yIGRldGFpbGVkIGluc3RhbGxhdGlvbiBpbnN0cnVjdGlvbnMKKworU0dYUFYgPSAiNF8w
+NF8wMF8wMiIKK0lNR1BWID0gIjEuNi4xNi40MTE3IgorQklORklMRSA6PSAiR3JhcGhpY3NfU0RL
+X3NldHVwbGludXhfJHtTR1hQVn0uYmluIgorCitTUkNfVVJJID0gImh0dHA6Ly9zb2Z0d2FyZS1k
+bC50aS5jb20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFyZ2V0Y29udGVudC9nZnhzZGsv
+JHtTR1hQVn0vZXhwb3J0cy9HcmFwaGljc19TREtfc2V0dXBsaW51eF8ke1NHWFBWfS5iaW4gXAor
+ICAgICAgICAgICAgICAgICAgIGZpbGU6Ly9jcHV0eXBlIFwKKyAgICAgICAgICAgICAgICAgICBm
+aWxlOi8vcmMucHZyIFwKKyAgICAgICAgICAgICAgICAgICBmaWxlOi8vc2FtcGxlLmRlc2t0b3Ag
+XAorICAgICAgICAgICAgICAgICAgIGZpbGU6Ly85OS1idWZmZXJjbGFzcy5ydWxlcyAgXAorIgor
+U1JDX1VSSVttZDVzdW1dID0gIjkwMTMyNzc2NWMwOTkxOTAwYWZkYTkxNDczZjg0NzI1IgorU1JD
+X1VSSVtzaGEyNTZzdW1dID0gIjJjZWQyMzI5ZWM4MTllNDJkNTdlY2ExYTExMTIwYjAyZWM5YzMz
+MmZiNjNiYWEwYTQxMjg1ZWVkMDdkNGI0OGUiCisKK1MgPSAiJHtXT1JLRElSfS9HcmFwaGljc19T
+REtfJHtTR1hQVn0iCisKZGlmZiAtLWdpdCBhL3JlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL29tYXAz
+LXNneC1tb2R1bGVzXzEuNi4xNi40MTE3LmJiIGIvcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvb21h
+cDMtc2d4LW1vZHVsZXNfMS42LjE2LjQxMTcuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXgg
+MDAwMDAwMC4uODllMGYxMgotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMvcG93ZXJ2ci1kcml2
+ZXJzL29tYXAzLXNneC1tb2R1bGVzXzEuNi4xNi40MTE3LmJiCkBAIC0wLDAgKzEsNDQgQEAKK0RF
+U0NSSVBUSU9OID0gIktlcm5lbCBkcml2ZXJzIGZvciB0aGUgUG93ZXJWUiBTR1ggY2hpcHNldCBm
+b3VuZCBpbiB0aGUgb21hcDMgU29DcyIKK0xJQ0VOU0UgPSAiR1BMdjIiCisKKyMgZG93bmxvYWQg
+cmVxdWlyZWQgYmluYXJ5IGRpc3RyaWJ1dGlvbiBmcm9tOgorIyBodHRwOi8vc29mdHdhcmUtZGwu
+dGkuY29tL2RzcHMvZHNwc19wdWJsaWNfc3cvc2RvX3NiL3RhcmdldGNvbnRlbnQvZ2Z4c2RrL2xh
+dGVzdC9pbmRleF9GRFMuaHRtbAorIyBzZWUgbGliZ2xlcy1vbWFwMy5pbmMgZm9yIGRldGFpbGVk
+IGluc3RhbGxhdGlvbiBpbnN0cnVjdGlvbnMKKworVElfQklOX1VOUEtfQ01EUz0iWTogcVk6d29y
+a2RpcjpZIgorcmVxdWlyZSAuLi90aS90aS1ldWxhLXVucGFjay5pbmMKKworU0dYUFYgPSAiNF8w
+NF8wMF8wMiIKK0lNR1BWID0gIjEuNi4xNi40MTE3IgorQklORklMRSA6PSAiR3JhcGhpY3NfU0RL
+X3NldHVwbGludXhfJHtTR1hQVn0uYmluIgorCitpbmhlcml0IG1vZHVsZQorCitNQUNISU5FX0tF
+Uk5FTF9QUl9hcHBlbmQgPSAiaSIKKworU1JDX1VSSSA9ICJodHRwOi8vc29mdHdhcmUtZGwudGku
+Y29tL2RzcHMvZHNwc19wdWJsaWNfc3cvc2RvX3NiL3RhcmdldGNvbnRlbnQvZ2Z4c2RrLyR7U0dY
+UFZ9L2V4cG9ydHMvR3JhcGhpY3NfU0RLX3NldHVwbGludXhfJHtTR1hQVn0uYmluIFwKKyAgICAg
+ICAgICAgZmlsZTovL0NvbXBpbGUtZml4ZXMtZm9yLTM4LWtlcm5lbC5wYXRjaCBcCisgICAgICAg
+ICAgIgorU1JDX1VSSVttZDVzdW1dID0gIjkwMTMyNzc2NWMwOTkxOTAwYWZkYTkxNDczZjg0NzI1
+IgorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjJjZWQyMzI5ZWM4MTllNDJkNTdlY2ExYTExMTIwYjAy
+ZWM5YzMzMmZiNjNiYWEwYTQxMjg1ZWVkMDdkNGI0OGUiCisKK1MgPSAiJHtXT1JLRElSfS9HcmFw
+aGljc19TREtfJHtTR1hQVn0vR0ZYX0xpbnV4X0tNIgorCitQVlJCVUlMRCA9ICJyZWxlYXNlIgor
+CitQQUNLQUdFX1NUUklQID0gIm5vIgorCitUSV9QTEFURk9STV9vbWFwMyA9ICJvbWFwMzYzMCIK
+K1RJX1BMQVRGT1JNX3RpODE2eCA9ICJ0aTgxeHgiCisKK01PRFVMRVNMT0NBVElPTl9vbWFwMyA9
+ICJkY19vbWFwZmIzX2xpbnV4IgorTU9EVUxFU0xPQ0FUSU9OX3RpODE2eCA9ICJkY190aTgxeHhf
+bGludXgiCisKK01BS0VfVEFSR0VUUyA9ICIgQlVJTEQ9JHtQVlJCVUlMRH0gVElfUExBVEZPUk09
+JHtUSV9QTEFURk9STX0iCisKK2RvX2luc3RhbGwoKSB7CisJbWtkaXIgLXAgJHtEfS9saWIvbW9k
+dWxlcy8ke0tFUk5FTF9WRVJTSU9OfS9rZXJuZWwvZHJpdmVycy9ncHUvcHZyCisJY3AgJHtTfS9w
+dnJzcnZrbS5rbyAke0R9L2xpYi9tb2R1bGVzLyR7S0VSTkVMX1ZFUlNJT059L2tlcm5lbC9kcml2
+ZXJzL2dwdS9wdnIKKwljcCAke1N9L3NlcnZpY2VzNC8zcmRwYXJ0eS8ke01PRFVMRVNMT0NBVElP
+Tn0vb21hcGxmYi5rbyAgJHtEfS9saWIvbW9kdWxlcy8ke0tFUk5FTF9WRVJTSU9OfS9rZXJuZWwv
+ZHJpdmVycy9ncHUvcHZyCisJY3AgJHtTfS9zZXJ2aWNlczQvM3JkcGFydHkvYnVmZmVyY2xhc3Nf
+dGkvYnVmZmVyY2xhc3NfdGkua28gJHtEfS9saWIvbW9kdWxlcy8ke0tFUk5FTF9WRVJTSU9OfS9r
+ZXJuZWwvZHJpdmVycy9ncHUvcHZyCit9Ci0tIAoxLjcuMQoK
+
+--_003_5A47E75E594F054BAF48C5E4FC4B92AB038595A123dbde02enttico_
+Content-Type: application/octet-stream;
+	name="0002-Fix-for-library-linking-isssue-with-graphics-SDK.patch"
+Content-Description: 0002-Fix-for-library-linking-isssue-with-graphics-SDK.patch
+Content-Disposition: attachment;
+	filename="0002-Fix-for-library-linking-isssue-with-graphics-SDK.patch";
+	size=1401; creation-date="Wed, 12 Oct 2011 14:41:11 GMT";
+	modification-date="Tue, 11 Oct 2011 11:04:26 GMT"
+Content-Transfer-Encoding: base64
+
+RnJvbSA1OTIyNzgxMWY2ZDQzNjRjYjhjZjI1NGY1MjdlZmQyMzNiZDEwODI3IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBQcmF0aGFwIE0gUyA8bXNwcmF0aGFwQHRpLmNvbT4KRGF0ZTog
+VHVlLCAxMSBPY3QgMjAxMSAxMDo1ODozNCArMDUzMApTdWJqZWN0OiBbUEFUQ0ggMi8yXSBGaXgg
+Zm9yIGxpYnJhcnkgbGlua2luZyBpc3NzdWUgd2l0aCBncmFwaGljcyBTREsKIFNpZ25lZC1vZmYt
+Ynk6IFByYXRoYXAgTSBTIDxtc3ByYXRoYXBAdGkuY29tPgoKLS0tCiByZWNpcGVzL3Bvd2VydnIt
+ZHJpdmVycy9saWJnbGVzLW9tYXAzLmluYyB8ICAgIDkgKysrKysrKystCiAxIGZpbGVzIGNoYW5n
+ZWQsIDggaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9yZWNpcGVz
+L3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzLmluYyBiL3JlY2lwZXMvcG93ZXJ2ci1kcml2
+ZXJzL2xpYmdsZXMtb21hcDMuaW5jCmluZGV4IDM2YzMxMWQuLmU2MDU2ODEgMTAwNjQ0Ci0tLSBh
+L3JlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDMuaW5jCisrKyBiL3JlY2lwZXMv
+cG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDMuaW5jCkBAIC0xLDcgKzEsNyBAQAogREVTQ1JJ
+UFRJT04gPSAibGliR0xFUyBmb3IgdGhlIG9tYXAzIgogTElDRU5TRSA9ICJwcm9wcmlldGFyeS1i
+aW5hcnkiCiAKLVBSID0gInIxNSIKK1BSID0gInIxNiIKIAogQ09NUEFUSUJMRV9NQUNISU5FID0g
+IihvbWFwM3x0aTgxNngpIgogCkBAIC0zNSw2ICszNSwxMyBAQCBkb19jb25maWd1cmUoKSB7CiAJ
+Zm9yIGkgaW4gJChmaW5kICR7U30gLW5hbWUgIiouaCIpICQoZmluZCAke1N9IC1uYW1lICIqLmMi
+KSAkKGZpbmQgJHtTfSAtbmFtZSAiTWFrZSoiKSA7IGRvCiAJCWNobW9kIDA2NDQgJGkKIAlkb25l
+IAorCQorCWZvciBkcmlmaWxlIGluICQoZmluZCAke1N9IC1uYW1lICJsaWJzcnZfdW1fZHJpLnNv
+Iik7IGRvCisgICAgICAgICAgICAgICAgaWYgWyAiJGRyaWZpbGUiICE9ICIiIF0gOyB0aGVuCisg
+ICAgICAgICAgICAgICAgICAgICAgICBkaXI9JChkaXJuYW1lICR7ZHJpZmlsZX0pCisgICAgICAg
+ICAgICAgICAgICAgICAgICBybSAtcmYgJHtkaXJ9L2xpYnNydl91bV9kcmkuc28KKyAgICAgICAg
+ICAgICAgICBmaQorCWRvbmUKIAogCSMgQXR0ZW1wdCB0byBjcmVhdGUgcHJvcGVyIGxpYnJhcnkg
+c29mdGxpbmtzCiAJZm9yIHNvZmlsZSBpbiAkKGZpbmQgJHtTfSAtbmFtZSAibGliKk9wZW4qLnNv
+IikgJChmaW5kICR7U30gLW5hbWUgImxpYipzcnYqLnNvIikgJChmaW5kICR7U30gLW5hbWUgImxp
+YipnbCouc28iKSAkKGZpbmQgJHtTfSAtbmFtZSAibGlicHZyKi5zbyIpICQoZmluZCAke1N9IC1u
+YW1lICJsaWIqR0wqLnNvIik7IGRvCi0tIAoxLjcuMQoK
+
+--_003_5A47E75E594F054BAF48C5E4FC4B92AB038595A123dbde02enttico_--
