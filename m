@@ -1,29 +1,30 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RDmFi-0005hP-Iu
+	(envelope-from <raj.khem@gmail.com>) id 1RDo9H-00019M-S1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 02:00:54 +0200
-Received: by ywf7 with SMTP id 7so141692ywf.6
+	Wed, 12 Oct 2011 04:02:24 +0200
+Received: by iafi7 with SMTP id i7so6615iaf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 16:55:11 -0700 (PDT)
+	Tue, 11 Oct 2011 18:56:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=gJTFdOOIApUzeSJ5CNlJFqzHw61oIvJhbLA6ALBa82I=;
-	b=oL+OwkXQxNWoteEl3Rga5APs7jbOm5nQoJ/UYPlgZKzr5dByEQ0ZX31FZY6q65yUNH
-	f/Xx75pRHAuk78qNQoccQALFmsg1zSDY6xIPFEPOumcNT9pY9Dn/UB11iaU7x3ReoGsR
-	ejG0I8IsJLdQbev+tSB0TUi/ZN+mtQ/S5ZjoY=
-Received: by 10.68.8.195 with SMTP id t3mr49351195pba.107.1318377310071; Tue,
-	11 Oct 2011 16:55:10 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.49.129 with HTTP; Tue, 11 Oct 2011 16:54:40 -0700 (PDT)
-In-Reply-To: <201110120100.15523.schnitzeltony@gmx.de>
-References: <201110120100.15523.schnitzeltony@gmx.de>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=CHreQUnUnVIsMBAQRZ1FGt9EBg9DVLuaHePF3SFpIV4=;
+	b=oO10uKajtZPlgSH3AIkYTF9lerwbSdalJsz42ViP1EzsQPa8RiXoFUCIvCqPjdSXvg
+	xAqkVW1cChkS1YLcJvti/n9UrA0kzL0qoBxg9yHlBYAH48rpvU3ixuwvzdPyAkOpiZGE
+	5GN1Y4lGQjovn7vXJcS2acnuseCKGKqysGMgk=
+Received: by 10.231.82.12 with SMTP id z12mr11733011ibk.36.1318384600486;
+	Tue, 11 Oct 2011 18:56:40 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id 2sm1471311ibf.0.2011.10.11.18.56.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 11 Oct 2011 18:56:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Oct 2011 16:54:40 -0700
-Message-ID: <CAMKF1sqgWAfNbL+W1Ge3gOHXdHoZQ9e_rO+jEKRSpapH+C1ZRw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] home for pdf-viewers / meta-office?
+Date: Tue, 11 Oct 2011 18:56:29 -0700
+Message-Id: <1318384589-17127-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-intel][PATCH] xorg-xserver: Include xserver-xorg-lite.inc instead of xserver-xf86-dri-lite.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 00:00:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Oct 2011 02:02:24 -0000
 
-On Tue, Oct 11, 2011 at 4:00 PM, Andreas M=C3=BCller <schnitzeltony@gmx.de>=
- wrote:
-> I would like to have a pdf-viewer in my image.
-> Since I can not find evince & epdfview ( did I oversee something? ) I am =
-looking for a suited place for them: How about a new meta-office layer with=
-in meta-oe?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../xorg-xserver/xserver-xf86-dri-lite_1.9.3.bb    |    2 +-
+ .../xorg-xserver/xserver-psb_1.7.99.2.bb           |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-I think it would be better if there could be separated based on gtk or
-qt as well.
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/common/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bb b/common/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bb
+index 81d70bc..c3d6d02 100644
+--- a/common/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bb
++++ b/common/recipes-graphics/xorg-xserver/xserver-xf86-dri-lite_1.9.3.bb
+@@ -1,4 +1,4 @@
+-require recipes-graphics/xorg-xserver/xserver-xf86-dri-lite.inc
++require recipes-graphics/xorg-xserver/xserver-xorg-lite.inc
+ 
+ PROTO_DEPS += "xf86driproto dri2proto"
+ 
+diff --git a/meta-emenlow/recipes-graphics/xorg-xserver/xserver-psb_1.7.99.2.bb b/meta-emenlow/recipes-graphics/xorg-xserver/xserver-psb_1.7.99.2.bb
+index 5227faa..28d77d5 100644
+--- a/meta-emenlow/recipes-graphics/xorg-xserver/xserver-psb_1.7.99.2.bb
++++ b/meta-emenlow/recipes-graphics/xorg-xserver/xserver-psb_1.7.99.2.bb
+@@ -1,4 +1,4 @@
+-require recipes-graphics/xorg-xserver/xserver-xf86-dri-lite.inc
++require recipes-graphics/xorg-xserver/xserver-xorg-lite.inc
+ 
+ PR = "r3"
+ 
+-- 
+1.7.5.4
+
 
 
