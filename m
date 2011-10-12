@@ -1,28 +1,36 @@
-Received: from mail-pz0-f43.google.com ([209.85.210.43])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RE0qM-0004S4-VA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 17:35:43 +0200
-Received: by pzd13 with SMTP id 13so334466pzd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 08:29:59 -0700 (PDT)
+	(envelope-from <kergoth@gmail.com>)
+	id 1RE0tf-0004ap-0T; Wed, 12 Oct 2011 17:39:07 +0200
+Received: by wwf27 with SMTP id 27so184388wwf.24
+	for <multiple recipients>; Wed, 12 Oct 2011 08:33:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=wIGrrhwBB2hhwrZ13yXpgEmgSuvthQS6zoh5l9r6PKg=;
-	b=wKICW9jX+8Tdjx95Xjc7AP2Pzn9MpTJRgsyPQdlxgy+xJS+QonVyY2/PU+FJwcup5O
-	fe4pDYjhz/l8vUjQzwUCmaqipBZjl1vRc6iYPfDG/3rTmN1yTKtjX0u8RKts4DF2iBmL
-	zX8LZZZx+OaeMURe4NzFYv7f+VLj1nnm00Byc=
-Received: by 10.68.28.4 with SMTP id x4mr1992015pbg.56.1318433399075; Wed, 12
-	Oct 2011 08:29:59 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=AfE8I/OcJzUpv7mXelpfy2O4sVEuewdab2REYgmgscI=;
+	b=E2syyjexIYrfoJS9yw0OMXR4hbOzY4rHMHwn49R13OLQQSxej3zRaLunLSa7arZNQB
+	e+ScpAS5VOMZEFDeG4vNWzi3/kr5ONxKby9ltRG+yBiB6heufjGYiFTk2qtj/5kMS0XE
+	f7SwF9C9H/rqj/Y8/LFzIZwpKZktVfX9i6sNo=
+Received: by 10.216.159.4 with SMTP id r4mr2689550wek.9.1318433401221; Wed, 12
+	Oct 2011 08:30:01 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.68.58.168 with HTTP; Wed, 12 Oct 2011 08:29:29 -0700 (PDT)
-In-Reply-To: <1318408173.3556.4.camel@mattotaupa>
-References: <4E953D5E.3050908@telia.com> <1318408173.3556.4.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 12 Oct 2011 08:29:29 -0700
-Message-ID: <CAMKF1spkbLAbLJmcvJkhqX=p3umU2un7Yn4Uf+8-P0xdwOX-vA@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.160.80 with HTTP; Wed, 12 Oct 2011 08:25:46 -0700 (PDT)
+In-Reply-To: <CAMKF1srW_j_H1EKJvs9LMOcFeXauLbK5_9W7jcr2RjTtN5OeQQ@mail.gmail.com>
+References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
+	<j73ifb$3kl$1@dough.gmane.org>
+	<CAMKF1srHT5uh5a=z=mt0kOpF2YO9YyKkEdkRK9ZT8=LaGY6JSA@mail.gmail.com>
+	<6C40DE44-FE7C-4C0A-AB7F-1B78CE95216F@dominion.thruhere.net>
+	<CAMKF1srW_j_H1EKJvs9LMOcFeXauLbK5_9W7jcr2RjTtN5OeQQ@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 12 Oct 2011 08:25:46 -0700
+X-Google-Sender-Auth: rKDf-c3QI5FOPqs9KN-8UKmDmaY
+Message-ID: <CABcZANnaPSrgGSsKuXW6jEXZ98+-kQohRd4r4uSq+spWfSNTOg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Can someone pls prune a few obsolete branches in openembedded?
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] git server move
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,40 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 15:35:43 -0000
+X-List-Received-Date: Wed, 12 Oct 2011 15:39:07 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 12, 2011 at 1:29 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Dear Ulf,
->
->
-> Am Mittwoch, den 12.10.2011, 09:10 +0200 schrieb Ulf Samuelsson:
->> All the branches:
+On Wed, Oct 12, 2011 at 8:22 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Oct 12, 2011 at 8:18 AM, Koen Kooi <koen@dominion.thruhere.net> w=
+rote:
 >>
->> ulf/linux-2.6.30*
->> and
->> ulf/test
+>> Op 12 okt. 2011, om 17:16 heeft Khem Raj het volgende geschreven:
 >>
->> are no longer in use.
->> All the stuff is already in mainline.
+>>> On Wed, Oct 12, 2011 at 1:17 AM, Koen Kooi <koen@dominion.thruhere.net>=
+ wrote:
+>>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>>> Hash: SHA1
+>>>>
+>>>> Op 11-10-11 21:11, Cliff Brake schreef:
+>>>>> Hi, we are moving git.openembedded.org to a new server.
+>>>>>
+>>>>> SSH access on the old server has been disabled. =C2=A0git:// still wo=
+rks
+>>>>> there.
+>>>>>
+>>>>> As soon as DNS propagates, SSH access will work with the new server.
+>>>>>
+>>>>> Let me know if you see any problems.
+>>>>
+>>>> When will cgit be back up?
+>>>
+>>> It should be up already. Do Ctrl+f5 in your browser on git.openembedded=
+.org
 >>
->> Can someone please remove them?
+>> Let me rephrase: when will it be working again? I still get "No reposito=
+ries found" when clicking on a repo.
 >
-> Is for example `git push origin :ulf/test` not working?
+> Weird I see all the repos fine.
 
-thats not allowed since it can result in accidental deletion of wrong branches
->
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Works here too.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
