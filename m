@@ -1,31 +1,24 @@
-Received: from smtprelay-b22.telenor.se ([195.54.99.213])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RDtae-0005M5-Qa
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 09:51:01 +0200
-Received: from iph3.telenor.se (iph3.telenor.se [195.54.127.134])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id 734B1E9E71
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 09:18:09 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AvQvALw+lU5T4zkNPGdsb2JhbAAMN4k8kBGMZoITAQEBATeCBQEBAQEDOEARCxgJFg8JAwIBAgExFBMIAQHAIYdYBJN1kVU
-X-IronPort-AV: E=Sophos;i="4.69,333,1315173600"; d="scan'208";a="129684205"
-Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.244]) ([83.227.57.13])
-	by iph3.telenor.se with ESMTP; 12 Oct 2011 09:18:09 +0200
-Message-ID: <4E953F31.6080002@telia.com>
-Date: Wed, 12 Oct 2011 09:18:09 +0200
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110922 Thunderbird/3.1.15
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RDuFM-0006oL-Q3 for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 10:33:04 +0200
+Received: from f053046227.adsl.alicedsl.de ([78.53.46.227]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RDu9x-0001V2-DE for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 08:27:29 +0000
+Message-ID: <1318408026.3556.3.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4E936282.3030505@telia.com> <20111010213559.GI3125@denix.org>
-	<4E938024.2090605@telia.com>
-In-Reply-To: <4E938024.2090605@telia.com>
-Subject: Re: psyco-dist not supported on 64 bit Linux
+Date: Wed, 12 Oct 2011 10:27:06 +0200
+In-Reply-To: <1318361177.3726.1.camel@mattotaupa>
+References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
+	<1318361177.3726.1.camel@mattotaupa>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: git server move
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,47 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 07:51:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 12 Oct 2011 08:33:04 -0000
+X-Groupsio-MsgNum: 34665
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-PYaD1hg+xWSzLmBxeUFw"
+
+--=-PYaD1hg+xWSzLmBxeUFw
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear OE folks,
+
+
+Am Dienstag, den 11.10.2011, 21:26 +0200 schrieb Paul Menzel:
+
+> Am Dienstag, den 11.10.2011, 15:11 -0400 schrieb Cliff Brake:
+> > Hi, we are moving git.openembedded.org to a new server.
+>=20
+> is there more information about the reasons? Is it just a new machine?
+> Where is it hosted now?
+>=20
+> > SSH access on the old server has been disabled.  git:// still works the=
+re.
+> >=20
+> > As soon as DNS propagates, SSH access will work with the new server.
+> >=20
+> > Let me know if you see any problems.
+> >=20
+> > SSH keys will likely change, so expect messages about that.
+>=20
+> So what are the fingerprints of the new keys? ;-)
+
+I hope the new fingerprint is the following.
+
+ed:99:0d:c1:6e:6c:02:75:df:36:25:4d:62:39:b7:e5
+
+Looking at what happened at <kernel.org> I would have hoped to get an
+earlier response. Or do I miss something here that the fingerprint is
+not important?
+
+
+Thanks,
+
+Paul
+
+--=-PYaD1hg+xWSzLmBxeUFw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
-On 2011-10-11 01:30, Ulf Samuelsson wrote:
-> On 2011-10-10 23:35, Denys Dmytriyenko wrote:
->> On Mon, Oct 10, 2011 at 11:24:18PM +0200, Ulf Samuelsson wrote:
->>> psyco-dist will not run on a 64 bit linux.
->>> The guys behind psyco-dist recommends the use of PyPy
->>>
->>> What is the recommendation for 64 bit linux?
->>>
->>> Just run without JIT?
->>> Don't run on a 64 bit linux?
->>> Anything else?
->> Yes, not supporting 64-bit hosts is one of the known limitations of 
->> psyco.
->> Being stuck with Python 2.6 is another limitation.
->>
->> But, latest bitbake appears to be quite fast even w/o using psyco 
->> these days.
->> Especially with parallel parsing on multiple cores...
->>
->
-> OK, I will try without JIT then.
->
-Now I have some results.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-Building a custom x11 image on a 32 bit Ubuntu 10.10/psyco-dist  took 91 
-minutes.
-Building the same image on a 64 bit Ubuntu 11.04 without psyco-dist took 
-109 minutes
-(The last machine was an i7-920 w 4 GB RAM)
-The first might be the same, alternatively it was a machine with 6 GB RAM.
+iEYEABECAAYFAk6VT1oACgkQPX1aK2wOHVg0AgCfUvhGXnOMYbORuFUQQGzoQlfX
+1FwAn0crPF9DF3zpaIr8YjXe302mMK7h
+=aSB7
+-----END PGP SIGNATURE-----
 
-= It takes 20% more time on a 64 bit O/S.
-
-
--- 
-Best Regards
-Ulf Samuelsson
-
-
-
+--=-PYaD1hg+xWSzLmBxeUFw--
