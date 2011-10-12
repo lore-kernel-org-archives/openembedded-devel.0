@@ -1,22 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RDuHS-0006vE-MK for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 10:35:14 +0200
-Received: from f053046227.adsl.alicedsl.de ([78.53.46.227]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RDuC3-0001Vf-Mi for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 08:29:39 +0000
-Message-ID: <1318408173.3556.4.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RDuP0-00077r-Sv
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 10:43:02 +0200
+Received: from iph1.telenor.se (iph1.telenor.se [195.54.127.132])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id A63A4EA637
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 10:37:08 +0200 (CEST)
+X-SENDER-IP: [83.227.57.13]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Aj0iAHhQlU5T4zkNPGdsb2JhbAAMN4R1lFmOdAEBAQE3ggUBAQEBAwEBASBLChELBBQJFgsCAgkDAgECARUBGxQTBgIBAYgCpheSFYZEgRQEkVuCGpFW
+X-IronPort-AV: E=Sophos;i="4.69,333,1315173600"; 
+	d="scan'208,217";a="494972661"
+Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.57.13])
+	by iph1.telenor.se with ESMTP; 12 Oct 2011 10:37:08 +0200
+Message-ID: <4E9551B3.6020606@telia.com>
+Date: Wed, 12 Oct 2011 10:37:07 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.23) Gecko/20110922 Thunderbird/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Oct 2011 10:29:33 +0200
-In-Reply-To: <4E953D5E.3050908@telia.com>
-References: <4E953D5E.3050908@telia.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
+References: <4E953D5E.3050908@telia.com> <1318408173.3556.4.camel@mattotaupa>
+In-Reply-To: <1318408173.3556.4.camel@mattotaupa>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Can someone pls prune a few obsolete branches in openembedded?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,49 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 08:35:14 -0000
-X-Groupsio-MsgNum: 34666
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-JKm+NaaKaDeQ4HkUEJjz"
-
---=-JKm+NaaKaDeQ4HkUEJjz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear Ulf,
-
-
-Am Mittwoch, den 12.10.2011, 09:10 +0200 schrieb Ulf Samuelsson:
-> All the branches:
->=20
-> ulf/linux-2.6.30*
-> and
-> ulf/test
->=20
-> are no longer in use.
-> All the stuff is already in mainline.
->=20
-> Can someone please remove them?
-
-Is for example `git push origin :ulf/test` not working?
-
-
-Thanks,
-
-Paul
-
---=-JKm+NaaKaDeQ4HkUEJjz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Wed, 12 Oct 2011 08:43:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+On 2011-10-12 10:29, Paul Menzel wrote:
+> Dear Ulf,
+>
+>
+> Am Mittwoch, den 12.10.2011, 09:10 +0200 schrieb Ulf Samuelsson:
+>> All the branches:
+>>
+>> ulf/linux-2.6.30*
+>> and
+>> ulf/test
+>>
+>> are no longer in use.
+>> All the stuff is already in mainline.
+>>
+>> Can someone please remove them?
+> Is for example `git push origin :ulf/test` not working?
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iEYEABECAAYFAk6VT+0ACgkQPX1aK2wOHVjIuQCfZ1rQU6cdYtc9Bo7/OAn1KqGO
-7NgAn3xw3Ngku5VYtXaC4WyKUFh8LOqE
-=Wn5t
------END PGP SIGNATURE-----
+There are only a few people that can delete branches in openembedded.
 
---=-JKm+NaaKaDeQ4HkUEJjz--
+$ git push origin :ulf/test
+
+<LOCALE messages, skipped>
+
+remote: + refs/heads/ulf/test openembedded ulf_samuelsson DENIED by fallthru
+remote: error: hook declined to update refs/heads/ulf/test
+To git@git.openembedded.org:openembedded
+  ! [remote rejected] ulf/test (hook declined)
+error: failed to push some refs to 'git@git.openembedded.org:openembedded'
+
+-- 
+Best Regards
+Ulf Samuelsson
+
+
