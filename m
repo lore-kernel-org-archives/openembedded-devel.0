@@ -1,28 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1RE5fY-0004HQ-Mc
+	(envelope-from <azarnasab@gmail.com>) id 1RE5n2-0004cm-50
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 22:44:52 +0200
-Received: by eyd9 with SMTP id 9so1172467eyd.6
+	Wed, 12 Oct 2011 22:52:36 +0200
+Received: by bke11 with SMTP id 11so605130bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 13:39:09 -0700 (PDT)
-Received: by 10.223.1.131 with SMTP id 3mr973921faf.30.1318451949059;
-	Wed, 12 Oct 2011 13:39:09 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id a7sm6010452fam.22.2011.10.12.13.39.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 12 Oct 2011 13:39:08 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1244.3)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4E95F9E2.8080704@mlbassoc.com>
-Date: Wed, 12 Oct 2011 22:39:05 +0200
-Message-Id: <B8697035-FE5A-42CA-B517-A5E26313D565@dominion.thruhere.net>
-References: <4E958698.1030800@ts.fujitsu.com> <4E95DBA0.9080307@gmail.com>
-	<j74ojo$oi8$1@dough.gmane.org> <4E95F9E2.8080704@mlbassoc.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1244.3)
-Subject: Re: OE beginner constantly failing to build anything
+	Wed, 12 Oct 2011 13:46:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XSC5lT8dkoaYyZhZgb95cNqIk3eBDPEagpDekWxyWrM=;
+	b=FKkt4HnFjgehmZQ33xd+sYiRRS7+15jtQeM3erEZp91gZd0VyDI0gysd//qkd6QSOy
+	qRfTZCE5lU3daWnd9PqAP3+8XEolvIobt+ueWeaWGtb/HDM9q+QsX3Wk0M5kuCI9VGA2
+	1fv4pAlfDAmc+1egVRCfoh3PnCq/aO/XIS2fk=
+MIME-Version: 1.0
+Received: by 10.204.129.6 with SMTP id m6mr519330bks.0.1318452413109; Wed, 12
+	Oct 2011 13:46:53 -0700 (PDT)
+Sender: azarnasab@gmail.com
+Received: by 10.204.142.154 with HTTP; Wed, 12 Oct 2011 13:46:53 -0700 (PDT)
+In-Reply-To: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
+References: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
+Date: Wed, 12 Oct 2011 14:46:53 -0600
+X-Google-Sender-Auth: EpAcffI_wv81avlziAXiVwLxnjM
+Message-ID: <CADWjqk598H9nE+StShm26eyWYOU-=W3ko-Nkgw1CAuxpjtdDWw@mail.gmail.com>
+From: dashesy <dashesy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Creating Rootfs images without packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,174 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 20:44:52 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Wed, 12 Oct 2011 20:52:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+On Wed, Oct 12, 2011 at 6:22 AM, mgundes <mgcse@hotmail.com> wrote:
+> =A0 Hi,
+>
+> =A0 I think one of the big issue with OE is build time. It does everythin=
+g
+> for you, so that it takes too much times. I want to minimize build time a=
+nd
+> realized that OE creates ipkgs for almost every package. If there is a wa=
+y
+> to prevent creation of ipkgs it would be really good for me. In my opinio=
+n,
+> it would be fine for other people too since usually rootfs directory is
+> enough and ipkgs are not frequently used directly by developers.
+>
+Just as a suggestion:
+1- You can start with a bare minimum rootfs then run it under qemu, or
+even on the board itself
+    Then you can use opkg to download/upgrade from the repositories,
+or remove what you do not need. I guess this is the fastest method.
+    I am thinking of putting together a build environment based on
+user-mode qemu and opkg.
+    I use fedora's kickstart files to build my desktop rootfs. That
+would be great to have a similar approach using qemu and opkg.
+    Specially for most people they do not need to compile the packages
+themselves and the repositories are enough, they only need to compile
+a few packages of their own.
+2- You can only bitbake meta-toolchain to get a gcc with cross
+compilation capability, then use that to build any package that you
+want directly from sources without relying on OE.
+    This is what I do myself right now, but you need to make sure the
+dependencies are met.
 
-Op 12 okt. 2011, om 22:34 heeft Gary Thomas het volgende geschreven:
+If the dependencies of packages are correct and to the bare minimum
+required (which should becase or it should be filed as a bug), OE will
+be a better approach, it takes care of dependencies for you.
+The only problem I have is that OE is hugely customizable, and takes
+time to learn all different tricks to get exactly what I want in my
+rootfs.
+I am learning OE, for me I try to follow the mailing lists to learn
+non-out-dated information as the first thing I learned was to that
+most wikis are way outdated :)
 
-> On 2011-10-12 13:08, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>=20
->> Op 12-10-11 20:25, Khem Raj schreef:
->>> On 10/12/2011 5:22 AM, Rainer Koenig wrote:
->>>> Hi there,
->>>>=20
->>>> the following lines might give you the feeling of a rant, sorry =
-about
->>>> that but after 2 weeks of no success I need to write down quickly =
-what
->>>> bothers me. Please don't feel offended by my deep desperation. ;-)
->>>>=20
->>>> My build system is running Debian/Squeeze (amd64) and I also
->>>> downloaded the CodeSourcery Toolchain. Was able to compile a simple
->>>> hello world with that for Angstrom, but now I wanted to build =
-Angstrom
->>>> from scratch.
->>>>=20
->>>> So I started with OE classic, tried the "getting started" from the =
-PDF
->>>> docs and failed. I learned quickly that there are version =
-dependencies
->>>> between bitbake and the version that I checkout of the OE tree. I =
-also
->>>> learned that some of the failures come because I tried to bild =
-"old"
->>>> images and meanwhile the sources that bitbake wants to fetch seem =
-to
->>>> have moved to another place or got deleted. I tried according to =
-the
->>>> wiki docs that said OE 2011.3 works with bitbake 1.12.0 but even =
-then
->>>> I failed. Last failure had to do with building libtool-2.4-cross =
-when
->>>> the build system told my that my compiler can't create binaries...
->>>> after the process has build around 60+ packets without any problem.
->>>>=20
->>>> Well, I learned that OE classic is no longer maintained and that I
->>>> should switch to OE-core. So I said, lets start from scratch again =
-and
->>>> see. I followed the Angstrome building instructions as they are
->>>> written here:
->>>> =
-http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/angstrom-layers/tree=
-/README
->>>>=20
->>>>=20
->>>>=20
->>>>=20
->> Did everything that was described there and faild again. This time
->>>> with the following errors:
->>>> ----------------8<-snip---------------------- bitbake base-image =
-Pseudo
->>>> is not present but is required, building this first before the main
->>>> build NOTE: angstrom DOES NOT support libiconv because the eglibc
->>>> provided iconv library is used                         | ETA:
->>>> 00:04:17 NOTE: angstrom DOES NOT support libiconv because the =
-eglibc
->>>> provided iconv library is used                         | ETA:
->>>> 00:04:16 NOTE: angstrom DOES NOT support gconf-dbus because =
-gconf-dbus
->>>> has been merged back into main GConf                 | ETA:  =
-00:03:57
->>>> NOTE: angstrom DOES NOT support gconf-dbus-native because =
-gconf-dbus
->>>> has been merged back into main GConf ERROR: Error Method already =
-seen:
->>>> get_tls_setting in' glx-use-tls.inc' now in 'glx-use-tls.bbclass'
->>>> | ETA:  00:02:59 ERROR: Could not include required file
->>>> recipes-graphics/xorg-xserver/xserver-xf86-dri-lite.inc | ETA:
->>>> 00:02:01 ERROR: Command execution failed: Exited with 1
->>>=20
->>> bad timing. There is a bit of churn due to xorg updates happening in
->>> core layer and other layers need to adjust once the core parts are
->>> settled in. This is master so expect few bleeding here and there
->>> occasionally
->>>=20
->>>> ----------------8<-snip----------------------
->>>>=20
->>>> Then I read "glx-use-tls" and remembered to saw that in the list
->>>> archive of today. There is a mail from Khem Raj Subject: [oe]
->>>> [meta-oe][PATCH 1/2] classes/glx-use-tls.bbclass: Delete
->>>>=20
->>>> Yeah. I checked my meta-oe tree and glx-use-tls.bbclass is still
->>>> there. Then I checked where that tree came from, it comes from =
-github,
->>>> but nevertheless, also the tree from http://git.openembedded.org at
->>>> the moment has no patch like that applied.
->>>>=20
->>>> So I need to start questions:
->>>>=20
->>>> 1. Is there any *failsafe* procedure that lets me build some image =
-for
->>>> my beagleboard? I'm relatively new to embedded linux and I need to
->>>> read a lot about bitbake and oe, but failing with every "getting
->>>> started" instructions doesn't give me much confidence that I will =
-ever
->>>> succeed.
->>>>=20
->>>> 2. How are patches applied in OE? The patch from Khem Raj is not =
-yet
->>>> in the git-tree, so how can I patch it to my tree.
->>>=20
->>> with some git-fu you can. (git am) can help
->>>=20
->>> However those patches are just a workaround to keep parsing happy =
-they
->>> are not final patches that should go into repo.
->>>=20
->>>>=20
->>>> 3. I tried to search for the bugs I encountered and found out that =
-you
->>>> have abandoned a tool like Bugzilla in favor of reporting bugs on =
-the
->>>> mailing list. =46rom my perspective the mailing list is not very =
-helpful
->>>> to *find* information about existing bugs and their status, so is
->>>> there a reason for this switch that I can understand?
->>>=20
->>> It has been discussed extensively and decision to have mailing list =
-was
->>> the outcome. You can searc through mailing list archives to gmane =
-will
->>> help you.
->>>=20
->>>>=20
->>>> I think there are solutions for my problem, the fact that Angstrom
->>>> exists and can be downloaded makes me think that somebody was able =
-to
->>>> build it from the sources, but it seems that I got the wrong moment =
-in
->>>> time for my attempts so all the sources and recipes that I'm =
-depending
->>>> on are constantly changing and I always get lost in the gory =
-details.
->>>>=20
->>>=20
->>> generally everybody builds from source every day its a norm with
->>> openembedded.
->>>=20
->>> You could try the 2011.03 release branch which should be pretty =
-stable
->>=20
->> Especially if you're using the angstrom setup script instead of some =
-'pdf'
->=20
-> Sadly, even this magic script is often broken.
->=20
-> I just updated the script to rev
-> I then ran (from scratch):
->  % MACHINE=3D"beagleboard" ./oebb.sh config beagleboard
->    ... lots of update messages, but these errors:
->  layer repository name: meta-openembedded
->  layer uri: git://github.com/openembedded/meta-oe.git
->  layer branch/revision: master/HEAD
->  Updating layer at layers/meta-openembedded
->  fatal: read error: Connection reset by peer
+For example, is there a way not to compile any -dbg packages?
+I intuitively guess I need to set "release" in my local.conf but there
+is no easier way than trying it and check if -dbg packages are created
+or not.
 
-Yes, connection resets are indeed the fault of the script. As is the =
-economic crisis and electricity outtages.=
+> =A0 I have asked in freenode oe room but friends said there no way to do =
+that
+> in OE system. If there is no way to do that in current OE, do you plan to
+> add as a feature?
+>
+> =A0 Thanks,
+>
+> Regards
+>
+> --
+> MahmutG
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+dashesy
 
 
