@@ -1,34 +1,34 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msprathap@ti.com>) id 1RDvrV-0001x0-Kr
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 12:16:34 +0200
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9CAAl9k006462
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDvyE-0002Fd-Gl for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 12:23:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDvsj-0003LA-4Y for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 12:17:49 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 12:17:49 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 05:10:50 -0500
-Received: from dbde70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9CAAljd025920
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 15:40:47 +0530 (IST)
-Received: from dbde02.ent.ti.com ([172.24.170.145]) by dbde70.ent.ti.com
-	([172.24.170.148]) with mapi; Wed, 12 Oct 2011 15:40:47 +0530
-From: "Srinivas, Prathap" <msprathap@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Oct 2011 15:40:46 +0530
-Thread-Topic: Patch to add Xorg DRI driver support with TI Linux Graphics
-	SDK 04.04.00.02 Release
-Thread-Index: AcyIxzV2LqZpt1ZoQHmoDb3Xn5Q+tQ==
-Message-ID: <5A47E75E594F054BAF48C5E4FC4B92AB038595A143@dbde02.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Patch to add Xorg DRI driver support with TI Linux Graphics SDK 04.04.00.02 Release
+	Wed, 12 Oct 2011 12:17:49 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 12 Oct 2011 12:17:32 +0200
+Message-ID: <j73pg0$knr$1@dough.gmane.org>
+References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0) Gecko/20110922 Thunderbird/7.0
+In-Reply-To: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: Patches to add support for TI Linux Graphics SDK release 04.04.00.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,215 +42,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 10:16:34 -0000
-X-Groupsio-MsgNum: 34676
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_5A47E75E594F054BAF48C5E4FC4B92AB038595A143dbde02enttico_"
+X-List-Received-Date: Wed, 12 Oct 2011 10:23:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---_004_5A47E75E594F054BAF48C5E4FC4B92AB038595A143dbde02enttico_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi All,
-Attached is the patch for adding Xorg DRI driver support with TI Linux Grap=
-hics SDK 04.04.00.02 release.
-Please review the patch and let me know if there are any comments.
+Op 12-10-11 11:57, Srinivas, Prathap schreef:
+> Hi All, Attached are the patches for adding TI Linux Graphics SDK
+> 04.04.00.02 Release support in OE. Please include these patches in the
+> OE.
+> 
+> Details of patches - 1)
+> 0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch - Adds
+> support for TI Linux graphics SDK release 04.04.00.02 2)
+> 0002-Fix-for-library-linking-isssue-with-graphics-SDK.patch - Fix to link
+> the appropriate graphics user library with TI Linux graphics SDK release
+> 04.04.00.02.
+> 
+> Since I am sending through outlook, the patches may get mangled. So I am
+> attaching the patches.
+> 
+> Thanks, Prathap.
+> 
+> 
+> 
+> 0001-libgles-omap3_4.04.00.02-added-support-for-graphics-.patch
+> 
+> 
+> From a11f1ae4c07d09be89be49f9094207abddad854e Mon Sep 17 00:00:00 2001 
+> From: Prathap M S <msprathap@ti.com> Date: Mon, 10 Oct 2011 15:09:46
+> +0530 Subject: [PATCH 1/2] libgles-omap3_4.04.00.02: added support for
+> graphics sdk 04.04.00.02
+> 
+> * added support sgx ddk 1.6.16.4117 * included video driver as part of
+> the kernel for accessing the fbdev in the sgx driver
+> 
+> Signed-off-by: Prathap M S <msprathap@ti.com> --- classes/kernel.bbclass
+> |    2 +- .../powervr-drivers/libgles-omap3_4.04.00.02.bb    |   29
+> +++++++++++++ .../omap3-sgx-modules_1.6.16.4117.bb               |   44
+> ++++++++++++++++++++ 3 files changed, 74 insertions(+), 1 deletions(-) 
+> create mode 100644 recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb 
+> create mode 100644
+> recipes/powervr-drivers/omap3-sgx-modules_1.6.16.4117.bb
+> 
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass index
+> 0109ce6..bf731e6 100644 --- a/classes/kernel.bbclass +++
+> b/classes/kernel.bbclass @@ -168,7 +168,7 @@ sysroot_stage_all_append()
+> { mkdir -p $kerneldir/include/asm-generic cp -fR include/asm-generic/*
+> $kerneldir/include/asm-generic/
+> 
+> -	for entry in drivers/crypto drivers/media include/generated
+> include/linux include/net include/pcmcia include/media include/acpi
+> include/sound include/video include/scsi include/trace include/mtd
+> include/rdma include/drm include/xen crypto/ocf; do +	for entry in
+> drivers/crypto drivers/media drivers/video drivers/gpu drivers/base
+> include/generated include/linux include/net include/pcmcia include/media
+> include/acpi include/sound include/video include/scsi include/trace
+> include/mtd include/rdma include/drm include/xen crypto/ocf; do if [ -d
+> $entry ]; then mkdir -p $kerneldir/$entry cp -fR $entry/*
+> $kerneldir/$entry/
 
-Thanks,
-Prathap.
+The above needs to be a seperate patch
 
---_004_5A47E75E594F054BAF48C5E4FC4B92AB038595A143dbde02enttico_
-Content-Type: application/octet-stream;
-	name="0001-omap3-sgx-modules_1.6.16.4117-libgles-omap3-powervr-.patch"
-Content-Description: 0001-omap3-sgx-modules_1.6.16.4117-libgles-omap3-powervr-.patch
-Content-Disposition: attachment;
-	filename="0001-omap3-sgx-modules_1.6.16.4117-libgles-omap3-powervr-.patch";
-	size=10343; creation-date="Wed, 12 Oct 2011 14:41:11 GMT";
-	modification-date="Wed, 12 Oct 2011 14:27:59 GMT"
-Content-Transfer-Encoding: base64
 
-RnJvbSA2OGY2MjJjNTNmOTVkMTIwYWM2ZWI1YjM2ZDRlYWZiMjJkY2EzZTc0IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQcmF0aGFwIE0gUyA8bXNwcmF0aGFwQHRpLmNvbT4KRGF0ZTog
-VHVlLCAxMSBPY3QgMjAxMSAxNDo1NDowNyArMDUzMApTdWJqZWN0OiBbUEFUQ0ggMS8xXSBvbWFw
-My1zZ3gtbW9kdWxlc18xLjYuMTYuNDExNyxsaWJnbGVzLW9tYXAzLHBvd2VydnIscmNfZHJpIDog
-QWRkZWQgc3VwcG9ydCBmb3IgWG9yZyBEUkkgZHJpdmVyCgoqIG9tYXAzLXNneC1tb2R1bGVzXzEu
-Ni4xNi40MTE3IC0gQWRkZWQgc3VwcG9ydCB0byBidWlsZCBYb3JnIGRyaXZlciBiYXNlZCBvbiBT
-VVBQT1JUX1hPUkcgdmFsdWUKKiBsaWJnbGVzLW9tYXAzIC0gTW9kaWZpZWQgdG8gYWRkIFhvcmcg
-RFJJIGRyaXZlciBzdXBwb3J0CiogcG93ZXJ2ciAtIENvbnRhaW5zIHNldHRpbmcgb2YgU1VQUE9S
-VF9YT1JHCiogcmNfZHJpIC0gU2NyaXB0IGZvciBpbnN0YWxsaW5nIFhvcmcgRFJJIGRyaXZlciBt
-b2R1bGUKU2lnbmVkLW9mZi1ieTogUHJhdGhhcCBNIFMgPG1zcHJhdGhhcEB0aS5jb20+Ci0tLQog
-cmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvbGliZ2xlcy1vbWFwMy5pbmMgICAgICAgICAgfCAgIDQ2
-ICsrKysrKystLS0KIHJlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDMvcmNfZHJp
-LnB2ciAgIHwgICA5NCArKysrKysrKysrKysrKysrKysrKwogLi4uL29tYXAzLXNneC1tb2R1bGVz
-XzEuNi4xNi40MTE3LmJiICAgICAgICAgICAgICAgfCAgIDEyICsrLQogcmVjaXBlcy9wb3dlcnZy
-LWRyaXZlcnMvcG93ZXJ2ci5pbmMgICAgICAgICAgICAgICAgfCAgICAyICsKIDQgZmlsZXMgY2hh
-bmdlZCwgMTM5IGluc2VydGlvbnMoKyksIDE1IGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAw
-NzU1IHJlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDMvcmNfZHJpLnB2cgogY3Jl
-YXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL3Bvd2VydnIuaW5jCgpkaWZm
-IC0tZ2l0IGEvcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvbGliZ2xlcy1vbWFwMy5pbmMgYi9yZWNp
-cGVzL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzLmluYwppbmRleCBlNjA1NjgxLi5hNDdi
-MTc5IDEwMDY0NAotLS0gYS9yZWNpcGVzL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzLmlu
-YworKysgYi9yZWNpcGVzL3Bvd2VydnItZHJpdmVycy9saWJnbGVzLW9tYXAzLmluYwpAQCAtOSw2
-ICs5LDcgQEAgREVQRU5EUyA9ICJ2aXJ0dWFsL2xpYngxMSBsaWJ4YXUgbGlieGRtY3AiCiAKIFBS
-T1ZJREVTICs9ICJ2aXJ0dWFsL2VnbCIKIAorCiBTUkNfVVJJID0gImh0dHA6Ly9zb2Z0d2FyZS1k
-bC50aS5jb20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFyZ2V0Y29udGVudC9nZnhzZGsv
-JHtTR1hQVn0vZXhwb3J0cy9PTUFQMzV4X0dyYXBoaWNzX1NES19zZXR1cGxpbnV4XyR7U0dYUFZ9
-LmJpbiBcCiAJCSAgIGZpbGU6Ly9jcHV0eXBlIFwKIAkJICAgZmlsZTovL3JjLnB2ciBcCkBAIC0y
-MSw2ICsyMiw4IEBAIFMgPSAiJHtXT1JLRElSfS9PTUFQMzV4X0dyYXBoaWNzX1NES18ke1NHWFBW
-fSIKICMgTG9naWMgdG8gdW5wYWNrIGluc3RhbGxqYW1tZXIgZmlsZQogVElfQklOX1VOUEtfQ01E
-Uz0iWTogcVk6d29ya2RpcjpZIgogcmVxdWlyZSAuLi90aS90aS1ldWxhLXVucGFjay5pbmMKKyMg
-Rm9yIGFjY2Vzc2luZyBTVVBQT1JUX1hPUkcgdmFsdWUKK3JlcXVpcmUgcG93ZXJ2ci5pbmMKIAog
-QklOTE9DQVRJT04gPz0gIiR7U30vZ2Z4X3JlbCIKIEVTMkxPQ0FUSU9OID89ICIke1N9L2dmeF9y
-ZWxfZXMyLngiCkBAIC0zMCwxOSArMzMsMzAgQEAgRVM2TE9DQVRJT04gPz0gIiR7U30vZ2Z4X3Jl
-bF9lczYueCIKIAogTElCR0xFU1dJTkRPV1NZU1RFTSA/PSAibGlicHZyUFZSMkRfRlJPTlRXU0VH
-TC5zby4xIgogCitleHBvcnQgU1VQUE9SVF9YT1JHCisKIGRvX2NvbmZpZ3VyZSgpIHsKIAkjIEF0
-dGVtcHQgdG8gZml4IHVwIHRoZSB3b3JzdCBvZmZlbmRlcnMgZm9yIGZpbGUgcGVybWlzc2lvbnMK
-IAlmb3IgaSBpbiAkKGZpbmQgJHtTfSAtbmFtZSAiKi5oIikgJChmaW5kICR7U30gLW5hbWUgIiou
-YyIpICQoZmluZCAke1N9IC1uYW1lICJNYWtlKiIpIDsgZG8KIAkJY2htb2QgMDY0NCAkaQogCWRv
-bmUgCi0JCi0JZm9yIGRyaWZpbGUgaW4gJChmaW5kICR7U30gLW5hbWUgImxpYnNydl91bV9kcmku
-c28iKTsgZG8KLSAgICAgICAgICAgICAgICBpZiBbICIkZHJpZmlsZSIgIT0gIiIgXSA7IHRoZW4K
-LSAgICAgICAgICAgICAgICAgICAgICAgIGRpcj0kKGRpcm5hbWUgJHtkcmlmaWxlfSkKLSAgICAg
-ICAgICAgICAgICAgICAgICAgIHJtIC1yZiAke2Rpcn0vbGlic3J2X3VtX2RyaS5zbwotICAgICAg
-ICAgICAgICAgIGZpCi0JZG9uZQogCisJY3AgJHtTfS90YXJnZXRmcy9YU0dYL2xpYi9saWJkcm0u
-c28qICR7U1RBR0lOR19ESVJfVEFSR0VUfSR7bGliZGlyfSAKKwkKKwkjIENoYW5nZSBQVlIgc2Vy
-dmVyJ3MgdXNlciBtb2RlIGxpYnJhcnkgdG8gcG9pbnQgdG8gRFJJCisJCWZvciBkcmlmaWxlIGlu
-ICQoZmluZCAke1N9IC1uYW1lICJsaWJzcnZfdW1fZHJpLnNvIik7IGRvCisJCWlmIFsgIiRkcmlm
-aWxlIiAhPSAiIiBdCisJCXRoZW4KKwkJCWRpcj0kKGRpcm5hbWUgJHtkcmlmaWxlfSkKKwkJCWlm
-IFsgIiRTVVBQT1JUX1hPUkciID0gIjEiIF0gCisJCQl0aGVuIAorCQkJbXYgJHtkaXJ9L2xpYnNy
-dl91bV9kcmkuc28gJHtkaXJ9L2xpYnNydl91bS5zbworCQkJZWxzZQorCQkJcm0gLXJmICR7ZGly
-fS9saWJzcnZfdW1fZHJpLnNvCisJCQlmaQorCQlmaQorCQlkb25lCisJCiAJIyBBdHRlbXB0IHRv
-IGNyZWF0ZSBwcm9wZXIgbGlicmFyeSBzb2Z0bGlua3MKIAlmb3Igc29maWxlIGluICQoZmluZCAk
-e1N9IC1uYW1lICJsaWIqT3Blbiouc28iKSAkKGZpbmQgJHtTfSAtbmFtZSAibGliKnNydiouc28i
-KSAkKGZpbmQgJHtTfSAtbmFtZSAibGliKmdsKi5zbyIpICQoZmluZCAke1N9IC1uYW1lICJsaWJw
-dnIqLnNvIikgJChmaW5kICR7U30gLW5hbWUgImxpYipHTCouc28iKTsgZG8KIAkJaWYgWyAiJChy
-ZWFkbGluayAtbiAke3NvZmlsZX0pIiA9ICIiIF0gOyB0aGVuCkBAIC0xMjUsNyArMTM5LDYgQEAg
-ZG9fY29tcGlsZSgpIHsKIAkJCWluc3RhbGwgLW0gMDc1NSAkdHJhaW5pbmcvT0dMRVMyL0J1aWxk
-L0xpbnV4T01BUDMvUmVsZWFzZVJhdy8qICR7U30vdHJhaW5pbmdjb3Vyc2VzL3JhdyB8fCB0cnVl
-CQogCQlkb25lCiAJZG9uZQotCiB9CiAKIGRvX2luc3RhbGwgKCkgewpAQCAtMTU3LDcgKzE3MCwx
-MiBAQCBkb19pbnN0YWxsICgpIHsKIAljcCAtcFByICR7U30vaW5jbHVkZS93c2VnbC8qLmggJHtE
-fSR7aW5jbHVkZWRpcn0gfHwgdHJ1ZQogCQogCWluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0v
-aW5pdC5kLwotCWNwIC1wUCAke1dPUktESVJ9L3JjLnB2ciAke0R9JHtzeXNjb25mZGlyfS9pbml0
-LmQvcHZyLWluaXQKKwlpZiBbICIkU1VQUE9SVF9YT1JHIiA9ICIxIl07IHRoZW4KKwkJY3AgLXBQ
-UiAke1N9L3RhcmdldGZzL1hTR1ggJHtEfS91c3IvbG9jYWwKKwkJY3AgLXBQICR7V09SS0RJUn0v
-cmNfZHJpLnB2ciAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQvcHZyLWluaXQKKwllbHNlCisJCWNw
-IC1wUCAke1dPUktESVJ9L3JjLnB2ciAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQvcHZyLWluaXQK
-KwlmaQogCiAJaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfQogCWVjaG8gIltkZWZhdWx0XSIg
-PiAke0R9JHtzeXNjb25mZGlyfS9wb3dlcnZyLmluaQpAQCAtMjI2LDE0ICsyNDQsMTQgQEAgUEFD
-S0FHRVMgPSsgIiR7UE59LXJhd2RlbW9zIFwKIFBBQ0tBR0VTICs9ICJ4c2VydmVyLWtkcml2ZS1w
-b3dlcnZyc2d4IFwKICAgICAgICAgICAgICAke1BOfS10ZXN0cyAiCiAKLVBBQ0tBR0VTID0rICIk
-e1BOfS1ibGl0d3NlZ2wgJHtQTn0tZmxpcHdzZWdsICR7UE59LWZyb250d3NlZ2wgJHtQTn0tbGlu
-dXhmYndzZWdsICR7UE59LXgxMXdzZWdsIgorUEFDS0FHRVMgPSsgIiR7UE59LWJsaXR3c2VnbCAk
-e1BOfS1mbGlwd3NlZ2wgJHtQTn0tZnJvbnR3c2VnbCAke1BOfS1saW51eGZid3NlZ2wgJHtQTn0t
-eDExd3NlZ2wgJHtQTn0tZHJpd3NlZ2wiCiAKIEZJTEVTXyR7UE59LWJsaXR3c2VnbCA9ICIke2xp
-YmRpcn0vbGlicHZyUFZSMkRfQkxJVFdTRUdMLnNvLiogJHtsaWJkaXJ9LyovbGlicHZyUFZSMkRf
-QkxJVFdTRUdMLnNvLioiCiBGSUxFU18ke1BOfS1mbGlwd3NlZ2wgPSAiJHtsaWJkaXJ9L2xpYnB2
-clBWUjJEX0ZMSVBXU0VHTC5zby4qICR7bGliZGlyfS8qL2xpYnB2clBWUjJEX0ZMSVBXU0VHTC5z
-by4qIgogRklMRVNfJHtQTn0tZnJvbnR3c2VnbCA9ICIke2xpYmRpcn0vbGlicHZyUFZSMkRfRlJP
-TlRXU0VHTC5zby4qICR7bGliZGlyfS8qL2xpYnB2clBWUjJEX0ZST05UV1NFR0wuc28uKiIKIEZJ
-TEVTXyR7UE59LWxpbnV4ZmJ3c2VnbCA9ICIke2xpYmRpcn0vbGlicHZyUFZSMkRfTElOVVhGQldT
-RUdMLnNvLiogJHtsaWJkaXJ9LyovbGlicHZyUFZSMkRfTElOVVhGQldTRUdMLnNvLioiCiBGSUxF
-U18ke1BOfS14MTF3c2VnbCA9ICIke2xpYmRpcn0vbGlicHZyUFZSMkRfWDExV1NFR0wuc28qICR7
-bGliZGlyfS8qL2xpYnB2clBWUjJEX1gxMVdTRUdMLnNvKiIKLQorRklMRVNfJHtQTn0tZHJpd3Nl
-Z2wgPSAiJHtsaWJkaXJ9L2xpYnB2clBWUjJEX0RSSVdTRUdMLnNvKiAke2xpYmRpcn0vKi9saWJw
-dnJQVlIyRF9EUklXU0VHTC5zbyoiCiBDT05GRklMRVNfJHtQTn0gPSAiJHtzeXNjb25mZGlyfS9w
-b3dlcnZyLmluaSIKIAogRklMRVNfJHtQTn0gPSAiJHtzeXNjb25mZGlyfSAke2xpYmRpcn0vbGli
-Ki5zby4qICR7bGliZGlyfS9FUyovKiAke2JpbmRpcn0vcHZyc3J2aW5pdCAke2JpbmRpcn0vY3B1
-dHlwZSAke2JpbmRpcn0vKi8qIgpAQCAtMjQ3LDExICsyNjUsMTEgQEAgRklMRVNfJHtQTn0tZGJn
-ID0gIiR7bGliZGlyfS8uZGVidWcvKiAke2JpbmRpcn0vLmRlYnVnLyogXAogCiBGSUxFU18ke1BO
-fS1yYXdkZW1vcyA9ICIke2JpbmRpcn0vU0dYL2RlbW9zL1Jhdy8qIgogRklMRVNfJHtQTn0teDEx
-ZGVtb3MgPSAiJHtiaW5kaXJ9L1NHWC9kZW1vcy9YMTEvKiAke3ByZWZpeH0vc2hhcmUvYXBwbGlj
-YXRpb25zICIKLVJSRUNPTU1FTkRTXyR7UE59LXgxMWRlbW9zID0gIiR7UE59LXgxMXdzZWdsIgor
-UlJFQ09NTUVORFNfJHtQTn0teDExZGVtb3MgPSAiJHtQTn0tZHJpd3NlZ2wiCiAKIEZJTEVTXyR7
-UE59LXJhd3RyYWluaW5nY291cnNlcyA9ICIke2JpbmRpcn0vU0dYL3RyYWluaW5nY291cnNlcy9S
-YXcvKiIKIEZJTEVTXyR7UE59LXgxMXRyYWluaW5nY291cnNlcyA9ICIke2JpbmRpcn0vU0dYL3Ry
-YWluaW5nY291cnNlcy9YMTEvKiIKLVJSRUNPTU1FTkRTXyR7UE59LXgxMXRyYWluaW5nY291cnNl
-cyA9ICIke1BOfS14MTF3c2VnbCIKK1JSRUNPTU1FTkRTXyR7UE59LXgxMXRyYWluaW5nY291cnNl
-cyA9ICIke1BOfS1kcml3c2VnbCIKIAogIyBUaGUgbGlicyBuZWVkIHRoZSBrZXJuZWwtbW9kdWxl
-cwogUlJFQ09NTUVORFNfJHtQTn0gPSAib21hcDMtc2d4LW1vZHVsZXMiCkBAIC0yNjYsNiArMjg0
-LDcgQEAgSU5TQU5FX1NLSVBfJHtQTn0tZmxpcHdzZWdsID0gVHJ1ZQogSU5TQU5FX1NLSVBfJHtQ
-Tn0tZnJvbnR3c2VnbCA9IFRydWUKIElOU0FORV9TS0lQXyR7UE59LWxpbnV4ZmJ3c2VnbCA9IFRy
-dWUKIElOU0FORV9TS0lQXyR7UE59LXgxMXdzZWdsID0gVHJ1ZQorSU5TQU5FX1NLSVBfJHtQTn0t
-ZHJpd3NlZ2wgPSBUcnVlCiBJTlNBTkVfU0tJUF8ke1BOfS10ZXN0cyA9IFRydWUKIElOU0FORV9T
-S0lQX3hzZXJ2ZXIta2RyaXZlLXBvd2VydnJzZ3ggPSBUcnVlCiAKQEAgLTI4NCw0ICszMDMsNSBA
-QCBybSAtZiAvZXRjL3Bvd2VydnItZXNyZXYKIAogbG4gLXNmIC91c3IvbGliL2xpYlhkbWNwLnNv
-LjYuMC4wIC91c3IvbGliL2xpYlhkbWNwLnNvLjAgCiBsbiAtc2YgL3Vzci9saWIvbGliWGF1LnNv
-LjYuMC4wIC91c3IvbGliL2xpYlhhdS5zby4wCisKIH0KZGlmZiAtLWdpdCBhL3JlY2lwZXMvcG93
-ZXJ2ci1kcml2ZXJzL2xpYmdsZXMtb21hcDMvcmNfZHJpLnB2ciBiL3JlY2lwZXMvcG93ZXJ2ci1k
-cml2ZXJzL2xpYmdsZXMtb21hcDMvcmNfZHJpLnB2cgpuZXcgZmlsZSBtb2RlIDEwMDc1NQppbmRl
-eCAwMDAwMDAwLi41MDJiYWFjCi0tLSAvZGV2L251bGwKKysrIGIvcmVjaXBlcy9wb3dlcnZyLWRy
-aXZlcnMvbGliZ2xlcy1vbWFwMy9yY19kcmkucHZyCkBAIC0wLDAgKzEsOTQgQEAKKyMhL2Jpbi9z
-aAorUEFUSD0kUEFUSDovdXNyL3NiaW4KKworQklUU1BFUlBJWEVMPSIkKGZic2V0IHwgZ3JlcCBn
-ZW9tIHwgYXdrICd7cHJpbnQgJDZ9JykiCitZUkVTPSIkKGZic2V0IHwgZ3JlcCBnZW9tIHwgYXdr
-ICd7cHJpbnQgJDN9JykiCisKK0NQVVRZUEU9IiQoY3B1dHlwZSkiCisKK2lmIFsgIiQxIiA9ICIi
-IF07IHRoZW4KKwllY2hvIFBWUi1JTklUOiBQbGVhc2UgdXNlIHN0YXJ0LCBzdG9wLCBvciByZXN0
-YXJ0LgorCWV4aXQgMQorZmkKKworaWYgWyAiJDEiID0gInN0b3AiIC1vICAiJDEiID0gInJlc3Rh
-cnQiIF07IHRoZW4KKwllY2hvIFN0b3BwaW5nIFBWUgorCXJtbW9kIGJ1ZmZlcmNsYXNzX3RpCisJ
-cm1tb2QgcHZyc3J2a20gMj4vZGV2L251bGwKKwlybW1vZCBkcm0gMj4vZGV2L251bGwKK2ZpCisK
-K2lmIFsgIiQxIiA9ICJzdG9wIiBdOyB0aGVuCisJZXhpdCAwCitmaQorCisjIFNldCBSR0JBIG9y
-ZGVyaW5nIHRvIHNvbWV0aGluZyB0aGUgZHJpdmVycyBsaWtlCitpZiBbICIkQklUU1BFUlBJWEVM
-IiA9ICIzMiIgXSA7IHRoZW4KKwlmYnNldCAtcmdiYSA4LzE2LDgvOCw4LzAsOC8yNAorZmkKKwor
-IyBUcnkgdG8gZW5hYmxlIHRyaXBsZSBidWZmZXJpbmcgd2hlbiB0aGVyZSdzIGVub3VnaCBWUkFN
-CitmYnNldCAtdnlyZXMgJChleHByICRZUkVTIFwqIDMpIAorCitzZ3hwcmVwYXJlICgpIHsKKwll
-Y2hvIFN0YXJ0aW5nIFBWUgorCS91c3IvbG9jYWwvWFNHWC9iaW4vWCAtdmVyYm9zZSAtY29uZmln
-IC91c3IvbG9jYWwvWFNHWC9ldGMveG9yZy5jb25mICYKKwlpbnNtb2QgJChidXN5Ym94IGZpbmQg
-L2xpYi9tb2R1bGVzLyQodW5hbWUgLXIpIC1uYW1lICJkcm0ua28iKQorCW1vZHByb2JlIHB2cnNy
-dmttCisJbW9kcHJvYmUgYnVmZmVyY2xhc3NfdGkKKworCXB2cl9tYWo9YGdyZXAgInB2cnNydmtt
-JCIgL3Byb2MvZGV2aWNlcyB8IGN1dCAtYjEsMiwzYAorICAgICAgICBiY19tYWo9YGdyZXAgImJj
-IiAvcHJvYy9kZXZpY2VzIHwgY3V0IC1iMSwyLDNgCisKKwlpZiBbIC1lIC9kZXYvcHZyc3J2a20g
-XSA7IHRoZW4gCisJCXJtIC1mIC9kZXYvcHZyc3J2a20KKwlmaQorCisJbWtub2QgL2Rldi9wdnJz
-cnZrbSBjICRwdnJfbWFqIDAgCisJY2htb2QgNjY2IC9kZXYvcHZyc3J2a20KKworCXRvdWNoIC9l
-dGMvcG93ZXJ2ci1lc3JldgorCisJU0FWRURfRVNSRVZJU0lPTj0iJChjYXQgL2V0Yy9wb3dlcnZy
-LWVzcmV2KSIKK30KKworc2d4ZmluaXNoICgpIHsKKwlpZiBbICIke0VTX1JFVklTSU9OfSIgIT0g
-IiR7U0FWRURfRVNSRVZJU0lPTn0iIF0gOyB0aGVuCisJCWVjaG8gLW4gIlN0YXJ0aW5nIFNHWCBm
-aXh1cCBmb3IiCisJCWVjaG8gIiBFUyR7RVNfUkVWSVNJT059LngiCisJCWNwIC1hIC91c3IvbGli
-L0VTJHtFU19SRVZJU0lPTn0uMC8qIC91c3IvbGliCisJCWNwIC1hIC91c3IvYmluL0VTJHtFU19S
-RVZJU0lPTn0uMC8qIC91c3IvYmluCQorCQllY2hvICIke0VTX1JFVklTSU9OfSIgPiAvZXRjL3Bv
-d2VydnItZXNyZXYKKwlmaQorCS91c3IvYmluL3B2cnNydmluaXQKK30KKworY2FzZSAkQ1BVVFlQ
-RSBpbgorIk9NQVAzNTMwIikKKwlzZ3hwcmVwYXJlCisKKwlkZXZtZW0yIDB4NDgwMDRCNDggdyAw
-eDIgPiAvZGV2L251bGwKKwlkZXZtZW0yIDB4NDgwMDRCMTAgdyAweDEgPiAvZGV2L251bGwKKwlk
-ZXZtZW0yIDB4NDgwMDRCMDAgdyAweDIgPiAvZGV2L251bGwKKworCUVTX1JFVklTSU9OPSIkKGRl
-dm1lbTIgMHg1MDAwMDAxNCB8IHNlZCAtZSBzOjB4MDAwMTAyMDU6NTogLWUgczoweDAwMDEwMjAx
-OjM6IC1lIHM6MHgwMDAxMDAwMzoyOiB8IHRhaWwgLW4xIHwgYXdrIC1GJzogJyAne3ByaW50ICQy
-fScpIgorCisJc2d4ZmluaXNoCisJOzsKKyJUSTgxNngiKQorCXNneHByZXBhcmUKKworCWRldm1l
-bTIgMHg0ODE4MEYwNCB3IDB4MCA+IC9kZXYvbnVsbAorCWRldm1lbTIgMHg0ODE4MDkwMCB3IDB4
-MiA+IC9kZXYvbnVsbAorCWRldm1lbTIgMHg0ODE4MDkyMCB3IDB4MiA+IC9kZXYvbnVsbAorCisJ
-RVNfUkVWSVNJT049IiQoZGV2bWVtMiAweDU2MDAwMDE0IHwgc2VkIC1lIHM6MHgwMDAxMDIwNTo2
-OiAtZSBzOjB4MDAwMTAyMDE6MzogLWUgczoweDAwMDEwMDAzOjI6IHwgdGFpbCAtbjEgfCBhd2sg
-LUYnOiAnICd7cHJpbnQgJDJ9JykiCisKKwlzZ3hmaW5pc2gKKwk7OworKikKKwllY2hvIE5vIFNH
-WCBoYXJkd2FyZSwgbm90IHN0YXJ0aW5nIFBWUgorCTs7Citlc2FjCisKKwpkaWZmIC0tZ2l0IGEv
-cmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvb21hcDMtc2d4LW1vZHVsZXNfMS42LjE2LjQxMTcuYmIg
-Yi9yZWNpcGVzL3Bvd2VydnItZHJpdmVycy9vbWFwMy1zZ3gtbW9kdWxlc18xLjYuMTYuNDExNy5i
-YgppbmRleCA4OWUwZjEyLi4zMzkwN2M3IDEwMDY0NAotLS0gYS9yZWNpcGVzL3Bvd2VydnItZHJp
-dmVycy9vbWFwMy1zZ3gtbW9kdWxlc18xLjYuMTYuNDExNy5iYgorKysgYi9yZWNpcGVzL3Bvd2Vy
-dnItZHJpdmVycy9vbWFwMy1zZ3gtbW9kdWxlc18xLjYuMTYuNDExNy5iYgpAQCAtNyw2ICs3LDgg
-QEAgTElDRU5TRSA9ICJHUEx2MiIKIAogVElfQklOX1VOUEtfQ01EUz0iWTogcVk6d29ya2RpcjpZ
-IgogcmVxdWlyZSAuLi90aS90aS1ldWxhLXVucGFjay5pbmMKKyMgRm9yIGFjY2Vzc2luZyBTVVBQ
-T1JUX1hPUkcgdmFsdWUKK3JlcXVpcmUgcG93ZXJ2ci5pbmMKIAogU0dYUFYgPSAiNF8wNF8wMF8w
-MiIKIElNR1BWID0gIjEuNi4xNi40MTE3IgpAQCAtMjgsMTcgKzMwLDIzIEBAIFBWUkJVSUxEID0g
-InJlbGVhc2UiCiAKIFBBQ0tBR0VfU1RSSVAgPSAibm8iCiAKK2V4cG9ydCBTVVBQT1JUX1hPUkcK
-KwogVElfUExBVEZPUk1fb21hcDMgPSAib21hcDM2MzAiCiBUSV9QTEFURk9STV90aTgxNnggPSAi
-dGk4MXh4IgogCiBNT0RVTEVTTE9DQVRJT05fb21hcDMgPSAiZGNfb21hcGZiM19saW51eCIKIE1P
-RFVMRVNMT0NBVElPTl90aTgxNnggPSAiZGNfdGk4MXh4X2xpbnV4IgogCi1NQUtFX1RBUkdFVFMg
-PSAiIEJVSUxEPSR7UFZSQlVJTER9IFRJX1BMQVRGT1JNPSR7VElfUExBVEZPUk19IgorTUFLRV9U
-QVJHRVRTID0gIiBCVUlMRD0ke1BWUkJVSUxEfSBUSV9QTEFURk9STT0ke1RJX1BMQVRGT1JNfSBT
-VVBQT1JUX1hPUkc9JHtTVVBQT1JUX1hPUkd9IgogCiBkb19pbnN0YWxsKCkgewogCW1rZGlyIC1w
-ICR7RH0vbGliL21vZHVsZXMvJHtLRVJORUxfVkVSU0lPTn0va2VybmVsL2RyaXZlcnMvZ3B1L3B2
-cgogCWNwICR7U30vcHZyc3J2a20ua28gJHtEfS9saWIvbW9kdWxlcy8ke0tFUk5FTF9WRVJTSU9O
-fS9rZXJuZWwvZHJpdmVycy9ncHUvcHZyCi0JY3AgJHtTfS9zZXJ2aWNlczQvM3JkcGFydHkvJHtN
-T0RVTEVTTE9DQVRJT059L29tYXBsZmIua28gICR7RH0vbGliL21vZHVsZXMvJHtLRVJORUxfVkVS
-U0lPTn0va2VybmVsL2RyaXZlcnMvZ3B1L3B2cgorCWlmIFsgIiRTVVBQT1JUX1hPUkciID0gIjEi
-IF07IHRoZW4KKyAJCWNwICR7U30vc2VydmljZXM0LzNyZHBhcnR5L2xpbnV4X2RybS9kcm0ua28g
-JHtEfS9saWIvbW9kdWxlcy8ke0tFUk5FTF9WRVJTSU9OfS9rZXJuZWwvZHJpdmVycy9ncHUvcHZy
-CisJZWxzZQorCQljcCAke1N9L3NlcnZpY2VzNC8zcmRwYXJ0eS8ke01PRFVMRVNMT0NBVElPTn0v
-b21hcGxmYi5rbyAgJHtEfS9saWIvbW9kdWxlcy8ke0tFUk5FTF9WRVJTSU9OfS9rZXJuZWwvZHJp
-dmVycy9ncHUvcHZyCisJZmkKIAljcCAke1N9L3NlcnZpY2VzNC8zcmRwYXJ0eS9idWZmZXJjbGFz
-c190aS9idWZmZXJjbGFzc190aS5rbyAke0R9L2xpYi9tb2R1bGVzLyR7S0VSTkVMX1ZFUlNJT059
-L2tlcm5lbC9kcml2ZXJzL2dwdS9wdnIKIH0KZGlmZiAtLWdpdCBhL3JlY2lwZXMvcG93ZXJ2ci1k
-cml2ZXJzL3Bvd2VydnIuaW5jIGIvcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvcG93ZXJ2ci5pbmMK
-bmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uNmNiZjE3YwotLS0gL2Rldi9udWxs
-CisrKyBiL3JlY2lwZXMvcG93ZXJ2ci1kcml2ZXJzL3Bvd2VydnIuaW5jCkBAIC0wLDAgKzEsMiBA
-QAorIyBTZXQgdG8gMSBpZiBYb3JnIERSSSBkcml2ZXIgc3VwcG9ydCBpcyByZXF1aXJlZAorU1VQ
-UE9SVF9YT1JHID89IDAKLS0gCjEuNy4xCgo=
+> diff --git a/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb
+> b/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb new file mode
+> 100644 index 0000000..c5062c1 --- /dev/null +++
+> b/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb @@ -0,0 +1,29 @@ 
+> +BINLOCATION_omap3  = "${S}/gfx_rel_es3.x" +BINLOCATION_ti816x =
+> "${S}/gfx_rel_es6.x" + +ES2LOCATION = "${S}/gfx_rel_es2.x" +ES3LOCATION =
+> "${S}/gfx_rel_es3.x" +ES5LOCATION = "${S}/gfx_rel_es5.x" +ES6LOCATION =
+> "${S}/gfx_rel_es6.x"
 
---_004_5A47E75E594F054BAF48C5E4FC4B92AB038595A143dbde02enttico_--
+Since the above is being repeated in each recipe, shouldn't it move to the .inc?
+
+> --- /dev/null +++
+> b/recipes/powervr-drivers/omap3-sgx-modules_1.6.16.4117.bb
+
+> +MACHINE_KERNEL_PR_append = "i"
+
+Start at 'a' please, or remove it
+
+> +TI_PLATFORM_omap3 = "omap3630" +TI_PLATFORM_ti816x = "ti81xx" + 
+> +MODULESLOCATION_omap3 = "dc_omapfb3_linux" +MODULESLOCATION_ti816x =
+> "dc_ti81xx_linux"
+
+Move to .inc?
+
+> From 59227811f6d4364cb8cf254f527efd233bd10827 Mon Sep 17 00:00:00 2001 
+> From: Prathap M S <msprathap@ti.com> Date: Tue, 11 Oct 2011 10:58:34
+> +0530 Subject: [PATCH 2/2] Fix for library linking isssue with graphics
+> SDK
+
+please format the summary according to the commit guidelines
+
+> Signed-off-by: Prathap M S <msprathap@ti.com>
+> 
+> --- recipes/powervr-drivers/libgles-omap3.inc |    9 ++++++++- 1 files
+> changed, 8 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/powervr-drivers/libgles-omap3.inc
+> b/recipes/powervr-drivers/libgles-omap3.inc index 36c311d..e605681
+> 100644 --- a/recipes/powervr-drivers/libgles-omap3.inc +++
+> b/recipes/powervr-drivers/libgles-omap3.inc @@ -1,7 +1,7 @@ DESCRIPTION =
+> "libGLES for the omap3" LICENSE = "proprietary-binary"
+> 
+> -PR = "r15" +PR = "r16"
+> 
+> COMPATIBLE_MACHINE = "(omap3|ti816x)"
+> 
+> @@ -35,6 +35,13 @@ do_configure() { for i in $(find ${S} -name "*.h")
+> $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do chmod 0644 $i 
+> done + +	for drifile in $(find ${S} -name "libsrv_um_dri.so"); do +
+> if [ "$drifile" != "" ] ; then +                        dir=$(dirname
+> ${drifile}) +                        rm -rf ${dir}/libsrv_um_dri.so +
+> fi +	done
+
+What does this try to fix exactly?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOlWk8MkyGM64RGpERAl2qAJsFjMZDHiIY14FPRsWrqg+bIkQAZwCeJqTJ
+NHO0BQ5XeErYUttBY44hqGM=
+=lbJ/
+-----END PGP SIGNATURE-----
+
+
+
