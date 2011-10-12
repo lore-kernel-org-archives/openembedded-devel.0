@@ -1,30 +1,29 @@
 Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RDoBP-0001No-23
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 04:04:35 +0200
-Received: by qadc1 with SMTP id c1so198962qad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2011 18:58:52 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1RDoDc-0001TK-2w; Wed, 12 Oct 2011 04:06:52 +0200
+Received: by qadc1 with SMTP id c1so200251qad.6
+	for <multiple recipients>; Tue, 11 Oct 2011 19:01:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=lnM8Jaf4YsnRxmZqq0IsaOaRLVlKCFnN+87Cf6uXPlU=;
-	b=wCfFUFzxazxt7v2vkBfbO8HrnPH87bqRHC9Vc/EDXtFvuLbnrAmSJNcy1l45HRjfwv
-	21ddsDNg9PYzPOh3UqthVL16GGqMOjocaSXRzMmK8nAYbqRhuQ8OpAT0/DNuNxleeAeA
-	GNLPQYA8YZJwFkQS2zxdEdhGUgHZhiPZuNI1Y=
-Received: by 10.68.16.166 with SMTP id h6mr49651816pbd.103.1318384731957;
-	Tue, 11 Oct 2011 18:58:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id v8sm2018944pbf.8.2011.10.11.18.58.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Oct 2011 18:58:51 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=xoKFPnh1MxzOriGAXxv1ZvWalNiVfXbrwnKz0uvK//s=;
+	b=Dz8wAb7Z2k5RaxkUjG2O+hpdJsRV+yO+jHEFCp26jw7L0Psr8EfD7PqtxI8UuJH25e
+	JPOznwkb4F+75Ehb2LQpIoth7Di2Juk79skPsgWihaeSBETJuq7jA00zrcSxpcesyA0E
+	jiVTgBSygQnSw2MY0DPHtLwTkN9busIpaSElA=
+Received: by 10.68.208.229 with SMTP id mh5mr50053956pbc.124.1318384869104;
+	Tue, 11 Oct 2011 19:01:09 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.49.129 with HTTP; Tue, 11 Oct 2011 19:00:39 -0700 (PDT)
+In-Reply-To: <201110120110.38951.schnitzeltony@gmx.de>
+References: <201110120110.38951.schnitzeltony@gmx.de>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Oct 2011 18:58:42 -0700
-Message-Id: <1318384722-17530-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-openmoko][PATCH] mesa-dri: Move mesa-dri_7.11.bbappend -> mesa-dri_7.10.2.bbappend
+Date: Tue, 11 Oct 2011 19:00:39 -0700
+Message-ID: <CAMKF1srfiOy0k2714bkmkfSnvgQ=UGg3CDWUYUEnV1OFXcVKxQ@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] oe parse fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 02:04:35 -0000
+X-List-Received-Date: Wed, 12 Oct 2011 02:06:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-dri_7.11.bbappend => mesa-dri_7.10.2.bbappend} |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-openmoko/recipes-graphics/mesa/{mesa-dri_7.11.bbappend => mesa-dri_7.10.2.bbappend} (100%)
+On Tue, Oct 11, 2011 at 4:10 PM, Andreas M=C3=BCller <schnitzeltony@gmx.de>=
+ wrote:
+> Angstrom environment / fresh pull / clean tmp dir -> error
+>
+> Pseudo is not present but is required, building this first before the mai=
+n build
+> NOTE: angstrom DOES NOT support libiconv because the eglibc provided icon=
+v library is used =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0| ETA: =C2=A000:00:34
+> NOTE: angstrom DOES NOT support libiconv because the eglibc provided icon=
+v library is used
+> NOTE: angstrom DOES NOT support gconf-dbus because gconf-dbus has been me=
+rged back into main GConf =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| ETA: =
+=C2=A000:00:34
+> NOTE: angstrom DOES NOT support gconf-dbus-native because gconf-dbus has =
+been merged back into main GConf
+> ERROR: Could not include required file recipes-graphics/xorg-xserver/xser=
+ver-xf86-dri-lite.inc######################################################=
+######## =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| ETA: =
+=C2=A000:00:09
+> ERROR: Command execution failed: Exited with 1
+>
 
-diff --git a/meta-openmoko/recipes-graphics/mesa/mesa-dri_7.11.bbappend b/meta-openmoko/recipes-graphics/mesa/mesa-dri_7.10.2.bbappend
-similarity index 100%
-rename from meta-openmoko/recipes-graphics/mesa/mesa-dri_7.11.bbappend
-rename to meta-openmoko/recipes-graphics/mesa/mesa-dri_7.10.2.bbappend
--- 
-1.7.5.4
+the recent xorg changes in oe-core needs to be adapted into layers. I
+have posted some patches, they may be wrong
+but they help in getting over the parse issues while using angstrom.
 
+> Andreas
+>
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
+>
 
 
