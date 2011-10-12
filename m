@@ -1,24 +1,34 @@
-Received: from slimlogic.co.uk ([89.16.172.20])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gg@slimlogic.co.uk>) id 1RDuSU-0007Jb-96
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 10:46:38 +0200
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by slimlogic.co.uk (Postfix) with ESMTPSA id 5FB0013001B
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDugQ-0007yq-9N for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 11:01:02 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDuas-0006O5-JX for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 10:55:18 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 10:55:18 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 09:40:56 +0100 (BST)
-Message-ID: <4E955297.4000100@slimlogic.co.uk>
-Date: Wed, 12 Oct 2011 09:40:55 +0100
-From: Graeme Gregory <gg@slimlogic.co.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	Wed, 12 Oct 2011 10:55:18 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>	<1318361177.3726.1.camel@mattotaupa>
-	<1318408026.3556.3.camel@mattotaupa>
-In-Reply-To: <1318408026.3556.3.camel@mattotaupa>
-Subject: Re: git server move
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 12 Oct 2011 10:55:06 +0200
+Message-ID: <j73kla$iem$1@dough.gmane.org>
+References: <201110120100.15523.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0) Gecko/20110922 Thunderbird/7.0
+In-Reply-To: <201110120100.15523.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-oe] home for pdf-viewers / meta-office?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,43 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 08:46:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Oct 2011 09:01:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 12/10/11 09:27, Paul Menzel wrote:
-> Dear OE folks,
->
->
-> Am Dienstag, den 11.10.2011, 21:26 +0200 schrieb Paul Menzel:
->
->> Am Dienstag, den 11.10.2011, 15:11 -0400 schrieb Cliff Brake:
->>> Hi, we are moving git.openembedded.org to a new server.
->> is there more information about the reasons? Is it just a new machine?
->> Where is it hosted now?
->>
->>> SSH access on the old server has been disabled.  git:// still works there.
->>>
->>> As soon as DNS propagates, SSH access will work with the new server.
->>>
->>> Let me know if you see any problems.
->>>
->>> SSH keys will likely change, so expect messages about that.
->> So what are the fingerprints of the new keys? ;-)
-> I hope the new fingerprint is the following.
->
-> ed:99:0d:c1:6e:6c:02:75:df:36:25:4d:62:39:b7:e5
->
-> Looking at what happened at<kernel.org>  I would have hoped to get an
-> earlier response. Or do I miss something here that the fingerprint is
-> not important?
->
->
-Depends if you care about server substitution attacks or man in the 
-middle attacks really :-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Graeme
+Op 12-10-11 01:00, Andreas Müller schreef:
+> I would like to have a pdf-viewer in my image. Since I can not find
+> evince & epdfview ( did I oversee something? ) I am looking for a suited
+> place for them: How about a new meta-office layer within meta-oe?
 
+I think evince can go into meta-gnome and epdfview into meta-efl
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOlVXqMkyGM64RGpERAvQoAKC6WzUfszjJYeHGxS5PfXhBeg5BbACfR7G1
+WMJH3yBe+cyqYy0D0JqIBmc=
+=al3M
+-----END PGP SIGNATURE-----
 
 
 
