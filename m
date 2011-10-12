@@ -1,36 +1,36 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msprathap@ti.com>) id 1RDwOj-0004VY-7a
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 12:50:53 +0200
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9CAj67l028855
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDwb4-0005Dn-48 for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 13:03:38 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RDwVV-0005nj-7T for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 12:57:53 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 12:57:53 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 05:45:09 -0500
-Received: from dbde71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9CAj6fH003671
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 16:15:06 +0530 (IST)
-Received: from dbde02.ent.ti.com ([172.24.170.145]) by dbde71.ent.ti.com
-	([172.24.170.149]) with mapi; Wed, 12 Oct 2011 16:15:06 +0530
-From: "Srinivas, Prathap" <msprathap@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Oct 2011 16:15:06 +0530
-Thread-Topic: [oe] Patches to add support for TI Linux Graphics SDK
-	release04.04.00.02
-Thread-Index: AcyIxU/u7cA2Qp7dR964/F+LGrR2/gAARzWwAAFPnhA=
-Message-ID: <5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
+	Wed, 12 Oct 2011 12:57:53 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 12 Oct 2011 12:57:40 +0200
+Message-ID: <j73rr4$5ar$1@dough.gmane.org>
 References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com>
-	<0C757E680E33864AB113392C7E83F910BE520F@GSX300A.mxchg.m.corp>
-In-Reply-To: <0C757E680E33864AB113392C7E83F910BE520F@GSX300A.mxchg.m.corp>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: Patches to add support for TI Linux Graphics SDK	release04.04.00.02
+	<j73pg0$knr$1@dough.gmane.org>
+	<5A47E75E594F054BAF48C5E4FC4B92AB038595A16D@dbde02.ent.ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0) Gecko/20110922 Thunderbird/7.0
+In-Reply-To: <5A47E75E594F054BAF48C5E4FC4B92AB038595A16D@dbde02.ent.ti.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: Patches to add support for TI Linux Graphics SDK release 04.04.00.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +44,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 10:50:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Oct 2011 11:03:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-This depends on 2.6.37 kernel.
-http://processors.wiki.ti.com/index.php/RN_4_04_00_02#Kernel.28Linux_PSP.29=
-_versions_used_for_validation
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thanks,
-Prathap.
+Op 12-10-11 12:42, Srinivas, Prathap schreef:
+> Thanks for the comments. Please find my responses inline.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Hauser, Wolfgang (exte=
-rnal)
-Sent: Wednesday, October 12, 2011 3:37 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Patches to add support for TI Linux Graphics SDK release0=
-4.04.00.02
 
-Hello,
+>> diff --git a/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb 
+>> b/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb new file mode 
+>> 100644 index 0000000..c5062c1 --- /dev/null +++ 
+>> b/recipes/powervr-drivers/libgles-omap3_4.04.00.02.bb @@ -0,0 +1,29 @@
+>>  +BINLOCATION_omap3  = "${S}/gfx_rel_es3.x" +BINLOCATION_ti816x = 
+>> "${S}/gfx_rel_es6.x" + +ES2LOCATION = "${S}/gfx_rel_es2.x" +ES3LOCATION
+>> = "${S}/gfx_rel_es3.x" +ES5LOCATION = "${S}/gfx_rel_es5.x" +ES6LOCATION
+>> = "${S}/gfx_rel_es6.x"
+> 
+> Since the above is being repeated in each recipe, shouldn't it move to
+> the .inc? - I am just following in the way of already existing recipes.
+> Existing recipes have this. If it still needs to be addressed, let me
+> know.
 
-on which kernel version depends this Graphics SDK ?=20
+It needs to be addressed, otherwise I wouldn't have mentioned it
 
-Regards
-Wolfgang
+> 
+>> --- /dev/null +++ 
+>> b/recipes/powervr-drivers/omap3-sgx-modules_1.6.16.4117.bb
+> 
+>> +MACHINE_KERNEL_PR_append = "i"
+> 
+> Start at 'a' please, or remove it - I am just following in the way of
+> already existing recipes. Existing recipes have this way only. If it
+> still needs to be addressed, let me know.
 
->Attached are the patches for adding TI Linux Graphics SDK 04.04.00.02
-Release support in OE. Please include these patches in the OE.
+It needs to be addressed, otherwise I wouldn't have mentioned it
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> +TI_PLATFORM_omap3 = "omap3630" +TI_PLATFORM_ti816x = "ti81xx" + 
+>> +MODULESLOCATION_omap3 = "dc_omapfb3_linux" +MODULESLOCATION_ti816x = 
+>> "dc_ti81xx_linux"
+> 
+> Move to .inc? - I am just following in the way of already existing
+> recipes. Existing recipes have this way only. If it still needs to be
+> addressed, let me know.
+
+It needs to be addressed, otherwise I wouldn't have mentioned it
+
+
+>> diff --git a/recipes/powervr-drivers/libgles-omap3.inc 
+>> b/recipes/powervr-drivers/libgles-omap3.inc index 36c311d..e605681 
+>> 100644 --- a/recipes/powervr-drivers/libgles-omap3.inc +++ 
+>> b/recipes/powervr-drivers/libgles-omap3.inc @@ -1,7 +1,7 @@ DESCRIPTION
+>> = "libGLES for the omap3" LICENSE = "proprietary-binary"
+> 
+>> -PR = "r15" +PR = "r16"
+> 
+>> COMPATIBLE_MACHINE = "(omap3|ti816x)"
+> 
+>> @@ -35,6 +35,13 @@ do_configure() { for i in $(find ${S} -name "*.h") 
+>> $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do chmod 0644 $i
+>>  done + +	for drifile in $(find ${S} -name "libsrv_um_dri.so"); do + if
+>> [ "$drifile" != "" ] ; then +                        dir=$(dirname 
+>> ${drifile}) +                        rm -rf ${dir}/libsrv_um_dri.so + 
+>> fi +	done
+> 
+> What does this try to fix exactly? - This fix is for the issue seen with
+> opkg install of libgles-omap3_4.04.00.02-r16.6_armv7a.ipk on target. With
+> Graphics SDK release 04.04.00.02, there are 2 versions of the library
+> libsrv_um.so - one is libsrv_um.so and other is libsrv_um_dri.so (For
+> Xorg driver). What we observed was in presence of libsrv_um_dri.so , the
+> links created under /usr/lib were all by default linking to
+> libsrv_um_dri.so only. Due to this demos used to fail. Now this fix makes
+> sure that only 1 appropriate version of the library libsrv_um.so is
+> present and hence links created will now be proper.
+=
+
+Please put that explanation in both the commit message and as a comment
+about the for loop so people won't say "I am just following in the way of
+already existing recipes" when this issues has been properly fixed.
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOlXKkMkyGM64RGpERAvROAKCCDqURb233i2eJ2mxdCNU2DoyhEACfXQmr
+jB2nZhTMFSiQY0LWiRxYedE=
+=1KC2
+-----END PGP SIGNATURE-----
+
 
 
