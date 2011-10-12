@@ -1,27 +1,33 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1RE18J-0004wS-J1; Wed, 12 Oct 2011 17:54:15 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 12 Oct 2011 08:48:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="62249814"
-Received: from unknown (HELO helios.localnet) ([10.252.120.213])
-	by orsmga001.jf.intel.com with ESMTP; 12 Oct 2011 08:48:30 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Oct 2011 16:48:29 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-11-generic-pae; KDE/4.6.5; i686; ; )
-References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
-	<CAMKF1srHT5uh5a=z=mt0kOpF2YO9YyKkEdkRK9ZT8=LaGY6JSA@mail.gmail.com>
-	<6C40DE44-FE7C-4C0A-AB7F-1B78CE95216F@dominion.thruhere.net>
-In-Reply-To: <6C40DE44-FE7C-4C0A-AB7F-1B78CE95216F@dominion.thruhere.net>
+	(envelope-from <kergoth@gmail.com>) id 1RE18T-0004xY-JQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 17:54:25 +0200
+Received: by wwf27 with SMTP id 27so205424wwf.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Oct 2011 08:48:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=GB+3cGaUBN7/NGrZ6DmusShVofMoBPKJK3VS8zmP2QI=;
+	b=frB/lsw7QC8+urLliNAU15Z0T21p9Ky955QCXxpgLm/Kr4sqbJvdTb1MBZhdoEMBrj
+	GyOiBC1PeaoIvuuoKDFRAtObaIpYadFtgY58k07dM894jo3YYySGCkKUm7zAXTeId6Xj
+	dmWXswRKOXI8lgGjQPDsbhS2qQHISBWiHDXkw=
+Received: by 10.216.230.83 with SMTP id i61mr27331weq.54.1318433376159; Wed,
+	12 Oct 2011 08:29:36 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201110121648.29478.paul.eggleton@linux.intel.com>
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] git server move
+Sender: kergoth@gmail.com
+Received: by 10.216.160.80 with HTTP; Wed, 12 Oct 2011 08:29:15 -0700 (PDT)
+In-Reply-To: <4E95893C.6050903@mlbassoc.com>
+References: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
+	<4E95893C.6050903@mlbassoc.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 12 Oct 2011 08:29:15 -0700
+X-Google-Sender-Auth: OXKK5DJRd75DpZ_Fkn3UWopEKyo
+Message-ID: <CABcZANmw3VnLfpD1X0nGy6d=3U72npvKYFoR_8g40eOaXfhBEQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Creating Rootfs images without packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 15:54:15 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Oct 2011 15:54:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 12 October 2011 16:18:37 Koen Kooi wrote:
-> Op 12 okt. 2011, om 17:16 heeft Khem Raj het volgende geschreven:
-> > On Wed, Oct 12, 2011 at 1:17 AM, Koen Kooi <koen@dominion.thruhere.net> 
-wrote:
-> >> -----BEGIN PGP SIGNED MESSAGE-----
-> >> Hash: SHA1
-> >> 
-> >> Op 11-10-11 21:11, Cliff Brake schreef:
-> >>> Hi, we are moving git.openembedded.org to a new server.
-> >>> 
-> >>> SSH access on the old server has been disabled.  git:// still works
-> >>> there.
-> >>> 
-> >>> As soon as DNS propagates, SSH access will work with the new server.
-> >>> 
-> >>> Let me know if you see any problems.
-> >> 
-> >> When will cgit be back up?
-> > 
-> > It should be up already. Do Ctrl+f5 in your browser on
-> > git.openembedded.org
-> 
-> Let me rephrase: when will it be working again? I still get "No
-> repositories found" when clicking on a repo.
+On Wed, Oct 12, 2011 at 5:34 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2011-10-12 06:22, mgundes wrote:
+>>
+>> =C2=A0 =C2=A0Hi,
+>>
+>> =C2=A0 =C2=A0I think one of the big issue with OE is build time. It does=
+ everything
+>> for you, so that it takes too much times. I want to minimize build time
+>> and
+>> realized that OE creates ipkgs for almost every package. If there is a w=
+ay
+>
+> Not true. =C2=A0Only the packages needed to complete your image will be b=
+uilt.
 
-I think you may find it's the "/cgit.cgi" part of the URL that's causing 
-problems. It used to work, now it doesn't - if you remove it then you get a 
-working interface.
-
-FWIW I'd be in favour of fixing it however; all of the links to cgit on my 
-layer index page are now broken for example.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+This isn't the case, of course. Only the *recipes* needed to complete
+your image will be built, but all of the packages for those recipes
+are constructed, whether they'll eventually be used or not. Of course,
+not saying that's a problem, just clarifying for mgundes.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
