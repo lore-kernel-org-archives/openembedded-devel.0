@@ -1,32 +1,29 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mgargela@gmail.com>) id 1RDyfE-0000Ta-1Y
+	(envelope-from <gary@mlbassoc.com>) id 1RDyq0-0000ly-2V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 15:16:04 +0200
-Received: by gyg8 with SMTP id 8so654735gyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 06:10:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=WJcXlQxNQunRT82k8rwEXmKLy24d6vd7W4mFFKS57HE=;
-	b=V+cHXeNkD379+pVX/BIlTFy8Bixd/UBnCeqd1PKkHhQYAymMq9SnXXqGup7EYRmbRB
-	yoF9Hc69JgpLc2YScnN0sbkWVBqkNWAWqp5mpS8jNvSJ055Ua+r3CiMi2T+38p2/ECO8
-	Jr07Tn9FYPdnB8iKo6n0xZ+MFLQqgjJe+A3Do=
+	Wed, 12 Oct 2011 15:27:12 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 690CA6AACAD; Wed, 12 Oct 2011 07:21:30 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 6A0B216601A9;
+	Wed, 12 Oct 2011 07:21:27 -0600 (MDT)
+Message-ID: <4E959457.8030908@mlbassoc.com>
+Date: Wed, 12 Oct 2011 07:21:27 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:7.0.1) Gecko/20110930 Thunderbird/7.0.1
 MIME-Version: 1.0
-Received: by 10.236.79.170 with SMTP id i30mr36082648yhe.94.1318425020728;
-	Wed, 12 Oct 2011 06:10:20 -0700 (PDT)
-Sender: mgargela@gmail.com
-Received: by 10.236.103.146 with HTTP; Wed, 12 Oct 2011 06:10:20 -0700 (PDT)
-In-Reply-To: <4E95893C.6050903@mlbassoc.com>
+To: mgundes <mgcse@hotmail.com>
 References: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
 	<4E95893C.6050903@mlbassoc.com>
-Date: Wed, 12 Oct 2011 16:10:20 +0300
-X-Google-Sender-Auth: dsBQKgVkYRxYgZj-8szNRE0D5z8
-Message-ID: <CAObi9r8Vm92XauJ1nh50qBC4uz9OyyfhYSUW0YMdRCsFdOmgbw@mail.gmail.com>
-From: mgundes <mgcse@hotmail.com>
-To: Gary Thomas <gary@mlbassoc.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAObi9r8Vm92XauJ1nh50qBC4uz9OyyfhYSUW0YMdRCsFdOmgbw@mail.gmail.com>
+In-Reply-To: <CAObi9r8Vm92XauJ1nh50qBC4uz9OyyfhYSUW0YMdRCsFdOmgbw@mail.gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Creating Rootfs images without packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,92 +39,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 13:16:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 12 Oct 2011 13:27:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 12, 2011 at 3:34 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-
-> On 2011-10-12 06:22, mgundes wrote:
->
->>    Hi,
->>
->>    I think one of the big issue with OE is build time. It does everything
->> for you, so that it takes too much times. I want to minimize build time
->> and
->> realized that OE creates ipkgs for almost every package. If there is a way
->>
->
-> Not true.  Only the packages needed to complete your image will be built.
->
-> That said, there are some packages which are built (the first time only)
-> that
-> comprise the build environment and tool chain which takes a lot of time,
-> but
-> this is only the first time through.
->
-
-What image & target are you building for and what packages are built that
-> you
-> don't think needed to be built?
+On 2011-10-12 07:10, mgundes wrote:
 >
 >
+> On Wed, Oct 12, 2011 at 3:34 PM, Gary Thomas <gary@mlbassoc.com <mailto:gary@mlbassoc.com>> wrote:
 >
-     In my tmp/work directroy there are 868 ipk packages which was created
-by OE:
-
-$ find -iname *.ipk | wc -l
-868
-
-     I use arm based pc7302 chipset and vendor supplied machine and distro
-configuration. I use standard filesystem with packages like below in my
-rootfs image.
-
-IMAGE_INSTALL +=
-"base-files base-files-doc  base-passwd  busybox  bash  mtd-utils
-dropbear  ethtool  firmwareupdate  strace  oprofile  kernel-modules
-memview
-\
-
-  modutils-initscripts modutils pareadback picomon2 picoifapp picofuse ubootenv"
-
-     Of course every needed packages should be built and located into rootfs
-filesystem directory.
-
-     "ipk" and "deb" files are used to install target system, right? I mean
-If I don't need ipkgs as a developer, it would be nice if there is a way to
-prevent ipkg creation steps. As far as I know, OE creates ipk from built
-package's files and then use created ipks to create rootfs directory; then
-creates image from rootfs directory. I am asking that what about directly
-creating a rootfs directory and install built package files to rootfs after
-compilation in install tasks. By this way there is no need to create ipkgs?
-Am I right?
-
-
->  to prevent creation of ipkgs it would be really good for me. In my
->> opinion,
->> it would be fine for other people too since usually rootfs directory is
->> enough and ipkgs are not frequently used directly by developers.
->>
->>    I have asked in freenode oe room but friends said there no way to do
->> that
->> in OE system. If there is no way to do that in current OE, do you plan to
->> add as a feature?
->>
->>    Thanks,
->>
->> Regards
->>
->>
-> --
-> ------------------------------**------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------**------------------------------
+>     On 2011-10-12 06:22, mgundes wrote:
+>
+>             Hi,
+>
+>             I think one of the big issue with OE is build time. It does everything
+>         for you, so that it takes too much times. I want to minimize build time and
+>         realized that OE creates ipkgs for almost every package. If there is a way
 >
 >
+>     Not true.  Only the packages needed to complete your image will be built.
+>
+>     That said, there are some packages which are built (the first time only) that
+>     comprise the build environment and tool chain which takes a lot of time, but
+>     this is only the first time through.
+>
+>     What image & target are you building for and what packages are built that you
+>     don't think needed to be built?
+>
+>
+>
+>       In my tmp/work directroy there are 868 ipk packages which was created by OE:
+>
+> $ find -iname *.ipk | wc -l
+> 868
 
-Thanks,
-Regards,
+You'll find nearly 1/2 of those are support packages, e.g. XXX-dbg or XXX-dev, which are only
+used for development or debugging and not normally installed on your image.
+
+>
+>       I use arm based pc7302 chipset and vendor supplied machine and distro configuration. I use standard filesystem with packages like below in my rootfs image.
+>
+> IMAGE_INSTALL += "base-files base-files-doc  base-passwd  busybox  bash  mtd-utils  dropbear  ethtool  firmwareupdate  strace  oprofile  kernel-modules  memview \
+>                                  modutils-initscripts modutils pareadback picomon2 picoifapp picofuse ubootenv"
+>
+>       Of course every needed packages should be built and located into rootfs filesystem directory.
+>
+> "ipk" and "deb" files are used to install target system, right? I mean If I don't need ipkgs as a developer, it would be nice if there is a way to prevent ipkg creation steps. As
+> far as I know, OE creates ipk from built package's files and then use created ipks to create rootfs directory; then creates image from rootfs directory. I am asking that what about
+> directly creating a rootfs directory and install built package files to rootfs after compilation in install tasks. By this way there is no need to create ipkgs? Am I right?
+
+That's not the OE philosophy.  Using ipkg (or rpm) is a way of keeping the relevant files
+in a convenient, reusable, container.  These containers are then used to build the image.
+By having reusable containers, you can [re]use the same set to build multiple different images
+without having to rebuild the component pieces.  Also, the working directories used to
+build the packages can be purged after the package containers have been created.
+
+>
+>         to prevent creation of ipkgs it would be really good for me. In my opinion,
+>         it would be fine for other people too since usually rootfs directory is
+>         enough and ipkgs are not frequently used directly by developers.
+>
+>             I have asked in freenode oe room but friends said there no way to do that
+>         in OE system. If there is no way to do that in current OE, do you plan to
+>         add as a feature?
+
+
 -- 
-MahmutG
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
+
 
