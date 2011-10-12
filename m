@@ -1,32 +1,30 @@
-Received: from mail.eads.net ([80.156.45.113])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1RDxLv-0006LP-Qi for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 13:52:03 +0200
-Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p9CBkAx0013444
+	(envelope-from <mgargela@gmail.com>) id 1RDxv7-0007Jp-MI
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Oct 2011 14:28:25 +0200
+Received: by gyg8 with SMTP id 8so611411gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2011 13:46:11 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.132]) by
-	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 12 Oct 2011 13:46:21 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 12 Oct 2011 05:22:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=WpNScfsIKooW/SmB5F9x5nCZleobx6DQULTIV8dRcKk=;
+	b=Sie67z+035HNB/IcoVbLR8H4sR9WkjEXBRaYpqMhIa+DQl3viP0FQITJes1Q8i782M
+	LdXNGKCDuqw8xRijgvev+Vxo+sLX1P/PW29J5cKTpHFWuiE/UCCgG0bHG8cvKTvKvc8z
+	Rmk5cjBSIiTocrhSsO2AWGugYTTp3Xl07YGFM=
 MIME-Version: 1.0
-Date: Wed, 12 Oct 2011 13:46:20 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F910BE5210@GSX300A.mxchg.m.corp>
-In-Reply-To: <5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Patches to add support for TI Linux
-	GraphicsSDK	release04.04.00.02
-Thread-Index: AcyIxU/u7cA2Qp7dR964/F+LGrR2/gAARzWwAAFPnhAAAh10gA==
-References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com><0C757E680E33864AB113392C7E83F910BE520F@GSX300A.mxchg.m.corp>
-	<5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 12 Oct 2011 11:46:21.0715 (UTC)
-	FILETIME=[8FFE3E30:01CC88D4]
-Subject: Re: Patches to add support for TI Linux GraphicsSDK	release04.04.00.02
+Received: by 10.236.79.170 with SMTP id i30mr35837800yhe.94.1318422154715;
+	Wed, 12 Oct 2011 05:22:34 -0700 (PDT)
+Sender: mgargela@gmail.com
+Received: by 10.236.103.146 with HTTP; Wed, 12 Oct 2011 05:22:34 -0700 (PDT)
+Date: Wed, 12 Oct 2011 15:22:34 +0300
+X-Google-Sender-Auth: O7K56DmrSS0FGuh6NFjCldaCdPE
+Message-ID: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
+From: mgundes <mgcse@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Creating Rootfs images without packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 11:52:03 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Oct 2011 12:28:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+   Hi,
 
+   I think one of the big issue with OE is build time. It does everything
+for you, so that it takes too much times. I want to minimize build time and
+realized that OE creates ipkgs for almost every package. If there is a way
+to prevent creation of ipkgs it would be really good for me. In my opinion,
+it would be fine for other people too since usually rootfs directory is
+enough and ipkgs are not frequently used directly by developers.
 
->This depends on 2.6.37 kernel.
->http://processors.wiki.ti.com/index.php/RN_4_04_00_02#Kernel.28Linux_PS
-P.29_versions_used_for_validation
+   I have asked in freenode oe room but friends said there no way to do that
+in OE system. If there is no way to do that in current OE, do you plan to
+add as a feature?
 
-which OpenEmbedded (2011.03-maintenance) kernel recipe builds this
-kernel ?
+   Thanks,
 
 Regards
-Wolfgang
 
+-- 
+MahmutG
 
