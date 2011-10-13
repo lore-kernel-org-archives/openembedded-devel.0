@@ -1,25 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RE5vg-0005Mb-1d for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 23:01:32 +0200
-Received: from f053046227.adsl.alicedsl.de ([78.53.46.227]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RE5qH-0004DB-AA for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Oct 2011 20:55:57 +0000
-Message-ID: <1318452949.1055.11.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RE9II-0001b0-B9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Oct 2011 02:37:06 +0200
+Received: from iph3.telenor.se (iph3.telenor.se [195.54.127.134])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 2BBB9E9890
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Oct 2011 02:31:22 +0200 (CEST)
+X-SENDER-IP: [83.227.57.13]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AucgABgwlk5T4zkNPGdsb2JhbAAMN5lkjnYBAQEBN4IFAQEBAQMBAQE1NgoRCxgJFAIPCQMCAQIBFQEbFBMGAgEBiAK4XIdYBJFbghqRVg
+X-IronPort-AV: E=Sophos;i="4.69,337,1315173600"; d="scan'208";a="130093154"
+Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.57.13])
+	by iph3.telenor.se with ESMTP; 13 Oct 2011 02:31:22 +0200
+Message-ID: <4E963159.6020304@telia.com>
+Date: Thu, 13 Oct 2011 02:31:21 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.23) Gecko/20110922 Thunderbird/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Oct 2011 22:55:49 +0200
-In-Reply-To: <CAOd_LFy94B+0ApZYLu3Q3FxNtME9gH-eAnRrGKt=Aa=NR-QFBQ@mail.gmail.com>
-References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
-	<1318361177.3726.1.camel@mattotaupa>
-	<CAOd_LFy94B+0ApZYLu3Q3FxNtME9gH-eAnRrGKt=Aa=NR-QFBQ@mail.gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: git server move: new server key fingerprints
+References: <4E936282.3030505@telia.com>
+	<20111010213559.GI3125@denix.org>	<4E938024.2090605@telia.com>
+	<4E953F31.6080002@telia.com> <4E95E479.7070802@gmail.com>
+In-Reply-To: <4E95E479.7070802@gmail.com>
+Subject: Re: psyco-dist not supported on 64 bit Linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +40,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2011 21:01:32 -0000
-X-Groupsio-MsgNum: 34708
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-Quj9tikSwApmAtQ1Iowm"
-
---=-Quj9tikSwApmAtQ1Iowm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Mittwoch, den 12.10.2011, 10:44 -0400 schrieb Cliff Brake:
-> On Tue, Oct 11, 2011 at 3:26 PM, Paul Menzel wrote:
-
-[=E2=80=A6]
-
-> > So what are the fingerprints of the new keys? ;-)
->=20
-> 1024 ad:8e:65:4e:dc:4c:d9:63:8f:67:b3:87:03:c9:a1:73 ssh_host_dsa_key.pub=
- (DSA)
-> 2048 ed:99:0d:c1:6e:6c:02:75:df:36:25:4d:62:39:b7:e5 ssh_host_rsa_key.pub=
- (RSA)
->=20
-> Let me know if you have any more questions.
-
-Thank you for doing the work and sharing the key. It is much
-appreciated.
-
-
-Thanks,
-
-Paul
-
---=-Quj9tikSwApmAtQ1Iowm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Thu, 13 Oct 2011 00:37:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+On 2011-10-12 21:03, Khem Raj wrote:
+> On 10/12/2011 12:18 AM, Ulf Samuelsson wrote:
+>> On 2011-10-11 01:30, Ulf Samuelsson wrote:
+>>> On 2011-10-10 23:35, Denys Dmytriyenko wrote:
+>>>> On Mon, Oct 10, 2011 at 11:24:18PM +0200, Ulf Samuelsson wrote:
+>>>>> psyco-dist will not run on a 64 bit linux.
+>>>>> The guys behind psyco-dist recommends the use of PyPy
+>>>>>
+>>>>> What is the recommendation for 64 bit linux?
+>>>>>
+>>>>> Just run without JIT?
+>>>>> Don't run on a 64 bit linux?
+>>>>> Anything else?
+>>>> Yes, not supporting 64-bit hosts is one of the known limitations of
+>>>> psyco.
+>>>> Being stuck with Python 2.6 is another limitation.
+>>>>
+>>>> But, latest bitbake appears to be quite fast even w/o using psyco
+>>>> these days.
+>>>> Especially with parallel parsing on multiple cores...
+>>>>
+>>>
+>>> OK, I will try without JIT then.
+>>>
+>> Now I have some results.
+>>
+>> Building a custom x11 image on a 32 bit Ubuntu 10.10/psyco-dist took 91
+>> minutes.
+>> Building the same image on a 64 bit Ubuntu 11.04 without psyco-dist took
+>> 109 minutes
+>> (The last machine was an i7-920 w 4 GB RAM)
+>> The first might be the same, alternatively it was a machine with 6 GB 
+>> RAM.
+>>
+>> = It takes 20% more time on a 64 bit O/S.
+>>
+>
+> are these on same hardware running once 32bit or and second time 64bit 
+> OS ?
+>>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iEYEABECAAYFAk6V/tUACgkQPX1aK2wOHVgJkQCfd+ZD6YyyMaD8wNapdWqu5Uy1
-F0IAnRRbyPbUzdhUpZvM4hx+yAkMECu/
-=iykf
------END PGP SIGNATURE-----
+I have two core i7 machines
+#1 Dell Studio XPS with a 2.67 GHz  920 + 4GB of RAM (2 channel)./Ubuntu 
+11.04/x64
+       The 109 minutes was measured on machine #1
 
---=-Quj9tikSwApmAtQ1Iowm--
+#2 Homebuilt with a 2.67 GHz  920 + 6 GB of RAM (tri-channel)/Ubuntu 
+10.04 x86
+      Gigabyte UD5 Motherboard
+      The   91 minutes was measured on machine #2.
+
+Both are using the same type of disk Western Digital Black 1 TB
+and have 1333 MHz memories.
+
+
+I tried Ubuntu 11.04 / x86 on machine #1 using an external e-SATA 
+Seagate disk
+some time ago. I do not have the exact figures, but It was within minutes
+of machine #2, so I think it is safe to assume that the extra time
+is there due to the lack of JIT compiling.
+
+End of this week, I hope to try on a 4.4 GHz (overclocked) Core-i7 
+2600k/Ubuntu 11.10/x64.
+Still only 1333 MHz memory unfortunately.
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
+
+
