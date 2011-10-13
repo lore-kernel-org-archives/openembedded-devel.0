@@ -1,30 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1REPzc-0006qv-Rt
+	(envelope-from <msprathap@ti.com>) id 1REQMS-0007KW-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Oct 2011 20:26:57 +0200
-Received: by gyc15 with SMTP id 15so318421gyc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2011 11:21:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=yhGcvHHJtTDB3uucAVKPUZ/+0fgBo+PLWQYwfNj+Xuw=;
-	b=MJSUkVKkzoLd2ygYdP5JLtHoYe1NiV1I5VS7dDSZyRfvc8+ueBSGcgLT1jDUr2B5fB
-	U+AQ2CquAECgYbF3zy+7PcUyHVGzLXCrUKusXlbrVhNnofUROnd56hqPTS5bAZwx7rOM
-	EqKPdA6b/ST5P/v6Si0Ck1BZeYITGckJGU7XY=
+	Thu, 13 Oct 2011 20:50:32 +0200
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9DIiXM2025697
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 13 Oct 2011 13:44:36 -0500
+Received: from dbde71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9DIiVHB011218;
+	Fri, 14 Oct 2011 00:14:32 +0530 (IST)
+Received: from dbde02.ent.ti.com ([172.24.170.145]) by dbde71.ent.ti.com
+	([172.24.170.149]) with mapi; Fri, 14 Oct 2011 00:14:32 +0530
+From: "Srinivas, Prathap" <msprathap@ti.com>
+To: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Oct 2011 00:14:29 +0530
+Thread-Topic: [oe] Patches to add support for TI Linux GraphicsSDK
+	release04.04.00.02
+Thread-Index: AcyIxU/u7cA2Qp7dR964/F+LGrR2/gAARzWwAAFPnhAAAh10gABA49wA
+Message-ID: <5A47E75E594F054BAF48C5E4FC4B92AB038595A738@dbde02.ent.ti.com>
+References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com><0C757E680E33864AB113392C7E83F910BE520F@GSX300A.mxchg.m.corp>
+	<5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
+	<0C757E680E33864AB113392C7E83F910BE521C@GSX300A.mxchg.m.corp>
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE521C@GSX300A.mxchg.m.corp>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.150.48.40 with SMTP id v40mr5663760ybv.98.1318530071398; Thu,
-	13 Oct 2011 11:21:11 -0700 (PDT)
-Received: by 10.151.112.10 with HTTP; Thu, 13 Oct 2011 11:21:11 -0700 (PDT)
-In-Reply-To: <20111013170423.GH26170@denix.org>
-References: <CAFu+nvHi=pWi-bX5NrTQAk_JVv04YTa=d60Rg7YVSvLv7FNsPg@mail.gmail.com>
-	<20111013170423.GH26170@denix.org>
-Date: Thu, 13 Oct 2011 14:21:11 -0400
-Message-ID: <CAFu+nvFi=ML98ncOtaHQU2OESoeNtZkFJZt-=gbPaVOnY0L7Bw@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [2011.03-maintenance] using sdk as external toolchain
+Subject: Re: Patches to add support for TI Linux GraphicsSDK	release04.04.00.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,41 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2011 18:26:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 13 Oct 2011 18:50:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 13, 2011 at 1:04 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Hi,
+The graphics SDK has been validated with 2.6.32 kernel in OE angstrom envir=
+onment.
+The graphics SDK is also validated in standalone environment as well. In st=
+andalone validation it has been validated with 2.6.37 kernel as mentioned i=
+n the release notes.
 
-> On Thu, Oct 13, 2011 at 11:22:05AM -0400, George C. Huntington, III wrote:
-> > I've built an sdk with oe on the 2011.03-maintenance branch, and I am now
-> > trying to set up a local.conf to use the sdk as an external toolchain and
-> I
-> > get problems building gtk+-native.  any ideas on where I should start
-> > debugging this?
->
-> gtk+-native should be built by the host toolchain, not the target one from
-> SDK - are you sure you are setting all the correct build variables
-> properly?
->
-I think I am setting the build variables properly, but I'm not quite sure
-where the correct place to look would be.
-I was hoping the manual or the wiki would have a "this is how you build an
-SDK" and "this is how you use the SDK you just built, as an external
-toolchain"
-I think I get how to build an SDK with the meta-sdk recipe, the other part
-is less clear.
-you can talk to me on irc, I use gchiii as my nickname there.
+Thanks,
+Prathap.
 
->
-> Moreover, it's hard to help you debug your issue, if you don't provide
-> details, such as your local.conf and the build logs...
->
-> --
-> Denys
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-----Original Message-----
+From: Hauser, Wolfgang (external) [mailto:Wolfgang.Hauser.external@cassidia=
+n.com]=20
+Sent: Thursday, October 13, 2011 9:12 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: AW: [oe] Patches to add support for TI Linux GraphicsSDK release04=
+.04.00.02
+
+Ping ?
+Hello,
+
+
+>This depends on 2.6.37 kernel.
+>http://processors.wiki.ti.com/index.php/RN_4_04_00_02#Kernel.28Linux_PS
+P.29_versions_used_for_validation
+
+which OpenEmbedded (2011.03-maintenance) kernel recipe builds this
+kernel ?
+
+Regards
+Wolfgang
+
 
