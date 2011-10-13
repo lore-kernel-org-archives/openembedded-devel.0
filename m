@@ -1,29 +1,29 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mgargela@gmail.com>) id 1REFib-0004Hw-0O
+	(envelope-from <mgargela@gmail.com>) id 1REFpy-0004Rz-LO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Oct 2011 09:28:41 +0200
-Received: by gyc15 with SMTP id 15so157193gyc.6
+	Thu, 13 Oct 2011 09:36:19 +0200
+Received: by ywf7 with SMTP id 7so875893ywf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2011 00:22:53 -0700 (PDT)
+	Thu, 13 Oct 2011 00:30:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=MU6a2ks/pR8UND7fLoMb76mVSfr37nwNeZNhp2bje4E=;
-	b=WA8Ylusjh+3v6koPT7mcjEfA2n+agNOu4Xuut13Xjd0VoRxW0dBt93LPOirPP4zsiW
-	/tXVnPs5YTCRDBfAi3pmRK7+TOKFj9NqBAUnJaJi9yDGyu6emP6/UxoXSLN0ZHmf77at
-	LVauZJkj6Ll2PaT2rQ6OsWv0x/VxUnWk8BU1o=
+	bh=TyTJMS6wiRUM8AL/DgNC6hhOPuGSbGgSqnFiL1MyyJI=;
+	b=MwtDrV6OrzuIEn6OuVzFhXmK5K1bjdTYQ8fvnPFYGfbpqqhJXXjYf1r3DFL0Wa8b5C
+	WWwiQf17lSNUorFVwAtBrL3aJoZb7DzRj/nCnHEdINkKiWqz9hOL0mandXAYBppLWrap
+	rXXcIydyTetdMMGP61ZMf9Rf0XXVZC9KGTQXM=
 MIME-Version: 1.0
-Received: by 10.236.182.233 with SMTP id o69mr3100905yhm.60.1318490572037;
-	Thu, 13 Oct 2011 00:22:52 -0700 (PDT)
+Received: by 10.236.153.195 with SMTP id f43mr1455707yhk.94.1318491034735;
+	Thu, 13 Oct 2011 00:30:34 -0700 (PDT)
 Sender: mgargela@gmail.com
-Received: by 10.236.103.146 with HTTP; Thu, 13 Oct 2011 00:22:52 -0700 (PDT)
-In-Reply-To: <4E9632B7.2010901@telia.com>
+Received: by 10.236.103.146 with HTTP; Thu, 13 Oct 2011 00:30:34 -0700 (PDT)
+In-Reply-To: <CADWjqk598H9nE+StShm26eyWYOU-=W3ko-Nkgw1CAuxpjtdDWw@mail.gmail.com>
 References: <CAObi9r9=55i4W686VfCv-TGSChsrewu7zSGUsPZC2PbA3x3zbQ@mail.gmail.com>
-	<4E9632B7.2010901@telia.com>
-Date: Thu, 13 Oct 2011 10:22:52 +0300
-X-Google-Sender-Auth: j7IL4E-ztQk6W1cOGSUW3UBBPrs
-Message-ID: <CAObi9r9qc5qwdph5QyvYw0t8+=b0+y7=W8rrfNXqLpr6djnDUQ@mail.gmail.com>
+	<CADWjqk598H9nE+StShm26eyWYOU-=W3ko-Nkgw1CAuxpjtdDWw@mail.gmail.com>
+Date: Thu, 13 Oct 2011 10:30:34 +0300
+X-Google-Sender-Auth: nlxyphkQz5ovwpNITahczFhaAoE
+Message-ID: <CAObi9r8Y5GdQXn8gOKxyOo_gk1g1x2TTmYsVSh5rrhci6nmdpA@mail.gmail.com>
 From: mgundes <mgcse@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
@@ -41,58 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2011 07:28:41 -0000
+X-List-Received-Date: Thu, 13 Oct 2011 07:36:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Oct 13, 2011 at 3:37 AM, Ulf Samuelsson <ulf_samuelsson@telia.com>wrote:
+On Wed, Oct 12, 2011 at 11:46 PM, dashesy <dashesy@gmail.com> wrote:
 
-> On 2011-10-12 14:22, mgundes wrote:
+> On Wed, Oct 12, 2011 at 6:22 AM, mgundes <mgcse@hotmail.com> wrote:
+> >   Hi,
+> >
+> >   I think one of the big issue with OE is build time. It does everything
+> > for you, so that it takes too much times. I want to minimize build time
+> and
+> > realized that OE creates ipkgs for almost every package. If there is a
+> way
+> > to prevent creation of ipkgs it would be really good for me. In my
+> opinion,
+> > it would be fine for other people too since usually rootfs directory is
+> > enough and ipkgs are not frequently used directly by developers.
+> >
+> Just as a suggestion:
+> 1- You can start with a bare minimum rootfs then run it under qemu, or
+> even on the board itself
+>    Then you can use opkg to download/upgrade from the repositories,
+> or remove what you do not need. I guess this is the fastest method.
+>    I am thinking of putting together a build environment based on
+> user-mode qemu and opkg.
+>    I use fedora's kickstart files to build my desktop rootfs. That
+> would be great to have a similar approach using qemu and opkg.
+>    Specially for most people they do not need to compile the packages
+> themselves and the repositories are enough, they only need to compile
+> a few packages of their own.
+> 2- You can only bitbake meta-toolchain to get a gcc with cross
+> compilation capability, then use that to build any package that you
+> want directly from sources without relying on OE.
+>    This is what I do myself right now, but you need to make sure the
+> dependencies are met.
 >
->>    Hi,
->>
->>    I think one of the big issue with OE is build time. It does everything
->> for you, so that it takes too much times. I want to minimize build time
->> and
->> realized that OE creates ipkgs for almost every package. If there is a way
->> to prevent creation of ipkgs it would be really good for me. In my
->> opinion,
->> it would be fine for other people too since usually rootfs directory is
->> enough and ipkgs are not frequently used directly by developers.
->>
->>    I have asked in freenode oe room but friends said there no way to do
->> that
->> in OE system. If there is no way to do that in current OE, do you plan to
->> add as a feature?
->>
->>    Thanks,
->>
->> Regards
->>
->>
-> Question: What do youj mean by long build time.
->                Building everything takes 1.5-2 hours.
->                Doing an incremental build is much less.
+> If the dependencies of packages are correct and to the bare minimum
+> required (which should becase or it should be filed as a bug), OE will
+> be a better approach, it takes care of dependencies for you.
+> The only problem I have is that OE is hugely customizable, and takes
+> time to learn all different tricks to get exactly what I want in my
+> rootfs.
+> I am learning OE, for me I try to follow the mailing lists to learn
+> non-out-dated information as the first thing I learned was to that
+> most wikis are way outdated :)
 >
-> When I started, my laptop would take 42 hours to complete the build
-> (Calculated, I gave up way before), but then I got a decent machine.
-> If you consider 1.5 hours for the first build long, then you still have a
-> problem
+> For example, is there a way not to compile any -dbg packages?
+> I intuitively guess I need to set "release" in my local.conf but there
+> is no easier way than trying it and check if -dbg packages are created
+> or not.
 >
->
-     If you can make it 30 minutes shorter, why wouldn't you try, it worths
-I think. I wondered and asked what can I do about it, that's it.
+
+    Thanks for suggestions dashesy, I am going to try to use external
+toolchain first. I think this will reduce much time if I achieve.
 
 
-> --
-> Best Regards
-> Ulf Samuelsson
 >
+> >   I have asked in freenode oe room but friends said there no way to do
+> that
+> > in OE system. If there is no way to do that in current OE, do you plan to
+> > add as a feature?
+> >
+> >   Thanks,
+> >
+> > Regards
+> >
+> > --
+> > MahmutG
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
 >
+> dashesy
 >
-> ______________________________**_________________
+> _______________________________________________
 > Openembedded-devel mailing list
-> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
-> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 >
 
