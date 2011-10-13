@@ -1,24 +1,25 @@
-Received: from slimlogic.co.uk ([89.16.172.20])
+Received: from vms173007pub.verizon.net ([206.46.173.7])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gg@slimlogic.co.uk>) id 1REPXC-0005kd-En
+	(envelope-from <denis@denix.org>) id 1REPjv-0006Ni-4f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Oct 2011 19:57:34 +0200
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by slimlogic.co.uk (Postfix) with ESMTPSA id 679EB13001B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2011 18:51:49 +0100 (BST)
-Message-ID: <4E972533.7020505@slimlogic.co.uk>
-Date: Thu, 13 Oct 2011 18:51:47 +0100
-From: Graeme Gregory <gg@slimlogic.co.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	Thu, 13 Oct 2011 20:10:43 +0200
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LT0002SOKRB40M4@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	13 Oct 2011 12:04:26 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6781E14AF5D; Thu,
+	13 Oct 2011 13:04:23 -0400 (EDT)
+Date: Thu, 13 Oct 2011 13:04:23 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4E954243.4040209@telia.com> <4E957C19.6080106@slimlogic.co.uk>
-	<20111013170644.GI26170@denix.org>
-In-Reply-To: <20111013170644.GI26170@denix.org>
-Subject: Re: Wiki write access disabled?
+Message-id: <20111013170423.GH26170@denix.org>
+References: <CAFu+nvHi=pWi-bX5NrTQAk_JVv04YTa=d60Rg7YVSvLv7FNsPg@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAFu+nvHi=pWi-bX5NrTQAk_JVv04YTa=d60Rg7YVSvLv7FNsPg@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [2011.03-maintenance] using sdk as external toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2011 17:57:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Oct 2011 18:10:43 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 13/10/11 18:06, Denys Dmytriyenko wrote:
-> On Wed, Oct 12, 2011 at 12:38:01PM +0100, Graeme Gregory wrote:
->> Did some experiments with FM on IRC, seems you need the approved flag to be
->> sat to edit wiki now.
->>
->> I don't know what the procedure is to set this flag. I have set it for
->> eFfeM now. I don't want to go ahead and add it for other users without a
->> nod from someone who knows more about the wiki than me.
-> So, how do we go about this limitation? Do we enable write access on a case by
-> case basis? Right now I believe there is only a handful of people allowed to
-> edit Wiki pages...
->
-I spoke to the Tom and OE members may talk to a wiki admin, pass a 
-turing test and get added to the approved group.
+On Thu, Oct 13, 2011 at 11:22:05AM -0400, George C. Huntington, III wrote:
+> I've built an sdk with oe on the 2011.03-maintenance branch, and I am now
+> trying to set up a local.conf to use the sdk as an external toolchain and I
+> get problems building gtk+-native.  any ideas on where I should start
+> debugging this?
 
-List of admins can be got here 
-http://www.openembedded.org/wiki/Special:ActiveUsers
+gtk+-native should be built by the host toolchain, not the target one from
+SDK - are you sure you are setting all the correct build variables properly?
 
-Graeme
+Moreover, it's hard to help you debug your issue, if you don't provide 
+details, such as your local.conf and the build logs...
 
+-- 
+Denys
 
 
