@@ -1,27 +1,31 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1RENCK-0002Wa-RH
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Oct 2011 17:27:53 +0200
-Received: by gyc15 with SMTP id 15so130166gyc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2011 08:22:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=aazDSxbfIOKrJgQrLGTL8tqACqzJDsR7EQjW6Iktr54=;
-	b=MftWin/NsQna0GOEpzOGmKHTSAT9b/DUBd96VoY/R/v8asLldsVIvjdt8ENYaZR7pE
-	PemjOJFlK2D2nl1zYp0OvtAIH3Kl0Mt8rScv8gvkpqhiBfSUmgwchjueEl+997pT6vAt
-	mT9XMFJ5F/EmJSqsF8gwXkfMLi62XSp2GiqQA=
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1RENV9-0002qe-2s for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Oct 2011 17:47:19 +0200
+Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id p9DFfcXl025768; 
+	Thu, 13 Oct 2011 17:41:39 +0200
+Received: from gsx300a.mxchg.m.corp ([10.43.212.132]) by
+	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 13 Oct 2011 17:41:35 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.150.48.40 with SMTP id v40mr4944221ybv.98.1318519325579; Thu,
-	13 Oct 2011 08:22:05 -0700 (PDT)
-Received: by 10.151.112.10 with HTTP; Thu, 13 Oct 2011 08:22:05 -0700 (PDT)
-Date: Thu, 13 Oct 2011 11:22:05 -0400
-Message-ID: <CAFu+nvHi=pWi-bX5NrTQAk_JVv04YTa=d60Rg7YVSvLv7FNsPg@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [2011.03-maintenance] using sdk as external toolchain
+Date: Thu, 13 Oct 2011 17:41:35 +0200
+Message-ID: <0C757E680E33864AB113392C7E83F910BE521C@GSX300A.mxchg.m.corp>
+In-Reply-To: <5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Patches to add support for TI Linux
+	GraphicsSDK	release04.04.00.02
+Thread-Index: AcyIxU/u7cA2Qp7dR964/F+LGrR2/gAARzWwAAFPnhAAAh10gA==
+References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com><0C757E680E33864AB113392C7E83F910BE520F@GSX300A.mxchg.m.corp>
+	<5A47E75E594F054BAF48C5E4FC4B92AB038595A171@dbde02.ent.ti.com>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 13 Oct 2011 15:41:35.0793 (UTC)
+	FILETIME=[970D6210:01CC89BE]
+Subject: Re: Patches to add support for TI Linux GraphicsSDK	release04.04.00.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,11 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2011 15:27:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 13 Oct 2011 15:47:19 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
 
-I've built an sdk with oe on the 2011.03-maintenance branch, and I am now
-trying to set up a local.conf to use the sdk as an external toolchain and I
-get problems building gtk+-native.  any ideas on where I should start
-debugging this?
+Ping ?
+Hello,
+
+
+>This depends on 2.6.37 kernel.
+>http://processors.wiki.ti.com/index.php/RN_4_04_00_02#Kernel.28Linux_PS
+P.29_versions_used_for_validation
+
+which OpenEmbedded (2011.03-maintenance) kernel recipe builds this
+kernel ?
+
+Regards
+Wolfgang
+
 
