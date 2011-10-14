@@ -1,43 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1REkCm-0001bw-5n for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 18:01:52 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1REk7F-0006d0-69 for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 17:56:09 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2011 17:56:09 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2011 17:56:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 14 Oct 2011 17:55:56 +0200
-Message-ID: <j79m2c$ft4$1@dough.gmane.org>
-References: <4E96E9FE.1060005@mlbassoc.com>
-	<CAMKF1sp9HPM8DzxTSuhUKY7-q4QuDPNkDQ2TAQPwoGkZ+Gu4eg@mail.gmail.com>
-	<4E974E38.5050807@mlbassoc.com>
-	<201110132258.27380.schnitzeltony@gmx.de>
-	<4E975444.3050507@mlbassoc.com>
-	<CA+T6QPkOQgFSmSsNaaeCOM5zNtzaNcCzgVaXr=t_5jj902w11Q@mail.gmail.com>
-	<CAMKF1srDzFzjkoWAs2k8wP45xskCuwhyLb_dCpiT2GMarC_s5w@mail.gmail.com>
-	<4E980D6D.7090307@mlbassoc.com>
-	<CAMKF1srhvhNhf5DAsGeuzWYvuhsExE_y92PjvSaQRoDixtMiDQ@mail.gmail.com>
-	<j79kqm$6qg$1@dough.gmane.org> <4E9858CF.2070902@mlbassoc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <4E9858CF.2070902@mlbassoc.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: Can't build libcgroup
+	(envelope-from <raj.khem@gmail.com>)
+	id 1REmVV-0005dK-K9; Fri, 14 Oct 2011 20:29:21 +0200
+Received: by pzk33 with SMTP id 33so1963865pzk.2
+	for <multiple recipients>; Fri, 14 Oct 2011 11:23:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=hqUOdQQD/EQJudmcjMdoEGnAYyR3B5A5qwvWTMoxSGY=;
+	b=oPFTYMhdDgPbCk950QaadRf/dCz4ff3Jvf/YzCUF59wNvl7+JWQyH963a8OMu43uAq
+	Z//HEOnRTlMxsJit/FnpbHcKboiHMret43G47qdA3Z+I7C9d3sC88Yl5HW5KQWsyvRho
+	qHO4Cw6SsOAm5uXuoqinJyTMVYy18T1svSJn8=
+Received: by 10.68.32.162 with SMTP id k2mr18147731pbi.132.1318616614140; Fri,
+	14 Oct 2011 11:23:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.48.230 with HTTP; Fri, 14 Oct 2011 11:23:03 -0700 (PDT)
+In-Reply-To: <201110121648.29478.paul.eggleton@linux.intel.com>
+References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
+	<CAMKF1srHT5uh5a=z=mt0kOpF2YO9YyKkEdkRK9ZT8=LaGY6JSA@mail.gmail.com>
+	<6C40DE44-FE7C-4C0A-AB7F-1B78CE95216F@dominion.thruhere.net>
+	<201110121648.29478.paul.eggleton@linux.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Oct 2011 11:23:03 -0700
+Message-ID: <CAMKF1srD_yEst84JpmvVPmKr3uB+F4+Jw+t35VcsV_cmV2WdLw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] git server move
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,48 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 16:01:52 -0000
+X-List-Received-Date: Fri, 14 Oct 2011 18:29:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Oct 12, 2011 at 8:48 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+>
+> I think you may find it's the "/cgit.cgi" part of the URL that's causing
+> problems. It used to work, now it doesn't - if you remove it then you get a
+> working interface.
+>
+> FWIW I'd be in favour of fixing it however; all of the links to cgit on my
+> layer index page are now broken for example.
+>
 
-Op 14-10-11 17:44, Gary Thomas schreef:
-> On 2011-10-14 09:34, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 14-10-11 17:28, Khem Raj schreef:
->>>> Indeed, I did a rebuild from scratch with BB_NUMBER_THREADS=1 and 
->>>> PARALLEL_MAKE="-j1" and it worked fine.  When I set both to 2 I had
->>>> failures, but of a different sort (openssl failed to build).
->>>> 
->>>> Seems to be some real gremlins in the parallel builds :-(
->>>> 
->>>> Odd that I've never seen this when building Poky (I _always_ use 
->>>> BB_NUMBER_THREADS=4 and PARALLEL_MAKE="-j4")
->>>> 
->>> 
->>> It could be that the runqueue of poky is constructed such that this 
->>> does not happen
->> 
->> RP suspects it's rm_work that is triggering all these bitbake bugs.
-> 
-> Could well be - I'm convinced that rm_work is *evil* - it caused me no 
-> end of woes in Poky, so I gave up on it.
+A bit of update on cgit.
+The url redirect of openembedded-commit malining list links is not
+working (thanks Tom Rini for his help)
+/cgit.cgi is also rewritten to point to correct link so existing links
+should work as usual. Please report any
+issues you find with the cgit interface to the mailing list.
 
-If someone wants to sponsor larger SSDs for all angstrom developers we might
-consider making rm_work opt-in :)
+Thanks for you patience and support
 
-More seriously, bitbake needs to get fixed to work properly with rm_work.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOmFuMMkyGM64RGpERAuikAKC2rXu0ekarJBbieRHPpye97NewSwCgoJZB
-Smyl3Mh+U9RmQjGevwIfcfs=
-=qJ0E
------END PGP SIGNATURE-----
-
+-Khem
 
 
