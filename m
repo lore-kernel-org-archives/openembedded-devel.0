@@ -1,26 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1REi2a-0004mF-O1
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch-fe.de>) id 1REiOU-0005oh-QO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 15:43:12 +0200
-Received: (qmail invoked by alias); 14 Oct 2011 13:37:27 -0000
-Received: from p5B0A29C7.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.41.199]
-	by mail.gmx.net (mp044) with SMTP; 14 Oct 2011 15:37:27 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19Fmsk5ItNFXiNe8NrV+uWqD94OpzVANo/TuQrwk6
-	OG/xrpyBk5A9lM
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Oct 2011 15:41:55 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <CAAQYJAuwL6f1eGGDsKh1Uf1CCfpjuLuFaCgX6LEeXt+pYHN1Pg@mail.gmail.com>
-In-Reply-To: <CAAQYJAuwL6f1eGGDsKh1Uf1CCfpjuLuFaCgX6LEeXt+pYHN1Pg@mail.gmail.com>
+	Fri, 14 Oct 2011 16:05:50 +0200
+Received: by bkat8 with SMTP id t8so2013758bka.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Oct 2011 07:00:05 -0700 (PDT)
+Received: by 10.204.145.28 with SMTP id b28mr6907610bkv.76.1318600805460;
+	Fri, 14 Oct 2011 07:00:05 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id u10sm8599753bkv.3.2011.10.14.07.00.04
+	(version=SSLv3 cipher=OTHER); Fri, 14 Oct 2011 07:00:04 -0700 (PDT)
+Message-ID: <4E984064.3010306@dresearch-fe.de>
+Date: Fri, 14 Oct 2011 16:00:04 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Message-Id: <201110141541.55957.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: Race during build of kernel firmwares ?
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.3.2
+Cc: Dirk Nilius <nilius@dresearch-fe.de>
+Subject: postinst problem: module vs. update-rc.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,57 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 13:43:12 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Oct 2011 14:05:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Friday, October 14, 2011 10:15:51 AM Andrea Adami wrote:
-> Hello,
-> 
-> building with 4 BB_THREADS and -j5 I repeatedly see this error during build
-> of linux-2.6.39.
-> 
-> MKDIR
-> /oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/cis/
-> make[1]: *** No rule to make target
-> `/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/./',
-> needed by
-> `/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/ti_3410.fw'.
-> Stop.
-> 
-> I'm using no-distro and following layers:
-> 
-> openembedded-core
-> meta-openembedded
-> meta-handheld
-> 
-> Note that I'm thus using kernel.bbclass from meta-oe and linux.inc from
-> meta-handheld.
-> 
-> I had to start bitbake core-image-minimal 5 or 6 time before the issue
-> vanished itself.
-> So, it could be a race or some missing dependency. I'll inspect the logs
-> later this evening.
-> 
-> Having recently read patches about firmwares in the ML, I'm wondering maybe
-> some recent commit broke the stuff...
-> 
-> Regards
-> 
-> Andrea
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-Had the same here in gumstix kernel which is based on linux-omap. AFAIK parallel install was enabled in oe-core few days ago. By adding
+We have a problem with a package that needs to install a kernel module and an initscript.
 
-PARALLEL_MAKEINST = ""
+The recipe contains
 
-it builds for me fine again
+  inherit module update-rc.d
 
-Andreas
+The generated postinst script is
 
+  #!/bin/sh
+  if [ -n "$D" ]; then
+        exit 1
+  else
+        depmod -a 2.6.24.7
+        update-modules || true
+  fi
+  if test "x$D" != "x"; then
+        OPT="-r $D"
+  else
+        OPT="-s"
+  fi
+  update-rc.d $OPT somescript start 90 S . stop 10 0 1 6 .
+
+The 'exit 1' leads to an error if $D contains a nonzero length string (what is the case in the OE image creation step at the build host) and suppresses the execution of the second (update-rc.d) part.
+
+Because of this error the postinst is run a second time when the target device boots the first time ("opkg-cl configure" from /etc/rcS.d/S40configure).
+
+The problem is that the update-rc.d execution (and therefor the creation of the new symlink into rcS.d) is done from within rcS itself. So the rcS.d/S90somescript will *not* be executed at this boot. :(
+
+We see two possible solutions.
+
+A) Don't use "inherit module update-rc.d" but write the pkg_postint ourselfs.
+
+B) Create two packages (one for the module, one for the initscript) with a runtime dependency.
+
+I don't like both of them. Any other ideas? Is it possible to force the order of postinst fragments (update-rc.d code before module code)?
+
+Regards,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
