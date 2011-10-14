@@ -1,26 +1,27 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1REaso-00046R-IX
+	(envelope-from <andrea.adami@gmail.com>) id 1REd1N-00083U-JF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 08:04:38 +0200
-Received: from gandalf.denix.org ([unknown] [71.191.138.237])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LT100CFRKLUBPZ1@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	14 Oct 2011 00:58:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8AF9D14AF5D; Fri,
-	14 Oct 2011 01:58:42 -0400 (EDT)
-Date: Fri, 14 Oct 2011 01:58:42 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 14 Oct 2011 10:21:37 +0200
+Received: by ggnq1 with SMTP id q1so857614ggn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Oct 2011 01:15:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=gjrnLHhdT7QrLq6lXMj+hVyyeSrNYkhLBbadtpxoOFo=;
+	b=L2fvcQkWQPIFmikNAFF3VqhWlamSf74QAkTH0ib21Swo0E8k7n2TOKvknIeKktJMoa
+	ti673UyTaWQGFYv5EnXG2TzKmtZgKp3ZT7QyffZHRtWyuGCH8nlGKGrWkLp26Z/ifvpL
+	z/+9ulaRTDdCmHLFnJIJK3+AwkK5jXPMMYUck=
+MIME-Version: 1.0
+Received: by 10.146.7.31 with SMTP id 31mr1497058yag.10.1318580152043; Fri, 14
+	Oct 2011 01:15:52 -0700 (PDT)
+Received: by 10.147.124.18 with HTTP; Fri, 14 Oct 2011 01:15:51 -0700 (PDT)
+Date: Fri, 14 Oct 2011 10:15:51 +0200
+Message-ID: <CAAQYJAuwL6f1eGGDsKh1Uf1CCfpjuLuFaCgX6LEeXt+pYHN1Pg@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20111014055842.GM26170@denix.org>
-References: <1318535732-16028-1-git-send-email-denis@denix.org>
-	<CAMKF1sqaW3169pRDurhA+G+fD86Et0BFvf_j4zZBt2_1oOwUKQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAMKF1sqaW3169pRDurhA+G+fD86Et0BFvf_j4zZBt2_1oOwUKQ@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [meta-oe][PATCH] ltp-ddt: import initial version 0.0.4	plus fixes
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Race during build of kernel firmwares ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,23 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 06:04:38 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 14 Oct 2011 08:21:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 13, 2011 at 05:10:24PM -0700, Khem Raj wrote:
-> On Thu, Oct 13, 2011 at 12:55 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > +
-> > +TARGET_CC_ARCH += "${LDFLAGS}"
-> > +
-> 
-> why is this needed ?
+Hello,
 
-In Classic OE it was used to pass global LDFLAGS with things like GNU_HASH and 
-optimizations down to the app's build command, so all the QA checks are in 
-balance :) Not sure if it's still needed with oe-core/meta-oe...
+building with 4 BB_THREADS and -j5 I repeatedly see this error during build
+of linux-2.6.39.
 
--- 
-Denys
+MKDIR
+/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/cis/
+make[1]: *** No rule to make target
+`/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/./',
+needed by
+`/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/ti_3410.fw'.
+Stop.
 
+I'm using no-distro and following layers:
+
+openembedded-core
+meta-openembedded
+meta-handheld
+
+Note that I'm thus using kernel.bbclass from meta-oe and linux.inc from
+meta-handheld.
+
+I had to start bitbake core-image-minimal 5 or 6 time before the issue
+vanished itself.
+So, it could be a race or some missing dependency. I'll inspect the logs
+later this evening.
+
+Having recently read patches about firmwares in the ML, I'm wondering maybe
+some recent commit broke the stuff...
+
+Regards
+
+Andrea
 
