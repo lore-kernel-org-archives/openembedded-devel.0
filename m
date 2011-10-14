@@ -1,33 +1,30 @@
 Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1REmVV-0005dK-K9; Fri, 14 Oct 2011 20:29:21 +0200
-Received: by pzk33 with SMTP id 33so1963865pzk.2
-	for <multiple recipients>; Fri, 14 Oct 2011 11:23:34 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1REoeK-0000F6-HD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Oct 2011 22:46:36 +0200
+Received: by pzk33 with SMTP id 33so2201641pzk.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Oct 2011 13:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=hqUOdQQD/EQJudmcjMdoEGnAYyR3B5A5qwvWTMoxSGY=;
-	b=oPFTYMhdDgPbCk950QaadRf/dCz4ff3Jvf/YzCUF59wNvl7+JWQyH963a8OMu43uAq
-	Z//HEOnRTlMxsJit/FnpbHcKboiHMret43G47qdA3Z+I7C9d3sC88Yl5HW5KQWsyvRho
-	qHO4Cw6SsOAm5uXuoqinJyTMVYy18T1svSJn8=
-Received: by 10.68.32.162 with SMTP id k2mr18147731pbi.132.1318616614140; Fri,
-	14 Oct 2011 11:23:34 -0700 (PDT)
+	:content-type; bh=PKrJLD0H870egyAzIORCQ8Psl3xXwqvg/Y15MGfb+DU=;
+	b=kkH0RLWxTLJe8RWfQaEpSU8rVh59ZVi4QhyH23NWBEObhdgo87k0bBi6XXm430YnLn
+	By5i6PRBCoQ8vItNqZGProH5mx8QXgOxG4bK1nvWAgoj6gz0vpANeGoeL+rKvPFvuWYr
+	oxjs8m03Uq1hcwilcw337tnsOLwdXf0WwWpn4=
+Received: by 10.68.74.4 with SMTP id p4mr19024490pbv.47.1318624850062; Fri, 14
+	Oct 2011 13:40:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Fri, 14 Oct 2011 11:23:03 -0700 (PDT)
-In-Reply-To: <201110121648.29478.paul.eggleton@linux.intel.com>
-References: <CAOd_LFzbT0j3wSjp+d3POcTUo9X9+aiYtax4d6tep3YXmTwb2g@mail.gmail.com>
-	<CAMKF1srHT5uh5a=z=mt0kOpF2YO9YyKkEdkRK9ZT8=LaGY6JSA@mail.gmail.com>
-	<6C40DE44-FE7C-4C0A-AB7F-1B78CE95216F@dominion.thruhere.net>
-	<201110121648.29478.paul.eggleton@linux.intel.com>
+Received: by 10.68.48.230 with HTTP; Fri, 14 Oct 2011 13:40:20 -0700 (PDT)
+In-Reply-To: <20111014055842.GM26170@denix.org>
+References: <1318535732-16028-1-git-send-email-denis@denix.org>
+	<CAMKF1sqaW3169pRDurhA+G+fD86Et0BFvf_j4zZBt2_1oOwUKQ@mail.gmail.com>
+	<20111014055842.GM26170@denix.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Oct 2011 11:23:03 -0700
-Message-ID: <CAMKF1srD_yEst84JpmvVPmKr3uB+F4+Jw+t35VcsV_cmV2WdLw@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] git server move
+Date: Fri, 14 Oct 2011 13:40:20 -0700
+Message-ID: <CAMKF1sqCJV8rV7-jB1-HVMbgT1U6zXdxxKVjzuJ+P0Azp8Rbtg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ltp-ddt: import initial version 0.0.4 plus fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,29 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 18:29:21 -0000
+X-List-Received-Date: Fri, 14 Oct 2011 20:46:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Oct 12, 2011 at 8:48 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
+On Thu, Oct 13, 2011 at 10:58 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Thu, Oct 13, 2011 at 05:10:24PM -0700, Khem Raj wrote:
+>> On Thu, Oct 13, 2011 at 12:55 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+>> > +
+>> > +TARGET_CC_ARCH += "${LDFLAGS}"
+>> > +
+>>
+>> why is this needed ?
 >
-> I think you may find it's the "/cgit.cgi" part of the URL that's causing
-> problems. It used to work, now it doesn't - if you remove it then you get a
-> working interface.
->
-> FWIW I'd be in favour of fixing it however; all of the links to cgit on my
-> layer index page are now broken for example.
+> In Classic OE it was used to pass global LDFLAGS with things like GNU_HASH and
+> optimizations down to the app's build command, so all the QA checks are in
+> balance :) Not sure if it's still needed with oe-core/meta-oe...
 >
 
-A bit of update on cgit.
-The url redirect of openembedded-commit malining list links is not
-working (thanks Tom Rini for his help)
-/cgit.cgi is also rewritten to point to correct link so existing links
-should work as usual. Please report any
-issues you find with the cgit interface to the mailing list.
-
-Thanks for you patience and support
-
--Khem
+It would be nice to test it if it still is needed.
+> --
+> Denys
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
