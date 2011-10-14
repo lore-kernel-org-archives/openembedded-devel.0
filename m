@@ -1,34 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1REiWR-0006JH-Gh
+	(envelope-from <raj.khem@gmail.com>) id 1REjmH-0000Pl-QG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 16:14:03 +0200
-Received: by bkat8 with SMTP id t8so2023419bka.6
+	Fri, 14 Oct 2011 17:34:29 +0200
+Received: by qadc1 with SMTP id c1so946894qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2011 07:08:18 -0700 (PDT)
+	Fri, 14 Oct 2011 08:28:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=y+YTwc2IF0C8XmQ8xjN0sldO9LJowDmcVA4bV4EKUCM=;
-	b=BMCU/aXl3xvLq+bNRYw0/nvfyyuKLJeIgOf57VZ/wWntdcnEvYGoqnPutmA3oGVu0D
-	oWd8e2DMxzg/Su9TeMZ+UPT/4h+0O2GU2vpt3IY/wHRYhsIvUbJ8DVAVkx8Aes0yw2Nm
-	riP9e20Ll+jF5S+ES613MfMU35KQPpYvj437Q=
-Received: by 10.204.135.72 with SMTP id m8mr6885832bkt.101.1318601298525;
-	Fri, 14 Oct 2011 07:08:18 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id rc12sm8591394bkb.10.2011.10.14.07.08.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 14 Oct 2011 07:08:17 -0700 (PDT)
-Date: Fri, 14 Oct 2011 16:08:10 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111014140810.GJ3542@jama.jama.net>
-References: <4E984064.3010306@dresearch-fe.de>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=ByBiamvfD743YK7pMYGp7vsLHUBKmfXtzKI4fOjrQQA=;
+	b=gIkPv0mCixnbucF7GvFJH0jSythLWLOpUMPRczP/uHDRt3wPrJcLU2FrKSia3YRQmq
+	jTpz2J03cVfsZfb2PEngIvc79iTdVKDz1eIDMzmeQ6Pwys0Kw8OXTUK8VMstvOZ/5+iB
+	AyVBwKfcqk1hZl+OvKbrxGnSj0+oNssbOc19E=
+Received: by 10.68.32.162 with SMTP id k2mr17326675pbi.132.1318606123667; Fri,
+	14 Oct 2011 08:28:43 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <4E984064.3010306@dresearch-fe.de>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Dirk Nilius <nilius@dresearch-fe.de>
-Subject: Re: postinst problem: module vs. update-rc.d
+Received: by 10.68.48.230 with HTTP; Fri, 14 Oct 2011 08:28:13 -0700 (PDT)
+In-Reply-To: <4E980D6D.7090307@mlbassoc.com>
+References: <4E96E9FE.1060005@mlbassoc.com>
+	<CAMKF1sp9HPM8DzxTSuhUKY7-q4QuDPNkDQ2TAQPwoGkZ+Gu4eg@mail.gmail.com>
+	<4E974E38.5050807@mlbassoc.com>
+	<201110132258.27380.schnitzeltony@gmx.de>
+	<4E975444.3050507@mlbassoc.com>
+	<CA+T6QPkOQgFSmSsNaaeCOM5zNtzaNcCzgVaXr=t_5jj902w11Q@mail.gmail.com>
+	<CAMKF1srDzFzjkoWAs2k8wP45xskCuwhyLb_dCpiT2GMarC_s5w@mail.gmail.com>
+	<4E980D6D.7090307@mlbassoc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Oct 2011 08:28:13 -0700
+Message-ID: <CAMKF1srhvhNhf5DAsGeuzWYvuhsExE_y92PjvSaQRoDixtMiDQ@mail.gmail.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Can't build libcgroup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,91 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 14:14:03 -0000
-X-Groupsio-MsgNum: 34752
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OX7PPUk8qMPP4++R"
-Content-Disposition: inline
-
---OX7PPUk8qMPP4++R
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Oct 2011 15:34:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 14, 2011 at 04:00:04PM +0200, Steffen Sledz wrote:
-> We have a problem with a package that needs to install a kernel module an=
-d an initscript.
->=20
-> The recipe contains
->=20
->   inherit module update-rc.d
->=20
-> The generated postinst script is
->=20
->   #!/bin/sh
->   if [ -n "$D" ]; then
->         exit 1
->   else
->         depmod -a 2.6.24.7
->         update-modules || true
->   fi
->   if test "x$D" !=3D "x"; then
->         OPT=3D"-r $D"
->   else
->         OPT=3D"-s"
->   fi
->   update-rc.d $OPT somescript start 90 S . stop 10 0 1 6 .
->=20
-> The 'exit 1' leads to an error if $D contains a nonzero length string (wh=
-at is the case in the OE image creation step at the build host) and suppres=
-ses the execution of the second (update-rc.d) part.
->=20
-> Because of this error the postinst is run a second time when the target d=
-evice boots the first time ("opkg-cl configure" from /etc/rcS.d/S40configur=
-e).
->=20
-> The problem is that the update-rc.d execution (and therefor the creation =
-of the new symlink into rcS.d) is done from within rcS itself. So the rcS.d=
-/S90somescript will *not* be executed at this boot. :(
->=20
-> We see two possible solutions.
->=20
-> A) Don't use "inherit module update-rc.d" but write the pkg_postint ourse=
-lfs.
->=20
-> B) Create two packages (one for the module, one for the initscript) with =
-a runtime dependency.
->=20
-> I don't like both of them. Any other ideas? Is it possible to force the o=
-rder of postinst fragments (update-rc.d code before module code)?
->=20
-> Regards,
-> Steffen
+> Indeed, I did a rebuild from scratch with BB_NUMBER_THREADS=3D1 and
+> PARALLEL_MAKE=3D"-j1" and it worked fine. =C2=A0When I set both to 2 I ha=
+d
+> failures, but of a different sort (openssl failed to build).
+>
+> Seems to be some real gremlins in the parallel builds :-(
+>
+> Odd that I've never seen this when building Poky (I _always_ use
+> BB_NUMBER_THREADS=3D4 and PARALLEL_MAKE=3D"-j4")
+>
 
-BTW: there is another problem with update-modules:
+It could be that the runqueue of poky is constructed such that this
+does not happen
+or it could be really a problem in gcc 4.5 packaging (which I doubt)
+you could select
+gcc 4.6 in angstrom and see if you still hit it. Since gcc 4.6 in
+angstrom is just bbappended
+on top of oe-core unlike gcc 4.5 which is completely hosted in meta-oe
 
-SHR root@gjama ~ $ opkg files syslog-ng | grep modules.conf
-/etc/modules.conf
-SHR root@gjama ~ $ update-modules
-Error: the current /etc/modules.conf is not automatically generated.
-Use "update-modules force" to force (re)generation.
 
-so if someone is using syslog-ng, than kernel-module-* or any "inherit
-module" package won't update ie autoloads properly..
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OX7PPUk8qMPP4++R
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk6YQkoACgkQN1Ujt2V2gByXvwCdGYxWqmeOibaEjEYPk3DV4LEa
-azcAn2QBDdLP4oGjSgzj2r2V2/FXE3iu
-=Cyld
------END PGP SIGNATURE-----
-
---OX7PPUk8qMPP4++R--
