@@ -1,31 +1,26 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1REgr5-00080s-5C
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1REi2a-0004mF-O1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Oct 2011 14:27:15 +0200
-Received: by mail-bw0-f47.google.com with SMTP id t8so1904372bka.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2011 05:21:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=/0JSkP3QY48NZeSZ2JArW0xcdMDQiTLiRdXIUxlt2ug=;
-	b=bHmQEJaZQR3OjHxEI3/JBe6xxg6HSRiHkKrQX5Orzyeww1GjDcyT+6KcpCbcG1Y7Pp
-	7BTsFNFrdsY93Tqu7ZDIwbj6g7DENYRmlb8q9jCm4paLLVC97eZPkclrL744f2z7Uz26
-	Of/G/ED/8wX2EeQYZeCmFFM4ygx3hw277dsvQ=
-Received: by 10.204.139.195 with SMTP id f3mr6700311bku.73.1318594892464;
-	Fri, 14 Oct 2011 05:21:32 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e14sm8297837bka.0.2011.10.14.05.21.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 14 Oct 2011 05:21:31 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 14 Oct 2011 15:43:12 +0200
+Received: (qmail invoked by alias); 14 Oct 2011 13:37:27 -0000
+Received: from p5B0A29C7.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.41.199]
+	by mail.gmx.net (mp044) with SMTP; 14 Oct 2011 15:37:27 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19Fmsk5ItNFXiNe8NrV+uWqD94OpzVANo/TuQrwk6
+	OG/xrpyBk5A9lM
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Oct 2011 14:21:01 +0200
-Message-Id: <1318594861-29087-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.7
-In-Reply-To: <1318594861-29087-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1318594861-29087-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 2/2] libgcrypt: rename .bbappend to apply to new 1.5.0 version
+Date: Fri, 14 Oct 2011 15:41:55 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <CAAQYJAuwL6f1eGGDsKh1Uf1CCfpjuLuFaCgX6LEeXt+pYHN1Pg@mail.gmail.com>
+In-Reply-To: <CAAQYJAuwL6f1eGGDsKh1Uf1CCfpjuLuFaCgX6LEeXt+pYHN1Pg@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201110141541.55957.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: Race during build of kernel firmwares ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,34 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2011 12:27:15 -0000
+X-List-Received-Date: Fri, 14 Oct 2011 13:43:12 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../libgcrypt/libgcrypt_1.4.6.bbappend             |    2 --
- .../libgcrypt/libgcrypt_1.5.0.bbappend             |    2 ++
- 2 files changed, 2 insertions(+), 2 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend
- create mode 100644 meta-oe/recipes-support/libgcrypt/libgcrypt_1.5.0.bbappend
+On Friday, October 14, 2011 10:15:51 AM Andrea Adami wrote:
+> Hello,
+> 
+> building with 4 BB_THREADS and -j5 I repeatedly see this error during build
+> of linux-2.6.39.
+> 
+> MKDIR
+> /oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/cis/
+> make[1]: *** No rule to make target
+> `/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/./',
+> needed by
+> `/oe/oe-core/build/tmp-eglibc/work/poodle-oe-linux-gnueabi/linux-2.6.39-r0/image/lib/firmware/ti_3410.fw'.
+> Stop.
+> 
+> I'm using no-distro and following layers:
+> 
+> openembedded-core
+> meta-openembedded
+> meta-handheld
+> 
+> Note that I'm thus using kernel.bbclass from meta-oe and linux.inc from
+> meta-handheld.
+> 
+> I had to start bitbake core-image-minimal 5 or 6 time before the issue
+> vanished itself.
+> So, it could be a race or some missing dependency. I'll inspect the logs
+> later this evening.
+> 
+> Having recently read patches about firmwares in the ML, I'm wondering maybe
+> some recent commit broke the stuff...
+> 
+> Regards
+> 
+> Andrea
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+Had the same here in gumstix kernel which is based on linux-omap. AFAIK parallel install was enabled in oe-core few days ago. By adding
 
-diff --git a/meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend b/meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend
-deleted file mode 100644
-index d9172b4..0000000
---- a/meta-oe/recipes-support/libgcrypt/libgcrypt_1.4.6.bbappend
-+++ /dev/null
-@@ -1,2 +0,0 @@
--BBCLASSEXTEND = "native"
--
-diff --git a/meta-oe/recipes-support/libgcrypt/libgcrypt_1.5.0.bbappend b/meta-oe/recipes-support/libgcrypt/libgcrypt_1.5.0.bbappend
-new file mode 100644
-index 0000000..d9172b4
---- /dev/null
-+++ b/meta-oe/recipes-support/libgcrypt/libgcrypt_1.5.0.bbappend
-@@ -0,0 +1,2 @@
-+BBCLASSEXTEND = "native"
-+
--- 
-1.7.7
+PARALLEL_MAKEINST = ""
+
+it builds for me fine again
+
+Andreas
 
 
 
