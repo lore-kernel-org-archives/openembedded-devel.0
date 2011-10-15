@@ -1,25 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RF5th-0005Hn-Nd
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Oct 2011 17:11:37 +0200
-Received: (qmail invoked by alias); 15 Oct 2011 15:05:51 -0000
-Received: from p4FDF1DFB.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.29.251]
-	by mail.gmx.net (mp047) with SMTP; 15 Oct 2011 17:05:51 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+sm5cKujisTzCIURHt/cTPeE4fzpwq1OYnuLvOqM
-	/hG7JRUEnm4rYb
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RF6Ez-0007Gr-Ma for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Oct 2011 17:33:37 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RF69P-00053O-7p for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Oct 2011 17:27:51 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Oct 2011 17:27:51 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Oct 2011 17:27:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Oct 2011 17:10:21 +0200
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 15 Oct 2011 17:27:36 +0200
+Message-ID: <j7c8p8$fp9$1@dough.gmane.org>
 References: <1318690583-15073-1-git-send-email-koen@dominion.thruhere.net>
-In-Reply-To: <1318690583-15073-1-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-Message-Id: <201110151710.21987.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
+	<201110151710.21987.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <201110151710.21987.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
 Subject: Re: [meta-xfce] xfce4-settings 4.8.2: change default icon theme to 'gnome'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,91 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Oct 2011 15:11:37 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 15 Oct 2011 15:33:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Saturday, October 15, 2011 04:56:23 PM Koen Kooi wrote:
-> 'task-xfce4-base' doesn't install the 'Rodent' theme leading to missing i=
-cons. With this patch all icons show up.
->=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  ...settingsd-use-gnome-as-default-icon-theme.patch |   29 ++++++++++++++=
-++++++
->  .../xfce4-settings/xfce4-settings_4.8.2.bb         |    6 +++-
->  2 files changed, 34 insertions(+), 1 deletions(-)
->  create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/=
-0001-xfsettingsd-use-gnome-as-default-icon-theme.patch
->=20
-> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/0001-xf=
-settingsd-use-gnome-as-default-icon-theme.patch b/meta-xfce/recipes-xfce/xf=
-ce4-settings/xfce4-settings/0001-xfsettingsd-use-gnome-as-default-icon-them=
-e.patch
-> new file mode 100644
-> index 0000000..d428848
-> --- /dev/null
-> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/0001-xfsetting=
-sd-use-gnome-as-default-icon-theme.patch
-> @@ -0,0 +1,29 @@
-> +From 576e7881bdc84390cc51210ee37e5bdd87a170fc Mon Sep 17 00:00:00 2001
-> +From: Koen Kooi <koen@dominion.thruhere.net>
-> +Date: Sat, 15 Oct 2011 16:43:09 +0200
-> +Subject: [PATCH] xfsettingsd: use 'gnome' as default icon theme
-> +
-> +Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> +---
-> +
-> +Upstream-status: unacceptable (config)
-> +
-> + xfsettingsd/xsettings.xml |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/xfsettingsd/xsettings.xml b/xfsettingsd/xsettings.xml
-> +index 049b4ed..d8c6a85 100644
-> +--- a/xfsettingsd/xsettings.xml
-> ++++ b/xfsettingsd/xsettings.xml
-> +@@ -3,7 +3,7 @@
-> + <channel name=3D"xsettings" version=3D"1.0">
-> +   <property name=3D"Net" type=3D"empty">
-> +     <property name=3D"ThemeName" type=3D"string" value=3D"Xfce"/>
-> +-    <property name=3D"IconThemeName" type=3D"string" value=3D"Rodent"/>
-> ++    <property name=3D"IconThemeName" type=3D"string" value=3D"gnome"/>
-> +   </property>
-> +   <property name=3D"Xft" type=3D"empty">
-> +     <property name=3D"DPI" type=3D"int" value=3D"-1"/>
-> +--=20
-> +1.6.6.1
-> +
-> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.b=
-b b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
-> index 7b31dae..258c238 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
-> @@ -4,9 +4,13 @@ LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
->  DEPENDS =3D "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi vir=
-tual/libx11 xrandr libnotify libxcursor libxklavier"
-> =20
-> -PR =3D "r0"
-> +PR =3D "r1"
-> =20
->  inherit xfce
-> =20
-> +SRC_URI +=3D "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.pa=
-tch"
-> +
->  SRC_URI[md5sum] =3D "a45420fea20f29265ab6785cb1d07377"
->  SRC_URI[sha256sum] =3D "3f79865a6a3817f3c868f2412cbf105e73e54810438f6203=
-5699ae5fd72c29d0"
-> +
-> +RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
->=20
-One further step to a system working 'out of the box' and saving me time se=
-tting up a new image - thanks!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Andreas M=FCller <schnitzeltony@gmx.de>
+Op 15-10-11 17:10, Andreas Müller schreef:
+> On Saturday, October 15, 2011 04:56:23 PM Koen Kooi wrote:
+>> 'task-xfce4-base' doesn't install the 'Rodent' theme leading to missing
+>> icons. With this patch all icons show up.
+>> 
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> ---
+
+[..]
+
+>> 
+> One further step to a system working 'out of the box' and saving me time
+> setting up a new image - thanks!
+
+AFAICS the only further tweak needed is to debug the xfwm4 crash we have
+been discussing off-list. I'm warming up strace to have a look when I get
+some time :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOmaZoMkyGM64RGpERAjlmAJ9F94kW/gVEB1crVoZZuu7mF0g42wCglYQK
+IUvy6R+OWaQ0+4zHmhwm3gw=
+=l/wZ
+-----END PGP SIGNATURE-----
+
 
 
