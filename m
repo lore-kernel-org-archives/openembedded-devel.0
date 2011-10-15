@@ -1,29 +1,24 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RF7Jo-0000Lq-DC
+	(envelope-from <koen@dominion.thruhere.net>) id 1RF7O7-0000Tk-K4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Oct 2011 18:42:40 +0200
-Received: by gyc15 with SMTP id 15so1896440gyc.6
+	Sat, 15 Oct 2011 18:47:07 +0200
+Received: by bkat8 with SMTP id t8so3456973bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Oct 2011 09:36:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=dqexY84nfYjKOY6B8g02lKwSx2U6ml0kK6ufggTtV1I=;
-	b=fk3uMMdkgWRd31wNEsydY6dv6egBDHkmeIhGYqpdtb/8Bplb4Q9jdEs1RiLUsz6mrn
-	HDhBSFwqFHIYNKNr3jGdUSjQR3zIn4VrG4p50u8xHSg9syS6ih8odl02yr2kq1kyTwfr
-	/u/I0tbdqSjBnD386eRkskDousx1py18ghBbg=
-Received: by 10.68.55.69 with SMTP id q5mr25141885pbp.81.1318696613114; Sat,
-	15 Oct 2011 09:36:53 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Sat, 15 Oct 2011 09:36:23 -0700 (PDT)
-In-Reply-To: <201110151108.47753.schnitzeltony@gmx.de>
-References: <201110151108.47753.schnitzeltony@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 15 Oct 2011 09:36:23 -0700
-Message-ID: <CAMKF1sokf2sQOfFdat-as-GrZXrOYQbzR6=n94Gxp3=3F_fgsg@mail.gmail.com>
+	Sat, 15 Oct 2011 09:41:21 -0700 (PDT)
+Received: by 10.223.62.15 with SMTP id v15mr11975282fah.22.1318696880778;
+	Sat, 15 Oct 2011 09:41:20 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id r6sm11332475fam.0.2011.10.15.09.41.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 15 Oct 2011 09:41:20 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Patchwork down?
+Date: Sat, 15 Oct 2011 18:41:12 +0200
+Message-Id: <1318696873-5478-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.6.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe 1/2] libdivecomputer: initial add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,17 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Oct 2011 16:42:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 15 Oct 2011 16:47:07 -0000
 
-On Sat, Oct 15, 2011 at 2:08 AM, Andreas M=C3=BCller <schnitzeltony@gmx.de>=
- wrote:
-> It get's more and more difficult to open patchwork - is it dying?
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../libdivecomputer/libdivecomputer_git.bb         |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
 
-Its supposed to be pretty much alive.
-It was some hitch on server.  Should be back to normal services now.
+diff --git a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+new file mode 100644
+index 0000000..ac609a9
+--- /dev/null
++++ b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Libdivecomputer is a cross-platform and open source library for communication with dive computers from various manufacturers."
++HOMEPAGE = "http://www.divesoftware.org/libdc/"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
++
++DEPENDS = "libusb1"
++
++inherit autotools pkgconfig
++
++PV = "0.0.0"
++SRCREV = "b7a6be15ca58cc8f89fbc8fa1a4c840e13d51092"
++SRC_URI = "git://libdivecomputer.git.sourceforge.net/gitroot/libdivecomputer/libdivecomputer"
++S = "${WORKDIR}/git"
++
++
+-- 
+1.6.6.1
 
--Khem
 
 
