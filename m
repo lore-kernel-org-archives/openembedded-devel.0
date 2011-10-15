@@ -1,34 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RF7Tb-0000hf-7g for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Oct 2011 18:52:47 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RF7Ny-0003wC-2J for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Oct 2011 18:46:58 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Oct 2011 18:46:58 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1RF886-0001dM-Ch
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Oct 2011 19:34:38 +0200
+Received: by pzk33 with SMTP id 33so4147493pzk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Oct 2011 18:46:58 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 15 Oct 2011 10:28:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=JkwIu5cX8bJgSgFcoEPRecLXLdn11qiiD+9ugaj+L3w=;
+	b=hroaDgOUUYHNCWZKvpY/ssB5+sYVErhor/AawIqhjKPn6wNZR83LjJYCyn9R1e3L81
+	5bwYe6fawVgBTg3A+/gbBhU2Z4OPoguIh50Cgr0Do475g05Uo6eNIewoYBhDPnPvi/Na
+	sTLC2kEmp04bn3CVGp16L0HfaYBMUequBRbDQ=
+Received: by 10.68.34.137 with SMTP id z9mr22548308pbi.76.1318699726244;
+	Sat, 15 Oct 2011 10:28:46 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id y4sm33445346pbe.4.2011.10.15.10.28.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 15 Oct 2011 10:28:45 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 15 Oct 2011 18:46:44 +0200
-Message-ID: <j7cddk$e0b$1@dough.gmane.org>
-References: <1318696873-5478-1-git-send-email-koen@dominion.thruhere.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <1318696873-5478-1-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-oe 1/2] libdivecomputer: initial add
+Date: Sat, 15 Oct 2011 10:28:32 -0700
+Message-Id: <1318699712-6518-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] binutils-cross: Sync with oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,49 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Oct 2011 16:52:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 15 Oct 2011 17:34:38 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Now we have own copy of binutils-cross in meta-oe
+we need to sync with oe-core periodically
 
-You might see these patches popping up some more, Khem and I are testing the
-git hooks for patchwork.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-devtools/binutils/binutils-cross.inc   |    4 ++++
+ .../recipes-devtools/binutils/binutils_2.20.1.bb   |    2 +-
+ 2 files changed, 5 insertions(+), 1 deletions(-)
 
-Op 15-10-11 18:41, Koen Kooi schreef:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> --- 
-> .../libdivecomputer/libdivecomputer_git.bb         |   16
-> ++++++++++++++++ 1 files changed, 16 insertions(+), 0 deletions(-) create
-> mode 100644
-> meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
-> 
-> diff --git
-> a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
-> b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb new
-> file mode 100644 index 0000000..ac609a9 --- /dev/null +++
-> b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb @@ -0,0
-> +1,16 @@ +DESCRIPTION = "Libdivecomputer is a cross-platform and open
-> source library for communication with dive computers from various
-> manufacturers." +HOMEPAGE = "http://www.divesoftware.org/libdc/" + 
-> +LICENSE = "LGPLv2.1" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=fbc093901857fcd118f065f900982c24" + +DEPENDS =
-> "libusb1" + +inherit autotools pkgconfig + +PV = "0.0.0" +SRCREV =
-> "b7a6be15ca58cc8f89fbc8fa1a4c840e13d51092" +SRC_URI =
-> "git://libdivecomputer.git.sourceforge.net/gitroot/libdivecomputer/libdivecomputer"
->
-> 
-+S = "${WORKDIR}/git"
-> + +
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOmbj0MkyGM64RGpERAqUaAJ9fV9XzntBnkW1PMPE6OTMGPd8bYACguiaD
-EejKJlRKrvkSFQ6CkDAedk8=
-=Je//
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-devtools/binutils/binutils-cross.inc b/meta-oe/recipes-devtools/binutils/binutils-cross.inc
+index 4b90972..595fb20 100644
+--- a/meta-oe/recipes-devtools/binutils/binutils-cross.inc
++++ b/meta-oe/recipes-devtools/binutils/binutils-cross.inc
+@@ -1,10 +1,14 @@
+ inherit cross
+ PROVIDES = "virtual/${TARGET_PREFIX}binutils"
+ 
++INHIBIT_DEFAULT_DEPS = "1"
++INHIBIT_AUTOTOOLS_DEPS = "1"
++
+ EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
+                 --program-prefix=${TARGET_PREFIX} \
+                 --disable-install-libbfd \
+                 --disable-werror \
++                --disable-nls \
+                 --enable-poison-system-directories"
+ 
+ do_install () {
+diff --git a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb b/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
+index ea61136..d0f889c 100644
+--- a/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
++++ b/meta-oe/recipes-devtools/binutils/binutils_2.20.1.bb
+@@ -1,6 +1,6 @@
+ require binutils.inc
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ LIC_FILES_CHKSUM="\
+     file://src-release;endline=17;md5=4830a9ef968f3b18dd5e9f2c00db2d35\
+-- 
+1.7.5.4
 
 
 
