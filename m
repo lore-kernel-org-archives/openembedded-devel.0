@@ -1,29 +1,23 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RFYU9-0005S4-03
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RFZRN-0006Tm-Ne
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Oct 2011 23:43:09 +0200
-Received: by ywm39 with SMTP id 39so242443ywm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=jfGsQtJrE+1Fhxbsm9NZP83y8yHkAlWrBhDdRd8rDao=;
-	b=wpkHzqW2V5ctZ/PXIhlDVfsJ03NziNxqHcLuNKN9ic+co2TSfBEW2ufnV9adqwy/6E
-	oHKlExhm3YZ8iQqFX+AfUophNYwLOPZhdzRXW9J2Xkw5xIEvCl2dQw22c2017KmfQMHf
-	nBZF0QZHA2wRldh9jJgY34X+ugBUBIEZ5+Bbk=
-MIME-Version: 1.0
-Received: by 10.236.165.102 with SMTP id d66mr23524256yhl.2.1318801040783;
-	Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
-Received: by 10.147.124.18 with HTTP; Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
-In-Reply-To: <20111015185155.DA982101FE@opal>
-References: <20111015185155.DA982101FE@opal>
-Date: Sun, 16 Oct 2011 23:37:20 +0200
-Message-ID: <CAAQYJAvm1mGo6sswMBPx+tgQfZapTqX4E1SXSsZKU25D-u1eDA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 17 Oct 2011 00:44:21 +0200
+Received: (qmail invoked by alias); 16 Oct 2011 22:38:32 -0000
+Received: from p5B0A1665.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.22.101]
+	by mail.gmx.net (mp066) with SMTP; 17 Oct 2011 00:38:32 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19fIFke5zdfsCFp45JWS6JyLM+4oJ8Wp6ahWDtoW5
+	vBZzGu2Vn8stAq
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [oe-commits] Khem Raj : binutils-cross: Sync with oe-core
+Date: Mon, 17 Oct 2011 00:43:06 +0200
+Message-Id: <1318804986-2262-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-efl][V2] epdfview: add initial recipe with version 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,41 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Oct 2011 21:43:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 16 Oct 2011 22:44:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Oct 15, 2011 at 8:51 PM, <git@git.openembedded.org> wrote:
+initial source taken from oe-classic epdfview_0.1.7.bb
+commit 44985d56bc556786812a0a02d6219afd31a7381d
 
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 92b02b7209e426a70cc5626e7bdbc82052e01ac5
-> URL:
-> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=92b02b7209e426a70cc5626e7bdbc82052e01ac5
->
-> Author: Khem Raj <raj.khem@gmail.com>
-> Date:   Sun Oct 16 01:28:32 2011 +0000
->
-> binutils-cross: Sync with oe-core
->
-> Now we have own copy of binutils-cross in meta-oe
->
+run tested on overo
 
-I can't unfortunately find the discussion which supposedly provided a valid
-reason for binutils-2.20 in meta-oe while binutils-2.21 is in oe-core.
-I'm against that kind of policy for meta-oe, particularly when it's about
-toolchain.
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-efl/recipes-efl/efl/epdfview_0.1.8.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
 
-we need to sync with oe-core periodically
->
-That's just one of the bad effects :/
+diff --git a/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
+new file mode 100644
+index 0000000..9598990
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "A lightweight PDF viewer based on gtk and poppler"
++HOMEPAGE = "http://www.emma-soft.com/projects/epdfview/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++SECTION = "x11/applications"
++DEPENDS = "gtk+ poppler"
++
++inherit autotools gettext
++
++SRC_URI = "http://www.emma-soft.com/projects/epdfview/chrome/site/releases/epdfview-${PV}.tar.bz2"
++SRC_URI[md5sum] = "e50285b01612169b2594fea375f53ae4"
++SRC_URI[sha256sum] = "948648ae7c9d7b3b408d738bd4f48d87375b1196cae1129d6b846a8de0f2f8f0"
+-- 
+1.7.4.4
 
 
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->
->
-my 2c
-
-Andrea
 
