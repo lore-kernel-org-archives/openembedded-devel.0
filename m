@@ -1,29 +1,29 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pespin.shar@gmail.com>) id 1RFYSA-0005M1-77
+	(envelope-from <andrea.adami@gmail.com>) id 1RFYU9-0005S4-03
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Oct 2011 23:41:06 +0200
-Received: by wyg19 with SMTP id 19so484315wyg.6
+	Sun, 16 Oct 2011 23:43:09 +0200
+Received: by ywm39 with SMTP id 39so242443ywm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Oct 2011 14:35:18 -0700 (PDT)
+	Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=D29du/4Trmqvz7vG9AN30LmS5oUXMc67/RcJIK2HBpg=;
-	b=O5jqdPx03Y1AWAfc9wZYVs93RbqGV1RpWvJM9YOHTOCpYPHJs1Nnmobbfr5RsefZ4U
-	Q06KraBdJNJfy+hmXCoPV5vm0Fz9etI3rbfUPF3+ZQY3q1EUB2pLXcjX9QZEuZaMIYl6
-	JmVbHUD6FOa4NI3CRtFFr7z+pcMKY43ktC8TM=
-Received: by 10.216.135.99 with SMTP id t77mr2813074wei.100.1318800918368;
-	Sun, 16 Oct 2011 14:35:18 -0700 (PDT)
-Received: from localhost.localdomain ([90.163.53.2])
-	by mx.google.com with ESMTPS id gd18sm3671142wbb.5.2011.10.16.14.35.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Oct 2011 14:35:17 -0700 (PDT)
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=jfGsQtJrE+1Fhxbsm9NZP83y8yHkAlWrBhDdRd8rDao=;
+	b=wpkHzqW2V5ctZ/PXIhlDVfsJ03NziNxqHcLuNKN9ic+co2TSfBEW2ufnV9adqwy/6E
+	oHKlExhm3YZ8iQqFX+AfUophNYwLOPZhdzRXW9J2Xkw5xIEvCl2dQw22c2017KmfQMHf
+	nBZF0QZHA2wRldh9jJgY34X+ugBUBIEZ5+Bbk=
+MIME-Version: 1.0
+Received: by 10.236.165.102 with SMTP id d66mr23524256yhl.2.1318801040783;
+	Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
+Received: by 10.147.124.18 with HTTP; Sun, 16 Oct 2011 14:37:20 -0700 (PDT)
+In-Reply-To: <20111015185155.DA982101FE@opal>
+References: <20111015185155.DA982101FE@opal>
+Date: Sun, 16 Oct 2011 23:37:20 +0200
+Message-ID: <CAAQYJAvm1mGo6sswMBPx+tgQfZapTqX4E1SXSsZKU25D-u1eDA@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Oct 2011 23:33:01 +0200
-Message-Id: <1318800781-21037-1-git-send-email-pespin.shar@gmail.com>
-X-Mailer: git-send-email 1.7.7
-Subject: [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe-commits] Khem Raj : binutils-cross: Sync with oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Oct 2011 21:41:06 -0000
+X-List-Received-Date: Sun, 16 Oct 2011 21:43:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Copied from oe-classic <http://git.openembedded.org/openembedded/commit/?id=63d3969b0f839fc4b7bf7fe836daec729d9d3c53>
-* Remove PE=1
-* Add LIC_FILES_CHKSUM
-* Builds fine using SHR distro
+On Sat, Oct 15, 2011 at 8:51 PM, <git@git.openembedded.org> wrote:
 
-Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
----
- .../lightmediascanner/lightmediascanner_0.4.4.bb   |   29 ++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 92b02b7209e426a70cc5626e7bdbc82052e01ac5
+> URL:
+> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=92b02b7209e426a70cc5626e7bdbc82052e01ac5
+>
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Sun Oct 16 01:28:32 2011 +0000
+>
+> binutils-cross: Sync with oe-core
+>
+> Now we have own copy of binutils-cross in meta-oe
+>
 
-diff --git a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-new file mode 100644
-index 0000000..cb35fb0
---- /dev/null
-+++ b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "Lightweight media scanner meant to be used in not-so-powerful devices"
-+AUTHOR = "ProFUSION"
-+HOMEPAGE = "http://lms.garage.maemo.org/"
-+SECTION = "libs/multimedia"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-+DEPENDS = "sqlite3 flac virtual/libiconv"
-+
-+PR = "r0"
-+
-+SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
-+"
-+SRC_URI[md5sum] = "f423376a70f8f321af69b12563b176fe"
-+SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e"
-+
-+S = "${WORKDIR}/release_${PV}"
-+
-+inherit autotools pkgconfig
-+
-+do_install_append() {
-+    install -d ${D}/${bindir}/
-+    install -m 755 ${S}/src/bin/.libs/test  ${D}/${bindir}/test-lms
-+}
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/test-lms"
-+
-+FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
--- 
-1.7.7
+I can't unfortunately find the discussion which supposedly provided a valid
+reason for binutils-2.20 in meta-oe while binutils-2.21 is in oe-core.
+I'm against that kind of policy for meta-oe, particularly when it's about
+toolchain.
+
+we need to sync with oe-core periodically
+>
+That's just one of the bad effects :/
 
 
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>
+>
+my 2c
+
+Andrea
 
