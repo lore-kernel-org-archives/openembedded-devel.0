@@ -1,23 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RFZRN-0006Tm-Ne
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <andrea.adami@gmail.com>) id 1RFZUr-0006Zw-DW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 00:44:21 +0200
-Received: (qmail invoked by alias); 16 Oct 2011 22:38:32 -0000
-Received: from p5B0A1665.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.22.101]
-	by mail.gmx.net (mp066) with SMTP; 17 Oct 2011 00:38:32 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19fIFke5zdfsCFp45JWS6JyLM+4oJ8Wp6ahWDtoW5
-	vBZzGu2Vn8stAq
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Oct 2011 00:43:06 +0200
-Message-Id: <1318804986-2262-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+	Mon, 17 Oct 2011 00:47:57 +0200
+Received: by gyc15 with SMTP id 15so2346966gyc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Oct 2011 15:42:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=cyRsuDlrBXJ8Qh5mbIp4LxTlp0TcQ6LIf/GsNWOklQ4=;
+	b=WcxLkLk2vJEswWBhm8qQp0wf2pMOX1rvONS+A+PLYePx4QikprAh/b9+qZiXNaTItP
+	8aqieFWb2d0wqrksPoz8AmOMNUvxiBUFDz/U8fX/HPQAY39ACvWAgZOI/lvRFjKeWtWl
+	PJgR9H3tE18/Inn5h+fhcu7Srgu5wW2m+Rw70=
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-efl][V2] epdfview: add initial recipe with version 0.1.8
+Received: by 10.236.76.38 with SMTP id a26mr23295223yhe.53.1318804928979; Sun,
+	16 Oct 2011 15:42:08 -0700 (PDT)
+Received: by 10.147.124.18 with HTTP; Sun, 16 Oct 2011 15:42:08 -0700 (PDT)
+Date: Mon, 17 Oct 2011 00:42:08 +0200
+Message-ID: <CAAQYJAt+o+Wcp1aSa5pxSd_FAHYVJv-ZYLfKLYUt6n+tdkjjQw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: xserver-common and x11-common conflicting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,41 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Oct 2011 22:44:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 16 Oct 2011 22:47:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-initial source taken from oe-classic epdfview_0.1.7.bb
-commit 44985d56bc556786812a0a02d6219afd31a7381d
+Hello,
 
-run tested on overo
+using oe-core and meta-oe my xserver settings are "touched" by two packages:
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- meta-efl/recipes-efl/efl/epdfview_0.1.8.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
+xserver-common: seems more complete, provides some xmodmaps (should be in
+BSP layers). Though it invocates fbset which is not in path.
+x11-common: needs maybe care but is using the formfactor settings from BSP
+so obviously is more modular
 
-diff --git a/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
-new file mode 100644
-index 0000000..9598990
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "A lightweight PDF viewer based on gtk and poppler"
-+HOMEPAGE = "http://www.emma-soft.com/projects/epdfview/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+SECTION = "x11/applications"
-+DEPENDS = "gtk+ poppler"
-+
-+inherit autotools gettext
-+
-+SRC_URI = "http://www.emma-soft.com/projects/epdfview/chrome/site/releases/epdfview-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "e50285b01612169b2594fea375f53ae4"
-+SRC_URI[sha256sum] = "948648ae7c9d7b3b408d738bd4f48d87375b1196cae1129d6b846a8de0f2f8f0"
--- 
-1.7.4.4
+I suppose once the merge is finished we'll have sane default settings.
+(atm the xserver-common is providing some extra cruft)
 
+Keep on the great unification work!
 
+Regards
+
+Andrea
+
+PS, I've noticed many modules are missing and have to be installed (extmod,
+dve, dri, ...)
 
