@@ -1,29 +1,16 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RFZmb-0007Br-Um
+	(envelope-from <andrea.adami@gmail.com>) id 1RFaCH-0007XZ-Ut
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 01:06:18 +0200
-Received: by ggnq1 with SMTP id q1so2362976ggn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Oct 2011 16:00:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=QIIGuu+2yvTzu10Fq2enw8ufTK4xfdTYbNro1+MvqZQ=;
-	b=ZkMqYDkQPP/O42kwxiYeUObr2oCT3NPxy4CqVE6QUsR/mZ8kHN64jolmAjI3nbYn6m
-	9/bSRZ8c8K1/OscxO4dJMdRt8u569sbZKcLmb9kn//dkBeWk5CmObyrRGicign0ovGZi
-	CajQyWIYcvRyMa37thAcgUxAgS7SYfCjT0MK8=
-MIME-Version: 1.0
-Received: by 10.236.76.38 with SMTP id a26mr23335445yhe.53.1318806029826; Sun,
-	16 Oct 2011 16:00:29 -0700 (PDT)
-Received: by 10.147.124.18 with HTTP; Sun, 16 Oct 2011 16:00:29 -0700 (PDT)
-In-Reply-To: <CAAQYJAt+o+Wcp1aSa5pxSd_FAHYVJv-ZYLfKLYUt6n+tdkjjQw@mail.gmail.com>
-References: <CAAQYJAt+o+Wcp1aSa5pxSd_FAHYVJv-ZYLfKLYUt6n+tdkjjQw@mail.gmail.com>
-Date: Mon, 17 Oct 2011 01:00:29 +0200
-Message-ID: <CAAQYJAvZy8Xw0Wnd9_4m82fgrF1kLxHyrxK_DpVjoVa22gMjag@mail.gmail.com>
+	Mon, 17 Oct 2011 01:32:50 +0200
+Received: from mizar.localdomain (82.60.186.164) by smtp208.alice.it
+	(8.5.124.08) id 4DE64DF10C5F6E82; Mon, 17 Oct 2011 01:27:02 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: xserver-common and x11-common conflicting
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 17 Oct 2011 01:26:49 +0200
+Message-Id: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld][PATCH 1/3] formfactor: initial commit of collie, poodle and tosa machconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,40 +24,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Oct 2011 23:06:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 16 Oct 2011 23:32:50 -0000
 
-On Mon, Oct 17, 2011 at 12:42 AM, Andrea Adami <andrea.adami@gmail.com>wrote:
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-bsp/formfactor/files/collie/machconfig |   15 +++++++++++++++
+ recipes-bsp/formfactor/files/poodle/machconfig |   15 +++++++++++++++
+ recipes-bsp/formfactor/files/tosa/machconfig   |   15 +++++++++++++++
+ 3 files changed, 45 insertions(+), 0 deletions(-)
+ create mode 100755 recipes-bsp/formfactor/files/collie/machconfig
+ create mode 100755 recipes-bsp/formfactor/files/poodle/machconfig
+ create mode 100755 recipes-bsp/formfactor/files/tosa/machconfig
 
-> Hello,
->
-> using oe-core and meta-oe my xserver settings are "touched" by two
-> packages:
->
-> xserver-common: seems more complete, provides some xmodmaps (should be in
-> BSP layers). Though it invocates fbset which is not in path.
-> x11-common: needs maybe care but is using the formfactor settings from BSP
-> so obviously is more modular
->
-> I suppose once the merge is finished we'll have sane default settings.
-> (atm the xserver-common is providing some extra cruft)
->
-> Keep on the great unification work!
->
-> Regards
->
-> Andrea
->
-> PS, I've noticed many modules are missing and have to be installed (extmod,
-> dve, dri, ...)
->
->
-fwiw the issues is originated by the xserver-nodm-init in meta-oe, which
-RDEPENDS_${PN} = "xserver-common (>= 1.30) xinit"
+diff --git a/recipes-bsp/formfactor/files/collie/machconfig b/recipes-bsp/formfactor/files/collie/machconfig
+new file mode 100755
+index 0000000..c5b1aca
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/collie/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
++ 
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=270
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=54
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=96
++DISPLAY_SUBPIXEL_ORDER=rgb
+diff --git a/recipes-bsp/formfactor/files/poodle/machconfig b/recipes-bsp/formfactor/files/poodle/machconfig
+new file mode 100755
+index 0000000..c5b1aca
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/poodle/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
++ 
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=270
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=54
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=96
++DISPLAY_SUBPIXEL_ORDER=rgb
+diff --git a/recipes-bsp/formfactor/files/tosa/machconfig b/recipes-bsp/formfactor/files/tosa/machconfig
+new file mode 100755
+index 0000000..a7cf68d
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/tosa/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
++ 
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=0
++DISPLAY_WIDTH_PIXELS=480
++DISPLAY_WIDTH_MM=61
++DISPLAY_HEIGHT_PIXELS=640
++DISPLAY_HEIGHT_MM=80
++DISPLAY_BPP=16
++#DISPLAY_DPI=200
++DISPLAY_DPI=150
++DISPLAY_SUBPIXEL_ORDER=rgb
+-- 
+1.7.3.4
 
-We should aim at having *one* single recipe...
 
-Regards
-
-Andrea
 
