@@ -1,34 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFgzy-0003tT-GK for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 08:48:34 +0200
+	id 1RFh77-0004EY-Uj for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Oct 2011 08:55:58 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFguL-0003TU-TR for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 08:42:45 +0200
+	id 1RFh1U-0005r7-LO for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Oct 2011 08:50:08 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 08:42:45 +0200
+	Mon, 17 Oct 2011 08:50:08 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 08:42:45 +0200
+	Mon, 17 Oct 2011 08:50:08 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Oct 2011 08:42:30 +0200
-Message-ID: <j7giom$e07$1@dough.gmane.org>
-References: <1318800781-21037-1-git-send-email-pespin.shar@gmail.com>
+Date: Mon, 17 Oct 2011 08:46:56 +0200
+Message-ID: <j7gj10$e07$2@dough.gmane.org>
+References: <1318809068-16742-1-git-send-email-schnitzeltony@gmx.de>
+	<1318809068-16742-2-git-send-email-schnitzeltony@gmx.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <1318800781-21037-1-git-send-email-pespin.shar@gmail.com>
+In-Reply-To: <1318809068-16742-2-git-send-email-schnitzeltony@gmx.de>
 X-Enigmail-Version: 1.3.2
-Subject: Re: [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+Subject: Re: [meta-gnome 2/2] nautilus: cleanup package directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 06:48:34 -0000
+X-List-Received-Date: Mon, 17 Oct 2011 06:55:58 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-[PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+Op 17-10-11 01:51, Andreas Müller schreef:
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
+> .../recipes-gnome/nautilus/nautilus_2.32.2.bb      |    3 +-- 1 files
+> changed, 1 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
+> b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb index
+> f34cbbe..e076ca1 100644 ---
+> a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb +++
+> b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb @@ -33,8 +33,7 @@
+> do_configure() { }
+> 
+> RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash glib-networking" 
+> -FILES_${PN} += "${datadir}/icons  /usr/libexec/ " -FILES_${PN}-dbg +=
+> "/usr/libexec/.debug" +FILES_${PN} += "${datadir}/icons"
 
-I know the difference is academic, but meta-oe or meta-efl?
+So nautilus stopped installing helpers in /usr/libexec?
 
-Op 16-10-11 23:33, Pau Espin Pedrol schreef:
-> * Copied from oe-classic
-> <http://git.openembedded.org/openembedded/commit/?id=63d3969b0f839fc4b7bf7fe836daec729d9d3c53>
->
-> 
-* Remove PE=1
-> * Add LIC_FILES_CHKSUM * Builds fine using SHR distro
-> 
-> Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com> --- 
-> .../lightmediascanner/lightmediascanner_0.4.4.bb   |   29
-> ++++++++++++++++++++ 1 files changed, 29 insertions(+), 0 deletions(-) 
-> create mode 100644
-> meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-> 
-> diff --git
-> a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-> b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
->
-> 
-new file mode 100644
-> index 0000000..cb35fb0 --- /dev/null +++
-> b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
->
-> 
-@@ -0,0 +1,29 @@
-> +DESCRIPTION = "Lightweight media scanner meant to be used in
-> not-so-powerful devices" +AUTHOR = "ProFUSION" +HOMEPAGE =
-> "http://lms.garage.maemo.org/" +SECTION = "libs/multimedia" +LICENSE =
-> "LGPLv2.1+" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343" +DEPENDS = "sqlite3
-> flac virtual/libiconv" + +PR = "r0" + +SRC_URI =
-> "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2
-> \ +" +SRC_URI[md5sum] = "f423376a70f8f321af69b12563b176fe" 
-> +SRC_URI[sha256sum] =
-> "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e" + +S =
-> "${WORKDIR}/release_${PV}" + +inherit autotools pkgconfig + 
-> +do_install_append() { +    install -d ${D}/${bindir}/ +    install -m
-> 755 ${S}/src/bin/.libs/test  ${D}/${bindir}/test-lms +} + +PACKAGES =+
-> "${PN}-test" + +FILES_${PN}-test = "${bindir}/test-lms" + 
-> +FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
+regards,
 
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOm85WMkyGM64RGpERApAnAJ9JtVK+0TfgAev2BW7aB0ACg/3DMwCgoDbv
-4r1P2NRHiDH3S6cA64cRP0w=
-=92no
+iD8DBQFOm89gMkyGM64RGpERAqvtAJ9AgQwxHX1QcHvGvgYRlIaQUImjMQCfYg5F
+q/yL8Vd5Edz7lVmNXYLcG7A=
+=PknH
 -----END PGP SIGNATURE-----
 
 
