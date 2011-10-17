@@ -1,37 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFoLo-0004M7-ON for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 16:39:37 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFoGB-0000Wn-Nj for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 16:33:47 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 16:33:47 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen@dominion.thruhere.net>) id 1RFr02-0003n9-Ui
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Oct 2011 19:29:19 +0200
+Received: by eyd9 with SMTP id 9so3120202eyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 16:33:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Mon, 17 Oct 2011 10:23:30 -0700 (PDT)
+Received: by 10.213.14.71 with SMTP id f7mr595574eba.137.1318872209250;
+	Mon, 17 Oct 2011 10:23:29 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id z58sm765322eea.3.2011.10.17.10.23.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 17 Oct 2011 10:23:28 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Oct 2011 16:33:33 +0200
-Message-ID: <j7hebu$i16$1@dough.gmane.org>
-References: <cover.1318856759.git.otavio@ossystems.com.br>
-	<914e717b651c0891badce01c1a6c5591457a2c1b.1318856759.git.otavio@ossystems.com.br>
-	<j7h9tt$ehl$1@dough.gmane.org>
-	<CAP9ODKooQOMs=ZCzR7on8SOzn+9VMkd=ATxU5uOD8MXoti15zw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <CAP9ODKooQOMs=ZCzR7on8SOzn+9VMkd=ATxU5uOD8MXoti15zw@mail.gmail.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-oe][PATCH 1/1] digitemp: add 3.6.0 version
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Oct 2011 19:23:19 +0200
+Message-Id: <1318872201-26433-2-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.6.1
+In-Reply-To: <1318872201-26433-1-git-send-email-koen@dominion.thruhere.net>
+References: <1318872201-26433-1-git-send-email-koen@dominion.thruhere.net>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-xfce 2/4] xfce-panel-plugin: bbclass for panel plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 14:39:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Oct 2011 17:29:19 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-xfce/classes/xfce-panel-plugin.bbclass |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/classes/xfce-panel-plugin.bbclass
 
-Op 17-10-11 16:13, Otavio Salvador schreef:
-> On Mon, Oct 17, 2011 at 11:17, Koen Kooi <koen@dominion.thruhere.net>
-> wrote: ...
-> 
-> I've done all those changes and updated my meta-oe repository in github.
-> If you can pull it I will be thankful. If required I can resend the patch
-> but don't seem to be worth it.
-
-Applied (well, cherry-picked), thanks!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOnDy9MkyGM64RGpERAnW4AKCxrkzcixCUO8TiE6MGRUdqkDrgXgCfS+8O
-ai5BkijDQEQRU2oX8+Je3rQ=
-=0CDl
------END PGP SIGNATURE-----
+diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
+new file mode 100644
+index 0000000..495d0b1
+--- /dev/null
++++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
+@@ -0,0 +1,10 @@
++inherit xfce
++
++DEPENDS += "libxfcegui4 libxfce4util xfce4-panel"
++
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
++
++FILES_${PN} += "${datadir}/xfce4/panel-plugins/"
++FILES_${PN}-dbg += "${libexecdir}/xfce4/panel-plugins/.debug"
++
++
+-- 
+1.6.6.1
 
 
 
