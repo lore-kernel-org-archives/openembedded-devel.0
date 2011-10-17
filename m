@@ -1,34 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFnAl-000706-NU for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 15:24:08 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFn50-0006zU-Rd for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 15:18:10 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 15:18:10 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RFo2Y-0002Zn-FY
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Oct 2011 16:19:42 +0200
+Received: by bkat8 with SMTP id t8so5819297bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 15:18:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Oct 2011 15:17:49 +0200
-Message-ID: <j7h9tt$ehl$1@dough.gmane.org>
+	Mon, 17 Oct 2011 07:13:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ga++Nwjam2hD9GRMVEDrrfOjBDb+aDjUfuP0+VqtTYQ=;
+	b=qSiToDFAki4eo8dBxJ9ATRQEQmAiOwfocPjVnGSn864YohmSzZ7sc2AZfxYsX2zv0x
+	Aqwc4EzM6ou52Gb3cQhHLYEk2ncWJryU8DtnxHMBABkQN9hLvkXQxt/OPOT43M6Nzd4f
+	raiAy/d9Bbm5TqpSAq8bPpSVkJa6vHcHdnN+E=
+MIME-Version: 1.0
+Received: by 10.204.7.138 with SMTP id d10mr9196826bkd.31.1318860831642; Mon,
+	17 Oct 2011 07:13:51 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.205.114.204 with HTTP; Mon, 17 Oct 2011 07:13:51 -0700 (PDT)
+In-Reply-To: <j7h9tt$ehl$1@dough.gmane.org>
 References: <cover.1318856759.git.otavio@ossystems.com.br>
 	<914e717b651c0891badce01c1a6c5591457a2c1b.1318856759.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <914e717b651c0891badce01c1a6c5591457a2c1b.1318856759.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3.2
+	<j7h9tt$ehl$1@dough.gmane.org>
+Date: Mon, 17 Oct 2011 12:13:51 -0200
+X-Google-Sender-Auth: jVVWH1I5Jxvcls1Xi6SVaNQ4DQk
+Message-ID: <CAP9ODKooQOMs=ZCzR7on8SOzn+9VMkd=ATxU5uOD8MXoti15zw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 1/1] digitemp: add 3.6.0 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,58 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 13:24:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Oct 2011 14:19:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Oct 17, 2011 at 11:17, Koen Kooi <koen@dominion.thruhere.net> wrote=
+:
+...
 
-Op 17-10-11 15:06, Otavio Salvador schreef:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> --- 
-> meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb |   16
-> ++++++++++++++++ 1 files changed, 16 insertions(+), 0 deletions(-) create
-> mode 100644 meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
-> 
-> diff --git a/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
-> b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb new file mode
-> 100644 index 0000000..7d89e9b --- /dev/null +++
-> b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb @@ -0,0 +1,16 @@ 
-> +DESCRIPTION = "read temperature sensors in a 1-Wire net" +SECTION =
-> "util" +PRIORITY = "optional"
+I've done all those changes and updated my meta-oe repository in
+github. If you can pull it I will be thankful. If required I can
+resend the patch but don't seem to be worth it.
 
-PRIORITY isn't used anymore
-
-> +DEPENDS = "libusb"
-
-libusb 0.x or libusb 1.x?
-
-> +LICENSE = "GPL-2"
-
-GPLv2?
-
-> +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0" +PR = "r0"
-
-As stated before, PR is going away so I will not accept patches adding
-default values when in some weeks from now we'll need to remove them all.
-
-> + +SRC_URI =
-> "http://www.digitemp.com/software/linux/digitemp-3.6.0.tar.gz"
-
-use ${PV} in the uri?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOnCr9MkyGM64RGpERAnAyAKCmYywmNETYv/V630l2e7vD1jY5IgCbBIKR
-gHwLixIRe8MFM40O+T5l3rs=
-=Yc9q
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
