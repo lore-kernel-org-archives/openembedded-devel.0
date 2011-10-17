@@ -1,29 +1,36 @@
 Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RFui0-0003kq-46
+	(envelope-from <raj.khem@gmail.com>) id 1RFv9B-0004DK-IT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 23:26:56 +0200
-Received: by qam2 with SMTP id 2so808394qam.6
+	Mon, 17 Oct 2011 23:55:01 +0200
+Received: by qam2 with SMTP id 2so825178qam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 14:21:06 -0700 (PDT)
+	Mon, 17 Oct 2011 14:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=lxYYZRzF/A9iqy/ChPRItTu6TR6Xwq9A86EOPClUWL0=;
-	b=t/jvzqDv/T10qFpx0dCJeJXITSVB04TPnKmVJ3eWUkstjKyCwH1wn5LwqfAq4HZYus
-	cqMHgng/Pa7eqcf/rf/8kAyJVuMNKc7Hy0ReJHKVir0toNtS1Cq5BHgA+jiTUDmJX6to
-	7Dxu1G1s9IHYIZhk6cYs/tXhkkTlWYTc+qSrc=
-Received: by 10.68.17.193 with SMTP id q1mr40427005pbd.98.1318886466192; Mon,
-	17 Oct 2011 14:21:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Mon, 17 Oct 2011 14:20:36 -0700 (PDT)
-In-Reply-To: <4E9C97B7.6010607@telia.com>
-References: <CACphT6KqgRkRt1vtfS8ROS5P36P=yKACX0tNV6gw7NTa25U9Bg@mail.gmail.com>
-	<4E9C97B7.6010607@telia.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=3T65mWNhfMEPcev5K/qqhEjYTfG1/4OAsJV8e4rYABI=;
+	b=a/eE+AcB64xFqPCgo3vvpmH4YShD7Hbwl6Y5O4uOWqo3ltWJVp/MJK0K5rvKFk63Nl
+	i8KJjVfbDi6aYMiSvkqw05SOmoW/S54/d2zX0VtaiWDvL6eKPLIBYr8HXfOwKjHiM0gN
+	rzslUV5BlyNVwTWqh07SdIV6D5PNGQuxCbwig=
+Received: by 10.229.63.65 with SMTP id a1mr4690149qci.174.1318888151653;
+	Mon, 17 Oct 2011 14:49:11 -0700 (PDT)
+Received: from [172.23.8.192] (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id fj8sm23237098qab.9.2011.10.17.14.49.08
+	(version=SSLv3 cipher=OTHER); Mon, 17 Oct 2011 14:49:09 -0700 (PDT)
+Message-ID: <4E9CA2D1.2000304@gmail.com>
+Date: Mon, 17 Oct 2011 14:49:05 -0700
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 17 Oct 2011 14:20:36 -0700
-Message-ID: <CAMKF1sp-JDV0i9k=0OXju5NfAdjYLsM3vv0CrEPTcOjFm-pF1A@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Openssl build bug
+References: <20111015185155.DA982101FE@opal>
+	<CAAQYJAvm1mGo6sswMBPx+tgQfZapTqX4E1SXSsZKU25D-u1eDA@mail.gmail.com>
+	<CAMKF1sqEQtqCMi+p6yEArDWpiGGS2Du1ca34ROtkFAzdc-X3MA@mail.gmail.com>
+	<CACW_hTYw8eSDh6z_Q+v6aK9CoF-9D5Ba0+fp4beuLuA9oi7NAw@mail.gmail.com>
+In-Reply-To: <CACW_hTYw8eSDh6z_Q+v6aK9CoF-9D5Ba0+fp4beuLuA9oi7NAw@mail.gmail.com>
+Subject: Re: [oe-commits] Khem Raj : binutils-cross: Sync with oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 21:26:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 17 Oct 2011 21:55:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 17, 2011 at 2:01 PM, Ulf Samuelsson
-<ulf_samuelsson@telia.com> wrote:
-> 2011-10-17 22:46, Panda Resistor skrev:
+On 10/16/2011 11:35 PM, Frans Meulenbroeks wrote:
+> 2011/10/17 Khem Raj<raj.khem@gmail.com>
+>
+>> On Sun, Oct 16, 2011 at 2:37 PM, Andrea Adami<andrea.adami@gmail.com>
+>> wrote:
+>>> On Sat, Oct 15, 2011 at 8:51 PM,<git@git.openembedded.org>  wrote:
+>>>
+>>>> Module: meta-openembedded.git
+>>>> Branch: master
+>>>> Commit: 92b02b7209e426a70cc5626e7bdbc82052e01ac5
+>>>> URL:
+>>>>
+>> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=92b02b7209e426a70cc5626e7bdbc82052e01ac5
+>>>>
+>>>> Author: Khem Raj<raj.khem@gmail.com>
+>>>> Date:   Sun Oct 16 01:28:32 2011 +0000
+>>>>
+>>>> binutils-cross: Sync with oe-core
+>>>>
+>>>> Now we have own copy of binutils-cross in meta-oe
+>>>>
+>>>
+>>> I can't unfortunately find the discussion which supposedly provided a
+>> valid
+>>> reason for binutils-2.20 in meta-oe while binutils-2.21 is in oe-core.
+>>> I'm against that kind of policy for meta-oe, particularly when it's about
+>>> toolchain.
 >>
->> Openssl-native_1.0.0d-r14 will not build on Ubuntu 11.10, but is building
->> on
->> Ubuntu 10.04. The errors are undefined reference errors, and it has been
->> suggested that they are linked to erroneous ordering of library
->> dependencies
->> and dependency folders, however the libdepsfirst patch has been applied by
->> bitbake upon a compilation attempt.
+>> oe-core is deprecating versions that are still used by consumers of
+>> meta-oe (mainly angstrom 2010 release)
+>> since its toolchain and it will also benefit derivatives of angstrom.
+>> Angstrom could also move these elements
+>> into meta-angstrom if we think that its only angstrom specific and no
+>> other consumers of oe-core needs them
+>> layer maintainers make judgement call which they think should benefit
+>> wider community
 >>
->> Cheers
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> similar but not for binutils here is a relevant thread
+>>
 >
-> I can confirm that I see the same.
-> Builds on 11.04, but not on 11.10.
+> I feel if a distro or bsp needs a version of a package that is older than
+> the oe-core one, it should be stored in the distro or bsp layer.
+> Or is meta-oe also wanting to keep binutils 18.50? In oe classic this is
+> used by the nios2 hw (and afaik there is no newer binutils supporting
+> nios2)? I'd say if some layer needs older versions it is up to them.
 >
 
-It has been fixed in oe-core. if its needed for maintainance 2011.03 branch
-then do the needed backport.
+This is a bit different when a version is retired from oe-core there 
+might be more than one bsp using it therefore it would be more 
+beneficial to keep it in a common layer
 
-> --
-> Best Regards
-> Ulf Samuelsson
+> What we are lacking here is a policy on purpose/goal of meta-oe and what
+> goes in (and what not).
+
+This has been discussed quite a bit when we decided to move to layered 
+structure. meta-oe infact is an umbrella of layers and each layer can 
+have it own development policies.
+
 >
->
+> Frans
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
 
