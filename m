@@ -1,33 +1,26 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RFvWf-000517-Bu
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RFvfM-0005CD-9R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 00:19:17 +0200
-Received: by gyc15 with SMTP id 15so3329560gyc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 15:13:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=2HcGIjymWJUCIbefYclX3P4QzNRpJ1musKuT6d6/KvI=;
-	b=iPtdgSMrS8lgaWsoWruse+5CLsQhqYLkqmx2Nc1dYjJb1Nd5jk+f9vD+ZbW5SZY1DK
-	1nBZjVxk0DE21filyE6D25jPFW6nyQt4E6SrNuB1UBd/Gk5vpq82Up2H/fV5NvUVPfgs
-	hPo9BKQv2EWTL+UkUmxOo2Ehywcx8pPGqeSg8=
-Received: by 10.150.236.11 with SMTP id j11mr52969ybh.8.1318889607860;
-	Mon, 17 Oct 2011 15:13:27 -0700 (PDT)
-Received: from [172.23.8.192] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id t7sm29899672anh.15.2011.10.17.15.13.26
-	(version=SSLv3 cipher=OTHER); Mon, 17 Oct 2011 15:13:26 -0700 (PDT)
-Message-ID: <4E9CA882.7080107@gmail.com>
-Date: Mon, 17 Oct 2011 15:13:22 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Tue, 18 Oct 2011 00:28:16 +0200
+Received: (qmail invoked by alias); 17 Oct 2011 22:22:26 -0000
+Received: from p5B0A17D4.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.23.212]
+	by mail.gmx.net (mp044) with SMTP; 18 Oct 2011 00:22:26 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18xHu1/acQxmm6yeqDeStDq6vGRPU1lK7ZyMpqJkG
+	TErzFIUixwzT4z
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4E9C93AB.7090705@telia.com>
-In-Reply-To: <4E9C93AB.7090705@telia.com>
-Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
+Date: Tue, 18 Oct 2011 00:27:04 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1318872201-26433-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1318872201-26433-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+Message-Id: <201110180027.05116.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-xfce 1/4] libxfcegui4: add 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,79 +34,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 22:19:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 17 Oct 2011 22:28:16 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 10/17/2011 1:44 PM, Ulf Samuelsson wrote:
-> If anyone is interested...
->
+On Monday, October 17, 2011 07:23:18 PM Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  .../recipes-xfce/libxfcegui4/libxfcegui4_4.8.1.bb  |   20 ++++++++++++++++++++
+>  1 files changed, 20 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-xfce/recipes-xfce/libxfcegui4/libxfcegui4_4.8.1.bb
+> 
+> diff --git a/meta-xfce/recipes-xfce/libxfcegui4/libxfcegui4_4.8.1.bb b/meta-xfce/recipes-xfce/libxfcegui4/libxfcegui4_4.8.1.bb
+> new file mode 100644
+> index 0000000..1273880
+> --- /dev/null
+> +++ b/meta-xfce/recipes-xfce/libxfcegui4/libxfcegui4_4.8.1.bb
+> @@ -0,0 +1,20 @@
+> +DESCRIPTION = "Xfce4 Widget library and X Window System interaction"
+> +DEPENDS = "intltool virtual/libx11 libxfce4util xfconf libxml2 gtk+ libglade"
+> +
+> +LICENSE = "GPLv2 LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee \
+> +                    file://COPYING.LIB;md5=b8081563814865b09774a6915b594a71 \
+> +                   "
+> +
+> +SECTION = "x11/libs"
+> +
+> +inherit xfce gettext
+> +
+> +SRC_URI[md5sum] = "ca0cdeff99f1732307d0fc0672d382ef"
+> +SRC_URI[sha256sum] = "309a81823cdfdb7301bc6a5199e14f0df29b58dae89a9302c7839b9b94812443"
+> +
+> +LEAD_SONAME = "libxfcegui4.so.4"
+> +
+> +FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
+> +RDEPENDS_${PN} = "xfconf startup-notification "
+> +
+> 
+I intentionally left out libxfcegui4 because it is deprecated [1] since xfce 4.8 and replaced by libxfce4ui.
 
-thanks for numbers. Is there statistics on 64bit host Vs. 32bit build 
-host available too ?
+Since meta-oe / oe-core is some fresh & new - I wanted to keep it out. Anyway - the panel recipes following in this series 
+need a bit more love:
 
-> Same machine in two different configurations.
->
-> .........................................................#1...........................#2
->
-> P8Z68V Pro
-> Core-i7 2600K @ 3.4 GHz..................4.4 GHz
-> 8 GB @ ...........................................1333
-> MHz...............1640 MHz
-> 1TB WD Black 7200 RPM
-> Ubuntu 11-10
->
-> Almost all source code already in source directory
->
-> Building meta-toolchain is 13% faster with overclocking.
->
->
-> #1
-> build: meta-toolchain
-> START 10:46:23 55:52
-> FINISH 11:42:15
-> build: core-image-minimal
-> START 11:42:15 17:34
-> FINISH 11:59:49
-> build: core-image-sato
-> START 13:40:47 01:19
-> FINISH 13:42:06
-> Build fails, since one package could not be downloaded.
-> build: meta-toolchain-sdk
-> START 13:42:06 00:38
-> FINISH 13:42:44
-> build: adt-installer
-> START 13:42:44 00:03
-> FINISH 13:42:51
-> build: meta-ide-support
-> START 13:42:51 01:13
-> FINISH 13:44:04
->
->
->
-> #2
-> build: meta-toolchain
-> START 20:18:51 49:19 (vs 55:52)
-> FINISH 21:08:10
-> build: core-image-minimal
-> START 21:08:10 16:38 (vs 17:34)
-> FINISH 21:24:48
-> build: core-image-sato
-> START 21:24:48 15:38 (vs 01:19 - I think I have a problem in the first
-> build)
-> FINISH 21:40:26
-> build: meta-toolchain-sdk
-> START 21:40:26 00:59 (vs 00:38)
-> FINISH 21:41:25
-> build: adt-installer
-> START 21:41:25 00:03 (vs 00:03)
-> FINISH 21:41:28
-> build: meta-ide-support
-> START 21:41:28 01:03 (vs 01:13)
-> FINISH 21:42:31
->
->
->
+* DESCRIPTION missing
+* LICENSE = "MIT" ??
+* SRC_URI[*sum] missing
 
+I checked the sources of the two panel plugins and would like to spend few nights to see how far I get migrating 
+them to libxfce4ui ( take [2] as a starter - xfce4-cpufreq-plugin is already building - have run test tomorrow...). 
+
+Andreas
+
+[1] http://git.xfce.org/xfce/libxfcegui4/
+[2] http://git.xfce.org/panel-plugins/xfce4-clipman-plugin/commit/?id=4b08db62bd85e6c9abc3c00570eaae365d992ad5
 
 
