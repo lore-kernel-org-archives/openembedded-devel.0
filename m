@@ -1,35 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFsU0-0008F9-QE for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 21:04:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RFsOO-000515-F8 for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 20:58:32 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 20:58:32 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 20:58:32 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Oct 2011 20:58:11 +0200
-Message-ID: <j7hts3$96r$1@dough.gmane.org>
-References: <1318872201-26433-1-git-send-email-koen@dominion.thruhere.net>
-	<1318872201-26433-2-git-send-email-koen@dominion.thruhere.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <1318872201-26433-2-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-xfce 2/4] xfce-panel-plugin: bbclass for panel plugins
+	(envelope-from <raj.khem@gmail.com>)
+	id 1RFsbq-0008S2-04; Mon, 17 Oct 2011 21:12:26 +0200
+Received: by pzk33 with SMTP id 33so9215572pzk.2
+	for <multiple recipients>; Mon, 17 Oct 2011 12:06:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=Y+9mUryXB4la1DfxdwEFpXXa/n7fk283s7COEtjF8t8=;
+	b=LfZKl70nB3jL8xiPS9oIIR4Z6enqp7spf1E/96Jqi1WEUfSnmGxZ0MIHkl6p4f7WPV
+	vFRdpOnpr8UvjDU0F+gOVscCFT1MnUrouwIFQRyX2Z6cV7UAhZYpO78SwLEXjMnqeji2
+	2a5djJd/p0H4PnZ2yBAqhO3FjIQ08+3GTEmRc=
+Received: by 10.68.20.226 with SMTP id q2mr39668466pbe.115.1318878394071; Mon,
+	17 Oct 2011 12:06:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.48.230 with HTTP; Mon, 17 Oct 2011 12:06:04 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 17 Oct 2011 12:06:04 -0700
+Message-ID: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: [ANNOUNCEMENT] New Patchwork available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 19:04:20 -0000
+X-List-Received-Date: Mon, 17 Oct 2011 19:12:26 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-Op 17-10-11 19:23, Koen Kooi schreef:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> --- 
-> meta-xfce/classes/xfce-panel-plugin.bbclass |   10 ++++++++++ 1 files
-> changed, 10 insertions(+), 0 deletions(-) create mode 100644
-> meta-xfce/classes/xfce-panel-plugin.bbclass
-> 
-> diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass
-> b/meta-xfce/classes/xfce-panel-plugin.bbclass new file mode 100644 index
-> 0000000..495d0b1 --- /dev/null +++
-> b/meta-xfce/classes/xfce-panel-plugin.bbclass @@ -0,0 +1,10 @@ +inherit
-> xfce + +DEPENDS += "libxfcegui4 libxfce4util xfce4-panel" + +SRC_URI =
-> "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
->
-> 
-+
-> +FILES_${PN} += "${datadir}/xfce4/panel-plugins/" +FILES_${PN}-dbg +=
-> "${libexecdir}/xfce4/panel-plugins/.debug" + +
+Here is a new instance of patchwork accessible at
+http://patchwork.openembedded.org
 
-These seem to trigger a bitbake bug for me, I'm curious if other people are
-seeing that as well
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+This instance uses same database therefore it should not be any different than
+existing patches.openembedded.org
 
-iD8DBQFOnHrDMkyGM64RGpERAviNAJ9wUQHP7wN+Ef+qh2l9D9gBOUtMKwCgh+Zt
-5dTS8HMYs4N3peckSXKvq9U=
-=m2HC
------END PGP SIGNATURE-----
+However with the new patchwork you will see additionally "Mail settings"
+link on the right hand upper corner this could be used to subscribe to patchwork
+activity. This is a new feature so try it out and report any issues.
 
+The patch capturing is done by the new patchwork.
+
+reiterating what Koen already announced, git post-recieve hook is
+installed for meta-openembedded repository to interact with patchwork
+on push so it will change the state of patch to "Accepted" once
+it has been pushed. This should avoid lot of manual work for the maintainers
+Please test this and report any problems you see with patches being marked
+incorrectly or something else. Eventually if this turns out to be
+useful we could
+consider it for oe-core and bitbake as well.
+
+Registering new user should work now. There has been issues with old server
+sending out emails.
+
+Eventually patches.openembedded.org will just be an alias to
+patchwork.openembedded.org
+
+Happy patching
+
+-Khem
 
 
