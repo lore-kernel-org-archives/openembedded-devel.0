@@ -1,27 +1,23 @@
-Received: from stoexhubfe01.domain01.net ([83.145.59.140])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RFl64-0003Mv-6m
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RFlov-0004LX-0K
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Oct 2011 13:11:08 +0200
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhubfe01.domain01.net
-	(10.12.10.6) with Microsoft SMTP Server (TLS) id 8.3.137.0;
-	Mon, 17 Oct 2011 13:05:18 +0200
-Date: Mon, 17 Oct 2011 13:05:33 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20111017110533.GB3496@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <j7gllt$s0$1@dough.gmane.org>
+	Mon, 17 Oct 2011 13:57:37 +0200
+Received: (qmail invoked by alias); 17 Oct 2011 11:51:34 -0000
+Received: from ip-95-222-156-232.unitymediagroup.de (EHLO
+	localhost.localdomain) [95.222.156.232]
+	by mail.gmx.net (mp037) with SMTP; 17 Oct 2011 13:51:34 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/HgqMo3anH+kOXdWV+yDceNejqxrQeOHzrvnfBgZ
+	hHWJvc8i74CO3S
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Oct 2011 13:50:53 +0200
+Message-Id: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.6.4
 MIME-Version: 1.0
-In-Reply-To: <j7gllt$s0$1@dough.gmane.org>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: Patchwork hooks for meta-oe active and working
+X-Y-GMX-Trusted: 0
+Subject: [meta-efl][V3] epdfview: add initial recipe with version 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,24 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2011 11:11:08 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Oct 2011 11:57:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* Koen Kooi <koen@dominion.thruhere.net> [111017 09:33]:
-> Thanks to Khem the patchwork hooks for meta-oe (and hence meta-efl,
-> meta-gnome and meta-xfce) are active and working.
-> Once the commits hit the OE server the state will get updated automatically,
-> so the submitter will instantly know when his/her patch has hit the repo.
+initial source taken from oe-classic epdfview_0.1.7.bb
+commit 44985d56bc556786812a0a02d6219afd31a7381d
 
-Thanks!
-That sounds wonderfull!
+run tested on overo
 
-Cheers,
-Anders
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-efl/recipes-efl/efl/epdfview_0.1.8.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
 
+diff --git a/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
+new file mode 100644
+index 0000000..5351733
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "A lightweight PDF viewer based on gtk and poppler"
++HOMEPAGE = "http://www.emma-soft.com/projects/epdfview/"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++SECTION = "x11/applications"
++DEPENDS = "gtk+ poppler"
++
++inherit autotools gettext
++
++SRC_URI = "http://www.emma-soft.com/projects/epdfview/chrome/site/releases/epdfview-${PV}.tar.bz2"
++SRC_URI[md5sum] = "e50285b01612169b2594fea375f53ae4"
++SRC_URI[sha256sum] = "948648ae7c9d7b3b408d738bd4f48d87375b1196cae1129d6b846a8de0f2f8f0"
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+1.7.6.4
+
 
 
