@@ -1,34 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RGATI-00069x-Fn
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 16:16:48 +0200
-Received: by mail-bw0-f47.google.com with SMTP id t8so923474bka.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RGAbr-0006eu-L2 for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 16:25:39 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RGAWE-0005pm-Fk for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 16:19:50 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Oct 2011 16:19:50 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 07:11:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=dlzFaGw9lgc5azB5uQIpHN/OK4xJpsVcRv0uZu/3Aj0=;
-	b=G8GNUfVf/6sVYxSXxyvHDdNQxyfLBIHB/glCBcFyKDN2tGuP8dqZqods/JTL8BRwf0
-	q1qCys/wMePVOrebsB+HQWyoxJLTWmOoHxFDwjeUIVEpwAfAWBOtaqjRPhn2uL8c+/bQ
-	5uMIEra2THbBCNPp0dKgazvkZ6L05uUziPuXk=
-Received: by 10.204.7.83 with SMTP id c19mr1932021bkc.81.1318947052385;
-	Tue, 18 Oct 2011 07:10:52 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id r12sm2307310bkw.5.2011.10.18.07.10.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Oct 2011 07:10:51 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 18 Oct 2011 16:19:50 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2011 16:10:27 +0200
-Message-Id: <c4b964c5a17f463645b3e9cb7a8351bbe62eef9a.1318946821.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.7
-In-Reply-To: <359a5968f27008d6fcbaee5137c237bfcabd2579.1318946821.git.Martin.Jansa@gmail.com>
-References: <359a5968f27008d6fcbaee5137c237bfcabd2579.1318946821.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1318946821.git.Martin.Jansa@gmail.com>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 18 Oct 2011 16:19:34 +0200
+Message-ID: <j7k1tq$e53$1@dough.gmane.org>
 References: <cover.1318946821.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl 3/3] lightmediascanner: Add version 0.4.4 (initial recipe)
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <cover.1318946821.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-efl 0/3] EFL upgrade and lightmediascanner
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,58 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 14:16:48 -0000
+X-List-Received-Date: Tue, 18 Oct 2011 14:25:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: pespin <pespin.shar@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-* Copied from oe-classic <http://git.openembedded.org/openembedded/commit/?id=63d3969b0f839fc4b7bf7fe836daec729d9d3c53>
-* Remove PE=1
-* Add LIC_FILES_CHKSUM
-* Builds fine using SHR distro
-* JaMa: removed PR
+Op 18-10-11 16:10, Martin Jansa schreef:
+> My eve patches were applied upstream, so we can use newer webkit-efl
+> without those patches in OE.
+> 
+> Webkit-efl build depends on fixed fontconfig see 
+> http://patches.openembedded.org/patch/13371/
 
-Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../lightmediascanner/lightmediascanner_0.4.4.bb   |   27 ++++++++++++++++++++
- 1 files changed, 27 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
+I'll wait till that goes in, I asked on the OE-core list for an ETA.
 
-diff --git a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-new file mode 100644
-index 0000000..96f4ba8
---- /dev/null
-+++ b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Lightweight media scanner meant to be used in not-so-powerful devices"
-+AUTHOR = "ProFUSION"
-+HOMEPAGE = "http://lms.garage.maemo.org/"
-+SECTION = "libs/multimedia"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-+DEPENDS = "sqlite3 flac virtual/libiconv"
-+
-+SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
-+"
-+SRC_URI[md5sum] = "f423376a70f8f321af69b12563b176fe"
-+SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e"
-+
-+S = "${WORKDIR}/release_${PV}"
-+
-+inherit autotools pkgconfig
-+
-+do_install_append() {
-+    install -d ${D}/${bindir}/
-+    install -m 755 ${S}/src/bin/.libs/test  ${D}/${bindir}/test-lms
-+}
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/test-lms"
-+
-+FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
--- 
-1.7.7
+regards,
+
+Koen
+
+> 
+> The following changes since commit
+> 2631ed9f4c987192749960bc7a2209b5f5bbfa78:
+> 
+> epdfview: add initial recipe with version 0.1.8 (2011-10-18 13:47:21
+> +0200)
+> 
+> are available in the git repository at: 
+> git://git.openembedded.org/meta-openembedded-contrib jansa/pull 
+> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+>
+>  Martin Jansa (2): e-base: bump EFL_SRCREV webkit-efl: upgrade to 1.6.1
+> 
+> pespin (1): lightmediascanner: Add version 0.4.4 (initial recipe)
+> 
+> meta-efl/classes/e-base.bbclass                    |    2 +- 
+> .../webkit/webkit-efl/revert.r78057.patch          |   19 -------------- 
+> meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |   11 +------ 
+> .../lightmediascanner/lightmediascanner_0.4.4.bb   |   27
+> ++++++++++++++++++++ 4 files changed, 30 insertions(+), 29 deletions(-) 
+> delete mode 100644
+> meta-efl/recipes-efl/webkit/webkit-efl/revert.r78057.patch create mode
+> 100644
+> meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOnYr1MkyGM64RGpERAlYAAJ9+hJewnLM3TRk5C/jWmiITOmBLnQCeOtHS
+gt8mgcxx5B3H6qOjeiyOSbg=
+=8FeF
+-----END PGP SIGNATURE-----
 
 
 
