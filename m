@@ -1,29 +1,36 @@
-Received: from stoexhub02.domain01.net ([83.145.59.143])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RG8kT-00024C-Ho
+	(envelope-from <martin.jansa@gmail.com>) id 1RG8kZ-00024d-Ur
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 14:26:25 +0200
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.83.0;
-	Tue, 18 Oct 2011 14:19:24 +0200
-Date: Tue, 18 Oct 2011 14:19:36 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20111018121936.GA23902@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <4E9C93AB.7090705@telia.com>
-	<20111018062814.GA3751@ad.chargestorm.se>
-	<4E9D6B7C.5000404@telia.com>
+	Tue, 18 Oct 2011 14:26:32 +0200
+Received: by bkat8 with SMTP id t8so785786bka.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Oct 2011 05:20:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=/6piuDup65bgyWvdlBKSekwmjcUWZZaiZfv6OlXUXuE=;
+	b=upI3KzQMbO0c31uISCDZ/d/3Wxusz3tTOTCGQgH+tikvv/Pny9z/kWDCmdKH91eb7K
+	jrhcOb/gTuj+oAVHWVgL8Pb2tOYwRo4yobGCvMV55RLk84rMiplcoHcMYW0YeiA5Zj79
+	QYXBTeniTYofBIXUpmnj9izYrXtBeijcM2JGc=
+Received: by 10.204.136.131 with SMTP id r3mr1623239bkt.60.1318940442393;
+	Tue, 18 Oct 2011 05:20:42 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id k6sm1919071bkv.8.2011.10.18.05.20.40
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 18 Oct 2011 05:20:41 -0700 (PDT)
+Date: Tue, 18 Oct 2011 14:20:34 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111018122034.GF20678@jama.jama.net>
+References: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
+	<j7jma5$kg2$1@dough.gmane.org>
+	<20111018114340.GC20678@jama.jama.net>
+	<j7jpfj$c64$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <4E9D6B7C.5000404@telia.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
+In-Reply-To: <j7jpfj$c64$1@dough.gmane.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
+Subject: All patches in patchwork archived? Was: [meta-efl][V3] epdfview: add initial recipe with version 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 12:26:25 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 18 Oct 2011 12:26:32 -0000
+X-Groupsio-MsgNum: 34856
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Cp3Cp8fzgozWLBWL"
 Content-Disposition: inline
 
-* Ulf Samuelsson <ulf_samuelsson@telia.com> [111018 14:06]:
-> 2011-10-18 08:28, Anders Darander skrev:
-> > * Ulf Samuelsson<ulf_samuelsson@telia.com>  [111017 22:45]:
-> >> If anyone is interested...
-> > Build stats are always interesting... ;)
+--Cp3Cp8fzgozWLBWL
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> >> Same machine in two different configurations.
-> >> .........................................................#1...........................#2
-> >> P8Z68V Pro
-> >> Core-i7 2600K @                             3.4 GHz..................4.4 GHz
-> >> 8 GB @ ...........................................1333
-> >> MHz...............1640 MHz
-> >> 1TB WD Black 7200 RPM
-> >> Ubuntu 11-10
-> >> Almost all source code already in source directory
-> > This would severely restrict the usefulness of the comparison. I'd guess
-> > that this means that in one case the source will be downloaded, while
-> > it'll already be downloaded in the second test. Could you redo the
-> > statistics with all sources downloaded?
-> I had already built it once before running the first test then updated
-> and I think one additional package was downloaded over a 100 MBps line
-> so it affects a little, but not too much.
+On Tue, Oct 18, 2011 at 01:55:31PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 18-10-11 13:43, Martin Jansa schreef:
+> > On Tue, Oct 18, 2011 at 01:01:25PM +0200, Koen Kooi wrote:
+> >> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
+> >>=20
+> >> Op 17-10-11 13:50, Andreas M=FCller schreef:
+> >>> initial source taken from oe-classic epdfview_0.1.7.bb commit=20
+> >>> 44985d56bc556786812a0a02d6219afd31a7381d
+> >>>=20
+> >>> run tested on overo
+> >>>=20
+> >>> Signed-off-by: Andreas M=FCller <schnitzeltony@gmx.de>
+> >>=20
+> >> Martin, do you want to put this in your next pull request or do you
+> >> want me to takes this directly?
+> >=20
+> > I have only webkit-efl and eve changes in my queue and I would like to=
+=20
+> > get them applied upstream first. So please take this directly, I've=20
+> > tested it here too and it looks fine.
+>=20
+> Done. And patchwork updated itself! THIS IS THE FUTURE!!!!one!!!
 
-Ok, just curious. Not least as you had one image fail in the first
-configuration, which you attributed to a failed download. That remark
-made me wonder...
+Nice, but did it accidentally mark all oe-core patches in=20
+http://patchwork.openembedded.org/project/oe-core/list/
+as Archived?
 
-Cheers,
-Anders
+Because such patches are not shown by default even when they are in
+state New.
 
-> I think the conclusion:
->      Increasing the CPU speed by 30% and the memory frequency by 20%
->      gives 10-15% faster build time is OK.
+If it's only because of pw upgrade and won't mark them archived after
+every push then fine :).
 
-> >> Building meta-toolchain is 13% faster with overclocking.
-> > Was the overclocking test run after the non-overclocking?
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--Cp3Cp8fzgozWLBWL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk6dbxIACgkQN1Ujt2V2gBx0HACggZBeJnn/yKWXAITaksH5tCQp
+l2YAmgPRS2qcbTd8kXuJn/17l2fYeo7w
+=z6ly
+-----END PGP SIGNATURE-----
 
+--Cp3Cp8fzgozWLBWL--
