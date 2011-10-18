@@ -1,37 +1,32 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from smtprelay-b21.telenor.se ([195.54.99.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RGHoN-0001pQ-JI
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RGIKc-0002fs-UE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 00:07:04 +0200
-Received: by ywm39 with SMTP id 39so1039773ywm.6
+	Wed, 19 Oct 2011 00:40:23 +0200
+Received: from iph5.telenor.se (iph5.telenor.se [195.54.127.136])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id DA500EA10C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 15:01:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=bUQf1t1Wc3WpT2JgwrGLQrHDZ3gIlqui07wFJuNLBOw=;
-	b=UNGbxH9D7vhFz1DM4FfQW+TuPjfmeLpvBN0ncKPOdeYVv0W+hLkFnGjGpBufkB1IBE
-	fdKNHyMMsDSJEbXSbskx3ZcM5vxf5KYyDHtYfySMHx+LaavKuTwPWrDwAlXm1xjU/mr/
-	gxW0WVLPZugDG0moXENGDUV8YkbwxhkwhwtKM=
-Received: by 10.68.199.8 with SMTP id jg8mr1622877pbc.45.1318975271988;
-	Tue, 18 Oct 2011 15:01:11 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id v7sm12694pbr.10.2011.10.18.15.01.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Oct 2011 15:01:08 -0700 (PDT)
-Date: Tue, 18 Oct 2011 15:02:29 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111018220229.GF27508@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1318971633-1534-1-git-send-email-pespin.shar@gmail.com>
-	<20111018211611.GC27508@sakrah.homelinux.org>
-	<20111018212425.GF556@jama.jama.net>
+	Wed, 19 Oct 2011 00:34:32 +0200 (CEST)
+X-SENDER-IP: [83.227.57.13]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AvcjALX+nU5T4zkNPGdsb2JhbAAMOJl/jwkBAQEBN4IgAQEBAQIBAQEBNTYbCxgJGgsPAhYBGxQTBgIBAYd8CLYjiBsEkWOCGpFY
+X-IronPort-AV: E=Sophos;i="4.69,367,1315173600"; d="scan'208";a="55538891"
+Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.57.13])
+	by iph5.telenor.se with ESMTP; 19 Oct 2011 00:34:32 +0200
+Message-ID: <4E9DFEF8.40705@telia.com>
+Date: Wed, 19 Oct 2011 00:34:32 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-In-Reply-To: <20111018212425.GF556@jama.jama.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH][meta-efl]] dummy patch to try if patchwork bug is fixed
+To: openembedded-devel@lists.openembedded.org
+References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
+	<4E9D16AD.7040403@telia.com>
+	<1318949254.22985.146.camel@phil-desktop>
+In-Reply-To: <1318949254.22985.146.camel@phil-desktop>
+Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,20 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 22:07:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Oct 2011 22:40:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (18/10/11 23:24), Martin Jansa wrote:
-> On Tue, Oct 18, 2011 at 02:16:11PM -0700, Khem Raj wrote:
-> > On (18/10/11 23:00), Pau Espin Pedrol wrote:
-> > > Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
-> > 
-> > And it did not work since mailman served it as it is. I guess problem
-> > might be in the mailman
-> 
-> Sorry I don't see the problem in mailman.
+2011-10-18 16:47, Phil Blundell skrev:
+> On Tue, 2011-10-18 at 08:03 +0200, Ulf Samuelsson wrote:
+>> My comparision between 2 similar machines indicate that
+>> 32 bit 11.04 with Psyco-Dist is 20% faster than 64 bit with 11.04
+>>
+>> The machine running 64 bit 11.04 was tested with 32 bit 11.04
+>> using an external disk (connected through e-SATA) and results
+>> were very close to the numbers for the other 32 bit machine
+>>
+>> I didn't save those numbers but I think that is good enough
+>> to draw the conclusion that adding JIT for 64 bit (PyPy?) will reduce build
+>> time significantly.
+> You seem to have changed two things at once there (or perhaps just made
+> a bit too much of a leap in your conclusion).  Did you test 32-bit
+> without the JIT?
 
-It was my web interface.
+The word indicate is not soo strong as you indicate ;-)
+Just saying that if it looks like a duck, walks like a duck
+it is probably a duck.
+
+It takes too long to reinstall for that to be an alternative for me.
+More data from other people could be an alternative.
+
+
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
