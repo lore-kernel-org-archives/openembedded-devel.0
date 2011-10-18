@@ -1,34 +1,35 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RGArR-0007ET-EN
+	(envelope-from <raj.khem@gmail.com>) id 1RGAzT-0007UH-1o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 16:41:45 +0200
-Received: by vcbf1 with SMTP id f1so559193vcb.6
+	Tue, 18 Oct 2011 16:50:03 +0200
+Received: by pzk33 with SMTP id 33so1755794pzk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 07:35:55 -0700 (PDT)
+	Tue, 18 Oct 2011 07:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=6JswgDUSIT/HaRYRqvYhGVzTIzCPKhlqJj6i6735VTs=;
-	b=m0etWcMb6hq0Q+sMTlm8LgkUgzWDWHmxQfsb0LwRHJ8hkGCHIlq5/HfxlMNVTvW2GC
-	qNkwvtk04rSdrff7tfwyUbbhjdr+9go1kaLUTLlbkDydrAFZUC6q9dtO9/Y9TXBDM/o3
-	zHKKGGM+zuO1j7dBXbM83nxRnAcHZ/EOee0SQ=
-Received: by 10.68.20.41 with SMTP id k9mr5292719pbe.90.1318948554619;
-	Tue, 18 Oct 2011 07:35:54 -0700 (PDT)
+	bh=KgfmKrI2U2HXfW8bF3qqQ4Cik82IDF2JxcWduyiG29c=;
+	b=Ec+H40xvgpzj82dbtEGEmFW4VWvdWWrTO/n0LyNRPOBoDZDosvZwotKUIy7Wd5KzxN
+	HXI5O4KyLrTbzEOe5YPCOb4U60J6RcgGJo3ANuDrlEKY4bkqZbE2akrSlp8JMAXkXaay
+	w+daVtYrOlIa+J0CtMOZa9JLlW5VgJOMsDR2U=
+Received: by 10.68.29.101 with SMTP id j5mr5310065pbh.61.1318949051645;
+	Tue, 18 Oct 2011 07:44:11 -0700 (PDT)
 Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net.
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id ko15sm7916690pbb.9.2011.10.18.07.35.48
-	(version=SSLv3 cipher=OTHER); Tue, 18 Oct 2011 07:35:53 -0700 (PDT)
-Message-ID: <4E9D8EC0.4030409@gmail.com>
-Date: Tue, 18 Oct 2011 07:35:44 -0700
+	by mx.google.com with ESMTPS id ml4sm8078290pbc.0.2011.10.18.07.44.10
+	(version=SSLv3 cipher=OTHER); Tue, 18 Oct 2011 07:44:10 -0700 (PDT)
+Message-ID: <4E9D90B6.3070604@gmail.com>
+Date: Tue, 18 Oct 2011 07:44:06 -0700
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4E9D3640.9070608@telia.com>
-In-Reply-To: <4E9D3640.9070608@telia.com>
-Subject: Re: Use of stamps in the source directory of openembedded-core
+References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
+	<4E9D16AD.7040403@telia.com>
+In-Reply-To: <4E9D16AD.7040403@telia.com>
+Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,24 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 14:41:45 -0000
+X-List-Received-Date: Tue, 18 Oct 2011 14:50:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 10/18/2011 1:18 AM, Ulf Samuelsson wrote:
-> After I have built openembedded-core, I notice that the source directory
-> is loaded with files: *.done.
+On 10/17/2011 11:03 PM, Ulf Samuelsson wrote:
+> My comparision between 2 similar machines indicate that
+> 32 bit 11.04 with Psyco-Dist is 20% faster than 64 bit with 11.04
 >
 
-they indicate successful download of a source tar.
+thats why I wanted to know if they were exactly same machine. Better to 
+reinstall may be. I dont rule out that 32bit cant be faster but we need 
+to measure it
 
-> Is this really a good idea?
+> The machine running 64 bit 11.04 was tested with 32 bit 11.04
+> using an external disk (connected through e-SATA) and results
+> were very close to the numbers for the other 32 bit machine
 >
-> I tend to use a common source directory for multiple projects.
->
-> Having stamps in the source directory, means that you let one
-> project affect the others.
->
+
+
+> I didn't save those numbers but I think that is good enough
+> to draw the conclusion that adding JIT for 64 bit (PyPy?) will reduce build
+> time significantly.
+
+Thats what I am interested in. If pypy would make it faster than
+we could recommend it.
 
 
 
