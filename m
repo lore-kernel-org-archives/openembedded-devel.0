@@ -1,30 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from smtprelay-b22.telenor.se ([195.54.99.213])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pespin.shar@gmail.com>) id 1RG9sd-0004sQ-FL
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RGA0T-00059g-BC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 15:38:55 +0200
-Received: by qam2 with SMTP id 2so375319qam.6
+	Tue, 18 Oct 2011 15:47:01 +0200
+Received: from iph2.telenor.se (iph2.telenor.se [195.54.127.133])
+	by smtprelay-b22.telenor.se (Postfix) with ESMTP id C1487E9DB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 06:33:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=D8n3GIN6swUqGTy5Nzfewb0W6/05bUft9K+Lwx/uGz8=;
-	b=kFSYLwn65a36wKUIm+Y8NjQAODHoTJynbJJPgd3PNKQ9+PnhkZjnzFeZzrfL+AoRXv
-	nOHyOThSuP7zH2moyLvRRnB/W7T4NmCUtvT1KsAz3xLLkHmrmr4fEW7hFa7SxgA88tBK
-	Bdz3pfnGA7MvtxxLntgGn+Xlxafkp4mmyLt6k=
+	Tue, 18 Oct 2011 15:41:11 +0200 (CEST)
+X-SENDER-IP: [83.227.57.13]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtkvANWBnU5T4zkNPGdsb2JhbAAMOIk8kEWOfAEBAQE3giABAQEBAgE4UQshGgsPAjIUEwYCAQGHfLcniBsEk32RWA
+X-IronPort-AV: E=Sophos;i="4.69,365,1315173600"; d="scan'208";a="496726775"
+Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.57.13])
+	by iph2.telenor.se with ESMTP; 18 Oct 2011 15:41:00 +0200
+Message-ID: <4E9D81EB.50702@telia.com>
+Date: Tue, 18 Oct 2011 15:40:59 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Received: by 10.229.64.81 with SMTP id d17mr535742qci.114.1318944784941; Tue,
-	18 Oct 2011 06:33:04 -0700 (PDT)
-Received: by 10.229.198.227 with HTTP; Tue, 18 Oct 2011 06:33:04 -0700 (PDT)
-In-Reply-To: <j7giom$e07$1@dough.gmane.org>
-References: <1318800781-21037-1-git-send-email-pespin.shar@gmail.com>
-	<j7giom$e07$1@dough.gmane.org>
-Date: Tue, 18 Oct 2011 15:33:04 +0200
-Message-ID: <CAEGpDuYCQPYDLZ3CNPPDMbf23Jjjt2cnQgQpVr9SjKx59WmEAQ@mail.gmail.com>
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+References: <4E9C93AB.7090705@telia.com>
+	<20111018062814.GA3751@ad.chargestorm.se>
+	<4E9D6B7C.5000404@telia.com>
+	<20111018121936.GA23902@ad.chargestorm.se>
+In-Reply-To: <20111018121936.GA23902@ad.chargestorm.se>
+Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,97 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 13:38:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Oct 2011 13:47:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-meta-efl ;)
+2011-10-18 14:19, Anders Darander skrev:
+> * Ulf Samuelsson<ulf_samuelsson@telia.com>  [111018 14:06]:
+>> 2011-10-18 08:28, Anders Darander skrev:
+>>> * Ulf Samuelsson<ulf_samuelsson@telia.com>   [111017 22:45]:
+>>>> If anyone is interested...
+>>> Build stats are always interesting... ;)
+>>>> Same machine in two different configurations.
+>>>> .........................................................#1...........................#2
+>>>> P8Z68V Pro
+>>>> Core-i7 2600K @                             3.4 GHz..................4.4 GHz
+>>>> 8 GB @ ...........................................1333
+>>>> MHz...............1640 MHz
+>>>> 1TB WD Black 7200 RPM
+>>>> Ubuntu 11-10
+>>>> Almost all source code already in source directory
+>>> This would severely restrict the usefulness of the comparison. I'd guess
+>>> that this means that in one case the source will be downloaded, while
+>>> it'll already be downloaded in the second test. Could you redo the
+>>> statistics with all sources downloaded?
+>> I had already built it once before running the first test then updated
+>> and I think one additional package was downloaded over a 100 MBps line
+>> so it affects a little, but not too much.
+> Ok, just curious. Not least as you had one image fail in the first
+> configuration, which you attributed to a failed download. That remark
+> made me wonder...
 
-El 17 d=E2=80=99octubre de 2011 8:42, Koen Kooi <koen@dominion.thruhere.net=
-> ha
-escrit:
+OK, To be 100% correct:
+I built meta-toolchain first so all packages for that build should be there.
+This is much longer than anything else, so this is a good comparision.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Then the build #1 was started and measruements was taken.
+This failed for core-image-sato due to one missing package, which
+After build #1 was completed, I downloaded the missing package
+and started build #2.
+
 >
-> [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+> Cheers,
+> Anders
 >
-> I know the difference is academic, but meta-oe or meta-efl?
->
-> Op 16-10-11 23:33, Pau Espin Pedrol schreef:
-> > * Copied from oe-classic
-> > <
-> http://git.openembedded.org/openembedded/commit/?id=3D63d3969b0f839fc4b7b=
-f7fe836daec729d9d3c53
-> >
-> >
-> >
-> * Remove PE=3D1
-> > * Add LIC_FILES_CHKSUM * Builds fine using SHR distro
-> >
-> > Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com> ---
-> > .../lightmediascanner/lightmediascanner_0.4.4.bb   |   29
-> > ++++++++++++++++++++ 1 files changed, 29 insertions(+), 0 deletions(-)
-> > create mode 100644
-> > meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.b=
-b
-> >
-> > diff --git
-> > a/meta-efl/recipes-multimedia/lightmediascanner/
-> lightmediascanner_0.4.4.bb
-> > b/meta-efl/recipes-multimedia/lightmediascanner/
-> lightmediascanner_0.4.4.bb
-> >
-> >
-> new file mode 100644
-> > index 0000000..cb35fb0 --- /dev/null +++
-> > b/meta-efl/recipes-multimedia/lightmediascanner/
-> lightmediascanner_0.4.4.bb
-> >
-> >
-> @@ -0,0 +1,29 @@
-> > +DESCRIPTION =3D "Lightweight media scanner meant to be used in
-> > not-so-powerful devices" +AUTHOR =3D "ProFUSION" +HOMEPAGE =3D
-> > "http://lms.garage.maemo.org/" +SECTION =3D "libs/multimedia" +LICENSE =
-=3D
-> > "LGPLv2.1+" +LIC_FILES_CHKSUM =3D
-> > "file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e37343" +DEPENDS =3D "s=
-qlite3
-> > flac virtual/libiconv" + +PR =3D "r0" + +SRC_URI =3D
-> > "
-> http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release=
-_${PV}.tar.bz2
-> > \ +" +SRC_URI[md5sum] =3D "f423376a70f8f321af69b12563b176fe"
-> > +SRC_URI[sha256sum] =3D
-> > "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e" + +S=
- =3D
-> > "${WORKDIR}/release_${PV}" + +inherit autotools pkgconfig +
-> > +do_install_append() { +    install -d ${D}/${bindir}/ +    install -m
-> > 755 ${S}/src/bin/.libs/test  ${D}/${bindir}/test-lms +} + +PACKAGES =3D=
-+
-> > "${PN}-test" + +FILES_${PN}-test =3D "${bindir}/test-lms" +
-> > +FILES_${PN}-dbg +=3D "${libdir}/${PN}/plugins/.debug"
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFOm85WMkyGM64RGpERApAnAJ9JtVK+0TfgAev2BW7aB0ACg/3DMwCgoDbv
-> 4r1P2NRHiDH3S6cA64cRP0w=3D
-> =3D92no
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> I think the conclusion:
+>>       Increasing the CPU speed by 30% and the memory frequency by 20%
+>>       gives 10-15% faster build time is OK.
+>>>> Building meta-toolchain is 13% faster with overclocking.
+>>> Was the overclocking test run after the non-overclocking?
 >
 
 
+-- 
+Best Regards
+Ulf Samuelsson
 
---=20
-Pau Espin Pedrol
-mail/jabber: pespin.shar@gmail.com
-http://blog.espeweb.net
+
 
