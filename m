@@ -1,24 +1,24 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1RGB2f-0007dD-Ga
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 16:53:21 +0200
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1RGAx4-0000rT-0W
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 16:47:34 +0200
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RGB6B-0007mc-G1 for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 16:56:59 +0200
+Received: from g225081213.adsl.alicedsl.de ([92.225.81.213]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RGB0d-00075c-Al for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 14:51:15 +0000
+Message-ID: <1318949469.3538.34.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2011 15:47:33 +0100
-In-Reply-To: <4E9D16AD.7040403@telia.com>
-References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
-	<4E9D16AD.7040403@telia.com>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1318949254.22985.146.camel@phil-desktop>
+Date: Tue, 18 Oct 2011 16:51:09 +0200
+In-Reply-To: <c4b964c5a17f463645b3e9cb7a8351bbe62eef9a.1318946821.git.Martin.Jansa@gmail.com>
+References: <359a5968f27008d6fcbaee5137c237bfcabd2579.1318946821.git.Martin.Jansa@gmail.com>
+	<c4b964c5a17f463645b3e9cb7a8351bbe62eef9a.1318946821.git.Martin.Jansa@gmail.com>
+X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
-Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
+Subject: Re: [meta-efl 3/3] lightmediascanner: Add version 0.4.4 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +32,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 14:53:21 -0000
+X-List-Received-Date: Tue, 18 Oct 2011 14:56:59 -0000
+X-Groupsio-MsgNum: 34869
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-pHEIjR0ttFRn8SxssI8J"
+
+--=-pHEIjR0ttFRn8SxssI8J
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Am Dienstag, den 18.10.2011, 16:10 +0200 schrieb Martin Jansa:
+> From: pespin <pespin.shar@gmail.com>
+
+The name is still not correct. Although the Signed-off-by line is.
+Please correct that.
+
+> * Copied from oe-classic <http://git.openembedded.org/openembedded/commit=
+/?id=3D63d3969b0f839fc4b7bf7fe836daec729d9d3c53>
+> * Remove PE=3D1
+> * Add LIC_FILES_CHKSUM
+> * Builds fine using SHR distro
+> * JaMa: removed PR
+
+Was the recipe tested somehow?
+
+> Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../lightmediascanner/lightmediascanner_0.4.4.bb   |   27 ++++++++++++++=
+++++++
+>  1 files changed, 27 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-efl/recipes-multimedia/lightmediascanner/lightme=
+diascanner_0.4.4.bb
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+--=-pHEIjR0ttFRn8SxssI8J
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2011-10-18 at 08:03 +0200, Ulf Samuelsson wrote:
-> My comparision between 2 similar machines indicate that
-> 32 bit 11.04 with Psyco-Dist is 20% faster than 64 bit with 11.04
-> 
-> The machine running 64 bit 11.04 was tested with 32 bit 11.04
-> using an external disk (connected through e-SATA) and results
-> were very close to the numbers for the other 32 bit machine
-> 
-> I didn't save those numbers but I think that is good enough
-> to draw the conclusion that adding JIT for 64 bit (PyPy?) will reduce build
-> time significantly.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-You seem to have changed two things at once there (or perhaps just made
-a bit too much of a leap in your conclusion).  Did you test 32-bit
-without the JIT?
+iEYEABECAAYFAk6dkl4ACgkQPX1aK2wOHVhm1gCfWz0jbUjGaplJjPhz0KUc6/bD
+al4An0j443BxZR6tfK4FhBX1QNXuq0lm
+=Lenc
+-----END PGP SIGNATURE-----
 
-p.
-
-
-
-
+--=-pHEIjR0ttFRn8SxssI8J--
