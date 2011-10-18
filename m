@@ -1,34 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RG7W6-0008Eh-Uc for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 13:07:31 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RG7QR-0006dC-Ev for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 13:01:39 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 13:01:39 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <lynn.xin.lin@gmail.com>) id 1RG84Q-0000Qn-MB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 13:42:58 +0200
+Received: by vwe42 with SMTP id 42so217796vwe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 13:01:39 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 18 Oct 2011 04:37:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=ex0P3PvUPJVCqAH8/vSkIKNcQVkjpR4WEopjml+NreE=;
+	b=O/p2/54r2nMxqJ1VOC7HalXkS97hNAeTwjMOYSagnXXxjsC1hZGhcReGCxqiTwyyGd
+	g9fOL70C0HRwwfO0OxE9mJN3Xq7fr5leWhN6ZTawBD2qhJANhjWeT78UbBl2L78MbP2v
+	jj3Nb4pzOnz+Y9/KPSVBMVKssXUYDsvfTI4MI=
+MIME-Version: 1.0
+Received: by 10.52.109.42 with SMTP id hp10mr1185500vdb.65.1318937828604; Tue,
+	18 Oct 2011 04:37:08 -0700 (PDT)
+Received: by 10.52.160.197 with HTTP; Tue, 18 Oct 2011 04:37:08 -0700 (PDT)
+Received: by 10.52.160.197 with HTTP; Tue, 18 Oct 2011 04:37:08 -0700 (PDT)
+In-Reply-To: <CACphT6KqgRkRt1vtfS8ROS5P36P=yKACX0tNV6gw7NTa25U9Bg@mail.gmail.com>
+References: <CACphT6KqgRkRt1vtfS8ROS5P36P=yKACX0tNV6gw7NTa25U9Bg@mail.gmail.com>
+Date: Tue, 18 Oct 2011 19:37:08 +0800
+Message-ID: <CAPgpnMRYDpv6gKF2m7OTz-9BKgR1EYaEgu0Sqy2JDRKqiMxfXA@mail.gmail.com>
+From: Lynn Lin <lynn.xin.lin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 18 Oct 2011 13:01:25 +0200
-Message-ID: <j7jma5$kg2$1@dough.gmane.org>
-References: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-efl][V3] epdfview: add initial recipe with version 0.1.8
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Openssl build bug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 11:07:31 -0000
+X-List-Received-Date: Tue, 18 Oct 2011 11:42:58 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 17-10-11 13:50, Andreas Müller schreef:
-> initial source taken from oe-classic epdfview_0.1.7.bb commit
-> 44985d56bc556786812a0a02d6219afd31a7381d
-> 
-> run tested on overo
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-
-Martin, do you want to put this in your next pull request or do you want me
-to takes this directly?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOnVyFMkyGM64RGpERAr1RAKC2lXWrfNhtRyrbB2rCzyIn4df8NACfWzM9
-3wn8zFaGfuMnCLyLwxY0YBM=
-=Td+/
------END PGP SIGNATURE-----
-
-
+=E5=9C=A8 2011-10-18 =E4=B8=8A=E5=8D=884:46=EF=BC=8C"Panda Resistor" <panda=
+resistor@gmail.com>=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Openssl-native_1.0.0d-r14 will not build on Ubuntu 11.10, but is building
+on
+> Ubuntu 10.04. The errors are undefined reference errors, and it has been
+> suggested that they are linked to erroneous ordering of library
+dependencies
+> and dependency folders, however the libdepsfirst patch has been applied b=
+y
+> bitbake upon a compilation attempt.
+>
+> Cheers
+>
+I also see this error on ubuntu 11.10
+_______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
