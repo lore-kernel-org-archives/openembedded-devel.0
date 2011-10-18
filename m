@@ -1,32 +1,34 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <slapinid@gmail.com>) id 1RG6Ly-0006Gr-PQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 11:52:59 +0200
-Received: by wyg19 with SMTP id 19so381820wyg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RG7W6-0008Eh-Uc for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 13:07:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RG7QR-0006dC-Ev for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 13:01:39 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Oct 2011 13:01:39 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 02:47:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=zO5F2z446vNO6JmHlhW3bagI1lTimIlOQnSxiKAQY/c=;
-	b=WvHm06KKnrpEehoY6qXvK/SpNrH1El+LCIRjARtkhnFDH9GPiVPvLAC/qUdfmt34Zl
-	XZ/+xyBPnYsdhvp24426kZ5yTpy8CThbg+OHdcytgoWo68bZ6/obpQCC3wxIPQ0tEGAq
-	5C3BUtN/AXoIxShPZHupgd4SHYjQBSlG1kpc8=
-MIME-Version: 1.0
-Received: by 10.216.88.212 with SMTP id a62mr632736wef.43.1318931228666; Tue,
-	18 Oct 2011 02:47:08 -0700 (PDT)
-Received: by 10.216.183.13 with HTTP; Tue, 18 Oct 2011 02:47:08 -0700 (PDT)
-In-Reply-To: <j76o9h$504$1@dough.gmane.org>
-References: <201109222337.30836.schnitzeltony@gmx.de>
-	<201109251506.30431.schnitzeltony@gmx.de>
-	<j6ugs9$j5b$1@dough.gmane.org>
-	<201110102141.56124.schnitzeltony@gmx.de>
-	<j76o9h$504$1@dough.gmane.org>
-Date: Tue, 18 Oct 2011 13:47:08 +0400
-Message-ID: <CAFZPMoZNRKKtOpX7mqtNWB1mEZC1onz4GjAjH+AYWAETQ53XoQ@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Tue, 18 Oct 2011 13:01:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] do_rootfs fails with networkmanager (was network-manager-applet) included
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 18 Oct 2011 13:01:25 +0200
+Message-ID: <j7jma5$kg2$1@dough.gmane.org>
+References: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-efl][V3] epdfview: add initial recipe with version 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,15 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 09:52:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 Oct 2011 11:07:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi, all!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Just to let you know, lmbench contains /var/run as a directory, too.
+Op 17-10-11 13:50, Andreas Müller schreef:
+> initial source taken from oe-classic epdfview_0.1.7.bb commit
+> 44985d56bc556786812a0a02d6219afd31a7381d
+> 
+> run tested on overo
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 
-Removing it from list fixes a problem.
+Martin, do you want to put this in your next pull request or do you want me
+to takes this directly?
 
-S.
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOnVyFMkyGM64RGpERAr1RAKC2lXWrfNhtRyrbB2rCzyIn4df8NACfWzM9
+3wn8zFaGfuMnCLyLwxY0YBM=
+=Td+/
+-----END PGP SIGNATURE-----
+
 
 
