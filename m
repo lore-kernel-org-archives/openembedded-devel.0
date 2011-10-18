@@ -1,28 +1,34 @@
-Received: from smtprelay-h21.telenor.se ([195.54.99.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RG4xs-00005n-8T
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 10:24:00 +0200
-Received: from iph2.telenor.se (iph2.telenor.se [195.54.127.133])
-	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 14B9EE9CC6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RG54o-0000If-2j for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 10:31:10 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RG4zC-00059L-DQ for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Oct 2011 10:25:22 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Oct 2011 10:25:22 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 10:18:11 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AtMvAJw1nU5T4zkNPGdsb2JhbAAMN4k8kD6OfAEBAQE3gl9APRYYAwIBAgExJwgBAb48iBsEk32RWA
-X-IronPort-AV: E=Sophos;i="4.69,364,1315173600"; d="scan'208";a="496399508"
-Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.249]) ([83.227.57.13])
-	by iph2.telenor.se with ESMTP; 18 Oct 2011 10:18:08 +0200
-Message-ID: <4E9D3640.9070608@telia.com>
-Date: Tue, 18 Oct 2011 10:18:08 +0200
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Tue, 18 Oct 2011 10:25:22 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Use of stamps in the source directory of openembedded-core
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 18 Oct 2011 10:25:08 +0200
+Message-ID: <j7jd54$gnc$1@dough.gmane.org>
+References: <4E9C975D.60709@telia.com> <4E9D3547.4050809@telia.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <4E9D3547.4050809@telia.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: Building multiple u-boot binaries in oe-core?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 08:24:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 18 Oct 2011 08:31:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-After I have built openembedded-core, I notice that the source directory
-is loaded with files: *.done.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Is this really a good idea?
+Op 18-10-11 10:13, Ulf Samuelsson schreef:
+> I added the functionality for building multiple u-boot binaries to 
+> classic openembedded, but this has not been implemented in oe-core. I
+> find that rather useful. Anyone disagreeing?
+> 
+> The core of this is:
+> 
+> do_compile () { if ! [ "x${UBOOT_MACHINES}" == "x" ] ; then for board in
+> ${UBOOT_MACHINES} ; do if ! [ `grep ${board}_config Makefile | wc -c` ==
+> 0 ] ; then mkdir -p binaries/${board} oe_runmake O=binaries/${board}
+> distclean oe_runmake O=binaries/${board} ${board}_config oe_runmake
+> O=binaries/${board} all fi done else oe_runmake ${UBOOT_MACHINE} 
+> oe_runmake all fi }
+> 
+> Note that I removed the _config part from UBOOT_MACHINES.
+> 
+> At the moment, the binary after youv'e done "make beagleboard_config;
+> make" will be called: u-boot-beagleboard_config-${PV}-${PR}.bin
+> 
+> I think "u-boot-beagleboard-${PV}-${PR}.bin" is nicer.
+> 
+> There aren't that many boards in oe-core at the moment.
 
-I tend to use a common source directory for multiple projects.
+4 qemu machine to be exact
 
-Having stamps in the source directory, means that you let one
-project affect the others.
+> Isn't this a good time to get rid of UBOOT_MACHINE altogher and/or
+> redefine it without the "_config"
 
--- 
-Best Regards
-Ulf Samuelsson
+Not sure, there are a *lot* of BSPs out there where _config is expected to
+be there.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOnTfkMkyGM64RGpERAhgKAJ934JngAAMd33iLVGrYVKYKJ7Am8ACfaxKL
+GdSJOI5qgK2eFk7OwHwD3eU=
+=62Sb
+-----END PGP SIGNATURE-----
 
 
 
