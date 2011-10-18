@@ -1,26 +1,30 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1RG1lE-0001Bg-BU
+	(envelope-from <raj.khem@gmail.com>) id 1RG1rp-0001nN-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 06:58:44 +0200
-Received: by vcbf1 with SMTP id f1so189035vcb.6
+	Tue, 18 Oct 2011 07:05:34 +0200
+Received: by pzk33 with SMTP id 33so603478pzk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2011 21:52:54 -0700 (PDT)
+	Mon, 17 Oct 2011 21:59:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=+o82iZfThBk9MI9SNyvWQsfIKvl1f0h/BZSgEtdO5cA=;
-	b=qdZqDm6M8D5xAsLWPWbpk4NbBc1LgkGIf+zWN5uExVWaCnzTMm1LtHXaVhKF96DZxl
-	1wh3Qn4kOwB61028gaL0Tho5zsPE4y1JohLRcA4elI+fUz9oVXWtitjPKazmtkvP683f
-	csuPtW4wHUdj+bWtOhQVZTboNNuYUq5hAkQgY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=yzzhrPhUfqOjxy3hn1oNYvnzJm/ZXi97xYVx6dtndks=;
+	b=yHAbEje++aVmJss3l4nbugK3yeQaq2HgYRwAAtp7J2I3Z78WBG9bYJBw6Uh6xL8bwv
+	1KU1ZWsGtIO3BPhnYY23X5ehObGovLxAQ8hJSXq9WL3S7O45Q1GpH0Uj0g8quBtn4Xih
+	Y64U25d2Am4Cr/4Esy1TK42Dw0K3vdmmHhOvQ=
 MIME-Version: 1.0
-Received: by 10.52.94.97 with SMTP id db1mr712045vdb.67.1318913574296; Mon, 17
-	Oct 2011 21:52:54 -0700 (PDT)
-Received: by 10.220.190.141 with HTTP; Mon, 17 Oct 2011 21:52:54 -0700 (PDT)
-Date: Mon, 17 Oct 2011 21:52:54 -0700
-Message-ID: <CAG4_upS8pTwVFda=HcYWZ5VcXjo838s85ep2H+=fo9NrMV9hqQ@mail.gmail.com>
-From: Chris Verges <kg4ysn@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: tzdata moved to ICANN, URLs to update?
+Received: by 10.68.23.6 with SMTP id i6mr2386143pbf.13.1318913982934; Mon, 17
+	Oct 2011 21:59:42 -0700 (PDT)
+Received: by 10.68.48.230 with HTTP; Mon, 17 Oct 2011 21:59:42 -0700 (PDT)
+In-Reply-To: <CAG4_upS8pTwVFda=HcYWZ5VcXjo838s85ep2H+=fo9NrMV9hqQ@mail.gmail.com>
+References: <CAG4_upS8pTwVFda=HcYWZ5VcXjo838s85ep2H+=fo9NrMV9hqQ@mail.gmail.com>
+Date: Mon, 17 Oct 2011 21:59:42 -0700
+Message-ID: <CAMKF1srG+ExyMmC-7x3shdKdZaKQSX4vbBMDqM=PG1p=Ea2kXw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: tzdata moved to ICANN, URLs to update?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,18 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 04:58:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 Oct 2011 05:05:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi all,
+On Monday, October 17, 2011, Chris Verges <kg4ysn@gmail.com> wrote:
+> Hi all,
+>
+> I just saw the posting that the tz database has been moved to ICANN
+> after the law suit issue occurred.  Do we need to update any recipes
+> or has this been handled already?
 
-I just saw the posting that the tz database has been moved to ICANN
-after the law suit issue occurred.  Do we need to update any recipes
-or has this been handled already?
-
-http://www.iana.org/time-zones
-
-Thanks,
-Chris
-
+I think we might need the src_uri updated
+>
+> http://www.iana.org/time-zones
+>
+> Thanks,
+> Chris
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
