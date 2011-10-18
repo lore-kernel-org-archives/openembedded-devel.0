@@ -1,35 +1,29 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RGGgC-0004Hp-36
+	(envelope-from <pespin.shar@gmail.com>) id 1RGGu0-000526-BS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 22:54:33 +0200
-Received: by iafi7 with SMTP id i7so1130737iaf.6
+	Tue, 18 Oct 2011 23:08:49 +0200
+Received: by wyg19 with SMTP id 19so1105384wyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 13:48:40 -0700 (PDT)
+	Tue, 18 Oct 2011 14:02:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=I8CHvOtH2zY7mmVmjOT3PvyEY9ajduNo9Zi0cqPP7Tw=;
-	b=jo1iHgPmDCJflz+N4R4o/mCWqiHHhT1jAjx5hXTOMdOvvd6bx+YYtlvNfRYERBb8ry
-	PJLzuyQl+kLdZKrxISod1zO+YhfYHqah8DDL9CxTDxZVQfqAXwm2pXyNotDn/ITd+9DS
-	G0cEdpCWuOuomL1Oiu9wvPJPR67c5qJLedomA=
-Received: by 10.231.50.201 with SMTP id a9mr1788267ibg.1.1318970920305;
-	Tue, 18 Oct 2011 13:48:40 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id jm11sm8393031ibb.1.2011.10.18.13.48.38
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=k20GshcG5BQRM4H37tbSq1Voq7Wseqwp7QOJ7JpoSrk=;
+	b=UeHsV9QRfi8epkYS2L/QlNvT7jhFsm9AhylYbwByYLnASNEFBzIIiV+lhHzq8V82zo
+	Wc9IU87dfM2+JnACinNSdlF9aAZpZPnBePo4CWeA3Y+UlIjMv+J17shc6onm7GTTc3Gp
+	TTdtW1x29H68lUha5mdwdjzcrDh8A93xpNXwo=
+Received: by 10.227.13.66 with SMTP id b2mr481717wba.44.1318971775184;
+	Tue, 18 Oct 2011 14:02:55 -0700 (PDT)
+Received: from localhost.localdomain ([90.163.60.41])
+	by mx.google.com with ESMTPS id i29sm5767885wbp.22.2011.10.18.14.02.53
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Oct 2011 13:48:38 -0700 (PDT)
-Date: Tue, 18 Oct 2011 13:49:54 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 18 Oct 2011 14:02:54 -0700 (PDT)
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111018204954.GA27472@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <j7gllt$s0$1@dough.gmane.org> <20111018203818.GD556@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20111018203818.GD556@jama.jama.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: Patchwork breaking submitters name Was: Patchwork hooks for meta-oe active and working
+Date: Tue, 18 Oct 2011 23:00:33 +0200
+Message-Id: <1318971633-1534-1-git-send-email-pespin.shar@gmail.com>
+X-Mailer: git-send-email 1.7.7
+Subject: [PATCH][meta-efl]] dummy patch to try if patchwork bug is fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 20:54:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Oct 2011 21:08:49 -0000
 
-On (18/10/11 22:38), Martin Jansa wrote:
-> On Mon, Oct 17, 2011 at 09:32:13AM +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > Hi,
-> > 
-> > Thanks to Khem the patchwork hooks for meta-oe (and hence meta-efl,
-> > meta-gnome and meta-xfce) are active and working.
-> > Once the commits hit the OE server the state will get updated automatically,
-> > so the submitter will instantly know when his/her patch has hit the repo.
-> > 
-> > regards,
-> 
-> There is known and fixed issue with patchwork breaking author name
-> 
-> We have an example in patch
-> "[meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)"
-> Original e-mail says "Pau Espin Pedrol <pespin.shar at gmail.com>"
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-October/035644.html
-> 
-> older patchwork instance says only "pespin <pespin.shar at gmail.com>"
-> http://patches.openembedded.org/patch/13323/
-> newer patchwork instance says also "pespin <pespin.shar at gmail.com>"
-> http://patchwork.openembedded.org/patch/13323/
-> 
-> Same problem was reported also on LKML
-> https://lkml.org/lkml/2011/9/18/128
-> And later fixed by Jeremy Kerr
-> https://lkml.org/lkml/2011/9/18/149
-> 
-> Can we get this upstream fix to our patchwork instance too?
+Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com>
+---
+ meta-efl/recipes-efl/e17/efm-path_svn.bb |   15 ---------------
+ 1 files changed, 0 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/e17/efm-path_svn.bb
 
-This patch is already applied to the new patchwork instance on
-patchwork.openembedded.org however it was only yesterday when it came
-into life.
+diff --git a/meta-efl/recipes-efl/e17/efm-path_svn.bb b/meta-efl/recipes-efl/e17/efm-path_svn.bb
+deleted file mode 100644
+index 685513f..0000000
+--- a/meta-efl/recipes-efl/e17/efm-path_svn.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-LICENSE = "MIT"
+-PV = "0.0.1+svnr${SRCPV}"
+-PR = "${INC_PR}.0"
+-
+-require e-module.inc
+-
+-SRCNAME = "E-MODULES-EXTRA/efm_path"
+-
+-do_configure_prepend() {
+-    sed -i -e /po/d configure.ac
+-    sed -i -e s:\ po::g Makefile.am
+-}
+-
+-FILES_${PN}-dbg += "${libdir}/enlightenment/modules/*/*/.debug/"
+-FILES_${PN} += "${libdir}/enlightenment/modules/"
+-- 
+1.7.7
 
--Khem
 
 
