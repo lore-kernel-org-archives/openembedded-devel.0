@@ -1,38 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RG9DM-0003Ap-Tz
+	(envelope-from <pespin.shar@gmail.com>) id 1RG9sd-0004sQ-FL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Oct 2011 14:56:18 +0200
-Received: by bkat8 with SMTP id t8so819840bka.6
+	Tue, 18 Oct 2011 15:38:55 +0200
+Received: by qam2 with SMTP id 2so375319qam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2011 05:50:24 -0700 (PDT)
+	Tue, 18 Oct 2011 06:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KWlsFLPZZsde588kFbDMzmoek3fFf59KdztAO7+MWyM=;
-	b=jZo3IXiBb2mWIoCkVlThMsSdjIJY2Dlmb/ktLUz7XiybvRzS1XVPNzWcs5u3zcxMq+
-	B6oAO0uoFUp3cc4NrcRGw8QYvROC/qAVf09aag/TA9B+fguPBjc43alCSvIyYYiU+IFl
-	S0jUI/pHlXoRKKJuMoieYzbDxNosYrmYC7qBs=
-Received: by 10.204.14.208 with SMTP id h16mr1780716bka.2.1318942224193;
-	Tue, 18 Oct 2011 05:50:24 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id x3sm2039825bkn.1.2011.10.18.05.50.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Oct 2011 05:50:23 -0700 (PDT)
-Date: Tue, 18 Oct 2011 14:50:16 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111018125016.GG20678@jama.jama.net>
-References: <1318852253-4171-1-git-send-email-schnitzeltony@gmx.de>
-	<j7jma5$kg2$1@dough.gmane.org>
-	<20111018114340.GC20678@jama.jama.net>
-	<j7jpfj$c64$1@dough.gmane.org>
-	<20111018122034.GF20678@jama.jama.net>
-	<j7jrf1$pe3$1@dough.gmane.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=D8n3GIN6swUqGTy5Nzfewb0W6/05bUft9K+Lwx/uGz8=;
+	b=kFSYLwn65a36wKUIm+Y8NjQAODHoTJynbJJPgd3PNKQ9+PnhkZjnzFeZzrfL+AoRXv
+	nOHyOThSuP7zH2moyLvRRnB/W7T4NmCUtvT1KsAz3xLLkHmrmr4fEW7hFa7SxgA88tBK
+	Bdz3pfnGA7MvtxxLntgGn+Xlxafkp4mmyLt6k=
 MIME-Version: 1.0
-In-Reply-To: <j7jrf1$pe3$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: All patches in patchwork archived? Was: [meta-efl][V3] epdfview: add initial recipe with version 0.1.8
+Received: by 10.229.64.81 with SMTP id d17mr535742qci.114.1318944784941; Tue,
+	18 Oct 2011 06:33:04 -0700 (PDT)
+Received: by 10.229.198.227 with HTTP; Tue, 18 Oct 2011 06:33:04 -0700 (PDT)
+In-Reply-To: <j7giom$e07$1@dough.gmane.org>
+References: <1318800781-21037-1-git-send-email-pespin.shar@gmail.com>
+	<j7giom$e07$1@dough.gmane.org>
+Date: Tue, 18 Oct 2011 15:33:04 +0200
+Message-ID: <CAEGpDuYCQPYDLZ3CNPPDMbf23Jjjt2cnQgQpVr9SjKx59WmEAQ@mail.gmail.com>
+From: Pau Espin Pedrol <pespin.shar@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,81 +38,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 12:56:18 -0000
-X-Groupsio-MsgNum: 34858
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kHRd/tpU31Zn62xO"
-Content-Disposition: inline
-
---kHRd/tpU31Zn62xO
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Oct 2011 13:38:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 18, 2011 at 02:29:21PM +0200, Koen Kooi wrote:
+meta-efl ;)
+
+El 17 d=E2=80=99octubre de 2011 8:42, Koen Kooi <koen@dominion.thruhere.net=
+> ha
+escrit:
+
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
->=20
-> Op 18-10-11 14:20, Martin Jansa schreef:
-> > On Tue, Oct 18, 2011 at 01:55:31PM +0200, Koen Kooi wrote:
-> >> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
-> >>=20
-> >> Op 18-10-11 13:43, Martin Jansa schreef:
-> >>> On Tue, Oct 18, 2011 at 01:01:25PM +0200, Koen Kooi wrote:
-> >>>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
-> >>>>=20
-> >>>> Op 17-10-11 13:50, Andreas M=FCller schreef:
-> >>>>> initial source taken from oe-classic epdfview_0.1.7.bb commit=20
-> >>>>> 44985d56bc556786812a0a02d6219afd31a7381d
-> >>>>>=20
-> >>>>> run tested on overo
-> >>>>>=20
-> >>>>> Signed-off-by: Andreas M=FCller <schnitzeltony@gmx.de>
-> >>>>=20
-> >>>> Martin, do you want to put this in your next pull request or do
-> >>>> you want me to takes this directly?
-> >>>=20
-> >>> I have only webkit-efl and eve changes in my queue and I would like
-> >>> to get them applied upstream first. So please take this directly,
-> >>> I've tested it here too and it looks fine.
-> >>=20
-> >> Done. And patchwork updated itself! THIS IS THE FUTURE!!!!one!!!
-> >=20
-> > Nice, but did it accidentally mark all oe-core patches in=20
-> > http://patchwork.openembedded.org/project/oe-core/list/ as Archived?
-> >=20
-> > Because such patches are not shown by default even when they are in sta=
-te
-> > New.
-> >=20
-> > If it's only because of pw upgrade and won't mark them archived after=
-=20
-> > every push then fine :).
->=20
-> No, I got tired of the mess and archived them all manually, but left them=
- in
-> the 'New' state.
+>
+> [PATCH][meta-oe] lightmediascanner: Add version 0.4.4 (initial recipe)
+>
+> I know the difference is academic, but meta-oe or meta-efl?
+>
+> Op 16-10-11 23:33, Pau Espin Pedrol schreef:
+> > * Copied from oe-classic
+> > <
+> http://git.openembedded.org/openembedded/commit/?id=3D63d3969b0f839fc4b7b=
+f7fe836daec729d9d3c53
+> >
+> >
+> >
+> * Remove PE=3D1
+> > * Add LIC_FILES_CHKSUM * Builds fine using SHR distro
+> >
+> > Signed-off-by: Pau Espin Pedrol <pespin.shar@gmail.com> ---
+> > .../lightmediascanner/lightmediascanner_0.4.4.bb   |   29
+> > ++++++++++++++++++++ 1 files changed, 29 insertions(+), 0 deletions(-)
+> > create mode 100644
+> > meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.b=
+b
+> >
+> > diff --git
+> > a/meta-efl/recipes-multimedia/lightmediascanner/
+> lightmediascanner_0.4.4.bb
+> > b/meta-efl/recipes-multimedia/lightmediascanner/
+> lightmediascanner_0.4.4.bb
+> >
+> >
+> new file mode 100644
+> > index 0000000..cb35fb0 --- /dev/null +++
+> > b/meta-efl/recipes-multimedia/lightmediascanner/
+> lightmediascanner_0.4.4.bb
+> >
+> >
+> @@ -0,0 +1,29 @@
+> > +DESCRIPTION =3D "Lightweight media scanner meant to be used in
+> > not-so-powerful devices" +AUTHOR =3D "ProFUSION" +HOMEPAGE =3D
+> > "http://lms.garage.maemo.org/" +SECTION =3D "libs/multimedia" +LICENSE =
+=3D
+> > "LGPLv2.1+" +LIC_FILES_CHKSUM =3D
+> > "file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e37343" +DEPENDS =3D "s=
+qlite3
+> > flac virtual/libiconv" + +PR =3D "r0" + +SRC_URI =3D
+> > "
+> http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release=
+_${PV}.tar.bz2
+> > \ +" +SRC_URI[md5sum] =3D "f423376a70f8f321af69b12563b176fe"
+> > +SRC_URI[sha256sum] =3D
+> > "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e" + +S=
+ =3D
+> > "${WORKDIR}/release_${PV}" + +inherit autotools pkgconfig +
+> > +do_install_append() { +    install -d ${D}/${bindir}/ +    install -m
+> > 755 ${S}/src/bin/.libs/test  ${D}/${bindir}/test-lms +} + +PACKAGES =3D=
++
+> > "${PN}-test" + +FILES_${PN}-test =3D "${bindir}/test-lms" +
+> > +FILES_${PN}-dbg +=3D "${libdir}/${PN}/plugins/.debug"
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFOm85WMkyGM64RGpERApAnAJ9JtVK+0TfgAev2BW7aB0ACg/3DMwCgoDbv
+> 4r1P2NRHiDH3S6cA64cRP0w=3D
+> =3D92no
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-OK, I've just marked all my oe-core patches appropriately with web
-interface..
 
-with meta-oe it will be easier, but I'll learn to use pwclient to mark
-them all (except maybe few exceptions) at once :).
 
-Thanks,
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Pau Espin Pedrol
+mail/jabber: pespin.shar@gmail.com
+http://blog.espeweb.net
 
---kHRd/tpU31Zn62xO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk6ddggACgkQN1Ujt2V2gByxmACbB/SzXpFxRbL4FHaOJf3VKaWn
-M0UAnArK1sS7M/mc4eXvDaBRmzHdltNd
-=eep3
------END PGP SIGNATURE-----
-
---kHRd/tpU31Zn62xO--
