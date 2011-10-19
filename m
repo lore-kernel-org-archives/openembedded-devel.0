@@ -1,32 +1,40 @@
-Received: from smtprelay-b21.telenor.se ([195.54.99.212])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RGIKc-0002fs-UE
+	(envelope-from <martin.jansa@gmail.com>) id 1RGJkH-0005Ks-1O
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 00:40:23 +0200
-Received: from iph5.telenor.se (iph5.telenor.se [195.54.127.136])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id DA500EA10C
+	Wed, 19 Oct 2011 02:10:57 +0200
+Received: by eyd9 with SMTP id 9so1135981eyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 00:34:32 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AvcjALX+nU5T4zkNPGdsb2JhbAAMOJl/jwkBAQEBN4IgAQEBAQIBAQEBNTYbCxgJGgsPAhYBGxQTBgIBAYd8CLYjiBsEkWOCGpFY
-X-IronPort-AV: E=Sophos;i="4.69,367,1315173600"; d="scan'208";a="55538891"
-Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.249]) ([83.227.57.13])
-	by iph5.telenor.se with ESMTP; 19 Oct 2011 00:34:32 +0200
-Message-ID: <4E9DFEF8.40705@telia.com>
-Date: Wed, 19 Oct 2011 00:34:32 +0200
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Tue, 18 Oct 2011 17:05:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=cVDZTkghcYzZtLPzXOMeAujkYoyFbzz1cPBFy3hsF4U=;
+	b=ViqqEO3v/Y9+yjyYT5zTGWCiwUh328ct+8Wya/3mUpZlt6/oGSIrJbVOKjGdS/uPRt
+	rEWjumZE+Gd8m6OyvWBwF/A158eVKbR7Uj1fzZRcJqg7QczZw/52dFtX1tAAl8OffQLq
+	lph9bgWhh3dkz/7dIjQFo5OzDqcb2M85PcPls=
+Received: by 10.223.81.205 with SMTP id y13mr7179721fak.34.1318982706555;
+	Tue, 18 Oct 2011 17:05:06 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n18sm6367129fah.2.2011.10.18.17.05.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 18 Oct 2011 17:05:05 -0700 (PDT)
+Date: Wed, 19 Oct 2011 02:04:59 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
-	<4E9D16AD.7040403@telia.com>
-	<1318949254.22985.146.camel@phil-desktop>
-In-Reply-To: <1318949254.22985.146.camel@phil-desktop>
-Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
+Message-ID: <20111019000459.GA3522@jama.jama.net>
+References: <359a5968f27008d6fcbaee5137c237bfcabd2579.1318946821.git.Martin.Jansa@gmail.com>
+	<c4b964c5a17f463645b3e9cb7a8351bbe62eef9a.1318946821.git.Martin.Jansa@gmail.com>
+	<1318949469.3538.34.camel@mattotaupa>
+	<20111018162433.GJ20678@jama.jama.net>
+	<j7ka5s$ioi$1@dough.gmane.org>
+	<20111018165107.GA17242@jama.jama.net>
+	<j7kb44$pmd$1@dough.gmane.org> <20111018173948.GA556@jama.jama.net>
+	<j7kjjv$ud8$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <j7kjjv$ud8$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-efl 3/3] lightmediascanner: Add version 0.4.4 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +48,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 22:40:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Oct 2011 00:10:57 -0000
+X-Groupsio-MsgNum: 34889
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="5mCyUwZo2JvN/JJP"
+Content-Disposition: inline
 
-2011-10-18 16:47, Phil Blundell skrev:
-> On Tue, 2011-10-18 at 08:03 +0200, Ulf Samuelsson wrote:
->> My comparision between 2 similar machines indicate that
->> 32 bit 11.04 with Psyco-Dist is 20% faster than 64 bit with 11.04
->>
->> The machine running 64 bit 11.04 was tested with 32 bit 11.04
->> using an external disk (connected through e-SATA) and results
->> were very close to the numbers for the other 32 bit machine
->>
->> I didn't save those numbers but I think that is good enough
->> to draw the conclusion that adding JIT for 64 bit (PyPy?) will reduce build
->> time significantly.
-> You seem to have changed two things at once there (or perhaps just made
-> a bit too much of a leap in your conclusion).  Did you test 32-bit
-> without the JIT?
+--5mCyUwZo2JvN/JJP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The word indicate is not soo strong as you indicate ;-)
-Just saying that if it looks like a duck, walks like a duck
-it is probably a duck.
+On Tue, Oct 18, 2011 at 09:21:35PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 18-10-11 19:39, Martin Jansa schreef:
+> > On Tue, Oct 18, 2011 at 06:56:36PM +0200, Koen Kooi wrote:
+> >>> because of eglibc or uclibc?
+> >>=20
+> >> uclibc, the 'libc-glibc' override is true for both (e)glibc.
+> >=20
+> > Ah OK,
+> >=20
+> > -RDEPENDS_${PN}-test =3D "glibc-gconv-utf-16"=20
+> > +RDEPENDS_${PN}-test_append_libc-glibc =3D "glibc-gconv-utf-16"
+>=20
+> The branch has a space after the first quote, right?
 
-It takes too long to reinstall for that to be an alternative for me.
-More data from other people could be an alternative.
-
-
->
-> p.
->
->
->
+Not yet, but I'll add it.. but now it works without fine
+Depends: liblightmediascanner0 (>=3D 0.4.4), libsqlite3-0 (>=3D 3.7.7.1), g=
+libc-gconv-utf-16, libc6 (>=3D 2.14)
+=20
+> >=20
+> > tested on nokia900 and done in branch
+> >=20
+> > Regards,
+> >=20
+> >=20
+> >=20
+> >=20
+> > _______________________________________________ Openembedded-devel
+> > mailing list Openembedded-devel@lists.openembedded.org=20
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>=20
+> iD8DBQFOndG/MkyGM64RGpERAsasAKCUMgJWC9EAxDVKVJRF3P5k3cC4AQCghk7g
+> 9xAqFKNdmygRhd7vSRq2Yqs=3D
+> =3DALWc
+> -----END PGP SIGNATURE-----
+>=20
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
--- 
-Best Regards
-Ulf Samuelsson
+--5mCyUwZo2JvN/JJP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk6eFCsACgkQN1Ujt2V2gBxzIQCfdHTDQfaEn2gswTR990Ak+9dI
+VYgAoI8wKxCH1FMjvLuQ9OvVQUoiRsWH
+=T0rM
+-----END PGP SIGNATURE-----
 
+--5mCyUwZo2JvN/JJP--
