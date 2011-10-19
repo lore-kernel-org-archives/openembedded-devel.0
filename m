@@ -1,31 +1,30 @@
-Received: from smtprelay-b22.telenor.se ([195.54.99.213])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RGXvd-0003il-6h
+	(envelope-from <otavio.salvador@gmail.com>) id 1RGYGq-0004AU-Vd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 17:19:37 +0200
-Received: from iph5.telenor.se (iph5.telenor.se [195.54.127.136])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id 6B2C7EB48E
+	Wed, 19 Oct 2011 17:41:33 +0200
+Received: by yxo30 with SMTP id 30so1761253yxo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 17:13:46 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ArQuAAPonk5T4zkNPGdsb2JhbAAMOIk8kEuPBQEBAQE3giABAQEBAgE4EwEsBgsLFQwWDwkDAgECATEUEwYCAQGHfKdzAY1niBsEk36RWQ
-X-IronPort-AV: E=Sophos;i="4.69,372,1315173600"; d="scan'208";a="55996226"
-Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.249]) ([83.227.57.13])
-	by iph5.telenor.se with ESMTP; 19 Oct 2011 17:13:46 +0200
-Message-ID: <4E9EE929.4000005@telia.com>
-Date: Wed, 19 Oct 2011 17:13:45 +0200
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Wed, 19 Oct 2011 08:35:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=0axR/h3QkiwkzcVF27k3CHVHA4SbZot2hcbWzRJRZS8=;
+	b=mu6kZg1zhIgbb7e5gkJmPJjLEJhlAC417SgAw3w1bbuzHVeRvWAVu3+PIuOHaZe8Ti
+	+rmdgtxZ3n8zaaGOkPF4cAny7Mur7PnRynEIQSaf+L4D4AK12kiJsOOmDU1hbBmWZINf
+	NVahgzbpE5k5IL08IIV+VwOwF9Hmw67Zw5lx8=
+Received: by 10.151.92.21 with SMTP id u21mr6192159ybl.82.1319038541150;
+	Wed, 19 Oct 2011 08:35:41 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id m37sm16823371anq.11.2011.10.19.08.35.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 19 Oct 2011 08:35:40 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1319037014-29473-1-git-send-email-ulf_samuelsson@telia.com>
-	<1319037014-29473-3-git-send-email-ulf_samuelsson@telia.com>
-In-Reply-To: <1319037014-29473-3-git-send-email-ulf_samuelsson@telia.com>
-Subject: Re: [PATCH 3/3] Update checksums for binutils-2.20.1.tar.bz2
+Date: Wed, 19 Oct 2011 15:35:31 +0000
+Message-Id: <cover.1319038482.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/1] SystemD related fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,62 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 15:19:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Oct 2011 15:41:33 -0000
 
-2011-10-19 17:10, ulf_samuelsson@telia.com skrev:
+The following changes since commit 59f9d80e83fd3275def5d909d7d0e1861fd8105b:
 
-FYI:
-With the three patches in the patchset,
-classic openembedded builds on a 64 bit Ubuntu-11.10.
-Did not test them on a board yet.
+  cloud9 0.5.1: convert to fetch SRC_URI (2011-10-19 14:48:02 +0200)
 
-BR
-Ulf Samuelsson
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-> From: Ulf Samuelsson<ulf_samuelsson@telia.com>
->
-> Tarball is updated to 2.20.1b so checksums have changed.
->
-> Signed-off-by: Ulf Samuelsson<ulf.samuelsson@telia.com>
->
-> ---
->   recipes/binutils/binutils_2.20.1.bb |    7 ++++---
->   1 files changed, 4 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
-> index 5154e2d..0497675 100644
-> --- a/recipes/binutils/binutils_2.20.1.bb
-> +++ b/recipes/binutils/binutils_2.20.1.bb
-> @@ -1,7 +1,7 @@
->   require binutils.inc
->   LICENSE = "GPLv3"
->
-> -PR = "${INC_PR}.4"
-> +PR = "${INC_PR}.5"
->   EXTRA_OECONF += "--disable-werror"
->
->   #COMPATIBLE_TARGET_SYS = "."
-> @@ -24,10 +24,11 @@ SRC_URI_append_nios2 =" \
->   	file://binutils-nios2.patch \
->   	"
->
-> -SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
-> -SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
-> +SRC_URI[tarball.sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
-> +SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
->
->   # powerpc patches
->   SRC_URI += "\
->        file://binutils-2.16.1-e300c2c3.patch \
->        "
-> +
+Otavio Salvador (1):
+  udev: udev-systemd refactory
 
+ meta-oe/recipes-core/udev/udev_173.bb |    8 +++-----
+ 1 files changed, 3 insertions(+), 5 deletions(-)
 
 -- 
-Best Regards
-Ulf Samuelsson
+1.7.2.5
 
 
 
