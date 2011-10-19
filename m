@@ -1,42 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RGPhf-0001hT-DF for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 08:32:39 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RGPby-0008An-QA for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 08:26:46 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 08:26:46 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RGRR8-0000NJ-Pp
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Oct 2011 10:23:42 +0200
+Received: from iph1.telenor.se (iph1.telenor.se [195.54.127.132])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 3902AEAB12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 08:26:46 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 19 Oct 2011 08:26:33 +0200
-Message-ID: <j7lqiq$b6p$1@dough.gmane.org>
-References: <359a5968f27008d6fcbaee5137c237bfcabd2579.1318946821.git.Martin.Jansa@gmail.com>
-	<c4b964c5a17f463645b3e9cb7a8351bbe62eef9a.1318946821.git.Martin.Jansa@gmail.com>
-	<1318949469.3538.34.camel@mattotaupa>
-	<20111018162433.GJ20678@jama.jama.net>
-	<j7ka5s$ioi$1@dough.gmane.org>
-	<20111018165107.GA17242@jama.jama.net>
-	<j7kb44$pmd$1@dough.gmane.org> <20111018173948.GA556@jama.jama.net>
-	<j7kjjv$ud8$1@dough.gmane.org>
-	<20111019000459.GA3522@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	Wed, 19 Oct 2011 10:17:51 +0200 (CEST)
+X-SENDER-IP: [83.227.57.13]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AoYgAGmGnk5T4zkNPGdsb2JhbAAMOJoBjwoBAQEBN4IgAQEBAQIBAQEBNTYbCxgJJQ8CFgEbFBMGAgEBh3wItGqIGwSRZIIakVk
+X-IronPort-AV: E=Sophos;i="4.69,370,1315173600"; d="scan'208";a="498416194"
+Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.57.13])
+	by iph1.telenor.se with ESMTP; 19 Oct 2011 10:17:51 +0200
+Message-ID: <4E9E87AF.70900@telia.com>
+Date: Wed, 19 Oct 2011 10:17:51 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <20111019000459.GA3522@jama.jama.net>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-efl 3/3] lightmediascanner: Add version 0.4.4 (initial recipe)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4E9D3640.9070608@telia.com> <4E9D8EC0.4030409@gmail.com>
+In-Reply-To: <4E9D8EC0.4030409@gmail.com>
+Subject: Re: Use of stamps in the source directory of openembedded-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,44 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 06:32:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Oct 2011 08:23:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2011-10-18 16:35, Khem Raj skrev:
+> On 10/18/2011 1:18 AM, Ulf Samuelsson wrote:
+>> After I have built openembedded-core, I notice that the source directory
+>> is loaded with files: *.done.
+>>
+>
+> they indicate successful download of a source tar.
+>
+Are you sure?
+It does not look like the whole story to me.
 
-Op 19-10-11 02:04, Martin Jansa schreef:
-> On Tue, Oct 18, 2011 at 09:21:35PM +0200, Koen Kooi wrote: Op 18-10-11
-> 19:39, Martin Jansa schreef:
->>>> On Tue, Oct 18, 2011 at 06:56:36PM +0200, Koen Kooi wrote:
->>>>>> because of eglibc or uclibc?
->>>>> 
->>>>> uclibc, the 'libc-glibc' override is true for both (e)glibc.
->>>> 
->>>> Ah OK,
->>>> 
->>>> -RDEPENDS_${PN}-test = "glibc-gconv-utf-16" 
->>>> +RDEPENDS_${PN}-test_append_libc-glibc = "glibc-gconv-utf-16"
-> 
-> The branch has a space after the first quote, right?
-> 
->> Not yet, but I'll add it.. but now it works without fine Depends:
->> liblightmediascanner0 (>= 0.4.4), libsqlite3-0 (>= 3.7.7.1),
->> glibc-gconv-utf-16, libc6 (>= 2.14)
-> 
->>>> 
->>>> tested on nokia900 and done in branch
+I can see that for each source file, there is a *.done file,
+but there are also a lot of *.done which seems to be related
+to patches, and the patches are not present in the source directory.
 
-Applied, thanks! (fontconfig went into oe-core)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Why are those files created?
 
-iD8DBQFOnm2ZMkyGM64RGpERAsILAJ92BtAi/cdxtztTCRKgYvJlaQ42SgCdEqji
-Wu20of+7MZcL7WEQ2R5Rw6k=
-=TTKB
------END PGP SIGNATURE-----
+What happens if two different packages have a patch with the same name?
+
+>> Is this really a good idea?
+>>
+>> I tend to use a common source directory for multiple projects.
+>>
+>> Having stamps in the source directory, means that you let one
+>> project affect the others.
+>>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
 
 
 
