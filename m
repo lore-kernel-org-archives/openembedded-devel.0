@@ -1,24 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RGdJT-0000Eq-B1 for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 23:04:35 +0200
+	id 1RGdOr-0000PU-2s for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Oct 2011 23:10:09 +0200
 Received: from f053042198.adsl.alicedsl.de ([78.53.42.198]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RGdDw-0006Pl-Lx for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 20:58:52 +0000
-Message-ID: <1319057924.12686.10.camel@mattotaupa>
+	id 1RGdJK-0006Qb-GA for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Oct 2011 21:04:26 +0000
+Message-ID: <1319058258.12686.14.camel@mattotaupa>
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Oct 2011 22:58:44 +0200
-In-Reply-To: <1319037014-29473-3-git-send-email-ulf_samuelsson@telia.com>
-References: <1319037014-29473-1-git-send-email-ulf_samuelsson@telia.com>
-	<1319037014-29473-3-git-send-email-ulf_samuelsson@telia.com>
+Date: Wed, 19 Oct 2011 23:04:18 +0200
+In-Reply-To: <790990daa702e1ca0c4688b0c45d2fd95c4ed0eb.1319038482.git.otavio@ossystems.com.br>
+References: <cover.1319038482.git.otavio@ossystems.com.br>
+	<790990daa702e1ca0c4688b0c45d2fd95c4ed0eb.1319038482.git.otavio@ossystems.com.br>
 X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
-Subject: Re: [PATCH 3/3] Update checksums for binutils-2.20.1.tar.bz2
+Subject: Re: [meta-oe][PATCH 1/1] udev: udev-systemd refactory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,75 +32,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 21:04:35 -0000
-X-Groupsio-MsgNum: 34911
+X-List-Received-Date: Wed, 19 Oct 2011 21:10:09 -0000
+X-Groupsio-MsgNum: 34912
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature"; 
-	boundary="=-RVCBbT/WJZf41MEMU862"
+	boundary="=-B2hmgF9XpV9Q2hh3QSB/"
 
---=-RVCBbT/WJZf41MEMU862
+--=-B2hmgF9XpV9Q2hh3QSB/
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Ulf,
+Dear Otavio,
 
 
-Am Mittwoch, den 19.10.2011, 17:10 +0200 schrieb ulf_samuelsson@telia.com:
-> From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+Am Mittwoch, den 19.10.2011, 15:35 +0000 schrieb Otavio Salvador:
 
-again, please comply with our commit policy [1].
+your Signed-off-by line is missing. Additionally please describe your
+changes in the commit message [1].
 
-binutils: Update from 2.20.1 to 2.20.1a
+In this case
 
-> Tarball is updated to 2.20.1b so checksums have changed.
+    udev_173: Package all systemd files in udev-systemd
 
-I am not aware of any binutils version 2.20.1b. Do you mean 2.20.1a?
+should be good.
 
-Please create a new recipe since doing it this way the already
-downloaded sources would be made invalid and archives on mirrors would
-cause problems too.
+Is that change just cosmetic or does it yield a (big?) size reduction of
+package `udev`?
 
-Please see commit f4faecdb [2] as an example and take a look at the list
-discussion [3].
-
-> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@telia.com>
->=20
 > ---
->  recipes/binutils/binutils_2.20.1.bb |    7 ++++---
->  1 files changed, 4 insertions(+), 3 deletions(-)
+>  meta-oe/recipes-core/udev/udev_173.bb |    8 +++-----
+>  1 files changed, 3 insertions(+), 5 deletions(-)
 >=20
-> diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binut=
-ils_2.20.1.bb
-> index 5154e2d..0497675 100644
-> --- a/recipes/binutils/binutils_2.20.1.bb
-> +++ b/recipes/binutils/binutils_2.20.1.bb
-> @@ -1,7 +1,7 @@
->  require binutils.inc
->  LICENSE =3D "GPLv3"
+> diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core=
+/udev/udev_173.bb
+> index 56ebb77..e4e634a 100644
+> --- a/meta-oe/recipes-core/udev/udev_173.bb
+> +++ b/meta-oe/recipes-core/udev/udev_173.bb
+> @@ -16,7 +16,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa9=
+54499f7abaabaa882bbe \
+>  # Needed for udev-extras
+>  DEPENDS =3D "gperf-native usbutils acl glib-2.0"
 > =20
-> -PR =3D "${INC_PR}.4"
-> +PR =3D "${INC_PR}.5"
->  EXTRA_OECONF +=3D "--disable-werror"
+> -PR =3D "r1"
+> +PR =3D "r2"
 > =20
->  #COMPATIBLE_TARGET_SYS =3D "."
-> @@ -24,10 +24,11 @@ SRC_URI_append_nios2 =3D" \
->  	file://binutils-nios2.patch \
->  	"
+>  # version specific SRC_URI
+>  SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.t=
+ar.gz \
+> @@ -61,7 +61,8 @@ INITSCRIPT_PARAMS =3D "start 04 S ."
 > =20
-> -SRC_URI[tarball.sha256sum] =3D "228b84722d87e88e7fdd36869e590e649ab523a0=
-800a7d53df906498afe6f6f8"
-> -SRC_URI[tarball.md5sum] =3D "9cdfb9d6ec0578c166d3beae5e15c4e5"
-> +SRC_URI[tarball.sha256sum] =3D "71d37c96451333c5c0b84b170169fdcb138bbb27=
-397dc06281905d9717c8ed64"
-> +SRC_URI[tarball.md5sum] =3D "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+>  PACKAGES =3D+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit=
+"
 > =20
->  # powerpc patches
->  SRC_URI +=3D "\
->       file://binutils-2.16.1-e300c2c3.patch \
->       "
-> +
-
-Please remove the newly added line.
+> -FILES_${PN}-systemd =3D "${base_libdir}/systemd/system/"
+> +FILES_${PN}-systemd =3D "${base_libdir}/systemd"
+> +RDEPENDS_${PN}-systemd +=3D "udev"
+> =20
+>  FILES_libudev =3D "${base_libdir}/libudev.so.*"
+>  FILES_libgudev =3D "${base_libdir}/libgudev*.so.*"
+> @@ -82,9 +83,6 @@ FILES_${PN}-dbg +=3D "/lib/udev/.debug"
+>  FILES_${PN}-consolekit +=3D "${libdir}/ConsoleKit"
+>  RDEPENDS_${PN}-consolekit +=3D "consolekit"
+> =20
+> -# Package up systemd files
+> -FILES_${PN} +=3D "${base_libdir}/systemd"
+> -
+>  do_install () {
+>  	install -d ${D}${usrsbindir} \
+>  		   ${D}${sbindir}
 
 
 Thanks,
@@ -108,13 +107,9 @@ Thanks,
 Paul
 
 
-[1] http://www.openembedded.org/wiki/Commit_Policy
-[2] http://git.openembedded.org/openembedded/commit/?id=3Df4faecdbd0b7c83e5=
-787735ef1495a34aca861e4
-[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-September/=
-034885.html
+[1] http://openembedded.org/wiki/Commit_Patch_Message_Guidelines
 
---=-RVCBbT/WJZf41MEMU862
+--=-B2hmgF9XpV9Q2hh3QSB/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
@@ -122,9 +117,9 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk6fOgUACgkQPX1aK2wOHVhcEwCfX6kDxLNipmi62oS7rXlB6MLX
-wTMAmwfbYCRXBdv6NrKCi6th/UfKAlBn
-=JmEm
+iEYEABECAAYFAk6fO1IACgkQPX1aK2wOHVickQCbBzBL++Av4Zjiu8dUZhNsmLwU
+s/oAn1AbCME21537h3PZhGHgVM3r11yh
+=pLH9
 -----END PGP SIGNATURE-----
 
---=-RVCBbT/WJZf41MEMU862--
+--=-B2hmgF9XpV9Q2hh3QSB/--
