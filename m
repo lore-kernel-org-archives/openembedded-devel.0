@@ -1,34 +1,35 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RGcko-0005lI-Lo
+	(envelope-from <martin.jansa@gmail.com>) id 1RGcpr-00067f-Q8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 22:28:46 +0200
-Received: by bkat8 with SMTP id t8so2818762bka.6
+	Wed, 19 Oct 2011 22:34:00 +0200
+Received: by bkat8 with SMTP id t8so2823575bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 13:22:55 -0700 (PDT)
+	Wed, 19 Oct 2011 13:28:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9nSpwXFgszuFnAi6h7a2CbW4BiyFjmIonRBk8IHl+6g=;
-	b=Txkfmn1cyDayFtQN+1YTlYTIpHgChly1rJzdvOkSVqH5lPTXOKkYKs3h/sE7c1T07w
-	paScZI/fCbhApm8IWymgeb+KXzHwF5bcu9V7h1PB9znB+6hWCuBL+suTS6OJDCyjL+PQ
-	zT/NSTfgWs1dxxpJC/h5md+7ceQzs3i43Q9d8=
-Received: by 10.204.156.150 with SMTP id x22mr6036371bkw.86.1319055775557;
-	Wed, 19 Oct 2011 13:22:55 -0700 (PDT)
+	bh=OUM+NoVR0eD4JlihOKFoojdj4+j/iXr1QTcipMrb2iM=;
+	b=pNVRvFjtUP/TNg7aUCNDVnzi/2k8B0pbjW186Tz0lvogC0Qj782jtAPhMCBCPXIUoz
+	XU9i/Wwc5gdPG3nrmsCHhppBN4w2u6FIKZGIKwSJr8CRC5C/fnQb8nj87mVl4tGAImG1
+	2EbNGENIdz8uNutSk7PMFUDufoGUatBHEGoNI=
+Received: by 10.204.148.68 with SMTP id o4mr6088966bkv.21.1319056084104;
+	Wed, 19 Oct 2011 13:28:04 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id u18sm7279773bkn.6.2011.10.19.13.22.54
+	by mx.google.com with ESMTPS id e14sm7309400bka.0.2011.10.19.13.28.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Oct 2011 13:22:54 -0700 (PDT)
-Date: Wed, 19 Oct 2011 22:22:49 +0200
+	Wed, 19 Oct 2011 13:28:02 -0700 (PDT)
+Date: Wed, 19 Oct 2011 22:27:57 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111019202248.GE3522@jama.jama.net>
-References: <1319027399-8297-1-git-send-email-Martin.Jansa@gmail.com>
-	<201110192135.56318.schnitzeltony@gmx.de>
+Message-ID: <20111019202757.GF3522@jama.jama.net>
+References: <1319037014-29473-1-git-send-email-ulf_samuelsson@telia.com>
+	<1319037014-29473-2-git-send-email-ulf_samuelsson@telia.com>
+	<4E9EF092.3080300@gmail.com> <4E9F3005.5040203@telia.com>
 MIME-Version: 1.0
-In-Reply-To: <201110192135.56318.schnitzeltony@gmx.de>
+In-Reply-To: <4E9F3005.5040203@telia.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] midori: fix build with dirty vala
+Subject: Re: [PATCH 2/3] Use linux2 when configuring python-2.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,106 +43,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 20:28:47 -0000
-X-Groupsio-MsgNum: 34908
+X-List-Received-Date: Wed, 19 Oct 2011 20:34:00 -0000
+X-Groupsio-MsgNum: 34909
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VUDLurXRWRKrGuMn"
+	protocol="application/pgp-signature"; boundary="5Mfx4RzfBqgnTE/w"
 Content-Disposition: inline
 
---VUDLurXRWRKrGuMn
-Content-Type: text/plain; charset=iso-8859-1
+--5Mfx4RzfBqgnTE/w
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 19, 2011 at 09:35:55PM +0200, Andreas M=FCller wrote:
-> On Wednesday, October 19, 2011 02:29:59 PM Martin Jansa wrote:
-> > * there is only one line added to default waf file
-> >   in unpack_wafdir() just before last chdir and return
-> >   because those files are downloaded and cannot be patched in normal way
-> >   os.system("sed -i \"s/version=3Doutput.split/version=3Doutput.replace=
-('-dirty','').split/g\" wafadmin/Tools/vala.py")
-> >=20
-> > * It fails to parse version like this
-> >   /OE/shr-core/tmp/sysroots/x86_64-linux/usr/bin/valac --version
-> >   Vala 0.12.1-dirty
-> >   reporting 0.0.0 instead which breaks configure
-> >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../recipes-connectivity/midori/midori-0.4.1/waf   |  Bin 0 -> 92569 b=
-ytes
-> >  .../recipes-connectivity/midori/midori_0.4.1.bb    |    8 ++++++++
-> >  2 files changed, 8 insertions(+), 0 deletions(-)
-> >  create mode 100755 meta-oe/recipes-connectivity/midori/midori-0.4.1/waf
-> >=20
-> > diff --git a/meta-oe/recipes-connectivity/midori/midori-0.4.1/waf b/met=
-a-oe/recipes-connectivity/midori/midori-0.4.1/waf
-> > new file mode 100755
-> > index 0000000000000000000000000000000000000000..b74a2d809a1bca11ec8548c=
-b9dfcd7501c5f346d
-> > GIT binary patch
-> > literal 92569
-=2E..
-> > literal 0
-> > HcmV?d00001
-> >=20
-> > diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb b/meta=
--oe/recipes-connectivity/midori/midori_0.4.1.bb
-> > index 2805b92..860ed21 100644
-> > --- a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-> > +++ b/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-> > @@ -1,7 +1,15 @@
-> >  require midori.inc
-> > =20
-> > +PR =3D "r1"
-> > +
-> >  SRC_URI =3D "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.=
-tar.bz2;name=3Dmidori \
-> > +           file://waf \
-> >            "
-> > +
-> > +do_configure_prepend() {
-> > +  cp -f ${WORKDIR}/waf ${S}/
-> > +}
-> > +
-> >  SRC_URI[midori.md5sum] =3D "33dde203cd71ae2b1d2adcc7f5739f65"
-> >  SRC_URI[midori.sha256sum] =3D "b3c77ddb6f562a0ea3d2e6fbb756ca0dc158ad8=
-410f4b60f8e5998c2f7305f07"
-> > =20
-> >=20
-> Just my personal interest: How did you get to new waf. Can you suggest so=
-urces to lift waf out of black-box?
+On Wed, Oct 19, 2011 at 10:16:05PM +0200, Ulf Samuelsson wrote:
+> 2011-10-19 17:45, Khem Raj skrev:
+> > On 10/19/2011 8:10 AM, ulf_samuelsson@telia.com wrote:
+> >> From: Ulf Samuelsson<ulf_samuelsson@telia.com>
+> >>
+> >> Signed-off-by: Ulf Samuelsson<ulf.samuelsson@telia.com>
+> >>
+> >> ---
+> >>   ...64-bit-host.-Use-linux2-instead-of-linux3.patch |   40=20
+> >> ++++++++++++++++++++
+> >>   recipes/python/python_2.6.6.bb                     |    1 +
+> >>   2 files changed, 41 insertions(+), 0 deletions(-)
+> >>   create mode 100644=20
+> >> recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-inste=
+ad-of-linux3.patch
+> >>
+> >> diff --git=20
+> >> a/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-ins=
+tead-of-linux3.patch=20
+> >> b/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-ins=
+tead-of-linux3.patch=20
+> >>
+> >> new file mode 100644
+> >> index 0000000..46ce713
+> >> --- /dev/null
+> >> +++=20
+> >> b/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-ins=
+tead-of-linux3.patch
+> >> @@ -0,0 +1,40 @@
+> >> +From 3fbd3d4aa2f9b0aaa806ec9f19dc589a0928ef0c Mon Sep 17 00:00:00 2001
+> >> +From: Ulf Samuelsson<ulf_samuelsson@telia.com>
+> >> +Date: Wed, 19 Oct 2011 15:46:32 +0200
+> >> +Subject: [PATCH] Support 64 bit host. Use linux2 instead of linux3
+> >
+> >
+> > can you explain why this change is needed.
+>=20
+> I tried building on Ubuntu 11.10 x64 and Python, openssl and binutils fai=
+ls.
+> openssl I backported as recommended, and I then found the buildroot
+> patch after some searching.
+>=20
+> Here is the comment from the Buildroot patch:
+>=20
+> When compiling Python on a host running Linux 3.0, the sys.platform
+> constant is set at "linux3". A lot of code (inside the interpreter
+> itself, its build system and third party apps and libraries) relies on
+> it to be linux2 on a Linux system.
 
-I've edited old one with vim :)
-
-Not that I'm usually able after few beers to fix binaries directly in vim..=
-=20
-but the beginning of that file is python script where I've put that
-extra line..
-
-Maybe it would be worth it to upgrade waf to 1.6.0 or newer (where vala
-issue is also resolved), but I haven't tried to build midori with it as
-there were many changes in waf and I hope that newer midori will be
-using it already from upstream.
-
-Other option is to store only smaller binary patch to upstream waf, but
-that wont probably apply to next version too.
+Or you can use this patch
+http://git.openembedded.org/openembedded-core/commit/?id=3D4b7e7b004dacb698=
+ed637f35661a60d2402c00cd
 
 Regards,
+
+> This leads to the build of the target python package to break.
+>=20
+> This behaviour has been reported on the Python bugtracker but is not
+> fixed yet.
+>=20
+>=20
+> ---
+> After I applied the three patches in the patchset,
+> I managed to complete the build without errors.
+>=20
+> >
+> >> +
+> >> +Imported from the Buildroot project.
+> >> +
+> >> +Signed-off-by: Ulf Samuelsson<ulf.samuelsson@telia.com>
+> >> +---
+> >> + configure    |    1 +
+> >> + configure.in |    1 +
+> >> + 2 files changed, 2 insertions(+), 0 deletions(-)
+> >> +
+> >> +diff --git a/configure b/configure
+> >> +index d0731c3..dc8d029 100755
+> >> +--- a/configure
+> >> ++++ b/configure
+> >> +@@ -2814,6 +2814,7 @@ then
+> >> +     darwin*) MACHDEP=3D"darwin";;
+> >> +     atheos*) MACHDEP=3D"atheos";;
+> >> +         irix646) MACHDEP=3D"irix6";;
+> >> ++    linux*)    MACHDEP=3D"linux2";;
+> >> +     '')    MACHDEP=3D"unknown";;
+> >> +     esac
+> >> + fi
+> >> +diff --git a/configure.in b/configure.in
+> >> +index 609d8f2..8b8b77c 100644
+> >> +--- a/configure.in
+> >> ++++ b/configure.in
+> >> +@@ -264,6 +264,7 @@ then
+> >> +     darwin*) MACHDEP=3D"darwin";;
+> >> +     atheos*) MACHDEP=3D"atheos";;
+> >> +         irix646) MACHDEP=3D"irix6";;
+> >> ++    linux*)    MACHDEP=3D"linux2";;
+> >> +     '')    MACHDEP=3D"unknown";;
+> >> +     esac
+> >> + fi
+> >> +--
+> >> +1.7.5.4
+> >> +
+> >> diff --git a/recipes/python/python_2.6.6.bb=20
+> >> b/recipes/python/python_2.6.6.bb
+> >> index eacc5c2..ae057a2 100644
+> >> --- a/recipes/python/python_2.6.6.bb
+> >> +++ b/recipes/python/python_2.6.6.bb
+> >> @@ -18,6 +18,7 @@ SRC_URI =3D "\
+> >>     file://python-module-rpath-fix.patch \
+> >>     file://sitecustomize.py \
+> >>     file://pkgconfig-support.patch \
+> >> +  file://0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch=
+ \
+> >>   "
+> >>   SRC_URI[md5sum] =3D "cf4e6881bb84a7ce6089e4a307f71f14"
+> >>   SRC_URI[sha256sum] =3D=20
+> >> "134c5e0736bae2e5570d0b915693374f11108ded63c35a23a35d282737d2ce83"
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+>=20
+> --=20
+> Best Regards
+> Ulf Samuelsson
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---VUDLurXRWRKrGuMn
+--5Mfx4RzfBqgnTE/w
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk6fMZgACgkQN1Ujt2V2gBxEJACfUWvPpfnvLnLpNQZl8mGEJSSh
-jJAAn3jZSw7Ccxxb+DHaI5RbBXo3oXb+
-=w0XU
+iEYEARECAAYFAk6fMs0ACgkQN1Ujt2V2gBzZLwCggFmJvbuTMh/O4Bti2iFct+Wm
+OosAnRIuhdeInF4J248Nrqf5Wm71+M0p
+=Cwyy
 -----END PGP SIGNATURE-----
 
---VUDLurXRWRKrGuMn--
+--5Mfx4RzfBqgnTE/w--
