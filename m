@@ -1,26 +1,28 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RGb4l-0008FR-9G
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 20:41:15 +0200
-Received: by ggnj1 with SMTP id j1so486903ggn.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 11:35:23 -0700 (PDT)
+	(envelope-from <cliff.brake@gmail.com>) id 1RGbTt-0000hk-KJ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Oct 2011 21:07:13 +0200
+Received: by bkat8 with SMTP id t8so2735713bka.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Oct 2011 12:01:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=tiWWmnSPk4U5Dafru97hbGGEk/mt5I72EawuUq2Mszs=;
-	b=RcPR2Y2YsC6qe0ufbOtmVXMZqrZy/8DjcG2IyCA+fnfv9KN4yiQTFeFvLUEkai2pTI
-	tAAumsnPWJEi7lGk0UX8qQflL5gBosTgbgApZCItZ7dXRqPbtgKb7BoCRQmh56uT91QK
-	PEqPSqHVB/I0Z9wrIllnanfTmlJLrrMWFPQ9k=
-Received: by 10.68.73.103 with SMTP id k7mr4668175pbv.30.1319049323253; Wed,
-	19 Oct 2011 11:35:23 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=q7GwuQzCEJNp8xNa1BV/RvK1JwvyzxtmPp+7hiRYh+0=;
+	b=ce5zavXihjpg+RDQpbjJjHShZ2FekLmm6eSn1hNT4XiveLcEAFOgL6GuvZm7IvEU/U
+	hizORbBQiiDmCtlz84drXYZa+Yh0GkJ/8HgDGiUmm0xZZIMsbD5BQ7nCxB9vHwO5vOkb
+	+4EpwzMS3GaZgTPHSqrDvDCAJV6Yr6HcbfVJI=
 MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Wed, 19 Oct 2011 11:34:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Oct 2011 11:34:53 -0700
-Message-ID: <CAMKF1soq10mOoBn_L4VJTAygNn0=hRef5a2Ln-gdS1FFQXQcUA@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: OE bugzilla to be decommissioned
+Received: by 10.223.77.71 with SMTP id f7mr12757539fak.33.1319050879102; Wed,
+	19 Oct 2011 12:01:19 -0700 (PDT)
+Received: by 10.152.21.193 with HTTP; Wed, 19 Oct 2011 12:01:19 -0700 (PDT)
+In-Reply-To: <CAMKF1soq10mOoBn_L4VJTAygNn0=hRef5a2Ln-gdS1FFQXQcUA@mail.gmail.com>
+References: <CAMKF1soq10mOoBn_L4VJTAygNn0=hRef5a2Ln-gdS1FFQXQcUA@mail.gmail.com>
+Date: Wed, 19 Oct 2011 15:01:19 -0400
+Message-ID: <CAOd_LFxtb1mmD0o5z29mrDPSJSy4RhBvMkaYz65C8tmYetY88Q@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: OE bugzilla to be decommissioned
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,20 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 18:41:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Oct 2011 19:07:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi
+On Wed, Oct 19, 2011 at 2:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> For many months OE bugzilla is available as read only instance, Now
+> that OE web services have moved to a new server
+> I would like to ask if we can decommission it completely. Since
+> bringing it over to new server is some work and if there is
+> no value in doing that it should be avoided.
+> Opinons?
 
-For many months OE bugzilla is available as read only instance, Now
-that OE web services have moved to a new server
-I would like to ask if we can decommission it completely. Since
-bringing it over to new server is some work and if there is
-no value in doing that it should be avoided.
-Opinons?
+Unless we have someone dedicated to watching over it, assigning bugs,
+cleaning things up, it quickly degrades.  I support this decision, and
+perhaps we can use the yocto bugzilla if one is needed.
 
-Thanks
+Cliff
 
--Khem
+-- 
+=================
+http://bec-systems.com
 
 
