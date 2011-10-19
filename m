@@ -1,35 +1,35 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RGYGt-0004AX-F6
+	(envelope-from <raj.khem@gmail.com>) id 1RGYQP-0004Sr-KT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Oct 2011 17:41:37 +0200
-Received: by ggnj1 with SMTP id j1so300899ggn.6
+	Wed, 19 Oct 2011 17:51:26 +0200
+Received: by pzk33 with SMTP id 33so4695444pzk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2011 08:35:44 -0700 (PDT)
+	Wed, 19 Oct 2011 08:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=ebDSf589RXB6NLQCoP+I+ui04hEWeLynXg14bo1YVWs=;
-	b=C4FVoOSSCoeHJcAtZuzHeWH83Fe6gQciVgf70yabKTYXkQPUEAu4s1RLV/iY4pyLK4
-	3NbaC+chozjtD+m0OYPFXRPxJIjO8cfS6YmhM7Yq1+rkS9K8I6ksAeS2mvz+BIvb9zZ3
-	EuP4z+oa8baSp/YBHgI5q0syQ7GeMSp932Uqg=
-Received: by 10.236.139.133 with SMTP id c5mr10628718yhj.62.1319038544216;
-	Wed, 19 Oct 2011 08:35:44 -0700 (PDT)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id m37sm16823371anq.11.2011.10.19.08.35.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Oct 2011 08:35:43 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=sdSG0E0gln9mUClq/JlWunxjzNLieZOxxlrPSXa0334=;
+	b=Ww9RLBW+5r8dJWVt7vba38BkPhQ/tYOR3doZoLi1eXVKUbem0p/G9XzBrXcbPpK6lJ
+	yDzaahJaKwM3h3v5Y6ZQwH7Fp5CNY2PMq5nRtn/PPhll7/PxyvEZqLrMR/sGDWfsNvoS
+	yFBzWUfjBAY2Z4axWmMGzKKUGpLghx1WjkibI=
+Received: by 10.68.9.2 with SMTP id v2mr13188814pba.101.1319039130150;
+	Wed, 19 Oct 2011 08:45:30 -0700 (PDT)
+Received: from [192.168.1.70] (99-57-141-118.lightspeed.sntcca.sbcglobal.net.
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id jm5sm8592328pbc.1.2011.10.19.08.45.28
+	(version=SSLv3 cipher=OTHER); Wed, 19 Oct 2011 08:45:28 -0700 (PDT)
+Message-ID: <4E9EF092.3080300@gmail.com>
+Date: Wed, 19 Oct 2011 08:45:22 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Oct 2011 15:35:32 +0000
-Message-Id: <790990daa702e1ca0c4688b0c45d2fd95c4ed0eb.1319038482.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1319038482.git.otavio@ossystems.com.br>
-References: <cover.1319038482.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1319038482.git.otavio@ossystems.com.br>
-References: <cover.1319038482.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] udev: udev-systemd refactory
+References: <1319037014-29473-1-git-send-email-ulf_samuelsson@telia.com>
+	<1319037014-29473-2-git-send-email-ulf_samuelsson@telia.com>
+In-Reply-To: <1319037014-29473-2-git-send-email-ulf_samuelsson@telia.com>
+Subject: Re: [PATCH 2/3] Use linux2 when configuring python-2.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2011 15:41:37 -0000
+X-List-Received-Date: Wed, 19 Oct 2011 15:51:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- meta-oe/recipes-core/udev/udev_173.bb |    8 +++-----
- 1 files changed, 3 insertions(+), 5 deletions(-)
+On 10/19/2011 8:10 AM, ulf_samuelsson@telia.com wrote:
+> From: Ulf Samuelsson<ulf_samuelsson@telia.com>
+>
+> Signed-off-by: Ulf Samuelsson<ulf.samuelsson@telia.com>
+>
+> ---
+>   ...64-bit-host.-Use-linux2-instead-of-linux3.patch |   40 ++++++++++++++++++++
+>   recipes/python/python_2.6.6.bb                     |    1 +
+>   2 files changed, 41 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch
+>
+> diff --git a/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch b/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch
+> new file mode 100644
+> index 0000000..46ce713
+> --- /dev/null
+> +++ b/recipes/python/python-2.6.6/0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch
+> @@ -0,0 +1,40 @@
+> +From 3fbd3d4aa2f9b0aaa806ec9f19dc589a0928ef0c Mon Sep 17 00:00:00 2001
+> +From: Ulf Samuelsson<ulf_samuelsson@telia.com>
+> +Date: Wed, 19 Oct 2011 15:46:32 +0200
+> +Subject: [PATCH] Support 64 bit host. Use linux2 instead of linux3
 
-diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core/udev/udev_173.bb
-index 56ebb77..e4e634a 100644
---- a/meta-oe/recipes-core/udev/udev_173.bb
-+++ b/meta-oe/recipes-core/udev/udev_173.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
- # Needed for udev-extras
- DEPENDS = "gperf-native usbutils acl glib-2.0"
- 
--PR = "r1"
-+PR = "r2"
- 
- # version specific SRC_URI
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
-@@ -61,7 +61,8 @@ INITSCRIPT_PARAMS = "start 04 S ."
- 
- PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
- 
--FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
-+FILES_${PN}-systemd = "${base_libdir}/systemd"
-+RDEPENDS_${PN}-systemd += "udev"
- 
- FILES_libudev = "${base_libdir}/libudev.so.*"
- FILES_libgudev = "${base_libdir}/libgudev*.so.*"
-@@ -82,9 +83,6 @@ FILES_${PN}-dbg += "/lib/udev/.debug"
- FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
- RDEPENDS_${PN}-consolekit += "consolekit"
- 
--# Package up systemd files
--FILES_${PN} += "${base_libdir}/systemd"
--
- do_install () {
- 	install -d ${D}${usrsbindir} \
- 		   ${D}${sbindir}
--- 
-1.7.2.5
+
+can you explain why this change is needed.
+
+> +
+> +Imported from the Buildroot project.
+> +
+> +Signed-off-by: Ulf Samuelsson<ulf.samuelsson@telia.com>
+> +---
+> + configure    |    1 +
+> + configure.in |    1 +
+> + 2 files changed, 2 insertions(+), 0 deletions(-)
+> +
+> +diff --git a/configure b/configure
+> +index d0731c3..dc8d029 100755
+> +--- a/configure
+> ++++ b/configure
+> +@@ -2814,6 +2814,7 @@ then
+> + 	darwin*) MACHDEP="darwin";;
+> + 	atheos*) MACHDEP="atheos";;
+> +         irix646) MACHDEP="irix6";;
+> ++	linux*)	MACHDEP="linux2";;
+> + 	'')	MACHDEP="unknown";;
+> + 	esac
+> + fi
+> +diff --git a/configure.in b/configure.in
+> +index 609d8f2..8b8b77c 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -264,6 +264,7 @@ then
+> + 	darwin*) MACHDEP="darwin";;
+> + 	atheos*) MACHDEP="atheos";;
+> +         irix646) MACHDEP="irix6";;
+> ++	linux*)	MACHDEP="linux2";;
+> + 	'')	MACHDEP="unknown";;
+> + 	esac
+> + fi
+> +--
+> +1.7.5.4
+> +
+> diff --git a/recipes/python/python_2.6.6.bb b/recipes/python/python_2.6.6.bb
+> index eacc5c2..ae057a2 100644
+> --- a/recipes/python/python_2.6.6.bb
+> +++ b/recipes/python/python_2.6.6.bb
+> @@ -18,6 +18,7 @@ SRC_URI = "\
+>     file://python-module-rpath-fix.patch \
+>     file://sitecustomize.py \
+>     file://pkgconfig-support.patch \
+> +  file://0001-Support-64-bit-host.-Use-linux2-instead-of-linux3.patch \
+>   "
+>   SRC_URI[md5sum] = "cf4e6881bb84a7ce6089e4a307f71f14"
+>   SRC_URI[sha256sum] = "134c5e0736bae2e5570d0b915693374f11108ded63c35a23a35d282737d2ce83"
 
 
 
