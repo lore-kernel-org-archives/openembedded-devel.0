@@ -1,27 +1,28 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1RGxiM-0003EK-7B
+	(envelope-from <gary@mlbassoc.com>) id 1RGyCy-0004d0-S0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Oct 2011 20:51:38 +0200
-Received: from server ([unknown] [173.74.34.213]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTD009TKLB9IDC0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	20 Oct 2011 12:45:15 -0500 (CDT)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 30F862; Thu, 20 Oct 2011 12:45:06 -0500
-Received: from [192.168.254.252] by rkmorris.us with HTTP; Thu,
-	20 Oct 2011 12:45:05 -0500
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Thu, 20 Oct 2011 12:45:05 -0500
-X-Mailer: Axigen WebMail
+	Thu, 20 Oct 2011 21:23:17 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 8583016606CB; Thu, 20 Oct 2011 13:17:20 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 1A90B16605E5;
+	Thu, 20 Oct 2011 13:17:20 -0600 (MDT)
+Message-ID: <4EA073C0.7000502@mlbassoc.com>
+Date: Thu, 20 Oct 2011 13:17:20 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:7.0.1) Gecko/20110930 Thunderbird/7.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1319132705374102500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 1
-Subject: Machine Configuration
+References: <1319132705374102500@rkmorris.us>
+In-Reply-To: <1319132705374102500@rkmorris.us>
+Subject: Re: Machine Configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,37 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2011 18:51:38 -0000
-Content-type: text/plain
-Content-transfer-encoding: quoted-printable
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Oct 2011 19:23:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 2011-10-20 11:45, Russell Morris wrote:
+> Hi,
+>
+> I am trying to do some builds for an am3517-evm ... but the machine configuration doesn't seem to be working (or I'm doing it wrong, more likely ... :-().
+>
+> I have successfully built console-image for qemuarm, and then use oebb.sh to set the machine (to am3517-evm, followed bu ./oebb.sh update) - but then when I try to build for this machine I see the following ...
+>
+> OE Build Configuration:
+> BB_VERSION        = "1.13.3"
+> TARGET_ARCH       = "arm"
+> TARGET_OS         = "linux-gnueabi"
+> MACHINE           = "qemuarm"
+> DISTRO            = "angstrom"
+> DISTRO_VERSION    = "v2011.10-core"
+> TUNE_FEATURES     = "armv5 dsp thumb arm926ejs"
+> TARGET_FPU        = "soft"
+>
+> So it's still building for qemuarm, not am3517-evm ... :-(. Is anyone else having this issue? Any suggestions of how to fix this?
 
-I am trying to do some builds for an am3517-evm ... but the machine configu=
-ration doesn't seem to be working (or I'm doing it wrong, more likely ... :=
--().
+You need to always specify MACHINE="am3517-evm" on your command line, e.g.
+   % MACHINE="am3517-evm" bitbake systemd-image
 
-I have successfully built console-image for qemuarm, and then use oebb.sh t=
-o set the machine (to am3517-evm, followed bu ./oebb.sh update) - but then =
-when I try to build for this machine I see the following ...
+Alternatively, you can add just a single line to conf/local.conf
+and then it will be "sticky"
 
-OE Build Configuration:
-BB_VERSION        =3D "1.13.3"
-TARGET_ARCH       =3D "arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D "qemuarm"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D "v2011.10-core"
-TUNE_FEATURES     =3D "armv5 dsp thumb arm926ejs"
-TARGET_FPU        =3D "soft"
-
-So it's still building for qemuarm, not am3517-evm ... :-(. Is anyone else =
-having this issue? Any suggestions of how to fix this?
-
-Thanks!
-
-... Russell
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
