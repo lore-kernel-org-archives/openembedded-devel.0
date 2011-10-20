@@ -1,23 +1,26 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RGzOL-00077U-RU
+	(envelope-from <schnitzeltony@gmx.de>) id 1RGzcI-0007ZA-NL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Oct 2011 22:39:07 +0200
-Received: (qmail invoked by alias); 20 Oct 2011 20:33:12 -0000
+	Thu, 20 Oct 2011 22:53:30 +0200
+Received: (qmail invoked by alias); 20 Oct 2011 20:47:38 -0000
 Received: from p4FDF0EB6.dip.t-dialin.net (EHLO localhost.localdomain)
 	[79.223.14.182]
-	by mail.gmx.net (mp007) with SMTP; 20 Oct 2011 22:33:12 +0200
+	by mail.gmx.net (mp069) with SMTP; 20 Oct 2011 22:47:38 +0200
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/6W4AjB3H6U9ZrSLcw0AewP/PTfrzbnsXnBu5KBi
-	SwOp21amvTM+Bc
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+X-Provags-ID: V01U2FsdGVkX19SldgwUc1S/ZpvyKKjRWP5iusBKJsSobkk09msmk
+	/JrYWvqUT95ur8
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Oct 2011 22:37:52 +0200
-Message-Id: <1319143073-23469-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+Date: Thu, 20 Oct 2011 22:52:18 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
 MIME-Version: 1.0
+Message-Id: <201110202252.19213.schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 0/1] xfce4-icon-theme: initial add 4.4.3
+Subject: Re: [ANNOUNCEMENT] New Patchwork available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,24 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2011 20:39:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 20 Oct 2011 20:53:31 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-For those used to xfce icons (there a only few differences to gnome-icon-theme)
-xfce-icon-theme is added. It is optional and not made default again in 
-xfce4-settings. Many other recipes insist on gnome-icon-theme and if 
-users do not add xfce-icon-theme, image is not blown up unnecessarily.
+On Monday, October 17, 2011 09:06:04 PM Khem Raj wrote:
+> Here is a new instance of patchwork accessible at
+> http://patchwork.openembedded.org
+...
+> However with the new patchwork you will see additionally "Mail settings"
+> link on the right hand upper corner this could be used to subscribe to patchwork
+> activity. This is a new feature so try it out and report any issues.
+Could you send more info (e.g. screenshot- sorry I am too stupid to find it
 
-Andreas Müller (1):
-  xfce4-icon-theme: initial add 4.4.3
-
- .../xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb     |   14 ++++++++++++++
- 1 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-
--- 
-1.7.4.4
-
+Andreas
 
 
