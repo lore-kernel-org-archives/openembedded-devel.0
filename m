@@ -1,34 +1,18 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH0VV-0001RT-KX for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Oct 2011 23:50:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH0Pp-00052T-Bd for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Oct 2011 23:44:41 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2011 23:44:41 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2011 23:44:41 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 20 Oct 2011 23:44:21 +0200
-Message-ID: <j7q4nl$akr$1@dough.gmane.org>
-References: <1319132705374102500@rkmorris.us> <4EA073C0.7000502@mlbassoc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <4EA073C0.7000502@mlbassoc.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: Machine Configuration
+	(envelope-from <andrea.adami@gmail.com>) id 1RH19B-0002iF-Uh
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 00:31:34 +0200
+Received: from mizar.localdomain (95.252.35.248) by smtp206.alice.it
+	(8.5.124.08) id 4E4BBF7705EC55D5; Fri, 21 Oct 2011 00:25:41 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Oct 2011 00:25:38 +0200
+Message-Id: <1319149538-3111-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH V2 3/3] xserver-xf86-config: add more xorg.conf for other Zaurus devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,52 +26,297 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2011 21:50:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Oct 2011 22:31:34 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../xserver-xf86-config/akita/xorg.conf            |   49 ++++++++++++++++++++
+ .../xserver-xf86-config/c7x0/xorg.conf             |   48 +++++++++++++++++++
+ .../xserver-xf86-config/collie/xorg.conf           |   49 ++++++++++++++++++++
+ .../xserver-xf86-config/poodle/xorg.conf           |   49 ++++++++++++++++++++
+ .../xserver-xf86-config/tosa/xorg.conf             |   48 +++++++++++++++++++
+ 5 files changed, 243 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-graphics/xorg-xserver/xserver-xf86-config/akita/xorg.conf
+ create mode 100644 recipes-graphics/xorg-xserver/xserver-xf86-config/c7x0/xorg.conf
+ create mode 100644 recipes-graphics/xorg-xserver/xserver-xf86-config/collie/xorg.conf
+ create mode 100644 recipes-graphics/xorg-xserver/xserver-xf86-config/poodle/xorg.conf
+ create mode 100644 recipes-graphics/xorg-xserver/xserver-xf86-config/tosa/xorg.conf
 
-Op 20-10-11 21:17, Gary Thomas schreef:
-> On 2011-10-20 11:45, Russell Morris wrote:
->> Hi,
->> 
->> I am trying to do some builds for an am3517-evm ... but the machine 
->> configuration doesn't seem to be working (or I'm doing it wrong, more
->> likely ... :-().
->> 
->> I have successfully built console-image for qemuarm, and then use
->> oebb.sh to set the machine (to am3517-evm, followed bu ./oebb.sh
->> update) - but then when I try to build for this machine I see the
->> following ...
->> 
->> OE Build Configuration: BB_VERSION        = "1.13.3" TARGET_ARCH
->> = "arm" TARGET_OS         = "linux-gnueabi" MACHINE           =
->> "qemuarm" DISTRO            = "angstrom" DISTRO_VERSION    =
->> "v2011.10-core" TUNE_FEATURES     = "armv5 dsp thumb arm926ejs" 
->> TARGET_FPU        = "soft"
->> 
->> So it's still building for qemuarm, not am3517-evm ... :-(. Is anyone
->> else having this issue? Any suggestions of how to fix this?
-> 
-> You need to always specify MACHINE="am3517-evm" on your command line,
-> e.g. % MACHINE="am3517-evm" bitbake systemd-image
-> 
-> Alternatively, you can add just a single line to conf/local.conf and then
-> it will be "sticky"
-
-not local.conf, auto.conf
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOoJY1MkyGM64RGpERAliKAKCfu0E2K3Qn+lsTx5YzNRgkxrA+QwCgqJjT
-0ZsSMZCZArrGVc54VNa4dDA=
-=zm3i
------END PGP SIGNATURE-----
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/akita/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/akita/xorg.conf
+new file mode 100644
+index 0000000..224df5c
+--- /dev/null
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/akita/xorg.conf
+@@ -0,0 +1,49 @@
++Section "Device"
++        Identifier      "Generic Video Card"
++        Driver          "fbdev"
++        Option          "UseFBDev"              "true"
++        Option          "Rotate"                "CW"
++EndSection
++
++Section "Monitor"
++        Identifier      "Generic Monitor"
++        Option          "DPMS"
++        HorizSync       28-32
++        VertRefresh     43-60
++EndSection
++
++Section "Screen"
++        Identifier      "Default Screen"
++        Device          "Generic Video Card"
++        Monitor         "Generic Monitor"
++        DefaultDepth    16
++        SubSection "Display"
++                Depth           1
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           4
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           8
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           15
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           16
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           24
++                Modes           "640x480"
++        EndSubSection
++EndSection
++
++Section "ServerLayout"
++        Identifier      "Default Layout"
++        Screen          "Default Screen"
++EndSection
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/c7x0/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/c7x0/xorg.conf
+new file mode 100644
+index 0000000..ce544bb
+--- /dev/null
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/c7x0/xorg.conf
+@@ -0,0 +1,48 @@
++Section "Device"
++        Identifier      "Generic Video Card"
++        Driver          "fbdev"
++        Option          "UseFBDev"              "true"
++EndSection
++
++Section "Monitor"
++        Identifier      "Generic Monitor"
++        Option          "DPMS"
++        HorizSync       28-32
++        VertRefresh     43-60
++EndSection
++
++Section "Screen"
++        Identifier      "Default Screen"
++        Device          "Generic Video Card"
++        Monitor         "Generic Monitor"
++        DefaultDepth    16
++        SubSection "Display"
++                Depth           1
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           4
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           8
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           15
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           16
++                Modes           "640x480"
++        EndSubSection
++        SubSection "Display"
++                Depth           24
++                Modes           "640x480"
++        EndSubSection
++EndSection
++
++Section "ServerLayout"
++        Identifier      "Default Layout"
++        Screen          "Default Screen"
++EndSection
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/collie/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/collie/xorg.conf
+new file mode 100644
+index 0000000..0c8d291
+--- /dev/null
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/collie/xorg.conf
+@@ -0,0 +1,49 @@
++Section "Device"
++        Identifier      "Generic Video Card"
++        Driver          "fbdev"
++        Option          "UseFBDev"              "true"
++        Option          "Rotate"                "CW"
++EndSection
++
++Section "Monitor"
++        Identifier      "Generic Monitor"
++        Option          "DPMS"
++        HorizSync       28-32
++        VertRefresh     43-60
++EndSection
++
++Section "Screen"
++        Identifier      "Default Screen"
++        Device          "Generic Video Card"
++        Monitor         "Generic Monitor"
++        DefaultDepth    16
++        SubSection "Display"
++                Depth           1
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           4
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           8
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           15
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           16
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           24
++                Modes           "320x240"
++        EndSubSection
++EndSection
++
++Section "ServerLayout"
++        Identifier      "Default Layout"
++        Screen          "Default Screen"
++EndSection
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/poodle/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/poodle/xorg.conf
+new file mode 100644
+index 0000000..0c8d291
+--- /dev/null
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/poodle/xorg.conf
+@@ -0,0 +1,49 @@
++Section "Device"
++        Identifier      "Generic Video Card"
++        Driver          "fbdev"
++        Option          "UseFBDev"              "true"
++        Option          "Rotate"                "CW"
++EndSection
++
++Section "Monitor"
++        Identifier      "Generic Monitor"
++        Option          "DPMS"
++        HorizSync       28-32
++        VertRefresh     43-60
++EndSection
++
++Section "Screen"
++        Identifier      "Default Screen"
++        Device          "Generic Video Card"
++        Monitor         "Generic Monitor"
++        DefaultDepth    16
++        SubSection "Display"
++                Depth           1
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           4
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           8
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           15
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           16
++                Modes           "320x240"
++        EndSubSection
++        SubSection "Display"
++                Depth           24
++                Modes           "320x240"
++        EndSubSection
++EndSection
++
++Section "ServerLayout"
++        Identifier      "Default Layout"
++        Screen          "Default Screen"
++EndSection
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/tosa/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/tosa/xorg.conf
+new file mode 100644
+index 0000000..73f26df
+--- /dev/null
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/tosa/xorg.conf
+@@ -0,0 +1,48 @@
++Section "Device"
++        Identifier      "Generic Video Card"
++        Driver          "fbdev"
++        Option          "UseFBDev"              "true"
++EndSection
++
++Section "Monitor"
++        Identifier      "Generic Monitor"
++        Option          "DPMS"
++        HorizSync       28-32
++        VertRefresh     43-60
++EndSection
++
++Section "Screen"
++        Identifier      "Default Screen"
++        Device          "Generic Video Card"
++        Monitor         "Generic Monitor"
++        DefaultDepth    16
++        SubSection "Display"
++                Depth           1
++                Modes           "480x640"
++        EndSubSection
++        SubSection "Display"
++                Depth           4
++                Modes           "480x640"
++        EndSubSection
++        SubSection "Display"
++                Depth           8
++                Modes           "480x640"
++        EndSubSection
++        SubSection "Display"
++                Depth           15
++                Modes           "480x640"
++        EndSubSection
++        SubSection "Display"
++                Depth           16
++                Modes           "480x640"
++        EndSubSection
++        SubSection "Display"
++                Depth           24
++                Modes           "480x640"
++        EndSubSection
++EndSection
++
++Section "ServerLayout"
++        Identifier      "Default Layout"
++        Screen          "Default Screen"
++EndSection
+-- 
+1.7.3.4
 
 
 
