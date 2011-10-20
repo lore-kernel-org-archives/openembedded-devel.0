@@ -1,28 +1,25 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1RGyCy-0004d0-S0
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RGzOM-00077V-56
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Oct 2011 21:23:17 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 8583016606CB; Thu, 20 Oct 2011 13:17:20 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 1A90B16605E5;
-	Thu, 20 Oct 2011 13:17:20 -0600 (MDT)
-Message-ID: <4EA073C0.7000502@mlbassoc.com>
-Date: Thu, 20 Oct 2011 13:17:20 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:7.0.1) Gecko/20110930 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Thu, 20 Oct 2011 22:39:06 +0200
+Received: (qmail invoked by alias); 20 Oct 2011 20:33:13 -0000
+Received: from p4FDF0EB6.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.14.182]
+	by mail.gmx.net (mp007) with SMTP; 20 Oct 2011 22:33:13 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1945Oo/vC141Hnf8ep99nC+deuRofcfU6n5Rvztqx
+	LIlsibqVLbPdjt
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1319132705374102500@rkmorris.us>
-In-Reply-To: <1319132705374102500@rkmorris.us>
-Subject: Re: Machine Configuration
+Date: Thu, 20 Oct 2011 22:37:53 +0200
+Message-Id: <1319143073-23469-2-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1319143073-23469-1-git-send-email-schnitzeltony@gmx.de>
+References: <1319143073-23469-1-git-send-email-schnitzeltony@gmx.de>
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-xfce 1/1] xfce4-icon-theme: initial add 4.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,39 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2011 19:23:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Oct 2011 20:39:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2011-10-20 11:45, Russell Morris wrote:
-> Hi,
->
-> I am trying to do some builds for an am3517-evm ... but the machine configuration doesn't seem to be working (or I'm doing it wrong, more likely ... :-().
->
-> I have successfully built console-image for qemuarm, and then use oebb.sh to set the machine (to am3517-evm, followed bu ./oebb.sh update) - but then when I try to build for this machine I see the following ...
->
-> OE Build Configuration:
-> BB_VERSION        = "1.13.3"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "qemuarm"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "v2011.10-core"
-> TUNE_FEATURES     = "armv5 dsp thumb arm926ejs"
-> TARGET_FPU        = "soft"
->
-> So it's still building for qemuarm, not am3517-evm ... :-(. Is anyone else having this issue? Any suggestions of how to fix this?
 
-You need to always specify MACHINE="am3517-evm" on your command line, e.g.
-   % MACHINE="am3517-evm" bitbake systemd-image
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb     |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
 
-Alternatively, you can add just a single line to conf/local.conf
-and then it will be "sticky"
-
+diff --git a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
+new file mode 100644
+index 0000000..bc6229a
+--- /dev/null
++++ b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "xfce4 icon theme rodent"
++SECTION = "x11/wm"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++inherit xfce
++
++SRC_URI = "http://archive.xfce.org/src/art/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
++SRC_URI[md5sum] = "73ce2977b84f634a6a6c5d9c27e336db"
++SRC_URI[sha256sum] = "d4786692d56b8a563f66a5f260f1f13ade11e86c78cbcb25a9f9a5fc47cf66fa"
++
++#FILES_${PN} += "${datadir}/xfce4"
++
++
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.4.4
+
 
 
