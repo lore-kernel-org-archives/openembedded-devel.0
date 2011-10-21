@@ -1,26 +1,26 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1RHIrg-0002fH-Bd; Fri, 21 Oct 2011 19:26:40 +0200
-Received: by ggnj1 with SMTP id j1so2507790ggn.6
-	for <multiple recipients>; Fri, 21 Oct 2011 10:20:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=EQt0T/XYN05nxc2OhGrF5a/FECYyxIUo7O57EOCcigs=;
-	b=iFntgCsrXP4nV+qy95EOXzERt+DvJyFg+jqMZMYWfBcuZ1/2b/yje+ShMbwL3nIK/a
-	Qt/KIyXqdpUEdDVl7pA1rPzL7JvTupLNhKzyQHVYdLqGI7Ma6eTJATwcBgDIiPIOKsdY
-	wNpPLQvDP6nPd3H1/4ebEXdLqGSuOgayBlp5I=
-Received: by 10.68.23.6 with SMTP id i6mr29184531pbf.13.1319217642116; Fri, 21
-	Oct 2011 10:20:42 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Fri, 21 Oct 2011 10:20:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Oct 2011 10:20:12 -0700
-Message-ID: <CAMKF1srCM1QpLmAAr13qbAsD0_PZUx9zLWP==tQMBcy=+ck5Dw@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Keeping patch status uptodate in patchwork
+	(envelope-from <denis@denix.org>) id 1RHKUE-0005X8-HD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 21:10:35 +0200
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LTF00JWOGUZU1RY@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	21 Oct 2011 13:04:11 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id E6F4414AF5D; Fri,
+	21 Oct 2011 14:04:10 -0400 (EDT)
+Date: Fri, 21 Oct 2011 14:04:10 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20111021180410.GE9156@denix.org>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013CD9B@post.tritech.se>
+	<1319192173.3766.16.camel@mattotaupa> <4EA18A1F.9040409@telia.com>
+MIME-version: 1.0
+In-reply-to: <4EA18A1F.9040409@telia.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] 2011.03-maintenance: Bad checksums in	binutils-cross-sdk_2.18.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +34,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 17:26:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Oct 2011 19:10:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi
+On Fri, Oct 21, 2011 at 05:05:03PM +0200, Ulf Samuelsson wrote:
+> 2011-10-21 12:16, Paul Menzel skrev:
+>> Dear Mats,
+>>
+>>
+>> Am Freitag, den 21.10.2011, 06:42 +0000 schrieb Mats K?rrman:
+>>
+>>> My first patch, please be gentle if i did something wrong ;)
+>> our commit policy describes how patches should be formatted [1][2]. Most
+>> importantly you forgot your Signed-off-by line.
+>>
+>>> The following patch is from a local branch tracking
+>>> 2011.03-maintenance, should it be done different?
+> I did a similar fix for binutils-2.20.1, and that is apparently not the way
+> so this was rejected. (See other discussions on binutils this week).
 
-I would like to request the patch submitter to change the status of
-patches appropriately particularly case where manual intervention will
-be needed
+Ulf,
 
-1. When you send pull request the cover letter is not marked accepted
-automatically so when pull request is merged please mark it so.
-2. When multiple versions of patches V1, V2, V3 are sent then the
-versions that don't get applied should be marked as superseded.
+You did not read the issue description carefully. There is a genuine issue 
+with "overwriting" checksums incorrectly in binutils-cross-sdk_2.18.bb
 
-It will greatly help in keeping the patchwork clean and layer
-maintainers and the data it represents will be lot more relevant.
 
-Thanks for you help
+> I sent a new version of binutils-2.20.1 patch today,
+> which is taken from openembedded-core, and that
+> combines the new checksums, with downloading a new tarball.
 
--Khem
+That is a correct way of solving the changed checksum issue. Thanks for 
+submitting your patches.
+
+
+> If it follows the same scheme, then:
+> binutils-2.18.tar.bz2 is only a link to binutils-2.18a.tar.bz2
+> Your SRC_URI should be pointing at binutils-${PV}a.tar.bz2
+
+That is a problem for binutils_2.18.bb and he is fixing a slightly different 
+problem in binutils-cross-sdk_2.18.bb
+
+-- 
+Denys
+
+
+>> If I read [3] correctly it first has to go into for example the master
+>> branch. I pushed a similar hopefully correct change there [4]. Please
+>> send a pull request as described in [3] to get that included in
+>> 2011.03-maintenance.
+>>
+>>> The binutils_2.18 tarball from GNU has changed checksums, ref. to 
+>>> this<http://git.openembedded.org/openembedded/commit/recipes/binutils/binutils_2.18.bb?h=2011.03-maintenance&id=bc8ddbf7944f82383936d88379619aa46c3954a2>
+>>> As binutils-cross-sdk_2.18.bb includes binutils_2.18.bb it does not need 
+>>> to specify its own checksums.
+>>>
+>>> diff --git a/recipes/binutils/binutils-cross-sdk_2.18.bb 
+>>> b/recipes/binutils/binutils-cross-sdk_2.18.bb
+>>> index 837ebbe..2f13b26 100644
+>>> --- a/recipes/binutils/binutils-cross-sdk_2.18.bb
+>>> +++ b/recipes/binutils/binutils-cross-sdk_2.18.bb
+>>> @@ -1,6 +1,3 @@
+>>>   require binutils_${PV}.bb
+>>>   require binutils-cross-sdk.inc
+>>>   PR = "${INC_PR}.1"
+>>> -
+>>> -SRC_URI[md5sum] = "9d22ee4dafa3a194457caf4706f9cf01"
+>>> -SRC_URI[sha256sum] = 
+>>> "487a33a452f0edcf1f8bb8fc23dff5c7a82edec3f3f8b65632b6c945e961ee9b"
+>>
+>> Thanks and I am looking forward to further contributions,
+>>
+>> Paul
+>>
+>>
+>> [1] http://www.openembedded.org/wiki/Commit_Policy
+>> [2] http://www.openembedded.org/wiki/Category:Policy
+>> [3] http://www.openembedded.org/wiki/2011.03-maintenance
+>> [4] 
+>> http://git.openembedded.org/openembedded/commit/?id=f2d53aa074d76509384e7bb8a9c39e2e27210f4a
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+> -- 
+> Best Regards
+> Ulf Samuelsson
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
