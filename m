@@ -1,30 +1,30 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1RH37d-0007LY-8t; Fri, 21 Oct 2011 02:38:05 +0200
-Received: by gyc15 with SMTP id 15so3260659gyc.6
-	for <multiple recipients>; Thu, 20 Oct 2011 17:32:11 -0700 (PDT)
+	(envelope-from <otavio.salvador@gmail.com>) id 1RH5xu-000565-Ax
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 05:40:14 +0200
+Received: by ywf9 with SMTP id 9so1013446ywf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Oct 2011 20:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Opzi3QKP5MWAsJWIbfHyDewJe1b5ymebvn7Cr+VwwLQ=;
-	b=OtqwxUKQgkfNgr2EDK99jk6HeBW8ozpkYxS+zH7HZg5bq88WQDaX/hpb4+okB+WQDw
-	0r/02lBu1Qp4EsiQ2EGT2bLlKnjvHctCdRQ7o6CU9OVAMF2W/irRWx1QDhLKo8TvrOtO
-	1v1TAT/3jzb+7g6GvzZFAhIgi666uuvgnmB2Y=
-Received: by 10.68.32.138 with SMTP id j10mr17782176pbi.81.1319157131087; Thu,
-	20 Oct 2011 17:32:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Thu, 20 Oct 2011 17:31:41 -0700 (PDT)
-In-Reply-To: <20111021002021.GV26170@denix.org>
-References: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
-	<20111021002021.GV26170@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Oct 2011 17:31:41 -0700
-Message-ID: <CAMKF1srCsoXv+kiYypb1j3kHeo0_Opr6oR4MzARx0tuQgir71w@mail.gmail.com>
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=nnbhYJ2M6PNou6hb5u+12JNanEY6qtp7slObw4Ywxh8=;
+	b=fGIFfyXRe1w+VLBn2XPHZrHXwIrQ1rpqFZMSmFO243gBEGORzzYVM3E0GsBGa2+SDG
+	sjBwf4GDuV+zrC7kOR6Z31AH4hmW/rE8IPYM2dtEUnOru8D/3sYU1/CqcIfVRFdmBcFr
+	OvOvYsCq2q5CxKm8WXAF1/ab7Ic2NqvaF76NU=
+Received: by 10.150.138.15 with SMTP id l15mr12201318ybd.21.1319168060120;
+	Thu, 20 Oct 2011 20:34:20 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id t7sm31947517anh.15.2011.10.20.20.34.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 20 Oct 2011 20:34:19 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [ANNOUNCEMENT] New Patchwork available for testing
+Date: Fri, 21 Oct 2011 03:34:09 +0000
+Message-Id: <cover.1319168013.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/4] systemd fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,43 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 00:38:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Oct 2011 03:40:14 -0000
 
-On Thu, Oct 20, 2011 at 5:20 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Mon, Oct 17, 2011 at 12:06:04PM -0700, Khem Raj wrote:
->> Hi
->>
->> Here is a new instance of patchwork accessible at
->> http://patchwork.openembedded.org
->>
->> This instance uses same database therefore it should not be any different than
->> existing patches.openembedded.org
->>
->> However with the new patchwork you will see additionally "Mail settings"
->> link on the right hand upper corner this could be used to subscribe to patchwork
->> activity. This is a new feature so try it out and report any issues.
->>
->> The patch capturing is done by the new patchwork.
->>
->> reiterating what Koen already announced, git post-recieve hook is
->> installed for meta-openembedded repository to interact with patchwork
->> on push so it will change the state of patch to "Accepted" once
->> it has been pushed. This should avoid lot of manual work for the maintainers
->
-> Does this work for pull requests?
+The following changes since commit 0368dfd5d8285fe31c853097846e8a6822c7cda0:
 
-if patch appears in patchwork yet it will
+  gcc-4.6: Remove the patches that are already applied via oe-core (2011-10-20 19:25:50 +0200)
 
->
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-> --
-> Denys
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Otavio Salvador (4):
+  systemd: add systemd-initramfs
+  systemd: add lock group using useradd.bbclass
+  systemd: do not recommend systemd-serialgetty
+  systemd-serialgetty: don't require systemd_git.bb
+
+ .../recipes-core/systemd/systemd-serialgetty.bb    |   22 +++++------------
+ meta-oe/recipes-core/systemd/systemd_git.bb        |   24 ++++++++++----------
+ 2 files changed, 19 insertions(+), 27 deletions(-)
+
+-- 
+1.7.2.5
+
 
 
