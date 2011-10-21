@@ -1,36 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH8dD-0007GU-7p for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 08:31:03 +0200
+	id 1RH8i0-0007O2-79 for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 08:36:00 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH8XU-0005er-VJ for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 08:25:08 +0200
+	id 1RH8cK-0007NP-Gu for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 08:30:08 +0200
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 08:25:08 +0200
+	Fri, 21 Oct 2011 08:30:08 +0200
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 08:25:08 +0200
+	Fri, 21 Oct 2011 08:30:08 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 21 Oct 2011 08:13:35 +0200
-Message-ID: <j7r2if$7jb$4@dough.gmane.org>
-References: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
-	<20111021002021.GV26170@denix.org>
+Date: Fri, 21 Oct 2011 08:11:26 +0200
+Message-ID: <j7r2ee$7jb$2@dough.gmane.org>
+References: <cover.1319168013.git.otavio@ossystems.com.br>
+	<f8bb508b661653c11221ac4b6a8ec080d2527569.1319168013.git.otavio@ossystems.com.br>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <20111021002021.GV26170@denix.org>
+In-Reply-To: <f8bb508b661653c11221ac4b6a8ec080d2527569.1319168013.git.otavio@ossystems.com.br>
 X-Enigmail-Version: 1.3.2
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [ANNOUNCEMENT] New Patchwork available for testing
+Subject: Re: [meta-oe][PATCH 1/4] systemd: add systemd-initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,38 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 06:31:03 -0000
+X-List-Received-Date: Fri, 21 Oct 2011 06:36:00 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 21-10-11 02:20, Denys Dmytriyenko schreef:
-> On Mon, Oct 17, 2011 at 12:06:04PM -0700, Khem Raj wrote:
->> Hi
->> 
->> Here is a new instance of patchwork accessible at 
->> http://patchwork.openembedded.org
->> 
->> This instance uses same database therefore it should not be any
->> different than existing patches.openembedded.org
->> 
->> However with the new patchwork you will see additionally "Mail
->> settings" link on the right hand upper corner this could be used to
->> subscribe to patchwork activity. This is a new feature so try it out
->> and report any issues.
->> 
->> The patch capturing is done by the new patchwork.
->> 
->> reiterating what Koen already announced, git post-recieve hook is 
->> installed for meta-openembedded repository to interact with patchwork 
->> on push so it will change the state of patch to "Accepted" once it has
->> been pushed. This should avoid lot of manual work for the maintainers
-> 
-> Does this work for pull requests?
+Op 21-10-11 05:34, Otavio Salvador schreef:
+> Includes a /init that points to ${base_sbin}/init that is called so to 
+> avoid having to include post rootfs commands for it.
 
-Yes, except for the coverletter, you need to archive that one manually.
+lrwxrwxrwx 1 root root 12 Jan  1  1970 /sbin/init -> /bin/systemd
+
+So please symlink /init to /bin/systemd directly.
 
 regards,
 
@@ -84,9 +65,9 @@ Koen
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOoQ2PMkyGM64RGpERAs6NAJ9F3xzg0VCswRttYTu0VSdKJZuQsACfa6/+
-psGXYPWGqACD0cQKaeNbdh8=
-=K4Xv
+iD8DBQFOoQ0OMkyGM64RGpERAmGAAKCg0d+PzTU9EdxpEnPyPuAvRG0NnACcDLhg
+c2oS6aSOH3tRpd0T3W9mWbk=
+=1HJa
 -----END PGP SIGNATURE-----
 
 
