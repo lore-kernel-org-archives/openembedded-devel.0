@@ -1,30 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RH8cV-0007An-PE
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 08:30:19 +0200
-Received: by gyc15 with SMTP id 15so3441616gyc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RH8dD-0007GU-7p for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 08:31:03 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RH8XU-0005er-VJ for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 08:25:08 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 08:25:08 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2011 23:24:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=L/b/bt76uLm2JKoO/pkup1Wlw2cDA8N/zKITyck5CJ0=;
-	b=pUDAx+Jl/drOPEjyMxMgGZEOAqRjpeQ/vSyGy3YJWA+8sznNkAop9OMoJTeHADKBC/
-	s/nTa4XDi+2V8c99JYAqRy0qdefj8pbcqDSpndU7B7JNjpMTEkh1F1UmlB2aZVvwbwUa
-	YK2cT66kdyBKdCDmI4soRToiVpdS91cGECizc=
-Received: by 10.68.73.103 with SMTP id k7mr16126441pbv.30.1319178263056; Thu,
-	20 Oct 2011 23:24:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Thu, 20 Oct 2011 23:23:53 -0700 (PDT)
-In-Reply-To: <201110202252.19213.schnitzeltony@gmx.de>
-References: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
-	<201110202252.19213.schnitzeltony@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Oct 2011 23:23:53 -0700
-Message-ID: <CAMKF1sqF9jHmBkrhjNJJfvAXZoTorS7kWqnB4sD79MSntUt9Zw@mail.gmail.com>
+	Fri, 21 Oct 2011 08:25:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [ANNOUNCEMENT] New Patchwork available for testing
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 21 Oct 2011 08:13:35 +0200
+Message-ID: <j7r2if$7jb$4@dough.gmane.org>
+References: <CAMKF1sqwC26Qo2MPCmNcwvsqweC-8F1P2y9myNOgihrBtCdTXA@mail.gmail.com>
+	<20111021002021.GV26170@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <20111021002021.GV26170@denix.org>
+X-Enigmail-Version: 1.3.2
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] [ANNOUNCEMENT] New Patchwork available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 06:30:19 -0000
+X-List-Received-Date: Fri, 21 Oct 2011 06:31:03 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 20, 2011 at 1:52 PM, Andreas M=C3=BCller <schnitzeltony@gmx.de>=
- wrote:
-> Could you send more info (e.g. screenshot- sorry I am too stupid to find =
-it
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-heh see http://uclibc.org/~kraj/pw.jpg
-"Linked email addresses"
+Op 21-10-11 02:20, Denys Dmytriyenko schreef:
+> On Mon, Oct 17, 2011 at 12:06:04PM -0700, Khem Raj wrote:
+>> Hi
+>> 
+>> Here is a new instance of patchwork accessible at 
+>> http://patchwork.openembedded.org
+>> 
+>> This instance uses same database therefore it should not be any
+>> different than existing patches.openembedded.org
+>> 
+>> However with the new patchwork you will see additionally "Mail
+>> settings" link on the right hand upper corner this could be used to
+>> subscribe to patchwork activity. This is a new feature so try it out
+>> and report any issues.
+>> 
+>> The patch capturing is done by the new patchwork.
+>> 
+>> reiterating what Koen already announced, git post-recieve hook is 
+>> installed for meta-openembedded repository to interact with patchwork 
+>> on push so it will change the state of patch to "Accepted" once it has
+>> been pushed. This should avoid lot of manual work for the maintainers
+> 
+> Does this work for pull requests?
+
+Yes, except for the coverletter, you need to archive that one manually.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOoQ2PMkyGM64RGpERAs6NAJ9F3xzg0VCswRttYTu0VSdKJZuQsACfa6/+
+psGXYPWGqACD0cQKaeNbdh8=
+=K4Xv
+-----END PGP SIGNATURE-----
+
 
 
