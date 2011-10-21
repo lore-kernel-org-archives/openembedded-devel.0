@@ -1,35 +1,35 @@
 Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RH5xv-000565-54
+	(envelope-from <otavio.salvador@gmail.com>) id 1RH5xv-000568-Ey
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 21 Oct 2011 05:40:15 +0200
-Received: by mail-yw0-f47.google.com with SMTP id 9so1013446ywf.6
+Received: by ywf9 with SMTP id 9so1013458ywf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2011 20:34:24 -0700 (PDT)
+	Thu, 20 Oct 2011 20:34:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=mz0qTo/iju3o2G8ENqI9CV/4h5Ov3YNw3SxRjnj/Yyw=;
-	b=fKOFSH6YRnvIQtczxwaIwgeEaKCLrE0bb/fpXWRStjhgySjudXEAswuYT3C3Dtoaef
-	Dv6wOI9baB/Kuzm5uMn1BrFvwNmi0uoY2D4Nj0vg7QujIL5Cb3LAxd2qEqAYJOzzQSbD
-	PcqLBBTXDOQpHoOxLM1DZrg9Dsub+GRSHEl2o=
-Received: by 10.150.14.9 with SMTP id 9mr12158954ybn.70.1319168064427;
-	Thu, 20 Oct 2011 20:34:24 -0700 (PDT)
+	bh=9bPw/ZrnNxOdoFWv8WFjaN8l3m9OdfcaqRhVmucbEfc=;
+	b=nM9PFURFLYImzeNlKD9on+13X31CCKVvZlSJ39A1jNJ8R8kkfeDq8dZKdeN1njUDy7
+	AgD25YVzjtODyQuRaYx1h96mLBtzZfNm+LanUJkx1zlMPaSQliDiWlBUGua2tBljiHq8
+	gy+qpisRx9CVL+RvY4UIZBw9G2VTM5+oxk0do=
+Received: by 10.151.59.20 with SMTP id m20mr4359643ybk.39.1319168062456;
+	Thu, 20 Oct 2011 20:34:22 -0700 (PDT)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id t7sm31947517anh.15.2011.10.20.20.34.22
+	by mx.google.com with ESMTPS id t7sm31947517anh.15.2011.10.20.20.34.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Oct 2011 20:34:23 -0700 (PDT)
+	Thu, 20 Oct 2011 20:34:21 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Oct 2011 03:34:11 +0000
-Message-Id: <18e83a0b90b4fc9931900e6ffd0b55c910c174f2.1319168013.git.otavio@ossystems.com.br>
+Date: Fri, 21 Oct 2011 03:34:10 +0000
+Message-Id: <f8bb508b661653c11221ac4b6a8ec080d2527569.1319168013.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1319168013.git.otavio@ossystems.com.br>
 References: <cover.1319168013.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1319168013.git.otavio@ossystems.com.br>
 References: <cover.1319168013.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/4] systemd: add lock group using useradd.bbclass
+Subject: [meta-oe][PATCH 1/4] systemd: add systemd-initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +45,44 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Oct 2011 03:40:15 -0000
 
+Includes a /init that points to ${base_sbin}/init that is called so to
+avoid having to include post rootfs commands for it.
+
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-core/systemd/systemd_git.bb |   15 +++++----------
- 1 files changed, 5 insertions(+), 10 deletions(-)
+ meta-oe/recipes-core/systemd/systemd_git.bb |   10 ++++++++--
+ 1 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 9df3b53..4a640e7 100644
+index 8faedd0..9df3b53 100644
 --- a/meta-oe/recipes-core/systemd/systemd_git.bb
 +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -14,9 +14,9 @@ inherit gitpkgv
+@@ -14,7 +14,7 @@ inherit gitpkgv
  PKGV = "v${GITPKGVTAG}"
  
  PV = "git"
--PR = "r1"
-+PR = "r2"
+-PR = "r0"
++PR = "r1"
  
--inherit pkgconfig autotools vala perlnative
-+inherit useradd pkgconfig autotools vala perlnative
+ inherit pkgconfig autotools vala perlnative
  
- SRCREV = "64685e0cea62b4937f0804e47ce2cb7929f58223"
- 
-@@ -59,6 +59,9 @@ do_install() {
- 
- PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
- 
-+USERADD_PACKAGES = "${PN}"
-+GROUPADD_PARAM_${PN} = "-r lock"
+@@ -52,9 +52,15 @@ do_install() {
+ 	autotools_do_install
+ 	# provided by a seperate recipe
+ 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
 +
- FILES_${PN}-initramfs = "/init"
- RDEPENDS_${PN}-initramfs = "${PN}"
- 
-@@ -113,12 +116,4 @@ update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl
- update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
- update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
- update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
--
--# can't do this offline, but we need the u-a bits above
--if [ "x$D" != "x" ]; then
--	echo "can't do addgroup offline" ; exit 1
--else
--	grep "^lock:" /etc/group > /dev/null || addgroup lock
--fi
++	# provide support for initramfs
++	ln -s ${base_sbindir}/init ${D}/init
  }
--
+ 
+-PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup"
++PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
++
++FILES_${PN}-initramfs = "/init"
++RDEPENDS_${PN}-initramfs = "${PN}"
+ 
+ FILES_${PN}-gui = "${bindir}/systemadm"
+ 
 -- 
 1.7.2.5
 
