@@ -1,34 +1,34 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RHEFG-0001Qz-A2
+	(envelope-from <otavio.salvador@gmail.com>) id 1RHEQq-00039O-6x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 14:30:42 +0200
-Received: by bkat8 with SMTP id t8so5046265bka.6
+	Fri, 21 Oct 2011 14:42:40 +0200
+Received: by bkat8 with SMTP id t8so5057606bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 05:24:49 -0700 (PDT)
+	Fri, 21 Oct 2011 05:36:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=ACN2uuuYDUHShS37gSHiAkijCVOvc0GF9L3kf/MLqsk=;
-	b=JABxVbizPFhB9jxpfkJAIp6uW0f2k7Jp5z+uGHdpyhssQOxTBSHml70p5k0OGxo13z
-	nvPY1XfJevON2+ftrBwLa/BfVSf2cT1dmg6eXIyM5RkzC9F/qOYHv2S09D8wPdfTUHNA
-	GnjWE56HsLNwzYIqqgQsI95a+0xcPBP38KGzU=
+	bh=2cP+h9lYTxTe6C3o62Ck9Li2I1rrWh5CUFROyMcckN0=;
+	b=lRYhE45Z9ow6YP0Kena8F+QNr/u1vF7kAv7aPhbWOHAOfuhkSq0y3dNtiTv6/pYy8s
+	MyOGYREh+H5CRLZoLapwe196rwW6K0mGS35DNct1ETfGHXykoHYS7DtNdeK2tRvBBW5x
+	G+XnG/MoUPoYzHfXmOPJDQ8cPq40KeY21rlc4=
 MIME-Version: 1.0
-Received: by 10.204.157.142 with SMTP id b14mr10679276bkx.44.1319199889142;
-	Fri, 21 Oct 2011 05:24:49 -0700 (PDT)
+Received: by 10.204.136.152 with SMTP id r24mr10664167bkt.5.1319200606893;
+	Fri, 21 Oct 2011 05:36:46 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.205.114.204 with HTTP; Fri, 21 Oct 2011 05:24:49 -0700 (PDT)
-In-Reply-To: <j7r2bh$7jb$1@dough.gmane.org>
+Received: by 10.205.114.204 with HTTP; Fri, 21 Oct 2011 05:36:46 -0700 (PDT)
+In-Reply-To: <j7r1gt$3jk$1@dough.gmane.org>
 References: <cover.1319168013.git.otavio@ossystems.com.br>
-	<b9bb7aa6a838bfad2d268907d0af7820cfd46618.1319168013.git.otavio@ossystems.com.br>
-	<j7r2bh$7jb$1@dough.gmane.org>
-Date: Fri, 21 Oct 2011 10:24:49 -0200
-X-Google-Sender-Auth: si9nkUieM9H_KsOzfcaXfS3Lw1Y
-Message-ID: <CAP9ODKo1XF-QsGa3f6K3vgnG2jf4WR1eP-Ccjmvh=W4JUXqi_Q@mail.gmail.com>
+	<1d63385213ee2d6741906cf2e61ccfb6fee58270.1319168013.git.otavio@ossystems.com.br>
+	<j7r1gt$3jk$1@dough.gmane.org>
+Date: Fri, 21 Oct 2011 10:36:46 -0200
+X-Google-Sender-Auth: j-WakVfhjwNclFe-e67MXiVpdl4
+Message-ID: <CAP9ODKryW=T3KVjGu1F1sWovbpZYE5eJSRTe+f+WxbAnQEJ0Xw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/4] systemd-serialgetty: don't require systemd_git.bb
+Subject: Re: [meta-oe][PATCH 3/4] systemd: do not recommend systemd-serialgetty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 12:30:42 -0000
+X-List-Received-Date: Fri, 21 Oct 2011 12:42:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 21, 2011 at 04:09, Koen Kooi <koen@dominion.thruhere.net> wrote=
+On Fri, Oct 21, 2011 at 03:55, Koen Kooi <koen@dominion.thruhere.net> wrote=
 :
-...
->> file://serial-getty@.service \ - =A0 =A0 =A0 =A0 =A0" - DESCRIPTION =3D =
-"Systemd
->> serial config" -SERIAL_CONSOLE ?=3D "115200 /dev/ttyS0" +LICENSE =3D "MI=
-T"
->> +LIC_FILES_CHKSUM =3D
->> "file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58"
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> The file is originally from systemd itself, so not MIT.
+> Op 21-10-11 05:34, Otavio Salvador schreef:
+>> The service ought to be add if need. Not by default on all images.
+>
+> Hmmm, I disagree. If you're using sysvinit OE will add the getty to initt=
+ab
+> already, I see no need to make systemd behave differently.
 
-Fixed locally.
+We we don't move it to suggests?
+
+Personally I think it is different and forcing everyone that doesn't
+want it to have bad recommendations is wrong.
+
+Someone moving to systemd will need to review everything once again
+and it won't hurt to add one package if he really wants to have getty
+on serial. Many won't want or use it.
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
