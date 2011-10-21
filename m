@@ -1,30 +1,40 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RHHYf-0008SN-UQ
+	(envelope-from <chase.maupin@ti.com>) id 1RHHbX-0000Aq-Es
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 18:02:58 +0200
-Received: by qam2 with SMTP id 2so3187571qam.6
+	Fri, 21 Oct 2011 18:05:55 +0200
+Received: from dlep33.itg.ti.com ([157.170.170.112])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9LFun2A015584
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 08:57:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=2ileuqoNmW6lLOWyLlrtY4zto7ueyA3ZAaNiDDOBrOg=;
-	b=oDHefa81vjEWpmQtKwLCPtp22S6HV5fjf2g2bKAiO0fVsd3RYWqTT5P889hvW6GLos
-	uf/gLDlu3Qgl1Nr0AIy8eCy9fq81+dSurxSXnDX2SFP3UW3NNLn/RdiApij1VxlDOPpI
-	UH9Z2Qxln2eyipHfgQLk9LPRU1eG4ETPMOfM4=
-Received: by 10.68.20.226 with SMTP id q2mr28417990pbe.115.1319212623044; Fri,
-	21 Oct 2011 08:57:03 -0700 (PDT)
+	Fri, 21 Oct 2011 10:56:49 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9LFunju012237
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 10:56:49 -0500 (CDT)
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9LFunYt023908
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 10:56:49 -0500 (CDT)
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE70.ent.ti.com ([fe80::db3:609a:aa62:e1ec%22]) with mapi id
+	14.01.0323.003; Fri, 21 Oct 2011 10:56:49 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] sourceipk: dereference symlinks in sourceipk
+Thread-Index: AQHMh4Kb0CgRRC7i5k+nHGhb4hrzyZWHBQCA
+Date: Fri, 21 Oct 2011 15:56:48 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1010350412A@DLEE12.ent.ti.com>
+References: <1318274820-23565-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1318274820-23565-1-git-send-email-Chase.Maupin@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Received: by 10.68.48.230 with HTTP; Fri, 21 Oct 2011 08:56:33 -0700 (PDT)
-In-Reply-To: <j7ru52$7mq$1@dough.gmane.org>
-References: <cover.1319205291.git.otavio@ossystems.com.br>
-	<009ed9f76dd5f8b17a89881366903f070b6e8a1b.1319205291.git.otavio@ossystems.com.br>
-	<j7ru52$7mq$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Oct 2011 08:56:33 -0700
-Message-ID: <CAMKF1sq6oY3n20=C3LdVWSA+1t_7KV8AMgMssdiWQNcFBQ_GhQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 5/5] task-basic: add "serial-console" machine feature
+Subject: Re: [PATCH] sourceipk: dereference symlinks in sourceipk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,14 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 16:02:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Oct 2011 16:05:56 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 21, 2011 at 7:04 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> As we discussed briefly on IRC, DISTRO_FEATURE or IMAGE_FEATURE might be
-> better. So, what do others think?
->
+Ping.  Any objections to this?
 
-I think IMAGE_FEATURE is appropriate here.
+Sincerely,
+Chase Maupin
+Open Platforms
+ARM MPU
+e-mail: chase.maupin@ti.com
+phone: (214) 567-2950
+
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/
+
+> -----Original Message-----
+> From: Maupin, Chase
+> Sent: Monday, October 10, 2011 2:27 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Maupin, Chase
+> Subject: [PATCH] sourceipk: dereference symlinks in sourceipk
+>=20
+> * Added the -h option to the tar command to make sure that any
+>   patches that may have been applied by the recipe are actually
+>   copied instead of made as symlinks to the recipe directory.
+> * This is so that people can see the actual patches and unapply
+>   individual patches as desired.
+>=20
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+>  classes/sourceipk.bbclass |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+> index 1b63996..546ec67 100644
+> --- a/classes/sourceipk.bbclass
+> +++ b/classes/sourceipk.bbclass
+> @@ -122,7 +122,7 @@ sourceipk_do_create_srcipk() {
+>          fi
+>=20
+>          #Write the data tarball
+> -        tar -C $tmp_dir --owner=3D0 --group=3D0 -czf
+> $srcipk_dir/data.tar.gz .
+> +        tar -C $tmp_dir --owner=3D0 --group=3D0 -chzf
+> $srcipk_dir/data.tar.gz .
+>=20
+>          # Create the debian-binary file
+>          echo "2.0" > $srcipk_dir/debian-binary
+> --
+> 1.7.0.4
+
 
 
