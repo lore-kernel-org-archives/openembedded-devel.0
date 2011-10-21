@@ -1,35 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH8i0-0007O2-79 for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 08:36:00 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RH8cK-0007NP-Gu for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 08:30:08 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 08:30:08 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RH8uE-0007h3-0S
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 08:48:38 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p9L6gekW008842
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2011 08:30:08 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 21 Oct 2011 08:11:26 +0200
-Message-ID: <j7r2ee$7jb$2@dough.gmane.org>
-References: <cover.1319168013.git.otavio@ossystems.com.br>
-	<f8bb508b661653c11221ac4b6a8ec080d2527569.1319168013.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <f8bb508b661653c11221ac4b6a8ec080d2527569.1319168013.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-oe][PATCH 1/4] systemd: add systemd-initramfs
+	Fri, 21 Oct 2011 08:42:45 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Fri, 21 Oct 2011 08:42:40 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] 2011.03-maintenance: Bad checksums in
+	binutils-cross-sdk_2.18.bb
+Thread-Index: AQHMj7wNioF1hjTXskiWCAQz6BdIcg==
+Date: Fri, 21 Oct 2011 06:42:39 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013CD9B@post.tritech.se>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
+MIME-Version: 1.0
+Subject: [PATCH] 2011.03-maintenance: Bad checksums in binutils-cross-sdk_2.18.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 06:36:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Oct 2011 06:48:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 21-10-11 05:34, Otavio Salvador schreef:
-> Includes a /init that points to ${base_sbin}/init that is called so to 
-> avoid having to include post rootfs commands for it.
-
-lrwxrwxrwx 1 root root 12 Jan  1  1970 /sbin/init -> /bin/systemd
-
-So please symlink /init to /bin/systemd directly.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOoQ0OMkyGM64RGpERAmGAAKCg0d+PzTU9EdxpEnPyPuAvRG0NnACcDLhg
-c2oS6aSOH3tRpd0T3W9mWbk=
-=1HJa
------END PGP SIGNATURE-----
-
+Hi,=0A=
+My first patch, please be gentle if i did something wrong ;)=0A=
+The following patch is from a local branch tracking 2011.03-maintenance, sh=
+ould it be done different?=0A=
+=0A=
+=0A=
+The binutils_2.18 tarball from GNU has changed checksums, ref. to this<http=
+://git.openembedded.org/openembedded/commit/recipes/binutils/binutils_2.18.=
+bb?h=3D2011.03-maintenance&id=3Dbc8ddbf7944f82383936d88379619aa46c3954a2>=
+=0A=
+As binutils-cross-sdk_2.18.bb includes binutils_2.18.bb it does not need to=
+ specify its own checksums.=0A=
+=0A=
+diff --git a/recipes/binutils/binutils-cross-sdk_2.18.bb b/recipes/binutils=
+/binutils-cross-sdk_2.18.bb=0A=
+index 837ebbe..2f13b26 100644=0A=
+--- a/recipes/binutils/binutils-cross-sdk_2.18.bb=0A=
++++ b/recipes/binutils/binutils-cross-sdk_2.18.bb=0A=
+@@ -1,6 +1,3 @@=0A=
+ require binutils_${PV}.bb=0A=
+ require binutils-cross-sdk.inc=0A=
+ PR =3D "${INC_PR}.1"=0A=
+-=0A=
+-SRC_URI[md5sum] =3D "9d22ee4dafa3a194457caf4706f9cf01"=0A=
+-SRC_URI[sha256sum] =3D "487a33a452f0edcf1f8bb8fc23dff5c7a82edec3f3f8b65632=
+b6c945e961ee9b"=0A=
 
 
