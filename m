@@ -1,23 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RHM3m-0008RB-Lm for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 22:51:22 +0200
-Received: from f053040166.adsl.alicedsl.de ([78.53.40.166]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RHLyH-0001oi-RO for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 20:45:42 +0000
-Message-ID: <1319229929.3448.7.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Oct 2011 22:45:29 +0200
-In-Reply-To: <4EA18A1F.9040409@telia.com>
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RHMPx-0000lS-Qr
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 23:14:19 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p9LL8GjT011482
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 23:08:21 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Fri, 21 Oct 2011 23:08:14 +0200
+From: =?Windows-1252?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH] 2011.03-maintenance: Bad checksums in
+	binutils-cross-sdk_2.18.bb
+Thread-Index: AQHMkDJ4v+KJPO8aEkSqMrMAe8XxmZWHSN4m
+Date: Fri, 21 Oct 2011 21:08:14 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013D19C@post.tritech.se>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013CD9B@post.tritech.se>
-	<1319192173.3766.16.camel@mattotaupa> <4EA18A1F.9040409@telia.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
+	<1319192173.3766.16.camel@mattotaupa>
+	<4EA18A1F.9040409@telia.com>,<1319229929.3448.7.camel@mattotaupa>
+In-Reply-To: <1319229929.3448.7.camel@mattotaupa>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [213.89.227.239]
+MIME-Version: 1.0
 Subject: Re: [PATCH] 2011.03-maintenance: Bad checksums in binutils-cross-sdk_2.18.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,76 +41,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 20:51:22 -0000
-X-Groupsio-MsgNum: 34977
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-0S0R8hJ8GH1GFD6lJOI7"
-
---=-0S0R8hJ8GH1GFD6lJOI7
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Oct 2011 21:14:19 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Ulf,
-
-
-Am Freitag, den 21.10.2011, 17:05 +0200 schrieb Ulf Samuelsson:
-> 2011-10-21 12:16, Paul Menzel skrev:
-
-> > Am Freitag, den 21.10.2011, 06:42 +0000 schrieb Mats K=C3=A4rrman:
-> >
-> >> My first patch, please be gentle if i did something wrong ;)
+Paul,=0A=
+=0A=
+I think Denys is correct in saying that "my" fix is a fix to a slightly dif=
+ferent problem (http://article.gmane.org/gmane.comp.handhelds.openembedded/=
+48425) . The way the included binutils_2.18.bb was fixed may be wrong and r=
+equire an additional fix though. I'll look into this.=0A=
+=0A=
+BR // Mats=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Paul Menzel [paulepanter@user=
+s.sourceforge.net]=0A=
+Sent: Friday, October 21, 2011 10:45 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] [PATCH] 2011.03-maintenance: Bad checksums in binutils-cr=
+oss-sdk_2.18.bb=0A=
+=0A=
+Dear Ulf,=0A=
+=0A=
+=0A=
+Am Freitag, den 21.10.2011, 17:05 +0200 schrieb Ulf Samuelsson:=0A=
+> 2011-10-21 12:16, Paul Menzel skrev:=0A=
+=0A=
+> > Am Freitag, den 21.10.2011, 06:42 +0000 schrieb Mats K=E4rrman:=0A=
+> >=0A=
+> >> My first patch, please be gentle if i did something wrong ;)=0A=
 > > our commit policy describes how patches should be formatted [1][2]. Mos=
-t
-> > importantly you forgot your Signed-off-by line.
-> >
-> >> The following patch is from a local branch tracking
-> >> 2011.03-maintenance, should it be done different?
+t=0A=
+> > importantly you forgot your Signed-off-by line.=0A=
+> >=0A=
+> >> The following patch is from a local branch tracking=0A=
+> >> 2011.03-maintenance, should it be done different?=0A=
 > I did a similar fix for binutils-2.20.1, and that is apparently not the w=
-ay
-> so this was rejected. (See other discussions on binutils this week).
->=20
-> I sent a new version of binutils-2.20.1 patch today,
-> which is taken from openembedded-core, and that
-> combines the new checksums, with downloading a new tarball.
->=20
-> If it follows the same scheme, then:
-> binutils-2.18.tar.bz2 is only a link to binutils-2.18a.tar.bz2
-> Your SRC_URI should be pointing at binutils-${PV}a.tar.bz2
-
-you describe indeed the correct fix. Unfortunately the =E2=80=9Cwrong=E2=80=
-=9D fix was
-already committed so I just continued on this track. I also noted that
-in my commit message.
-
-Ulf thank you for the correct fix for 2.20.1 and Mats, if you have some
-time it would be great if you could send a patch for what Ulf proposed.
-
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
-
-
-> > [1] http://www.openembedded.org/wiki/Commit_Policy
-> > [2] http://www.openembedded.org/wiki/Category:Policy
-> > [3] http://www.openembedded.org/wiki/2011.03-maintenance
+ay=0A=
+> so this was rejected. (See other discussions on binutils this week).=0A=
+>=0A=
+> I sent a new version of binutils-2.20.1 patch today,=0A=
+> which is taken from openembedded-core, and that=0A=
+> combines the new checksums, with downloading a new tarball.=0A=
+>=0A=
+> If it follows the same scheme, then:=0A=
+> binutils-2.18.tar.bz2 is only a link to binutils-2.18a.tar.bz2=0A=
+> Your SRC_URI should be pointing at binutils-${PV}a.tar.bz2=0A=
+=0A=
+you describe indeed the correct fix. Unfortunately the =93wrong=94 fix was=
+=0A=
+already committed so I just continued on this track. I also noted that=0A=
+in my commit message.=0A=
+=0A=
+Ulf thank you for the correct fix for 2.20.1 and Mats, if you have some=0A=
+time it would be great if you could send a patch for what Ulf proposed.=0A=
+=0A=
+[=85]=0A=
+=0A=
+=0A=
+Thanks,=0A=
+=0A=
+Paul=0A=
+=0A=
+=0A=
+> > [1] http://www.openembedded.org/wiki/Commit_Policy=0A=
+> > [2] http://www.openembedded.org/wiki/Category:Policy=0A=
+> > [3] http://www.openembedded.org/wiki/2011.03-maintenance=0A=
 > > [4] http://git.openembedded.org/openembedded/commit/?id=3Df2d53aa074d76=
-509384e7bb8a9c39e2e27210f4a
+509384e7bb8a9c39e2e27210f4a=0A=
 
---=-0S0R8hJ8GH1GFD6lJOI7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk6h2ekACgkQPX1aK2wOHVhOEwCfU1Kse8ZFOFtTo9XnuIQgjmyh
-wGAAnAu5D450/iI5qN1+PvMp80GhAej7
-=X1Kb
------END PGP SIGNATURE-----
-
---=-0S0R8hJ8GH1GFD6lJOI7--
