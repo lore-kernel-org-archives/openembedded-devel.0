@@ -1,26 +1,34 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RHKUE-0005X8-HD
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Oct 2011 21:10:35 +0200
-Received: from gandalf.denix.org ([unknown] [71.191.138.237])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTF00JWOGUZU1RY@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	21 Oct 2011 13:04:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E6F4414AF5D; Fri,
-	21 Oct 2011 14:04:10 -0400 (EDT)
-Date: Fri, 21 Oct 2011 14:04:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RHKZU-0005jb-RM for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 21:16:00 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RHKTl-0007x1-SP for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Oct 2011 21:10:06 +0200
+Received: from 72.5.59.140 ([72.5.59.140])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 21:10:05 +0200
+Received: from wylder.keane by 72.5.59.140 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2011 21:10:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20111021180410.GE9156@denix.org>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013CD9B@post.tritech.se>
-	<1319192173.3766.16.camel@mattotaupa> <4EA18A1F.9040409@telia.com>
-MIME-version: 1.0
-In-reply-to: <4EA18A1F.9040409@telia.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] 2011.03-maintenance: Bad checksums in	binutils-cross-sdk_2.18.bb
+From: Wylder <wylder.keane@gmail.com>
+Date: Fri, 21 Oct 2011 19:07:11 +0000 (UTC)
+Message-ID: <loom.20111021T210119-168@post.gmane.org>
+References: <4D3DE56B.7020803@freyther.de> <4D3DF7CF.7010308@freyther.de>
+	<4D3DFE34.3090706@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 72.5.59.140 (Mozilla/5.0 (X11;
+	Linux i686) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.10
+	Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1)
+Subject: Re: build errors in openssl-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,100 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 19:10:35 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 21 Oct 2011 19:16:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 21, 2011 at 05:05:03PM +0200, Ulf Samuelsson wrote:
-> 2011-10-21 12:16, Paul Menzel skrev:
->> Dear Mats,
->>
->>
->> Am Freitag, den 21.10.2011, 06:42 +0000 schrieb Mats K?rrman:
->>
->>> My first patch, please be gentle if i did something wrong ;)
->> our commit policy describes how patches should be formatted [1][2]. Most
->> importantly you forgot your Signed-off-by line.
->>
->>> The following patch is from a local branch tracking
->>> 2011.03-maintenance, should it be done different?
-> I did a similar fix for binutils-2.20.1, and that is apparently not the way
-> so this was rejected. (See other discussions on binutils this week).
+Holger Freyther <holger+oe <at> freyther.de> writes:
 
-Ulf,
+> 
+> On 01/24/2011 11:06 PM, Holger Freyther wrote:
+> > On 01/24/2011 09:47 PM, Holger Freyther wrote:
+> >> Hi,
+> >>
+> >> is anyone else seeing build errors like this:
+> 
+> next weird breakage is curl-native... compiled without gnutls ending up
+> linking to the system gnutls that uses gcrypt but does not link to it...
+> 
 
-You did not read the issue description carefully. There is a genuine issue 
-with "overwriting" checksums incorrectly in binutils-cross-sdk_2.18.bb
+Any luck with this? I've run into the same error and can't seem
+to resolve the issue. I can't find anyone else who's had this issue.
 
+I'm running Ubuntu 11.10 with Python 2.6 and gcc 4.6
 
-> I sent a new version of binutils-2.20.1 patch today,
-> which is taken from openembedded-core, and that
-> combines the new checksums, with downloading a new tarball.
-
-That is a correct way of solving the changed checksum issue. Thanks for 
-submitting your patches.
+I wonder if it has to do with the version of gcc, or maybe a
+stray link or include path. I'm gonna keep working on it and
+will let you know if I find anything.
 
 
-> If it follows the same scheme, then:
-> binutils-2.18.tar.bz2 is only a link to binutils-2.18a.tar.bz2
-> Your SRC_URI should be pointing at binutils-${PV}a.tar.bz2
-
-That is a problem for binutils_2.18.bb and he is fixing a slightly different 
-problem in binutils-cross-sdk_2.18.bb
-
--- 
-Denys
-
-
->> If I read [3] correctly it first has to go into for example the master
->> branch. I pushed a similar hopefully correct change there [4]. Please
->> send a pull request as described in [3] to get that included in
->> 2011.03-maintenance.
->>
->>> The binutils_2.18 tarball from GNU has changed checksums, ref. to 
->>> this<http://git.openembedded.org/openembedded/commit/recipes/binutils/binutils_2.18.bb?h=2011.03-maintenance&id=bc8ddbf7944f82383936d88379619aa46c3954a2>
->>> As binutils-cross-sdk_2.18.bb includes binutils_2.18.bb it does not need 
->>> to specify its own checksums.
->>>
->>> diff --git a/recipes/binutils/binutils-cross-sdk_2.18.bb 
->>> b/recipes/binutils/binutils-cross-sdk_2.18.bb
->>> index 837ebbe..2f13b26 100644
->>> --- a/recipes/binutils/binutils-cross-sdk_2.18.bb
->>> +++ b/recipes/binutils/binutils-cross-sdk_2.18.bb
->>> @@ -1,6 +1,3 @@
->>>   require binutils_${PV}.bb
->>>   require binutils-cross-sdk.inc
->>>   PR = "${INC_PR}.1"
->>> -
->>> -SRC_URI[md5sum] = "9d22ee4dafa3a194457caf4706f9cf01"
->>> -SRC_URI[sha256sum] = 
->>> "487a33a452f0edcf1f8bb8fc23dff5c7a82edec3f3f8b65632b6c945e961ee9b"
->>
->> Thanks and I am looking forward to further contributions,
->>
->> Paul
->>
->>
->> [1] http://www.openembedded.org/wiki/Commit_Policy
->> [2] http://www.openembedded.org/wiki/Category:Policy
->> [3] http://www.openembedded.org/wiki/2011.03-maintenance
->> [4] 
->> http://git.openembedded.org/openembedded/commit/?id=f2d53aa074d76509384e7bb8a9c39e2e27210f4a
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> -- 
-> Best Regards
-> Ulf Samuelsson
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
