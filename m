@@ -1,27 +1,23 @@
-Received: from smtprelay-h21.telenor.se ([195.54.99.196])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RHb5j-0002YN-AA
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Oct 2011 14:54:23 +0200
-Received: from iph3.telenor.se (iph3.telenor.se [195.54.127.134])
-	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 198A1CD33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Oct 2011 14:48:28 +0200 (CEST)
-X-SENDER-IP: [83.227.57.13]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AvRrAFa6ok5T4zkNPGdsb2JhbABDmiKOfhkBAQEBNzKBbgFRAQojMB9LCi0Jh3kGpHkBjRWDNoUKBJQJkV0
-X-IronPort-AV: E=Sophos;i="4.69,391,1315173600"; d="scan'208";a="134950912"
-Received: from c-0d39e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	nazgul.atmel.com) ([83.227.57.13])
-	by iph3.telenor.se with ESMTP; 22 Oct 2011 14:48:28 +0200
-From: ulf_samuelsson@telia.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RHbV9-0003MT-9N for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Oct 2011 15:20:39 +0200
+Received: from f053040124.adsl.alicedsl.de ([78.53.40.124]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RHbPf-0005gy-ET for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Oct 2011 13:14:59 +0000
+Message-ID: <1319289285.3496.40.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Oct 2011 14:48:26 +0200
-Message-Id: <1319287706-3451-1-git-send-email-ulf_samuelsson@telia.com>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Ulf Samuelsson <ulf_samuelsson@telia.com>
-Subject: [PATCH] python-2.6.6:	Fix python-2.6.6 build failure on linux-3.x
+Date: Sat, 22 Oct 2011 15:14:45 +0200
+In-Reply-To: <1319286535-2935-1-git-send-email-ulf_samuelsson@telia.com>
+References: <1319286535-2935-1-git-send-email-ulf_samuelsson@telia.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [PATCH] freetype_2.4.3.bb; Change order of configuration.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,70 +31,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Oct 2011 12:54:23 -0000
+X-List-Received-Date: Sat, 22 Oct 2011 13:20:39 -0000
+X-Groupsio-MsgNum: 34982
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-OCVUlxxsSZiPSM2JE6ju"
 
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+--=-OCVUlxxsSZiPSM2JE6ju
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-python-2.6.6 build will crash when host is running linux kernel 3.x.
+Am Samstag, den 22.10.2011, 14:28 +0200 schrieb ulf_samuelsson@telia.com:
+> From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+>=20
+> Build of freetype-native is broken on Ubuntu 11.10 x64 - possible others.
 
-Fix backported from openembedded-core.
-meta/recipes-devtools/python/python/07-linux3-regen-fix.patch
+It works for me without problem with Debian Squeeze (32-bit). So what is
+the error message in the first place?
 
-Signed-Off-By:	Ulf Samuelsson <ulf.samuelsson@telia.com>
----
- .../python/python-2.6.6/07-linux3-regen-fix.patch  |   19 +++++++++++++++++++
- recipes/python/python_2.6.6.bb                     |    3 ++-
- 2 files changed, 21 insertions(+), 1 deletions(-)
- create mode 100644 recipes/python/python-2.6.6/07-linux3-regen-fix.patch
+> Problem fixed in openembedded-core 2.4.4 recipe
 
-diff --git a/recipes/python/python-2.6.6/07-linux3-regen-fix.patch b/recipes/python/python-2.6.6/07-linux3-regen-fix.patch
-new file mode 100644
-index 0000000..ef360c5
---- /dev/null
-+++ b/recipes/python/python-2.6.6/07-linux3-regen-fix.patch
-@@ -0,0 +1,19 @@
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Without this patch it calls cross-compiled python if host is running linux-3.0
-+python$EXE ../../Tools/scripts/h2py.py -i '(u_long)' /usr/include/netinet/in.h
-+| ./regen: line 3: /OE/shr-core/tmp/work/armv4t-oe-linux-gnueabi/python-2.6.6-nk2.8/Python-2.6.6/python: cannot execute binary file
-+
-+diff -uNr Python-2.6.6.orig//Lib/plat-linux3/regen Python-2.6.6/Lib/plat-linux3/regen
-+--- Python-2.6.6.orig//Lib/plat-linux3/regen 1970-01-01 01:00:00.000000000 +0100
-++++ Python-2.6.6/Lib/plat-linux3/regen 2001-08-09 14:48:17.000000000 +0200
-+@@ -0,0 +1,8 @@
-++#! /bin/sh
-++case `uname` in
-++Linux*) ;;
-++*) echo Probably not on a Linux system 1>&2
-++ exit 1;;
-++esac
-++set -v
-++h2py -i '(u_long)' /usr/include/sys/types.h /usr/include/netinet/in.h /usr/include/dlfcn.h
-+
-diff --git a/recipes/python/python_2.6.6.bb b/recipes/python/python_2.6.6.bb
-index eacc5c2..5b47fec 100644
---- a/recipes/python/python_2.6.6.bb
-+++ b/recipes/python/python_2.6.6.bb
-@@ -3,7 +3,7 @@ DEPENDS = "python-native db gdbm openssl readline sqlite3 tcl zlib\
-            ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}"
- DEPENDS_sharprom = "python-native db readline zlib gdbm openssl"
- # set to .0 on every increase of INC_PR
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
- 
- SRC_URI = "\
-   http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
-@@ -14,6 +14,7 @@ SRC_URI = "\
-   file://04-default-is-optimized.patch \
-   file://05-enable-ctypes-cross-build.patch \
-   file://06-ctypes-libffi-fix-configure.patch \
-+  file://07-linux3-regen-fix.patch \
-   file://ipv6-cross.patch \
-   file://python-module-rpath-fix.patch \
-   file://sitecustomize.py \
--- 
-1.7.5.4
+It seems it was not present since the beginning, i. e. version 2.3.12.
+
+> Backporting the change will allow the build to complete.
+>=20
+> openembedded-core-contrib/meta/recipes-graphics/freetype
+>=20
+> Signed-Off-By: Ulf Samuelsson <ulf.samuelsson@telia.com>
+> ---
+>  recipes/freetype/freetype_2.4.3.bb |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/recipes/freetype/freetype_2.4.3.bb b/recipes/freetype/freety=
+pe_2.4.3.bb
+> index 66d2e51..dfc1b43 100644
+> --- a/recipes/freetype/freetype_2.4.3.bb
+> +++ b/recipes/freetype/freetype_2.4.3.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "Freetype font rendering library"
+>  SECTION =3D "libs"
+>  LICENSE =3D "freetype GPLv2"
+> -PR =3D "r1"
+> +PR =3D "r2"
+>  DEPENDS =3D "zlib"
+> =20
+>  SRC_URI =3D "\
+> @@ -23,9 +23,9 @@ LDFLAGS_append =3D " -Wl,-rpath-link -Wl,${STAGING_DIR_=
+TARGET}${libdir}"
+> =20
+>  do_configure() {
+>  	cd builds/unix
+> -	gnu-configize --force
+> -	aclocal -I .
+>  	libtoolize --force --copy
+> +	aclocal -I .
+> +	gnu-configize --force
+>  	autoconf
+>  	cd ${S}
+>  	oe_runconf
 
 
+Thanks,
 
+Paul
+
+--=-OCVUlxxsSZiPSM2JE6ju
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk6iwcUACgkQPX1aK2wOHVgjNwCfbWiCcyhiJrhXzXDRp7kAxFPS
+v7wAn0gKgnI+jGpw/Gp1yPDBIKI1ResC
+=lRym
+-----END PGP SIGNATURE-----
+
+--=-OCVUlxxsSZiPSM2JE6ju--
