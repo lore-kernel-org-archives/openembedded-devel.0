@@ -1,22 +1,32 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1RI2YX-0005Lu-U6
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RI61X-0005UR-26
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Oct 2011 20:13:58 +0200
-Received: from [93.100.16.104] (helo=mate.hex)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1RI2CG-0003c8-Us
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Oct 2011 21:51:01 +0400
-From: Roman Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Oct 2011 21:50:43 +0400
-User-Agent: KMail/1.13.6 (Linux/2.6.37.6-0.7-desktop; KDE/4.6.0; x86_64; ; )
-References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
-	<4E9D16AD.7040403@telia.com>
-In-Reply-To: <4E9D16AD.7040403@telia.com>
+	Sun, 23 Oct 2011 23:56:07 +0200
+Received: from iph3.telenor.se (iph3.telenor.se [195.54.127.134])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 2D2C4C2DB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Oct 2011 23:50:07 +0200 (CEST)
+X-SENDER-IP: [83.227.59.253]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AhEZAGqLpE5T4zv9PGdsb2JhbAAMN6kqAQEBATeCIAEBAQEDAQEBawoRCyEWBAsJAwIBAgEVARsUEwYCAQGIBLQ+iEAEkW6CG5Fd
+X-IronPort-AV: E=Sophos;i="4.69,395,1315173600"; 
+	d="scan'208,217";a="135312910"
+Received: from c-fd3be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.59.253])
+	by iph3.telenor.se with ESMTP; 23 Oct 2011 23:50:06 +0200
+Message-ID: <4EA48C0E.6070700@telia.com>
+Date: Sun, 23 Oct 2011 23:50:06 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Message-Id: <201110232150.53072.roman@khimov.ru>
+To: openembedded-devel@lists.openembedded.org
+References: <4E9C93AB.7090705@telia.com> <4E9CA882.7080107@gmail.com>
+	<4E9D16AD.7040403@telia.com> <201110232150.53072.roman@khimov.ru>
+In-Reply-To: <201110232150.53072.roman@khimov.ru>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Performance measurement: Building openembedded-core with and without overclocking on C-i7 2600K
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,88 +41,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Oct 2011 18:13:58 -0000
-X-Groupsio-MsgNum: 34988
-Content-Type: multipart/signed; boundary="nextPart1890086.Wi8TAq8cAK";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart1890086.Wi8TAq8cAK
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 23 Oct 2011 21:56:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-18 =D0=BE=D0=BA=D1=82=D1=8F=D0=B1=D1=80=D1=8F 2011 10:03:25 =D0=B0=D0=B2=D1=
-=82=D0=BE=D1=80 Ulf Samuelsson =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> Also what happens if it it built on a fast SSD, or even a RAMdisk?
+2011-10-23 19:50, Roman Khimov skrev:
+> ? ????????? ?? 18 ??????? 2011 10:03:25 ????? Ulf Samuelsson ???????:
+>> Also what happens if it it built on a fast SSD, or even a RAMdisk?
+> Our main build server has two Xeons X5670 with 96 GB of RAM. It's runni=
+ng 24=D77
+> cyclicly doing clean isolated builds of all our OE projects (currently =
+five).
+> "Isolated" means that the the actual build is done inside a container (=
+LXC)
+> with no network available at all, that is a requirement for all our bui=
+lds, to
+> be able to take one tarball of sources, one tarball of OE tree and buil=
+d the
+> project somewhere in a nuclear bunker.
+>
+> The system is configured in such way that container is located on tmpfs=
+ (with
+> size of 50 GB). The most complex build takes about hour and a half on t=
+his
+> system occupying about 45 GB of space in a ramdisk.
+>
+> So today I tried to get some RAM vs. Linux cache statistics and switche=
+d this
+> mount point over to newly created 60 GB LVM partition with ext4 on RAID=
+0 array
+> consisting of two SAS 15K drives.
+>
+> The system made builds for three projects is this configuration and I s=
+ee no
+> difference at all, usual 1-2 minutes deviation. Granted, the system has=
+ quite
+> powerful disks (RAID array gives about 380 MB/sec on hdparm) and things=
+ might
+> be a little different on plain SATA drives, but frankly I'd expected to=
+ see
+> the difference anyway since there are lots of small files involved in a=
+ build.
+>
+> Maybe I should try to further degrade the disk system by creating some
+> encrypted volume inside LVM, but still from what I see Linux caching an=
+d
+> buffering works good enough, just give it as much RAM as you can.
+>
+> But then also what you'll get from RAM or disk or even CPU upgrade depe=
+nds on
+> what type of build you have. Upgrading developers build servers from pa=
+ir of
+> 4-core Opterons (don't remember exact model) with 8 GB of RAM to pair o=
+f Xeons
+> E5620 with 24 GB of RAM with comparable disks gave about 20-30% of buil=
+d time
+> reduction for one project and 50% for another. But that builds are not
+> isolated and use icecc cluster with all build servers available to the
+> cluster, maybe that helps also in our situation.
+>
 
-Our main build server has two Xeons X5670 with 96 GB of RAM. It's running 2=
-4=C3=977=20
-cyclicly doing clean isolated builds of all our OE projects (currently five=
-).=20
-"Isolated" means that the the actual build is done inside a container (LXC)=
-=20
-with no network available at all, that is a requirement for all our builds,=
- to=20
-be able to take one tarball of sources, one tarball of OE tree and build th=
-e=20
-project somewhere in a nuclear bunker.
+Thanks,
 
-The system is configured in such way that container is located on tmpfs (wi=
-th=20
-size of 50 GB). The most complex build takes about hour and a half on this=
-=20
-system occupying about 45 GB of space in a ramdisk.
+I tried installing 32 bit Ubuntu 11.10 on a HDD and got results,
+which are very close to the results of 64 bit ubuntu 11.10, but when I tr=
+ied
+hdparm the 32 bit system had 50 MB/s and the 64 bit system
+had 100-110 MB/s so they are not comparable.
 
-So today I tried to get some RAM vs. Linux cache statistics and switched th=
-is=20
-mount point over to newly created 60 GB LVM partition with ext4 on RAID0 ar=
-ray=20
-consisting of two SAS 15K drives.
+Also tried putting tmp/sysroots on a 3 GB tmpfs, and that only
+made the build a couple of minutes faster on a 1 hour build.
 
-The system made builds for three projects is this configuration and I see n=
-o=20
-difference at all, usual 1-2 minutes deviation. Granted, the system has qui=
-te=20
-powerful disks (RAID array gives about 380 MB/sec on hdparm) and things mig=
-ht=20
-be a little different on plain SATA drives, but frankly I'd expected to see=
-=20
-the difference anyway since there are lots of small files involved in a bui=
-ld.
 
-Maybe I should try to further degrade the disk system by creating some=20
-encrypted volume inside LVM, but still from what I see Linux caching and=20
-buffering works good enough, just give it as much RAM as you can.
 
-But then also what you'll get from RAM or disk or even CPU upgrade depends =
-on=20
-what type of build you have. Upgrading developers build servers from pair o=
-f=20
-4-core Opterons (don't remember exact model) with 8 GB of RAM to pair of Xe=
-ons=20
-E5620 with 24 GB of RAM with comparable disks gave about 20-30% of build ti=
-me=20
-reduction for one project and 50% for another. But that builds are not=20
-isolated and use icecc cluster with all build servers available to the=20
-cluster, maybe that helps also in our situation.
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1890086.Wi8TAq8cAK
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+--=20
+Best Regards
+Ulf Samuelsson
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.16 (GNU/Linux)
 
-iEYEABECAAYFAk6kU/wACgkQXJ70z+XgVcPFDQCeMNhg7MSge+lFHhxucss8uvU/
-SWUAn11yB9uqhao7lg5h5f6Vql+xaQEB
-=27gp
------END PGP SIGNATURE-----
-
---nextPart1890086.Wi8TAq8cAK--
