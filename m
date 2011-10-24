@@ -1,34 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RIEXc-0007iT-2l for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Oct 2011 09:01:49 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RIERs-0005L3-8Y for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Oct 2011 08:55:52 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2011 08:55:52 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2011 08:55:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RIFci-00052f-Gh for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Oct 2011 10:11:08 +0200
+Received: from f053042016.adsl.alicedsl.de ([78.53.42.16]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RIFX0-0006an-HT for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Oct 2011 08:05:14 +0000
+Message-ID: <1319443507.3844.9.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 24 Oct 2011 08:55:38 +0200
-Message-ID: <j8325a$t1v$1@dough.gmane.org>
-References: <cover.1319205291.git.otavio@ossystems.com.br>
+Date: Mon, 24 Oct 2011 10:05:07 +0200
+In-Reply-To: <1319427652-9401-1-git-send-email-joelagnel@ti.com>
+References: <1319427652-9401-1-git-send-email-joelagnel@ti.com>
+X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <cover.1319205291.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-oe][PATCH 0/5] SystemD fixes and improvements
+Subject: Re: [PATCH meta-oe] memtester: Import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +31,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2011 07:01:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 24 Oct 2011 08:11:08 -0000
+X-Groupsio-MsgNum: 34992
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-lzKalxCJHXfiiaWjzFJA"
+
+--=-lzKalxCJHXfiiaWjzFJA
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Koen,
+
+
+could you please wait at least a day until merging the patches to get
+time for proper review.
+
+
+Am Sonntag, den 23.10.2011, 22:40 -0500 schrieb Joel A Fernandes:
+
+Joel, when importing recipes please add the corresponding commit ID too
+as required by the commit guide lines [1].
+
+> Added LIC_FILES_CHKSUM
+>=20
+> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+> ---
+> This package is required by the beaglebone-tester
+>=20
+>  .../memtester/files/Makefile.patch                 |   15 +++++++++++
+>  .../recipes-benchmark/memtester/memtester_4.1.3.bb |   27 ++++++++++++++=
+++++++
+>  2 files changed, 42 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-benchmark/memtester/files/Makefile.pa=
+tch
+>  create mode 100644 meta-oe/recipes-benchmark/memtester/memtester_4.1.3.b=
+b
+>=20
+> diff --git a/meta-oe/recipes-benchmark/memtester/files/Makefile.patch b/m=
+eta-oe/recipes-benchmark/memtester/files/Makefile.patch
+> new file mode 100644
+> index 0000000..57a0464
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/memtester/files/Makefile.patch
+
+Please add a patch header.
+
+> @@ -0,0 +1,15 @@
+> +Index: memtester-4.0.5/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- memtester-4.0.5.orig/Makefile	2005-03-14 06:02:30.000000000 -0800
+> ++++ memtester-4.0.5/Makefile	2006-07-08 23:53:42.000000000 -0700
+> +@@ -24,8 +24,8 @@
+> + auto-ccld.sh: \
+> + conf-cc conf-ld warn-auto.sh
+> + 	( cat warn-auto.sh; \
+> +-	echo CC=3D\'`head -1 conf-cc`\'; \
+> +-	echo LD=3D\'`head -1 conf-ld`\' \
+> ++	echo CC=3D\'`head -n 1 conf-cc`\'; \
+> ++	echo LD=3D\'`head -n 1 conf-ld`\' \
+> + 	) > auto-ccld.sh
+> +=20
+> + compile: \
+> diff --git a/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb b/met=
+a-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
+> new file mode 100644
+> index 0000000..9f4e53e
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
+> @@ -0,0 +1,27 @@
+> +SECTION =3D "console/utils"
+> +DESCRIPTION =3D "Utility to test for faulty memory subsystem"
+> +LICENSE =3D "GPLv2"
+
+The ordering is wrong and the field `HOMEPAGE` is missing [3].
+
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
+bb3"
+> +
+> +SRC_URI =3D "http://pyropus.ca/software/memtester/old-versions/memtester=
+-${PV}.tar.gz"
+> +SRC_URI +=3D "file://Makefile.patch"
+> +
+> +SRC_URI[md5sum] =3D "e562451620cf5343016950462bc0dc38"
+> +SRC_URI[sha256sum] =3D "ac56f0b6d6d6e58bcf2a3fa7f2c9b29894f5177871f21115=
+a1906c535106acf6"
+> +
+> +S =3D "${WORKDIR}/memtester-${PV}"
+
+This is the default.
+
+> +
+> +do_compile () {
+> +	echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
+> +	echo '${CC} ${LDFLAGS}' > conf-ld
+> +	oe_runmake
+> +}
+> +
+> +do_install () {
+> +	install -d ${D}${bindir}
+> +	install -d ${D}${mandir}/man8
+> +	install -m 0755 memtester ${D}${bindir}/
+> +	install -m 0755 memtester.8 ${D}${mandir}/man8/
+> +}
+> +
+
+No empty line at the end is needed.
+
+I fixed some of the above in OE classic. Please fix the issues mentioned
+above in meta-oe with follow-up patches.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Import=
+ing_from_Elsewhere
+[2] http://git.openembedded.org/openembedded/tree/recipes/memtester?id=3D07=
+e215db9870db1a0f88edb328024781eb9ac852
+[3] http://wiki.openembedded.org/index.php/Styleguide
+
+--=-lzKalxCJHXfiiaWjzFJA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 21-10-11 15:55, Otavio Salvador schreef:
-> The following changes since commit
-> 36423031ae2cc2157232f3bec8f5c9fa53ef215d:
-> 
-> Cloud9: incremental submodule and build fixes (2011-10-21 14:57:30
-> +0200)
-> 
-> are available in the git repository at: 
-> git://github.com/OSSystems/meta-oe master 
-> https://github.com/OSSystems/meta-oe/tree/master
-> 
-> Otavio Salvador (5): systemd-serialgetty: don't require systemd_git.bb 
-> systemd: add systemd-initramfs
-
-These 2 have been merged
-
-> systemd: add lock group using useradd.bbclass
-
-This one is waiting for the matching useradd fix to go in to oe-core
-
-> systemd: do not recommend systemd-serialgetty task-basic: add
-> "serial-console" machine feature
-
-I'd like some more feedback on this from the oe-core people, since we're
-adding a new MACHINE/DISTRO/IMAGE_FEATURE.
-
-I'll be at ELC-E in Prague this week with other OE developers, so the
-patchflow will slow down.
-
-regards,
-
-Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iD8DBQFOpQvqMkyGM64RGpERAmCzAKCancsMz7U/YndZn2Gc2WLzJHnVxACfcbBk
-tb1bywVIb3azG5MC90B9PX0=
-=licP
+iEYEABECAAYFAk6lHDMACgkQPX1aK2wOHVgYwQCgiJL5SPHkbv9aZ+9ku72FXvEa
+QWQAnRzDaspextfn9Y0QHRew0Eb4SEar
+=9VuI
 -----END PGP SIGNATURE-----
 
-
-
+--=-lzKalxCJHXfiiaWjzFJA--
