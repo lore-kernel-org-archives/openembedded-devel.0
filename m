@@ -1,25 +1,28 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RIQ3u-0001Yb-1e for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Oct 2011 21:19:54 +0200
-Received: from f053042016.adsl.alicedsl.de ([78.53.42.16]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RIPyC-00019C-P9 for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Oct 2011 19:14:01 +0000
-Message-ID: <1319483638.3483.5.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RIQ6i-0001ha-EQ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Oct 2011 21:22:48 +0200
+Received: (qmail invoked by alias); 24 Oct 2011 19:16:51 -0000
+Received: from p4FDF19E4.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.25.228]
+	by mail.gmx.net (mp039) with SMTP; 24 Oct 2011 21:16:51 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18bnxojHhwbG4tEfvEO8rsz4fYAaqWTdWFXGqCVZQ
+	hwaFM+nMG5j8E/
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Oct 2011 21:13:58 +0200
-In-Reply-To: <CAD=GYpbY0-6qRjGdpZoGGtf7i6vnK+-_-nxtNngN-amC9WNKiw@mail.gmail.com>
-References: <1319427652-9401-1-git-send-email-joelagnel@ti.com>
-	<1319443507.3844.9.camel@mattotaupa>
-	<CAD=GYpbY0-6qRjGdpZoGGtf7i6vnK+-_-nxtNngN-amC9WNKiw@mail.gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [PATCH meta-oe] memtester: Import from OE classic
+Date: Mon, 24 Oct 2011 21:21:29 +0200
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-97.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1319480061-20128-1-git-send-email-schnitzeltony@gmx.de>
+	<1319480061-20128-3-git-send-email-schnitzeltony@gmx.de>
+	<1319480673.3483.3.camel@mattotaupa>
+In-Reply-To: <1319480673.3483.3.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201110242121.30046.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-xfce 3/3] xfce4-datetime-plugin: Initial add git (0.6.1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +36,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2011 19:19:54 -0000
-X-Groupsio-MsgNum: 35006
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-LTungYIciX4E8ZguFpd7"
-
---=-LTungYIciX4E8ZguFpd7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear Joel,
-
-
-Am Montag, den 24.10.2011, 14:01 -0500 schrieb Joel A Fernandes:
-
-> On Mon, Oct 24, 2011 at 3:05 AM, Paul Menzel wrote:
-> ..
-> > I fixed some of the above in OE classic. Please fix the issues mentione=
-d
-> > above in meta-oe with follow-up patches.
->=20
-> Thanks for your review comments, I'll work on resubmitting a new patch
-> today with the suggested changes.
-
-please note that your patch was already pushed so resubmitting is not
-needed and just a follow up patch.
-
-
-Thanks,
-
-Paul
-
---=-LTungYIciX4E8ZguFpd7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Mon, 24 Oct 2011 19:22:48 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-6"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+On Monday, October 24, 2011 08:24:33 PM Paul Menzel wrote:
+> the description could be improved if I am right.
+> 
+> 	Panel plugin displaying date and time and a calendar when left-clicked.
+You are right :-) V2 coming soon.
 
-iEYEABECAAYFAk6luPYACgkQPX1aK2wOHVh+nQCdGD1KKoO1pLD2PCzQhTycv3Pj
-qyIAn03gxxrZSwymDTe/IzerJ0qV/3IA
-=r08S
------END PGP SIGNATURE-----
+Andreas
 
---=-LTungYIciX4E8ZguFpd7--
+
