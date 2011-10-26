@@ -1,35 +1,34 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joelagnel@ti.com>) id 1RIrPM-0001C5-3P
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RIxan-0003hm-9q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Oct 2011 02:31:52 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9Q0Ppfb023851
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 26 Oct 2011 09:08:05 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p9Q7212o024874
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2011 19:25:51 -0500
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9Q0PpJn025227
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2011 19:25:51 -0500 (CDT)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9Q0PpKG014390
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2011 19:25:51 -0500 (CDT)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 25 Oct 2011 19:25:50 -0500
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	p9Q0PmK4022330;	Tue, 25 Oct 2011 19:25:49 -0500
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Oct 2011 19:09:39 -0500
-Message-ID: <1319587780-10897-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+	Wed, 26 Oct 2011 09:02:06 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Wed, 26 Oct 2011 09:02:01 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [2011.03-maintenance] Pull request for binutils
+Thread-Index: AcyQMHd1oo4wdREbRK2n4Yh64exBfwCfpyUAAA3woVn//+ZUAIAApdAAgAD8wJE=
+Date: Wed, 26 Oct 2011 07:02:00 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013D181@post.tritech.se>
+	<8721E570-6C63-4CC6-AC4A-854409FFF3E6@gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C4013D8A9@post.tritech.se>
+	<20111025075030.GA17580@ad.chargestorm.se>,
+	<20111025174358.GA7690@denix.org>
+In-Reply-To: <20111025174358.GA7690@denix.org>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
 MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>
-Subject: [PATCH meta-oe] memtester: Corrected recipe following review comments and guidelines
+Subject: Re: [2011.03-maintenance] Pull request for binutils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,87 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 00:31:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Oct 2011 07:08:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-This is an import of memtester from OE classic,
-commit ID: 5671855bfba71575e4919c4b5fc9c5dcb8052612
-
-Fixes to recipe:
-* Added patch header to Makefile.patch
-* Corrected order of variables and added HOMEPAGE to recipe
-* Removed the line, S = "${WORKDIR}/memtester-${PV}" as its the default
-* Removed new-line at end of recipe
-
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
----
- .../memtester/files/Makefile.patch                 |   23 +++++++++++++++----
- .../recipes-benchmark/memtester/memtester_4.1.3.bb |    6 +---
- 2 files changed, 20 insertions(+), 9 deletions(-)
-
-diff --git a/meta-oe/recipes-benchmark/memtester/files/Makefile.patch b/meta-oe/recipes-benchmark/memtester/files/Makefile.patch
-index 57a0464..971e52a 100644
---- a/meta-oe/recipes-benchmark/memtester/files/Makefile.patch
-+++ b/meta-oe/recipes-benchmark/memtester/files/Makefile.patch
-@@ -1,8 +1,18 @@
--Index: memtester-4.0.5/Makefile
--===================================================================
----- memtester-4.0.5.orig/Makefile	2005-03-14 06:02:30.000000000 -0800
--+++ memtester-4.0.5/Makefile	2006-07-08 23:53:42.000000000 -0700
--@@ -24,8 +24,8 @@
-+From 9a950b14b9f7767d83e5faac2e1e8203c500e2c2 Mon Sep 17 00:00:00 2001
-+From: Rod Whitby <rod@whitby.id.au>
-+Date: Tue, 25 Oct 2011 18:43:50 -0500
-+Subject: [PATCH] memtester: Added patch to Makefile to change no-longer-supported 'head -1' syntax to 'head -n 1'.
-+
-+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
-+---
-+ Makefile |    4 ++--
-+ 1 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index a271bf5..6bccff3 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -32,8 +32,8 @@ install: all
-  auto-ccld.sh: \
-  conf-cc conf-ld warn-auto.sh
-  	( cat warn-auto.sh; \
-@@ -13,3 +23,6 @@ Index: memtester-4.0.5/Makefile
-  	) > auto-ccld.sh
-  
-  compile: \
-+-- 
-+1.7.0.4
-+
-diff --git a/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb b/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
-index 9f4e53e..f220553 100644
---- a/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
-+++ b/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
-@@ -1,5 +1,6 @@
--SECTION = "console/utils"
- DESCRIPTION = "Utility to test for faulty memory subsystem"
-+HOMEPAGE = "http://pyropus.ca/software/memtester/"
-+SECTION = "console/utils"
- LICENSE = "GPLv2"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-@@ -10,8 +11,6 @@ SRC_URI += "file://Makefile.patch"
- SRC_URI[md5sum] = "e562451620cf5343016950462bc0dc38"
- SRC_URI[sha256sum] = "ac56f0b6d6d6e58bcf2a3fa7f2c9b29894f5177871f21115a1906c535106acf6"
- 
--S = "${WORKDIR}/memtester-${PV}"
--
- do_compile () {
- 	echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
- 	echo '${CC} ${LDFLAGS}' > conf-ld
-@@ -24,4 +23,3 @@ do_install () {
- 	install -m 0755 memtester ${D}${bindir}/
- 	install -m 0755 memtester.8 ${D}${mandir}/man8/
- }
--
--- 
-1.7.0.4
-
+Thanks to all for your support!=0A=
+=0A=
+I'm thinking that it would be great if the patch first went into master. Th=
+en I could pick both the binutils 2.18 related patches from there. So I sta=
+rted to look for information about how to make the patch go to master. I th=
+en discovered that the patch is already in patchwork but I fail to see how =
+I make it go from there to being committed, considering I'm a user without =
+repo write permission. Could someone tell me the next steps or point me to =
+somewhere where this is described?=0A=
+=0A=
+BR // Mats=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Denys Dmytriyenko [denis@deni=
+x.org]=0A=
+Sent: Tuesday, October 25, 2011 7:43 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] [2011.03-maintenance] Pull request for binutils=0A=
+=0A=
+On Tue, Oct 25, 2011 at 09:50:30AM +0200, Anders Darander wrote:=0A=
+> * Mats K?rrman <Mats.Karrman@tritech.se> [111025 09:37]:=0A=
+> > I'm sorry for the slow progress but I'm working 100% on something else=
+=0A=
+> > so this is overtime...=0A=
+>=0A=
+> Unfortunately a too common situation...=0A=
+>=0A=
+> > What is the correct practice; to fork the oe repository at GitHub or=0A=
+> > to create a "username/maintenance" branch in the same repo?=0A=
+>=0A=
+> Well, unless you already have a git account, with rw permission=0A=
+> openembedded.org (and thus can push to e.g. openembedded), the easiest=0A=
+> thing should be to use another hosting. I'm using github for my=0A=
+> pull-requests to meta-oe and oe-core.=0A=
+>=0A=
+> If you do that, just:=0A=
+> 1) fork openembedded on github=0A=
+> 2) add the remote to you local git-tree=0A=
+> 3) push your local branch to github, using i.e. `git push github=0A=
+> featureXXX`, assuming that you named the remote github.=0A=
+=0A=
+Just don't forget that you want your personal tree be at the tip of=0A=
+2011.03-maintenance branch, not the master oe.dev (which would otherwise be=
+=0A=
+similar to what you just sent). Then you can cherry-pick the needed commit,=
+=0A=
+push it to github and generate a pull request.=0A=
+=0A=
+--=0A=
+Denys=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
