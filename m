@@ -1,34 +1,26 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1RIxan-0003hm-9q
+	(envelope-from <jaap.dejong@nedap.com>) id 1RIyb6-0007Rt-L8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Oct 2011 09:08:05 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id p9Q7212o024874
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2011 09:02:06 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Wed, 26 Oct 2011 09:02:01 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [2011.03-maintenance] Pull request for binutils
-Thread-Index: AcyQMHd1oo4wdREbRK2n4Yh64exBfwCfpyUAAA3woVn//+ZUAIAApdAAgAD8wJE=
-Date: Wed, 26 Oct 2011 07:02:00 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013D181@post.tritech.se>
-	<8721E570-6C63-4CC6-AC4A-854409FFF3E6@gmail.com>
-	<ED3E0BCACD909541BA94A34C4A164D4C4013D8A9@post.tritech.se>
-	<20111025075030.GA17580@ad.chargestorm.se>,
-	<20111025174358.GA7690@denix.org>
-In-Reply-To: <20111025174358.GA7690@denix.org>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
+	Wed, 26 Oct 2011 10:12:28 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Wed, 26 Oct 2011
+	10:06:26 +0200
+X-TM-IMSS-Message-ID: <94316bfb000b14c9@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 94316bfb000b14c9 ;
+	Wed, 26 Oct 2011 10:02:43 +0200
+Message-ID: <4EA7BF81.108@nedap.com>
+Date: Wed, 26 Oct 2011 10:06:25 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
 MIME-Version: 1.0
-Subject: Re: [2011.03-maintenance] Pull request for binutils
+To: openembedded-devel@lists.openembedded.org
+References: <01b901cc934b$a5a00620$f0e01260$@gmail.com>
+In-Reply-To: <01b901cc934b$a5a00620$f0e01260$@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Creating an ejre receipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +34,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 07:08:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Oct 2011 08:12:28 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thanks to all for your support!=0A=
-=0A=
-I'm thinking that it would be great if the patch first went into master. Th=
-en I could pick both the binutils 2.18 related patches from there. So I sta=
-rted to look for information about how to make the patch go to master. I th=
-en discovered that the patch is already in patchwork but I fail to see how =
-I make it go from there to being committed, considering I'm a user without =
-repo write permission. Could someone tell me the next steps or point me to =
-somewhere where this is described?=0A=
-=0A=
-BR // Mats=0A=
-________________________________________=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Denys Dmytriyenko [denis@deni=
-x.org]=0A=
-Sent: Tuesday, October 25, 2011 7:43 PM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Subject: Re: [oe] [2011.03-maintenance] Pull request for binutils=0A=
-=0A=
-On Tue, Oct 25, 2011 at 09:50:30AM +0200, Anders Darander wrote:=0A=
-> * Mats K?rrman <Mats.Karrman@tritech.se> [111025 09:37]:=0A=
-> > I'm sorry for the slow progress but I'm working 100% on something else=
-=0A=
-> > so this is overtime...=0A=
->=0A=
-> Unfortunately a too common situation...=0A=
->=0A=
-> > What is the correct practice; to fork the oe repository at GitHub or=0A=
-> > to create a "username/maintenance" branch in the same repo?=0A=
->=0A=
-> Well, unless you already have a git account, with rw permission=0A=
-> openembedded.org (and thus can push to e.g. openembedded), the easiest=0A=
-> thing should be to use another hosting. I'm using github for my=0A=
-> pull-requests to meta-oe and oe-core.=0A=
->=0A=
-> If you do that, just:=0A=
-> 1) fork openembedded on github=0A=
-> 2) add the remote to you local git-tree=0A=
-> 3) push your local branch to github, using i.e. `git push github=0A=
-> featureXXX`, assuming that you named the remote github.=0A=
-=0A=
-Just don't forget that you want your personal tree be at the tip of=0A=
-2011.03-maintenance branch, not the master oe.dev (which would otherwise be=
-=0A=
-similar to what you just sent). Then you can cherry-pick the needed commit,=
-=0A=
-push it to github and generate a pull request.=0A=
-=0A=
---=0A=
-Denys=0A=
-=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+I added a few lines for mine version
 
+    # no gnu_hash in any file, so skip QA...
+    INSANE_SKIP_${PN} = True
+
+    inherit update-alternatives
+
+    ALTERNATIVE_NAME = "java"
+    ALTERNATIVE_PATH = "${libdir}/jvm/java-6-sun/jre/bin/java"
+    ALTERNATIVE_PRIORITY = "4"
+
+
+
+On 10/25/2011 09:23 PM, itodroid wrote:
+> Greetings all.  I'm not sure of the frequency of posting to this list, but I
+> thought I would ask all of you a question regarding creating a recipe for
+> Oracle/Sun's embedded JRE.  I can't seem to figure out the syntax needed to
+> create an appropriate recipe for automatically including the ejre in my
+> image.
+>
+> Everytime I try to bitbake, my deployment packet (ipk) is<  1000 bytes.  In
+> other words, I think its empty.  The recipe should simply untar the .tar.gz
+> file and put it into a format that can be distributed into the sysroot (I'm
+> picking /usr/java for its destination).  I'd appreciate any
+> feedback/comments/fixes to the following:
+>
+> DESCRIPTION = "Oracle/Sun Embedded JRE"
+> PV = "1.6.0"
+> PR = "27"
+> SRC_URI =
+> "file://ejre-1_6_0_27-fcs-b07-linux-arm-vfp-eabi-headless-18_jul_2011.tar.gz
+> "
+>
+> S = "${WORKDIR}"
+>
+> SRC_URI[md5sum]="b30175c5168e1df394bc79474583f2a3"
+> SRC_URI[sha256sum]="d8b02bd16c95435d9c460cea060bc10b6eda00a2e8864d6412074903
+> dd73243c"
+>
+> do_compile() {
+> }
+>
+> do_install() {
+>    install -d ${D}/usr/java
+>    cp -R ${S}/ejre${PV}_${PR}/* ${D}/usr/java
+> }
+>
+> do_qa_staging() {
+> }
+>
+> do_package_qa() {
+> }
+>
+> FILES_${PN} = " \
+>    ${D}/usr/java/* \
+> "
+>
+> PACKAGE = ${PN}
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
