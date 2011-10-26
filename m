@@ -1,26 +1,32 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from stoexhub01.domain01.net ([83.145.59.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1RIyb6-0007Rt-L8
+	(envelope-from <anders@chargestorm.se>) id 1RIzQy-0003SS-5p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Oct 2011 10:12:28 +0200
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Wed, 26 Oct 2011
-	10:06:26 +0200
-X-TM-IMSS-Message-ID: <94316bfb000b14c9@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 94316bfb000b14c9 ;
-	Wed, 26 Oct 2011 10:02:43 +0200
-Message-ID: <4EA7BF81.108@nedap.com>
-Date: Wed, 26 Oct 2011 10:06:25 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
+	Wed, 26 Oct 2011 11:06:04 +0200
+Received: from STOEXMBXC03.domain01.net
+	([fe80:0000:0000:0000:8de9:60e6:88.102.95.97]) by
+	STOEXHUB01.domain01.net
+	([10.12.10.1]) with mapi; Wed, 26 Oct 2011 11:00:04 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Oct 2011 11:00:02 +0200
+Thread-Topic: [oe] [2011.03-maintenance] Pull request for binutils
+Thread-Index: AcyTvabZZ40aIWbaSz6c9OaxW4E2fQ==
+Message-ID: <C2E46814-179D-4756-AD02-CC3603E11A3E@chargestorm.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013D181@post.tritech.se>
+	<8721E570-6C63-4CC6-AC4A-854409FFF3E6@gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C4013D8A9@post.tritech.se>
+	<20111025075030.GA17580@ad.chargestorm.se>
+	<20111025174358.GA7690@denix.org>
+	<ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <01b901cc934b$a5a00620$f0e01260$@gmail.com>
-In-Reply-To: <01b901cc934b$a5a00620$f0e01260$@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Creating an ejre receipe
+Subject: Re: [2011.03-maintenance] Pull request for binutils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,73 +40,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 08:12:28 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Oct 2011 09:06:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-I added a few lines for mine version
+DQoNCk9uIDI2IG9rdCAyMDExLCBhdCAwOTowMywgIk1hdHMgS8OkcnJtYW4iIDxNYXRzLkthcnJt
+YW5AdHJpdGVjaC5zZT4gd3JvdGU6DQoNCj4gVGhhbmtzIHRvIGFsbCBmb3IgeW91ciBzdXBwb3J0
+IQ0KPiANCj4gSSdtIHRoaW5raW5nIHRoYXQgaXQgd291bGQgYmUgZ3JlYXQgaWYgdGhlIHBhdGNo
+IGZpcnN0IHdlbnQgaW50byBtYXN0ZXIuIFRoZW4gSSBjb3VsZCBwaWNrIGJvdGggdGhlIGJpbnV0
+aWxzIDIuMTggcmVsYXRlZCBwYXRjaGVzIGZyb20gdGhlcmUuIFNvIEkgc3RhcnRlZCB0byBsb29r
+IGZvciBpbmZvcm1hdGlvbiBhYm91dCBob3cgdG8gbWFrZSB0aGUgcGF0Y2ggZ28gdG8gbWFzdGVy
+LiBJIHRoZW4gZGlzY292ZXJlZCB0aGF0IHRoZSBwYXRjaCBpcyBhbHJlYWR5IGluIHBhdGNod29y
+ayBidXQgSSBmYWlsIHRvIHNlZSBob3cgSSBtYWtlIGl0IGdvIGZyb20gdGhlcmUgdG8gYmVpbmcg
+Y29tbWl0dGVkLCBjb25zaWRlcmluZyBJJ20gYSB1c2VyIHdpdGhvdXQgcmVwbyB3cml0ZSBwZXJt
+aXNzaW9uLiBDb3VsZCBzb21lb25lIHRlbGwgbWUgdGhlIG5leHQgc3RlcHMgb3IgcG9pbnQgbWUg
+dG8gc29tZXdoZXJlIHdoZXJlIHRoaXMgaXMgZGVzY3JpYmVkPw0KDQpXZWxsLCBpZiB0aGUgcGF0
+Y2ggaGFzIGFscmVhZHkgYmVlbiBzZW50IChhbmQgdGh1cyBleGlzdHMgaW4gdGhlIHBhdGNod29y
+aykgdGhlcmUgY291bGQgYmUgZWl0aGVyIG9uZSBvZiBhIGZldyBzaXR1YXRpb25zOg0KDQoqIGl0
+J3MgcmVjZW50bHkgc3VibWl0dGVkLCBhbmQgbm8gb25lIGhhcyBoYWQgYW55IHRpbWUgdG8gbG9v
+ayBpbnRvIGl0IHlldC4NCiogaXQgY291bGQgaGF2ZSBiZWVuIG92ZXJsb29rZWQuDQoqIGl0IGNv
+dWxkIGhhdmUgcmVjZWl2ZWQgY29tbWVudHMgdGhhdCBuZWVkIHRvIGJlIGFkZHJlc3NlZCBiZWZv
+cmUgaXQgY2FuIGJlIGNvbW1pdHRlZC4NCg0KU28geW91IGNvdWxkIGFsd2F5cyBjaGVjayB0byBz
+ZWUgaWYgeW91IGNhbiBmaW5kIGFueSBkaXNjdXNzaW9ucyBvZiB0aGUgcGF0Y2ggb24gdGhpcyBs
+aXN0LCBvdGhlcndpc2UgYXNrIHRoZSBxdWVzdGlvbiBhZ2Fpbi4NCg0KQ2hlZXJzLA0KQW5kZXJz
+DQoNCj4gQlIgLy8gTWF0cw0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fDQo+IEZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmcgW29wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmdd
+IG9uIGJlaGFsZiBvZiBEZW55cyBEbXl0cml5ZW5rbyBbZGVuaXNAZGVuaXgub3JnXQ0KPiBTZW50
+OiBUdWVzZGF5LCBPY3RvYmVyIDI1LCAyMDExIDc6NDMgUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1k
+ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFsyMDExLjAz
+LW1haW50ZW5hbmNlXSBQdWxsIHJlcXVlc3QgZm9yIGJpbnV0aWxzDQo+IA0KPiBPbiBUdWUsIE9j
+dCAyNSwgMjAxMSBhdCAwOTo1MDozMEFNICswMjAwLCBBbmRlcnMgRGFyYW5kZXIgd3JvdGU6DQo+
+PiAqIE1hdHMgSz9ycm1hbiA8TWF0cy5LYXJybWFuQHRyaXRlY2guc2U+IFsxMTEwMjUgMDk6Mzdd
+Og0KPj4+IEknbSBzb3JyeSBmb3IgdGhlIHNsb3cgcHJvZ3Jlc3MgYnV0IEknbSB3b3JraW5nIDEw
+MCUgb24gc29tZXRoaW5nIGVsc2UNCj4+PiBzbyB0aGlzIGlzIG92ZXJ0aW1lLi4uDQo+PiANCj4+
+IFVuZm9ydHVuYXRlbHkgYSB0b28gY29tbW9uIHNpdHVhdGlvbi4uLg0KPj4gDQo+Pj4gV2hhdCBp
+cyB0aGUgY29ycmVjdCBwcmFjdGljZTsgdG8gZm9yayB0aGUgb2UgcmVwb3NpdG9yeSBhdCBHaXRI
+dWIgb3INCj4+PiB0byBjcmVhdGUgYSAidXNlcm5hbWUvbWFpbnRlbmFuY2UiIGJyYW5jaCBpbiB0
+aGUgc2FtZSByZXBvPw0KPj4gDQo+PiBXZWxsLCB1bmxlc3MgeW91IGFscmVhZHkgaGF2ZSBhIGdp
+dCBhY2NvdW50LCB3aXRoIHJ3IHBlcm1pc3Npb24NCj4+IG9wZW5lbWJlZGRlZC5vcmcgKGFuZCB0
+aHVzIGNhbiBwdXNoIHRvIGUuZy4gb3BlbmVtYmVkZGVkKSwgdGhlIGVhc2llc3QNCj4+IHRoaW5n
+IHNob3VsZCBiZSB0byB1c2UgYW5vdGhlciBob3N0aW5nLiBJJ20gdXNpbmcgZ2l0aHViIGZvciBt
+eQ0KPj4gcHVsbC1yZXF1ZXN0cyB0byBtZXRhLW9lIGFuZCBvZS1jb3JlLg0KPj4gDQo+PiBJZiB5
+b3UgZG8gdGhhdCwganVzdDoNCj4+IDEpIGZvcmsgb3BlbmVtYmVkZGVkIG9uIGdpdGh1Yg0KPj4g
+MikgYWRkIHRoZSByZW1vdGUgdG8geW91IGxvY2FsIGdpdC10cmVlDQo+PiAzKSBwdXNoIHlvdXIg
+bG9jYWwgYnJhbmNoIHRvIGdpdGh1YiwgdXNpbmcgaS5lLiBgZ2l0IHB1c2ggZ2l0aHViDQo+PiBm
+ZWF0dXJlWFhYYCwgYXNzdW1pbmcgdGhhdCB5b3UgbmFtZWQgdGhlIHJlbW90ZSBnaXRodWIuDQo+
+IA0KPiBKdXN0IGRvbid0IGZvcmdldCB0aGF0IHlvdSB3YW50IHlvdXIgcGVyc29uYWwgdHJlZSBi
+ZSBhdCB0aGUgdGlwIG9mDQo+IDIwMTEuMDMtbWFpbnRlbmFuY2UgYnJhbmNoLCBub3QgdGhlIG1h
+c3RlciBvZS5kZXYgKHdoaWNoIHdvdWxkIG90aGVyd2lzZSBiZQ0KPiBzaW1pbGFyIHRvIHdoYXQg
+eW91IGp1c3Qgc2VudCkuIFRoZW4geW91IGNhbiBjaGVycnktcGljayB0aGUgbmVlZGVkIGNvbW1p
+dCwNCj4gcHVzaCBpdCB0byBnaXRodWIgYW5kIGdlbmVyYXRlIGEgcHVsbCByZXF1ZXN0Lg0KPiAN
+Cj4gLS0NCj4gRGVueXMNCj4gDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fDQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVt
+YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLmxpbnV4
+dG9nby5vcmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiAN
+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gT3Bl
+bmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMubGludXh0b2dvLm9yZy9jZ2ktYmluL21h
+aWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
-    # no gnu_hash in any file, so skip QA...
-    INSANE_SKIP_${PN} = True
-
-    inherit update-alternatives
-
-    ALTERNATIVE_NAME = "java"
-    ALTERNATIVE_PATH = "${libdir}/jvm/java-6-sun/jre/bin/java"
-    ALTERNATIVE_PRIORITY = "4"
-
-
-
-On 10/25/2011 09:23 PM, itodroid wrote:
-> Greetings all.  I'm not sure of the frequency of posting to this list, but I
-> thought I would ask all of you a question regarding creating a recipe for
-> Oracle/Sun's embedded JRE.  I can't seem to figure out the syntax needed to
-> create an appropriate recipe for automatically including the ejre in my
-> image.
->
-> Everytime I try to bitbake, my deployment packet (ipk) is<  1000 bytes.  In
-> other words, I think its empty.  The recipe should simply untar the .tar.gz
-> file and put it into a format that can be distributed into the sysroot (I'm
-> picking /usr/java for its destination).  I'd appreciate any
-> feedback/comments/fixes to the following:
->
-> DESCRIPTION = "Oracle/Sun Embedded JRE"
-> PV = "1.6.0"
-> PR = "27"
-> SRC_URI =
-> "file://ejre-1_6_0_27-fcs-b07-linux-arm-vfp-eabi-headless-18_jul_2011.tar.gz
-> "
->
-> S = "${WORKDIR}"
->
-> SRC_URI[md5sum]="b30175c5168e1df394bc79474583f2a3"
-> SRC_URI[sha256sum]="d8b02bd16c95435d9c460cea060bc10b6eda00a2e8864d6412074903
-> dd73243c"
->
-> do_compile() {
-> }
->
-> do_install() {
->    install -d ${D}/usr/java
->    cp -R ${S}/ejre${PV}_${PR}/* ${D}/usr/java
-> }
->
-> do_qa_staging() {
-> }
->
-> do_package_qa() {
-> }
->
-> FILES_${PN} = " \
->    ${D}/usr/java/* \
-> "
->
-> PACKAGE = ${PN}
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
