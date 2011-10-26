@@ -1,32 +1,29 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RIzQy-0003SS-5p
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RJ0GV-0004J5-Fj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Oct 2011 11:06:04 +0200
-Received: from STOEXMBXC03.domain01.net
-	([fe80:0000:0000:0000:8de9:60e6:88.102.95.97]) by
-	STOEXHUB01.domain01.net
-	([10.12.10.1]) with mapi; Wed, 26 Oct 2011 11:00:04 +0200
-From: Anders Darander <anders@chargestorm.se>
+	Wed, 26 Oct 2011 11:59:19 +0200
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id p9Q9rCth025550
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Oct 2011 11:53:17 +0200
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Wed, 26 Oct 2011 11:53:13 +0200
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Oct 2011 11:00:02 +0200
-Thread-Topic: [oe] [2011.03-maintenance] Pull request for binutils
-Thread-Index: AcyTvabZZ40aIWbaSz6c9OaxW4E2fQ==
-Message-ID: <C2E46814-179D-4756-AD02-CC3603E11A3E@chargestorm.se>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013D181@post.tritech.se>
-	<8721E570-6C63-4CC6-AC4A-854409FFF3E6@gmail.com>
-	<ED3E0BCACD909541BA94A34C4A164D4C4013D8A9@post.tritech.se>
-	<20111025075030.GA17580@ad.chargestorm.se>
-	<20111025174358.GA7690@denix.org>
-	<ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C4013DA0E@post.tritech.se>
-Accept-Language: en-US
+Thread-Topic: [oe] [2011.03-maintenance] Pull request for binutils (+
+	waiting for master patch)
+Thread-Index: AQHMk8UTJ88duWzr0USdkxkjVC/SRQ==
+Date: Wed, 26 Oct 2011 09:53:12 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013DA2E@post.tritech.se>
+Accept-Language: en-US, sv-SE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+x-originating-ip: [194.132.137.34]
 MIME-Version: 1.0
-Subject: Re: [2011.03-maintenance] Pull request for binutils
+Subject: Re: [2011.03-maintenance] Pull request for binutils (+ waiting for master patch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,65 +37,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 09:06:04 -0000
+X-List-Received-Date: Wed, 26 Oct 2011 09:59:19 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-DQoNCk9uIDI2IG9rdCAyMDExLCBhdCAwOTowMywgIk1hdHMgS8OkcnJtYW4iIDxNYXRzLkthcnJt
-YW5AdHJpdGVjaC5zZT4gd3JvdGU6DQoNCj4gVGhhbmtzIHRvIGFsbCBmb3IgeW91ciBzdXBwb3J0
-IQ0KPiANCj4gSSdtIHRoaW5raW5nIHRoYXQgaXQgd291bGQgYmUgZ3JlYXQgaWYgdGhlIHBhdGNo
-IGZpcnN0IHdlbnQgaW50byBtYXN0ZXIuIFRoZW4gSSBjb3VsZCBwaWNrIGJvdGggdGhlIGJpbnV0
-aWxzIDIuMTggcmVsYXRlZCBwYXRjaGVzIGZyb20gdGhlcmUuIFNvIEkgc3RhcnRlZCB0byBsb29r
-IGZvciBpbmZvcm1hdGlvbiBhYm91dCBob3cgdG8gbWFrZSB0aGUgcGF0Y2ggZ28gdG8gbWFzdGVy
-LiBJIHRoZW4gZGlzY292ZXJlZCB0aGF0IHRoZSBwYXRjaCBpcyBhbHJlYWR5IGluIHBhdGNod29y
-ayBidXQgSSBmYWlsIHRvIHNlZSBob3cgSSBtYWtlIGl0IGdvIGZyb20gdGhlcmUgdG8gYmVpbmcg
-Y29tbWl0dGVkLCBjb25zaWRlcmluZyBJJ20gYSB1c2VyIHdpdGhvdXQgcmVwbyB3cml0ZSBwZXJt
-aXNzaW9uLiBDb3VsZCBzb21lb25lIHRlbGwgbWUgdGhlIG5leHQgc3RlcHMgb3IgcG9pbnQgbWUg
-dG8gc29tZXdoZXJlIHdoZXJlIHRoaXMgaXMgZGVzY3JpYmVkPw0KDQpXZWxsLCBpZiB0aGUgcGF0
-Y2ggaGFzIGFscmVhZHkgYmVlbiBzZW50IChhbmQgdGh1cyBleGlzdHMgaW4gdGhlIHBhdGNod29y
-aykgdGhlcmUgY291bGQgYmUgZWl0aGVyIG9uZSBvZiBhIGZldyBzaXR1YXRpb25zOg0KDQoqIGl0
-J3MgcmVjZW50bHkgc3VibWl0dGVkLCBhbmQgbm8gb25lIGhhcyBoYWQgYW55IHRpbWUgdG8gbG9v
-ayBpbnRvIGl0IHlldC4NCiogaXQgY291bGQgaGF2ZSBiZWVuIG92ZXJsb29rZWQuDQoqIGl0IGNv
-dWxkIGhhdmUgcmVjZWl2ZWQgY29tbWVudHMgdGhhdCBuZWVkIHRvIGJlIGFkZHJlc3NlZCBiZWZv
-cmUgaXQgY2FuIGJlIGNvbW1pdHRlZC4NCg0KU28geW91IGNvdWxkIGFsd2F5cyBjaGVjayB0byBz
-ZWUgaWYgeW91IGNhbiBmaW5kIGFueSBkaXNjdXNzaW9ucyBvZiB0aGUgcGF0Y2ggb24gdGhpcyBs
-aXN0LCBvdGhlcndpc2UgYXNrIHRoZSBxdWVzdGlvbiBhZ2Fpbi4NCg0KQ2hlZXJzLA0KQW5kZXJz
-DQoNCj4gQlIgLy8gTWF0cw0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fDQo+IEZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcgW29wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmdd
-IG9uIGJlaGFsZiBvZiBEZW55cyBEbXl0cml5ZW5rbyBbZGVuaXNAZGVuaXgub3JnXQ0KPiBTZW50
-OiBUdWVzZGF5LCBPY3RvYmVyIDI1LCAyMDExIDc6NDMgUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFsyMDExLjAz
-LW1haW50ZW5hbmNlXSBQdWxsIHJlcXVlc3QgZm9yIGJpbnV0aWxzDQo+IA0KPiBPbiBUdWUsIE9j
-dCAyNSwgMjAxMSBhdCAwOTo1MDozMEFNICswMjAwLCBBbmRlcnMgRGFyYW5kZXIgd3JvdGU6DQo+
-PiAqIE1hdHMgSz9ycm1hbiA8TWF0cy5LYXJybWFuQHRyaXRlY2guc2U+IFsxMTEwMjUgMDk6Mzdd
-Og0KPj4+IEknbSBzb3JyeSBmb3IgdGhlIHNsb3cgcHJvZ3Jlc3MgYnV0IEknbSB3b3JraW5nIDEw
-MCUgb24gc29tZXRoaW5nIGVsc2UNCj4+PiBzbyB0aGlzIGlzIG92ZXJ0aW1lLi4uDQo+PiANCj4+
-IFVuZm9ydHVuYXRlbHkgYSB0b28gY29tbW9uIHNpdHVhdGlvbi4uLg0KPj4gDQo+Pj4gV2hhdCBp
-cyB0aGUgY29ycmVjdCBwcmFjdGljZTsgdG8gZm9yayB0aGUgb2UgcmVwb3NpdG9yeSBhdCBHaXRI
-dWIgb3INCj4+PiB0byBjcmVhdGUgYSAidXNlcm5hbWUvbWFpbnRlbmFuY2UiIGJyYW5jaCBpbiB0
-aGUgc2FtZSByZXBvPw0KPj4gDQo+PiBXZWxsLCB1bmxlc3MgeW91IGFscmVhZHkgaGF2ZSBhIGdp
-dCBhY2NvdW50LCB3aXRoIHJ3IHBlcm1pc3Npb24NCj4+IG9wZW5lbWJlZGRlZC5vcmcgKGFuZCB0
-aHVzIGNhbiBwdXNoIHRvIGUuZy4gb3BlbmVtYmVkZGVkKSwgdGhlIGVhc2llc3QNCj4+IHRoaW5n
-IHNob3VsZCBiZSB0byB1c2UgYW5vdGhlciBob3N0aW5nLiBJJ20gdXNpbmcgZ2l0aHViIGZvciBt
-eQ0KPj4gcHVsbC1yZXF1ZXN0cyB0byBtZXRhLW9lIGFuZCBvZS1jb3JlLg0KPj4gDQo+PiBJZiB5
-b3UgZG8gdGhhdCwganVzdDoNCj4+IDEpIGZvcmsgb3BlbmVtYmVkZGVkIG9uIGdpdGh1Yg0KPj4g
-MikgYWRkIHRoZSByZW1vdGUgdG8geW91IGxvY2FsIGdpdC10cmVlDQo+PiAzKSBwdXNoIHlvdXIg
-bG9jYWwgYnJhbmNoIHRvIGdpdGh1YiwgdXNpbmcgaS5lLiBgZ2l0IHB1c2ggZ2l0aHViDQo+PiBm
-ZWF0dXJlWFhYYCwgYXNzdW1pbmcgdGhhdCB5b3UgbmFtZWQgdGhlIHJlbW90ZSBnaXRodWIuDQo+
-IA0KPiBKdXN0IGRvbid0IGZvcmdldCB0aGF0IHlvdSB3YW50IHlvdXIgcGVyc29uYWwgdHJlZSBi
-ZSBhdCB0aGUgdGlwIG9mDQo+IDIwMTEuMDMtbWFpbnRlbmFuY2UgYnJhbmNoLCBub3QgdGhlIG1h
-c3RlciBvZS5kZXYgKHdoaWNoIHdvdWxkIG90aGVyd2lzZSBiZQ0KPiBzaW1pbGFyIHRvIHdoYXQg
-eW91IGp1c3Qgc2VudCkuIFRoZW4geW91IGNhbiBjaGVycnktcGljayB0aGUgbmVlZGVkIGNvbW1p
-dCwNCj4gcHVzaCBpdCB0byBnaXRodWIgYW5kIGdlbmVyYXRlIGEgcHVsbCByZXF1ZXN0Lg0KPiAN
-Cj4gLS0NCj4gRGVueXMNCj4gDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fDQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVt
-YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLmxpbnV4
-dG9nby5vcmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiAN
-Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gT3Bl
-bmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMubGludXh0b2dvLm9yZy9jZ2ktYmluL21h
-aWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+Apologies for mixing up my binutil issues...=0A=
+=0A=
+I have submitted a patch: "[PATCH] binutils_2.18: update SRC_URI to avoid m=
+anual delete" that is in patchwork now. I am following the mailing list, bu=
+t have seen no comments about it.=0A=
+=0A=
+What I do hope for is this patch to be committed so that I can pick this on=
+e and a related one and create a maintenance pull request for both.=0A=
+=0A=
+Perhaps I'm just too impatient...=0A=
+=0A=
+BR // Mats=0A=
+=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Anders Darander [anders@charg=
+estorm.se]=0A=
+Sent: Wednesday, October 26, 2011 11:00 AM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] [2011.03-maintenance] Pull request for binutils=0A=
+=0A=
+On 26 okt 2011, at 09:03, "Mats K=E4rrman" <Mats.Karrman@tritech.se> wrote:=
+=0A=
+=0A=
+> Thanks to all for your support!=0A=
+>=0A=
+> I'm thinking that it would be great if the patch first went into master. =
+Then I could pick both the binutils 2.18 related patches from there. So I s=
+tarted to look for information about how to make the patch go to master. I =
+then discovered that the patch is already in patchwork but I fail to see ho=
+w I make it go from there to being committed, considering I'm a user withou=
+t repo write permission. Could someone tell me the next steps or point me t=
+o somewhere where this is described?=0A=
+=0A=
+Well, if the patch has already been sent (and thus exists in the patchwork)=
+ there could be either one of a few situations:=0A=
+=0A=
+* it's recently submitted, and no one has had any time to look into it yet.=
+=0A=
+* it could have been overlooked.=0A=
+* it could have received comments that need to be addressed before it can b=
+e committed.=0A=
+=0A=
+So you could always check to see if you can find any discussions of the pat=
+ch on this list, otherwise ask the question again.=0A=
+=0A=
+Cheers,=0A=
+Anders=0A=
+=0A=
+> BR // Mats=0A=
+> ________________________________________=0A=
+> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
+el-bounces@lists.openembedded.org] on behalf of Denys Dmytriyenko [denis@de=
+nix.org]=0A=
+> Sent: Tuesday, October 25, 2011 7:43 PM=0A=
+> To: openembedded-devel@lists.openembedded.org=0A=
+> Subject: Re: [oe] [2011.03-maintenance] Pull request for binutils=0A=
+>=0A=
+> On Tue, Oct 25, 2011 at 09:50:30AM +0200, Anders Darander wrote:=0A=
+>> * Mats K?rrman <Mats.Karrman@tritech.se> [111025 09:37]:=0A=
+>>> I'm sorry for the slow progress but I'm working 100% on something else=
+=0A=
+>>> so this is overtime...=0A=
+>>=0A=
+>> Unfortunately a too common situation...=0A=
+>>=0A=
+>>> What is the correct practice; to fork the oe repository at GitHub or=0A=
+>>> to create a "username/maintenance" branch in the same repo?=0A=
+>>=0A=
+>> Well, unless you already have a git account, with rw permission=0A=
+>> openembedded.org (and thus can push to e.g. openembedded), the easiest=
+=0A=
+>> thing should be to use another hosting. I'm using github for my=0A=
+>> pull-requests to meta-oe and oe-core.=0A=
+>>=0A=
+>> If you do that, just:=0A=
+>> 1) fork openembedded on github=0A=
+>> 2) add the remote to you local git-tree=0A=
+>> 3) push your local branch to github, using i.e. `git push github=0A=
+>> featureXXX`, assuming that you named the remote github.=0A=
+>=0A=
+> Just don't forget that you want your personal tree be at the tip of=0A=
+> 2011.03-maintenance branch, not the master oe.dev (which would otherwise =
+be=0A=
+> similar to what you just sent). Then you can cherry-pick the needed commi=
+t,=0A=
+> push it to github and generate a pull request.=0A=
+>=0A=
+> --=0A=
+> Denys=0A=
+>=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+>=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
