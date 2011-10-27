@@ -1,25 +1,29 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1RJM8f-00030r-02
+	(envelope-from <Imran_Mehmood@mentor.com>) id 1RJM8g-00030z-3P
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 11:20:41 +0200
+	Thu, 27 Oct 2011 11:20:42 +0200
 Received: from nat-dem.mentorg.com ([195.212.93.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1RJM2p-00076j-Mi from Imran_Mehmood@mentor.com 
+	id 1RJM2t-00076w-ES from Imran_Mehmood@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 02:14:39 -0700
+	Thu, 27 Oct 2011 02:14:43 -0700
 Received: from localhost.localdomain ([137.202.156.87]) by
 	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 27 Oct 2011 11:14:38 +0200
+	Thu, 27 Oct 2011 11:14:42 +0200
 From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Oct 2011 14:13:52 +0500
-Message-Id: <cover.1319650935.git.Imran_Mehmood@mentor.com>
+Date: Thu, 27 Oct 2011 14:13:53 +0500
+Message-Id: <3ed003aaae2d2fba52e5b3fa951ed1b125f97455.1319650935.git.Imran_Mehmood@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 27 Oct 2011 09:14:38.0676 (UTC)
-	FILETIME=[DA5AF940:01CC9488]
+In-Reply-To: <cover.1319650935.git.Imran_Mehmood@mentor.com>
+References: <cover.1319650935.git.Imran_Mehmood@mentor.com>
+In-Reply-To: <cover.1319650935.git.Imran_Mehmood@mentor.com>
+References: <cover.1319650935.git.Imran_Mehmood@mentor.com>
+X-OriginalArrivalTime: 27 Oct 2011 09:14:42.0301 (UTC)
+	FILETIME=[DC841AD0:01CC9488]
 Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH 0/1] pull request for xclock recipe
+Subject: [meta-oe][PATCH 1/1] xclock: Add version 1.0.5 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2011 09:20:41 -0000
+X-List-Received-Date: Thu, 27 Oct 2011 09:20:42 -0000
 
 From: Imran Mehmood <Imran_Mehmood@mentor.com>
 
-The following changes since commit c60bf558fa16034f7b010dc3e5862a1d3eb6c6d4:
-  Andreas Müller (1):
-        xfce4-datetime-plugin: Initial add git (0.6.1)
+    * Imported from oe.dev commit id 6e7e35679200cd55264fae308cd5dec7ef2d1d29
 
-are available in the git repository at:
-
-  git://github.com/imehmood/meta-oe master
-  https://github.com/imehmood/meta-oe/tree/master
-
-Imran Mehmood (1):
-  xclock: Add version 1.0.5 (initial recipe)
-
+Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
+---
  meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb |   12 ++++++++++++
  1 files changed, 12 insertions(+), 0 deletions(-)
  create mode 100644 meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+
+diff --git a/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+new file mode 100644
+index 0000000..b7939db
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+@@ -0,0 +1,12 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
++
++DESCRIPTION = "analog / digital clock for X"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=857759ade8f2ddde5c7b32ef7356ea36"
++
++DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
++
++SRC_URI[archive.md5sum] = "eaf124bbc9d13e1a12a29faaa2ed3612"
++SRC_URI[archive.sha256sum] = "53a9169e24f3814fbfcfee3ca0b98637840a3156ed7c7e36ae03940fabae4c9a"
++FILES_${PN} += " /usr/share/X11/app-defaults/"
++
+-- 
+1.7.0.4
 
 
 
