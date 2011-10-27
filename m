@@ -1,29 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Imran_Mehmood@mentor.com>) id 1RJOEr-0006sL-HE
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1RJOgE-0007zI-2e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 13:35:13 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1RJO94-00012K-PS from Imran_Mehmood@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 04:29:14 -0700
-Received: from localhost.localdomain ([137.202.156.87]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 27 Oct 2011 13:29:13 +0200
-From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+	Thu, 27 Oct 2011 14:03:30 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RJOaP-0006bx-Ue>; Thu, 27 Oct 2011 13:57:30 +0200
+Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
+	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RJOaP-0008CB-OK>; Thu, 27 Oct 2011 13:57:29 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by mail.imp.fu-berlin.de with esmtps (Exim 4.72) id 1RJOZk-0001wh-NM
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Oct 2011 13:57:00 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1RJOZf-0003t3-Jo
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Oct 2011 13:56:43 +0200
+Date: Thu, 27 Oct 2011 13:56:43 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Oct 2011 16:28:35 +0500
-Message-Id: <e47e61f0299e7aeb267452a50cde4441ad72118f.1319713297.git.Imran_Mehmood@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <cover.1319713297.git.Imran_Mehmood@mentor.com>
-References: <cover.1319713297.git.Imran_Mehmood@mentor.com>
-In-Reply-To: <cover.1319713297.git.Imran_Mehmood@mentor.com>
-References: <cover.1319713297.git.Imran_Mehmood@mentor.com>
-X-OriginalArrivalTime: 27 Oct 2011 11:29:13.0930 (UTC)
-	FILETIME=[A794F2A0:01CC949B]
-Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
-Subject: [meta-oe][PATCH v2 1/1] xclock: Add version 1.0.5 (initial recipe)
+Message-ID: <20111027115643.GA13369@mi.fu-berlin.de>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+MIME-Version: 1.0
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Remote-IP: 160.45.42.84
+X-Spam_Score: -3.4
+X-exim-Spam_Score_Int: -33
+X-exim-Spam_Bar: ---
+X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	* -0.5 RP_MATCHES_RCVD Envelope sender domain matches handover relay
+	domain * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+X-Originating-IP: 160.45.117.149
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2011 11:35:13 -0000
+X-List-Received-Date: Thu, 27 Oct 2011 12:03:30 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-From: Imran Mehmood <Imran_Mehmood@mentor.com>
+On Thu, Oct 27, 2011 at 10:53:13AM +0000, Mats Kärrman wrote:
+> Hi,
+> 
+> Are there any plans for new releases and/or maintenance branches of OE classic?
+> 
+> BR / Mats
 
-    * Imported from oe.dev commit id 6e7e35679200cd55264fae308cd5dec7ef2d1d29
+Hi,
 
-Signed-off-by: Imran Mehmood <Imran_Mehmood@mentor.com>
----
- meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+http://cgit.openembedded.org/openembedded/log/?h=org.openembedded.dev
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
-new file mode 100644
-index 0000000..f50b74e
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
-@@ -0,0 +1,12 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
-+
-+DESCRIPTION = "analog / digital clock for X"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=857759ade8f2ddde5c7b32ef7356ea36"
-+
-+DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
-+
-+SRC_URI[md5sum] = "eaf124bbc9d13e1a12a29faaa2ed3612"
-+SRC_URI[sha256sum] = "53a9169e24f3814fbfcfee3ca0b98637840a3156ed7c7e36ae03940fabae4c9a"
-+FILES_${PN} += " /usr/share/X11/app-defaults/"
-+
--- 
-1.7.0.4
+and
 
+http://cgit.openembedded.org/openembedded/log/?h=2011.03-maintenance
+
+Bye Henning
+
+PS: Feel free to update the wiki
 
 
