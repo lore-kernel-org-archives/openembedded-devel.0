@@ -1,29 +1,25 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1RJNg6-0005u5-Hk
+	(envelope-from <Imran_Mehmood@mentor.com>) id 1RJOEp-0006sE-Vo
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 12:59:18 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id p9RArC9s029309
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2011 12:53:18 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Thu, 27 Oct 2011 12:53:13 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Plans for OE classic future
-Thread-Index: AcyUlp+U2Tnulhz/TiaFJRlWYsvGkw==
-Date: Thu, 27 Oct 2011 10:53:13 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Plans for OE classic future
+	Thu, 27 Oct 2011 13:35:12 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1RJO90-00011p-NI from Imran_Mehmood@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Oct 2011 04:29:10 -0700
+Received: from localhost.localdomain ([137.202.156.87]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 27 Oct 2011 13:29:09 +0200
+From: "Mehmood, Imran" <Imran_Mehmood@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Oct 2011 16:28:34 +0500
+Message-Id: <cover.1319713297.git.Imran_Mehmood@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 27 Oct 2011 11:29:09.0727 (UTC)
+	FILETIME=[A5139EF0:01CC949B]
+Cc: Imran Mehmood <Imran_Mehmood@mentor.com>
+Subject: [meta-oe][PATCH v2 0/1] pull request for xclock recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,15 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2011 10:59:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Oct 2011 11:35:12 -0000
 
-Hi,
+From: Imran Mehmood <Imran_Mehmood@mentor.com>
 
-Are there any plans for new releases and/or maintenance branches of OE clas=
-sic?
+The following changes since commit c60bf558fa16034f7b010dc3e5862a1d3eb6c6d4:
+  Andreas Müller (1):
+        xfce4-datetime-plugin: Initial add git (0.6.1)
 
-BR / Mats
+are available in the git repository at:
+
+  git://github.com/imehmood/meta-oe master
+  https://github.com/imehmood/meta-oe/tree/master
+
+Imran Mehmood (1):
+  xclock: Add version 1.0.5 (initial recipe)
+
+ meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+
+
 
