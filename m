@@ -1,27 +1,29 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RJXIK-0001Vp-AT
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Oct 2011 23:15:24 +0200
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LTQ00IQNTFBFYRF@vms173017.mailsrvcs.net>; Thu,
-	27 Oct 2011 16:09:12 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B368614AF5D; Thu,
-	27 Oct 2011 17:09:11 -0400 (EDT)
-Date: Thu, 27 Oct 2011 17:09:11 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20111027210911.GM15391@denix.org>
-References: <E1RJWkv-0001RX-LN@happy.bec-systems.com>
-MIME-version: 1.0
-In-reply-to: <E1RJWkv-0001RX-LN@happy.bec-systems.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: angstrom-distro-devel@linuxtogo.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: OE Changelog for 2011-10-17 to 2011-10-24
+	(envelope-from <jefro.net@gmail.com>)
+	id 1RJXyG-00027n-0b; Thu, 27 Oct 2011 23:58:44 +0200
+Received: by ywf9 with SMTP id 9so3054553ywf.6
+	for <multiple recipients>; Thu, 27 Oct 2011 14:52:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=EzbeG34EFzTU8GNSRcesiOMfKpRL2M3PlxkuET58Yo4=;
+	b=X9xBKJtplTW+kkzZYj2L+wHiCaIrmd5Ihs7KtyH4wQThHFze/vG7AtJYj+DA7OhxUX
+	dV+OFmU+dapIDSK4+4p5JBDQQu/FUPup5XlEELPz5JIL4MhRtgEGH0AbP9/AHBFy7EC7
+	9SABxb5+7/hCODihIqLULRaqIh8Br48QH1qEY=
+MIME-Version: 1.0
+Received: by 10.42.153.6 with SMTP id k6mr60207330icw.30.1319752362295; Thu,
+	27 Oct 2011 14:52:42 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.50.216.193 with HTTP; Thu, 27 Oct 2011 14:52:42 -0700 (PDT)
+Date: Thu, 27 Oct 2011 23:52:42 +0200
+X-Google-Sender-Auth: KGG1HsEUgcKqt8Ze8UMHd_gy8Dk
+Message-ID: <CA+YB3rYgnqQ1dY8Ehjgwf7Uf-6tsFS0QkMbLJmm4wafSXiDmGw@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-members@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: openembedded GA information
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,23 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2011 21:15:24 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 27 Oct 2011 21:58:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 27, 2011 at 04:40:53PM -0400, cliff.brake@gmail.com wrote:
-> Changelog for 2011-10-17 to 2011-10-24.  Projects included in this report:
+Hi all - this is for those members who will be present at the General
+Assembly tomorrow, Oct 28, in Prague.
 
-Cliff,
+The GA will be in the Clarion Congress Hotel's Quadrant room starting at
+6pm. Sandwiches, beer, and soft drinks will be provided. Please make sure to
+bring your signed proxy forms.
 
-FYI, I think you have a bug in your scripts, where it misses commits made on 
-Monday, that were not included in the previous ChangeLog and they are being 
-skipped in this one...
-
-Also, can you please include meta-ti@yoctoproject.org as the official mailing 
-list for meta-ti/meta-texasinstruments BSP layer. Thanks.
+thanks & see you there
 
 -- 
-Denys
-
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
