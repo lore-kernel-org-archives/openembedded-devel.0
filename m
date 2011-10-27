@@ -1,29 +1,30 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefro.net@gmail.com>)
-	id 1RJXyG-00027n-0b; Thu, 27 Oct 2011 23:58:44 +0200
-Received: by ywf9 with SMTP id 9so3054553ywf.6
-	for <multiple recipients>; Thu, 27 Oct 2011 14:52:42 -0700 (PDT)
+	(envelope-from <tom.rini@gmail.com>) id 1RJZth-0005Hr-DM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Oct 2011 02:02:09 +0200
+Received: by qyg14 with SMTP id 14so4292801qyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Oct 2011 16:56:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=EzbeG34EFzTU8GNSRcesiOMfKpRL2M3PlxkuET58Yo4=;
-	b=X9xBKJtplTW+kkzZYj2L+wHiCaIrmd5Ihs7KtyH4wQThHFze/vG7AtJYj+DA7OhxUX
-	dV+OFmU+dapIDSK4+4p5JBDQQu/FUPup5XlEELPz5JIL4MhRtgEGH0AbP9/AHBFy7EC7
-	9SABxb5+7/hCODihIqLULRaqIh8Br48QH1qEY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=cqttSUavFyKfi5j3MzAE1t2qsVrvCB5FD9WyY0NaGRI=;
+	b=Y0Nh3dlvQqxwAPa8fWONeCIQgHcqIVC5Eq0JOR8DReDnSQN6a++TpdssW+mcbDu2RY
+	ztpeC/shuLnC5qpT3F9ENcMSU4vpmUuh+j1ILkKdSWGU0eGNW6119UEIPM3xaiaFoLGe
+	TfdwBaNHBqvwchnQt3PSEvFbRXqQ+prrLi/pA=
 MIME-Version: 1.0
-Received: by 10.42.153.6 with SMTP id k6mr60207330icw.30.1319752362295; Thu,
-	27 Oct 2011 14:52:42 -0700 (PDT)
-Sender: jefro.net@gmail.com
-Received: by 10.50.216.193 with HTTP; Thu, 27 Oct 2011 14:52:42 -0700 (PDT)
-Date: Thu, 27 Oct 2011 23:52:42 +0200
-X-Google-Sender-Auth: KGG1HsEUgcKqt8Ze8UMHd_gy8Dk
-Message-ID: <CA+YB3rYgnqQ1dY8Ehjgwf7Uf-6tsFS0QkMbLJmm4wafSXiDmGw@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-To: openembedded-members@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: openembedded GA information
+Received: by 10.229.64.144 with SMTP id e16mr76061qci.112.1319759767844; Thu,
+	27 Oct 2011 16:56:07 -0700 (PDT)
+Received: by 10.229.94.72 with HTTP; Thu, 27 Oct 2011 16:56:07 -0700 (PDT)
+In-Reply-To: <20111027174442.GG15391@denix.org>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<20111027115643.GA13369@mi.fu-berlin.de>
+	<20111027174442.GG15391@denix.org>
+Date: Thu, 27 Oct 2011 16:56:07 -0700
+Message-ID: <CA+M6bX=bdAbBPoNbnRU3nfFCnR8prk5XAnh9o1VCcZtD5arW+g@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,19 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2011 21:58:44 -0000
+X-List-Received-Date: Fri, 28 Oct 2011 00:02:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi all - this is for those members who will be present at the General
-Assembly tomorrow, Oct 28, in Prague.
+On Thu, Oct 27, 2011 at 10:44 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Thu, Oct 27, 2011 at 01:56:43PM +0200, Henning Heinold wrote:
+>> On Thu, Oct 27, 2011 at 10:53:13AM +0000, Mats K?rrman wrote:
+>> > Hi,
+>> >
+>> > Are there any plans for new releases and/or maintenance branches of OE classic?
+>
+>> http://cgit.openembedded.org/openembedded/log/?h=org.openembedded.dev
+>>
+>> and)
+>>
+>> http://cgit.openembedded.org/openembedded/log/?h=2011.03-maintenance
+>
+> Huh? Are those links to the plans?
 
-The GA will be in the Clarion Congress Hotel's Quadrant room starting at
-6pm. Sandwiches, beer, and soft drinks will be provided. Please make sure to
-bring your signed proxy forms.
+No, but putting my TSC hat on, we had talked (and this is reflected in
+the minutes somewhere or another) and we aren't actively having
+another maintenance release happen (if people step up to do one of
+course, that's another matter).
 
-thanks & see you there
+Taking my TSC hat off, 2011.03-maintenance will continue so long as
+people have a use for it and my policy was clarified at some point a
+little while back that backporting from oe-core/etc directly is fine
+(which is another plus of asking people to put what they want into a
+branch for me to pull from rather than "cherry-pick $hash from $tree"
+as the request).
 
 -- 
-Jeff Osier-Mixon http://jefro.net/blog
-Yocto Project Community Manager @Intel http://yoctoproject.org
+Tom
+
 
