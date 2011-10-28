@@ -1,26 +1,34 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RJbEt-0004GT-Ve
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Oct 2011 03:28:08 +0200
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LTR001TO54COD55@vms173013.mailsrvcs.net>; Thu,
-	27 Oct 2011 20:21:49 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9A59814AF5D; Thu,
-	27 Oct 2011 21:21:48 -0400 (EDT)
-Date: Thu, 27 Oct 2011 21:21:48 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org
-Message-id: <20111028012148.GP15391@denix.org>
-References: <CA+YB3rYgnqQ1dY8Ehjgwf7Uf-6tsFS0QkMbLJmm4wafSXiDmGw@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CA+YB3rYgnqQ1dY8Ehjgwf7Uf-6tsFS0QkMbLJmm4wafSXiDmGw@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: openembedded GA information
+	(envelope-from <cliff.brake@gmail.com>)
+	id 1RJbvv-0004t0-0L; Fri, 28 Oct 2011 04:12:35 +0200
+Received: by ggnj1 with SMTP id j1so3217214ggn.6
+	for <multiple recipients>; Thu, 27 Oct 2011 19:06:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=0rtlgtbCHlbzW6gVnV8nC4bo4O9H+k0veqeJZjLO3z4=;
+	b=vh5anp0iAmhdMzqKdEHDj0DZsX8wymN4j4wMM7ewPonkPzg80T+4qlUyI0xiNHpKWG
+	WMlw3hMHjfYwatbBmBUMEynhal/KKB/Aks+BuuwmupFJR0hyiLs3ZsAGxgjlV/j2ukOl
+	BjioQ4bmDiduQoyEraM3QSdhOqrg6+WZDZWcw=
+MIME-Version: 1.0
+Received: by 10.236.124.17 with SMTP id w17mr471511yhh.126.1319767593043; Thu,
+	27 Oct 2011 19:06:33 -0700 (PDT)
+Received: by 10.236.60.198 with HTTP; Thu, 27 Oct 2011 19:06:32 -0700 (PDT)
+In-Reply-To: <20111027210911.GM15391@denix.org>
+References: <E1RJWkv-0001RX-LN@happy.bec-systems.com>
+	<20111027210911.GM15391@denix.org>
+Date: Thu, 27 Oct 2011 22:06:32 -0400
+Message-ID: <CAOd_LFw0kBsf-NDpUQ-rUHxYP+v_5Ff3nuSNTUK3QuSrB5_eHw@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: "angstrom-distro-devel@linuxtogo.org"
+	<angstrom-distro-devel@linuxtogo.org>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OE Changelog for 2011-10-17 to 2011-10-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2011 01:28:08 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 28 Oct 2011 02:12:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 27, 2011 at 11:52:42PM +0200, Jeff Osier-Mixon wrote:
-> Hi all - this is for those members who will be present at the General
-> Assembly tomorrow, Oct 28, in Prague.
-> 
-> The GA will be in the Clarion Congress Hotel's Quadrant room starting at
-> 6pm. Sandwiches, beer, and soft drinks will be provided. Please make sure to
-> bring your signed proxy forms.
+On Thursday, October 27, 2011, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Thu, Oct 27, 2011 at 04:40:53PM -0400, cliff.brake@gmail.com wrote:
+>> Changelog for 2011-10-17 to 2011-10-24.  Projects included in this
+report:
+>
+> Cliff,
+>
+> FYI, I think you have a bug in your scripts, where it misses commits made
+on
+> Monday, that were not included in the previous ChangeLog and they are
+being
+> skipped in this one...
 
-Jeff,
+Can you give me an example of a commit that got missed and I'll debug?
 
-Thanks for your support and help in organizing the General Assembly!
+>
+> Also, can you please include meta-ti@yoctoproject.org as the official
+mailing
+> list for meta-ti/meta-texasinstruments BSP layer. Thanks.
+>
+
+Ill look into something like that.  We currently don't have any type of
+email field, but something could be added.
+
+Thanks,
+Cliff
 
 
-All,
-
-Have a good and productive General Assembly! I wish I was able to attend 
-this year, but I'm virtually there with you (via proxy)... :)
+> --
+> Denys
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 -- 
-Denys
-
+=================
+http://bec-systems.com
 
