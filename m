@@ -1,24 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RK7es-0001aR-WA for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 14:05:07 +0200
+	id 1RK7iQ-0001iD-Sy for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 14:08:46 +0200
 Received: from g225082113.adsl.alicedsl.de ([92.225.82.113]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RK7ZH-0001wp-5A for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 11:59:19 +0000
-Message-ID: <1319889545.3756.10.camel@mattotaupa>
+	id 1RK7cn-0001xc-3w for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 12:02:58 +0000
+Message-ID: <1319889763.3756.12.camel@mattotaupa>
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Oct 2011 13:59:05 +0200
-In-Reply-To: <941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
+Date: Sat, 29 Oct 2011 14:02:43 +0200
+In-Reply-To: <80e083564f1c33169626c79f52b15fe54f64c01d.1319884094.git.Martin.Jansa@gmail.com>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
+	<80e083564f1c33169626c79f52b15fe54f64c01d.1319884094.git.Martin.Jansa@gmail.com>
 X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
-Subject: Re: [meta-efl][meta-oe 09/12] task-x11-server: import from Angstrom
+Subject: Re: [meta-efl][meta-oe 12/12] elfe: add another patch to fix API changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,13 +32,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 12:05:07 -0000
-X-Groupsio-MsgNum: 35063
+X-List-Received-Date: Sat, 29 Oct 2011 12:08:47 -0000
+X-Groupsio-MsgNum: 35064
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature"; 
-	boundary="=-QReyLZE5Os1+4oYQAFrd"
+	boundary="=-QJx462M3HTSjRMVSMBRx"
 
---=-QReyLZE5Os1+4oYQAFrd
+--=-QJx462M3HTSjRMVSMBRx
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -46,66 +46,48 @@ Dear Martin,
 
 
 Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
-> * from meta-angstrom revision 8aa9581a920abae8878df2f3faf9857474edd1f8
-
-I am not knowledgeable about the new infrastructure, so I cannot comment
-on the import.
-
-> * added RPROVIDES to be able to drop server part from task-x11
-> * updated DESCRIPTION to match
-> * renamed to task-x11-server for upgradeable path
->=20
 > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  meta-oe/recipes-core/tasks/task-x11-server_1.0.bb |   24 +++++++++++++++=
+>  ...update-again-to-even-newer-elementary-API.patch |  105 ++++++++++++++=
 ++++++
->  1 files changed, 24 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
+>  meta-efl/recipes-efl/e17/elfe_svn.bb               |    2 +
+>  2 files changed, 107 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-=
+to-even-newer-elementary-API.patch
 >=20
-> diff --git a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb b/meta-oe/=
-recipes-core/tasks/task-x11-server_1.0.bb
+> diff --git a/meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-to-even=
+-newer-elementary-API.patch b/meta-efl/recipes-efl/e17/elfe/0001-elfe-updat=
+e-again-to-even-newer-elementary-API.patch
 > new file mode 100644
-> index 0000000..86de1ec
+> index 0000000..ad1c259
 > --- /dev/null
-> +++ b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
-> @@ -0,0 +1,24 @@
-> +DESCRIPTION =3D "Task for a image with Xserver"
+> +++ b/meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-to-even-newer-=
+elementary-API.patch
 
-s/a image/an image/
+[=E2=80=A6]
 
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=3D3f40d799439710928=
-5ec7b81fdeb3b58"
-> +PR =3D "r9"
+> diff --git a/meta-efl/recipes-efl/e17/elfe_svn.bb b/meta-efl/recipes-efl/=
+e17/elfe_svn.bb
+> index 151ef7e..5b703dc 100644
+> --- a/meta-efl/recipes-efl/e17/elfe_svn.bb
+> +++ b/meta-efl/recipes-efl/e17/elfe_svn.bb
+> @@ -5,4 +5,6 @@ PR =3D "${INC_PR}.1"
+> =20
+>  require e-module.inc
+> =20
+> +SRC_URI +=3D "file://0001-elfe-update-again-to-even-newer-elementary-API=
+.patch"
 > +
-> +inherit task
-> +
-> +# for backwards compatibility
-> +RPROVIDES_${PN} =3D "task-x11-server"
-> +
-> +XSERVER ?=3D "xserver-xorg \
-> +           xf86-input-evdev \
-> +           xf86-input-mouse \
-> +           xf86-video-fbdev \
-> +           xf86-input-keyboard \
-> +"
-> +
-> +
-> +RDEPENDS_${PN} =3D " \
-> +  ${XSERVER} \
-> +"
-> +
-> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> +
+>  DEPENDS +=3D "elementary"
 
-No newline needed at the end?
+is `PR =3D "${INC_PR}.2"` needed? Or does the package content not change?
 
 
 Thanks,
 
 Paul
 
---=-QReyLZE5Os1+4oYQAFrd
+--=-QJx462M3HTSjRMVSMBRx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
@@ -113,9 +95,9 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk6r6okACgkQPX1aK2wOHVjdeACeKFQbnYqxqmQpK2fsntsvAPl4
-O/gAn28RMwUWCmCJrQpKj25frsSmxT4w
-=lbDv
+iEYEABECAAYFAk6r62MACgkQPX1aK2wOHVgyPACfeUbXCIdrZCPU6J06kSF4111j
+ceMAnAluZRPFNyJR5qUfFE6jGEXYSLM0
+=lr4V
 -----END PGP SIGNATURE-----
 
---=-QReyLZE5Os1+4oYQAFrd--
+--=-QJx462M3HTSjRMVSMBRx--
