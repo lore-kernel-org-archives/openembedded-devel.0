@@ -1,33 +1,30 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RJnwE-0003TX-QT
+	(envelope-from <martin.jansa@gmail.com>) id 1RK6Ff-0006fd-GN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Oct 2011 17:01:42 +0200
-Received: by vwe42 with SMTP id 42so3506620vwe.6
+	Sat, 29 Oct 2011 12:34:59 +0200
+Received: by faas16 with SMTP id s16so4799631faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2011 07:55:40 -0700 (PDT)
+	Sat, 29 Oct 2011 03:28:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:in-reply-to:mime-version:content-type:message-id
-	:content-transfer-encoding:from:subject:date:to:x-mailer;
-	bh=RIya3tZ9FEHDyyin1j4TzAZzT5mrlOhF5fItsUQnvXo=;
-	b=jSnvJJ2jElor0Sk2Ws3Jyg6LJGOw9TFZ1bTlYFDa01NYKI5OaDFTaFVCsZlGiFwYhZ
-	VZMHJIe2YAVspRy6DfxVSSaFWdAXjYXZAi1e7eAoz2Y1MtkYL0o6BuV/OceYKdLyLn1a
-	NBVMtMMticJcUHqmlIUrK96pnh1i5/v2iz9BY=
-Received: by 10.68.17.197 with SMTP id q5mr4616063pbd.25.1319813740415;
-	Fri, 28 Oct 2011 07:55:40 -0700 (PDT)
-Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id w8sm24312481pbn.11.2011.10.28.07.55.35
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=PfMI06YJWOhdlSa4z1vbsu32fkBdVKZQYMIstfLccWE=;
+	b=HqjjyxZeRgKBbJR5ENo8GNTnz3R5tInkhrmLMStRK+nQwLnEUf76vbbX9s03AUiAHa
+	0JuZb2Pcm9haUPNp6N9QSLoZmpIF1dmiMDiV0Wp8Yz7hDqUV5NRAbxPTy2BBFj/jsQkC
+	fjiiONfhJG7/LSLHr2Oq6uBFvq7gB7I0TARc8=
+Received: by 10.223.17.23 with SMTP id q23mr12984424faa.11.1319884137147;
+	Sat, 29 Oct 2011 03:28:57 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id j5sm23340504faf.14.2011.10.29.03.28.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 28 Oct 2011 07:55:37 -0700 (PDT)
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DCF6@post.tritech.se>
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C4013DCF6@post.tritech.se>
-Mime-Version: 1.0 (Apple Message framework v1084)
-Message-Id: <29E6EB36-4280-484A-A9FA-45DD784FE6A5@gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-Date: Fri, 28 Oct 2011 07:55:33 -0700
+	Sat, 29 Oct 2011 03:28:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1084)
-Subject: Re: [2011.03-maintenance] New pull request for binutils
+Date: Sat, 29 Oct 2011 12:28:50 +0200
+Message-Id: <cover.1319884094.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.7.1
+Cc: Klaus Kurzmann <mok@fluxnetz.de>
+Subject: [meta-efl][meta-oe 00/12] EFL upgrade and few small fixes and additions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +38,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2011 15:01:43 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 29 Oct 2011 10:34:59 -0000
 
-On Oct 27, 2011, at 2:48 AM, Mats K=E4rrman wrote:
+The following changes since commit c60bf558fa16034f7b010dc3e5862a1d3eb6c6d4:
 
-> Hello Tom,
->=20
-> A new, hopefully conformant attempt at a pull request (I also sent a =
-pull request from github but I don't know where that ended up...).
-> Please pull these two commits from here:
->=20
-> git://github.com/mkarrman/openembedded
-> Branch: maintenance
->=20
-> Paul Menzel (1):
->      e5832d65b8  binutils-{canadian,cross}-sdk_2.18: Remove checksums =
-and implicitly update them
->=20
-> Mats K=E4rrman (1):
->      656bed267a  binutils_2.18: update SRC_URI to avoid manual delete
+  xfce4-datetime-plugin: Initial add git (0.6.1) (2011-10-25 07:02:07 +0200)
 
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
-Applied, pushing as soon as I can get ahold of someone to see if =
-something is broken with the server...  Thanks!
+Denis 'GNUtoo' Carikli (2):
+  id3lib: Import from openembedded classic
+  liblinebreak: import from openembedded classic
 
---=20
-Tom=
+Klaus Kurzmann (1):
+  xserver-common_1.34: patch Xserver to add support for gta04
+
+Martin Jansa (9):
+  midori: fix build with dirty vala
+  navit: upgrade to latest SRCREV and remove navit-icons
+  xserver-nodm-init: set USER and HOME
+  e-base: bump EFL_SRCREV and refresh patches and elementary version
+  elsa: add new login manager for Enlightenment
+  task-x11-server: import from Angstrom
+  task-x11: remove server parts and add VIRTUAL_RUNTIME variables to be
+    able to select different -common and init providers
+  systemd-serialgetty: use better default SERIAL_CONSOLE
+  elfe: add another patch to fix API changes
+
+ meta-efl/classes/e-base.bbclass                    |    2 +-
+ ...update-again-to-even-newer-elementary-API.patch |  105 ++++++
+ meta-efl/recipes-efl/e17/elfe_svn.bb               |    2 +
+ meta-efl/recipes-efl/efl/ecore/exit_uclibc.patch   |   12 -
+ .../efl/ecore/fix-ecore-fb-initialization.patch    |   44 ++-
+ meta-efl/recipes-efl/efl/ecore_svn.bb              |    1 -
+ meta-efl/recipes-efl/efl/elementary_svn.bb         |    3 +-
+ meta-efl/recipes-efl/efl/elsa_svn.bb               |   16 +
+ .../recipes-connectivity/midori/midori-0.4.1/waf   |  Bin 0 -> 92569 bytes
+ .../recipes-connectivity/midori/midori_0.4.1.bb    |    8 +
+ .../recipes-core/systemd/systemd-serialgetty.bb    |    2 +-
+ meta-oe/recipes-core/tasks/task-x11-server_1.0.bb  |   24 ++
+ .../tasks/{task-x11.bb => task-x11_1.0.bb}         |   27 +--
+ .../xserver-common-1.34/Xserver.gta04.patch        |   32 ++
+ .../xserver-common/xserver-common_1.34.bb          |    1 +
+ .../xserver-nodm-init-2.0/xserver-nodm             |    7 +
+ .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |    2 +-
+ meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb  |   18 +
+ meta-oe/recipes-navigation/navit/navit-icons/GPL-2 |  339 --------------------
+ .../navit/navit-icons/configure.in                 |   70 ----
+ .../recipes-navigation/navit/navit-icons_svn.bb    |   32 --
+ meta-oe/recipes-navigation/navit/navit.inc         |    7 +-
+ meta-oe/recipes-navigation/navit/navit_svn.bb      |    6 +-
+ .../liblinebreak/liblinebreak_1.2.bb               |   13 +
+ 24 files changed, 272 insertions(+), 501 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-to-even-newer-elementary-API.patch
+ delete mode 100644 meta-efl/recipes-efl/efl/ecore/exit_uclibc.patch
+ create mode 100644 meta-efl/recipes-efl/efl/elsa_svn.bb
+ create mode 100755 meta-oe/recipes-connectivity/midori/midori-0.4.1/waf
+ create mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
+ rename meta-oe/recipes-core/tasks/{task-x11.bb => task-x11_1.0.bb} (46%)
+ create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/Xserver.gta04.patch
+ create mode 100644 meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+ delete mode 100644 meta-oe/recipes-navigation/navit/navit-icons/GPL-2
+ delete mode 100644 meta-oe/recipes-navigation/navit/navit-icons/configure.in
+ delete mode 100644 meta-oe/recipes-navigation/navit/navit-icons_svn.bb
+ create mode 100644 meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+
+-- 
+1.7.7.1
+
 
 
