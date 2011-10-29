@@ -1,20 +1,28 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.thomas@microbee-systems.com>)
-	id 1RKGti-0000k3-G0 for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 23:57:02 +0200
-Received: by wyh5 with SMTP id 5so150690wyh.6
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RKHcA-00022G-ML
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Oct 2011 00:42:58 +0200
+Received: from iph2.telenor.se (iph2.telenor.se [195.54.127.133])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id AAF66C46A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Oct 2011 14:50:59 -0700 (PDT)
+	Sun, 30 Oct 2011 00:36:55 +0200 (CEST)
+X-SENDER-IP: [83.227.59.253]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AjIrANl+rE5T4zv9PGdsb2JhbAAMN4k+kRuPKQEBAQE3gmNAPQ0BCBgDAgECATEnCAEBulaDQYItAYMTBJQOkWE
+X-IronPort-AV: E=Sophos;i="4.69,425,1315173600"; d="scan'208";a="504023182"
+Received: from c-fd3be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.59.253])
+	by iph2.telenor.se with ESMTP; 30 Oct 2011 00:36:55 +0200
+Message-ID: <4EAC8007.4080006@telia.com>
+Date: Sun, 30 Oct 2011 00:36:55 +0200
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Received: by 10.227.207.205 with SMTP id fz13mr10683672wbb.0.1319925058748;
-	Sat, 29 Oct 2011 14:50:58 -0700 (PDT)
-Received: by 10.227.200.14 with HTTP; Sat, 29 Oct 2011 14:50:58 -0700 (PDT)
-Date: Sat, 29 Oct 2011 16:50:58 -0500
-Message-ID: <CALJpqJw17ftFmyYbdBw8VZoEvdF54-tGGBj4QfHqEWKy5BqgGw@mail.gmail.com>
-From: David Thomas <david.thomas@microbee-systems.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Help?
+Subject: console-image: No login prompt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,72 +36,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 21:57:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 29 Oct 2011 22:42:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I can get bitbake to run as root but I don't let it continue as it is
-not advised.
+Have build console-image and I am running it on an AT91SAM9G20EK.
+The boot process freezes, and I have managed to verify that this
+happens after the init process has executed "finished.sh".
+(Put some print statements in this, and I see them)
 
-As user I get this:
+Then nothing...
+Normally I would get a login prompt
 
-Traceback (most recent call last):
-  File "/home/dthomas/bitbake/bin/bitbake", line 234, in <module>
-    ret = main()
-  File "/home/dthomas/bitbake/bin/bitbake", line 197, in main
-    server = ProcessServer(server_channel, event_queue, configuration)
-  File "/home/dthomas/bitbake/lib/bb/server/process.py", line 78, in __init__
-    self.cooker = BBCooker(configuration, self.register_idle_function)
-  File "/home/dthomas/bitbake/lib/bb/cooker.py", line 77, in __init__
-    self.parseConfigurationFiles(self.configuration.file)
-  File "/home/dthomas/bitbake/lib/bb/cooker.py", line 529, in
-parseConfigurationFiles
-    bb.event.fire(bb.event.ConfigParsed(), self.configuration.data)
-IOError: [Errno 1] Operation not permitted
+Have been searching for people with similar problems,
+and I found one that claimed that /etc/rcS.d/S03udev
+needs to run after /etc/rcS.d/S10checkout.
+
+I tried this but this does not make any difference.
+Is there some configuration item that enables/disables the console
+after init.
+
+finish.sh is linked from rcS.d/S99/finish.sh
+
+Is the problem, that the kernel stays in level 1 for some reason?
+Default run level is 5 (id:5:initdefault:) which I assume
+
+Does that make sense for a console-image?
+
+Should not level 3 be more appropriate if
+you do not have any graphics?
+
+Any reason why console I/O is redirected?
+
+------------------------------------------------------------------------------------
+# /etc/inittab: init(8) configuration.
+# $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
+
+# The default runlevel.
+id:5:initdefault:
+
+# Boot-time system configuration/initialization script.
+# This is run first except when booting in emergency (-b) mode.
+si::sysinit:/etc/init.d/rcS
+
+# What to do in single-user mode.
+~~:S:wait:/sbin/sulogin
+
+# /etc/init.d executes the S and K scripts upon change
+# of runlevel.
+#
+# Runlevel 0 is halt.
+# Runlevel 1 is single-user.
+# Runlevels 2-5 are multi-user.
+# Runlevel 6 is reboot.
+
+l0:0:wait:/etc/init.d/rc 0
+l1:1:wait:/etc/init.d/rc 1
+l2:2:wait:/etc/init.d/rc 2
+l3:3:wait:/etc/init.d/rc 3
+l4:4:wait:/etc/init.d/rc 4
+l5:5:wait:/etc/init.d/rc 5
+l6:6:wait:/etc/init.d/rc 6
+# Normally not reached, but fallthrough in case of emergency.
+z6:6:respawn:/sbin/sulogin
+S:2345:respawn:/sbin/getty 115200 ttyS0
 
 
-I have tried everything. I am using Fedora 13 and have followed every
-guide to the letter. It seems to be a permissions issue but where, I
-have almost given up trying. As always, there is no info on the this
-anywhere that is remotely useful
 
-Any help is appreciated?
+
 
 -- 
-Dave Thomas
-MicroBee Systems, Inc
-1429 Weatherly Road, Suite G
-Huntsville, AL 35803-1187
-256-489-6671 (Voice)
-256-426-2431 (Mobile)
-256-489-6673 (FAX)
-www.microbee-systems.com
-"Innovative Solutions for an Embedded World"
+Best Regards
+Ulf Samuelsson
 
-This message is intended for the sole use of the addressee, and may
-contain information that is privileged, confidential and exempt from
-disclosure under applicable law. If you are not the addressee you are
-hereby notified that you may not use, copy, disclose, or distribute to
-anyone the message or any information contained in the message. If you
-have received this message in error, please immediately advise the
-sender by reply email and delete this message.
-
--- 
-Dave Thomas
-MicroBee Systems, Inc
-1429 Weatherly Road, Suite G
-Huntsville, AL 35803-1187
-256-489-6671 (Voice)
-256-426-2431 (Mobile)
-256-489-6673 (FAX)
-www.microbee-systems.com
-"Innovative Solutions for an Embedded World"
-
-This message is intended for the sole use of the addressee, and may
-contain information that is privileged, confidential and exempt from
-disclosure under applicable law. If you are not the addressee you are
-hereby notified that you may not use, copy, disclose, or distribute to
-anyone the message or any information contained in the message. If you
-have received this message in error, please immediately advise the
-sender by reply email and delete this message.
 
 
