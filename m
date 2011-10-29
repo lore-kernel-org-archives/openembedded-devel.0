@@ -1,34 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RK6HB-0006fd-Ka
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 12:36:34 +0200
-Received: by mail-fx0-f47.google.com with SMTP id s16so4799631faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Oct 2011 03:30:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=CBEqc3lCVoOyBmCrWuvIB5uD757Yl2pJ/xxyfnLCzVA=;
-	b=A/LgCvegcaPpMyHWkwio7aN/HEM+mVLKwjIbqwClChOLuwBtC0JEuEoj6Q2rwYpsbe
-	+LOh3gpVKIMChmPxTi3Z7Jwx4mWRDOYpvpYROkkX+tSNHfnsEoRKYMemH4IAEMoUft5q
-	AcXK46oNbSv4uRCC6NrBdCWaoUSJ2AiPK6dDk=
-Received: by 10.223.76.11 with SMTP id a11mr13058588fak.1.1319884231298;
-	Sat, 29 Oct 2011 03:30:31 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id d21sm20443384fac.4.2011.10.29.03.30.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 29 Oct 2011 03:30:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RK7c4-0001UV-Rf for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 14:02:12 +0200
+Received: from g225082113.adsl.alicedsl.de ([92.225.82.113]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RK7WS-0001wK-Dx for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 11:56:24 +0000
+Message-ID: <1319889370.3756.8.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Oct 2011 12:29:07 +0200
-Message-Id: <1dd29bc4f6b05d60b8b7a5d01c3c2cb94c9d9c46.1319884094.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.7.1
-In-Reply-To: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
+Date: Sat, 29 Oct 2011 13:56:10 +0200
+In-Reply-To: <10e61d56dfc41e0b0a334ec248b20877a8ead600.1319884094.git.Martin.Jansa@gmail.com>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1319884094.git.Martin.Jansa@gmail.com>
-References: <cover.1319884094.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][meta-oe 11/12] systemd-serialgetty: use better default SERIAL_CONSOLE
+	<10e61d56dfc41e0b0a334ec248b20877a8ead600.1319884094.git.Martin.Jansa@gmail.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [meta-efl][meta-oe 08/12] elsa: add new login manager for Enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +32,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 10:37:02 -0000
+X-List-Received-Date: Sat, 29 Oct 2011 12:02:13 -0000
+X-Groupsio-MsgNum: 35062
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Vhx1XBlTugJ7B4n9yNlx"
 
-* having /dev/ttySO fails with:
-  | ln: failed to create symbolic link
-  `/OE/shr-core/tmp/work/nokia900-oe-linux-gnueabi/systemd-serialgetty-1.0-r0/image/etc/systemd/system/getty.target.wants/serial-getty@/dev/ttyS0.service':
-  No such file or directory
+--=-Vhx1XBlTugJ7B4n9yNlx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-core/systemd/systemd-serialgetty.bb    |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty.bb b/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-index 86d833e..9294869 100644
---- a/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-+++ b/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Systemd serial config"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- 
--SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
-+SERIAL_CONSOLE ?= "115200 ttyS0"
- 
- SRC_URI = "file://LICENSE \
-            file://serial-getty@.service"
--- 
-1.7.7.1
+Dear Martin,
 
 
+could you add the version in the commit summary?
 
+
+Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-efl/recipes-efl/efl/elsa_svn.bb |   16 ++++++++++++++++
+>  1 files changed, 16 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-efl/recipes-efl/efl/elsa_svn.bb
+>=20
+> diff --git a/meta-efl/recipes-efl/efl/elsa_svn.bb b/meta-efl/recipes-efl/=
+efl/elsa_svn.bb
+> new file mode 100644
+> index 0000000..59127d3
+> --- /dev/null
+> +++ b/meta-efl/recipes-efl/efl/elsa_svn.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "Login manager for Enlightenment"
+> +DEPENDS =3D "efreet eina eet ecore elementary"
+> +LICENSE =3D "GPLv3+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> +SECTION =3D "e/apps"
+> +
+> +inherit e gettext
+> +SRC_URI =3D "${E_SVN}/trunk/PROTO;module=3D${SRCNAME};proto=3Dhttp;scmda=
+ta=3Dkeep"
+> +S =3D "${WORKDIR}/${SRCNAME}"
+> +
+> +EXTRA_OECONF =3D "--with-edje-cc=3D${STAGING_BINDIR_NATIVE}/edje_cc"
+> +
+> +PV =3D "0.0.4+svnr${SRCPV}"
+> +SRCREV =3D "${EFL_SRCREV}"
+> +
+> +#RDEPENDS_${PN} =3D "${PN}-themes"
+
+Is there a reason the last line is commented out(?)?
+
+
+Thanks,
+
+Paul
+
+
+--=-Vhx1XBlTugJ7B4n9yNlx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk6r6dsACgkQPX1aK2wOHVgY4gCfbJ6z5y3O+AKkeh7x3RBaS6C9
+eAgAniGb1Tz8XKtTB8IG/zHOx3c3YVQZ
+=/6Jy
+-----END PGP SIGNATURE-----
+
+--=-Vhx1XBlTugJ7B4n9yNlx--
