@@ -1,35 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RK8Ee-0002QM-V3
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 14:42:04 +0200
-Received: by faas16 with SMTP id s16so4859003faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Oct 2011 05:36:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=6CrusOOt4nYL2n2pVCq0WB4CtalnthhqamCX91bazGs=;
-	b=RmDh64UJVDyOsw7ZUX1tjeY4cP733eanJaBemmEHD2ETeTR+kKTDxicIa/PuV5/fBa
-	83fIaseZRnDXg6j/x+YCnmUPZUwoi1q2DhCvtssMuLzaHXOGqLjBf4L+UAqZEc0vr06c
-	Jw62zOAPULvf2fj132rmftXa2AnxqagrZRrds=
-Received: by 10.223.15.13 with SMTP id i13mr13523983faa.36.1319891762545;
-	Sat, 29 Oct 2011 05:36:02 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id p14sm24004148faf.20.2011.10.29.05.36.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 29 Oct 2011 05:36:01 -0700 (PDT)
-Date: Sat, 29 Oct 2011 14:35:56 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RK8GQ-0002Yb-AU for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 14:43:54 +0200
+Received: from g225082113.adsl.alicedsl.de ([92.225.82.113]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RK8Ao-00021d-6p for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 12:38:06 +0000
+Message-ID: <1319891872.3756.20.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111029123556.GF12609@jama.jama.net>
+Date: Sat, 29 Oct 2011 14:37:52 +0200
+In-Reply-To: <ff2c3e6a8645c6120d4770be1592e7644ab72ad2.1319884094.git.Martin.Jansa@gmail.com>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
-	<1319889545.3756.10.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1319889545.3756.10.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][meta-oe 09/12] task-x11-server: import from Angstrom
+	<ff2c3e6a8645c6120d4770be1592e7644ab72ad2.1319884094.git.Martin.Jansa@gmail.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [meta-efl][meta-oe 06/12] liblinebreak: import from openembedded classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,96 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 12:42:05 -0000
-X-Groupsio-MsgNum: 35067
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9ToWwKEyhugL+MAz"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 29 Oct 2011 12:43:54 -0000
+X-Groupsio-MsgNum: 35068
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-4ugY+VPZsSQpX7IMCrRS"
 
---9ToWwKEyhugL+MAz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-4ugY+VPZsSQpX7IMCrRS
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 29, 2011 at 01:59:05PM +0200, Paul Menzel wrote:
-> Dear Martin,
->=20
->=20
-> Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
-> > * from meta-angstrom revision 8aa9581a920abae8878df2f3faf9857474edd1f8
->=20
-> I am not knowledgeable about the new infrastructure, so I cannot comment
-> on the import.
->=20
-> > * added RPROVIDES to be able to drop server part from task-x11
-> > * updated DESCRIPTION to match
-> > * renamed to task-x11-server for upgradeable path
-> >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-core/tasks/task-x11-server_1.0.bb |   24 +++++++++++++=
-++++++++
-> >  1 files changed, 24 insertions(+), 0 deletions(-)
-> >  create mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
-> >=20
-> > diff --git a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb b/meta-o=
-e/recipes-core/tasks/task-x11-server_1.0.bb
-> > new file mode 100644
-> > index 0000000..86de1ec
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
-> > @@ -0,0 +1,24 @@
-> > +DESCRIPTION =3D "Task for a image with Xserver"
->=20
-> s/a image/an image/
->=20
-> > +LICENSE =3D "MIT"
-> > +LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=3D3f40d7994397109=
-285ec7b81fdeb3b58"
-> > +PR =3D "r9"
-> > +
-> > +inherit task
-> > +
-> > +# for backwards compatibility
-> > +RPROVIDES_${PN} =3D "task-x11-server"
-> > +
-> > +XSERVER ?=3D "xserver-xorg \
-> > +           xf86-input-evdev \
-> > +           xf86-input-mouse \
-> > +           xf86-video-fbdev \
-> > +           xf86-input-keyboard \
-> > +"
-> > +
-> > +
-> > +RDEPENDS_${PN} =3D " \
-> > +  ${XSERVER} \
-> > +"
-> > +
-> > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> > +
->=20
-> No newline needed at the end?
->=20
->=20
-> Thanks,
->=20
-> Paul
+Dear Denis, dear Martin,
 
-Thanks for review, updated in branch
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
---9ToWwKEyhugL+MAz
+as replied to the other message please add the version and the commit
+ID.
+
+> The License was verified and LIC_FILES_CHKSUM was added
+>=20
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../liblinebreak/liblinebreak_1.2.bb               |   13 +++++++++++++
+>  1 files changed, 13 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/liblinebreak/liblinebreak_1.2=
+.bb
+>=20
+> diff --git a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb b/m=
+eta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+> new file mode 100644
+> index 0000000..03c4352
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "Liblinebreak is an implementation of the line breaking =
+algorithm as described in Unicode 5.1.0 Standard Annex 14, Revision 22"
+> +HOMEPAGE =3D "http://vimgadgets.sourceforge.net/liblinebreak/"
+> +SECTION =3D "libs"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "zlib"
+> +LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D3715191da62bafb5cfc4ff36195b2=
+ec3"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}=
+/liblinebreak-${PV}.tar.gz"
+> +
+> +inherit autotools
+> +
+> +SRC_URI[md5sum] =3D "d18039259001ccb24b5dd4648c49c5ad"
+> +SRC_URI[sha256sum] =3D "9efcb0cb1afc75ad1e92d2b2dbf4d9c77b072d6656c5f1a1=
+50af8b718d0c7b76"
+
+Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+
+Thanks,
+
+Paul
+
+--=-4ugY+VPZsSQpX7IMCrRS
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk6r8ywACgkQN1Ujt2V2gBxDbQCgu8bRX57VzqRCuVfoj6tO8rfI
-e0sAnRf+Kd5rOLbIHgxnUb0TNRozlMxa
-=47Lk
+iEYEABECAAYFAk6r86AACgkQPX1aK2wOHVgEeACdHRokRiMEhl4KR1mrLw0ybj71
+bD4Ani+QeQFqRipUYIgCCA/jQ0ciZ1yy
+=z+BM
 -----END PGP SIGNATURE-----
 
---9ToWwKEyhugL+MAz--
+--=-4ugY+VPZsSQpX7IMCrRS--
