@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RK8C8-0002AQ-Ei for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 14:39:28 +0200
-Received: from g225082113.adsl.alicedsl.de ([92.225.82.113]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RK86W-000219-Kk for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 12:33:40 +0000
-Message-ID: <1319891607.3756.18.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1RK8CA-0002AO-2Q
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Oct 2011 14:39:30 +0200
+Received: by faas16 with SMTP id s16so4857758faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Oct 2011 05:33:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=8Mx3Wo3vfx/L1VW25s5h3CSwJw9KOxR90uMLxnYHbTg=;
+	b=D31pm0EFJXkrCYUT6x7IMMEmXOLpaAKq5NJtrkeBsj2SRmzMUoENO1FnZCbmqyWAYA
+	57KsQ+Jj7ypctFbPcJd2NZAajBWUHZGZlgL0tpiEBslM6rqbONoFJmFGQa9bULXtMJ3F
+	ULWhmibKPsYnEy69AcuOMJLix79oWy1Gmajjg=
+Received: by 10.223.75.15 with SMTP id w15mr13759113faj.9.1319891604792;
+	Sat, 29 Oct 2011 05:33:24 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id d22sm8155935fad.19.2011.10.29.05.33.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 29 Oct 2011 05:33:23 -0700 (PDT)
+Date: Sat, 29 Oct 2011 14:33:18 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Oct 2011 14:33:27 +0200
-In-Reply-To: <3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
+Message-ID: <20111029123318.GE12609@jama.jama.net>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
+	<80e083564f1c33169626c79f52b15fe54f64c01d.1319884094.git.Martin.Jansa@gmail.com>
+	<1319889763.3756.12.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1319889763.3756.12.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-efl][meta-oe 12/12] elfe: add another patch to fix API changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,100 +43,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 12:39:28 -0000
-X-Groupsio-MsgNum: 35065
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-CBhjnUFsO4cXzAnTgBps"
+X-List-Received-Date: Sat, 29 Oct 2011 12:39:30 -0000
+X-Groupsio-MsgNum: 35066
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="OGLMwEELQbPC02lM"
+Content-Disposition: inline
 
---=-CBhjnUFsO4cXzAnTgBps
-Content-Type: text/plain; charset="UTF-8"
+--OGLMwEELQbPC02lM
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear Martin, dear Denis,
-
-
-Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
-> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+On Sat, Oct 29, 2011 at 02:02:43PM +0200, Paul Menzel wrote:
+> Dear Martin,
 >=20
-> Added LIC_FILES_CHKSUM, and fixed LICENSE
 >=20
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-NACK.
-
-please add the version you import and the commit ID you import from.
-This is all written in the guide lines [1]!
-
-> ---
->  meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb |   18 +++++++++++++++=
-+++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+> Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  ...update-again-to-even-newer-elementary-API.patch |  105 ++++++++++++=
+++++++++
+> >  meta-efl/recipes-efl/e17/elfe_svn.bb               |    2 +
+> >  2 files changed, 107 insertions(+), 0 deletions(-)
+> >  create mode 100644 meta-efl/recipes-efl/e17/elfe/0001-elfe-update-agai=
+n-to-even-newer-elementary-API.patch
+> >=20
+> > diff --git a/meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-to-ev=
+en-newer-elementary-API.patch b/meta-efl/recipes-efl/e17/elfe/0001-elfe-upd=
+ate-again-to-even-newer-elementary-API.patch
+> > new file mode 100644
+> > index 0000000..ad1c259
+> > --- /dev/null
+> > +++ b/meta-efl/recipes-efl/e17/elfe/0001-elfe-update-again-to-even-newe=
+r-elementary-API.patch
 >=20
-> diff --git a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb b/meta-oe/=
-recipes-multimedia/id3lib/id3lib_3.8.3.bb
-> new file mode 100644
-> index 0000000..9be4ffb
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "Library for interacting with ID3 tags."
-> +SECTION =3D "libs/multimedia"
-> +PRIORITY =3D "optional"
-> +DEPENDS =3D "zlib"
-> +LICENSE =3D "GPLv2+"
+> [=E2=80=A6]
+>=20
+> > diff --git a/meta-efl/recipes-efl/e17/elfe_svn.bb b/meta-efl/recipes-ef=
+l/e17/elfe_svn.bb
+> > index 151ef7e..5b703dc 100644
+> > --- a/meta-efl/recipes-efl/e17/elfe_svn.bb
+> > +++ b/meta-efl/recipes-efl/e17/elfe_svn.bb
+> > @@ -5,4 +5,6 @@ PR =3D "${INC_PR}.1"
+> > =20
+> >  require e-module.inc
+> > =20
+> > +SRC_URI +=3D "file://0001-elfe-update-again-to-even-newer-elementary-A=
+PI.patch"
+> > +
+> >  DEPENDS +=3D "elementary"
+>=20
+> is `PR =3D "${INC_PR}.2"` needed? Or does the package content not change?
 
-That is not correct [2], it is `LGPLv2+`. Additionally the header
-ordering is not the standard. I thought migration to meta-oe was
-supposed to be a chance to clean up the recipes.
-
-> +LIC_FILES_CHKSUM =3D "files://COPYING;md5=3D3bf50002aefd002f49e7bb854063=
-f7e7"
-> +PR =3D "r0"
-
-According to Koen these are going away. Unfortunately these things are
-discussed on oe-core instead of openembedded-devel as described in the
-Wiki [3].
-
-> +inherit autotools
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/id3lib/id3lib-${PV}.tar.gz;name=3Darc=
-hive \
-> +           http://ftp.de.debian.org/debian/pool/main/i/id3lib3.8.3/id3li=
-b3.8.3_3.8.3-7.2.diff.gz;name=3Dpatch \
-> +          "
-> +
-> +SRC_URI[archive.md5sum] =3D "19f27ddd2dda4b2d26a559a4f0f402a7"
-> +SRC_URI[archive.sha256sum] =3D "2749cc3c0cd7280b299518b1ddf5a5bcfe2d1100=
-614519b68702230e26c7d079"
-> +SRC_URI[patch.md5sum] =3D "805c0320a2efb21c40ce06fa13cd7c4b"
-> +SRC_URI[patch.sha256sum] =3D "9f03b59ccc8826a5be55a3dcde2f889067d58bdc72=
-bf846416a198c9b933704c"
+EFL_SRCREV is changed in same request.. so no it's not needed
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
 
 
-Thanks,
 
-Paul
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-[1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-[2] http://git.openembedded.org/openembedded/log/recipes/id3lib/id3lib_3.8.=
-3.bb
-[3] http://www.openembedded.org/wiki/Mailing_lists
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---=-CBhjnUFsO4cXzAnTgBps
+--OGLMwEELQbPC02lM
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEABECAAYFAk6r8pcACgkQPX1aK2wOHVhLSQCeLQwOfINBtez/J5yKYPCcIUMB
-XKUAn3Kz49Fe5edNDMs4Gl82W6/E9u+L
-=Jhmw
+iEYEARECAAYFAk6r8o4ACgkQN1Ujt2V2gBwCkQCgu4Mwt2jBBtnhLMdqn2OBaYin
+Tf0An1IHeMqlbaR5Q97okL1dFWDOsCih
+=tJl4
 -----END PGP SIGNATURE-----
 
---=-CBhjnUFsO4cXzAnTgBps--
+--OGLMwEELQbPC02lM--
