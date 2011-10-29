@@ -1,27 +1,29 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RKCZv-0001rb-49
+	(envelope-from <andrea.adami@gmail.com>) id 1RKGXP-0000Ad-GD
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Oct 2011 19:20:20 +0200
-Received: by qyg14 with SMTP id 14so5975991qyg.6
+	Sat, 29 Oct 2011 23:33:59 +0200
+Received: by ggnj1 with SMTP id j1so4610929ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Oct 2011 10:14:11 -0700 (PDT)
+	Sat, 29 Oct 2011 14:27:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=YL3Gkat25lEj6Mq97+DnANooxCbhivaH7jMSS3QGZ20=;
-	b=Ya34Ld/0I6UspwSpT2qnIJzZmybzdf7b7GtcFgX8JGd3GVpNNoJBfhuFyRe0uAsw0u
-	GALGDvaGeSI0F1kdEFcpJQUSvZvqrYB1c3gvwn1t2Zv03XLoeDeOOCXSFQL+SSNWu47O
-	sJet8+tngT5J5OEFZttKaZf0MZ9NKmp7LTI+k=
+	:content-type; bh=yPEJkqfqpizjbOKDj3NlOMAdpJp6BvVQNG4eKpVB3sU=;
+	b=Q9/shUgZjqvScV0ZxT71i2WLyTcu4EanN2QYd1B2zk1TRhYysofY7tH56IkUFbXlGV
+	BehEG4sd+98iuYgkw2Zwj6aLD/Uz7vEUTnsyznkIuUus+vvAtt+nmFEr2Li4O1TOz6cM
+	SJ3lruM7kJMtrqjxNIBplaEGjvap8L2WK28QU=
 MIME-Version: 1.0
-Received: by 10.229.64.134 with SMTP id e6mr1283916qci.150.1319908451129; Sat,
-	29 Oct 2011 10:14:11 -0700 (PDT)
-Received: by 10.229.94.72 with HTTP; Sat, 29 Oct 2011 10:14:11 -0700 (PDT)
-In-Reply-To: <4EAC296D.8040403@telia.com>
+Received: by 10.236.108.225 with SMTP id q61mr10178723yhg.66.1319923674841;
+	Sat, 29 Oct 2011 14:27:54 -0700 (PDT)
+Received: by 10.147.182.9 with HTTP; Sat, 29 Oct 2011 14:27:54 -0700 (PDT)
+In-Reply-To: <CA+M6bXnq6jfhyZ+6nRB3GDqoRv3oa=m-xcht8xrAYV_7aeVzkA@mail.gmail.com>
 References: <4EAC296D.8040403@telia.com>
-Date: Sat, 29 Oct 2011 10:14:11 -0700
-Message-ID: <CA+M6bXnq6jfhyZ+6nRB3GDqoRv3oa=m-xcht8xrAYV_7aeVzkA@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+	<CA+M6bXnq6jfhyZ+6nRB3GDqoRv3oa=m-xcht8xrAYV_7aeVzkA@mail.gmail.com>
+Date: Sat, 29 Oct 2011 23:27:54 +0200
+Message-ID: <CAAQYJAucXepsfHvxSkJyvsEnv4Eid6yu3NxPgMfk5QrNb4t=mw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Adding sumtool to a JFFS2 build to speed up first boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,30 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Oct 2011 17:20:20 -0000
+X-List-Received-Date: Sat, 29 Oct 2011 21:33:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Oct 29, 2011 at 9:27 AM, Ulf Samuelsson
-<ulf_samuelsson@telia.com> wrote:
-> Trying to solve another problem I came up with
-> changing IMAGE_CMD_jffs2 defined in conf/bitbake.conf
-> by redefining it in conf/local.conf.
+On Sat, Oct 29, 2011 at 7:14 PM, Tom Rini <tom.rini@gmail.com> wrote:
+
+> On Sat, Oct 29, 2011 at 9:27 AM, Ulf Samuelsson
+> <ulf_samuelsson@telia.com> wrote:
+> > Trying to solve another problem I came up with
+> > changing IMAGE_CMD_jffs2 defined in conf/bitbake.conf
+> > by redefining it in conf/local.conf.
+> >
+> > During that process I noticed the "sumtool" utility
+> > which works on the jffs2 image, doing some
+> > bookkeeping which then does not have to be
+> > done on the target.
+> >
+> > I unserstand, this can speed up loading significantly.
+> > Any reason not using this in OE?
 >
-> During that process I noticed the "sumtool" utility
-> which works on the jffs2 image, doing some
-> bookkeeping which then does not have to be
-> done on the target.
+> Last time I looked at this, the reason was that you had to re-jigger
+> the IMAGE_CMD a bit and you also have to take care as not all of the
+> options are the same between mkfs.jffs2 and sumtool.  At least the
+> first part might be easier with oe-core and the reworked image class.
+> The latter part is just annoying.
 >
-> I unserstand, this can speed up loading significantly.
-> Any reason not using this in OE?
+> --
+> Tom
+>
+> FWIW we are defining our jffs2-summary in
+http://cgit.openembedded.org/meta-handheld/tree/conf/machine/include/zaurus.inc
 
-Last time I looked at this, the reason was that you had to re-jigger
-the IMAGE_CMD a bit and you also have to take care as not all of the
-options are the same between mkfs.jffs2 and sumtool.  At least the
-first part might be easier with oe-core and the reworked image class.
-The latter part is just annoying.
+This works beautifully in oe-dev but not using oe-core for it sets
+IMAGE_CMD_jffs2 = and this can  not be overriden
+We would just need a weak assignment in image_types.bbclass or maybe a new
+image type like IMAGE_CMD_jffs2-summary and related commands.
 
--- 
-Tom
+Regards
 
+Andrea
 
