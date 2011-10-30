@@ -1,29 +1,31 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RKZhy-0003fQ-Ao
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RKapU-0005OK-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Oct 2011 19:02:10 +0100
-Received: by qyk35 with SMTP id 35so3644122qyk.6
+	Sun, 30 Oct 2011 20:14:00 +0100
+Received: from iph4.telenor.se (iph4.telenor.se [195.54.127.135])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 629F414480
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2011 10:56:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=d4vAgJYUlYzGBk2QJ+8pBw7bkFQKWmJbYNbM2oCo2j0=;
-	b=nkTLabWTdf7P/ffQvfCYixYSIrY19dj/ZOaQ0TYeiRC69T/nHr6F009MaIgQnb5Rtd
-	Wh1IJT5lqbOvKuf+naw/qdzrCQvk/ww40IQF0TaB52/ysLXukQBh8QULhWQxYp72iTZJ
-	jqRxQdC6FCDPyZmBNTnUHlhpI33eCcp/Qv1qY=
+	Sun, 30 Oct 2011 20:07:56 +0100 (CET)
+X-SENDER-IP: [83.227.59.253]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AnsuAP2frU5T4zv9PGdsb2JhbAAMN4k+kHGPKQEBAQE3giQBAQEBAzhAEQshDQEIDwkDAgECATEUEwgBAblyg0GCLQGDEwSUDpFg
+X-IronPort-AV: E=Sophos;i="4.69,427,1315173600"; d="scan'208";a="1997461701"
+Received: from c-fd3be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.249]) ([83.227.59.253])
+	by iph4.telenor.se with ESMTP; 30 Oct 2011 20:07:55 +0100
+Message-ID: <4EADA08B.8040302@telia.com>
+Date: Sun, 30 Oct 2011 20:07:55 +0100
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
-Received: by 10.229.64.144 with SMTP id e16mr2468498qci.112.1319997366062;
-	Sun, 30 Oct 2011 10:56:06 -0700 (PDT)
-Received: by 10.229.94.72 with HTTP; Sun, 30 Oct 2011 10:56:06 -0700 (PDT)
-In-Reply-To: <CAFU7RzOnmbu=dxsM7MZ2DXLrOUMYSN4hoVfAL4W=vJ+Y0vH-Kg@mail.gmail.com>
-References: <CAFU7RzOnmbu=dxsM7MZ2DXLrOUMYSN4hoVfAL4W=vJ+Y0vH-Kg@mail.gmail.com>
-Date: Sun, 30 Oct 2011 10:56:06 -0700
-Message-ID: <CA+M6bXk_1OLfQ0p4Ziq+Y-5KWOfwS9JXMsLo62U19VByNyFOYw@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: from narcissus to compilation
+References: <4EAC8007.4080006@telia.com> <4EAC810B.8010302@telia.com>
+	<4EAC86BD.9040903@telia.com>
+In-Reply-To: <4EAC86BD.9040903@telia.com>
+Subject: Re: console-image: No login prompt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,23 +39,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Oct 2011 18:02:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 30 Oct 2011 19:14:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Oct 30, 2011 at 10:23 AM, Raffaele Recalcati
-<lamiaposta71@gmail.com> wrote:
-> Can anybody tell me, as =A0I got a succesfull compilation on narcissus
-> for dm3730-am3715-evm, which is
-> the right branch to reproduce the same compilation in order to port
-> the kernel to my board?
+2011-10-30 01:05, Ulf Samuelsson skrev:
+> 2011-10-30 00:41, Ulf Samuelsson skrev:
+>> 2011-10-30 00:36, Ulf Samuelsson skrev:
+>>> Have build console-image and I am running it on an AT91SAM9G20EK.
+>>> The boot process freezes, and I have managed to verify that this
+>>> happens after the init process has executed "finished.sh".
+>>> (Put some print statements in this, and I see them)
+>>>
+>>> Then nothing...
+>>> Normally I would get a login prompt
+>>
+>> Is this somehow redirected to the non-existant screen?
+>
+> A little futher.
+> If I enable SULOGIN and from SULOGIN do:
+>
+> $ init 2
+>
+> I get the login prompt,
+> but SULOGIN uses the same serial line, so things get mixed up.
+>
+> It definitely looks like the system never leaves level 1 - why?
+Tried with a different kernel.
+2.6.30 has problems.
+2.6.39 I get the login prompt.
 
-Well, if you didn't select 'advanced' under build options, it's
-probably from the 2011.03-maintenance branch.  The rest of it depends
-on what image you selected and options and so forth.  And since this
-is an angstrom image, it's best to ask on their MLs.
+Any clue why?
 
---=20
-Tom
+
+>>
+>>>
+>>> Have been searching for people with similar problems,
+>>> and I found one that claimed that /etc/rcS.d/S03udev
+>>> needs to run after /etc/rcS.d/S10checkout.
+>>>
+>>> I tried this but this does not make any difference.
+>>> Is there some configuration item that enables/disables the console
+>>> after init.
+>>>
+>>> finish.sh is linked from rcS.d/S99/finish.sh
+>>>
+>>> Is the problem, that the kernel stays in level 1 for some reason?
+>>> Default run level is 5 (id:5:initdefault:) which I assume
+>>>
+>>> Does that make sense for a console-image?
+>>>
+>>> Should not level 3 be more appropriate if
+>>> you do not have any graphics?
+>>>
+>>> Any reason why console I/O is redirected?
+>>>
+>>> ------------------------------------------------------------------------------------ 
+>>>
+>>> # /etc/inittab: init(8) configuration.
+>>> # $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
+>>>
+>>> # The default runlevel.
+>>> id:5:initdefault:
+>>>
+>>> # Boot-time system configuration/initialization script.
+>>> # This is run first except when booting in emergency (-b) mode.
+>>> si::sysinit:/etc/init.d/rcS
+>>>
+>>> # What to do in single-user mode.
+>>> ~~:S:wait:/sbin/sulogin
+>>>
+>>> # /etc/init.d executes the S and K scripts upon change
+>>> # of runlevel.
+>>> #
+>>> # Runlevel 0 is halt.
+>>> # Runlevel 1 is single-user.
+>>> # Runlevels 2-5 are multi-user.
+>>> # Runlevel 6 is reboot.
+>>>
+>>> l0:0:wait:/etc/init.d/rc 0
+>>> l1:1:wait:/etc/init.d/rc 1
+>>> l2:2:wait:/etc/init.d/rc 2
+>>> l3:3:wait:/etc/init.d/rc 3
+>>> l4:4:wait:/etc/init.d/rc 4
+>>> l5:5:wait:/etc/init.d/rc 5
+>>> l6:6:wait:/etc/init.d/rc 6
+>>> # Normally not reached, but fallthrough in case of emergency.
+>>> z6:6:respawn:/sbin/sulogin
+>>> S:2345:respawn:/sbin/getty 115200 ttyS0
+>>>
+>>>
+>>>
+>>>
+>>>
+>>
+>>
+>
+>
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
