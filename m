@@ -1,25 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RKTsb-0001H7-Nc
+	(envelope-from <schnitzeltony@gmx.de>) id 1RKTsb-0001Gr-OG
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 30 Oct 2011 12:48:45 +0100
-Received: (qmail invoked by alias); 30 Oct 2011 11:42:42 -0000
+Received: (qmail invoked by alias); 30 Oct 2011 11:42:40 -0000
 Received: from p4FDF1C25.dip.t-dialin.net (EHLO localhost.localdomain)
 	[79.223.28.37]
-	by mail.gmx.net (mp068) with SMTP; 30 Oct 2011 12:42:42 +0100
+	by mail.gmx.net (mp068) with SMTP; 30 Oct 2011 12:42:40 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18racF4OZsr7Zox5/lvGLH9xkK6Z1ewg/we8TjB6S
-	eh3st3AV9dmQct
+X-Provags-ID: V01U2FsdGVkX18wVPw/zyEw7GOLWKV7EeAauNuUW/xvtLgur4sj8Y
+	QszW3GuOT2mKX8
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Oct 2011 12:47:21 +0100
-Message-Id: <1319975241-10849-4-git-send-email-schnitzeltony@gmx.de>
+Date: Sun, 30 Oct 2011 12:47:19 +0100
+Message-Id: <1319975241-10849-2-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1319975241-10849-1-git-send-email-schnitzeltony@gmx.de>
 References: <1319975241-10849-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce][V2 3/3] xfce4-eyes-plugin: initial add 4.4.1
+Subject: [meta-xfce][V2 1/3] xfce-app.bbclass: just set SRC_URI commmon to most xfce-apps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,112 +37,61 @@ X-List-Received-Date: Sun, 30 Oct 2011 11:48:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* port-to-libxfce4ui.patch was send to xfce-buglist [1]
+* build tested with source download for xfce4-notifyd and xfce4-screenshooter
 * run tested on overo
-
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=8074
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../eyes/files/port-to-libxfce4ui.patch            |   68 ++++++++++++++++++++
- .../eyes/xfce4-eyes-plugin_4.4.1.bb                |   13 ++++
- 2 files changed, 81 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-panel-plugins/eyes/files/port-to-libxfce4ui.patch
- create mode 100644 meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.1.bb
+ meta-xfce/classes/xfce-app.bbclass                 |    4 ++++
+ .../xfce4-notifyd/xfce4-notifyd_0.2.2.bb           |    5 +----
+ .../xfce4-screenshooter_1.8.0.bb                   |    7 +------
+ 3 files changed, 6 insertions(+), 10 deletions(-)
+ create mode 100644 meta-xfce/classes/xfce-app.bbclass
 
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/files/port-to-libxfce4ui.patch b/meta-xfce/recipes-panel-plugins/eyes/files/port-to-libxfce4ui.patch
+diff --git a/meta-xfce/classes/xfce-app.bbclass b/meta-xfce/classes/xfce-app.bbclass
 new file mode 100644
-index 0000000..2fa96f7
+index 0000000..c60ad3d
 --- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/eyes/files/port-to-libxfce4ui.patch
-@@ -0,0 +1,68 @@
-+From aef48031ed443be04bfd16ae755766ff75d624b6 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
-+Date: Wed, 26 Oct 2011 00:40:09 +0200
-+Subject: [PATCH] port to libxfce4ui
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-xfce/classes/xfce-app.bbclass
+@@ -0,0 +1,4 @@
++inherit xfce
 +
++SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
 +
-+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-+---
-+ configure.ac             |    6 +++---
-+ panel-plugin/Makefile.am |    4 ++--
-+ panel-plugin/eyes.c      |    2 +-
-+ 3 files changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 5ff1397..67e2288 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -56,9 +56,9 @@ dnl *** Check for required packages ***
-+ dnl ***********************************
-+ XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.0])
-+ XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
-+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.2])
-+-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.2])
-+-XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.99.1])
-++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.8.0])
-++XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.8.0])
-++XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.8.0])
-+ 
-+ dnl ***********************************
-+ dnl *** Check for debugging support ***
-+diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
-+index 1ee4d28..249303c 100644
-+--- a/panel-plugin/Makefile.am
-++++ b/panel-plugin/Makefile.am
-+@@ -13,12 +13,12 @@ xfce4_eyes_plugin_SOURCES =						\
-+ 	themes.c
-+ 
-+ xfce4_eyes_plugin_CFLAGS =						\
-+-	$(LIBXFCEGUI4_CFLAGS)						\
-++	$(LIBXFCE4UI_CFLAGS)						\
-+ 	$(LIBXFCE4PANEL_CFLAGS)
-+ 	
-+ xfce4_eyes_plugin_LDADD =						\
-+ 	$(LIBXFCE4PANEL_LIBS)						\
-+-	$(LIBXFCEGUI4_LIBS)
-++	$(LIBXFCE4UI_LIBS)
-+ 
-+ desktopdir = $(datadir)/xfce4/panel-plugins
-+ desktop_in_in_files = eyes.desktop.in.in
-+diff --git a/panel-plugin/eyes.c b/panel-plugin/eyes.c
-+index 6c71938..f3cd195 100644
-+--- a/panel-plugin/eyes.c
-++++ b/panel-plugin/eyes.c
-+@@ -33,7 +33,7 @@
-+ #include <stdlib.h>
-+ 
-+ #include <libxfce4util/libxfce4util.h>
-+-#include <libxfcegui4/libxfcegui4.h>
-++#include <libxfce4ui/libxfce4ui.h>
-+ 
-+ #include "eyes.h"
-+ #include "themes.h"
-+-- 
-+1.7.4.4
-+
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.1.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.1.bb
-new file mode 100644
-index 0000000..6ca49c7
---- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.1.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Panel plugin with graphical representation of the cpu frequency"
-+HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-eyes-plugin"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+inherit xfce-panel-plugin
-+
-+# SRC_URI must follow inherited one
-+SRC_URI += "file://port-to-libxfce4ui.patch"
-+SRC_URI[md5sum] = "dcbf6ea9035d379d168b479be0d09f14"
-+SRC_URI[sha256sum] = "eaae5d230b5c2fe6a8b448b59cfe959bf126796911c166a7343a51dc440fbbb2"
-+
-+FILES_${PN} += "${datadir}/xfce4/eyes"
+diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
+index 4fea1de..0ee6da3 100644
+--- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb
+@@ -6,10 +6,7 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib"
+ 
+ PR = "r0"
+ 
+-inherit xfce
+-
+-# SRC_URI must follow inherited one
+-SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
++inherit xfce-app
+ 
+ FILES_${PN} += " \
+     ${libdir}/xfce4/notifyd \
+diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.0.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.0.bb
+index ef409c1..2362b8a 100644
+--- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.0.bb
++++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.0.bb
+@@ -7,12 +7,7 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
+ 
+ PR = "r0"
+ 
+-inherit xfce
+-
+-# SRC_URI must follow inherited one
+-# decoded to e.g. http://archive.xfce.org/src/apps/xfce4-screenshooter/1.8/xfce4-screenshooter-1.8.0.tar.bz2
+-SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2 \
+-"
++inherit xfce-app
+ 
+ FILES_${PN} += "${datadir}/xfce4/panel-plugins/*"
+ FILES_${PN}-dbg += "${libexecdir}/xfce4/panel-plugins/.debug"
 -- 
 1.7.4.4
 
