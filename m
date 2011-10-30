@@ -1,31 +1,23 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf_samuelsson@telia.com>) id 1RKapU-0005OK-6Z
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RKb9v-0005zh-QP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Oct 2011 20:14:00 +0100
-Received: from iph4.telenor.se (iph4.telenor.se [195.54.127.135])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 629F414480
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2011 20:07:56 +0100 (CET)
-X-SENDER-IP: [83.227.59.253]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AnsuAP2frU5T4zv9PGdsb2JhbAAMN4k+kHGPKQEBAQE3giQBAQEBAzhAEQshDQEIDwkDAgECATEUEwgBAblyg0GCLQGDEwSUDpFg
-X-IronPort-AV: E=Sophos;i="4.69,427,1315173600"; d="scan'208";a="1997461701"
-Received: from c-fd3be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.249]) ([83.227.59.253])
-	by iph4.telenor.se with ESMTP; 30 Oct 2011 20:07:55 +0100
-Message-ID: <4EADA08B.8040302@telia.com>
-Date: Sun, 30 Oct 2011 20:07:55 +0100
-From: Ulf Samuelsson <ulf_samuelsson@telia.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Sun, 30 Oct 2011 20:35:07 +0100
+Received: (qmail invoked by alias); 30 Oct 2011 19:29:03 -0000
+Received: from p4FDF1C25.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.28.37]
+	by mail.gmx.net (mp011) with SMTP; 30 Oct 2011 20:29:03 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19WBGx5qm5WHI8hbp8m1E6p/1z6XGOwMWio5Bfihj
+	Xc/R2zGLPUAOPg
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4EAC8007.4080006@telia.com> <4EAC810B.8010302@telia.com>
-	<4EAC86BD.9040903@telia.com>
-In-Reply-To: <4EAC86BD.9040903@telia.com>
-Subject: Re: console-image: No login prompt
+Date: Sun, 30 Oct 2011 20:33:44 +0100
+Message-Id: <1320003224-12913-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-gnome] evince: initial add 2.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,108 +31,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Oct 2011 19:14:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 30 Oct 2011 19:35:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2011-10-30 01:05, Ulf Samuelsson skrev:
-> 2011-10-30 00:41, Ulf Samuelsson skrev:
->> 2011-10-30 00:36, Ulf Samuelsson skrev:
->>> Have build console-image and I am running it on an AT91SAM9G20EK.
->>> The boot process freezes, and I have managed to verify that this
->>> happens after the init process has executed "finished.sh".
->>> (Put some print statements in this, and I see them)
->>>
->>> Then nothing...
->>> Normally I would get a login prompt
->>
->> Is this somehow redirected to the non-existant screen?
->
-> A little futher.
-> If I enable SULOGIN and from SULOGIN do:
->
-> $ init 2
->
-> I get the login prompt,
-> but SULOGIN uses the same serial line, so things get mixed up.
->
-> It definitely looks like the system never leaves level 1 - why?
-Tried with a different kernel.
-2.6.30 has problems.
-2.6.39 I get the login prompt.
+* recipe based on oe-classic: evince_2.30.0.bb
+  commit 5dba154457691d2096f2b1a7ef24bdc6f1b51859
+* run tested on overo
+* TODO further doctype support
+  configure option  ->    current configure result
+  ------------------------------------------------
+  --enable-ps       ->    PostScript Backend.:  no
+  --enable-djvu     ->    DJVU Backend.......:  no
+  --enable-impress  ->    Impress Backend....:  no
 
-Any clue why?
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-gnome/recipes-gnome/evince/evince_2.32.0.bb |   39 ++++++++++++++++++++++
+ 1 files changed, 39 insertions(+), 0 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
 
-
->>
->>>
->>> Have been searching for people with similar problems,
->>> and I found one that claimed that /etc/rcS.d/S03udev
->>> needs to run after /etc/rcS.d/S10checkout.
->>>
->>> I tried this but this does not make any difference.
->>> Is there some configuration item that enables/disables the console
->>> after init.
->>>
->>> finish.sh is linked from rcS.d/S99/finish.sh
->>>
->>> Is the problem, that the kernel stays in level 1 for some reason?
->>> Default run level is 5 (id:5:initdefault:) which I assume
->>>
->>> Does that make sense for a console-image?
->>>
->>> Should not level 3 be more appropriate if
->>> you do not have any graphics?
->>>
->>> Any reason why console I/O is redirected?
->>>
->>> ------------------------------------------------------------------------------------ 
->>>
->>> # /etc/inittab: init(8) configuration.
->>> # $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
->>>
->>> # The default runlevel.
->>> id:5:initdefault:
->>>
->>> # Boot-time system configuration/initialization script.
->>> # This is run first except when booting in emergency (-b) mode.
->>> si::sysinit:/etc/init.d/rcS
->>>
->>> # What to do in single-user mode.
->>> ~~:S:wait:/sbin/sulogin
->>>
->>> # /etc/init.d executes the S and K scripts upon change
->>> # of runlevel.
->>> #
->>> # Runlevel 0 is halt.
->>> # Runlevel 1 is single-user.
->>> # Runlevels 2-5 are multi-user.
->>> # Runlevel 6 is reboot.
->>>
->>> l0:0:wait:/etc/init.d/rc 0
->>> l1:1:wait:/etc/init.d/rc 1
->>> l2:2:wait:/etc/init.d/rc 2
->>> l3:3:wait:/etc/init.d/rc 3
->>> l4:4:wait:/etc/init.d/rc 4
->>> l5:5:wait:/etc/init.d/rc 5
->>> l6:6:wait:/etc/init.d/rc 6
->>> # Normally not reached, but fallthrough in case of emergency.
->>> z6:6:respawn:/sbin/sulogin
->>> S:2345:respawn:/sbin/getty 115200 ttyS0
->>>
->>>
->>>
->>>
->>>
->>
->>
->
->
-
-
+diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+new file mode 100644
+index 0000000..899d416
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+@@ -0,0 +1,39 @@
++DESCRIPTION = "Evince is a document viewer for document formats like pdf, ps, djvu."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
++SECTION = "x11/office"
++DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
++
++inherit gnome pkgconfig gtk-icon-cache
++
++SRC_URI[archive.md5sum] = "ebc3ce6df8dcbf29cb9492f8dd031319"
++SRC_URI[archive.sha256sum] = "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7"
++
++EXTRA_OECONF = " --enable-thumbnailer \
++                 --enable-nautilus \
++                 --disable-scrollkeeper \
++                 --enable-pixbuf \
++               "
++
++do_install_append() {
++	install -d install -d ${D}${datadir}/pixmaps
++	install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
++}
++
++RDEPENDS_${PN} += "glib-2.0-utils"
++
++PACKAGES =+ "${PN}-nautilus-extension"
++FILES_${PN} += "${datadir}/dbus-1"
++FILES_${PN}-dbg += "${libdir}/*/*/.debug \
++                    ${libdir}/*/*/*/.debug"
++FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
++FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
++FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
++
++pkg_postinst_${PN} () {
++if [ -n "$D" ]; then
++    exit 1
++fi
++
++glib-compile-schemas ${datadir}/glib-2.0/schemas
++}
 -- 
-Best Regards
-Ulf Samuelsson
+1.7.4.4
 
 
 
