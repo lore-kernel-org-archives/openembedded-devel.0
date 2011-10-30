@@ -1,38 +1,36 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1RKSqI-0008J8-VA
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Oct 2011 11:42:19 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id CA99811000B5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2011 11:30:26 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BD31211000B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2011 11:30:24 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g229044096.adsl.alicedsl.de
-	[92.229.44.96]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2011 11:30:24 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 17A0F3C490; Sun, 30 Oct 2011 11:30:22 +0100 (CET)
-Date: Sun, 30 Oct 2011 11:30:22 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKTlK-00013Q-Bq for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Oct 2011 12:41:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKTfR-0007lQ-A2 for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Oct 2011 12:35:09 +0100
+Received: from seketeli.net ([91.121.166.71])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Oct 2011 12:35:09 +0100
+Received: from dodji by seketeli.net with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Oct 2011 12:35:09 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111030103021.GA3822@rhein.zuhause.netz>
-References: <CALJpqJw17ftFmyYbdBw8VZoEvdF54-tGGBj4QfHqEWKy5BqgGw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALJpqJw17ftFmyYbdBw8VZoEvdF54-tGGBj4QfHqEWKy5BqgGw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Help?
+From: Dodji Seketeli <dodji@seketeli.org>
+Date: 30 Oct 2011 11:59:53 +0100
+Organization: Me, myself and I
+Sender: dodji@agbo.seketeli.net
+Message-ID: <m3lis2bv86.fsf@agbo.seketeli.net>
+References: <1318324122-16951-1-git-send-email-vitap@ti.com>
+	<1318343515.14384.8.camel@mattotaupa>
+	<AC090B9732AB2B4DB7FF476E907FE660013BAEBD36@dnce02.ent.ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: seketeli.net
+X-Operating-System: CentOS 5.7
+X-URL: http://www.seketeli.net/~dodji
+User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.4
+Subject: Re: [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Oct 2011 10:42:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 30 Oct 2011 11:41:14 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Oct 29, 2011 at 04:50:58PM -0500, David Thomas wrote:
-> I can get bitbake to run as root but I don't let it continue as it is
-> not advised.
-> 
-> As user I get this:
-> 
-> Traceback (most recent call last):
->   File "/home/dthomas/bitbake/bin/bitbake", line 234, in <module>
->     ret = main()
->   File "/home/dthomas/bitbake/bin/bitbake", line 197, in main
->     server = ProcessServer(server_channel, event_queue, configuration)
->   File "/home/dthomas/bitbake/lib/bb/server/process.py", line 78, in __init__
->     self.cooker = BBCooker(configuration, self.register_idle_function)
->   File "/home/dthomas/bitbake/lib/bb/cooker.py", line 77, in __init__
->     self.parseConfigurationFiles(self.configuration.file)
->   File "/home/dthomas/bitbake/lib/bb/cooker.py", line 529, in
-> parseConfigurationFiles
->     bb.event.fire(bb.event.ConfigParsed(), self.configuration.data)
-> IOError: [Errno 1] Operation not permitted
-> 
-> 
-> I have tried everything. I am using Fedora 13 and have followed every
+"Preskovsky, Vita" <vitap@ti.com> a écrit:
 
-Why don't use some more up to date distribution?
-
-> guide to the letter. It seems to be a permissions issue but where, I
-> have almost given up trying. As always, there is no info on the this
-> anywhere that is remotely useful
+> There are two possible locations for this package:
+> http://www.mirrorservice.org/sites/ftp.kernel.org/pub/linux/bluetooth/bluez-4.95.tar.gz
+> http://www.angstrom-distribution.org/unstable/sources/bluez-4.95.tar.gz
+> I changed the SRC_URI in my working directory for the first location
+> and it worked fine. So with what location do you prefer the recipe
+> will be released?
 > 
 
-Use "ls -la" and "find" to find out permissions and ownership. Hence you used
-root user in the first place its likely there has something the wrong permisions.
+Maybe a better way would be to use the `KERNELORG_MIRROR' variable as a
+prefix of the url like in:
 
-If nothing helps start from the beginning, that is most of time easier and faster.
+    SRC = "${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-4.95.tar.gz"
 
-> Any help is appreciated?
-Sure.
+That will give users a chance to define KERNELORG_MIRROR -- in their
+local.conf -- to a value that works for them.  That variable is set to
+http://kernel.org by default in openembedded/bitbake.conf.
 
-Bye Henning
+Also, please configure your email client to prefix the lines of the
+message you are replying to with a sensible character string like ">
+", just like most of us do on mailing list on the internet.  That
+greatly improves legibility.
+
+Thanks.
+
+-- 
+		Dodji
+
 
 
