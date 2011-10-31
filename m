@@ -1,24 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RKul5-0007sF-Pl for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 17:30:47 +0100
-Received: from f053038082.adsl.alicedsl.de ([78.53.38.82]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RKufG-0001l7-9b for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 16:24:46 +0000
-Message-ID: <1320078283.3621.4.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKvBm-0000CW-Ck for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 17:58:24 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKv5s-0002NI-Ai for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 17:52:16 +0100
+Received: from seketeli.net ([91.121.166.71])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2011 17:52:16 +0100
+Received: from dodji by seketeli.net with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2011 17:52:16 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2011 17:24:43 +0100
-In-Reply-To: <j8luhk$7vb$3@dough.gmane.org>
+From: Dodji Seketeli <dodji@seketeli.org>
+Date: 31 Oct 2011 17:36:11 +0100
+Organization: Me, myself and I
+Sender: dodji@agbo.seketeli.net
+Message-ID: <m3d3ddp18k.fsf@agbo.seketeli.net>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
 	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
-	<1319891607.3756.18.camel@mattotaupa> <j8luhk$7vb$3@dough.gmane.org>
-X-Mailer: Evolution 3.0.3-2 
+	<1319891607.3756.18.camel@mattotaupa>
+	<j8luhk$7vb$3@dough.gmane.org> <1320078283.3621.4.camel@mattotaupa>
 Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: seketeli.net
+X-Operating-System: CentOS 5.7
+X-URL: http://www.seketeli.net/~dodji
+User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.4
 Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,59 +45,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 16:30:47 -0000
-X-Groupsio-MsgNum: 35119
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-F5P/U4PISpOuXcWokL/o"
+X-List-Received-Date: Mon, 31 Oct 2011 16:58:24 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---=-F5P/U4PISpOuXcWokL/o
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Paul Menzel <paulepanter@users.sourceforge.net> a écrit:
 
-Am Montag, den 31.10.2011, 11:50 +0100 schrieb Koen Kooi:
-> Op 29-10-11 14:33, Paul Menzel schreef:
-> > Dear Martin, dear Denis,
-> >=20
-> >=20
-> > Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
-> >> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-> >>=20
-> >> Added LIC_FILES_CHKSUM, and fixed LICENSE
-> >>=20
-> >> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>=20
-> >> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >=20
-> > NACK.
-> >=20
-> > please add the version you import and the commit ID you import from. Th=
-is
-> > is all written in the guide lines [1]!
->=20
-> And as I've said before, meta-oe is not oe-dev, so you can't use take the
-> old 'rules' and apply them to meta-oe 1:1!
+> The guide lines I referred to [1] have been written for OE-core. ;-)
 
-The guide lines I referred to [1] have been written for OE-core. ;-)
+Just to be sure, do they apply to OE classic as well?  They are neat.
+
+> [1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+-- 
+		Dodji
 
 
-Thanks,
 
-Paul
-
-
-[1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-
---=-F5P/U4PISpOuXcWokL/o
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk6uy8sACgkQPX1aK2wOHVgP0ACfXwTAsbGf7KBJdPLIJC5qVIPO
-k0MAn20J4/mPeD+nQt7WbiJXd3zAodqY
-=6wJi
------END PGP SIGNATURE-----
-
---=-F5P/U4PISpOuXcWokL/o--
