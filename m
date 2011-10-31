@@ -1,28 +1,25 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RKwsU-0004Qj-0b
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1RKzLB-0007jb-26
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 19:46:34 +0100
-Received: (qmail invoked by alias); 31 Oct 2011 18:40:28 -0000
-Received: from p5B0A152D.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.21.45]
-	by mail.gmx.net (mp023) with SMTP; 31 Oct 2011 19:40:28 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/jOMAuK03jyHWbs9rO2Ui/RtudvsQgGR8ihkSwwJ
-	HXno71Ye5Lz6WD
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2011 19:45:06 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1319968917-3120-1-git-send-email-schnitzeltony@gmx.de>
-	<201110311210.28693.schnitzeltony@gmx.de>
-	<201110311217.28604.schnitzeltony@gmx.de>
-In-Reply-To: <201110311217.28604.schnitzeltony@gmx.de>
+	Mon, 31 Oct 2011 22:24:43 +0100
+Received: (qmail 30831 invoked by uid 1003); 31 Oct 2011 21:18:14 -0000
+Received: from unknown (HELO ?192.168.1.108?)
+	(philip@opensdr.com@96.240.183.10)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	31 Oct 2011 21:18:14 -0000
+Message-ID: <4EAF1095.2050701@balister.org>
+Date: Mon, 31 Oct 2011 17:18:13 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.23) Gecko/20110928 Fedora/3.1.15-1.fc14 Thunderbird/3.1.15
 MIME-Version: 1.0
-Message-Id: <201110311945.06660.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [meta-oe] task-basic: include wireless-tools for distros featuring wifi
+To: openembedded-devel@lists.openembedded.org
+References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>	<1319891607.3756.18.camel@mattotaupa>	<j8luhk$7vb$3@dough.gmane.org>
+	<1320078283.3621.4.camel@mattotaupa> <j8mn18$usd$1@dough.gmane.org>
+In-Reply-To: <j8mn18$usd$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.2
+Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,57 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 18:46:34 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 31 Oct 2011 21:24:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Monday, October 31, 2011 12:17:28 PM Andreas M=C3=BCller wrote:
-> On Monday, October 31, 2011 12:10:28 PM Andreas M=C3=BCller wrote:
-> > On Monday, October 31, 2011 11:42:40 AM Koen Kooi wrote:
-> > > Op 30-10-11 11:01, Andreas M=C3=BCller schreef:
-> > > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de> ---
-> > > > meta-oe/recipes-core/tasks/task-basic.bb |    2 +- 1 files changed,=
- 1
-> > > > insertions(+), 1 deletions(-)
-> > > >=20
-> > > > diff --git a/meta-oe/recipes-core/tasks/task-basic.bb
-> > > > b/meta-oe/recipes-core/tasks/task-basic.bb index 34aa7e1..9b9385e
-> > > > 100644 --- a/meta-oe/recipes-core/tasks/task-basic.bb +++
-> > > > b/meta-oe/recipes-core/tasks/task-basic.bb @@ -51,7 +51,7 @@
-> > > > RRECOMMENDS_${PN} =3D "\ ${@base_contains("MACHINE_FEATURES",
-> > > > "usbgadget", "kernel-module-g-ether kernel-module-g-serial
-> > > > kernel-module-g-mass-storage", "", d)} \ \
-> > > > ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
-> > > > - ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant",
-> > > > "", d)} \ +	${@base_contains("DISTRO_FEATURES", "wifi", "iw
-> > > > wireless-tools wpa-supplicant", "", d)} \
-> > >=20
-> > > I have to NAK this one, 'iw' has replaced wireless in the
-> > > linux-wireless world and having both doesn't make sense.
-> >=20
-> > I had the feeling (am not 100% sure), that adding wireless-tools to ima=
-ge
-> > made my wlan work under networkmanger control - will do some tests on
-> > that.
-> >=20
-> > FYI: networkmanager has wireless-tools in DEPENDS but that is not enough
-> > to make wireless-tools into the image.
-> >=20
-> > How about wireless-tools in RDEPENDS for networkmanager?
->=20
-> I took a look at networkmanager configure.ac:
-> | AC_MSG_ERROR(wireless-tools or libiw development headers >=3D 28pre9 not
->=20
-> installed or not functional)
->=20
-> I seems better to have iw in dependencies there instead of wireless-tools.
-> Will give that one a try.
->=20
-=46or maiden image wlan works without change / wireless-tools. Sorry for th=
-e=20
-noise.
+On 10/31/2011 01:48 PM, Koen Kooi wrote:
+> Op 31-10-11 17:24, Paul Menzel schreef:
+>> Am Montag, den 31.10.2011, 11:50 +0100 schrieb Koen Kooi:
+>>> Op 29-10-11 14:33, Paul Menzel schreef:
+>>>> Dear Martin, dear Denis,
+>>>>
+>>>>
+>>>> Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+>>>>> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+>>>>>
+>>>>> Added LIC_FILES_CHKSUM, and fixed LICENSE
+>>>>>
+>>>>> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org> 
+>>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>>>
+>>>> NACK.
+>>>>
+>>>> please add the version you import and the commit ID you import from. 
+>>>> This is all written in the guide lines [1]!
+>>>
+>>> And as I've said before, meta-oe is not oe-dev, so you can't use take 
+>>> the old 'rules' and apply them to meta-oe 1:1!
+> 
+>> The guide lines I referred to [1] have been written for OE-core. ;-)
+> 
+> Yes, and oe-core still isn't meta-oe
 
-Andreas
+Why would we need different guidelines?
+
+Philip
 
 
