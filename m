@@ -1,26 +1,35 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RKogY-0006eT-BO
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 11:01:42 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 31 Oct 2011 02:55:36 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.69,430,1315206000"; d="scan'208";a="31687648"
-Received: from unknown (HELO helios.localnet) ([10.252.121.56])
-	by AZSMGA002.ch.intel.com with ESMTP; 31 Oct 2011 02:55:35 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Mon, 31 Oct 2011 09:55:28 +0000
-User-Agent: KMail/1.13.6 (Linux/2.6.38-11-generic-pae; KDE/4.6.5; i686; ; )
-References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
-	<1319891607.3756.18.camel@mattotaupa>
-In-Reply-To: <1319891607.3756.18.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201110310955.28626.paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKpQM-0007WO-08 for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 11:49:02 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKpKU-00012M-1y for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 11:42:58 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2011 11:42:57 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2011 11:42:57 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 31 Oct 2011 11:42:40 +0100
+Message-ID: <j8lu30$7vb$1@dough.gmane.org>
+References: <1319968917-3120-1-git-send-email-schnitzeltony@gmx.de>
+	<1319968917-3120-2-git-send-email-schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1319968917-3120-2-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-oe] task-basic: include wireless-tools for distros featuring wifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 10:01:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Oct 2011 10:49:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Saturday 29 October 2011 13:33:27 Paul Menzel wrote:
-> > +LIC_FILES_CHKSUM =
-> > "files://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7" 
-> > +PR = "r0"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 30-10-11 11:01, Andreas Müller schreef:
 > 
-> According to Koen these are going away.
+> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
+> meta-oe/recipes-core/tasks/task-basic.bb |    2 +- 1 files changed, 1
+> insertions(+), 1 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-core/tasks/task-basic.bb
+> b/meta-oe/recipes-core/tasks/task-basic.bb index 34aa7e1..9b9385e 100644 
+> --- a/meta-oe/recipes-core/tasks/task-basic.bb +++
+> b/meta-oe/recipes-core/tasks/task-basic.bb @@ -51,7 +51,7 @@
+> RRECOMMENDS_${PN} = "\ ${@base_contains("MACHINE_FEATURES", "usbgadget",
+> "kernel-module-g-ether kernel-module-g-serial
+> kernel-module-g-mass-storage", "", d)} \ \ 
+> ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \ -
+> ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)}
+> \ +	${@base_contains("DISTRO_FEATURES", "wifi", "iw wireless-tools
+> wpa-supplicant", "", d)} \
 
-Well, Koen might reject PR = "r0" in meta-oe, that's fine; however 
-LIC_FILES_CHKSUM is mandatory or the recipe will not build, and I don't think 
-that will be changing any time soon. I have considered if it would be 
-desirable/possible to eliminate it for recipes that don't install any files 
-(e.g. tasks), so far I haven't done any work on that. For normal recipes it is 
-required however.
+I have to NAK this one, 'iw' has replaced wireless in the linux-wireless
+world and having both doesn't make sense.
 
-Cheers,
-Paul 
+regards,
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
--- 
+iD8DBQFOrnugMkyGM64RGpERAlz9AKCVmZKrR98wxQ0X7sbVtlpJCeXlmACfba2v
+9kKB7H1D6OrM2DgxRWmiyLg=
+=R97K
+-----END PGP SIGNATURE-----
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
