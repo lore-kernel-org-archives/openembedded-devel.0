@@ -1,23 +1,26 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RKeFk-0003MY-F4
+	(envelope-from <schnitzeltony@gmx.de>) id 1RKgDv-0005sA-5W
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Oct 2011 23:53:20 +0100
-Received: (qmail invoked by alias); 30 Oct 2011 22:47:12 -0000
+	Mon, 31 Oct 2011 01:59:35 +0100
+Received: (qmail invoked by alias); 31 Oct 2011 00:53:30 -0000
 Received: from p4FDF1C25.dip.t-dialin.net (EHLO localhost.localdomain)
 	[79.223.28.37]
-	by mail.gmx.net (mp070) with SMTP; 30 Oct 2011 23:47:12 +0100
+	by mail.gmx.net (mp042) with SMTP; 31 Oct 2011 01:53:30 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+/G2Ijj0C/azRmx8l6JHzKQCXgYwDC8wpJJ3tkvX
-	kPd8xteJYEsXNg
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+X-Provags-ID: V01U2FsdGVkX1/DVUcmcUbD9Xlx1eCGLF1I5kYYhwf55kbrZWsxU/
+	4NBOqMIQ1uu0rU
+From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Oct 2011 23:51:53 +0100
-Message-Id: <1320015113-21219-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+Date: Mon, 31 Oct 2011 01:58:13 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1320003224-12913-1-git-send-email-schnitzeltony@gmx.de>
+In-Reply-To: <1320003224-12913-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
+Message-Id: <201110310158.13431.schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] xfce4-weather-plugin: initial add 0.7.4
+Subject: Re: [meta-gnome] evince: initial add 2.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,152 +34,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Oct 2011 22:53:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 31 Oct 2011 00:59:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-port-to-libxfce4ui.patch was taken from [1]
+On Sunday, October 30, 2011 08:33:44 PM Andreas M=C3=BCller wrote:
+> * recipe based on oe-classic: evince_2.30.0.bb
+>   commit 5dba154457691d2096f2b1a7ef24bdc6f1b51859
+> * run tested on overo
+> * TODO further doctype support
+>   configure option  ->    current configure result
+>   ------------------------------------------------
+>   --enable-ps       ->    PostScript Backend.:  no
+>   --enable-djvu     ->    DJVU Backend.......:  no
+>   --enable-impress  ->    Impress Backend....:  no
+>=20
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de>
+> ---
+>  meta-gnome/recipes-gnome/evince/evince_2.32.0.bb |   39
+> ++++++++++++++++++++++ 1 files changed, 39 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+>=20
+> diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+> b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb new file mode 100644
+> index 0000000..899d416
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+> @@ -0,0 +1,39 @@
+> +DESCRIPTION =3D "Evince is a document viewer for document formats like p=
+df,
+> ps, djvu." +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D96f2f8d5ee576a2163977938ea36f=
+a7b"
+> +SECTION =3D "x11/office"
+> +DEPENDS =3D "gnome-icon-theme gnome-doc-utils-native libgnome-keyring
+> nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade" +
+> +inherit gnome pkgconfig gtk-icon-cache
+> +
+> +SRC_URI[archive.md5sum] =3D "ebc3ce6df8dcbf29cb9492f8dd031319"
+> +SRC_URI[archive.sha256sum] =3D
+> "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7" +
+> +EXTRA_OECONF =3D " --enable-thumbnailer \
+> +                 --enable-nautilus \
+> +                 --disable-scrollkeeper \
+> +                 --enable-pixbuf \
+> +               "
+> +
+> +do_install_append() {
+> +	install -d install -d ${D}${datadir}/pixmaps
+> +	install -m 0755 ${S}/data/icons/48x48/apps/evince.png
+> ${D}${datadir}/pixmaps/ +}
+> +
+> +RDEPENDS_${PN} +=3D "glib-2.0-utils"
+> +
+> +PACKAGES =3D+ "${PN}-nautilus-extension"
+> +FILES_${PN} +=3D "${datadir}/dbus-1"
+> +FILES_${PN}-dbg +=3D "${libdir}/*/*/.debug \
+> +                    ${libdir}/*/*/*/.debug"
+> +FILES_${PN}-dev +=3D "${libdir}/nautilus/extensions-2.0/*.la"
+> +FILES_${PN}-staticdev +=3D "${libdir}/nautilus/extensions-2.0/*.a"
+> +FILES_${PN}-nautilus-extension =3D "${libdir}/nautilus/*/*so"
+> +
+> +pkg_postinst_${PN} () {
+> +if [ -n "$D" ]; then
+> +    exit 1
+> +fi
+> +
+> +glib-compile-schemas ${datadir}/glib-2.0/schemas
+> +}
+Be prepared that your system might feel different when installing evince an=
+d=20
+starting *glib-compile-schemas* on pkg_postinst. It seems that now the file=
+s in=20
+/usr/share/glib-2.0/schedule rise from dead by being compiled and thereby=20
+causing new behaviours. E.g. When starting thunar for the first time in ses=
+sion I=20
+now have to wait for very long and see
 
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=7956
+Out of memory: Kill process 1458 (gvfsd-smb-brows) score 742 or sacrifice c=
+hild
+Killed process 1458 (gvfsd-smb-brows) total-vm:403384kB, anon-rss:185676kB,=
+ file-
+rss:108kB
+gvfsd-smb-brows invoked oom-killer: gfp_mask=3D0x201da, order=3D0, oom_adj=
+=3D0,=20
+oom_score_adj=3D0
+[<c003f9bc>] (unwind_backtrace+0x0/0xe0) from [<c00a3020>]=20
+(dump_header.clone.13+0x4c/0x11c)
+[<c00a3020>] (dump_header.clone.13+0x4c/0x11c) from [<c00a31f0>]=20
+(oom_kill_process.clone.16+0x3c/0x1e4)
+[<c00a31f0>] (oom_kill_process.clone.16+0x3c/0x1e4) from [<c00a36f0>]=20
+(out_of_memory+0x250/0x2d8)
+[<c00a36f0>] (out_of_memory+0x250/0x2d8) from [<c00a658c>]=20
+(__alloc_pages_nodemask+0x49c/0x614)
+[<c00a658c>] (__alloc_pages_nodemask+0x49c/0x614) from [<c00a7e84>]=20
+(__do_page_cache_readahead+0xa0/0x1e4)
+[<c00a7e84>] (__do_page_cache_readahead+0xa0/0x1e4) from [<c00a8224>]=20
+(ra_submit+0x20/0x24)
+[<c00a8224>] (ra_submit+0x20/0x24) from [<c00a2704>] (filemap_fault+0x164/0=
+x39c)
+[<c00a2704>] (filemap_fault+0x164/0x39c) from [<c00b3e0c>]=20
+(__do_fault+0x50/0x3a8)
+[<c00b3e0c>] (__do_fault+0x50/0x3a8) from [<c00b68e4>]=20
+(handle_pte_fault+0x23c/0x550)
+[<c00b68e4>] (handle_pte_fault+0x23c/0x550) from [<c00b6c90>]=20
+(handle_mm_fault+0x98/0xa8)
+[<c00b6c90>] (handle_mm_fault+0x98/0xa8) from [<c00418f8>]=20
+(do_page_fault+0xe0/0x268)
+[<c00418f8>] (do_page_fault+0xe0/0x268) from [<c0036278>]=20
+(do_PrefetchAbort+0x34/0x98)
+[<c0036278>] (do_PrefetchAbort+0x34/0x98) from [<c003b460>]=20
+(ret_from_exception+0x0/0x10)
+Exception stack(0xcefb7fb0 to 0xcefb7ff8)
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../weather/files/port-to-libxfce4ui.patch         |  104 ++++++++++++++++++++
- .../weather/xfce4-weather-plugin_0.7.4.bb          |   12 +++
- 2 files changed, 116 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-panel-plugins/weather/files/port-to-libxfce4ui.patch
- create mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
+After a while a second thunar opens with contents at Network. This was empt=
+y=20
+before!
 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/files/port-to-libxfce4ui.patch b/meta-xfce/recipes-panel-plugins/weather/files/port-to-libxfce4ui.patch
-new file mode 100644
-index 0000000..968d84f
---- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/weather/files/port-to-libxfce4ui.patch
-@@ -0,0 +1,104 @@
-+From 24da1964f72429b0b4d20e0805cbd8346179527f Mon Sep 17 00:00:00 2001
-+From: Matias De lellis <mati86dl@gmail.com>
-+Date: Mon, 5 Sep 2011 14:17:29 -0300
-+Subject: [PATCH] Port xfce4-weather-plugin to libxfce4ui
-+
-+---
-+ configure.ac                   |    2 +-
-+ panel-plugin/Makefile.am       |    4 ++--
-+ panel-plugin/weather-config.c  |    2 +-
-+ panel-plugin/weather-search.c  |    2 +-
-+ panel-plugin/weather-summary.c |    2 +-
-+ panel-plugin/weather.c         |    2 +-
-+ 6 files changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 04f466a..d1bb58e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -59,7 +59,7 @@ dnl ***********************************
-+ XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
-+ XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.0])
-+ XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.2])
-+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.2])
-++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.7.0])
-+ XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.99.1])
-+ XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
-+ 
-+diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
-+index 50fc962..ed06da1 100644
-+--- a/panel-plugin/Makefile.am
-++++ b/panel-plugin/Makefile.am
-+@@ -33,7 +33,7 @@ xfce4_weather_plugin_SOURCES =						\
-+ 
-+ xfce4_weather_plugin_CFLAGS =						\
-+ 	$(LIBXFCE4PANEL_CFLAGS)						\
-+-	$(LIBXFCEGUI4_CFLAGS)						\
-++	$(LIBXFCE4UI_CFLAGS)						\
-+ 	$(LIBXFCE4UTIL_CFLAGS)						\
-+ 	$(GTK_CFLAGS)							\
-+ 	$(LIBXML_CFLAGS)
-+@@ -41,7 +41,7 @@ xfce4_weather_plugin_CFLAGS =						\
-+ xfce4_weather_plugin_LDADD =						\
-+ 	$(LIBXFCE4PANEL_LIBS)						\
-+ 	$(LIBXFCE4UTIL_LIBS)						\
-+-	$(LIBXFCEGUI4_LIBS)						\
-++	$(LIBXFCE4UI_LIBS)						\
-+ 	$(GTK_LIBS)							\
-+ 	$(LIBXML_LIBS)							\
-+ 	$(LIBRESOLV)
-+diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
-+index 3023e11..d183e75 100644
-+--- a/panel-plugin/weather-config.c
-++++ b/panel-plugin/weather-config.c
-+@@ -20,7 +20,7 @@
-+ #endif
-+ 
-+ #include <string.h>
-+-#include <libxfcegui4/libxfcegui4.h>
-++#include <libxfce4ui/libxfce4ui.h>
-+ 
-+ #include "weather-parsers.h"
-+ #include "weather-data.h"
-+diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
-+index c43ad15..dba395f 100644
-+--- a/panel-plugin/weather-search.c
-++++ b/panel-plugin/weather-search.c
-+@@ -21,7 +21,7 @@
-+ 
-+ #include <string.h>
-+ 
-+-#include <libxfcegui4/libxfcegui4.h>
-++#include <libxfce4ui/libxfce4ui.h>
-+ 
-+ #include "weather-parsers.h"
-+ #include "weather-data.h"
-+diff --git a/panel-plugin/weather-summary.c b/panel-plugin/weather-summary.c
-+index 36eeb14..b584c7d 100644
-+--- a/panel-plugin/weather-summary.c
-++++ b/panel-plugin/weather-summary.c
-+@@ -19,7 +19,7 @@
-+ #include <config.h>
-+ #endif
-+ 
-+-#include <libxfcegui4/libxfcegui4.h>
-++#include <libxfce4ui/libxfce4ui.h>
-+ 
-+ #include "weather-parsers.h"
-+ #include "weather-data.h"
-+diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
-+index cd341aa..c6c918d 100644
-+--- a/panel-plugin/weather.c
-++++ b/panel-plugin/weather.c
-+@@ -23,7 +23,7 @@
-+ #include <sys/stat.h>
-+ 
-+ #include <libxfce4util/libxfce4util.h>
-+-#include <libxfcegui4/libxfcegui4.h>
-++#include <libxfce4ui/libxfce4ui.h>
-+ 
-+ #include "weather-parsers.h"
-+ #include "weather-data.h"
-+-- 
-+1.7.6
-+
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
-new file mode 100644
-index 0000000..d75d51e
---- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Panel plugin to display current temperature and weather condition"
-+HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-weather-plugin"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+inherit xfce-panel-plugin
-+
-+SRC_URI += "file://port-to-libxfce4ui.patch"
-+SRC_URI[md5sum] = "03c972d13eba5cd226432ff66e3ff282"
-+SRC_URI[sha256sum] = "3f76207b8a845d15bfec6825bd5300aedd086c455259c4dd8670a89a3c8ab382"
-+
-+FILES_${PN} += "${datadir}/xfce4/weather"
--- 
-1.7.4.4
+Right now it again seems to me that opening one door causes entering a room=
+ with=20
+many new doors...
 
+Andreas
 
 
