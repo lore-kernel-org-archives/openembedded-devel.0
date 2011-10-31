@@ -1,31 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RKvs8-0001nz-T9
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 18:42:09 +0100
-Received: by faas16 with SMTP id s16so6397466faa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKw4I-0002S0-S7 for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 18:54:48 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RKvyP-0001Nk-SM for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 18:48:37 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2011 18:48:37 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2011 10:36:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=+vB1Dcf//IPLVJKJmaiBz/TzibTx6RpgOH0RKsLkLeU=;
-	b=MSYHH2KSV6Cb43McXgsW6VMs42XmQ5mcdhi+GsoMB9aUUQIdP7CIyIDVzihx+vCvJQ
-	WRHkjbvT4airF0IbZ/YHIA1X2cZLRQK37nfnjTbYw9kLgy5G2lvJShW+vPiLmhlrAte8
-	w40QfrmgugjNXKA4mtHuD3DdbJK3DxWdndokY=
-Received: by 10.223.5.201 with SMTP id 9mr31586198faw.5.1320082562851;
-	Mon, 31 Oct 2011 10:36:02 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w11sm39151398fad.7.2011.10.31.10.36.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 31 Oct 2011 10:36:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 31 Oct 2011 18:48:37 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2011 18:35:46 +0100
-Message-Id: <1320082546-31376-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.7.1
-In-Reply-To: <1320082546-31376-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1320082546-31376-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 2/2] gpsd: fix build with python2.7 in sysroot and python2.6 on host
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 31 Oct 2011 18:48:24 +0100
+Message-ID: <j8mn18$usd$1@dough.gmane.org>
+References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
+	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
+	<1319891607.3756.18.camel@mattotaupa>
+	<j8luhk$7vb$3@dough.gmane.org> <1320078283.3621.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1320078283.3621.4.camel@mattotaupa>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,59 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 17:42:09 -0000
+X-List-Received-Date: Mon, 31 Oct 2011 17:54:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../gpsd/gpsd-2.95/fix-build-with-python2.7.patch  |   15 +++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb       |    3 ++-
- 2 files changed, 17 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-2.95/fix-build-with-python2.7.patch
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-2.95/fix-build-with-python2.7.patch b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/fix-build-with-python2.7.patch
-new file mode 100644
-index 0000000..6bba2b8
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-2.95/fix-build-with-python2.7.patch
-@@ -0,0 +1,15 @@
-+Without this patch python2.6 from host could be preferred over python from native sysroot.
-+
-+Upstream-Status: Pending
-+diff -uNr gpsd-2.95.orig/configure.ac gpsd-2.95/configure.ac
-+--- gpsd-2.95.orig/configure.ac	2011-10-31 18:26:08.860719033 +0100
-++++ gpsd-2.95/configure.ac	2011-10-31 18:27:47.718716963 +0100
-+@@ -31,7 +31,7 @@
-+ dnl AM_PATH_PYTHON provided with automake can be too old.  Look
-+ dnl for newer python first, and include 2.6 on the list.
-+ m4_define([_AM_PYTHON_INTERPRETER_LIST],
-+-	    [python2.6 python2.5 python2.4 python])
-++	    [python2.7 python2.6 python2.5 python2.4 python])
-+ AM_PATH_PYTHON([2.4])
-+ ac_python=yes
-+ if test "x$PYTHON" = "x"; then
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb
-index a6bf308..cdcb77c 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_2.95.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
--PR = "r1"
-+PR = "r2"
- 
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
-@@ -15,6 +15,7 @@ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
- 
- SRC_URI = "http://download.berlios.de/${PN}/${P}.tar.gz;name=gpsd \
-            file://libtool.patch \
-+           file://fix-build-with-python2.7.patch \
-            file://gpsd-default \
-            file://gpsd \
-            file://60-gpsd.rules"
--- 
-1.7.7.1
+Op 31-10-11 17:24, Paul Menzel schreef:
+> Am Montag, den 31.10.2011, 11:50 +0100 schrieb Koen Kooi:
+>> Op 29-10-11 14:33, Paul Menzel schreef:
+>>> Dear Martin, dear Denis,
+>>> 
+>>> 
+>>> Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+>>>> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+>>>> 
+>>>> Added LIC_FILES_CHKSUM, and fixed LICENSE
+>>>> 
+>>>> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org> 
+>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>> 
+>>> NACK.
+>>> 
+>>> please add the version you import and the commit ID you import from. 
+>>> This is all written in the guide lines [1]!
+>> 
+>> And as I've said before, meta-oe is not oe-dev, so you can't use take 
+>> the old 'rules' and apply them to meta-oe 1:1!
+> 
+> The guide lines I referred to [1] have been written for OE-core. ;-)
+
+Yes, and oe-core still isn't meta-oe
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOrt9oMkyGM64RGpERAjfuAJ0f8N80qZ8LjF5XbW7lJ6Gl296cRACePnNK
+h4DGgQIV9y/kR+YzHeVOWIA=
+=QPHc
+-----END PGP SIGNATURE-----
 
 
 
