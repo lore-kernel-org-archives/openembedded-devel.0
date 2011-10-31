@@ -1,37 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RKpqe-0000ZF-Ny for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 12:16:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RKpko-0002WR-1f for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 12:10:10 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2011 12:10:10 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2011 12:10:10 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RKptG-0000l4-1J
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 12:18:54 +0100
+Received: (qmail invoked by alias); 31 Oct 2011 11:12:46 -0000
+Received: from p5B0A152D.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.21.45]
+	by mail.gmx.net (mp038) with SMTP; 31 Oct 2011 12:12:46 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19UoyhL5VRUP7uPEHXzzvW9k7/XKgWu7IKTnmJAa+
+	znJJnvs9zhp9Jr
+From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 31 Oct 2011 11:50:55 +0100
-Message-ID: <j8luif$7vb$4@dough.gmane.org>
-References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
-	<1319891607.3756.18.camel@mattotaupa>
-	<201110310955.28626.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <201110310955.28626.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
+Date: Mon, 31 Oct 2011 12:17:28 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1319968917-3120-1-git-send-email-schnitzeltony@gmx.de>
+	<j8lu30$7vb$1@dough.gmane.org>
+	<201110311210.28693.schnitzeltony@gmx.de>
+In-Reply-To: <201110311210.28693.schnitzeltony@gmx.de>
+MIME-Version: 1.0
+Message-Id: <201110311217.28604.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe] task-basic: include wireless-tools for distros featuring wifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 11:16:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Oct 2011 11:18:54 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Monday, October 31, 2011 12:10:28 PM Andreas M=C3=BCller wrote:
+> On Monday, October 31, 2011 11:42:40 AM Koen Kooi wrote:
+> > Op 30-10-11 11:01, Andreas M=C3=BCller schreef:
+> > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de> ---
+> > > meta-oe/recipes-core/tasks/task-basic.bb |    2 +- 1 files changed, 1
+> > > insertions(+), 1 deletions(-)
+> > >=20
+> > > diff --git a/meta-oe/recipes-core/tasks/task-basic.bb
+> > > b/meta-oe/recipes-core/tasks/task-basic.bb index 34aa7e1..9b9385e
+> > > 100644 --- a/meta-oe/recipes-core/tasks/task-basic.bb +++
+> > > b/meta-oe/recipes-core/tasks/task-basic.bb @@ -51,7 +51,7 @@
+> > > RRECOMMENDS_${PN} =3D "\ ${@base_contains("MACHINE_FEATURES",
+> > > "usbgadget", "kernel-module-g-ether kernel-module-g-serial
+> > > kernel-module-g-mass-storage", "", d)} \ \
+> > > ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \ -
+> > > ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "",
+> > > d)} \ +	${@base_contains("DISTRO_FEATURES", "wifi", "iw wireless-tools
+> > > wpa-supplicant", "", d)} \
+> >=20
+> > I have to NAK this one, 'iw' has replaced wireless in the linux-wireless
+> > world and having both doesn't make sense.
+>=20
+> I had the feeling (am not 100% sure), that adding wireless-tools to image
+> made my wlan work under networkmanger control - will do some tests on
+> that.
+>=20
+> FYI: networkmanager has wireless-tools in DEPENDS but that is not enough =
+to
+> make wireless-tools into the image.
+>=20
+> How about wireless-tools in RDEPENDS for networkmanager?
+>=20
+I took a look at networkmanager configure.ac:=20
 
-Op 31-10-11 10:55, Paul Eggleton schreef:
-> On Saturday 29 October 2011 13:33:27 Paul Menzel wrote:
->>> +LIC_FILES_CHKSUM = 
->>> "files://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7" +PR = "r0"
->> 
->> According to Koen these are going away.
-> 
-> Well, Koen might reject PR = "r0" in meta-oe, that's fine; however 
-> LIC_FILES_CHKSUM is mandatory or the recipe will not build, and I don't
-> think that will be changing any time soon. I have considered if it would
-> be desirable/possible to eliminate it for recipes that don't install any
-> files (e.g. tasks), so far I haven't done any work on that. For normal
-> recipes it is required however.
+| AC_MSG_ERROR(wireless-tools or libiw development headers >=3D 28pre9 not=
+=20
+installed or not functional)
 
-Exactly!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I seems better to have iw in dependencies there instead of wireless-tools. =
+Will=20
+give that one a try.
 
-iD8DBQFOrn2PMkyGM64RGpERAtZRAJ9+q7eDwUbX3o3vuIxOnwKhWSx0VQCgorOy
-1FZ3HAsW95D1sXuh3uldPaU=
-=OzFY
------END PGP SIGNATURE-----
-
+Andreas
 
 
