@@ -1,23 +1,22 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RKujd-0007kW-8S for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 17:29:17 +0100
+	id 1RKul5-0007sF-Pl for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 17:30:47 +0100
 Received: from f053038082.adsl.alicedsl.de ([78.53.38.82]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RKudn-0001km-Br for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 16:23:15 +0000
-Message-ID: <1320078181.3621.2.camel@mattotaupa>
+	id 1RKufG-0001l7-9b for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Oct 2011 16:24:46 +0000
+Message-ID: <1320078283.3621.4.camel@mattotaupa>
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2011 17:23:01 +0100
-In-Reply-To: <201110310955.28626.paul.eggleton@linux.intel.com>
+Date: Mon, 31 Oct 2011 17:24:43 +0100
+In-Reply-To: <j8luhk$7vb$3@dough.gmane.org>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
 	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>
-	<1319891607.3756.18.camel@mattotaupa>
-	<201110310955.28626.paul.eggleton@linux.intel.com>
+	<1319891607.3756.18.camel@mattotaupa> <j8luhk$7vb$3@dough.gmane.org>
 X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
 Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
@@ -34,44 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 16:29:17 -0000
-X-Groupsio-MsgNum: 35118
+X-List-Received-Date: Mon, 31 Oct 2011 16:30:47 -0000
+X-Groupsio-MsgNum: 35119
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature"; 
-	boundary="=-mzJn56k24+PmPtQBtBQo"
+	boundary="=-F5P/U4PISpOuXcWokL/o"
 
---=-mzJn56k24+PmPtQBtBQo
+--=-F5P/U4PISpOuXcWokL/o
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 31.10.2011, 09:55 +0000 schrieb Paul Eggleton:
-> On Saturday 29 October 2011 13:33:27 Paul Menzel wrote:
-> > > +LIC_FILES_CHKSUM =3D "files://COPYING;md5=3D3bf50002aefd002f49e7bb85=
-4063f7e7"=20
-> > > +PR =3D "r0"
+Am Montag, den 31.10.2011, 11:50 +0100 schrieb Koen Kooi:
+> Op 29-10-11 14:33, Paul Menzel schreef:
+> > Dear Martin, dear Denis,
 > >=20
-> > According to Koen these are going away.
+> >=20
+> > Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
+> >> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+> >>=20
+> >> Added LIC_FILES_CHKSUM, and fixed LICENSE
+> >>=20
+> >> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>=20
+> >> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >=20
+> > NACK.
+> >=20
+> > please add the version you import and the commit ID you import from. Th=
+is
+> > is all written in the guide lines [1]!
 >=20
-> Well, Koen might reject PR =3D "r0" in meta-oe, that's fine; however=20
-> LIC_FILES_CHKSUM is mandatory or the recipe will not build, and I don't t=
-hink=20
-> that will be changing any time soon. I have considered if it would be=20
-> desirable/possible to eliminate it for recipes that don't install any fil=
-es=20
-> (e.g. tasks), so far I haven't done any work on that. For normal recipes =
-it is=20
-> required however.
+> And as I've said before, meta-oe is not oe-dev, so you can't use take the
+> old 'rules' and apply them to meta-oe 1:1!
 
-I meant =C2=BBthis is=C2=AB instead of =C2=BBthese are=C2=AB. (Or did I mea=
-n these
-occurrences of `PR`.)I am sorry for the confusion.
+The guide lines I referred to [1] have been written for OE-core. ;-)
 
 
 Thanks,
 
 Paul
 
---=-mzJn56k24+PmPtQBtBQo
+
+[1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+--=-F5P/U4PISpOuXcWokL/o
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
@@ -79,9 +83,9 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEABECAAYFAk6uy2UACgkQPX1aK2wOHVh5+gCfYJ5ItwiKkgogrUIVosmKYWpo
-vCcAnA540dirXa5W5qvhA1DitAvMUGk9
-=aP6i
+iEYEABECAAYFAk6uy8sACgkQPX1aK2wOHVgP0ACfXwTAsbGf7KBJdPLIJC5qVIPO
+k0MAn20J4/mPeD+nQt7WbiJXd3zAodqY
+=6wJi
 -----END PGP SIGNATURE-----
 
---=-mzJn56k24+PmPtQBtBQo--
+--=-F5P/U4PISpOuXcWokL/o--
