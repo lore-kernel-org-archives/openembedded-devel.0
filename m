@@ -1,25 +1,39 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RKzLB-0007jb-26
+	(envelope-from <vitap@ti.com>) id 1RKzWY-00080c-Mv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 22:24:43 +0100
-Received: (qmail 30831 invoked by uid 1003); 31 Oct 2011 21:18:14 -0000
-Received: from unknown (HELO ?192.168.1.108?)
-	(philip@opensdr.com@96.240.183.10)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	31 Oct 2011 21:18:14 -0000
-Message-ID: <4EAF1095.2050701@balister.org>
-Date: Mon, 31 Oct 2011 17:18:13 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110928 Fedora/3.1.15-1.fc14 Thunderbird/3.1.15
+	Mon, 31 Oct 2011 22:36:07 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9VLIwqW003135
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 31 Oct 2011 16:18:59 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9VLIwPj029614;
+	Mon, 31 Oct 2011 16:18:58 -0500 (CDT)
+Received: from dnce72.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9VLIvce024312;
+	Mon, 31 Oct 2011 16:18:58 -0500 (CDT)
+Received: from dnce02.ent.ti.com ([137.167.131.106]) by dnce72.ent.ti.com
+	([137.167.131.87]) with mapi; Mon, 31 Oct 2011 22:18:56 +0100
+From: "Preskovsky, Vita" <vitap@ti.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Date: Mon, 31 Oct 2011 22:18:51 +0100
+Thread-Topic: [oe] [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
+Thread-Index: AcyW+QAazWS7+9WASP2MVuL9w0iBcABFvMBQ
+Message-ID: <AC090B9732AB2B4DB7FF476E907FE660013BAEC653@dnce02.ent.ti.com>
+References: <1318324122-16951-1-git-send-email-vitap@ti.com>
+	<1318343515.14384.8.camel@mattotaupa>
+	<AC090B9732AB2B4DB7FF476E907FE660013BAEBD36@dnce02.ent.ti.com>
+	<1319974939.4242.19.camel@mattotaupa>
+In-Reply-To: <1319974939.4242.19.camel@mattotaupa>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>	<3bcd2fb9e853253747293c584109ab394ba3fd4e.1319884094.git.Martin.Jansa@gmail.com>	<1319891607.3756.18.camel@mattotaupa>	<j8luhk$7vb$3@dough.gmane.org>
-	<1320078283.3621.4.camel@mattotaupa> <j8mn18$usd$1@dough.gmane.org>
-In-Reply-To: <j8mn18$usd$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,39 +47,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 21:24:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Oct 2011 21:36:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 10/31/2011 01:48 PM, Koen Kooi wrote:
-> Op 31-10-11 17:24, Paul Menzel schreef:
->> Am Montag, den 31.10.2011, 11:50 +0100 schrieb Koen Kooi:
->>> Op 29-10-11 14:33, Paul Menzel schreef:
->>>> Dear Martin, dear Denis,
->>>>
->>>>
->>>> Am Samstag, den 29.10.2011, 12:29 +0200 schrieb Martin Jansa:
->>>>> From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
->>>>>
->>>>> Added LIC_FILES_CHKSUM, and fixed LICENSE
->>>>>
->>>>> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org> 
->>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>>>
->>>> NACK.
->>>>
->>>> please add the version you import and the commit ID you import from. 
->>>> This is all written in the guide lines [1]!
->>>
->>> And as I've said before, meta-oe is not oe-dev, so you can't use take 
->>> the old 'rules' and apply them to meta-oe 1:1!
-> 
->> The guide lines I referred to [1] have been written for OE-core. ;-)
-> 
-> Yes, and oe-core still isn't meta-oe
-
-Why would we need different guidelines?
-
-Philip
+UGF1bCwNCg0KSSdtIHN1YnNjcmliZWQgdG8gdGhlIGxpc3QgYW5kIHJlY2VpdmUgbWFpbHMgZnJv
+bSBpdCwgYnV0IEknbSBuZXcgdG8gYXJhZ28gYW5kIG9wZW5lbWJlZGVkLg0KSSBoYXZlIGEgcXVl
+c3Rpb24gYWJvdXQgdGhlIHJpZ2h0IHdheSB0byBkZWZpbmUgREVGQVVMVF9QUkVGRVJFTkNFIGlu
+IHJlY2lwZXMuDQpJbiBhbGwgYmx1ZXo0XzQueCByZWNpcGVzIHRoZXJlIGlzIGRlZmluaXRpb24g
+b2YgZGVmYXVsdCBwcmVmZXJlbmNlIGFzDQpERUZBVUxUX1BSRUZFUkVOQ0UgPSAiLTEiLCBhbmQg
+Yml0YmFrZSB0YWtlcyB0aGUgbGFzdCBvbmUuDQpJbiB0aGUgbGFzdCByZWNpcGUgdmVyc2lvbiA0
+Ljg5IHRoZXkgZGVmaW5lZCBhbHNvIGFuZ3N0cm9tIGRlZmF1bHQgcHJlZmVyZW5jZToNCkRFRkFV
+TFRfUFJFRkVSRU5DRV9hbmdzdHJvbSA9ICIxIg0KU28gZXZlcnlvbmUsIHdvcmtpbmcgdW5kZXIg
+YW5nc3Ryb20sIGFzIHdlIGRvLCBjb21waWxlcyB3aXRoIHRoZSB2ZXJzaW9uIDQuODkuDQpXZSBj
+aG9zZSB0byB3b3JrIHdpdGggdmVyc2lvbiA0Ljk1IChkZXNwaXRlIGV4aXN0ZW5jZSBvZiA0Ljk2
+KSBidXQgd2UgZG9uJ3Qgd2FudCB0aGlzIHJlY2lwZSB3aWxsIGJlIGNvbXBpbGVkIGFzIGRlZmF1
+bHQsIG9ubHkgZm9yIHRob3NlIHdobyB3aWxsIGNvbXBpbGUgdGhpcyByZWNpcGUgZm9yIHNwZWNp
+ZmljIG1hY2hpbmUgYXMgYW0xODB4LWV2bS4NClNvIGluc3RlYWQgb2YgREVGQVVMVF9QUkVGRVJF
+TkNFX2FuZ3N0cm9tIEkgY2FuIGRlZmluZSBERUZBVUxUX1BSRUZFUkVOQ0VfYW0xODB4LWV2bSA9
+ICIxIiwgdGhhdCBtZWV0cyBvdXIgZ29hbC4NCklzIHRoaXMgd2F5IG1vcmUgYXBwcm9wcmlhdGUg
+dGhhbiBJIGRpZCBwcmV2aW91c2x5PyANCg0KVGhhbmsgeW91LA0KVml0YS4NCg0KLS0tLS1Pcmln
+aW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IFBhdWwgTWVuemVsIFttYWlsdG86cGF1bGVwYW50ZXJA
+dXNlcnMuc291cmNlZm9yZ2UubmV0XSANClNlbnQ6IFN1bmRheSwgT2N0b2JlciAzMCwgMjAxMSAx
+OjQyIFBNDQpUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCkNj
+OiBQcmVza292c2t5LCBWaXRhOyBWaXRhIFByZXNrb3Zza3kNClN1YmplY3Q6IFJlOiBbb2VdIFtQ
+QVRDSF0gYmx1ZXo0XzQuOTUuYmI6IG5ldyByZWNpcGUgZm9yIGJ1aWxkaW5nIGJsdWV6LTQuOTUN
+Cg0KRGVhciBWaXRhLA0KDQoNCmFyZSB5b3UgcmVhZGluZyB0aGUgbGlzdCBvciBkbyBJIGhhdmUg
+dG8gYWRkIHlvdXIgYWRkcmVzcyB0byB0aGUgQ0MgZmllbGQ/DQoNCg0KQW0gU29ubnRhZywgZGVu
+IDMwLjEwLjIwMTEsIDEwOjU4ICswMTAwIHNjaHJpZWIgUHJlc2tvdnNreSwgVml0YToNCg0KPiBQ
+bGVhc2Ugc2VlIG15IGFuc3dlcnMgYmVsbG93Lg0KDQp0aGFuayB5b3UgZm9yIHlvdXIgYW5zd2Vy
+Lg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQoNCj4gU2VudDogVHVlc2RheSwgT2N0
+b2JlciAxMSwgMjAxMSA0OjMyIFBNDQoNCj4gU3ViamVjdDogUmU6IFtvZV0gW1BBVENIXSBibHVl
+ejRfNC45NS5iYjogbmV3IHJlY2lwZSBmb3IgYnVpbGRpbmcgDQo+IGJsdWV6LTQuOTUNCj4gDQo+
+IERlYXIgVml0YSwNCj4gDQo+IA0KPiB0aGFuayB5b3UgZm9yIHlvdXIgcGF0Y2guDQo+IA0KPiBB
+bSBEaWVuc3RhZywgZGVuIDExLjEwLjIwMTEsIDExOjA4ICswMjAwIHNjaHJpZWIgVml0YSBQcmVz
+a292c2t5Og0KPiANCj4gVXNpbmcNCj4gDQo+ICAgICAgICAgYmx1ZXo0OiBBZGQgdmVyc2lvbiA0
+Ljk1DQo+IA0KPiBhcyB0aGUgY29tbWl0IHN1bW1hcnkgd291bGQgYmUgY2xlYW5lci4gVXNlIGBn
+aXQgY29tbWl0IC0tYW1lbmRgIHRvIGNoYW5nZSB0aGF0Lg0KPiANCj4gQWRkaXRpb25hbGx5IHlv
+dSBzaG91bGQgZWxhYm9yYXRlIG1vcmUgaW4gdGhlIGNvbW1pdCBtZXNzYWdlIHdoYXQgdGhlIHBh
+dGNoIGlzIGRvaW5nLg0KPiANCj4gMS4gSGF2ZSB5b3UgdGVzdGVkIGl0PyBJcyBpdCBqdXN0IGFu
+IHVwZ3JhZGUgYmVjYXVzZSBvZiBvciBkb2VzIA0KPiB2ZXJzaW9uDQo+IDQuOTEgaW4gdGhlIHJl
+cG9zaXRvcnkgaGF2ZSBhbnkgc2hvcnQgY29taW5ncyBzbyB0aGF0IGl0IHNob3VsZCBiZSByZW1v
+dmVkPw0KPg0KPiBJIHRlc3RlZCB0aGlzIHJlY2lwZSwgYW5kIHRoZSByZWFzb24gSSBhZGRlZCB0
+aGlzIHZlcnNpb24gaXMgdGhhdCB3ZSB3YW50IHRvIHVzZSB0aGlzIHZlcnNpb24gb2YgQmx1ZXog
+aW4gb3VyIHJlbGVhc2UuDQoNCkkgZ3Vlc3MgeW91IHRlc3RlZCBpdCB1c2luZyDIpm5nc3Ryw7Zt
+LCBzbyB0aGUgb2xkIHJlY2lwZSBjYW4gYmUgcmVtb3ZlZC4NClBsZWFzZSBub3RlIHRoYXQgb2Ut
+Y29yZSBhbHJlYWR5IGhhcyB2ZXJzaW9uIDQuOTYuDQoNCj4gPiBTaWduZWQtb2ZmLWJ5OiBWaXRh
+IFByZXNrb3Zza3kgPHZpdGFwQHRpLmNvbT4NCj4gPiAtLS0NCj4gPiAgcmVjaXBlcy9ibHVlei9i
+bHVlejRfNC45NS5iYiB8ICAgMzAgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4g
+IDEgZmlsZXMgY2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkgIGNyZWF0
+ZSBtb2RlIA0KPiA+IDEwMDY0NCByZWNpcGVzL2JsdWV6L2JsdWV6NF80Ljk1LmJiDQo+ID4gDQo+
+ID4gZGlmZiAtLWdpdCBhL3JlY2lwZXMvYmx1ZXovYmx1ZXo0XzQuOTUuYmIgDQo+ID4gYi9yZWNp
+cGVzL2JsdWV6L2JsdWV6NF80Ljk1LmJiIG5ldyBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4IA0KPiA+
+IDAwMDAwMDAuLmE2ODJkNmENCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvcmVjaXBlcy9i
+bHVlei9ibHVlejRfNC45NS5iYg0KPiA+IEBAIC0wLDAgKzEsMzAgQEANCj4gPiArcmVxdWlyZSBi
+bHVlejQuaW5jDQo+ID4gK1NSQ19VUkkgPSAiXA0KPiA+ICsgIGh0dHA6Ly93d3cua2VybmVsLm9y
+Zy9wdWIvbGludXgvYmx1ZXRvb3RoL2JsdWV6LSR7UFZ9LnRhci5neiBcDQo+IA0KPiAyLiBBcyBm
+YXIgYXMgSSBrbm93IGtlcm5lbC5vcmcgYWZ0ZXIgdGhlIGNvbXByb21pc2UgcHJlc2VudGx5IGRv
+ZXMgbm90IHByb3ZpZGUgdGhhdCBhcmNoaXZlLiBTbyB0aGUgcmVjaXBlIHdpbGwgbm90IGJ1aWxk
+IHVubGVzcyB0aGVyZSBpcyBhIG1pcnJvciBzb21ld2hlcmUuIERvIHlvdSBrbm93IG9mIGEgbWly
+cm9yPw0KPiANCj4gVGhlcmUgYXJlIHR3byBwb3NzaWJsZSBsb2NhdGlvbnMgZm9yIHRoaXMgcGFj
+a2FnZToNCj4gCWh0dHA6Ly93d3cubWlycm9yc2VydmljZS5vcmcvc2l0ZXMvZnRwLmtlcm5lbC5v
+cmcvcHViL2xpbnV4L2JsdWV0b290aC9ibHVlei00Ljk1LnRhci5neg0KPiAgCQ0KPiBodHRwOi8v
+d3d3LmFuZ3N0cm9tLWRpc3RyaWJ1dGlvbi5vcmcvdW5zdGFibGUvc291cmNlcy9ibHVlei00Ljk1
+LnRhci5nDQo+IHogSSBjaGFuZ2VkIHRoZSBTUkNfVVJJIGluIG15IHdvcmtpbmcgZGlyZWN0b3J5
+IGZvciB0aGUgZmlyc3QgbG9jYXRpb24gDQo+IGFuZCBpdCB3b3JrZWQgZmluZS4gU28gd2l0aCB3
+aGF0IGxvY2F0aW9uIGRvIHlvdSBwcmVmZXIgdGhlIHJlY2lwZSB3aWxsIGJlIHJlbGVhc2VkPw0K
+DQpJIGFtIHVuc3VyZSBhYm91dCB0aGUgcG9saWN5IG15c2VsZiBhbmQgSSBkbyBub3QgdGhpbmsg
+YW4g4oCcT0UgbWlycm9y4oCdDQpoYXMgdGhhdCBwYXJ0aWN1bGFyIGFyY2hpdmUuDQoNCj4gPiAr
+IGZpbGU6Ly9ibHVldG9vdGguY29uZiBcDQo+ID4gKyINCj4gPiArDQo+ID4gK1NSQ19VUklbbWQ1
+c3VtXSA9ICIzNDEyOTRiMjg0OWEwNGE0YWZmZjVjOTZiZmJmMzBiMiINCj4gPiArU1JDX1VSSVtz
+aGEyNTZzdW1dID0gImQ2ZWE5ZGU0MTBmYzJiY2QyNjIwZDcwOWMyMjAyODkzYjIxOGUyZTZhNTVj
+M2MwY2U2YmViZDI3ZmE0MTIwZjYiDQo+ID4gKw0KPiA+ICtERUZBVUxUX1BSRUZFUkVOQ0UgPSAi
+LTEiDQo+IA0KPiAzLiBXaHk/DQo+ID4gK0RFRkFVTFRfUFJFRkVSRU5DRV9hbmdzdHJvbSA9ICIx
+Ig0KPiANCj4gNC4gSGF2ZSB5b3UgdGFsa2VkIHRvIHRoZSDIpm5nc3Ryw7ZtIG1haW50YWluZXJz
+Pw0KPiANCj4gVGhlc2UgdHdvIHZhcmlhYmxlcyBhcmUgZGVmaW5lZCBpbiB0aGUgcHJldmlvdXMg
+dmVyc2lvbiBvZiBibHVlejQgcmVjaXBlOiBibHVlejRfNC44OS5iYi4gV2l0aG91dCB0aGVzZSB0
+d28gZGVmaW5pdGlvbnMgaW4gbXkgcmVjaXBlIGJpdGJha2UgcHJlZmVycyB0aGUgb2xkIHJlY2lw
+ZSB1cG9uIG1pbmUsIHdoaWNoIGRvZXNuJ3QgbGVhdmUgbWUgYSBjaG9pY2UgYnV0IHRvIGRlZmlu
+ZSB0aGVzZSB2YXJpYWJsZXMuDQoNClRoZSDigJxjb3JyZWN04oCdIHdheSB3b3VsZCBiZSB0byBm
+aXJzdCBhZGQgdGhhdCByZWNpcGUgYW5kIHRoZW4gYWZ0ZXJ3YXJkIHNlbnQgYSBwYXRjaCB0byBj
+aGFuZ2UgdGhlIHByZWZlcmVuY2VzIHdoaWNoIHRoZSDIpm5nc3Ryw7ZtIG1haW50YWluZXJzIGhh
+dmUgdG8gYWNrbm93bGVkZ2UuDQoNCj4gPiArDQo+ID4gK0RFUEVORFMgKz0gImxpYnNuZGZpbGUx
+Ig0KPiA+ICsNCj4gPiArUFIgPSAiJHtJTkNfUFJ9LjAiDQo+ID4gKw0KPiA+ICsjIE5vdCBhbGwg
+ZGlzdHJvcyBoYXZlIGEgcmVjZW50IGVub3VnaCB1ZGV2IEJUVURFViA9ICIgDQo+ID4gKy0tZGlz
+YWJsZS11ZGV2cnVsZXMiDQo+ID4gK0JUVURFVl9hbmdzdHJvbSA9ICIgLS1lbmFibGUtdWRldnJ1
+bGVzIg0KPiA+ICtCVFVERVZfc2hyID0gIiAtLWVuYWJsZS11ZGV2cnVsZXMiDQo+ID4gKw0KPiA+
+ICtFWFRSQV9PRUNPTkYgKz0gIiR7QlRVREVWfSINCj4gPiArZG9fY29uZmlndXJlX2FwcGVuZCgp
+ew0KPiA+ICsJZWNobyAiI2RlZmluZSBMSUJVREVWX0lfS05PV19USEVfQVBJX0lTX1NVQkpFQ1Rf
+VE9fQ0hBTkdFIiA+PiANCj4gPiArJHtTfS9jb25maWcuaCB9DQo+ID4gKw0KPiA+ICtGSUxFU18k
+e1BOfS1kYmcgKz0gIlwNCj4gPiArICAke2Jhc2VfbGliZGlyfS91ZGV2Ly5kZWJ1ZyBcDQo+ID4g
+KyAgJHtsaWJkaXJ9LyovLmRlYnVnIFwNCj4gPiArIg0KPiANCj4gT3RoZXJ3aXNlIHRoaXMgcmVj
+aXBlIGxvb2tzIGdvb2QuIElzIGl0IHBsYW5uZWQgZm9yIGJyYW5jaCAyMDExLjAzLW1haW50ZW5h
+bmNlPw0KDQoNClRoYW5rcywNCg0KUGF1bA0K
 
 
