@@ -1,26 +1,30 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RKgDv-0005sA-5W
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cwabbott0@gmail.com>) id 1RKkOI-0007OW-ID
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Oct 2011 01:59:35 +0100
-Received: (qmail invoked by alias); 31 Oct 2011 00:53:30 -0000
-Received: from p4FDF1C25.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.28.37]
-	by mail.gmx.net (mp042) with SMTP; 31 Oct 2011 01:53:30 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/DVUcmcUbD9Xlx1eCGLF1I5kYYhwf55kbrZWsxU/
-	4NBOqMIQ1uu0rU
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
+	Mon, 31 Oct 2011 06:26:34 +0100
+Received: by qam2 with SMTP id 2so4590569qam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Oct 2011 22:20:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=x6wMESSKnplGP7IdZs6Ut4strc8R43Zi8tc4WbQU4HQ=;
+	b=D3mGDqDJUGyI63OPv2+yBy4ekNARhDCproFX5l+5ebxjS+4rcAn2KEb1g8n+ShUlV/
+	XpTi4rAcwdciEnf8+shu/LJe31TjNgm4QqCdToBGPNKFmkTWkK1RZtQz1BYTWXTAyDip
+	xKVIY4iV2K868kBbomXR22FaFLfptHR43L20o=
+Received: by 10.224.216.197 with SMTP id hj5mr10537848qab.15.1320038428432;
+	Sun, 30 Oct 2011 22:20:28 -0700 (PDT)
+Received: from localhost.localdomain (ool-4573101f.dyn.optonline.net.
+	[69.115.16.31])
+	by mx.google.com with ESMTPS id fj8sm29138587qab.9.2011.10.30.22.20.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 30 Oct 2011 22:20:27 -0700 (PDT)
+From: Connor Abbott <cwabbott0@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2011 01:58:13 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1320003224-12913-1-git-send-email-schnitzeltony@gmx.de>
-In-Reply-To: <1320003224-12913-1-git-send-email-schnitzeltony@gmx.de>
-MIME-Version: 1.0
-Message-Id: <201110310158.13431.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [meta-gnome] evince: initial add 2.32.0
+Date: Mon, 31 Oct 2011 01:20:18 -0400
+Message-Id: <1320038418-24191-1-git-send-email-cwabbott0@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Subject: [meta-oe][PATCH] opencv: import from oe-classic and upgrade to 2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,128 +38,196 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2011 00:59:35 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 31 Oct 2011 05:26:34 -0000
 
-On Sunday, October 30, 2011 08:33:44 PM Andreas M=C3=BCller wrote:
-> * recipe based on oe-classic: evince_2.30.0.bb
->   commit 5dba154457691d2096f2b1a7ef24bdc6f1b51859
-> * run tested on overo
-> * TODO further doctype support
->   configure option  ->    current configure result
->   ------------------------------------------------
->   --enable-ps       ->    PostScript Backend.:  no
->   --enable-djvu     ->    DJVU Backend.......:  no
->   --enable-impress  ->    Impress Backend....:  no
->=20
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de>
-> ---
->  meta-gnome/recipes-gnome/evince/evince_2.32.0.bb |   39
-> ++++++++++++++++++++++ 1 files changed, 39 insertions(+), 0 deletions(-)
->  create mode 100644 meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
->=20
-> diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-> b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb new file mode 100644
-> index 0000000..899d416
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-> @@ -0,0 +1,39 @@
-> +DESCRIPTION =3D "Evince is a document viewer for document formats like p=
-df,
-> ps, djvu." +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D96f2f8d5ee576a2163977938ea36f=
-a7b"
-> +SECTION =3D "x11/office"
-> +DEPENDS =3D "gnome-icon-theme gnome-doc-utils-native libgnome-keyring
-> nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade" +
-> +inherit gnome pkgconfig gtk-icon-cache
-> +
-> +SRC_URI[archive.md5sum] =3D "ebc3ce6df8dcbf29cb9492f8dd031319"
-> +SRC_URI[archive.sha256sum] =3D
-> "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7" +
-> +EXTRA_OECONF =3D " --enable-thumbnailer \
-> +                 --enable-nautilus \
-> +                 --disable-scrollkeeper \
-> +                 --enable-pixbuf \
-> +               "
-> +
-> +do_install_append() {
-> +	install -d install -d ${D}${datadir}/pixmaps
-> +	install -m 0755 ${S}/data/icons/48x48/apps/evince.png
-> ${D}${datadir}/pixmaps/ +}
-> +
-> +RDEPENDS_${PN} +=3D "glib-2.0-utils"
-> +
-> +PACKAGES =3D+ "${PN}-nautilus-extension"
-> +FILES_${PN} +=3D "${datadir}/dbus-1"
-> +FILES_${PN}-dbg +=3D "${libdir}/*/*/.debug \
-> +                    ${libdir}/*/*/*/.debug"
-> +FILES_${PN}-dev +=3D "${libdir}/nautilus/extensions-2.0/*.la"
-> +FILES_${PN}-staticdev +=3D "${libdir}/nautilus/extensions-2.0/*.a"
-> +FILES_${PN}-nautilus-extension =3D "${libdir}/nautilus/*/*so"
-> +
-> +pkg_postinst_${PN} () {
-> +if [ -n "$D" ]; then
-> +    exit 1
-> +fi
-> +
-> +glib-compile-schemas ${datadir}/glib-2.0/schemas
-> +}
-Be prepared that your system might feel different when installing evince an=
-d=20
-starting *glib-compile-schemas* on pkg_postinst. It seems that now the file=
-s in=20
-/usr/share/glib-2.0/schedule rise from dead by being compiled and thereby=20
-causing new behaviours. E.g. When starting thunar for the first time in ses=
-sion I=20
-now have to wait for very long and see
+OpenCV <= 2.2 won't compile on oe-core due to the lack of v4l1 headers, and therefore wasn't included in this patch. Also, the support for newer cv2-style python bindings is a bit hacked up at the moment due to the way OpenCV detects the Python version and Numpy headers (see 0001-Fix-CMakeLists.txt-numpy-detection.patch). In particular, it requires the native & target python to be the same version and have similar site-packages directories, which is true at least for now in OE.
+Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
+---
+ .../recipes-support/opencv/opencv-samples_2.3.bb   |   43 +++++++++++
+ .../0001-Fix-CMakeLists.txt-numpy-detection.patch  |   37 ++++++++++
+ meta-oe/recipes-support/opencv/opencv_2.3.bb       |   76 ++++++++++++++++++++
+ 3 files changed, 156 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv-samples_2.3.bb
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv_2.3.bb
 
-Out of memory: Kill process 1458 (gvfsd-smb-brows) score 742 or sacrifice c=
-hild
-Killed process 1458 (gvfsd-smb-brows) total-vm:403384kB, anon-rss:185676kB,=
- file-
-rss:108kB
-gvfsd-smb-brows invoked oom-killer: gfp_mask=3D0x201da, order=3D0, oom_adj=
-=3D0,=20
-oom_score_adj=3D0
-[<c003f9bc>] (unwind_backtrace+0x0/0xe0) from [<c00a3020>]=20
-(dump_header.clone.13+0x4c/0x11c)
-[<c00a3020>] (dump_header.clone.13+0x4c/0x11c) from [<c00a31f0>]=20
-(oom_kill_process.clone.16+0x3c/0x1e4)
-[<c00a31f0>] (oom_kill_process.clone.16+0x3c/0x1e4) from [<c00a36f0>]=20
-(out_of_memory+0x250/0x2d8)
-[<c00a36f0>] (out_of_memory+0x250/0x2d8) from [<c00a658c>]=20
-(__alloc_pages_nodemask+0x49c/0x614)
-[<c00a658c>] (__alloc_pages_nodemask+0x49c/0x614) from [<c00a7e84>]=20
-(__do_page_cache_readahead+0xa0/0x1e4)
-[<c00a7e84>] (__do_page_cache_readahead+0xa0/0x1e4) from [<c00a8224>]=20
-(ra_submit+0x20/0x24)
-[<c00a8224>] (ra_submit+0x20/0x24) from [<c00a2704>] (filemap_fault+0x164/0=
-x39c)
-[<c00a2704>] (filemap_fault+0x164/0x39c) from [<c00b3e0c>]=20
-(__do_fault+0x50/0x3a8)
-[<c00b3e0c>] (__do_fault+0x50/0x3a8) from [<c00b68e4>]=20
-(handle_pte_fault+0x23c/0x550)
-[<c00b68e4>] (handle_pte_fault+0x23c/0x550) from [<c00b6c90>]=20
-(handle_mm_fault+0x98/0xa8)
-[<c00b6c90>] (handle_mm_fault+0x98/0xa8) from [<c00418f8>]=20
-(do_page_fault+0xe0/0x268)
-[<c00418f8>] (do_page_fault+0xe0/0x268) from [<c0036278>]=20
-(do_PrefetchAbort+0x34/0x98)
-[<c0036278>] (do_PrefetchAbort+0x34/0x98) from [<c003b460>]=20
-(ret_from_exception+0x0/0x10)
-Exception stack(0xcefb7fb0 to 0xcefb7ff8)
+diff --git a/meta-oe/recipes-support/opencv/opencv-samples_2.3.bb b/meta-oe/recipes-support/opencv/opencv-samples_2.3.bb
+new file mode 100644
+index 0000000..5cac4a5
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv-samples_2.3.bb
+@@ -0,0 +1,43 @@
++DESCRIPTION = "Opencv : The Open Computer Vision Library"
++HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "BSD"
++
++DEPENDS = "opencv"
++
++LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
++"
++
++SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
++"
++
++SRCREV = "6923"
++PV = "2.3.1"
++PR = "r0"
++
++S = "${WORKDIR}/opencv"
++
++do_install() {
++    cd samples/c
++	install -d ${D}/${bindir}
++	install -d ${D}/${datadir}/opencv/samples
++
++	cp * ${D}/${datadir}/opencv/samples || true
++
++    for i in *.c; do
++        echo "compiling $i"
++        ${CXX} ${CFLAGS} ${LDFLAGS} -ggdb `pkg-config --cflags opencv` -o `basename $i .c` $i `pkg-config --libs opencv` || true
++		install -m 0755 `basename $i .c` ${D}/${bindir} || true
++		rm ${D}/${datadir}/opencv/samples/`basename $i .c` || true
++	done
++    for i in *.cpp; do
++        echo "compiling $i"
++        ${CXX} ${CFLAGS} ${LDFLAGS} -ggdb `pkg-config --cflags opencv` -o `basename $i .cpp` $i `pkg-config --libs opencv` || true
++		install -m 0755 `basename $i .cpp` ${D}/${bindir} || true
++		rm ${D}/${datadir}/opencv/samples/`basename $i .cpp` || true
++	done
++}
++
++FILES_${PN}-dev += "${datadir}/opencv/samples/*.c* ${datadir}/opencv/samples/*.vcp* ${datadir}/opencv/samples/build*" 
++FILES_${PN} += "${bindir} ${datadir}/opencv"
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch b/meta-oe/recipes-support/opencv/opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch
+new file mode 100644
+index 0000000..dba00f8
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch
+@@ -0,0 +1,37 @@
++From a7301911a3cdf9196abd93ff894a9e86e0bcdc5e Mon Sep 17 00:00:00 2001
++From: Connor Abbott <cwabbott0@gmail.com>
++Date: Sun, 30 Oct 2011 20:00:03 -0400
++Subject: [PATCH] Fix CMakeLists.txt numpy detection
++
++Right now, the code opencv uses to detect where the numpy include files are doesn't work with cross-compiling because it uses the native python to determine the environment. To make this a little better, allow the user to explictly specify the path using -DPYTHON_NUMPY_INCLUDE_DIRS=path/to/numpy/include/dir .
++Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
++---
++ CMakeLists.txt |   12 ++++++++----
++ 1 files changed, 8 insertions(+), 4 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index ff8f20c..8edbd78 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -715,10 +715,14 @@ IF ("${PYTHON_VERSION_MAJOR_MINOR}" VERSION_GREATER 2.4)
++ ENDIF()
++ 
++ # Attempt to discover the NumPy include directory. If this succeeds, then build python API with NumPy
++-execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
++-            RESULT_VARIABLE PYTHON_NUMPY_PROCESS
++-            OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
++-            OUTPUT_STRIP_TRAILING_WHITESPACE)
+++if(NOT DEFINED PYTHON_NUMPY_INCLUDE_DIRS)
+++    execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
+++                RESULT_VARIABLE PYTHON_NUMPY_PROCESS
+++                OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
+++                OUTPUT_STRIP_TRAILING_WHITESPACE)
+++else()
+++    set(PYTHON_NUMPY_PROCESS 0)
+++endif()
++ 
++ if(PYTHON_NUMPY_PROCESS EQUAL 0)
++     set(PYTHON_USE_NUMPY 1)
++-- 
++1.7.4.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.3.bb b/meta-oe/recipes-support/opencv/opencv_2.3.bb
+new file mode 100644
+index 0000000..220116d
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv_2.3.bb
+@@ -0,0 +1,76 @@
++DESCRIPTION = "Opencv : The Open Computer Vision Library"
++HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "BSD"
++
++ARM_INSTRUCTION_SET = "arm"
++
++LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
++"
++
++DEPENDS = "python-numpy ffmpeg gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
++
++SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
++file://opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch \
++"
++
++SRCREV = "6923"
++
++PV = "2.3.1"
++PR = "r0"
++
++S = "${WORKDIR}/opencv"
++
++EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
++-DBUILD_PYTHON_SUPPORT=ON \
++"
++
++inherit distutils-base pkgconfig cmake
++
++export BUILD_SYS
++export HOST_SYS
++export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
++export PYTHON=${STAGING_BINDIR_NATIVE}/python
++
++TARGET_CC_ARCH += "-I${S}/include "
++
++PACKAGES += "${PN}-apps python-opencv"
++
++python populate_packages_prepend () {
++	cv_libdir = bb.data.expand('${libdir}', d)
++	cv_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
++	do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev', allow_links=True)
++	do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
++	do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
++	do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV %s library', extra_depends='', allow_links=True)
++
++	pn = bb.data.getVar('PN', d, 1)
++	metapkg =  pn + '-dev'
++	bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
++	blacklist = [ metapkg ]
++	metapkg_rdepends = [ ] 
++	packages = bb.data.getVar('PACKAGES', d, 1).split()
++	for pkg in packages[1:]:
++		if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):
++			metapkg_rdepends.append(pkg)
++	bb.data.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
++}
++
++FILES_${PN} = ""
++FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
++FILES_${PN}-dbg += "${libdir}/.debug"
++FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
++FILES_${PN}-doc = "${datadir}/OpenCV/doc"
++
++ALLOW_EMPTY_${PN} = "1"
++
++INSANE_SKIP_python-opencv = True
++DESCRIPTION_python-opencv = "Python bindings to opencv"
++FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
++RDEPENDS_python-opencv = "python-core python-numpy"
++
++do_install_append() {
++	cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
++	sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
++}
+\ No newline at end of file
+-- 
+1.7.4.1
 
-After a while a second thunar opens with contents at Network. This was empt=
-y=20
-before!
-
-Right now it again seems to me that opening one door causes entering a room=
- with=20
-many new doors...
-
-Andreas
 
 
