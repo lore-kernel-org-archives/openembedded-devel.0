@@ -1,49 +1,23 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1RLBrk-0008N1-VX
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RLCQp-0000el-A4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 11:46:49 +0100
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RLBlt-0007C1-8L>; Tue, 01 Nov 2011 11:40:45 +0100
-Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
-	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RLBlt-0006n1-2c>; Tue, 01 Nov 2011 11:40:45 +0100
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by mail.imp.fu-berlin.de with esmtps (Exim 4.72) id 1RLBl9-0001gg-NE
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 11:40:15 +0100
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1RLBl4-0002t5-Jg
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 11:39:54 +0100
-Date: Tue, 1 Nov 2011 11:39:54 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 01 Nov 2011 12:23:03 +0100
+Received: (qmail invoked by alias); 01 Nov 2011 11:16:47 -0000
+Received: from p5B0A3AE4.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.58.228]
+	by mail.gmx.net (mp006) with SMTP; 01 Nov 2011 12:16:47 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/7NX8Mypr7+eJ1t+BcktbsuRG5Y83AM7bKUPCT6U
+	J7PZNx0jjtUZTW
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111101103954.GA424@mi.fu-berlin.de>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<20111027115643.GA13369@mi.fu-berlin.de>
-	<20111027122735.GC12609@jama.jama.net> <4EAF3F89.6000204@telia.com>
-	<20111101010055.GU15391@denix.org> <4EAF9C0E.9030702@nedap.com>
+Date: Tue,  1 Nov 2011 12:21:18 +0100
+Message-Id: <1320146478-14875-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-In-Reply-To: <4EAF9C0E.9030702@nedap.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Remote-IP: 160.45.42.84
-X-Spam_Score: -4.1
-X-exim-Spam_Score_Int: -40
-X-exim-Spam_Bar: ----
-X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-	* -1.2 RP_MATCHES_RCVD Envelope sender domain matches handover relay
-	domain * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-X-Originating-IP: 160.45.117.149
-Subject: Re: Plans for OE classic future
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe] imagemagick: fix unshipped packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,43 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 10:46:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Nov 2011 11:23:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Nov 01, 2011 at 08:13:18AM +0100, Jaap de Jong wrote:
-> On 11/01/2011 02:00 AM, Denys Dmytriyenko wrote:
-> >On Tue, Nov 01, 2011 at 01:38:33AM +0100, Ulf Samuelsson wrote:
-> >>2011-10-27 14:27, Martin Jansa skrev:
-> >>>On Thu, Oct 27, 2011 at 01:56:43PM +0200, Henning Heinold wrote:
-> >>>>On Thu, Oct 27, 2011 at 10:53:13AM +0000, Mats K?rrman wrote:
-> >>>>>Hi,
-> >>>>>
-> >>>>>Are there any plans for new releases and/or maintenance branches of OE
-> >>>>>classic?
-> >>>>>
-> >>>>>BR / Mats
-> >>>>Hi,
-> >>>>
-> >>>>http://cgit.openembedded.org/openembedded/log/?h=org.openembedded.dev
-> >>>>
-> >>>>and
-> >>>>
-> >>>>http://cgit.openembedded.org/openembedded/log/?h=2011.03-maintenance
-> >>>>
-> >>>>Bye Henning
-> >>>Are you showing that maintenance ibranch is not so old and that only few
-> >>>things changed in old OE-classic since then? :)
-> >>>
-> >>>Afaik: nobody plans to do another release from OE-classic and
-> >>>oe-core/meta-oe/BSP's/... are veryclose to first release
-> >>What repository is used for the BSP's ?
-> >Each BSP in own repository - http://www.openembedded.org/wiki/LayerIndex
-> >
-> Does anybody know where the atmel boards are? (at91sam9263ek)
+on build we receive tons of warnings like
 
-I guess Ulf has to do create it first.
+WARNING: For recipe imagemagick, the following files were installed but not shipped in any package:
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/type.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-solaris.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/locale.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/english.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-windows.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-ghostscript.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/delegates.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/configure.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/config/francais.xml
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.a
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.la
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.so
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/.debug/analyze.so
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/coders/histogram.la
+WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/coders/ycbcr.a
+...
 
-Bye Henning
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../imagemagick/imagemagick_6.4.4.bb               |   14 +++++++-------
+ 1 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
+index c38c644..dd84cb2 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e1ebcc1358b9f81eba64255fc5da6892"
+ # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ PATCHSET = "1"
+ SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+@@ -20,14 +20,14 @@ inherit autotools binconfig pkgconfig
+ 
+ EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
+ 
+-FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
+-                ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
+-                ${libdir}/ImageMagick-${IMVER}/config/ \
+-                ${datadir}/ImageMagick-${IMVER}"
++FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
++                ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
++                ${libdir}/ImageMagick-${PV}/config/ \
++                ${datadir}/ImageMagick-${PV}"
+ 
+-FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
++FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
+ 
+-FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
++FILES_${PN}-dbg += "${libdir}/ImageMagick-${PV}/modules-Q16/*/.debug/*"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-- 
+1.7.4.4
+
 
 
