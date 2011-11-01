@@ -1,23 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RLNAk-0005yk-G1 for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 23:51:10 +0100
-Received: from f053040042.adsl.alicedsl.de ([78.53.40.42]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RLN4v-0006EY-VM for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 22:45:10 +0000
-Message-ID: <1320187498.27731.13.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RLOFq-0002YK-5f
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Nov 2011 01:00:30 +0100
+Received: (qmail invoked by alias); 01 Nov 2011 23:54:23 -0000
+Received: from p5B0A3AE4.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.58.228]
+	by mail.gmx.net (mp006) with SMTP; 02 Nov 2011 00:54:23 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18uGMBImuUuMDg+f5gCcmkqquhHqplu5EIArD9mXf
+	7Ohhd6q3n9Jkwj
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 01 Nov 2011 23:44:58 +0100
-In-Reply-To: <1320166017-12836-1-git-send-email-nmacgum@gmail.com>
-References: <1320166017-12836-1-git-send-email-nmacgum@gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [PATCH] guilt-native: changed SRC_URI
+Date: Wed,  2 Nov 2011 00:58:53 +0100
+Message-Id: <1320191933-28392-3-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1320191933-28392-1-git-send-email-schnitzeltony@gmx.de>
+References: <1320191933-28392-1-git-send-email-schnitzeltony@gmx.de>
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe][V2 2/2] mime.bbclass: Add --disable-update-mimedb to EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,72 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 22:51:10 -0000
-X-Groupsio-MsgNum: 35168
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-2whspa3CqzfQ92N/dL+d"
+X-List-Received-Date: Wed, 02 Nov 2011 00:00:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-2whspa3CqzfQ92N/dL+d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+keep recipes from building files not intended to pack and causing QA warnings [1]
 
-Dear Neil,
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/035954.html
 
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-oe/classes/mime.bbclass |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Am Dienstag, den 01.11.2011, 09:46 -0700 schrieb nmacgum@gmail.com:
-> From: Neil MacMunn <neil@gumstix.com>
->=20
-> * the old kernel.org URI is no longer reachable
-
-=E2=80=A6 because of the server compromise.
-
-> Signed-off-by: Neil MacMunn <neil@gumstix.com>
-> ---
->  meta/recipes-devtools/guilt/guilt-native_0.33.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/meta/recipes-devtools/guilt/guilt-native_0.33.bb b/meta/reci=
-pes-devtools/guilt/guilt-native_0.33.bb
-> index 54b1b90..325118a 100644
-> --- a/meta/recipes-devtools/guilt/guilt-native_0.33.bb
-> +++ b/meta/recipes-devtools/guilt/guilt-native_0.33.bb
-> @@ -8,7 +8,7 @@ PR =3D r1
-> =20
->  inherit native
-> =20
-> -SRC_URI =3D "${KERNELORG_MIRROR}/linux/kernel/people/jsipek/guilt/guilt-=
-${PV}.tar.gz\
-> +SRC_URI =3D "http://ftp.sunet.se/pub/Linux/kernels/people/jsipek/guilt/g=
-uilt-${PV}.tar.gz\
-
-If I understand that correctly, you should define `KERNELORG_MIRROR` to
-something else in your `local.conf` until <kernel.org> is back hosting
-these archives. Otherwise all mirrors need to be changed. Maybe this
-variable could be also redefined to some other mirror and later we will
-revert that commit when <kernel.org> is back up.
-
->             file://guilt-push.patch \
->  	   file://guilt-pop.patch \
->  	   file://guilt.patch \
+diff --git a/meta-oe/classes/mime.bbclass b/meta-oe/classes/mime.bbclass
+index b9cdd7b..d73c2cb 100644
+--- a/meta-oe/classes/mime.bbclass
++++ b/meta-oe/classes/mime.bbclass
+@@ -1,5 +1,7 @@
+ DEPENDS += "shared-mime-info-native shared-mime-info"
+ 
++EXTRA_OECONF += "--disable-update-mimedb"
++
+ mime_postinst() {
+ if [ "$1" = configure ]; then
+ 	if [ -x ${bindir}/update-mime-database ] ; then
+-- 
+1.7.4.4
 
 
-Thanks,
 
-Paul
-
-
---=-2whspa3CqzfQ92N/dL+d
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk6wdmoACgkQPX1aK2wOHVj/AQCeI2ButFWCdsj5tdEPIkp4y/FG
-BcMAn3gLFmNVOlW6BZMLUA/ghtNI4Wnh
-=O8Wu
------END PGP SIGNATURE-----
-
---=-2whspa3CqzfQ92N/dL+d--
