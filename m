@@ -1,33 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RLHEW-00030i-3f
+	(envelope-from <nmacgum@gmail.com>) id 1RLHb7-0003TF-O9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 17:30:40 +0100
-Received: by faas16 with SMTP id s16so7411536faa.6
+	Tue, 01 Nov 2011 17:54:02 +0100
+Received: by ggnj1 with SMTP id j1so6976193ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 09:24:31 -0700 (PDT)
+	Tue, 01 Nov 2011 09:47:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Pz52LaFUtbisp64vusrD7kI9cVC6V3Jj7DgeFUgY07Y=;
-	b=JohuiH+i5dlVRPY6iCoTVdpEHE4AwFaHytZCvhJVAaoiKeiiGBUC2u6sgbtm0aoeSG
-	krdBkNd3UpC6knUTBAYkHUZkVWGq1H79eqMUESSGyMD0c1WN5IKubXAdGS7kM1wqXjCP
-	37Q4UgaTku6vj062U3VIlv1IZErAhg4roNyrg=
-Received: by 10.223.7.20 with SMTP id b20mr1654039fab.21.1320164670934;
-	Tue, 01 Nov 2011 09:24:30 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y17sm45750340faf.1.2011.11.01.09.24.29
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=jYagGCx00XX8+NN7HnBwe2SSPmVsNWODCjZMhJQ0vco=;
+	b=n4BHoS0dlXBEmNbbpCWjFlP5XdA9OE5ReUUwWaHCGB3KDGafbrOArh6ByoFdvugJJd
+	qyh2dnTFiHp1ZP8/V7BZP/C6NMKxt/zFOcyyp3pZH49bHlzQXISLz2NNDzxSMxM/ym+w
+	macYM42DpbFXqmzxzjiAOZzorC+HREDMa3l9Q=
+Received: by 10.42.135.66 with SMTP id o2mr367738ict.0.1320166072855;
+	Tue, 01 Nov 2011 09:47:52 -0700 (PDT)
+Received: from localhost.localdomain ([74.3.164.55])
+	by mx.google.com with ESMTPS id ge16sm31587188ibb.2.2011.11.01.09.47.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 Nov 2011 09:24:29 -0700 (PDT)
-Date: Tue, 1 Nov 2011 17:24:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 01 Nov 2011 09:47:52 -0700 (PDT)
+From: nmacgum@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111101162422.GE4714@jama.jama.net>
-References: <CAHELjkPJSKOT7Ttv-XQ1wJf+TsSe_V=R4x4BUkntApSnmW-CsQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAHELjkPJSKOT7Ttv-XQ1wJf+TsSe_V=R4x4BUkntApSnmW-CsQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: guilt-native-0.33-r1: task do_fetch: Failed
+Date: Tue,  1 Nov 2011 09:46:57 -0700
+Message-Id: <1320166017-12836-1-git-send-email-nmacgum@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Cc: Neil MacMunn <neil@gumstix.com>
+Subject: [PATCH] guilt-native: changed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 16:30:40 -0000
-X-Groupsio-MsgNum: 35162
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wTWi5aaYRw9ix9vO"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Nov 2011 16:54:02 -0000
 
---wTWi5aaYRw9ix9vO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Neil MacMunn <neil@gumstix.com>
 
-On Tue, Nov 01, 2011 at 09:20:12AM -0700, Neil MacMunn wrote:
-> Hello,
-> Does anyone have a working mirror for
-> http://kernel.org/pub/linux/kernel/people/jsipek/guilt/guilt-0.33.tar.gz?
+* the old kernel.org URI is no longer reachable
 
-first link in google:
-http://ftp.sunet.se/pub/Linux/kernels/people/jsipek/guilt/
+Signed-off-by: Neil MacMunn <neil@gumstix.com>
+---
+ meta/recipes-devtools/guilt/guilt-native_0.33.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta/recipes-devtools/guilt/guilt-native_0.33.bb b/meta/recipes-devtools/guilt/guilt-native_0.33.bb
+index 54b1b90..325118a 100644
+--- a/meta/recipes-devtools/guilt/guilt-native_0.33.bb
++++ b/meta/recipes-devtools/guilt/guilt-native_0.33.bb
+@@ -8,7 +8,7 @@ PR = r1
+ 
+ inherit native
+ 
+-SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/people/jsipek/guilt/guilt-${PV}.tar.gz\
++SRC_URI = "http://ftp.sunet.se/pub/Linux/kernels/people/jsipek/guilt/guilt-${PV}.tar.gz\
+            file://guilt-push.patch \
+ 	   file://guilt-pop.patch \
+ 	   file://guilt.patch \
+-- 
+1.7.1
 
---wTWi5aaYRw9ix9vO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk6wHTYACgkQN1Ujt2V2gBz2SQCgmFpp8ZMAKlMctR6A0COx5hJj
-T5QAoIkqHCJZ8yvfbCIvserWrb783GVm
-=QouP
------END PGP SIGNATURE-----
-
---wTWi5aaYRw9ix9vO--
