@@ -1,26 +1,33 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nmacgum@gmail.com>) id 1RLHAP-0002s5-LY
+	(envelope-from <martin.jansa@gmail.com>) id 1RLHEW-00030i-3f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 17:26:26 +0100
-Received: by vcbf1 with SMTP id f1so6382973vcb.6
+	Tue, 01 Nov 2011 17:30:40 +0100
+Received: by faas16 with SMTP id s16so7411536faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 09:20:13 -0700 (PDT)
+	Tue, 01 Nov 2011 09:24:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=lLD2RZCEVjD8qR0se5BN/RoEA7gqCVnPIGw9YPHkp68=;
-	b=wc+m0kfRqDMW+oWZ/mbuH9WjooZ5juaSC++Nkn6aezxesNRQUtgQZYH9gPX/Qo1CE5
-	lmh+3KgLDhef4Z2l/5bsfcMI5wLnl2RWpSkLYIy4Eh1hY9yZ/2g+bdQ6vp6djulv9bUh
-	bVwGSET17D8Tv4/yjHoyO4VPU99jXzjs/Xn8I=
-MIME-Version: 1.0
-Received: by 10.52.68.43 with SMTP id s11mr166889vdt.62.1320164412954; Tue, 01
-	Nov 2011 09:20:12 -0700 (PDT)
-Received: by 10.220.169.17 with HTTP; Tue, 1 Nov 2011 09:20:12 -0700 (PDT)
-Date: Tue, 1 Nov 2011 09:20:12 -0700
-Message-ID: <CAHELjkPJSKOT7Ttv-XQ1wJf+TsSe_V=R4x4BUkntApSnmW-CsQ@mail.gmail.com>
-From: Neil MacMunn <nmacgum@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Pz52LaFUtbisp64vusrD7kI9cVC6V3Jj7DgeFUgY07Y=;
+	b=JohuiH+i5dlVRPY6iCoTVdpEHE4AwFaHytZCvhJVAaoiKeiiGBUC2u6sgbtm0aoeSG
+	krdBkNd3UpC6knUTBAYkHUZkVWGq1H79eqMUESSGyMD0c1WN5IKubXAdGS7kM1wqXjCP
+	37Q4UgaTku6vj062U3VIlv1IZErAhg4roNyrg=
+Received: by 10.223.7.20 with SMTP id b20mr1654039fab.21.1320164670934;
+	Tue, 01 Nov 2011 09:24:30 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y17sm45750340faf.1.2011.11.01.09.24.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 01 Nov 2011 09:24:29 -0700 (PDT)
+Date: Tue, 1 Nov 2011 17:24:22 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: guilt-native-0.33-r1: task do_fetch: Failed
+Message-ID: <20111101162422.GE4714@jama.jama.net>
+References: <CAHELjkPJSKOT7Ttv-XQ1wJf+TsSe_V=R4x4BUkntApSnmW-CsQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAHELjkPJSKOT7Ttv-XQ1wJf+TsSe_V=R4x4BUkntApSnmW-CsQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: guilt-native-0.33-r1: task do_fetch: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,15 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 16:26:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Nov 2011 16:30:40 -0000
+X-Groupsio-MsgNum: 35162
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wTWi5aaYRw9ix9vO"
+Content-Disposition: inline
 
-Hello,
-Does anyone have a working mirror for
-http://kernel.org/pub/linux/kernel/people/jsipek/guilt/guilt-0.33.tar.gz?
+--wTWi5aaYRw9ix9vO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
--
-Neil
+On Tue, Nov 01, 2011 at 09:20:12AM -0700, Neil MacMunn wrote:
+> Hello,
+> Does anyone have a working mirror for
+> http://kernel.org/pub/linux/kernel/people/jsipek/guilt/guilt-0.33.tar.gz?
 
+first link in google:
+http://ftp.sunet.se/pub/Linux/kernels/people/jsipek/guilt/
 
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--wTWi5aaYRw9ix9vO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk6wHTYACgkQN1Ujt2V2gBz2SQCgmFpp8ZMAKlMctR6A0COx5hJj
+T5QAoIkqHCJZ8yvfbCIvserWrb783GVm
+=QouP
+-----END PGP SIGNATURE-----
+
+--wTWi5aaYRw9ix9vO--
