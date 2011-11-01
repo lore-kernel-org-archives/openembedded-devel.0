@@ -1,35 +1,49 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RL9vU-00050g-ON
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1RLBrk-0008N1-VX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 09:42:32 +0100
-Received: by faas16 with SMTP id s16so6988113faa.6
+	Tue, 01 Nov 2011 11:46:49 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RLBlt-0007C1-8L>; Tue, 01 Nov 2011 11:40:45 +0100
+Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
+	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RLBlt-0006n1-2c>; Tue, 01 Nov 2011 11:40:45 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by mail.imp.fu-berlin.de with esmtps (Exim 4.72) id 1RLBl9-0001gg-NE
+	(envelope-from <heinold@mi.fu-berlin.de>)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 01:36:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=e3eqriv10Fuzm65j5UjIu91wfLnvDEO/SqWVuW5sXhI=;
-	b=oTx4wwHJBN4QzHNKYDgEAPsV+Nk5zitYODlV5LTJQ683Ivy3d8r9SVs+J0mF0sCxom
-	IeAJoOs7lfUJGhjKUeqIIn/aH3ptYLMCZQm1uICKRX4GXT7IpcusdJq6/ed4dRPNch7n
-	4VGeSY68yEKDvlW+lxLA7dpwe1dYAkugt4kK8=
-Received: by 10.223.5.66 with SMTP id 2mr35505499fau.26.1320136586766;
-	Tue, 01 Nov 2011 01:36:26 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y2sm43380193fag.12.2011.11.01.01.36.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 Nov 2011 01:36:26 -0700 (PDT)
-Date: Tue, 1 Nov 2011 09:36:19 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 01 Nov 2011 11:40:15 +0100
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1RLBl4-0002t5-Jg
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Nov 2011 11:39:54 +0100
+Date: Tue, 1 Nov 2011 11:39:54 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111101083619.GC4714@jama.jama.net>
-References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<1881c344694290d71556dec7d9e784b6819f7a17.1319884094.git.Martin.Jansa@gmail.com>
-	<j8oahf$g4n$1@dough.gmane.org>
+Message-ID: <20111101103954.GA424@mi.fu-berlin.de>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<20111027115643.GA13369@mi.fu-berlin.de>
+	<20111027122735.GC12609@jama.jama.net> <4EAF3F89.6000204@telia.com>
+	<20111101010055.GU15391@denix.org> <4EAF9C0E.9030702@nedap.com>
 MIME-Version: 1.0
-In-Reply-To: <j8oahf$g4n$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][meta-oe 07/12] e-base: bump EFL_SRCREV and refresh patches and elementary version
+In-Reply-To: <4EAF9C0E.9030702@nedap.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Remote-IP: 160.45.42.84
+X-Spam_Score: -4.1
+X-exim-Spam_Score_Int: -40
+X-exim-Spam_Bar: ----
+X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	* -1.2 RP_MATCHES_RCVD Envelope sender domain matches handover relay
+	domain * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+X-Originating-IP: 160.45.117.149
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,102 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 08:42:33 -0000
-X-Groupsio-MsgNum: 35153
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iFRdW5/EC4oqxDHL"
-Content-Disposition: inline
-
---iFRdW5/EC4oqxDHL
+X-List-Received-Date: Tue, 01 Nov 2011 10:46:49 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 01, 2011 at 09:27:27AM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 29-10-11 12:29, Martin Jansa schreef:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> I get:
->=20
-> c evas_engine.c  -fPIC -DPIC -o .libs/module_la-evas_engine.o
-> | evas_engine.c: In function '_sym_init':
-> | evas_engine.c:493:115: warning: assignment from incompatible pointer ty=
-pe
-> | evas_engine.c:493:273: warning: assignment from incompatible pointer ty=
-pe
-> | evas_engine.c: In function 'eng_gl_make_current':
-> | evas_engine.c:3223:9: error: 'rsc' undeclared (first use in this functi=
-on)
-> | evas_engine.c:3223:9: note: each undeclared identifier is reported only
-> once for each function it appears in
-> | evas_engine.c: In function 'eng_gl_api_get':
-> | evas_engine.c:3600:30: warning: assignment from incompatible pointer ty=
-pe
-> | make[5]: *** [module_la-evas_engine.lo] Error 1
-> | make[5]: *** Waiting for unfinished jobs...
->=20
-> regards,
+On Tue, Nov 01, 2011 at 08:13:18AM +0100, Jaap de Jong wrote:
+> On 11/01/2011 02:00 AM, Denys Dmytriyenko wrote:
+> >On Tue, Nov 01, 2011 at 01:38:33AM +0100, Ulf Samuelsson wrote:
+> >>2011-10-27 14:27, Martin Jansa skrev:
+> >>>On Thu, Oct 27, 2011 at 01:56:43PM +0200, Henning Heinold wrote:
+> >>>>On Thu, Oct 27, 2011 at 10:53:13AM +0000, Mats K?rrman wrote:
+> >>>>>Hi,
+> >>>>>
+> >>>>>Are there any plans for new releases and/or maintenance branches of OE
+> >>>>>classic?
+> >>>>>
+> >>>>>BR / Mats
+> >>>>Hi,
+> >>>>
+> >>>>http://cgit.openembedded.org/openembedded/log/?h=org.openembedded.dev
+> >>>>
+> >>>>and
+> >>>>
+> >>>>http://cgit.openembedded.org/openembedded/log/?h=2011.03-maintenance
+> >>>>
+> >>>>Bye Henning
+> >>>Are you showing that maintenance ibranch is not so old and that only few
+> >>>things changed in old OE-classic since then? :)
+> >>>
+> >>>Afaik: nobody plans to do another release from OE-classic and
+> >>>oe-core/meta-oe/BSP's/... are veryclose to first release
+> >>What repository is used for the BSP's ?
+> >Each BSP in own repository - http://www.openembedded.org/wiki/LayerIndex
+> >
+> Does anybody know where the atmel boards are? (at91sam9263ek)
 
-Ah, sorry didn't fail here (probably gl_x11 isn't build), but it was fixed =
-fw commits later,
+I guess Ulf has to do create it first.
 
-can you try with SRCREV =3D "64516" in evas?
-
-commit ae081608293eadb01a7bef6998baf35cc6b5354c
-Author: caro <caro@7cbeb6ba-43b4-40fd-8cce-4c39aea84d33>
-Date:   Sun Oct 30 05:02:05 2011 +0000
-
-    declare the variables at the beginning of the block
+Bye Henning
 
 
-    git-svn-id: svn+ssh://svn.enlightenment.org/var/svn/e/trunk@64516 7cbeb=
-6ba-43b4-40fd-8cce-4c39aea84d33
-
-commit a8f05145fc9fd2397493b668a8d8618a85414a74
-Author: discomfitor <discomfitor@7cbeb6ba-43b4-40fd-8cce-4c39aea84d33>
-Date:   Sun Oct 30 02:04:50 2011 +0000
-
-    add missing variable from r64139
-    direct all spankies to raster and Sung W. Park
-
-
-    git-svn-id: svn+ssh://svn.enlightenment.org/var/svn/e/trunk@64514 7cbeb=
-6ba-43b4-40fd-8cce-4c39aea84d33
-
-
->=20
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD4DBQFOr61vMkyGM64RGpERAnBUAJoD72qOUzuULyChDz8vLl13lBE5rgCY2RHN
-> HcL5T8UkOy84Lr+z6i7dIg=3D=3D
-> =3D6yE7
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---iFRdW5/EC4oqxDHL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk6vr4MACgkQN1Ujt2V2gBzwxACfU9o1FEbNpcUsEMxZk8JUZupC
-sR8An3iueYjVqQc1yQeROTu4T+AYa/NF
-=M6Ee
------END PGP SIGNATURE-----
-
---iFRdW5/EC4oqxDHL--
