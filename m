@@ -1,35 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RL9Qh-0007hw-BY
+	(envelope-from <martin.jansa@gmail.com>) id 1RL9UL-0007sE-CU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 09:10:43 +0100
-Received: by faas16 with SMTP id s16so6971158faa.6
+	Tue, 01 Nov 2011 09:14:29 +0100
+Received: by faas16 with SMTP id s16so6972952faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 01:04:34 -0700 (PDT)
+	Tue, 01 Nov 2011 01:08:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=FMDu+32pM4Swb7/pXu8bpVT5UmZwNQV04+T83xy1sJ4=;
-	b=m5TiTBG7KGDMCixY2MTmMBgvsIR3r+rqXC78DqZ6Ol7CjtH0YB/13u/+cUYpY48l9D
-	kjVS7uQKzkSJAs/H7vjOyIx9Gv+ctpbZTk4/ok8eUFTkJSEJRdbbDeor8cfglzss4DWr
-	SqAoeRsREpCCRGdv8Mnw6d26nYd0JA6qfUDFQ=
-Received: by 10.223.17.23 with SMTP id q23mr35363481faa.11.1320134674419;
-	Tue, 01 Nov 2011 01:04:34 -0700 (PDT)
+	bh=g0obTN4GNGbFhDVqAxOEtQamKLJRrEwSDhfibkOIzt4=;
+	b=CeWk9X7wz+znl+WLAKnGDY71DRfj5UOmrxrRSqBLpOpqaCi32z7Gtg3kgTJWx8rPL7
+	gimqd7j4IIeaxg1g4u87x435SkdD9Z3aSAr5xCwXZ1PSd73Hop7oLW5TTsg4vEQSEVeB
+	5gdsWtYQwRTch0JCKI+IglmXs0ALx+qFoQL9U=
+Received: by 10.223.15.13 with SMTP id i13mr35300212faa.36.1320134901621;
+	Tue, 01 Nov 2011 01:08:21 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k16sm43239673fab.8.2011.11.01.01.04.32
+	by mx.google.com with ESMTPS id g25sm43235639fae.16.2011.11.01.01.08.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 Nov 2011 01:04:32 -0700 (PDT)
-Date: Tue, 1 Nov 2011 09:04:26 +0100
+	Tue, 01 Nov 2011 01:08:20 -0700 (PDT)
+Date: Tue, 1 Nov 2011 09:08:14 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111101080426.GA4714@jama.jama.net>
+Message-ID: <20111101080814.GB4714@jama.jama.net>
 References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
-	<c5be2d9dea4e1914eb73f39af1517d457ef92f3a.1319884094.git.Martin.Jansa@gmail.com>
-	<j8o8gg$4gv$1@dough.gmane.org>
+	<941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
+	<j8o884$2bp$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <j8o8gg$4gv$1@dough.gmane.org>
+In-Reply-To: <j8o884$2bp$1@dough.gmane.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][meta-oe 10/12] task-x11: remove server parts and add VIRTUAL_RUNTIME variables to be able to select different -common and init providers
+Subject: Re: [meta-efl][meta-oe 09/12] task-x11-server: import from Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +43,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 08:10:43 -0000
-X-Groupsio-MsgNum: 35134
+X-List-Received-Date: Tue, 01 Nov 2011 08:14:29 -0000
+X-Groupsio-MsgNum: 35135
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+	protocol="application/pgp-signature"; boundary="KFztAG8eRSV9hGtP"
 Content-Disposition: inline
 
---UlVJffcvxoiEqYs2
+--KFztAG8eRSV9hGtP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 01, 2011 at 08:52:48AM +0100, Koen Kooi wrote:
+On Tue, Nov 01, 2011 at 08:48:20AM +0100, Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 >=20
 > Op 29-10-11 12:29, Martin Jansa schreef:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> [..]
->=20
-> > -# Some machines don't set a *runtime* provider for X, so default to
-> > Xfbdev here -# virtual/xserver won't work, since the kdrive recipes will
-> > build multiple xserver packages -XSERVER ?=3D "xserver-xorg"=20
-> > -XSERVER_COMMON ?=3D "xserver-common" - -PACKAGE_ARCH =3D "${MACHINE_AR=
-CH}"=20
-> > +# xserver-common, x11-common +VIRTUAL-RUNTIME_xserver-common ?=3D
-> > "xserver-common"
+> > * from meta-angstrom revision 8aa9581a920abae8878df2f3faf9857474edd1f8 *
+> > added RPROVIDES to be able to drop server part from task-x11 * updated
+> > DESCRIPTION to match * renamed to task-x11-server for upgradeable path
 > >=20
-> > -RDEPENDS_${PN}-server =3D "\ -  ${XSERVER} \ -" +# elsa,
-> > xserver-nodm-init +VIRTUAL-RUNTIME_graphical_init_manager ?=3D
-> > "xserver-nodm-init"
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> ---=20
+> > meta-oe/recipes-core/tasks/task-x11-server_1.0.bb |   24
+> > +++++++++++++++++++++ 1 files changed, 24 insertions(+), 0 deletions(-)=
+=20
+> > create mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
 > >=20
-> > RDEPENDS_${PN}-utils =3D "\ -  ${XSERVER_COMMON} \ -  xserver-nodm-init=
- \ +
-> > ${VIRTUAL-RUNTIME_xserver-common} \ +
-> > ${VIRTUAL-RUNTIME_graphical_init_manager} \ xauth \ xhost \ xset \
+> > diff --git a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
+> > b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb new file mode 10064=
+4=20
+> > index 0000000..86de1ec --- /dev/null +++
+> > b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb @@ -0,0 +1,24 @@=20
+> > +DESCRIPTION =3D "Task for a image with Xserver" +LICENSE =3D "MIT"=20
+> > +LIC_FILES_CHKSUM =3D
+> > "file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58" +PR=
+ =3D
+> > "r9" + +inherit task + +# for backwards compatibility +RPROVIDES_${PN} =
+=3D
+> > "task-x11-server"
 >=20
-> Can someone explain what the VIRTUAL-RUNTIME_* buys us? I'd be much happi=
-er
-> if you split this into two or more tasks. Experience has shown that people
-> just don't get that they need to change all the PRs in the tasks when
-> updating magic vars like VIRTUAL-RUNTIME_* :(
+> I think that shoud read:
+>=20
+> RPROVIDES_${PN} +=3D "task-xserver"
+>=20
+> To provide a proper upgrade path.
 
-Right now I'm using them to use x11-common instead of xserver-common and
-elsa instead of xserver-nodm-init, while my image is still depending
-only on task-x11 (to get reasonable x11 support).
+Ah you're right.. I had this before renaming the recipe to
+task-x11-server and then forgot to change it.
 
-And those VIRTUAL-RUNTIME with default value should keep task-x11 as it
-was before and if some distribution decide to change them, they have to
-PRINC in their bbappend.
-
-Regards,
+Will fix it in branch.
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---UlVJffcvxoiEqYs2
+--KFztAG8eRSV9hGtP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk6vqAoACgkQN1Ujt2V2gBzHlQCggtVSLeMcO7ZGUTXHHsMAYCaO
-sZcAn3nJaLAzh58uyLdDluJ+kKa555j3
-=Pes0
+iEYEARECAAYFAk6vqO4ACgkQN1Ujt2V2gBxcFgCgnSCf5nfu3Xr0t2N+u1i7cvNI
+KnYAoJhylyXHQybERRNGCTjY1COaA2n+
+=JuQ4
 -----END PGP SIGNATURE-----
 
---UlVJffcvxoiEqYs2--
+--KFztAG8eRSV9hGtP--
