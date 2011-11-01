@@ -1,23 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RLCyq-0001b7-7h
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 12:58:12 +0100
-Received: (qmail invoked by alias); 01 Nov 2011 11:52:06 -0000
-Received: from p5B0A3AE4.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.58.228]
-	by mail.gmx.net (mp017) with SMTP; 01 Nov 2011 12:52:06 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/A5q4T/ZjAirRyx+JPeVfOybXZxxou1b3847V2OW
-	jB72Aw/EvDgeyH
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLD6A-0002Bd-BV for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 13:05:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLD0I-0000dU-6V for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 12:59:42 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Nov 2011 12:59:42 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Nov 2011 12:59:42 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Nov 2011 12:56:37 +0100
-Message-Id: <1320148597-10157-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-gnome] gnome-control-center: fix unshipped packages
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 01 Nov 2011 12:59:22 +0100
+Message-ID: <j8omuq$1ht$1@dough.gmane.org>
+References: <1320148597-10157-1-git-send-email-schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1320148597-10157-1-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-gnome] gnome-control-center: fix unshipped packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,53 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 11:58:12 -0000
+X-List-Received-Date: Tue, 01 Nov 2011 12:05:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-warnings fixed:
-WARNING: For recipe gnome-control-center, the following files were installed but not shipped in any package:
-WARNING:   /usr/share/mime/XMLnamespaces
-WARNING:   /usr/share/mime/version
-WARNING:   /usr/share/mime/subclasses
-WARNING:   /usr/share/mime/globs2
-WARNING:   /usr/share/mime/globs
-WARNING:   /usr/share/mime/types
-WARNING:   /usr/share/mime/mime.cache
-WARNING:   /usr/share/mime/icons
-WARNING:   /usr/share/mime/generic-icons
-WARNING:   /usr/share/mime/treemagic
-WARNING:   /usr/share/mime/magic
-WARNING:   /usr/share/mime/aliases
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../gnome-control-center_2.32.1.bb                 |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+Op 01-11-11 12:56, Andreas Müller schreef:
+> warnings fixed: WARNING: For recipe gnome-control-center, the following
+> files were installed but not shipped in any package: WARNING:
+> /usr/share/mime/XMLnamespaces WARNING:   /usr/share/mime/version WARNING:
+> /usr/share/mime/subclasses WARNING:   /usr/share/mime/globs2 WARNING:
+> /usr/share/mime/globs WARNING:   /usr/share/mime/types WARNING:
+> /usr/share/mime/mime.cache WARNING:   /usr/share/mime/icons WARNING:
+> /usr/share/mime/generic-icons WARNING:   /usr/share/mime/treemagic 
+> WARNING:   /usr/share/mime/magic WARNING:   /usr/share/mime/aliases
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-index b308350..1ebfb6d 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra"
- 
-+PR = "r1"
-+
- inherit gnome
- 
- SRC_URI[archive.md5sum] = "b4e8ab5c7556ae07addbfcfb4fa2f761"
-@@ -20,6 +22,7 @@ FILES_${PN} += "${datadir}/icon* \
-                 ${libdir}/window-manager-settings/*.so \
-                 ${datadir}/gnome \
-                 ${datadir}/desktop-directories \
-+                ${datadir}/mime \
-                "
- FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
- FILES_${PN}-dev += "${libdir}/window-manager-settings/*a"
--- 
-1.7.4.4
+THose aren't meant to be shipped, mime.bbclass should already package the
+stuff it needs.
+
+regards,
+
+Koen
+
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOr98aMkyGM64RGpERAiqiAJ0de3cEOkFsbd+y3ntGzdXsZttZoACgnJVR
+a1WkZc370ABW6dHLS/AxAZE=
+=m2Bq
+-----END PGP SIGNATURE-----
 
 
 
