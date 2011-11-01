@@ -1,37 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLJPj-0002N7-C8 for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 19:50:23 +0100
+	id 1RLJQe-0002TP-RD for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 19:51:21 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLJJi-0004pg-2j for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 19:44:10 +0100
+	id 1RLJKi-0005Fk-1n for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 19:45:12 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 19:44:10 +0100
+	Tue, 01 Nov 2011 19:45:12 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2011 19:44:10 +0100
+	Tue, 01 Nov 2011 19:45:12 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 01 Nov 2011 19:43:57 +0100
-Message-ID: <j8peld$qmh$1@dough.gmane.org>
-References: <1320148597-10157-1-git-send-email-schnitzeltony@gmx.de>
-	<201111011430.12670.schnitzeltony@gmx.de>
-	<j8os5g$837$1@dough.gmane.org>
-	<201111011924.41459.schnitzeltony@gmx.de>
+Date: Tue, 01 Nov 2011 19:44:40 +0100
+Message-ID: <j8pemo$qmh$2@dough.gmane.org>
+References: <1320166017-12836-1-git-send-email-nmacgum@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <201111011924.41459.schnitzeltony@gmx.de>
+In-Reply-To: <1320166017-12836-1-git-send-email-nmacgum@gmail.com>
 X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-gnome] gnome-control-center: fix unshipped packages
+Subject: Re: [PATCH] guilt-native: changed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,70 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 18:50:23 -0000
+X-List-Received-Date: Tue, 01 Nov 2011 18:51:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 01-11-11 19:24, Andreas Müller schreef:
-> On Tuesday, November 01, 2011 02:28:16 PM Koen Kooi wrote:
->> Op 01-11-11 14:30, Andreas Müller schreef:
->>> On Tuesday, November 01, 2011 12:59:22 PM Koen Kooi wrote:
->>>> Op 01-11-11 12:56, Andreas Müller schreef:
->>>>> warnings fixed: WARNING: For recipe gnome-control-center, the 
->>>>> following files were installed but not shipped in any package: 
->>>>> WARNING: /usr/share/mime/XMLnamespaces WARNING: 
->>>>> /usr/share/mime/version WARNING: /usr/share/mime/subclasses
->>>>> WARNING: /usr/share/mime/globs2 WARNING: /usr/share/mime/globs
->>>>> WARNING: /usr/share/mime/types WARNING:
->>>>> /usr/share/mime/mime.cache WARNING: /usr/share/mime/icons
->>>>> WARNING: /usr/share/mime/generic-icons WARNING:
->>>>> /usr/share/mime/treemagic WARNING:   /usr/share/mime/magic 
->>>>> WARNING: /usr/share/mime/aliases
->>>> 
->>>> THose aren't meant to be shipped, mime.bbclass should already
->>>> package the stuff it needs.
->>> 
->>> How about adding a dummy package gnome-control-center-mime to clean
->>> up log and keep further enthusiastic patchers away?
->> 
->> I'd suggest rm'ing them in do_install
->> 
-> Sorry for making noise for this 'cosmetic' issue but I would like get a
-> better understanding on this.
-
-The short version is that those are generated files of which only one copy
-should exist. So if package them we get 2 problems:
-
-1) clashes when installing packages
-2) replacing properly generated mime files containing all the info with ones
-only holding the info for a single package.
-
-> mime.bbclass seems to pack all folders in /usr/share/mime, files will not
-> be packed.
+Op 01-11-11 17:46, nmacgum@gmail.com schreef:
+> From: Neil MacMunn <neil@gumstix.com>
 > 
-> I looked a bit around and added
+> * the old kernel.org URI is no longer reachable
 > 
-> EXTRA_OECONF += "--disable-update-mimedb"
-> 
-> in the recipe. With this no files are installed but there is also 
-> /usr/share/mime/application/missing/x-gnome-theme-package.xml missing.
-> Could this be a solution ( even for mime.bbclass )?
+> Signed-off-by: Neil MacMunn <neil@gumstix.com> --- 
+> meta/recipes-devtools/guilt/guilt-native_0.33.bb |    2 +-
 
-It looks that way.
-
-regards,
-
-Koen
+it looks like this one needs to go to the oe-core list.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOsD3tMkyGM64RGpERAiCXAJ9FnaDhA9cLhYuJeZQLCq5ix6hPfACfbqOL
-QY1lHZXym7qv7vy+//cvyBc=
-=u477
+iD8DBQFOsD4YMkyGM64RGpERAu+HAKCGgFH14gz9HK+dpjPt/ZiEFtwEBgCfYulU
+Wy0XaWFSfEARoVQ91bpBtyo=
+=4gd8
 -----END PGP SIGNATURE-----
 
 
