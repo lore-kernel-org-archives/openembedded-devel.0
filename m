@@ -1,26 +1,35 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1RL8dm-0003q6-Or
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 08:20:10 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0;
-	Tue, 1 Nov 2011 08:13:19 +0100
-X-TM-IMSS-Message-ID: <b2e6c21e00007594@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id b2e6c21e00007594 ;
-	Tue, 1 Nov 2011 08:13:10 +0100
-Message-ID: <4EAF9C0E.9030702@nedap.com>
-Date: Tue, 1 Nov 2011 08:13:18 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RL9BB-00060E-Gz for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 08:54:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RL95F-00057w-Ld for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Nov 2011 08:48:33 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Nov 2011 08:48:33 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Nov 2011 08:48:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>	<20111027115643.GA13369@mi.fu-berlin.de>	<20111027122735.GC12609@jama.jama.net>
-	<4EAF3F89.6000204@telia.com> <20111101010055.GU15391@denix.org>
-In-Reply-To: <20111101010055.GU15391@denix.org>
-Subject: Re: Plans for OE classic future
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 01 Nov 2011 08:48:20 +0100
+Message-ID: <j8o884$2bp$1@dough.gmane.org>
+References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
+	<941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <941836c79ce4b08c62672c36c77f47d3a8b89b83.1319884094.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-efl][meta-oe 09/12] task-x11-server: import from Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 07:20:10 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Tue, 01 Nov 2011 07:54:47 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 11/01/2011 02:00 AM, Denys Dmytriyenko wrote:
-> On Tue, Nov 01, 2011 at 01:38:33AM +0100, Ulf Samuelsson wrote:
->> 2011-10-27 14:27, Martin Jansa skrev:
->>> On Thu, Oct 27, 2011 at 01:56:43PM +0200, Henning Heinold wrote:
->>>> On Thu, Oct 27, 2011 at 10:53:13AM +0000, Mats K?rrman wrote:
->>>>> Hi,
->>>>>
->>>>> Are there any plans for new releases and/or maintenance branches of OE
->>>>> classic?
->>>>>
->>>>> BR / Mats
->>>> Hi,
->>>>
->>>> http://cgit.openembedded.org/openembedded/log/?h=org.openembedded.dev
->>>>
->>>> and
->>>>
->>>> http://cgit.openembedded.org/openembedded/log/?h=2011.03-maintenance
->>>>
->>>> Bye Henning
->>> Are you showing that maintenance ibranch is not so old and that only few
->>> things changed in old OE-classic since then? :)
->>>
->>> Afaik: nobody plans to do another release from OE-classic and
->>> oe-core/meta-oe/BSP's/... are veryclose to first release
->> What repository is used for the BSP's ?
-> Each BSP in own repository - http://www.openembedded.org/wiki/LayerIndex
->
-Does anybody know where the atmel boards are? (at91sam9263ek)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 29-10-11 12:29, Martin Jansa schreef:
+> * from meta-angstrom revision 8aa9581a920abae8878df2f3faf9857474edd1f8 *
+> added RPROVIDES to be able to drop server part from task-x11 * updated
+> DESCRIPTION to match * renamed to task-x11-server for upgradeable path
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
+> meta-oe/recipes-core/tasks/task-x11-server_1.0.bb |   24
+> +++++++++++++++++++++ 1 files changed, 24 insertions(+), 0 deletions(-) 
+> create mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
+> 
+> diff --git a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
+> b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb new file mode 100644 
+> index 0000000..86de1ec --- /dev/null +++
+> b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb @@ -0,0 +1,24 @@ 
+> +DESCRIPTION = "Task for a image with Xserver" +LICENSE = "MIT" 
+> +LIC_FILES_CHKSUM =
+> "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58" +PR =
+> "r9" + +inherit task + +# for backwards compatibility +RPROVIDES_${PN} =
+> "task-x11-server"
+
+I think that shoud read:
+
+RPROVIDES_${PN} += "task-xserver"
+
+To provide a proper upgrade path.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOr6REMkyGM64RGpERAhQpAJ9MeX1xovKidPJUo15EjJsQ8hVyLgCbBb8S
+6BncLYCLGZnhu4ktIpyDnWQ=
+=9qNh
+-----END PGP SIGNATURE-----
+
 
 
