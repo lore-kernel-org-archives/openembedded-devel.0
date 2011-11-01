@@ -1,23 +1,25 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RLCQp-0000el-A4
+Received: from mga09.intel.com ([134.134.136.24])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RLCny-0001G2-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Nov 2011 12:23:03 +0100
-Received: (qmail invoked by alias); 01 Nov 2011 11:16:47 -0000
-Received: from p5B0A3AE4.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.58.228]
-	by mail.gmx.net (mp006) with SMTP; 01 Nov 2011 12:16:47 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/7NX8Mypr7+eJ1t+BcktbsuRG5Y83AM7bKUPCT6U
-	J7PZNx0jjtUZTW
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+	Tue, 01 Nov 2011 12:46:58 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 01 Nov 2011 04:40:51 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="69963308"
+Received: from unknown (HELO helios.localnet) ([10.252.121.93])
+	by orsmga001.jf.intel.com with ESMTP; 01 Nov 2011 04:40:50 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Nov 2011 12:21:18 +0100
-Message-Id: <1320146478-14875-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+Date: Tue, 01 Nov 2011 11:40:49 +0000
+Message-ID: <3098867.eFpIKVGeXE@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
+In-Reply-To: <j8n6fh$dvf$1@dough.gmane.org>
+References: <eeffc3b2de8e5277ef3184874b88e4e382fa72c8.1319884094.git.Martin.Jansa@gmail.com>
+	<4EAF1095.2050701@balister.org> <j8n6fh$dvf$1@dough.gmane.org>
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe] imagemagick: fix unshipped packages
+Subject: Re: [meta-efl][meta-oe 05/12] id3lib: Import from openembedded classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,71 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 11:23:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Nov 2011 11:46:58 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-on build we receive tons of warnings like
+On Monday 31 October 2011 23:12:01 Koen Kooi wrote:
+> Different goals I guess. 
 
-WARNING: For recipe imagemagick, the following files were installed but not shipped in any package:
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/type.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-solaris.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/locale.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/english.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-windows.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/type-ghostscript.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/delegates.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/configure.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/config/francais.xml
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.a
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.la
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/analyze.so
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/filters/.debug/analyze.so
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/coders/histogram.la
-WARNING:   /usr/lib/ImageMagick-6.4.4/modules-Q16/coders/ycbcr.a
-...
+That's not much in the way of justification...
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../imagemagick/imagemagick_6.4.4.bb               |   14 +++++++-------
- 1 files changed, 7 insertions(+), 7 deletions(-)
+> And I don't trust a ruleset that's in a wiki, too
+> much room for people coming in and messing it up.
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
-index c38c644..dd84cb2 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e1ebcc1358b9f81eba64255fc5da6892"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
- 
--PR = "r8"
-+PR = "r9"
- 
- PATCHSET = "1"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-@@ -20,14 +20,14 @@ inherit autotools binconfig pkgconfig
- 
- EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
- 
--FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
--                ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
--                ${libdir}/ImageMagick-${IMVER}/config/ \
--                ${datadir}/ImageMagick-${IMVER}"
-+FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
-+                ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
-+                ${libdir}/ImageMagick-${PV}/config/ \
-+                ${datadir}/ImageMagick-${PV}"
- 
--FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
-+FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
- 
--FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
-+FILES_${PN}-dbg += "${libdir}/ImageMagick-${PV}/modules-Q16/*/.debug/*"
- 
- BBCLASSEXTEND = "native"
- 
+If that's a concern, just apply some access restrictions to the page. Edit 
+history is tracked if it's on a wiki at least.
+
+Cheers,
+Paul
+
 -- 
-1.7.4.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
