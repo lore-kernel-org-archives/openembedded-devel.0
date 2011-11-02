@@ -1,24 +1,25 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RLi2r-0007Nd-Mz
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RLi3F-0007RA-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Nov 2011 22:08:28 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 02 Nov 2011 14:02:17 -0700
+	Wed, 02 Nov 2011 22:08:51 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 02 Nov 2011 14:02:39 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="70380574"
+X-IronPort-AV: E=Sophos;i="4.69,445,1315206000"; d="scan'208";a="80600718"
 Received: from unknown (HELO helios.localnet) ([10.252.121.83])
-	by orsmga002.jf.intel.com with ESMTP; 02 Nov 2011 14:02:16 -0700
+	by fmsmga001.fm.intel.com with ESMTP; 02 Nov 2011 14:02:38 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 02 Nov 2011 21:02:15 +0000
-Message-ID: <1742242.WP01ZavBdz@helios>
+Date: Wed, 02 Nov 2011 21:02:37 +0000
+Message-ID: <1691080.2lVjPomeYY@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
-In-Reply-To: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
-References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1319524046-22472-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1319524046-22472-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH 1/3] formfactor: initial commit of collie, poodle and tosa machconfig
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-handheld] linux.inc: be more strict in CONF_SED_SCRIPT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,15 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Nov 2011 21:08:28 -0000
+X-List-Received-Date: Wed, 02 Nov 2011 21:08:52 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Monday 17 October 2011 01:26:49 Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ...
+On Tuesday 25 October 2011 08:27:26 Martin Jansa wrote:
+> * without this ARM_THUMB is also removing ARM_THUMBEE from
+>   defconfig and not setting it back
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-kernel/linux/linux.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+> index 7a25b59..781d5ba 100644
+> --- a/recipes-kernel/linux/linux.inc
+> +++ b/recipes-kernel/linux/linux.inc
+> @@ -24,7 +24,7 @@ LOCALVERSION ?= ""
+> 
+>  #kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
+>  kernel_conf_variable() {
+> -	CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1/d;"
+> +	CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
+>  	if test "$2" = "n"
+>  	then
+>  		echo "# CONFIG_$1 is not set" >> ${S}/.config
 
-I've merged this series apart from 2/3 which we still need to discuss.
+Merged to meta-handheld master, thanks.
 
 Cheers,
 Paul
