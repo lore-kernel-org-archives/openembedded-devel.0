@@ -1,23 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RLZHK-0002iE-EV
+	(envelope-from <schnitzeltony@gmx.de>) id 1RLZHL-0002iH-1k
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 02 Nov 2011 12:46:48 +0100
-Received: (qmail invoked by alias); 02 Nov 2011 11:40:38 -0000
+Received: (qmail invoked by alias); 02 Nov 2011 11:40:39 -0000
 Received: from p5B0A24CF.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.36.207]
-	by mail.gmx.net (mp020) with SMTP; 02 Nov 2011 12:40:38 +0100
+	by mail.gmx.net (mp020) with SMTP; 02 Nov 2011 12:40:39 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18eLcVKDRIe/cuh6wUHWL17JWh0UboebfEz/jS7ja
-	OHzVxXI64rPyYd
+X-Provags-ID: V01U2FsdGVkX1+buS9nws6bfb5FXtV5h1oEuumXoFLZzINKeuWFr0
+	mGhXo/9MlQox2R
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Nov 2011 12:45:13 +0100
-Message-Id: <1320234315-14835-1-git-send-email-schnitzeltony@gmx.de>
+Date: Wed,  2 Nov 2011 12:45:15 +0100
+Message-Id: <1320234315-14835-3-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1320234315-14835-1-git-send-email-schnitzeltony@gmx.de>
+References: <1320234315-14835-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 1/3] xfce.bbclass: Add further folders for ${PN}-dev/-staticdev/-dbg
+Subject: [meta-xfce 3/3] xfce4-clipman-plugin: initial add 1.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +37,31 @@ X-List-Received-Date: Wed, 02 Nov 2011 11:46:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Some panel-plugins (e.g xfce4-clipman-plugin) store libraries in
-  /usr/lib/xfce4/panel/plugins instead of
-  /usr/lib/xfce4/panel-plugins.
-* build tested on maiden tmp-dir
-* run tested all applications and plugins on overo
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- meta-xfce/classes/xfce.bbclass |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ .../clipman/xfce4-clipman-plugin_1.2.2.bb          |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.2.bb
 
-diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
-index 1a13fdc..debd645 100644
---- a/meta-xfce/classes/xfce.bbclass
-+++ b/meta-xfce/classes/xfce.bbclass
-@@ -7,6 +7,9 @@ FILES_${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/mod
- FILES_${PN}-doc += "${datadir}/xfce4/doc"
- 
- FILES_${PN}-dev += "${libdir}/xfce4/*/*.la"
-+FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.la"
- FILES_${PN}-staticdev += "${libdir}/xfce4/*/*.a"
-+FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.a"
- FILES_${PN}-dbg += "${libdir}/xfce4/*/.debug"
-+FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
- 
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.2.bb
+new file mode 100644
+index 0000000..c830229
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.2.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Clipman is a clipboard manager for Xfce"
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin"
++SECTION = "x11/application"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++inherit xfce-panel-plugin
++
++DEPENDS += "xfconf xproto libxtst"
++
++SRC_URI[md5sum] = "60df7769a8271d7fcab177210f4291e8"
++SRC_URI[sha256sum] = "fcac10bc150eb2f73955f28184ac2b8324c9aabc3d773242eadcec137e1096a1"
 -- 
 1.7.4.4
 
