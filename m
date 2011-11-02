@@ -1,23 +1,23 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RLOFr-0002YS-RH
+	(envelope-from <schnitzeltony@gmx.de>) id 1RLZHK-0002iE-EV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Nov 2011 01:00:32 +0100
-Received: (qmail invoked by alias); 01 Nov 2011 23:54:21 -0000
-Received: from p5B0A3AE4.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.58.228]
-	by mail.gmx.net (mp006) with SMTP; 02 Nov 2011 00:54:21 +0100
+	Wed, 02 Nov 2011 12:46:48 +0100
+Received: (qmail invoked by alias); 02 Nov 2011 11:40:38 -0000
+Received: from p5B0A24CF.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.36.207]
+	by mail.gmx.net (mp020) with SMTP; 02 Nov 2011 12:40:38 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18zBwsQMGwzLyuWsY9DriwdsiC441R3Uh/SMcje+q
-	gfrwbR8FqV3yV4
+X-Provags-ID: V01U2FsdGVkX18eLcVKDRIe/cuh6wUHWL17JWh0UboebfEz/jS7ja
+	OHzVxXI64rPyYd
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Nov 2011 00:58:51 +0100
-Message-Id: <1320191933-28392-1-git-send-email-schnitzeltony@gmx.de>
+Date: Wed,  2 Nov 2011 12:45:13 +0100
+Message-Id: <1320234315-14835-1-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-oe][V2 0/2] Fix QA warnings for unpacked files
+Subject: [meta-xfce 1/3] xfce.bbclass: Add further folders for ${PN}-dev/-staticdev/-dbg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,23 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Nov 2011 00:00:32 -0000
+X-List-Received-Date: Wed, 02 Nov 2011 11:46:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-v1 -> v2:
-* Combine two patches [1]/[2] into a patch series
-* imagemagick: change commit message
-* mime.bbclass: was gnome-control-center: fix unshipped packages
+* Some panel-plugins (e.g xfce4-clipman-plugin) store libraries in
+  /usr/lib/xfce4/panel/plugins instead of
+  /usr/lib/xfce4/panel-plugins.
+* build tested on maiden tmp-dir
+* run tested all applications and plugins on overo
 
-Andreas Müller (2):
-  imagemagick: fix QA warnings for unshipped files
-  mime.bbclass: Add --disable-update-mimedb to EXTRA_OECONF
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-xfce/classes/xfce.bbclass |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
- meta-oe/classes/mime.bbclass                       |    2 ++
- .../imagemagick/imagemagick_6.4.4.bb               |   14 +++++++-------
- 2 files changed, 9 insertions(+), 7 deletions(-)
-
+diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
+index 1a13fdc..debd645 100644
+--- a/meta-xfce/classes/xfce.bbclass
++++ b/meta-xfce/classes/xfce.bbclass
+@@ -7,6 +7,9 @@ FILES_${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/mod
+ FILES_${PN}-doc += "${datadir}/xfce4/doc"
+ 
+ FILES_${PN}-dev += "${libdir}/xfce4/*/*.la"
++FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.la"
+ FILES_${PN}-staticdev += "${libdir}/xfce4/*/*.a"
++FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.a"
+ FILES_${PN}-dbg += "${libdir}/xfce4/*/.debug"
++FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
+ 
 -- 
 1.7.4.4
 
