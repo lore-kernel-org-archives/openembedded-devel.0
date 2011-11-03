@@ -1,29 +1,28 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail.eads.net ([80.156.45.113])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vita.preskovsky@gmail.com>) id 1RLu2I-0007iQ-4Y
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:56:38 +0100
-Received: by gyd8 with SMTP id 8so1072742gyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 02:50:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=BRRLrgcxxOAFpERlHWoLXF5mdas+zihnBYHtZ1AaGdI=;
-	b=hMiYPnkME4rmIJbUNQNc8bXiSK7++D+bN2f9jm/0+lHU0a0q6z1CGKXfF224jr0J23
-	22X3KG5LXTed8XgxdyrJFcCjsdpSjH5ug1XxrbweSqkrH/RuOWTCAitFsxl/1wTgM8yo
-	j6mi8fk/1IBIHs1edsp7VzZiUr2OzCZaZA+40=
-Received: by 10.236.22.164 with SMTP id t24mr11840781yht.67.1320313825605;
-	Thu, 03 Nov 2011 02:50:25 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id o64sm8553185yhk.3.2011.11.03.02.50.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 Nov 2011 02:50:24 -0700 (PDT)
-From: Vita Preskovsky <vita.preskovsky@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Nov 2011 11:49:33 +0200
-Message-Id: <1320313773-1826-1-git-send-email-vitap@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new version of bluez-hcidump-2.1 that compatible with bluez4_4.95.
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1RLu7K-00015C-0k for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 11:01:59 +0100
+Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id pA39tLRg028749; 
+	Thu, 3 Nov 2011 10:55:22 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 3 Nov 2011 10:55:34 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 3 Nov 2011 10:55:34 +0100
+Message-ID: <0C757E680E33864AB113392C7E83F910BE522A@GSX300A.mxchg.m.corp>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Clean of qt4-embedded don't cleanup sysroot and deploy
+Thread-Index: AcyP4ovn6EzPVhcDTmCKRTj3ZlV1+g==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<openembedded-core@lists.openembedded.org>
+X-OriginalArrivalTime: 03 Nov 2011 09:55:34.0465 (UTC)
+	FILETIME=[BB02E310:01CC9A0E]
+Subject: Clean of qt4-embedded don't cleanup sysroot and deploy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,37 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 09:56:38 -0000
+X-List-Received-Date: Thu, 03 Nov 2011 10:01:59 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
----
- recipes/bluez/bluez-hcidump_2.1.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 recipes/bluez/bluez-hcidump_2.1.bb
+It may be hidden by the huge work that is done by the community, so I
+ask it again.
 
-diff --git a/recipes/bluez/bluez-hcidump_2.1.bb b/recipes/bluez/bluez-hcidump_2.1.bb
-new file mode 100644
-index 0000000..2e1389c
---- /dev/null
-+++ b/recipes/bluez/bluez-hcidump_2.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Linux Bluetooth Stack HCI Debugger Tool."
-+SECTION = "console"
-+PRIORITY = "optional"
-+DEPENDS = "bluez-libs"
-+LICENSE = "GPLv2"
-+PR = "r0"
-+
-+SRC_URI = "http://bluez.sourceforge.net/download/bluez-hcidump-${PV}.tar.gz"
-+S = "${WORKDIR}/bluez-hcidump-${PV}"
-+
-+EXTRA_OECONF = "--with-bluez-libs=${STAGING_LIBDIR} --with-bluez-includes=${STAGING_INCDIR}"
-+
-+inherit autotools
-+
-+SRC_URI[md5sum] = "b160f0672276398344eebe9df1b37a2c"
-+SRC_URI[sha256sum] = "a6cc20b95b6b1a28ff336aad91e124555231628689225c1155e8cd7aac1af86d"
--- 
-1.7.0.4
+Hello,
 
+if I do a bitbake -c clean for qt4-embedded or qt4-native all libraries
+and binaries of QT are left in the sysroots and all created packages are
+left in deploy. This is an result of splitting qt into several sub
+packages and install them.
+
+This behavior makes problems if I change the used QT Version of the
+distro.
+If qt recipe builds, it first searches for the libraries in sysroot
+(standard library path of OE) and then it search in its working
+directory. While the sysroots contain libraries of a different QT
+version now, the build will fail.=20
+
+Is there a way to clean all sub packages of qt if I clean the
+qt4-embedded or qt4-native package ?
+
+An other solution may be to switch the order of the library paths in the
+linker command (-L) to search libraries in the package working path
+first. But how to do this in a proper way?
+
+Regards
+Wolfgang Hauser
 
 
