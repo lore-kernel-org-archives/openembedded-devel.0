@@ -1,26 +1,38 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <slapinid@gmail.com>) id 1RLtbY-0006mb-8u
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:29:00 +0100
-Received: by wyh5 with SMTP id 5so1062071wyh.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLtdF-0006u1-0d for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 10:30:45 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLtXG-0004Pa-Nb for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 10:24:34 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Nov 2011 10:24:34 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 02:22:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=3WqmOZCjMiJauh2MeLF5fNFWRHiZqcVy5Sl4mNckets=;
-	b=dzoi+ZUafhSiWwbYFcNr4jrKDUQTkGMxnf8b0JriNPh+8PCC8i+Wuba4r38MekBJaC
-	mY2Kr0jY6C8QdTOczqk0U9Vn108xB3cQYd8KwPgnBpeYUfDFkt/KEHJMCyAQvG+aC5ce
-	b3CGoM6Ve9qxKw6bHp05Uo4v+K32kspzofAwc=
-MIME-Version: 1.0
-Received: by 10.216.132.41 with SMTP id n41mr2486233wei.77.1320312162975; Thu,
-	03 Nov 2011 02:22:42 -0700 (PDT)
-Received: by 10.216.25.1 with HTTP; Thu, 3 Nov 2011 02:22:42 -0700 (PDT)
-Date: Thu, 3 Nov 2011 12:22:42 +0300
-Message-ID: <CAFZPMoY0yFw7dAx=rOQRhj6nnXJ7tuPqjPQ4J0a_gi2tjw-WsA@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Thu, 03 Nov 2011 10:24:34 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe-core[ de034bf830bec1b64260ac8516dd584163716ef4 breaks iproute2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 03 Nov 2011 10:24:17 +0100
+Message-ID: <j8tmk1$jfd$1@dough.gmane.org>
+References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+	<1318807611-16837-2-git-send-email-andrea.adami@gmail.com>
+	<2904446.7I7DN7edGu@helios> <j8tjq1$o2$1@dough.gmane.org>
+	<CAAQYJAt5ApbYCi9f_mNgAN7WjEEZZyAdgPkfhwxjVsePf+VaqA@mail.gmail.com>
+	<CAAQYJAv=30cuGTS0rS6bYC=xMjcmxReDH=uyeV+ehBUCbuAaBA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <CAAQYJAv=30cuGTS0rS6bYC=xMjcmxReDH=uyeV+ehBUCbuAaBA@mail.gmail.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-handheld][PATCH 2/3] udev: add bbappend and disable device cache as default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,108 +46,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 09:29:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 03 Nov 2011 09:30:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi, all!
-iptables upgrade broke iproute2. Do anybody work on this?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-NOTE: package iproute2-2.6.38-r0: task do_compile: Started
-ERROR: Function 'do_compile' failed (see
-/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/temp/log.do_compile.22734
-for further information)
-ERROR: Logfile of failure stored in:
-/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/temp/log.do_compile.22734
-Log data follows:
-| + cd /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/iproute2-2.6.38
-| + do_compile
-| + base_do_compile
-| + '[' -e Makefile -o -e makefile ']'
-| + oe_runmake
-| + '[' xmake = x ']'
-| + bbnote make 'CC=ccache arm-angstrom-linux-gnueabi-gcc
--march=armv5te  -mno-thumb -mthumb-interwork  -mtune=arm926ej-s
--mthumb-interwork -mno-thumb
---sysroot=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux'
-KERNEL_INCLUDE=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/kernel/include
-DOCDIR=/usr/share/doc/iproute2 'SUBDIRS=lib tc ip' SBINDIR=/sbin
-| + echo 'NOTE: make CC=ccache arm-angstrom-linux-gnueabi-gcc
--march=armv5te  -mno-thumb -mthumb-interwork  -mtune=arm926ej-s
--mthumb-interwork -mno-thumb
---sysroot=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux
-KERNEL_INCLUDE=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/kernel/include
-DOCDIR=/usr/share/doc/iproute2 SUBDIRS=lib tc ip SBINDIR=/sbin'
-| NOTE: make CC=ccache arm-angstrom-linux-gnueabi-gcc  -march=armv5te
--mno-thumb -mthumb-interwork  -mtune=arm926ej-s -mthumb-interwork
--mno-thumb --sysroot=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux
-KERNEL_INCLUDE=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/kernel/include
-DOCDIR=/usr/share/doc/iproute2 SUBDIRS=lib tc ip SBINDIR=/sbin
-| + make 'CC=ccache arm-angstrom-linux-gnueabi-gcc  -march=armv5te
--mno-thumb -mthumb-interwork  -mtune=arm926ej-s -mthumb-interwork
--mno-thumb --sysroot=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux'
-KERNEL_INCLUDE=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/kernel/include
-DOCDIR=/usr/share/doc/iproute2 'SUBDIRS=lib tc ip' SBINDIR=/sbin
-| make[1]: Entering directory
-`/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/iproute2-2.6.38/lib'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/iproute2-2.6.38/lib'
-| make[1]: Entering directory
-`/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/iproute2-2.6.38/tc'
-| ccache arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -mno-thumb
--mthumb-interwork  -mtune=arm926ej-s -mthumb-interwork -mno-thumb
---sysroot=/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux
--D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall -I../include
--DRESOLVE_HOSTNAMES -DLIBDIR=\"/usr/lib/\" -DCONFIG_GACT
--DCONFIG_GACT_PROB -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
--Wl,-export-dynamic -shared -fpic -o m_xt.so m_xt.c -lxtables
-| m_xt.c: In function 'parse_ipt':
-| m_xt.c:167:31: warning: passing argument 2 of
-'xtables_merge_options' discards qualifiers from pointer target type
-| /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: expected 'struct option *' but argument is of type 'const struct
-option *'
-| m_xt.c:167:31: warning: passing argument 3 of
-'xtables_merge_options' from incompatible pointer type
-| /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: expected 'const struct option *' but argument is of type
-'unsigned int *'
-| m_xt.c:167:31: error: too few arguments to function 'xtables_merge_options'
-| /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: declared here
-| m_xt.c: In function 'print_ipt':
-| m_xt.c:312:30: warning: passing argument 2 of
-'xtables_merge_options' discards qualifiers from pointer target type
-| /home/build1/OE/slave/angstrom_build/build/buERROR: Function
-'do_compile' failed (see
-/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/temp/log.do_compile.22734
-for further information)
-| ild/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: expected 'struct option *' but argument is of type 'const struct
-option *'
-| m_xt.c:312:30: warning: passing argument 3 of
-'xtables_merge_options' from incompatible pointer type
-| /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: expected 'const struct option *' but argument is of type
-'unsigned int *'
-| m_xt.c:312:30: error: too few arguments to function 'xtables_merge_options'
-| /home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/include/xtables.h:407:23:
-note: declared here
-| make[1]: *** [m_xt.so] Error 1
-| make[1]: Leaving directory
-`/home/build1/OE/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/iproute2-2.6.38-r0/iproute2-2.6.38/tc'
-| make: *** [all] Error 2
-| + die 'oe_runmake failed'
-| + bbfatal 'oe_runmake failed'
-| + echo 'ERROR: oe_runmake failed'
-| ERROR: oe_runmake failed
-| + exit 1
-NOTE: package iproute2-2.6.38-r0: task do_compile: Failed
-ERROR: Task 453
-(/home/build1/OE/slave/angstrom_build/build/sources/openembedded-core/meta/recipes-connectivity/iproute2/iproute2_2.6.38.bb,
-do_compile) failed with exit code '1'
+Op 03-11-11 10:22, Andrea Adami schreef:
+> On Thu, Nov 3, 2011 at 10:09 AM, Andrea Adami
+> <andrea.adami@gmail.com>wrote:
+> 
+>> On Thu, Nov 3, 2011 at 9:36 AM, Koen Kooi
+>> <koen@dominion.thruhere.net>wrote:
+>> 
+>>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
+>>> 
+>>> Op 02-11-11 22:00, Paul Eggleton schreef:
+>>>> On Monday 17 October 2011 01:26:50 Andrea Adami wrote:
+>>>>> * For some reasons when the cache is created root can still be ro
+>>>>> * and as solution you would be obliged to add 'rw' to your
+>>>>> commandline. * There are patches in openembedded-classic to
+>>>>> correct this * (and those are still pending for meta-oe). * Until
+>>>>> a solution is found disable the creation of the device cache on
+>>>>> boot.
+>>>>> 
+>>>>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> --- 
+>>>>> recipes-core/udev/udev/default      |    4 ++++ 
+>>>>> recipes-core/udev/udev_173.bbappend |    1 + 2 files changed, 5 
+>>>>> insertions(+), 0 deletions(-) create mode 100644 
+>>>>> recipes-core/udev/udev/default create mode 100644 
+>>>>> recipes-core/udev/udev_173.bbappend
+>>>>> 
+>>>>> diff --git a/recipes-core/udev/udev/default 
+>>>>> b/recipes-core/udev/udev/default new file mode 100644 index 
+>>>>> 0000000..ba2867e --- /dev/null +++
+>>>>> b/recipes-core/udev/udev/default @@ -0,0 +1,4 @@ +# Default for
+>>>>> /etc/init.d/udev + +# Uncomment this out to enable device cache
+>>>>> +#DEVCACHE="/etc/dev.tar" diff --git 
+>>>>> a/recipes-core/udev/udev_173.bbappend 
+>>>>> b/recipes-core/udev/udev_173.bbappend new file mode 100644 index 
+>>>>> 0000000..72d991c --- /dev/null +++ 
+>>>>> b/recipes-core/udev/udev_173.bbappend @@ -0,0 +1 @@ 
+>>>>> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+>>>> 
+>>>> I think this is going to cause problems for distros such as
+>>>> Angstrom that enable this layer without always using it. Can we
+>>>> just disable the dev cache for the machines in meta-handheld?
+>>> 
+>>> Or get with the program and use udev 174 with systemd, no need for a 
+>>> device cache in that case!
+>>> 
+>>> regards,
+>>> 
+>>> Koen
+>>> 
+>> 
+>> Sure, this is the future...but for now oe-core doesn't implement
+>> systemd as default.
+>> 
+>> Until then, I think we should have sane defaults allowing to build
+>> with just oe-core + meta-oe + meta-handheld even without distro
+>> layers.
+>> 
+>> Regards
+>> 
+>> Andrea
+>> 
+> 
+> 
+> Oh, I forgot to say that's unfortunate oe-core is still on udev_164. 
+> Probably they have been scared by the note "# udev 169 and up require 
+> kernel 2.6.36 for ARM:"
+> 
+> Is this still a problem? Maybe we should insist on the oe-core list and
+> try to unify the recipes.
 
-I do not know anything about xtables stuff, but could try to help as
-last resort.
+It's not a problem if you backport the patches udev needs :)
+
+E.g.
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstruments/tree/recipes-kernel/linux/linux-omap4_2.6.35.7.bb
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOsl3BMkyGM64RGpERAmHPAJkBIlv7noLAr+tqSLyRRWNCRDu8JQCgsgun
+62cQ+8B93YcHPBGjcd2J0rk=
+=EVzO
+-----END PGP SIGNATURE-----
+
 
 
