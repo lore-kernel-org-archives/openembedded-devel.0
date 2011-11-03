@@ -1,28 +1,36 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RLlZL-0005ns-L0
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 01:54:11 +0100
-Received: (qmail invoked by alias); 03 Nov 2011 00:48:03 -0000
-Received: from p5B0A24CF.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.36.207]
-	by mail.gmx.net (mp062) with SMTP; 03 Nov 2011 01:48:03 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18BWk90vhkBIv4Oz568SivHeqj7v9hRkzvqmTC4rG
-	n4COI/INqS/7h0
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLssd-0004ef-Qn for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 09:42:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RLsmj-0001rR-Jd for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 09:36:29 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Nov 2011 09:36:29 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Nov 2011 09:36:29 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 3 Nov 2011 01:52:48 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <20111101085901.447CF1032F@opal>
-	<201111022252.15928.schnitzeltony@gmx.de>
-	<20111102233254.GJ9949@jama.jama.net>
-In-Reply-To: <20111102233254.GJ9949@jama.jama.net>
-MIME-Version: 1.0
-Message-Id: <201111030152.49177.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] Martin Jansa : midori: fix build with dirty vala
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 03 Nov 2011 09:36:17 +0100
+Message-ID: <j8tjq1$o2$1@dough.gmane.org>
+References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
+	<1318807611-16837-2-git-send-email-andrea.adami@gmail.com>
+	<2904446.7I7DN7edGu@helios>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <2904446.7I7DN7edGu@helios>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-handheld][PATCH 2/3] udev: add bbappend and disable device cache as default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,52 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 00:54:11 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-6"
+X-List-Received-Date: Thu, 03 Nov 2011 08:42:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thursday, November 03, 2011 12:32:54 AM Martin Jansa wrote:
-> > Hm - I am afraid since this update midori never finishes configuring
-> > here. I waited for approximately 2 hours and stopped the process. The
-> > log file is attached ( a fresh retry creates similar log ). I commented
-> > out the whole
-> 
-> Have you tried to revert it to see that it's not caused ie by glib
-> changes or something? Because my vala detection change is already finished
-> before it writes this stuff and the tar in waf is compared with
-> hardcoded checksum, so it also could not change just by this monster
-> blob.
-When sending previous mail I had two runs with and without your patch which gave 
-me a clear picture. Now I have had some further rebuilds - seems sometimes it 
-builds sometimes not! It's a bit late - tomorrow I would like to check further 
-builds to see if I get a hang too with your patch reverted.
-> 
-> Could you also check if there is something interesting in ps aux or
-> strace when it's "hanging"? On all 3 boxes I have tried this it always
-> worked as expected.
-> 
-> > | do_configure_prepend()
-> > 
-> > function, ran
-> > 
-> > | bitbake -ccleanall midori
-> > 
-> > and
-> > 
-> > | bitbake midori
-> > 
-> > without further issues in few minutes.
-> > 
-> > Maybe we should rethink this monster blob commit intended to fix a corner
-> > case...
-> 
-> Yes pity that this corner case is our only vala-native and I was hopping
-> that newer midori with newer waf-1.6 will be released soon and this
-> won't be needed anymore..
-Did you send a note to xfce-bugzilla to increase probability of making it 
-happen?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Andreas
+Op 02-11-11 22:00, Paul Eggleton schreef:
+> On Monday 17 October 2011 01:26:50 Andrea Adami wrote:
+>> * For some reasons when the cache is created root can still be ro *
+>> and as solution you would be obliged to add 'rw' to your commandline.
+>> * There are patches in openembedded-classic to correct this * (and
+>> those are still pending for meta-oe). * Until a solution is found
+>> disable the creation of the device cache on boot.
+>> 
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> --- 
+>> recipes-core/udev/udev/default      |    4 ++++ 
+>> recipes-core/udev/udev_173.bbappend |    1 + 2 files changed, 5 
+>> insertions(+), 0 deletions(-) create mode 100644 
+>> recipes-core/udev/udev/default create mode 100644 
+>> recipes-core/udev/udev_173.bbappend
+>> 
+>> diff --git a/recipes-core/udev/udev/default 
+>> b/recipes-core/udev/udev/default new file mode 100644 index 
+>> 0000000..ba2867e --- /dev/null +++ b/recipes-core/udev/udev/default @@ 
+>> -0,0 +1,4 @@ +# Default for /etc/init.d/udev + +# Uncomment this out
+>> to enable device cache +#DEVCACHE="/etc/dev.tar" diff --git 
+>> a/recipes-core/udev/udev_173.bbappend 
+>> b/recipes-core/udev/udev_173.bbappend new file mode 100644 index 
+>> 0000000..72d991c --- /dev/null +++ 
+>> b/recipes-core/udev/udev_173.bbappend @@ -0,0 +1 @@ 
+>> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+> 
+> I think this is going to cause problems for distros such as Angstrom
+> that enable this layer without always using it. Can we just disable the
+> dev cache for the machines in meta-handheld?
+
+Or get with the program and use udev 174 with systemd, no need for a device
+cache in that case!
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOslKBMkyGM64RGpERApRuAKCrFvkx2Ndu72tpP0DZSRXARyj1kgCgjPKR
+uITbHbzYgtHKi/k2aEpRS+4=
+=D6Yf
+-----END PGP SIGNATURE-----
+
 
 
