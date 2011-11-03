@@ -1,34 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLtrD-0007Om-BE for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:45:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLtlI-0002NU-Pa for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:39:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 10:39:04 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vita.preskovsky@gmail.com>) id 1RLu2I-0007iQ-4Y
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 10:56:38 +0100
+Received: by gyd8 with SMTP id 8so1072742gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 10:39:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 03 Nov 2011 02:50:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=BRRLrgcxxOAFpERlHWoLXF5mdas+zihnBYHtZ1AaGdI=;
+	b=hMiYPnkME4rmIJbUNQNc8bXiSK7++D+bN2f9jm/0+lHU0a0q6z1CGKXfF224jr0J23
+	22X3KG5LXTed8XgxdyrJFcCjsdpSjH5ug1XxrbweSqkrH/RuOWTCAitFsxl/1wTgM8yo
+	j6mi8fk/1IBIHs1edsp7VzZiUr2OzCZaZA+40=
+Received: by 10.236.22.164 with SMTP id t24mr11840781yht.67.1320313825605;
+	Thu, 03 Nov 2011 02:50:25 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id o64sm8553185yhk.3.2011.11.03.02.50.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 03 Nov 2011 02:50:24 -0700 (PDT)
+From: Vita Preskovsky <vita.preskovsky@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 03 Nov 2011 10:38:51 +0100
-Message-ID: <j8tnfb$pf5$1@dough.gmane.org>
-References: <CAFZPMoY0yFw7dAx=rOQRhj6nnXJ7tuPqjPQ4J0a_gi2tjw-WsA@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <CAFZPMoY0yFw7dAx=rOQRhj6nnXJ7tuPqjPQ4J0a_gi2tjw-WsA@mail.gmail.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [oe-core[ de034bf830bec1b64260ac8516dd584163716ef4 breaks iproute2
+Date: Thu,  3 Nov 2011 11:49:33 +0200
+Message-Id: <1320313773-1826-1-git-send-email-vitap@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new version of bluez-hcidump-2.1 that compatible with bluez4_4.95.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 09:45:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Nov 2011 09:56:38 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+---
+ recipes/bluez/bluez-hcidump_2.1.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/bluez-hcidump_2.1.bb
 
-Mails about oe-core need to be sent to the oe-core ml, not oe-dev.
-
-Op 03-11-11 10:22, Sergey Lapin schreef:
-> Hi, all! iptables upgrade broke iproute2. Do anybody work on this?
-> 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOsmErMkyGM64RGpERAgafAJ9U4uxQuLeHbu/o67yyk+oiHxkGWgCgsiNv
-5cuq1Wqq6e5pqNLvw/NLMa0=
-=KTjR
------END PGP SIGNATURE-----
+diff --git a/recipes/bluez/bluez-hcidump_2.1.bb b/recipes/bluez/bluez-hcidump_2.1.bb
+new file mode 100644
+index 0000000..2e1389c
+--- /dev/null
++++ b/recipes/bluez/bluez-hcidump_2.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Linux Bluetooth Stack HCI Debugger Tool."
++SECTION = "console"
++PRIORITY = "optional"
++DEPENDS = "bluez-libs"
++LICENSE = "GPLv2"
++PR = "r0"
++
++SRC_URI = "http://bluez.sourceforge.net/download/bluez-hcidump-${PV}.tar.gz"
++S = "${WORKDIR}/bluez-hcidump-${PV}"
++
++EXTRA_OECONF = "--with-bluez-libs=${STAGING_LIBDIR} --with-bluez-includes=${STAGING_INCDIR}"
++
++inherit autotools
++
++SRC_URI[md5sum] = "b160f0672276398344eebe9df1b37a2c"
++SRC_URI[sha256sum] = "a6cc20b95b6b1a28ff336aad91e124555231628689225c1155e8cd7aac1af86d"
+-- 
+1.7.0.4
 
 
 
