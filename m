@@ -1,32 +1,28 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1RM4pW-0001hP-UF
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RM57O-00022M-BU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 22:28:10 +0100
-Received: by wwf4 with SMTP id 4so2126258wwf.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 14:22:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=pEV7Kpfw81CEU1PksCQ9mEmnAGj8nGEl6zj+pXg/1uw=;
-	b=MwwuXgt1UPNltzFE1bpjs0zmADshWXVNwsjyWrhhsTUxG+bZ++1QfSXitfUGfVi2K7
-	Dff+YisGGqy6Dw3DEO+y9oBB0nJir9AmgFsoPyFujJE10D7uka9wtAZg36qy2zSMGwUr
-	tE4UkyRONI1e6r/wnYN1uoVTZ+tCHT4TOt4oE=
-Received: by 10.216.54.83 with SMTP id h61mr19889wec.6.1320355322278; Thu, 03
-	Nov 2011 14:22:02 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.28.138 with HTTP; Thu, 3 Nov 2011 14:21:41 -0700 (PDT)
-In-Reply-To: <CAObi9r-62Wr8S8aJV0=UvpB9mhP657UBw556w-cpSq9YkCZ7TA@mail.gmail.com>
-References: <CAObi9r-62Wr8S8aJV0=UvpB9mhP657UBw556w-cpSq9YkCZ7TA@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 3 Nov 2011 14:21:41 -0700
-X-Google-Sender-Auth: 1RizgxsaYzOcqI3eOkDq67N2YSg
-Message-ID: <CABcZAN=9hRzsRE0=qPuCn+Kf5z-fNYQmtsh702OWnHyJ9uQbHg@mail.gmail.com>
+	Thu, 03 Nov 2011 22:46:40 +0100
+Received: (qmail invoked by alias); 03 Nov 2011 21:40:29 -0000
+Received: from p5B0A14EB.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.20.235]
+	by mail.gmx.net (mp002) with SMTP; 03 Nov 2011 22:40:29 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/D3tg+UPzDTjR1h0N9u8vERsiosIfbzdJx/pbOvI
+	P7XyrUwGpySpuU
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: running bb located path info
+Date: Thu, 3 Nov 2011 22:45:16 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <20111101085901.447CF1032F@opal>
+	<20111102233254.GJ9949@jama.jama.net>
+	<201111030152.49177.schnitzeltony@gmx.de>
+In-Reply-To: <201111030152.49177.schnitzeltony@gmx.de>
+MIME-Version: 1.0
+Message-Id: <201111032245.17175.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] Martin Jansa : midori: fix build with dirty vala
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +36,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 21:28:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 03 Nov 2011 21:46:40 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 3, 2011 at 2:06 PM, mgundes <mgcse@hotmail.com> wrote:
-> =C2=A0 I need to know is there a variable assigned with running current b=
-b file
-> path?
->
-> =C2=A0 One of freenode #oe friend told me to try THISDIR but It did not w=
-ork
-> for me. By the way, I use openembedded classic.
+On Thursday, November 03, 2011 01:52:48 AM Andreas M=FCller wrote:
+> On Thursday, November 03, 2011 12:32:54 AM Martin Jansa wrote:
+> > > Hm - I am afraid since this update midori never finishes configuring
+> > > here. I waited for approximately 2 hours and stopped the process. The
+> > > log file is attached ( a fresh retry creates similar log ). I comment=
+ed
+> > > out the whole
+> >=20
+> > Have you tried to revert it to see that it's not caused ie by glib
+> > changes or something? Because my vala detection change is already
+> > finished before it writes this stuff and the tar in waf is compared with
+> > hardcoded checksum, so it also could not change just by this monster
+> > blob.
+>=20
+> When sending previous mail I had two runs with and without your patch whi=
+ch
+> gave me a clear picture. Now I have had some further rebuilds - seems
+> sometimes it builds sometimes not! It's a bit late - tomorrow I would like
+> to check further builds to see if I get a hang too with your patch
+> reverted.
+I created a simple script rebuilding midori again and again. I tested it wi=
+th=20
+your patch reverted -> I cannot tell when, but when I came back had also ha=
+ng on=20
+configure. So your patch is out of suspicion. For now my strategy will be l=
+iving=20
+with it.
+>=20
+> > Could you also check if there is something interesting in ps aux or
+> > strace when it's "hanging"? On all 3 boxes I have tried this it always
+> > worked as expected.
+> >=20
+> > > | do_configure_prepend()
+> > >=20
+> > > function, ran
+> > >=20
+> > > | bitbake -ccleanall midori
+> > >=20
+> > > and
+> > >=20
+> > > | bitbake midori
+> > >=20
+> > > without further issues in few minutes.
+> > >=20
+> > > Maybe we should rethink this monster blob commit intended to fix a
+> > > corner case...
+> >=20
+> > Yes pity that this corner case is our only vala-native and I was hopping
+> > that newer midori with newer waf-1.6 will be released soon and this
+> > won't be needed anymore..
+What I still do not unterstand: Since configure detetced vala correct with =
+patch=20
+reverted I ran
 
-The 'FILE' variable holds the current file's full path. FILE_DIRNAME
-is the directory it's in.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+~/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin/valac --version
+
+I got
+
+Vala 0.12.1
+
+Why am I not dirty?
+
+Andreas
 
 
