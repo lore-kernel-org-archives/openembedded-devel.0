@@ -1,25 +1,26 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RLuLg-0001pD-ML
+	(envelope-from <ka6sox@gmail.com>) id 1RLvgN-0007HW-5S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 11:16:41 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 03 Nov 2011 03:10:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="70743730"
-Received: from unknown (HELO helios.localnet) ([10.252.121.97])
-	by orsmga001.jf.intel.com with ESMTP; 03 Nov 2011 03:10:30 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 03 Nov 2011 10:10:29 +0000
-Message-ID: <1770529.XOL5Uly8Fl@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
-In-Reply-To: <j8tkml$5ra$1@dough.gmane.org>
-References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
-	<1742242.WP01ZavBdz@helios> <j8tkml$5ra$1@dough.gmane.org>
+	Thu, 03 Nov 2011 12:42:08 +0100
+Received: by iafj26 with SMTP id j26so1273188iaf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Nov 2011 04:35:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=TA/xQ1Ph8RMXvKFmJ/8qu9+cr7VIgVKpSYenmcohABA=;
+	b=in0zPb+/FwIJCueaZIKth4qKnvPRhP3bwwCg3zdq2shgFVpfOfbuiPbKbQ91FP1Blo
+	nZAsRdyUVOYr/lOmTkZhggR/8Zq3jywWeR2XhQgn2iGi/+18qkOpvCBXdPJnx4JgspBs
+	Q+F2cYrRsuY1c+aesNuPKpn8k8bkRfek1E+h0=
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH 1/3] formfactor: initial commit of collie, poodle and tosa machconfig
+Received: by 10.42.163.200 with SMTP id d8mr5715039icy.41.1320320148487; Thu,
+	03 Nov 2011 04:35:48 -0700 (PDT)
+Received: by 10.42.228.66 with HTTP; Thu, 3 Nov 2011 04:35:48 -0700 (PDT)
+Date: Thu, 3 Nov 2011 04:35:48 -0700
+Message-ID: <CAHQecY491xbCjv3Vbr0tb3BRRZwznJ970ad7E5=8vo0C3W-xSg@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Planned outage to move servers into new rackspace.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +34,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 10:16:41 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 03 Nov 2011 11:42:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 03 November 2011 09:51:33 Koen Kooi wrote:
-> Op 02-11-11 22:02, Paul Eggleton schreef:
-> > On Monday 17 October 2011 01:26:49 Andrea Adami wrote:
-> >> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> ...
-> > 
-> > I've merged this series apart from 2/3 which we still need to discuss.
-> 
-> Can you please update patchwork as well?
+today, 3NOV2011, between 1000-1200PDT (1800-2000UTC) there will be a
+short 15-30Minute outage for us to migrate our servers into the final
+destination at the Colo.
 
-Apparently, despite patchwork saying I'm a "contributor" I have no ability to 
-do so.
+This will affect all services including git, cgit, wiki, patches and bugs.
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+ka6sox
+(for the OE Infra team)
 
 
