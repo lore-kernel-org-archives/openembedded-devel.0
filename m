@@ -1,26 +1,33 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>) id 1RLvgN-0007HW-5S
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 12:42:08 +0100
-Received: by iafj26 with SMTP id j26so1273188iaf.6
+Received: from devils.ext.ti.com ([198.47.26.153])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <jdk@ti.com>)
+	id 1RLwGM-0008D8-6z for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 13:19:18 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA3CD55C029409
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 04:35:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=TA/xQ1Ph8RMXvKFmJ/8qu9+cr7VIgVKpSYenmcohABA=;
-	b=in0zPb+/FwIJCueaZIKth4qKnvPRhP3bwwCg3zdq2shgFVpfOfbuiPbKbQ91FP1Blo
-	nZAsRdyUVOYr/lOmTkZhggR/8Zq3jywWeR2XhQgn2iGi/+18qkOpvCBXdPJnx4JgspBs
-	Q+F2cYrRsuY1c+aesNuPKpn8k8bkRfek1E+h0=
+	Thu, 3 Nov 2011 07:13:05 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id pA3CD54t010634
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 3 Nov 2011 07:13:05 -0500 (CDT)
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA3CD5eY028683
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 3 Nov 2011 07:13:05 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Thu, 3 Nov 2011
+	07:13:04 -0500
+Received: from D620.itg.ti.com (h16-209.vpn.ti.com [172.24.16.209])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA3CD46F029891;
+	Thu, 3 Nov 2011 07:13:04 -0500
+From: Jason Kridner <jdk@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 3 Nov 2011 08:13:03 -0400
+Message-ID: <1320322383-19870-1-git-send-email-jdk@ti.com>
+X-Mailer: git-send-email 1.7.4.1
 MIME-Version: 1.0
-Received: by 10.42.163.200 with SMTP id d8mr5715039icy.41.1320320148487; Thu,
-	03 Nov 2011 04:35:48 -0700 (PDT)
-Received: by 10.42.228.66 with HTTP; Thu, 3 Nov 2011 04:35:48 -0700 (PDT)
-Date: Thu, 3 Nov 2011 04:35:48 -0700
-Message-ID: <CAHQecY491xbCjv3Vbr0tb3BRRZwznJ970ad7E5=8vo0C3W-xSg@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Planned outage to move servers into new rackspace.
+Subject: [PATCH] rt-test: moved to github repo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,16 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 11:42:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 03 Nov 2011 12:19:18 -0000
+Content-Type: text/plain
 
-today, 3NOV2011, between 1000-1200PDT (1800-2000UTC) there will be a
-short 15-30Minute outage for us to migrate our servers into the final
-destination at the Colo.
+PR not bumped since previous builds would be identical.
+---
+ meta/recipes-rt/rt-tests/rt-tests_0.73.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-This will affect all services including git, cgit, wiki, patches and bugs.
+diff --git a/meta/recipes-rt/rt-tests/rt-tests_0.73.bb b/meta/recipes-rt/rt-tests/rt-tests_0.73.bb
+index a2cf6be..e816fa2 100644
+--- a/meta/recipes-rt/rt-tests/rt-tests_0.73.bb
++++ b/meta/recipes-rt/rt-tests/rt-tests_0.73.bb
+@@ -11,7 +11,7 @@ SRCREV = "81da016fb0f6ab0511fbec81fc8ba1a50398a20d"
+ PV = "git${SRCPV}"
+ PR = "r0"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests.git;protocol=git"
++SRC_URI = "git://github.com/clrkwllms/rt-tests.git;protocol=git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.4.1
 
-ka6sox
-(for the OE Infra team)
 
 
