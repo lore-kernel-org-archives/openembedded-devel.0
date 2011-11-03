@@ -1,37 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLtib-00076R-A9 for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:36:17 +0100
+	id 1RLtrD-0007Om-BE for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 10:45:14 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RLtcd-0006jB-Tf for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Nov 2011 10:30:07 +0100
+	id 1RLtlI-0002NU-Pa for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Nov 2011 10:39:04 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 10:30:07 +0100
+	Thu, 03 Nov 2011 10:39:04 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2011 10:30:07 +0100
+	Thu, 03 Nov 2011 10:39:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 03 Nov 2011 10:25:27 +0100
-Message-ID: <j8tmm7$jfd$2@dough.gmane.org>
-References: <1318807611-16837-1-git-send-email-andrea.adami@gmail.com>
-	<1318807611-16837-2-git-send-email-andrea.adami@gmail.com>
-	<2904446.7I7DN7edGu@helios> <j8tjq1$o2$1@dough.gmane.org>
-	<CAAQYJAt5ApbYCi9f_mNgAN7WjEEZZyAdgPkfhwxjVsePf+VaqA@mail.gmail.com>
+Date: Thu, 03 Nov 2011 10:38:51 +0100
+Message-ID: <j8tnfb$pf5$1@dough.gmane.org>
+References: <CAFZPMoY0yFw7dAx=rOQRhj6nnXJ7tuPqjPQ4J0a_gi2tjw-WsA@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <CAAQYJAt5ApbYCi9f_mNgAN7WjEEZZyAdgPkfhwxjVsePf+VaqA@mail.gmail.com>
+In-Reply-To: <CAFZPMoY0yFw7dAx=rOQRhj6nnXJ7tuPqjPQ4J0a_gi2tjw-WsA@mail.gmail.com>
 X-Enigmail-Version: 1.3.2
-Subject: Re: [meta-handheld][PATCH 2/3] udev: add bbappend and disable device cache as default.
+Subject: Re: [oe-core[ de034bf830bec1b64260ac8516dd584163716ef4 breaks iproute2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,71 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 09:36:17 -0000
+X-List-Received-Date: Thu, 03 Nov 2011 09:45:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 03-11-11 10:09, Andrea Adami schreef:
-> On Thu, Nov 3, 2011 at 9:36 AM, Koen Kooi
-> <koen@dominion.thruhere.net>wrote:
-> 
-> Op 02-11-11 22:00, Paul Eggleton schreef:
->>>> On Monday 17 October 2011 01:26:50 Andrea Adami wrote:
->>>>> * For some reasons when the cache is created root can still be ro
->>>>> * and as solution you would be obliged to add 'rw' to your
->>>>> commandline. * There are patches in openembedded-classic to
->>>>> correct this * (and those are still pending for meta-oe). * Until
->>>>> a solution is found disable the creation of the device cache on
->>>>> boot.
->>>>> 
->>>>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> --- 
->>>>> recipes-core/udev/udev/default      |    4 ++++ 
->>>>> recipes-core/udev/udev_173.bbappend |    1 + 2 files changed, 5 
->>>>> insertions(+), 0 deletions(-) create mode 100644 
->>>>> recipes-core/udev/udev/default create mode 100644 
->>>>> recipes-core/udev/udev_173.bbappend
->>>>> 
->>>>> diff --git a/recipes-core/udev/udev/default 
->>>>> b/recipes-core/udev/udev/default new file mode 100644 index 
->>>>> 0000000..ba2867e --- /dev/null +++
->>>>> b/recipes-core/udev/udev/default @@ -0,0 +1,4 @@ +# Default for
->>>>> /etc/init.d/udev + +# Uncomment this out to enable device cache
->>>>> +#DEVCACHE="/etc/dev.tar" diff --git 
->>>>> a/recipes-core/udev/udev_173.bbappend 
->>>>> b/recipes-core/udev/udev_173.bbappend new file mode 100644 index 
->>>>> 0000000..72d991c --- /dev/null +++ 
->>>>> b/recipes-core/udev/udev_173.bbappend @@ -0,0 +1 @@ 
->>>>> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
->>>> 
->>>> I think this is going to cause problems for distros such as
->>>> Angstrom that enable this layer without always using it. Can we
->>>> just disable the dev cache for the machines in meta-handheld?
-> 
-> Or get with the program and use udev 174 with systemd, no need for a
-> device cache in that case!
-> 
-> regards,
-> 
-> Koen
-> 
-> 
->> Sure, this is the future...but for now oe-core doesn't implement
->> systemd as default.
+Mails about oe-core need to be sent to the oe-core ml, not oe-dev.
 
-Nor does it have udev 173. You can't argue that oe-core doesn't have
-something that's in meta-oe when you're already relying on meta-oe.
-
-
+Op 03-11-11 10:22, Sergey Lapin schreef:
+> Hi, all! iptables upgrade broke iproute2. Do anybody work on this?
+> 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOsl4HMkyGM64RGpERAtCEAJ9ogPDgyj0IsYMcKjLEML/PXvMK+ACgu3xN
-RT3IaA5N1TqtzQQE81uoRHU=
-=5YFd
+iD8DBQFOsmErMkyGM64RGpERAgafAJ9U4uxQuLeHbu/o67yyk+oiHxkGWgCgsiNv
+5cuq1Wqq6e5pqNLvw/NLMa0=
+=KTjR
 -----END PGP SIGNATURE-----
 
 
