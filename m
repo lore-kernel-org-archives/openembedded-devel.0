@@ -1,33 +1,29 @@
-Received: from mail-pz0-f43.google.com ([209.85.210.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1RMML2-0004fK-NM
+	(envelope-from <martin.jansa@gmail.com>) id 1RMMgq-0005xd-4C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 17:09:52 +0100
-Received: by pzk37 with SMTP id 37so3446710pzk.2
+	Fri, 04 Nov 2011 17:32:24 +0100
+Received: by faat2 with SMTP id t2so147048faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Nov 2011 09:03:41 -0700 (PDT)
+	Fri, 04 Nov 2011 09:26:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Yue/FJgPSOP1y/cZxO+XkRA63LSMvWZiwkRiN8QV0Vg=;
-	b=f3ozDBe/HpevoYRpThsFMin9Otqy06ZbAUxlKsCRK5wZxbc+vvTeIfa71fbM1UrQWW
-	SfVtyEgCO67azv2ah0Dj6OKRtl9frCUatFtGVS2QH50rGjcytQEgpZUTU4vMCgOf0mMP
-	NxY44b242eZB2BH1Z86thbfkMy6xhaLTJW/iY=
-MIME-Version: 1.0
-Received: by 10.182.17.103 with SMTP id n7mr3020811obd.68.1320422621146; Fri,
-	04 Nov 2011 09:03:41 -0700 (PDT)
-Received: by 10.182.192.99 with HTTP; Fri, 4 Nov 2011 09:03:40 -0700 (PDT)
-In-Reply-To: <1320416709.20107.115.camel@ted>
-References: <1320361692.20107.103.camel@ted>
-	<CAFu+nvG9gLNyCOEcE9ZdCwCe8wtzn=4vxdd3fGz2mP_zBtAM_Q@mail.gmail.com>
-	<1320416709.20107.115.camel@ted>
-Date: Fri, 4 Nov 2011 12:03:40 -0400
-Message-ID: <CAFu+nvFhs+YGSfs6=Jy6wHnY3c-yTGnTxG=FdzbuRe=n9ZpiXw@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: richard.purdie@linuxfoundation.org
-Subject: Re: [OE-core] Bitbake 1.14.0 released!
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=THUzoKFGYEuy/R8pMUQJg3kL2nB3ctm7xR+Cz9RrfQA=;
+	b=wPOlrBqNFxznAhQUx8atIe2zBzWKWOegYonqLDEJsjfM6e1ogm3DiPdbXUiq8JKf3A
+	6RxC5Js4T0+ZHkDHgHM7RNRzQWu7xHs3b1Sj7BL+e7vLpD7DbLf1dWyFKRcCpCJk14Fq
+	3UkI35hOBvPmI/1S3t4of7s7ssLmqsISJaP8k=
+Received: by 10.223.30.149 with SMTP id u21mr25388346fac.18.1320423974459;
+	Fri, 04 Nov 2011 09:26:14 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y10sm14313152fal.10.2011.11.04.09.26.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 04 Nov 2011 09:26:13 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Nov 2011 17:26:06 +0100
+Message-Id: <1320423966-7492-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.7.2
+Subject: [PATCH] mplayer-common: import from OE-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +37,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 16:09:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Nov 2011 16:32:24 -0000
 
-On Fri, Nov 4, 2011 at 10:25 AM, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
+* commit b28081b6039db85f18bf9e722fece59bff6e7b0f
 
-> On Fri, 2011-11-04 at 10:05 -0400, George C. Huntington, III wrote:
-> > can the new bitbake be used on oe-classic, 2011.03-maintenance branch?
->
-> It should work there, yes.
->
-> Cheers,
->
-> Richard
->
->
->
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 ++++++++++++++++++++
+ .../mplayer/mplayer-common/mplayer.conf            |   15 +++++++++++++
+ 2 files changed, 37 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
 
-hmm the new bitbake isn't working on the 2011.03-maintenance branch.  It is
-reporting errors like
- "ERROR: There is a comment on line 59 of file
-/home/mscudder/oe-phase2/openembedded/recipes/gcc/gcc-4.3.1.inc (#
-file://pr34130.patch
-\) which is in the middle of a multiline expression.
-Bitbake used to ignore these but no longer does so, please fix your
-metadata as errors are likely as a result of this change."
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+new file mode 100644
+index 0000000..889bb95
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+@@ -0,0 +1,22 @@
++# Copyright Matthias Hentges <devel@hentges.net> (c) 2006
++# License: MIT (see COPYING.MIT)
++
++DESCRIPTION = "Preconfigured mplayer preferences"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++PV = "0.0.1"
++
++SRC_URI = "file://mplayer.conf"
++
++# Yes, really /usr/etc!!!
++do_install() {
++	install -d "${D}/usr${sysconfdir}/mplayer"
++
++	install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
++}
++
++FILES_${PN} = "/usr${sysconfdir}/mplayer"
++
++inherit allarch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+new file mode 100644
+index 0000000..92aeb15
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+@@ -0,0 +1,15 @@
++
++# You probably shouldn't touch these
++ac=mad,
++ao=oss,
++
++# Required on SL-Cxxxx for correct rotation in the *VT*,
++# breaks rotation in X!
++# vf=rotate=1
++
++# Enable fullscreen display by default
++# fs=true
++
++# Drop frames to keep audio and video in sync
++framedrop=true
++
+-- 
+1.7.7.2
 
-this seems to be mostly in the gcc area.  are there any patches that can be
-pulled in to the 2011.03-maintenance branch that fix the comments in
-multiline expressions?
+
 
