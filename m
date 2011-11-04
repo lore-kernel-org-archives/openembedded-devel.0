@@ -1,34 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RMN9A-00074t-2b for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 18:01:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RMN3B-0004nz-BE for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 17:55:29 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Nov 2011 17:55:28 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RMNcz-0007oA-Dr
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Nov 2011 18:32:29 +0100
+Received: by ggnj1 with SMTP id j1so2600827ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Nov 2011 17:55:28 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 04 Nov 2011 10:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=Dz5pI/duirkiAPz4HfTnHGQwbNgjpmZZ4jR8wxv04Uc=;
+	b=kMKNKM4DOZDdLvQt8Px43Av8R8oPxlCg6IFJsLorboxiuvUQJMJ4XUOfngx+TbAvRf
+	sGZQ0xyHz7snAJeXisGbEolGzeb7eLwN5ueoJBcH8hJCndgYUYATUqa3VmkyWPHzuCDJ
+	t5Lu/nOiNSL6nY8Dr/jALCLm+N7KDBhcJywsQ=
+Received: by 10.236.192.230 with SMTP id i66mr19792898yhn.82.1320427578962;
+	Fri, 04 Nov 2011 10:26:18 -0700 (PDT)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id y58sm6548572yhi.17.2011.11.04.10.26.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 04 Nov 2011 10:26:18 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 04 Nov 2011 17:55:16 +0100
-Message-ID: <j915dk$4rp$1@dough.gmane.org>
-References: <1320399536-9588-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <1320399536-9588-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [PATCH] mplayer2: import from OE-classic
+Date: Fri,  4 Nov 2011 17:26:00 +0000
+Message-Id: <aed5eb8163af7253804d6e82d3b9aadffa67bf1e.1320427498.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <cover.1320427498.git.otavio@ossystems.com.br>
+References: <cover.1320427498.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1320427498.git.otavio@ossystems.com.br>
+References: <cover.1320427498.git.otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 3/3] connman: refactor systemd packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 17:01:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Nov 2011 17:32:29 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This changes the recipe to use systemd.bbclass to avoid duplicating
+code and also fix the rdepends of connman-systemd on connman.
 
-Op 04-11-11 10:38, Martin Jansa schreef:
-> * taken from 1a91fc4b705b0c4f45eb088a2f7aea01ebc9c98e * dropped V4L1,
-> largefile, xvmc * added libass * added LIC_FILES_CHKSUM * upgraded to
-> latest SRCREV * moved glamo patch to meta-openmoko layer
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-connectivity/connman/connman.inc   |   24 ++++---------------
+ .../recipes-connectivity/connman/connman_0.77.bb   |    2 +-
+ 2 files changed, 6 insertions(+), 20 deletions(-)
 
-I did some more fixes, it still doesn't build for armv7a or if you use
-- --as-needed, but to get parsing to work again I pushed it, OE-core style ;)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOtBj0MkyGM64RGpERAsC0AJ96GU31nRYnk5b9YXMMMYDdytS3tACgu9cB
-I7SHKc1LjGCRba1yX295//c=
-=MfO5
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-connectivity/connman/connman.inc b/meta-oe/recipes-connectivity/connman/connman.inc
+index 8209502..88b2e51 100644
+--- a/meta-oe/recipes-connectivity/connman/connman.inc
++++ b/meta-oe/recipes-connectivity/connman/connman.inc
+@@ -31,9 +31,12 @@ EXTRA_OECONF += "\
+ INITSCRIPT_NAME = "connman"
+ INITSCRIPT_PARAMS = "start 05 5 2 . stop 22 0 1 6 ."
+ 
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
++
+ PARALLEL_MAKE = ""
+ 
+-inherit autotools pkgconfig update-rc.d
++inherit autotools pkgconfig update-rc.d systemd
+ 
+ do_configure_append() {
+ 	ln -sf . include/connman
+@@ -84,24 +87,7 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
+ PACKAGES =+ "${PN}-systemd"
+ # Package up systemd files
+ FILES_${PN}-systemd += "${base_libdir}/systemd"
+-
+-pkg_postinst_connman-systemd() {
+-	# can't do this offline
+-	if [ "x$D" != "x" ]; then
+-		exit 1
+-	fi
+-	
+-	systemctl enable connman.service
+-}
+-
+-pkg_postrm_connman-systemd() {
+-	# can't do this offline
+-	if [ "x$D" != "x" ]; then
+-		exit 1
+-	fi
+-
+-	systemctl disable connman.service
+-}
++RDEPENDS_${PN}-systemd += "${PN}"
+ 
+ # Needed when using DNS proxy feature
+ RRECOMMENDS_${PN} += "dnsmasq-dbus"
+diff --git a/meta-oe/recipes-connectivity/connman/connman_0.77.bb b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
+index 6d9c87c..9c93e51 100644
+--- a/meta-oe/recipes-connectivity/connman/connman_0.77.bb
++++ b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
+@@ -1,5 +1,5 @@
+ require connman.inc
+-PR = "r2"
++PR = "r3"
+ 
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
+-- 
+1.7.2.5
 
 
 
