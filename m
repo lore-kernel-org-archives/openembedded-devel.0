@@ -1,28 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RM8QF-0006o7-QY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 02:18:19 +0100
-Received: (qmail invoked by alias); 04 Nov 2011 01:12:07 -0000
-Received: from p5B0A14EB.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.20.235]
-	by mail.gmx.net (mp059) with SMTP; 04 Nov 2011 02:12:07 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+GW74jMiaGqwJw1EFel7zC49j7rqDdjeySKDgSRS
-	jPq6zRJpsznSMQ
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 4 Nov 2011 02:16:56 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <20111101085901.447CF1032F@opal>
-	<201111032245.17175.schnitzeltony@gmx.de>
-	<20111103222918.GP9949@jama.jama.net>
-In-Reply-To: <20111103222918.GP9949@jama.jama.net>
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1RMG0h-00066H-1a; Fri, 04 Nov 2011 10:24:27 +0100
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id pA49IGOE028331; 
+	Fri, 4 Nov 2011 10:18:17 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 4 Nov 2011 10:18:14 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Message-Id: <201111040216.57169.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] Martin Jansa : midori: fix build with dirty vala
+Date: Fri, 4 Nov 2011 10:18:14 +0100
+Message-ID: <0C757E680E33864AB113392C7E83F910BE522C@GSX300A.mxchg.m.corp>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Clean of qt4-embedded don't cleanup sysroot and deploy
+Thread-Index: AcyP4ovn6EzPVhcDTmCKRTj3ZlV1+g==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 04 Nov 2011 09:18:14.0581 (UTC)
+	FILETIME=[AE597650:01CC9AD2]
+Cc: openembedded-core@lists.openembedded.org
+Subject: Clean of qt4-embedded don't cleanup sysroot and deploy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,136 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 01:18:19 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 04 Nov 2011 09:24:27 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Thursday, November 03, 2011 11:29:18 PM Martin Jansa wrote:
-> On Thu, Nov 03, 2011 at 10:45:16PM +0100, Andreas M=FCller wrote:
-> > On Thursday, November 03, 2011 01:52:48 AM Andreas M=FCller wrote:
-> > > On Thursday, November 03, 2011 12:32:54 AM Martin Jansa wrote:
-> > > > > Hm - I am afraid since this update midori never finishes
-> > > > > configuring here. I waited for approximately 2 hours and stopped
-> > > > > the process. The log file is attached ( a fresh retry creates
-> > > > > similar log ). I commented out the whole
-> > > >=20
-> > > > Have you tried to revert it to see that it's not caused ie by glib
-> > > > changes or something? Because my vala detection change is already
-> > > > finished before it writes this stuff and the tar in waf is compared
-> > > > with hardcoded checksum, so it also could not change just by this
-> > > > monster blob.
-> > >=20
-> > > When sending previous mail I had two runs with and without your patch
-> > > which gave me a clear picture. Now I have had some further rebuilds -
-> > > seems sometimes it builds sometimes not! It's a bit late - tomorrow I
-> > > would like to check further builds to see if I get a hang too with
-> > > your patch reverted.
-> >=20
-> > I created a simple script rebuilding midori again and again. I tested it
-> > with your patch reverted -> I cannot tell when, but when I came back had
-> > also hang on configure. So your patch is out of suspicion. For now my
-> > strategy will be living with it.
-> >=20
-> > > > Could you also check if there is something interesting in ps aux or
-> > > > strace when it's "hanging"? On all 3 boxes I have tried this it
-> > > > always worked as expected.
-> > > >=20
-> > > > > | do_configure_prepend()
-> > > > >=20
-> > > > > function, ran
-> > > > >=20
-> > > > > | bitbake -ccleanall midori
-> > > > >=20
-> > > > > and
-> > > > >=20
-> > > > > | bitbake midori
-> > > > >=20
-> > > > > without further issues in few minutes.
-> > > > >=20
-> > > > > Maybe we should rethink this monster blob commit intended to fix a
-> > > > > corner case...
-> > > >=20
-> > > > Yes pity that this corner case is our only vala-native and I was
-> > > > hopping that newer midori with newer waf-1.6 will be released soon
-> > > > and this won't be needed anymore..
-> >=20
-> > What I still do not unterstand: Since configure detetced vala correct
-> > with patch reverted I ran
-> >=20
-> > ~/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin/valac --version
-> >=20
-> > I got
-> >=20
-> > Vala 0.12.1
-> >=20
-> > Why am I not dirty?
->=20
-> SHR buildhost with shr-chroot:
-> OE @ ~ $ ~/shr-core/tmp/sysroots/x86_64-linux/usr/bin/valac --version
-> Vala 0.12.1-dirty
->=20
-> my buildhost with shr-chroot:
-> OE @ ~ $ ~/shr-core/tmp/sysroots/x86_64-linux/usr/bin/valac --version
-> Vala 0.12.1
->=20
-> So right now only bad people are dirty and only sometimes.. see how they
-> get dirty
-:-))
->=20
-> vala/build-aux/git-version-gen
-> ...
-> # Don't declare a version "dirty" merely because a time stamp has changed.
-> git status > /dev/null 2>&1
->=20
-> dirty=3D`sh -c 'git diff-index --name-only HEAD' 2>/dev/null` || dirty=3D
-> case "$dirty" in
->     '') ;;
->     *) # Append the suffix only if there isn't one already.
->         case $v in
->           *-dirty) ;;
->           *) v=3D"$v-dirty" ;;
->         esac ;;
-> esac
->=20
-> shr buildhost:
-> OE @ ~/shr-core/tmp/work/x86_64-linux $ git diff-index --name-only HEAD
-> dev/.keep
-> dev/null
-> etc/group
-> etc/hosts
-> etc/localtime
-> etc/passwd
-> etc/resolv.conf
-> proc/.keep
-> sys/.keep
-> var/cache/ldconfig/aux-cache
-> var/run/utmp
->=20
-> and my buildhost:
-> OE @ ~/shr-core/tmp/work/x86_64-linux $ git diff-index --name-only HEAD
-> fatal: Not a git repository (or any parent up to mount parent
-> /OE/shr-core/tmp) Stopping at filesystem boundary
-> (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
->=20
-> The difference is that my tmp/work dir is mount -o bind outside shr-chroot
-> (which is itself git checkout).
-This is not a corner case - sorry
->=20
-> So yes.. the detection in vala is not optimal and and causes false positi=
-ve
-> -dirty, but midori should be able to build even with really dirty
-> vala_git.bb and newer waf is also fixing it like this.
-agreed
->=20
-> If someone confirms that this patch is causing some problems I'll remove
-> -dirty detection from vala completely so it will also report clean on
-> really dirty vala_git.bb.
-After my tests it is not modified waf causing the trouble.
->=20
-> Regards,
-Thanks a lot for taking your time to clear up this one.
+I didn't get an answer, so I ask it again.
 
-Andreas
+Hello,
+
+if I do a bitbake -c clean for qt4-embedded or qt4-native all libraries
+and binaries of QT are left in the sysroots and all created packages are
+left in deploy. This is an result of splitting qt into several sub
+packages and install them.
+
+This behavior makes problems if I change the used QT Version of the
+distro.
+If qt recipe builds, it first searches for the libraries in sysroot
+(standard library path of OE) and then it search in its working
+directory. While the sysroots contain libraries of a different QT
+version now, the build will fail.=20
+
+Is there a way to clean all sub packages of qt if I clean the
+qt4-embedded or qt4-native package ?
+
+An other solution may be to switch the order of the library paths in the
+linker command (-L) to search libraries in the package working path
+first. But how to do this in a proper way?
+
+Regards
+Wolfgang Hauser
 
 
