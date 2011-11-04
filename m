@@ -1,34 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-pz0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RMLPP-0002we-Nu
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1RMML2-0004fK-NM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 16:10:20 +0100
-Received: by qam2 with SMTP id 2so2205078qam.6
+	Fri, 04 Nov 2011 17:09:52 +0100
+Received: by pzk37 with SMTP id 37so3446710pzk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Nov 2011 08:04:09 -0700 (PDT)
+	Fri, 04 Nov 2011 09:03:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:in-reply-to:mime-version:content-type:message-id
-	:content-transfer-encoding:from:subject:date:to:x-pgp-agent:x-mailer;
-	bh=zwEl9fdqcgDSRwLtpbbX95z4T6eQlgt17+C6qcz6mwY=;
-	b=ibC8uFKwe+wnwp+rkpXk07hasNYXwCpmQZaWhbKH66SrtlAgX7RC1sBfNMCsPSvv96
-	fPvA1JyB+7G2pRIJ7MVZmw4sqLwd0YDrBPUXuJtAn2JAnCTnTkJ5TUovQRuUj/UHeiUl
-	E0czlf1a3IPQglexdTsIA2mJQetLo6xSrQ928=
-Received: by 10.42.158.9 with SMTP id f9mr16350479icx.31.1320419049170;
-	Fri, 04 Nov 2011 08:04:09 -0700 (PDT)
-Received: from [192.168.0.5] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id n30sm21724716ibl.4.2011.11.04.08.04.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Nov 2011 08:04:08 -0700 (PDT)
-References: <20111102214733.GY15391@denix.org>
-In-Reply-To: <20111102214733.GY15391@denix.org>
-Mime-Version: 1.0 (Apple Message framework v1084)
-Message-Id: <F2DBF52B-333D-407D-AF35-A225C71A2A8D@gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-Date: Fri, 4 Nov 2011 08:03:56 -0700
-To: openembedded-devel@lists.openembedded.org
-X-Pgp-Agent: GPGMail 1.3.3
-X-Mailer: Apple Mail (2.1084)
-Subject: Re: [2011.03-maintenance] Pull request 20111006
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Yue/FJgPSOP1y/cZxO+XkRA63LSMvWZiwkRiN8QV0Vg=;
+	b=f3ozDBe/HpevoYRpThsFMin9Otqy06ZbAUxlKsCRK5wZxbc+vvTeIfa71fbM1UrQWW
+	SfVtyEgCO67azv2ah0Dj6OKRtl9frCUatFtGVS2QH50rGjcytQEgpZUTU4vMCgOf0mMP
+	NxY44b242eZB2BH1Z86thbfkMy6xhaLTJW/iY=
+MIME-Version: 1.0
+Received: by 10.182.17.103 with SMTP id n7mr3020811obd.68.1320422621146; Fri,
+	04 Nov 2011 09:03:41 -0700 (PDT)
+Received: by 10.182.192.99 with HTTP; Fri, 4 Nov 2011 09:03:40 -0700 (PDT)
+In-Reply-To: <1320416709.20107.115.camel@ted>
+References: <1320361692.20107.103.camel@ted>
+	<CAFu+nvG9gLNyCOEcE9ZdCwCe8wtzn=4vxdd3fGz2mP_zBtAM_Q@mail.gmail.com>
+	<1320416709.20107.115.camel@ted>
+Date: Fri, 4 Nov 2011 12:03:40 -0400
+Message-ID: <CAFu+nvFhs+YGSfs6=Jy6wHnY3c-yTGnTxG=FdzbuRe=n9ZpiXw@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: richard.purdie@linuxfoundation.org
+Subject: Re: [OE-core] Bitbake 1.14.0 released!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 15:10:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Nov 2011 16:09:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Nov 4, 2011 at 10:25 AM, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
 
-On Nov 2, 2011, at 2:47 PM, Denys Dmytriyenko wrote:
+> On Fri, 2011-11-04 at 10:05 -0400, George C. Huntington, III wrote:
+> > can the new bitbake be used on oe-classic, 2011.03-maintenance branch?
+>
+> It should work there, yes.
+>
+> Cheers,
+>
+> Richard
+>
+>
+>
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
+>
 
-> Tom,
->=20
-> Please pull this 1 commit, that updates sourceipk.bbclass to =
-dereference
-> symlinks properly. Cherry-picked from oe.dev.
->=20
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->  Branch: 2011.03-maintenance
->  Browse: =
-http://arago-project.org/git/people/?p=3Ddenix/openembedded.git;a=3Dshortl=
-og;h=3Drefs/heads/2011.03-maintenance
->=20
-> Thanks,
->    Denys Dmytriyenko <denys@ti.com>
-> ---
->=20
-> The following changes since commit =
-656bed267ae71e63ff443bfd2dd7ca0d2feff11d:
->  Mats K=D1=86=E2=95=93rrman (1):
->        binutils_2.18: update SRC_URI to avoid manual delete
->=20
-> Chase Maupin (1):
->  sourceipk: dereference symlinks in sourceipk
+hmm the new bitbake isn't working on the 2011.03-maintenance branch.  It is
+reporting errors like
+ "ERROR: There is a comment on line 59 of file
+/home/mscudder/oe-phase2/openembedded/recipes/gcc/gcc-4.3.1.inc (#
+file://pr34130.patch
+\) which is in the middle of a multiline expression.
+Bitbake used to ignore these but no longer does so, please fix your
+metadata as errors are likely as a result of this change."
 
-Applied, thanks.
-
-- --=20
-Tom
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk6z/t4ACgkQdZngf2G4WwMKowCglL66HVqE2sxTFs0hIx2GC7mN
-aQ4An23g/ooF7Q7svUHi76V0HySBJgJb
-=3DdsmA
------END PGP SIGNATURE-----
-
+this seems to be mostly in the gcc area.  are there any patches that can be
+pulled in to the 2011.03-maintenance branch that fix the comments in
+multiline expressions?
 
