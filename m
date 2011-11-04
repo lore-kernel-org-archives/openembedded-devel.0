@@ -1,31 +1,31 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <redzhepoff@gmail.com>) id 1RMGVr-00071E-RG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Nov 2011 10:56:39 +0100
-Received: by eyd9 with SMTP id 9so1828621eyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Nov 2011 02:50:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:cc:content-type;
-	bh=YBEcyM5034O1JeOmER2hr2BJITVALPN0kbmecT7aiBI=;
-	b=qy9/GsIdV8+SzlH4wqpXkOVYY3VWijiNAyYGxZaNg3U2owWJbZu3EzuI9tzTvFrJsj
-	0hpN1GgP9KGh6KzSuqxURu4srn+K9w6QBaRuCO224rHUnB/EkIp0WW6DC5XLwFL4hC0i
-	eF1VIB1bXJzcaHv8NsCa1SNSoJDHIwZbsFOW4=
-MIME-Version: 1.0
-Received: by 10.14.11.209 with SMTP id 57mr1321967eex.109.1320400230098; Fri,
-	04 Nov 2011 02:50:30 -0700 (PDT)
-Sender: redzhepoff@gmail.com
-Received: by 10.14.185.129 with HTTP; Fri, 4 Nov 2011 02:50:30 -0700 (PDT)
-Date: Fri, 4 Nov 2011 12:50:30 +0300
-X-Google-Sender-Auth: 2sLnD0TMU0IJx8V9MNmvLf1dNNw
-Message-ID: <CAK_2FrmQVqMCVYGGCS7+qJzg7tNMU_45FmhjNVFx3RhFxqpG9g@mail.gmail.com>
-From: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Ivan.Kuten@promwad.com
-Subject: [PATCH] new recipe - sdparm_1.06.bb
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1RMHbc-0007DI-Se for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Nov 2011 12:06:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id pA4Aqh1W008641;
+	Fri, 4 Nov 2011 10:52:43 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07309-09; Fri,  4 Nov 2011 10:52:39 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id pA4AqXpI008635
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 4 Nov 2011 10:52:35 GMT
+Message-ID: <1320403953.20107.111.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Date: Fri, 04 Nov 2011 10:52:33 +0000
+In-Reply-To: <0C757E680E33864AB113392C7E83F910BE522C@GSX300A.mxchg.m.corp>
+References: <0C757E680E33864AB113392C7E83F910BE522C@GSX300A.mxchg.m.corp>
+X-Mailer: Evolution 3.2.1- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] Clean of qt4-embedded don't cleanup sysroot and deploy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 09:56:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Nov 2011 11:06:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
- recipes/sdparm/sdparm_1.06.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/sdparm/sdparm_1.06.bb
+On Fri, 2011-11-04 at 10:18 +0100, Hauser, Wolfgang (external) wrote:
+> if I do a bitbake -c clean for qt4-embedded or qt4-native all libraries
+> and binaries of QT are left in the sysroots and all created packages are
+> left in deploy. This is an result of splitting qt into several sub
+> packages and install them.
 
-diff --git a/recipes/sdparm/sdparm_1.06.bb b/recipes/sdparm/sdparm_1.06.bb
-new file mode 100644
-index 0000000..b49a753
---- /dev/null
-+++ b/recipes/sdparm/sdparm_1.06.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "The sdparm utility accesses SCSI device parameters."
-+HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html#mozTocId166213"
-+SECTION = "console/utils"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=03299eb2d80659ec83507fcc511c5b42"
-+PR = "r0"
-+
-+SRC_URI = "http://sg.danny.cz/sg/p/${PN}-${PV}.tgz"
-+
-+SRC_URI[md5sum] = "5e19913658bb4f9849ddd909e0f47cde"
-+SRC_URI[sha256sum] =
-"e011a7a9e87e4e24c9c115f456ac4916fdc314d36ae99167979175782ea2f6b4"
-+inherit autotools
--- 
-1.7.2.5
+When you clean a package, everything it installed into the sysroot
+should get removed. If this doesn't happen there is a bug somewhere and
+we need to fix that bug...
+
+Cheers,
+
+Richard
+
+
 
