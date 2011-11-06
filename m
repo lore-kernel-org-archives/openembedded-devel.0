@@ -1,30 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pabigot@gmail.com>) id 1RMoaI-0004Fw-SF
+	(envelope-from <tom.rini@gmail.com>) id 1RN66U-0002S7-1B
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Nov 2011 23:19:30 +0100
-Received: by wwf4 with SMTP id 4so4183462wwf.24
+	Sun, 06 Nov 2011 18:01:54 +0100
+Received: by qyc1 with SMTP id 1so2211662qyc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Nov 2011 15:13:19 -0700 (PDT)
+	Sun, 06 Nov 2011 08:55:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=1N52bn2rvM/UOPq5r51OaDwyujJiETEmrox4NmGjCCQ=;
-	b=gR5NNUv83lOo6aC/KRWmnmcoO9P5Hj8UsrIc45exvsVBV3Y6WsFAEiglFOuTTWCHPI
-	gsajiCThxBAn5Efz6cR0KT8ev4uAu+tLhho3xfQNPdt8ZbN2aK1KtJXnaqhgeuVHrhL2
-	VxPZr34I6eyDmqpvEu2eG8V2Imu1sTDFtpSOg=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=66XHqLj16eZiTyPC5vBB1xZLJDtkiog4Z/1PhRPDprM=;
+	b=KTZlnjEfVOYcBNKlMo/M+CMxjuQSu0a/Y7brFXVJlhdAeM2dOgRBGcltfBK9dx5gW4
+	6jSZw13lWCn9vufgQskfOBUNgpFU0jxnztt4BsADkrF4t4N9vPJDIfJNbsFQhpkwr775
+	CJY1iOicXhi4avooy6MrOrOhzQHSzKovLpssU=
 MIME-Version: 1.0
-Received: by 10.216.136.79 with SMTP id v57mr2298086wei.10.1320531197550; Sat,
-	05 Nov 2011 15:13:17 -0700 (PDT)
-Sender: pabigot@gmail.com
-Received: by 10.216.22.81 with HTTP; Sat, 5 Nov 2011 15:13:17 -0700 (PDT)
-Date: Sat, 5 Nov 2011 17:13:17 -0500
-X-Google-Sender-Auth: cyctCxyjjQtf0sNbQp4qQRbCH48
-Message-ID: <CAPOJ94McqGvz50v6oDkSjY1s5Lx+=x_L+k=wtPy9vor4pFcOmg@mail.gmail.com>
-From: Peter Bigot <bigotp@acm.org>
+Received: by 10.229.64.134 with SMTP id e6mr2808504qci.150.1320598539967; Sun,
+	06 Nov 2011 08:55:39 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Sun, 6 Nov 2011 08:55:39 -0800 (PST)
+In-Reply-To: <CAPOJ94McqGvz50v6oDkSjY1s5Lx+=x_L+k=wtPy9vor4pFcOmg@mail.gmail.com>
+References: <CAPOJ94McqGvz50v6oDkSjY1s5Lx+=x_L+k=wtPy9vor4pFcOmg@mail.gmail.com>
+Date: Sun, 6 Nov 2011 09:55:39 -0700
+Message-ID: <CA+M6bX=UHG20Am7X9K9QZqe3Hp8Jwjmp7TN7OkR=wX9jOcx7pQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: cloud9 patch incompatible with fedora patch utility
+Subject: Re: cloud9 patch incompatible with fedora patch utility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Nov 2011 22:19:31 -0000
+X-List-Received-Date: Sun, 06 Nov 2011 17:01:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The patch in
-http://comments.gmane.org/gmane.comp.handhelds.openembedded.scm/49645includes
-/../ as a path component; as noted in
-http://lists.linuxtogo.org/pipermail/openembedded-users/2011-March/001249.htmland
-not resolved otherwise that I could find, this construct will not work
-on Fedora 14 or 15 because a security patch prevents application of patches
-that include up-directory components in the paths.
+On Sat, Nov 5, 2011 at 3:13 PM, Peter Bigot <bigotp@acm.org> wrote:
+> The patch in
+> http://comments.gmane.org/gmane.comp.handhelds.openembedded.scm/49645incl=
+udes
+> /../ as a path component; as noted in
+> http://lists.linuxtogo.org/pipermail/openembedded-users/2011-March/001249=
+.htmland
+> not resolved otherwise that I could find, this construct will not work
+> on Fedora 14 or 15 because a security patch prevents application of patch=
+es
+> that include up-directory components in the paths.
+>
+> My bitbake skills are not presently up to cleanly creating and applying a
+> patch to a file outside the S directory; how should this be fixed? =A0(I'=
+m
+> hoping for something other than "don't use Fedora".)
 
-My bitbake skills are not presently up to cleanly creating and applying a
-patch to a file outside the S directory; how should this be fixed?  (I'm
-hoping for something other than "don't use Fedora".)
+Modify the patch so that it doesn't use '../' and then add
+';patchdir=3Ddir' to the line in SRC_URI.  dir here should be relative
+to S, iirc.  A quick 'git grep' should show a few other examples of
+this usage today.
 
-Peter
+
+--=20
+Tom
+
 
