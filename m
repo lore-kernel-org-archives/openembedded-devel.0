@@ -1,36 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RNOgD-0004KJ-4b for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 13:52:01 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RNOaC-0001oV-Lf for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 13:45:48 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Nov 2011 13:45:48 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RNQMx-00019F-D7
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Nov 2011 15:40:15 +0100
+Received: by ywf9 with SMTP id 9so5004558ywf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Nov 2011 13:45:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 07 Nov 2011 06:34:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=nElk/bimzPjbYtdWPeXQl/W/oZeS7K11wZqIKj2KaGU=;
+	b=apfJnT58IhUN0VaeMy3OdhRagB+RAD9Sq6K3weLwPxU5DSDCwbAyHosLnFVvs/lBUP
+	jrdH6bhhL8bJEpMeTfeEgugN6W/n4Q2HP2HINfgpctOfinCeTrjl5OQLgAr9Lg2+D0If
+	zIzIljnE8gPBCaJLAfpPS/Nefxo+CnnSW3734=
+Received: by 10.236.75.167 with SMTP id z27mr34988876yhd.53.1320676441159;
+	Mon, 07 Nov 2011 06:34:01 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id l8sm56038679anb.1.2011.11.07.06.33.59
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 Nov 2011 06:34:00 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 07 Nov 2011 13:45:36 +0100
-Message-ID: <j98jtg$ban$1@dough.gmane.org>
-References: <1320399536-9588-1-git-send-email-Martin.Jansa@gmail.com>
-	<j915dk$4rp$1@dough.gmane.org>
-	<20111107113426.GB4237@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <20111107113426.GB4237@jama.jama.net>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [PATCH] mplayer2: import from OE-classic
+Date: Mon,  7 Nov 2011 14:33:49 +0000
+Message-Id: <c910d23fec8138319d3ff83ad37ba89469267b86.1320676389.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <cover.1320676389.git.otavio@ossystems.com.br>
+References: <cover.1320676389.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1320676389.git.otavio@ossystems.com.br>
+References: <cover.1320676389.git.otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/1] dhcp: add system support to dhcp-server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,48 +43,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2011 12:52:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Nov 2011 14:40:15 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-connectivity/dhcp/dhcp_4.2.0.bbappend  |   19 +++++++++++++++++++
+ .../recipes-connectivity/dhcp/files/dhcpd.service  |   12 ++++++++++++
+ 2 files changed, 31 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+ create mode 100644 meta-oe/recipes-connectivity/dhcp/files/dhcpd.service
 
-Op 07-11-11 12:34, Martin Jansa schreef:
-> On Fri, Nov 04, 2011 at 05:55:16PM +0100, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 04-11-11 10:38, Martin Jansa schreef:
->>> * taken from 1a91fc4b705b0c4f45eb088a2f7aea01ebc9c98e * dropped
->>> V4L1, largefile, xvmc * added libass * added LIC_FILES_CHKSUM *
->>> upgraded to latest SRCREV * moved glamo patch to meta-openmoko layer
->> 
->> I did some more fixes, it still doesn't build for armv7a or if you use 
->> - --as-needed, but to get parsing to work again I pushed it, OE-core
->> style ;)
-> 
-> I had it built for armv4t (om-gta02), armv5te (spitz, qemuarm) and 
-> armv7a-vfp-neon (nokia900, palmpre, palmpre2) and qemux86,qemux86-64 
-> before sending this patch, but seems like something was wrong here even 
-> with successfull build :/.
-> 
-> thanks for armv7a fixes, but there was also one typo introduced..
-> 
-> -SRC_URI_append_armv7a = " \ +SRC_URI_append_aarmv7a = " \
-
-That's on purpose, since the code in that patch won't compile (drawXY is
-gone from mplayer).
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOt9LwMkyGM64RGpERAiguAKCcx7S9vcN8Mj2AC7Qq+TqU5tRETwCfYM9s
-at+JagJOiFwHa1ontngDuTM=
-=9Oi4
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+new file mode 100644
+index 0000000..d47f1ce
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+@@ -0,0 +1,19 @@
++# look for files in the layer first
++FILESEXTRAPATHS := "${THISDIR}/files"
++
++inherit systemd
++
++SYSTEMD_PACKAGES = "dhcp-server-systemd"
++SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
++
++SRC_URI += "file://dhcpd.service"
++
++do_install_append() {
++    install -d ${D}${base_libdir}/systemd/system
++    install -m 644 ${WORKDIR}/dhcpd.service ${D}${base_libdir}/systemd/system
++}
++
++PACKAGES =+ "dhcp-server-systemd"
++
++FILES_dhcp-server-systemd += "${base_libdir}/systemd"
++RDEPENDS_dhcp-server-systemd += "dhcp-server"
+diff --git a/meta-oe/recipes-connectivity/dhcp/files/dhcpd.service b/meta-oe/recipes-connectivity/dhcp/files/dhcpd.service
+new file mode 100644
+index 0000000..70beee9
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dhcp/files/dhcpd.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Dynamic Host Configuration Protocol (DHCP)
++After=syslog.target network.target
++
++[Service]
++Type=forking
++PIDFile=/var/run/dhcpd.pid
++EnvironmentFile=-/etc/default/dhcp-server
++ExecStart=/usr/sbin/dhcpd -cf /etc/dhcp/dhcpd.conf -q $INTERFACES
++
++[Install]
++WantedBy=multi-user.target
+-- 
+1.7.2.5
 
 
 
