@@ -1,33 +1,34 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RNND4-0000iy-PS
+	(envelope-from <martin.jansa@gmail.com>) id 1RNOVQ-00041t-M3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 12:17:50 +0100
-Received: by wwf4 with SMTP id 4so5309610wwf.24
+	Mon, 07 Nov 2011 13:40:52 +0100
+Received: by bkbzs2 with SMTP id zs2so312902bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Nov 2011 03:11:38 -0800 (PST)
-Received: by 10.227.208.149 with SMTP id gc21mr28384618wbb.10.1320664297996;
-	Mon, 07 Nov 2011 03:11:37 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id es5sm27361543wbb.11.2011.11.07.03.11.37
-	(version=SSLv3 cipher=OTHER); Mon, 07 Nov 2011 03:11:37 -0800 (PST)
-Message-ID: <4EB7BCE8.8080604@dresearch-fe.de>
-Date: Mon, 07 Nov 2011 12:11:36 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+	Mon, 07 Nov 2011 04:34:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Wf17+3kQHUr6PyFEvgJEOJKaE3jz7qz2RPvQ1AyV0/I=;
+	b=sjB7fWN/phI+D7bnITwjxkrpWbPMXYDFj1VztGdZoQvhkV/iQr6i1MghsBMmOQsjrY
+	ZyFGw4JL8qBDdydhgm0vYQYeVKMOBBMmSWQyIueFCZTMdsLqoMRxTNqUow4BWE/5u30L
+	467wS7fitvYach8Zs6wOmqMSQRDR4zkhIcODg=
+Received: by 10.152.105.203 with SMTP id go11mr6360653lab.10.1320669279546;
+	Mon, 07 Nov 2011 04:34:39 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id nw10sm8409098lab.4.2011.11.07.04.34.37
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 Nov 2011 04:34:38 -0800 (PST)
+Date: Mon, 7 Nov 2011 12:34:26 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111107113426.GB4237@jama.jama.net>
+References: <1320399536-9588-1-git-send-email-Martin.Jansa@gmail.com>
+	<j915dk$4rp$1@dough.gmane.org>
 MIME-Version: 1.0
-To: Phil Blundell <philb@gnu.org>
-References: <4EB79325.80107@dresearch-fe.de>
-	<1320660702.22985.636.camel@phil-desktop>
-	<4EB7B383.10106@dresearch-fe.de>
-	<1320663454.22985.643.camel@phil-desktop>
-In-Reply-To: <1320663454.22985.643.camel@phil-desktop>
-X-Enigmail-Version: 1.3.2
-Cc: Tim Riker <Tim@Rikers.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: default route handling of udhcpc
+In-Reply-To: <j915dk$4rp$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] mplayer2: import from OE-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,73 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2011 11:17:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 07 Nov 2011 12:40:52 -0000
+X-Groupsio-MsgNum: 35237
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="QKdGvSO+nmPlgiQ/"
+Content-Disposition: inline
 
-On 07.11.2011 11:57, Phil Blundell wrote:
-> On Mon, 2011-11-07 at 11:31 +0100, Steffen Sledz wrote:
->> What do you mean with stale routes? If an interfaces supports a
->> default route it is availailable as long as the interface is up. If
->> the interface goes down all routes using this interface are removed.
-> 
-> I was thinking about the case of an interface changing address without
-> actually going down.  For example, try this:
-> 
-> # ip addr add 192.168.11.2/24 dev dummy0
-> # ip route append default via 192.168.11.1
-> # ip addr add 192.168.12.2/24 dev dummy0
-> # ip addr del 192.168.11.2/24 dev dummy0
-> # ip route append default via 192.168.12.1
-> 
-> which, I think, will leave you with a "stale" default route pointing to
-> 192.168.11.1 even though you no longer have any addresses on that
-> subnet.
+--QKdGvSO+nmPlgiQ/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-OK, i see.
+On Fri, Nov 04, 2011 at 05:55:16PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 04-11-11 10:38, Martin Jansa schreef:
+> > * taken from 1a91fc4b705b0c4f45eb088a2f7aea01ebc9c98e * dropped V4L1,
+> > largefile, xvmc * added libass * added LIC_FILES_CHKSUM * upgraded to
+> > latest SRCREV * moved glamo patch to meta-openmoko layer
+>=20
+> I did some more fixes, it still doesn't build for armv7a or if you use
+> - --as-needed, but to get parsing to work again I pushed it, OE-core styl=
+e ;)
 
-> If it's the case that interfaces always do go down and then up again
-> when changing configuration then you're right, it would be a non-issue.
-> I guess maybe the best thing to do is to make sure that this is true and
-> then we could avoid the unconditional route squashing as you suggest.
+I had it built for armv4t (om-gta02), armv5te (spitz, qemuarm) and
+armv7a-vfp-neon (nokia900, palmpre, palmpre2) and qemux86,qemux86-64
+before sending this patch, but seems like something was wrong here even
+with successfull build :/.
 
-I can't imagine that one of the OE related distros reconfigures network interfaces in described way. I believe they all use something like ifup/ifdown.
+thanks for armv7a fixes, but there was also one typo introduced..
 
->> On the contrary. As i mentioned above we really hit a problem with current setting.
->>
->> * Interface ethA (static config with default route) comes up and sets this default route.
->> * Interface ethB (in our case a USB-NIC for diagnostic purposes, DHCP with default route) comes up and *replaces* the former default route.
->>
->> scenario a)
->> * Interface ethB goes down and removes its default route.
->> * There does not exist a default route any longer. :(
->>
->> scenario b)
->> * Interface ethA tries to go down.
->> * This fails because removing the not-existing default route of config ethA fails. :(
-> 
-> That latter scenario sounds like a separate scripting bug: failing to
-> remove a route shouldn't prevent the interface going down.  But I agree,
-> scenario A does sound like one that we should try to support and I guess
-> it oughtn't to be too hard to make the default scripts work with that.
-> 
-> There is still an unavoidable ambiguity about which default route should
-> actually be used, though: at some point something, somewhere is going to
-> have to decide whether the "new" or "old" default route is the preferred
-> one.  I suppose the most sensible default policy would be to have the
-> newer one win.
+-SRC_URI_append_armv7a =3D " \
++SRC_URI_append_aarmv7a =3D " \
 
-Why do we have to make this decision? Let them both exist and the kernel make the routing decisions depending on its built in strategy and config.
+Restarting test builds to see if it still builds..
 
-Steffen
+Regards,
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--QKdGvSO+nmPlgiQ/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk63wkIACgkQN1Ujt2V2gBxb9QCgnZM0lbt1zeKd5cTkctRXODCz
+qWoAni+9APAWzZaK9yNcI1d4iy2absNh
+=0O2U
+-----END PGP SIGNATURE-----
+
+--QKdGvSO+nmPlgiQ/--
