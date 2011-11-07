@@ -1,29 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RNQRW-0001T1-Bj
+	(envelope-from <martin.jansa@gmail.com>) id 1RNQRd-0001Uv-Ne
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 15:44:58 +0100
-Received: by faat2 with SMTP id t2so2533023faa.6
+	Mon, 07 Nov 2011 15:45:05 +0100
+Received: by bkbzs2 with SMTP id zs2so423998bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Nov 2011 06:38:45 -0800 (PST)
+	Mon, 07 Nov 2011 06:38:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=sM8bzzzHnGopqGPT+VgVDeHjHioqbmOaV3NwNT/LyJU=;
-	b=ndHhOdVj7I1xbBoHYfstXtpuozHsEvXk1BsfyHEb8LIFyjXWtLsAjWlcyBaLgG2OLE
-	8dlbuKee9ht/mJDCNH3/clOBgNaSAfDrNCijf3aeMGGYetAlIVZDH6U5iVJ2xVFEhRHB
-	ZT6wMgzqcgq/3CMlNE9D7mPD4BtzJZetgjGLE=
-Received: by 10.152.122.34 with SMTP id lp2mr543436lab.20.1320676724875;
-	Mon, 07 Nov 2011 06:38:44 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=VUTRQwhSun/Ln2M4nuTUmm0q+GAqILk6joqWxZD8CbE=;
+	b=KKFZfEWLDsNzSUGSV67uENZA8cqDbil2yitg5Lsvf/bm/fiKaJov6SnII6q0rIM04s
+	1XHUP0iA9S1KKlJ5h0EuuYvrMApwHBlNmU1Oq8wrV2aTv0ykiqG5NEr3wNRHv0/Db0fz
+	D3WDyJMOfb/bPydxHKbveHIe9ctFelDFh9dlo=
+Received: by 10.152.110.166 with SMTP id ib6mr6524852lab.19.1320676732670;
+	Mon, 07 Nov 2011 06:38:52 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id pw12sm8653114lab.13.2011.11.07.06.38.43
+	by mx.google.com with ESMTPS id nw10sm8677992lab.4.2011.11.07.06.38.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 07 Nov 2011 06:38:44 -0800 (PST)
+	Mon, 07 Nov 2011 06:38:51 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Nov 2011 15:38:32 +0100
-Message-Id: <1320676714-3099-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon,  7 Nov 2011 15:38:33 +0100
+Message-Id: <1320676714-3099-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.7.2
-Subject: [PATCH 1/3] libnl: drop 2.0 and git recipes, now there is usable in oe-core
+In-Reply-To: <1320676714-3099-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1320676714-3099-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH 2/3] libnl1: remove libnl.inc as it doesn't help much with libnl 2.0 in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,118 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2011 14:44:58 -0000
+X-List-Received-Date: Mon, 07 Nov 2011 14:45:05 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/libnl/libnl/fix-pc-file.patch  |   11 ---------
- .../libnl/libnl/fix-pktloc-dep-race.patch          |   20 -----------------
- meta-oe/recipes-support/libnl/libnl_2.0.bb         |   23 --------------------
- meta-oe/recipes-support/libnl/libnl_git.bb         |   20 -----------------
- 4 files changed, 0 insertions(+), 74 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libnl/libnl/fix-pc-file.patch
- delete mode 100644 meta-oe/recipes-support/libnl/libnl/fix-pktloc-dep-race.patch
- delete mode 100644 meta-oe/recipes-support/libnl/libnl_2.0.bb
- delete mode 100644 meta-oe/recipes-support/libnl/libnl_git.bb
+ meta-oe/recipes-support/libnl/libnl.inc     |    9 ---------
+ meta-oe/recipes-support/libnl/libnl1_1.1.bb |    9 ++++++---
+ 2 files changed, 6 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl.inc
 
-diff --git a/meta-oe/recipes-support/libnl/libnl/fix-pc-file.patch b/meta-oe/recipes-support/libnl/libnl/fix-pc-file.patch
+diff --git a/meta-oe/recipes-support/libnl/libnl.inc b/meta-oe/recipes-support/libnl/libnl.inc
 deleted file mode 100644
-index 17666fb..0000000
---- a/meta-oe/recipes-support/libnl/libnl/fix-pc-file.patch
+index 6f502b1..0000000
+--- a/meta-oe/recipes-support/libnl/libnl.inc
 +++ /dev/null
-@@ -1,11 +0,0 @@
--Index: libnl-2.0/libnl-2.0.pc.in
--===================================================================
----- libnl-2.0.orig/libnl-2.0.pc.in
--+++ libnl-2.0/libnl-2.0.pc.in
--@@ -6,5 +6,5 @@
-- Name: libnl
-- Description: Convenience library for netlink sockets
-- Version: @PACKAGE_VERSION@
---Libs: -L${libdir} -lnl
--+Libs: -L${libdir} -lnl -lnl-genl -lnl-nf -lnl-route
-- Cflags: -I${includedir}
-diff --git a/meta-oe/recipes-support/libnl/libnl/fix-pktloc-dep-race.patch b/meta-oe/recipes-support/libnl/libnl/fix-pktloc-dep-race.patch
-deleted file mode 100644
-index ee21744..0000000
---- a/meta-oe/recipes-support/libnl/libnl/fix-pktloc-dep-race.patch
-+++ /dev/null
-@@ -1,20 +0,0 @@
--Index: libnl-2.0/lib/Makefile.am
--===================================================================
----- libnl-2.0.orig/lib/Makefile.am
--+++ libnl-2.0/lib/Makefile.am
--@@ -27,11 +27,15 @@ CLEANFILES = \
-- 	route/pktloc_grammar.c route/pktloc_grammar.h \
-- 	route/pktloc_syntax.c route/pktloc_syntax.h
-- 
--+BUILT_SOURCES = route/pktloc_syntax.h route/pktloc_grammar.h
--+
-- # Hack to avoid using ylwrap. It does not function correctly in combination
-- # with --header-file=
--+route/pktloc_grammar.h: route/pktloc_grammar.c
-- route/pktloc_grammar.c: route/pktloc_grammar.l
-- 	$(LEX) --header-file=route/pktloc_grammar.h $(LFLAGS) -o $@ $^
-- 
--+route/pktloc_syntax.h: route/pktloc_syntax.c
-- route/pktloc_syntax.c: route/pktloc_syntax.y
-- 	$(YACC) -d $(YFLAGS) -o $@ $^
-- 
-diff --git a/meta-oe/recipes-support/libnl/libnl_2.0.bb b/meta-oe/recipes-support/libnl/libnl_2.0.bb
-deleted file mode 100644
-index e646e3d..0000000
---- a/meta-oe/recipes-support/libnl/libnl_2.0.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
+@@ -1,9 +0,0 @@
+-DESCRIPTION = "libnl is a library for applications dealing with netlink sockets"
+-SECTION = "libs/network"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+-
+-INC_PR = "r5"
+-
+-inherit autotools pkgconfig
+-
+diff --git a/meta-oe/recipes-support/libnl/libnl1_1.1.bb b/meta-oe/recipes-support/libnl/libnl1_1.1.bb
+index cf5396f..72f5995 100644
+--- a/meta-oe/recipes-support/libnl/libnl1_1.1.bb
++++ b/meta-oe/recipes-support/libnl/libnl1_1.1.bb
+@@ -1,10 +1,13 @@
 -require libnl.inc
--PE = "1"
++DESCRIPTION = "libnl is a library for applications dealing with netlink sockets"
++HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
++SECTION = "libs/network"
++
++inherit autotools pkgconfig
+ 
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc"
+ 
+-
 -PR = "${INC_PR}.0"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc"
--
--DEPENDS = "flex-native bison-native"
--
--SRC_URI = "\
--  http://www.infradead.org/~tgr/libnl/files/libnl-${PV}.tar.gz \
--  file://fix-pc-file.patch \
--  file://fix-pktloc-dep-race.patch \
--"
--
--SRC_URI[md5sum] = "6aaf1e9802a17a7d702bb0638044ffa7"
--SRC_URI[sha256sum] = "5a40dc903d3ca1074da7424b908bec8ff16936484798c7e46e53e9db8bc87a9c"
--
--PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
--FILES_${PN}-route = "${libdir}/libnl-route.so.*"
--FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
--FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
--FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
-diff --git a/meta-oe/recipes-support/libnl/libnl_git.bb b/meta-oe/recipes-support/libnl/libnl_git.bb
-deleted file mode 100644
-index a4a37a8..0000000
---- a/meta-oe/recipes-support/libnl/libnl_git.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--require libnl.inc
--
--PE = "1"
--PV = "1.9+gitr${SRCPV}"
--PR = "${INC_PR}.0"
--
--DEPENDS = "flex-native bison-native"
--
--S = "${WORKDIR}/git"
--SRCREV = "d378220c96c3c8b6f27dca33e7d8ba03318f9c2d"
--SRC_URI = "\
--  git://git.kernel.org/pub/scm/libs/netlink/libnl.git;protocol=git \
--  file://fix-pc-file.patch \
--"
--
--PACKAGES =+ "${PN}-route ${PN}-nf ${PN}-genl ${PN}-cli"
--FILES_${PN}-route = "${libdir}/libnl-route.so.*"
--FILES_${PN}-nf    = "${libdir}/libnl-nf.so.*"
--FILES_${PN}-genl  = "${libdir}/libnl-genl.so.*"
--FILES_${PN}-cli   = "${libdir}/libnl-cli.so.*"
++PR = "r6"
+ 
+ # move it to extra subdirectory
+ includedir = "${prefix}/include/libnl1"
 -- 
 1.7.7.2
 
