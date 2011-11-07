@@ -1,24 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RNTfm-0004t6-48 for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 19:11:54 +0100
-Received: from f053042081.adsl.alicedsl.de ([78.53.42.81]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RNTZo-0004OI-Ed for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Nov 2011 18:05:44 +0000
-Message-ID: <1320689136.4727.11.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <cdhmanning@gmail.com>) id 1RNXsE-0007BF-Ej
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Nov 2011 23:41:02 +0100
+Received: by eyd9 with SMTP id 9so3818926eyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Nov 2011 14:34:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=1AczAf5Et8/fTxzhk16IpZMR1DpDbWlmEwEtPKGKNmw=;
+	b=KYDvYFjgpUrNXt5+oIyAUfRX8hA8LaaRPhcyaFMXUpTUpWAKGQ8HOE2PTyviLyWwO+
+	zr7MoN7WGac/bBkGh/PoeCjzoI28jGe028h/qvgk+caNt3UvOeneYV2nQJ1G+pg21PNP
+	UQc+qLeShxGafgx+vQZMftQ8YYOf14dwE1rvU=
+MIME-Version: 1.0
+Received: by 10.14.3.168 with SMTP id 40mr2331239eeh.130.1320705288523; Mon,
+	07 Nov 2011 14:34:48 -0800 (PST)
+Received: by 10.14.37.3 with HTTP; Mon, 7 Nov 2011 14:34:48 -0800 (PST)
+In-Reply-To: <D5AB6E638E5A3E4B8F4406B113A5A19A12DBA31174@shsmsx501.ccr.corp.intel.com>
+References: <CAE21AQr7mWqM=RQZBk8k2FUkQW8=jXb6vPBL3k6SnXF5sqRSPg@mail.gmail.com>
+	<D5AB6E638E5A3E4B8F4406B113A5A19A12DBA31174@shsmsx501.ccr.corp.intel.com>
+Date: Tue, 8 Nov 2011 11:34:48 +1300
+Message-ID: <CAE21AQoKSk=GDpKuxH-br02QNf0vxiy7MR1sV2hcayAUpVxzvg@mail.gmail.com>
+From: Charles Manning <cdhmanning@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 07 Nov 2011 19:05:36 +0100
-In-Reply-To: <c910d23fec8138319d3ff83ad37ba89469267b86.1320676389.git.otavio@ossystems.com.br>
-References: <cover.1320676389.git.otavio@ossystems.com.br>
-	<c910d23fec8138319d3ff83ad37ba89469267b86.1320676389.git.otavio@ossystems.com.br>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH 1/1] dhcp: add system support to dhcp-server
+Subject: Re: Understanding recipes vs packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,72 +38,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2011 18:11:54 -0000
-X-Groupsio-MsgNum: 35245
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-KgsdQRPVsMgYdBibQPtl"
-
---=-KgsdQRPVsMgYdBibQPtl
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 07 Nov 2011 22:41:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear Otavio,
+On Mon, Nov 7, 2011 at 6:15 PM, Xu, Dongxiao <dongxiao.xu@intel.com> wrote:
+> Hi Charles,
+>
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>> Charles Manning
+>> Sent: Monday, November 07, 2011 11:32 AM
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] Understanding recipes vs packages
+>>
+>> Hello
+>>
+>> Something very weird is going on with some changes I have made recently =
+to a
+>> custom image I am building.
+>>
+>> For some reason I was getting libpng12 built and now that no longer happ=
+ens.
+>>
+>> In debugging this I've been doing things that now stump me.
+>>
+>> From my understanding, a recipe can build multiple different packages.
+>> For example libpng.inc has the following in it:
+>
+> Yes, it is correct.
+>
+>>
+>> PACKAGES =3D+ "${PN}12-dbg ${PN}12 ${PN}12-dev"
+>>
+>> FILES_${PN}12-dbg +=3D "${libdir}/libpng12*.dbg"
+>> FILES_${PN}12 =3D "${libdir}/libpng12.so.*"
+>> FILES_${PN}12-dev =3D "${libdir}/libpng12.* ${includedir}/libpng12
+>> ${libdir}/pkgconfig/libpng12.pc"
+>> FILES_${PN} =3D "${libdir}/lib*.so.*"
+>> FILES_${PN}-dev =3D "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${libdir}/*.a ${libdir}/pkgconfig \
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${datadir}/aclocal ${bindir} ${sbindir}"
+>>
+>>
+>> Does that mean I should be able to build =A0libgpng12 as follows:
+>>
+>> bitbake libpng12
+>
+> No, package name could not be passed to bitbake as a parameter.
+>
+> Bitbake can accept a recipe name as its parameter, and it will process ta=
+sks like "do_fetch", "do_unpack", ..., "do_package", etc. for that recipe. =
+In the above case, libpng12 will be generated in do_package task, and then =
+it will be archived into rpm/ipk/deb package formats.
+>
+> Try to run "bitbake libpng" and see if libpng12 is generated.
+
+Yes it is.
+
+OK thanks for the clarification....
+
+So if I want to put the libpng12 in an image then do I need to do
+something like:
+
+# Add libpng to DEPENDS to get the recipe to build
+# Add libpng12 to IMAGE_INSTALL because that's what I want in the package
+
+DEPENDS +=3D " libpng"
+IMAGE_INSTALL +=3D " libpng12"
 
 
-thank you for the patch. system*d* in the commit summary.
-
-Am Montag, den 07.11.2011, 14:33 +0000 schrieb Otavio Salvador:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../recipes-connectivity/dhcp/dhcp_4.2.0.bbappend  |   19 ++++++++++++++=
-+++++
->  .../recipes-connectivity/dhcp/files/dhcpd.service  |   12 ++++++++++++
->  2 files changed, 31 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
->  create mode 100644 meta-oe/recipes-connectivity/dhcp/files/dhcpd.service
-
-[=E2=80=A6]
-
-> diff --git a/meta-oe/recipes-connectivity/dhcp/files/dhcpd.service b/meta=
--oe/recipes-connectivity/dhcp/files/dhcpd.service
-> new file mode 100644
-> index 0000000..70beee9
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/dhcp/files/dhcpd.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=3DDynamic Host Configuration Protocol (DHCP)
-> +After=3Dsyslog.target network.target
-> +
-> +[Service]
-> +Type=3Dforking
-> +PIDFile=3D/var/run/dhcpd.pid
-> +EnvironmentFile=3D-/etc/default/dhcp-server
-> +ExecStart=3D/usr/sbin/dhcpd -cf /etc/dhcp/dhcpd.conf -q $INTERFACES
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-
-Did you write this yourself or did you get it from somewhere? Is
-upstream aware of this?
-
-
-Thanks,
-
-Paul
-
---=-KgsdQRPVsMgYdBibQPtl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk64HfAACgkQPX1aK2wOHVgDZQCdE87tn/TScFyX5dWyGAHzac/9
-ZOcAn0HPmlcFGSVoUj4tsDYkua5YCPXt
-=ejsh
------END PGP SIGNATURE-----
-
---=-KgsdQRPVsMgYdBibQPtl--
