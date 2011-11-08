@@ -1,35 +1,35 @@
 Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RNlLn-0002RA-1a
+	(envelope-from <otavio.salvador@gmail.com>) id 1RNlLo-0002RK-UE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Nov 2011 14:04:27 +0100
-Received: by ywf9 with SMTP id 9so471153ywf.6
+	Tue, 08 Nov 2011 14:04:29 +0100
+Received: by ywf9 with SMTP id 9so471188ywf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Nov 2011 04:58:12 -0800 (PST)
+	Tue, 08 Nov 2011 04:58:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=NBmv3e4BkbOrD8qeNm7L5tS4HztXTwuUGHzr7FUyusg=;
-	b=pkK4OYejvtzmK/8A2hjLmLQeoSOC5MBpMr2UY5XiW+uFXo91y5xe1dW6hvYxoK8BOE
-	Jp0WKj+QrHm+CrlR4hjr4x/JpttcKZMYlWrnAjpgLpnHF72R6nN8xv/ihWv+wpIGKtMf
-	DxU8HIrXvKc2rUoz9RbcDnj9JeCYPyvcXX4yY=
-Received: by 10.236.181.198 with SMTP id l46mr41293182yhm.96.1320757092242;
-	Tue, 08 Nov 2011 04:58:12 -0800 (PST)
+	bh=iELEz3hPxtnWf5BiMWdtyubkRQcdkPrRl7TKcR0f2Tc=;
+	b=HeV5lY+x+NUlcsEd4pGZeCK1Az2dkrVDsOeat4A7Jul10EE3AnvobpZYAuuljloT8b
+	pP3pKSi6KjLUImTy+Z9qfkfm4S7Imdiz1YKV08jg5WfOp+RuPo3U33x+htGbfucPFy5v
+	zvfQ95e1l5XbqD7lDlKFAxOulsT/467NS3ahM=
+Received: by 10.236.83.81 with SMTP id p57mr17850446yhe.97.1320757094407;
+	Tue, 08 Nov 2011 04:58:14 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id y58sm2066338yhi.17.2011.11.08.04.58.09
+	by mx.google.com with ESMTPS id y58sm2066338yhi.17.2011.11.08.04.58.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 08 Nov 2011 04:58:11 -0800 (PST)
+	Tue, 08 Nov 2011 04:58:13 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Nov 2011 12:58:00 +0000
-Message-Id: <db24be4e6f001aae20b76249c499becc26ca1821.1320757052.git.otavio@ossystems.com.br>
+Date: Tue,  8 Nov 2011 12:58:01 +0000
+Message-Id: <5ce6c44c67ea34eaba2366493baaecb460668deb.1320757052.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1320757052.git.otavio@ossystems.com.br>
 References: <cover.1320757052.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1320757052.git.otavio@ossystems.com.br>
 References: <cover.1320757052.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/2] systemd.bbclass: stop using SYSTEMDPN to rdepends addition
+Subject: [meta-oe][PATCH 2/2] connman: bump PR due systemd.bbclass fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Nov 2011 13:04:27 -0000
-
-The systemd runtime dependency needs to be add dynamically onto each
-package that has the postinst generate thus removing the SYSTEMDPN use
-et all.
+X-List-Received-Date: Tue, 08 Nov 2011 13:04:29 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/classes/systemd.bbclass |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
+ .../recipes-connectivity/connman/connman_0.77.bb   |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
-index 83833db..2ca7bfc 100644
---- a/meta-oe/classes/systemd.bbclass
-+++ b/meta-oe/classes/systemd.bbclass
-@@ -1,7 +1,4 @@
--SYSTEMDPN ?= "${PN}"
--
- DEPENDS_append = " systemd-systemctl-native"
--RDEPENDS_${SYSTEMDPN}_append = " systemd"
+diff --git a/meta-oe/recipes-connectivity/connman/connman_0.77.bb b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
+index 9c93e51..9ef368b 100644
+--- a/meta-oe/recipes-connectivity/connman/connman_0.77.bb
++++ b/meta-oe/recipes-connectivity/connman/connman_0.77.bb
+@@ -1,5 +1,5 @@
+ require connman.inc
+-PR = "r3"
++PR = "r4"
  
- systemd_postinst() {
- OPTS=""
-@@ -67,9 +64,14 @@ python populate_packages_prepend () {
-                 postrm += bb.data.getVar('systemd_postrm', localdata, 1)
- 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
- 
-+		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
-+		rdepends.append("systemd")
-+		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
-+
-+
- 	pkgs = bb.data.getVar('SYSTEMD_PACKAGES', d, 1)
- 	if pkgs == None:
--		pkgs = bb.data.getVar('SYSTEMDPN', d, 1)
-+		pkgs = bb.data.getVar('PN', d, 1)
- 		packages = (bb.data.getVar('PACKAGES', d, 1) or "").split()
- 		if not pkgs in packages and packages != []:
- 			pkgs = packages[0]
+ EXTRA_OECONF += "\
+   --disable-gtk-doc \
 -- 
 1.7.2.5
 
