@@ -1,23 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RNYXh-0000pm-ON
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Nov 2011 00:23:54 +0100
-Received: (qmail invoked by alias); 07 Nov 2011 23:17:40 -0000
-Received: from p5B0A3C37.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.60.55]
-	by mail.gmx.net (mp062) with SMTP; 08 Nov 2011 00:17:40 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/bo0gWA7nbD/3rnPM9uR5PhngJEjMoWIPRUhuIBq
-	jipQrzZSanRBOH
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RNiWW-00051X-QI; Tue, 08 Nov 2011 11:03:20 +0100
+Received: from f053044161.adsl.alicedsl.de ([78.53.44.161]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RNiQZ-0006xR-I5; Tue, 08 Nov 2011 09:57:11 +0000
+Message-ID: <1320746220.3915.2.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Nov 2011 00:22:35 +0100
-Message-Id: <1320708155-13730-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] task-xfce-extended: initial add task for full featured XFCE
+Date: Tue, 08 Nov 2011 10:57:00 +0100
+In-Reply-To: <CA+YB3rZXMywUtMmVfR8UTRQsuWZN7M9xt1xBH0syD2TzKjJXgQ@mail.gmail.com>
+References: <CA+YB3rZXMywUtMmVfR8UTRQsuWZN7M9xt1xBH0syD2TzKjJXgQ@mail.gmail.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Cc: tsc <tsc@lists.openembedded.org>,
+	openembedded-members@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: OpenEmbedded General Assembly, 28 October 2011, Prague, CZ
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,62 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2011 23:23:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 08 Nov 2011 10:03:20 -0000
+X-Groupsio-MsgNum: 35249
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-ZGxtuiqjvhW5xf6xGA2Q"
+
+--=-ZGxtuiqjvhW5xf6xGA2Q
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Jeff,
 
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |   37 ++++++++++++++++++++
- 1 files changed, 37 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
+Am Freitag, den 04.11.2011, 10:28 -0700 schrieb Jeff Osier-Mixon:
+> OpenEmbedded General Assembly, 28 November 2011, 6pm-9pm CET
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-new file mode 100644
-index 0000000..122252f
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "All packages for full XFCE installation"
-+SECTION = "x11/wm"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+
-+inherit task
-+
-+# mandatory
-+RDEPENDS_${PN} = " \
-+    task-xfce-base \
-+"
-+
-+# nice to have
-+RRECOMMENDS_${PN} = " \
-+    xfwm4-theme-daloa \
-+    xfwm4-theme-kokodi \
-+    xfwm4-theme-moheli \
-+    xfwm4-theme-sassandra \
-+    xfwm4-theme-stoneage \
-+    xfwm4-theme-therapy \
-+    xfwm4-theme-tyrex \
-+    xfwm4-theme-wallis \
-+    \
-+    xfce4-icon-theme \
-+    \
-+    xfce4-cpufreq-plugin \
-+    xfce4-cpugraph-plugin \
-+    xfce4-datetime-plugin \
-+    xfce4-eyes-plugin \
-+    xfce4-clipman-plugin \
-+    xfce4-diskperf-plugin \
-+    xfce4-netload-plugin \
-+    \
-+    xfce4-appfinder \
-+    xfce4-screenshooter \
-+    ristretto \
-+"
--- 
-1.7.4.4
+I am guessing you meant October?
+
+> Clarion Congress Hotel, Prague, CZ
+>=20
+> Proceedings taken by Jeff Osier-Mixon, apologies for any misspellings
+> _____________________________________________________________________
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+--=-ZGxtuiqjvhW5xf6xGA2Q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk64/O0ACgkQPX1aK2wOHVjYwQCeIhxZaM8u67pxZPqtcQc3NWz/
+tzYAn3j5g0GyPa0Twr0xgmk4DTlITtO2
+=g+SQ
+-----END PGP SIGNATURE-----
+
+--=-ZGxtuiqjvhW5xf6xGA2Q--
