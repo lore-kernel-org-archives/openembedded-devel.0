@@ -1,34 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ROCM9-0008HM-Sk
+	(envelope-from <martin.jansa@gmail.com>) id 1ROCMI-0008HM-75
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 18:54:37 +0100
+	Wed, 09 Nov 2011 18:54:46 +0100
 Received: by mail-fx0-f47.google.com with SMTP id t2so2009238faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 09:48:24 -0800 (PST)
+	Wed, 09 Nov 2011 09:48:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=EUPl98lmzw0ZNKjxM8TN551zVpz/l3oHf/ilZWej8Ao=;
-	b=uonpZ4+V5qrApRkvg5itSYDrA0yERyozATgG5IY7+AYORoi7rxMh+fESQBOV1rGg5i
-	bpvrpSPv7Q15mcmEhKoLHRy0FwqOp2RdxPLZeoc+PypibalRAJEV7N18u7x1NDhRbm/P
-	aUYiTQqfjBGp/j1xXxY0ClVlrKhDUtDKKV5+Y=
-Received: by 10.223.17.80 with SMTP id r16mr6104854faa.37.1320860904542;
-	Wed, 09 Nov 2011 09:48:24 -0800 (PST)
+	bh=HYN8t80g2WNcLmKodzwgu6gC6VHesddna6zxdUflTXI=;
+	b=RTVFKLhsdAyq+JU9+eaWG6+m6jRDe6s62MkQlx/slufwnT4pw6ZzoX6Z1XiDwVSUHq
+	S2fjFzYjgfzmG+PPk1vv3jxypQ07gaL0Y2icMlI0lzQBvkLRiSs0DoHKwQDVPya7OZdi
+	GPzfinK6uCBFHBog7ws39coghEQ25hKHQYZEg=
+Received: by 10.223.64.70 with SMTP id d6mr6254960fai.16.1320860912884;
+	Wed, 09 Nov 2011 09:48:32 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id i3sm7466468faf.0.2011.11.09.09.48.22
+	by mx.google.com with ESMTPS id d22sm7430178fad.19.2011.11.09.09.48.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Nov 2011 09:48:22 -0800 (PST)
+	Wed, 09 Nov 2011 09:48:31 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Nov 2011 18:47:55 +0100
-Message-Id: <15e1d24dd8ceb0b5caad096f215a3ace86f6c14d.1320860740.git.Martin.Jansa@gmail.com>
+Date: Wed,  9 Nov 2011 18:47:56 +0100
+Message-Id: <dba6cc5acf8984714e0dbf725b4b8601827f4671.1320860740.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc1
 In-Reply-To: <31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
 References: <31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1320860740.git.Martin.Jansa@gmail.com>
 References: <cover.1320860740.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe 3/4] libsdl-x11: drop from meta-oe
+Subject: [meta-oe 4/4] kbd: move to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,75 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 17:54:38 -0000
-
-* there is libsdl in oe-core and nothing depends on libsdl-x11 here
+X-List-Received-Date: Wed, 09 Nov 2011 17:54:46 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc  |   27 --------------------
- .../recipes-graphics/libsdl/libsdl-x11_1.2.14.bb   |   18 -------------
- 2 files changed, 0 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb
+ meta-oe/recipes-core/kbd/kbd_1.15.2.bb |   19 -------------------
+ 1 files changed, 0 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/kbd/kbd_1.15.2.bb
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc
+diff --git a/meta-oe/recipes-core/kbd/kbd_1.15.2.bb b/meta-oe/recipes-core/kbd/kbd_1.15.2.bb
 deleted file mode 100644
-index 92627e3..0000000
---- a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc
+index 36e68a0..0000000
+--- a/meta-oe/recipes-core/kbd/kbd_1.15.2.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Simple DirectMedia Layer (DirectFB and Framebuffer support)"
--SECTION = "libs"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
+@@ -1,19 +0,0 @@
+-DESCRIPTION = "This package contains keytable files and keyboard utilities"
+-# everything minus console-fonts is GPLv2+
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=587ce626d15bd61699a64a6b8a5afefb"
 -
--DEPENDS = "alsa-lib"
--PROVIDES = "virtual/libsdl"
--INC_PR = "r0"
+-inherit autotools gettext
 -
--SRC_URI = "http://www.libsdl.org/release/SDL-${PV}.tar.gz"
--SRC_URI[md5sum] = "e52086d1b508fa0b76c52ee30b55bec4"
--SRC_URI[sha256sum] = "5d927e287034cb6bb0ebccfa382cb1d185cb113c8ab5115a0759798642eed9b6"
+-BBCLASSEXTEND = "native"
 -
--S = "${WORKDIR}/SDL-${PV}"
+-SRC_URI="${KERNELORG_MIRROR}/linux/utils/kbd/kbd-1.15.2.tar.bz2"
+-SRC_URI[md5sum] = "e850eb91e4d3b94b194efe8e953204c5"
+-SRC_URI[sha256sum] = "b3602d191eef7a6a8317fc3cd231efa40a89ac235dce57a77cac825a2a21eba6"
 -
--inherit autotools lib_package binconfig pkgconfig
+-PACKAGES += "${PN}-consolefonts ${PN}-keymaps ${PN}-unimaps ${PN}-consoletrans"
 -
--EXTRA_AUTORECONF += "--include=acinclude --exclude=autoheader"
--
--do_configure_prepend () {
--        # Remove old libtool macros.
--        MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
--        for i in ${MACROS}; do
--               rm -f acinclude/$i
--        done
--	export SYSROOT=$PKG_CONFIG_SYSROOT_DIR
--}
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb b/meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb
-deleted file mode 100644
-index 26f2c18..0000000
---- a/meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--require libsdl-1.2.14.inc
--
--DEPENDS += "virtual/libgl virtual/libx11 libxext tslib"
--DEPENDS_avr32 += "alsa-lib virtual/libx11 libxext tslib"
--
--PR = "${INC_PR}.0"
--
--EXTRA_OECONF = " \
--  --disable-static --disable-debug --enable-cdrom --enable-threads --enable-timers --enable-endian \
--  --enable-file --enable-oss --enable-alsa --disable-esd --disable-arts \
--  --disable-diskaudio --disable-nas --disable-esd-shared --disable-esdtest \
--  --disable-mintaudio --disable-nasm --enable-video-x11 --disable-video-dga \
--  --enable-video-fbcon --disable-video-directfb --disable-video-ps2gs \
--  --disable-video-xbios --disable-video-gem --disable-video-dummy \
--  --enable-video-opengl --enable-input-events --enable-pthreads \
--  --disable-video-picogui --disable-video-qtopia --enable-dlopen \
--  --enable-input-tslib --disable-video-ps3 --disable-rpath \
--"
+-FILES_${PN}-consolefonts = "${datadir}/consolefonts"
+-FILES_${PN}-consoletrans = "${datadir}/consoletrans"
+-FILES_${PN}-keymaps = "${datadir}/keymaps"
+-FILES_${PN}-unimaps = "${datadir}/unimaps"
 -- 
 1.7.8.rc1
 
