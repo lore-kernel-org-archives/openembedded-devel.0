@@ -1,37 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RO8QE-0007Co-L7 for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 14:42:34 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RO8KC-00006J-0t for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 14:36:20 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 14:36:19 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1ROCLh-0008HM-Dl
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 18:54:09 +0100
+Received: by faat2 with SMTP id t2so2009238faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 14:36:19 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 09 Nov 2011 09:47:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/Fjy1SY3x5CFx5J7i6z5JN2t82SF9ALKHMqnnx/2pno=;
+	b=tHQVtN/lyKdpTF5n71juUu56Gq23i3WcU+Y6RSzS4lvsVK/Q5/dDFvPZwkfteeAqvE
+	NF4Ncxma0l+WrzDEICESh+CY18WRp1tA4hBhJ/EpNOQjsYTTgEWKnBVtpJ/ePTW5yIYs
+	pM+TYfJfPMm6JUOGwa/vogJidMxsWha4dspiI=
+Received: by 10.223.76.197 with SMTP id d5mr6299558fak.13.1320860873836;
+	Wed, 09 Nov 2011 09:47:53 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id j5sm7431857faf.14.2011.11.09.09.47.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Nov 2011 09:47:52 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 09 Nov 2011 14:36:05 +0100
-Message-ID: <j9dvk5$shg$1@dough.gmane.org>
-References: <cover.1320841846.git.anders@chargestorm.se>
-	<af4142d54e9a7999e8e705495cb746c07c7d3990.1320841846.git.anders@chargestorm.se>
-	<j9dugs$k6f$1@dough.gmane.org>
-	<20111109133220.GB5579@ad.chargestorm.se>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <20111109133220.GB5579@ad.chargestorm.se>
-X-Enigmail-Version: 1.3.2
-Subject: Re: [PATCH 1/1] rsyslog: change postrm to prerm
+Date: Wed,  9 Nov 2011 18:47:49 +0100
+Message-Id: <cover.1320860740.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc1
+Subject: [meta-oe 0/4] Small fixes, move kbd and libsdl to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 13:42:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Nov 2011 17:54:09 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Patches 3 and 4 depend on oe-core patchset
+http://lists.linuxtogo.org/pipermail/openembedded-core/2011-November/012397.html
 
-Op 09-11-11 14:32, Anders Darander schreef:
-> * Koen Kooi <koen@dominion.thruhere.net> [111109 14:18]:
->> Op 09-11-11 13:32, Anders Darander schreef:
->>> The systemd service can't be disabled if it already has been
->>> removed, thus disable it prior to removing the package.
-> 
->>> Signed-off-by: Anders Darander <anders@chargestorm.se>
-> 
->> Applied. Next time could you please follow 
->> https://github.com/openembedded/meta-oe/blob/master/meta-oe/README and
->> use [meta-oe] in the subject?
-> 
-> Yes, sure. Sorry that I forgot that....
+The following changes since commit dd54be4a2fc0f0597a82525fcb97c69539a547c4:
 
-I look at http://patchwork.openembedded.org/project/oe/list/?q=meta- far
-more often than oe-devel :)
+  rsyslog: change postrm to prerm (2011-11-09 14:16:14 +0100)
 
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Martin Jansa (4):
+  mplayer-common: import from OE-classic
+  openssl: bump PR to fix license
+  libsdl-x11: drop from meta-oe
+  kbd: move to oe-core
 
-iD8DBQFOuoHFMkyGM64RGpERAmq/AJ0QQyXQm9w8pAuW9djpTVi2QcubUwCfXZXy
-UxerDjXtNhgihdFgTfmaKfg=
-=Blqn
------END PGP SIGNATURE-----
+ .../recipes-connectivity/openssl/openssl_0.9.8m.bb |    2 +-
+ .../recipes-connectivity/openssl/openssl_1.0.0e.bb |    2 +-
+ meta-oe/recipes-core/kbd/kbd_1.15.2.bb             |   19 --------------
+ meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc  |   27 --------------------
+ .../recipes-graphics/libsdl/libsdl-x11_1.2.14.bb   |   18 -------------
+ .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 ++++++++++++++++
+ .../mplayer/mplayer-common/mplayer.conf            |   15 +++++++++++
+ 7 files changed, 39 insertions(+), 66 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/kbd/kbd_1.15.2.bb
+ delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc
+ delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+
+-- 
+1.7.8.rc1
 
 
 
