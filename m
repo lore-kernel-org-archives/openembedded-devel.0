@@ -1,24 +1,20 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1ROGXm-0004Hr-3i
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 23:22:54 +0100
-Received: (qmail invoked by alias); 09 Nov 2011 22:16:37 -0000
-Received: from p5B0A37AB.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.55.171]
-	by mail.gmx.net (mp013) with SMTP; 09 Nov 2011 23:16:37 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19NrRpbKNZNEfzgKOz5O1LPoXZ+H42OCKYTE/ge4P
-	16tISSK74kAhFR
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 9 Nov 2011 23:21:33 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1ROGnQ-0004ip-NQ for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 23:39:04 +0100
+Received: by wyh5 with SMTP id 5so2293253wyh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Nov 2011 14:32:49 -0800 (PST)
 MIME-Version: 1.0
-Message-Id: <201111092321.33622.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: systemd packages -> image
+Received: by 10.180.107.229 with SMTP id hf5mr5119593wib.35.1320877968985;
+	Wed, 09 Nov 2011 14:32:48 -0800 (PST)
+Received: by 10.227.200.14 with HTTP; Wed, 9 Nov 2011 14:32:48 -0800 (PST)
+Date: Wed, 9 Nov 2011 16:32:48 -0600
+Message-ID: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+From: David Thomas <david.thomas@microbee-systems.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,21 +28,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 22:22:54 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Nov 2011 22:39:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Since svn.o-hand.com is dead does anyone have a different repository?
 
-Imagine a recipe is included into an image by a task and later gets systemd-
-native support.
-How about forcing the packages in SYSTEMD_PACKAGES packed into images in case 
+SRC_URI = "git://git.yoctoproject.org/matchbox-keyboard;protocol=git \
+           file://smallscreen-fontsize.patch;patch=1 \
+           file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-available-layouts.patch;patch=1
+\
+           file://3-Changes-to-improve-layout-rendering--especially-after-adding-support-for.patch;patch=1
+\
+           file://4-Add-rendering-debug-logging.patch;patch=1 \
+           file://5-Add-support-for-loading-multiple-independent-layouts.patch;patch=1
+\
+           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=1 \
+          "
 
-IMAGE_INIT_MANAGER  = "systemd"
+I am unable to find any source for these. It sure seems to me that OE
+is overly dependent upon links that come and go.
 
-is found in the image definition?
 
-Andreas
+-- 
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803-1187
+256-489-6671 (Voice)
+256-426-2431 (Mobile)
+256-489-6673 (FAX)
+www.microbee-systems.com
+"Innovative Solutions for an Embedded World"
+
+This message is intended for the sole use of the addressee, and may
+contain information that is privileged, confidential and exempt from
+disclosure under applicable law. If you are not the addressee you are
+hereby notified that you may not use, copy, disclose, or distribute to
+anyone the message or any information contained in the message. If you
+have received this message in error, please immediately advise the
+sender by reply email and delete this message.
 
 
