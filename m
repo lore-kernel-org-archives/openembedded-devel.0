@@ -1,28 +1,35 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RNx7c-0003sg-QA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 02:38:36 +0100
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LUD000BSDLG95G5@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	08 Nov 2011 19:32:05 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 55FC614AF5D; Tue,
-	08 Nov 2011 20:32:04 -0500 (EST)
-Date: Tue, 08 Nov 2011 20:32:04 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <CAPOJ94NE2DBeyuW5zqusE-HL4dTxGVvf3U0n0dfnscC0UzF0Sw@mail.gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RO5L8-0004mL-9w for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 11:25:06 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RO5F7-0005s9-3v for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 11:18:53 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Nov 2011 11:18:53 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Nov 2011 11:18:53 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20111109013204.GE15391@denix.org>
-MIME-version: 1.0
-References: <CAPOJ94PUaBtZkRHE_v_x4raOQZnBtHp9bt6mvoMjZGmPTQ=-jQ@mail.gmail.com>
-	<CA+M6bXkfk40ztOn+WFocLFGzLRU6PE4z5Qf_9=NAnhO_U4QFSg@mail.gmail.com>
-	<CAPOJ94NE2DBeyuW5zqusE-HL4dTxGVvf3U0n0dfnscC0UzF0Sw@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: forcing dependency on genext2fs-native
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 09 Nov 2011 11:18:37 +0100
+Message-ID: <j9dk1t$994$1@dough.gmane.org>
+References: <loom.20111108T225635-677@post.gmane.org>
+	<loom.20111109T001647-942@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <loom.20111109T001647-942@post.gmane.org>
+X-Enigmail-Version: 1.3.2
+Subject: Re: Anstrom boot hang with MACHINE=i686-generic and DISTRO=anstrom-2010.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,77 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 01:38:37 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Wed, 09 Nov 2011 10:25:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 08, 2011 at 02:00:28PM -0600, Peter Bigot wrote:
-> On Tue, Nov 8, 2011 at 1:23 PM, Tom Rini <tom.rini@gmail.com> wrote=
-:
-> > On Tue, Nov 8, 2011 at 11:25 AM, Peter Bigot <bigotp@acm.org> wro=
-te:
-> >> I've added a DEPENDS +=3D "genext2fs-native" for a recipe in met=
-a-ti,
-> >> but the corresponding package is not getting built. =A0bitbake -=
-DDD
-> >> says:
-> >>
-> >> DEBUG: Added dependency genext2fs-native for
-> >> /prj/oe/angstrom/sources/meta-ti/recipes-misc/images/cloud9-gfx-=
-image.bb
-> >> DEBUG: providers for genext2fs-native are: ['genext2fs-native']
-> >> DEBUG: sorted providers for genext2fs-native are:
-> >> ['virtual:native:/prj/oe/angstrom/sources/openembedded-core/meta=
-/recipes-devtools/genext2fs/genext2fs_1.4.1.bb']
-> >> DEBUG: adding virtual:native:/prj/oe/angstrom/sources/openembedd=
-ed-core/meta/recipes-devtools/genext2fs/genext2fs_1.4.1.bb
-> >> to satisfy genext2fs-native
-> >>
-> >> I'm guessing the "virtual:native:" means somebody thinks genext2=
-fs
-> >> should already be installed on the host. =A0It's not available o=
-n
-> >> Fedora, so this decision is wrong. =A0I haven't been able to fig=
-ure out
-> >> what's causing this to happen.
-> >
-> > No, it means that the "virtual:native" (coming from BBCLASSEXTEND=
- in
-> > the recipe file) is being selected to provide "genext2fs-native"
-> > (since in many cases we don't have a separate -native recipe, we =
-just
-> > use BBCLASSEXTEND). =A0What's probably happening is that you need
-> > genext2fs to exist for a specific task and just "DEPENDS +=3D
-> > genext2fs-native" really means "make do_configure depend on
-> > genext2fs-native being in the sysroot". =A0Did you modify
-> > cloud9-gfx-image? =A0It should already get the DEPENDS right for
-> > populating the image.
->=20
-> The build had failed in meta-ti/classes/sdcard_image.bbclass which
-> used genext2fs to build an sdimg image.
->=20
-> I had added DEPENDS +=3D "genext2fs-native" to
-> meta-ti/recipes-misc/images/ti-hw-bringup-image.bb since it was wha=
-t
-> inherited sdcard_image.
->=20
-> On further investigation cued by your response, it seems that the
-> correct change is instead to add:
->=20
-> IMAGE_DEPENDS_sdimg =3D "genext2fs-native"
->=20
-> analogously to what's done for the other image types.  With that th=
-e
-> bitbake of cloud9-gfx-image does the right thing.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Thanks for your report! Can you please submit a patch to meta-ti mail=
-ing list=20
-at meta-ti@yoctoproject.org
-Thanks.
+Op 09-11-11 00:19, Greg Kogut schreef:
+> Greg Kogut <gkogut <at> yahoo.com> writes:
+> 
+>> 
+>> I've tried both console-image and x11-image.
+> 
+> 
+> Edit:
+> 
+> I was able to to boot fully after appending "-o rw" to the "root" kernel
+> parameter.
+> 
+> I suspect the issue was that the read-only mount was not allowing udev to
+> correctly populate /dev with the tty devices passed to getty, and getty
+> was flummoxed.
+> 
+> So I'm amending my question:  Help a n00b -what's the standard practice
+> with respect to maintaining an embedded-safe read-only rootfs while
+> allowing udev to do its thang?   Separate partition for /dev?
 
---=20
-Denys
+You're still following the deprecated OE-classic workflow. If you follow the
+instructions at http://www.angstrom-distribution.org/building-angstrom you
+will get the updated angstrom configs that work with RO /
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOulN9MkyGM64RGpERAgkLAJsHQ6t7GR+JUBu5BeaTVz/YYK/KpQCguTWU
+XMTgjD846DcyqCIr9B7JUhc=
+=3H0D
+-----END PGP SIGNATURE-----
 
 
 
