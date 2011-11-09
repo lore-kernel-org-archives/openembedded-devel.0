@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RO884-000648-3D for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 14:23:48 +0100
+	id 1RO8AY-0006Ba-Br for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 14:26:22 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RO81y-0000R7-R1 for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 14:17:30 +0100
+	id 1RO84W-0001VZ-KL for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Nov 2011 14:20:08 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 14:17:30 +0100
+	Wed, 09 Nov 2011 14:20:08 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 14:17:30 +0100
+	Wed, 09 Nov 2011 14:20:08 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 09 Nov 2011 14:17:16 +0100
-Message-ID: <j9dugs$k6f$1@dough.gmane.org>
-References: <cover.1320841846.git.anders@chargestorm.se>
-	<af4142d54e9a7999e8e705495cb746c07c7d3990.1320841846.git.anders@chargestorm.se>
+Date: Wed, 09 Nov 2011 14:17:53 +0100
+Message-ID: <j9dui1$k6f$2@dough.gmane.org>
+References: <1320760075-19217-1-git-send-email-Martin.Jansa@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <af4142d54e9a7999e8e705495cb746c07c7d3990.1320841846.git.anders@chargestorm.se>
+In-Reply-To: <1320760075-19217-1-git-send-email-Martin.Jansa@gmail.com>
 X-Enigmail-Version: 1.3.2
-Subject: Re: [PATCH 1/1] rsyslog: change postrm to prerm
+Subject: Re: [PATCH] openssl: bump PR to fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 13:23:48 -0000
+X-List-Received-Date: Wed, 09 Nov 2011 13:26:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 09-11-11 13:32, Anders Darander schreef:
-> The systemd service can't be disabled if it already has been removed,
-> thus disable it prior to removing the package.
+Op 08-11-11 14:47, Martin Jansa schreef:
+> * see http://patchwork.openembedded.org/patch/14217/
 > 
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Applied. Next time could you please follow
-https://github.com/openembedded/meta-oe/blob/master/meta-oe/README and use
-[meta-oe] in the subject?
+Could you please follow
+https://github.com/openembedded/meta-oe/blob/master/meta-oe/README and put
+'[meta-oe]' in the subject next time?
 
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOun1cMkyGM64RGpERAtC7AKCc5sVPSafYXUIn763VVmCwIPuw0gCfcAGw
-lTnZak0VIzJnfOG1wjF2vC4=
-=x7f9
+iD8DBQFOun2BMkyGM64RGpERAl1qAJ43x5VrEp5h1VToLvHWzv8IA0nknQCgpPJ8
+RTSzxl2I1FKNu84Wrc6b9pY=
+=Rods
 -----END PGP SIGNATURE-----
 
 
