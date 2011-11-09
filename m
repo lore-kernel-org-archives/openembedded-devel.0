@@ -1,29 +1,31 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ROCLh-0008HM-Dl
+	(envelope-from <martin.jansa@gmail.com>) id 1ROCLr-0008HM-KR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 18:54:09 +0100
-Received: by faat2 with SMTP id t2so2009238faa.6
+	Wed, 09 Nov 2011 18:54:19 +0100
+Received: by mail-fx0-f47.google.com with SMTP id t2so2009238faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 09:47:53 -0800 (PST)
+	Wed, 09 Nov 2011 09:48:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=/Fjy1SY3x5CFx5J7i6z5JN2t82SF9ALKHMqnnx/2pno=;
-	b=tHQVtN/lyKdpTF5n71juUu56Gq23i3WcU+Y6RSzS4lvsVK/Q5/dDFvPZwkfteeAqvE
-	NF4Ncxma0l+WrzDEICESh+CY18WRp1tA4hBhJ/EpNOQjsYTTgEWKnBVtpJ/ePTW5yIYs
-	pM+TYfJfPMm6JUOGwa/vogJidMxsWha4dspiI=
-Received: by 10.223.76.197 with SMTP id d5mr6299558fak.13.1320860873836;
-	Wed, 09 Nov 2011 09:47:53 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=TGF1Jomc6qoqpwM4mhrac1uRBb9fEbs/j9kqWfTMCOg=;
+	b=c8p6t41b+vII3d0Hss0j+c8AEukQQYgSH8Z5nB5Dn+2PHMqjfS7s/QdfGUHTXdHToD
+	Qg3bgdKztOkO1W2wAHTxfgjlprk24ldK6GVHbfB6lanbPtRbzOWDMLiMlPyf31Iclcqx
+	G11JWPbys74L6OpQ5FzMR1lSuRmlWsO2Cnkq4=
+Received: by 10.223.58.8 with SMTP id e8mr6181070fah.27.1320860886295;
+	Wed, 09 Nov 2011 09:48:06 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j5sm7431857faf.14.2011.11.09.09.47.51
+	by mx.google.com with ESMTPS id w11sm7452767fad.7.2011.11.09.09.48.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Nov 2011 09:47:52 -0800 (PST)
+	Wed, 09 Nov 2011 09:48:04 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Nov 2011 18:47:49 +0100
-Message-Id: <cover.1320860740.git.Martin.Jansa@gmail.com>
+Date: Wed,  9 Nov 2011 18:47:53 +0100
+Message-Id: <31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc1
-Subject: [meta-oe 0/4] Small fixes, move kbd and libsdl to oe-core
+In-Reply-To: <cover.1320860740.git.Martin.Jansa@gmail.com>
+References: <cover.1320860740.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe 1/4] mplayer-common: import from OE-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,39 +39,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 17:54:09 -0000
+X-List-Received-Date: Wed, 09 Nov 2011 17:54:19 -0000
 
-Patches 3 and 4 depend on oe-core patchset
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-November/012397.html
+From: Martin Jansa <martin.jansa@gmail.com>
 
-The following changes since commit dd54be4a2fc0f0597a82525fcb97c69539a547c4:
+* commit b28081b6039db85f18bf9e722fece59bff6e7b0f
 
-  rsyslog: change postrm to prerm (2011-11-09 14:16:14 +0100)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (4):
-  mplayer-common: import from OE-classic
-  openssl: bump PR to fix license
-  libsdl-x11: drop from meta-oe
-  kbd: move to oe-core
-
- .../recipes-connectivity/openssl/openssl_0.9.8m.bb |    2 +-
- .../recipes-connectivity/openssl/openssl_1.0.0e.bb |    2 +-
- meta-oe/recipes-core/kbd/kbd_1.15.2.bb             |   19 --------------
- meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc  |   27 --------------------
- .../recipes-graphics/libsdl/libsdl-x11_1.2.14.bb   |   18 -------------
- .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 ++++++++++++++++
- .../mplayer/mplayer-common/mplayer.conf            |   15 +++++++++++
- 7 files changed, 39 insertions(+), 66 deletions(-)
- delete mode 100644 meta-oe/recipes-core/kbd/kbd_1.15.2.bb
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-1.2.14.inc
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-x11_1.2.14.bb
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 ++++++++++++++++++++
+ .../mplayer/mplayer-common/mplayer.conf            |   15 +++++++++++++
+ 2 files changed, 37 insertions(+), 0 deletions(-)
  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
 
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+new file mode 100644
+index 0000000..889bb95
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+@@ -0,0 +1,22 @@
++# Copyright Matthias Hentges <devel@hentges.net> (c) 2006
++# License: MIT (see COPYING.MIT)
++
++DESCRIPTION = "Preconfigured mplayer preferences"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++PV = "0.0.1"
++
++SRC_URI = "file://mplayer.conf"
++
++# Yes, really /usr/etc!!!
++do_install() {
++	install -d "${D}/usr${sysconfdir}/mplayer"
++
++	install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
++}
++
++FILES_${PN} = "/usr${sysconfdir}/mplayer"
++
++inherit allarch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+new file mode 100644
+index 0000000..92aeb15
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+@@ -0,0 +1,15 @@
++
++# You probably shouldn't touch these
++ac=mad,
++ao=oss,
++
++# Required on SL-Cxxxx for correct rotation in the *VT*,
++# breaks rotation in X!
++# vf=rotate=1
++
++# Enable fullscreen display by default
++# fs=true
++
++# Drop frames to keep audio and video in sync
++framedrop=true
++
 -- 
 1.7.8.rc1
 
