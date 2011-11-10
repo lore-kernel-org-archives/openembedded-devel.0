@@ -1,35 +1,25 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ROQEl-0002d9-LO
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RORg1-0007aG-KN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 09:43:55 +0100
-Received: by faat2 with SMTP id t2so2675986faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 00:37:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8wIiInTcpUz49L9DSiAaSTzJvCVj4v/+9ybBphYo8lk=;
-	b=up5I54pOxho/GeU4sgB2jWV+XhD2+wRe8C8X1hhmHhkWRTOx+qdtzT0xN4wpZe6FBV
-	W1zvtLxz1AsemA0506NWF5SuL9KlSWfk+Cz3oUppJRtKBuVzDjDMZyWS/L3BEIifzDj0
-	+tT0mQVLUEuDtU1YsrNtHHE3Z9f6bGDNQf9w0=
-Received: by 10.223.94.143 with SMTP id z15mr10618424fam.32.1320914259513;
-	Thu, 10 Nov 2011 00:37:39 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k26sm10255865fab.8.2011.11.10.00.37.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 10 Nov 2011 00:37:38 -0800 (PST)
-Date: Thu, 10 Nov 2011 09:37:27 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111110083727.GI21022@jama.jama.net>
-References: <cover.1320860740.git.Martin.Jansa@gmail.com>
-	<31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
-	<j9g1t8$4f8$1@dough.gmane.org>
+	Thu, 10 Nov 2011 11:16:09 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 10 Nov 2011 02:09:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.69,488,1315206000"; d="scan'208";a="83404739"
+Received: from unknown (HELO helios.localnet) ([10.252.121.140])
+	by fmsmga001.fm.intel.com with ESMTP; 10 Nov 2011 02:09:50 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: David Thomas <david.thomas@microbee-systems.com>
+Date: Thu, 10 Nov 2011 09:58:31 +0000
+Message-ID: <1389840.j5gWQFZ9u1@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
+In-Reply-To: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <j9g1t8$4f8$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe 1/4] mplayer-common: import from OE-classic
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,87 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 08:43:56 -0000
-X-Groupsio-MsgNum: 35287
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CNK/L7dwKXQ4Ub8J"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Nov 2011 10:16:10 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---CNK/L7dwKXQ4Ub8J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 09 November 2011 16:32:48 David Thomas wrote:
+> Since svn.o-hand.com is dead does anyone have a different repository?
 
-On Thu, Nov 10, 2011 at 09:27:20AM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 09-11-11 18:47, Martin Jansa schreef:
-> > From: Martin Jansa <martin.jansa@gmail.com>
-> >=20
-> > * commit b28081b6039db85f18bf9e722fece59bff6e7b0f
-> >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> ---=20
-> > .../recipes-multimedia/mplayer/mplayer-common.bb   |   22
-> > ++++++++++++++++++++ .../mplayer/mplayer-common/mplayer.conf           =
- |
-> > 15 +++++++++++++ 2 files changed, 37 insertions(+), 0 deletions(-) crea=
-te
-> > mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb create
-> > mode 100644
-> > meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
-> >=20
-> > diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
-> > b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb new file mode
-> > 100644 index 0000000..889bb95 --- /dev/null +++
-> > b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb @@ -0,0 +1,22 @@=
-=20
-> > +# Copyright Matthias Hentges <devel@hentges.net> (c) 2006 +# License:
-> > MIT (see COPYING.MIT) + +DESCRIPTION =3D "Preconfigured mplayer
-> > preferences" + +LICENSE =3D "MIT" +LIC_FILES_CHKSUM =3D
-> > "file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbcb788c80a0384361b4de2=
-0420"
-> >
-> >=20
-> +
-> > +PV =3D "0.0.1" + +SRC_URI =3D "file://mplayer.conf" + +# Yes, really
-> > /usr/etc!!! +do_install() { +	install -d "${D}/usr${sysconfdir}/mplayer=
-"=20
-> > + +	install -m 0644 ${WORKDIR}/mplayer.conf
-> > "${D}/usr${sysconfdir}/mplayer" +} + +FILES_${PN} =3D
-> > "/usr${sysconfdir}/mplayer" + +inherit allarch diff --git
-> > a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
-> > b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf new fi=
-le
-> > mode 100644 index 0000000..92aeb15 --- /dev/null +++
-> > b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf @@ -0,0
-> > +1,15 @@ + +# You probably shouldn't touch these +ac=3Dmad, +ao=3Doss,
->=20
-> Are those still needed? On armv6 and up the builtin ffmpeg decoder is fas=
-ter
-> than mad and who is using non-alsa emulated oss nowadays?
+Most if not all o-hand repositories have been converted to git and moved to 
+git.yoctoproject.org. A list of what's available:
 
-default
-Selected audio codec: [ffmp3float] afm: ffmpeg (FFmpeg MPEG layer-3 audio)
-is terribly slow on armv4t without FPU
+ http://git.yoctoproject.org/cgit/cgit.cgi/
+ 
+> SRC_URI = "git://git.yoctoproject.org/matchbox-keyboard;protocol=git \
 
-but you're right ao could have better default
+This works for me... ?
 
-Regards,
+> I am unable to find any source for these. It sure seems to me that OE
+> is overly dependent upon links that come and go.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+It is if you don't use a mirror. Realistically with the wide range of software 
+from hundreds of different providers built in OE there's no way you can expect 
+all of them to not change their download locations, remove old versions, etc. 
+over time. That's why we have mirror support, and both Angstrom and the Yocto 
+Project provide mirrors already.
 
---CNK/L7dwKXQ4Ub8J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+If you really want to ensure long-term support you may want to consider 
+setting up your own local mirror; it's fairly easy to do.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Cheers,
+Paul
 
-iEYEARECAAYFAk67jUYACgkQN1Ujt2V2gBz7VQCgq6VzIMkHMZVp2LXFDKo5Fm7M
-eS0AoJb4ks1JfaZohJJJFtEEJ8dmtOCN
-=LxUa
------END PGP SIGNATURE-----
+-- 
 
---CNK/L7dwKXQ4Ub8J--
+Paul Eggleton
+Intel Open Source Technology Centre
+
+
