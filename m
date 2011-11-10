@@ -1,23 +1,35 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1ROb4B-0005at-Mn
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:17:43 +0100
-Received: from [77.182.190.96] (helo=[192.168.23.109])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1RObMt-0001lE-KY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:37:03 +0100
-Message-ID: <4EBC2FEF.5020405@kernelconcepts.de>
-Date: Thu, 10 Nov 2011 21:11:27 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RObFA-0005u4-CS for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:29:04 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ROb97-00046G-GW for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:22:49 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 21:22:49 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 21:22:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-Subject: RFC: Clean up omap3.inc
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 10 Nov 2011 21:22:35 +0100
+Message-ID: <j9hbqb$b8u$1@dough.gmane.org>
+References: <4EBBF280.30301@freyther.de>
+	<1320945711.21488.21.camel@phil-desktop>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1320945711.21488.21.camel@phil-desktop>
+X-Enigmail-Version: 1.3.2
+Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,33 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 20:17:44 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Thu, 10 Nov 2011 20:29:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-omap3.inc currently contains this line:
+Op 10-11-11 18:21, Phil Blundell schreef:
+> On Thu, 2011-11-10 at 16:49 +0100, Holger Freyther wrote:
+>> could someone create a meta-telephony repository for me? In this
+>> repository I would like to maintain OpenBSC, osmocomBB, TETRA, mISDN,
+>> LCR, Asterisk (and probably more in the future).
+> 
+> Sounds like a good idea.  I can set this up on oe.org if you want.
 
-EXTRA_IMAGEDEPENDS += "u-boot x-load"
+Infrastructure is still a TSC thing, so please don't go creating
+repositories without consulting the TSC first.
 
-This makes it hard to build for an OMAP3 based machine without providing a
-x-load configuration for it. Actually I do not think hardcoding a particular
-bootloader for a class of SoC is a good idea at all. The selection whether a
-bootloader needs to be build and which one to select should be a matter of the
-machine configuration.
 
-Could we please get rid of this and fix the board descriptions?
 
-Greetings
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Florian
+iD8DBQFOvDKKMkyGM64RGpERAjH/AJ9OyhLaxdcqjWRRlad7etTOqGMwkgCdES94
+jRtR/1F+hKk/3FmcjO/GJVM=
+=ezna
+-----END PGP SIGNATURE-----
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
