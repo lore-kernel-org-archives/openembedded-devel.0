@@ -1,20 +1,26 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from stoexhub01.domain01.net ([83.145.59.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.thomas@microbee-systems.com>)
-	id 1ROGnQ-0004ip-NQ for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Nov 2011 23:39:04 +0100
-Received: by wyh5 with SMTP id 5so2293253wyh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Nov 2011 14:32:49 -0800 (PST)
+	(envelope-from <anders@chargestorm.se>) id 1ROPPe-0006Zx-Q4
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 08:51:07 +0100
+Received: from ad.chargestorm.se (193.235.91.228) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server (TLS) id 8.3.137.0;
+	Thu, 10 Nov 2011 08:44:48 +0100
+Date: Thu, 10 Nov 2011 08:44:49 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20111110074449.GB3933@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Received: by 10.180.107.229 with SMTP id hf5mr5119593wib.35.1320877968985;
-	Wed, 09 Nov 2011 14:32:48 -0800 (PST)
-Received: by 10.227.200.14 with HTTP; Wed, 9 Nov 2011 14:32:48 -0800 (PST)
-Date: Wed, 9 Nov 2011 16:32:48 -0600
-Message-ID: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
-From: David Thomas <david.thomas@microbee-systems.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
+In-Reply-To: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,44 +34,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 22:39:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Nov 2011 07:51:07 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Since svn.o-hand.com is dead does anyone have a different repository?
+* Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++--
+>  1 files changed, 9 insertions(+), 2 deletions(-)
 
-SRC_URI = "git://git.yoctoproject.org/matchbox-keyboard;protocol=git \
-           file://smallscreen-fontsize.patch;patch=1 \
-           file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-available-layouts.patch;patch=1
-\
-           file://3-Changes-to-improve-layout-rendering--especially-after-adding-support-for.patch;patch=1
-\
-           file://4-Add-rendering-debug-logging.patch;patch=1 \
-           file://5-Add-support-for-loading-multiple-independent-layouts.patch;patch=1
-\
-           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=1 \
-          "
+> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+> index 90862a3..d1d4306 100644
+> --- a/meta-oe/recipes-core/systemd/systemd_git.bb
+> +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+> @@ -14,7 +14,7 @@ inherit gitpkgv
+>  # TODO:
+>  # u-a for runlevel and telinit
+> -# u-a prerm
 
-I am unable to find any source for these. It sure seems to me that OE
-is overly dependent upon links that come and go.
+Here on your todo list, it stated u-a for prerm, but you applied it to
+the postrm. In this case, it probably doesn't really matter, but I'd
+still guess that it would make more sense to remove the u-a before
+removing the binaries. Although, I don't think it'll actually cause any
+problems in this case.
 
+Cheers,
+Anders
 
+>  pkg_postinst_systemd () {
+>  update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
+> @@ -117,3 +116,11 @@ update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/syste
+>  update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
+>  update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
+>  }
+> +
+> +pkg_postrm_systemd () {
+> +update-alternatives --remove init ${base_bindir}/systemd
+> +update-alternatives --remove halt ${base_bindir}/systemctl
+> +update-alternatives --remove reboot ${base_bindir}/systemctl
+> +update-alternatives --remove shutdown ${base_bindir}/systemctl
+> +update-alternatives --remove poweroff ${base_bindir}/systemctl
+> +}
 -- 
-Dave Thomas
-MicroBee Systems, Inc
-1429 Weatherly Road, Suite G
-Huntsville, AL 35803-1187
-256-489-6671 (Voice)
-256-426-2431 (Mobile)
-256-489-6673 (FAX)
-www.microbee-systems.com
-"Innovative Solutions for an Embedded World"
-
-This message is intended for the sole use of the addressee, and may
-contain information that is privileged, confidential and exempt from
-disclosure under applicable law. If you are not the addressee you are
-hereby notified that you may not use, copy, disclose, or distribute to
-anyone the message or any information contained in the message. If you
-have received this message in error, please immediately advise the
-sender by reply email and delete this message.
+Anders Darander
+ChargeStorm AB / eStorm AB
 
 
