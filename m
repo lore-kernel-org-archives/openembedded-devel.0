@@ -1,29 +1,25 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1ROcgS-0003Us-Ra
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 23:01:21 +0100
-Received: by ggnq4 with SMTP id q4so171214ggn.6
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1ROcwi-0003yp-IJ for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 23:18:10 +0100
+Received: by faat2 with SMTP id t2so3573622faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 13:55:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Nzhs1FOFGbNlD6RSy764uuvu/sfGtZ33RnKsoYR7ByI=;
-	b=mtTM3xvojZFULE/0SekwRzZHGMtmHWPFZlygrBvdvHAxkdVxHhT40Y7KNwdm/quc+5
-	hkaJ8vwqGm1RGrpcM7uJwJLJEaaS4hjwFEvaFhvdcn8fZLWuQunldQ1q/zEfr19Xwtwj
-	PXipiMj2npWyP9JecZDQGzam7bNP6KZAyHD1Q=
+	Thu, 10 Nov 2011 14:11:51 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.52.143 with SMTP id i15mr1498685qcg.188.1320962103337;
-	Thu, 10 Nov 2011 13:55:03 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Thu, 10 Nov 2011 13:55:03 -0800 (PST)
-In-Reply-To: <4EBC39EB.2060004@kernelconcepts.de>
-References: <4EBC2FEF.5020405@kernelconcepts.de> <j9hc2l$b8u$3@dough.gmane.org>
-	<4EBC39EB.2060004@kernelconcepts.de>
-Date: Thu, 10 Nov 2011 14:55:03 -0700
-Message-ID: <CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Clean up omap3.inc
+Received: by 10.223.75.150 with SMTP id y22mr14589056faj.29.1320963111697;
+	Thu, 10 Nov 2011 14:11:51 -0800 (PST)
+Received: by 10.223.93.203 with HTTP; Thu, 10 Nov 2011 14:11:51 -0800 (PST)
+In-Reply-To: <D1FB05D7-71E3-4B22-8A8B-594B38FE09D1@microbee-systems.com>
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+	<1389840.j5gWQFZ9u1@helios>
+	<D1FB05D7-71E3-4B22-8A8B-594B38FE09D1@microbee-systems.com>
+Date: Thu, 10 Nov 2011 16:11:51 -0600
+Message-ID: <CALJpqJx6SVr8TRPDaZFSvEWfs-uyjN_OMsrLxVfYo+RrLtCQcg@mail.gmail.com>
+From: David Thomas <david.thomas@microbee-systems.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +33,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 22:01:21 -0000
+X-List-Received-Date: Thu, 10 Nov 2011 22:18:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Nov 10, 2011 at 1:54 PM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-> Hi Koen,
->
-> Am 10.11.2011 21:27, schrieb Koen Kooi:
->> Wrong. You can do the following in your machine.conf:
->>
->> require omap3.inc
->>
->> EXTRA_IMAGEDEPENDS = "whatever"
->
-> this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could have been
-> appended everywhere and this intrusive override might break quite a lot.
->
->> In OE classic, no. In meta-ti the cleanup is already underway.
->
-> I do not care bout meta-ti, its is broken in OE classic.
->
->
-> Removing this hardcoded dependency would not break anything. Only the board
-> maintainers who want to get it built automatically would have to add it.
+I have tried every possible way, 8 hours so far, to get this file to
+process these patches. I got the patches, I have set up local
+repositories, ad nasium and same response, unable to fetch from any
+source.
 
-But, that's most of them today.
+I have tired every combination, I have tried every possible link, url,
+
+SRC_URI = "git:///home/twoods/local;protocol=file;branch=master"
+
+git://git.yoctoproject.org/matchbox-keyboard;protocol=git;file://smallscreen-fontsize.patch;patch=1
+
+and on and on. Every single project I have seen references the same
+
+
+SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk;module=${PN};proto=http \
+
+I am at the point of hurling this machine out a window. How could this
+be so cryptic and difficult?
+
+Does anyone have a idea?
+
+DESCRIPTION = "Matchbox virtual keyboard for X11"
+LICENSE = "GPL"
+DEPENDS = "libfakekey expat libxft"
+RCONFLICTS = matchbox-keyboard-inputmethod
+RPROVIDES_${PN} = matchbox-keyboard-inputmethod
+SECTION = "x11"
+PV = "0.0+svnr${SRCPV}"
+PR ="r7"
+
+SRC_URI = "https://git.gitorious.org/cm-t3530/cm-t3530.git;protocol=git \
+           file://smallscreen-fontsize.patch;patch=1 \
+           file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-available-layouts.patch;patch=1
+\
+           file://3-Changes-to-improve-layout-rendering--especially-after-adding-support-for.patch;patch=1
+\
+           file://4-Add-rendering-debug-logging.patch;patch=1 \
+           file://5-Add-support-for-loading-multiple-independent-layouts.patch;patch=1
+\
+           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=1 \
+          "
+
+
+S = "${WORKDIR}/${PN}"
+
+inherit autotools pkgconfig gettext
+
+EXTRA_OECONF = "--disable-cairo"
+
+FILES_${PN} = "${bindir}/* \
+	       ${datadir}/applications \
+	       ${datadir}/pixmaps \
+	       ${datadir}/matchbox-keyboard"
+
+On Thu, Nov 10, 2011 at 6:35 AM, David Thomas
+<david.thomas@microbee-systems.com> wrote:
+> I appreciate the response. Yes, I found this but it would seem this is related to the patches listed in that file I included.
+>
+> I will press on.
+>
+> Dave
+>
+>
+> On Nov 10, 2011, at 3:58 AM, Paul Eggleton wrote:
+>
+>> On Wednesday 09 November 2011 16:32:48 David Thomas wrote:
+>>> Since svn.o-hand.com is dead does anyone have a different repository?
+>>
+>> Most if not all o-hand repositories have been converted to git and moved to
+>> git.yoctoproject.org. A list of what's available:
+>>
+>> http://git.yoctoproject.org/cgit/cgit.cgi/
+>>
+>>> SRC_URI = "git://git.yoctoproject.org/matchbox-keyboard;protocol=git \
+>>
+>> This works for me... ?
+>>
+>>> I am unable to find any source for these. It sure seems to me that OE
+>>> is overly dependent upon links that come and go.
+>>
+>> It is if you don't use a mirror. Realistically with the wide range of software
+>> from hundreds of different providers built in OE there's no way you can expect
+>> all of them to not change their download locations, remove old versions, etc.
+>> over time. That's why we have mirror support, and both Angstrom and the Yocto
+>> Project provide mirrors already.
+>>
+>> If you really want to ensure long-term support you may want to consider
+>> setting up your own local mirror; it's fairly easy to do.
+>>
+>> Cheers,
+>> Paul
+>>
+>> --
+>>
+>> Paul Eggleton
+>> Intel Open Source Technology Centre
+>
+>
+
+
 
 -- 
-Tom
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803-1187
+256-489-6671 (Voice)
+256-426-2431 (Mobile)
+256-489-6673 (FAX)
+www.microbee-systems.com
+"Innovative Solutions for an Embedded World"
+
+This message is intended for the sole use of the addressee, and may
+contain information that is privileged, confidential and exempt from
+disclosure under applicable law. If you are not the addressee you are
+hereby notified that you may not use, copy, disclose, or distribute to
+anyone the message or any information contained in the message. If you
+have received this message in error, please immediately advise the
+sender by reply email and delete this message.
 
 
