@@ -1,22 +1,23 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1ROWDj-0004LZ-TG
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1ROWSV-0004i7-8l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 16:07:16 +0100
-Received: (qmail 13974 invoked by uid 1003); 10 Nov 2011 15:00:53 -0000
-Received: from unknown (HELO ?192.168.1.111?) (philip@opensdr.com@96.240.172.5)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	10 Nov 2011 15:00:53 -0000
-Message-ID: <4EBBE725.8000107@balister.org>
-Date: Thu, 10 Nov 2011 10:00:53 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110928 Fedora/3.1.15-1.fc14 Thunderbird/3.1.15
-MIME-Version: 1.0
+	Thu, 10 Nov 2011 16:22:31 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 10 Nov 2011 07:16:13 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="73530428"
+Received: from unknown (HELO helios.localnet) ([10.252.121.140])
+	by orsmga001.jf.intel.com with ESMTP; 10 Nov 2011 07:16:12 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4EBBE67F.20300@freyther.de>
+Date: Thu, 10 Nov 2011 15:16:11 +0000
+Message-ID: <2296445.ooI7eHlGua@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
 In-Reply-To: <4EBBE67F.20300@freyther.de>
-X-Enigmail-Version: 1.1.2
+References: <4EBBE67F.20300@freyther.de>
+MIME-Version: 1.0
 Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,30 +32,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 15:07:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Nov 2011 15:22:31 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 11/10/2011 09:58 AM, Holger Freyther wrote:
-> Hi all, sysadmins,
-> 
-> could someone create a meta-telephony repository for me? In this repository I
-> would like to maintain OpenBSC, osmocomBB, TETRA, mISDN, LCR, Asterisk (and
-> probably more in the future).
+On Thursday 10 November 2011 15:58:07 Holger Freyther wrote:
+> could someone create a meta-telephony repository for me? In this repository
+> I would like to maintain OpenBSC, osmocomBB, TETRA, mISDN, LCR, Asterisk
+> (and probably more in the future).
 
-What about OpenBTS also :) And what about the libraries needed to build
-these? It would be good to minimize layer inter-dependencies.
+Sounds like a great idea. +1.
 
-Philip
+Cheers,
+Paul
 
-> 
-> cheers
-> 	holger
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
