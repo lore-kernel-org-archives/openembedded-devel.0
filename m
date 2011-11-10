@@ -1,25 +1,26 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1ROZv4-0003SB-Cb
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1ROaul-0005Go-V7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 20:04:14 +0100
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LUG00JMPKNWO8JT@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	10 Nov 2011 12:57:38 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6F0DF14AF5D; Thu,
-	10 Nov 2011 13:57:32 -0500 (EST)
-Date: Thu, 10 Nov 2011 13:57:32 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 10 Nov 2011 21:08:00 +0100
+Received: from [77.182.190.96] (helo=[192.168.23.109])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1RObDT-0001jy-H2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:27:19 +0100
+Message-ID: <4EBC2DA7.9080304@kernelconcepts.de>
+Date: Thu, 10 Nov 2011 21:01:43 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20111110185732.GC20602@denix.org>
-References: <4EBBE67F.20300@freyther.de> <j9gufv$35d$1@dough.gmane.org>
-MIME-version: 1.0
-In-reply-to: <j9gufv$35d$1@dough.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: RFC Creation of a meta-telephony repository
+References: <20111106230200.5DEC41032D@opal>
+	<CA+M6bXk801_N5bhqU3K00SOfc5KdONWAJhJj5+h2LSiF8kuwCg@mail.gmail.com>
+In-Reply-To: <CA+M6bXk801_N5bhqU3K00SOfc5KdONWAJhJj5+h2LSiF8kuwCg@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: [oe-commits] Florian Boor : Revert "libgee.inc: Use libtool macros from installed libtool"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 19:04:14 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 10 Nov 2011 20:08:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-> Op 10-11-11 15:58, Holger Freyther schreef:
-> > Hi all, sysadmins,
-> > 
-> > could someone create a meta-telephony repository for me?
-> 
-> Why not use github/gitorious/etc for it?
+Hi,
 
-Do you have a hidden anti-OpenEmbedded agenda here? ;-)
+> PRs don't go backwards in time, please fix this, thanks.
 
-Seriously though, why is it better than oe.org hosting?
+oops indeed - fixed.
+
+I somehow pushed a pile of crappy and incredibly old changes rotting in some
+random tree.
+
+Greetings
+
+Florian
+
 
 -- 
-Denys
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
