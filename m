@@ -1,29 +1,35 @@
-Received: from stoexhubfe01.domain01.net ([83.145.59.140])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1ROPzp-0000T3-Kz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 09:28:29 +0100
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhubfe01.domain01.net
-	(10.12.10.6) with Microsoft SMTP Server (TLS) id 8.3.137.0;
-	Thu, 10 Nov 2011 09:22:13 +0100
-Date: Thu, 10 Nov 2011 09:22:12 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20111110082212.GD3933@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
-	<20111110074449.GB3933@ad.chargestorm.se>
-	<20111110075607.GH21022@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20111110075607.GH21022@jama.jama.net>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ROQ4z-0000hz-3J for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 09:33:49 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ROPyw-0003X2-8E for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 09:27:34 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 09:27:34 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 09:27:34 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 10 Nov 2011 09:27:20 +0100
+Message-ID: <j9g1t8$4f8$1@dough.gmane.org>
+References: <cover.1320860740.git.Martin.Jansa@gmail.com>
+	<31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <31a2761c1b9ca9e31445017b8180474813aecef4.1320860740.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: [meta-oe 1/4] mplayer-common: import from OE-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,53 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 08:28:30 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Nov 2011 08:33:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
-> On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
-> > * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > ---
-> > >  meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++--
-> > >  1 files changed, 9 insertions(+), 2 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > > diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-> > > index 90862a3..d1d4306 100644
-> > > --- a/meta-oe/recipes-core/systemd/systemd_git.bb
-> > > +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-> > > @@ -14,7 +14,7 @@ inherit gitpkgv
-> > >  # TODO:
-> > >  # u-a for runlevel and telinit
-> > > -# u-a prerm
+Op 09-11-11 18:47, Martin Jansa schreef:
+> From: Martin Jansa <martin.jansa@gmail.com>
+> 
+> * commit b28081b6039db85f18bf9e722fece59bff6e7b0f
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
+> .../recipes-multimedia/mplayer/mplayer-common.bb   |   22
+> ++++++++++++++++++++ .../mplayer/mplayer-common/mplayer.conf            |
+> 15 +++++++++++++ 2 files changed, 37 insertions(+), 0 deletions(-) create
+> mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb create
+> mode 100644
+> meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+> 
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+> b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb new file mode
+> 100644 index 0000000..889bb95 --- /dev/null +++
+> b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb @@ -0,0 +1,22 @@ 
+> +# Copyright Matthias Hentges <devel@hentges.net> (c) 2006 +# License:
+> MIT (see COPYING.MIT) + +DESCRIPTION = "Preconfigured mplayer
+> preferences" + +LICENSE = "MIT" +LIC_FILES_CHKSUM =
+> "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+>
+> 
++
+> +PV = "0.0.1" + +SRC_URI = "file://mplayer.conf" + +# Yes, really
+> /usr/etc!!! +do_install() { +	install -d "${D}/usr${sysconfdir}/mplayer" 
+> + +	install -m 0644 ${WORKDIR}/mplayer.conf
+> "${D}/usr${sysconfdir}/mplayer" +} + +FILES_${PN} =
+> "/usr${sysconfdir}/mplayer" + +inherit allarch diff --git
+> a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+> b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf new file
+> mode 100644 index 0000000..92aeb15 --- /dev/null +++
+> b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf @@ -0,0
+> +1,15 @@ + +# You probably shouldn't touch these +ac=mad, +ao=oss,
 
-> > Here on your todo list, it stated u-a for prerm, but you applied it to
-> > the postrm. In this case, it probably doesn't really matter, but I'd
-> > still guess that it would make more sense to remove the u-a before
-> > removing the binaries. Although, I don't think it'll actually cause any
-> > problems in this case.
+Are those still needed? On armv6 and up the builtin ffmpeg decoder is faster
+than mad and who is using non-alsa emulated oss nowadays?
 
-> I did what u-a.bbclass usually do.. if you think it should be in prerm
-> then it would be best to first fix in u-a.bbclass and then we can update
-> the rest of metadata.
+regards,
 
-Yeah, like I said, is't likely not a real problem. There'll probably
-just be a tiny window during which, in this case, e.g. reboot isn't
-available, before u-a has been told to change the reboot link.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-I'm currently just a little bit catious as I've recently stumbled upon
-post-/prerm issues using rpm... (Although the ones I know of (busybox
-updates, rsyslog removal) are either fixed or there has been patches
-submitted).
+iD8DBQFOu4roMkyGM64RGpERApONAJ0cAehUkELZSbomF2h1y92Pv40P0wCgpWd1
+1nkJwVaKO6lYpmSRFXOiOzU=
+=72y+
+-----END PGP SIGNATURE-----
 
-I'll see if I ever get the time to look into it.
-
-Cheers,
-Anders
-
--- 
-Anders Darander
-ChargeStorm AB / eStorm AB
 
 
