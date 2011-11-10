@@ -1,33 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RObRC-0007q5-Hi for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:41:30 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RObL4-0002OB-NU for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:35:10 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 21:35:10 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 21:35:10 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1RObjQ-0001hY-Cr
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 22:00:20 +0100
+Received: from [77.182.190.96] (helo=[192.168.23.109])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1ROc28-0001qr-Gi
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 22:19:40 +0100
+Message-ID: <4EBC39EB.2060004@kernelconcepts.de>
+Date: Thu, 10 Nov 2011 21:54:03 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 10 Nov 2011 21:27:01 +0100
-Message-ID: <j9hc2l$b8u$3@dough.gmane.org>
-References: <4EBC2FEF.5020405@kernelconcepts.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <4EBC2FEF.5020405@kernelconcepts.de>
-X-Enigmail-Version: 1.3.2
+References: <4EBC2FEF.5020405@kernelconcepts.de> <j9hc2l$b8u$3@dough.gmane.org>
+In-Reply-To: <j9hc2l$b8u$3@dough.gmane.org>
+X-Enigmail-Version: 1.1.2
 Subject: Re: RFC: Clean up omap3.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,51 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 20:41:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 10 Nov 2011 21:00:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Koen,
 
-Op 10-11-11 21:11, Florian Boor schreef:
-> Hi all,
+Am 10.11.2011 21:27, schrieb Koen Kooi:
+> Wrong. You can do the following in your machine.conf:
 > 
-> omap3.inc currently contains this line:
+> require omap3.inc
 > 
-> EXTRA_IMAGEDEPENDS += "u-boot x-load"
-> 
-> This makes it hard to build for an OMAP3 based machine without providing
-> a x-load configuration for it.
+> EXTRA_IMAGEDEPENDS = "whatever"
 
-Wrong. You can do the following in your machine.conf:
+this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could have been
+appended everywhere and this intrusive override might break quite a lot.
 
-require omap3.inc
+> In OE classic, no. In meta-ti the cleanup is already underway.
 
-EXTRA_IMAGEDEPENDS = "whatever"
+I do not care bout meta-ti, its is broken in OE classic.
 
-to reset it.
 
-> Actually I do not think hardcoding a particular bootloader for a class of
-> SoC is a good idea at all. The selection whether a bootloader needs to be
-> build and which one to select should be a matter of the machine
-> configuration.
-> 
-> Could we please get rid of this and fix the board descriptions?
+Removing this hardcoded dependency would not break anything. Only the board
+maintainers who want to get it built automatically would have to add it.
 
-In OE classic, no. In meta-ti the cleanup is already underway.
+Greetings
 
-regards,
+Florian
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOvDOVMkyGM64RGpERAunKAKC7udUOfCyn4wLKlPYg5/kMJPSNEgCgqgp9
-lFTgVwMfsUQuNuC6mI8VZrg=
-=ndzI
------END PGP SIGNATURE-----
-
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
