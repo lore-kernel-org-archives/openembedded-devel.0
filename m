@@ -1,25 +1,34 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1RObLx-0006Ah-Q7
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:36:05 +0100
-Received: from [77.182.190.96] (helo=[192.168.23.109])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1RObef-0001nL-Mx
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:55:25 +0100
-Message-ID: <4EBC343D.90809@kernelconcepts.de>
-Date: Thu, 10 Nov 2011 21:29:49 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RObMG-0006EG-ME for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:36:24 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RObG9-00081q-Lf for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:30:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 21:30:05 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 21:30:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4EBBF280.30301@freyther.de>	<1320945711.21488.21.camel@phil-desktop>
-	<j9hbqb$b8u$1@dough.gmane.org>
-In-Reply-To: <j9hbqb$b8u$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 10 Nov 2011 21:25:24 +0100
+Message-ID: <j9hbvk$b8u$2@dough.gmane.org>
+References: <4EBBE67F.20300@freyther.de> <j9gufv$35d$1@dough.gmane.org>
+	<20111110185732.GC20602@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <20111110185732.GC20602@denix.org>
+X-Enigmail-Version: 1.3.2
 Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,31 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 20:36:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Nov 2011 20:36:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 10.11.2011 21:22, schrieb Koen Kooi:
->> Sounds like a good idea.  I can set this up on oe.org if you want.
+Op 10-11-11 19:57, Denys Dmytriyenko schreef:
+>> Op 10-11-11 15:58, Holger Freyther schreef:
+>>> Hi all, sysadmins,
+>>> 
+>>> could someone create a meta-telephony repository for me?
+>> 
+>> Why not use github/gitorious/etc for it?
 > 
-> Infrastructure is still a TSC thing, so please don't go creating
-> repositories without consulting the TSC first.
+> Do you have a hidden anti-OpenEmbedded agenda here? ;-)
+> 
+> Seriously though, why is it better than oe.org hosting?
 
-I do not agree here... creating another layer is a simple administrative thing
-to do and everyone with the rights to do it should be able to do it independent
-from TSC.
+It has less constraints. You should know, since you were the one telling me
+that oe.org is resource constrained and we can't host too many layers.
 
-Greetings
+I haven't seen enough reason to place the burden for this layer on the OE
+admin team instead of doing 'self' hosting on gitorious/github/etc/
 
-Florian
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFOvDM0MkyGM64RGpERAqoBAKCjVDqjsjmYJOhRVkU+YWh4TlOGWACfZnvx
+WETbx98dV+/px3ofKTEHN2w=
+=YzlL
+-----END PGP SIGNATURE-----
+
 
 
