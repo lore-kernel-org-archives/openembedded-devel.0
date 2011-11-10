@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RObMG-0006EG-ME for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:36:24 +0100
+	id 1RObRC-0007q5-Hi for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:41:30 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RObG9-00081q-Lf for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Nov 2011 21:30:05 +0100
+	id 1RObL4-0002OB-NU for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Nov 2011 21:35:10 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 21:30:05 +0100
+	Thu, 10 Nov 2011 21:35:10 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 21:30:05 +0100
+	Thu, 10 Nov 2011 21:35:10 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 10 Nov 2011 21:25:24 +0100
-Message-ID: <j9hbvk$b8u$2@dough.gmane.org>
-References: <4EBBE67F.20300@freyther.de> <j9gufv$35d$1@dough.gmane.org>
-	<20111110185732.GC20602@denix.org>
+Date: Thu, 10 Nov 2011 21:27:01 +0100
+Message-ID: <j9hc2l$b8u$3@dough.gmane.org>
+References: <4EBC2FEF.5020405@kernelconcepts.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <20111110185732.GC20602@denix.org>
+In-Reply-To: <4EBC2FEF.5020405@kernelconcepts.de>
 X-Enigmail-Version: 1.3.2
-Subject: Re: RFC Creation of a meta-telephony repository
+Subject: Re: RFC: Clean up omap3.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,40 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2011 20:36:24 -0000
+X-List-Received-Date: Thu, 10 Nov 2011 20:41:31 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 10-11-11 19:57, Denys Dmytriyenko schreef:
->> Op 10-11-11 15:58, Holger Freyther schreef:
->>> Hi all, sysadmins,
->>> 
->>> could someone create a meta-telephony repository for me?
->> 
->> Why not use github/gitorious/etc for it?
+Op 10-11-11 21:11, Florian Boor schreef:
+> Hi all,
 > 
-> Do you have a hidden anti-OpenEmbedded agenda here? ;-)
+> omap3.inc currently contains this line:
 > 
-> Seriously though, why is it better than oe.org hosting?
+> EXTRA_IMAGEDEPENDS += "u-boot x-load"
+> 
+> This makes it hard to build for an OMAP3 based machine without providing
+> a x-load configuration for it.
 
-It has less constraints. You should know, since you were the one telling me
-that oe.org is resource constrained and we can't host too many layers.
+Wrong. You can do the following in your machine.conf:
 
-I haven't seen enough reason to place the burden for this layer on the OE
-admin team instead of doing 'self' hosting on gitorious/github/etc/
+require omap3.inc
 
+EXTRA_IMAGEDEPENDS = "whatever"
 
+to reset it.
 
+> Actually I do not think hardcoding a particular bootloader for a class of
+> SoC is a good idea at all. The selection whether a bootloader needs to be
+> build and which one to select should be a matter of the machine
+> configuration.
+> 
+> Could we please get rid of this and fix the board descriptions?
+
+In OE classic, no. In meta-ti the cleanup is already underway.
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFOvDM0MkyGM64RGpERAqoBAKCjVDqjsjmYJOhRVkU+YWh4TlOGWACfZnvx
-WETbx98dV+/px3ofKTEHN2w=
-=YzlL
+iD8DBQFOvDOVMkyGM64RGpERAunKAKC7udUOfCyn4wLKlPYg5/kMJPSNEgCgqgp9
+lFTgVwMfsUQuNuC6mI8VZrg=
+=ndzI
 -----END PGP SIGNATURE-----
 
 
