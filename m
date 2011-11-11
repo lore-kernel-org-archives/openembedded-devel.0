@@ -1,27 +1,25 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1ROqtb-00082O-Dw
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1ROqwE-0008A9-Is
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 14:11:51 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 11 Nov 2011 05:05:32 -0800
+	Fri, 11 Nov 2011 14:14:34 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 11 Nov 2011 05:08:06 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.69,494,1315206000"; d="scan'208";a="89104148"
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="74084252"
 Received: from unknown (HELO helios.localnet) ([10.252.121.97])
-	by fmsmga002.fm.intel.com with ESMTP; 11 Nov 2011 05:05:32 -0800
+	by orsmga001.jf.intel.com with ESMTP; 11 Nov 2011 05:08:05 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: David Thomas <david.thomas@microbee-systems.com>
-Date: Fri, 11 Nov 2011 13:05:30 +0000
-Message-ID: <6416131.BOns2L3oYb@helios>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Nov 2011 13:08:04 +0000
+Message-ID: <2190543.WLJntyeND4@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
-In-Reply-To: <833EEBB2-42FF-438F-A5F3-8B24DDD3964D@microbee-systems.com>
-References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
-	<1320996619.7415.4.camel@mattotaupa>
-	<833EEBB2-42FF-438F-A5F3-8B24DDD3964D@microbee-systems.com>
+In-Reply-To: <1321016548.29435.1.camel@phil-desktop>
+References: <4EBBE67F.20300@freyther.de> <4EBD1AEF.1080905@freyther.de>
+	<1321016548.29435.1.camel@phil-desktop>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
+Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,40 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 13:11:51 -0000
+X-List-Received-Date: Fri, 11 Nov 2011 13:14:34 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Friday 11 November 2011 06:11:14 David Thomas wrote:
-> Well I checked this and the files where in this location... Still no dice.
-> The manual states it first searches to see if they exist then downloads. I
-> see the opposite, it fails to contact the server and then fails.
+On Friday 11 November 2011 13:02:27 Phil Blundell wrote:
+> On Fri, 2011-11-11 at 13:54 +0100, Holger Freyther wrote:
+> > all fine, one question not answered though. How does someone that wants
+> > to add asterisk to his image find my layer? Is there a layer/repository
+> > registry? do we need one?
+> 
+> Paul Eggleton made a fine wiki page for that very purpose:
+> http://wiki.openembedded.org/wiki/LayerIndex
 
-I don't think this is to do with those files (they are in the files subdir as 
-you point out, and they will be found there via FILESPATH; this is automatic). 
-If it's contacting the server and failing, it's the URI pointing to that 
-server or some other problem relating to that operation. You're not behind 
-some kind of firewall that blocks the git protocol are you?
-
-Also, from one of your earlier emails:
-> SRC_URI = "git:///home/twoods/local;protocol=file;branch=master"
-
-I don't think this is what you want. Just use file://<full path> if you want to 
-point it to a local location. But I'm not sure that's what you really want 
-here either.
-
-> git://git.yoctoproject.org/matchbox-keyboard;protocol=git;file://smallscreen
-> -fontsize.patch;patch=1
-
-That won't work - you have no space between the first URI and the next. Fix 
-that, and assuming your network allows access to remote git repos, that should 
-work.
-
-You can double check what SRC_URI bitbake is going to use by running this:
-
-bitbake -e matchbox-keyboard | grep ^SRC_URI
-
-Could you also remind me what DISTRO you are using?
+I hope one day this can be replaced with something backed by a database; 
+preferably with the ability to search at least by recipe name (with regular 
+updates from the metadata in git, of course). Until someone has time to write 
+that though this will have to suffice.
 
 Cheers,
 Paul
