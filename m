@@ -1,23 +1,25 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1ROqie-0007cu-1A
+	(envelope-from <philb@gnu.org>) id 1ROqqa-0007t0-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 14:00:32 +0100
-Received: from [192.168.1.250] (91-65-246-230-dynip.superkabel.de
-	[91.65.246.230])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 81D6D1B10C03
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 12:52:26 +0000 (UTC)
-Message-ID: <4EBD1AEF.1080905@freyther.de>
-Date: Fri, 11 Nov 2011 13:54:07 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20111010 Iceowl/1.0b2 Icedove/3.1.15
-MIME-Version: 1.0
+	Fri, 11 Nov 2011 14:08:44 +0100
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1ROqkW-0003Gt-SO
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 14:02:29 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4EBBE67F.20300@freyther.de>	<j9gufv$35d$1@dough.gmane.org>	<20111110185732.GC20602@denix.org>	<j9hbvk$b8u$2@dough.gmane.org>	<20111110210133.GD20602@denix.org>
-	<4EBCEE8B.10802@freyther.de> <j9iud0$16r$1@dough.gmane.org>
-In-Reply-To: <j9iud0$16r$1@dough.gmane.org>
+Date: Fri, 11 Nov 2011 13:02:27 +0000
+In-Reply-To: <4EBD1AEF.1080905@freyther.de>
+References: <4EBBE67F.20300@freyther.de>	<j9gufv$35d$1@dough.gmane.org>
+	<20111110185732.GC20602@denix.org>	<j9hbvk$b8u$2@dough.gmane.org>
+	<20111110210133.GD20602@denix.org> <4EBCEE8B.10802@freyther.de>
+	<j9iud0$16r$1@dough.gmane.org> <4EBD1AEF.1080905@freyther.de>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1321016548.29435.1.camel@phil-desktop>
+Mime-Version: 1.0
 Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,27 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 13:00:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Nov 2011 13:08:44 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 11/11/2011 11:45 AM, Koen Kooi wrote:
+On Fri, 2011-11-11 at 13:54 +0100, Holger Freyther wrote:
+> all fine, one question not answered though. How does someone that wants to add
+> asterisk to his image find my layer? Is there a layer/repository registry? do
+> we need one?
 
-> 
+Paul Eggleton made a fine wiki page for that very purpose:
+http://wiki.openembedded.org/wiki/LayerIndex
 
-> 
-> And after a I while re-evaluate it.
+p.
 
-all fine, one question not answered though. How does someone that wants to add
-asterisk to his image find my layer? Is there a layer/repository registry? do
-we need one?
-
-holger
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
