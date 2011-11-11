@@ -1,34 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ROnfP-0002LC-7f for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 10:45:00 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ROnZK-0004YC-2R for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 10:38:42 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 10:38:42 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <holger+oe@freyther.de>) id 1ROnlJ-0002Ux-9l
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 10:51:05 +0100
+Received: from [192.168.1.250] (91-65-246-230-dynip.superkabel.de
+	[91.65.246.230])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8C8201B10C03
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 10:38:42 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 11 Nov 2011 09:43:00 +0000 (UTC)
+Message-ID: <4EBCEE8B.10802@freyther.de>
+Date: Fri, 11 Nov 2011 10:44:43 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20111010 Iceowl/1.0b2 Icedove/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 11 Nov 2011 10:38:28 +0100
-Message-ID: <j9iqek$6np$1@dough.gmane.org>
-References: <4EBBF280.30301@freyther.de>	<1320945711.21488.21.camel@phil-desktop>	<j9hbqb$b8u$1@dough.gmane.org>	<1320959262.3080.11.camel@lenovo.internal.reciva.com>
-	<j9iooh$q1p$1@dough.gmane.org> <4EBCE9FB.9030002@kernelconcepts.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <4EBCE9FB.9030002@kernelconcepts.de>
-X-Enigmail-Version: 1.3.2
+References: <4EBBE67F.20300@freyther.de>
+	<j9gufv$35d$1@dough.gmane.org>	<20111110185732.GC20602@denix.org>
+	<j9hbvk$b8u$2@dough.gmane.org> <20111110210133.GD20602@denix.org>
+In-Reply-To: <20111110210133.GD20602@denix.org>
 Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,46 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 09:45:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Nov 2011 09:51:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 11/10/2011 10:01 PM, Denys Dmytriyenko wrote:
 
-Op 11-11-11 10:25, Florian Boor schreef:
-> Hi,
+>> I haven't seen enough reason to place the burden for this layer on the OE
+>> admin team instead of doing 'self' hosting on gitorious/github/etc/
 > 
-> Am 11.11.2011 10:09, schrieb Koen Kooi:
->>> I don't recall any general requirement that one needs to seek
->>> permission from the TSC before acting on what seems like essentially
->>> a minor operational matter.  When did this become the policy?
->> 
->> Ever since the TSC has been formed. You never noticed it since the
->> second TSC was so shockingly passive.
-> 
-> the job of the TSC is sketched in the TSC Charter like this: "To govern
-> access to all technical aspects of OpenEmbedded, this includes official
-> git trees, openembedded-devel mailing list, bug trackers, QA systems, and
-> others as the TSC sees fit."
-> 
-> In this context my interpretation would be that the TSC grants
-> permissions for write access to the Git tree but nothing more. And
-> further control related to the responsible use of Git is not defined and
-> IMHO never was. Phil has the required permissions to create a layer, so
-> why he would have to ask?
+> Well, first of all, when we had constrained resources at oe.org, we were 
+> trying to limit the number of commercial layers, assuming that the company 
+> behind such layer is well capable of providing hosting for their product. 
+> That would mean BSP layers from semis, like Intel, TI, Freescale etc. or 
+> commercial distro layers from OSVs, such as Mentor, Montavista etc.
+> We always welcomed community layers on oe.org, even BSP layers for platforms 
+> that had no official commercial support, but also distro, apps and other 
+> layers, as long as they had "supported by community" status.
 
-Phil also has the required permissions to delete trees, should he have to
-ask when doing that?
-The fact that you have permissions doesn't mean you may use them at will.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Okay,
 
-iD8DBQFOvO0UMkyGM64RGpERAqW0AJ9poKdlAZ7ZPjLjuIW6xgaILJp7sQCfU7jD
-Hrr3S6Mf1DsI7q/55C36J5s=
-=a4Rx
------END PGP SIGNATURE-----
+i don't mind hosting this myself (either gitorious or really myself). The
+reason to ask for hosting it on OE was making it easier to collaborate with OE
+members and making it more easy to find the repository.
 
+cheers
+	holger
+
+PS: sorry for reposting... postfix +subject and mailman don't know each
+other... thunderbird is of not much help either.
 
 
