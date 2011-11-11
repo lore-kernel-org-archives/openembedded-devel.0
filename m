@@ -1,32 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1ROlyR-0007dM-SU
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 08:56:32 +0100
-Received: by faat2 with SMTP id t2so3925576faa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ROnDT-0001c9-4S for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 10:16:07 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ROn7P-0000ko-87 for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 10:09:51 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Nov 2011 10:09:51 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 23:50:14 -0800 (PST)
-Received: by 10.223.7.20 with SMTP id b20mr17475049fab.21.1320997814175;
-	Thu, 10 Nov 2011 23:50:14 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id k26sm14601363fab.8.2011.11.10.23.50.12
-	(version=SSLv3 cipher=OTHER); Thu, 10 Nov 2011 23:50:13 -0800 (PST)
-Message-ID: <4EBCD3B3.3020202@dresearch-fe.de>
-Date: Fri, 11 Nov 2011 08:50:11 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
-To: Phil Blundell <philb@gnu.org>
-References: <4EB79325.80107@dresearch-fe.de>
-	<1320660702.22985.636.camel@phil-desktop>
-	<4EB7B383.10106@dresearch-fe.de>
-	<1320663454.22985.643.camel@phil-desktop>
-In-Reply-To: <1320663454.22985.643.camel@phil-desktop>
-Cc: Tim Riker <Tim@Rikers.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: default route handling of udhcpc
+	Fri, 11 Nov 2011 10:09:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 11 Nov 2011 10:09:37 +0100
+Message-ID: <j9iooh$q1p$1@dough.gmane.org>
+References: <4EBBF280.30301@freyther.de>
+	<1320945711.21488.21.camel@phil-desktop>
+	<j9hbqb$b8u$1@dough.gmane.org>
+	<1320959262.3080.11.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+In-Reply-To: <1320959262.3080.11.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 1.3.2
+Subject: Re: RFC Creation of a meta-telephony repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 07:56:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Nov 2011 09:16:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 07.11.2011 11:57, Phil Blundell wrote:
-> If it's the case that interfaces always do go down and then up again
-> when changing configuration then you're right, it would be a non-issue.
-> I guess maybe the best thing to do is to make sure that this is true and
-> then we could avoid the unconditional route squashing as you suggest.
->
->> On the contrary. As i mentioned above we really hit a problem with current setting.
->>
->> * Interface ethA (static config with default route) comes up and sets this default route.
->> * Interface ethB (in our case a USB-NIC for diagnostic purposes, DHCP with default route) comes up and *replaces* the former default route.
->>
->> scenario a)
->> * Interface ethB goes down and removes its default route.
->> * There does not exist a default route any longer. :(
->>
->> scenario b)
->> * Interface ethA tries to go down.
->> * This fails because removing the not-existing default route of config ethA fails. :(
->
-> That latter scenario sounds like a separate scripting bug: failing to
-> remove a route shouldn't prevent the interface going down.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It seems that we can't find a general solution for the default route handling for the moment. So i like to fix this bug at first. Can someone give a hint which scripts are involved here?
+Op 10-11-11 22:07, Phil Blundell schreef:
+> On Thu, 2011-11-10 at 21:22 +0100, Koen Kooi wrote:
+>> Op 10-11-11 18:21, Phil Blundell schreef:
+>>> On Thu, 2011-11-10 at 16:49 +0100, Holger Freyther wrote:
+>>>> could someone create a meta-telephony repository for me? In this 
+>>>> repository I would like to maintain OpenBSC, osmocomBB, TETRA,
+>>>> mISDN, LCR, Asterisk (and probably more in the future).
+>>> 
+>>> Sounds like a good idea.  I can set this up on oe.org if you want.
+>> 
+>> Infrastructure is still a TSC thing, so please don't go creating 
+>> repositories without consulting the TSC first.
+> 
+> I don't recall any general requirement that one needs to seek permission 
+> from the TSC before acting on what seems like essentially a minor 
+> operational matter.  When did this become the policy?
 
-Regards,
-Steffen
+Ever since the TSC has been formed. You never noticed it since the second
+TSC was so shockingly passive.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+iD8DBQFOvOZRMkyGM64RGpERArfYAJ93AgSYj1EOKOmfFDFEfTT2VQdqVgCff+ln
+FhA+5qkhzCOlrQbJZB3lADA=
+=5g6I
+-----END PGP SIGNATURE-----
+
 
 
