@@ -1,21 +1,26 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1ROs1b-0001Vc-Nk
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 15:24:22 +0100
-Received: (qmail 10893 invoked by uid 1003); 11 Nov 2011 14:17:53 -0000
-Received: from unknown (HELO ?192.168.1.111?) (philip@opensdr.com@96.240.172.5)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	11 Nov 2011 14:17:52 -0000
-Message-ID: <4EBD2E8F.6060400@balister.org>
-Date: Fri, 11 Nov 2011 09:17:51 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.23) Gecko/20110928 Fedora/3.1.15-1.fc14 Thunderbird/3.1.15
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1ROsXs-0002Kb-R7 for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 15:57:32 +0100
+Received: by wwp14 with SMTP id 14so1833861wwp.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Nov 2011 06:51:15 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-Subject: Guidelines for creating a layer
+Received: by 10.227.60.85 with SMTP id o21mr8446927wbh.0.1321023075178; Fri,
+	11 Nov 2011 06:51:15 -0800 (PST)
+Received: by 10.227.200.14 with HTTP; Fri, 11 Nov 2011 06:51:15 -0800 (PST)
+In-Reply-To: <6416131.BOns2L3oYb@helios>
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+	<1320996619.7415.4.camel@mattotaupa>
+	<833EEBB2-42FF-438F-A5F3-8B24DDD3964D@microbee-systems.com>
+	<6416131.BOns2L3oYb@helios>
+Date: Fri, 11 Nov 2011 08:51:15 -0600
+Message-ID: <CALJpqJzSkZ9g1kSqztyjHk6M-cjZX=Bj-5K06D0V7nHJpLesxQ@mail.gmail.com>
+From: David Thomas <david.thomas@microbee-systems.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,59 +34,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 14:24:22 -0000
+X-List-Received-Date: Fri, 11 Nov 2011 14:57:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Sorry to hack the subject and delete the earlier conversation, but Koen
-raises a good point here and I do not want it lost in the earlier
-discussion since I among others stopped reading the emails in detail.
+Returning the recipe to the original
 
-Is there a good set of guidelines on the web site (not buried in a git
-repo) to guide people making the decision when to create a new layer, as
-opposed to contributing to an existing layer?
-
-How do we make sure layers are well thought out and not people taking
-the path of least resistance?
-
-Philip
-
--------- Original Message --------
-Subject: Re: [oe] RFC Creation of a meta-telephony repository
-Date: Fri, 11 Nov 2011 11:45:52 +0100
-From: Koen Kooi <koen@dominion.thruhere.net>
-Reply-To: openembedded-devel@lists.openembedded.org
-To: openembedded-devel@lists.openembedded.org
+EVA-DEV:~/openembedded/recipes/matchbox-keyboard$ bitbake -e
+matchbox-keyboard | grep ^SRC_URI
+SRC_URI="svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-keyboard;proto=http
+           file://smallscreen-fontsize.patch;patch=1
+file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-available-layouts.patch;patch=1
+           file://3-Changes-to-improve-layout-rendering--especially-after-adding-support-for.patch;patch=1
+           file://4-Add-rendering-debug-logging.patch;patch=1
+  file://5-Add-support-for-loading-multiple-independent-layouts.patch;patch=1
+           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=1"
 
 
-Having worked with layers for quite a while now I go through the following
-list before creating one:
 
-Does it need to be a layer? -> no -> send patches to existing layers
-	|
-	yes
-	|
-Does it need to be a seperate repo? -> no -> send patches to existing repos
-	|
-	yes
-	|
-Is github/gitorious/etc good enough? -> no -> ...
-	|
-	yes
-	|
-Create repo + layer
-
-And after a I while re-evaluate it.
-
-regards,
-
-Koen
+svn: OPTIONS of
+'http://svn.o-hand.com/repos/matchbox/trunk/matchbox-keyboard': could
+not connect to server (http://svn.o-hand.com)
+NOTE: package matchbox-keyboard-0.0+svnr1910-r7: task Fetch failed:
+Unable to fetch URL
+svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-keyboard;proto=http
+from any source.: Failed
+ERROR: Function 'Fetch failed: Unable to fetch URL
+svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-keyboard;proto=http
+from any source.' failed
+ERROR: Task 5758
+(/home/twoods/openembedded/recipes/matchbox-keyboard/matchbox-keyboard_svn.bb,
+do_fetch) failed with exit code '1'
+ERROR: '/home/twoods/openembedded/recipes/matchbox-keyboard/matchbox-keyboard_svn.bb'
+failed
 
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I am building for the COMPULAB T-CM3530 using the kernel they post online.
+The build platform is Ubuntu 10 LTS
 
+
+
+On Fri, Nov 11, 2011 at 7:05 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Friday 11 November 2011 06:11:14 David Thomas wrote:
+>> Well I checked this and the files where in this location... Still no dice.
+>> The manual states it first searches to see if they exist then downloads. I
+>> see the opposite, it fails to contact the server and then fails.
+>
+> I don't think this is to do with those files (they are in the files subdir as
+> you point out, and they will be found there via FILESPATH; this is automatic).
+> If it's contacting the server and failing, it's the URI pointing to that
+> server or some other problem relating to that operation. You're not behind
+> some kind of firewall that blocks the git protocol are you?
+>
+> Also, from one of your earlier emails:
+>> SRC_URI = "git:///home/twoods/local;protocol=file;branch=master"
+>
+> I don't think this is what you want. Just use file://<full path> if you want to
+> point it to a local location. But I'm not sure that's what you really want
+> here either.
+>
+>> git://git.yoctoproject.org/matchbox-keyboard;protocol=git;file://smallscreen
+>> -fontsize.patch;patch=1
+>
+> That won't work - you have no space between the first URI and the next. Fix
+> that, and assuming your network allows access to remote git repos, that should
+> work.
+>
+> You can double check what SRC_URI bitbake is going to use by running this:
+>
+> bitbake -e matchbox-keyboard | grep ^SRC_URI
+>
+> Could you also remind me what DISTRO you are using?
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
+
+
+
+-- 
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803-1187
+256-489-6671 (Voice)
+256-426-2431 (Mobile)
+256-489-6673 (FAX)
+www.microbee-systems.com
+"Innovative Solutions for an Embedded World"
+
+This message is intended for the sole use of the addressee, and may
+contain information that is privileged, confidential and exempt from
+disclosure under applicable law. If you are not the addressee you are
+hereby notified that you may not use, copy, disclose, or distribute to
+anyone the message or any information contained in the message. If you
+have received this message in error, please immediately advise the
+sender by reply email and delete this message.
 
 
