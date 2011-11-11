@@ -1,28 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1ROlfH-0007Hw-CH for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 08:36:43 +0100
-Received: from f053039250.adsl.alicedsl.de ([78.53.39.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1ROlZN-0005FT-BQ for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 07:30:37 +0000
-Message-ID: <1320996619.7415.4.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Nov 2011 08:30:19 +0100
-In-Reply-To: <18E8B061-C5E9-48CE-93CF-94642D94339A@microbee-systems.com>
-References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
-	<1389840.j5gWQFZ9u1@helios>
-	<D1FB05D7-71E3-4B22-8A8B-594B38FE09D1@microbee-systems.com>
-	<CALJpqJx6SVr8TRPDaZFSvEWfs-uyjN_OMsrLxVfYo+RrLtCQcg@mail.gmail.com>
-	<1320966270.21414.8.camel@mattotaupa>
-	<18E8B061-C5E9-48CE-93CF-94642D94339A@microbee-systems.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
+	(envelope-from <sledz@dresearch-fe.de>) id 1ROlyR-0007dM-SU
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 08:56:32 +0100
+Received: by faat2 with SMTP id t2so3925576faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Nov 2011 23:50:14 -0800 (PST)
+Received: by 10.223.7.20 with SMTP id b20mr17475049fab.21.1320997814175;
+	Thu, 10 Nov 2011 23:50:14 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id k26sm14601363fab.8.2011.11.10.23.50.12
+	(version=SSLv3 cipher=OTHER); Thu, 10 Nov 2011 23:50:13 -0800 (PST)
+Message-ID: <4EBCD3B3.3020202@dresearch-fe.de>
+Date: Fri, 11 Nov 2011 08:50:11 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
+To: Phil Blundell <philb@gnu.org>
+References: <4EB79325.80107@dresearch-fe.de>
+	<1320660702.22985.636.camel@phil-desktop>
+	<4EB7B383.10106@dresearch-fe.de>
+	<1320663454.22985.643.camel@phil-desktop>
+In-Reply-To: <1320663454.22985.643.camel@phil-desktop>
+Cc: Tim Riker <Tim@Rikers.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: default route handling of udhcpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,103 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 07:36:43 -0000
-X-Groupsio-MsgNum: 35323
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-LL/7veWnxdGNtqEI+ZuC"
+X-List-Received-Date: Fri, 11 Nov 2011 07:56:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-LL/7veWnxdGNtqEI+ZuC
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 07.11.2011 11:57, Phil Blundell wrote:
+> If it's the case that interfaces always do go down and then up again
+> when changing configuration then you're right, it would be a non-issue.
+> I guess maybe the best thing to do is to make sure that this is true and
+> then we could avoid the unconditional route squashing as you suggest.
+>
+>> On the contrary. As i mentioned above we really hit a problem with current setting.
+>>
+>> * Interface ethA (static config with default route) comes up and sets this default route.
+>> * Interface ethB (in our case a USB-NIC for diagnostic purposes, DHCP with default route) comes up and *replaces* the former default route.
+>>
+>> scenario a)
+>> * Interface ethB goes down and removes its default route.
+>> * There does not exist a default route any longer. :(
+>>
+>> scenario b)
+>> * Interface ethA tries to go down.
+>> * This fails because removing the not-existing default route of config ethA fails. :(
+>
+> That latter scenario sounds like a separate scripting bug: failing to
+> remove a route shouldn't prevent the interface going down.
 
-Am Donnerstag, den 10.11.2011, 21:17 -0600 schrieb David Thomas:
-> On Nov 10, 2011, at 5:04 PM, Paul Menzel wrote:
->=20
-> > Am Donnerstag, den 10.11.2011, 16:11 -0600 schrieb David Thomas:
-> >> I have tried every possible way, 8 hours so far, to get this file to
-> >> process these patches. I got the patches, I have set up local
-> >> repositories, ad nasium and same response, unable to fetch from any
-> >> source.
-> >>=20
-> >> I have tired every combination, I have tried every possible link, url,
-> >>=20
-> >> SRC_URI =3D "git:///home/twoods/local;protocol=3Dfile;branch=3Dmaster"
-> >>=20
-> >> git://git.yoctoproject.org/matchbox-keyboard;protocol=3Dgit;file://sma=
-llscreen-fontsize.patch;patch=3D1
-> >>=20
-> >> and on and on. Every single project I have seen references the same
-> >>=20
-> >>=20
-> >> SRC_URI =3D "svn://svn.o-hand.com/repos/matchbox/trunk;module=3D${PN};=
-proto=3Dhttp \
-> >>=20
-> >> I am at the point of hurling this machine out a window. How could this
-> >> be so cryptic and difficult?
-> >>=20
-> >> Does anyone have a idea?
-> >>=20
-> >> DESCRIPTION =3D "Matchbox virtual keyboard for X11"
-> >> LICENSE =3D "GPL"
-> >> DEPENDS =3D "libfakekey expat libxft"
-> >> RCONFLICTS =3D matchbox-keyboard-inputmethod
-> >> RPROVIDES_${PN} =3D matchbox-keyboard-inputmethod
-> >> SECTION =3D "x11"
-> >> PV =3D "0.0+svnr${SRCPV}"
-> >> PR =3D"r7"
-> >>=20
-> >> SRC_URI =3D "https://git.gitorious.org/cm-t3530/cm-t3530.git;protocol=
-=3Dgit \
-> >>           file://smallscreen-fontsize.patch;patch=3D1 \
-> >>           file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-av=
-ailable-layouts.patch;patch=3D1\
-> >>           file://3-Changes-to-improve-layout-rendering--especially-aft=
-er-adding-support-for.patch;patch=3D1 \
-> >>           file://4-Add-rendering-debug-logging.patch;patch=3D1 \
-> >>           file://5-Add-support-for-loading-multiple-independent-layout=
-s.patch;patch=3D1 \
-> >>           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=3D=
-1 \
-> >>          "
-> >=20
-> > Where do you have these files stored?
->=20
->      $OEBASE/sources or /home/twoods/sources
+It seems that we can't find a general solution for the default route handling for the moment. So i like to fix this bug at first. Can someone give a hint which scripts are involved here?
 
-You have to put them in the recipe folder under `files`, which is
-deprecated, or cm-t3530-=E2=80=A6 like here.
+Regards,
+Steffen
 
-        recipes/vdr$ ls -r
-        vdr.inc
-        vdr_1.7.16.bb
-       =20
-        vdr-1.7.16:
-        0003-uclibc-Add-lintl-to-LIBS.patch  0001-Makefile-Pass-LDFLAGS.pat=
-ch
-        0002-tools.h-include-stdarg.h.patch
-
-This is even in the manual I think and you have plenty of examples in
-the repository already.
-
-[=E2=80=A6]
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
-Thanks,
-
-Paul
-
---=-LL/7veWnxdGNtqEI+ZuC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk68zwwACgkQPX1aK2wOHVjvFwCfeZ6XT2UzCrKlVQeRG1euFaAK
-PcUAn2cN90pY4CUfZd3dHzPBPpmaVBKi
-=0FMF
------END PGP SIGNATURE-----
-
---=-LL/7veWnxdGNtqEI+ZuC--
