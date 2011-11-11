@@ -1,37 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ROoie-00042o-7N for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 11:52:24 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ROoca-00088F-FK for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 11:46:08 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 11:46:08 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1ROpo2-0006CM-ST for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 13:02:03 +0100
+Received: by ywt2 with SMTP id 2so1237009ywt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 11:46:08 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 11 Nov 2011 11:45:52 +0100
-Message-ID: <j9iud0$16r$1@dough.gmane.org>
-References: <4EBBE67F.20300@freyther.de>
-	<j9gufv$35d$1@dough.gmane.org>	<20111110185732.GC20602@denix.org>
-	<j9hbvk$b8u$2@dough.gmane.org>
-	<20111110210133.GD20602@denix.org> <4EBCEE8B.10802@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
-In-Reply-To: <4EBCEE8B.10802@freyther.de>
-X-Enigmail-Version: 1.3.2
-Subject: Re: RFC Creation of a meta-telephony repository
+	Fri, 11 Nov 2011 03:55:44 -0800 (PST)
+Received: by 10.146.9.32 with SMTP id 32mr1353054yai.10.1321012544432;
+	Fri, 11 Nov 2011 03:55:44 -0800 (PST)
+Received: from [192.168.0.154] ([24.214.175.85])
+	by mx.google.com with ESMTPS id m29sm16679707yhi.20.2011.11.11.03.55.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 11 Nov 2011 03:55:43 -0800 (PST)
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+	<1389840.j5gWQFZ9u1@helios>
+	<D1FB05D7-71E3-4B22-8A8B-594B38FE09D1@microbee-systems.com>
+	<CALJpqJx6SVr8TRPDaZFSvEWfs-uyjN_OMsrLxVfYo+RrLtCQcg@mail.gmail.com>
+	<1320966270.21414.8.camel@mattotaupa>
+	<18E8B061-C5E9-48CE-93CF-94642D94339A@microbee-systems.com>
+	<1320996619.7415.4.camel@mattotaupa>
+In-Reply-To: <1320996619.7415.4.camel@mattotaupa>
+Mime-Version: 1.0 (1.0)
+Message-Id: <C9C59BE1-E3ED-4B2A-B287-8685C1B105B3@microbee-systems.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: iPad Mail (9A334)
+From: Dave Thomas <david.thomas@microbee-systems.com>
+Date: Fri, 11 Nov 2011 05:55:43 -0600
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,67 +43,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 10:52:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Nov 2011 12:02:03 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Thanks, I am new to oe and this is not entirely intuitive to me yet... I wil=
+l try this.
 
-Op 11-11-11 10:44, Holger Freyther schreef:
-> On 11/10/2011 10:01 PM, Denys Dmytriyenko wrote:
-> 
->>> I haven't seen enough reason to place the burden for this layer on
->>> the OE admin team instead of doing 'self' hosting on
->>> gitorious/github/etc/
->> 
->> Well, first of all, when we had constrained resources at oe.org, we
->> were trying to limit the number of commercial layers, assuming that the
->> company behind such layer is well capable of providing hosting for
->> their product. That would mean BSP layers from semis, like Intel, TI,
->> Freescale etc. or commercial distro layers from OSVs, such as Mentor,
->> Montavista etc. We always welcomed community layers on oe.org, even BSP
->> layers for platforms that had no official commercial support, but also
->> distro, apps and other layers, as long as they had "supported by
->> community" status.
-> 
-> Okay,
-> 
-> i don't mind hosting this myself (either gitorious or really myself).
-> The reason to ask for hosting it on OE was making it easier to
-> collaborate with OE members and making it more easy to find the
-> repository.
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803
+256-489-6671
 
-Having worked with layers for quite a while now I go through the following
-list before creating one:
+=46rom my iPad
 
-Does it need to be a layer? -> no -> send patches to existing layers
-	|
-	yes
-	|
-Does it need to be a seperate repo? -> no -> send patches to existing repos
-	|
-	yes
-	|
-Is github/gitorious/etc good enough? -> no -> ...
-	|
-	yes
-	|
-Create repo + layer
+On Nov 11, 2011, at 1:30 AM, Paul Menzel <paulepanter@users.sourceforge.net>=
+ wrote:
 
-And after a I while re-evaluate it.
+> Am Donnerstag, den 10.11.2011, 21:17 -0600 schrieb David Thomas:
+>> On Nov 10, 2011, at 5:04 PM, Paul Menzel wrote:
+>>=20
+>>> Am Donnerstag, den 10.11.2011, 16:11 -0600 schrieb David Thomas:
+>>>> I have tried every possible way, 8 hours so far, to get this file to
+>>>> process these patches. I got the patches, I have set up local
+>>>> repositories, ad nasium and same response, unable to fetch from any
+>>>> source.
+>>>>=20
+>>>> I have tired every combination, I have tried every possible link, url,
+>>>>=20
+>>>> SRC_URI =3D "git:///home/twoods/local;protocol=3Dfile;branch=3Dmaster"
+>>>>=20
+>>>> git://git.yoctoproject.org/matchbox-keyboard;protocol=3Dgit;file://smal=
+lscreen-fontsize.patch;patch=3D1
+>>>>=20
+>>>> and on and on. Every single project I have seen references the same
+>>>>=20
+>>>>=20
+>>>> SRC_URI =3D "svn://svn.o-hand.com/repos/matchbox/trunk;module=3D${PN};p=
+roto=3Dhttp \
+>>>>=20
+>>>> I am at the point of hurling this machine out a window. How could this
+>>>> be so cryptic and difficult?
+>>>>=20
+>>>> Does anyone have a idea?
+>>>>=20
+>>>> DESCRIPTION =3D "Matchbox virtual keyboard for X11"
+>>>> LICENSE =3D "GPL"
+>>>> DEPENDS =3D "libfakekey expat libxft"
+>>>> RCONFLICTS =3D matchbox-keyboard-inputmethod
+>>>> RPROVIDES_${PN} =3D matchbox-keyboard-inputmethod
+>>>> SECTION =3D "x11"
+>>>> PV =3D "0.0+svnr${SRCPV}"
+>>>> PR =3D"r7"
+>>>>=20
+>>>> SRC_URI =3D "https://git.gitorious.org/cm-t3530/cm-t3530.git;protocol=3D=
+git \
+>>>>          file://smallscreen-fontsize.patch;patch=3D1 \
+>>>>          file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-avai=
+lable-layouts.patch;patch=3D1\
+>>>>          file://3-Changes-to-improve-layout-rendering--especially-after=
+-adding-support-for.patch;patch=3D1 \
+>>>>          file://4-Add-rendering-debug-logging.patch;patch=3D1 \
+>>>>          file://5-Add-support-for-loading-multiple-independent-layouts.=
+patch;patch=3D1 \
+>>>>          file://6-Add-layout-switch-key-to-all-layouts.patch;patch=3D1 \=
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFOvPzgMkyGM64RGpERAjNiAJ4114dbMzlf07Jsa4IeGGmhxX1n2QCfchcF
-PmSc2wSo80JoBXbPHZo5PgM=
-=ulrG
------END PGP SIGNATURE-----
-
+>>>>         "
+>>>=20
+>>> Where do you have these files stored?
+>>=20
+>>     $OEBASE/sources or /home/twoods/sources
+>=20
+> You have to put them in the recipe folder under `files`, which is
+> deprecated, or cm-t3530-=E2=80=A6 like here.
+>=20
+>        recipes/vdr$ ls -r
+>        vdr.inc
+>        vdr_1.7.16.bb
+>=20
+>        vdr-1.7.16:
+>        0003-uclibc-Add-lintl-to-LIBS.patch  0001-Makefile-Pass-LDFLAGS.pat=
+ch
+>        0002-tools.h-include-stdarg.h.patch
+>=20
+> This is even in the manual I think and you have plenty of examples in
+> the repository already.
+>=20
+> [=E2=80=A6]
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
