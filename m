@@ -1,30 +1,28 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.thomas@microbee-systems.com>)
-	id 1ROhid-0006UB-1w for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 04:23:56 +0100
-Received: by gyh4 with SMTP id 4so2473122gyh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2011 19:17:37 -0800 (PST)
-Received: by 10.101.196.32 with SMTP id y32mr4469311anp.120.1320981456495;
-	Thu, 10 Nov 2011 19:17:36 -0800 (PST)
-Received: from [192.168.0.225] ([24.214.175.85])
-	by mx.google.com with ESMTPS id c10sm15079288yhj.2.2011.11.10.19.17.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 10 Nov 2011 19:17:35 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: David Thomas <david.thomas@microbee-systems.com>
-In-Reply-To: <1320966270.21414.8.camel@mattotaupa>
-Date: Thu, 10 Nov 2011 21:17:51 -0600
-Message-Id: <18E8B061-C5E9-48CE-93CF-94642D94339A@microbee-systems.com>
-References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
-	<1389840.j5gWQFZ9u1@helios>
-	<D1FB05D7-71E3-4B22-8A8B-594B38FE09D1@microbee-systems.com>
-	<CALJpqJx6SVr8TRPDaZFSvEWfs-uyjN_OMsrLxVfYo+RrLtCQcg@mail.gmail.com>
-	<1320966270.21414.8.camel@mattotaupa>
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1ROl14-0006Au-F1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Nov 2011 07:55:10 +0100
+Received: (qmail invoked by alias); 11 Nov 2011 06:48:52 -0000
+Received: from p5B0A2B0A.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.43.10]
+	by mail.gmx.net (mp021) with SMTP; 11 Nov 2011 07:48:52 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19plXRXQ1xpTfVA9elyDPZPzVzTuV8rjsHknbYw4S
+	Lrnkyng/Yp2J78
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1251.1)
-Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
+Date: Fri, 11 Nov 2011 07:53:50 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1320929044-13077-1-git-send-email-koen@dominion.thruhere.net>
+	<A8FB2C52-B689-46AF-9D24-D1EEBA2B19CF@dominion.thruhere.net>
+	<201111101956.09638.schnitzeltony@gmx.de>
+In-Reply-To: <201111101956.09638.schnitzeltony@gmx.de>
+MIME-Version: 1.0
+Message-Id: <201111110753.50771.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: xfce4-dev-tools (was [OE-core] [PATCH] hicolor-icon-theme 0.12: add BBCLASSEXTEND=native for xfce tools)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,89 +36,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 03:23:56 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 11 Nov 2011 06:55:10 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-
-On Nov 10, 2011, at 5:04 PM, Paul Menzel wrote:
-
-> Am Donnerstag, den 10.11.2011, 16:11 -0600 schrieb David Thomas:
->> I have tried every possible way, 8 hours so far, to get this file to
->> process these patches. I got the patches, I have set up local
->> repositories, ad nasium and same response, unable to fetch from any
->> source.
->>=20
->> I have tired every combination, I have tried every possible link, =
-url,
->>=20
->> SRC_URI =3D "git:///home/twoods/local;protocol=3Dfile;branch=3Dmaster"
->>=20
->> =
-git://git.yoctoproject.org/matchbox-keyboard;protocol=3Dgit;file://smallsc=
-reen-fontsize.patch;patch=3D1
->>=20
->> and on and on. Every single project I have seen references the same
->>=20
->>=20
->> SRC_URI =3D =
-"svn://svn.o-hand.com/repos/matchbox/trunk;module=3D${PN};proto=3Dhttp \
->>=20
->> I am at the point of hurling this machine out a window. How could =
-this
->> be so cryptic and difficult?
->>=20
->> Does anyone have a idea?
->>=20
->> DESCRIPTION =3D "Matchbox virtual keyboard for X11"
->> LICENSE =3D "GPL"
->> DEPENDS =3D "libfakekey expat libxft"
->> RCONFLICTS =3D matchbox-keyboard-inputmethod
->> RPROVIDES_${PN} =3D matchbox-keyboard-inputmethod
->> SECTION =3D "x11"
->> PV =3D "0.0+svnr${SRCPV}"
->> PR =3D"r7"
->>=20
->> SRC_URI =3D =
-"https://git.gitorious.org/cm-t3530/cm-t3530.git;protocol=3Dgit \
->>           file://smallscreen-fontsize.patch;patch=3D1 \
->>           =
-file://2-Add-new-modifier--layout--Used-to-cycle-thru-all-available-layout=
-s.patch;patch=3D1\
->>           =
-file://3-Changes-to-improve-layout-rendering--especially-after-adding-supp=
-ort-for.patch;patch=3D1 \
->>           file://4-Add-rendering-debug-logging.patch;patch=3D1 \
->>           =
-file://5-Add-support-for-loading-multiple-independent-layouts.patch;patch=3D=
-1 \
->>           file://6-Add-layout-switch-key-to-all-layouts.patch;patch=3D1=
- \
->>          "
+On Thursday, November 10, 2011 07:56:09 PM Andreas M=FCller wrote:
+> On Thursday, November 10, 2011 02:38:33 PM you wrote:
+> > Op 10 nov. 2011, om 14:20 heeft Richard Purdie het volgende geschreven:
+> > > On Thu, 2011-11-10 at 13:44 +0100, Koen Kooi wrote:
+> > >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> > >> ---
+> > >> .../hicolor-icon-theme/hicolor-icon-theme_0.12.bb  |    2 ++
+> > >> 1 files changed, 2 insertions(+), 0 deletions(-)
+> > >>=20
+> > >> diff --git
+> > >> a/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12.bb
+> > >> b/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12.bb
+> > >> index 759c9d8..aeb89c9 100644
+> > >> --- a/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12.=
+bb
+> > >> +++ b/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12.=
+bb
+> > >> @@ -5,6 +5,8 @@ BUGTRACKER =3D "https://bugs.freedesktop.org/"
+> > >> LICENSE =3D "GPLv2"
+> > >> LIC_FILES_CHKSUM =3D
+> > >> "file://COPYING;md5=3Df08a446809913fc9b3c718f0eaea0426"
+> > >>=20
+> > >> +BBCLASSEXTEND =3D "native"
+> > >> +
+> > >> SECTION =3D "unknown"
+> > >> inherit gnome allarch
+> > >=20
+> > > This is interesting dilemma since this is an allarch recipe. What iss=
+ue
+> > > were you seeing to need this? Could we add the allarch sysroot
+> > > directory to PATH to resolve this instead? We could add a PROVIDES
+> > > "hicolor-icon-theme-native" too...
+> >=20
+> > XFCE needs some native tools to run, one of which has hicolor-icon-theme
+> > in its depends. Without this patch you can't build xfce. Andreas might
+> > know more about this.
 >=20
-> Where do you have these files stored?
-
-     $OEBASE/sources or /home/twoods/sources
+> Up to this mail I did not notice any problem but the bad guy seems
+> xfce4-dev- tools: Few xfce recipes depend on that and it contains only:
 >=20
->> S =3D "${WORKDIR}/${PN}"
->>=20
->> inherit autotools pkgconfig gettext
->>=20
->> EXTRA_OECONF =3D "--disable-cairo"
->>=20
->> FILES_${PN} =3D "${bindir}/* \
->> 	       ${datadir}/applications \
->> 	       ${datadir}/pixmaps \
->> 	       ${datadir}/matchbox-keyboard"
+> - m4 autoconf extensions
+> - two shell scripts (don't know what they are for...)
+After test build fails for xfce-git recipes I know what the scripts are for=
+:=20
+some extension, the shipped autogen scripts insist on. So the native suppor=
+t for=20
+xfce4-dev-tools was not that bad I think. I will break the dependency to =20
+hicolor- icon-theme and have a test build with that...
 >=20
+> By inheriting xfce, it inherits gtk-icon-cache which seems to depend on
+> hicolor- icon-theme.
 >=20
-> Thanks,
+> I don't remember what exactly my idea was, when adding native support on
+> that.
 >=20
-> Paul
+> Will make a change, build test it on fresh build dir and send a patch on
+> meta-oe mailing list.
+>=20
+> Apart from bad practice on xfce4-dev-tools: I wouldn't have expected
+> trouble when a native recipe depends on an allarch one.
+>=20
+> Andreas
+>=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
 
