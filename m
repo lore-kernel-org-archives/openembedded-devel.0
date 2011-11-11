@@ -1,20 +1,16 @@
-Received: from smtp203.alice.it ([82.57.200.99])
+Received: from ausc60ps301.us.dell.com ([143.166.148.206])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1ROvb9-00032w-0S
+	(envelope-from <michael_e_brown@dell.com>) id 1ROyYk-0008GD-JM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 19:13:07 +0100
-Received: from trisquel.localnet (82.48.111.246) by smtp203.alice.it
-	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4E6FEAFE0132AFE6; Fri, 11 Nov 2011 19:06:48 +0100
-From: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
+	Fri, 11 Nov 2011 22:22:50 +0100
+X-Loopcount0: from 10.9.160.253
+From: michael_e_brown@dell.com
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Nov 2011 19:06:47 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-12-generic; KDE/4.6.5; x86_64; ; )
-References: <4EBBF280.30301@freyther.de>
-In-Reply-To: <4EBBF280.30301@freyther.de>
-MIME-Version: 1.0
-Message-Id: <201111111906.47889.GNUtoo@no-log.org>
-Subject: Re: RFC Creation of a meta-telephony repository
+Date: Fri, 11 Nov 2011 15:14:41 -0600
+Message-Id: <1321046081-26585-1-git-send-email-michael_e_brown@dell.com>
+X-Mailer: git-send-email 1.7.6.4
+Cc: Michael Brown <Michael_E_Brown@dell.com>
+Subject: [PATCH] gcc-4.6: fix toolchain build for SH4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,17 +24,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 18:13:07 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Nov 2011 21:22:50 -0000
 
->could someone create a meta-telephony repository for me? In this repository I
->would like to maintain OpenBSC, osmocomBB, TETRA, mISDN, LCR, Asterisk (and
->probably more in the future).
-I already did some osmocomBB recipes in meta-smartphone.
-(only the necessary recipes to load osmocomBB on the freerunner baseband)
+From: Michael Brown <Michael_E_Brown@Dell.com>
 
-Denis.
+Signed-off-by: Michael Brown <Michael_E_Brown@dell.com>
+
+Port patch from base openembedded. Since 4.6 already has fixes for config.gcc,
+the fix only requires a one line change to gcc-cross4.inc.
+
+The patch was imported from the OpenEmbedded git server
+(git://git.openembedded.org/openembedded) as of commit id
+3aa8afe97e9cf1340feb9c4442a6ed88b7e32c96.
+
+gcc-4.5: Fix toolchain builds for SH4/SH3
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta/recipes-devtools/gcc/gcc-cross4.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/meta/recipes-devtools/gcc/gcc-cross4.inc b/meta/recipes-devtools/gcc/gcc-cross4.inc
+index ea20a24..4a20818 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross4.inc
++++ b/meta/recipes-devtools/gcc/gcc-cross4.inc
+@@ -1 +1,3 @@
+ require gcc-cross.inc
++
++EXTRA_OECONF_append_sh4 = " --with-multilib-list= --enable-incomplete-targets "
+-- 
+1.7.6.4
+
 
 
