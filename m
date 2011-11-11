@@ -1,46 +1,27 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1ROtok-0004xb-Hd
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1ROtqn-00058v-7u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Nov 2011 17:19:02 +0100
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1ROtig-0006Ay-Rs>; Fri, 11 Nov 2011 17:12:46 +0100
-Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
-	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1ROtig-0006lU-Pn>; Fri, 11 Nov 2011 17:12:46 +0100
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by mail.imp.fu-berlin.de with esmtps (Exim 4.72) id 1ROtiR-0002Yh-HU
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 17:12:43 +0100
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1ROtiM-0000UE-Dk
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Nov 2011 17:12:26 +0100
-Date: Fri, 11 Nov 2011 17:12:26 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111111161226.GA31507@mi.fu-berlin.de>
-References: <CAFZPMobAtbxhHfAae1eY6ykB=z=uU36SCn5zsxcWbJMAmrTxVg@mail.gmail.com>
+	Fri, 11 Nov 2011 17:21:09 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 11 Nov 2011 08:14:50 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.69,495,1315206000"; d="scan'208";a="73623877"
+Received: from unknown (HELO helios.localnet) ([10.252.121.143])
+	by azsmga001.ch.intel.com with ESMTP; 11 Nov 2011 08:14:49 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: David Thomas <david.thomas@microbee-systems.com>
+Date: Fri, 11 Nov 2011 16:14:48 +0000
+Message-ID: <3922254.LEV2HJuVaL@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.2 (Linux/3.0.0-12-generic-pae; KDE/4.7.2; i686; ; )
+In-Reply-To: <CALJpqJwC460+sy7PBVt+q6uVqYKs+XpgqfNombbSZaH8U9SCfw@mail.gmail.com>
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+	<45554938.bbIM0h9DI3@helios>
+	<CALJpqJwC460+sy7PBVt+q6uVqYKs+XpgqfNombbSZaH8U9SCfw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAFZPMobAtbxhHfAae1eY6ykB=z=uU36SCn5zsxcWbJMAmrTxVg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Remote-IP: 160.45.42.84
-X-Spam_Score: -4.1
-X-exim-Spam_Score_Int: -40
-X-exim-Spam_Bar: ----
-X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-	* -1.2 RP_MATCHES_RCVD Envelope sender domain matches handover relay
-	domain * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-X-Originating-IP: 160.45.117.149
-Subject: Re: trying to compile recent gpsd (one with scons) with OE
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,30 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 16:19:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Nov 2011 16:21:09 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, Nov 11, 2011 at 04:14:04PM +0300, Sergey Lapin wrote:
-> -L/home/build1/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux/usr/lib
-> -lm -mthumb-interwork -mno-thumb
-> --sysroot=/home/build1/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/sysroots/crux
-> -o driver_garmin.os -c -O2 -pipe -g -feliminate-unused-debug-types -O2
-> -fPIC -I/usr/include/libusb-1.0 driver_garmin.c
-           ^^^^^^^^^^^^^^^^^
-Host includes used, wonder why gcc do not choke anymore.
+On Friday 11 November 2011 10:04:11 you wrote:
+>  bitbake -e matchbox-native | grep ^PREMIRRORS
+> 
+> Returned nothing...
 
-> | driver_garmin.c:95:20: fatal error: libusb.h: No such file or directory
-> | compilation terminated.
-> | scons: *** [driver_garmin.os] Error 1
-> | scons: building terminated because of errors.
-> | + oefatal 'scons build execution failed.'
-> | /home/build1/slave/angstrom_build/build/build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/gpsd-git-r18.8/temp/run.do_compile.20570:
-> line 104: oefatal: command not found
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-looks like scons class needs to changed, but do not know at the moment how it could be done
-or what replaces the oe(msg) commands.
+Are you using DISTRO = "angstrom-2008.1" with the master branch of OE by any 
+chance?
 
-Bye Henning
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
