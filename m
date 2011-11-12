@@ -1,30 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.thomas@microbee-systems.com>)
-	id 1RPFVU-0008Vh-NH for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Nov 2011 16:28:36 +0100
-Received: by ggnh4 with SMTP id h4so1176044ggn.6
+	(envelope-from <tom.rini@gmail.com>) id 1RPL6u-0007CX-4e
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Nov 2011 22:27:36 +0100
+Received: by qadb10 with SMTP id b10so555936qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Nov 2011 07:22:17 -0800 (PST)
-Received: by 10.236.115.40 with SMTP id d28mr3690039yhh.37.1321111336540;
-	Sat, 12 Nov 2011 07:22:16 -0800 (PST)
-Received: from [192.168.0.225] ([24.214.175.85])
-	by mx.google.com with ESMTPS id d2sm20078322anm.6.2011.11.12.07.22.14
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 12 Nov 2011 07:22:15 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: David Thomas <david.thomas@microbee-systems.com>
-In-Reply-To: <2222512.tIAhHCihnJ@helios>
-Date: Sat, 12 Nov 2011 09:22:12 -0600
-Message-Id: <09B58F24-AD81-46C9-86CA-C92284C7BBC4@microbee-systems.com>
-References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
-	<2307753.9BlijQWh4O@helios>
-	<CALJpqJw6MvmkxxDhJ_amJRFep3yYoTjRogPD4GQ1HG2RpQmvQQ@mail.gmail.com>
-	<2222512.tIAhHCihnJ@helios>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
+	Sat, 12 Nov 2011 13:21:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=y7oq154gwPmg05XREhN5lfnbm7TVIx2tLx8EI/41VN4=;
+	b=vQUXBbHu0I8QlUP2EVjr4pqOSZH9SWiro7QpCh2/W/Rr1H5NkRHJ6w3lUgQopbKepb
+	YdaiY7w+jnkXEHlJBMfae1AKa9XJWZadhoHUo6Hezsv8JDlFw7iiUdMD/sLgCxj7qjXv
+	5xQcc1C+y+253VPDgT75gRNgr18J2t1mNZAv4=
+MIME-Version: 1.0
+Received: by 10.229.251.73 with SMTP id mr9mr2546374qcb.264.1321132876360;
+	Sat, 12 Nov 2011 13:21:16 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Sat, 12 Nov 2011 13:21:16 -0800 (PST)
+In-Reply-To: <1321093682.3557.14.camel@mattotaupa>
+References: <4EBC2FEF.5020405@kernelconcepts.de> <j9hc2l$b8u$3@dough.gmane.org>
+	<4EBC39EB.2060004@kernelconcepts.de>
+	<CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
+	<1321093682.3557.14.camel@mattotaupa>
+Date: Sat, 12 Nov 2011 14:21:16 -0700
+Message-ID: <CA+M6bX=QSUAf8yR4d2UdQx3nTJz5eftFqY-4oPBtJBeW8=z6nQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: RFC: Clean up omap3.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,52 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2011 15:28:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 12 Nov 2011 21:27:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I got the Angstrom scripts working with a cm-t35.conf file I found on =
-the net. While it remains to bee seen if it runs and functions the same =
-as the current Compulab build it is a big step forward. I am going to do =
-a writeup to Compulab to change their Wiki as it was a painful dead end =
-path... Wish I had tried this approach sooner but I had reservations =
-about the CM-T35 having hardware specific differences...
+On Sat, Nov 12, 2011 at 3:28 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Am Donnerstag, den 10.11.2011, 14:55 -0700 schrieb Tom Rini:
+>> On Thu, Nov 10, 2011 at 1:54 PM, Florian Boor wrote:
+>
+>> > Am 10.11.2011 21:27, schrieb Koen Kooi:
+>> >> Wrong. You can do the following in your machine.conf:
+>> >>
+>> >> require omap3.inc
+>> >>
+>> >> EXTRA_IMAGEDEPENDS = "whatever"
+>> >
+>> > this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could have been
+>> > appended everywhere and this intrusive override might break quite a lot.
+>> >
+>> >> In OE classic, no. In meta-ti the cleanup is already underway.
+>> >
+>> > I do not care bout meta-ti, its is broken in OE classic.
+>> >
+>> >
+>> > Removing this hardcoded dependency would not break anything. Only the board
+>> > maintainers who want to get it built automatically would have to add it.
+>>
+>> But, that's most of them today.
+>
+> Sorry Tom, could you try harder to explain the reason, please? How many
+> boards are there in the upstream OE repository depending on this and
+> would have to be changed? I think Florian could commit that with his
+> clean up easily.
 
-If this works as I now surmize it is a pretty interesting way to build =
-kernels for a number of platforms. =20
+With respect to boards that use omap3.inc today, nearly all of them
+use x-load as the between ROM and U-Boot program (I suspect
+conf/machine/include/palmpre.inc is working around this issue by
+setting a fake XLOAD_MACHINE).  So instead of having a few machines
+say "now let me not build x-load" we have lots of machines saying "I
+should build x-load too".
 
-Thanks for everything
+> On the other side developers opposing this clean up could at least offer
+> to add a comment to the file with a proposed work around for people
+> hitting this issue. Still there should be a good reason. Like all your
+> internal TI projects depend on this for example.
 
-Dave
+Again, oe.dev isn't a really great place to do new work, oe-core+stuff
+is, and as Koen said, in meta-ti this is being cleaned up (in part
+because TI parts now don't use x-load as the middle step but a build
+of U-Boot called SPL as the middle step).  Adding a comment to
+omap3.inc with what Koen said about opting out would make sense, yes.
 
-On Nov 11, 2011, at 11:28 AM, Paul Eggleton wrote:
-
-> On Friday 11 November 2011 11:06:29 you wrote:
->> Dumb question. Can you point me to this distro with cm-t35 machines
->> such that I can get clone? I looked at the Angstrom site.
->=20
-> Well, the Angstrom-prescribed method is to use the setup scripts - =
-it's=20
-> documented in the "Developers" section of the website. You don't have =
-to use=20
-> this method however - just switch over to the master / =
-2011.3-maintenance=20
-> branch of OE and you should be able to run your build.
->=20
->> If I have Angstrom build me a kernel does it provide me with the
->> local.conf, etc?=20
->=20
-> If you use the scripts it does, yes. Otherwise you should be able to =
-keep your=20
-> current configuration.
->=20
-> Cheers,
-> Paul
->=20
-> --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
-
+-- 
+Tom
 
 
