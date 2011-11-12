@@ -1,26 +1,25 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RP0fx-0003JR-E1
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Nov 2011 00:38:25 +0100
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LUI009ILS12JH52@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	11 Nov 2011 17:31:56 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E346614AF5D; Fri,
-	11 Nov 2011 18:31:49 -0500 (EST)
-Date: Fri, 11 Nov 2011 18:31:49 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RPAuj-0007Q1-Lb for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Nov 2011 11:34:21 +0100
+Received: from f053044109.adsl.alicedsl.de ([78.53.44.109]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RPAop-0003lk-Nm for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Nov 2011 10:28:15 +0000
+Message-ID: <1321093682.3557.14.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20111111233149.GF20602@denix.org>
-References: <1321046081-26585-1-git-send-email-michael_e_brown@dell.com>
-MIME-version: 1.0
-In-reply-to: <1321046081-26585-1-git-send-email-michael_e_brown@dell.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: Michael Brown <Michael_E_Brown@dell.com>
-Subject: Re: [PATCH] gcc-4.6: fix toolchain build for SH4
+Date: Sat, 12 Nov 2011 11:28:02 +0100
+In-Reply-To: <CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
+References: <4EBC2FEF.5020405@kernelconcepts.de>
+	<j9hc2l$b8u$3@dough.gmane.org> <4EBC39EB.2060004@kernelconcepts.de>
+	<CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: RFC: Clean up omap3.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +33,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 23:38:25 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 12 Nov 2011 10:34:21 -0000
+X-Groupsio-MsgNum: 35361
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-gPJ10Pzc0fu0DaI85xfx"
 
-On Fri, Nov 11, 2011 at 03:14:41PM -0600, michael_e_brown@dell.com wrote:
-> From: Michael Brown <Michael_E_Brown@Dell.com>
-> 
-> Signed-off-by: Michael Brown <Michael_E_Brown@dell.com>
+--=-gPJ10Pzc0fu0DaI85xfx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is a wrong mailing list for this patch - it needs to go to 
-openembedded-core instead.
+Am Donnerstag, den 10.11.2011, 14:55 -0700 schrieb Tom Rini:
+> On Thu, Nov 10, 2011 at 1:54 PM, Florian Boor wrote:
 
--- 
-Denys
+> > Am 10.11.2011 21:27, schrieb Koen Kooi:
+> >> Wrong. You can do the following in your machine.conf:
+> >>
+> >> require omap3.inc
+> >>
+> >> EXTRA_IMAGEDEPENDS =3D "whatever"
+> >
+> > this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could =
+have been
+> > appended everywhere and this intrusive override might break quite a lot=
+.
+> >
+> >> In OE classic, no. In meta-ti the cleanup is already underway.
+> >
+> > I do not care bout meta-ti, its is broken in OE classic.
+> >
+> >
+> > Removing this hardcoded dependency would not break anything. Only the b=
+oard
+> > maintainers who want to get it built automatically would have to add it=
+.
+>=20
+> But, that's most of them today.
 
+Sorry Tom, could you try harder to explain the reason, please? How many
+boards are there in the upstream OE repository depending on this and
+would have to be changed? I think Florian could commit that with his
+clean up easily.
 
-> Port patch from base openembedded. Since 4.6 already has fixes for config.gcc,
-> the fix only requires a one line change to gcc-cross4.inc.
-> 
-> The patch was imported from the OpenEmbedded git server
-> (git://git.openembedded.org/openembedded) as of commit id
-> 3aa8afe97e9cf1340feb9c4442a6ed88b7e32c96.
-> 
-> gcc-4.5: Fix toolchain builds for SH4/SH3
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta/recipes-devtools/gcc/gcc-cross4.inc |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
-> 
-> diff --git a/meta/recipes-devtools/gcc/gcc-cross4.inc b/meta/recipes-devtools/gcc/gcc-cross4.inc
-> index ea20a24..4a20818 100644
-> --- a/meta/recipes-devtools/gcc/gcc-cross4.inc
-> +++ b/meta/recipes-devtools/gcc/gcc-cross4.inc
-> @@ -1 +1,3 @@
->  require gcc-cross.inc
-> +
-> +EXTRA_OECONF_append_sh4 = " --with-multilib-list= --enable-incomplete-targets "
-> -- 
-> 1.7.6.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On the other side developers opposing this clean up could at least offer
+to add a comment to the file with a proposed work around for people
+hitting this issue. Still there should be a good reason. Like all your
+internal TI projects depend on this for example.
 
 
+Thanks,
+
+Paul
+
+--=-gPJ10Pzc0fu0DaI85xfx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk6+SjIACgkQPX1aK2wOHVgXegCgiTEx5XMuZkfvFQcjBWVN1Zac
+tzwAn3JKOkZooW9zdBgOgEuW1YDCMFbO
+=ROtg
+-----END PGP SIGNATURE-----
+
+--=-gPJ10Pzc0fu0DaI85xfx--
