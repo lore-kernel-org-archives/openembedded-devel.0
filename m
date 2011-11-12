@@ -1,25 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RPAuj-0007Q1-Lb for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Nov 2011 11:34:21 +0100
-Received: from f053044109.adsl.alicedsl.de ([78.53.44.109]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RPAop-0003lk-Nm for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Nov 2011 10:28:15 +0000
-Message-ID: <1321093682.3557.14.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Nov 2011 11:28:02 +0100
-In-Reply-To: <CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
-References: <4EBC2FEF.5020405@kernelconcepts.de>
-	<j9hc2l$b8u$3@dough.gmane.org> <4EBC39EB.2060004@kernelconcepts.de>
-	<CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: RFC: Clean up omap3.inc
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1RPFVU-0008Vh-NH for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Nov 2011 16:28:36 +0100
+Received: by ggnh4 with SMTP id h4so1176044ggn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Nov 2011 07:22:17 -0800 (PST)
+Received: by 10.236.115.40 with SMTP id d28mr3690039yhh.37.1321111336540;
+	Sat, 12 Nov 2011 07:22:16 -0800 (PST)
+Received: from [192.168.0.225] ([24.214.175.85])
+	by mx.google.com with ESMTPS id d2sm20078322anm.6.2011.11.12.07.22.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 12 Nov 2011 07:22:15 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: David Thomas <david.thomas@microbee-systems.com>
+In-Reply-To: <2222512.tIAhHCihnJ@helios>
+Date: Sat, 12 Nov 2011 09:22:12 -0600
+Message-Id: <09B58F24-AD81-46C9-86CA-C92284C7BBC4@microbee-systems.com>
+References: <CALJpqJwD0FPCUiD1FRCKR4e=ZTRJb-Lko1nBAC-gLPp057EKpg@mail.gmail.com>
+	<2307753.9BlijQWh4O@helios>
+	<CALJpqJw6MvmkxxDhJ_amJRFep3yYoTjRogPD4GQ1HG2RpQmvQQ@mail.gmail.com>
+	<2222512.tIAhHCihnJ@helios>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,69 +38,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2011 10:34:21 -0000
-X-Groupsio-MsgNum: 35361
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-gPJ10Pzc0fu0DaI85xfx"
-
---=-gPJ10Pzc0fu0DaI85xfx
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 12 Nov 2011 15:28:36 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 10.11.2011, 14:55 -0700 schrieb Tom Rini:
-> On Thu, Nov 10, 2011 at 1:54 PM, Florian Boor wrote:
+I got the Angstrom scripts working with a cm-t35.conf file I found on =
+the net. While it remains to bee seen if it runs and functions the same =
+as the current Compulab build it is a big step forward. I am going to do =
+a writeup to Compulab to change their Wiki as it was a painful dead end =
+path... Wish I had tried this approach sooner but I had reservations =
+about the CM-T35 having hardware specific differences...
 
-> > Am 10.11.2011 21:27, schrieb Koen Kooi:
-> >> Wrong. You can do the following in your machine.conf:
-> >>
-> >> require omap3.inc
-> >>
-> >> EXTRA_IMAGEDEPENDS =3D "whatever"
-> >
-> > this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could =
-have been
-> > appended everywhere and this intrusive override might break quite a lot=
-.
-> >
-> >> In OE classic, no. In meta-ti the cleanup is already underway.
-> >
-> > I do not care bout meta-ti, its is broken in OE classic.
-> >
-> >
-> > Removing this hardcoded dependency would not break anything. Only the b=
-oard
-> > maintainers who want to get it built automatically would have to add it=
-.
+If this works as I now surmize it is a pretty interesting way to build =
+kernels for a number of platforms. =20
+
+Thanks for everything
+
+Dave
+
+On Nov 11, 2011, at 11:28 AM, Paul Eggleton wrote:
+
+> On Friday 11 November 2011 11:06:29 you wrote:
+>> Dumb question. Can you point me to this distro with cm-t35 machines
+>> such that I can get clone? I looked at the Angstrom site.
 >=20
-> But, that's most of them today.
+> Well, the Angstrom-prescribed method is to use the setup scripts - =
+it's=20
+> documented in the "Developers" section of the website. You don't have =
+to use=20
+> this method however - just switch over to the master / =
+2011.3-maintenance=20
+> branch of OE and you should be able to run your build.
+>=20
+>> If I have Angstrom build me a kernel does it provide me with the
+>> local.conf, etc?=20
+>=20
+> If you use the scripts it does, yes. Otherwise you should be able to =
+keep your=20
+> current configuration.
+>=20
+> Cheers,
+> Paul
+>=20
+> --=20
+>=20
+> Paul Eggleton
+> Intel Open Source Technology Centre
 
-Sorry Tom, could you try harder to explain the reason, please? How many
-boards are there in the upstream OE repository depending on this and
-would have to be changed? I think Florian could commit that with his
-clean up easily.
-
-On the other side developers opposing this clean up could at least offer
-to add a comment to the file with a proposed work around for people
-hitting this issue. Still there should be a good reason. Like all your
-internal TI projects depend on this for example.
 
 
-Thanks,
-
-Paul
-
---=-gPJ10Pzc0fu0DaI85xfx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk6+SjIACgkQPX1aK2wOHVgXegCgiTEx5XMuZkfvFQcjBWVN1Zac
-tzwAn3JKOkZooW9zdBgOgEuW1YDCMFbO
-=ROtg
------END PGP SIGNATURE-----
-
---=-gPJ10Pzc0fu0DaI85xfx--
