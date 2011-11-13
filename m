@@ -1,31 +1,47 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RPL6u-0007CX-4e
+	(envelope-from <vitap@ti.com>) id 1RPUzF-0000NB-NS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Nov 2011 22:27:36 +0100
-Received: by qadb10 with SMTP id b10so555936qad.6
+	Sun, 13 Nov 2011 09:00:22 +0100
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAD7s0JQ014606
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Nov 2011 13:21:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=y7oq154gwPmg05XREhN5lfnbm7TVIx2tLx8EI/41VN4=;
-	b=vQUXBbHu0I8QlUP2EVjr4pqOSZH9SWiro7QpCh2/W/Rr1H5NkRHJ6w3lUgQopbKepb
-	YdaiY7w+jnkXEHlJBMfae1AKa9XJWZadhoHUo6Hezsv8JDlFw7iiUdMD/sLgCxj7qjXv
-	5xQcc1C+y+253VPDgT75gRNgr18J2t1mNZAv4=
+	Sun, 13 Nov 2011 01:54:00 -0600
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAD7s0e2013132
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Nov 2011 01:54:00 -0600 (CST)
+Received: from DNCE72.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAD7rxPB010092
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Nov 2011 01:54:00 -0600 (CST)
+Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
+	DNCE72.ent.ti.com ([fe80::8e3:61e5:a5b9:593c%23]) with mapi id
+	14.01.0323.003; Sun, 13 Nov 2011 08:53:59 +0100
+From: "Preskovsky, Vita" <vitap@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new
+	version of bluez-hcidump-2.1 that compatible with bluez4_4.95.
+Thread-Index: AcyaDgSXZdhaXifUSA22nrzMNj4USQHyzjxg
+Date: Sun, 13 Nov 2011 07:53:58 +0000
+Message-ID: <99AD691F1FA415449470C6EA37B6FE4606D506@DNCE03.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-cr-hashedpuzzle: RiI= BOY7 Ckwl DJt0 DgWG ERZt Fw0n F9RK Ho9l IC9a IGiU
+	JHIk KR/j KWQH LtI9 Lt3J; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {A24629AF-C9A4-416C-B46B-47C25B6AC816};
+	dgBpAHQAYQBwAEAAdABpAC4AYwBvAG0A; Sun, 13 Nov 2011 07:53:53
+	GMT;
+	RgBXADoAIABbAFAAQQBUAEMASABdACAAbgBlAHcAIAByAGUAYwBpAHAAZQAgAC0AIABiAGwAdQBlAHoALQBoAGMAaQBkAHUAbQBwAF8AMgAuADEALgBiAGIALAAgAHQAbwAgAGIAdQBpAGwAZAAgAG4AZQB3ACAAdgBlAHIAcwBpAG8AbgAgAG8AZgAgAGIAbAB1AGUAegAtAGgAYwBpAGQAdQBtAHAALQAyAC4AMQAgAHQAaABhAHQAIABjAG8AbQBwAGEAdABpAGIAbABlACAAdwBpAHQAaAAgAGIAbAB1AGUAegA0AF8ANAAuADkANQAuAA==
+x-cr-puzzleid: {A24629AF-C9A4-416C-B46B-47C25B6AC816}
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-Received: by 10.229.251.73 with SMTP id mr9mr2546374qcb.264.1321132876360;
-	Sat, 12 Nov 2011 13:21:16 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Sat, 12 Nov 2011 13:21:16 -0800 (PST)
-In-Reply-To: <1321093682.3557.14.camel@mattotaupa>
-References: <4EBC2FEF.5020405@kernelconcepts.de> <j9hc2l$b8u$3@dough.gmane.org>
-	<4EBC39EB.2060004@kernelconcepts.de>
-	<CA+M6bXmuTYrJ=_ALera0NnhrQyqZD+nUH64kv2g1z9eQfsptqg@mail.gmail.com>
-	<1321093682.3557.14.camel@mattotaupa>
-Date: Sat, 12 Nov 2011 14:21:16 -0700
-Message-ID: <CA+M6bX=QSUAf8yR4d2UdQx3nTJz5eftFqY-4oPBtJBeW8=z6nQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: RFC: Clean up omap3.inc
+Subject: FW: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new version of bluez-hcidump-2.1 that compatible with bluez4_4.95.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,58 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2011 21:27:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 13 Nov 2011 08:00:22 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 12, 2011 at 3:28 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Donnerstag, den 10.11.2011, 14:55 -0700 schrieb Tom Rini:
->> On Thu, Nov 10, 2011 at 1:54 PM, Florian Boor wrote:
->
->> > Am 10.11.2011 21:27, schrieb Koen Kooi:
->> >> Wrong. You can do the following in your machine.conf:
->> >>
->> >> require omap3.inc
->> >>
->> >> EXTRA_IMAGEDEPENDS = "whatever"
->> >
->> > this is a workaround for a bad misconception. EXTRA_IMAGEDEPENDS could have been
->> > appended everywhere and this intrusive override might break quite a lot.
->> >
->> >> In OE classic, no. In meta-ti the cleanup is already underway.
->> >
->> > I do not care bout meta-ti, its is broken in OE classic.
->> >
->> >
->> > Removing this hardcoded dependency would not break anything. Only the board
->> > maintainers who want to get it built automatically would have to add it.
->>
->> But, that's most of them today.
->
-> Sorry Tom, could you try harder to explain the reason, please? How many
-> boards are there in the upstream OE repository depending on this and
-> would have to be changed? I think Florian could commit that with his
-> clean up easily.
+Ping to: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new version of=
+ bluez-hcidump-2.1 that compatible with bluez4_4.95.
 
-With respect to boards that use omap3.inc today, nearly all of them
-use x-load as the between ROM and U-Boot program (I suspect
-conf/machine/include/palmpre.inc is working around this issue by
-setting a fake XLOAD_MACHINE).  So instead of having a few machines
-say "now let me not build x-load" we have lots of machines saying "I
-should build x-load too".
+Regards,
+Vita Preskovsky
 
-> On the other side developers opposing this clean up could at least offer
-> to add a comment to the file with a proposed work around for people
-> hitting this issue. Still there should be a good reason. Like all your
-> internal TI projects depend on this for example.
+-----Original Message-----
+From: Vita Preskovsky [mailto:vita.preskovsky@gmail.com]=20
+Sent: Thursday, November 03, 2011 11:50 AM
+To: openembedded-devel@lists.openembedded.org
+Cc: Preskovsky, Vita
+Subject: [PATCH] new recipe - bluez-hcidump_2.1.bb, to build new version of=
+ bluez-hcidump-2.1 that compatible with bluez4_4.95.
 
-Again, oe.dev isn't a really great place to do new work, oe-core+stuff
-is, and as Koen said, in meta-ti this is being cleaned up (in part
-because TI parts now don't use x-load as the middle step but a build
-of U-Boot called SPL as the middle step).  Adding a comment to
-omap3.inc with what Koen said about opting out would make sense, yes.
+---
+ recipes/bluez/bluez-hcidump_2.1.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/bluez-hcidump_2.1.bb
 
--- 
-Tom
+diff --git a/recipes/bluez/bluez-hcidump_2.1.bb b/recipes/bluez/bluez-hcidu=
+mp_2.1.bb
+new file mode 100644
+index 0000000..2e1389c
+--- /dev/null
++++ b/recipes/bluez/bluez-hcidump_2.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION =3D "Linux Bluetooth Stack HCI Debugger Tool."
++SECTION =3D "console"
++PRIORITY =3D "optional"
++DEPENDS =3D "bluez-libs"
++LICENSE =3D "GPLv2"
++PR =3D "r0"
++
++SRC_URI =3D "http://bluez.sourceforge.net/download/bluez-hcidump-${PV}.tar=
+.gz"
++S =3D "${WORKDIR}/bluez-hcidump-${PV}"
++
++EXTRA_OECONF =3D "--with-bluez-libs=3D${STAGING_LIBDIR} --with-bluez-inclu=
+des=3D${STAGING_INCDIR}"
++
++inherit autotools
++
++SRC_URI[md5sum] =3D "b160f0672276398344eebe9df1b37a2c"
++SRC_URI[sha256sum] =3D "a6cc20b95b6b1a28ff336aad91e124555231628689225c1155=
+e8cd7aac1af86d"
+--=20
+1.7.0.4
+
 
 
