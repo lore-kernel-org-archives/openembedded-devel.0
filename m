@@ -1,8 +1,8 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RPhX2-0000Dc-Sq
+	(envelope-from <schnitzeltony@gmx.de>) id 1RPhX3-0000Dd-Gb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Nov 2011 22:24:04 +0100
+	Sun, 13 Nov 2011 22:24:05 +0100
 Received: (qmail invoked by alias); 13 Nov 2011 21:17:44 -0000
 Received: from p5B0A37D1.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.55.209]
@@ -12,14 +12,14 @@ X-Provags-ID: V01U2FsdGVkX18rk7sXNwYr22Jl+MfdcNBD1kxr02AW4oQrRrjTww
 	giIRFkoIumh61c
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Nov 2011 22:22:40 +0100
-Message-Id: <1321219363-17855-2-git-send-email-schnitzeltony@gmx.de>
+Date: Sun, 13 Nov 2011 22:22:41 +0100
+Message-Id: <1321219363-17855-3-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1321219363-17855-1-git-send-email-schnitzeltony@gmx.de>
 References: <1321219363-17855-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 2/5] midori: update to 0.4.2
+Subject: [meta-xfce 3/5] tumbler: initial add 0.1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,41 +37,53 @@ X-List-Received-Date: Sun, 13 Nov 2011 21:24:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-for bad and sometimes vala-dirty people [1] we keep overwriting of waf since
-midori still installs waf 1.5.19
-(checked by bitbake -cunpack midori && <midori-workdir>/waf --version).
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/035995.html# Please enter the commit message for your changes. Lines starting
+* run tested on on overo with ristretto and thunar
+* TODO: split out plugins
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../midori/{midori-0.4.1 => midori}/waf            |  Bin 92569 -> 92569 bytes
- .../midori/{midori_0.4.1.bb => midori_0.4.2.bb}    |    4 ++--
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/midori/{midori-0.4.1 => midori}/waf (100%)
- rename meta-oe/recipes-connectivity/midori/{midori_0.4.1.bb => midori_0.4.2.bb} (58%)
+ meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb |   32 ++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori-0.4.1/waf b/meta-oe/recipes-connectivity/midori/midori/waf
-similarity index 100%
-rename from meta-oe/recipes-connectivity/midori/midori-0.4.1/waf
-rename to meta-oe/recipes-connectivity/midori/midori/waf
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-similarity index 58%
-rename from meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-rename to meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-index 7f4eb4b..10109e6 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-@@ -10,7 +10,7 @@ do_configure_prepend() {
-   cp -f ${WORKDIR}/waf ${S}/
- }
- 
--SRC_URI[midori.md5sum] = "33dde203cd71ae2b1d2adcc7f5739f65"
--SRC_URI[midori.sha256sum] = "b3c77ddb6f562a0ea3d2e6fbb756ca0dc158ad8410f4b60f8e5998c2f7305f07"
-+SRC_URI[midori.md5sum] = "4ec9c3daa332ebe865cba6aa8256ef63"
-+SRC_URI[midori.sha256sum] = "2e3f104254fb9a28c77e8acf1cc8ae6dd529499711d558b29146ab0fa915f0a7"
- 
- 
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
+new file mode 100644
+index 0000000..922d7db
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus specification"
++SECTION = "x11/libs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++DEPENDS = "dbus-glib freetype gdk-pixbuf poppler"
++
++inherit xfce
++
++ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
++
++do_install_append() {
++    # correct tumbler-cache-plugin.so link (see plugins/xdg-cache/Makefile.am)
++    ln -sf ${libdir}/tumbler-1/plugins/cache/tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
++}
++
++FILES_${PN} += "${datadir}/dbus-1/services \
++                ${libdir}/tumbler-1/tumblerd \
++                ${libdir}/tumbler-1/plugins/*.so \
++                ${libdir}/tumbler-1/plugins/cache/*.so \
++               "
++
++FILES_${PN}-dev += "${libdir}/tumbler-1/plugins/*.la \
++                    ${libdir}/tumbler-1/plugins/cache/*.la"
++FILES_${PN}-staticdev += "${libdir}/tumbler-1/plugins/*.a \
++                          ${libdir}/tumbler-1/plugins/cache/*.a"
++FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
++                    ${libdir}/tumbler-1/plugins/.debug \
++                    ${libdir}/tumbler-1/plugins/cache/.debug \
++"
++
++SRC_URI[md5sum] = "e7ba3b8f21f8f7e736f1e214906b4ca9"
++SRC_URI[sha256sum] = "9e41fe8f76f9422fb4f804e9635f6734552f0d82361f9971c0442a2119d451b6"
 -- 
 1.7.4.4
 
