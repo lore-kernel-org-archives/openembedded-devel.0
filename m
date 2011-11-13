@@ -1,38 +1,24 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vitap@ti.com>) id 1RPV15-0000U2-2r
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RPdqt-0002yN-IF
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Nov 2011 09:02:15 +0100
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAD7trmr032524
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Nov 2011 01:55:53 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAD7trLw013427
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Nov 2011 01:55:53 -0600 (CST)
-Received: from DNCE72.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAD7tqbC011773
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Nov 2011 01:55:53 -0600 (CST)
-Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
-	DNCE72.ent.ti.com ([fe80::8e3:61e5:a5b9:593c%23]) with mapi id
-	14.01.0323.003; Sun, 13 Nov 2011 08:55:52 +0100
-From: "Preskovsky, Vita" <vitap@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
-Thread-Index: AcyW+QAazWS7+9WASP2MVuL9w0iBcABFvMBQAnJjY5A=
-Date: Sun, 13 Nov 2011 07:55:51 +0000
-Message-ID: <99AD691F1FA415449470C6EA37B6FE4606D917@DNCE03.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.131.83]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+	Sun, 13 Nov 2011 18:28:19 +0100
+Received: (qmail invoked by alias); 13 Nov 2011 17:21:58 -0000
+Received: from p5B0A37D1.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.55.209]
+	by mail.gmx.net (mp023) with SMTP; 13 Nov 2011 18:21:58 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX181MycYjXw1t4sfdGz/5OmrVojYqy0Aa+4VjsUWcy
+	R1OmERapQYRwCt
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 13 Nov 2011 18:27:00 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-100.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
 MIME-Version: 1.0
-Subject: FW: [PATCH] bluez4_4.95.bb: new recipe for building bluez-4.95
+Message-Id: <201111131827.00994.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: How to avoid oe complaining for .so symlink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,111 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 08:02:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sun, 13 Nov 2011 17:28:19 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-UGluZyB0bzogW29lXSBbUEFUQ0hdIGJsdWV6NF80Ljk1LmJiOiBuZXcgcmVjaXBlIGZvciBidWls
-ZGluZyBibHVlei00Ljk1DQoNClJlZ2FyZHMsDQpWaXRhIFByZXNrb3Zza3kNCg0KLS0tLS1Pcmln
-aW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcgW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYgT2YgUHJlc2tvdnNreSwgVml0YQ0KU2VudDog
-TW9uZGF5LCBPY3RvYmVyIDMxLCAyMDExIDExOjE5IFBNDQpUbzogUGF1bCBNZW56ZWwNCkNjOiBv
-cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3ViamVjdDogUmU6IFtv
-ZV0gW1BBVENIXSBibHVlejRfNC45NS5iYjogbmV3IHJlY2lwZSBmb3IgYnVpbGRpbmcgYmx1ZXot
-NC45NQ0KDQpQYXVsLA0KDQpJJ20gc3Vic2NyaWJlZCB0byB0aGUgbGlzdCBhbmQgcmVjZWl2ZSBt
-YWlscyBmcm9tIGl0LCBidXQgSSdtIG5ldyB0byBhcmFnbyBhbmQgb3BlbmVtYmVkZWQuDQpJIGhh
-dmUgYSBxdWVzdGlvbiBhYm91dCB0aGUgcmlnaHQgd2F5IHRvIGRlZmluZSBERUZBVUxUX1BSRUZF
-UkVOQ0UgaW4gcmVjaXBlcy4NCkluIGFsbCBibHVlejRfNC54IHJlY2lwZXMgdGhlcmUgaXMgZGVm
-aW5pdGlvbiBvZiBkZWZhdWx0IHByZWZlcmVuY2UgYXMNCkRFRkFVTFRfUFJFRkVSRU5DRSA9ICIt
-MSIsIGFuZCBiaXRiYWtlIHRha2VzIHRoZSBsYXN0IG9uZS4NCkluIHRoZSBsYXN0IHJlY2lwZSB2
-ZXJzaW9uIDQuODkgdGhleSBkZWZpbmVkIGFsc28gYW5nc3Ryb20gZGVmYXVsdCBwcmVmZXJlbmNl
-Og0KREVGQVVMVF9QUkVGRVJFTkNFX2FuZ3N0cm9tID0gIjEiDQpTbyBldmVyeW9uZSwgd29ya2lu
-ZyB1bmRlciBhbmdzdHJvbSwgYXMgd2UgZG8sIGNvbXBpbGVzIHdpdGggdGhlIHZlcnNpb24gNC44
-OS4NCldlIGNob3NlIHRvIHdvcmsgd2l0aCB2ZXJzaW9uIDQuOTUgKGRlc3BpdGUgZXhpc3RlbmNl
-IG9mIDQuOTYpIGJ1dCB3ZSBkb24ndCB3YW50IHRoaXMgcmVjaXBlIHdpbGwgYmUgY29tcGlsZWQg
-YXMgZGVmYXVsdCwgb25seSBmb3IgdGhvc2Ugd2hvIHdpbGwgY29tcGlsZSB0aGlzIHJlY2lwZSBm
-b3Igc3BlY2lmaWMgbWFjaGluZSBhcyBhbTE4MHgtZXZtLg0KU28gaW5zdGVhZCBvZiBERUZBVUxU
-X1BSRUZFUkVOQ0VfYW5nc3Ryb20gSSBjYW4gZGVmaW5lIERFRkFVTFRfUFJFRkVSRU5DRV9hbTE4
-MHgtZXZtID0gIjEiLCB0aGF0IG1lZXRzIG91ciBnb2FsLg0KSXMgdGhpcyB3YXkgbW9yZSBhcHBy
-b3ByaWF0ZSB0aGFuIEkgZGlkIHByZXZpb3VzbHk/IA0KDQpUaGFuayB5b3UsDQpWaXRhLg0KDQot
-LS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogUGF1bCBNZW56ZWwgW21haWx0bzpwYXVs
-ZXBhbnRlckB1c2Vycy5zb3VyY2Vmb3JnZS5uZXRdIA0KU2VudDogU3VuZGF5LCBPY3RvYmVyIDMw
-LCAyMDExIDE6NDIgUE0NClRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KQ2M6IFByZXNrb3Zza3ksIFZpdGE7IFZpdGEgUHJlc2tvdnNreQ0KU3ViamVjdDogUmU6
-IFtvZV0gW1BBVENIXSBibHVlejRfNC45NS5iYjogbmV3IHJlY2lwZSBmb3IgYnVpbGRpbmcgYmx1
-ZXotNC45NQ0KDQpEZWFyIFZpdGEsDQoNCg0KYXJlIHlvdSByZWFkaW5nIHRoZSBsaXN0IG9yIGRv
-IEkgaGF2ZSB0byBhZGQgeW91ciBhZGRyZXNzIHRvIHRoZSBDQyBmaWVsZD8NCg0KDQpBbSBTb25u
-dGFnLCBkZW4gMzAuMTAuMjAxMSwgMTA6NTggKzAxMDAgc2NocmllYiBQcmVza292c2t5LCBWaXRh
-Og0KDQo+IFBsZWFzZSBzZWUgbXkgYW5zd2VycyBiZWxsb3cuDQoNCnRoYW5rIHlvdSBmb3IgeW91
-ciBhbnN3ZXIuDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCg0KPiBTZW50OiBUdWVz
-ZGF5LCBPY3RvYmVyIDExLCAyMDExIDQ6MzIgUE0NCg0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFU
-Q0hdIGJsdWV6NF80Ljk1LmJiOiBuZXcgcmVjaXBlIGZvciBidWlsZGluZyANCj4gYmx1ZXotNC45
-NQ0KPiANCj4gRGVhciBWaXRhLA0KPiANCj4gDQo+IHRoYW5rIHlvdSBmb3IgeW91ciBwYXRjaC4N
-Cj4gDQo+IEFtIERpZW5zdGFnLCBkZW4gMTEuMTAuMjAxMSwgMTE6MDggKzAyMDAgc2NocmllYiBW
-aXRhIFByZXNrb3Zza3k6DQo+IA0KPiBVc2luZw0KPiANCj4gICAgICAgICBibHVlejQ6IEFkZCB2
-ZXJzaW9uIDQuOTUNCj4gDQo+IGFzIHRoZSBjb21taXQgc3VtbWFyeSB3b3VsZCBiZSBjbGVhbmVy
-LiBVc2UgYGdpdCBjb21taXQgLS1hbWVuZGAgdG8gY2hhbmdlIHRoYXQuDQo+IA0KPiBBZGRpdGlv
-bmFsbHkgeW91IHNob3VsZCBlbGFib3JhdGUgbW9yZSBpbiB0aGUgY29tbWl0IG1lc3NhZ2Ugd2hh
-dCB0aGUgcGF0Y2ggaXMgZG9pbmcuDQo+IA0KPiAxLiBIYXZlIHlvdSB0ZXN0ZWQgaXQ/IElzIGl0
-IGp1c3QgYW4gdXBncmFkZSBiZWNhdXNlIG9mIG9yIGRvZXMgDQo+IHZlcnNpb24NCj4gNC45MSBp
-biB0aGUgcmVwb3NpdG9yeSBoYXZlIGFueSBzaG9ydCBjb21pbmdzIHNvIHRoYXQgaXQgc2hvdWxk
-IGJlIHJlbW92ZWQ/DQo+DQo+IEkgdGVzdGVkIHRoaXMgcmVjaXBlLCBhbmQgdGhlIHJlYXNvbiBJ
-IGFkZGVkIHRoaXMgdmVyc2lvbiBpcyB0aGF0IHdlIHdhbnQgdG8gdXNlIHRoaXMgdmVyc2lvbiBv
-ZiBCbHVleiBpbiBvdXIgcmVsZWFzZS4NCg0KSSBndWVzcyB5b3UgdGVzdGVkIGl0IHVzaW5nIMim
-bmdzdHLDtm0sIHNvIHRoZSBvbGQgcmVjaXBlIGNhbiBiZSByZW1vdmVkLg0KUGxlYXNlIG5vdGUg
-dGhhdCBvZS1jb3JlIGFscmVhZHkgaGFzIHZlcnNpb24gNC45Ni4NCg0KPiA+IFNpZ25lZC1vZmYt
-Ynk6IFZpdGEgUHJlc2tvdnNreSA8dml0YXBAdGkuY29tPg0KPiA+IC0tLQ0KPiA+ICByZWNpcGVz
-L2JsdWV6L2JsdWV6NF80Ljk1LmJiIHwgICAzMCArKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysNCj4gPiAgMSBmaWxlcyBjaGFuZ2VkLCAzMCBpbnNlcnRpb25zKCspLCAwIGRlbGV0aW9ucygt
-KSAgY3JlYXRlIG1vZGUgDQo+ID4gMTAwNjQ0IHJlY2lwZXMvYmx1ZXovYmx1ZXo0XzQuOTUuYmIN
-Cj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy9ibHVlei9ibHVlejRfNC45NS5iYiANCj4g
-PiBiL3JlY2lwZXMvYmx1ZXovYmx1ZXo0XzQuOTUuYmIgbmV3IGZpbGUgbW9kZSAxMDA2NDQgaW5k
-ZXggDQo+ID4gMDAwMDAwMC4uYTY4MmQ2YQ0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9y
-ZWNpcGVzL2JsdWV6L2JsdWV6NF80Ljk1LmJiDQo+ID4gQEAgLTAsMCArMSwzMCBAQA0KPiA+ICty
-ZXF1aXJlIGJsdWV6NC5pbmMNCj4gPiArU1JDX1VSSSA9ICJcDQo+ID4gKyAgaHR0cDovL3d3dy5r
-ZXJuZWwub3JnL3B1Yi9saW51eC9ibHVldG9vdGgvYmx1ZXotJHtQVn0udGFyLmd6IFwNCj4gDQo+
-IDIuIEFzIGZhciBhcyBJIGtub3cga2VybmVsLm9yZyBhZnRlciB0aGUgY29tcHJvbWlzZSBwcmVz
-ZW50bHkgZG9lcyBub3QgcHJvdmlkZSB0aGF0IGFyY2hpdmUuIFNvIHRoZSByZWNpcGUgd2lsbCBu
-b3QgYnVpbGQgdW5sZXNzIHRoZXJlIGlzIGEgbWlycm9yIHNvbWV3aGVyZS4gRG8geW91IGtub3cg
-b2YgYSBtaXJyb3I/DQo+IA0KPiBUaGVyZSBhcmUgdHdvIHBvc3NpYmxlIGxvY2F0aW9ucyBmb3Ig
-dGhpcyBwYWNrYWdlOg0KPiAJaHR0cDovL3d3dy5taXJyb3JzZXJ2aWNlLm9yZy9zaXRlcy9mdHAu
-a2VybmVsLm9yZy9wdWIvbGludXgvYmx1ZXRvb3RoL2JsdWV6LTQuOTUudGFyLmd6DQo+ICAJDQo+
-IGh0dHA6Ly93d3cuYW5nc3Ryb20tZGlzdHJpYnV0aW9uLm9yZy91bnN0YWJsZS9zb3VyY2VzL2Js
-dWV6LTQuOTUudGFyLmcNCj4geiBJIGNoYW5nZWQgdGhlIFNSQ19VUkkgaW4gbXkgd29ya2luZyBk
-aXJlY3RvcnkgZm9yIHRoZSBmaXJzdCBsb2NhdGlvbiANCj4gYW5kIGl0IHdvcmtlZCBmaW5lLiBT
-byB3aXRoIHdoYXQgbG9jYXRpb24gZG8geW91IHByZWZlciB0aGUgcmVjaXBlIHdpbGwgYmUgcmVs
-ZWFzZWQ/DQoNCkkgYW0gdW5zdXJlIGFib3V0IHRoZSBwb2xpY3kgbXlzZWxmIGFuZCBJIGRvIG5v
-dCB0aGluayBhbiDigJxPRSBtaXJyb3LigJ0NCmhhcyB0aGF0IHBhcnRpY3VsYXIgYXJjaGl2ZS4N
-Cg0KPiA+ICsgZmlsZTovL2JsdWV0b290aC5jb25mIFwNCj4gPiArIg0KPiA+ICsNCj4gPiArU1JD
-X1VSSVttZDVzdW1dID0gIjM0MTI5NGIyODQ5YTA0YTRhZmZmNWM5NmJmYmYzMGIyIg0KPiA+ICtT
-UkNfVVJJW3NoYTI1NnN1bV0gPSAiZDZlYTlkZTQxMGZjMmJjZDI2MjBkNzA5YzIyMDI4OTNiMjE4
-ZTJlNmE1NWMzYzBjZTZiZWJkMjdmYTQxMjBmNiINCj4gPiArDQo+ID4gK0RFRkFVTFRfUFJFRkVS
-RU5DRSA9ICItMSINCj4gDQo+IDMuIFdoeT8NCj4gPiArREVGQVVMVF9QUkVGRVJFTkNFX2FuZ3N0
-cm9tID0gIjEiDQo+IA0KPiA0LiBIYXZlIHlvdSB0YWxrZWQgdG8gdGhlIMimbmdzdHLDtm0gbWFp
-bnRhaW5lcnM/DQo+IA0KPiBUaGVzZSB0d28gdmFyaWFibGVzIGFyZSBkZWZpbmVkIGluIHRoZSBw
-cmV2aW91cyB2ZXJzaW9uIG9mIGJsdWV6NCByZWNpcGU6IGJsdWV6NF80Ljg5LmJiLiBXaXRob3V0
-IHRoZXNlIHR3byBkZWZpbml0aW9ucyBpbiBteSByZWNpcGUgYml0YmFrZSBwcmVmZXJzIHRoZSBv
-bGQgcmVjaXBlIHVwb24gbWluZSwgd2hpY2ggZG9lc24ndCBsZWF2ZSBtZSBhIGNob2ljZSBidXQg
-dG8gZGVmaW5lIHRoZXNlIHZhcmlhYmxlcy4NCg0KVGhlIOKAnGNvcnJlY3TigJ0gd2F5IHdvdWxk
-IGJlIHRvIGZpcnN0IGFkZCB0aGF0IHJlY2lwZSBhbmQgdGhlbiBhZnRlcndhcmQgc2VudCBhIHBh
-dGNoIHRvIGNoYW5nZSB0aGUgcHJlZmVyZW5jZXMgd2hpY2ggdGhlIMimbmdzdHLDtm0gbWFpbnRh
-aW5lcnMgaGF2ZSB0byBhY2tub3dsZWRnZS4NCg0KPiA+ICsNCj4gPiArREVQRU5EUyArPSAibGli
-c25kZmlsZTEiDQo+ID4gKw0KPiA+ICtQUiA9ICIke0lOQ19QUn0uMCINCj4gPiArDQo+ID4gKyMg
-Tm90IGFsbCBkaXN0cm9zIGhhdmUgYSByZWNlbnQgZW5vdWdoIHVkZXYgQlRVREVWID0gIiANCj4g
-PiArLS1kaXNhYmxlLXVkZXZydWxlcyINCj4gPiArQlRVREVWX2FuZ3N0cm9tID0gIiAtLWVuYWJs
-ZS11ZGV2cnVsZXMiDQo+ID4gK0JUVURFVl9zaHIgPSAiIC0tZW5hYmxlLXVkZXZydWxlcyINCj4g
-PiArDQo+ID4gK0VYVFJBX09FQ09ORiArPSAiJHtCVFVERVZ9Ig0KPiA+ICtkb19jb25maWd1cmVf
-YXBwZW5kKCl7DQo+ID4gKwllY2hvICIjZGVmaW5lIExJQlVERVZfSV9LTk9XX1RIRV9BUElfSVNf
-U1VCSkVDVF9UT19DSEFOR0UiID4+IA0KPiA+ICske1N9L2NvbmZpZy5oIH0NCj4gPiArDQo+ID4g
-K0ZJTEVTXyR7UE59LWRiZyArPSAiXA0KPiA+ICsgICR7YmFzZV9saWJkaXJ9L3VkZXYvLmRlYnVn
-IFwNCj4gPiArICAke2xpYmRpcn0vKi8uZGVidWcgXA0KPiA+ICsiDQo+IA0KPiBPdGhlcndpc2Ug
-dGhpcyByZWNpcGUgbG9va3MgZ29vZC4gSXMgaXQgcGxhbm5lZCBmb3IgYnJhbmNoIDIwMTEuMDMt
-bWFpbnRlbmFuY2U/DQoNCg0KVGhhbmtzLA0KDQpQYXVsDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlz
-dA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0
-cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2
-ZWwNCg==
+Hi,
+
+I am preparing a recipe for tumbler (xfce). The package itself installs a 
+symlink which seems required on a .so. OE QA complains
+
+| ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: 
+tumbler path '/work/armv7a-angstrom-linux-gnueabi/tumbler-0.1.22-r0/packages-
+split/tumbler/usr/lib/tumbler-1/plugins/cache/tumbler-cache-plugin.so'
+
+I could workaround by removing symlink on do_install_append and adding it again 
+at pkg_postinst but this seems crap. 
+
+The better method seems telling QA not to check for so-symlinks.
+
+In insane.bbclass I find
+
+ERROR_QA ?= "dev-so debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
+
+so I could set in recipe
+
+ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
+
+but this makes recipe immune to ERROR_QA in insane.bbclass. Is there a way to 
+remove 'dev-so' from ERROR_QA?
+
+Andreas
 
 
