@@ -1,27 +1,23 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Kv-0002Hl-4w
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 22:45:06 +0100
-Received: (qmail invoked by alias); 14 Nov 2011 21:38:43 -0000
-Received: from p5B0A3A75.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.58.117]
-	by mail.gmx.net (mp050) with SMTP; 14 Nov 2011 22:38:43 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/SjUxC3rPSiZzDjB21yeU20d5NVTSx1hz6ZWCpdq
-	Gsux42dhFyl9Cj
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 22:43:48 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-103.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <201111140105.00784.schnitzeltony@gmx.de>
-	<201111142207.50587.schnitzeltony@gmx.de>
-In-Reply-To: <201111142207.50587.schnitzeltony@gmx.de>
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1RQ52G-0003Ov-LA for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Nov 2011 23:29:55 +0100
+Received: by wyg8 with SMTP id 8so2040748wyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Nov 2011 14:23:30 -0800 (PST)
 MIME-Version: 1.0
-Message-Id: <201111142243.48373.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: networkmanager: update to 0.9.2.0 causes trouble
+Received: by 10.227.205.130 with SMTP id fq2mr17232863wbb.17.1321309410836;
+	Mon, 14 Nov 2011 14:23:30 -0800 (PST)
+Received: by 10.227.200.14 with HTTP; Mon, 14 Nov 2011 14:23:30 -0800 (PST)
+In-Reply-To: <CAEsOVNf_5HnBQHuJpuOrAXJQDhhoM7kAF5L56bCF=fBFeOjxyA@mail.gmail.com>
+References: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
+	<CAEsOVNf_5HnBQHuJpuOrAXJQDhhoM7kAF5L56bCF=fBFeOjxyA@mail.gmail.com>
+Date: Mon, 14 Nov 2011 16:23:30 -0600
+Message-ID: <CALJpqJy6gZG2w6PmptOV0tzV9wzQr5zdPZKeJbzn02PrAb__Uw@mail.gmail.com>
+From: David Thomas <david.thomas@microbee-systems.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: GCC Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +31,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 21:45:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Nov 2011 22:29:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday, November 14, 2011 10:07:50 PM Andreas M=FCller wrote:
-> On Monday, November 14, 2011 01:05:00 AM Andreas M=FCller wrote:
-> > since
-> >=20
-> > commit 037cb32f99f229c9c55a029bec088ebc7f59d278
-> > Author: Koen Kooi <koen@dominion.thruhere.net>
-> > Date:   Fri Nov 11 12:50:38 2011 +0100
-> >=20
-> >     networkmanager: update to 0.9.2.0
-> >=20
-> > wlan connects successfully to my router but *fails* to connect external
-> > locations.
-> >=20
-> > networkmanager / nm-applet set up my network as
-> > eth0: IPv4 fixed IP
-> > wlan0: WPA & WPA 2 Personal / IPv4 DHCP
-> >=20
-> > Attached you find the results for networkmanager 0.9.2 and networkmanag=
-er
-> > 0.9.0 (reverted 037cb32f99f229c9c55a029bec088ebc7f59d278)
-> >=20
-> > My suggestion:
-> > * revert 037cb32f99f229c9c55a029bec088ebc7f59d278 until fixed
-> > * send a note to gnome bugzilla
->=20
-=46YI: with network-manager-applet 0.9.2.0 the problem persists
+OK, so I fight a install of gcc-4.6 onto ubuntu lts and same error. I
+first tried for weeks to get Compulab CM-T35 stuff to work per their
+instructions. Then I get the scripts and all seems well, now this. I
+have spent a month on trying to build a cm-t35 so I can then add in
+additional functionality. At ever turn it fails.  4 weeks and nothing.
 
-Andreas
+I mean, how hard can this be?
+
+
+On Mon, Nov 14, 2011 at 12:59 PM, McClintock Matthew-B29882
+<B29882@freescale.com> wrote:
+> On Mon, Nov 14, 2011 at 12:55 PM, David Thomas
+> <david.thomas@microbee-systems.com> wrote:
+>> I am getting a gcc error
+>>
+>> cc1: error: -Werror=unused-but-set-variable: No option -Wunused-but-set-variable
+>>
+>> Using the Angstrom scripts I can run machine=beagleboard and complete.
+>> However, machine=cm-t35 with a cm-t35.conf file throws this error.
+>>
+>> I am having to guess that the machine file is all that was required,
+>> it seems to pich all the right arch, etc.
+>>
+>> I had asked on Angstrom for any CM-T35 related info to no avail...
+>
+> This error is on by default for the compiler for OE now. You can get
+> around it by
+>
+> 1) Fixing the (potential) errors in the source code
+> 2) Turning off the error in the build (EXTRA_CFLAGS =
+> "-Wno-error=unused-but-set-variable" or something similiar)
+>
+> -M
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803-1187
+256-489-6671 (Voice)
+256-426-2431 (Mobile)
+256-489-6673 (FAX)
+www.microbee-systems.com
+"Innovative Solutions for an Embedded World"
+
+This message is intended for the sole use of the addressee, and may
+contain information that is privileged, confidential and exempt from
+disclosure under applicable law. If you are not the addressee you are
+hereby notified that you may not use, copy, disclose, or distribute to
+anyone the message or any information contained in the message. If you
+have received this message in error, please immediately advise the
+sender by reply email and delete this message.
 
 
