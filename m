@@ -1,25 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Ch-0001f0-FD
+	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Ch-0001fD-WE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 22:36:35 +0100
-Received: (qmail invoked by alias); 14 Nov 2011 21:30:10 -0000
+	Mon, 14 Nov 2011 22:36:36 +0100
+Received: (qmail invoked by alias); 14 Nov 2011 21:30:14 -0000
 Received: from p5B0A3A75.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.58.117]
-	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:10 +0100
+	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:14 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/bLR1cKY3bDVApLgzwuEt0QjOFBGB9b8nsksuf85
-	BoKBiGiEpd0MRq
+X-Provags-ID: V01U2FsdGVkX1/SW6dN/X/SD2RoopToyJtdTvDKiwCDnH872FtgB6
+	/WrPiL7WjC4nmS
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 22:35:10 +0100
-Message-Id: <1321306512-9055-4-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 14 Nov 2011 22:35:12 +0100
+Message-Id: <1321306512-9055-6-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
 References: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce][V2 3/5] tumbler: initial add 0.1.22
+Subject: [meta-xfce][V2 5/5] ristretto: add tumbler to RRECOMMENDS_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,57 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 21:36:35 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 21:36:36 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* run tested on on overo with ristretto and thunar
-* TODO: split out plugins
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb |   32 ++++++++++++++++++++++
- 1 files changed, 32 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
+ .../recipes-apps/ristretto/ristretto_0.3.0.bb      |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
-new file mode 100644
-index 0000000..d06ae31
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus specification"
-+SECTION = "x11/libs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "dbus-glib freetype gdk-pixbuf poppler"
+diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
+index a8c028f..9a5d077 100644
+--- a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
++++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
+@@ -7,5 +7,7 @@ DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
+ 
+ inherit xfce-app
+ 
++RRECOMMENDS_${PN} += "tumbler"
 +
-+inherit xfce
-+
-+INSANE_SKIP_${PN} = "dev-so"
-+
-+do_install_append() {
-+    # correct tumbler-cache-plugin.so link (see plugins/xdg-cache/Makefile.am)
-+    ln -sf ${libdir}/tumbler-1/plugins/cache/tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
-+}
-+
-+FILES_${PN} += "${datadir}/dbus-1/services \
-+                ${libdir}/tumbler-1/tumblerd \
-+                ${libdir}/tumbler-1/plugins/*.so \
-+                ${libdir}/tumbler-1/plugins/cache/*.so \
-+               "
-+
-+FILES_${PN}-dev += "${libdir}/tumbler-1/plugins/*.la \
-+                    ${libdir}/tumbler-1/plugins/cache/*.la"
-+FILES_${PN}-staticdev += "${libdir}/tumbler-1/plugins/*.a \
-+                          ${libdir}/tumbler-1/plugins/cache/*.a"
-+FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
-+                    ${libdir}/tumbler-1/plugins/.debug \
-+                    ${libdir}/tumbler-1/plugins/cache/.debug \
-+"
-+
-+SRC_URI[md5sum] = "e7ba3b8f21f8f7e736f1e214906b4ca9"
-+SRC_URI[sha256sum] = "9e41fe8f76f9422fb4f804e9635f6734552f0d82361f9971c0442a2119d451b6"
+ SRC_URI[md5sum] = "124c4e98f837e35c728b0ff1d9078b1a"
+ SRC_URI[sha256sum] = "a8bf0aa8a18af4ad8d53cbfc918bc92db51b5446cf7ff09e7b988fe5c7b986e4"
 -- 
 1.7.4.4
 
