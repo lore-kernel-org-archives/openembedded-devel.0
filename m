@@ -1,23 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Cg-0001ep-Ky
+	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Ch-0001f0-FD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 22:36:34 +0100
-Received: (qmail invoked by alias); 14 Nov 2011 21:30:08 -0000
+	Mon, 14 Nov 2011 22:36:35 +0100
+Received: (qmail invoked by alias); 14 Nov 2011 21:30:10 -0000
 Received: from p5B0A3A75.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.58.117]
-	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:08 +0100
+	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:10 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/gGEgjvxPgDBAFqLnMIv2uLFa4t9a1Ym7yviJDcB
-	7ffe56Z+w/2j5O
+X-Provags-ID: V01U2FsdGVkX1/bLR1cKY3bDVApLgzwuEt0QjOFBGB9b8nsksuf85
+	BoKBiGiEpd0MRq
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 22:35:07 +0100
-Message-Id: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 14 Nov 2011 22:35:10 +0100
+Message-Id: <1321306512-9055-4-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
+References: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce][V2 0/5] cleanup and bugfixes
+Subject: [meta-xfce][V2 3/5] tumbler: initial add 0.1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,32 +33,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 21:36:34 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 21:36:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-V1 -> V2:
-* midori: cleanup commit message
-* tumbler: use INSANE_SKIP
+* run tested on on overo with ristretto and thunar
+* TODO: split out plugins
 
-Andreas Müller (5):
-  xfce4-dev-tools: cleanups
-  midori: update to 0.4.2
-  tumbler: initial add 0.1.22
-  ristretto: update to 0.3.0
-  ristretto: add tumbler to RRECOMMENDS_${PN}
-
- .../midori/{midori-0.4.1 => midori}/waf            |  Bin 92569 -> 92569 bytes
- .../midori/{midori_0.4.1.bb => midori_0.4.2.bb}    |    4 +-
- .../{ristretto_0.2.2.bb => ristretto_0.3.0.bb}     |    6 ++-
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb   |   32 ++++++++++++++++++++
- .../xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb       |    8 +++--
- 5 files changed, 43 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-connectivity/midori/{midori-0.4.1 => midori}/waf (100%)
- rename meta-oe/recipes-connectivity/midori/{midori_0.4.1.bb => midori_0.4.2.bb} (58%)
- rename meta-xfce/recipes-apps/ristretto/{ristretto_0.2.2.bb => ristretto_0.3.0.bb} (64%)
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb |   32 ++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
  create mode 100644 meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
 
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
+new file mode 100644
+index 0000000..d06ae31
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus specification"
++SECTION = "x11/libs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++DEPENDS = "dbus-glib freetype gdk-pixbuf poppler"
++
++inherit xfce
++
++INSANE_SKIP_${PN} = "dev-so"
++
++do_install_append() {
++    # correct tumbler-cache-plugin.so link (see plugins/xdg-cache/Makefile.am)
++    ln -sf ${libdir}/tumbler-1/plugins/cache/tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
++}
++
++FILES_${PN} += "${datadir}/dbus-1/services \
++                ${libdir}/tumbler-1/tumblerd \
++                ${libdir}/tumbler-1/plugins/*.so \
++                ${libdir}/tumbler-1/plugins/cache/*.so \
++               "
++
++FILES_${PN}-dev += "${libdir}/tumbler-1/plugins/*.la \
++                    ${libdir}/tumbler-1/plugins/cache/*.la"
++FILES_${PN}-staticdev += "${libdir}/tumbler-1/plugins/*.a \
++                          ${libdir}/tumbler-1/plugins/cache/*.a"
++FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
++                    ${libdir}/tumbler-1/plugins/.debug \
++                    ${libdir}/tumbler-1/plugins/cache/.debug \
++"
++
++SRC_URI[md5sum] = "e7ba3b8f21f8f7e736f1e214906b4ca9"
++SRC_URI[sha256sum] = "9e41fe8f76f9422fb4f804e9635f6734552f0d82361f9971c0442a2119d451b6"
 -- 
 1.7.4.4
 
