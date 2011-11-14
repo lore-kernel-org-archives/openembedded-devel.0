@@ -1,34 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RPsNG-0003Hq-Jk for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 09:58:43 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RPsH9-0002HH-Ap for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 09:52:23 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 09:52:23 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <aspnair@gmail.com>) id 1RPtdD-0005Ms-F4
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Nov 2011 11:19:15 +0100
+Received: by iahk25 with SMTP id k25so5837842iah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 09:52:23 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 14 Nov 2011 02:12:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=YlcqYDrSOn7PSCmpwmTn66aFdGXZbpq+yCRYJkwlF6A=;
+	b=VZ+JRkNpjofvqzJfxOpOtkgb76y6UZUSVEfDre5kcjyiiPiAydOseNd6cQsKKSrVg4
+	fJfF85FC4A6wD4pAooGiRONpW0qvb3kYc1tfcAY/IwNEMZG9WnACpBP6OrPweOhxN/sx
+	vdKJ3oFNmySO5huUj0mA86X0JEcrN8YoCwhBY=
+MIME-Version: 1.0
+Received: by 10.231.62.75 with SMTP id w11mr5139766ibh.6.1321265573033; Mon,
+	14 Nov 2011 02:12:53 -0800 (PST)
+Received: by 10.231.199.12 with HTTP; Mon, 14 Nov 2011 02:12:52 -0800 (PST)
+Date: Mon, 14 Nov 2011 15:42:52 +0530
+Message-ID: <CAHBw83f=g2zU5o1MCMLg=TYuEMiSpHwwQCL98dZwfF8U7tS5sg@mail.gmail.com>
+From: Anand Sivaram <aspnair@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 14 Nov 2011 09:52:12 +0100
-Message-ID: <j9qkrr$lcr$1@dough.gmane.org>
-References: <201111131827.00994.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <201111131827.00994.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.3
-Subject: Re: How to avoid oe complaining for .so symlink
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Using Multiple images for different partitions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,54 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 08:58:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 14 Nov 2011 10:19:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dear All,
 
-Op 13-11-11 18:27, Andreas Müller schreef:
-> Hi,
-> 
-> I am preparing a recipe for tumbler (xfce). The package itself installs a
->  symlink which seems required on a .so. OE QA complains
-> 
-> | ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so:
->  tumbler path
-> '/work/armv7a-angstrom-linux-gnueabi/tumbler-0.1.22-r0/packages- 
-> split/tumbler/usr/lib/tumbler-1/plugins/cache/tumbler-cache-plugin.so'
-> 
-> I could workaround by removing symlink on do_install_append and adding it
-> again at pkg_postinst but this seems crap.
-> 
-> The better method seems telling QA not to check for so-symlinks.
-> 
-> In insane.bbclass I find
-> 
-> ERROR_QA ?= "dev-so debug-deps dev-deps debug-files arch la2 pkgconfig la
-> perms"
-> 
-> so I could set in recipe
-> 
-> ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
-> 
-> but this makes recipe immune to ERROR_QA in insane.bbclass. Is there a
-> way to remove 'dev-so' from ERROR_QA?
+This question is about creating multiple images/tasks for one specific
+requirement.  I just want to know how this could be done in OE.
 
-INSANE_SKIP_${PN} = "dev-so"
+I have a few custom applications/libraries to be installed in a separate
+partition and they need to be separate from the normal rootfs.  The
+dependency is like the following
 
-regards,
+          custom_app1                      custom_app2
+          |        |                       |         |
+          v        v                       v         v
+      custom_lib1 custom_lib2         custom_lib4 custom_lib2
+          |                                |
+          v                                v
+      custom_lib3                     custom_lib5
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I do have a recipe from each of the custom_app and custom_lib above and
+they all compile very well.  If I package them under a single image
+(image1), then everything is fine.
 
-iEYEARECAAYFAk7A1rkACgkQMkyGM64RGpHI7gCgnH3LnoFE1VOrLvOm2gvWdR7s
-BQMAoKxo/N4PfCfaHlSFWEA3nbXreXIV
-=eMjv
------END PGP SIGNATURE-----
+Now I have to split the images for different partitions
+image1: Normal OE rootfs except the above apps/libraries,
+        but all their other dependencies including libc etc.
+        (for partition1)
+image2: Squashfs filesystem with the above
+        custom_app[1-2] and custom_libs[1-5], but nothing else.
+        (for parititon2)
+
+There is no problem in running bitbake two times to create these two
+images.  It is also fine to get a tar.gz instead of squashfs filesystem.
+
+Any suggestions on how to do this?
+
+Thanks and Regards
+
+Anand
 
 
+-- 
+http://saurorja.org
+Twitter: @anand_sivaram
 
