@@ -1,50 +1,22 @@
-Received: from mail-am1.bigfish.com ([213.199.180.138]
-	helo=AM1EHSOBE001.bigfish.com)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1RQ1zN-0005zv-08
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 20:14:41 +0100
-Received: from mail9-am1-R.bigfish.com (10.3.201.244) by
-	AM1EHSOBE001.bigfish.com (10.3.204.21) with Microsoft SMTP Server id
-	14.1.225.22; Mon, 14 Nov 2011 19:07:46 +0000
-Received: from mail9-am1 (localhost [127.0.0.1])	by mail9-am1-R.bigfish.com
-	(Postfix) with ESMTP id A909B6403C1	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 19:07:16 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VS-12(zz9371K1432N98dKzz1202hzz8275bhz2dh2a8h668h839h8e2h8e3h)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail9-am1 (localhost.localdomain [127.0.0.1]) by mail9-am1
-	(MessageSwitch) id 1321297636627769_28507;
-	Mon, 14 Nov 2011 19:07:16 +0000 (UTC)
-Received: from AM1EHSMHS004.bigfish.com (unknown [10.3.201.241])	by
-	mail9-am1.bigfish.com (Postfix) with ESMTP id 89CD75C0042	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 19:07:16 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS004.bigfish.com
-	(10.3.207.104) with Microsoft SMTP Server (TLS) id 14.1.225.22;
-	Mon, 14 Nov 2011 19:07:45 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.83]) by
-	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
-	14.01.0339.002; Mon, 14 Nov 2011 13:08:14 -0600
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] GCC Error
-Thread-Index: AQHMov+P3c/H1X3ltEmCHoq9Qg2a8A==
-Date: Mon, 14 Nov 2011 19:08:14 +0000
-Message-ID: <CAEsOVNdtanuSxeyMew2Dvt6-nULXWiE1tCsc-nSs71AsH_5jYg@mail.gmail.com>
-References: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
-	<CAEsOVNf_5HnBQHuJpuOrAXJQDhhoM7kAF5L56bCF=fBFeOjxyA@mail.gmail.com>
-	<CALJpqJwzNbcvmHbSZiy2Be5-akzkOpaZucaHa_0vMDsPYn7=MA@mail.gmail.com>
-In-Reply-To: <CALJpqJwzNbcvmHbSZiy2Be5-akzkOpaZucaHa_0vMDsPYn7=MA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [99.47.177.27]
+	(envelope-from <david.thomas@microbee-systems.com>)
+	id 1RQ1zO-0005zz-Ev for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Nov 2011 20:14:42 +0100
+Received: by wyg8 with SMTP id 8so1817296wyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Nov 2011 11:08:21 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
+Received: by 10.227.205.130 with SMTP id fq2mr16765095wbb.17.1321297700959;
+	Mon, 14 Nov 2011 11:08:20 -0800 (PST)
+Received: by 10.227.200.14 with HTTP; Mon, 14 Nov 2011 11:08:20 -0800 (PST)
+In-Reply-To: <20111114190400.GD311@jama.jama.net>
+References: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
+	<20111114190400.GD311@jama.jama.net>
+Date: Mon, 14 Nov 2011 13:08:20 -0600
+Message-ID: <CALJpqJzOZeF3sKSdSjAtbA=vhwf53daa=2hqaVzVEpCoVV+xMg@mail.gmail.com>
+From: David Thomas <david.thomas@microbee-systems.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: GCC Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -59,24 +31,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 19:14:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <BD94DCDC8CB036438F2B176755604EFD@freescale.net>
+X-List-Received-Date: Mon, 14 Nov 2011 19:14:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 14, 2011 at 1:06 PM, David Thomas
-<david.thomas@microbee-systems.com> wrote:
-> 1) Fixing the (potential) errors in the source code
+gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5)
+
+Sigh, update time?
+
+Appreciate the help. Not sure why the beagleboard test I ran compiles
+but not this one...
+
+Dave
+
+
+
+On Mon, Nov 14, 2011 at 1:04 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Mon, Nov 14, 2011 at 12:55:37PM -0600, David Thomas wrote:
+>> I am getting a gcc error
 >
-> Since I pulled this from Angstrom are you saying there is a error in
-> the sources I need to hunt down??
+> What recipe is failing with this?
+>
+>> cc1: error: -Werror=3Dunused-but-set-variable: No option -Wunused-but-se=
+t-variable
+>
+> and what gcc version is used in that Angstrom version you're using?
+>
+> This option was added to gcc-4.6, so if you have 4.5 then it will
+> probably fail if recipe is forcing such option to CFLAGS.
+>
+> Cheers,
+>
+>> Using the Angstrom scripts I can run machine=3Dbeagleboard and complete.
+>> However, machine=3Dcm-t35 with a cm-t35.conf file throws this error.
+>>
+>> I am having to guess that the machine file is all that was required,
+>> it seems to pich all the right arch, etc.
+>>
+>> I had asked on Angstrom for any CM-T35 related info to no avail...
+>>
+>> --
+>> Dave Thomas
+>> MicroBee Systems, Inc
+>> 1429 Weatherly Road, Suite G
+>> Huntsville, AL 35803-1187
+>> 256-489-6671 (Voice)
+>> 256-426-2431 (Mobile)
+>> 256-489-6673 (FAX)
+>> www.microbee-systems.com
+>> "Innovative Solutions for an Embedded World"
+>>
+>> This message is intended for the sole use of the addressee, and may
+>> contain information that is privileged, confidential and exempt from
+>> disclosure under applicable law. If you are not the addressee you are
+>> hereby notified that you may not use, copy, disclose, or distribute to
+>> anyone the message or any information contained in the message. If you
+>> have received this message in error, please immediately advise the
+>> sender by reply email and delete this message.
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-It's a new build warning, it's something GCC is saying could be an
-issue. It's probably not in Angstrom but rather in the source of a
-package Angstrom is building.
 
--M=
 
+--=20
+Dave Thomas
+MicroBee Systems, Inc
+1429 Weatherly Road, Suite G
+Huntsville, AL 35803-1187
+256-489-6671 (Voice)
+256-426-2431 (Mobile)
+256-489-6673 (FAX)
+www.microbee-systems.com
+"Innovative Solutions for an Embedded World"
+
+This message is intended for the sole use of the addressee, and may
+contain information that is privileged, confidential and exempt from
+disclosure under applicable law. If you are not the addressee you are
+hereby notified that you may not use, copy, disclose, or distribute to
+anyone the message or any information contained in the message. If you
+have received this message in error, please immediately advise the
+sender by reply email and delete this message.
 
 
