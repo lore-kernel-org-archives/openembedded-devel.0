@@ -1,25 +1,23 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Cd-0001ef-Qf
+	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Cg-0001ep-Ky
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 22:36:31 +0100
-Received: (qmail invoked by alias); 14 Nov 2011 21:30:09 -0000
+	Mon, 14 Nov 2011 22:36:34 +0100
+Received: (qmail invoked by alias); 14 Nov 2011 21:30:08 -0000
 Received: from p5B0A3A75.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.58.117]
-	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:09 +0100
+	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:08 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19dpaI/dNBdjdvmw2VcRKt8VCa8NDViDPvsUqGJmv
-	FjqihDppzlX3Ru
+X-Provags-ID: V01U2FsdGVkX1/gGEgjvxPgDBAFqLnMIv2uLFa4t9a1Ym7yviJDcB
+	7ffe56Z+w/2j5O
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 22:35:09 +0100
-Message-Id: <1321306512-9055-3-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 14 Nov 2011 22:35:07 +0100
+Message-Id: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
-References: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce][V2 2/5] midori: update to 0.4.2
+Subject: [meta-xfce][V2 0/5] cleanup and bugfixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,46 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 21:36:31 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 21:36:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-for bad and sometimes vala-dirty people [1] we keep overwriting of waf since
-midori still installs waf 1.5.19
-(checked by bitbake -cunpack midori && <midori-workdir>/waf --version).
+V1 -> V2:
+* midori: cleanup commit message
+* tumbler: use INSANE_SKIP
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/035995.html
+Andreas Müller (5):
+  xfce4-dev-tools: cleanups
+  midori: update to 0.4.2
+  tumbler: initial add 0.1.22
+  ristretto: update to 0.3.0
+  ristretto: add tumbler to RRECOMMENDS_${PN}
 
-Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
  .../midori/{midori-0.4.1 => midori}/waf            |  Bin 92569 -> 92569 bytes
- .../midori/{midori_0.4.1.bb => midori_0.4.2.bb}    |    4 ++--
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../midori/{midori_0.4.1.bb => midori_0.4.2.bb}    |    4 +-
+ .../{ristretto_0.2.2.bb => ristretto_0.3.0.bb}     |    6 ++-
+ meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb   |   32 ++++++++++++++++++++
+ .../xfce4-dev-tools/xfce4-dev-tools_4.8.0.bb       |    8 +++--
+ 5 files changed, 43 insertions(+), 7 deletions(-)
  rename meta-oe/recipes-connectivity/midori/{midori-0.4.1 => midori}/waf (100%)
  rename meta-oe/recipes-connectivity/midori/{midori_0.4.1.bb => midori_0.4.2.bb} (58%)
+ rename meta-xfce/recipes-apps/ristretto/{ristretto_0.2.2.bb => ristretto_0.3.0.bb} (64%)
+ create mode 100644 meta-xfce/recipes-xfce/tumbler/tumbler_0.1.22.bb
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori-0.4.1/waf b/meta-oe/recipes-connectivity/midori/midori/waf
-similarity index 100%
-rename from meta-oe/recipes-connectivity/midori/midori-0.4.1/waf
-rename to meta-oe/recipes-connectivity/midori/midori/waf
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-similarity index 58%
-rename from meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-rename to meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-index 7f4eb4b..10109e6 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.1.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.2.bb
-@@ -10,7 +10,7 @@ do_configure_prepend() {
-   cp -f ${WORKDIR}/waf ${S}/
- }
- 
--SRC_URI[midori.md5sum] = "33dde203cd71ae2b1d2adcc7f5739f65"
--SRC_URI[midori.sha256sum] = "b3c77ddb6f562a0ea3d2e6fbb756ca0dc158ad8410f4b60f8e5998c2f7305f07"
-+SRC_URI[midori.md5sum] = "4ec9c3daa332ebe865cba6aa8256ef63"
-+SRC_URI[midori.sha256sum] = "2e3f104254fb9a28c77e8acf1cc8ae6dd529499711d558b29146ab0fa915f0a7"
- 
- 
 -- 
 1.7.4.4
 
