@@ -1,32 +1,29 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <todd.kempel@gmail.com>) id 1RPyOg-0006sy-Av
+	(envelope-from <vita.preskovsky@gmail.com>) id 1RPyRk-00070a-Tv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 16:24:34 +0100
-Received: by yenq7 with SMTP id q7so175235yen.6
+	Mon, 14 Nov 2011 16:27:45 +0100
+Received: by yenq7 with SMTP id q7so178667yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 07:18:12 -0800 (PST)
+	Mon, 14 Nov 2011 07:21:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=7IUnQh4/3u/RdeANoVBRoSKdjbulxCqilIoXckSOWm0=;
-	b=DuBoevXwQoGXggd92iWD1P7//tyYEv1rv3pQV6OxhIn5+i6B0WrRGnJDagwlabRjGb
-	9cB7ViD9QMDfWJynGPeIoQIR8qjpPpve6PzIeFZb/3SDoGECBP2PeW8dh4/X762lfmZy
-	F4NA/fgduWquPEutfVBm9myeXKt9Kcn1QvTxg=
-Received: by 10.146.200.27 with SMTP id x27mr1331142yaf.31.1321283891222;
-	Mon, 14 Nov 2011 07:18:11 -0800 (PST)
-Received: from localhost.localdomain
-	(173-165-236-123-minnesota.hfc.comcastbusiness.net.
-	[173.165.236.123])
-	by mx.google.com with ESMTPS id 8sm61948955anv.16.2011.11.14.07.18.09
+	bh=36hMZZuyhTM2++dGAOjylMVZM4TIhP2CSBNt1ztimgY=;
+	b=aA4hwRKrLdrIOrOxA2WDr7+NeRJKaj/j3UrMYmZrDOZU0r5pAgfUFut2HBjmvmbY5R
+	jRlcjP9ccqcFajgiUJFswICcfP/LEBlivciG0FARPbgSihofCa8NSkH+wCI55S31YA/e
+	SKKipenY6mmuLKC8+4Nyw/fzNqoi62LNnPlcg=
+Received: by 10.146.179.31 with SMTP id b31mr2594623yaf.38.1321284081880;
+	Mon, 14 Nov 2011 07:21:21 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id k3sm62054496ann.0.2011.11.14.07.21.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Nov 2011 07:18:10 -0800 (PST)
-From: Todd Kempel <todd.kempel@gmail.com>
+	Mon, 14 Nov 2011 07:21:18 -0800 (PST)
+From: Vita Preskovsky <vita.preskovsky@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 09:17:42 -0600
-Message-Id: <1321283862-3579-1-git-send-email-todd.kempel@gmail.com>
-X-Mailer: git-send-email 1.7.4.1
-Cc: Todd Kempel <todd.kempel@gmail.com>
-Subject: [PATCH v2] batctl: Add version 2011.3.0 (initial recipe)
+Date: Mon, 14 Nov 2011 17:20:45 +0200
+Message-Id: <1321284045-13726-1-git-send-email-vitap@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] bluez4: Add version 4.95 Signed-off-by: Vita Preskovsky <vitap@ti.com> Adds new recipe that builds bluez-4.95 package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,60 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 15:24:34 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 15:27:45 -0000
 
-* batmand is included in the current OE repository but is not being actively maintained.
-  The batman-adv kernel module is a replacement for batmand and requires batctl for operation.
-  Recipe has been tested and binary found fully operational using Angstrom on gumstix board.
-
-Signed-off-by: Todd Kempel <todd.kempel@gmail.com>
+ Second version of the patch adresses comments made by community 
+ members. Checked on angstrom, version 2011.09.
 ---
- recipes/batctl/batctl.inc         |   20 ++++++++++++++++++++
- recipes/batctl/batctl_2011.3.0.bb |    6 ++++++
- 2 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 recipes/batctl/batctl.inc
- create mode 100644 recipes/batctl/batctl_2011.3.0.bb
+ recipes/bluez/bluez4_4.95.bb |   30 ++++++++++++++++++++++++++++++
+ 1 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/bluez4_4.95.bb
 
-diff --git a/recipes/batctl/batctl.inc b/recipes/batctl/batctl.inc
+diff --git a/recipes/bluez/bluez4_4.95.bb b/recipes/bluez/bluez4_4.95.bb
 new file mode 100644
-index 0000000..75bb62f
+index 0000000..290dff6
 --- /dev/null
-+++ b/recipes/batctl/batctl.inc
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "Control application for B.A.T.M.A.N. routing protocol kernel module for multi-hop ad-hoc mesh networks."
-+HOMEPAGE = "http://www.open-mesh.net/"
-+SECTION = "console/network"
-+PRIORITY = "optional"
-+LICENSE = "GPL"
++++ b/recipes/bluez/bluez4_4.95.bb
+@@ -0,0 +1,30 @@
++require bluez4.inc
 +
-+INC_PR = "r0"
++SRC_URI = "\
++  ${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-${PV}.tar.gz \
++  file://bluetooth.conf \
++"
++SRC_URI[md5sum] = "341294b2849a04a4afff5c96bfbf30b2"
++SRC_URI[sha256sum] = "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0ce6bebd27fa4120f6"
 +
-+RDEPENDS_${PN} = "kernel-module-batman-adv"
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_angstrom = "1"
 +
-+SRC_URI = "http://downloads.open-mesh.net/batman/stable/sources/batctl/batctl-${PV}.tar.gz"
++DEPENDS += "libsndfile1"
 +
-+do_compile() {
-+  oe_runmake
-+}
-+
-+do_install() {
-+  install -d ${D}${bindir}
-+  install -m 0755 batctl ${D}${bindir}
-+}
-diff --git a/recipes/batctl/batctl_2011.3.0.bb b/recipes/batctl/batctl_2011.3.0.bb
-new file mode 100644
-index 0000000..97d8e17
---- /dev/null
-+++ b/recipes/batctl/batctl_2011.3.0.bb
-@@ -0,0 +1,6 @@
-+require batctl.inc
 +PR = "${INC_PR}.0"
 +
++# Not all distros have a recent enough udev
++BTUDEV = " --disable-udevrules"
++BTUDEV_angstrom = " --enable-udevrules"
++BTUDEV_shr = " --enable-udevrules"
 +
-+SRC_URI[md5sum] = "8eb197896049bb04a6beef56015a16b6"
-+SRC_URI[sha256sum] = "94922fd167d2bca5193cc7465bfc212c2c3595da70e653506493dfc65e4410fb"
++EXTRA_OECONF += "${BTUDEV}"
++do_configure_append(){
++	echo "#define LIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE" >> ${S}/config.h
++}
++
++FILES_${PN}-dbg += "\
++  ${base_libdir}/udev/.debug \
++  ${libdir}/*/.debug \
++"
 -- 
-1.7.4.1
+1.7.0.4
 
 
 
