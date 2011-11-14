@@ -1,49 +1,32 @@
-Received: from mail-am1.bigfish.com ([213.199.180.138]
-	helo=AM1EHSOBE002.bigfish.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1RQ1r5-0005dd-Ry
+	(envelope-from <martin.jansa@gmail.com>) id 1RQ1vO-0005mw-LV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 20:06:08 +0100
-Received: from mail30-am1-R.bigfish.com (10.3.201.243) by
-	AM1EHSOBE002.bigfish.com (10.3.204.22) with Microsoft SMTP Server id
-	14.1.225.22; Mon, 14 Nov 2011 18:59:16 +0000
-Received: from mail30-am1 (localhost [127.0.0.1])	by mail30-am1-R.bigfish.com
-	(Postfix) with ESMTP id 4967D58048D	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 19:00:16 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VS-12(zz9371K1432N98dKzz1202hzz8275bhz2dh2a8h668h839h8e2h8e3h)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-FB-SS: 13,
-Received: from mail30-am1 (localhost.localdomain [127.0.0.1]) by mail30-am1
-	(MessageSwitch) id 1321297216221425_5749;
-	Mon, 14 Nov 2011 19:00:16 +0000 (UTC)
-Received: from AM1EHSMHS004.bigfish.com (unknown [10.3.201.254])	by
-	mail30-am1.bigfish.com (Postfix) with ESMTP id 319AA700043	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2011 19:00:16 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS004.bigfish.com
-	(10.3.207.104) with Microsoft SMTP Server (TLS) id 14.1.225.22;
-	Mon, 14 Nov 2011 18:59:13 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.83]) by
-	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
-	14.01.0339.002; Mon, 14 Nov 2011 12:59:39 -0600
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] GCC Error
-Thread-Index: AQHMov+P3c/H1X3ltEmCHoq9Qg2a8A==
-Date: Mon, 14 Nov 2011 18:59:39 +0000
-Message-ID: <CAEsOVNf_5HnBQHuJpuOrAXJQDhhoM7kAF5L56bCF=fBFeOjxyA@mail.gmail.com>
+	Mon, 14 Nov 2011 20:10:34 +0100
+Received: by faat2 with SMTP id t2so5802705faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Nov 2011 11:04:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=hGuFEuSF74yHNg5QHNlT5M3ux/vNFlzT/0TpiVwWdc8=;
+	b=UFuMcV+UQyt378Fa7XjPsBMrmCP780dGhxaKC8sudushbAi++ZFO6TQl7zXr+N9sVT
+	xdakXBfgyoX76zEz/PvakLgMSToDzOl13OZkv5eGKbWH9y6/4vT0L/PAjlzrX1690hVc
+	9O/D6HVN6icYNTxjgk8QOj/fsJtKPETc44t9k=
+Received: by 10.205.133.148 with SMTP id hy20mr12977338bkc.132.1321297452960; 
+	Mon, 14 Nov 2011 11:04:12 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z15sm34174005bkv.4.2011.11.14.11.04.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Nov 2011 11:04:12 -0800 (PST)
+Date: Mon, 14 Nov 2011 20:04:00 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111114190400.GD311@jama.jama.net>
 References: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
-In-Reply-To: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [99.47.177.27]
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
+In-Reply-To: <CALJpqJz0x63nDkXuJe3Xp9k014gyaMnONpFUWtds5VNCUrTnrA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: GCC Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -58,35 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 19:06:08 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <E18B8CC857347442909958E254F6FB03@freescale.net>
+X-List-Received-Date: Mon, 14 Nov 2011 19:10:34 -0000
+X-Groupsio-MsgNum: 35387
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1sNVjLsmu1MXqwQ/"
+Content-Disposition: inline
+
+--1sNVjLsmu1MXqwQ/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 14, 2011 at 12:55 PM, David Thomas
-<david.thomas@microbee-systems.com> wrote:
+On Mon, Nov 14, 2011 at 12:55:37PM -0600, David Thomas wrote:
 > I am getting a gcc error
->
+
+What recipe is failing with this?
+
 > cc1: error: -Werror=3Dunused-but-set-variable: No option -Wunused-but-set=
 -variable
->
+
+and what gcc version is used in that Angstrom version you're using?
+=20
+This option was added to gcc-4.6, so if you have 4.5 then it will
+probably fail if recipe is forcing such option to CFLAGS.
+
+Cheers,
+
 > Using the Angstrom scripts I can run machine=3Dbeagleboard and complete.
 > However, machine=3Dcm-t35 with a cm-t35.conf file throws this error.
->
+>=20
 > I am having to guess that the machine file is all that was required,
 > it seems to pich all the right arch, etc.
->
+>=20
 > I had asked on Angstrom for any CM-T35 related info to no avail...
+>=20
+> --=20
+> Dave Thomas
+> MicroBee Systems, Inc
+> 1429 Weatherly Road, Suite G
+> Huntsville, AL 35803-1187
+> 256-489-6671 (Voice)
+> 256-426-2431 (Mobile)
+> 256-489-6673 (FAX)
+> www.microbee-systems.com
+> "Innovative Solutions for an Embedded World"
+>=20
+> This message is intended for the sole use of the addressee, and may
+> contain information that is privileged, confidential and exempt from
+> disclosure under applicable law. If you are not the addressee you are
+> hereby notified that you may not use, copy, disclose, or distribute to
+> anyone the message or any information contained in the message. If you
+> have received this message in error, please immediately advise the
+> sender by reply email and delete this message.
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-This error is on by default for the compiler for OE now. You can get
-around it by
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-1) Fixing the (potential) errors in the source code
-2) Turning off the error in the build (EXTRA_CFLAGS =3D
-"-Wno-error=3Dunused-but-set-variable" or something similiar)
+--1sNVjLsmu1MXqwQ/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--M=
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk7BZh8ACgkQN1Ujt2V2gBy3bACeLU/e2lx5vSV3/6RmyhNRpV5d
+4NEAoJI4GHYLvCAdD3ca0yHOYvZ8apI6
+=tDh6
+-----END PGP SIGNATURE-----
 
-
+--1sNVjLsmu1MXqwQ/--
