@@ -1,25 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
+Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Ci-0001fE-7y
+	(envelope-from <schnitzeltony@gmx.de>) id 1RQ4Kv-0002Hl-4w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Nov 2011 22:36:36 +0100
-Received: (qmail invoked by alias); 14 Nov 2011 21:30:13 -0000
+	Mon, 14 Nov 2011 22:45:06 +0100
+Received: (qmail invoked by alias); 14 Nov 2011 21:38:43 -0000
 Received: from p5B0A3A75.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.58.117]
-	by mail.gmx.net (mp007) with SMTP; 14 Nov 2011 22:30:13 +0100
+	by mail.gmx.net (mp050) with SMTP; 14 Nov 2011 22:38:43 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19Uz0wxSMNUj9iPNQlJU1krLpV2D9hwBHMt3ikehx
-	5XVOFCor3t34xs
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+X-Provags-ID: V01U2FsdGVkX1/SjUxC3rPSiZzDjB21yeU20d5NVTSx1hz6ZWCpdq
+	Gsux42dhFyl9Cj
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Nov 2011 22:35:11 +0100
-Message-Id: <1321306512-9055-5-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
-References: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 14 Nov 2011 22:43:48 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-103.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <201111140105.00784.schnitzeltony@gmx.de>
+	<201111142207.50587.schnitzeltony@gmx.de>
+In-Reply-To: <201111142207.50587.schnitzeltony@gmx.de>
 MIME-Version: 1.0
+Message-Id: <201111142243.48373.schnitzeltony@gmx.de>
 X-Y-GMX-Trusted: 0
-Subject: [meta-xfce][V2 4/5] ristretto: update to 0.3.0
+Subject: Re: networkmanager: update to 0.9.2.0 causes trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,35 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 21:36:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 14 Nov 2011 21:45:06 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-run tested on overo
+On Monday, November 14, 2011 10:07:50 PM Andreas M=FCller wrote:
+> On Monday, November 14, 2011 01:05:00 AM Andreas M=FCller wrote:
+> > since
+> >=20
+> > commit 037cb32f99f229c9c55a029bec088ebc7f59d278
+> > Author: Koen Kooi <koen@dominion.thruhere.net>
+> > Date:   Fri Nov 11 12:50:38 2011 +0100
+> >=20
+> >     networkmanager: update to 0.9.2.0
+> >=20
+> > wlan connects successfully to my router but *fails* to connect external
+> > locations.
+> >=20
+> > networkmanager / nm-applet set up my network as
+> > eth0: IPv4 fixed IP
+> > wlan0: WPA & WPA 2 Personal / IPv4 DHCP
+> >=20
+> > Attached you find the results for networkmanager 0.9.2 and networkmanag=
+er
+> > 0.9.0 (reverted 037cb32f99f229c9c55a029bec088ebc7f59d278)
+> >=20
+> > My suggestion:
+> > * revert 037cb32f99f229c9c55a029bec088ebc7f59d278 until fixed
+> > * send a note to gnome bugzilla
+>=20
+=46YI: with network-manager-applet 0.9.2.0 the problem persists
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../{ristretto_0.2.2.bb => ristretto_0.3.0.bb}     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/ristretto/{ristretto_0.2.2.bb => ristretto_0.3.0.bb} (68%)
-
-diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.2.2.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-similarity index 68%
-rename from meta-xfce/recipes-apps/ristretto/ristretto_0.2.2.bb
-rename to meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-index 78d090c..a8c028f 100644
---- a/meta-xfce/recipes-apps/ristretto/ristretto_0.2.2.bb
-+++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-@@ -7,5 +7,5 @@ DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
- 
- inherit xfce-app
- 
--SRC_URI[md5sum] = "ee812d1200674960c246a7e05a1cbc6d"
--SRC_URI[sha256sum] = "c43832d7e6e37b670c3dd04dcf406266ff5980dc80abed7b8a82aa7c7defaa69"
-+SRC_URI[md5sum] = "124c4e98f837e35c728b0ff1d9078b1a"
-+SRC_URI[sha256sum] = "a8bf0aa8a18af4ad8d53cbfc918bc92db51b5446cf7ff09e7b988fe5c7b986e4"
--- 
-1.7.4.4
-
+Andreas
 
 
