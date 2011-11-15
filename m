@@ -1,24 +1,36 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1RQNQy-0005Oy-AN
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Nov 2011 19:08:36 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1RQNkE-0000Jb-8W
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Nov 2011 19:28:30 +0100
-Message-ID: <4EC2A928.30709@kernelconcepts.de>
-Date: Tue, 15 Nov 2011 19:02:16 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110921 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RQO5y-0006Av-UQ for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Nov 2011 19:50:59 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RQNzp-0008IV-R7 for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Nov 2011 19:44:37 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Nov 2011 19:44:37 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Nov 2011 19:44:37 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4EC19A78.6040103@gmx.net>
-In-Reply-To: <4EC19A78.6040103@gmx.net>
-X-Enigmail-Version: 1.1.2
-Subject: Re: OpenEmbedded @ FOSDEM 2012
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 15 Nov 2011 19:44:25 +0100
+Message-ID: <j9ubu8$6f8$1@dough.gmane.org>
+References: <1321306512-9055-1-git-send-email-schnitzeltony@gmx.de>
+	<j9ti8o$q4t$2@dough.gmane.org>
+	<201111151509.44547.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <201111151509.44547.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.3
+Subject: Re: [meta-xfce][V2 0/5] cleanup and bugfixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,33 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2011 18:08:36 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Nov 2011 18:50:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 14.11.2011 23:47, schrieb Robert Schuster:
-> Hi all,
-> the registration for stands at the next FOSDEM in Brussels (February
-> 4/5th 2012) is open and I am going to write our application really soon.
+Op 15-11-11 15:09, Andreas Müller schreef:
+> On Tuesday, November 15, 2011 12:26:16 PM Koen Kooi wrote:
+>> Op 14-11-11 22:35, Andreas Müller schreef:
+>>> V1 -> V2: * midori: cleanup commit message * tumbler: use
+>>> INSANE_SKIP
+>>> 
+>>> Andreas Müller (5): xfce4-dev-tools: cleanups midori: update to
+>>> 0.4.2 tumbler: initial add 0.1.22 ristretto: update to 0.3.0
+>>> ristretto: add tumbler to RRECOMMENDS_${PN}
+>> 
+>> To double check: this one can be pulled in as-is, right?
+> From my point of view the patches are OK (run tested based fresh build
+> dir / V2 change in tumbler build tested) - but I think I havent't got the
+> point: you need a branch to pull from?
 
-very good - many thanks for taking care about this!
+Patchwork is good enough, I was under the mistaken impression you wanted to
+do a v3 :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-> As with similar events we need people manning the stand who can explain
-> OE to people, show some demos and so on. I'd like to make clear that
+iEYEARECAAYFAk7CswUACgkQMkyGM64RGpH+8ACfSAjPc034sbGuierm7xGF00aA
+9n8AnR7pB2NFi9Rhv0IZ4vpPhn7ZtkQo
+=YSSv
+-----END PGP SIGNATURE-----
 
-I plan to be there...
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
