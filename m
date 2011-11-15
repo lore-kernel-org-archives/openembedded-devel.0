@@ -1,30 +1,25 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mgargela@gmail.com>) id 1RQP0a-0007qr-6m
+	(envelope-from <denis@denix.org>) id 1RQSuP-00052w-A4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Nov 2011 20:49:28 +0100
-Received: by ywt2 with SMTP id 2so4993368ywt.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2011 11:43:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=h3mHzCunGLVDmH/9xZjEQbrKQrQHqzGIZ4GHbvr8KFw=;
-	b=dmIHwBMsznV4YfRAC9q5vnD8xjZeSEqFZZSmGPfnwQsZ+E2j2btcBCIfIZTs5TllML
-	TzU4QnLcBIPUu9j6gok4PpCNCvg4SlWKoq7wsrHSFzGHwLeNaBjr//sgeJ/m/hUP73NP
-	vlKFxQAUM15X5Clc/cRXUgBt30YarWUZTw2NU=
-MIME-Version: 1.0
-Received: by 10.100.130.14 with SMTP id c14mr1988873and.114.1321386185022;
-	Tue, 15 Nov 2011 11:43:05 -0800 (PST)
-Sender: mgargela@gmail.com
-Received: by 10.236.110.7 with HTTP; Tue, 15 Nov 2011 11:43:04 -0800 (PST)
-Date: Tue, 15 Nov 2011 21:43:04 +0200
-X-Google-Sender-Auth: xIxFCilk9oLGLoEaTXjkMAQc6p0
-Message-ID: <CAObi9r-fY1M+5PbW=ZXxfPigrT_yrOabWv9C1_2VL-OBg037Xg@mail.gmail.com>
-From: mgundes <mgcse@hotmail.com>
+	Wed, 16 Nov 2011 00:59:21 +0100
+Received: from gandalf.denix.org ([unknown] [96.240.135.93])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LUQ003YH7NTJ061@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	15 Nov 2011 17:52:47 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A6A0014AF5D; Tue,
+	15 Nov 2011 18:52:41 -0500 (EST)
+Date: Tue, 15 Nov 2011 18:52:41 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: wrapping bb and updating base bb environments
+Message-id: <20111115235241.GC15557@denix.org>
+References: <CAObi9r-fY1M+5PbW=ZXxfPigrT_yrOabWv9C1_2VL-OBg037Xg@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAObi9r-fY1M+5PbW=ZXxfPigrT_yrOabWv9C1_2VL-OBg037Xg@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: wrapping bb and updating base bb environments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,48 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2011 19:49:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Nov 2011 23:59:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-   Hi,
+On Tue, Nov 15, 2011 at 09:43:04PM +0200, mgundes wrote:
+>    Hi,
+> 
+>    I wonder if there is a way to wrap a bb file. For example, I use
+> dropbear with oe classic but I need to make some update in dropbear init
+> script. I copied oe/openembedded/recipes/dropbear/ to another bb path which
+> has higher bbfile priority. In this case bitbake find bb and files
+> in workarea/recipes/dropbear/ and I update init script in
+> path workarea/recipes/dropbear/dropbear/init. It is ok and work fine
+> however I duplicate whole recipe files for my little update. Is there a
+> better way do same thing without duplicating whole files such as simple bb
+> wrapping original dropbear bb file?
+> 
+>    Since oe is so modular and talented I though there would already be a
+> way to do that :)
 
-   I wonder if there is a way to wrap a bb file. For example, I use
-dropbear with oe classic but I need to make some update in dropbear init
-script. I copied oe/openembedded/recipes/dropbear/ to another bb path which
-has higher bbfile priority. In this case bitbake find bb and files
-in workarea/recipes/dropbear/ and I update init script in
-path workarea/recipes/dropbear/dropbear/init. It is ok and work fine
-however I duplicate whole recipe files for my little update. Is there a
-better way do same thing without duplicating whole files such as simple bb
-wrapping original dropbear bb file?
+There are at least 2 ways - first is the old amend class[1], which allows you 
+to alter recipes with simple amend.inc placed in your overlay, that gets 
+parsed after the corresponding recipe, letting you overwrite any variables 
+from the original recipe, like we often do in Arago, for example[2][3].
 
-   Since oe is so modular and talented I though there would already be a
-way to do that :)
+Another way is to use bbappend feature of the newer bitbake. It's used quite a 
+lot with the "new" layered structure of oe-core and meta-oe. You just place a 
+file, named like your recipe, but instead of .bb extension, it's .bbappend[4][5]
 
-BB>> which dropbear
-SHELL: This command needs to parse bbfiles...
-NOTE: Handling BitBake files: / (8377/8377) [100 %]
-NOTE: Parsing finished. 7604 cached, 448 parsed, 325 skipped, 1 masked.
-
-
- /home/kays/Perforce/checkout_010811/dev/argela/firmware/oe/openembedded/recipes/dropbear/
-dropbear_0.52.bb
-
- /home/kays/Perforce/checkout_010811/dev/argela/firmware/oe/openembedded/recipes/dropbear/
-dropbear_0.49.bb
-
- /home/kays/Perforce/checkout_010811/dev/argela/firmware/oe/openembedded/recipes/dropbear/
-dropbear_0.51.bb
- (***)
-/home/kays/Perforce/checkout_010811/dev/argela/firmware/workarea/recipes/dropbear/
-dropbear_0.51.bb
-
-
-Thanks,
-Regards,
-
-
+[1] http://cgit.openembedded.org/openembedded/tree/classes/amend.bbclass?h=org.openembedded.dev
+[2] http://arago-project.org/git/?p=arago.git;a=blob;f=recipes/openobex/openobex/amend.inc;hb=HEAD
+[3] http://arago-project.org/git/?p=arago.git;a=blob;f=recipes/qt4/qt4-embedded-4.7.2/amend.inc;hb=HEAD
+[4] http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/gcc/gcc-cross_4.6.bbappend
+[5] http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
 
 -- 
-MahmutG
+Denys
+
 
