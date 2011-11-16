@@ -1,26 +1,36 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1RQd6r-0007KC-1k
+	(envelope-from <martin.jansa@gmail.com>) id 1RQgNC-0006CX-9S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Nov 2011 11:52:53 +0100
-Received: from p4fc76d4d.dip.t-dialin.net ([79.199.109.77]
-	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1RQcHi-00085f-Sd by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Wed, 16 Nov 2011 11:00:06 +0100
-Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.77)
-	(envelope-from <stefan@novatech.datenfreihafen.org>)
-	id 1RQcI7-0000oq-7q; Wed, 16 Nov 2011 11:00:27 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Wed, 16 Nov 2011 15:21:58 +0100
+Received: by faat2 with SMTP id t2so1578542faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Nov 2011 06:15:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=qEn6AnJkTHuBrNcR15lWH6UW4c9draCUa6+mytNdcm0=;
+	b=GPczPI2eVk5VFhoqbzVhuu1+OMIcrEcbDn+ynLiZ0PrFLrANmFMAjEJvwCFYQYgCYC
+	CMCzZ6uUZw4S0dj4aKruSC9dldqD/QxbuB+1Tcvrh9Z4Ib0RgYjnO11O4lldGAmJzqI5
+	dPHMYHxu9yTJaoE8dje8IIlnWSAzy8lerF5cs=
+Received: by 10.205.133.137 with SMTP id hy9mr7439982bkc.134.1321452931036;
+	Wed, 16 Nov 2011 06:15:31 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id c12sm5538445fam.1.2011.11.16.06.15.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Nov 2011 06:15:29 -0800 (PST)
+Date: Wed, 16 Nov 2011 15:15:17 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Nov 2011 11:00:14 +0100
-Message-Id: <1321437614-3117-1-git-send-email-stefan@datenfreihafen.org>
-X-Mailer: git-send-email 1.7.7.2
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: [meta-oe] nodejs: Update to latest 0.4x series release 0.4.12
+Message-ID: <20111116141517.GA10880@jama.jama.net>
+References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
+	<20111110074449.GB3933@ad.chargestorm.se>
+	<20111110075607.GH21022@jama.jama.net>
+	<20111110082212.GD3933@ad.chargestorm.se>
+MIME-Version: 1.0
+In-Reply-To: <20111110082212.GD3933@ad.chargestorm.se>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,148 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2011 10:52:53 -0000
+X-List-Received-Date: Wed, 16 Nov 2011 14:21:58 -0000
+X-Groupsio-MsgNum: 35419
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="fdj2RfSjLxBAspz7"
+Content-Disposition: inline
 
-Rename patch and update checksums accordingly.
+--fdj2RfSjLxBAspz7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Stefan Schmidt <stefan@datenfreihafen.org>
----
- .../nodejs/nodejs/libev-cross-cc_0.4.12.patch      |   13 +++++++
- .../nodejs/nodejs/libev-cross-cc_0.4.9.patch       |   13 -------
- meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb   |   37 ++++++++++++++++++++
- meta-oe/recipes-devtools/nodejs/nodejs_0.4.9.bb    |   37 --------------------
- 4 files changed, 50 insertions(+), 50 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.12.patch
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.9.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.4.9.bb
+On Thu, Nov 10, 2011 at 09:22:12AM +0100, Anders Darander wrote:
+> * Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
+> > On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
+> > > * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
+> > > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > > ---
+> > > >  meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++--
+> > > >  1 files changed, 9 insertions(+), 2 deletions(-)
+>=20
+> > > > diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/=
+recipes-core/systemd/systemd_git.bb
+> > > > index 90862a3..d1d4306 100644
+> > > > --- a/meta-oe/recipes-core/systemd/systemd_git.bb
+> > > > +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+> > > > @@ -14,7 +14,7 @@ inherit gitpkgv
+> > > >  # TODO:
+> > > >  # u-a for runlevel and telinit
+> > > > -# u-a prerm
+>=20
+> > > Here on your todo list, it stated u-a for prerm, but you applied it to
+> > > the postrm. In this case, it probably doesn't really matter, but I'd
+> > > still guess that it would make more sense to remove the u-a before
+> > > removing the binaries. Although, I don't think it'll actually cause a=
+ny
+> > > problems in this case.
+>=20
+> > I did what u-a.bbclass usually do.. if you think it should be in prerm
+> > then it would be best to first fix in u-a.bbclass and then we can update
+> > the rest of metadata.
+>=20
+> Yeah, like I said, is't likely not a real problem. There'll probably
+> just be a tiny window during which, in this case, e.g. reboot isn't
+> available, before u-a has been told to change the reboot link.
+>=20
+> I'm currently just a little bit catious as I've recently stumbled upon
+> post-/prerm issues using rpm... (Although the ones I know of (busybox
+> updates, rsyslog removal) are either fixed or there has been patches
+> submitted).
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.12.patch b/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.12.patch
-new file mode 100644
-index 0000000..2b9838f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.12.patch
-@@ -0,0 +1,13 @@
-+diff --git a/deps/libev/wscript b/deps/libev/wscript
-+index 4f6c9a8..1796749 100644
-+--- a/deps/libev/wscript
-++++ b/deps/libev/wscript
-+@@ -58,7 +58,7 @@ def configure(conf):
-+           return 0;
-+       }
-+   """
-+-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
-++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
-+                 msg="Checking for SYS_clock_gettime")
-+ 
-+   have_librt = conf.check(lib='rt', uselib_store='RT')
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.9.patch b/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.9.patch
-deleted file mode 100644
-index 2b9838f..0000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/libev-cross-cc_0.4.9.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--diff --git a/deps/libev/wscript b/deps/libev/wscript
--index 4f6c9a8..1796749 100644
----- a/deps/libev/wscript
--+++ b/deps/libev/wscript
--@@ -58,7 +58,7 @@ def configure(conf):
--           return 0;
--       }
--   """
---  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
--+  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
--                 msg="Checking for SYS_clock_gettime")
-- 
--   have_librt = conf.check(lib='rt', uselib_store='RT')
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
-new file mode 100644
-index 0000000..22e1384
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-+HOMEPAGE = "http://nodejs.org"
-+LICENSE = "MIT && zlib"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
-+
-+DEPENDS = "openssl"
-+
-+SRC_URI = " \
-+  http://nodejs.org/dist/node-v${PV}.tar.gz \
-+  file://libev-cross-cc_${PV}.patch \
-+"
-+SRC_URI[md5sum] = "a6375eaa43db5356bf443e25b828ae16"
-+SRC_URI[sha256sum] = "c01af05b933ad4d2ca39f63cac057f54f032a4d83cff8711e42650ccee24fce4"
-+
-+S = "${WORKDIR}/node-v${PV}"
-+
-+# v8 errors out if you have set CCACHE
-+CCACHE = ""
-+
-+do_configure () {
-+  sed -i -e 's:/usr/lib:${STAGING_LIBDIR}:g' wscript
-+  sed -i -e 's:/usr/local/lib:${STAGING_LIBDIR}:g' wscript
-+  ./configure --prefix=${prefix} --without-snapshot
-+}
-+
-+do_compile () {
-+  make
-+}
-+
-+do_install () {
-+  DESTDIR=${D} oe_runmake install
-+}
-+
-+RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
-+
-+FILES_${PN} += "${libdir}/node/wafadmin"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.4.9.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.4.9.bb
-deleted file mode 100644
-index 70a526d..0000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.4.9.bb
-+++ /dev/null
-@@ -1,37 +0,0 @@
--DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
--HOMEPAGE = "http://nodejs.org"
--LICENSE = "MIT && zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
--
--DEPENDS = "openssl"
--
--SRC_URI = " \
--  http://nodejs.org/dist/node-v${PV}.tar.gz \
--  file://libev-cross-cc_${PV}.patch \
--"
--SRC_URI[md5sum] = "e525b8b99d949bf2f031bc262c138e96"
--SRC_URI[sha256sum] = "f231ea6d19ea9ea4c7f8e7ff5061e7d301f1635bec7ed0ff1eef2512576ea442"
--
--S = "${WORKDIR}/node-v${PV}"
--
--# v8 errors out if you have set CCACHE
--CCACHE = ""
--
--do_configure () {
--  sed -i -e 's:/usr/lib:${STAGING_LIBDIR}:g' wscript
--  sed -i -e 's:/usr/local/lib:${STAGING_LIBDIR}:g' wscript
--  ./configure --prefix=${prefix} --without-snapshot
--}
--
--do_compile () {
--  make
--}
--
--do_install () {
--  DESTDIR=${D} oe_runmake install
--}
--
--RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
--
--FILES_${PN} += "${libdir}/node/wafadmin"
--BBCLASSEXTEND = "native"
--- 
-1.7.7.2
+So should I change postrm to prerm in this patch or is there other
+reason why it wasn't applied yet?
 
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--fdj2RfSjLxBAspz7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk7DxXUACgkQN1Ujt2V2gBxLDACeJmRw/t0HAi57a9Sek0i19Dux
+cHAAn39CxLqC22DNB9we5fynwX/5u+NZ
+=SpZ0
+-----END PGP SIGNATURE-----
+
+--fdj2RfSjLxBAspz7--
