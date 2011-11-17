@@ -1,42 +1,37 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msprathap@ti.com>) id 1RR4jm-0002IF-QW
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Nov 2011 17:22:55 +0100
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAHGGQ3s022340
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RRBA9-00028o-6v for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 00:14:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RRB3s-0005PD-Et for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 00:08:04 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2011 00:08:04 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2011 10:16:28 -0600
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAHGGPAN027335
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2011 21:46:26 +0530 (IST)
-Received: from DBDE01.ent.ti.com ([fe80::d5df:c4b5:9919:4e10]) by
-	DBDE70.ent.ti.com ([fe80::2141:513f:409:315a%21]) with mapi id
-	14.01.0323.003; Thu, 17 Nov 2011 21:46:25 +0530
-From: "Srinivas, Prathap" <msprathap@ti.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Patches to add support for TI Linux Graphics SDK release
-	04.04.00.02 : Patch3-Fix for library linking issue with Graphics SDK
-	Release 04.04.00.02
-Thread-Index: AcyIzd2+N3qNHV6OQ0qpVEOJ0yRTEAcRz4/Q///r4wD//5JzgP//I+eg//5FzTD//IqtYA==
-Date: Thu, 17 Nov 2011 16:16:24 +0000
-Message-ID: <C2C4AB609E1BCF4689C1782E8F42E30A027B48@DBDE01.ent.ti.com>
-References: <5A47E75E594F054BAF48C5E4FC4B92AB038595A123@dbde02.ent.ti.com>
-	<j73pg0$knr$1@dough.gmane.org>
-	<5A47E75E594F054BAF48C5E4FC4B92AB038595A16D@dbde02.ent.ti.com>
-	<j73rr4$5ar$1@dough.gmane.org>
-	<C2C4AB609E1BCF4689C1782E8F42E30A0279FE@DBDE01.ent.ti.com>
-	<ja37bn$roq$1@dough.gmane.org>
-	<C2C4AB609E1BCF4689C1782E8F42E30A027AF8@DBDE01.ent.ti.com>  
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.133.21]
-MIME-Version: 1.0
-Subject: Re: Patches to add support for TI Linux Graphics SDK release 04.04.00.02 : Patch3-Fix for library linking issue with Graphics SDK Release 04.04.00.02
+	Fri, 18 Nov 2011 00:08:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 18 Nov 2011 00:07:50 +0100
+Message-ID: <ja4446$vbc$1@dough.gmane.org>
+References: <201111140105.00784.schnitzeltony@gmx.de>
+	<201111142207.50587.schnitzeltony@gmx.de>
+	<j9ti41$q4t$1@dough.gmane.org>
+	<201111151507.09365.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <201111151507.09365.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.3
+Subject: Re: networkmanager: update to 0.9.2.0 causes trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,148 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2011 16:22:56 -0000
-X-Groupsio-MsgNum: 35428
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_002_C2C4AB609E1BCF4689C1782E8F42E30A027B48DBDE01entticom_"
-
---_002_C2C4AB609E1BCF4689C1782E8F42E30A027B48DBDE01entticom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Attached is the patch for fixing the library linking issue observed with gr=
-aphics SDK release 04.04.00.02.
-
-Thanks,
-Prathap.
-
------Original Message-----
-From: Srinivas, Prathap=20
-Sent: Thursday, November 17, 2011 9:43 PM
-To: 'openembedded-devel@lists.openembedded.org'
-Subject: RE: [oe] Patches to add support for TI Linux Graphics SDK release =
-04.04.00.02 : Patch2-Graphics SDK release 04.04.00.02 build support
-
-Attached is the patch to add support for TI Linux Graphics SDK release 04.0=
-4.00.02.
-
-Thanks,
-Prathap.
-
------Original Message-----
-From: Srinivas, Prathap=20
-Sent: Thursday, November 17, 2011 9:40 PM
-To: 'openembedded-devel@lists.openembedded.org'
-Subject: RE: [oe] Patches to add support for TI Linux Graphics SDK release =
-04.04.00.02 : Patch1-kernel.bbclass update
-
-Attached is the patch for updating kernel.bbclass to stage additional direc=
-tories required for Graphics SDK 04.04.00.02 build.
-
-Thanks,
-Prathap.
-
------Original Message-----
-From: Srinivas, Prathap=20
-Sent: Thursday, November 17, 2011 9:31 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: RE: [oe] Patches to add support for TI Linux Graphics SDK release =
-04.04.00.02
-
-Patch 2 is dependant on Patch 1 and Patch 3 is dependant on Patch 2.
-Anyways, as suggested I will send them separately.
-
-Thanks,
-Prathap.
-
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Koen Kooi
-Sent: Thursday, November 17, 2011 8:27 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Patches to add support for TI Linux Graphics SDK release =
-04.04.00.02
+X-List-Received-Date: Thu, 17 Nov 2011 23:14:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 17-11-11 11:43, Srinivas, Prathap schreef:
-> The comments provided have been addressed. Please find the updated
-> patches attached.
+Op 15-11-11 15:07, Andreas Müller schreef:
+> On Tuesday, November 15, 2011 12:23:45 PM Koen Kooi wrote:
+>> Op 14-11-11 22:07, Andreas Müller schreef:
+>>> On Monday, November 14, 2011 01:05:00 AM Andreas Müller wrote:
+>>>> since
+>>>> 
+>>>> commit 037cb32f99f229c9c55a029bec088ebc7f59d278 Author: Koen Kooi 
+>>>> <koen@dominion.thruhere.net> Date:   Fri Nov 11 12:50:38 2011
+>>>> +0100
+>>>> 
+>>>> networkmanager: update to 0.9.2.0
+>>>> 
+>>>> wlan connects successfully to my router but *fails* to connect 
+>>>> external locations.
+>>>> 
+>>>> networkmanager / nm-applet set up my network as eth0: IPv4 fixed
+>>>> IP wlan0: WPA & WPA 2 Personal / IPv4 DHCP
+>>>> 
+>>>> Attached you find the results for networkmanager 0.9.2 and 
+>>>> networkmanager 0.9.0 (reverted 
+>>>> 037cb32f99f229c9c55a029bec088ebc7f59d278)
+>>>> 
+>>>> My suggestion: * revert 037cb32f99f229c9c55a029bec088ebc7f59d278
+>>>> until fixed * send a note to gnome bugzilla
+>>> 
+>>> FYI: with network-manager-applet the problem persists
+>> 
+>> I'm seeing the same problem with default route not getting set, but
+>> rolling back to the older release won't solve much since binaries are
+>> already out there :/
+>> 
+>> regards,
+>> 
+>> Koen
+> So let's see it as another challenge :)
 
-Please send them as seperate patches so that patchwork will pick them up an=
-d
-people can review them better.
-
-
+As a small update: I'm still working on it. Although I haven't fixed the
+route issue, I have found (and fixed!) other issues :)
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk7FILgACgkQMkyGM64RGpFoJwCgl3zvY6qDGZK7b/6vIMevNhbp
-7kMAn2A9gRnB2Lth+lSYz5vmyfrve+A2
-=3D5YBy
+iEYEARECAAYFAk7Fk8QACgkQMkyGM64RGpHPkwCglhcS9GFS7smPgh+Wwo5HQz7z
+lm8AoJo4A2/R5wjvpjh4MvYL904p4Tc0
+=Vr8k
 -----END PGP SIGNATURE-----
 
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---_002_C2C4AB609E1BCF4689C1782E8F42E30A027B48DBDE01entticom_
-Content-Type: application/octet-stream;
-	name="0003-libgles-omap3.inc-Fix-for-library-linking-isssue-wit.patch"
-Content-Description: 0003-libgles-omap3.inc-Fix-for-library-linking-isssue-wit.patch
-Content-Disposition: attachment;
-	filename="0003-libgles-omap3.inc-Fix-for-library-linking-isssue-wit.patch";
-	size=2351; creation-date="Thu, 17 Nov 2011 10:38:43 GMT";
-	modification-date="Thu, 17 Nov 2011 10:31:47 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSAwZmRhMGE5MTdmNzkxODg3N2Q2YzFhMTRlOTM1MTA4MTdjNGJmMGVjIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQcmF0aGFwIE0gUyA8bXNwcmF0aGFwQHRpLmNvbT4KRGF0ZTog
-VGh1LCAxNyBOb3YgMjAxMSAxNTozNTowOCArMDUzMApTdWJqZWN0OiBbUEFUQ0ggdjIgMy8zXSBs
-aWJnbGVzLW9tYXAzLmluYyA6IEZpeCBmb3IgbGlicmFyeSBsaW5raW5nIGlzc3N1ZSB3aXRoIGdy
-YXBoaWNzIFNESwoKKiBUaGlzIGlzIHRoZSBmaXggZm9yIHRoZSBpc3N1ZSBzZWVuIHdpdGggb3Br
-ZyBpbnN0YWxsIG9mIGxpYmdsZXMtb21hcDNfNC4wNC4wMC4wMi1yMTYuNl9hcm12N2EuaXBrIG9u
-IHRhcmdldC4KKiBXaXRoIEdyYXBoaWNzIFNESyByZWxlYXNlIDA0LjA0LjAwLjAyIG9ud2FyZHMs
-IHRoZXJlIGFyZSAyIHZlcnNpb25zIG9mIHRoZSBsaWJyYXJ5IGxpYnNydl91bS5zbyAtIG9uZSBp
-cyBsaWJzcnZfdW0uc28gYW5kIG90aGVyIGlzIGxpYnNydl91bV9kcmkuc28gKEZvciBYb3JnIGRy
-aXZlcikuSW4gcHJlc2VuY2Ugb2YgbGlic3J2X3VtX2RyaS5zbyAsIHRoZSBsaW5rcyBjcmVhdGVk
-IHVuZGVyIC91c3IvbGliIHdlcmUgYWxsIGJ5IGRlZmF1bHQgbGlua2luZyB0byBsaWJzcnZfdW1f
-ZHJpLnNvIG9ubHkuIER1ZSB0byB0aGlzIDNEIGRlbW9zIHdlcmUgZmFpbGluZy4KKiBUaGlzIGZp
-eCBtYWtlcyBzdXJlIHRoYXQgb25seSBvbmUgYXBwcm9wcmlhdGUgdmVyc2lvbiBvZiB0aGUgbGli
-cmFyeSBsaWJzcnZfdW0uc28gaXMgcHJlc2VudCBvbiB0YXJnZXQgYW5kIGhlbmNlIGxpbmtzIGNy
-ZWF0ZWQgd2lsbCBub3cgYmUgcHJvcGVyLgoKU2lnbmVkLW9mZi1ieTogUHJhdGhhcCBNIFMgPG1z
-cHJhdGhhcEB0aS5jb20+Ci0tLQogcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvbGliZ2xlcy1vbWFw
-My5pbmMgfCAgIDEyICsrKysrKysrKysrKwogMSBmaWxlcyBjaGFuZ2VkLCAxMiBpbnNlcnRpb25z
-KCspLCAwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3JlY2lwZXMvcG93ZXJ2ci1kcml2ZXJz
-L2xpYmdsZXMtb21hcDMuaW5jIGIvcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMvbGliZ2xlcy1vbWFw
-My5pbmMKaW5kZXggZjZiOTRiMC4uMTE5Zjc0YyAxMDA2NDQKLS0tIGEvcmVjaXBlcy9wb3dlcnZy
-LWRyaXZlcnMvbGliZ2xlcy1vbWFwMy5pbmMKKysrIGIvcmVjaXBlcy9wb3dlcnZyLWRyaXZlcnMv
-bGliZ2xlcy1vbWFwMy5pbmMKQEAgLTM4LDYgKzM4LDE4IEBAIGRvX2NvbmZpZ3VyZSgpIHsKIAkJ
-Y2htb2QgMDY0NCAkaQogCWRvbmUgCiAKKwkjIFRoZSBiZWxvdyBmb3IgbG9vcCBpcyB0aGUgZml4
-IGZvciB0aGUgaXNzdWUgc2VlbiB3aXRoIG9wa2cgaW5zdGFsbCBvZiBsaWJnbGVzLW9tYXAzXzQu
-MDQuMDAuMDItcjE2LjZfYXJtdjdhLmlwayBvbiB0YXJnZXQuIAorCSMgV2l0aCBHcmFwaGljcyBT
-REsgcmVsZWFzZSAwNC4wNC4wMC4wMiwgdGhlcmUgYXJlIDIgdmVyc2lvbnMgb2YgdGhlIGxpYnJh
-cnkgbGlic3J2X3VtLnNvIC0gb25lIGlzIGxpYnNydl91bS5zbyBhbmQgb3RoZXIgaXMgbGlic3J2
-X3VtX2RyaS5zbyAoRm9yIFhvcmcgZHJpdmVyKS4gCisJIyBJbiBwcmVzZW5jZSBvZiBsaWJzcnZf
-dW1fZHJpLnNvICwgdGhlIGxpbmtzIGNyZWF0ZWQgdW5kZXIgL3Vzci9saWIgd2VyZSBhbGwgYnkg
-ZGVmYXVsdCBsaW5raW5nIHRvIGxpYnNydl91bV9kcmkuc28gb25seS4gRHVlIHRvIHRoaXMgM0Qg
-ZGVtb3Mgd2VyZSBmYWlsaW5nLiAKKwkjIE5vdyB0aGlzIGZpeCBtYWtlcyBzdXJlIHRoYXQgb25s
-eSBvbmUgYXBwcm9wcmlhdGUgdmVyc2lvbiBvZiB0aGUgbGlicmFyeSBsaWJzcnZfdW0uc28gaXMg
-cHJlc2VudCBvbiB0YXJnZXQgYW5kIGhlbmNlIGxpbmtzIGNyZWF0ZWQgd2lsbCBub3cgYmUgcHJv
-cGVyLgorCisJZm9yIGRyaWZpbGUgaW4gJChmaW5kICR7U30gLW5hbWUgImxpYnNydl91bV9kcmku
-c28iKTsgZG8KKwkJaWYgWyAiJGRyaWZpbGUiICE9ICIiIF0gOyB0aGVuCisJCQlkaXI9JChkaXJu
-YW1lICR7ZHJpZmlsZX0pCisJCQlybSAtcmYgJHtkaXJ9L2xpYnNydl91bV9kcmkuc28KKwkJZmkK
-Kwlkb25lCisKIAkjIEF0dGVtcHQgdG8gY3JlYXRlIHByb3BlciBsaWJyYXJ5IHNvZnRsaW5rcwog
-CWZvciBzb2ZpbGUgaW4gJChmaW5kICR7U30gLW5hbWUgImxpYipPcGVuKi5zbyIpICQoZmluZCAk
-e1N9IC1uYW1lICJsaWIqc3J2Ki5zbyIpICQoZmluZCAke1N9IC1uYW1lICJsaWIqZ2wqLnNvIikg
-JChmaW5kICR7U30gLW5hbWUgImxpYnB2ciouc28iKSAkKGZpbmQgJHtTfSAtbmFtZSAibGliKkdM
-Ki5zbyIpOyBkbwogCQlpZiBbICIkKHJlYWRsaW5rIC1uICR7c29maWxlfSkiID0gIiIgXSA7IHRo
-ZW4KLS0gCjEuNy4xCgo=
-
---_002_C2C4AB609E1BCF4689C1782E8F42E30A027B48DBDE01entticom_--
