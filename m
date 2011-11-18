@@ -1,30 +1,16 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RRCJq-0004Ur-6a
+	(envelope-from <andrea.adami@gmail.com>) id 1RRCXZ-0004yv-Nd
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 01:28:38 +0100
-Received: by iahk25 with SMTP id k25so2910962iah.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2011 16:22:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=hjDxgqOQ7AYrsQKnfhHL1KCxi50mMqUDFY8ryKOQ2Ns=;
-	b=LcfqvN89GUvUKknRI70i2+QkI1LRmiyOf2Nj7tBGzPR+xPA2izkB4d+kod9iJLucg2
-	6OBhkarwyXp+Vr+1MCVw8kQlt3BakEHbVjCTB2wd47jidBfoCF9IofXxhZ6J7hpekeTz
-	pk89pjPjfwrd2EqdKJihbRugX15Ck3QHLsWEQ=
-Received: by 10.42.135.69 with SMTP id o5mr365049ict.34.1321575731755;
-	Thu, 17 Nov 2011 16:22:11 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id ew6sm35060314igc.4.2011.11.17.16.22.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 17 Nov 2011 16:22:10 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Nov 2011 16:22:06 -0800
-Message-Id: <1321575726-25190-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] gcc-4.6: Delete linaro patch that has been committed upstream
+	Fri, 18 Nov 2011 01:42:49 +0100
+Received: from mizar.localdomain (87.5.50.68) by smtp209.alice.it (8.5.124.08)
+	id 4E850A8605666140; Fri, 18 Nov 2011 01:36:24 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 18 Nov 2011 01:36:02 +0100
+Message-Id: <cover.1321575642.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld][PATCH 0/5] Kernel 3.1 and cleanings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,101 +24,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 00:28:38 -0000
+X-List-Received-Date: Fri, 18 Nov 2011 00:42:49 -0000
 
-gcc-4.6-linaro-r106723.patch is actually a fix for PR 47551
-and its needed in oe-core therefore we have to delete this
-here since now it will be part of oe-core
+* Initial commit of kernel 3.1 patchset 1
+*  tested on Zaurus devices
+*  defconfig refinements needed for hx4700 and h1940 (untested)
+*
+* Removed 2.6.39 and 3.0.1 kernel versions
+* Removed git versions (unused by our couple of kernel devs)
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch    |   63 --------------------
- .../gcc/gcc-4_6-branch-linaro-backports.inc        |    1 -
- 2 files changed, 0 insertions(+), 64 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch
+Andrea Adami (5):
+  linux(kexecboot): initial commit of kernel 3.1 updated to patchset 1
+  linux: remove linux-3.0.1. hx4700 is up to 3.1 now.
+  linux(kexecboot): remove kernels 2.6.39
+  linux-kexecboot: remove now unused git version
+  linux: remove unused git version
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch
-deleted file mode 100644
-index 5271ffa..0000000
---- a/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106723.patch
-+++ /dev/null
-@@ -1,63 +0,0 @@
--2011-02-02  Richard Sandiford  <richard.sandiford@linaro.org>
--
--	gcc/
--	PR target/47551
--	* config/arm/arm.c (coproc_secondary_reload_class): Handle
--	structure modes.  Don't check neon_vector_mem_operand for
--	vector or structure modes.
--
--	gcc/testsuite/
--	PR target/47551
--	* gcc.target/arm/neon-modes-2.c: New test.
--
--=== modified file 'gcc/config/arm/arm.c'
----- old/gcc/config/arm/arm.c	2011-02-21 14:04:51 +0000
--+++ new/gcc/config/arm/arm.c	2011-03-02 11:38:43 +0000
--@@ -9139,11 +9139,14 @@
--       return GENERAL_REGS;
--     }
-- 
--+  /* The neon move patterns handle all legitimate vector and struct
--+     addresses.  */
--   if (TARGET_NEON
--+      && MEM_P (x)
--       && (GET_MODE_CLASS (mode) == MODE_VECTOR_INT
---          || GET_MODE_CLASS (mode) == MODE_VECTOR_FLOAT)
---      && neon_vector_mem_operand (x, 0))
---     return NO_REGS;
--+	  || GET_MODE_CLASS (mode) == MODE_VECTOR_FLOAT
--+	  || VALID_NEON_STRUCT_MODE (mode)))
--+    return NO_REGS;
-- 
--   if (arm_coproc_mem_operand (x, wb) || s_register_operand (x, mode))
--     return NO_REGS;
--
--=== added file 'gcc/testsuite/gcc.target/arm/neon-modes-2.c'
----- old/gcc/testsuite/gcc.target/arm/neon-modes-2.c	1970-01-01 00:00:00 +0000
--+++ new/gcc/testsuite/gcc.target/arm/neon-modes-2.c	2011-02-02 10:02:45 +0000
--@@ -0,0 +1,24 @@
--+/* { dg-do compile } */
--+/* { dg-require-effective-target arm_neon_ok } */
--+/* { dg-options "-O1" } */
--+/* { dg-add-options arm_neon } */
--+
--+#include "arm_neon.h"
--+
--+#define SETUP(A) x##A = vld3_u32 (ptr + A * 0x20)
--+#define MODIFY(A) x##A = vld3_lane_u32 (ptr + A * 0x20 + 0x10, x##A, 1)
--+#define STORE(A) vst3_u32 (ptr + A * 0x20, x##A)
--+
--+#define MANY(A) A (0), A (1), A (2), A (3), A (4), A (5)
--+
--+void
--+bar (uint32_t *ptr, int y)
--+{
--+  uint32x2x3_t MANY (SETUP);
--+  int *x = __builtin_alloca (y);
--+  int z[0x1000];
--+  foo (x, z);
--+  MANY (MODIFY);
--+  foo (x, z);
--+  MANY (STORE);
--+}
--
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc b/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
-index 9ed282e..73fe5c8 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
-@@ -1,6 +1,5 @@
- GCC-4_6-BRANCH-LINARO-BACKPORTS = "        \
- file://linaro/gcc-4.6-linaro-r106720.patch \
--file://linaro/gcc-4.6-linaro-r106723.patch \
- file://linaro/gcc-4.6-linaro-r106733.patch \
- file://linaro/gcc-4.6-linaro-r106737.patch \
- file://linaro/gcc-4.6-linaro-r106738.patch \
+ recipes-kernel/linux/linux-2.6.39.inc              |   20 -
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 -
+ recipes-kernel/linux/linux-2.6.39/akita/defconfig  |  381 ----
+ recipes-kernel/linux/linux-2.6.39/c7x0/defconfig   |  378 ----
+ recipes-kernel/linux/linux-2.6.39/collie/defconfig |  324 ----
+ recipes-kernel/linux/linux-2.6.39/h1940/defconfig  | 1704 ------------------
+ .../linux/linux-2.6.39/locomo_kbd_tweak-r2.patch   |   66 -
+ recipes-kernel/linux/linux-2.6.39/poodle/defconfig |  379 ----
+ recipes-kernel/linux/linux-2.6.39/spitz/defconfig  |  381 ----
+ recipes-kernel/linux/linux-2.6.39/tosa/defconfig   |  381 ----
+ ...port-for-the-HTC-ASIC3.-Underlying-suppor.patch |   50 -
+ .../hx4700/0002-tmio_mmc_irq-race.patch            |  114 --
+ ...e-tmio_mmc_dma.o-when-CONFIG_MMC_SDHI-is-.patch |   29 -
+ ...CF-support-for-the-HTC-ASIC3.-Underlying-.patch |  254 ---
+ .../hx4700/0005-Suspend-unbalanced-irqs.patch      |   34 -
+ .../linux/linux-3.0.1/hx4700/0006-suspend.patch    |   55 -
+ ...007-hx4700-change-led-trigger-assignments.patch |   31 -
+ recipes-kernel/linux/linux-3.0.1/hx4700/defconfig  | 1822 --------------------
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 +
+ recipes-kernel/linux/linux-3.1/akita/defconfig     |  378 ++++
+ recipes-kernel/linux/linux-3.1/c7x0/defconfig      |  316 ++++
+ recipes-kernel/linux/linux-3.1/collie/defconfig    |  322 ++++
+ recipes-kernel/linux/linux-3.1/h1940/defconfig     | 1704 ++++++++++++++++++
+ ...port-for-the-HTC-ASIC3.-Underlying-suppor.patch |   50 +
+ .../linux-3.1/hx4700/0002-tmio_mmc_irq-race.patch  |  114 ++
+ ...e-tmio_mmc_dma.o-when-CONFIG_MMC_SDHI-is-.patch |   29 +
+ ...CF-support-for-the-HTC-ASIC3.-Underlying-.patch |  254 +++
+ .../hx4700/0005-Suspend-unbalanced-irqs.patch      |   34 +
+ .../linux/linux-3.1/hx4700/0006-suspend.patch      |   55 +
+ ...007-hx4700-change-led-trigger-assignments.patch |   31 +
+ recipes-kernel/linux/linux-3.1/hx4700/defconfig    | 1822 ++++++++++++++++++++
+ .../linux/linux-3.1/locomo_kbd_tweak-r2.patch      |   66 +
+ recipes-kernel/linux/linux-3.1/poodle/defconfig    |  317 ++++
+ recipes-kernel/linux/linux-3.1/spitz/defconfig     |  378 ++++
+ recipes-kernel/linux/linux-3.1/tosa/defconfig      |  379 ++++
+ .../linux/linux-kexecboot-2.6.39/akita/defconfig   |  133 --
+ .../linux/linux-kexecboot-2.6.39/c7x0/defconfig    |  135 --
+ .../linux/linux-kexecboot-2.6.39/collie/defconfig  |  145 --
+ .../linux/linux-kexecboot-2.6.39/poodle/defconfig  |  137 --
+ .../linux/linux-kexecboot-2.6.39/spitz/defconfig   |  133 --
+ .../linux/linux-kexecboot-2.6.39/tosa/defconfig    |  135 --
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 +
+ .../linux/linux-kexecboot-3.1/akita/defconfig      |  132 ++
+ .../linux/linux-kexecboot-3.1/c7x0/defconfig       |  134 ++
+ .../linux/linux-kexecboot-3.1/collie/defconfig     |  144 ++
+ .../linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch  |   66 +
+ .../linux/linux-kexecboot-3.1/poodle/defconfig     |  136 ++
+ .../linux/linux-kexecboot-3.1/spitz/defconfig      |  132 ++
+ .../linux/linux-kexecboot-3.1/tosa/defconfig       |  134 ++
+ recipes-kernel/linux/linux-kexecboot.inc           |   17 +-
+ .../linux/linux-kexecboot/spitz/defconfig          |  129 --
+ recipes-kernel/linux/linux-kexecboot_2.6.39.bb     |    5 -
+ recipes-kernel/linux/linux-kexecboot_3.1.bb        |   25 +
+ recipes-kernel/linux/linux-kexecboot_git.bb        |    2 -
+ recipes-kernel/linux/linux.inc                     |    4 +-
+ recipes-kernel/linux/linux/spitz/defconfig         |  379 ----
+ recipes-kernel/linux/linux_2.6.39.bb               |    9 -
+ recipes-kernel/linux/linux_3.0.1.bb                |   22 -
+ recipes-kernel/linux/linux_3.1.bb                  |   35 +
+ recipes-kernel/linux/linux_git.bb                  |   10 -
+ 60 files changed, 7266 insertions(+), 7821 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39.inc
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/akita/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/c7x0/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/collie/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/h1940/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/locomo_kbd_tweak-r2.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/poodle/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.39/tosa/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0001-Add-LED-support-for-the-HTC-ASIC3.-Underlying-suppor.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0002-tmio_mmc_irq-race.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0003-Only-compile-tmio_mmc_dma.o-when-CONFIG_MMC_SDHI-is-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0004-Add-PCMCIA-CF-support-for-the-HTC-ASIC3.-Underlying-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0005-Suspend-unbalanced-irqs.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0006-suspend.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/0007-hx4700-change-led-trigger-assignments.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0.1/hx4700/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/akita/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/c7x0/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/collie/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/h1940/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0001-Add-LED-support-for-the-HTC-ASIC3.-Underlying-suppor.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0002-tmio_mmc_irq-race.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0003-Only-compile-tmio_mmc_dma.o-when-CONFIG_MMC_SDHI-is-.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0004-Add-PCMCIA-CF-support-for-the-HTC-ASIC3.-Underlying-.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0005-Suspend-unbalanced-irqs.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0006-suspend.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/0007-hx4700-change-led-trigger-assignments.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/hx4700/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-3.1/poodle/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/spitz/defconfig
+ create mode 100644 recipes-kernel/linux/linux-3.1/tosa/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/akita/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/c7x0/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/collie/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/poodle/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-2.6.39/tosa/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/akita/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/c7x0/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/collie/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/poodle/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/spitz/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/tosa/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot_2.6.39.bb
+ create mode 100644 recipes-kernel/linux/linux-kexecboot_3.1.bb
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
+ delete mode 100644 recipes-kernel/linux/linux/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux_2.6.39.bb
+ delete mode 100644 recipes-kernel/linux/linux_3.0.1.bb
+ create mode 100644 recipes-kernel/linux/linux_3.1.bb
+ delete mode 100644 recipes-kernel/linux/linux_git.bb
+
 -- 
-1.7.5.4
+1.7.3.4
 
 
 
