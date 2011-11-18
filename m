@@ -1,31 +1,23 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from smtp-out11.han.skanova.net ([195.67.226.200])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RRQYt-0005Pt-M2
+	(envelope-from <openembedded@telia.com>) id 1RRV9h-0003Ax-62
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 16:41:08 +0100
-Received: by faat2 with SMTP id t2so4561548faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2011 07:34:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=J4byhRLOqR11We3eZlxoKxE9YFaS9saKqS/zaVQeWmw=;
-	b=QNrO8O0672fA7stHt3RYhJpPhHGSEeNJfzK3wJ0xxE+vgB+rXkpFOJxTQseGkZx6PM
-	rG6jWXOmC8pZ7RI+kJnkjUU24Gtumfwas9O6hi8F3V6hPUeEjyyANG71zML9Q4dWSaBw
-	Vwm6yuf3RNF1m444I7MxXlA15ioSGpbaav0Kk=
+	Fri, 18 Nov 2011 21:35:25 +0100
+Received: from [10.175.196.23] (213.67.40.173) by smtp-out11.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 4EC0B6880024BB37 for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 21:26:19 +0100
+Message-ID: <4EC6BF6E.30800@telia.com>
+Date: Fri, 18 Nov 2011 21:26:22 +0100
+From: Ulf Samuelsson <openembedded@telia.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
 MIME-Version: 1.0
-Received: by 10.152.148.168 with SMTP id tt8mr2406712lab.7.1321630475427; Fri,
-	18 Nov 2011 07:34:35 -0800 (PST)
-Received: by 10.152.24.36 with HTTP; Fri, 18 Nov 2011 07:34:35 -0800 (PST)
-In-Reply-To: <ja59tk$sno$2@dough.gmane.org>
-References: <1321575726-25190-1-git-send-email-raj.khem@gmail.com>
-	<ja59tk$sno$2@dough.gmane.org>
-Date: Fri, 18 Nov 2011 07:34:35 -0800
-Message-ID: <CAMKF1sqgMD+4+cZuXgp-ACub0X0HQqaAjxoCgLMsiCConiQT6A@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
+References: <4EC19A78.6040103@gmx.net>
+In-Reply-To: <4EC19A78.6040103@gmx.net>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] gcc-4.6: Delete linaro patch that has been committed upstream
+Subject: Re: OpenEmbedded @ FOSDEM 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 15:41:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 18 Nov 2011 20:35:25 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Friday, November 18, 2011, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+2011-11-14 23:47, Robert Schuster skrev:
+> Hi all,
+> the registration for stands at the next FOSDEM in Brussels (February
+> 4/5th 2012) is open and I am going to write our application really soon.
 >
-> Op 18-11-11 01:22, Khem Raj schreef:
->> gcc-4.6-linaro-r106723.patch is actually a fix for PR 47551 and its
->> needed in oe-core therefore we have to delete this here since now it will
->> be part of oe-core
+> As with similar events we need people manning the stand who can explain
+> OE to people, show some demos and so on. I'd like to make clear that
+> while an OpenEmbedded booth is primarily meant for the project companies
+> and freelancers contributing to it can, of course, demonstrate their
+> affiliation, hand out business cards etc. It is in the project's
+> interest to show the diversity of its supporters. :)
 >
-> Any idea when this will go into oe-core?
+> Regarding the organisation of the project's attendance I'll keep you posted.
+>
+> Cheers,
+> Robert
+>
+Hotel and Flight ticket booked since a month :-)
+BR
+Ulf
 
-I need some builds going with it so looking for Saul and others to try it
-out on scratch builds
-I will keep an eye on it
->
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iEYEARECAAYFAk7GKvQACgkQMkyGM64RGpGvuACdEZnnBkj9Bq2kyw+6tJBbmkp5
-> 4ZwAnikMpRnHZRspmDDuA4XSJL7OqCYY
-> =A/tL
-> -----END PGP SIGNATURE-----
->
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
