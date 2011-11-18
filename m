@@ -1,20 +1,28 @@
-Received: from smtp209.alice.it ([82.57.200.105])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RRCXp-00053D-Rt
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RRDLT-0007Hr-Nn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 01:43:06 +0100
-Received: from mizar.localdomain (87.5.50.68) by smtp209.alice.it (8.5.124.08)
-	id 4E850A86056661BF; Fri, 18 Nov 2011 01:36:42 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Nov 2011 01:36:07 +0100
-Message-Id: <c4465784961e18f1e86e94fe2d57b93ea1e6ec58.1321575642.git.andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <cover.1321575642.git.andrea.adami@gmail.com>
-References: <cover.1321575642.git.andrea.adami@gmail.com>
-In-Reply-To: <cover.1321575642.git.andrea.adami@gmail.com>
-References: <cover.1321575642.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 5/5] linux: remove unused git version
+	Fri, 18 Nov 2011 02:34:23 +0100
+Received: (qmail invoked by alias); 18 Nov 2011 01:27:57 -0000
+Received: from p4FDF0932.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.9.50]
+	by mail.gmx.net (mp003) with SMTP; 18 Nov 2011 02:27:57 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18Zzjta4CYZOiP+w+mc2JVWe9yqTjk4mk0QaKm4GM
+	Ury5b7Wjwqv22K
+From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Nov 2011 02:27:55 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-103.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <201111140105.00784.schnitzeltony@gmx.de>
+	<ja4446$vbc$1@dough.gmane.org>
+	<201111180021.48213.schnitzeltony@gmx.de>
+In-Reply-To: <201111180021.48213.schnitzeltony@gmx.de>
+MIME-Version: 1.0
+Message-Id: <201111180227.55333.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: networkmanager: update to 0.9.2.0 causes trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,422 +36,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 00:43:06 -0000
+X-List-Received-Date: Fri, 18 Nov 2011 01:34:24 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-* for our old beloved handhelds the kernel
-* development is slow and based on stable kernels
+On Friday, November 18, 2011 12:21:47 AM Andreas M=C3=BCller wrote:
+> On Friday, November 18, 2011 12:07:50 AM Koen Kooi wrote:
+> > Op 15-11-11 15:07, Andreas M=C3=BCller schreef:
+> > > On Tuesday, November 15, 2011 12:23:45 PM Koen Kooi wrote:
+> > >> Op 14-11-11 22:07, Andreas M=C3=BCller schreef:
+> > >>> On Monday, November 14, 2011 01:05:00 AM Andreas M=C3=BCller wrote:
+> > >>>> since
+> > >>>>=20
+> > >>>> commit 037cb32f99f229c9c55a029bec088ebc7f59d278 Author: Koen Kooi
+> > >>>> <koen@dominion.thruhere.net> Date:   Fri Nov 11 12:50:38 2011
+> > >>>> +0100
+> > >>>>=20
+> > >>>> networkmanager: update to 0.9.2.0
+> > >>>>=20
+> > >>>> wlan connects successfully to my router but *fails* to connect
+> > >>>> external locations.
+> > >>>>=20
+> > >>>> networkmanager / nm-applet set up my network as eth0: IPv4 fixed
+> > >>>> IP wlan0: WPA & WPA 2 Personal / IPv4 DHCP
+> > >>>>=20
+> > >>>> Attached you find the results for networkmanager 0.9.2 and
+> > >>>> networkmanager 0.9.0 (reverted
+> > >>>> 037cb32f99f229c9c55a029bec088ebc7f59d278)
+> > >>>>=20
+> > >>>> My suggestion: * revert 037cb32f99f229c9c55a029bec088ebc7f59d278
+> > >>>> until fixed * send a note to gnome bugzilla
+> > >>>=20
+> > >>> FYI: with network-manager-applet the problem persists
+> > >>=20
+> > >> I'm seeing the same problem with default route not getting set, but
+> > >> rolling back to the older release won't solve much since binaries are
+> > >> already out there :/
+> > >>=20
+> > >> regards,
+> > >>=20
+> > >> Koen
+> > >=20
+> > > So let's see it as another challenge :)
+> >=20
+> > As a small update: I'm still working on it. Although I haven't fixed the
+> > route issue, I have found (and fixed!) other issues :)
+>=20
+> I saw that - and I was full of hope but 10 minutes ago I tested your last
+> commit fixing version detecttion of dhclient.
+>=20
+> It is not much but I tried with elder versions to bisect a bit when we we=
+re
+> kicked out.
+>=20
+> 0.9.1.95: same - no default route
+> 0.9.1.90: build gets totally confused when libnl-1 and libnl-2 are found.
+> So I build from scratch with libnl-2 only but fall over a linker error...
+>=20
+I checked the first commit working with libnl-2 (two commits after our work=
+ing=20
+version 0.9.0) [1] together with libnl-2 and nm-applet 0.9.0: It does not c=
+reate=20
+a default route.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux/spitz/defconfig |  379 ----------------------------
- recipes-kernel/linux/linux_git.bb          |   10 -
- 2 files changed, 0 insertions(+), 389 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux/spitz/defconfig
- delete mode 100644 recipes-kernel/linux/linux_git.bb
+Two possible reasons for not working:
+* commit [1] causes malfunction
+* libnl-2 causes our trouble for networkmanager 0.9.0 libnl-1 was used
 
-diff --git a/recipes-kernel/linux/linux/spitz/defconfig b/recipes-kernel/linux/linux/spitz/defconfig
-deleted file mode 100644
-index 65aed48..0000000
---- a/recipes-kernel/linux/linux/spitz/defconfig
-+++ /dev/null
-@@ -1,379 +0,0 @@
--CONFIG_EXPERIMENTAL=y
--# CONFIG_LOCALVERSION_AUTO is not set
--CONFIG_SYSVIPC=y
--CONFIG_BSD_PROCESS_ACCT=y
--CONFIG_BSD_PROCESS_ACCT_V3=y
--CONFIG_IKCONFIG=m
--CONFIG_IKCONFIG_PROC=y
--CONFIG_LOG_BUF_SHIFT=14
--CONFIG_BLK_DEV_INITRD=y
--CONFIG_RD_BZIP2=y
--CONFIG_RD_LZMA=y
--CONFIG_RD_LZO=y
--CONFIG_EMBEDDED=y
--CONFIG_SLOB=y
--CONFIG_PROFILING=y
--CONFIG_OPROFILE=m
--CONFIG_MODULES=y
--CONFIG_MODULE_UNLOAD=y
--CONFIG_MODULE_FORCE_UNLOAD=y
--# CONFIG_LBDAF is not set
--CONFIG_IOSCHED_DEADLINE=m
--CONFIG_IOSCHED_CFQ=m
--CONFIG_ARCH_PXA=y
--CONFIG_PXA_SHARPSL=y
--CONFIG_MACH_AKITA=y
--CONFIG_MACH_BORZOI=y
--CONFIG_PCCARD=y
--CONFIG_PCMCIA_PXA2XX=y
--CONFIG_NO_HZ=y
--CONFIG_HIGH_RES_TIMERS=y
--CONFIG_AEABI=y
--# CONFIG_OABI_COMPAT is not set
--CONFIG_ZBOOT_ROM_TEXT=0x0
--CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
--CONFIG_KEXEC=y
--# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
--CONFIG_BINFMT_AOUT=m
--CONFIG_BINFMT_MISC=m
--CONFIG_PM_RUNTIME=y
--CONFIG_NET=y
--CONFIG_PACKET=m
--CONFIG_UNIX=y
--CONFIG_XFRM_USER=m
--CONFIG_INET=y
--CONFIG_INET_XFRM_MODE_TRANSPORT=m
--CONFIG_INET_XFRM_MODE_TUNNEL=m
--CONFIG_INET_XFRM_MODE_BEET=m
--# CONFIG_INET_LRO is not set
--CONFIG_INET_DIAG=m
--CONFIG_INET6_AH=m
--CONFIG_INET6_ESP=m
--CONFIG_INET6_IPCOMP=m
--CONFIG_IPV6_TUNNEL=m
--CONFIG_NETFILTER=y
--CONFIG_NF_CONNTRACK=m
--CONFIG_NF_CONNTRACK_FTP=m
--CONFIG_NF_CONNTRACK_H323=m
--CONFIG_NF_CONNTRACK_IRC=m
--CONFIG_NF_CONNTRACK_SIP=m
--CONFIG_NF_CONNTRACK_IPV4=m
--CONFIG_IP_NF_IPTABLES=m
--CONFIG_IP_NF_MATCH_AH=m
--CONFIG_IP_NF_MATCH_ECN=m
--CONFIG_IP_NF_MATCH_TTL=m
--CONFIG_IP_NF_FILTER=m
--CONFIG_IP_NF_TARGET_REJECT=m
--CONFIG_IP_NF_TARGET_LOG=m
--CONFIG_IP_NF_TARGET_ULOG=m
--CONFIG_NF_NAT=m
--CONFIG_IP_NF_TARGET_MASQUERADE=m
--CONFIG_IP_NF_TARGET_NETMAP=m
--CONFIG_IP_NF_TARGET_REDIRECT=m
--CONFIG_IP_NF_MANGLE=m
--CONFIG_IP_NF_TARGET_ECN=m
--CONFIG_IP_NF_TARGET_TTL=m
--CONFIG_IP_NF_RAW=m
--CONFIG_IP_NF_ARPTABLES=m
--CONFIG_IP_NF_ARPFILTER=m
--CONFIG_IP_NF_ARP_MANGLE=m
--CONFIG_IRDA=m
--CONFIG_IRLAN=m
--CONFIG_IRNET=m
--CONFIG_IRCOMM=m
--CONFIG_PXA_FICP=m
--CONFIG_BT=m
--CONFIG_BT_L2CAP=y
--CONFIG_BT_SCO=y
--CONFIG_BT_RFCOMM=m
--CONFIG_BT_RFCOMM_TTY=y
--CONFIG_BT_BNEP=m
--CONFIG_BT_BNEP_MC_FILTER=y
--CONFIG_BT_BNEP_PROTO_FILTER=y
--CONFIG_BT_HIDP=m
--CONFIG_BT_HCIBTUSB=m
--CONFIG_BT_HCIBTSDIO=m
--CONFIG_BT_HCIUART=m
--CONFIG_BT_HCIUART_H4=y
--CONFIG_BT_HCIUART_BCSP=y
--CONFIG_BT_HCIUART_ATH3K=y
--CONFIG_BT_HCIUART_LL=y
--CONFIG_BT_HCIBCM203X=m
--CONFIG_BT_HCIBPA10X=m
--CONFIG_BT_HCIBFUSB=m
--CONFIG_BT_HCIDTL1=m
--CONFIG_BT_HCIBT3C=m
--CONFIG_BT_HCIBLUECARD=m
--CONFIG_BT_HCIBTUART=m
--CONFIG_BT_HCIVHCI=m
--CONFIG_BT_MRVL=m
--CONFIG_BT_MRVL_SDIO=m
--CONFIG_BT_ATH3K=m
--CONFIG_CFG80211=m
--# CONFIG_CFG80211_DEFAULT_PS is not set
--CONFIG_MAC80211=m
--# CONFIG_MAC80211_RC_MINSTREL is not set
--CONFIG_DEVTMPFS=y
--CONFIG_DEVTMPFS_MOUNT=y
--CONFIG_MTD=y
--CONFIG_MTD_CMDLINE_PARTS=y
--CONFIG_MTD_CHAR=y
--CONFIG_MTD_BLOCK=y
--CONFIG_MTD_ROM=y
--CONFIG_MTD_COMPLEX_MAPPINGS=y
--CONFIG_MTD_PHYSMAP=y
--CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
--CONFIG_MTD_NAND_SHARPSL=y
--CONFIG_MTD_UBI=y
--CONFIG_MTD_UBI_GLUEBI=m
--CONFIG_BLK_DEV_LOOP=y
--CONFIG_MISC_DEVICES=y
--CONFIG_BLK_DEV_SD=y
--CONFIG_BLK_DEV_SR=m
--CONFIG_CHR_DEV_SG=m
--CONFIG_SCSI_MULTI_LUN=y
--CONFIG_ATA=y
--CONFIG_PATA_PXA=y
--CONFIG_PATA_PCMCIA=y
--CONFIG_NETDEVICES=y
--CONFIG_TUN=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
--CONFIG_AIRO_CS=m
--CONFIG_HOSTAP=m
--CONFIG_HOSTAP_FIRMWARE=y
--CONFIG_HOSTAP_CS=m
--CONFIG_USB_CATC=m
--CONFIG_USB_KAWETH=m
--CONFIG_USB_PEGASUS=m
--CONFIG_USB_RTL8150=m
--CONFIG_USB_USBNET=m
--CONFIG_USB_NET_DM9601=m
--# CONFIG_USB_NET_CDC_SUBSET is not set
--CONFIG_USB_SIERRA_NET=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
--# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
--CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
--CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
--CONFIG_INPUT_EVDEV=y
--CONFIG_INPUT_APMPOWER=y
--# CONFIG_KEYBOARD_ATKBD is not set
--CONFIG_KEYBOARD_GPIO=y
--CONFIG_KEYBOARD_MATRIX=y
--# CONFIG_INPUT_MOUSE is not set
--CONFIG_INPUT_TOUCHSCREEN=y
--CONFIG_TOUCHSCREEN_ADS7846=y
--CONFIG_INPUT_MISC=y
--CONFIG_INPUT_UINPUT=m
--# CONFIG_SERIO is not set
--# CONFIG_LEGACY_PTYS is not set
--CONFIG_SERIAL_8250=m
--CONFIG_SERIAL_8250_CS=m
--CONFIG_SERIAL_PXA=y
--CONFIG_SERIAL_PXA_CONSOLE=y
--CONFIG_RAMOOPS=y
--CONFIG_SPI=y
--CONFIG_SPI_PXA2XX=y
--CONFIG_GPIO_SYSFS=y
--CONFIG_POWER_SUPPLY=y
--CONFIG_POWER_SUPPLY_DEBUG=y
--CONFIG_PDA_POWER=y
--CONFIG_APM_POWER=y
--CONFIG_FB=y
--CONFIG_FB_PXA=y
--CONFIG_FB_PXA_OVERLAY=y
--CONFIG_FB_PXA_SMARTPANEL=y
--CONFIG_FB_PXA_PARAMETERS=y
--CONFIG_BACKLIGHT_LCD_SUPPORT=y
--CONFIG_LCD_CLASS_DEVICE=y
--CONFIG_LCD_CORGI=y
--CONFIG_BACKLIGHT_CLASS_DEVICE=y
--CONFIG_DISPLAY_SUPPORT=y
--CONFIG_FRAMEBUFFER_CONSOLE=y
--CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
--CONFIG_FONTS=y
--CONFIG_FONT_8x16=y
--CONFIG_LOGO=y
--# CONFIG_LOGO_LINUX_MONO is not set
--# CONFIG_LOGO_LINUX_VGA16 is not set
--CONFIG_SOUND=m
--CONFIG_SND=m
--CONFIG_SND_SEQUENCER=m
--CONFIG_SND_MIXER_OSS=m
--CONFIG_SND_PCM_OSS=m
--CONFIG_SND_PXA2XX_AC97=m
--CONFIG_SND_USB_AUDIO=m
--CONFIG_SND_SOC=m
--CONFIG_SND_PXA2XX_SOC=m
--CONFIG_SND_PXA2XX_SOC_SPITZ=m
--CONFIG_HID=m
--CONFIG_USB_KBD=m
--CONFIG_USB_MOUSE=m
--CONFIG_USB=m
--CONFIG_USB_DEBUG=y
--CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
--CONFIG_USB_DEVICEFS=y
--CONFIG_USB_OTG_WHITELIST=y
--CONFIG_USB_MON=m
--CONFIG_USB_OHCI_HCD=m
--CONFIG_USB_SL811_HCD=m
--CONFIG_USB_SL811_CS=m
--CONFIG_USB_ACM=m
--CONFIG_USB_PRINTER=m
--CONFIG_USB_STORAGE=m
--CONFIG_USB_MDC800=m
--CONFIG_USB_MICROTEK=m
--CONFIG_USB_SERIAL=m
--CONFIG_USB_SERIAL_GENERIC=y
--CONFIG_USB_SERIAL_BELKIN=m
--CONFIG_USB_SERIAL_DIGI_ACCELEPORT=m
--CONFIG_USB_SERIAL_CYPRESS_M8=m
--CONFIG_USB_SERIAL_EMPEG=m
--CONFIG_USB_SERIAL_FTDI_SIO=m
--CONFIG_USB_SERIAL_VISOR=m
--CONFIG_USB_SERIAL_IPAQ=m
--CONFIG_USB_SERIAL_IR=m
--CONFIG_USB_SERIAL_EDGEPORT=m
--CONFIG_USB_SERIAL_EDGEPORT_TI=m
--CONFIG_USB_SERIAL_GARMIN=m
--CONFIG_USB_SERIAL_IPW=m
--CONFIG_USB_SERIAL_KEYSPAN_PDA=m
--CONFIG_USB_SERIAL_KEYSPAN=m
--CONFIG_USB_SERIAL_KLSI=m
--CONFIG_USB_SERIAL_KOBIL_SCT=m
--CONFIG_USB_SERIAL_MCT_U232=m
--CONFIG_USB_SERIAL_PL2303=m
--CONFIG_USB_SERIAL_SAFE=m
--CONFIG_USB_SERIAL_TI=m
--CONFIG_USB_SERIAL_CYBERJACK=m
--CONFIG_USB_SERIAL_XIRCOM=m
--CONFIG_USB_SERIAL_OMNINET=m
--CONFIG_USB_EMI62=m
--CONFIG_USB_EMI26=m
--CONFIG_USB_RIO500=m
--CONFIG_USB_LEGOTOWER=m
--CONFIG_USB_LCD=m
--CONFIG_USB_LED=m
--CONFIG_USB_CYTHERM=m
--CONFIG_USB_IDMOUSE=m
--CONFIG_USB_GADGET=m
--CONFIG_USB_GADGET_DEBUG_FILES=y
--CONFIG_USB_GADGET_DEBUG_FS=y
--CONFIG_USB_PXA27X=m
--CONFIG_USB_ZERO=m
--CONFIG_USB_ETH=m
--CONFIG_USB_ETH_EEM=y
--CONFIG_USB_GADGETFS=m
--CONFIG_USB_FILE_STORAGE=m
--CONFIG_USB_MASS_STORAGE=m
--CONFIG_USB_G_SERIAL=m
--CONFIG_USB_CDC_COMPOSITE=m
--CONFIG_USB_G_MULTI=m
--CONFIG_USB_G_MULTI_CDC=y
--CONFIG_USB_GPIO_VBUS=m
--CONFIG_USB_ULPI=y
--CONFIG_NOP_USB_XCEIV=m
--CONFIG_MMC=y
--CONFIG_MMC_UNSAFE_RESUME=y
--CONFIG_MMC_PXA=y
--CONFIG_MMC_SPI=y
--CONFIG_NEW_LEDS=y
--CONFIG_LEDS_CLASS=y
--CONFIG_LEDS_GPIO=y
--CONFIG_LEDS_TRIGGERS=y
--CONFIG_LEDS_TRIGGER_TIMER=y
--CONFIG_LEDS_TRIGGER_HEARTBEAT=y
--CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_SA1100=m
--CONFIG_RTC_DRV_PXA=m
--CONFIG_EXT2_FS=y
--CONFIG_EXT3_FS=y
--# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
--# CONFIG_EXT3_FS_XATTR is not set
--CONFIG_EXT4_FS=y
--CONFIG_VFAT_FS=y
--CONFIG_TMPFS=y
--CONFIG_TMPFS_POSIX_ACL=y
--CONFIG_JFFS2_FS=y
--CONFIG_JFFS2_SUMMARY=y
--CONFIG_JFFS2_COMPRESSION_OPTIONS=y
--CONFIG_JFFS2_LZO=y
--CONFIG_JFFS2_RUBIN=y
--CONFIG_UBIFS_FS=y
--CONFIG_UBIFS_FS_ADVANCED_COMPR=y
--CONFIG_CRAMFS=m
--CONFIG_NFS_FS=m
--CONFIG_NFS_V3=y
--CONFIG_NFS_V4=y
--CONFIG_NFSD=m
--CONFIG_NFSD_V4=y
--CONFIG_CIFS=m
--CONFIG_PARTITION_ADVANCED=y
--CONFIG_NLS_DEFAULT="cp437"
--CONFIG_NLS_CODEPAGE_437=y
--CONFIG_NLS_CODEPAGE_737=m
--CONFIG_NLS_CODEPAGE_775=m
--CONFIG_NLS_CODEPAGE_850=m
--CONFIG_NLS_CODEPAGE_852=m
--CONFIG_NLS_CODEPAGE_855=m
--CONFIG_NLS_CODEPAGE_857=m
--CONFIG_NLS_CODEPAGE_860=m
--CONFIG_NLS_CODEPAGE_861=m
--CONFIG_NLS_CODEPAGE_862=m
--CONFIG_NLS_CODEPAGE_863=m
--CONFIG_NLS_CODEPAGE_864=m
--CONFIG_NLS_CODEPAGE_865=m
--CONFIG_NLS_CODEPAGE_866=m
--CONFIG_NLS_CODEPAGE_869=m
--CONFIG_NLS_CODEPAGE_936=m
--CONFIG_NLS_CODEPAGE_950=m
--CONFIG_NLS_CODEPAGE_932=m
--CONFIG_NLS_CODEPAGE_949=m
--CONFIG_NLS_CODEPAGE_874=m
--CONFIG_NLS_ISO8859_8=m
--CONFIG_NLS_CODEPAGE_1250=m
--CONFIG_NLS_CODEPAGE_1251=m
--CONFIG_NLS_ASCII=m
--CONFIG_NLS_ISO8859_1=y
--CONFIG_NLS_ISO8859_2=m
--CONFIG_NLS_ISO8859_3=m
--CONFIG_NLS_ISO8859_4=m
--CONFIG_NLS_ISO8859_5=m
--CONFIG_NLS_ISO8859_6=m
--CONFIG_NLS_ISO8859_7=m
--CONFIG_NLS_ISO8859_9=m
--CONFIG_NLS_ISO8859_13=m
--CONFIG_NLS_ISO8859_14=m
--CONFIG_NLS_ISO8859_15=m
--CONFIG_NLS_KOI8_R=m
--CONFIG_NLS_KOI8_U=m
--CONFIG_NLS_UTF8=y
--CONFIG_MAGIC_SYSRQ=y
--CONFIG_DEBUG_FS=y
--CONFIG_SYSCTL_SYSCALL_CHECK=y
--CONFIG_CRYPTO_NULL=m
--CONFIG_CRYPTO_TEST=m
--CONFIG_CRYPTO_PCBC=m
--CONFIG_CRYPTO_SHA256=m
--CONFIG_CRYPTO_SHA512=m
--CONFIG_CRYPTO_WP512=m
--CONFIG_CRYPTO_ANUBIS=m
--CONFIG_CRYPTO_BLOWFISH=m
--CONFIG_CRYPTO_CAMELLIA=m
--CONFIG_CRYPTO_CAST5=m
--CONFIG_CRYPTO_CAST6=m
--CONFIG_CRYPTO_KHAZAD=m
--CONFIG_CRYPTO_SERPENT=m
--CONFIG_CRYPTO_TEA=m
--CONFIG_CRYPTO_TWOFISH=m
--# CONFIG_CRYPTO_HW is not set
--CONFIG_CRC_CCITT=y
--CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux_git.bb b/recipes-kernel/linux/linux_git.bb
-deleted file mode 100644
-index fbe3049..0000000
---- a/recipes-kernel/linux/linux_git.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--CMDLINE_DEBUG = "debug"
--require linux.inc
--require linux-git.inc
--
--SRC_URI_append_akita = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--SRC_URI_append_c7x0 = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--SRC_URI_append_collie = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--SRC_URI_append_poodle = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--SRC_URI_append_tosa = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--SRC_URI_append_spitz = " file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 "
--- 
-1.7.3.4
+So long
 
+Andreas
+
+[1]=20
+http://cgit.freedesktop.org/NetworkManager/NetworkManager/commit/?id=3D0fe8=
+c80faef07777b9d6712abbdfbb9671b70899
 
 
