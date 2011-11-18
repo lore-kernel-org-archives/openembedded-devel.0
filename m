@@ -1,25 +1,30 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RROxA-0000sr-IL
+	(envelope-from <andrea.adami@gmail.com>) id 1RRP88-0001gd-PX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 14:58:05 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 18 Nov 2011 05:51:37 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.69,533,1315206000"; d="scan'208";a="76625092"
-Received: from unknown (HELO helios.localnet) ([10.252.121.185])
-	by azsmga001.ch.intel.com with ESMTP; 18 Nov 2011 05:51:37 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2011 13:51:35 +0000
-Message-ID: <3257489.OMhGnQsRki@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-12-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <CAAQYJAu8UbRXaFpExAioYyxfsy_tM9hm3k=yipO8Fu_zRxO3XQ@mail.gmail.com>
+	Fri, 18 Nov 2011 15:09:24 +0100
+Received: by ywt2 with SMTP id 2so2507911ywt.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2011 06:02:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=AzS3bKdzjCm01WLYZq9T+PHGogvm9LiVr8lH7sXe8v8=;
+	b=YgZlXKfe816ieF0Fgt//BXeA1eEr5ZVZQDe2tXJ2IHD0PncOCWTCmcmku+1Ch+OlyW
+	iEURHhT1w6GK/DjYRNbfe7TPpD14IsTfYzxUyJLpDjLgdBkvEk6bCPc0XQYQwLVnU1y+
+	zMBE9pI0WQofUBkxHsrjrX10CQP7IRrrYVF28=
+MIME-Version: 1.0
+Received: by 10.101.11.18 with SMTP id o18mr799493ani.86.1321624978415; Fri,
+	18 Nov 2011 06:02:58 -0800 (PST)
+Received: by 10.150.229.21 with HTTP; Fri, 18 Nov 2011 06:02:58 -0800 (PST)
+In-Reply-To: <3257489.OMhGnQsRki@helios>
 References: <cover.1321575642.git.andrea.adami@gmail.com>
 	<20111118131116.GB3549@jama.jama.net>
 	<CAAQYJAu8UbRXaFpExAioYyxfsy_tM9hm3k=yipO8Fu_zRxO3XQ@mail.gmail.com>
-MIME-Version: 1.0
+	<3257489.OMhGnQsRki@helios>
+Date: Fri, 18 Nov 2011 15:02:58 +0100
+Message-ID: <CAAQYJAs=jxLf8moiFwNyg3Rnqxe2EHe4c4ARrZW3ms2VrS=5JQ@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-handheld][PATCH 5/5] linux: remove unused git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,24 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 13:58:05 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 18 Nov 2011 14:09:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Friday 18 November 2011 14:45:32 Andrea Adami wrote:
-> My thoughts are that Pavel is always testing bleeding edge way before
-> we commit it in OE while Dmitry told me repeatedly he prefers to base
-> his patches on stable, older kernels.
+On Fri, Nov 18, 2011 at 2:51 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Friday 18 November 2011 14:45:32 Andrea Adami wrote:
+>> My thoughts are that Pavel is always testing bleeding edge way before
+>> we commit it in OE while Dmitry told me repeatedly he prefers to base
+>> his patches on stable, older kernels.
+>
+> You're right, but I figure if we have the mechanism to allow people to build a
+> bleeding edge kernel already, let's keep it for the moment.
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-You're right, but I figure if we have the mechanism to allow people to build a 
-bleeding edge kernel already, let's keep it for the moment.
+Ok, I'll refresh and refactor the recipe then. Patch will follow.
 
-Cheers,
-Paul
+Cheers
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Andrea
 
 
