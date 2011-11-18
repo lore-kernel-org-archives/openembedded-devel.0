@@ -1,34 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RRLL9-0002dE-9s for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 11:06:35 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RRLEv-00045s-Ma for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 11:00:09 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2011 11:00:09 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2011 11:00:09 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RRLck-0003EV-Fo
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 11:24:46 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 18 Nov 2011 02:18:19 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.69,532,1315206000"; d="scan'208";a="38633496"
+Received: from unknown (HELO helios.localnet) ([10.252.121.216])
+	by AZSMGA002.ch.intel.com with ESMTP; 18 Nov 2011 02:18:18 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 18 Nov 2011 10:52:52 +0100
-Message-ID: <ja59tk$sno$2@dough.gmane.org>
-References: <1321575726-25190-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1321575726-25190-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-oe][PATCH] gcc-4.6: Delete linaro patch that has been committed upstream
+Date: Fri, 18 Nov 2011 10:18:17 +0000
+Message-ID: <15369757.CEiKJYElQt@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-12-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <20111118095503.GA3549@jama.jama.net>
+References: <cover.1321575642.git.andrea.adami@gmail.com>
+	<c4465784961e18f1e86e94fe2d57b93ea1e6ec58.1321575642.git.andrea.adami@gmail.com>
+	<20111118095503.GA3549@jama.jama.net>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH 5/5] linux: remove unused git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 10:06:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Nov 2011 10:24:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Friday 18 November 2011 10:55:03 Martin Jansa wrote:
+> On Fri, Nov 18, 2011 at 01:36:07AM +0100, Andrea Adami wrote:
+> > * for our old beloved handhelds the kernel
+> 
+> I'm using it.. but if I'm alone then I can keep it in my own branch..
+> currently upgrading from 3.1.0-rc10 to 3.2.0-rc2
 
-Op 18-11-11 01:22, Khem Raj schreef:
-> gcc-4.6-linaro-r106723.patch is actually a fix for PR 47551 and its
-> needed in oe-core therefore we have to delete this here since now it will
-> be part of oe-core
+If you're still using it Martin I'd rather keep it around than force you to 
+maintain your own branch with it in; it shouldn't get in the way of anyone 
+else.
 
-Any idea when this will go into oe-core?
+Cheers,
+Paul 
 
+ -- 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7GKvQACgkQMkyGM64RGpGvuACdEZnnBkj9Bq2kyw+6tJBbmkp5
-4ZwAnikMpRnHZRspmDDuA4XSJL7OqCYY
-=A/tL
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
