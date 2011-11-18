@@ -1,33 +1,37 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <prathap@bangubntigfx>) id 1RRJ9W-0006JX-Pb
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 08:46:27 +0100
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAI7Zsw0014619
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RRLGL-0002JI-8W for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 11:01:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RRLA3-0001zX-Vy for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Nov 2011 10:55:07 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2011 10:55:07 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2011 01:35:57 -0600
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAI7ZsNQ004747
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2011 13:05:54 +0530 (IST)
-Received: from dbdp31.itg.ti.com (172.24.170.98) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 18 Nov 2011 13:05:54 +0530
-Received: from bangubntigfx (bangubntigfx.india.ti.com [172.24.132.46])	by
-	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAI7Zsri015104;
-	Fri, 18 Nov 2011 13:05:54 +0530 (IST)
-Received: from prathap by bangubntigfx with local (Exim 4.72)	(envelope-from
-	<prathap@bangubntigfx>)	id 1RRIzJ-0002U4-UL;
-	Fri, 18 Nov 2011 13:05:53 +0530
-From: Prathap M S <msprathap@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Nov 2011 13:05:49 +0530
-Message-ID: <1321601749-9419-1-git-send-email-msprathap@ti.com>
-X-Mailer: git-send-email 1.7.1
-MIME-Version: 1.0
-Subject: [PATCH v2 3/3] libgles-omap3.inc : Fix for library linking isssue with graphics SDK
+	Fri, 18 Nov 2011 10:55:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 18 Nov 2011 10:51:58 +0100
+Message-ID: <ja59ru$sno$1@dough.gmane.org>
+References: <201111140105.00784.schnitzeltony@gmx.de>
+	<ja4446$vbc$1@dough.gmane.org>
+	<201111180021.48213.schnitzeltony@gmx.de>
+	<201111180227.55333.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <201111180227.55333.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.3
+Subject: Re: networkmanager: update to 0.9.2.0 causes trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +45,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 07:46:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Nov 2011 10:01:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* This is the fix for the issue seen with opkg install of libgles-omap3_4.04.00.02-r16.6_armv7a.ipk on target.
-* With Graphics SDK release 04.04.00.02 onwards, there are 2 versions of the library libsrv_um.so - one is libsrv_um.so and other is libsrv_um_dri.so (For Xorg driver).In presence of libsrv_um_dri.so , the links created under /usr/lib were all by default linking to libsrv_um_dri.so only. Due to this 3D demos were failing.
-* This fix makes sure that only one appropriate version of the library libsrv_um.so is present on target and hence links created will now be proper.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Prathap M S <msprathap@ti.com>
----
- recipes/powervr-drivers/libgles-omap3.inc |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
+Op 18-11-11 02:27, Andreas Müller schreef:
+> On Friday, November 18, 2011 12:21:47 AM Andreas Müller wrote:
+>> On Friday, November 18, 2011 12:07:50 AM Koen Kooi wrote:
+>>> Op 15-11-11 15:07, Andreas Müller schreef:
+>>>> On Tuesday, November 15, 2011 12:23:45 PM Koen Kooi wrote:
+>>>>> Op 14-11-11 22:07, Andreas Müller schreef:
+>>>>>> On Monday, November 14, 2011 01:05:00 AM Andreas Müller wrote:
+>>>>>>> since
+>>>>>>> 
+>>>>>>> commit 037cb32f99f229c9c55a029bec088ebc7f59d278 Author: Koen
+>>>>>>> Kooi <koen@dominion.thruhere.net> Date:   Fri Nov 11 12:50:38
+>>>>>>> 2011 +0100
+>>>>>>> 
+>>>>>>> networkmanager: update to 0.9.2.0
+>>>>>>> 
+>>>>>>> wlan connects successfully to my router but *fails* to
+>>>>>>> connect external locations.
+>>>>>>> 
+>>>>>>> networkmanager / nm-applet set up my network as eth0: IPv4
+>>>>>>> fixed IP wlan0: WPA & WPA 2 Personal / IPv4 DHCP
+>>>>>>> 
+>>>>>>> Attached you find the results for networkmanager 0.9.2 and 
+>>>>>>> networkmanager 0.9.0 (reverted 
+>>>>>>> 037cb32f99f229c9c55a029bec088ebc7f59d278)
+>>>>>>> 
+>>>>>>> My suggestion: * revert
+>>>>>>> 037cb32f99f229c9c55a029bec088ebc7f59d278 until fixed * send a
+>>>>>>> note to gnome bugzilla
+>>>>>> 
+>>>>>> FYI: with network-manager-applet the problem persists
+>>>>> 
+>>>>> I'm seeing the same problem with default route not getting set,
+>>>>> but rolling back to the older release won't solve much since
+>>>>> binaries are already out there :/
+>>>>> 
+>>>>> regards,
+>>>>> 
+>>>>> Koen
+>>>> 
+>>>> So let's see it as another challenge :)
+>>> 
+>>> As a small update: I'm still working on it. Although I haven't fixed
+>>> the route issue, I have found (and fixed!) other issues :)
+>> 
+>> I saw that - and I was full of hope but 10 minutes ago I tested your
+>> last commit fixing version detecttion of dhclient.
+>> 
+>> It is not much but I tried with elder versions to bisect a bit when we
+>> were kicked out.
+>> 
+>> 0.9.1.95: same - no default route 0.9.1.90: build gets totally confused
+>> when libnl-1 and libnl-2 are found. So I build from scratch with
+>> libnl-2 only but fall over a linker error...
+>> 
+> I checked the first commit working with libnl-2 (two commits after our
+> working version 0.9.0) [1] together with libnl-2 and nm-applet 0.9.0: It
+> does not create a default route.
+> 
+> Two possible reasons for not working: * commit [1] causes malfunction *
+> libnl-2 causes our trouble for networkmanager 0.9.0 libnl-1 was used
 
-diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
-index f6b94b0..119f74c 100644
---- a/recipes/powervr-drivers/libgles-omap3.inc
-+++ b/recipes/powervr-drivers/libgles-omap3.inc
-@@ -38,6 +38,18 @@ do_configure() {
- 		chmod 0644 $i
- 	done 
- 
-+	# The below for loop is the fix for the issue seen with opkg install of libgles-omap3_4.04.00.02-r16.6_armv7a.ipk on target. 
-+	# With Graphics SDK release 04.04.00.02, there are 2 versions of the library libsrv_um.so - one is libsrv_um.so and other is libsrv_um_dri.so (For Xorg driver). 
-+	# In presence of libsrv_um_dri.so , the links created under /usr/lib were all by default linking to libsrv_um_dri.so only. Due to this 3D demos were failing. 
-+	# Now this fix makes sure that only one appropriate version of the library libsrv_um.so is present on target and hence links created will now be proper.
-+
-+	for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
-+		if [ "$drifile" != "" ] ; then
-+			dir=$(dirname ${drifile})
-+			rm -rf ${dir}/libsrv_um_dri.so
-+		fi
-+	done
-+
- 	# Attempt to create proper library softlinks
- 	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
- 		if [ "$(readlink -n ${sofile})" = "" ] ; then
--- 
-1.7.1
+Or both :)
+
+If it's the libnl2 code, we're out of luck, NM will use the highest version
+available. So either we add libnl3 to meta-oe with all the associated pains
+or we patch out libnl2,3 detection out of configure.
+
+Any volunteers for taking this up with upstream NM?
+
+regards,
+
+Koen
+
+> 
+> So long
+> 
+> Andreas
+> 
+> [1] 
+> http://cgit.freedesktop.org/NetworkManager/NetworkManager/commit/?id=0fe8c80faef07777b9d6712abbdfbb9671b70899
+>
+>  _______________________________________________ Openembedded-devel
+> mailing list Openembedded-devel@lists.openembedded.org 
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7GKr0ACgkQMkyGM64RGpG6ZACfR4IVSFnvdRehk3HOLO1XY/4J
+0fAAn1/wshh+/sDFu/f1JO0hLuGgJUc4
+=tgL4
+-----END PGP SIGNATURE-----
 
 
 
