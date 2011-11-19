@@ -1,26 +1,26 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lamiaposta71@gmail.com>) id 1RRg2X-0006zd-Cs
+	(envelope-from <eric@eukrea.com>) id 1RRg7w-0007BP-4j
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Nov 2011 09:12:45 +0100
-Received: by vbbey12 with SMTP id ey12so971102vbb.6
+	Sat, 19 Nov 2011 09:18:20 +0100
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 45A9377C76F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Nov 2011 00:06:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=BJWBUV8CeM5/Obanxjhb34hfT9lje/n1dNNvSo0uYZY=;
-	b=qmIpkhSDOYy9VdXPf5nJl9qV/vI2hCUoUTY2+PqIe71bYuwROqQAIuTaFS7p8d4YzR
-	JBYsmE4GTxoIBHebCDy06GcXSKAsjK45xGOZAQah1k6bkvjNMzYzO8CzL6jOGn9Qjf/1
-	mE46WxnKLWak6zWEug5G6+UvT3fy+vu/VnRCQ=
+	Sat, 19 Nov 2011 09:05:59 +0100 (CET)
+Received: from [192.168.2.8] (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 9314BA6434
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Nov 2011 09:05:54 +0100 (CET)
+Message-ID: <4EC76361.9070604@eukrea.com>
+Date: Sat, 19 Nov 2011 09:05:53 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-Received: by 10.224.216.197 with SMTP id hj5mr2841607qab.15.1321689977933;
-	Sat, 19 Nov 2011 00:06:17 -0800 (PST)
-Received: by 10.229.88.195 with HTTP; Sat, 19 Nov 2011 00:06:17 -0800 (PST)
-Date: Sat, 19 Nov 2011 09:06:17 +0100
-Message-ID: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: dm3730
+References: <CAFU7RzMFc2jtHKRAHQYBykpBTAVhpEKh+01yKUZFXr6Et+LDFA@mail.gmail.com>
+In-Reply-To: <CAFU7RzMFc2jtHKRAHQYBykpBTAVhpEKh+01yKUZFXr6Et+LDFA@mail.gmail.com>
+Subject: Re: dm3730 question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,16 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Nov 2011 08:12:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 19 Nov 2011 08:18:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-I'm sorry for so easy question!
-It seems that if I compiling for beagleboard I get a 2.6.39 running
-also on dm3730 cpu.
-It's not clear to me how can dsp codec work correctly at the same time
-with omap3530 and with dm3730.
+Hi Raffaele,
 
-Thx,
-Raffaele
+Le 19/11/2011 08:28, Raffaele Recalcati a =E9crit :
+> At the moment I have a arago image running am37xx (without dsp) on my
+> desk with 2.6.37.
+> Can anybody point me the right branch for OE in order to move also
+> with dm3730 to 2.6.37 kernel?
+> The MACHINE can be either beagle-xm or dm3730-evm.
+> The confusion is created by the MACHINE=3Dbeagleboard that I don't know
+> if support dm3730 cpu.
+
+current oe-core builds a 3.0.x kernel which runs fine on beagleboard.
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrumen=
+ts/tree/recipes-kernel/linux/linux_3.0.bb
+
+Yo can get it easily with
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/setup-scripts/
+
+Eric
 
 
