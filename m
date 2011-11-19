@@ -1,23 +1,26 @@
-Received: from smtp-out11.han.skanova.net ([195.67.226.200])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@telia.com>) id 1RRV9h-0003Ax-62
+	(envelope-from <lamiaposta71@gmail.com>) id 1RRfRp-0005l8-3Y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 21:35:25 +0100
-Received: from [10.175.196.23] (213.67.40.173) by smtp-out11.han.skanova.net
-	(8.5.133) (authenticated as u82406562)
-	id 4EC0B6880024BB37 for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Nov 2011 21:26:19 +0100
-Message-ID: <4EC6BF6E.30800@telia.com>
-Date: Fri, 18 Nov 2011 21:26:22 +0100
-From: Ulf Samuelsson <openembedded@telia.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
+	Sat, 19 Nov 2011 08:34:49 +0100
+Received: by vcbfo11 with SMTP id fo11so1557230vcb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2011 23:28:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=pqHjHSJ81yjt6b+Ii7CrW8FhOEOlfECt4AKEt5WLpCw=;
+	b=uWr1cUQE/LYucmKAR6vp8Hwx3mqVSfwqDRZJ5IiVicNtrq+ehPBx02Vb8BTw1YSwj7
+	H570RihN/h4wPontdJ45xbPtUi51zIjnPqpYEKRsOxrefGcTRDTrhpIkCKDAmNdq90kO
+	7f+guM3WFKxxngNKArbok26Wn4h28dowP0TBU=
 MIME-Version: 1.0
+Received: by 10.224.117.74 with SMTP id p10mr2837305qaq.28.1321687701393; Fri,
+	18 Nov 2011 23:28:21 -0800 (PST)
+Received: by 10.229.88.195 with HTTP; Fri, 18 Nov 2011 23:28:21 -0800 (PST)
+Date: Sat, 19 Nov 2011 08:28:21 +0100
+Message-ID: <CAFU7RzMFc2jtHKRAHQYBykpBTAVhpEKh+01yKUZFXr6Et+LDFA@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4EC19A78.6040103@gmx.net>
-In-Reply-To: <4EC19A78.6040103@gmx.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: OpenEmbedded @ FOSDEM 2012
+Subject: dm3730 question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +34,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2011 20:35:25 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 19 Nov 2011 07:34:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-2011-11-14 23:47, Robert Schuster skrev:
-> Hi all,
-> the registration for stands at the next FOSDEM in Brussels (February
-> 4/5th 2012) is open and I am going to write our application really soon.
->
-> As with similar events we need people manning the stand who can explain
-> OE to people, show some demos and so on. I'd like to make clear that
-> while an OpenEmbedded booth is primarily meant for the project companies
-> and freelancers contributing to it can, of course, demonstrate their
-> affiliation, hand out business cards etc. It is in the project's
-> interest to show the diversity of its supporters. :)
->
-> Regarding the organisation of the project's attendance I'll keep you posted.
->
-> Cheers,
-> Robert
->
-Hotel and Flight ticket booked since a month :-)
-BR
-Ulf
+At the moment I have a arago image running am37xx (without dsp) on my
+desk with 2.6.37.
+Can anybody point me the right branch for OE in order to move also
+with dm3730 to 2.6.37 kernel?
+The MACHINE can be either beagle-xm or dm3730-evm.
+The confusion is created by the MACHINE=beagleboard that I don't know
+if support dm3730 cpu.
+Thx for any help,
 
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Raffaele
 
 
