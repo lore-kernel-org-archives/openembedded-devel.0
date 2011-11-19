@@ -1,39 +1,33 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <jdk@ti.com>)
-	id 1RRjbt-0007HO-5M for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Nov 2011 13:01:29 +0100
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAJBpoRi017468
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <pabigot@gmail.com>) id 1RRkGC-0007yA-RR
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Nov 2011 13:43:08 +0100
+Received: by wwp14 with SMTP id 14so5711317wwp.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Nov 2011 05:51:50 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id pAJBpoq0004530
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Nov 2011 05:51:50 -0600 (CST)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAJBpo14014028
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Nov 2011 05:51:50 -0600 (CST)
-Received: from DFLE34.ent.ti.com ([fe80::c12:d795:2e56:2d02]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%20]) with mapi id
-	14.01.0323.003; Sat, 19 Nov 2011 05:51:50 -0600
-From: "Kridner, Jason" <jdk@ti.com>
-To: "<openembedded-devel@lists.openembedded.org>"
-	<openembedded-devel@lists.openembedded.org>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe]  dm3730
-Thread-Index: AQHMppI5W1XF7BSJMEe8nIH53K7FJ5W0Fhox
-Date: Sat, 19 Nov 2011 11:51:49 +0000
-Message-ID: <294F4A1A-29D7-492E-9E2F-2414F63F7C77@ti.com>
-References: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
-In-Reply-To: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	Sat, 19 Nov 2011 04:36:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=VDzvEV2c6T9oN4WWyIIRrHffOFGLiQbkewEzC3cnRz4=;
+	b=TPLGE70V1u3aPtjI3G4VNxz3gAUBDT7wxhSaAqvG9YrVElbGazp6ZIQfVKXgec/3HQ
+	MRnPtFASG8wuWLlzuK15MRyPX+YThwQ0Mldo4Hdc+UxIlg+QgSXJjzJHwdaQzeHVWKwN
+	hAB+0PPm6kS2FC9QplXox/l/0erQmkIfRLMqY=
 MIME-Version: 1.0
-Subject: Re: dm3730
+Received: by 10.216.221.160 with SMTP id r32mr994875wep.54.1321706200185; Sat,
+	19 Nov 2011 04:36:40 -0800 (PST)
+Sender: pabigot@gmail.com
+Received: by 10.216.37.6 with HTTP; Sat, 19 Nov 2011 04:36:39 -0800 (PST)
+In-Reply-To: <4EC76361.9070604@eukrea.com>
+References: <CAFU7RzMFc2jtHKRAHQYBykpBTAVhpEKh+01yKUZFXr6Et+LDFA@mail.gmail.com>
+	<4EC76361.9070604@eukrea.com>
+Date: Sat, 19 Nov 2011 06:36:39 -0600
+X-Google-Sender-Auth: XI9oLWaTK67jWltYDzYjU4hvSWg
+Message-ID: <CAPOJ94M00kuN24yqsqBByzxmykM55Pb6F2d8=ixtmF97GHKbOw@mail.gmail.com>
+From: Peter Bigot <bigotp@acm.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: dm3730 question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Nov 2011 12:01:29 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 19 Nov 2011 12:43:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Nov 19, 2011, at 3:07 AM, "Raffaele Recalcati" <lamiaposta71@gmail.com> =
-wrote:
+On Sat, Nov 19, 2011 at 2:05 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Hi Raffaele,
+>
+> Le 19/11/2011 08:28, Raffaele Recalcati a =E9crit :
+>>
+>> At the moment I have a arago image running am37xx (without dsp) on my
+>> desk with 2.6.37.
+>> Can anybody point me the right branch for OE in order to move also
+>> with dm3730 to 2.6.37 kernel?
+>> The MACHINE can be either beagle-xm or dm3730-evm.
+>> The confusion is created by the MACHINE=3Dbeagleboard that I don't know
+>> if support dm3730 cpu.
+>
+> current oe-core builds a 3.0.x kernel which runs fine on beagleboard.
+> http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrumen=
+ts/tree/recipes-kernel/linux/linux_3.0.bb
+>
+> Yo can get it easily with
+> http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/setup-scripts/
 
-> I'm sorry for so easy question!
-> It seems that if I compiling for beagleboard I get a 2.6.39 running
-> also on dm3730 cpu.
+To my knowledge, until
+https://lists.yoctoproject.org/pipermail/meta-ti/2011-November/000124.html
+is addressed anybody starting a new oe-core based effort (one that
+doesn't have the old TI tools zip file already downloaded) will have
+problems getting the DSP stuff to work.
 
-I recommend moving on to OE-core and meta-ti if you are doing new developme=
-nt. That is 3.0 today, but I expect we will bring it in-line with the Beagl=
-eBone kernel.=20
+Peter
 
-> It's not clear to me how can dsp codec work correctly at the same time
-> with omap3530 and with dm3730.
-
-Same DSP?  There are fairly few differences between those two devices.  Mos=
-tly a process shrink and incremental improvements.=20
-
->=20
-> Thx,
-> Raffaele
->=20
+>
+> Eric
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
