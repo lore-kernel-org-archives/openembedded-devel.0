@@ -1,31 +1,20 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mazama.dcclabs.tv ([91.121.153.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RSQYF-0005Ae-J5
+	(envelope-from <pawelo@dcclabs.tv>) id 1RSQhy-0005jq-C7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 10:52:35 +0100
-Received: by faat2 with SMTP id t2so5781083faa.6
+	Mon, 21 Nov 2011 11:02:38 +0100
+Received: from [192.168.1.1] (fish.king.net.pl [83.19.124.154])
+	by mazama.dcclabs.tv (Postfix) with ESMTPSA id 9D0D845A83
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 01:46:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=Zr5SCMJ/rZh3/oDN+Zu77lbf+aY5q8BvZF56N/XMtlI=;
-	b=pizMfNrDAC4Aryt6xxmHDba/DDOhakB95Fd/0R9bsA4mgezr2l2mrYchTtyYCkRu10
-	b+7wceUruZrfeHqvNnKm2O/DgaNJvbmOdEl6w3xMlxMGEMXtpREFU+d6O/KmShT55+ul
-	E/ROhjpROOfy4J7ihTole4KrY/f77a+SqMUGo=
-Received: by 10.152.113.167 with SMTP id iz7mr8420812lab.15.1321868766139;
-	Mon, 21 Nov 2011 01:46:06 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id pc8sm8968634lab.8.2011.11.21.01.46.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Nov 2011 01:46:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 21 Nov 2011 10:49:20 +0100 (CET)
+Message-ID: <4ECA1EA0.9080309@dcclabs.tv>
+Date: Mon, 21 Nov 2011 10:49:20 +0100
+From: Pawel Osmialowski <pawelo@dcclabs.tv>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.20) Gecko/20110916 Lightning/1.0b3pre Thunderbird/3.1.12
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Nov 2011 10:45:30 +0100
-Message-Id: <1321868730-28312-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.rc3
-In-Reply-To: <jad5sh$iv7$1@dough.gmane.org>
-References: <jad5sh$iv7$1@dough.gmane.org>
-Subject: [meta-oe v2] systemd: add prerm u-a calls
+Subject: Cannot compile glibc-initial for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,39 +28,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 09:52:35 -0000
+X-List-Received-Date: Mon, 21 Nov 2011 10:02:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/systemd/systemd_git.bb |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+I'm trying to build Angstrom-derived distro for my handheld with
+customized set of software. It will be held in few-GB CF card, so I can
+use full-blown glibc for it.
 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 7b0771a..228e0e4 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -108,7 +108,6 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
- 
- # TODO:
- # u-a for runlevel and telinit
--# u-a prerm
- 
- pkg_postinst_systemd () {
- update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
-@@ -117,3 +116,11 @@ update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/syste
- update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
- update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
- }
-+
-+pkg_prerm_systemd () {
-+update-alternatives --remove init ${base_bindir}/systemd
-+update-alternatives --remove halt ${base_bindir}/systemctl
-+update-alternatives --remove reboot ${base_bindir}/systemctl
-+update-alternatives --remove shutdown ${base_bindir}/systemctl
-+update-alternatives --remove poweroff ${base_bindir}/systemctl
-+}
--- 
-1.7.8.rc3
+I've prepared following distro configuration file:
+
+# file-native version compatible with rpm tools:
+PREFERRED_VERSION_file-native = "4.18"
+DISTRO_NAME = "customized"
+DISTRO_TYPE = "release"
+DISTRO_VERSION = "0.1"
+TOOLCHAIN_TYPE = "internal"
+TOOLCHAIN_BRAND = ""
+IMAGE_LINGUAS = "en-us"
+IMAGE_FSTYPE = "tar.gz"
+IMAGE_FSTYPES = "tar.gz"
+IMAGE_PKGTYPE = "rpm"
+IMAGE_PKGTYPES = "rpm"
+PREFERRED_PKG_FORMAT = "rpm"
+ANGSTROM_PKG_FORMAT = "rpm"
+TARGET_OS = "linux"
+ANGSTROM_FEED_CONFIGS = "angstrom-feed-configs"
+DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
+LIBC = "glibc"
+FEED_BASEPATH = "feeds/next/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
+GLIBC_GENERATE_LOCALES = "en_US.UTF-8"
+ANGSTROMLIBC = "glibc"
+KERNEL = "kernel26"
+MACHINE_KERNEL_VERSION = "2.6"
+PCMCIA_MANAGER = "pcmciautils"
+LINUX_LIBC_HEADERS_VERSION = "2.6.37"
+PREFERRED_VERSION_linux-libc-headers = "${LINUX_LIBC_HEADERS_VERSION}"
+PREFERRED_VERSION_linux-libc-headers-native =
+"${LINUX_LIBC_HEADERS_VERSION}"
+require conf/distro/include/glibc-internal.inc
+require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+require conf/distro/include/arm-thumb.inc
+require conf/distro/include/angstrom.inc
+require conf/distro/include/sane-toolchain.inc
+DISTRO_CHECK := "${@bb.data.getVar('DISTRO_VERSION',d,1) or
+bb.fatal('Remove this line or set a dummy DISTRO_VERSION")
+XSERVER = "xserver-xorg xf86-input-evdev xf86-input-keyboard
+xf86-input-mouse xf86-video-fbdev"
+INHERIT += "sanity"
+INHERIT += "devshell"
+USE_NLS = "yes"
+USE_LDCONFIG = "0"
+FULL_OPTIMIZATION = "-Os"
+BUILD_OPTIMIZATION = "-Os"
+
+DISTRO_EXTRA_RDEPENDS += "\
+    angstrom-version \
+    ${ANGSTROM_FEED_CONFIGS} \
+    util-linux-ng-mount util-linux-ng-umount \
+    angstrom-libc-fixup-hack \
+"
+
+DISTRO_EXTRA_RRECOMMENDS += " \
+    kernel-module-vfat \
+    kernel-module-ext2 \
+    kernel-module-ext3 \
+    kernel-module-af-packet \
+    avahi-daemon \
+    avahi-autoipd \
+    openssh-sftp-server \
+"
+
+As I see in work directory, following versions of critical packages were
+picked:
+
+binutils-cross-2.21.1a-r14.3
+busybox-1.18.5-r43.0
+gcc-cross-4.5-r38.1+svnr170880
+gcc-cross-initial-4.5-r38.1+svnr170880
+gcc-cross-intermediate-4.5-r38.1+svnr170880
+glibc-2.10.1-r37.1
+glibc-initial-2.10.1-r37.1
+linux-libc-headers-2.6.37-r0
+
+Unfortunately, it stopped at glibc-initial confgure script:
+
+| running configure fragment for ports/sysdeps/arm/elf
+| checking for ARM TLS support... yes
+| running configure fragment for nptl/sysdeps/pthread
+| configure: error: working compiler support for visibility attribute is
+required
+NOTE: package glibc-initial-2.10.1-r37.1: task do_configure: Failed
+
+Looking at config.log file produced by this configure script, I've found
+that it contains a lot of errors like this (although I doubt this is the
+reason for the whole problem):
+
+conftest.c:9:19: fatal error: stdio.h: No such file or directory
+compilation terminated.
+
+I've checked that stdio.h is not present anywhere in tmp/sysroots (no
+glibc yet...)
+
+the final one:
+
+configure:8362: arm-oe-linux-gcc -march=armv4 -mtune=strongarm
+-mthumb-interwork -mno-thumb
+--sysroot=/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux
+-c -g -O2 -I
+/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux/usr/include
+conftest.c >&5
+conftest.c:1:0: warning: target CPU does not support interworking
+conftest.c:21:19: fatal error: stdio.h: No such file or directory
+compilation terminated.
+configure:8369: $? = 1
+configure: failed program was:
+| /* confdefs.h.  */
+...
+| }
+configure:8586: result: 0
+configure:8618: result: running configure fragment for ports/sysdeps/arm/elf
+configure:7: checking for ARM TLS support
+configure:24: arm-oe-linux-gcc -march=armv4 -mtune=strongarm
+-mthumb-interwork -mno-thumb
+--sysroot=/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux
+-c -g -O2 conf
+test.s 1>&5
+configure:27: $? = 0
+configure:35: result: yes
+configure:8618: result: running configure fragment for nptl/sysdeps/pthread
+configure:11: error: working compiler support for visibility attribute
+is required
+
+I've tried with eglibc too, unfortunately, with the same result. Can you
+point me, what am I doing wrong?
+
+Best regards,
+Paul
 
 
 
