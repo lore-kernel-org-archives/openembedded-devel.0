@@ -1,31 +1,30 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RSVip-0003Dg-Op
+	(envelope-from <lamiaposta71@gmail.com>) id 1RSW3D-0006af-BX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 16:23:53 +0100
-Received: by yenm2 with SMTP id m2so3262919yen.6
+	Mon, 21 Nov 2011 16:44:56 +0100
+Received: by ywt2 with SMTP id 2so4813567ywt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 07:17:21 -0800 (PST)
+	Mon, 21 Nov 2011 07:38:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=ZWcbB8h1qpSdSAFlrYzR1b0S0DIHrtuUbvUsHRDN+DE=;
-	b=aEFlGKqd6bjJugjfkS3YudvPRE1SW71zIgZSVeS9nvFRPzhnaXaYpiblzgHY5hnhFm
-	l4TtxhqALvzfCpFVACS2yF03RIqRvWeOIFGTtJ3oBNpJsjvlhirJ4yTTg8xR+iqvHR6v
-	7xbmXh4XWUOmbdAHiYrz/64C0VcDaduvyPfqs=
-Received: by 10.152.0.138 with SMTP id 10mr9373424lae.3.1321888641130;
-	Mon, 21 Nov 2011 07:17:21 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id hr17sm9828861lab.12.2011.11.21.07.17.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Nov 2011 07:17:20 -0800 (PST)
-Date: Mon, 21 Nov 2011 16:17:07 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111121151707.GK3565@jama.jama.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=/g85bSegBQCq8fDQLM/9f7OIPjZXWSsXtkeNp/yZxXc=;
+	b=p5EsmxtQuIImbnGIHbgB+bfD7ym8WnYAN5/V+22tfPq1efskWZ63KTPgq5mS9RjYfp
+	co26YW5ZY4xyClfhyE2K2c/kh6wfb2EjPf0MMXE+RbuRuw1CNMWJKAc2PXPE9cga6Oqw
+	8Pa1YZHWC+sxOxiMZJv0Uv7r9MDbN4Yfxn8RI=
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe] openssl using wrong libdir
+Received: by 10.50.94.229 with SMTP id df5mr14887662igb.27.1321889905315; Mon,
+	21 Nov 2011 07:38:25 -0800 (PST)
+Received: by 10.231.123.91 with HTTP; Mon, 21 Nov 2011 07:38:25 -0800 (PST)
+In-Reply-To: <294F4A1A-29D7-492E-9E2F-2414F63F7C77@ti.com>
+References: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
+	<294F4A1A-29D7-492E-9E2F-2414F63F7C77@ti.com>
+Date: Mon, 21 Nov 2011 16:38:25 +0100
+Message-ID: <CAFU7RzMM=ur61PsQdBwbG2m9XT4ubCcD8Be4LiiUtFX=js_EhQ@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: dm3730
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,102 +38,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 15:23:53 -0000
-X-Groupsio-MsgNum: 35492
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="08ATZu8fEq0x2T3M"
-Content-Disposition: inline
-
---08ATZu8fEq0x2T3M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Nov 2011 15:44:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-while building on 64bit host with MACHINE=3Dqemux86-64 I got
-few errors like this
-configure:11590: $PKG_CONFIG --exists --print-errors "openssl >=3D
-$OPENSSL_REQUIRED"
-Package openssl was not found in the pkg-config search path.
-Perhaps you should add the directory containing `openssl.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'openssl' found
-configure:11593: $? =3D 1
+On Sat, Nov 19, 2011 at 12:51 PM, Kridner, Jason <jdk@ti.com> wrote:
+> On Nov 19, 2011, at 3:07 AM, "Raffaele Recalcati" <lamiaposta71@gmail.com=
+> wrote:
+>
+>> I'm sorry for so easy question!
+>> It seems that if I compiling for beagleboard I get a 2.6.39 running
+>> also on dm3730 cpu.
+>
+> I recommend moving on to OE-core and meta-ti if you are doing new develop=
+ment. That is 3.0 > today, but I expect we will bring it in-line with the B=
+eagleBone kernel.
 
-Even from packages with DEPENDS =3D "openssl" the real cause for this is
-that openssl installs files to wrong libdir (/usr/lib64 is used on my
-host - gentoo) and for OE build it should be just /usr/lib afaik). So
-openssl files are not packaged and pkg-config is right to complain.
+It's ok.
+I have the new monster to compile.
+I have followed https://wiki.yoctoproject.org/wiki/OpenEmbedded-Core
+setup and started, without changing anything, a compilation of
+'bitbake core-image-minimal', to test my setup.
 
-NOTE: package openssl-1.0.0e-r14.4: task do_package: Started
-WARNING: For recipe openssl, the following files/directories were
-installed but not shipped in any package:
-WARNING:   /usr/lib64
-WARNING:   /usr/lib64/libcrypto.so.1.0.0
-WARNING:   /usr/lib64/libcrypto.a
-WARNING:   /usr/lib64/libssl.a
-WARNING:   /usr/lib64/libssl.so.1.0.0
-WARNING:   /usr/lib64/libcrypto.so
-WARNING:   /usr/lib64/libssl.so
-WARNING:   /usr/lib64/engines
-WARNING:   /usr/lib64/.debug
-WARNING:   /usr/lib64/pkgconfig
-WARNING:   /usr/lib64/ssl
-WARNING:   /usr/lib64/.debug/libcrypto.so.1.0.0
-WARNING:   /usr/lib64/.debug/libssl.so.1.0.0
-WARNING:   /usr/lib64/.debug/libcrypto.so
-WARNING:   /usr/lib64/.debug/libssl.so
-WARNING:   /usr/lib64/pkgconfig/openssl.pc
-WARNING:   /usr/lib64/pkgconfig/libcrypto.pc
-WARNING:   /usr/lib64/pkgconfig/libssl.pc
-WARNING:   /usr/lib64/ssl/engines
-WARNING:   /usr/lib64/ssl/engines/lib4758cca.so
-WARNING:   /usr/lib64/ssl/engines/libubsec.so
-WARNING:   /usr/lib64/ssl/engines/libcswift.so
-WARNING:   /usr/lib64/ssl/engines/libatalla.so
-WARNING:   /usr/lib64/ssl/engines/libnuron.so
-WARNING:   /usr/lib64/ssl/engines/libgmp.so
-WARNING:   /usr/lib64/ssl/engines/libsureware.so
-WARNING:   /usr/lib64/ssl/engines/libcapi.so
-WARNING:   /usr/lib64/ssl/engines/libaep.so
-WARNING:   /usr/lib64/ssl/engines/libpadlock.so
-WARNING:   /usr/lib64/ssl/engines/libchil.so
-WARNING:   /usr/lib64/ssl/engines/libgost.so
-WARNING:   /usr/lib64/ssl/engines/.debug
-WARNING:   /usr/lib64/ssl/engines/.debug/lib4758cca.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libubsec.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libcswift.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libatalla.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libnuron.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libgmp.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libsureware.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libcapi.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libaep.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libpadlock.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libchil.so
-WARNING:   /usr/lib64/ssl/engines/.debug/libgost.so
-WARNING:   /usr/lib/ssl/certs
-WARNING:   /usr/lib/ssl/private
-NOTE: package openssl-1.0.0e-r14.4: task do_package: Succeeded
+Waiting it ends can I go on preparing the setup for beagle-xm with
+GLES and gstreamer-ti running?
+Is maybe the right starting point
+https://github.com/koenkooi/Angstrom-integration-layer.git?
 
-Anyone seen this before? I didn't notice it on my last qemux86-64 build.
+Maybe at http://beagleboard.org/esc/boston2011/beagleboard101 there
+should be a presentation about that, but the link is broken.
 
-Cheers,
+Thx,
+Raffaele
+
+
+
+>> It's not clear to me how can dsp codec work correctly at the same time
+>> with omap3530 and with dm3730.
+>
+> Same DSP? =C2=A0There are fairly few differences between those two device=
+s. =C2=A0Mostly a process shrink and incremental improvements.
+>
+>>
+>> Thx,
+>> Raffaele
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+www.opensurf.it
 
---08ATZu8fEq0x2T3M
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk7Ka3MACgkQN1Ujt2V2gBw7ewCgtAw3I/xHEXQ7Lo/mVoF/1OQY
-8KQAnibeJ3cIE9/yjNjfhIAHUeLz3Too
-=RKzi
------END PGP SIGNATURE-----
-
---08ATZu8fEq0x2T3M--
