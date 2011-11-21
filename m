@@ -1,35 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RSOyl-0000xc-VP for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 09:11:52 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RSOsV-0008TQ-IK for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 09:05:23 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 09:05:23 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1RSPco-0003qH-AB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Nov 2011 09:53:14 +0100
+Received: by faat2 with SMTP id t2so5732532faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 09:05:23 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 21 Nov 2011 00:46:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=KRJ4MeGlpOVp/xgh9xRJbXzoev/dv0Yqpmm7Q6Nxfyg=;
+	b=RGD642AdINZ9DoiS2fzm7fmiFr9bpbNs0yRtdQyQ1W82Z2OWlh09hnkYoGQ8Ljy0hG
+	1mlKw+t+OGBxe7+fLDRJENnchl0holAVFjuOYt513L23+iSJlw+vC8pio8mwu5nsa+yH
+	w4JRwqfv41rauSxRi5KpUOZSaKsCB3v4A1pUE=
+Received: by 10.152.144.136 with SMTP id sm8mr8318333lab.33.1321865205103;
+	Mon, 21 Nov 2011 00:46:45 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id ne3sm8815725lab.7.2011.11.21.00.46.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 21 Nov 2011 00:46:42 -0800 (PST)
+Date: Mon, 21 Nov 2011 09:46:30 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 21 Nov 2011 09:05:08 +0100
-Message-ID: <jad0nk$faj$1@dough.gmane.org>
-References: <1321822001-3647-1-git-send-email-schnitzeltony@gmx.de>
-	<1321822001-3647-2-git-send-email-schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1321822001-3647-2-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-oe 2/3] libnl: add 3.23
+Message-ID: <20111121084630.GD3565@jama.jama.net>
+References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
+	<20111110074449.GB3933@ad.chargestorm.se>
+	<20111110075607.GH21022@jama.jama.net>
+	<20111110082212.GD3933@ad.chargestorm.se>
+	<20111116141517.GA10880@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20111116141517.GA10880@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,76 +45,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 08:11:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 21 Nov 2011 08:53:14 -0000
+X-Groupsio-MsgNum: 35477
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="rqzD5py0kzyFAOWN"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--rqzD5py0kzyFAOWN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 20-11-11 21:46, Andreas Müller schreef:
-> * fixes networkmanager default route issue
+On Wed, Nov 16, 2011 at 03:15:17PM +0100, Martin Jansa wrote:
+> On Thu, Nov 10, 2011 at 09:22:12AM +0100, Anders Darander wrote:
+> > * Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
+> > > On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
+> > > > * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
+> > > > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > > > ---
+> > > > >  meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++--
+> > > > >  1 files changed, 9 insertions(+), 2 deletions(-)
+> >=20
+> > > > > diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-o=
+e/recipes-core/systemd/systemd_git.bb
+> > > > > index 90862a3..d1d4306 100644
+> > > > > --- a/meta-oe/recipes-core/systemd/systemd_git.bb
+> > > > > +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+> > > > > @@ -14,7 +14,7 @@ inherit gitpkgv
+> > > > >  # TODO:
+> > > > >  # u-a for runlevel and telinit
+> > > > > -# u-a prerm
+> >=20
+> > > > Here on your todo list, it stated u-a for prerm, but you applied it=
+ to
+> > > > the postrm. In this case, it probably doesn't really matter, but I'd
+> > > > still guess that it would make more sense to remove the u-a before
+> > > > removing the binaries. Although, I don't think it'll actually cause=
+ any
+> > > > problems in this case.
+> >=20
+> > > I did what u-a.bbclass usually do.. if you think it should be in prerm
+> > > then it would be best to first fix in u-a.bbclass and then we can upd=
+ate
+> > > the rest of metadata.
+> >=20
+> > Yeah, like I said, is't likely not a real problem. There'll probably
+> > just be a tiny window during which, in this case, e.g. reboot isn't
+> > available, before u-a has been told to change the reboot link.
+> >=20
+> > I'm currently just a little bit catious as I've recently stumbled upon
+> > post-/prerm issues using rpm... (Although the ones I know of (busybox
+> > updates, rsyslog removal) are either fixed or there has been patches
+> > submitted).
+>=20
+> So should I change postrm to prerm in this patch or is there other
+> reason why it wasn't applied yet?
 
-If so, you'll need an extra patch to bump PR for networkmanager.
+ping
 
-regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Koen
-
-> * to make wpa-supplicant build, links to include files and shared libs 
-> were added since wpa-supplicant expects old libnl-2 locations. Should 
-> libnl-3 move to oe-core, this woraround should be fixed at 
-> wpa-supplicant. * the command line interface (cli) applications were 
-> added at libnl-cli packet. This seems correct because EXTRA_OECONF += 
-> "--disable-cli" creates empty package libnl-cli without affecting other 
-> packages. * build tested from scratch & run tested on overo with iw 3.2 /
-> wpa-supplicant 0.7.3 / networkmanager 0.9.2.
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de> --- 
-> meta-oe/recipes-support/libnl/libnl_3.2.3.bb |   46 
-> ++++++++++++++++++++++++++ 1 files changed, 46 insertions(+), 0 
-> deletions(-) create mode 100644 
-> meta-oe/recipes-support/libnl/libnl_3.2.3.bb
-> 
-> diff --git a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb 
-> b/meta-oe/recipes-support/libnl/libnl_3.2.3.bb new file mode 100644
-> index 0000000..190ea4c --- /dev/null +++ 
-> b/meta-oe/recipes-support/libnl/libnl_3.2.3.bb @@ -0,0 +1,46 @@ 
-> +DESCRIPTION = "libnl is a library for applications dealing with netlink 
-> sockets." +HOMEPAGE = "http://www.infradead.org/~tgr/libnl/" +SECTION = 
-> "libs/network" + +LICENSE = "LGPLv2.1" +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc" + +DEPENDS = 
-> "flex-native bison-native" + +SRC_URI = 
-> "http://www.infradead.org/~tgr/${BPN}/files/${BP}.tar.gz" + 
-> +SRC_URI[md5sum] = "dbbb44801e833cf9ca4fdc943f2a58ee"
-> +SRC_URI[sha256sum] =
-> "69f4a360350ea61f2c988f947c251995c04093c74743eae9eeffba85846ef007" + 
-> +inherit autotools pkgconfig + +do_install_append() { +    # make 
-> wpa-supplicant happy +    # TODO: when moving to oe-core fix at 
-> wpa-supplicant +    # (e.g src/drivers/drivers.mak) +    cd 
-> ${D}${includedir} +    ln -sf libnl3/netlink netlink +    cd 
-> ${D}${libdir} +    ln -sf libnl-3.so.200 libnl.so +    ln -sf 
-> libnl-3.so.200 libnl.so.3 +    ln -sf libnl-genl-3.so.200 libnl-genl.so
-> + ln -sf libnl-genl-3.so.200 libnl-genl.so.3 +} + +FILES_${PN} = 
-> "${libdir}/libnl-3.so.* \ +               ${libdir}/libnl.so.* \ + 
-> ${sysconfdir}" +FILES_${PN}-dbg += "${libdir}/libnl/cli/*/.debug" 
-> +FILES_${PN}-dev += "${libdir}/libnl/cli/*/*.so \ + 
-> ${libdir}/libnl/cli/*/*.la" +FILES_${PN}-staticdev += 
-> "${libdir}/libnl/cli/*/*.a" + +PACKAGES += "${PN}-cli ${PN}-route 
-> ${PN}-nf ${PN}-genl" +FILES_${PN}-cli   = "${libdir}/libnl-cli-3.so.* \
-> + ${libdir}/libnl/cli/*/*.so.* \ +                     ${sbindir}/nl-*" 
-> +FILES_${PN}-route = "${libdir}/libnl-route-3.so.*" +FILES_${PN}-nf    = 
-> "${libdir}/libnl-nf-3.so.*" +FILES_${PN}-genl  = 
-> "${libdir}/libnl-genl-3.so.* \ + ${libdir}/libnl-genl.so.*" +
+--rqzD5py0kzyFAOWN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk7KBjQACgkQMkyGM64RGpFf1ACgiOaSB2YjkcTglGeUD57fx3SA
-ZL0AnRvCYLiJDS8n19prYLVlhAnXCPox
-=hjyd
+iEYEARECAAYFAk7KD+YACgkQN1Ujt2V2gBw3ugCaA25pBjjiNYyw7vd5mPBz4ysS
+N74An2u8arJ0jTdT3WLdHq1CsJHQSdgz
+=fFZc
 -----END PGP SIGNATURE-----
 
-
-
+--rqzD5py0kzyFAOWN--
