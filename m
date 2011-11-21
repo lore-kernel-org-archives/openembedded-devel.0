@@ -1,30 +1,33 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from stoexhubfe02.domain01.net ([83.145.59.141])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RSRS6-00068L-2c
+	(envelope-from <anders@chargestorm.se>) id 1RSRnp-0006wh-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 11:50:18 +0100
-Received: by ywt2 with SMTP id 2so4516762ywt.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 02:43:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=jDM8FXUNjgDScwxk9fvKnT9B7q1wSqnoWhHo4ktDlpM=;
-	b=dmz+dXLAzzE9raZpwwefzkBLGWvYdahoK87DNW/5LqpV7tKdmiT9N90xpNNc5rQqhb
-	Ztlp4iL0yHK0Sl0FRYaBZIFwtG3H5oinLFIcHletxmhKNY5vQCKiEHxprFbFlg75NJCC
-	PqcxkL1ddIpWO1D+3cu7x09GWkdnxo5sAawMs=
+	Mon, 21 Nov 2011 12:12:45 +0100
+Received: from ad.chargestorm.se (193.235.91.228) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server (TLS) id 8.3.137.0;
+	Mon, 21 Nov 2011 12:06:15 +0100
+Date: Mon, 21 Nov 2011 12:06:17 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20111121110617.GC3566@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
+	<20111110074449.GB3933@ad.chargestorm.se>
+	<20111110075607.GH21022@jama.jama.net>
+	<20111110082212.GD3933@ad.chargestorm.se>
+	<20111116141517.GA10880@jama.jama.net>
+	<20111121084630.GD3565@jama.jama.net>
+	<jad5sh$iv7$1@dough.gmane.org>
 MIME-Version: 1.0
-Received: by 10.146.160.10 with SMTP id i10mr2574646yae.11.1321872226561; Mon,
-	21 Nov 2011 02:43:46 -0800 (PST)
-Received: by 10.150.229.21 with HTTP; Mon, 21 Nov 2011 02:43:46 -0800 (PST)
-In-Reply-To: <1321788386-31278-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1321783600-23772-1-git-send-email-Martin.Jansa@gmail.com>
-	<1321788386-31278-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Mon, 21 Nov 2011 11:43:46 +0100
-Message-ID: <CAAQYJAvg6mLaVxNf2O6VV1Dw+5vCH+SsJ3HKJVmgmU4KkYvk5Q@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld v2] linux-kexecboot: use kernel_conf_variable like linux.inc does and respect CMDLINE_DEBUG
+In-Reply-To: <jad5sh$iv7$1@dough.gmane.org>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-GFI-SMTP-Submission: 1
+Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,249 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 10:50:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Nov 2011 11:12:45 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Sun, Nov 20, 2011 at 12:26 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> =A0recipes-kernel/linux/linux-kexecboot.inc | =A0104 ++++++++++++++------=
----------
-> =A01 files changed, 50 insertions(+), 54 deletions(-)
->
-> diff --git a/recipes-kernel/linux/linux-kexecboot.inc b/recipes-kernel/li=
-nux/linux-kexecboot.inc
-> index ea0bbd6..c7b29f3 100644
-> --- a/recipes-kernel/linux/linux-kexecboot.inc
-> +++ b/recipes-kernel/linux/linux-kexecboot.inc
-> @@ -11,7 +11,6 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd7810fab7487=
-fb0aad327b76f1be7cd7"
-> =A0# only as fallback for patches available only in linux-PV dir and ie d=
-efconfigs needs to go from linux-kexecboot-PV
-> =A0FILESPATH_append =3D ":${FILE_DIRNAME}/linux-${PV}"
->
-> -
-> =A0DEPENDS +=3D "xz-native"
->
-> =A0# Kernel bootlogo is distro-specific (default is OE logo).
-> @@ -19,13 +18,17 @@ DEPENDS +=3D "xz-native"
-> =A0LOGO_SIZE ?=3D "."
-> =A0SRC_URI =3D "file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2"
->
-> +# Set the verbosity of kernel messages during runtime
-> +# You can define CMDLINE_DEBUG in your local.conf or distro.conf to over=
-ride this behaviour
-> +CMDLINE_DEBUG ?=3D '${@base_contains("IMAGE_FEATURES", "debug-tweaks", "=
-debug", "loglevel=3D3", d)}'
-> +
-> =A0# Note how we set loglevel=3D3 and master console on serial to protect=
- bootlogo.
-> -CMDLINE_c7x0 =3D "console=3Dtty1 console=3DttyS0,115200n8 loglevel=3D3"
-> -CMDLINE_tosa =3D "console=3Dtty1 console=3DttyS0,115200n8 loglevel=3D3"
-> -CMDLINE_poodle =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drota=
-te:1 loglevel=3D3"
-> -CMDLINE_akita =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drotat=
-e:1 loglevel=3D3"
-> -CMDLINE_collie =3D "console=3Dtty1 console=3DttySA0,115200n8 fbcon=3Drot=
-ate:1 mem=3D64M loglevel=3D3"
-> -CMDLINE_spitz =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drotat=
-e:1 loglevel=3D3"
-> +CMDLINE_c7x0 =3D "console=3Dtty1 console=3DttyS0,115200n8"
-> +CMDLINE_tosa =3D "console=3Dtty1 console=3DttyS0,115200n8"
-> +CMDLINE_poodle =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drota=
-te:1"
-> +CMDLINE_akita =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drotat=
-e:1"
-> +CMDLINE_collie =3D "console=3Dtty1 console=3DttySA0,115200n8 fbcon=3Drot=
-ate:1 mem=3D64M"
-> +CMDLINE_spitz =3D "console=3Dtty1 console=3DttyS0,115200n8 fbcon=3Drotat=
-e:1"
->
-> =A0PACKAGES =3D ""
-> =A0PROVIDES =3D ""
-> @@ -46,28 +49,39 @@ LOCALVERSION ?=3D ""
-> =A0# we want the smallest size
-> =A0INITRAMFS_IMAGE =3D "initramfs-kexecboot-klibc-image"
->
-> +kernel_conf_variable() {
-> + =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_$1[ =3D]/d;"
-> + =A0 =A0 =A0 =A0if test "$2" =3D "n"
-> + =A0 =A0 =A0 =A0then
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "# CONFIG_$1 is not set" >> ${S}/.c=
-onfig
-> + =A0 =A0 =A0 =A0else
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_$1=3D$2" >> ${S}/.config
-> + =A0 =A0 =A0 =A0fi
-> +}
-> +
-> =A0do_configure_prepend() {
->
-> =A0 =A0 =A0 =A0 echo "" > ${S}/.config
-> + =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D""
->
-> =A0 =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0 # CONFIG_CMDLINE mangling
-> =A0 =A0 =A0 =A0 #
-> - =A0 =A0 =A0 =A0echo "CONFIG_CMDLINE_BOOL=3Dy" >> ${S}/.config
-> - =A0 =A0 =A0 =A0echo "CONFIG_CMDLINE=3D\"${CMDLINE}\"" >> ${S}/.config
-> + =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_BOOL y
-> + =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEB=
-UG}\""
->
-> =A0 =A0 =A0 =A0 # mips and x86
-> - =A0 =A0 =A0 =A0echo "CONFIG_CMDLINE_OVERRIDE=3Dy" >> ${S}/.config
-> + =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_OVERRIDE y
->
-> =A0 =A0 =A0 =A0 # sh only
-> - =A0 =A0 =A0 =A0echo "CONFIG_CMDLINE_OVERWRITE=3Dy" >> ${S}/.config
-> - =A0 =A0 =A0 =A0echo "# CONFIG_CMDLINE_EXTEND is not set" >> ${S}/.confi=
-g
-> + =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_OVERWRITE y
-> + =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_EXTEND n
->
-> =A0 =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0 # endian support
-> =A0 =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0 if [ "${SITEINFO_ENDIANNESS}" =3D "be" ]; then
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_CPU_BIG_ENDIAN=3Dy" =A0 =A0=
- =A0 =A0 =A0>> ${S}/.config
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable CPU_BIG_ENDIAN y
-> =A0 =A0 =A0 =A0 fi
->
-> =A0 =A0 =A0 =A0 #
-> @@ -75,60 +89,42 @@ do_configure_prepend() {
-> =A0 =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0 if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 install -m 0644 ${WORKDIR}/logo_linux_clu=
-t224.ppm drivers/video/logo/logo_linux_clut224.ppm
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_LOGO=3Dy" =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0>> ${S}/.config
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_LOGO_LINUX_CLUT224=3Dy" =A0=
- =A0 =A0>> ${S}/.config
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable LOGO y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable LOGO_LINUX_CLUT224 =
-y
-> =A0 =A0 =A0 =A0 fi
->
-> =A0 =A0 =A0 =A0 # When enabling thumb for userspace we also need thumb su=
-pport in the kernel
-> =A0 =A0 =A0 =A0 if [ "${ARM_INSTRUCTION_SET}" =3D "thumb" ] ; then
-> - =A0 =A0 =A0 =A0 =A0 =A0sed -i -e /CONFIG_ARM_THUMB/d ${WORKDIR}/defconf=
-ig
-> - =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_ARM_THUMB=3Dy" >> ${S}/.config
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable ARM_THUMB y
-> =A0 =A0 =A0 =A0 fi
->
-> - =A0 =A0 =A0 =A0sed -e '/CONFIG_CMDLINE=3D/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_CMDLINE_BOOL/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_CMDLINE_OVERRIDE/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_CMDLINE_OVERWRITE/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_CMDLINE_EXTEND/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_CPU_BIG_ENDIAN/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_LOGO=3D/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_LOGO_LINUX_CLUT224=3D/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_LOCALVERSION/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_LOCALVERSION_AUTO/d' \
-> - =A0 =A0 =A0 =A0 =A0 =A0< '${WORKDIR}/defconfig' >>'${S}/.config'
-> -
-> - =A0 =A0 =A0 =A0echo 'CONFIG_LOCALVERSION=3D"${LOCALVERSION}"' >>${S}/.c=
-onfig
-> - =A0 =A0 =A0 =A0echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.con=
-fig
-> + =A0 =A0 =A0 =A0kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
-> + =A0 =A0 =A0 =A0kernel_conf_variable LOCALVERSION_AUTO n
->
-> =A0 =A0 =A0 =A0 # Force sane defaults for kexec-enabled kernels and keep =
-size small
-> - =A0 =A0 =A0 =A0sed -i -e /CONFIG_BLK_DEV_INITRD/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_KEXEC/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /=3Dm/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_MODULES/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_DEBUG_ERRORS/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_DEBUG_BUGVERBOSE/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_DEBUG_KERNEL/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${S}/.config
-> -
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_BLK_DEV_INITRD=3Dy' >>${S}/.co=
-nfig
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_KEXEC=3Dy' >>${S}/.config
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo '# CONFIG_MODULES is not set' >> ${S}/=
-.config
-> + =A0 =A0 =A0 =A0kernel_conf_variable BLK_DEV_INITRD y
-> + =A0 =A0 =A0 =A0kernel_conf_variable KEXEC y
-> + =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /=3Dm/d;"
-> + =A0 =A0 =A0 =A0kernel_conf_variable MODULES n
-> + =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS n
-> + =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE n
-> + =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL n
->
-> =A0 =A0 =A0 =A0 # Force lzma for arm kernels only
-> =A0 =A0 =A0 =A0 if [ "${ARCH}" =3D "arm" ] ; then
-> -
-> - =A0 =A0 =A0 =A0 =A0 =A0sed -i -e /CONFIG_KERNEL/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_INITRAMFS_COMPRESSION/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_INITRAMFS_SOURCE/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e /CONFIG_RD/d \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${S}/.config
-> -
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_KERNEL_LZMA=3Dy' >>${S}/.confi=
-g
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_INITRAMFS_COMPRESSION_LZMA=3Dy=
-' >>${S}/.config
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_INITRAMFS_SOURCE=3D"initramfs.=
-cpio.lzma"' >>${S}/.config
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 echo 'CONFIG_RD_LZMA=3Dy' >>${S}/.config
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
-FIG_KERNEL/d;"
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
-FIG_RD/d;"
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
-FIG_INITRAMFS_COMPRESSION/d;"
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
-FIG_INITRAMFS_SOURCE/d;"
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable KERNEL_LZMA y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable RD_LZMA y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable INITRAMFS_COMPRESSI=
-ON_LZMA y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable INITRAMFS_SOURCE "\=
-"initramfs.cpio.lzma\""
-> =A0 =A0 =A0 =A0 fi
->
-> + =A0 =A0 =A0 =A0sed -e "${CONF_SED_SCRIPT}" \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0< '${WORKDIR}/defconfig'=
- >>'${S}/.config'
-> +
-> =A0 =A0 =A0 =A0 yes '' | oe_runmake oldconfig
-> =A0}
->
-> --
-> 1.7.8.rc3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+* Koen Kooi <koen@dominion.thruhere.net> [111121 10:34]:
+> Op 21-11-11 09:46, Martin Jansa schreef:
+> > On Wed, Nov 16, 2011 at 03:15:17PM +0100, Martin Jansa wrote:
+> >> On Thu, Nov 10, 2011 at 09:22:12AM +0100, Anders Darander wrote:
+> >>> * Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
+> >>>> On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
+> >>>>> * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
+> >>>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
+> >>>>>> meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++-- 
+> >>>>>> 1 files changed, 9 insertions(+), 2 deletions(-)
 
-Martin,
+> >>>>>> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb
+> >>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb index
+> >>>>>> 90862a3..d1d4306 100644 ---
+> >>>>>> a/meta-oe/recipes-core/systemd/systemd_git.bb +++
+> >>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb @@ -14,7 +14,7 @@
+> >>>>>> inherit gitpkgv # TODO: # u-a for runlevel and telinit -# u-a
+> >>>>>> prerm
 
-I agree for the use kernel_conf_variable but I'm unsure about CMDLINE_DEBUG=
-.
-In fact, I hardcoded it purposedly with commit 8929166 with the
-following reasons:
+> >>>>> Here on your todo list, it stated u-a for prerm, but you applied
+> >>>>> it to the postrm. In this case, it probably doesn't really
+> >>>>> matter, but I'd still guess that it would make more sense to
+> >>>>> remove the u-a before removing the binaries. Although, I don't
+> >>>>> think it'll actually cause any problems in this case.
 
-* Being a second-stage bootloader we don't expect any output on screen.
-* Adding 'debug' as commandline arg is pointless because
-* linux-kexecboot is compiled without debug and printk in order
-* to minimize the size.
-* Full debug implies not only editing the commandline (e.g. earlyprintk)
-* but re-enabling full debug options in the defconfigs
+> >>>> I did what u-a.bbclass usually do.. if you think it should be in
+> >>>> prerm then it would be best to first fix in u-a.bbclass and then we
+> >>>> can update the rest of metadata.
 
-Regards
+> >>> Yeah, like I said, is't likely not a real problem. There'll probably 
+> >>> just be a tiny window during which, in this case, e.g. reboot isn't 
+> >>> available, before u-a has been told to change the reboot link.
 
-Andrea
+> >>> I'm currently just a little bit catious as I've recently stumbled
+> >>> upon post-/prerm issues using rpm... (Although the ones I know of
+> >>> (busybox updates, rsyslog removal) are either fixed or there has been
+> >>> patches submitted).
+
+> >> So should I change postrm to prerm in this patch or is there other 
+> >> reason why it wasn't applied yet?
+
+> I was waiting for Anders to comment on it :) Changing to prerm would be better.
+
+Sorry, for the delay. I've been out of the loop for almost a week
+(hardly read any emails at all).
+
+Well, prerm would probably be better, as Koen stated, not least
+long-ternm. But postrm has been working as far as I see, so I'll leave
+it to you to decide.
+
+Cheers,
+/Anders
+
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
 
 
