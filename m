@@ -1,33 +1,35 @@
-Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RSRnp-0006wh-Fs
+	(envelope-from <martin.jansa@gmail.com>) id 1RSSXG-0007tG-C5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 12:12:45 +0100
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server (TLS) id 8.3.137.0;
-	Mon, 21 Nov 2011 12:06:15 +0100
-Date: Mon, 21 Nov 2011 12:06:17 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20111121110617.GC3566@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
-	<20111110074449.GB3933@ad.chargestorm.se>
-	<20111110075607.GH21022@jama.jama.net>
-	<20111110082212.GD3933@ad.chargestorm.se>
-	<20111116141517.GA10880@jama.jama.net>
-	<20111121084630.GD3565@jama.jama.net>
-	<jad5sh$iv7$1@dough.gmane.org>
+	Mon, 21 Nov 2011 12:59:42 +0100
+Received: by ywt2 with SMTP id 2so4575274ywt.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Nov 2011 03:53:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=N7TYSGcY1JEnSJIJg8nAw8VyBisvUZPqCP8Xw+d56f8=;
+	b=gtMR2hwPW99iTs3bw4X/tbbfhiVoFZfSN+byw2gS64T1u7PXbXJzwAhu0e58nnlBAq
+	ud+fIXeEvE5S5AOSefohSsibaszhRKxKyd/gjHWsQm+cetb9giUtvx4gRh6Loxs/9o+K
+	94zF1giAmU+wJGrYf2eAAypbtnYTWW7ey1mVE=
+Received: by 10.152.146.100 with SMTP id tb4mr7943616lab.0.1321876346500;
+	Mon, 21 Nov 2011 03:52:26 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id mo6sm9304862lab.11.2011.11.21.03.52.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 21 Nov 2011 03:52:25 -0800 (PST)
+Date: Mon, 21 Nov 2011 12:52:13 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111121115213.GF3565@jama.jama.net>
+References: <1321783600-23772-1-git-send-email-Martin.Jansa@gmail.com>
+	<1321788386-31278-1-git-send-email-Martin.Jansa@gmail.com>
+	<CAAQYJAvg6mLaVxNf2O6VV1Dw+5vCH+SsJ3HKJVmgmU4KkYvk5Q@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <jad5sh$iv7$1@dough.gmane.org>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
+In-Reply-To: <CAAQYJAvg6mLaVxNf2O6VV1Dw+5vCH+SsJ3HKJVmgmU4KkYvk5Q@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
+Subject: Re: [meta-handheld v2] linux-kexecboot: use kernel_conf_variable like linux.inc does and respect CMDLINE_DEBUG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,65 +43,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 11:12:45 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 21 Nov 2011 11:59:43 -0000
+X-Groupsio-MsgNum: 35483
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eNMatiwYGLtwo1cJ"
 Content-Disposition: inline
 
-* Koen Kooi <koen@dominion.thruhere.net> [111121 10:34]:
-> Op 21-11-11 09:46, Martin Jansa schreef:
-> > On Wed, Nov 16, 2011 at 03:15:17PM +0100, Martin Jansa wrote:
-> >> On Thu, Nov 10, 2011 at 09:22:12AM +0100, Anders Darander wrote:
-> >>> * Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
-> >>>> On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
-> >>>>> * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
-> >>>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
-> >>>>>> meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++-- 
-> >>>>>> 1 files changed, 9 insertions(+), 2 deletions(-)
+--eNMatiwYGLtwo1cJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> >>>>>> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb
-> >>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb index
-> >>>>>> 90862a3..d1d4306 100644 ---
-> >>>>>> a/meta-oe/recipes-core/systemd/systemd_git.bb +++
-> >>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb @@ -14,7 +14,7 @@
-> >>>>>> inherit gitpkgv # TODO: # u-a for runlevel and telinit -# u-a
-> >>>>>> prerm
+On Mon, Nov 21, 2011 at 11:43:46AM +0100, Andrea Adami wrote:
+> On Sun, Nov 20, 2011 at 12:26 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> Martin,
+>=20
+> I agree for the use kernel_conf_variable but I'm unsure about CMDLINE_DEB=
+UG.
+> In fact, I hardcoded it purposedly with commit 8929166 with the
+> following reasons:
+>=20
+> * Being a second-stage bootloader we don't expect any output on screen.
+> * Adding 'debug' as commandline arg is pointless because
+> * linux-kexecboot is compiled without debug and printk in order
+> * to minimize the size.
+> * Full debug implies not only editing the commandline (e.g. earlyprintk)
+> * but re-enabling full debug options in the defconfigs
 
-> >>>>> Here on your todo list, it stated u-a for prerm, but you applied
-> >>>>> it to the postrm. In this case, it probably doesn't really
-> >>>>> matter, but I'd still guess that it would make more sense to
-> >>>>> remove the u-a before removing the binaries. Although, I don't
-> >>>>> think it'll actually cause any problems in this case.
+I had some issues with 3.2.0-rc2 when used as linux-kexecboot, that's
+why I've added this, but later found out that it's really a bit
+incomplete, that's why I have followup patch for this:
+https://gitorious.org/shr/meta-handheld/commit/6bc710615b587fc0bfd8fc4372ca=
+d0de5599dd82?format=3Dpatch
 
-> >>>> I did what u-a.bbclass usually do.. if you think it should be in
-> >>>> prerm then it would be best to first fix in u-a.bbclass and then we
-> >>>> can update the rest of metadata.
+But with latest SRCREV it works again, so in theory I don't need it, but
+still it would be usefull to have easy way to debug even this stage
+(maybe you still remember older kernel version where it worked fine=20
+as 3rd stage and failed to boot as 2nd stage..).
 
-> >>> Yeah, like I said, is't likely not a real problem. There'll probably 
-> >>> just be a tiny window during which, in this case, e.g. reboot isn't 
-> >>> available, before u-a has been told to change the reboot link.
+BTW: here is upgrade to 3.2.0-rc2 with those changes to
+linux-kexecboot.inc applied
+https://gitorious.org/shr/meta-handheld/commit/27ca3d24353a5473f4f1aade00ba=
+7a52b667e28c?format=3Dpatch
 
-> >>> I'm currently just a little bit catious as I've recently stumbled
-> >>> upon post-/prerm issues using rpm... (Although the ones I know of
-> >>> (busybox updates, rsyslog removal) are either fixed or there has been
-> >>> patches submitted).
+(be aware that I do rebase that branch sometimes so if those commits are
+not valid anymore just look at last few commits in that branch).
 
-> >> So should I change postrm to prerm in this patch or is there other 
-> >> reason why it wasn't applied yet?
+Regards,
 
-> I was waiting for Anders to comment on it :) Changing to prerm would be better.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Sorry, for the delay. I've been out of the loop for almost a week
-(hardly read any emails at all).
+--eNMatiwYGLtwo1cJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Well, prerm would probably be better, as Koen stated, not least
-long-ternm. But postrm has been working as far as I see, so I'll leave
-it to you to decide.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-Cheers,
-/Anders
+iEYEARECAAYFAk7KO20ACgkQN1Ujt2V2gBxFbwCgkYYWuBYfVjn6bjmyBp8EjkkC
+e+MAoJ+1l0EiKm7vAsVCvQWeeKW9o7lR
+=Eoq9
+-----END PGP SIGNATURE-----
 
--- 
-Anders Darander
-ChargeStorm AB / eStorm AB
-
-
+--eNMatiwYGLtwo1cJ--
