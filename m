@@ -1,37 +1,25 @@
-Received: from dd12300.kasserver.com ([85.13.134.141])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <info@itPenguin.de>) id 1RSYig-00053k-HW
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RSa2Z-0007In-U9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 19:35:54 +0100
-Received: from server.itpinguin.de (unknown [95.210.227.252])
-	by dd12300.kasserver.com (Postfix) with ESMTPSA id 357CE4208A3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 19:19:34 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by server.itpinguin.de (Postfix) with ESMTP id B8158176083
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 19:19:26 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at itpinguin.de
-Received: from server.itpinguin.de ([127.0.0.1])
-	by localhost (server.itpinguin.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Cj+v6cxHCwlM
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 19:19:19 +0100 (CET)
-Received: from [192.168.100.2] (troubadix.itpinguin.de [192.168.100.2])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by server.itpinguin.de (Postfix) with ESMTPS id 0F378118279
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 19:19:19 +0100 (CET)
-Message-ID: <4ECA9626.900@itPenguin.de>
-Date: Mon, 21 Nov 2011 19:19:18 +0100
-From: info <info@itPenguin.de>
-Organization: itPenguin GmbH
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
-MIME-Version: 1.0
+	Mon, 21 Nov 2011 21:00:32 +0100
+Received: (qmail invoked by alias); 21 Nov 2011 19:54:02 -0000
+Received: from p5B0A17D0.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.23.208]
+	by mail.gmx.net (mp070) with SMTP; 21 Nov 2011 20:54:02 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/UeqZGgRvUWmUdaXHgZj1ki1Q4mzfr/0cuVdSajC
+	8655KrOmTWKoBg
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Problem bitbaking angstrom-x-image
+Date: Mon, 21 Nov 2011 20:53:56 +0100
+Message-Id: <1321905239-3527-2-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
+References: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe][V2 1/4] iw: update to 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +33,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 18:35:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Nov 2011 20:00:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello,
+to prepare support for libnl-3 we need to update iw.
 
-I managed to create several images for my beagle board, so my 
-configuration seems to work.
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../iw/iw/kill-git-version-check.patch             |   26 --------------------
+ .../iw/{iw_0.9.20.bb => iw_3.2.bb}                 |   15 +++--------
+ 2 files changed, 4 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
+ rename meta-oe/recipes-connectivity/iw/{iw_0.9.20.bb => iw_3.2.bb} (51%)
 
-When bitbaking angstrom-x-image I get these error messages:
+diff --git a/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch b/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
+deleted file mode 100644
+index 93aad02..0000000
+--- a/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-Index: iw-0.9.18/version.sh
+-===================================================================
+---- iw-0.9.18.orig/version.sh	2010-09-14 13:50:27.000000000 +0400
+-+++ iw-0.9.18/version.sh	2010-09-14 13:50:40.000000000 +0400
+-@@ -5,20 +5,6 @@
+- 
+- echo '#include "iw.h"' > "$OUT"
+- 
+--if head=`git rev-parse --verify HEAD 2>/dev/null`; then
+--	git update-index --refresh --unmerged > /dev/null
+--	descr=$(git describe)
+--
+--	# on git builds check that the version number above
+--	# is correct...
+--	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
+--
+--	v="${descr#v}"
+--	if git diff-index --name-only HEAD | read dummy ; then
+--		v="$v"-dirty
+--	fi
+--else
+--	v="$VERSION"
+--fi
+-+v="$VERSION"
+- 
+- echo "const char iw_version[] = \"$v\";" >> "$OUT"
+diff --git a/meta-oe/recipes-connectivity/iw/iw_0.9.20.bb b/meta-oe/recipes-connectivity/iw/iw_3.2.bb
+similarity index 51%
+rename from meta-oe/recipes-connectivity/iw/iw_0.9.20.bb
+rename to meta-oe/recipes-connectivity/iw/iw_3.2.bb
+index 0b66e8d..ba7afdd 100644
+--- a/meta-oe/recipes-connectivity/iw/iw_0.9.20.bb
++++ b/meta-oe/recipes-connectivity/iw/iw_3.2.bb
+@@ -6,19 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
+ 
+ DEPENDS = "libnl pkgconfig"
+ 
+-SRC_URI = " \
+-	http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
+-	file://kill-git-version-check.patch \
+-	"
++SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "1055799b544b3e08169d155bb6c21bb0"
+-SRC_URI[sha256sum] = "2d665fbfbe4fd6a40159fb821518fc5337da37448416405b936a393a14cbc7d3"
++SRC_URI[md5sum] = "80615c972a287dcd50890735469b0d1c"
++SRC_URI[sha256sum] = "370edabe6f73cc55be77a7502a3a25d23ec2aea900ae4ca3cec19d55bf8bdb12"
+ 
+-CFLAGS += "-DCONFIG_LIBNL20"
+-
+-do_compile() {
+-	oe_runmake
+-}
++CFLAGS += "-DCONFIG_LIBNL30"
+ 
+ do_install() {
+ 	oe_runmake DESTDIR=${D} install
+-- 
+1.7.4.4
 
-| config.status: creating cups/pstoraster
-| + mkdir obj
-| mkdir: cannot create directory `obj': File exists
-NOTE: package gs-9.01-r0: task do_configure: Failed
-ERROR: Function 'do_configure' failed (see 
-/project/heizung/develop/openembedded/build/tmp/work/armv7a-angstrom-linux-gnueabi/gs-9.01-r0/temp/log.do_configure.15504 
-for further information)
-ERROR: Task 2462 
-(/project/heizung/develop/openembedded/openembedded/recipes/gs/gs_9.01.bb, 
-do_configure) failed with exit code '1'
-ERROR: 
-'/project/heizung/develop/openembedded/openembedded/recipes/gs/gs_9.01.bb' 
-failed
-
-Is this a problem of the ghostscript package when creating the directory 
-obj?
-Is there something I can do, to fix it?
-
-Some contents of my local.conf:
-MACHINE = "beagleboard"
-DISTRO = "angstrom-2010.x"
-
-Any help is welcome,
-Roland
 
 
