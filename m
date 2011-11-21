@@ -1,25 +1,23 @@
 Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RSa2Z-0007In-U9
+	(envelope-from <schnitzeltony@gmx.de>) id 1RSa2Z-0007Im-IZ
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 21 Nov 2011 21:00:32 +0100
-Received: (qmail invoked by alias); 21 Nov 2011 19:54:02 -0000
+Received: (qmail invoked by alias); 21 Nov 2011 19:54:01 -0000
 Received: from p5B0A17D0.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.23.208]
-	by mail.gmx.net (mp070) with SMTP; 21 Nov 2011 20:54:02 +0100
+	by mail.gmx.net (mp070) with SMTP; 21 Nov 2011 20:54:01 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/UeqZGgRvUWmUdaXHgZj1ki1Q4mzfr/0cuVdSajC
-	8655KrOmTWKoBg
+X-Provags-ID: V01U2FsdGVkX19W8ksqzF5W2vBXtV+zGXATi9lelYt8oTaNQOpAVW
+	X0ZLVICwyV7A0p
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Nov 2011 20:53:56 +0100
-Message-Id: <1321905239-3527-2-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 21 Nov 2011 20:53:55 +0100
+Message-Id: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
-References: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-oe][V2 1/4] iw: update to 3.2
+Subject: [meta-oe][V2 0/4] libnl and iw updates to make networkmanager work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,79 +35,41 @@ X-List-Received-Date: Mon, 21 Nov 2011 20:00:32 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-to prepare support for libnl-3 we need to update iw.
+V1 -> V2: networkmanager bump PR
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../iw/iw/kill-git-version-check.patch             |   26 --------------------
- .../iw/{iw_0.9.20.bb => iw_3.2.bb}                 |   15 +++--------
- 2 files changed, 4 insertions(+), 37 deletions(-)
+Note: It might be required to rebuild wpa-supplicant coming from oe-core.
+
+Andreas Müller (4):
+  iw: update to 3.2
+  libnl: add 3.23
+  networkmanager: bump PR to force rebuild with libnl 3.23
+  libnl1: remove
+
+ .../iw/iw/kill-git-version-check.patch             |   26 -------
+ .../iw/{iw_0.9.20.bb => iw_3.2.bb}                 |   15 +---
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
+ .../libnl/libnl1-1.1/build.only.static.lib.patch   |   79 --------------------
+ .../libnl1-1.1/dont-link-libnl-from-sysroot.patch  |   26 -------
+ .../libnl/libnl1-1.1/fix-includes.patch            |   13 ---
+ .../libnl/libnl1-1.1/fix-ucred-declaration.patch   |   23 ------
+ .../libnl/libnl1-1.1/local-includes.patch          |   12 ---
+ .../libnl/libnl1-1.1/netlink-local-fix.patch       |   12 ---
+ .../libnl/libnl1-1.1/respect-ldflags.patch         |   12 ---
+ meta-oe/recipes-support/libnl/libnl1_1.1.bb        |   30 --------
+ meta-oe/recipes-support/libnl/libnl_3.2.3.bb       |   46 +++++++++++
+ 12 files changed, 51 insertions(+), 245 deletions(-)
  delete mode 100644 meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
  rename meta-oe/recipes-connectivity/iw/{iw_0.9.20.bb => iw_3.2.bb} (51%)
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/build.only.static.lib.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/dont-link-libnl-from-sysroot.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/fix-includes.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/fix-ucred-declaration.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/local-includes.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/netlink-local-fix.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1-1.1/respect-ldflags.patch
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl1_1.1.bb
+ create mode 100644 meta-oe/recipes-support/libnl/libnl_3.2.3.bb
 
-diff --git a/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch b/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
-deleted file mode 100644
-index 93aad02..0000000
---- a/meta-oe/recipes-connectivity/iw/iw/kill-git-version-check.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--Index: iw-0.9.18/version.sh
--===================================================================
----- iw-0.9.18.orig/version.sh	2010-09-14 13:50:27.000000000 +0400
--+++ iw-0.9.18/version.sh	2010-09-14 13:50:40.000000000 +0400
--@@ -5,20 +5,6 @@
-- 
-- echo '#include "iw.h"' > "$OUT"
-- 
---if head=`git rev-parse --verify HEAD 2>/dev/null`; then
---	git update-index --refresh --unmerged > /dev/null
---	descr=$(git describe)
---
---	# on git builds check that the version number above
---	# is correct...
---	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
---
---	v="${descr#v}"
---	if git diff-index --name-only HEAD | read dummy ; then
---		v="$v"-dirty
---	fi
---else
---	v="$VERSION"
---fi
--+v="$VERSION"
-- 
-- echo "const char iw_version[] = \"$v\";" >> "$OUT"
-diff --git a/meta-oe/recipes-connectivity/iw/iw_0.9.20.bb b/meta-oe/recipes-connectivity/iw/iw_3.2.bb
-similarity index 51%
-rename from meta-oe/recipes-connectivity/iw/iw_0.9.20.bb
-rename to meta-oe/recipes-connectivity/iw/iw_3.2.bb
-index 0b66e8d..ba7afdd 100644
---- a/meta-oe/recipes-connectivity/iw/iw_0.9.20.bb
-+++ b/meta-oe/recipes-connectivity/iw/iw_3.2.bb
-@@ -6,19 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
- 
- DEPENDS = "libnl pkgconfig"
- 
--SRC_URI = " \
--	http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
--	file://kill-git-version-check.patch \
--	"
-+SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2"
- 
--SRC_URI[md5sum] = "1055799b544b3e08169d155bb6c21bb0"
--SRC_URI[sha256sum] = "2d665fbfbe4fd6a40159fb821518fc5337da37448416405b936a393a14cbc7d3"
-+SRC_URI[md5sum] = "80615c972a287dcd50890735469b0d1c"
-+SRC_URI[sha256sum] = "370edabe6f73cc55be77a7502a3a25d23ec2aea900ae4ca3cec19d55bf8bdb12"
- 
--CFLAGS += "-DCONFIG_LIBNL20"
--
--do_compile() {
--	oe_runmake
--}
-+CFLAGS += "-DCONFIG_LIBNL30"
- 
- do_install() {
- 	oe_runmake DESTDIR=${D} install
 -- 
 1.7.4.4
 
