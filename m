@@ -1,34 +1,34 @@
-Received: from mail-dy0-f47.google.com ([209.85.220.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RSacI-0008NF-Ik
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 21:37:26 +0100
-Received: by dye2 with SMTP id 2so355698dye.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RScBk-0005kf-9Q for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Nov 2011 23:18:08 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RSc5S-0003wL-Ld for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Nov 2011 23:11:38 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Nov 2011 23:11:38 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 12:30:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=uWk9JbJB6v8ZJZBnw28fWD5Z4hT1hK+St/t/CmXQPI0=;
-	b=J7riXa3bxC5aBFt3Jcuc2WK9AK+J2kbmC8nbXLlbNAf2blWxQBpkLwWc2xnArD3kNR
-	yShyIWbfS/rRC4v2ziQzk0nzxsgb/dBHSqme7Y6qeZaFgGTyehajN5T3z3rY5WUpQRBe
-	BhyoukSNmc2Lg8n7wwp5WpxGSlBUtJ7lJQVSM=
-Received: by 10.152.144.202 with SMTP id so10mr10197138lab.9.1321907454349;
-	Mon, 21 Nov 2011 12:30:54 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id jb5sm10501415lab.15.2011.11.21.12.30.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Nov 2011 12:30:52 -0800 (PST)
-Date: Mon, 21 Nov 2011 21:30:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 21 Nov 2011 23:11:38 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111121203039.GM3565@jama.jama.net>
-References: <20111104141806.GU9949@jama.jama.net>
-	<20111104142028.GV9949@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20111104142028.GV9949@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: libvpx causing gcc ICE when building for qemux86-64
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 21 Nov 2011 23:11:22 +0100
+Message-ID: <jaeia9$bll$1@dough.gmane.org>
+References: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.3
+Subject: Re: [meta-oe][V2 0/4] libnl and iw updates to make networkmanager work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,55 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 20:37:26 -0000
-X-Groupsio-MsgNum: 35507
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IoFIGPN1N3g1Ryqz"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Nov 2011 22:18:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---IoFIGPN1N3g1Ryqz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, Nov 04, 2011 at 03:20:28PM +0100, Martin Jansa wrote:
-> On Fri, Nov 04, 2011 at 03:18:06PM +0100, Martin Jansa wrote:
-> > Hi, with latest gcc-4.6 from meta-oe I get this ICE:
-> >=20
-> > OE @ ~/shr-core/tmp/work/x86_64-oe-linux/libvpx-0.9.5-r0.0/libvpx-v0.9.=
-5 $ x86_64-oe-linux-gcc    -m64 --sysroot=3D/OE/shr-core/tmp/sysroots/qemux=
-86-64 -O2 -pipe -g -feliminate-unused-debug-types -fPIC -O3 -Wall -Wdeclara=
-tion-after-statement -Wdisabled-optimization -Wpointer-arith -Wtype-limits =
--Wcast-qual -Wno-unused -I. -I"/OE/shr-core/tmp/work/x86_64-oe-linux/libvpx=
--0.9.5-r0.0/libvpx-v0.9.5" -I/OE/shr-core/tmp/work/x86_64-oe-linux/libvpx-0=
-=2E9.5-r0.0/libvpx-v0.9.5/vp8 -I/OE/shr-core/tmp/work/x86_64-oe-linux/libvp=
-x-0.9.5-r0.0/libvpx-v0.9.5/vp8 -c -o md5_utils.c.o md5_utils.c
-> > md5_utils.c: In function 'byteSwap':
-> > md5_utils.c:30:1: internal compiler error: Segmentation fault
-> > Please submit a full bug report,
-> > with preprocessed source if appropriate.
-> > See <http://gcc.gnu.org/bugs.html> for instructions.
->=20
-> And dropping -O3 is enough to make it compile again.
+Op 21-11-11 20:53, Andreas Müller schreef:
+> V1 -> V2: networkmanager bump PR
+> 
+> Note: It might be required to rebuild wpa-supplicant coming from
+> oe-core.
 
-FWIW: Just tested with newer gcc from oe-core and the problem is still ther=
-e.
+I'll apply this set tomorrow if there are no comments, but could you also
+push libnl3 into oe-core and then bump PR for wpa-supplicant? If not, could
+you add a wpa-supplicant bbappend that simply does PR_INC = 1 (or PRINC, I
+forget) ?
 
-Regards,
+regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---IoFIGPN1N3g1Ryqz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk7KtO8ACgkQN1Ujt2V2gBxc3ACfbIRp7TpNDjImQ8mDvQtzoOBo
-fqUAnA047vq1MnVQysNlUAP9mUjrl15b
-=4uZx
+iEYEARECAAYFAk7KzIgACgkQMkyGM64RGpHnHACffdU98Hr58FMbhlExV7qH3QVd
+jCAAoLCk4++ZcR/spyp7aSzY1rWSWf6k
+=grcU
 -----END PGP SIGNATURE-----
 
---IoFIGPN1N3g1Ryqz--
+
+
