@@ -1,39 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RSQLs-0004u3-Jx for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 10:39:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RSQFc-0001UR-G2 for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Nov 2011 10:33:20 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 10:33:20 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1RSQYF-0005Ae-J5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Nov 2011 10:52:35 +0100
+Received: by faat2 with SMTP id t2so5781083faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2011 10:33:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 21 Nov 2011 01:46:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=Zr5SCMJ/rZh3/oDN+Zu77lbf+aY5q8BvZF56N/XMtlI=;
+	b=pizMfNrDAC4Aryt6xxmHDba/DDOhakB95Fd/0R9bsA4mgezr2l2mrYchTtyYCkRu10
+	b+7wceUruZrfeHqvNnKm2O/DgaNJvbmOdEl6w3xMlxMGEMXtpREFU+d6O/KmShT55+ul
+	E/ROhjpROOfy4J7ihTole4KrY/f77a+SqMUGo=
+Received: by 10.152.113.167 with SMTP id iz7mr8420812lab.15.1321868766139;
+	Mon, 21 Nov 2011 01:46:06 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id pc8sm8968634lab.8.2011.11.21.01.46.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 21 Nov 2011 01:46:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 21 Nov 2011 10:33:05 +0100
-Message-ID: <jad5sh$iv7$1@dough.gmane.org>
-References: <1320866629-22073-1-git-send-email-Martin.Jansa@gmail.com>
-	<20111110074449.GB3933@ad.chargestorm.se>
-	<20111110075607.GH21022@jama.jama.net>
-	<20111110082212.GD3933@ad.chargestorm.se>
-	<20111116141517.GA10880@jama.jama.net>
-	<20111121084630.GD3565@jama.jama.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <20111121084630.GD3565@jama.jama.net>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [PATCH][meta-oe] systemd: add postrm u-a calls
+Date: Mon, 21 Nov 2011 10:45:30 +0100
+Message-Id: <1321868730-28312-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc3
+In-Reply-To: <jad5sh$iv7$1@dough.gmane.org>
+References: <jad5sh$iv7$1@dough.gmane.org>
+Subject: [meta-oe v2] systemd: add prerm u-a calls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,66 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2011 09:39:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Nov 2011 09:52:35 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    9 ++++++++-
+ 1 files changed, 8 insertions(+), 1 deletions(-)
 
-Op 21-11-11 09:46, Martin Jansa schreef:
-> On Wed, Nov 16, 2011 at 03:15:17PM +0100, Martin Jansa wrote:
->> On Thu, Nov 10, 2011 at 09:22:12AM +0100, Anders Darander wrote:
->>> * Martin Jansa <martin.jansa@gmail.com> [111110 08:57]:
->>>> On Thu, Nov 10, 2011 at 08:44:49AM +0100, Anders Darander wrote:
->>>>> * Martin Jansa <martin.jansa@gmail.com> [111109 20:25]:
->>>>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
->>>>>> meta-oe/recipes-core/systemd/systemd_git.bb |   11 +++++++++-- 
->>>>>> 1 files changed, 9 insertions(+), 2 deletions(-)
->>> 
->>>>>> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb
->>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb index
->>>>>> 90862a3..d1d4306 100644 ---
->>>>>> a/meta-oe/recipes-core/systemd/systemd_git.bb +++
->>>>>> b/meta-oe/recipes-core/systemd/systemd_git.bb @@ -14,7 +14,7 @@
->>>>>> inherit gitpkgv # TODO: # u-a for runlevel and telinit -# u-a
->>>>>> prerm
->>> 
->>>>> Here on your todo list, it stated u-a for prerm, but you applied
->>>>> it to the postrm. In this case, it probably doesn't really
->>>>> matter, but I'd still guess that it would make more sense to
->>>>> remove the u-a before removing the binaries. Although, I don't
->>>>> think it'll actually cause any problems in this case.
->>> 
->>>> I did what u-a.bbclass usually do.. if you think it should be in
->>>> prerm then it would be best to first fix in u-a.bbclass and then we
->>>> can update the rest of metadata.
->>> 
->>> Yeah, like I said, is't likely not a real problem. There'll probably 
->>> just be a tiny window during which, in this case, e.g. reboot isn't 
->>> available, before u-a has been told to change the reboot link.
->>> 
->>> I'm currently just a little bit catious as I've recently stumbled
->>> upon post-/prerm issues using rpm... (Although the ones I know of
->>> (busybox updates, rsyslog removal) are either fixed or there has been
->>> patches submitted).
->> 
->> So should I change postrm to prerm in this patch or is there other 
->> reason why it wasn't applied yet?
-
-I was waiting for Anders to comment on it :) Changing to prerm would be better.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7KGs8ACgkQMkyGM64RGpFddACghK4Srey32MmPC9KSCl5uLP4T
-KDwAoKc4IGiGwRrOVXzgRtHTjmhxYzra
-=QnvQ
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 7b0771a..228e0e4 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -108,7 +108,6 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
+ 
+ # TODO:
+ # u-a for runlevel and telinit
+-# u-a prerm
+ 
+ pkg_postinst_systemd () {
+ update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
+@@ -117,3 +116,11 @@ update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/syste
+ update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
+ update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
+ }
++
++pkg_prerm_systemd () {
++update-alternatives --remove init ${base_bindir}/systemd
++update-alternatives --remove halt ${base_bindir}/systemctl
++update-alternatives --remove reboot ${base_bindir}/systemctl
++update-alternatives --remove shutdown ${base_bindir}/systemctl
++update-alternatives --remove poweroff ${base_bindir}/systemctl
++}
+-- 
+1.7.8.rc3
 
 
 
