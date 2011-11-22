@@ -1,24 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1RStbW-0006CV-DH
+	(envelope-from <lamiaposta71@gmail.com>) id 1RSuFJ-00008S-4L
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Nov 2011 17:53:54 +0100
-Received: by faat2 with SMTP id t2so631653faa.6
+	Tue, 22 Nov 2011 18:35:01 +0100
+Received: by qyk9 with SMTP id 9so290688qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2011 08:47:21 -0800 (PST)
-Received: by 10.180.24.65 with SMTP id s1mr19671570wif.59.1321980441166;
-	Tue, 22 Nov 2011 08:47:21 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id j5sm6917010wix.20.2011.11.22.08.47.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Nov 2011 08:47:20 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Tue, 22 Nov 2011 09:28:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=kfbrOVao1pA3chKTOap6w4DOn21/T2o/bATM/+mhIwI=;
+	b=rTLXlMVSeySvBgcYKMypT/4MCapXWMPyxTAr68tZzkWxQ4xu/2AoSLQRS+eCsxlr4m
+	o7heE+Q2/g80hftA9pDSUnbScfdvNmuwfz10ztJdV6ufDcmhZUmpM6+uDIUGPvYTBfNh
+	pAlqpbrbj9XMrqhlDq8ghNzwTlWo+l2g2IKsY=
+MIME-Version: 1.0
+Received: by 10.229.191.2 with SMTP id dk2mr2326926qcb.32.1321982909344; Tue,
+	22 Nov 2011 09:28:29 -0800 (PST)
+Received: by 10.229.2.80 with HTTP; Tue, 22 Nov 2011 09:28:29 -0800 (PST)
+In-Reply-To: <CAFU7RzNgSSHEGchnv2cJ1HtHrCa=QsOBivBfdqtybjqGCLKDEw@mail.gmail.com>
+References: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
+	<6297782.2EN2Ceo0kI@helios> <jae01t$scs$1@dough.gmane.org>
+	<2451003.Qx4lekPWFq@helios>
+	<CAPOJ94PYDr0MF8C4s4no6d6hrW_sd8_GRioPrnsmxdQf0QyVJA@mail.gmail.com>
+	<CAFU7RzNgSSHEGchnv2cJ1HtHrCa=QsOBivBfdqtybjqGCLKDEw@mail.gmail.com>
+Date: Tue, 22 Nov 2011 18:28:29 +0100
+Message-ID: <CAFU7RzNb6L6B+stCO+SOb1u+9yoqa9sPrpamnub+8KUbedQ67A@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Nov 2011 17:47:15 +0100
-Message-Id: <1321980435-4389-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-efl] e-wm: add missing dependency on dbus-x11
+Subject: Re: dm3730
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,38 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2011 16:53:54 -0000
+X-List-Received-Date: Tue, 22 Nov 2011 17:35:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-ERR<654>:e_dbus e_dbus.c:472 e_dbus_bus_get() Error connecting to bus: /usr/bin/dbus-launch terminated abnormally without any error message
+On Tue, Nov 22, 2011 at 8:52 AM, Raffaele Recalcati
+<lamiaposta71@gmail.com> wrote:
+> Hi,
+> it seems really better the oe-core architecture.
+>
+>> oe-core+meta-ti will not support dsp for new developers either, at
+>> least not until ti-cgt6x is updated to correspond to the
+>> ti_cgt_c6000_6.1.17_setup_linux_x86.bin currently available from TI,
+>> or somebody makes the old binary available.
+>
+> I hope it will be fixed.
+> I'm starting now and I find this message:
+>
+> MACHINE=beagleboard ./oebb.sh bitbake virtual/kernel
+> ..
+> Layers present in repository:
+> openembedded-core/meta-skeleton
+> openembedded-core/meta
+> ..
+> Using /home/sources/.oe/environment-oecore to setup needed variables.
+> It is recommended to do '. /home/sources/.oe/environment-oecore' and
+> run 'bitbake something' without using ./oebb.sh as wrapper
+>
+> I can not consider this message?
+>
+> Thx,
+> Raffaele
+>
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Finally I have 3.0.10+ kernel running on beagleboard.
+Thank you very much.
+Now I'm trying to find the way to have qt+GLES and gstreamer-ti running.
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index 2c2518b..9da788d 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
--PR = "r21"
-+PR = "r22"
- SRCREV = "${EFL_SRCREV}"
- 
- inherit e update-alternatives gettext
-@@ -53,6 +53,7 @@ RDEPENDS_${PN} += "\
-   mime-support \
-   edje-utils \
-   ${PN}-utils \
-+  dbus-x11 \
- "
- 
- # Uclibc build don't have 'glibc-utils'
--- 
-1.7.2.5
-
+Raffaele
 
 
