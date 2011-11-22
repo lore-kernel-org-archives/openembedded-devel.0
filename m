@@ -1,32 +1,26 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lamiaposta71@gmail.com>) id 1RSuFJ-00008S-4L
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Nov 2011 18:35:01 +0100
-Received: by qyk9 with SMTP id 9so290688qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2011 09:28:29 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>) id 1RSv0R-0006zv-9H
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 22 Nov 2011 19:23:43 +0100
+Received: by yenm2 with SMTP id m2so522576yen.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Nov 2011 10:17:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=kfbrOVao1pA3chKTOap6w4DOn21/T2o/bATM/+mhIwI=;
-	b=rTLXlMVSeySvBgcYKMypT/4MCapXWMPyxTAr68tZzkWxQ4xu/2AoSLQRS+eCsxlr4m
-	o7heE+Q2/g80hftA9pDSUnbScfdvNmuwfz10ztJdV6ufDcmhZUmpM6+uDIUGPvYTBfNh
-	pAlqpbrbj9XMrqhlDq8ghNzwTlWo+l2g2IKsY=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=Xj71GAvDpToZoQISZGBCMtF52w+Tdw+SGnheMetNVz4=;
+	b=OQhB9mZX7sr0S/BnSB6ys7lmanu1hZ6+rjBp9uup+b8CaQ1fBz3F5+BtbftlgComWh
+	eyZ2t+dAtz6v25OrddOAhZzxdJtVTVwwYDYjqJdB1oYILAX889ldnGN/aMG6N/mhoOcc
+	BEnKO4ReIFRwOvtShVUy2kXKs1N/zTxUC9RCc=
+Received: by 10.152.105.226 with SMTP id gp2mr12476217lab.28.1321985830070;
+	Tue, 22 Nov 2011 10:17:10 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.191.2 with SMTP id dk2mr2326926qcb.32.1321982909344; Tue,
-	22 Nov 2011 09:28:29 -0800 (PST)
-Received: by 10.229.2.80 with HTTP; Tue, 22 Nov 2011 09:28:29 -0800 (PST)
-In-Reply-To: <CAFU7RzNgSSHEGchnv2cJ1HtHrCa=QsOBivBfdqtybjqGCLKDEw@mail.gmail.com>
-References: <CAFU7RzPxXLOA2FUQC7v-VuOmZ_G6_5gwokHy4vNt_WB-pcOn7g@mail.gmail.com>
-	<6297782.2EN2Ceo0kI@helios> <jae01t$scs$1@dough.gmane.org>
-	<2451003.Qx4lekPWFq@helios>
-	<CAPOJ94PYDr0MF8C4s4no6d6hrW_sd8_GRioPrnsmxdQf0QyVJA@mail.gmail.com>
-	<CAFU7RzNgSSHEGchnv2cJ1HtHrCa=QsOBivBfdqtybjqGCLKDEw@mail.gmail.com>
-Date: Tue, 22 Nov 2011 18:28:29 +0100
-Message-ID: <CAFU7RzNb6L6B+stCO+SOb1u+9yoqa9sPrpamnub+8KUbedQ67A@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: dm3730
+Received: by 10.152.24.36 with HTTP; Tue, 22 Nov 2011 10:16:38 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 Nov 2011 10:16:38 -0800
+Message-ID: <CAMKF1squRxNrL4q__e7p-Vi4eK-TD1kv9DDAviCCEowEFogMAw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: gcc-4.6 linaro updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2011 17:35:01 -0000
+X-List-Received-Date: Tue, 22 Nov 2011 18:23:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Nov 22, 2011 at 8:52 AM, Raffaele Recalcati
-<lamiaposta71@gmail.com> wrote:
-> Hi,
-> it seems really better the oe-core architecture.
->
->> oe-core+meta-ti will not support dsp for new developers either, at
->> least not until ti-cgt6x is updated to correspond to the
->> ti_cgt_c6000_6.1.17_setup_linux_x86.bin currently available from TI,
->> or somebody makes the old binary available.
->
-> I hope it will be fixed.
-> I'm starting now and I find this message:
->
-> MACHINE=beagleboard ./oebb.sh bitbake virtual/kernel
-> ..
-> Layers present in repository:
-> openembedded-core/meta-skeleton
-> openembedded-core/meta
-> ..
-> Using /home/sources/.oe/environment-oecore to setup needed variables.
-> It is recommended to do '. /home/sources/.oe/environment-oecore' and
-> run 'bitbake something' without using ./oebb.sh as wrapper
->
-> I can not consider this message?
->
-> Thx,
-> Raffaele
->
+Hi
 
-Finally I have 3.0.10+ kernel running on beagleboard.
-Thank you very much.
-Now I'm trying to find the way to have qt+GLES and gstreamer-ti running.
+I have pushed a contrib branch with latest linaro updates for gcc 4.6
+the tree is here please try it out, I have built
+systemd-gnome-image/angstrom for all qemu arches
+successfully but I am looking for more testing help
 
-Raffaele
+http://git.openembedded.org/meta-openembedded-contrib/log/?h=kraj/gcc-linaro-update
+
+Thanks
+-Khem
 
 
