@@ -1,28 +1,29 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RTGRD-0000aN-Rd
+	(envelope-from <raj.khem@gmail.com>) id 1RTGl6-0001NH-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Nov 2011 18:16:47 +0100
-Received: by ggnh4 with SMTP id h4so1675725ggn.6
+	Wed, 23 Nov 2011 18:37:20 +0100
+Received: by ywb20 with SMTP id 20so1505083ywb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2011 09:10:15 -0800 (PST)
+	Wed, 23 Nov 2011 09:30:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=CY3bBUyARj4VDQAnzusVLeVb2X7SjogQn9NnFA2FrC8=;
-	b=xT/6qAERNpMUnKRMIw8pBPw2hF+S6LNrmVb2Mez34hcNqoIxGWqEGQcx7HsW8ONiyr
-	gCH2P9NN0Wi+y2PGmjKrT4amWV4ZULQ1WVFd1bsxmD2/vBqCDEzrllvZWK96aTY028lc
-	qxOAA/YfCO3xKSpQRcpK01o0D1N/YJZ/2Rlw4=
-Received: by 10.152.134.77 with SMTP id pi13mr15446686lab.21.1322068214297;
-	Wed, 23 Nov 2011 09:10:14 -0800 (PST)
+	:content-type; bh=Xl1Q82hJYXFDkF0/tx6yOw08ui/wr9wjy1DYrX5nvzI=;
+	b=AzckefF5THX/PX+TMwubSFviZ9EDMuLjzBoagBpZgPs2NPu2VkxPBC3s//bSWM2kBG
+	pjpNG6w7qapFpMz8NGLcoCk5fBCgx+TYO4hNiN8WyUyt9hVIPTX3H7kXRsnAyVXatzU7
+	diW1ajSjNfQJBTjcLeOQDlhzJQ0IrX4g+/IYA=
+Received: by 10.152.105.226 with SMTP id gp2mr15183057lab.28.1322069445262;
+	Wed, 23 Nov 2011 09:30:45 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Wed, 23 Nov 2011 09:09:42 -0800 (PST)
-In-Reply-To: <4ECA9626.900@itPenguin.de>
-References: <4ECA9626.900@itPenguin.de>
+Received: by 10.152.24.36 with HTTP; Wed, 23 Nov 2011 09:30:14 -0800 (PST)
+In-Reply-To: <CA+chaQdUFUswZg-aYtWdEiF0C3fVFtrmMP8uH+AMKtbH2yGkKg@mail.gmail.com>
+References: <20111121131845.D1E9910337@opal>
+	<CA+chaQdUFUswZg-aYtWdEiF0C3fVFtrmMP8uH+AMKtbH2yGkKg@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Nov 2011 09:09:42 -0800
-Message-ID: <CAMKF1spuG=gmPReqtVQL8DAUgQYm8LXLuMZTVp8soc+LNU3hWg@mail.gmail.com>
+Date: Wed, 23 Nov 2011 09:30:14 -0800
+Message-ID: <CAMKF1soJR=CswvnzuvSeffqpbQ7Y84oLeD3BNDRCuaAaAqRxWw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Problem bitbaking angstrom-x-image
+Subject: Re: [oe-commits] Koen Kooi : abiword: update to 2.8.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,53 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2011 17:16:48 -0000
+X-List-Received-Date: Wed, 23 Nov 2011 17:37:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Nov 21, 2011 at 10:19 AM, info <info@itpenguin.de> wrote:
-> Hello,
+On Tue, Nov 22, 2011 at 11:11 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Anyone seen this? Looks like missing -Wl, but I didn't look into it
+> from where I get it.
 >
-> I managed to create several images for my beagle board, so my configuration
-> seems to work.
+> Maybe it's related to
+> http://lists.gnu.org/archive/html/libtool/2011-03/msg00015.html and
+> commiter didn't see it because is using gcc-4.5.
 >
-> When bitbaking angstrom-x-image I get these error messages:
->
-> | config.status: creating cups/pstoraster
-> | + mkdir obj
-> | mkdir: cannot create directory `obj': File exists
-> NOTE: package gs-9.01-r0: task do_configure: Failed
-> ERROR: Function 'do_configure' failed (see
-> /project/heizung/develop/openembedded/build/tmp/work/armv7a-angstrom-linux-gnueabi/gs-9.01-r0/temp/log.do_configure.15504
-> for further information)
-> ERROR: Task 2462
-> (/project/heizung/develop/openembedded/openembedded/recipes/gs/gs_9.01.bb,
-> do_configure) failed with exit code '1'
-> ERROR:
-> '/project/heizung/develop/openembedded/openembedded/recipes/gs/gs_9.01.bb'
-> failed
->
-> Is this a problem of the ghostscript package when creating the directory
-> obj?
-> Is there something I can do, to fix it?
 
-It could be that directory has been created before this mkdir so using
-mkdir -p in this
-case instead can get you further. But please find out who is creating
-this dir before
-and if thats correct.
+very likely the case
 
->
-> Some contents of my local.conf:
-> MACHINE = "beagleboard"
-> DISTRO = "angstrom-2010.x"
->
-> Any help is welcome,
-> Roland
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Regards,
 >
 
 
