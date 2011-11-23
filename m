@@ -1,28 +1,31 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RT7eJ-0000cq-C9
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1RTAGi-0000Qp-GM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Nov 2011 08:53:43 +0100
-Received: (qmail invoked by alias); 23 Nov 2011 07:47:08 -0000
-Received: from p4FDF04A3.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.4.163]
-	by mail.gmx.net (mp069) with SMTP; 23 Nov 2011 08:47:08 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/pDfJkC97pNcNKsBKRwOSXzgiDb4tXrXGaGlDa/d
-	4txOX8kO8MR/Ud
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
+	Wed, 23 Nov 2011 11:41:32 +0100
+Received: by faat2 with SMTP id t2so1561340faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Nov 2011 02:35:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=D3qJ03V+AYu001HeOvJDsV4FUrgmXxQGOpo7f4qyAZI=;
+	b=BrKeabEgE8BcYN6MXudAp3stufvnUn5FLVxYzMV4l+OUEnyDeNL0Rs3TTTe8K/RMYH
+	C1excTGdArFoThOjd5DL1VWJRlcMYdiwx+kitp/uRUSowG7wAIWaGMmSKlik058Ru08l
+	QlQoFWeJS9zIhuiyWPdwlNInBY5oVnsqDDiNQ=
+Received: by 10.180.14.129 with SMTP id p1mr23427062wic.8.1322044498256;
+	Wed, 23 Nov 2011 02:34:58 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id dw6sm8008907wib.12.2011.11.23.02.34.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 Nov 2011 02:34:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2011 08:47:07 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-103.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
-	<201111220144.15440.schnitzeltony@gmx.de>
-	<jafkln$of4$1@dough.gmane.org>
-In-Reply-To: <jafkln$of4$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201111230847.07434.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [meta-oe][V2 0/4] libnl and iw updates to make networkmanager work
+Date: Wed, 23 Nov 2011 11:34:49 +0100
+Message-Id: <1322044489-25810-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc3
+In-Reply-To: <CA+chaQdUFUswZg-aYtWdEiF0C3fVFtrmMP8uH+AMKtbH2yGkKg@mail.gmail.com>
+References: <CA+chaQdUFUswZg-aYtWdEiF0C3fVFtrmMP8uH+AMKtbH2yGkKg@mail.gmail.com>
+Subject: [PATCH] abiword: fix no-undefined param
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,48 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2011 07:53:43 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Nov 2011 10:41:32 -0000
 
-On Tuesday, November 22, 2011 08:57:43 AM Koen Kooi wrote:
-> Op 22-11-11 01:44, Andreas M=C3=BCller schreef:
-> > On Tuesday, November 22, 2011 12:49:20 AM Andreas M=C3=BCller wrote:
-> >> On Monday, November 21, 2011 11:11:22 PM Koen Kooi wrote:
-> >>> Op 21-11-11 20:53, Andreas M=C3=BCller schreef:
-> >>>> V1 -> V2: networkmanager bump PR
-> >>>>=20
-> >>>> Note: It might be required to rebuild wpa-supplicant coming from
-> >>>> oe-core.
-> >>>=20
-> >>> I'll apply this set tomorrow if there are no comments, but could you
-> >>> also push libnl3 into oe-core and then bump PR for wpa-supplicant? If
-> >>> not, could you add a wpa-supplicant bbappend that simply does PR_INC
-> >>> =3D 1 (or PRINC, I forget) ?
-> >>=20
-> >> how about:
-> >>=20
-> >> 1st step: I'll send V3 in a few minutes with wpa-supplicant PR bump.
-> >>=20
-> >> 2nd step: * libnl-3 -> oe-core and remove workarounds for
-> >> wpa-supplicant (symlink include/lib) * modify wpa-supplicant so that it
-> >> works with libnl-3 without workarounds & PR bump +2 * iw -> oe-core?
-> >>=20
-> >> Since I am under pressure in my first life, 2nd step may take a few
-> >> days.
-> >>=20
-> >> What do you think?
-> >=20
-> > Sorry for spamming but: how about 2nd step only?
->=20
-> I'm fine with either, but since you sent a v3 already, do you want me to
-> apply it?
->=20
-It seems no pressure on networkmanager issue, so I would prefer the cleaner=
- oe-
-core solution and ignore these patches.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../abiword/abiword/fix.no.undefined.param.patch   |   30 ++++++++++++++++++++
+ meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb  |    5 ++-
+ 2 files changed, 34 insertions(+), 1 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/abiword/abiword/fix.no.undefined.param.patch
 
-Andreas
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword/fix.no.undefined.param.patch b/meta-gnome/recipes-gnome/abiword/abiword/fix.no.undefined.param.patch
+new file mode 100644
+index 0000000..954b50d
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/abiword/abiword/fix.no.undefined.param.patch
+@@ -0,0 +1,30 @@
++diff -uNr abiword-2.8.6.orig/src/Makefile.am abiword-2.8.6/src/Makefile.am
++--- abiword-2.8.6.orig/src/Makefile.am	2009-09-09 15:11:01.000000000 +0200
+++++ abiword-2.8.6/src/Makefile.am	2011-11-23 09:06:06.000000000 +0100
++@@ -44,7 +44,7 @@
++ 
++ libabiword_2_8_la_LDFLAGS = \
++ 	$(DEPS_LIBS) \
++-	--no-undefined \
+++	-no-undefined \
++ 	-avoid-version \
++ 	-export-dynamic
++ 
++@@ -107,7 +107,7 @@
++ 
++ AbiWord_LDFLAGS = \
++ 	$(DEPS_LIBS) \
++-	--no-undefined \
+++	-no-undefined \
++ 	-avoid-version \
++ 	-export-dynamic \
++ 	-headerpad_max_install_names 
++@@ -129,7 +129,7 @@
++ 
++ abiword_LDFLAGS = \
++ 	$(platform_ldflags) \
++-	--no-undefined      \
+++	-no-undefined      \
++ 	-avoid-version      \
++ 	-export-dynamic
++ 
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
+index 1746769..2d0ec97 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
+@@ -2,9 +2,12 @@ require abiword-2.5.inc
+ DEPENDS += " loudmouth libwmf-native gtkmathview asio"
+ RCONFLICTS_${PN} = "abiword-embedded"
+ 
++PR = "r1"
++
+ SRC_URI = "http://www.abisource.com/downloads/abiword/${PV}/source/abiword-${PV}.tar.gz;name=abiword \
+            file://autogen-common.sh \
+-           file://nodolt.patch"
++           file://nodolt.patch \
++           file://fix.no.undefined.param.patch"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
+ 
+-- 
+1.7.8.rc3
+
 
 
