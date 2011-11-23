@@ -1,34 +1,28 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RT7B3-0007qa-N3
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1RT7eJ-0000cq-C9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Nov 2011 08:23:29 +0100
-Received: by wwo1 with SMTP id 1so1148124wwo.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2011 23:16:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Dxzourpob3EZMjpiJwy1T3PlLo/MIllq4CaD65iZmUw=;
-	b=j/SOMO9bx0xiIqBFaZ7yaqFBv1uqFVowhQua2meJ5godUUtzvIX/uu9zoMABiY9ORw
-	GUIJa95z15+MidxX5y4gm/Qb+kYehPsjqHRPU5ld2Ag8My0cGIfgkJcZ8lVdSowzlex3
-	sYAR07PAmqNP5jSnxNR8WMa/Dn1ybAM94W+sU=
-Received: by 10.180.106.3 with SMTP id gq3mr22247140wib.34.1322032617508;
-	Tue, 22 Nov 2011 23:16:57 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ca18sm7790770wib.13.2011.11.22.23.16.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Nov 2011 23:16:56 -0800 (PST)
-Date: Wed, 23 Nov 2011 08:16:44 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 23 Nov 2011 08:53:43 +0100
+Received: (qmail invoked by alias); 23 Nov 2011 07:47:08 -0000
+Received: from p4FDF04A3.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.4.163]
+	by mail.gmx.net (mp069) with SMTP; 23 Nov 2011 08:47:08 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/pDfJkC97pNcNKsBKRwOSXzgiDb4tXrXGaGlDa/d
+	4txOX8kO8MR/Ud
+From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111123071644.GR3565@jama.jama.net>
-References: <1321980435-4389-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 23 Nov 2011 08:47:07 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-103.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1321905239-3527-1-git-send-email-schnitzeltony@gmx.de>
+	<201111220144.15440.schnitzeltony@gmx.de>
+	<jafkln$of4$1@dough.gmane.org>
+In-Reply-To: <jafkln$of4$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <1321980435-4389-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-efl] e-wm: add missing dependency on dbus-x11
+Message-Id: <201111230847.07434.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe][V2 0/4] libnl and iw updates to make networkmanager work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,76 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2011 07:23:29 -0000
-X-Groupsio-MsgNum: 35529
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="QRtLtq+kfJNLc57H"
-Content-Disposition: inline
-
---QRtLtq+kfJNLc57H
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Nov 2011 07:53:43 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 22, 2011 at 05:47:15PM +0100, Koen Kooi wrote:
-> ERR<654>:e_dbus e_dbus.c:472 e_dbus_bus_get() Error connecting to bus: /u=
-sr/bin/dbus-launch terminated abnormally without any error message
+On Tuesday, November 22, 2011 08:57:43 AM Koen Kooi wrote:
+> Op 22-11-11 01:44, Andreas M=C3=BCller schreef:
+> > On Tuesday, November 22, 2011 12:49:20 AM Andreas M=C3=BCller wrote:
+> >> On Monday, November 21, 2011 11:11:22 PM Koen Kooi wrote:
+> >>> Op 21-11-11 20:53, Andreas M=C3=BCller schreef:
+> >>>> V1 -> V2: networkmanager bump PR
+> >>>>=20
+> >>>> Note: It might be required to rebuild wpa-supplicant coming from
+> >>>> oe-core.
+> >>>=20
+> >>> I'll apply this set tomorrow if there are no comments, but could you
+> >>> also push libnl3 into oe-core and then bump PR for wpa-supplicant? If
+> >>> not, could you add a wpa-supplicant bbappend that simply does PR_INC
+> >>> =3D 1 (or PRINC, I forget) ?
+> >>=20
+> >> how about:
+> >>=20
+> >> 1st step: I'll send V3 in a few minutes with wpa-supplicant PR bump.
+> >>=20
+> >> 2nd step: * libnl-3 -> oe-core and remove workarounds for
+> >> wpa-supplicant (symlink include/lib) * modify wpa-supplicant so that it
+> >> works with libnl-3 without workarounds & PR bump +2 * iw -> oe-core?
+> >>=20
+> >> Since I am under pressure in my first life, 2nd step may take a few
+> >> days.
+> >>=20
+> >> What do you think?
+> >=20
+> > Sorry for spamming but: how about 2nd step only?
 >=20
-
-Looks good
-
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
+> I'm fine with either, but since you sent a v3 already, do you want me to
+> apply it?
 >=20
-> diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/=
-e17/e-wm_svn.bb
-> index 2c2518b..9da788d 100644
-> --- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-> +++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-> @@ -4,7 +4,7 @@ LICENSE =3D "MIT BSD"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2667a0f4120372ea91f7467cdff40=
-95f"
->  SRCNAME =3D "e"
->  PV =3D "0.16.999.060+svnr${SRCPV}"
-> -PR =3D "r21"
-> +PR =3D "r22"
->  SRCREV =3D "${EFL_SRCREV}"
-> =20
->  inherit e update-alternatives gettext
-> @@ -53,6 +53,7 @@ RDEPENDS_${PN} +=3D "\
->    mime-support \
->    edje-utils \
->    ${PN}-utils \
-> +  dbus-x11 \
->  "
-> =20
->  # Uclibc build don't have 'glibc-utils'
-> --=20
-> 1.7.2.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+It seems no pressure on networkmanager issue, so I would prefer the cleaner=
+ oe-
+core solution and ignore these patches.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas
 
---QRtLtq+kfJNLc57H
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk7MndwACgkQN1Ujt2V2gBzxIQCeKOMWv4AxmwzB+Yoe09BT5y37
-5hUAoLuBJ88OfdbGBA90YEcxn8A+fOSp
-=D/gH
------END PGP SIGNATURE-----
-
---QRtLtq+kfJNLc57H--
