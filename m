@@ -1,29 +1,34 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RT75o-0007Vd-Ne
+	(envelope-from <martin.jansa@gmail.com>) id 1RT7B3-0007qa-N3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Nov 2011 08:18:05 +0100
-Received: by ywb20 with SMTP id 20so939552ywb.6
+	Wed, 23 Nov 2011 08:23:29 +0100
+Received: by wwo1 with SMTP id 1so1148124wwo.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2011 23:11:32 -0800 (PST)
+	Tue, 22 Nov 2011 23:16:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=I0kA0qcDa5yjE0XxQ8vwDTA5P5HZYeTlJBoBKNOITYw=;
-	b=ImRXDbwy7jLuQK66OHJ5QmlqjCGRLHNweTJ+BVtHF2cb/qn4wcDOkAgoI7W9qcb9v+
-	mu5VCCwaRK7HB998lkzpgTQwpMkw8CY834b3hWVn/3zQWoSKzII8V5k295qygI7ram/5
-	mRSS2ZsFIkqlGMLfbIoICyBCHx4MymsNOOWoI=
-MIME-Version: 1.0
-Received: by 10.236.193.68 with SMTP id j44mr31781029yhn.97.1322032291877;
-	Tue, 22 Nov 2011 23:11:31 -0800 (PST)
-Received: by 10.150.157.15 with HTTP; Tue, 22 Nov 2011 23:11:31 -0800 (PST)
-In-Reply-To: <20111121131845.D1E9910337@opal>
-References: <20111121131845.D1E9910337@opal>
-Date: Wed, 23 Nov 2011 08:11:31 +0100
-Message-ID: <CA+chaQdUFUswZg-aYtWdEiF0C3fVFtrmMP8uH+AMKtbH2yGkKg@mail.gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Dxzourpob3EZMjpiJwy1T3PlLo/MIllq4CaD65iZmUw=;
+	b=j/SOMO9bx0xiIqBFaZ7yaqFBv1uqFVowhQua2meJ5godUUtzvIX/uu9zoMABiY9ORw
+	GUIJa95z15+MidxX5y4gm/Qb+kYehPsjqHRPU5ld2Ag8My0cGIfgkJcZ8lVdSowzlex3
+	sYAR07PAmqNP5jSnxNR8WMa/Dn1ybAM94W+sU=
+Received: by 10.180.106.3 with SMTP id gq3mr22247140wib.34.1322032617508;
+	Tue, 22 Nov 2011 23:16:57 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id ca18sm7790770wib.13.2011.11.22.23.16.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 22 Nov 2011 23:16:56 -0800 (PST)
+Date: Wed, 23 Nov 2011 08:16:44 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : abiword: update to 2.8.6
+Message-ID: <20111123071644.GR3565@jama.jama.net>
+References: <1321980435-4389-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1321980435-4389-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-efl] e-wm: add missing dependency on dbus-x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,130 +42,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2011 07:18:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Nov 2011 07:23:29 -0000
+X-Groupsio-MsgNum: 35529
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="QRtLtq+kfJNLc57H"
+Content-Disposition: inline
+
+--QRtLtq+kfJNLc57H
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-With 2.8.6 I get
+On Tue, Nov 22, 2011 at 05:47:15PM +0100, Koen Kooi wrote:
+> ERR<654>:e_dbus e_dbus.c:472 e_dbus_bus_get() Error connecting to bus: /u=
+sr/bin/dbus-launch terminated abnormally without any error message
+>=20
 
-| make[3]: Entering directory
-`/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/ab=
-iword-2.8.6/src'
-| /bin/sh ../arm-oe-linux-gnueabi-libtool --tag=3DCXX   --mode=3Dlink
-arm-oe-linux-gnueabi-g++  -march=3Darmv7-a -fno-tree-vectorize
--mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a8
---sysroot=3D/OE/shr-core/tmp/sysroots/nokia900  -O2 -pipe -g
--feliminate-unused-debug-types -fpermissive
--fvisibility-inlines-hidden  --no-undefined -avoid-version
--export-dynamic -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -o
-abiword abiword-UnixMain.o libabiword-2.8.la  -pthread -lfribidi -lwv
--lpng -lgsf-1 -lxml2 -lenchant -lz -lgtk-x11-2.0 -lgdk-x11-2.0
--latk-1.0 -lpangoft2-1.0 -lpangocairo-1.0 -lpango-1.0 -lfreetype
--lfontconfig -lrsvg-2 -lm -lgio-2.0 -lgdk_pixbuf-2.0 -lcairo
--lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0   -ljpeg
-| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-g++
--march=3Darmv7-a -fno-tree-vectorize -mthumb-interwork
--mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a8
---sysroot=3D/OE/shr-core/tmp/sysroots/nokia900 -O2 -pipe -g
--feliminate-unused-debug-types -fpermissive
--fvisibility-inlines-hidden --no-undefined -Wl,-O1
--Wl,--hash-style=3Dgnu -Wl,--as-needed -o .libs/abiword
-abiword-UnixMain.o -pthread -Wl,--export-dynamic
-./.libs/libabiword-2.8.so -L=3D/usr/lib
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfribidi.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libwv.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgsf-1.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libbz2.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libenchant.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgtk-x11-2.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgdk-x11-2.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libatk-1.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/librsvg-2.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libxml2.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpangocairo-1.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpangoft2-1.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libstdc++.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpango-1.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgdk_pixbuf-2.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgio-2.0.so -lresolv
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libcairo.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpixman-1.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfontconfig.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libexpat.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfreetype.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpng12.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXrender.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libX11.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libxcb.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXau.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXdmcp.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libERROR: Function
-'do_compile' failed (see
-/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/tem=
-p/log.do_compile.10916
-for further information)
-| z.so -lm /OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgmodule-2.0.so
--ldl /OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgobject-2.0.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libffi.so
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgthread-2.0.so -lpthread
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libglib-2.0.so -lrt
-/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libjpeg.so -pthread
-| arm-oe-linux-gnueabi-g++: error: unrecognized option '--no-undefined'
-| make[3]: *** [abiword] Error 1
-| make[3]: Leaving directory
-`/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/ab=
-iword-2.8.6/src'
+Looks good
 
-Anyone seen this? Looks like missing -Wl, but I didn't look into it
-from where I get it.
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Maybe it's related to
-http://lists.gnu.org/archive/html/libtool/2011-03/msg00015.html and
-commiter didn't see it because is using gcc-4.5.
-
-Regards,
-
-On Mon, Nov 21, 2011 at 2:18 PM,  <git@git.openembedded.org> wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: dea4a2dce2d247dcc9f6233e195b8497039f8547
-> URL: =C2=A0 =C2=A0http://git.openembedded.org/?p=3Dmeta-openembedded.git&=
-a=3Dcommit;h=3Ddea4a2dce2d247dcc9f6233e195b8497039f8547
->
-> Author: Koen Kooi <koen@dominion.thruhere.net>
-> Date: =C2=A0 Mon Nov 21 14:15:59 2011 +0100
->
-> abiword: update to 2.8.6
->
 > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->
 > ---
->
-> =C2=A0.../abiword/abiword-2.5/fix.double.install.patch =C2=A0 | =C2=A0 34=
- -----------
-> =C2=A0.../abiword/abiword-embedded_2.5.2.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| =C2=A0 12 ----
-> =C2=A0.../abiword/abiword/abiword-cxx-for-ld-fix.patch =C2=A0 | =C2=A0 12=
- ++++
-> =C2=A0.../abiword/abiword/autogen-common.sh =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| =C2=A0 28 +++++++++
-> =C2=A0meta-gnome/recipes-gnome/abiword/abiword/cdump.pl =C2=A0| =C2=A0 32=
- +++++++++++
-> =C2=A0.../recipes-gnome/abiword/abiword/nodolt.patch =C2=A0 =C2=A0 | =C2=
-=A0 12 ++++
-> =C2=A0meta-gnome/recipes-gnome/abiword/abiword_2.5.2.bb =C2=A0| =C2=A0 =
-=C2=A05 --
-> =C2=A0meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb =C2=A0| =C2=A0 59=
- ++++++++++++++++++++
-> =C2=A08 files changed, 143 insertions(+), 51 deletions(-)
->
-> Diff: =C2=A0 http://git.openembedded.org/?p=3Dmeta-openembedded.git/?a=3D=
-commitdiff;h=3Ddea4a2dce2d247dcc9f6233e195b8497039f8547
->
+>  meta-efl/recipes-efl/e17/e-wm_svn.bb |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/=
+e17/e-wm_svn.bb
+> index 2c2518b..9da788d 100644
+> --- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
+> +++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
+> @@ -4,7 +4,7 @@ LICENSE =3D "MIT BSD"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2667a0f4120372ea91f7467cdff40=
+95f"
+>  SRCNAME =3D "e"
+>  PV =3D "0.16.999.060+svnr${SRCPV}"
+> -PR =3D "r21"
+> +PR =3D "r22"
+>  SRCREV =3D "${EFL_SRCREV}"
+> =20
+>  inherit e update-alternatives gettext
+> @@ -53,6 +53,7 @@ RDEPENDS_${PN} +=3D "\
+>    mime-support \
+>    edje-utils \
+>    ${PN}-utils \
+> +  dbus-x11 \
+>  "
+> =20
+>  # Uclibc build don't have 'glibc-utils'
+> --=20
+> 1.7.2.5
+>=20
+>=20
 > _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--QRtLtq+kfJNLc57H
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk7MndwACgkQN1Ujt2V2gBzxIQCeKOMWv4AxmwzB+Yoe09BT5y37
+5hUAoLuBJ88OfdbGBA90YEcxn8A+fOSp
+=D/gH
+-----END PGP SIGNATURE-----
+
+--QRtLtq+kfJNLc57H--
