@@ -1,27 +1,24 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mazama.dcclabs.tv ([91.121.153.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RTXob-0007Te-5z
+	(envelope-from <pawelo@dcclabs.tv>) id 1RTXu9-0007lh-2c
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 12:50:05 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 24 Nov 2011 03:43:31 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="79518646"
-Received: from unknown (HELO helios.localnet) ([10.252.121.190])
-	by orsmga001.jf.intel.com with ESMTP; 24 Nov 2011 03:43:30 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Thu, 24 Nov 2011 11:43:28 +0000
-Message-ID: <1341768.l3QXe5jHAh@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <1322134409.3391.21.camel@mattotaupa>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
-	<1322134409.3391.21.camel@mattotaupa>
+	Thu, 24 Nov 2011 12:55:49 +0100
+Received: from [192.168.4.23] (ip-93.159.54.194.static.crowley.pl
+	[93.159.54.194])
+	by mazama.dcclabs.tv (Postfix) with ESMTPSA id 9F1E845A32
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Nov 2011 12:49:17 +0100 (CET)
+Message-ID: <4ECE2EE0.8050708@dcclabs.tv>
+Date: Thu, 24 Nov 2011 12:47:44 +0100
+From: Pawel Osmialowski <pawelo@dcclabs.tv>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20111101 Thunderbird/7.0.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Plans for OE classic future
+To: openembedded-devel@lists.openembedded.org
+References: <4ECA1EA0.9080309@dcclabs.tv>
+	<CAMKF1sqtTsT-W5SuegBrJS9q9JLEze2rU1R8axSrSkwsq-0_Tw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqtTsT-W5SuegBrJS9q9JLEze2rU1R8axSrSkwsq-0_Tw@mail.gmail.com>
+Subject: Re: Cannot compile glibc-initial for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,42 +32,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 11:50:08 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 24 Nov 2011 11:55:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thursday 24 November 2011 12:33:29 Paul Menzel wrote:
-> You seem to use OE-core and meta-oe already so I understand your point
-> of view. Martin, Koen, Andreas and you are doing the major work for
-> meta-oe and not a lot of other people contribute.
-> 
-> In my opinion it is a bad sign to force people to switch. OE-core and
-> meta-oe should be so appealing that they switch by themselves. My
-> impression from reading the list and from IRC is that a lot of people
-> still have objections and are not totally comfortable. Good community
-> management would be to listen to these people then try to find solutions
-> and implement them. People then should come by themselves.
+Hi Khem,
 
-Let's not get carried away. In the current discussion it seems the main 
-objection to switching from several people is that they are in the middle or 
-close to the end of their development cycle on products that depend on OE-
-classic; it's totally understandable that those people can't switch at this 
-time. I'm not entirely convinced those people can't use the 2011.3 maintenance 
-branch for those purposes however.
+Thanks for your answer.
 
-As regards to things missing or improvements needed in the new OE-core based 
-structure, those things will only get better when people who are able to do so 
-commit to moving across. You can't expect a restructuring of the thousands of 
-recipes to come fully formed from a small number of developers - please, we 
-need your help. If more people get involved it's only a small amount of work 
-for lots of people as opposed to a large amount of work for very few.
+Unfortunately, removing TARGET_OS and changing glibc to eglibc did not help:
 
-Cheers,
+| running configure fragment for ports/sysdeps/arm/elf
+| checking for ARM TLS support... yes
+| running configure fragment for nptl/sysdeps/pthread
+| configure: error: working compiler support for visibility attribute is 
+required
+NOTE: package eglibc-initial-2.12-r21.8+svnr13230: task do_configure: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/pawelo/h3660/openembedded/h3660/../recipes/eglibc/eglibc-initial_2.12.bb 
+do_configure failed
+
+What else could be wrong?
+
+Best regards,
 Paul
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+W dniu 24.11.2011 04:03, Khem Raj pisze:
+> On Mon, Nov 21, 2011 at 1:49 AM, Pawel Osmialowski<pawelo@dcclabs.tv>  wrote:
+>> I'm trying to build Angstrom-derived distro for my handheld with
+>> customized set of software. It will be held in few-GB CF card, so I can
+>> use full-blown glibc for it.
+>>
+>> I've prepared following distro configuration file:
+>>
+>> # file-native version compatible with rpm tools:
+>> PREFERRED_VERSION_file-native = "4.18"
+>> DISTRO_NAME = "customized"
+>> DISTRO_TYPE = "release"
+>> DISTRO_VERSION = "0.1"
+>> TOOLCHAIN_TYPE = "internal"
+>> TOOLCHAIN_BRAND = ""
+>> IMAGE_LINGUAS = "en-us"
+>> IMAGE_FSTYPE = "tar.gz"
+>> IMAGE_FSTYPES = "tar.gz"
+>> IMAGE_PKGTYPE = "rpm"
+>> IMAGE_PKGTYPES = "rpm"
+>> PREFERRED_PKG_FORMAT = "rpm"
+>> ANGSTROM_PKG_FORMAT = "rpm"
+>> TARGET_OS = "linux"
+>                 ^^^^^^
+>
+> The above setting will make it use OABI which is long outdated in OE
+> remove the above line and rebuild
+>
+>
+>> ANGSTROM_FEED_CONFIGS = "angstrom-feed-configs"
+>> DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
+>> LIBC = "glibc"
+>> FEED_BASEPATH = "feeds/next/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
+>> GLIBC_GENERATE_LOCALES = "en_US.UTF-8"
+>> ANGSTROMLIBC = "glibc"
+> While that might work you better use eglibc since
+> thats maintained
+>
+>> KERNEL = "kernel26"
+>> MACHINE_KERNEL_VERSION = "2.6"
+>> PCMCIA_MANAGER = "pcmciautils"
+>> LINUX_LIBC_HEADERS_VERSION = "2.6.37"
+>> PREFERRED_VERSION_linux-libc-headers = "${LINUX_LIBC_HEADERS_VERSION}"
+>> PREFERRED_VERSION_linux-libc-headers-native =
+>> "${LINUX_LIBC_HEADERS_VERSION}"
+>> require conf/distro/include/glibc-internal.inc
+>> require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+>> require conf/distro/include/arm-thumb.inc
+>> require conf/distro/include/angstrom.inc
+>> require conf/distro/include/sane-toolchain.inc
+>> DISTRO_CHECK := "${@bb.data.getVar('DISTRO_VERSION',d,1) or
+>> bb.fatal('Remove this line or set a dummy DISTRO_VERSION")
+>> XSERVER = "xserver-xorg xf86-input-evdev xf86-input-keyboard
+>> xf86-input-mouse xf86-video-fbdev"
+>> INHERIT += "sanity"
+>> INHERIT += "devshell"
+>> USE_NLS = "yes"
+>> USE_LDCONFIG = "0"
+>> FULL_OPTIMIZATION = "-Os"
+>> BUILD_OPTIMIZATION = "-Os"
+> beaware compiling glibc with Os may not work but eglibc can be compiled
+> using -Os
+>
+>> DISTRO_EXTRA_RDEPENDS += "\
+>>     angstrom-version \
+>>     ${ANGSTROM_FEED_CONFIGS} \
+>>     util-linux-ng-mount util-linux-ng-umount \
+>>     angstrom-libc-fixup-hack \
+>> "
+>>
+>> DISTRO_EXTRA_RRECOMMENDS += " \
+>>     kernel-module-vfat \
+>>     kernel-module-ext2 \
+>>     kernel-module-ext3 \
+>>     kernel-module-af-packet \
+>>     avahi-daemon \
+>>     avahi-autoipd \
+>>     openssh-sftp-server \
+>> "
+>>
+>> As I see in work directory, following versions of critical packages were
+>> picked:
+>>
+>> binutils-cross-2.21.1a-r14.3
+>> busybox-1.18.5-r43.0
+>> gcc-cross-4.5-r38.1+svnr170880
+>> gcc-cross-initial-4.5-r38.1+svnr170880
+>> gcc-cross-intermediate-4.5-r38.1+svnr170880
+>> glibc-2.10.1-r37.1
+>> glibc-initial-2.10.1-r37.1
+>> linux-libc-headers-2.6.37-r0
+>>
+>> Unfortunately, it stopped at glibc-initial confgure script:
+>>
+>> | running configure fragment for ports/sysdeps/arm/elf
+>> | checking for ARM TLS support... yes
+>> | running configure fragment for nptl/sysdeps/pthread
+>> | configure: error: working compiler support for visibility attribute is
+>> required
+>> NOTE: package glibc-initial-2.10.1-r37.1: task do_configure: Failed
+>>
+>> Looking at config.log file produced by this configure script, I've found
+>> that it contains a lot of errors like this (although I doubt this is the
+>> reason for the whole problem):
+>>
+>> conftest.c:9:19: fatal error: stdio.h: No such file or directory
+>> compilation terminated.
+>>
+>> I've checked that stdio.h is not present anywhere in tmp/sysroots (no
+>> glibc yet...)
+>>
+>> the final one:
+>>
+>> configure:8362: arm-oe-linux-gcc -march=armv4 -mtune=strongarm
+>> -mthumb-interwork -mno-thumb
+>> --sysroot=/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux
+>> -c -g -O2 -I
+>> /home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux/usr/include
+>> conftest.c>&5
+>> conftest.c:1:0: warning: target CPU does not support interworking
+>> conftest.c:21:19: fatal error: stdio.h: No such file or directory
+>> compilation terminated.
+>> configure:8369: $? = 1
+>> configure: failed program was:
+>> | /* confdefs.h.  */
+>> ...
+>> | }
+>> configure:8586: result: 0
+>> configure:8618: result: running configure fragment for ports/sysdeps/arm/elf
+>> configure:7: checking for ARM TLS support
+>> configure:24: arm-oe-linux-gcc -march=armv4 -mtune=strongarm
+>> -mthumb-interwork -mno-thumb
+>> --sysroot=/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux
+>> -c -g -O2 conf
+>> test.s 1>&5
+>> configure:27: $? = 0
+>> configure:35: result: yes
+>> configure:8618: result: running configure fragment for nptl/sysdeps/pthread
+>> configure:11: error: working compiler support for visibility attribute
+>> is required
+>>
+>> I've tried with eglibc too, unfortunately, with the same result. Can you
+>> point me, what am I doing wrong?
+>>
+>> Best regards,
+>> Paul
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
