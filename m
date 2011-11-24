@@ -1,16 +1,40 @@
-Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1RTaib-0002Tv-D6
+	(envelope-from <raj.khem@gmail.com>) id 1RTclB-0004Dg-Jz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 15:56:05 +0100
-Received: by localhost (Postfix, from userid 1000)
-	id C81C5440529; Thu, 24 Nov 2011 15:47:17 +0100 (CET)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	Thu, 24 Nov 2011 18:06:53 +0100
+Received: by yenm2 with SMTP id m2so2761409yen.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Nov 2011 09:00:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=2hbh2FHEb8r4pHhQ2HjzxSsDo9na5EgubMprWtHqUP0=;
+	b=CZewJoVuIo3srNPFjBVOOygy0oeHkiawKPo8oe2zb9Q/o2xQjPsG9boBqE0hL5wasb
+	de2NcLqcnbumVRQmh1Tkhj0US24hRdn2IBqcpp1PKRxQ3SZ+zkFWDs0QqbZ5Ss0U1scq
+	3M9PyjJvKT1N843rY9wj8sXuJZlR6Ky7ZodP8=
+Received: by 10.50.194.231 with SMTP id hz7mr36877264igc.7.1322154019461;
+	Thu, 24 Nov 2011 09:00:19 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id l28sm89302915ibc.3.2011.11.24.09.00.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Nov 2011 09:00:15 -0800 (PST)
+Date: Thu, 24 Nov 2011 09:06:54 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Nov 2011 15:47:04 +0100
-Message-Id: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.7
-Subject: [PATCH 1/2] gypsy: fix packaging
+Message-ID: <20111124170654.GA28572@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org> <jal1pc$2u7$1@dough.gmane.org>
+	<CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,52 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 14:56:05 -0000
+X-List-Received-Date: Thu, 24 Nov 2011 17:06:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-A wrong path had avoided the packaging of the dbus starter script
-/usr/share/dbus-1/system-services/org.freedesktop.Gypsy.service.
+On (24/11/11 10:31), Frans Meulenbroeks wrote:
+> 2011/11/24 Koen Kooi <koen@dominion.thruhere.net>
+> 
+> >
+> >
+> > OE .dev will go read-only soon, If you need an OE-classic setup,
+> > 2011.03-maintenance is there for you.
+> >
+> 
+> As stated before there are still people using .dev and committing to it
+> [1], and there are people interested in keeping it that way for a while.
+> So as it stands I suggest to keep it open for a while for those that still
+> are interested to use it.
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- recipes/gypsy/gypsy.inc    |    4 +++-
- recipes/gypsy/gypsy_0.7.bb |    2 ++
- 2 files changed, 5 insertions(+), 1 deletions(-)
+I would suggest that people interested in oe classic should use 2011.03
+branch since its maintained and tested regularly. Its in their best
+interest too since there are people behind the branch and it gets
+regular bug fixes thats not true for master.
 
-diff --git a/recipes/gypsy/gypsy.inc b/recipes/gypsy/gypsy.inc
-index eab062c..964e336 100644
---- a/recipes/gypsy/gypsy.inc
-+++ b/recipes/gypsy/gypsy.inc
-@@ -3,6 +3,8 @@ LICENSE = "GPL"
- SECTION = "x11"
- DEPENDS = "glib-2.0 dbus-glib bluez4 libxslt-native"
- 
-+INC_PR = "r1"
-+
- inherit autotools pkgconfig
- 
- do_configure_prepend () {
-@@ -14,6 +16,6 @@ PACKAGES += "libgypsy libgypsy-dev libgypsy-dbg"
- FILES_lib${PN} = "${libdir}/lib*.so*"
- FILES_lib${PN}-dev = "${includedir}/* ${libdir}/*.la ${libdir}/*.a ${libdir}/pkgconfig"
- FILES_lib${PN}-dbg = "${libdir}/.debug"
--FILES_${PN} = "${datadir}/dbus-1/services/ ${libexecdir}/gypsy-daemon ${sysconfdir}/dbus-1/system.d/*"
-+FILES_${PN} = "${datadir}/dbus-1/system-services/* ${libexecdir}/gypsy-daemon ${sysconfdir}/dbus-1/system.d/*"
- FILES_${PN}-dbg ="${libexecdir}/.debug*"
- CONFFILES_${PN} = "${sysconfdir}/dbus-1/system.d/Gypsy.conf"
-diff --git a/recipes/gypsy/gypsy_0.7.bb b/recipes/gypsy/gypsy_0.7.bb
-index 8cd8760..a10cd6e 100644
---- a/recipes/gypsy/gypsy_0.7.bb
-+++ b/recipes/gypsy/gypsy_0.7.bb
-@@ -1,5 +1,7 @@
- require gypsy.inc
- 
-+PR = "${INC_PR}.1"
-+
- SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-0.7.tar.gz;name=gypsy \
-            file://docs-reference-am.patch \
-            file://remove-werror.patch \
--- 
-1.7.7
+I would like stronger arguments for why master and not 2011.03 release
+branch ?
 
+-Khem
 
 
