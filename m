@@ -1,29 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RTPhV-0004kT-KO
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RTUOK-0005R6-Ex
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 04:10:14 +0100
-Received: by faat2 with SMTP id t2so2498913faa.6
+	Thu, 24 Nov 2011 09:10:44 +0100
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id pAO83vau004879
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2011 19:03:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=hM+TVjB2UkuTFRV+68HTQyYrRegJIh6GtE4bwjq5wqw=;
-	b=xNdkt5j3jw9OSJcWpc8iESeaIn9uEqgqhXD+/yceVp/UNsAidYDZfEWOMNMTlcl6xf
-	lwmulNfj+OEUcK8VprQJO9OgeGWMerQS6GnTOxMWMn9RbCDUxoXZja4Riw6QPe8U/I1q
-	/pYD2E+FvhZ0irrXbiaNIZ0bZeP1dLrgDXoxU=
-Received: by 10.152.104.236 with SMTP id gh12mr16430516lab.49.1322103821126;
-	Wed, 23 Nov 2011 19:03:41 -0800 (PST)
+	Thu, 24 Nov 2011 09:04:02 +0100
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Thu, 24 Nov 2011 09:03:55 +0100
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Plans for OE classic future
+Thread-Index: AQHMqiEmklF2+ZuH1E2iU/5HPfN1AJW65byAgAASxgCAAATjAIAAqPbb
+Date: Thu, 24 Nov 2011 08:03:54 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>,
+	<4ECD76E2.3040001@opendreambox.org>
+In-Reply-To: <4ECD76E2.3040001@opendreambox.org>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
 MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Wed, 23 Nov 2011 19:03:10 -0800 (PST)
-In-Reply-To: <4ECA1EA0.9080309@dcclabs.tv>
-References: <4ECA1EA0.9080309@dcclabs.tv>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Nov 2011 19:03:10 -0800
-Message-ID: <CAMKF1sqtTsT-W5SuegBrJS9q9JLEze2rU1R8axSrSkwsq-0_Tw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Cannot compile glibc-initial for ARM
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,170 +42,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 03:10:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Nov 2011 08:10:44 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 21, 2011 at 1:49 AM, Pawel Osmialowski <pawelo@dcclabs.tv> wrot=
-e:
-> I'm trying to build Angstrom-derived distro for my handheld with
-> customized set of software. It will be held in few-GB CF card, so I can
-> use full-blown glibc for it.
->
-> I've prepared following distro configuration file:
->
-> # file-native version compatible with rpm tools:
-> PREFERRED_VERSION_file-native =3D "4.18"
-> DISTRO_NAME =3D "customized"
-> DISTRO_TYPE =3D "release"
-> DISTRO_VERSION =3D "0.1"
-> TOOLCHAIN_TYPE =3D "internal"
-> TOOLCHAIN_BRAND =3D ""
-> IMAGE_LINGUAS =3D "en-us"
-> IMAGE_FSTYPE =3D "tar.gz"
-> IMAGE_FSTYPES =3D "tar.gz"
-> IMAGE_PKGTYPE =3D "rpm"
-> IMAGE_PKGTYPES =3D "rpm"
-> PREFERRED_PKG_FORMAT =3D "rpm"
-> ANGSTROM_PKG_FORMAT =3D "rpm"
-> TARGET_OS =3D "linux"
-               ^^^^^^
-
-The above setting will make it use OABI which is long outdated in OE
-remove the above line and rebuild
-
-
-> ANGSTROM_FEED_CONFIGS =3D "angstrom-feed-configs"
-> DISTRO_FEED_CONFIGS =3D "${ANGSTROM_FEED_CONFIGS}"
-> LIBC =3D "glibc"
-> FEED_BASEPATH =3D "feeds/next/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
-> GLIBC_GENERATE_LOCALES =3D "en_US.UTF-8"
-> ANGSTROMLIBC =3D "glibc"
-
-While that might work you better use eglibc since
-thats maintained
-
-> KERNEL =3D "kernel26"
-> MACHINE_KERNEL_VERSION =3D "2.6"
-> PCMCIA_MANAGER =3D "pcmciautils"
-> LINUX_LIBC_HEADERS_VERSION =3D "2.6.37"
-> PREFERRED_VERSION_linux-libc-headers =3D "${LINUX_LIBC_HEADERS_VERSION}"
-> PREFERRED_VERSION_linux-libc-headers-native =3D
-> "${LINUX_LIBC_HEADERS_VERSION}"
-> require conf/distro/include/glibc-internal.inc
-> require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
-> require conf/distro/include/arm-thumb.inc
-> require conf/distro/include/angstrom.inc
-> require conf/distro/include/sane-toolchain.inc
-> DISTRO_CHECK :=3D "${@bb.data.getVar('DISTRO_VERSION',d,1) or
-> bb.fatal('Remove this line or set a dummy DISTRO_VERSION")
-> XSERVER =3D "xserver-xorg xf86-input-evdev xf86-input-keyboard
-> xf86-input-mouse xf86-video-fbdev"
-> INHERIT +=3D "sanity"
-> INHERIT +=3D "devshell"
-> USE_NLS =3D "yes"
-> USE_LDCONFIG =3D "0"
-> FULL_OPTIMIZATION =3D "-Os"
-> BUILD_OPTIMIZATION =3D "-Os"
-
-beaware compiling glibc with Os may not work but eglibc can be compiled
-using -Os
-
->
-> DISTRO_EXTRA_RDEPENDS +=3D "\
-> =C2=A0 =C2=A0angstrom-version \
-> =C2=A0 =C2=A0${ANGSTROM_FEED_CONFIGS} \
-> =C2=A0 =C2=A0util-linux-ng-mount util-linux-ng-umount \
-> =C2=A0 =C2=A0angstrom-libc-fixup-hack \
-> "
->
-> DISTRO_EXTRA_RRECOMMENDS +=3D " \
-> =C2=A0 =C2=A0kernel-module-vfat \
-> =C2=A0 =C2=A0kernel-module-ext2 \
-> =C2=A0 =C2=A0kernel-module-ext3 \
-> =C2=A0 =C2=A0kernel-module-af-packet \
-> =C2=A0 =C2=A0avahi-daemon \
-> =C2=A0 =C2=A0avahi-autoipd \
-> =C2=A0 =C2=A0openssh-sftp-server \
-> "
->
-> As I see in work directory, following versions of critical packages were
-> picked:
->
-> binutils-cross-2.21.1a-r14.3
-> busybox-1.18.5-r43.0
-> gcc-cross-4.5-r38.1+svnr170880
-> gcc-cross-initial-4.5-r38.1+svnr170880
-> gcc-cross-intermediate-4.5-r38.1+svnr170880
-> glibc-2.10.1-r37.1
-> glibc-initial-2.10.1-r37.1
-> linux-libc-headers-2.6.37-r0
->
-> Unfortunately, it stopped at glibc-initial confgure script:
->
-> | running configure fragment for ports/sysdeps/arm/elf
-> | checking for ARM TLS support... yes
-> | running configure fragment for nptl/sysdeps/pthread
-> | configure: error: working compiler support for visibility attribute is
-> required
-> NOTE: package glibc-initial-2.10.1-r37.1: task do_configure: Failed
->
-> Looking at config.log file produced by this configure script, I've found
-> that it contains a lot of errors like this (although I doubt this is the
-> reason for the whole problem):
->
-> conftest.c:9:19: fatal error: stdio.h: No such file or directory
-> compilation terminated.
->
-> I've checked that stdio.h is not present anywhere in tmp/sysroots (no
-> glibc yet...)
->
-> the final one:
->
-> configure:8362: arm-oe-linux-gcc -march=3Darmv4 -mtune=3Dstrongarm
-> -mthumb-interwork -mno-thumb
-> --sysroot=3D/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-o=
-e-linux
-> -c -g -O2 -I
-> /home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-oe-linux/usr/=
-include
-> conftest.c >&5
-> conftest.c:1:0: warning: target CPU does not support interworking
-> conftest.c:21:19: fatal error: stdio.h: No such file or directory
-> compilation terminated.
-> configure:8369: $? =3D 1
-> configure: failed program was:
-> | /* confdefs.h. =C2=A0*/
-> ...
-> | }
-> configure:8586: result: 0
-> configure:8618: result: running configure fragment for ports/sysdeps/arm/=
-elf
-> configure:7: checking for ARM TLS support
-> configure:24: arm-oe-linux-gcc -march=3Darmv4 -mtune=3Dstrongarm
-> -mthumb-interwork -mno-thumb
-> --sysroot=3D/home/pawelo/h3660/openembedded/h3660/tmp/sysroots/arm-oabi-o=
-e-linux
-> -c -g -O2 conf
-> test.s 1>&5
-> configure:27: $? =3D 0
-> configure:35: result: yes
-> configure:8618: result: running configure fragment for nptl/sysdeps/pthre=
-ad
-> configure:11: error: working compiler support for visibility attribute
-> is required
->
-> I've tried with eglibc too, unfortunately, with the same result. Can you
-> point me, what am I doing wrong?
->
-> Best regards,
-> Paul
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>From: openembedded-devel-bounces@lists.openembedded.org [openembedded-deve=
+l-bounces@lists.openembedded.org] on behalf of Andreas Oberritter [obi@open=
+dreambox.org]=0A=
+>Sent: Wednesday, November 23, 2011 11:42 PM=0A=
+>To: openembedded-devel@lists.openembedded.org=0A=
+>Subject: Re: [oe] Plans for OE classic future=0A=
+>=0A=
+>On 23.11.2011 23:25, Khem Raj wrote:=0A=
+>> On Wed, Nov 23, 2011 at 1:18 PM, Frans Meulenbroeks=0A=
+>> <fransmeulenbroeks@gmail.com> wrote:=0A=
+>>> 2011/11/23 Khem Raj <raj.khem@gmail.com>=0A=
+>>>=0A=
+>>>> On Thu, Oct 27, 2011 at 3:53 AM, Mats K=E4rrman <Mats.Karrman@tritech.=
+se>=0A=
+>>>> wrote:=0A=
+>>>>> Hi,=0A=
+>>>>>=0A=
+>>>>> Are there any plans for new releases and/or maintenance branches of O=
+E=0A=
+>>>> classic?=0A=
+>>>>>=0A=
+>>>>=0A=
+>>>> 2011.03-maintenance is the last release of OE classic. As long as the=
+=0A=
+>>>> branch is maintained=0A=
+>>>>=0A=
+>>>> _=0A=
+>>>>=0A=
+>>>> Related: I noticed TSC plans to discuss on whether or not to make oe=
+=0A=
+>>> classic read only.=0A=
+>>>=0A=
+>>> I'd like to suggest leaving it open for those of us that are still usin=
+g=0A=
+>>> it.=0A=
+>>=0A=
+>> 2011.03-maintenance branch is maintained and that would be place to go.=
+=0A=
+>>=0A=
+>>=0A=
+>>> For instance I have still products that are based on OE classic. If the=
+re=0A=
+>>> is a problem that is of a generic nature, I'm more than happy to submit=
+=0A=
+>>> patches so others in the same situation can benefit from it.=0A=
+>>> (actually I have one pending with a new version of netsnmp; the current=
+=0A=
+>>> recipe does not build with uclibc, whereas the latest version of netsnm=
+p=0A=
+>>> does; found/fixed this today, but haven't had time to make a commit)=0A=
+>>>=0A=
+>>> And if there is no interest any more it'll eventually die. But as of no=
+w I=0A=
+>>> do see people working on/with it (see the commit log).=0A=
+>>=0A=
+>> those fixes are intended for 2011.03-maintenance which go into master an=
+d then=0A=
+>> get cherry-picked=0A=
+>=0A=
+> So master needs to stay open in order to get patches there first before=
+=0A=
+> being cherry-picked into 2011.03-maintenance, right?=0A=
+>=0A=
+> I also don't like the idea to make it read-only. Those who already=0A=
+> switched to oe-core are free to just ignore the classic master branch.=0A=
+> Others should still be able to push bugfixes etc, if they care enough=0A=
+> about it.=0A=
+>=0A=
+> Regards,=0A=
+> Andreas=0A=
+=0A=
+I have a project based on 2011.03-maintenance that is about to reach final=
+=0A=
+testing and I don't have the confidence (or the budget) to make a switch to=
+=0A=
+oe-core now. However only yesterday I had failing builds due to=0A=
+missing/obsolete package versions.=0A=
+--> One more vote to keep classic open!=0A=
+=0A=
+BR // Mats=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
