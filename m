@@ -1,31 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RTXAG-0005fa-E0
+	(envelope-from <andrea.adami@gmail.com>) id 1RTXKG-000671-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 12:08:24 +0100
-Received: by ggnh4 with SMTP id h4so2446614ggn.6
+	Thu, 24 Nov 2011 12:18:45 +0100
+Received: by yenm2 with SMTP id m2so2440869yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 03:01:50 -0800 (PST)
+	Thu, 24 Nov 2011 03:12:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=GcQTR265n64gV5tLsQPToeQUtO7+e1JjGBtkyyptLFg=;
-	b=LwpTGv6kqktgxbs+T9pBIlc0UQ2b2uaFxYkTHi2sp+OZeD9pn8faWo1NtTNwy6FW3H
-	2XPoaNpOxYXRUM5vgoe6+wdwTe/hQIeBtIwGxt/HIaz4AaKbST+Qe1DyZZJFlBl16FW7
-	SFMBbNcYzkVNfrEb7lfIhG2f3fm2ZRNjF6YEw=
+	:content-type; bh=5U3LpNSAME9k5dNYh+Dhj8kYkKMhLZ+1waN8osYlSBc=;
+	b=Or1mqAX0fpPxDivaiEigzW8c80HqxSjCGrM6J/DOPMWoFG2zHsQd6eogz/diuF9VG7
+	eyeMsIa6kp47XMebin0i5YPTgBrSDsIYa0yPig61KpJ3rrgtdk/+6qjAjBk/isbZFGA/
+	V5GMOc97jMKvCf8ZApjTBRd5ZEOo5GKkFHdHw=
 MIME-Version: 1.0
-Received: by 10.236.191.5 with SMTP id f5mr40736715yhn.122.1322132510879; Thu,
-	24 Nov 2011 03:01:50 -0800 (PST)
-Received: by 10.150.229.21 with HTTP; Thu, 24 Nov 2011 03:01:50 -0800 (PST)
-In-Reply-To: <19b573f112f191ea9dd166e3be7edc8310725198.1322129758.git.Martin.Jansa@gmail.com>
-References: <cover.1322129758.git.Martin.Jansa@gmail.com>
-	<0004016e514fbb3f18793561ebf85766344ae499.1322129758.git.Martin.Jansa@gmail.com>
-	<19b573f112f191ea9dd166e3be7edc8310725198.1322129758.git.Martin.Jansa@gmail.com>
-Date: Thu, 24 Nov 2011 12:01:50 +0100
-Message-ID: <CAAQYJAv=z6msRfaR3bj7PfWrm=tuv8opBPjfD9nkpSrwAUgRbQ@mail.gmail.com>
+Received: by 10.236.191.5 with SMTP id f5mr40795484yhn.122.1322133131010; Thu,
+	24 Nov 2011 03:12:11 -0800 (PST)
+Received: by 10.150.229.21 with HTTP; Thu, 24 Nov 2011 03:12:10 -0800 (PST)
+In-Reply-To: <1864854.crejHBLR9b@helios>
+References: <cover.1321575642.git.andrea.adami@gmail.com>
+	<CAAQYJAs=jxLf8moiFwNyg3Rnqxe2EHe4c4ARrZW3ms2VrS=5JQ@mail.gmail.com>
+	<CA+chaQeWRbSCXk_vxsB7Nfoarh11fTSAZsteKf62T2DaSt0-xw@mail.gmail.com>
+	<1864854.crejHBLR9b@helios>
+Date: Thu, 24 Nov 2011 12:12:10 +0100
+Message-ID: <CAAQYJAtxpRAOPg62aqFwNkQPgGTeLOU6-FfOiDtsvAgdrRFkVA@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld 4/6] linux-kexecboot: don't disable DEBUG, PRINTK, BUG with CMDLINE_DEBUG not just loglevel=3
+Subject: Re: [meta-handheld][PATCH 5/5] linux: remove unused git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 11:08:24 -0000
+X-List-Received-Date: Thu, 24 Nov 2011 11:18:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 24, 2011 at 11:18 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> =A0recipes-kernel/linux/linux-kexecboot.inc | =A0 14 +++++++++++---
-> =A01 files changed, 11 insertions(+), 3 deletions(-)
+On Thu, Nov 24, 2011 at 10:43 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Thursday 24 November 2011 10:24:44 Martin Jansa wrote:
+>> Are you going to refresh and refactor something or is this patchset
+>> fine if Paul applies only first 3? Because your 3.1.2 patch says it
+>> should be applied on top of this..
+>>
+>> If you or Paul want I can send pull request with first 3 from this +
+>> 3.1.2 and my changes to linux-kexecboot.inc + 3.2.0-rc3, because I
+>> have it all in jansa/spitz anyway.
+
+Patch is now archived in patchwork, marked as rejected.
+
 >
-> diff --git a/recipes-kernel/linux/linux-kexecboot.inc b/recipes-kernel/li=
-nux/linux-kexecboot.inc
-> index 83b7018..220bf36 100644
-> --- a/recipes-kernel/linux/linux-kexecboot.inc
-> +++ b/recipes-kernel/linux/linux-kexecboot.inc
-> @@ -108,9 +108,17 @@ do_configure_prepend() {
-> =A0 =A0 =A0 =A0 kernel_conf_variable KEXEC y
-> =A0 =A0 =A0 =A0 CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /=3Dm/d;"
-> =A0 =A0 =A0 =A0 kernel_conf_variable MODULES n
-> - =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS n
-> - =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE n
-> - =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL n
-> + =A0 =A0 =A0 =A0if [ "${CMDLINE_DEBUG}" =3D "loglevel=3D3" ] ; then
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS n
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE n
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL n
-> + =A0 =A0 =A0 else
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable PRINTK y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable BUG y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE y
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL y
-> + =A0 =A0 =A0 fi
+> We discovered last night that we can't move hx4700 to 3.1 because the
+> necessary patches don't apply. However as of this morning I do now have
+> patches against 3.2.0-rc2 (hopefully they also apply against rc3).
 >
-> =A0 =A0 =A0 =A0 # Force lzma for arm kernels only
-> =A0 =A0 =A0 =A0 if [ "${ARCH}" =3D "arm" ] ; then
+> My suggestion would be to produce a new set of patches that only affects the
+> Zaurus machines and we can handle the iPAQs separately.
+
+Martin already took care of that ;)
+
+
+>
+> Cheers,
+> Paul
+>
 > --
-> 1.7.8.rc3
 >
+> Paul Eggleton
+> Intel Open Source Technology Centre
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -86,13 +81,6 @@ nux/linux-kexecboot.inc
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-The idea is good!
-The weak point is EXTRA_IMAGE_FEATURES =3D "debug-tweaks" , default in loca=
-l.conf.
-
-Remember for collie we have to watch the kernel size! I'm not sure we
-respect the limit, probably yes.
-No problem on other Zaurus, unless we want to renable networking and usb.
 
 Regards
 
