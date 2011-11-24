@@ -1,34 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RTWUt-0003Ic-Re
+	(envelope-from <martin.jansa@gmail.com>) id 1RTWUz-0003Sg-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 11:25:39 +0100
-Received: by mail-fx0-f47.google.com with SMTP id t2so2756831faa.6
+	Thu, 24 Nov 2011 11:25:45 +0100
+Received: by wwo1 with SMTP id 1so2941500wwo.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 02:19:09 -0800 (PST)
+	Thu, 24 Nov 2011 02:19:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=iELjXYI8jUqE5PGrhEAx1i2qC1SRNDWI5RCk6p33NHw=;
-	b=V7Z1XxT7XUMHds6EoMtqYS/DH7QBDG3EUpgDCE9utbkDRsNT2Wq/qq6mzKlWn/BjiH
-	HC/mSUaiL8QRtB/h2nP5Fba4RjUfl+IVROeoYayXhcsLZWqZmknRrEur8J9hRLhYVXeD
-	dxza3AUUfkXTnHGSdBxrwptjyX9Gm34UoWH0g=
-Received: by 10.180.108.114 with SMTP id hj18mr28594088wib.2.1322129945372;
-	Thu, 24 Nov 2011 02:19:05 -0800 (PST)
+	bh=WSNz6U0b1TPd4JtaGjT31+bducq9bLzdDUXssKOzL0A=;
+	b=Ne+UW8o5ZEvVV/6cq0tjKxchxvI65KSj0BIxP0l85VUdTfCg1VOodlNivnGEh7o3xo
+	x6ftZqGFhHlScsd1YdQVBuoHdbrK6+NCx/vkWeJtblR8CWsGzu2ItzPLDeMkceYtkmYi
+	VWKhje/fBeJbKr449E2/cyDYRLe3pVRAIi8Gk=
+Received: by 10.227.16.166 with SMTP id o38mr2998159wba.13.1322129952827;
+	Thu, 24 Nov 2011 02:19:12 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v6sm9259558wix.1.2011.11.24.02.19.04
+	by mx.google.com with ESMTPS id gf10sm9256919wib.2.2011.11.24.02.19.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Nov 2011 02:19:04 -0800 (PST)
+	Thu, 24 Nov 2011 02:19:12 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Nov 2011 11:18:41 +0100
-Message-Id: <39ba8867e5460d67c8be4e972cb5b06e5d2b40ba.1322129758.git.Martin.Jansa@gmail.com>
+Date: Thu, 24 Nov 2011 11:18:42 +0100
+Message-Id: <4fb71f23ca156720be745d2a86828f5f6d0081a7.1322129758.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc3
 In-Reply-To: <0004016e514fbb3f18793561ebf85766344ae499.1322129758.git.Martin.Jansa@gmail.com>
 References: <0004016e514fbb3f18793561ebf85766344ae499.1322129758.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1322129758.git.Martin.Jansa@gmail.com>
 References: <cover.1322129758.git.Martin.Jansa@gmail.com>
-Subject: [meta-handheld 2/6] linux(kexecboot): update from 3.1.1 to 3.1.2
+Subject: [meta-handheld 3/6] linux-kexecboot: use kernel_conf_variable like linux.inc does and respect CMDLINE_DEBUG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,74 +42,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 10:25:39 -0000
+X-List-Received-Date: Thu, 24 Nov 2011 10:25:45 -0000
 
-From: Andrea Adami <andrea.adami@gmail.com>
-
-* apply latest patchset
-* fix missing sha256sum in linux-kexecboot_3.1.bb
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-kernel/linux/linux-kexecboot_3.1.bb |    9 +++++----
- recipes-kernel/linux/linux_3.1.bb           |   10 +++++-----
- 2 files changed, 10 insertions(+), 9 deletions(-)
+ recipes-kernel/linux/linux-kexecboot.inc |  103 ++++++++++++++---------------
+ 1 files changed, 50 insertions(+), 53 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-index 44c76d6..d04be36 100644
---- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-+++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-@@ -1,12 +1,12 @@
- require linux-kexecboot.inc
+diff --git a/recipes-kernel/linux/linux-kexecboot.inc b/recipes-kernel/linux/linux-kexecboot.inc
+index 31ae5b5..83b7018 100644
+--- a/recipes-kernel/linux/linux-kexecboot.inc
++++ b/recipes-kernel/linux/linux-kexecboot.inc
+@@ -20,13 +20,17 @@ LOGO_SIZE ?= "."
+ # to your kernel recipe, and then structure your logos for each resolution
+ # accordingly.
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- S = "${WORKDIR}/linux-${PV}"
++# Set the verbosity of kernel messages during runtime
++# You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour
++CMDLINE_DEBUG ?= '${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "loglevel=3", d)}'
++
+ # Note how we set loglevel=3 and master console on serial to protect bootlogo.
+-CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8 loglevel=3"
+-CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8 loglevel=3"
+-CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
+-CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
+-CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M loglevel=3"
+-CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
++CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
++CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
  
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+ PACKAGES = ""
+ PROVIDES = ""
+@@ -47,28 +51,39 @@ LOCALVERSION ?= ""
+ # we want the smallest size
+ INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
  
--SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.0/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.0/patch-${PV}.1.bz2;apply=yes;name=stablepatch \
-+SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -22,4 +22,5 @@ SRC_URI_append_poodle = " \
++kernel_conf_variable() {
++        CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
++        if test "$2" = "n"
++        then
++                echo "# CONFIG_$1 is not set" >> ${S}/.config
++        else
++                echo "CONFIG_$1=$2" >> ${S}/.config
++        fi
++}
++
+ do_configure_prepend() {
  
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "8eb92cc70e7f8d1d18a349ba8c029d7d"
-+SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
-+SRC_URI[stablepatch.sha256sum] = "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index c714040..88511c3 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -1,11 +1,11 @@
- require linux.inc
+         echo "" > ${S}/.config
++        CONF_SED_SCRIPT=""
  
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
+         #
+         # CONFIG_CMDLINE mangling
+         #
+-        echo "CONFIG_CMDLINE_BOOL=y" >> ${S}/.config
+-        echo "CONFIG_CMDLINE=\"${CMDLINE}\"" >> ${S}/.config
++        kernel_conf_variable CMDLINE_BOOL y
++        kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
  
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+         # mips and x86
+-        echo "CONFIG_CMDLINE_OVERRIDE=y" >> ${S}/.config
++        kernel_conf_variable CMDLINE_OVERRIDE y
  
--SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.0/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.0/patch-${PV}.1.bz2;apply=yes;name=stablepatch \
-+SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
+         # sh only
+-        echo "CONFIG_CMDLINE_OVERWRITE=y" >> ${S}/.config
+-        echo "# CONFIG_CMDLINE_EXTEND is not set" >> ${S}/.config
++        kernel_conf_variable CMDLINE_OVERWRITE y
++        kernel_conf_variable CMDLINE_EXTEND n
  
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "8eb92cc70e7f8d1d18a349ba8c029d7d"
--SRC_URI[stablepatch.sha256sum] = "192b3716fa29bafcf8871676d530cf008b4bcc9ae98f1fde812de2a1047ee4c3"
-+SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
-+SRC_URI[stablepatch.sha256sum] = "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
+         #
+         # endian support
+         #
+         if [ "${SITEINFO_ENDIANNESS}" = "be" ]; then
+-                echo "CONFIG_CPU_BIG_ENDIAN=y"          >> ${S}/.config
++                kernel_conf_variable CPU_BIG_ENDIAN y
+         fi
+ 
+         #
+@@ -76,60 +91,42 @@ do_configure_prepend() {
+         #
+         if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
+                 install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
+-                echo "CONFIG_LOGO=y"                    >> ${S}/.config
+-                echo "CONFIG_LOGO_LINUX_CLUT224=y"      >> ${S}/.config
++                kernel_conf_variable LOGO y
++                kernel_conf_variable LOGO_LINUX_CLUT224 y
+         fi
+ 
+         # When enabling thumb for userspace we also need thumb support in the kernel
+         if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
+-            sed -i -e /CONFIG_ARM_THUMB/d ${WORKDIR}/defconfig 
+-            echo "CONFIG_ARM_THUMB=y" >> ${S}/.config
++                kernel_conf_variable ARM_THUMB y
+         fi
+ 
+-        sed -e '/CONFIG_CMDLINE=/d' \
+-            -e '/CONFIG_CMDLINE_BOOL/d' \
+-            -e '/CONFIG_CMDLINE_OVERRIDE/d' \
+-            -e '/CONFIG_CMDLINE_OVERWRITE/d' \
+-            -e '/CONFIG_CMDLINE_EXTEND/d' \
+-            -e '/CONFIG_CPU_BIG_ENDIAN/d' \
+-            -e '/CONFIG_LOGO=/d' \
+-            -e '/CONFIG_LOGO_LINUX_CLUT224=/d' \
+-            -e '/CONFIG_LOCALVERSION/d' \
+-            -e '/CONFIG_LOCALVERSION_AUTO/d' \
+-            < '${WORKDIR}/defconfig' >>'${S}/.config'
+-
+-        echo 'CONFIG_LOCALVERSION="${LOCALVERSION}"' >>${S}/.config
+-        echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.config
++        kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
++        kernel_conf_variable LOCALVERSION_AUTO n
+ 
+         # Force sane defaults for kexec-enabled kernels and keep size small
+-        sed -i -e /CONFIG_BLK_DEV_INITRD/d \
+-               -e /CONFIG_KEXEC/d \
+-               -e /=m/d \
+-               -e /CONFIG_MODULES/d \
+-               -e /CONFIG_DEBUG_ERRORS/d \
+-               -e /CONFIG_DEBUG_BUGVERBOSE/d \
+-               -e /CONFIG_DEBUG_KERNEL/d \
+-               ${S}/.config
+-
+-               echo 'CONFIG_BLK_DEV_INITRD=y' >>${S}/.config
+-               echo 'CONFIG_KEXEC=y' >>${S}/.config
+-               echo '# CONFIG_MODULES is not set' >> ${S}/.config
++        kernel_conf_variable BLK_DEV_INITRD y
++        kernel_conf_variable KEXEC y
++        CONF_SED_SCRIPT="$CONF_SED_SCRIPT /=m/d;"
++        kernel_conf_variable MODULES n
++        kernel_conf_variable DEBUG_ERRORS n
++        kernel_conf_variable DEBUG_BUGVERBOSE n
++        kernel_conf_variable DEBUG_KERNEL n
+ 
+         # Force lzma for arm kernels only
+         if [ "${ARCH}" = "arm" ] ; then
+-
+-            sed -i -e /CONFIG_KERNEL/d \
+-               -e /CONFIG_INITRAMFS_COMPRESSION/d \
+-               -e /CONFIG_INITRAMFS_SOURCE/d \
+-               -e /CONFIG_RD/d \
+-               ${S}/.config
+-
+-               echo 'CONFIG_KERNEL_LZMA=y' >>${S}/.config
+-               echo 'CONFIG_INITRAMFS_COMPRESSION_LZMA=y' >>${S}/.config
+-               echo 'CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"' >>${S}/.config
+-               echo 'CONFIG_RD_LZMA=y' >>${S}/.config
++                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_KERNEL/d;"
++                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_RD/d;"
++                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_INITRAMFS_COMPRESSION/d;"
++                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_INITRAMFS_SOURCE/d;"
++                kernel_conf_variable KERNEL_LZMA y
++                kernel_conf_variable RD_LZMA y
++                kernel_conf_variable INITRAMFS_COMPRESSION_LZMA y
++                kernel_conf_variable INITRAMFS_SOURCE "\"initramfs.cpio.lzma\""
+         fi
+ 
++        sed -e "${CONF_SED_SCRIPT}" \
++                        < '${WORKDIR}/defconfig' >>'${S}/.config'
++
+         yes '' | oe_runmake oldconfig
+ }
+ 
 -- 
 1.7.8.rc3
 
