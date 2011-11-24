@@ -1,40 +1,39 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RTdPJ-0005QL-B9
+	(envelope-from <raj.khem@gmail.com>) id 1RTdQQ-0005W2-8S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 18:48:21 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 1EB5A3156100
+	Thu, 24 Nov 2011 18:49:30 +0100
+Received: by iahk25 with SMTP id k25so3291791iah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 18:41:47 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id LVMhcX4N9xyP
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 18:41:40 +0100 (CET)
-Received: from [172.22.22.61] (drms-4d0150b5.pool.mediaWays.net [77.1.80.181])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 24DE031560E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 18:41:40 +0100 (CET)
-Message-ID: <4ECE81D3.2010603@opendreambox.org>
-Date: Thu, 24 Nov 2011 18:41:39 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20111031 Thunderbird/7.0.1
+	Thu, 24 Nov 2011 09:42:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=YQgDPwhRApYuYu9YKG0txjwFEDp/baEfTf3PGLAOnTI=;
+	b=k1fy1fi5qvO3yZY4tNH0dHtBqT3swPdC/9cXWYL+A2H0mt0obUtHuJqFCEAxsmvqMg
+	tR+h1FpCv+1Lo24Kg+hH7V/r46CBKl5HXep/Cr5azSAiw5eSI0ZXx3/BHTX2xJFZNdmx
+	akOyz4Fk5uGCfc+Lim+Lm+Zkr9Q+PVD2ol7Vs=
+Received: by 10.42.176.8 with SMTP id bc8mr1978878icb.12.1322156576143;
+	Thu, 24 Nov 2011 09:42:56 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id z10sm89664300ibv.9.2011.11.24.09.42.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Nov 2011 09:42:54 -0800 (PST)
+Date: Thu, 24 Nov 2011 09:49:36 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: Mr Dash Four <mr.dash.four@googlemail.com>
+Message-ID: <20111124174936.GA28767@sakrah.homelinux.org>
+Mail-Followup-To: Mr Dash Four <mr.dash.four@googlemail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <4EC81A85.8050704@googlemail.com>
+	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
+	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org> <jal1pc$2u7$1@dough.gmane.org>
-	<CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
-	<20111124170654.GA28572@sakrah.homelinux.org>
-In-Reply-To: <20111124170654.GA28572@sakrah.homelinux.org>
-Subject: Re: Plans for OE classic future
+In-Reply-To: <4ECE5422.3070504@googlemail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: "cannot find -lppl_c" link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 17:48:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Nov 2011 17:49:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 24.11.2011 18:06, Khem Raj wrote:
-> On (24/11/11 10:31), Frans Meulenbroeks wrote:
->> 2011/11/24 Koen Kooi <koen@dominion.thruhere.net>
->>
->>>
->>>
->>> OE .dev will go read-only soon, If you need an OE-classic setup,
->>> 2011.03-maintenance is there for you.
->>>
->>
->> As stated before there are still people using .dev and committing to it
->> [1], and there are people interested in keeping it that way for a while.
->> So as it stands I suggest to keep it open for a while for those that still
->> are interested to use it.
+On (24/11/11 14:26), Mr Dash Four wrote:
 > 
-> I would suggest that people interested in oe classic should use 2011.03
-> branch since its maintained and tested regularly. Its in their best
-> interest too since there are people behind the branch and it gets
-> regular bug fixes thats not true for master.
+> >Any ideas why OE can't find my ppl_c libs?
+> Further to my previous post, the gcc prerequisites are clearly
+> stated here -> http://gcc.gnu.org/install/prerequisites.html. Both
+> PPL and CLooG are in that list. I have just looked at my OE source
+> directory and I could see that neither of these packages have been
+> downloaded during the OE build. These are not present in the gcc svn
+> tree either.
 
-I guess most people using OE are old enough to know better about their
-own interests.
+its detected at configure time if not found then GCC is not built with Graphite
+loop optimizations
 
-> I would like stronger arguments for why master and not 2011.03 release
-> branch ?
+> 
+> Is it possible that the OE build might have missed them and that is
+> why it fails? I know that there are two ways to include them for the
+> gcc build - either as a subdirectory to the main tree (libppl/ and
+> libcloog/) in which case gcc builds them "automatically" or build
+> them separately as static libs and then point to these during the
+> actual gcc build.
+> 
+> Am I missing something here or is this a bug?
+I think the fact that you have ppl/cloog installed its trying to use it
+general distros dont install them by default and hence more often gcc
+with OE is build without them.
 
-Obviously, you can push a changeset to master, wait for someone to
-complain about a bug, fix the bug, wait for silence, merge it into 2011.03.
+what we could have done in OE is disable ppl/cloog exlicitly in
+configure
 
-Would you prefer experimental changesets in 2011.03?
-
-Regards,
-Andreas
-
-P.S.: I'd really like to switch to oe-core, but at this time it's
-impossible. I'm not multithreaded. Closing master won't make me switch
-faster, but just annoy me. You'll just force me to keep any bugfixes and
-enhancements in my own layer, so that no other body can benefit from them.
+-- 
+-Khem
 
 
