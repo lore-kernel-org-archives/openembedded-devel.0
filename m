@@ -1,39 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RTXoW-0007TL-Ci
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RTXob-0007Te-5z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 12:50:00 +0100
-Received: by faat2 with SMTP id t2so2833580faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 03:43:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=PEBP6y3/PzTvXjLQJpNMneX4hQG8dXFAQ2JM5v5nM+U=;
-	b=BnB4Q+lcuOtEWetyZ+EMUhwPOLCeDp5usHNJINivN6T6LUB1+bqShyglfFJ78dmuox
-	bFremD0S9MUYfAt6C7bwam6merqeodI0vbop5K5PxvDKBk7fbCibJ6PsSnAMfGu7adN2
-	uzZm6H3yv504QycrPUdOH5ULGy1Z4aoKibeJA=
-MIME-Version: 1.0
-Received: by 10.204.15.200 with SMTP id l8mr13688937bka.132.1322135007443;
-	Thu, 24 Nov 2011 03:43:27 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Thu, 24 Nov 2011 03:43:27 -0800 (PST)
+	Thu, 24 Nov 2011 12:50:05 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 24 Nov 2011 03:43:31 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="79518646"
+Received: from unknown (HELO helios.localnet) ([10.252.121.190])
+	by orsmga001.jf.intel.com with ESMTP; 24 Nov 2011 03:43:30 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Date: Thu, 24 Nov 2011 11:43:28 +0000
+Message-ID: <1341768.l3QXe5jHAh@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
 In-Reply-To: <1322134409.3391.21.camel@mattotaupa>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org>
-	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
-	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
 	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
 	<1322134409.3391.21.camel@mattotaupa>
-Date: Thu, 24 Nov 2011 09:43:27 -0200
-X-Google-Sender-Auth: pMh90rvrcFABOePgZKhxGsTMALg
-Message-ID: <CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,49 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 11:50:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Nov 2011 11:50:08 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Nov 24, 2011 at 09:33, Paul Menzel <
-paulepanter@users.sourceforge.net> wrote:
-
-> Am Donnerstag, den 24.11.2011, 09:12 -0200 schrieb Otavio Salvador:
-> > On Thu, Nov 24, 2011 at 08:23, Hauser, Wolfgang (external) wrote:
-> >
-> > > I would vote for an open classic master for bugfixing too, our project
-> > > based on 2011.03-maintenance goes into the final phase and to switch to
-> > > oe-core, the budged is not available jet.
-> >
-> > I also believe oe-classic master ought to be read-only as soon as
-> possible;
-> > I understand that people are using it but the soonner we make it
-> read-only,
-> > sooner people will move to oe-core otherwise people will keep starting
-> new
-> > project on it and it will never die.
->
+On Thursday 24 November 2011 12:33:29 Paul Menzel wrote:
 > You seem to use OE-core and meta-oe already so I understand your point
 > of view. Martin, Koen, Andreas and you are doing the major work for
 > meta-oe and not a lot of other people contribute.
->
+> 
 > In my opinion it is a bad sign to force people to switch. OE-core and
 > meta-oe should be so appealing that they switch by themselves. My
 > impression from reading the list and from IRC is that a lot of people
 > still have objections and are not totally comfortable. Good community
 > management would be to listen to these people then try to find solutions
 > and implement them. People then should come by themselves.
->
 
-In fact I use both. The projects running at oe-classic are working well and
-will be kept running that way but all new ones are based on oe-core +
-meta-oe.
+Let's not get carried away. In the current discussion it seems the main 
+objection to switching from several people is that they are in the middle or 
+close to the end of their development cycle on products that depend on OE-
+classic; it's totally understandable that those people can't switch at this 
+time. I'm not entirely convinced those people can't use the 2011.3 maintenance 
+branch for those purposes however.
 
-I am not against oe-classic maintainence branch and people contributting
-new fixes but I am against the work on new features and recipes being put
-on master branch.
+As regards to things missing or improvements needed in the new OE-core based 
+structure, those things will only get better when people who are able to do so 
+commit to moving across. You can't expect a restructuring of the thousands of 
+recipes to come fully formed from a small number of developers - please, we 
+need your help. If more people get involved it's only a small amount of work 
+for lots of people as opposed to a large amount of work for very few.
+
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
