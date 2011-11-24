@@ -1,35 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RTYnx-0001Mc-Sc
+	(envelope-from <andrea.adami@gmail.com>) id 1RTYws-0000qV-NX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 13:53:29 +0100
-Received: by wwo1 with SMTP id 1so3141865wwo.24
+	Thu, 24 Nov 2011 14:02:43 +0100
+Received: by ggnh4 with SMTP id h4so2543652ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 04:46:56 -0800 (PST)
+	Thu, 24 Nov 2011 04:56:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jyq97Qk301yOwuSjCLtU6W7pu+hHghShm3U4Wl3A6tw=;
-	b=iVRCJHHbALHz7VoionyXkuQbYDznDxSo4uHWDw6E7tQtTmTKR+FfmUK2RIa1kcT3Qx
-	0RRkDNFJ2yXeqhZdkNAKiCDR1yRuhlGgEMEg8a/R289NKH4A1/rC3OxA2vGtOhVktZ9T
-	fo+E8VzCLU+TCnZzyIsfDsmWc+GVWW2KSKOSk=
-Received: by 10.180.91.8 with SMTP id ca8mr28114775wib.22.1322138816352;
-	Thu, 24 Nov 2011 04:46:56 -0800 (PST)
-Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
-	fy13sm24050696wbb.18.2011.11.24.04.46.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Nov 2011 04:46:55 -0800 (PST)
-Date: Thu, 24 Nov 2011 13:46:42 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111124124642.GW3565@jama.jama.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=nal3rw84ReZhZsIyGuT/U1T/FtGq5QvnfLOpAkexi1k=;
+	b=ZsAjc9vi18RnyOBWPy8TRiwxht7v0ADkGVaYpMOBD0ysRIWntDwKE8ocwO/CBTHQxy
+	P2y7iYjfLYlGmgF8qbrxoaZDo9Bq0J7CisC9IQ97Uos4FAns7/m8soKAMTb4FtnrsGe6
+	jmP+I2Amy4PRUb+CgNCT0B8lYjhSZt2YOi6RE=
+MIME-Version: 1.0
+Received: by 10.101.118.20 with SMTP id v20mr210724anm.86.1322139368252; Thu,
+	24 Nov 2011 04:56:08 -0800 (PST)
+Received: by 10.150.229.21 with HTTP; Thu, 24 Nov 2011 04:56:08 -0800 (PST)
+In-Reply-To: <11302548.rhDq0zLurQ@helios>
 References: <cover.1322129758.git.Martin.Jansa@gmail.com>
 	<CAAQYJAv=z6msRfaR3bj7PfWrm=tuv8opBPjfD9nkpSrwAUgRbQ@mail.gmail.com>
 	<CAAQYJAvgLfieUK43nQOKL+H6omoXjuASrwPP4GZFc66bL+WMrg@mail.gmail.com>
 	<11302548.rhDq0zLurQ@helios>
-MIME-Version: 1.0
-In-Reply-To: <11302548.rhDq0zLurQ@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Date: Thu, 24 Nov 2011 13:56:08 +0100
+Message-ID: <CAAQYJAskVdWfKW+g=npyyop73EwSdEFynPFYLXG=-GD6RkUGCQ@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-handheld 4/6] linux-kexecboot: don't disable DEBUG, PRINTK, BUG with CMDLINE_DEBUG not just loglevel=3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,48 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 12:53:30 -0000
-X-Groupsio-MsgNum: 35577
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="v6gilOcl2gU05R9Q"
-Content-Disposition: inline
-
---v6gilOcl2gU05R9Q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Nov 2011 13:02:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 24, 2011 at 12:42:56PM +0000, Paul Eggleton wrote:
+On Thu, Nov 24, 2011 at 1:42 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
 > On Thursday 24 November 2011 13:38:53 Andrea Adami wrote:
-> > On Thu, Nov 24, 2011 at 12:01 PM, Andrea Adami <andrea.adami@gmail.com>
-> > wrote:
-> > > The weak point is EXTRA_IMAGE_FEATURES =3D "debug-tweaks" , default in
-> > > local.conf.
-> > Hm.. and what about using  "tools-debug" instead?
->=20
+>> On Thu, Nov 24, 2011 at 12:01 PM, Andrea Adami <andrea.adami@gmail.com>
+>> wrote:
+>> > The weak point is EXTRA_IMAGE_FEATURES =3D "debug-tweaks" , default in
+>> > local.conf.
+>> Hm.. and what about using =A0"tools-debug" instead?
+>
 > I realise we've already done it here and elsewhere (e.g. dropbear) but I'=
-m not=20
-> hugely keen on configuration of individual recipes being dependent on=20
+m not
+> hugely keen on configuration of individual recipes being dependent on
 > IMAGE_FEATURES - it's not supposed to be allowed AFAIK.
+>
 
-I'm fine with keeping default CMDLINE_DEBUG set to just loglevel=3D3 and
-debug can be set from local.conf or linux-git.inc if needed.
+Well, in fact you are right and I rememebr your initial perplexity.
 
-Cheers,
+Oe-classic had CMDLINE_DEBUG ?=3D '${@base_conditional("DISTRO_TYPE",
+"release", "loglevel=3D3", "debug", d)}'
+but now DISTRO_TYPE has gone (not in grep results).
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---v6gilOcl2gU05R9Q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Andrea
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk7OPLIACgkQN1Ujt2V2gBwogACffTwA46z0SEHBivnmLp7E8QAk
-gLEAn3UTRDFLP2paaalsYG8++DetgOyU
-=SoO4
------END PGP SIGNATURE-----
 
---v6gilOcl2gU05R9Q--
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
