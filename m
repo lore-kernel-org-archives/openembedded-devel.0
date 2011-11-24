@@ -1,34 +1,32 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RTWVL-0003hc-Dz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 11:26:07 +0100
-Received: by wwf22 with SMTP id 22so412245wwf.0
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1RTWYw-0003ui-MJ for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Nov 2011 11:29:50 +0100
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id pAOANBH8006789
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 02:19:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=tklLd8/joIOSdyAUWWF7r73kECXSRpQKVwiaR+wCrMI=;
-	b=v1Vd5jFWO90YEf/odgEyHphMAntXkjfNCY78FbWYbz01hepas3vbnJlWwxAmIuk5ZD
-	/Y6JV/3Ng9ak6IPz6FCVdP+jrUaZPXXSLhXmSu3R2uWsq4jkE9fYeLbCkwyQ+eF6osZT
-	1pSUDaKNJYpLIiCJCBXz9BmnmsdCZm68lrfwc=
-Received: by 10.227.205.135 with SMTP id fq7mr17569901wbb.19.1322129974688;
-	Thu, 24 Nov 2011 02:19:34 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id m30sm2983235wbo.14.2011.11.24.02.19.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Nov 2011 02:19:34 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Nov 2011 11:18:45 +0100
-Message-Id: <5481ee02a91ce0e79f9980a097dc1e68147e6088.1322129758.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.rc3
-In-Reply-To: <0004016e514fbb3f18793561ebf85766344ae499.1322129758.git.Martin.Jansa@gmail.com>
-References: <0004016e514fbb3f18793561ebf85766344ae499.1322129758.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1322129758.git.Martin.Jansa@gmail.com>
-References: <cover.1322129758.git.Martin.Jansa@gmail.com>
-Subject: [meta-handheld 6/6] linux-git: upgrade to 3.2.0-rc3
+	Thu, 24 Nov 2011 11:23:17 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 24 Nov 2011 11:23:14 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 24 Nov 2011 11:23:13 +0100
+Message-ID: <0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Plans for OE classic future
+Thread-Index: AQHMqiEmklF2+ZuH1E2iU/5HPfN1AJW65byAgAASxgCAAATjAIAAqPbbgAAqqCA=
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se><CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com><CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com><CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>,
+	<4ECD76E2.3040001@opendreambox.org>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 24 Nov 2011 10:23:14.0100 (UTC)
+	FILETIME=[12E7D740:01CCAA93]
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,130 +40,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 10:26:07 -0000
+X-List-Received-Date: Thu, 24 Nov 2011 10:29:50 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-kernel/linux/linux-git.inc                 |    6 ++--
- .../linux/linux-kexecboot/spitz/defconfig          |    7 +----
- recipes-kernel/linux/linux/spitz/defconfig         |   26 +++++++------------
- 3 files changed, 14 insertions(+), 25 deletions(-)
+I would vote for an open classic master for bugfixing too, our project =
+based on 2011.03-maintenance goes into the final phase and to switch to =
+oe-core, the budged is not available jet.
 
-diff --git a/recipes-kernel/linux/linux-git.inc b/recipes-kernel/linux/linux-git.inc
-index 4e7565e..66a6b9a 100644
---- a/recipes-kernel/linux/linux-git.inc
-+++ b/recipes-kernel/linux/linux-git.inc
-@@ -1,8 +1,8 @@
--KERNEL_RELEASE = "3.1.0-rc9"
--OLD_KERNEL_RELEASE = "3.0.99"
-+KERNEL_RELEASE = "3.2.0-rc3"
-+OLD_KERNEL_RELEASE = "3.1.99"
- PV = "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
- 
--SRCREV = "65112dccf8a113737684366349d7f9ec373ddc47"
-+SRCREV = "caca6a03d365883564885f2c1da3e88dcf65d139"
- 
- CMDLINE_DEBUG = "debug"
- 
-diff --git a/recipes-kernel/linux/linux-kexecboot/spitz/defconfig b/recipes-kernel/linux/linux-kexecboot/spitz/defconfig
-index e62ab14..c368338 100644
---- a/recipes-kernel/linux/linux-kexecboot/spitz/defconfig
-+++ b/recipes-kernel/linux/linux-kexecboot/spitz/defconfig
-@@ -8,10 +8,7 @@ CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
- CONFIG_RD_LZMA=y
- CONFIG_INITRAMFS_COMPRESSION_LZMA=y
- # CONFIG_UID16 is not set
--# CONFIG_SYSCTL_SYSCALL is not set
- # CONFIG_KALLSYMS is not set
--# CONFIG_PRINTK is not set
--# CONFIG_BUG is not set
- # CONFIG_ELF_CORE is not set
- # CONFIG_BASE_FULL is not set
- CONFIG_EMBEDDED=y
-@@ -33,7 +30,7 @@ CONFIG_AEABI=y
- # CONFIG_OABI_COMPAT is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 debug"
- CONFIG_KEXEC=y
- CONFIG_DEVTMPFS=y
- CONFIG_DEVTMPFS_MOUNT=y
-@@ -73,12 +70,10 @@ CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
- # CONFIG_HW_RANDOM is not set
- # CONFIG_I2C_COMPAT is not set
--CONFIG_SPI=y
- CONFIG_SPI_PXA2XX=y
- CONFIG_POWER_SUPPLY=y
- CONFIG_PDA_POWER=y
- CONFIG_APM_POWER=y
--# CONFIG_MFD_SUPPORT is not set
- CONFIG_FB=y
- CONFIG_FB_PXA=y
- CONFIG_BACKLIGHT_LCD_SUPPORT=y
-diff --git a/recipes-kernel/linux/linux/spitz/defconfig b/recipes-kernel/linux/linux/spitz/defconfig
-index 65aed48..90d49e9 100644
---- a/recipes-kernel/linux/linux/spitz/defconfig
-+++ b/recipes-kernel/linux/linux/spitz/defconfig
-@@ -29,10 +29,9 @@ CONFIG_PCMCIA_PXA2XX=y
- CONFIG_NO_HZ=y
- CONFIG_HIGH_RES_TIMERS=y
- CONFIG_AEABI=y
--# CONFIG_OABI_COMPAT is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 debug"
- CONFIG_KEXEC=y
- # CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
- CONFIG_BINFMT_AOUT=m
-@@ -139,13 +138,11 @@ CONFIG_PATA_PXA=y
- CONFIG_PATA_PCMCIA=y
- CONFIG_NETDEVICES=y
- CONFIG_TUN=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
--CONFIG_AIRO_CS=m
--CONFIG_HOSTAP=m
--CONFIG_HOSTAP_FIRMWARE=y
--CONFIG_HOSTAP_CS=m
-+CONFIG_PCMCIA_PCNET=m
-+CONFIG_PPP=m
-+CONFIG_PPP_BSDCOMP=m
-+CONFIG_PPP_DEFLATE=m
-+CONFIG_PPP_ASYNC=m
- CONFIG_USB_CATC=m
- CONFIG_USB_KAWETH=m
- CONFIG_USB_PEGASUS=m
-@@ -154,12 +151,10 @@ CONFIG_USB_USBNET=m
- CONFIG_USB_NET_DM9601=m
- # CONFIG_USB_NET_CDC_SUBSET is not set
- CONFIG_USB_SIERRA_NET=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
-+CONFIG_AIRO_CS=m
-+CONFIG_HOSTAP=m
-+CONFIG_HOSTAP_FIRMWARE=y
-+CONFIG_HOSTAP_CS=m
- # CONFIG_INPUT_MOUSEDEV_PSAUX is not set
- CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
- CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
-@@ -180,7 +175,6 @@ CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
- CONFIG_RAMOOPS=y
--CONFIG_SPI=y
- CONFIG_SPI_PXA2XX=y
- CONFIG_GPIO_SYSFS=y
- CONFIG_POWER_SUPPLY=y
--- 
-1.7.8.rc3
+Regards=20
+Wolfgang Hauser
+ =20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Mats K=E4rrman
+Gesendet: Donnerstag, 24. November 2011 09:04
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] Plans for OE classic future
 
+>From: openembedded-devel-bounces@lists.openembedded.org =
+[openembedded-devel-bounces@lists.openembedded.org] on behalf of Andreas =
+Oberritter [obi@opendreambox.org]
+>Sent: Wednesday, November 23, 2011 11:42 PM
+>To: openembedded-devel@lists.openembedded.org
+>Subject: Re: [oe] Plans for OE classic future
+>
+>On 23.11.2011 23:25, Khem Raj wrote:
+>> On Wed, Nov 23, 2011 at 1:18 PM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>>> 2011/11/23 Khem Raj <raj.khem@gmail.com>
+>>>
+>>>> On Thu, Oct 27, 2011 at 3:53 AM, Mats K=E4rrman =
+<Mats.Karrman@tritech.se>
+>>>> wrote:
+>>>>> Hi,
+>>>>>
+>>>>> Are there any plans for new releases and/or maintenance branches =
+of OE
+>>>> classic?
+>>>>>
+>>>>
+>>>> 2011.03-maintenance is the last release of OE classic. As long as =
+the
+>>>> branch is maintained
+>>>>
+>>>> _
+>>>>
+>>>> Related: I noticed TSC plans to discuss on whether or not to make =
+oe
+>>> classic read only.
+>>>
+>>> I'd like to suggest leaving it open for those of us that are still =
+using
+>>> it.
+>>
+>> 2011.03-maintenance branch is maintained and that would be place to =
+go.
+>>
+>>
+>>> For instance I have still products that are based on OE classic. If =
+there
+>>> is a problem that is of a generic nature, I'm more than happy to =
+submit
+>>> patches so others in the same situation can benefit from it.
+>>> (actually I have one pending with a new version of netsnmp; the =
+current
+>>> recipe does not build with uclibc, whereas the latest version of =
+netsnmp
+>>> does; found/fixed this today, but haven't had time to make a commit)
+>>>
+>>> And if there is no interest any more it'll eventually die. But as of =
+now I
+>>> do see people working on/with it (see the commit log).
+>>
+>> those fixes are intended for 2011.03-maintenance which go into master =
+and then
+>> get cherry-picked
+>
+> So master needs to stay open in order to get patches there first =
+before
+> being cherry-picked into 2011.03-maintenance, right?
+>
+> I also don't like the idea to make it read-only. Those who already
+> switched to oe-core are free to just ignore the classic master branch.
+> Others should still be able to push bugfixes etc, if they care enough
+> about it.
+>
+> Regards,
+> Andreas
+
+I have a project based on 2011.03-maintenance that is about to reach =
+final
+testing and I don't have the confidence (or the budget) to make a switch =
+to
+oe-core now. However only yesterday I had failing builds due to
+missing/obsolete package versions.
+--> One more vote to keep classic open!
+
+BR // Mats
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
