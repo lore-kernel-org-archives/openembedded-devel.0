@@ -1,36 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RTdXK-0005zG-UW for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 18:56:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RTdR0-0005pT-F1 for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2011 18:50:06 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 18:50:06 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RTdnN-0006zW-Ks
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Nov 2011 19:13:14 +0100
+Received: by bkbzs2 with SMTP id zs2so3079467bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 18:50:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 24 Nov 2011 10:06:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=yDc+/k9GVAXhvaU5/vx/9Hcu6GEHbQiRayikt/0LKjU=;
+	b=FKV3OmXscVon5BInVWGNLs7yAZCKWjIGJg4BxZayUeaow0d4FmcRN2/KOnL0R6bM5E
+	lsRe/tqOGos9sEcuECAj3tQDjBFGSFegffu+DLQ+o4JIDuO67WYz8IRH1R6SenzUmx4z
+	AKbo5UcO25MLCsi+QFcNPHIBdECWrJuGIlAdE=
+Received: by 10.204.143.148 with SMTP id v20mr26343261bku.104.1322158000440;
+	Thu, 24 Nov 2011 10:06:40 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id l5sm13013377bkv.9.2011.11.24.10.06.37
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Nov 2011 10:06:38 -0800 (PST)
+Message-ID: <4ECE87A9.8040109@googlemail.com>
+Date: Thu, 24 Nov 2011 18:06:33 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 24 Nov 2011 18:47:52 +0100
-Message-ID: <jam005$3bl$2@dough.gmane.org>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
-	<1322134409.3391.21.camel@mattotaupa> <1341768.l3QXe5jHAh@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1341768.l3QXe5jHAh@helios>
-X-Enigmail-Version: 1.3.3
-Subject: Re: Plans for OE classic future
+References: <4EC81A85.8050704@googlemail.com>
+	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
+	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
+	<20111124174936.GA28767@sakrah.homelinux.org>
+In-Reply-To: <20111124174936.GA28767@sakrah.homelinux.org>
+Subject: Re: "cannot find -lppl_c" link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2011 17:56:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Nov 2011 18:13:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Op 24-11-11 12:43, Paul Eggleton schreef:
-> On Thursday 24 November 2011 12:33:29 Paul Menzel wrote:
->> You seem to use OE-core and meta-oe already so I understand your point 
->> of view. Martin, Koen, Andreas and you are doing the major work for 
->> meta-oe and not a lot of other people contribute.
->> 
->> In my opinion it is a bad sign to force people to switch. OE-core and 
->> meta-oe should be so appealing that they switch by themselves. My 
->> impression from reading the list and from IRC is that a lot of people 
->> still have objections and are not totally comfortable. Good community 
->> management would be to listen to these people then try to find
->> solutions and implement them. People then should come by themselves.
-> 
-> Let's not get carried away. In the current discussion it seems the main 
-> objection to switching from several people is that they are in the middle
-> or close to the end of their development cycle on products that depend on
-> OE- classic; it's totally understandable that those people can't switch
-> at this time. I'm not entirely convinced those people can't use the
-> 2011.3 maintenance branch for those purposes however.
-
-Most, if not all people objecting to OE-classic closing seem to be on
-2011.03-maintenance already. The confusion seems to be rooted into not
-paying attention when Tom said fixes for the maintenance branch can go
-through oe-core/meta-oe/whatever as well. That is even mentioned in the damn
-wiki for the maintenance branch!
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7Og0gACgkQMkyGM64RGpETAgCfX1jflPTMJCZndnIKZpKWTAvR
-2psAoLqc0id3iCacEOuVu9bZVBPVwzBq
-=AUUz
------END PGP SIGNATURE-----
-
+>> Am I missing something here or is this a bug?
+>>     
+> I think the fact that you have ppl/cloog installed its trying to use it
+> general distros dont install them by default and hence more often gcc
+> with OE is build without them.
+>
+> what we could have done in OE is disable ppl/cloog exlicitly in
+> configure
+>   
+OK, but how does this tie up with the error I am getting? The ppl/cloog 
+libs are clearly installed and in the library path, but the toolchain's 
+gcc cannot be build because the said libraries "cannot be found"? How do 
+I correct this so that my build could proceed further?
 
 
