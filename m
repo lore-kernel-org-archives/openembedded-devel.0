@@ -1,27 +1,30 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RTv53-0005T7-Rt
+	(envelope-from <sledz@dresearch-fe.de>) id 1RTvht-00073c-Sl
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 13:40:38 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 25 Nov 2011 04:34:02 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.69,571,1315206000"; d="scan'208";a="95307031"
-Received: from unknown (HELO helios.localnet) ([10.252.121.214])
-	by fmsmga002.fm.intel.com with ESMTP; 25 Nov 2011 04:34:01 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Nov 2011 12:34 +0000
-Message-ID: <1734371.1v8iFp6Vj1@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <20111121115213.GF3565@jama.jama.net>
-References: <1321783600-23772-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAAQYJAvg6mLaVxNf2O6VV1Dw+5vCH+SsJ3HKJVmgmU4KkYvk5Q@mail.gmail.com>
-	<20111121115213.GF3565@jama.jama.net>
+	Fri, 25 Nov 2011 14:20:45 +0100
+Received: by wwo1 with SMTP id 1so4941586wwo.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Nov 2011 05:14:11 -0800 (PST)
+Received: by 10.227.205.135 with SMTP id fq7mr21492392wbb.19.1322226851454;
+	Fri, 25 Nov 2011 05:14:11 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id z35sm788712wbm.12.2011.11.25.05.14.10
+	(version=SSLv3 cipher=OTHER); Fri, 25 Nov 2011 05:14:10 -0800 (PST)
+Message-ID: <4ECF94A1.9050803@dresearch-fe.de>
+Date: Fri, 25 Nov 2011 14:14:09 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-handheld v2] linux-kexecboot: use kernel_conf_variable like linux.inc does and respect CMDLINE_DEBUG
+To: openembedded-devel@lists.openembedded.org
+References: <201111092321.33622.schnitzeltony@gmx.de>
+	<2977361.KIYvSC26hZ@helios> <j9g8hi$43b$1@dough.gmane.org>
+	<1627207.pd1HnObREr@helios>
+In-Reply-To: <1627207.pd1HnObREr@helios>
+X-Enigmail-Version: 1.3.3
+Subject: Re: systemd packages -> image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,55 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 12:40:38 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 25 Nov 2011 13:20:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Monday 21 November 2011 12:52:13 Martin Jansa wrote:
-> On Mon, Nov 21, 2011 at 11:43:46AM +0100, Andrea Adami wrote:
-> > On Sun, Nov 20, 2011 at 12:26 PM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote: Martin,
-> > 
-> > I agree for the use kernel_conf_variable but I'm unsure about
-> > CMDLINE_DEBUG. In fact, I hardcoded it purposedly with commit 8929166
-> > with the
-> > following reasons:
-> > 
-> > * Being a second-stage bootloader we don't expect any output on screen.
-> > * Adding 'debug' as commandline arg is pointless because
-> > * linux-kexecboot is compiled without debug and printk in order
-> > * to minimize the size.
-> > * Full debug implies not only editing the commandline (e.g. earlyprintk)
-> > * but re-enabling full debug options in the defconfigs
+On 10.11.2011 11:35, Paul Eggleton wrote:
+> On Thursday 10 November 2011 11:20:34 Koen Kooi wrote:
+>> So I can start sending patches to add the systemd files to ${PN} in oe-core
+>> recipes now?
 > 
-> I had some issues with 3.2.0-rc2 when used as linux-kexecboot, that's
-> why I've added this, but later found out that it's really a bit
-> incomplete, that's why I have followup patch for this:
-> https://gitorious.org/shr/meta-handheld/commit/6bc710615b587fc0bfd8fc4372cad
-> 0de5599dd82?format=patch
-> 
-> But with latest SRCREV it works again, so in theory I don't need it, but
-> still it would be usefull to have easy way to debug even this stage
-> (maybe you still remember older kernel version where it worked fine
-> as 3rd stage and failed to boot as 2nd stage..).
-> 
-> BTW: here is upgrade to 3.2.0-rc2 with those changes to
-> linux-kexecboot.inc applied
-> https://gitorious.org/shr/meta-handheld/commit/27ca3d24353a5473f4f1aade00ba7
-> a52b667e28c?format=patch
-> 
-> (be aware that I do rebase that branch sometimes so if those commits are
-> not valid anymore just look at last few commits in that branch).
+> I would think if these additions are conditional upon systemd being in 
+> DISTRO_FEATURES, I can't see a problem. I think the ideal situation would be 
+> to have a generic "init" bbclass (or some better name) which does all the work 
+> for you regardless of whether sysvinit or systemd is used (i.e. it would 
+> effectively replace update-rc.d.bbclass), and save having to have packaging 
+> boilerplate in every recipe.
 
-As discussed on IRC I've merged the latest version of this branch to meta-
-handheld master now, thanks.
+What about upstart in this context? An generic "init" bbclass should support this too.
 
-Cheers,
-Paul
+> My main point was, yes there are both people who want to stay with sysvinit 
+> and people who are keen to move to systemd, but I'm not convinced both of 
+> those need to be catered for within the same distro policy.
+> 
+>> That's the big hold up: lack of vision from the OE-core folks.
+> 
+> This is a community project, if you have ideas or suggestions, just start the 
+> discussion...
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
