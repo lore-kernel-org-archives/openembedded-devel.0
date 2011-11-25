@@ -1,30 +1,42 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RTvht-00073c-Sl
+	(envelope-from <obi@opendreambox.org>) id 1RTvlA-0007D7-Br
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 14:20:45 +0100
-Received: by wwo1 with SMTP id 1so4941586wwo.24
+	Fri, 25 Nov 2011 14:24:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id DF64F3156595
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 05:14:11 -0800 (PST)
-Received: by 10.227.205.135 with SMTP id fq7mr21492392wbb.19.1322226851454;
-	Fri, 25 Nov 2011 05:14:11 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id z35sm788712wbm.12.2011.11.25.05.14.10
-	(version=SSLv3 cipher=OTHER); Fri, 25 Nov 2011 05:14:10 -0800 (PST)
-Message-ID: <4ECF94A1.9050803@dresearch-fe.de>
-Date: Fri, 25 Nov 2011 14:14:09 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	Fri, 25 Nov 2011 14:17:32 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id oYmq6iEkGbUL
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Nov 2011 14:17:23 +0100 (CET)
+Received: from [172.22.22.61] (drms-590c4dea.pool.mediaWays.net [89.12.77.234])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 539533156591
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Nov 2011 14:17:23 +0100 (CET)
+Message-ID: <4ECF9562.30503@opendreambox.org>
+Date: Fri, 25 Nov 2011 14:17:22 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
+	rv:7.0.1) Gecko/20111031 Thunderbird/7.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <201111092321.33622.schnitzeltony@gmx.de>
-	<2977361.KIYvSC26hZ@helios> <j9g8hi$43b$1@dough.gmane.org>
-	<1627207.pd1HnObREr@helios>
-In-Reply-To: <1627207.pd1HnObREr@helios>
-X-Enigmail-Version: 1.3.3
-Subject: Re: systemd packages -> image
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org> <jal1pc$2u7$1@dough.gmane.org>
+	<CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
+	<20111124170654.GA28572@sakrah.homelinux.org>
+	<4ECE81D3.2010603@opendreambox.org>
+	<CAP9ODKrrnc8Op+At6CH2EJbUkTPafGuS=6wMmBXTFsBhA90oTA@mail.gmail.com>
+In-Reply-To: <CAP9ODKrrnc8Op+At6CH2EJbUkTPafGuS=6wMmBXTFsBhA90oTA@mail.gmail.com>
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,40 +50,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 13:20:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 25 Nov 2011 13:24:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 10.11.2011 11:35, Paul Eggleton wrote:
-> On Thursday 10 November 2011 11:20:34 Koen Kooi wrote:
->> So I can start sending patches to add the systemd files to ${PN} in oe-core
->> recipes now?
+On 24.11.2011 19:43, Otavio Salvador wrote:
+> On Thu, Nov 24, 2011 at 15:41, Andreas Oberritter <obi@opendreambox.org>wrote:
 > 
-> I would think if these additions are conditional upon systemd being in 
-> DISTRO_FEATURES, I can't see a problem. I think the ideal situation would be 
-> to have a generic "init" bbclass (or some better name) which does all the work 
-> for you regardless of whether sysvinit or systemd is used (i.e. it would 
-> effectively replace update-rc.d.bbclass), and save having to have packaging 
-> boilerplate in every recipe.
-
-What about upstart in this context? An generic "init" bbclass should support this too.
-
-> My main point was, yes there are both people who want to stay with sysvinit 
-> and people who are keen to move to systemd, but I'm not convinced both of 
-> those need to be catered for within the same distro policy.
+>> ...
+>>
+>> I would like stronger arguments for why master and not 2011.03 release
+>>> branch ?
+>>
+>> Obviously, you can push a changeset to master, wait for someone to
+>> complain about a bug, fix the bug, wait for silence, merge it into 2011.03.
+>>
 > 
->> That's the big hold up: lack of vision from the OE-core folks.
-> 
-> This is a community project, if you have ideas or suggestions, just start the 
-> discussion...
+> Sure not; 2011.03 is for bugfixes not huge changesets with new things.
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Who said "huge" or "new"? Even bugfixes need testing. That's why
+changesets should go
+through master after all.
+
+>> Would you prefer experimental changesets in 2011.03?
+>>
+> 
+> This is not going to happen  has 2011.03 is not a playground but a stable
+>  branch.
+
+Exactly. That's what master is good for. Everything that hasn't been
+tested in many environments is experimental by nature. You simply can't
+commit anything to 2011.03 directly, for it would be experimental. It
+has to be tested somewhere. That's master. (Yes, Koen, we know, OE-core
+is an option, but not for some of us.)
+
+> You're confusing development and maintainence branch meaning here.
+
+Obviously not.
+
+Regards,
+Andreas
 
 
