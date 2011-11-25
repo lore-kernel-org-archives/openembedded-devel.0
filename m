@@ -1,43 +1,38 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RTo2T-0001s1-N5
+	(envelope-from <lamiaposta71@gmail.com>) id 1RToM5-0006KF-9b
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 06:09:31 +0100
-Received: by iahk25 with SMTP id k25so4021930iah.6
+	Fri, 25 Nov 2011 06:29:45 +0100
+Received: by qadb10 with SMTP id b10so231879qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 21:02:52 -0800 (PST)
+	Thu, 24 Nov 2011 21:23:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=SdEgqGvOLuyY6uidqA734m29kz21bs9mBRdvcjN5G8A=;
-	b=tf6RrI5OCjce9CmglydBbkpVZt3iahZpPTm9krlbuAhSJy9v8ua2+K44RrIYkJ+Da2
-	lspG9cxRugpzPTiN/BU94WubNDZtGxYoCl9Pn4UJrYLndomMm1DKR6Dbs5T8uDkl8VHf
-	BoxWbYUiI5EOcnwKVRt5VO1rIMLyUB5eiJl34=
-Received: by 10.50.194.229 with SMTP id hz5mr36312924igc.36.1322197372086;
-	Thu, 24 Nov 2011 21:02:52 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id a2sm54134409igj.7.2011.11.24.21.02.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Nov 2011 21:02:50 -0800 (PST)
-Date: Thu, 24 Nov 2011 21:09:22 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: Mr Dash Four <mr.dash.four@googlemail.com>
-Message-ID: <20111125050922.GA30623@sakrah.homelinux.org>
-Mail-Followup-To: Mr Dash Four <mr.dash.four@googlemail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <4EC81A85.8050704@googlemail.com>
-	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
-	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
-	<20111124174936.GA28767@sakrah.homelinux.org>
-	<4ECE87A9.8040109@googlemail.com>
-	<20111124182713.GH28767@sakrah.homelinux.org>
-	<4ECEE6D8.7080802@googlemail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=Dxq24KXN83oBG9T93js3IVzQsZveGdqA3MqxPXJrH0Y=;
+	b=Z3Pzg4zF1dRZH5ozx2acEBWIqD/krH963zNtq6/qzUQT0pFbqpgYSc/Yo3FX4iuCz6
+	4ehGvYtehAZJeSsHsXyFSxIaSfxe23u8G9uBO41pg7udX9GmpVYxh28OYGcrtRfOjjQn
+	yEbJP/8mESOqJebfitWEJ9iDCWr43+FzFvOJY=
 MIME-Version: 1.0
-In-Reply-To: <4ECEE6D8.7080802@googlemail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: "cannot find -lppl_c" link error
+Received: by 10.224.73.19 with SMTP id o19mr13909502qaj.61.1322198590973; Thu,
+	24 Nov 2011 21:23:10 -0800 (PST)
+Received: by 10.229.2.80 with HTTP; Thu, 24 Nov 2011 21:23:10 -0800 (PST)
+In-Reply-To: <jalvr1$3bl$1@dough.gmane.org>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
+	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
+	<1322134409.3391.21.camel@mattotaupa>
+	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
+	<jalvr1$3bl$1@dough.gmane.org>
+Date: Fri, 25 Nov 2011 06:23:10 +0100
+Message-ID: <CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,42 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 05:09:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 25 Nov 2011 05:29:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On (25/11/11 00:52), Mr Dash Four wrote:
-> > I have no idea OTOH probably adding --with-ppl=no --with-cloog=no
-> > to EXTRA_OECONF might help
-> That did not work, unfortunately - "perl ./Configure" doesn't like these:
+Hi,
 
-well where did you add them ? they should ONLY be added for gcc-cross
-recipe
+> With both my angstrom and TI hat on: I use both 2011.03-maintenance and OE-core.
 
-> + do_configure
-> + cd util
-> + perl perlpath.pl /home/mr-4/oe/build/tmp/sysroots/x86_64-linux/usr/bin
-> + cd ..
-> + ln -sf apps/openssl.pod crypto/crypto.pod ssl/ssl.pod doc/
-> + os=linux
-> ++ grep -q linux
-> ++ echo linux
-> ++ echo 0
-> + '[' 0 -eq 0 ']'
-> + os=linux
-> + target=linux-x86_64
-> + case $target in
-> + sed -i -e 's|^\("linux-x86_64",\s*"[^:]\+\):\([^:]\+\)|\1:-DL_ENDIAN 	-DTERMIO   -Wall  -Wa,--noexecstack |g' Configure
-> + useprefix=/home/mr-4/oe/build/tmp/sysroots/x86_64-linux/usr
-> + '[' x/home/mr-4/oe/build/tmp/sysroots/x86_64-linux/usr = x ']'
-> + perl ./Configure --with-ppl=no --with-cloog=no shared --prefix=/home/mr-4/oe/build/tmp/sysroots/x86_64-linux/usr --openssldir=/home/mr-4/oe/build/tmp/sysroots/x86_64-linux/usr/lib/ssl linux-x86_64
-> Usage: Configure [no-<cipher> ...] [enable-<cipher> ...] [experimental-<cipher> ...] [-Dxxx] [-lxxx] [-Lxxx] [-fxxx] [-Kxxx] [no-hw-xxx|no-hw] [[no-]threads] [[no-]shared] [[no-]zlib|zlib-dynamic] [no-asm] [no-dso] [no-krb5] [386] [--prefix=DIR] [--openssldir=OPENSSLDIR] [--with-xxx[=vvv]] [--test-sanity] os/compiler[:flags]
-> NOTE: package openssl-native-1.0.0d-r14.0: task do_configure: Failed
-> 
-> Any ideas?
-> 
+I'm starting now a project. I have a preliminary build on oe-core and
+I'm trying to convince my boss to join this direction.
+I'll try to put resources on it, hoping it is the right choice (I need
+a stable angstrom in four months).
 
--- 
--Khem
+Thx for your work,
+Raffaele
 
 
