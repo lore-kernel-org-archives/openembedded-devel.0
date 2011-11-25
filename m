@@ -1,46 +1,33 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-qw0-f54.google.com ([209.85.216.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mr.dash.four@googlemail.com>) id 1RU3m7-0000kl-GI
+	(envelope-from <tom.rini@gmail.com>) id 1RU3ny-0000sD-R6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 22:57:39 +0100
-Received: by wwf22 with SMTP id 22so3272577wwf.0
+	Fri, 25 Nov 2011 22:59:35 +0100
+Received: by qadc10 with SMTP id c10so3148502qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 13:51:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=message-id:disposition-notification-to:date:from:user-agent
-	:mime-version:to:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=K/Mj8rKEmvVoiFIUBGJELErJycSzlaXZrZdIrQ7nSg0=;
-	b=LBikI70qJpOkjcJvjtLhKAT186jifLvyVB5JaHYf9FN4ByseSu4MoH5VR/UpS4RoeG
-	+U73T7l2wQjp/NSGvAgYbnxmrE4T+PXpULcttmCXXYxGtgfPI0EzpQnadQW1+qyUapOw
-	qYbkOKS1e3SvKovInTM9g+bNPzp569vqP5ggc=
-Received: by 10.227.207.201 with SMTP id fz9mr22878231wbb.25.1322257864854;
-	Fri, 25 Nov 2011 13:51:04 -0800 (PST)
-Received: from [10.68.68.173]
-	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
-	by mx.google.com with ESMTPS id a27sm29039966wbp.16.2011.11.25.13.51.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 25 Nov 2011 13:51:03 -0800 (PST)
-Message-ID: <4ED00DC1.3080605@googlemail.com>
-Date: Fri, 25 Nov 2011 21:50:57 +0000
-From: Mr Dash Four <mr.dash.four@googlemail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
+	Fri, 25 Nov 2011 13:52:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=eK7ca3anJbpVNgdU2n5eF31ql19HeIIpq54LEI5HMxo=;
+	b=kAbrUDU7cZ5jfmgLXwjmhmbn9cnSWt4NBveel8DHsq8RKb4WkaqYP7pP1FiH73qAb1
+	e++mDIWP6Gv6KxNk+ic9sajKnvCmykj7lJQo2vzrevXJiNN1He+0exA6t+8KJpyG27Zn
+	3XfaPzLZ4+wYgfZxvHLXWom6NO3aO+J6tXgoM=
 MIME-Version: 1.0
+Received: by 10.224.189.129 with SMTP id de1mr15973945qab.18.1322257979776;
+	Fri, 25 Nov 2011 13:52:59 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Fri, 25 Nov 2011 13:52:59 -0800 (PST)
+In-Reply-To: <4ECD76E2.3040001@opendreambox.org>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org>
+Date: Fri, 25 Nov 2011 14:52:59 -0700
+Message-ID: <CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4EC81A85.8050704@googlemail.com>
-	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
-	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
-	<20111124174936.GA28767@sakrah.homelinux.org>
-	<4ECE87A9.8040109@googlemail.com>
-	<20111124182713.GH28767@sakrah.homelinux.org>
-	<4ECEE6D8.7080802@googlemail.com>
-	<20111125050922.GA30623@sakrah.homelinux.org>
-	<4ECF2887.2040400@googlemail.com>
-	<CAMKF1srBccnok0GsuwZxsRCpUNwT7nLz=iJi9vhNZSykxhztfA@mail.gmail.com>
-In-Reply-To: <CAMKF1srBccnok0GsuwZxsRCpUNwT7nLz=iJi9vhNZSykxhztfA@mail.gmail.com>
-Subject: Re: "cannot find -lppl_c" link error
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,37 +41,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 21:57:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Nov 2011 21:59:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-
->> I have just finished my built - the whole lot and with a lot of warnings, mainly from unpackaged files - don't know whether these are important though.
->>     
+On Wed, Nov 23, 2011 at 3:42 PM, Andreas Oberritter
+<obi@opendreambox.org> wrote:
+> On 23.11.2011 23:25, Khem Raj wrote:
+>> On Wed, Nov 23, 2011 at 1:18 PM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>>> 2011/11/23 Khem Raj <raj.khem@gmail.com>
+>>>
+>>>> On Thu, Oct 27, 2011 at 3:53 AM, Mats K=E4rrman <Mats.Karrman@tritech.=
+se>
+>>>> wrote:
+>>>>> Hi,
+>>>>>
+>>>>> Are there any plans for new releases and/or maintenance branches of O=
+E
+>>>> classic?
+>>>>>
+>>>>
+>>>> 2011.03-maintenance is the last release of OE classic. As long as the
+>>>> branch is maintained
+>>>>
+>>>> _
+>>>>
+>>>> Related: I noticed TSC plans to discuss on whether or not to make oe
+>>> classic read only.
+>>>
+>>> I'd like to suggest leaving it open for those of us that are still usin=
+g
+>>> it.
+>>
+>> 2011.03-maintenance branch is maintained and that would be place to go.
+>>
+>>
+>>> For instance I have still products that are based on OE classic. If the=
+re
+>>> is a problem that is of a generic nature, I'm more than happy to submit
+>>> patches so others in the same situation can benefit from it.
+>>> (actually I have one pending with a new version of netsnmp; the current
+>>> recipe does not build with uclibc, whereas the latest version of netsnm=
+p
+>>> does; found/fixed this today, but haven't had time to make a commit)
+>>>
+>>> And if there is no interest any more it'll eventually die. But as of no=
+w I
+>>> do see people working on/with it (see the commit log).
+>>
+>> those fixes are intended for 2011.03-maintenance which go into master an=
+d then
+>> get cherry-picked
 >
-> they should be looked into sometimes there might be important files that
-> go unpackaged
->   
-I kept a log of these and can attach them separately. From what I 
-remember the majority of them all were from the gcc packaging.
-
->> I'll probably spend the weekend fine-tuning this as my build went over 25G in size - massive! Thanks for your help Raj, much appreciated!
->>     
+> So master needs to stay open in order to get patches there first before
+> being cherry-picked into 2011.03-maintenance, right?
 >
-> yes its big since a lot of software is built you could use rm_work
-> feature where it will try to delete the work dirs after they are
-> successfully built but I would suggest not to do that unless you
-> really need it.
->   
-I really have to - I've expanded my "dev" partition to the limit now and 
-I run a lot of other things - I didn't expect this to take so much space 
-- I am executing a massive 15k+ steps task with bitbake at present and I 
-am dreading the free disk space - I have "barely" 50G left.
+> I also don't like the idea to make it read-only. Those who already
+> switched to oe-core are free to just ignore the classic master branch.
+> Others should still be able to push bugfixes etc, if they care enough
+> about it.
 
-OE is actually a very handy tool to have - I have been struggling with 
-different projects mainly because of the nightmares of building and 
-maintaining the toolchains needed for the various arches I have been 
-using. This seems to be very streamlined in OE, so I might start 
-developing some recipes soon.
+<Putting on TSC hat>
+The problem with this mindset is that we don't want to have
+oe-core+meta-oe+etc and oe.dev diverge any more than they had at the
+start.  This is why at some point master needs to become read-only.
+Everyone and their master based project can still fetch and build and
+work.  But if you're going right now and saying "I need to start a new
+project and it should be oe.dev+master based", please speak up now
+about why you're unable to use oe-core+etc.  We can't solve what we
+don't know is a problem and frankly I think the TSC is of the mind
+that oe-core+etc is as good as or better than oe.dev.  If we're wrong,
+someone needs to tell us what's missing.
+
+<Taking off TSC hat, putting on just my own>
+In the beginning it felt like oe-core was missing a lot of handy
+little things that oe.dev had gone off and made since the last time
+there had been a sync up into poky (but there were its own good ideas
+in there!).  We've now finally reached the point where it's really
+just mechanical "migrate recipes A/B/C" (and not to trivialize these
+efforts!).  I think it would be bad to go back to the point of "well,
+now we need to move $concept from oe.dev into oe-core".
+
+--=20
+Tom
 
 
