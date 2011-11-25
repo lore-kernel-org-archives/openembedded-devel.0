@@ -1,38 +1,43 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lamiaposta71@gmail.com>) id 1RToM5-0006KF-9b
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RToVZ-0006aX-Jz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 06:29:45 +0100
-Received: by qadb10 with SMTP id b10so231879qad.6
+	Fri, 25 Nov 2011 06:39:33 +0100
+Received: by wwf22 with SMTP id 22so1880628wwf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 21:23:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Dxq24KXN83oBG9T93js3IVzQsZveGdqA3MqxPXJrH0Y=;
-	b=Z3Pzg4zF1dRZH5ozx2acEBWIqD/krH963zNtq6/qzUQT0pFbqpgYSc/Yo3FX4iuCz6
-	4ehGvYtehAZJeSsHsXyFSxIaSfxe23u8G9uBO41pg7udX9GmpVYxh28OYGcrtRfOjjQn
-	yEbJP/8mESOqJebfitWEJ9iDCWr43+FzFvOJY=
+	Thu, 24 Nov 2011 21:32:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=x82q9GI/IbcQbGBvBKYnIWdHBmUKztIEAZg4LOLUIu0=;
+	b=MhHSdXLfKE63epk1xcZmPVQazquLG22rk4WeRiKFfVgA/gsKV5aZHkzqONnCKsVBnZ
+	gL/i70X9DT5cqKXu56KL5UKw4dnEFag+eSQmp6MuyyzFr9AeNil0vXTr4/Nq5/4iJxFF
+	EOcXQREnODTbJ0qT/me0E2YfACT/WV8X1i9Y0=
+Received: by 10.180.81.73 with SMTP id y9mr32140780wix.37.1322199176764;
+	Thu, 24 Nov 2011 21:32:56 -0800 (PST)
+Received: from xp1.wyse.network
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id gd6sm26628985wbb.1.2011.11.24.21.32.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Nov 2011 21:32:55 -0800 (PST)
+Message-ID: <4ECF2887.2040400@googlemail.com>
+Date: Fri, 25 Nov 2011 05:32:55 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20110312)
 MIME-Version: 1.0
-Received: by 10.224.73.19 with SMTP id o19mr13909502qaj.61.1322198590973; Thu,
-	24 Nov 2011 21:23:10 -0800 (PST)
-Received: by 10.229.2.80 with HTTP; Thu, 24 Nov 2011 21:23:10 -0800 (PST)
-In-Reply-To: <jalvr1$3bl$1@dough.gmane.org>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org>
-	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
-	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
-	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
-	<1322134409.3391.21.camel@mattotaupa>
-	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
-	<jalvr1$3bl$1@dough.gmane.org>
-Date: Fri, 25 Nov 2011 06:23:10 +0100
-Message-ID: <CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Plans for OE classic future
+References: <4EC81A85.8050704@googlemail.com>
+	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
+	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
+	<20111124174936.GA28767@sakrah.homelinux.org>
+	<4ECE87A9.8040109@googlemail.com>
+	<20111124182713.GH28767@sakrah.homelinux.org>
+	<4ECEE6D8.7080802@googlemail.com>
+	<20111125050922.GA30623@sakrah.homelinux.org>
+In-Reply-To: <20111125050922.GA30623@sakrah.homelinux.org>
+Subject: Re: "cannot find -lppl_c" link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,19 +51,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 05:29:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Nov 2011 05:39:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Hi,
+>> That did not work, unfortunately - "perl ./Configure" doesn't like these:
+> 
+> well where did you add them ? they should ONLY be added for gcc-cross
+> recipe
+Well, considering my OE experience is just a few days old (if you can call it that), I placed this in my local.conf file. Then I realised I should put it with the failed task recipe (gcc-4.5-initial) and then by looking at the actual file itself I realised that the gcc-4.5.bb is the place to go. 
 
-> With both my angstrom and TI hat on: I use both 2011.03-maintenance and OE-core.
+I have just finished my built - the whole lot and with a lot of warnings, mainly from unpackaged files - don't know whether these are important though.
 
-I'm starting now a project. I have a preliminary build on oe-core and
-I'm trying to convince my boss to join this direction.
-I'll try to put resources on it, hoping it is the right choice (I need
-a stable angstrom in four months).
-
-Thx for your work,
-Raffaele
+I'll probably spend the weekend fine-tuning this as my build went over 25G in size - massive! Thanks for your help Raj, much appreciated!
 
 
