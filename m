@@ -1,35 +1,46 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RU3eT-0000QE-8o
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RU3m7-0000kl-GI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 22:49:46 +0100
-Received: by qyk30 with SMTP id 30so750647qyk.6
+	Fri, 25 Nov 2011 22:57:39 +0100
+Received: by wwf22 with SMTP id 22so3272577wwf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 13:43:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=PeG3OYFyuFw3lSGOGnayGNXLrc8CWOeno3mtH5mZoH0=;
-	b=lLM3AWxVtRiYRGUCrAnuuPy68cKyyXeL6P7RD189zmdyHn2Agm2nB/W/vhXk8JxxPU
-	yaCyf21m+xJjGgKJSXPr9DnEomMedLqCKp32Vn66cwk5UiQPJ65P8K9AAb8YVT0wYbjH
-	FOBjfdSceKQHwuWn32EWYZTjdlZYu0FWf4YJY=
+	Fri, 25 Nov 2011 13:51:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=K/Mj8rKEmvVoiFIUBGJELErJycSzlaXZrZdIrQ7nSg0=;
+	b=LBikI70qJpOkjcJvjtLhKAT186jifLvyVB5JaHYf9FN4ByseSu4MoH5VR/UpS4RoeG
+	+U73T7l2wQjp/NSGvAgYbnxmrE4T+PXpULcttmCXXYxGtgfPI0EzpQnadQW1+qyUapOw
+	qYbkOKS1e3SvKovInTM9g+bNPzp569vqP5ggc=
+Received: by 10.227.207.201 with SMTP id fz9mr22878231wbb.25.1322257864854;
+	Fri, 25 Nov 2011 13:51:04 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id a27sm29039966wbp.16.2011.11.25.13.51.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 25 Nov 2011 13:51:03 -0800 (PST)
+Message-ID: <4ED00DC1.3080605@googlemail.com>
+Date: Fri, 25 Nov 2011 21:50:57 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
 MIME-Version: 1.0
-Received: by 10.229.61.167 with SMTP id t39mr3989381qch.226.1322257389897;
-	Fri, 25 Nov 2011 13:43:09 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Fri, 25 Nov 2011 13:43:09 -0800 (PST)
-In-Reply-To: <1322166832.13272.2.camel@mattotaupa>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org> <jal1pc$2u7$1@dough.gmane.org>
-	<CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
-	<20111124170654.GA28572@sakrah.homelinux.org>
-	<1322166832.13272.2.camel@mattotaupa>
-Date: Fri, 25 Nov 2011 14:43:09 -0700
-Message-ID: <CA+M6bXkQUtRu5+JgufshDHnb8suc1sRFiR4ViJ+GoisbYx1JOQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Plans for OE classic future
+References: <4EC81A85.8050704@googlemail.com>
+	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
+	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
+	<20111124174936.GA28767@sakrah.homelinux.org>
+	<4ECE87A9.8040109@googlemail.com>
+	<20111124182713.GH28767@sakrah.homelinux.org>
+	<4ECEE6D8.7080802@googlemail.com>
+	<20111125050922.GA30623@sakrah.homelinux.org>
+	<4ECF2887.2040400@googlemail.com>
+	<CAMKF1srBccnok0GsuwZxsRCpUNwT7nLz=iJi9vhNZSykxhztfA@mail.gmail.com>
+In-Reply-To: <CAMKF1srBccnok0GsuwZxsRCpUNwT7nLz=iJi9vhNZSykxhztfA@mail.gmail.com>
+Subject: Re: "cannot find -lppl_c" link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 21:49:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 25 Nov 2011 21:57:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 24, 2011 at 1:33 PM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Donnerstag, den 24.11.2011, 09:06 -0800 schrieb Khem Raj:
->> On (24/11/11 10:31), Frans Meulenbroeks wrote:
->> > 2011/11/24 Koen Kooi <koen@dominion.thruhere.net>
->> >
->> > > OE .dev will go read-only soon, If you need an OE-classic setup,
->> > > 2011.03-maintenance is there for you.
->> >
->> > As stated before there are still people using .dev and committing to it
->> > [1], and there are people interested in keeping it that way for a while.
->> > So as it stands I suggest to keep it open for a while for those that still
->> > are interested to use it.
->>
->> I would suggest that people interested in oe classic should use 2011.03
->> branch since its maintained and tested regularly. Its in their best
->> interest too since there are people behind the branch and it gets
->> regular bug fixes thats not true for master.
+
+>> I have just finished my built - the whole lot and with a lot of warnings, mainly from unpackaged files - don't know whether these are important though.
+>>     
 >
-> That statement is not true as far as I can see from the commit log.
-> Almost all patches to 2011.03-maintenance went through master.
+> they should be looked into sometimes there might be important files that
+> go unpackaged
+>   
+I kept a log of these and can attach them separately. From what I 
+remember the majority of them all were from the gcc packaging.
 
-Yes, but that's also due, in general to the nature of the branch.
-Angstrom/TI related stuff was going master->2011.03-maintenance before
-I clarified that coming from oe-core is also fine.  As of yet, no one
-else has stepped up and said "I need DISTRO=foo MACHINE=bar working
-here, and I intend to keep an eye on things".  Having angstrom-2008.1
-in there seems to be good enough for most cases.
+>> I'll probably spend the weekend fine-tuning this as my build went over 25G in size - massive! Thanks for your help Raj, much appreciated!
+>>     
+>
+> yes its big since a lot of software is built you could use rm_work
+> feature where it will try to delete the work dirs after they are
+> successfully built but I would suggest not to do that unless you
+> really need it.
+>   
+I really have to - I've expanded my "dev" partition to the limit now and 
+I run a lot of other things - I didn't expect this to take so much space 
+- I am executing a massive 15k+ steps task with bitbake at present and I 
+am dreading the free disk space - I have "barely" 50G left.
 
--- 
-Tom
+OE is actually a very handy tool to have - I have been struggling with 
+different projects mainly because of the nightmares of building and 
+maintaining the toolchains needed for the various arches I have been 
+using. This seems to be very streamlined in OE, so I might start 
+developing some recipes soon.
 
 
