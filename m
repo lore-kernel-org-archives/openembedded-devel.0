@@ -1,42 +1,30 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RTvlA-0007D7-Br
+	(envelope-from <otavio.salvador@gmail.com>) id 1RTysV-0001hX-1q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 14:24:08 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id DF64F3156595
+	Fri, 25 Nov 2011 17:43:55 +0100
+Received: by yenm2 with SMTP id m2so3660152yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 14:17:32 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id oYmq6iEkGbUL
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 14:17:23 +0100 (CET)
-Received: from [172.22.22.61] (drms-590c4dea.pool.mediaWays.net [89.12.77.234])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 539533156591
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 14:17:23 +0100 (CET)
-Message-ID: <4ECF9562.30503@opendreambox.org>
-Date: Fri, 25 Nov 2011 14:17:22 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20111031 Thunderbird/7.0.1
-MIME-Version: 1.0
+	Fri, 25 Nov 2011 08:37:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=qSbPaNixtJMNCer4TUyBElezWW+so7MS17DZxYcmT5k=;
+	b=GnhKbGV2uU6uoRiCM3XlE2GIdmShaqqLLK2XzTAmeX3+SDZ4LCJ3nnNVlLuMQrgv11
+	uSD0W43gOtlF0+7xbfO7JA02hWRSgEHAS6RQUjS2ymoDYK/13wYNUjYnDrma2biuAUze
+	4gfWOVlR6opfRP00Y/p84H37K/abd4DVsvNdg=
+Received: by 10.236.116.37 with SMTP id f25mr11326078yhh.82.1322239039853;
+	Fri, 25 Nov 2011 08:37:19 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id w68sm36619531yhe.14.2011.11.25.08.37.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 25 Nov 2011 08:37:18 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org> <jal1pc$2u7$1@dough.gmane.org>
-	<CACW_hTZpUU0Zyjv4d+ut1n+Rte55TTh5GT_k1W98KzMY9sjL1w@mail.gmail.com>
-	<20111124170654.GA28572@sakrah.homelinux.org>
-	<4ECE81D3.2010603@opendreambox.org>
-	<CAP9ODKrrnc8Op+At6CH2EJbUkTPafGuS=6wMmBXTFsBhA90oTA@mail.gmail.com>
-In-Reply-To: <CAP9ODKrrnc8Op+At6CH2EJbUkTPafGuS=6wMmBXTFsBhA90oTA@mail.gmail.com>
-Subject: Re: Plans for OE classic future
+Date: Fri, 25 Nov 2011 16:37:08 +0000
+Message-Id: <cover.1322238977.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/1] digitemp build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,45 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 13:24:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Nov 2011 16:43:55 -0000
 
-On 24.11.2011 19:43, Otavio Salvador wrote:
-> On Thu, Nov 24, 2011 at 15:41, Andreas Oberritter <obi@opendreambox.org>wrote:
-> 
->> ...
->>
->> I would like stronger arguments for why master and not 2011.03 release
->>> branch ?
->>
->> Obviously, you can push a changeset to master, wait for someone to
->> complain about a bug, fix the bug, wait for silence, merge it into 2011.03.
->>
-> 
-> Sure not; 2011.03 is for bugfixes not huge changesets with new things.
+The following changes since commit 7019fbb50796fedcedef6ff92981a7f26659a251:
 
-Who said "huge" or "new"? Even bugfixes need testing. That's why
-changesets should go
-through master after all.
+  mplayer: fix build with -Wl,-as-needed (2011-11-23 22:41:17 +0100)
 
->> Would you prefer experimental changesets in 2011.03?
->>
-> 
-> This is not going to happen  has 2011.03 is not a playground but a stable
->  branch.
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-Exactly. That's what master is good for. Everything that hasn't been
-tested in many environments is experimental by nature. You simply can't
-commit anything to 2011.03 directly, for it would be experimental. It
-has to be tested somewhere. That's master. (Yes, Koen, we know, OE-core
-is an option, but not for some of us.)
+Otavio Salvador (1):
+  digitemp: fix build for non x86 architectures
 
-> You're confusing development and maintainence branch meaning here.
+ .../digitemp/digitemp/makefile-fix.patch           |   20 ++++++++++++++++++++
+ meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb |   11 ++++++++++-
+ 2 files changed, 30 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-support/digitemp/digitemp/makefile-fix.patch
 
-Obviously not.
+-- 
+1.7.2.5
 
-Regards,
-Andreas
 
 
