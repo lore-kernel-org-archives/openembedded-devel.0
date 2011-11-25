@@ -1,43 +1,40 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mr.dash.four@googlemail.com>) id 1RToVZ-0006aX-Jz
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RTqMY-0002GP-A7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Nov 2011 06:39:33 +0100
-Received: by wwf22 with SMTP id 22so1880628wwf.0
+	Fri, 25 Nov 2011 08:38:22 +0100
+Received: by vcbfo13 with SMTP id fo13so156584vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2011 21:32:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=message-id:disposition-notification-to:date:from:user-agent
-	:mime-version:to:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=x82q9GI/IbcQbGBvBKYnIWdHBmUKztIEAZg4LOLUIu0=;
-	b=MhHSdXLfKE63epk1xcZmPVQazquLG22rk4WeRiKFfVgA/gsKV5aZHkzqONnCKsVBnZ
-	gL/i70X9DT5cqKXu56KL5UKw4dnEFag+eSQmp6MuyyzFr9AeNil0vXTr4/Nq5/4iJxFF
-	EOcXQREnODTbJ0qT/me0E2YfACT/WV8X1i9Y0=
-Received: by 10.180.81.73 with SMTP id y9mr32140780wix.37.1322199176764;
-	Thu, 24 Nov 2011 21:32:56 -0800 (PST)
-Received: from xp1.wyse.network
-	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
-	by mx.google.com with ESMTPS id gd6sm26628985wbb.1.2011.11.24.21.32.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Nov 2011 21:32:55 -0800 (PST)
-Message-ID: <4ECF2887.2040400@googlemail.com>
-Date: Fri, 25 Nov 2011 05:32:55 +0000
-From: Mr Dash Four <mr.dash.four@googlemail.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20110312)
+	Thu, 24 Nov 2011 23:31:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=WHJy1U+piDEr+NFzgr5UAmfMk27de815d0bzc1PnC3E=;
+	b=FcEHJe5Z0exa28UUcINh84gqdxWGy5kCXw8go5RLOpoK5b4CD8qvUCkV0DKLcn3RPi
+	29Yyn8/53LiRyfxnGqPlC6Jn+mTOvtb4Ombs7hut8fVk96LzPSxQbWdvUAlHjnidpJct
+	qkCgZb2+dKCf2uA0/6mDZa3l6VA8o90tMyctk=
 MIME-Version: 1.0
+Received: by 10.52.33.140 with SMTP id r12mr33081764vdi.36.1322206307718; Thu,
+	24 Nov 2011 23:31:47 -0800 (PST)
+Received: by 10.52.28.238 with HTTP; Thu, 24 Nov 2011 23:31:47 -0800 (PST)
+In-Reply-To: <CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
+	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
+	<1322134409.3391.21.camel@mattotaupa>
+	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
+	<jalvr1$3bl$1@dough.gmane.org>
+	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
+Date: Fri, 25 Nov 2011 08:31:47 +0100
+Message-ID: <CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4EC81A85.8050704@googlemail.com>
-	<CAMKF1srcWq1mD4wNZEi2Eff2iMCVcwvjL_swTJ7z1Y6=qjZA1Q@mail.gmail.com>
-	<4ECE4B0D.6030401@googlemail.com> <4ECE5422.3070504@googlemail.com>
-	<20111124174936.GA28767@sakrah.homelinux.org>
-	<4ECE87A9.8040109@googlemail.com>
-	<20111124182713.GH28767@sakrah.homelinux.org>
-	<4ECEE6D8.7080802@googlemail.com>
-	<20111125050922.GA30623@sakrah.homelinux.org>
-In-Reply-To: <20111125050922.GA30623@sakrah.homelinux.org>
-Subject: Re: "cannot find -lppl_c" link error
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,18 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2011 05:39:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Nov 2011 07:38:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
->> That did not work, unfortunately - "perl ./Configure" doesn't like these:
-> 
-> well where did you add them ? they should ONLY be added for gcc-cross
-> recipe
-Well, considering my OE experience is just a few days old (if you can call it that), I placed this in my local.conf file. Then I realised I should put it with the failed task recipe (gcc-4.5-initial) and then by looking at the actual file itself I realised that the gcc-4.5.bb is the place to go. 
+Some global comments.
 
-I have just finished my built - the whole lot and with a lot of warnings, mainly from unpackaged files - don't know whether these are important though.
+First of all I think it is good that we have this discussion, and that this
+is discussed with the community, not solely within the TSC.
 
-I'll probably spend the weekend fine-tuning this as my build went over 25G in size - massive! Thanks for your help Raj, much appreciated!
+Wrt keeping master alive:
 
+I feel it is better to have a central spot to put patches to be cherry
+picked, than everyone making e.g. his own github project (at least having a
+central spot is less work and less cumbersome).
+Cherry picking from oe-core/meta-oe is of course also possible, but also
+has a higher chance to encounter problems. E.g. the patch may not apply or
+the recipe may not be parseable by the bitbake used in maintenance (because
+oe-core uses a newer bitbake or different class files).
+
+Also switching from master to the maintenance branch may not be possible
+for all projects. This may depend on phase of the project, internal
+policies, time etc.
+(actually I did a test to move one of my projects to the maintenance
+branch, several of the recipes did not fetch any more (mostly due to the
+kernel.org situation))
+
+For me, and from reading the discussion master still serves a need for some
+of us, so why close it down. Actually I have not really heard any
+compelling (compelling to me that is) reason to close it down.
+Yes, for new projects most likely oe-core is the best choice, but I feel
+people are capable enough to make that choice themselves; and, over time,
+both the classic master branch and maintenance branch will die. For now it
+is still useful for some of us, so my preference would be to keep it
+available and writable (if only as a sort of 'alpha/draft' version of
+maintenance).
+
+After all, isn't one of the purposes of OE to promote information sharing,
+cooperation and the use of openembedded technology (and not make things
+harder).
+
+Best regards, Frans
+
+'PS: Thinking of it, we might consider a README file; and/or some text in
+the git description to suggest not to use classic for new developments.
 
