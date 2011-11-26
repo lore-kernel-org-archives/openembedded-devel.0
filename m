@@ -1,33 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RUCy7-0000KO-Kp for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 08:46:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RUCrl-0007JC-Ud for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 08:40:06 +0100
-Received: from dynamicip-95-79-237-69.pppoe.nn.ertelecom.ru
-	([dynamicip-95-79-237-69.pppoe.nn.ertelecom.ru])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2011 08:40:05 +0100
-Received: from mordenhil by dynamicip-95-79-237-69.pppoe.nn.ertelecom.ru with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RUG2s-0006pU-Tm
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Nov 2011 12:03:48 +0100
+Received: from ipb5.telenor.se (ipb5.telenor.se [195.54.127.168])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id BC709EAA43
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2011 08:40:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 26 Nov 2011 11:57:08 +0100 (CET)
+X-SENDER-IP: [83.227.56.19]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AncaAKbF0E5T4zgTPGdsb2JhbAAMOIlKoU4BAQEBN4IkAQEBAQM4QBELGAkWDwkDAgECAQ8iFBMGAgEBvhmHTYMVBJRKilaHNg
+X-IronPort-AV: E=Sophos;i="4.69,575,1315173600"; 
+   d="scan'208";a="3233939"
+Received: from c-1338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.19])
+	by ipb5.telenor.se with ESMTP; 26 Nov 2011 11:57:08 +0100
+Message-ID: <4ED0C603.9020900@telia.com>
+Date: Sat, 26 Nov 2011 11:57:07 +0100
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Thunderbird/3.1.15
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Evgeniy Markov <mordenhil@yandex.ru>
-Date: Sat, 26 Nov 2011 07:38:12 +0000 (UTC)
-Message-ID: <loom.20111126T081859-131@post.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 95.79.237.69 (Opera/9.80 (X11; Linux i686; U;
-	en) Presto/2.10.229 Version/11.60)
-Subject: Build xfce46-image crash
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>	<4ECD76E2.3040001@opendreambox.org>	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>	<1322134409.3391.21.camel@mattotaupa>	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>	<jalvr1$3bl$1@dough.gmane.org>	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>	<CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>
+	<CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>
+In-Reply-To: <CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2011 07:46:39 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 26 Nov 2011 11:03:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello!
+On 2011-11-25 23:04, Tom Rini wrote:
+> On Fri, Nov 25, 2011 at 12:31 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com>  wrote:
+>
+>> After all, isn't one of the purposes of OE to promote information sharing,
+>> cooperation and the use of openembedded technology (and not make things
+>> harder).
+> One of the points of making master read-only would be to ensure that
+> changes aren't lost.
+>
+> Perhaps the transition needs to be:
+> - master is as it is today
+> - master becomes oe-core backport || master-only bugfixes only
+> - master becomes read only.
+>
+> And we go from the first step to the second step sometime sooner
+> rather than later.  The top of my head date would be before the
+> paid-developers go on end of year breaks to try and make sure all the
+> hobbyist folks start their hacking with oe-core+etc rather than master
+> and risk getting caught later.  I'm open to arguments on why that's
+> exactly backwards...
+>
 
-I have a problem with building 'xfce46-image'. Building crashes on stage 'do-
-rootfs'. Log shows that this is due to an dependencies error for 'task-xfce46-
-base' - this task can't satisfy the dependencies from 'hicolor-icon-theme'. 
-Description of this dependence looks strange.
-Here is a part of the log:
+Won't it be a problem for existing projects, if you cannot add fixes to 
+cope with new host OS versions.
 
-Collected errors:
- * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-
-xfce46-base:
- * 	hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-
-themehicolor-icon-theme * 	hicolor-icon-themehicolor-icon-themehicolor-
-icon-themehicolor-icon-themehicolor-icon-theme * 	hicolor-icon-
-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-* 	hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-
-themehicolor-icon-theme * 	hicolor-icon-themehicolor-icon-themehicolor-
-icon-themehicolor-icon-themehicolor-icon-theme * 	hicolor-icon-
-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-* 	hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-
-themehicolor-icon-theme * 	hicolor-icon-themehicolor-icon-themehicolor-
-icon-themehicolor-icon-themehicolor-icon-theme * 	hicolor-icon-
-themehicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-theme 
-* 	hicolor-icon-themehicolor-icon-themehicolor-icon-themehicolor-icon-
-themehicolor-icon-theme * 	hicolor-icon-themehicolor-icon-themehicolor-
-icon-themehicolor-icon-themehicolor-icon-theme * 
- * opkg_install_cmd: Cannot install package task-xfce46-base.
- * opkg_install_cmd: Cannot install package qt4-tools-sdk.
- * resolve_conffiles: Existing conffile /home/evmarkov/angstrom-setup-scripts/
-build/tmp-angstrom_2008_1/rootfs/my-xfce46-image/etc/device_table is different 
-from the conffile in the new package. The new conffile will be placed at /home/
-evmarkov/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/my-xfce46-
-image/etc/device_table-opkg.
+At the moment, openembedded-classic does not build properly with Ubuntu 
+11.10 .
 
-I've seen reports of the same error, but there wasn't the solution.
-I would be glad if someone could explain to me how can I fix this problem.
-
-Regards,
-
-Evgeniy
+-- 
+Best Regards
+Ulf Samuelsson
 
 
 
