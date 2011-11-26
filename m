@@ -1,29 +1,22 @@
-Received: from mail-qw0-f54.google.com ([209.85.216.54])
+Received: from smtp204.alice.it ([82.57.200.100])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RU7B9-0000cP-Mg
+	(envelope-from <GNUtoo@no-log.org>) id 1RU9NE-0005sp-V9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 02:35:43 +0100
-Received: by qadc10 with SMTP id c10so3189140qad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2011 17:29:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=/a+XwjHambXdPqz5aqEkufd+VZJb39aoUjPcSfcVqU0=;
-	b=WpdbxX8n3XOoKhDvwLTBWXafoIPUOcFJ3C5RQCC3vl6POgkCSlEqdTdseUGqQGi7mh
-	BG79Deb9wxftd4FAITKhEwpsODfEMEPXtMmz6O0H0e0FYUmnMBkENXkZtoYnCMxxruV1
-	eolYBxP7BmoL1ZrZyC5Oi4Y1gDyXU7yv13Qto=
-MIME-Version: 1.0
-Received: by 10.224.18.69 with SMTP id v5mr16061675qaa.31.1322270948094; Fri,
-	25 Nov 2011 17:29:08 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Fri, 25 Nov 2011 17:29:08 -0800 (PST)
-In-Reply-To: <CAEsOVNchsOnDwZhadFHUHDz98oLrXm0fk-gV=WHWf-iWCS2xGA@mail.gmail.com>
-References: <1322247176.91444.YahooMailRC@web5703.biz.mail.ne1.yahoo.com>
-	<CAEsOVNchsOnDwZhadFHUHDz98oLrXm0fk-gV=WHWf-iWCS2xGA@mail.gmail.com>
-Date: Fri, 25 Nov 2011 18:29:08 -0700
-Message-ID: <CA+M6bXkH28ymg+CC+6bffS-KDHgpwaCneDZ_ezeThs7=ku7xNw@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+	Sat, 26 Nov 2011 04:56:21 +0100
+Received: from trisquel.localnet (80.116.58.40) by smtp204.alice.it
+	(8.6.023.02) (authenticated as editempo@alice.it)
+	id 4ECA5ECD002C1985; Sat, 26 Nov 2011 04:49:45 +0100
+From: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Mac OS X & redhat-lsb
+Date: Sat, 26 Nov 2011 04:49:45 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-12-generic; KDE/4.6.5; x86_64; ; )
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<4ECD76E2.3040001@opendreambox.org>
+	<CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
+In-Reply-To: <CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201111260449.45351.GNUtoo@no-log.org>
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2011 01:35:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 26 Nov 2011 03:56:21 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 25, 2011 at 12:19 PM, McClintock Matthew-B29882
-<B29882@freescale.com> wrote:
-> On Fri, Nov 25, 2011 at 12:52 PM, Brett McMillian
-> <brett.mcmillian@crossfieldtech.com> wrote:
->> Here are the steps I have run successfully so far.
->> 1) ./scripts/rhel5-oe.sh
->> 2) Edited the first line of ./scripts/create-config.py to read:
->> #!/usr/bin/python2.7
->> 3) ./scripts/create-config.py --config-file=fsl-p1022ds/sample-create-config.ini
->> --features="native-development" -j 4 -t 2
->> 4) source build_p1022ds_release/bitbake.rc
->> 4) bitbake devel-image
->
-> Just for everyone's information, some of this stuff is specfic to the
-> Freescale SDK. But, I think the rest should be valid.
+>If we're wrong,
+>someone needs to tell us what's missing.
+A lot of recipes are missing in the new core-based oe
 
-OS X isn't a supported (nor functional) build environment today nor in
-the snapshot that SDK is built from.  The first bit of problems sound
-like a "well, try python 2.6 instead" but once you overcome that,
-other things will fail.
+>We've now finally reached the point where it's really
+>just mechanical "migrate recipes A/B/C" (and not to trivialize these
+>efforts!).
+What about recipes that have patches without the correct header?
+Migrating the patches to the new core-based oe may be trivial, but in order to 
+be able to submit them you need to have the correct patch headers, right?
 
--- 
-Tom
+Some recipes are kept in the contrib/shr branches because of that issue.
+
+I was thinking of a kernel-like staging area for recipes of bad quality. (for 
+instance that lack the correct patch headers) so porting a big recipe like 
+mplayer1 would not be a one-person effort anymore.
+
+Or are the recipes with multiples patches lacking the correct headers not so 
+common?
+
+Denis.
 
 
