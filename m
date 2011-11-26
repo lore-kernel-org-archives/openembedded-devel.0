@@ -1,23 +1,24 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lamiaposta71@gmail.com>) id 1RUQyy-00061J-Hf
+	(envelope-from <otavio.salvador@gmail.com>) id 1RUR50-0006CL-NN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 23:44:28 +0100
-Received: by qyk30 with SMTP id 30so958348qyk.6
+	Sat, 26 Nov 2011 23:50:42 +0100
+Received: by bkbzs2 with SMTP id zs2so5801373bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2011 14:37:52 -0800 (PST)
+	Sat, 26 Nov 2011 14:44:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=VkpjNsh4gFnbG7Gjz+r8qGjbv6D/wkQ98tEVNsEWc8A=;
-	b=Fqv+zbqcz+03h7AYDLt0sMJxrQf8/zmxxuabye+2EWz+S7MTAS1CASlCvg0fPoIaer
-	83h+VdeHyRXBBWNc8lutKxYImCCZlbc0EqRwg4YtZ2PE27lyi6gkhdRHRdJhNGqhhhTX
-	0flcDzlOLmxd8svVjbJvpXHnTz/ObJOz6SLKI=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=O7WYYTZiHNahJ+Eam9MkFTLYO9CgC/cydae5Pz/LKOY=;
+	b=S/Li/LBkqAY+AugVtFFSmjz9T99ZJ3iPt2ZXsnT3dPD5Z5poCfKVbWaE0tumuuWW6M
+	K/y3898/7I47jejlHY8/VR5xjpC+QIqPcHrdOXkq1PX2LmCmxTKBDEqP7TQopWwxxAfH
+	oUi4sgKxDDEWV3ICG8u47La6g07Mwa46HiUeU=
 MIME-Version: 1.0
-Received: by 10.229.65.70 with SMTP id h6mr4466168qci.146.1322347071978; Sat,
-	26 Nov 2011 14:37:51 -0800 (PST)
-Received: by 10.229.2.80 with HTTP; Sat, 26 Nov 2011 14:37:51 -0800 (PST)
-Received: by 10.229.2.80 with HTTP; Sat, 26 Nov 2011 14:37:51 -0800 (PST)
-In-Reply-To: <1322344896.16303.49.camel@mattotaupa>
+Received: by 10.204.13.70 with SMTP id b6mr40311617bka.78.1322347444943; Sat,
+	26 Nov 2011 14:44:04 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Sat, 26 Nov 2011 14:44:04 -0800 (PST)
+In-Reply-To: <CAFU7RzP-78tD6dYt+qj2=9EODOCyXAYLVyvn31yLtx+CG8TcoA@mail.gmail.com>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
 	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
@@ -37,9 +38,11 @@ References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CACW_hTZ6tkRGj938SAg4xmENwe-qRZMGpE=8-KvexQydgD-m_w@mail.gmail.com>
 	<CA+M6bXnGhgrzZSuOe99ViWU=eZ5+Q+exWqWkstFJM-MCYzc6zQ@mail.gmail.com>
 	<1322344896.16303.49.camel@mattotaupa>
-Date: Sat, 26 Nov 2011 23:37:51 +0100
-Message-ID: <CAFU7RzP-78tD6dYt+qj2=9EODOCyXAYLVyvn31yLtx+CG8TcoA@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	<CAFU7RzP-78tD6dYt+qj2=9EODOCyXAYLVyvn31yLtx+CG8TcoA@mail.gmail.com>
+Date: Sat, 26 Nov 2011 20:44:04 -0200
+X-Google-Sender-Auth: 5eaWjmdR0zhXmEHG1cWcyNtMFAs
+Message-ID: <CAP9ODKpfGKy-EuY=s=yFsgvfHb=6sc11Fit4jBqE8Ps7fiYn8g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Plans for OE classic future
@@ -56,135 +59,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2011 22:44:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 26 Nov 2011 22:50:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Nov 26, 2011 11:02 PM, "Paul Menzel" <paulepanter@users.sourceforge.net>
-wrote:
->
-> Am Samstag, den 26.11.2011, 14:36 -0700 schrieb Tom Rini:
-> > On Sat, Nov 26, 2011 at 8:49 AM, Frans Meulenbroeks wrote:
-> > > 2011/11/26 Tom Rini
-> > >
-> > >> On Sat, Nov 26, 2011 at 3:57 AM, Ulf Samuelsson wrote:
-> > >> > On 2011-11-25 23:04, Tom Rini wrote:
-> > >> >>
-> > >> >> On Fri, Nov 25, 2011 at 12:31 AM, Frans Meulenbroeks wrote:
-> > >> >>
-> > >> >>> After all, isn't one of the purposes of OE to promote information
-> > >> >>> sharing,
-> > >> >>> cooperation and the use of openembedded technology (and not make
-things
-> > >> >>> harder).
-> > >> >>
-> > >> >> One of the points of making master read-only would be to ensure
-that
-> > >> >> changes aren't lost.
-> > >> >>
-> > >> >> Perhaps the transition needs to be:
-> > >> >> - master is as it is today
-> > >> >> - master becomes oe-core backport || master-only bugfixes only
-> > >> >> - master becomes read only.
-> > >> >>
-> > >> >> And we go from the first step to the second step sometime sooner
-> > >> >> rather than later.  The top of my head date would be before the
-> > >> >> paid-developers go on end of year breaks to try and make sure all
-the
-> > >> >> hobbyist folks start their hacking with oe-core+etc rather than
-master
-> > >> >> and risk getting caught later.  I'm open to arguments on why
-that's
-> > >> >> exactly backwards...
-> > >> >>
-> > >> >
-> > >> > Won't it be a problem for existing projects, if you cannot add
-fixes to
-> > >> cope
-> > >> > with new host OS versions.
-> > >> >
-> > >> > At the moment, openembedded-classic does not build properly with
-Ubuntu
-> > >> > 11.10 .
-> > >>
-> > >> Won't what be a problem?  Either oe-core+meta-oe+etc fails on 11.10
-> > >> (so, fix it there first then backport changes) or it's fine and you
-> > >> can either find the relevant changes there and move them or it's a
-> > >> oe.dev-only bug and just needs to be fixed, under my proposal (until
-> > >> we reach the point where everyone is OK calling it r/o).
-> > >>
-> > >> And part of this is to say that yes, existing projects external to
-> > >> oe.dev need to move to oe-core(+meta-oe+whatever else) (where layers
-> > >> should be making their life easier or again, there's problems we're
-> > >> unaware of and need to be made aware of) or explain why they can't
-> > >> ever move (and are forking the project?).
-> > >
-> > > See the message on NIOS that I just posted.
-> >
-> > Addressed there :)
-> >
-> > > Also I am not opposed to making oe classic master the place where
-patches
-> > > may land before they end up in the maintenance thread, but I am
-strongly
-> > > opposed to making OE classic read only on short notice (which as
-suggested
-> > > by Koen earlier).
-> >
-> > I believe master needs to go read-only, or at least
-> > backport||master-only-problems bugfix only, sooner rather than later.
-> >
-> > The arguments seem to be:
-> > - Some people or projects use master and can't move
-> > * So don't move, but do expect to need to either migrate to
-> > 2011.03-maintenance or carry more fixes locally.
->
-> This is still not understandable. I understand that you want developers
-> to move to OE-core and meta-oe. But trying to force people by making
-> master read-only is the wrong way. It just arbitrarily puts a burden on
-> current users. You can advertise prominently that OE-core and meta-oe
-> should be used. Over the time people will move and a lot of people have
-> expressed their willingness to move in the future.
->
+On Sat, Nov 26, 2011 at 20:37, Raffaele Recalcati <lamiaposta71@gmail.com>wrote:
+
+> ...
 
 Choosing now the baseline for dm3730 with my colleagues it seems that it
-will be arago, that is still oe-classic, because Ti is releasing dvsdk
-based on it. If Ti moves with arago to oe-core we move as well to it.
-Very clean and simple decision, isn't it?
+> will be arago, that is still oe-classic, because Ti is releasing dvsdk
+> based on it. If Ti moves with arago to oe-core we move as well to it.
+> Very clean and simple decision, isn't it?
 
-> > With my
-> > 2011.03-maintenance hat on, if someone says for my project to move I
-> > need N patches moved from master to maintenance, I'm fine reviewing
-> > that pull request.
->
-> I thought that was always possible in the past.
->
-> > - There's concern that $something won't be able to work with
-oe-core+meta-oe+etc
-> > * These are problems that either need to be fixed or assumptions that
-> > aren't correct.
-> >
-> > - Lack of recipes in meta-oe
-> > * The recipes people need have been moved, stuff that isn't can be
-> > when someone needs it.  id3lib was mentioned as an example of why
-> > there might be problems getting things moved to meta-oe.  I can't help
-> > but notice it's also been moved into meta-oe.
->
-> As Bernhard noted in this reply. OE-Core and meta-oe seriously lack
-> documentation. And if it is just that our Wiki currently is still based
-> on OE-classic. And in my experience not a lot of people put effort
-> behind it and just neglect it.
->
-> (New users will search for tutorials and help on the WWW and there
-> currently a lot is dealing with OE-classic.)
->
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+Yes and you deal with the fork of it by your own. Simple consequence, isn't
+it?
+
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
