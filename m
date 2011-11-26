@@ -1,49 +1,32 @@
-Received: from nm11.bullet.mail.ac4.yahoo.com ([98.139.52.208])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <brett.mcmillian@crossfieldtech.com>)
-	id 1RULsQ-0004V5-8y for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 18:17:22 +0100
-Received: from [98.139.52.195] by nm11.bullet.mail.ac4.yahoo.com with NNFMP;
-	26 Nov 2011 17:08:14 -0000
-Received: from [98.139.52.165] by tm8.bullet.mail.ac4.yahoo.com with NNFMP;
-	26 Nov 2011 17:08:14 -0000
-Received: from [127.0.0.1] by omp1048.mail.ac4.yahoo.com with NNFMP;
-	26 Nov 2011 17:08:14 -0000
-X-Yahoo-Newman-Id: 95617.81039.bm@omp1048.mail.ac4.yahoo.com
-Received: (qmail 8080 invoked from network); 26 Nov 2011 17:08:14 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1322327294; bh=wxGGDQeU+2IbOVaqh9eju702BsQoxqoDP8I+JvW2Xo0=;
-	h=X-Yahoo-Newman-Property:X-YMail-OSG:X-Yahoo-SMTP:Received:Subject:References:From:Content-Type:X-Mailer:In-Reply-To:Message-Id:Date:To:Content-Transfer-Encoding:Mime-Version;
-	b=ouKM85+TJeMNgnDcCx+OV3YIBc3ltK+51nA7yYiLUq8EjVvS09X6Xz8au1JBqJPsi390lZcbZIAMXcvJk+qznVKpEA43sEqPRRDZxMPgU/EimPjO48vpEJcYsHGArLiangNUFQvmy66+brSPecscPEurxHj/xSIbj0wi9Wqdu4k=
-X-Yahoo-Newman-Property: ymail-3
-X-YMail-OSG: xFePZEUVM1nuWbFudHif2ZuPyG4DpZCn4b2WTJLOw5uy4B7
-	yyzvdJx1rbBj.tY8mhbWwTQuFl1sd.pa.2heO7ScnjeKHs1.wX0G7f1lNVqn
-	t8ns9ujYxqbSAdra3hYchlKcR945nMD7gy6c3U9n8j93r2XbFJ6BDTMjhYdU
-	8nGye3q4SNWbuFDu2ood0wM2wUjCZaV_xBljHxipNtEHZX6NrkV4p9pTppGr
-	VYQu5b8WVuh2uF7wtC2b.wb6JINvAZzmm0ATUhFVM1zeVioZTOJ2mZA.88kY
-	StVoBkpqIfBvNS8qI4CzklxTod5jkbZiebgQWcslgQB1aDNHWlaBR_moRJM4
-	3gWsxcMUnJkoJoqwN7kMsU5OwYW9ALhk.Ibov4AiQOAA1ubQRCQCz2zr_rRr
-	.dXZVhoxCaWOf.yPi95kIR__uvQQzFhcy8Ae.dCs.kaAmcpENyzvtoAfY9SO
-	dukITZdfLKqKA1oz438SvM14Km_u7V9HLB_rjioFSiRUTRwhthY5EtOt865u
-	xBOvdtV57G8iYdRtQjreV1xhaGBzOjqeuQHAZNEwVpBQwgUk1uNTNKifXTmD
-	jHGCP.ddOhevCWl6s_Lq3uR4nCgtm_5CpsjYJkaMb8u5vtOG7fWiCFgnBe0E
-	Ho0sElOy78MjmabK6KU94D7RZzcPFKwZFBnM-
-X-Yahoo-SMTP: nnexsE.swBBZP0MgcFjP5wxnkPNXJHJOx4o.w1x4bFR9C0hTX2Q-
-Received: from [192.168.1.111] (brett.mcmillian@66.25.190.109 with xymcookie)
-	by smtp123-mob.biz.mail.ac4.yahoo.com with SMTP;
-	26 Nov 2011 09:08:13 -0800 PST
-References: <1322247176.91444.YahooMailRC@web5703.biz.mail.ne1.yahoo.com>
-	<CAEsOVNchsOnDwZhadFHUHDz98oLrXm0fk-gV=WHWf-iWCS2xGA@mail.gmail.com>
-	<CA+M6bXkH28ymg+CC+6bffS-KDHgpwaCneDZ_ezeThs7=ku7xNw@mail.gmail.com>
-From: Brett McMillian <brett.mcmillian@crossfieldtech.com>
-X-Mailer: iPhone Mail (9A334)
-In-Reply-To: <CA+M6bXkH28ymg+CC+6bffS-KDHgpwaCneDZ_ezeThs7=ku7xNw@mail.gmail.com>
-Message-Id: <C18C0503-C64F-4C86-818E-69656C62DF6C@crossfieldtech.com>
-Date: Sat, 26 Nov 2011 11:08:12 -0600
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (1.0)
-Subject: Re: Mac OS X & redhat-lsb
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ulf_samuelsson@telia.com>) id 1RUNTX-0007pC-FR
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Nov 2011 19:59:47 +0100
+Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 7E525EABA3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Nov 2011 19:53:08 +0100 (CET)
+X-SENDER-IP: [83.227.56.19]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ArEbAPs00U5T4zgTPGdsb2JhbAAMOIlKoU4BAQEBN4IkAQEBAQIBOEAGCwsYCRYPCQMCAQIBDyIUEwYCAQEVh2y1V4dNgxUElEqKVoc2
+X-IronPort-AV: E=Sophos;i="4.69,576,1315173600"; 
+   d="scan'208";a="3409692"
+Received: from c-1338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.19])
+	by ipb3.telenor.se with ESMTP; 26 Nov 2011 19:53:07 +0100
+Message-ID: <4ED13592.3060506@telia.com>
+Date: Sat, 26 Nov 2011 19:53:06 +0100
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Thunderbird/3.1.15
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>	<4ECD76E2.3040001@opendreambox.org>	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>	<1322134409.3391.21.camel@mattotaupa>	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>	<jalvr1$3bl$1@dough.gmane.org>	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>	<CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>	<CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>	<4ED0C603.9020900@telia.com>
+	<CA+M6bXmsbDoFS_8etRA+RYqkP7b0x8t998Tcmn9KyKhAbEP2ew@mail.gmail.com>
+In-Reply-To: <CA+M6bXmsbDoFS_8etRA+RYqkP7b0x8t998Tcmn9KyKhAbEP2ew@mail.gmail.com>
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,47 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2011 17:17:22 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 26 Nov 2011 18:59:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I tried both 2.6 and 2.7.  Same result.
+On 2011-11-26 16:20, Tom Rini wrote:
+> On Sat, Nov 26, 2011 at 3:57 AM, Ulf Samuelsson
+> <ulf_samuelsson@telia.com>  wrote:
+>> On 2011-11-25 23:04, Tom Rini wrote:
+>>> On Fri, Nov 25, 2011 at 12:31 AM, Frans Meulenbroeks
+>>> <fransmeulenbroeks@gmail.com>    wrote:
+>>>
+>>>> After all, isn't one of the purposes of OE to promote information
+>>>> sharing,
+>>>> cooperation and the use of openembedded technology (and not make things
+>>>> harder).
+>>> One of the points of making master read-only would be to ensure that
+>>> changes aren't lost.
+>>>
+>>> Perhaps the transition needs to be:
+>>> - master is as it is today
+>>> - master becomes oe-core backport || master-only bugfixes only
+>>> - master becomes read only.
+>>>
+>>> And we go from the first step to the second step sometime sooner
+>>> rather than later.  The top of my head date would be before the
+>>> paid-developers go on end of year breaks to try and make sure all the
+>>> hobbyist folks start their hacking with oe-core+etc rather than master
+>>> and risk getting caught later.  I'm open to arguments on why that's
+>>> exactly backwards...
+>>>
+>> Won't it be a problem for existing projects, if you cannot add fixes to cope
+>> with new host OS versions.
+>>
+>> At the moment, openembedded-classic does not build properly with Ubuntu
+>> 11.10 .
+> Won't what be a problem?  Either oe-core+meta-oe+etc fails on 11.10
+> (so, fix it there first then backport changes) or it's fine and you
+> can either find the relevant changes there and move them or it's a
+> oe.dev-only bug and just needs to be fixed, under my proposal (until
+> we reach the point where everyone is OK calling it r/o).
 
-Brett
+Making it R/O.
+/Ulf
 
 
+> And part of this is to say that yes, existing projects external to
+> oe.dev need to move to oe-core(+meta-oe+whatever else) (where layers
+> should be making their life easier or again, there's problems we're
+> unaware of and need to be made aware of) or explain why they can't
+> ever move (and are forking the project?).
+>
 
-On Nov 25, 2011, at 7:29 PM, Tom Rini <tom.rini@gmail.com> wrote:
 
-> On Fri, Nov 25, 2011 at 12:19 PM, McClintock Matthew-B29882
-> <B29882@freescale.com> wrote:
->> On Fri, Nov 25, 2011 at 12:52 PM, Brett McMillian
->> <brett.mcmillian@crossfieldtech.com> wrote:
->>> Here are the steps I have run successfully so far.
->>> 1) ./scripts/rhel5-oe.sh
->>> 2) Edited the first line of ./scripts/create-config.py to read:
->>> #!/usr/bin/python2.7
->>> 3) ./scripts/create-config.py --config-file=3Dfsl-p1022ds/sample-create-=
-config.ini
->>> --features=3D"native-development" -j 4 -t 2
->>> 4) source build_p1022ds_release/bitbake.rc
->>> 4) bitbake devel-image
->>=20
->> Just for everyone's information, some of this stuff is specfic to the
->> Freescale SDK. But, I think the rest should be valid.
->=20
-> OS X isn't a supported (nor functional) build environment today nor in
-> the snapshot that SDK is built from.  The first bit of problems sound
-> like a "well, try python 2.6 instead" but once you overcome that,
-> other things will fail.
->=20
-> --=20
-> Tom
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
