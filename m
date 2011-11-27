@@ -1,24 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUkAE-0000NW-PI for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 20:13:22 +0100
-Received: from f053040091.adsl.alicedsl.de ([78.53.40.91]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUk47-0001L6-Az for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 19:07:03 +0000
-Message-ID: <1322420806.7998.50.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2011 20:06:46 +0100
-In-Reply-To: <1414964.lPpRFmgCOe@helios>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RUmi4-0005JA-3n
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 22:56:28 +0100
+Received: by vbbfc21 with SMTP id fc21so2790215vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Nov 2011 13:49:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=wOt6s5SdV4xkXP9+L7nsCbRtAbALTW4Qs7qHv5W+KYs=;
+	b=kyDywd7ouvlExGN8eQ4G+9gf5YQyfDqZ9NPPpJCKRBRjb6FNQOkJOsXk3pjgpUru6x
+	Wi7xxuQoFkCJpyaU3s2MQtqA3XpqikjpoS6F8P5HPY/tUc5F+Y0F6lEhQbxWHXB14v2b
+	XEPnlbBNLQOpu864VrpQGMLXgj5MNRhHgsqVE=
+MIME-Version: 1.0
+Received: by 10.52.34.207 with SMTP id b15mr40877713vdj.19.1322430583400; Sun,
+	27 Nov 2011 13:49:43 -0800 (PST)
+Received: by 10.52.28.238 with HTTP; Sun, 27 Nov 2011 13:49:43 -0800 (PST)
+In-Reply-To: <1322420806.7998.50.camel@mattotaupa>
 References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
 	<15202278.8Gdc2a6et6@helios> <1322419119.7998.43.camel@mattotaupa>
-	<1414964.lPpRFmgCOe@helios>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
+	<1414964.lPpRFmgCOe@helios> <1322420806.7998.50.camel@mattotaupa>
+Date: Sun, 27 Nov 2011 22:49:43 +0100
+Message-ID: <CACW_hTZMQQ9uTTGhvCk1x6zgPpQRsUz64XTdyKYF5UKX_Fw=yg@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,81 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 19:13:22 -0000
-X-Groupsio-MsgNum: 35657
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-onYKdvhYreTsF+W3bxld"
+X-List-Received-Date: Sun, 27 Nov 2011 21:56:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-onYKdvhYreTsF+W3bxld
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Generally speaking writing documentation is difficult and a task not liked
+by most sw developers (me included).
+People should be encouraged and it should be as easy as possible.
+The more difficult it is, the less likely it is people will do it.
 
-Am Sonntag, den 27.11.2011, 18:56 +0000 schrieb Paul Eggleton:
-> On Sunday 27 November 2011 19:38:39 Paul Menzel wrote:
-> > Only Koen brought up the idea of the pull model. By itself, ikiwiki als=
-o
-> > allows Web edits [1].
->=20
-> Yes but what benefit do we get by changing the system? Only that the back=
-end=20
-> changes to git? Given that MediaWiki is familiar to many (thanks to Wikip=
-edia)=20
-> I would be hesitant to replace it with anything less widely understood.
+Then again I am not too sure what we need, given the yocto documentation.
 
-Everything is in one place. And developers are not familiar with
-MediaWiki or most of the time hate it to not be able to use their
-favorite editor and to use a Web interface.
+BTW and if a certain part of the wiki is for a specific purpose (e.g.
+related to a distro): in most wiki's it is possible to restrict access to
+certain pages to a specific group.
+Then again that all needs to be managed....
 
-Maybe a survey should be held. It is work in the beginning but would pay
-back in the end since this infrastructure should be used for a while. Or
-we just try it out.
+Frans
 
-> > Additionally, you have not addressed the point that reality shows, that
-> > not a lot of people write documentation and use it. The best way to
-> > =E2=80=9Cenforce=E2=80=9D this is to add documentation with the corresp=
-onding change.
->=20
-> I'm not sure I understand what you mean here. If you're suggesting that w=
-e=20
-> will be able to force people to write changes for the documentation toget=
-her=20
-> with their changes to the code, I think there are two problems with this:=
-=20
->   (1) it assumes that we already have complete documentation for the curr=
-ent=20
-> state of the code;
-
-Then people could update that part in one go or should at least add a
-TODO somewhere.
-
->   (2) given that writing meaningful commit messages is a challenge for ma=
-ny=20
-> contributors, you're going to have a very difficult time getting people t=
-o write=20
-> documentation for their changes as well.
-
-That is our choice to make. Either we want good documentation. Then we
-have to make this a requirement and contributors have to deal with that
-but will get help from the list too. Or we do not enforce this and
-probably the documentation will be lacking.
-
-
-Thanks,
-
-Paul
-
---=-onYKdvhYreTsF+W3bxld
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk7SikYACgkQPX1aK2wOHVhFRQCfe8v+mY06hpqaNcYfsTCuBc/7
-TwMAn0FdHSh6jPkOt/v+Zs9zxY4rdMt1
-=jC2S
------END PGP SIGNATURE-----
-
---=-onYKdvhYreTsF+W3bxld--
