@@ -1,25 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUjj2-0007mZ-Ln for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 19:45:16 +0100
-Received: from f053040091.adsl.alicedsl.de ([78.53.40.91]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUjcv-0001Cv-0K for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 18:38:57 +0000
-Message-ID: <1322419119.7998.43.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RUjzt-000056-Hw
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 20:02:41 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 27 Nov 2011 10:56:03 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="80417453"
+Received: from unknown (HELO helios.localnet) ([10.252.121.183])
+	by orsmga002.jf.intel.com with ESMTP; 27 Nov 2011 10:56:03 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2011 19:38:39 +0100
-In-Reply-To: <15202278.8Gdc2a6et6@helios>
+Date: Sun, 27 Nov 2011 18:56:01 +0000
+Message-ID: <1414964.lPpRFmgCOe@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <1322419119.7998.43.camel@mattotaupa>
 References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<CABcZANkBYxz8f3WE4VTJoKc3aThdLVY4WWN80UHGRKHi=r0wkw@mail.gmail.com>
-	<CACW_hTay+0OU8PcgSJnELiDpDWTT_CeP-ahKf6HCxwtgydG97Q@mail.gmail.com>
-	<15202278.8Gdc2a6et6@helios>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
+	<15202278.8Gdc2a6et6@helios> <1322419119.7998.43.camel@mattotaupa>
+MIME-Version: 1.0
 Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,89 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 18:45:16 -0000
-X-Groupsio-MsgNum: 35655
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-qmA9DvfKERUHXmqKaxqK"
-
---=-qmA9DvfKERUHXmqKaxqK
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 27 Nov 2011 19:02:41 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-Am Sonntag, den 27.11.2011, 17:06 +0000 schrieb Paul Eggleton:
-> On Sunday 27 November 2011 17:58:00 Frans Meulenbroeks wrote:
-> > What is the problem with being it a wiki (probably with authorized user=
-s to
-> > avoid spam).
-> >=20
-> > I'd say let everyone who wants to contribute.
-> > If someone makes a mistake it can easily be corrected and/or reverted, =
-and
-> > if someone messes things up on purpose and/or creates more bad than goo=
-d
-> > such a (non)contributor can be banned.
-> >=20
-> > Disadvantage of a pull model is:
-> > - more difficult to make changes (e.g. if I see a typo in a wiki and I =
-have
-> > write permission, I'll fix it; however if it invokes checking out a fil=
-e,
-> > make the edit, commit it, mail a pull request, most likely I'll decide =
-it
-> > is not worth the effort
-> > - more administrative workload (that is probably better spent on actual=
-ly
-> > doing things).
-> > - It sends out a message of distrust. Not really a good way to create
-> > involvement.
-> >=20
-> > One might feel that it improves quality; then again also in a wiki one =
-can
-> > review and improve (or revert) changes.
-> >=20
-> > As far as I see it we are all adults (at least I think so) all interest=
-ed
-> > in improving OE so no unnecessary barriers should be raised.
-> >=20
-> > Frans.
-> >=20
-> > PS: it is quite possible to backup a wiki (and I hope this is done at
-> > regular intervals with our wiki). Also all edits are recorded so they c=
-an
-> > always be tracked back and (if needed) undone.
->=20
-> I agree with all of this. We shouldn't be putting more barriers up to=20
-> contributing to the documentation - there are already enough.
+On Sunday 27 November 2011 19:38:39 Paul Menzel wrote:
+> Only Koen brought up the idea of the pull model. By itself, ikiwiki a=
+lso
+> allows Web edits [1].
 
-Only Koen brought up the idea of the pull model. By itself, ikiwiki also
-allows Web edits [1].
-
-Additionally, you have not addressed the point that reality shows, that
-not a lot of people write documentation and use it. The best way to
-=E2=80=9Cenforce=E2=80=9D this is to add documentation with the correspondi=
-ng change.
+Yes but what benefit do we get by changing the system? Only that the ba=
+ckend=20
+changes to git? Given that MediaWiki is familiar to many (thanks to Wik=
+ipedia)=20
+I would be hesitant to replace it with anything less widely understood.=
 
 
-Thanks,
+> Additionally, you have not addressed the point that reality shows, th=
+at
+> not a lot of people write documentation and use it. The best way to
+> =E2=80=9Cenforce=E2=80=9D this is to add documentation with the corre=
+sponding change.
 
+I'm not sure I understand what you mean here. If you're suggesting that=
+ we=20
+will be able to force people to write changes for the documentation tog=
+ether=20
+with their changes to the code, I think there are two problems with thi=
+s:=20
+  (1) it assumes that we already have complete documentation for the cu=
+rrent=20
+state of the code;
+  (2) given that writing meaningful commit messages is a challenge for =
+many=20
+contributors, you're going to have a very difficult time getting people=
+ to write=20
+documentation for their changes as well.
+
+Cheers,
 Paul
 
+--=20
 
-[1] http://ikiwiki.info/
-    (just click on edit)
+Paul Eggleton
+Intel Open Source Technology Centre
 
---=-qmA9DvfKERUHXmqKaxqK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk7Sg68ACgkQPX1aK2wOHVgAqACggj+Gx6kYhpHRY7lnISRQpstQ
-ezMAnRfCXbwMOd0a29jYRuK2ds6/RkQw
-=wGQN
------END PGP SIGNATURE-----
-
---=-qmA9DvfKERUHXmqKaxqK--
