@@ -1,23 +1,33 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RUfpq-000114-Ez
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 15:36:02 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 27 Nov 2011 06:29:24 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="80381641"
-Received: from unknown (HELO helios.localnet) ([10.252.121.183])
-	by orsmga002.jf.intel.com with ESMTP; 27 Nov 2011 06:29:23 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RUh0f-0002mk-Pg for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 16:51:21 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RUguD-0004v9-OZ for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 16:44:37 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Nov 2011 16:44:37 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Nov 2011 16:44:37 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2011 14:29:22 +0000
-Message-ID: <1585839.h8q1bxhDN3@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 27 Nov 2011 16:44:24 +0100
+Message-ID: <jatlso$idi$1@dough.gmane.org>
 References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-MIME-Version: 1.0
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+X-Enigmail-Version: 1.3.3
 Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,33 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 14:36:02 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 27 Nov 2011 15:51:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Saturday 26 November 2011 19:40:48 Tom Rini wrote:
-> As things stand today, the wiki is out of date and a number of folks
-> refuse to work on it. 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The question is why do they refuse to work on it? And would throwing out our 
-current wiki and setting up something completely new and different actually 
-solve the issue? I suspect the problem is more that people feel they can't 
-make time for writing documentation or simply aren't interested.
+Op 27-11-11 03:40, Tom Rini schreef:
+> Hey all,
+> 
+> As things stand today, the wiki is out of date and a number of folks 
+> refuse to work on it.
 
-For a long time because of spam problems it was impossible for anyone outside 
-a set few to edit the wiki. I thought this was resolved already but I could be 
-wrong.
+Does it actually need to be a wiki? Or rather: do web edits need to show up
+immediately?
 
-I think the best thing would be if we could come up with a set of proposed 
-topics to cover and a basic structure and get volunteers to start working on 
-each item.
+> Paul Menzel has mentioned that ikiwiki has been mentioned before and that
+> lets us have the website in a repository.  Do folks have other ideas?
 
-Cheers,
-Paul
+I really like the idea of storing the content in git since it gives us 2
+things we need for documentation: backups and a pull model.
 
--- 
+regards,
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7SWs8ACgkQMkyGM64RGpG2pQCdEJpV4Qx8QiE12s1GgHA1JCaV
+I7YAoIQxzH9Io1NcddPecgOK8HDWRU+3
+=jo70
+-----END PGP SIGNATURE-----
+
 
 
