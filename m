@@ -1,26 +1,37 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RUiHh-0005Q7-KQ
+	(envelope-from <tom.rini@gmail.com>) id 1RUiR7-0005g6-4W
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 18:12:57 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 27 Nov 2011 09:06:19 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="80228446"
-Received: from unknown (HELO helios.localnet) ([10.252.121.183])
-	by orsmga001.jf.intel.com with ESMTP; 27 Nov 2011 09:06:19 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2011 17:06:16 +0000
-Message-ID: <15202278.8Gdc2a6et6@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <CACW_hTay+0OU8PcgSJnELiDpDWTT_CeP-ahKf6HCxwtgydG97Q@mail.gmail.com>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<CABcZANkBYxz8f3WE4VTJoKc3aThdLVY4WWN80UHGRKHi=r0wkw@mail.gmail.com>
-	<CACW_hTay+0OU8PcgSJnELiDpDWTT_CeP-ahKf6HCxwtgydG97Q@mail.gmail.com>
+	Sun, 27 Nov 2011 18:22:43 +0100
+Received: by qaea17 with SMTP id a17so687400qae.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Nov 2011 09:15:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=jikfgAzMKYrt0/sNeFef4cO5+lgMrFaHdGd0GxUxqWA=;
+	b=ceKBQfxFovIFJrnIzWTkr4lVip+S87b4Y7G4+KmL4bPg+Qcx4KCTi90YIjibddM2gS
+	Maami8H6n0ohXO7Q4dC03XntRDr72g4uvixI8PkyokZ5QbHoLphHC1zfn9omb+BW2CFw
+	KF6fyPGLF26lQPmgFprwEJjD881V3vbmNJmS0=
 MIME-Version: 1.0
-Subject: Re: Documentation problems
+Received: by 10.224.180.131 with SMTP id bu3mr12780685qab.5.1322414159257;
+	Sun, 27 Nov 2011 09:15:59 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Sun, 27 Nov 2011 09:15:59 -0800 (PST)
+In-Reply-To: <CACW_hTZonV9m3U+gUTBBG2hEL2C9hzDLJrdZt+nM7qcn2LunQw@mail.gmail.com>
+References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
+	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
+	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
+	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
+	<4ECD76E2.3040001@opendreambox.org>
+	<CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
+	<CACW_hTbDBOV9yikTqpeVDif1J0oCcEorj=vMB1BcRsZG=0gzKg@mail.gmail.com>
+	<CA+M6bXkTP9BPgEx_3ykwKJuv73s+0WAsJH_NwRbFEo=ZERhC0A@mail.gmail.com>
+	<CACW_hTZonV9m3U+gUTBBG2hEL2C9hzDLJrdZt+nM7qcn2LunQw@mail.gmail.com>
+Date: Sun, 27 Nov 2011 10:15:59 -0700
+Message-ID: <CA+M6bXmXavWA1ruhSQk4+ryvtnq3t9g-b7SGUkuB7=4tPaf3_Q@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,50 +45,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 17:12:57 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 27 Nov 2011 17:22:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sunday 27 November 2011 17:58:00 Frans Meulenbroeks wrote:
-> What is the problem with being it a wiki (probably with authorized users to
-> avoid spam).
-> 
-> I'd say let everyone who wants to contribute.
-> If someone makes a mistake it can easily be corrected and/or reverted, and
-> if someone messes things up on purpose and/or creates more bad than good
-> such a (non)contributor can be banned.
-> 
-> Disadvantage of a pull model is:
-> - more difficult to make changes (e.g. if I see a typo in a wiki and I have
-> write permission, I'll fix it; however if it invokes checking out a file,
-> make the edit, commit it, mail a pull request, most likely I'll decide it
-> is not worth the effort
-> - more administrative workload (that is probably better spent on actually
-> doing things).
-> - It sends out a message of distrust. Not really a good way to create
-> involvement.
-> 
-> One might feel that it improves quality; then again also in a wiki one can
-> review and improve (or revert) changes.
-> 
-> As far as I see it we are all adults (at least I think so) all interested
-> in improving OE so no unnecessary barriers should be raised.
-> 
-> Frans.
-> 
-> PS: it is quite possible to backup a wiki (and I hope this is done at
-> regular intervals with our wiki). Also all edits are recorded so they can
-> always be tracked back and (if needed) undone.
+On Sun, Nov 27, 2011 at 2:55 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2011/11/26 Tom Rini <tom.rini@gmail.com>
+>
+>> On Sat, Nov 26, 2011 at 8:45 AM, Frans Meulenbroeks
+>>
+>> >
+>> > Well, there is at least the issue of machines and architectures.
+>> > Now it is probably not too big a deal to bring over a new machine and
+>> turn
+>> > it into a BSP layers, but adding another architecture is yet another
+>> thing.
+>> >
+>> > We do have products that are based upon NIOS II. This architecture is
+>> > present in OE classic and not in OE core.
+>> > One of the issues is that the NIOS II toolchain is still based upon
+>> (iirc)
+>> > gcc 4.1.1
+>> > I do not see an upgrade of gcc/niosii happen in the near future (In th=
+e
+>> > past I did spent some time to see if I could move to a newer version, =
+but
+>> > there were some issues, and afaik no one is working on this atm), and =
+I
+>> > doubt oe-core is interested in having a 4.1.1 toolchain around.
+>>
+>> An external toolchain should be fine. =A0You should also be able to put
+>> that gcc & company into meta-niosii. =A0If you can't, then IMHO, there's
+>> a problem someone needs to look at. =A0But I suspect there isn't a
+>> problem doing that.
+>>
+>
+> In oe-classic it is not an external toolchain. It is also a CPU
+> architecture.
 
-I agree with all of this. We shouldn't be putting more barriers up to 
-contributing to the documentation - there are already enough.
+Right.  I'm saying that on the path to migration using OE classic to
+export a NIOS II toolchain as an external toolchain and having
+meta-niosii start by using that would save some headache.   Get the
+basics building and working then bring in the toolchain.
 
-Cheers,
-Paul
+> It mgiht be possible to make an external toolchain for it, but that does
+> not allow
+> saying things in recipes like: FILES_niosii +=3D in other recipes (iirc t=
+here
+> are a few of these)
+>
+> Moving the recipes to meta-niosii could also be done, and is probably
+> better as the toolchain is a set of OE recipes. I'm not sure if it is
+> possible to solve the ARCH problem that way, but one might get away with =
+it
+> by e.g. bbappend-ing in all relevant recipes. This seems a fair amount of
+> work, so I guess this is not going to happen overnight.
 
--- 
+Yes, meta-niosii would have some bbappend files and a copy of a few
+bbclass files until those parts ARCH parts can be merged.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+[snip]
+> I feel that if meta-oe is considered an openembedded layer, its guideline=
+s
+> should be made clear.
+
+Agreed.
+
+--=20
+Tom
 
 
