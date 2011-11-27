@@ -1,53 +1,26 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RUjWk-0007Uh-EM
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 19:32:34 +0100
-Received: by qyk30 with SMTP id 30so1102455qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 10:25:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=hGS9/xCT/+Dt2c4s5Nys7iVL4L847ZBWcTP9oQKtPbY=;
-	b=CerBS6M8wa/+Gfr3Lf5nEoYCprjYuYQ/zhPXTpUcaedByT0s+ue7MB5UTSsTuAsU2J
-	B2877jrZUUiWkaD2qYikhOyKCAZINpQxl6JY3aTeAjiFGE2NQ72wpVavMamsXDo97iKY
-	XMINdWP/ufj8wfHezqSVDzEW+/5q7RuksjvP4=
-MIME-Version: 1.0
-Received: by 10.224.180.131 with SMTP id bu3mr12842172qab.5.1322418355719;
-	Sun, 27 Nov 2011 10:25:55 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Sun, 27 Nov 2011 10:25:55 -0800 (PST)
-In-Reply-To: <CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org>
-	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
-	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
-	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
-	<1322134409.3391.21.camel@mattotaupa>
-	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
-	<jalvr1$3bl$1@dough.gmane.org>
-	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
-	<CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>
-	<CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>
-	<4ED0C603.9020900@telia.com>
-	<CA+M6bXmsbDoFS_8etRA+RYqkP7b0x8t998Tcmn9KyKhAbEP2ew@mail.gmail.com>
-	<CACW_hTZ6tkRGj938SAg4xmENwe-qRZMGpE=8-KvexQydgD-m_w@mail.gmail.com>
-	<CA+M6bXnGhgrzZSuOe99ViWU=eZ5+Q+exWqWkstFJM-MCYzc6zQ@mail.gmail.com>
-	<1322344896.16303.49.camel@mattotaupa>
-	<CA+M6bXkfDtMOE6RUDbGCc59CFaGijCcc=Abj7sqh2veEVYvM-A@mail.gmail.com>
-	<1322347742.16303.66.camel@mattotaupa>
-	<CA+M6bX=FNKdJ-BrctoqhnzRzV=Hg41BXSx5pCODx3xrMyVnwfg@mail.gmail.com>
-	<CACW_hTbyuhWH8_B_=r0UM-MEq_N_=SwwZ7WP7Wi5RPO6mtxudA@mail.gmail.com>
-	<CA+M6bXkMqS6frOYwvGmLQwvSYWerYzC5fX4sXXu0hO1ogPwXhA@mail.gmail.com>
-	<CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
-Date: Sun, 27 Nov 2011 11:25:55 -0700
-Message-ID: <CA+M6bXmKsZmFTjrhMuouj3cYKHJX9e7t3gSUTTyf4nBzXr5g-A@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RUjj2-0007mZ-Ln for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 19:45:16 +0100
+Received: from f053040091.adsl.alicedsl.de ([78.53.40.91]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RUjcv-0001Cv-0K for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 18:38:57 +0000
+Message-ID: <1322419119.7998.43.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Plans for OE classic future
+Date: Sun, 27 Nov 2011 19:38:39 +0100
+In-Reply-To: <15202278.8Gdc2a6et6@helios>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<CABcZANkBYxz8f3WE4VTJoKc3aThdLVY4WWN80UHGRKHi=r0wkw@mail.gmail.com>
+	<CACW_hTay+0OU8PcgSJnELiDpDWTT_CeP-ahKf6HCxwtgydG97Q@mail.gmail.com>
+	<15202278.8Gdc2a6et6@helios>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,79 +34,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 18:32:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Nov 2011 18:45:16 -0000
+X-Groupsio-MsgNum: 35655
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-qmA9DvfKERUHXmqKaxqK"
+
+--=-qmA9DvfKERUHXmqKaxqK
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 27, 2011 at 10:25 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2011/11/27 Tom Rini <tom.rini@gmail.com>
->
->> On Sun, Nov 27, 2011 at 3:12 AM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> wrote:
->> > Personally I think we are not yet at at point where we should move OE
->> > classic to a pull/patches model. Give it some time.
->>
->> So, why are we not at that point yet for OE classic? =A0I'd like to
->> think I've been timely in my pulls.
->
-> I'm not saying you are not timely. Au contraire, you are.
+Am Sonntag, den 27.11.2011, 17:06 +0000 schrieb Paul Eggleton:
+> On Sunday 27 November 2011 17:58:00 Frans Meulenbroeks wrote:
+> > What is the problem with being it a wiki (probably with authorized user=
+s to
+> > avoid spam).
+> >=20
+> > I'd say let everyone who wants to contribute.
+> > If someone makes a mistake it can easily be corrected and/or reverted, =
+and
+> > if someone messes things up on purpose and/or creates more bad than goo=
+d
+> > such a (non)contributor can be banned.
+> >=20
+> > Disadvantage of a pull model is:
+> > - more difficult to make changes (e.g. if I see a typo in a wiki and I =
+have
+> > write permission, I'll fix it; however if it invokes checking out a fil=
+e,
+> > make the edit, commit it, mail a pull request, most likely I'll decide =
+it
+> > is not worth the effort
+> > - more administrative workload (that is probably better spent on actual=
+ly
+> > doing things).
+> > - It sends out a message of distrust. Not really a good way to create
+> > involvement.
+> >=20
+> > One might feel that it improves quality; then again also in a wiki one =
+can
+> > review and improve (or revert) changes.
+> >=20
+> > As far as I see it we are all adults (at least I think so) all interest=
+ed
+> > in improving OE so no unnecessary barriers should be raised.
+> >=20
+> > Frans.
+> >=20
+> > PS: it is quite possible to backup a wiki (and I hope this is done at
+> > regular intervals with our wiki). Also all edits are recorded so they c=
+an
+> > always be tracked back and (if needed) undone.
+>=20
+> I agree with all of this. We shouldn't be putting more barriers up to=20
+> contributing to the documentation - there are already enough.
 
-OK.  So provided we have an easy way to make pull requests of trees
-hosted on oe.org (like oe-core/meta-oe today), are there any other
-objections to moving towards pull request model for classic OE?
+Only Koen brought up the idea of the pull model. By itself, ikiwiki also
+allows Web edits [1].
 
->> > I understand the concerns with people using master for new projects, b=
-ut
->> I
->> > also understand the concerns of people that for one reason or another =
-are
->> > still bound to oe-classic.
->> >
->> > I feel that it also would be helpful to have some sort of staging area
->> > where people can update things before they are pulled. Doing that
->> > distributed not really creates visibility to those changes, so I'd say=
- it
->> > is better to keep that centralized. Might even be more convenient too.
->>
->> We already have this for oe-core/meta-oe so it shouldn't be hard to
->> make up a contrib repo for classic OE, for folks that don't want to
->> just fork the mirror on github.
->>
->
-> Whether it is a branch or a separate repo does not make too much of a
-> difference (at least not to me).
-> It was my impression that a branch would work a little bit simpler, but I
-> may well be mistaken here.
-
-My understanding of the git server side of things is a contrib repo is
-easier to setup and manage permission-wise.
-
->> > That still leaves the issue of new projects.
->> > What if we decide to rename master to e.g. maintenance-staging, or
->> legacy,
->> > or classic or whatever you want to; keeping it as it is now (so not R/=
-O),
->> > and have a new master that is R/O and only contains a document with so=
-me
->> > explanation and referring to oe-core for new projects. This doc could
->> > mention the legacy branch together with a statement that it is not
->> desired
->> > for new projects, but mainly there for maintenance/testing purposes.
->>
->> The only part here I object to is saying we need an anyone-can-write
->> branch.
->>
->
-> If it is a contrib repo or overlay fine with me.
-> I do think it is probably convenient that it should be an
-> anyone-who-is-authorized-can-write repo/overlay/branch/whatever, in order
-> not to unneededly raise the barrier to submit patches.
-
-So, like we do today for openembedded-core-contrib / meta-openembedded-cont=
-rib?
-
---=20
-Tom
+Additionally, you have not addressed the point that reality shows, that
+not a lot of people write documentation and use it. The best way to
+=E2=80=9Cenforce=E2=80=9D this is to add documentation with the correspondi=
+ng change.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://ikiwiki.info/
+    (just click on edit)
+
+--=-qmA9DvfKERUHXmqKaxqK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk7Sg68ACgkQPX1aK2wOHVgAqACggj+Gx6kYhpHRY7lnISRQpstQ
+ezMAnRfCXbwMOd0a29jYRuK2ds6/RkQw
+=wGQN
+-----END PGP SIGNATURE-----
+
+--=-qmA9DvfKERUHXmqKaxqK--
