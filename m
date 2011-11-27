@@ -1,36 +1,23 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RUbYs-0002QK-Ii
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 11:02:16 +0100
-Received: by vcbfo13 with SMTP id fo13so1178919vcb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 01:55:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=zeroLrmF/FoG3IS+T5LpFyDWvd6C7/DiqDKPQQRlfn0=;
-	b=OMOHbeJosLhVO6ldlbpYgENCSZ6qPExq8dqTy3UOUtl0NfOvv+qptScnbmHYMGZn0F
-	yoe6fG60aY4dolmMlHc8864f5zkLjOyE5MdP8xqvFGC4q1Hp35DVVELKeQuuqPRTxdOI
-	+yA2iqw8TgT9ZTwRUIReaZSwwu3r1JmY//Bq8=
-MIME-Version: 1.0
-Received: by 10.52.34.207 with SMTP id b15mr39241112vdj.19.1322387737553; Sun,
-	27 Nov 2011 01:55:37 -0800 (PST)
-Received: by 10.52.28.238 with HTTP; Sun, 27 Nov 2011 01:55:37 -0800 (PST)
-In-Reply-To: <CA+M6bXkTP9BPgEx_3ykwKJuv73s+0WAsJH_NwRbFEo=ZERhC0A@mail.gmail.com>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org>
-	<CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
-	<CACW_hTbDBOV9yikTqpeVDif1J0oCcEorj=vMB1BcRsZG=0gzKg@mail.gmail.com>
-	<CA+M6bXkTP9BPgEx_3ykwKJuv73s+0WAsJH_NwRbFEo=ZERhC0A@mail.gmail.com>
-Date: Sun, 27 Nov 2011 10:55:37 +0100
-Message-ID: <CACW_hTZonV9m3U+gUTBBG2hEL2C9hzDLJrdZt+nM7qcn2LunQw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RUbbf-0002d3-Qc for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 11:05:09 +0100
+Received: from f053040091.adsl.alicedsl.de ([78.53.40.91]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RUbVX-0006gv-RD for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 09:58:48 +0000
+Message-ID: <1322387906.7998.20.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Plans for OE classic future
+Date: Sun, 27 Nov 2011 10:58:26 +0100
+In-Reply-To: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [RFC] Documentation problems and future plans
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,80 +31,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 10:02:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Nov 2011 10:05:09 -0000
+X-Groupsio-MsgNum: 35642
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-wQ6iFYTsXLcl69Yspwd5"
 
-2011/11/26 Tom Rini <tom.rini@gmail.com>
+--=-wQ6iFYTsXLcl69Yspwd5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On Sat, Nov 26, 2011 at 8:45 AM, Frans Meulenbroeks
->
-> >
-> > Well, there is at least the issue of machines and architectures.
-> > Now it is probably not too big a deal to bring over a new machine and
-> turn
-> > it into a BSP layers, but adding another architecture is yet another
-> thing.
-> >
-> > We do have products that are based upon NIOS II. This architecture is
-> > present in OE classic and not in OE core.
-> > One of the issues is that the NIOS II toolchain is still based upon
-> (iirc)
-> > gcc 4.1.1
-> > I do not see an upgrade of gcc/niosii happen in the near future (In the
-> > past I did spent some time to see if I could move to a newer version, but
-> > there were some issues, and afaik no one is working on this atm), and I
-> > doubt oe-core is interested in having a 4.1.1 toolchain around.
->
-> An external toolchain should be fine.  You should also be able to put
-> that gcc & company into meta-niosii.  If you can't, then IMHO, there's
-> a problem someone needs to look at.  But I suspect there isn't a
-> problem doing that.
->
+Dear everyone,
 
-In oe-classic it is not an external toolchain. It is also a CPU
-architecture.
-It mgiht be possible to make an external toolchain for it, but that does
-not allow
-saying things in recipes like: FILES_niosii += in other recipes (iirc there
-are a few of these)
 
-Moving the recipes to meta-niosii could also be done, and is probably
-better as the toolchain is a set of OE recipes. I'm not sure if it is
-possible to solve the ARCH problem that way, but one might get away with it
-by e.g. bbappend-ing in all relevant recipes. This seems a fair amount of
-work, so I guess this is not going to happen overnight.
+Am Samstag, den 26.11.2011, 19:40 -0700 schrieb Tom Rini:
 
-BTW if this is felt to be a good plan then we might consider moving all
-arch specific bits into an arch specific layer. (not too sure if that is a
-good plan though).
+> As things stand today, the wiki is out of date and a number of folks
+> refuse to work on it.  Using things like "It's all text!" for firefox
+> only go so far and don't solve problems like people just avoiding
+> documentation anyhow.
 
->
-> > Therefore probably our next niosii project will still be oe-classic
-> based.
-> > On the other hand we also have ppc projects and the next one might quite
-> > well use oe-core (it is too late to switch for the current one as we need
-> > to release next month).
-> >
-> > (and more general: oe classic still has quite some recipes that are not
-> in
-> > oe-core or meta-oe (apart from the fact that the latter is not really too
-> > open to contributions; see the email thread on id3lib from a while ago).
->
-> Where someone asked Koen to document the differences between oe-core
-> requirements and meta-oe requirements?  Yes, that's reasonable but
-> lets not fool ourselves either, it's not vastly different, it's PR =
-> r0 or not (and PR is supposed to go away).
->
+the Special Pages page [1] has interesting information. For example you
+can get an overview of the recent changes in the Wiki [2].
 
-I feel that if meta-oe is considered an openembedded layer, its guidelines
-should be made clear.
-Also in that case it does seem desirable to use the same guidelines as OE
-core uses where possible and only deviate if really needed (and in the PR
-case there is probably no such compelling reason).
-This last section may be off-topic for the discussion at hand, but it might
-explain some of the reluctance to contribute to meta-oe and move to meta-oe.
+> Paul Menzel has mentioned that ikiwiki has been mentioned before and
+> that lets us have the website in a repository.  Do folks have other
+> ideas?
 
-Might be a topic for the TSC to discuss too.
+Before the implementation is discussed, could we decide what
+documentation we need and what is possible to maintain in the long run?
+Avoiding maintenance and duplicate efforts should be the objective.
 
-Frans
+1. User manual
+2. FAQ
+3. README
+4. Guidelines (Commit, patch, style)
+5. Getting started document (could be included in 1.)
+6. Git usage (a lot of existing documentation for that one elsewhere) or
+can be put in a file `HACKING`.
+7. =E2=80=A6
 
+Formatted in a markup language like Markdown those could be converted to
+HTML easily.
+
+The second question is, is OE-core documented in the OE wiki or for
+example at the Yocto project?
+
+To get users started we could also recommend to use the =C8=A6ngstr=C3=B6m =
+scripts
+or to take a look at the Yocto project, i. e. just point to
+distributions being well documented.
+
+They have a Wiki already [3] and we could decide to use that instead. Or
+we could say to use use the Wiki at eLinux.org [4].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://www.openembedded.org/wiki/Special:SpecialPages
+[2] http://www.openembedded.org/wiki/Special:RecentChanges
+[3] https://wiki.yoctoproject.org/wiki/Main_Page
+[4] http://elinux.org/Main_Page
+
+--=-wQ6iFYTsXLcl69Yspwd5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk7SCcIACgkQPX1aK2wOHVjcRwCbBN6fNKBP6Adb2pMl6SqCWtSM
+/u8An3TGxmIgrJhqSoPX6kKfH0rGZxq6
+=Pqvb
+-----END PGP SIGNATURE-----
+
+--=-wQ6iFYTsXLcl69Yspwd5--
