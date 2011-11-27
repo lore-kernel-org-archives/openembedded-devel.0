@@ -1,24 +1,24 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1RUda9-0006DZ-7Z
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RUfpq-000114-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 13:11:41 +0100
-Received: by wwf22 with SMTP id 22so5638954wwf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 04:05:01 -0800 (PST)
-Received: by 10.216.132.224 with SMTP id o74mr969779wei.53.1322395498687;
-	Sun, 27 Nov 2011 04:04:58 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id x8sm13101669wix.17.2011.11.27.04.04.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 27 Nov 2011 04:04:57 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Sun, 27 Nov 2011 15:36:02 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 27 Nov 2011 06:29:24 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="80381641"
+Received: from unknown (HELO helios.localnet) ([10.252.121.183])
+	by orsmga002.jf.intel.com with ESMTP; 27 Nov 2011 06:29:23 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2011 13:04:53 +0100
-Message-Id: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe] digitemp: fix QA issues:
+Date: Sun, 27 Nov 2011 14:29:22 +0000
+Message-ID: <1585839.h8q1bxhDN3@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,48 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 12:11:41 -0000
+X-List-Received-Date: Sun, 27 Nov 2011 14:36:02 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* missing SRC_URI checksums
-* GNU_HASH QA errors:
-	WARNING: QA Issue: No GNU_HASH in the elf binary: '/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/digitemp-3.6.0-r2/packages-split/digitemp/usr/sbin/digitemp_DS9097U'
-	WARNING: QA Issue: No GNU_HASH in the elf binary: '/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/digitemp-3.6.0-r2/packages-split/digitemp/usr/sbin/digitemp_DS9097'
-* $(uname -s) access
+On Saturday 26 November 2011 19:40:48 Tom Rini wrote:
+> As things stand today, the wiki is out of date and a number of folks
+> refuse to work on it. 
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb |   12 ++++++++----
- 1 files changed, 8 insertions(+), 4 deletions(-)
+The question is why do they refuse to work on it? And would throwing out our 
+current wiki and setting up something completely new and different actually 
+solve the issue? I suspect the problem is more that people feel they can't 
+make time for writing documentation or simply aren't interested.
 
-diff --git a/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
-index 395e56a..0ac8fa3 100644
---- a/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
-+++ b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
-@@ -4,14 +4,18 @@ DEPENDS = "libusb1"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
- 
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "http://www.digitemp.com/software/linux/digitemp-${PV}.tar.gz \
-            file://makefile-fix.patch"
-+SRC_URI[md5sum] = "9be2e48db37920f21925ae6e88f83b84"
-+SRC_URI[sha256sum] = "14cfc584cd3714fe8c9a2cdc8388be49e08b5e395d95e6bcd11d4410e2505ca2"
- 
--inherit autotools
--
--EXTRA_OEMAKE = "ds9097 ds9097u"
-+EXTRA_OEMAKE = "ds9097 ds9097u \
-+                SYSTYPE='Linux' \
-+               "
-+# Fix GNU_HASH QA errors
-+TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
- 
- do_configure() {
-     rm -f digitemp_*
+For a long time because of spam problems it was impossible for anyone outside 
+a set few to edit the wiki. I thought this was resolved already but I could be 
+wrong.
+
+I think the best thing would be if we could come up with a set of proposed 
+topics to cover and a basic structure and get volunteers to start working on 
+each item.
+
+Cheers,
+Paul
+
 -- 
-1.7.2.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
