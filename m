@@ -1,36 +1,51 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RUiR7-0005g6-4W
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RUiae-0005x0-4v
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 18:22:43 +0100
-Received: by qaea17 with SMTP id a17so687400qae.6
+	Sun, 27 Nov 2011 18:32:32 +0100
+Received: by vcbfo13 with SMTP id fo13so1298130vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 09:15:59 -0800 (PST)
+	Sun, 27 Nov 2011 09:25:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=jikfgAzMKYrt0/sNeFef4cO5+lgMrFaHdGd0GxUxqWA=;
-	b=ceKBQfxFovIFJrnIzWTkr4lVip+S87b4Y7G4+KmL4bPg+Qcx4KCTi90YIjibddM2gS
-	Maami8H6n0ohXO7Q4dC03XntRDr72g4uvixI8PkyokZ5QbHoLphHC1zfn9omb+BW2CFw
-	KF6fyPGLF26lQPmgFprwEJjD881V3vbmNJmS0=
+	:content-type; bh=LLrmfFj8y4jhrcDiODJhVtg9a4g/PHisRzPmZPTdv0c=;
+	b=YCdu9+DX2RNBSLuDzdDhs5k+rkbdoZ66tbaZk8gU8ZokszM+0TfpDCwG+aYYJaeFFj
+	WfUYqzTvTYX+jhsu0SZuYYqv0XpAFljegRqtC7QQFJQdrBIK9PFCRP5Inh6IIiSauTtK
+	sXfdFkRyBwtZf2h989qqT0q7hjDQ3hGNpwkyI=
 MIME-Version: 1.0
-Received: by 10.224.180.131 with SMTP id bu3mr12780685qab.5.1322414159257;
-	Sun, 27 Nov 2011 09:15:59 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Sun, 27 Nov 2011 09:15:59 -0800 (PST)
-In-Reply-To: <CACW_hTZonV9m3U+gUTBBG2hEL2C9hzDLJrdZt+nM7qcn2LunQw@mail.gmail.com>
+Received: by 10.220.148.68 with SMTP id o4mr4080119vcv.123.1322414751655; Sun,
+	27 Nov 2011 09:25:51 -0800 (PST)
+Received: by 10.52.28.238 with HTTP; Sun, 27 Nov 2011 09:25:51 -0800 (PST)
+In-Reply-To: <CA+M6bXkMqS6frOYwvGmLQwvSYWerYzC5fX4sXXu0hO1ogPwXhA@mail.gmail.com>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
 	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
 	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
 	<4ECD76E2.3040001@opendreambox.org>
-	<CA+M6bX=Xs+ACNOXYfFafb__vGNVYX3y8g7zvLQvDiHyg=5yjRw@mail.gmail.com>
-	<CACW_hTbDBOV9yikTqpeVDif1J0oCcEorj=vMB1BcRsZG=0gzKg@mail.gmail.com>
-	<CA+M6bXkTP9BPgEx_3ykwKJuv73s+0WAsJH_NwRbFEo=ZERhC0A@mail.gmail.com>
-	<CACW_hTZonV9m3U+gUTBBG2hEL2C9hzDLJrdZt+nM7qcn2LunQw@mail.gmail.com>
-Date: Sun, 27 Nov 2011 10:15:59 -0700
-Message-ID: <CA+M6bXmXavWA1ruhSQk4+ryvtnq3t9g-b7SGUkuB7=4tPaf3_Q@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
+	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
+	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
+	<1322134409.3391.21.camel@mattotaupa>
+	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
+	<jalvr1$3bl$1@dough.gmane.org>
+	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
+	<CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>
+	<CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>
+	<4ED0C603.9020900@telia.com>
+	<CA+M6bXmsbDoFS_8etRA+RYqkP7b0x8t998Tcmn9KyKhAbEP2ew@mail.gmail.com>
+	<CACW_hTZ6tkRGj938SAg4xmENwe-qRZMGpE=8-KvexQydgD-m_w@mail.gmail.com>
+	<CA+M6bXnGhgrzZSuOe99ViWU=eZ5+Q+exWqWkstFJM-MCYzc6zQ@mail.gmail.com>
+	<1322344896.16303.49.camel@mattotaupa>
+	<CA+M6bXkfDtMOE6RUDbGCc59CFaGijCcc=Abj7sqh2veEVYvM-A@mail.gmail.com>
+	<1322347742.16303.66.camel@mattotaupa>
+	<CA+M6bX=FNKdJ-BrctoqhnzRzV=Hg41BXSx5pCODx3xrMyVnwfg@mail.gmail.com>
+	<CACW_hTbyuhWH8_B_=r0UM-MEq_N_=SwwZ7WP7Wi5RPO6mtxudA@mail.gmail.com>
+	<CA+M6bXkMqS6frOYwvGmLQwvSYWerYzC5fX4sXXu0hO1ogPwXhA@mail.gmail.com>
+Date: Sun, 27 Nov 2011 18:25:51 +0100
+Message-ID: <CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,74 +60,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 17:22:43 -0000
+X-List-Received-Date: Sun, 27 Nov 2011 17:32:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 27, 2011 at 2:55 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2011/11/26 Tom Rini <tom.rini@gmail.com>
+2011/11/27 Tom Rini <tom.rini@gmail.com>
+
+> On Sun, Nov 27, 2011 at 3:12 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+> > Personally I think we are not yet at at point where we should move OE
+> > classic to a pull/patches model. Give it some time.
 >
->> On Sat, Nov 26, 2011 at 8:45 AM, Frans Meulenbroeks
->>
->> >
->> > Well, there is at least the issue of machines and architectures.
->> > Now it is probably not too big a deal to bring over a new machine and
->> turn
->> > it into a BSP layers, but adding another architecture is yet another
->> thing.
->> >
->> > We do have products that are based upon NIOS II. This architecture is
->> > present in OE classic and not in OE core.
->> > One of the issues is that the NIOS II toolchain is still based upon
->> (iirc)
->> > gcc 4.1.1
->> > I do not see an upgrade of gcc/niosii happen in the near future (In th=
-e
->> > past I did spent some time to see if I could move to a newer version, =
-but
->> > there were some issues, and afaik no one is working on this atm), and =
-I
->> > doubt oe-core is interested in having a 4.1.1 toolchain around.
->>
->> An external toolchain should be fine. =A0You should also be able to put
->> that gcc & company into meta-niosii. =A0If you can't, then IMHO, there's
->> a problem someone needs to look at. =A0But I suspect there isn't a
->> problem doing that.
->>
+> So, why are we not at that point yet for OE classic?  I'd like to
+> think I've been timely in my pulls.
 >
-> In oe-classic it is not an external toolchain. It is also a CPU
-> architecture.
 
-Right.  I'm saying that on the path to migration using OE classic to
-export a NIOS II toolchain as an external toolchain and having
-meta-niosii start by using that would save some headache.   Get the
-basics building and working then bring in the toolchain.
+I'm not saying you are not timely. Au contraire, you are.
 
-> It mgiht be possible to make an external toolchain for it, but that does
-> not allow
-> saying things in recipes like: FILES_niosii +=3D in other recipes (iirc t=
-here
-> are a few of these)
 >
-> Moving the recipes to meta-niosii could also be done, and is probably
-> better as the toolchain is a set of OE recipes. I'm not sure if it is
-> possible to solve the ARCH problem that way, but one might get away with =
-it
-> by e.g. bbappend-ing in all relevant recipes. This seems a fair amount of
-> work, so I guess this is not going to happen overnight.
+> > I understand the concerns with people using master for new projects, but
+> I
+> > also understand the concerns of people that for one reason or another are
+> > still bound to oe-classic.
+> >
+> > I feel that it also would be helpful to have some sort of staging area
+> > where people can update things before they are pulled. Doing that
+> > distributed not really creates visibility to those changes, so I'd say it
+> > is better to keep that centralized. Might even be more convenient too.
+>
+> We already have this for oe-core/meta-oe so it shouldn't be hard to
+> make up a contrib repo for classic OE, for folks that don't want to
+> just fork the mirror on github.
+>
 
-Yes, meta-niosii would have some bbappend files and a copy of a few
-bbclass files until those parts ARCH parts can be merged.
+Whether it is a branch or a separate repo does not make too much of a
+difference (at least not to me).
+It was my impression that a branch would work a little bit simpler, but I
+may well be mistaken here.
 
-[snip]
-> I feel that if meta-oe is considered an openembedded layer, its guideline=
-s
-> should be made clear.
+>
+> > That still leaves the issue of new projects.
+> > What if we decide to rename master to e.g. maintenance-staging, or
+> legacy,
+> > or classic or whatever you want to; keeping it as it is now (so not R/O),
+> > and have a new master that is R/O and only contains a document with some
+> > explanation and referring to oe-core for new projects. This doc could
+> > mention the legacy branch together with a statement that it is not
+> desired
+> > for new projects, but mainly there for maintenance/testing purposes.
+>
+> The only part here I object to is saying we need an anyone-can-write
+> branch.
+>
 
-Agreed.
+If it is a contrib repo or overlay fine with me.
+I do think it is probably convenient that it should be an
+anyone-who-is-authorized-can-write repo/overlay/branch/whatever, in order
+not to unneededly raise the barrier to submit patches.
 
---=20
-Tom
-
+Frans
 
