@@ -1,19 +1,22 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUR9m-0006N5-44 for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 23:55:38 +0100
-Received: from f053032217.adsl.alicedsl.de ([78.53.32.217]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUR3d-00041I-MU for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Nov 2011 22:49:17 +0000
-Message-ID: <1322347742.16303.66.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Nov 2011 23:49:02 +0100
-In-Reply-To: <CA+M6bXkfDtMOE6RUDbGCc59CFaGijCcc=Abj7sqh2veEVYvM-A@mail.gmail.com>
+	(envelope-from <tom.rini@gmail.com>) id 1RUUY4-0002lu-W0
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2011 03:32:57 +0100
+Received: by qyk30 with SMTP id 30so982758qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Nov 2011 18:26:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=6HvrVobsL+BiEfsEPyQMj2mUu6jIWzE0+wH/Ovv3jkI=;
+	b=A2MAkZf7IG1uMqzFLgkjXfbmVlvB3sP4z5bV12E0y6iyOeIP3wjXFwBvFLJrkzXnEK
+	c2xF1cIvmrOmat4cW401RnHSgFNi24ZYp4kcEDHVSHk5xIvm15uc80vczj2QGCQ3P2gA
+	SJ5k5ptERU1elbur8GSasM/Oz9LhICDIN1m9w=
+MIME-Version: 1.0
+Received: by 10.229.61.167 with SMTP id t39mr4367801qch.226.1322360780429;
+	Sat, 26 Nov 2011 18:26:20 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Sat, 26 Nov 2011 18:26:20 -0800 (PST)
+In-Reply-To: <CAP9ODKpfGKy-EuY=s=yFsgvfHb=6sc11Fit4jBqE8Ps7fiYn8g@mail.gmail.com>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
 	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
@@ -33,9 +36,12 @@ References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CACW_hTZ6tkRGj938SAg4xmENwe-qRZMGpE=8-KvexQydgD-m_w@mail.gmail.com>
 	<CA+M6bXnGhgrzZSuOe99ViWU=eZ5+Q+exWqWkstFJM-MCYzc6zQ@mail.gmail.com>
 	<1322344896.16303.49.camel@mattotaupa>
-	<CA+M6bXkfDtMOE6RUDbGCc59CFaGijCcc=Abj7sqh2veEVYvM-A@mail.gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
+	<CAFU7RzP-78tD6dYt+qj2=9EODOCyXAYLVyvn31yLtx+CG8TcoA@mail.gmail.com>
+	<CAP9ODKpfGKy-EuY=s=yFsgvfHb=6sc11Fit4jBqE8Ps7fiYn8g@mail.gmail.com>
+Date: Sat, 26 Nov 2011 19:26:20 -0700
+Message-ID: <CA+M6bXmVAKZ2nRGTicCX5c3GhUF+V=yRre3JVnYgjhLkuzUHeQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,197 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2011 22:55:38 -0000
-X-Groupsio-MsgNum: 35635
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-iGBbCwgResOj8CaNw4CM"
+X-List-Received-Date: Sun, 27 Nov 2011 02:32:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-iGBbCwgResOj8CaNw4CM
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sat, Nov 26, 2011 at 3:44 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Sat, Nov 26, 2011 at 20:37, Raffaele Recalcati <lamiaposta71@gmail.com>wrote:
+>
+>> ...
+>
+> Choosing now the baseline for dm3730 with my colleagues it seems that it
+>> will be arago, that is still oe-classic, because Ti is releasing dvsdk
+>> based on it. If Ti moves with arago to oe-core we move as well to it.
+>> Very clean and simple decision, isn't it?
+>
+>
+> Yes and you deal with the fork of it by your own. Simple consequence, isn't
+> it?
 
-Am Samstag, den 26.11.2011, 15:33 -0700 schrieb Tom Rini:
-> On Sat, Nov 26, 2011 at 3:01 PM, Paul Menzel wrote:
-> > Am Samstag, den 26.11.2011, 14:36 -0700 schrieb Tom Rini:
-> >> On Sat, Nov 26, 2011 at 8:49 AM, Frans Meulenbroeks wrote:
-> >> > 2011/11/26 Tom Rini
-> >> >
-> >> >> On Sat, Nov 26, 2011 at 3:57 AM, Ulf Samuelsson wrote:
-> >> >> > On 2011-11-25 23:04, Tom Rini wrote:
-> >> >> >>
-> >> >> >> On Fri, Nov 25, 2011 at 12:31 AM, Frans Meulenbroeks wrote:
-> >> >> >>
-> >> >> >>> After all, isn't one of the purposes of OE to promote informati=
-on
-> >> >> >>> sharing,
-> >> >> >>> cooperation and the use of openembedded technology (and not mak=
-e things
-> >> >> >>> harder).
-> >> >> >>
-> >> >> >> One of the points of making master read-only would be to ensure =
-that
-> >> >> >> changes aren't lost.
-> >> >> >>
-> >> >> >> Perhaps the transition needs to be:
-> >> >> >> - master is as it is today
-> >> >> >> - master becomes oe-core backport || master-only bugfixes only
-> >> >> >> - master becomes read only.
-> >> >> >>
-> >> >> >> And we go from the first step to the second step sometime sooner
-> >> >> >> rather than later.  The top of my head date would be before the
-> >> >> >> paid-developers go on end of year breaks to try and make sure al=
-l the
-> >> >> >> hobbyist folks start their hacking with oe-core+etc rather than =
-master
-> >> >> >> and risk getting caught later.  I'm open to arguments on why tha=
-t's
-> >> >> >> exactly backwards...
-> >> >> >>
-> >> >> >
-> >> >> > Won't it be a problem for existing projects, if you cannot add fi=
-xes to
-> >> >> cope
-> >> >> > with new host OS versions.
-> >> >> >
-> >> >> > At the moment, openembedded-classic does not build properly with =
-Ubuntu
-> >> >> > 11.10 .
-> >> >>
-> >> >> Won't what be a problem?  Either oe-core+meta-oe+etc fails on 11.10
-> >> >> (so, fix it there first then backport changes) or it's fine and you
-> >> >> can either find the relevant changes there and move them or it's a
-> >> >> oe.dev-only bug and just needs to be fixed, under my proposal (unti=
-l
-> >> >> we reach the point where everyone is OK calling it r/o).
-> >> >>
-> >> >> And part of this is to say that yes, existing projects external to
-> >> >> oe.dev need to move to oe-core(+meta-oe+whatever else) (where layer=
-s
-> >> >> should be making their life easier or again, there's problems we're
-> >> >> unaware of and need to be made aware of) or explain why they can't
-> >> >> ever move (and are forking the project?).
-> >> >
-> >> > See the message on NIOS that I just posted.
-> >>
-> >> Addressed there :)
-> >>
-> >> > Also I am not opposed to making oe classic master the place where pa=
-tches
-> >> > may land before they end up in the maintenance thread, but I am stro=
-ngly
-> >> > opposed to making OE classic read only on short notice (which as sug=
-gested
-> >> > by Koen earlier).
-> >>
-> >> I believe master needs to go read-only, or at least
-> >> backport||master-only-problems bugfix only, sooner rather than later.
-> >>
-> >> The arguments seem to be:
-> >> - Some people or projects use master and can't move
-> >> * So don't move, but do expect to need to either migrate to
-> >> 2011.03-maintenance or carry more fixes locally.
-> >
-> > This is still not understandable. I understand that you want developers
-> > to move to OE-core and meta-oe. But trying to force people by making
-> > master read-only is the wrong way. It just arbitrarily puts a burden on
-> > current users. You can advertise prominently that OE-core and meta-oe
-> > should be used. Over the time people will move and a lot of people have
-> > expressed their willingness to move in the future.
->=20
-> Well, on this side of the fence I think we're unclear what more needs
-> to be said.
+Putting on my TI hat, Arago isn't a fork.  And, TI is moving forward
+to oe-core/etc, but like everyone else with a timing problem, yeah,
+timing problem.
 
-Like Frans and Bernhard wrote, for new users a README on OE-classic
-would be nice and the Wiki needs to be updated. Maybe also a deprecation
-notice when pulling from the master branch.
-
-For old users as also written no further comments are needed. They are
-experienced enough and have heard your arguments. Now you should let
-them make their own decisions even if you do not like it.
-
-> In my mind, we couldn't do a technical branching of the repository, we
-> made a new one. But people are still working off of a branch made
-> against an 8 month old snapshot.  We really want to encourage this to
-> stop.  If we were all in one repository still, it would be people
-> saying "don't make legacy/main read-only!  I still want to add things
-> to it!".
-
-I did not understand that paragraph. Sorry.
-
-> >> With my
-> >> 2011.03-maintenance hat on, if someone says for my project to move I
-> >> need N patches moved from master to maintenance, I'm fine reviewing
-> >> that pull request.
-> >
-> > I thought that was always possible in the past.
->=20
-> It always has been, but since there's been confusion apparently about
-> what can and cannot happen with the branch today, I want to spell it
-> out.  I would be very happy to review whatever changes need to come in
-> from master that would make $project be able to say "OK, I can use the
-> maintenance branch until we have the time to move to oe-core/etc".
->=20
-> >> - There's concern that $something won't be able to work with oe-core+m=
-eta-oe+etc
-> >> * These are problems that either need to be fixed or assumptions that
-> >> aren't correct.
-> >>
-> >> - Lack of recipes in meta-oe
-> >> * The recipes people need have been moved, stuff that isn't can be
-> >> when someone needs it.  id3lib was mentioned as an example of why
-> >> there might be problems getting things moved to meta-oe.  I can't help
-> >> but notice it's also been moved into meta-oe.
-> >
-> > As Bernhard noted in this reply. OE-Core and meta-oe seriously lack
-> > documentation. And if it is just that our Wiki currently is still based
-> > on OE-classic. And in my experience not a lot of people put effort
-> > behind it and just neglect it.
-> >
-> > (New users will search for tutorials and help on the WWW and there
-> > currently a lot is dealing with OE-classic.)
->=20
-> Yes, and this is why I can understand wikihate.  So, consider this a
-> beg for help, from anyone that likes wiki editing.  There's content to
-> be updated, people that will answer questions when it's not clear, but
-> just can't get into the groove on editing the wiki.
-
-A lot of developers do not like to document things or to use a Web-Wiki.
-I can understand the Wiki part because in my opinion a Web editor is
-just unusable.
-
-In my opinion the the community should seriously think about if a
-MediaWiki setup has proven successful and if they think not first think
-about if a Wiki is needed at all, secondly what should be documented and
-lastly what tools developers might use.
-
-There are a lot of Wiki setups maintained in a repository like ikiwiki
-[1]. Adding a requirement to the guidelines that documentation also has
-be updated would be a feasible solution in my opinion developers could
-also live with since it is all managed in one repository.
-
-There has been a thread about this in the past I think. So please open a
-new thread if you put that up on the agenda.
+-- 
+Tom
 
 
-Thanks,
-
-Paul
-
-
-[1] http://ikiwiki.info/
-
---=-iGBbCwgResOj8CaNw4CM
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk7RbN8ACgkQPX1aK2wOHVhI+gCffBnatT6Krdqm7gmVOj88oeM1
-lXkAnidEWcnqzAdmK36CCXNE2RMyiqqH
-=MlkN
------END PGP SIGNATURE-----
-
---=-iGBbCwgResOj8CaNw4CM--
