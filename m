@@ -1,22 +1,23 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RUiae-0005x0-4v
+	(envelope-from <tom.rini@gmail.com>) id 1RUjWk-0007Uh-EM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 18:32:32 +0100
-Received: by vcbfo13 with SMTP id fo13so1298130vcb.6
+	Sun, 27 Nov 2011 19:32:34 +0100
+Received: by qyk30 with SMTP id 30so1102455qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 09:25:51 -0800 (PST)
+	Sun, 27 Nov 2011 10:25:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=LLrmfFj8y4jhrcDiODJhVtg9a4g/PHisRzPmZPTdv0c=;
-	b=YCdu9+DX2RNBSLuDzdDhs5k+rkbdoZ66tbaZk8gU8ZokszM+0TfpDCwG+aYYJaeFFj
-	WfUYqzTvTYX+jhsu0SZuYYqv0XpAFljegRqtC7QQFJQdrBIK9PFCRP5Inh6IIiSauTtK
-	sXfdFkRyBwtZf2h989qqT0q7hjDQ3hGNpwkyI=
+	:content-type:content-transfer-encoding;
+	bh=hGS9/xCT/+Dt2c4s5Nys7iVL4L847ZBWcTP9oQKtPbY=;
+	b=CerBS6M8wa/+Gfr3Lf5nEoYCprjYuYQ/zhPXTpUcaedByT0s+ue7MB5UTSsTuAsU2J
+	B2877jrZUUiWkaD2qYikhOyKCAZINpQxl6JY3aTeAjiFGE2NQ72wpVavMamsXDo97iKY
+	XMINdWP/ufj8wfHezqSVDzEW+/5q7RuksjvP4=
 MIME-Version: 1.0
-Received: by 10.220.148.68 with SMTP id o4mr4080119vcv.123.1322414751655; Sun,
-	27 Nov 2011 09:25:51 -0800 (PST)
-Received: by 10.52.28.238 with HTTP; Sun, 27 Nov 2011 09:25:51 -0800 (PST)
-In-Reply-To: <CA+M6bXkMqS6frOYwvGmLQwvSYWerYzC5fX4sXXu0hO1ogPwXhA@mail.gmail.com>
+Received: by 10.224.180.131 with SMTP id bu3mr12842172qab.5.1322418355719;
+	Sun, 27 Nov 2011 10:25:55 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Sun, 27 Nov 2011 10:25:55 -0800 (PST)
+In-Reply-To: <CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
 References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
 	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
@@ -41,11 +42,11 @@ References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
 	<CA+M6bX=FNKdJ-BrctoqhnzRzV=Hg41BXSx5pCODx3xrMyVnwfg@mail.gmail.com>
 	<CACW_hTbyuhWH8_B_=r0UM-MEq_N_=SwwZ7WP7Wi5RPO6mtxudA@mail.gmail.com>
 	<CA+M6bXkMqS6frOYwvGmLQwvSYWerYzC5fX4sXXu0hO1ogPwXhA@mail.gmail.com>
-Date: Sun, 27 Nov 2011 18:25:51 +0100
-Message-ID: <CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<CACW_hTayj6TLHk_u6+JpTUGQ_w=Vh4n-Fm42sFsFfO4PougsLw@mail.gmail.com>
+Date: Sun, 27 Nov 2011 11:25:55 -0700
+Message-ID: <CA+M6bXmKsZmFTjrhMuouj3cYKHJX9e7t3gSUTTyf4nBzXr5g-A@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Plans for OE classic future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -60,62 +61,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 17:32:32 -0000
+X-List-Received-Date: Sun, 27 Nov 2011 18:32:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2011/11/27 Tom Rini <tom.rini@gmail.com>
+On Sun, Nov 27, 2011 at 10:25 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2011/11/27 Tom Rini <tom.rini@gmail.com>
+>
+>> On Sun, Nov 27, 2011 at 3:12 AM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>> > Personally I think we are not yet at at point where we should move OE
+>> > classic to a pull/patches model. Give it some time.
+>>
+>> So, why are we not at that point yet for OE classic? =A0I'd like to
+>> think I've been timely in my pulls.
+>
+> I'm not saying you are not timely. Au contraire, you are.
 
-> On Sun, Nov 27, 2011 at 3:12 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
-> > Personally I think we are not yet at at point where we should move OE
-> > classic to a pull/patches model. Give it some time.
->
-> So, why are we not at that point yet for OE classic?  I'd like to
-> think I've been timely in my pulls.
->
+OK.  So provided we have an easy way to make pull requests of trees
+hosted on oe.org (like oe-core/meta-oe today), are there any other
+objections to moving towards pull request model for classic OE?
 
-I'm not saying you are not timely. Au contraire, you are.
+>> > I understand the concerns with people using master for new projects, b=
+ut
+>> I
+>> > also understand the concerns of people that for one reason or another =
+are
+>> > still bound to oe-classic.
+>> >
+>> > I feel that it also would be helpful to have some sort of staging area
+>> > where people can update things before they are pulled. Doing that
+>> > distributed not really creates visibility to those changes, so I'd say=
+ it
+>> > is better to keep that centralized. Might even be more convenient too.
+>>
+>> We already have this for oe-core/meta-oe so it shouldn't be hard to
+>> make up a contrib repo for classic OE, for folks that don't want to
+>> just fork the mirror on github.
+>>
+>
+> Whether it is a branch or a separate repo does not make too much of a
+> difference (at least not to me).
+> It was my impression that a branch would work a little bit simpler, but I
+> may well be mistaken here.
 
->
-> > I understand the concerns with people using master for new projects, but
-> I
-> > also understand the concerns of people that for one reason or another are
-> > still bound to oe-classic.
-> >
-> > I feel that it also would be helpful to have some sort of staging area
-> > where people can update things before they are pulled. Doing that
-> > distributed not really creates visibility to those changes, so I'd say it
-> > is better to keep that centralized. Might even be more convenient too.
->
-> We already have this for oe-core/meta-oe so it shouldn't be hard to
-> make up a contrib repo for classic OE, for folks that don't want to
-> just fork the mirror on github.
->
+My understanding of the git server side of things is a contrib repo is
+easier to setup and manage permission-wise.
 
-Whether it is a branch or a separate repo does not make too much of a
-difference (at least not to me).
-It was my impression that a branch would work a little bit simpler, but I
-may well be mistaken here.
-
+>> > That still leaves the issue of new projects.
+>> > What if we decide to rename master to e.g. maintenance-staging, or
+>> legacy,
+>> > or classic or whatever you want to; keeping it as it is now (so not R/=
+O),
+>> > and have a new master that is R/O and only contains a document with so=
+me
+>> > explanation and referring to oe-core for new projects. This doc could
+>> > mention the legacy branch together with a statement that it is not
+>> desired
+>> > for new projects, but mainly there for maintenance/testing purposes.
+>>
+>> The only part here I object to is saying we need an anyone-can-write
+>> branch.
+>>
 >
-> > That still leaves the issue of new projects.
-> > What if we decide to rename master to e.g. maintenance-staging, or
-> legacy,
-> > or classic or whatever you want to; keeping it as it is now (so not R/O),
-> > and have a new master that is R/O and only contains a document with some
-> > explanation and referring to oe-core for new projects. This doc could
-> > mention the legacy branch together with a statement that it is not
-> desired
-> > for new projects, but mainly there for maintenance/testing purposes.
->
-> The only part here I object to is saying we need an anyone-can-write
-> branch.
->
+> If it is a contrib repo or overlay fine with me.
+> I do think it is probably convenient that it should be an
+> anyone-who-is-authorized-can-write repo/overlay/branch/whatever, in order
+> not to unneededly raise the barrier to submit patches.
 
-If it is a contrib repo or overlay fine with me.
-I do think it is probably convenient that it should be an
-anyone-who-is-authorized-can-write repo/overlay/branch/whatever, in order
-not to unneededly raise the barrier to submit patches.
+So, like we do today for openembedded-core-contrib / meta-openembedded-cont=
+rib?
 
-Frans
+--=20
+Tom
+
 
