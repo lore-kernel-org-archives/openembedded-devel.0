@@ -1,50 +1,24 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RUbop-00037S-Vc
+	(envelope-from <koen@dominion.thruhere.net>) id 1RUda9-0006DZ-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Nov 2011 11:18:44 +0100
-Received: by vbbfc21 with SMTP id fc21so2591093vbb.6
+	Sun, 27 Nov 2011 13:11:41 +0100
+Received: by wwf22 with SMTP id 22so5638954wwf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 02:12:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=G9DWZBwltIIJ1c4VlKatYtlJI2eO9SboGkQMPP6kQrk=;
-	b=YFpmnuOsD1JIxc8Gbd5pi8eI2rm8rnPdkonupgxeeItBQvz2o8mIkfz9C4rz7QC2NO
-	L+t824XHdBQ6HvuaL8Umf2ppphPhKveBH7yQRUL+9ta5fl79+dnfIkOmFa8+M53GsK1O
-	7hb5WTkd2GrBQSj4f2KcVRLGT/Y3Tbvf0ew3g=
-MIME-Version: 1.0
-Received: by 10.52.33.140 with SMTP id r12mr39750076vdi.36.1322388726787; Sun,
-	27 Nov 2011 02:12:06 -0800 (PST)
-Received: by 10.52.28.238 with HTTP; Sun, 27 Nov 2011 02:12:06 -0800 (PST)
-In-Reply-To: <CA+M6bX=FNKdJ-BrctoqhnzRzV=Hg41BXSx5pCODx3xrMyVnwfg@mail.gmail.com>
-References: <ED3E0BCACD909541BA94A34C4A164D4C4013DD0E@post.tritech.se>
-	<CAMKF1sr6mM0_iYu_1vfEGbUYNqaj2hK2vpdsHqCTkoSdrHyJOA@mail.gmail.com>
-	<CACW_hTYcHF6RXuW3prEO2cR+UYCFFvdtoH1d6DetY-6pCmT6qA@mail.gmail.com>
-	<CAMKF1srRnHd4C7XsEdZ80HcKuc7ioLC_+2J4NO3=bChoCw2k-Q@mail.gmail.com>
-	<4ECD76E2.3040001@opendreambox.org>
-	<ED3E0BCACD909541BA94A34C4A164D4C401A0AC7@post.tritech.se>
-	<0C757E680E33864AB113392C7E83F910BE5242@GSX300A.mxchg.m.corp>
-	<CAP9ODKrviqf=GN12Y6OKE0ajsG7v+fFWnWDHp=K1-YFzvQi-pA@mail.gmail.com>
-	<1322134409.3391.21.camel@mattotaupa>
-	<CAP9ODKrKN3m_V09j6+C1dL9P8yHtuck4P5jcdKv4Ua=mrP1E=Q@mail.gmail.com>
-	<jalvr1$3bl$1@dough.gmane.org>
-	<CAFU7RzM5-VAbs2-5qR-D6eo5+LsVQc+e3rGK6zZ5NvviSvUWig@mail.gmail.com>
-	<CACW_hTY9ybnax9xHb1KV4Y25J3nNRkQqCs=TqUivcBcYOT7BkA@mail.gmail.com>
-	<CA+M6bXkjViAHc6ADH+vyvikeOaLa1+V1uCX6S=d75Z18Z2oj8w@mail.gmail.com>
-	<4ED0C603.9020900@telia.com>
-	<CA+M6bXmsbDoFS_8etRA+RYqkP7b0x8t998Tcmn9KyKhAbEP2ew@mail.gmail.com>
-	<CACW_hTZ6tkRGj938SAg4xmENwe-qRZMGpE=8-KvexQydgD-m_w@mail.gmail.com>
-	<CA+M6bXnGhgrzZSuOe99ViWU=eZ5+Q+exWqWkstFJM-MCYzc6zQ@mail.gmail.com>
-	<1322344896.16303.49.camel@mattotaupa>
-	<CA+M6bXkfDtMOE6RUDbGCc59CFaGijCcc=Abj7sqh2veEVYvM-A@mail.gmail.com>
-	<1322347742.16303.66.camel@mattotaupa>
-	<CA+M6bX=FNKdJ-BrctoqhnzRzV=Hg41BXSx5pCODx3xrMyVnwfg@mail.gmail.com>
-Date: Sun, 27 Nov 2011 11:12:06 +0100
-Message-ID: <CACW_hTbyuhWH8_B_=r0UM-MEq_N_=SwwZ7WP7Wi5RPO6mtxudA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 27 Nov 2011 04:05:01 -0800 (PST)
+Received: by 10.216.132.224 with SMTP id o74mr969779wei.53.1322395498687;
+	Sun, 27 Nov 2011 04:04:58 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id x8sm13101669wix.17.2011.11.27.04.04.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 27 Nov 2011 04:04:57 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Plans for OE classic future
+Date: Sun, 27 Nov 2011 13:04:53 +0100
+Message-Id: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe] digitemp: fix QA issues:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,74 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2011 10:18:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Nov 2011 12:11:41 -0000
 
-2011/11/27 Tom Rini <tom.rini@gmail.com>
+* missing SRC_URI checksums
+* GNU_HASH QA errors:
+	WARNING: QA Issue: No GNU_HASH in the elf binary: '/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/digitemp-3.6.0-r2/packages-split/digitemp/usr/sbin/digitemp_DS9097U'
+	WARNING: QA Issue: No GNU_HASH in the elf binary: '/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/digitemp-3.6.0-r2/packages-split/digitemp/usr/sbin/digitemp_DS9097'
+* $(uname -s) access
 
->
->
-> So the question is, what is the long term plan for classic OE based
-> stuff?  The TSC has been saying, perhaps not with enough voice or
-> emphasis:
-> - 2011.03 is the last "release" of oe.dev (unless someone(s) step up
-> and wish to do another!)
-> - 2011.03-maintenance will be maintained as long as people are saying
-> they have a need for it.
-> - The master branch needs to go away somehow as the last step of
-> migration.  This is what I was trying to say below...
->
-> >> In my mind, we couldn't do a technical branching of the repository, we
-> >> made a new one. But people are still working off of a branch made
-> >> against an 8 month old snapshot.  We really want to encourage this to
-> >> stop.  If we were all in one repository still, it would be people
-> >> saying "don't make legacy/main read-only!  I still want to add things
-> >> to it!".
-> >
-> > I did not understand that paragraph. Sorry.
->
-> The analogy I'm trying to make between classic OE master branch and
-> behavior is that it wasn't "lets start from scratch with this new
-> repository and hope someday most people stop using the old tree" it
-> was "if we could cleanly do a 'git branch -m master legacy' and start
-> master as the new meta-oe repository, we would".
->
-> Now I'm going to make a Linux Kernel analogy.  The 2.4 series didn't
-> (nearly) go away for a long while after 2.6 came out, but after a
-> while the rules for what could go in got rather restrictive.
->
-> The direction the TSC has recommended for how to deal with classic OE
-> is to have the folks that can't yet move off of it be using the
-> maintenance branch.  It's not going to be pulled out from under
-> anyone.  It's just got rules about what kind of changes are allowed
-> in.  Today that's "must exist in relevant oe-core based layer or be
-> N/A in that world".  I can't imagine that changing until the user base
-> is small enough and themselves in a maintenance mode to be happy with
-> that too.
->
-> If anything it seems like there's an objection to switching classic OE
-> from "free for all" to the pull request (or patches posted) model
-> oe-core/meta-oe/etc are using.
->
-> Personally I think we are not yet at at point where we should move OE
-classic to a pull/patches model. Give it some time.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb |   12 ++++++++----
+ 1 files changed, 8 insertions(+), 4 deletions(-)
 
-I understand the concerns with people using master for new projects, but I
-also understand the concerns of people that for one reason or another are
-still bound to oe-classic.
+diff --git a/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
+index 395e56a..0ac8fa3 100644
+--- a/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
++++ b/meta-oe/recipes-support/digitemp/digitemp_3.6.0.bb
+@@ -4,14 +4,18 @@ DEPENDS = "libusb1"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://www.digitemp.com/software/linux/digitemp-${PV}.tar.gz \
+            file://makefile-fix.patch"
++SRC_URI[md5sum] = "9be2e48db37920f21925ae6e88f83b84"
++SRC_URI[sha256sum] = "14cfc584cd3714fe8c9a2cdc8388be49e08b5e395d95e6bcd11d4410e2505ca2"
+ 
+-inherit autotools
+-
+-EXTRA_OEMAKE = "ds9097 ds9097u"
++EXTRA_OEMAKE = "ds9097 ds9097u \
++                SYSTYPE='Linux' \
++               "
++# Fix GNU_HASH QA errors
++TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
+ 
+ do_configure() {
+     rm -f digitemp_*
+-- 
+1.7.2.5
 
-I feel that it also would be helpful to have some sort of staging area
-where people can update things before they are pulled. Doing that
-distributed not really creates visibility to those changes, so I'd say it
-is better to keep that centralized. Might even be more convenient too.
 
-That still leaves the issue of new projects.
-What if we decide to rename master to e.g. maintenance-staging, or legacy,
-or classic or whatever you want to; keeping it as it is now (so not R/O),
-and have a new master that is R/O and only contains a document with some
-explanation and referring to oe-core for new projects. This doc could
-mention the legacy branch together with a statement that it is not desired
-for new projects, but mainly there for maintenance/testing purposes.
-
-Frans.
 
