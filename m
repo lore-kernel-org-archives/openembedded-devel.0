@@ -1,19 +1,21 @@
 Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1RV5L0-0001nU-BR
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1RV5bo-00026d-N5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 18:49:54 +0100
+	Mon, 28 Nov 2011 19:07:16 +0100
 Received: from myhost (188-192-193-31-dynip.superkabel.de [188.192.193.31])
-	by dd20204.kasserver.com (Postfix) with ESMTPSA id 0822E12A05AF
+	by dd20204.kasserver.com (Postfix) with ESMTPSA id D001912A1437
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 18:43:17 +0100 (CET)
-Date: Mon, 28 Nov 2011 18:44:52 +0100 (CET)
+	Mon, 28 Nov 2011 19:00:37 +0100 (CET)
+Date: Mon, 28 Nov 2011 19:02:12 +0100 (CET)
 From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 X-X-Sender: nice@myhost
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-Message-ID: <alpine.LNX.2.02.1111281842480.1090@myhost>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1322478479.26287.15.camel@ted>
+Message-ID: <alpine.LNX.2.02.1111281848560.1090@myhost>
 References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<1322476245.26081.89.camel@phil-desktop>
+	<1322478479.26287.15.camel@ted>
 User-Agent: Alpine 2.02 (LNX 1266 2009-07-14)
 MIME-Version: 1.0
 Subject: Re: Documentation problems
@@ -30,25 +32,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 17:49:54 -0000
+X-List-Received-Date: Mon, 28 Nov 2011 18:07:16 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
 
 
-On Sat, 26 Nov 2011, Tom Rini wrote:
+On Mon, 28 Nov 2011, Richard Purdie wrote:
 
-> Hey all,
->
-> As things stand today, the wiki is out of date and a number of folks
-> refuse to work on it.  Using things like "It's all text!" for firefox
-> only go so far and don't solve problems like people just avoiding
-> documentation anyhow.
+> Rather than fork off the Yocto docs for OE's needs, it would be nice to
+> see if there was a way we could share the documentation.
 
-Hi,
-today I wanted to create a Template:We-move-to-oe-core (something like
-this artikle is a stub) to mark all pages which needs a change and inform
-new users about the move to oe-core. I created an account but I am unable
-to edit anything. I even cannot edit my user page.
+I like that idea + the pull based model idea from Koen. In my opinion a 
+pull based model for the documentation lower the barriers to write 
+documentation because nobody want to write something false.
+
+But the project webpage should not look like a docbook page.
 
 Best regards,
 Bernhard
