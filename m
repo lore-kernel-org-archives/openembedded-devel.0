@@ -1,29 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RUwZq-0001D5-Tr
+	(envelope-from <koen@dominion.thruhere.net>) id 1RUweW-0001NU-E6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 09:28:38 +0100
-Received: by wwo1 with SMTP id 1so8751566wwo.24
+	Mon, 28 Nov 2011 09:33:28 +0100
+Received: by lahe6 with SMTP id e6so495763lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 00:22:01 -0800 (PST)
-Received: by 10.180.90.6 with SMTP id bs6mr42884263wib.63.1322468521222;
-	Mon, 28 Nov 2011 00:22:01 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id em4sm38315416wbb.20.2011.11.28.00.22.00
-	(version=SSLv3 cipher=OTHER); Mon, 28 Nov 2011 00:22:00 -0800 (PST)
-Message-ID: <4ED344A7.6060301@dresearch-fe.de>
-Date: Mon, 28 Nov 2011 09:21:59 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
-	<1322146025-21514-2-git-send-email-sledz@dresearch-fe.de>
-In-Reply-To: <1322146025-21514-2-git-send-email-sledz@dresearch-fe.de>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [PATCH 2/2] gypsy: update to latest upstream version 0.8
+	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
+Received: by 10.152.162.10 with SMTP id xw10mr27355994lab.12.1322468810798;
+	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id px20sm11758775lab.2.2011.11.28.00.26.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
+Date: Mon, 28 Nov 2011 09:26:46 +0100
+Message-Id: <652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
+	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] digitemp: fix QA issues:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,29 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 08:28:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 28 Nov 2011 08:33:28 -0000
+X-Groupsio-MsgNum: 35668
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On 24.11.2011 15:47, Steffen Sledz wrote:
-> Bug fixes, enhanced logging, a new debugging system, enhanced device
-> discovery.
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-
-Ping!
-
-If there are no NAKs i'll push both patches tomorrow.
-
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
+
+> On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>> -EXTRA_OEMAKE =3D "ds9097 ds9097u"
+>> +EXTRA_OEMAKE =3D "ds9097 ds9097u \
+>> +                SYSTYPE=3D'Linux' \
+>> +               "
+>> +# Fix GNU_HASH QA errors
+>> +TARGET_CC_ARCH +=3D "${CFLAGS} ${LDFLAGS}"
+>>=20
+>>=20
+>=20
+> why CFLAGS ? I thought only LDFLAGS would have been sufficient
+
+For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and =
+LDFLAGS.
+
+regards,
+
+Koen
+
+
+--Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7TRcgACgkQMkyGM64RGpGywgCgjzrNXHq8p6U9B0SxwnA185VM
+cFoAn2GqpleZxYeGQkSsr7oy/0lfrJn5
+=Nbq+
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C--
