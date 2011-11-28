@@ -1,29 +1,16 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1RUweW-0001NU-E6
+	(envelope-from <sledz@localhost.localdomain>) id 1RUx0H-0005Y0-UX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 09:33:28 +0100
-Received: by lahe6 with SMTP id e6so495763lah.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
-Received: by 10.152.162.10 with SMTP id xw10mr27355994lab.12.1322468810798;
-	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
-Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id px20sm11758775lab.2.2011.11.28.00.26.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Nov 2011 00:26:50 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
-Date: Mon, 28 Nov 2011 09:26:46 +0100
-Message-Id: <652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
-References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
-	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] digitemp: fix QA issues:
+	Mon, 28 Nov 2011 09:55:58 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 2D22044A609; Mon, 28 Nov 2011 09:49:20 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Nov 2011 09:49:12 +0100
+Message-Id: <1322470152-12440-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [PATCH] live555: add version 2011.11.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,54 +24,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 08:33:28 -0000
-X-Groupsio-MsgNum: 35668
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 28 Nov 2011 08:55:58 -0000
 
---Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/live555/live555_20111120.bb |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/live555/live555_20111120.bb
 
-
-Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
-
-> On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->> -EXTRA_OEMAKE =3D "ds9097 ds9097u"
->> +EXTRA_OEMAKE =3D "ds9097 ds9097u \
->> +                SYSTYPE=3D'Linux' \
->> +               "
->> +# Fix GNU_HASH QA errors
->> +TARGET_CC_ARCH +=3D "${CFLAGS} ${LDFLAGS}"
->>=20
->>=20
->=20
-> why CFLAGS ? I thought only LDFLAGS would have been sufficient
-
-For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and =
-LDFLAGS.
-
-regards,
-
-Koen
+diff --git a/recipes/live555/live555_20111120.bb b/recipes/live555/live555_20111120.bb
+new file mode 100644
+index 0000000..7256007
+--- /dev/null
++++ b/recipes/live555/live555_20111120.bb
+@@ -0,0 +1,7 @@
++require live555.inc
++
++PR = "${INC_PR}.1"
++
++SRC_URI[md5sum] = "8e5ebefdf7d12ca9cfd7175ff3d7eef2"
++SRC_URI[sha256sum] = "695cf22d43516f082e26ee9eb8373a0ae3b4ed472f1e224b51d881219f694f2e"
++
+-- 
+1.7.7
 
 
---Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
 
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk7TRcgACgkQMkyGM64RGpGywgCgjzrNXHq8p6U9B0SxwnA185VM
-cFoAn2GqpleZxYeGQkSsr7oy/0lfrJn5
-=Nbq+
------END PGP SIGNATURE-----
-
---Apple-Mail=_30094CC1-851E-4E43-A507-E7D95B57A81C--
