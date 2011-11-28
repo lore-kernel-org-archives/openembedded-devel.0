@@ -1,23 +1,32 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1RV4IY-0007eN-2l
+	(envelope-from <raj.khem@gmail.com>) id 1RV56W-0001Cg-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 17:43:18 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 4A296CAD3F4
+	Mon, 28 Nov 2011 18:34:56 +0100
+Received: by faar15 with SMTP id r15so366702faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 17:29:54 +0100 (CET)
-Received: from e6520eb.lan (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 595504B03C1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 17:29:44 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2011 17:29:42 +0100
-Message-Id: <1322497782-4934-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6.4
+	Mon, 28 Nov 2011 09:28:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=RjP5eKdy3WNtWMSgBUieuTIrZ34YE2UBSloV7wY/Uzs=;
+	b=SprRa6oDPoc0or3wSEPNiOvjiyZ1EiV9unbYG2ZWRlMxaf6eJG6Dqgf9tGEtxL/XwN
+	b4+Kr8Jr1p9szgBhaC+EK/sQ10Bx29PmcDFFufcTr20D96NJnjMviAK7oDEPlKX1DbZb
+	0J2m7BpeiP3qpcM6vfvi3N3r8SY+ELsrqLOjQ=
+Received: by 10.152.106.38 with SMTP id gr6mr29833115lab.35.1322501298240;
+	Mon, 28 Nov 2011 09:28:18 -0800 (PST)
 MIME-Version: 1.0
-Subject: [=meta-oe] hicolor-icon-theme: add checksums
+Received: by 10.152.24.36 with HTTP; Mon, 28 Nov 2011 09:27:13 -0800 (PST)
+In-Reply-To: <652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
+	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
+	<652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Nov 2011 09:27:13 -0800
+Message-ID: <CAMKF1sqdDTL5NshgoiGaN67GwynMZ+rWnwCRvo3+YAy4e3Tepw@mail.gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] digitemp: fix QA issues:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,37 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 16:43:18 -0000
+X-List-Received-Date: Mon, 28 Nov 2011 17:34:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- .../hicolor-icon-theme/hicolor-icon-theme_0.12.bb  |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+On Mon, Nov 28, 2011 at 12:26 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+>
+> Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
+>
+>> On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi <koen@dominion.thruhere.net> =
+wrote:
+>>> -EXTRA_OEMAKE =3D "ds9097 ds9097u"
+>>> +EXTRA_OEMAKE =3D "ds9097 ds9097u \
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SYSTYPE=3D'Lin=
+ux' \
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 "
+>>> +# Fix GNU_HASH QA errors
+>>> +TARGET_CC_ARCH +=3D "${CFLAGS} ${LDFLAGS}"
+>>>
+>>>
+>>
+>> why CFLAGS ? I thought only LDFLAGS would have been sufficient
+>
+> For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and LDFLAG=
+S.
+>
 
-diff --git a/meta-gnome/recipes-gnome/hicolor-icon-theme/hicolor-icon-the=
-me_0.12.bb b/meta-gnome/recipes-gnome/hicolor-icon-theme/hicolor-icon-the=
-me_0.12.bb
-index db43267..8d48dec 100644
---- a/meta-gnome/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12=
-.bb
-+++ b/meta-gnome/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.12=
-.bb
-@@ -13,6 +13,9 @@ PR =3D "r1"
- SRC_URI =3D "http://icon-theme.freedesktop.org/releases/${BPN}-${PV}.tar=
-.gz \
-         file://index.theme"
-=20
-+SRC_URI[md5sum] =3D "55cafbcef8bcf7107f6d502149eb4d87"
-+SRC_URI[sha256sum] =3D "9edca690617eaa19054951ca53501c802180262be8880ed8=
-4754ac46c93bec73"
-+
- FILES_${PN} +=3D "${datadir}/icons"
-=20
- do_install_append () {
---=20
-1.7.6.4
+bug in the build system I would say
 
+> regards,
+>
+> Koen
+>
+>
+> -----BEGIN PGP SIGNATURE-----
+>
+> iEYEARECAAYFAk7TRcgACgkQMkyGM64RGpGywgCgjzrNXHq8p6U9B0SxwnA185VM
+> cFoAn2GqpleZxYeGQkSsr7oy/0lfrJn5
+> =3DNbq+
+> -----END PGP SIGNATURE-----
+>
+>
 
 
