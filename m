@@ -1,35 +1,25 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RV0ny-0007jc-RZ
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RV1Ju-0000ny-Ee
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 13:59:33 +0100
-Received: by yenl4 with SMTP id l4so611471yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 04:52:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=BdKQsaFHiL2byEPSVoFSnV0U601buT0skFNsIYE6ZC4=;
-	b=NNIiPDaMKzUqf1GqxhdywCanqFShAvRbugMLSdrS69x1rB3kwP6tcYZf1+ZsmOY/me
-	jawLlKeUS+PB7XB0MVCv8tR5qqpt1pMS3htyaSGpYtnfNIOXeHTnS30yb01A2C19obEY
-	BuYTidEajb512cXLqNNNQC9nsRdnx3knf6AoA=
-Received: by 10.236.72.167 with SMTP id t27mr60517802yhd.127.1322484772166;
-	Mon, 28 Nov 2011 04:52:52 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id n5sm50577181yhk.1.2011.11.28.04.52.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Nov 2011 04:52:51 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2011 12:52:39 +0000
-Message-Id: <e32fd0221c36927758fffdda5b4235c39fb5b3d0.1322484731.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1322484731.git.otavio@ossystems.com.br>
-References: <cover.1322484731.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1322484731.git.otavio@ossystems.com.br>
-References: <cover.1322484731.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] systemd-serialgetty: use a wrapper script to find getty
+	Mon, 28 Nov 2011 14:32:30 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 28 Nov 2011 05:25:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.69,584,1315206000"; d="scan'208";a="89777648"
+Received: from unknown (HELO helios.localnet) ([10.252.121.230])
+	by fmsmga001.fm.intel.com with ESMTP; 28 Nov 2011 05:25:50 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 28 Nov 2011 13:25:49 +0000
+Message-ID: <47236173.EeZFgPNp8G@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <1322472706-12917-1-git-send-email-koen@dominion.thruhere.net>
+References: <1322472706-12917-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld] linux 2.6.39: remove all traces of it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,99 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 12:59:33 -0000
+X-List-Received-Date: Mon, 28 Nov 2011 13:32:30 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The following binaries are checked:
+On Monday 28 November 2011 10:31:46 Koen Kooi wrote:
+> The previous commit stated:
+> 
+> 	From e6a10fdf93658c0ab93e9a9afc924f52589ab4f6 Mon Sep 17 00:00:00 2001
+> 	From: Paul Eggleton <paul.eggleton@linux.intel.com>
+> 	Date: Sun, 27 Nov 2011 21:33:58 +0000
+> 	Subject: linux: move h1940 up to 3.1
+> 
+> 	* Add new h1940 defconfig from Vasily Koruzhick <anarsoul@gmail.com>
+> 	* Remove 2.6.39 as no machine in meta-handheld is using it anymore
+> 
+> So lets indeed remove 2.6.39 and stop the parse failures from happening
 
-  /sbin/agetty
-  /sbin/mingetty
-  /sbin/getty
+Oops, sorry about that. Fix merged to meta-handheld master.
 
-So this works out of box in most cases and doesn't enforce one getty
-as dependency.
+Thanks,
+Paul
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-core/systemd/systemd-serialgetty.bb    |   13 ++++++++++---
- .../systemd-serialgetty/serial-getty@.service      |    2 +-
- .../systemd-serialgetty/systemd-serialgetty        |   13 +++++++++++++
- 3 files changed, 24 insertions(+), 4 deletions(-)
- create mode 100755 meta-oe/recipes-core/systemd/systemd-serialgetty/systemd-serialgetty
-
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty.bb b/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-index 2b88d0c..c79ae84 100644
---- a/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-+++ b/meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-@@ -2,12 +2,13 @@ DESCRIPTION = "Systemd serial config"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r1"
-+PR = "r2"
- 
- SERIAL_CONSOLE ?= "115200 ttyS0"
- 
- SRC_URI = "file://LICENSE \
--           file://serial-getty@.service"
-+           file://serial-getty@.service \
-+           file://systemd-serialgetty"
- 
- def get_baudrate(bb, d):
-     return bb.data.getVar('SERIAL_CONSOLE', d, 1).split()[0]
-@@ -22,6 +23,9 @@ do_install() {
- 		install -d ${D}${sysconfdir}/systemd/system/getty.target.wants/
- 		install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
- 
-+		# Install wrapper that looks for available getty binary
-+		install -m 755 ${WORKDIR}/systemd-serialgetty ${D}${base_libdir}/systemd/
-+
- 		# enable the service
- 		ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
- 			${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
-@@ -34,5 +38,8 @@ RRECOMMENDS_${PN} = ""
- RDEPENDS_${PN} = "systemd"
- 
- # This is a machine specific file
--FILES_${PN} = "${base_libdir}/systemd/system/serial-getty@.service ${sysconfdir}"
-+FILES_${PN} = "${base_libdir}/systemd/systemd-serialgetty \
-+               ${base_libdir}/systemd/system/serial-getty@.service \
-+               ${sysconfdir} \
-+               "
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service b/meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-index daf0dac..ee60a37 100644
---- a/meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-+++ b/meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-@@ -17,7 +17,7 @@ Before=getty.target
- 
- [Service]
- Environment=TERM=vt100
--ExecStart=-/sbin/getty @BAUDRATE@ %I
-+ExecStart=-/lib/systemd/systemd-serialgetty @BAUDRATE@ %I
- Restart=always
- RestartSec=0
- UtmpIdentifier=%I
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty/systemd-serialgetty b/meta-oe/recipes-core/systemd/systemd-serialgetty/systemd-serialgetty
-new file mode 100755
-index 0000000..688b4b4
---- /dev/null
-+++ b/meta-oe/recipes-core/systemd/systemd-serialgetty/systemd-serialgetty
-@@ -0,0 +1,13 @@
-+#!/bin/sh
-+
-+for g in /sbin/agetty \
-+         /sbin/mingetty \
-+         /sbin/getty; do
-+	if [ -x "$g" ]; then
-+		$g $@
-+		exit 0
-+	fi
-+done
-+
-+echo "Failed to find the getty binary to use."
-+exit 1
 -- 
-1.7.2.5
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
 
