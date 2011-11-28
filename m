@@ -1,30 +1,19 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RUzuz-0003xR-00
+	(envelope-from <sledz@localhost.localdomain>) id 1RUzxs-00047B-U7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 13:02:41 +0100
-Received: by eaad13 with SMTP id d13so1669974eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 03:56:03 -0800 (PST)
-Received: by 10.180.7.97 with SMTP id i1mr45225267wia.23.1322481363262;
-	Mon, 28 Nov 2011 03:56:03 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id fi11sm38870855wbb.9.2011.11.28.03.56.02
-	(version=SSLv3 cipher=OTHER); Mon, 28 Nov 2011 03:56:02 -0800 (PST)
-Message-ID: <4ED376D1.9010701@dresearch-fe.de>
-Date: Mon, 28 Nov 2011 12:56:01 +0100
+	Mon, 28 Nov 2011 13:05:41 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 6C10B449275; Mon, 28 Nov 2011 12:59:03 +0100 (CET)
 From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1322470152-12440-1-git-send-email-sledz@dresearch-fe.de>
-	<1322471415.3637.6.camel@mattotaupa>
-In-Reply-To: <1322471415.3637.6.camel@mattotaupa>
-X-Enigmail-Version: 1.3.3
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] live555: add version 2011.11.20
+Date: Mon, 28 Nov 2011 12:58:59 +0100
+Message-Id: <1322481540-26151-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+In-Reply-To: <4ED376D1.9010701@dresearch-fe.de>
+References: <4ED376D1.9010701@dresearch-fe.de>
+Cc: paulepanter@users.sourceforge.net
+Subject: [PATCH v2] update live555 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +27,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 12:02:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 28 Nov 2011 12:05:41 -0000
 
-On 28.11.2011 10:10, Paul Menzel wrote:
-> Can the old recipe then removed?
+Steffen Sledz (1):
+  live555: replace version 20110314 with 20111120
 
-I'm not sure but i think yes. I'll modify the patch.
-
-> Could you also try to bring
-> `config.linux-cross` upstream, please?
-
-I'm not feeling as a live555 maintainer but i can try.
-
-Steffen
+ recipes/live555/live555_20110314.bb |    8 --------
+ recipes/live555/live555_20111120.bb |    7 +++++++
+ 2 files changed, 7 insertions(+), 8 deletions(-)
+ delete mode 100644 recipes/live555/live555_20110314.bb
+ create mode 100644 recipes/live555/live555_20111120.bb
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.7
+
 
 
