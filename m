@@ -1,35 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RV1xW-0002qy-2T for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 15:13:26 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RV1r3-00041R-Ab for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 15:06:45 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 15:06:45 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RV2MK-0003iZ-ES
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 15:39:05 +0100
+Received: by bkbzs2 with SMTP id zs2so7897494bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 15:06:45 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 28 Nov 2011 06:32:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=+SCv0Pm2zWJWZz6mWV+8MbxP8iGn6yRWYSvNhqjr9aA=;
+	b=QFRTjpgGjc8dpuel3piEFOXYlmEAu1nu2t01vSADcqQ+OTdvNQUETmOnrlmOMcanKW
+	lJkUlmabYEXz4cXoqyWkFo2KKgkxhpRlIIe7q7aVwtJ6zesZGGa6S0OQwvFkkaN7SnYs
+	OVSVhZ+XHh2EBrVv4LWx5fLLB9FUd/nN0aT2Q=
+MIME-Version: 1.0
+Received: by 10.204.153.195 with SMTP id l3mr10275156bkw.132.1322490722649;
+	Mon, 28 Nov 2011 06:32:02 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Mon, 28 Nov 2011 06:32:02 -0800 (PST)
+In-Reply-To: <CAPOJ94MGM=UQY4x+miij+rMcCLXPbJ8M9QHvVQQmf5Loqemc6w@mail.gmail.com>
+References: <cover.1322484731.git.otavio@ossystems.com.br>
+	<CAPOJ94MGM=UQY4x+miij+rMcCLXPbJ8M9QHvVQQmf5Loqemc6w@mail.gmail.com>
+Date: Mon, 28 Nov 2011 12:32:02 -0200
+X-Google-Sender-Auth: TmdcCd2Y2xGfFkdU2Cn0YJuQy4E
+Message-ID: <CAP9ODKppxv1Kj1qpsXeq9Y6FjmbXBeXL358BZxQuozau3_cEWg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 28 Nov 2011 15:06:30 +0100
-Message-ID: <jb04h6$241$1@dough.gmane.org>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>	<1322476245.26081.89.camel@phil-desktop>	<1322478479.26287.15.camel@ted>	<CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
-	<4ED38DA1.8060802@balister.org> <4ED38E5E.9060201@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <4ED38E5E.9060201@balister.org>
-X-Enigmail-Version: 1.3.3
-Subject: Re: Documentation problems
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH 0/1] systemd-serialgetty improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 14:13:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Nov 2011 14:39:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Nov 28, 2011 at 11:55, Peter Bigot <bigotp@acm.org> wrote:
 
-Op 28-11-11 14:36, Philip Balister schreef:
-> On 11/28/2011 08:33 AM, Philip Balister wrote:
->> On 11/28/2011 06:16 AM, Otavio Salvador wrote:
->>> On Mon, Nov 28, 2011 at 09:07, Richard Purdie < 
->>> richard.purdie@linuxfoundation.org> wrote:
->>> 
->>>> Rather than fork off the Yocto docs for OE's needs, it would be
->>>> nice to see if there was a way we could share the documentation.
->>>> 
->>> 
->>> I fully agree with that.
->>> 
->>> The work would be much easier if all that could be shared.
->>> 
->>> AFAIK, using docbook it is possible to use macros to expand for
->>> branding and also conditional to output text so this could be done in
->>> a single repository.
->>> 
->> 
->> We need to be really careful how all the pieces get branded. There is 
->> way too much confusion already, without referring people to the "Yocto 
->> Instructions" to use OE-core + layers.
-> 
-> Just to be really clear .....
-> 
-> Also, not I am not opposed to a unified documentation set, just that it 
-> is clear to people what things are called.
+> I'm still coming up to speed on OE standard practices, but on other
+> Unix-like systems I would expect /sbin/getty to be the standard
+> selection, though in some cases a symlink to a preferred alternative.
+> Why does the patch make /sbin/getty the last alternative checked,
+> instead of the first?
+>
 
-I started composing an email listing a lot of the phrases we need to avoid
-("yocto builds <foo>"), but I deleted it since previous attempts have been
-met with deafening silence. As I said during the GA: an excellent task for
-the board.
+If people want, I can change it. No problem.
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7TlWIACgkQMkyGM64RGpGP3QCgqT0MHXqB1XsNLTEq5zHiPTSo
-/CUAnR0FpleNrCBkRnDSzA0eLRzGG0bp
-=ErdT
------END PGP SIGNATURE-----
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
