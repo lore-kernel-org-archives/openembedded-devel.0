@@ -1,29 +1,33 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1RUzAW-0002RG-N4 for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 12:14:40 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id pASB80ND031204;
-	Mon, 28 Nov 2011 11:08:00 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30843-04; Mon, 28 Nov 2011 11:07:56 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id pASB7orB031198
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 28 Nov 2011 11:07:52 GMT
-Message-ID: <1322478479.26287.15.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2011 11:07:59 +0000
-In-Reply-To: <1322476245.26081.89.camel@phil-desktop>
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1RUzIO-0002lN-DH
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 12:22:49 +0100
+Received: by bkbzs2 with SMTP id zs2so7689007bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Nov 2011 03:16:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=4Hwn2msFWwGuGjfI+2uG8lTRCFeSvbkG/C3FLwaUJgQ=;
+	b=lDxFhI2yM8p34ZVnEsmw+gHo3bzWsilezKqV72gy7kB9wpAJ8nHmKfkSp8fs/mfMCp
+	ObUMMG7g6If9rabvQvgbePgsxn85lP03An8sCyWrqwa07FOjpOZgwHx1/Pbrv6DuhY9K
+	C5Lw4BRWPDkNrtysIY1gJgoN+nb05KQBpvGH4=
+MIME-Version: 1.0
+Received: by 10.204.148.4 with SMTP id n4mr45188914bkv.42.1322478969115; Mon,
+	28 Nov 2011 03:16:09 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Mon, 28 Nov 2011 03:16:08 -0800 (PST)
+In-Reply-To: <1322478479.26287.15.camel@ted>
 References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
 	<1322476245.26081.89.camel@phil-desktop>
-X-Mailer: Evolution 3.2.1- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
+	<1322478479.26287.15.camel@ted>
+Date: Mon, 28 Nov 2011 09:16:08 -0200
+X-Google-Sender-Auth: JksuR4Nm81iTzsR1C05cfBr4nU4
+Message-ID: <CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Cc: "Rifenbark, Scott M" <scott.m.rifenbark@intel.com>
 Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,56 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 11:14:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Nov 2011 11:22:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, 2011-11-28 at 10:30 +0000, Phil Blundell wrote:
-> On Sat, 2011-11-26 at 19:40 -0700, Tom Rini wrote:
-> > As things stand today, the wiki is out of date and a number of folks
-> > refuse to work on it.  Using things like "It's all text!" for firefox
-> > only go so far and don't solve problems like people just avoiding
-> > documentation anyhow.
-> > 
-> > Paul Menzel has mentioned that ikiwiki has been mentioned before and
-> > that lets us have the website in a repository.  Do folks have other
-> > ideasPeople could even contribute to those pieces of documentation?
-> 
-> I guess it depends what documentation you are thinking of exactly.
-> 
-> Bitbake and oe-classic both have their own user manuals written in
-> Docbook.  I think Poky has something similar which might be more or less
-> directly applicable to oe-core.  If the objective is to create a high
-> quality user guide then I think that starting from some combination of
-> these (and continuing in the same format) is probably the right
-> approach.
+On Mon, Nov 28, 2011 at 09:07, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
 
-The Yocto documentation effortI'd really love it if we could find a way
-for OE and Yocto to share the documentation.
- is aiming at a kind of "bookshelf" approach so that there are manuals
-for different parts of the system. 
+> Rather than fork off the Yocto docs for OE's needs, it would be nice to
+> see if there was a way we could share the documentation.
+>
 
-Yocto has a tech writer dedicated to working on the docs (cc'd, hi
-Scott). He's sometimes not able to directly write the deeply technical
-content but he is more than happy to take contributions to the manuals
-and edit them together to ensure consistent style, ordering and indexing
-and so forth. 
+I fully agree with that.
 
-We've had a few challenges in finding ways for Scott to be able to work
-on docs in an "open source" way using git+docbook as its a little
-different from some of his previous work but we're getting there. This
-is one of the reasons we have the docs repository separate at the moment
-since it simplifies some of Scott's work.
+The work would be much easier if all that could be shared.
 
-Rather than fork off the Yocto docs for OE's needs, it would be nice to
-see if there was a way we could share the documentation.
+AFAIK, using docbook it is possible to use macros to expand for branding
+and also conditional to output text so this could be done in a single
+repository.
 
-Cheers,
-
-Richard
-
-
-
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
