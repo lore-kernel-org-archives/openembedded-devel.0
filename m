@@ -1,23 +1,25 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RV1UE-0001K7-ST
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RV1Y8-0001Wn-HA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 14:43:11 +0100
-Received: (qmail 6103 invoked by uid 1003); 28 Nov 2011 13:36:32 -0000
-Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@96.240.172.5)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	28 Nov 2011 13:36:32 -0000
-Message-ID: <4ED38E5E.9060201@balister.org>
-Date: Mon, 28 Nov 2011 08:36:30 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
-MIME-Version: 1.0
+	Mon, 28 Nov 2011 14:47:12 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 28 Nov 2011 05:40:33 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.69,584,1315206000"; d="scan'208";a="79777524"
+Received: from unknown (HELO helios.localnet) ([10.252.121.230])
+	by azsmga001.ch.intel.com with ESMTP; 28 Nov 2011 05:40:32 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>	<1322476245.26081.89.camel@phil-desktop>	<1322478479.26287.15.camel@ted>	<CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
-	<4ED38DA1.8060802@balister.org>
-In-Reply-To: <4ED38DA1.8060802@balister.org>
-X-Enigmail-Version: 1.1.2
+Date: Mon, 28 Nov 2011 13:40:31 +0000
+Message-ID: <1724253.zzXo0bHLbE@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<jatlso$idi$1@dough.gmane.org>
+	<CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
+MIME-Version: 1.0
 Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,37 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 13:43:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Nov 2011 13:47:12 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 11/28/2011 08:33 AM, Philip Balister wrote:
-> On 11/28/2011 06:16 AM, Otavio Salvador wrote:
->> On Mon, Nov 28, 2011 at 09:07, Richard Purdie <
->> richard.purdie@linuxfoundation.org> wrote:
->>
->>> Rather than fork off the Yocto docs for OE's needs, it would be nice to
->>> see if there was a way we could share the documentation.
->>>
->>
->> I fully agree with that.
->>
->> The work would be much easier if all that could be shared.
->>
->> AFAIK, using docbook it is possible to use macros to expand for branding
->> and also conditional to output text so this could be done in a single
->> repository.
->>
-> 
-> We need to be really careful how all the pieces get branded. There is
-> way too much confusion already, without referring people to the "Yocto
-> Instructions" to use OE-core + layers.
+On Sunday 27 November 2011 22:11:00 Tom Rini wrote:
+> The number one thing we lack today is people willing to document.
+> Everyone, myself included, who has said we need X done to the public
+> documentation today, has generally found a point at which they stop
+> wanting to keep things up to date.  Why?  What would change that?
+> Does anyone reading this know people that _like_ editing wikis?  Can
+> we ask them what keeps them engaged in the process?
 
-Just to be really clear .....
+FWIW I do like editing wikis - certainly more than I like editing things 
+written in DocBook at least.
 
-Also, not I am not opposed to a unified documentation set, just that it
-is clear to people what things are called.
+It's true our wiki contains a *lot* of outdated or incomplete information. We 
+could do a lot just by marking pages as out-of-date or irrelevant (via 
+categories?) and then updating or deleting them assuming people agree. I'm 
+happy to start working on this assuming we aren't going to throw the whole 
+thing out.
 
-Philip
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
