@@ -1,28 +1,34 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1RUyjz-00015V-P0; Mon, 28 Nov 2011 11:47:15 +0100
-Received: by vcbfo13 with SMTP id fo13so1683250vcb.6
-	for <multiple recipients>; Mon, 28 Nov 2011 02:40:36 -0800 (PST)
-Received: by 10.220.152.20 with SMTP id e20mr4820731vcw.176.1322476836483;
-	Mon, 28 Nov 2011 02:40:36 -0800 (PST)
-Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id c7sm48242985vdh.12.2011.11.28.02.40.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Nov 2011 02:40:36 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1322475081.26081.79.camel@phil-desktop>
-Date: Mon, 28 Nov 2011 11:40:32 +0100
-Message-Id: <B33265F2-2F78-438E-B0A9-219EAC1A266A@dominion.thruhere.net>
-References: <CA+YB3rZzq1zu9UCqZo4H4OypRdPyRObzahLjejp-qxXbzum+aw@mail.gmail.com>
-	<1322475081.26081.79.camel@phil-desktop>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: tsc <tsc@lists.openembedded.org>, openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] OpenEmbedded TSC Meeting 17-Nov-2011
+	(envelope-from <otavio.salvador@gmail.com>) id 1RUyvw-0001Tg-4k
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 11:59:36 +0100
+Received: by bkbzs2 with SMTP id zs2so7663780bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Nov 2011 02:52:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=K0qzmrceMCFiw8dWEGnqmyDj5oRWIN1pvS/n9BSwF50=;
+	b=fM0a9vG5UZriK5+2LXozg31mJuqq1G4YFFmWfASrFGIgbzqyqcOfkdbY/Eku59SSrL
+	IQGbRd5V/b0ddqXn8lmpPNMLnQmwQzfPwxBVIcVp0pJt/FSpjQntJl/Ks3IVHAxOM4ST
+	Ss2otDDLAvtGB/Koj/u9jAWafWg4UkMlYLhqU=
+MIME-Version: 1.0
+Received: by 10.204.16.67 with SMTP id n3mr46689453bka.6.1322477578527; Mon,
+	28 Nov 2011 02:52:58 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Mon, 28 Nov 2011 02:52:58 -0800 (PST)
+In-Reply-To: <652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
+	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
+	<652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+Date: Mon, 28 Nov 2011 08:52:58 -0200
+X-Google-Sender-Auth: P5O-P8XPNbxDQk7UNlepX-1lm0g
+Message-ID: <CAP9ODKpFz5xpkJv-B1L5m2sMSERcN1d+P=hSJb=nDa7DxfdowQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe] digitemp: fix QA issues:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,62 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 10:47:16 -0000
-X-Groupsio-MsgNum: 35680
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_5B9E9CD4-F296-4DA9-A7C5-EB50CCC5F9ED";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 28 Nov 2011 10:59:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Apple-Mail=_5B9E9CD4-F296-4DA9-A7C5-EB50CCC5F9ED
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+On Mon, Nov 28, 2011 at 06:26, Koen Kooi <koen@dominion.thruhere.net> wrote:
+
+>
+> Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
+>
+> > On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> >> -EXTRA_OEMAKE = "ds9097 ds9097u"
+> >> +EXTRA_OEMAKE = "ds9097 ds9097u \
+> >> +                SYSTYPE='Linux' \
+> >> +               "
+> >> +# Fix GNU_HASH QA errors
+> >> +TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
+> >>
+> >>
+> >
+> > why CFLAGS ? I thought only LDFLAGS would have been sufficient
+>
+> For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and LDFLAGS.
+>
+> regards,
+>
+> Koen
+>
+>
+> -----BEGIN PGP SIGNATURE-----
+>
+> iEYEARECAAYFAk7TRcgACgkQMkyGM64RGpGywgCgjzrNXHq8p6U9B0SxwnA185VM
+> cFoAn2GqpleZxYeGQkSsr7oy/0lfrJn5
+> =Nbq+
+> -----END PGP SIGNATURE-----
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
-Op 28 nov. 2011, om 11:11 heeft Phil Blundell het volgende geschreven:
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-> On Wed, 2011-11-23 at 10:18 -0800, Jeff Osier-Mixon wrote:
->> berlios disappearing
->=20
-> Just as an observation, this business of "berlios going away at the =
-end
-> of the year" seems to crop up in the TSC minutes fairly often but
-> appears to be incorrect (or at least outdated).  According to the
-> berlios website, it doesn't appear that there is an imminent threat of
-> it disappearing.
-
-=46rom the berlios website:
-
-"Dear BerliOS developers and users,=20
-
-Since announcing that Fraunhofer FOKUS is forced to discontinue to =
-operate BerliOS we have received numerous rescue proposals. Today, we =
-are pleased to announce that the BerliOS platform can continue to exist. =
-Still in November 2011 a non-profit association will be founded, whose =
-aim is the operation and further development of the BerliOS platform. "
-
-So it seems the rescue is fairly recent [1] and still not completely =
-finished.
-
-regards,
-
-Koen
-
-[1] 20111031: http://developer.berlios.de/forum/forum.php?forum_id=3D37533=
-
---Apple-Mail=_5B9E9CD4-F296-4DA9-A7C5-EB50CCC5F9ED
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk7TZSIACgkQMkyGM64RGpF2qwCePBeCAgCleRjroGyb9YRSEdJr
-vhgAnRyksVGxcKm2gbnvznzSflMLTrCs
-=E8JM
------END PGP SIGNATURE-----
-
---Apple-Mail=_5B9E9CD4-F296-4DA9-A7C5-EB50CCC5F9ED--
