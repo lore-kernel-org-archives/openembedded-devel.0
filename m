@@ -1,31 +1,26 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RV8c7-0000kN-6B
+	(envelope-from <ka6sox@gmail.com>) id 1RV9tJ-0004BN-Ey
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 22:19:47 +0100
-Received: by qyk30 with SMTP id 30so1839885qyk.6
+	Mon, 28 Nov 2011 23:41:38 +0100
+Received: by iahk25 with SMTP id k25so9567889iah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 13:13:08 -0800 (PST)
+	Mon, 28 Nov 2011 14:34:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=m8IUSxzj1Zdd4krQKa47zFTZwc+jmess7dps/SeX0Fk=;
-	b=hL5qgtRAqEVrhq0+pwVDRO0oqPDQu+0Qeyn/TgAq2BVEP5UEiedx5L7XnzEFw7RLAD
-	Fj7z2CxJDYhYMRVaz0fK06tVjQGRL7ukBRkihX6lXVhggrrBkD2Xp4LZ+mx1+nAlYuCS
-	XezvU+yWjSiW45LtgNN+0UsKWJhXOosiE4KCQ=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=YpzVTgE4j/CR5SKa5XepyJbe22u+gY+orazfcyTv0jE=;
+	b=iOULsWRYj4ks27k543LDzUhI3wwSq0ywQjcjJ/E6MsdBcSkDG21CnHK5RxJxALYsjU
+	Al+cUQeCaao8MijHJ5jemE4xvHpoZLNke9+9j9uCxzSszgcSrmVRS7NA4Zm60nini7YO
+	2WuF40tAkxcpAlYxSRULDnCosfUMI1Q57iZns=
 MIME-Version: 1.0
-Received: by 10.229.85.193 with SMTP id p1mr3445622qcl.152.1322514788281; Mon,
-	28 Nov 2011 13:13:08 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Mon, 28 Nov 2011 13:13:08 -0800 (PST)
-In-Reply-To: <alpine.LNX.2.02.1111281848560.1090@myhost>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<1322476245.26081.89.camel@phil-desktop>
-	<1322478479.26287.15.camel@ted>
-	<alpine.LNX.2.02.1111281848560.1090@myhost>
-Date: Mon, 28 Nov 2011 14:13:08 -0700
-Message-ID: <CA+M6bXmW9d_+QYOGsGXggA4UvSySe1s6RRF_2Mcu77xvk04Kew@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+Received: by 10.42.156.130 with SMTP id z2mr27725061icw.13.1322519696782; Mon,
+	28 Nov 2011 14:34:56 -0800 (PST)
+Received: by 10.50.213.6 with HTTP; Mon, 28 Nov 2011 14:34:56 -0800 (PST)
+Date: Mon, 28 Nov 2011 14:34:56 -0800
+Message-ID: <CAHQecY6GREs=B5-asSaJm24enYo45_99o7sK6droTauuH9e1GQ@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Documentation problems
+Subject: Re: Documentation Issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 21:19:47 -0000
+X-List-Received-Date: Mon, 28 Nov 2011 22:41:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Nov 28, 2011 at 11:02 AM, Bernhard Guillon
-<Bernhard.Guillon@opensimpad.org> wrote:
-> On Mon, 28 Nov 2011, Richard Purdie wrote:
->
->> Rather than fork off the Yocto docs for OE's needs, it would be nice to
->> see if there was a way we could share the documentation.
->
-> I like that idea + the pull based model idea from Koen. In my opinion a pull
-> based model for the documentation lower the barriers to write documentation
-> because nobody want to write something false.
->
-> But the project webpage should not look like a docbook page.
+on 11/26/11:
 
-In my mind, that's only half of the problem, the deep dive side of
-things.  Or would that really be so few pages it doesn't matter (along
-with having the full manual online) ?
+Bernhard Guillon Bernhard.Guillon at opensimpad.org
 
--- 
+>Hi,
+>today I wanted to create a Template:We-move-to-oe-core (something like
+>this artikle is a stub) to mark all pages which needs a change and inform
+>new users about the move to oe-core. I created an account but I am unable
+>to edit anything. I even cannot edit my user page.>>
+>
+>Best regards,
+>Bernhard
+
+You now have access
+
 Tom
 
 
