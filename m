@@ -1,31 +1,34 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1RUuvY-00023A-Tb
+	(envelope-from <stefan@datenfreihafen.org>) id 1RUvxJ-0008W6-OP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 07:42:57 +0100
-Received: by yenl4 with SMTP id l4so342863yen.6
+	Mon, 28 Nov 2011 08:48:49 +0100
+Received: from [2001:638:602:1183:f2de:f1ff:fe62:28f7]
+	(helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1RUvqq-0005En-Na by authid <stefan@sostec.de> with srv_auth_cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Nov 2011 22:36:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=/c+Fqkxhwlev90jkx0372bRDMU1R/7/JH6QwHMX5fzY=;
-	b=RavaLDbZb0ROHObja30zT7mVjb+VN8juvlQKJnr3oKMoER3euVpc1lChyt/pYCc1eY
-	jCDw5NKCdZAvFVyofiw6gvgRwsSIUu55n2tMIm8YX67WKLi9VRslaC4riCdo5FEqEkRm
-	gHsB7RE4cKNVzN4huPUukFjDaeU+OxWWXjf2M=
-MIME-Version: 1.0
-Received: by 10.182.193.99 with SMTP id hn3mr8420229obc.61.1322462178949; Sun,
-	27 Nov 2011 22:36:18 -0800 (PST)
-Received: by 10.182.5.134 with HTTP; Sun, 27 Nov 2011 22:36:18 -0800 (PST)
-In-Reply-To: <CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<jatlso$idi$1@dough.gmane.org>
-	<CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
-Date: Sun, 27 Nov 2011 22:36:18 -0800
-Message-ID: <CAG4_upQty8KS_4tsHs9gvTtSgi=kMOq=xDrOdRTjeGpePWjqHA@mail.gmail.com>
-From: Chris Verges <kg4ysn@gmail.com>
+	Mon, 28 Nov 2011 08:42:13 +0100
+Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.77)
+	(envelope-from <stefan@novatech.datenfreihafen.org>)
+	id 1RUvrN-0003eX-3A for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 08:42:41 +0100
+Date: Mon, 28 Nov 2011 08:42:41 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Documentation problems
+Message-ID: <20111128074240.GA18674@novatech.datenfreihafen.org>
+References: <4ED2D6D2.1020308@hopgarden.net>
+MIME-Version: 1.0
+In-Reply-To: <4ED2D6D2.1020308@hopgarden.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
+Subject: Re: New user build problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,39 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 06:42:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Nov 2011 07:48:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, Nov 27, 2011 at 9:11 PM, Tom Rini <tom.rini@gmail.com> wrote:
+Hello.
 
-> Does anyone reading this know people that _like_ editing wikis?  Can
-> we ask them what keeps them engaged in the process?
->
+On Mon, 2011-11-28 at 00:33, Reuben Wells wrote:
+> 
+> I had built most of the packages and then hit a problem and tried to
+> start again. I removed all files and then ran:
+> 
+> git clone git://git.angstrom-distribution.org/setup-scripts
+> MACHINE=beagleboard ./oebb.sh config beagleboard
+> MACHINE=beagleboard ./oebb.sh update
+> MACHINE=beagleboard ./oebb.sh bitbake virtual/kernel
+> 
+> Now I can't get past the "Parsing recipes", my cooker.log file just has:
+> 
+> NOTE: angstrom DOES NOT support libiconv because the eglibc provided
+> iconv library is used
+> NOTE: angstrom DOES NOT support libiconv because the eglibc provided
+> iconv library is used
+> ERROR: Could not include required file linux-2.6.39.inc
+> ERROR: Command execution failed: Exited with 1
+> 
+> I've since tried refreshing a number of times with no luck.
+> 
+> I'm not sure where the reference to "linux-2.6.39.inc" is coming
+> from. I can't find any references to it.
 
-Hi Tom,
+Its a problem introduced with a commit on meta-handheld. Taking out
+the meta-handheld line in conf/bblayers.conf can work as a temporary
+workaround.
 
-This is an excellent discussion.  As someone interested in seeing some good
-documentation come out of the OE project, consider that documentation is
-really the way that users first interact with the software.  If the
-documentation is poor, the user will more than likely seek another project.
- But if the documentation helps explain things well, the user will be able
-to start interacting with the software and/or code more quickly.
+regards
+Stefan Schmidt
 
-Some consider a "necessary evil," but I prefer to think of it as "the
-gateway to the product."  I actually do find documenting my designs and
-code to be useful, as I find I can't keep track of as many things the older
-I get.  :-)
-
-On that note, as a user of OE for the past 5 years, I want to thank you ALL
-for producing a great piece of software.  It's revolutionized how I start
-embedded projects, and is one of those "essential" tools in my war chest.
- The "classic" docs were decent enough, but even as someone with 5 years of
-OE experience, I'm having problems figuring out the new scheme fully.  I've
-been waiting silently to read any docs that are produced, in fact.
-
-I'm happy to help document, but obviously would need some knowledge
-transfer to make that happen.  Catch-22, eh?
-
-Thanks again,
-Chris
 
