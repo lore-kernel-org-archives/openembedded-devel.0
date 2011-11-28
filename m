@@ -1,34 +1,19 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RUyvw-0001Tg-4k
+	(envelope-from <sledz@localhost.localdomain>) id 1RUz9s-0002CL-EC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 11:59:36 +0100
-Received: by bkbzs2 with SMTP id zs2so7663780bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 02:52:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=K0qzmrceMCFiw8dWEGnqmyDj5oRWIN1pvS/n9BSwF50=;
-	b=fM0a9vG5UZriK5+2LXozg31mJuqq1G4YFFmWfASrFGIgbzqyqcOfkdbY/Eku59SSrL
-	IQGbRd5V/b0ddqXn8lmpPNMLnQmwQzfPwxBVIcVp0pJt/FSpjQntJl/Ks3IVHAxOM4ST
-	Ss2otDDLAvtGB/Koj/u9jAWafWg4UkMlYLhqU=
-MIME-Version: 1.0
-Received: by 10.204.16.67 with SMTP id n3mr46689453bka.6.1322477578527; Mon,
-	28 Nov 2011 02:52:58 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Mon, 28 Nov 2011 02:52:58 -0800 (PST)
-In-Reply-To: <652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
-References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
-	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
-	<652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
-Date: Mon, 28 Nov 2011 08:52:58 -0200
-X-Google-Sender-Auth: P5O-P8XPNbxDQk7UNlepX-1lm0g
-Message-ID: <CAP9ODKpFz5xpkJv-B1L5m2sMSERcN1d+P=hSJb=nDa7DxfdowQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 28 Nov 2011 12:14:00 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 335BC44A5F5; Mon, 28 Nov 2011 12:07:22 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe] digitemp: fix QA issues:
+Date: Mon, 28 Nov 2011 12:07:01 +0100
+Message-Id: <1322478424-22419-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+In-Reply-To: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
+References: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: [PATCH v2 0/3] gypsy update and fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +27,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 10:59:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Nov 2011 11:14:00 -0000
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+This is the update patch set according to the annotations of Paul Menzel.
 
-On Mon, Nov 28, 2011 at 06:26, Koen Kooi <koen@dominion.thruhere.net> wrote:
+Steffen Sledz (3):
+  gypsy: fix packaging of DBus starter script
+  gypsy: move generic SRC_URI part to gypsy.inc
+  gypsy: update to latest upstream version 0.8, and remove version 0.7
 
->
-> Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
->
-> > On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
-> >> -EXTRA_OEMAKE = "ds9097 ds9097u"
-> >> +EXTRA_OEMAKE = "ds9097 ds9097u \
-> >> +                SYSTYPE='Linux' \
-> >> +               "
-> >> +# Fix GNU_HASH QA errors
-> >> +TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
-> >>
-> >>
-> >
-> > why CFLAGS ? I thought only LDFLAGS would have been sufficient
->
-> For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and LDFLAGS.
->
-> regards,
->
-> Koen
->
->
-> -----BEGIN PGP SIGNATURE-----
->
-> iEYEARECAAYFAk7TRcgACgkQMkyGM64RGpGywgCgjzrNXHq8p6U9B0SxwnA185VM
-> cFoAn2GqpleZxYeGQkSsr7oy/0lfrJn5
-> =Nbq+
-> -----END PGP SIGNATURE-----
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-
+ recipes/gypsy/gypsy.inc    |    6 +++++-
+ recipes/gypsy/gypsy_0.7.bb |   10 ----------
+ recipes/gypsy/gypsy_0.8.bb |    6 ++++++
+ 3 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 recipes/gypsy/gypsy_0.7.bb
+ create mode 100644 recipes/gypsy/gypsy_0.8.bb
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.7
+
+
 
