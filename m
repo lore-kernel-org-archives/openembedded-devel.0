@@ -1,34 +1,29 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1RUvxJ-0008W6-OP
+	(envelope-from <sledz@dresearch-fe.de>) id 1RUwZq-0001D5-Tr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 08:48:49 +0100
-Received: from [2001:638:602:1183:f2de:f1ff:fe62:28f7]
-	(helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1RUvqq-0005En-Na by authid <stefan@sostec.de> with srv_auth_cram_md5
+	Mon, 28 Nov 2011 09:28:38 +0100
+Received: by wwo1 with SMTP id 1so8751566wwo.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 08:42:13 +0100
-Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.77)
-	(envelope-from <stefan@novatech.datenfreihafen.org>)
-	id 1RUvrN-0003eX-3A for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 08:42:41 +0100
-Date: Mon, 28 Nov 2011 08:42:41 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111128074240.GA18674@novatech.datenfreihafen.org>
-References: <4ED2D6D2.1020308@hopgarden.net>
+	Mon, 28 Nov 2011 00:22:01 -0800 (PST)
+Received: by 10.180.90.6 with SMTP id bs6mr42884263wib.63.1322468521222;
+	Mon, 28 Nov 2011 00:22:01 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id em4sm38315416wbb.20.2011.11.28.00.22.00
+	(version=SSLv3 cipher=OTHER); Mon, 28 Nov 2011 00:22:00 -0800 (PST)
+Message-ID: <4ED344A7.6060301@dresearch-fe.de>
+Date: Mon, 28 Nov 2011 09:21:59 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-In-Reply-To: <4ED2D6D2.1020308@hopgarden.net>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: New user build problem
+To: openembedded-devel@lists.openembedded.org
+References: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
+	<1322146025-21514-2-git-send-email-sledz@dresearch-fe.de>
+In-Reply-To: <1322146025-21514-2-git-send-email-sledz@dresearch-fe.de>
+X-Enigmail-Version: 1.3.3
+Subject: Re: [PATCH 2/2] gypsy: update to latest upstream version 0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 07:48:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Nov 2011 08:28:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello.
+On 24.11.2011 15:47, Steffen Sledz wrote:
+> Bug fixes, enhanced logging, a new debugging system, enhanced device
+> discovery.
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 
-On Mon, 2011-11-28 at 00:33, Reuben Wells wrote:
-> 
-> I had built most of the packages and then hit a problem and tried to
-> start again. I removed all files and then ran:
-> 
-> git clone git://git.angstrom-distribution.org/setup-scripts
-> MACHINE=beagleboard ./oebb.sh config beagleboard
-> MACHINE=beagleboard ./oebb.sh update
-> MACHINE=beagleboard ./oebb.sh bitbake virtual/kernel
-> 
-> Now I can't get past the "Parsing recipes", my cooker.log file just has:
-> 
-> NOTE: angstrom DOES NOT support libiconv because the eglibc provided
-> iconv library is used
-> NOTE: angstrom DOES NOT support libiconv because the eglibc provided
-> iconv library is used
-> ERROR: Could not include required file linux-2.6.39.inc
-> ERROR: Command execution failed: Exited with 1
-> 
-> I've since tried refreshing a number of times with no luck.
-> 
-> I'm not sure where the reference to "linux-2.6.39.inc" is coming
-> from. I can't find any references to it.
+Ping!
 
-Its a problem introduced with a commit on meta-handheld. Taking out
-the meta-handheld line in conf/bblayers.conf can work as a temporary
-workaround.
+If there are no NAKs i'll push both patches tomorrow.
 
-regards
-Stefan Schmidt
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
