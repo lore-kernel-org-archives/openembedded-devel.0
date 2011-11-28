@@ -1,35 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RUzIO-0002lN-DH
+	(envelope-from <sledz@dresearch-fe.de>) id 1RUzuz-0003xR-00
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 12:22:49 +0100
-Received: by bkbzs2 with SMTP id zs2so7689007bkb.6
+	Mon, 28 Nov 2011 13:02:41 +0100
+Received: by eaad13 with SMTP id d13so1669974eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 03:16:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=4Hwn2msFWwGuGjfI+2uG8lTRCFeSvbkG/C3FLwaUJgQ=;
-	b=lDxFhI2yM8p34ZVnEsmw+gHo3bzWsilezKqV72gy7kB9wpAJ8nHmKfkSp8fs/mfMCp
-	ObUMMG7g6If9rabvQvgbePgsxn85lP03An8sCyWrqwa07FOjpOZgwHx1/Pbrv6DuhY9K
-	C5Lw4BRWPDkNrtysIY1gJgoN+nb05KQBpvGH4=
+	Mon, 28 Nov 2011 03:56:03 -0800 (PST)
+Received: by 10.180.7.97 with SMTP id i1mr45225267wia.23.1322481363262;
+	Mon, 28 Nov 2011 03:56:03 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id fi11sm38870855wbb.9.2011.11.28.03.56.02
+	(version=SSLv3 cipher=OTHER); Mon, 28 Nov 2011 03:56:02 -0800 (PST)
+Message-ID: <4ED376D1.9010701@dresearch-fe.de>
+Date: Mon, 28 Nov 2011 12:56:01 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-Received: by 10.204.148.4 with SMTP id n4mr45188914bkv.42.1322478969115; Mon,
-	28 Nov 2011 03:16:09 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Mon, 28 Nov 2011 03:16:08 -0800 (PST)
-In-Reply-To: <1322478479.26287.15.camel@ted>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<1322476245.26081.89.camel@phil-desktop>
-	<1322478479.26287.15.camel@ted>
-Date: Mon, 28 Nov 2011 09:16:08 -0200
-X-Google-Sender-Auth: JksuR4Nm81iTzsR1C05cfBr4nU4
-Message-ID: <CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: "Rifenbark, Scott M" <scott.m.rifenbark@intel.com>
-Subject: Re: Documentation problems
+References: <1322470152-12440-1-git-send-email-sledz@dresearch-fe.de>
+	<1322471415.3637.6.camel@mattotaupa>
+In-Reply-To: <1322471415.3637.6.camel@mattotaupa>
+X-Enigmail-Version: 1.3.3
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] live555: add version 2011.11.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 11:22:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 28 Nov 2011 12:02:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 28, 2011 at 09:07, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
+On 28.11.2011 10:10, Paul Menzel wrote:
+> Can the old recipe then removed?
 
-> Rather than fork off the Yocto docs for OE's needs, it would be nice to
-> see if there was a way we could share the documentation.
->
+I'm not sure but i think yes. I'll modify the patch.
 
-I fully agree with that.
+> Could you also try to bring
+> `config.linux-cross` upstream, please?
 
-The work would be much easier if all that could be shared.
+I'm not feeling as a live555 maintainer but i can try.
 
-AFAIK, using docbook it is possible to use macros to expand for branding
-and also conditional to output text so this could be done in a single
-repository.
+Steffen
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
+
 
