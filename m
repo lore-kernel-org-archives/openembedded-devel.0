@@ -1,25 +1,24 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RV1Ju-0000ny-Ee
+	(envelope-from <philip@balister.org>) id 1RV1RF-00019J-Fe
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 14:32:30 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 28 Nov 2011 05:25:51 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.69,584,1315206000"; d="scan'208";a="89777648"
-Received: from unknown (HELO helios.localnet) ([10.252.121.230])
-	by fmsmga001.fm.intel.com with ESMTP; 28 Nov 2011 05:25:50 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 28 Nov 2011 13:25:49 +0000
-Message-ID: <47236173.EeZFgPNp8G@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <1322472706-12917-1-git-send-email-koen@dominion.thruhere.net>
-References: <1322472706-12917-1-git-send-email-koen@dominion.thruhere.net>
+	Mon, 28 Nov 2011 14:40:05 +0100
+Received: (qmail 16976 invoked by uid 1003); 28 Nov 2011 13:33:22 -0000
+Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@96.240.172.5)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	28 Nov 2011 13:33:22 -0000
+Message-ID: <4ED38DA1.8060802@balister.org>
+Date: Mon, 28 Nov 2011 08:33:21 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld] linux 2.6.39: remove all traces of it
+To: openembedded-devel@lists.openembedded.org
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>	<1322476245.26081.89.camel@phil-desktop>	<1322478479.26287.15.camel@ted>
+	<CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
+In-Reply-To: <CAP9ODKqJdi_fNhBN7QZambbSRtE6w8z--EYRYoypT1Mm5AV6gw@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,32 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 13:32:30 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 28 Nov 2011 13:40:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Monday 28 November 2011 10:31:46 Koen Kooi wrote:
-> The previous commit stated:
+On 11/28/2011 06:16 AM, Otavio Salvador wrote:
+> On Mon, Nov 28, 2011 at 09:07, Richard Purdie <
+> richard.purdie@linuxfoundation.org> wrote:
 > 
-> 	From e6a10fdf93658c0ab93e9a9afc924f52589ab4f6 Mon Sep 17 00:00:00 2001
-> 	From: Paul Eggleton <paul.eggleton@linux.intel.com>
-> 	Date: Sun, 27 Nov 2011 21:33:58 +0000
-> 	Subject: linux: move h1940 up to 3.1
+>> Rather than fork off the Yocto docs for OE's needs, it would be nice to
+>> see if there was a way we could share the documentation.
+>>
 > 
-> 	* Add new h1940 defconfig from Vasily Koruzhick <anarsoul@gmail.com>
-> 	* Remove 2.6.39 as no machine in meta-handheld is using it anymore
+> I fully agree with that.
 > 
-> So lets indeed remove 2.6.39 and stop the parse failures from happening
+> The work would be much easier if all that could be shared.
+> 
+> AFAIK, using docbook it is possible to use macros to expand for branding
+> and also conditional to output text so this could be done in a single
+> repository.
+> 
 
-Oops, sorry about that. Fix merged to meta-handheld master.
+We need to be really careful how all the pieces get branded. There is
+way too much confusion already, without referring people to the "Yocto
+Instructions" to use OE-core + layers.
 
-Thanks,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Philip
 
 
