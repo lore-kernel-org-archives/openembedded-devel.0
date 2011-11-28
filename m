@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUxWR-0006at-3N for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 10:29:11 +0100
-Received: from f053038019.adsl.alicedsl.de ([78.53.38.19]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RUxQ4-0005YF-Hg for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Nov 2011 09:22:36 +0000
-Message-ID: <1322472154.3637.10.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RUxXC-0006hm-7e for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 10:29:59 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RUxQm-0007in-MF for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Nov 2011 10:23:20 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Nov 2011 10:23:20 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Nov 2011 10:23:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2011 10:22:34 +0100
-In-Reply-To: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
-References: <1322146025-21514-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: Evolution 3.0.3-2 
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 28 Nov 2011 10:23:08 +0100
+Message-ID: <javjts$6f8$1@dough.gmane.org>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<jatlso$idi$1@dough.gmane.org>
+	<CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
 Mime-Version: 1.0
-Subject: Re: [PATCH 1/2] gypsy: fix packaging
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <CA+M6bXnQN9Q62w22sjiVaqkdipaXPgujR_FTWPE8N24z=MAW4A@mail.gmail.com>
+X-Enigmail-Version: 1.3.3
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,93 +44,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 09:29:11 -0000
-X-Groupsio-MsgNum: 35671
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-W5J5bCCEY+38KL6pgG1B"
-
---=-W5J5bCCEY+38KL6pgG1B
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Donnerstag, den 24.11.2011, 15:47 +0100 schrieb Steffen Sledz:
-> A wrong path had avoided the packaging of the dbus starter script
-> /usr/share/dbus-1/system-services/org.freedesktop.Gypsy.service.
-
-So why not use
-
-    gypsy: fix packaging of DBus starter script
-
-as the commit summary?
-
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> ---
->  recipes/gypsy/gypsy.inc    |    4 +++-
->  recipes/gypsy/gypsy_0.7.bb |    2 ++
->  2 files changed, 5 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/gypsy/gypsy.inc b/recipes/gypsy/gypsy.inc
-> index eab062c..964e336 100644
-> --- a/recipes/gypsy/gypsy.inc
-> +++ b/recipes/gypsy/gypsy.inc
-> @@ -3,6 +3,8 @@ LICENSE =3D "GPL"
->  SECTION =3D "x11"
->  DEPENDS =3D "glib-2.0 dbus-glib bluez4 libxslt-native"
-> =20
-> +INC_PR =3D "r1"
-> +
->  inherit autotools pkgconfig
-> =20
->  do_configure_prepend () {
-> @@ -14,6 +16,6 @@ PACKAGES +=3D "libgypsy libgypsy-dev libgypsy-dbg"
->  FILES_lib${PN} =3D "${libdir}/lib*.so*"
->  FILES_lib${PN}-dev =3D "${includedir}/* ${libdir}/*.la ${libdir}/*.a ${l=
-ibdir}/pkgconfig"
->  FILES_lib${PN}-dbg =3D "${libdir}/.debug"
-> -FILES_${PN} =3D "${datadir}/dbus-1/services/ ${libexecdir}/gypsy-daemon =
-${sysconfdir}/dbus-1/system.d/*"
-> +FILES_${PN} =3D "${datadir}/dbus-1/system-services/* ${libexecdir}/gypsy=
--daemon ${sysconfdir}/dbus-1/system.d/*"
->  FILES_${PN}-dbg =3D"${libexecdir}/.debug*"
->  CONFFILES_${PN} =3D "${sysconfdir}/dbus-1/system.d/Gypsy.conf"
-> diff --git a/recipes/gypsy/gypsy_0.7.bb b/recipes/gypsy/gypsy_0.7.bb
-> index 8cd8760..a10cd6e 100644
-> --- a/recipes/gypsy/gypsy_0.7.bb
-> +++ b/recipes/gypsy/gypsy_0.7.bb
-> @@ -1,5 +1,7 @@
->  require gypsy.inc
-> =20
-> +PR =3D "${INC_PR}.1"
-> +
-
-Since `INC_PR` is increased, `${INC_PR}.0` should be fine.
-
->  SRC_URI =3D "http://gypsy.freedesktop.org/releases/gypsy-0.7.tar.gz;name=
-=3Dgypsy \
->             file://docs-reference-am.patch \
->             file://remove-werror.patch \
-
-With the changes above this recipe is
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-
-Thanks,
-
-Paul
-
---=-W5J5bCCEY+38KL6pgG1B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Mon, 28 Nov 2011 09:30:00 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-iEYEABECAAYFAk7TUtoACgkQPX1aK2wOHVi+NgCfQRgZsoH98e6Fb4Zuzg0+DtNR
-D/4AnRBixZougFLUI8PsxuJFPDCu4/Q0
-=B+dw
+Op 28-11-11 06:11, Tom Rini schreef:
+> On Sun, Nov 27, 2011 at 8:44 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
+>> 
+>> Op 27-11-11 03:40, Tom Rini schreef:
+>>> Hey all,
+>>> 
+>>> As things stand today, the wiki is out of date and a number of folks 
+>>> refuse to work on it.
+>> 
+>> Does it actually need to be a wiki? Or rather: do web edits need to
+>> show up immediately?
+> 
+> If spam is eliminated, does it still matter, today?
+
+Ever since OE was founded the information in the wikis has been terrible.
+The information in the docbook was accurate, but didn't cover everything.
+
+
+>>> Paul Menzel has mentioned that ikiwiki has been mentioned before and
+>>> that lets us have the website in a repository.  Do folks have other
+>>> ideas?
+>> 
+>> I really like the idea of storing the content in git since it gives us
+>> 2 things we need for documentation: backups and a pull model.
+> 
+> The number one thing we lack today is people willing to document.
+
+I'd change that to "knowledgable people"
+
+> Everyone, myself included, who has said we need X done to the public 
+> documentation today, has generally found a point at which they stop 
+> wanting to keep things up to date.  Why?  What would change that?
+
+I stopped working on the OE wiki because I couldn't keep up with people
+adding anecdotal, but misleading information into it.
+
+> Does anyone reading this know people that _like_ editing wikis?  Can we
+> ask them what keeps them engaged in the process?
+
+People in general like editing wikis, yes. The problem with OE is that it is
+such niche product and has a steep learning curve as well. It does not lend
+itself to drive-by editing like e.g. wikipedia.
+
+How about this:
+
+Proposal a:
+
+1) fork the poky/yocto docbook based manual
+2) run a sed script to change it to an OE branded version
+3) convert it to a wiki
+
+proposal b:
+
+1) fork the poky/yocto docbook based manual
+2) run a sed script to change it to an OE branded version
+3) put it in git, webpages get updated with a git-hook
+
+If people want to use a webbrowser to edit it:
+https://github.com/blog/844-forking-with-the-edit-button
+If we have setup the github mirror correctly the pull request will arrive on
+the mailinglist automatically.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7TUvoACgkQMkyGM64RGpGqZACgoputgxl8LxHT0bipoA0gdWpV
+kzEAnA3mTcKxrfsH3a4M1jTnGHACa6VL
+=PMji
 -----END PGP SIGNATURE-----
 
---=-W5J5bCCEY+38KL6pgG1B--
+
+
