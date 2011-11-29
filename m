@@ -1,34 +1,31 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RVVcP-0006aq-1p
+	(envelope-from <cwabbott0@gmail.com>) id 1RVWy6-0002dT-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Nov 2011 22:53:37 +0100
-Received: by vbbfc21 with SMTP id fc21so4744803vbb.6
+	Wed, 30 Nov 2011 00:20:06 +0100
+Received: by vcbfo13 with SMTP id fo13so3384941vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2011 13:46:56 -0800 (PST)
+	Tue, 29 Nov 2011 15:13:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=F1fWzyErIlx5+EPeSpGwhtPz84m1WzaMcBeTnKhSAFo=;
-	b=o+3ptrHg3oWVgZ77lSJTXXjBrAspqb9EKOhq21275+5XO9URNe49mYOfyB22heJOE0
-	RrMXODgXQv7N0EDXBUA+feQs8mNtQ67WVKqB9H+iwukOQ8JRAU351CYw9p/5FtUSDkvC
-	0GocvvwltGktN3B4kno8lccsBp4a+2DRIb8TM=
+	:content-type; bh=+M4u9u5OQ/HwvWWevjZwYjf1v4fEh9C8tvh/XTUqMsg=;
+	b=Xit7ZYxKXkdDh6MKzrelHTj9FskXUO8HfOL6g8/VIFUMwRjMlShsDX89VZ1/5JqGsD
+	5Ax2QsNHYBMaAQRA25nmqFeNS6TQxXmPzd7T2+Y9VYJEfhcKNL7dwkfPnAFel1rKMw25
+	hwE0lQGOFAgZ6LARcCufZX/znUvvH3QR9fsLM=
 MIME-Version: 1.0
-Received: by 10.52.65.176 with SMTP id y16mr50634150vds.53.1322603216786; Tue,
-	29 Nov 2011 13:46:56 -0800 (PST)
-Received: by 10.52.28.238 with HTTP; Tue, 29 Nov 2011 13:46:56 -0800 (PST)
-In-Reply-To: <CAMKF1sr9aBc4tMvJDwoPQHranmLs-knaXDp3bhgK5jxd-8f+WQ@mail.gmail.com>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<1322476245.26081.89.camel@phil-desktop>
-	<1322478479.26287.15.camel@ted>
-	<alpine.LNX.2.02.1111281848560.1090@myhost>
-	<CACW_hTYYKTX4RQXwFSEu+VR3kPe1kGw1J_ba-=L1XqE_QkwWJA@mail.gmail.com>
-	<CAMKF1sr9aBc4tMvJDwoPQHranmLs-knaXDp3bhgK5jxd-8f+WQ@mail.gmail.com>
-Date: Tue, 29 Nov 2011 22:46:56 +0100
-Message-ID: <CACW_hTbvoH+KH75mXrikXp8+CPTxdh_w=LKCOgGJ6CQGaKOTWw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.52.94.227 with SMTP id df3mr40904749vdb.51.1322608406206; Tue,
+	29 Nov 2011 15:13:26 -0800 (PST)
+Received: by 10.220.203.66 with HTTP; Tue, 29 Nov 2011 15:13:26 -0800 (PST)
+Received: by 10.220.203.66 with HTTP; Tue, 29 Nov 2011 15:13:26 -0800 (PST)
+In-Reply-To: <jad09l$c0g$1@dough.gmane.org>
+References: <1321811782-7133-1-git-send-email-cwabbott0@gmail.com>
+	<jad09l$c0g$1@dough.gmane.org>
+Date: Tue, 29 Nov 2011 18:13:26 -0500
+Message-ID: <CACu1E7EigJom5yDg+VYZ15o6HF2cJO3BThtCLgEO1Fo1=s-URg@mail.gmail.com>
+From: Connor Abbott <cwabbott0@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Documentation problems
+Subject: Re: [meta-gnome][PATCH] libnotify: add 0.5.2 and make it the default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,93 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 21:53:37 -0000
+X-List-Received-Date: Tue, 29 Nov 2011 23:20:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2011/11/29 Khem Raj <raj.khem@gmail.com>
-
-> Hi Frans,
+Sorry, I must have had the 0.7.0 headers installed and didn't realize it.
+Actually, that's a problem; if you build two different packages, one which
+requires libnotify and one which requires libnotify3, then the wrong
+headers can get installed in the sysroot because the packages have
+different names. Anyways, it appears that 0.5.2 is actually newer than
+0.6.0 anyways; I'll update the commit message then.
+On Nov 21, 2011 2:58 AM, "Koen Kooi" <koen@dominion.thruhere.net> wrote:
 >
-
-Hi Khem, all
-
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> On Tue, Nov 29, 2011 at 12:24 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
-> >
-> > Of course I also do not want to write faulty documentation; then again I
-> > also hate wasting my time, so I think I wouldn't even start if there was
-> a
-> > chance that my contribution might be rejected because the pull master
-> does
-> > not like my style or feels there are grammar errors or so.
+> Op 20-11-11 18:56, Connor Abbott schreef:
+> > Versions of libnotify >= 0.6.0 have API changes that break some gnome
+> > recipes.
 >
-> I consider someone reviewing my patches a good thing. I think it makes
-> me learn things
-> if there is feedback on the patches, I include the feedback and
-> resubmit the patch and thereby improve it
->
-
-Oh, I consider reviewing patches a good thing too. For documentation it
-also depends on the process and the kind of comments.
-If the person pulling the changes rejects them because (s)he finds the
-grammar not ok and the review comment is "improve grammar", that is fairly
-demotivating (if I knew how to do so, I would have done that upfront).
-A few of such rejects will make that most people loose the interest in
-submitting documentation quite quickly.
-And if you have to give detailed review comments or instructions reviewing
-becomes quite time consuming (actually more time consuming than actually
-making the change yourself)
-
-That is somewhat the advantage of a wiki. You can contribute to the best of
-your abilities and others can extend with their knowledge, expertise and
-language skills.
-Then again, I understand that there is a risk that faulty information is
-created (as was also expressed by Koen). However I cannot really recall big
-such problems with our wiki.
-
-There is of course another problem (which does surface every once in a
-while). Sometimes people write pieces based upon outdated information. And
-even if not, the information itself will become outdated.
-E.g. if we deprecate PR (which is a good idea btw) this needs to be changed
-in the wiki too. That is a part of the process that is not really well
-developed.
-outdated information is equally wrong as other faulty information.
-
-As stated before, for most people writing documentation is not particularly
-fun, so it should be made easy with few annoyances. Make it hard and you
-will hardly get contributions. Turn people down a few times and they are
-gone.
-
+> Which recipes are that? The only API breakage I know of is in libnoty >=
+> 0.7.0, which is why that's called 'libnotify3'
 >
 >
-> >
-> > (note that I am not a native english speaker so this is not too unlikely;
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.11 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
 >
-> neither am I.
+> iEYEARECAAYFAk7KBHAACgkQMkyGM64RGpFcmQCfXeZgqdkn76RQO6fErXYARefD
+> 2zsAnAgBzS2HiSx1RQQ+hvW63Le66qsY
+> =0+pG
+> -----END PGP SIGNATURE-----
 >
-> > also if there are language errors in a contributed piece of documentation
-> > on a wiki other people more proficient in english could correct those
-> > easier and better than I ever can),
 >
-> right now there is no review process for wiki. So if I write a
-> document it does not get notified
-> to people and chances of someone really stumbling into this new piece
-> are new users who are studying
-> that document and I think reviewing it beforehand is a good thing
-> since I might have written it wrong
-> besides grammar errors. I think wrong documentation is worse than no
-> documentation.
->
-
-I agree with the wrong documentation is worse than no documentation.
-I'm not sure whether there are no wiki plugins to allow notification.
-(and it is always possible to examine the recent changes page, but that is
-not really convenient).
-
-BTW it is always possible to lock certain pages and only allow a limited
-set of users to edit those pages. I can imagine this is done wth the pages
-that are considered core.
-
-Frans
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
