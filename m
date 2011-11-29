@@ -1,36 +1,34 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RVKoT-0005Dg-MP
+	(envelope-from <martin.jansa@gmail.com>) id 1RVOfI-0005fH-LE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Nov 2011 11:21:21 +0100
-Received: by bkbzs2 with SMTP id zs2so9144807bkb.6
+	Tue, 29 Nov 2011 15:28:08 +0100
+Received: by bkbzs2 with SMTP id zs2so9413849bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2011 02:14:42 -0800 (PST)
+	Tue, 29 Nov 2011 06:21:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=bte9bGxAyePvisooo17hilEGeBH6CRmeLTurJUa4X6o=;
-	b=k1aMaf+cWsfgnxhLvPRCn2jkwa8rcBjSGG/U7AnzblXieVSuqT5sBIiE88eNhNk8Ri
-	mh3Xo1+o4+mFq5LMY0PlPBMpZtGI/HySzJGs9LbW1Zn9Kxss/GsX+5a4TJMcg9+WJ+EI
-	suw+XiSmvb5TWrFv+5o6Hz7xhw6PB65j3j+CQ=
-MIME-Version: 1.0
-Received: by 10.204.153.195 with SMTP id l3mr14213286bkw.132.1322561681825;
-	Tue, 29 Nov 2011 02:14:41 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Tue, 29 Nov 2011 02:14:41 -0800 (PST)
-In-Reply-To: <CACW_hTaLjh10+YEfHkvTDkLC_PNxAjG8kBJkuUVemoO8+NC-Rw@mail.gmail.com>
-References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
-	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
-	<652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
-	<CAMKF1sqdDTL5NshgoiGaN67GwynMZ+rWnwCRvo3+YAy4e3Tepw@mail.gmail.com>
-	<CACW_hTaLjh10+YEfHkvTDkLC_PNxAjG8kBJkuUVemoO8+NC-Rw@mail.gmail.com>
-Date: Tue, 29 Nov 2011 08:14:41 -0200
-X-Google-Sender-Auth: q1SfJ0d0bZ2xkDR368EgsheesX8
-Message-ID: <CAP9ODKpOijfCiwjRRWYodndXmYF9Cfs55ftGbtTW2pXBXBM8EA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ZsWpbPDoQbVz3KxuNnvQ20Ev1vYBka5Y6bkj4kS2WZA=;
+	b=Gg2RfiZioLuznZ681bYfe/Z29RRw200L8+RvJQ7AN0wXhCAUQ7oGxx8qKS9HI9y/rO
+	rAH+8QaprGb89ZDAI8mgCipGZ+01bxsZFH66yAlYrmZcHwNb+NrOPyTZOK+JsBBnm5A5
+	ZHccHIsklXMcEA/P+DXAxjlyttXwsbDEWdZj4=
+Received: by 10.204.156.218 with SMTP id y26mr49647163bkw.103.1322576489748;
+	Tue, 29 Nov 2011 06:21:29 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id c4sm37319502bkk.13.2011.11.29.06.21.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 29 Nov 2011 06:21:26 -0800 (PST)
+Date: Tue, 29 Nov 2011 15:21:14 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe] digitemp: fix QA issues:
+Message-ID: <20111129142114.GG7441@jama.jama.net>
+References: <cover.1320860740.git.Martin.Jansa@gmail.com>
+	<15e1d24dd8ceb0b5caad096f215a3ace86f6c14d.1320860740.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <15e1d24dd8ceb0b5caad096f215a3ace86f6c14d.1320860740.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe 3/4] libsdl-x11: drop from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,21 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 10:21:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Nov 2011 14:28:08 -0000
+X-Groupsio-MsgNum: 35717
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="w/VI3ydZO+RcZ3Ux"
+Content-Disposition: inline
 
-On Tue, Nov 29, 2011 at 05:52, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+--w/VI3ydZO+RcZ3Ux
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->  Actually personally I'd say passing CFLAGS and LDFLAGS to TARGET_CC_ARCH
-> is a workaround and the real solution is patching the build system to not
-> to ignore those flags.
+On Wed, Nov 09, 2011 at 06:47:55PM +0100, Martin Jansa wrote:
+> * there is libsdl in oe-core and nothing depends on libsdl-x11 here
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+finally this can go in and I'll resend updated mplayer patches with next
+pull request.
+
+Cheers,
 
 
-Yes; I am cooking a patch for it.
+--w/VI3ydZO+RcZ3Ux
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk7U6loACgkQN1Ujt2V2gBxqYQCfeb4yrz4Nr6TwU0bWA2SbB3PU
+s8EAn1+nqoJQbKXaCQc7/GP50yXI+F84
+=Mwop
+-----END PGP SIGNATURE-----
+
+--w/VI3ydZO+RcZ3Ux--
