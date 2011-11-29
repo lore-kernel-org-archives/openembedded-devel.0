@@ -1,30 +1,32 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RVB37-0006wU-FK
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RVIav-0004Qc-KR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Nov 2011 00:55:49 +0100
-Received: by iahk25 with SMTP id k25so9657729iah.6
+	Tue, 29 Nov 2011 08:59:13 +0100
+Received: by vbbfc21 with SMTP id fc21so4027121vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2011 15:49:10 -0800 (PST)
+	Mon, 28 Nov 2011 23:52:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=5ZOOW3IbE0VvJTQFA1TH3TdwEPIjcM5QBFmcGjhtLNI=;
-	b=hDbvx2VzyPApFb9niq2vemMdL6tFO0RbvSW8ZjuxLUUNbKtW2MMgAOTbHFdMl6VMUK
-	6CddghxML5qoXGThY/WGpnx8ctlHuLeduAzr8f1Xmu3IBjiGOk4yIAXZwZ7cdVpFj91s
-	9lSoxGXA1pC/cYnkLlKE45OJT95lMPMEd46C8=
-Received: by 10.50.213.6 with SMTP id no6mr56052922igc.51.1322524150132;
-	Mon, 28 Nov 2011 15:49:10 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id cb15sm46349163ibb.4.2011.11.28.15.49.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 28 Nov 2011 15:49:09 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=3cayWMxyiphaN3WOt9QJ5B1QDq/9e4qZQGTNaLZ3rAc=;
+	b=JZtySb8GCc0s73l7Yk8aB9D1WK5GltQrHoSqboHnUZMWjSNMb/71Ags0ca1uBMEtLw
+	GgIUNN9h93Bo9+I6AS6tqizDfgWAwdkfuP5/opNaQyBE7z3fGTrpo/KumNnriY9hyZNQ
+	0k2BTlnRmbiEW+Jpt9FTCFTd9f/pDE9+3v1JQ=
+MIME-Version: 1.0
+Received: by 10.52.97.35 with SMTP id dx3mr46958999vdb.2.1322553154382; Mon,
+	28 Nov 2011 23:52:34 -0800 (PST)
+Received: by 10.52.28.238 with HTTP; Mon, 28 Nov 2011 23:52:34 -0800 (PST)
+In-Reply-To: <CAMKF1sqdDTL5NshgoiGaN67GwynMZ+rWnwCRvo3+YAy4e3Tepw@mail.gmail.com>
+References: <1322395493-30396-1-git-send-email-koen@dominion.thruhere.net>
+	<CAMKF1sreJB3qkFnDZPxpxBv7bZBkfE6aJ0Jwbv55HvQepitj6g@mail.gmail.com>
+	<652FFCE9-01FD-4E13-8ABA-4B7100803BE0@dominion.thruhere.net>
+	<CAMKF1sqdDTL5NshgoiGaN67GwynMZ+rWnwCRvo3+YAy4e3Tepw@mail.gmail.com>
+Date: Tue, 29 Nov 2011 08:52:34 +0100
+Message-ID: <CACW_hTaLjh10+YEfHkvTDkLC_PNxAjG8kBJkuUVemoO8+NC-Rw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2011 15:56:42 -0800
-Message-Id: <1322524602-11331-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [2011.03-maintenance][PATCH] eglibc: Fix build when OPTION_EGLIBC_NSSWITCH is not set.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe] digitemp: fix QA issues:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,67 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 23:55:49 -0000
+X-List-Received-Date: Tue, 29 Nov 2011 07:59:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Few of build problems are being reported on classic OE
-when OPTION_EGLIBC_NSSWITCH is set to 'n' by default it
-works well. But when its set to 'n' then we have to make
-sure that OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG and
-OPTION_EGLIBC_NSSWITCH_FIXED_FUNCTIONS are set to point
-to abosolute paths in sources
+2011/11/28 Khem Raj <raj.khem@gmail.com>
 
-Fixes build errors like
+> On Mon, Nov 28, 2011 at 12:26 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> >
+> > Op 28 nov. 2011, om 03:17 heeft Khem Raj het volgende geschreven:
+> >
+> >> On Sun, Nov 27, 2011 at 4:04 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> >>> -EXTRA_OEMAKE = "ds9097 ds9097u"
+> >>> +EXTRA_OEMAKE = "ds9097 ds9097u \
+> >>> +                SYSTYPE='Linux' \
+> >>> +               "
+> >>> +# Fix GNU_HASH QA errors
+> >>> +TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
+> >>>
+> >>>
+> >>
+> >> why CFLAGS ? I thought only LDFLAGS would have been sufficient
+> >
+> > For GNU_HASH yes, but the buildsystem was ignoring both CFLAGS and
+> LDFLAGS.
+> >
+>
+> bug in the build system I would say
+>
+> Actually personally I'd say passing CFLAGS and LDFLAGS to TARGET_CC_ARCH
+is a workaround and the real solution is patching the build system to not
+to ignore those flags.
 
-Makefile:85: *** OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG variable left
-unset.  Stop.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/eglibc/eglibc-options.inc |    6 +++++-
- recipes/eglibc/eglibc.inc         |    4 ++--
- 2 files changed, 7 insertions(+), 3 deletions(-)
-
-diff --git a/recipes/eglibc/eglibc-options.inc b/recipes/eglibc/eglibc-options.inc
-index 0af0aab..c3ba5e3 100644
---- a/recipes/eglibc/eglibc-options.inc
-+++ b/recipes/eglibc/eglibc-options.inc
-@@ -4,7 +4,11 @@ def eglibc_cfg(feature, features, tokens, cnf ):
- 	if type(features) == type([]) and feature in features:
- 		cnf.extend([token + ' = y' for token in tokens])
- 	else:
--		cnf.extend([token + ' = n' for token in tokens])
-+		for token in tokens:
-+			cnf.extend([token + ' = n'])
-+			if token == 'OPTION_EGLIBC_NSSWITCH':
-+				cnf.extend(["OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG = ${S}/nss/nsswitch.conf"])
-+				cnf.extend(["OPTION_EGLIBC_NSSWITCH_FIXED_FUNCTIONS = ${S}/nss/fixed-nsswitch.functions"])
- 
- # Map distro features to eglibc options settings
- def features_to_eglibc_settings(d):
-diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
-index f0cfca8..23c3763 100644
---- a/recipes/eglibc/eglibc.inc
-+++ b/recipes/eglibc/eglibc.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.eglibc.org/home"
- SECTION = "libs"
- PRIORITY = "required"
- LICENSE = "LGPL"
--INC_PR = "r21"
-+INC_PR = "r22"
- # nptl needs unwind support in gcc, which can't be built without glibc.
- DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
- #this leads to circular deps, so lets not add it yet
-@@ -42,7 +42,7 @@ do_move_ports() {
- 	    mv ${WORKDIR}/${EGLIBC_BRANCH}/ports ${S}/
- 	fi
- }
--OE_FEATURES := "${@features_to_eglibc_settings(d)}"
-+OE_FEATURES = "${@features_to_eglibc_settings(d)}"
- do_configure_prepend() {
- 	echo '${OE_FEATURES}' > ${B}/option-groups.config
- }
--- 
-1.7.0.4
-
-
+Frans
 
