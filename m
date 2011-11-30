@@ -1,33 +1,29 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RVfLK-0007qt-1X
+	(envelope-from <martin.jansa@gmail.com>) id 1RVfS0-0008BK-OG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 09:16:38 +0100
-Received: by eaad13 with SMTP id d13so317225eaa.6
+	Wed, 30 Nov 2011 09:23:32 +0100
+Received: by eekc1 with SMTP id c1so154835eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 00:09:58 -0800 (PST)
+	Wed, 30 Nov 2011 00:16:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1uaEOPGMC+NVLwjlzRKq2VbxjNAl+cgH5epRHmOjr6A=;
-	b=o+8Zjl9XrruDrrHW9avQ7KOY64C5hcuwKx2EcD+GSiEyti5ETpoSwao5jppbrgCNXC
-	hnqBc7Ax9+24mC1Zsb/4enfiyib8zTNwTNUx+oqKwuBHrOdMscRC4AHhzsb9N8ka3G/S
-	Uo//BxtNnjUi03H93nM+d0iJSwH0cXaysiPLU=
-Received: by 10.213.26.206 with SMTP id f14mr267499ebc.126.1322640598304;
-	Wed, 30 Nov 2011 00:09:58 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=CaMe6IMbcsoQlhe7zXZzKi6xOTmBUowv9ZZZ6yqSGdI=;
+	b=SR1DhQLDKUGfO05KcqbadBdC0ATnSRZxdqJk0kZnrBRrWik6HS5zBb2VbpyQbtGAsa
+	Jq+wk5pxHavWZ7p35mcndfu+2GOje2pN1sf6yVK1LhJ+/1BsjmCWi+5fGgGbGgzyQ5PK
+	Rpovjvjyo4Gcn/O/b/QV9z/4xLLxgYhx1WBW8=
+Received: by 10.14.16.97 with SMTP id g73mr116682eeg.73.1322641009707;
+	Wed, 30 Nov 2011 00:16:49 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z54sm3608201eeh.5.2011.11.30.00.09.56
+	by mx.google.com with ESMTPS id q28sm3655560eea.6.2011.11.30.00.16.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Nov 2011 00:09:57 -0800 (PST)
-Date: Wed, 30 Nov 2011 09:09:43 +0100
+	Wed, 30 Nov 2011 00:16:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111130080943.GA30631@jama.jama.net>
-References: <cover.1322640244.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <cover.1322640244.git.Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oo 0/4] mplayer changes and gconf-native drop
+Date: Wed, 30 Nov 2011 09:16:45 +0100
+Message-Id: <cover.1322640506.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc4
+Subject: [meta-efl 00/11] efl upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,70 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 08:16:38 -0000
-X-Groupsio-MsgNum: 35733
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SUOF0GtieIMvvwua"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Nov 2011 08:23:32 -0000
 
---SUOF0GtieIMvvwua
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I'm testing even newer revisions for 1.1.0-beta, but with current elementary
+changes I'll keep it a bit longer in shr or jansa/test branch until API settle
+a bit again.. (ie elm_genlist/elm_gengrid API was unifiend to elm_gen around r64250
+but today there is new plan to remove new elm_gen and merge gengrid to genlist and 
+keep genlist api see r65700)
 
-On Wed, Nov 30, 2011 at 09:06:39AM +0100, Martin Jansa wrote:
-> The following changes since commit f3ca7acd0b678a9247e432aee34512a26e30f5=
-09:
+The following changes since commit f3ca7acd0b678a9247e432aee34512a26e30f509:
 
-sorry about typo in prefix, but I belive that it will show in koen's
-patchwork :)
+  libsdl-x11: drop from meta-oe (2011-11-30 08:52:38 +0100)
 
->=20
->   libsdl-x11: drop from meta-oe (2011-11-30 08:52:38 +0100)
->=20
-> are available in the git repository at:
->   git://git.openembedded.org/meta-openembedded-contrib jansa/pull
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/pull
->=20
-> Martin Jansa (4):
->   mplayer-common: import from OE-classic
->   mplayer2: drop armv7a/omapfb optimizations, those can be applied from
->     bsp layer if needed
->   mplayer2: drop OPTIMIZATIONs for now
->   gconf-native: drop from meta-gnome, newer version is in oe-core
->=20
->  .../recipes-gnome/gconf/gconf-native_2.6.1.bb      |   17 -
->  .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 +
->  .../mplayer/mplayer-common/mplayer.conf            |   15 +
->  .../0001-video-out-for-omapfb-support.patch        |  826 --------------=
-------
->  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   28 +-
->  5 files changed, 43 insertions(+), 865 deletions(-)
->  delete mode 100644 meta-gnome/recipes-gnome/gconf/gconf-native_2.6.1.bb
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mpl=
-ayer.conf
->  delete mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-vide=
-o-out-for-omapfb-support.patch
->=20
-> --=20
-> 1.7.8.rc4
->=20
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/meta-efl
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/meta-efl
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Martin Jansa (11):
+  elsa: add sessreg xauth to RDEPENDS
+  elsa: add elsa.conf to CONFFILES
+  elsa: use common-* instead of system-auth in pam config
+  e-base: bump EFL_SRCREV for 1.1.0 alpha versions
+  efl.bbclass: don't remove STAGING_LIBDIR STAGING_INCDIR from efl
+    pkgconfig files
+  epdf: drop upstream applied patch and ewl is gone too
+  eeze: pass /bin/true instead of eject which is not available
+  edje: fix license metadata
+  elementary: fix license metadata
+  elementary: add gettextize patch
+  elementary: disable web support
 
---SUOF0GtieIMvvwua
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ meta-efl/classes/e-base.bbclass                    |    2 +-
+ meta-efl/classes/efl.bbclass                       |    2 +-
+ meta-efl/recipes-efl/e17/elfe_svn.bb               |    3 +-
+ meta-efl/recipes-efl/efl/edje.inc                  |    5 +-
+ meta-efl/recipes-efl/efl/eeze.inc                  |    3 +
+ .../0001-elementary-gettextize-0.18.1.patch        |   76 ++++++++++++++++++++
+ meta-efl/recipes-efl/efl/elementary_svn.bb         |    7 ++-
+ ...am-use-common-auth-instead-of-system-auth.patch |   29 ++++++++
+ meta-efl/recipes-efl/efl/elsa_svn.bb               |    8 ++-
+ .../efl/epdf/epdf.poppler-0.16.api.change.patch    |   11 ---
+ meta-efl/recipes-efl/efl/epdf_svn.bb               |    2 -
+ meta-efl/recipes-efl/efl/evas_svn.bb               |    3 +-
+ 12 files changed, 126 insertions(+), 25 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/efl/elementary/0001-elementary-gettextize-0.18.1.patch
+ create mode 100644 meta-efl/recipes-efl/efl/elsa/0001-pam-use-common-auth-instead-of-system-auth.patch
+ delete mode 100644 meta-efl/recipes-efl/efl/epdf/epdf.poppler-0.16.api.change.patch
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+-- 
+1.7.8.rc4
 
-iEYEARECAAYFAk7V5McACgkQN1Ujt2V2gBygqwCeLH4P2gNhWOaonkUecuNxlRX1
-eLYAn2MqLXRjoUYaC7E4h4YVIGOIZ1Yg
-=ZJ/P
------END PGP SIGNATURE-----
 
---SUOF0GtieIMvvwua--
+
