@@ -1,29 +1,31 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RVfIK-0007LU-7b
+	(envelope-from <martin.jansa@gmail.com>) id 1RVfIP-0007LU-VA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 09:13:32 +0100
-Received: by eekc1 with SMTP id c1so149163eek.6
+	Wed, 30 Nov 2011 09:13:38 +0100
+Received: by mail-ee0-f47.google.com with SMTP id c1so149163eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 00:06:52 -0800 (PST)
+	Wed, 30 Nov 2011 00:07:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=kPX5FN+jzfApC1Y2ldbPu1uniKvvnqAsY+Uaa8fzR1Q=;
-	b=MkYKQ4RzfkXJFfhAF0RxrK3iJBSSOY4tw7sZCqO3P9BNt3pOuyDOHjschI1onDEzHv
-	HD65t/Hhx7uMHWzqngUvx2F6ZNREeO3m2D6mZIQMZtpAn3QM4P8kWVP75c3nUHuSr8jv
-	xm1sg3/uEMCQOkV5AL+xue2IJxEl6FhRsAKY8=
-Received: by 10.14.12.78 with SMTP id 54mr118356eey.150.1322640408635;
-	Wed, 30 Nov 2011 00:06:48 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=1BBj5KiVYueQ9NUMqu1ugTVsyEd66ZX66lC1Mz0MXXU=;
+	b=Xasowivhu8b+X1vBbI1szqjYxlU5g4aF+kHfPQ4SZj9SOVzyYIIbTsdO/kLDN9ZZht
+	YAVqezZ/D/PKSTz2idXnLGTUTKqtJsasrvfcl8LVZ6fU8s7K1F7JeidQtJZPz/f3KguU
+	I0EFssmDXqGjFcuPWtahbp9GFR+wUS4SpSfcI=
+Received: by 10.14.8.199 with SMTP id 47mr131078eer.1.1322640420164;
+	Wed, 30 Nov 2011 00:07:00 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id c9sm1662940eeb.0.2011.11.30.00.06.46
+	by mx.google.com with ESMTPS id v3sm3565167eej.7.2011.11.30.00.06.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Nov 2011 00:06:47 -0800 (PST)
+	Wed, 30 Nov 2011 00:06:58 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2011 09:06:39 +0100
-Message-Id: <cover.1322640244.git.Martin.Jansa@gmail.com>
+Date: Wed, 30 Nov 2011 09:06:48 +0100
+Message-Id: <404d4fc58d6513392e0e567f15ebc92299c6f3df.1322640244.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc4
-Subject: [meta-oo 0/4] mplayer changes and gconf-native drop
+In-Reply-To: <cover.1322640244.git.Martin.Jansa@gmail.com>
+References: <cover.1322640244.git.Martin.Jansa@gmail.com>
+Subject: [meta-oo 1/4] mplayer-common: import from OE-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 08:13:33 -0000
+X-List-Received-Date: Wed, 30 Nov 2011 08:13:38 -0000
 
-The following changes since commit f3ca7acd0b678a9247e432aee34512a26e30f509:
+From: Martin Jansa <martin.jansa@gmail.com>
 
-  libsdl-x11: drop from meta-oe (2011-11-30 08:52:38 +0100)
+* default ao is now alsa instead of oss
+* ffmp3float is terribly slow on armv4t without FPU, mad is better
+* commit b28081b6039db85f18bf9e722fece59bff6e7b0f
 
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (4):
-  mplayer-common: import from OE-classic
-  mplayer2: drop armv7a/omapfb optimizations, those can be applied from
-    bsp layer if needed
-  mplayer2: drop OPTIMIZATIONs for now
-  gconf-native: drop from meta-gnome, newer version is in oe-core
-
- .../recipes-gnome/gconf/gconf-native_2.6.1.bb      |   17 -
- .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 +
- .../mplayer/mplayer-common/mplayer.conf            |   15 +
- .../0001-video-out-for-omapfb-support.patch        |  826 --------------------
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   28 +-
- 5 files changed, 43 insertions(+), 865 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gconf/gconf-native_2.6.1.bb
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-multimedia/mplayer/mplayer-common.bb   |   22 ++++++++++++++++++++
+ .../mplayer/mplayer-common/mplayer.conf            |   15 +++++++++++++
+ 2 files changed, 37 insertions(+), 0 deletions(-)
  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
  create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
- delete mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-video-out-for-omapfb-support.patch
 
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+new file mode 100644
+index 0000000..889bb95
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
+@@ -0,0 +1,22 @@
++# Copyright Matthias Hentges <devel@hentges.net> (c) 2006
++# License: MIT (see COPYING.MIT)
++
++DESCRIPTION = "Preconfigured mplayer preferences"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++PV = "0.0.1"
++
++SRC_URI = "file://mplayer.conf"
++
++# Yes, really /usr/etc!!!
++do_install() {
++	install -d "${D}/usr${sysconfdir}/mplayer"
++
++	install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
++}
++
++FILES_${PN} = "/usr${sysconfdir}/mplayer"
++
++inherit allarch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+new file mode 100644
+index 0000000..37ad65f
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+@@ -0,0 +1,15 @@
++
++# You probably shouldn't touch these
++ac=mad,
++ao=alsa,
++
++# Required on SL-Cxxxx for correct rotation in the *VT*,
++# breaks rotation in X!
++# vf=rotate=1
++
++# Enable fullscreen display by default
++# fs=true
++
++# Drop frames to keep audio and video in sync
++framedrop=true
++
 -- 
 1.7.8.rc4
 
