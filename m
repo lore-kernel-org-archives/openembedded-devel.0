@@ -1,28 +1,36 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1RVhEK-0003yI-NJ
+	(envelope-from <martin.jansa@gmail.com>) id 1RVhba-00056X-Ts
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 11:17:33 +0100
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id pAUAAlkM026958
+	Wed, 30 Nov 2011 11:41:34 +0100
+Received: by eekc1 with SMTP id c1so236162eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 11:10:52 +0100
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Wed, 30 Nov 2011 11:10:48 +0100
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Can't get BBLAYERS working with 2011.03-maintenance RECALL
-Thread-Index: AQHMr0hULX7buIvbbUS4naZTWT7Z5Q==
-Date: Wed, 30 Nov 2011 10:10:48 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C401A242A@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
+	Wed, 30 Nov 2011 02:34:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=G16+wwiax1nfrgb1MMYsRzxtyOOzIqhc+mrmZQoY5P0=;
+	b=yGJlGi2GlAE4NOldyWsMbdWZEXNA7y1DVsiifnKJFUI2h43KFfjo2dXvKBGQXPntRJ
+	jx1QmrtCO+TVbUBb/weKAFMXtPgyFCnaEDGp/+8l2Dx86fFD/JIvUUtbW+HCzUhE7hv/
+	x0iAYTeGyYYNhf67e6jlWkFtBXa9lAQ93d3vQ=
+Received: by 10.14.5.148 with SMTP id 20mr202702eel.105.1322649294890;
+	Wed, 30 Nov 2011 02:34:54 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id d6sm4755033eec.10.2011.11.30.02.34.52
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 30 Nov 2011 02:34:53 -0800 (PST)
+Date: Wed, 30 Nov 2011 11:34:41 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20111130103441.GB4799@jama.jama.net>
+References: <a>
+	<55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
+	<ecba1c3e0b6a24b2dfe237b04ad6789b32014391.1322640506.git.Martin.Jansa@gmail.com>
+	<jb4t09$rmo$3@dough.gmane.org>
 MIME-Version: 1.0
-Subject: Re: Can't get BBLAYERS working with 2011.03-maintenance RECALL
+In-Reply-To: <jb4t09$rmo$3@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-efl 11/11] elementary: disable web support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,74 +44,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 10:17:33 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 30 Nov 2011 10:41:35 -0000
+X-Groupsio-MsgNum: 35759
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="5I6of5zJg18YgZEa"
+Content-Disposition: inline
+
+--5I6of5zJg18YgZEa
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Sorry!=0A=
-Forget this, I'm an idiot!=0A=
-I found a conflicting definition of BBFILES in local.conf.=0A=
-=0A=
-BR // Mats=0A=
-________________________________________=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Mats K=E4rrman [Mats.Karrman@=
-tritech.se]=0A=
-Sent: Wednesday, November 30, 2011 10:37 AM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Subject: [oe] Can't get BBLAYERS working with 2011.03-maintenance=0A=
-=0A=
- Hi,=0A=
-=0A=
-I want to start using BBLAYERS and .bbappend with my 2011.03-maintenance pr=
-oject. I found a nice introduction ( http://sakrah.homelinux.org/blog/2010/=
-11/bblayers-bbappend/ ) that I followed.=0A=
-Now I've got the following ($PWD and TOPDIR is .../oe/):=0A=
-=0A=
---- setup script ---=0A=
-export OEBASE=3D$PWD=0A=
-export DL_DIR=3D$ARCHIVE_DIR=0A=
-export BB_ENV_EXTRAWHITE=3D"OEBASE MACHINE DISTRO DL_DIR"=0A=
-export PATH=3D$OEBASE/bitbake/bin:$PATH=0A=
-=0A=
---- .../oe/conf//bblayers.conf ---=0A=
-TOPDIR :=3D "${@os.path.dirname(os.path.dirname(d.getVar('FILE', True)))}"=
-=0A=
-BBPATH =3D "${TOPDIR}"=0A=
-BBLAYERS =3D "${TOPDIR}/openembedded ${TOPDIR}/local"=0A=
-=0A=
---- .../oe/openembedded/conf/layer.conf ---=0A=
-BBFILES +=3D "${LAYERDIR}/recipes/*/*.bb"=0A=
-BBPATH .=3D ":${LAYERDIR}"=0A=
-BBFILE_COLLECTIONS +=3D "oe"=0A=
-BBFILE_PRIORITY_oe =3D "0"=0A=
-BBFILE_PATTERN_oe =3D "^${LAYERDIR}/"=0A=
-=0A=
---- .../oe/local/conf/layer.conf ---=0A=
-BBFILES +=3D "${LAYERDIR}/recipes/*/*.bb ${LAYERDIR}/recipes/*/*.bbappend"=
-=0A=
-BBPATH .=3D ":${LAYERDIR}"=0A=
-BBFILE_COLLECTIONS +=3D "local"=0A=
-BBFILE_PRIORITY_local =3D "1"=0A=
-BBFILE_PATTERN_local =3D "${LAYERDIR}"=0A=
-=0A=
-Now, if I run "bitbake -e" all variables seem to get the correct values exc=
-ept BBFILES that gets the .bb entry for both openembedded and local but no =
-.bbappend!=0A=
-I have tried with both bitbake 1.12.0 and 1.14.0 but there is no difference=
- in the outcome.=0A=
-I can see in the debug log that the .../oe/local/conf/layer.conf is loaded =
-and if I change the BBFILES line to garbage I get a parsing error but no ma=
-tter what I write between the quotes it doesn't show up in the output...=0A=
-=0A=
-If anyone have a clue on what is wrong I would appreciate your help!=0A=
-=0A=
-BR // Mats=0A=
-=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
+On Wed, Nov 30, 2011 at 10:28:41AM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 30-11-11 09:16, Martin Jansa schreef:
+> > * we don't have webkit-efl in DEPENDS so it depends on build order if
+> > it's autodetected or not for elementary * libewebkit0 is quite bit so we
+> > don't want to pull it to every image with elementary
+>=20
+> I was about to suggest splitting it...
+>=20
+> > * and we cannot split elementary web support to different package becau=
+se
+> > libewebkit is linked directly from libelementary-ver-pre-svn-09.so.0.8.0
+>=20
+> ... but you've already answered that :)
 
+I was also thinking about spliting libewebkit a bit more
+SHR root@gjama / $ ls -lah /usr/lib/libewebkit.so.0.1.0
+-rwxr-xr-x 1 root root 525K Nov 10 10:09 /usr/lib/libewebkit.so.0.1.0
 
+525K is not that big, but:
+SHR root@gjama / $ opkg info libewebkit0 | grep Size
+Size: 13192646
+
+lrwxrwxrwx 1 root root   19 Nov 28 15:47 /usr/lib/libewebkit.so.0 -> libewe=
+bkit.so.0.1.0
+-rwxr-xr-x 1 root root 525K Nov 10 10:09 /usr/lib/libewebkit.so.0.1.0
+lrwxrwxrwx 1 root root   30 Nov 28 15:47 /usr/lib/libjavascriptcore_efl.so.=
+0 -> libjavascriptcore_efl.so.0.1.0
+-rwxr-xr-x 1 root root 4.2M Nov 10 10:09 /usr/lib/libjavascriptcore_efl.so.=
+0.1.0
+lrwxrwxrwx 1 root root   23 Nov 28 15:47 /usr/lib/libwebcore_efl.so.0 -> li=
+bwebcore_efl.so.0.1.0
+-rwxr-xr-x 1 root root  41M Nov 10 10:09 /usr/lib/libwebcore_efl.so.0.1.0
+lrwxrwxrwx 1 root root   19 Nov 28 15:47 /usr/lib/libwtf_efl.so.0 -> libwtf=
+_efl.so.0.1.0
+-rwxr-xr-x 1 root root 413K Nov 10 10:09 /usr/lib/libwtf_efl.so.0.1.0
+-rw-r--r-- 1 root root 116K Nov 10 10:06 /usr/share/ewebkit-0/themes/defaul=
+t.edj
+
+and
+SHR root@gjama / $ ldd /usr/lib/libewebkit.so.0.1.0  | grep web
+        libwebcore_efl.so.0 =3D> /usr/lib/libwebcore_efl.so.0 (0x403a5000)
+
+So we cannot even pull only smaller 525K part of it..
+
+Regards,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--5I6of5zJg18YgZEa
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk7WBsEACgkQN1Ujt2V2gBwWygCfdKQ8A9rcig9kkafiBWlAAI75
+VWIAoLAyP4uxI0boU0YF4XbrDywwmP5G
+=Xpkt
+-----END PGP SIGNATURE-----
+
+--5I6of5zJg18YgZEa--
