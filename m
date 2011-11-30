@@ -1,35 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RVfTM-0008LO-Ua
+	(envelope-from <martin.jansa@gmail.com>) id 1RVfTW-0000R8-2J
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 09:24:56 +0100
-Received: by mail-ey0-f175.google.com with SMTP id d13so325412eaa.6
+	Wed, 30 Nov 2011 09:25:06 +0100
+Received: by eekc1 with SMTP id c1so155730eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 00:18:19 -0800 (PST)
+	Wed, 30 Nov 2011 00:18:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=zb/4coGrSpNcoaTC1GYgSW3o4gpSx2VQkUr9yv0V82o=;
-	b=BYd2kufo44VRpO0x+gIoPVt6jCc0QJx7H0MRlUTeQBMwXWhDE+k4g5KnaixMXyozI9
-	UcRcAIPl6xkOvfXVg2iKBNOc8LPPIQ3/05En8Z8udnEw14nTkiBwES7ZbAvGjlB499ma
-	Oq/hFne6FsYb+gPfa+pno+lSuezGnOOYAoxjc=
-Received: by 10.213.27.74 with SMTP id h10mr190652ebc.72.1322641099085;
-	Wed, 30 Nov 2011 00:18:19 -0800 (PST)
+	bh=2E5F5bLl1GSk/beZZk2NPm8lSkL/wr52PcVMZfayXLI=;
+	b=IJ9aKklCftZ5Hxa+cVR6MDF7kGkN858jhi6to7NnBWAUfzFJO9hQVeThDtwNkzrQ4N
+	d3jl4HkYDL7yv7JjWH22aPPsSZG94vwC0a6yLwyYA1esn3v0pdQK8erJAgqYRrki77AL
+	vsoAV+vNXsZ0Yd/vYWwYSUT1vMtgROjbEd4Lc=
+Received: by 10.14.18.132 with SMTP id l4mr124142eel.144.1322641106378;
+	Wed, 30 Nov 2011 00:18:26 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 49sm3712957eec.1.2011.11.30.00.18.17
+	by mx.google.com with ESMTPS id z58sm3696459eea.3.2011.11.30.00.18.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Nov 2011 00:18:17 -0800 (PST)
+	Wed, 30 Nov 2011 00:18:25 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2011 09:16:55 +0100
-Message-Id: <7c1a8723e991d635c448e59ff9430601b8889556.1322640506.git.Martin.Jansa@gmail.com>
+Date: Wed, 30 Nov 2011 09:16:56 +0100
+Message-Id: <8ea2d6d86320d3660470b9b9224bb41c3a268ff0.1322640506.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc4
 In-Reply-To: <55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
 References: <a>
 	<55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1322640506.git.Martin.Jansa@gmail.com>
 References: <cover.1322640506.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl 08/11] edje: fix license metadata
+Subject: [meta-efl 09/11] elementary: fix license metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 08:24:57 -0000
+X-List-Received-Date: Wed, 30 Nov 2011 08:25:06 -0000
+
+* in r65248 fix errant word 'either' in license.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/edje.inc |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ meta-efl/recipes-efl/efl/elementary_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/edje.inc b/meta-efl/recipes-efl/efl/edje.inc
-index b922f90..7c415d2 100644
---- a/meta-efl/recipes-efl/efl/edje.inc
-+++ b/meta-efl/recipes-efl/efl/edje.inc
-@@ -2,8 +2,9 @@ DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
- DEPENDS = "lua5.1 eet evas ecore embryo edje-native"
- DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native"
- DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native"
--LICENSE = "MIT BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=1f2d83425ec8dfae5cd77f8ce52e872c"
-+# GPLv2 because of epp in PN-utils
-+LICENSE = "MIT BSD GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
- 
- inherit efl
- 
+diff --git a/meta-efl/recipes-efl/efl/elementary_svn.bb b/meta-efl/recipes-efl/efl/elementary_svn.bb
+index 6162abd..4051caf 100644
+--- a/meta-efl/recipes-efl/efl/elementary_svn.bb
++++ b/meta-efl/recipes-efl/efl/elementary_svn.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "EFL based widget set for mobile devices"
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=cdc6c12b238ccd62635a7517dfe89438"
++LIC_FILES_CHKSUM = "file://COPYING;md5=10a051c72424b80bc784a3903651b43b"
+ DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb"
+ PV = "0.8.0+svnr${SRCPV}"
+ SRCREV = "${EFL_SRCREV}"
 -- 
 1.7.8.rc4
 
