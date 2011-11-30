@@ -1,35 +1,35 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RVfT7-0008LO-CG
+	(envelope-from <martin.jansa@gmail.com>) id 1RVfTE-0008LO-VH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 09:24:41 +0100
+	Wed, 30 Nov 2011 09:24:49 +0100
 Received: by mail-ey0-f175.google.com with SMTP id d13so325412eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 00:18:03 -0800 (PST)
+	Wed, 30 Nov 2011 00:18:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=17l6AuKnFF6Lbf6Gc4Jl2HFxNrt6NWx8Kh9UgW82bNU=;
-	b=sW2JST1cGvGlG/HAt25K6KXpiWG+R5ykQ4/QwczRDq0myXWSkNV3izG6LHRqEcCoKz
-	ERVZ5mFDu9jtSG0x0Ixv1ykwlQe6a3R2jBPqB6uzflT+B4LXKKFBd99uSDHegqIph+7q
-	bRZHO0xtm/jp+34chJzNaPH3VSVSY/MNYlP0o=
-Received: by 10.213.101.17 with SMTP id a17mr286000ebo.78.1322641083406;
-	Wed, 30 Nov 2011 00:18:03 -0800 (PST)
+	bh=Sr8+CGQT1KleDYCTD2YmlljAnVU4eIqOIJYO26uNej0=;
+	b=M1Gw27SGu+cO9/HFwUalhiUjs4vcfkfTVVunRVc3OScJnmBzhlcowDTYh01kvnRGCJ
+	Ir8S+C5YN6ATZgIXzbxCQrrpFWHaOrcXS9GachZjLeNITosLLIaEEOUDBFHu10Evd7aF
+	FIVc/DFYkYphPF83XEUjxmlcKlrLoh/h3bhT8=
+Received: by 10.213.26.11 with SMTP id b11mr185629ebc.117.1322641091099;
+	Wed, 30 Nov 2011 00:18:11 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 8sm3648489eei.8.2011.11.30.00.18.02
+	by mx.google.com with ESMTPS id q28sm3666988eea.6.2011.11.30.00.18.09
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Nov 2011 00:18:02 -0800 (PST)
+	Wed, 30 Nov 2011 00:18:10 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2011 09:16:53 +0100
-Message-Id: <b5553359bee6bbe98a3df12f02698cdd4fdbe771.1322640506.git.Martin.Jansa@gmail.com>
+Date: Wed, 30 Nov 2011 09:16:54 +0100
+Message-Id: <ec55dac74706f161c53c7dda81f7df99305cf7ff.1322640506.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.rc4
 In-Reply-To: <55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
 References: <a>
 	<55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1322640506.git.Martin.Jansa@gmail.com>
 References: <cover.1322640506.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl 06/11] epdf: drop upstream applied patch and ewl is gone too
+Subject: [meta-efl 07/11] eeze: pass /bin/true instead of eject which is not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,49 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 08:24:41 -0000
+X-List-Received-Date: Wed, 30 Nov 2011 08:24:49 -0000
+
+* hopefully better fix will be available upstream later
+  09:03:03 < discomfitor> only if an app makes an eject call
+  09:03:36 < discomfitor> in which case, the resulting exe call would be "/bin/true $mountpoint"
+  09:03:39 < discomfitor> which would do nothing
+  09:03:55 < discomfitor> so you would break those apps, but it doesn't seem to be an issue for embedded...
+  09:08:06 < JaMa> ok, I meant if it would be better for those apps to know that eject functionality is not available, but if this is fine for you I can live
+                 with it too :)
+  09:09:26 < discomfitor> JaMa: hmm
+  09:09:37 < discomfitor> JaMa: I will consider that
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../efl/epdf/epdf.poppler-0.16.api.change.patch    |   11 -----------
- meta-efl/recipes-efl/efl/epdf_svn.bb               |    2 --
- 2 files changed, 0 insertions(+), 13 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/efl/epdf/epdf.poppler-0.16.api.change.patch
+ meta-efl/recipes-efl/efl/eeze.inc |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/epdf/epdf.poppler-0.16.api.change.patch b/meta-efl/recipes-efl/efl/epdf/epdf.poppler-0.16.api.change.patch
-deleted file mode 100644
-index 7c0ae65..0000000
---- a/meta-efl/recipes-efl/efl/epdf/epdf.poppler-0.16.api.change.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
--diff -uNr epdf.orig/src/lib/poppler/epdf_poppler_postscript.cpp epdf/src/lib/poppler/epdf_poppler_postscript.cpp
----- epdf.orig/src/lib/poppler/epdf_poppler_postscript.cpp	2011-09-30 20:50:03.580218578 +0200
--+++ epdf/src/lib/poppler/epdf_poppler_postscript.cpp	2011-09-30 20:49:11.573219667 +0200
--@@ -84,6 +84,7 @@
-- 
--   // FIXME: fix postscript title
--   ps_dev = new PSOutputDev (postscript->filename,
--+                            postscript->pdfdoc,
--                             postscript->pdfdoc->getXRef(),
--                             postscript->pdfdoc->getCatalog(),
-- 			    "PS title",
-diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
-index d479da6..28da32b 100644
---- a/meta-efl/recipes-efl/efl/epdf_svn.bb
-+++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
-@@ -13,13 +13,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
- "
+diff --git a/meta-efl/recipes-efl/efl/eeze.inc b/meta-efl/recipes-efl/efl/eeze.inc
+index 4b13984..7a06f9d 100644
+--- a/meta-efl/recipes-efl/efl/eeze.inc
++++ b/meta-efl/recipes-efl/efl/eeze.inc
+@@ -8,6 +8,9 @@ inherit efl
+ BBCLASSEXTEND = "native"
+ INC_PR = "r2"
  
- SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};proto=http;scmdata=keep \
--           file://epdf.poppler-0.16.api.change.patch \
- "
- S = "${WORKDIR}/${SRCNAME}"
- 
- EXTRA_OECONF = "\
-     --enable-poppler \
--    --disable-ewl \
-     --disable-mupdf \
- "
++# to make configure happy, but we don't have (and usually don't need)  eject on target
++EXTRA_OECONF += "--with-eject=${base_bindir}/true"
++
+ # Some upgrade path tweaking
+ AUTO_LIBNAME_PKGS = ""
  
 -- 
 1.7.8.rc4
