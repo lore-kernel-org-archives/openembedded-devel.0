@@ -1,23 +1,41 @@
-Received: from slimlogic.co.uk ([89.16.172.20])
+Received: from eu1sys200aog109.obsmtp.com ([207.126.144.127])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gg@slimlogic.co.uk>) id 1RVjLQ-0004Wc-Q2
+	(envelope-from <giuseppe.condorelli@st.com>) id 1RVkg4-0007en-Pk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 13:33:00 +0100
-Received: from [192.168.222.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by slimlogic.co.uk (Postfix) with ESMTPSA id 93D5A13008F
+	Wed, 30 Nov 2011 14:58:26 +0100
+Received: from beta.dmz-eu.st.com ([164.129.1.35]) (using TLSv1) by
+	eu1sys200aob109.postini.com ([207.126.147.11]) with SMTP
+	ID DSNKTtY08gerK0Ch1k8AI6mgB/4FO/uLRqe0@postini.com;
+	Wed, 30 Nov 2011 13:51:46 UTC
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D1E1B12D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 12:26:20 +0000 (GMT)
-Message-ID: <4ED620E8.4000509@slimlogic.co.uk>
-Date: Wed, 30 Nov 2011 12:26:16 +0000
-From: Graeme Gregory <gg@slimlogic.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
+	Wed, 30 Nov 2011 10:20:27 +0000 (GMT)
+Received: from mail7.sgp.st.com (mail7.sgp.st.com [164.129.223.81])
+	by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D90C71B79
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Nov 2011 10:20:26 +0000 (GMT)
+Received: from ctn005027 (pcmdt30.ctn.st.com [164.130.129.192])
+	by mail7.sgp.st.com (MOS 4.1.8-GA)
+	with ESMTP id AKM05633 (AUTH condorg);
+	Wed, 30 Nov 2011 11:20:26 +0100
+From: Giuseppe CONDORELLI <giuseppe.condorelli@st.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 30 Nov 2011 11:20:24 +0100
+Message-ID: <01e301ccaf49$ad5a6e40$080f4ac0$@condorelli@st.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4ED5EBE0.9070906@free.fr>
-In-Reply-To: <4ED5EBE0.9070906@free.fr>
-Subject: Re: Wiki edition rights
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcyvSatxHl6Sl6jwTIquUg6UVFkKGQ==
+x-cr-hashedpuzzle: ADfI A/jX Bv+f DQrA DhMz Dvt3 Elnc Em79 FQre FsYj Fx7I GEmH
+	Hg3s JxEe LG7O LNLJ; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {CF630C84-9764-43C9-9A54-4B32DBFF2704};
+	ZwBpAHUAcwBlAHAAcABlAC4AYwBvAG4AZABvAHIAZQBsAGwAaQBAAHMAdAAuAGMAbwBtAA==;
+	Wed, 30 Nov 2011 10:20:23 GMT;
+	WwBvAGUAXQAgAFcAYQBuAHQAIAB0AG8AIABjAGgAYQBuAGcAZQAgAGIAYQBzAGUAXwBwAHIAZQBmAGkAeAAgAGkAbgBzAHQAYQBsAGwAYQB0AGkAbwBuACAAcABhAHQAaAA=
+x-cr-puzzleid: {CF630C84-9764-43C9-9A54-4B32DBFF2704}
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Want to change base_prefix installation path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,20 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 12:33:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 30 Nov 2011 13:58:26 -0000
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 30/11/2011 08:40, Guillaume Gardet wrote:
-> Hi all,
->
-> I would like to have wiki edition rights, to update the wiki page :
-> OEandYourDistro (for openSUSE). Is it possible, please?
-> My username is:  Guillaume G
->
-You are now enabled
+Hi All,
 
-Graeme
+ 
 
+I need to change the file installation path of the target packages. I mean,
+I need to have set a different path in the .spec file (talking about rpm
+installation)
+
+for the installed files contained in the %files directive. I think this
+should be obtained setting base_prefix accordingly.
+
+ 
+
+Suggestions are welcome.
+
+May thanks,
+
+Giuseppe
 
 
