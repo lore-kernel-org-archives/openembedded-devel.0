@@ -1,32 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f51.google.com ([209.85.214.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RVpqW-0001VF-2u for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 20:29:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RVpk1-0008Vs-Rh for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 20:22:49 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 20:22:49 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RVq7W-0002Ch-Gk
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Nov 2011 20:47:07 +0100
+Received: by bkat8 with SMTP id t8so1238721bka.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 20:22:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 30 Nov 2011 11:40:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=ra2hkVALzP32UmllgsuSXTn/XBQ8nO3ky66OsvpaHEk=;
+	b=mmJ8++L+c+c05AwCAOAG1+ZzQUjTsFpFMZQ3QJ64v4uA/ff1WaAtttHu0M3+fLSbI1
+	6GLg9i91l4sBsT12CFLqP+NQQ27ygrJagET5+UwdeQttum8NNMKoiNVcFawVEFJuCi59
+	OtSa2BzBGmns+cYftdBQdbGwXmn8TmdY4jjcg=
+MIME-Version: 1.0
+Received: by 10.204.157.133 with SMTP id b5mr3702619bkx.121.1322682023045;
+	Wed, 30 Nov 2011 11:40:23 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.54.74 with HTTP; Wed, 30 Nov 2011 11:40:23 -0800 (PST)
+In-Reply-To: <jb5vpp$c8o$1@dough.gmane.org>
+References: <jb5vpp$c8o$1@dough.gmane.org>
+Date: Wed, 30 Nov 2011 17:40:23 -0200
+X-Google-Sender-Auth: 5yr9RKgbNb-uLTJ0GBrZyk3xxzY
+Message-ID: <CAP9ODKrc5FEriRchZuiAYKfa+dyXO+kfxFn=0E3ExYYeey8pJA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 30 Nov 2011 20:22:33 +0100
-Message-ID: <jb5vpp$c8o$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-X-Enigmail-Version: 1.3.3
-Subject: OE-core based java layer?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: OE-core based java layer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 19:29:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Nov 2011 19:47:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Nov 30, 2011 at 17:22, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-Hi,
+> Are there already people working on such a thing or should I just go ahead
+> and add a meta-java to the meta-oe repo and start importing recipes
+> one-by-one?
+>
 
-Beagleboard.org has moved to the OE-core metaverse to build the factory
-images and we need java support to stay feature compatible with OE classic.
+https://github.com/woglinde/meta-java
 
-Are there already people working on such a thing or should I just go ahead
-and add a meta-java to the meta-oe repo and start importing recipes one-by-one?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7WgnUACgkQMkyGM64RGpGoCACdENwNJC/SWsEuDbm0HBMcV19B
-lB0AmwbUDZVUgy3dg+o4i1nu1MsM+u1J
-=eNzT
------END PGP SIGNATURE-----
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
