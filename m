@@ -1,27 +1,23 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from slimlogic.co.uk ([89.16.172.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1RViPL-0007MI-Rv
+	(envelope-from <gg@slimlogic.co.uk>) id 1RVjLQ-0004Wc-Q2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 12:33:00 +0100
-Received: by iahk25 with SMTP id k25so612088iah.6
+	Wed, 30 Nov 2011 13:33:00 +0100
+Received: from [192.168.222.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by slimlogic.co.uk (Postfix) with ESMTPSA id 93D5A13008F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 03:26:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=mFO0yJJ41JP3EpH5WF+LppgCP6KYFWGpdTEVr3wzyAQ=;
-	b=fWiUTP+0rmHokZoWBIE+976E5AMeCCwW4k+hG+hHiXCFhSheSeZj0evVeWui1o4OvE
-	aGQfXuwKPt1c+SizE/P4ZpQWwuoFiAgcu6/TnGs8bSFhsVoGB5KulG7KLy/PuFHI0n4E
-	bst0Xma8++FvuoHdwhXopdDSee+cRxZGsk8gI=
+	Wed, 30 Nov 2011 12:26:20 +0000 (GMT)
+Message-ID: <4ED620E8.4000509@slimlogic.co.uk>
+Date: Wed, 30 Nov 2011 12:26:16 +0000
+From: Graeme Gregory <gg@slimlogic.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-Received: by 10.42.176.8 with SMTP id bc8mr2201099icb.12.1322652379389; Wed,
-	30 Nov 2011 03:26:19 -0800 (PST)
-Received: by 10.231.85.139 with HTTP; Wed, 30 Nov 2011 03:26:19 -0800 (PST)
-Date: Wed, 30 Nov 2011 12:26:19 +0100
-Message-ID: <CAOHjBZv=FrBpCyUvLwTK=ta1RU-d3zqcpG=ShsHL2BkMDs6BMA@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Want to change prefix installation path
+References: <4ED5EBE0.9070906@free.fr>
+In-Reply-To: <4ED5EBE0.9070906@free.fr>
+Subject: Re: Wiki edition rights
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,25 +31,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 11:33:00 -0000
+X-List-Received-Date: Wed, 30 Nov 2011 12:33:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 30/11/2011 08:40, Guillaume Gardet wrote:
+> Hi all,
+>
+> I would like to have wiki edition rights, to update the wiki page :
+> OEandYourDistro (for openSUSE). Is it possible, please?
+> My username is:  Guillaume G
+>
+You are now enabled
+
+Graeme
 
 
-
-I need to change the file installation path of the target packages. I mean,
-I need to have set a different path in the .spec file (talking about rpm
-installation)
-
-for the installed files contained in the %files directive. I think this
-should be obtained setting base_prefix accordingly.
-
-
-
-Suggestions are welcome.
-
-May thanks,
-
-Giuseppe
 
