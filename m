@@ -1,36 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RVgfm-0008W5-6x for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 10:41:50 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RVgZM-0008PL-2U for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 10:35:12 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 10:35:12 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RVgho-0002aC-Oc
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Nov 2011 10:43:56 +0100
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id pAU9bBFX026756
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 10:35:12 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 30 Nov 2011 10:28:41 +0100
-Message-ID: <jb4t09$rmo$3@dough.gmane.org>
-References: <a>
-	<55137a5d61c11567ab74d1c1382e04da35cecd5f.1322640506.git.Martin.Jansa@gmail.com>
-	<ecba1c3e0b6a24b2dfe237b04ad6789b32014391.1322640506.git.Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <ecba1c3e0b6a24b2dfe237b04ad6789b32014391.1322640506.git.Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-efl 11/11] elementary: disable web support
+	Wed, 30 Nov 2011 10:37:16 +0100
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
+	14.01.0270.001; Wed, 30 Nov 2011 10:37:12 +0100
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Can't get BBLAYERS working with 2011.03-maintenance
+Thread-Index: AQHMr0OgjjdRCyRVK0iHOSbwD4on9A==
+Date: Wed, 30 Nov 2011 09:37:12 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C401A23F0@post.tritech.se>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.34]
+MIME-Version: 1.0
+Subject: Can't get BBLAYERS working with 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,32 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 09:41:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Nov 2011 09:43:56 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 30-11-11 09:16, Martin Jansa schreef:
-> * we don't have webkit-efl in DEPENDS so it depends on build order if
-> it's autodetected or not for elementary * libewebkit0 is quite bit so we
-> don't want to pull it to every image with elementary
-
-I was about to suggest splitting it...
-
-> * and we cannot split elementary web support to different package because
-> libewebkit is linked directly from libelementary-ver-pre-svn-09.so.0.8.0
-
-... but you've already answered that :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7V90kACgkQMkyGM64RGpGU2QCeLWMPS7hTu+eOdbalBWFC7qGj
-MksAoI4wCu7TWda3b8qNG0uRUeRMXC0/
-=aOVT
------END PGP SIGNATURE-----
-
+ Hi,=0A=
+=0A=
+I want to start using BBLAYERS and .bbappend with my 2011.03-maintenance pr=
+oject. I found a nice introduction ( http://sakrah.homelinux.org/blog/2010/=
+11/bblayers-bbappend/ ) that I followed.=0A=
+Now I've got the following ($PWD and TOPDIR is .../oe/):=0A=
+=0A=
+--- setup script ---=0A=
+export OEBASE=3D$PWD=0A=
+export DL_DIR=3D$ARCHIVE_DIR=0A=
+export BB_ENV_EXTRAWHITE=3D"OEBASE MACHINE DISTRO DL_DIR"=0A=
+export PATH=3D$OEBASE/bitbake/bin:$PATH=0A=
+=0A=
+--- .../oe/conf//bblayers.conf ---=0A=
+TOPDIR :=3D "${@os.path.dirname(os.path.dirname(d.getVar('FILE', True)))}"=
+=0A=
+BBPATH =3D "${TOPDIR}"=0A=
+BBLAYERS =3D "${TOPDIR}/openembedded ${TOPDIR}/local"=0A=
+=0A=
+--- .../oe/openembedded/conf/layer.conf ---=0A=
+BBFILES +=3D "${LAYERDIR}/recipes/*/*.bb"=0A=
+BBPATH .=3D ":${LAYERDIR}"=0A=
+BBFILE_COLLECTIONS +=3D "oe"=0A=
+BBFILE_PRIORITY_oe =3D "0"=0A=
+BBFILE_PATTERN_oe =3D "^${LAYERDIR}/"=0A=
+=0A=
+--- .../oe/local/conf/layer.conf ---=0A=
+BBFILES +=3D "${LAYERDIR}/recipes/*/*.bb ${LAYERDIR}/recipes/*/*.bbappend"=
+=0A=
+BBPATH .=3D ":${LAYERDIR}"=0A=
+BBFILE_COLLECTIONS +=3D "local"=0A=
+BBFILE_PRIORITY_local =3D "1"=0A=
+BBFILE_PATTERN_local =3D "${LAYERDIR}"=0A=
+=0A=
+Now, if I run "bitbake -e" all variables seem to get the correct values exc=
+ept BBFILES that gets the .bb entry for both openembedded and local but no =
+.bbappend!=0A=
+I have tried with both bitbake 1.12.0 and 1.14.0 but there is no difference=
+ in the outcome.=0A=
+I can see in the debug log that the .../oe/local/conf/layer.conf is loaded =
+and if I change the BBFILES line to garbage I get a parsing error but no ma=
+tter what I write between the quotes it doesn't show up in the output...=0A=
+=0A=
+If anyone have a clue on what is wrong I would appreciate your help!=0A=
+=0A=
+BR // Mats=0A=
 
 
