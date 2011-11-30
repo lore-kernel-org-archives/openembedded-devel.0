@@ -1,28 +1,17 @@
-Received: from fb1.tech.numericable.fr ([82.216.111.51])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.gardet@free.fr>) id 1RVfoM-0001QP-NR
+	(envelope-from <sledz@localhost.localdomain>) id 1RVg5b-0002oD-9H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 09:46:38 +0100
-Received: from smtp1.tech.numericable.fr (smtp1.nc.sdv.fr [10.0.0.24])
-	by fb1.tech.numericable.fr (Postfix) with ESMTP id 225B6A5CFA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 09:40:01 +0100 (CET)
-Received: from [192.168.1.111] (164.60-224-89.dsl.completel.net
-	[89.224.60.164])
-	by smtp1.tech.numericable.fr (Postfix) with ESMTP id 99DA8E0813
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2011 09:40:00 +0100 (CET)
-Message-ID: <4ED5EBE0.9070906@free.fr>
-Date: Wed, 30 Nov 2011 09:40:00 +0100
-From: Guillaume Gardet <guillaume.gardet@free.fr>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedrtddvucetggdotefuucfrrhhofhhilhgvmecupfgfoffgtffkveetuefngfenuceurghilhhouhhtmecufedttdenuc
-Subject: Wiki edition rights
+	Wed, 30 Nov 2011 10:04:27 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 0592F44A5FF; Wed, 30 Nov 2011 09:57:45 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Tom Rini <tom.rini@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Nov 2011 09:57:34 +0100
+Message-Id: <cover.1322643070.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [2011.03-maintenance 0/4] pull request: rsyslog,gypsy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,17 +25,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 08:46:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Nov 2011 09:04:27 -0000
 
-Hi all,
+Hi Tom,
 
-I would like to have wiki edition rights, to update the wiki page : OEandYourDistro (for openSUSE). Is it possible, please?
-My username is:  Guillaume G
+Please pull these 4 commits cherry-picked from oe.dev.
+The first one fixes the path for additional rsyslog config files.
+The other ones fix bugs in gypsy application and installation.
+All of them are well tested in our own environment.
 
-Cheers,
+Thx,
+Steffen
 
-Guillaume
+The following changes since commit 77a5200f2f7405368be243579c77947f4bae5f22:
+
+  Revert "gypsy: fix packaging of DBus starter script" (2011-11-30 09:24:02 +0100)
+
+are available in the git repository at:
+  git://git.openembedded.org/openembedded sledz/maintenance
+  http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=sledz/maintenance
+
+Steffen Sledz (4):
+  rsyslog: change path for config includes to /etc/rsyslog.d
+  gypsy: fix packaging of DBus starter script
+  gypsy: move generic SRC_URI part to gypsy.inc
+  gypsy: update to latest upstream version 0.8, and remove version 0.7
+
+ recipes/gypsy/gypsy.inc     |    6 +++++-
+ recipes/gypsy/gypsy_0.7.bb  |   10 ----------
+ recipes/gypsy/gypsy_0.8.bb  |    6 ++++++
+ recipes/rsyslog/rsyslog.inc |    4 ++--
+ 4 files changed, 13 insertions(+), 13 deletions(-)
+ delete mode 100644 recipes/gypsy/gypsy_0.7.bb
+ create mode 100644 recipes/gypsy/gypsy_0.8.bb
+
+-- 
+1.7.7
+
 
 
