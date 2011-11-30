@@ -1,34 +1,29 @@
 Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RVXLI-0006GC-VT
+	(envelope-from <tom.rini@gmail.com>) id 1RVXi5-00079E-6l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Nov 2011 00:44:05 +0100
-Received: by qyk30 with SMTP id 30so6271qyk.6
+	Wed, 30 Nov 2011 01:07:37 +0100
+Received: by qyk30 with SMTP id 30so13516qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2011 15:37:25 -0800 (PST)
+	Tue, 29 Nov 2011 16:00:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=oz9vE8vloxLUnJq7RxnoSiaC5ds/kX22K0UJblDnFrI=;
-	b=TzEyChYnS+yh24qEtzeFouDNK930yVT/M04VVvmErJA0n6llPaqthdjdULw+jss2VK
-	brUQjaLE4D1Qqc/Hal7Dy99ONjK0UOKWdfDf+HUL2DN96yLCF0r18aG1H7q4ejio4KUi
-	ExDyBWHaOe4oZVHvKHk91I+RknKzP0AY1dwGg=
+	:content-type:content-transfer-encoding;
+	bh=pId/Z+CwtKq0hcEwPExswxm5y6vYFAGpC9LZ9lhr2j4=;
+	b=pN81rIA2o4UYXodK3D4gjtjSX82eNdOAMh7U8Q4ZgsMfUIrjUVjHB//HrJnt8RHiN7
+	snXCqM6I22jAQ/nW+3cpv80Jm6tnehiSUY02J8WQoP9IRIvbZDsWQUdF1DBlAo1cZKCl
+	X89VKSa1wEmg7Hmk8bq0Tm/zbE2yMUaiRA0N0=
 MIME-Version: 1.0
-Received: by 10.229.46.4 with SMTP id h4mr4618417qcf.188.1322609845122; Tue,
-	29 Nov 2011 15:37:25 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Tue, 29 Nov 2011 15:37:25 -0800 (PST)
-In-Reply-To: <CACW_hTbvoH+KH75mXrikXp8+CPTxdh_w=LKCOgGJ6CQGaKOTWw@mail.gmail.com>
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<1322476245.26081.89.camel@phil-desktop>
-	<1322478479.26287.15.camel@ted>
-	<alpine.LNX.2.02.1111281848560.1090@myhost>
-	<CACW_hTYYKTX4RQXwFSEu+VR3kPe1kGw1J_ba-=L1XqE_QkwWJA@mail.gmail.com>
-	<CAMKF1sr9aBc4tMvJDwoPQHranmLs-knaXDp3bhgK5jxd-8f+WQ@mail.gmail.com>
-	<CACW_hTbvoH+KH75mXrikXp8+CPTxdh_w=LKCOgGJ6CQGaKOTWw@mail.gmail.com>
-Date: Tue, 29 Nov 2011 16:37:25 -0700
-Message-ID: <CA+M6bXn0wrOomBX1_L5Bq-oPv08A7xaNWxNvtg3oCOYbDG2m=Q@mail.gmail.com>
+Received: by 10.229.46.4 with SMTP id h4mr1966qcf.188.1322611257041; Tue, 29
+	Nov 2011 16:00:57 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Tue, 29 Nov 2011 16:00:57 -0800 (PST)
+In-Reply-To: <1322524602-11331-1-git-send-email-raj.khem@gmail.com>
+References: <1322524602-11331-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 29 Nov 2011 17:00:57 -0700
+Message-ID: <CA+M6bXkdMk9msMLi_ape5a4i2LBV+Rj3zXGf+CMN6+nNVQ9jUA@mail.gmail.com>
 From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Documentation problems
+Subject: Re: [2011.03-maintenance][PATCH] eglibc: Fix build when OPTION_EGLIBC_NSSWITCH is not set.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,58 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 23:44:05 -0000
+X-List-Received-Date: Wed, 30 Nov 2011 00:07:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 29, 2011 at 2:46 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2011/11/29 Khem Raj <raj.khem@gmail.com>
+On Mon, Nov 28, 2011 at 4:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Few of build problems are being reported on classic OE
+> when OPTION_EGLIBC_NSSWITCH is set to 'n' by default it
+> works well. But when its set to 'n' then we have to make
+> sure that OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG and
+> OPTION_EGLIBC_NSSWITCH_FIXED_FUNCTIONS are set to point
+> to abosolute paths in sources
 >
->> Hi Frans,
->>
+> Fixes build errors like
 >
-> Hi Khem, all
+> Makefile:85: *** OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG variable left
+> unset. =A0Stop.
 >
->>
->> On Tue, Nov 29, 2011 at 12:24 AM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> wrote:
->> >
->> > Of course I also do not want to write faulty documentation; then again I
->> > also hate wasting my time, so I think I wouldn't even start if there was
->> a
->> > chance that my contribution might be rejected because the pull master
->> does
->> > not like my style or feels there are grammar errors or so.
->>
->> I consider someone reviewing my patches a good thing. I think it makes
->> me learn things
->> if there is feedback on the patches, I include the feedback and
->> resubmit the patch and thereby improve it
->>
->
-> Oh, I consider reviewing patches a good thing too. For documentation it
-> also depends on the process and the kind of comments.
-> If the person pulling the changes rejects them because (s)he finds the
-> grammar not ok and the review comment is "improve grammar", that is fairly
-> demotivating (if I knew how to do so, I would have done that upfront).
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-This would be just as bad as reviewing a patch and saying only "fix
-the things that are wrong".  Both are equally unacceptable, and
-frankly at this point in the projects life, equally unlikely.
+After confirming oe-core has this fix already, applied, thanks.
 
-> A few of such rejects will make that most people loose the interest in
-> submitting documentation quite quickly.
-> And if you have to give detailed review comments or instructions reviewing
-> becomes quite time consuming (actually more time consuming than actually
-> making the change yourself)
-
-Which probably means the commenter knows enough that they should have
-made the documentation change to start with.  This is the price to pay
-for not doing the edits directly.  Personally, I've been willing to
-pay that cost and explaining it to someone else helps make sure I
-really understand it and that the code is also really correct.
-
--- 
+--=20
 Tom
 
 
