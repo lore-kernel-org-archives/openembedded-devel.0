@@ -1,30 +1,35 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RW8EW-0001tr-O9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 16:07:32 +0100
-Received: by qaea17 with SMTP id a17so4592343qae.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RW8vJ-00034X-Oe for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Dec 2011 16:51:45 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RW8or-0005zr-PM for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Dec 2011 16:45:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Dec 2011 16:45:05 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2011 07:00:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=CK7wGH0Bj5G/flNNIuQ6Ojondh3ekKzwhlKRAAFN720=;
-	b=aDnTYYDwqvA2FX/ahxcvtQlkRlv8fyl2/vNwcYgqSr2coODLP/vgSdYdrRoAyCoahN
-	33TTJIbSceI3akvNWLZ3kWMEiSt0/oPl5OwIvn4s1t27ScWlwXInjO1BtNA7wom1qwhF
-	cxhtnrSB7GNNv1pROmFqyQYBeTblwtAtRJ5WQ=
-MIME-Version: 1.0
-Received: by 10.229.63.36 with SMTP id z36mr1420608qch.150.1322751650474; Thu,
-	01 Dec 2011 07:00:50 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Thu, 1 Dec 2011 07:00:50 -0800 (PST)
-In-Reply-To: <cover.1322643070.git.sledz@dresearch-fe.de>
-References: <cover.1322643070.git.sledz@dresearch-fe.de>
-Date: Thu, 1 Dec 2011 08:00:50 -0700
-Message-ID: <CA+M6bXm6M=04Ej2LoLHrWneXcmyDX+xJCFKvCv1JkPNyRxWU5g@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/4] pull request: rsyslog,gypsy
+	Thu, 01 Dec 2011 16:45:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 01 Dec 2011 16:44:51 +0100
+Message-ID: <jb87dj$92e$1@dough.gmane.org>
+References: <1322748446-29453-1-git-send-email-rafaelignacio.zurita@gmail.com>
+	<20111201140933.GE2695@Boggieman>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <20111201140933.GE2695@Boggieman>
+X-Enigmail-Version: 1.3.3
+Subject: Re: [PATCH] directvnc: Add initial recipe with version 0.7.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2011 15:07:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Dec 2011 15:51:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Nov 30, 2011 at 1:57 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> Hi Tom,
->
-> Please pull these 4 commits cherry-picked from oe.dev.
-> The first one fixes the path for additional rsyslog config files.
-> The other ones fix bugs in gypsy application and installation.
-> All of them are well tested in our own environment.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Applied, thanks!
+Op 01-12-11 15:09, Kristoffer Ericson schreef:
+> 
+> Acked-by: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 
--- 
-Tom
+Why do you ACK a recipe with obvious style issues?
+
+
+> 
+> On Thu, Dec 01, 2011 at 11:07:26AM -0300, Rafael Ignacio Zurita wrote:
+>> DirectVNC provides a very thin VNC client for unix framebuffer
+>> systems.
+>> 
+>> Signed-off-by: Rafael Ignacio Zurita <rafaelignacio.zurita@gmail.com> 
+>> --- recipes/directvnc/directvnc_0.7.7.bb |   12 ++++++++++++ 1 files
+>> changed, 12 insertions(+), 0 deletions(-) create mode 100644
+>> recipes/directvnc/directvnc_0.7.7.bb
+>> 
+>> diff --git a/recipes/directvnc/directvnc_0.7.7.bb
+>> b/recipes/directvnc/directvnc_0.7.7.bb new file mode 100644 index
+>> 0000000..9e9afa7 --- /dev/null +++
+>> b/recipes/directvnc/directvnc_0.7.7.bb @@ -0,0 +1,12 @@ +DESCRIPTION =
+>> "DirectVNC provides a very thin VNC client for unix framebuffer
+>> systems." +HOMEPAGE = "http://drinkmilk.github.com/directvnc/" +SECTION
+>> = "utils" +LICENSE = "GPLv2" +DEPENDS_${PN} = "zlib libpng jpeg
+>> directfb" + +SRC_URI =
+>> "https://github.com/downloads/drinkmilk/directvnc/directvnc-${PV}.tar.gz"
+>>
+>> 
++
+>> +inherit autotools + +SRC_URI[md5sum] =
+>> "e30f1a0e45b440443c044148fb62ad6e" +SRC_URI[sha256sum] =
+>> "ac8c0a6b6aaf0702411e71dd3626c655287c903233b659389fc07113114c9de3" -- 
+>> 1.7.0.4
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7XoPMACgkQMkyGM64RGpHIVQCguP2wCvEyyLeEKQ3nbfeNj/bQ
+6lgAn0rlf26OGEuPuNyK1nnlvDZjNb7q
+=ixh+
+-----END PGP SIGNATURE-----
+
 
 
