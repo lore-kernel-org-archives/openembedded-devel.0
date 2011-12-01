@@ -1,36 +1,30 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RWFMc-0001Z1-76
+	(envelope-from <martin.jansa@gmail.com>) id 1RWGWc-0007rn-DG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 23:44:22 +0100
-Received: by iahk25 with SMTP id k25so3139983iah.6
+	Fri, 02 Dec 2011 00:58:46 +0100
+Received: by bkbzv15 with SMTP id zv15so2397001bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2011 14:37:36 -0800 (PST)
+	Thu, 01 Dec 2011 15:52:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=XWLNDasQCfZ0B6gcACwInrRo1ZpoTutsx0EDPbh71I8=;
-	b=Ip9j60/W+59oEqRfPdnJFUfu4tyDVyiGyayvTxHJmGVGnF0PP0DAYByrNIxW7uiDmX
-	fK4SOLz6rkYl97HXDNJTMMGoplHammPvr7380IPd8N3/8R69O4TFi/mmQHo9v66l+8Yz
-	rVCGwA9cr6x+rrs1iKH+jf8QMdLwZZkkx+P2Q=
-Received: by 10.231.63.129 with SMTP id b1mr2423197ibi.75.1322779056326;
-	Thu, 01 Dec 2011 14:37:36 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id z10sm26281030ibv.9.2011.12.01.14.37.34
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=h8pOT4XCfKNQ+3hfQMNq2SWIqZ4lUflLgT+FkeveP8Q=;
+	b=uiPjQ3gBFj3Zq0nrqbKtpqHFnW70nKVf7uSckIrzg1/roxxCdfl9k8dBos5noJaxTR
+	sMxVNSsFbgFduYW1IerMhFK5iVqhNk2J6DCwo+pzPvEgOHz2MdC7vOwstwfbdoUnKEO+
+	3Vi2D9CF3metIc327oWq7DokY4XkamKBsUFs4=
+Received: by 10.204.153.23 with SMTP id i23mr1425540bkw.57.1322783524058;
+	Thu, 01 Dec 2011 15:52:04 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id c4sm14922077bkk.13.2011.12.01.15.51.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Dec 2011 14:37:34 -0800 (PST)
-Date: Thu, 1 Dec 2011 14:45:48 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 01 Dec 2011 15:51:59 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111201224548.GC9685@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <mailman.501.1322730000.26642.openembedded-devel@lists.openembedded.org>
-	<CAPdp9mwrRs2+m=ixuJCC=ASQ0jrz4Wy1MGFxFX6q=CzF9Z8LdQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAPdp9mwrRs2+m=ixuJCC=ASQ0jrz4Wy1MGFxFX6q=CzF9Z8LdQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: Openembedded-devel Digest, Vol 65, Issue 2
+Date: Fri,  2 Dec 2011 00:51:50 +0100
+Message-Id: <1322783510-11021-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc4
+Cc: Norman Schleicher <NormanSchleicher@gmx.de>
+Subject: [PATCH][meta-oe] nmon_13g: add -ltinfo linker flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2011 22:44:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Dec 2011 23:58:46 -0000
 
-On (01/12/11 16:26), Rizwan Shaik wrote:
-> Dear Sir/Madam,
-> 
-> I am getting the following error while building the OpenEmbedded Angstrom
-> image.
-> 
-> ERROR: Task 31
-> (/media/THARMA_OE_500GB/rizwan_oe_11.04/openembedded/recipes/shasum/
-> shasum-native.bb, do_fetch) failed
-> NOTE: Tasks Summary: Attempted 1 tasks of which 1 didn't need to be rerun
-> and 1 failed.
-> ERROR: '/media/THARMA_OE_500GB/rizwan_oe_11.04/openembedded/recipes/shasum/
-> shasum-native.bb' failed
-> 
-> Please give me a solution.Thank you in Advance.
-> Waiting for the solution.
+From: Norman Schleicher <NormanSchleicher@gmx.de>
 
-Provide more log information, it should tell you locations it tried to
-fetch the source from and sometimes these temporary problems too. Try to
-rerun your build
+* ld in latest binutils-2.22 from oe-core doesn't have
+  --copy-dt-needed-entries enabled by default anymore see:
+  http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/src/ld/NEWS?rev=1.121&content-type=text/plain&cvsroot=src&only_with_tag=binutils-binutils-2_22
+  so we have to be more carefull which libs are specified on linker
+  command line, similar issue is in mplayer2 and aurora-daemon (qt4)
 
--Khem
+Signed-off-by: Norman Schleicher <NormanSchleicher@gmx.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/nmon/nmon_13g.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/nmon/nmon_13g.bb b/meta-oe/recipes-support/nmon/nmon_13g.bb
+index ffe5d06..bc82c0a 100644
+--- a/meta-oe/recipes-support/nmon/nmon_13g.bb
++++ b/meta-oe/recipes-support/nmon/nmon_13g.bb
+@@ -4,7 +4,7 @@ SECTION = "console/utils"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/Documentation.txt;md5=dbb13658cf55d687c4f2ff771a696d4a"
+ DEPENDS = "ncurses"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/nmon/lmon13g.c;name=lmon \
+            ${SOURCEFORGE_MIRROR}/nmon/Documentation.txt;name=doc \
+@@ -16,7 +16,7 @@ SRC_URI[doc.md5sum] = "dbb13658cf55d687c4f2ff771a696d4a"
+ SRC_URI[doc.sha256sum] = "1f7f83afe62a7210be5e83cd24157adb854c14599efe0b377a7ecca933869278"
+ 
+ CFLAGS += "-D JFS -D GETUSER -Wall -D LARGEMEM"
+-LDFLAGS += "-lncursesw"
++LDFLAGS += "-ltinfo -lncursesw"
+ ASNEEDED_pn-nmon = ""
+ 
+ do_compile() {
+-- 
+1.7.8.rc4
+
 
 
