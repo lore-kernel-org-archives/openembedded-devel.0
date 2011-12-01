@@ -1,23 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RWDrb-0006d7-NA for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 22:08:15 +0100
-Received: from f053046128.adsl.alicedsl.de ([78.53.46.128]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RWDlI-0001dB-9b for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 21:01:44 +0000
-Message-ID: <1322773288.3834.10.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1RWFH7-0001J5-A3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Dec 2011 23:38:41 +0100
+Received: by iahk25 with SMTP id k25so3133284iah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Dec 2011 14:31:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=Zq42MKQ4LE8mCeX4c5rmUryedxbuTFxS7OfB43FUkds=;
+	b=IEQTwTX/edwex8VL/acATCpq1ZR0v9LHCR5rElVXZpahC6JyRN9p9XHn/DIwyLIzw8
+	n25MkHI/X+J5Bie0AXm4d+41wnjBFwu3XONrbsbRxHHq7T6a3lKI70IQwcdpvEYX8EUQ
+	2ODPlXo+qSl6QijP8cdhiBeqGmG5IjqPjWmQ4=
+Received: by 10.42.189.5 with SMTP id dc5mr10328637icb.51.1322778718589;
+	Thu, 01 Dec 2011 14:31:58 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id z10sm26230821ibv.9.2011.12.01.14.31.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 01 Dec 2011 14:31:56 -0800 (PST)
+Date: Thu, 1 Dec 2011 14:40:10 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 01 Dec 2011 22:01:28 +0100
-In-Reply-To: <1322759816-16498-1-git-send-email-rafaelignacio.zurita@gmail.com>
-References: <1322759816-16498-1-git-send-email-rafaelignacio.zurita@gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [PATCH v2] directvnc: Add initial recipe with version 0.7.7
+Message-ID: <20111201224010.GB9685@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <jb5vpp$c8o$1@dough.gmane.org>
+	<CAP9ODKrc5FEriRchZuiAYKfa+dyXO+kfxFn=0E3ExYYeey8pJA@mail.gmail.com>
+	<4ED73FF4.1020406@dresearch-fe.de> <9948164.8uAFTZxd8M@helios>
+	<CAEsOVNf4FTHDNHBf-ggHPHzChg2kQrHPVhFyL3MSU-Rb4K3+WA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAEsOVNf4FTHDNHBf-ggHPHzChg2kQrHPVhFyL3MSU-Rb4K3+WA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: OE-core based java layer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,65 +46,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2011 21:08:15 -0000
-X-Groupsio-MsgNum: 35794
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-3C7cT3bsf6pEJX5q/fxg"
+X-List-Received-Date: Thu, 01 Dec 2011 22:38:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-3C7cT3bsf6pEJX5q/fxg
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> Can someone give me permissions (account: mattsm) to edit pages and/or
+> add meta-fsl-ppc?
 
-Dear Rafael,
+You should be member of active users now. Retry
 
 
-thank you for your patch.
-
-Am Donnerstag, den 01.12.2011, 14:16 -0300 schrieb Rafael Ignacio Zurita:
-> DirectVNC provides a very thin VNC client for unix framebuffer systems.
-
-I find it useful to add to the commit message what distribution and
-machine you tested the recipe with.
-
-> Signed-off-by: Rafael Ignacio Zurita <rafaelignacio.zurita@gmail.com>
-> ---
-
-Please add changes in the patch iteration (v2) below that line to help
-reviewers.
-
->  recipes/directvnc/directvnc_0.7.7.bb |   13 +++++++++++++
->  1 files changed, 13 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/directvnc/directvnc_0.7.7.bb
-
-[=E2=80=A6]
-
-I pushed your patch to the repository as a4f35de0 [1].
-
-Please also consider adding that recipe to meta-oe. The license checksum
-is used in OE classic but in meta-oe, so porting it should be just
-copying it to the right directory.
-
-
-Thanks a lot,
-
-Paul
-
-
-[1] http://git.openembedded.org/openembedded/commit/?id=3Da4f35de0f6ca17e92=
-763d5a5f32422c56e5d8882
-
---=-3C7cT3bsf6pEJX5q/fxg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk7X6ygACgkQPX1aK2wOHVhoxQCeLDkxCLscZ57uKcTKXDQVdm2i
-9gYAnRVLFqNVKB/Fa/cpGwe/V0QvADfK
-=Andq
------END PGP SIGNATURE-----
-
---=-3C7cT3bsf6pEJX5q/fxg--
