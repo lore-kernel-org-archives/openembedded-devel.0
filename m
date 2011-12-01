@@ -1,29 +1,51 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from am1ehsobe001.messaging.microsoft.com ([213.199.154.204]
+	helo=AM1EHSOBE001.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rafaelignacio.zurita@gmail.com>) id 1RWAMn-0007d1-D9
+	(envelope-from <B29882@freescale.com>) id 1RWDSm-0005RR-MG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 18:24:14 +0100
-Received: by yenr11 with SMTP id r11so1949862yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2011 09:17:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=gXq5tUhhh+RoxIkIssqE5HVi4VfDrud2ixyF78zc13E=;
-	b=fVtPkt+2kkyXrpeHnN6kZ2S76clVJ6CUT8wICuRZnqpxx7olTdJJ2o1LAlyYoyYHPs
-	x1tf7j4R4Z6u8p0M6/om9RgY7XEl91uadvLwjRM1SHRTH4lebgim5xbe/mRFzjOC4Wy3
-	XU3H7dOVejhHnOdNDAonF0P+j8pcDgIvvVV20=
-Received: by 10.236.154.3 with SMTP id g3mr13853801yhk.119.1322759821029;
-	Thu, 01 Dec 2011 09:17:01 -0800 (PST)
-Received: from localhost.localdomain ([186.137.0.13])
-	by mx.google.com with ESMTPS id u20sm6291976ank.9.2011.12.01.09.16.59
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Dec 2011 09:17:00 -0800 (PST)
-From: Rafael Ignacio Zurita <rafaelignacio.zurita@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Dec 2011 14:16:56 -0300
-Message-Id: <1322759816-16498-1-git-send-email-rafaelignacio.zurita@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH v2] directvnc: Add initial recipe with version 0.7.7
+	Thu, 01 Dec 2011 21:42:37 +0100
+Received: from mail68-am1-R.bigfish.com (10.3.201.252) by
+	AM1EHSOBE001.bigfish.com (10.3.204.21) with Microsoft SMTP Server id
+	14.1.225.22; Thu, 1 Dec 2011 20:20:33 +0000
+Received: from mail68-am1 (localhost [127.0.0.1])	by mail68-am1-R.bigfish.com
+	(Postfix) with ESMTP id 3AD954C03CD	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Dec 2011 20:20:33 +0000 (UTC)
+X-SpamScore: -16
+X-BigFish: VS-16(zz9371K1432N98dK4015Lzz1202hzz8275bh8275dhz2dh2a8h668h839h8e2h8e3h)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail68-am1 (localhost.localdomain [127.0.0.1]) by mail68-am1
+	(MessageSwitch) id 1322770833172816_23283;
+	Thu,  1 Dec 2011 20:20:33 +0000 (UTC)
+Received: from AM1EHSMHS004.bigfish.com (unknown [10.3.201.248])	by
+	mail68-am1.bigfish.com (Postfix) with ESMTP id 1BD372C0047	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Dec 2011 20:20:33 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS004.bigfish.com
+	(10.3.207.104) with Microsoft SMTP Server (TLS) id 14.1.225.22;
+	Thu, 1 Dec 2011 20:20:32 +0000
+Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.83]) by
+	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
+	14.01.0339.002; Thu, 1 Dec 2011 14:19:58 -0600
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] OE-core based java layer?
+Thread-Index: AQHMsGaYsfJWc/4upEK/eHhTEkSk9A==
+Date: Thu, 1 Dec 2011 20:19:58 +0000
+Message-ID: <CAEsOVNf4FTHDNHBf-ggHPHzChg2kQrHPVhFyL3MSU-Rb4K3+WA@mail.gmail.com>
+References: <jb5vpp$c8o$1@dough.gmane.org>
+	<CAP9ODKrc5FEriRchZuiAYKfa+dyXO+kfxFn=0E3ExYYeey8pJA@mail.gmail.com>
+	<4ED73FF4.1020406@dresearch-fe.de> <9948164.8uAFTZxd8M@helios>
+In-Reply-To: <9948164.8uAFTZxd8M@helios>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [99.47.177.27]
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Subject: Re: OE-core based java layer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,37 +59,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2011 17:24:14 -0000
+X-List-Received-Date: Thu, 01 Dec 2011 20:42:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <7BB9DE9ACE5DF1479557E03D7570ED9F@freescale.net>
+Content-Transfer-Encoding: quoted-printable
 
-DirectVNC provides a very thin VNC client for unix framebuffer systems.
+On Thu, Dec 1, 2011 at 4:40 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Thursday 01 December 2011 09:51:00 Steffen Sledz wrote:
+>> On 30.11.2011 20:40, Otavio Salvador wrote:
+>> > https://github.com/woglinde/meta-java
+>>
+>> In my opinion ths should be added to
+>> <http://www.openembedded.org/wiki/LayerIndex>.
+>
+> Done :)
 
-Signed-off-by: Rafael Ignacio Zurita <rafaelignacio.zurita@gmail.com>
----
- recipes/directvnc/directvnc_0.7.7.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes/directvnc/directvnc_0.7.7.bb
+This is quite useful, just found it =3D)
 
-diff --git a/recipes/directvnc/directvnc_0.7.7.bb b/recipes/directvnc/directvnc_0.7.7.bb
-new file mode 100644
-index 0000000..1917320
---- /dev/null
-+++ b/recipes/directvnc/directvnc_0.7.7.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "DirectVNC provides a very thin VNC client for unix framebuffer systems."
-+HOMEPAGE = "http://drinkmilk.github.com/directvnc/"
-+SECTION = "utils"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=cbbd794e2a0a289b9dfcc9f513d1996e"
-+
-+DEPENDS = "zlib libpng jpeg directfb"
-+
-+SRC_URI = "https://github.com/downloads/drinkmilk/directvnc/directvnc-${PV}.tar.gz"
-+SRC_URI[md5sum] = "e30f1a0e45b440443c044148fb62ad6e"
-+SRC_URI[sha256sum] = "ac8c0a6b6aaf0702411e71dd3626c655287c903233b659389fc07113114c9de3"
-+
-+inherit autotools
--- 
-1.7.0.4
+Can someone give me permissions (account: mattsm) to edit pages and/or
+add meta-fsl-ppc?
+
+Thanks,
+
+-M=
 
 
 
