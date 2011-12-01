@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RW30P-0006vF-6s for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 10:32:37 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RW2ts-0001ke-OK for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Dec 2011 10:25:52 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2011 10:25:52 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2011 10:25:52 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RW4AT-0000UE-A2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Dec 2011 11:47:05 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Dec 2011 02:40:20 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,277,1320652800"; d="scan'208";a="97395488"
+Received: from unknown (HELO helios.localnet) ([10.252.121.250])
+	by fmsmga002.fm.intel.com with ESMTP; 01 Dec 2011 02:40:19 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 01 Dec 2011 10:25:39 +0100
-Message-ID: <jb7h6j$ek$1@dough.gmane.org>
+Date: Thu, 01 Dec 2011 10:40:18 +0000
+Message-ID: <9948164.8uAFTZxd8M@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <4ED73FF4.1020406@dresearch-fe.de>
 References: <jb5vpp$c8o$1@dough.gmane.org>
-	<20111201080837.GB17111@novatech.datenfreihafen.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <20111201080837.GB17111@novatech.datenfreihafen.org>
-X-Enigmail-Version: 1.3.3
+	<CAP9ODKrc5FEriRchZuiAYKfa+dyXO+kfxFn=0E3ExYYeey8pJA@mail.gmail.com>
+	<4ED73FF4.1020406@dresearch-fe.de>
+MIME-Version: 1.0
 Subject: Re: OE-core based java layer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,44 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2011 09:32:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Dec 2011 10:47:06 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 01-12-11 09:08, Stefan Schmidt schreef:
-> Hello.
+On Thursday 01 December 2011 09:51:00 Steffen Sledz wrote:
+> On 30.11.2011 20:40, Otavio Salvador wrote:
+> > https://github.com/woglinde/meta-java
 > 
-> On Wed, 2011-11-30 at 20:22, Koen Kooi wrote:
->> 
->> Beagleboard.org has moved to the OE-core metaverse to build the
->> factory images and we need java support to stay feature compatible with
->> OE classic.
->> 
->> Are there already people working on such a thing or should I just go
->> ahead and add a meta-java to the meta-oe repo and start importing
->> recipes one-by-one?
-> 
-> Henning already did it. https://github.com/woglinde/meta-java/
-> 
-> I was able to build openjdk-6 from it.
+> In my opinion ths should be added to
+> <http://www.openembedded.org/wiki/LayerIndex>.
 
-I've found a common theme for this week: It works if you follow the README,
-but noone actually reads a README :)
+Done :)
 
-regards,
+Cheers,
+Paul
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+-- 
 
-iEYEARECAAYFAk7XSBMACgkQMkyGM64RGpFb9gCfV34u1uP26A7os77pXJwdnZWd
-77wAn1aWEKIqEftpwVFqzVRVeCvoGf2V
-=veMI
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
