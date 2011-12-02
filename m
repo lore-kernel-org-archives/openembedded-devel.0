@@ -1,19 +1,38 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1RWUrc-0002pW-Ue
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RWUtj-0003G3-2o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 16:19:33 +0100
-Received: from e6520eb.lan (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id BC8994B0292;
-	Fri,  2 Dec 2011 16:10:00 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Dec 2011 16:09:55 +0100
-Message-Id: <1322838598-30090-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6.4
+	Fri, 02 Dec 2011 16:19:35 +0100
+Received: by bkbzv15 with SMTP id zv15so3182442bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Dec 2011 07:12:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=/kyh0pkPDLEwTnpqU0Yab1pePLOpNmoS+jrq7/RT/kI=;
+	b=A9Nx0wET4REXKkmeBBem+YkvH7d2r2oq13vZySdgRrXP2rKy2g1iUrLFggVwoirVMX
+	7k08jNc7CoTKUfMKfxQFGwzl5oYJ+JBH/Qks/hYZAgW+Svc2LVHragOtmYVIFO6m7oKW
+	kexzer8drLDmnWH2fgSHKVgHcEFK0e3o0kyQc=
+Received: by 10.204.149.86 with SMTP id s22mr11569748bkv.58.1322838771496;
+	Fri, 02 Dec 2011 07:12:51 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id w3sm9632078bkq.3.2011.12.02.07.12.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 02 Dec 2011 07:12:50 -0800 (PST)
+Message-ID: <4ED8EAEC.3010706@googlemail.com>
+Date: Fri, 02 Dec 2011 15:12:44 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe v2 1/4] pcsc-lite: clean recipe
+To: openembedded-devel@lists.openembedded.org
+References: <4ED8307F.2060306@googlemail.com>	<201112021120.17762.GNUtoo@no-log.org>	<4ED8DBC7.6080708@googlemail.com>
+	<20111202145256.GD3770@jama.jama.net>
+In-Reply-To: <20111202145256.GD3770@jama.jama.net>
+Subject: Re: fso-console-image problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,103 +46,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 15:19:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 02 Dec 2011 15:19:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-we get the following log at boot :
-Configuring pcsc-lite.
-update-rc.d: /etc/init.d/pcscd: file does not exist
 
-as the init script is no more nedded (autoload feature
-of the daemon by the clients), we can remove the previously
-unused init script and clean the recipe in order not
-to have any update-rc interaction.
+> So yes this is OE-classic.
+>
+> For building SHR you should follow SHR instructions:
+> http://wiki.shr-project.org/trac/wiki/Building%20SHR
+>   
+I see. Truth be told, this was the first thing I tried to do, but later 
+on decided to use openembedded as my ultimate aim is to have a cli image 
+(with less stuff on it as I don't want/need the gui). I think the 
+"shr-image" target I build is similar, if not the same, as the building 
+of the SHR - a link to which you provided above.
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- meta-oe/recipes-support/pcsc-lite/files/pcscd.init |   32 --------------=
-------
- .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |    7 +---
- 2 files changed, 2 insertions(+), 37 deletions(-)
- delete mode 100644 meta-oe/recipes-support/pcsc-lite/files/pcscd.init
+> Where are instructions for building from OE-classic as well as new
+> layers, but with htcdream there is problem in oe-core, see this thread:
+> http://lists.linuxtogo.org/pipermail/openembedded-core/2011-October/010993.html
+>   
+Interesting, but thankfully that doesn't apply to me, right?
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/files/pcscd.init b/meta-oe=
-/recipes-support/pcsc-lite/files/pcscd.init
-deleted file mode 100644
-index 92385ab..0000000
---- a/meta-oe/recipes-support/pcsc-lite/files/pcscd.init
-+++ /dev/null
-@@ -1,32 +0,0 @@
--#!/bin/sh
--DAEMON=3D/usr/sbin/pcscd
--NAME=3Dpcscd
--DESC=3D"PCSC Daemon"
--PIDFILE=3D/var/run/pcscd/pcscd.pid
--ARGS=3D""
--
--test -f $DAEMON || exit 0
--
--case "$1" in
--    start)
--        echo -n "Starting $DESC: $NAME"
--        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAE=
-MON -- $ARGS
--        echo "."
--        ;;
--    stop)
--        echo -n "Stopping $DESC: $NAME"
--        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEM=
-ON
--        echo "."
--        ;;
--    restart)
--        $0 stop
--        sleep 1
--        $0 start
--        ;;
--    *)
--        echo "Usage: $0 {start|stop|restart}"
--        exit 1
--        ;;
--esac
--
--exit 0
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb b/meta-=
-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-index 14a0ba0..de980ff 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-@@ -4,14 +4,14 @@ LICENSE =3D "BSD"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8e551349dc346258274f0007679e=
-149"
- DEPENDS =3D "udev"
- RDEPENDS +=3D "ccid"
--PR =3D "r1"
-+PR =3D "r2"
-=20
- SRC_URI =3D "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-$=
-{PV}.tar.bz2"
-=20
- SRC_URI[md5sum] =3D "47e7055cfc14399fdaa1b7a4aa06e5aa"
- SRC_URI[sha256sum] =3D "41f13d552eaa2c3978fbb6f2125e81903a0767011d999052=
-fd1a6ee03880b398"
-=20
--inherit autotools update-rc.d
-+inherit autotools
-=20
- EXTRA_OECONF =3D " \
- 	--disable-libusb \
-@@ -23,7 +23,4 @@ S =3D "${WORKDIR}/pcsc-lite-${PV}"
-=20
- PACKAGES =3D+ "${PN}-lib"
-=20
--INITSCRIPT_NAME =3D "pcscd"
--INITSCRIPT_PARAMS =3D "defaults"
--
- FILES_${PN}-lib =3D "${libdir}/lib*${SOLIBS}"
---=20
-1.7.6.4
+> I'm not familiar with htcdream, but this looks like some problem with kernel fb 
+> driver, you can try to boot shr-image, setup ssh access and then
+> shutdown xserver (with /etc/init.d/xserver-nodm stop) to see if you get
+> console login (check inittab if it's starting getty there) and also try
+> other vts with chvt.
+>   
+The phone, as far as I know, is not connected anywhere - I don't have a 
+working wifi/gsm etc - fastboot uses the usb link to transfer (and boot) 
+the image. Is it possible to, somehow, use usb to connect to the phone 
+this way (if so, how)? As you probably have gathered by now, I am a n00b 
+when it comes to this smartphone/embedded devices business, so would 
+need a bit of help with it. What is "vts" and "chvt"?
+
+I was thinking (that was plan B) to specify runlevel 3, not 5, thus 
+forcing a console log in (provided there is one!) - don't know if this 
+works on smartphones though! I already discovered that "nomodeset" isn't 
+working, sadly!
+
+> If it works you can prepare console-image with right
+> /etc/network/interfaces to be able to ssh in as soon as it boots and
+> then debug those stripes over ssh too.
+>   
+This is what I can't figure out - how can I get connectivity on this 
+phone if none of my wifi/gms is up and running?
+
+> Well if you can get serial console to htcdream then it would be even
+> easier.
+>   
+That is way over my head I am afraid!
+
+>> I don't know whether I would need this. I also discovered yesterday that 
+>> there is another openembedded git repository on freesmartphone.org 
+>> (git://git.freesmartphone.org/openembedded.git), but not sure whether 
+>> this is the same as the one I have been using...
+>>     
+>
+> This is usually used only by FSO people without R/W access to OE git to
+> prepare some changes.
+>   
+So, I shouldn't use it then?
+
+> Cheers,
+>   
+Thanks JaMa, your help is appreciated!
 
 
 
