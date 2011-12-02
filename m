@@ -1,35 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWRi0-0007Hl-H6 for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 12:55:16 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWRbX-0005SZ-L3 for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 12:48:35 +0100
-Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 12:48:35 +0100
-Received: from koen by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RWTtF-0008T6-Nl
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Dec 2011 15:15:02 +0100
+Received: by lagj5 with SMTP id j5so1275464lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 12:48:35 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 02 Dec 2011 12:48:20 +0100
-Message-ID: <jbadu4$u4u$1@dough.gmane.org>
-References: <1322824856-15965-1-git-send-email-eric@eukrea.com>
-	<1322824856-15965-2-git-send-email-eric@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1322824856-15965-2-git-send-email-eric@eukrea.com>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-oe 2/3] atftp: correctly handle init script
+	Fri, 02 Dec 2011 06:08:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=2Dhw/Yt+xLO3UmD6AM2pmkRRWuT49TPIYHIYODIVcjc=;
+	b=G5FVSoy7qqgqtsBnwK4uyN56MJjcWsY4ml6jjSs9hQK7EyjKl68gnK9MX39zAsOh6I
+	2bbzCGa7ZVhXEY2AOEuSygRQQqVeuHdIqeXfoIaIn7YsXtaRIKtpju/wGVeSltKbjLj3
+	pYC8dhHQkY1dMGJuOhFfrlVHYjyiR2wmdV/Fo=
+Received: by 10.152.125.196 with SMTP id ms4mr8073951lab.50.1322834894435;
+	Fri, 02 Dec 2011 06:08:14 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id mo6sm8600880lab.11.2011.12.02.06.08.12
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 02 Dec 2011 06:08:13 -0800 (PST)
+Message-ID: <4ED8DBC7.6080708@googlemail.com>
+Date: Fri, 02 Dec 2011 14:08:07 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
+MIME-Version: 1.0
+To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+References: <4ED8307F.2060306@googlemail.com>
+	<201112021120.17762.GNUtoo@no-log.org>
+In-Reply-To: <201112021120.17762.GNUtoo@no-log.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: fso-console-image problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,58 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 11:55:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 02-12-11 12:20, Eric Bénard schreef:
-> else it's affected to atftp package which is the client and not the
-> server, but the init file is only in the server package thus leading to
-> the following log at boot : Configuring atftp. update-rc.d:
-> /etc/init.d/atftpd: file does not exist
-> 
-> Signed-off-by: Eric Bénard <eric@eukrea.com> --- 
-> meta-oe/recipes-extended/atftp/atftp_0.7.bb |   10 ++++++---- 1 files
-> changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-> b/meta-oe/recipes-extended/atftp/atftp_0.7.bb index c541634..ab14a28
-> 100644 --- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb +++
-> b/meta-oe/recipes-extended/atftp/atftp_0.7.bb @@ -3,6 +3,7 @@ SECTION =
-> "network" HOMEPAGE = "http://packages.debian.org/atftp" LICENSE =
-> "GPLv2" LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f" +PR = "r1"
-> 
-> SRC_URI =
-> "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive
-> \ ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \ 
-> @@ -16,11 +17,12 @@ inherit autotools update-rc.d systemd useradd 
-> SYSTEMD_PACKAGES = "atftpd-systemd" SYSTEMD_SERVICE_atftpd-systemd =
-> "atftpd.service"
-> 
-> -INITSCRIPT_NAME = "atftpd" -INITSCRIPT_PARAMS = "defaults 80" 
-> +INITSCRIPT_PACKAGES = "${PN}d" +INITSCRIPT_NAME_${PN}d = "atftpd" 
-> +INITSCRIPT_PARAMS_${PN}d = "defaults 80"
-> 
-> -USERADD_PACKAGES = "atftpd" -USERADD_PARAM_atftpd = "--system
-> --no-create-home --shell /bin/false \ +USERADD_PACKAGES = "${PN}d" 
-> +USERADD_PARAM_${PN}d = "--system --no-create-home --shell /bin/false \ 
-> --user-group nobody"
-
-Was the USERADD change intentional?
+X-List-Received-Date: Fri, 02 Dec 2011 14:15:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk7YuwQACgkQMkyGM64RGpF28ACgp424Q0NwZ8bd7YPA9Sb8N72f
-Ug4AoKSN21FrC2eX55kKso8MEWt9lTwY
-=4fY6
------END PGP SIGNATURE-----
+Denis 'GNUtoo' Carikli wrote:
+> What are you using?
+> SHR-core or openembedded classic?
+>   
+Don't know if I am honest - there is a (very good) wiki page I have been 
+following to build this -> 
+http://www.openembedded.org/wiki/Getting_started. I presume it is 
+openembedded classic since I downloaded all the stuff from that page 
+(git://github.com/openembedded/openembedded.git is the repository used).
+
+As I indicated earlier, I successfully built the shr-image (GUI-based) - 
+it boots up OK on my smartphone, but I have no luck whatsoever with the 
+console (i.e. just cli) images - I tried two: "console-image" and 
+"fso-console-image", both unsuccessful (they do build, but my smartphone 
+is having problems booting up properly with these).
+
+> If you are using shr-core you need to fix that file:
+> openembedded-core/meta/conf/machine/include/arm/arch-armv6.inc
+> to include support for armv6-novfp and add a tune file for the CPU of the 
+> htcdream and then require that cpu tune file in the htcdream machine recipe.
+>   
+I don't know whether I would need this. I also discovered yesterday that 
+there is another openembedded git repository on freesmartphone.org 
+(git://git.freesmartphone.org/openembedded.git), but not sure whether 
+this is the same as the one I have been using...
 
 
 
