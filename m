@@ -1,28 +1,32 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RWOzE-0007ip-Ek
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 10:00:52 +0100
-Received: by lagj5 with SMTP id j5so1132531lag.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RWPns-0002Ev-RF for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Dec 2011 10:53:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RWPhM-0004EE-S2 for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Dec 2011 10:46:28 +0100
+Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Dec 2011 10:46:28 +0100
+Received: from koen by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 00:54:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=08IbtzalSudypUJ+yMjSiMEYZiq5Vm8u2YusUL2lDQw=;
-	b=icTr8Cyv1ccwX42Iko2XCX4DFZuycRBAThyMweqZjM0VqgcnwYLmy2u7g8INnizzQq
-	PU6K1+fqpD3NafDQSwDhQ5GQb2l+20zhIFaZCDhpI7bC9eb5DsIcKo8pColMnMvrzpIB
-	UgLp0m20y/kOLDyhtcHaLPKvSO+CsRsyUIz/s=
-Received: by 10.152.103.51 with SMTP id ft19mr7008868lab.42.1322816049511;
-	Fri, 02 Dec 2011 00:54:09 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Fri, 2 Dec 2011 00:53:37 -0800 (PST)
-In-Reply-To: <20111202072916.B61BC12A0201@dd20204.kasserver.com>
-References: <20111202072916.B61BC12A0201@dd20204.kasserver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 2 Dec 2011 00:53:37 -0800
-Message-ID: <CAMKF1spPT+NFvyp69cr6EFiB2EO5aO6AQ2iXtr-UB0hbAbA78Q@mail.gmail.com>
+	Fri, 02 Dec 2011 10:46:28 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Wiki account approvement
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 02 Dec 2011 10:46:14 +0100
+Message-ID: <jba6p6$bep$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+X-Enigmail-Version: 1.3.3
+Subject: [meta-java] rpath problem for llvm libs?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +40,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 09:00:52 -0000
+X-List-Received-Date: Fri, 02 Dec 2011 09:53:13 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 1, 2011 at 11:29 PM,  <bernhard.guillon@opensimpad.org> wrote:
-> Hi all,
-> can someone please approve my wiki account "Mr-nice". I want create
-> something like the stub template from wikipedia for "we are moving
-> to oe-core" and add it to all wiki pages which document how to use
-> oe-classic.\
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-try now
+Hi,
 
->
-> Best regards,
-> Bernhard
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I installed openjdk + openjdk-shark on my target and I get:
+
+root@beaglebone:~# java
+dl failure on line 696Error: failed
+/usr/lib/jvm/java-6-openjdk/jre/lib/arm/shark/libjvm.so, because
+libLLVMARMCodeGen.so: cannot open shared object file: No such file or directory
+
+The 'fix' I used:
+
+root@beaglebone:~# for i in /usr/lib/llvm2.9/libLLVM*.so ; do ln -sf $i
+/usr/lib ; done
+
+root@beaglebone:~# java
+Usage: java [-options] class [args...]
+           (to execute a class)
+
+I came up with a number of workarounds, but I'm not sure which is best:
+
+1) do the for ; ln thing in a postinst
+2) have llvm install into ${libdir} instead of ${libdir}${LLVM_RELEASE}
+3) Use u-a for the libs
+4) add rpaths
+5) convince people java is evil and have them switch to C
+
+I have a preference for 5), but I suspect Henning would like a different
+solution :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7YnmQACgkQMkyGM64RGpHTCwCdGfG86k7u/9QRKqN8KQIT6D1F
+Vq8An0Q/rjJ4C/oDX1OA/xzm8cop7/rq
+=bnBj
+-----END PGP SIGNATURE-----
+
 
 
