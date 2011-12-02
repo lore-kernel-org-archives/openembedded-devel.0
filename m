@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWYi4-0004jw-UD for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 20:23:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWYba-0008Ew-4L for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 20:17:06 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 20:17:06 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mark.hatle@windriver.com>) id 1RWZNh-0001kM-9g
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Dec 2011 21:06:49 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB2GPTFJ005723
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 20:17:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 02 Dec 2011 20:16:53 +0100
-Message-ID: <jbb875$apq$1@dough.gmane.org>
-References: <1322838598-30090-1-git-send-email-eric@eukrea.com>
-	<1322838598-30090-4-git-send-email-eric@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	Fri, 2 Dec 2011 08:25:29 -0800 (PST)
+Received: from Macintosh-5.local (172.25.36.232) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
+	Fri, 2 Dec 2011 08:25:28 -0800
+Message-ID: <4ED8FBF8.2090002@windriver.com>
+Date: Fri, 2 Dec 2011 10:25:28 -0600
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
 	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1322838598-30090-4-git-send-email-eric@eukrea.com>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-oe v2 4/4] add nostromo webserver
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <20111202103113.18D7A12A00B8@dd20204.kasserver.com>
+In-Reply-To: <20111202103113.18D7A12A00B8@dd20204.kasserver.com>
+Subject: Re: Please review my tmeplate:Oe-core-transition Wiki entry
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 19:23:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 02 Dec 2011 20:06:49 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 12/2/11 4:31 AM, bernhard.guillon@opensimpad.org wrote:
+> Hi all,
+> before I start to add this template everywhere can you please take a look at it here [1]. I especialy want to put it on the getting started page. The main page would be also nice but might look a bit odd.
+>
+> It misses this image [2] which is public domain because I cannot upload files to the wiki. Can someone with the neccessary rights upload it?
+> Also the moving to oe-core page currently do not exist because I do not know what to put at that page.
 
-Op 02-12-11 16:09, Eric Bénard schreef:
-> this recipe was imported from OE-classic and upgraded to latest version
-> 
-> Signed-off-by: Eric Bénard <eric@eukrea.com> --- 
-> meta-oe/recipes-extended/nostromo/files/cross.diff |  119
-> ++++++++++++++++++++ .../recipes-extended/nostromo/files/nhttpd.conf    |
-> 55 +++++++++ meta-oe/recipes-extended/nostromo/files/nostromo   |   34
-> ++++++ meta-oe/recipes-extended/nostromo/files/volatiles  |    2 + 
-> .../recipes-extended/nostromo/nostromo_1.9.5.bb    |   55 +++++++++ 5
-> files changed, 265 insertions(+), 0 deletions(-) create mode 100644
-> meta-oe/recipes-extended/nostromo/files/cross.diff create mode 100644
-> meta-oe/recipes-extended/nostromo/files/nhttpd.conf create mode 100644
-> meta-oe/recipes-extended/nostromo/files/nostromo create mode 100644
-> meta-oe/recipes-extended/nostromo/files/volatiles create mode 100644
-> meta-oe/recipes-extended/nostromo/nostromo_1.9.5.bb
-> 
-> diff --git a/meta-oe/recipes-extended/nostromo/files/cross.diff
-> b/meta-oe/recipes-extended/nostromo/files/cross.diff new file mode
-> 100644 index 0000000..d93ddb7 --- /dev/null +++
-> b/meta-oe/recipes-extended/nostromo/files/cross.diff @@ -0,0 +1,119 @@
+I think that information will be good to add to the OE (classic) pages. 
+However, we really need to have some text on the oe-core page to explain things.
 
-Can you please add a patch header with the purpose and upstream status of
-the patches? Bonus points for making them git-amable :)
+Has someone made the transition that can do a quick write up of what was necessary?
 
-regards,
+--Mark
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7ZJCIACgkQMkyGM64RGpEVWACghc+52XWW5LR0RmW1Yr0kLrtx
-s3EAoKYtrtzi1ZVyZau50/TUSSePoPyE
-=Pm0P
------END PGP SIGNATURE-----
+> Best regards,
+> Bernhard
+>
+> 1 http://www.openembedded.org/wiki/Template:Oe-core-transition
+> 2 http://en.wikipedia.org/wiki/File:Imbox_notice.png
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
