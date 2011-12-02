@@ -1,25 +1,33 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1RWRIc-0005vG-U4
+	(envelope-from <otavio.salvador@gmail.com>) id 1RWROA-0006L0-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 12:29:11 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 41749D1A064
+	Fri, 02 Dec 2011 12:34:46 +0100
+Received: by bkbzv15 with SMTP id zv15so2946756bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2011 12:21:43 +0100 (CET)
-Received: from e6520eb.lan (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id F3C8D4B0235;
-	Fri,  2 Dec 2011 12:21:37 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Dec 2011 12:20:55 +0100
-Message-Id: <1322824856-15965-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6.4
+	Fri, 02 Dec 2011 03:28:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=A54L4WQEKy2LK6oXPwoOQTE5Wc6+lFLLApEQfMxvwow=;
+	b=en45PKOT3vUNVzhhzWCiyCPePUjb/MaHomA+A4p27eHm3ORtbIQwBAP2wxMdCMCuyk
+	DWHWhdCdbvTAMtRy1pqVjPcxGrlQRrhLtalXqBwd5csufvy86BqDEbhPiOtGL2nKmWro
+	6rQBegQx4p8/mPKM0etyOJA7+hww21jU4F7FI=
+MIME-Version: 1.0
+Received: by 10.205.122.139 with SMTP id gg11mr10573219bkc.67.1322825284214;
+	Fri, 02 Dec 2011 03:28:04 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.54.74 with HTTP; Fri, 2 Dec 2011 03:28:04 -0800 (PST)
 In-Reply-To: <1322824856-15965-1-git-send-email-eric@eukrea.com>
 References: <1322824856-15965-1-git-send-email-eric@eukrea.com>
-MIME-Version: 1.0
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe 2/3] atftp: correctly handle init script
+Date: Fri, 2 Dec 2011 09:28:04 -0200
+X-Google-Sender-Auth: CjTt5H6vWnLqmgiUTiwpmQiq4fo
+Message-ID: <CAP9ODKq9VHPHHV57RakS8NB-xCWt3wxHhX3sr0AHdC=rahjM8A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: Re: [meta-oe 1/3] pcsc-lite: handle initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,56 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 11:29:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 Dec 2011 11:34:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-else it's affected to atftp package which is the client
-and not the server, but the init file is only in the server
-package thus leading to the following log at boot :
-Configuring atftp.
-update-rc.d: /etc/init.d/atftpd: file does not exist
+2011/12/2 Eric B=E9nard <eric@eukrea.com>
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- meta-oe/recipes-extended/atftp/atftp_0.7.bb |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
+> else we get the following log at boot :
+> Configuring pcsc-lite.
+> update-rc.d: /etc/init.d/pcscd: file does not exist
+>
 
-diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb b/meta-oe/recipe=
-s-extended/atftp/atftp_0.7.bb
-index c541634..ab14a28 100644
---- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-+++ b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-@@ -3,6 +3,7 @@ SECTION =3D "network"
- HOMEPAGE =3D "http://packages.debian.org/atftp"
- LICENSE =3D "GPLv2"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-+PR =3D "r1"
-=20
- SRC_URI =3D "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;=
-name=3Darchive \
-            ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;nam=
-e=3Dpatch \
-@@ -16,11 +17,12 @@ inherit autotools update-rc.d systemd useradd
- SYSTEMD_PACKAGES =3D "atftpd-systemd"
- SYSTEMD_SERVICE_atftpd-systemd =3D "atftpd.service"
-=20
--INITSCRIPT_NAME =3D "atftpd"
--INITSCRIPT_PARAMS =3D "defaults 80"
-+INITSCRIPT_PACKAGES =3D "${PN}d"
-+INITSCRIPT_NAME_${PN}d =3D "atftpd"
-+INITSCRIPT_PARAMS_${PN}d =3D "defaults 80"
-=20
--USERADD_PACKAGES =3D "atftpd"
--USERADD_PARAM_atftpd =3D "--system --no-create-home --shell /bin/false \
-+USERADD_PACKAGES =3D "${PN}d"
-+USERADD_PARAM_${PN}d =3D "--system --no-create-home --shell /bin/false \
-                         --user-group nobody"
-=20
- do_install_append() {
+It doesn't need the init script anymore as it has autoload support now.
+
 --=20
-1.7.6.4
-
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
