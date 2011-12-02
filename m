@@ -1,20 +1,23 @@
-Received: from smtp204.alice.it ([82.57.200.100])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1RWQKb-0003Ts-58
+	(envelope-from <bernhard.guillon@opensimpad.org>) id 1RWQNC-0003bT-1A
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Dec 2011 11:27:01 +0100
-Received: from trisquel.localnet (80.116.58.40) by smtp204.alice.it
-	(8.6.023.02) (authenticated as editempo@alice.it)
-	id 4ECA5ECD0059765D; Fri, 2 Dec 2011 11:20:18 +0100
-From: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
+	Fri, 02 Dec 2011 11:29:42 +0100
+Received: from dd20204.kasserver.com (dd0801.kasserver.com [85.13.143.205])
+	by dd20204.kasserver.com (Postfix) with SMTP id 838CA12A00B8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Dec 2011 11:23:00 +0100 (CET)
+In-Reply-To: <CAMKF1spPT+NFvyp69cr6EFiB2EO5aO6AQ2iXtr-UB0hbAbA78Q@mail.gmail.com>
+References: <20111202072916.B61BC12A0201@dd20204.kasserver.com>
+	<CAMKF1spPT+NFvyp69cr6EFiB2EO5aO6AQ2iXtr-UB0hbAbA78Q@mail.gmail.com>
+From: bernhard.guillon@opensimpad.org
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 2 Dec 2011 11:20:17 +0100
-User-Agent: KMail/1.13.6 (Linux/2.6.38-12-generic; KDE/4.6.5; x86_64; ; )
-References: <4ED8307F.2060306@googlemail.com>
-In-Reply-To: <4ED8307F.2060306@googlemail.com>
 MIME-Version: 1.0
-Message-Id: <201112021120.17762.GNUtoo@no-log.org>
-Subject: Re: fso-console-image problems
+X-SenderIP: 141.201.224.246
+User-Agent: ALL-INKL Webmail
+Message-Id: <20111202102301.838CA12A00B8@dd20204.kasserver.com>
+Date: Fri,  2 Dec 2011 11:23:00 +0100 (CET)
+Subject: Re: Wiki account approvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,19 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 10:27:01 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Dec 2011 10:29:42 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-What are you using?
-SHR-core or openembedded classic?
 
-If you are using shr-core you need to fix that file:
-openembedded-core/meta/conf/machine/include/arm/arch-armv6.inc
-to include support for armv6-novfp and add a tune file for the CPU of the 
-htcdream and then require that cpu tune file in the htcdream machine recipe.
 
-Denis.
+
+----- Original Message -----
+From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: 02.12.2011 09:53:37
+Subject: Re: [oe] Wiki account approvement
+
+
+> On Thu, Dec 1, 2011 at 11:29 PM,  <bernhard.guillon@opensimpad.org> wro=
+te:
+> > Hi all,
+> > can someone please approve my wiki account "Mr-nice". I want create
+> > something like the stub template from wikipedia for "we are moving
+> > to oe-core" and add it to all wiki pages which document how to use
+> > oe-classic.\
+>=20
+> try now
+
+Thanks! That worked :)
+
+Best regards,
+Bernhard
+
+
+
 
 
