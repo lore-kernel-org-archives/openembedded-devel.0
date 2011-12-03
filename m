@@ -1,23 +1,22 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from smtp203.alice.it ([82.57.200.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RWeOR-0004pX-UN
+	(envelope-from <GNUtoo@no-log.org>) id 1RWmHh-00016J-AO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 02:27:56 +0100
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LVL00HMUT36XQE1@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	02 Dec 2011 19:21:07 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8666914AF5D; Fri,
-	02 Dec 2011 20:21:06 -0500 (EST)
-Date: Fri, 02 Dec 2011 20:21:06 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20111203012106.GR20602@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: [2011.03-maintenance] Pull request 20111202
+	Sat, 03 Dec 2011 10:53:29 +0100
+Received: from trisquel.localnet (80.116.58.40) by smtp203.alice.it
+	(8.6.023.02) (authenticated as editempo@alice.it)
+	id 4ECA5E230060D273; Sat, 3 Dec 2011 10:46:45 +0100
+From: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
+To: Mr Dash Four <mr.dash.four@googlemail.com>
+Date: Sat, 3 Dec 2011 10:46:43 +0100
+User-Agent: KMail/1.13.6 (Linux/2.6.38-12-generic; KDE/4.6.5; x86_64; ; )
+References: <4ED8307F.2060306@googlemail.com> <4ED960AB.5040502@googlemail.com>
+	<4ED96455.8060008@googlemail.com>
+In-Reply-To: <4ED96455.8060008@googlemail.com>
+MIME-Version: 1.0
+Message-Id: <201112031046.44018.GNUtoo@no-log.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: fso-console-image problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,44 +30,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Dec 2011 01:27:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 03 Dec 2011 09:53:29 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Tom,
+>Apart from setting "CONFIG_FRAMEBUFFER_CONSOLE=y" (and possibly setting 
+>"# CONFIG_DUMMY_CONSOLE is not set") should I activate anything else 
+>from the above? Is that all what's needed?
+Instead of trying to edit the file manually, try "make xconfig" in the 
+directory where the kernel is extracted(something like work/htcdream*/linux-
+leviathan*/git/ ) and do it manually trough the GUI, then save back the 
+resulting defconfig, increase PR in the recipe and rebuild your console-image.
 
-Please pull these 2 commits that fix fakeroot, cherry-picked from oe.dev
-
-Pull URL: git://arago-project.org/git/people/denix/openembedded.git
-  Branch: 2011.03-maintenance
-  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
-
-Thanks,
-    Denys Dmytriyenko <denys@ti.com>
----
-
-The following changes since commit bf617b522784fc83a678c5a5a10a053f84e39f7e:
-  Steffen Sledz (1):
-        gypsy: update to latest upstream version 0.8, and remove version 0.7
-
-are available in the git repository at:
-
-  git://arago-project.org/git/people/denix/openembedded 2011.03-maintenance
-
-Florian Boor (1):
-  fakeroot: Move from not fetchable 1.14.5 to 1.15.1
-
-Tom Rini (1):
-  fakeroot.inc: Add RDEPENDS_${PN}-virtclass-native
-
- .../fix-prefix.patch                               |    0
- .../quiet-getopt-check.patch                       |    0
- recipes/fakeroot/fakeroot.inc                      |    1 +
- .../{fakeroot_1.14.5.bb => fakeroot_1.15.1.bb}     |    4 ++--
- 4 files changed, 3 insertions(+), 2 deletions(-)
- rename recipes/fakeroot/{fakeroot-1.14.5 => fakeroot-1.15.1}/fix-prefix.patch (100%)
- rename recipes/fakeroot/{fakeroot-1.14.5 => fakeroot-1.15.1}/quiet-getopt-check.patch (100%)
- rename recipes/fakeroot/{fakeroot_1.14.5.bb => fakeroot_1.15.1.bb} (53%)
-
+Denis.
 
 
