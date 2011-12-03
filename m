@@ -1,34 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWsLy-0008CN-Dl for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 17:22:18 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWsFS-0003ZE-G7 for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 17:15:34 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Dec 2011 17:15:34 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1RWseF-00006l-PE
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Dec 2011 17:41:11 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B0B001100182
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Dec 2011 17:15:34 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat,  3 Dec 2011 17:34:25 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 92F74110017F
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Dec 2011 17:34:24 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052239173.adsl.alicedsl.de
+	[78.52.239.173]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Dec 2011 17:34:24 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 7A0A03C49D; Sat,  3 Dec 2011 17:34:23 +0100 (CET)
+Date: Sat, 3 Dec 2011 17:34:23 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 03 Dec 2011 17:15:21 +0100
-Message-ID: <jbdhuo$pe4$1@dough.gmane.org>
+Message-ID: <20111203163423.GA3821@mail.familie-heinold.de>
 References: <jba6p6$bep$1@dough.gmane.org>
 	<CA+M6bXk94ukVFEva8Ab-RbvNe3pWuYkJWZkk-WS8CpKca83F4Q@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <CA+M6bXk94ukVFEva8Ab-RbvNe3pWuYkJWZkk-WS8CpKca83F4Q@mail.gmail.com>
-X-Enigmail-Version: 1.3.3
+	<jbdhuo$pe4$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <jbdhuo$pe4$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [meta-java] rpath problem for llvm libs?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,67 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Dec 2011 16:22:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Dec 2011 16:41:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 03-12-11 16:42, Tom Rini schreef:
-> On Fri, Dec 2, 2011 at 2:46 AM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Hi,
->> 
->> I installed openjdk + openjdk-shark on my target and I get:
->> 
->> root@beaglebone:~# java dl failure on line 696Error: failed 
->> /usr/lib/jvm/java-6-openjdk/jre/lib/arm/shark/libjvm.so, because 
->> libLLVMARMCodeGen.so: cannot open shared object file: No such file or
->> directory
->> 
->> The 'fix' I used:
->> 
->> root@beaglebone:~# for i in /usr/lib/llvm2.9/libLLVM*.so ; do ln -sf
->> $i /usr/lib ; done
->> 
->> root@beaglebone:~# java Usage: java [-options] class [args...] (to
->> execute a class)
->> 
->> I came up with a number of workarounds, but I'm not sure which is
->> best:
->> 
->> 1) do the for ; ln thing in a postinst 2) have llvm install into
->> ${libdir} instead of ${libdir}${LLVM_RELEASE} 3) Use u-a for the libs 
->> 4) add rpaths 5) convince people java is evil and have them switch to
->> C
->> 
->> I have a preference for 5), but I suspect Henning would like a
->> different solution :)
+On Sat, Dec 03, 2011 at 05:15:21PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> So if we were to follow that option 4) seems to be the way.
 > 
-> Well, what's Fedora or Debian/Ubuntu look like here?
+> regards,
+> 
+> Koen
 
-They seem to lack the shark jre, but the 'llvm' package looks like this:
+Hi,
 
-root@dominion:/data/ssd# find /usr/lib | grep llvm | grep Printer | head -n2
-/usr/lib/llvm/lib/libLLVMCellSPUAsmPrinter.a
-/usr/lib/llvm/lib/libLLVMXCoreAsmPrinter.a
+our original Idea was, that you can install diffrent llvm versions at the same time. We need
+to discuss if we have still the case or really only one version of llvm. If not we can use directly /usr/lib if not
+solution 4 with rpath is my favourit. Besides this llvm should go to core, but I wanted to wait
+for the 3.0 release and christmas holidays to do it.
 
-So if we were to follow that option 4) seems to be the way.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7aSxcACgkQMkyGM64RGpGD4wCfQojBBu41NzAvjl9mT8vjPE+Y
-lcUAnA6Bfne8yFGuw+5m9QSZbQ0fktht
-=4DKv
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
