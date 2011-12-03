@@ -1,37 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWupM-0003uW-HA for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 20:00:48 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RWuis-0003vG-CR for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 19:54:06 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Dec 2011 19:54:06 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Dec 2011 19:54:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 03 Dec 2011 19:53:53 +0100
-Message-ID: <jbdr82$3ri$1@dough.gmane.org>
-References: <jba6p6$bep$1@dough.gmane.org>
-	<CA+M6bXk94ukVFEva8Ab-RbvNe3pWuYkJWZkk-WS8CpKca83F4Q@mail.gmail.com>
-	<jbdhuo$pe4$1@dough.gmane.org>
-	<20111203163423.GA3821@mail.familie-heinold.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <20111203163423.GA3821@mail.familie-heinold.de>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-java] rpath problem for llvm libs?
+	(envelope-from <raj.khem@gmail.com>) id 1RWw9e-00063C-C3
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 03 Dec 2011 21:25:50 +0100
+Received: by lagj5 with SMTP id j5so1703366lag.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Dec 2011 12:19:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=nU0zf49lQi0KzYev6xJH9q5okPeRGH5X8LF5iVbMskk=;
+	b=Y50GYBA0UOIkUYDFE76ognsQGomSnGdzDS1ReHHXJOK3sQYoacpI0Xc3YwPHq4fQns
+	VQKKZ28njmWaBD68AUHYaU3G3Hmh5cQz01IOWE9ZnG02awSPHW3ehEoayvjn5uQ6twzP
+	O0tDi3t4z/zmhYB3kTA6s2EjGnN6/vUwZXxz4=
+Received: by 10.152.144.73 with SMTP id sk9mr2155755lab.34.1322943543280; Sat,
+	03 Dec 2011 12:19:03 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.24.36 with HTTP; Sat, 3 Dec 2011 12:18:32 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 3 Dec 2011 12:18:32 -0800
+Message-ID: <CAMKF1srGAsF2OSgL4qPMCDFxUTusFy-Mk=swJ3bvgLZ8ZQVP0w@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Failure expanding variable PRINC[:=], expression was ${@int(PRINC) + 1} which triggered exception NameError: name 'PRINC' is not defined
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Dec 2011 19:00:48 -0000
+X-List-Received-Date: Sat, 03 Dec 2011 20:25:50 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-Op 03-12-11 17:34, Henning Heinold schreef:
-> On Sat, Dec 03, 2011 at 05:15:21PM +0100, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE----- So if we were to follow that option
->> 4) seems to be the way.
->> 
->> regards,
->> 
->> Koen
-> 
-> Hi,
-> 
-> our original Idea was, that you can install diffrent llvm versions at the
-> same time. We need to discuss if we have still the case or really only
-> one version of llvm. If not we can use directly /usr/lib if not solution
-> 4 with rpath is my favourit. Besides this llvm should go to core, but I
-> wanted to wait for the 3.0 release and christmas holidays to do it.
+I am seeing  this
 
-- From the llvm website: "December 1, 2011: LLVM 3.0 is now available for
-download!"
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk7acD8ACgkQMkyGM64RGpF6ZACfX2Mby+mhVCxNvx7FzFbBUMmS
-zmcAnRgLUHbfFZLIjaQZQI0dor057JNO
-=l4wJ
------END PGP SIGNATURE-----
+Pseudo is not present but is required, building this first before the main build
+NOTE: angstrom DOES NOT support libiconv because the eglibc provided
+iconv library is used          | ETA:  00:00:22
+NOTE: angstrom DOES NOT support libiconv because the eglibc provided
+iconv library is used          | ETA:  00:00:22
+ERROR: Failure expanding variable PRINC[:=], expression was
+${@int(PRINC) + 1} which triggered exception NameError: name 'PRINC'
+is not defined
+ERROR: Command execution failed: Exited with 1
 
+when parsing angstrom-2010.x distro after deleting the builddir and
+doing clean slate build
+
+I see lot of those expressions are coming from
+meta-shr and other layers in meta-smartphone
+
+Does someone else encountered it ?
+
+Thanks
+-Khem
 
 
