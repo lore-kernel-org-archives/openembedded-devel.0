@@ -1,42 +1,23 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mr.dash.four@googlemail.com>) id 1RWcz3-0002uu-Vr
+	(envelope-from <denis@denix.org>) id 1RWeOR-0004pX-UN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Dec 2011 00:57:38 +0100
-Received: by wgbds11 with SMTP id ds11so1823945wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2011 15:50:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=message-id:disposition-notification-to:date:from:user-agent
-	:mime-version:to:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=ZhFVZCFIbDo0napHK/89oN+NWXhKTl3gs1cs9yBpGYs=;
-	b=qhOXj+hcbxwzYNHTSrhCh2dYXTcdAe9LCsbj7wIykINvOnXlujNcPZJ3xpdXDtzGVT
-	IqiI6CYoBndzJXD77EaIhJbc/PJroDOToxk6OQr3S3JwRFZYMsM8QsHQdpWGctpspKYy
-	SDCeVNUhCnY5ieA5UJM0M+KFt/z2Jq4LP2Cuw=
-Received: by 10.216.203.163 with SMTP id f35mr103327weo.13.1322869851998;
-	Fri, 02 Dec 2011 15:50:51 -0800 (PST)
-Received: from [10.68.68.173]
-	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
-	by mx.google.com with ESMTPS id n9sm7557280wbo.16.2011.12.02.15.50.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 02 Dec 2011 15:50:51 -0800 (PST)
-Message-ID: <4ED96455.8060008@googlemail.com>
-Date: Fri, 02 Dec 2011 23:50:45 +0000
-From: Mr Dash Four <mr.dash.four@googlemail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
-MIME-Version: 1.0
-To: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-References: <4ED8307F.2060306@googlemail.com>
-	<20111202145256.GD3770@jama.jama.net>
-	<4ED92FC0.2050502@googlemail.com>
-	<201112022324.09104.GNUtoo@no-log.org>
-	<4ED960AB.5040502@googlemail.com>
-In-Reply-To: <4ED960AB.5040502@googlemail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: fso-console-image problems
+	Sat, 03 Dec 2011 02:27:56 +0100
+Received: from gandalf.denix.org ([unknown] [96.240.135.93])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LVL00HMUT36XQE1@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	02 Dec 2011 19:21:07 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8666914AF5D; Fri,
+	02 Dec 2011 20:21:06 -0500 (EST)
+Date: Fri, 02 Dec 2011 20:21:06 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20111203012106.GR20602@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: [2011.03-maintenance] Pull request 20111202
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2011 23:57:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Dec 2011 01:27:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
- 
-> I use bitbake to compile/build everything - how do I get that done 
-> there (I presume there must be some sort of .config file somewhere)?
-Right, after a bit of digging, I found this in my 
-recipes/linux/linux-leviathan/defconfig (I think that's the kernel used 
-to build my htcdream image, if not, then I'm wrong!):
+Tom,
 
-# CONFIG_DISPLAY_SUPPORT is not set
-# CONFIG_VGA_CONSOLE is not set
-CONFIG_DUMMY_CONSOLE=y
-# CONFIG_FRAMEBUFFER_CONSOLE is not set
+Please pull these 2 commits that fix fakeroot, cherry-picked from oe.dev
 
-Apart from setting "CONFIG_FRAMEBUFFER_CONSOLE=y" (and possibly setting 
-"# CONFIG_DUMMY_CONSOLE is not set") should I activate anything else 
-from the above? Is that all what's needed?
+Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+  Branch: 2011.03-maintenance
+  Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
+
+Thanks,
+    Denys Dmytriyenko <denys@ti.com>
+---
+
+The following changes since commit bf617b522784fc83a678c5a5a10a053f84e39f7e:
+  Steffen Sledz (1):
+        gypsy: update to latest upstream version 0.8, and remove version 0.7
+
+are available in the git repository at:
+
+  git://arago-project.org/git/people/denix/openembedded 2011.03-maintenance
+
+Florian Boor (1):
+  fakeroot: Move from not fetchable 1.14.5 to 1.15.1
+
+Tom Rini (1):
+  fakeroot.inc: Add RDEPENDS_${PN}-virtclass-native
+
+ .../fix-prefix.patch                               |    0
+ .../quiet-getopt-check.patch                       |    0
+ recipes/fakeroot/fakeroot.inc                      |    1 +
+ .../{fakeroot_1.14.5.bb => fakeroot_1.15.1.bb}     |    4 ++--
+ 4 files changed, 3 insertions(+), 2 deletions(-)
+ rename recipes/fakeroot/{fakeroot-1.14.5 => fakeroot-1.15.1}/fix-prefix.patch (100%)
+ rename recipes/fakeroot/{fakeroot-1.14.5 => fakeroot-1.15.1}/quiet-getopt-check.patch (100%)
+ rename recipes/fakeroot/{fakeroot_1.14.5.bb => fakeroot_1.15.1.bb} (53%)
+
 
 
