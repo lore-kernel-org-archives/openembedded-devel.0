@@ -1,40 +1,25 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mr.dash.four@googlemail.com>) id 1RXBSC-0005v1-0y
+	(envelope-from <eric@eukrea.com>) id 1RXDsw-0001XL-TR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Dec 2011 13:46:00 +0100
-Received: by wgbds11 with SMTP id ds11so4373259wgb.24
+	Sun, 04 Dec 2011 16:21:48 +0100
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 4BF3F2D1EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Dec 2011 04:39:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=message-id:disposition-notification-to:date:from:user-agent
-	:mime-version:to:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=jTt5ENr4fIaQFo2Rp6RhLFPw+CpixNy37l762csHVVo=;
-	b=SKgmkgFktRHCZwY9Quu9+9tMcEPNOlcLq4kfytXvWuS+rwFHFt+3oEbb/brsxo6Ayh
-	gNGbw4LhL2CBzdvv+kyjZaex/ZNJGqdVeZylJDIvj+v0/J4W6E/Q6FAf9FmccqZQCX+R
-	DWlKxfhiyWXTrNQp3/tmiqMm8VmswNR6lhMpg=
-Received: by 10.227.209.82 with SMTP id gf18mr12480534wbb.8.1323002352018;
-	Sun, 04 Dec 2011 04:39:12 -0800 (PST)
-Received: from [10.68.68.173]
-	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
-	by mx.google.com with ESMTPS id d17sm22009902wbh.19.2011.12.04.04.39.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 04 Dec 2011 04:39:09 -0800 (PST)
-Message-ID: <4EDB69E5.3050809@googlemail.com>
-Date: Sun, 04 Dec 2011 12:39:01 +0000
-From: Mr Dash Four <mr.dash.four@googlemail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
-MIME-Version: 1.0
+	Sun,  4 Dec 2011 16:15:01 +0100 (CET)
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 0FF65A6AC9;
+	Sun,  4 Dec 2011 16:14:52 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4ED8307F.2060306@googlemail.com>
-	<4ED960AB.5040502@googlemail.com>	<4ED96455.8060008@googlemail.com>	<201112031046.44018.GNUtoo@no-log.org>	<4EDA504E.7070304@googlemail.com>	<20111203165213.GB3797@jama.jama.net>	<4EDA6095.5030203@googlemail.com>
-	<20111203180303.GD3797@jama.jama.net>
-	<4EDA6C03.1040308@googlemail.com>
-In-Reply-To: <4EDA6C03.1040308@googlemail.com>
-Subject: Re: fso-console-image problems
+Date: Sun,  4 Dec 2011 16:14:46 +0100
+Message-Id: <1323011686-31232-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.6.4
+In-Reply-To: <jbb875$apq$1@dough.gmane.org>
+References: <jbb875$apq$1@dough.gmane.org>
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe v2] add nostromo webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +33,211 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Dec 2011 12:46:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Dec 2011 15:21:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+this recipe was imported from OE-classic and upgraded to latest
+version
 
-> Noted, though what I did in the meantime is I logged in via ssh (see 
-> below :-) ), called nano, cut-and-paste job from my PC's htcuniversal 
-> keymap file, saved this as /etc/keymap-2.6.map (on the phone) and then 
-> executed /etc/init.d/keymap - the layout has changed somewhat but it 
-> is not what I need, so I am going to see if I could make the 
-> corrections I need so that this file matches the htcdream layout exactly.
->
-> There are quite a few "non-standard" keys (like "home", "back", two 
-> different "alt" keys, one "search" key etc) which I am hoping to 
-> capture with this layout config - will search google for the tool to 
-> use to see what scan codes they transmit (provided this is how the 
-> "keycode" works, that is).
-Not having much luck with this at the moment! I dumped the entire 
-key-mapping configuration to a separate file using dumpkeys and tried, 
-as a test, to reconfigure a non-standard key (called 'menu') to emit the 
-letter 'z' when pressed - at least that was the idea.
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ .../recipes-extended/nostromo/files/nhttpd.conf    |   55 ++++++++++++++=
+++++++
+ meta-oe/recipes-extended/nostromo/files/nostromo   |   34 ++++++++++++
+ meta-oe/recipes-extended/nostromo/files/volatiles  |    2 +
+ .../recipes-extended/nostromo/nostromo_1.9.5.bb    |   54 ++++++++++++++=
++++++
+ 4 files changed, 145 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/nostromo/files/nhttpd.conf
+ create mode 100644 meta-oe/recipes-extended/nostromo/files/nostromo
+ create mode 100644 meta-oe/recipes-extended/nostromo/files/volatiles
+ create mode 100644 meta-oe/recipes-extended/nostromo/nostromo_1.9.5.bb
 
-When I ran "showkeys -s" (to see what was the scan code of that key) I 
-noted it as "0xe0 0x5e", so I then did the following: "setkeycodes e05e 
-44" (44 in the already-dumped keymap is defined as "keycode 44 = +z +Z 
-+z Control_z Control_z Meta_z Meta_Control_z"). After doing that, I 
-pressed the "menu" key a couple of times, but nothing happened.
+diff --git a/meta-oe/recipes-extended/nostromo/files/nhttpd.conf b/meta-o=
+e/recipes-extended/nostromo/files/nhttpd.conf
+new file mode 100644
+index 0000000..6674bb6
+--- /dev/null
++++ b/meta-oe/recipes-extended/nostromo/files/nhttpd.conf
+@@ -0,0 +1,55 @@
++# MAIN [MANDATORY]
++
++servername		localhost
++#servername		www.nazgul.ch:8080
++serverlisten		*
++#serverlisten		81.221.21.250 127.0.0.1 ::1
++serveradmin		webmaster@localhost
++serverroot		/var/nostromo
++servermimes		/var/nostromo/conf/mimes
++docroot			/var/nostromo/htdocs
++docindex		index.html
++
++# LOGS [OPTIONAL]
++
++logpid			/var/run/nostromo/nhttpd.pid
++#logaccess		/var/log/nostromo/access_log
++
++# SETUID [RECOMMENDED]
++
++user			www-data
++
++# BASIC AUTHENTICATION [OPTIONAL]
++
++#htaccess		.htaccess
++#htpasswd		/var/nostromo/conf/.htpasswd
++#htpasswd		+bsdauth
++#htpasswd		+bsdauthnossl
++
++# SSL [OPTIONAL]
++
++#sslport		443
++#sslcert		/etc/ssl/server.crt
++#sslcertkey		/etc/ssl/server.key
++
++# CUSTOM RESPONSES [OPTIONAL]
++#
++# The custom responses are searched in the corresponding document root.
++
++#custom_401		custom_401.html
++#custom_403		custom_403.html
++#custom_404		custom_404.html
++
++# ALIASES [OPTIONAL]
++
++/icons			/var/nostromo/icons
++
++# VIRTUAL HOSTS [OPTIONAL]
++
++#www.rahel.ch		/var/nostromo/htdocs/www.rahel.ch
++#www.rahel.ch:8080	/var/nostromo/htdocs/www.rahel.ch
++
++# HOMEDIRS [OPTIONAL]
++
++#homedirs		/home
++#homedirs_public	public_www
+diff --git a/meta-oe/recipes-extended/nostromo/files/nostromo b/meta-oe/r=
+ecipes-extended/nostromo/files/nostromo
+new file mode 100644
+index 0000000..8a28868
+--- /dev/null
++++ b/meta-oe/recipes-extended/nostromo/files/nostromo
+@@ -0,0 +1,34 @@
++#!/bin/sh
++
++PATH=3D/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=3Dnhttpd
++NAME=3Dnhttpd
++DESC=3D"Nostromo Web Server"
++OPTS=3D"-c /etc/nhttpd.conf"
++
++case "$1" in
++  start)
++	echo -n "Starting $DESC: "
++	start-stop-daemon --start -x "$DAEMON" -- $OPTS
++	echo "$NAME."
++	;;
++  stop)
++	echo -n "Stopping $DESC: "
++	start-stop-daemon --stop -x "$DAEMON"
++	echo "$NAME."
++	;;
++  restart|force-reload)
++	echo -n "Restarting $DESC: "
++	start-stop-daemon --stop -x "$DAEMON"
++	sleep 1
++	start-stop-daemon --start -x "$DAEMON" -- $OPTS
++	echo "$NAME."
++	;;
++  *)
++	N=3D/etc/init.d/$NAME
++	echo "Usage: $N {start|stop|restart|force-reload}" >&2
++	exit 1
++	;;
++esac
++
++exit 0
+diff --git a/meta-oe/recipes-extended/nostromo/files/volatiles b/meta-oe/=
+recipes-extended/nostromo/files/volatiles
+new file mode 100644
+index 0000000..4092496
+--- /dev/null
++++ b/meta-oe/recipes-extended/nostromo/files/volatiles
+@@ -0,0 +1,2 @@
++d www-data www-data 0775 /var/run/nostromo none
++d www-data www-data 0775 /var/log/nostromo none
+diff --git a/meta-oe/recipes-extended/nostromo/nostromo_1.9.5.bb b/meta-o=
+e/recipes-extended/nostromo/nostromo_1.9.5.bb
+new file mode 100644
+index 0000000..ee326d2
+--- /dev/null
++++ b/meta-oe/recipes-extended/nostromo/nostromo_1.9.5.bb
+@@ -0,0 +1,54 @@
++HOMEPAGE =3D "http://www.nazgul.ch/dev_nostromo.html"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://src/nhttpd/main.c;beginline=3D2;endline=3D1=
+4;md5=3De5ec3fa723b29b7d59d205afd8d36938"
++
++SRC_URI =3D "http://www.nazgul.ch/dev/${PN}-${PV}.tar.gz \
++           file://nhttpd.conf \
++           file://volatiles \
++           file://nostromo \
++           "
++
++TARGET_CC_ARCH +=3D "${LDFLAGS}"
++
++DEPENDS =3D "openssl"
++
++inherit update-rc.d
++
++INITSCRIPT_NAME =3D "nostromo"
++INITSCRIPT_PARAMS =3D "defaults 70"
++
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    install -d ${D}/${sbindir}
++    install -m 0755 src/nhttpd/nhttpd ${D}/${sbindir}/nhttpd
++    install -m 0755 src/tools/crypt ${D}/${sbindir}/crypt
++    install -d ${D}/${mandir}/man8
++    install -m 0444 src/nhttpd/nhttpd.8 ${D}/${mandir}/man8/nhttpd.8
++    install -d ${D}${localstatedir}/nostromo/conf
++    install -d ${D}${localstatedir}/nostromo/htdocs/cgi-bin
++    install -d ${D}${localstatedir}/nostromo/icons
++    install -d ${D}${localstatedir}/log/nostromo
++    install -d ${D}${localstatedir}/run/nostromo
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0644 conf/mimes ${D}${localstatedir}/nostromo/conf/mimes
++    install -m 0644 ${WORKDIR}/nhttpd.conf ${D}${sysconfdir}
++    install -m 0755 ${WORKDIR}/nostromo ${D}${sysconfdir}/init.d
++    install -c -D -m 644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/=
+volatiles/nostromo
++    install -m 0644 htdocs/index.html ${D}${localstatedir}/nostromo/htdo=
+cs/index.html
++    install -m 0644 htdocs/nostromo.gif ${D}${localstatedir}/nostromo/ht=
+docs/nostromo.gif
++    install -m 0644 icons/dir.gif ${D}${localstatedir}/nostromo/icons/di=
+r.gif
++    install -m 0644 icons/file.gif ${D}${localstatedir}/nostromo/icons/f=
+ile.gif
++}
++
++pkg_postinst_${PN}_prepend() {
++    chown -R www-data:www-data  ${localstatedir}/nostromo ${localstatedi=
+r}/log/nostromo ${localstatedir}/run/nostromo
++    /etc/init.d/populate-volatile.sh update
++}
++
++SRC_URI[md5sum] =3D "dc6cfd6b5aae04c370c7f818fa7bde55"
++SRC_URI[sha256sum] =3D "5f62578285e02449406b46cf06a7888fe3dc4a90bedf58cc=
+18523bad62f6b914"
++
++CONFFILES_${PN} +=3D "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf=
+"
+--=20
+1.7.6.4
 
-I then tried to remap another "non-standard" key - my "Back" key on the 
-actual phone, but again nothing happens (when I press it, it emits '?' 
-*regardless* of whether this key is re-defined by me or not). Lastly, I 
-tried to do this trick on a "known" key - '1' (scancode 2): no problem, 
-it emits the letter 'z' as it should.
-
-I don't know if I am doing this wrong and why it doesn't work with 
-"non-standard" keys, maybe the kernel keyboard driver is somehow 
-"stopping" these - I have no idea at this point!
 
 
