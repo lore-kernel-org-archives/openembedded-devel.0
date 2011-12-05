@@ -1,30 +1,33 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RXaVp-0004zW-AL
+	(envelope-from <tom.rini@gmail.com>) id 1RXbb8-0006rU-E4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Dec 2011 16:31:25 +0100
-Received: by ywb20 with SMTP id 20so4357439ywb.6
+	Mon, 05 Dec 2011 17:40:58 +0100
+Received: by iadj38 with SMTP id j38so818598iad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2011 07:24:36 -0800 (PST)
+	Mon, 05 Dec 2011 08:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=/ZH4lPGOPQrVkqM/QSDz4S4LzKLGLInFmpUIDsMCvGk=;
-	b=cTCJcFjnyaowy+EGIOBE3dVN/4sc1/s3Df1BY6tvoyrLIQ2OKReNJpo4dv5IXp/vQb
-	p/Cm1BMl2U9Dlb6grXE/dgTkyuCmfimnqEMWR2RuekpozgpKi2/LZSwpxEIaEOftQltN
-	CCy6x7ZctRY9AUqffSeEjaBWV3xYWyW/4weOU=
-MIME-Version: 1.0
-Received: by 10.236.191.5 with SMTP id f5mr12375628yhn.122.1323098676006; Mon,
-	05 Dec 2011 07:24:36 -0800 (PST)
-Received: by 10.150.202.10 with HTTP; Mon, 5 Dec 2011 07:24:35 -0800 (PST)
-In-Reply-To: <20111017071406.GF12684@jama.jama.net>
-References: <CAAQYJAt+o+Wcp1aSa5pxSd_FAHYVJv-ZYLfKLYUt6n+tdkjjQw@mail.gmail.com>
-	<20111017071406.GF12684@jama.jama.net>
-Date: Mon, 5 Dec 2011 16:24:35 +0100
-Message-ID: <CAAQYJAuLcwC8p6HoOkXhH3neC0pofi5z_1GNCpwWB=pA73bPsQ@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=from:mime-version:content-type:subject:date:in-reply-to:to
+	:references:message-id:x-mailer;
+	bh=oi2YxqQiCVT7YUxI4RZDIXrPsmCjr3VVrZGa9MB/sEI=;
+	b=tk0kGc6VX6Hq+Y+j3UN5hbz9iNHO2wLw0KdOjZrNyExOEqKNBcKwr6O7Ff4D/m2UJo
+	/qchNS8LqyFeoH6T4fdfZSH02qqLkT6fDvx2pwB+3ppiqO3yhve8tnKPKgG0w/3F4Jek
+	FF7i5Pcv9jHOyeFMsjii4sHm3ugBh4EeshhMc=
+Received: by 10.42.156.130 with SMTP id z2mr11158980icw.13.1323102846609;
+	Mon, 05 Dec 2011 08:34:06 -0800 (PST)
+Received: from [192.168.0.4] (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id v18sm78404280ibh.4.2011.12.05.08.34.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 05 Dec 2011 08:34:05 -0800 (PST)
+From: Tom Rini <tom.rini@gmail.com>
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+Date: Mon, 5 Dec 2011 09:34:08 -0700
+In-Reply-To: <20111203012106.GR20602@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: xserver-common and x11-common conflicting
+References: <20111203012106.GR20602@denix.org>
+Message-Id: <312C3170-0C98-4B6E-B306-54EFF9D7E42D@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
+Subject: Re: [2011.03-maintenance] Pull request 20111202
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,52 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2011 15:31:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 05 Dec 2011 16:40:58 -0000
+X-Groupsio-MsgNum: 35873
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_A03B0EB6-B4D7-46CE-A3F1-590F514D25EC";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_A03B0EB6-B4D7-46CE-A3F1-590F514D25EC
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Mon, Oct 17, 2011 at 9:14 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Mon, Oct 17, 2011 at 12:42:08AM +0200, Andrea Adami wrote:
->> Hello,
->>
->> using oe-core and meta-oe my xserver settings are "touched" by two packa=
-ges:
->>
->> xserver-common: seems more complete, provides some xmodmaps (should be i=
-n
->> BSP layers). Though it invocates fbset which is not in path.
->> x11-common: needs maybe care but is using the formfactor settings from B=
-SP
->> so obviously is more modular
->>
->> I suppose once the merge is finished we'll have sane default settings.
->> (atm the xserver-common is providing some extra cruft)
->
-> It was part of my original xorg patchset, but it needed more work
-> (rework ROOTLESS_X) and you wanted xorg in oe-core faster :).
->
-> --
-> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On Dec 2, 2011, at 6:21 PM, Denys Dmytriyenko wrote:
 
-Well, I verified the issue is still open and that xserver-nodm-init
-have diverged even more.
-In practice if I don't mask the one in meta-oe the xserver does start
-and immediately shut down.
+> Tom,
+>=20
+> Please pull these 2 commits that fix fakeroot, cherry-picked from =
+oe.dev
+>=20
+> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+>  Branch: 2011.03-maintenance
+>  Browse: =
+http://arago-project.org/git/people/?p=3Ddenix/openembedded.git;a=3Dshortl=
+og;h=3Drefs/heads/2011.03-maintenance
 
-Now, it would be nice if those remaining bits could be
-merged...unfortunately I lack the knowledge about intrinsic relations
-with initscripts/systemd. I'm ready to test and perhaps debug once
-committed, though.
+Applied, thanks.
 
-Regards
-
-Andrea
+--=20
+Tom
 
 
+--Apple-Mail=_A03B0EB6-B4D7-46CE-A3F1-590F514D25EC
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7c8oAACgkQdZngf2G4WwMxLgCgkCauVqCA1ZoDWgVI03Df2w1G
++boAmwdm/S6Ssqk7mSpKVt2dRGlE07G/
+=W5N+
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_A03B0EB6-B4D7-46CE-A3F1-590F514D25EC--
