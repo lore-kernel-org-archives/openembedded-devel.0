@@ -1,28 +1,29 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1RXbir-00073I-7G
+	(envelope-from <tom.rini@gmail.com>) id 1RXeeM-0004Hm-7B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Dec 2011 17:48:58 +0100
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id pB5Gg5Tj017144
+	Mon, 05 Dec 2011 20:56:32 +0100
+Received: by qadb17 with SMTP id b17so1958139qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Dec 2011 17:42:10 +0100
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%11]) with mapi id
-	14.01.0270.001; Mon, 5 Dec 2011 17:42:06 +0100
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [2011.03-maintenance] Pull request for libpam
-Thread-Index: AQHMs2zS+vIjg8Dblk6vPcxGVI57oA==
-Date: Mon, 5 Dec 2011 16:42:05 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.34]
+	Mon, 05 Dec 2011 11:49:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=qljhonz4yPE/meodGRECzf/7gTyXuM/pnSE7aqLIROA=;
+	b=uxRE4AWNuboxOBGRb3krU5NlVofkSjkTzRBATyENIVvXG1T80go/7gRM4Sg8T/W+I9
+	E8NuPfy0+Wvm1CZ4XrKGfzk4bfiNzVxhGzjQ7wJH+YjpnCSYoH+DkE/PrDl8BfYtILkm
+	HdHVvZMmAnIeF48JEk0wFgai5Vl4/NIQadO8M=
 MIME-Version: 1.0
-Subject: [2011.03-maintenance] Pull request for libpam
+Received: by 10.224.198.10 with SMTP id em10mr9184315qab.44.1323114581212;
+	Mon, 05 Dec 2011 11:49:41 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Mon, 5 Dec 2011 11:49:41 -0800 (PST)
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+Date: Mon, 5 Dec 2011 12:49:41 -0700
+Message-ID: <CA+M6bXnrw7p=5ACg99REKASR4L+0yzgunJ6xDWWSwcFeR82hww@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance] Pull request for libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2011 16:48:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 05 Dec 2011 19:56:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hello Tom,=0A=
-=0A=
-Please pull this commit from here:=0A=
-=0A=
-git://github.com/mkarrman/openembedded=0A=
-Branch: maintenance=0A=
-=0A=
-Mats K=E4rrman (1):=0A=
-      368c68a  libpam_1.1.1: remove directory preventing /var/run from bein=
-g volatile.=0A=
-=0A=
-Thanks,=0A=
-Mats=0A=
+On Mon, Dec 5, 2011 at 9:42 AM, Mats K=E4rrman <Mats.Karrman@tritech.se> wr=
+ote:
+> Hello Tom,
+>
+> Please pull this commit from here:
+>
+> git://github.com/mkarrman/openembedded
+> Branch: maintenance
+>
+> Mats K=E4rrman (1):
+> =A0 =A0 =A0368c68a =A0libpam_1.1.1: remove directory preventing /var/run =
+from being volatile.
+
+Where is this a backport from?  Thanks!
+
+--=20
+Tom
 
 
