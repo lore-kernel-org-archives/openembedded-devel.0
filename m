@@ -1,32 +1,24 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cwabbott0@gmail.com>) id 1RXNJi-00033M-Hp
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Dec 2011 02:26:02 +0100
-Received: by vbbfc21 with SMTP id fc21so3513752vbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Dec 2011 17:19:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=YAmTEZWBslZlG1K5964LW/Oi5wJ8/uwVv35UNR2e2SQ=;
-	b=UwFUaMRpFZBJhAkBIUcbjMhN5EgDhqkPrW1WNXYUnwWouhEmyppW4g9t6jDA44lAsu
-	UExKfKiMZls/gzwIK22WGfZ9nD5t9JGqS5HWA3+4tH//6XwDZ/wnFwiIsVFantvwmUEv
-	lMeJz3S/JwU9qMxipeath3ySlezq84LQGrWBA=
-MIME-Version: 1.0
-Received: by 10.52.35.75 with SMTP id f11mr3602090vdj.18.1323047955606; Sun,
-	04 Dec 2011 17:19:15 -0800 (PST)
-Received: by 10.220.154.70 with HTTP; Sun, 4 Dec 2011 17:19:15 -0800 (PST)
-In-Reply-To: <CAMKF1sqNpuzg8xL0vQp981KCe4ryHMRn+qOYz245EbY8nXKR_g@mail.gmail.com>
-References: <1321811782-7133-1-git-send-email-cwabbott0@gmail.com>
-	<jad09l$c0g$1@dough.gmane.org>
-	<CACu1E7EigJom5yDg+VYZ15o6HF2cJO3BThtCLgEO1Fo1=s-URg@mail.gmail.com>
-	<CAMKF1sqNpuzg8xL0vQp981KCe4ryHMRn+qOYz245EbY8nXKR_g@mail.gmail.com>
-Date: Sun, 4 Dec 2011 20:19:15 -0500
-Message-ID: <CACu1E7G05hqsfPx5vCxRiXgA6xTs76Kqpi6SnQ-_JcvazBHSbQ@mail.gmail.com>
-From: Connor Abbott <cwabbott0@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RXT1l-0001kL-UZ for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Dec 2011 08:31:53 +0100
+Received: from f053043049.adsl.alicedsl.de ([78.53.43.49]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RXSvG-0004rO-NM for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Dec 2011 07:25:10 +0000
+Message-ID: <1323069908.3449.4.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-gnome][PATCH] libnotify: add 0.5.2 and make it the default
+Date: Mon, 05 Dec 2011 08:25:08 +0100
+In-Reply-To: <1323030626-564-1-git-send-email-eric@eukrea.com>
+References: <jbgcgc$tmh$1@dough.gmane.org>
+	<1323030626-564-1-git-send-email-eric@eukrea.com>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [meta-oe v4] add nostromo webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2011 01:26:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 05 Dec 2011 07:31:54 -0000
+X-Groupsio-MsgNum: 35868
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-NfqnXix6dXRQGDn7uYhf"
 
-Well, in this case they don't, everything just intalls to
-/usr/include/notify. The reason is that usually, programs using libnotify
-hardcode that directory like this:
-#include <notify/notify.h>
+--=-NfqnXix6dXRQGDn7uYhf
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-So it's impossible to install multiple versions at once without breakage at
-least without changing the library itself or all its dependencies, as I
-discovered.
+Dear Eric,
 
-On Wed, Nov 30, 2011 at 5:53 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> On Tue, Nov 29, 2011 at 3:13 PM, Connor Abbott <cwabbott0@gmail.com>
-> wrote:
-> > Sorry, I must have had the 0.7.0 headers installed and didn't realize it.
-> > Actually, that's a problem; if you build two different packages, one
-> which
-> > requires libnotify and one which requires libnotify3, then the wrong
-> > headers can get installed in the sysroot because the packages have
-> > different names. Anyways, it appears that 0.5.2 is actually newer than
-> > 0.6.0 anyways; I'll update the commit message then.
->
-> if they are incompatible and needs to live together then they should
-> have different install locations
-> in sysroot for headers and libs e.g. /usr/include/libnotify2 and
-> /usr/include/libnotify3
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Am Sonntag, den 04.12.2011, 21:30 +0100 schrieb Eric B=C3=A9nard:
+> this recipe was imported from OE-classic and upgraded to latest
+> version
 
+could you add the version number to the commit summary? That would be
+great. Also the OE-classic commit SHA sum would be useful.
+
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> ---
+>  ...ile-add-possibility-to-override-variables.patch |  141 ++++++++++++++=
+++++++
+>  .../recipes-extended/nostromo/files/nhttpd.conf    |   55 ++++++++
+>  meta-oe/recipes-extended/nostromo/files/nostromo   |   34 +++++
+>  meta-oe/recipes-extended/nostromo/files/volatiles  |    2 +
+>  .../recipes-extended/nostromo/nostromo_1.9.5.bb    |   51 +++++++
+>  5 files changed, 283 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/nostromo/files/0001-GNUmakef=
+ile-add-possibility-to-override-variables.patch
+>  create mode 100644 meta-oe/recipes-extended/nostromo/files/nhttpd.conf
+>  create mode 100644 meta-oe/recipes-extended/nostromo/files/nostromo
+>  create mode 100644 meta-oe/recipes-extended/nostromo/files/volatiles
+>  create mode 100644 meta-oe/recipes-extended/nostromo/nostromo_1.9.5.bb
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+--=-NfqnXix6dXRQGDn7uYhf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk7ccdQACgkQPX1aK2wOHVhiTQCdE5nJBgyqtb+iKrXzknf/cuW8
+iU0An2KyhLbhc3d1Bccs5LIDs/eQVYeW
+=WoiR
+-----END PGP SIGNATURE-----
+
+--=-NfqnXix6dXRQGDn7uYhf--
