@@ -1,39 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RXXmW-0008Tn-3r for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Dec 2011 13:36:28 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RXXfy-0003SY-5c for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Dec 2011 13:29:42 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2011 13:29:42 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen@dominion.thruhere.net>) id 1RXXom-0000ez-5w
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Dec 2011 13:38:48 +0100
+Received: by bkbzv15 with SMTP id zv15so5496428bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2011 13:29:42 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Mon, 05 Dec 2011 04:32:02 -0800 (PST)
+Received: by 10.205.122.1 with SMTP id ge1mr4124204bkc.103.1323088321723;
+	Mon, 05 Dec 2011 04:32:01 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id n14sm12866896bkn.13.2011.12.05.04.32.00
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 05 Dec 2011 04:32:00 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 05 Dec 2011 13:29:28 +0100
-Message-ID: <jbidf8$54c$1@dough.gmane.org>
-References: <jba6p6$bep$1@dough.gmane.org>
-	<CA+M6bXk94ukVFEva8Ab-RbvNe3pWuYkJWZkk-WS8CpKca83F4Q@mail.gmail.com>
-	<jbdhuo$pe4$1@dough.gmane.org>
-	<20111203163423.GA3821@mail.familie-heinold.de>
-	<jbdr82$3ri$1@dough.gmane.org>
-	<20111204111425.GA4871@rhein.zuhause.netz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <20111204111425.GA4871@rhein.zuhause.netz>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-java] rpath problem for llvm libs?
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Dec 2011 13:31:56 +0100
+Message-Id: <1323088316-20564-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-java] openjdk-6-common: move java2-vm to RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,66 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2011 12:36:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Dec 2011 12:38:48 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+ Even though a vm is a hard dependency it is set as RRECOMMENDS so a single vm can get uninstalled:
 
-Op 04-12-11 12:14, Henning Heinold schreef:
-> On Sat, Dec 03, 2011 at 07:53:53PM +0100, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 03-12-11 17:34, Henning Heinold schreef:
->>> On Sat, Dec 03, 2011 at 05:15:21PM +0100, Koen Kooi wrote:
->>>> -----BEGIN PGP SIGNED MESSAGE----- So if we were to follow that
->>>> option 4) seems to be the way.
->>>> 
->>>> regards,
->>>> 
->>>> Koen
->>> 
->>> Hi,
->>> 
->>> our original Idea was, that you can install diffrent llvm versions at
->>> the same time. We need to discuss if we have still the case or really
->>> only one version of llvm. If not we can use directly /usr/lib if not
->>> solution 4 with rpath is my favourit. Besides this llvm should go to
->>> core, but I wanted to wait for the 3.0 release and christmas holidays
->>> to do it.
->> 
->> - From the llvm website: "December 1, 2011: LLVM 3.0 is now available
->> for download!"
-> 
-> I know ;)
+   root@beaglebone:~/java# opkg remove openjdk-6-vm-shark
+   No packages removed.
+   Collected errors:
+    * print_dependents_warning: Package openjdk-6-vm-shark is depended upon by packages:
+    * print_dependents_warning:         openjdk-6-java
+    * print_dependents_warning: These might cease to work if package openjdk-6-vm-shark is removed.
 
-FWIW, even after 'fixing' the llvm problems with ln shark still shows some
-problems:
+In the above situation all vms (cacao, zero and shark) were installed, but due to llvm problems[1] shark is currently broken. To fix the java install shark needs to get uninstalled.
 
-root@beaglebone:~/java# javac -O Linpack.java
-javac:
-/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/llvm2.9-2.9-r0/llvm-2.9/include/llvm/Support/Casting.h:202:
-typename llvm::cast_retty<To, From>::ret_type llvm::cast(const Y&) [with X =
-llvm::ConstantInt, Y = llvm::Value*, typename llvm::cast_retty<To,
-From>::ret_type = llvm::ConstantInt*]: Assertion `isa<X>(Val) && "cast<Ty>()
-argument of incompatible type!"' failed.
-Stack dump:
-0.	Running pass 'ARM Instruction Selection' on function
-'@"com.sun.tools.javac.zip.ZipFileIndex$ZipDirectory::readEntry"'
-Aborted
+In theory this change allows people to break the java installation, but in practice it's already broken due to [1].
 
-regards,
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-December/036595.html
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-core/openjdk/openjdk-6-common.inc |   11 +++++++++--
+ 1 files changed, 9 insertions(+), 2 deletions(-)
 
-iEYEARECAAYFAk7cuSYACgkQMkyGM64RGpGM/wCcCekfcU2mGzHYPmY3pCk9ExXO
-68kAnitsMmhDfADPCYA6NsTNRHP8Bujc
-=qnMt
------END PGP SIGNATURE-----
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index ef1c41d..257fe56 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -10,7 +10,7 @@ ICEDTEA = "NEEDS TO BE SET"
+ S = "${WORKDIR}/${ICEDTEA}"
+ B = "${S}/build"
+ 
+-INC_PR = "r11"
++INC_PR = "r12"
+ 
+ SRC_URI = "\
+   ${ICEDTEA_URI} \
+@@ -426,7 +426,14 @@ RPROVIDES_${JDKPN}-vm-shark = "java2-vm"
+ RPROVIDES_${JDKPN}-vm-zero = "java2-vm"
+ RPROVIDES_${JDKPN}-vm-cacao = "java2-vm"
+ 
+-RDEPENDS_${JDKPN}-java = "java2-vm"
++# Even though a vm is a hard dependency it is set as RRECOMMENDS so a single vm can get uninstalled:
++# root@beaglebone:~/java# opkg remove openjdk-6-vm-shark 
++# No packages removed.
++# Collected errors:
++#  * print_dependents_warning: Package openjdk-6-vm-shark is depended upon by packages:
++#  * print_dependents_warning: 	openjdk-6-java
++#  * print_dependents_warning: These might cease to work if package openjdk-6-vm-shark is removed.
++RRECOMMENDS_${JDKPN}-java = "java2-vm"
+ 
+ # For some reason shark and cacao do not automatically depends on -common.
+ # So we add that manually.
+-- 
+1.7.2.5
 
 
 
