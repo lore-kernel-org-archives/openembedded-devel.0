@@ -1,34 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RXru1-0004Wz-Dr
+	(envelope-from <martin.jansa@gmail.com>) id 1RXru2-0004Zk-Ju
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 11:05:33 +0100
-Received: by mail-ey0-f175.google.com with SMTP id c1so1374062eaa.6
+	Tue, 06 Dec 2011 11:05:34 +0100
+Received: by mail-ee0-f47.google.com with SMTP id v2so902377eea.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 01:58:47 -0800 (PST)
+	Tue, 06 Dec 2011 01:58:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=QHjVMDRPvNKEJ/B+XWHM76C2k1ir6r+YreYcnQwUhQk=;
-	b=GVp9tKAlWcorz077brvS2aWNB2F0VVSAM0I2mOsbm0LMnXpD7Xzye36AlYDQ8E/5pZ
-	7WHKL/AbK63G7R9SOnKhHBS+0aWFAlRS7kJrLyqPPlfvXg6SRBZRt7HMaSCsT0dqNQXi
-	cekDRje3/fmOeo2ABACkINXiKLz1MI4hzm4dM=
-Received: by 10.213.19.69 with SMTP id z5mr2109537eba.130.1323165522311;
-	Tue, 06 Dec 2011 01:58:42 -0800 (PST)
+	bh=FYnLhl/a6XP4k6YcJ5NNnqa9/vbemnaDVpP1ULwcIFg=;
+	b=t9xX33dSvZAFCKNp2hkxE066iUl/13P4Y7lhghThCtqO9WU+MwxYWA1Ik3XSx+YADJ
+	HHTr5Qlq+NdXfPm53DdmMxiC4kA0I3KKzJw9AzV/Azn/q5jYXmWSKSfEiHSlcmhfq1C5
+	wVONxOXHt7bb1/Wa1LyaXfl+veFIM+KcQMk7M=
+Received: by 10.14.15.229 with SMTP id f77mr2132920eef.137.1323165529583;
+	Tue, 06 Dec 2011 01:58:49 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q28sm69320815eea.6.2011.12.06.01.58.41
+	by mx.google.com with ESMTPS id a60sm69335518eeb.4.2011.12.06.01.58.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 06 Dec 2011 01:58:41 -0800 (PST)
+	Tue, 06 Dec 2011 01:58:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Dec 2011 10:57:10 +0100
-Message-Id: <750a3af6e23a133e3f23b84754d7989b2da688f7.1323165311.git.Martin.Jansa@gmail.com>
+Date: Tue,  6 Dec 2011 10:57:11 +0100
+Message-Id: <af1902de247d6a66c7fbd476ab6584548aa067e5.1323165311.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8
 In-Reply-To: <afdc12df305d22c372df0202f576cc3f85860b1a.1323165311.git.Martin.Jansa@gmail.com>
 References: <afdc12df305d22c372df0202f576cc3f85860b1a.1323165311.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1323165311.git.Martin.Jansa@gmail.com>
 References: <cover.1323165311.git.Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-efl 11/16] eeze: RRECOMMEND eject, build time autodetection is now fixed
+Subject: [PATCH][meta-efl 12/16] elsa_svn.bb: disable pam if not in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 10:05:33 -0000
+X-List-Received-Date: Tue, 06 Dec 2011 10:05:34 -0000
 
+From: Klaus Kurzmann <mok@fluxnetz.de>
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/eeze.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ meta-efl/recipes-efl/efl/elsa_svn.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/eeze.inc b/meta-efl/recipes-efl/efl/eeze.inc
-index 4b13984..aa4baa4 100644
---- a/meta-efl/recipes-efl/efl/eeze.inc
-+++ b/meta-efl/recipes-efl/efl/eeze.inc
-@@ -13,3 +13,5 @@ AUTO_LIBNAME_PKGS = ""
+diff --git a/meta-efl/recipes-efl/efl/elsa_svn.bb b/meta-efl/recipes-efl/efl/elsa_svn.bb
+index f885daf..949c7e1 100644
+--- a/meta-efl/recipes-efl/efl/elsa_svn.bb
++++ b/meta-efl/recipes-efl/efl/elsa_svn.bb
+@@ -11,9 +11,9 @@ SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};proto=http;scmdata=keep \
+ "
+ S = "${WORKDIR}/${SRCNAME}"
  
- FILES_${PN} += "${libdir}/enlightenment/utils/eeze_scanner"
- FILES_${PN}-dbg += "${libdir}/enlightenment/utils/.debug"
-+
-+RRECOMMENDS_${PN} += "eject"
+-EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
++EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
+ 
+-PR = "r2"
++PR = "r3"
+ PV = "0.0.4+svnr${SRCPV}"
+ SRCREV = "${EFL_SRCREV}"
+ 
 -- 
 1.7.8
 
