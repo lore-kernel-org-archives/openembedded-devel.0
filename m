@@ -1,34 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RXxvC-0005CC-5j for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 17:31:10 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RXxoc-0004eA-4c for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 17:24:22 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 17:24:22 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1RXzbq-0007k7-Bu
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Dec 2011 19:19:18 +0100
+Received: by lahd3 with SMTP id d3so473871lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 17:24:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 06 Dec 2011 10:12:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=ZjCmDgeq/Y4VxjZcrpZCooPInbBKjQp2c658jb62NF8=;
+	b=xpWYhXgPYfemHNCgOdGs5AEcLL2dMr+j/Db1tvoGL4rsCOLVjweITH7cF3QJvjP3eX
+	o5PHqc/qyUAwwsgzURWdtFeuxlqmzxdl/qaXCsneePXtQ9tE5UX3oqb3ZSH2PYMDnvpM
+	spOLJsKv6G6UDAYDd8JaC0cchnaO6GzzsZoG8=
+Received: by 10.152.122.34 with SMTP id lp2mr9763588lab.20.1323195146474; Tue,
+	06 Dec 2011 10:12:26 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.24.36 with HTTP; Tue, 6 Dec 2011 10:11:54 -0800 (PST)
+In-Reply-To: <1323149076-10389-1-git-send-email-raj.khem@gmail.com>
+References: <1323149076-10389-1-git-send-email-raj.khem@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 6 Dec 2011 10:11:54 -0800
+Message-ID: <CAMKF1sqVKMS-Cb=Oo3YiVNSqnqaabUZ_fMes1nSF0Hqgz-7G6A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 06 Dec 2011 17:24:03 +0100
-Message-ID: <jblfj1$mnj$1@dough.gmane.org>
-References: <1323177679-8736-1-git-send-email-guillaume.gardet@oliseo.fr>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1323177679-8736-1-git-send-email-guillaume.gardet@oliseo.fr>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [PATCH] Fix git URL to linux-omap git repo.
+Subject: Re: [[meta-oe] 1/2] gcc-4.6: Delete the patch that is now applied in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,43 +37,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 16:31:10 -0000
+X-List-Received-Date: Tue, 06 Dec 2011 18:19:18 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Koen
 
-Op 06-12-11 14:21, Guillaume GARDET schreef:
-> Signed-off-by: Guillaume GARDET <guillaume.gardet@oliseo.fr> --- 
-> recipes/linux/linux-omap_2.6.29.bb |    2 +- 1 files changed, 1
-> insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/linux/linux-omap_2.6.29.bb
-> b/recipes/linux/linux-omap_2.6.29.bb index a87fb25..3248dc3 100644 ---
-> a/recipes/linux/linux-omap_2.6.29.bb +++
-> b/recipes/linux/linux-omap_2.6.29.bb @@ -17,7 +17,7 @@ SRCREV =
-> "58cf2f1425abfd3a449f9fe985e48be2d2555022" # The main PR is now using
-> MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc PR_append
-> = "+gitr${SRCREV}"
-> 
-> -SRC_URI =
-> "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git
-> \ +SRC_URI =
-> "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git
-> \ file://defconfig"
+The corresponding patch to oe-core is now applied. Now you can apply
+this to meta-oe
+otherwise people may start seeing conflicts.
 
-Acked-by: Koen Kooi <k-kooi@ti.com>
+Thanks
+-Khem
 
-But which machine is still using such an old kernel?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7eQaEACgkQMkyGM64RGpE3/wCfSG7fhgerwSWAQ92KvXp6jdK0
-b2MAoI+O9/UI3xiEvUpqs/iJ7ejsY/od
-=eomX
------END PGP SIGNATURE-----
-
+On Mon, Dec 5, 2011 at 9:24 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0.../gcc-4.6/linaro/gcc-4.6-linaro-r106793.patch =C2=A0 =C2=A0| =C2=
+=A0 34 --------------------
+> =C2=A0.../gcc/gcc-4_6-branch-linaro-backports.inc =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 =C2=A01 -
+> =C2=A02 files changed, 0 insertions(+), 35 deletions(-)
+> =C2=A0delete mode 100644 meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-=
+4.6-linaro-r106793.patch
+>
+> diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r=
+106793.patch b/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r=
+106793.patch
+> deleted file mode 100644
+> index 04dabaf..0000000
+> --- a/meta-oe/recipes-devtools/gcc/gcc-4.6/linaro/gcc-4.6-linaro-r106793.=
+patch
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -2011-08-18 =C2=A0Richard Sandiford =C2=A0<richard.sandiford@linaro.org>
+> -
+> - =C2=A0 =C2=A0 =C2=A0 gcc/
+> - =C2=A0 =C2=A0 =C2=A0 Backport from mainline:
+> -
+> - =C2=A0 =C2=A0 =C2=A0 2011-08-18 =C2=A0Richard Sandiford =C2=A0<richard.=
+sandiford@linaro.org>
+> -
+> - =C2=A0 =C2=A0 =C2=A0 * config/arm/arm.c (arm_rtx_costs_1): Don't modify=
+ the costs of SET.
+> - =C2=A0 =C2=A0 =C2=A0 (arm_size_rtx_costs): Likewise.
+> -
+> -=3D=3D=3D modified file 'gcc/config/arm/arm.c'
+> ---- old/gcc/config/arm/arm.c =C2=A0 2011-08-12 08:08:31 +0000
+> -+++ new/gcc/config/arm/arm.c =C2=A0 2011-08-18 13:53:37 +0000
+> -@@ -7464,6 +7464,9 @@
+> - =C2=A0 =C2=A0 =C2=A0 *total =3D COSTS_N_INSNS (4);
+> - =C2=A0 =C2=A0 =C2=A0 return true;
+> -
+> -+ =C2=A0 =C2=A0case SET:
+> -+ =C2=A0 =C2=A0 =C2=A0return false;
+> -+
+> - =C2=A0 =C2=A0 default:
+> - =C2=A0 =C2=A0 =C2=A0 *total =3D COSTS_N_INSNS (4);
+> - =C2=A0 =C2=A0 =C2=A0 return false;
+> -@@ -7811,6 +7814,9 @@
+> - =C2=A0 =C2=A0 =C2=A0 *total =3D COSTS_N_INSNS (1) + 1;
+> - =C2=A0 =C2=A0 =C2=A0 return true;
+> -
+> -+ =C2=A0 =C2=A0case SET:
+> -+ =C2=A0 =C2=A0 =C2=A0return false;
+> -+
+> - =C2=A0 =C2=A0 default:
+> - =C2=A0 =C2=A0 =C2=A0 if (mode !=3D VOIDmode)
+> - =C2=A0 =C2=A0 =C2=A0 *total =3D COSTS_N_INSNS (ARM_NUM_REGS (mode));
+> -
+> diff --git a/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports=
+.inc b/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
+> index fcdccf5..882876e 100644
+> --- a/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
+> +++ b/meta-oe/recipes-devtools/gcc/gcc-4_6-branch-linaro-backports.inc
+> @@ -39,7 +39,6 @@ file://linaro/gcc-4.6-linaro-r106786.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106787.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106789.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106792.patch \
+> -file://linaro/gcc-4.6-linaro-r106793.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106794.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106796.patch \
+> =C2=A0file://linaro/gcc-4.6-linaro-r106797.patch \
+> --
+> 1.7.5.4
+>
 
 
