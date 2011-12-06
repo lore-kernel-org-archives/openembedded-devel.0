@@ -1,23 +1,25 @@
 Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Xiaofeng.Yan@windriver.com>) id 1RXp9O-0006eJ-2V
+	(envelope-from <Xiaofeng.Yan@windriver.com>) id 1RXp9Q-0006eO-CC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 08:09:14 +0100
+	Tue, 06 Dec 2011 08:09:16 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB672Qij008647
+	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB672S0i008652
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Dec 2011 23:02:26 -0800 (PST)
+	Mon, 5 Dec 2011 23:02:29 -0800 (PST)
 Received: from localhost (128.224.162.28) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
-	Mon, 5 Dec 2011 23:02:26 -0800
-Message-ID: <cover.1323141676.git.xiaofeng.yan@windriver.com>
-Old-Date: Tue, 6 Dec 2011 11:21:16 +0800
-Date: Tue, 6 Dec 2011 14:58:00 +0800
+	Mon, 5 Dec 2011 23:02:28 -0800
+Message-ID: <2a20136f9c98ed273197836930d8f6bf932b7c06.1323141676.git.xiaofeng.yan@windriver.com>
+In-Reply-To: <cover.1323141676.git.xiaofeng.yan@windriver.com>
+References: <cover.1323141676.git.xiaofeng.yan@windriver.com>
+Old-Date: Mon, 5 Dec 2011 14:28:39 +0800
+Date: Tue, 6 Dec 2011 14:58:02 +0800
 To: <openembedded-devel@lists.openembedded.org>
 From: Xiaofeng Yan <xiaofeng.yan@windriver.com>
 MIME-Version: 1.0
-Subject: [OE-core][PATCH 00/10] gtk+-directfb: The patches to run gtk over directfb [YOCTO #1674]
+Subject: [OE-core][PATCH 01/10] qemu-config: Disable dbus-x11 when no x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,63 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 07:09:14 -0000
+X-List-Received-Date: Tue, 06 Dec 2011 07:09:16 -0000
 Content-Type: text/plain
 
 From: Xiaofeng Yan <xiaofeng.yan@windriver.com>
 
-I got many comments about previous submitting patches to run gtk+ over directfb. thank koen to give me many suggestions. The main problem query is as follow:
-Question:
-Why removing x11 for running gtk over directfb?  x11 doesn't infect directfb and they can co-exist in the same image. also if have x11 in image, it could be better in many respects.
-Answer:
-Yes, it is. Both x11 and directfb can co-exist in an image. gtk can run in an image including x11. I also test gtk over directfb in an image based on x11. it can work well.
+dbus-x11 could be not needed by an image without x11.
+So I modified this bb file to enable dbus-x11 when x11 is in DISTRO_FEATURES and disable \
+dbus-x11 without x11 feature.
 
-As far as I know many engineers make Directfb part of their product in embedded field. It is enough for person to finish their designing with directfb because they don't need complicated graphic and perhaps it is more important for them to save more memory.  So x11 is not neccessary in these products if have directfb.
-
-So removing x11 in an image based on directfb can meet some engineers' requirement. They can get this image without wasting too much time if they want to develop their product with Yocto.
-Also there is still no test program and application for directfb at current status. If have this image, directfb can be tested by directfb-example. gtk-demo based on directfb will be a good application.
-
-
-More description:
-x11 and directfb can't be set in DISTRO_FEATURES at the same time. They  are mutually exclusive in  DISTRO_FEATURES because gtk run over either  x11 or directfb in current version. But if x11 is defined in  DISTRO_FEATURES, then directfb can be compiled by other methods. for  example, directfb can be compiled by dependence relationships or be  included in a task list like task-core-sato.bb. They can  co-exist in an  image with above methods.
-
-Moore:
-X11 and directfb are exclusive since only one backend is enabled at a time. at 3.0 version of gtk they could co-exist by setting --enable-x11-backend and --enable-directfb-backend (Thank Phil ). So the configuration is either --with-gdktarget=x11 or --with-gdktarget=directfb at current version. I will modify configuration when gtk is updated to 3.0.  
-
-Pull URL: git://git.pokylinux.org/poky-contrib.git
-  Branch: xiaofeng/gtk-directfb
-  Browse: http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=xiaofeng/gtk-directfb
-
-Thanks,
-    Xiaofeng Yan <xiaofeng.yan@windriver.com>
+Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
 ---
+ meta/recipes-bsp/qemu-config/qemu-config.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-
-Xiaofeng Yan (10):
-  qemu-config: Disable dbus-x11 when no x11 in DISTRO_FEATURES
-  gconf: Disable dbus-x11 when x11 isn't in DISTRO_FEATURES
-  gtk.inc: Split x11 dependency relationship from DEPENDS
-  gtk.inc: add feature based on directfb
-  gtk: add demos to the configuation of gtk+
-  cairo: add directfb DISTRO_FEATURE
-  pango: add directfb DISTRO_FEATURE
-  directfb-examples: add package directfb-examples to OE-core
-  task-core-gtk-directfb.bb: Add task list to run gtk over directfb
-  core-image-gtk-directfb.bb: add an image for gtk over directfb
-
- meta/recipes-bsp/qemu-config/qemu-config.bb        |    4 +-
- meta/recipes-gnome/gnome/gconf_3.2.3.bb            |    6 +++-
- meta/recipes-gnome/gtk+/gtk+.inc                   |   21 +++++++++++++---
- meta/recipes-gnome/gtk+/gtk+_2.24.8.bb             |    6 +++-
- meta/recipes-graphics/cairo/cairo.inc              |    9 +++++-
- .../directfb/directfb-examples_1.2.0.bb            |   20 +++++++++++++++
- .../images/core-image-gtk-directfb.bb              |   21 ++++++++++++++++
- meta/recipes-graphics/pango/pango.inc              |   20 ++++++++++++---
- .../tasks/task-core-gtk-directfb.bb                |   26 ++++++++++++++++++++
- 9 files changed, 117 insertions(+), 16 deletions(-)
- create mode 100644 meta/recipes-graphics/directfb/directfb-examples_1.2.0.bb
- create mode 100644 meta/recipes-graphics/images/core-image-gtk-directfb.bb
- create mode 100644 meta/recipes-graphics/tasks/task-core-gtk-directfb.bb
+diff --git a/meta/recipes-bsp/qemu-config/qemu-config.bb b/meta/recipes-bsp/qemu-config/qemu-config.bb
+index ebf957a..deaf3a5 100644
+--- a/meta/recipes-bsp/qemu-config/qemu-config.bb
++++ b/meta/recipes-bsp/qemu-config/qemu-config.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/COPYING.GPL;md5=751419260aa954499f7abaabaa
+ 
+ COMPATIBLE_MACHINE = "(qemuarm|qemux86|qemumips|qemuppc)"
+ 
+-PR = "r22"
++PR = "r23"
+ 
+ SRC_URI = "file://distcc.sh \
+            file://anjuta-remote-run \
+@@ -37,7 +37,7 @@ pkg_postinst_${PN} () {
+         sed -i $D${datadir}/applications/shutdown.desktop -e 's/^Exec=halt/Exec=reboot/'
+ }
+ 
+-RDEPENDS_${PN} = "distcc dbus-x11 task-core-nfs-server oprofileui-server rsync bash"
++RDEPENDS_${PN} = "distcc ${@base_contains('DISTRO_FEATURES', 'x11', 'dbus-x11', '', d)}  task-core-nfs-server oprofileui-server rsync bash"
+ 
+ inherit update-rc.d allarch
+ 
+-- 
+1.7.0.4
 
 
 
