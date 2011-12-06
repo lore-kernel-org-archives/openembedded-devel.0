@@ -1,47 +1,25 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1RXwBb-0001WQ-E8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 15:39:59 +0100
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RXw52-0006qI-7J>; Tue, 06 Dec 2011 15:33:12 +0100
-Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
-	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RXw52-0000gg-5K>; Tue, 06 Dec 2011 15:33:12 +0100
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by mail.imp.fu-berlin.de with esmtps (Exim 4.72) id 1RXw4Y-0001I0-MD
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 15:32:57 +0100
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1RXw4T-0006IJ-IR
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 15:32:37 +0100
-Date: Tue, 6 Dec 2011 15:32:37 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RXwE2-0001e0-Vw for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Dec 2011 15:42:31 +0100
+Received: from g225080061.adsl.alicedsl.de ([92.225.80.61]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RXw7Z-0000hQ-90 for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Dec 2011 14:35:49 +0000
+Message-ID: <1323182142.4571.10.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111206143237.GA16350@mi.fu-berlin.de>
-References: <20111205225044.DD3AB10338@opal>
-MIME-Version: 1.0
-In-Reply-To: <20111205225044.DD3AB10338@opal>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Remote-IP: 160.45.42.84
-X-Spam_Score: -4.1
-X-exim-Spam_Score_Int: -40
-X-exim-Spam_Bar: ----
-X-Spam_Report: * -1.0 ALL_TRUSTED Nachricht wurde nur über vertrauenswürdige Rechner
- *      weitergeleitet
- * -1.2 RP_MATCHES_RCVD Envelope sender domain matches handover relay domain
- * -1.9 BAYES_00 BODY: Spamwahrscheinlichkeit nach Bayes-Test: 0-1%
- *      [score: 0.0000]
-X-Originating-IP: 160.45.117.149
-Subject: Re: [oe-commits] Nitin A Kamble : libatomics-ops: patch source code for x32
+Date: Tue, 06 Dec 2011 15:35:42 +0100
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C401A4A69@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+	, <CA+M6bXnrw7p=5ACg99REKASR4L+0yzgunJ6xDWWSwcFeR82hww@mail.gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A4A69@post.tritech.se>
+X-Mailer: Evolution 3.0.3-2 
+Mime-Version: 1.0
+Subject: Re: [2011.03-maintenance] Pull request for libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,19 +33,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 14:39:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 06 Dec 2011 14:42:31 -0000
+X-Groupsio-MsgNum: 35923
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-HLjocancwNpsBtycRFga"
 
-Hi,
+--=-HLjocancwNpsBtycRFga
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-libatomic_ops is now developed here and with this two changes
-
-https://github.com/ivmai/libatomic_ops/commit/f977dca8aa6873891937442198cdbe5479ce52cd#src/atomic_ops/sysdeps/gcc/x86_64.h
-https://github.com/ivmai/libatomic_ops/commit/53a14c1d6eede42614ac0f7cd335cb76faf6e145#src/atomic_ops/sysdeps/gcc/x86_64.h
-
-the patch is only needed for older gcc's.
-
-Bye Henning
+Dear Mats,
 
 
+Am Dienstag, den 06.12.2011, 07:55 +0000 schrieb Mats K=C3=A4rrman:
+> > From: openembedded-devel-bounces@lists.openembedded.org [openembedded-d=
+evel-bounces@lists.openembedded.org] on behalf of Tom Rini [tom.rini@gmail.=
+com]
+> > Sent: Monday, December 05, 2011 8:49 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [2011.03-maintenance] Pull request for libpam
+> >=20
+> > On Mon, Dec 5, 2011 at 9:42 AM, Mats K=C3=A4rrman <Mats.Karrman@tritech=
+.se> wrote:
+> > > Hello Tom,
+> > >
+> > > Please pull this commit from here:
+> > >
+> > > git://github.com/mkarrman/openembedded
+> > > Branch: maintenance
+> > >
+> > > Mats K=C3=A4rrman (1):
+> > >      368c68a  libpam_1.1.1: remove directory preventing /var/run from=
+ being volatile.
+> >=20
+> > Where is this a backport from?  Thanks!
+
+> My local project...
+> Maybe I went ahead of myself but the solution is ~equivalent to the
+> solution applied in libpam recipes of oe-core but 1.1.1 does not exist
+> there and the corresponding fix was a part of the original recipes for
+> later versions.
+
+so why not push it to OE-classic master first?
+
+
+Thanks,
+
+Paul
+
+--=-HLjocancwNpsBtycRFga
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk7eKD8ACgkQPX1aK2wOHVjciACeNm+ahu9vMkHkDgV5R+akWiPq
+FyMAn1rvEnzFV/4+3VWAzHojWxb+/cww
+=wdRA
+-----END PGP SIGNATURE-----
+
+--=-HLjocancwNpsBtycRFga--
