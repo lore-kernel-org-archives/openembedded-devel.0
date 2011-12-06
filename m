@@ -1,24 +1,24 @@
 Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elizabeth.flanagan@intel.com>) id 1RY40O-0006SC-9M
+	(envelope-from <elizabeth.flanagan@intel.com>) id 1RY40O-0006S3-Rt
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 07 Dec 2011 00:00:57 +0100
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
 	by orsmga102.jf.intel.com with ESMTP; 06 Dec 2011 14:53:01 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="84211325"
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="84211328"
 Received: from unknown (HELO cenodoxus.amr.corp.intel.com) ([10.255.12.24])
 	by orsmga002.jf.intel.com with ESMTP; 06 Dec 2011 14:53:01 -0800
 From: Beth Flanagan <elizabeth.flanagan@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Dec 2011 14:52:57 -0800
-Message-Id: <fd3d0a51d9f304ef80053643e7201219ac9190e6.1323211648.git.elizabeth.flanagan@intel.com>
+Date: Tue,  6 Dec 2011 14:52:58 -0800
+Message-Id: <9b5c9a1c895014562ab42d7cefb8937346110579.1323211648.git.elizabeth.flanagan@intel.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <2a00651a5fbbd59355fcccd716ca7f2a98605f94.1323211648.git.elizabeth.flanagan@intel.com>
 References: <2a00651a5fbbd59355fcccd716ca7f2a98605f94.1323211648.git.elizabeth.flanagan@intel.com>
 In-Reply-To: <cover.1323211648.git.elizabeth.flanagan@intel.com>
 References: <cover.1323211648.git.elizabeth.flanagan@intel.com>
-Subject: [PATCH 5/6] [YOCTO #1776] license: manifest and license path
+Subject: [PATCH 6/6] OECore license fixes: meta/*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,666 +36,708 @@ X-List-Received-Date: Tue, 06 Dec 2011 23:00:57 -0000
 
 From: Elizabeth Flanagan <elizabeth.flanagan@intel.com>
 
-This is a fairly large commit, so I want to step through some of
-what this accomplishes:
+This is a quick audit of only the most obviously wrong licenses
+found within OECore. These fixes fall into four areas:
 
-1. Additional licenses
+- LICENSE field had incorrect format so that the parser choked
+- LICENSE field has a license with no version
+- LICENSE field was actually incorrect
+- LICENSE field has an imaginary license that didn't exist
 
-I've added/modified/corrected some of the common licenses
-within OE-core in prep. for a major license audit. Most of these
-are in SPDX format. A few, there is no OSI equivalent.
+This fixes most of the LICENSE warnings thrown, along with my prior
+commit adding additional licenses to common-licenses and additional
+SPDXLICENSEMAP entries.
 
-2. Additional SPDX mappings
-
-I've added some additional SPDX mappings to account for removing
-some duplicate licenses. (ie GPL-2 and GPL-2.0 were the same)
-I've also remapped a few things to more accurately reflect what
-they should be pointing at.
-
-Note: Artistic/LGPL/GPL/MPL. Quite a few LICENSE fields list these
-licenses. They make no sense and need auditing. In a future commit
-I have some fixes to particularly egregious LICENSE fields, but
-a full audit should be done. I've listed to obvious candidates at:
+HOWEVER..... there is much to be done on the license front.
+For a list of recipes with licenses that need obvious fixing see:
 
 https://wiki.yoctoproject.org/wiki/License_Audit
 
-3. License manifest
-
-We now have a license manifest generation that occurs in rootfs for
-everything BUT .deb. This requires the changes Paul Eggleton has
-done to rootfs_* particularly the list_installed_packages function.
-The manifest is accurate during a parallel bitbake now (Weee!) and
-is prime for my planned SPDX format manifest during the next period.
-
-4. License manifest on image.
-
-We also want the ability to add licenses to the image. This
-functionality is also in base-files and will be stripped out in my
-next commit. The manifest is not added by default and is a two var
-setting in license.conf:
-
-If I want *just* the manifest on the image (small) then I set:
-COPY_LIC_MANIFEST = "1"
-
-This copies the manifest to:
-
-/usr/share/common-licenses/license.manifest
-
-If I want the actual PKG license text on the image (much larger)
-I need to set both both COPY_LIC_MANIFEST and COPY_LIC_DIRS in
-license.conf. This will create:
-
-/usr/share/common-licenses/(package name)/(licenses in LIC_SRC_URI)
-
-Word of warning. This can be larger than wanted depending on image
-and is probably ripe for linking licenses, but I ran out of time this
-week to get that done.
-
-5. Custom License search path.
-
-We now have the ability to add licenses to the build without touching
-common-licenses. This is set via license.conf:
-
-LICENSE_PATH += "/path/to/custom/licenses"
-
-You want to make sure the license is unique. license.bbclass picks the
-first license it finds.
+That said, I would suggest another license audit as I've found
+enough inconsistencies. A good suggestion is when in doubt, look at
+how openSuse or Gentoo or Debian license the package.
 
 Signed-off-by: Elizabeth Flanagan <elizabeth.flanagan@intel.com>
 ---
- meta/classes/license.bbclass                       |  222 ++++++---
- meta/classes/package.bbclass                       |    1 +
- meta/classes/rootfs_ipk.bbclass                    |    3 +
- meta/classes/rootfs_rpm.bbclass                    |    3 +
- meta/conf/licenses.conf                            |   54 ++-
- meta/files/common-licenses/AFL-1                   |   92 ---
- meta/files/common-licenses/AFL-2                   |  155 ------
- meta/files/common-licenses/AGPL-3                  |  213 -------
- meta/files/common-licenses/APL-1                   |  327 -----------
- meta/files/common-licenses/APSL-1                  |  334 -----------
- meta/files/common-licenses/APSL-2                  |  337 -----------
- meta/files/common-licenses/Adobe                   |   14 +
- meta/files/common-licenses/Apache-1                |   59 --
- meta/files/common-licenses/Apache-2                |  203 -------
- meta/files/common-licenses/Artistic                |  131 -----
- meta/files/common-licenses/Artistic-1              |   97 ----
- meta/files/common-licenses/Artistic-2              |  202 -------
- meta/files/common-licenses/BSL-1                   |   25 -
- meta/files/common-licenses/BitstreamVera           |  160 ++++++
- meta/files/common-licenses/CATOSL-1                |  335 -----------
- meta/files/common-licenses/CC-BY-1                 |  185 -------
- meta/files/common-licenses/CC-BY-2                 |  205 -------
- meta/files/common-licenses/CC-BY-3                 |  283 ----------
- meta/files/common-licenses/CC-BY-NC-1              |  194 -------
- meta/files/common-licenses/CC-BY-NC-2              |  220 --------
- meta/files/common-licenses/CC-BY-NC-3              |  297 ----------
- meta/files/common-licenses/CC-BY-NC-ND-1           |  146 -----
- meta/files/common-licenses/CC-BY-NC-ND-2           |  209 -------
- meta/files/common-licenses/CC-BY-NC-ND-3           |  272 ---------
- meta/files/common-licenses/CC-BY-NC-SA-1           |  209 -------
- meta/files/common-licenses/CC-BY-NC-SA-2           |  242 --------
- meta/files/common-licenses/CC-BY-NC-SA-3           |  320 -----------
- meta/files/common-licenses/CC-BY-ND-2              |  194 -------
- meta/files/common-licenses/CC-BY-ND-3              |  259 ---------
- meta/files/common-licenses/CC-BY-SA-1              |  201 -------
- meta/files/common-licenses/CC-BY-SA-2              |  227 --------
- meta/files/common-licenses/CC-BY-SA-3              |  319 -----------
- meta/files/common-licenses/CDDL-1                  |  313 -----------
- meta/files/common-licenses/CECILL-1                |  462 ----------------
- meta/files/common-licenses/CECILL-2                |  451 ---------------
- meta/files/common-licenses/CPAL-1                  |  435 ---------------
- meta/files/common-licenses/CPL-1                   |  250 ---------
- meta/files/common-licenses/CUA-OPL-1               |  482 ----------------
- meta/files/common-licenses/DSSSL                   |   49 ++
- meta/files/common-licenses/ECL-1                   |   61 --
- meta/files/common-licenses/ECL-2                   |  218 --------
- meta/files/common-licenses/EDL-1.0                 |   13 +
- meta/files/common-licenses/EFL-1                   |   30 -
- meta/files/common-licenses/EFL-2                   |   27 -
- meta/files/common-licenses/EPL-1                   |  204 -------
- meta/files/common-licenses/EUPL-1                  |  302 ----------
- meta/files/common-licenses/Elfutils-Exception      |   12 +
- meta/files/common-licenses/ErlPL-1                 |  293 ----------
- meta/files/common-licenses/Frameworx-1             |  181 ------
- meta/files/common-licenses/FreeType                |  170 ++++++
- meta/files/common-licenses/GPL-1                   |  259 ---------
- meta/files/common-licenses/GPL-1.0+                |  252 ---------
- meta/files/common-licenses/GPL-2                   |   23 -
- .../common-licenses/GPL-2,0-with-GCC-exception     |   17 -
- .../common-licenses/GPL-2,0-with-font-exception    |   18 -
- meta/files/common-licenses/GPL-2.0+                |  132 -----
- .../common-licenses/GPL-2.0-with-GCC-exception     |   13 +-
- .../common-licenses/GPL-2.0-with-font-exception    |   14 +-
- meta/files/common-licenses/GPL-3                   |   70 ---
- meta/files/common-licenses/GPL-3.0                 |  224 ++++++++-
- meta/files/common-licenses/GPL-3.0+                |    3 -
- meta/files/common-licenses/IPL-1                   |  222 --------
- meta/files/common-licenses/LGPL-2                  |  461 ----------------
- meta/files/common-licenses/LGPL-2.0                |  189 ++++++-
- meta/files/common-licenses/LGPL-2.0+               |  173 ------
- meta/files/common-licenses/LGPL-2.1+               |  176 ------
- meta/files/common-licenses/LGPL-3                  |  147 -----
- meta/files/common-licenses/LGPL-3.0                |   53 +-
- meta/files/common-licenses/LGPL-3.0+               |   66 ---
- meta/files/common-licenses/LPL-1                   |  213 -------
- meta/files/common-licenses/LPPL-1                  |  422 --------------
- meta/files/common-licenses/MIT-style               |    1 -
- meta/files/common-licenses/MPL-1                   |  433 ---------------
- meta/files/common-licenses/NASA-1                  |  246 ---------
- meta/files/common-licenses/NPOSL-3                 |  206 -------
- meta/files/common-licenses/OASIS                   |   13 +
- meta/files/common-licenses/OCLC-2                  |  207 -------
- meta/files/common-licenses/OFL-1                   |   96 ----
- meta/files/common-licenses/OLDAP-2                 |   54 --
- meta/files/common-licenses/OSL-1                   |  172 ------
- meta/files/common-licenses/OSL-1.0                 |    2 +-
- meta/files/common-licenses/OSL-2                   |  171 ------
- meta/files/common-licenses/OSL-3                   |  157 ------
- meta/files/common-licenses/PHP-3                   |   70 ---
- meta/files/common-licenses/Proprietary             |    1 +
- meta/files/common-licenses/Python-2                |  192 -------
- meta/files/common-licenses/QPL-1                   |   96 ----
- meta/files/common-licenses/RPL-1                   |  582 --------------------
- meta/files/common-licenses/RPSL-1                  |  535 ------------------
- meta/files/common-licenses/SPL                     |  519 -----------------
- meta/files/common-licenses/Simple-2                |   53 --
- meta/files/common-licenses/UCB                     |   26 +
- meta/files/common-licenses/VSL-1                   |   54 --
- meta/files/common-licenses/Watcom-1                |  389 -------------
- meta/files/common-licenses/XFree86-1               |   50 --
- meta/files/common-licenses/YPL-1                   |  140 -----
- meta/files/common-licenses/ZPL-1                   |   60 --
- meta/files/common-licenses/ZPL-2                   |   44 --
- meta/files/common-licenses/Zimbra-1                |  140 -----
- meta/files/common-licenses/eCos-2                  |   38 --
- 105 files changed, 1126 insertions(+), 17670 deletions(-)
- delete mode 100644 meta/files/common-licenses/AFL-1
- delete mode 100644 meta/files/common-licenses/AFL-2
- delete mode 100644 meta/files/common-licenses/AGPL-3
- delete mode 100644 meta/files/common-licenses/APL-1
- delete mode 100644 meta/files/common-licenses/APSL-1
- delete mode 100644 meta/files/common-licenses/APSL-2
- create mode 100644 meta/files/common-licenses/Adobe
- delete mode 100644 meta/files/common-licenses/Apache-1
- delete mode 100644 meta/files/common-licenses/Apache-2
- delete mode 100644 meta/files/common-licenses/Artistic
- delete mode 100644 meta/files/common-licenses/Artistic-1
- delete mode 100644 meta/files/common-licenses/Artistic-2
- delete mode 100644 meta/files/common-licenses/BSL-1
- create mode 100644 meta/files/common-licenses/BitstreamVera
- delete mode 100644 meta/files/common-licenses/CATOSL-1
- delete mode 100644 meta/files/common-licenses/CC-BY-1
- delete mode 100644 meta/files/common-licenses/CC-BY-2
- delete mode 100644 meta/files/common-licenses/CC-BY-3
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-1
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-2
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-3
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-ND-1
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-ND-2
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-ND-3
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-SA-1
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-SA-2
- delete mode 100644 meta/files/common-licenses/CC-BY-NC-SA-3
- delete mode 100644 meta/files/common-licenses/CC-BY-ND-1
- delete mode 100644 meta/files/common-licenses/CC-BY-ND-2
- delete mode 100644 meta/files/common-licenses/CC-BY-ND-3
- delete mode 100644 meta/files/common-licenses/CC-BY-SA-1
- delete mode 100644 meta/files/common-licenses/CC-BY-SA-2
- delete mode 100644 meta/files/common-licenses/CC-BY-SA-3
- delete mode 100644 meta/files/common-licenses/CDDL-1
- delete mode 100644 meta/files/common-licenses/CECILL-1
- delete mode 100644 meta/files/common-licenses/CECILL-2
- delete mode 100644 meta/files/common-licenses/CPAL-1
- delete mode 100644 meta/files/common-licenses/CPL-1
- delete mode 100644 meta/files/common-licenses/CUA-OPL-1
- create mode 100644 meta/files/common-licenses/DSSSL
- delete mode 100644 meta/files/common-licenses/ECL-1
- delete mode 100644 meta/files/common-licenses/ECL-2
- create mode 100644 meta/files/common-licenses/EDL-1.0
- delete mode 100644 meta/files/common-licenses/EFL-1
- delete mode 100644 meta/files/common-licenses/EFL-2
- delete mode 100644 meta/files/common-licenses/EPL-1
- delete mode 100644 meta/files/common-licenses/EUPL-1
- create mode 100644 meta/files/common-licenses/Elfutils-Exception
- delete mode 100644 meta/files/common-licenses/ErlPL-1
- delete mode 100644 meta/files/common-licenses/Frameworx-1
- create mode 100644 meta/files/common-licenses/FreeType
- delete mode 100644 meta/files/common-licenses/GPL-1
- delete mode 100644 meta/files/common-licenses/GPL-1.0+
- delete mode 100644 meta/files/common-licenses/GPL-2
- delete mode 100644 meta/files/common-licenses/GPL-2,0-with-GCC-exception
- delete mode 100644 meta/files/common-licenses/GPL-2,0-with-font-exception
- delete mode 100644 meta/files/common-licenses/GPL-2.0+
- delete mode 100644 meta/files/common-licenses/GPL-3
- delete mode 100644 meta/files/common-licenses/GPL-3.0+
- delete mode 100644 meta/files/common-licenses/IPL-1
- delete mode 100644 meta/files/common-licenses/LGPL-2
- delete mode 100644 meta/files/common-licenses/LGPL-2.0+
- delete mode 100644 meta/files/common-licenses/LGPL-2.1+
- delete mode 100644 meta/files/common-licenses/LGPL-3
- delete mode 100644 meta/files/common-licenses/LGPL-3.0+
- delete mode 100644 meta/files/common-licenses/LPL-1
- delete mode 100644 meta/files/common-licenses/LPPL-1
- delete mode 120000 meta/files/common-licenses/MIT-style
- delete mode 100644 meta/files/common-licenses/MPL-1
- delete mode 100644 meta/files/common-licenses/NASA-1
- delete mode 100644 meta/files/common-licenses/NPOSL-3
- create mode 100644 meta/files/common-licenses/OASIS
- delete mode 100644 meta/files/common-licenses/OCLC-2
- delete mode 100644 meta/files/common-licenses/OFL-1
- delete mode 100644 meta/files/common-licenses/OLDAP-2
- delete mode 100644 meta/files/common-licenses/OSL-1
- delete mode 100644 meta/files/common-licenses/OSL-2
- delete mode 100644 meta/files/common-licenses/OSL-3
- delete mode 100644 meta/files/common-licenses/PHP-3
- create mode 100644 meta/files/common-licenses/Proprietary
- delete mode 100644 meta/files/common-licenses/Python-2
- delete mode 100644 meta/files/common-licenses/QPL-1
- delete mode 100644 meta/files/common-licenses/RPL-1
- delete mode 100644 meta/files/common-licenses/RPSL-1
- delete mode 100644 meta/files/common-licenses/SPL
- delete mode 100644 meta/files/common-licenses/Simple-2
- create mode 100644 meta/files/common-licenses/UCB
- delete mode 100644 meta/files/common-licenses/VSL-1
- delete mode 100644 meta/files/common-licenses/Watcom-1
- delete mode 100644 meta/files/common-licenses/XFree86-1
- delete mode 100644 meta/files/common-licenses/YPL-1
- delete mode 100644 meta/files/common-licenses/ZPL-1
- delete mode 100644 meta/files/common-licenses/ZPL-2
- delete mode 100644 meta/files/common-licenses/Zimbra-1
- delete mode 100644 meta/files/common-licenses/eCos-2
+ .../base-files/base-files/licenses/Artistic        |  131 ----
+ .../base-files/base-files/licenses/BSD             |   26 -
+ .../base-files/base-files/licenses/GFDL-1.2        |  397 ------------
+ .../base-files/base-files/licenses/GPL-3           |  676 --------------------
+ .../base-files/base-files/licenses/LGPL-2          |  481 --------------
+ .../base-files/base-files/licenses/LGPL-2.1        |  510 ---------------
+ .../base-files/base-files/licenses/LGPL-3          |  165 -----
+ meta/recipes-core/base-files/base-files_3.0.14.bb  |   20 +-
+ meta/recipes-core/busybox/busybox.inc              |    3 +-
+ meta/recipes-core/busybox/busybox_1.19.3.bb        |    2 +-
+ .../gettext/gettext-minimal-native_0.18.1.1.bb     |    4 +-
+ meta/recipes-core/gettext/gettext_0.18.1.1.bb      |    4 +-
+ meta/recipes-core/jpeg/jpeg_8c.bb                  |    4 +-
+ meta/recipes-devtools/elfutils/elfutils_0.148.bb   |    4 +-
+ meta/recipes-devtools/python/python-pyrex_0.9.9.bb |    4 +-
+ .../squashfs-tools/squashfs-tools_4.2.bb           |    4 +-
+ meta/recipes-devtools/tcf-agent/tcf-agent_svn.bb   |    4 +-
+ meta/recipes-devtools/tcltk/tcl_8.5.11.bb          |    4 +-
+ .../transfig/transfig-native_3.2.5d.bb             |    4 +-
+ meta/recipes-extended/byacc/byacc_20110908.bb      |   10 +-
+ meta/recipes-extended/bzip2/bzip2_1.0.6.bb         |    4 +-
+ meta/recipes-extended/less/less_444.bb             |    7 +-
+ .../tcp-wrappers/tcp-wrappers_7.6.bb               |    4 +-
+ meta/recipes-extended/unzip/unzip_6.0.bb           |    4 +-
+ meta/recipes-extended/xinetd/xinetd_2.3.14.bb      |    5 +-
+ meta/recipes-extended/zip/zip.inc                  |    2 +-
+ meta/recipes-extended/zip/zip_3.0.bb               |    2 +-
+ .../recipes-gnome/gnome/gnome-icon-theme_2.31.0.bb |    4 +-
+ meta/recipes-graphics/clutter/clutter-box2d.inc    |    2 +-
+ meta/recipes-graphics/clutter/clutter-box2d_git.bb |    2 +-
+ meta/recipes-graphics/freetype/freetype_2.4.6.bb   |    4 +-
+ .../ttf-fonts/ttf-bitstream-vera_1.10.bb           |    4 +-
+ meta/recipes-graphics/xorg-app/xrandr_1.3.5.bb     |    4 +-
+ .../recipes-graphics/xorg-font/font-alias_1.0.3.bb |    4 +-
+ meta/recipes-graphics/xorg-font/font-util_1.2.0.bb |    5 +-
+ .../linux-firmware/linux-firmware_git.bb           |    5 +
+ meta/recipes-multimedia/libtiff/tiff_3.9.5.bb      |    4 +-
+ .../matchbox-theme-sato/matchbox-theme-sato.inc    |    2 +-
+ .../matchbox-theme-sato/matchbox-theme-sato_0.1.bb |    2 +-
+ .../sato-icon-theme/sato-icon-theme.inc            |    2 +-
+ .../sato-icon-theme/sato-icon-theme_0.4.1.bb       |    2 +-
+ meta/recipes-support/boost/boost.inc               |    4 +-
+ 42 files changed, 81 insertions(+), 2454 deletions(-)
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/Artistic
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/BSD
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/GFDL-1.2
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/GPL-3
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/LGPL-2
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/LGPL-2.1
+ delete mode 100644 meta/recipes-core/base-files/base-files/licenses/LGPL-3
 
-diff --git a/meta/classes/license.bbclass b/meta/classes/license.bbclass
-index 8c6e2d2..10bcbd6 100644
---- a/meta/classes/license.bbclass
-+++ b/meta/classes/license.bbclass
-@@ -1,17 +1,14 @@
-+inherit buildhistory
- # Populates LICENSE_DIRECTORY as set in distro config with the license files as set by
- # LIC_FILES_CHKSUM.
-+# LIC_FILES_CHKSUM.
- # TODO:
--# - We should also enable the ability to put the generated license directory onto the
--#  rootfs
--# - Gather up more generic licenses
--# - There is a real issue revolving around license naming standards. See license names
--#  licenses.conf and compare them to the license names in the recipes. You'll see some
--#  differences and that should be corrected.
-+# - There is a real issue revolving around license naming standards.
+(NOTE: Removed common-license diffs)
+
+diff --git a/meta/recipes-core/base-files/base-files_3.0.14.bb b/meta/recipes-core/base-files/base-files_3.0.14.bb
+index 8f5313b..eb40917 100644
+--- a/meta/recipes-core/base-files/base-files_3.0.14.bb
++++ b/meta/recipes-core/base-files/base-files_3.0.14.bb
+@@ -1,9 +1,15 @@
+ SUMMARY = "Miscellaneous files for the base system."
+ DESCRIPTION = "The base-files package creates the basic system directory structure and provides a small set of key configuration files for the system."
+ SECTION = "base"
+-PR = "r69"
++PR = "r70"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://licenses/GPL-2;md5=94d55d512a9ba36caa9b7df079bae19f"
++# Removed all license related tasks in this recipe as license.bbclass 
++# now deals with this. In order to get accurate licensing on to the image:
++# Set COPY_LIC_MANIFEST to just copy just the license.manifest to the image
++# For the manifest and the license text for each package:
++# Set COPY_LIC_MANIFEST and COPY_LIC_DIRS
++
+ SRC_URI = "file://rotation \
+            file://nsswitch.conf \
+            file://motd \
+@@ -18,14 +24,8 @@ SRC_URI = "file://rotation \
+            file://usbd \
+            file://share/dot.bashrc \
+            file://share/dot.profile \
+-           file://licenses/BSD \
+            file://licenses/GPL-2 \
+-           file://licenses/GPL-3 \
+-           file://licenses/LGPL-2 \
+-           file://licenses/LGPL-2.1 \
+-           file://licenses/LGPL-3 \
+-           file://licenses/GFDL-1.2 \
+-           file://licenses/Artistic"
++           "
+ S = "${WORKDIR}"
  
- LICENSE_DIRECTORY ??= "${DEPLOY_DIR}/licenses"
- LICSSTATEDIR = "${WORKDIR}/license-destdir/"
+ INHIBIT_DEFAULT_DEPS = "1"
+@@ -103,10 +103,6 @@ do_install () {
+ 	install -m 0644 ${WORKDIR}/host.conf ${D}${sysconfdir}/host.conf
+ 	install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}/motd
  
--addtask populate_lic after do_patch before do_package
-+addtask populate_lic after do_patch before do_compile
- do_populate_lic[dirs] = "${LICSSTATEDIR}/${PN}"
- do_populate_lic[cleandirs] = "${LICSSTATEDIR}"
- 
-@@ -22,33 +19,124 @@ do_populate_lic[cleandirs] = "${LICSSTATEDIR}"
- #
- # We should really discuss standardizing this field, but that's a longer term goal.
- # For now, we can do this and it should grab the most common LICENSE naming variations.
+-	for license in BSD GPL-2 LGPL-2 LGPL-2.1 Artistic GPL-3 LGPL-3 GFDL-1.2; do
+-		install -m 0644 ${WORKDIR}/licenses/$license ${D}${datadir}/common-licenses/
+-	done
 -
--#GPL variations
--SPDXLICENSEMAP[GPL] = "GPL-1"
--SPDXLICENSEMAP[GPLv2] = "GPL-2"
--SPDXLICENSEMAP[GPLv3] = "GPL-3"
-+#
-+# Changing GPL mapping to GPL-2 as it's not very likely to be GPL-1
-+# We should NEVER have a GPL/LGPL without a version!!!!
-+# Any mapping to MPL/LGPL/GPL should be fixed
-+# see: https://wiki.yoctoproject.org/wiki/License_Audit
-+
-+# GPL variations
-+SPDXLICENSEMAP[GPL] = "GPL-2.0"
-+SPDXLICENSEMAP[GPL-2] = "GPL-2.0"
-+SPDXLICENSEMAP[GPLv2] = "GPL-2.0"
-+SPDXLICENSEMAP[GPL-3] = "GPL-3.0"
-+SPDXLICENSEMAP[GPLv3] = "GPL-3.0"
- 
- #LGPL variations
--SPDXLICENSEMAP[LGPL] = "LGPL-2"
--SPDXLICENSEMAP[LGPLv2] = "LGPL-2"
-+SPDXLICENSEMAP[LGPL] = "LGPL-2.0"
-+SPDXLICENSEMAP[LGPLv2] = "LGPL-2.0"
- SPDXLICENSEMAP[LGPL2.1] = "LGPL-2.1"
- SPDXLICENSEMAP[LGPLv2.1] = "LGPL-2.1"
--SPDXLICENSEMAP[LGPLv3] = "LGPL-3"
-+SPDXLICENSEMAP[LGPLv3] = "LGPL-3.0"
- 
- #MPL variations
--SPDXLICENSEMAP[MPL] = "MPL-1"
--SPDXLICENSEMAP[MPLv1] = "MPL-1"
--SPDXLICENSEMAP[MPLv1.1] = "MPL-1"
-+SPDXLICENSEMAP[MPL] = "MPL-1.0"
-+SPDXLICENSEMAP[MPL-1] = "MPL-1.0"
-+SPDXLICENSEMAP[MPLv1] = "MPL-1.0"
-+SPDXLICENSEMAP[MPLv1.1] = "MPL-1.1"
- 
- #MIT variations
- SPDXLICENSEMAP[MIT-X] = "MIT"
-+SPDXLICENSEMAP[MIT-style] = "MIT"
- 
- #Openssl variations
- SPDXLICENSEMAP[openssl] = "OpenSSL"
- 
-+#Python variations
-+SPDXLICENSEMAP[PSF] = "Python-2.0"
-+SPDXLICENSEMAP[PSFv2] = "Python-2.0"
-+SPDXLICENSEMAP[Python-2] = "Python-2.0"
-+
-+#Apache variations
-+SPDXLICENSEMAP[Apachev2] = "Apache-2.0"
-+SPDXLICENSEMAP[Apache-2] = "Apache-2.0"
-+
-+#Artistic variations
-+SPDXLICENSEMAP[Artistic] = "Artistic-1.0"
-+SPDXLICENSEMAP[Artisticv1] = "Artistic-1.0"
-+SPDXLICENSEMAP[Artistic-1] = "Artistic-1.0"
-+
-+#Academic variations
-+SPDXLICENSEMAP[AFL-2] = "AFL-2.0"
-+SPDXLICENSEMAP[AFL-1] = "AFL-1.2"
-+SPDXLICENSEMAP[AFLv2] = "AFL-2.0"
-+SPDXLICENSEMAP[AFLv1] = "AFL-1.2"
-+
- #Other variations
--SPDXLICENSEMAP[AFL2.1] = "AFL-2"
--SPDXLICENSEMAP[EPLv1.0] = "EPL-1"
-+SPDXLICENSEMAP[EPLv1.0] = "EPL-1.0"
-+
-+license_create_manifest() {
-+    mkdir -p ${LICENSE_DIRECTORY}/${IMAGE_NAME}
-+    # Get list of installed packages
-+    list_installed_packages | grep -v "locale" |sort > ${LICENSE_DIRECTORY}/${IMAGE_NAME}/package.manifest
-+    INSTALLED_PKGS=`cat ${LICENSE_DIRECTORY}/${IMAGE_NAME}/package.manifest`
-+    # list of installed packages is broken for deb
-+    if [ ${IMAGE_PKGTYPE} != "deb" ]; then
-+
-+        for pkg in ${INSTALLED_PKGS}; do
-+            # not the best way to do this but licenses are not arch dependant iirc
-+            files=`find ${TMPDIR}/pkgdata/*/runtime -name ${pkg}| head -1`
-+            for filename in $files; do
-+                pkged_pn="$(sed -n 's/^PN: //p' ${filename})"
-+                pkged_lic="$(sed -n '/^LICENSE: /{ s/^LICENSE: //; s/[+|&()*]/ /g; s/  */ /g; p }' ${filename})"
-+                # check to see if the package name exists in the manifest. if so, bail.
-+                if ! grep -q "PACKAGE NAME: ${pkg}" ${filename}; then
-+                    # exclude local recipes
-+                    if [ ! ${pkged_pn} == "*locale*" ]; then
-+                        echo "PACKAGE NAME:" ${pkg} >> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                        echo "RECIPE NAME:" ${pkged_pn} >> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                        echo "LICENSE: " >> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                        for lic in ${pkged_lic}; do
-+                            if [ -e "${LICENSE_DIRECTORY}/${pkged_pn}/generic_${lic}" ]; then
-+                                echo ${lic}|sed s'/generic_//'g >> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                            else
-+                                echo "WARNING: The license listed, " ${lic} " was not in the licenses collected for " ${pkged_pn}>> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                            fi
-+                        done
-+                        echo "" >> ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest
-+                    fi
-+                fi
-+            done
-+        done
-+    fi
-+
-+    # Two options here:
-+    # - Just copy the manifest
-+    # - Copy the manifest and the license directories
-+    # This will make your image a bit larger, however 
-+    # if you are concerned about license compliance 
-+    # and delivery this should cover all your bases
-+
-+    if [ -n ${COPY_LIC_MANIFEST} ]; then
-+        mkdir -p ${IMAGE_ROOTFS}/usr/share/common-licenses/
-+        cp ${LICENSE_DIRECTORY}/${IMAGE_NAME}/license.manifest ${IMAGE_ROOTFS}/usr/share/common-licenses/license.manifest
-+        if [ -n ${COPY_LIC_DIRS} ]; then
-+            for pkg in ${INSTALLED_PKGS}; do
-+                mkdir -p ${IMAGE_ROOTFS}/usr/share/common-licenses/${pkg}
-+                for lic in `ls ${LICENSE_DIRECTORY}/${pkged_pn}`; do
-+                    # Really don't need to copy the generics as they're 
-+                    # represented in the manifest and in the actual pkg licenses
-+                    # Doing so would make your image quite a bit larger
-+                    if [ ! ${lic} == "generic_*" ]; then
-+                        cp ${LICENSE_DIRECTORY}/${pkged_pn}/${lic} ${IMAGE_ROOTFS}/usr/share/common-licenses/${pkg}/${lic}
-+                    fi
-+                done
-+            done
-+        fi
-+    fi
-+
-+}
-+
- 
- python do_populate_lic() {
-     """
-@@ -59,6 +147,26 @@ python do_populate_lic() {
-     import shutil
-     import oe.license
- 
-+    # All the license types for the package
-+    license_types = d.getVar('LICENSE', True)
-+    # All the license files for the package
-+    lic_files = d.getVar('LIC_FILES_CHKSUM', True)
-+    pn = d.getVar('PN', True)
-+    # The base directory we wrangle licenses to
-+    destdir = os.path.join(d.getVar('LICSSTATEDIR', True), pn)
-+    # The license files are located in S/LIC_FILE_CHECKSUM.
-+    srcdir = d.getVar('S', True)
-+    # Directory we store the generic licenses as set in the distro configuration
-+    generic_directory = d.getVar('COMMON_LICENSE_DIR', True)
-+    license_source_dirs = []
-+    license_source_dirs.append(generic_directory)
-+    try:
-+        additional_lic_dirs = d.getVar('LICENSE_DIR', True).split()
-+        for lic_dir in additional_lic_dirs:
-+            license_source_dirs.append(lic_dir)
-+    except:
-+        pass
-+
-     class FindVisitor(oe.license.LicenseVisitor):
-         def visit_Str(self, node):
-             #
-@@ -70,55 +178,42 @@ python do_populate_lic() {
-             find_license(node.s.replace("+", "").replace("*", ""))
-             self.generic_visit(node)
- 
--    def copy_license(source, destination, file_name):
--        try:
--            bb.copyfile(os.path.join(source, file_name), os.path.join(destination, file_name))
--        except:
--            bb.warn("%s: No generic license file exists for: %s at %s" % (pn, file_name, source))
--            pass
--
--    def link_license(source, destination, file_name):
--        try:
--            os.symlink(os.path.join(source, file_name), os.path.join(destination, "generic_" + file_name))
--        except:
--            bb.warn("%s: Could not symlink: %s at %s to %s at %s" % (pn, file_name, source, file_name, destination))
--            pass
--
-     def find_license(license_type):
-         try:
-             bb.mkdirhier(gen_lic_dest)
-         except:
-             pass
--
-+        spdx_generic = ""
-+        license_source = ""
-         # If the generic does not exist we need to check to see if there is an SPDX mapping to it
--        if not os.path.isfile(os.path.join(generic_directory, license_type)):
--            if d.getVarFlag('SPDXLICENSEMAP', license_type) != None:
--                # Great, there is an SPDXLICENSEMAP. We can copy!
--                bb.note("We need to use a SPDXLICENSEMAP for %s" % (license_type))
--                spdx_generic = d.getVarFlag('SPDXLICENSEMAP', license_type)
--                copy_license(generic_directory, gen_lic_dest, spdx_generic)
--                link_license(gen_lic_dest, destdir, spdx_generic)
--            else:
--                # And here is where we warn people that their licenses are lousy
--                bb.warn("%s: No generic license file exists for: %s at %s" % (pn, license_type, generic_directory))
--                bb.warn("%s: There is also no SPDXLICENSEMAP for this license type: %s at %s" % (pn, license_type, generic_directory))
--                pass
--        elif os.path.isfile(os.path.join(generic_directory, license_type)):
--            copy_license(generic_directory, gen_lic_dest, license_type)
--            link_license(gen_lic_dest, destdir, license_type)
--
--    # All the license types for the package
--    license_types = d.getVar('LICENSE', True)
--    # All the license files for the package
--    lic_files = d.getVar('LIC_FILES_CHKSUM', True)
--    pn = d.getVar('PN', True)
--    # The base directory we wrangle licenses to
--    destdir = os.path.join(d.getVar('LICSSTATEDIR', True), pn)
--    # The license files are located in S/LIC_FILE_CHECKSUM.
--    srcdir = d.getVar('S', True)
--    # Directory we store the generic licenses as set in the distro configuration
--    generic_directory = d.getVar('COMMON_LICENSE_DIR', True)
-+        for lic_dir in license_source_dirs:
-+            if not os.path.isfile(os.path.join(lic_dir, license_type)):
-+                if d.getVarFlag('SPDXLICENSEMAP', license_type) != None:
-+                    # Great, there is an SPDXLICENSEMAP. We can copy!
-+                    bb.note("We need to use a SPDXLICENSEMAP for %s" % (license_type))
-+                    spdx_generic = d.getVarFlag('SPDXLICENSEMAP', license_type)
-+                    license_source = lic_dir
-+                    break
-+            elif os.path.isfile(os.path.join(lic_dir, license_type)):
-+                spdx_generic = license_type
-+                license_source = lic_dir
-+                break
-+
-+        if spdx_generic!="" and license_source!="":
-+            # we really should copy to generic_ + spdx_generic, however, that ends up messing the manifest
-+            # audit up. This should be fixed in emit_pkgdata (or, we actually got and fix all the recipes)
-+            ret = bb.copyfile(os.path.join(license_source, spdx_generic), os.path.join(os.path.join(d.getVar('LICSSTATEDIR', True), pn), "generic_" + license_type))
-+            # If the copy didn't occur, something horrible went wrong and we fail out
-+            if ret is False or ret == 0:
-+                bb.warn("%s for %s could not be copied for some reason. It may not exist. WARN for now." % (spdx_generic, pn))
-+
-+        else:
-+            # And here is where we warn people that their licenses are lousy
-+            bb.warn("%s: No generic license file exists for: %s in any provider" % (pn, license_type))
-+            bb.warn("%s: There is also no SPDXLICENSEMAP for this license type: %s in any provider" % (pn, license_type))
-+            pass
- 
-+    
-     try:
-         bb.mkdirhier(destdir)
-     except:
-@@ -142,8 +237,6 @@ python do_populate_lic() {
-         if ret is False or ret == 0:
-             bb.warn("%s could not be copied for some reason. It may not exist. WARN for now." % srclicfile)
- 
--    gen_lic_dest = os.path.join(d.getVar('LICENSE_DIRECTORY', True), "common-licenses")
--
-     v = FindVisitor()
-     try:
-         v.visit_string(license_types)
-@@ -160,4 +253,3 @@ python do_populate_lic_setscene () {
- 	sstate_setscene(d)
+ 	ln -sf /proc/mounts ${D}${sysconfdir}/mtab
  }
- addtask do_populate_lic_setscene
--
-diff --git a/meta/classes/package.bbclass b/meta/classes/package.bbclass
-index 256cdc1..39c1d4b 100644
---- a/meta/classes/package.bbclass
-+++ b/meta/classes/package.bbclass
-@@ -1065,6 +1065,7 @@ python emit_pkgdata() {
- 		write_if_exists(sf, pkg, 'PR')
- 		write_if_exists(sf, pkg, 'PKGV')
- 		write_if_exists(sf, pkg, 'PKGR')
-+		write_if_exists(sf, pkg, 'LICENSE')
- 		write_if_exists(sf, pkg, 'DESCRIPTION')
- 		write_if_exists(sf, pkg, 'SUMMARY')
- 		write_if_exists(sf, pkg, 'RDEPENDS')
-diff --git a/meta/classes/rootfs_ipk.bbclass b/meta/classes/rootfs_ipk.bbclass
-index b4b95c5..4e5227a 100644
---- a/meta/classes/rootfs_ipk.bbclass
-+++ b/meta/classes/rootfs_ipk.bbclass
-@@ -62,6 +62,9 @@ fakeroot rootfs_ipk_do_rootfs () {
  
- 	package_install_internal_ipk
+diff --git a/meta/recipes-core/busybox/busybox.inc b/meta/recipes-core/busybox/busybox.inc
+index b948e2c..07ca782 100644
+--- a/meta/recipes-core/busybox/busybox.inc
++++ b/meta/recipes-core/busybox/busybox.inc
+@@ -5,7 +5,8 @@ BUGTRACKER = "https://bugs.busybox.net/"
  
-+    # create license manifest
-+    license_create_manifest
-+
- 	#post install
- 	export D=${IMAGE_ROOTFS}
- 	export OFFLINE_ROOT=${IMAGE_ROOTFS}
-diff --git a/meta/classes/rootfs_rpm.bbclass b/meta/classes/rootfs_rpm.bbclass
-index 5fd45d7..b0b1ecc 100644
---- a/meta/classes/rootfs_rpm.bbclass
-+++ b/meta/classes/rootfs_rpm.bbclass
-@@ -99,6 +99,9 @@ EOF
+ # bzip2 applet in busybox is based on lightly-modified bzip2 source
+ # the GPL is version 2 only
+-LICENSE = "GPLv2 & bzip2"
++# bzip2 is not a bzip2 license (no such thing)
++LICENSE = "GPLv2 & BSD-4-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=de10de48642ab74318e893a61105afbb"
  
- 	package_install_internal_rpm
+ SECTION = "base"
+diff --git a/meta/recipes-core/busybox/busybox_1.19.3.bb b/meta/recipes-core/busybox/busybox_1.19.3.bb
+index 7a54789..7360219 100644
+--- a/meta/recipes-core/busybox/busybox_1.19.3.bb
++++ b/meta/recipes-core/busybox/busybox_1.19.3.bb
+@@ -1,5 +1,5 @@
+ require busybox.inc
+-PR = "r0"
++PR = "r1"
  
-+    # create license manifest
-+    license_create_manifest
-+
- 	export D=${IMAGE_ROOTFS}
- 	export OFFLINE_ROOT=${IMAGE_ROOTFS}
- 	export IPKG_OFFLINE_ROOT=${IMAGE_ROOTFS}
-diff --git a/meta/conf/licenses.conf b/meta/conf/licenses.conf
-index e81434d..e2f6149 100644
---- a/meta/conf/licenses.conf
-+++ b/meta/conf/licenses.conf
-@@ -1,5 +1,51 @@
--SRC_DISTRIBUTE_LICENSES += "GPL GPLv2 BSD LGPL Apache-2.0 QPL AFL"
--SRC_DISTRIBUTE_LICENSES += "MIT Sleepycat Classpath Perl PSF PD Artistic"
--SRC_DISTRIBUTE_LICENSES += "bzip2 zlib ntp cron libpng netperf openssl"
--SRC_DISTRIBUTE_LICENSES += "Info-ZIP tcp-wrappers"
-+# These aren't actually used anywhere that I can tell
-+# They may be in the future (or are used by someone else
-+# For completion sake, I've updated them
-+SRC_DISTRIBUTE_LICENSES += "AAL Adobe AFL-1.2 AFL-2.0 AFL-2.1 AFL-3.0"
-+SRC_DISTRIBUTE_LICENSES += "AGPL-3.0 ANTLR-PD Apache-1.0 Apache-1.1 Apache-2.0"
-+SRC_DISTRIBUTE_LICENSES += "APL-1.0 APSL-1.0 APSL-1.1 APSL-1.2 APSL-2.0"
-+SRC_DISTRIBUTE_LICENSES += "Artistic-1.0 Artistic-2.0 BitstreamVera BSD"
-+SRC_DISTRIBUTE_LICENSES += "BSD-2-Clause BSD-3-Clause BSD-4-Clause BSL-1.0"
-+SRC_DISTRIBUTE_LICENSES += "CATOSL-1.1 CC0-1.0 CC-BY-1.0 CC-BY-2.0 CC-BY-2.5"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-3.0 CC-BY-NC-1.0 CC-BY-NC-2.0 CC-BY-NC-2.5"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-NC-3.0 CC-BY-NC-ND-1.0 CC-BY-NC-ND-2.0"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-NC-ND-2.5 CC-BY-NC-ND-3.0 CC-BY-NC-SA-1.0"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-NC-SA-2.0 CC-BY-NC-SA-2.5 CC-BY-NC-SA-3.0"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-ND-1.0 CC-BY-ND-2.0 CC-BY-ND-2.5 CC-BY-ND-3.0"
-+SRC_DISTRIBUTE_LICENSES += "CC-BY-SA-1.0 CC-BY-SA-2.0 CC-BY-SA-2.5 CC-BY-SA-3.0"
-+SRC_DISTRIBUTE_LICENSES += "CDDL-1.0 CECILL-1.0 CECILL-2.0 CECILL-B CECILL-C"
-+SRC_DISTRIBUTE_LICENSES += "ClArtistic CPAL-1.0 CPL-1.0 CUA-OPL-1.0 DSSSL"
-+SRC_DISTRIBUTE_LICENSES += "ECL-1.0 ECL-2.0 eCos-2.0 EDL-1.0 EFL-1.0 EFL-2.0"
-+SRC_DISTRIBUTE_LICENSES += "Elfutils-Exception Entessa EPL-1.0 ErlPL-1.1"
-+SRC_DISTRIBUTE_LICENSES += "EUDatagrid EUPL-1.0 EUPL-1.1 Fair Frameworx-1.0"
-+SRC_DISTRIBUTE_LICENSES += "FreeType GFDL-1.1 GFDL-1.2 GFDL-1.3 GPL-1.0"
-+SRC_DISTRIBUTE_LICENSES += "GPL-2.0 GPL-2.0-with-autoconf-exception"
-+SRC_DISTRIBUTE_LICENSES += "GPL-2.0-with-classpath-exception"
-+SRC_DISTRIBUTE_LICENSES += "GPL-2.0-with-font-exception"
-+SRC_DISTRIBUTE_LICENSES += "GPL-2.0-with-GCC-exception"
-+SRC_DISTRIBUTE_LICENSES += "GPL-2-with-bison-exception GPL-3.0"
-+SRC_DISTRIBUTE_LICENSES += "GPL-3.0-with-autoconf-exception"
-+SRC_DISTRIBUTE_LICENSES += "GPL-3.0-with-GCC-exception"
-+SRC_DISTRIBUTE_LICENSES += "gSOAP-1 gSOAP-1.3b HPND IPA IPL-1.0 ISC LGPL-2.0"
-+SRC_DISTRIBUTE_LICENSES += "LGPL-2.1 LGPL-3.0 Libpng LPL-1.02 LPPL-1.0 LPPL-1.1"
-+SRC_DISTRIBUTE_LICENSES += "LPPL-1.2 LPPL-1.3c MirOS MIT Motosoto MPL-1.0"
-+SRC_DISTRIBUTE_LICENSES += "MPL-1.1 MS-PL MS-RL Multics NASA-1.3 Nauman NCSA"
-+SRC_DISTRIBUTE_LICENSES += "NGPL Nokia NPOSL-3.0 NTP OASIS OCLC-2.0 ODbL-1.0"
-+SRC_DISTRIBUTE_LICENSES += "OFL-1.1 OGTSL OLDAP-2.8 OpenSSL OSL-1.0 OSL-2.0"
-+SRC_DISTRIBUTE_LICENSES += "OSL-3.0 PD PHP-3.0 PostgreSQL Proprietary"
-+SRC_DISTRIBUTE_LICENSES += "Python-2.0 QPL-1.0 RHeCos-1 RHeCos-1.1 RPL-1.5"
-+SRC_DISTRIBUTE_LICENSES += "RPSL-1.0 RSCPL Ruby SAX-PD Simple-2.0 Sleepycat"
-+SRC_DISTRIBUTE_LICENSES += "SPL-1.0 SugarCRM-1 SugarCRM-1.1.3 UCB VSL-1.0 W3C
-+SRC_DISTRIBUTE_LICENSES += "Watcom-1.0 WXwindows XFree86-1.1 Xnet YPL-1.1"
-+SRC_DISTRIBUTE_LICENSES += "Zimbra-1.3 Zlib ZPL-1.1 ZPL-2.0 ZPL-2.1"
+ SRC_URI = "http://www.busybox.net/downloads/busybox-${PV}.tar.bz2;name=tarball \
+            file://udhcpscript.patch \
+diff --git a/meta/recipes-core/gettext/gettext-minimal-native_0.18.1.1.bb b/meta/recipes-core/gettext/gettext-minimal-native_0.18.1.1.bb
+index 71c6045..8f9ac1a 100644
+--- a/meta/recipes-core/gettext/gettext-minimal-native_0.18.1.1.bb
++++ b/meta/recipes-core/gettext/gettext-minimal-native_0.18.1.1.bb
+@@ -4,12 +4,12 @@ SRC_URI = "file://aclocal.tgz \
+ INHIBIT_DEFAULT_DEPS = "1"
+ INHIBIT_AUTOTOOLS_DEPS = "1"
  
+-LICENSE = "FSF-Unlimited"
++LICENSE = "GPL-3+ & LGPL-2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ inherit native
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ S = "${WORKDIR}"
+ 
+diff --git a/meta/recipes-core/gettext/gettext_0.18.1.1.bb b/meta/recipes-core/gettext/gettext_0.18.1.1.bb
+index 9db2eb1..615582e 100644
+--- a/meta/recipes-core/gettext/gettext_0.18.1.1.bb
++++ b/meta/recipes-core/gettext/gettext_0.18.1.1.bb
+@@ -2,10 +2,10 @@ SUMMARY = "Utilities and libraries for producing multi-lingual messages."
+ DESCRIPTION = "Gettext offers to programmers, translators, and even users, a well integrated set of tools and documentation. Specifically, the GNU `gettext' utilities are a set of tools that provides a framework to help other GNU packages produce multi-lingual messages. These tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs themselves, a runtime library supporting the retrieval of translated messages, and a few stand-alone programs to massage in various ways the sets of translatable strings, or already translated strings."
+ HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
+ SECTION = "libs"
+-LICENSE = "GPLv3"
++LICENSE = "GPL-3+ & LGPL-2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r5"
++PR = "r6"
+ DEPENDS = "libxml2-native gettext-native virtual/libiconv ncurses expat"
+ DEPENDS_virtclass-native = "libxml2-native"
+ PROVIDES = "virtual/libintl virtual/gettext"
+diff --git a/meta/recipes-core/jpeg/jpeg_8c.bb b/meta/recipes-core/jpeg/jpeg_8c.bb
+index df6c5b6..1c242d1 100644
+--- a/meta/recipes-core/jpeg/jpeg_8c.bb
++++ b/meta/recipes-core/jpeg/jpeg_8c.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "libjpeg contains a library for handling the JPEG (JFIF) image for
+ HOMEPAGE = "http://www.ijg.org/"
+ BUGTRACKER = ""
+ 
+-LICENSE ="jpeg"
++LICENSE ="BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
+                     file://jpeglib.h;endline=14;md5=22f1e0f8fc71f6f7563146d3b210dbe5 \
+                     file://djpeg.c;endline=13;md5=ca89254925da06fef47e4b6468233432"
+@@ -13,7 +13,7 @@ SECTION = "libs"
+ DEPENDS = "libtool-cross"
+ DEPENDS_virtclass-native = "libtool-native"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://www.ijg.org/files/jpegsrc.v${PV}.tar.gz \
+ 	   file://debian-libjpeg7_7-1.diff;"
+diff --git a/meta/recipes-devtools/elfutils/elfutils_0.148.bb b/meta/recipes-devtools/elfutils/elfutils_0.148.bb
+index 1399eb7..0f4e8ca 100644
+--- a/meta/recipes-devtools/elfutils/elfutils_0.148.bb
++++ b/meta/recipes-devtools/elfutils/elfutils_0.148.bb
+@@ -1,12 +1,12 @@
+ DESCRIPTION = "A collection of utilities and DSOs to handle compiled objects."
+ HOMEPAGE = "https://fedorahosted.org/elfutils"
+ SECTION = "base"
+-LICENSE = "(GPLv2 & Exception)"
++LICENSE = "(GPL-2+ & Elfutils-Exception)"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3\
+                     file://EXCEPTION;md5=570adcb0c1218ab57f2249c67d0ce417"
+ DEPENDS = "libtool bzip2 zlib"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "https://fedorahosted.org/releases/e/l/elfutils/elfutils-${PV}.tar.bz2"
+ 
+diff --git a/meta/recipes-devtools/python/python-pyrex_0.9.9.bb b/meta/recipes-devtools/python/python-pyrex_0.9.9.bb
+index 330f856..7d80554 100644
+--- a/meta/recipes-devtools/python/python-pyrex_0.9.9.bb
++++ b/meta/recipes-devtools/python/python-pyrex_0.9.9.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = "Pyrex is a language specially designed for writing Python extensi
+ It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
+ and the messy, low-level world of C."
+ SECTION = "devel/python"
+-LICENSE = "Apache-2"
++LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=771d472f53f933033f57eeee7808e5bd"
+ SRCNAME = "Pyrex"
+-PR = "ml1"
++PR = "ml2"
+ 
+ SRC_URI = "\
+   http://www.cosc.canterbury.ac.nz/greg.ewing/python/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+diff --git a/meta/recipes-devtools/squashfs-tools/squashfs-tools_4.2.bb b/meta/recipes-devtools/squashfs-tools/squashfs-tools_4.2.bb
+index a2ed8ba..c54081b 100644
+--- a/meta/recipes-devtools/squashfs-tools/squashfs-tools_4.2.bb
++++ b/meta/recipes-devtools/squashfs-tools/squashfs-tools_4.2.bb
+@@ -2,12 +2,12 @@
+ # and I don't think the kernel supports it any more.
+ DESCRIPTION = "Tools to manipulate Squashfs filesystems."
+ SECTION = "base"
+-LICENSE = "GPLv2 & Public Domain"
++LICENSE = "GPL-2 & PD"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                     file://../../7zC.txt;beginline=12;endline=16;md5=2056cd6d919ebc3807602143c7449a7c \
+                    "
+ DEPENDS = "attr zlib xz"
+-PR = "r0"
++PR = "1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/squashfs/squashfs${PV}.tar.gz;name=squashfs \
+            http://downloads.sourceforge.net/sevenzip/lzma465.tar.bz2;name=lzma \
+diff --git a/meta/recipes-devtools/tcf-agent/tcf-agent_svn.bb b/meta/recipes-devtools/tcf-agent/tcf-agent_svn.bb
+index 2c11628..c9ac396 100644
+--- a/meta/recipes-devtools/tcf-agent/tcf-agent_svn.bb
++++ b/meta/recipes-devtools/tcf-agent/tcf-agent_svn.bb
+@@ -2,13 +2,13 @@ DESCRIPTION = "Target Communication Framework"
+ HOMEPAGE = "http://wiki.eclipse.org/TCF"
+ BUGTRACKER = "https://bugs.eclipse.org/bugs/"
+ 
+-LICENSE = "EPL-1 | EDLv1.0"
++LICENSE = "EPL-1.0 | EDL-1.0"
+ LIC_FILES_CHKSUM = "file://../epl-v10.html;md5=7aa4215a330a0a4f6a1cbf8da1a0879f \
+                     file://edl-v10.html;md5=522a390a83dc186513f0500543ad3679"
+ 
+ SRCREV = "1855"
+ PV = "0.0+svnr${SRCPV}"
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "svn://dev.eclipse.org/svnroot/dsdp/org.eclipse.tm.tcf/trunk;module=agent;proto=http \
+            http://dev.eclipse.org/svnroot/dsdp/org.eclipse.tm.tcf/trunk/epl-v10.html;name=epl \
+diff --git a/meta/recipes-devtools/tcltk/tcl_8.5.11.bb b/meta/recipes-devtools/tcltk/tcl_8.5.11.bb
+index b1424f4..146021a 100644
+--- a/meta/recipes-devtools/tcltk/tcl_8.5.11.bb
++++ b/meta/recipes-devtools/tcltk/tcl_8.5.11.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Tool Command Language"
+-LICENSE = "tcl"
++LICENSE = "BSD-3-Clause"
+ SECTION = "devel/tcltk"
+ HOMEPAGE = "http://tcl.sourceforge.net"
+ DEPENDS = "tcl-native"
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://../license.terms;md5=a47a9be26d03f925fc1fbd2784f27e11
+     file://../win/license.terms;md5=a47a9be26d03f925fc1fbd2784f27e11 \
+     "
+ 
+-PR = "r0"
++PR = "r2"
+ 
+ BASE_SRC_URI = "${SOURCEFORGE_MIRROR}/tcl/tcl${PV}-src.tar.gz \
+                 file://tcl-add-soname.patch"
+diff --git a/meta/recipes-devtools/transfig/transfig-native_3.2.5d.bb b/meta/recipes-devtools/transfig/transfig-native_3.2.5d.bb
+index 97441c6..c20a243 100644
+--- a/meta/recipes-devtools/transfig/transfig-native_3.2.5d.bb
++++ b/meta/recipes-devtools/transfig/transfig-native_3.2.5d.bb
+@@ -3,9 +3,9 @@ DESCRIPTION = "This package contains utilities (mainly fig2dev) to \
+ handle XFig (Facility for Interactive Generation of figures) files."
+ HOMEPAGE = "http://www-epb.lbl.gov/xfig/"
+ SECTION = "console/utils"
+-LICENSE = "xfig"
++LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://fig2dev/fig2dev.c;endline=16;md5=6bab01e017409cf9ab21d3e953b793f7"
+-PR = "r0"
++PR = "r1"
+ 
+ DEPENDS = "imake-native xorg-cf-files-native zlib-native jpeg-native libpng-native libxpm-native"
+ 
+diff --git a/meta/recipes-extended/byacc/byacc_20110908.bb b/meta/recipes-extended/byacc/byacc_20110908.bb
+index 5969d0a..5e01c25 100644
+--- a/meta/recipes-extended/byacc/byacc_20110908.bb
++++ b/meta/recipes-extended/byacc/byacc_20110908.bb
+@@ -1,5 +1,11 @@
+-PR = "r0"
+-LICENSE="other-BSD"
++PR = "r1"
 +
-+# Additional license directories. Add your custom licenses directories this path.
-+# LICENSE_PATH += "${COREBASE}/custom-licenses"
++# Sigh. This is one of those places where everyone licenses it differently. Someone
++# even apply UCB to it (Free/Net/OpenBSD). The maintainer states that:
++# "I've found no reliable source which states that byacc must bear a UCB copyright."
++# Setting to PD as this is what the upstream has it as.
 +
-+# Set if you want the license.manifest copied to the image
-+#COPY_LIC_MANIFEST = "1"
++LICENSE="PD"
+ LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=4dc4c30f840a7203fb6edf20b3db849e"
+ require byacc.inc
+ 
+diff --git a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
+index f5b9ac1..14cd240 100644
+--- a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
++++ b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
+@@ -4,9 +4,9 @@ Huffman coding. Compression is generally considerably better than that achieved
+ LZ77/LZ78-based compressors, and approaches the performance of the PPM family of statistical compressors."
+ HOMEPAGE = "http://www.bzip.org/"
+ SECTION = "console/utils"
+-LICENSE = "bzip2"
++LICENSE = "BSD-4-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;beginline=8;endline=37;md5=40d9d1eb05736d1bfc86cfdd9106e6b2"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "http://www.bzip.org/${PV}/${BPN}-${PV}.tar.gz \
+            file://configure.ac \
+diff --git a/meta/recipes-extended/less/less_444.bb b/meta/recipes-extended/less/less_444.bb
+index c78dbaa..f198692 100644
+--- a/meta/recipes-extended/less/less_444.bb
++++ b/meta/recipes-extended/less/less_444.bb
+@@ -7,11 +7,14 @@ SECTION = "console/utils"
+ 
+ # (GPLv2+ (<< 418), GPLv3+ (>= 418)) | less
+ # less is a 2-clause BSD-like permissive license
+-LICENSE = "GPLv3+ | less"
++# Reading LICENSE and COPYING indicate that GPL-3+ is suffient.
++# openSuse .spec and Debian seem to agree here. setting to GPL-3+
 +
-+# If you want the pkg licenses copied over as well you must set 
-+# both COPY_LIC_MANIFEST and COPY_LIC_DIRS
-+#COPY_LIC_DIRS = "1"
-
++LICENSE = "GPLv3+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://LICENSE;md5=1237c0f825bb36122b0b2b486ffbe6be"
+ DEPENDS = "ncurses"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://www.greenwoodsoftware.com/${BPN}/${BPN}-${PV}.tar.gz"
+ 
+diff --git a/meta/recipes-extended/tcp-wrappers/tcp-wrappers_7.6.bb b/meta/recipes-extended/tcp-wrappers/tcp-wrappers_7.6.bb
+index 46d9675..985e848 100644
+--- a/meta/recipes-extended/tcp-wrappers/tcp-wrappers_7.6.bb
++++ b/meta/recipes-extended/tcp-wrappers/tcp-wrappers_7.6.bb
+@@ -3,9 +3,9 @@ DESCRIPTION = "Tools for monitoring and filtering incoming requests for tcp \
+ 	      services."
+ SECTION = "console/network"
+ 
+-LICENSE = "tcp-wrappers"
++LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://DISCLAIMER;md5=071bd69cb78b18888ea5e3da5c3127fa"
+-PR ="r7"
++PR ="r8"
+ 
+ 
+ PACKAGES = "${PN}-dbg libwrap libwrap-doc libwrap-dev ${PN} ${PN}-doc"
+diff --git a/meta/recipes-extended/unzip/unzip_6.0.bb b/meta/recipes-extended/unzip/unzip_6.0.bb
+index b9eff43..79e450d 100644
+--- a/meta/recipes-extended/unzip/unzip_6.0.bb
++++ b/meta/recipes-extended/unzip/unzip_6.0.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "A (de)compression library for the ZIP format"
+ HOMEPAGE = "http://www.info-zip.org"
+ SECTION = "console/utils"
+-LICENSE = "Info-ZIP"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94caec5a51ef55ef711ee4e8b1c69e29"
+ PE = "1"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "ftp://ftp.info-zip.org/pub/infozip/src/unzip60.tgz \
+ 	file://avoid-strip.patch"
+diff --git a/meta/recipes-extended/xinetd/xinetd_2.3.14.bb b/meta/recipes-extended/xinetd/xinetd_2.3.14.bb
+index 159cb2c..26ba78f 100644
+--- a/meta/recipes-extended/xinetd/xinetd_2.3.14.bb
++++ b/meta/recipes-extended/xinetd/xinetd_2.3.14.bb
+@@ -2,11 +2,12 @@ DESCRIPTION = "Highly configurable, modular and secure inetd"
+ HOMEPAGE = "http://www.xinetd.org"
+ 
+ # xinetd is a BSD-like license
+-LICENSE = "xinetd"
++# Apple and Gentoo say BSD here.
++LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=8ad8615198542444f84d28a6cf226dd8"
+ 
+ DEPENDS = ""
+-PR ="r0"
++PR ="r1"
+ 
+ SRC_URI = "http://www.xinetd.org/xinetd-${PV}.tar.gz \
+       file://xinetd.init \
+diff --git a/meta/recipes-extended/zip/zip.inc b/meta/recipes-extended/zip/zip.inc
+index 8cce146..a3bbc93 100644
+--- a/meta/recipes-extended/zip/zip.inc
++++ b/meta/recipes-extended/zip/zip.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Archiver for .zip files"
+ HOMEPAGE = "http://www.info-zip.org"
+ SECTION = "console/utils"
+ 
+-LICENSE = "Info-ZIP"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=04d43c5d70b496c032308106e26ae17d"
+ 
+ SRC_URI = "ftp://ftp.info-zip.org/pub/infozip/src/zip${@d.getVar('PV',1).replace('.', '')}.tgz"
+diff --git a/meta/recipes-extended/zip/zip_3.0.bb b/meta/recipes-extended/zip/zip_3.0.bb
+index b009c24..1238071 100644
+--- a/meta/recipes-extended/zip/zip_3.0.bb
++++ b/meta/recipes-extended/zip/zip_3.0.bb
+@@ -1,6 +1,6 @@
+ require zip.inc
+ 
+-PR="r0"
++PR="r1"
+ 
+ # zip-2.32 still uses directory name of zip-2.30
+ S = "${WORKDIR}/zip30"
+diff --git a/meta/recipes-gnome/gnome/gnome-icon-theme_2.31.0.bb b/meta/recipes-gnome/gnome/gnome-icon-theme_2.31.0.bb
+index 587ac40..00ba1d1 100644
+--- a/meta/recipes-gnome/gnome/gnome-icon-theme_2.31.0.bb
++++ b/meta/recipes-gnome/gnome/gnome-icon-theme_2.31.0.bb
+@@ -2,14 +2,14 @@ DESCRIPTION = "GNOME 2 default icon themes"
+ HOMEPAGE = "http://www.gnome.org/"
+ BUGTRACKER = "https://bugzilla.gnome.org/"
+ 
+-LICENSE = "LGPLv3 | BY-SAv3"
++LICENSE = "LGPLv3+ | CC-BY-SA-3.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e7e289d90fc8bdceed5e3f142f98229e"
+ 
+ SECTION = "x11/gnome"
+ DEPENDS = "icon-naming-utils-native glib-2.0 intltool-native"
+ RDEPENDS_${PN} = "hicolor-icon-theme"
+ RRECOMMENDS_${PN} = "librsvg-gtk"
+-PR = "r1"
++PR = "r2"
+ 
+ FILES_${PN} += "${datadir}/*"
+ 
+diff --git a/meta/recipes-graphics/clutter/clutter-box2d.inc b/meta/recipes-graphics/clutter/clutter-box2d.inc
+index 599b467..056b091 100644
+--- a/meta/recipes-graphics/clutter/clutter-box2d.inc
++++ b/meta/recipes-graphics/clutter/clutter-box2d.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Clutter Box2D"
+ HOMEPAGE = "http://www.clutter-project.org/"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPLv2.1+"
+ 
+ # The main clutter lib is machine specific so we need to be too
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/meta/recipes-graphics/clutter/clutter-box2d_git.bb b/meta/recipes-graphics/clutter/clutter-box2d_git.bb
+index 554ce81..d256a28 100644
+--- a/meta/recipes-graphics/clutter/clutter-box2d_git.bb
++++ b/meta/recipes-graphics/clutter/clutter-box2d_git.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://box2d/License.txt;md5=e5d39ad91f7dc4692dcdb1d85139ec6
+ 
+ SRCREV = "de5452e56b537a11fd7f9453d048ff4b4793b5a2"
+ PV = "0.12.1+git${SRCPV}"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "git://git.gnome.org/clutter-box2d.git"
+ 
+diff --git a/meta/recipes-graphics/freetype/freetype_2.4.6.bb b/meta/recipes-graphics/freetype/freetype_2.4.6.bb
+index 94a389a..f002103 100644
+--- a/meta/recipes-graphics/freetype/freetype_2.4.6.bb
++++ b/meta/recipes-graphics/freetype/freetype_2.4.6.bb
+@@ -6,14 +6,14 @@ image generation tools, and many other products as well."
+ HOMEPAGE = "http://www.freetype.org/"
+ BUGTRACKER = "https://savannah.nongnu.org/bugs/?group=freetype"
+ 
+-LICENSE = "FreeTypeLicense | GPLv2+"
++LICENSE = "FreeType | GPLv2+"
+ LIC_FILES_CHKSUM = "file://docs/LICENSE.TXT;md5=28d5381b1bef2649c59f20c20bae4f39 \
+                     file://docs/FTL.TXT;md5=d479e83797f699fe873b38dadd0fcd4c \
+                     file://docs/GPLv2.TXT;md5=8ef380476f642c20ebf40fecb0add2ec"
+ 
+ SECTION = "libs"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/freetype/freetype-${PV}.tar.bz2 \
+            file://no-hardcode.patch"
+diff --git a/meta/recipes-graphics/ttf-fonts/ttf-bitstream-vera_1.10.bb b/meta/recipes-graphics/ttf-fonts/ttf-bitstream-vera_1.10.bb
+index 682184a..6214c16 100644
+--- a/meta/recipes-graphics/ttf-fonts/ttf-bitstream-vera_1.10.bb
++++ b/meta/recipes-graphics/ttf-fonts/ttf-bitstream-vera_1.10.bb
+@@ -5,9 +5,9 @@ and bold).  In addition Fontconfig/Xft2 can artificially oblique the \
+ serif faces for you: this loses hinting and distorts the faces slightly, \
+ but is visibly different than normal and bold, and reasonably pleasing."
+ SECTION = "x11/fonts"
+-LICENSE = "Bitstream_Vera"
++LICENSE = "BitstreamVera"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT.TXT;md5=27d7484b1e18d0ee4ce538644a3f04be"
+-PR = "r5"
++PR = "r6"
+ RDEPENDS_${PN} = "fontconfig-utils"
+ 
+ inherit allarch
+diff --git a/meta/recipes-graphics/xorg-app/xrandr_1.3.5.bb b/meta/recipes-graphics/xorg-app/xrandr_1.3.5.bb
+index afb45cb..4410865 100644
+--- a/meta/recipes-graphics/xorg-app/xrandr_1.3.5.bb
++++ b/meta/recipes-graphics/xorg-app/xrandr_1.3.5.bb
+@@ -6,11 +6,11 @@ DESCRIPTION = "Xrandr is used to set the size, orientation and/or \
+ reflection of the outputs for a screen. It can also set the screen \
+ size."
+ 
+-LICENSE= "BSD-X"
++LICENSE= "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fe1608bdb33cf8c62a4438f7d34679b3"
+ DEPENDS += "libxrandr libxrender"
+ PE = "1"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI[md5sum] = "9735173a84dca9b05e06fd4686196b07"
+ SRC_URI[sha256sum] = "1059ff7a9ad0df8e00a765ffa4e08a505304c02663112da370ac7082030b980e"
+diff --git a/meta/recipes-graphics/xorg-font/font-alias_1.0.3.bb b/meta/recipes-graphics/xorg-font/font-alias_1.0.3.bb
+index 7005291..a212f19 100644
+--- a/meta/recipes-graphics/xorg-font/font-alias_1.0.3.bb
++++ b/meta/recipes-graphics/xorg-font/font-alias_1.0.3.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "X font aliases."
+ 
+ require xorg-font-common.inc
+ 
+-LICENSE = "Font-Alias"
++LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=bf0158b89be493d523d69d9f29265038 \
+                     file://cyrillic/fonts.alias;md5=f40795b0640d6785826aecd3b16f6124 \
+                     file://75dpi/fonts.alias;md5=6bc48023f2ae7f3bfc105db7b0ee6b49 \
+@@ -18,7 +18,7 @@ RDEPENDS_${PN}_virtclass-native = "font-util-native"
+ inherit allarch
+ 
+ PE = "1"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ SRC_URI[md5sum] = "6d25f64796fef34b53b439c2e9efa562"
+ SRC_URI[sha256sum] = "8b453b2aae1cfa8090009ca037037b8c5e333550651d5a158b7264ce1d472c9a"
+diff --git a/meta/recipes-graphics/xorg-font/font-util_1.2.0.bb b/meta/recipes-graphics/xorg-font/font-util_1.2.0.bb
+index 8834708..2c5ba41 100644
+--- a/meta/recipes-graphics/xorg-font/font-util_1.2.0.bb
++++ b/meta/recipes-graphics/xorg-font/font-util_1.2.0.bb
+@@ -2,7 +2,8 @@ DESCRIPTION = "X.Org font package creation/installation utilities"
+ 
+ require xorg-font-common.inc
+ 
+-LICENSE = "BSD & MIT-style & Unicode"
++#Unicode is MIT
++LICENSE = "BSD & MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c0067273d90f6336008cb2504e14bd32 \
+                     file://ucs2any.c;endline=28;md5=8357dc567fc628bd12696f15b2a33bcb \
+                     file://bdftruncate.c;endline=26;md5=4f82ffc101a1b165eae9c6998abff937 \
+@@ -13,7 +14,7 @@ DEPENDS_virtclass-native = "util-macros-native"
+ RDEPENDS_${PN} = "mkfontdir mkfontscale encodings"
+ RDEPENDS_${PN}_virtclass-native = "mkfontdir-native mkfontscale-native"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ do_configure_prepend() {
+         sed -i "s#MAPFILES_PATH=\`pkg-config#MAPFILES_PATH=\`PKG_CONFIG_PATH=\"${STAGING_LIBDIR_NATIVE}/pkg-config\" pkg-config#g" fontutil.m4.in
+diff --git a/meta/recipes-kernel/linux-firmware/linux-firmware_git.bb b/meta/recipes-kernel/linux-firmware/linux-firmware_git.bb
+index 224cec0..1534cd9 100644
+--- a/meta/recipes-kernel/linux-firmware/linux-firmware_git.bb
++++ b/meta/recipes-kernel/linux-firmware/linux-firmware_git.bb
+@@ -1,5 +1,10 @@
+ DESCRIPTION = "Firmware files for use with Linux kernel"
+ SECTION = "kernel"
++# Notes:
++# This is kind of a mess. Each bit of firmware has their own license. Some free
++# some not. Leaving this as Proprietary for now, but this recipe should be probably
++# be rethought out a bit more around how it deals with licenses.
++
+ LICENSE = "Proprietary"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.radeon_rlc;md5=4c243f7854d2884b483abda991adef43 \
+diff --git a/meta/recipes-multimedia/libtiff/tiff_3.9.5.bb b/meta/recipes-multimedia/libtiff/tiff_3.9.5.bb
+index c646c15..7d60326 100644
+--- a/meta/recipes-multimedia/libtiff/tiff_3.9.5.bb
++++ b/meta/recipes-multimedia/libtiff/tiff_3.9.5.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "This software provides support for the Tag Image File Format (TIFF)"
+-LICENSE = "${PN}"
++LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=34da3db46fab7501992f9615d7e158cf"
+ HOMEPAGE = "http://www.remotesensing.org/libtiff/"
+ DEPENDS = "zlib jpeg lzo"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "ftp://ftp.remotesensing.org/pub/libtiff/tiff-${PV}.tar.gz \
+            file://libtool2.patch"
+diff --git a/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato.inc b/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato.inc
+index 032dc2d..f031ce0 100644
+--- a/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato.inc
++++ b/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Matchbox window manager Sato themes"
+ HOMEPAGE = "http://www.matchbox-project.org/"
+ BUGTRACKER = "http://bugzilla.openedhand.com/"
+ 
+-LICENSE = "CCPL"
++LICENSE = "CC-BY-SA-3.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=aae86bb34b0a83716ca09f4e783d6ba4"
+ 
+ DEPENDS = "matchbox-wm"
+diff --git a/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato_0.1.bb b/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato_0.1.bb
+index e00386f..f6786dd 100644
+--- a/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato_0.1.bb
++++ b/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato_0.1.bb
+@@ -1,6 +1,6 @@
+ require matchbox-theme-sato.inc
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://pokylinux.org/releases/sato/matchbox-theme-sato-0.1.tar.gz"
+ 
+diff --git a/meta/recipes-sato/sato-icon-theme/sato-icon-theme.inc b/meta/recipes-sato/sato-icon-theme/sato-icon-theme.inc
+index 75e029c..9fd1012 100644
+--- a/meta/recipes-sato/sato-icon-theme/sato-icon-theme.inc
++++ b/meta/recipes-sato/sato-icon-theme/sato-icon-theme.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Sato Icon Theme"
+ HOMEPAGE = "http://www.o-hand.com"
+ BUGTRACKER = "http://bugzilla.openedhand.com/"
+ 
+-LICENSE = "CCPL"
++LICENSE = "CC-BY-SA-3.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=56a830bbe6e4697fe6cbbae01bb7c2b2"
+ 
+ SECTION = "x11"
+diff --git a/meta/recipes-sato/sato-icon-theme/sato-icon-theme_0.4.1.bb b/meta/recipes-sato/sato-icon-theme/sato-icon-theme_0.4.1.bb
+index 54e4627..652424a 100644
+--- a/meta/recipes-sato/sato-icon-theme/sato-icon-theme_0.4.1.bb
++++ b/meta/recipes-sato/sato-icon-theme/sato-icon-theme_0.4.1.bb
+@@ -2,7 +2,7 @@ require sato-icon-theme.inc
+ 
+ DEPENDS += "icon-naming-utils-native"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://pokylinux.org/releases/sato/${BPN}-${PV}.tar.gz \
+            file://iconpath-option.patch"
+diff --git a/meta/recipes-support/boost/boost.inc b/meta/recipes-support/boost/boost.inc
+index fecdb97..cc26ef9 100644
+--- a/meta/recipes-support/boost/boost.inc
++++ b/meta/recipes-support/boost/boost.inc
+@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.boost.org/"
+ SECTION = "libs"
+ DEPENDS = "boost-native zlib"
+ DEPENDS_virtclass-native = ""
+-LICENSE = "Boost"
++LICENSE = "BSL-1 & MIT & Python-2.0"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -16,7 +16,7 @@ BOOST_VER = "${@"_".join(d.getVar("PV",1).split("."))}"
+ BOOST_MAJ = "${@"_".join(d.getVar("PV",1).split(".")[0:2])}"
+ BOOST_P = "boost_${BOOST_VER}"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BOOST_P}.tar.bz2"
+ 
+-- 
+1.7.1
 
 
 
