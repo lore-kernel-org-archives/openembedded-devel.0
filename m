@@ -1,25 +1,25 @@
-Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elizabeth.flanagan@intel.com>) id 1RY45t-00079j-6B
+	(envelope-from <sgw@linux.intel.com>) id 1RY4ze-0002EU-Jo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 00:06:37 +0100
-Received: from mail-iy0-f180.google.com ([209.85.210.180])
-	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 06 Dec 2011 14:58:36 -0800
-Received: by iaae16 with SMTP id e16so377203iaa.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2011 14:58:36 -0800 (PST)
+	Wed, 07 Dec 2011 01:04:16 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 06 Dec 2011 15:56:21 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,309,1320652800"; d="scan'208";a="82955095"
+Received: from unknown (HELO [10.255.12.199]) ([10.255.12.199])
+	by azsmga001.ch.intel.com with ESMTP; 06 Dec 2011 15:56:21 -0800
+Message-ID: <4EDEABA5.2030505@linux.intel.com>
+Date: Tue, 06 Dec 2011 15:56:21 -0800
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0) Gecko/20110927 Thunderbird/7.0
 MIME-Version: 1.0
-Received: by 10.42.72.135 with SMTP id o7mr17241079icj.45.1323212316134; Tue,
-	06 Dec 2011 14:58:36 -0800 (PST)
-Received: by 10.50.184.166 with HTTP; Tue, 6 Dec 2011 14:58:36 -0800 (PST)
-In-Reply-To: <cover.1323211648.git.elizabeth.flanagan@intel.com>
-References: <cover.1323211648.git.elizabeth.flanagan@intel.com>
-Date: Tue, 6 Dec 2011 14:58:36 -0800
-Message-ID: <CAPhnLPCq-k0cu2dm15p9r2hB7HELOsikTiM2srqroGyX5hy26Q@mail.gmail.com>
-From: "Flanagan, Elizabeth" <elizabeth.flanagan@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 0/6] Merged license wrangling changes
+References: <cover.1323141676.git.xiaofeng.yan@windriver.com>
+	<db85bdb92ce1ffd1840f4fb719035d3b5692888e.1323141676.git.xiaofeng.yan@windriver.com>
+In-Reply-To: <db85bdb92ce1ffd1840f4fb719035d3b5692888e.1323141676.git.xiaofeng.yan@windriver.com>
+Subject: Re: [OE-core][PATCH 04/10] gtk.inc: add feature based on directfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,10 +33,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 23:06:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 07 Dec 2011 00:04:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Please ignore. I meant to send this to OE-core.
+On 12/05/2011 09:58 PM, Xiaofeng Yan wrote:
+> From: Xiaofeng Yan<xiaofeng.yan@windriver.com>
+>
+> gtk run over x11 at current OE-core. If gtk want to run over directfb, then \
+> the configuration related to x11 should be disabled and directfb should be enabled.
+>
+> [YOCTO #1674]
+>
+> Signed-off-by: Xiaofeng Yan<xiaofeng.yan@windriver.com>
+> ---
+>   meta/recipes-gnome/gtk+/gtk+.inc |   16 ++++++++++++++--
+>   1 files changed, 14 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta/recipes-gnome/gtk+/gtk+.inc b/meta/recipes-gnome/gtk+/gtk+.inc
+> index 39a4f4a..7fc55e2 100644
+> --- a/meta/recipes-gnome/gtk+/gtk+.inc
+> +++ b/meta/recipes-gnome/gtk+/gtk+.inc
+> @@ -12,11 +12,18 @@ SECTION = "libs"
+>
+>   X11DEPENDS = "virtual/libx11 libxext libxcursor libxrandr libxdamage libxrender libxcomposite"
+>   DEPENDS = "glib-2.0 pango atk jpeg libpng gtk-doc-native gdk-pixbuf-native docbook-utils-native \
+> -           libgcrypt cairo gdk-pixbuf ${X11DEPENDS}"
+> +           libgcrypt cairo gdk-pixbuf"
+> +
+> +PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+> +            ${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
+> +
+> +PACKAGECONFIG[x11] = "--with-x=yes --with-gdktarget=x11,--with-x=no,${X11DEPENDS}"
+> +PACKAGECONFIG[directfb] = "--with-gdktarget=directfb,,directfb"
+> +
+>
+This change with the change prior (Split X11 Dependencies) should be 1 
+commit, while below should be a second commit, you are still mixing 
+different items together in 1 commit.
 
--b
+>   inherit autotools pkgconfig
+>
+> -PACKAGES += "libgail"
+> +PACKAGES += "libgail gtk-demo"
+>
+>   FILES_${PN} = "${bindir}/gtk-update-icon-cache \
+>   	${bindir}/gtk-query-immodules-2.0 \
+> @@ -41,6 +48,11 @@ FILES_${PN}-dbg += " \
+>   	${libdir}/gtk-2.0/${LIBV}/engines/.debug/* \
+>   	${libdir}/gtk-2.0/${LIBV}/printbackends/.debug/*"
+>
+> +FILES_gtk-demo = " \
+> +         ${datadir}/gtk-2.0/demo/* \
+> +         ${bindir}/gtk-demo \
+> +         "
+> +
+This and the above PACKAGES += change should be in a separate commit 
+from the PACKAGECONFIG and DEPENDS changes above.
+
+Sau!
+
+>   FILES_libgail = " \
+>   	${libdir}/gtk-2.0/modules/libgail.so \
+>   	${libdir}/gtk-2.0/modules/libferret.so \
+
 
