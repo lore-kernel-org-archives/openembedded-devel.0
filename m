@@ -1,30 +1,23 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RXoiq-0005kd-Bm
+	(envelope-from <Xiaofeng.Yan@windriver.com>) id 1RXp9O-0006eJ-2V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 07:41:48 +0100
-Received: by yenq1 with SMTP id q1so1535146yen.6
+	Tue, 06 Dec 2011 08:09:14 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB672Qij008647
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2011 22:35:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=gWRbZNu+h3it3o6g3flagMR30eeAHrWE/ukEgaxUl5U=;
-	b=CAVpPjwAsQYPIU6MJZtLxLIzgwg8YMCklYEn19QuKADhDo6wXU/e6AtWVRTDeGc9vM
-	kcA0p9NorEpaL8TGLWw00y+kmiPsxIwQqzhmKFvgq3pV55sOQJ134CQH2vx7E9UqSyCe
-	CJHmNsV3a28BkM0JPZ+vRdnSjxMystmpWTKNs=
-Received: by 10.236.170.1 with SMTP id o1mr16827409yhl.16.1323153301055;
-	Mon, 05 Dec 2011 22:35:01 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id c44sm35733261yhm.5.2011.12.05.22.34.59
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 05 Dec 2011 22:35:00 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Dec 2011 22:34:56 -0800
-Message-Id: <1323153296-6790-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] eglibc-2.12: Fix build on powerpc
+	Mon, 5 Dec 2011 23:02:26 -0800 (PST)
+Received: from localhost (128.224.162.28) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
+	Mon, 5 Dec 2011 23:02:26 -0800
+Message-ID: <cover.1323141676.git.xiaofeng.yan@windriver.com>
+Old-Date: Tue, 6 Dec 2011 11:21:16 +0800
+Date: Tue, 6 Dec 2011 14:58:00 +0800
+To: <openembedded-devel@lists.openembedded.org>
+From: Xiaofeng Yan <xiaofeng.yan@windriver.com>
+MIME-Version: 1.0
+Subject: [OE-core][PATCH 00/10] gtk+-directfb: The patches to run gtk over directfb [YOCTO #1674]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,58 +31,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 06:41:48 -0000
+X-List-Received-Date: Tue, 06 Dec 2011 07:09:14 -0000
+Content-Type: text/plain
 
-After tune file rework this patch needed an update
-so here we come. Fixes the build for powerpc
+From: Xiaofeng Yan <xiaofeng.yan@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+I got many comments about previous submitting patches to run gtk+ over directfb. thank koen to give me many suggestions. The main problem query is as follow:
+Question:
+Why removing x11 for running gtk over directfb?  x11 doesn't infect directfb and they can co-exist in the same image. also if have x11 in image, it could be better in many respects.
+Answer:
+Yes, it is. Both x11 and directfb can co-exist in an image. gtk can run in an image including x11. I also test gtk over directfb in an image based on x11. it can work well.
+
+As far as I know many engineers make Directfb part of their product in embedded field. It is enough for person to finish their designing with directfb because they don't need complicated graphic and perhaps it is more important for them to save more memory.  So x11 is not neccessary in these products if have directfb.
+
+So removing x11 in an image based on directfb can meet some engineers' requirement. They can get this image without wasting too much time if they want to develop their product with Yocto.
+Also there is still no test program and application for directfb at current status. If have this image, directfb can be tested by directfb-example. gtk-demo based on directfb will be a good application.
+
+
+More description:
+x11 and directfb can't be set in DISTRO_FEATURES at the same time. They  are mutually exclusive in  DISTRO_FEATURES because gtk run over either  x11 or directfb in current version. But if x11 is defined in  DISTRO_FEATURES, then directfb can be compiled by other methods. for  example, directfb can be compiled by dependence relationships or be  included in a task list like task-core-sato.bb. They can  co-exist in an  image with above methods.
+
+Moore:
+X11 and directfb are exclusive since only one backend is enabled at a time. at 3.0 version of gtk they could co-exist by setting --enable-x11-backend and --enable-directfb-backend (Thank Phil ). So the configuration is either --with-gdktarget=x11 or --with-gdktarget=directfb at current version. I will modify configuration when gtk is updated to 3.0.  
+
+Pull URL: git://git.pokylinux.org/poky-contrib.git
+  Branch: xiaofeng/gtk-directfb
+  Browse: http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=xiaofeng/gtk-directfb
+
+Thanks,
+    Xiaofeng Yan <xiaofeng.yan@windriver.com>
 ---
- .../eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch   |   12 ++++++------
- meta-oe/recipes-core/eglibc/eglibc_2.12.bb         |    2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch b/meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
-index 5c90e5b..70d3aed 100644
---- a/meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
-+++ b/meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
-@@ -12,15 +12,15 @@ Upstream-Status: Inappropriate [OE config related]
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
--Index: libc/ports/sysdeps/powerpc/powerpc32/603e/Implies
-+Index: libc/ports/sysdeps/powerpc/powerpc32/603e/fpu/Implies
- ===================================================================
- --- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ libc/ports/sysdeps/powerpc/powerpc32/603e/Implies	2011-09-17 19:18:57.593292084 -0700
-++++ libc/ports/sysdeps/powerpc/powerpc32/603e/fpu/Implies	2011-12-05 22:18:14.151326027 -0800
- @@ -0,0 +1 @@
--+powerpc/powerpc32
--Index: libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/Implies
-++powerpc/powerpc32/fpu
-+Index: libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/fpu/Implies
- ===================================================================
- --- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/Implies	2011-09-17 19:17:48.613292100 -0700
-++++ libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/fpu/Implies	2011-12-05 22:16:11.751326040 -0800
- @@ -0,0 +1 @@
--+powerpc/powerpc32
-++powerpc/powerpc32/603e/fpu
-diff --git a/meta-oe/recipes-core/eglibc/eglibc_2.12.bb b/meta-oe/recipes-core/eglibc/eglibc_2.12.bb
-index 7ab8033..3509e8d 100644
---- a/meta-oe/recipes-core/eglibc/eglibc_2.12.bb
-+++ b/meta-oe/recipes-core/eglibc/eglibc_2.12.bb
-@@ -1,7 +1,7 @@
- require recipes-core/eglibc/eglibc.inc
- 
- DEPENDS += "gperf-native"
--PR = "r27"
-+PR = "r28"
- 
- SRCREV = "15872"
- 
--- 
-1.7.5.4
+
+Xiaofeng Yan (10):
+  qemu-config: Disable dbus-x11 when no x11 in DISTRO_FEATURES
+  gconf: Disable dbus-x11 when x11 isn't in DISTRO_FEATURES
+  gtk.inc: Split x11 dependency relationship from DEPENDS
+  gtk.inc: add feature based on directfb
+  gtk: add demos to the configuation of gtk+
+  cairo: add directfb DISTRO_FEATURE
+  pango: add directfb DISTRO_FEATURE
+  directfb-examples: add package directfb-examples to OE-core
+  task-core-gtk-directfb.bb: Add task list to run gtk over directfb
+  core-image-gtk-directfb.bb: add an image for gtk over directfb
+
+ meta/recipes-bsp/qemu-config/qemu-config.bb        |    4 +-
+ meta/recipes-gnome/gnome/gconf_3.2.3.bb            |    6 +++-
+ meta/recipes-gnome/gtk+/gtk+.inc                   |   21 +++++++++++++---
+ meta/recipes-gnome/gtk+/gtk+_2.24.8.bb             |    6 +++-
+ meta/recipes-graphics/cairo/cairo.inc              |    9 +++++-
+ .../directfb/directfb-examples_1.2.0.bb            |   20 +++++++++++++++
+ .../images/core-image-gtk-directfb.bb              |   21 ++++++++++++++++
+ meta/recipes-graphics/pango/pango.inc              |   20 ++++++++++++---
+ .../tasks/task-core-gtk-directfb.bb                |   26 ++++++++++++++++++++
+ 9 files changed, 117 insertions(+), 16 deletions(-)
+ create mode 100644 meta/recipes-graphics/directfb/directfb-examples_1.2.0.bb
+ create mode 100644 meta/recipes-graphics/images/core-image-gtk-directfb.bb
+ create mode 100644 meta/recipes-graphics/tasks/task-core-gtk-directfb.bb
 
 
 
