@@ -1,19 +1,29 @@
-Received: from smtp3-g21.free.fr ([212.27.42.3])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1RY2Lw-0003wN-Tr
+	(envelope-from <martin.jansa@gmail.com>) id 1RY2jV-0004PA-4i
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Dec 2011 22:15:13 +0100
-Received: from localhost.localdomain (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 647B6A6604;
-	Tue,  6 Dec 2011 22:07:36 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Tue, 06 Dec 2011 22:39:25 +0100
+Received: by wgbds11 with SMTP id ds11so5938413wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Dec 2011 13:32:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=mh8FqCJD9fYjrpPpB8p6jeisMUw+Q4Kf/KaQaw1EE1o=;
+	b=Rbcl8eToM0rJ95Muy0RbsZ6Smgmf74IbiLnjHiSS0RgGtBhiQxZtwwjbIRIr6VnH3Q
+	fbV2BffCmtCBsNxxxs5y6df0n+ugs4q4xzsBFQx54hjLtjo5bHAoJEAtlwk5pJ1i0aa1
+	ja2LDNVjwJQZNz0KwsSKAUE2MEIFhcRXPYnKw=
+Received: by 10.227.59.205 with SMTP id m13mr12432095wbh.28.1323207154391;
+	Tue, 06 Dec 2011 13:32:34 -0800 (PST)
+Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
+	hn15sm16680113wib.22.2011.12.06.13.32.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Dec 2011 13:32:33 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Dec 2011 22:07:30 +0100
-Message-Id: <1323205650-14903-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.6.4
-MIME-Version: 1.0
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe] xf86-input-tslib: fix checksum error
+Date: Tue,  6 Dec 2011 22:32:23 +0100
+Message-Id: <1323207144-440-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8
+Subject: [PATCH][meta-oe][meta-efl 1/2] e-tasks: fix for newer elementary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,45 +37,696 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2011 21:15:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Dec 2011 21:39:25 -0000
 
-remove name=3Darchive in SRC_URI in order to use the right checksum
-(else, we would need SRC_URI[archive.md5sum])
-
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../xorg-driver/xf86-input-tslib_0.0.6.bb          |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ .../e17/e-tasks/0001-adapt-to-newer-elm-API.patch  |  656 ++++++++++++++++++++
+ meta-efl/recipes-efl/e17/e-tasks_svn.bb            |    3 +-
+ 2 files changed, 658 insertions(+), 1 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0001-adapt-to-newer-elm-API.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.=
-bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-index de0eb6f..d00fb4e 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-@@ -10,13 +10,14 @@ LIC_FILES_CHKSUM =3D "file://src/tslib.c;endline=3D28=
-;md5=3Dbd62eaef222dcf5cd59e490a12
-=20
- PR =3D "${INC_PR}.1"
-=20
--SRC_URI =3D "http://www.pengutronix.de/software/xf86-input-tslib/downloa=
-d/xf86-input-tslib-${PV}.tar.bz2;name=3Darchive \
-+SRC_URI =3D "http://www.pengutronix.de/software/xf86-input-tslib/downloa=
-d/xf86-input-tslib-${PV}.tar.bz2 \
-            file://double-free-crash.patch \
-            file://10-x11-input-tslib.fdi \
-            file://xserver-174-XGetPointerControl.patch \
-            file://99-xf86-input-tslib.rules \
-            file://xf86-input-tslib-port-ABI-12-r48.patch \
- "
+diff --git a/meta-efl/recipes-efl/e17/e-tasks/0001-adapt-to-newer-elm-API.patch b/meta-efl/recipes-efl/e17/e-tasks/0001-adapt-to-newer-elm-API.patch
+new file mode 100644
+index 0000000..70fa169
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/e-tasks/0001-adapt-to-newer-elm-API.patch
+@@ -0,0 +1,656 @@
++From 1204c115e006b380c2c64452c9d35f0d695502fe Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Tue, 6 Dec 2011 19:07:56 +0100
++Subject: [PATCH] adapt to newer elm API
 +
- SRC_URI[md5sum] =3D "b7a4d2f11637ee3fcf432e044b1d017f"
- SRC_URI[sha256sum] =3D "5f46fdef095a6e44a69e0f0b57c7d665224b26d990d00661=
-1236d8332e85b105"
-=20
---=20
-1.7.6.4
++* sed 's/elm_button_label_set/elm_object_text_set/g' -i src/gui.c
++  sed 's/elm_button_label_set/elm_object_text_set/g' -i src/db_sqlite.c
++  sed 's/elm_label_label_set/elm_object_text_set/g' -i src/gui.c
++  sed 's/elm_button_icon_set/elm_object_content_set/g' -i src/gui.c
++  sed 's/elm_box_homogenous_set/elm_box_homogeneous_set/g' -i src/gui.c
++  sed 's/label_get/text_get/g' -i src/gui.c
++  sed 's/icon_get/content_get/g' -i src/gui.c
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ src/db_sqlite.c |   12 ++--
++ src/gui.c       |  138 +++++++++++++++++++++++++++---------------------------
++ 2 files changed, 75 insertions(+), 75 deletions(-)
++
++diff --git a/src/db_sqlite.c b/src/db_sqlite.c
++index dfee471..fde2181 100644
++--- a/src/db_sqlite.c
+++++ b/src/db_sqlite.c
++@@ -118,7 +118,7 @@ void restore_state(void)
++ 	if (db_ret == SQLITE_ROW) sprintf(sel_category, "%s", sqlite3_column_text(stmt, 0));
++ 	sqlite3_finalize(stmt);
++ 	if(strcmp(sel_category, "")== 0) strcpy(sel_category, " All Tasks ");
++-	elm_button_label_set(sel_cat_bt, sel_category);
+++	elm_object_text_set(sel_cat_bt, sel_category);
++ 	load_data ();
++ }
++ 
++@@ -232,7 +232,7 @@ void add_hs_items(Evas_Object *win, Evas_Object *bx, Evas_Object *bt, int i)
++ 	if (i) {
++ 		sprintf(cate, " All Tasks ");
++ 		bt = elm_button_add(win);
++-		elm_button_label_set(bt,cate);
+++		elm_object_text_set(bt,cate);
++ 		elm_box_pack_end(bx, bt);
++ 		tystr = strdup(cate);
++ 		evas_object_smart_callback_add(bt, "clicked", select_category, (char *)tystr);
++@@ -240,7 +240,7 @@ void add_hs_items(Evas_Object *win, Evas_Object *bx, Evas_Object *bt, int i)
++ 
++ 		sprintf(cate, "Deleted");
++ 		bt = elm_button_add(win);
++-		elm_button_label_set(bt,cate);
+++		elm_object_text_set(bt,cate);
++ 		elm_box_pack_end(bx, bt);
++ 		tystr = strdup(cate);
++ 		evas_object_smart_callback_add(bt, "clicked", select_category, (char *)tystr);
++@@ -248,7 +248,7 @@ void add_hs_items(Evas_Object *win, Evas_Object *bx, Evas_Object *bt, int i)
++ 
++ 		sprintf(cate, "Edit Categories");
++ 		bt = elm_button_add(win);
++-		elm_button_label_set(bt,cate);
+++		elm_object_text_set(bt,cate);
++ 		elm_box_pack_end(bx, bt);
++ 		tystr = strdup(cate);
++ 		evas_object_smart_callback_add(bt, "clicked", select_category, (char *)tystr);
++@@ -264,7 +264,7 @@ void add_hs_items(Evas_Object *win, Evas_Object *bx, Evas_Object *bt, int i)
++ 		sprintf(cate, "%s", sqlite3_column_text(stmt, 0));
++ 		if (i) {
++ 			bt = elm_button_add(win);
++-			elm_button_label_set(bt,cate);
+++			elm_object_text_set(bt,cate);
++ 			elm_box_pack_end(bx, bt);
++ 			tystr = strdup(cate);
++ 			evas_object_smart_callback_add(bt, "clicked", select_category, (char *)tystr);
++@@ -272,7 +272,7 @@ void add_hs_items(Evas_Object *win, Evas_Object *bx, Evas_Object *bt, int i)
++ 		}
++ 		else {
++ 			bt = elm_button_add(win);
++-			elm_button_label_set(bt, cate);
+++			elm_object_text_set(bt, cate);
++ 			elm_box_pack_end(bx, bt);
++ 			tystr = strdup(cate);
++ 			evas_object_smart_callback_add(bt, "clicked", set_category, (char *)tystr);
++diff --git a/src/gui.c b/src/gui.c
++index 113c807..5c8003c 100644
++--- a/src/gui.c
+++++ b/src/gui.c
++@@ -51,11 +51,11 @@ void select_category(void *data, Evas_Object *obj, void *event_info)
++ 		return;
++ 	}
++ 	if(strcmp(cat, "Deleted") ==0) {
++-		elm_button_label_set(new_button, "Purge");
+++		elm_object_text_set(new_button, "Purge");
++ 	}
++-	else  elm_button_label_set(new_button, "Add");
+++	else  elm_object_text_set(new_button, "Add");
++ 
++-	elm_button_label_set(sel_cat_bt, cat);
+++	elm_object_text_set(sel_cat_bt, cat);
++ 	strcpy(sel_category, cat);
++ 	elm_genlist_clear(list);
++ 	last_rec = -1;
++@@ -92,10 +92,10 @@ void select_category(void *data, Evas_Object *obj, void *event_info)
++ 	item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(li);
++ 	tsk = (_Task *)elm_genlist_item_data_get(item);
++ 	last_rec = tsk->no;
++-	elm_button_label_set(cat_bt, tsk->cat);
+++	elm_object_text_set(cat_bt, tsk->cat);
++ 	sprintf(tystr, "%d", tsk->pr);
++-	elm_button_label_set(pr_bt, tystr);
++-	elm_button_label_set(date_bt, tsk->date);
+++	elm_object_text_set(pr_bt, tystr);
+++	elm_object_text_set(date_bt, tsk->date);
++ 	elm_entry_entry_set(tk, tsk->text);
++ 	if (strcmp(tsk->text, "Task") == 0) elm_entry_select_all(tk);
++ }
++@@ -109,7 +109,7 @@ void set_priority(void *data, Evas_Object *obj, void *event_info)
++ 	char *prio = (char *)data;
++ 	ty = atoi(prio);
++ 	sprintf(tystr, "%d", ty);
++-	elm_button_label_set(pr_bt, tystr);
+++	elm_object_text_set(pr_bt, tystr);
++ 	
++ 	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++ 	evas_object_hide(hv);
++@@ -134,7 +134,7 @@ void set_category(void *data, Evas_Object *obj, void *event_info)
++ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
++ 	if (strcmp(tsk->cat, category) == 0) return;
++ 	strcpy(tsk->cat, category);
++-	elm_button_label_set(cat_bt, category);
+++	elm_object_text_set(cat_bt, category);
++ 	WRITE = 1;
++     if (strcmp(sel_category, " All Tasks ") !=0 &&
++         strcmp(sel_category, category) != 0) elm_genlist_item_del(item);
++@@ -144,7 +144,7 @@ void set_date(void *data, Evas_Object *obj, void *event_info)
++ {
++ 	char *dt = (char *)data;
++ 	//set the date
++-	elm_button_label_set(date_bt, dt);
+++	elm_object_text_set(date_bt, dt);
++ 	evas_object_hide(date_hs);
++ 	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++ 	if (!item) {
++@@ -185,7 +185,7 @@ void add_dates(Evas_Object *win, Evas_Object *bx, Evas_Object *bt)
++ 	
++ 	sprintf(dt, "No Date");
++ 	bt = elm_button_add(win);
++-	elm_button_label_set(bt,dt);
+++	elm_object_text_set(bt,dt);
++ 	elm_box_pack_end(bx, bt);
++ 	tystr = strdup(dt);
++ 	evas_object_smart_callback_add(bt, "clicked", set_date, (char *)tystr);
++@@ -197,7 +197,7 @@ void add_dates(Evas_Object *win, Evas_Object *bx, Evas_Object *bt)
++ 		strftime(dt, 6, "%d-%m", loctime);
++ 		//sprintf(dt, " All Tasks ");
++ 		bt = elm_button_add(win);
++-		elm_button_label_set(bt,dt);
+++		elm_object_text_set(bt,dt);
++ 		elm_box_pack_end(bx, bt);
++ 		tystr = strdup(dt);
++ 		evas_object_smart_callback_add(bt, "clicked", set_date, (char *)tystr);
++@@ -206,7 +206,7 @@ void add_dates(Evas_Object *win, Evas_Object *bx, Evas_Object *bt)
++ 	
++ 	sprintf(dt, "Calendar");
++ 	bt = elm_button_add(win);
++-	elm_button_label_set(bt,dt);
+++	elm_object_text_set(bt,dt);
++ 	elm_box_pack_end(bx, bt);
++ 	tystr = strdup(dt);
++ 	evas_object_smart_callback_add(bt, "clicked", set_date, (char *)tystr);
++@@ -221,7 +221,7 @@ void set_create_date(void *data, Evas_Object *obj, void *event_info)
++ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(det->item);
++ 	strcpy(tsk->date, det->data);
++ 	//update button label
++-	elm_button_label_set(det->button, det->data);
+++	elm_object_text_set(det->button, det->data);
++ 	WRITE = 1;
++ }
++ 
++@@ -233,7 +233,7 @@ void set_create_priority(void *data, Evas_Object *obj, void *event_info)
++ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(det->item);
++ 	tsk->pr = atoi(det->data);
++ 	//update button label
++-	elm_button_label_set(det->button, det->data);
+++	elm_object_text_set(det->button, det->data);
++ 	WRITE = 1;
++ }
++ 
++@@ -320,14 +320,14 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label to frame
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Edit Task Details");
+++	elm_object_text_set(lb,"Edit Task Details");
++ 	evas_object_size_hint_align_set(lb, 0.5, -1.0);
++ 	elm_frame_content_set(fr, lb);
++ 	evas_object_show(lb);
++ 
++ 	//add a label 
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Task:");
+++	elm_object_text_set(lb,"Task:");
++ 	evas_object_size_hint_align_set(lb, 1.0, 0.5);
++  	elm_table_pack(tb, lb, 0, 1, 1, 1);
++ 	evas_object_show(lb);
++@@ -343,7 +343,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label to hbox
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Priority:");
+++	elm_object_text_set(lb,"Priority:");
++ 	evas_object_size_hint_align_set(lb, 1.0, 0.5);
++  	elm_table_pack(tb, lb, 0, 2, 1, 1);
++ 	evas_object_show(lb);
++@@ -357,7 +357,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	c_pr_bt = elm_button_add(det_page);
++ 	sprintf(no, "%d", tsk->pr);
++-	elm_button_label_set(c_pr_bt, no);
+++	elm_object_text_set(c_pr_bt, no);
++ 	evas_object_smart_callback_add(c_pr_bt, "clicked", my_hover_bt_1, det_hv);
++ 	elm_box_pack_end(bx, c_pr_bt);
++ 	evas_object_show(c_pr_bt);
++@@ -365,7 +365,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	elm_hover_target_set(det_hv, c_pr_bt);
++ 
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt, "Pr");
+++	elm_object_text_set(bt, "Pr");
++ 	elm_hover_content_set(det_hv, "middle", bt);
++ 	evas_object_show(bt);
++ 
++@@ -377,7 +377,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 		det[i].button = c_pr_bt;
++ 		bt = elm_button_add(det_page);
++ 		sprintf(no, "%d", i);
++-		elm_button_label_set(bt, no);
+++		elm_object_text_set(bt, no);
++ 		elm_box_pack_end(bx, bt);
++ 		det[i].data = strdup(no);
++ 		evas_object_smart_callback_add(bt, "clicked", set_create_priority, &det[i]);
++@@ -388,7 +388,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label to hbox
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Category:");
+++	elm_object_text_set(lb,"Category:");
++ 	evas_object_size_hint_align_set(lb, 1.0, 0.5);
++  	elm_table_pack(tb, lb, 0, 3, 1, 1);
++ 	evas_object_show(lb);
++@@ -400,7 +400,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_show(bx);
++ 
++ 	cat_bt = elm_button_add(det_page);
++-	elm_button_label_set(cat_bt, tsk->cat);
+++	elm_object_text_set(cat_bt, tsk->cat);
++ 	evas_object_smart_callback_add(cat_bt, "clicked", my_hover_bt_1, hs);
++ 	elm_box_pack_end(bx, cat_bt);
++ 	evas_object_show(cat_bt);
++@@ -408,7 +408,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	elm_hover_target_set(hs, cat_bt);
++ 
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt, "Category");
+++	elm_object_text_set(bt, "Category");
++ 	elm_hover_content_set(hs, "middle", bt);
++ 	evas_object_show(bt);
++ 
++@@ -420,7 +420,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label to hbox
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb, "Date:");
+++	elm_object_text_set(lb, "Date:");
++ 	evas_object_size_hint_align_set(lb, 1.0, 0.5);
++  	elm_table_pack(tb, lb, 0, 4, 1, 1);
++ 	evas_object_show(lb);
++@@ -433,7 +433,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_show(bx);
++ 
++ 	c_date_bt = elm_button_add(det_page);
++-	elm_button_label_set(c_date_bt, tsk->date);
+++	elm_object_text_set(c_date_bt, tsk->date);
++ 	evas_object_smart_callback_add(c_date_bt, "clicked", my_hover_bt_1, c_date_hs);
++ 	elm_box_pack_end(bx, c_date_bt);
++ 	evas_object_show(c_date_bt);
++@@ -441,7 +441,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	elm_hover_target_set(c_date_hs, c_date_bt);
++ 
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt, "Date");
+++	elm_object_text_set(bt, "Date");
++ 	elm_hover_content_set(c_date_hs, "middle", bt);
++ 	evas_object_show(bt);
++ 
++@@ -453,7 +453,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	det[6].button = c_date_bt;
++ 	sprintf(dt, "No Date");
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt,dt);
+++	elm_object_text_set(bt,dt);
++ 	elm_box_pack_end(bx, bt);
++ 	det[6].data = strdup(dt);
++ 	evas_object_smart_callback_add(bt, "clicked", set_create_date, &det[6]);
++@@ -467,7 +467,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 		loctime = localtime (&tm);
++ 		strftime(dt, 7, "%d-%m", loctime);
++ 		bt = elm_button_add(det_page);
++-		elm_button_label_set(bt,dt);
+++		elm_object_text_set(bt,dt);
++ 		elm_box_pack_end(bx, bt);
++ 		det[7+i].data = strdup(dt);
++ 		evas_object_smart_callback_add(bt, "clicked", set_create_date, &det[7+i]);
++@@ -479,7 +479,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	det[14].button = c_date_bt;
++ 	sprintf(dt, "Calendar");
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt,dt);
+++	elm_object_text_set(bt,dt);
++ 	elm_box_pack_end(bx, bt);
++ 	det[14].data = strdup(dt);
++ 	evas_object_smart_callback_add(bt, "clicked", set_create_date, &det[14]);
++@@ -490,7 +490,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label 
++ 	lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Note:");
+++	elm_object_text_set(lb,"Note:");
++ 	evas_object_size_hint_align_set(lb, 1.0, 0.5);
++  	elm_table_pack(tb, lb, 0, 5, 1, 1);
++ 	evas_object_show(lb);
++@@ -509,7 +509,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_show(note_entry);
++ 
++ 	/*lb = elm_label_add(det_page);
++-	elm_label_label_set(lb,"Note:");
+++	elm_object_text_set(lb,"Note:");
++  	elm_table_pack(tb, lb, 1, 5, 2, 1);
++ 	evas_object_show(lb);*/
++ 	
++@@ -523,7 +523,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	
++ 	//add done button
++ 	bt_done = elm_button_add(det_page);
++-	elm_button_label_set(bt_done, "Done");
+++	elm_object_text_set(bt_done, "Done");
++ 	evas_object_size_hint_weight_set(bt_done, 1.0, 0.0);
++ 	evas_object_size_hint_align_set(bt_done, -1.0, -1.0);
++  	elm_table_pack(tb, bt_done, 0, 7, 1, 1);
++@@ -532,7 +532,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	
++ 	//add del button
++ 	bt = elm_button_add(det_page);
++-	elm_button_label_set(bt, "Delete");
+++	elm_object_text_set(bt, "Delete");
++ 	evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++  	elm_table_pack(tb, bt, 1, 7, 1, 1);
++@@ -543,7 +543,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	//bt = elm_button_add(det_page);
++ 	//evas_object_size_hint_weight_set(bt, 1.0, 1.0);
++ 	//evas_object_size_hint_align_set(bt, -1.0, -1.0);
++-	//elm_button_label_set(bt, "Note");
+++	//elm_object_text_set(bt, "Note");
++ 	//elm_box_pack_end(hbox1, bt);
++ 	//evas_object_show(bt);
++ 	//evas_object_smart_callback_add(bt, "clicked", det_page_add, entry);
++@@ -552,7 +552,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
++ 	bt = elm_button_add(det_page);
++ 	evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++-	elm_button_label_set(bt, "Cancel");
+++	elm_object_text_set(bt, "Cancel");
++  	elm_table_pack(tb, bt, 2, 7, 1, 1);
++ 	evas_object_show(bt);
++ 	evas_object_smart_callback_add(bt, "clicked", cat_win_del, det_page);
++@@ -674,7 +674,7 @@ void note_button_clicked(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_size_hint_align_set(bx2, -1.0, -1.0);
++ 
++ 	bt = elm_button_add(note_win);
++-	elm_button_label_set(bt, "Clear");
+++	elm_object_text_set(bt, "Clear");
++ 	evas_object_smart_callback_add(bt, "clicked", note_clear, en);
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++ 	evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++@@ -682,7 +682,7 @@ void note_button_clicked(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_show(bt);
++ 
++ 	//bt = elm_button_add(note_win);
++-	//elm_button_label_set(bt, "Save");
+++	//elm_object_text_set(bt, "Save");
++ 	//evas_object_smart_callback_add(bt, "clicked", my_entry_bt_2, en);
++ 	//evas_object_size_hint_align_set(bt, -1.0, -1.0);
++ 	//evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++@@ -690,7 +690,7 @@ void note_button_clicked(void *data, Evas_Object *obj, void *event_info)
++ 	//evas_object_show(bt);
++ 
++ 	bt = elm_button_add(note_win);
++-	elm_button_label_set(bt, "Cancel");
+++	elm_object_text_set(bt, "Cancel");
++ 	evas_object_smart_callback_add(bt, "clicked", cat_win_del, note_win);
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++ 	evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++@@ -698,7 +698,7 @@ void note_button_clicked(void *data, Evas_Object *obj, void *event_info)
++ 	evas_object_show(bt);
++ 
++ 	bt = elm_button_add(note_win);
++-	elm_button_label_set(bt, "Done");
+++	elm_object_text_set(bt, "Done");
++ 	evas_object_smart_callback_add(bt, "clicked", note_done, en);
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++ 	evas_object_size_hint_weight_set(bt, 1.0, 0.0);
++@@ -728,7 +728,7 @@ void create_cat_hover(void)
++ //for genlist
++ Elm_Genlist_Item_Class itc1;
++ 
++-char *gl_label_get(const void *data, Evas_Object *obj, const char *part)
+++char *gl_text_get(const void *data, Evas_Object *obj, const char *part)
++ {
++ 	_Task *tsk = (_Task *)data;
++ 	char tystr[255], *ty;
++@@ -739,7 +739,7 @@ char *gl_label_get(const void *data, Evas_Object *obj, const char *part)
++ 	//return NULL;
++ }
++ 
++-Evas_Object *gl_icon_get(const void *data, Evas_Object *obj, const char *part)
+++Evas_Object *gl_content_get(const void *data, Evas_Object *obj, const char *part)
++ {
++ 	_Task *tsk = (_Task *)data;
++ 	
++@@ -759,7 +759,7 @@ Evas_Object *gl_icon_get(const void *data, Evas_Object *obj, const char *part)
++ 		//add a label for priority
++ 		sprintf(txt, "%d", tsk->pr);
++ 		pr_lb = elm_label_add(obj);
++-		elm_label_label_set(pr_lb, txt);
+++		elm_object_text_set(pr_lb, txt);
++ 		elm_box_pack_end(bx, pr_lb);
++ 		evas_object_show(pr_lb);   
++ 		evas_object_show(bx);
++@@ -812,7 +812,7 @@ Evas_Object *gl_icon_get(const void *data, Evas_Object *obj, const char *part)
++ 		}
++ 
++ 		lb_date = elm_label_add(obj);
++-		elm_label_label_set(lb_date, tsk->date);
+++		elm_object_text_set(lb_date, tsk->date);
++ 		elm_box_pack_end(bx, lb_date);
++ 		evas_object_size_hint_weight_set(lb_date, 0.0, 0.0);
++ 		evas_object_size_hint_align_set(lb_date, 1.0, 0.5);
++@@ -871,7 +871,7 @@ void create_gui(Evas_Object *win)
++ 	evas_object_show(bx);
++ 
++ 	pr_bt = elm_button_add(win);
++-	elm_button_label_set(pr_bt, "Pr");
+++	elm_object_text_set(pr_bt, "Pr");
++ 	evas_object_smart_callback_add(pr_bt, "clicked", my_hover_bt_1, hv);
++ 	elm_box_pack_end(bx, pr_bt);
++ 	evas_object_show(pr_bt);
++@@ -879,7 +879,7 @@ void create_gui(Evas_Object *win)
++ 	elm_hover_target_set(hv, pr_bt);
++ 
++ 	bt = elm_button_add(win);
++-	elm_button_label_set(bt, "Pr");
+++	elm_object_text_set(bt, "Pr");
++ 	elm_hover_content_set(hv, "middle", bt);
++ 	evas_object_show(bt);
++ 
++@@ -888,7 +888,7 @@ void create_gui(Evas_Object *win)
++ 	for (i=1; i<6; i++) {
++ 		bt = elm_button_add(win);
++ 		sprintf(no, "%d", i);
++-		elm_button_label_set(bt, no);
+++		elm_object_text_set(bt, no);
++ 		elm_box_pack_end(bx, bt);
++ 		tystr = strdup(no);
++ 		evas_object_smart_callback_add(bt, "clicked", set_priority, (char *)tystr);
++@@ -925,7 +925,7 @@ void create_gui(Evas_Object *win)
++ 	evas_object_show(bx1);
++ 
++ 	date_bt = elm_button_add(win);
++-	elm_button_label_set(date_bt, "Date");
+++	elm_object_text_set(date_bt, "Date");
++ 	evas_object_smart_callback_add(date_bt, "clicked", my_hover_bt_1, date_hs);
++ 	elm_box_pack_end(bx1, date_bt);
++ 	evas_object_show(date_bt);
++@@ -933,7 +933,7 @@ void create_gui(Evas_Object *win)
++ 	elm_hover_target_set(date_hs, date_bt);
++ 
++ 	bt = elm_button_add(win);
++-	elm_button_label_set(bt, "Date");
+++	elm_object_text_set(bt, "Date");
++ 	elm_hover_content_set(date_hs, "middle", bt);
++ 	evas_object_show(bt);
++ 
++@@ -944,7 +944,7 @@ void create_gui(Evas_Object *win)
++ 
++ 	//add save button
++ 	save_button = elm_button_add(win);
++-	elm_button_label_set(save_button, "Save");
+++	elm_object_text_set(save_button, "Save");
++ 	evas_object_size_hint_weight_set(save_button, 0.0, 0.0);
++ 	evas_object_size_hint_align_set(save_button, 1.0, -1.0);
++ 	elm_box_pack_end(hbox, save_button);
++@@ -963,8 +963,8 @@ void create_gui(Evas_Object *win)
++ 
++ 	//genlist class defs
++ 	itc1.item_style     	= "default";
++-	itc1.func.label_get 	= gl_label_get;
++-	itc1.func.icon_get  	= gl_icon_get;
+++	itc1.func.text_get 	= gl_text_get;
+++	itc1.func.content_get  	= gl_content_get;
++ 	itc1.func.state_get 	= gl_state_get;
++ 	itc1.func.del      		= gl_del;
++ 
++@@ -978,7 +978,7 @@ void create_gui(Evas_Object *win)
++ 
++ 	//add new button to the hbox
++ 	new_button = elm_button_add(win);
++-	elm_button_label_set(new_button, "Add");
+++	elm_object_text_set(new_button, "Add");
++ 	evas_object_size_hint_weight_set(new_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(new_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox1, new_button);
++@@ -987,7 +987,7 @@ void create_gui(Evas_Object *win)
++ 
++ 	//add Properties button to the hbox
++ 	prop_button = elm_button_add(win);
++-	elm_button_label_set(prop_button, "Details");
+++	elm_object_text_set(prop_button, "Details");
++ 	evas_object_size_hint_weight_set(prop_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(prop_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox1, prop_button);
++@@ -1000,9 +1000,9 @@ void create_gui(Evas_Object *win)
++ 	snprintf(buf, sizeof(buf), "/usr/share/e-tasks/note_butt.png");
++ 	elm_icon_file_set(ic, buf, NULL);
++ 	evas_object_size_hint_aspect_set(ic, EVAS_ASPECT_CONTROL_VERTICAL, 1, 1);
++-	elm_button_icon_set(note_button, ic);
+++	elm_object_content_set(note_button, ic);
++ 	evas_object_show(ic);
++-	//elm_button_label_set(note_button, "Note");
+++	//elm_object_text_set(note_button, "Note");
++ 	evas_object_size_hint_weight_set(note_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(note_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox1, note_button);
++@@ -1018,7 +1018,7 @@ void create_gui(Evas_Object *win)
++ 	evas_object_show(bx);
++ 
++ 	sel_cat_bt = elm_button_add(win);
++-	elm_button_label_set(sel_cat_bt, " All Tasks ");
+++	elm_object_text_set(sel_cat_bt, " All Tasks ");
++ 	evas_object_smart_callback_add(sel_cat_bt, "clicked", my_hover_bt_1, hs1);
++ 	elm_box_pack_end(bx, sel_cat_bt);
++ 	evas_object_show(sel_cat_bt);
++@@ -1026,7 +1026,7 @@ void create_gui(Evas_Object *win)
++ 	elm_hover_target_set(hs1, sel_cat_bt);
++ 
++ 	bt = elm_button_add(win);
++-	elm_button_label_set(bt, " All Tasks ");
+++	elm_object_text_set(bt, " All Tasks ");
++ 	elm_hover_content_set(hs1, "middle", bt);
++ 	evas_object_show(bt);
++ 	create_cat_hover ();
++@@ -1131,7 +1131,7 @@ void create_cat_dialog(void *data, Evas_Object *obj, void *event_info)
++ 
++ 	//add a label to hbox
++ 	lb = elm_label_add(cat_dialog);
++-	elm_label_label_set(lb,"Category:");
+++	elm_object_text_set(lb,"Category:");
++ 	elm_box_pack_end(hbox, lb);
++ 	evas_object_show(lb);
++ 
++@@ -1149,13 +1149,13 @@ void create_cat_dialog(void *data, Evas_Object *obj, void *event_info)
++ 	//add another hbox
++ 	hbox1 = elm_box_add(cat_dialog);
++ 	elm_box_horizontal_set(hbox1, 1);
++-	elm_box_homogenous_set(hbox1, 1);
+++	elm_box_homogeneous_set(hbox1, 1);
++ 	elm_box_pack_end(vbox, hbox1);
++ 	evas_object_show(hbox1);
++ 	
++ 	//add yes button
++ 	bt = elm_button_add(cat_dialog);
++-	elm_button_label_set(bt, "Add");
+++	elm_object_text_set(bt, "Add");
++ 	evas_object_size_hint_align_set(bt, -1.0, -1.0);
++ 	elm_box_pack_end(hbox1, bt);
++ 	evas_object_show(bt);
++@@ -1163,7 +1163,7 @@ void create_cat_dialog(void *data, Evas_Object *obj, void *event_info)
++ 	
++ 	//add close button
++ 	bt1 = elm_button_add(cat_dialog);
++-	elm_button_label_set(bt1, "Cancel");
+++	elm_object_text_set(bt1, "Cancel");
++ 	elm_box_pack_end(hbox1, bt1);
++ 	evas_object_show(bt1);
++ 	evas_object_smart_callback_add(bt1, "clicked", cat_win_del, cat_dialog);
++@@ -1203,14 +1203,14 @@ void  del_cat_button_clicked(void *data, Evas_Object *obj, void *event_info)
++ 	if(strcmp(sel_category, _cat) == 0) select_category (" All Tasks ", NULL, NULL);
++ }
++ 
++-char *cat_label_get(const void *data, Evas_Object *obj, const char *part)
+++char *cat_text_get(const void *data, Evas_Object *obj, const char *part)
++ {
++ 	char *_cat = (char *)data;
++ 	char *ty = strdup(_cat);
++ 	return (ty);
++ }
++ 
++-Evas_Object *cat_icon_get(const void *data, Evas_Object *obj, const char *part)
+++Evas_Object *cat_content_get(const void *data, Evas_Object *obj, const char *part)
++ {
++ 	return NULL;
++ }
++@@ -1262,7 +1262,7 @@ void edit_cat(void)
++ 
++ 	// add a label
++ 	lb = elm_label_add(cat_win);
++-	elm_label_label_set(lb, "Task Categories");
+++	elm_object_text_set(lb, "Task Categories");
++ 	elm_frame_content_set(fr, lb);
++ 	evas_object_show(lb);  
++ 	
++@@ -1277,8 +1277,8 @@ void edit_cat(void)
++ 
++ 	//genlist class defs
++ 	itc2.item_style     		= "default";
++-	itc2.func.label_get 	= cat_label_get;
++-	itc2.func.icon_get  	= cat_icon_get;
+++	itc2.func.text_get 	= cat_text_get;
+++	itc2.func.content_get  	= cat_content_get;
++ 	itc2.func.state_get 	= cat_state_get;
++ 	itc2.func.del      		= cat_del;
++ 	
++@@ -1292,7 +1292,7 @@ void edit_cat(void)
++ 	
++ 	//add button to add categories
++ 	add_cat_button = elm_button_add(cat_win);
++-	elm_button_label_set(add_cat_button, "Add");
+++	elm_object_text_set(add_cat_button, "Add");
++ 	evas_object_size_hint_weight_set(add_cat_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(add_cat_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox, add_cat_button);
++@@ -1301,7 +1301,7 @@ void edit_cat(void)
++ 	
++ 	//add button to del categories
++ 	del_cat_button = elm_button_add(cat_win);
++-	elm_button_label_set(del_cat_button, "Delete");
+++	elm_object_text_set(del_cat_button, "Delete");
++ 	evas_object_size_hint_weight_set(del_cat_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(del_cat_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox, del_cat_button);
++@@ -1310,7 +1310,7 @@ void edit_cat(void)
++ 
++ 	//add done button
++ 	done_button = elm_button_add(cat_win);
++-	elm_button_label_set(done_button, "Done");
+++	elm_object_text_set(done_button, "Done");
++ 	evas_object_size_hint_weight_set(done_button, 1.0, 1.0);
++ 	evas_object_size_hint_align_set(done_button, -1.0, -1.0);
++ 	elm_box_pack_end(hbox, done_button);
++-- 
++1.7.8
++
+diff --git a/meta-efl/recipes-efl/e17/e-tasks_svn.bb b/meta-efl/recipes-efl/e17/e-tasks_svn.bb
+index b79353b..b07959b 100644
+--- a/meta-efl/recipes-efl/e17/e-tasks_svn.bb
++++ b/meta-efl/recipes-efl/e17/e-tasks_svn.bb
+@@ -10,10 +10,11 @@ inherit autotools
+ 
+ SRCREV = "25"
+ PV = "0.0.1+svnr${SRCPV}"
+-PR = "r9"
++PR = "r10"
+ 
+ SRC_URI = "svn://e-tasks.googlecode.com/svn;module=trunk;proto=http \
+            file://genlist_item_insert_before.api.patch \
++           file://0001-adapt-to-newer-elm-API.patch \
+            file://depends.eina.patch"
+ S = "${WORKDIR}/trunk"
+ 
+-- 
+1.7.8
 
 
 
