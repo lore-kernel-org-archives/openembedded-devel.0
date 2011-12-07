@@ -1,32 +1,37 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RYPhc-0003tO-9d
+	(envelope-from <raj.khem@gmail.com>) id 1RYPut-0004DQ-Gy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 23:11:01 +0100
-Received: by dake40 with SMTP id e40so942715dak.6
+	Wed, 07 Dec 2011 23:24:43 +0100
+Received: by iadj38 with SMTP id j38so1540146iad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 14:04:10 -0800 (PST)
+	Wed, 07 Dec 2011 14:17:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=wnfeEf9RQA7bduKBxk4oFAf9NvAyd7baxbFjSwvwpDE=;
-	b=L/1VW5YZUraQbRKraOvqSrRQf2SXYrPEj8PPrvWpdkHJueBIFCfyRuoaPcvgELUxkP
-	NMYZoOMRWA6aVTHtgemSzmcEdz2KjQ4oz9DNZ6CkwMoobvoTvZBJTsfS0cNWJgvDYPw6
-	olWTSVIlkGryAS+zxznOUgQP4kPqhD9TCQ43I=
-MIME-Version: 1.0
-Received: by 10.68.72.104 with SMTP id c8mr9287748pbv.34.1323295449798; Wed,
-	07 Dec 2011 14:04:09 -0800 (PST)
-Received: by 10.142.139.19 with HTTP; Wed, 7 Dec 2011 14:04:09 -0800 (PST)
-In-Reply-To: <CAMKF1srmkneQQ8UaD3z=N53jDQNyzWTCA2sxTEs3ZOSns3c5KA@mail.gmail.com>
-References: <4EAC296D.8040403@telia.com>
-	<CA+M6bXnq6jfhyZ+6nRB3GDqoRv3oa=m-xcht8xrAYV_7aeVzkA@mail.gmail.com>
-	<CAAQYJAucXepsfHvxSkJyvsEnv4Eid6yu3NxPgMfk5QrNb4t=mw@mail.gmail.com>
-	<CAMKF1srmkneQQ8UaD3z=N53jDQNyzWTCA2sxTEs3ZOSns3c5KA@mail.gmail.com>
-Date: Wed, 7 Dec 2011 23:04:09 +0100
-Message-ID: <CAAQYJAuEvxc1ZwoxUB4GY5v4EPxUi3B4iCiFWWBpVM6mkX=5CA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=pBtNa0MAG0+JFglkpeDK+tVoDICA2VGb95hhBMR0YB0=;
+	b=jxGeHWVh/qN8kKPemqfkg8ECkgvj0b+uSMPVVrNkkMgFP6Cd34ds4AMf/QjqRxzu09
+	GdAibKOsw1RfR6Gx5rHMLhtXpcfxUOqlieoUutRFKFPfo8+mtl+EFGqzPC66qV4tC88Q
+	GXE4AB4w6FV88VelGLqrcBwu3qy2/fjg5/1dY=
+Received: by 10.43.53.1 with SMTP id vo1mr1004379icb.2.1323296272439;
+	Wed, 07 Dec 2011 14:17:52 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id cz1sm11328314ibb.11.2011.12.07.14.17.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Dec 2011 14:17:51 -0800 (PST)
+Date: Wed, 7 Dec 2011 14:17:24 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Adding sumtool to a JFFS2 build to speed up first boot
+Message-ID: <20111207221724.GA7003@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<alpine.LNX.2.02.1111281842480.1090@myhost>
+	<CAOAMawF_Y=tw_R_on3rzjwB4UteGCi4Ff9dKU22ke_=hAO=MKA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOAMawF_Y=tw_R_on3rzjwB4UteGCi4Ff9dKU22ke_=hAO=MKA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,65 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 22:11:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Dec 2011 22:24:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Nov 23, 2011 at 9:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Sat, Oct 29, 2011 at 2:27 PM, Andrea Adami <andrea.adami@gmail.com> wr=
-ote:
->> On Sat, Oct 29, 2011 at 7:14 PM, Tom Rini <tom.rini@gmail.com> wrote:
->>
->>> On Sat, Oct 29, 2011 at 9:27 AM, Ulf Samuelsson
->>> <ulf_samuelsson@telia.com> wrote:
->>> > Trying to solve another problem I came up with
->>> > changing IMAGE_CMD_jffs2 defined in conf/bitbake.conf
->>> > by redefining it in conf/local.conf.
->>> >
->>> > During that process I noticed the "sumtool" utility
->>> > which works on the jffs2 image, doing some
->>> > bookkeeping which then does not have to be
->>> > done on the target.
->>> >
->>> > I unserstand, this can speed up loading significantly.
->>> > Any reason not using this in OE?
->>>
->>> Last time I looked at this, the reason was that you had to re-jigger
->>> the IMAGE_CMD a bit and you also have to take care as not all of the
->>> options are the same between mkfs.jffs2 and sumtool. =A0At least the
->>> first part might be easier with oe-core and the reworked image class.
->>> The latter part is just annoying.
->>>
->>> --
->>> Tom
->>>
->>> FWIW we are defining our jffs2-summary in
->> http://cgit.openembedded.org/meta-handheld/tree/conf/machine/include/zau=
-rus.inc
->>
->> This works beautifully in oe-dev but not using oe-core for it sets
->> IMAGE_CMD_jffs2 =3D and this can =A0not be overriden
->> We would just need a weak assignment in image_types.bbclass or maybe a n=
-ew
->> image type like IMAGE_CMD_jffs2-summary and related commands.
->>
->
-> I would say port patches to oe-core for it.
+On (07/12/11 00:01), Bill Traynor wrote:
+> > Hi,
+> > today I wanted to create a Template:We-move-to-oe-core (something like
+> > this artikle is a stub) to mark all pages which needs a change and inform
+> > new users about the move to oe-core. I created an account but I am unable
+> > to edit anything. I even cannot edit my user page.
+> >
+> 
+> This is fixed now.
+> 
+> I've just implemented  Email Confirmation for New Users to the wiki with
+> auto-promotion to the 'User' group to allow for editing.  I also switched
+> the Captcha from recaptcha to QuestyCaptcha with a simple question about
+> Linux that's easily google-able.  This scheme has worked well for a number
+> of months on elinux.org, so it seemed prudent to try it here as well.
+> 
 
-Done, patch sent to oe-core
+Thanks Bill this should solve our spammy problems
 
-Regards
-Andrea
+> More wiki improvements to come.
 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+looking forward to it.
 
 
