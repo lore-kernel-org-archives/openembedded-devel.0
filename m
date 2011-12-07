@@ -1,26 +1,27 @@
-Received: from fb2.tech.numericable.fr ([82.216.111.50])
+Received: from smtprelay-b21.telenor.se ([195.54.99.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <guillaume.gardet@oliseo.fr>) id 1RYHw5-0005lC-Qa
+	(envelope-from <ulf@emagii.com>) id 1RYIk0-0004uq-Rj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 14:53:25 +0100
-Received: from smtp4.tech.numericable.fr (smtp4.nc.sdv.fr [10.0.0.60])
-	by fb2.tech.numericable.fr (Postfix) with ESMTP id ABE2819D11A
+	Wed, 07 Dec 2011 15:45:00 +0100
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 91B72EB76C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Dec 2011 14:46:39 +0100 (CET)
-Received: from localhost.localdomain (164.60-224-89.dsl.completel.net
-	[89.224.60.164])
-	by smtp4.tech.numericable.fr (Postfix) with ESMTP id 28E3712A823;
-	Wed,  7 Dec 2011 14:46:36 +0100 (CET)
-From: Guillaume GARDET <guillaume.gardet@oliseo.fr>
+	Wed,  7 Dec 2011 15:19:26 +0100 (CET)
+X-SENDER-IP: [83.227.56.19]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgpMAAR1305T4zgTPGdsb2JhbABDp1iCehkBAQEBNzKBcgFRAQojMB9LCi2ICQapAwGNHogcgxgElGuSJA
+X-IronPort-AV: E=Sophos;i="4.71,313,1320620400"; d="scan'208";a="230259232"
+Received: from c-1338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	hexagon.atmel.com) ([83.227.56.19])
+	by ipb1.telenor.se with ESMTP; 07 Dec 2011 15:19:26 +0100
+From: ulf@emagii.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Dec 2011 14:46:24 +0100
-Message-Id: <1323265584-7090-1-git-send-email-guillaume.gardet@oliseo.fr>
-X-Mailer: git-send-email 1.7.7
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedrudehucetggdotefuucfrrhhofhhilhgvmecupfgfoffgtffkveetuefngfenuceurghilhhouhhtmecufedttdenuc
-Cc: Guillaume GARDET <guillaume.gardet@oliseo.fr>
-Subject: [PATCH v2] Fix git URL to linux-omap git repo.
+Date: Wed,  7 Dec 2011 15:19:14 +0100
+Message-Id: <1323267554-2806-1-git-send-email-ulf@emagii.com>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: [meta-oe] xf86-input-tslib: Use correct name for checksum calculation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,182 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 13:53:26 -0000
+X-List-Received-Date: Wed, 07 Dec 2011 14:45:00 -0000
 
-Signed-off-by: Guillaume GARDET <guillaume.gardet@oliseo.fr>
+From: Ulf Samuelsson <ulf@emagii.com>
+
+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- recipes/linux/linux-kexecboot_2.6.32.bb |    2 +-
- recipes/linux/linux-omap2_git.bb        |    2 +-
- recipes/linux/linux-omap_2.6.26.bb      |    2 +-
- recipes/linux/linux-omap_2.6.27.bb      |    2 +-
- recipes/linux/linux-omap_2.6.28.bb      |    2 +-
- recipes/linux/linux-omap_2.6.29.bb      |    2 +-
- recipes/linux/linux-omap_2.6.31.bb      |    2 +-
- recipes/linux/linux-omap_2.6.32.bb      |    2 +-
- recipes/linux/linux-omap_2.6.37.bb      |    2 +-
- recipes/linux/linux-omap_2.6.38.bb      |    2 +-
- recipes/linux/linux-omap_2.6.39.bb      |    2 +-
- recipes/linux/linux-omap_git.bb         |    2 +-
- 12 files changed, 12 insertions(+), 12 deletions(-)
+ .../xorg-driver/xf86-input-tslib_0.0.6.bb          |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/linux/linux-kexecboot_2.6.32.bb b/recipes/linux/linux-kexecboot_2.6.32.bb
-index 4c3294a..0c0d2af 100644
---- a/recipes/linux/linux-kexecboot_2.6.32.bb
-+++ b/recipes/linux/linux-kexecboot_2.6.32.bb
-@@ -21,7 +21,7 @@ SRC_URI += "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=k
- SRC_URI[kernel.md5sum] = "260551284ac224c3a43c4adac7df4879"
- SRC_URI[kernel.sha256sum] = "5099786d80b8407d98a619df00209c2353517f22d804fdd9533b362adcb4504e"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
+index de0eb6f..768453a 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
+@@ -17,12 +17,14 @@ SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-inp
+            file://99-xf86-input-tslib.rules \
+            file://xf86-input-tslib-port-ABI-12-r48.patch \
+ "
+-SRC_URI[md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
+-SRC_URI[sha256sum] = "5f46fdef095a6e44a69e0f0b57c7d665224b26d990d006611236d8332e85b105"
++
++SRC_URI[archive.md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
++SRC_URI[archive.sha256sum] = "5f46fdef095a6e44a69e0f0b57c7d665224b26d990d006611236d8332e85b105"
  
--SRC_URI_append_omap3 = " git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git;rev=6833f1a8cdcb65a370f898bde6b6af63f81962df \
-+SRC_URI_append_omap3 = " git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git;rev=6833f1a8cdcb65a370f898bde6b6af63f81962df \
- file://defconfig \
- file://sctp-fix.patch \
- file://cm-t35/0001-omap3-cm-t35-add-mux-initialization.patch \
-diff --git a/recipes/linux/linux-omap2_git.bb b/recipes/linux/linux-omap2_git.bb
-index cb427e3..ad3a7eb 100644
---- a/recipes/linux/linux-omap2_git.bb
-+++ b/recipes/linux/linux-omap2_git.bb
-@@ -8,7 +8,7 @@ PV = "2.6.26"
- #PV = "2.6.26+2.6.27-rc1+${PR}+git${SRCREV}"
- PR = "r64"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append_beagleboard = " file://no-harry-potter.diff \
-diff --git a/recipes/linux/linux-omap_2.6.26.bb b/recipes/linux/linux-omap_2.6.26.bb
-index 0c8dcd9..0d74820 100644
---- a/recipes/linux/linux-omap_2.6.26.bb
-+++ b/recipes/linux/linux-omap_2.6.26.bb
-@@ -5,7 +5,7 @@ SRCREV = "d6daf8d8cc5ccf90247def5551ee9c3e8555e848"
- PV = "2.6.26"
- PR = "r65"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append_beagleboard = " file://no-harry-potter.diff \
-diff --git a/recipes/linux/linux-omap_2.6.27.bb b/recipes/linux/linux-omap_2.6.27.bb
-index fdf0fdd..36f86d9 100644
---- a/recipes/linux/linux-omap_2.6.27.bb
-+++ b/recipes/linux/linux-omap_2.6.27.bb
-@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "omap5912osk|omap1710h3|omap2430sdp|omap2420h4|beagleboard|
- SRCREV = "2a3408be17f287fdb5809c9b6c68e7ad96d25b74"
- PR = "r14"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.28.bb b/recipes/linux/linux-omap_2.6.28.bb
-index 622a38d..53fcc83 100644
---- a/recipes/linux/linux-omap_2.6.28.bb
-+++ b/recipes/linux/linux-omap_2.6.28.bb
-@@ -11,7 +11,7 @@ SRCREV = "79d042a081d3e467c735bb0d9569ed6296f85a3c"
- 
- PV = "2.6.28"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;branch=omap-2.6.28;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;branch=omap-2.6.28;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.29.bb b/recipes/linux/linux-omap_2.6.29.bb
-index a87fb25..3248dc3 100644
---- a/recipes/linux/linux-omap_2.6.29.bb
-+++ b/recipes/linux/linux-omap_2.6.29.bb
-@@ -17,7 +17,7 @@ SRCREV = "58cf2f1425abfd3a449f9fe985e48be2d2555022"
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- PR_append = "+gitr${SRCREV}"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.31.bb b/recipes/linux/linux-omap_2.6.31.bb
-index 0f1e79b..2b627ca 100644
---- a/recipes/linux/linux-omap_2.6.31.bb
-+++ b/recipes/linux/linux-omap_2.6.31.bb
-@@ -13,7 +13,7 @@ SRCREV = "945044d157dd63c6af0f2ed40a5346382af94eb4"
- #PV = "2.6.30+2.6.31-rc8+gitr${SRCREV}"
- PV = "2.6.31"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.32.bb b/recipes/linux/linux-omap_2.6.32.bb
-index 348ec96..f5aacda 100644
---- a/recipes/linux/linux-omap_2.6.32.bb
-+++ b/recipes/linux/linux-omap_2.6.32.bb
-@@ -13,7 +13,7 @@ SRCREV = "89c9eaeb92c97348dcabd6cb377b646c00855f6a"
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- PV = "2.6.32"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.37.bb b/recipes/linux/linux-omap_2.6.37.bb
-index 9c7ce01..6c63fa7 100644
---- a/recipes/linux/linux-omap_2.6.37.bb
-+++ b/recipes/linux/linux-omap_2.6.37.bb
-@@ -12,7 +12,7 @@ SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
- 
- FILESPATHPKG_prepend = "linux-omap-2.6.37:"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_2.6.38.bb b/recipes/linux/linux-omap_2.6.38.bb
-index b79d701..732e6df 100644
---- a/recipes/linux/linux-omap_2.6.38.bb
-+++ b/recipes/linux/linux-omap_2.6.38.bb
-@@ -12,7 +12,7 @@ SRCREV = "73ee404d7dedd23e35aae3ce516c504db783716f"
- 
- FILESPATHPKG_prepend = "linux-omap-2.6.38:"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " file://base/0001-ARM-OMAP-beagleboard-Add-infrastructure-to-do-fixups.patch \
-diff --git a/recipes/linux/linux-omap_2.6.39.bb b/recipes/linux/linux-omap_2.6.39.bb
-index 3880aa1..8172d5a 100644
---- a/recipes/linux/linux-omap_2.6.39.bb
-+++ b/recipes/linux/linux-omap_2.6.39.bb
-@@ -11,7 +11,7 @@ MACHINE_KERNEL_PR_append = "o"
- 
- FILESPATHPKG_prepend = "linux-omap-2.6.39:"
- 
--SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
-             file://defconfig"
- 
- SRC_URI_append = " \
-diff --git a/recipes/linux/linux-omap_git.bb b/recipes/linux/linux-omap_git.bb
-index e74e8cf..1d729c2 100644
---- a/recipes/linux/linux-omap_git.bb
-+++ b/recipes/linux/linux-omap_git.bb
-@@ -15,7 +15,7 @@ FILESPATHPKG_prepend = "linux-omap-2.6.31:"
- #PV = "2.6.30+2.6.31-rc8+gitr${SRCREV}"
- PV = "2.6.31"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
- 	   file://defconfig"
- 
- SRC_URI_append = " \
+ do_configure_prepend() {
+         rm -rf ${S}/m4/ || true
+ }
++
+ do_install_append() {
+         install -d ${D}/${datadir}/hal/fdi/policy/20thirdparty
+         install -m 0644 ${WORKDIR}/10-x11-input-tslib.fdi ${D}/${datadir}/hal/fdi/policy/20thirdparty
 -- 
-1.7.7
+1.7.4.1
 
 
 
