@@ -1,25 +1,34 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>) id 1RYPYF-0003c4-5K
+	(envelope-from <otavio.salvador@gmail.com>) id 1RYPbA-0003io-53
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 23:01:19 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Dec 2011 13:54:25 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="93662366"
-Received: from unknown (HELO [10.255.12.35]) ([10.255.12.35])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Dec 2011 13:54:24 -0800
-Message-ID: <4EDFE090.6010101@linux.intel.com>
-Date: Wed, 07 Dec 2011 13:54:24 -0800
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0) Gecko/20110927 Thunderbird/7.0
+	Wed, 07 Dec 2011 23:04:20 +0100
+Received: by bkbzt4 with SMTP id zt4so1032285bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Dec 2011 13:57:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=ggt0W6SFZmddX+buXntnB8ne6yZjtMGgl//isHAFd3w=;
+	b=AoK+ettFVBbWeb8Ey1CDHwgb1mHfs2cn0rlRYQgg+HWBQM9gl96zFV5gCreTtNzu50
+	Xm5y0YOBQqd5Hq3T6NbgXb0hfmxcHM+FswFZpPz5nT45Fdjjsg1pY4lrpY0Neyf+wDNz
+	uERhlmj0oKd8mlK4ZK9N2DXs/pPNhgNQKJgd8=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.205.139.7 with SMTP id iu7mr269890bkc.83.1323295050859; Wed,
+	07 Dec 2011 13:57:30 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.132 with HTTP; Wed, 7 Dec 2011 13:57:30 -0800 (PST)
+In-Reply-To: <4EDFE090.6010101@linux.intel.com>
 References: <cover.1323292658.git.otavio@ossystems.com.br>
 	<602892cc30a9872388e3e116d7eea691ebafe034.1323292658.git.otavio@ossystems.com.br>
-In-Reply-To: <602892cc30a9872388e3e116d7eea691ebafe034.1323292658.git.otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
+	<4EDFE090.6010101@linux.intel.com>
+Date: Wed, 7 Dec 2011 19:57:30 -0200
+X-Google-Sender-Auth: NW4iZ_th8rr1s-onwXAc_q2lC4I
+Message-ID: <CAP9ODKqBh=nO3eg1_Cdt12cX1ozAixpV2RMw7-vQ6PgH=ow8iQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Saul Wold <sgw@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 1/1] connman: update to 0.78
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,56 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 22:01:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Dec 2011 22:04:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 12/07/2011 01:18 PM, Otavio Salvador wrote:
-> We moved to GIT repository as the tarball releases are not available
-> since kernel.org compromise.
->
-Any reason this can't be updated in OE-core?
+On Wed, Dec 7, 2011 at 19:54, Saul Wold <sgw@linux.intel.com> wrote:
 
-Sau!
+> On 12/07/2011 01:18 PM, Otavio Salvador wrote:
+>
+>> We moved to GIT repository as the tarball releases are not available
+>> since kernel.org compromise.
+>>
+>>  Any reason this can't be updated in OE-core?
+>
 
-> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
-> ---
->   .../connman/{connman_0.77.bb =>  connman_0.78.bb}   |   13 ++++++-------
->   1 files changed, 6 insertions(+), 7 deletions(-)
->   rename meta-oe/recipes-connectivity/connman/{connman_0.77.bb =>  connman_0.78.bb} (75%)
->
-> diff --git a/meta-oe/recipes-connectivity/connman/connman_0.77.bb b/meta-oe/recipes-connectivity/connman/connman_0.78.bb
-> similarity index 75%
-> rename from meta-oe/recipes-connectivity/connman/connman_0.77.bb
-> rename to meta-oe/recipes-connectivity/connman/connman_0.78.bb
-> index 9ef368b..f486f95 100644
-> --- a/meta-oe/recipes-connectivity/connman/connman_0.77.bb
-> +++ b/meta-oe/recipes-connectivity/connman/connman_0.78.bb
-> @@ -1,5 +1,4 @@
->   require connman.inc
-> -PR = "r4"
->
->   EXTRA_OECONF += "\
->     --disable-gtk-doc \
-> @@ -18,13 +17,13 @@ EXTRA_OECONF += "\
->     --with-ntpd=${bindir}/ntpd \
->   "
->
-> -SRC_URI  = "\
-> -  http://www.kernel.org/pub/linux/network/connman/connman-${PV}.tar.gz \
-> -  file://connman \
-> -"
-> +S = "${WORKDIR}/git"
-> +
-> +# 0.78 tag
-> +SRCREV = "02f5d5fe2d7c71514a6387ba2b772b42d8e8d297"
->
-> -SRC_URI[md5sum] = "2e95edb0ead4fff3e84458f7fa192a64"
-> -SRC_URI[sha256sum] = "df6e926c4b0ccbab26d6e21b9935ab72fa5adf275eb7ac2b48540117ae84cbcc"
-> +SRC_URI  = "git://git.kernel.org/pub/scm/network/connman/connman.git \
-> +            file://connman"
->
->   # alg-test doesn't build, so disable that and test for if_alg.h as this header is only in 2.6.39
->   do_configure_prepend() {
+Sure not; for it I'd need to test connman-gnome but I don't have the
+required time to do that.
 
+As far as I know the xuser patch ought to apply fine but others might need
+checking.
+
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
