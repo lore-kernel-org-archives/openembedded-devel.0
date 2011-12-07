@@ -1,34 +1,41 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RYQKl-0004mD-Sw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 23:51:27 +0100
-Received: by wgbds11 with SMTP id ds11so1818255wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 14:44:39 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1RYQRU-00051m-5x; Wed, 07 Dec 2011 23:58:24 +0100
+Received: by iadj38 with SMTP id j38so1583473iad.6
+	for <multiple recipients>; Wed, 07 Dec 2011 14:51:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=euD/cMCUvBxPDrvxcNIXpbnN7m5zkP8LEYtfl+BN2BY=;
-	b=fJgIYU/KiEsGnt2l+hI6gOq0d9bbVvifRNqmsVfXFwZOMQO1LWLdxoSxlsW1LHk5pg
-	jbxycnofYZ6vhWsjCVz9Fa6XQrph8RkM0Izpmdv6kEVYyOsEZfu+T46UTifPNTYMmQsS
-	VmOxMAJjvrxa0YwZp8LO2XdaoudyWXgUmYoh4=
-Received: by 10.227.207.136 with SMTP id fy8mr379304wbb.16.1323297878936;
-	Wed, 07 Dec 2011 14:44:38 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z5sm5267483wix.5.2011.12.07.14.44.37
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=sOvrCifdvEsVbhwf2gwwTfP3XJTcubSUM+4SfgqOt5E=;
+	b=G3U5gGPR6QqMe/BJR+JCLgtbi58GrJC7WQsxGWo5Ttt5rHyOwXXnXmBagiNvNdC8xZ
+	z+RT+SH6hYvaJ/fNEr+skqDkIfY6UZRUWfYoptr0nhtK45UIwk6994H8wIP41hbno4jP
+	lKkNuxWhRsP/A8QL+4/saGez70BrLp2jVNDpQ=
+Received: by 10.42.157.137 with SMTP id d9mr937767icx.31.1323298292868;
+	Wed, 07 Dec 2011 14:51:32 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id v18sm11712761ibh.4.2011.12.07.14.51.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Dec 2011 14:44:37 -0800 (PST)
-Date: Wed, 7 Dec 2011 23:44:26 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111207224425.GA3761@jama.jama.net>
-References: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
+	Wed, 07 Dec 2011 14:51:31 -0800 (PST)
+Date: Wed, 7 Dec 2011 14:51:08 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Message-ID: <20111207225108.GB7003@sakrah.homelinux.org>
+Mail-Followup-To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, ulf@emagii.com
+References: <4ED0CC76.4040606@emagii.com> <1322579029.7964.0.camel@ted>
+	<4ED54C2B.2060505@emagii.com> <4ED66835.3050400@intel.com>
+	<4ED793E2.5070205@emagii.com> <4EDA80A2.5070303@emagii.com>
+	<20111204112019.GB4871@rhein.zuhause.netz>
+	<1322998509.25960.55.camel@ted>
 MIME-Version: 1.0
-In-Reply-To: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-efl] places: add autopoint
+In-Reply-To: <1322998509.25960.55.camel@ted>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org, ulf@emagii.com
+Subject: Re: [OE-core] Feedback on building openembedded-core for qemuarm. Excerpts from buildlog
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,69 +49,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 22:51:28 -0000
-X-Groupsio-MsgNum: 35974
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
-Content-Disposition: inline
-
---UlVJffcvxoiEqYs2
+X-List-Received-Date: Wed, 07 Dec 2011 22:58:24 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 07, 2011 at 01:53:48PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-efl/recipes-efl/e17/places_svn.bb |    6 +++++-
->  1 files changed, 5 insertions(+), 1 deletions(-)
+On (04/12/11 11:35), Richard Purdie wrote:
+> On Sun, 2011-12-04 at 12:20 +0100, Henning Heinold wrote:
+> > On Sat, Dec 03, 2011 at 09:03:46PM +0100, Ulf Samuelsson wrote:
+> > > Have made some further tests with the same machine, but now running
+> > > Ubuntu 11.04 x64
+> > > 
+> > > bitbake console-image
+> > > 
+> > >     PARALLEL_TASKS        BB_NUMBER_TASKS        BUILD TIME
+> > >     2                                  2
+> > > 1:24:16
+> > >     4                                  4
+> > > 0:48:22
+> > >     6                                  6
+> > > 0:45:00
+> > >     24                                24
+> > > C++ compiler fails with --sysroot problem
+> > >         after ~2200 out of 2400 tasks.
+> > > 
+> > > 
+> > > 
+> > > BR
+> > > Ulf
+> > 
+> > Hi Ulf,
+> > 
+> > can you try the attached patch if it solves the problem?
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Does this really fix the problem.
 
->=20
-> diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-ef=
-l/e17/places_svn.bb
-> index 0abe138..103d720 100644
-> --- a/meta-efl/recipes-efl/e17/places_svn.bb
-> +++ b/meta-efl/recipes-efl/e17/places_svn.bb
-> @@ -2,9 +2,13 @@ LICENSE =3D "BSD"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D344895f253c32f38e182dcaf30fe8=
-a35"
-> =20
->  PV =3D "0.1.0+svnr${SRCPV}"
-> -PR =3D "${INC_PR}.0"
-> +PR =3D "${INC_PR}.1"
-> =20
->  require e-module.inc
-> =20
-> +do_configure_prepend() {
-> +	autopoint || touch config.rpath
-> +}
-> +
->  # Calls /usr/bin/eject for media
->  RRECOMMENDS_${PN} +=3D "eject"
-> --=20
-> 1.7.2.5
->=20
->=20
+> 
+> Can someone please explain to me how this would fix the problem?
+> 
+> If this were the issue shouldn't it either always work or always fail?
+> 
+> I'm worried that even if this does "fix" the problem, there is a deeper
+> issue lurking somewhere :(
+
+We use --with-local-prefix and then also --with-gxx-include-dir which
+points to /usr/include/c++ 
+
+Now the documentation says that --with-gxx-include-dir is an absolute
+path but if sysroot gets prepended to it or not I am not clear yet
+if sysroot gets prepended to it then we should be in safe spot
+
+
+> 
+> Cheers,
+> 
+> Richard
+> 
+> 
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+-Khem
 
---UlVJffcvxoiEqYs2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk7f7EkACgkQN1Ujt2V2gBzlrQCeKmDeNRyewqEnNMtaIU7xGt1c
-rTIAn0doZskDUOX9xcTt/XM9K2PPbX8L
-=T2My
------END PGP SIGNATURE-----
-
---UlVJffcvxoiEqYs2--
