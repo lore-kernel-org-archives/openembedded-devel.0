@@ -1,37 +1,26 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RYPQT-0002yK-5J
+	(envelope-from <sgw@linux.intel.com>) id 1RYPYF-0003c4-5K
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 22:53:17 +0100
-Received: by iadj38 with SMTP id j38so1504660iad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 13:46:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=4+Hm6z+7caW8D7cxwAgUGZlxmV0mbUbzQ2dUnQGXNfY=;
-	b=hpXoCcfnQUwqqeU7vZviCRTOQoJWOzWDzOwDVsMZY3SGl6Cyh9lBcqpXxbVIKH0JVx
-	lLOXu4kkcC0VUrwUKzEBKwK3SmxJESMuV3abjm7JIs9tOjxlZBTfu4+DQKsqP+xEjbRR
-	t72HYebsX/p+sgPPqQJcEq9+79+ZxhpG48rpM=
-Received: by 10.43.43.130 with SMTP id uc2mr695564icb.35.1323294387617;
-	Wed, 07 Dec 2011 13:46:27 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id cz1sm11049340ibb.11.2011.12.07.13.46.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Dec 2011 13:46:26 -0800 (PST)
-Date: Wed, 7 Dec 2011 13:46:03 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111207214603.GD6351@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Koen Kooi <koen@dominion.thruhere.net>
-References: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
+	Wed, 07 Dec 2011 23:01:19 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Dec 2011 13:54:25 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="93662366"
+Received: from unknown (HELO [10.255.12.35]) ([10.255.12.35])
+	by fmsmga001.fm.intel.com with ESMTP; 07 Dec 2011 13:54:24 -0800
+Message-ID: <4EDFE090.6010101@linux.intel.com>
+Date: Wed, 07 Dec 2011 13:54:24 -0800
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0) Gecko/20110927 Thunderbird/7.0
 MIME-Version: 1.0
-In-Reply-To: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-efl] places: add autopoint
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1323292658.git.otavio@ossystems.com.br>
+	<602892cc30a9872388e3e116d7eea691ebafe034.1323292658.git.otavio@ossystems.com.br>
+In-Reply-To: <602892cc30a9872388e3e116d7eea691ebafe034.1323292658.git.otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 1/1] connman: update to 0.78
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,45 +34,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 21:53:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Dec 2011 22:01:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (07/12/11 13:53), Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+On 12/07/2011 01:18 PM, Otavio Salvador wrote:
+> We moved to GIT repository as the tarball releases are not available
+> since kernel.org compromise.
+>
+Any reason this can't be updated in OE-core?
+
+Sau!
+
+> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
 > ---
->  meta-efl/recipes-efl/e17/places_svn.bb |    6 +++++-
->  1 files changed, 5 insertions(+), 1 deletions(-)
-> 
-> diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-efl/e17/places_svn.bb
-> index 0abe138..103d720 100644
-> --- a/meta-efl/recipes-efl/e17/places_svn.bb
-> +++ b/meta-efl/recipes-efl/e17/places_svn.bb
-> @@ -2,9 +2,13 @@ LICENSE = "BSD"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
->  
->  PV = "0.1.0+svnr${SRCPV}"
-> -PR = "${INC_PR}.0"
-> +PR = "${INC_PR}.1"
->  
->  require e-module.inc
->  
-> +do_configure_prepend() {
-> +	autopoint || touch config.rpath
-> +}
+>   .../connman/{connman_0.77.bb =>  connman_0.78.bb}   |   13 ++++++-------
+>   1 files changed, 6 insertions(+), 7 deletions(-)
+>   rename meta-oe/recipes-connectivity/connman/{connman_0.77.bb =>  connman_0.78.bb} (75%)
+>
+> diff --git a/meta-oe/recipes-connectivity/connman/connman_0.77.bb b/meta-oe/recipes-connectivity/connman/connman_0.78.bb
+> similarity index 75%
+> rename from meta-oe/recipes-connectivity/connman/connman_0.77.bb
+> rename to meta-oe/recipes-connectivity/connman/connman_0.78.bb
+> index 9ef368b..f486f95 100644
+> --- a/meta-oe/recipes-connectivity/connman/connman_0.77.bb
+> +++ b/meta-oe/recipes-connectivity/connman/connman_0.78.bb
+> @@ -1,5 +1,4 @@
+>   require connman.inc
+> -PR = "r4"
+>
+>   EXTRA_OECONF += "\
+>     --disable-gtk-doc \
+> @@ -18,13 +17,13 @@ EXTRA_OECONF += "\
+>     --with-ntpd=${bindir}/ntpd \
+>   "
+>
+> -SRC_URI  = "\
+> -  http://www.kernel.org/pub/linux/network/connman/connman-${PV}.tar.gz \
+> -  file://connman \
+> -"
+> +S = "${WORKDIR}/git"
 > +
->  # Calls /usr/bin/eject for media
->  RRECOMMENDS_${PN} += "eject"
-> -- 
-> 1.7.2.5
-
-you could also do
-
-EXTRA_AUTORECONF = ""
-
-which would remove --exclude=autopoint being passed down to autoreconf 
-
--- 
--Khem
+> +# 0.78 tag
+> +SRCREV = "02f5d5fe2d7c71514a6387ba2b772b42d8e8d297"
+>
+> -SRC_URI[md5sum] = "2e95edb0ead4fff3e84458f7fa192a64"
+> -SRC_URI[sha256sum] = "df6e926c4b0ccbab26d6e21b9935ab72fa5adf275eb7ac2b48540117ae84cbcc"
+> +SRC_URI  = "git://git.kernel.org/pub/scm/network/connman/connman.git \
+> +            file://connman"
+>
+>   # alg-test doesn't build, so disable that and test for if_alg.h as this header is only in 2.6.39
+>   do_configure_prepend() {
 
 
