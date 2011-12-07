@@ -1,37 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RYPut-0004DQ-Gy
+	(envelope-from <martin.jansa@gmail.com>) id 1RYQKl-0004mD-Sw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 23:24:43 +0100
-Received: by iadj38 with SMTP id j38so1540146iad.6
+	Wed, 07 Dec 2011 23:51:27 +0100
+Received: by wgbds11 with SMTP id ds11so1818255wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 14:17:54 -0800 (PST)
+	Wed, 07 Dec 2011 14:44:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=pBtNa0MAG0+JFglkpeDK+tVoDICA2VGb95hhBMR0YB0=;
-	b=jxGeHWVh/qN8kKPemqfkg8ECkgvj0b+uSMPVVrNkkMgFP6Cd34ds4AMf/QjqRxzu09
-	GdAibKOsw1RfR6Gx5rHMLhtXpcfxUOqlieoUutRFKFPfo8+mtl+EFGqzPC66qV4tC88Q
-	GXE4AB4w6FV88VelGLqrcBwu3qy2/fjg5/1dY=
-Received: by 10.43.53.1 with SMTP id vo1mr1004379icb.2.1323296272439;
-	Wed, 07 Dec 2011 14:17:52 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id cz1sm11328314ibb.11.2011.12.07.14.17.50
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=euD/cMCUvBxPDrvxcNIXpbnN7m5zkP8LEYtfl+BN2BY=;
+	b=fJgIYU/KiEsGnt2l+hI6gOq0d9bbVvifRNqmsVfXFwZOMQO1LWLdxoSxlsW1LHk5pg
+	jbxycnofYZ6vhWsjCVz9Fa6XQrph8RkM0Izpmdv6kEVYyOsEZfu+T46UTifPNTYMmQsS
+	VmOxMAJjvrxa0YwZp8LO2XdaoudyWXgUmYoh4=
+Received: by 10.227.207.136 with SMTP id fy8mr379304wbb.16.1323297878936;
+	Wed, 07 Dec 2011 14:44:38 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z5sm5267483wix.5.2011.12.07.14.44.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Dec 2011 14:17:51 -0800 (PST)
-Date: Wed, 7 Dec 2011 14:17:24 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 07 Dec 2011 14:44:37 -0800 (PST)
+Date: Wed, 7 Dec 2011 23:44:26 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111207221724.GA7003@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
-	<alpine.LNX.2.02.1111281842480.1090@myhost>
-	<CAOAMawF_Y=tw_R_on3rzjwB4UteGCi4Ff9dKU22ke_=hAO=MKA@mail.gmail.com>
+Message-ID: <20111207224425.GA3761@jama.jama.net>
+References: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <CAOAMawF_Y=tw_R_on3rzjwB4UteGCi4Ff9dKU22ke_=hAO=MKA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: Documentation problems
+In-Reply-To: <1323262428-856-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-efl] places: add autopoint
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,31 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 22:24:43 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 07 Dec 2011 22:51:28 -0000
+X-Groupsio-MsgNum: 35974
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
 Content-Disposition: inline
 
-On (07/12/11 00:01), Bill Traynor wrote:
-> > Hi,
-> > today I wanted to create a Template:We-move-to-oe-core (something like
-> > this artikle is a stub) to mark all pages which needs a change and inform
-> > new users about the move to oe-core. I created an account but I am unable
-> > to edit anything. I even cannot edit my user page.
-> >
-> 
-> This is fixed now.
-> 
-> I've just implemented  Email Confirmation for New Users to the wiki with
-> auto-promotion to the 'User' group to allow for editing.  I also switched
-> the Captcha from recaptcha to QuestyCaptcha with a simple question about
-> Linux that's easily google-able.  This scheme has worked well for a number
-> of months on elinux.org, so it seemed prudent to try it here as well.
-> 
+--UlVJffcvxoiEqYs2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks Bill this should solve our spammy problems
+On Wed, Dec 07, 2011 at 01:53:48PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-efl/recipes-efl/e17/places_svn.bb |    6 +++++-
+>  1 files changed, 5 insertions(+), 1 deletions(-)
 
-> More wiki improvements to come.
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-looking forward to it.
+>=20
+> diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-ef=
+l/e17/places_svn.bb
+> index 0abe138..103d720 100644
+> --- a/meta-efl/recipes-efl/e17/places_svn.bb
+> +++ b/meta-efl/recipes-efl/e17/places_svn.bb
+> @@ -2,9 +2,13 @@ LICENSE =3D "BSD"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D344895f253c32f38e182dcaf30fe8=
+a35"
+> =20
+>  PV =3D "0.1.0+svnr${SRCPV}"
+> -PR =3D "${INC_PR}.0"
+> +PR =3D "${INC_PR}.1"
+> =20
+>  require e-module.inc
+> =20
+> +do_configure_prepend() {
+> +	autopoint || touch config.rpath
+> +}
+> +
+>  # Calls /usr/bin/eject for media
+>  RRECOMMENDS_${PN} +=3D "eject"
+> --=20
+> 1.7.2.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--UlVJffcvxoiEqYs2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk7f7EkACgkQN1Ujt2V2gBzlrQCeKmDeNRyewqEnNMtaIU7xGt1c
+rTIAn0doZskDUOX9xcTt/XM9K2PPbX8L
+=T2My
+-----END PGP SIGNATURE-----
+
+--UlVJffcvxoiEqYs2--
