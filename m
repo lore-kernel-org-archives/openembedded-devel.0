@@ -1,34 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RYCU6-0002zr-GJ for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 09:04:10 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RYCNY-0003AH-3D for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 08:57:24 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 08:57:24 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 08:57:24 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RYDJ6-0004Hl-Bq for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Dec 2011 09:56:52 +0100
+Received: from f053037255.adsl.alicedsl.de ([78.53.37.255]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RYDCd-0003Hu-A7 for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Dec 2011 08:50:11 +0000
+Message-ID: <1323247803.32367.48.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 07 Dec 2011 08:57:17 +0100
-Message-ID: <jbn68n$lav$1@dough.gmane.org>
-References: <1323088316-20564-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 07 Dec 2011 09:50:03 +0100
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C401A4DAE@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+	, <CA+M6bXnrw7p=5ACg99REKASR4L+0yzgunJ6xDWWSwcFeR82hww@mail.gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A4A69@post.tritech.se>
+	, <1323182142.4571.10.camel@mattotaupa>
+	<ED3E0BCACD909541BA94A34C4A164D4C401A4DAE@post.tritech.se>
+X-Mailer: Evolution 3.0.3-2 
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1323088316-20564-1-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [meta-java] openjdk-6-common: move java2-vm to RRECOMMENDS
+Subject: Re: [2011.03-maintenance] Pull request for libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +35,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 08:04:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Dec 2011 08:56:52 -0000
+X-Groupsio-MsgNum: 35952
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-aRJv6R43H9hUzsLiMvNG"
+
+--=-aRJv6R43H9hUzsLiMvNG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Am Dienstag, den 06.12.2011, 15:40 +0000 schrieb Mats K=C3=A4rrman:
+> > From: openembedded-devel-bounces@lists.openembedded.org [openembedded-d=
+evel-bounces@lists.openembedded.org] on behalf of Paul Menzel [paulepanter@=
+users.sourceforge.net]
+> > Sent: Tuesday, December 06, 2011 3:35 PM
+
+> > Am Dienstag, den 06.12.2011, 07:55 +0000 schrieb Mats K=C3=A4rrman:
+> > > > From: openembedded-devel-bounces@lists.openembedded.org [openembedd=
+ed-devel-bounces@lists.openembedded.org] on behalf of Tom Rini [tom.rini@gm=
+ail.com]
+> > > > Sent: Monday, December 05, 2011 8:49 PM
+> > > > To: openembedded-devel@lists.openembedded.org
+> > > > Subject: Re: [oe] [2011.03-maintenance] Pull request for libpam
+> > > >
+> > > > On Mon, Dec 5, 2011 at 9:42 AM, Mats K=C3=A4rrman <Mats.Karrman@tri=
+tech.se> wrote:
+> > > > > Hello Tom,
+> > > > >
+> > > > > Please pull this commit from here:
+> > > > >
+> > > > > git://github.com/mkarrman/openembedded
+> > > > > Branch: maintenance
+> > > > >
+> > > > > Mats K=C3=A4rrman (1):
+> > > > >      368c68a  libpam_1.1.1: remove directory preventing /var/run =
+from being volatile.
+> > > >
+> > > > Where is this a backport from?  Thanks!
+> >=20
+> > > My local project...
+> > > Maybe I went ahead of myself but the solution is ~equivalent to the
+> > > solution applied in libpam recipes of oe-core but 1.1.1 does not exis=
+t
+> > > there and the corresponding fix was a part of the original recipes fo=
+r
+> > > later versions.
+> >=20
+> > so why not push it to OE-classic master first?
+>=20
+> Perhaps I missed the consensus of the "Plans for OE classic future" threa=
+d?
+> To my understanding pull requests from "somewhere" and master will sooner=
+-than-later die was the way to go.
+
+True. And a lot of developers answered they are still using OE-classic
+including master. So they would profit from your fix too.
+
+> Also, pushing requires write access to the repo (that I don't have) but I=
+ can send a patch to the mailing list, if you like.
+
+I would push it for you.
+
+
+Thanks,
+
+Paul
+
+--=-aRJv6R43H9hUzsLiMvNG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-ping
-
-Op 05-12-11 13:31, Koen Kooi schreef:
-> Even though a vm is a hard dependency it is set as RRECOMMENDS so a
-> single vm can get uninstalled:
-> 
-> root@beaglebone:~/java# opkg remove openjdk-6-vm-shark No packages
-> removed. Collected errors: * print_dependents_warning: Package
-> openjdk-6-vm-shark is depended upon by packages: *
-> print_dependents_warning:         openjdk-6-java *
-> print_dependents_warning: These might cease to work if package
-> openjdk-6-vm-shark is removed.
-> 
-> In the above situation all vms (cacao, zero and shark) were installed,
-> but due to llvm problems[1] shark is currently broken. To fix the java
-> install shark needs to get uninstalled.
-> 
-> In theory this change allows people to break the java installation, but
-> in practice it's already broken due to [1].
-> 
-> [1]
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-December/036595.html
->
->  Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> --- 
-> recipes-core/openjdk/openjdk-6-common.inc |   11 +++++++++-- 1 files
-> changed, 9 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-core/openjdk/openjdk-6-common.inc
-> b/recipes-core/openjdk/openjdk-6-common.inc index ef1c41d..257fe56
-> 100644 --- a/recipes-core/openjdk/openjdk-6-common.inc +++
-> b/recipes-core/openjdk/openjdk-6-common.inc @@ -10,7 +10,7 @@ ICEDTEA =
-> "NEEDS TO BE SET" S = "${WORKDIR}/${ICEDTEA}" B = "${S}/build"
-> 
-> -INC_PR = "r11" +INC_PR = "r12"
-> 
-> SRC_URI = "\ ${ICEDTEA_URI} \ @@ -426,7 +426,14 @@
-> RPROVIDES_${JDKPN}-vm-shark = "java2-vm" RPROVIDES_${JDKPN}-vm-zero =
-> "java2-vm" RPROVIDES_${JDKPN}-vm-cacao = "java2-vm"
-> 
-> -RDEPENDS_${JDKPN}-java = "java2-vm" +# Even though a vm is a hard
-> dependency it is set as RRECOMMENDS so a single vm can get uninstalled: 
-> +# root@beaglebone:~/java# opkg remove openjdk-6-vm-shark +# No packages
-> removed. +# Collected errors: +#  * print_dependents_warning: Package
-> openjdk-6-vm-shark is depended upon by packages: +#  *
-> print_dependents_warning: 	openjdk-6-java +#  * print_dependents_warning:
-> These might cease to work if package openjdk-6-vm-shark is removed. 
-> +RRECOMMENDS_${JDKPN}-java = "java2-vm"
-> 
-> # For some reason shark and cacao do not automatically depends on
-> -common. # So we add that manually.
-
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk7fHF0ACgkQMkyGM64RGpF3FgCfRixFz4cNEI7OdLfkulNHjp/U
-Zi4An0KRfx/jCebXGK67GpFziay5CMHp
-=Xnc1
+iEYEABECAAYFAk7fKLsACgkQPX1aK2wOHVil+QCfaLt5ktQqTy7g0JPZrz+9VqcN
+q5sAnihASy3zJZb/YimY6dKmrMOwdicR
+=T72e
 -----END PGP SIGNATURE-----
 
-
-
+--=-aRJv6R43H9hUzsLiMvNG--
