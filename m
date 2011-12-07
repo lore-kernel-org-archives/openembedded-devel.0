@@ -1,31 +1,24 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Xiaofeng.Yan@windriver.com>) id 1RY6XD-0003vR-Iq
+	(envelope-from <btraynor@mvista.com>) id 1RY9jt-0003sV-Si
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 02:42:59 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB71a97C023806
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Dec 2011 17:36:10 -0800 (PST)
-Received: from [128.224.162.146] (128.224.162.146) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
-	Tue, 6 Dec 2011 17:36:09 -0800
-Message-ID: <4EDEC246.5080306@windriver.com>
-Date: Wed, 7 Dec 2011 09:32:54 +0800
-From: Xiaofeng Yan <xiaofeng.yan@windriver.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
+	Wed, 07 Dec 2011 06:08:17 +0100
+Received: by wgbds11 with SMTP id ds11so318898wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Dec 2011 21:01:29 -0800 (PST)
+Received: by 10.216.221.39 with SMTP id q39mr251206wep.70.1323234088302; Tue,
+	06 Dec 2011 21:01:28 -0800 (PST)
 MIME-Version: 1.0
-To: Saul Wold <sgw@linux.intel.com>
-References: <cover.1323141676.git.xiaofeng.yan@windriver.com>
-	<db85bdb92ce1ffd1840f4fb719035d3b5692888e.1323141676.git.xiaofeng.yan@windriver.com>
-	<4EDEABA5.2030505@linux.intel.com>
-In-Reply-To: <4EDEABA5.2030505@linux.intel.com>
-X-Originating-IP: [128.224.162.146]
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.windriver.com id
-	pB71a97C023806
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core][PATCH 04/10] gtk.inc: add feature based on directfb
+Received: by 10.180.94.135 with HTTP; Tue, 6 Dec 2011 21:01:07 -0800 (PST)
+In-Reply-To: <alpine.LNX.2.02.1111281842480.1090@myhost>
+References: <CA+M6bX=PYZ+2vb32ZmT3SirqHdKpCtD90QqtHhQiWSp38f1kVA@mail.gmail.com>
+	<alpine.LNX.2.02.1111281842480.1090@myhost>
+From: Bill Traynor <btraynor@mvista.com>
+Date: Wed, 7 Dec 2011 00:01:07 -0500
+Message-ID: <CAOAMawF_Y=tw_R_on3rzjwB4UteGCi4Ff9dKU22ke_=hAO=MKA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Documentation problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,86 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 01:43:00 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Dec 2011 05:08:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 2011=E5=B9=B412=E6=9C=8807=E6=97=A5 07:56, Saul Wold wrote:
-> On 12/05/2011 09:58 PM, Xiaofeng Yan wrote:
->> From: Xiaofeng Yan<xiaofeng.yan@windriver.com>
->>
->> gtk run over x11 at current OE-core. If gtk want to run over=20
->> directfb, then \
->> the configuration related to x11 should be disabled and directfb=20
->> should be enabled.
->>
->> [YOCTO #1674]
->>
->> Signed-off-by: Xiaofeng Yan<xiaofeng.yan@windriver.com>
->> ---
->> meta/recipes-gnome/gtk+/gtk+.inc | 16 ++++++++++++++--
->> 1 files changed, 14 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta/recipes-gnome/gtk+/gtk+.inc=20
->> b/meta/recipes-gnome/gtk+/gtk+.inc
->> index 39a4f4a..7fc55e2 100644
->> --- a/meta/recipes-gnome/gtk+/gtk+.inc
->> +++ b/meta/recipes-gnome/gtk+/gtk+.inc
->> @@ -12,11 +12,18 @@ SECTION =3D "libs"
->>
->> X11DEPENDS =3D "virtual/libx11 libxext libxcursor libxrandr libxdamage=
-=20
->> libxrender libxcomposite"
->> DEPENDS =3D "glib-2.0 pango atk jpeg libpng gtk-doc-native=20
->> gdk-pixbuf-native docbook-utils-native \
->> - libgcrypt cairo gdk-pixbuf ${X11DEPENDS}"
->> + libgcrypt cairo gdk-pixbuf"
->> +
->> +PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'x11'=
-,=20
->> '', d)} \
->> + ${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
->> +
->> +PACKAGECONFIG[x11] =3D "--with-x=3Dyes=20
->> --with-gdktarget=3Dx11,--with-x=3Dno,${X11DEPENDS}"
->> +PACKAGECONFIG[directfb] =3D "--with-gdktarget=3Ddirectfb,,directfb"
->> +
->>
-> This change with the change prior (Split X11 Dependencies) should be 1=20
-> commit, while below should be a second commit, you are still mixing=20
-> different items together in 1 commit.
+On Mon, Nov 28, 2011 at 12:44 PM, Bernhard Guillon <
+Bernhard.Guillon@opensimpad.org> wrote:
+
 >
->> inherit autotools pkgconfig
->>
->> -PACKAGES +=3D "libgail"
->> +PACKAGES +=3D "libgail gtk-demo"
->>
->> FILES_${PN} =3D "${bindir}/gtk-update-icon-cache \
->> ${bindir}/gtk-query-immodules-2.0 \
->> @@ -41,6 +48,11 @@ FILES_${PN}-dbg +=3D " \
->> ${libdir}/gtk-2.0/${LIBV}/engines/.debug/* \
->> ${libdir}/gtk-2.0/${LIBV}/printbackends/.debug/*"
->>
->> +FILES_gtk-demo =3D " \
->> + ${datadir}/gtk-2.0/demo/* \
->> + ${bindir}/gtk-demo \
->> + "
->> +
-> This and the above PACKAGES +=3D change should be in a separate commit=20
-> from the PACKAGECONFIG and DEPENDS changes above.
 >
-> Sau!
-Yes, it looks better.
-Thanks for your suggestion.
-I will push it again after fixing.
+> On Sat, 26 Nov 2011, Tom Rini wrote:
+>
+>  Hey all,
+>>
+>> As things stand today, the wiki is out of date and a number of folks
+>> refuse to work on it.  Using things like "It's all text!" for firefox
+>> only go so far and don't solve problems like people just avoiding
+>> documentation anyhow.
+>>
+>
+> Hi,
+> today I wanted to create a Template:We-move-to-oe-core (something like
+> this artikle is a stub) to mark all pages which needs a change and inform
+> new users about the move to oe-core. I created an account but I am unable
+> to edit anything. I even cannot edit my user page.
+>
+
+This is fixed now.
+
+I've just implemented  Email Confirmation for New Users to the wiki with
+auto-promotion to the 'User' group to allow for editing.  I also switched
+the Captcha from recaptcha to QuestyCaptcha with a simple question about
+Linux that's easily google-able.  This scheme has worked well for a number
+of months on elinux.org, so it seemed prudent to try it here as well.
+
+More wiki improvements to come.
 
 Thanks
-Yan
+Bill
+
+
+> Best regards,
+> Bernhard
 >
->> FILES_libgail =3D " \
->> ${libdir}/gtk-2.0/modules/libgail.so \
->> ${libdir}/gtk-2.0/modules/libferret.so \
+>
+> ______________________________**_________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
+> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
 >
 
 
+
+-- 
+Bill Traynor
+Technical Writer & Community Manager of Meld.org
+MontaVista Software, LLC
+2929 Patrick Henry Drive
+Santa Clara, CA 95054
 
