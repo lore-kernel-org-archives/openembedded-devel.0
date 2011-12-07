@@ -1,26 +1,26 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from fb2.tech.numericable.fr ([82.216.111.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RYHpT-0005YT-HA
+	(envelope-from <guillaume.gardet@oliseo.fr>) id 1RYHw5-0005lC-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Dec 2011 14:46:35 +0100
-Received: by eekb15 with SMTP id b15so425110eek.6
+	Wed, 07 Dec 2011 14:53:25 +0100
+Received: from smtp4.tech.numericable.fr (smtp4.nc.sdv.fr [10.0.0.60])
+	by fb2.tech.numericable.fr (Postfix) with ESMTP id ABE2819D11A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Dec 2011 05:39:44 -0800 (PST)
-Received: by 10.14.3.206 with SMTP id 54mr3573148eeh.214.1323265183916;
-	Wed, 07 Dec 2011 05:39:43 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id p13sm2490409bkd.4.2011.12.07.05.39.42
-	(version=SSLv3 cipher=OTHER); Wed, 07 Dec 2011 05:39:43 -0800 (PST)
-Message-ID: <4EDF6C9E.6050806@dresearch-fe.de>
-Date: Wed, 07 Dec 2011 14:39:42 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.3.3
-Subject: [master/2011.03-maintenance] module-init-tools-cross-3.12-r6: task do_compile: Failed
+	Wed,  7 Dec 2011 14:46:39 +0100 (CET)
+Received: from localhost.localdomain (164.60-224-89.dsl.completel.net
+	[89.224.60.164])
+	by smtp4.tech.numericable.fr (Postfix) with ESMTP id 28E3712A823;
+	Wed,  7 Dec 2011 14:46:36 +0100 (CET)
+From: Guillaume GARDET <guillaume.gardet@oliseo.fr>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Dec 2011 14:46:24 +0100
+Message-Id: <1323265584-7090-1-git-send-email-guillaume.gardet@oliseo.fr>
+X-Mailer: git-send-email 1.7.7
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedrudehucetggdotefuucfrrhhofhhilhgvmecupfgfoffgtffkveetuefngfenuceurghilhhouhhtmecufedttdenuc
+Cc: Guillaume GARDET <guillaume.gardet@oliseo.fr>
+Subject: [PATCH v2] Fix git URL to linux-omap git repo.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,284 +34,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 13:46:35 -0000
-X-Groupsio-MsgNum: 35960
-Content-Type: multipart/mixed; boundary="------------070306050007040500030901"
+X-List-Received-Date: Wed, 07 Dec 2011 13:53:26 -0000
 
---------------070306050007040500030901
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Signed-off-by: Guillaume GARDET <guillaume.gardet@oliseo.fr>
+---
+ recipes/linux/linux-kexecboot_2.6.32.bb |    2 +-
+ recipes/linux/linux-omap2_git.bb        |    2 +-
+ recipes/linux/linux-omap_2.6.26.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.27.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.28.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.29.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.31.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.32.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.37.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.38.bb      |    2 +-
+ recipes/linux/linux-omap_2.6.39.bb      |    2 +-
+ recipes/linux/linux-omap_git.bb         |    2 +-
+ 12 files changed, 12 insertions(+), 12 deletions(-)
 
-This problem occurs with the current master (a4f35de0f6ca17e92763d5a5f32422c56e5d8882) *and* the 2011.03-maintenance branch (672af8093cf33d8b90e9186986ba5c95fc7a0a0a).
-
-To reproduce it i used the current Kaeilos setup and made a clean build.
-
-------------------->snip<--------------------
-14:11 sledz@~/work/kaeilos/build/kaeilos $ MACHINE=beagleboard bitbake module-init-tools-cross
-...
-Build Configuration:
-BB_VERSION        = "1.12.0"
-METADATA_BRANCH   = "2011.03-maintenance"
-METADATA_REVISION = "672af80"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "beagleboard"
-DISTRO            = "kaeilos"
-DISTRO_VERSION    = "2009.2-test-20111207"
-TARGET_FPU        = "hard"
-...
-| gcc  -isystem/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/include -O2 -g -Wunused -Wall -static -L/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-rpath-link,/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-rpath,/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-O1 -o insmod.static insmod.o libmodtools.a
-| /usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../x86_64-suse-linux/bin/ld: cannot find -lc
-| collect2: ld returned 1 exit status
-| make: *** [insmod.static] Error 1
-| make: *** Waiting for unfinished jobs....
-| mv -f .deps/tables.Tpo .deps/tables.Po
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: package module-init-tools-cross-3.12-r6: task do_compile: Failed
-ERROR: Function 'do_compile' failed (see /home/sledz/work/kaeilos/build/kaeilos/tmp/work/armv7a-kaeilos-linux-gnueabi/module-init-tools-cross-3.12-r6/temp/log.do_compile.5337 for further information)
-------------------->snip<--------------------
-
-(complete compile log is attached)
-
-Any ideas?
-
-Regards,
-Steffen
-
+diff --git a/recipes/linux/linux-kexecboot_2.6.32.bb b/recipes/linux/linux-kexecboot_2.6.32.bb
+index 4c3294a..0c0d2af 100644
+--- a/recipes/linux/linux-kexecboot_2.6.32.bb
++++ b/recipes/linux/linux-kexecboot_2.6.32.bb
+@@ -21,7 +21,7 @@ SRC_URI += "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=k
+ SRC_URI[kernel.md5sum] = "260551284ac224c3a43c4adac7df4879"
+ SRC_URI[kernel.sha256sum] = "5099786d80b8407d98a619df00209c2353517f22d804fdd9533b362adcb4504e"
+ 
+-SRC_URI_append_omap3 = " git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git;rev=6833f1a8cdcb65a370f898bde6b6af63f81962df \
++SRC_URI_append_omap3 = " git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git;rev=6833f1a8cdcb65a370f898bde6b6af63f81962df \
+ file://defconfig \
+ file://sctp-fix.patch \
+ file://cm-t35/0001-omap3-cm-t35-add-mux-initialization.patch \
+diff --git a/recipes/linux/linux-omap2_git.bb b/recipes/linux/linux-omap2_git.bb
+index cb427e3..ad3a7eb 100644
+--- a/recipes/linux/linux-omap2_git.bb
++++ b/recipes/linux/linux-omap2_git.bb
+@@ -8,7 +8,7 @@ PV = "2.6.26"
+ #PV = "2.6.26+2.6.27-rc1+${PR}+git${SRCREV}"
+ PR = "r64"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append_beagleboard = " file://no-harry-potter.diff \
+diff --git a/recipes/linux/linux-omap_2.6.26.bb b/recipes/linux/linux-omap_2.6.26.bb
+index 0c8dcd9..0d74820 100644
+--- a/recipes/linux/linux-omap_2.6.26.bb
++++ b/recipes/linux/linux-omap_2.6.26.bb
+@@ -5,7 +5,7 @@ SRCREV = "d6daf8d8cc5ccf90247def5551ee9c3e8555e848"
+ PV = "2.6.26"
+ PR = "r65"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append_beagleboard = " file://no-harry-potter.diff \
+diff --git a/recipes/linux/linux-omap_2.6.27.bb b/recipes/linux/linux-omap_2.6.27.bb
+index fdf0fdd..36f86d9 100644
+--- a/recipes/linux/linux-omap_2.6.27.bb
++++ b/recipes/linux/linux-omap_2.6.27.bb
+@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "omap5912osk|omap1710h3|omap2430sdp|omap2420h4|beagleboard|
+ SRCREV = "2a3408be17f287fdb5809c9b6c68e7ad96d25b74"
+ PR = "r14"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.28.bb b/recipes/linux/linux-omap_2.6.28.bb
+index 622a38d..53fcc83 100644
+--- a/recipes/linux/linux-omap_2.6.28.bb
++++ b/recipes/linux/linux-omap_2.6.28.bb
+@@ -11,7 +11,7 @@ SRCREV = "79d042a081d3e467c735bb0d9569ed6296f85a3c"
+ 
+ PV = "2.6.28"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;branch=omap-2.6.28;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;branch=omap-2.6.28;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.29.bb b/recipes/linux/linux-omap_2.6.29.bb
+index a87fb25..3248dc3 100644
+--- a/recipes/linux/linux-omap_2.6.29.bb
++++ b/recipes/linux/linux-omap_2.6.29.bb
+@@ -17,7 +17,7 @@ SRCREV = "58cf2f1425abfd3a449f9fe985e48be2d2555022"
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+ PR_append = "+gitr${SRCREV}"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.31.bb b/recipes/linux/linux-omap_2.6.31.bb
+index 0f1e79b..2b627ca 100644
+--- a/recipes/linux/linux-omap_2.6.31.bb
++++ b/recipes/linux/linux-omap_2.6.31.bb
+@@ -13,7 +13,7 @@ SRCREV = "945044d157dd63c6af0f2ed40a5346382af94eb4"
+ #PV = "2.6.30+2.6.31-rc8+gitr${SRCREV}"
+ PV = "2.6.31"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.32.bb b/recipes/linux/linux-omap_2.6.32.bb
+index 348ec96..f5aacda 100644
+--- a/recipes/linux/linux-omap_2.6.32.bb
++++ b/recipes/linux/linux-omap_2.6.32.bb
+@@ -13,7 +13,7 @@ SRCREV = "89c9eaeb92c97348dcabd6cb377b646c00855f6a"
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+ PV = "2.6.32"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.37.bb b/recipes/linux/linux-omap_2.6.37.bb
+index 9c7ce01..6c63fa7 100644
+--- a/recipes/linux/linux-omap_2.6.37.bb
++++ b/recipes/linux/linux-omap_2.6.37.bb
+@@ -12,7 +12,7 @@ SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
+ 
+ FILESPATHPKG_prepend = "linux-omap-2.6.37:"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_2.6.38.bb b/recipes/linux/linux-omap_2.6.38.bb
+index b79d701..732e6df 100644
+--- a/recipes/linux/linux-omap_2.6.38.bb
++++ b/recipes/linux/linux-omap_2.6.38.bb
+@@ -12,7 +12,7 @@ SRCREV = "73ee404d7dedd23e35aae3ce516c504db783716f"
+ 
+ FILESPATHPKG_prepend = "linux-omap-2.6.38:"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " file://base/0001-ARM-OMAP-beagleboard-Add-infrastructure-to-do-fixups.patch \
+diff --git a/recipes/linux/linux-omap_2.6.39.bb b/recipes/linux/linux-omap_2.6.39.bb
+index 3880aa1..8172d5a 100644
+--- a/recipes/linux/linux-omap_2.6.39.bb
++++ b/recipes/linux/linux-omap_2.6.39.bb
+@@ -11,7 +11,7 @@ MACHINE_KERNEL_PR_append = "o"
+ 
+ FILESPATHPKG_prepend = "linux-omap-2.6.39:"
+ 
+-SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+             file://defconfig"
+ 
+ SRC_URI_append = " \
+diff --git a/recipes/linux/linux-omap_git.bb b/recipes/linux/linux-omap_git.bb
+index e74e8cf..1d729c2 100644
+--- a/recipes/linux/linux-omap_git.bb
++++ b/recipes/linux/linux-omap_git.bb
+@@ -15,7 +15,7 @@ FILESPATHPKG_prepend = "linux-omap-2.6.31:"
+ #PV = "2.6.30+2.6.31-rc8+gitr${SRCREV}"
+ PV = "2.6.31"
+ 
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+ 
+ SRC_URI_append = " \
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.7
 
---------------070306050007040500030901
-Content-Type: text/plain;
- name="log.do_compile.5337"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="log.do_compile.5337"
 
-KyBkb19jb21waWxlCisgYmFzZV9kb19jb21waWxlCisgJ1snIC1lIE1ha2VmaWxlIC1vIC1lIG1h
-a2VmaWxlIC1vIC1lIEdOVW1ha2VmaWxlICddJworIG9lX3J1bm1ha2UKKyBvZW5vdGUgbWFrZSAt
-aiA0CisgZWNobyBOT1RFOiAnbWFrZSAtaiA0JwpOT1RFOiBtYWtlIC1qIDQKKyBtYWtlIC1qIDQK
-Z2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVEFSTkFN
-RT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1ZFUlNJT049XCIzLjEyXCIgLURQQUNL
-QUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xzXCAzLjEyXCIgLURQQUNLQUdFX0JVR1JFUE9S
-VD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBBQ0tBR0U9XCJtb2R1bGUtaW5pdC10b29sc1wi
-IC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsva2FlaWxv
-cy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1ZGUgLWZm
-dW5jdGlvbi1zZWN0aW9ucyAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9r
-YWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1ZGUgLU8yIC1nIC1XdW51
-c2VkIC1XYWxsIC1NVCBsaWJtb2R0b29sc19hLXV0aWwubyAtTUQgLU1QIC1NRiAuZGVwcy9saWJt
-b2R0b29sc19hLXV0aWwuVHBvIC1jIC1vIGxpYm1vZHRvb2xzX2EtdXRpbC5vIGB0ZXN0IC1mICd1
-dGlsLmMnIHx8IGVjaG8gJy4vJ2B1dGlsLmMKZ2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWlu
-aXQtdG9vbHNcIiAtRFBBQ0tBR0VfVEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNL
-QUdFX1ZFUlNJT049XCIzLjEyXCIgLURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xz
-XCAzLjEyXCIgLURQQUNLQUdFX0JVR1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBB
-Q0tBR0U9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5
-c3RlbS9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94
-ODZfNjQtbGludXgvdXNyL2luY2x1ZGUgLWZmdW5jdGlvbi1zZWN0aW9ucyAtaXN5c3RlbS9ob21l
-L3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGlu
-dXgvdXNyL2luY2x1ZGUgLU8yIC1nIC1XdW51c2VkIC1XYWxsIC1NVCBsaWJtb2R0b29sc19hLWxv
-Z2dpbmcubyAtTUQgLU1QIC1NRiAuZGVwcy9saWJtb2R0b29sc19hLWxvZ2dpbmcuVHBvIC1jIC1v
-IGxpYm1vZHRvb2xzX2EtbG9nZ2luZy5vIGB0ZXN0IC1mICdsb2dnaW5nLmMnIHx8IGVjaG8gJy4v
-J2Bsb2dnaW5nLmMKZ2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBB
-Q0tBR0VfVEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1ZFUlNJT049XCIz
-LjEyXCIgLURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xzXCAzLjEyXCIgLURQQUNL
-QUdFX0JVR1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBBQ0tBR0U9XCJtb2R1bGUt
-aW5pdC10b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5c3RlbS9ob21lL3NsZWR6
-L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNy
-L2luY2x1ZGUgLWZmdW5jdGlvbi1zZWN0aW9ucyAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsva2Fl
-aWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1ZGUg
-LU8yIC1nIC1XdW51c2VkIC1XYWxsIC1NVCBsaWJtb2R0b29sc19hLWluZGV4Lm8gLU1EIC1NUCAt
-TUYgLmRlcHMvbGlibW9kdG9vbHNfYS1pbmRleC5UcG8gLWMgLW8gbGlibW9kdG9vbHNfYS1pbmRl
-eC5vIGB0ZXN0IC1mICdpbmRleC5jJyB8fCBlY2hvICcuLydgaW5kZXguYwpnY2MgLURQQUNLQUdF
-X05BTUU9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EUEFDS0FHRV9UQVJOQU1FPVwibW9kdWxlLWlu
-aXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVSU0lPTj1cIjMuMTJcIiAtRFBBQ0tBR0VfU1RSSU5HPVwi
-bW9kdWxlLWluaXQtdG9vbHNcIDMuMTJcIiAtRFBBQ0tBR0VfQlVHUkVQT1JUPVwiXCIgLURQQUNL
-QUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURWRVJTSU9OPVwi
-My4xMlwiIC1JLiAgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWls
-b3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtZmZ1bmN0aW9uLXNlY3Rp
-b25zIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5
-c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgLU1U
-IGxpYm1vZHRvb2xzX2EtY29uZmlnX2ZpbHRlci5vIC1NRCAtTVAgLU1GIC5kZXBzL2xpYm1vZHRv
-b2xzX2EtY29uZmlnX2ZpbHRlci5UcG8gLWMgLW8gbGlibW9kdG9vbHNfYS1jb25maWdfZmlsdGVy
-Lm8gYHRlc3QgLWYgJ2NvbmZpZ19maWx0ZXIuYycgfHwgZWNobyAnLi8nYGNvbmZpZ19maWx0ZXIu
-YwptdiAtZiAuZGVwcy9saWJtb2R0b29sc19hLWxvZ2dpbmcuVHBvIC5kZXBzL2xpYm1vZHRvb2xz
-X2EtbG9nZ2luZy5QbwpnY2MgLURQQUNLQUdFX05BTUU9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1E
-UEFDS0FHRV9UQVJOQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVSU0lPTj1c
-IjMuMTJcIiAtRFBBQ0tBR0VfU1RSSU5HPVwibW9kdWxlLWluaXQtdG9vbHNcIDMuMTJcIiAtRFBB
-Q0tBR0VfQlVHUkVQT1JUPVwiXCIgLURQQUNLQUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1cIm1vZHVs
-ZS1pbml0LXRvb2xzXCIgLURWRVJTSU9OPVwiMy4xMlwiIC1JLiAgIC1pc3lzdGVtL2hvbWUvc2xl
-ZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91
-c3IvaW5jbHVkZSAtZmZ1bmN0aW9uLXNlY3Rpb25zIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9r
-YWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVk
-ZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgLU1UIGxpYm1vZHRvb2xzX2EtZWxmb3BzLm8gLU1EIC1N
-UCAtTUYgLmRlcHMvbGlibW9kdG9vbHNfYS1lbGZvcHMuVHBvIC1jIC1vIGxpYm1vZHRvb2xzX2Et
-ZWxmb3BzLm8gYHRlc3QgLWYgJ2VsZm9wcy5jJyB8fCBlY2hvICcuLydgZWxmb3BzLmMKbXYgLWYg
-LmRlcHMvbGlibW9kdG9vbHNfYS1jb25maWdfZmlsdGVyLlRwbyAuZGVwcy9saWJtb2R0b29sc19h
-LWNvbmZpZ19maWx0ZXIuUG8KZ2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWluaXQtdG9vbHNc
-IiAtRFBBQ0tBR0VfVEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1ZFUlNJ
-T049XCIzLjEyXCIgLURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xzXCAzLjEyXCIg
-LURQQUNLQUdFX0JVR1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBBQ0tBR0U9XCJt
-b2R1bGUtaW5pdC10b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5c3RlbS9ob21l
-L3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGlu
-dXgvdXNyL2luY2x1ZGUgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2th
-ZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVz
-ZWQgLVdhbGwgLU1UIGxzbW9kLm8gLU1EIC1NUCAtTUYgLmRlcHMvbHNtb2QuVHBvIC1jIC1vIGxz
-bW9kLm8gbHNtb2QuYwptdiAtZiAuZGVwcy9saWJtb2R0b29sc19hLXV0aWwuVHBvIC5kZXBzL2xp
-Ym1vZHRvb2xzX2EtdXRpbC5QbwpnY2MgLURQQUNLQUdFX05BTUU9XCJtb2R1bGUtaW5pdC10b29s
-c1wiIC1EUEFDS0FHRV9UQVJOQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVS
-U0lPTj1cIjMuMTJcIiAtRFBBQ0tBR0VfU1RSSU5HPVwibW9kdWxlLWluaXQtdG9vbHNcIDMuMTJc
-IiAtRFBBQ0tBR0VfQlVHUkVQT1JUPVwiXCIgLURQQUNLQUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1c
-Im1vZHVsZS1pbml0LXRvb2xzXCIgLURWRVJTSU9OPVwiMy4xMlwiIC1JLiAgIC1pc3lzdGVtL2hv
-bWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1s
-aW51eC91c3IvaW5jbHVkZSAgLWlzeXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQv
-a2FlaWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlIC1PMiAtZyAtV3Vu
-dXNlZCAtV2FsbCAtTVQgbW9kaW5kZXgubyAtTUQgLU1QIC1NRiAuZGVwcy9tb2RpbmRleC5UcG8g
-LWMgLW8gbW9kaW5kZXgubyBtb2RpbmRleC5jCm12IC1mIC5kZXBzL2xzbW9kLlRwbyAuZGVwcy9s
-c21vZC5QbwpnY2MgLURQQUNLQUdFX05BTUU9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EUEFDS0FH
-RV9UQVJOQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVSU0lPTj1cIjMuMTJc
-IiAtRFBBQ0tBR0VfU1RSSU5HPVwibW9kdWxlLWluaXQtdG9vbHNcIDMuMTJcIiAtRFBBQ0tBR0Vf
-QlVHUkVQT1JUPVwiXCIgLURQQUNLQUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1cIm1vZHVsZS1pbml0
-LXRvb2xzXCIgLURWRVJTSU9OPVwiMy4xMlwiIC1JLiAgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29y
-ay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5j
-bHVkZSAgLWlzeXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAv
-c3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlIC1PMiAtZyAtV3VudXNlZCAtV2FsbCAt
-TVQgemxpYnN1cHBvcnQubyAtTUQgLU1QIC1NRiAuZGVwcy96bGlic3VwcG9ydC5UcG8gLWMgLW8g
-emxpYnN1cHBvcnQubyB6bGlic3VwcG9ydC5jCm12IC1mIC5kZXBzL21vZGluZGV4LlRwbyAuZGVw
-cy9tb2RpbmRleC5QbwpnY2MgLURQQUNLQUdFX05BTUU9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1E
-UEFDS0FHRV9UQVJOQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVSU0lPTj1c
-IjMuMTJcIiAtRFBBQ0tBR0VfU1RSSU5HPVwibW9kdWxlLWluaXQtdG9vbHNcIDMuMTJcIiAtRFBB
-Q0tBR0VfQlVHUkVQT1JUPVwiXCIgLURQQUNLQUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1cIm1vZHVs
-ZS1pbml0LXRvb2xzXCIgLURWRVJTSU9OPVwiMy4xMlwiIC1JLiAgIC1pc3lzdGVtL2hvbWUvc2xl
-ZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91
-c3IvaW5jbHVkZSAgLWlzeXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxv
-cy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlIC1PMiAtZyAtV3VudXNlZCAt
-V2FsbCAtTVQgaW5zbW9kLm8gLU1EIC1NUCAtTUYgLmRlcHMvaW5zbW9kLlRwbyAtYyAtbyBpbnNt
-b2QubyBpbnNtb2QuYwptdiAtZiAuZGVwcy96bGlic3VwcG9ydC5UcG8gLmRlcHMvemxpYnN1cHBv
-cnQuUG8KZ2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0Vf
-VEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1ZFUlNJT049XCIzLjEyXCIg
-LURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xzXCAzLjEyXCIgLURQQUNLQUdFX0JV
-R1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBBQ0tBR0U9XCJtb2R1bGUtaW5pdC10
-b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsv
-a2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1
-ZGUgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5
-c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgLU1U
-IG1vZHByb2JlLm8gLU1EIC1NUCAtTUYgLmRlcHMvbW9kcHJvYmUuVHBvIC1jIC1vIG1vZHByb2Jl
-Lm8gbW9kcHJvYmUuYwppbnNtb2QuYzogSW4gZnVuY3Rpb24gJ21haW4nOgppbnNtb2QuYzoxMTA6
-ODogd2FybmluZzogdmFyaWFibGUgJ3AnIHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1z
-ZXQtdmFyaWFibGVdCm12IC1mIC5kZXBzL2xpYm1vZHRvb2xzX2EtaW5kZXguVHBvIC5kZXBzL2xp
-Ym1vZHRvb2xzX2EtaW5kZXguUG8KZ2NjIC1EUEFDS0FHRV9OQU1FPVwibW9kdWxlLWluaXQtdG9v
-bHNcIiAtRFBBQ0tBR0VfVEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1ZF
-UlNJT049XCIzLjEyXCIgLURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1pbml0LXRvb2xzXCAzLjEy
-XCIgLURQQUNLQUdFX0JVR1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9XCJcIiAtRFBBQ0tBR0U9
-XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAtSS4gICAtaXN5c3RlbS9o
-b21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQt
-bGludXgvdXNyL2luY2x1ZGUgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxk
-L2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1
-bnVzZWQgLVdhbGwgLU1UIHJtbW9kLm8gLU1EIC1NUCAtTUYgLmRlcHMvcm1tb2QuVHBvIC1jIC1v
-IHJtbW9kLm8gcm1tb2QuYwptdiAtZiAuZGVwcy9pbnNtb2QuVHBvIC5kZXBzL2luc21vZC5Qbwpn
-Y2MgLURQQUNLQUdFX05BTUU9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EUEFDS0FHRV9UQVJOQU1F
-PVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVkVSU0lPTj1cIjMuMTJcIiAtRFBBQ0tB
-R0VfU1RSSU5HPVwibW9kdWxlLWluaXQtdG9vbHNcIDMuMTJcIiAtRFBBQ0tBR0VfQlVHUkVQT1JU
-PVwiXCIgLURQQUNLQUdFX1VSTD1cIlwiIC1EUEFDS0FHRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIg
-LURWRVJTSU9OPVwiMy4xMlwiIC1JLiAgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9z
-L2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAgLWlz
-eXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMv
-eDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlIC1PMiAtZyAtV3VudXNlZCAtV2FsbCAtTVQgZGVwbW9k
-Lm8gLU1EIC1NUCAtTUYgLmRlcHMvZGVwbW9kLlRwbyAtYyAtbyBkZXBtb2QubyBkZXBtb2QuYwpy
-bW1vZC5jOiBJbiBmdW5jdGlvbiAnbWFpbic6CnJtbW9kLmM6MTY1OjE0OiB3YXJuaW5nOiB2YXJp
-YWJsZSAnYWxsJyBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQpt
-diAtZiAuZGVwcy9ybW1vZC5UcG8gLmRlcHMvcm1tb2QuUG8KZ2NjIC1EUEFDS0FHRV9OQU1FPVwi
-bW9kdWxlLWluaXQtdG9vbHNcIiAtRFBBQ0tBR0VfVEFSTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xz
-XCIgLURQQUNLQUdFX1ZFUlNJT049XCIzLjEyXCIgLURQQUNLQUdFX1NUUklORz1cIm1vZHVsZS1p
-bml0LXRvb2xzXCAzLjEyXCIgLURQQUNLQUdFX0JVR1JFUE9SVD1cIlwiIC1EUEFDS0FHRV9VUkw9
-XCJcIiAtRFBBQ0tBR0U9XCJtb2R1bGUtaW5pdC10b29sc1wiIC1EVkVSU0lPTj1cIjMuMTJcIiAt
-SS4gICAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9z
-eXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1ZGUgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29y
-ay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5j
-bHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgLU1UIHRhYmxlcy5vIC1NRCAtTVAgLU1GIC5kZXBz
-L3RhYmxlcy5UcG8gLWMgLW8gdGFibGVzLm8gdGFibGVzLmMKbXYgLWYgLmRlcHMvbGlibW9kdG9v
-bHNfYS1lbGZvcHMuVHBvIC5kZXBzL2xpYm1vZHRvb2xzX2EtZWxmb3BzLlBvCmdjYyAtRFBBQ0tB
-R0VfTkFNRT1cIm1vZHVsZS1pbml0LXRvb2xzXCIgLURQQUNLQUdFX1RBUk5BTUU9XCJtb2R1bGUt
-aW5pdC10b29sc1wiIC1EUEFDS0FHRV9WRVJTSU9OPVwiMy4xMlwiIC1EUEFDS0FHRV9TVFJJTkc9
-XCJtb2R1bGUtaW5pdC10b29sc1wgMy4xMlwiIC1EUEFDS0FHRV9CVUdSRVBPUlQ9XCJcIiAtRFBB
-Q0tBR0VfVVJMPVwiXCIgLURQQUNLQUdFPVwibW9kdWxlLWluaXQtdG9vbHNcIiAtRFZFUlNJT049
-XCIzLjEyXCIgLUkuICAgLWlzeXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2Fl
-aWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlICAtaXN5c3RlbS9ob21l
-L3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGlu
-dXgvdXNyL2luY2x1ZGUgLU8yIC1nIC1XdW51c2VkIC1XYWxsIC1NVCBtb2RpbmZvLm8gLU1EIC1N
-UCAtTUYgLmRlcHMvbW9kaW5mby5UcG8gLWMgLW8gbW9kaW5mby5vIG1vZGluZm8uYwptdiAtZiAu
-ZGVwcy9tb2Rwcm9iZS5UcG8gLmRlcHMvbW9kcHJvYmUuUG8Kcm0gLWYgbGlibW9kdG9vbHMuYQph
-ciBjcnUgbGlibW9kdG9vbHMuYSBsaWJtb2R0b29sc19hLXV0aWwubyBsaWJtb2R0b29sc19hLWxv
-Z2dpbmcubyBsaWJtb2R0b29sc19hLWluZGV4Lm8gbGlibW9kdG9vbHNfYS1jb25maWdfZmlsdGVy
-Lm8gbGlibW9kdG9vbHNfYS1lbGZvcHMubyAKcmFubGliIGxpYm1vZHRvb2xzLmEKbXYgLWYgLmRl
-cHMvbW9kaW5mby5UcG8gLmRlcHMvbW9kaW5mby5QbwpnY2MgIC1pc3lzdGVtL2hvbWUvc2xlZHov
-d29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3Iv
-aW5jbHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgIC1ML2hvbWUvc2xlZHovd29yay9rYWVpbG9z
-L2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwtcnBh
-dGgtbGluaywvaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9v
-dHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1ycGF0aCwvaG9tZS9zbGVkei93b3JrL2thZWls
-b3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1P
-MSAtbyBsc21vZCBsc21vZC5vICBsaWJtb2R0b29scy5hIApnY2MgIC1pc3lzdGVtL2hvbWUvc2xl
-ZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91
-c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgIC1ML2hvbWUvc2xlZHovd29yay9rYWVp
-bG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwt
-cnBhdGgtbGluaywvaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lz
-cm9vdHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1ycGF0aCwvaG9tZS9zbGVkei93b3JrL2th
-ZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVds
-LC1PMSAtbyBtb2RpbmRleCBtb2RpbmRleC5vIHpsaWJzdXBwb3J0Lm8gIGxpYm1vZHRvb2xzLmEg
-CmdjYyAgLWlzeXN0ZW0vaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAv
-c3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9pbmNsdWRlIC1PMiAtZyAtV3VudXNlZCAtV2FsbCAg
-LUwvaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMveDg2
-XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1ycGF0aC1saW5rLC9ob21lL3NsZWR6L3dvcmsva2FlaWxv
-cy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2xpYiAtV2wsLXJw
-YXRoLC9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94
-ODZfNjQtbGludXgvdXNyL2xpYiAtV2wsLU8xIC1vIGluc21vZCBpbnNtb2QubyAgbGlibW9kdG9v
-bHMuYSAKZ2NjICAtaXN5c3RlbS9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9z
-L3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2luY2x1ZGUgLU8yIC1nIC1XdW51c2VkIC1X
-YWxsICAtTC9ob21lL3NsZWR6L3dvcmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290
-cy94ODZfNjQtbGludXgvdXNyL2xpYiAtV2wsLXJwYXRoLWxpbmssL2hvbWUvc2xlZHovd29yay9r
-YWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1X
-bCwtcnBhdGgsL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jv
-b3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwtTzEgLW8gbW9kcHJvYmUgbW9kcHJvYmUubyB6
-bGlic3VwcG9ydC5vICBsaWJtb2R0b29scy5hIAptdiAtZiAuZGVwcy9kZXBtb2QuVHBvIC5kZXBz
-L2RlcG1vZC5QbwpnY2MgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2th
-ZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVz
-ZWQgLVdhbGwgIC1ML2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5
-c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwtcnBhdGgtbGluaywvaG9tZS9zbGVkei93
-b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9s
-aWIgLVdsLC1ycGF0aCwvaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAv
-c3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1PMSAtbyBybW1vZCBybW1vZC5vICBs
-aWJtb2R0b29scy5hIApnY2MgIC1pc3lzdGVtL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxk
-L2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvaW5jbHVkZSAtTzIgLWcgLVd1
-bnVzZWQgLVdhbGwgIC1ML2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1w
-L3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwtcnBhdGgtbGluaywvaG9tZS9zbGVk
-ei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vz
-ci9saWIgLVdsLC1ycGF0aCwvaG9tZS9zbGVkei93b3JrL2thZWlsb3MvYnVpbGQva2FlaWxvcy90
-bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9saWIgLVdsLC1PMSAtbyBtb2RpbmZvIG1vZGlu
-Zm8ubyB6bGlic3VwcG9ydC5vICBsaWJtb2R0b29scy5hIApnY2MgIC1pc3lzdGVtL2hvbWUvc2xl
-ZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91
-c3IvaW5jbHVkZSAtTzIgLWcgLVd1bnVzZWQgLVdhbGwgLXN0YXRpYyAtTC9ob21lL3NsZWR6L3dv
-cmsva2FlaWxvcy9idWlsZC9rYWVpbG9zL3RtcC9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2xp
-YiAtV2wsLXJwYXRoLWxpbmssL2hvbWUvc2xlZHovd29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3Mv
-dG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3IvbGliIC1XbCwtcnBhdGgsL2hvbWUvc2xlZHov
-d29yay9rYWVpbG9zL2J1aWxkL2thZWlsb3MvdG1wL3N5c3Jvb3RzL3g4Nl82NC1saW51eC91c3Iv
-bGliIC1XbCwtTzEgLW8gaW5zbW9kLnN0YXRpYyBpbnNtb2QubyBsaWJtb2R0b29scy5hIAovdXNy
-L2xpYjY0L2djYy94ODZfNjQtc3VzZS1saW51eC80LjYvLi4vLi4vLi4vLi4veDg2XzY0LXN1c2Ut
-bGludXgvYmluL2xkOiBjYW5ub3QgZmluZCAtbGMKY29sbGVjdDI6IGxkIHJldHVybmVkIDEgZXhp
-dCBzdGF0dXMKbWFrZTogKioqIFtpbnNtb2Quc3RhdGljXSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0
-aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCm12IC1mIC5kZXBzL3RhYmxlcy5UcG8gLmRlcHMv
-dGFibGVzLlBvCisgZGllICdvZV9ydW5tYWtlIGZhaWxlZCcKKyBvZWZhdGFsICdvZV9ydW5tYWtl
-IGZhaWxlZCcKKyBlY2hvIEZBVEFMOiAnb2VfcnVubWFrZSBmYWlsZWQnCkZBVEFMOiBvZV9ydW5t
-YWtlIGZhaWxlZAorIGV4aXQgMQo=
 
---------------070306050007040500030901--
