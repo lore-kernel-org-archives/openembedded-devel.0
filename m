@@ -1,26 +1,29 @@
-Received: from smtp207.alice.it ([82.57.200.103])
+Received: from mail-qw0-f54.google.com ([209.85.216.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>) id 1RYb4X-0002dW-Al
+	(envelope-from <tom.rini@gmail.com>) id 1RYfSi-0003DZ-0P
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Dec 2011 11:19:25 +0100
-Received: from jcn (79.2.146.244) by smtp207.alice.it (8.6.023.02)
-	(authenticated as fospite@alice.it)
-	id 4ED236CF01AC7250; Thu, 8 Dec 2011 11:12:37 +0100
-Date: Thu, 8 Dec 2011 11:12:13 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Thu, 08 Dec 2011 16:00:41 +0100
+Received: by qabg14 with SMTP id g14so1599385qab.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Dec 2011 06:53:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=Y9qbcsmJwjGO00Db4x/tzHAAyF73izxd6dmR44rSoxc=;
+	b=mmAwAyWIVto2zZIHiNPIn+jjqTPAHGFIocb42cjfvihh8p4gihhWFCdTv9gqwaGtGp
+	IHSDQ4+Z1QnlTxo8Gx/T7UqhvEzOdjqVoUp+CbyUHIzfkQjV7t9V36UXTIhykVCrosWa
+	C+9JXpsWb5yLO6vndvzNfh+x22lKg04I1kn7k=
+MIME-Version: 1.0
+Received: by 10.224.189.78 with SMTP id dd14mr3189981qab.31.1323356028848;
+	Thu, 08 Dec 2011 06:53:48 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Thu, 8 Dec 2011 06:53:48 -0800 (PST)
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C401A486D@post.tritech.se>
+Date: Thu, 8 Dec 2011 07:53:48 -0700
+Message-ID: <CA+M6bXmAWBYktJBtxYXoqWsXr=2ADAqJ0+Xa4YWZkWYQV+wQMQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20111208111213.47d30591074a587aa68a58ab@studenti.unina.it>
-In-Reply-To: <20111207153453.GG3897@jama.jama.net>
-References: <1323271091-8549-1-git-send-email-ospite@studenti.unina.it>
-	<20111207153453.GG3897@jama.jama.net>
-X-Mailer: Sylpheed 3.2.0beta4 (GTK+ 2.24.8; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [oe-core][PATCH] gcc-4.6.inc: remove gcc-arm-set-cost.patch merged upstream
+Subject: Re: [2011.03-maintenance] Pull request for libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,63 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2011 10:19:25 -0000
-X-Groupsio-MsgNum: 35979
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd"
-
---Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Dec 2011 15:00:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 7 Dec 2011 16:34:53 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> On Wed, Dec 07, 2011 at 04:18:11PM +0100, Antonio Ospite wrote:
-> > gcc-arm-set-cost.patch is not needed anymore as it has been merged
-> > upstream, remove it.
->=20
-> I belive this is because you're using meta-oe from where this patch was
-> moved to oe-core and it wasn't removed from meta-oe at the same time when=
-=20
-> it was applied in oe-core.
+On Mon, Dec 5, 2011 at 9:42 AM, Mats K=E4rrman <Mats.Karrman@tritech.se> wr=
+ote:
+> Hello Tom,
 >
+> Please pull this commit from here:
+>
+> git://github.com/mkarrman/openembedded
+> Branch: maintenance
+>
+> Mats K=E4rrman (1):
+> =A0 =A0 =A0368c68a =A0libpam_1.1.1: remove directory preventing /var/run =
+from being volatile.
 
-I see, I wrongly assumed the change was upstream but meta-oe was
-applying it on top of the one from oe-core (or the other way around?),
-I did not "think in layers", sorry.
-
-> So right fix is to update your meta-oe checkout
-> http://git.openembedded.org/meta-openembedded/commit/?id=3D9e0a23fcb4e2c0=
-c57de5e7b0ee8ed253b11d15b8
->=20
-
-OK thanks, I updated and I am rebuilding from scratch now.
-
-Regards,
-   Antonio
+To be clear, since you've made changes to this patch based on Paul's
+feedback for oe.dev/master, I expect a new pull request with these
+changes incorporated, thanks!
 
 --=20
-Antonio Ospite
-http://ao2.it
+Tom
 
-PGP public key ID: 0x4553B001
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-
---Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk7gjX0ACgkQ5xr2akVTsAG6YQCcDSjrKmnDK7OZcp+4ZmgJirei
-s+8AoIjSMxR/Al1x63t+CBjrY2fFYHYA
-=hwNR
------END PGP SIGNATURE-----
-
---Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd--
