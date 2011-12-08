@@ -1,28 +1,26 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RYZso-0000Jg-OJ
+	(envelope-from <ospite@studenti.unina.it>) id 1RYb4X-0002dW-Al
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Dec 2011 10:03:14 +0100
-Received: by eaao14 with SMTP id o14so980706eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Dec 2011 00:56:25 -0800 (PST)
-Received: by 10.213.9.204 with SMTP id m12mr96699ebm.52.1323334585317;
-	Thu, 08 Dec 2011 00:56:25 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id x12sm15483952eef.9.2011.12.08.00.56.24
-	(version=SSLv3 cipher=OTHER); Thu, 08 Dec 2011 00:56:24 -0800 (PST)
-Message-ID: <4EE07BB8.1000101@dresearch-fe.de>
-Date: Thu, 08 Dec 2011 09:56:24 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <4EDF6C9E.6050806@dresearch-fe.de>
-In-Reply-To: <4EDF6C9E.6050806@dresearch-fe.de>
-X-Enigmail-Version: 1.3.3
-Subject: Re: [master/2011.03-maintenance] module-init-tools-cross-3.12-r6: task do_compile: Failed (solution)
+	Thu, 08 Dec 2011 11:19:25 +0100
+Received: from jcn (79.2.146.244) by smtp207.alice.it (8.6.023.02)
+	(authenticated as fospite@alice.it)
+	id 4ED236CF01AC7250; Thu, 8 Dec 2011 11:12:37 +0100
+Date: Thu, 8 Dec 2011 11:12:13 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: openembedded-devel@lists.openembedded.org
+Message-Id: <20111208111213.47d30591074a587aa68a58ab@studenti.unina.it>
+In-Reply-To: <20111207153453.GG3897@jama.jama.net>
+References: <1323271091-8549-1-git-send-email-ospite@studenti.unina.it>
+	<20111207153453.GG3897@jama.jama.net>
+X-Mailer: Sylpheed 3.2.0beta4 (GTK+ 2.24.8; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [oe-core][PATCH] gcc-4.6.inc: remove gcc-arm-set-cost.patch merged upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,57 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2011 09:03:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 08 Dec 2011 10:19:25 -0000
+X-Groupsio-MsgNum: 35979
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd"
 
-On 07.12.2011 14:39, Steffen Sledz wrote:
-> This problem occurs with the current master (a4f35de0f6ca17e92763d5a5f32422c56e5d8882) *and* the 2011.03-maintenance branch (672af8093cf33d8b90e9186986ba5c95fc7a0a0a).
-> 
-> To reproduce it i used the current Kaeilos setup and made a clean build.
-> 
-> ------------------->snip<--------------------
-> 14:11 sledz@~/work/kaeilos/build/kaeilos $ MACHINE=beagleboard bitbake module-init-tools-cross
-> ...
-> Build Configuration:
-> BB_VERSION        = "1.12.0"
-> METADATA_BRANCH   = "2011.03-maintenance"
-> METADATA_REVISION = "672af80"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "beagleboard"
-> DISTRO            = "kaeilos"
-> DISTRO_VERSION    = "2009.2-test-20111207"
-> TARGET_FPU        = "hard"
-> ...
-> | gcc  -isystem/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/include -O2 -g -Wunused -Wall -static -L/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-rpath-link,/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-rpath,/home/sledz/work/kaeilos/build/kaeilos/tmp/sysroots/x86_64-linux/usr/lib -Wl,-O1 -o insmod.static insmod.o libmodtools.a
-> | /usr/lib64/gcc/x86_64-suse-linux/4.6/../../../../x86_64-suse-linux/bin/ld: cannot find -lc
-> | collect2: ld returned 1 exit status
-> | make: *** [insmod.static] Error 1
-> | make: *** Waiting for unfinished jobs....
-> | mv -f .deps/tables.Tpo .deps/tables.Po
-> | + die 'oe_runmake failed'
-> | + oefatal 'oe_runmake failed'
-> | + echo FATAL: 'oe_runmake failed'
-> | FATAL: oe_runmake failed
-> | + exit 1
-> NOTE: package module-init-tools-cross-3.12-r6: task do_compile: Failed
-> ERROR: Function 'do_compile' failed (see /home/sledz/work/kaeilos/build/kaeilos/tmp/work/armv7a-kaeilos-linux-gnueabi/module-init-tools-cross-3.12-r6/temp/log.do_compile.5337 for further information)
-> ------------------->snip<--------------------
-> 
-> (complete compile log is attached)
+--Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The cause for this problem was a missing package glibc-devel-static at my new installed openSUSE 12.1 build host.
+On Wed, 7 Dec 2011 16:34:53 +0100
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Sorry for the annoyance.
+> On Wed, Dec 07, 2011 at 04:18:11PM +0100, Antonio Ospite wrote:
+> > gcc-arm-set-cost.patch is not needed anymore as it has been merged
+> > upstream, remove it.
+>=20
+> I belive this is because you're using meta-oe from where this patch was
+> moved to oe-core and it wasn't removed from meta-oe at the same time when=
+=20
+> it was applied in oe-core.
+>
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+I see, I wrongly assumed the change was upstream but meta-oe was
+applying it on top of the one from oe-core (or the other way around?),
+I did not "think in layers", sorry.
 
+> So right fix is to update your meta-oe checkout
+> http://git.openembedded.org/meta-openembedded/commit/?id=3D9e0a23fcb4e2c0=
+c57de5e7b0ee8ed253b11d15b8
+>=20
 
+OK thanks, I updated and I am rebuilding from scratch now.
+
+Regards,
+   Antonio
+
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+
+--Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk7gjX0ACgkQ5xr2akVTsAG6YQCcDSjrKmnDK7OZcp+4ZmgJirei
+s+8AoIjSMxR/Al1x63t+CBjrY2fFYHYA
+=hwNR
+-----END PGP SIGNATURE-----
+
+--Signature=_Thu__8_Dec_2011_11_12_13_+0100_AHj.MwF_opkzYtDd--
