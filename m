@@ -1,28 +1,38 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1RZ6wN-0000VB-Tm
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RZ7RH-0001ck-Rh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 21:21:08 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id pB9KEFLV028109
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 09 Dec 2011 21:53:03 +0100
+Received: by faaa20 with SMTP id a20so1079843faa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Dec 2011 12:14:15 -0800 (PST)
-Received: from Macintosh-5.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
-	Fri, 9 Dec 2011 12:14:15 -0800
-Message-ID: <4EE26C16.8040707@windriver.com>
-Date: Fri, 9 Dec 2011 14:14:14 -0600
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
+	Fri, 09 Dec 2011 12:46:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=4TOpYjd0wO4ibrliGY19isWnSG07jh08oY8x7Y2JeHI=;
+	b=M7nfsdKzSQ+h56ZtOcjMwxKODVoeAv3Ogh5VxNbccLE4ab6RtrTLENPP4frcLGN1nX
+	HALzRzYAn3y1rMwrdmZl2j5dk7vkIuOe8osLm4WVeVqvkvTmm/638YBoE6eibBBfrvE5
+	1nPvpRVIqMfocBLwHSJV1BtYcONApZ3k1wZWc=
+Received: by 10.180.6.71 with SMTP id y7mr12041837wiy.67.1323463572792;
+	Fri, 09 Dec 2011 12:46:12 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id p2sm906006wbh.22.2011.12.09.12.46.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Dec 2011 12:46:11 -0800 (PST)
+Message-ID: <4EE2738E.4060902@googlemail.com>
+Date: Fri, 09 Dec 2011 20:46:06 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4EE17931.7000609@googlemail.com>	<CABcZANn76DwH5QPkZw_zPVBHxS0F3a-7YgKebU3Hd=+CtZd+eQ@mail.gmail.com>	<4EE20646.2030300@googlemail.com>	<jbt2rc$l31$1@dough.gmane.org>
-	<4EE2305B.5030407@googlemail.com> <4EE23411.2060907@windriver.com>
-	<4EE25A0B.7070309@googlemail.com>
-In-Reply-To: <4EE25A0B.7070309@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+References: <4EE17931.7000609@googlemail.com>	<CABcZANn76DwH5QPkZw_zPVBHxS0F3a-7YgKebU3Hd=+CtZd+eQ@mail.gmail.com>	<4EE20646.2030300@googlemail.com>	<jbt2rc$l31$1@dough.gmane.org>	<4EE2305B.5030407@googlemail.com>
+	<4EE23411.2060907@windriver.com>	<4EE25A0B.7070309@googlemail.com>
+	<4EE26C16.8040707@windriver.com>
+In-Reply-To: <4EE26C16.8040707@windriver.com>
 Subject: Re: packages versioning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,46 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 20:21:08 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Fri, 09 Dec 2011 20:53:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12/9/11 12:57 PM, Mr Dash Four wrote:
->
->> The creation of the filesystem image is driven by a number of
->> components. Basically it works like this:
-> Thanks a lot for that - a good insight into the workings of oe and
-> bitbake. I was hoping there would be an easier way to configure/change
-> this to what I want, but I see that it is much more complex than I
-> thought initially.
 
-Ya, I created the spreadsheet due to the complexity.. :(  I like the flexibility 
-of the components that are used to construct the image packages, but there has 
-to be a more transparent way of doing this.
+> Ya, I created the spreadsheet due to the complexity.. :(  I like the 
+> flexibility of the components that are used to construct the image 
+> packages, but there has to be a more transparent way of doing this.
+I concur. I am starting to like oe and its flexibility, but it is a hell 
+of a steep curve at first to take on...particularly for people like me 
+that have little-to-no experience of oe.
 
->> I have a spreadsheet (OpenOffice 17k, or Excel 81k) that lists all of
->> the current breakdowns.  If you are interested send me an email off list.
-> I am interested (excel would be nice, thanks), but don't know your email
-> address (all I get when responding to 'all' is the mailing list email
-> address) - if you know mine, you could send me that and I'll have a look.
+> (Sent as a private email)
+Got it, thanks a lot - will look at it tomorrow in more detail.
 
-(Sent as a private email)
+> As Gary suggested in another email, "hob" is the best approach right now.
+I'll try that as well - it would be nice to see where all these 
+dependencies/packages come from, because for my (admittedly, rather 
+limited) case I won't need half the packages installed on that image, 
+but OTOH would need to add a few additions of my own to what is already 
+'included', so it is quite a change. I also plan to create one or two 
+new recipes for packages worth including (particularly for small systems 
+like the console image I am trying to build).
 
-> I take it there isn't an easy way to see the hierarchy of all
-> packages/dependencies involved in a particular image, is it (your
-> spreadsheet may be good, but I suppose it is static and reflects just a
-> current snapshot of a given packages/dependencies and that might change)?
->
-> If all else fails, I might use ipkg on the target system to uninstall
-> the packages I don't need and install new ones - not ideal by any means,
-> but this is what I'll do only as a last resort, if all else fails.
-> Thanks again for the thorough response!
+What is the policy of submitting patches on here - I followed the debate 
+about oe-classic/oe-core, but am still unclear if I want to submit 
+patches (I am working with oe-classic - so I am told) what should I base 
+against these?
 
-As Gary suggested in another email, "hob" is the best approach right now.
+> You can certainly remove binary packages after the fact, but it's much 
+> nicer to not have to.
+Indeed and it is the reason for asking here first as I always believe 
+there must be more intelligent and elegant solution to this than hacking 
+the target system (which I'll have to do each time I 
+build/update/upgrade that image).
 
-You can certainly remove binary packages after the fact, but it's much nicer to 
-not have to.
-
---Mark
 
 
