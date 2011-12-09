@@ -1,36 +1,22 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RZ0iu-0001Rx-M6 for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 14:42:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RZ0cI-0005rC-St for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 14:35:58 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 14:35:58 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 14:35:58 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 09 Dec 2011 14:35:40 +0100
-Message-ID: <jbt2rc$l31$1@dough.gmane.org>
-References: <4EE17931.7000609@googlemail.com>
-	<CABcZANn76DwH5QPkZw_zPVBHxS0F3a-7YgKebU3Hd=+CtZd+eQ@mail.gmail.com>
-	<4EE20646.2030300@googlemail.com>
+	(envelope-from <ospite@studenti.unina.it>) id 1RZ1kd-0002pR-Ma
+	for openembedded-devel@openembedded.org; Fri, 09 Dec 2011 15:48:39 +0100
+Received: from jcn (87.6.149.179) by smtp206.alice.it (8.6.023.02)
+	(authenticated as fospite@alice.it)
+	id 4ECA607902EEE9B8 for openembedded-devel@openembedded.org;
+	Fri, 9 Dec 2011 15:35:56 +0100
+Date: Fri, 9 Dec 2011 15:35:49 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: openembedded-devel@openembedded.org
+Message-Id: <20111209153549.b1b8cc650d47813a694e9fc7@studenti.unina.it>
+X-Mailer: Sylpheed 3.2.0beta4 (GTK+ 2.24.8; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <4EE20646.2030300@googlemail.com>
-X-Enigmail-Version: 1.3.3
-Subject: Re: packages versioning
+Subject: Using 'mr' to manage an oe-core build environment (configuration and layers)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,47 +30,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 13:42:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Dec 2011 14:48:39 -0000
+X-Groupsio-MsgNum: 36005
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 09-12-11 13:59, Mr Dash Four schreef:
-> 
->>> Is there a way I could force/select a particular version of a
->>> specific package in a given target?
->>> 
->>> I am building my fso-console-image and I would like it to use
->>> udev-165 instead of udev-162, but I can't find a way to alter this. I
->>> could build udev-165 separately - no problem, but don't know how to
->>> integrate this into the main task of building the image itself.
->>> 
->> 
->> PREFERRED_VERSION_udev = "165"
->> 
->> 
->>> Also, is there a way I can include additional packages as part of
->>> that fso-console-image build? I'd like to have openvpn, a different
->>> version of wpa_supplicant, openssl etc.
->>> 
->> 
->> IMAGE_INSTALL_append = " openvpn"
->> 
-> Superb, thank you! One more query regarding this - how do I remove
-> packages I do not want included in the final image? Is there a way to do
-> that (fairly) easily?
+Hi,
 
-Yes, create your own image recipe.
+I was looking into 'mr'[1] for another project and I thought about
+trying it for an oe-core workflow.
+
+The idea is to manage layers and configurations to set up a certain
+build environment with as few files as possible and with a way to easily
+recreate that environment, I've heard about alternative ways of doing
+that using 'repo' from android or git submodules, or some OE specific
+scripts, but I don't really know the details of those and I am not able
+to compare them with my approach, so I thought I'd just share it here
+and let you tell me.
+
+Here is some brief documentation:
+http://ao2.it/tmp/oe-ezx-build/README.asciidoc
+
+You can recreate the build environment with just this command:
+  mr bootstrap http://ao2.it/tmp/oe-ezx-build/.mrconfig oe-ezx-build
+
+This will bring in the configuration for the build environment (kept
+under revision control as well as the .mrconfig itself), and will
+checkout all the needed layers.
+
+You can start building right away with:
+  cd oe-ezx-build
+  . ./oe-core/oe-init-build-env
+  bitbake meta-toolchain
+
+You can do some work in the various component of the environment and
+check the status with:
+  mr status
+
+BTW the output of this last command makes me wonder if oe-core should
+put bitbake/ in .gitignore
+
+Adding layers is not immediate yet because this is a rare event in my
+use case.
+
+Final note, the repository under http://ao2.it/tmp/ is temporary and
+will most likely go away sometimes in the future. :)
+
+Thanks,
+   Antonio
+
+[1] http://kitenet.net/~joey/code/mr/
+
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+
+--Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_
+Content-Type: application/pgp-signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk7iDqoACgkQMkyGM64RGpE03wCfcIs3EgRCInV/7UR4HHhslFZN
-57kAoKbY+qE+wCxTLMQbEczLYiSr+a+u
-=4Wsq
+iEYEARECAAYFAk7iHMUACgkQ5xr2akVTsAE2EACfaNfleM8puXbUFuN6PIQF9qFG
+BhgAnRDzsJkh3pJziihlYhlss+Sdiod9
+=TQEr
 -----END PGP SIGNATURE-----
 
-
-
+--Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_--
