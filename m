@@ -1,39 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mr.dash.four@googlemail.com>) id 1RZ7RH-0001ck-Rh
+	(envelope-from <obi@opendreambox.org>) id 1RZ7z1-0002lG-7P
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 21:53:03 +0100
-Received: by faaa20 with SMTP id a20so1079843faa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 12:46:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=message-id:disposition-notification-to:date:from:user-agent
-	:mime-version:to:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=4TOpYjd0wO4ibrliGY19isWnSG07jh08oY8x7Y2JeHI=;
-	b=M7nfsdKzSQ+h56ZtOcjMwxKODVoeAv3Ogh5VxNbccLE4ab6RtrTLENPP4frcLGN1nX
-	HALzRzYAn3y1rMwrdmZl2j5dk7vkIuOe8osLm4WVeVqvkvTmm/638YBoE6eibBBfrvE5
-	1nPvpRVIqMfocBLwHSJV1BtYcONApZ3k1wZWc=
-Received: by 10.180.6.71 with SMTP id y7mr12041837wiy.67.1323463572792;
-	Fri, 09 Dec 2011 12:46:12 -0800 (PST)
-Received: from [10.68.68.173]
-	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
-	by mx.google.com with ESMTPS id p2sm906006wbh.22.2011.12.09.12.46.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Dec 2011 12:46:11 -0800 (PST)
-Message-ID: <4EE2738E.4060902@googlemail.com>
-Date: Fri, 09 Dec 2011 20:46:06 +0000
-From: Mr Dash Four <mr.dash.four@googlemail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
+	Fri, 09 Dec 2011 22:27:55 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 3CB783156C23;
+	Fri,  9 Dec 2011 22:21:06 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id xJvOsEK28cWd; Fri,  9 Dec 2011 22:20:58 +0100 (CET)
+Received: from [172.22.22.61] (drms-590ceabd.pool.mediaWays.net
+	[89.12.234.189])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 3210D3156C22;
+	Fri,  9 Dec 2011 22:20:58 +0100 (CET)
+Message-ID: <4EE27BB8.3020903@opendreambox.org>
+Date: Fri, 09 Dec 2011 22:20:56 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111124 Thunderbird/8.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4EE17931.7000609@googlemail.com>	<CABcZANn76DwH5QPkZw_zPVBHxS0F3a-7YgKebU3Hd=+CtZd+eQ@mail.gmail.com>	<4EE20646.2030300@googlemail.com>	<jbt2rc$l31$1@dough.gmane.org>	<4EE2305B.5030407@googlemail.com>
-	<4EE23411.2060907@windriver.com>	<4EE25A0B.7070309@googlemail.com>
-	<4EE26C16.8040707@windriver.com>
-In-Reply-To: <4EE26C16.8040707@windriver.com>
-Subject: Re: packages versioning
+To: Tom Rini <tom.rini@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: fakeroot 1.15.1 in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +39,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 20:53:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 09 Dec 2011 21:27:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Hi Tom, all,
 
-> Ya, I created the spreadsheet due to the complexity.. :(  I like the 
-> flexibility of the components that are used to construct the image 
-> packages, but there has to be a more transparent way of doing this.
-I concur. I am starting to like oe and its flexibility, but it is a hell 
-of a steep curve at first to take on...particularly for people like me 
-that have little-to-no experience of oe.
+one week ago, the fakeroot recipe was moved to 1.15.1 [1] in order to fix
+a download problem, even though previous attempts were rejected [2,3].
+Well, now I get the following error:
 
-> (Sent as a private email)
-Got it, thanks a lot - will look at it tomorrow in more detail.
 
-> As Gary suggested in another email, "hob" is the best approach right now.
-I'll try that as well - it would be nice to see where all these 
-dependencies/packages come from, because for my (admittedly, rather 
-limited) case I won't need half the packages installed on that image, 
-but OTOH would need to add a few additions of my own to what is already 
-'included', so it is quite a change. I also plan to create one or two 
-new recipes for packages worth including (particularly for small systems 
-like the console image I am trying to build).
+ERROR: The checksums for "[...]/fakeroot_1.15.1.orig.tar.bz2" did not match.
+  MD5: expected "248c408b1e06e776c5739871b49bd968", got "0f6101a5c35693fa9ec7f7949156c2ad"
+  SHA256: expected "45fbb9ad611f33224cc09954963dde563cc80fe58c76feb25b6e98550b81729a", got "24eda7c94fa8cf1f924cedf26deabcb8de5c0bdc01f1ac075f03dc12898d6923"
 
-What is the policy of submitting patches on here - I followed the debate 
-about oe-classic/oe-core, but am still unclear if I want to submit 
-patches (I am working with oe-classic - so I am told) what should I base 
-against these?
 
-> You can certainly remove binary packages after the fact, but it's much 
-> nicer to not have to.
-Indeed and it is the reason for asking here first as I always believe 
-there must be more intelligent and elegant solution to this than hacking 
-the target system (which I'll have to do each time I 
-build/update/upgrade that image).
+ --2011-12-09 22:00:36--  http://snapshot.debian.net/archive/pool/f/fakeroot/fakeroot_1.15.1.orig.tar.bz2
+ Resolving snapshot.debian.net... 193.62.202.30, 2001:630:206:4000:1a1a:0:c13e:ca1e
+ Connecting to snapshot.debian.net|193.62.202.30|:80... connected.
+ HTTP request sent, awaiting response... 302 Found
+ Location: http://snapshot.debian.org/ [following]
+ --2011-12-09 22:00:36--  http://snapshot.debian.org/
+ Resolving snapshot.debian.org... 193.62.202.30, 2001:630:206:4000:1a1a:0:c13e:ca1e
+ Reusing existing connection to snapshot.debian.net:80.
+ HTTP request sent, awaiting response... 200 OK
+ Length: 14143 (14K) [text/html]
+ Saving to: `[...]/fakeroot_1.15.1.orig.tar.bz2'
+ 
+      0K .......... ...                                        100%  119K=0.1s
+ 
+ 2011-12-09 22:00:36 (119 KB/s) - `[...]/fakeroot_1.15.1.orig.tar.bz2' saved [14143/14143]
+ 
+ERROR: The checksums for "[...]/fakeroot_1.15.1.orig.tar.bz2" did not match.
+  MD5: expected "248c408b1e06e776c5739871b49bd968", got "0f6101a5c35693fa9ec7f7949156c2ad"
+  SHA256: expected "45fbb9ad611f33224cc09954963dde563cc80fe58c76feb25b6e98550b81729a", got "24eda7c94fa8cf1f924cedf26deabcb8de5c0bdc01f1ac075f03dc12898d6923"
 
+
+That's because Debian redirects to a HTML page instead of returning an
+error, which makes it impossible to use a mirror. I'd submit a patch,
+but I'd like to ask first, what's the preferred solution (e.g. go back
+to previous version, update to new version, fix SRC_URI). The SRC_URI
+could have been fixed for 1.14.5, too. I wonder why this didn't happen
+instead.
+
+Regards,
+Andreas
+
+
+[1] http://cgit.openembedded.org/openembedded/commit/?h=2011.03-maintenance&id=672af8093cf33d8b90e9186986ba5c95fc7a0a0a
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-June/033373.html
+[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-July/034188.html
 
 
