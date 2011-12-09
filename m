@@ -1,24 +1,35 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RYzhd-0008EU-0R
+	(envelope-from <otavio.salvador@gmail.com>) id 1RYzi3-0008KZ-U7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 13:37:25 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 09 Dec 2011 04:30:33 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="45583082"
-Received: from unknown (HELO helios.localnet) ([10.252.122.20])
-	by AZSMGA002.ch.intel.com with ESMTP; 09 Dec 2011 04:30:32 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 09 Dec 2011 12:30:31 +0000
-Message-ID: <1429930.oZSh8tThZJ@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <1323360423-12691-1-git-send-email-andrea.adami@gmail.com>
-References: <1323360423-12691-1-git-send-email-andrea.adami@gmail.com>
+	Fri, 09 Dec 2011 13:37:51 +0100
+Received: by bkbzt4 with SMTP id zt4so2906314bkb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Dec 2011 04:31:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=QbJGGAE86qe2nGs77mJuq5Fjr6s6lBhYwEABYFXHFww=;
+	b=i6vyNnvNjIN03h3GgJILv7r2Ta/zxV3F7UxHTeQfBJvDYHCVRwCwgsUCHeNhzmxZCq
+	CePacPbO/AmyHNJaG1PKN6EpW2+5DOeC4gUIYq4iTl5FAkAAMGhNsNRDhs33MmiRD+U7
+	C9miAX9IeXZ53omQEavbKM6jqCmRODBIX7AW8=
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.2 to 3.1.4
+Received: by 10.204.150.9 with SMTP id w9mr3576236bkv.65.1323433859792; Fri,
+	09 Dec 2011 04:30:59 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.132 with HTTP; Fri, 9 Dec 2011 04:30:59 -0800 (PST)
+In-Reply-To: <CAP9ODKo1HMW642EKXw=BAdmSWpS-7j72g1_=LSYX-GXu4TR8aA@mail.gmail.com>
+References: <cover.1323432272.git.otavio@ossystems.com.br>
+	<9641b1aa618783af7dd82f10d4c1a6ae4d693d15.1323432272.git.otavio@ossystems.com.br>
+	<jbsu3u$img$1@dough.gmane.org>
+	<CAP9ODKo1HMW642EKXw=BAdmSWpS-7j72g1_=LSYX-GXu4TR8aA@mail.gmail.com>
+Date: Fri, 9 Dec 2011 10:30:59 -0200
+X-Google-Sender-Auth: 3m3umXKnJ_lhhaR2E_3bmO5a-Jg
+Message-ID: <CAP9ODKr_m+=1myqzvYOOdT1unbdKiW4sFuC+=NY3KHbv7+Q5Ww@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH 1/2] qconnman: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,91 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 12:37:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 09 Dec 2011 12:37:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 08 December 2011 17:07:03 Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
->  recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
->  2 files changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index d04be36..a83144a 100644
-> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> @@ -1,12 +1,12 @@
->  require linux-kexecboot.inc
-> 
-> -PR = "${INC_PR}.1"
-> +PR = "${INC_PR}.2"
->  S = "${WORKDIR}/linux-${PV}"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-> 
->  SRC_URI +=
-> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
->         
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stab
-> lepatch \ +          
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
-> lepatch \ file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> @@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
-> 
->  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
->  SRC_URI[kernel.sha256sum] =
-> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
-> -SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
-> -SRC_URI[stablepatch.sha256sum] =
-> "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
-> +SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
-> +SRC_URI[stablepatch.sha256sum] =
-> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f" diff
-> --git a/recipes-kernel/linux/linux_3.1.bb
-> b/recipes-kernel/linux/linux_3.1.bb index 4d28e78..82f61d3 100644
-> --- a/recipes-kernel/linux/linux_3.1.bb
-> +++ b/recipes-kernel/linux/linux_3.1.bb
-> @@ -1,11 +1,11 @@
->  require linux.inc
-> 
-> -PR = "${INC_PR}.2"
-> +PR = "${INC_PR}.3"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
-> 
->  SRC_URI +=
-> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
->         
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stab
-> lepatch \ +          
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
-> lepatch \ file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> @@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
-> 
->  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
->  SRC_URI[kernel.sha256sum] =
-> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
-> -SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
-> -SRC_URI[stablepatch.sha256sum] =
-> "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
-> +SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
-> +SRC_URI[stablepatch.sha256sum] =
-> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
+I have updated my GitHub branch. Want me to resend it?
 
-Merged to meta-handheld, thanks.
+On Fri, Dec 9, 2011 at 10:25, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
-Cheers,
-Paul
+> Will do.
+>
+>
+> On Fri, Dec 9, 2011 at 10:14, Koen Kooi <koen@dominion.thruhere.net>wrote:
+>
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 09-12-11 13:04, Otavio Salvador schreef:
+>> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> ---
+>> > meta-oe/recipes-qt/qconnman/qconnman_git.bb |   16 ++++++++++++++++ 1
+>> > files changed, 16 insertions(+), 0 deletions(-) create mode 100644
+>> > meta-oe/recipes-qt/qconnman/qconnman_git.bb
+>> >
+>> > diff --git a/meta-oe/recipes-qt/qconnman/qconnman_git.bb
+>> > b/meta-oe/recipes-qt/qconnman/qconnman_git.bb new file mode 100644
+>> index
+>> > 0000000..51b458b --- /dev/null +++
+>> > b/meta-oe/recipes-qt/qconnman/qconnman_git.bb @@ -0,0 +1,16 @@
+>> > +DESCRIPTION = "ConnMan management interface done in Qt" +DEPENDS =
+>> > "connman" + +LICENSE = "LGPLv2.1" +LIC_FILES_CHKSUM =
+>> > "file://COPYING;md5=4fbd65380cdd255951079008b364516c" + +inherit
+>> > autotools qt4x11 + +EXTRA_QMAKEVARS_PRE += "PREFIX=/usr" +EXTRA_OEMAKE
+>> +=
+>> > "INSTALL_ROOT=${D}" + +PV = "0.0+gitr${SRCPV}" +SRCREV =
+>> > "9bab120f426e41552c369b7030414c792dd25a91" +SRC_URI =
+>> > "git://github.com/OSSystems/qconnman.git" + +S = "${WORKDIR}/git/"
+>>
+>> Can I talk you into adding a 'inherit qt4e' version as well?
+>>
+>> regards,
+>>
+>> Koen
+>> -----BEGIN PGP SIGNATURE-----
+>> Version: GnuPG v1.4.11 (Darwin)
+>> Comment: GPGTools - http://gpgtools.org
+>>
+>> iEYEARECAAYFAk7h+7sACgkQMkyGM64RGpHAxgCgsBxvzbjbLz0GII6RmgCNGU2H
+>> smQAn1CPeCyO5X8N+eO9wqtE+v1G7OxA
+>> =LtMP
+>> -----END PGP SIGNATURE-----
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+>
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+>
+>
+
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
