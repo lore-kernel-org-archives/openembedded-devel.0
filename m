@@ -1,28 +1,35 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RZ8Kp-0003NJ-IY
+	(envelope-from <obi@opendreambox.org>) id 1RZA4b-0006uO-23
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 22:50:27 +0100
-Received: by lahd3 with SMTP id d3so1285876lah.6
+	Sat, 10 Dec 2011 00:41:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 561E93156C4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 13:43:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=4g9/LuOnf9e7+NsNTQ4tbFJntk74wwDKMeBuXdGdVjQ=;
-	b=EhSqBZJMO7CqDJE0/2CsrxerTPcStontAHy8WCjjYx0WWB1HSQdgdS4ScOU27HpBlk
-	diQnw1i71oAz112Wj618kVOlZQOgVmG06F6Unh9le2gdxb7jrtIKv37Io+lqlrxyWPN5
-	XmCIW1IpWeTsWHavrTYm0jz77e4/15b8zCp1Y=
-Received: by 10.152.128.103 with SMTP id nn7mr3651052lab.48.1323467016414;
-	Fri, 09 Dec 2011 13:43:36 -0800 (PST)
+	Sat, 10 Dec 2011 00:34:59 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id AyFBJ7Mx+AjT
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Dec 2011 00:34:52 +0100 (CET)
+Received: from [172.22.22.61] (drms-590ceabd.pool.mediaWays.net
+	[89.12.234.189])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 03A603156C47
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Dec 2011 00:34:51 +0100 (CET)
+Message-ID: <4EE29B1A.7010005@opendreambox.org>
+Date: Sat, 10 Dec 2011 00:34:50 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111124 Thunderbird/8.0
 MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Fri, 9 Dec 2011 13:43:05 -0800 (PST)
-In-Reply-To: <4EE27BB8.3020903@opendreambox.org>
-References: <4EE27BB8.3020903@opendreambox.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 9 Dec 2011 13:43:05 -0800
-Message-ID: <CAMKF1speb=XwcnmmhAC3hqKZ7tc8yDXOLNEhXweuyY+sSzx_Gw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <4EE27BB8.3020903@opendreambox.org>
+	<CAMKF1speb=XwcnmmhAC3hqKZ7tc8yDXOLNEhXweuyY+sSzx_Gw@mail.gmail.com>
+In-Reply-To: <CAMKF1speb=XwcnmmhAC3hqKZ7tc8yDXOLNEhXweuyY+sSzx_Gw@mail.gmail.com>
 Subject: Re: fakeroot 1.15.1 in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,15 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 21:50:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Dec 2011 23:41:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 9, 2011 at 1:20 PM, Andreas Oberritter <obi@opendreambox.org> wrote:
-> one week ago, the fakeroot recipe was moved to 1.15.1 [1] in order to fix
-> a download problem, even though previous attempts were rejected [2,3].
-> Well, now I get the following error:
->
+On 09.12.2011 22:43, Khem Raj wrote:
+> On Fri, Dec 9, 2011 at 1:20 PM, Andreas Oberritter <obi@opendreambox.org> wrote:
+>> one week ago, the fakeroot recipe was moved to 1.15.1 [1] in order to fix
+>> a download problem, even though previous attempts were rejected [2,3].
+>> Well, now I get the following error:
+>>
+> 
+> we should stash the tar file on sources.openembedded.org and be done with it.
 
-we should stash the tar file on sources.openembedded.org and be done with it.
+Please do so, if you have the necessary access rights. Btw, ltrace fails for the same reason.
+
+FWIW, I "fixed" the fakeroot issue using
+
+MIRRORS_prepend() {
+${DEBIAN_MIRROR}       http://snapshot.debian.org/archive/debian/20110301T040946Z/pool
+${DEBIAN_MIRROR}       http://snapshot.debian.org/archive/debian/20110901T033808Z/pool
+}
+
+I'd recommend removing
+${DEBIAN_MIRROR}/main   http://snapshot.debian.net/archive/pool
+from mirrors.bbclass, as it results in broken downloads.
+
+Regards,
+Andreas
+
 
 
