@@ -1,32 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RYxuc-0003Ka-H9
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 11:42:42 +0100
-Received: by ghrr13 with SMTP id r13so2254997ghr.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RYy3f-0003bs-TN for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Dec 2011 11:52:06 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RYxx3-0007qP-Qr for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Dec 2011 11:45:13 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Dec 2011 11:45:13 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 02:35:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=qMfUiGYLPCFe08nvWjs8UICrxJim5EXkgQw/+xaTSsI=;
-	b=whRpUTd2ZHCqarFUjXtwUsRYUaYaMt4dWGQtZ63dVjSHIMrCuxNfi+zy6ThFC11ATh
-	CwMupTrn6McU8m4jsTgvoDXYWyF+mtoRFenffHbAsnVbwTE0xTErN4LGHrtd/uwFIZP4
-	Myza+mTYQ3rz7fuMjKFwev03tHjlEsUS4EgXg=
-Received: by 10.101.137.37 with SMTP id p37mr1619178ann.26.1323426951258;
-	Fri, 09 Dec 2011 02:35:51 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 39sm15776000ant.15.2011.12.09.02.35.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Dec 2011 02:35:50 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 09 Dec 2011 11:45:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Dec 2011 10:35:40 +0000
-Message-Id: <a7563787e9ca6230aa14c4f47a549ae4507a9b59.1323426904.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1323426904.git.otavio@ossystems.com.br>
-References: <cover.1323426904.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] sg3-utils: fix license field format
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 09 Dec 2011 11:45:00 +0100
+Message-ID: <jbsorc$ean$1@dough.gmane.org>
+References: <1323419602-13546-1-git-send-email-koen@dominion.thruhere.net>
+	<1323419602-13546-2-git-send-email-koen@dominion.thruhere.net>
+	<20111209102409.GE3848@jama.jama.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <20111209102409.GE3848@jama.jama.net>
+X-Enigmail-Version: 1.3.3
+Subject: Re: [meta-efl 2/2] expedite: update runtime dependencies to match evas update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 10:42:42 -0000
+X-List-Received-Date: Fri, 09 Dec 2011 10:52:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-support/sg3-utils/sg3-utils_1.31.bb    |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-index cab9443..5fa0765 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-@@ -2,9 +2,11 @@ DESCRIPTION = "Utilities for working with generic SCSI devices"
- HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
- SECTION = "console/admin"
- 
--LICENSE = "GPLv2+ && BSD"
-+LICENSE = "GPLv2+ & BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1cc481c050dc92e12db9c8145043d5dc"
- 
-+PR = "r1"
-+
- SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
- RC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
- SRC_URI[sha256sum] = "d84b38b61f0ca3941eb1c48a5858f93d1d1b70a623e579f5ecce2440e18410a4"
--- 
-1.7.2.5
+Op 09-12-11 11:24, Martin Jansa schreef:
+> On Fri, Dec 09, 2011 at 09:33:22AM +0100, Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> --- 
+>> meta-efl/recipes-efl/e17/expedite_svn.bb |    5 ++++- 1 files changed,
+>> 4 insertions(+), 1 deletions(-)
+>> 
+>> diff --git a/meta-efl/recipes-efl/e17/expedite_svn.bb
+>> b/meta-efl/recipes-efl/e17/expedite_svn.bb index ee91c98..dfcbcde
+>> 100644 --- a/meta-efl/recipes-efl/e17/expedite_svn.bb +++
+>> b/meta-efl/recipes-efl/e17/expedite_svn.bb @@ -1,9 +1,10 @@ DESCRIPTION
+>> = "Expedite is a comprehensive benchmarking suite for Evas" DEPENDS =
+>> "eet evas" -RDEPENDS_${PN} = "expedite-themes evas-engine-buffer
+>> evas-engine-fb evas-engine-software-generic evas-engine-software-x11
+>> evas-engine-gl-x11 evas-loader-png" LICENSE = "MIT BSD" + SRCREV =
+>> "${EFL_SRCREV_1.1.0}" PV = "1.1.0+svnr${SRCPV}" +PR = "r1"
+>> 
+>> inherit e SRC_URI =
+>> "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep" @@ -27,3
+>> +28,5 @@ EXTRA_OECONF = "\ "
+>> 
+>> FILES_${PN} += "${datadir}" +RDEPENDS_${PN} = "expedite-themes
+>> evas-engine-fb evas-engine-software-generic evas-engine-software-x11
+>> evas-engine-gl-x11 evas-loader-png" + -- 1.7.2.5
+> 
+> not using expedite here, but makes sense wrt evas changes so
+
+Noone is, it lacks a license checksum, but I wanted to fix this issue right
+now instead of waiting for someone to fix expedite completely :)
+
+I guess I'll be drawing the short straw after our conversation about NEON :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7h5qoACgkQMkyGM64RGpGjLQCgoQORguHOb1z99m0D0LAX4oif
+EHYAnjoqoabEZNmwmXkw+TJWvqsYPFng
+=plE/
+-----END PGP SIGNATURE-----
 
 
 
