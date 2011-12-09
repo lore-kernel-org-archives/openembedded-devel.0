@@ -1,34 +1,24 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RYzcL-0007wG-Ev
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RYzgq-00084U-Bo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 13:31:57 +0100
-Received: by bkbzt4 with SMTP id zt4so2899736bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 04:25:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=g47d2Nyn+ND2NuZaoeqLGqex8BjfMq6gw0y2/WsBYMc=;
-	b=plaL71eNpo8kh7X8dEaJa4kItDGr7AbGUQiesknsLpFixJa1fIU8zUcGpdBGOHNFv5
-	vjdAMCR2xyvLtWBDaiwnNCAobPHqn26Kfd8dNTUE3vJKBbSw8UD0dkHcmYMLC3u+QS9W
-	HxQ1jQ4gIBsc3A1xD/X8YUGWiC3LIrQ343THA=
-MIME-Version: 1.0
-Received: by 10.204.150.9 with SMTP id w9mr3557889bkv.65.1323433505978; Fri,
-	09 Dec 2011 04:25:05 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.132 with HTTP; Fri, 9 Dec 2011 04:25:05 -0800 (PST)
-In-Reply-To: <jbsu3u$img$1@dough.gmane.org>
-References: <cover.1323432272.git.otavio@ossystems.com.br>
-	<9641b1aa618783af7dd82f10d4c1a6ae4d693d15.1323432272.git.otavio@ossystems.com.br>
-	<jbsu3u$img$1@dough.gmane.org>
-Date: Fri, 9 Dec 2011 10:25:05 -0200
-X-Google-Sender-Auth: 05zDcxGFw4naKJ0YVB4BzQugwNw
-Message-ID: <CAP9ODKo1HMW642EKXw=BAdmSWpS-7j72g1_=LSYX-GXu4TR8aA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 09 Dec 2011 13:36:36 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 09 Dec 2011 04:29:45 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="94341304"
+Received: from unknown (HELO helios.localnet) ([10.252.122.20])
+	by fmsmga001.fm.intel.com with ESMTP; 09 Dec 2011 04:29:44 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH 1/2] qconnman: add
+Date: Fri, 09 Dec 2011 12:29:43 +0000
+Message-ID: <2186162.576yhDyNMz@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
+In-Reply-To: <1323360390-12622-1-git-send-email-andrea.adami@gmail.com>
+References: <1323360390-12622-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH] zaurus.inc: adapt jffs2 and sum.jffs2 to changes in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,59 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 12:31:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Dec 2011 12:36:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Will do.
+On Thursday 08 December 2011 17:06:30 Andrea Adami wrote:
+> * in oe-core jffs2 summary has been added to image_types.bbclass and
+> * IMAGE_CMD_jffs2 now includes '-n' to skip cleanmarkers node creation
+> * so we need to customize only padding, endianness and compression mode
+> * While there remove compression settings which are handled in kernel.
+> * This allows us to use the same string for mkfs.jffs2 and for sumtool.
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  conf/machine/include/zaurus.inc |   13 +++----------
+>  1 files changed, 3 insertions(+), 10 deletions(-)
+> 
+> diff --git a/conf/machine/include/zaurus.inc
+> b/conf/machine/include/zaurus.inc index b488f37..0a9b1c5 100644
+> --- a/conf/machine/include/zaurus.inc
+> +++ b/conf/machine/include/zaurus.inc
+> @@ -9,18 +9,11 @@ ERASEBLOCKSIZE_akita = "0x20000"
+>  # C3100 and C3200 have same 128MiB NAND device as akita
+>  ERASEBLOCKSIZE_spitz = "0x20000"
+> 
+> -IMAGE_FSTYPES += "jffs2 tar.gz"
+> +IMAGE_FSTYPES += "tar.gz jffs2 sum.jffs2"
+> 
+>  # kernel now supports favourlzo
+> -IMAGE_CMD_jffs2 = "mkfs.jffs2 --root=${IMAGE_ROOTFS} --faketime -m
+> favourlzo \ -                   --output=${T}/${IMAGE_NAME}.rootfs.jffs2
+> --pad --little-endian --eraseblock=${ERASEBLOCKSIZE} -n \ -                
+>   && sumtool -i ${T}/${IMAGE_NAME}.rootfs.jffs2 \ -                   -o
+> ${T}/${IMAGE_NAME}.rootfs.jffs2.summary \
+> -                   --eraseblock=${ERASEBLOCKSIZE} -l -p; \
+> -                   cat ${T}/${IMAGE_NAME}.rootfs.jffs2 >
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2; \ -                   rm
+> ${T}/${IMAGE_NAME}.rootfs.jffs2; \
+> -                   cat ${T}/${IMAGE_NAME}.rootfs.jffs2.summary >
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.summary.jffs2; \ -                
+>   rm ${T}/${IMAGE_NAME}.rootfs.jffs2.summary;"
+> +EXTRA_IMAGECMD_jffs2 = "-p -l --eraseblock=${ERASEBLOCKSIZE}"
+> +EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+> 
+>  EXTRA_IMAGEDEPENDS += "zaurus-installer"
 
-On Fri, Dec 9, 2011 at 10:14, Koen Kooi <koen@dominion.thruhere.net> wrote:
+Merged to meta-handheld, thanks.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 09-12-11 13:04, Otavio Salvador schreef:
-> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> ---
-> > meta-oe/recipes-qt/qconnman/qconnman_git.bb |   16 ++++++++++++++++ 1
-> > files changed, 16 insertions(+), 0 deletions(-) create mode 100644
-> > meta-oe/recipes-qt/qconnman/qconnman_git.bb
-> >
-> > diff --git a/meta-oe/recipes-qt/qconnman/qconnman_git.bb
-> > b/meta-oe/recipes-qt/qconnman/qconnman_git.bb new file mode 100644 index
-> > 0000000..51b458b --- /dev/null +++
-> > b/meta-oe/recipes-qt/qconnman/qconnman_git.bb @@ -0,0 +1,16 @@
-> > +DESCRIPTION = "ConnMan management interface done in Qt" +DEPENDS =
-> > "connman" + +LICENSE = "LGPLv2.1" +LIC_FILES_CHKSUM =
-> > "file://COPYING;md5=4fbd65380cdd255951079008b364516c" + +inherit
-> > autotools qt4x11 + +EXTRA_QMAKEVARS_PRE += "PREFIX=/usr" +EXTRA_OEMAKE +=
-> > "INSTALL_ROOT=${D}" + +PV = "0.0+gitr${SRCPV}" +SRCREV =
-> > "9bab120f426e41552c369b7030414c792dd25a91" +SRC_URI =
-> > "git://github.com/OSSystems/qconnman.git" + +S = "${WORKDIR}/git/"
->
-> Can I talk you into adding a 'inherit qt4e' version as well?
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iEYEARECAAYFAk7h+7sACgkQMkyGM64RGpHAxgCgsBxvzbjbLz0GII6RmgCNGU2H
-> smQAn1CPeCyO5X8N+eO9wqtE+v1G7OxA
-> =LtMP
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
