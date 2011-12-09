@@ -1,35 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RYxjK-0002tE-VD
+	(envelope-from <otavio.salvador@gmail.com>) id 1RYxuc-0003Ka-H9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 11:31:03 +0100
-Received: by eekb15 with SMTP id b15so1470701eek.6
+	Fri, 09 Dec 2011 11:42:42 +0100
+Received: by ghrr13 with SMTP id r13so2254997ghr.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2011 02:24:12 -0800 (PST)
+	Fri, 09 Dec 2011 02:35:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=U4SgnCovXEmOCwSodlNUaz/0pLleAGFBcxRvaIFwekc=;
-	b=hjSIJWMC72j7yYBNc5F+uw2EGEkNF0wKwefrbbCFbRIdXYbtL6ILn50MFSIbKz/PzA
-	V9fbg//zqWi3HECVmB6DNTFw9AZPCktI/ixmn+dojUq/qjtrNmKO/s8R2R6O2KJ1jQsM
-	H+nsbjP+3IK3/n0qamaVgsLUZFGvWbe+r4i8M=
-Received: by 10.14.15.207 with SMTP id f55mr797676eef.6.1323426252500;
-	Fri, 09 Dec 2011 02:24:12 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 53sm29406038eef.2.2011.12.09.02.24.10
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=qMfUiGYLPCFe08nvWjs8UICrxJim5EXkgQw/+xaTSsI=;
+	b=whRpUTd2ZHCqarFUjXtwUsRYUaYaMt4dWGQtZ63dVjSHIMrCuxNfi+zy6ThFC11ATh
+	CwMupTrn6McU8m4jsTgvoDXYWyF+mtoRFenffHbAsnVbwTE0xTErN4LGHrtd/uwFIZP4
+	Myza+mTYQ3rz7fuMjKFwev03tHjlEsUS4EgXg=
+Received: by 10.101.137.37 with SMTP id p37mr1619178ann.26.1323426951258;
+	Fri, 09 Dec 2011 02:35:51 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id 39sm15776000ant.15.2011.12.09.02.35.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Dec 2011 02:24:11 -0800 (PST)
-Date: Fri, 9 Dec 2011 11:24:09 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 09 Dec 2011 02:35:50 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111209102409.GE3848@jama.jama.net>
-References: <1323419602-13546-1-git-send-email-koen@dominion.thruhere.net>
-	<1323419602-13546-2-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1323419602-13546-2-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-efl 2/2] expedite: update runtime dependencies to match evas update
+Date: Fri,  9 Dec 2011 10:35:40 +0000
+Message-Id: <a7563787e9ca6230aa14c4f47a549ae4507a9b59.1323426904.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <cover.1323426904.git.otavio@ossystems.com.br>
+References: <cover.1323426904.git.otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/1] sg3-utils: fix license field format
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 10:31:03 -0000
-X-Groupsio-MsgNum: 35991
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="//IivP0gvsAy3Can"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Dec 2011 10:42:42 -0000
 
---//IivP0gvsAy3Can
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-support/sg3-utils/sg3-utils_1.31.bb    |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-On Fri, Dec 09, 2011 at 09:33:22AM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-efl/recipes-efl/e17/expedite_svn.bb |    5 ++++-
->  1 files changed, 4 insertions(+), 1 deletions(-)
->=20
-> diff --git a/meta-efl/recipes-efl/e17/expedite_svn.bb b/meta-efl/recipes-=
-efl/e17/expedite_svn.bb
-> index ee91c98..dfcbcde 100644
-> --- a/meta-efl/recipes-efl/e17/expedite_svn.bb
-> +++ b/meta-efl/recipes-efl/e17/expedite_svn.bb
-> @@ -1,9 +1,10 @@
->  DESCRIPTION =3D "Expedite is a comprehensive benchmarking suite for Evas"
->  DEPENDS =3D "eet evas"
-> -RDEPENDS_${PN} =3D "expedite-themes evas-engine-buffer evas-engine-fb ev=
-as-engine-software-generic evas-engine-software-x11 evas-engine-gl-x11 evas=
--loader-png"
->  LICENSE =3D "MIT BSD"
-> +
->  SRCREV =3D "${EFL_SRCREV_1.1.0}"
->  PV =3D "1.1.0+svnr${SRCPV}"
-> +PR =3D "r1"
-> =20
->  inherit e
->  SRC_URI =3D "${E_SVN}/trunk;module=3D${SRCNAME};proto=3Dhttp;scmdata=3Dk=
-eep"
-> @@ -27,3 +28,5 @@ EXTRA_OECONF =3D "\
->  "
-> =20
->  FILES_${PN} +=3D "${datadir}"
-> +RDEPENDS_${PN} =3D "expedite-themes evas-engine-fb evas-engine-software-=
-generic evas-engine-software-x11 evas-engine-gl-x11 evas-loader-png"
-> +
-> --=20
-> 1.7.2.5
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+index cab9443..5fa0765 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+@@ -2,9 +2,11 @@ DESCRIPTION = "Utilities for working with generic SCSI devices"
+ HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
+ SECTION = "console/admin"
+ 
+-LICENSE = "GPLv2+ && BSD"
++LICENSE = "GPLv2+ & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1cc481c050dc92e12db9c8145043d5dc"
+ 
++PR = "r1"
++
+ SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+ RC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
+ SRC_URI[sha256sum] = "d84b38b61f0ca3941eb1c48a5858f93d1d1b70a623e579f5ecce2440e18410a4"
+-- 
+1.7.2.5
 
-not using expedite here, but makes sense wrt evas changes so
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---//IivP0gvsAy3Can
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk7h4ckACgkQN1Ujt2V2gBzizACgrULlHKFHQ2MEXmAbKKXlqHYu
-SLEAnjcz+PL3kQvSNbD90qt7nbQ6h63B
-=r6OO
------END PGP SIGNATURE-----
-
---//IivP0gvsAy3Can--
