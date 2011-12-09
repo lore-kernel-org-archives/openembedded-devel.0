@@ -1,22 +1,38 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>) id 1RZ1kd-0002pR-Ma
-	for openembedded-devel@openembedded.org; Fri, 09 Dec 2011 15:48:39 +0100
-Received: from jcn (87.6.149.179) by smtp206.alice.it (8.6.023.02)
-	(authenticated as fospite@alice.it)
-	id 4ECA607902EEE9B8 for openembedded-devel@openembedded.org;
-	Fri, 9 Dec 2011 15:35:56 +0100
-Date: Fri, 9 Dec 2011 15:35:49 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: openembedded-devel@openembedded.org
-Message-Id: <20111209153549.b1b8cc650d47813a694e9fc7@studenti.unina.it>
-X-Mailer: Sylpheed 3.2.0beta4 (GTK+ 2.24.8; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-Subject: Using 'mr' to manage an oe-core build environment (configuration and layers)
+	(envelope-from <mr.dash.four@googlemail.com>) id 1RZ2xo-00072X-84
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Dec 2011 17:06:20 +0100
+Received: by faaa20 with SMTP id a20so854230faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Dec 2011 07:59:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=message-id:disposition-notification-to:date:from:user-agent
+	:mime-version:to:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=ZDR2fyXizLt2QD9A447tBEprrV+MfOOebDN+xcdv+6I=;
+	b=TpvY7ELRsoo11pdbcLMm3WWBWWFubbfvmxNUXClWVX1ht59tzhfPpaJRx+dqL1nKbo
+	ti4XQk5ivnEg6Ff/YQ1P76EqXY7vW8gbD/jyCey1ZcepsiAO7dNuDwhhbaz/ZCM0EU/C
+	IFzNvzXpDogiq8zFfFmnJqdzCO5iiyB5GEsVs=
+Received: by 10.180.94.71 with SMTP id da7mr11272000wib.29.1323446369421;
+	Fri, 09 Dec 2011 07:59:29 -0800 (PST)
+Received: from [10.68.68.173]
+	(cpc2-gill1-0-0-cust1894.basl.cable.virginmedia.com. [82.34.63.103])
+	by mx.google.com with ESMTPS id fi11sm12943874wbb.9.2011.12.09.07.59.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Dec 2011 07:59:28 -0800 (PST)
+Message-ID: <4EE2305B.5030407@googlemail.com>
+Date: Fri, 09 Dec 2011 15:59:23 +0000
+From: Mr Dash Four <mr.dash.four@googlemail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4EE17931.7000609@googlemail.com>	<CABcZANn76DwH5QPkZw_zPVBHxS0F3a-7YgKebU3Hd=+CtZd+eQ@mail.gmail.com>	<4EE20646.2030300@googlemail.com>
+	<jbt2rc$l31$1@dough.gmane.org>
+In-Reply-To: <jbt2rc$l31$1@dough.gmane.org>
+Subject: Re: packages versioning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,82 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 14:48:39 -0000
-X-Groupsio-MsgNum: 36005
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_"
+X-List-Received-Date: Fri, 09 Dec 2011 16:06:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+>> One more query regarding this - how do I remove
+>> packages I do not want included in the final image? Is there a way to do
+>> that (fairly) easily?
+>>     
+>
+> Yes, create your own image recipe.
+>   
+I was hoping that there is an easier option ("(fairly) easily" being the 
+keywords here)!
 
-I was looking into 'mr'[1] for another project and I thought about
-trying it for an oe-core workflow.
+I tried to trace where these packages are derived from, but could not 
+find anything. For example, I'd like to remove ash (and possibly the 
+whole BusyBox setup) and replace it with bash and their package 
+equivalents. By looking at the tasks/ as well as images/ directories I 
+couldn't find where these packages are derived from, hence the above 
+question.
 
-The idea is to manage layers and configurations to set up a certain
-build environment with as few files as possible and with a way to easily
-recreate that environment, I've heard about alternative ways of doing
-that using 'repo' from android or git submodules, or some OE specific
-scripts, but I don't really know the details of those and I am not able
-to compare them with my approach, so I thought I'd just share it here
-and let you tell me.
 
-Here is some brief documentation:
-http://ao2.it/tmp/oe-ezx-build/README.asciidoc
-
-You can recreate the build environment with just this command:
-  mr bootstrap http://ao2.it/tmp/oe-ezx-build/.mrconfig oe-ezx-build
-
-This will bring in the configuration for the build environment (kept
-under revision control as well as the .mrconfig itself), and will
-checkout all the needed layers.
-
-You can start building right away with:
-  cd oe-ezx-build
-  . ./oe-core/oe-init-build-env
-  bitbake meta-toolchain
-
-You can do some work in the various component of the environment and
-check the status with:
-  mr status
-
-BTW the output of this last command makes me wonder if oe-core should
-put bitbake/ in .gitignore
-
-Adding layers is not immediate yet because this is a rare event in my
-use case.
-
-Final note, the repository under http://ao2.it/tmp/ is temporary and
-will most likely go away sometimes in the future. :)
-
-Thanks,
-   Antonio
-
-[1] http://kitenet.net/~joey/code/mr/
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-
---Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk7iHMUACgkQ5xr2akVTsAE2EACfaNfleM8puXbUFuN6PIQF9qFG
-BhgAnRDzsJkh3pJziihlYhlss+Sdiod9
-=TQEr
------END PGP SIGNATURE-----
-
---Signature=_Fri__9_Dec_2011_15_35_49_+0100_3cLMKO7z26eH.5b_--
