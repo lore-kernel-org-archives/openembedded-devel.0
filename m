@@ -1,25 +1,24 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RYzh4-00088r-Nf
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RYzhd-0008EU-0R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Dec 2011 13:36:50 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 09 Dec 2011 04:29:59 -0800
+	Fri, 09 Dec 2011 13:37:25 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 09 Dec 2011 04:30:33 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="85378700"
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="45583082"
 Received: from unknown (HELO helios.localnet) ([10.252.122.20])
-	by orsmga002.jf.intel.com with ESMTP; 09 Dec 2011 04:29:58 -0800
+	by AZSMGA002.ch.intel.com with ESMTP; 09 Dec 2011 04:30:32 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Antonio Ospite <ospite@studenti.unina.it>
-Date: Fri, 09 Dec 2011 12:29:57 +0000
-Message-ID: <2692184.c0BLhdi50S@helios>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 09 Dec 2011 12:30:31 +0000
+Message-ID: <1429930.oZSh8tThZJ@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.7.3 (Linux/3.0.0-13-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <1323390570-3088-1-git-send-email-ospite@studenti.unina.it>
-References: <1323390570-3088-1-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1323360423-12691-1-git-send-email-andrea.adami@gmail.com>
+References: <1323360423-12691-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH 0/2] Little EzX fixes
+Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.2 to 3.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,32 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 12:36:51 -0000
+X-List-Received-Date: Fri, 09 Dec 2011 12:37:25 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Friday 09 December 2011 01:29:28 Antonio Ospite wrote:
-> Hi,
+On Thursday 08 December 2011 17:07:03 Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
+>  recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
+>  2 files changed, 8 insertions(+), 8 deletions(-)
 > 
-> these are little touches for motorola-ezx in meta-handheld.
+> diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index d04be36..a83144a 100644
+> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> @@ -1,12 +1,12 @@
+>  require linux-kexecboot.inc
 > 
-> The first one is an actual fix, without it we can't build anything using EzX
-> MACHINEs. After this at least meta-toolchain builds fine.
+> -PR = "${INC_PR}.1"
+> +PR = "${INC_PR}.2"
+>  S = "${WORKDIR}/linux-${PV}"
 > 
-> The second one is taken from zaurus.inc, it makes settings less scattered
-> around motorola-ezx-base.inc.
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
 > 
-> Thanks,
->    Antonio
+>  SRC_URI +=
+> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
+>         
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stab
+> lepatch \ +          
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
+> lepatch \ file://defconfig \
+>             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+>             "
+> @@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
 > 
-> Antonio Ospite (2):
->   motorola-ezx-base.inc: do not define TARGET_ARCH
->   motorola-ezx-base.inc: enable "iwmmxt" as extra arch only when needed
+>  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+>  SRC_URI[kernel.sha256sum] =
+> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+> -SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
+> -SRC_URI[stablepatch.sha256sum] =
+> "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
+> +SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
+> +SRC_URI[stablepatch.sha256sum] =
+> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f" diff
+> --git a/recipes-kernel/linux/linux_3.1.bb
+> b/recipes-kernel/linux/linux_3.1.bb index 4d28e78..82f61d3 100644
+> --- a/recipes-kernel/linux/linux_3.1.bb
+> +++ b/recipes-kernel/linux/linux_3.1.bb
+> @@ -1,11 +1,11 @@
+>  require linux.inc
 > 
->  conf/machine/include/motorola-ezx-base.inc |    5 +----
->  1 files changed, 1 insertions(+), 4 deletions(-)
+> -PR = "${INC_PR}.2"
+> +PR = "${INC_PR}.3"
+> 
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
+> 
+>  SRC_URI +=
+> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
+>         
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.2.bz2;apply=yes;name=stab
+> lepatch \ +          
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
+> lepatch \ file://defconfig \
+>             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+>             "
+> @@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
+> 
+>  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+>  SRC_URI[kernel.sha256sum] =
+> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+> -SRC_URI[stablepatch.md5sum] = "7487d8e6f00c077f6e15d6f4f9947c30"
+> -SRC_URI[stablepatch.sha256sum] =
+> "bc6508cc2d275cbf4a20af74d7454d22791e439948c31b8397d265c20dfd6bb6"
+> +SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
+> +SRC_URI[stablepatch.sha256sum] =
+> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
 
-Merged to meta-handheld (with a very minor whitespace fix for 2/2), thanks.
+Merged to meta-handheld, thanks.
 
 Cheers,
 Paul
