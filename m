@@ -1,23 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RZUU0-0003FT-Q2 for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Dec 2011 22:29:24 +0100
-Received: from f053033126.adsl.alicedsl.de ([78.53.33.126]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RZUNb-0006SU-IE for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Dec 2011 21:22:47 +0000
-Message-ID: <1323552152.25802.133.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1RZVxn-0006Yr-Fv
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Dec 2011 00:04:15 +0100
+Received: by eaal1 with SMTP id l1so564902eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 Dec 2011 14:57:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=QK7jo8P7R/OwQyQ/IO0UFFhgpIVZ2ejgFUD7W+pp3dM=;
+	b=xaoUdNEyPssFjPG92mqXOcKoDFfYz06EVugEjxwNZ+MtsTBKA7ahGU80DbEMhIZocN
+	d3mVDeTmlHTz5J6xtLw30jtlRZvTv6KHaIlm0BXSkuKHmnDrZgq/x2B9W/SipfZgtIKi
+	fO4O8dCph5px0Fj79BL1lebNXcYU7Ke4Q67Es=
+Received: by 10.213.14.204 with SMTP id h12mr969529eba.21.1323557838594;
+	Sat, 10 Dec 2011 14:57:18 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 58sm52402687eet.11.2011.12.10.14.57.16
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 10 Dec 2011 14:57:17 -0800 (PST)
+Date: Sat, 10 Dec 2011 23:57:05 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 Dec 2011 22:22:32 +0100
-In-Reply-To: <1323547821-19780-1-git-send-email-vitperov@gmail.com>
-References: <1323547821-19780-1-git-send-email-vitperov@gmail.com>
-X-Mailer: Evolution 3.0.3-2 
-Mime-Version: 1.0
-Subject: Re: [PATCH] ftplib: add initial version of recipe
+Message-ID: <20111210225705.GC3986@jama.jama.net>
+References: <4EE3A963.8070504@comcast.net>
+MIME-Version: 1.0
+In-Reply-To: <4EE3A963.8070504@comcast.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011,03 maint] Confused about xserver-xorg + touchscreen
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,133 +41,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Dec 2011 21:29:24 -0000
-X-Groupsio-MsgNum: 36026
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-+2oXK4nl2168tuhSw7PF"
+X-List-Received-Date: Sat, 10 Dec 2011 23:04:15 -0000
+X-Groupsio-MsgNum: 36027
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tqI+Z3u+9OQ7kwn0"
+Content-Disposition: inline
 
---=-+2oXK4nl2168tuhSw7PF
-Content-Type: text/plain; charset="UTF-8"
+--tqI+Z3u+9OQ7kwn0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear Vitaly,
-
-
-thank you for your patch.
-
-Am Sonntag, den 11.12.2011, 00:10 +0400 schrieb Vitaly Perov:
-> From: Vitaly Perov <vit@vt-tech.eu>
-
-Please add the recipe version to the commit summary (subject) and follow
-our commit policy [1][2][3].
-
-Especially your Signed-off-by line is missing. Please also add
-information how you tested that recipe.
-
-> ---
->  recipes/ftplib/ftplib_3.1.bb |   38 ++++++++++++++++++++++++++++++++++++=
-++
->  1 files changed, 38 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/ftplib/ftplib_3.1.bb
+On Sat, Dec 10, 2011 at 10:48:03AM -0800, Ed Nelson wrote:
+> I am trying to build a modified minimal-gpe-image to use xserver-xorg=20
+> and use xinput-calibrator but for some reason it keeps building tslib. =
+=20
+> Consequently I have to modify xorg.conf so the touchscreen driver uses=20
+> tslib and not evdev for the touchsceen to work.  This is OK but I=20
+> thought that the new way to do the touchscreen was to use xinput and to=
+=20
+> calibrate the touchscreen was to use xinput-calibrator.  I tried to find=
+=20
+> a image recipe that used xinput-calbrator but didn't find one.
 >=20
-> diff --git a/recipes/ftplib/ftplib_3.1.bb b/recipes/ftplib/ftplib_3.1.bb
-> new file mode 100644
-> index 0000000..1dcdb3d
-> --- /dev/null
-> +++ b/recipes/ftplib/ftplib_3.1.bb
-> @@ -0,0 +1,38 @@
-> +#! /bin/sh
-> +
+> Is it better to use xserver-xorg + xinput-calibrator  or use=20
+> xserver-xorg + tslib + modify xorg.conf?
+> Am I missing something in the minimal-gpe-image recipe?
+> Shouldn't I see something for xinput-calibrator inside Xsessions?
 
-The shebang is not needed.
+See SHR overrides in xserver-common
 
-> +DESCRIPTION =3D "A set of routines that implement the FTP protocol"
-> +HOMEPAGE =3D "http://nbpfaus.net/~pfau/ftplib/"
-> +LICENSE =3D "LGPLv2"
-> +
-> +PR =3D "r1"
+Regards,
 
-Please start with `r0` when submitting.
+>=20
+>=20
+> Below is my minimal-gpe-image recipe
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> #Angstrom minimal gpe image
+> # This image provides a barebone dm and 'desktop'
+> # Very angstrom and opkg centric
+>=20
+> ANGSTROM_EXTRA_INSTALL +=3D " \
+>                            "
+>=20
+> XSERVER =3D "xserver-xorg \
+>             xf86-input-evdev \
+>             xf86-input-mouse \
+>             xf86-video-fbdev \
+>             xf86-input-keyboard"
+>=20
+> SPLASH ?=3D ' ${@base_contains("MACHINE_FEATURES", "screen",=20
+> "psplash-angstrom", "",d)}'
+>=20
+> export IMAGE_BASENAME =3D "minimal-gpe-image"
+>=20
+> PR =3D "r2"
+>=20
+> DEPENDS =3D "task-boot"
+>=20
+> IMAGE_INSTALL =3D "\
+>      ${XSERVER} \
+>      task-boot \
+>      gpe-dm gpe-session-scripts gpe-login \
+>      matchbox-wm \
+>      gpe-terminal \
+>      angstrom-feed-configs \
+>      xinput-calibrator \
+>      nano \
+>      python \
+>      ${SPLASH} \
+>      ${ANGSTROM_EXTRA_INSTALL} \
+>      "
+>=20
+> #zap root password for release images
+> ROOTFS_POSTPROCESS_COMMAND +=3D '${@base_conditional("DISTRO_TYPE",=20
+> "release", "zap_root_password; ", "",d)}'
+>=20
+> inherit image
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This is my Xinit.d
+>=20
+> root@sbc9261:~# ls /etc/X11/Xinit.d/
+> 01xrandr         40xmodmap        60xXDefaults     99gpe-login
+> 11zaurus         50setdpi         89xTs_Calibrate
+> 12keymap         55xScreenSaver   98keymap-fixup
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This is my Xsessions.d
+>=20
+> root@sbc9261:~# ls /etc/X11/Xsession.d/
+> 50autolock        69ipaq-sleep      98standard-apps
+> 60xXDefaults      89xdgautostart    99xWindowManager
+> root@sbc9261:~#
+>=20
+> Thanks
+> Ed
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-> +
-> +########################################################################=
-##############
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Please remove these =E2=80=9Cstyle=E2=80=9D lines. They are not common. [4]
-
-> +
-> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
-
-Why is that needed. Please add a comment and explain it in the commit
-message.
-
-> +
-> +SRC_URI =3D "http://nbpfaus.net/~pfau/ftplib/ftplib-${PV}-src.tar.gz"
-
-Can you talk with upstream, that they release versioned tarballs
-otherwise that will become a mess when upgraded.
-
-> +
-> +S =3D "${WORKDIR}/ftplib-${PV}"
-> +
-> +########################################################################=
-##############
-> +
-> +SRC_URI[md5sum] =3D "c6af758ccbf806b28f022a587a41d9c5"
-> +SRC_URI[sha256sum] =3D "be524e1086cfe9d86afa832e1413dde79a4e88ee8ea5325a=
-87ffaaf6620a0a2b"
-> +
-> +########################################################################=
-##############
-> +do_compile() {
-> +    cd linux && make
-
-Are you sure that works? At least `oe-runmake` should be used. This way
-you should get not the correct target architecture since the build host
-make is used. (I could be mistaken and maybe the Makefile figures it out
-nevertheless.)
-
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}/${libdir}
-> +    install -d ${D}/${includedir}
-> +    install -d ${D}/${bindir}
-> +    install -m 755 ${S}/linux/libftp.so.3.1 ${D}/${libdir}
-> +    install -m 755 ${S}/linux/libftp.a ${D}/${libdir}
-> +    install -m 644 ${S}/linux/ftplib.h ${D}/${includedir}
-> +    install -m 755 ${S}/linux/qftp ${D}/${bindir}
-> +    (cd ${D}/${libdir} && \
-> +     ln -sf libftp.so.3.1 libftp.so.3 && \
-> +     ln -sf libftp.so.3 libftp.so)
-> +}
-
-I do not know if the last three lines are common. But if it works,
-great!
-
-
-Thanks,
-
-Paul
-
-
-[1] http://www.openembedded.org/wiki/Category:Policy
-[2] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-[3] http://www.openembedded.org/wiki/Commit_Policy
-[4] http://www.openembedded.org/wiki/Styleguide
-
---=-+2oXK4nl2168tuhSw7PF
+--tqI+Z3u+9OQ7kwn0
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEABECAAYFAk7jzZgACgkQPX1aK2wOHViVNwCfdfOp6McU3Zjrd1EQByZkrtg9
-/HMAniQEL7/R+vI0xwBwAceVoqkRi0GQ
-=yDry
+iEYEARECAAYFAk7j48EACgkQN1Ujt2V2gBxtNwCbBZIs5TkGxvcY0dR98thQ22tE
+PSkAoLTiY38poBqYjqpQzB4tSLlzWYuF
+=HONf
 -----END PGP SIGNATURE-----
 
---=-+2oXK4nl2168tuhSw7PF--
+--tqI+Z3u+9OQ7kwn0--
