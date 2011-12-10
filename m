@@ -1,36 +1,28 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RZA4b-0006uO-23
+	(envelope-from <sledz@dresearch-fe.de>) id 1RZKHd-00034u-7D
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Dec 2011 00:41:49 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 561E93156C4A
+	Sat, 10 Dec 2011 11:35:58 +0100
+Received: by bkbzt4 with SMTP id zt4so3814239bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Dec 2011 00:34:59 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id AyFBJ7Mx+AjT
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Dec 2011 00:34:52 +0100 (CET)
-Received: from [172.22.22.61] (drms-590ceabd.pool.mediaWays.net
-	[89.12.234.189])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 03A603156C47
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Dec 2011 00:34:51 +0100 (CET)
-Message-ID: <4EE29B1A.7010005@opendreambox.org>
-Date: Sat, 10 Dec 2011 00:34:50 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111124 Thunderbird/8.0
+	Sat, 10 Dec 2011 02:29:04 -0800 (PST)
+Received: by 10.205.139.76 with SMTP id iv12mr5938586bkc.100.1323512944566;
+	Sat, 10 Dec 2011 02:29:04 -0800 (PST)
+Received: from [217.197.84.226] (recycler.in-berlin.de. [217.197.84.226])
+	by mx.google.com with ESMTPS id j9sm16152685bkd.2.2011.12.10.02.29.02
+	(version=SSLv3 cipher=OTHER); Sat, 10 Dec 2011 02:29:03 -0800 (PST)
+Message-ID: <4EE3346C.1040703@dresearch-fe.de>
+Date: Sat, 10 Dec 2011 11:29:00 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4EE27BB8.3020903@opendreambox.org>
-	<CAMKF1speb=XwcnmmhAC3hqKZ7tc8yDXOLNEhXweuyY+sSzx_Gw@mail.gmail.com>
-In-Reply-To: <CAMKF1speb=XwcnmmhAC3hqKZ7tc8yDXOLNEhXweuyY+sSzx_Gw@mail.gmail.com>
-Subject: Re: fakeroot 1.15.1 in 2011.03-maintenance
+References: <1323450027-31964-1-git-send-email-sledz@dresearch-fe.de>
+	<CAMKF1sqkmOx6wPHA9vZNPp_XMhZN+s8fLy74wDcCLt4OvUVGtQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqkmOx6wPHA9vZNPp_XMhZN+s8fLy74wDcCLt4OvUVGtQ@mail.gmail.com>
+Cc: Steffen Sledz <sledz@dresearch.de>
+Subject: Re: [PATCH] icedtea6-native: fix problem on build hosts with linux kernel 3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 23:41:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 10 Dec 2011 10:35:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 09.12.2011 22:43, Khem Raj wrote:
-> On Fri, Dec 9, 2011 at 1:20 PM, Andreas Oberritter <obi@opendreambox.org> wrote:
->> one week ago, the fakeroot recipe was moved to 1.15.1 [1] in order to fix
->> a download problem, even though previous attempts were rejected [2,3].
->> Well, now I get the following error:
->>
+Am 09.12.2011 20:59, schrieb Khem Raj:
+> On Fri, Dec 9, 2011 at 9:00 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>        done
+>> +
+>> +       for F in openjdk/hotspot/make/linux/Makefile openjdk-ecj/hotspot/make/linux/Makefile ;
+>> +       do
+>> +               sed -i \
+>> +                       -e"s|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 2.7%|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3%|" \
+>> +                       $F
+>> +       done
+>>  }
 > 
-> we should stash the tar file on sources.openembedded.org and be done with it.
+> why drop the 'dot' may be using 3. is better ?
 
-Please do so, if you have the necessary access rights. Btw, ltrace fails for the same reason.
+Just following the scheme, e.g. 2.6% is without a dot too.
 
-FWIW, I "fixed" the fakeroot issue using
+Steffen
 
-MIRRORS_prepend() {
-${DEBIAN_MIRROR}       http://snapshot.debian.org/archive/debian/20110301T040946Z/pool
-${DEBIAN_MIRROR}       http://snapshot.debian.org/archive/debian/20110901T033808Z/pool
-}
-
-I'd recommend removing
-${DEBIAN_MIRROR}/main   http://snapshot.debian.net/archive/pool
-from mirrors.bbclass, as it results in broken downloads.
-
-Regards,
-Andreas
 
 
 
