@@ -1,31 +1,19 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1Ra3fG-00087K-SS
+Received: from host39-232-static.225-95-b.business.telecomitalia.it
+	([95.225.232.39] helo=cindy) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <adriano@gmail.com>) id 1Ra51r-0002u2-DO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 12:03:24 +0100
-Received: by bkbzt4 with SMTP id zt4so5059413bkb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 02:56:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=cgCG1l+nLk5z7ShcRiWBO/FVkgu7/qyylFAfpy/ciA0=;
-	b=K3tEloF/b8VXw4h3c+jzxkIaCkCXEmnGvt3Axr9eaDXLtkYaYy8rDl3KHUGJYBQkge
-	5cyDnRxYuJMb0JGu4/hulxvcPN7RDrQbuLqP2YatPox139mY7AnpKCT41xOmcotz/7f5
-	kCeRrfT+GiizEVar6ZXKbH5PCrVkNv90g6bd8=
-Received: by 10.205.81.141 with SMTP id zy13mr9409234bkb.50.1323687388448;
-	Mon, 12 Dec 2011 02:56:28 -0800 (PST)
-Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
-	[95.222.156.232])
-	by mx.google.com with ESMTPS id p13sm30782722bkd.4.2011.12.12.02.56.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Dec 2011 02:56:27 -0800 (PST)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Mon, 12 Dec 2011 13:30:47 +0100
+Received: by cindy (Postfix, from userid 1000)
+	id 270805E23C4; Mon, 12 Dec 2011 13:14:25 +0100 (CET)
+From: Adriano Pallavicino <adrianopallavicino@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Dec 2011 11:56:19 +0100
-Message-Id: <1323687379-25490-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [PATCH] florence: Initial recipe added
+Date: Mon, 12 Dec 2011 13:13:55 +0100
+Message-Id: <1323692035-24394-1-git-send-email-adrianopallavicino@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <libtans1_1.17_patch>
+References: <libtans1_1.17_patch>
+Cc: Adriano Pallavicino <adriano.pallavicino@gmail.com>
+Subject: [PATCH] Signed-off-by: Adriano Pallavicino <adrianopallavicino@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,53 +27,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 11:03:24 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 12:30:47 -0000
 
-Florence is a virtual keyboard used to input text with a touchscreen.
+From: Adriano Pallavicino <adriano.pallavicino@gmail.com>
 
-Tests:
-* Run tested on Overo Gumstix with xfce-nm-image
-* Build tested for Qemuarm
-
-Known issues:
-* Florence cannot access the gconf settings?
-
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+URL sources was wrong. md5sum  and sha256sum now refers to new archive
 ---
- meta-oe/recipes-support/florence/florence_0.5.1.bb |   21 ++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/florence/florence_0.5.1.bb
+ recipes/gnutls/libtasn1-native_1.7.bb |    1 +
+ recipes/gnutls/libtasn1_1.7.bb        |    4 +++-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/florence/florence_0.5.1.bb b/meta-oe/recipes-support/florence/florence_0.5.1.bb
-new file mode 100644
-index 0000000..79f5742
---- /dev/null
-+++ b/meta-oe/recipes-support/florence/florence_0.5.1.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
-+HOMEPAGE = "http://florence.sourceforge.net/english.html"
+diff --git a/recipes/gnutls/libtasn1-native_1.7.bb b/recipes/gnutls/libtasn1-native_1.7.bb
+index a91bd4f..2d41274 100644
+--- a/recipes/gnutls/libtasn1-native_1.7.bb
++++ b/recipes/gnutls/libtasn1-native_1.7.bb
+@@ -5,3 +5,4 @@ inherit native
+ 
+ SRC_URI[md5sum] = "ebfd69b3514d8e8830057f0e9df6a5f9"
+ SRC_URI[sha256sum] = "9431f8e41acbeb5b5b89ec87a092b1a1fe9ef0a229a9a90806f4774707ca1f1f"
 +
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/recipes/gnutls/libtasn1_1.7.bb b/recipes/gnutls/libtasn1_1.7.bb
+index 44da659..92302b5 100644
+--- a/recipes/gnutls/libtasn1_1.7.bb
++++ b/recipes/gnutls/libtasn1_1.7.bb
+@@ -3,9 +3,11 @@ LICENSE = "LGPL"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/libtasn1/libtasn1-${PV}.tar.gz"
++SRC_URI = "ftp://ftp.gnu.org/gnu/libtasn1/libtasn1-${PV}.tar.gz"
+ 
+ inherit autotools binconfig
+ 
+ SRC_URI[md5sum] = "ebfd69b3514d8e8830057f0e9df6a5f9"
+ SRC_URI[sha256sum] = "9431f8e41acbeb5b5b89ec87a092b1a1fe9ef0a229a9a90806f4774707ca1f1f"
 +
 +
-+DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo gettext-native intltool-native"
-+
-+
-+SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
-+          "
-+
-+SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
-+SRC_URI[sha1sum] = "a3f1c29dd436150002ec14ce9a63de1d72bd1f91"
-+
-+
-+inherit autotools
-+
-+
-+EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
-\ No newline at end of file
 -- 
-1.7.5.4
+1.7.4.1
 
 
 
