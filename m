@@ -1,37 +1,31 @@
-Received: from mailbackup.inode.at ([213.229.60.24])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1Ra20o-00036h-Lb
+	(envelope-from <s.stirtzel@googlemail.com>) id 1Ra3fG-00087K-SS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 10:17:30 +0100
-Received: from [62.99.145.9] (port=59389 helo=mx.inode.at)
-	by mailbackup.inode.at with esmtp (Exim 4.76)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1Ra1nD-0002sN-0H
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 10:03:27 +0100
-Received: from [83.64.51.210] (port=13528 helo=gateway1.hale)
-	by smartmx-09.inode.at with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <Bernhard.Guillon@hale.at>)
-	id 1Ra1n9-0005My-R3 for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 10:03:23 +0100
-Received: from mail1.hale.at (mail2.hale [192.168.100.12])
-	by gateway1.hale (8.13.8/8.13.7) with ESMTP id pBC93F02005412
+	Mon, 12 Dec 2011 12:03:24 +0100
+Received: by bkbzt4 with SMTP id zt4so5059413bkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 10:03:15 +0100
-Received: from localhost.localdomain ([192.168.100.138]) by hale.at with
-	MailEnable ESMTP; Mon, 12 Dec 2011 10:03:05 +0100
-From: Bernhard Guillon <Bernhard.Guillon@hale.at>
+	Mon, 12 Dec 2011 02:56:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=cgCG1l+nLk5z7ShcRiWBO/FVkgu7/qyylFAfpy/ciA0=;
+	b=K3tEloF/b8VXw4h3c+jzxkIaCkCXEmnGvt3Axr9eaDXLtkYaYy8rDl3KHUGJYBQkge
+	5cyDnRxYuJMb0JGu4/hulxvcPN7RDrQbuLqP2YatPox139mY7AnpKCT41xOmcotz/7f5
+	kCeRrfT+GiizEVar6ZXKbH5PCrVkNv90g6bd8=
+Received: by 10.205.81.141 with SMTP id zy13mr9409234bkb.50.1323687388448;
+	Mon, 12 Dec 2011 02:56:28 -0800 (PST)
+Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
+	[95.222.156.232])
+	by mx.google.com with ESMTPS id p13sm30782722bkd.4.2011.12.12.02.56.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 12 Dec 2011 02:56:27 -0800 (PST)
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Dec 2011 10:02:55 +0100
-Message-Id: <1323680575-31596-1-git-send-email-Bernhard.Guillon@hale.at>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-HALE-MailScanner-Information: Please contact the ISP for more information
-X-MailScanner-ID: pBC93F02005412
-X-HALE-MailScanner: Found to be clean
-X-HALE-MailScanner-From: bernhard.guillon@hale.at
-MailScanner-NULL-Check: 1324285396.28848@aKeh9zEMmP2+nsdZ76wtvw
-X-Spam-Status: No
-Subject: [[meta-oe][PATCH]] libgtkstylus_0.5.bb: add missing LIC_FILES_CHKSUM
+Date: Mon, 12 Dec 2011 11:56:19 +0100
+Message-Id: <1323687379-25490-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] florence: Initial recipe added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 09:17:30 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 11:03:24 -0000
 
+Florence is a virtual keyboard used to input text with a touchscreen.
 
-Signed-off-by: Bernhard Guillon <Bernhard.Guillon@hale.at>
+Tests:
+* Run tested on Overo Gumstix with xfce-nm-image
+* Build tested for Qemuarm
+
+Known issues:
+* Florence cannot access the gconf settings?
+
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
 ---
- .../recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ meta-oe/recipes-support/florence/florence_0.5.1.bb |   21 ++++++++++++++++++++
+ 1 files changed, 21 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/florence/florence_0.5.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-index f614048..9c9fc2d 100644
---- a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-+++ b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-@@ -2,7 +2,8 @@ DESCRIPTION = "GTK plugin for stylus based systems"
- SECTION = "libs"
- DEPENDS = "gtk+"
- LICENSE = "LGPL"
--PR = "r2"
-+LIC_FILES_CHKSUM = "file://tap.c;beginline=1;endline=20;md5=71756eeb144e9eeb177c69aa672b1635"
-+PR = "r3"
- 
- inherit autotools
- 
+diff --git a/meta-oe/recipes-support/florence/florence_0.5.1.bb b/meta-oe/recipes-support/florence/florence_0.5.1.bb
+new file mode 100644
+index 0000000..79f5742
+--- /dev/null
++++ b/meta-oe/recipes-support/florence/florence_0.5.1.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
++HOMEPAGE = "http://florence.sourceforge.net/english.html"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++
++
++DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo gettext-native intltool-native"
++
++
++SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
++          "
++
++SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
++SRC_URI[sha1sum] = "a3f1c29dd436150002ec14ce9a63de1d72bd1f91"
++
++
++inherit autotools
++
++
++EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
+\ No newline at end of file
 -- 
-1.7.1
-
-
-
---
-Scanned by MailScanner.
+1.7.5.4
 
 
 
