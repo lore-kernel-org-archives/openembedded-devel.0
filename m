@@ -1,30 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-qw0-f54.google.com ([209.85.216.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ra8lk-0006YA-RQ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 17:30:24 +0100
-Received: by eaal1 with SMTP id l1so1225875eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 08:23:27 -0800 (PST)
+	(envelope-from <philip.balister@gmail.com>) id 1Ra8nA-0006eY-N5
+	for openembedded-devel@openembedded.org; Mon, 12 Dec 2011 17:31:52 +0100
+Received: by qabg14 with SMTP id g14so4454897qab.6
+	for <openembedded-devel@openembedded.org>;
+	Mon, 12 Dec 2011 08:24:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=B0wqgl0HzzRl7FgtmdOfOake/lFgBmRz+T+iAY449zQ=;
-	b=cUd/zhdeClo0OY0KWq3LHY8SRg/hlEcDVJDwlAOTOdaBD2Cf/usrzPNmc1NkdjzvjF
-	YPbG/9tQuq9RX8qTxGl1NxNZ7jS+fRt6O3c1cgHr519KgToJuV0Gedh6JGizlUZMe0k2
-	xrqVrOcn4FPY55jSkY3jWpinL1xdQ7H1Z8efU=
-Received: by 10.213.3.14 with SMTP id 14mr2099411ebl.110.1323707007211;
-	Mon, 12 Dec 2011 08:23:27 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 65sm76988782eeg.8.2011.12.12.08.23.25
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=gSq6VJO8jmle6+UDZ1p2xbweeFkdFWPNkCWCHkieaq4=;
+	b=TLFLW+9fKSStdfL/QEChkAzqreHSWVH0GR2pnDC3lZAI21vFAzvbFBM+aUGOZHkP4t
+	bW8hW1F1Zifl+Le7z3fibIuOE791szEBY81b8A3W2oB4Khm8iDBgMKWY0ybOAG8O2SDa
+	bhbuIoKtx5YMoBhxwWyhAGplC3vWHWtcKkgJI=
+Received: by 10.224.189.11 with SMTP id dc11mr18032493qab.35.1323707093407;
+	Mon, 12 Dec 2011 08:24:53 -0800 (PST)
+Received: from localhost.localdomain
+	(pool-96-240-172-5.ronkva.east.verizon.net. [96.240.172.5])
+	by mx.google.com with ESMTPS id eb5sm37323705qab.10.2011.12.12.08.24.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Dec 2011 08:23:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Dec 2011 17:23:15 +0100
-Message-Id: <1323706995-23065-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8
-Cc: Klaus Kurzmann <mok@fluxnetz.de>
-Subject: [PATCH][meta-oe] openssh_5.9p1.bbappend: add systemd units
+	Mon, 12 Dec 2011 08:24:52 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@openembedded.org
+Date: Mon, 12 Dec 2011 11:24:41 -0500
+Message-Id: <1323707082-9185-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [PATCH 1/2] gnome-panel : Fix format of LICENSE field.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,101 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 16:30:24 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 16:31:52 -0000
 
-From: Klaus Kurzmann <mok@fluxnetz.de>
-
-Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../openssh/openssh/sshd.socket                    |   11 ++++++++++
- .../openssh/openssh/sshd@.service                  |    9 ++++++++
- .../openssh/openssh/sshdgenkeys.service            |   10 +++++++++
- .../openssh/openssh_5.9p1.bbappend                 |   22 ++++++++++++++++++++
- 4 files changed, 52 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
- create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
- create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
- create mode 100644 meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
+ .../gnome-panel/gnome-panel_2.32.1.bb              |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket b/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
-new file mode 100644
-index 0000000..753a33b
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
-@@ -0,0 +1,11 @@
-+[Unit]
-+Conflicts=sshd.service
-+
-+[Socket]
-+ExecStartPre=/bin/mkdir -p /var/run/sshd
-+ListenStream=22
-+Accept=yes
-+
-+[Install]
-+WantedBy=sockets.target
-+Also=sshdgenkeys.service
-diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service b/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
-new file mode 100644
-index 0000000..d118490
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
-@@ -0,0 +1,9 @@
-+[Unit]
-+Description=OpenSSH Per-Connection Daemon
-+After=sshdgenkeys.service
-+
-+[Service]
-+ExecStart=-/usr/sbin/sshd -i
-+ExecReload=/bin/kill -HUP $MAINPID
-+StandardInput=socket
-+StandardError=syslog
-diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service b/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
-new file mode 100644
-index 0000000..c717214
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=SSH Key Generation
-+
-+[Service]
-+ExecStart=/usr/bin/ssh-keygen -A
-+Type=oneshot
-+RemainAfterExit=yes
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
-new file mode 100644
-index 0000000..3f68e09
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
-@@ -0,0 +1,22 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+SYSTEMD_PACKAGES = "openssh-sshd-systemd"
-+SYSTEMD_SERVICE = "sshd.socket"
-+
-+inherit systemd
-+
-+SRC_URI += "file://sshd.socket file://sshd@.service file://sshdgenkeys.service"
-+
-+do_install_append() {
-+       install -d ${D}${base_libdir}/systemd/system
-+       install -m 644 ${WORKDIR}/sshd.socket ${D}${base_libdir}/systemd/system
-+       install -m 644 ${WORKDIR}/sshd@.service ${D}${base_libdir}/systemd/system
-+       install -m 644 ${WORKDIR}/sshdgenkeys.service ${D}${base_libdir}/systemd/system
-+}
-+
-+PACKAGES =+ "openssh-sshd-systemd"
-+
-+FILES_openssh-sshd-systemd += "${base_libdir}/systemd"
-+RDEPENDS_openssh-sshd-systemd += "openssh-sshd"
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+index 4a07378..78b874d 100644
+--- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "GNOME panel"
+-LICENSE = "GPLv2 && LGPLv2 && GFDLv1.1"
++LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
 -- 
-1.7.8
+1.7.3.4
 
 
 
