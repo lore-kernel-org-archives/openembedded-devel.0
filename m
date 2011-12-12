@@ -1,30 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1Ra8Ae-0004zl-Cd
+	(envelope-from <s.stirtzel@googlemail.com>) id 1Ra8Xf-00065N-7w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 16:52:04 +0100
-Received: by wgbds11 with SMTP id ds11so9961868wgb.24
+	Mon, 12 Dec 2011 17:15:51 +0100
+Received: by eekb15 with SMTP id b15so2613508eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 07:45:10 -0800 (PST)
+	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Nv/ML+JfG5mhpuZjXO0vhI9sSLsqk9DSr4sWNvpdHRU=;
-	b=W2EX45708IkrWhVEUe8fncwcVyICIeqXEDIDsgk/9FMNq0+X/gN6XCpIuPpSY0hRU2
-	OCrlUzK0bfsI/7WD2nMl9VGCvFcUkAdQ3fCKxn6W2ZEVbzI48UBlUCr52MW2yXI3O5CW
-	iBgiSjJHyhZuJuZw5Q0TOnEviD0UzVlvEsBnU=
-MIME-Version: 1.0
-Received: by 10.216.182.193 with SMTP id o43mr3226033wem.87.1323704709834;
-	Mon, 12 Dec 2011 07:45:09 -0800 (PST)
-Received: by 10.223.69.133 with HTTP; Mon, 12 Dec 2011 07:45:09 -0800 (PST)
-In-Reply-To: <jc50ht$phq$1@dough.gmane.org>
-References: <1323687379-25490-1-git-send-email-s.stirtzel@googlemail.com>
-	<jc50ht$phq$1@dough.gmane.org>
-Date: Mon, 12 Dec 2011 16:45:09 +0100
-Message-ID: <CAGiJk9f8O9nwG-iEbEu2xHLWVBn-M-5c0KCeRxy5HMeogjLYog@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=NE0LSu7zF+LoH1Yu7my9OnujtlzbGV0AviUFes9in7M=;
+	b=DNLo9ex9qkP/mdMRdfezpfuBXIvrmlcF3X/3JDfPi9ZCnQ2l6HUzMB9O3qJ7RCkQw0
+	bIwCDE6LOfV94Fy1u7vn3+6lyeFf3d8JAijeuwgfYE9zJM+JTTzNnaJOhDQFWt0tU5YH
+	cJHC3YoSyNC2fDKUgWtlvzAyVOEE8JGi0QmFo=
+Received: by 10.213.25.201 with SMTP id a9mr3775547ebc.20.1323706136770;
+	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
+Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
+	[95.222.156.232])
+	by mx.google.com with ESMTPS id 65sm76841966eeg.8.2011.12.12.08.08.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] florence: Initial recipe added
+Date: Mon, 12 Dec 2011 17:08:09 +0100
+Message-Id: <1323706089-31836-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe] [PATCH v2] florence: Initial recipe added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,59 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 15:52:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 12 Dec 2011 16:15:51 -0000
 
-2011/12/12 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 12-12-11 11:56, Samuel Stirtzel schreef:
->> Florence is a virtual keyboard used to input text with a touchscreen.
->>
->> Tests: * Run tested on Overo Gumstix with xfce-nm-image * Build tested
->> for Qemuarm
->>
->> Known issues: * Florence cannot access the gconf settings?
->
-> Does adding 'inherit gconf' fix that?
-Thanks, this worked when the configuration was saved once,
-it should work with a fresh installation too,
-but I' couldn't test that because I could not uninstall the package with opkg.
+Florence is a virtual keyboard used to input text with a touchscreen.
 
-When running "opkg remove *florence*" it shows only "no packages
-removed", the same with --force-remove.
-For the case it won't work I've added a notice how I got it working.
-I will test it with a fresh rootfs later.
+Tests:
+* Run tested on Overo Gumstix with xfce-nm-image
+* Build tested for Qemuarm
 
->
-> For v2 don't forget to add --subject-prefix meta-oe to your git-send-email
-> command.
-Ok, I will send v2 out with the prefix soon.
+NOTICE:
+If florence can't find its gconf settings,
+you need to start florence with --config and save the configuration once.
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iEYEARECAAYFAk7mBXoACgkQMkyGM64RGpH67QCghKjiqTVzHTcu9vmFpYvJ2cAO
-> oEkAn3J+wddb2f8fIJeBkAvdwBQTkTKY
-> =oknF
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-support/florence/florence_0.5.1.bb |   23 ++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/florence/florence_0.5.1.bb
 
-
-
+diff --git a/meta-oe/recipes-support/florence/florence_0.5.1.bb b/meta-oe/recipes-support/florence/florence_0.5.1.bb
+new file mode 100644
+index 0000000..1f1d7ef
+--- /dev/null
++++ b/meta-oe/recipes-support/florence/florence_0.5.1.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
++HOMEPAGE = "http://florence.sourceforge.net/english.html"
++
++#NOTICE: If florence can't find its gconf settings, you need to start florence with --config for one time and save the configuration once.
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++
++
++DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo gettext-native intltool-native"
++
++
++SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
++          "
++
++SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
++SRC_URI[sha1sum] = "a3f1c29dd436150002ec14ce9a63de1d72bd1f91"
++
++
++inherit autotools
++inherit gconf
++
++EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
 -- 
-Regards
-Samuel
+1.7.5.4
+
 
 
