@@ -1,19 +1,19 @@
 Received: from host39-232-static.225-95-b.business.telecomitalia.it
 	([95.225.232.39] helo=cindy) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <adriano@gmail.com>) id 1Ra51r-0002u2-DO
+	(envelope-from <adriano@gmail.com>) id 1Ra54t-00031h-IV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 13:30:47 +0100
+	Mon, 12 Dec 2011 13:33:55 +0100
 Received: by cindy (Postfix, from userid 1000)
-	id 270805E23C4; Mon, 12 Dec 2011 13:14:25 +0100 (CET)
-From: Adriano Pallavicino <adrianopallavicino@gmail.com>
+	id 2DCC25E23CA; Mon, 12 Dec 2011 13:26:44 +0100 (CET)
+From: adrianopallavicino@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Dec 2011 13:13:55 +0100
-Message-Id: <1323692035-24394-1-git-send-email-adrianopallavicino@gmail.com>
+Date: Mon, 12 Dec 2011 13:26:32 +0100
+Message-Id: <1323692792-24574-1-git-send-email-adrianopallavicino@gmail.com>
 X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <libtans1_1.17_patch>
-References: <libtans1_1.17_patch>
+In-Reply-To: <adrianopallavicino@gmail.com>
+References: <adrianopallavicino@gmail.com>
 Cc: Adriano Pallavicino <adriano.pallavicino@gmail.com>
-Subject: [PATCH] Signed-off-by: Adriano Pallavicino <adrianopallavicino@gmail.com>
+Subject: [[v1]libtans1_1.17: fix sources URL and md5/sha sum] Added new local recepie for support of DSP on gumstix console image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,40 +27,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 12:30:47 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 12:33:55 -0000
 
 From: Adriano Pallavicino <adriano.pallavicino@gmail.com>
 
-URL sources was wrong. md5sum  and sha256sum now refers to new archive
 ---
- recipes/gnutls/libtasn1-native_1.7.bb |    1 +
- recipes/gnutls/libtasn1_1.7.bb        |    4 +++-
- 2 files changed, 4 insertions(+), 1 deletions(-)
+ recipes/images/omap3-console-image-adri-dsp.bb |   85 ++++++++++++++++++++++++
+ 1 files changed, 85 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/images/omap3-console-image-adri-dsp.bb
 
-diff --git a/recipes/gnutls/libtasn1-native_1.7.bb b/recipes/gnutls/libtasn1-native_1.7.bb
-index a91bd4f..2d41274 100644
---- a/recipes/gnutls/libtasn1-native_1.7.bb
-+++ b/recipes/gnutls/libtasn1-native_1.7.bb
-@@ -5,3 +5,4 @@ inherit native
- 
- SRC_URI[md5sum] = "ebfd69b3514d8e8830057f0e9df6a5f9"
- SRC_URI[sha256sum] = "9431f8e41acbeb5b5b89ec87a092b1a1fe9ef0a229a9a90806f4774707ca1f1f"
+diff --git a/recipes/images/omap3-console-image-adri-dsp.bb b/recipes/images/omap3-console-image-adri-dsp.bb
+new file mode 100644
+index 0000000..bf84839
+--- /dev/null
++++ b/recipes/images/omap3-console-image-adri-dsp.bb
+@@ -0,0 +1,85 @@
++# console image for omap3
 +
-diff --git a/recipes/gnutls/libtasn1_1.7.bb b/recipes/gnutls/libtasn1_1.7.bb
-index 44da659..92302b5 100644
---- a/recipes/gnutls/libtasn1_1.7.bb
-+++ b/recipes/gnutls/libtasn1_1.7.bb
-@@ -3,9 +3,11 @@ LICENSE = "LGPL"
- 
- PR = "r1"
- 
--SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/libtasn1/libtasn1-${PV}.tar.gz"
-+SRC_URI = "ftp://ftp.gnu.org/gnu/libtasn1/libtasn1-${PV}.tar.gz"
- 
- inherit autotools binconfig
- 
- SRC_URI[md5sum] = "ebfd69b3514d8e8830057f0e9df6a5f9"
- SRC_URI[sha256sum] = "9431f8e41acbeb5b5b89ec87a092b1a1fe9ef0a229a9a90806f4774707ca1f1f"
++inherit image
++
++DEPENDS = "task-base"
++
++IMAGE_EXTRA_INSTALL ?= ""
++
++AUDIO_INSTALL = " \
++  alsa-utils \
++  alsa-utils-aplay \
++  alsa-utils-amixer \
++  angstrom-zeroconf-audio \
++ "
++
++TI_DSP_INSTALL = " \
++  task-gstreamer-ti \
++  ti-codec-engine \
++  ti-dmai \
++  ti-dspbios \
++  ti-dsplib \
++  ti-dsplink \
++  ti-dsplink-module \
++  ti-cmem-module \
++"
++
++BASE_INSTALL = " \
++  task-base-extended \
++ "
++
++FIRMWARE_INSTALL = " \
++#  linux-firmware \
++  libertas-sd-firmware \
++  rt73-firmware \
++  zd1211-firmware \
++ "
++
++GLES_INSTALL = " \
++#  libgles-omap3 \
++ "
++
++TOOLS_INSTALL = " \
++  bash \
++  bzip2 \
++  ckermit \
++  devmem2 \
++  dhcp-client \
++  dosfstools \
++  fbgrab \
++  fbset \
++  fbset-modes \
++  i2c-tools \
++#  ksymoops \
++  mkfs-jffs2 \
++  mtd-utils \
++  nano \
++  ntp ntpdate \
++  openssh-misc \
++  openssh-scp \
++  openssh-ssh \
++  omap3-writeprom \
++  procps \
++  socat \
++  strace \
++  sudo \
++  syslog-ng \
++  task-proper-tools \
++  u-boot-utils \
++ "
++
++IMAGE_INSTALL += " \
++  ${BASE_INSTALL} \
++  ${AUDIO_INSTALL} \
++  ${FIRMWARE_INSTALL} \
++  ${GLES_INSTALL} \
++  ${IMAGE_EXTRA_INSTALL} \
++  ${TOOLS_INSTALL} \
++  ${TI_DSP_INSTALL} \
++ "
++
++IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
++
++#ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
 +
 +
 -- 
