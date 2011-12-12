@@ -1,23 +1,31 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RaAuw-0005ga-KF
+	(envelope-from <raj.khem@gmail.com>) id 1RaDnW-00046b-HS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 19:48:04 +0100
-Received: (qmail 4805 invoked by uid 1003); 12 Dec 2011 18:34:24 -0000
-Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@96.240.172.5)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	12 Dec 2011 18:34:24 -0000
-Message-ID: <4EE6492F.9030402@balister.org>
-Date: Mon, 12 Dec 2011 13:34:23 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Mon, 12 Dec 2011 22:52:35 +0100
+Received: by lami14 with SMTP id i14so126001lam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Dec 2011 13:45:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=saNqHirpbbJmQklvI911KXVV1frAk/Gcfows2agLQh0=;
+	b=hloZ4IZIGfV++PseNNGcR8cPGo6UpnCGaGrvKPksRxj0APjSVwHWE0lkliuvsT9x5i
+	RZx7bP380E75Ibs+tmNZU48rHu41TZCKV085Q1zmGOZPadQk5FSfkCAXlB3MKvU27gFd
+	3c/D3hvLqIGXTt3U2lvEs2CxAWGsu8rnSJ/5A=
+Received: by 10.152.134.179 with SMTP id pl19mr13266346lab.13.1323726335584;
+	Mon, 12 Dec 2011 13:45:35 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1323707082-9185-1-git-send-email-philip@balister.org>	<1323707082-9185-2-git-send-email-philip@balister.org>
+Received: by 10.152.24.36 with HTTP; Mon, 12 Dec 2011 13:45:04 -0800 (PST)
+In-Reply-To: <4EE6492F.9030402@balister.org>
+References: <1323707082-9185-1-git-send-email-philip@balister.org>
+	<1323707082-9185-2-git-send-email-philip@balister.org>
 	<CAMKF1soquX6jz+ZFpUEgWPkAUFxhcHXBQSug7tFJck8y+1QKng@mail.gmail.com>
-In-Reply-To: <CAMKF1soquX6jz+ZFpUEgWPkAUFxhcHXBQSug7tFJck8y+1QKng@mail.gmail.com>
-X-Enigmail-Version: 1.1.2
+	<4EE6492F.9030402@balister.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 12 Dec 2011 13:45:04 -0800
+Message-ID: <CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 2/2] gvfs : Fix build failure due to introduction of host includes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,57 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 18:48:04 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 21:52:35 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 12/12/2011 12:35 PM, Khem Raj wrote:
-> On Mon, Dec 12, 2011 at 8:24 AM, Philip Balister <philip@balister.org> wrote:
->> Tested with Angstrom on usrp-e1xx.
+On Mon, Dec 12, 2011 at 10:34 AM, Philip Balister <philip@balister.org> wro=
+te:
+>>>
+>>> =C2=A0EXTRA_OECONF =3D "--disable-samba \
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--disable-arch=
+ive \
 >>
->> Signed-off-by: Philip Balister <philip@balister.org>
->> ---
->>  meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb |    1 +
->>  1 files changed, 1 insertions(+), 0 deletions(-)
->>
->> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
->> index 5a230eb..fd4a089 100644
->> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
->> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
->> @@ -14,6 +14,7 @@ SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
->>  SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
->>
->>  EXTRA_OECONF = "--disable-samba \
->> +                --disable-archive \
-> 
-> You are disabling archive backend explicitly. It might be that someone is using
-> it successfully. Why does it not work ?
+>> You are disabling archive backend explicitly. It might be that someone i=
+s using
+>> it successfully. Why does it not work ?
+>
+> With it enabled, the build fails because it looks at host includes. Long
+> term someone will likely fix this, be in the short term, I need this to
+> work so I can move forward with oe-core based stuff.
 
-With it enabled, the build fails because it looks at host includes. Long
-term someone will likely fix this, be in the short term, I need this to
-work so I can move forward with oe-core based stuff.
+OK. I see that we do not list libarchive in DEPENDS if we did then it
+would build I suppose. Can you try that please ?
 
-Philip
+so I think at present what you get is that if libarchive is built and
+staged before you build
+gvfs then you get the support compiled in if not then you don't. So
+your patch at least makes
+it consistent by disabling it.
 
-> 
->>                 --with-samba-includes=${STAGING_INCDIR} \
->>                 --with-samba-libs=${STAGING_LIBDIR} \
->>                 --with-archive-includes=${STAGING_INCDIR} \
-> 
-> the above option is not needed when you are disabling libarchive anyway
-> 
->> --
->> 1.7.3.4
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Problem only happens if you have libarchive-dev installed on your
+build host which I think
+you do have and hence you see the problem.
+
+I have no strong feeling on enabling or disabling it but I would
+prefer consistency
+
+-Khem
 
 
