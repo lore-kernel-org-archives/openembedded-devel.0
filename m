@@ -1,30 +1,32 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RZs1N-0003Pn-IH
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Dec 2011 23:37:25 +0100
-Received: by pbcc11 with SMTP id c11so731558pbc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Dec 2011 14:30:31 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1Ra1eW-00017m-Uj; Mon, 12 Dec 2011 09:54:29 +0100
+Received: by eaal1 with SMTP id l1so1012284eaa.6
+	for <multiple recipients>; Mon, 12 Dec 2011 00:47:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=d+t2ifHqJUOV0+2pD4OaVuYbFzAnWSIMbAVtrPZGK20=;
-	b=YoYEQpewo79S2aBjZa5nyBNBwSrxl+8A6SlrxzU1UjoLMdzRuE/BGZobJA+Cqu2eDI
-	lEc+ZpOqGk3PyZ6HWvb1YXOcN2Dvlhhcyi/6FoKeXgzvnxcJe85OGiEIQEEZl42uP04T
-	xrGt9kQsmqZhhrd9sDmjettOcLheiYFCWQ+1g=
-MIME-Version: 1.0
-Received: by 10.68.73.197 with SMTP id n5mr28143712pbv.102.1323642630356; Sun,
-	11 Dec 2011 14:30:30 -0800 (PST)
-Received: by 10.142.128.8 with HTTP; Sun, 11 Dec 2011 14:30:30 -0800 (PST)
-In-Reply-To: <20111211092940.GD3986@jama.jama.net>
-References: <1323360390-12622-1-git-send-email-andrea.adami@gmail.com>
-	<20111211092940.GD3986@jama.jama.net>
-Date: Sun, 11 Dec 2011 23:30:30 +0100
-Message-ID: <CAAQYJAsnWiv8YnF_oe=L5NheMw6O4n29Bq-cauVCKK-dSm505A@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ZFK0Y65v9iCdSRCIL+sEHbRyDBkriKp04vWRZav7j+U=;
+	b=nELD0kua27zbagGapG7PC7T+XYpU7sQeUEzcNAP6kwcGcQ3nj8W2voBskdoCGk2wtT
+	nVI6WzBlUT7k6lw0zkiZHe5zhvtwEbXEyzHTpgZCHUXeFHi+WFMfRcRuxYPOQly17X9c
+	JZMfDmerceV0O4KiwBs0zUwYvsueAHBdReOIk=
+Received: by 10.213.98.68 with SMTP id p4mr3209342ebn.109.1323679654822;
+	Mon, 12 Dec 2011 00:47:34 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z54sm72689053eeh.5.2011.12.12.00.47.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 12 Dec 2011 00:47:34 -0800 (PST)
+Date: Mon, 12 Dec 2011 09:47:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH] zaurus.inc: adapt jffs2 and sum.jffs2 to changes in oe-core
+Message-ID: <20111212084731.GD3783@jama.jama.net>
+References: <20111212084206.608CB10332@opal>
+MIME-Version: 1.0
+In-Reply-To: <20111212084206.608CB10332@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-core@lists.openembedded.org
+Subject: Kernel version has extra '+' when kernel is built from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,103 +40,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Dec 2011 22:37:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 12 Dec 2011 08:54:29 -0000
+X-Groupsio-MsgNum: 36031
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="9UV9rz0O2dU/yYYn"
+Content-Disposition: inline
+
+--9UV9rz0O2dU/yYYn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 11, 2011 at 10:29 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Thu, Dec 08, 2011 at 05:06:30PM +0100, Andrea Adami wrote:
->> * in oe-core jffs2 summary has been added to image_types.bbclass and
->> * IMAGE_CMD_jffs2 now includes '-n' to skip cleanmarkers node creation
->> * so we need to customize only padding, endianness and compression mode
->> * While there remove compression settings which are handled in kernel.
->> * This allows us to use the same string for mkfs.jffs2 and for sumtool.
->>
->> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->> ---
->> =A0conf/machine/include/zaurus.inc | =A0 13 +++----------
->> =A01 files changed, 3 insertions(+), 10 deletions(-)
->>
->> diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaur=
-us.inc
->> index b488f37..0a9b1c5 100644
->> --- a/conf/machine/include/zaurus.inc
->> +++ b/conf/machine/include/zaurus.inc
->> @@ -9,18 +9,11 @@ ERASEBLOCKSIZE_akita =3D "0x20000"
->> =A0# C3100 and C3200 have same 128MiB NAND device as akita
->> =A0ERASEBLOCKSIZE_spitz =3D "0x20000"
->>
->> -IMAGE_FSTYPES +=3D "jffs2 tar.gz"
->> +IMAGE_FSTYPES +=3D "tar.gz jffs2 sum.jffs2"
->
-> Do you really need jffs2 if there is sum.jffs2? IMAGE_CMD_sum.jffs2
-> produces both now, doesn't it?
->
-Yes, the jffs2 is rebuilt as well.
-Actually I though about calling the output differently and remove it
-after the sumtool step but did not find special reasons to do it...in
-fact you almost always want the plain jffs2 too.
-Not a strong opinion, though...
+On Mon, Dec 12, 2011 at 08:42:06AM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: c486dfa4013b37972c1a1e4df8616eb6f49de498
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3Dc486dfa4013b37972c1a1e4df8616eb6f49de498
+>=20
+> Author: Koen Kooi <koen@dominion.thruhere.net>
+> Date:   Sun Dec 11 09:46:28 2011 +0100
+>=20
+> kernel bbclass: sync with OE-core
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-> IIRC there was discussion about using +=3D IMAGE_FSTYPES, I don't remembe=
-r
-> the result, but can we use ?=3D here? Just to make easier for someone to
-> limit images in local.conf ie just
-> IMAGE_FSTYPES =3D "tar.gz"
->
+If you're working on shared linux.inc in meta-oe, could you please
+integrate this:
 
-Nothing against, this is a remnant of oe-classic.
+do_configure_prepend() {
+#otherwise it gets extra '+' "2.6.37+"
+#because:
+#$ scripts/setlocalversion . =3D> +
+#$ make kernelversion =3D> 2.6.37
+#$ make kernelrelease =3D> 2.6.37+
+  rm -rf ${S}/.git
+}
 
->
->> =A0# kernel now supports favourlzo
->> -IMAGE_CMD_jffs2 =3D "mkfs.jffs2 --root=3D${IMAGE_ROOTFS} --faketime -m =
-favourlzo \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --output=3D${T}/${IMAGE_NAME}.root=
-fs.jffs2 --pad --little-endian --eraseblock=3D${ERASEBLOCKSIZE} -n \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 && sumtool -i ${T}/${IMAGE_NAME}.r=
-ootfs.jffs2 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 -o ${T}/${IMAGE_NAME}.rootfs.jffs2=
-.summary \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --eraseblock=3D${ERASEBLOCKSIZE} -=
-l -p; \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 cat ${T}/${IMAGE_NAME}.rootfs.jffs=
-2 > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2; \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 rm ${T}/${IMAGE_NAME}.rootfs.jffs2=
-; \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 cat ${T}/${IMAGE_NAME}.rootfs.jffs=
-2.summary > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.summary.jffs2; \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 rm ${T}/${IMAGE_NAME}.rootfs.jffs2=
-.summary;"
->> +EXTRA_IMAGECMD_jffs2 =3D "-p -l --eraseblock=3D${ERASEBLOCKSIZE}"
->> +EXTRA_IMAGECMD_sum.jffs2 =3D "${EXTRA_IMAGECMD_jffs2}"
->>
->> =A0EXTRA_IMAGEDEPENDS +=3D "zaurus-installer"
->>
->> --
->> 1.7.3.4
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
->
+I have to do this in every git recipe as I don't like dirs like
+/lib/modules/2.6.37+
+
+Maybe it should be fixed on kernel.bbclass level, because linux-yocto
+suffers the same ie /lib/modules/3.0.12-yocto-standard+
+
+Ccing oe-core for that..
+
+>=20
+> ---
+>=20
+>  meta-oe/classes/kernel.bbclass |  105 +++++++++++++++++++++++-----------=
+------
+>  1 files changed, 61 insertions(+), 44 deletions(-)
+>=20
+> Diff:   http://git.openembedded.org/?p=3Dmeta-openembedded.git/?a=3Dcommi=
+tdiff;h=3Dc486dfa4013b37972c1a1e4df8616eb6f49de498
+>=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
-BTW we'll support soon ubi filesystems in kexecboot so long mount
-times will disappear.
-Thanks for testing
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Cheers
+--9UV9rz0O2dU/yYYn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Andrea
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk7lv6MACgkQN1Ujt2V2gBzWMQCfd4mxft4Enq6hrlTdVs5G98GA
+QSkAoLEunLnp7PwBgC83kV4tKbupknca
+=lcH9
+-----END PGP SIGNATURE-----
 
+--9UV9rz0O2dU/yYYn--
