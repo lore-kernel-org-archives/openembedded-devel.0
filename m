@@ -1,31 +1,30 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1Ra8Xf-00065N-7w
+	(envelope-from <martin.jansa@gmail.com>) id 1Ra8lk-0006YA-RQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 17:15:51 +0100
-Received: by eekb15 with SMTP id b15so2613508eek.6
+	Mon, 12 Dec 2011 17:30:24 +0100
+Received: by eaal1 with SMTP id l1so1225875eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
+	Mon, 12 Dec 2011 08:23:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=NE0LSu7zF+LoH1Yu7my9OnujtlzbGV0AviUFes9in7M=;
-	b=DNLo9ex9qkP/mdMRdfezpfuBXIvrmlcF3X/3JDfPi9ZCnQ2l6HUzMB9O3qJ7RCkQw0
-	bIwCDE6LOfV94Fy1u7vn3+6lyeFf3d8JAijeuwgfYE9zJM+JTTzNnaJOhDQFWt0tU5YH
-	cJHC3YoSyNC2fDKUgWtlvzAyVOEE8JGi0QmFo=
-Received: by 10.213.25.201 with SMTP id a9mr3775547ebc.20.1323706136770;
-	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
-Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
-	[95.222.156.232])
-	by mx.google.com with ESMTPS id 65sm76841966eeg.8.2011.12.12.08.08.55
+	bh=B0wqgl0HzzRl7FgtmdOfOake/lFgBmRz+T+iAY449zQ=;
+	b=cUd/zhdeClo0OY0KWq3LHY8SRg/hlEcDVJDwlAOTOdaBD2Cf/usrzPNmc1NkdjzvjF
+	YPbG/9tQuq9RX8qTxGl1NxNZ7jS+fRt6O3c1cgHr519KgToJuV0Gedh6JGizlUZMe0k2
+	xrqVrOcn4FPY55jSkY3jWpinL1xdQ7H1Z8efU=
+Received: by 10.213.3.14 with SMTP id 14mr2099411ebl.110.1323707007211;
+	Mon, 12 Dec 2011 08:23:27 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 65sm76988782eeg.8.2011.12.12.08.23.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Dec 2011 08:08:56 -0800 (PST)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Mon, 12 Dec 2011 08:23:26 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Dec 2011 17:08:09 +0100
-Message-Id: <1323706089-31836-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe] [PATCH v2] florence: Initial recipe added
+Date: Mon, 12 Dec 2011 17:23:15 +0100
+Message-Id: <1323706995-23065-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8
+Cc: Klaus Kurzmann <mok@fluxnetz.de>
+Subject: [PATCH][meta-oe] openssh_5.9p1.bbappend: add systemd units
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +38,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 16:15:51 -0000
+X-List-Received-Date: Mon, 12 Dec 2011 16:30:24 -0000
 
-Florence is a virtual keyboard used to input text with a touchscreen.
+From: Klaus Kurzmann <mok@fluxnetz.de>
 
-Tests:
-* Run tested on Overo Gumstix with xfce-nm-image
-* Build tested for Qemuarm
-
-NOTICE:
-If florence can't find its gconf settings,
-you need to start florence with --config and save the configuration once.
-
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/florence/florence_0.5.1.bb |   23 ++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/florence/florence_0.5.1.bb
+ .../openssh/openssh/sshd.socket                    |   11 ++++++++++
+ .../openssh/openssh/sshd@.service                  |    9 ++++++++
+ .../openssh/openssh/sshdgenkeys.service            |   10 +++++++++
+ .../openssh/openssh_5.9p1.bbappend                 |   22 ++++++++++++++++++++
+ 4 files changed, 52 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
+ create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
+ create mode 100644 meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
+ create mode 100644 meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
 
-diff --git a/meta-oe/recipes-support/florence/florence_0.5.1.bb b/meta-oe/recipes-support/florence/florence_0.5.1.bb
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket b/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
 new file mode 100644
-index 0000000..1f1d7ef
+index 0000000..753a33b
 --- /dev/null
-+++ b/meta-oe/recipes-support/florence/florence_0.5.1.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
-+HOMEPAGE = "http://florence.sourceforge.net/english.html"
++++ b/meta-oe/recipes-connectivity/openssh/openssh/sshd.socket
+@@ -0,0 +1,11 @@
++[Unit]
++Conflicts=sshd.service
 +
-+#NOTICE: If florence can't find its gconf settings, you need to start florence with --config for one time and save the configuration once.
++[Socket]
++ExecStartPre=/bin/mkdir -p /var/run/sshd
++ListenStream=22
++Accept=yes
 +
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++[Install]
++WantedBy=sockets.target
++Also=sshdgenkeys.service
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service b/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
+new file mode 100644
+index 0000000..d118490
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/openssh/openssh/sshd@.service
+@@ -0,0 +1,9 @@
++[Unit]
++Description=OpenSSH Per-Connection Daemon
++After=sshdgenkeys.service
 +
++[Service]
++ExecStart=-/usr/sbin/sshd -i
++ExecReload=/bin/kill -HUP $MAINPID
++StandardInput=socket
++StandardError=syslog
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service b/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
+new file mode 100644
+index 0000000..c717214
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/openssh/openssh/sshdgenkeys.service
+@@ -0,0 +1,10 @@
++[Unit]
++Description=SSH Key Generation
 +
-+DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo gettext-native intltool-native"
++[Service]
++ExecStart=/usr/bin/ssh-keygen -A
++Type=oneshot
++RemainAfterExit=yes
 +
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
+new file mode 100644
+index 0000000..3f68e09
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
+@@ -0,0 +1,22 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 +
-+SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
-+          "
++PRINC := "${@int(PRINC) + 1}"
 +
-+SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
-+SRC_URI[sha1sum] = "a3f1c29dd436150002ec14ce9a63de1d72bd1f91"
++SYSTEMD_PACKAGES = "openssh-sshd-systemd"
++SYSTEMD_SERVICE = "sshd.socket"
 +
++inherit systemd
 +
-+inherit autotools
-+inherit gconf
++SRC_URI += "file://sshd.socket file://sshd@.service file://sshdgenkeys.service"
 +
-+EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
++do_install_append() {
++       install -d ${D}${base_libdir}/systemd/system
++       install -m 644 ${WORKDIR}/sshd.socket ${D}${base_libdir}/systemd/system
++       install -m 644 ${WORKDIR}/sshd@.service ${D}${base_libdir}/systemd/system
++       install -m 644 ${WORKDIR}/sshdgenkeys.service ${D}${base_libdir}/systemd/system
++}
++
++PACKAGES =+ "openssh-sshd-systemd"
++
++FILES_openssh-sshd-systemd += "${base_libdir}/systemd"
++RDEPENDS_openssh-sshd-systemd += "openssh-sshd"
 -- 
-1.7.5.4
+1.7.8
 
 
 
