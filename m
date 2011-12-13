@@ -1,31 +1,30 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RaYsk-0004YQ-I4
+	(envelope-from <vitperov@gmail.com>) id 1RaZ2p-0005FW-Mi
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 21:23:22 +0100
-Received: by lami14 with SMTP id i14so35612lam.6
+	Tue, 13 Dec 2011 21:33:47 +0100
+Received: by eekb15 with SMTP id b15so71801eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 12:16:26 -0800 (PST)
+	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=i/Cho547XclrVj6cx8o+IcvlWGvOcwKQUpnOQDXKxag=;
-	b=jE9yJXiUyWaQM+y7fZIk0Q+DJZduhiTLJHkjIOb4UmBsWg999DQVDOooMRclKGaW7x
-	oczfdhypwWzkrYReTUNAXOkaeTJj2fLo9IeAz7cMi65fCiEWOX4I20xNNx4LL2M9e/bp
-	XlAEIVTuIrzAB0hzOZkG0qgdht/7YMAzCNljk=
-Received: by 10.152.106.115 with SMTP id gt19mr16664363lab.27.1323807386437;
-	Tue, 13 Dec 2011 12:16:26 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Tue, 13 Dec 2011 12:15:56 -0800 (PST)
-In-Reply-To: <4EE7A9CA.2050904@linux.intel.com>
-References: <1323789098-6941-1-git-send-email-ulf@emagii.com>
-	<4EE7A9CA.2050904@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 13 Dec 2011 12:15:56 -0800
-Message-ID: <CAMKF1soZMLXz2_0OU9-4HmEyYDK-h40=940cCTqf8O53AkR7-Q@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=tRc2R9Ct6Z/nEI0tKKC8aVPslHbhBZqwFkSJwMWSL0g=;
+	b=X/lPj7RtB7D7kFWBWQ1/hwowhPrGUb3AiBJQ1BswfuCy/ntu7pri50IWeRsRLjwvNu
+	foV9HouKfh08LhmsCmQBmCTHi6aWnyLvBzL87ycyf2JZG6TAoQxdzwp0Gw5XDMvcsoNt
+	jT0EZlMHa89l/Rg3tr43wjFVNxzcxzn/HsIpk=
+Received: by 10.14.119.71 with SMTP id m47mr116089eeh.67.1323808011732;
+	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
+Received: from localhost.localdomain ([109.195.90.21])
+	by mx.google.com with ESMTPS id z43sm545157eef.7.2011.12.13.12.26.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
+From: Vitaly Perov <vitperov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: ulf@emagii.com
-Subject: Re: [meta-oe] tz*: download location has moved
+Date: Wed, 14 Dec 2011 00:23:56 +0400
+Message-Id: <1323807836-9611-1-git-send-email-vitperov@gmail.com>
+X-Mailer: git-send-email 1.7.6
+Cc: Vitaly Perov <vit@vt-tech.eu>
+Subject: [PATCH v2] ftplib: add initial version of recipe 3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 20:23:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 Dec 2011 20:33:47 -0000
 
-On Tue, Dec 13, 2011 at 11:38 AM, Saul Wold <sgw@linux.intel.com> wrote:
-> On 12/13/2011 07:11 AM, ulf@emagii.com wrote:
->>
->> From: Ulf Samuelsson<ulf@emagii.com>
->>
->> Signed-off-by: Ulf Samuelsson<ulf@emagii.com>
->> ---
->> =C2=A0meta-oe/recipes-extended/tzcode/tzcode-native.inc | =C2=A0 =C2=A06=
- +++---
->> =C2=A0meta-oe/recipes-extended/tzdata/tzdata.inc =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| =C2=A0 =C2=A04 ++--
->> =C2=A02 files changed, 5 insertions(+), 5 deletions(-)
->>
-> This was fixed in oe-core, What's the reason that a tz* set is needed in
-> meta-oe? =C2=A0Can we remove them from meta-oe or is the older version ne=
-eded by
-> someone?
->
+From: Vitaly Perov <vit@vt-tech.eu>
 
-there are some differences e.g. met-oe it installs a sane default for timez=
-one
-may be if those differences can be merged then it would make it go away
+tested on armv5te(AT91SAM9260)
 
--Khem
+Signed-off-by: Vitaly Perov <vitperov@gmail.com>
+---
+ recipes/ftplib/ftplib_3.1.bb |   38 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 38 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ftplib/ftplib_3.1.bb
+
+diff --git a/recipes/ftplib/ftplib_3.1.bb b/recipes/ftplib/ftplib_3.1.bb
+new file mode 100644
+index 0000000..00a49bc
+--- /dev/null
++++ b/recipes/ftplib/ftplib_3.1.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "A set of routines that implement the FTP protocol"
++HOMEPAGE = "http://nbpfaus.net/~pfau/ftplib/"
++LICENSE = "LGPLv2"
++
++PR = "r0"
++
++# LDFLAGS are missing in Makefile build section
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++# Use current directory for linking qftp with just-build ftplib
++EXTRA_OEMAKE = "LDFLAGS='${LDFLAGS} -L.'"
++
++SRC_URI = "http://nbpfaus.net/~pfau/ftplib/ftplib-${PV}-src.tar.gz"
++
++S = "${WORKDIR}/ftplib-${PV}"
++
++SRC_URI[md5sum] = "c6af758ccbf806b28f022a587a41d9c5"
++SRC_URI[sha256sum] = "be524e1086cfe9d86afa832e1413dde79a4e88ee8ea5325a87ffaaf6620a0a2b"
++
++do_compile() {
++    cd linux && oe_runmake
++}
++
++do_install() {
++    install -d ${D}/${libdir}
++    install -d ${D}/${includedir}
++    install -d ${D}/${bindir}
++    oe_libinstall -so -C linux libftp ${D}/${libdir}
++    install -m 755 ${S}/linux/libftp.a ${D}/${libdir}
++    install -m 644 ${S}/linux/ftplib.h ${D}/${includedir}
++    install -m 755 ${S}/linux/qftp ${D}/${bindir}
++    (cd  ${D}/${bindir} && \
++     ln -sf qftp ftpdir && \
++     ln -sf qftp ftpget && \
++     ln -sf qftp ftplist && \
++     ln -sf qftp fptrm && \
++     ln -sf qftp ftpsend)
++}
+-- 
+1.7.6
+
 
 
