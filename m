@@ -1,45 +1,30 @@
-Received: from ch1ehsobe004.messaging.microsoft.com ([216.32.181.184]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1RaJSK-00010x-0q
+	(envelope-from <sledz@dresearch-fe.de>) id 1RaNZs-0007LJ-Mk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 04:55:04 +0100
-Received: from mail158-ch1-R.bigfish.com (10.43.68.240) by
-	CH1EHSOBE001.bigfish.com (10.43.70.51) with Microsoft SMTP Server id
-	14.1.225.23; Tue, 13 Dec 2011 03:17:55 +0000
-Received: from mail158-ch1 (localhost [127.0.0.1])	by
-	mail158-ch1-R.bigfish.com (Postfix) with ESMTP id 2A19E44013A	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 03:17:55 +0000 (UTC)
-X-SpamScore: -6
-X-BigFish: VS-6(zz1432Nzz1202hzz8275bh8275dhz2dh2a8h668h839h)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail158-ch1 (localhost.localdomain [127.0.0.1]) by mail158-ch1
-	(MessageSwitch) id 132374627365973_10249;
-	Tue, 13 Dec 2011 03:17:53 +0000 (UTC)
-Received: from CH1EHSMHS005.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.249])	by mail158-ch1.bigfish.com (Postfix) with ESMTP id
-	0BEEDA0045 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 03:17:53 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS005.bigfish.com
-	(10.43.70.5) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Tue, 13 Dec 2011 03:17:52 +0000
-Received: from az33smr01.freescale.net (10.64.34.199) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server id 14.1.355.3; Mon, 12 Dec 2011 21:17:54 -0600
-Received: from localhost.localdomain
-	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197] (may
-	be forged))	by az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id
-	pBD3HqdH029069;	Mon, 12 Dec 2011 21:17:53 -0600 (CST)
-From: <b19537@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Dec 2011 11:20:23 +0800
-Message-ID: <1323746424-18637-1-git-send-email-b19537@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
+	Tue, 13 Dec 2011 09:19:08 +0100
+Received: by wgbds11 with SMTP id ds11so11288555wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2011 00:12:13 -0800 (PST)
+Received: by 10.216.139.79 with SMTP id b57mr3033061wej.111.1323763933410;
+	Tue, 13 Dec 2011 00:12:13 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id m13sm26013095wbh.0.2011.12.13.00.12.12
+	(version=SSLv3 cipher=OTHER); Tue, 13 Dec 2011 00:12:12 -0800 (PST)
+Message-ID: <4EE708DC.8000901@dresearch-fe.de>
+Date: Tue, 13 Dec 2011 09:12:12 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [PATCH mate-oe 1/2] xmlto: add
+To: openembedded-devel@lists.openembedded.org
+References: <1323450027-31964-1-git-send-email-sledz@dresearch-fe.de>
+	<CAMKF1sqkmOx6wPHA9vZNPp_XMhZN+s8fLy74wDcCLt4OvUVGtQ@mail.gmail.com>
+	<4EE3346C.1040703@dresearch-fe.de>
+In-Reply-To: <4EE3346C.1040703@dresearch-fe.de>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [PATCH] icedtea6-native: fix problem on build hosts with linux kernel 3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 03:55:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Dec 2011 08:19:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Zhenhua Luo <b19537@freescale.com>
+On 10.12.2011 11:29, Steffen Sledz wrote:
+> Am 09.12.2011 20:59, schrieb Khem Raj:
+>> On Fri, Dec 9, 2011 at 9:00 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>>        done
+>>> +
+>>> +       for F in openjdk/hotspot/make/linux/Makefile openjdk-ecj/hotspot/make/linux/Makefile ;
+>>> +       do
+>>> +               sed -i \
+>>> +                       -e"s|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 2.7%|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3%|" \
+>>> +                       $F
+>>> +       done
+>>>  }
+>>
+>> why drop the 'dot' may be using 3. is better ?
+> 
+> Just following the scheme, e.g. 2.6% is without a dot too.
 
-    > 'xmlto' converts an XML file (DocBook or XSL-FO) into a specified format
-      (PS, PDF, HTML, man, ASCII, XSL-FO, etc.).
+Ping!
 
-Signed-off-by: Zhenhua Luo <b19537@freescale.com>
----
- meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-
-diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-new file mode 100644
-index 0000000..dcbf799
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "A shell-script tool for converting XML files to various formats" 
-+SECTION = "docs/xmlto" 
-+LICENSE = "GPLv2" 
-+HOMEPAGE = "https://fedorahosted.org/xmlto/" 
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+
-+SRC_URI = "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar.gz" 
-+
-+inherit autotools  
-+
-+SRC_URI[md5sum] = "a88cd3f08789b4825d1ac89fa065170d"
-+SRC_URI[sha256sum] = "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc352e843147e3e31a"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
 -- 
-1.7.0.4
-
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
