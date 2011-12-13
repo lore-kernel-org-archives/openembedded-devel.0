@@ -1,34 +1,25 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RaXYO-00005B-3M
+	(envelope-from <sgw@linux.intel.com>) id 1RaYbx-0003c1-2n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 19:58:16 +0100
-Received: by eaal1 with SMTP id l1so1880755eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 10:51:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=j8Wa1DtPRPlzoKCnXrKeR0fwY1ZDHQqBAW1vhqoiDBQ=;
-	b=LfZB9q7G0Taw9te+RrGwEn19YrsnJGFbJic1Lf9/Nlla5uLJi17ic14Tbhw271g6xT
-	E/7B1bjx/sRPjsrFY8KDwvdx3ZBAHL9Ny0roFulhB82BorYd5eVCDtlXZJx1JZbGKSuQ
-	80ZxTehoWwE4bAPVOGdjLvVisUA5sTWECe0C8=
+	Tue, 13 Dec 2011 21:06:01 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 13 Dec 2011 11:57:59 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="86172501"
+Received: from unknown (HELO [10.255.12.219]) ([10.255.12.219])
+	by orsmga001.jf.intel.com with ESMTP; 13 Dec 2011 11:38:50 -0800
+Message-ID: <4EE7A9CA.2050904@linux.intel.com>
+Date: Tue, 13 Dec 2011 11:38:50 -0800
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0) Gecko/20110927 Thunderbird/7.0
 MIME-Version: 1.0
-Received: by 10.204.157.25 with SMTP id z25mr11881249bkw.37.1323802277977;
-	Tue, 13 Dec 2011 10:51:17 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.42.137 with HTTP; Tue, 13 Dec 2011 10:51:17 -0800 (PST)
-In-Reply-To: <jc86fu$pem$1@dough.gmane.org>
-References: <cover.1323772986.git.otavio@ossystems.com.br>
-	<dd9bd4910b7278f024c9602b8d0cc162efc485fa.1323772987.git.otavio@ossystems.com.br>
-	<jc86fu$pem$1@dough.gmane.org>
-Date: Tue, 13 Dec 2011 16:51:17 -0200
-X-Google-Sender-Auth: 1rwN3aIzjkr38-b4jyF8JaCWwHg
-Message-ID: <CAP9ODKpz+RsFfTPqztX6yXM25n+ng813hJ6xJMrMHmn9LN4Cdg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH 3/4] dropbear: bump epoch to ensure an upgrade path and cleanup packaging
+References: <1323789098-6941-1-git-send-email-ulf@emagii.com>
+In-Reply-To: <1323789098-6941-1-git-send-email-ulf@emagii.com>
+Cc: ulf@emagii.com
+Subject: Re: [meta-oe] tz*: download location has moved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +33,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 18:58:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 13 Dec 2011 20:06:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 13, 2011 at 16:45, Koen Kooi <koen@dominion.thruhere.net> wrote:
-
-> I'd really like to avoid PE in bbappends for obvious reasons. Can we get
-> this into OE-core instead?
+On 12/13/2011 07:11 AM, ulf@emagii.com wrote:
+> From: Ulf Samuelsson<ulf@emagii.com>
 >
+> Signed-off-by: Ulf Samuelsson<ulf@emagii.com>
+> ---
+>   meta-oe/recipes-extended/tzcode/tzcode-native.inc |    6 +++---
+>   meta-oe/recipes-extended/tzdata/tzdata.inc        |    4 ++--
+>   2 files changed, 5 insertions(+), 5 deletions(-)
+>
+This was fixed in oe-core, What's the reason that a tz* set is needed in 
+meta-oe?  Can we remove them from meta-oe or is the older version needed 
+by someone?
 
-I can send a patch to them for this but in meanwhile this ought to be
-merged as currently dropbear is at broken state.
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Sau!
+
+> diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native.inc b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
+> index b946e71..2f9f176 100644
+> --- a/meta-oe/recipes-extended/tzcode/tzcode-native.inc
+> +++ b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
+> @@ -1,9 +1,9 @@
+>   DESCRIPTION = "tzcode, timezone zoneinfo utils -- zic, zdump, tzselect"
+> -INC_PR = "r4"
+> +INC_PR = "r5"
+>
+>   SRC_URI = " \
+> -        ftp://elsie.nci.nih.gov/pub/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
+> -        ftp://elsie.nci.nih.gov/pub/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
+> +        http://www.iana.org/time-zones/repository/releases/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
+> +        http://www.iana.org/time-zones/repository/releases/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
+>   	"
+>
+>   inherit native
+> diff --git a/meta-oe/recipes-extended/tzdata/tzdata.inc b/meta-oe/recipes-extended/tzdata/tzdata.inc
+> index ceec924..94f73d8 100644
+> --- a/meta-oe/recipes-extended/tzdata/tzdata.inc
+> +++ b/meta-oe/recipes-extended/tzdata/tzdata.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION = "Timezone data"
+>   SECTION = "base"
+>   DEPENDS = "tzcode-native"
+>
+> -INC_PR = "r10"
+> +INC_PR = "r11"
+>
+>   DEFAULT_TIMEZONE ?= "Europe/London"
+>
+> @@ -11,7 +11,7 @@ RCONFLICTS_${PN} = "timezones timezone-africa timezone-america timezone-antarcti
+>                timezone-australia timezone-europe timezone-indian \
+>                timezone-iso3166.tab timezone-pacific timezone-zone.tab"
+>
+> -SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
+> +SRC_URI = "http://www.iana.org/time-zones/repository/releases/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
+>
+>   TZONES= "africa antarctica asia australasia europe northamerica southamerica  \
+>            factory solar87 solar88 solar89 etcetera backward systemv \
+
 
