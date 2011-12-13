@@ -1,31 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dbaryshkov@gmail.com>) id 1RaVbL-00020s-Rc
+	(envelope-from <dbaryshkov@gmail.com>) id 1RaVbM-00021p-PQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 17:53:11 +0100
-Received: by mail-fx0-f47.google.com with SMTP id a20so369504faa.6
+	Tue, 13 Dec 2011 17:53:12 +0100
+Received: by mail-ee0-f47.google.com with SMTP id b15so3169269eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 08:46:18 -0800 (PST)
+	Tue, 13 Dec 2011 08:46:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=M58W0SUtVG41yWaQh8Gdoq5VhO6q++IrRBtJ1OJjPVQ=;
-	b=MDMd7x4ZmlJgFY4h2JXrfBA2ZRmcvj4OHbCpqejRFTa5v9DqTuNaK+ge/XhKnIbLb0
-	EafEBNw7N+9uyKGJR2mspZSP5/AxFC5DPIdW1fdrwnNAtejsxoXs2HrMsDMFlVIXvsOI
-	7/ZlkuaSrLHjeTcSkW8LGDgONClogWqgpEtL4=
-Received: by 10.180.7.161 with SMTP id k1mr27439002wia.23.1323794777269;
-	Tue, 13 Dec 2011 08:46:17 -0800 (PST)
+	bh=oVgJcisxy41HnUFDDzJwiWnPGBpEWfLlABfxy89PdMo=;
+	b=pz2+drk0T3sSCLZe7HUQXTl6/s6YNAmbwym0yJm0GW1mflaOi4hkeVCVzLhKGfQz3v
+	JHxsHdcZ1endSSSEYySBGVuv3wPeHMVgNxXSPSWwyorFUQaiCXqN2cbkXOo503RFzVRL
+	mfIk9RWp10r2Y7XQ86t4fTHaZb6iXyUMsWhoc=
+Received: by 10.180.104.2 with SMTP id ga2mr33316172wib.33.1323794779125;
+	Tue, 13 Dec 2011 08:46:19 -0800 (PST)
 Received: from fangorn.rup.mentorg.com (nat-rup.mentorg.com. [139.181.168.34])
 	by mx.google.com with ESMTPS id
-	n9sm27277056wbo.16.2011.12.13.08.46.15 (version=SSLv3 cipher=OTHER);
-	Tue, 13 Dec 2011 08:46:16 -0800 (PST)
+	n9sm27277056wbo.16.2011.12.13.08.46.17 (version=SSLv3 cipher=OTHER);
+	Tue, 13 Dec 2011 08:46:18 -0800 (PST)
 From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Dec 2011 20:44:42 +0400
-Message-Id: <1323794683-24233-6-git-send-email-dbaryshkov@gmail.com>
+Date: Tue, 13 Dec 2011 20:44:43 +0400
+Message-Id: <1323794683-24233-7-git-send-email-dbaryshkov@gmail.com>
 X-Mailer: git-send-email 1.7.7.3
 In-Reply-To: <1323794683-24233-1-git-send-email-dbaryshkov@gmail.com>
 References: <1323794683-24233-1-git-send-email-dbaryshkov@gmail.com>
-Subject: [meta-opie 5/6] libopie2: make libopie2-dev package installable
+Subject: [meta-opie 6/6] opie: fix SDK generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +39,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 16:53:11 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 16:53:12 -0000
 
-For now libopie2-dev package depends on libopie2 package which doesn't
-exist: libraries are split into the individual packages. Fix that by
-making libopie2-dev depend on all generated library packages.
+Fix SDK generation. Include correct version of tools, set up environment
+for the linux-oe-g++ qmake spec. qmake still has some room for
+improvement to add automatic handling of (e.g.) thread/non-threaded
+config, opie-related defines, etc.
 
 Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 ---
- recipes-opie/libopie/libopie2.inc |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ recipes-opie/meta/meta-toolchain-opie.bb           |   30 ++++++++++++++++---
+ .../tasks/task-opie-toolchain-host-nativesdk.bb    |    8 +++++
+ recipes-opie/tasks/task-opie-toolchain-target.bb   |   16 ++++++++++
+ 3 files changed, 49 insertions(+), 5 deletions(-)
+ create mode 100644 recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+ create mode 100644 recipes-opie/tasks/task-opie-toolchain-target.bb
 
-diff --git a/recipes-opie/libopie/libopie2.inc b/recipes-opie/libopie/libopie2.inc
-index fbe2fd6..af4385f 100644
---- a/recipes-opie/libopie/libopie2.inc
-+++ b/recipes-opie/libopie/libopie2.inc
-@@ -8,7 +8,7 @@ I18N_FILES = "libopiecore2.ts libopiesecurity2.ts"
- DEPENDS = "libqpe-opie libpcap sqlite3 bluez4"
- PROVIDES = "libopiecore2 libopiedb2 libopiemm2 libopiesecurity2 libopienet2 libopiepim2 libopieui2"
+diff --git a/recipes-opie/meta/meta-toolchain-opie.bb b/recipes-opie/meta/meta-toolchain-opie.bb
+index 6a941c3..3238b37 100644
+--- a/recipes-opie/meta/meta-toolchain-opie.bb
++++ b/recipes-opie/meta/meta-toolchain-opie.bb
+@@ -1,8 +1,28 @@
+-PR = "r1"
+-TOOLCHAIN_TARGET_TASK = "\
+-    task-sdk-base \
+-    task-sdk-opie"
++PR = "r3"
++TOOLCHAIN_HOST_TASK = "task-opie-toolchain-host-nativesdk task-cross-canadian-${TRANSLATED_TARGET_ARCH}"
++TOOLCHAIN_TARGET_TASK = "task-opie-toolchain-target"
++TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-toolchain-opie-${DISTRO_VERSION}"
  
--INC_PR = "r16"
-+INC_PR = "r17"
+ require recipes-core/meta/meta-toolchain.bb
  
- S = "${WORKDIR}/libopie2"
- 
-@@ -98,7 +98,9 @@ do_install() {
- 
- FILES_${PN}-dev += "${palmtopdir}/include.pro"
- 
--PACKAGES_prepend = " libopiecore2 libopiedb2 libopiesecurity2 libopiemm2 libopienet2 libopiepim2 libopieui2 libopiebluez2 "
-+OPIE_LIBS = " libopiecore2 libopiedb2 libopiesecurity2 libopiemm2 libopienet2 libopiepim2 libopieui2 libopiebluez2 "
-+PACKAGES_prepend = "${OPIE_LIBS}"
-+RDEPENDS_${PN}-dev = "${OPIE_LIBS}"
- 
- DESCRIPTION_libopiecore2 = "Opie Development Platform 1.x Core Library"
- FILES_libopiecore2 = "${libdir}/libopiecore2.so.*"
+-SDK_SUFFIX = "toolchain-opie"
++QT_TOOLS_PREFIX = "${SDKPATHNATIVE}${bindir_nativesdk}"
++
++toolchain_create_sdk_env_script_append() {
++
++    echo 'export OE_QMAKE_CC=${TARGET_PREFIX}gcc' >> $script
++    echo 'export OE_QMAKE_CFLAGS="-DQWS $CFLAGS"' >> $script
++    echo 'export OE_QMAKE_CXX=${TARGET_PREFIX}g++' >> $script
++    echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
++    echo 'export OE_QMAKE_AR=${TARGET_PREFIX}ar' >> $script
++    echo 'export OE_QMAKE_STRIP="echo"' >> $script
++    echo 'export OE_QMAKE_UIC=${QT_TOOLS_PREFIX}/uic2' >> $script
++    echo 'export OE_QMAKE_MOC=${QT_TOOLS_PREFIX}/moc2' >> $script
++    echo 'export OE_QMAKE_CXXFLAGS="-fno-exceptions -fno-rtti -DQWS $CXXFLAGS"' >> $script
++    echo 'export OE_QMAKE_LINK="${TARGET_PREFIX}g++"' >> $script
++    echo 'export OE_QMAKE_INCDIR_QT="${SDKTARGETSYSROOT}${includedir}/qte"' >> $script
++    echo 'export OE_QMAKE_LIBDIR_QT="${SDKTARGETSYSROOT}${libdir}"' >> $script
++    echo 'export OE_QMAKE_LIBS_QT="qte"' >> $script
++    echo 'export OE_QMAKE_LIBS_X11=""' >> $script
++
++    echo 'export QMAKESPEC=${SDKPATHNATIVE}${datadir}/qmake/linux-oe-g++' >> $script
++}
+diff --git a/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+new file mode 100644
+index 0000000..5ca80e6
+--- /dev/null
++++ b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+@@ -0,0 +1,8 @@
++require recipes-core/tasks/task-sdk-host-nativesdk.bb
++
++DESCRIPTION = "Host packages for Opie SDK"
++PR = "r2"
++LICENSE = "MIT"
++ALLOW_EMPTY = "1"
++
++RDEPENDS_${PN} += "qmake-nativesdk uicmoc-nativesdk"
+diff --git a/recipes-opie/tasks/task-opie-toolchain-target.bb b/recipes-opie/tasks/task-opie-toolchain-target.bb
+new file mode 100644
+index 0000000..b9ea713
+--- /dev/null
++++ b/recipes-opie/tasks/task-opie-toolchain-target.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Target packages for Opie SDK"
++PR = "r7"
++LICENSE = "MIT"
++ALLOW_EMPTY = "1"
++
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
++                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++
++RDEPENDS_${PN} = "\
++    task-core-standalone-sdk-target \
++    libopie2-dev \
++    libqpe-opie-dev \
++    ${@base_conditional("PALMTOP_USE_MULTITHREADED_QT", "yes", "qte-mt", "qte", d)}-dev \
++    libqtaux2-dev \
++    libmailwrapper-dev"
 -- 
 1.7.7.3
 
