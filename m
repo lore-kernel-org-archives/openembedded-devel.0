@@ -1,27 +1,25 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rac5b-0007aM-2H
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RacAo-0007kS-OP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Dec 2011 00:48:51 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 13 Dec 2011 15:41:42 -0800
+	Wed, 14 Dec 2011 00:54:14 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 13 Dec 2011 15:47:04 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="86956033"
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="101881956"
 Received: from unknown (HELO helios.localnet) ([10.252.122.62])
-	by orsmga002.jf.intel.com with ESMTP; 13 Dec 2011 15:41:41 -0800
+	by fmsmga002.fm.intel.com with ESMTP; 13 Dec 2011 15:47:03 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Tue, 13 Dec 2011 23:41:40 +0000
-Message-ID: <2795170.GPyksbkBvZ@helios>
+Date: Tue, 13 Dec 2011 23:47:02 +0000
+Message-ID: <3017837.W6lmoH9RaO@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <CALT56yNowfmEegV6OFQEdnk47YaaFOd9S_g0vdt3YKQf91DYHg@mail.gmail.com>
-References: <1323811550-876-1-git-send-email-dbaryshkov@gmail.com>
-	<1545212.W5z1uACr0M@helios>
-	<CALT56yNowfmEegV6OFQEdnk47YaaFOd9S_g0vdt3YKQf91DYHg@mail.gmail.com>
+In-Reply-To: <1323819509-19552-1-git-send-email-dbaryshkov@gmail.com>
+References: <1323819509-19552-1-git-send-email-dbaryshkov@gmail.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] opie-bluetoothd: fix compilation issues
+Subject: Re: [meta-opie][PATCH] obexftp: fix LICENSE field
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,30 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 23:48:51 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 23:54:15 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Wednesday 14 December 2011 03:32:08 Dmitry Eremin-Solenikov wrote:
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Wednesday 14 December 2011 01:25:50 Dmitry Eremin-Solenikov wrote:
-> >> rfkill.cpp uses symbols from libsysfs. However opie-bluetoothd recipe
-> >> lacks dependency on sysfsutils (package containing libsysfs) and
-> >> project
-> >> file also lacks -lsysfs in the LIBS rule. Fix those issues.
-> > 
-> > Rather than apply this patch I've merged the change upstream and updated
-> > the OPIE_SRCREV in meta-opie to
-> > f5c8bd6272b5bee393736f401232ce0ccc984fec (which includes a few other
-> > fixes as well.) Thanks!
+On Wednesday 14 December 2011 03:38:29 Dmitry Eremin-Solenikov wrote:
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> ---
+>  recipes-support/obexftp/obexftp_0.23.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> Thanks! I just didn't want to touch SRCREV, so I provided oe patch instead
-> :)
+> diff --git a/recipes-support/obexftp/obexftp_0.23.bb
+> b/recipes-support/obexftp/obexftp_0.23.bb index 46cc628..b6aa9fb 100644
+> --- a/recipes-support/obexftp/obexftp_0.23.bb
+> +++ b/recipes-support/obexftp/obexftp_0.23.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION = "OBEX Ftp Client based on openobex."
+>  SECTION = "console/network"
+>  HOMEPAGE = "http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp"
+> -LICENSE = "GPLv2/LGPLv2"
+> +LICENSE = "GPLv2 & LGPLv2"
+>  DEPENDS = "openobex bluez4 virtual/libusb0 virtual/libiconv"
+>  PR = "r1"
 
-I guess I prefer updating SRCREV to carrying around a bunch of patches given 
-that I'm the upstream in this case ;) I realise it forces a rebuild of 
-everything, but I'd imagine people building from git are prepared to put up 
-with a little pain for the benefit of getting the absolute latest code.
+Merged to meta-opie, thanks.
 
 Cheers,
 Paul
