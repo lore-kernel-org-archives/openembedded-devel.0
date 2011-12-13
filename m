@@ -1,30 +1,35 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RaPwm-00055r-4y
+	(envelope-from <otavio.salvador@gmail.com>) id 1RaPwo-000566-O3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 11:50:57 +0100
-Received: by yenm12 with SMTP id m12so4873540yen.6
+	Tue, 13 Dec 2011 11:50:58 +0100
+Received: by yenm12 with SMTP id m12so4873589yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 02:43:57 -0800 (PST)
+	Tue, 13 Dec 2011 02:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	bh=fRh2IuM576AWHIWNT4CPaKFrWKo4ayh+jIOi5qpayFg=;
-	b=YMitRlTl6mvMxGFsY7Hebb4D56HjY4gwduCtCagyBO/09ZsIWUBUEODadpSXsTpyWM
-	Fs9JkqNrgumBdeOj/oiphlCSFhSf2ASBSZe2GRSrM/AqbiXCQ1hrtBFADEfYA6GF51U9
-	0ru4qGNKfxBv2vHRLMVWK34cDhRy99p6lD+2w=
-Received: by 10.236.173.131 with SMTP id v3mr2418243yhl.112.1323773037190;
-	Tue, 13 Dec 2011 02:43:57 -0800 (PST)
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=8nuyBiPqGmZ5rbUkoqFI0ZKJ1GNH8D9yBZ2gxU4/9w0=;
+	b=UXvvaHuVCBCIH/xHWQS33YXuU7cGNNi31Yju4tCvDXdLcC9hzyjjF0jEyRAP+s+AWu
+	rmzh6yWumsftsjPVFje8kFt6Z+dvt8GbGvWFvXLM3NSwU4A6oPbetiEW6CGhUvNYIcoJ
+	GXUp7jj3Q8jyyI3pSS0Nyiz1uzF8ZZQyKkwgA=
+Received: by 10.236.178.33 with SMTP id e21mr2552301yhm.4.1323773043098;
+	Tue, 13 Dec 2011 02:44:03 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 37sm33437204anu.21.2011.12.13.02.43.55
+	by mx.google.com with ESMTPS id 37sm33437204anu.21.2011.12.13.02.43.59
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Dec 2011 02:43:56 -0800 (PST)
+	Tue, 13 Dec 2011 02:44:02 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Dec 2011 10:43:42 +0000
-Message-Id: <cover.1323772986.git.otavio@ossystems.com.br>
+Date: Tue, 13 Dec 2011 10:43:44 +0000
+Message-Id: <0c9ca9464df523163601aacfc91fcd61935cae40.1323772987.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [meta-oe][PATCH 0/4] systemd related fixes and qconnman bump
+In-Reply-To: <cover.1323772986.git.otavio@ossystems.com.br>
+References: <cover.1323772986.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1323772986.git.otavio@ossystems.com.br>
+References: <cover.1323772986.git.otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 2/4] dropbear: convert PR to use PRINC on bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 10:50:57 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 10:50:58 -0000
 
-The following changes since commit 7ad9db8b3b6dd8fb9f85032b02344036015a9698:
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../dropbear/dropbear_2011.54.bbappend             |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-  gnome-panel : Fix format of LICENSE field. (2011-12-12 18:45:06 +0100)
-
-are available in the git repository at:
-  git://github.com/OSSystems/meta-oe master
-  https://github.com/OSSystems/meta-oe/tree/master
-
-Otavio Salvador (4):
-  systemd-systemctl-native: add support to recursive services
-  dropbear: convert PR to use PRINC on bbappend
-  dropbear: bump epoch to ensure an upgrade path and cleanup packaging
-  qconnman: bump SRCREV
-
- .../dropbear/dropbear_2011.54.bbappend             |   13 ++++---------
- .../systemd/systemd-systemctl-native.bb            |    2 ++
- .../systemd/systemd-systemctl-native/systemctl     |    8 ++++++++
- meta-oe/recipes-qt/qconnman/qconnman.inc           |    2 +-
- 4 files changed, 15 insertions(+), 10 deletions(-)
-
+diff --git a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
+index a642235..874a7d4 100644
+--- a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
++++ b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
+@@ -1,6 +1,6 @@
+ inherit systemd
+ 
+-PRINC = "1"
++PRINC := "${@int(PRINC) + 1}"
+ 
+ # look for files in the layer first
+ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 -- 
 1.7.2.5
 
