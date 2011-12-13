@@ -1,27 +1,24 @@
-Received: from smtprelay-b21.telenor.se ([195.54.99.212])
+Received: from sanddollar.geekisp.com ([216.168.135.167])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1RaU7w-0000z3-K0
+	(envelope-from <philip@balister.org>) id 1RaUNV-0008A7-22
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 16:18:44 +0100
-Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id EC274EB3D6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 16:11:48 +0100 (CET)
-X-SENDER-IP: [83.227.56.19]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AtRLAJ9q505T4zgTPGdsb2JhbABDqyAZAQEBATcygXIBXBMBDzAfSwotCYd1BrYAiE6DGgSUcZIq
-X-IronPort-AV: E=Sophos;i="4.71,345,1320620400"; d="scan'208";a="15342309"
-Received: from c-1338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	hexagon.atmel.com) ([83.227.56.19])
-	by ipb3.telenor.se with ESMTP; 13 Dec 2011 16:11:48 +0100
-From: ulf@emagii.com
+	Tue, 13 Dec 2011 16:34:52 +0100
+Received: (qmail 25640 invoked by uid 1003); 13 Dec 2011 15:21:12 -0000
+Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@96.240.172.5)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	13 Dec 2011 15:21:12 -0000
+Message-ID: <4EE76D67.5060404@balister.org>
+Date: Tue, 13 Dec 2011 10:21:11 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Dec 2011 16:11:38 +0100
-Message-Id: <1323789098-6941-1-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.7.4.1
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [meta-oe] tz*: download location has moved
+References: <1323707082-9185-1-git-send-email-philip@balister.org>	<1323707082-9185-2-git-send-email-philip@balister.org>	<CAMKF1soquX6jz+ZFpUEgWPkAUFxhcHXBQSug7tFJck8y+1QKng@mail.gmail.com>	<4EE6492F.9030402@balister.org>
+	<CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: [PATCH 2/2] gvfs : Fix build failure due to introduction of host includes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,57 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 15:18:44 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 15:34:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Ulf Samuelsson <ulf@emagii.com>
+On 12/12/2011 04:45 PM, Khem Raj wrote:
+> On Mon, Dec 12, 2011 at 10:34 AM, Philip Balister <philip@balister.org> wrote:
+>>>>
+>>>>  EXTRA_OECONF = "--disable-samba \
+>>>> +                --disable-archive \
+>>>
+>>> You are disabling archive backend explicitly. It might be that someone is using
+>>> it successfully. Why does it not work ?
+>>
+>> With it enabled, the build fails because it looks at host includes. Long
+>> term someone will likely fix this, be in the short term, I need this to
+>> work so I can move forward with oe-core based stuff.
+> 
+> OK. I see that we do not list libarchive in DEPENDS if we did then it
+> would build I suppose. Can you try that please ?
+> 
+> so I think at present what you get is that if libarchive is built and
+> staged before you build
+> gvfs then you get the support compiled in if not then you don't. So
+> your patch at least makes
+> it consistent by disabling it.
 
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- meta-oe/recipes-extended/tzcode/tzcode-native.inc |    6 +++---
- meta-oe/recipes-extended/tzdata/tzdata.inc        |    4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+Still fails if you DEPEND on libarchive.
 
-diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native.inc b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
-index b946e71..2f9f176 100644
---- a/meta-oe/recipes-extended/tzcode/tzcode-native.inc
-+++ b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "tzcode, timezone zoneinfo utils -- zic, zdump, tzselect"
--INC_PR = "r4"
-+INC_PR = "r5"
- 
- SRC_URI = " \
--        ftp://elsie.nci.nih.gov/pub/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
--        ftp://elsie.nci.nih.gov/pub/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
-+        http://www.iana.org/time-zones/repository/releases/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
-+        http://www.iana.org/time-zones/repository/releases/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
- 	"
- 
- inherit native
-diff --git a/meta-oe/recipes-extended/tzdata/tzdata.inc b/meta-oe/recipes-extended/tzdata/tzdata.inc
-index ceec924..94f73d8 100644
---- a/meta-oe/recipes-extended/tzdata/tzdata.inc
-+++ b/meta-oe/recipes-extended/tzdata/tzdata.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Timezone data"
- SECTION = "base"
- DEPENDS = "tzcode-native"
- 
--INC_PR = "r10"
-+INC_PR = "r11"
- 
- DEFAULT_TIMEZONE ?= "Europe/London"
- 
-@@ -11,7 +11,7 @@ RCONFLICTS_${PN} = "timezones timezone-africa timezone-america timezone-antarcti
-              timezone-australia timezone-europe timezone-indian \
-              timezone-iso3166.tab timezone-pacific timezone-zone.tab"
- 
--SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
-+SRC_URI = "http://www.iana.org/time-zones/repository/releases/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
- 
- TZONES= "africa antarctica asia australasia europe northamerica southamerica  \
-          factory solar87 solar88 solar89 etcetera backward systemv \
--- 
-1.7.4.1
+Philip
 
+> 
+> Problem only happens if you have libarchive-dev installed on your
+> build host which I think
+> you do have and hence you see the problem.
+> 
+> I have no strong feeling on enabling or disabling it but I would
+> prefer consistency
+> 
+> -Khem
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
