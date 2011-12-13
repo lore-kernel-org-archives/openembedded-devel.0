@@ -1,30 +1,28 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vitperov@gmail.com>) id 1RaZ2p-0005FW-Mi
+	(envelope-from <dbaryshkov@gmail.com>) id 1RaZzI-00082R-9W
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 21:33:47 +0100
-Received: by eekb15 with SMTP id b15so71801eek.6
+	Tue, 13 Dec 2011 22:34:12 +0100
+Received: by wgbds11 with SMTP id ds11so172062wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
+	Tue, 13 Dec 2011 13:27:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=tRc2R9Ct6Z/nEI0tKKC8aVPslHbhBZqwFkSJwMWSL0g=;
-	b=X/lPj7RtB7D7kFWBWQ1/hwowhPrGUb3AiBJQ1BswfuCy/ntu7pri50IWeRsRLjwvNu
-	foV9HouKfh08LhmsCmQBmCTHi6aWnyLvBzL87ycyf2JZG6TAoQxdzwp0Gw5XDMvcsoNt
-	jT0EZlMHa89l/Rg3tr43wjFVNxzcxzn/HsIpk=
-Received: by 10.14.119.71 with SMTP id m47mr116089eeh.67.1323808011732;
-	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
-Received: from localhost.localdomain ([109.195.90.21])
-	by mx.google.com with ESMTPS id z43sm545157eef.7.2011.12.13.12.26.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Dec 2011 12:26:51 -0800 (PST)
-From: Vitaly Perov <vitperov@gmail.com>
+	bh=9uRWgFPh1sRzJkw1p11PYed0JIKB5O3R0Z1nRCbXlIk=;
+	b=BXxsMJpLxJSWU+WV2uJg1O8v7/JILYOkCXP0Kkf9wQSO7ymbALSsBTrza0QwIkX5Of
+	1E1uXNBvN1IBwyh3VUnCnCz3G8keC9NjCKxjJtuquWYfsD3lQiMmg3mcFpPVIP9SvWpu
+	QibJ8FS9pFAZMWJ1LzFm4QgNv6F41obtqA+Dc=
+Received: by 10.227.205.135 with SMTP id fq7mr184540wbb.19.1323811636049;
+	Tue, 13 Dec 2011 13:27:16 -0800 (PST)
+Received: from fangorn.rup.mentorg.com (nat-rup.mentorg.com. [139.181.168.34])
+	by mx.google.com with ESMTPS id fo3sm507942wib.11.2011.12.13.13.27.13
+	(version=SSLv3 cipher=OTHER); Tue, 13 Dec 2011 13:27:14 -0800 (PST)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Dec 2011 00:23:56 +0400
-Message-Id: <1323807836-9611-1-git-send-email-vitperov@gmail.com>
-X-Mailer: git-send-email 1.7.6
-Cc: Vitaly Perov <vit@vt-tech.eu>
-Subject: [PATCH v2] ftplib: add initial version of recipe 3.1
+Date: Wed, 14 Dec 2011 01:25:50 +0400
+Message-Id: <1323811550-876-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.7.3
+Subject: [meta-opie][PATCH] opie-bluetoothd: fix compilation issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,64 +36,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 20:33:47 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 21:34:12 -0000
 
-From: Vitaly Perov <vit@vt-tech.eu>
+rfkill.cpp uses symbols from libsysfs. However opie-bluetoothd recipe
+lacks dependency on sysfsutils (package containing libsysfs) and project
+file also lacks -lsysfs in the LIBS rule. Fix those issues.
 
-tested on armv5te(AT91SAM9260)
-
-Signed-off-by: Vitaly Perov <vitperov@gmail.com>
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 ---
- recipes/ftplib/ftplib_3.1.bb |   38 ++++++++++++++++++++++++++++++++++++++
- 1 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ftplib/ftplib_3.1.bb
+ recipes-opie/opie-bluetoothd/opie-bluetoothd.inc   |    1 +
+ .../opie-bluetoothd/opie-bluetoothd/libsysfs.patch |   20 ++++++++++++++++++++
+ .../opie-bluetoothd/opie-bluetoothd_git.bb         |    5 ++++-
+ 3 files changed, 25 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-opie/opie-bluetoothd/opie-bluetoothd/libsysfs.patch
 
-diff --git a/recipes/ftplib/ftplib_3.1.bb b/recipes/ftplib/ftplib_3.1.bb
+diff --git a/recipes-opie/opie-bluetoothd/opie-bluetoothd.inc b/recipes-opie/opie-bluetoothd/opie-bluetoothd.inc
+index 5cae5be..6c8f6a5 100644
+--- a/recipes-opie/opie-bluetoothd/opie-bluetoothd.inc
++++ b/recipes-opie/opie-bluetoothd/opie-bluetoothd.inc
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
+ # FIXME stopgap until split archives have license files included
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+ APPNAME = "opiebluetoothd"
++DEPENDS = "sysfsutils"
+ 
+ S = "${WORKDIR}/opiebluetoothd"
+ 
+diff --git a/recipes-opie/opie-bluetoothd/opie-bluetoothd/libsysfs.patch b/recipes-opie/opie-bluetoothd/opie-bluetoothd/libsysfs.patch
 new file mode 100644
-index 0000000..00a49bc
+index 0000000..0701e22
 --- /dev/null
-+++ b/recipes/ftplib/ftplib_3.1.bb
-@@ -0,0 +1,38 @@
-+DESCRIPTION = "A set of routines that implement the FTP protocol"
-+HOMEPAGE = "http://nbpfaus.net/~pfau/ftplib/"
-+LICENSE = "LGPLv2"
++++ b/recipes-opie/opie-bluetoothd/opie-bluetoothd/libsysfs.patch
+@@ -0,0 +1,20 @@
++Upstream-Status: Pending
++Subject: Fix opiebluetoothd linking to libsysfs
 +
-+PR = "r0"
++rfkill.cpp uses symbols from libsys. Add -lsysfs to the LIBS list
 +
-+# LDFLAGS are missing in Makefile build section
-+TARGET_CC_ARCH += "${LDFLAGS}"
++Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 +
-+# Use current directory for linking qftp with just-build ftplib
-+EXTRA_OEMAKE = "LDFLAGS='${LDFLAGS} -L.'"
-+
-+SRC_URI = "http://nbpfaus.net/~pfau/ftplib/ftplib-${PV}-src.tar.gz"
-+
-+S = "${WORKDIR}/ftplib-${PV}"
-+
-+SRC_URI[md5sum] = "c6af758ccbf806b28f022a587a41d9c5"
-+SRC_URI[sha256sum] = "be524e1086cfe9d86afa832e1413dde79a4e88ee8ea5325a87ffaaf6620a0a2b"
-+
-+do_compile() {
-+    cd linux && oe_runmake
-+}
-+
-+do_install() {
-+    install -d ${D}/${libdir}
-+    install -d ${D}/${includedir}
-+    install -d ${D}/${bindir}
-+    oe_libinstall -so -C linux libftp ${D}/${libdir}
-+    install -m 755 ${S}/linux/libftp.a ${D}/${libdir}
-+    install -m 644 ${S}/linux/ftplib.h ${D}/${includedir}
-+    install -m 755 ${S}/linux/qftp ${D}/${bindir}
-+    (cd  ${D}/${bindir} && \
-+     ln -sf qftp ftpdir && \
-+     ln -sf qftp ftpget && \
-+     ln -sf qftp ftplist && \
-+     ln -sf qftp fptrm && \
-+     ln -sf qftp ftpsend)
-+}
++Index: opiebluetoothd/opiebluetoothd.pro
++===================================================================
++--- opiebluetoothd.orig/opiebluetoothd.pro	2011-12-13 23:52:42.563082969 +0400
+++++ opiebluetoothd/opiebluetoothd.pro	2011-12-14 01:10:28.375070146 +0400
++@@ -5,7 +5,7 @@
++ INTERFACES      = bluetoothpindlgbase.ui
++ INCLUDEPATH     += $(OPIEDIR)/include
++ DEPENDPATH      += $(OPIEDIR)/include
++-LIBS            += -lqpe -lopiecore2 -lopiebluez2 -lopieui2 -ldbus-qt2 $$system(pkg-config --libs dbus-1)
+++LIBS            += -lqpe -lopiecore2 -lopiebluez2 -lopieui2 -ldbus-qt2 $$system(pkg-config --libs dbus-1) -lsysfs
++ 
++ TARGET 		= opiebluetoothd
++ 
+diff --git a/recipes-opie/opie-bluetoothd/opie-bluetoothd_git.bb b/recipes-opie/opie-bluetoothd/opie-bluetoothd_git.bb
+index dac89e4..a9d29f3 100644
+--- a/recipes-opie/opie-bluetoothd/opie-bluetoothd_git.bb
++++ b/recipes-opie/opie-bluetoothd/opie-bluetoothd_git.bb
+@@ -1,4 +1,7 @@
+ require ${PN}.inc
+ PV = "${OPIE_GIT_PV}"
+ 
+-SRC_URI = "${OPIE_GIT};protocol=git;subpath=noncore/net/opietooth/opiebluetoothd"
++SRC_URI = "\
++    ${OPIE_GIT};protocol=git;subpath=noncore/net/opietooth/opiebluetoothd \
++    file://libsysfs.patch \
++"
 -- 
-1.7.6
+1.7.7.3
 
 
 
