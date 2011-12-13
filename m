@@ -1,35 +1,27 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from smtprelay-b21.telenor.se ([195.54.99.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RaPwu-00055r-0E
+	(envelope-from <ulf@emagii.com>) id 1RaU7w-0000z3-K0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 11:51:04 +0100
-Received: by mail-yx0-f175.google.com with SMTP id m12so4873540yen.6
+	Tue, 13 Dec 2011 16:18:44 +0100
+Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id EC274EB3D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 02:44:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=50OrO6NtDIQEQ3BbaQpzul08HFXML0TDBnhtBYwaXGA=;
-	b=j38pMAVYQZinWFwCExp47H8XHgYR31sJMn8KqCtFuUTsSrLx7kDIYqXsaeNz2RrEET
-	zqYDkW0MtK4i6fkmqqlVIYTxlaRfqr3eCXHJMwOMkzWjp30IVogw8S7RS9klQ3vjL60n
-	auUORdL8mP1X0D1K8PJDkvC2EHBCMC+uYko+k=
-Received: by 10.236.91.84 with SMTP id g60mr2655448yhf.90.1323773050700;
-	Tue, 13 Dec 2011 02:44:10 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 37sm33437204anu.21.2011.12.13.02.44.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Dec 2011 02:44:10 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 13 Dec 2011 16:11:48 +0100 (CET)
+X-SENDER-IP: [83.227.56.19]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtRLAJ9q505T4zgTPGdsb2JhbABDqyAZAQEBATcygXIBXBMBDzAfSwotCYd1BrYAiE6DGgSUcZIq
+X-IronPort-AV: E=Sophos;i="4.71,345,1320620400"; d="scan'208";a="15342309"
+Received: from c-1338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	hexagon.atmel.com) ([83.227.56.19])
+	by ipb3.telenor.se with ESMTP; 13 Dec 2011 16:11:48 +0100
+From: ulf@emagii.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Dec 2011 10:43:46 +0000
-Message-Id: <670a53f897525652548ec3eeb2b4bf2a8ef3924b.1323772987.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1323772986.git.otavio@ossystems.com.br>
-References: <cover.1323772986.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1323772986.git.otavio@ossystems.com.br>
-References: <cover.1323772986.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 4/4] qconnman: bump SRCREV
+Date: Tue, 13 Dec 2011 16:11:38 +0100
+Message-Id: <1323789098-6941-1-git-send-email-ulf@emagii.com>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: [meta-oe] tz*: download location has moved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +35,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 10:51:05 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 15:18:44 -0000
 
- * add translation support
- * doesn't allow simultaneous connections
+From: Ulf Samuelsson <ulf@emagii.com>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- meta-oe/recipes-qt/qconnman/qconnman.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/recipes-extended/tzcode/tzcode-native.inc |    6 +++---
+ meta-oe/recipes-extended/tzdata/tzdata.inc        |    4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-qt/qconnman/qconnman.inc b/meta-oe/recipes-qt/qconnman/qconnman.inc
-index 280a002..06ad5fd 100644
---- a/meta-oe/recipes-qt/qconnman/qconnman.inc
-+++ b/meta-oe/recipes-qt/qconnman/qconnman.inc
-@@ -9,7 +9,7 @@ PR = "r1"
- inherit autotools
+diff --git a/meta-oe/recipes-extended/tzcode/tzcode-native.inc b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
+index b946e71..2f9f176 100644
+--- a/meta-oe/recipes-extended/tzcode/tzcode-native.inc
++++ b/meta-oe/recipes-extended/tzcode/tzcode-native.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "tzcode, timezone zoneinfo utils -- zic, zdump, tzselect"
+-INC_PR = "r4"
++INC_PR = "r5"
  
- PV = "0.0+gitr${SRCPV}"
--SRCREV = "9bab120f426e41552c369b7030414c792dd25a91"
-+SRCREV = "f976b18c7c5584627224784801803e9fd3ebe0ff"
- SRC_URI = "git://github.com/OSSystems/qconnman.git"
+ SRC_URI = " \
+-        ftp://elsie.nci.nih.gov/pub/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
+-        ftp://elsie.nci.nih.gov/pub/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
++        http://www.iana.org/time-zones/repository/releases/tzcode${PV}.tar.gz;name=tzcode-${PV};subdir=${BPN}-${PV} \
++        http://www.iana.org/time-zones/repository/releases/tzdata${TZDATA_PV}.tar.gz;name=tzdata-${TZDATA_PV};subdir=${BPN}-${PV} \
+ 	"
  
- S = "${WORKDIR}/git/"
+ inherit native
+diff --git a/meta-oe/recipes-extended/tzdata/tzdata.inc b/meta-oe/recipes-extended/tzdata/tzdata.inc
+index ceec924..94f73d8 100644
+--- a/meta-oe/recipes-extended/tzdata/tzdata.inc
++++ b/meta-oe/recipes-extended/tzdata/tzdata.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Timezone data"
+ SECTION = "base"
+ DEPENDS = "tzcode-native"
+ 
+-INC_PR = "r10"
++INC_PR = "r11"
+ 
+ DEFAULT_TIMEZONE ?= "Europe/London"
+ 
+@@ -11,7 +11,7 @@ RCONFLICTS_${PN} = "timezones timezone-africa timezone-america timezone-antarcti
+              timezone-australia timezone-europe timezone-indian \
+              timezone-iso3166.tab timezone-pacific timezone-zone.tab"
+ 
+-SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
++SRC_URI = "http://www.iana.org/time-zones/repository/releases/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
+ 
+ TZONES= "africa antarctica asia australasia europe northamerica southamerica  \
+          factory solar87 solar88 solar89 etcetera backward systemv \
 -- 
-1.7.2.5
+1.7.4.1
 
 
 
