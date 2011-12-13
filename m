@@ -1,27 +1,31 @@
-Received: from smtprelay-b22.telenor.se ([195.54.99.213])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1RabsM-0006he-Lw
+	(envelope-from <dbaryshkov@gmail.com>) id 1Rabw9-0006r3-BP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Dec 2011 00:35:10 +0100
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id EECC2C7BB
+	Wed, 14 Dec 2011 00:39:05 +0100
+Received: by dake40 with SMTP id e40so161717dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 23:56:42 +0100 (CET)
-X-SENDER-IP: [83.227.57.213]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ah1JAAHX505T4znVPGdsb2JhbABDqx4ZAQEBATcygXIBXCMwH0sKLYd+BrYziEmDGgSUcZIq
-X-IronPort-AV: E=Sophos;i="4.71,349,1320620400"; d="scan'208";a="236202567"
-Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	hexagon.atmel.com) ([83.227.57.213])
-	by ipb1.telenor.se with ESMTP; 13 Dec 2011 23:56:42 +0100
-From: ulf@emagii.com
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Dec 2011 23:56:19 +0100
-Message-Id: <1323816980-21668-1-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.7.4.1
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [meta-oe] cpufrequtils: Replace non-existant kernel.org git source
+	Tue, 13 Dec 2011 15:32:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=kYZ20MT4q9/IY/pUqkF6cVqX23tPNf4AQzZI7GKRdHc=;
+	b=up8IkaPar8R3v7G9yKYwX+EkoeYSsy30HRR3Pre3qZXGVjWrLjnc2Y1It198gypMOI
+	cw3iPOgSuhc+tWnSN+/HNJBGJzexyUY5uYXoYiugMNpjlh5n2YFOt0weCJLaq4QcwVdg
+	YJIQjEt7ptjtiyibzSW/S3KitMjegNXLZs8AU=
+MIME-Version: 1.0
+Received: by 10.68.122.231 with SMTP id lv7mr26327959pbb.45.1323819128353;
+	Tue, 13 Dec 2011 15:32:08 -0800 (PST)
+Received: by 10.68.196.196 with HTTP; Tue, 13 Dec 2011 15:32:08 -0800 (PST)
+In-Reply-To: <1545212.W5z1uACr0M@helios>
+References: <1323811550-876-1-git-send-email-dbaryshkov@gmail.com>
+	<1545212.W5z1uACr0M@helios>
+Date: Wed, 14 Dec 2011 03:32:08 +0400
+Message-ID: <CALT56yNowfmEegV6OFQEdnk47YaaFOd9S_g0vdt3YKQf91DYHg@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-opie][PATCH] opie-bluetoothd: fix compilation issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,48 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 23:35:11 -0000
+X-List-Received-Date: Tue, 13 Dec 2011 23:39:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Ulf Samuelsson <ulf@emagii.com>
+On Wed, Dec 14, 2011 at 2:58 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Wednesday 14 December 2011 01:25:50 Dmitry Eremin-Solenikov wrote:
+>> rfkill.cpp uses symbols from libsysfs. However opie-bluetoothd recipe
+>> lacks dependency on sysfsutils (package containing libsysfs) and project
+>> file also lacks -lsysfs in the LIBS rule. Fix those issues.
+>
+> Rather than apply this patch I've merged the change upstream and updated the
+> OPIE_SRCREV in meta-opie to f5c8bd6272b5bee393736f401232ce0ccc984fec (which
+> includes a few other fixes as well.) Thanks!
 
-git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git
-no longer exists so build fails, unless it is already present in
-downloads directory.
+Thanks! I just didn't want to touch SRCREV, so I provided oe patch instead :)
 
-Source has been retrieved from a mirror:
-(http://mirror.nexcess.net/kernel.org/scm/utils/kernel/cpufreq/cpufrequtils.git)
-and a new git source has been established on github.
-
-kernel.org link kept in a comment to allow the old
-link to be easily reestablished once it is available.
-
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- .../cpufrequtils/cpufrequtils_008.bb               |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
-index d795e54..ea38e15 100644
---- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
-+++ b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
-@@ -6,11 +6,13 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- SRCREV = "adb7e044755aa06b12212d05c4acbcccb023d2cd"
--SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git \
-+# SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git \
-+
-+SRC_URI = "git://github.com/emagii/cpufrequtils.git \
-            file://cpufrequtils-nls.patch \
-           "
- 
--PR = "r1"
-+PR = "r2"
- 
- S = "${WORKDIR}/git"
- 
 -- 
-1.7.4.1
-
+With best wishes
+Dmitry
 
 
