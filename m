@@ -1,32 +1,48 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from tx2ehsobe004.messaging.microsoft.com ([65.55.88.14]
+	helo=TX2EHSOBE007.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RaDnW-00046b-HS
+	(envelope-from <B19537@freescale.com>) id 1RaJDm-0000ZB-Bb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Dec 2011 22:52:35 +0100
-Received: by lami14 with SMTP id i14so126001lam.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Dec 2011 13:45:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=saNqHirpbbJmQklvI911KXVV1frAk/Gcfows2agLQh0=;
-	b=hloZ4IZIGfV++PseNNGcR8cPGo6UpnCGaGrvKPksRxj0APjSVwHWE0lkliuvsT9x5i
-	RZx7bP380E75Ibs+tmNZU48rHu41TZCKV085Q1zmGOZPadQk5FSfkCAXlB3MKvU27gFd
-	3c/D3hvLqIGXTt3U2lvEs2CxAWGsu8rnSJ/5A=
-Received: by 10.152.134.179 with SMTP id pl19mr13266346lab.13.1323726335584;
-	Mon, 12 Dec 2011 13:45:35 -0800 (PST)
+	Tue, 13 Dec 2011 04:40:02 +0100
+Received: from mail6-tx2-R.bigfish.com (10.9.14.247) by
+	TX2EHSOBE007.bigfish.com (10.9.40.27) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 13 Dec 2011 03:17:54 +0000
+Received: from mail6-tx2 (localhost [127.0.0.1])	by mail6-tx2-R.bigfish.com
+	(Postfix) with ESMTP id AA0BC64010E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2011 03:17:54 +0000 (UTC)
+X-SpamScore: -6
+X-BigFish: VS-6(zz1432Nzz1202hzz8275bhz2dh2a8h668h839h61h)
+X-Spam-TCS-SCL: 0:0
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail6-tx2 (localhost.localdomain [127.0.0.1]) by mail6-tx2
+	(MessageSwitch) id 1323746274563857_18610;
+	Tue, 13 Dec 2011 03:17:54 +0000 (UTC)
+Received: from TX2EHSMHS005.bigfish.com (unknown [10.9.14.241])	by
+	mail6-tx2.bigfish.com (Postfix) with ESMTP id 830BA680047	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2011 03:17:54 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS005.bigfish.com
+	(10.9.99.105) with Microsoft SMTP Server (TLS) id 14.1.225.22;
+	Tue, 13 Dec 2011 03:17:54 +0000
+Received: from az33smr01.freescale.net (10.64.34.199) by
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server id 14.1.355.3; Mon, 12 Dec 2011 21:17:56 -0600
+Received: from localhost.localdomain
+	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197] (may
+	be forged))	by az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id
+	pBD3HqdI029069;	Mon, 12 Dec 2011 21:17:55 -0600 (CST)
+From: <b19537@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 Dec 2011 11:20:24 +0800
+Message-ID: <1323746424-18637-2-git-send-email-b19537@freescale.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1323746424-18637-1-git-send-email-b19537@freescale.com>
+References: <1323746424-18637-1-git-send-email-b19537@freescale.com>
 MIME-Version: 1.0
-Received: by 10.152.24.36 with HTTP; Mon, 12 Dec 2011 13:45:04 -0800 (PST)
-In-Reply-To: <4EE6492F.9030402@balister.org>
-References: <1323707082-9185-1-git-send-email-philip@balister.org>
-	<1323707082-9185-2-git-send-email-philip@balister.org>
-	<CAMKF1soquX6jz+ZFpUEgWPkAUFxhcHXBQSug7tFJck8y+1QKng@mail.gmail.com>
-	<4EE6492F.9030402@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Dec 2011 13:45:04 -0800
-Message-ID: <CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] gvfs : Fix build failure due to introduction of host includes.
+X-OriginatorOrg: freescale.com
+Subject: [PATCH mate-oe 2/2] libxaw: fix build error due to missing xmlto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2011 21:52:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 Dec 2011 03:40:02 -0000
+Content-Type: text/plain
 
-On Mon, Dec 12, 2011 at 10:34 AM, Philip Balister <philip@balister.org> wro=
-te:
->>>
->>> =C2=A0EXTRA_OECONF =3D "--disable-samba \
->>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--disable-arch=
-ive \
->>
->> You are disabling archive backend explicitly. It might be that someone i=
-s using
->> it successfully. Why does it not work ?
->
-> With it enabled, the build fails because it looks at host includes. Long
-> term someone will likely fix this, be in the short term, I need this to
-> work so I can move forward with oe-core based stuff.
+From: Zhenhua Luo <b19537@freescale.com>
 
-OK. I see that we do not list libarchive in DEPENDS if we did then it
-would build I suppose. Can you try that please ?
+    > libxaw build failed due to missing native xmlto, add xmlto-native in
+      DEPENDS of libxaw
 
-so I think at present what you get is that if libarchive is built and
-staged before you build
-gvfs then you get the support compiled in if not then you don't. So
-your patch at least makes
-it consistent by disabling it.
+Signed-off-by: Zhenhua Luo <b19537@freescale.com>
+---
+ meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-Problem only happens if you have libarchive-dev installed on your
-build host which I think
-you do have and hence you see the problem.
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb
+index 40d11da..602f887 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb
+@@ -1,11 +1,12 @@
+ require recipes-graphics/xorg-lib/xorg-lib-common.inc
+ DESCRIPTION = "X Athena Widget Set"
+ DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp printproto libxau"
++DEPENDS += "xmlto-native"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f1beacbc336a5a256bb28dbfcf01c2be"
+ 
+ PE = "1"
+-PR = "r10"
++PR = "r11"
+ 
+ SRC_URI[md5sum] = "ccc57478c41b7a75b9702241b889b1d4"
+ SRC_URI[sha256sum] = "a83977546b78e24ac5dca86affc10b6404a87c16272405b05386feca1a2db037"
+-- 
+1.7.0.4
 
-I have no strong feeling on enabling or disabling it but I would
-prefer consistency
 
--Khem
 
 
