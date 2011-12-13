@@ -1,24 +1,29 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RaUNV-0008A7-22
+	(envelope-from <dbaryshkov@gmail.com>) id 1RaVbC-00020s-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Dec 2011 16:34:52 +0100
-Received: (qmail 25640 invoked by uid 1003); 13 Dec 2011 15:21:12 -0000
-Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@96.240.172.5)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	13 Dec 2011 15:21:12 -0000
-Message-ID: <4EE76D67.5060404@balister.org>
-Date: Tue, 13 Dec 2011 10:21:11 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
-MIME-Version: 1.0
+	Tue, 13 Dec 2011 17:53:02 +0100
+Received: by faaa20 with SMTP id a20so369504faa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2011 08:46:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=PRYDCmC+2T/jtA3Aetk8OPBWJAhWkTH/gTsiREnb8aw=;
+	b=bVBUX0Db4eZxGr1209rPwsTcJg0/gwVoDxXXUJeM0sFgLSyIFH555Yz93HfOlVAcaR
+	Cg1fsM0ffPX9T/1p83+Ea8H7Iz8kCcEbDBJPtP2oVkURAd8NT2chPL9E4LszymDhavA5
+	gqJ6eCmleLc+AYQR37AgUQZtRAbE1RLsX62b4=
+Received: by 10.180.106.105 with SMTP id gt9mr10199577wib.39.1323794766575;
+	Tue, 13 Dec 2011 08:46:06 -0800 (PST)
+Received: from fangorn.rup.mentorg.com (nat-rup.mentorg.com. [139.181.168.34])
+	by mx.google.com with ESMTPS id
+	n9sm27277056wbo.16.2011.12.13.08.46.04 (version=SSLv3 cipher=OTHER);
+	Tue, 13 Dec 2011 08:46:05 -0800 (PST)
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1323707082-9185-1-git-send-email-philip@balister.org>	<1323707082-9185-2-git-send-email-philip@balister.org>	<CAMKF1soquX6jz+ZFpUEgWPkAUFxhcHXBQSug7tFJck8y+1QKng@mail.gmail.com>	<4EE6492F.9030402@balister.org>
-	<CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sq-WGFk4LV6L8Zj4mn-NGymtUDYrZaoK_LBbDMF4_1vCQ@mail.gmail.com>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [PATCH 2/2] gvfs : Fix build failure due to introduction of host includes.
+Date: Tue, 13 Dec 2011 20:44:37 +0400
+Message-Id: <1323794683-24233-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.7.7.3
+Subject: [meta-opie 0/6] Fix SDK generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 15:34:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 Dec 2011 16:53:03 -0000
 
-On 12/12/2011 04:45 PM, Khem Raj wrote:
-> On Mon, Dec 12, 2011 at 10:34 AM, Philip Balister <philip@balister.org> wrote:
->>>>
->>>>  EXTRA_OECONF = "--disable-samba \
->>>> +                --disable-archive \
->>>
->>> You are disabling archive backend explicitly. It might be that someone is using
->>> it successfully. Why does it not work ?
->>
->> With it enabled, the build fails because it looks at host includes. Long
->> term someone will likely fix this, be in the short term, I need this to
->> work so I can move forward with oe-core based stuff.
-> 
-> OK. I see that we do not list libarchive in DEPENDS if we did then it
-> would build I suppose. Can you try that please ?
-> 
-> so I think at present what you get is that if libarchive is built and
-> staged before you build
-> gvfs then you get the support compiled in if not then you don't. So
-> your patch at least makes
-> it consistent by disabling it.
+The following changes since commit ad8e8dc745831e2f8523757d790294906500b0ad:
 
-Still fails if you DEPEND on libarchive.
+  Fix LIC_FILES_CHKSUM for change to common LGPL-2.0 license file (2011-12-09 12:18:49 +0000)
 
-Philip
+are available in the git repository at:
+  https://github.com/lumag/meta-opie master
 
-> 
-> Problem only happens if you have libarchive-dev installed on your
-> build host which I think
-> you do have and hence you see the problem.
-> 
-> I have no strong feeling on enabling or disabling it but I would
-> prefer consistency
-> 
-> -Khem
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Dmitry Eremin-Solenikov (6):
+      uicmoc: do also provide nativesdk variant
+      qmake: do also provide nativesdk variant
+      task-opie, task-opie-16mb: make whole recipe a machine-only
+      opie-button-settings: make whole recipe a machine-only
+      libopie2: make libopie2-dev package installable
+      opie: fix SDK generation
+
+ recipes-opie/libopie/libopie2.inc                  |    6 ++-
+ recipes-opie/meta/meta-toolchain-opie.bb           |   30 ++++++++++++++++---
+ .../opie-button-settings/opie-button-settings.inc  |    2 +-
+ recipes-opie/tasks/task-opie-16mb.bb               |    5 +--
+ .../tasks/task-opie-toolchain-host-nativesdk.bb    |    8 +++++
+ recipes-opie/tasks/task-opie-toolchain-target.bb   |   16 ++++++++++
+ recipes-opie/tasks/task-opie.bb                    |    9 +----
+ .../{qmake-native_1.07a.bb => qmake_1.07a.bb}      |    8 ++---
+ .../64bit-cleanup.patch                            |    0
+ .../fix-makefile.patch                             |    0
+ .../gcc3_4.patch                                   |    0
+ .../gcc4.patch                                     |    0
+ .../gcc4_1.patch                                   |    0
+ .../kernel-asm-page.patch                          |    0
+ .../{uicmoc-native_2.3.10.bb => uicmoc_2.3.10.bb}  |   11 +++++--
+ 15 files changed, 69 insertions(+), 26 deletions(-)
+ create mode 100644 recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+ create mode 100644 recipes-opie/tasks/task-opie-toolchain-target.bb
+ rename recipes-qt/qmake/{qmake-native_1.07a.bb => qmake_1.07a.bb} (92%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/64bit-cleanup.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/fix-makefile.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/gcc3_4.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/gcc4.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/gcc4_1.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native-2.3.10 => uicmoc-2.3.10}/kernel-asm-page.patch (100%)
+ rename recipes-qt/uicmoc/{uicmoc-native_2.3.10.bb => uicmoc_2.3.10.bb} (81%)
+
 
 
