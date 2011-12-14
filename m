@@ -1,25 +1,30 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RacAo-0007kS-OP
+	(envelope-from <otavio.salvador@gmail.com>) id 1RadTb-0004Av-NF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Dec 2011 00:54:14 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 13 Dec 2011 15:47:04 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="101881956"
-Received: from unknown (HELO helios.localnet) ([10.252.122.62])
-	by fmsmga002.fm.intel.com with ESMTP; 13 Dec 2011 15:47:03 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Tue, 13 Dec 2011 23:47:02 +0000
-Message-ID: <3017837.W6lmoH9RaO@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.3; i686; ; )
-In-Reply-To: <1323819509-19552-1-git-send-email-dbaryshkov@gmail.com>
-References: <1323819509-19552-1-git-send-email-dbaryshkov@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] obexftp: fix LICENSE field
+	Wed, 14 Dec 2011 02:17:43 +0100
+Received: by yhoo47 with SMTP id o47so889767yho.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2011 17:10:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=0VA3gJhJ7gAMjwZaKRpfauB+QgKt0EeHs6YCcm9F/uM=;
+	b=G05jVy8Ip6KtpgmvdZ4Exc3BaWLZ8/D2iJAjye41sUGNZATwUh5tNmAq3aNjn8UnQ9
+	AWkvHcELmdZgtw2PZMMkQRDtKwJdkwyPOm/lhRxgQLcpX1zNZSfCL93vBFzRgJJQv28K
+	8xpOgiDKqJEcMwHZ96gqqkspiJrx+/g7u5tzs=
+Received: by 10.236.77.232 with SMTP id d68mr7666571yhe.98.1323825047094;
+	Tue, 13 Dec 2011 17:10:47 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id 37sm2306489anu.21.2011.12.13.17.10.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 13 Dec 2011 17:10:46 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Dec 2011 01:10:27 +0000
+Message-Id: <cover.1323824998.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/8] Remove PRIORITY set as optional as it the default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 23:54:15 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 14 Dec 2011 01:17:43 -0000
 
-On Wednesday 14 December 2011 03:38:29 Dmitry Eremin-Solenikov wrote:
-> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> ---
->  recipes-support/obexftp/obexftp_0.23.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes-support/obexftp/obexftp_0.23.bb
-> b/recipes-support/obexftp/obexftp_0.23.bb index 46cc628..b6aa9fb 100644
-> --- a/recipes-support/obexftp/obexftp_0.23.bb
-> +++ b/recipes-support/obexftp/obexftp_0.23.bb
-> @@ -1,7 +1,7 @@
->  DESCRIPTION = "OBEX Ftp Client based on openobex."
->  SECTION = "console/network"
->  HOMEPAGE = "http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp"
-> -LICENSE = "GPLv2/LGPLv2"
-> +LICENSE = "GPLv2 & LGPLv2"
->  DEPENDS = "openobex bluez4 virtual/libusb0 virtual/libiconv"
->  PR = "r1"
+The following changes since commit 7ad9db8b3b6dd8fb9f85032b02344036015a9698:
 
-Merged to meta-opie, thanks.
+  gnome-panel : Fix format of LICENSE field. (2011-12-12 18:45:06 +0100)
 
-Cheers,
-Paul
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (8):
+  openvpn.inc: drop 'PRIORITY = "optional"' as it is the default
+  faad2_2.7.bb: drop 'PRIORITY = "optional"' as it is the default
+  id3lib_3.8.3.bb: drop 'PRIORITY = "optional"' as it is the default
+  libav.inc: drop 'PRIORITY = "optional"' as it is the default
+  mplayer2_git.bb: drop 'PRIORITY = "optional"' as it is the default
+  xpext_1.0-5.bb: drop 'PRIORITY = "optional"' as it is the default
+  qwt.inc: drop 'PRIORITY = "optional"' as it is the default
+  liblinebreak_1.2.bb: drop 'PRIORITY = "optional"' as it is the
+    default
+
+ meta-oe/recipes-connectivity/openvpn/openvpn.inc   |    1 -
+ meta-oe/recipes-multimedia/faad2/faad2_2.7.bb      |    1 -
+ meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb  |    1 -
+ meta-oe/recipes-multimedia/libav/libav.inc         |    1 -
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |    1 -
+ meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb    |    1 -
+ meta-oe/recipes-qt/qwt/qwt.inc                     |    1 -
+ .../liblinebreak/liblinebreak_1.2.bb               |    1 -
+ 8 files changed, 0 insertions(+), 8 deletions(-)
 
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
