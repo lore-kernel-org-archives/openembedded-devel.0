@@ -1,29 +1,30 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RaolB-0008EP-Gi
+	(envelope-from <tom.rini@gmail.com>) id 1RatI6-0007Fy-5z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Dec 2011 14:20:37 +0100
-Received: by eekb15 with SMTP id b15so648926eek.6
+	Wed, 14 Dec 2011 19:10:54 +0100
+Received: by qadb17 with SMTP id b17so5675224qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2011 05:13:40 -0800 (PST)
+	Wed, 14 Dec 2011 10:03:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=YQ6zJx4wGsPwgFg1gAD4Kw6YpT8cUIlndHOyiB1YGJk=;
-	b=KtZdq+PdP34gtiY5aPlnDSqQNPuwCeDE5T0pdTHPme8cNrM1kWHANmHtcnNOx/1gQW
-	sAGi2Jcgklrho27flJHgiO7IodlP8CxrpMYgO0XNgz5jUIfTQa1M1NUrolJhUkROxp0F
-	cBxbBT89c7mfVr+iwqLk4ySjP8+OY0CyGf6is=
-Received: by 10.213.15.69 with SMTP id j5mr539484eba.128.1323868420718;
-	Wed, 14 Dec 2011 05:13:40 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 76sm10348953eeh.0.2011.12.14.05.13.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Dec 2011 05:13:39 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Dec 2011 14:13:28 +0100
-Message-Id: <1323868408-21946-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8
-Subject: [PATCH][meta-gnome] libgsf: fix LICENSE field
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=RKz2vEYR9e2SW05xIMZAu43BIoG81Z7DYoQBzqbs/Es=;
+	b=syz9DKIaLLDxmDxp1HU2+qheVrG2B39XsWvzo241AUG7uq/2I8wDdj/sQwcvuljpjB
+	e4umsjoOq3DBruTYpt1l3nwIl71p7N4f5HW4dPkjMHks1D7BMIs4PuW4FHtb4z9cduEg
+	LPZUtY2KLFR/XAiaYJFKM9eTPOq4ENNbtm36I=
+MIME-Version: 1.0
+Received: by 10.224.33.69 with SMTP id g5mr11325828qad.70.1323885836774; Wed,
+	14 Dec 2011 10:03:56 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Wed, 14 Dec 2011 10:03:56 -0800 (PST)
+In-Reply-To: <4EE27BB8.3020903@opendreambox.org>
+References: <4EE27BB8.3020903@opendreambox.org>
+Date: Wed, 14 Dec 2011 11:03:56 -0700
+Message-ID: <CA+M6bXmvd8H=jYrd0QNxmzNy+RKNm3rV+iCy8aZNxNzMd=KUFw@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Andreas Oberritter <obi@opendreambox.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: fakeroot 1.15.1 in 2011.03-maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2011 13:20:37 -0000
+X-List-Received-Date: Wed, 14 Dec 2011 18:10:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Fri, Dec 9, 2011 at 2:20 PM, Andreas Oberritter <obi@opendreambox.org> wrote:
+> Hi Tom, all,
+>
+> one week ago, the fakeroot recipe was moved to 1.15.1 [1] in order to fix
+> a download problem, even though previous attempts were rejected [2,3].
+> Well, now I get the following error:
+[snip]
+> That's because Debian redirects to a HTML page instead of returning an
+> error, which makes it impossible to use a mirror. I'd submit a patch,
+> but I'd like to ask first, what's the preferred solution (e.g. go back
+> to previous version, update to new version, fix SRC_URI). The SRC_URI
+> could have been fixed for 1.14.5, too. I wonder why this didn't happen
+> instead.
 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-index e9b6211..d856c6e 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "GNOME Structured File Library"
--LICENSE = "GPLv2/LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
-                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
- 
+Arrg, you're right and I made a mistake.  The reason we didn't use the
+snapshot mirror like you suggest is that I at least was unaware that
+you could.  To fix this problem I've reverted the change that
+introduced 1.15.1, added PE = 1 to the recipe (so that anyone that did
+somehow get 1.15.1 built will go and be back to 1.14.5) and changed
+the URI based on what you provided in a follow-up so that it fetches
+again, for all.  Sorry for the inconvenience.
+
 -- 
-1.7.8
-
+Tom
 
 
