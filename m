@@ -1,35 +1,31 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RadTq-0004Av-61
+	(envelope-from <sledz@dresearch-fe.de>) id 1Ran2Q-00041h-4p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Dec 2011 02:17:58 +0100
-Received: by mail-yw0-f47.google.com with SMTP id o47so889767yho.6
+	Wed, 14 Dec 2011 12:30:18 +0100
+Received: by wgbds11 with SMTP id ds11so1312253wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2011 17:11:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=85B6E+PQ9pxNopJbSXe+YSreARvGIKJ2ZeP88a4Z6jM=;
-	b=GfI1CXylwrakFzTrowR5NuPkfjTSaMOBXzWpjgeUTExtcYKTX5CXsq1FQ1O7XO0W7Z
-	CXINB3P4xsPPKkI392l1cT0F3I7dZs7TRXQE2KxJoioMBVoUFdxnOfJS+v7kAkBJUAE4
-	MzMOI3CiSRP5b2r+qmboe3clvIK9CssgSVGT4=
-Received: by 10.236.75.167 with SMTP id z27mr7862491yhd.53.1323825063851;
-	Tue, 13 Dec 2011 17:11:03 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 37sm2306489anu.21.2011.12.13.17.11.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Dec 2011 17:11:03 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 14 Dec 2011 03:23:21 -0800 (PST)
+Received: by 10.216.139.204 with SMTP id c54mr906314wej.13.1323861801032;
+	Wed, 14 Dec 2011 03:23:21 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id u5sm3292171wbm.2.2011.12.14.03.23.19
+	(version=SSLv3 cipher=OTHER); Wed, 14 Dec 2011 03:23:20 -0800 (PST)
+Message-ID: <4EE88727.4000006@dresearch-fe.de>
+Date: Wed, 14 Dec 2011 12:23:19 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Dec 2011 01:10:35 +0000
-Message-Id: <eab7e406f394e54535322a183581c3c1b894e4ac.1323824998.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1323824998.git.otavio@ossystems.com.br>
-References: <cover.1323824998.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1323824998.git.otavio@ossystems.com.br>
-References: <cover.1323824998.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 8/8] liblinebreak_1.2.bb: drop 'PRIORITY = "optional"' as it is the default
+References: <1323450027-31964-1-git-send-email-sledz@dresearch-fe.de>
+	<CAMKF1sqkmOx6wPHA9vZNPp_XMhZN+s8fLy74wDcCLt4OvUVGtQ@mail.gmail.com>
+	<4EE3346C.1040703@dresearch-fe.de>
+	<4EE708DC.8000901@dresearch-fe.de>
+In-Reply-To: <4EE708DC.8000901@dresearch-fe.de>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [PATCH] icedtea6-native: fix problem on build hosts with linux kernel 3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,27 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2011 01:17:59 -0000
+X-List-Received-Date: Wed, 14 Dec 2011 11:30:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../liblinebreak/liblinebreak_1.2.bb               |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+On 13.12.2011 09:12, Steffen Sledz wrote:
+> On 10.12.2011 11:29, Steffen Sledz wrote:
+>> Am 09.12.2011 20:59, schrieb Khem Raj:
+>>> On Fri, Dec 9, 2011 at 9:00 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>>>        done
+>>>> +
+>>>> +       for F in openjdk/hotspot/make/linux/Makefile openjdk-ecj/hotspot/make/linux/Makefile ;
+>>>> +       do
+>>>> +               sed -i \
+>>>> +                       -e"s|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 2.7%|SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3%|" \
+>>>> +                       $F
+>>>> +       done
+>>>>  }
+>>>
+>>> why drop the 'dot' may be using 3. is better ?
+>>
+>> Just following the scheme, e.g. 2.6% is without a dot too.
 
-diff --git a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb b/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
-index d64cfd9..2a5efad 100644
---- a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
-+++ b/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
-@@ -3,7 +3,6 @@ HOMEPAGE = "http://vimgadgets.sourceforge.net/liblinebreak/"
- SECTION = "libs"
- LICENSE = "zlib"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3"
--PRIORITY = "optional"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebreak-${PV}.tar.gz"
- SRC_URI[md5sum] = "d18039259001ccb24b5dd4648c49c5ad"
+pushed to oe-classic master
+
 -- 
-1.7.2.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
