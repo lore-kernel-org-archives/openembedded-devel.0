@@ -1,37 +1,37 @@
-Received: from mailbackup.inode.at ([213.229.60.24])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1Rb6eI-0003b9-Ns
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 09:26:42 +0100
-Received: from [62.99.145.5] (port=51400 helo=mx.inode.at)
-	by mailbackup.inode.at with esmtp (Exim 4.76)
-	(envelope-from <Bernhard.Guillon@hale.at>) id 1Rb6Xb-0002r2-Hq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 09:19:47 +0100
-Received: from [83.64.51.210] (port=14645 helo=gateway1.hale)
-	by smartmx-05.inode.at with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <Bernhard.Guillon@hale.at>)
-	id 1Rb6XV-0002hu-Rn for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 09:19:41 +0100
-Received: from mail1.hale.at (mail2.hale [192.168.100.12])
-	by gateway1.hale (8.13.8/8.13.7) with ESMTP id pBF8JapT030758
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rb6me-000452-9v for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Dec 2011 09:35:20 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rb6fw-0003XW-S3 for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Dec 2011 09:28:24 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Dec 2011 09:28:24 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2011 09:19:36 +0100
-Received: from localhost.localdomain ([192.168.100.138]) by hale.at with
-	MailEnable ESMTP; Thu, 15 Dec 2011 09:19:25 +0100
-From: Bernhard Guillon <Bernhard.Guillon@hale.at>
+	Thu, 15 Dec 2011 09:28:24 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Dec 2011 09:19:11 +0100
-Message-Id: <1323937151-17817-1-git-send-email-Bernhard.Guillon@hale.at>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-HALE-MailScanner-Information: Please contact the ISP for more information
-X-MailScanner-ID: pBF8JapT030758
-X-HALE-MailScanner: Found to be clean
-X-HALE-MailScanner-From: bernhard.guillon@hale.at
-MailScanner-NULL-Check: 1324541977.4297@+8xXdG1dTP9Gj81Wug6YIQ
-X-Spam-Status: No
-Subject: [meta-oe] libgtkstylus_0.5.bb: fix LIC_FILES_CHECKSUM and LICENSE
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 15 Dec 2011 09:28:20 +0100
+Message-ID: <jccb2s$qlr$1@dough.gmane.org>
+References: <cover.1323772986.git.otavio@ossystems.com.br>
+	<dd9bd4910b7278f024c9602b8d0cc162efc485fa.1323772987.git.otavio@ossystems.com.br>
+	<jc86fu$pem$1@dough.gmane.org>
+	<CAP9ODKpz+RsFfTPqztX6yXM25n+ng813hJ6xJMrMHmn9LN4Cdg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <CAP9ODKpz+RsFfTPqztX6yXM25n+ng813hJ6xJMrMHmn9LN4Cdg@mail.gmail.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [meta-oe][PATCH 3/4] dropbear: bump epoch to ensure an upgrade path and cleanup packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2011 08:26:42 -0000
+X-List-Received-Date: Thu, 15 Dec 2011 08:35:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Provide a valid LIC_FILES_CHECKSUM
-Use SPDX style versioned license for LICENSE field
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Bernhard Guillon <Bernhard.Guillon@hale.at>
----
- .../recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+Op 13-12-11 19:51, Otavio Salvador schreef:
+> On Tue, Dec 13, 2011 at 16:45, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> 
+>> I'd really like to avoid PE in bbappends for obvious reasons. Can we
+>> get this into OE-core instead?
+>> 
+> 
+> I can send a patch to them for this but in meanwhile this ought to be 
+> merged as currently dropbear is at broken state.
 
-diff --git a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-index f614048..8567b13 100644
---- a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-+++ b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-@@ -1,8 +1,9 @@
- DESCRIPTION = "GTK plugin for stylus based systems"
- SECTION = "libs"
- DEPENDS = "gtk+"
--LICENSE = "LGPL"
--PR = "r2"
-+LICENSE = "LGPL-2.0+"
-+LIC_FILES_CHKSUM = "file://tap.c;beginline=1;endline=20;md5=71756eeb144e9eeb177c69aa672b1635"
-+PR = "r3"
- 
- inherit autotools
- 
--- 
-1.7.0.4
+No, a PE should only get added once and with care.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-
-
---
-Scanned by MailScanner.
+iEYEARECAAYFAk7pr6IACgkQMkyGM64RGpHgjwCfZeKt8oSrufiyWEMlWOTnp6D3
+lIAAn0MKN4wpytvMSiyfbg0dkYnN2O5V
+=86zF
+-----END PGP SIGNATURE-----
 
 
 
