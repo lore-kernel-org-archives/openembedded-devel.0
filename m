@@ -1,31 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vitperov@gmail.com>) id 1RbEb2-0002l3-Us
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 17:55:53 +0100
-Received: by eekb15 with SMTP id b15so2002789eek.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RbFV2-000559-S1 for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Dec 2011 18:53:44 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RbFOK-0001G2-KC for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Dec 2011 18:46:48 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Dec 2011 18:46:48 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2011 08:48:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=CxaroN+GLChtIIvIJypEELY0lFumL5RjiD6MSfTMXPg=;
-	b=ZpuM4pHrokVV5CVy4TrMUa6g/RLzVYI6tKnv3pE+N/EaXr6NPgJVFeytT/c11xsct9
-	0c/TC4T0/rF8QYHSNxzlYE8PYJz7WDc4YZeZHYvmxDqWfjjdR0jSM0v5tOjzi+zzrFLy
-	jauoqUpfrEbc+qy10y296xchd6lE9oHtDpaWE=
-Received: by 10.14.120.79 with SMTP id o55mr1742202eeh.77.1323967734586;
-	Thu, 15 Dec 2011 08:48:54 -0800 (PST)
-Received: from localhost.localdomain
-	(pppoe-188-187-39-181.volgograd.ertelecom.ru. [188.187.39.181])
-	by mx.google.com with ESMTPS id 58sm26069247eet.11.2011.12.15.08.48.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Dec 2011 08:48:53 -0800 (PST)
-From: Vitaly Perov <vitperov@gmail.com>
+	Thu, 15 Dec 2011 18:46:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Dec 2011 20:48:40 +0400
-Message-Id: <1323967720-6899-1-git-send-email-vitperov@gmail.com>
-X-Mailer: git-send-email 1.7.6
-Cc: Vitaly Perov <vit@vt-tech.eu>
-Subject: [PATCH v3] ftplib: add initial recipe with version 3.1
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 15 Dec 2011 18:46:32 +0100
+Message-ID: <jcdbpo$grj$1@dough.gmane.org>
+References: <cover.1323951062.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <cover.1323951062.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [PATCH][meta-oe][meta-efl 0/6] Small fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,66 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2011 16:55:53 -0000
+X-List-Received-Date: Thu, 15 Dec 2011 17:53:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Vitaly Perov <vit@vt-tech.eu>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-fplib provides a set of routines that implement the FTP protocol.
+Op 15-12-11 13:12, Martin Jansa schreef:
+> The following changes since commit
+> 6f36625d072054737e0aa797fb791c35d999addc:
+> 
+> florence: clean up recipe (2011-12-15 09:42:59 +0100)
+> 
+> are available in the git repository at: 
+> git://git.openembedded.org/meta-openembedded-contrib jansa/pull 
+> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
-Build tested with 'angstrom v2011.12' and Angstrom-console-image for machine AT91SAM9260
+Does
+> 
+that have the updated mplayer2 patch?
 
-Signed-off-by: Vitaly Perov <vitperov@gmail.com>
----
- recipes/ftplib/ftplib_3.1.bb |   38 ++++++++++++++++++++++++++++++++++++++
- 1 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ftplib/ftplib_3.1.bb
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/recipes/ftplib/ftplib_3.1.bb b/recipes/ftplib/ftplib_3.1.bb
-new file mode 100644
-index 0000000..00a49bc
---- /dev/null
-+++ b/recipes/ftplib/ftplib_3.1.bb
-@@ -0,0 +1,38 @@
-+DESCRIPTION = "A set of routines that implement the FTP protocol"
-+HOMEPAGE = "http://nbpfaus.net/~pfau/ftplib/"
-+LICENSE = "LGPLv2"
-+
-+PR = "r0"
-+
-+# LDFLAGS are missing in Makefile build section
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+# Use current directory for linking qftp with just-build ftplib
-+EXTRA_OEMAKE = "LDFLAGS='${LDFLAGS} -L.'"
-+
-+SRC_URI = "http://nbpfaus.net/~pfau/ftplib/ftplib-${PV}-src.tar.gz"
-+
-+S = "${WORKDIR}/ftplib-${PV}"
-+
-+SRC_URI[md5sum] = "c6af758ccbf806b28f022a587a41d9c5"
-+SRC_URI[sha256sum] = "be524e1086cfe9d86afa832e1413dde79a4e88ee8ea5325a87ffaaf6620a0a2b"
-+
-+do_compile() {
-+    cd linux && oe_runmake
-+}
-+
-+do_install() {
-+    install -d ${D}/${libdir}
-+    install -d ${D}/${includedir}
-+    install -d ${D}/${bindir}
-+    oe_libinstall -so -C linux libftp ${D}/${libdir}
-+    install -m 755 ${S}/linux/libftp.a ${D}/${libdir}
-+    install -m 644 ${S}/linux/ftplib.h ${D}/${includedir}
-+    install -m 755 ${S}/linux/qftp ${D}/${bindir}
-+    (cd  ${D}/${bindir} && \
-+     ln -sf qftp ftpdir && \
-+     ln -sf qftp ftpget && \
-+     ln -sf qftp ftplist && \
-+     ln -sf qftp fptrm && \
-+     ln -sf qftp ftpsend)
-+}
--- 
-1.7.6
+iEYEARECAAYFAk7qMnQACgkQMkyGM64RGpEUJACePpB9nwYqrc93XD2LIUFPnsCl
+bw4An2A3Z+A9bTuqW+Yn0OTcwm1Joxek
+=vnup
+-----END PGP SIGNATURE-----
 
 
 
