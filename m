@@ -1,34 +1,40 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RbALW-0005b5-1E
+Received: from 7.mo2.mail-out.ovh.net ([188.165.48.182]
+	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <guillaume.gardet@oliseo.fr>) id 1RbB4V-0007iL-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 13:23:34 +0100
-Received: by mail-ee0-f47.google.com with SMTP id b15so1718019eek.6
+	Thu, 15 Dec 2011 14:10:03 +0100
+Received: from mail416.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo2.mail-out.ovh.net (Postfix) with SMTP id 4569BDC967E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2011 04:16:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=Sc3fDjEmDUg7nA8YA71zlMbZQVzcaeJA+ZWQXLQwIcc=;
-	b=WnLYh+/ANSN7tVSqBVknfzUvQICqC+Hw0+1D9z/3OCzA1MwmfEanCKpmB1v6ndZy9n
-	3SURSD66Ys8LLgZoZx2495plkMwtjzWD/ChaxGYKna3a90jFz9+ER9+Q5kTeBeX98wsQ
-	HQUHFznjKw32+cNE6LIFEhwqGNHUJZcmgQHjU=
-Received: by 10.14.48.9 with SMTP id u9mr1379157eeb.37.1323951398468;
-	Thu, 15 Dec 2011 04:16:38 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t1sm13483595eeb.3.2011.12.15.04.16.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Dec 2011 04:16:37 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 15 Dec 2011 13:46:30 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 15 Dec 2011 14:46:06 +0200
+Received: from 164.60-224-89.dsl.completel.net (HELO ?192.168.1.111?)
+	(guillaume.gardet@oliseo.fr@89.224.60.164)
+	by ns0.ovh.net with SMTP; 15 Dec 2011 14:46:05 +0200
+Message-ID: <4EE9EC0D.3070700@oliseo.fr>
+Date: Thu, 15 Dec 2011 13:46:05 +0100
+From: =?ISO-8859-1?Q?Guillaume_GARDET_-_Olis=E9o?= <guillaume.gardet@oliseo.fr>
+Organization: =?ISO-8859-1?Q?OLIS=C9O?=
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Dec 2011 13:15:53 +0100
-Message-Id: <b85dc69db3d426eaa8df90ab7948b4512ec91c46.1323951062.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8
-In-Reply-To: <14695ed754963f85a601e945e21179c00199661a.1323951062.git.Martin.Jansa@gmail.com>
-References: <14695ed754963f85a601e945e21179c00199661a.1323951062.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1323951062.git.Martin.Jansa@gmail.com>
-References: <cover.1323951062.git.Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe][meta-efl 6/6] libvpx: disable tree-vectorize
+X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
+References: <1323265584-7090-1-git-send-email-guillaume.gardet@oliseo.fr>
+In-Reply-To: <1323265584-7090-1-git-send-email-guillaume.gardet@oliseo.fr>
+X-Ovh-Tracer-Id: 17009251368464431945
+X-Ovh-Remote: 89.224.60.164 (164.60-224-89.dsl.completel.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 20
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedrfedvucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucgfrhhlucfvnfffucdlvddtmdenucfjughrpefkfffhohgfggfvufhfjggtgfesthejrgdttdefudenucfhrhhomhepifhuihhllhgruhhmvggpifettfffgffvpgdqpgfqlhhishorohcuoehguhhilhhlrghumhgvrdhgrghruggvthesohhlihhsvghordhfrheqnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghen
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 20
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedruddvucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucgfrhhlucfvnfffucdlvddtmdenucfjughrpefkfffhohgfggfvufhfjggtgfesthejrgdttdefudenucfhrhhomhepifhuihhllhgruhhmvggpifettfffgffvpgdqpgfqlhhishorohcuoehguhhilhhlrghumhgvrdhgrghruggvthesohhlihhsvghordhfrheqnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghen
+Cc: koen@dominion.thruhere.net
+Subject: Re: [PATCH v2] Fix git URL to linux-omap git repo.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2011 12:23:34 -0000
+X-List-Received-Date: Thu, 15 Dec 2011 13:10:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* It's causing ICE with latest gcc-4.6 from meta-oe, see:
-  http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/036001.html
+Ping.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-multimedia/webm/libvpx.inc |   15 +++++++++++++--
- 1 files changed, 13 insertions(+), 2 deletions(-)
+I modified my original patch (v1) to fix ALL linux-omap git url (v2). See: http://patches.openembedded.org/patch/16379/
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx.inc b/meta-oe/recipes-multimedia/webm/libvpx.inc
-index fbece03..8434f38 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx.inc
-+++ b/meta-oe/recipes-multimedia/webm/libvpx.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "vpx Multi-Format Codec SDK"
- LICENSE = "BSD"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- SRC_URI = "http://webm.googlecode.com/files/libvpx-v${PV}.tar.bz2"
- S = "${WORKDIR}/libvpx-v${PV}"
-@@ -10,7 +10,18 @@ S = "${WORKDIR}/libvpx-v${PV}"
- # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
- ARM_INSTRUCTION_SET = "arm"
- 
--CFLAGS += "-fPIC"
-+#-ftree-vectorize was causing ICE with gcc-4.6 from meta-oe, see
-+# http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/036001.html
-+#|     [CC] vpx_scale/generic/gen_scalers.c.o
-+#| vpx_scale/generic/gen_scalers.c: In function 'vp8cx_vertical_band_3_4_scale_c':
-+#| vpx_scale/generic/gen_scalers.c:537:6: internal compiler error: in vect_get_vec_def_for_stmt_copy, at tree-vect-stmts.c:1390
-+#| Please submit a full bug report,
-+#| with preprocessed source if appropriate.
-+#| See <http://gcc.gnu.org/bugs.html> for instructions.
-+#| make[1]: *** [vpx_scale/generic/gen_scalers.c.o] Error 1
-+#| make: *** [.DEFAULT] Error 2
-+
-+CFLAGS += "-fPIC -fno-tree-vectorize"
- 
- export CC
- export LD = "${CC}"
--- 
-1.7.8
+Is there anything else I should do?
+
+
+Guillaume
 
 
 
