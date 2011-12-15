@@ -1,35 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Rb9RI-0002uy-84
+	(envelope-from <otavio.salvador@gmail.com>) id 1Rb9RI-0002uQ-80
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 15 Dec 2011 12:25:28 +0100
-Received: by yhoo47 with SMTP id o47so2013136yho.6
+Received: by ghrr15 with SMTP id r15so1412186ghr.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2011 03:18:30 -0800 (PST)
+	Thu, 15 Dec 2011 03:18:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=jmNZiI9QuADWwnSFl5jXuq+eirfIrA5W1p02naXLF7s=;
-	b=oT5LOaaSMOb0kDFHanv6YFir5ztlV5Di7lZb0PqmsIS1qwPsWVt1IZl/M8UqEw9t7c
-	N0k/yVWxKrKKbv6r7YMmeILPlZEHa8nWBO3CV/6an4lPPhbS/bxUEgIf6SFvMCDIbdJm
-	PpaAbmAQyjLRYUD1Yge7ku02mXRVIHQQdQteo=
-Received: by 10.236.197.99 with SMTP id s63mr5420485yhn.14.1323947910101;
-	Thu, 15 Dec 2011 03:18:30 -0800 (PST)
+	bh=vM+5SPvd9XImQrkKFanZIym+2dYDooJsbewTK1WEC1M=;
+	b=Sb0VuSyu8INDcE85l1xxs8aUaPdP/lT0nXHoOTge3+ZR7UWr3ttejyf4OCVeAYU4H+
+	YNnNkK9SYZa3EBbqMVb12sPX4QK7v8zT5j4AkYnVDIhOe82V2Lq5QpAbAt9p8988kokM
+	R7BqDGUxCZIVwP/ul1WrocOFaR9aOSrtL3EXE=
+Received: by 10.101.95.20 with SMTP id x20mr1102592anl.83.1323947906135;
+	Thu, 15 Dec 2011 03:18:26 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id c44sm8652593yhm.5.2011.12.15.03.18.28
+	by mx.google.com with ESMTPS id c44sm8652593yhm.5.2011.12.15.03.18.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Dec 2011 03:18:29 -0800 (PST)
+	Thu, 15 Dec 2011 03:18:25 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Dec 2011 11:18:06 +0000
-Message-Id: <2ba3b00677d245e824c9ac83b177a4f9a91f8b0f.1323947853.git.otavio@ossystems.com.br>
+Date: Thu, 15 Dec 2011 11:18:04 +0000
+Message-Id: <ac183f41540e463ed0af3955ab804be8cde005bd.1323947853.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1323947853.git.otavio@ossystems.com.br>
 References: <cover.1323947853.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1323947853.git.otavio@ossystems.com.br>
 References: <cover.1323947853.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 5/5] dropbear: cleanup packaging
+Subject: [meta-oe][PATCH 3/5] twm: fix checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +45,26 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 15 Dec 2011 11:25:28 -0000
 
-* the symbolic link required to disable the sysvinit init script is
-  now done during the do_install task so making the recipe simple
-
-* convert to use PRINC to bump PR on bbappend
-
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../dropbear/dropbear_2011.54.bbappend             |   11 ++---------
- 1 files changed, 2 insertions(+), 9 deletions(-)
+ meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
-index a642235..899e1fc 100644
---- a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
-+++ b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
-@@ -1,6 +1,6 @@
- inherit systemd
+diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+index af27632..a0a0eaf 100644
+--- a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
++++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+@@ -6,8 +6,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
  
--PRINC = "1"
-+PRINC := "${@int(PRINC) + 1}"
  
- # look for files in the layer first
- FILESEXTRAPATHS := "${THISDIR}/${PN}"
-@@ -17,17 +17,10 @@ do_install_append() {
- 	install -m 0644 ${WORKDIR}/dropbearkey.service ${D}${base_libdir}/systemd/system/
- 	install -m 0644 ${WORKDIR}/dropbear@.service ${D}${base_libdir}/systemd/system/
- 	install -m 0644 ${WORKDIR}/dropbear.socket ${D}${base_libdir}/systemd/system/
-+	ln -sf /dev/null ${D}${base_libdir}/systemd/system/dropbear.service
- }
+-SRC_URI[archive.md5sum] = "952d06a0c2ec34687b536c7b619fc671"
+-SRC_URI[archive.sha256sum] = "e7dccad7879a7570442f0cd9df0b9064e926466b5a52b710fca8cfb167f294e9"
++SRC_URI[md5sum] = "952d06a0c2ec34687b536c7b619fc671"
++SRC_URI[sha256sum] = "e7dccad7879a7570442f0cd9df0b9064e926466b5a52b710fca8cfb167f294e9"
  
- PACKAGES += "${PN}-systemd"
- 
- RDEPENDS_${PN}-systemd += "dropbear"
- FILES_${PN}-systemd = "${base_libdir}/systemd"
--
--pkg_postinst_${PN}-systemd_append() {
--ln -sf /dev/null $D${base_libdir}/systemd/system/dropbear.service
--}
--
--pkg_postrm_${PN}-systemd_append() {
--rm -f ${base_libdir}/systemd/system/dropbear.service
--}
+ FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
+ ALTERNATIVE_NAME = "x-window-manager"
 -- 
 1.7.2.5
 
