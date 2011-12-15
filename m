@@ -1,28 +1,49 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from ch1ehsobe003.messaging.microsoft.com ([216.32.181.183]
+	helo=ch1outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1Rb2I8-0006kq-QY
+	(envelope-from <Y080067@e.ntu.edu.sg>) id 1Rb2gJ-0007yY-PG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Dec 2011 04:47:33 +0100
-Received: by qcqw6 with SMTP id w6so917840qcq.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2011 19:40:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Yde6TJtfnb6KKnx4HTl3dL0tYYeBa6KkKxYpxsvCUxE=;
-	b=gP6U9RS3DpSmp9mZvomsjV5lguqWxBFaRE+52XuscJsNnErNwC9vuPyaKcrTkOmJkA
-	QVpDQXtmaClxAiP+N/W/VlSWynRdGh9lD0vaoo5Ygsp9Rqy685y5vUiTt5cjBFai/1Rm
-	FmsdrmmhtzSJCYmAo/FE35j6BGnNZsXXmK/fo=
+	Thu, 15 Dec 2011 05:12:32 +0100
+Received: from mail126-ch1-R.bigfish.com (10.43.68.248) by
+	CH1EHSOBE018.bigfish.com (10.43.70.68) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 15 Dec 2011 02:50:05 +0000
+Received: from mail126-ch1 (localhost [127.0.0.1])	by
+	mail126-ch1-R.bigfish.com (Postfix) with ESMTP id D91C132014E;
+	Thu, 15 Dec 2011 02:50:08 +0000 (UTC)
+X-SpamScore: 18
+X-BigFish: PS18(zzc85fh14ffO8532mzz1202hzz8275bh8275dhf73b6ilz2dh2a8h668h839h)
+X-Forefront-Antispam-Report: CIP:111.221.23.141; KIP:(null); UIP:(null);
+	IPV:NLI; H:SINPRD0104HT001.apcprd01.prod.exchangelabs.com;
+	RD:none; EFVD:NLI
+X-FB-SS: 13,
+Received: from mail126-ch1 (localhost.localdomain [127.0.0.1]) by mail126-ch1
+	(MessageSwitch) id 1323917408767289_21339;
+	Thu, 15 Dec 2011 02:50:08 +0000 (UTC)
+Received: from CH1EHSMHS021.bigfish.com (snatpool1.int.messaging.microsoft.com
+	[10.43.68.241])	by mail126-ch1.bigfish.com (Postfix) with ESMTP id
+	B61981401BC;	Thu, 15 Dec 2011 02:50:08 +0000 (UTC)
+Received: from SINPRD0104HT001.apcprd01.prod.exchangelabs.com (111.221.23.141)
+	by CH1EHSMHS021.bigfish.com (10.43.70.21) with Microsoft SMTP Server
+	(TLS) id 14.1.225.23; Thu, 15 Dec 2011 02:50:05 +0000
+Received: from SINPRD0104MB133.apcprd01.prod.exchangelabs.com ([169.254.1.40])
+	by SINPRD0104HT001.apcprd01.prod.exchangelabs.com ([10.210.223.37])
+	with mapi id 14.15.0018.001; Thu, 15 Dec 2011 02:50:00 +0000
+From: #LOH KHAI PING# <Y080067@e.ntu.edu.sg>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Enquire > Initramfs
+Thread-Index: Acy61Dq13dnuUUOGSpmDs7Hl6NHB0w==
+Date: Thu, 15 Dec 2011 02:49:59 +0000
+Message-ID: <BB88E9AFCBAA2B4DA2CE2EA1D67484FB0C6ACBF7@SINPRD0104MB133.apcprd01.prod.exchangelabs.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.210.222.10]
 MIME-Version: 1.0
-Received: by 10.224.173.135 with SMTP id p7mr2305670qaz.83.1323920434818; Wed,
-	14 Dec 2011 19:40:34 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Wed, 14 Dec 2011 19:40:34 -0800 (PST)
-In-Reply-To: <20111214122225.21c780a1@robert-linuxworkstation.nanometrics.ca>
-References: <20111214122225.21c780a1@robert-linuxworkstation.nanometrics.ca>
-Date: Wed, 14 Dec 2011 20:40:34 -0700
-Message-ID: <CA+M6bX=8Z8iWZYUp_5fWeNimddAcK8S-RwkqEFV8HzssuFbA8A@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Maintenance branch 2011-03
+X-OriginatorOrg: e.ntu.edu.sg
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: "#LOH KHAI PING# \(Y080067@ntu.edu.sg\)" <Y080067@ntu.edu.sg>
+Subject: Enquire > Initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,27 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2011 03:47:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Dec 2011 04:12:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 14, 2011 at 10:22 AM, Robert Casanova
-<robertcasanova@nanometrics.ca> wrote:
-> Hello Tom,
->
-> we have developed a few recipes for OpenEmbedded on top of the
-> 2011-03-maintenance branch the architecture used is ARM. We would like
-> to send these recipes but not sure what is the maintenance policy for
-> that branch or what should be the right mailing list to post to.
+Hi all,
 
-I hope that http://www.openembedded.org/index.php/2011.03-maintenance
-answers your questions but in short, the first step is to get the
-recipes into meta-oe or another layer that's based on oe-core and then
-port them over to 2011.03-maintenance (it might just be a matter of
-copying your old recipes but there might be feedback to incorporate
-first).  Thanks and let me know if you have any questions.  This is
-the correct mailing list.
+I am currently doing research on openembedded for my project. I facing some=
+ problems hoping you guys can enlighten me. I manage to follow this tutoria=
+l www.3open.org/d/oe/build_kernel_with_inline_initramfs  to create a initra=
+msfs(.cpio)+kernel . It manage to get boot up on my board. But when I try t=
+o load it separately it fails.
 
--- 
-Tom
+I try to load .cpio.gz and kernel. For example I load my .cpio.gz at 0x2100=
+0000. I pass this address as initrd to my kernel but my kernel cant seems t=
+o find .cpio.gz . Below is the error message.
 
+http://pastebin.com/Li22FBER
+
+Really wish you guys could assist me.
+
+Regards,
+Khai Ping
 
