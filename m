@@ -1,35 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RbSfB-0003oT-3B for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 08:57:05 +0100
+	id 1RbSjz-0004QR-Mk for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2011 09:02:04 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RbSYR-0007Ww-Aw for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 08:50:07 +0100
+	id 1RbSdF-0000kA-Pv for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2011 08:55:05 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 08:50:07 +0100
+	Fri, 16 Dec 2011 08:55:05 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 08:50:07 +0100
+	Fri, 16 Dec 2011 08:55:05 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 16 Dec 2011 08:48:41 +0100
-Message-ID: <jcet4n$4n1$2@dough.gmane.org>
+Date: Fri, 16 Dec 2011 08:53:11 +0100
+Message-ID: <jcetd5$4n1$7@dough.gmane.org>
 References: <1324003173-13994-1-git-send-email-b19537@freescale.com>
-	<1324003173-13994-2-git-send-email-b19537@freescale.com>
+	<1324003173-13994-7-git-send-email-b19537@freescale.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1324003173-13994-2-git-send-email-b19537@freescale.com>
+In-Reply-To: <1324003173-13994-7-git-send-email-b19537@freescale.com>
 X-Enigmail-Version: 1.3.4
-Subject: Re: [PATCH meta-oe 2/9] ietutils: add
+Subject: Re: [PATCH meta-oe 7/9] strongswan: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 07:57:05 -0000
+X-List-Received-Date: Fri, 16 Dec 2011 08:02:04 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -53,87 +53,54 @@ Hash: SHA1
 Op 16-12-11 03:39, b19537@freescale.com schreef:
 > From: Zhenhua Luo <b19537@freescale.com>
 > 
-> The GNU inetutils are a collection of common networking utilities and
-> servers including ftp, ftpd, rcp, rexec, rlogin, rlogind, rsh, rshd,
-> syslog, syslogd, talk, talkd, telnet, telnetd, tftp, tftpd, and uucpd.
+> strongSwan is an OpenSource IPsec implementation for the Linux operating
+> system.
 > 
-> Signed-off-by: Zhenhua Luo <b19537@freescale.com>
+> Signed-off-by: Zhenhua Luo <b19537@freescale.com> --- 
+> .../recipes-support/strongswan/strongswan_4.5.1.bb |   23
+> ++++++++++++++++++++ 1 files changed, 23 insertions(+), 0 deletions(-) 
+> create mode 100644
+> meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
+> 
+> diff --git a/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
+> b/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb new file mode
+> 100644 index 0000000..a692637 --- /dev/null +++
+> b/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb @@ -0,0 +1,23
+> @@ +SECTION = "console/network" +DESCRIPTION = "strongSwan is an
+> OpenSource IPsec implementation for the \ +Linux operating system." 
+> +HOMEPAGE = "http://www.strongswan.org" +LICENSE = "GPLv2" +DEPENDS =
+> "gmp openssl flex-native flex bison-native" +RRECOMMENDS_${PN} =
+> "kernel-module-ipsec"
 
-> +++ b/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb @@ -0,0
-> +1,66 @@ +SECTION = "libs" +DEPENDS = "ncurses fakeroot-native" +LICENSE
-> = "GPL"
+Move below do_install
 
-That's not valid license, please include the version number, e.g. GPLv2 or
-GPLv2+
+> +PR = "r0"
 
-> +DESCRIPTION = "The GNU inetutils are a collection of common \ 
-> +networking utilities and servers including ftp, ftpd, rcp, \ +rexec,
-> rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \ +talkd, telnet,
-> telnetd, tftp, tftpd, and uucpd."
+drop
 
-Please move that to the top
+> +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-> + +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=adefda309052235aa5d1e99ce7557010"
+move next to LICENSE
 
-And move that next to LICENSE
-
-> + +SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \ +
-> file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-> \ +
-> file://inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch
-> \ +           file://inetutils-1.8-0003-wchar.patch \ +
-> file://inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch
-> \ +
-> file://inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch
-> \ +
-> file://inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch
-> \ +           file://inetutils-1.8-1004-detect-fork-support.patch \ +
-> file://inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch \ +
-> file://fix-disable-ipv6.patch \ +" + +inherit autotools gettext + 
-> +noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6
-> gl_cv_socket_ipv6=no', d)}" +EXTRA_OECONF =
-> "--with-ncurses-include-dir=${STAGING_INCDIR} \ +
-> --with-path-procnet-dev=/proc/net/dev \ +		${noipv6} \ +		" + 
-> +do_configure_prepend () { +	export HELP2MAN='true' +	cp
-> ${STAGING_DATADIR_NATIVE}/gettext/config.rpath
-> ${S}/build-aux/config.rpath +	rm -f ${S}/glob/configure* +} + +fakeroot
-> do_install () {
-
-explicit fakeroot isn't needed anymore, pseudo always runs.
+> +SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2" + 
+> +EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \ +
+> --enable-gmp --disable-mysql --disable-sqlite \ +		--enable-openssl" + 
+> +inherit autotools + +FILES_${PN}-dbg += "${libexecdir}/ipsec/.debug
+> ${libexecdir}/ipsec/plugins/.debug" + +SRC_URI[md5sum] =
+> "81a4a699c4a1a49b74061dfa47b5a033" +SRC_URI[sha256sum] =
+> "252d7369d94aa2d79e6fad078853b07ca897ea811ab1e1a2b008bcec0d1e758a"
 
 
-> +	autotools_do_install +	install -d ${D}${base_sbindir}
-> ${D}${base_bindir} +	mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${PN} +	mv
-> ${D}${bindir}/telnet ${D}${bindir}/telnet.${PN} +	mv ${D}${bindir}/logger
-> ${D}${bindir}/logger.${PN} +	mv ${D}${bindir}/traceroute
-> ${D}${bindir}/traceroute.${PN} +	mv ${D}${bindir}/hostname
-> ${D}${base_bindir}/hostname.${PN} +	mv ${D}${bindir}/ifconfig
-> ${D}${base_sbindir}/ifconfig.${PN} +} + +pkg_postinst_${PN} () { +
-> update-alternatives --install ${bindir}/tftp tftp tftp.${PN} 100 +
-> update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100 +
-> update-alternatives --install ${bindir}/logger logger logger.${PN} 100 +
-> update-alternatives --install ${bindir}/traceroute traceroute
-> traceroute.${PN} 100 +	update-alternatives --install
-> ${base_bindir}/hostname hostname hostname.${PN} 100 +	update-alternatives
-> --install ${base_sbindir}/ifconfig ifconfig ifconfig.${PN} 100 +} + 
-> +pkg_prerm_${PN} () { +	update-alternatives --remove tftp tftp.${PN} +
-> update-alternatives --remove telnet telnet.${PN} +	update-alternatives
-> --remove logger logger.${PN} +	update-alternatives --remove traceroute
-> traceroute.${PN} +	update-alternatives --remove ifconfig ifconfig.${PN} 
-> +} + +SRC_URI[md5sum] = "ad8fdcdf1797b9ca258264a6b04e48fd" 
-> +SRC_URI[sha256sum] =
-> "c8500baee04b9ea408c9e65e24ad7f5b41e7d96d42fb1d29abf25b52b68311c7"
-
-Move those next to SRC_URI
+move next to SRC_URI
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk7q99kACgkQMkyGM64RGpFtqQCfeLWLjY8SuCe3eSSd8CabPyo0
-SNYAn2f32eL5hwGnPC4P9T5CtrYlBCRt
-=oxmn
+iEYEARECAAYFAk7q+OcACgkQMkyGM64RGpF9qgCgiJ5vKcsCyiFm1/T8xVCfkNhW
+LBUAn1vqptZ1/neJw2xpdBi4MlIR2d21
+=Tbw5
 -----END PGP SIGNATURE-----
 
 
