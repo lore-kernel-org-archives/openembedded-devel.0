@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RbffE-00082a-GH for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 22:50:00 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RbfYT-0003rc-DV for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 22:43:01 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 22:43:01 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1Rbfi0-0008CB-Ax
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2011 22:52:52 +0100
+Received: by iakh37 with SMTP id h37so1513613iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 22:43:01 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 16 Dec 2011 13:45:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=Lk7YiO8RovuG1lmXy/2BwF6cZIKBAOoDrpPSgDAhstA=;
+	b=FjqPz21LsP+lvbR1alwb8DB28e9oLLzZlu6Ksf4GouJAungOOZ0NjPQUY8z2sRDsK4
+	vKRZzRKHejbKdHKdnsV8LBDf/Xs9h/1Yp7NVdNsqP7VmwkATaQu4ZsPpo4Ocwfjj8HQF
+	f4nTGPsPMvOBQzfWsdzroOLV/2Eu5bPx6ui3Q=
+Received: by 10.50.160.134 with SMTP id xk6mr10759769igb.59.1324071947028;
+	Fri, 16 Dec 2011 13:45:47 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id e2sm36763007ibe.0.2011.12.16.13.45.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 16 Dec 2011 13:45:45 -0800 (PST)
+Date: Fri, 16 Dec 2011 13:46:02 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 16 Dec 2011 22:42:48 +0100
-Message-ID: <jcge0o$3mo$1@dough.gmane.org>
-References: <1324045163-19287-1-git-send-email-b19537@freescale.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1324045163-19287-1-git-send-email-b19537@freescale.com>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [PATCH meta-oe v3 1/3] bridge-utils: add
+Message-ID: <20111216214602.GB28832@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20111215132901.GC4419@jama.jama.net>
+	<1323955898-31477-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1323955898-31477-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH][meta-oe][meta-efl 4/6] mplayer2: drop FULL_OPTIMIZATION_armv7a and add -fno-tree-vectorize
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,62 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 21:50:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Dec 2011 21:52:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-These 3 are all in now
-
-Op 16-12-11 15:19, b19537@freescale.com schreef:
-> From: Zhenhua Luo <b19537@freescale.com>
+On (15/12/11 14:31), Martin Jansa wrote:
+> * we had -ftree-vectorize instead of -frename-registers here, but that's
+>   causing ICE with latest gcc-4.6 from meta-oe
+> * qemux86-64 was still failing without -fno-tree-vectorize
+> * similar to issue in libvpx
+>   http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-November/036001.html
+>   and lowering to -O3 is not enough in this case
+>   | libmpcodecs/ad_imaadpcm.c: In function 'qt_ima_adpcm_decode_block':
+>   | libmpcodecs/ad_imaadpcm.c:177:12: internal compiler error: Segmentation fault
+>   | Please submit a full bug report,
+>   | with preprocessed source if appropriate.
+>   | See <http://gcc.gnu.org/bugs.html> for instructions.
+>   | make: *** [libmpcodecs/ad_imaadpcm.o] Error 1
 > 
-> bridge-utils provides tools for ethernet bridging.
+
+can you create a preprocessed file for this please so we can look at it
+
+
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |    5 ++---
+>  1 files changed, 2 insertions(+), 3 deletions(-)
 > 
-> Signed-off-by: Zhenhua Luo <b19537@freescale.com> --- 
-> .../bridge-utils/bridge-utils.inc                  |   28
-> ++++++++++++++++++++ .../bridge-utils/bridge-utils_1.4.bb               |
-> 6 ++++ 2 files changed, 34 insertions(+), 0 deletions(-) create mode
-> 100644 meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc create
-> mode 100644
-> meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> index ee64ca8..72d5754 100644
+> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> @@ -21,7 +21,7 @@ SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
+>  ARM_INSTRUCTION_SET = "ARM"
+>  
+>  PV = "2.0+gitr${SRCPV}"
+> -PR = "r3"
+> +PR = "r4"
+>  
+>  PARALLEL_MAKE = ""
+>  
+> @@ -130,8 +130,7 @@ EXTRA_OECONF = " \
+>  EXTRA_OECONF_append_armv6 = " --enable-armv6"
+>  EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
+>  
+> -FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O4 -ffast-math"
+> -FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations  -ftree-vectorize -fomit-frame-pointer -O4 -ffast-math"
+> +FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O4 -ffast-math -fno-tree-vectorize"
+>  BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+>  
+>  CFLAGS_append = " -I${S}/libdvdread4 "
+> -- 
+> 1.7.8
 > 
-> diff --git a/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc
-> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc new file
-> mode 100644 index 0000000..75bf2a9 --- /dev/null +++
-> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc @@ -0,0
-> +1,28 @@ +DESCRIPTION = "Tools for ethernet bridging." +HOMEPAGE =
-> "http://bridge.sourceforge.net/" +SECTION = "console/network" +LICENSE =
-> "GPLv2" + +SRC_URI =
-> "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz" + +inherit
-> autotools + +EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}" + 
-> +do_install_append () { +	mv ${D}${sbindir}/brctl
-> ${D}${sbindir}/brctl.${PN} +	install -d ${D}/${datadir}/bridge-utils +
-> install -d ${D}/${sysconfdir}/network/if-pre-up.d +	install -d
-> ${D}/${sysconfdir}/network/if-post-down.d +} + +DEPENDS = "sysfsutils" 
-> +RRECOMMENDS_${PN} = "kernel-module-bridge" + +pkg_postinst_${PN} () { +
-> update-alternatives --install ${sbindir}/brctl brctl brctl.${PN} 100 +} 
-> + +pkg_prerm_${PN} () { +	update-alternatives --remove brctl brctl.${PN} 
-> +} diff --git
-> a/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb
-> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb new file
-> mode 100644 index 0000000..00a5815 --- /dev/null +++
-> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb @@ -0,0
-> +1,6 @@ +require bridge-utils.inc + +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=f9d20a453221a1b7e32ae84694da2c37" + +SRC_URI[md5sum]
-> = "0182fcac3a2b307113bbec34e5f1c673" +SRC_URI[sha256sum] =
-> "876975e9bcc302aa8b829161ea3348b12b9b879f1db0dc98feaed8d0e5dd5933"
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7ru1YACgkQMkyGM64RGpH3SACfZ4PpCsdoIwlOFy1IRhtbQA9M
-w6EAmQHT02CzIKjhd+AN7hE8zLS5nuiQ
-=eGKk
------END PGP SIGNATURE-----
-
+-- 
+-Khem
 
 
