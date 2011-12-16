@@ -1,26 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philippedeswert@gmail.com>) id 1RbR1Q-0007bc-0q
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 07:11:56 +0100
-Received: by iakh37 with SMTP id h37so452620iak.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RbSbP-0003bL-QP for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2011 08:53:11 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RbSUg-0006KD-8y for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2011 08:46:14 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Dec 2011 08:46:14 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2011 22:04:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=KxREFu37IAOf0Jfs/40s58c0IQL3rYPuzZrJBRm3IzE=;
-	b=sX1YWDO96VMZ61kvtnTcmKYzI4zyEfgLdA9/ycq05rUsG3Q0AJwg5q7NZr6KBLAbwD
-	hvZ8jNG/HQyq3mT3PuC64ydzE7xqvNQVj4t+/dJXnd2bk83LGv+kgVD1G8cNsq6o7mOd
-	uXykJmpa6LexgVbwiNtt6IvId4MKTvIfawC3M=
-MIME-Version: 1.0
-Received: by 10.50.106.137 with SMTP id gu9mr6774112igb.35.1324015493521; Thu,
-	15 Dec 2011 22:04:53 -0800 (PST)
-Received: by 10.231.23.65 with HTTP; Thu, 15 Dec 2011 22:04:53 -0800 (PST)
-Date: Fri, 16 Dec 2011 08:04:53 +0200
-Message-ID: <CAPsFW+RwrNxxA+ezuvk6ThpmeHtBHZAC6SH4QHJuKjXv7q=ktw@mail.gmail.com>
-From: Philippe De Swert <philippedeswert@gmail.com>
+	Fri, 16 Dec 2011 08:46:14 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Fosdem Embedded 2012 looking for speakers
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 16 Dec 2011 08:45:59 +0100
+Message-ID: <jcesvl$4n1$1@dough.gmane.org>
+References: <1324003173-13994-1-git-send-email-b19537@freescale.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1324003173-13994-1-git-send-email-b19537@freescale.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [PATCH meta-oe 1/9] bridge-utils: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,44 +42,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 06:11:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Dec 2011 07:53:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Since traditionally we have had a number of openembedded talks I am
-trying to make sure
-we can have a few more next year ;)
+Op 16-12-11 03:39, b19537@freescale.com schreef:
+> From: Zhenhua Luo <b19537@freescale.com>
+> 
+> bridge-utils provides tools for ethernet bridging.
+> 
+> Signed-off-by: Zhenhua Luo <b19537@freescale.com> --- 
+> .../bridge-utils/bridge-utils.inc                  |   30 +++ 
+> .../bridge-utils/bridge-utils_1.4.bb               |    6 + 
+> .../bridge-utils/files/ifupdown.sh                 |  245
+> ++++++++++++++++++++ 3 files changed, 281 insertions(+), 0 deletions(-) 
+> create mode 100644
+> meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc create mode
+> 100644 meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb 
+> create mode 100644
+> meta-oe/recipes-connectivity/bridge-utils/files/ifupdown.sh
+> 
+> diff --git a/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc
+> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc new file
+> mode 100644 index 0000000..5ac6c83 --- /dev/null +++
+> b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc @@ -0,0
+> +1,30 @@ +DESCRIPTION = "Tools for ethernet bridging." +HOMEPAGE =
+> "http://bridge.sourceforge.net/" +SECTION = "console/network" +LICENSE =
+> "GPL"
 
-FOSDEM will be held the 4th and 5th of February 2012 in Brussels,
-Belgium. As usual and for the 9th time there will be an embedded and
-mobile room.
-For this years program we are looking for people who would like to do
-a presentation about their or their community's projects in this area.
-These projects must be Free Software or Open Source.
-For example involvement and experiences with projects like Arduino,
-Meego/Tizen, Mer, Beagleboard, Openembedded, Android, OpenWrt, Yocto,
-Linaro...
-Also we are interested in short tutorials, project overviews,
-achievements, ports to new hardware and hardware hacking, real life
-deployments, ... all are welcome and all submissions will be reviewed
-by our panel.
-Submissions require a small abstract and short speaker presentation
-and should be submitted to fosdem.embedded@gmail.com before the 15th
-of January 2012
+That's not a valid license
 
-The panel consists of:
-Philippe De Swert
-Peter De Schrijver
-Klaas Van Gend
-Dave Neary
-Michael Opdenacker
-Geert Uytterhoeven
+> +DEPENDS = "sysfsutils" +RRECOMMENDS_${PN} = "kernel-module-bridge"
 
-Looking forward to see you all at FOSDEM !
+That needs to move below do_install. Does it also need ifupdown? Patch looks
+OK otherwise.
 
-Thanks,
+regards,
 
-Philippe
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7q9zcACgkQMkyGM64RGpFR3QCfes5gKH1Jk36n80JUJGUoa1nO
+DWsAn1aWYMXjieT5K+xmiwEdACL6Ln+5
+=RPWd
+-----END PGP SIGNATURE-----
+
 
 
