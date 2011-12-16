@@ -1,48 +1,48 @@
-Received: from va3ehsobe005.messaging.microsoft.com ([216.32.180.31]
-	helo=VA3EHSOBE005.bigfish.com)
+Received: from va3ehsobe010.messaging.microsoft.com ([216.32.180.30]
+	helo=VA3EHSOBE010.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1RbUbj-0001sL-6D
+	(envelope-from <B19537@freescale.com>) id 1RbUbh-0001qz-Ke
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 11:01:39 +0100
-Received: from mail136-va3-R.bigfish.com (10.7.14.235) by
-	VA3EHSOBE005.bigfish.com (10.7.40.25) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 16 Dec 2011 09:39:31 +0000
-Received: from mail136-va3 (localhost [127.0.0.1])	by
-	mail136-va3-R.bigfish.com (Postfix) with ESMTP id 426A02C0056	for
+	Fri, 16 Dec 2011 11:01:44 +0100
+Received: from mail173-va3-R.bigfish.com (10.7.14.242) by
+	VA3EHSOBE010.bigfish.com (10.7.40.12) with Microsoft SMTP Server id
+	14.1.225.22; Fri, 16 Dec 2011 09:39:26 +0000
+Received: from mail173-va3 (localhost [127.0.0.1])	by
+	mail173-va3-R.bigfish.com (Postfix) with ESMTP id 6E16D2C010C	for
 	<openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 09:39:40 +0000 (UTC)
-X-SpamScore: 1
-X-BigFish: VS1(zzzz1202hzz8275bhz2dh2a8h668h839hb79i62h)
+	Fri, 16 Dec 2011 09:39:35 +0000 (UTC)
+X-SpamScore: -2
+X-BigFish: VS-2(zz936eKzz1202hzz8275ch8275bh8275dhz2dh2a8h668h839hb79i62h)
 X-Spam-TCS-SCL: 1:0
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail136-va3 (localhost.localdomain [127.0.0.1]) by mail136-va3
-	(MessageSwitch) id 132402838074922_30832;
-	Fri, 16 Dec 2011 09:39:40 +0000 (UTC)
-Received: from VA3EHSMHS029.bigfish.com (unknown [10.7.14.242])	by
-	mail136-va3.bigfish.com (Postfix) with ESMTP id 0AF611003AD	for
+Received: from mail173-va3 (localhost.localdomain [127.0.0.1]) by mail173-va3
+	(MessageSwitch) id 1324028375146906_11926;
+	Fri, 16 Dec 2011 09:39:35 +0000 (UTC)
+Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.241])	by
+	mail173-va3.bigfish.com (Postfix) with ESMTP id 1D9EE2A0043	for
 	<openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 09:39:40 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS029.bigfish.com
-	(10.7.99.39) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 16 Dec 2011 09:39:27 +0000
+	Fri, 16 Dec 2011 09:39:35 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS016.bigfish.com
+	(10.7.99.26) with Microsoft SMTP Server (TLS) id 14.1.225.22;
+	Fri, 16 Dec 2011 09:39:19 +0000
 Received: from az33smr01.freescale.net (10.64.34.199) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server id 14.1.355.3; Fri, 16 Dec 2011 03:39:27 -0600
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server id 14.1.355.3; Fri, 16 Dec 2011 03:39:19 -0600
 Received: from localhost.localdomain
 	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
-	az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id pBG9dDjm008853;
-	Fri, 16 Dec 2011 03:39:25 -0600 (CST)
+	az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id pBG9dDjh008853;
+	Fri, 16 Dec 2011 03:39:17 -0600 (CST)
 From: <b19537@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Dec 2011 17:42:00 +0800
-Message-ID: <1324028520-16474-8-git-send-email-b19537@freescale.com>
+Date: Fri, 16 Dec 2011 17:41:55 +0800
+Message-ID: <1324028520-16474-3-git-send-email-b19537@freescale.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1324028520-16474-1-git-send-email-b19537@freescale.com>
 References: <1324028520-16474-1-git-send-email-b19537@freescale.com>
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
-Subject: [PATCH meta-oe v2 8/8] xfsprogs: add
+Subject: [PATCH meta-oe v2 3/8] ipsec-tools: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,68 +56,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 10:01:39 -0000
+X-List-Received-Date: Fri, 16 Dec 2011 10:01:44 -0000
 Content-Type: text/plain
 
 From: Zhenhua Luo <b19537@freescale.com>
 
-    xfsprogs provides XFS filesystem utilities.
+    IPsec-Tools is a port of KAME's IPsec utilities to the Linux IPsec
+    implementation.
 
 Signed-off-by: Zhenhua Luo <b19537@freescale.com>
 ---
- meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb |   43 ++++++++++++++++++++
- 1 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
+ .../ipsec-tools/files/ipsec-tools-install.patch    |   14 +++++
+ .../recipes-support/ipsec-tools/ipsec-tools.inc    |   51 ++++++++++++++++++++
+ .../ipsec-tools/ipsec-tools_0.7.2.bb               |    7 +++
+ 3 files changed, 72 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/ipsec-tools/files/ipsec-tools-install.patch
+ create mode 100644 meta-oe/recipes-support/ipsec-tools/ipsec-tools.inc
+ create mode 100644 meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
 
-diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
+diff --git a/meta-oe/recipes-support/ipsec-tools/files/ipsec-tools-install.patch b/meta-oe/recipes-support/ipsec-tools/files/ipsec-tools-install.patch
 new file mode 100644
-index 0000000..d150d4f
+index 0000000..6b9c39b
 --- /dev/null
-+++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "XFS Filesystem Utilities"
-+HOMEPAGE = "http://oss.sgi.com/projects/xfs"
-+SECTION = "base"
-+LICENSE = "LGPL2.1"
-+LIC_FILES_CHKSUM = "file://Makefile;endline=3;md5=def2844770bb44eba37bc9ca8610fad4"
++++ b/meta-oe/recipes-support/ipsec-tools/files/ipsec-tools-install.patch
+@@ -0,0 +1,14 @@
++Taken from pld-linux.org:
++http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/packages/ipsec-tools/ipsec-tools-install.patch
 +
-+SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz"
-+SRC_URI[md5sum] = "049cf9873794ea49d0bb3f12d45748a4"
-+SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d75c8eaa"
++--- ipsec-tools-0.7.2/src/racoon/Makefile.am~	2008-07-23 13:48:40.000000000 +0200
+++++ ipsec-tools-0.7.2/src/racoon/Makefile.am	2009-07-04 01:43:48.148433975 +0200
++@@ -3,7 +3,7 @@
++ sbin_PROGRAMS = racoon racoonctl plainrsa-gen
++ noinst_PROGRAMS = eaytest
++ include_racoon_HEADERS = racoonctl.h var.h vmbuf.h misc.h gcmalloc.h admin.h \
++-	schedule.h sockmisc.h vmbuf.h isakmp_var.h isakmp.h isakmp_xauth.h \
+++	schedule.h sockmisc.h isakmp_var.h isakmp.h isakmp_xauth.h \
++ 	isakmp_cfg.h isakmp_unity.h ipsec_doi.h evt.h
++ lib_LTLIBRARIES = libracoon.la
++ 
+diff --git a/meta-oe/recipes-support/ipsec-tools/ipsec-tools.inc b/meta-oe/recipes-support/ipsec-tools/ipsec-tools.inc
+new file mode 100644
+index 0000000..caf2b0b
+--- /dev/null
++++ b/meta-oe/recipes-support/ipsec-tools/ipsec-tools.inc
+@@ -0,0 +1,51 @@
++DESCRIPTION = "IPsec-Tools is a port of KAME's IPsec utilities to the \
++Linux-2.6 IPsec implementation."
++HOMEPAGE = "http://ipsec-tools.sourceforge.net/"
++SECTION = "console/network"
++LICENSE = "BSD"
++DEPENDS = "virtual/kernel openssl readline flex"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2;name=ipsec-tools-${PV}"
 +
 +inherit autotools
 +
++# Options:
++#  --enable-adminport      enable admin port
++#  --enable-rc5            enable RC5 encryption (patented)
++#  --enable-idea enable IDEA encryption (patented)
++#  --enable-gssapi         enable GSS-API authentication
++#  --enable-hybrid         enable hybrid, both mode-cfg and xauth support
++#  --enable-frag           enable IKE fragmentation payload support
++#  --enable-stats          enable statistics logging function
++#  --enable-dpd            enable dead peer detection
++#  --enable-samode-unspec  enable to use unspecified a mode of SA
++#  --disable-ipv6          disable ipv6 support
++#  --enable-natt           enable NAT-Traversal (yes/no/kernel)
++#  --enable-natt-versions=list    list of supported NAT-T versions delimited by coma.
++#  --with-kernel-headers=/lib/modules/<uname>/build/include
++#                          where your Linux Kernel headers are installed
++#  --with-readline         support readline input (yes by default)
++#  --with-flex             use directiory (default: no)
++#  --with-flexlib=<LIB>    specify flex library.
++#  --with-openssl=DIR      specify OpenSSL directory
++#  --with-libradius=DIR    specify libradius path (like/usr/pkg)
++#  --with-libpam=DIR       specify libpam path (like/usr/pkg)
++#
++# Note: if you give it the actual kernel headers it won't build, it actually
++# needs to point at the linux-libc-headers version of the kernel headers.
++#
++EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
++                --with-readline \
++                --with-openssl=${STAGING_LIBDIR}/.. \
++                --without-libradius \
++                --without-gssapi \
++                --without-libpam \
++		--disable-security-context"
++
++# See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
++CFLAGS += "-fno-strict-aliasing"
++
++# Sometimes it attempts to use y.tab.c before it is actually
++# generated. Note that the failure case is very rare, but it does
++# happen.
 +PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
+new file mode 100644
+index 0000000..270d77e
+--- /dev/null
++++ b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
+@@ -0,0 +1,7 @@
++require ipsec-tools.inc
 +
-+FILES_${PN}-dev += "${base_libdir}/libhandle.la \
-+                    ${base_libdir}/libhandle.so"
++LIC_FILES_CHKSUM = "file://Makefile.in;endline=14;md5=c73d05590728997bfbab5c671ed38366"
 +
-+do_configure () {
-+	export DEBUG="-DNDEBUG"
-+	oe_runconf
-+}
-+
-+do_install () {
-+	export DIST_ROOT=${D}
-+	oe_runmake install
-+	# needed for xfsdump
-+	oe_runmake install-dev
-+	# replace extra links to /usr/lib with relative links (otherwise autotools_prepackage_lamangler fails to read nonexistent link)
-+	rm -f ${D}/${base_libdir}/libhandle.la
-+	rm -f ${D}/${base_libdir}/libhandle.a
-+	ln -s ../usr/lib/libhandle.la ${D}/${base_libdir}/libhandle.la
-+	ln -s ../usr/lib/libhandle.a ${D}/${base_libdir}/libhandle.a
-+
-+	# and link from /usr/lib/libhandle.so to /lib/libhandle.so
-+	rm -f ${D}/${libdir}/libhandle.so
-+	ln -s ../../lib/libhandle.a ${D}/${libdir}/libhandle.so
-+}
-+EXTRA_OECONF = "--enable-gettext=no"
-+LIBTOOL = "${HOST_SYS}-libtool"
-+EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+DEPENDS = "util-linux"
++SRC_URI += "file://ipsec-tools-install.patch"
++SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
++SRC_URI[ipsec-tools-0.7.2.sha256sum] = "08722ff6c62de3e042fef337454f03622a79053108d6dcc686c9c854f9f9e031"
 -- 
 1.7.0.4
 
