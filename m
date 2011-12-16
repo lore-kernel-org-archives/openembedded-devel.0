@@ -1,47 +1,48 @@
-Received: from va3ehsobe004.messaging.microsoft.com ([216.32.180.14]
-	helo=VA3EHSOBE004.bigfish.com)
+Received: from db3ehsobe001.messaging.microsoft.com ([213.199.154.139]
+	helo=DB3EHSOBE001.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1RbUc1-0002Ga-74
+	(envelope-from <B19537@freescale.com>) id 1RbUc6-000202-Gp
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 11:01:57 +0100
-Received: from mail14-va3-R.bigfish.com (10.7.14.250) by
-	VA3EHSOBE004.bigfish.com (10.7.40.24) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 16 Dec 2011 09:39:48 +0000
-Received: from mail14-va3 (localhost [127.0.0.1])	by mail14-va3-R.bigfish.com
-	(Postfix) with ESMTP id 1B32280434	for
+	Fri, 16 Dec 2011 11:02:02 +0100
+Received: from mail1-db3-R.bigfish.com (10.3.81.252) by
+	DB3EHSOBE001.bigfish.com (10.3.84.21) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 16 Dec 2011 09:39:34 +0000
+Received: from mail1-db3 (localhost [127.0.0.1])	by mail1-db3-R.bigfish.com
+	(Postfix) with ESMTP id 6CB264804EA	for
 	<openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 09:39:57 +0000 (UTC)
+	Fri, 16 Dec 2011 09:39:43 +0000 (UTC)
 X-SpamScore: 1
-X-BigFish: VS1(zzzz1202hzz8275ch8275bhz2dh2a8h668h839hb79i62h)
-X-Spam-TCS-SCL: 1:0
+X-BigFish: VS1(zzzz1202hzz8275bh8275dhz2dh2a8h668h839hb79i)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-X-FB-SS: 0,
-Received: from mail14-va3 (localhost.localdomain [127.0.0.1]) by mail14-va3
-	(MessageSwitch) id 1324028365746387_4214;
-	Fri, 16 Dec 2011 09:39:25 +0000 (UTC)
-Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.250])	by
-	mail14-va3.bigfish.com (Postfix) with ESMTP id 7A0002C0050	for
+X-FB-SS: 0,13,
+Received: from mail1-db3 (localhost.localdomain [127.0.0.1]) by mail1-db3
+	(MessageSwitch) id 1324028373759289_11369;
+	Fri, 16 Dec 2011 09:39:33 +0000 (UTC)
+Received: from DB3EHSMHS005.bigfish.com (unknown [10.3.81.246])	by
+	mail1-db3.bigfish.com (Postfix) with ESMTP id AB455280042	for
 	<openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 09:39:25 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS016.bigfish.com
-	(10.7.99.26) with Microsoft SMTP Server (TLS) id 14.1.225.22;
-	Fri, 16 Dec 2011 09:39:16 +0000
+	Fri, 16 Dec 2011 09:39:33 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB3EHSMHS005.bigfish.com
+	(10.3.87.105) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 16 Dec 2011 09:39:24 +0000
 Received: from az33smr01.freescale.net (10.64.34.199) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server id 14.1.355.3; Fri, 16 Dec 2011 03:39:15 -0600
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server id 14.1.355.3; Fri, 16 Dec 2011 03:39:20 -0600
 Received: from localhost.localdomain
 	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
-	az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id pBG9dDjf008853;
-	Fri, 16 Dec 2011 03:39:14 -0600 (CST)
+	az33smr01.freescale.net (8.13.1/8.13.0) with ESMTP id pBG9dDji008853;
+	Fri, 16 Dec 2011 03:39:19 -0600 (CST)
 From: <b19537@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Dec 2011 17:41:53 +0800
-Message-ID: <1324028520-16474-1-git-send-email-b19537@freescale.com>
+Date: Fri, 16 Dec 2011 17:41:56 +0800
+Message-ID: <1324028520-16474-4-git-send-email-b19537@freescale.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1324028520-16474-1-git-send-email-b19537@freescale.com>
+References: <1324028520-16474-1-git-send-email-b19537@freescale.com>
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
-Subject: [PATCH meta-oe v2 1/8] bridge-utils: add
+Subject: [PATCH meta-oe v2 4/8] libnfnetlink: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,67 +56,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 10:01:57 -0000
+X-List-Received-Date: Fri, 16 Dec 2011 10:02:02 -0000
 Content-Type: text/plain
 
 From: Zhenhua Luo <b19537@freescale.com>
 
-    bridge-utils provides tools for ethernet bridging.
+    libnfnetlink is the low-level library for netfilter related kernel/userspace
+    communication. It provides a generic messaging infrastructure for in-kernel
+    netfilter subsystems (such as nfnetlink_log, nfnetlink_queue, nfnetlink_conntrack)
+    and their respective users and/or management tools in userspace.
 
 Signed-off-by: Zhenhua Luo <b19537@freescale.com>
 ---
- .../bridge-utils/bridge-utils.inc                  |   28 ++++++++++++++++++++
- .../bridge-utils/bridge-utils_1.4.bb               |    6 ++++
- 2 files changed, 34 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc
- create mode 100644 meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb
+ .../libnfnetlink/libnfnetlink.inc                  |   13 +++++++++++++
+ .../libnfnetlink/libnfnetlink_1.0.0.bb             |    6 ++++++
+ 2 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink.inc
+ create mode 100644 meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
 
-diff --git a/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc
+diff --git a/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink.inc b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink.inc
 new file mode 100644
-index 0000000..8b3d167
+index 0000000..e79c1a9
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils.inc
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "Tools for ethernet bridging."
-+HOMEPAGE = "http://bridge.sourceforge.net/"
-+SECTION = "console/network"
-+LICENSE = "GPL v2"
++++ b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink.inc
+@@ -0,0 +1,13 @@
++DESCRIPTION = "libnfnetlink is the low-level library for netfilter related \
++kernel/userspace communication. It provides a generic messaging \
++infrastructure for in-kernel netfilter subsystems (such as nfnetlink_log, \
++nfnetlink_queue, nfnetlink_conntrack) and their respective users and/or \
++management tools in userspace."
++SECTION = "devel/libs"
++LICENSE = "GPLv2+"
++HOMEPAGE = "http://www.netfilter.org/projects/libnfnetlink/index.html"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
++SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=libnfnetlink-${PV}"
 +
-+inherit autotools
++inherit autotools pkgconfig
 +
-+EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
-+
-+do_install_append () {
-+	mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
-+	install -d ${D}/${datadir}/bridge-utils
-+	install -d ${D}/${sysconfdir}/network/if-pre-up.d
-+	install -d ${D}/${sysconfdir}/network/if-post-down.d
-+}
-+
-+DEPENDS = "sysfsutils"
-+RRECOMMENDS_${PN} = "kernel-module-bridge"
-+
-+pkg_postinst_${PN} () {
-+	update-alternatives --install ${sbindir}/brctl brctl brctl.${PN} 100
-+}
-+
-+pkg_prerm_${PN} () {
-+	update-alternatives --remove brctl brctl.${PN}
-+}
-diff --git a/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb
+diff --git a/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
 new file mode 100644
-index 0000000..00a5815
+index 0000000..cea4195
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/bridge-utils/bridge-utils_1.4.bb
++++ b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
 @@ -0,0 +1,6 @@
-+require bridge-utils.inc
++include libnfnetlink.inc
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f9d20a453221a1b7e32ae84694da2c37"
++LIC_FILES_CHKSUM = "file://Makefile.in;endline=13;md5=a44bb8f4c22793d55c5e879eec256702"
 +
-+SRC_URI[md5sum] = "0182fcac3a2b307113bbec34e5f1c673"
-+SRC_URI[sha256sum] = "876975e9bcc302aa8b829161ea3348b12b9b879f1db0dc98feaed8d0e5dd5933"
++SRC_URI[libnfnetlink-1.0.0.md5sum] = "016fdec8389242615024c529acc1adb8"
++SRC_URI[libnfnetlink-1.0.0.sha256sum] = "3752b03a4c09821ee9a2528d69289423a01e7171f1a22dfdd11d5459e03972fb"
 -- 
 1.7.0.4
 
