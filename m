@@ -1,32 +1,53 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from am1ehsobe001.messaging.microsoft.com ([213.199.154.204]
+	helo=AM1EHSOBE001.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1Rbgby-0003NR-Kt
+	(envelope-from <Y080067@e.ntu.edu.sg>) id 1Rbota-0003EW-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Dec 2011 23:50:42 +0100
-Received: by iakh37 with SMTP id h37so1576116iak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2011 14:43:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:from:in-reply-to:mime-version:date:message-id:subject:to
-	:cc:content-type;
-	bh=NpdD5LPXCPQDvjsXeUv3xi90cZnbi8WXC7VjQL8VswQ=;
-	b=c39H2ISP2R4DRZ9e6q/kZ2EYVYQbTaesTzK2Ymx+pWf8na1mmmRq2ft7KNmLp7CAe1
-	3TvXo9DXYnlxqZLrZWB/SwsApGrvVHQJRc1i9BQQUE0+Sk3+XCoaODp97w7vBYycJbWy
-	F+8MwXIqiMZcJd2AfysNfzh7Fgis8cgqRGwbo=
-Received: by 10.50.182.199 with SMTP id eg7mr11014474igc.57.1324075422215;
-	Fri, 16 Dec 2011 14:43:42 -0800 (PST)
-References: <CAOHjBZtWd8-_xgqbzx=jBjA4=tRD3CHJ62YiA=dzFr9QsUzaVA@mail.gmail.com>
-	<CAMKF1srRe_ksYrw3Zq+ScS0ED12e7QoeGurtynybsFOvACH1-Q@mail.gmail.com>
-	<1845722180277205462@unknownmsgid> <13795657.zIHqNnJ6yk@helios>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-In-Reply-To: <13795657.zIHqNnJ6yk@helios>
-Mime-Version: 1.0 (1.0)
-Date: Fri, 16 Dec 2011 23:43:40 +0100
-Message-ID: <5552958045648051101@unknownmsgid>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: "openembedded-devel@lists.openembedded.org"
+	Sat, 17 Dec 2011 08:41:26 +0100
+Received: from mail119-am1-R.bigfish.com (10.3.201.249) by
+	AM1EHSOBE001.bigfish.com (10.3.204.21) with Microsoft SMTP Server id
+	14.1.225.23; Sat, 17 Dec 2011 07:19:18 +0000
+Received: from mail119-am1 (localhost [127.0.0.1])	by
+	mail119-am1-R.bigfish.com (Postfix) with ESMTP id AA9113E04B3	for
+	<openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Dec 2011 07:19:30 +0000 (UTC)
+X-SpamScore: 18
+X-BigFish: PS18(zzc85fh14ffO8532mzz1202hzz8275bh8275dhf73b6ilz2dh2a8h668h839h)
+X-Forefront-Antispam-Report: CIP:111.221.23.141; KIP:(null); UIP:(null);
+	IPV:NLI; H:SINPRD0104HT004.apcprd01.prod.exchangelabs.com;
+	RD:none; EFVD:NLI
+X-FB-SS: 13,
+Received: from mail119-am1 (localhost.localdomain [127.0.0.1]) by mail119-am1
+	(MessageSwitch) id 1324106370569416_16777;
+	Sat, 17 Dec 2011 07:19:30 +0000 (UTC)
+Received: from AM1EHSMHS017.bigfish.com (unknown [10.3.201.247])	by
+	mail119-am1.bigfish.com (Postfix) with ESMTP id 8624046004E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Dec 2011 07:19:30 +0000 (UTC)
+Received: from SINPRD0104HT004.apcprd01.prod.exchangelabs.com (111.221.23.141)
+	by AM1EHSMHS017.bigfish.com (10.3.207.155) with Microsoft SMTP
+	Server (TLS) id 14.1.225.23; Sat, 17 Dec 2011 07:19:17 +0000
+Received: from SINPRD0104MB133.apcprd01.prod.exchangelabs.com ([169.254.1.40])
+	by SINPRD0104HT004.apcprd01.prod.exchangelabs.com ([10.210.223.102])
+	with mapi id 14.15.0018.001; Sat, 17 Dec 2011 07:19:15 +0000
+From: #LOH KHAI PING# <Y080067@e.ntu.edu.sg>
+To: #LOH KHAI PING# <Y080067@e.ntu.edu.sg>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Question about package prefix
+Thread-Topic: Enquire > Initramfs
+Thread-Index: Acy61Dq13dnuUUOGSpmDs7Hl6NHB0wBt+sSg
+Date: Sat, 17 Dec 2011 07:19:15 +0000
+Message-ID: <BB88E9AFCBAA2B4DA2CE2EA1D67484FB0C6AD38C@SINPRD0104MB133.apcprd01.prod.exchangelabs.com>
+References: <BB88E9AFCBAA2B4DA2CE2EA1D67484FB0C6ACBF7@SINPRD0104MB133.apcprd01.prod.exchangelabs.com>
+In-Reply-To: <BB88E9AFCBAA2B4DA2CE2EA1D67484FB0C6ACBF7@SINPRD0104MB133.apcprd01.prod.exchangelabs.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.210.222.9]
+MIME-Version: 1.0
+X-OriginatorOrg: e.ntu.edu.sg
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Enquire > Initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +61,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 22:50:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 17 Dec 2011 07:41:26 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Many thanks Paul, I'll at it soon and I'll let you know.
 
-Cheers,
-Giuseppe
+Hi all,
 
-Il giorno 16/dic/2011, alle ore 23:41, Paul Eggleton
-<paul.eggleton@linux.intel.com> ha scritto:
+I am currently doing research on openembedded for my project. I facing some=
+ problems hoping you guys can enlighten me. I manage to follow this tutoria=
+l www.3open.org/d/oe/build_kernel_with_inline_initramfs  to create a initra=
+msfs(.cpio)+kernel . It manage to get boot up on my board. But when I try t=
+o load it separately it fails.
 
-> On Friday 16 December 2011 23:35:37 Giuseppe Condorelli wrote:
->> I'm sorry but I'm not able to find the meta-micro file. I searched it
->> under meta directory without success (openembedded git repos).
->> Any suggestions?
->
-> FYI you can find a link to it on the layer index page:
->
-> http://www.openembedded.org/wiki/LayerIndex
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
+I try to load .cpio.gz and kernel. For example I load my .cpio.gz at 0x2100=
+0000. I pass this address as initrd to my kernel but my kernel cant seems t=
+o find .cpio.gz . Below is the error message.
 
+http://pastebin.com/Li22FBER
+
+Really wish you guys could assist me.
+
+Regards,
+Khai Ping
 
