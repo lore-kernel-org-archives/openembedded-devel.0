@@ -1,32 +1,23 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Rbsfw-0001SH-Es
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Rc5OF-0000CD-TN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Dec 2011 12:43:36 +0100
-Received: by yhoo47 with SMTP id o47so3195666yho.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2011 03:36:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=2xgQqP43skEgEMgRwZcABFUFzw2Svz3W+ueaUw/VeC8=;
-	b=mFnmDB501M1yQUgfs7j+9JFxwlB0zJphymMFipBjuHVQzgO5bq+05rNAjWANgxSsXh
-	v3yXuty/4BMBjxz4buRh+rXN44OdKdxflC22WAQdrr/5pkAOdxVWcJJBu8FLagrSBv31
-	TLHcCXSuSB/9XnDIKon1XvlERloxq72mz5D3Q=
-Received: by 10.236.91.84 with SMTP id g60mr17085570yhf.90.1324121795840;
-	Sat, 17 Dec 2011 03:36:35 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id i32sm28493387anm.6.2011.12.17.03.36.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 17 Dec 2011 03:36:35 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sun, 18 Dec 2011 02:18:11 +0100
+Received: (qmail invoked by alias); 18 Dec 2011 01:11:11 -0000
+Received: from p5B0A29E7.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.41.231]
+	by mail.gmx.net (mp005) with SMTP; 18 Dec 2011 02:11:11 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+ADIQCmkiATIddM0ya7VZvmyP/BxYu1nHRO8wTVA
+	/M2amnaxmKwi5J
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Dec 2011 11:36:24 +0000
-Message-Id: <1d3684a1c514356d83172e54cdd7852d04af5ed1.1324121762.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1324121762.git.otavio@ossystems.com.br>
-References: <cover.1324121762.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] pcsc-lite: ccid downgraded to a runtime recommendation
+Date: Sun, 18 Dec 2011 02:11:34 +0100
+Message-Id: <1324170694-11250-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+X-Y-GMX-Trusted: 0
+Subject: [meta-xfce] xfwm4: break runtime dependency loop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2011 11:43:36 -0000
+X-List-Received-Date: Sun, 18 Dec 2011 01:18:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-ccid adds more smart-card readers support but it is not a requirement
-for pcsc-lite to work thus we change it to a recommendation instead of
-a hard dependency.
+required since oe-core opkg update [1]
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+[1] http://cgit.openembedded.org/openembedded-core/commit/?id=2feba313c991170747381c7cf821a45c2cd04632
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.2.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-index de980ff..a4f3fcc 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "http://pcsclite.alioth.debian.org/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
- DEPENDS = "udev"
--RDEPENDS += "ccid"
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2"
- 
-@@ -23,4 +22,6 @@ S = "${WORKDIR}/pcsc-lite-${PV}"
- 
- PACKAGES =+ "${PN}-lib"
- 
-+RRECOMMENDS_${PN} = "ccid"
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.2.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.2.bb
+index c1ad221..09f4cf6 100644
+--- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.2.bb
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.2.bb
+@@ -2,6 +2,8 @@ DESCRIPTION="Xfce4 Window Manager"
+ SECTION = "x11/wm"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
++PR = "r1"
 +
- FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
+ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification"
+ 
+ inherit xfce update-alternatives
+@@ -27,7 +29,7 @@ ALTERNATIVE_LINK = "${bindir}/x-window-manager"
+ ALTERNATIVE_PATH = "${bindir}/xfce4-session"
+ ALTERNATIVE_PRIORITY = "30"
+ 
+-RDEPENDS_${PN} = "xfwm4-theme-default"
++RRECOMMENDS_${PN} = "xfwm4-theme-default"
+ FILES_${PN} += "${libdir}/xfce4/xfwm4/helper-dialog \
+                 ${datadir}/xfwm4/defaults \
+                "
 -- 
-1.7.2.5
+1.7.4.4
 
 
 
