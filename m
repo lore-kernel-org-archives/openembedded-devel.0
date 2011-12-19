@@ -1,25 +1,54 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Rca2b-00026m-3N
+Received: from am1ehsobe003.messaging.microsoft.com ([213.199.154.206]
+	helo=AM1EHSOBE003.bigfish.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <B19537@freescale.com>) id 1RcaEx-0002XK-OL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 11:01:53 +0100
-Received: (qmail invoked by alias); 19 Dec 2011 09:54:50 -0000
-Received: from ip-95-222-156-232.unitymediagroup.de (EHLO
-	zera-git-ew.localnet) [95.222.156.232]
-	by mail.gmx.net (mp029) with SMTP; 19 Dec 2011 10:54:50 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+QxIdcUQKQ2PR0Rg34ZbtcbBZeUG41XjwwB9bNHP
-	AJoQ9ihmHqTy0U
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Dec 2011 10:54:56 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.41.4-1.fc15.x86_64; KDE/4.6.5; x86_64; ; )
-References: <20111219093447.C6DBE10331@opal>
-In-Reply-To: <20111219093447.C6DBE10331@opal>
+	Mon, 19 Dec 2011 11:14:40 +0100
+Received: from mail76-am1-R.bigfish.com (10.3.201.247) by
+	AM1EHSOBE003.bigfish.com (10.3.204.23) with Microsoft SMTP Server id
+	14.1.225.23; Mon, 19 Dec 2011 09:52:28 +0000
+Received: from mail76-am1 (localhost [127.0.0.1])	by mail76-am1-R.bigfish.com
+	(Postfix) with ESMTP id 01962500072;
+	Sat, 12 May 2012 09:52:56 +0000 (UTC)
+X-SpamScore: -10
+X-BigFish: VS-10(zz9371I542M1432N41c5Nzz1202hzz8275dhz2dh2a8h668h839h8e2h8e3h944h286p)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-FB-SS: 13,
+Received: from mail76-am1 (localhost.localdomain [127.0.0.1]) by mail76-am1
+	(MessageSwitch) id 1336816375869612_30679;
+	Sat, 12 May 2012 09:52:55 +0000 (UTC)
+Received: from AM1EHSMHS005.bigfish.com (unknown [10.3.201.245])	by
+	mail76-am1.bigfish.com (Postfix) with ESMTP id C5917480043;
+	Sat, 12 May 2012 09:52:55 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS005.bigfish.com
+	(10.3.207.105) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Mon, 19 Dec 2011 09:52:28 +0000
+Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.213]) by
+	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
+	14.01.0355.003; Mon, 19 Dec 2011 03:52:21 -0600
+From: Luo Zhenhua-B19537 <B19537@freescale.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [PATCH meta-oe 5/9] nerperf: add
+Thread-Index: AQHMu5uU0v7ifXEdrkurJWiJJ/F/5pXefH+A//+y/yCAAGZ4gIAA0hiAgAOHjOA=
+Date: Mon, 19 Dec 2011 09:52:20 +0000
+Message-ID: <CA452391058F6D4E9715FB2C29D9312A010B90B0@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1324003173-13994-1-git-send-email-b19537@freescale.com>
+	<1324003173-13994-5-git-send-email-b19537@freescale.com>
+	<jcetai$4n1$5@dough.gmane.org>
+	<CA452391058F6D4E9715FB2C29D9312A02CEB8@039-SN2MPN1-022.039d.mgd.msft.net>
+	<44FD6890-C4DA-4A40-B30F-BDADC690C21E@dominion.thruhere.net>
+	<20111216215455.GC28832@sakrah.homelinux.org>
+In-Reply-To: <20111216215455.GC28832@sakrah.homelinux.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.114]
 MIME-Version: 1.0
-Message-Id: <201112191054.57179.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] Scott Garman : Add missing SUMMARY fields to various recipes
+X-OriginatorOrg: freescale.com
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH meta-oe 5/9] nerperf: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,120 +62,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 10:01:53 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Dec 2011 10:14:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Monday, December 19, 2011 10:34:47 AM git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: e8c194a627e091ef9da3b7fa83ea3897bd283d9e
-> URL:   
-> http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=e8c194a627
-> e091ef9da3b7fa83ea3897bd283d9e
-> 
-> Author: Scott Garman <scott.a.garman@intel.com>
-> Date:   Sun Dec 18 15:06:57 2011 -0800
-> 
-> Add missing SUMMARY fields to various recipes
-> 
-> This adds the SUMMARY field to the following recipes which were
-> missing it:
-> 
-> * dosfstools
-> * grep
-> * icu
-> * libevent
-> * libnfsidmap
-> * qemu-helper-nativesdk
-> 
-> Signed-off-by: Scott Garman <scott.a.garman@intel.com>
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> 
-> ---
-> 
->  .../nfs-utils/libnfsidmap_0.24.bb                  |    3 ++-
->  .../recipes-devtools/dosfstools/dosfstools_2.11.bb |    2 +-
->  .../qemu/qemu-helper-nativesdk_1.0.bb              |    3 ++-
->  meta/recipes-extended/grep/grep_2.9.bb             |    1 +
->  meta/recipes-support/icu/icu-3.6.inc               |    1 +
->  meta/recipes-support/libevent/libevent_1.4.14b.bb  |    3 ++-
->  6 files changed, 9 insertions(+), 4 deletions(-)
-> 
-> diff --git a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
-> b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb index
-> 101ecab..eff75ec 100644
-> --- a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
-> +++ b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
-> @@ -1,4 +1,5 @@
-> -DESCRIPTION = "nfs idmapping library"
-> +SUMMARY = "NFS id mapping library"
-> +DESCRIPTION = "NFS id mapping library"
->  HOMEPAGE = "http://www.citi.umich.edu/projects/nfsv4/linux/"
->  SECTION = "libs"
-> 
-> diff --git a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
-> b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb index
-> ec75ac9..eca54f1 100644
-> --- a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
-> +++ b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
-> @@ -1,7 +1,7 @@
->  # dosfstools OE build file
->  # Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights
-> Reserved # Released under the MIT license (see packages/COPYING)
-> -
-> +SUMMARY = "DOS FAT Filesystem Utilities"
->  DESCRIPTION = "DOS FAT Filesystem Utilities"
-> 
->  SECTION = "base"
-> diff --git a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
-> b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb index
-> a3dca3d..df0cae0 100644
-> --- a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
-> +++ b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
-> @@ -1,4 +1,5 @@
-> -DESCRIPTION = "Qemu helper scripts from Poky"
-> +SUMMARY = "Qemu helper scripts"
-> +DESCRIPTION = "Qemu helper scripts"
->  LICENSE = "GPLv2"
->  RDEPENDS_${PN} = "qemu-nativesdk"
->  PR = "r9"
-> diff --git a/meta/recipes-extended/grep/grep_2.9.bb
-> b/meta/recipes-extended/grep/grep_2.9.bb index 08ac527..9099bed 100644
-> --- a/meta/recipes-extended/grep/grep_2.9.bb
-> +++ b/meta/recipes-extended/grep/grep_2.9.bb
-> @@ -1,3 +1,4 @@
-> +SUMMARY = "GNU grep utility"
->  DESCRIPTION = "GNU grep utility"
->  HOMEPAGE = "http://savannah.gnu.org/projects/grep/"
->  BUGTRACKER = "http://savannah.gnu.org/bugs/?group=grep"
-> diff --git a/meta/recipes-support/icu/icu-3.6.inc
-> b/meta/recipes-support/icu/icu-3.6.inc index 8fadc92..e3f9dd2 100644
-> --- a/meta/recipes-support/icu/icu-3.6.inc
-> +++ b/meta/recipes-support/icu/icu-3.6.inc
-> @@ -1,3 +1,4 @@
-> +SUMMARY = "International Component for Unicode libraries"
->  DESCRIPTION = "The International Component for Unicode (ICU) is a mature,
-> portable set of C/C++ and Java libraries for Unicode support, software
-> internationalization (I18N) and globalization (G11N), giving applications
-> the same results on all platforms." HOMEPAGE =
-> "http://www-01.ibm.com/software/globalization/icu/index.jsp"
-> 
-> diff --git a/meta/recipes-support/libevent/libevent_1.4.14b.bb
-> b/meta/recipes-support/libevent/libevent_1.4.14b.bb index 1a369b5..36468dc
-> 100644
-> --- a/meta/recipes-support/libevent/libevent_1.4.14b.bb
-> +++ b/meta/recipes-support/libevent/libevent_1.4.14b.bb
-> @@ -1,4 +1,5 @@
-> -DESCRIPTION = "an asynchronous event notification library"
-> +SUMMARY = "An asynchronous event notification library"
-> +DESCRIPTION = "An asynchronous event notification library"
->  HOMEPAGE = "http://www.monkey.org/~provos/libevent/"
->  SECTION = "libs"
-> 
-What is the value in creating redundancies by copying DESRCIPTION to SUMMARY?
+Hello Khem,=20
 
-Andreas
+> -----Original Message-----
+> From: Khem Raj [mailto:raj.khem@gmail.com]
+> Sent: Saturday, December 17, 2011 5:55 AM
+> > >>
+> > >>> +++ b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb @@ -0,0
+> > >>> +++ +1,47
+> > >>> @@ +DESCRIPTION=3D"Network performance benchmark including tests fo=
+r
+> > >>> TCP, UDP, sockets, ATM and more." +SECTION =3D "console/network"
+> > >>> +HOMEPAGE =3D "http://www.netperf.org/" +LICENSE =3D "netperf"
+> > >>
+> > >> Can you include a comment on what type of license netperf is? MIT
+> > >> like, BSD like, GPL like?
+> > > [Luo Zhenhua-B19537] May I know which license type should be with fol=
+lowing
+> COPYING content?
+> >
+> > That looks like a BSD or MIT derivative, maybe Beth can give us some
+> > guidance on what to use as LICENSE
+>=20
+> it says "for non-commercial purposes only"
+[Luo Zhenhua-B19537] Does this message mean netperf can't be included in me=
+ta-oe?
+
+> > >
+> > >              Copyright (C) 1993 Hewlett-Packard Company
+> > >                         ALL RIGHTS RESERVED.
+> > >
+> > >  The enclosed software and documentation includes copyrighted works
+> > > of Hewlett-Packard Co. For as long as you comply with the following
+> > > limitations, you are hereby authorized to (i) use, reproduce, and
+> > > modify the software and documentation, and to (ii) distribute the
+> > > software and documentation, including modifications, for
+> > > non-commercial purposes only.
+> > >
+> > >  1.  The enclosed software and documentation is made available at no
+> > >      charge in order to advance the general development of
+> > >      high-performance networking products.
+> > >
+> > >  2.  You may not delete any copyright notices contained in the
+> > >      software or documentation. All hard copies, and copies in
+> > >      source code or object code form, of the software or
+> > >      documentation (including modifications) must contain at least
+> > >      one of the copyright notices.
+> > >
+> > >  3.  The enclosed software and documentation has not been subjected
+> > >      to testing and quality control and is not a Hewlett-Packard Co.
+> > >      product. At a future time, Hewlett-Packard Co. may or may not
+> > >      offer a version of the software and documentation as a product.
+> > >
+> > >  4.  THE SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS".
+> > >      HEWLETT-PACKARD COMPANY DOES NOT WARRANT THAT THE USE,
+> > >      REPRODUCTION, MODIFICATION OR DISTRIBUTION OF THE SOFTWARE OR
+> > >      DOCUMENTATION WILL NOT INFRINGE A THIRD PARTY'S INTELLECTUAL
+> > >      PROPERTY RIGHTS. HP DOES NOT WARRANT THAT THE SOFTWARE OR
+> > >      DOCUMENTATION IS ERROR FREE. HP DISCLAIMS ALL WARRANTIES,
+> > >      EXPRESS AND IMPLIED, WITH REGARD TO THE SOFTWARE AND THE
+> > >      DOCUMENTATION. HP SPECIFICALLY DISCLAIMS ALL WARRANTIES OF
+> > >      MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+> > >
+> > >  5.  HEWLETT-PACKARD COMPANY WILL NOT IN ANY EVENT BE LIABLE FOR ANY
+> > >      DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES
+> > >      (INCLUDING LOST PROFITS) RELATED TO ANY USE, REPRODUCTION,
+> > >      MODIFICATION, OR DISTRIBUTION OF THE SOFTWARE OR DOCUMENTATION.
+
+
+Best Regards,
+
+Zhenhua
+
 
 
