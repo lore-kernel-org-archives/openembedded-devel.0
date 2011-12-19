@@ -1,54 +1,33 @@
-Received: from am1ehsobe003.messaging.microsoft.com ([213.199.154.206]
-	helo=AM1EHSOBE003.bigfish.com)
+Received: from mail-qw0-f54.google.com ([209.85.216.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1RcaEx-0002XK-OL
+	(envelope-from <tom.rini@gmail.com>) id 1RceU1-0001tt-Tq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 11:14:40 +0100
-Received: from mail76-am1-R.bigfish.com (10.3.201.247) by
-	AM1EHSOBE003.bigfish.com (10.3.204.23) with Microsoft SMTP Server id
-	14.1.225.23; Mon, 19 Dec 2011 09:52:28 +0000
-Received: from mail76-am1 (localhost [127.0.0.1])	by mail76-am1-R.bigfish.com
-	(Postfix) with ESMTP id 01962500072;
-	Sat, 12 May 2012 09:52:56 +0000 (UTC)
-X-SpamScore: -10
-X-BigFish: VS-10(zz9371I542M1432N41c5Nzz1202hzz8275dhz2dh2a8h668h839h8e2h8e3h944h286p)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-FB-SS: 13,
-Received: from mail76-am1 (localhost.localdomain [127.0.0.1]) by mail76-am1
-	(MessageSwitch) id 1336816375869612_30679;
-	Sat, 12 May 2012 09:52:55 +0000 (UTC)
-Received: from AM1EHSMHS005.bigfish.com (unknown [10.3.201.245])	by
-	mail76-am1.bigfish.com (Postfix) with ESMTP id C5917480043;
-	Sat, 12 May 2012 09:52:55 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS005.bigfish.com
-	(10.3.207.105) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Mon, 19 Dec 2011 09:52:28 +0000
-Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.213]) by
-	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
-	14.01.0355.003; Mon, 19 Dec 2011 03:52:21 -0600
-From: Luo Zhenhua-B19537 <B19537@freescale.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [PATCH meta-oe 5/9] nerperf: add
-Thread-Index: AQHMu5uU0v7ifXEdrkurJWiJJ/F/5pXefH+A//+y/yCAAGZ4gIAA0hiAgAOHjOA=
-Date: Mon, 19 Dec 2011 09:52:20 +0000
-Message-ID: <CA452391058F6D4E9715FB2C29D9312A010B90B0@039-SN2MPN1-023.039d.mgd.msft.net>
-References: <1324003173-13994-1-git-send-email-b19537@freescale.com>
-	<1324003173-13994-5-git-send-email-b19537@freescale.com>
-	<jcetai$4n1$5@dough.gmane.org>
-	<CA452391058F6D4E9715FB2C29D9312A02CEB8@039-SN2MPN1-022.039d.mgd.msft.net>
-	<44FD6890-C4DA-4A40-B30F-BDADC690C21E@dominion.thruhere.net>
-	<20111216215455.GC28832@sakrah.homelinux.org>
-In-Reply-To: <20111216215455.GC28832@sakrah.homelinux.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.192.208.114]
+	Mon, 19 Dec 2011 15:46:30 +0100
+Received: by qabg14 with SMTP id g14so3607414qab.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Dec 2011 06:39:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=pkUsYqKnuaits/ErwH/Vtl81Cyzsazw8bO0K8TWxPH4=;
+	b=W24ntH/ifEiUh57wnwiwkZPg+H80I83Mlel/YZATzBeHXiKdaXnMxSTLhBeLOcOxyl
+	MA8MSqByfV23M/RQRBQk8gpyv30Q5fiIIW4wYa3VWLA94ZuNQB5ntxmaKaH39e3Ouxv8
+	WhhH4K6q37VtPCeeCr7IN6INjpgZtkuLYveNU=
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH meta-oe 5/9] nerperf: add
+Received: by 10.224.198.10 with SMTP id em10mr24916710qab.44.1324305565972;
+	Mon, 19 Dec 2011 06:39:25 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Mon, 19 Dec 2011 06:39:25 -0800 (PST)
+In-Reply-To: <4EEEE51E.6040306@dresearch-fe.de>
+References: <cover.1323862499.git.sledz@dresearch-fe.de>
+	<CA+M6bXk57+wbvAzkLrZVDPCvhGFLH8A-A3ESNnW_-Yk=TiDfLw@mail.gmail.com>
+	<4EE995AB.5090503@dresearch-fe.de>
+	<4EEEE51E.6040306@dresearch-fe.de>
+Date: Mon, 19 Dec 2011 07:39:25 -0700
+Message-ID: <CA+M6bXn5CCfETj1qctbPyCt5qB4=9em-K2af78x0W6QEA2ZxsQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/5] pull request 20111214
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,82 +41,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 10:14:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 19 Dec 2011 14:46:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hello Khem,=20
+On Mon, Dec 19, 2011 at 12:17 AM, Steffen Sledz <sledz@dresearch-fe.de> wro=
+te:
+> On 15.12.2011 07:37, Steffen Sledz wrote:
+>> Am 14.12.2011 19:07, schrieb Tom Rini:
+>>> On Wed, Dec 14, 2011 at 4:40 AM, Steffen Sledz <sledz@dresearch-fe.de> =
+wrote:
+>>>> Hi Tom,
+>>>>
+>>>> please pull these 5 commits cherry-picked from oe.dev.
+>>>> All of them are bugfixes and tested in our own environment.
+>>>>
+>>>> Thx,
+>>>> Steffen
+>>>>
+>>>> The following changes since commit 9826895e30baa597a5ec433cc0ebd52f5f6=
+c8796:
+>>>>
+>>>> =A0Merge remote-tracking branch 'upstream/2011.03-maintenance' into sl=
+edz/maintenance (2011-12-09 14:06:08 +0100)
+>>>>
+>>>> are available in the git repository at:
+>>>>
+>>>> =A0git://git.openembedded.org/openembedded sledz/maintenance
+>>>> =A0http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Dsledz/m=
+aintenance
+>>>>
+>>>> Stefan Schmidt (2):
+>>>> =A0llvm2.7_2.7: Add patch for build errors on newer gcc / glibc
+>>>> =A0 =A0combinations
+>>>> =A0llvm2.7_2.7.bb: Update patch to use c++ include style.
+>>>>
+>>>> Steffen Sledz (3):
+>>>> =A0live555: replace version 20110314 with 20111120
+>>>> =A0icedtea6-native: fix problem on build hosts with linux kernel 3.x
+>>>> =A0openjdk: fix problem on build hosts with linux kernel 3.x
+>>>
+>>> Only 1 2 and 3 made it to the ML.
+>>
+>> Please have a second look. They all should be there.
+>>
+>>> 1 and 2 are fine. =A0For 3, we should
+>>> grab the old file (someone must have a copy) and stick that on
+>>> sources.openembedded.org.
+>>
+>> The version replacement is not just for the well known live555 download =
+problem. It fixes some other problems too. Also the version introduced by t=
+his patch is already uploaded to sources.openembedded.org and the angstrom =
+mirrors.
+>
+> Ping!
 
-> -----Original Message-----
-> From: Khem Raj [mailto:raj.khem@gmail.com]
-> Sent: Saturday, December 17, 2011 5:55 AM
-> > >>
-> > >>> +++ b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb @@ -0,0
-> > >>> +++ +1,47
-> > >>> @@ +DESCRIPTION=3D"Network performance benchmark including tests fo=
-r
-> > >>> TCP, UDP, sockets, ATM and more." +SECTION =3D "console/network"
-> > >>> +HOMEPAGE =3D "http://www.netperf.org/" +LICENSE =3D "netperf"
-> > >>
-> > >> Can you include a comment on what type of license netperf is? MIT
-> > >> like, BSD like, GPL like?
-> > > [Luo Zhenhua-B19537] May I know which license type should be with fol=
-lowing
-> COPYING content?
-> >
-> > That looks like a BSD or MIT derivative, maybe Beth can give us some
-> > guidance on what to use as LICENSE
->=20
-> it says "for non-commercial purposes only"
-[Luo Zhenhua-B19537] Does this message mean netperf can't be included in me=
-ta-oe?
+Sorry for the delay.  Especially since I'm now going to ask you to
+rebase the branch.  Here's what I get after merging your request:
+$ git log --oneline origin..
+b6cc3be87 Merge branch 'sledz/maintenance' of git://git.openembedded.org/op=
+enemb
+eda1aaf openjdk: fix problem on build hosts with linux kernel 3.x
+4500148 icedtea6-native: fix problem on build hosts with linux kernel 3.x
+cb5b2fb live555: replace version 20110314 with 20111120
+3904feb llvm2.7_2.7.bb: Update patch to use c++ include style.
+a992bc4 llvm2.7_2.7: Add patch for build errors on newer gcc / glibc combin=
+ation
+9826895 Merge remote-tracking branch 'upstream/2011.03-maintenance' into sl=
+edz/m
+ebb70fd gypsy: update to latest upstream version 0.8, and remove version 0.=
+7
+69186cf gypsy: move generic SRC_URI part to gypsy.inc
+7f9e803 gypsy: fix packaging of DBus starter script
+45b8af8 rsyslog: change path for config includes to /etc/rsyslog.d
+77a5200 Revert "gypsy: fix packaging of DBus starter script"
+105f8ae Revert "gypsy: move generic SRC_URI part to gypsy.inc"
+701d1cb Revert "gypsy: update to latest upstream version 0.8, and remove ve=
+rsion
+593bb51 Revert "rsyslog: change path for config includes to /etc/rsyslog.d"
+de3065d gypsy: update to latest upstream version 0.8, and remove version 0.=
+7
+dbb8899 gypsy: move generic SRC_URI part to gypsy.inc
+9bef377 gypsy: fix packaging of DBus starter script
+772286e Merge remote-tracking branch 'upstream/2011.03-maintenance' into sl=
+edz/m
+ef52795 rsyslog: change path for config includes to /etc/rsyslog.d
 
-> > >
-> > >              Copyright (C) 1993 Hewlett-Packard Company
-> > >                         ALL RIGHTS RESERVED.
-> > >
-> > >  The enclosed software and documentation includes copyrighted works
-> > > of Hewlett-Packard Co. For as long as you comply with the following
-> > > limitations, you are hereby authorized to (i) use, reproduce, and
-> > > modify the software and documentation, and to (ii) distribute the
-> > > software and documentation, including modifications, for
-> > > non-commercial purposes only.
-> > >
-> > >  1.  The enclosed software and documentation is made available at no
-> > >      charge in order to advance the general development of
-> > >      high-performance networking products.
-> > >
-> > >  2.  You may not delete any copyright notices contained in the
-> > >      software or documentation. All hard copies, and copies in
-> > >      source code or object code form, of the software or
-> > >      documentation (including modifications) must contain at least
-> > >      one of the copyright notices.
-> > >
-> > >  3.  The enclosed software and documentation has not been subjected
-> > >      to testing and quality control and is not a Hewlett-Packard Co.
-> > >      product. At a future time, Hewlett-Packard Co. may or may not
-> > >      offer a version of the software and documentation as a product.
-> > >
-> > >  4.  THE SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS".
-> > >      HEWLETT-PACKARD COMPANY DOES NOT WARRANT THAT THE USE,
-> > >      REPRODUCTION, MODIFICATION OR DISTRIBUTION OF THE SOFTWARE OR
-> > >      DOCUMENTATION WILL NOT INFRINGE A THIRD PARTY'S INTELLECTUAL
-> > >      PROPERTY RIGHTS. HP DOES NOT WARRANT THAT THE SOFTWARE OR
-> > >      DOCUMENTATION IS ERROR FREE. HP DISCLAIMS ALL WARRANTIES,
-> > >      EXPRESS AND IMPLIED, WITH REGARD TO THE SOFTWARE AND THE
-> > >      DOCUMENTATION. HP SPECIFICALLY DISCLAIMS ALL WARRANTIES OF
-> > >      MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-> > >
-> > >  5.  HEWLETT-PACKARD COMPANY WILL NOT IN ANY EVENT BE LIABLE FOR ANY
-> > >      DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES
-> > >      (INCLUDING LOST PROFITS) RELATED TO ANY USE, REPRODUCTION,
-> > >      MODIFICATION, OR DISTRIBUTION OF THE SOFTWARE OR DOCUMENTATION.
+I'm sure it's all unintentional.
 
-
-Best Regards,
-
-Zhenhua
-
+--=20
+Tom
 
 
