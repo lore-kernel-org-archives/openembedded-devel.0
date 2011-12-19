@@ -1,32 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sylvain.pare@gmail.com>) id 1RcgBk-00058T-O8
+	(envelope-from <sledz@dresearch-fe.de>) id 1RcgFv-0005K3-Ff
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 17:35:45 +0100
-Received: by eeit10 with SMTP id t10so1770484eei.6
+	Mon, 19 Dec 2011 17:40:03 +0100
+Received: by wgbdt12 with SMTP id dt12so8696516wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2011 08:28:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=g/Jch5m7+Nz7Ipe8kFqg1101JKcIOkcz9iUQCTtAYgE=;
-	b=lOnP2kgYLtqYpx2cCupwDNk+zm5AOD42tH+GNxne9yudzeN45nAO3lViM0S1mk7B8G
-	pp6FlfHDl5scyHSFWECmNqMeNUpukVdC27/uga+uhcmeaobBduzcLGKZEcyjD/nmO1Pt
-	9m5kxeI9M1cRNleoSr8CPlrjCMLa0piSueo14=
-Received: by 10.213.32.142 with SMTP id c14mr4962496ebd.77.1324312110739;
-	Mon, 19 Dec 2011 08:28:30 -0800 (PST)
-Received: from localhost.localdomain (qrc29-1-82-245-206-103.fbx.proxad.net.
-	[82.245.206.103])
-	by mx.google.com with ESMTPS id q28sm46389314eea.6.2011.12.19.08.28.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Dec 2011 08:28:29 -0800 (PST)
-From: =?UTF-8?q?Sylvain=20=27GarthPS=27=20Par=C3=A9?= <sylvain.pare@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Dec 2011 17:28:14 +0100
-Message-Id: <1324312094-24426-1-git-send-email-sylvain.pare@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
+	Mon, 19 Dec 2011 08:33:01 -0800 (PST)
+Received: by 10.216.135.150 with SMTP id u22mr7232873wei.35.1324312380604;
+	Mon, 19 Dec 2011 08:33:00 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id hq5sm26487161wib.7.2011.12.19.08.32.59
+	(version=SSLv3 cipher=OTHER); Mon, 19 Dec 2011 08:33:00 -0800 (PST)
+Message-ID: <4EEF673A.6050200@dresearch-fe.de>
+Date: Mon, 19 Dec 2011 17:32:58 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
 MIME-Version: 1.0
-Subject: [[meta-oe]] vlc: re-add dropped depends as they are available now and add libxpm as dependency as current vlc's config depends on it.
+To: Tom Rini <tom.rini@gmail.com>
+References: <cover.1323862499.git.sledz@dresearch-fe.de>
+	<CA+M6bXk57+wbvAzkLrZVDPCvhGFLH8A-A3ESNnW_-Yk=TiDfLw@mail.gmail.com>
+	<4EE995AB.5090503@dresearch-fe.de>
+	<4EEEE51E.6040306@dresearch-fe.de>
+	<CA+M6bXn5CCfETj1qctbPyCt5qB4=9em-K2af78x0W6QEA2ZxsQ@mail.gmail.com>
+	<4EEF56B3.7000909@dresearch-fe.de>
+	<CA+M6bXk5AmQAvFDUG4WRGnBUCGwSYqvheS3xGWJeH42_+5410g@mail.gmail.com>
+In-Reply-To: <CA+M6bXk5AmQAvFDUG4WRGnBUCGwSYqvheS3xGWJeH42_+5410g@mail.gmail.com>
+X-Enigmail-Version: 1.3.4
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/5] pull request 20111214
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +43,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 16:35:45 -0000
+X-List-Received-Date: Mon, 19 Dec 2011 16:40:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Sylvain 'GarthPS' Paré <sylvain.pare@gmail.com>
----
- meta-oe/recipes-multimedia/vlc/vlc.inc |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+On 19.12.2011 16:28, Tom Rini wrote:
+> On Mon, Dec 19, 2011 at 8:22 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>> On 19.12.2011 15:39, Tom Rini wrote:
+>>> On Mon, Dec 19, 2011 at 12:17 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>>> On 15.12.2011 07:37, Steffen Sledz wrote:
+>>>>> Am 14.12.2011 19:07, schrieb Tom Rini:
+>>>>>> On Wed, Dec 14, 2011 at 4:40 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>>>>>> Hi Tom,
+>>>>>>>
+>>>>>>> please pull these 5 commits cherry-picked from oe.dev.
+>>>>>>> All of them are bugfixes and tested in our own environment.
+>>>>>>>
+>>>>>>> Thx,
+>>>>>>> Steffen
+>>>>>>>
+>>>>>>> The following changes since commit 9826895e30baa597a5ec433cc0ebd52f5f6c8796:
+>>>>>>>
+>>>>>>>  Merge remote-tracking branch 'upstream/2011.03-maintenance' into sledz/maintenance (2011-12-09 14:06:08 +0100)
+>>>>>>>
+>>>>>>> are available in the git repository at:
+>>>>>>>
+>>>>>>>  git://git.openembedded.org/openembedded sledz/maintenance
+>>>>>>>  http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=sledz/maintenance
+>>>>>>>
+>>>>>>> Stefan Schmidt (2):
+>>>>>>>  llvm2.7_2.7: Add patch for build errors on newer gcc / glibc
+>>>>>>>    combinations
+>>>>>>>  llvm2.7_2.7.bb: Update patch to use c++ include style.
+>>>>>>>
+>>>>>>> Steffen Sledz (3):
+>>>>>>>  live555: replace version 20110314 with 20111120
+>>>>>>>  icedtea6-native: fix problem on build hosts with linux kernel 3.x
+>>>>>>>  openjdk: fix problem on build hosts with linux kernel 3.x
+>>>>>>
+>>>>>> Only 1 2 and 3 made it to the ML.
+>>>>>
+>>>>> Please have a second look. They all should be there.
+>>>>>
+>>>>>> 1 and 2 are fine.  For 3, we should
+>>>>>> grab the old file (someone must have a copy) and stick that on
+>>>>>> sources.openembedded.org.
+>>>>>
+>>>>> The version replacement is not just for the well known live555 download problem. It fixes some other problems too. Also the version introduced by this patch is already uploaded to sources.openembedded.org and the angstrom mirrors.
+>>>>
+>>>> Ping!
+>>>
+>>> Sorry for the delay.  Especially since I'm now going to ask you to
+>>> rebase the branch.  Here's what I get after merging your request:
+>>> $ git log --oneline origin..
+>>> b6cc3be87 Merge branch 'sledz/maintenance' of git://git.openembedded.org/openemb
+>>> eda1aaf openjdk: fix problem on build hosts with linux kernel 3.x
+>>> 4500148 icedtea6-native: fix problem on build hosts with linux kernel 3.x
+>>> cb5b2fb live555: replace version 20110314 with 20111120
+>>> 3904feb llvm2.7_2.7.bb: Update patch to use c++ include style.
+>>> a992bc4 llvm2.7_2.7: Add patch for build errors on newer gcc / glibc combination
+>>> 9826895 Merge remote-tracking branch 'upstream/2011.03-maintenance' into sledz/m
+>>> ebb70fd gypsy: update to latest upstream version 0.8, and remove version 0.7
+>>> 69186cf gypsy: move generic SRC_URI part to gypsy.inc
+>>> 7f9e803 gypsy: fix packaging of DBus starter script
+>>> 45b8af8 rsyslog: change path for config includes to /etc/rsyslog.d
+>>> 77a5200 Revert "gypsy: fix packaging of DBus starter script"
+>>> 105f8ae Revert "gypsy: move generic SRC_URI part to gypsy.inc"
+>>> 701d1cb Revert "gypsy: update to latest upstream version 0.8, and remove version
+>>> 593bb51 Revert "rsyslog: change path for config includes to /etc/rsyslog.d"
+>>> de3065d gypsy: update to latest upstream version 0.8, and remove version 0.7
+>>> dbb8899 gypsy: move generic SRC_URI part to gypsy.inc
+>>> 9bef377 gypsy: fix packaging of DBus starter script
+>>> 772286e Merge remote-tracking branch 'upstream/2011.03-maintenance' into sledz/m
+>>> ef52795 rsyslog: change path for config includes to /etc/rsyslog.d
+>>>
+>>> I'm sure it's all unintentional.
+>>
+>> The pull request contains the last five commits only ("The following changes since commit 9826895e30baa597a5ec433cc0ebd52f5f6c8796").
+>>
+>> Maybe i need some help in using git here. How should i prepare my branch to fulfil your requirements?
+> 
+> Are others using your branch?  If not, git push <name of your writable
+> OE remote> :sledz/maintenance to delete your current branch, git
+> rebase -i origin/2011.03-maintenance (and remove the commits you no
+> longer want) then git push <name of writeable OE remote>
+> local-branch:sledz/maintenance.
 
-diff --git a/meta-oe/recipes-multimedia/vlc/vlc.inc b/meta-oe/recipes-multimedia/vlc/vlc.inc
-index aecfb3a..375e42e 100644
---- a/meta-oe/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-oe/recipes-multimedia/vlc/vlc.inc
-@@ -4,8 +4,7 @@ LICENSE = "GPLv2"
- SECTION = "multimedia"
- 
- DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
--"
--#           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
-+           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
- 
- SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
- 
-@@ -13,7 +12,7 @@ inherit autotools gettext
- 
- ARM_INSTRUCTION_SET = "arm"
- 
--DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1"
-+DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1 libxpm"
- 
- LEAD_SONAME = "libvlc.so.5"
- 
+Sorry, but i need some more guidance here. Everytime i think i made it another problem drives me crazy. :(
+
+Assuming i've a fresh local clone created with
+
+  git clone git@git.openembedded.org:openembedded
+
+What are the exact next stepts?
+
+I tried
+
+  git checkout sledz/maintenance
+  git rebase -i origin/2011.03-maintenance    # unwanted commits removed
+  git push origin sledz/maintenance
+
+The last results in
+
+  To git@git.openembedded.org:openembedded
+   ! [rejected]        sledz/maintenance -> sledz/maintenance (non-fast-forward)
+  error: failed to push some refs to 'git@git.openembedded.org:openembedded'
+  To prevent you from losing history, non-fast-forward updates were rejected
+  Merge the remote changes (e.g. 'git pull') before pushing again.  See the
+  'Note about fast-forwards' section of 'git push --help' for details.
+
+> If others are using your branch, skip
+> the first step and for the second step do a git checkout -b clean-push
+> origin/sledz/maintenance, then do the rebase in that branch and push
+> to sledz/pull-request-some-date-spec
+
 -- 
-1.7.5.4
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
