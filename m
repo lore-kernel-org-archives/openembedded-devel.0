@@ -1,33 +1,37 @@
-Received: from masterfoo.zenlinux.com ([207.192.74.254])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgarman@zenlinux.com>) id 1Rcggb-0006GX-OG
+	(envelope-from <tom.rini@gmail.com>) id 1RchJi-0001Wr-Hx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 18:07:37 +0100
-Received: from [192.168.1.12] (c-76-115-40-64.hsd1.or.comcast.net
-	[76.115.40.64])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 012922FF36
+	Mon, 19 Dec 2011 18:48:02 +0100
+Received: by qadb17 with SMTP id b17so2623036qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2011 11:27:56 -0500 (EST)
-Message-ID: <4EEF6617.3070004@zenlinux.com>
-Date: Mon, 19 Dec 2011 08:28:07 -0800
-From: Scott Garman <sgarman@zenlinux.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111124 Thunderbird/8.0
+	Mon, 19 Dec 2011 09:40:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=28SLAWRZzn48dqaWRzKDGJo4ixXNGRAhnsFsd31QkhU=;
+	b=qTpJVkFH2cEi+FfRc/4JDwed+M+z+nb6o7Zl3Nhb4qtYQ/FnXjOZBBziVef1qLvP4k
+	5O9pKcf2W7Gvc1czj2qIC++QsmF4CtXR1VBz59BKWl/i91u9lkmyHUcjbqHu4rFmqKuQ
+	Mq2/kgmNunlCnc3gkv7gWLABUxYnMxUCoLb/k=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20111219093447.C6DBE10331@opal>
-	<201112191054.57179.schnitzeltony@gmx.de>
-In-Reply-To: <201112191054.57179.schnitzeltony@gmx.de>
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: 012922FF36.87B68
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-SpamCheck: not spam
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-Spam-Status: No
-Subject: Re: [oe-commits] Scott Garman : Add missing SUMMARY fields to various recipes
+Received: by 10.224.107.200 with SMTP id c8mr26454469qap.18.1324316459209;
+	Mon, 19 Dec 2011 09:40:59 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Mon, 19 Dec 2011 09:40:59 -0800 (PST)
+In-Reply-To: <4EEF673A.6050200@dresearch-fe.de>
+References: <cover.1323862499.git.sledz@dresearch-fe.de>
+	<CA+M6bXk57+wbvAzkLrZVDPCvhGFLH8A-A3ESNnW_-Yk=TiDfLw@mail.gmail.com>
+	<4EE995AB.5090503@dresearch-fe.de>
+	<4EEEE51E.6040306@dresearch-fe.de>
+	<CA+M6bXn5CCfETj1qctbPyCt5qB4=9em-K2af78x0W6QEA2ZxsQ@mail.gmail.com>
+	<4EEF56B3.7000909@dresearch-fe.de>
+	<CA+M6bXk5AmQAvFDUG4WRGnBUCGwSYqvheS3xGWJeH42_+5410g@mail.gmail.com>
+	<4EEF673A.6050200@dresearch-fe.de>
+Date: Mon, 19 Dec 2011 10:40:59 -0700
+Message-ID: <CA+M6bXmi_v8eG0gFooZ2JyOpVfk1XzXSH4RCQyBm3LtJjvKdqQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/5] pull request 20111214
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,148 +45,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 17:07:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 19 Dec 2011 17:48:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On 12/19/2011 01:54 AM, Andreas M=FCller wrote:
-> On Monday, December 19, 2011 10:34:47 AM git@git.openembedded.org wrote=
-:
->> Module: openembedded-core.git
->> Branch: master
->> Commit: e8c194a627e091ef9da3b7fa83ea3897bd283d9e
->> URL:
->> http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit;h=3D=
-e8c194a627
->> e091ef9da3b7fa83ea3897bd283d9e
+On Mon, Dec 19, 2011 at 9:32 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
+e:
+> On 19.12.2011 16:28, Tom Rini wrote:
+>> On Mon, Dec 19, 2011 at 8:22 AM, Steffen Sledz <sledz@dresearch-fe.de> w=
+rote:
+>>> On 19.12.2011 15:39, Tom Rini wrote:
+>>>> On Mon, Dec 19, 2011 at 12:17 AM, Steffen Sledz <sledz@dresearch-fe.de=
+> wrote:
+>>>>> On 15.12.2011 07:37, Steffen Sledz wrote:
+>>>>>> Am 14.12.2011 19:07, schrieb Tom Rini:
+>>>>>>> On Wed, Dec 14, 2011 at 4:40 AM, Steffen Sledz <sledz@dresearch-fe.=
+de> wrote:
+>>>>>>>> Hi Tom,
+>>>>>>>>
+>>>>>>>> please pull these 5 commits cherry-picked from oe.dev.
+>>>>>>>> All of them are bugfixes and tested in our own environment.
+>>>>>>>>
+>>>>>>>> Thx,
+>>>>>>>> Steffen
+>>>>>>>>
+>>>>>>>> The following changes since commit 9826895e30baa597a5ec433cc0ebd52=
+f5f6c8796:
+>>>>>>>>
+>>>>>>>> =A0Merge remote-tracking branch 'upstream/2011.03-maintenance' int=
+o sledz/maintenance (2011-12-09 14:06:08 +0100)
+>>>>>>>>
+>>>>>>>> are available in the git repository at:
+>>>>>>>>
+>>>>>>>> =A0git://git.openembedded.org/openembedded sledz/maintenance
+>>>>>>>> =A0http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Dsle=
+dz/maintenance
+>>>>>>>>
+>>>>>>>> Stefan Schmidt (2):
+>>>>>>>> =A0llvm2.7_2.7: Add patch for build errors on newer gcc / glibc
+>>>>>>>> =A0 =A0combinations
+>>>>>>>> =A0llvm2.7_2.7.bb: Update patch to use c++ include style.
+>>>>>>>>
+>>>>>>>> Steffen Sledz (3):
+>>>>>>>> =A0live555: replace version 20110314 with 20111120
+>>>>>>>> =A0icedtea6-native: fix problem on build hosts with linux kernel 3=
+.x
+>>>>>>>> =A0openjdk: fix problem on build hosts with linux kernel 3.x
+>>>>>>>
+>>>>>>> Only 1 2 and 3 made it to the ML.
+>>>>>>
+>>>>>> Please have a second look. They all should be there.
+>>>>>>
+>>>>>>> 1 and 2 are fine. =A0For 3, we should
+>>>>>>> grab the old file (someone must have a copy) and stick that on
+>>>>>>> sources.openembedded.org.
+>>>>>>
+>>>>>> The version replacement is not just for the well known live555 downl=
+oad problem. It fixes some other problems too. Also the version introduced =
+by this patch is already uploaded to sources.openembedded.org and the angst=
+rom mirrors.
+>>>>>
+>>>>> Ping!
+>>>>
+>>>> Sorry for the delay. =A0Especially since I'm now going to ask you to
+>>>> rebase the branch. =A0Here's what I get after merging your request:
+>>>> $ git log --oneline origin..
+>>>> b6cc3be87 Merge branch 'sledz/maintenance' of git://git.openembedded.o=
+rg/openemb
+>>>> eda1aaf openjdk: fix problem on build hosts with linux kernel 3.x
+>>>> 4500148 icedtea6-native: fix problem on build hosts with linux kernel =
+3.x
+>>>> cb5b2fb live555: replace version 20110314 with 20111120
+>>>> 3904feb llvm2.7_2.7.bb: Update patch to use c++ include style.
+>>>> a992bc4 llvm2.7_2.7: Add patch for build errors on newer gcc / glibc c=
+ombination
+>>>> 9826895 Merge remote-tracking branch 'upstream/2011.03-maintenance' in=
+to sledz/m
+>>>> ebb70fd gypsy: update to latest upstream version 0.8, and remove versi=
+on 0.7
+>>>> 69186cf gypsy: move generic SRC_URI part to gypsy.inc
+>>>> 7f9e803 gypsy: fix packaging of DBus starter script
+>>>> 45b8af8 rsyslog: change path for config includes to /etc/rsyslog.d
+>>>> 77a5200 Revert "gypsy: fix packaging of DBus starter script"
+>>>> 105f8ae Revert "gypsy: move generic SRC_URI part to gypsy.inc"
+>>>> 701d1cb Revert "gypsy: update to latest upstream version 0.8, and remo=
+ve version
+>>>> 593bb51 Revert "rsyslog: change path for config includes to /etc/rsysl=
+og.d"
+>>>> de3065d gypsy: update to latest upstream version 0.8, and remove versi=
+on 0.7
+>>>> dbb8899 gypsy: move generic SRC_URI part to gypsy.inc
+>>>> 9bef377 gypsy: fix packaging of DBus starter script
+>>>> 772286e Merge remote-tracking branch 'upstream/2011.03-maintenance' in=
+to sledz/m
+>>>> ef52795 rsyslog: change path for config includes to /etc/rsyslog.d
+>>>>
+>>>> I'm sure it's all unintentional.
+>>>
+>>> The pull request contains the last five commits only ("The following ch=
+anges since commit 9826895e30baa597a5ec433cc0ebd52f5f6c8796").
+>>>
+>>> Maybe i need some help in using git here. How should i prepare my branc=
+h to fulfil your requirements?
 >>
->> Author: Scott Garman<scott.a.garman@intel.com>
->> Date:   Sun Dec 18 15:06:57 2011 -0800
->>
->> Add missing SUMMARY fields to various recipes
->>
->> This adds the SUMMARY field to the following recipes which were
->> missing it:
->>
->> * dosfstools
->> * grep
->> * icu
->> * libevent
->> * libnfsidmap
->> * qemu-helper-nativesdk
->>
->> Signed-off-by: Scott Garman<scott.a.garman@intel.com>
->> Signed-off-by: Richard Purdie<richard.purdie@linuxfoundation.org>
->>
->> ---
->>
->>   .../nfs-utils/libnfsidmap_0.24.bb                  |    3 ++-
->>   .../recipes-devtools/dosfstools/dosfstools_2.11.bb |    2 +-
->>   .../qemu/qemu-helper-nativesdk_1.0.bb              |    3 ++-
->>   meta/recipes-extended/grep/grep_2.9.bb             |    1 +
->>   meta/recipes-support/icu/icu-3.6.inc               |    1 +
->>   meta/recipes-support/libevent/libevent_1.4.14b.bb  |    3 ++-
->>   6 files changed, 9 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
->> b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb index
->> 101ecab..eff75ec 100644
->> --- a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
->> +++ b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
->> @@ -1,4 +1,5 @@
->> -DESCRIPTION =3D "nfs idmapping library"
->> +SUMMARY =3D "NFS id mapping library"
->> +DESCRIPTION =3D "NFS id mapping library"
->>   HOMEPAGE =3D "http://www.citi.umich.edu/projects/nfsv4/linux/"
->>   SECTION =3D "libs"
->>
->> diff --git a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
->> b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb index
->> ec75ac9..eca54f1 100644
->> --- a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
->> +++ b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
->> @@ -1,7 +1,7 @@
->>   # dosfstools OE build file
->>   # Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights
->> Reserved # Released under the MIT license (see packages/COPYING)
->> -
->> +SUMMARY =3D "DOS FAT Filesystem Utilities"
->>   DESCRIPTION =3D "DOS FAT Filesystem Utilities"
->>
->>   SECTION =3D "base"
->> diff --git a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
->> b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb index
->> a3dca3d..df0cae0 100644
->> --- a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
->> +++ b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
->> @@ -1,4 +1,5 @@
->> -DESCRIPTION =3D "Qemu helper scripts from Poky"
->> +SUMMARY =3D "Qemu helper scripts"
->> +DESCRIPTION =3D "Qemu helper scripts"
->>   LICENSE =3D "GPLv2"
->>   RDEPENDS_${PN} =3D "qemu-nativesdk"
->>   PR =3D "r9"
->> diff --git a/meta/recipes-extended/grep/grep_2.9.bb
->> b/meta/recipes-extended/grep/grep_2.9.bb index 08ac527..9099bed 100644
->> --- a/meta/recipes-extended/grep/grep_2.9.bb
->> +++ b/meta/recipes-extended/grep/grep_2.9.bb
->> @@ -1,3 +1,4 @@
->> +SUMMARY =3D "GNU grep utility"
->>   DESCRIPTION =3D "GNU grep utility"
->>   HOMEPAGE =3D "http://savannah.gnu.org/projects/grep/"
->>   BUGTRACKER =3D "http://savannah.gnu.org/bugs/?group=3Dgrep"
->> diff --git a/meta/recipes-support/icu/icu-3.6.inc
->> b/meta/recipes-support/icu/icu-3.6.inc index 8fadc92..e3f9dd2 100644
->> --- a/meta/recipes-support/icu/icu-3.6.inc
->> +++ b/meta/recipes-support/icu/icu-3.6.inc
->> @@ -1,3 +1,4 @@
->> +SUMMARY =3D "International Component for Unicode libraries"
->>   DESCRIPTION =3D "The International Component for Unicode (ICU) is a =
-mature,
->> portable set of C/C++ and Java libraries for Unicode support, software
->> internationalization (I18N) and globalization (G11N), giving applicati=
-ons
->> the same results on all platforms." HOMEPAGE =3D
->> "http://www-01.ibm.com/software/globalization/icu/index.jsp"
->>
->> diff --git a/meta/recipes-support/libevent/libevent_1.4.14b.bb
->> b/meta/recipes-support/libevent/libevent_1.4.14b.bb index 1a369b5..364=
-68dc
->> 100644
->> --- a/meta/recipes-support/libevent/libevent_1.4.14b.bb
->> +++ b/meta/recipes-support/libevent/libevent_1.4.14b.bb
->> @@ -1,4 +1,5 @@
->> -DESCRIPTION =3D "an asynchronous event notification library"
->> +SUMMARY =3D "An asynchronous event notification library"
->> +DESCRIPTION =3D "An asynchronous event notification library"
->>   HOMEPAGE =3D "http://www.monkey.org/~provos/libevent/"
->>   SECTION =3D "libs"
->>
-> What is the value in creating redundancies by copying DESRCIPTION to SU=
-MMARY?
+>> Are others using your branch? =A0If not, git push <name of your writable
+>> OE remote> :sledz/maintenance to delete your current branch, git
+>> rebase -i origin/2011.03-maintenance (and remove the commits you no
+>> longer want) then git push <name of writeable OE remote>
+>> local-branch:sledz/maintenance.
+>
+> Sorry, but i need some more guidance here. Everytime i think i made it an=
+other problem drives me crazy. :(
+>
+> Assuming i've a fresh local clone created with
+>
+> =A0git clone git@git.openembedded.org:openembedded
+>
+> What are the exact next stepts?
+>
+> I tried
+>
+> =A0git checkout sledz/maintenance
+> =A0git rebase -i origin/2011.03-maintenance =A0 =A0# unwanted commits rem=
+oved
+> =A0git push origin sledz/maintenance
+>
+> The last results in
+>
+> =A0To git@git.openembedded.org:openembedded
+> =A0 ! [rejected] =A0 =A0 =A0 =A0sledz/maintenance -> sledz/maintenance (n=
+on-fast-forward)
+> =A0error: failed to push some refs to 'git@git.openembedded.org:openembed=
+ded'
+> =A0To prevent you from losing history, non-fast-forward updates were reje=
+cted
+> =A0Merge the remote changes (e.g. 'git pull') before pushing again. =A0Se=
+e the
+> =A0'Note about fast-forwards' section of 'git push --help' for details.
 
-Hi Andreas,
+You either need to do the git push
+git@git.openembedded.org:openembedded :sledz/maintenance (to delete
+the old one) and if that fails (it used to be that only admins could
+delete branches, just push instead to sledz/pull-request-19dec2011 or
+so :)
 
-I did this because SUMMARY is a required field by the HOB UI. This was=20
-requested by Shane Wang on the oe-core ML:
-
-http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/0146=
-00.html
-
-For recipes which have short descriptions, there was little sense in=20
-summarizing them further, so I duplicated the DESCRIPTION field. Above=20
-you can also see an example (in the icu recipe) were I did summarize a=20
-long DESCRIPTION field.
-
-Mark Hatle replied to this thread explaining why we previously allowed=20
-SUMMARY to be an optional field and how it automatically inherited from=20
-DESCRIPTION.
-
-Let me know if you have further questions.
-
-Regards,
-
-Scott
-
+--=20
+Tom
 
 
