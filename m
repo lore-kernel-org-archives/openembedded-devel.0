@@ -1,37 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RchJi-0001Wr-Hx
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 18:48:02 +0100
-Received: by qadb17 with SMTP id b17so2623036qad.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RciAe-0003eK-JT for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Dec 2011 19:42:44 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rci3r-0006K0-KY for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Dec 2011 19:35:43 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Dec 2011 19:35:43 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2011 09:40:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=28SLAWRZzn48dqaWRzKDGJo4ixXNGRAhnsFsd31QkhU=;
-	b=qTpJVkFH2cEi+FfRc/4JDwed+M+z+nb6o7Zl3Nhb4qtYQ/FnXjOZBBziVef1qLvP4k
-	5O9pKcf2W7Gvc1czj2qIC++QsmF4CtXR1VBz59BKWl/i91u9lkmyHUcjbqHu4rFmqKuQ
-	Mq2/kgmNunlCnc3gkv7gWLABUxYnMxUCoLb/k=
-MIME-Version: 1.0
-Received: by 10.224.107.200 with SMTP id c8mr26454469qap.18.1324316459209;
-	Mon, 19 Dec 2011 09:40:59 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Mon, 19 Dec 2011 09:40:59 -0800 (PST)
-In-Reply-To: <4EEF673A.6050200@dresearch-fe.de>
-References: <cover.1323862499.git.sledz@dresearch-fe.de>
-	<CA+M6bXk57+wbvAzkLrZVDPCvhGFLH8A-A3ESNnW_-Yk=TiDfLw@mail.gmail.com>
-	<4EE995AB.5090503@dresearch-fe.de>
-	<4EEEE51E.6040306@dresearch-fe.de>
-	<CA+M6bXn5CCfETj1qctbPyCt5qB4=9em-K2af78x0W6QEA2ZxsQ@mail.gmail.com>
-	<4EEF56B3.7000909@dresearch-fe.de>
-	<CA+M6bXk5AmQAvFDUG4WRGnBUCGwSYqvheS3xGWJeH42_+5410g@mail.gmail.com>
-	<4EEF673A.6050200@dresearch-fe.de>
-Date: Mon, 19 Dec 2011 10:40:59 -0700
-Message-ID: <CA+M6bXmi_v8eG0gFooZ2JyOpVfk1XzXSH4RCQyBm3LtJjvKdqQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/5] pull request 20111214
+	Mon, 19 Dec 2011 19:35:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Dec 2011 19:35:27 +0100
+Message-ID: <jco05e$tt9$1@dough.gmane.org>
+References: <1324312094-24426-1-git-send-email-sylvain.pare@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1324312094-24426-1-git-send-email-sylvain.pare@gmail.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [[meta-oe]] vlc: re-add dropped depends as they are available now and add libxpm as dependency as current vlc's config depends on it.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,151 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 17:48:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Dec 2011 18:42:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Dec 19, 2011 at 9:32 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
-e:
-> On 19.12.2011 16:28, Tom Rini wrote:
->> On Mon, Dec 19, 2011 at 8:22 AM, Steffen Sledz <sledz@dresearch-fe.de> w=
-rote:
->>> On 19.12.2011 15:39, Tom Rini wrote:
->>>> On Mon, Dec 19, 2011 at 12:17 AM, Steffen Sledz <sledz@dresearch-fe.de=
-> wrote:
->>>>> On 15.12.2011 07:37, Steffen Sledz wrote:
->>>>>> Am 14.12.2011 19:07, schrieb Tom Rini:
->>>>>>> On Wed, Dec 14, 2011 at 4:40 AM, Steffen Sledz <sledz@dresearch-fe.=
-de> wrote:
->>>>>>>> Hi Tom,
->>>>>>>>
->>>>>>>> please pull these 5 commits cherry-picked from oe.dev.
->>>>>>>> All of them are bugfixes and tested in our own environment.
->>>>>>>>
->>>>>>>> Thx,
->>>>>>>> Steffen
->>>>>>>>
->>>>>>>> The following changes since commit 9826895e30baa597a5ec433cc0ebd52=
-f5f6c8796:
->>>>>>>>
->>>>>>>> =A0Merge remote-tracking branch 'upstream/2011.03-maintenance' int=
-o sledz/maintenance (2011-12-09 14:06:08 +0100)
->>>>>>>>
->>>>>>>> are available in the git repository at:
->>>>>>>>
->>>>>>>> =A0git://git.openembedded.org/openembedded sledz/maintenance
->>>>>>>> =A0http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Dsle=
-dz/maintenance
->>>>>>>>
->>>>>>>> Stefan Schmidt (2):
->>>>>>>> =A0llvm2.7_2.7: Add patch for build errors on newer gcc / glibc
->>>>>>>> =A0 =A0combinations
->>>>>>>> =A0llvm2.7_2.7.bb: Update patch to use c++ include style.
->>>>>>>>
->>>>>>>> Steffen Sledz (3):
->>>>>>>> =A0live555: replace version 20110314 with 20111120
->>>>>>>> =A0icedtea6-native: fix problem on build hosts with linux kernel 3=
-.x
->>>>>>>> =A0openjdk: fix problem on build hosts with linux kernel 3.x
->>>>>>>
->>>>>>> Only 1 2 and 3 made it to the ML.
->>>>>>
->>>>>> Please have a second look. They all should be there.
->>>>>>
->>>>>>> 1 and 2 are fine. =A0For 3, we should
->>>>>>> grab the old file (someone must have a copy) and stick that on
->>>>>>> sources.openembedded.org.
->>>>>>
->>>>>> The version replacement is not just for the well known live555 downl=
-oad problem. It fixes some other problems too. Also the version introduced =
-by this patch is already uploaded to sources.openembedded.org and the angst=
-rom mirrors.
->>>>>
->>>>> Ping!
->>>>
->>>> Sorry for the delay. =A0Especially since I'm now going to ask you to
->>>> rebase the branch. =A0Here's what I get after merging your request:
->>>> $ git log --oneline origin..
->>>> b6cc3be87 Merge branch 'sledz/maintenance' of git://git.openembedded.o=
-rg/openemb
->>>> eda1aaf openjdk: fix problem on build hosts with linux kernel 3.x
->>>> 4500148 icedtea6-native: fix problem on build hosts with linux kernel =
-3.x
->>>> cb5b2fb live555: replace version 20110314 with 20111120
->>>> 3904feb llvm2.7_2.7.bb: Update patch to use c++ include style.
->>>> a992bc4 llvm2.7_2.7: Add patch for build errors on newer gcc / glibc c=
-ombination
->>>> 9826895 Merge remote-tracking branch 'upstream/2011.03-maintenance' in=
-to sledz/m
->>>> ebb70fd gypsy: update to latest upstream version 0.8, and remove versi=
-on 0.7
->>>> 69186cf gypsy: move generic SRC_URI part to gypsy.inc
->>>> 7f9e803 gypsy: fix packaging of DBus starter script
->>>> 45b8af8 rsyslog: change path for config includes to /etc/rsyslog.d
->>>> 77a5200 Revert "gypsy: fix packaging of DBus starter script"
->>>> 105f8ae Revert "gypsy: move generic SRC_URI part to gypsy.inc"
->>>> 701d1cb Revert "gypsy: update to latest upstream version 0.8, and remo=
-ve version
->>>> 593bb51 Revert "rsyslog: change path for config includes to /etc/rsysl=
-og.d"
->>>> de3065d gypsy: update to latest upstream version 0.8, and remove versi=
-on 0.7
->>>> dbb8899 gypsy: move generic SRC_URI part to gypsy.inc
->>>> 9bef377 gypsy: fix packaging of DBus starter script
->>>> 772286e Merge remote-tracking branch 'upstream/2011.03-maintenance' in=
-to sledz/m
->>>> ef52795 rsyslog: change path for config includes to /etc/rsyslog.d
->>>>
->>>> I'm sure it's all unintentional.
->>>
->>> The pull request contains the last five commits only ("The following ch=
-anges since commit 9826895e30baa597a5ec433cc0ebd52f5f6c8796").
->>>
->>> Maybe i need some help in using git here. How should i prepare my branc=
-h to fulfil your requirements?
->>
->> Are others using your branch? =A0If not, git push <name of your writable
->> OE remote> :sledz/maintenance to delete your current branch, git
->> rebase -i origin/2011.03-maintenance (and remove the commits you no
->> longer want) then git push <name of writeable OE remote>
->> local-branch:sledz/maintenance.
->
-> Sorry, but i need some more guidance here. Everytime i think i made it an=
-other problem drives me crazy. :(
->
-> Assuming i've a fresh local clone created with
->
-> =A0git clone git@git.openembedded.org:openembedded
->
-> What are the exact next stepts?
->
-> I tried
->
-> =A0git checkout sledz/maintenance
-> =A0git rebase -i origin/2011.03-maintenance =A0 =A0# unwanted commits rem=
-oved
-> =A0git push origin sledz/maintenance
->
-> The last results in
->
-> =A0To git@git.openembedded.org:openembedded
-> =A0 ! [rejected] =A0 =A0 =A0 =A0sledz/maintenance -> sledz/maintenance (n=
-on-fast-forward)
-> =A0error: failed to push some refs to 'git@git.openembedded.org:openembed=
-ded'
-> =A0To prevent you from losing history, non-fast-forward updates were reje=
-cted
-> =A0Merge the remote changes (e.g. 'git pull') before pushing again. =A0Se=
-e the
-> =A0'Note about fast-forwards' section of 'git push --help' for details.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-You either need to do the git push
-git@git.openembedded.org:openembedded :sledz/maintenance (to delete
-the old one) and if that fails (it used to be that only admins could
-delete branches, just push instead to sledz/pull-request-19dec2011 or
-so :)
+Op 19-12-11 17:28, Sylvain 'GarthPS' Paré schreef:
+> Signed-off-by: Sylvain 'GarthPS' Paré <sylvain.pare@gmail.com> --- 
+> meta-oe/recipes-multimedia/vlc/vlc.inc |    5 ++--- 1 files changed, 2
+> insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-multimedia/vlc/vlc.inc
+> b/meta-oe/recipes-multimedia/vlc/vlc.inc index aecfb3a..375e42e 100644 
+> --- a/meta-oe/recipes-multimedia/vlc/vlc.inc +++
+> b/meta-oe/recipes-multimedia/vlc/vlc.inc @@ -4,8 +4,7 @@ LICENSE =
+> "GPLv2" SECTION = "multimedia"
+> 
+> DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl
+> qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \ -" -#
+> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag
+> liba52 mpeg2dec', d)}" +
+> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag
+> liba52 mpeg2dec', d)}"
+> 
+> SRC_URI =
+> "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+> 
+> @@ -13,7 +12,7 @@ inherit autotools gettext
+> 
+> ARM_INSTRUCTION_SET = "arm"
+> 
+> -DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1" +DEPENDS +=
+> "libdvdcss libdvdread lua5.1-native lua5.1 libxpm"
+> 
+> LEAD_SONAME = "libvlc.so.5"
+> 
 
---=20
-Tom
+Missing PR bump
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7vg+8ACgkQMkyGM64RGpFwmACgsufoFQDWp5Z6G+WUzWBeY8Yo
+Z9EAn0JPLjlqRnmiFcH/mGy40iU+JyjR
+=I5gy
+-----END PGP SIGNATURE-----
+
 
 
