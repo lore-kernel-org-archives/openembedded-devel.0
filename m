@@ -1,31 +1,25 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1RcXag-00063x-1z
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Rca2b-00026m-3N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Dec 2011 08:24:54 +0100
-Received: by wibhq7 with SMTP id hq7so842810wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2011 23:17:51 -0800 (PST)
-Received: by 10.180.7.198 with SMTP id l6mr25445316wia.3.1324279071699;
-	Sun, 18 Dec 2011 23:17:51 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id dw6sm24533096wib.12.2011.12.18.23.17.50
-	(version=SSLv3 cipher=OTHER); Sun, 18 Dec 2011 23:17:50 -0800 (PST)
-Message-ID: <4EEEE51E.6040306@dresearch-fe.de>
-Date: Mon, 19 Dec 2011 08:17:50 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
+	Mon, 19 Dec 2011 11:01:53 +0100
+Received: (qmail invoked by alias); 19 Dec 2011 09:54:50 -0000
+Received: from ip-95-222-156-232.unitymediagroup.de (EHLO
+	zera-git-ew.localnet) [95.222.156.232]
+	by mail.gmx.net (mp029) with SMTP; 19 Dec 2011 10:54:50 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+QxIdcUQKQ2PR0Rg34ZbtcbBZeUG41XjwwB9bNHP
+	AJoQ9ihmHqTy0U
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Dec 2011 10:54:56 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.41.4-1.fc15.x86_64; KDE/4.6.5; x86_64; ; )
+References: <20111219093447.C6DBE10331@opal>
+In-Reply-To: <20111219093447.C6DBE10331@opal>
 MIME-Version: 1.0
-To: Tom Rini <tom.rini@gmail.com>
-References: <cover.1323862499.git.sledz@dresearch-fe.de>
-	<CA+M6bXk57+wbvAzkLrZVDPCvhGFLH8A-A3ESNnW_-Yk=TiDfLw@mail.gmail.com>
-	<4EE995AB.5090503@dresearch-fe.de>
-In-Reply-To: <4EE995AB.5090503@dresearch-fe.de>
-X-Enigmail-Version: 1.3.4
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/5] pull request 20111214
+Message-Id: <201112191054.57179.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [oe-commits] Scott Garman : Add missing SUMMARY fields to various recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,59 +33,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 07:24:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 Dec 2011 10:01:53 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On 15.12.2011 07:37, Steffen Sledz wrote:
-> Am 14.12.2011 19:07, schrieb Tom Rini:
->> On Wed, Dec 14, 2011 at 4:40 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->>> Hi Tom,
->>>
->>> please pull these 5 commits cherry-picked from oe.dev.
->>> All of them are bugfixes and tested in our own environment.
->>>
->>> Thx,
->>> Steffen
->>>
->>> The following changes since commit 9826895e30baa597a5ec433cc0ebd52f5f6c8796:
->>>
->>>  Merge remote-tracking branch 'upstream/2011.03-maintenance' into sledz/maintenance (2011-12-09 14:06:08 +0100)
->>>
->>> are available in the git repository at:
->>>
->>>  git://git.openembedded.org/openembedded sledz/maintenance
->>>  http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=sledz/maintenance
->>>
->>> Stefan Schmidt (2):
->>>  llvm2.7_2.7: Add patch for build errors on newer gcc / glibc
->>>    combinations
->>>  llvm2.7_2.7.bb: Update patch to use c++ include style.
->>>
->>> Steffen Sledz (3):
->>>  live555: replace version 20110314 with 20111120
->>>  icedtea6-native: fix problem on build hosts with linux kernel 3.x
->>>  openjdk: fix problem on build hosts with linux kernel 3.x
->>
->> Only 1 2 and 3 made it to the ML.
+On Monday, December 19, 2011 10:34:47 AM git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: e8c194a627e091ef9da3b7fa83ea3897bd283d9e
+> URL:   
+> http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=e8c194a627
+> e091ef9da3b7fa83ea3897bd283d9e
 > 
-> Please have a second look. They all should be there.
+> Author: Scott Garman <scott.a.garman@intel.com>
+> Date:   Sun Dec 18 15:06:57 2011 -0800
 > 
->> 1 and 2 are fine.  For 3, we should
->> grab the old file (someone must have a copy) and stick that on
->> sources.openembedded.org.
+> Add missing SUMMARY fields to various recipes
 > 
-> The version replacement is not just for the well known live555 download problem. It fixes some other problems too. Also the version introduced by this patch is already uploaded to sources.openembedded.org and the angstrom mirrors.
+> This adds the SUMMARY field to the following recipes which were
+> missing it:
+> 
+> * dosfstools
+> * grep
+> * icu
+> * libevent
+> * libnfsidmap
+> * qemu-helper-nativesdk
+> 
+> Signed-off-by: Scott Garman <scott.a.garman@intel.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> 
+> ---
+> 
+>  .../nfs-utils/libnfsidmap_0.24.bb                  |    3 ++-
+>  .../recipes-devtools/dosfstools/dosfstools_2.11.bb |    2 +-
+>  .../qemu/qemu-helper-nativesdk_1.0.bb              |    3 ++-
+>  meta/recipes-extended/grep/grep_2.9.bb             |    1 +
+>  meta/recipes-support/icu/icu-3.6.inc               |    1 +
+>  meta/recipes-support/libevent/libevent_1.4.14b.bb  |    3 ++-
+>  6 files changed, 9 insertions(+), 4 deletions(-)
+> 
+> diff --git a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
+> b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb index
+> 101ecab..eff75ec 100644
+> --- a/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
+> +++ b/meta/recipes-connectivity/nfs-utils/libnfsidmap_0.24.bb
+> @@ -1,4 +1,5 @@
+> -DESCRIPTION = "nfs idmapping library"
+> +SUMMARY = "NFS id mapping library"
+> +DESCRIPTION = "NFS id mapping library"
+>  HOMEPAGE = "http://www.citi.umich.edu/projects/nfsv4/linux/"
+>  SECTION = "libs"
+> 
+> diff --git a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
+> b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb index
+> ec75ac9..eca54f1 100644
+> --- a/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
+> +++ b/meta/recipes-devtools/dosfstools/dosfstools_2.11.bb
+> @@ -1,7 +1,7 @@
+>  # dosfstools OE build file
+>  # Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights
+> Reserved # Released under the MIT license (see packages/COPYING)
+> -
+> +SUMMARY = "DOS FAT Filesystem Utilities"
+>  DESCRIPTION = "DOS FAT Filesystem Utilities"
+> 
+>  SECTION = "base"
+> diff --git a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
+> b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb index
+> a3dca3d..df0cae0 100644
+> --- a/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
+> +++ b/meta/recipes-devtools/qemu/qemu-helper-nativesdk_1.0.bb
+> @@ -1,4 +1,5 @@
+> -DESCRIPTION = "Qemu helper scripts from Poky"
+> +SUMMARY = "Qemu helper scripts"
+> +DESCRIPTION = "Qemu helper scripts"
+>  LICENSE = "GPLv2"
+>  RDEPENDS_${PN} = "qemu-nativesdk"
+>  PR = "r9"
+> diff --git a/meta/recipes-extended/grep/grep_2.9.bb
+> b/meta/recipes-extended/grep/grep_2.9.bb index 08ac527..9099bed 100644
+> --- a/meta/recipes-extended/grep/grep_2.9.bb
+> +++ b/meta/recipes-extended/grep/grep_2.9.bb
+> @@ -1,3 +1,4 @@
+> +SUMMARY = "GNU grep utility"
+>  DESCRIPTION = "GNU grep utility"
+>  HOMEPAGE = "http://savannah.gnu.org/projects/grep/"
+>  BUGTRACKER = "http://savannah.gnu.org/bugs/?group=grep"
+> diff --git a/meta/recipes-support/icu/icu-3.6.inc
+> b/meta/recipes-support/icu/icu-3.6.inc index 8fadc92..e3f9dd2 100644
+> --- a/meta/recipes-support/icu/icu-3.6.inc
+> +++ b/meta/recipes-support/icu/icu-3.6.inc
+> @@ -1,3 +1,4 @@
+> +SUMMARY = "International Component for Unicode libraries"
+>  DESCRIPTION = "The International Component for Unicode (ICU) is a mature,
+> portable set of C/C++ and Java libraries for Unicode support, software
+> internationalization (I18N) and globalization (G11N), giving applications
+> the same results on all platforms." HOMEPAGE =
+> "http://www-01.ibm.com/software/globalization/icu/index.jsp"
+> 
+> diff --git a/meta/recipes-support/libevent/libevent_1.4.14b.bb
+> b/meta/recipes-support/libevent/libevent_1.4.14b.bb index 1a369b5..36468dc
+> 100644
+> --- a/meta/recipes-support/libevent/libevent_1.4.14b.bb
+> +++ b/meta/recipes-support/libevent/libevent_1.4.14b.bb
+> @@ -1,4 +1,5 @@
+> -DESCRIPTION = "an asynchronous event notification library"
+> +SUMMARY = "An asynchronous event notification library"
+> +DESCRIPTION = "An asynchronous event notification library"
+>  HOMEPAGE = "http://www.monkey.org/~provos/libevent/"
+>  SECTION = "libs"
+> 
+What is the value in creating redundancies by copying DESRCIPTION to SUMMARY?
 
-Ping!
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Andreas
 
 
