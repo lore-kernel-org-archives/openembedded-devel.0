@@ -1,20 +1,22 @@
-Received: from mail.borenet.se ([213.134.106.117] helo=mail-storage.borenet.se)
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <xerxes@zafena.se>) id 1RdKUn-0006N1-5A
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RdNr2-00043W-No
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Dec 2011 12:38:05 +0100
-Received: from [192.168.1.106] (labb.zafena.se [213.134.106.61])
-	by mail-storage.borenet.se (Postfix) with ESMTP id 4F7C05FDB01
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2011 12:22:55 +0100 (CET)
-Message-ID: <4EF1C1A4.9060504@zafena.se>
-Date: Wed, 21 Dec 2011 12:23:16 +0100
-From: =?ISO-8859-1?Q?Xerxes_R=E5nby?= <xerxes@zafena.se>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:8.0) Gecko/20111124 Thunderbird/8.0
-MIME-Version: 1.0
+	Wed, 21 Dec 2011 16:13:16 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 21 Dec 2011 07:06:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="90007884"
+Received: from unknown (HELO helios.localnet) ([10.252.122.36])
+	by orsmga002.jf.intel.com with ESMTP; 21 Dec 2011 07:06:10 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-java] Fixed upstream source URL's and match oe-core license files.
+Date: Wed, 21 Dec 2011 15:06:07 +0000
+Message-ID: <1619521.vnmDeKUhkM@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.4 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+MIME-Version: 1.0
+Subject: OE-Core transition documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,24 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2011 11:38:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Dec 2011 15:13:17 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi I have prepared a pull request to fix upstream source URL's and match =
-oe-core license files.
-https://github.com/woglinde/meta-java/pull/2
+Hi all,
 
-While testing the meta-java layer i noticed that some of the upstream sou=
-rce URL's have changed.
-A special note on jdepend: here the upstream source file of 2.9 have been=
- removed and been replaced by version 2.9.1.
-License fix of libecj-bootstrap: oe-core have removed the EPL-1 license f=
-ile, i have correct the license in libecj-bootstrap to use EPL-1.0 instea=
-d.
-License fix of llvm: oe-core use the name NCSA for the University of Illi=
-nois/NCSA Open Source License license file.
+It seems we still haven't made an announcement on the website about the OE-
+Core transition. I did write a wiki page about it [1] but never got around to 
+linking it from the main page. What I'd like to do is the following:
 
-Signed-off-by: Xerxes R=E5nby xerxes@zafena.se
+1) Add a short news entry mentioning the transition and pointing people to the 
+OE-Core page.
+
+2) Extend the OE-Core page to help people understand how to make the 
+transition a bit better:
+ * Describe how the mailing lists function
+ * Add info on how to add a layer to your setup
+ * More info on what should go where and what to do if something's missing
+I'm starting to wonder if this page ought to be turned into an FAQ type 
+document.
+
+3) Try to figure out how to reorganise the main page so having a link from 
+there to the layer index [2] makes sense
+
+Comments? Suggestions? Please let me know if you have questions about OE-Core 
+that aren't fully answered by the material already on the OE-Core / layer 
+index pages.
+
+Cheers,
+Paul
+
+[1] http://www.openembedded.org/wiki/OpenEmbedded-Core
+[2] http://www.openembedded.org/wiki/LayerIndex
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
