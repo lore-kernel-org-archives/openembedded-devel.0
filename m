@@ -1,22 +1,27 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RdNr2-00043W-No
+	(envelope-from <gdalex@gmail.com>) id 1RdNuE-0004EP-QG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Dec 2011 16:13:16 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 21 Dec 2011 07:06:10 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="90007884"
-Received: from unknown (HELO helios.localnet) ([10.252.122.36])
-	by orsmga002.jf.intel.com with ESMTP; 21 Dec 2011 07:06:10 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Dec 2011 15:06:07 +0000
-Message-ID: <1619521.vnmDeKUhkM@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.4 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+	Wed, 21 Dec 2011 16:16:34 +0100
+Received: by eaal1 with SMTP id l1so6765994eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Dec 2011 07:09:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=R7uxpnoVLLgbv8vu5PUxjfWnehUKH79heLQOccpwq1k=;
+	b=YtInlXG/XX9Y3pTOUiDaeiNUH5qZ5CbwR/02X5kpXR+KAYKqhu7dFbP+A88VHIR1IM
+	uKvBBpQpSjUtvmYma6gtG6lF7qjTgOfpOO7oKr2b2igcaykj5yzaUFZu8PG1TuAnePYy
+	E6OgWePDWKgIoaCHiLu8e9ZxBa6YuEDgR7n0g=
 MIME-Version: 1.0
-Subject: OE-Core transition documentation
+Received: by 10.204.157.25 with SMTP id z25mr2157688bkw.25.1324480169616; Wed,
+	21 Dec 2011 07:09:29 -0800 (PST)
+Received: by 10.205.26.134 with HTTP; Wed, 21 Dec 2011 07:09:29 -0800 (PST)
+Date: Wed, 21 Dec 2011 10:09:29 -0500
+Message-ID: <CAFggvfNpJGosK3E0pG=Qikk3QXLoOSHndVRqxoTkNUS47_pDQw@mail.gmail.com>
+From: George Alexandru Dorobantu <gdalex@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: openssl failing to compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,43 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2011 15:13:17 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 21 Dec 2011 15:16:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi all,
+Hello list,
 
-It seems we still haven't made an announcement on the website about the OE-
-Core transition. I did write a wiki page about it [1] but never got around to 
-linking it from the main page. What I'd like to do is the following:
+bulding a console-image for beagleboard, openssl fails to compile.
 
-1) Add a short news entry mentioning the transition and pointing people to the 
-OE-Core page.
+The log shows this:
 
-2) Extend the OE-Core page to help people understand how to make the 
-transition a bit better:
- * Describe how the mailing lists function
- * Add info on how to add a layer to your setup
- * More info on what should go where and what to do if something's missing
-I'm starting to wonder if this page ought to be turned into an FAQ type 
-document.
+openssl.o: In function `main':
+openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
+openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
+openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+.....
 
-3) Try to figure out how to reorganise the main page so having a link from 
-there to the layer index [2] makes sense
+Removing libdeps-first.patch solved the issue.
 
-Comments? Suggestions? Please let me know if you have questions about OE-Core 
-that aren't fully answered by the material already on the OE-Core / layer 
-index pages.
+Does anyone know if libdeps-first.patch is really needed?
+If not, could it be removed?
 
-Cheers,
-Paul
 
-[1] http://www.openembedded.org/wiki/OpenEmbedded-Core
-[2] http://www.openembedded.org/wiki/LayerIndex
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Thank you
+George A. Dorobantu
 
