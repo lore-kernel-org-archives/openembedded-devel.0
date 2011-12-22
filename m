@@ -1,41 +1,35 @@
-Received: from nm17.access.bullet.mail.sp2.yahoo.com ([98.139.44.144])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <jesse@celestialaudio.com>) id 1RdenK-0008Gl-9g
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Dec 2011 10:18:37 +0100
-Received: from [98.139.44.97] by nm17.access.bullet.mail.sp2.yahoo.com with
-	NNFMP; 22 Dec 2011 09:08:17 -0000
-Received: from [98.139.44.69] by tm2.access.bullet.mail.sp2.yahoo.com with
-	NNFMP; 22 Dec 2011 09:08:17 -0000
-Received: from [127.0.0.1] by omp1006.access.mail.sp2.yahoo.com with NNFMP;
-	22 Dec 2011 09:08:17 -0000
-X-Yahoo-Newman-Id: 347771.1246.bm@omp1006.access.mail.sp2.yahoo.com
-Received: (qmail 93185 invoked from network); 22 Dec 2011 09:08:16 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1324544896; bh=iSfXPmprmg+OPoyBHydzt+Oht6Ye7jGFD0LvlGv3B5s=;
-	h=X-Yahoo-Newman-Property:X-YMail-OSG:X-Yahoo-SMTP:Received:Message-ID:Date:From:User-Agent:MIME-Version:To:CC:Subject:Content-Type:Content-Transfer-Encoding;
-	b=GjX6MhZfzL9kESDcicb+abSuwNZkP7nyQrLUqk0XLC93BK9SI1gzPInqzRIoJxPtnPv/hOIV0HpBNICs5W+CV76owb+DndQl9cOiEyUkc28iejFDgRYSp4FMlm4V8aAUPoDrNbfuIjeC72sKhD1OM+7f5JlO8rCqWMfE2LMtXJg=
-X-Yahoo-Newman-Property: ymail-3
-X-YMail-OSG: dCTIFtsVM1nA08GEu5co1Fl2NG42fd3989exPCxl40PKQ8b
-	37ZFl0ov6x.DXZE6dIJ1fWAf2hNSsaUSJ5Fcagkb2ajBktoDzOBnt2Kt4Lz5
-	GvHfxuIYO0zhKQ4Vv2fMJ1ynzbbwBJ9U6oBPfpLsLfXLmChd8piRTmFoclmv
-	4xjBCtCoDuyi183uOGqJkZHxCsDSwOqygeLCpyxkF4pYuyyJFcR6u7Tv6AV5
-	zPNy1rwEWmbTSfKG71xCxMP1XZ30fNocPsljuy_UMaCXM8n9sBzi4YHyD5Oe
-	WzNI3zppS4pmQjE9nV9C5roL43voWJMKAEwci_tWzx8BqqDaMMmmTG9g14fS
-	aqS9mOARZl6CE_7D4hhdP7otQdmyXcu5_4WAyZZdulZGf4zsHzRu31JORMRi
-	Zl7Yz0itAvkNU1ktuze4m3hkKx7m4uUMfZcvLp_ON36VVdUMeIgkG
-X-Yahoo-SMTP: EvXGd.2swBBthDSY4mkIP5t97F2eRma9yhZSmUuF0tN2
-Received: from [192.168.1.136] (jesse@76.102.136.108 with plain)
-	by smtp108.sbc.mail.gq1.yahoo.com with SMTP;
-	22 Dec 2011 01:08:16 -0800 PST
-Message-ID: <4EF2F380.80704@celestialaudio.com>
-Date: Thu, 22 Dec 2011 01:08:16 -0800
-From: Jesse Lackey <jesse@celestialaudio.com>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:8.0.1) Gecko/20111121 Firefox/8.0.1 SeaMonkey/2.5
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RdenP-0008Jv-Ic for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Dec 2011 10:18:40 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RdegX-0006Cw-32 for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Dec 2011 10:11:33 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2011 10:11:33 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2011 10:11:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: fakeroot 1.15.1 issues
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 22 Dec 2011 10:11:14 +0100
+Message-ID: <jcus7i$5a2$1@dough.gmane.org>
+References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
+	<1324447304-4874-7-git-send-email-b19537@freescale.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1324447304-4874-7-git-send-email-b19537@freescale.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [PATCH v3 meta-oe 7/7] xfsprogs: add version 3.1.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +43,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 09:18:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 22 Dec 2011 09:18:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I'm have exactly the same problem.  "git pull" says up to date.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm continuing on by running "bitbake -k".  But things appear to be 
-indeed broken, by the presumably recent removal of 
-fakeroot_1.15.1.orig.tar.bz2 from the debian ftp site.
+Op 21-12-11 07:01, b19537@freescale.com schreef:
+> From: Zhenhua Luo <b19537@freescale.com>
+> 
+> xfsprogs provides XFS filesystem utilities.
 
-Any assistance greatly appreciated.  I'm a total newbie with bitbake and OE.
+I get:
 
-J
+NOTE: package xfsprogs-3.1.7-r0: task do_install: Started
+ERROR: Function 'do_install' failed (see
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
+for further information)
+ERROR: Logfile of failure stored in:
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
+Log data follows:
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
+'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| ERROR: Function 'do_install' failed (see
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
+for further information)
+| + cd
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/xfsprogs-3.1.7
+| + do_install
+| + export
+DIST_ROOT=/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/image
+| +
+DIST_ROOT=/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/image
+| + oe_runmake install
+| + '[' xmake = x ']'
+| + bbnote make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
+| + echo 'NOTE: make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install'
+| NOTE: make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
+| + make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
+| Installing include-install
+| make[1]: Nothing to be done for `install'.
+| Installing libxfs-install
+| make[1]: Nothing to be done for `install'.
+| Installing libxlog-install
+| make[1]: Nothing to be done for `install'.
+| Installing libxcmd-install
+| make[1]: Nothing to be done for `install'.
+| Installing libhandle-install
+| cd ../libhandle/.libs; ../../install-sh -o koen -g koen -m 755 -d /lib;
+../../install-sh -o koen -g koen -m 644 -T so_dot_version libhandle.lai
+/lib; ../../install-sh -o koen -g koen -T so_dot_current libhandle.lai /lib
+| chown: invalid user: `koen:koen'
+| chown: invalid user: `koen:koen'
+| Installing libdisk-install
+| make[1]: Nothing to be done for `install'.
+| Installing copy-install
+| ../install-sh -o koen -g koen -m 755 -d /usr/sbin
+| chown: invalid user: `koen:koen'
+| make[1]: *** [install] Error 1
+| make: *** [copy-install] Error 2
+| + die 'oe_runmake failed'
+| + bbfatal 'oe_runmake failed'
+| + echo 'ERROR: oe_runmake failed'
+| ERROR: oe_runmake failed
+| + exit 1
 
-> Christopher Sarra chris.sarra at gmail.com
-> Wed Dec 21 20:52:32 CET 2011
 
-> I tried `git pull` but apparently everything is "Already up-to-date." Am I
-> missing something else?
->
-> Thanks,
-> Chris
->
+I've pushed the other 6 patches.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk7y9CoACgkQMkyGM64RGpFmDwCfU8GxakEJlbraZyyELIeApzzi
+99MAoKaLUGwa5QvVnuxGsGIFqVW4+nPf
+=SmzT
+-----END PGP SIGNATURE-----
+
 
 
