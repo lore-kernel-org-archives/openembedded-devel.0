@@ -1,35 +1,34 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RdiUx-0003Ah-Su
+	(envelope-from <martin.jansa@gmail.com>) id 1RdifZ-00041F-CP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Dec 2011 14:15:53 +0100
-Received: by yenm12 with SMTP id m12so4974036yen.6
+	Thu, 22 Dec 2011 14:26:49 +0100
+Received: by eeit10 with SMTP id t10so4244421eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2011 05:08:45 -0800 (PST)
+	Thu, 22 Dec 2011 05:19:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=tF05JZsyNQywDb+c6VPknRmuYqyxNguDxA21dycng2M=;
-	b=EdEwPTdFARC4q/aHbrlQ94YSJQR0KrwIW2k08ZWDMpXbEF5WerHktehqiKNQSaaKpk
-	wqTN3yfSgj1pXH7kpZZA7+2oefvJ4TLU7BUgnl+/0JnAPjZUP/mB5mklmQp5SzYXTCVz
-	jnqcYbHGrNBiQQIJWMObKVcv2ZTxw5EAa6P7M=
-Received: by 10.236.201.196 with SMTP id b44mr14709295yho.48.1324559325462;
-	Thu, 22 Dec 2011 05:08:45 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id n5sm14603838yhk.1.2011.12.22.05.08.42
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Ixv1DQFWaQeDT+zw4yZeVAxo9sBH0DRK6n5vLXZFy4k=;
+	b=LT3addK3C9A6s9jatey/q54QZEih7Alzxhz/dIbb81f+QrMOQQDpRbHlRzkcl58EUn
+	PIVaeAc0WS2fglU/108sZk3qzmcW5xc7gsZoyU1r7LoKTcMyyeO22eL5xdXFtSHYI7PQ
+	tqJ6bYDpW1e26b7XlHsrOhHKU/Y1g+mjN1kJc=
+Received: by 10.14.52.4 with SMTP id d4mr4272675eec.124.1324559983235;
+	Thu, 22 Dec 2011 05:19:43 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id t59sm34020479eeh.10.2011.12.22.05.19.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Dec 2011 05:08:44 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 22 Dec 2011 05:19:41 -0800 (PST)
+Date: Thu, 22 Dec 2011 14:19:40 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2011 13:08:24 +0000
-Message-Id: <579f9ddb93f5f73114b8dfb45639a65d4eeb3307.1324559278.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1324559278.git.otavio@ossystems.com.br>
+Message-ID: <20111222131940.GA1471@jama.jama.net>
 References: <cover.1324559278.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1324559278.git.otavio@ossystems.com.br>
-References: <cover.1324559278.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 3/3] systemd: depends on intltool-native
+	<06703197a0e4b89243cacc36ac59cdb88992b9ca.1324559278.git.otavio@ossystems.com.br>
+MIME-Version: 1.0
+In-Reply-To: <06703197a0e4b89243cacc36ac59cdb88992b9ca.1324559278.git.otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 2/3] rsyslog: move systemd support to rsyslog-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,37 +42,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 13:15:53 -0000
+X-List-Received-Date: Thu, 22 Dec 2011 13:26:49 -0000
+X-Groupsio-MsgNum: 36254
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="n8g4imXOkfNTN/H1"
+Content-Disposition: inline
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+--n8g4imXOkfNTN/H1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 22, 2011 at 01:08:23PM +0000, Otavio Salvador wrote:
+> This makes the package consistent with others supporting systemd and
+> also cleans up the recipe using the systemd.bbclass.
+
+Do you have similar change for xserver-nodm-init? to make it even more
+consistent? :)
+
+Cheers,
+
+>=20
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  meta-oe/recipes-extended/rsyslog/rsyslog.inc |   23 ++++++++------------=
 ---
- meta-oe/recipes-core/systemd/systemd_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+>  1 files changed, 8 insertions(+), 15 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog.inc b/meta-oe/recip=
+es-extended/rsyslog/rsyslog.inc
+> index 856d965..ea7fa22 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog.inc
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog.inc
+> @@ -4,32 +4,25 @@ HOMEPAGE =3D "http://www.rsyslog.com/"
+>  LICENSE =3D "GPLv3"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D51d9635e646fb75e1b74c074f788e=
+973"
+> =20
+> -INC_PR =3D "r1"
+> +INC_PR =3D "r2"
+> =20
+>  SRC_URI =3D "http://www.rsyslog.com/files/download/rsyslog/${PN}-${PV}.t=
+ar.gz \
+>             file://rsyslog.conf"
+>            =20
+> =20
+> -inherit autotools
+> +inherit autotools systemd
+> +
+> +SYSTEMD_PACKAGES =3D "${PN}-systemd"
+> +SYSTEMD_SERVICE =3D "${PN}.service"
+> =20
+>  do_install_append() {
+>          install -d ${D}/${sysconfdir}/${PN}
+>          install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+>  }
+> =20
+> +PACKAGES =3D+ "${PN}-systemd"
+> =20
+> -pkg_postinst_${PN} () {
+> -	if test "x$D" !=3D "x"; then
+> -		exit 1
+> -	fi
+> -	systemctl enable rsyslog.service
+> -}
+> -
+> -pkg_prerm_${PN} () {
+> -	systemctl disable rsyslog.service
+> -}
+> -
+> -RRECOMMENDS_${PN} +=3D "systemd"
+>  CONFFILES_${PN} =3D "${sysconfdir}/rsyslog.conf"
+> -FILES_${PN} +=3D "${base_libdir}/systemd"
+> =20
+> +FILES_${PN}-systemd +=3D "${base_libdir}/systemd"
+> +RDEPENDS_${PN}-systemd +=3D "${PN}"
+> --=20
+> 1.7.2.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 228e0e4..2548d10 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "docbook-sgml-dtd-4.1-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
-+DEPENDS = "docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
-@@ -14,7 +14,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r6"
-+PR = "r7"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
--- 
-1.7.2.5
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--n8g4imXOkfNTN/H1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
+iEYEARECAAYFAk7zLmwACgkQN1Ujt2V2gBwX3QCffRwYmDo9UOBrcxplLXpvUMzW
+yZoAn0T2AMXXlWxFPy4n9TAoYDjTuHi1
+=A+Eo
+-----END PGP SIGNATURE-----
+
+--n8g4imXOkfNTN/H1--
