@@ -1,34 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RdirL-0004Hs-9C
+	(envelope-from <koansoftware@gmail.com>) id 1RdjaI-0005V1-BN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Dec 2011 14:38:59 +0100
-Received: by eaal1 with SMTP id l1so7557227eaa.6
+	Thu, 22 Dec 2011 15:25:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id B69DD2C7FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2011 05:31:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=v8rCz4l/0PDFuI5p78oobAfXBr09wFIT/7MBTo7wxjY=;
-	b=MWg45JMHmRpfYhl7/czd0ER9D9xWjWmeprszZsWYSrlppdyVJA/jOGqxfyq+hk/LbA
-	o88qmhDTMJdqpflNXg895fRKBoteWrPCrACDVCj0LJLijZn3X5Dl7YmcAxlgjNunnITe
-	484tG10esHA47bZvqvzNGV8bJhSIbAH75xt7A=
+	Thu, 22 Dec 2011 14:07:39 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id QwTFfabssyTf
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2011 14:07:30 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 2ECE92C7EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2011 14:07:29 +0000 (UTC)
+Message-ID: <4EF33A66.3050204@gmail.com>
+Date: Thu, 22 Dec 2011 15:10:46 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.205.120.148 with SMTP id fy20mr2777999bkc.125.1324560711257;
-	Thu, 22 Dec 2011 05:31:51 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.78.79 with HTTP; Thu, 22 Dec 2011 05:31:51 -0800 (PST)
-In-Reply-To: <20111222131940.GA1471@jama.jama.net>
-References: <cover.1324559278.git.otavio@ossystems.com.br>
-	<06703197a0e4b89243cacc36ac59cdb88992b9ca.1324559278.git.otavio@ossystems.com.br>
-	<20111222131940.GA1471@jama.jama.net>
-Date: Thu, 22 Dec 2011 11:31:51 -0200
-X-Google-Sender-Auth: jVPk68P46VHITwfNfpZGmtfW_Js
-Message-ID: <CAP9ODKqFnR+CwboHkQsrCa9dkV5aTS0mXcjirchjtRS0DbCfoQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH 2/3] rsyslog: move systemd support to rsyslog-systemd
+References: <CAAJ_Y3kksFvP84YPNV0=oQE7x8XxH0-CoDq02eO-MsODi_2B0g@mail.gmail.com>	<CA+M6bX=sR9QVCM7AmqQY-xY74Tp-y9iebQsg3L_E1rGDsJR6ZQ@mail.gmail.com>
+	<CAAJ_Y3kpmycekZ+JokVjChnOdg_-aR3=TcFgvFP0gXf-r1LR6g@mail.gmail.com>
+In-Reply-To: <CAAJ_Y3kpmycekZ+JokVjChnOdg_-aR3=TcFgvFP0gXf-r1LR6g@mail.gmail.com>
+Subject: Re: fakeroot 1.15.1 issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,24 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 13:38:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Dec 2011 14:25:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 22, 2011 at 11:19, Martin Jansa <martin.jansa@gmail.com> wrote:
+Christopher Sarra ha scritto, Il 21/12/2011 20:52:
+> I tried `git pull` but apparently everything is "Already up-to-date." A=
+m I
+> missing something else?
+>=20
+> Thanks,
 
-> On Thu, Dec 22, 2011 at 01:08:23PM +0000, Otavio Salvador wrote:
-> > This makes the package consistent with others supporting systemd and
-> > also cleans up the recipe using the systemd.bbclass.
->
-> Do you have similar change for xserver-nodm-init? to make it even more
-> consistent? :)
->
+Chris,
+I simply removed the line
+${DEBIAN_MIRROR}/main   http://snapshot.debian.net/archive/pool
+from  mirrors.bbclass, and it worked smoothly.
 
-Not now but can cook one for later :-) if you can help doing that, it would
-be nice.
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
+
+
 
