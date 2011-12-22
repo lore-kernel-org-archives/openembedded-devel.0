@@ -1,35 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RdenP-0008Jv-Ic for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Dec 2011 10:18:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RdegX-0006Cw-32 for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Dec 2011 10:11:33 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2011 10:11:33 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RdiUq-00039s-Bp
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Dec 2011 14:15:44 +0100
+Received: by yhoo47 with SMTP id o47so5542552yho.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2011 10:11:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 22 Dec 2011 05:08:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=J3q8L4M1WmDPsyHAS0/e0I9M+TejvTYAsa5rmkEChLw=;
+	b=VxcLpr36bLPnHns43T+4ed6bxRb/tZn0mCw3cJdMCcX4Lnc44IMkunByHpDpB9Saoi
+	9ZVpXBbTTEWaupGFr+1nOfxFMEVJRQ+ZUX8ejyB3WGM8UI6jszWDOK7N1FqHG2SHtCci
+	rOm5mN0r9x/a9Y+dR8WWD9jClkwWynK1dKEnI=
+Received: by 10.236.178.33 with SMTP id e21mr15246231yhm.4.1324559317792;
+	Thu, 22 Dec 2011 05:08:37 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id n5sm14603838yhk.1.2011.12.22.05.08.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Dec 2011 05:08:35 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 22 Dec 2011 10:11:14 +0100
-Message-ID: <jcus7i$5a2$1@dough.gmane.org>
-References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
-	<1324447304-4874-7-git-send-email-b19537@freescale.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1324447304-4874-7-git-send-email-b19537@freescale.com>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [PATCH v3 meta-oe 7/7] xfsprogs: add version 3.1.7
+Date: Thu, 22 Dec 2011 13:08:21 +0000
+Message-Id: <cover.1324559278.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [meta-oe][PATCH 0/3] Misc fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,82 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 09:18:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Dec 2011 13:15:44 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The following changes since commit 87a35d203278d220e6c730dc551af11a060798cd:
 
-Op 21-12-11 07:01, b19537@freescale.com schreef:
-> From: Zhenhua Luo <b19537@freescale.com>
-> 
-> xfsprogs provides XFS filesystem utilities.
+  gdm 2.32.2: add missing source checksums (2011-12-22 10:10:55 +0100)
 
-I get:
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-NOTE: package xfsprogs-3.1.7-r0: task do_install: Started
-ERROR: Function 'do_install' failed (see
-/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-for further information)
-ERROR: Logfile of failure stored in:
-/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-Log data follows:
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
-'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| ERROR: Function 'do_install' failed (see
-/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-for further information)
-| + cd
-/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/xfsprogs-3.1.7
-| + do_install
-| + export
-DIST_ROOT=/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/image
-| +
-DIST_ROOT=/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/xfsprogs-3.1.7-r0/image
-| + oe_runmake install
-| + '[' xmake = x ']'
-| + bbnote make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
-| + echo 'NOTE: make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install'
-| NOTE: make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
-| + make LIBTOOL=arm-angstrom-linux-gnueabi-libtool install
-| Installing include-install
-| make[1]: Nothing to be done for `install'.
-| Installing libxfs-install
-| make[1]: Nothing to be done for `install'.
-| Installing libxlog-install
-| make[1]: Nothing to be done for `install'.
-| Installing libxcmd-install
-| make[1]: Nothing to be done for `install'.
-| Installing libhandle-install
-| cd ../libhandle/.libs; ../../install-sh -o koen -g koen -m 755 -d /lib;
-../../install-sh -o koen -g koen -m 644 -T so_dot_version libhandle.lai
-/lib; ../../install-sh -o koen -g koen -T so_dot_current libhandle.lai /lib
-| chown: invalid user: `koen:koen'
-| chown: invalid user: `koen:koen'
-| Installing libdisk-install
-| make[1]: Nothing to be done for `install'.
-| Installing copy-install
-| ../install-sh -o koen -g koen -m 755 -d /usr/sbin
-| chown: invalid user: `koen:koen'
-| make[1]: *** [install] Error 1
-| make: *** [copy-install] Error 2
-| + die 'oe_runmake failed'
-| + bbfatal 'oe_runmake failed'
-| + echo 'ERROR: oe_runmake failed'
-| ERROR: oe_runmake failed
-| + exit 1
+Otavio Salvador (3):
+  pcsc-lite: ccid downgraded to a runtime recommendation
+  rsyslog: move systemd support to rsyslog-systemd
+  systemd: depends on intltool-native
 
+ meta-oe/recipes-core/systemd/systemd_git.bb        |    4 +-
+ meta-oe/recipes-extended/rsyslog/rsyslog.inc       |   23 +++++++-------------
+ .../recipes-support/pcsc-lite/pcsc-lite_1.7.2.bb   |    5 ++-
+ 3 files changed, 13 insertions(+), 19 deletions(-)
 
-I've pushed the other 6 patches.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk7y9CoACgkQMkyGM64RGpFmDwCfU8GxakEJlbraZyyELIeApzzi
-99MAoKaLUGwa5QvVnuxGsGIFqVW4+nPf
-=SmzT
------END PGP SIGNATURE-----
+-- 
+1.7.2.5
 
 
 
