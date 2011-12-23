@@ -1,51 +1,19 @@
-Received: from va3ehsobe005.messaging.microsoft.com ([216.32.180.31]
-	helo=VA3EHSOBE005.bigfish.com)
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1Rdygs-0002Lu-AE
+	(envelope-from <eric@eukrea.com>) id 1RdzPl-0003mU-10
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Dec 2011 07:33:14 +0100
-Received: from mail13-va3-R.bigfish.com (10.7.14.247) by
-	VA3EHSOBE005.bigfish.com (10.7.40.25) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 23 Dec 2011 06:25:51 +0000
-Received: from mail13-va3 (localhost [127.0.0.1])	by mail13-va3-R.bigfish.com
-	(Postfix) with ESMTP id DCE9344019F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2011 06:26:50 +0000 (UTC)
-X-SpamScore: -27
-X-BigFish: VS-27(z98bRz154cP9371I936eK542M1432Nzz1202hzz8275bh8275dhz2dh2a8h668h839h8e2h8e3h944hbe9n)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail13-va3 (localhost.localdomain [127.0.0.1]) by mail13-va3
-	(MessageSwitch) id 1324621608723433_2780;
-	Fri, 23 Dec 2011 06:26:48 +0000 (UTC)
-Received: from VA3EHSMHS004.bigfish.com (unknown [10.7.14.236])	by
-	mail13-va3.bigfish.com (Postfix) with ESMTP id AD838540042	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2011 06:26:48 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS004.bigfish.com
-	(10.7.99.14) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 23 Dec 2011 06:25:49 +0000
-Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.213]) by
-	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
-	14.01.0355.003; Fri, 23 Dec 2011 00:26:00 -0600
-From: Luo Zhenhua-B19537 <B19537@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH v3 meta-oe 7/7] xfsprogs: add version 3.1.7
-Thread-Index: AQHMv6WaXWdN4VoSZESP/FA9vdSJ/ZXn+JgAgAD/WQA=
-Date: Fri, 23 Dec 2011 06:26:00 +0000
-Message-ID: <CA452391058F6D4E9715FB2C29D9312A010BBE33@039-SN2MPN1-023.039d.mgd.msft.net>
-References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
-	<1324447304-4874-7-git-send-email-b19537@freescale.com>
-	<jcus7i$5a2$1@dough.gmane.org>
-In-Reply-To: <jcus7i$5a2$1@dough.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.192.208.114]
+	Fri, 23 Dec 2011 08:19:37 +0100
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 2EDD8A6510;
+	Fri, 23 Dec 2011 08:12:27 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Dec 2011 08:12:16 +0100
+Message-Id: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.6.4
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [PATCH v3 meta-oe 7/7] xfsprogs: add version 3.1.7
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe] gdb-cross-canadian: build gdb with python support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,117 +27,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2011 06:33:14 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 23 Dec 2011 07:19:37 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Thanks. I created a new patch of xfsprogs to fix the issue.=20
+* python support is needed for providing finer scripting control
+in gdb, and for remote controling gdb for example from qtcreator
+* gdb/configure tries to autodetect python using python executable
+with --includes --ldflags --exec-prefix to get the right flags
+As it's difficult to achieve in OE's context, we generate a
+script which will return the right values and make gdb's build
+system happy. This idea was taken from the following article :
+http://www.mentby.com/doug-evans-2/python-enabled-gdb-on-windows-and-relo=
+cation.html
+* tested using angstrom & armv7/armv5 targets & qtcreator 201005 & 2.4.0
 
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ .../gdb/gdb-cross-canadian_7.3.1.bbappend          |   20 ++++++++++++++=
+++++++
+ 1 files changed, 20 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1=
+.bbappend
 
-Best Regards,
-
-Zhenhua
-
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-
-> devel-bounces@lists.openembedded.org] On Behalf Of Koen Kooi
-> Sent: Thursday, December 22, 2011 5:11 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH v3 meta-oe 7/7] xfsprogs: add version 3.1.7
->=20
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 21-12-11 07:01, b19537@freescale.com schreef:
-> > From: Zhenhua Luo <b19537@freescale.com>
-> >
-> > xfsprogs provides XFS filesystem utilities.
->=20
-> I get:
->=20
-> NOTE: package xfsprogs-3.1.7-r0: task do_install: Started
-> ERROR: Function 'do_install' failed (see
-> /OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-
-> gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-> for further information)
-> ERROR: Logfile of failure stored in:
-> /OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-
-> gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-> Log data follows:
-> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
-> 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common=
-']
-> | ERROR: Function 'do_install' failed (see
-> /OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-
-> gnueabi/xfsprogs-3.1.7-r0/temp/log.do_install.32411
-> for further information)
-> | + cd
-> /OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-
-> gnueabi/xfsprogs-3.1.7-r0/xfsprogs-3.1.7
-> | + do_install
-> | + export
-> DIST_ROOT=3D/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-ang=
-strom-
-> linux-gnueabi/xfsprogs-3.1.7-r0/image
-> | +
-> DIST_ROOT=3D/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work/armv7a-ang=
-strom-
-> linux-gnueabi/xfsprogs-3.1.7-r0/image
-> | + oe_runmake install
-> | + '[' xmake =3D x ']'
-> | + bbnote make LIBTOOL=3Darm-angstrom-linux-gnueabi-libtool install echo
-> | + 'NOTE: make LIBTOOL=3Darm-angstrom-linux-gnueabi-libtool install'
-> | NOTE: make LIBTOOL=3Darm-angstrom-linux-gnueabi-libtool install
-> | + make LIBTOOL=3Darm-angstrom-linux-gnueabi-libtool install
-> | Installing include-install
-> | make[1]: Nothing to be done for `install'.
-> | Installing libxfs-install
-> | make[1]: Nothing to be done for `install'.
-> | Installing libxlog-install
-> | make[1]: Nothing to be done for `install'.
-> | Installing libxcmd-install
-> | make[1]: Nothing to be done for `install'.
-> | Installing libhandle-install
-> | cd ../libhandle/.libs; ../../install-sh -o koen -g koen -m 755 -d
-> | /lib;
-> ../../install-sh -o koen -g koen -m 644 -T so_dot_version libhandle.lai
-> /lib; ../../install-sh -o koen -g koen -T so_dot_current libhandle.lai /l=
-ib
-> | chown: invalid user: `koen:koen'
-> | chown: invalid user: `koen:koen'
-> | Installing libdisk-install
-> | make[1]: Nothing to be done for `install'.
-> | Installing copy-install
-> | ../install-sh -o koen -g koen -m 755 -d /usr/sbin
-> | chown: invalid user: `koen:koen'
-> | make[1]: *** [install] Error 1
-> | make: *** [copy-install] Error 2
-> | + die 'oe_runmake failed'
-> | + bbfatal 'oe_runmake failed'
-> | + echo 'ERROR: oe_runmake failed'
-> | ERROR: oe_runmake failed
-> | + exit 1
->=20
->=20
-> I've pushed the other 6 patches.
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iEYEARECAAYFAk7y9CoACgkQMkyGM64RGpFmDwCfU8GxakEJlbraZyyELIeApzzi
-> 99MAoKaLUGwa5QvVnuxGsGIFqVW4+nPf
-> =3DSmzT
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappe=
+nd b/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
+new file mode 100644
+index 0000000..3bbfe38
+--- /dev/null
++++ b/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
+@@ -0,0 +1,20 @@
++DEPENDS +=3D "python-nativesdk"
++RDEPENDS +=3D "python-nativesdk-core python-nativesdk-lang python-native=
+sdk-re \
++			 python-nativesdk-codecs python-nativesdk-netclient"
++
++EXTRA_OECONF_append =3D "--with-python=3D${WORKDIR}/python"
++PRINC =3D "1"
++
++do_configure_prepend() {
++cat > ${WORKDIR}/python << EOF
++#! /bin/sh
++case "\$2" in
++	--includes) echo "-I${STAGING_DIR}/${HOST_ARCH}-nativesdk${HOST_VENDOR}=
+-${HOST_OS}${exec_prefix}/include/python${PYTHON_BASEVERSION}/" ;;
++	--ldflags) echo "-L${STAGING_DIR}/${HOST_ARCH}-nativesdk${HOST_VENDOR}-=
+${HOST_OS}${libdir}/python${PYTHON_BASEVERSION}/config/config -lpthread -=
+ldl -lutil -lm -lpython${PYTHON_BASEVERSION}" ;;
++	--exec-prefix) echo "/usr" ;;
++	*) exit 1 ;;
++esac
++exit 0
++EOF
++	chmod +x ${WORKDIR}/python
++}
+--=20
+1.7.6.4
 
 
 
