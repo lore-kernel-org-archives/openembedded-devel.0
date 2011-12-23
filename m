@@ -1,32 +1,25 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1ReCBO-00043P-6Q
+	(envelope-from <denis@denix.org>) id 1ReEo0-0007L9-1T
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Dec 2011 21:57:38 +0100
-Received: by yenm12 with SMTP id m12so5675461yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2011 12:50:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=3DCnWBxB2xA6PwGQzLTaykLLCK3W0L/QpEu6K1RMyks=;
-	b=beU2BsRdntpx/WCUP88eTzbeAiDJzYhyxnzfP6I8fAHMOonDLzyjkQUvWkGSjnlVwa
-	cQnEJ4+FpT+qPeQa5P51TNO32KcTw7tiwz+FvnWu3rhgBooz01iNMxoni0AkZEy1w4zU
-	FCmVNRR7txJP5XWt8tJ5o3/Z18LyhxT5DraiE=
-Received: by 10.236.197.103 with SMTP id s67mr23991612yhn.5.1324673429888;
-	Fri, 23 Dec 2011 12:50:29 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id i67sm22088802yhm.16.2011.12.23.12.50.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 23 Dec 2011 12:50:28 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 24 Dec 2011 00:45:40 +0100
+Received: from gandalf.denix.org ([unknown] [71.163.124.23])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LWO00LKBHJ5D1C0@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	23 Dec 2011 16:37:59 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 95BEA20429; Fri,
+	23 Dec 2011 17:37:53 -0500 (EST)
+Date: Fri, 23 Dec 2011 17:37:53 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Dec 2011 20:50:18 +0000
-Message-Id: <2da113ea26a5de8a56a21e8e292445ecb64313ee.1324673362.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1324673362.git.otavio@ossystems.com.br>
-References: <cover.1324673362.git.otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/1] dialog: add 1.1-20111020 recipe (dynamic and static)
+Message-id: <20111223223753.GA20360@denix.org>
+References: <4EF2F380.80704@celestialaudio.com>
+MIME-version: 1.0
+In-reply-to: <4EF2F380.80704@celestialaudio.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: fakeroot 1.15.1 issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,74 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2011 20:57:38 -0000
+X-List-Received-Date: Fri, 23 Dec 2011 23:45:40 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../dialog/dialog-static_1.1-20111020.bb           |    7 +++++
- meta-oe/recipes-extended/dialog/dialog.inc         |   24 ++++++++++++++++++++
- .../recipes-extended/dialog/dialog_1.1-20111020.bb |    5 ++++
- 3 files changed, 36 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
- create mode 100644 meta-oe/recipes-extended/dialog/dialog.inc
- create mode 100644 meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+On Thu, Dec 22, 2011 at 01:08:16AM -0800, Jesse Lackey wrote:
+> I'm have exactly the same problem.  "git pull" says up to date.
+> 
+> I'm continuing on by running "bitbake -k".  But things appear to be
+> indeed broken, by the presumably recent removal of
+> fakeroot_1.15.1.orig.tar.bz2 from the debian ftp site.
+> 
+> Any assistance greatly appreciated.  I'm a total newbie with bitbake and OE.
+> 
+> >I tried `git pull` but apparently everything is "Already up-to-date." Am I
+> >missing something else?
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
-new file mode 100644
-index 0000000..e21a914
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
-@@ -0,0 +1,7 @@
-+require dialog.inc
-+PR = "${INC_PR}.0"
-+
-+LDFLAGS += "-static"
-+
-+SRC_URI[md5sum] = "15dd2ce9f537c0400f600d1a383aa0a3"
-+SRC_URI[sha256sum] = "746bf18b8414985864835b61536cee826ac916e6827fbcad9faffb496cae8a7a"
-diff --git a/meta-oe/recipes-extended/dialog/dialog.inc b/meta-oe/recipes-extended/dialog/dialog.inc
-new file mode 100644
-index 0000000..03b0aa7
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/dialog.inc
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Dialog lets you to present a variety of questions \
-+or display messages using dialog boxes from a shell \
-+script (or any scripting language)."
-+SECTION = "console/utils"
-+DEPENDS = "ncurses"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-+
-+INC_PR = "r0"
-+
-+SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz"
-+
-+# hardcoded here for use in dialog-static recipe
-+S = "${WORKDIR}/dialog-${PV}"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--with-ncurses \
-+                --disable-rpath-hack"
-+
-+do_configure() {
-+    sed -i 's,${cf_ncuconfig_root}6-config,${cf_ncuconfig_root}-config,g' -i configure
-+    oe_runconf
-+}
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb b/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
-new file mode 100644
-index 0000000..73079a1
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
-@@ -0,0 +1,5 @@
-+require dialog.inc
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "15dd2ce9f537c0400f600d1a383aa0a3"
-+SRC_URI[sha256sum] = "746bf18b8414985864835b61536cee826ac916e6827fbcad9faffb496cae8a7a"
+Add this line to your local.conf:
+
+DEBIAN_MIRROR = "http://snapshot.debian.org/archive/debian/20111129T215729Z/pool"
+
 -- 
-1.7.2.5
-
+Denys
 
 
