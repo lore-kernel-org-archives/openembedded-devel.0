@@ -1,33 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Re25Y-0008WA-6g
+	(envelope-from <otavio.salvador@gmail.com>) id 1Re30Y-0001up-5C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Dec 2011 11:10:56 +0100
-Received: by eeit10 with SMTP id t10so4876923eei.6
+	Fri, 23 Dec 2011 12:09:50 +0100
+Received: by eaal1 with SMTP id l1so8296013eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2011 02:03:49 -0800 (PST)
+	Fri, 23 Dec 2011 03:02:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GdKaB44+5zdWsvFt+83iJyKagWYtVZ+M7ehEeWSlca8=;
-	b=OqL1V+N82WmZ5/oT6U0HgnB9N6lZESgGOL3lmlgFAki7vTJOFkhwHyPt6H8t9HpQwb
-	NvJjRlDtEudCqwCUwVtncT1jL4kVP4ifb41/OFBGzwv7P6nsox8wYGxmbjdUPTViZ3CE
-	+YSM5msCJdt5fmOY7JM0dM+TyQbQMCUN4RT5A=
-Received: by 10.14.51.198 with SMTP id b46mr5717150eec.111.1324634629164;
-	Fri, 23 Dec 2011 02:03:49 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s16sm46333324eef.2.2011.12.23.02.03.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 23 Dec 2011 02:03:47 -0800 (PST)
-Date: Fri, 23 Dec 2011 11:03:35 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111223100335.GO12791@jama.jama.net>
-References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=BVNd84FKKBlT2v3jWa2wkBgCOrOrAA9Uq9uCl9nwTH8=;
+	b=G5kGR5I7pWvuaAkJkNDMAPzZbf1g4kc1pKsewnbAzWBenNE0XBDGu3L92crBFqzIlP
+	M8e5S55SD/s1CdLGKZDRKpbpKfEpZ6yoKQtjj7OF68nVSLJ5JOAd3BrOeHtbF0fFl1cf
+	ohOFv/IMcyPkS8hkcC+2wvOML0+13C/eOchwk=
 MIME-Version: 1.0
-In-Reply-To: <1324447304-4874-1-git-send-email-b19537@freescale.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH v2 meta-oe 1/7] xmlto: add version 0.0.25
+Received: by 10.204.133.207 with SMTP id g15mr3947177bkt.17.1324638159201;
+	Fri, 23 Dec 2011 03:02:39 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.78.79 with HTTP; Fri, 23 Dec 2011 03:02:39 -0800 (PST)
+In-Reply-To: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+References: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+Date: Fri, 23 Dec 2011 09:02:39 -0200
+X-Google-Sender-Auth: eq47a3xiG6rpEAhlmpNsYCewMMo
+Message-ID: <CAP9ODKqMKWHN66pSq6GvpSy_fOk8CNZ5jXnGx_WULmyEGH9ZvQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe] gdb-cross-canadian: build gdb with python support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,240 +40,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2011 10:10:56 -0000
-X-Groupsio-MsgNum: 36261
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="c2gYorpyS4gG0T74"
-Content-Disposition: inline
-
---c2gYorpyS4gG0T74
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Dec 2011 11:09:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 21, 2011 at 02:01:38PM +0800, b19537@freescale.com wrote:
-> From: Zhenhua Luo <b19537@freescale.com>
->=20
->     xmlto converts an XML file (DocBook or XSL-FO) into a specified format
->     (PS, PDF, HTML, man, ASCII, XSL-FO, etc.)
++1 :-) very cool :-D
 
-Is there plan to provide native stylesheets too? Because after building
-xmlto-native some packages are failing because they detect xmlto-native
-available but don't check if all needed stylesheets are installed.
+2011/12/23 Eric B=E9nard <eric@eukrea.com>
 
-e.g. xtrans, libxdmcp:
-| make[1]: Entering directory `/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-lin=
-ux-gnueabi/xtrans/xtrans-1_1.2.6-r0/xtrans-1.2.6/doc'
-| /OE/shr-core/tmp/sysroots/x86_64-linux/usr/bin/xmlto  xhtml-nochunks xtra=
-ns.xml
-| xmlto: /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtra=
-ns-1_1.2.6-r0/xtrans-1.2.6/doc/xtrans.xml does not validate (status 3)
-| xmlto: Fix document syntax or use --skip-validation option
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:3: warning: failed to load external enti=
-ty "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
-|                       "http://www.oasis-open.org/docbook/xml/4.3/docbookx=
-=2Edtd">
-|                                                                          =
-      ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:26: parser error : Entity 'copy' not def=
-ined
-| Copyright &copy; 1993, 1994 NCR Corporation - Dayton, Ohio, USA
-|                 ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:59: parser error : Entity 'copy' not def=
-ined
-| Copyright &copy; 1993, 1994, 2002 The Open Group
-|                 ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:64: parser error : Entity 'ldquo' not de=
-fined
-| of this software and associated documentation files (the &ldquo;Software&=
-rdquo;)
-|                                                                 ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:64: parser error : Entity 'rdquo' not de=
-fined
-| of this software and associated documentation files (the &ldquo;Software&=
-rdquo;)
-|                                                                          =
-      ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:77: parser error : Entity 'ldquo' not de=
-fined
-| THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIN=
-D, EXPR
-|                                 ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xtrans-1_1.=
-2.6-r0/xtrans-1.2.6/doc/xtrans.xml:77: parser error : Entity 'rdquo' not de=
-fined
-| THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIN=
-D, EXPR
-|                                             ^
-| warning: failed to load external entity "http://www.oasis-open.org/docboo=
-k/xml/4.3/docbookx.dtd"
-| validity error : Could not load the external subset "http://www.oasis-ope=
-n.org/docbook/xml/4.3/docbookx.dtd"
-| Document /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/xtrans/xt=
-rans-1_1.2.6-r0/xtrans-1.2.6/doc/xtrans.xml does not validate
-| make[1]: *** [xtrans.html] Error 13
-| make[1]: Leaving directory `/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linu=
-x-gnueabi/xtrans/xtrans-1_1.2.6-r0/xtrans-1.2.6/doc'
-| make: *** [all-recursive] Error 1
-
-
-
-and libxdmcp:
-
-| make[2]: Entering directory `/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-lin=
-ux-gnueabi/libxdmcp/libxdmcp-1_1.1.0-r0/libXdmcp-1.1.0/doc'
-| /OE/shr-core/tmp/sysroots/x86_64-linux/usr/bin/xmlto  xhtml-nochunks xdmc=
-p.xml
-| xmlto: /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/li=
-bxdmcp-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml does not validate (status 3)
-| xmlto: Fix document syntax or use --skip-validation option
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3: warning: failed to load external=
- entity "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
-|                    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dt=
-d">
-|                                                                          =
-   ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3774: parser error : Entity 'tau' n=
-ot defined
-| &tau; =3D private key shared by display and manager
-|      ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3779: parser error : Entity 'rho' n=
-ot defined
-| &rho; =3D 64 bit random number generated by display
-|      ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3784: parser error : Entity 'alpha'=
- not defined
-| &alpha; =3D authentication data in XDMCP packets
-|        ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3789: parser error : Entity 'sigma'=
- not defined
-| &sigma; =3D per-session private key, generated by manager
-|        ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3794: parser error : Entity 'beta' =
-not defined
-| &beta; =3D authorization data
-|       ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3827: parser error : Entity 'rho' n=
-ot defined
-| &rho; =3D {&alpha; Request } *&tau;
-|      ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3827: parser error : Entity 'alpha'=
- not defined
-| &rho; =3D {&alpha; Request } *&tau;
-|                 ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3827: parser error : Entity 'tau' n=
-ot defined
-| &rho; =3D {&alpha; Request } *&tau;
-|                                  ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3831: parser error : Entity 'alpha'=
- not defined
-| &alpha; Accept =3D { &rho; + 1}&tau;
-|        ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3831: parser error : Entity 'rho' n=
-ot defined
-| &alpha; Accept =3D { &rho; + 1}&tau;
-|                         ^
-| /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/libxdmcp-=
-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml:3831: parser error : Entity 'tau' n=
-ot defined
-| &alpha; Accept =3D { &rho; + 1}&tau;
-|                                   ^
-| warning: failed to load external entity "http://www.oasis-open.org/docboo=
-k/xml/4.3/docbookx.dtd"
-| validity error : Could not load the external subset "http://www.oasis-ope=
-n.org/docbook/xml/4.3/docbookx.dtd"
-| Document /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/=
-libxdmcp-1_1.1.0-r0/libXdmcp-1.1.0/doc/xdmcp.xml does not validate
-| make[2]: *** [xdmcp.html] Error 13
-| make[2]: Leaving directory `/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linu=
-x-gnueabi/libxdmcp/libxdmcp-1_1.1.0-r0/libXERROR: Function 'do_compile' fai=
-led (see /OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/libxdmcp/li=
-bxdmcp-1_1.1.0-r0/temp/log.do_compile.895 for further information)
-| dmcp-1.1.0/doc'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory `/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linu=
-x-gnueabi/libxdmcp/libxdmcp-1_1.1.0-r0/libXdmcp-1.1.0'
-| make: *** [all] Error 2
-
-Probably more, I haven't finished rebuild from scratch with it yet.
-For now I plan to disable doc generation in those recipes where it's
-failing, but if you plan to add all common stylesheets, then we can
-try to fix doc generation instead and add xmlto-native + stylesheets
-to DEPENDS instead.
-
-Regards,
-
-> Signed-off-by: Zhenhua Luo <b19537@freescale.com>
+> * python support is needed for providing finer scripting control
+> in gdb, and for remote controling gdb for example from qtcreator
+> * gdb/configure tries to autodetect python using python executable
+> with --includes --ldflags --exec-prefix to get the right flags
+> As it's difficult to achieve in OE's context, we generate a
+> script which will return the right values and make gdb's build
+> system happy. This idea was taken from the following article :
+>
+> http://www.mentby.com/doug-evans-2/python-enabled-gdb-on-windows-and-relo=
+cation.html
+> * tested using angstrom & armv7/armv5 targets & qtcreator 201005 & 2.4.0
+>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 > ---
->  meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb |   14 ++++++++++++++
->  1 files changed, 14 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
->=20
-> diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/reci=
-pes-support/xmlto/xmlto_0.0.25.bb
+>  .../gdb/gdb-cross-canadian_7.3.1.bbappend          |   20
+> ++++++++++++++++++++
+>  1 files changed, 20 insertions(+), 0 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
+>
+> diff --git
+> a/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
+> b/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
 > new file mode 100644
-> index 0000000..806ea2e
+> index 0000000..3bbfe38
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION =3D "A shell-script tool for converting XML files to various=
- formats"=20
-> +HOMEPAGE =3D "https://fedorahosted.org/xmlto/"=20
-> +SECTION =3D "docs/xmlto"=20
-> +LICENSE =3D "GPLv2"=20
+> +++ b/meta-oe/recipes-devtools/gdb/gdb-cross-canadian_7.3.1.bbappend
+> @@ -0,0 +1,20 @@
+> +DEPENDS +=3D "python-nativesdk"
+> +RDEPENDS +=3D "python-nativesdk-core python-nativesdk-lang
+> python-nativesdk-re \
+> +                        python-nativesdk-codecs
+> python-nativesdk-netclient"
 > +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
-552"
+> +EXTRA_OECONF_append =3D "--with-python=3D${WORKDIR}/python"
+> +PRINC =3D "1"
 > +
-> +SRC_URI =3D "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar=
-=2Egz"=20
-> +SRC_URI[md5sum] =3D "a88cd3f08789b4825d1ac89fa065170d"
-> +SRC_URI[sha256sum] =3D "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc=
-352e843147e3e31a"
-> +
-> +inherit autotools =20
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --=20
-> 1.7.0.4
->=20
->=20
->=20
+> +do_configure_prepend() {
+> +cat > ${WORKDIR}/python << EOF
+> +#! /bin/sh
+> +case "\$2" in
+> +       --includes) echo
+> "-I${STAGING_DIR}/${HOST_ARCH}-nativesdk${HOST_VENDOR}-${HOST_OS}${exec_p=
+refix}/include/python${PYTHON_BASEVERSION}/"
+> ;;
+> +       --ldflags) echo
+> "-L${STAGING_DIR}/${HOST_ARCH}-nativesdk${HOST_VENDOR}-${HOST_OS}${libdir=
+}/python${PYTHON_BASEVERSION}/config/config
+> -lpthread -ldl -lutil -lm -lpython${PYTHON_BASEVERSION}" ;;
+> +       --exec-prefix) echo "/usr" ;;
+> +       *) exit 1 ;;
+> +esac
+> +exit 0
+> +EOF
+> +       chmod +x ${WORKDIR}/python
+> +}
+> --
+> 1.7.6.4
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---c2gYorpyS4gG0T74
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk70UfcACgkQN1Ujt2V2gBzILQCggx970k334qgV+/PhpRDq8C0q
-WLAAn13Ai6FBy+MlNS+ms+C1cre1v/Py
-=S/yO
------END PGP SIGNATURE-----
-
---c2gYorpyS4gG0T74--
