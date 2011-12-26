@@ -1,25 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Rezz6-0000w8-2E
+Received: from vms173007pub.verizon.net ([206.46.173.7])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@denix.org>) id 1Rf2yu-0005JJ-QA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Dec 2011 03:08:24 +0100
-Received: (qmail invoked by alias); 26 Dec 2011 02:01:02 -0000
-Received: from p4FDF1C30.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.28.48]
-	by mail.gmx.net (mp072) with SMTP; 26 Dec 2011 03:01:02 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/VZ81zVQvVq1+fj8KJ/3XZliUUtAs0KrkEMeYJTf
-	IZYDXJ7WZOGM2Y
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+	Mon, 26 Dec 2011 06:20:17 +0100
+Received: from gandalf.denix.org ([unknown] [71.163.124.23])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LWS00MN1MD37Q30@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	25 Dec 2011 22:12:45 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C3A0D202C0; Sun,
+	25 Dec 2011 23:12:39 -0500 (EST)
+Date: Sun, 25 Dec 2011 23:12:39 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Dec 2011 03:01:59 +0100
-Message-Id: <1324864919-17138-3-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1324864919-17138-1-git-send-email-schnitzeltony@gmx.de>
-References: <1324864919-17138-1-git-send-email-schnitzeltony@gmx.de>
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce 3/3] libxfce4ui: update to 4.8.1
+Message-id: <20111226041239.GA2321@denix.org>
+References: <4EF2F380.80704@celestialaudio.com>
+	<20111223223753.GA20360@denix.org>
+	<CACW_hTbZ=9HZNZGouQoWvLcc2WmDP4O+i+ooF98DYHWOXK79Jw@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CACW_hTbZ=9HZNZGouQoWvLcc2WmDP4O+i+ooF98DYHWOXK79Jw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: fakeroot 1.15.1 issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,42 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Dec 2011 02:08:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 26 Dec 2011 05:20:17 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* build tested incremental & from empty build dir
-* run tested on overo
+On Sun, Dec 25, 2011 at 09:11:36PM +0100, Frans Meulenbroeks wrote:
+> 2011/12/23 Denys Dmytriyenko <denis@denix.org>
+> 
+> > On Thu, Dec 22, 2011 at 01:08:16AM -0800, Jesse Lackey wrote:
+> > > I'm have exactly the same problem.  "git pull" says up to date.
+> > >
+> > > I'm continuing on by running "bitbake -k".  But things appear to be
+> > > indeed broken, by the presumably recent removal of
+> > > fakeroot_1.15.1.orig.tar.bz2 from the debian ftp site.
+> > >
+> > > Any assistance greatly appreciated.  I'm a total newbie with bitbake and
+> > OE.
+> > >
+> > > >I tried `git pull` but apparently everything is "Already up-to-date."
+> > Am I
+> > > >missing something else?
+> >
+> > Add this line to your local.conf:
+> >
+> > DEBIAN_MIRROR = "
+> > http://snapshot.debian.org/archive/debian/20111129T215729Z/pool"
+> >
+> 
+> Actually bumped into this today as well; I saw maintenance moved back to
+> 1.14.6 or so.
+> Latest version is about 1.18.2.2.
+> 
+> Guess we should either move master back to 1.14.6, or maybe even move to a
+> newer version. or fix the url to point to the snapshot copy.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../{libxfce4ui_4.8.0.bb => libxfce4ui_4.8.1.bb}   |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.8.0.bb => libxfce4ui_4.8.1.bb} (71%)
+So, instead of always chasing the very latest version, why not simply set the 
+Debian mirror variable on a per-distro basis?
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-similarity index 71%
-rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.0.bb
-rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-index 6d299cd..0887c38 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.0.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-@@ -4,11 +4,9 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
- DEPENDS = "gtk+ gettext intltool libxfce4util startup-notification xfconf"
- 
--PR = "r1"
--
- inherit xfce
- 
- FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
- 
--SRC_URI[md5sum] = "df9acb3328dff905bd0777b84532b69f"
--SRC_URI[sha256sum] = "21f67fd004653440bfdb44874ed69c9806b4784978ec068d0b1c7012864ba339"
-+SRC_URI[md5sum] = "30bd432dd0f19305e846a122d4c7c6fe"
-+SRC_URI[sha256sum] = "39cbed29da06960074014b74abc2ba57db49dc81ab8995fb2160579c51669956"
 -- 
-1.7.4.4
-
+Denys
 
 
