@@ -1,33 +1,30 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <moosab@ti.com>) id 1RfXCc-0005rm-4W
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rfbru-0006Zn-U4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Dec 2011 14:36:26 +0100
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pBRDP2nY024313
+	Tue, 27 Dec 2011 19:35:23 +0100
+Received: by vcbf1 with SMTP id f1so8631615vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2011 07:25:02 -0600
-Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pBRDP2Sn021810
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2011 07:25:02 -0600 (CST)
-Received: from DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8]) by
-	DFLE70.ent.ti.com ([fe80::db3:609a:aa62:e1ec%22]) with mapi id
-	14.01.0323.003; Tue, 27 Dec 2011 07:25:02 -0600
-From: "Baransi, Moosa" <moosab@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: rt-tests recipe
-Thread-Index: AczEmu8d5U/tMIyJRWqUGS4g4vhXPg==
-Date: Tue, 27 Dec 2011 13:25:01 +0000
-Message-ID: <308727D9E105A34D845E688AECAF6F470A718A9A@DLEE74.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.103.61]
+	Tue, 27 Dec 2011 10:28:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=PDmqwx2nsf8eclfi6M2BJy2OpC/2kcLPXkt4i8d9zYY=;
+	b=NK+xyR6tGbBCXxwLOxduJtkmEJp3Yzw5cYF50dshsS9scay5/vtteWayccsFLoxaSq
+	XHO6mfpwTWcOTFD6BHWKKef8fhMDv+J3f6kBhDFDObHSDMB+q/s56kkaQ7atYLiIsCrv
+	Ec5POMDMmonDfl+vjICfE4Fw6c2ebFd20jEpc=
 MIME-Version: 1.0
+Received: by 10.220.140.135 with SMTP id i7mr3296821vcu.65.1325010484472; Tue,
+	27 Dec 2011 10:28:04 -0800 (PST)
+Received: by 10.52.160.137 with HTTP; Tue, 27 Dec 2011 10:28:04 -0800 (PST)
+In-Reply-To: <CA+M6bXn4T8YO5SwiotYJcy3K2ioQtUBsGLCTOXCZZE=yU2vdBg@mail.gmail.com>
+References: <CACW_hTbaEcTcwhut+9NJX6yci6Mu6w+uhqB3xKcfORSg5gM2FA@mail.gmail.com>
+	<CA+M6bXn4T8YO5SwiotYJcy3K2ioQtUBsGLCTOXCZZE=yU2vdBg@mail.gmail.com>
+Date: Tue, 27 Dec 2011 19:28:04 +0100
+Message-ID: <CACW_hTZkQw6G=D=vKo1KUkHmbT-ODu7uPVH0ebbh-E7=R8zKMA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: rt-tests recipe
+Subject: Re: [2011.03-maintenance] net-snmp: please cherry pick 4a98e62ac35d4367d3c072819317deeda52abf5e from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2011 13:36:26 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Dec 2011 18:35:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+2011/12/27 Tom Rini <tom.rini@gmail.com>
 
-I am using the arago-devel with branch "next".
+> On Mon, Dec 26, 2011 at 1:29 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+> > Please merge this one
+> >
+> http://cgit.openembedded.org/openembedded/commit/?id=4a98e62ac35d4367d3c072819317deeda52abf5e
+> >
+> > to the maintenance tree. it updates net-snmp to 5.7.1; the existing
+> version
+> > does not build for uclibc; this fixes it.
+>
+> Per the wiki page, this is not a proper request for the maintenance
+> branch, please re-submit a pull request with the cherry-pick tested
+> and confirmed to fix the issue, thanks.
+>
+> This has been tested for meta-oe (by Eric) and for the maintenance branch
+(by me, actually it is part of our most recent product) and compile-tested
+by me on master.
+I'm not planning to set up a git or branch for a single patch. I'll mail a
+patch in a few minutes.
+Didn't know we became this bureaucratic. Will take that into account when
+considering submitting my next patch.
 
-When building the rt-tests recipe, I get an error that the package cannot b=
-e found.
-Searching the web shows that the git was move from git.kernel.org to github=
-. I changed the recipe (rt-tests_git.bb) accordingly:
-
-
--SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/tglx/rt-tests;p=
-rotocol=3Dgit"
-
-+SRC_URI =3D "git://github.com/clrkwllms/rt-tests.git;protocol=3Dgit"
-
-When doing so, the package is found and the recipe compiles OK.
-
-Are you aware of such an issue?
-
-Thanks,
-Moosa
+Best regards,
+Frans
 
