@@ -1,28 +1,51 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from am1ehsobe001.messaging.microsoft.com ([213.199.154.204]
+	helo=AM1EHSOBE001.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RfOZz-0003aS-VB
+	(envelope-from <B19537@freescale.com>) id 1RfScT-0006fo-4w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Dec 2011 05:24:00 +0100
-Received: by qcqw6 with SMTP id w6so6419068qcq.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2011 20:16:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=BaW8j+DyeG+ZbmpmH3253KUrgoBC2mAJ4LsLDXgWos8=;
-	b=wG6aaW2EWA9Fs1T8mv5GK7DEbPqehM8BqJMn9dUZbe7FgnH9xN1rk/PqlcYPh1Ssqu
-	DrBvHZmZnQ5Dq/NnMoR6ghPsoehXeIk2hRQxgtF7BeSPGYzI20Ww0nqkWMPQESS7O0K2
-	waXDFe2FT3yp2m51hkynZ15kVyBH2kwLjBAf4=
+	Tue, 27 Dec 2011 09:42:49 +0100
+Received: from mail72-am1-R.bigfish.com (10.3.201.247) by
+	AM1EHSOBE001.bigfish.com (10.3.204.21) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 27 Dec 2011 08:20:13 +0000
+Received: from mail72-am1 (localhost [127.0.0.1])	by mail72-am1-R.bigfish.com
+	(Postfix) with ESMTP id 9185170018E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Dec 2011 08:19:47 +0000 (UTC)
+X-SpamScore: -16
+X-BigFish: VS-16(z98bRz9371I542M1432Nzz1202hzz8275dhz2dh2a8h668h839h8e2h8e3h944hbe9n)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-FB-SS: 13,
+Received: from mail72-am1 (localhost.localdomain [127.0.0.1]) by mail72-am1
+	(MessageSwitch) id 1324973987510448_19949;
+	Tue, 27 Dec 2011 08:19:47 +0000 (UTC)
+Received: from AM1EHSMHS008.bigfish.com (unknown [10.3.201.245])	by
+	mail72-am1.bigfish.com (Postfix) with ESMTP id 7838F520045	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Dec 2011 08:19:47 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS008.bigfish.com
+	(10.3.207.108) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 27 Dec 2011 08:20:13 +0000
+Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.213]) by
+	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
+	14.01.0355.003; Tue, 27 Dec 2011 02:20:30 -0600
+From: Luo Zhenhua-B19537 <B19537@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH v4 meta-oe] xfsprogs: add version 3.1.7
+Thread-Index: AQHMwTuOrwEuxikpB0q2AenrxTzNo5Xrst6AgAOqUKA=
+Date: Tue, 27 Dec 2011 08:20:30 +0000
+Message-ID: <CA452391058F6D4E9715FB2C29D9312A010BCE4E@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1324621680-32025-1-git-send-email-b19537@freescale.com>
+	<jd550r$uov$1@dough.gmane.org>
+In-Reply-To: <jd550r$uov$1@dough.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.114]
 MIME-Version: 1.0
-Received: by 10.229.102.163 with SMTP id g35mr7836758qco.78.1324959407887;
-	Mon, 26 Dec 2011 20:16:47 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Mon, 26 Dec 2011 20:16:47 -0800 (PST)
-In-Reply-To: <CACW_hTbaEcTcwhut+9NJX6yci6Mu6w+uhqB3xKcfORSg5gM2FA@mail.gmail.com>
-References: <CACW_hTbaEcTcwhut+9NJX6yci6Mu6w+uhqB3xKcfORSg5gM2FA@mail.gmail.com>
-Date: Mon, 26 Dec 2011 21:16:47 -0700
-Message-ID: <CA+M6bXn4T8YO5SwiotYJcy3K2ioQtUBsGLCTOXCZZE=yU2vdBg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance] net-snmp: please cherry pick 4a98e62ac35d4367d3c072819317deeda52abf5e from master
+X-OriginatorOrg: freescale.com
+Subject: Re: [PATCH v4 meta-oe] xfsprogs: add version 3.1.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,22 +59,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2011 04:24:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Dec 2011 08:42:49 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 26, 2011 at 1:29 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Please merge this one
-> http://cgit.openembedded.org/openembedded/commit/?id=4a98e62ac35d4367d3c072819317deeda52abf5e
->
-> to the maintenance tree. it updates net-snmp to 5.7.1; the existing version
-> does not build for uclibc; this fixes it.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-
+> devel-bounces@lists.openembedded.org] On Behalf Of Koen Kooi
+> Sent: Sunday, December 25, 2011 2:18 AM
+>=20
+> ../../install-sh -o koen -g koen -m 644 -T so_dot_version libhandle.lai
+> /lib; ../../install-sh -o koen -g koen -T so_dot_current libhandle.lai /l=
+ib
+> | id: koen: No such user
+> | id: koen: No such user
+> | id: koen: No such user
+> | id: koen: No such user
+> | id: koen: No such user
+> | id: koen: No such user
+> | Installing libdisk-install
+> | make[1]: Nothing to be done for `install'.
+> | Installing copy-install
+> | ../install-sh -o koen -g koen -m 755 -d /usr/sbin
+> | id: koen: No such user
+> | id: koen: No such user
+> | make[1]: *** [install] Error 255
+> | make: *** [copy-install] Error 2
+> | + die 'oe_runmake failed'
+> | + bbfatal 'oe_runmake failed'
+> | + echo 'ERROR: oe_runmake failed'
+> | ERROR: oe_runmake failed
+> | + exit 1
+> NOTE: package xfsprogs-3.1.7-r0: task do_install: Failed
+>=20
+> The whole 'install as user' idea is flawed, so I'd recommend to patch it =
+out
+[Luo Zhenhua-B19537] Makes sense.=20
 
-Per the wiki page, this is not a proper request for the maintenance
-branch, please re-submit a pull request with the cherry-pick tested
-and confirmed to fix the issue, thanks.
 
--- 
-Tom
+Best Regards,
+
+Zhenhua
+
 
 
