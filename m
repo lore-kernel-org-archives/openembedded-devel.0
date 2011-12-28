@@ -1,45 +1,45 @@
-Received: from ch1ehsobe003.messaging.microsoft.com ([216.32.181.183]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from db3ehsobe003.messaging.microsoft.com ([213.199.154.141]
+	helo=DB3EHSOBE003.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1RfmYW-0006I4-2Q
+	(envelope-from <B19537@freescale.com>) id 1Rfoy5-0002Ac-Ky
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 07:00:04 +0100
-Received: from mail119-ch1-R.bigfish.com (10.43.68.249) by
-	CH1EHSOBE002.bigfish.com (10.43.70.52) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 28 Dec 2011 05:52:21 +0000
-Received: from mail119-ch1 (localhost [127.0.0.1])	by
-	mail119-ch1-R.bigfish.com (Postfix) with ESMTP id 85B635800B1	for
+	Wed, 28 Dec 2011 09:34:38 +0100
+Received: from mail119-db3-R.bigfish.com (10.3.81.252) by
+	DB3EHSOBE003.bigfish.com (10.3.84.23) with Microsoft SMTP Server id
+	14.1.225.23; Wed, 28 Dec 2011 08:27:04 +0000
+Received: from mail119-db3 (localhost [127.0.0.1])	by
+	mail119-db3-R.bigfish.com (Postfix) with ESMTP id 388D4140096	for
 	<openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2011 05:52:37 +0000 (UTC)
-X-SpamScore: -13
-X-BigFish: VS-13(z98bRz936eKzz1202hzz8275bhz2dh2a8h668h839h)
+	Wed, 28 Dec 2011 08:27:34 +0000 (UTC)
+X-SpamScore: -21
+X-BigFish: VS-21(z98bRz1803M936eK146fKzz1202hzz8275fh8275bh8275dhz2dh2a8h668h839h)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail119-ch1 (localhost.localdomain [127.0.0.1]) by mail119-ch1
-	(MessageSwitch) id 1325051555180313_18463;
-	Wed, 28 Dec 2011 05:52:35 +0000 (UTC)
-Received: from CH1EHSMHS022.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.249])	by mail119-ch1.bigfish.com (Postfix) with ESMTP id
-	1DD4B6C0048	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2011 05:52:35 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS022.bigfish.com
-	(10.43.70.22) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 28 Dec 2011 05:52:16 +0000
+Received: from mail119-db3 (localhost.localdomain [127.0.0.1]) by mail119-db3
+	(MessageSwitch) id 132506085420758_12542;
+	Wed, 28 Dec 2011 08:27:34 +0000 (UTC)
+Received: from DB3EHSMHS010.bigfish.com (unknown [10.3.81.244])	by
+	mail119-db3.bigfish.com (Postfix) with ESMTP id 007B9240210	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Dec 2011 08:27:34 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB3EHSMHS010.bigfish.com
+	(10.3.87.110) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 28 Dec 2011 08:27:03 +0000
 Received: from az33smr02.freescale.net (10.64.34.200) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server id 14.1.355.3; Tue, 27 Dec 2011 23:52:36 -0600
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server id 14.1.355.3; Wed, 28 Dec 2011 02:27:22 -0600
 Received: from localhost.localdomain
 	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
-	az33smr02.freescale.net (8.13.1/8.13.0) with ESMTP id pBS5qY92013592;
-	Tue, 27 Dec 2011 23:52:35 -0600 (CST)
+	az33smr02.freescale.net (8.13.1/8.13.0) with ESMTP id pBS8RKMv004971;
+	Wed, 28 Dec 2011 02:27:21 -0600 (CST)
 From: <b19537@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Dec 2011 13:56:17 +0800
-Message-ID: <1325051777-15317-1-git-send-email-b19537@freescale.com>
+Date: Wed, 28 Dec 2011 16:31:03 +0800
+Message-ID: <1325061063-26942-1-git-send-email-b19537@freescale.com>
 X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
-Subject: [PATCH v5 meta-oe] xfsprogs: add version 3.1.7
+Subject: [PATCH v2 meta-oe] netperf: add version 2.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,447 +53,194 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 06:00:04 -0000
+X-List-Received-Date: Wed, 28 Dec 2011 08:34:38 -0000
 Content-Type: text/plain
 
 From: Zhenhua Luo <b19537@freescale.com>
 
-    xfsprogs provides XFS filesystem utilities.
-
 Signed-off-by: Zhenhua Luo <b19537@freescale.com>
 ---
- .../xfsprogs-3.1.7/remove-install-as-user.patch    |  368 ++++++++++++++++++++
- meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb |   46 +++
- 2 files changed, 414 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch
- create mode 100644 meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
+ .../recipes-benchmark/netperf/files/cpu_set.patch  |   24 +++++++++
+ meta-oe/recipes-benchmark/netperf/files/init       |   51 ++++++++++++++++++++
+ .../recipes-benchmark/netperf/files/vfork.patch    |   26 ++++++++++
+ meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb |   46 ++++++++++++++++++
+ 4 files changed, 147 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/init
+ create mode 100644 meta-oe/recipes-benchmark/netperf/files/vfork.patch
+ create mode 100644 meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
 
-diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch
+diff --git a/meta-oe/recipes-benchmark/netperf/files/cpu_set.patch b/meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
 new file mode 100644
-index 0000000..1263aaf
+index 0000000..b2b95c7
 --- /dev/null
-+++ b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch
-@@ -0,0 +1,368 @@
-+diff -urN a/include/buildmacros b/include/buildmacros
-+--- a/include/buildmacros	2011-12-27 23:32:31.554197934 -0600
-++++ b/include/buildmacros	2011-12-27 23:33:17.895485348 -0600
-+@@ -30,7 +30,7 @@
-+ 	  $(LFILES:.l=.o) \
-+ 	  $(YFILES:%.y=%.tab.o)
++++ b/meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
+@@ -0,0 +1,24 @@
++Index: netperf-2.4.4/src/netlib.c
++===================================================================
++--- netperf-2.4.4.orig/src/netlib.c	2007-10-17 23:16:02.000000000 +0200
+++++ netperf-2.4.4/src/netlib.c	2008-12-03 17:56:32.000000000 +0100
++@@ -1988,10 +1988,15 @@
++      fall-back on what we had before, which is to use just the size of
++      an unsigned long. raj 2006-09-14 */
 + 
-+-INSTALL	= $(TOPDIR)/install-sh -o $(PKG_USER) -g $(PKG_GROUP)
-++INSTALL	= $(TOPDIR)/install-sh
-+ 
-+ IMAGES_DIR = $(TOPDIR)/all-images
-+ DIST_DIR = $(TOPDIR)/dist
-+diff -urN a/include/install-sh b/include/install-sh
-+--- a/include/install-sh	2011-12-27 23:32:31.556198121 -0600
-++++ b/include/install-sh	2011-12-27 23:32:57.012201738 -0600
-+@@ -24,11 +24,11 @@
-+ #       set           set      |    yes        yes
-+ #
-+ _usage() {
-+-    echo "Usage: $prog [-o owner] [-g group] [-m mode] -d directory"
-+-    echo "or     $prog [-D] [-o owner] [-g group] [-m mode] file directory/file"
-+-    echo "or     $prog [-o owner] [-g group] [-m mode] file [file ...] directory"
-++    echo "Usage: $prog [-m mode] -d directory"
-++    echo "or     $prog [-m mode] file directory/file"
-++    echo "or     $prog [-m mode] file [file ...] directory"
-+     echo "or     $prog -S file target  (creates \"target\" symlink)"
-+-    echo "or     $prog -T lt_arg [-o owner] [-g group] [-m mode] libtool.lai directory"
-++    echo "or     $prog -T lt_arg [-m mode] libtool.lai directory"
-+     echo ""
-+     echo "The \$DIST_MANIFEST and \$DIST_ROOT environment variables affect the"
-+     echo "behaviour of this command - see comments in the script."
-+@@ -38,32 +38,6 @@
-+     exit 1
-+ }
-+ 
-+-_chown ()
-+-{
-+-    _st=255
-+-    if [ $# -eq 3 ] ; then
-+-	chown $1:$2 $3
-+-	_st=$?
-+-	if [ $_st -ne 0 ] ; then
-+-	    if [ $REAL_UID != '0' ] ; then
-+-		if [ ! -f $DIST_ROOT/.chown.quiet ] ; then
-+-		    echo '==============================================='
-+-		    echo Ownership of files under ${DIST_ROOT:-/}
-+-		    echo cannot be changed
-+-		    echo '==============================================='
-+-		    if [ -n "$DIST_ROOT" ] ; then
-+-			touch $DIST_ROOT/.chown.quiet
-+-		    fi
-+-		fi
-+-	       _st=0
-+-	    fi     
-+-	fi
-+-    fi
-+-
-+-    return $_st
-+-}
-+-
-+-
-+ _manifest ()
-+ { 
-+     echo $* | sed -e 's/\/\//\//g' >>${DIST_MANIFEST:-/dev/null}
-+@@ -77,9 +51,6 @@
-+ Tflag=false
-+ DIRMODE=755
-+ FILEMODE=644
-+-OWNER=`id -u`
-+-GROUP=`id -g`
-+-REAL_UID=$OWNER
-+ 
-+ # default is to install and don't append manifest
-+ INSTALL=true
-+@@ -92,24 +63,16 @@
-+ 
-+ if $INSTALL
-+ then
-+-    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod; CHOWN=_chown
-++    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod;
-+ else
-+-    CP=true; LN=true; MKDIR=true; CHMOD=true; CHOWN=true
-++    CP=true; LN=true; MKDIR=true; CHMOD=true;
-+ fi
-+ 
-+-[ -n "$DIST_ROOT" -a $REAL_UID -ne 0 ] && CHOWN=true
-+-
-+-while getopts "Dcm:d:S:o:g:T:" c $*
-++while getopts "Dcm:d:S:T:" c $*
-+ do
-+    case $c in
-+    c)
-+ 	;;
-+-   g)
-+-	GROUP=$OPTARG
-+-	;;
-+-   o)
-+-	OWNER=$OPTARG
-+-	;;
-+    m)
-+ 	DIRMODE=`expr $OPTARG`
-+ 	FILEMODE=$DIRMODE
-+@@ -144,18 +107,7 @@
-+     # first usage
-+     #
-+     $MKDIR -p $dir 
-+-    status=$?
-+-    if [ $status -eq 0 ]
-+-    then
-+-	$CHMOD $DIRMODE $dir
-+-	status=$?
-+-    fi
-+-    if [ $status -eq 0 ]
-+-    then
-+-	$CHOWN $OWNER $GROUP $dir
-+-	status=$?
-+-    fi
-+-    $MANIFEST d $DIRMODE $OWNER $GROUP ${dir#$DIST_ROOT}
-++    $MANIFEST d $DIRMODE ${dir#$DIST_ROOT}
-+ elif $Sflag
-+ then
-+     #
-+@@ -201,7 +153,7 @@
-+ 			install_name=$target/$solib
-+ 			$CP $solib $install_name
-+ 			status=$?
-+-			$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$solib ${install_name#$DIST_ROOT}
-++			$MANIFEST f $FILEMODE $HERE/$solib ${install_name#$DIST_ROOT}
-+ 			break
-+ 		fi
-+ 	done
-+@@ -252,7 +204,7 @@
-+ 	install_name=$target/$old_library
-+ 	$CP $old_library $install_name
-+ 	status=$?
-+-	$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$old_library ${install_name#$DIST_ROOT}
-++	$MANIFEST f $FILEMODE $HERE/$old_library ${install_name#$DIST_ROOT}
-+ 	;;
-+     *)
-+ 	echo "$prog: -T $lt_install invalid"
-+@@ -265,7 +217,6 @@
-+ 	if [ $status -eq 0 ]
-+ 	then
-+ 		$CHMOD $FILEMODE $install_name
-+-		$CHOWN $OWNER $GROUP $install_name
-+ 	fi
-+ 	;;
-+     esac
-+@@ -290,23 +241,10 @@
-+ 	then 
-+ 	    if [ -f $dir/$f ]
-+ 	    then
-+-		$CHMOD $FILEMODE $dir/$f
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir/$f
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
-++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
-+ 	    else
-+ 		$CHMOD $FILEMODE $dir
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$dir ${dir#$DIST_ROOT}
-++		$MANIFEST f $FILEMODE $HERE/$dir ${dir#$DIST_ROOT}
-+ 	    fi
-+ 	fi
-+     else
-+@@ -332,14 +270,7 @@
-+ 	    status=$?
-+ 	    if [ $status -eq 0 ]
-+ 	    then
-+-		$CHMOD $FILEMODE $dir/$f
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir/$f
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
-++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
-+ 	    fi
-+ 	    [ $status -ne 0 ] && break
-+ 	done
-+diff -urN a/install-sh b/install-sh
-+--- a/install-sh	2011-12-27 23:32:31.565200349 -0600
-++++ b/install-sh	2011-12-27 23:32:51.854178224 -0600
-+@@ -24,11 +24,11 @@
-+ #       set           set      |    yes        yes
-+ #
-+ _usage() {
-+-    echo "Usage: $prog [-o owner] [-g group] [-m mode] -d directory"
-+-    echo "or     $prog [-D] [-o owner] [-g group] [-m mode] file directory/file"
-+-    echo "or     $prog [-o owner] [-g group] [-m mode] file [file ...] directory"
-++    echo "Usage: $prog [-m mode] -d directory"
-++    echo "or     $prog [-m mode] file directory/file"
-++    echo "or     $prog [-m mode] file [file ...] directory"
-+     echo "or     $prog -S file target  (creates \"target\" symlink)"
-+-    echo "or     $prog -T lt_arg [-o owner] [-g group] [-m mode] libtool.lai directory"
-++    echo "or     $prog -T lt_arg [-m mode] libtool.lai directory"
-+     echo ""
-+     echo "The \$DIST_MANIFEST and \$DIST_ROOT environment variables affect the"
-+     echo "behaviour of this command - see comments in the script."
-+@@ -38,32 +38,6 @@
-+     exit 1
-+ }
-+ 
-+-_chown ()
-+-{
-+-    _st=255
-+-    if [ $# -eq 3 ] ; then
-+-	chown $1:$2 $3
-+-	_st=$?
-+-	if [ $_st -ne 0 ] ; then
-+-	    if [ $REAL_UID != '0' ] ; then
-+-		if [ ! -f $DIST_ROOT/.chown.quiet ] ; then
-+-		    echo '==============================================='
-+-		    echo Ownership of files under ${DIST_ROOT:-/}
-+-		    echo cannot be changed
-+-		    echo '==============================================='
-+-		    if [ -n "$DIST_ROOT" ] ; then
-+-			touch $DIST_ROOT/.chown.quiet
-+-		    fi
-+-		fi
-+-	       _st=0
-+-	    fi     
-+-	fi
-+-    fi
-+-
-+-    return $_st
-+-}
-+-
-+-
-+ _manifest ()
-+ { 
-+     echo $* | sed -e 's/\/\//\//g' >>${DIST_MANIFEST:-/dev/null}
-+@@ -77,9 +51,6 @@
-+ Tflag=false
-+ DIRMODE=755
-+ FILEMODE=644
-+-OWNER=`id -u`
-+-GROUP=`id -g`
-+-REAL_UID=$OWNER
-+ 
-+ # default is to install and don't append manifest
-+ INSTALL=true
-+@@ -92,24 +63,16 @@
-+ 
-+ if $INSTALL
-+ then
-+-    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod; CHOWN=_chown
-++    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod;
-+ else
-+-    CP=true; LN=true; MKDIR=true; CHMOD=true; CHOWN=true
-++    CP=true; LN=true; MKDIR=true; CHMOD=true;
-+ fi
-+ 
-+-[ -n "$DIST_ROOT" -a $REAL_UID -ne 0 ] && CHOWN=true
-+-
-+-while getopts "Dcm:d:S:o:g:T:" c $*
-++while getopts "Dcm:d:S:T:" c $*
-+ do
-+    case $c in
-+    c)
-+ 	;;
-+-   g)
-+-	GROUP=$OPTARG
-+-	;;
-+-   o)
-+-	OWNER=$OPTARG
-+-	;;
-+    m)
-+ 	DIRMODE=`expr $OPTARG`
-+ 	FILEMODE=$DIRMODE
-+@@ -144,18 +107,7 @@
-+     # first usage
-+     #
-+     $MKDIR -p $dir 
-+-    status=$?
-+-    if [ $status -eq 0 ]
-+-    then
-+-	$CHMOD $DIRMODE $dir
-+-	status=$?
-+-    fi
-+-    if [ $status -eq 0 ]
-+-    then
-+-	$CHOWN $OWNER $GROUP $dir
-+-	status=$?
-+-    fi
-+-    $MANIFEST d $DIRMODE $OWNER $GROUP ${dir#$DIST_ROOT}
-++    $MANIFEST d $DIRMODE ${dir#$DIST_ROOT}
-+ elif $Sflag
-+ then
-+     #
-+@@ -201,7 +153,7 @@
-+ 			install_name=$target/$solib
-+ 			$CP $solib $install_name
-+ 			status=$?
-+-			$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$solib ${install_name#$DIST_ROOT}
-++			$MANIFEST f $FILEMODE $HERE/$solib ${install_name#$DIST_ROOT}
-+ 			break
-+ 		fi
-+ 	done
-+@@ -252,7 +204,7 @@
-+ 	install_name=$target/$old_library
-+ 	$CP $old_library $install_name
-+ 	status=$?
-+-	$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$old_library ${install_name#$DIST_ROOT}
-++	$MANIFEST f $FILEMODE $HERE/$old_library ${install_name#$DIST_ROOT}
-+ 	;;
-+     *)
-+ 	echo "$prog: -T $lt_install invalid"
-+@@ -265,7 +217,6 @@
-+ 	if [ $status -eq 0 ]
-+ 	then
-+ 		$CHMOD $FILEMODE $install_name
-+-		$CHOWN $OWNER $GROUP $install_name
-+ 	fi
-+ 	;;
-+     esac
-+@@ -290,23 +241,10 @@
-+ 	then 
-+ 	    if [ -f $dir/$f ]
-+ 	    then
-+-		$CHMOD $FILEMODE $dir/$f
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir/$f
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
-++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
-+ 	    else
-+ 		$CHMOD $FILEMODE $dir
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$dir ${dir#$DIST_ROOT}
-++		$MANIFEST f $FILEMODE $HERE/$dir ${dir#$DIST_ROOT}
-+ 	    fi
-+ 	fi
-+     else
-+@@ -332,14 +270,7 @@
-+ 	    status=$?
-+ 	    if [ $status -eq 0 ]
-+ 	    then
-+-		$CHMOD $FILEMODE $dir/$f
-+-		status=$?
-+-		if [ $status -eq 0 ]
-+-		then
-+-		    $CHOWN $OWNER $GROUP $dir/$f
-+-		    status=$?
-+-		fi
-+-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
-++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
-+ 	    fi
-+ 	    [ $status -ne 0 ] && break
-+ 	done
-diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
++-#if defined(__CPU_SETSIZE)
++-#define NETPERF_CPU_SETSIZE __CPU_SETSIZE
++-#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET(cpu, cpusetp)
++-#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp)
+++#if defined(CPU_SETSIZE)
+++#define NETPERF_CPU_SETSIZE CPU_SETSIZE
+++#define NETPERF_CPU_SET(cpu, cpusetp)  CPU_SET(cpu, cpusetp)
+++#define NETPERF_CPU_ZERO(cpusetp)      CPU_ZERO (cpusetp)
+++  typedef cpu_set_t netperf_cpu_set_t;
+++#elif defined(__CPU_SETSIZE)
+++#define NETPERF_CPU_SETSIZE __CPU_SETSIZE
+++#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET (cpu, cpusetp)
+++#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp)
++   typedef cpu_set_t netperf_cpu_set_t;
++ #else
++ #define NETPERF_CPU_SETSIZE sizeof(unsigned long)
+diff --git a/meta-oe/recipes-benchmark/netperf/files/init b/meta-oe/recipes-benchmark/netperf/files/init
 new file mode 100644
-index 0000000..3830887
+index 0000000..7cc053a
 --- /dev/null
-+++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
++++ b/meta-oe/recipes-benchmark/netperf/files/init
+@@ -0,0 +1,51 @@
++#!/bin/sh
++#
++#
++# Written by Miquel van Smoorenburg <miquels@cistron.nl>.
++# Modified for Debian GNU/Linux by Ian Murdock <imurdock@gnu.org>.
++# Modified for Debian by Christoph Lameter <clameter@debian.org>
++# Modified for openembedded by Bruno Randolf <bruno.randolf@4g-systems.biz>
++
++PATH=/bin:/usr/bin:/sbin:/usr/sbin
++DAEMON=/usr/sbin/netserver
++
++test -f $DAEMON || exit 0
++
++case "$1" in
++  start)
++		echo -n "Starting network benchmark server: netserver"
++    start-stop-daemon -S -x $DAEMON > /dev/null 2>&1 
++		echo "."
++    ;;
++  stop)
++		echo -n "Stopping network benchmark server: netserver"
++    start-stop-daemon -K -x $DAEMON
++		echo "."
++    ;;
++  #reload)
++    #
++    # If the daemon can reload its config files on the fly
++    # for example by sending it SIGHUP, do it here.
++    #
++    # If the daemon responds to changes in its config file
++    # directly anyway, make this a do-nothing entry.
++    #
++    # start-stop-daemon --stop --signal 1 --verbose --exec $DAEMON
++    # ;;
++  restart|force-reload)
++  #
++  # If the "reload" option is implemented, move the "force-reload"
++  # option to the "reload" entry above. If not, "force-reload" is
++  # just the same as "restart".
++  #
++    start-stop-daemon -K -x $DAEMON
++    sleep 1
++    start-stop-daemon -S -x $DAEMON
++    ;;
++  *)
++    echo "Usage: /etc/init.d/netperf {start|stop|restart|force-reload}"
++    exit 1
++    ;;
++esac
++
++exit 0
+diff --git a/meta-oe/recipes-benchmark/netperf/files/vfork.patch b/meta-oe/recipes-benchmark/netperf/files/vfork.patch
+new file mode 100644
+index 0000000..a40c96f
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/netperf/files/vfork.patch
+@@ -0,0 +1,26 @@
++--- netperf-2.4.4/src/netserver.c	2007-10-17 17:09:12.000000000 -0400
+++++ netperf-2.4.4.new/src/netserver.c	2011-01-23 12:26:39.000000000 -0500
++@@ -567,7 +567,11 @@
++   fflush (stdin);
++   fflush (stdout);
++   fflush (stderr);
+++#if defined(HAVE_FORK)
++   switch (fork())
+++#else
+++  switch (vfork())
+++#endif
++     {
++     case -1:  	
++       perror("netperf server error");
++@@ -712,7 +716,11 @@
++ #else
++       signal(SIGCLD, SIG_IGN);
++ 	  
+++#if defined(HAVE_FORK)
++ 	  switch (fork())
+++#else
+++	  switch (vfork())
+++#endif
++ 	    {
++ 	    case -1:
++ 	      /* something went wrong */
+diff --git a/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
+new file mode 100644
+index 0000000..6a3a81c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
 @@ -0,0 +1,46 @@
-+DESCRIPTION = "XFS Filesystem Utilities"
-+HOMEPAGE = "http://oss.sgi.com/projects/xfs"
-+SECTION = "base"
-+LICENSE = "LGPL2.1"
++DESCRIPTION="Network performance benchmark including tests for TCP, UDP, sockets, ATM and more."
++SECTION = "console/network"
++HOMEPAGE = "http://www.netperf.org/"
++LICENSE = "GPLv2+"
 +
-+LIC_FILES_CHKSUM = "file://Makefile;endline=3;md5=def2844770bb44eba37bc9ca8610fad4"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
 +
-+DEPENDS = "util-linux"
++SRC_URI="ftp://ftp.netperf.org/netperf/archive/netperf-${PV}.tar.bz2 \
++         file://cpu_set.patch \
++         file://vfork.patch \
++         file://init"
 +
-+SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
-+	file://remove-install-as-user.patch \
-+"
-+SRC_URI[md5sum] = "049cf9873794ea49d0bb3f12d45748a4"
-+SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d75c8eaa"
++SRC_URI[md5sum] = "0e942f22864e601406a994420231075b"
++SRC_URI[sha256sum] = "28e76af491ea3696885e4558ae2f5628a4b9ebdbefc2f1d9cf1b35db2813e497"
 +
-+inherit autotools
++inherit update-rc.d autotools
 +
-+FILES_${PN}-dev += "${base_libdir}/libhandle.la \
-+                    ${base_libdir}/libhandle.so"
++S = "${WORKDIR}/netperf-${PV}"
 +
-+EXTRA_OECONF = "--enable-gettext=no"
-+do_configure () {
-+	export DEBUG="-DNDEBUG"
-+	oe_runconf
++# cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
++CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
++
++do_install() {
++        install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
++        install -m 4755 src/netperf ${D}${bindir}
++        install -m 4755 src/netserver ${D}${sbindir}
++        install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
++
++        # man
++        install -d ${D}${mandir}/man1/
++        install -m 0644 doc/netserver.man ${D}${mandir}/man1/netserver.1
++        install -m 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1
++
++        # move scripts to examples directory
++        install -d ${D}${docdir}/netperf/examples
++        install -m 0644 doc/examples/*_script ${D}${docdir}/netperf/examples/
++
++        # docs ..
++        install -m 0644 COPYING ${D}${docdir}/netperf
++        install -m 0644 Release_Notes ${D}${docdir}/netperf
++        install -m 0644 README ${D}${docdir}/netperf
++        install -m 0644 doc/netperf_old.ps ${D}${docdir}/netperf
 +}
 +
-+LIBTOOL = "${HOST_SYS}-libtool"
-+EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+PARALLEL_MAKE = ""
-+
-+do_install () {
-+	export DIST_ROOT=${D}
-+	oe_runmake install
-+	# needed for xfsdump
-+	oe_runmake install-dev
-+	# replace extra links to /usr/lib with relative links (otherwise autotools_prepackage_lamangler fails to read nonexistent link)
-+	rm -f ${D}/${base_libdir}/libhandle.la
-+	rm -f ${D}/${base_libdir}/libhandle.a
-+	ln -s ../usr/lib/libhandle.la ${D}/${base_libdir}/libhandle.la
-+	ln -s ../usr/lib/libhandle.a ${D}/${base_libdir}/libhandle.a
-+
-+	# and link from /usr/lib/libhandle.so to /lib/libhandle.so
-+	rm -f ${D}/${libdir}/libhandle.so
-+	ln -s ../../lib/libhandle.a ${D}/${libdir}/libhandle.so
-+}
++INITSCRIPT_NAME="netperf"
++INITSCRIPT_PARAMS="defaults"
 -- 
 1.7.0.4
 
