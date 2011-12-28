@@ -1,27 +1,27 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RfqZY-0005kV-Gd
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 11:17:24 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 28 Dec 2011 02:10:10 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="90912620"
-Received: from unknown (HELO helios.localnet) ([10.252.122.71])
-	by orsmga001.jf.intel.com with ESMTP; 28 Dec 2011 02:10:09 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-Date: Wed, 28 Dec 2011 10:10:06 +0000
-Message-ID: <10519823.CSrPkrPaVF@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
-References: <CAOHjBZtWd8-_xgqbzx=jBjA4=tRD3CHJ62YiA=dzFr9QsUzaVA@mail.gmail.com>
-	<CAOHjBZv6UcZcc1CNqzUEinbmUWeKw85AjoADWKE_gM0m9VEOMw@mail.gmail.com>
-	<CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
+	(envelope-from <fransmeulenbroeks@gmail.com>)
+	id 1Rfqvw-0006Zy-IC; Wed, 28 Dec 2011 11:40:33 +0100
+Received: by vcbf1 with SMTP id f1so8998448vcb.6
+	for <multiple recipients>; Wed, 28 Dec 2011 02:33:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Y+rLOm0fqAH16d1PHNL74Vwvjrt55cQVHH4H4lp3jn4=;
+	b=VywR5PO+RPQTjmAgMtl6hRQEg36CPMO0L74cGz9T6Ep9UYHWqNa9Tb85mLd9FyEz4q
+	CXXb22xQ5RUeXGIv1P8FojQqxAXQM9ZJjutP8Oczb0I6PuWKgY2b3HTi1y1H8FZXQkBo
+	Baowd6KSI8rxlJWqGCcmrDuerxcv4EfZof8eY=
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Question about package prefix
+Received: by 10.52.178.195 with SMTP id da3mr15253626vdc.20.1325068395786;
+	Wed, 28 Dec 2011 02:33:15 -0800 (PST)
+Received: by 10.52.160.137 with HTTP; Wed, 28 Dec 2011 02:33:15 -0800 (PST)
+Date: Wed, 28 Dec 2011 11:33:15 +0100
+Message-ID: <CACW_hTbBoB4yaN0W+H3WuW9GXYFGD6+FxQ5BMbKe+a2-pqc_Hw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: non-fetching recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 10:17:24 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 28 Dec 2011 10:40:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wednesday 28 December 2011 10:40:47 Giuseppe Condorelli wrote:
-> any advices?
-> Thanks again,
-> Giuseppe
-> 
-> 2011/12/20 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-> > looking at the link Paul suggested me I cannot see anything that can be
-> > address me to solve my problem.
-> > The lone modification I can see here is the prefix, exec_prefix, etc...
-> > setting inside micro.conf file, but this
-> > is not good to help me.
-> > I'm showing an example:
-> > 
-> > 1) imagine we have a package rpm, for example zlib
-> > 2) rpm -qpli zlib.rpm (let me to call the package in this manner) will
-> > show a list of the included files plus other info.
-> > 
-> >    All of those will have absolute path (/usr, etc...)
-> > 
-> > 3) What I need is to change this to a prefixed one (for example
-> > /opt/test/distro/usr, etc...)
-> > 4) I need this for all package in my distribution
+Hi,
 
-So I'm not entirely sure I understand why this doesn't solve your problem. For 
-your purposes you should have your own distro config file 
-(conf/distro/distroname.conf) and set DISTRO = "distroname" in local.conf, and 
-AFAICT then you should just need to set the *_prefix variables in the distro 
-config as micro.conf does. You can look at classes/nativesdk.bbclass in OE-Core 
-for another example of setting these prefixes.
+I noticed that several recipes are non-fetchers. These are mostly the ones
+with sources hosted on kernel.org.
+Is there an issue with kernel.org again?
 
-Cheers,
-Paul
+I noticed this for oe classic where libpam and util-linux-ng did not fetch
+(as well as opkg-utils but that one is from openmoko).
+oe maintenance branch seems to have the same problems as well as using
+binutils 2.21 which is not available any more. master does not have this as
+it has been moved to 2.21a.
 
--- 
+I'm crossposting this to oe-core, because I noticed it uses the same
+location for libpam (and probably util-linux).
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Someone might want to run some fetchalls.
 
+Frans.
 
