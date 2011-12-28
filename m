@@ -1,25 +1,27 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RfvrG-0007FV-V8
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rfvte-0007NW-Rs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 16:56:04 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 28 Dec 2011 07:48:48 -0800
+	Wed, 28 Dec 2011 16:58:31 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 28 Dec 2011 07:51:13 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="92282373"
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="106709890"
 Received: from unknown (HELO helios.localnet) ([10.252.122.71])
-	by orsmga002.jf.intel.com with ESMTP; 28 Dec 2011 07:48:47 -0800
+	by fmsmga002.fm.intel.com with ESMTP; 28 Dec 2011 07:51:12 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-Date: Wed, 28 Dec 2011 15:48:46 +0000
-Message-ID: <1535311.D6ZbQ8u8yE@helios>
+Date: Wed, 28 Dec 2011 15:51:10 +0000
+Message-ID: <1472473.WE2LHPWOEC@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <CAOHjBZuETnOuVQkfC9hmoS9X8vRVQCnLUPtqF6g5+JLjT4+DQA@mail.gmail.com>
-References: <CAOHjBZuETnOuVQkfC9hmoS9X8vRVQCnLUPtqF6g5+JLjT4+DQA@mail.gmail.com>
+In-Reply-To: <CAOHjBZtRqvM+DD1_JwuDs2MzWXF=DK9Sg-AtSwNpQsTq--+itw@mail.gmail.com>
+References: <CAOHjBZtWd8-_xgqbzx=jBjA4=tRD3CHJ62YiA=dzFr9QsUzaVA@mail.gmail.com>
+	<10519823.CSrPkrPaVF@helios>
+	<CAOHjBZtRqvM+DD1_JwuDs2MzWXF=DK9Sg-AtSwNpQsTq--+itw@mail.gmail.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Python2.7.2 compatibility
+Subject: Re: Question about package prefix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,20 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 15:56:04 -0000
+X-List-Received-Date: Wed, 28 Dec 2011 15:58:31 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Wednesday 28 December 2011 16:43:55 Giuseppe Condorelli wrote:
-> I moved to two VM (Fedora16 and Ubuntu11.10). Both have python2.7.2
-> I have problem using bitbake against this python version.
-> Is this a known problem or I'm missing something?
-> I had this problem with both best so far bitbake (git clone) and previous
-> stable versions.
+On Wednesday 28 December 2011 16:40:55 Giuseppe Condorelli wrote:
+> What micro.conf does is to put all the *_prefix variables to "".
+> Also to create an sdk is not my scope, I need to build a base-image distro
+> and, running "bitbake base-image", this will not use nativesdk.bbclass
+> AFAIK.
 
-Could you be more specific about the problem you are having, and what version 
-of BitBake you are using? I am using Python 2.7.2+ on Ubuntu 11.10 with no 
-problems.
+I'm not suggesting you should use nativesdk.bbclass, I'm suggesting it as an 
+example you can look at where the *_prefix variables are being set.
+
+> I tried to modify *_prefix variables but, everytime, build failed at a
+> given point.
+
+Where did it fail? Please provide the error output.
 
 Cheers,
 Paul
