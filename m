@@ -1,35 +1,26 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1Rfq77-0004YM-37
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RfqZY-0005kV-Gd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 10:48:02 +0100
-Received: by iakh37 with SMTP id h37so18189875iak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2011 01:40:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=BEdzae8k+n+ZLrMRi4muPrLG1zwmOt7x3p7oyPrOHCQ=;
-	b=KvhumSDWdotbpr/8lVJ/DME1QKFMeYPWbuPNmW2b4h2MgUAQHajHrA41FVZXS913XQ
-	+W+0bHvQ1mMJVA/MrFcyjsLnXLJ97G+d5BPOfp2c1qVRGdEPG8o5AHYcL0Ej79zGz3Br
-	ypAoU3cuUR1vcE+SF2naIRe4PBRQcmv38IbJM=
-MIME-Version: 1.0
-Received: by 10.43.58.10 with SMTP id wi10mr31767278icb.57.1325065247270; Wed,
-	28 Dec 2011 01:40:47 -0800 (PST)
-Received: by 10.231.3.70 with HTTP; Wed, 28 Dec 2011 01:40:47 -0800 (PST)
-In-Reply-To: <CAOHjBZv6UcZcc1CNqzUEinbmUWeKw85AjoADWKE_gM0m9VEOMw@mail.gmail.com>
+	Wed, 28 Dec 2011 11:17:24 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 28 Dec 2011 02:10:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="90912620"
+Received: from unknown (HELO helios.localnet) ([10.252.122.71])
+	by orsmga001.jf.intel.com with ESMTP; 28 Dec 2011 02:10:09 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+Date: Wed, 28 Dec 2011 10:10:06 +0000
+Message-ID: <10519823.CSrPkrPaVF@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+In-Reply-To: <CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
 References: <CAOHjBZtWd8-_xgqbzx=jBjA4=tRD3CHJ62YiA=dzFr9QsUzaVA@mail.gmail.com>
-	<CAMKF1srRe_ksYrw3Zq+ScS0ED12e7QoeGurtynybsFOvACH1-Q@mail.gmail.com>
-	<1845722180277205462@unknownmsgid> <13795657.zIHqNnJ6yk@helios>
-	<5552958045648051101@unknownmsgid>
 	<CAOHjBZv6UcZcc1CNqzUEinbmUWeKw85AjoADWKE_gM0m9VEOMw@mail.gmail.com>
-Date: Wed, 28 Dec 2011 10:40:47 +0100
-Message-ID: <CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Question about package prefix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,66 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 09:48:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Dec 2011 10:17:24 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi All,
-
-any advices?
-Thanks again,
-Giuseppe
-
-2011/12/20 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-
-> Hi All,
->
-> looking at the link Paul suggested me I cannot see anything that can be
-> address me to solve my problem.
-> The lone modification I can see here is the prefix, exec_prefix, etc...
-> setting inside micro.conf file, but this
-> is not good to help me.
-> I'm showing an example:
->
-> 1) imagine we have a package rpm, for example zlib
-> 2) rpm -qpli zlib.rpm (let me to call the package in this manner) will
-> show a list of the included files plus other info.
->    All of those will have absolute path (/usr, etc...)
-> 3) What I need is to change this to a prefixed one (for example
-> /opt/test/distro/usr, etc...)
-> 4) I need this for all package in my distribution
-> 5) Is there a solution for this?
->
-> Thanks for all people that will try to help me.
-> Best Regards,
+On Wednesday 28 December 2011 10:40:47 Giuseppe Condorelli wrote:
+> any advices?
+> Thanks again,
 > Giuseppe
->
-> 2011/12/16 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
->
->> Many thanks Paul, I'll at it soon and I'll let you know.
->>
->> Cheers,
->> Giuseppe
->>
->> Il giorno 16/dic/2011, alle ore 23:41, Paul Eggleton
->> <paul.eggleton@linux.intel.com> ha scritto:
->>
->> > On Friday 16 December 2011 23:35:37 Giuseppe Condorelli wrote:
->> >> I'm sorry but I'm not able to find the meta-micro file. I searched it
->> >> under meta directory without success (openembedded git repos).
->> >> Any suggestions?
->> >
->> > FYI you can find a link to it on the layer index page:
->> >
->> > http://www.openembedded.org/wiki/LayerIndex
->> >
->> > Cheers,
->> > Paul
->> >
->> > --
->> >
->> > Paul Eggleton
->> > Intel Open Source Technology Centre
->>
->
->
+> 
+> 2011/12/20 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+> > looking at the link Paul suggested me I cannot see anything that can be
+> > address me to solve my problem.
+> > The lone modification I can see here is the prefix, exec_prefix, etc...
+> > setting inside micro.conf file, but this
+> > is not good to help me.
+> > I'm showing an example:
+> > 
+> > 1) imagine we have a package rpm, for example zlib
+> > 2) rpm -qpli zlib.rpm (let me to call the package in this manner) will
+> > show a list of the included files plus other info.
+> > 
+> >    All of those will have absolute path (/usr, etc...)
+> > 
+> > 3) What I need is to change this to a prefixed one (for example
+> > /opt/test/distro/usr, etc...)
+> > 4) I need this for all package in my distribution
+
+So I'm not entirely sure I understand why this doesn't solve your problem. For 
+your purposes you should have your own distro config file 
+(conf/distro/distroname.conf) and set DISTRO = "distroname" in local.conf, and 
+AFAICT then you should just need to set the *_prefix variables in the distro 
+config as micro.conf does. You can look at classes/nativesdk.bbclass in OE-Core 
+for another example of setting these prefixes.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
