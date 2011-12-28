@@ -1,27 +1,25 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1Rfvmc-00072l-Vb
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RfvrG-0007FV-V8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 16:51:15 +0100
-Received: by iakh37 with SMTP id h37so18592240iak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2011 07:43:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=6AaMPs6JHLY+wUa1bHNNDt9VpSvathJWsD2929+ZlFc=;
-	b=wNX8UVU6GxirPHAh0pq9N4SWuG8Kwm05KvHsPOAO+OsgczMurehPYHrbsE6TyIc59+
-	5+0Fcw/koWmAPz983oovcRuM0aLsiWYK88tmD+l+QUUG27I9VNid1th+iYuUkMOETG9q
-	QLPor1vWtSAgKXfCPPBQAsn3GpnNK5SU05kXM=
+	Wed, 28 Dec 2011 16:56:04 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 28 Dec 2011 07:48:48 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="92282373"
+Received: from unknown (HELO helios.localnet) ([10.252.122.71])
+	by orsmga002.jf.intel.com with ESMTP; 28 Dec 2011 07:48:47 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+Date: Wed, 28 Dec 2011 15:48:46 +0000
+Message-ID: <1535311.D6ZbQ8u8yE@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+In-Reply-To: <CAOHjBZuETnOuVQkfC9hmoS9X8vRVQCnLUPtqF6g5+JLjT4+DQA@mail.gmail.com>
+References: <CAOHjBZuETnOuVQkfC9hmoS9X8vRVQCnLUPtqF6g5+JLjT4+DQA@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.50.155.195 with SMTP id vy3mr36307054igb.12.1325087035826;
-	Wed, 28 Dec 2011 07:43:55 -0800 (PST)
-Received: by 10.231.3.70 with HTTP; Wed, 28 Dec 2011 07:43:55 -0800 (PST)
-Date: Wed, 28 Dec 2011 16:43:55 +0100
-Message-ID: <CAOHjBZuETnOuVQkfC9hmoS9X8vRVQCnLUPtqF6g5+JLjT4+DQA@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Python2.7.2 compatibility
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Python2.7.2 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,18 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 15:51:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Dec 2011 15:56:04 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi All,
+On Wednesday 28 December 2011 16:43:55 Giuseppe Condorelli wrote:
+> I moved to two VM (Fedora16 and Ubuntu11.10). Both have python2.7.2
+> I have problem using bitbake against this python version.
+> Is this a known problem or I'm missing something?
+> I had this problem with both best so far bitbake (git clone) and previous
+> stable versions.
 
-I moved to two VM (Fedora16 and Ubuntu11.10). Both have python2.7.2
-I have problem using bitbake against this python version.
-Is this a known problem or I'm missing something?
-I had this problem with both best so far bitbake (git clone) and previous
-stable versions.
+Could you be more specific about the problem you are having, and what version 
+of BitBake you are using? I am using Python 2.7.2+ on Ubuntu 11.10 with no 
+problems.
 
-Please let me know.
-Thanks and Regards,
-Giuseppe
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
