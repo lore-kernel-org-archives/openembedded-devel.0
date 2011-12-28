@@ -1,27 +1,50 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from ch1ehsobe002.messaging.microsoft.com ([216.32.181.182]
+	helo=ch1outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rfe0W-0002tX-G6
+	(envelope-from <B29882@freescale.com>) id 1RfijU-0003Ml-9E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Dec 2011 21:52:24 +0100
-Received: by vbbfc21 with SMTP id fc21so9447678vbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2011 12:45:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=yi2jdCgq60MO3Dy0bS8F6nlarphleBsihPSPjbOO9zY=;
-	b=BATHoAHKvyp/TA/dpvW406u5aEMs81/zG9jHyD0MDQOhr6EhjaDOIeTLBBdVLYmX2h
-	gOiHc4EvK1MGt3EX/xwg3qg4TUz5qndx048Ml+0Vl37P9Xkru1a7lYOyexuZDGfUzqYa
-	JvazaqT2/e8gfOcgPClssSFTSVWRRuAmOQoGA=
+	Wed, 28 Dec 2011 02:55:09 +0100
+Received: from mail72-ch1-R.bigfish.com (10.43.68.254) by
+	CH1EHSOBE018.bigfish.com (10.43.70.68) with Microsoft SMTP Server id
+	14.1.225.23; Wed, 28 Dec 2011 01:32:11 +0000
+Received: from mail72-ch1 (localhost [127.0.0.1])	by mail72-ch1-R.bigfish.com
+	(Postfix) with ESMTP id CECE6700082	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Dec 2011 01:32:34 +0000 (UTC)
+X-SpamScore: -14
+X-BigFish: VS-14(z21eN98bRz9371I98dKzz1202hzz8275bhz2dh2a8h668h839h8e2h8e3hbe9n)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail72-ch1 (localhost.localdomain [127.0.0.1]) by mail72-ch1
+	(MessageSwitch) id 1325035952164989_31501;
+	Wed, 28 Dec 2011 01:32:32 +0000 (UTC)
+Received: from CH1EHSMHS016.bigfish.com (snatpool1.int.messaging.microsoft.com
+	[10.43.68.250])	by mail72-ch1.bigfish.com (Postfix) with ESMTP id
+	C101B480050 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Dec 2011 01:32:31 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS016.bigfish.com
+	(10.43.70.16) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 28 Dec 2011 01:32:06 +0000
+Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.86]) by
+	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
+	14.01.0355.003; Tue, 27 Dec 2011 19:32:25 -0600
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH v2 meta-oe 1/7] xmlto: add version 0.0.25
+Thread-Index: AQHMxQCNB5tU42ylrkWXcGiVmmVOhA==
+Date: Wed, 28 Dec 2011 01:32:24 +0000
+Message-ID: <CAEsOVNc05t2eoOqYo8U1Ktz4O4cKNgnve2qMLgB0_qn+7H4JDA@mail.gmail.com>
+References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
+	<20111223100335.GO12791@jama.jama.net>
+In-Reply-To: <20111223100335.GO12791@jama.jama.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [99.47.177.27]
 MIME-Version: 1.0
-Received: by 10.52.17.139 with SMTP id o11mr15387474vdd.62.1325018711312; Tue,
-	27 Dec 2011 12:45:11 -0800 (PST)
-Received: by 10.52.160.137 with HTTP; Tue, 27 Dec 2011 12:45:11 -0800 (PST)
-Date: Tue, 27 Dec 2011 21:45:11 +0100
-Message-ID: <CACW_hTbMw7rssTV0ceidKR496jUbdcENRE6c23y46ds+xrSOow@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [2011.03-maintenance] u-boot 2011.03 recipe
+X-OriginatorOrg: freescale.com
+Subject: Re: [PATCH v2 meta-oe 1/7] xmlto: add version 0.0.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +58,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2011 20:52:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Dec 2011 01:55:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <D804A5A56563D64FB9845ED743E9BC0F@freescale.net>
+Content-Transfer-Encoding: quoted-printable
 
-Just a snippet of info for the maintenance tree users.
-I've modified 2011.03 in master to also build the latest version of the
-tools (notably fw_printenv, fw_setenv).
-These are useful if you want to modify the u-boot environment from user
-space.
+On Fri, Dec 23, 2011 at 4:03 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> Is there plan to provide native stylesheets too? Because after building
+> xmlto-native some packages are failing because they detect xmlto-native
+> available but don't check if all needed stylesheets are installed.
 
-As the maintenance branch does not have this version, I'm not sure whether
-it is desired or not to submit it. (not sure whether maintenance would want
-a newer u-boot)
-Anyone needing it (or wanting to move it to the maintenance branch): feel
-free to copy.
+Can you help us out here and tell us what package would provide these?
 
-Enjoy, Frans.
+-M=
+
+
 
