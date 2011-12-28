@@ -1,27 +1,34 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>)
-	id 1Rfqvw-0006Zy-IC; Wed, 28 Dec 2011 11:40:33 +0100
-Received: by vcbf1 with SMTP id f1so8998448vcb.6
-	for <multiple recipients>; Wed, 28 Dec 2011 02:33:15 -0800 (PST)
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1Rfvje-0006sB-06
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Dec 2011 16:48:10 +0100
+Received: by iakh37 with SMTP id h37so18588936iak.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Dec 2011 07:40:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=Y+rLOm0fqAH16d1PHNL74Vwvjrt55cQVHH4H4lp3jn4=;
-	b=VywR5PO+RPQTjmAgMtl6hRQEg36CPMO0L74cGz9T6Ep9UYHWqNa9Tb85mLd9FyEz4q
-	CXXb22xQ5RUeXGIv1P8FojQqxAXQM9ZJjutP8Oczb0I6PuWKgY2b3HTi1y1H8FZXQkBo
-	Baowd6KSI8rxlJWqGCcmrDuerxcv4EfZof8eY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=MRnnP9Lnj10hnWv2z5s37xnLtZKIZPZuxfSczlrZJh0=;
+	b=uZI5EyJGfK63gUp3ElurkrtiTMKky0blZc0fZHoIz9MDDFK/jGBMl+z+5rqYhR+w8Z
+	j/NNZNQ6SiQsGVwpH1AJvb9YLeD5pTVwI/JPViqjnzTnZpBQbobYJaedTwaDCXhnC1Ho
+	p/D+WH4bi8c/XqNA+EaTixmrrBp4nCpJeYCpI=
 MIME-Version: 1.0
-Received: by 10.52.178.195 with SMTP id da3mr15253626vdc.20.1325068395786;
-	Wed, 28 Dec 2011 02:33:15 -0800 (PST)
-Received: by 10.52.160.137 with HTTP; Wed, 28 Dec 2011 02:33:15 -0800 (PST)
-Date: Wed, 28 Dec 2011 11:33:15 +0100
-Message-ID: <CACW_hTbBoB4yaN0W+H3WuW9GXYFGD6+FxQ5BMbKe+a2-pqc_Hw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
+Received: by 10.50.100.164 with SMTP id ez4mr16870765igb.12.1325086855185;
+	Wed, 28 Dec 2011 07:40:55 -0800 (PST)
+Received: by 10.231.3.70 with HTTP; Wed, 28 Dec 2011 07:40:55 -0800 (PST)
+In-Reply-To: <10519823.CSrPkrPaVF@helios>
+References: <CAOHjBZtWd8-_xgqbzx=jBjA4=tRD3CHJ62YiA=dzFr9QsUzaVA@mail.gmail.com>
+	<CAOHjBZv6UcZcc1CNqzUEinbmUWeKw85AjoADWKE_gM0m9VEOMw@mail.gmail.com>
+	<CAOHjBZs+qDj-Rz-rMeMXrAPPDq2huA2cobNBv0cK7qncejMk-g@mail.gmail.com>
+	<10519823.CSrPkrPaVF@helios>
+Date: Wed, 28 Dec 2011 16:40:55 +0100
+Message-ID: <CAOHjBZtRqvM+DD1_JwuDs2MzWXF=DK9Sg-AtSwNpQsTq--+itw@mail.gmail.com>
+From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: non-fetching recipes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Question about package prefix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,25 +42,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 10:40:33 -0000
+X-List-Received-Date: Wed, 28 Dec 2011 15:48:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Hi Paul,
 
-I noticed that several recipes are non-fetchers. These are mostly the ones
-with sources hosted on kernel.org.
-Is there an issue with kernel.org again?
+many thanks for your support (see below).
 
-I noticed this for oe classic where libpam and util-linux-ng did not fetch
-(as well as opkg-utils but that one is from openmoko).
-oe maintenance branch seems to have the same problems as well as using
-binutils 2.21 which is not available any more. master does not have this as
-it has been moved to 2.21a.
+2011/12/28 Paul Eggleton <paul.eggleton@linux.intel.com>
 
-I'm crossposting this to oe-core, because I noticed it uses the same
-location for libpam (and probably util-linux).
+> On Wednesday 28 December 2011 10:40:47 Giuseppe Condorelli wrote:
+> > any advices?
+> > Thanks again,
+> > Giuseppe
+> >
+> > 2011/12/20 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+> > > looking at the link Paul suggested me I cannot see anything that can be
+> > > address me to solve my problem.
+> > > The lone modification I can see here is the prefix, exec_prefix, etc...
+> > > setting inside micro.conf file, but this
+> > > is not good to help me.
+> > > I'm showing an example:
+> > >
+> > > 1) imagine we have a package rpm, for example zlib
+> > > 2) rpm -qpli zlib.rpm (let me to call the package in this manner) will
+> > > show a list of the included files plus other info.
+> > >
+> > >    All of those will have absolute path (/usr, etc...)
+> > >
+> > > 3) What I need is to change this to a prefixed one (for example
+> > > /opt/test/distro/usr, etc...)
+> > > 4) I need this for all package in my distribution
+>
+> So I'm not entirely sure I understand why this doesn't solve your problem.
+> For
+> your purposes you should have your own distro config file
+> (conf/distro/distroname.conf) and set DISTRO = "distroname" in local.conf,
+> and
+> AFAICT then you should just need to set the *_prefix variables in the
+> distro
+> config as micro.conf does. You can look at classes/nativesdk.bbclass in
+> OE-Core
+> for another example of setting these prefixes.
+>
 
-Someone might want to run some fetchalls.
+What micro.conf does is to put all the *_prefix variables to "".
+Also to create an sdk is not my scope, I need to build a base-image distro
+and, running "bitbake base-image", this will not use nativesdk.bbclass
+AFAIK.
+I tried to modify *_prefix variables but, everytime, build failed at a
+given point.
+I repeat, what I need is to obtain the rpm packages with %files containing
+relocated information (see above).
 
-Frans.
+What's your idea?
+Regards,
+Giuseppe
+
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
 
