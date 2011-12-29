@@ -1,36 +1,35 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RgDXD-0004ee-4z
+	(envelope-from <elizabeth.flanagan@intel.com>) id 1RgKgH-0000eH-5F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Dec 2011 11:48:31 +0100
-Received: by wibhq7 with SMTP id hq7so6287067wib.6
+	Thu, 29 Dec 2011 19:26:22 +0100
+Received: from mail-tul01m020-f180.google.com ([209.85.214.180])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 29 Dec 2011 10:19:05 -0800
+Received: by obbup3 with SMTP id up3so9072547obb.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Dec 2011 02:41:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9mSirXrf8A98LkopA+5NAbeVzplMMFYbBPckfQGmfy0=;
-	b=fplDR3BsTqU0BwZPQnkX5JeKEm4TVfdOso+0CxHJYtPZvQ2G3ArfDZDpMh6/qhSTn+
-	5Y+vySzwzOzemP/PywquyzTAvjBua9kOHC0eK2CCEdXVQvv3YC8I99/uNJHV3+C5ZWCM
-	EBapr2xhuZjmdzVtVT2dNhzGeowLp3KXn7YHw=
-Received: by 10.216.136.20 with SMTP id v20mr19672179wei.14.1325155277022;
-	Thu, 29 Dec 2011 02:41:17 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fq5sm13373779wbb.17.2011.12.29.02.41.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 29 Dec 2011 02:41:16 -0800 (PST)
-Date: Thu, 29 Dec 2011 11:41:14 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111229104114.GB16885@jama.jama.net>
-References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
-	<20111223100335.GO12791@jama.jama.net>
-	<CAEsOVNc05t2eoOqYo8U1Ktz4O4cKNgnve2qMLgB0_qn+7H4JDA@mail.gmail.com>
-	<20111229102439.GA16885@jama.jama.net>
+	Thu, 29 Dec 2011 10:19:04 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20111229102439.GA16885@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH v2 meta-oe 1/7] xmlto: add version 0.0.25
+Received: by 10.50.222.233 with SMTP id qp9mr42485804igc.1.1325182744241; Thu,
+	29 Dec 2011 10:19:04 -0800 (PST)
+Received: by 10.50.208.98 with HTTP; Thu, 29 Dec 2011 10:19:04 -0800 (PST)
+In-Reply-To: <CA452391058F6D4E9715FB2C29D9312A010BB252@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1324003173-13994-1-git-send-email-b19537@freescale.com>
+	<1324003173-13994-5-git-send-email-b19537@freescale.com>
+	<jcetai$4n1$5@dough.gmane.org>
+	<CA452391058F6D4E9715FB2C29D9312A02CEB8@039-SN2MPN1-022.039d.mgd.msft.net>
+	<44FD6890-C4DA-4A40-B30F-BDADC690C21E@dominion.thruhere.net>
+	<20111216215455.GC28832@sakrah.homelinux.org>
+	<CAPhnLPDSpXjAi+V9gjJCsrdoYez5CJWzv-+ejmDqm8P5mFu_Kw@mail.gmail.com>
+	<CA452391058F6D4E9715FB2C29D9312A010B9F06@039-SN2MPN1-023.039d.mgd.msft.net>
+	<CAPhnLPDpLHjNXG0gtr0fL1M_33bbxmQNPE5ZE_1xraN6=voikQ@mail.gmail.com>
+	<CA452391058F6D4E9715FB2C29D9312A010BB252@039-SN2MPN1-023.039d.mgd.msft.net>
+Date: Thu, 29 Dec 2011 10:19:04 -0800
+Message-ID: <CAPhnLPAdTtLsmnXedraQD5uLtxBUqAqG8-ZufNtAq40iWkYhYw@mail.gmail.com>
+From: "Flanagan, Elizabeth" <elizabeth.flanagan@intel.com>
+To: Luo Zhenhua-B19537 <B19537@freescale.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH meta-oe 5/9] nerperf: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,79 +43,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2011 10:48:31 -0000
-X-Groupsio-MsgNum: 36301
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aM3YZ0Iwxop3KEKx"
-Content-Disposition: inline
-
---aM3YZ0Iwxop3KEKx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Dec 2011 18:26:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 29, 2011 at 11:24:39AM +0100, Martin Jansa wrote:
-> On Wed, Dec 28, 2011 at 01:32:24AM +0000, McClintock Matthew-B29882 wrote:
-> > On Fri, Dec 23, 2011 at 4:03 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-> > > Is there plan to provide native stylesheets too? Because after buildi=
-ng
-> > > xmlto-native some packages are failing because they detect xmlto-nati=
-ve
-> > > available but don't check if all needed stylesheets are installed.
-> >=20
-> > Can you help us out here and tell us what package would provide these?
->=20
-> In gentoo they are provided by packages like this
-> app-text/docbook-xml-dtd
-> but because each docs build can ask for different dtd version then it's
-> common to have more than one version installed at the same time (e.g. 4.1,
-> 4.2 and 4.3 are mostly used at my gentoo installation)
->=20
-> That's why OE-classic and OE-core has those PV already in PN:
-> ./recipes/docbook-sgml-dtd
-> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
-> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
-> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
-> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
-> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
-> and
-> ./meta/recipes-devtools/docbook-sgml-dtd
-> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
-> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
-> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
-> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
->=20
-> But those xorg recipes seems to be using dtd-4.3.
+On Wed, Dec 21, 2011 at 6:44 PM, Luo Zhenhua-B19537
+<B19537@freescale.com> wrote:
+> May I know which license type should be put in the recipe?
+>
+> LICENSE =3D "GPLv2+"
+>
+> Or
+>
+> LICENSE =3D "Netperf 4"
 
-To be more clear about the issue:=20
+No, what I meant was, look at the version of Netperf, called Netperf 4.
 
-1) now there is also target xmlto without any dtds for target
-2) xmlto-native is autodetected as available (ie for xorg stuff) but
-   then fails to build docs because cannot find dtds even with
-   4.3-native added and installed
-   meta/recipes-devtools/docbook-utils/docbook-utils-native_0.6.14.bb is
-   doing some magic to find correct dtd files, not sure if it works
-3) xorg builds have xmlto support autodetected, I have patches to
-   disable it (to build them on host without stylessheets already
-   installed), but if xmlto is fixed and stylesheets available then we
-   can force it enabled instead.
+http://www.netperf.org/svn/netperf4/
 
-Regards,
+It's license would be GPL-2.0+.
+
+>
+>
+>
+>
+>
+> Best Regards,
+>
+>
+>
+> Zhenhua
+>
+>
+>
+> From: Flanagan, Elizabeth [mailto:elizabeth.flanagan@intel.com]
+> Sent: Thursday, December 22, 2011 1:38 AM
+> To: Luo Zhenhua-B19537
+> Cc: openembedded-devel@lists.openembedded.org
+>
+> Subject: Re: [oe] [PATCH meta-oe 5/9] nerperf: add
+>
+>
+>
+>
+>
+> On Tue, Dec 20, 2011 at 10:26 PM, Luo Zhenhua-B19537 <B19537@freescale.co=
+m>
+> wrote:
+>
+> I have sent an email to netperf-feedback@netperf.org to query the
+> appropriate license type yesterday and not response.
+>
+> I'd like to adopt following option, does it make sense?
+>
+>> > 2. We'll need to add a Netperf license to common-licenses and set
+>> > LICENSE =3D "Netperf"
+>
+>
+> Yes, I agree. Although the Netperf license isn't really compatible with a=
+ny
+> OSI compliant license I know of and may cause end user problems. One opti=
+on
+> is to use Netperf 4 which is in fact GPL compliant. In that case it would=
+ be
+> licensed as LICENSE =3D "GPL-2.0+"
+>
+> If netperf 4 was equivalent from a functional standpoint, I'd go consider
+> route, as the Netperf 2.x.x license can be problematic for some end users=
+,
+> I'm sure.
+>
+> -b
+>
+>
+>
+> Best Regards,
+>
+> Zhenhua
+>
+>
+>> -----Original Message-----
+>
+>> From: Luo Zhenhua-B19537
+>> Sent: Tuesday, December 20, 2011 10:32 AM
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: RE: [oe] [PATCH meta-oe 5/9] nerperf: add
+>>
+>> Thanks for the feedback.
+>>
+>> I saw netperf is licensed under "netperf" in oe
+>>
+>> http://cgit.openembedded.org/openembedded/plain/recipes/netperf/netperf_=
+2.4.4.bb.
+>>
+>> Anyway, I will send an email to the author to query about the license
+>> type.
+>>
+>>
+>> Best Regards,
+>>
+>> Zhenhua
+>>
+>> > -----Original Message-----
+>> > From: Flanagan, Elizabeth [mailto:elizabeth.flanagan@intel.com]
+>> > Sent: Tuesday, December 20, 2011 6:32 AM
+>> > To: openembedded-devel@lists.openembedded.org; Luo Zhenhua-B19537
+>> > Subject: Re: [oe] [PATCH meta-oe 5/9] nerperf: add
+>> >
+>
+>> > On Fri, Dec 16, 2011 at 1:54 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> > > On (16/12/11 10:22), Koen Kooi wrote:
+>> > >>
+>> > >> Op 16 dec. 2011, om 10:19 heeft Luo Zhenhua-B19537 het volgende
+>> > >> geschreven:
+>> > >>
+>> > >> > Hello Koen,
+>> > >> >
+>> > >> >> -----Original Message-----
+>> > >> >> From: openembedded-devel-bounces@lists.openembedded.org
+>> > >> >> [mailto:openembedded- devel-bounces@lists.openembedded.org] On
+>> > >> >> Behalf Of Koen Kooi
+>> > >> >> Sent: Friday, December 16, 2011 3:52 PM
+>> > >> >>
+>> > >> >>> +++ b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb @@
+>
+>> > >> >>> +++ -0,0
+>> > >> >>> +++ +1,47
+>
+>> > >> >>> @@ +DESCRIPTION=3D"Network performance benchmark including test=
+s
+>> > >> >>> for TCP, UDP, sockets, ATM and more." +SECTION =3D
+>> > >> >>> "console/network"
+>> > >> >>> +HOMEPAGE =3D "http://www.netperf.org/" +LICENSE =3D "netperf"
+>> > >> >>
+>> > >> >> Can you include a comment on what type of license netperf is?
+>> > >> >> MIT like, BSD like, GPL like?
+>> > >> > [Luo Zhenhua-B19537] May I know which license type should be with
+>> > >> > following
+>> > COPYING content?
+>> > >>
+>> > >> That looks like a BSD or MIT derivative, maybe Beth can give us
+>> > >> some guidance on what to use as LICENSE
+>> > >
+>> > > it says "for non-commercial purposes only"
+>> >
+>> > Yeah.... in this case, I would do one of two things (and I have a
+>> > feeling one will be more valid that the other):
+>> >
+>> > 1. Email the author and see if we can use BSD-4-Clause. My guess is no=
+.
+>> > 2. We'll need to add a Netperf license to common-licenses and set
+>> > LICENSE =3D "Netperf"
+>> >
+>> > I've checked the openSuSE Build Service and they have this as an
+>> > "Other" license, so, check with the author first, but be prepared to
+>
+>> > add Netperf to the common- licenses directory.
+>
+>> >
+>> > And yes, Koen is right. I wouldn't use BSD or MIT for this,
+>> > specifically because of the non-commercial clause in (ii).
+>> >
+>> > -b
+>> >
+>> > >
+>> > >>
+>> > >> regards,
+>> > >>
+>> > >> Koen
+>> > >>
+>> > >>
+>> > >> >
+>> > >> > =A0 =A0 =A0 =A0 =A0 =A0 =A0Copyright (C) 1993 Hewlett-Packard Com=
+pany
+>> > >> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 ALL RIGHTS RESERV=
+ED.
+>> > >> >
+>> > >> > =A0The enclosed software and documentation includes copyrighted
+>> > >> > works
+>> > >> > =A0of Hewlett-Packard Co. For as long as you comply with the
+>> > >> > following
+>> > >> > =A0limitations, you are hereby authorized to (i) use, reproduce,
+>> > >> > and
+>> > >> > =A0modify the software and documentation, and to (ii) distribute
+>> > >> > the
+>> > >> > =A0software and documentation, including modifications, for
+>> > >> > =A0non-commercial purposes only.
+>> > >> >
+>> > >> > =A01. =A0The enclosed software and documentation is made availabl=
+e at
+>> > >> > no
+>> > >> > =A0 =A0 =A0charge in order to advance the general development of
+>> > >> > =A0 =A0 =A0high-performance networking products.
+>> > >> >
+>> > >> > =A02. =A0You may not delete any copyright notices contained in th=
+e
+>> > >> > =A0 =A0 =A0software or documentation. All hard copies, and copies=
+ in
+>> > >> > =A0 =A0 =A0source code or object code form, of the software or
+>> > >> > =A0 =A0 =A0documentation (including modifications) must contain a=
+t
+>> > >> > least
+>> > >> > =A0 =A0 =A0one of the copyright notices.
+>> > >> >
+>> > >> > =A03. =A0The enclosed software and documentation has not been
+>> > >> > subjected
+>> > >> > =A0 =A0 =A0to testing and quality control and is not a Hewlett-Pa=
+ckard
+>> > >> > Co.
+>> > >> > =A0 =A0 =A0product. At a future time, Hewlett-Packard Co. may or =
+may
+>> > >> > not
+>> > >> > =A0 =A0 =A0offer a version of the software and documentation as a
+>> > >> > product.
+>> > >> >
+>> > >> > =A04. =A0THE SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS".
+>> > >> > =A0 =A0 =A0HEWLETT-PACKARD COMPANY DOES NOT WARRANT THAT THE USE,
+>> > >> > =A0 =A0 =A0REPRODUCTION, MODIFICATION OR DISTRIBUTION OF THE SOFT=
+WARE
+>> > >> > OR
+>> > >> > =A0 =A0 =A0DOCUMENTATION WILL NOT INFRINGE A THIRD PARTY'S INTELL=
+ECTUAL
+>> > >> > =A0 =A0 =A0PROPERTY RIGHTS. HP DOES NOT WARRANT THAT THE SOFTWARE=
+ OR
+>> > >> > =A0 =A0 =A0DOCUMENTATION IS ERROR FREE. HP DISCLAIMS ALL WARRANTI=
+ES,
+>> > >> > =A0 =A0 =A0EXPRESS AND IMPLIED, WITH REGARD TO THE SOFTWARE AND T=
+HE
+>> > >> > =A0 =A0 =A0DOCUMENTATION. HP SPECIFICALLY DISCLAIMS ALL WARRANTIE=
+S OF
+>> > >> > =A0 =A0 =A0MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+>> > >> >
+>> > >> > =A05. =A0HEWLETT-PACKARD COMPANY WILL NOT IN ANY EVENT BE LIABLE =
+FOR
+>> > >> > ANY
+>> > >> > =A0 =A0 =A0DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL
+>> > >> > DAMAGES
+>> > >> > =A0 =A0 =A0(INCLUDING LOST PROFITS) RELATED TO ANY USE, REPRODUCT=
+ION,
+>> > >> > =A0 =A0 =A0MODIFICATION, OR DISTRIBUTION OF THE SOFTWARE OR
+>> > >> > DOCUMENTATION.
+>> > >> >
+>> > >> >
+>> > >> > Best Regards,
+>> > >> >
+>> > >> > Zhenhua
+>> > >> >
+>> > >>
+>> > >
+>> > >
+>> > >
+>> > >> _______________________________________________
+>> > >> Openembedded-devel mailing list
+>> > >> Openembedded-devel@lists.openembedded.org
+>> > >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de
+>> > >> ve
+>> > >> l
+>> > >
+>> > >
+>> > > --
+>> > > -Khem
+>> > >
+>> > > _______________________________________________
+>> > > Openembedded-devel mailing list
+>> > > Openembedded-devel@lists.openembedded.org
+>> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev
+>> > > el
+>> >
+>> >
+>> >
+>> > --
+>> > Elizabeth Flanagan
+>> > Yocto Project
+>> > Build and Release
+>
+>
+>
+>
+> --
+> Elizabeth Flanagan
+> Yocto Project
+> Build and Release
+
+
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Elizabeth Flanagan
+Yocto Project
+Build and Release
 
---aM3YZ0Iwxop3KEKx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk78Q8oACgkQN1Ujt2V2gBzcEwCfVN2G+t6oobsktvRocEOHEQ5b
-VLIAoLFQFfvw71LUMxVWuNJbOiAXddQg
-=WeDt
------END PGP SIGNATURE-----
-
---aM3YZ0Iwxop3KEKx--
