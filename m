@@ -1,33 +1,34 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RgDHM-0004Gy-NC
+	(envelope-from <martin.jansa@gmail.com>) id 1RgDXD-0004ee-4z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Dec 2011 11:32:08 +0100
-Received: by wgbds11 with SMTP id ds11so19640687wgb.24
+	Thu, 29 Dec 2011 11:48:31 +0100
+Received: by wibhq7 with SMTP id hq7so6287067wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Dec 2011 02:24:54 -0800 (PST)
+	Thu, 29 Dec 2011 02:41:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=j9V4wVdnnrfMVGx5V7qTpy8mKNOckjRXL9ZY4q4jjIk=;
-	b=ZqQy8SINBY1t6Vv7f5CXa1t0cnQI4Y1IS0M19pAJsO1WU/cxg6xYsJe1rJrCzbBamu
-	bH/0bBz0vtqIJsaqW9eB8FODUfPaARI7mGwaSv+SNjBesnFWJOiuKrGbqXeqAEROrdnk
-	X4EryaomVj5yrukP519XwS1IgV7fwlHrGzc+0=
-Received: by 10.227.204.208 with SMTP id fn16mr34990110wbb.6.1325154294435;
-	Thu, 29 Dec 2011 02:24:54 -0800 (PST)
+	bh=9mSirXrf8A98LkopA+5NAbeVzplMMFYbBPckfQGmfy0=;
+	b=fplDR3BsTqU0BwZPQnkX5JeKEm4TVfdOso+0CxHJYtPZvQ2G3ArfDZDpMh6/qhSTn+
+	5Y+vySzwzOzemP/PywquyzTAvjBua9kOHC0eK2CCEdXVQvv3YC8I99/uNJHV3+C5ZWCM
+	EBapr2xhuZjmdzVtVT2dNhzGeowLp3KXn7YHw=
+Received: by 10.216.136.20 with SMTP id v20mr19672179wei.14.1325155277022;
+	Thu, 29 Dec 2011 02:41:17 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w8sm82071548wiz.4.2011.12.29.02.24.52
+	by mx.google.com with ESMTPS id fq5sm13373779wbb.17.2011.12.29.02.41.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 29 Dec 2011 02:24:53 -0800 (PST)
-Date: Thu, 29 Dec 2011 11:24:39 +0100
+	Thu, 29 Dec 2011 02:41:16 -0800 (PST)
+Date: Thu, 29 Dec 2011 11:41:14 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111229102439.GA16885@jama.jama.net>
+Message-ID: <20111229104114.GB16885@jama.jama.net>
 References: <1324447304-4874-1-git-send-email-b19537@freescale.com>
 	<20111223100335.GO12791@jama.jama.net>
 	<CAEsOVNc05t2eoOqYo8U1Ktz4O4cKNgnve2qMLgB0_qn+7H4JDA@mail.gmail.com>
+	<20111229102439.GA16885@jama.jama.net>
 MIME-Version: 1.0
-In-Reply-To: <CAEsOVNc05t2eoOqYo8U1Ktz4O4cKNgnve2qMLgB0_qn+7H4JDA@mail.gmail.com>
+In-Reply-To: <20111229102439.GA16885@jama.jama.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [PATCH v2 meta-oe 1/7] xmlto: add version 0.0.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,63 +44,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2011 10:32:08 -0000
-X-Groupsio-MsgNum: 36300
+X-List-Received-Date: Thu, 29 Dec 2011 10:48:31 -0000
+X-Groupsio-MsgNum: 36301
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
+	protocol="application/pgp-signature"; boundary="aM3YZ0Iwxop3KEKx"
 Content-Disposition: inline
 
---FL5UXtIhxfXey3p5
+--aM3YZ0Iwxop3KEKx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 28, 2011 at 01:32:24AM +0000, McClintock Matthew-B29882 wrote:
-> On Fri, Dec 23, 2011 at 4:03 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > Is there plan to provide native stylesheets too? Because after building
-> > xmlto-native some packages are failing because they detect xmlto-native
-> > available but don't check if all needed stylesheets are installed.
+On Thu, Dec 29, 2011 at 11:24:39AM +0100, Martin Jansa wrote:
+> On Wed, Dec 28, 2011 at 01:32:24AM +0000, McClintock Matthew-B29882 wrote:
+> > On Fri, Dec 23, 2011 at 4:03 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+> > > Is there plan to provide native stylesheets too? Because after buildi=
+ng
+> > > xmlto-native some packages are failing because they detect xmlto-nati=
+ve
+> > > available but don't check if all needed stylesheets are installed.
+> >=20
+> > Can you help us out here and tell us what package would provide these?
 >=20
-> Can you help us out here and tell us what package would provide these?
+> In gentoo they are provided by packages like this
+> app-text/docbook-xml-dtd
+> but because each docs build can ask for different dtd version then it's
+> common to have more than one version installed at the same time (e.g. 4.1,
+> 4.2 and 4.3 are mostly used at my gentoo installation)
+>=20
+> That's why OE-classic and OE-core has those PV already in PN:
+> ./recipes/docbook-sgml-dtd
+> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
+> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
+> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
+> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
+> ./recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
+> and
+> ./meta/recipes-devtools/docbook-sgml-dtd
+> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
+> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
+> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
+> ./meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
+>=20
+> But those xorg recipes seems to be using dtd-4.3.
 
-In gentoo they are provided by packages like this
-app-text/docbook-xml-dtd
-but because each docs build can ask for different dtd version then it's
-common to have more than one version installed at the same time (e.g. 4.1,
-4.2 and 4.3 are mostly used at my gentoo installation)
+To be more clear about the issue:=20
 
-That's why OE-classic and OE-core has those PV already in PN:
-=2E/recipes/docbook-sgml-dtd
-=2E/recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
-=2E/recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
-=2E/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
-=2E/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
-=2E/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
-and
-=2E/meta/recipes-devtools/docbook-sgml-dtd
-=2E/meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
-=2E/meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
-=2E/meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
-=2E/meta/recipes-devtools/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
-
-But those xorg recipes seems to be using dtd-4.3.
+1) now there is also target xmlto without any dtds for target
+2) xmlto-native is autodetected as available (ie for xorg stuff) but
+   then fails to build docs because cannot find dtds even with
+   4.3-native added and installed
+   meta/recipes-devtools/docbook-utils/docbook-utils-native_0.6.14.bb is
+   doing some magic to find correct dtd files, not sure if it works
+3) xorg builds have xmlto support autodetected, I have patches to
+   disable it (to build them on host without stylessheets already
+   installed), but if xmlto is fixed and stylesheets available then we
+   can force it enabled instead.
 
 Regards,
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---FL5UXtIhxfXey3p5
+--aM3YZ0Iwxop3KEKx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk78P+cACgkQN1Ujt2V2gByakQCeJMVxBFm8fURs9JlWvJpBp7Es
-PHcAn1fXadOzHqr72V8euwOOuJ88RNE4
-=ydFR
+iEYEARECAAYFAk78Q8oACgkQN1Ujt2V2gBzcEwCfVN2G+t6oobsktvRocEOHEQ5b
+VLIAoLFQFfvw71LUMxVWuNJbOiAXddQg
+=WeDt
 -----END PGP SIGNATURE-----
 
---FL5UXtIhxfXey3p5--
+--aM3YZ0Iwxop3KEKx--
