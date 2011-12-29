@@ -1,26 +1,31 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>) id 1RfzX8-0006oc-Oj
+	(envelope-from <kergoth@gmail.com>) id 1Rg3dP-0007ow-13
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Dec 2011 20:51:31 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 28 Dec 2011 11:43:07 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="101078327"
-Received: from unknown (HELO [10.255.13.80]) ([10.255.13.80])
-	by fmsmga001.fm.intel.com with ESMTP; 28 Dec 2011 11:43:07 -0800
-Message-ID: <4EFB714B.30206@linux.intel.com>
-Date: Wed, 28 Dec 2011 11:43:07 -0800
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0) Gecko/20110927 Thunderbird/7.0
-MIME-Version: 1.0
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-References: <CACW_hTbBoB4yaN0W+H3WuW9GXYFGD6+FxQ5BMbKe+a2-pqc_Hw@mail.gmail.com>
-In-Reply-To: <CACW_hTbBoB4yaN0W+H3WuW9GXYFGD6+FxQ5BMbKe+a2-pqc_Hw@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] non-fetching recipes
+	Thu, 29 Dec 2011 01:14:15 +0100
+Received: by yhoo47 with SMTP id o47so7474193yho.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Dec 2011 16:06:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=k8dBA3D2dKs7nmSE1s/l5sRpBNiQtR2ALARqjV/sbw0=;
+	b=SOBNQg7FuNs1e9dShw7WiKKwHiW+AqvH6HobSmRKHsAT9yAMewCpJ6ez7dtFjQ1Scc
+	SCKZQwg+y1NxigdWJ1RqLD1ZzvMbhG0mGHrV+iqAubpy/GGy5AN0pdLulLMFOmVP0tSL
+	jIeB5qU8YuP23W3fxa8cu3n8EvJl/8ymebTvQ=
+Received: by 10.236.154.5 with SMTP id g5mr14610438yhk.63.1325117216442;
+	Wed, 28 Dec 2011 16:06:56 -0800 (PST)
+Received: from sb-u1004lts-64bit.alm.mentorg.com (hsvwanfw1-nat.mentorg.com.
+	[139.181.24.34])
+	by mx.google.com with ESMTPS id 32sm79367685ant.12.2011.12.28.16.06.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 28 Dec 2011 16:06:55 -0800 (PST)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Dec 2011 18:06:56 -0600
+Message-Id: <1325117216-7835-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.8.rc4
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH][meta-oe] cramfs: fix license, as it's an "or later" case
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,49 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 19:51:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Dec 2011 00:14:15 -0000
 
-On 12/28/2011 02:33 AM, Frans Meulenbroeks wrote:
-> Hi,
->
-> I noticed that several recipes are non-fetchers. These are mostly the
-> ones with sources hosted on kernel.org <http://kernel.org>.
-> Is there an issue with kernel.org <http://kernel.org> again?
->
-It's not down again, a number of the sources have not been restored or 
-have been moved, still trying to track some of this down.
+From: Christopher Larson <chris_larson@mentor.com>
 
-There should be source mirrors at the yoctoproject.org website as well 
-as the openembedded,org site (not sure if this full url).
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ meta-oe/recipes-support/cramfs/cramfs_cvs.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-> I noticed this for oe classic where libpam and util-linux-ng did not
-> fetch (as well as opkg-utils but that one is from openmoko).
-> oe maintenance branch seems to have the same problems as well as using
-> binutils 2.21 which is not available any more. master does not have this
-> as it has been moved to 2.21a.
->
-> I'm crossposting this to oe-core, because I noticed it uses the same
-> location for libpam (and probably util-linux).
->
-> Someone might want to run some fetchalls.
->
-We do run a nightly fetch, but I think we have our mirror set so we 
-don't see the full fails, it might be a good idea to figure out the 
-complete failure set right now with no PREMIRROR or MIRRRORs.
+diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
+index 667097c..d9b2df4 100644
+--- a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
++++ b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Builds cramfs filesystems for embedded systems"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb07e0038a4"
+ DEPENDS = "zlib"
+ SRCDATE = "20110110"
+-- 
+1.7.8.rc4
 
-I will look into this.
-
-Sau!
-
-
-> Frans.
->
->
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
 
