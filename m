@@ -1,33 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rgefj-00041A-0B
+	(envelope-from <otavio.salvador@gmail.com>) id 1Rgego-00047E-0t
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 16:47:07 +0100
-Received: by eeit10 with SMTP id t10so8751334eei.6
+	Fri, 30 Dec 2011 16:48:14 +0100
+Received: by eaal1 with SMTP id l1so12545931eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2011 07:39:47 -0800 (PST)
+	Fri, 30 Dec 2011 07:40:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2sS4iuX1kQYIkN7RoNKLP8TuQlfRcRsaqBpnEzJky3Q=;
-	b=NWhdOmNYT7X7CRHfc4fqHt4T0sW7zoHePWp46oGggUdqZ29VKwr6ytLWDWBPBdgq1R
-	iwH+7+ADpFxFd93qzxTFQ2tLhLeENJgr8pVzt+MgHKPtjdWxgfGuu5gnD2WISvkZHxZc
-	ocegtgxWIgwT+uViASvu/JObdBwPtaKMQ2DHQ=
-Received: by 10.14.127.68 with SMTP id c44mr16363756eei.47.1325259587628;
-	Fri, 30 Dec 2011 07:39:47 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z54sm149212602eeh.5.2011.12.30.07.39.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Dec 2011 07:39:46 -0800 (PST)
-Date: Fri, 30 Dec 2011 16:39:35 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111230153935.GI16885@jama.jama.net>
-References: <012301ccc707$664a36e0$32dea4a0$@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=Sk8fB+f3wd8lj4nCnU7XMjF9UqHdJYNeRDK98zT5c9Q=;
+	b=alDuac05rwKFA1sbwrCQtUQ5RVWw/wCnOmIKd8HE1bqghCVs6QNe5nw/oVkSX82WY/
+	wfJeTL5Qf4N3Gz6yfKw/PqsdPcgx6YGeZm1QryLhzRc3rigpoUTXUundr9T+CqgIGz/8
+	sODa8BtAoZ4PtrJLO+4qfgDrdrIepgt3agcwY=
 MIME-Version: 1.0
-In-Reply-To: <012301ccc707$664a36e0$32dea4a0$@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Including python libs
+Received: by 10.205.143.18 with SMTP id jk18mr9319583bkc.1.1325259658107; Fri,
+	30 Dec 2011 07:40:58 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.78.79 with HTTP; Fri, 30 Dec 2011 07:40:58 -0800 (PST)
+In-Reply-To: <20111230125446.GG16885@jama.jama.net>
+References: <cover.1325248824.git.otavio@ossystems.com.br>
+	<2eaa23a3419bfd9b5aea6c1f059242a38eb03608.1325248824.git.otavio@ossystems.com.br>
+	<20111230125446.GG16885@jama.jama.net>
+Date: Fri, 30 Dec 2011 13:40:58 -0200
+X-Google-Sender-Auth: LEO5XiU5072END7K3dgfD_T0RtQ
+Message-ID: <CAP9ODKpHT8YA63BH3CjkDeeQHfr9uGGuD5+WC7BSJXHZkjFg_g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH 1/3] xserver-nodm-init: move systemd service to xserver-nodm-init-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 15:47:07 -0000
-X-Groupsio-MsgNum: 36316
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rmUrFcWP4LYae1gV"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Dec 2011 15:48:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---rmUrFcWP4LYae1gV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Dec 30, 2011 at 10:54, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-On Fri, Dec 30, 2011 at 08:26:25AM -0700, itodroid wrote:
-> Greetings all!
->=20
-> I'm having a little trouble figuring out the "right" way to include some
-> extra python libraries into a recipe, and for the life of me, I cannot
-> figure it out.  I'm using Python2.6 and I have a few python scripts that
-> depend on httplib.  I've found that httplib.py is contained within
-> "python-2.6.6-ml12.2". =20
->=20
-> In my recipe, I've tried "include python-2.6.6ml12.2" and also "DEPEND +=
-=3D
-> python-2.6.6ml12.2", neither of which actually include the
-> /usr/lib/python2.6/<python libs> into my rootfs.
->=20
-> I believe that httplib is part of python-netclient which appears to be
-> provided by python-2.6-manifest.inc.  I've also tried including this
-> manifest file into my recipe, but still, I cannot get the libraries into =
-my
-> rootfs.
->=20
-> Can anyone provide some insight as to what I'm doing wrong?  Thanks in
-> advance.
+> I haven't tried but isn't this ^ overwritting systemd runtime dependency
+> set by systemd.bbclass? += would be probably bette if it's the case.
+>
 
-If it's part of python itself then
-RDEPENDS_${PN} +=3D "python"
-if it's in python-netclient then
-RDEPENDS_${PN} +=3D "python-netclient"
+Got catch, indeed.
 
-Regards,
+Thanks. Fixed locally.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---rmUrFcWP4LYae1gV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk792zcACgkQN1Ujt2V2gBziUACfbX9+babqpd10FnBbPcJSqfOM
-zYwAoKCbX+ezE5mV/1u3IpBdIYAAkrjG
-=rUgM
------END PGP SIGNATURE-----
-
---rmUrFcWP4LYae1gV--
