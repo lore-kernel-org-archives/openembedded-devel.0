@@ -1,34 +1,34 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rgc6A-00077w-Hh
+	(envelope-from <martin.jansa@gmail.com>) id 1RgcBd-0007KT-JW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 14:02:14 +0100
-Received: by eeit10 with SMTP id t10so8666138eei.6
+	Fri, 30 Dec 2011 14:07:53 +0100
+Received: by eeit10 with SMTP id t10so8668798eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2011 04:54:59 -0800 (PST)
+	Fri, 30 Dec 2011 05:00:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=dvLcLdOUI7rfH9uPhksSlV3hTrxMTkPfRE8SVB7aHKg=;
-	b=LmJf3DHLOPLqVLVT9ycDybei68pT96GRrfCfpBlVCBXbCqCE41GEeuOS3xJ0j+VzQa
-	906EaCDYu7BIpg0aPtHn+2kgXAWq7muiHQgMa0qs+acktYTDykP+b1z/zcpWlKHfmsGa
-	Hva3bHNc2cKsiXzjaEklZ0U/TjKxiKpwsbwE8=
-Received: by 10.213.19.137 with SMTP id a9mr8148530ebb.51.1325249699136;
-	Fri, 30 Dec 2011 04:54:59 -0800 (PST)
+	bh=Z4RIq1cSazevqZmPUV8BPBA1N/R5S79K64cEkEYQUEQ=;
+	b=f/B5BuNmY1NSaVQMhUSw+HdKYkBXonfhSBiS02HGMy2w9sIdhcxLeSKzBCsT1n2SFY
+	6dLqvfLbP0evNIXMfbWUHpYi+MZ6FWtYRUsCUBnjzyQrz0WJUqtVFcoddVQjnN2Jz8Ky
+	dkDtltJOPzkPeZX9FNSW//T74ZXpGPyneP6Yo=
+Received: by 10.213.3.201 with SMTP id 9mr8046983ebo.45.1325250029179;
+	Fri, 30 Dec 2011 05:00:29 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b49sm116338121eec.9.2011.12.30.04.54.57
+	by mx.google.com with ESMTPS id s16sm147520564eef.2.2011.12.30.05.00.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Dec 2011 04:54:58 -0800 (PST)
-Date: Fri, 30 Dec 2011 13:54:46 +0100
+	Fri, 30 Dec 2011 05:00:28 -0800 (PST)
+Date: Fri, 30 Dec 2011 14:00:26 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111230125446.GG16885@jama.jama.net>
+Message-ID: <20111230130026.GH16885@jama.jama.net>
 References: <cover.1325248824.git.otavio@ossystems.com.br>
-	<2eaa23a3419bfd9b5aea6c1f059242a38eb03608.1325248824.git.otavio@ossystems.com.br>
+	<06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <2eaa23a3419bfd9b5aea6c1f059242a38eb03608.1325248824.git.otavio@ossystems.com.br>
+In-Reply-To: <06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 1/3] xserver-nodm-init: move systemd service to xserver-nodm-init-systemd
+Subject: Re: [meta-oe][PATCH 3/3] task-x11: use xserver-nodm-init-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,102 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 13:02:14 -0000
-X-Groupsio-MsgNum: 36313
+X-List-Received-Date: Fri, 30 Dec 2011 13:07:53 -0000
+X-Groupsio-MsgNum: 36314
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mYYhpFXgKVw71fwr"
+	protocol="application/pgp-signature"; boundary="RwxaKO075aXzzOz0"
 Content-Disposition: inline
 
---mYYhpFXgKVw71fwr
+--RwxaKO075aXzzOz0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 30, 2011 at 12:40:54PM +0000, Otavio Salvador wrote:
-> Move systemd service to xserver-nodm-init-systemd to be consistent
-> with other packages.
->=20
+On Fri, Dec 30, 2011 at 12:40:56PM +0000, Otavio Salvador wrote:
 > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 > ---
->  .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |   30 +++++++++-----=
------
->  1 files changed, 14 insertions(+), 16 deletions(-)
+>  meta-oe/recipes-core/tasks/task-x11_1.0.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init=
-_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.=
-bb
-> index 496b342..4d4ae4c 100644
-> --- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-> +++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-> @@ -3,7 +3,7 @@ LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
->  SECTION =3D "x11"
+> diff --git a/meta-oe/recipes-core/tasks/task-x11_1.0.bb b/meta-oe/recipes=
+-core/tasks/task-x11_1.0.bb
+> index 67ff93b..af92e49 100644
+> --- a/meta-oe/recipes-core/tasks/task-x11_1.0.bb
+> +++ b/meta-oe/recipes-core/tasks/task-x11_1.0.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "The X Window System -- install this task=
+ to get a client/server b
+>  SECTION =3D "x11/server"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbc=
+b788c80a0384361b4de20420"
+> -PR =3D "r9"
+> +PR =3D "r10"
 > =20
-> -PR =3D "r11"
-> +PR =3D "r12"
+>  inherit task
 > =20
->  SRC_URI =3D "file://xserver-nodm \
->             file://xserver-nodm.service \
-> @@ -13,6 +13,15 @@ S =3D ${WORKDIR}
+> @@ -17,7 +17,7 @@ RRECOMMENDS_${PN} =3D "\
+>  VIRTUAL-RUNTIME_xserver_common ?=3D "xserver-common"
 > =20
->  inherit allarch
-> =20
-> +inherit update-rc.d systemd
-> +
-> +INITSCRIPT_NAME =3D "xserver-nodm"
-> +INITSCRIPT_PARAMS =3D "start 01 5 2 . stop 01 0 1 6 ."
-> +INITSCRIPT_PARAMS_shr =3D "start 90 5 2 . stop 90 0 1 6 ."
-> +
-> +SYSTEMD_PACKAGES =3D "${PN}-systemd"
-> +SYSTEMD_SERVICE_${PN}-systemd =3D "xserver-nodm.service"
-> +
->  do_install() {
->  	install -d ${D}${sysconfdir}/init.d
->  	install xserver-nodm ${D}${sysconfdir}/init.d
-> @@ -21,20 +30,9 @@ do_install() {
->  	install -m 0644 xserver-nodm.service ${D}${base_libdir}/systemd/system/
->  }
-> =20
-> -RDEPENDS_${PN} =3D "xserver-common (>=3D 1.30) xinit"
-> -FILES_${PN} +=3D "${base_libdir}/systemd/system/"
-> -
-> -inherit update-rc.d
-> +PACKAGES +=3D "${PN}-systemd"
-> =20
-> -INITSCRIPT_NAME =3D "xserver-nodm"
-> -INITSCRIPT_PARAMS =3D "start 01 5 2 . stop 01 0 1 6 ."
-> -INITSCRIPT_PARAMS_shr =3D "start 90 5 2 . stop 90 0 1 6 ."
-> -
-> -pkg_postinst_${PN}_append () {
-> -    if [ -e ${base_bindir}/systemctl ] ; then
-> -        # can't do this offline
-> -        [ "x$D" !=3D "x" ] && exit 1
-> +RDEPENDS_${PN} =3D "xserver-common (>=3D 1.30) xinit"
-> =20
-> -        systemctl enable xserver-nodm.service
-> -    fi
-> -}
-> +FILES_${PN}-systemd +=3D "${base_libdir}/systemd/system/"
-> +RDEPENDS_${PN}-systemd =3D "xserver-common (>=3D 1.30) xinit"
+>  # elsa, xserver-nodm-init
+> -VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init"
+> +VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init-systemd"
 
-I haven't tried but isn't this ^ overwritting systemd runtime dependency
-set by systemd.bbclass? +=3D would be probably bette if it's the case.
+There are still people not using systemd _only_ and I belive that this
+change drops sysvinit script completely (xserver-nodm-init-systemd
+correctly doesn't rdepend on xserver-nodm-init, because is using only
+xinit and xserver-common provider).
+
+You can add both like=20
+VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init xserver-nodm=
+-init-systemd"
+but that would make xserver-nodm-init-systemd separation not so usefull.
+So I think that xserver-nodm-init-systemd should be added to
+VIRTUAL-RUNTIME_graphical_init_manager only by distribution config or
+only to some task-* used to build systemd images (I'm using
+task-shr-systemd_1.0.bb for that).
 
 Regards,
+
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---mYYhpFXgKVw71fwr
+--RwxaKO075aXzzOz0
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk79tJYACgkQN1Ujt2V2gByQtgCfeTSw3DaPLEYwtIHq7E2f5V50
-LbgAoJimKD7FMlG+LHXjlC0PFS/fDtQW
-=XNDt
+iEYEARECAAYFAk79teoACgkQN1Ujt2V2gBz0awCfTWNcaffBM4T0vsGauUx81jCH
+HxAAn1aOxYmxARNQpV2k6DC0JILX8Oym
+=URma
 -----END PGP SIGNATURE-----
 
---mYYhpFXgKVw71fwr--
+--RwxaKO075aXzzOz0--
