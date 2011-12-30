@@ -1,35 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rgesd-0004tt-UZ
+	(envelope-from <otavio.salvador@gmail.com>) id 1RgfBu-0005UA-5D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 17:00:29 +0100
-Received: by eeit10 with SMTP id t10so8758186eei.6
+	Fri, 30 Dec 2011 17:20:22 +0100
+Received: by eaal1 with SMTP id l1so12565448eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2011 07:53:01 -0800 (PST)
+	Fri, 30 Dec 2011 08:13:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=to9W6PzEFx+/+Vagu95f5HmQmWFiEVq+Gt+1TGvuWB4=;
-	b=nuL2dcxOjRGFDNsoyLD0YQ0OKhNGLPYJ3Ok+i6Kp7BRARw0RlAIQ/GrU6aKTRB50Wv
-	So8Yzw2A3I8fr6366x0Z8G24QjBLLbpeuekbQZzc5qGCQHVBuMZobwDTJmXyRV2tm5Dc
-	jfppi6Dwgo8ir+szla6khpOVsVPg5r411dZ/E=
-Received: by 10.213.28.7 with SMTP id k7mr11263031ebc.11.1325260381546;
-	Fri, 30 Dec 2011 07:53:01 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b49sm118267825eec.9.2011.12.30.07.52.59
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Dec 2011 07:53:00 -0800 (PST)
-Date: Fri, 30 Dec 2011 16:52:58 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111230155258.GJ16885@jama.jama.net>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=ncbd5lvX0Ja7eSYAPF/cXnbjfBMmQviTiQTqXzswM6M=;
+	b=EZ1Xl3Y7d/1ifNTwvlU27NXo3C8dcrQKEFBrF8u2iW76jGsf3xW7CHyEJdzEpGdOfY
+	ut0aI0KtOZHi/ygPIu0kycQ83FasB3JQeiusCgfChWhqH1KpOO/5NJvnkaBnPg0psXv7
+	1nzXkLPVMoMVKrqGDMlb+ulLFTzc8S7oERhmE=
+MIME-Version: 1.0
+Received: by 10.205.42.130 with SMTP id ty2mr4410919bkb.55.1325261586256; Fri,
+	30 Dec 2011 08:13:06 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.78.79 with HTTP; Fri, 30 Dec 2011 08:13:06 -0800 (PST)
+In-Reply-To: <20111230155258.GJ16885@jama.jama.net>
 References: <cover.1325248824.git.otavio@ossystems.com.br>
 	<06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
 	<20111230130026.GH16885@jama.jama.net>
 	<CAP9ODKredoCdpROP-4xjYMo5RAjj9Ctj_tGmET9ptTXgX4gaZQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKredoCdpROP-4xjYMo5RAjj9Ctj_tGmET9ptTXgX4gaZQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20111230155258.GJ16885@jama.jama.net>
+Date: Fri, 30 Dec 2011 14:13:06 -0200
+X-Google-Sender-Auth: R8FZbMpQ7PxkTuDf8TupXq_Fx9g
+Message-ID: <CAP9ODKrwakHnEXZ_bSNo2QBrYszPN2pR54KC7UAwkh3KQeEJfw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH 3/3] task-x11: use xserver-nodm-init-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,52 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 16:00:29 -0000
-X-Groupsio-MsgNum: 36319
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bgLLobvf7eP6VP5c"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Dec 2011 16:20:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---bgLLobvf7eP6VP5c
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Dec 30, 2011 at 13:52, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-On Fri, Dec 30, 2011 at 01:47:18PM -0200, Otavio Salvador wrote:
-> On Fri, Dec 30, 2011 at 11:00, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
->=20
-> > >  # elsa, xserver-nodm-init
-> > > -VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init"
-> > > +VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init-syste=
-md"
-> >
-> > There are still people not using systemd _only_ and I belive that this
-> > change drops sysvinit script completely (xserver-nodm-init-systemd
-> > correctly doesn't rdepend on xserver-nodm-init, because is using only
-> > xinit and xserver-common provider).
-> >
->=20
-> I added it because the task-basic depends on systemd-compat-units so it is
-> clearly forcing systemd use. So anyone using sysv will need to avoid
-> task-basic et all.
+> Yes, but this is task-x11 not task-basic.. I wouldn't complain if you
+> add it to task-basic.
+>
 
-Yes, but this is task-x11 not task-basic.. I wouldn't complain if you
-add it to task-basic.
+In this case adding both is the way to go but I *hate* this solutin :-(
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---bgLLobvf7eP6VP5c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk793loACgkQN1Ujt2V2gByDJwCgk3mWIQlEb0LXFkrNPJvAC84O
-ZgMAoJtAkpZz3Bwzymw5BvdojSbMBDjv
-=LGOg
------END PGP SIGNATURE-----
-
---bgLLobvf7eP6VP5c--
