@@ -1,34 +1,33 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-tul01m020-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RgcBd-0007KT-JW
+	(envelope-from <itodroid@gmail.com>) id 1RgeSo-0003cY-8f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 14:07:53 +0100
-Received: by eeit10 with SMTP id t10so8668798eei.6
+	Fri, 30 Dec 2011 16:33:46 +0100
+Received: by obcwn6 with SMTP id wn6so10846270obc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2011 05:00:29 -0800 (PST)
+	Fri, 30 Dec 2011 07:26:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Z4RIq1cSazevqZmPUV8BPBA1N/R5S79K64cEkEYQUEQ=;
-	b=f/B5BuNmY1NSaVQMhUSw+HdKYkBXonfhSBiS02HGMy2w9sIdhcxLeSKzBCsT1n2SFY
-	6dLqvfLbP0evNIXMfbWUHpYi+MZ6FWtYRUsCUBnjzyQrz0WJUqtVFcoddVQjnN2Jz8Ky
-	dkDtltJOPzkPeZX9FNSW//T74ZXpGPyneP6Yo=
-Received: by 10.213.3.201 with SMTP id 9mr8046983ebo.45.1325250029179;
-	Fri, 30 Dec 2011 05:00:29 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s16sm147520564eef.2.2011.12.30.05.00.27
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding:x-mailer:thread-index:content-language;
+	bh=2fGTKN4WhuAl8Lz3SZPCsGQ821U+AfC6V0Pz7qRIEMs=;
+	b=nG4k5JBdJ23xKfpASb6tyDTjI3lBW/IPgfwXAGNdj0JszliiVqrivtGlxgrAWMz2tH
+	G+0X3Fxa0/zBGNutltiMjJ0Gy6WbqcN34HPJHnr2gKSGF/Y5iEiY6ZuW0MBAp5ChaqoV
+	OTx2QFvZ1BTh49+nGtLXdhin7vsZVdiRWm1zQ=
+Received: by 10.50.40.129 with SMTP id x1mr55106524igk.4.1325258789798;
+	Fri, 30 Dec 2011 07:26:29 -0800 (PST)
+Received: from AZPCMATTWALTER (wsip-174-78-94-230.ph.ph.cox.net.
+	[174.78.94.230])
+	by mx.google.com with ESMTPS id cv10sm81392328igc.0.2011.12.30.07.26.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Dec 2011 05:00:28 -0800 (PST)
-Date: Fri, 30 Dec 2011 14:00:26 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20111230130026.GH16885@jama.jama.net>
-References: <cover.1325248824.git.otavio@ossystems.com.br>
-	<06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
+	Fri, 30 Dec 2011 07:26:29 -0800 (PST)
+From: "itodroid" <itodroid@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 30 Dec 2011 08:26:25 -0700
+Message-ID: <012301ccc707$664a36e0$32dea4a0$@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 3/3] task-x11: use xserver-nodm-init-systemd
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AczHBkKy73rRFxXcRmm0d/zKVaGTcA==
+Subject: Including python libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,75 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 13:07:53 -0000
-X-Groupsio-MsgNum: 36314
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RwxaKO075aXzzOz0"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Dec 2011 15:33:46 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
---RwxaKO075aXzzOz0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Greetings all!
 
-On Fri, Dec 30, 2011 at 12:40:56PM +0000, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  meta-oe/recipes-core/tasks/task-x11_1.0.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-core/tasks/task-x11_1.0.bb b/meta-oe/recipes=
--core/tasks/task-x11_1.0.bb
-> index 67ff93b..af92e49 100644
-> --- a/meta-oe/recipes-core/tasks/task-x11_1.0.bb
-> +++ b/meta-oe/recipes-core/tasks/task-x11_1.0.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "The X Window System -- install this task=
- to get a client/server b
->  SECTION =3D "x11/server"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbc=
-b788c80a0384361b4de20420"
-> -PR =3D "r9"
-> +PR =3D "r10"
-> =20
->  inherit task
-> =20
-> @@ -17,7 +17,7 @@ RRECOMMENDS_${PN} =3D "\
->  VIRTUAL-RUNTIME_xserver_common ?=3D "xserver-common"
-> =20
->  # elsa, xserver-nodm-init
-> -VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init"
-> +VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init-systemd"
+I'm having a little trouble figuring out the "right" way to include some
+extra python libraries into a recipe, and for the life of me, I cannot
+figure it out.  I'm using Python2.6 and I have a few python scripts that
+depend on httplib.  I've found that httplib.py is contained within
+"python-2.6.6-ml12.2".  
 
-There are still people not using systemd _only_ and I belive that this
-change drops sysvinit script completely (xserver-nodm-init-systemd
-correctly doesn't rdepend on xserver-nodm-init, because is using only
-xinit and xserver-common provider).
+In my recipe, I've tried "include python-2.6.6ml12.2" and also "DEPEND +=
+python-2.6.6ml12.2", neither of which actually include the
+/usr/lib/python2.6/<python libs> into my rootfs.
 
-You can add both like=20
-VIRTUAL-RUNTIME_graphical_init_manager ?=3D "xserver-nodm-init xserver-nodm=
--init-systemd"
-but that would make xserver-nodm-init-systemd separation not so usefull.
-So I think that xserver-nodm-init-systemd should be added to
-VIRTUAL-RUNTIME_graphical_init_manager only by distribution config or
-only to some task-* used to build systemd images (I'm using
-task-shr-systemd_1.0.bb for that).
+I believe that httplib is part of python-netclient which appears to be
+provided by python-2.6-manifest.inc.  I've also tried including this
+manifest file into my recipe, but still, I cannot get the libraries into my
+rootfs.
 
-Regards,
+Can anyone provide some insight as to what I'm doing wrong?  Thanks in
+advance.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---RwxaKO075aXzzOz0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk79teoACgkQN1Ujt2V2gBz0awCfTWNcaffBM4T0vsGauUx81jCH
-HxAAn1aOxYmxARNQpV2k6DC0JILX8Oym
-=URma
------END PGP SIGNATURE-----
-
---RwxaKO075aXzzOz0--
