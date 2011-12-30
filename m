@@ -1,34 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Rgego-00047E-0t
+	(envelope-from <otavio.salvador@gmail.com>) id 1Rgen1-0004L6-1I
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 16:48:14 +0100
-Received: by eaal1 with SMTP id l1so12545931eaa.6
+	Fri, 30 Dec 2011 16:54:39 +0100
+Received: by eeit10 with SMTP id t10so8755206eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2011 07:40:58 -0800 (PST)
+	Fri, 30 Dec 2011 07:47:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=Sk8fB+f3wd8lj4nCnU7XMjF9UqHdJYNeRDK98zT5c9Q=;
-	b=alDuac05rwKFA1sbwrCQtUQ5RVWw/wCnOmIKd8HE1bqghCVs6QNe5nw/oVkSX82WY/
-	wfJeTL5Qf4N3Gz6yfKw/PqsdPcgx6YGeZm1QryLhzRc3rigpoUTXUundr9T+CqgIGz/8
-	sODa8BtAoZ4PtrJLO+4qfgDrdrIepgt3agcwY=
+	bh=TSpS9v6Yrmz8rvWBFt9AJ8otOdJT3V6/3jlVhC8Eykk=;
+	b=Yb4IqjbmigeLVuY2sg6uW/c/Pfl+X3abYcVL9xRqS5xOuaaxVNgd6jPXwjxaha+3uo
+	1fvfPQk5q6saoOE0kKjfcjyCk9MdNpr7/6y8Kx+WBxD/QxzYbOAX6imLfXc0vHRKd8zV
+	K9FZgZpfLRzkA6KmRy+cpTdNjSSOQmZEFQPAg=
 MIME-Version: 1.0
-Received: by 10.205.143.18 with SMTP id jk18mr9319583bkc.1.1325259658107; Fri,
-	30 Dec 2011 07:40:58 -0800 (PST)
+Received: by 10.205.42.130 with SMTP id ty2mr4395991bkb.55.1325260038745; Fri,
+	30 Dec 2011 07:47:18 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.204.78.79 with HTTP; Fri, 30 Dec 2011 07:40:58 -0800 (PST)
-In-Reply-To: <20111230125446.GG16885@jama.jama.net>
+Received: by 10.204.78.79 with HTTP; Fri, 30 Dec 2011 07:47:18 -0800 (PST)
+In-Reply-To: <20111230130026.GH16885@jama.jama.net>
 References: <cover.1325248824.git.otavio@ossystems.com.br>
-	<2eaa23a3419bfd9b5aea6c1f059242a38eb03608.1325248824.git.otavio@ossystems.com.br>
-	<20111230125446.GG16885@jama.jama.net>
-Date: Fri, 30 Dec 2011 13:40:58 -0200
-X-Google-Sender-Auth: LEO5XiU5072END7K3dgfD_T0RtQ
-Message-ID: <CAP9ODKpHT8YA63BH3CjkDeeQHfr9uGGuD5+WC7BSJXHZkjFg_g@mail.gmail.com>
+	<06b8fd4ed68ad3e735b54d661f66737048ce9597.1325248824.git.otavio@ossystems.com.br>
+	<20111230130026.GH16885@jama.jama.net>
+Date: Fri, 30 Dec 2011 13:47:18 -0200
+X-Google-Sender-Auth: 4pitvgycGZgT7MXACy1y9EPLiG4
+Message-ID: <CAP9ODKredoCdpROP-4xjYMo5RAjj9Ctj_tGmET9ptTXgX4gaZQ@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH 1/3] xserver-nodm-init: move systemd service to xserver-nodm-init-systemd
+Subject: Re: [meta-oe][PATCH 3/3] task-x11: use xserver-nodm-init-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,18 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 15:48:14 -0000
+X-List-Received-Date: Fri, 30 Dec 2011 15:54:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Dec 30, 2011 at 10:54, Martin Jansa <martin.jansa@gmail.com> wrote:
+On Fri, Dec 30, 2011 at 11:00, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-> I haven't tried but isn't this ^ overwritting systemd runtime dependency
-> set by systemd.bbclass? += would be probably bette if it's the case.
+> >  # elsa, xserver-nodm-init
+> > -VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init"
+> > +VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init-systemd"
+>
+> There are still people not using systemd _only_ and I belive that this
+> change drops sysvinit script completely (xserver-nodm-init-systemd
+> correctly doesn't rdepend on xserver-nodm-init, because is using only
+> xinit and xserver-common provider).
 >
 
-Got catch, indeed.
-
-Thanks. Fixed locally.
+I added it because the task-basic depends on systemd-compat-units so it is
+clearly forcing systemd use. So anyone using sysv will need to avoid
+task-basic et all.
 
 -- 
 Otavio Salvador                             O.S. Systems
