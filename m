@@ -1,16 +1,32 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Rgl3Q-0000nc-RW
+	(envelope-from <adrianopallavicino@gmail.com>) id 1RgwTr-00084G-I5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Dec 2011 23:36:00 +0100
-Received: from mizar.localdomain (87.5.26.189) by smtp205.alice.it (8.6.023.02)
-	id 4EECA2D8020E763D; Fri, 30 Dec 2011 23:23:09 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Dec 2011 23:23:06 +0100
-Message-Id: <1325283786-13589-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.4 to 3.1.6
+	Sat, 31 Dec 2011 11:48:03 +0100
+Received: by eeit10 with SMTP id t10so9233259eei.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Dec 2011 02:40:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=YNrK8Qqi8+3FdWgJl0thgSVBv/hbXen+5HzGZOTysOY=;
+	b=PJ5VrwgvhTCX2oPcliorond2tgggbhl3Ura/1SZ/3+Ab/8OPtA1FgIjbwPmm3zPjdj
+	lyG0AFySOQ+IDW7klQe9kHnIcTW5+d4bTUUux68uh0ZS1FX81u+13JW4+3mwsk4KL5y8
+	CfhRhNgDjeDBJ+vTAjV5Xz1Sbc9zH6Jfe/AjA=
+Received: by 10.14.16.145 with SMTP id h17mr16803161eeh.62.1325328037957;
+	Sat, 31 Dec 2011 02:40:37 -0800 (PST)
+Received: from localhost.localdomain
+	(host39-232-static.225-95-b.business.telecomitalia.it.
+	[95.225.232.39]) by mx.google.com with ESMTPS id
+	t59sm160565946eeh.10.2011.12.31.02.40.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 31 Dec 2011 02:40:36 -0800 (PST)
+From: Adriano Pallavicino <adrianopallavicino@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 31 Dec 2011 11:40:13 +0100
+Message-Id: <1325328013-23217-1-git-send-email-adriano.pallavicino@gmail.com>
+X-Mailer: git-send-email 1.7.4.1
+Cc: Adriano Pallavicino <adriano.pallavicino@gmail.com>
+Subject: [PATCHv1] binutils_2.20.1 fixed md5 and sha256 sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,71 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2011 22:36:01 -0000
+X-List-Received-Date: Sat, 31 Dec 2011 10:48:03 -0000
 
-* apply latest stable patchset 2011-12-21
+Signed-off-by: Adriano Pallavicino <adriano.pallavicino@gmail.com>
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Fixed md5sum and sha256sum
 ---
- recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
- recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ recipes/binutils/binutils_2.20.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-index 1ef0287..de5d096 100644
---- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-+++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-@@ -1,12 +1,12 @@
- require linux-kexecboot.inc
+diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
+index 5154e2d..f40b676 100644
+--- a/recipes/binutils/binutils_2.20.1.bb
++++ b/recipes/binutils/binutils_2.20.1.bb
+@@ -24,8 +24,8 @@ SRC_URI_append_nios2 =" \
+ 	file://binutils-nios2.patch \
+ 	"
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
- S = "${WORKDIR}/linux-${PV}"
+-SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
+-SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
++SRC_URI[tarball.sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
++SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
  
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
- 
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
- 
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
--SRC_URI[stablepatch.sha256sum] = "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
-+SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
-+SRC_URI[stablepatch.sha256sum] = "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c"
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index c948f04..b4271e4 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -1,11 +1,11 @@
- require linux.inc
- 
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
- 
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
- 
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
- 
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
--SRC_URI[stablepatch.sha256sum] = "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
-+SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
-+SRC_URI[stablepatch.sha256sum] = "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c"
+ # powerpc patches
+ SRC_URI += "\
 -- 
-1.7.3.4
+1.7.4.1
 
 
 
