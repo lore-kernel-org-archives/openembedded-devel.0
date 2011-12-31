@@ -1,33 +1,31 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rh0Lm-0008CN-GP
+	(envelope-from <pabigot@gmail.com>) id 1Rh2un-0004Xu-KA
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Dec 2011 15:55:59 +0100
-Received: by vcbf1 with SMTP id f1so10844017vcb.6
+	Sat, 31 Dec 2011 18:40:18 +0100
+Received: by iakh37 with SMTP id h37so23303110iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Dec 2011 06:48:40 -0800 (PST)
+	Sat, 31 Dec 2011 09:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=WVF44mlxZoYkKHg7+8jZJ/Ggvk9gkhdfgAcyh5DUdAQ=;
-	b=FuC0tCMcQMT8Lcr+p9w2EozhuNSHSE2d45jcPIsMD2KsPmIRIITthxxlNeE5pX/sTS
-	eldozR8rW4lNBssAcTNOWb7uwX6S+FoVwmrCE9pBhN8RNV9E1uohGy6gFl0G4bIlGp8D
-	WGR7HkgWxyOYNI1CcvVl3YmBMZ4xlZPRLZJKA=
-MIME-Version: 1.0
-Received: by 10.220.106.207 with SMTP id y15mr24476950vco.69.1325342917566;
-	Sat, 31 Dec 2011 06:48:37 -0800 (PST)
-Received: by 10.52.160.137 with HTTP; Sat, 31 Dec 2011 06:48:37 -0800 (PST)
-In-Reply-To: <CAHucTJvY8BJsrpSDunZz_Rh703n=rpCps6idW7fYaH8diZr7nw@mail.gmail.com>
-References: <1325331840-23575-1-git-send-email-adriano.pallavicino@gmail.com>
-	<CACW_hTa+hpihvndWS-a7NZQme=+stZvUKxgtsxov3tdaqMj-xg@mail.gmail.com>
-	<CAHucTJvY8BJsrpSDunZz_Rh703n=rpCps6idW7fYaH8diZr7nw@mail.gmail.com>
-Date: Sat, 31 Dec 2011 15:48:37 +0100
-Message-ID: <CACW_hTZsSjS=6kst7mxEvzHOY1L6n5esrmptdxAOJtg94xetsA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: trini@kernel.crashing.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv2][2011.03-maintenance] binutils_2.20.1 fixed md5 and sha256 sum
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=qNKYGpqcaShii7/EXv6cUoFyy1LuTDseBskCld1RS+8=;
+	b=avk2b8aa+24uEOJuXBVHK/lAmY1SEm2sVgUhvmfIxvDG1MxL8/8CT5/sVr4mbJhCca
+	VyDcoODcvkqs8L1s3kulbvkUZhCE4QEdNVQ3Mu4BN8tqcQlWHJ/U/5aLm7Bjb45A09Kk
+	FWjFRmcV5xG8zaeOaQfM+/pJTDb6vD37/ZBWE=
+Received: by 10.43.50.67 with SMTP id vd3mr44143100icb.10.1325352779877;
+	Sat, 31 Dec 2011 09:32:59 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id gh9sm93228588igb.3.2011.12.31.09.32.57
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 31 Dec 2011 09:32:58 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 31 Dec 2011 11:32:39 -0600
+Message-Id: <1325352759-321-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+Subject: [meta-oe] python-mysqldb: import from OE classic, update to 1.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,94 +39,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Dec 2011 14:55:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 31 Dec 2011 17:40:18 -0000
 
-Tom,
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-I feel it is a good plan to resolve this problem by adding
-http://cgit.openembedded.org/openembedded/commit/?id=262f9eb0f046cd77d041a9dcb055700c5ab6601bto
-the maintenance branch
-This makes things buildable again.
-As you are the commiter of the above patch, I feel you are in a better
-position than me to judge this is ok.
-However with the patch at least the angstrom people get the problem
-resolved (minimal uses 2.21 and requries a different patch)
+Changes from classic recipe:
 
-Best regards, Frans.
+* Corrected license description based on text in README.
 
-2011/12/31 Adriano Pallavicino <adrianopallavicino@gmail.com>
+* Switched to setuptools since distutils produced an egg that had x86
+  encoded in it.
 
-> I can correctly download it from here
-> ftp://ftp.gnu.org/gnu/binutils/binutils-2.20.1.tar.bz2 (as indicated
-> inside
-> bb file). The problem is only in sha256 and md5 sum. I'm using
-> 2011.03-maintenance. I can desume that this branch is only for maintaining
-> 2011.03 release. If someone decided to use binutils 2.20.1 why should I
-> introduce the new 2.20.1a from master? All the things are tested with
-> 2.20.1 and imho the branch 2011.03-maintenance must continue to utilize
-> them.
-> Of course, if maintainers consider this patch useless, I'll remove it from
-> here.
->
-> 2011/12/31 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
-> > 2011/12/31 Adriano Pallavicino <adrianopallavicino@gmail.com>
-> >
-> > > Signed-off-by: Adriano Pallavicino <adriano.pallavicino@gmail.com>
-> > >
-> > > Fixed md5sum and sha256sum
-> > > ---
-> > >  recipes/binutils/binutils_2.20.1.bb |    4 ++--
-> > >  1 files changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/
-> > > binutils_2.20.1.bb
-> > > index 5154e2d..f40b676 100644
-> > > --- a/recipes/binutils/binutils_2.20.1.bb
-> > > +++ b/recipes/binutils/binutils_2.20.1.bb
-> > > @@ -24,8 +24,8 @@ SRC_URI_append_nios2 =" \
-> > >        file://binutils-nios2.patch \
-> > >        "
-> > >
-> > > -SRC_URI[tarball.sha256sum] =
-> > > "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
-> > > -SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
-> > > +SRC_URI[tarball.sha256sum] =
-> > > "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
-> > > +SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
-> > >
-> > >  # powerpc patches
-> > >  SRC_URI += "\
-> > > --
-> > > 1.7.4.1
-> > >
-> >
-> > As told on IRC, I'd suggest to compare against the version in master.
-> > THere the issue was fixed using this patch:
-> >
-> >
-> http://cgit.openembedded.org/openembedded/commit/recipes/binutils/binutils_2.20.1.bb?id=262f9eb0f046cd77d041a9dcb055700c5ab6601b
-> >
-> > Note that this also patches SRC_URI.
-> > Guess the patch above should also go into master.
-> >
-> > Did you by any chance download your binutils tarball manually?
-> >
-> > Best regards, Frans
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
->
-> --
-> Adriano Pallavicino
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+* Old site.patch no longer necessary; threadsafe is False in this version.
+---
+ .../python/python-mysqldb/mysqlpath.patch          |   18 +++++++++++++++
+ .../python/python-mysqldb_1.2.3.bb                 |   24 ++++++++++++++++++++
+ 2 files changed, 42 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/python/python-mysqldb/mysqlpath.patch
+ create mode 100644 meta-oe/recipes-devtools/python/python-mysqldb_1.2.3.bb
+
+diff --git a/meta-oe/recipes-devtools/python/python-mysqldb/mysqlpath.patch b/meta-oe/recipes-devtools/python/python-mysqldb/mysqlpath.patch
+new file mode 100644
+index 0000000..a38da6f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-mysqldb/mysqlpath.patch
+@@ -0,0 +1,18 @@
++--- MySQL-python-1.2.3/_mysql.c.orig	2010-06-17 02:21:56.000000000 -0500
+++++ MySQL-python-1.2.3/_mysql.c	2011-12-31 09:50:07.888056331 -0600
++@@ -33,11 +33,11 @@
++ #include <windows.h>
++ #include <config-win.h>
++ #else
++-#include "my_config.h"
+++#include "mysql/my_config.h"
++ #endif
++-#include "mysql.h"
++-#include "mysqld_error.h"
++-#include "errmsg.h"
+++#include "mysql/mysql.h"
+++#include "mysql/mysqld_error.h"
+++#include "mysql/errmsg.h"
++ 
++ #if PY_VERSION_HEX < 0x02020000
++ # define MyTuple_Resize(t,n,d) _PyTuple_Resize(t, n, d)
+diff --git a/meta-oe/recipes-devtools/python/python-mysqldb_1.2.3.bb b/meta-oe/recipes-devtools/python/python-mysqldb_1.2.3.bb
+new file mode 100644
+index 0000000..69eb47c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-mysqldb_1.2.3.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "Python interface to MySQL"
++HOMEPAGE = "http://sourceforge.net/projects/mysql-python/"
++SECTION = "devel/python"
++# "GPL or the original license based on Python 1.5.2's license"
++LICENSE = "GPL"
++LIC_FILES_CHKSUM = "file://README;md5=f92e5d60b213d35288bc14f18e1e31b4"
++DEPENDS = "mysql5"
++
++SRC_URI = "\
++  ${SOURCEFORGE_MIRROR}/mysql-python/MySQL-python-${PV}.tar.gz \
++  file://mysqlpath.patch \
++"
++SRC_URI[md5sum] = "215eddb6d853f6f4be5b4afc4154292f"
++SRC_URI[sha256sum] = "7de66fbbf923634e7c965aeaefa74642ba75ae20ee1cefcefc3009595b7a7e6e"
++
++SRCNAME = "MySQL-python"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
++
++do_install_append() {
++    install -d ${D}${datadir}/doc/${PN}/
++    install -m 0644 ${S}/doc/*.txt ${D}${datadir}/doc/${PN}/
++}
+-- 
+1.7.6.4
+
+
 
