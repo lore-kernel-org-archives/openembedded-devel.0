@@ -1,24 +1,23 @@
-Received: from mga14.intel.com ([143.182.124.37])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RhWkF-0005s8-JK
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Rhr6i-0004M1-3m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Jan 2012 02:31:23 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 01 Jan 2012 17:24:03 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="91366514"
-Received: from unknown (HELO helios.localnet) ([10.252.122.71])
-	by azsmga001.ch.intel.com with ESMTP; 01 Jan 2012 17:24:02 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 03 Jan 2012 00:15:56 +0100
+Received: (qmail invoked by alias); 02 Jan 2012 23:08:35 -0000
+Received: from p5B0A271B.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.39.27]
+	by mail.gmx.net (mp029) with SMTP; 03 Jan 2012 00:08:35 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18PNOcDrt8PdH7GShpo0pJAsKs84X5G8ywB5MyCMF
+	ZYqykR56MCItmz
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 02 Jan 2012 01:23:59 +0000
-Message-ID: <2051925.8fkZ2AdGgG@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <1325283786-13589-1-git-send-email-andrea.adami@gmail.com>
-References: <1325283786-13589-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue,  3 Jan 2012 00:09:39 +0100
+Message-Id: <1325545779-30547-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.4 to 3.1.6
+X-Y-GMX-Trusted: 0
+Subject: [meta-oe] udisks: add native systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,93 +31,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2012 01:31:23 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 02 Jan 2012 23:15:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Friday 30 December 2011 23:23:06 Andrea Adami wrote:
-> * apply latest stable patchset 2011-12-21
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
->  recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
->  2 files changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index 1ef0287..de5d096 100644
-> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> @@ -1,12 +1,12 @@
->  require linux-kexecboot.inc
-> 
-> -PR = "${INC_PR}.2"
-> +PR = "${INC_PR}.3"
->  S = "${WORKDIR}/linux-${PV}"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-> 
->  SRC_URI +=
-> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
->         
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
-> lepatch \ +          
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stab
-> lepatch \ file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> @@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
-> 
->  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
->  SRC_URI[kernel.sha256sum] =
-> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
-> -SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
-> -SRC_URI[stablepatch.sha256sum] =
-> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
-> +SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
-> +SRC_URI[stablepatch.sha256sum] =
-> "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c" diff
-> --git a/recipes-kernel/linux/linux_3.1.bb
-> b/recipes-kernel/linux/linux_3.1.bb index c948f04..b4271e4 100644
-> --- a/recipes-kernel/linux/linux_3.1.bb
-> +++ b/recipes-kernel/linux/linux_3.1.bb
-> @@ -1,11 +1,11 @@
->  require linux.inc
-> 
-> -PR = "${INC_PR}.3"
-> +PR = "${INC_PR}.4"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
-> 
->  SRC_URI +=
-> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
->         
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
-> lepatch \ +          
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stab
-> lepatch \ file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> @@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
-> 
->  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
->  SRC_URI[kernel.sha256sum] =
-> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
-> -SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
-> -SRC_URI[stablepatch.sha256sum] =
-> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
-> +SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
-> +SRC_URI[stablepatch.sha256sum] =
-> "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c"
 
-Merged to meta-handheld master, thanks.
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ .../udisks/udisks/add-systemd-support.patch        |  112 ++++++++++++++++++++
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |   14 ++-
+ 2 files changed, 123 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch b/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
+new file mode 100644
+index 0000000..29df8a4
+--- /dev/null
++++ b/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
+@@ -0,0 +1,112 @@
++From 7a485d491697906b445020dfcb37fe91806d7134 Mon Sep 17 00:00:00 2001
++From: Lennart Poettering <lennart@poettering.net>
++Date: Thu, 22 Jul 2010 02:20:22 +0200
++Subject: [PATCH] systemd: install systemd unit files
++Upstream-Status: ?
++Based on: https://www.libreoffice.org/bugzilla/show_bug.cgi?id=29205
++---
++ Makefile.am                            |    5 ++++-
++ configure.ac                           |    9 +++++++++
++ data/.gitignore                        |    1 +
++ data/Makefile.am                       |   11 ++++++++++-
++ data/org.freedesktop.UDisks.service.in |    2 +-
++ data/udisks-daemon.service.in          |   12 ++++++++++++
++ 6 files changed, 37 insertions(+), 3 deletions(-)
++ create mode 100644 data/udisks-daemon.service.in
++
++diff --git a/Makefile.am b/Makefile.am
++index 588f05d..c3aaeea 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -24,7 +24,10 @@ EXTRA_DIST = 			\
++ 	ChangeLog
++ 
++ # xsltproc barfs on 'make distcheck'; disable for now
++-DISTCHECK_CONFIGURE_FLAGS=--disable-man-pages --disable-gtk-doc
+++DISTCHECK_CONFIGURE_FLAGS = \
+++	--disable-man-pages \
+++	--disable-gtk-doc \
+++	--with-systemdsystemunitdir=$$dc_install_base/$(systemdsystemunitdir)
++ 
++ clean-local :
++ 	rm -f *~
++diff --git a/configure.ac b/configure.ac
++index a9141bf..39bbd7a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -232,6 +232,15 @@ AC_SUBST([GETTEXT_PACKAGE])
++ AM_GLIB_GNU_GETTEXT
++ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[gettext domain])
++ 
+++# systemd
+++
+++AC_ARG_WITH([systemdsystemunitdir],
+++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
+++        [],
+++        [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
+++AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
+++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir"])
+++
++ AC_OUTPUT([
++ Makefile
++ data/Makefile
++diff --git a/data/Makefile.am b/data/Makefile.am
++index ca6d8ac..bf5c1a7 100644
++--- a/data/Makefile.am
+++++ b/data/Makefile.am
++@@ -35,6 +35,14 @@ avahiservicedir = $(sysconfdir)/avahi/services
++ avahiservice_DATA = udisks.service
++ endif # REMOTE_ACCESS_ENABLED
++ 
+++if HAVE_SYSTEMD
+++systemdsystemunit_DATA = \
+++	udisks-daemon.service
+++
+++udisks-daemon.service: udisks-daemon.service.in
+++	@sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
+++endif
+++
++ EXTRA_DIST = 						\
++ 	80-udisks.rules					\
++ 	$(dbusif_DATA)					\
++@@ -42,7 +50,8 @@ EXTRA_DIST = 						\
++ 	$(dbusconf_in_files)				\
++ 	udisks.pc.in					\
++ 	udisks.service					\
+++	udisks-daemon.service.in                        \
++ 	$(NULL)
++ 
++ clean-local :
++-	rm -f *~ $(service_DATA) $(dbusconf_DATA)
+++	rm -f *~ $(service_DATA) $(dbusconf_DATA) udisks-daemon.service
++diff --git a/data/org.freedesktop.UDisks.service.in b/data/org.freedesktop.UDisks.service.in
++index b3606a6..6ba2cd0 100644
++--- a/data/org.freedesktop.UDisks.service.in
+++++ b/data/org.freedesktop.UDisks.service.in
++@@ -2,4 +2,4 @@
++ Name=org.freedesktop.UDisks
++ Exec=@libexecdir@/udisks-daemon
++ User=root
++-
+++SystemdService=udisks-daemon.service
++diff --git a/data/udisks-daemon.service.in b/data/udisks-daemon.service.in
++new file mode 100644
++index 0000000..78379b2
++--- /dev/null
+++++ b/data/udisks-daemon.service.in
++@@ -0,0 +1,12 @@
+++[Unit]
+++Description=Disk Manager
+++After=syslog.target
+++
+++[Service]
+++Type=dbus
+++BusName=org.freedesktop.UDisks
+++ExecStart=@libexecdir@/udisks-daemon
+++StandardOutput=syslog
+++
+++[Install]
+++WantedBy=graphical.target
++-- 
++1.7.0.1
++
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
+index 099ff8f..c3e2664 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
+@@ -6,15 +6,23 @@ DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
+ # optional dependencies: device-mapper parted
+ 
+ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
++           file://add-systemd-support.patch \
+            file://optional-depends.patch"
+ 
+ SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
+ SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
+ 
+-inherit autotools
++PR = "r1"
+ 
+-# No docbook-xsl-native recipe available
+-EXTRA_OECONF = "--enable-man-pages=no"
++inherit autotools systemd
++
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
++
++PACKAGES =+ "${PN}-systemd"
++
++FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
++RDEPENDS_${PN}-systemd = "${PN}"
+ 
+ FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
+                 ${datadir}/dbus-1/ \
 -- 
+1.7.4.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
