@@ -1,25 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RhIBn-0004fW-Gt for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Jan 2012 10:58:51 +0100
-Received: from f053044090.adsl.alicedsl.de ([78.53.44.90]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RhI4z-0007l4-VN for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Jan 2012 09:51:50 +0000
-Message-ID: <1325411493.3742.92.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RhWkF-0005s8-JK
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Jan 2012 02:31:23 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 01 Jan 2012 17:24:03 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="91366514"
+Received: from unknown (HELO helios.localnet) ([10.252.122.71])
+	by azsmga001.ch.intel.com with ESMTP; 01 Jan 2012 17:24:02 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 01 Jan 2012 10:51:33 +0100
-In-Reply-To: <CAHucTJvY8BJsrpSDunZz_Rh703n=rpCps6idW7fYaH8diZr7nw@mail.gmail.com>
-References: <1325331840-23575-1-git-send-email-adriano.pallavicino@gmail.com>
-	<CACW_hTa+hpihvndWS-a7NZQme=+stZvUKxgtsxov3tdaqMj-xg@mail.gmail.com>
-	<CAHucTJvY8BJsrpSDunZz_Rh703n=rpCps6idW7fYaH8diZr7nw@mail.gmail.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [PATCHv2][2011.03-maintenance] binutils_2.20.1 fixed md5 and sha256 sum
+Date: Mon, 02 Jan 2012 01:23:59 +0000
+Message-ID: <2051925.8fkZ2AdGgG@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+In-Reply-To: <1325283786-13589-1-git-send-email-andrea.adami@gmail.com>
+References: <1325283786-13589-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.4 to 3.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,63 +32,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jan 2012 09:58:51 -0000
-X-Groupsio-MsgNum: 36340
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-0r5oIxkDQnZve+Dqeai6"
+X-List-Received-Date: Mon, 02 Jan 2012 01:31:23 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---=-0r5oIxkDQnZve+Dqeai6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Friday 30 December 2011 23:23:06 Andrea Adami wrote:
+> * apply latest stable patchset 2011-12-21
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
+>  recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
+>  2 files changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index 1ef0287..de5d096 100644
+> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> @@ -1,12 +1,12 @@
+>  require linux-kexecboot.inc
+> 
+> -PR = "${INC_PR}.2"
+> +PR = "${INC_PR}.3"
+>  S = "${WORKDIR}/linux-${PV}"
+> 
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+> 
+>  SRC_URI +=
+> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
+>         
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
+> lepatch \ +          
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stab
+> lepatch \ file://defconfig \
+>             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+>             "
+> @@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
+> 
+>  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+>  SRC_URI[kernel.sha256sum] =
+> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+> -SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
+> -SRC_URI[stablepatch.sha256sum] =
+> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
+> +SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
+> +SRC_URI[stablepatch.sha256sum] =
+> "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c" diff
+> --git a/recipes-kernel/linux/linux_3.1.bb
+> b/recipes-kernel/linux/linux_3.1.bb index c948f04..b4271e4 100644
+> --- a/recipes-kernel/linux/linux_3.1.bb
+> +++ b/recipes-kernel/linux/linux_3.1.bb
+> @@ -1,11 +1,11 @@
+>  require linux.inc
+> 
+> -PR = "${INC_PR}.3"
+> +PR = "${INC_PR}.4"
+> 
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
+> 
+>  SRC_URI +=
+> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
+>         
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.4.bz2;apply=yes;name=stab
+> lepatch \ +          
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.6.bz2;apply=yes;name=stab
+> lepatch \ file://defconfig \
+>             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+>             "
+> @@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
+> 
+>  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+>  SRC_URI[kernel.sha256sum] =
+> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+> -SRC_URI[stablepatch.md5sum] = "b8b14bdfbf76cfef8e042e7d1a385fca"
+> -SRC_URI[stablepatch.sha256sum] =
+> "7fab9b4984bdc00781450ae3cdee7b1218a07d5ed8081da115316f17392a8d5f"
+> +SRC_URI[stablepatch.md5sum] = "b815dda0a05f7774a0ed0b705b8cfd4c"
+> +SRC_URI[stablepatch.sha256sum] =
+> "33684faae341f1c48269caf17338c5dca35757d291761df580f2eed10bf8b47c"
 
-Dear Adriano,
+Merged to meta-handheld master, thanks.
 
-
-Am Samstag, den 31.12.2011, 15:25 +0100 schrieb Adriano Pallavicino:
-> I can correctly download it from here
-> ftp://ftp.gnu.org/gnu/binutils/binutils-2.20.1.tar.bz2 (as indicated insi=
-de
-> bb file). The problem is only in sha256 and md5 sum. I'm using
-> 2011.03-maintenance. I can desume that this branch is only for maintainin=
-g
-> 2011.03 release. If someone decided to use binutils 2.20.1 why should I
-> introduce the new 2.20.1a from master? All the things are tested with
-> 2.20.1 and imho the branch 2011.03-maintenance must continue to utilize
-> them.
-
-please read the commit messages and the included links in the commit
-messages for `binutils` in OpenEmbedded master branch. The link you
-posted is [1] is just a symlink to 2.20.1a [2]. Try it out with `wget`.
-
-The problem as mentioned in some commit messages was that some source
-files were not included in 2.20.1 and therefore upstream had to update
-that.
-
-> Of course, if maintainers consider this patch useless, I'll remove it fro=
-m
-> here.
-
-
-Thanks,
-
+Cheers,
 Paul
 
+-- 
 
-[1] ftp://ftp.gnu.org/gnu/binutils/binutils-2.20.1.tar.bz2
-[2] ftp://ftp.gnu.org/gnu/binutils/binutils-2.20.1a.tar.bz2
+Paul Eggleton
+Intel Open Source Technology Centre
 
---=-0r5oIxkDQnZve+Dqeai6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk8ALKYACgkQPX1aK2wOHVgkEgCcDrmF/NN45zTAwIIkB2pS+hzA
-JxgAn27Amg9OYO+3UsyEEXTOzcNxy1nv
-=/PM0
------END PGP SIGNATURE-----
-
---=-0r5oIxkDQnZve+Dqeai6--
