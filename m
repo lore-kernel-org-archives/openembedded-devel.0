@@ -1,27 +1,30 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RiZGM-0001Ea-MN
+	(envelope-from <raj.khem@gmail.com>) id 1RiZdY-0001wj-7j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jan 2012 23:24:50 +0100
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LXA00B9MOKJVGD1@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	04 Jan 2012 16:17:07 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 46D7E202C2; Wed,
-	04 Jan 2012 17:17:06 -0500 (EST)
-Date: Wed, 04 Jan 2012 17:17:06 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 04 Jan 2012 23:48:48 +0100
+Received: by lami14 with SMTP id i14so6377253lam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Jan 2012 14:41:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=91WLYQLU5tdH0b8v9enGifK6jx5BnkYw3gyTzS3KNFI=;
+	b=ZEQPWeV2c78G75CLWUDnUlqHsj6qdyrCZwP6S6Pkv850pv/Dkw6oii5P0ga0cxQrR6
+	IGisRCd+RHqEPYtyW0JhMtsrKE0x9cVFnvs/GFb+aKvnMK44A8Tb87cr7orr+LTfPbbB
+	TEiZgUU1UY+RzJsnTm6avUZ7zs/dtu3c3H244=
+Received: by 10.112.36.8 with SMTP id m8mr329348lbj.54.1325716886247; Wed, 04
+	Jan 2012 14:41:26 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.115.1 with HTTP; Wed, 4 Jan 2012 14:40:55 -0800 (PST)
+In-Reply-To: <CAObi9r_A=fv0Q4QQMxzXTLmsdS1yb4y+9EApxrCkGiX53L70=g@mail.gmail.com>
+References: <CAObi9r-QdBpK9hzwQr1M1tjjKW1F+qLfr2CLbjyWCAuSuEUKAQ@mail.gmail.com>
+	<20120104180932.GD32676@sakrah.homelinux.org>
+	<CAObi9r_A=fv0Q4QQMxzXTLmsdS1yb4y+9EApxrCkGiX53L70=g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Jan 2012 14:40:55 -0800
+Message-ID: <CAMKF1spZGshc70t3e3dUjfckxEVFg0UX+Wtga7GJssFPuEugDg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120104221706.GF587@denix.org>
-References: <20120104181400.GD587@denix.org>
-	<CABcZAN=i6H+G_=v2KreWhzrOKe=fgVHv-vvrMhVMzKcefrXf2w@mail.gmail.com>
-	<C0EC035D-D055-4E49-A36C-F42AF03D232C@gmail.com>
-MIME-version: 1.0
-In-reply-to: <C0EC035D-D055-4E49-A36C-F42AF03D232C@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [OE-core] BlueZ old releases have new checksums
+Subject: Re: some ipk contents missed in rootfs - fuse_2.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,44 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2012 22:24:50 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 04 Jan 2012 22:48:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jan 04, 2012 at 09:41:43PM +0100, Adriano Pallavicino wrote:
-> Temporaly i've manually changed md5 and sha256sum. If needed i can prepare a 
-> patch
+On Wed, Jan 4, 2012 at 2:00 PM, mgundes <mgcse@hotmail.com> wrote:
+> At that point, can I say this as a result: "IMAGE_INSTALL is checked by
+> bitbake and just only ipks of in that variable are added to rootfs. In my
+> case, I had added fuse to IMAGE_INSTALL and just fuse*.ipk was added to
+> rootfs, so that I needed to adding fuse-utils to IMAGE_INSTALL to get
+> contents of fuse-utils*.ipk in my rootfs."
+>
+> Is that conclusion true?
+>
 
-That wouldn't work reliably, as some people have an old copy saved locally, 
-while others can still download the same old copy from one of the mirrors...
-
--- 
-Denys
-
-
-> Il giorno 04/gen/2012, alle ore 21:14, Chris Larson <clarson@kergoth.com> ha scritto:
-> 
-> > On Wed, Jan 4, 2012 at 11:14 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> >> The main archive of BlueZ/obexd/hcidump releases on kernel.org[1] finally
-> >> re-appeared after missing for long time since kernel.org compromise.
-> >> Unfortunately, all previous tarballs have new checksums, breaking builds for
-> >> anyone w/o previous copy cached. Old copies were also extensively mirrored,
-> >> so you never know which one you fetch next time...
-> > 
-> > Heh, checksums changing after a security compromise, that's worrisome
-> > :) should diff their contents to see what's going on, or whether its
-> > just a gzip timestamp change or something.
-> > -- 
-> > Christopher Larson
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+you have to understand the difference between recipe name and output
+package name
+one recipe may emit multiple packages. What goes into image is picked
+from output package
+names and not recipe names. By default bitbake translates recipe name
+to be one of packages
+name as well. e.g. if you have foo.bb then there will be a foo.ipk
+generated but there might
+be more like foo-utils.ipk etc. if you did that in the recipe.
 
 
