@@ -1,23 +1,31 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>)
-	id 1RiWPX-00030f-38; Wed, 04 Jan 2012 20:22:08 +0100
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0LXA003HSDBC9OH3@vms173003.mailsrvcs.net>; Wed,
-	04 Jan 2012 12:14:01 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8767A202C2; Wed,
-	04 Jan 2012 13:14:00 -0500 (EST)
-Date: Wed, 04 Jan 2012 13:14:00 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Message-id: <20120104181400.GD587@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: BlueZ old releases have new checksums
+	(envelope-from <kergoth@gmail.com>)
+	id 1RiXLh-0005B5-6A; Wed, 04 Jan 2012 21:22:13 +0100
+Received: by qcqw6 with SMTP id w6so10072341qcq.6
+	for <multiple recipients>; Wed, 04 Jan 2012 12:14:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=oax1KxhVP5ycVlX7w5qLYeek6gJGud+kdIqSHUwljc8=;
+	b=Nsq3cOxNEYMpr75xNIVpmaM364+mp0FWzbXGKdafJGfC1AqPV6mVm+lay/FXdj2B51
+	ejfIPiBB4GL0xrYmeegvSzBeFWrbvmNyhh0yXcfJC5F31dLCnlO81/cMs4h3vyvaBR79
+	VIiqXKAgL/99Xe8HgdjhaxYqOTLIc/fx8FPSc=
+Received: by 10.224.42.10 with SMTP id q10mr52704828qae.26.1325708087221; Wed,
+	04 Jan 2012 12:14:47 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.187.141 with HTTP; Wed, 4 Jan 2012 12:14:26 -0800 (PST)
+In-Reply-To: <20120104181400.GD587@denix.org>
+References: <20120104181400.GD587@denix.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 4 Jan 2012 13:14:26 -0700
+X-Google-Sender-Auth: tH8gD76j3bEgjUWPV4-C8IGCocc
+Message-ID: <CABcZAN=i6H+G_=v2KreWhzrOKe=fgVHv-vvrMhVMzKcefrXf2w@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] BlueZ old releases have new checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2012 19:22:09 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 04 Jan 2012 20:22:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-All,
+On Wed, Jan 4, 2012 at 11:14 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> The main archive of BlueZ/obexd/hcidump releases on kernel.org[1] finally
+> re-appeared after missing for long time since kernel.org compromise.
+> Unfortunately, all previous tarballs have new checksums, breaking builds for
+> anyone w/o previous copy cached. Old copies were also extensively mirrored,
+> so you never know which one you fetch next time...
 
-The main archive of BlueZ/obexd/hcidump releases on kernel.org[1] finally 
-re-appeared after missing for long time since kernel.org compromise. 
-Unfortunately, all previous tarballs have new checksums, breaking builds for 
-anyone w/o previous copy cached. Old copies were also extensively mirrored, 
-so you never know which one you fetch next time...
-
-I pinged the upstream, but I doubt it will be changed or fixed in any way. 
-So the proper solution for us would be to upgrade recipes to the latest 
-released versions - bluez-4.97, obexd-0.43 and bluez-hcidump-2.2.
-
-Are there any other suggestions?
-
-[1] http://www.kernel.org/pub/linux/bluetooth/
-
+Heh, checksums changing after a security compromise, that's worrisome
+:) should diff their contents to see what's going on, or whether its
+just a gzip timestamp change or something.
 -- 
-Denys
+Christopher Larson
 
 
