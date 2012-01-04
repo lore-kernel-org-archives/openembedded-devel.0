@@ -1,23 +1,31 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Ri6Yi-0003E8-7t
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <pabigot@gmail.com>) id 1RiGaz-0006vD-9e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Jan 2012 16:45:52 +0100
-Received: (qmail invoked by alias); 03 Jan 2012 15:38:31 -0000
-Received: from p5B0A12EF.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.18.239]
-	by mail.gmx.net (mp019) with SMTP; 03 Jan 2012 16:38:31 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18KHaFmgtoKadflgkux4qc9OGoffYzAhwUJybOZ5U
-	E6vZdmTnpDzJab
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+	Wed, 04 Jan 2012 03:28:53 +0100
+Received: by iakh37 with SMTP id h37so27928564iak.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Jan 2012 18:21:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=PKs8qojshcJxFRsoJresz7nyttnxm278JK4Kx6qTbMM=;
+	b=IW3fKbCtPsh5kc4FmsENbcaOLGsx3JmPArBOwsh5/9FIs98kwELFoo9ObLD+UkDvUU
+	QwVIm5JspFX3NdHJJNN7RrYmUFxOpxGN+MMO9rzSuq9HmYHSCaFMNKe6Cj73dFjQtKrh
+	LP2TrTfCZ3J27JTZmKLOICF6ht3ZAujo8cbBw=
+Received: by 10.50.34.233 with SMTP id c9mr52633113igj.19.1325643686858;
+	Tue, 03 Jan 2012 18:21:26 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id j3sm183632174ibj.1.2012.01.03.18.21.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 03 Jan 2012 18:21:25 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Jan 2012 16:39:37 +0100
-Message-Id: <1325605177-5372-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] ristretto: fix build error by including locale.h
+Date: Tue,  3 Jan 2012 20:21:05 -0600
+Message-Id: <1325643665-5111-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+Subject: [meta-oe] ntp: correct systemd EnvironmentFile, add ntpdate service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,69 +39,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jan 2012 15:45:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 04 Jan 2012 02:28:53 -0000
 
-build tested / error was:
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-| util.c: In function 'rstto_launch_help':
-| util.c:36:35: error: 'LC_MESSAGES' undeclared (first use in this function)
-| util.c:36:35: note: each undeclared identifier is reported only once for each function it appears in
-| make[3]: *** [ristretto-util.o] Error 1
-| make[3]: Leaving directory `/home/Superandy/tmp/oe-core-eglibc/work/armv7a-angstrom-linux-gnueabi/ristretto-0.3.0-r0/ristretto-0.3.0/src'
-| make[2]: *** [all] Error 2
-| make[2]: Leaving directory `/home/Superandy/tmp/oe-core-eglibc/work/armv7a-angstrom-linux-gnueabi/ristretto-0.3.0-r0/ristretto-0.3.0/src'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory `/home/Superandy/tmp/oe-core-eglibc/work/armv7a-angstrom-linux-gnueabi/ristretto-0.3.0-r0/ristretto-0.3.0'
-| make: *** [all] Error 2
-| + die 'oe_runmake failed'
+Eliminate EnvironmentFile from systemd unit descriptions.  /etc/ntp.conf
+can't be sourced to set environment variables like NTPD_ARG.  Following the
+rationale at http://0pointer.de/blog/projects/on-etc-sysinit.html it isn't
+needed anyway; if you don't buy that, it should be:
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+  EnvironmentFile=-/etc/default/ntpd
+
+Add one-shot ntpdate service which synchronizes local clock prior to
+starting ntpd (which aborts if the local time is more than 1000 seconds off
+of the server).  "systemctl enable ntpdate.service" not done by default
+because this would be a behavior change.
+
+Correct comment describing how to replace ntpdate (ntpdc doesn't take those
+arguments).
+
+Add comment to ntp.conf pointing out need to remove local hardware clock as
+a reference when simulating ntpdate.
+
+Signed-off-by: Peter A. Bigot <bigotp@acm.org>
 ---
- .../ristretto/files/add-locale_h.patch             |   13 +++++++++++++
- .../recipes-apps/ristretto/ristretto_0.3.0.bb      |    3 +++
- 2 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
+ meta-oe/recipes-support/ntp/files/ntp.conf        |    1 +
+ meta-oe/recipes-support/ntp/files/ntpd.service    |    3 +--
+ meta-oe/recipes-support/ntp/files/ntpdate.service |   11 +++++++++++
+ meta-oe/recipes-support/ntp/ntp.inc               |    3 ++-
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb        |    4 +++-
+ 5 files changed, 18 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-support/ntp/files/ntpdate.service
 
-diff --git a/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch b/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
+diff --git a/meta-oe/recipes-support/ntp/files/ntp.conf b/meta-oe/recipes-support/ntp/files/ntp.conf
+index 5964828..bf52440 100644
+--- a/meta-oe/recipes-support/ntp/files/ntp.conf
++++ b/meta-oe/recipes-support/ntp/files/ntp.conf
+@@ -7,6 +7,7 @@ driftfile /etc/ntp.drift
+ # as required, or change this.
+ server pool.ntp.org
+ # Using local hardware clock as fallback
++# Disable this when using ntpd -q -g -x as ntpdate or it will sync to itself
+ server 127.127.1.0
+ fudge 127.127.1.0 stratum 14
+ # Defining a default security setting
+diff --git a/meta-oe/recipes-support/ntp/files/ntpd.service b/meta-oe/recipes-support/ntp/files/ntpd.service
+index 420a056..bd87b1e 100644
+--- a/meta-oe/recipes-support/ntp/files/ntpd.service
++++ b/meta-oe/recipes-support/ntp/files/ntpd.service
+@@ -5,8 +5,7 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/ntpd.pid
+-EnvironmentFile=/etc/ntp.conf
+-ExecStart=/usr/bin/ntpd $NTPD_ARGS -p /run/ntpd.pid
++ExecStart=/usr/bin/ntpd -p /run/ntpd.pid
+ 
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/ntp/files/ntpdate.service b/meta-oe/recipes-support/ntp/files/ntpdate.service
 new file mode 100644
-index 0000000..a149500
+index 0000000..b2bc632
 --- /dev/null
-+++ b/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
-@@ -0,0 +1,13 @@
-+Upstream-Status: Applied in git repo
-+---
-+--- a/src/util.c.old	2011-11-05 22:12:00.000000000 +0100
-++++ b/src/util.c	2012-01-03 16:18:21.435234961 +0100
-+@@ -18,7 +18,7 @@
-+ 
-+ #include <config.h>
-+ #include <glib.h>
-+-
-++#include <locale.h>
-+ #include <exo/exo.h>
-+ 
-+ 
-diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-index 9a5d077..4fb28f0 100644
---- a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-+++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-@@ -4,9 +4,12 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
-+PR = "r1"
- 
- inherit xfce-app
- 
-+SRC_URI += "file://add-locale_h.patch"
++++ b/meta-oe/recipes-support/ntp/files/ntpdate.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Network Time Service (one-shot ntpdate mode)
++Before=ntpd.service
 +
- RRECOMMENDS_${PN} += "tumbler"
++[Service]
++Type=oneshot
++ExecStart=/usr/bin/ntpd -q -g -x
++RemainAfterExit=yes
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/ntp/ntp.inc b/meta-oe/recipes-support/ntp/ntp.inc
+index b398b80..1d740f0 100644
+--- a/meta-oe/recipes-support/ntp/ntp.inc
++++ b/meta-oe/recipes-support/ntp/ntp.inc
+@@ -28,7 +28,8 @@ EXTRA_OECONF = "--without-openssl --without-crypto ac_cv_header_readline_history
+ CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
  
- SRC_URI[md5sum] = "124c4e98f837e35c728b0ff1d9078b1a"
+ PACKAGES += "ntpdate ${PN}-bin ${PN}-tickadj ${PN}-utils"
+-# NOTE: you don't need ntpdate, use "ntpdc -q -g -x"
++# NOTE: you don't need ntpdate, use "ntpd -q -g -x"
++# or the ntpdate systemd service
+ 
+ # This should use rc.update
+ FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/init.d/ntpdate"
+diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+index e2bb1a8..063d82a 100644
+--- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
++++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+@@ -1,6 +1,6 @@
+ require ntp.inc
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ inherit systemd
+ 
+@@ -13,6 +13,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/${P}.tar.gz \
+         file://ntpd \
+         file://ntp.conf \
+         file://ntpdate \
++        file://ntpdate.service \
+         file://ntpd.service \
+ "
+ 
+@@ -29,6 +30,7 @@ do_install_append() {
+ 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
+ 
+ 	install -d ${D}${base_libdir}/systemd/system
++	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${base_libdir}/systemd/system/
+ 	install -m 0644 ${WORKDIR}/ntpd.service ${D}${base_libdir}/systemd/system/
+ }
+ 
 -- 
-1.7.4.4
+1.7.6.4
 
 
 
