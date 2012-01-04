@@ -1,35 +1,39 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <alees@google.com>) id 1RiNtC-0000dG-Ix
+Received: from 7.mo3.mail-out.ovh.net ([46.105.57.200]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1RiPMW-000376-Jl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jan 2012 11:16:10 +0100
-Received: by iakh37 with SMTP id h37so28475578iak.6
+	Wed, 04 Jan 2012 12:50:32 +0100
+Received: from mail402.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id 8D77A100C7A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jan 2012 02:08:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=beta;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:x-system-of-record:content-type;
-	bh=RV8s9AnS1d7RCN2JE8IpR7Fd3OZ1cM1kmFTNHNIpTkg=;
-	b=dfLwJ+YieuzMPwCo/XXHsnsW1eLDiypnk7i3/kPQi7d7XnML5ZlpMsym4PsxsxNrko
-	wcAIGX2HI4aEihpav44A==
-Received: by 10.43.50.67 with SMTP id vd3mr56159143icb.10.1325671728556;
-	Wed, 04 Jan 2012 02:08:48 -0800 (PST)
-Received: by 10.43.50.67 with SMTP id vd3mr56159130icb.10.1325671728307; Wed,
-	04 Jan 2012 02:08:48 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.231.125.155 with HTTP; Wed, 4 Jan 2012 02:08:27 -0800 (PST)
-In-Reply-To: <20111226041239.GA2321@denix.org>
-References: <4EF2F380.80704@celestialaudio.com>
-	<20111223223753.GA20360@denix.org>
-	<CACW_hTbZ=9HZNZGouQoWvLcc2WmDP4O+i+ooF98DYHWOXK79Jw@mail.gmail.com>
-	<20111226041239.GA2321@denix.org>
-From: Angus Lees <alees@google.com>
-Date: Wed, 4 Jan 2012 21:08:27 +1100
-Message-ID: <CA+C88Rn9Y6VdJ-Per2rQ2RFTbqu3m6BGaFCMLsHPngyAcwi0Tg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-System-Of-Record: true
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: fakeroot 1.15.1 issues
+	Wed,  4 Jan 2012 09:06:30 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Jan 2012 10:05:24 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
+	(82.240.38.71) by ns0.ovh.net with SMTP; 4 Jan 2012 10:05:23 +0200
+Date: Wed, 4 Jan 2012 09:05:23 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20120104090523.066ae2d7@eb-e6520>
+In-Reply-To: <20120104051849.GG31275@sakrah.homelinux.org>
+References: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+	<20120104051849.GG31275@sakrah.homelinux.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.7.10 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 595319577668791784
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -90
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefkedrvdejucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegfrhhlucfvnfffucdluddtmdenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtudenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinheplhhinhhugihtohhgohdrohhrghdpmhgvnhhtsgihrdgtohhmne
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -87
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeefjedruddvucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegfrhhlucfvnfffucdludefmdenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtudenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinheplhhinhhugihtohhgohdrohhrghdpmhgvnhhtsgihrdgtohhmne
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] gdb-cross-canadian: build gdb with python support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2012 10:16:11 -0000
+X-List-Received-Date: Wed, 04 Jan 2012 11:50:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 26, 2011 at 15:12, Denys Dmytriyenko <denis@denix.org> wrote:
+Hi Khem,
 
-> On Sun, Dec 25, 2011 at 09:11:36PM +0100, Frans Meulenbroeks wrote:
-> > 2011/12/23 Denys Dmytriyenko <denis@denix.org>
-> > Actually bumped into this today as well; I saw maintenance moved back to
-> > 1.14.6 or so.
-> > Latest version is about 1.18.2.2.
-> >
-> > Guess we should either move master back to 1.14.6, or maybe even move to
-> a
-> > newer version. or fix the url to point to the snapshot copy.
->
-> So, instead of always chasing the very latest version, why not simply set
-> the
-> Debian mirror variable on a per-distro basis?
+Le Tue, 3 Jan 2012 21:18:49 -0800,
+Khem Raj <raj.khem@gmail.com> a =E9crit :
+> On (23/12/11 08:12), Eric B=E9nard wrote:
+> > * python support is needed for providing finer scripting control
+> > in gdb, and for remote controling gdb for example from qtcreator
+> > * gdb/configure tries to autodetect python using python executable
+> > with --includes --ldflags --exec-prefix to get the right flags
+> > As it's difficult to achieve in OE's context, we generate a
+> > script which will return the right values and make gdb's build
+> > system happy. This idea was taken from the following article :
+> > http://www.mentby.com/doug-evans-2/python-enabled-gdb-on-windows-and-re=
+location.html
+> > * tested using angstrom & armv7/armv5 targets & qtcreator 201005 & 2.4.0
+>=20
+> I think this change should go into oe-core. Can you please redo it
+> w.r.t. oe-core=20
+>=20
+I agree with you, I initally submited it for oe-core and was asked
+to put it into meta-oe by Jessica :
+http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/014828=
+.html
+http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/014833=
+.html
 
+Eric
 
-Or stick to a fakeroot release that was in a Debian (stable) release, and
-hence will be around for a while.
-
- - Gus
 
