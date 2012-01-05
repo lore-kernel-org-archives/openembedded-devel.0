@@ -1,32 +1,27 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RiaGH-0003VU-9g
+	(envelope-from <neil@gruending.net>) id 1Rib3t-0004xW-71
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 00:28:49 +0100
-Received: by lami14 with SMTP id i14so6386038lam.6
+	Thu, 05 Jan 2012 01:20:05 +0100
+Received: by iakh37 with SMTP id h37so29474090iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jan 2012 15:21:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=niuD3/+jIY26BZI6hDC5KxCmVa7jkDX2Z08bkmVLXSw=;
-	b=wOLiEUmJmFhvEWWvgZTx1aPQlnm7LyoaxHEOiD86QdnlSWIYm4Rrj2ulcp7Sg+GoZ3
-	pq/d0i/aA1/IxYvvXO3gTaVQhLCd4Dh0pSafsZr2rbqGZSDF38aYCU+miD2VSVNJLcKo
-	rQ5leA9xUO4EyN87GdBpOmyojm+unpZfr9VSc=
-Received: by 10.152.123.75 with SMTP id ly11mr39215912lab.32.1325719287279;
-	Wed, 04 Jan 2012 15:21:27 -0800 (PST)
+	Wed, 04 Jan 2012 16:12:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gruending.net; s=google;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=KKU3fep4/xUUDRiS4v5FJXJwSoT4j2yEgZRatWO3HOk=;
+	b=kASjwnPXRzsK1KZLCd8/t8PK5R103aLBgqHs+z0XLH+9xLh1wPutwyCIY79WaTKfCO
+	g70lxBYo4z4OkjmDdWT+ldypPGCG5pDVdV2BmH7Ctiw2AH04Pwm4SptJehbgflSmPZAn
+	7QcG/vzPIBOVvqB7feX4qq+C/+IZBYN6FFmQM=
 MIME-Version: 1.0
-Received: by 10.152.115.1 with HTTP; Wed, 4 Jan 2012 15:20:56 -0800 (PST)
-In-Reply-To: <CAObi9r-Gm9_ORVY--3dyrgaAts3AEprr7jxfv8-WNJRr1aqKUw@mail.gmail.com>
-References: <CAObi9r-QdBpK9hzwQr1M1tjjKW1F+qLfr2CLbjyWCAuSuEUKAQ@mail.gmail.com>
-	<20120104180932.GD32676@sakrah.homelinux.org>
-	<CAObi9r_A=fv0Q4QQMxzXTLmsdS1yb4y+9EApxrCkGiX53L70=g@mail.gmail.com>
-	<CAMKF1spZGshc70t3e3dUjfckxEVFg0UX+Wtga7GJssFPuEugDg@mail.gmail.com>
-	<CAObi9r-Gm9_ORVY--3dyrgaAts3AEprr7jxfv8-WNJRr1aqKUw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Jan 2012 15:20:56 -0800
-Message-ID: <CAMKF1srjY=UC8_KCJvx08YuAbNa1fqp0pBAUCdsSO7LnW2e+YQ@mail.gmail.com>
+Received: by 10.43.58.10 with SMTP id wi10mr59110498icb.57.1325722362362; Wed,
+	04 Jan 2012 16:12:42 -0800 (PST)
+Received: by 10.231.207.158 with HTTP; Wed, 4 Jan 2012 16:12:42 -0800 (PST)
+Date: Wed, 4 Jan 2012 16:12:42 -0800
+Message-ID: <CACj0d1irS71X99mBn+od5fbFoO_JhTWiuB5EAAcUc63KXjPk7w@mail.gmail.com>
+From: Neil Gruending <neil@gruending.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: some ipk contents missed in rootfs - fuse_2.7.4
+Subject: Can't download linux-davinci
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,15 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2012 23:28:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 Jan 2012 00:20:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-> Yes, one bb can generate many ipks as defined by PACKAGES variable.
-> Just I want to be sure; up to your example, If I need foo.ipk and
-> foo-utils.ipk contents in my rootfs do I need to add "foo foo-utils" or
-> just "foo" to IMAGE_INSTALL?
+Is there another source for
+linux-davinci_2.6.31+2.6.32-rc2-psp03.01.00.37 besides
+http://www.angstrom-distribution.org/unstable/sources/git_arago-project.org.git.projects.linux-davinci.git_DEV.DaVinciPSP.03.XX.00.37.tar.gz?
+I've been trying to download it now for almost 24 hours now with no
+success. I get a download rate of about 2KB/s and then at around 20%
+complete bitbake times out. I'm trying compile openembedded
+2011.03-maintenance for a dm365-evm.
 
-IMAGE_INSTALL should be populated with packages so you need both unless
-foo or some other package which is included RDEPENDS on foo-utils
+Thanks,
+Neil
 
 
