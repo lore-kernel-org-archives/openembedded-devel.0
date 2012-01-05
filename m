@@ -1,36 +1,33 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eyalr@ti.com>) id 1Rinxa-0003aG-Hq
+	(envelope-from <gdalex@gmail.com>) id 1Rio5n-0003pe-5x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 15:06:26 +0100
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q05DsgHq014694
+	Thu, 05 Jan 2012 15:14:55 +0100
+Received: by eaal1 with SMTP id l1so366186eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Jan 2012 07:54:42 -0600
-Received: from DNCE72.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q05Dsfrr006163
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Jan 2012 07:54:41 -0600 (CST)
-Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
-	DNCE72.ent.ti.com ([fe80::8e3:61e5:a5b9:593c%23]) with mapi id
-	14.01.0323.003; Thu, 5 Jan 2012 14:54:41 +0100
-From: "Reizer, Eyal" <eyalr@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCHv2] iw_git: Update to commit 8b2b1c6a (version 3.2)
-Thread-Index: AQHMy5lNlRgB8ZoYJkKmSBQ4L9GLzpX9uVUAgAASXMA=
-Date: Thu, 5 Jan 2012 13:54:40 +0000
-Message-ID: <8665E2433BC68541A24DFFCA87B70F5B0CA2B7F3@DNCE03.ent.ti.com>
-References: <1325761243-6703-1-git-send-email-eyalr@ti.com>
-	<1325771284.3742.131.camel@mattotaupa>
-In-Reply-To: <1325771284.3742.131.camel@mattotaupa>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.15.26]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+	Thu, 05 Jan 2012 06:07:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=biV5OBICkrwv1lZPbydzOF84u1Zl1Qv9a/Hs+RoidWs=;
+	b=I8+W22j095B75YmlK6tpQ1YxONvNjdjjdYxfPvVvQ5xD5xOIJ5b81njiPoTmp6aodU
+	wqKpeAxdyKg1pqjtYmRq3sRXOEIU0/uT8fW7mCW8Nhp+I/cc51mexBU6Fimf+KqFOVy0
+	/Aqtc2UlEB+niEYc8v0Cq9xa1dDQFWRaRMjIw=
 MIME-Version: 1.0
-Subject: Re: [PATCHv2] iw_git: Update to commit 8b2b1c6a (version 3.2)
+Received: by 10.205.128.12 with SMTP id hc12mr756471bkc.133.1325772449280;
+	Thu, 05 Jan 2012 06:07:29 -0800 (PST)
+Received: by 10.205.26.134 with HTTP; Thu, 5 Jan 2012 06:07:29 -0800 (PST)
+In-Reply-To: <CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
+References: <CAFggvfNpJGosK3E0pG=Qikk3QXLoOSHndVRqxoTkNUS47_pDQw@mail.gmail.com>
+	<CAOy7-nOSQ1-SjHjYqKo4t-N=ZDo7FPoEGBdTbabtTBSd78Cczw@mail.gmail.com>
+	<CACj0d1jmq+XG=ksy5QTr9DsNs7xRZKVCtKwiSqXcJ=UGWDD_Pw@mail.gmail.com>
+	<CAOy7-nP8oc7ZObfc7We8j4Oj7ZTrhqs-upo8KY61tvqDcRG6-g@mail.gmail.com>
+	<CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
+Date: Thu, 5 Jan 2012 09:07:29 -0500
+Message-ID: <CAFggvfM4p0nvDYmgaCa=ZkgQkNzZ5XPCShkOkcWJPrEjgmbjEw@mail.gmail.com>
+From: George Alexandru Dorobantu <gdalex@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: openssl failing to compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +41,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 14:06:26 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 05 Jan 2012 14:14:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-U29ycnkgYWJvdXQgdGhhdC4gSnVzdCBzZW50IGEgZml4Lg0KDQpCZXN0IFJlZ2FyZHMsDQpFeWFs
-IFJlaXplcg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IG9wZW5lbWJl
-ZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gW21haWx0bzpvcGVu
-ZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYg
-T2YNCj4gUGF1bCBNZW56ZWwNCj4gU2VudDogVGh1cnNkYXksIEphbnVhcnkgMDUsIDIwMTIgMzo0
-OCBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4g
-U3ViamVjdDogUmU6IFtvZV0gW1BBVENIdjJdIGl3X2dpdDogVXBkYXRlIHRvIGNvbW1pdCA4YjJi
-MWM2YSAodmVyc2lvbg0KPiAzLjIpDQo+IA0KPiBBbSBEb25uZXJzdGFnLCBkZW4gMDUuMDEuMjAx
-MiwgMTM6MDAgKzAyMDAgc2NocmllYiBFeWFsIFJlaXplcjoNCj4gPiBVcGFkdGUgdG8gdGhlIGxh
-dGVzdCBmb3JtYWwgcmVsZWFzZSBvZiBpdyB3aGNpaCBoYXMgd293bGFuIGFuZCBwMnANCj4gc3Vw
-cG9ydC4NCj4gDQo+IFR5cG9zOiBVcGRhdGUsIHdoaWNoLiBTcGVsbCBjaGVja2VycyBzaG91bGQg
-ZmluZCB0aG9zZSB3aXRob3V0DQo+IHByb2JsZW1zLg0KPiANCj4gPiBUaGlzIHZlcnNpb24gd2Fz
-IHRlc3RlZCB0b2dldGhlciB3aXRoIG9mZmljaWFsIFI0X1NQMiBubGNwIHJlbGVhc2UNCj4gPiBm
-cm9tIFRJIFVzaW5nIHRoZSBmb2xsb3dpbmcgcGxhdGZvcnM6DQo+ID4NCj4gPiBhbTMzNXgtZXZt
-LCBhbTE4MHgtZXZtLCBhbTM3eC1ldm0NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEV5YWwgUmVp
-emVyIDxleWFsckB0aS5jb20+DQo+ID4gLS0tDQo+ID4gIHJlY2lwZXMvaXcvaXdfZ2l0LmJiIHwg
-ICAgNiArKystLS0NCj4gPiAgMSBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVs
-ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy9pdy9pd19naXQuYmIgYi9y
-ZWNpcGVzL2l3L2l3X2dpdC5iYiBpbmRleA0KPiA+IGM5OGUxYmMuLmYwZGM3ZmYgMTAwNjQ0DQo+
-ID4gLS0tIGEvcmVjaXBlcy9pdy9pd19naXQuYmINCj4gPiArKysgYi9yZWNpcGVzL2l3L2l3X2dp
-dC5iYg0KPiA+IEBAIC00LDkgKzQsOSBAQCBTRUNUSU9OID0gImJhc2UiDQo+ID4gIFBSSU9SSVRZ
-ID0gIm9wdGlvbmFsIg0KPiA+ICBMSUNFTlNFID0gIkJTRCINCj4gPg0KPiA+IC1TUkNSRVYgPSAi
-MGEyMzZlZjVmOGU0YmE3MjE4YWFjN2QwY2RhY2Y0NTY3M2Q1YjM1YyINCj4gPiAtUFIgPSAicjAi
-DQo+ID4gLVBWID0gIjAuOS4yMiINCj4gPiArU1JDUkVWID0gIjhiMmIxYzZhNzdlZTE3ZTQxMjhi
-MjI4NDVjYjhjNTkwMWRlMjk2YzkiDQo+ID4gK1BSID0gInIxIg0KPiA+ICtQViA9ICIzLjIiDQo+
-ID4gIFBSX2FwcGVuZCA9ICIrZ2l0ciR7U1JDUFZ9Ig0KPiA+DQo+ID4gIERFUEVORFMgPSAibGli
-bmwgcGtnY29uZmlnIg0KPiANCj4gUHJlc3VtaW5nIHRoZSBQUiBidW1wIGlzIG5lZWRlZDoNCj4g
-DQo+IEFja2VkLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9yZ2Uu
-bmV0Pg0KPiANCj4gRG9lcyB0aGUgcnVsZSBzdGlsbCBob2xkIHRoYXQgb25seSBUSSBmb2xrcyBz
-aG91bGQgcHVzaCBUSSBwYXRjaGVzPw0KPiANCj4gDQo+IFRoYW5rcywNCj4gDQo+IFBhdWwNCg==
+Edit openssl-native_1.0.0d.bb by removing the line containing this:
 
+file://libdeps-first.patch \
+
+It works after that. Don't forget to remove the stamps for openssl-native.
+
+Good luck
+George
+
+
+On Wed, Jan 4, 2012 at 8:50 PM, James <angweiyang@gmail.com> wrote:
+
+> Hi all,
+>
+> On Thu, Dec 29, 2011 at 10:17 AM, James <angweiyang@gmail.com> wrote:
+> > Hi all,
+> >
+> > On Thu, Dec 29, 2011 at 9:36 AM, Neil Gruending <neil@gruending.net>
+> wrote:
+> >> I have the same issue. After some Googling it appears to only affect
+> >> Ubuntu 11.10?
+> >>
+> >> Neil
+> >>
+> >> On Wed, Dec 28, 2011 at 5:23 PM, James <angweiyang@gmail.com> wrote:
+> >>> Hi all,
+> >>>
+> >>> On Wed, Dec 21, 2011 at 11:09 PM, George Alexandru Dorobantu
+> >>> <gdalex@gmail.com> wrote:
+> >>>> Hello list,
+> >>>>
+> >>>> bulding a console-image for beagleboard, openssl fails to compile.
+> >>>>
+> >>>> The log shows this:
+> >>>>
+> >>>> openssl.o: In function `main':
+> >>>> openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
+> >>>> openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
+> >>>> openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+> >>>> .....
+> >>>>
+> >>>> Removing libdeps-first.patch solved the issue.
+> >>>>
+> >>>> Does anyone know if libdeps-first.patch is really needed?
+> >>>> If not, could it be removed?
+> >>>>
+> >>>>
+> >>>> Thank you
+> >>>> George A. Dorobantu
+> >>>
+> >>> I'm too experiencing this issue with my overo board too and is
+> >>> currently using the same hack to get pass openssl compilation problem.
+> >>>
+> >>> Please backport openssl from oe-core to oe-classic to solve this once
+> >>> and for all?
+> >>>
+> >>> Thanks.
+> >>>
+> >>> --
+> >>> Regards,
+> >>> James
+> >>>
+> >
+> > My build host is Ubuntu 11.10 x64.
+> >
+> > --
+> > Regards,
+> > James
+>
+> Can anyone advise on this?
+>
+> Many thanks in adv
+>
+> --
+> Regards,
+> James
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
