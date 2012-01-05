@@ -1,30 +1,32 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rivd5-0004Tm-5E
+	(envelope-from <raj.khem@gmail.com>) id 1RivdA-0004U3-Je
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 23:17:48 +0100
-Received: by iakh37 with SMTP id h37so1563522iak.6
+	Thu, 05 Jan 2012 23:17:56 +0100
+Received: by iakh37 with SMTP id h37so1563563iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2012 14:10:23 -0800 (PST)
+	Thu, 05 Jan 2012 14:10:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ch3Ven0VLVnuA7EY+zbHLzNCx9tdGJGsyi7Me6t7xKM=;
-	b=NgZEI8veX5vmsNjOAlC0DlFmeHmNaGqEY9VE9sGDv54hnaGE7iXhzFX8EF+sEr3o++
-	XKnh9oM8Ksys1PGNaUr51eJSRq87UJc2cclqRGJtYmNxU/9BNgCru0C2yHuZ5ca+J5o+
-	65qnflEvYm7lOjTVGrKW303ZxgcC+71zBlY0w=
-Received: by 10.42.168.202 with SMTP id x10mr3800955icy.4.1325801422962;
-	Thu, 05 Jan 2012 14:10:22 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=UZciwrkcuie3wnrGZB4mM8MJoDwWUt0bU1Gzi0Lq1lM=;
+	b=HK/erY5KSap7KahqAGhWTG84rR1J6VjNcUBDYPA2Pn9c9mAfjZiFR5wtj4MFi9+iIg
+	INNlljtJdsajIgu+F7v0T10vNSZQM+fKAq5O/f/kxVKsf4nCEDGaYGbfxKsJDxuW6TVS
+	4DqRSKBC1914+iah84nHB4MDeQHyFwb6eUcIM=
+Received: by 10.42.76.66 with SMTP id d2mr3878694ick.7.1325801424929;
+	Thu, 05 Jan 2012 14:10:24 -0800 (PST)
 Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id f32sm202728478ibf.9.2012.01.05.14.10.21
+	by mx.google.com with ESMTPS id f32sm202728478ibf.9.2012.01.05.14.10.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 05 Jan 2012 14:10:21 -0800 (PST)
+	Thu, 05 Jan 2012 14:10:23 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jan 2012 14:09:58 -0800
-Message-Id: <1325801399-24880-1-git-send-email-raj.khem@gmail.com>
+Date: Thu,  5 Jan 2012 14:09:59 -0800
+Message-Id: <1325801399-24880-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-java][PATCH 1/2] llvm, openjdk: Use bb.error instread of oefatal
+In-Reply-To: <1325801399-24880-1-git-send-email-raj.khem@gmail.com>
+References: <1325801399-24880-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-java][PATCH 2/2] llvm, openjdk: Add mips to known architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,78 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 22:17:48 -0000
+X-List-Received-Date: Thu, 05 Jan 2012 22:17:56 -0000
 
-oefatal is not available in oe-core so replace
-it with bbfatal in classes and oe.error in recipes
-which use it in anonymous python. bb.fatal aborts
-parsing. So we want to give an error but not
-stop parsing.
+correct a typo Mips -> mips
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/java.bbclass                      |    6 +++---
- recipes-core/llvm/llvm.inc                |    2 +-
+ recipes-core/llvm/llvm.inc                |    4 ++--
  recipes-core/openjdk/openjdk-6-common.inc |    2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/classes/java.bbclass b/classes/java.bbclass
-index 6a45065..fe24648 100644
---- a/classes/java.bbclass
-+++ b/classes/java.bbclass
-@@ -39,7 +39,7 @@ oe_jarinstall() {
-       destname=$1
-       ;;
-     -*)
--      oefatal "oe_jarinstall: unknown option: $1"
-+      bbfatal "oe_jarinstall: unknown option: $1"
-       ;;
-     *)
-       break;
-@@ -105,7 +105,7 @@ oe_makeclasspath() {
-               fi
-               ;;
-           -*)
--              oefatal "oe_makeclasspath: unknown option: $1"
-+              bbfatal "oe_makeclasspath: unknown option: $1"
-               ;;
-           *)
-               file=$dir/$1.jar
-@@ -146,7 +146,7 @@ oe_java_simple_wrapper() {
-       output=$1
-       ;;
-     -*)
--      oefatal "oe_java_simple_wrapper: unknown option: $1"
-+      bbfatal "oe_java_simple_wrapper: unknown option: $1"
-       ;;
-     *)
-       if [ $mainclass ]
 diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-index c675c4d..5cc9957 100644
+index 5cc9957..578cd40 100644
 --- a/recipes-core/llvm/llvm.inc
 +++ b/recipes-core/llvm/llvm.inc
-@@ -208,7 +208,7 @@ def get_llvm_arch(d):
+@@ -203,8 +203,8 @@ def get_llvm_arch(d):
+     arch = "X86"
+   elif arch == "arm":
+     arch = "ARM"
+-  elif arch == "mipsel":
+-    arch = "Mips"
++  elif arch == "mipsel" or arch == "mips":
++    arch = "mips"
    elif arch == "powerpc":
      arch = "PowerPC"
    else:
--    oefatal("Your target architecture is not supported by this recipe");
-+    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
- 
-   return arch
- 
 diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
-index 1a3c52b..461ccd9 100644
+index 461ccd9..bc56105 100644
 --- a/recipes-core/openjdk/openjdk-6-common.inc
 +++ b/recipes-core/openjdk/openjdk-6-common.inc
-@@ -158,7 +158,7 @@ def get_llvm_configure_arch(d):
+@@ -153,7 +153,7 @@ def get_llvm_configure_arch(d):
+     arch = "x86"
+   elif arch == "arm":
+     arch = "arm"
+-  elif arch == "mipsel":
++  elif arch == "mipsel" or arch == "mips":
+     arch = "mips"
    elif arch == "powerpc":
      arch = "powerpc"
-   else:
--    oefatal("Your target architecture is not supported by this recipe");
-+    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
- 
-   return arch
- 
 -- 
 1.7.5.4
 
