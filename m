@@ -1,31 +1,31 @@
 Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RirpP-00059f-LI
+	(envelope-from <raj.khem@gmail.com>) id 1Rirtt-0005La-Ka
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 19:14:17 +0100
-Received: by lami14 with SMTP id i14so244772lam.6
+	Thu, 05 Jan 2012 19:18:53 +0100
+Received: by lami14 with SMTP id i14so246390lam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2012 10:06:52 -0800 (PST)
+	Thu, 05 Jan 2012 10:11:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	bh=P59YlH4QF0q9Oqd2EAynin4zDK4N7GWTz7bqw478JIU=;
-	b=Vhzwso3o+VX6ROmjP2orqVOq2MejC9wf3zcZClS8t6HZSzl5wsO1cIZ7DABc1E+Nl/
-	Y9iDXOxftF3gwyqML0xl9Vyi3bd/ll4qscnXIGrdTck1HLtyW35VXZ1lximLPrnstb3A
-	jvINlvFPM9mxnYDKOI0KndZKbyytVCr3Qojxg=
-Received: by 10.112.24.4 with SMTP id q4mr581037lbf.80.1325786812477; Thu, 05
-	Jan 2012 10:06:52 -0800 (PST)
+	bh=vSfTjF0uxpETkb1bP0LbH0tESc3RU86EZK5vK0snKEc=;
+	b=E9TnzMadm4OiQwqvZJvaPz2iHLHto1Dvk+6Y1+tJ3MGrf25isOkH3eqq+h88YNQiW4
+	SBW2rmrDCEd+OJiID/T6hsgsc+ZUP6A7ql+2K56D3AELmUHe3fO6jILaIeUWgvMNaUyl
+	o6/+vdLCCgfW8h8sOdtjdgfy6qtTQgD9WjS1A=
+Received: by 10.112.43.41 with SMTP id t9mr588936lbl.93.1325787086171; Thu, 05
+	Jan 2012 10:11:26 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.152.115.1 with HTTP; Thu, 5 Jan 2012 10:06:21 -0800 (PST)
-In-Reply-To: <1325768156.22038.6.camel@localhost.localdomain>
-References: <1325768156.22038.6.camel@localhost.localdomain>
+Received: by 10.152.115.1 with HTTP; Thu, 5 Jan 2012 10:10:54 -0800 (PST)
+In-Reply-To: <1325767804.22038.3.camel@localhost.localdomain>
+References: <1325767804.22038.3.camel@localhost.localdomain>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 5 Jan 2012 10:06:21 -0800
-Message-ID: <CAMKF1spvw=d4nPRr52dxmpWGrOkow6dZ1gopRCiv2WA0bmfHow@mail.gmail.com>
+Date: Thu, 5 Jan 2012 10:10:54 -0800
+Message-ID: <CAMKF1srGgA7030KJaZWrNog=wRTX0hA-MxiB=k_qT85sHQNg5w@mail.gmail.com>
 To: philby john <pjohn@mvista.com>
 Cc: koen@openembedded.org, mwester@dls.net,
 	openembedded-devel@lists.openembedded.org, hrw@openembedded.org
-Subject: Re: [PATCH] Fix ctorrent build failure by using --disable-maintainer-mode option
+Subject: Re: [PATCH] Fix typo in ctcs that causes build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,70 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 18:14:17 -0000
+X-List-Received-Date: Thu, 05 Jan 2012 18:18:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 5, 2012 at 4:55 AM, philby john <pjohn@mvista.com> wrote:
+On Thu, Jan 5, 2012 at 4:50 AM, philby john <pjohn@mvista.com> wrote:
+> From 19e675f8b24ae482b8c281ef8c32ef192894e4a1 Mon Sep 17 00:00:00 2001
 > From: Philby John <pjohn@mvista.com>
-> Date: Thu, 5 Jan 2012 18:08:00 +0530
-> Subject: [PATCH] Fix ctorrent build failure by using --disable-maintainer=
--mode option
+> Date: Thu, 5 Jan 2012 18:01:11 +0530
+> Subject: [PATCH] Fix typo in ctcs that causes build failure
 >
-> ctorrent package fails with error "aclocal.m4:14: error: this file was
-> generated for autoconf dnh3.3.1" as reported here
-> lists.linuxtogo.org/pipermail/openembedded-devel/2008-October/006598.html
-> Fix this by including --disable-maintainer-mode.
->
-> Also since ctcs inherits ctorrent.inc add do_configure() there doing
-> nothing.
+> RDEPENDS includes a line perl-module-tcntl, which is
+> clearly a typo for perl-module-fcntl, without which
+> you get a build failure.
 >
 > Signed-off-by: Philby John <pjohn@mvista.com>
+
+can you submit this as a pull request against 2011.03 maintenance branch ?
+
 > ---
-> =C2=A0recipes/ctorrent/ctcs_1.4.1.bb =C2=A0 =C2=A0 | =C2=A0 =C2=A06 +++++=
--
-> =C2=A0recipes/ctorrent/ctorrent.inc =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A06 =
-++++++
-> =C2=A0recipes/ctorrent/ctorrent_3.3.1.bb | =C2=A0 =C2=A02 +-
-> =C2=A03 files changed, 12 insertions(+), 2 deletions(-)
+> =C2=A0recipes/ctorrent/ctcs_1.4.1.bb | =C2=A0 =C2=A03 ++-
+> =C2=A01 files changed, 2 insertions(+), 1 deletions(-)
 >
 > diff --git a/recipes/ctorrent/ctcs_1.4.1.bb b/recipes/ctorrent/ctcs_1.4.1=
 .bb
-> index 8680b0c..d1e084e 100644
+> index afaee6f..8680b0c 100644
 > --- a/recipes/ctorrent/ctcs_1.4.1.bb
 > +++ b/recipes/ctorrent/ctcs_1.4.1.bb
-> @@ -5,7 +5,11 @@ RDEPENDS_${PN} =3D "perl perl-module-strict perl-module-=
-socket perl-module-fcntl \
+> @@ -1,10 +1,11 @@
+> =C2=A0require ctorrent.inc
+>
+> =C2=A0DESCRIPTION +=3D "This is the controller of the enhanced version"
+> -RDEPENDS_${PN} =3D "perl perl-module-strict perl-module-socket perl-modu=
+le-tcntl \
+> +RDEPENDS_${PN} =3D "perl perl-module-strict perl-module-socket perl-modu=
+le-fcntl \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 perl-module-errno perl-module-s=
 ys-hostname"
 >
 > =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/dtorrent/ctcs-${PV}.tar.gz"
-> -PR=3D"r1"
-> +PR=3D"r2"
-> +
-> +do_configure () {
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0:
-> +}
+> +PR=3D"r1"
 >
 > =C2=A0do_install () {
 > =C2=A0 install -d ${D}/usr/bin
-> diff --git a/recipes/ctorrent/ctorrent.inc b/recipes/ctorrent/ctorrent.in=
-c
-> index 8005fa9..e04c5d3 100644
-> --- a/recipes/ctorrent/ctorrent.inc
-> +++ b/recipes/ctorrent/ctorrent.inc
-> @@ -8,3 +8,9 @@ DEPENDS =3D "openssl"
-> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/ctorrent/ctorrent-${PV}.tar.bz2"
+> --
+> 1.6.3.3.338.ge89ce
 >
-> =C2=A0inherit autotools
-> +
-> +EXTRA_OECONF =3D "--disable-maintainer-mode"
-> +
-> +do_configure() {
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oe_runconf
-> +}
-
-why do you override do_configure ?
-is it not able to reconfigure ?
+>
+>
 
 
