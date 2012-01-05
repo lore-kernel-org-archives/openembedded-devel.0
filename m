@@ -1,28 +1,28 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mx1.altell.ru ([178.16.156.2] helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rigey-0000nI-AA
+	(envelope-from <khimov@altell.ru>) id 1RiivS-0005JM-6X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 07:18:44 +0100
-Received: by lami14 with SMTP id i14so53091lam.6
+	Thu, 05 Jan 2012 09:43:54 +0100
+Received: from sencha.localnet (unknown [10.160.56.110])
+	by mx1.altell.ru (Postfix) with ESMTPS id 96EB55419
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jan 2012 22:11:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=aj4SgmGfb7RRdBIz+8VneJy9y0755ffsbMdY/7c+kRE=;
-	b=RQz0GjhwKSGwjWVvB/xl5ePvk/qKdRGUSO0OLfQQ8xqB/cLshM8CWw9vwmOOi3jL63
-	7MrqzrcD1BCVJYkBEAAOk2L9NlDUBOnRJsv01AVuj1UwweqQ9zf8xfbsNl/qZUtDYdn1
-	nwHTkkPTT6UXkvCZPcZGLCusrf/wTDCfKZd/c=
-Received: by 10.112.43.41 with SMTP id t9mr102323lbl.93.1325743880345; Wed, 04
-	Jan 2012 22:11:20 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.115.1 with HTTP; Wed, 4 Jan 2012 22:10:49 -0800 (PST)
-In-Reply-To: <CACj0d1irS71X99mBn+od5fbFoO_JhTWiuB5EAAcUc63KXjPk7w@mail.gmail.com>
-References: <CACj0d1irS71X99mBn+od5fbFoO_JhTWiuB5EAAcUc63KXjPk7w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Jan 2012 22:10:49 -0800
-Message-ID: <CAMKF1spQTuzjf=vawoG3MS=pcXfnECceQG6L3fm58eoZLnsceg@mail.gmail.com>
+	Thu,  5 Jan 2012 12:31:16 +0400 (MSK)
+From: Roman Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Can't download linux-davinci
+Date: Thu, 05 Jan 2012 12:31:13 +0400
+Message-ID: <1434677.NeCVNTM8Up@sencha>
+Organization: ALTELL Ltd.
+User-Agent: KMail/4.7.2 (Linux/3.1.0-1.2-desktop; KDE/4.7.2; x86_64; ; )
+In-Reply-To: <CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
+References: <CAFggvfNpJGosK3E0pG=Qikk3QXLoOSHndVRqxoTkNUS47_pDQw@mail.gmail.com>
+	<CAOy7-nP8oc7ZObfc7We8j4Oj7ZTrhqs-upo8KY61tvqDcRG6-g@mail.gmail.com>
+	<CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
+MIME-Version: 1.0
+X-Altell-MailScanner-ID: 96EB55419.5D81D
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: Re: openssl failing to compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,26 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 06:18:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 Jan 2012 08:43:54 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On Wed, Jan 4, 2012 at 4:12 PM, Neil Gruending <neil@gruending.net> wrote:
-> Is there another source for
-> linux-davinci_2.6.31+2.6.32-rc2-psp03.01.00.37 besides
-> http://www.angstrom-distribution.org/unstable/sources/git_arago-project.org.git.projects.linux-davinci.git_DEV.DaVinciPSP.03.XX.00.37.tar.gz?
-> I've been trying to download it now for almost 24 hours now with no
-> success. I get a download rate of about 2KB/s and then at around 20%
-> complete bitbake times out. I'm trying compile openembedded
-> 2011.03-maintenance for a dm365-evm.
+On 5 =D1=8F=D0=BD=D0=B2=D0=B0=D1=80=D1=8F 2012 09:50:28 James wrote:
+> >>> <gdalex@gmail.com> wrote:
+> >>>> bulding a console-image for beagleboard, openssl fails to compil=
+e.
+> >>>>=20
+> >>>> The log shows this:
+> >>>>=20
+> >>>> openssl.o: In function `main':
+> >>>> openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
+> >>>> openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
+> >>>> openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+> >>>> .....
+> >>>>=20
+> >>>> Removing libdeps-first.patch solved the issue.
+> Can anyone advise on this?
 
-i guess angstrom mirrors are throttled. ask angstrom ml
->
-> Thanks,
-> Neil
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+As written in the patch itself:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Links to previously staged 0.9.8* easily otherwise
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Without this patch openssl links to any previously staged libssl/libcry=
+pto, if=20
+that was 0.9.8smth it won't work at all. I have no idea how this patch =
+could=20
+break the build. You need to carefully review the build log and especia=
+lly=20
+compare it between different hosts, as it seems like only Ubuntu 11.10 =
+has the=20
+problem.
 
 
