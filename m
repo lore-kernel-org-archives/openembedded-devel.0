@@ -1,33 +1,30 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RitDR-0007z5-Oa
+	(envelope-from <raj.khem@gmail.com>) id 1Rivd5-0004Tm-5E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 20:43:09 +0100
-Received: by lami14 with SMTP id i14so271006lam.6
+	Thu, 05 Jan 2012 23:17:48 +0100
+Received: by iakh37 with SMTP id h37so1563522iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2012 11:35:46 -0800 (PST)
+	Thu, 05 Jan 2012 14:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=viC5ODrN0mChIpqf5A9aGIm5XxI5xZBTG+198rdnmPE=;
-	b=W0fDgPh/erEkvm77D67DwAtban5SboeinZngNeflughqunvqu9BCLvKvsNM5IAvTe4
-	Uqr+hH6cxWxRLmIyuwnfQgJg5gXKVM/fa/zm6i+YQKR7NuAu8yF5FP4AfCuAu0rIDpyL
-	bKWW3QnJH9Ugnim4ddn4T2ZWqx6yjTzIckHvI=
-Received: by 10.112.36.8 with SMTP id m8mr662294lbj.54.1325792146368; Thu, 05
-	Jan 2012 11:35:46 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.115.1 with HTTP; Thu, 5 Jan 2012 11:35:15 -0800 (PST)
-In-Reply-To: <4F05EC85.1090908@mvista.com>
-References: <1325768156.22038.6.camel@localhost.localdomain>
-	<CAMKF1spvw=d4nPRr52dxmpWGrOkow6dZ1gopRCiv2WA0bmfHow@mail.gmail.com>
-	<4F05EC85.1090908@mvista.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=Ch3Ven0VLVnuA7EY+zbHLzNCx9tdGJGsyi7Me6t7xKM=;
+	b=NgZEI8veX5vmsNjOAlC0DlFmeHmNaGqEY9VE9sGDv54hnaGE7iXhzFX8EF+sEr3o++
+	XKnh9oM8Ksys1PGNaUr51eJSRq87UJc2cclqRGJtYmNxU/9BNgCru0C2yHuZ5ca+J5o+
+	65qnflEvYm7lOjTVGrKW303ZxgcC+71zBlY0w=
+Received: by 10.42.168.202 with SMTP id x10mr3800955icy.4.1325801422962;
+	Thu, 05 Jan 2012 14:10:22 -0800 (PST)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id f32sm202728478ibf.9.2012.01.05.14.10.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 05 Jan 2012 14:10:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 5 Jan 2012 11:35:15 -0800
-Message-ID: <CAMKF1sqCthR7x5EGc4JBKjj6qdSBSUBY+d2mK6bGnQ486psjEw@mail.gmail.com>
-To: Philby John <pjohn@mvista.com>
-Cc: koen@openembedded.org, mwester@dls.net,
-	openembedded-devel@lists.openembedded.org, hrw@openembedded.org
-Subject: Re: [PATCH] Fix ctorrent build failure by using --disable-maintainer-mode option
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Jan 2012 14:09:58 -0800
+Message-Id: <1325801399-24880-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-java][PATCH 1/2] llvm, openjdk: Use bb.error instread of oefatal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,55 +38,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 19:43:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Jan 2012 22:17:48 -0000
 
-On Thu, Jan 5, 2012 at 10:31 AM, Philby John <pjohn@mvista.com> wrote:
-> On 01/05/2012 11:36 PM, Khem Raj wrote:
->> On Thu, Jan 5, 2012 at 4:55 AM, philby john <pjohn@mvista.com> wrote:
->>>
->>> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/dtorrent/ctcs-${PV}.tar.gz"
->>> -PR=3D"r1"
->>> +PR=3D"r2"
->>> +
->>> +do_configure () {
->>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0:
->>> +}
->>>
->>> =C2=A0do_install () {
->>> =C2=A0 install -d ${D}/usr/bin
->>> diff --git a/recipes/ctorrent/ctorrent.inc b/recipes/ctorrent/ctorrent.=
-inc
->>> index 8005fa9..e04c5d3 100644
->>> --- a/recipes/ctorrent/ctorrent.inc
->>> +++ b/recipes/ctorrent/ctorrent.inc
->>> @@ -8,3 +8,9 @@ DEPENDS =3D "openssl"
->>> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/ctorrent/ctorrent-${PV}.tar.bz=
-2"
->>>
->>> =C2=A0inherit autotools
->>> +
->>> +EXTRA_OECONF =3D "--disable-maintainer-mode"
->>> +
->>> +do_configure() {
->>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oe_runconf
->>> +}
->>
->> why do you override do_configure ?
->> is it not able to reconfigure ?
->
-> Yes, ctcs has nothing to configure with, its just one perl script.
-> So do_configure() fails for ctcs.
->
+oefatal is not available in oe-core so replace
+it with bbfatal in classes and oe.error in recipes
+which use it in anonymous python. bb.fatal aborts
+parsing. So we want to give an error but not
+stop parsing.
 
-clearly then ctorrent.inc is not that common to be used as such in all
-recipes there.
-you should move inheriting autotools out of ctorrent.inc
-and into the needing .bb
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/java.bbclass                      |    6 +++---
+ recipes-core/llvm/llvm.inc                |    2 +-
+ recipes-core/openjdk/openjdk-6-common.inc |    2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-> ~Philby
->
->
+diff --git a/classes/java.bbclass b/classes/java.bbclass
+index 6a45065..fe24648 100644
+--- a/classes/java.bbclass
++++ b/classes/java.bbclass
+@@ -39,7 +39,7 @@ oe_jarinstall() {
+       destname=$1
+       ;;
+     -*)
+-      oefatal "oe_jarinstall: unknown option: $1"
++      bbfatal "oe_jarinstall: unknown option: $1"
+       ;;
+     *)
+       break;
+@@ -105,7 +105,7 @@ oe_makeclasspath() {
+               fi
+               ;;
+           -*)
+-              oefatal "oe_makeclasspath: unknown option: $1"
++              bbfatal "oe_makeclasspath: unknown option: $1"
+               ;;
+           *)
+               file=$dir/$1.jar
+@@ -146,7 +146,7 @@ oe_java_simple_wrapper() {
+       output=$1
+       ;;
+     -*)
+-      oefatal "oe_java_simple_wrapper: unknown option: $1"
++      bbfatal "oe_java_simple_wrapper: unknown option: $1"
+       ;;
+     *)
+       if [ $mainclass ]
+diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
+index c675c4d..5cc9957 100644
+--- a/recipes-core/llvm/llvm.inc
++++ b/recipes-core/llvm/llvm.inc
+@@ -208,7 +208,7 @@ def get_llvm_arch(d):
+   elif arch == "powerpc":
+     arch = "PowerPC"
+   else:
+-    oefatal("Your target architecture is not supported by this recipe");
++    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+ 
+   return arch
+ 
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index 1a3c52b..461ccd9 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -158,7 +158,7 @@ def get_llvm_configure_arch(d):
+   elif arch == "powerpc":
+     arch = "powerpc"
+   else:
+-    oefatal("Your target architecture is not supported by this recipe");
++    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+ 
+   return arch
+ 
+-- 
+1.7.5.4
+
 
 
