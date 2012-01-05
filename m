@@ -1,23 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1RikCj-0003da-G6 for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 11:05:49 +0100
-Received: from f053035030.adsl.alicedsl.de ([78.53.35.30]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Rik5k-0006JE-5E for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 09:58:36 +0000
-Message-ID: <1325757506.3742.128.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1RikOY-0003wr-NA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Jan 2012 11:18:02 +0100
+Received: by eeit10 with SMTP id t10so198901eei.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Jan 2012 02:10:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=zY9klQdQ5NVBpPmeCaDZLk0c3iZCh/flIuXs+5jxCa8=;
+	b=qYhsWHG+kzg5U7RdABJFysXXVLIeKIggtsuP2r2HNeWLD3q0CW4U+buosemzQiWahD
+	1AKVChX1ekXu1rF5r57fJImUxboB3vK5+HWJkRe9RAdPaVMlNF+/hv1al4JwgRhGha94
+	wUajiqFyoXXavowb2OUSkI0PRuhxdmJYl+pZQ=
+Received: by 10.14.39.196 with SMTP id d44mr516187eeb.108.1325758239471;
+	Thu, 05 Jan 2012 02:10:39 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id t1sm231818020eeb.3.2012.01.05.02.10.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 05 Jan 2012 02:10:37 -0800 (PST)
+Date: Thu, 5 Jan 2012 11:10:23 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 05 Jan 2012 10:58:26 +0100
-In-Reply-To: <1325756829-6511-1-git-send-email-eyalr@ti.com>
-References: <1325756829-6511-1-git-send-email-eyalr@ti.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [PATCH] iw: use a newer commit in the public git
+Message-ID: <20120105101023.GB3942@jama.jama.net>
+References: <20111104141806.GU9949@jama.jama.net>
+	<20111104142028.GV9949@jama.jama.net>
+	<20111121203039.GM3565@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20111121203039.GM3565@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: libvpx causing gcc ICE when building for qemux86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,74 +43,193 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 10:05:49 -0000
-X-Groupsio-MsgNum: 36373
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-eal5Kgebvvn7I2RWW2vD"
+X-List-Received-Date: Thu, 05 Jan 2012 10:18:02 -0000
+X-Groupsio-MsgNum: 36374
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kXdP64Ggrk/fb43R"
+Content-Disposition: inline
 
---=-eal5Kgebvvn7I2RWW2vD
-Content-Type: text/plain; charset="UTF-8"
+--kXdP64Ggrk/fb43R
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear Ayal,
-
-
-Am Donnerstag, den 05.01.2012, 11:47 +0200 schrieb Eyal Reizer:
-> switch to use a newer commit in the public git
-
-That line is redundant to the commit summary. Why not use the following
-as the summary?
-
-        iw_git: Update to commit 8b2b1c6a (version 3.2)
-
-Additionally please add if this just introduces new features or if it
-fixes any problems for you.
-
-And lastly please add how you have tested the new version.
-
-> Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> ---
->  recipes/iw/iw_git.bb |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
+On Mon, Nov 21, 2011 at 09:30:39PM +0100, Martin Jansa wrote:
+> On Fri, Nov 04, 2011 at 03:20:28PM +0100, Martin Jansa wrote:
+> > On Fri, Nov 04, 2011 at 03:18:06PM +0100, Martin Jansa wrote:
+> > > Hi, with latest gcc-4.6 from meta-oe I get this ICE:
+> > >=20
+> > > OE @ ~/shr-core/tmp/work/x86_64-oe-linux/libvpx-0.9.5-r0.0/libvpx-v0.=
+9.5 $ x86_64-oe-linux-gcc    -m64 --sysroot=3D/OE/shr-core/tmp/sysroots/qem=
+ux86-64 -O2 -pipe -g -feliminate-unused-debug-types -fPIC -O3 -Wall -Wdecla=
+ration-after-statement -Wdisabled-optimization -Wpointer-arith -Wtype-limit=
+s -Wcast-qual -Wno-unused -I. -I"/OE/shr-core/tmp/work/x86_64-oe-linux/libv=
+px-0.9.5-r0.0/libvpx-v0.9.5" -I/OE/shr-core/tmp/work/x86_64-oe-linux/libvpx=
+-0.9.5-r0.0/libvpx-v0.9.5/vp8 -I/OE/shr-core/tmp/work/x86_64-oe-linux/libvp=
+x-0.9.5-r0.0/libvpx-v0.9.5/vp8 -c -o md5_utils.c.o md5_utils.c
+> > > md5_utils.c: In function 'byteSwap':
+> > > md5_utils.c:30:1: internal compiler error: Segmentation fault
+> > > Please submit a full bug report,
+> > > with preprocessed source if appropriate.
+> > > See <http://gcc.gnu.org/bugs.html> for instructions.
+> >=20
+> > And dropping -O3 is enough to make it compile again.
 >=20
-> diff --git a/recipes/iw/iw_git.bb b/recipes/iw/iw_git.bb
-> index c98e1bc..f0dc7ff 100644
-> --- a/recipes/iw/iw_git.bb
-> +++ b/recipes/iw/iw_git.bb
-> @@ -4,9 +4,9 @@ SECTION =3D "base"
->  PRIORITY =3D "optional"
->  LICENSE =3D "BSD"
-> =20
-> -SRCREV =3D "0a236ef5f8e4ba7218aac7d0cdacf45673d5b35c"
-> -PR =3D "r0"
-> -PV =3D "0.9.22"
-> +SRCREV =3D "8b2b1c6a77ee17e4128b22845cb8c5901de296c9"
-> +PR =3D "r1"
-> +PV =3D "3.2"
->  PR_append =3D "+gitr${SRCPV}"
+> FWIW: Just tested with newer gcc from oe-core and the problem is still th=
+ere.
+>=20
+> Regards,
 
-I always forget, if a `PR` bump for a version update is needed if we
-have `PR_append${SRCPV}`. Could you check that again, please.
-=20
->  DEPENDS =3D "libnl pkgconfig"
+Another case is in qt4-x11-free-4.8
 
+OE @ ~/shr-core/tmp-eglibc/work/x86_64-oe-linux/qt4-x11-free-4.8.0-r36.0/qt=
+-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/JavaScriptCore =
+$ echo compiling wtf/MD5.cpp && x86_64-oe-linux-g++ -m64 --sysroot=3D/OE/sh=
+r-core/tmp-egl
+ibc/sysroots/qemux86-64 -c -O2 -pipe -feliminate-unused-debug-types -fpermi=
+ssive -fvisibility-inlines-hidden -I/OE/shr-core/tmp-eglibc/sysroots/qemux8=
+6-64/usr/include -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/=
+freetype2 -W
+all -Wextra -Wreturn-type -fno-strict-aliasing -Wcast-align -Wchar-subscrip=
+ts -Wformat-security -Wreturn-type -Wno-unused-parameter -Wno-sign-compare =
+-Wno-switch -Wno-switch-enum -Wundef -Wmissing-noreturn -Winit-self -O3 -pt=
+hread -fPIC
+-fPIC -fPIC -D_REENTRANT -DNDEBUG -DBUILDING_QT__=3D1 -DNDEBUG -DQT_ASCII_C=
+AST_WARNINGS -DBUILDING_JavaScriptCore -DBUILDING_WTF -DENABLE_GLIB_SUPPORT=
+=3D1 -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE -DQT_NO_DEBUG -DQT_CORE_LIB =
+-DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2=
+ -DQT_HAVE_SSE3 -DQT_HAVE_SSSE3 -DQT_HAVE_SSE4_1 -DQT_HAVE_SSE4_2 -DQT_HAVE=
+_AVX -DQT_SHARED -I../../../../../mkspecs/linux-g++ -I. -I../../../../../in=
+clude/QtCore -I../../../../../include -I. -I../../Source -I../ThirdParty -I=
+assembler -Ibytecode -Ibytecompiler -Iheap -Idfg -Idebugger -Iinterpreter -=
+Ijit -Iparser -Iprofiler -Iruntime -Iwtf -Iwtf/gobject -I/OE/shr-core/tmp-e=
+glibc/work/x86_64-oe-linux/qt4-x11-free-
+4.8.0-r36.0/qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/J=
+avaScriptCore/wtf/symbian -Iwtf/unicode -Iyarr -IAPI -IForwardingHeaders -I=
+generated -I../../Source -I../../include -I/include/QtWebKit -I/include -I/=
+OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/glib-2.0 -I/OE/shr-c=
+ore/tmp-eglibc/sysroots/qemux86-64/usr/lib/glib-2.0/include -I.moc/release-=
+static -o .obj/release-static/MD5.o wtf/MD5.cpp
++ echo compiling wtf/MD5.cpp
+compiling wtf/MD5.cpp
++ x86_64-oe-linux-g++ -m64 --sysroot=3D/OE/shr-core/tmp-eglibc/sysroots/qem=
+ux86-64 -c -O2 -pipe -feliminate-unused-debug-types -fpermissive -fvisibili=
+ty-inlines-hidden -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include=
+ -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/freetype2 -Wall =
+-Wextra -Wreturn-type -fno-strict-aliasing -Wcast-align -Wchar-subscripts -=
+Wformat-security -Wreturn-type -Wno-unused-parameter -Wno-sign-compare -Wno=
+-switch -Wno-switch-enum -Wundef -Wmissing-noreturn -Winit-self -O3 -pthrea=
+d -fPIC -fPIC -fPIC -D_REENTRANT -DNDEBUG -DBUILDING_QT__=3D1 -DNDEBUG -DQT=
+_ASCII_CAST_WARNINGS -DBUILDING_JavaScriptCore -DBUILDING_WTF -DENABLE_GLIB=
+_SUPPORT=3D1 -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE -DQT_NO_DEBUG -DQT_C=
+ORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_H=
+AVE_SSE2 -DQT_HAVE_SSE3 -DQT_HAVE_SSSE3 -DQT_HAVE_SSE4_1 -DQT_HAVE_SSE4_2 -=
+DQT_HAVE_AVX -DQT_SHARED -I../../../../../mkspecs/linux-g++ -I. -I../../../=
+=2E./../include/QtCore -I../../../../../include -I. -I../../Source -I../Thi=
+rdParty -Iassembler -Ibytecode -Ibytecompiler -Iheap -Idfg -Idebugger -Iint=
+erpreter -Ijit -Iparser -Iprofiler -Iruntime -Iwtf -Iwtf/gobject -I/OE/shr-=
+core/tmp-eglibc/work/x86_64-oe-linux/qt4-x11-free-4.8.0-r36.0/qt-everywhere=
+-opensource-src-4.8.0/src/3rdparty/webkit/Source/JavaScriptCore/wtf/symbian=
+ -Iwtf/unicode -Iyarr -IAPI -IForwardingHeaders -Igenerated -I../../Source =
+-I../../include -I/include/QtWebKit -I/include -I/OE/shr-core/tmp-eglibc/sy=
+sroots/qemux86-64/usr/include/glib-2.0 -I/OE/shr-core/tmp-eglibc/sysroots/q=
+emux86-64/usr/lib/glib-2.0/include -I.moc/release-static -o .obj/release-st=
+atic/MD5.o wtf/MD5.cpp
+In file included from ./wtf/OwnPtr.h:25:0,
+                 from ./wtf/VectorTraits.h:24,
+                 from ./wtf/Vector.h:29,
+                 from wtf/MD5.h:34,
+                 from wtf/MD5.cpp:50:
+=2E/wtf/NullPtr.h:48:1: warning: identifier 'nullptr' will become a keyword=
+ in C++0x [-Wc++0x-compat]
+wtf/MD5.cpp: In member function 'void WTF::MD5::addBytes(const uint8_t*, si=
+ze_t)':
+wtf/MD5.cpp:218:6: internal compiler error: Segmentation fault
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
 
-Thanks,
+The same qt4-x11-free-4.8 compiles fine with oe-core only, so I suspect tha=
+t one of those extra linaro patches in meta-oe's gcc-4.6 is causing this.
 
-Paul
+Preprocessed source is here: http://build.shr-project.org/tests/jama/gcc-is=
+sue/MD5.o.E
 
---=-eal5Kgebvvn7I2RWW2vD
+Passing -fno-tree-vectorize can be used as work around again (like with lib=
+vpx/libav/mplayer2).
+
+OE @ ~/shr-core/tmp-eglibc/work/x86_64-oe-linux/qt4-x11-free-4.8.0-r36.0/qt=
+-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/JavaScriptCore =
+$ echo compiling wtf/MD5.cpp && x86_64-oe-linux-g++ -m64 --sysroot=3D/OE/sh=
+r-core/tmp-eglibc/sysroots/qemux86-64 -c -O2 -pipe -feliminate-unused-debug=
+-types -fno-tree-vectorize -fpermissive -fvisibility-inlines-hidden -I/OE/s=
+hr-core/tmp-eglibc/sysroots/qemux86-64/usr/include -I/OE/shr-core/tmp-eglib=
+c/sysroots/qemux86-64/usr/include/freetype2 -Wall -Wextra -Wreturn-type -fn=
+o-strict-aliasing -Wcast-align -Wchar-subscripts -Wformat-security -Wreturn=
+-type -Wno-unused-parameter -Wno-sign-compare -Wno-switch -Wno-switch-enum =
+-Wundef -Wmissing-noreturn -Winit-self -O3 -pthread -fPIC -fPIC -fPIC -D_RE=
+ENTRANT -DNDEBUG -DBUILDING_QT__=3D1 -DNDEBUG -DQT_ASCII_CAST_WARNINGS -DBU=
+ILDING_JavaScriptCore -DBUILDING_WTF -DENABLE_GLIB_SUPPORT=3D1 -D_LARGEFILE=
+64_SOURCE -D_LARGEFILE_SOURCE -DQT_NO_DEBUG -DQT_CORE_LIB -DQT_HAVE_MMX -DQ=
+T_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_HAVE_SSE3 -=
+DQT_HAVE_SSSE3 -DQT_HAVE_SSE4_1 -DQT_HAVE_SSE4_2 -DQT_HAVE_AVX -DQT_SHARED =
+-I../../../../../mkspecs/linux-g++ -I. -I../../../../../include/QtCore -I..=
+/../../../../include -I. -I../../Source -I../ThirdParty -Iassembler -Ibytec=
+ode -Ibytecompiler -Iheap -Idfg -Idebugger -Iinterpreter -Ijit -Iparser -Ip=
+rofiler -Iruntime -Iwtf -Iwtf/gobject -I/OE/shr-core/tmp-eglibc/work/x86_64=
+-oe-linux/qt4-x11-free-4.8.0-r36.0/qt-everywhere-opensource-src-4.8.0/src/3=
+rdparty/webkit/Source/JavaScriptCore/wtf/symbian -Iwtf/unicode -Iyarr -IAPI=
+ -IForwardingHeaders -Igenerated -I../../Source -I../../include -I/include/=
+QtWebKit -I/include -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/inclu=
+de/glib-2.0 -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/glib-2.0/=
+include -I.moc/release-static -o .obj/release-static/MD5.o wtf/MD5.cpp
++ echo compiling wtf/MD5.cpp
+compiling wtf/MD5.cpp
++ x86_64-oe-linux-g++ -m64 --sysroot=3D/OE/shr-core/tmp-eglibc/sysroots/qem=
+ux86-64 -c -O2 -pipe -feliminate-unused-debug-types -fno-tree-vectorize -fp=
+ermissive -fvisibility-inlines-hidden -I/OE/shr-core/tmp-eglibc/sysroots/qe=
+mux86-64/usr/include -I/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/incl=
+ude/freetype2 -Wall -Wextra -Wreturn-type -fno-strict-aliasing -Wcast-align=
+ -Wchar-subscripts -Wformat-security -Wreturn-type -Wno-unused-parameter -W=
+no-sign-compare -Wno-switch -Wno-switch-enum -Wundef -Wmissing-noreturn -Wi=
+nit-self -O3 -pthread -fPIC -fPIC -fPIC -D_REENTRANT -DNDEBUG -DBUILDING_QT=
+__=3D1 -DNDEBUG -DQT_ASCII_CAST_WARNINGS -DBUILDING_JavaScriptCore -DBUILDI=
+NG_WTF -DENABLE_GLIB_SUPPORT=3D1 -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE =
+-DQT_NO_DEBUG -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQ=
+T_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_HAVE_SSE3 -DQT_HAVE_SSSE3 -DQT_HAVE_SSE4_=
+1 -DQT_HAVE_SSE4_2 -DQT_HAVE_AVX -DQT_SHARED -I../../../../../mkspecs/linux=
+-g++ -I. -I../../../../../include/QtCore -I../../../../../include -I. -I../=
+=2E./Source -I../ThirdParty -Iassembler -Ibytecode -Ibytecompiler -Iheap -I=
+dfg -Idebugger -Iinterpreter -Ijit -Iparser -Iprofiler -Iruntime -Iwtf -Iwt=
+f/gobject -I/OE/shr-core/tmp-eglibc/work/x86_64-oe-linux/qt4-x11-free-4.8.0=
+-r36.0/qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/JavaSc=
+riptCore/wtf/symbian -Iwtf/unicode -Iyarr -IAPI -IForwardingHeaders -Igener=
+ated -I../../Source -I../../include -I/include/QtWebKit -I/include -I/OE/sh=
+r-core/tmp-eglibc/sysroots/qemux86-64/usr/include/glib-2.0 -I/OE/shr-core/t=
+mp-eglibc/sysroots/qemux86-64/usr/lib/glib-2.0/include -I.moc/release-stati=
+c -o .obj/release-static/MD5.o wtf/MD5.cpp
+In file included from ./wtf/OwnPtr.h:25:0,
+                 from ./wtf/VectorTraits.h:24,
+                 from ./wtf/Vector.h:29,
+                 from wtf/MD5.h:34,
+                 from wtf/MD5.cpp:50:
+=2E/wtf/NullPtr.h:48:1: warning: identifier 'nullptr' will become a keyword=
+ in C++0x [-Wc++0x-compat]
+
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--kXdP64Ggrk/fb43R
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEABECAAYFAk8FdEMACgkQPX1aK2wOHVjADACfUtByz5n2A26Z8D3laDbpLJ/8
-Cx8AmwWtJI+uUooX0T0QypNkCsJukgFD
-=5sbI
+iEYEARECAAYFAk8Fdw8ACgkQN1Ujt2V2gBxnrACfTwShstR4rnYoZQtra6qX7MXU
+CsIAmwQoisFHtXNNWW4AE4UHi0H0RiCO
+=7DDz
 -----END PGP SIGNATURE-----
 
---=-eal5Kgebvvn7I2RWW2vD--
+--kXdP64Ggrk/fb43R--
