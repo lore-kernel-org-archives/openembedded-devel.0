@@ -1,26 +1,33 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1RisLY-0006IA-Iv
+	(envelope-from <raj.khem@gmail.com>) id 1RitDR-0007z5-Oa
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 19:47:31 +0100
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LXC00H7G96DXQWW@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	05 Jan 2012 12:39:54 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5D8B6201BF; Thu,
-	05 Jan 2012 13:39:49 -0500 (EST)
-Date: Thu, 05 Jan 2012 13:39:49 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20120105183949.GD28075@denix.org>
-References: <1325761243-6703-1-git-send-email-eyalr@ti.com>
-	<1325771284.3742.131.camel@mattotaupa>
-MIME-version: 1.0
-In-reply-to: <1325771284.3742.131.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCHv2] iw_git: Update to commit 8b2b1c6a (version 3.2)
+	Thu, 05 Jan 2012 20:43:09 +0100
+Received: by lami14 with SMTP id i14so271006lam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Jan 2012 11:35:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=viC5ODrN0mChIpqf5A9aGIm5XxI5xZBTG+198rdnmPE=;
+	b=W0fDgPh/erEkvm77D67DwAtban5SboeinZngNeflughqunvqu9BCLvKvsNM5IAvTe4
+	Uqr+hH6cxWxRLmIyuwnfQgJg5gXKVM/fa/zm6i+YQKR7NuAu8yF5FP4AfCuAu0rIDpyL
+	bKWW3QnJH9Ugnim4ddn4T2ZWqx6yjTzIckHvI=
+Received: by 10.112.36.8 with SMTP id m8mr662294lbj.54.1325792146368; Thu, 05
+	Jan 2012 11:35:46 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.115.1 with HTTP; Thu, 5 Jan 2012 11:35:15 -0800 (PST)
+In-Reply-To: <4F05EC85.1090908@mvista.com>
+References: <1325768156.22038.6.camel@localhost.localdomain>
+	<CAMKF1spvw=d4nPRr52dxmpWGrOkow6dZ1gopRCiv2WA0bmfHow@mail.gmail.com>
+	<4F05EC85.1090908@mvista.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 5 Jan 2012 11:35:15 -0800
+Message-ID: <CAMKF1sqCthR7x5EGc4JBKjj6qdSBSUBY+d2mK6bGnQ486psjEw@mail.gmail.com>
+To: Philby John <pjohn@mvista.com>
+Cc: koen@openembedded.org, mwester@dls.net,
+	openembedded-devel@lists.openembedded.org, hrw@openembedded.org
+Subject: Re: [PATCH] Fix ctorrent build failure by using --disable-maintainer-mode option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,53 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 18:47:31 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 05 Jan 2012 19:43:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 05, 2012 at 02:48:04PM +0100, Paul Menzel wrote:
-> Am Donnerstag, den 05.01.2012, 13:00 +0200 schrieb Eyal Reizer:
-> > Upadte to the latest formal release of iw whcih has wowlan and p2p support.
-> 
-> Typos: Update, which. Spell checkers should find those without problems.
-> 
-> > This version was tested together with official R4_SP2 nlcp release from TI
-> > Using the following platfors:
-> > 
-> > am335x-evm, am180x-evm, am37x-evm
-> > 
-> > Signed-off-by: Eyal Reizer <eyalr@ti.com>
-> > ---
-> >  recipes/iw/iw_git.bb |    6 +++---
-> >  1 files changed, 3 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/recipes/iw/iw_git.bb b/recipes/iw/iw_git.bb
-> > index c98e1bc..f0dc7ff 100644
-> > --- a/recipes/iw/iw_git.bb
-> > +++ b/recipes/iw/iw_git.bb
-> > @@ -4,9 +4,9 @@ SECTION = "base"
-> >  PRIORITY = "optional"
-> >  LICENSE = "BSD"
-> >  
-> > -SRCREV = "0a236ef5f8e4ba7218aac7d0cdacf45673d5b35c"
-> > -PR = "r0"
-> > -PV = "0.9.22"
-> > +SRCREV = "8b2b1c6a77ee17e4128b22845cb8c5901de296c9"
-> > +PR = "r1"
-> > +PV = "3.2"
-> >  PR_append = "+gitr${SRCPV}"
-> >  
-> >  DEPENDS = "libnl pkgconfig"
-> 
-> Presuming the PR bump is needed:
-> 
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> 
-> Does the rule still hold that only TI folks should push TI patches?
+On Thu, Jan 5, 2012 at 10:31 AM, Philby John <pjohn@mvista.com> wrote:
+> On 01/05/2012 11:36 PM, Khem Raj wrote:
+>> On Thu, Jan 5, 2012 at 4:55 AM, philby john <pjohn@mvista.com> wrote:
+>>>
+>>> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/dtorrent/ctcs-${PV}.tar.gz"
+>>> -PR=3D"r1"
+>>> +PR=3D"r2"
+>>> +
+>>> +do_configure () {
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0:
+>>> +}
+>>>
+>>> =C2=A0do_install () {
+>>> =C2=A0 install -d ${D}/usr/bin
+>>> diff --git a/recipes/ctorrent/ctorrent.inc b/recipes/ctorrent/ctorrent.=
+inc
+>>> index 8005fa9..e04c5d3 100644
+>>> --- a/recipes/ctorrent/ctorrent.inc
+>>> +++ b/recipes/ctorrent/ctorrent.inc
+>>> @@ -8,3 +8,9 @@ DEPENDS =3D "openssl"
+>>> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/ctorrent/ctorrent-${PV}.tar.bz=
+2"
+>>>
+>>> =C2=A0inherit autotools
+>>> +
+>>> +EXTRA_OECONF =3D "--disable-maintainer-mode"
+>>> +
+>>> +do_configure() {
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oe_runconf
+>>> +}
+>>
+>> why do you override do_configure ?
+>> is it not able to reconfigure ?
+>
+> Yes, ctcs has nothing to configure with, its just one perl script.
+> So do_configure() fails for ctcs.
+>
 
-I'll push v3 then.
+clearly then ctorrent.inc is not that common to be used as such in all
+recipes there.
+you should move inheriting autotools out of ctorrent.inc
+and into the needing .bb
 
--- 
-Denys
+> ~Philby
+>
+>
 
 
