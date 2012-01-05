@@ -1,31 +1,28 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <angweiyang@gmail.com>) id 1RicaV-0007mq-9a
+	(envelope-from <raj.khem@gmail.com>) id 1Rigey-0000nI-AA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jan 2012 02:57:51 +0100
-Received: by wgbds11 with SMTP id ds11so36332wgb.24
+	Thu, 05 Jan 2012 07:18:44 +0100
+Received: by lami14 with SMTP id i14so53091lam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jan 2012 17:50:29 -0800 (PST)
+	Wed, 04 Jan 2012 22:11:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=69ClWOQhd0KCMTa4OJeFMw2WOoFll/W655yzXqC/l58=;
-	b=UyC9TxyRdK0EJr6oBsJcWWNyhxFszyDErw0R/rmfzShT75fe5azHz+hIlLnVpi4WnA
-	sqPP4231a/NjluJfxaoRN74tGx58+SIpzgjkoSTGZybAo1386oYv6lJLrbl9kUa67J6I
-	u7DrZLMbpOXyT5/bS7iHwcP8n4Vp8ANqP4hlI=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=aj4SgmGfb7RRdBIz+8VneJy9y0755ffsbMdY/7c+kRE=;
+	b=RQz0GjhwKSGwjWVvB/xl5ePvk/qKdRGUSO0OLfQQ8xqB/cLshM8CWw9vwmOOi3jL63
+	7MrqzrcD1BCVJYkBEAAOk2L9NlDUBOnRJsv01AVuj1UwweqQ9zf8xfbsNl/qZUtDYdn1
+	nwHTkkPTT6UXkvCZPcZGLCusrf/wTDCfKZd/c=
+Received: by 10.112.43.41 with SMTP id t9mr102323lbl.93.1325743880345; Wed, 04
+	Jan 2012 22:11:20 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.227.198.68 with SMTP id en4mr15972840wbb.26.1325728228908;
-	Wed, 04 Jan 2012 17:50:28 -0800 (PST)
-Received: by 10.227.158.20 with HTTP; Wed, 4 Jan 2012 17:50:28 -0800 (PST)
-In-Reply-To: <CAOy7-nP8oc7ZObfc7We8j4Oj7ZTrhqs-upo8KY61tvqDcRG6-g@mail.gmail.com>
-References: <CAFggvfNpJGosK3E0pG=Qikk3QXLoOSHndVRqxoTkNUS47_pDQw@mail.gmail.com>
-	<CAOy7-nOSQ1-SjHjYqKo4t-N=ZDo7FPoEGBdTbabtTBSd78Cczw@mail.gmail.com>
-	<CACj0d1jmq+XG=ksy5QTr9DsNs7xRZKVCtKwiSqXcJ=UGWDD_Pw@mail.gmail.com>
-	<CAOy7-nP8oc7ZObfc7We8j4Oj7ZTrhqs-upo8KY61tvqDcRG6-g@mail.gmail.com>
-Date: Thu, 5 Jan 2012 09:50:28 +0800
-Message-ID: <CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
-From: James <angweiyang@gmail.com>
+Received: by 10.152.115.1 with HTTP; Wed, 4 Jan 2012 22:10:49 -0800 (PST)
+In-Reply-To: <CACj0d1irS71X99mBn+od5fbFoO_JhTWiuB5EAAcUc63KXjPk7w@mail.gmail.com>
+References: <CACj0d1irS71X99mBn+od5fbFoO_JhTWiuB5EAAcUc63KXjPk7w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Jan 2012 22:10:49 -0800
+Message-ID: <CAMKF1spQTuzjf=vawoG3MS=pcXfnECceQG6L3fm58eoZLnsceg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: openssl failing to compile
+Subject: Re: Can't download linux-davinci
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,71 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2012 01:57:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Jan 2012 06:18:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi all,
+On Wed, Jan 4, 2012 at 4:12 PM, Neil Gruending <neil@gruending.net> wrote:
+> Is there another source for
+> linux-davinci_2.6.31+2.6.32-rc2-psp03.01.00.37 besides
+> http://www.angstrom-distribution.org/unstable/sources/git_arago-project.org.git.projects.linux-davinci.git_DEV.DaVinciPSP.03.XX.00.37.tar.gz?
+> I've been trying to download it now for almost 24 hours now with no
+> success. I get a download rate of about 2KB/s and then at around 20%
+> complete bitbake times out. I'm trying compile openembedded
+> 2011.03-maintenance for a dm365-evm.
 
-On Thu, Dec 29, 2011 at 10:17 AM, James <angweiyang@gmail.com> wrote:
-> Hi all,
+i guess angstrom mirrors are throttled. ask angstrom ml
 >
-> On Thu, Dec 29, 2011 at 9:36 AM, Neil Gruending <neil@gruending.net> wrote:
->> I have the same issue. After some Googling it appears to only affect
->> Ubuntu 11.10?
->>
->> Neil
->>
->> On Wed, Dec 28, 2011 at 5:23 PM, James <angweiyang@gmail.com> wrote:
->>> Hi all,
->>>
->>> On Wed, Dec 21, 2011 at 11:09 PM, George Alexandru Dorobantu
->>> <gdalex@gmail.com> wrote:
->>>> Hello list,
->>>>
->>>> bulding a console-image for beagleboard, openssl fails to compile.
->>>>
->>>> The log shows this:
->>>>
->>>> openssl.o: In function `main':
->>>> openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
->>>> openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
->>>> openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
->>>> .....
->>>>
->>>> Removing libdeps-first.patch solved the issue.
->>>>
->>>> Does anyone know if libdeps-first.patch is really needed?
->>>> If not, could it be removed?
->>>>
->>>>
->>>> Thank you
->>>> George A. Dorobantu
->>>
->>> I'm too experiencing this issue with my overo board too and is
->>> currently using the same hack to get pass openssl compilation problem.
->>>
->>> Please backport openssl from oe-core to oe-classic to solve this once
->>> and for all?
->>>
->>> Thanks.
->>>
->>> --
->>> Regards,
->>> James
->>>
+> Thanks,
+> Neil
 >
-> My build host is Ubuntu 11.10 x64.
->
-> --
-> Regards,
-> James
-
-Can anyone advise on this?
-
-Many thanks in adv
-
--- 
-Regards,
-James
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
