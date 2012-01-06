@@ -1,23 +1,33 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1RjG2X-00028D-UX
+	(envelope-from <otavio.salvador@gmail.com>) id 1RjGEn-0002Za-5r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jan 2012 21:05:25 +0100
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.3])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1RjFvP-00041P-T0
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jan 2012 20:58:04 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b61f46cb503582b669cbc56b0ea04d7fdaafd256.1325876341.git.otavio@ossystems.com.br>
+	Fri, 06 Jan 2012 21:18:05 +0100
+Received: by eaal1 with SMTP id l1so1258503eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Jan 2012 12:10:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=+fW59a0qBRdX21QUZvG91sH+l/foZQ9KsVsNbtemB0g=;
+	b=CFhgikuGyxZ4eyOwVGdvHKfhm/2CmzhiODWj4stlPTFkfH1KyjeuYtPhJ6vfhSFBJc
+	sdnLDr6KNoyudhIQCvnYUKlpk5/8vWmvhWkCHHtDmdl1xrHMJKN5NC8H8YM+Ht2FEMwG
+	EtLFFIi4hZqFzOCWfYmfty8387hdWadS9oNBU=
+MIME-Version: 1.0
+Received: by 10.205.136.205 with SMTP id il13mr3180849bkc.37.1325880640852;
+	Fri, 06 Jan 2012 12:10:40 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.8.139 with HTTP; Fri, 6 Jan 2012 12:10:40 -0800 (PST)
+In-Reply-To: <1325879877.3234.2.camel@lenovo.internal.reciva.com>
 References: <cover.1325876341.git.otavio@ossystems.com.br>
 	<b61f46cb503582b669cbc56b0ea04d7fdaafd256.1325876341.git.otavio@ossystems.com.br>
-Date: Fri, 06 Jan 2012 19:57:57 +0000
-Message-ID: <1325879877.3234.2.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
+	<1325879877.3234.2.camel@lenovo.internal.reciva.com>
+Date: Fri, 6 Jan 2012 18:10:40 -0200
+X-Google-Sender-Auth: F-kq-7UHAPBjQqumltTVYyLeDwU
+Message-ID: <CAP9ODKqpDS=sJQ-uuP5+E6QOMU7eQheWXqk+TSA4fkpwha6LVw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH 5/5] udisks: disable manpage building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,17 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jan 2012 20:05:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Jan 2012 20:18:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2012-01-06 at 18:59 +0000, Otavio Salvador wrote:
-> +EXTRA_OECONF = "--disable-man-pages"
+On Fri, Jan 6, 2012 at 17:57, Phil Blundell <philb@gnu.org> wrote:
 
-why is this desirable?
+> On Fri, 2012-01-06 at 18:59 +0000, Otavio Salvador wrote:
+> > +EXTRA_OECONF = "--disable-man-pages"
+>
+> why is this desirable?
+>
 
-p.
+Because it was breaking builds for me.
 
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
