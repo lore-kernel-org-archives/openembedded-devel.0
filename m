@@ -1,23 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Rjhk8-0006FE-Hc
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <angweiyang@gmail.com>) id 1Rjr1u-0004UY-2m
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Jan 2012 02:40:18 +0100
-Received: (qmail invoked by alias); 08 Jan 2012 01:32:50 -0000
-Received: from p5B0A1340.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.19.64]
-	by mail.gmx.net (mp065) with SMTP; 08 Jan 2012 02:32:50 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX195HLgaieh5ZF+AP2YsPzHaVdhKfhfUpoK/Bl0q1/
-	RaRyg8PhJVDXlI
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Jan 2012 02:33:54 +0100
-Message-Id: <1325986434-2020-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
+	Sun, 08 Jan 2012 12:35:14 +0100
+Received: by wgbdt11 with SMTP id dt11so674084wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 Jan 2012 03:27:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=bBdNCrdWAJOKEsPEPkZpY8hMbrosnqzcl29mp765Rq0=;
+	b=HYLB5v1XE909coEZGlxr7bF0VzO4UF2il9p/vWfAw5iXQcRsI2QzDI8CE2dgc3nAOq
+	Wp5q3s9Zb4kot4A7RQ/f6Ht0bJHFMOuP00ux2+Ore8j2bdyRhGKKejC+8gu5teYWm14C
+	0VMGwseUFQfrjxb3huIRt9mIolopBhg+LHlOs=
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe] udisks: add sytemd to DEPENDS
+Received: by 10.180.95.199 with SMTP id dm7mr17689280wib.9.1326022067669; Sun,
+	08 Jan 2012 03:27:47 -0800 (PST)
+Received: by 10.227.60.68 with HTTP; Sun, 8 Jan 2012 03:27:47 -0800 (PST)
+Received: by 10.227.60.68 with HTTP; Sun, 8 Jan 2012 03:27:47 -0800 (PST)
+In-Reply-To: <1434677.NeCVNTM8Up@sencha>
+References: <CAFggvfNpJGosK3E0pG=Qikk3QXLoOSHndVRqxoTkNUS47_pDQw@mail.gmail.com>
+	<CAOy7-nP8oc7ZObfc7We8j4Oj7ZTrhqs-upo8KY61tvqDcRG6-g@mail.gmail.com>
+	<CAOy7-nNBAYxHFzPsNwZrQ_WAzSVuzNEVX+V9OQ+XK3v69+1=Ew@mail.gmail.com>
+	<1434677.NeCVNTM8Up@sencha>
+Date: Sun, 8 Jan 2012 19:27:47 +0800
+Message-ID: <CAOy7-nNYwu4ZSuh_eWeGG15J-vW_2O3g9BqfT8e4iHpeHLu+RA@mail.gmail.com>
+From: James <angweiyang@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: openssl failing to compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,44 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2012 01:40:18 -0000
+X-List-Received-Date: Sun, 08 Jan 2012 11:35:14 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-If systemd was not yet build, udisks configure caused systemd files not being
-build so udisks-sytemd package was empty. On do_rootfs we got:
-| Collected errors:
-|  * opkg_install_cmd: Cannot install package udisks-systemd.
+Hi,
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- meta-oe/recipes-support/udisks/udisks_1.0.4.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+On Jan 5, 2012 4:37 PM, "Roman Khimov" <khimov@altell.ru> wrote:
+>
+> On 5 =D1=8F=D0=BD=D0=B2=D0=B0=D1=80=D1=8F 2012 09:50:28 James wrote:
+> > >>> <gdalex@gmail.com> wrote:
+> > >>>> bulding a console-image for beagleboard, openssl fails to compile.
+> > >>>>
+> > >>>> The log shows this:
+> > >>>>
+> > >>>> openssl.o: In function `main':
+> > >>>> openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
+> > >>>> openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
+> > >>>> openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+> > >>>> .....
+> > >>>>
+> > >>>> Removing libdeps-first.patch solved the issue.
+> > Can anyone advise on this?
+>
+> As written in the patch itself:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Links to previously staged 0.9.8* easily otherwise
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> Without this patch openssl links to any previously staged
+libssl/libcrypto, if
+> that was 0.9.8smth it won't work at all. I have no idea how this patch
+could
+> break the build. You need to carefully review the build log and especiall=
+y
+> compare it between different hosts, as it seems like only Ubuntu 11.10
+has the
+> problem.
+>
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-index c3e2664..0e330fa 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
- 
--DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
-+DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0 systemd"
- # optional dependencies: device-mapper parted
- 
- SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-@@ -12,7 +12,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
- SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
- SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit autotools systemd
- 
--- 
-1.7.4.4
+Maybe a new recipe for openssl backported from current oe-core is needed in
+2011.03-maintenance?
 
-
+James
 
