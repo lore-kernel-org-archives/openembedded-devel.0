@@ -1,39 +1,27 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1RjvoK-0004Ps-KJ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rjw0K-0004rh-N0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Jan 2012 17:41:32 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 4230611001B1
+	Sun, 08 Jan 2012 17:53:56 +0100
+Received: by vbbfc21 with SMTP id fc21so2135400vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Jan 2012 17:34:08 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7F5C6110018B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Jan 2012 17:34:07 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052065057.adsl.alicedsl.de
-	[78.52.65.57]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Jan 2012 17:34:07 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 96E8A3C4B0; Sun,  8 Jan 2012 17:34:06 +0100 (CET)
-Date: Sun, 8 Jan 2012 17:34:06 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120108163406.GB23476@rhein.zuhause.netz>
-References: <1325801399-24880-1-git-send-email-raj.khem@gmail.com>
-	<1325801399-24880-2-git-send-email-raj.khem@gmail.com>
+	Sun, 08 Jan 2012 08:46:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=lonN6uQg+PydxpqI9LXzFhCEib5QWhcDwG0DOdoaNiY=;
+	b=qhIepcl5vccwief/E6RyDBG3hrZ2zdXWD9awseI//XJ+ZpjLepkYp6JITKp8/oEh3G
+	TZsMsYrTIxo43necbumdvFNAiwdn+E/YEdA883kUn7h8sqPil/E9BJlsF2MZ6ZVdmlFN
+	AMfQ7QvKmBwdkekW8N+hB6R4dnDagJDK1Np3w=
 MIME-Version: 1.0
-In-Reply-To: <1325801399-24880-2-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java][PATCH 2/2] llvm, openjdk: Add mips to known architectures
+Received: by 10.52.155.176 with SMTP id vx16mr2119343vdb.3.1326041189704; Sun,
+	08 Jan 2012 08:46:29 -0800 (PST)
+Received: by 10.52.160.137 with HTTP; Sun, 8 Jan 2012 08:46:29 -0800 (PST)
+Date: Sun, 8 Jan 2012 17:46:29 +0100
+Message-ID: <CACW_hTbd97GapgqUkRzUfd=i7pPcjA=jKjfq4ZXSmXg-cyTWqA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: #oe topic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,54 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2012 16:41:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 08 Jan 2012 16:53:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Jan 05, 2012 at 02:09:59PM -0800, Khem Raj wrote:
-> correct a typo Mips -> mips
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes-core/llvm/llvm.inc                |    4 ++--
->  recipes-core/openjdk/openjdk-6-common.inc |    2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-> index 5cc9957..578cd40 100644
-> --- a/recipes-core/llvm/llvm.inc
-> +++ b/recipes-core/llvm/llvm.inc
-> @@ -203,8 +203,8 @@ def get_llvm_arch(d):
->      arch = "X86"
->    elif arch == "arm":
->      arch = "ARM"
-> -  elif arch == "mipsel":
-> -    arch = "Mips"
-> +  elif arch == "mipsel" or arch == "mips":
-> +    arch = "mips"
->    elif arch == "powerpc":
->      arch = "PowerPC"
->    else:
-> diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
-> index 461ccd9..bc56105 100644
-> --- a/recipes-core/openjdk/openjdk-6-common.inc
-> +++ b/recipes-core/openjdk/openjdk-6-common.inc
-> @@ -153,7 +153,7 @@ def get_llvm_configure_arch(d):
->      arch = "x86"
->    elif arch == "arm":
->      arch = "arm"
-> -  elif arch == "mipsel":
-> +  elif arch == "mipsel" or arch == "mips":
->      arch = "mips"
->    elif arch == "powerpc":
->      arch = "powerpc"
-> -- 
-> 1.7.5.4
+No idea who is can change the topic for #oe, but currently it reads:
 
-Thanks Khem,
+(04:27:30 PM) *The topic for #oe is: OpenEmbedded Developer Lounge | Web:
+http://openembedded.org | Bugtracker: http://bugs.openembedded.org and
+http://tinderbox.openembedded.org for compile issues | Repository:
+git.openembedded.org/openembedded and repo.or.cz/r/openembedded.git as ro
+mirror | This is not a distro or machine support channel*
 
-it is applied.
+As it stands the bugtracker is taken offline permanently and tinderbox is
+(temporary?) out of service.
+It seems pointless to mention these in the topic
 
-Bye Henning
-
+Best regards, Frans
 
