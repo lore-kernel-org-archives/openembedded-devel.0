@@ -1,29 +1,35 @@
-Received: from stoexhub02.domain01.net ([83.145.59.143])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RkFdy-0007iJ-Bk
+	(envelope-from <otavio.salvador@gmail.com>) id 1RkGPj-0002au-9e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 14:52:10 +0100
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.213.0;
-	Mon, 9 Jan 2012 14:44:42 +0100
-Date: Mon, 9 Jan 2012 14:44:42 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20120109134441.GB5503@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
+	Mon, 09 Jan 2012 15:41:32 +0100
+Received: by lami14 with SMTP id i14so1338251lam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Jan 2012 06:34:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=sjc3Fo54Fr5K92CDw7Bf4HCXqg8Jh+16R4zzz3uheCE=;
+	b=VpvNe+PXURkrBa0aYbYGtwhzObe+H+lRmUCfEep/dpYlNNXPtPF4QHHvMhqGUs8UP9
+	HCwrGwFX28kNZjKBtJBfdsy2yvmSw0AF6gQxW718Dp4iOmzM2ejCzuQPgIGBv7/oB6ua
+	Q17I6Sky5wsOoUY7lJkLGW9EizyVBRcIWrv3I=
+MIME-Version: 1.0
+Received: by 10.112.101.163 with SMTP id fh3mr3431045lbb.97.1326119643501;
+	Mon, 09 Jan 2012 06:34:03 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.112.54.104 with HTTP; Mon, 9 Jan 2012 06:34:03 -0800 (PST)
+In-Reply-To: <20120109134441.GB5503@ad.chargestorm.se>
 References: <cover.1326114932.git.anders@chargestorm.se>
 	<5fec4c565130ce5590d5073421f211898d12dc24.1326114932.git.anders@chargestorm.se>
 	<20120109132816.GB3936@jama.jama.net>
 	<20120109133703.GA5503@ad.chargestorm.se>
-MIME-Version: 1.0
-In-Reply-To: <20120109133703.GA5503@ad.chargestorm.se>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
+	<20120109134441.GB5503@ad.chargestorm.se>
+Date: Mon, 9 Jan 2012 12:34:03 -0200
+X-Google-Sender-Auth: OlOU_KeH3CYD17944QPOr80ef_M
+Message-ID: <CAP9ODKoPwqC47oCi=ze5j86V_b3bebsmmjZqvddVHnThZ76wgQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH 2/2] systemd: split out systemd-analyze
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,44 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2012 13:52:10 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 09 Jan 2012 14:41:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Anders Darander <anders@chargestorm.se> [120109 14:37]:
-> * Martin Jansa <martin.jansa@gmail.com> [120109 14:28]:
+On Mon, Jan 9, 2012 at 11:44, Anders Darander <anders@chargestorm.se> wrote:
 
-> > On Mon, Jan 09, 2012 at 02:18:38PM +0100, Anders Darander wrote:
-> > > Split systemd-analyze to a separate package, to remove the implicit
-> > > dependency on python. (At least the rpm-packaging backend created a
-> > > run-time dependency on python).
+> Just pushed the above fix to the same systemd-move branch on github.
+>
 
-> > > +PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
-
-> > >  USERADD_PACKAGES = "${PN}"
-> > >  GROUPADD_PARAM_${PN} = "-r lock"
-
-> > > +FILES_${PN}-analyze = "${bindir}/systemd-analyze"
-
-> > according to your commit message, why not add
-> > RDEPENDS_${PN}-analyze = "python"
-> > here?
-
-> Yes, I should probably spin a v2 with:
-> RDEPENDS_${PN}-analyze = "python-dbus"
-> as python alone isn't enough to run systemd-analyze.
-
-Just pushed the above fix to the same systemd-move branch on github.
-
-Cheers,
-Anders
-
-> Missing that as on our larger image, python was always explicitly
-> installed by other packages, and on this smaller one, we didn't want it.
-> Good catch, though!
+Please send an updated patchset so people can review it.
 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
