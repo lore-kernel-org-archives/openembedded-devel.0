@@ -1,20 +1,21 @@
-Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+Received: from stoexhub02.domain01.net ([83.145.59.143])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RkFD8-0006jX-9f
+	(envelope-from <anders@chargestorm.se>) id 1RkFFn-0006rP-5U
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 14:24:26 +0100
-Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.213.0; Mon, 9 Jan 2012
-	14:16:57 +0100
+	Mon, 09 Jan 2012 14:27:11 +0100
+Received: from localhost (193.235.91.228) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server id 8.3.213.0; Mon, 9 Jan 2012
+	14:18:41 +0100
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 Jan 2012 14:16:50 +0100
-Message-ID: <cover.1326114932.git.anders@chargestorm.se>
+Date: Mon, 9 Jan 2012 14:18:38 +0100
+Message-ID: <5fec4c565130ce5590d5073421f211898d12dc24.1326114932.git.anders@chargestorm.se>
 X-Mailer: git-send-email 1.7.8.2
+In-Reply-To: <cover.1326114932.git.anders@chargestorm.se>
+References: <cover.1326114932.git.anders@chargestorm.se>
 MIME-Version: 1.0
 X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [PATCH 0/2] systemd: SRC_URI fix + package split
+Subject: [PATCH 2/2] systemd: split out systemd-analyze
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,33 +29,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2012 13:24:26 -0000
+X-List-Received-Date: Mon, 09 Jan 2012 13:27:11 -0000
 Content-Type: text/plain
 
-Systemd's git repo has moved on freedesktop.org, thus fix the SRC_URI.
+Split systemd-analyze to a separate package, to remove the implicit
+dependency on python. (At least the rpm-packaging backend created a
+run-time dependency on python).
 
-At least while using rpm-packaging, the systemd package (rpm) got a dependency
-on python, as systemd-analyze needs this (in the shebang). When trying to
-create a small image using systemd, this isn't always desirable. Thus the
-splitting of systemd-analyze to a separate package.
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-
-
-The following changes since commit 9c855444d025a85f28196bfeae25dd48e44510c5:
-
-  xf86-video-fbdev: remove, driver is now in oe-core (2012-01-09 10:31:00 +0100)
-
-are available in the git repository at:
-  git://github.com/darander/meta-oe systemd-move
-  https://github.com/darander/meta-oe/tree/systemd-move
-
-Anders Darander (2):
-  systemd: git repo moved
-  systemd: split out systemd-analyze
-
- meta-oe/recipes-core/systemd/systemd_git.bb |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
-
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index bdaaf16..1d71bb6 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r7"
++PR = "r8"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -57,11 +57,13 @@ do_install() {
+ 	ln -s ${base_bindir}/systemd ${D}/init
+ }
+ 
+-PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
++PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
+ 
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM_${PN} = "-r lock"
+ 
++FILES_${PN}-analyze = "${bindir}/systemd-analyze"
++
+ FILES_${PN}-initramfs = "/init"
+ RDEPENDS_${PN}-initramfs = "${PN}"
+ 
 -- 
 1.7.8.2
 
