@@ -1,33 +1,20 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from stoexhubfe02.domain01.net ([83.145.59.141])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RkDXQ-0004HO-NR
+	(envelope-from <anders@chargestorm.se>) id 1RkFD8-0006jX-9f
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 12:37:16 +0100
-Received: by lami14 with SMTP id i14so1259778lam.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jan 2012 03:29:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=xQLAxV68rixfZ650xULU9V6gBr1uXu/YHTMnCysl2LM=;
-	b=ueBRYN7+SuMoXG24KHt4YANaD3UKjtZlqe297oAlJ3deB0jLcLMT6y9Zf6u1l4nHXx
-	gs18LQ6BQoI1/lZtQuFpyl8QgKIIkojl2Jk7leuJmIY8gLPRRw12IQkq3EfV9BEY/iwu
-	KYC2urKzyqPHqbOElmcHZaiTsaehh3c7UWH60=
+	Mon, 09 Jan 2012 14:24:26 +0100
+Received: from localhost (193.235.91.228) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server id 8.3.213.0; Mon, 9 Jan 2012
+	14:16:57 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 9 Jan 2012 14:16:50 +0100
+Message-ID: <cover.1326114932.git.anders@chargestorm.se>
+X-Mailer: git-send-email 1.7.8.2
 MIME-Version: 1.0
-Received: by 10.112.25.74 with SMTP id a10mr3287901lbg.58.1326108587441; Mon,
-	09 Jan 2012 03:29:47 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.112.54.104 with HTTP; Mon, 9 Jan 2012 03:29:47 -0800 (PST)
-In-Reply-To: <jeeci3$i8k$1@dough.gmane.org>
-References: <1325986434-2020-1-git-send-email-schnitzeltony@gmx.de>
-	<jeeci3$i8k$1@dough.gmane.org>
-Date: Mon, 9 Jan 2012 09:29:47 -0200
-X-Google-Sender-Auth: DjqCw6mZ3qBIDYF3F3pyZtwT0xU
-Message-ID: <CAP9ODKrgJKaW3EOjBRfXDd0rr+XWRjZTPL4Gx9RFxOASdG6Ccg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe] udisks: add sytemd to DEPENDS
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [PATCH 0/2] systemd: SRC_URI fix + package split
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +28,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2012 11:37:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jan 2012 13:24:26 -0000
+Content-Type: text/plain
 
-On Mon, Jan 9, 2012 at 07:38, Koen Kooi <koen@dominion.thruhere.net> wrote:
+Systemd's git repo has moved on freedesktop.org, thus fix the SRC_URI.
 
-> I'm not sure this is the right solution, but I'll take the patch if someone
-> doesn't come up with a better way to solve this.
->
+At least while using rpm-packaging, the systemd package (rpm) got a dependency
+on python, as systemd-analyze needs this (in the shebang). When trying to
+create a small image using systemd, this isn't always desirable. Thus the
+splitting of systemd-analyze to a separate package.
 
-The right fix is to handle it in systemd.bbclass and bump every package PR
-using it.
+
+
+The following changes since commit 9c855444d025a85f28196bfeae25dd48e44510c5:
+
+  xf86-video-fbdev: remove, driver is now in oe-core (2012-01-09 10:31:00 +0100)
+
+are available in the git repository at:
+  git://github.com/darander/meta-oe systemd-move
+  https://github.com/darander/meta-oe/tree/systemd-move
+
+Anders Darander (2):
+  systemd: git repo moved
+  systemd: split out systemd-analyze
+
+ meta-oe/recipes-core/systemd/systemd_git.bb |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.8.2
+
+
 
