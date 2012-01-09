@@ -1,24 +1,28 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RkIzU-0007BX-RS
+	(envelope-from <martin.jansa@gmail.com>) id 1RkJBI-0007Tb-BY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 18:26:36 +0100
-Received: by lami14 with SMTP id i14so1426946lam.6
+	Mon, 09 Jan 2012 18:38:48 +0100
+Received: by eeit10 with SMTP id t10so2054120eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jan 2012 09:19:09 -0800 (PST)
+	Mon, 09 Jan 2012 09:31:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=jyZYzKk1P5bD0VGgaSIro1eL03KcLGZwqGcoVRsQZVo=;
-	b=btLsAlZXVymvt+AN0f6i01P0nXY1EGDIzSNFjRAbuKvsOi1reBkcaYx9lg8EZYoUGQ
-	gfGawCWYCXyRIfWhqYv5fWRYYEHXZBPy1QEaIrOHPVQCprZaoEIsIdqAp5zkzu5oW+9K
-	QzWRbPzASDk8t/K9GwJglQulPCYYa6olem1Z8=
-MIME-Version: 1.0
-Received: by 10.112.85.129 with SMTP id h1mr3551018lbz.84.1326129547651; Mon,
-	09 Jan 2012 09:19:07 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.112.54.104 with HTTP; Mon, 9 Jan 2012 09:19:07 -0800 (PST)
-In-Reply-To: <4F0B0F7A.9020907@windriver.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=k/j88Z7i0IhU4Qypf51frITeNDdatTj7WQ3kNjP8reQ=;
+	b=rKHla3GYSImQjv1uJmxLs2Yx2UalbOyI7zcsKtOT8E+M4qSksyS+UEN515ZwkB6Gz7
+	nsLYnQe4+78+nOaShR3GPUCfeNURqWgBL8YwSY5Ck9rVQeqLfJ2OKQCOgW0RLSBbS+Ie
+	JTh0283HhlJn6sxZ7DKvs2UgTJCLNNRS2H97Q=
+Received: by 10.14.11.27 with SMTP id 27mr6370094eew.126.1326130280757;
+	Mon, 09 Jan 2012 09:31:20 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 15sm42253286eeu.1.2012.01.09.09.31.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 09 Jan 2012 09:31:19 -0800 (PST)
+Date: Mon, 9 Jan 2012 18:31:07 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120109173107.GC3936@jama.jama.net>
 References: <cover.1325876341.git.otavio@ossystems.com.br>
 	<b61f46cb503582b669cbc56b0ea04d7fdaafd256.1325876341.git.otavio@ossystems.com.br>
 	<1325879877.3234.2.camel@lenovo.internal.reciva.com>
@@ -27,12 +31,9 @@ References: <cover.1325876341.git.otavio@ossystems.com.br>
 	<CAP9ODKrhfnL_+VJNWFQ0J7uyw3yayZ-e+gnyzsp4gjivxdtL2Q@mail.gmail.com>
 	<CAP9ODKo+uNuXx+jmN6uiFgG9nuwEuTjwc2JDpXnrygyp88j=rQ@mail.gmail.com>
 	<4F0B0F7A.9020907@windriver.com>
-Date: Mon, 9 Jan 2012 15:19:07 -0200
-X-Google-Sender-Auth: diKz7LGW9NxyuMBkHAmgG2gSx74
-Message-ID: <CAP9ODKpHL0y6wi6eYtYE979p0kw6P4P9=TjdJroAND53MCEYtA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+MIME-Version: 1.0
+In-Reply-To: <4F0B0F7A.9020907@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe][PATCH 5/5] udisks: disable manpage building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,22 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2012 17:26:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jan 2012 17:38:48 -0000
+X-Groupsio-MsgNum: 36442
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="TRYliJ5NKNqkz5bu"
+Content-Disposition: inline
 
-On Mon, Jan 9, 2012 at 14:02, Mark Hatle <mark.hatle@windriver.com> wrote:
+--TRYliJ5NKNqkz5bu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hmm, I think the best solution is to fix the docbook problems, but baring
-> that a static version of the man pages is the next best alternative.
->
+On Mon, Jan 09, 2012 at 10:02:02AM -0600, Mark Hatle wrote:
+> On 1/6/12 4:21 PM, Otavio Salvador wrote:
+> > On Fri, Jan 6, 2012 at 19:49, Otavio Salvador<otavio@ossystems.com.br>w=
+rote:
+> >
+> >> On Fri, Jan 6, 2012 at 19:13, Mark Hatle<mark.hatle@windriver.com>  wr=
+ote:
+> >>
+> >>> In what way?  Most of the problems I've observed in the past have been
+> >>> docbook related, but I think those have been resolved within OE-Core.
+> >>>
+> >>
+> >> Docbook related problems; you prefer if we fix those then?
+> >>
+> >
+> > It uses xsltproc and there's no native recipe at this moment.
+> >
+>=20
+> Hmm, I think the best solution is to fix the docbook problems, but baring=
+ that a=20
+> static version of the man pages is the next best alternative.
+>=20
 > Advantage to fixing docbook is it will work for the next package.  :)
 
+and for all xorg-* stuff...
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg23=
+006.html
 
-I fully agree but I am short in time for our deadline so this wasn't an
-option thus we choose the shortest route for now.
+But right now I'm using patches to disable it for xorg-* too...
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--TRYliJ5NKNqkz5bu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEUEARECAAYFAk8LJFsACgkQN1Ujt2V2gBx7JgCggbWLv+dOOjX2ZghrW8enwXHC
+rR8Al2PRbsE+zJgEQLnHcSaODvAqx/k=
+=l/16
+-----END PGP SIGNATURE-----
+
+--TRYliJ5NKNqkz5bu--
