@@ -1,33 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RkBnc-0000BB-EF for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 10:45:52 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RkBgP-0004HB-D1 for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jan 2012 10:38:25 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jan 2012 10:38:25 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1RkDXQ-0004HO-NR
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jan 2012 12:37:16 +0100
+Received: by lami14 with SMTP id i14so1259778lam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jan 2012 10:38:25 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 09 Jan 2012 10:38:10 +0100
-Message-ID: <jeeci3$i8k$1@dough.gmane.org>
+	Mon, 09 Jan 2012 03:29:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=xQLAxV68rixfZ650xULU9V6gBr1uXu/YHTMnCysl2LM=;
+	b=ueBRYN7+SuMoXG24KHt4YANaD3UKjtZlqe297oAlJ3deB0jLcLMT6y9Zf6u1l4nHXx
+	gs18LQ6BQoI1/lZtQuFpyl8QgKIIkojl2Jk7leuJmIY8gLPRRw12IQkq3EfV9BEY/iwu
+	KYC2urKzyqPHqbOElmcHZaiTsaehh3c7UWH60=
+MIME-Version: 1.0
+Received: by 10.112.25.74 with SMTP id a10mr3287901lbg.58.1326108587441; Mon,
+	09 Jan 2012 03:29:47 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.112.54.104 with HTTP; Mon, 9 Jan 2012 03:29:47 -0800 (PST)
+In-Reply-To: <jeeci3$i8k$1@dough.gmane.org>
 References: <1325986434-2020-1-git-send-email-schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1325986434-2020-1-git-send-email-schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.4
+	<jeeci3$i8k$1@dough.gmane.org>
+Date: Mon, 9 Jan 2012 09:29:47 -0200
+X-Google-Sender-Auth: DjqCw6mZ3qBIDYF3F3pyZtwT0xU
+Message-ID: <CAP9ODKrgJKaW3EOjBRfXDd0rr+XWRjZTPL4Gx9RFxOASdG6Ccg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe] udisks: add sytemd to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,35 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2012 09:45:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Jan 2012 11:37:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Jan 9, 2012 at 07:38, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-Op 08-01-12 02:33, Andreas Müller schreef:
-> If systemd was not yet build, udisks configure caused systemd files not
-> being build so udisks-sytemd package was empty. On do_rootfs we got: |
-> Collected errors: |  * opkg_install_cmd: Cannot install package
-> udisks-systemd.
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+> I'm not sure this is the right solution, but I'll take the patch if someone
+> doesn't come up with a better way to solve this.
+>
 
-I'm not sure this is the right solution, but I'll take the patch if someone
-doesn't come up with a better way to solve this.
+The right fix is to handle it in systemd.bbclass and bump every package PR
+using it.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk8KtX0ACgkQMkyGM64RGpEdiQCdHJrxZ2qeZVKMPhnOBIZIge+4
-jXkAnj+eSR0cBM8Rs/GQSmFdVLFGRKsz
-=UdTQ
------END PGP SIGNATURE-----
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
