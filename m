@@ -1,20 +1,21 @@
-Received: from stoexhubfe01.domain01.net ([83.145.59.140])
+Received: from stoexhub03.domain01.net ([83.145.59.144])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RkXgT-0000pA-JF
+	(envelope-from <anders@chargestorm.se>) id 1RkXgi-0000pa-8a
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jan 2012 10:07:57 +0100
-Received: from localhost (193.235.91.228) by stoexhubfe01.domain01.net
-	(10.12.10.6) with Microsoft SMTP Server id 8.3.213.0; Tue, 10 Jan 2012
-	10:00:27 +0100
+	Tue, 10 Jan 2012 10:08:12 +0100
+Received: from localhost (193.235.91.228) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server id 8.3.213.0; Tue, 10 Jan 2012
+	10:00:43 +0100
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Jan 2012 10:00:19 +0100
-Message-ID: <cover.1326185831.git.anders@chargestorm.se>
+Date: Tue, 10 Jan 2012 10:00:37 +0100
+Message-ID: <b2ef06de7421fdc29ae43f72b9f61e3410e68b15.1326185831.git.anders@chargestorm.se>
 X-Mailer: git-send-email 1.7.8.3
+In-Reply-To: <cover.1326185831.git.anders@chargestorm.se>
+References: <cover.1326185831.git.anders@chargestorm.se>
 MIME-Version: 1.0
 X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH v2 0/3] systemd: package split
+Subject: [meta-oe][PATCH v2 1/3] systemd: split out systemd-analyze
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,64 +29,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2012 09:07:57 -0000
+X-List-Received-Date: Tue, 10 Jan 2012 09:08:12 -0000
 Content-Type: text/plain
 
+Split systemd-analyze to a separate package, to remove the implicit
+dependency on python. (At least the rpm-packaging backend created a
+run-time dependency on python).
 
-At least while using rpm-packaging, the systemd package (rpm) got a dependency
-on python, as systemd-analyze needs this (in the shebang). When trying to
-create a small image using systemd, this isn't always desirable. Thus the
-splitting of systemd-analyze to a separate package.
+Add an RDEPENDS_${PN}-analyze on python-dbus, as this is required for
+systemd-analyze to work.
 
-As an RRECOMMENDS for python-pycairo is added for systemd-analyze, we also add
-new patch to conditionally build cairo with x11-support. This is desired for
-x11-less systems, to reduce build time and size. The actual patch is similar
-to how it is solved in oe-core.
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
-Conditionally RRECOMMENDS kbd and kbd-consolefonts: if the machine in
-question do not have keyboards, there is no need for kbd and
-kbd-consolefonts. 
-
-The first patch should be fine for pulling. The 2nd patch should also be
-relativly non-controversial. 
-
-The 3rd patch is new for v2, and can be omitted if more discussions is needed.
-
-All patches has been verified on a few internal arm-based machines, with a
-custom distro.
-
-
-------------------------------------
-v2: * The SRC_URI update has been applied to master.
-
-    * Let systemd-analyze RDEPENDS on python-dbus, and RRECOMMENDS
-      python-pycairo. 
-
-    * Add a patch to conditionally enable/disable x11 support when buildling
-      cairo. 
-    
-    * Add patch which makes the systemd's RRECOMMENDS on kbd and
-      kbd-consolefonts conditional on the keyboard MACHINE_FEATURES.
-
-The following changes since commit d3a451bbd08f7bb0ddea1aa0b314a72d65c660d4:
-
-  systemd: git repo moved (2012-01-10 08:25:55 +0100)
-
-are available in the git repository at:
-  git://github.com/darander/meta-oe systemd-move
-  https://github.com/darander/meta-oe/tree/systemd-move
-
-Anders Darander (3):
-  systemd: split out systemd-analyze
-  cairo: conditionally enable x11 dependencies
-  systemd: conditionally RRECOMMENDS kbd*
-
- meta-oe/recipes-core/systemd/systemd_git.bb      |   10 +++++++---
- meta-oe/recipes-graphics/cairo/cairo.inc         |    7 ++++++-
- meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb   |    2 ++
- meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb |    2 ++
- 4 files changed, 17 insertions(+), 4 deletions(-)
-
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index bdaaf16..0fa61a7 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r7"
++PR = "r8"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -57,11 +57,15 @@ do_install() {
+ 	ln -s ${base_bindir}/systemd ${D}/init
+ }
+ 
+-PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
++PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
+ 
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM_${PN} = "-r lock"
+ 
++FILES_${PN}-analyze = "${bindir}/systemd-analyze"
++RDEPENDS_${PN}-analyze = "python-dbus"
++RRECOMMENDS_${PN}-analyze = "python-pycairo"
++
+ FILES_${PN}-initramfs = "/init"
+ RDEPENDS_${PN}-initramfs = "${PN}"
+ 
 -- 
 1.7.8.3
 
