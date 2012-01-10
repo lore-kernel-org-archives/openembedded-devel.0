@@ -1,20 +1,21 @@
-Received: from stoexhub01.domain01.net ([83.145.59.142])
+Received: from stoexhub02.domain01.net ([83.145.59.143])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RkXgi-0000pb-Fz
+	(envelope-from <anders@chargestorm.se>) id 1RkXgi-0000pc-OH
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 10 Jan 2012 10:08:12 +0100
-Received: from localhost (193.235.91.228) by STOEXHUB01.domain01.net
-	(10.12.10.1) with Microsoft SMTP Server id 8.3.213.0; Tue, 10 Jan 2012
-	10:00:43 +0100
+Received: from localhost (193.235.91.228) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server id 8.3.213.0; Tue, 10 Jan 2012
+	10:00:44 +0100
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Jan 2012 10:00:38 +0100
-Message-ID: <3af96574c31be2c6ebe88463315712febfd621ef.1326185831.git.anders@chargestorm.se>
+Date: Tue, 10 Jan 2012 10:00:39 +0100
+Message-ID: <6382f565655efb9aec552453275832a351bc7467.1326185831.git.anders@chargestorm.se>
 X-Mailer: git-send-email 1.7.8.3
 In-Reply-To: <cover.1326185831.git.anders@chargestorm.se>
 References: <cover.1326185831.git.anders@chargestorm.se>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 2/3] cairo: conditionally enable x11 dependencies
+X-GFI-SMTP-Submission: 1
+Subject: [meta-oe][PATCH v2 3/3] systemd: conditionally RRECOMMENDS kbd*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,59 +32,35 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 X-List-Received-Date: Tue, 10 Jan 2012 09:08:12 -0000
 Content-Type: text/plain
 
-Take the same approach to conditionally enable x11 and x11-dependencies as used in oe-core.
+If the machine lacks keyboard support, there is no need for kbd*-packages.
 
 Signed-off-by: Anders Darander <anders@chargestorm.se>
 ---
- meta-oe/recipes-graphics/cairo/cairo.inc         |    7 ++++++-
- meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb   |    2 ++
- meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb |    2 ++
- 3 files changed, 10 insertions(+), 1 deletions(-)
+ meta-oe/recipes-core/systemd/systemd_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/cairo/cairo.inc b/meta-oe/recipes-graphics/cairo/cairo.inc
-index 6157004..bd38233 100644
---- a/meta-oe/recipes-graphics/cairo/cairo.inc
-+++ b/meta-oe/recipes-graphics/cairo/cairo.inc
-@@ -1,7 +1,12 @@
- SECTION = "libs"
--DEPENDS = "virtual/libx11 pixman libsm libpng fontconfig libxrender glib-2.0"
-+X11DEPENDS = "virtual/libx11 libsm libxrender"
-+DEPENDS = "pixman libpng fontconfig glib-2.0"
- DESCRIPTION = "Cairo graphics library"
- LICENSE = "MPL LGPL"
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+           ${@base_contains('DISTRO_FEATURES', 'gtk-directfb', 'directfb', '', d)}"
-+PACKAGECONFIG[x11] = "--with-x=yes,--without-x,${X11DEPENDS}"
-+PACKAGECONFIG[gtk-directfb] = "--enable-directfb=yes,,directfb"
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 0fa61a7..7af8357 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
  
- #check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points 
- require cairo-fpu.inc
-diff --git a/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb b/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
-index 9de75ed..e7b65af 100644
---- a/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
-+++ b/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
-@@ -2,6 +2,8 @@ require cairo.inc
+ PV = "git"
+-PR = "r8"
++PR = "r9"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=e73e999e0c72b5ac9012424fa157ad77"
+ inherit useradd pkgconfig autotools vala perlnative
  
-+PR = "r1"
-+
- SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
- "
- SRC_URI[cairo.md5sum] = "f101a9e88b783337b20b2e26dfd26d5f"
-diff --git a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
-index e4fec3c..496a605 100644
---- a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
-+++ b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
-@@ -5,6 +5,8 @@ DESCRIPTION = "C++ bindings for Cairo graphics library"
- LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
- 
-+PR = "r1"
-+
- DEPENDS = "cairo libsigc++-2.0"
- 
- SRC_URI = "http://cairographics.org/releases/cairomm-${PV}.tar.gz;name=archive"
+@@ -101,7 +101,7 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
+ # of blacklist support, so use proper modprobe from module-init-tools
+ # And pull in the kernel modules mentioned in INSTALL
+ # swapon -p is also not supported by busybox
+-RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
++RRECOMMENDS_${PN} += "${@base_contains("MACHINE_FEATURES", "keyboard", "kbd kbd-consolefonts", "", d)} \
+                       systemd-serialgetty \
+                       util-linux-agetty \
+                       util-linux-swaponoff \
 -- 
 1.7.8.3
 
