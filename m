@@ -1,31 +1,20 @@
 Received: from stoexhubfe01.domain01.net ([83.145.59.140])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1RkWec-0007oc-NQ
+	(envelope-from <anders@chargestorm.se>) id 1RkXgT-0000pA-JF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jan 2012 09:01:58 +0100
-Received: from ad.chargestorm.se (193.235.91.228) by stoexhubfe01.domain01.net
-	(10.12.10.6) with Microsoft SMTP Server (TLS) id 8.3.213.0;
-	Tue, 10 Jan 2012 08:53:26 +0100
-Date: Tue, 10 Jan 2012 08:53:25 +0100
+	Tue, 10 Jan 2012 10:07:57 +0100
+Received: from localhost (193.235.91.228) by stoexhubfe01.domain01.net
+	(10.12.10.6) with Microsoft SMTP Server id 8.3.213.0; Tue, 10 Jan 2012
+	10:00:27 +0100
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20120110075324.GA3664@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <cover.1326114932.git.anders@chargestorm.se>
-	<5fec4c565130ce5590d5073421f211898d12dc24.1326114932.git.anders@chargestorm.se>
-	<20120109132816.GB3936@jama.jama.net>
-	<20120109133703.GA5503@ad.chargestorm.se>
-	<jegp84$91t$1@dough.gmane.org>
+Date: Tue, 10 Jan 2012 10:00:19 +0100
+Message-ID: <cover.1326185831.git.anders@chargestorm.se>
+X-Mailer: git-send-email 1.7.8.3
 MIME-Version: 1.0
-In-Reply-To: <jegp84$91t$1@dough.gmane.org>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
 X-GFI-SMTP-Submission: 1
-Subject: Re: [PATCH 2/2] systemd: split out systemd-analyze
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-oe][PATCH v2 0/3] systemd: package split
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,48 +28,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2012 08:01:58 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Jan 2012 09:07:57 -0000
+Content-Type: text/plain
 
-* Koen Kooi <koen@dominion.thruhere.net> [120110 08:27]:
 
-> Op 09-01-12 14:37, Anders Darander schreef:
-> > * Martin Jansa <martin.jansa@gmail.com> [120109 14:28]:
+At least while using rpm-packaging, the systemd package (rpm) got a dependency
+on python, as systemd-analyze needs this (in the shebang). When trying to
+create a small image using systemd, this isn't always desirable. Thus the
+splitting of systemd-analyze to a separate package.
 
-> >> On Mon, Jan 09, 2012 at 02:18:38PM +0100, Anders Darander wrote:
-> >>> Split systemd-analyze to a separate package, to remove the implicit 
-> >>> dependency on python. (At least the rpm-packaging backend created a 
-> >>> run-time dependency on python).
+As an RRECOMMENDS for python-pycairo is added for systemd-analyze, we also add
+new patch to conditionally build cairo with x11-support. This is desired for
+x11-less systems, to reduce build time and size. The actual patch is similar
+to how it is solved in oe-core.
 
-> >>> +PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs
-> >>> ${PN}-analyze"
+Conditionally RRECOMMENDS kbd and kbd-consolefonts: if the machine in
+question do not have keyboards, there is no need for kbd and
+kbd-consolefonts. 
 
-> >>> USERADD_PACKAGES = "${PN}" GROUPADD_PARAM_${PN} = "-r lock"
+The first patch should be fine for pulling. The 2nd patch should also be
+relativly non-controversial. 
 
-> >>> +FILES_${PN}-analyze = "${bindir}/systemd-analyze"
+The 3rd patch is new for v2, and can be omitted if more discussions is needed.
 
-> >> according to your commit message, why not add RDEPENDS_${PN}-analyze =
-> >> "python" here?
+All patches has been verified on a few internal arm-based machines, with a
+custom distro.
 
-> > Yes, I should probably spin a v2 with: RDEPENDS_${PN}-analyze =
-> > "python-dbus" as python alone isn't enough to run systemd-analyze.
 
-> Don't forget python-pycairo for 'systemd-analyze plot'
+------------------------------------
+v2: * The SRC_URI update has been applied to master.
 
-Thanks, I'll add it as a RRECOMMENDS and send an updated patch series.
-(I've only used systemd an headless systems, without any graphics
-libraries at all, thus never been running systemd-analyze plot)
+    * Let systemd-analyze RDEPENDS on python-dbus, and RRECOMMENDS
+      python-pycairo. 
 
-I'll use RRECOMMENDS as it is not necessary for running systemd-analyze,
-which python-dbus is. Well, it is necessary for running 'systemd-analyze
-plot', but not for the other commands in systemd-analyze.
+    * Add a patch to conditionally enable/disable x11 support when buildling
+      cairo. 
+    
+    * Add patch which makes the systemd's RRECOMMENDS on kbd and
+      kbd-consolefonts conditional on the keyboard MACHINE_FEATURES.
 
-Cheers,
-Anders
+The following changes since commit d3a451bbd08f7bb0ddea1aa0b314a72d65c660d4:
+
+  systemd: git repo moved (2012-01-10 08:25:55 +0100)
+
+are available in the git repository at:
+  git://github.com/darander/meta-oe systemd-move
+  https://github.com/darander/meta-oe/tree/systemd-move
+
+Anders Darander (3):
+  systemd: split out systemd-analyze
+  cairo: conditionally enable x11 dependencies
+  systemd: conditionally RRECOMMENDS kbd*
+
+ meta-oe/recipes-core/systemd/systemd_git.bb      |   10 +++++++---
+ meta-oe/recipes-graphics/cairo/cairo.inc         |    7 ++++++-
+ meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb   |    2 ++
+ meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb |    2 ++
+ 4 files changed, 17 insertions(+), 4 deletions(-)
 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+1.7.8.3
+
 
 
