@@ -1,18 +1,31 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from stoexhub02.domain01.net ([83.145.59.143])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RkmZs-0001jY-7c
+	(envelope-from <anders@chargestorm.se>) id 1Rl4M6-0004yF-9S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jan 2012 02:02:10 +0100
-Received: from mizar.localdomain (87.9.229.96) by smtp209.alice.it (8.6.023.02)
-	id 4EF08A6301FC1C31; Wed, 11 Jan 2012 01:54:41 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Jan 2012 01:54:29 +0100
-Message-Id: <1326243269-21197-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
-References: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld] [PATCH 2/2] linux(-kexecboot): update from 3.1.7 to 3.1.8
+	Wed, 11 Jan 2012 21:01:06 +0100
+Received: from STOEXMBXC01.domain01.net
+	([fe80:0000:0000:0000:8caa:b43d:115.41.221.224]) by
+	STOEXHUB02.domain01.net
+	([10.12.10.2]) with mapi; Wed, 11 Jan 2012 20:52:19 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Jan 2012 20:52:20 +0100
+Thread-Topic: [oe] [meta-oe][PATCH v3 3/3] systemd: conditionally
+	RRECOMMENDS	kbd*
+Thread-Index: AczQmobVRgFTVG0XTWiyvbRnRuo4SQ==
+Message-ID: <FFE56B01-BC8B-4A8F-AD2A-9A1DEE3C2FCB@chargestorm.se>
+References: <cover.1326196151.git.anders@chargestorm.se>
+	<5dd3bb213c6027bdde9de0394b5dbbd0aeedaac7.1326196151.git.anders@chargestorm.se>
+	<jei7qo$gvl$1@dough.gmane.org>
+	<CAP9ODKou4VHCJrKOv6vQmqibprS3YRVzUJy6OCqaXbKBkwiiVA@mail.gmail.com>
+In-Reply-To: <CAP9ODKou4VHCJrKOv6vQmqibprS3YRVzUJy6OCqaXbKBkwiiVA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH v3 3/3] systemd: conditionally RRECOMMENDS	kbd*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,72 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2012 01:02:10 -0000
+X-List-Received-Date: Wed, 11 Jan 2012 20:01:06 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* apply latest stable patchset
-* bump PR
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
- recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+On 10 jan 2012, at 21:51, "Otavio Salvador" <otavio@ossystems.com.br> wrote=
+:
 
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-index 9e2fb69..8a7f38f 100644
---- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-+++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-@@ -1,12 +1,12 @@
- require linux-kexecboot.inc
- 
--PR = "${INC_PR}.4"
-+PR = "${INC_PR}.5"
- S = "${WORKDIR}/linux-${PV}"
- 
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
- 
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
- 
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "13ea1e611a0a580138b8203e6f1353ed"
--SRC_URI[stablepatch.sha256sum] = "44f2611ce923db17254eeb618ed06703acf4dd6dcc8357b360e11a1111b0bc9d"
-+SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
-+SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index baa0b34..3dc2759 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -1,11 +1,11 @@
- require linux.inc
- 
--PR = "${INC_PR}.5"
-+PR = "${INC_PR}.6"
- 
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
- 
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
- 
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "13ea1e611a0a580138b8203e6f1353ed"
--SRC_URI[stablepatch.sha256sum] = "44f2611ce923db17254eeb618ed06703acf4dd6dcc8357b360e11a1111b0bc9d"
-+SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
-+SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
--- 
-1.7.3.4
+> On Tue, Jan 10, 2012 at 18:42, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+>=20
+>> Op 10-01-12 12:52, Anders Darander schreef:
+>>> If the machine lacks keyboard support, there is no need for
+>>> kbd*-packages.
+>>=20
+>> NAK, this would make the complete systemd machine specific, which we do =
+not
+>> want.
+>>=20
+>=20
+> IMO the keyboard support ought to be handled, in systemd case, as a distr=
+o
+> feature so allowing it to be machine independent but allowing for the
+> flexibility of removing its recommendations if need.
 
+Good point.
+
+If we add a 'keyboard' distro feature, the issue would indeed be solved. I'=
+ll try to see if I can find some time to make such a suggestion, including =
+adding keyboard to the default distro features, to try to reduce problems f=
+or existing users. (Altough, it might take a while, as I've just been put o=
+ other assignments, reducing my time to work on oe).
+
+Cheers,
+ Anders=
 
 
