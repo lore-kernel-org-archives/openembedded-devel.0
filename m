@@ -1,34 +1,16 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Sean_Hudson@mentor.com>) id 1RkkJL-0005yW-3Q
+	(envelope-from <andrea.adami@gmail.com>) id 1RkmZr-0001jY-BP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jan 2012 23:36:55 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Rkjep-0000qS-6a from Sean_Hudson@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jan 2012 13:55:03 -0800
-Received: from SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 10 Jan 2012 13:55:03 -0800
-Received: from NA-MBX-02.mgc.mentorg.com ([169.254.2.234]) by
-	SVR-ORW-FEM-03.mgc.mentorg.com ([147.34.97.39]) with mapi id
-	14.01.0289.001; Tue, 10 Jan 2012 13:55:02 -0800
-From: "Hudson, Sean" <Sean_Hudson@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: RFC: Online forum for developer discussion
-Thread-Index: AczP1oX+aF601wiqT0ejDNP10RBGzQ==
-Date: Tue, 10 Jan 2012 21:55:02 +0000
-Message-ID: <289CD940EE567444BB43E62E0C3028F328F53146@NA-MBX-02.mgc.mentorg.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.34.91.1]
-MIME-Version: 1.0
-X-OriginalArrivalTime: 10 Jan 2012 21:55:03.0261 (UTC)
-	FILETIME=[81B568D0:01CCCFE2]
-Subject: RFC: Online forum for developer discussion
+	Wed, 11 Jan 2012 02:02:07 +0100
+Received: from mizar.localdomain (87.9.229.96) by smtp209.alice.it (8.6.023.02)
+	id 4EF08A6301FC1C1B; Wed, 11 Jan 2012 01:54:38 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Jan 2012 01:54:28 +0100
+Message-Id: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld] [PATCH 1/2] various kernels: remove apply=yes from SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +24,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2012 22:36:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Jan 2012 01:02:07 -0000
 
-I propose having a monthly, online developer forum that promotes discussion
-on longer term technical issues that impact both Yocto and OpenEmbedded.
-This would supplement the already existing mailing list and irc communicati=
-on
-channels.  In order to facilitate this, I'd like to propose a telephone/web
-conference, which my employer has agreed to host.
+* not necessary anymore, obsolete in oe-core
 
-This forum would help provide an additional way for the community to discus=
-s
-technical issues and share information about planned work and works in prog=
-ress.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-kexecboot_3.1.bb        |    2 +-
+ .../linux/linux-palm-omap1_2.6.22-omap1.bb         |    2 +-
+ recipes-kernel/linux/linux_3.1.bb                  |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Initial Topics for Discussion might include:
-    1. layering definitions - discussion on what exists today and how to ma=
-ke it better
-    2. discussions on techniques to make working with oe/yocto better
-    3. oe/yocto disconnects (opportunities for better alignment)
-    4. common new user issues
-    5. documentation (standards, lacks, etc)
-    6. ?
-
-Regards,
-=A0=A0=A0=A0 Sean
-
-Sean Hudson | Embedded Linux Architect for Mentor Embedded Linux
-Mentor Graphics - Embedded Software DivisionT
-
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+index 5da0cc4..9e2fb69 100644
+--- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
++++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+@@ -6,7 +6,7 @@ S = "${WORKDIR}/linux-${PV}"
+ COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+ 
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
+            file://defconfig \
+            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+            "
+diff --git a/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb b/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
+index f59779e..52c6aec 100644
+--- a/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
++++ b/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
+@@ -9,7 +9,7 @@ inherit kernel
+ DEPENDS = ""
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-2.6.22.tar.bz2;name=kernel \
+-           http://www.muru.com/linux/omap/patches/patch-2.6.22-omap1.bz2;apply=yes;name=patch \
++           http://www.muru.com/linux/omap/patches/patch-2.6.22-omap1.bz2;name=patch \
+ 	   file://defconfig"
+ 
+ S = "${WORKDIR}/linux-2.6.22"
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+index 0c65f7b..baa0b34 100644
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ b/recipes-kernel/linux/linux_3.1.bb
+@@ -5,7 +5,7 @@ PR = "${INC_PR}.5"
+ COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
+ 
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
+            file://defconfig \
+            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+            "
+-- 
+1.7.3.4
 
 
 
