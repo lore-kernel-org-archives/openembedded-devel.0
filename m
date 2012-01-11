@@ -1,16 +1,18 @@
 Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RkmZr-0001jY-BP
+	(envelope-from <andrea.adami@gmail.com>) id 1RkmZs-0001jY-7c
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jan 2012 02:02:07 +0100
+	Wed, 11 Jan 2012 02:02:10 +0100
 Received: from mizar.localdomain (87.9.229.96) by smtp209.alice.it (8.6.023.02)
-	id 4EF08A6301FC1C1B; Wed, 11 Jan 2012 01:54:38 +0100
+	id 4EF08A6301FC1C31; Wed, 11 Jan 2012 01:54:41 +0100
 From: Andrea Adami <andrea.adami@gmail.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Jan 2012 01:54:28 +0100
-Message-Id: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 11 Jan 2012 01:54:29 +0100
+Message-Id: <1326243269-21197-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld] [PATCH 1/2] various kernels: remove apply=yes from SRC_URI
+In-Reply-To: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
+References: <1326243269-21197-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld] [PATCH 2/2] linux(-kexecboot): update from 3.1.7 to 3.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,56 +26,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2012 01:02:07 -0000
+X-List-Received-Date: Wed, 11 Jan 2012 01:02:10 -0000
 
-* not necessary anymore, obsolete in oe-core
+* apply latest stable patchset
+* bump PR
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-kernel/linux/linux-kexecboot_3.1.bb        |    2 +-
- .../linux/linux-palm-omap1_2.6.22-omap1.bb         |    2 +-
- recipes-kernel/linux/linux_3.1.bb                  |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-kexecboot_3.1.bb |    8 ++++----
+ recipes-kernel/linux/linux_3.1.bb           |    8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-index 5da0cc4..9e2fb69 100644
+index 9e2fb69..8a7f38f 100644
 --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
 +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-@@ -6,7 +6,7 @@ S = "${WORKDIR}/linux-${PV}"
+@@ -1,12 +1,12 @@
+ require linux-kexecboot.inc
+ 
+-PR = "${INC_PR}.4"
++PR = "${INC_PR}.5"
+ S = "${WORKDIR}/linux-${PV}"
+ 
  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
  
  SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;name=stablepatch \
             file://defconfig \
             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
             "
-diff --git a/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb b/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
-index f59779e..52c6aec 100644
---- a/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
-+++ b/recipes-kernel/linux/linux-palm-omap1_2.6.22-omap1.bb
-@@ -9,7 +9,7 @@ inherit kernel
- DEPENDS = ""
+@@ -22,5 +22,5 @@ SRC_URI_append_poodle = " \
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-2.6.22.tar.bz2;name=kernel \
--           http://www.muru.com/linux/omap/patches/patch-2.6.22-omap1.bz2;apply=yes;name=patch \
-+           http://www.muru.com/linux/omap/patches/patch-2.6.22-omap1.bz2;name=patch \
- 	   file://defconfig"
- 
- S = "${WORKDIR}/linux-2.6.22"
+ SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+ SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+-SRC_URI[stablepatch.md5sum] = "13ea1e611a0a580138b8203e6f1353ed"
+-SRC_URI[stablepatch.sha256sum] = "44f2611ce923db17254eeb618ed06703acf4dd6dcc8357b360e11a1111b0bc9d"
++SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
++SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
 diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index 0c65f7b..baa0b34 100644
+index baa0b34..3dc2759 100644
 --- a/recipes-kernel/linux/linux_3.1.bb
 +++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -5,7 +5,7 @@ PR = "${INC_PR}.5"
+@@ -1,11 +1,11 @@
+ require linux.inc
+ 
+-PR = "${INC_PR}.5"
++PR = "${INC_PR}.6"
+ 
  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
  
  SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;name=stablepatch \
             file://defconfig \
             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
             "
+@@ -21,5 +21,5 @@ SRC_URI_append_poodle = " \
+ 
+ SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+ SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+-SRC_URI[stablepatch.md5sum] = "13ea1e611a0a580138b8203e6f1353ed"
+-SRC_URI[stablepatch.sha256sum] = "44f2611ce923db17254eeb618ed06703acf4dd6dcc8357b360e11a1111b0bc9d"
++SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
++SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
 -- 
 1.7.3.4
 
