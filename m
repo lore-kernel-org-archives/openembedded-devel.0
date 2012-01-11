@@ -1,28 +1,20 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1Rl4Nq-0006ZS-PI
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Rl4oF-0002dV-Vq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jan 2012 21:02:54 +0100
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id q0BJtJWg006799
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2012 20:55:24 +0100
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
-	14.02.0247.003; Wed, 11 Jan 2012 20:55:19 +0100
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Classic SDK host utilities missing
-Thread-Index: AQHM0Jryp15JumBlRUujedxbn3HolA==
-Date: Wed, 11 Jan 2012 19:55:19 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40233DEB@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.38]
-MIME-Version: 1.0
-Subject: Classic SDK host utilities missing
+	Wed, 11 Jan 2012 21:30:12 +0100
+Received: from [192.168.2.78] (helo=localhost.localdomain)
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1Rl5E1-0005f4-6a; Wed, 11 Jan 2012 21:56:49 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Jan 2012 21:21:59 +0100
+Message-Id: <1326313319-4579-1-git-send-email-florian.boor@kernelconcepts.de>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Florian Boor <florian@kernelconcepts.de>
+Subject: [PATCH] libusb1: Depend on libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,70 +28,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2012 20:02:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Jan 2012 20:30:12 -0000
 
- Hi,=0A=
-=0A=
-I'm using OE 2011.03-maintenance for a PowerPC based product and have creat=
-ed an SDK following the QTE example in the (very old) OE manual.=0A=
-=0A=
-The base SDK generation works fine.=0A=
-Adding target libraries etc also works fine.=0A=
-Adding host tools does not.=0A=
-=0A=
-What I'm trying to do is to add the cramfs tools to my SDK.=0A=
-=0A=
-I have created cramfs-sdk_1.1.bb:=0A=
-----------------=0A=
-inherit sdk=0A=
-require recipes/cramfs/cramfs_1.1.bb=0A=
-----------------=0A=
-=0A=
-And meta-toolchain-xxx.bb:=0A=
-----------------=0A=
-DESCRIPTION =3D "Xxx SDK meta recipe"=0A=
-LICENSE =3D "MIT"=0A=
-PR =3D "r0"=0A=
-=0A=
-TOOLCHAIN_TARGET_TASK =3D "task-xxx-toolchain-target"=0A=
-TOOLCHAIN_HOST_TASK =3D "task-xxx-toolchain-host"=0A=
-=0A=
-require recipes/meta/meta-toolchain.bb=0A=
-SDK_SUFFIX =3D "toolchain-xxx"=0A=
-----------------=0A=
-=0A=
-And task-xxx-toolchain-host.bb:=0A=
-----------------=0A=
-require recipes/tasks/task-sdk-host.bb=0A=
-=0A=
-DESCRIPTION =3D "Host packages for Xxx SDK"=0A=
-LICENSE =3D "MIT"=0A=
-PR =3D "r0"=0A=
-=0A=
-ALLOW_EMPTY =3D "1"=0A=
-=0A=
-RDEPENDS_${PN} +=3D "cramfs-sdk"=0A=
-----------------=0A=
-=0A=
-When building a cramfs-sdk package is created containing the correct binari=
-es in the correct location. The SDK is also created without errors but the =
-files from cramfs-sdk is just not there.=0A=
-=0A=
-I have looked around all log-files but the only suspicious thing I found is=
- from log.do_package of cramfs-sdk:=0A=
--------------=0A=
-NOTE: Couldn't find shared library provider for libz.so.1=0A=
-NOTE: Couldn't find shared library provider for libc.so.6=0A=
-NOTE: Couldn't find shared library provider for libz.so.1=0A=
-NOTE: Couldn't find shared library provider for libc.so.6=0A=
--------------=0A=
-=0A=
-If this is the problem, what to do about it?=0A=
-If not, any other clues would be very appreciated.=0A=
-=0A=
-Thanks // Mats=0A=
+From: Florian Boor <florian@kernelconcepts.de>
+
+Without libxml2 we get an error like this:
++ cp -r $TMPDIR/sysroots/netbookpro/usr/share/aclocal/. $TMPDIR/work/armv5te-oe-linux-gnueabi/libusb1-1.0.8-r2/libusb-1.0.8/aclocal-copy/
+cp: cannot stat `$TMPDIR/sysroots/netbookpro/usr/share/aclocal/./libxml.m4': No such file or directory
+
+Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
+---
+ meta/recipes-support/libusb/libusb1_1.0.8.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/meta/recipes-support/libusb/libusb1_1.0.8.bb b/meta/recipes-support/libusb/libusb1_1.0.8.bb
+index 8873de7..9af24b4 100644
+--- a/meta/recipes-support/libusb/libusb1_1.0.8.bb
++++ b/meta/recipes-support/libusb/libusb1_1.0.8.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "Userspace library to access USB (version 1.0)"
+ HOMEPAGE = "http://libusb.sf.net"
+ BUGTRACKER = "http://www.libusb.org/report"
+ SECTION = "libs"
++DEPENDS = "libxml2"
+ 
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-- 
+1.7.2.5
+
 
 
