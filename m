@@ -1,19 +1,28 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Rl5GS-0003KJ-C0
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Rl6nI-0006Ts-1x
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jan 2012 21:59:21 +0100
-Received: from [192.168.2.78] (helo=localhost.localdomain)
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1Rl5gC-0006hW-P1; Wed, 11 Jan 2012 22:25:56 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
+	Wed, 11 Jan 2012 23:37:20 +0100
+Received: (qmail invoked by alias); 11 Jan 2012 22:29:49 -0000
+Received: from p5B0A1F6E.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.31.110]
+	by mail.gmx.net (mp029) with SMTP; 11 Jan 2012 23:29:49 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18sDM4/oOYs5CE4bhplO64bZ6CZaPGkMSJRvvaSP2
+	uJGPPWi3hHLZPB
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jan 2012 21:51:03 +0100
-Message-Id: <1326315063-5488-1-git-send-email-florian.boor@kernelconcepts.de>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] upower: Depend on gobject-introspection-native
+Date: Wed, 11 Jan 2012 23:30:53 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1325986434-2020-1-git-send-email-schnitzeltony@gmx.de>
+	<jeeci3$i8k$1@dough.gmane.org>
+	<CAP9ODKrgJKaW3EOjBRfXDd0rr+XWRjZTPL4Gx9RFxOASdG6Ccg@mail.gmail.com>
+In-Reply-To: <CAP9ODKrgJKaW3EOjBRfXDd0rr+XWRjZTPL4Gx9RFxOASdG6Ccg@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201201112330.53226.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [meta-oe] udisks: add sytemd to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,33 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2012 20:59:21 -0000
+X-List-Received-Date: Wed, 11 Jan 2012 22:37:20 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Without the dependecy we get the following error:
-libupower-glib/Makefile.am:62: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
+On Monday, January 09, 2012 12:29:47 PM Otavio Salvador wrote:
+> On Mon, Jan 9, 2012 at 07:38, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> > I'm not sure this is the right solution, but I'll take the patch if
+> > someone doesn't come up with a better way to solve this.
+> 
+> The right fix is to handle it in systemd.bbclass and bump every package PR
+> using it.
+Can we agree on that? I would volunteer to prepare these patches.
 
-Tested with Jlime distribution, netbookpro
-
-Signed-off-by: Florian Boor <florian.boor@kernelconcepts.de>
----
- meta-oe/recipes-support/upower/upower_0.9.14.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-support/upower/upower_0.9.14.bb b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-index 622d7ac..b95bd74 100644
---- a/meta-oe/recipes-support/upower/upower_0.9.14.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "UPower is an abstraction for enumerating power devices, listening
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
- 
--DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit"
-+DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit gobject-introspection-native" 
- 
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
--- 
-1.7.2.5
-
+Andreas
 
 
