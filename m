@@ -1,31 +1,28 @@
-Received: from stoexhub02.domain01.net ([83.145.59.143])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1Rl4M6-0004yF-9S
+	(envelope-from <Mats.Karrman@tritech.se>) id 1Rl4Nq-0006ZS-PI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Jan 2012 21:01:06 +0100
-Received: from STOEXMBXC01.domain01.net
-	([fe80:0000:0000:0000:8caa:b43d:115.41.221.224]) by
-	STOEXHUB02.domain01.net
-	([10.12.10.2]) with mapi; Wed, 11 Jan 2012 20:52:19 +0100
-From: Anders Darander <anders@chargestorm.se>
+	Wed, 11 Jan 2012 21:02:54 +0100
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id q0BJtJWg006799
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jan 2012 20:55:24 +0100
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
+	14.02.0247.003; Wed, 11 Jan 2012 20:55:19 +0100
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Jan 2012 20:52:20 +0100
-Thread-Topic: [oe] [meta-oe][PATCH v3 3/3] systemd: conditionally
-	RRECOMMENDS	kbd*
-Thread-Index: AczQmobVRgFTVG0XTWiyvbRnRuo4SQ==
-Message-ID: <FFE56B01-BC8B-4A8F-AD2A-9A1DEE3C2FCB@chargestorm.se>
-References: <cover.1326196151.git.anders@chargestorm.se>
-	<5dd3bb213c6027bdde9de0394b5dbbd0aeedaac7.1326196151.git.anders@chargestorm.se>
-	<jei7qo$gvl$1@dough.gmane.org>
-	<CAP9ODKou4VHCJrKOv6vQmqibprS3YRVzUJy6OCqaXbKBkwiiVA@mail.gmail.com>
-In-Reply-To: <CAP9ODKou4VHCJrKOv6vQmqibprS3YRVzUJy6OCqaXbKBkwiiVA@mail.gmail.com>
-Accept-Language: en-US
+Thread-Topic: Classic SDK host utilities missing
+Thread-Index: AQHM0Jryp15JumBlRUujedxbn3HolA==
+Date: Wed, 11 Jan 2012 19:55:19 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40233DEB@post.tritech.se>
+Accept-Language: en-US, sv-SE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+x-originating-ip: [194.132.137.38]
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v3 3/3] systemd: conditionally RRECOMMENDS	kbd*
+Subject: Classic SDK host utilities missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +36,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2012 20:01:06 -0000
+X-List-Received-Date: Wed, 11 Jan 2012 20:02:55 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-
-On 10 jan 2012, at 21:51, "Otavio Salvador" <otavio@ossystems.com.br> wrote=
-:
-
-> On Tue, Jan 10, 2012 at 18:42, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
->=20
->> Op 10-01-12 12:52, Anders Darander schreef:
->>> If the machine lacks keyboard support, there is no need for
->>> kbd*-packages.
->>=20
->> NAK, this would make the complete systemd machine specific, which we do =
-not
->> want.
->>=20
->=20
-> IMO the keyboard support ought to be handled, in systemd case, as a distr=
-o
-> feature so allowing it to be machine independent but allowing for the
-> flexibility of removing its recommendations if need.
-
-Good point.
-
-If we add a 'keyboard' distro feature, the issue would indeed be solved. I'=
-ll try to see if I can find some time to make such a suggestion, including =
-adding keyboard to the default distro features, to try to reduce problems f=
-or existing users. (Altough, it might take a while, as I've just been put o=
- other assignments, reducing my time to work on oe).
-
-Cheers,
- Anders=
+ Hi,=0A=
+=0A=
+I'm using OE 2011.03-maintenance for a PowerPC based product and have creat=
+ed an SDK following the QTE example in the (very old) OE manual.=0A=
+=0A=
+The base SDK generation works fine.=0A=
+Adding target libraries etc also works fine.=0A=
+Adding host tools does not.=0A=
+=0A=
+What I'm trying to do is to add the cramfs tools to my SDK.=0A=
+=0A=
+I have created cramfs-sdk_1.1.bb:=0A=
+----------------=0A=
+inherit sdk=0A=
+require recipes/cramfs/cramfs_1.1.bb=0A=
+----------------=0A=
+=0A=
+And meta-toolchain-xxx.bb:=0A=
+----------------=0A=
+DESCRIPTION =3D "Xxx SDK meta recipe"=0A=
+LICENSE =3D "MIT"=0A=
+PR =3D "r0"=0A=
+=0A=
+TOOLCHAIN_TARGET_TASK =3D "task-xxx-toolchain-target"=0A=
+TOOLCHAIN_HOST_TASK =3D "task-xxx-toolchain-host"=0A=
+=0A=
+require recipes/meta/meta-toolchain.bb=0A=
+SDK_SUFFIX =3D "toolchain-xxx"=0A=
+----------------=0A=
+=0A=
+And task-xxx-toolchain-host.bb:=0A=
+----------------=0A=
+require recipes/tasks/task-sdk-host.bb=0A=
+=0A=
+DESCRIPTION =3D "Host packages for Xxx SDK"=0A=
+LICENSE =3D "MIT"=0A=
+PR =3D "r0"=0A=
+=0A=
+ALLOW_EMPTY =3D "1"=0A=
+=0A=
+RDEPENDS_${PN} +=3D "cramfs-sdk"=0A=
+----------------=0A=
+=0A=
+When building a cramfs-sdk package is created containing the correct binari=
+es in the correct location. The SDK is also created without errors but the =
+files from cramfs-sdk is just not there.=0A=
+=0A=
+I have looked around all log-files but the only suspicious thing I found is=
+ from log.do_package of cramfs-sdk:=0A=
+-------------=0A=
+NOTE: Couldn't find shared library provider for libz.so.1=0A=
+NOTE: Couldn't find shared library provider for libc.so.6=0A=
+NOTE: Couldn't find shared library provider for libz.so.1=0A=
+NOTE: Couldn't find shared library provider for libc.so.6=0A=
+-------------=0A=
+=0A=
+If this is the problem, what to do about it?=0A=
+If not, any other clues would be very appreciated.=0A=
+=0A=
+Thanks // Mats=0A=
 
 
