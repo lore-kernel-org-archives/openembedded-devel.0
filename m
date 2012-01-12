@@ -1,32 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RlLgB-0002bp-Pw for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jan 2012 15:30:59 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RlLYs-0001kN-4Q for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jan 2012 15:23:26 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2012 15:23:26 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1RlM63-0005cE-UJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Jan 2012 15:57:44 +0100
+Received: by eekd17 with SMTP id d17so590349eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2012 15:23:26 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 12 Jan 2012 06:50:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=sB4Gtwn/2BUTlZ5xiA+nRcaVSbYoYES/NSjdzppOfH8=;
+	b=gCX0n/37Ob2NOAYD/nIHA97NHalVNwv5InlHq4LvFxrVeTKsczR/kGfEEVlOp8ocVj
+	33DHyIEwrbdmyMECzVKAuta5sDKT18iO7Abp/hz9zLM0faHXK9WkXtDuqvulfawsdANZ
+	5uu4emGu1NEGD2UatGQUwCqvlbf4pxPygSFl8=
+Received: by 10.14.32.20 with SMTP id n20mr1490611eea.42.1326379812928;
+	Thu, 12 Jan 2012 06:50:12 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id t1sm20338700eeb.3.2012.01.12.06.50.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 12 Jan 2012 06:50:11 -0800 (PST)
+Date: Thu, 12 Jan 2012 15:49:59 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 12 Jan 2012 15:23:08 +0100
-Message-ID: <jemqcg$1q0$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-X-Enigmail-Version: 1.3.4
-Subject: meta-oe post holiday patchwork cleanup
+Message-ID: <20120112144959.GE3452@jama.jama.net>
+References: <jemqcg$1q0$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <jemqcg$1q0$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: meta-oe post holiday patchwork cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,76 +41,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2012 14:30:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Jan 2012 14:57:44 -0000
+X-Groupsio-MsgNum: 36485
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="k3qmt+ucFURmlhDS"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--k3qmt+ucFURmlhDS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-tl;dr version: get your subject-prefix right
+On Thu, Jan 12, 2012 at 03:23:08PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> tl;dr version: get your subject-prefix right
+>=20
+> Hi,
+>=20
+> I've cleaned up patchwork by marking every meta-oe patch as archived, min=
+us
+> the one Martin just sent.
+>=20
+> This means all the pending patches for meta-oe are listed here:
+>=20
+> http://patches.openembedded.org/project/oe/list/?q=3Dmeta-oe
+>=20
+> If your patches are missing, resend them using the method outlined in the
+> README of the respective meta-openembedded layer.
 
-Hi,
+I've checked mine and for some reason
+http://patchwork.openembedded.org/patch/19153/
+wasn't marked as Accepted by git hook (done that manually)
 
-I've cleaned up patchwork by marking every meta-oe patch as archived, minus
-the one Martin just sent.
+and [meta-oe] gpsd: disable xmlto
+http://patches.openembedded.org/patch/19165/
+was sent only few minutes before this email, so I guess it's still in
+queue.
 
-This means all the pending patches for meta-oe are listed here:
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-http://patches.openembedded.org/project/oe/list/?q=meta-oe
+--k3qmt+ucFURmlhDS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-If your patches are missing, resend them using the method outlined in the
-README of the respective meta-openembedded layer.
-
-I'll include the meta-oe one below, since too many patches still don't comply:
-
-- ---------------------------------------------------------------------------
-
-This layer depends on:
-
-URI: git://git.openembedded.org/openembedded-core
-branch: master
-revision: HEAD
-
-Send pull requests to openembedded-devel@lists.openembedded.org with
-'[meta-oe]' in the subject'
-
-When sending single patches, please use something like 'git send-email -1
-- --to openembedded-devel@lists.openembedded.org --subject-prefix meta-oe'
-
-You are encouraged to fork the mirror on github
-https://github.com/openembedded/meta-oe/ to share your patches, this is
-preferred for patch sets consisting of more than one patch. Other services
-like gitorious, repo.or.cz or self hosted setups are of course accepted as
-well, 'git fetch <remote>' works the same on all of them. We recommend
-github because it is free, easy to use, has been proven to be reliable and
-has a really good web GUI.
-
-Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
-
-- ---------------------------------------------------------------------------
-
-The most important thing of that is the subject prefix. I only read emails
-with a [meta-<foo>] subject prefix on oe-devel nowadays and I look at
-http://patches.openembedded.org/project/oe/list/?q=meta- more often than
-oe-devel.
-
-So: Get your subject-prefix right
-
-And kudos to Andreas, Martin and Otavio for getting their pull requests
-right pretty much all the time.
-
-regards,
-
-Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk8O7MoACgkQMkyGM64RGpFPUgCfQlCodSyFbuqPSfY6PVL2cPsR
-YE8AoIRcwaHFCyvULMbFSH3PeFY8Fjmj
-=cU1X
+iEYEARECAAYFAk8O8xcACgkQN1Ujt2V2gBzzUQCfbJHFIpbYsSihBEI/3TihWGhT
++uYAmgNuBomLsOoa70Go0dtoSwZSyY2w
+=LiN2
 -----END PGP SIGNATURE-----
 
-
-
+--k3qmt+ucFURmlhDS--
