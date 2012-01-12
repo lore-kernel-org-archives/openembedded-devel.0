@@ -1,34 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RlHMP-0007dH-Uw
+	(envelope-from <martin.jansa@gmail.com>) id 1RlHMS-0007c4-E0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jan 2012 10:54:17 +0100
-Received: by eekd17 with SMTP id d17so496708eek.6
+	Thu, 12 Jan 2012 10:54:20 +0100
+Received: by mail-ey0-f175.google.com with SMTP id o13so522504eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2012 01:46:44 -0800 (PST)
+	Thu, 12 Jan 2012 01:46:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=/D+9CPwIYrJwaSTFg+iXVuMGZrBwn2Lv5PFr1utiamg=;
-	b=AEGwAwF7vOSJi9ln8CdqhGUEAd0TAeijwSKqGyBfoJvti/+EBwEnAgssYPg4hVlhcn
-	g86e5Axd9qiZwkX5C2iEvgLTVNStp9o05CkxmajhitZxqX5nygg2SoI5/Xw65Y/sRaXE
-	xn3eXjy3ewhkt+ZFFmJnLMbVrea4ovRxQ8ouo=
-Received: by 10.14.40.79 with SMTP id e55mr1135272eeb.26.1326361604326;
-	Thu, 12 Jan 2012 01:46:44 -0800 (PST)
+	bh=zaPLAxuPXOUB/ID+Uqxku60drC9sMS96VyUshhLzujw=;
+	b=DhfapFRaUBmbgO17HaELB52Oi97QIlbuZaI+S+qZ9YCOXacG0GQXaVY00casP+03Ca
+	oRxL8AJMfRR2ePowlMls5QkX12dpVDWiOpAm00CNdym+iW72UIZTs2Bzx7dr5hKXYkq3
+	4rhThxTJ8TojsEAy1eAIgpBGAdGm/rT8HetkE=
+Received: by 10.213.31.76 with SMTP id x12mr671688ebc.45.1326361611865;
+	Thu, 12 Jan 2012 01:46:51 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id r2sm17414129eef.7.2012.01.12.01.46.43
+	by mx.google.com with ESMTPS id s16sm17466439eef.2.2012.01.12.01.46.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 Jan 2012 01:46:43 -0800 (PST)
+	Thu, 12 Jan 2012 01:46:50 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jan 2012 10:46:16 +0100
-Message-Id: <275bcc54a791b68489f89fd485f1678f269d01c0.1326361490.git.Martin.Jansa@gmail.com>
+Date: Thu, 12 Jan 2012 10:46:17 +0100
+Message-Id: <76bea3d19a9fa6f2c8a85ca0644c825a8ef415d2.1326361490.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.3
 In-Reply-To: <0796505f34620059cfed707c33f08b68f346937f.1326361490.git.Martin.Jansa@gmail.com>
 References: <0796505f34620059cfed707c33f08b68f346937f.1326361490.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1326361490.git.Martin.Jansa@gmail.com>
 References: <cover.1326361490.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 2/7] edje: add eina to DEPENDS, it depends on eina since r36623
+Subject: [meta-oe][meta-efl][PATCH 3/7] emotion: update LIC_FILES_CHKSUM, COPYING file was cleaned to match rest of EFL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2012 09:54:18 -0000
+X-List-Received-Date: Thu, 12 Jan 2012 09:54:20 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/edje.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ meta-efl/recipes-efl/efl/emotion_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/edje.inc b/meta-efl/recipes-efl/efl/edje.inc
-index 9a62156..743227c 100644
---- a/meta-efl/recipes-efl/efl/edje.inc
-+++ b/meta-efl/recipes-efl/efl/edje.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
--DEPENDS = "lua5.1 eet evas ecore embryo edje-native"
--DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native"
--DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native"
-+DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina"
-+DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
-+DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"
- # GPLv2 because of epp in PN-utils
- LICENSE = "MIT BSD GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
+diff --git a/meta-efl/recipes-efl/efl/emotion_svn.bb b/meta-efl/recipes-efl/efl/emotion_svn.bb
+index 8b197df..dd0adf2 100644
+--- a/meta-efl/recipes-efl/efl/emotion_svn.bb
++++ b/meta-efl/recipes-efl/efl/emotion_svn.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "The Enlightenment multimedia library"
+ LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
++LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
+ # we no longer build the libxine backend, since the gstreamer backend seems more promising
+ DEPENDS = "eet eeze evas ecore edje gstreamer gst-plugins-base"
+ PV = "0.2.0+svnr${SRCPV}"
 -- 
 1.7.8.3
 
