@@ -1,27 +1,31 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <trevorhickey3@gmail.com>) id 1RlQE8-0000Dj-GW
+	(envelope-from <pabigot@gmail.com>) id 1RlU9Z-0008SF-3Y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jan 2012 20:22:20 +0100
-Received: by qcol42 with SMTP id l42so399018qco.6
+	Fri, 13 Jan 2012 00:33:53 +0100
+Received: by wgbdt11 with SMTP id dt11so2419556wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2012 11:14:48 -0800 (PST)
+	Thu, 12 Jan 2012 15:26:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=OTFFqJ8AEGKFJiCQ7ErCjrIPZi6ip10w3E+icQBYciU=;
-	b=HmWfnGpEUWjkz3W3VE+KCzj8kG9ycZ3BEIcZOEwOo2/6mSPXAxLA8B8WjaTGbwZ0ED
-	H/2tjJDXPJS0ZRzENfsYK7cZpS2LEfaGmVUWPqCBdKAwRMjnOBLE3M0u3twz/Yx0tuiO
-	JKdHdITk+E6ljwptSEhNM5nyWV/5kZo5RNUJs=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=6RWYh1kgyQCnt2x+hZH5kKjuBTUhUVQoVrC1djR+6DA=;
+	b=kvxt/3UHO/Rj1AwL2nr7qVLfMV4l8Uqt4TqpDHCZDzrHTL9OYShIp2OT80c6IeOqqJ
+	0Rm0j73ZANjdagB3QgXWD2Ird/eR4MtVQ1RljZ7c5I/DvihmrdWn5meQAkFnRPbCGDC8
+	N+DA+X1nuUV406X6Rr8tIKtyZXHKcnYkSj3C8=
 MIME-Version: 1.0
-Received: by 10.224.183.81 with SMTP id cf17mr7497601qab.48.1326395688899;
-	Thu, 12 Jan 2012 11:14:48 -0800 (PST)
-Received: by 10.229.87.19 with HTTP; Thu, 12 Jan 2012 11:14:48 -0800 (PST)
-Date: Thu, 12 Jan 2012 14:14:48 -0500
-Message-ID: <CAHPA9DpV__ak869U+fDBh_eFnooTLZpxVKv3FOtG1aEKtHT-Hg@mail.gmail.com>
-From: Trevor Hickey <trevorhickey3@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: meta-toolchain-qte failing on gcc-cross-sdk_4.5.bb for mini6410
+Received: by 10.180.101.40 with SMTP id fd8mr10184993wib.15.1326410781326;
+	Thu, 12 Jan 2012 15:26:21 -0800 (PST)
+Sender: pabigot@gmail.com
+Received: by 10.216.155.209 with HTTP; Thu, 12 Jan 2012 15:26:21 -0800 (PST)
+In-Reply-To: <jemqcg$1q0$1@dough.gmane.org>
+References: <jemqcg$1q0$1@dough.gmane.org>
+Date: Thu, 12 Jan 2012 17:26:21 -0600
+X-Google-Sender-Auth: PmeQBNVFIE42IPVfo8TRbY-r3lQ
+Message-ID: <CAPOJ94ND1+KeABgs-v_m07L3pZDJg+7kReTKNEvLe27rngNGeA@mail.gmail.com>
+From: Peter Bigot <bigotp@acm.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-oe post holiday patchwork cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,68 +39,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2012 19:22:20 -0000
+X-List-Received-Date: Thu, 12 Jan 2012 23:33:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
+On Thu, Jan 12, 2012 at 8:23 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> tl;dr version: get your subject-prefix right
+>
+> Hi,
+>
+> I've cleaned up patchwork by marking every meta-oe patch as archived, minus
+> the one Martin just sent.
+>
+> This means all the pending patches for meta-oe are listed here:
+>
+> http://patches.openembedded.org/project/oe/list/?q=meta-oe
+>
+> If your patches are missing, resend them using the method outlined in the
+> README of the respective meta-openembedded layer.
+>
+> I'll include the meta-oe one below, since too many patches still don't comply:
+>
+> - ---------------------------------------------------------------------------
+>
+> This layer depends on:
+>
+> URI: git://git.openembedded.org/openembedded-core
+> branch: master
+> revision: HEAD
+>
+> Send pull requests to openembedded-devel@lists.openembedded.org with
+> '[meta-oe]' in the subject'
+>
+> When sending single patches, please use something like 'git send-email -1
+> - --to openembedded-devel@lists.openembedded.org --subject-prefix meta-oe'
+>
+> You are encouraged to fork the mirror on github
+> https://github.com/openembedded/meta-oe/ to share your patches, this is
+> preferred for patch sets consisting of more than one patch. Other services
+> like gitorious, repo.or.cz or self hosted setups are of course accepted as
+> well, 'git fetch <remote>' works the same on all of them. We recommend
+> github because it is free, easy to use, has been proven to be reliable and
+> has a really good web GUI.
+>
+> Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+>
+> - ---------------------------------------------------------------------------
+>
+> The most important thing of that is the subject prefix. I only read emails
+> with a [meta-<foo>] subject prefix on oe-devel nowadays and I look at
+> http://patches.openembedded.org/project/oe/list/?q=meta- more often than
+> oe-devel.
+>
+> So: Get your subject-prefix right
+>
+> And kudos to Andreas, Martin and Otavio for getting their pull requests
+> right pretty much all the time.
 
-I have been trying to bitbake meta-toolchain-qte for the mini6410 and have
-been stuck on this linker problem.
+While I appreciate that a blanket "throw it out; if they care they'll
+resend it" approach is an effective way to deal with the backlog
+resulting from an absence, I don't appreciate that in addition to the
+time I spent crafting patches to improve oe-core and submitting them
+(with the right prefix AFAIK), I am now expected to do so again.
+Further, the archived discussion of one of my patches included a
+request for clarification on how to address a licensing issue which
+was never answered, and which now presumably never will be.
 
-Here is my build configuration.
+This sort of practice discourages people (well, me at least) from
+contributing to this project.
 
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "8e7ed36"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "mini6410"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v2012.01"
-TARGET_FPU        = "hard"
+Peter
 
-I followed the instructions on
-http://www.openembedded.org/wiki/Getting_started to set up my OpenEmbedded
-environment.
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.11 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iEYEARECAAYFAk8O7MoACgkQMkyGM64RGpFPUgCfQlCodSyFbuqPSfY6PVL2cPsR
+> YE8AoIRcwaHFCyvULMbFSH3PeFY8Fjmj
+> =cU1X
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Here is the error:
-
-/home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
-error: emutls_s.o uses VFP register arguments, ./libgcc_s.so.1.tmp does not
-
-/home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
-failed to merge target specific data of file emutls_s.o
-
-/home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
-error:
-/home/balute/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r38.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/crtendS.o
-uses VFP register arguments, ./libgcc_s.so.1.tmp does not
-
-/home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
-failed to merge target specific data of file
-/home/balute/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r38.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi/./gcc/crtendS.o
-
-collect2: ld returned 1 exit status
-make[2]: *** [libgcc_s.so] Error 1
-make[2]: Leaving directory
-`/home/balute/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r38.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
-make[1]: *** [all-target-libgcc] Error 2
-make[1]: Leaving directory
-`/home/balute/tmp/work/i686-armv6-sdk-angstrom-linux-gnueabi/gcc-cross-sdk-4.5-r38.2+svnr170880/gcc-4_5-branch/build.i686-linux.arm-angstrom-linux-gnueabi'
-make: *** [all] Error 2
-FATAL: oe_runmake failed
-ERROR: Function do_compile failed
-
-Full output is here: http://pastebin.com/bbZtFQkp
-
-The "VFP register arguments" and "failed to merge target" errors occur
-repeatedly.
-
-I've tried adding -mfpu=vfp -mfloat-abi=softfp to the configuration, as
-well as --with-float=soft. I have tried everything else I can think of, but
-to no avail. I am new to using OpenEmbedded and could really use some help
-with this error.
-
-Trevor Hickey
 
