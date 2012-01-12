@@ -1,32 +1,31 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RlM63-0005cE-UJ
+	(envelope-from <otavio.salvador@gmail.com>) id 1RlNPe-0000OM-RP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jan 2012 15:57:44 +0100
-Received: by eekd17 with SMTP id d17so590349eek.6
+	Thu, 12 Jan 2012 17:22:02 +0100
+Received: by lami14 with SMTP id i14so1003214lam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2012 06:50:13 -0800 (PST)
+	Thu, 12 Jan 2012 08:14:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=sB4Gtwn/2BUTlZ5xiA+nRcaVSbYoYES/NSjdzppOfH8=;
-	b=gCX0n/37Ob2NOAYD/nIHA97NHalVNwv5InlHq4LvFxrVeTKsczR/kGfEEVlOp8ocVj
-	33DHyIEwrbdmyMECzVKAuta5sDKT18iO7Abp/hz9zLM0faHXK9WkXtDuqvulfawsdANZ
-	5uu4emGu1NEGD2UatGQUwCqvlbf4pxPygSFl8=
-Received: by 10.14.32.20 with SMTP id n20mr1490611eea.42.1326379812928;
-	Thu, 12 Jan 2012 06:50:12 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t1sm20338700eeb.3.2012.01.12.06.50.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 Jan 2012 06:50:11 -0800 (PST)
-Date: Thu, 12 Jan 2012 15:49:59 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120112144959.GE3452@jama.jama.net>
-References: <jemqcg$1q0$1@dough.gmane.org>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=0960vFdfmEuxemI0Fs7IpAaGTdDApXdK/3ZcGk87rG4=;
+	b=EwDGtDHFPa6lyfKHLCs1ameUNu31hHhGAQTAOHDzjH2lPT+uAvihHDRMd+rMNftFD0
+	huc+XU0OgR2imM7n68iQWQHgdeO6UJfUBw/r2fxx1Jwvhak8ZH5mOOC+0GxrpsOC7j1l
+	zGgDfxDgaXxKl1EoBSsLMGA/PhlJ53UCgFqjk=
 MIME-Version: 1.0
+Received: by 10.152.114.103 with SMTP id jf7mr2034255lab.22.1326384871358;
+	Thu, 12 Jan 2012 08:14:31 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.112.46.193 with HTTP; Thu, 12 Jan 2012 08:14:31 -0800 (PST)
 In-Reply-To: <jemqcg$1q0$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+References: <jemqcg$1q0$1@dough.gmane.org>
+Date: Thu, 12 Jan 2012 14:14:31 -0200
+X-Google-Sender-Auth: r5hoxvJKWXubNYsuAN60eRVsdD0
+Message-ID: <CAP9ODKpwcpjRgCtyovs4vT-SmJkJ4N9oKL9R2otgeRFbYAnXag@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: meta-oe post holiday patchwork cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,59 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2012 14:57:44 -0000
-X-Groupsio-MsgNum: 36485
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="k3qmt+ucFURmlhDS"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Jan 2012 16:22:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---k3qmt+ucFURmlhDS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jan 12, 2012 at 12:23, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-On Thu, Jan 12, 2012 at 03:23:08PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> tl;dr version: get your subject-prefix right
->=20
-> Hi,
->=20
-> I've cleaned up patchwork by marking every meta-oe patch as archived, min=
-us
-> the one Martin just sent.
->=20
-> This means all the pending patches for meta-oe are listed here:
->=20
-> http://patches.openembedded.org/project/oe/list/?q=3Dmeta-oe
->=20
-> If your patches are missing, resend them using the method outlined in the
-> README of the respective meta-openembedded layer.
+> And kudos to Andreas, Martin and Otavio for getting their pull requests
+> right pretty much all the time.
+>
 
-I've checked mine and for some reason
-http://patchwork.openembedded.org/patch/19153/
-wasn't marked as Accepted by git hook (done that manually)
+You're welcome :-D
 
-and [meta-oe] gpsd: disable xmlto
-http://patches.openembedded.org/patch/19165/
-was sent only few minutes before this email, so I guess it's still in
-queue.
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---k3qmt+ucFURmlhDS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8O8xcACgkQN1Ujt2V2gBzzUQCfbJHFIpbYsSihBEI/3TihWGhT
-+uYAmgNuBomLsOoa70Go0dtoSwZSyY2w
-=LiN2
------END PGP SIGNATURE-----
-
---k3qmt+ucFURmlhDS--
