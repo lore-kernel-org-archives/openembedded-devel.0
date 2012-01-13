@@ -1,52 +1,24 @@
-Received: from ch1ehsobe002.messaging.microsoft.com ([216.32.181.182]
-	helo=ch1outboundpool.messaging.microsoft.com)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1RlWfQ-0004Of-A9
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1Rlb0r-0006sN-Qu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jan 2012 03:14:56 +0100
-Received: from mail84-ch1-R.bigfish.com (10.43.68.245) by
-	CH1EHSOBE012.bigfish.com (10.43.70.62) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 13 Jan 2012 01:37:12 +0000
-Received: from mail84-ch1 (localhost [127.0.0.1])	by mail84-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 2BA1C4803CB	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jan 2012 01:37:12 +0000 (UTC)
-X-SpamScore: -1
-X-BigFish: VS-1(zz9371I98dKzz1202hzz8275dhz2dhc1ahc1bh2a8h668h839h8e2h8e3hbe9k)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail84-ch1 (localhost.localdomain [127.0.0.1]) by mail84-ch1
-	(MessageSwitch) id 1326418630107034_12268;
-	Fri, 13 Jan 2012 01:37:10 +0000 (UTC)
-Received: from CH1EHSMHS007.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.253])	by mail84-ch1.bigfish.com (Postfix) with ESMTP id
-	146D8420191 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jan 2012 01:37:10 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS007.bigfish.com
-	(10.43.70.7) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 13 Jan 2012 01:37:08 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.86]) by
-	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
-	14.01.0355.003; Thu, 12 Jan 2012 19:37:07 -0600
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] meta-oe post holiday patchwork cleanup
-Thread-Index: AQHM0Yc9G6PoW02HQEmcnDa15yGxrw==
-Date: Fri, 13 Jan 2012 01:37:06 +0000
-Message-ID: <CAEsOVNct8FK1g++FeA8Nkzeh8CXUi+cyC5GZpqQGkEOSK3etDg@mail.gmail.com>
-References: <jemqcg$1q0$1@dough.gmane.org>
-	<CAPOJ94ND1+KeABgs-v_m07L3pZDJg+7kReTKNEvLe27rngNGeA@mail.gmail.com>
-	<CAEsOVNevm9gf7xvXSyQBeuxA-GmSeco1FVTVejyEYLk_dtp76Q@mail.gmail.com>
-	<CAPOJ94NPC1CQJKSXTyyV93HTyaRrDYNRO7bFjXR+1Wd1oxJaBg@mail.gmail.com>
-In-Reply-To: <CAPOJ94NPC1CQJKSXTyyV93HTyaRrDYNRO7bFjXR+1Wd1oxJaBg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [99.47.177.27]
+	Fri, 13 Jan 2012 07:53:22 +0100
+Received: (qmail invoked by alias); 13 Jan 2012 06:45:49 -0000
+Received: from p5B0A1969.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.25.105]
+	by mail.gmx.net (mp008) with SMTP; 13 Jan 2012 07:45:49 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19mzdIXYLdmwU7VkLsHyR3OByv7tPqXMPzaq0Y4Bm
+	oV2qVJvHCn1gX1
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Jan 2012 07:46:58 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: meta-oe post holiday patchwork cleanup
+Message-Id: <201201130746.59009.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: [meta-mozilla] configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,22 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2012 02:14:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <56DC380A74AC47419F077F8D9A3B4D70@freescale.net>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Jan 2012 06:53:22 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 12, 2012 at 6:47 PM, Peter Bigot <bigotp@acm.org> wrote:
-> Maybe; the only one I can see in the archive is the one that has an
-> unanswered question. =A0If I request a patchwork account, would I be
-> able to do this? =A0(I don't have/use/know anything about pwclient.)
+Hi,
 
-Not sure how the OE patchworks is setup... but I think we have made
-the case for getting users the ability to do that though (I know we
-can do this on our internal patchworks setup) ;)
+FYI: after last update I wanted to give firefox a try and got
 
--M=
+| checking for cairo-tee >= 1.10... Package cairo-tee was not found in the pkg-
+config search path. Perhaps you should add the directory containing `cairo-
+tee.pc' to the PKG_CONFIG_PATH environment variable No package 'cairo-tee' found
+| configure: error: Library requirements (cairo-tee >= 1.10) not met; consider 
+adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a 
+nonstandard prefix so pkg-config can find them.
+| *** Fix above errors and then restart with               "make -f client.mk 
+build"
+| make[2]: *** [configure] Error 1
 
+Andreas
 
 
