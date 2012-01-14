@@ -1,35 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RlzXu-0001XF-96 for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Jan 2012 10:05:06 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RlzQd-0000CS-0A for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Jan 2012 09:57:35 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jan 2012 09:57:34 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rm5lF-00051j-JH
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Jan 2012 16:43:18 +0100
+Received: by vbbfc26 with SMTP id fc26so853717vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jan 2012 09:57:34 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 14 Jan 2012 09:57:21 +0100
-Message-ID: <jerg1f$kn1$1@dough.gmane.org>
-References: <20120113110213.AFF2110331@opal>
-	<201201131659.37622.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <201201131659.37622.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [oe-commits] Koen Kooi : libjpeg-turbo: initial add
+	Sat, 14 Jan 2012 07:35:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=pH+y0qBVXAwj75eZl8xfiPRWIx2bZ+uSLD5+/DsnT/E=;
+	b=IkqzFwtHIw35NNWsIUNiTrRzDTEuukr+QOm4ebg0FaKVEDBdZHSPhkh/m7Hi9Eo/ws
+	eiMbDmWg6mHF6hrSJ1sdjAn5JXbYhvSPzWZJae2aqXn6Ld27ppjV3IGjR1KQygVnolZH
+	By7oo74kysBzyOxZXbBcBeOmK+6jIgR3brZVc=
+MIME-Version: 1.0
+Received: by 10.52.26.206 with SMTP id n14mr93980vdg.51.1326555342217; Sat, 14
+	Jan 2012 07:35:42 -0800 (PST)
+Received: by 10.52.67.171 with HTTP; Sat, 14 Jan 2012 07:35:42 -0800 (PST)
+In-Reply-To: <CACW_hTbd97GapgqUkRzUfd=i7pPcjA=jKjfq4ZXSmXg-cyTWqA@mail.gmail.com>
+References: <CACW_hTbd97GapgqUkRzUfd=i7pPcjA=jKjfq4ZXSmXg-cyTWqA@mail.gmail.com>
+Date: Sat, 14 Jan 2012 16:35:42 +0100
+Message-ID: <CACW_hTbfyowYLekV=ujawq=uivgn5umyGVP7A6Osj8DbgArqew@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: #oe topic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jan 2012 09:05:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 14 Jan 2012 15:43:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Ping. Almost a week ago.
+No one with rights to change the topic ???
 
-Op 13-01-12 16:59, Andreas Müller schreef:
-> On Friday, January 13, 2012 12:02:13 PM git@git.openembedded.org wrote:
->> Module: meta-openembedded.git Branch: master Commit:
->> b026074a8d03e18790212ac5953c69fb36dbd3bc URL: 
->> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=b026074a8d
->>
->> 
-03e18790212ac5953c69fb36dbd3bc
->> 
->> Author: Koen Kooi <koen@dominion.thruhere.net> Date:   Fri Jan 13
->> 11:45:31 2012 +0100
->> 
->> libjpeg-turbo: initial add
->> 
->> If you're on x86 or ARM this will be a lot faster due to SIMD
->> optimizations
->> 
-> Another stupid question from my side: How can I make this replace
-> libjpeg?
+Best regards, Frans
 
-Build it manually and then opkg upgrade or set PREFERRED_PROVIDER_jpeg =
-"libjpeg-turbo". Angstrom will make it the default next week.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+2012/1/8 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-iEYEARECAAYFAk8RQ28ACgkQMkyGM64RGpFc4wCffRCBjxq3TAnKiMjh/aV4b33j
-YDsAn047Q8EvFa+wLo4TrwirqSz1ovNS
-=eGl5
------END PGP SIGNATURE-----
-
-
+> No idea who is can change the topic for #oe, but currently it reads:
+>
+> (04:27:30 PM) *The topic for #oe is: OpenEmbedded Developer Lounge | Web:
+> http://openembedded.org | Bugtracker: http://bugs.openembedded.org and
+> http://tinderbox.openembedded.org for compile issues | Repository:
+> git.openembedded.org/openembedded and repo.or.cz/r/openembedded.git as ro
+> mirror | This is not a distro or machine support channel*
+>
+> As it stands the bugtracker is taken offline permanently and tinderbox is
+> (temporary?) out of service.
+> It seems pointless to mention these in the topic
+>
+> Best regards, Frans
+>
 
