@@ -1,37 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RmMCn-0006pJ-Lu for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jan 2012 10:16:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RmM5U-0003XM-0K for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jan 2012 10:09:16 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jan 2012 10:09:15 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <andrea.adami@gmail.com>) id 1RmO32-00010C-U7
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jan 2012 12:14:53 +0100
+Received: by pbdv3 with SMTP id v3so1473472pbd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jan 2012 10:09:15 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 15 Jan 2012 03:07:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=auRdtlu2/T9U1g+BEC4pM/ila7yrs5hpAEw4H6ef5bY=;
+	b=ZmvzdnIOpzdPnWbDj/xyBnOEowJmSvqma3ZMp9HiCFECZUiPT1cN9Dg7eU8EU3tFan
+	FrRvKrKfjGDQb+Ruo+WU13Y6gWM3zzkDMCGHjtviNZysgnECanJATpR8khHEKrbLeCI0
+	Be8FU9XzjhDNpGhPeigzI5TC8YH6LPZVg2arA=
+MIME-Version: 1.0
+Received: by 10.68.191.97 with SMTP id gx1mr9867958pbc.126.1326625637468; Sun,
+	15 Jan 2012 03:07:17 -0800 (PST)
+Received: by 10.142.213.7 with HTTP; Sun, 15 Jan 2012 03:07:17 -0800 (PST)
+In-Reply-To: <1326585786-22118-3-git-send-email-andrea.adami@gmail.com>
+References: <1326585786-22118-1-git-send-email-andrea.adami@gmail.com>
+	<1326585786-22118-3-git-send-email-andrea.adami@gmail.com>
+Date: Sun, 15 Jan 2012 12:07:17 +0100
+Message-ID: <CAAQYJAuRHxOxFFpiF5w0gsrqgnJzJhQgC2OZCsZr1Qhr6MSyHw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 15 Jan 2012 10:09:03 +0100
-Message-ID: <jeu53e$cvt$1@dough.gmane.org>
-References: <20120113110213.AFF2110331@opal>
-	<201201131659.37622.schnitzeltony@gmx.de>
-	<jerg1f$kn1$1@dough.gmane.org>
-	<201201150322.22329.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <201201150322.22329.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [oe-commits] Koen Kooi : libjpeg-turbo: initial add
+Subject: Re: [meta-handheld] [PATCH 2/2] zaurus.inc: remove IMAGE_DEVICE_TABLES settings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,68 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jan 2012 09:16:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 15 Jan 2012 11:14:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, Jan 15, 2012 at 1:03 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
+e:
+> * Zaurus devices are now only using devtmpfs enabled kernels
+>
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+> =A0conf/machine/include/zaurus.inc | =A0 =A05 -----
+> =A01 files changed, 0 insertions(+), 5 deletions(-)
+>
+> diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zauru=
+s.inc
+> index ee24900..4419192 100644
+> --- a/conf/machine/include/zaurus.inc
+> +++ b/conf/machine/include/zaurus.inc
+> @@ -17,11 +17,6 @@ EXTRA_IMAGECMD_sum.jffs2 =3D "${EXTRA_IMAGECMD_jffs2}"
+>
+> =A0EXTRA_IMAGEDEPENDS +=3D "zaurus-installer"
+>
+> -IMAGE_DEVICE_TABLES =3D "files/device_table-minimal.txt \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 files/device_table_add-scsi=
+.txt \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 files/device_table_add-loop=
+.txt \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
+> -
+> =A0#########
+> =A0# xserver
+> =A0#########
+> --
+> 1.7.3.4
+>
 
-Op 15-01-12 03:22, Andreas Müller schreef:
-> On Saturday, January 14, 2012 09:57:21 AM Koen Kooi wrote:
->> Op 13-01-12 16:59, Andreas Müller schreef:
->>> Another stupid question from my side: How can I make this replace 
->>> libjpeg?
->> 
->> Build it manually and then opkg upgrade or set PREFERRED_PROVIDER_jpeg
->> = "libjpeg-turbo". Angstrom will make it the default next week.
->> 
-> In the first step I have set
-> 
-> PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
-> 
-> in my machine configuration and built image incremental and from
-> scratch.
-> 
-> In the second step after angstrom update (and native fix by Eric) I have
-> build image incremental.
-> 
-> In all cases the only jpeg library found in my image was:
-> 
-> libjpeg8_8c+1.2.0-r0_armv7a.ipk
+After this patch I'll test declaring
+IMAGE_DEVICE_TABLES =3D ""
 
-And that's how it should be:
+It remains to see if the /dev directory has to be manually added
+before.
 
-$ dpkg-deb -I libjpeg8_8c+1.2.0-r0_armv7a.ipk
- new debian package, version 2.0.
- size 81424 bytes: control archive= 489 bytes.
-     554 bytes,    15 lines      control
- Package: libjpeg8
- Version: 8c+1.2.0-r0
- Description: libjpeg-turbo version 8c+1.2.0-r0
-  libjpeg-turbo is a derivative of libjpeg that uses SIMD instructions
-  (MMX, SSE2, NEON) to accelerate baseline JPEG compression and
-  decompression
- Section: base
- Priority: optional
- Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
- License: BSD-3-Clause
- Architecture: armv7a
- OE: libjpeg-turbo
- Homepage: http://libjpeg-turbo.org/
- Depends: libc6 (>= 2.12)
- Source:
-svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;proto=https;module=trunk
+Regards
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk8Sl60ACgkQMkyGM64RGpGSaACfdOMvovSZ/eoclabkYkh3cXGQ
-kEYAnAhBifJ0F5FbMQ6JSOXvHhKgNMJb
-=jBcU
------END PGP SIGNATURE-----
-
+Andrea
 
 
