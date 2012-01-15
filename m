@@ -1,28 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RmPXg-0002hb-Eg
+Received: from mail-we0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <pabigot@gmail.com>) id 1RmRvW-00070q-0q
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jan 2012 13:50:36 +0100
-Received: (qmail invoked by alias); 15 Jan 2012 12:43:00 -0000
-Received: from p5B0A2462.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.36.98]
-	by mail.gmx.net (mp005) with SMTP; 15 Jan 2012 13:43:00 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18IiGAnw4oI6BQ4ZINdO5nKuuqUegtdxPIGcYVpCY
-	WpvNxzHl2eaS52
-From: Andreas =?utf-8?q?M=C3=BCller?= <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Jan 2012 13:44:16 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <20120113110213.AFF2110331@opal>
-	<201201150322.22329.schnitzeltony@gmx.de>
-	<jeu53e$cvt$1@dough.gmane.org>
-In-Reply-To: <jeu53e$cvt$1@dough.gmane.org>
+	Sun, 15 Jan 2012 16:23:22 +0100
+Received: by werf1 with SMTP id f1so461409wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jan 2012 07:15:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=WUNQCZRHkqo5lzVEgkSPJ6BiJ12lgXrXQ1oc2AVrQ3w=;
+	b=bWCEX7fOXR7Sv7ScE038FRdKQdBgTUqZi+xvQhnxeWwEsqgK00iBop8qsy+CgqI61S
+	b/XjxZU+mAzktxGIyYWAo3zvsa30HUzsda1Gm19AKj1X3k5CV8ls/1on9qKFeOU10JvJ
+	QHz5EIVcC0pKqbTRrs6SxM7YylPsy7aeEAv5k=
 MIME-Version: 1.0
-Message-Id: <201201151344.16594.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-commits] Koen Kooi : libjpeg-turbo: initial add
+Received: by 10.216.132.199 with SMTP id o49mr2110368wei.50.1326640546160;
+	Sun, 15 Jan 2012 07:15:46 -0800 (PST)
+Sender: pabigot@gmail.com
+Received: by 10.216.90.204 with HTTP; Sun, 15 Jan 2012 07:15:46 -0800 (PST)
+Date: Sun, 15 Jan 2012 09:15:46 -0600
+X-Google-Sender-Auth: RbqkL2A_bf1-NotUaqUpHGD-L3I
+Message-ID: <CAPOJ94OspH5H4G-=wQNqb=DdHratNwV3LHYnYo2BW43sbavk+g@mail.gmail.com>
+From: Peter Bigot <bigotp@acm.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: oe-core license description practices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,64 +37,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jan 2012 12:50:36 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 15 Jan 2012 15:23:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sunday, January 15, 2012 10:09:03 AM Koen Kooi wrote:
-> Op 15-01-12 03:22, Andreas M=C3=BCller schreef:
-> > On Saturday, January 14, 2012 09:57:21 AM Koen Kooi wrote:
-> >> Op 13-01-12 16:59, Andreas M=C3=BCller schreef:
-> >>> Another stupid question from my side: How can I make this replace
-> >>> libjpeg?
-> >>=20
-> >> Build it manually and then opkg upgrade or set PREFERRED_PROVIDER_jpeg
-> >> =3D "libjpeg-turbo". Angstrom will make it the default next week.
-> >=20
-> > In the first step I have set
-> >=20
-> > PREFERRED_PROVIDER_jpeg =3D "libjpeg-turbo"
-> >=20
-> > in my machine configuration and built image incremental and from
-> > scratch.
-> >=20
-> > In the second step after angstrom update (and native fix by Eric) I have
-> > build image incremental.
-> >=20
-> > In all cases the only jpeg library found in my image was:
-> >=20
-> > libjpeg8_8c+1.2.0-r0_armv7a.ipk
->=20
-> And that's how it should be:
->=20
-> $ dpkg-deb -I libjpeg8_8c+1.2.0-r0_armv7a.ipk
->  new debian package, version 2.0.
->  size 81424 bytes: control archive=3D 489 bytes.
->      554 bytes,    15 lines      control
->  Package: libjpeg8
->  Version: 8c+1.2.0-r0
->  Description: libjpeg-turbo version 8c+1.2.0-r0
->   libjpeg-turbo is a derivative of libjpeg that uses SIMD instructions
->   (MMX, SSE2, NEON) to accelerate baseline JPEG compression and
->   decompression
->  Section: base
->  Priority: optional
->  Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
->  License: BSD-3-Clause
->  Architecture: armv7a
->  OE: libjpeg-turbo
->  Homepage: http://libjpeg-turbo.org/
->  Depends: libc6 (>=3D 2.12)
->  Source:
-> svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;proto=3Dhtt=
-ps;m
-> odule=3Dtrunk
->=20
-Oops: libjpeg8_8c+1.2.0-r0_armv7a.ipk was created by libjpeg-turbo. Sorry f=
-or=20
-the noise
+I need a resolution to this question so I can complete the port of an
+oe-classic recipe to oe-core.
 
-Andreas
+http://www.openembedded.org/wiki/OpenEmbedded-Core states that the
+LICENSE field should be "as correct as possible (e.g. 'GPLv2', not
+just 'GPL')".  If the upstream package self-describes as "GPL", is it
+necessary that this be refined to a more specific version?  I again
+note there are numerous existing recipes that do not provide more than
+"GPL".
+
+Depending on the answer, I will resubmit with a license of GPL | HPND
+or will attempt to contact the upstream maintainer for clarification.
+
+Thanks.
+
+Peter
+
+On Sat, Dec 31, 2011 at 3:28 PM, Peter Bigot <bigotp@acm.org> wrote:
+> On Sat, Dec 31, 2011 at 1:40 PM, Koen Kooi <koen@dominion.thruhere.net> w=
+rote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 31-12-11 18:32, Peter A. Bigot schreef:
+>>> From: "Peter A. Bigot" <bigotp@acm.org>
+>>>
+>>
+>>> +++ b/meta-oe/recipes-devtools/python/python-mysqldb_1.2.3.bb @@ -0,0
+>>> +1,24 @@ +DESCRIPTION =3D "Python interface to MySQL" +HOMEPAGE =3D
+>>> "http://sourceforge.net/projects/mysql-python/" +SECTION =3D
+>>> "devel/python" +# "GPL or the original license based on Python 1.5.2's
+>>> license" +LICENSE =3D "GPL"
+>>
+>> That really needs a version specifier for the GPL version.
+>
+> I agree in theory, but what I quoted is what the author provided in
+> the README. =A0It's characterized as an unqualified "GPL" on SourceForge
+> and the Python Package Index. =A0There is no COPYING file in the
+> distribution, hence my use of the README as the license file. =A0I note
+> there are several dozen other recipes in meta-openembedded and
+> openembedded-core that have the same unqualified GPL license.
+>
+> Digging a little more, the only further source of guidance is _mysql.c
+> which has the following text in a header comment. =A0If =A0we assume the
+> other files are the same, I can update LICENSE to be GPLv2+. =A0The
+> alternative appears to be an HPND equivalent; I don't know how to
+> represent that, as I can't find any recipes that reference it.
+>
+> How do you want this resolved?
+>
+> This program is free software; you can redistribute it and/or modify
+> it under the terms of the GNU General Public License as published by
+> the Free Software Foundation; either version 2, or (at your option)
+> any later version. Alternatively, you may use the original license
+> reproduced below.
+>
+> Copyright 1999 by Comstar.net, Inc., Atlanta, GA, US.
+>
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0All Rights Reserved
+>
+> Permission to use, copy, modify, and distribute this software and its
+> documentation for any purpose and without fee is hereby granted,
+> provided that the above copyright notice appear in all copies and that
+> both that copyright notice and this permission notice appear in
+> supporting documentation, and that the name of Comstar.net, Inc.
+> or COMSTAR not be used in advertising or publicity pertaining to
+> distribution of the software without specific, written prior permission.
+>
+> COMSTAR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+> INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO
+> EVENT SHALL COMSTAR BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+> CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+> USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+> OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+> PERFORMANCE OF THIS SOFTWARE.
+>
+>
+>
+>> -----BEGIN PGP SIGNATURE-----
+>> Version: GnuPG v1.4.11 (Darwin)
+>> Comment: GPGTools - http://gpgtools.org
+>>
+>> iEYEARECAAYFAk7/ZTYACgkQMkyGM64RGpFc8wCcCU8ufb4FiToMuk0WYns9eAea
+>> +QkAoJd+xMnAHtk/Sf5eG2eoCusm8D/G
+>> =3DmaSn
+>> -----END PGP SIGNATURE-----
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
