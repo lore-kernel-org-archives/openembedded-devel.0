@@ -1,23 +1,37 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RmGAx-0002LK-7H
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jan 2012 03:50:31 +0100
-Received: (qmail invoked by alias); 15 Jan 2012 02:42:57 -0000
-Received: from p5B0A0A21.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.10.33]
-	by mail.gmx.net (mp028) with SMTP; 15 Jan 2012 03:42:57 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/GoPhkhGfGVI9O7uhlZDncIgprWcA4grbKYurMpn
-	dsi4lOUMv4kURk
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RmMCn-0006pJ-Lu for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jan 2012 10:16:49 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RmM5U-0003XM-0K for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jan 2012 10:09:16 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jan 2012 10:09:15 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jan 2012 10:09:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Jan 2012 03:44:12 +0100
-Message-Id: <1326595452-14323-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.4.4
-MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
-Subject: [meta-xfce] ristretto: update to 0.3.2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 15 Jan 2012 10:09:03 +0100
+Message-ID: <jeu53e$cvt$1@dough.gmane.org>
+References: <20120113110213.AFF2110331@opal>
+	<201201131659.37622.schnitzeltony@gmx.de>
+	<jerg1f$kn1$1@dough.gmane.org>
+	<201201150322.22329.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <201201150322.22329.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [oe-commits] Koen Kooi : libjpeg-turbo: initial add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,63 +45,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jan 2012 02:50:31 -0000
+X-List-Received-Date: Sun, 15 Jan 2012 09:16:49 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
----
- .../ristretto/files/add-locale_h.patch             |   13 -------------
- .../{ristretto_0.3.0.bb => ristretto_0.3.2.bb}     |    7 ++-----
- 2 files changed, 2 insertions(+), 18 deletions(-)
- delete mode 100644 meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
- rename meta-xfce/recipes-apps/ristretto/{ristretto_0.3.0.bb => ristretto_0.3.2.bb} (64%)
+Op 15-01-12 03:22, Andreas Müller schreef:
+> On Saturday, January 14, 2012 09:57:21 AM Koen Kooi wrote:
+>> Op 13-01-12 16:59, Andreas Müller schreef:
+>>> Another stupid question from my side: How can I make this replace 
+>>> libjpeg?
+>> 
+>> Build it manually and then opkg upgrade or set PREFERRED_PROVIDER_jpeg
+>> = "libjpeg-turbo". Angstrom will make it the default next week.
+>> 
+> In the first step I have set
+> 
+> PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
+> 
+> in my machine configuration and built image incremental and from
+> scratch.
+> 
+> In the second step after angstrom update (and native fix by Eric) I have
+> build image incremental.
+> 
+> In all cases the only jpeg library found in my image was:
+> 
+> libjpeg8_8c+1.2.0-r0_armv7a.ipk
 
-diff --git a/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch b/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
-deleted file mode 100644
-index a149500..0000000
---- a/meta-xfce/recipes-apps/ristretto/files/add-locale_h.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Upstream-Status: Applied in git repo
-----
----- a/src/util.c.old	2011-11-05 22:12:00.000000000 +0100
--+++ b/src/util.c	2012-01-03 16:18:21.435234961 +0100
--@@ -18,7 +18,7 @@
-- 
-- #include <config.h>
-- #include <glib.h>
---
--+#include <locale.h>
-- #include <exo/exo.h>
-- 
-- 
-diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.2.bb
-similarity index 64%
-rename from meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-rename to meta-xfce/recipes-apps/ristretto/ristretto_0.3.2.bb
-index 4fb28f0..3a167c1 100644
---- a/meta-xfce/recipes-apps/ristretto/ristretto_0.3.0.bb
-+++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.3.2.bb
-@@ -4,13 +4,10 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
--PR = "r1"
- 
- inherit xfce-app
- 
--SRC_URI += "file://add-locale_h.patch"
--
- RRECOMMENDS_${PN} += "tumbler"
- 
--SRC_URI[md5sum] = "124c4e98f837e35c728b0ff1d9078b1a"
--SRC_URI[sha256sum] = "a8bf0aa8a18af4ad8d53cbfc918bc92db51b5446cf7ff09e7b988fe5c7b986e4"
-+SRC_URI[md5sum] = "ab54fffe197c220bf26553c9a4f95658"
-+SRC_URI[sha256sum] = "a28c9e472c329b5f3136ebea887dec5ba93a37d5562b493633161392aff5545f"
--- 
-1.7.4.4
+And that's how it should be:
+
+$ dpkg-deb -I libjpeg8_8c+1.2.0-r0_armv7a.ipk
+ new debian package, version 2.0.
+ size 81424 bytes: control archive= 489 bytes.
+     554 bytes,    15 lines      control
+ Package: libjpeg8
+ Version: 8c+1.2.0-r0
+ Description: libjpeg-turbo version 8c+1.2.0-r0
+  libjpeg-turbo is a derivative of libjpeg that uses SIMD instructions
+  (MMX, SSE2, NEON) to accelerate baseline JPEG compression and
+  decompression
+ Section: base
+ Priority: optional
+ Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+ License: BSD-3-Clause
+ Architecture: armv7a
+ OE: libjpeg-turbo
+ Homepage: http://libjpeg-turbo.org/
+ Depends: libc6 (>= 2.12)
+ Source:
+svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;proto=https;module=trunk
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk8Sl60ACgkQMkyGM64RGpGSaACfdOMvovSZ/eoclabkYkh3cXGQ
+kEYAnAhBifJ0F5FbMQ6JSOXvHhKgNMJb
+=jBcU
+-----END PGP SIGNATURE-----
 
 
 
