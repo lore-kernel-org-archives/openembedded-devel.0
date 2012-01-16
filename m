@@ -1,35 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RmkkT-00057m-4L for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 12:29:13 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rmkd9-0001MY-4S for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 12:21:39 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2012 12:21:39 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1Rmopm-0000tK-Iz
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Jan 2012 16:50:58 +0100
+Received: by eekd17 with SMTP id d17so1570004eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2012 12:21:39 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 Jan 2012 07:43:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=pcbAJ4GrWN6AD/o00CjiQjnQYx1UAbb+g6rpNf55juk=;
+	b=cNaJ/n/FRDzR134gzMoAj5fVjbp6d3i5oEzf6RaNKbsfh1FD2kBOcAthd7IX3g+hcb
+	0yP3KQOvyCDfplhSwIQCMOw/EzsN7bemLjKg621ALAKf4bDAG0zOyLoLWNpYDm00qOjW
+	OjiiTug68NxMwSLwrfuYXQBKSadGPOV1vvqYQ=
+Received: by 10.213.105.76 with SMTP id s12mr3796100ebo.33.1326728602633;
+	Mon, 16 Jan 2012 07:43:22 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id a60sm73602281eeb.4.2012.01.16.07.43.20
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 16 Jan 2012 07:43:21 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 16 Jan 2012 12:21:28 +0100
-Message-ID: <jf117m$jek$1@dough.gmane.org>
-References: <1325061063-26942-1-git-send-email-b19537@freescale.com>
-	<CA452391058F6D4E9715FB2C29D9312A010CE056@039-SN2MPN1-023.039d.mgd.msft.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <CA452391058F6D4E9715FB2C29D9312A010CE056@039-SN2MPN1-023.039d.mgd.msft.net>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [PATCH v2 meta-oe] netperf: add version 2.4.4
+Date: Mon, 16 Jan 2012 16:43:12 +0100
+Message-Id: <1326728592-13903-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.3
+Subject: [meta-oe][PATCH] cairo: replace cairo_1.10.2.bb and .inc files with .bbappend, change cairomm to use .inc from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,146 +37,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2012 11:29:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Jan 2012 15:50:58 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* cairo-native is needed for pango-native
+  and PRINC is for slight packaging changes in oe-core version
 
-Op 16-01-12 10:34, Luo Zhenhua-B19537 schreef:
-> Hello,
-> 
-> Any comment on it?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/cairo/cairo-fpu.inc       |    6 ------
+ meta-oe/recipes-graphics/cairo/cairo.inc           |   19 -------------------
+ meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb     |   10 ----------
+ .../recipes-graphics/cairo/cairo_1.10.2.bbappend   |    2 ++
+ meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb   |    2 +-
+ 5 files changed, 3 insertions(+), 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/cairo/cairo-fpu.inc
+ delete mode 100644 meta-oe/recipes-graphics/cairo/cairo.inc
+ delete mode 100644 meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
+ create mode 100644 meta-oe/recipes-graphics/cairo/cairo_1.10.2.bbappend
 
-No, please rebase and resend
-
-> 
-> 
-> Best Regards,
-> 
-> Zhenhua
-> 
-> 
->> -----Original Message----- From: Luo Zhenhua-B19537 Sent: Wednesday,
->> December 28, 2011 4:31 PM To:
->> openembedded-devel@lists.openembedded.org Cc: Luo Zhenhua-B19537 
->> Subject: [PATCH v2 meta-oe] netperf: add version 2.4.4
->> 
->> From: Zhenhua Luo <b19537@freescale.com>
->> 
->> Signed-off-by: Zhenhua Luo <b19537@freescale.com> --- 
->> .../recipes-benchmark/netperf/files/cpu_set.patch  |   24 +++++++++ 
->> meta-oe/recipes-benchmark/netperf/files/init       |   51
->> ++++++++++++++++++++ .../recipes-benchmark/netperf/files/vfork.patch
->> |   26 ++++++++++ meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb |
->> 46 ++++++++++++++++++ 4 files changed, 147 insertions(+), 0
->> deletions(-)  create mode 100644 meta- 
->> oe/recipes-benchmark/netperf/files/cpu_set.patch create mode 100644
->> meta-oe/recipes-benchmark/netperf/files/init create mode 100644
->> meta-oe/recipes-benchmark/netperf/files/vfork.patch create mode 100644
->> meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
->> 
->> diff --git a/meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
->> b/meta- oe/recipes-benchmark/netperf/files/cpu_set.patch new file mode
->> 100644 index 0000000..b2b95c7 --- /dev/null +++
->> b/meta-oe/recipes-benchmark/netperf/files/cpu_set.patch @@ -0,0 +1,24
->> @@ +Index: netperf-2.4.4/src/netlib.c 
->> +=================================================================== 
->> +--- netperf-2.4.4.orig/src/netlib.c	2007-10-17 23:16:02.000000000
->> +0200 ++++ netperf-2.4.4/src/netlib.c	2008-12-03 17:56:32.000000000
->> +0100 +@@ -1988,10 +1988,15 @@ +      fall-back on what we had before,
->> which is to use just the size of +      an unsigned long. raj
->> 2006-09-14 */ + +-#if defined(__CPU_SETSIZE) +-#define
->> NETPERF_CPU_SETSIZE __CPU_SETSIZE -#define +NETPERF_CPU_SET(cpu,
->> cpusetp)  __CPU_SET(cpu, cpusetp) +-#define NETPERF_CPU_ZERO(cpusetp)
->> __CPU_ZERO (cpusetp) ++#if defined(CPU_SETSIZE) ++#define
->> NETPERF_CPU_SETSIZE CPU_SETSIZE #define NETPERF_CPU_SET(cpu, ++cpusetp)
->> CPU_SET(cpu, cpusetp) ++#define NETPERF_CPU_ZERO(cpusetp)      CPU_ZERO
->> (cpusetp) ++  typedef cpu_set_t netperf_cpu_set_t; #elif
->> defined(__CPU_SETSIZE) ++#define NETPERF_CPU_SETSIZE __CPU_SETSIZE
->> #define NETPERF_CPU_SET(cpu, ++cpusetp)  __CPU_SET (cpu, cpusetp) 
->> ++#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp) +
->> typedef cpu_set_t netperf_cpu_set_t; #else #define +
->> NETPERF_CPU_SETSIZE sizeof(unsigned long) diff --git
->> a/meta-oe/recipes-benchmark/netperf/files/init b/meta-oe/recipes- 
->> benchmark/netperf/files/init new file mode 100644 index
->> 0000000..7cc053a --- /dev/null +++
->> b/meta-oe/recipes-benchmark/netperf/files/init @@ -0,0 +1,51 @@ 
->> +#!/bin/sh +# +# +# Written by Miquel van Smoorenburg
->> <miquels@cistron.nl>. +# Modified for Debian GNU/Linux by Ian Murdock
->> <imurdock@gnu.org>. +# Modified for Debian by Christoph Lameter
->> <clameter@debian.org> # +Modified for openembedded by Bruno Randolf 
->> +<bruno.randolf@4g-systems.biz> + +PATH=/bin:/usr/bin:/sbin:/usr/sbin 
->> +DAEMON=/usr/sbin/netserver + +test -f $DAEMON || exit 0 + +case "$1"
->> in +  start) +		echo -n "Starting network benchmark server: netserver" 
->> +    start-stop-daemon -S -x $DAEMON > /dev/null 2>&1 +		echo "." +
->> ;; +  stop) +		echo -n "Stopping network benchmark server: netserver" +
->> start-stop-daemon -K -x $DAEMON +		echo "." +    ;; +  #reload) +    # 
->> +    # If the daemon can reload its config files on the fly +    # for
->> example by sending it SIGHUP, do it here. +    # +    # If the daemon
->> responds to changes in its config file +    # directly anyway, make
->> this a do-nothing entry. +    # +    # start-stop-daemon --stop
->> --signal 1 --verbose --exec $DAEMON +    # ;; +  restart|force-reload) 
->> +  # +  # If the "reload" option is implemented, move the
->> "force-reload" +  # option to the "reload" entry above. If not,
->> "force-reload" is +  # just the same as "restart". +  # +
->> start-stop-daemon -K -x $DAEMON +    sleep 1 +    start-stop-daemon -S
->> -x $DAEMON +    ;; +  *) +    echo "Usage: /etc/init.d/netperf
->> {start|stop|restart|force-reload}" +    exit 1 +    ;; +esac + +exit 0 
->> diff --git a/meta-oe/recipes-benchmark/netperf/files/vfork.patch
->> b/meta- oe/recipes-benchmark/netperf/files/vfork.patch new file mode
->> 100644 index 0000000..a40c96f --- /dev/null +++
->> b/meta-oe/recipes-benchmark/netperf/files/vfork.patch @@ -0,0 +1,26 @@ 
->> +--- netperf-2.4.4/src/netserver.c	2007-10-17 17:09:12.000000000 -0400 
->> ++++ netperf-2.4.4.new/src/netserver.c	2011-01-23 12:26:39.000000000
->> -0500 +@@ -567,7 +567,11 @@ +   fflush (stdin); +   fflush (stdout); +
->> fflush (stderr); ++#if defined(HAVE_FORK) +   switch (fork()) ++#else 
->> ++  switch (vfork()) ++#endif +     { +     case -1: +
->> perror("netperf server error"); +@@ -712,7 +716,11 @@ + #else +
->> signal(SIGCLD, SIG_IGN); + ++#if defined(HAVE_FORK) + 	  switch
->> (fork()) ++#else ++	  switch (vfork()) ++#endif + 	    { + 	    case
->> -1: + 	      /* something went wrong */ diff --git
->> a/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb b/meta- 
->> oe/recipes-benchmark/netperf/netperf_2.4.4.bb new file mode 100644 
->> index 0000000..6a3a81c --- /dev/null +++
->> b/meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb @@ -0,0 +1,46 @@ 
->> +DESCRIPTION="Network performance benchmark including tests for TCP,
->> UDP, sockets, ATM and more." +SECTION = "console/network" +HOMEPAGE =
->> "http://www.netperf.org/" +LICENSE = "GPLv2+" + +LIC_FILES_CHKSUM =
->> "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6" + 
->> +SRC_URI="ftp://ftp.netperf.org/netperf/archive/netperf-${PV}.tar.bz2
->> \ +         file://cpu_set.patch \ +         file://vfork.patch \ +
->> file://init" + +SRC_URI[md5sum] = "0e942f22864e601406a994420231075b" 
->> +SRC_URI[sha256sum] = 
->> "28e76af491ea3696885e4558ae2f5628a4b9ebdbefc2f1d9cf1b35db2813e497" + 
->> +inherit update-rc.d autotools + +S = "${WORKDIR}/netperf-${PV}" + +#
->> cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ 
->> +macros CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE" + 
->> +do_install() { +        install -d ${D}${sbindir} ${D}${bindir}
->> ${D}${sysconfdir}/init.d +        install -m 4755 src/netperf
->> ${D}${bindir} +        install -m 4755 src/netserver ${D}${sbindir} +
->> install -m 0755 ${WORKDIR}/init +${D}${sysconfdir}/init.d/netperf + +
->> # man +        install -d ${D}${mandir}/man1/ +        install -m 0644
->> doc/netserver.man ${D}${mandir}/man1/netserver.1 +        install -m
->> 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1 + +        # move
->> scripts to examples directory +        install -d
->> ${D}${docdir}/netperf/examples +        install -m 0644
->> doc/examples/*_script + ${D}${docdir}/netperf/examples/ + +        #
->> docs .. +        install -m 0644 COPYING ${D}${docdir}/netperf +
->> install -m 0644 Release_Notes ${D}${docdir}/netperf +        install -m
->> 0644 README ${D}${docdir}/netperf +        install -m 0644
->> doc/netperf_old.ps ${D}${docdir}/netperf } + 
->> +INITSCRIPT_NAME="netperf" +INITSCRIPT_PARAMS="defaults" -- 1.7.0.4
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk8UCDQACgkQMkyGM64RGpHofACgmAF+NuS+IOX3q/lmQL/Ya0zW
-hnQAoIL0UrAFgY8dfxKbUqtAzj2Gk8gx
-=odbb
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-graphics/cairo/cairo-fpu.inc b/meta-oe/recipes-graphics/cairo/cairo-fpu.inc
+deleted file mode 100644
+index bdaf789..0000000
+--- a/meta-oe/recipes-graphics/cairo/cairo-fpu.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-
+-def get_cairo_fpu_setting(bb, d):
+-	if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
+-		return "--disable-some-floating-point"
+-	return ""
+-
+diff --git a/meta-oe/recipes-graphics/cairo/cairo.inc b/meta-oe/recipes-graphics/cairo/cairo.inc
+deleted file mode 100644
+index 6157004..0000000
+--- a/meta-oe/recipes-graphics/cairo/cairo.inc
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SECTION = "libs"
+-DEPENDS = "virtual/libx11 pixman libsm libpng fontconfig libxrender glib-2.0"
+-DESCRIPTION = "Cairo graphics library"
+-LICENSE = "MPL LGPL"
+-
+-#check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points 
+-require cairo-fpu.inc
+-EXTRA_OECONF += "${@get_cairo_fpu_setting(bb, d)}"
+-
+-inherit autotools pkgconfig 
+-
+-BBCLASSEXTEND = "native"
+-
+-PACKAGES =+ "cairo-trace cairo-trace-dev libcairo-script-interpreter libcairo-gobject"
+-FILES_libcairo-gobject = "${libdir}/libcairo-gobject.so.*"
+-FILES_libcairo-script-interpreter = "${libdir}/libcairo-script-interpreter.so.*"
+-FILES_cairo-trace = "${bindir}/*trace ${libdir}/cairo/libcairo-trace.so.*"
+-FILES_cairo-trace-dev = "${libdir}/cairo/*"
+-
+diff --git a/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb b/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
+deleted file mode 100644
+index 9de75ed..0000000
+--- a/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require cairo.inc
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e73e999e0c72b5ac9012424fa157ad77"
+-
+-SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
+-"
+-SRC_URI[cairo.md5sum] = "f101a9e88b783337b20b2e26dfd26d5f"
+-SRC_URI[cairo.sha256sum] = "32018c7998358eebc2ad578ff8d8559d34fc80252095f110a572ed23d989fc41"
+-
+-
+diff --git a/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bbappend b/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bbappend
+new file mode 100644
+index 0000000..f02e129
+--- /dev/null
++++ b/meta-oe/recipes-graphics/cairo/cairo_1.10.2.bbappend
+@@ -0,0 +1,2 @@
++BBCLASSEXTEND = "native"
++PRINC := "${@int(PRINC) + 1}"
+diff --git a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
+index e4fec3c..dbde458 100644
+--- a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
++++ b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
+@@ -1,4 +1,4 @@
+-require cairo.inc
++require recipes-graphics/cairo/cairo.inc
+ 
+ DESCRIPTION = "C++ bindings for Cairo graphics library"
+ 
+-- 
+1.7.8.3
 
 
 
