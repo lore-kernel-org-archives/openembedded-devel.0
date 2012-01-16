@@ -1,32 +1,25 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RmtEu-0000Jk-TS
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Rmvl4-00055I-9i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 21:33:13 +0100
-Received: by vbnl22 with SMTP id l22so801997vbn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2012 12:25:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=XaQlHDJ37jPg+igq3GIc3cvsYfMVib1xfDpgrSYHE8s=;
-	b=l0rf1hWopDtsKbX1AaGnRy9bN6CNn1wG99/yIqZiV8F3pbYedcL2ihXLtbZN6sW/Iv
-	rmmtwVDPkOlqNNdqzN69o4+SjW391CxIqR0AO+gB3Wn8okk4TPLujBgiIqubG4aZjmD2
-	dlDkuliWtxwSq+fL86MXFdypnO164RB0SDwuU=
+	Tue, 17 Jan 2012 00:14:34 +0100
+Received: from [77.9.24.23] (helo=[192.168.1.184])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1RmwBQ-0006cE-EA
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Jan 2012 00:41:48 +0100
+Message-ID: <4F14AD8D.5050609@kernelconcepts.de>
+Date: Tue, 17 Jan 2012 00:06:53 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.23) Gecko/20110922 Lightning/1.0b2 Thunderbird/3.1.15
 MIME-Version: 1.0
-Received: by 10.52.26.199 with SMTP id n7mr7458957vdg.17.1326745535883; Mon,
-	16 Jan 2012 12:25:35 -0800 (PST)
-Received: by 10.52.67.171 with HTTP; Mon, 16 Jan 2012 12:25:35 -0800 (PST)
-In-Reply-To: <CA+M6bX=g79S88=-vwDDG9aYU4bydxdqHquASE-i12c5u_K-q4g@mail.gmail.com>
-References: <CACW_hTaxUWYmPmvczsBFNgaGBKMFyt7Pg40ZCr6JNppe3btScA@mail.gmail.com>
-	<CA+M6bXnz_B48oc4Nt_Cw-arQpR_nqx=HSLMba49+5giqGt4mSQ@mail.gmail.com>
-	<CACW_hTaEj8ogaR5NihAeGQsKu6kA0SXD4-BzgaoK02+eH_uGcg@mail.gmail.com>
-	<CA+M6bX=g79S88=-vwDDG9aYU4bydxdqHquASE-i12c5u_K-q4g@mail.gmail.com>
-Date: Mon, 16 Jan 2012 21:25:35 +0100
-Message-ID: <CACW_hTa9ayeHBLLQgiPOVzGWK5tQysYYSPJz6vyD9Wk5jo02Rg@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [2011.03-maintenance] commit 89cb863234616620d172984ff173f1d84ce4caa9
+References: <CAHPA9DpV__ak869U+fDBh_eFnooTLZpxVKv3FOtG1aEKtHT-Hg@mail.gmail.com>
+In-Reply-To: <CAHPA9DpV__ak869U+fDBh_eFnooTLZpxVKv3FOtG1aEKtHT-Hg@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: meta-toolchain-qte failing on gcc-cross-sdk_4.5.bb for mini6410
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,72 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2012 20:33:13 -0000
+X-List-Received-Date: Mon, 16 Jan 2012 23:14:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2012/1/16 Tom Rini <tom.rini@gmail.com>
+Hi,
 
-> On Mon, Jan 16, 2012 at 12:59 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
-> > 2012/1/16 Tom Rini <trini@kernel.crashing.org>
-> >
-> >> On Thu, Jan 12, 2012 at 12:33 AM, Frans Meulenbroeks
-> >> <fransmeulenbroeks@gmail.com> wrote:
-> >> > Dear all,
-> >> >
-> >> > I just accidently committed
-> >> > 89cb863234616620d172984ff173f1d84ce4caa9<
-> >>
-> http://cgit.openembedded.org/openembedded/commit/?h=2011.03-maintenance&id=89cb863234616620d172984ff173f1d84ce4caa9
-> >> >on
-> >> > the maintenance branch.
-> >> >
-> >> > My intention was to commit this to master and send a maintenance pull
-> >> > request, but as i did not notice that my branch was on
-> >> 2011.03-maintenance,
-> >> > I accidently pushed to that branch
-> >> > (actually somewhat surprizing me, as i did not expect to be able to
-> push
-> >> > against that branch).
-> >> >
-> >> > I'll leave it to the maintainers to decide on how to handle this.
-> >> > I would like to see this recipe in the maintenance branch too thoguh.
-> >> >
-> >> > The patch moves the recipe from the 2007_365 version to the 2010_365
-> >> > version.
-> >> > commit message:
-> >>
-> >> *kicks gmail for not marking this important*
-> >>
-> >> Well, how does this fit against the rest of the requirements for the
-> >> branch?  In other words, have you gotten all of these changes in
-> >> somewhere else so they won't be lost?
-> >>
-> >> Hi Tom,
-> >
-> > Not sure what you exactly mean.
-> > The change is also in oe classic master. oe-core does not carry this
-> recipe
-> > (and if I recall correctly meta-oe neither does)
-> > As it stands the patch simplifies the recipe as the uclibc specific patch
-> > is not needed any more (and hence is dropped).
-> >
-> > And maybe I caused confusion: the changes I listed in the commit message
-> > are the official changes between 2007_365 and 2010_365, not changes I
-> made
-> > to the code.
-> > In fact the recipe is pretty straightforward.
->
-> So long as the recipe changes exist somewhere else then yes, I'm OK
-> with this accident.  We don't currently have special hooks setup to
-> make the maintenance branch only writable by me and I'm not sure if
-> it's worth adding to our admins workload.
->
-> --
->
-I'll make sure it won't happen again (at least not by me).
-As I was unaware this could happen I did not really pay attention to the
-branch when pushing (actually I was under the impression I was on master)
+Am 12.01.2012 20:14, schrieb Trevor Hickey:
+> I have been trying to bitbake meta-toolchain-qte for the mini6410 and have
+> been stuck on this linker problem.
 
-Best regards, Frans
+> /home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
+> error: emutls_s.o uses VFP register arguments, ./libgcc_s.so.1.tmp does not
+
+that's an interesting one - I see the same problem here but have no found a
+solution yet. It seems that only ARMv6 architectures are affected since all
+other I build (ARMv4, ARMv5TE, ARMv7A, MIPSEL, SH4 and some PPC based ones do
+not seem to suffer from this).
+
+Greetings
+
+Florian
+
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
+
 
