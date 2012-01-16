@@ -1,24 +1,16 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rma9H-0001ZC-R1
+	(envelope-from <andrea.adami@gmail.com>) id 1RmaIf-0001qM-Au
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 01:10:08 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 15 Jan 2012 16:02:31 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="98842560"
-Received: from unknown (HELO helios.localnet) ([10.252.122.151])
-	by orsmga002.jf.intel.com with ESMTP; 15 Jan 2012 16:02:30 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jan 2012 00:02:29 +0000
-Message-ID: <8907813.DseLQ5t5Au@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <1326588627-28727-1-git-send-email-andrea.adami@gmail.com>
-References: <1326588627-28727-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-handheld] [PATCH 1/2] zaurus.inc: add settings for INITRAMFS_FSTYPES
+	Mon, 16 Jan 2012 01:19:51 +0100
+Received: from mizar.localdomain (87.5.74.30) by smtp206.alice.it (8.6.023.02)
+	id 4ECA607907BDF9E6; Mon, 16 Jan 2012 01:12:14 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Jan 2012 01:12:08 +0100
+Message-Id: <1326672731-7001-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld] [PATCH 0/3] [zaurus] rely on devtmpfs in kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +24,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2012 00:10:08 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 16 Jan 2012 00:19:51 -0000
 
-On Sunday 15 January 2012 01:50:26 Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  conf/machine/include/zaurus.inc |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
-> 
-> diff --git a/conf/machine/include/zaurus.inc
-> b/conf/machine/include/zaurus.inc index 4419192..7ff56fc 100644
-> --- a/conf/machine/include/zaurus.inc
-> +++ b/conf/machine/include/zaurus.inc
-> @@ -10,6 +10,7 @@ ERASEBLOCKSIZE_akita = "0x20000"
->  ERASEBLOCKSIZE_spitz = "0x20000"
-> 
->  IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2"
-> +INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
-> 
->  # kernel now supports favourlzo
->  EXTRA_IMAGECMD_jffs2 = "-p -l --eraseblock=${ERASEBLOCKSIZE}"
+* No need for static device tables when using devtmpfs.
+* The /dev directory must exist, though: kexecboot provides it
+* Bump to latest kexecboot to manage the empty /dev and
+* increase PR of linux-kexecboot to keep in synch.
 
-Both patches merged to meta-handheld master, thanks.
+Andrea Adami (3):
+  kexecboot_git: move to 8f1d3cc3d9c650c6a6c88f83071185d6ee0ef9c7
+  linux-kexecboot: bump INC_PR to follow kexecboot upgrade
+  zaurus.inc: don't install device nodes, rely on devtmpfs
 
-Cheers,
-Paul
+ conf/machine/include/zaurus.inc              |    2 ++
+ recipes-bsp/kexecboot/kexecboot-klibc_git.bb |    4 ++--
+ recipes-bsp/kexecboot/kexecboot.inc          |    3 ++-
+ recipes-bsp/kexecboot/kexecboot_git.bb       |    4 ++--
+ recipes-kernel/linux/linux-kexecboot.inc     |    2 +-
+ 5 files changed, 9 insertions(+), 6 deletions(-)
 
 -- 
+1.7.3.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
