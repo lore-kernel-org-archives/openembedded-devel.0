@@ -1,24 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1Rms8B-0006RR-Kc
+	(envelope-from <tom.rini@gmail.com>) id 1RmsBo-0006as-30
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 20:22:11 +0100
-Received: by wgbdr11 with SMTP id dr11so1797217wgb.24
+	Mon, 16 Jan 2012 20:25:57 +0100
+Received: by qcsp14 with SMTP id p14so1529288qcs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2012 11:14:32 -0800 (PST)
-Received: by 10.180.24.105 with SMTP id t9mr22362998wif.19.1326741271985;
-	Mon, 16 Jan 2012 11:14:31 -0800 (PST)
-Received: from localhost.localdomain ([89.121.200.106])
-	by mx.google.com with ESMTPS id g12sm35804037wiw.10.2012.01.16.11.14.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jan 2012 11:14:31 -0800 (PST)
-From: Andrei Gherzan <andrei@gherzan.ro>
+	Mon, 16 Jan 2012 11:18:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=mEQ9svr5S0ATL30f50pPQ30kGe+9E6I2t3HymQmrdX0=;
+	b=BU1QFfNwozElyK4zHZ9idbgCaycgrodBm/SRrZ/MAmPJrB73X65t8ca4g7VgOlex3d
+	2GKlf22eQS3AJAny+qyl6mskwRDjmc2so4A3fx99/wfdWQYFbinwOtGMBNasLoka7rmF
+	8DyD0V6nBQjYP7Ui1Tg1tKFSA0hqg1FhQ61os=
+MIME-Version: 1.0
+Received: by 10.229.106.35 with SMTP id v35mr4956823qco.84.1326741499537; Mon,
+	16 Jan 2012 11:18:19 -0800 (PST)
+Received: by 10.229.98.149 with HTTP; Mon, 16 Jan 2012 11:18:19 -0800 (PST)
+In-Reply-To: <873008982550291386@unknownmsgid>
+References: <4f13d827.8b7a0e0a.2808.ffffe10eSMTPIN_ADDED@mx.google.com>
+	<873008982550291386@unknownmsgid>
+Date: Mon, 16 Jan 2012 12:18:19 -0700
+Message-ID: <CA+M6bX=AwJFueoj1mGOkP2b7pFm14SSpOEMcbU1Ly4B_5v6LLg@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jan 2012 21:14:25 +0200
-Message-Id: <1326741265-29476-1-git-send-email-andrei@gherzan.ro>
-X-Mailer: git-send-email 1.7.5.4
-Cc: florcirel@gmail.com, Andrei Gherzan <andrei.gherzan@windriver.com>
-Subject: [PATCH] [META-OE] In LICENSE "&&" should be replaced with "&"
+Subject: Re: Python2.7.2 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,163 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2012 19:22:11 -0000
+X-List-Received-Date: Mon, 16 Jan 2012 19:25:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Andrei Gherzan <andrei.gherzan@windriver.com>
+On Mon, Jan 16, 2012 at 1:00 AM, Giuseppe Condorelli
+<giuseppe.condorelli@gmail.com> wrote:
+> Hi All, I've read the OE-Classic repository will be stopped and alla the
+> new work will be on OE-Core one. Can you confirm this? If so, I'll have to
+> move my work on a given layer in this new developing tree. Please let me
+> know.
 
-In this way meta-oe recipes will be parsed correctly in yocto.
+While the exact timetable isn't set in stone, yes, this is the long
+stated plan.  For work that's already in-flight, as it were, there'll
+be the 2011.03-maintenance branch for as long as there's interest but
+the oe-core model is where the project is heading for the future.
 
-Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
----
- .../recipes-gnome/bonobo/libbonoboui_2.24.3.bb     |    2 +-
- .../gnome-bluetooth/gnome-bluetooth_2.32.0.bb      |    2 +-
- .../gnome-menus/gnome-menus_2.30.5.bb              |    2 +-
- .../gnome-panel/gnome-panel3_3.0.2.bb              |    2 +-
- .../recipes-gnome/nautilus/nautilus3_3.0.2.bb      |    2 +-
- .../recipes-gnome/nautilus/nautilus_2.32.2.bb      |    2 +-
- meta-oe/recipes-connectivity/obex/openobex_1.5.bb  |    2 +-
- meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb   |    2 +-
- meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb   |    2 +-
- .../audiofile/audiofile_0.2.7.bb                   |    2 +-
- meta-oe/recipes-multimedia/jack/jack_0.121.0.bb    |    2 +-
- 11 files changed, 11 insertions(+), 11 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb
-index 5f519a5..cf37ccf 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb
-@@ -1,5 +1,5 @@
- SECTION = "x11/gnome/libs"
--LICENSE = "GPLv2 && LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-index f2273a7..80d7712 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "GNOME bluetooth manager"
--LICENSE = "GPLv2 && LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
-                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
- "
-diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-index 8d94e84..d4057c0 100644
---- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-+++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "GNOME menus"
- SECTION = "x11/gnome"
--LICENSE = "GPLv2 && LGPLv2"
-+LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-index f1d6b3d..37288e1 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "GNOME panel"
--LICENSE = "GPLv2 && LGPLv2 && GFDLv1.1"
-+LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
- 
- BPN = "gnome-panel"
- 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
-index b530cee..5dc4451 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
-@@ -2,7 +2,7 @@
- # Copyright (C) 2005, Advanced Micro Devices, Inc.  All Rights Reserved
- # Released under the MIT license (see packages/COPYING)
- 
--LICENSE="GPLv2 && LGPLv2"
-+LICENSE="GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426 \
-                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
- 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
-index e076ca1..fa136e1 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
-@@ -2,7 +2,7 @@
- # Copyright (C) 2005, Advanced Micro Devices, Inc.  All Rights Reserved
- # Released under the MIT license (see packages/COPYING)
- 
--LICENSE="GPLv2 && LGPLv2"
-+LICENSE="GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=7c0048536e43642a1f3a724c2909872b \
-                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
- 
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-index 66cc85d..d08420c 100644
---- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-+++ b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-@@ -3,7 +3,7 @@ Object Exchange (OBEX) protocol."
- HOMEPAGE = "http://openobex.triq.net"
- SECTION = "libs"
- DEPENDS = "virtual/libusb0 bluez4"
--LICENSE = "GPLv2 && LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
-                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
-                    "
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
-index 28fe4a1..b87b969 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.4.12.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
--LICENSE = "MIT && zlib"
-+LICENSE = "MIT & zlib"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
- 
- DEPENDS = "openssl"
-diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-index 8e09667..e581ded 100644
---- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-+++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "C++ bindings for the pango library."
- SECTION = "libs"
--LICENSE = "LGPLv2.1 && GPLv2"
-+LICENSE = "LGPLv2.1 & GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
-                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
- 
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.2.7.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.2.7.bb
-index a21bec6..5b0c740 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.2.7.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.2.7.bb
-@@ -4,7 +4,7 @@ WAVE, NeXT/Sun .snd/.au, Berkeley/IRCAM/CARL Sound File, Audio Visual \
- Research, Amiga IFF/8SVX, and NIST SPHERE."
- HOMEPAGE = "http://www.68k.org/~michael/audiofile/"
- SECTION = "libs"
--LICENSE = "LGPLv2 && GPLv2"
-+LICENSE = "LGPLv2 & GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
- PR = "r0"
-diff --git a/meta-oe/recipes-multimedia/jack/jack_0.121.0.bb b/meta-oe/recipes-multimedia/jack/jack_0.121.0.bb
-index f43b40a..ca98146 100644
---- a/meta-oe/recipes-multimedia/jack/jack_0.121.0.bb
-+++ b/meta-oe/recipes-multimedia/jack/jack_0.121.0.bb
-@@ -4,7 +4,7 @@ device, as well as allowing them to share audio between \
- themselves."
- SECTION = "libs/multimedia"
- 
--LICENSE = "GPLv2 && LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c030468238b2cf89925a57f2780396a7 \
-                     file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LGPL;md5=e77fe93202736b47c07035910f47974a \
 -- 
-1.7.5.4
-
+Tom
 
 
