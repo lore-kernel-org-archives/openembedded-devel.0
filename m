@@ -1,29 +1,31 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1RmsBo-0006as-30
+	(envelope-from <tom.rini@gmail.com>) id 1RmsDn-0006iE-Jw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jan 2012 20:25:57 +0100
-Received: by qcsp14 with SMTP id p14so1529288qcs.6
+	Mon, 16 Jan 2012 20:27:59 +0100
+Received: by qap15 with SMTP id 15so2403455qap.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2012 11:18:19 -0800 (PST)
+	Mon, 16 Jan 2012 11:20:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=mEQ9svr5S0ATL30f50pPQ30kGe+9E6I2t3HymQmrdX0=;
-	b=BU1QFfNwozElyK4zHZ9idbgCaycgrodBm/SRrZ/MAmPJrB73X65t8ca4g7VgOlex3d
-	2GKlf22eQS3AJAny+qyl6mskwRDjmc2so4A3fx99/wfdWQYFbinwOtGMBNasLoka7rmF
-	8DyD0V6nBQjYP7Ui1Tg1tKFSA0hqg1FhQ61os=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=at3ecZkTbk57MgPq1qlIOtvO+N2y2dkE5JcWw6FiFSU=;
+	b=fCH/ZRX3SnQhXHSifgXHFqlpgGry6gUUTFTgAssLSmQ7NGrCuB/6amPRfXv3vTan3O
+	kpmTAU95rfi8aMz+Wpc8Hm0OBZB1YiHDZqSmTMBpoft+3cIv5fJrAYyK4OZJ025ogbsR
+	ckl2un91ba+obO6q+ALTxpC9UvGJFA8c/1rmQ=
 MIME-Version: 1.0
-Received: by 10.229.106.35 with SMTP id v35mr4956823qco.84.1326741499537; Mon,
-	16 Jan 2012 11:18:19 -0800 (PST)
-Received: by 10.229.98.149 with HTTP; Mon, 16 Jan 2012 11:18:19 -0800 (PST)
-In-Reply-To: <873008982550291386@unknownmsgid>
-References: <4f13d827.8b7a0e0a.2808.ffffe10eSMTPIN_ADDED@mx.google.com>
-	<873008982550291386@unknownmsgid>
-Date: Mon, 16 Jan 2012 12:18:19 -0700
-Message-ID: <CA+M6bX=AwJFueoj1mGOkP2b7pFm14SSpOEMcbU1Ly4B_5v6LLg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+Received: by 10.224.111.6 with SMTP id q6mr16755787qap.65.1326741622011; Mon,
+	16 Jan 2012 11:20:22 -0800 (PST)
+Sender: tom.rini@gmail.com
+Received: by 10.229.98.149 with HTTP; Mon, 16 Jan 2012 11:20:21 -0800 (PST)
+In-Reply-To: <CACW_hTaxUWYmPmvczsBFNgaGBKMFyt7Pg40ZCr6JNppe3btScA@mail.gmail.com>
+References: <CACW_hTaxUWYmPmvczsBFNgaGBKMFyt7Pg40ZCr6JNppe3btScA@mail.gmail.com>
+Date: Mon, 16 Jan 2012 12:20:21 -0700
+X-Google-Sender-Auth: YqvEU_e_mQIBvoVWOaXhCW6398k
+Message-ID: <CA+M6bXnz_B48oc4Nt_Cw-arQpR_nqx=HSLMba49+5giqGt4mSQ@mail.gmail.com>
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Python2.7.2 compatibility
+Subject: Re: [2011.03-maintenance] commit 89cb863234616620d172984ff173f1d84ce4caa9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,20 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2012 19:25:57 -0000
+X-List-Received-Date: Mon, 16 Jan 2012 19:27:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Jan 16, 2012 at 1:00 AM, Giuseppe Condorelli
-<giuseppe.condorelli@gmail.com> wrote:
-> Hi All, I've read the OE-Classic repository will be stopped and alla the
-> new work will be on OE-Core one. Can you confirm this? If so, I'll have to
-> move my work on a given layer in this new developing tree. Please let me
-> know.
+On Thu, Jan 12, 2012 at 12:33 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Dear all,
+>
+> I just accidently committed
+> 89cb863234616620d172984ff173f1d84ce4caa9<http://cgit.openembedded.org/openembedded/commit/?h=2011.03-maintenance&id=89cb863234616620d172984ff173f1d84ce4caa9>on
+> the maintenance branch.
+>
+> My intention was to commit this to master and send a maintenance pull
+> request, but as i did not notice that my branch was on 2011.03-maintenance,
+> I accidently pushed to that branch
+> (actually somewhat surprizing me, as i did not expect to be able to push
+> against that branch).
+>
+> I'll leave it to the maintainers to decide on how to handle this.
+> I would like to see this recipe in the maintenance branch too thoguh.
+>
+> The patch moves the recipe from the 2007_365 version to the 2010_365
+> version.
+> commit message:
 
-While the exact timetable isn't set in stone, yes, this is the long
-stated plan.  For work that's already in-flight, as it were, there'll
-be the 2011.03-maintenance branch for as long as there's interest but
-the oe-core model is where the project is heading for the future.
+*kicks gmail for not marking this important*
+
+Well, how does this fit against the rest of the requirements for the
+branch?  In other words, have you gotten all of these changes in
+somewhere else so they won't be lost?
 
 -- 
 Tom
