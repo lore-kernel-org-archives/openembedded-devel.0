@@ -1,30 +1,24 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1Rn4Op-0006IB-RU
+	(envelope-from <andrei@gherzan.ro>) id 1RnBgL-0003Pp-9E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jan 2012 09:28:12 +0100
-Received: by iabz21 with SMTP id z21so2719782iab.6
+	Tue, 17 Jan 2012 17:14:46 +0100
+Received: by wgbdr11 with SMTP id dr11so2680149wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jan 2012 00:20:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=references:from:in-reply-to:mime-version:date:message-id:subject:to
-	:content-type; bh=5qu5tGTUboR7t6o8/j7r+JzeI5F5gZwe5z5v7XjFNOk=;
-	b=oM13k0OFxwjwJhjp7LSC27VwUGI6k8GLdrdSgwFJTsC5M34hNbStrOLOTZQb45fLzG
-	k1eiJDMQiYDDY/iBhqFqlQ7obMVWS2kcOy4NMAEJz8arMrf2buNFFgdspjXtT3frwQMl
-	xyzzqD450RXvP62YJyDAjVCtUYQgouIJxOeOY=
-Received: by 10.42.147.72 with SMTP id m8mr13238932icv.56.1326788434410; Tue,
-	17 Jan 2012 00:20:34 -0800 (PST)
-References: <4f13d827.8b7a0e0a.2808.ffffe10eSMTPIN_ADDED@mx.google.com>
-	<873008982550291386@unknownmsgid>
-	<CA+M6bX=AwJFueoj1mGOkP2b7pFm14SSpOEMcbU1Ly4B_5v6LLg@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-In-Reply-To: <CA+M6bX=AwJFueoj1mGOkP2b7pFm14SSpOEMcbU1Ly4B_5v6LLg@mail.gmail.com>
-Mime-Version: 1.0 (1.0)
-Date: Tue, 17 Jan 2012 09:20:34 +0100
-Message-ID: <8772233880060257226@unknownmsgid>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Python2.7.2 compatibility
+	Tue, 17 Jan 2012 08:07:04 -0800 (PST)
+Received: by 10.180.99.225 with SMTP id et1mr29567353wib.2.1326816424807;
+	Tue, 17 Jan 2012 08:07:04 -0800 (PST)
+Received: from localhost.localdomain ([89.121.200.106])
+	by mx.google.com with ESMTPS id ek1sm17608234wib.10.2012.01.17.08.07.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 17 Jan 2012 08:07:03 -0800 (PST)
+From: Andrei Gherzan <andrei@gherzan.ro>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Jan 2012 18:06:59 +0200
+Message-Id: <1326816419-1097-1-git-send-email-andrei@gherzan.ro>
+X-Mailer: git-send-email 1.7.5.4
+Cc: flocirel@gmail.com, Andrei Gherzan <andrei.gherzan@windriver.com>
+Subject: [PATCH] In LICENSE "&&" should be replaced with "&" [forgot .inc files]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,31 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jan 2012 08:28:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 17 Jan 2012 16:14:46 -0000
 
-Thanks Tom for the clarification.
+From: Andrei Gherzan <andrei.gherzan@windriver.com>
 
-Il giorno 16/gen/2012, alle ore 20:28, Tom Rini <tom.rini@gmail.com> ha scritto:
+In this way meta-oe recipes will be parsed correctly in yocto.
 
-> On Mon, Jan 16, 2012 at 1:00 AM, Giuseppe Condorelli
-> <giuseppe.condorelli@gmail.com> wrote:
->> Hi All, I've read the OE-Classic repository will be stopped and alla the
->> new work will be on OE-Core one. Can you confirm this? If so, I'll have to
->> move my work on a given layer in this new developing tree. Please let me
->> know.
->
-> While the exact timetable isn't set in stone, yes, this is the long
-> stated plan.  For work that's already in-flight, as it were, there'll
-> be the 2011.03-maintenance branch for as long as there's interest but
-> the oe-core model is where the project is heading for the future.
->
-> --
-> Tom
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+---
+ meta-gnome/recipes-gnome/bonobo/libbonobo.inc |    2 +-
+ meta-oe/recipes-core/glib-2.0/glibmm.inc      |    2 +-
+ meta-oe/recipes-devtools/swig/swig.inc        |    2 +-
+ meta-oe/recipes-gnome/gtk+/gtkmm.inc          |    2 +-
+ meta-oe/recipes-support/lvm2/lvm2.inc         |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+index b4f72d7..91ce737 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Bonobo CORBA interfaces library"
+-LICENSE = "GPLv2 && LGPLv2.1"
++LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
+ SECTION = "x11/gnome/libs"
+diff --git a/meta-oe/recipes-core/glib-2.0/glibmm.inc b/meta-oe/recipes-core/glib-2.0/glibmm.inc
+index 948f7c7..60e9bce 100644
+--- a/meta-oe/recipes-core/glib-2.0/glibmm.inc
++++ b/meta-oe/recipes-core/glib-2.0/glibmm.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "C++ bindings for the glib library."
+ HOMEPAGE = "http://www.gtkmm.org/"
+ SECTION = "libs"
+ 
+-LICENSE = "LGPLv2.1 && GPLv2"
++LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
+                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+ 
+diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
+index 65c562e..1c33e6e 100644
+--- a/meta-oe/recipes-devtools/swig/swig.inc
++++ b/meta-oe/recipes-devtools/swig/swig.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "SWIG - Simplified Wrapper and Interface Generator"
+ HOMEPAGE = "http://swig.sourceforge.net/"
+-LICENSE = "BSD && GPLv3"
++LICENSE = "BSD & GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e7807a6282784a7dde4c846626b08fc6 \
+                     file://LICENSE-GPL;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://LICENSE-UNIVERSITIES;md5=e0eaeeef7b2662c0c2d0d3c0b2509f75"
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm.inc b/meta-oe/recipes-gnome/gtk+/gtkmm.inc
+index 38a4a2b..b1a170a 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm.inc
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "C++ bindings for the GTK+ toolkit."
+ HOMEPAGE = "http://www.gtkmm.org/"
+ SECTION = "libs"
+ 
+-LICENSE = "LGPLv2.1 && GPLv2"
++LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
+                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+ 
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 781f597..7ac6a41 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -1,6 +1,6 @@
+ SECTION = "utils"
+ DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+-LICENSE = "GPLv2 && LGPLv2"
++LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+ INC_PR = "r0"
+-- 
+1.7.5.4
+
 
 
