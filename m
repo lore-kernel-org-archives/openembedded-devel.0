@@ -1,31 +1,31 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1RnShn-0007qk-6M
+	(envelope-from <pirobk@gmail.com>) id 1RnVmv-0002z6-JV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jan 2012 11:25:23 +0100
-Received: by eaao13 with SMTP id o13so1469609eaa.6
+	Wed, 18 Jan 2012 14:42:53 +0100
+Received: by bkar19 with SMTP id r19so1254999bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2012 02:17:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=wqyDDlrGq99Jv8DIvSClA3uJh2aZvVwePrgcXj56oL0=;
-	b=SxFZOasU0NsBfoh1noyFO5/qDbZApW4JtRlAs9al0alelXr9cmcyXwJNhhcRbTZrC0
-	4k5AMEee0YuIck6LnIaRbgBH3YTVpq8GYMyKevB/VyJpr5UvZClZaMePttwpeUKGXFFF
-	kcjladKC8sz63u1Ad+Jt73zAGfBBbRZs4mumc=
-Received: by 10.213.13.217 with SMTP id d25mr4394609eba.36.1326881865177;
-	Wed, 18 Jan 2012 02:17:45 -0800 (PST)
-Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
-	[95.222.156.232])
-	by mx.google.com with ESMTPS id u53sm97933185eeu.6.2012.01.18.02.17.44
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 Jan 2012 02:17:44 -0800 (PST)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Jan 2012 11:17:01 +0100
-Message-Id: <1326881821-19006-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [PATCH] [meta-gnome] Gtk+3: Fix cups related error in configure
+	Wed, 18 Jan 2012 05:35:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=0OuKoIek/xSZ7Icx80exwFLEJ5L7+gPE1fMPLP610EA=;
+	b=TB5Xk2JEHc/plO6Ajbe9dEOYjotHpFb1BYK47DmN3/64cJkC3wfrOdrPIOL6oxEtJN
+	k1QLj1xhjWYSbZjArA4RgdQjlYWVIw2YSm/EqwCoso/fDv7iFfS1/RRlxzc47ARmzyHM
+	pGCWYdUMASsrov39BMJs1wwCUOdZhFcArOrNI=
+Received: by 10.205.127.65 with SMTP id gz1mr8886602bkc.12.1326893715286;
+	Wed, 18 Jan 2012 05:35:15 -0800 (PST)
+Received: from [192.168.1.155] (pD9F8D1FD.dip.t-dialin.net. [217.248.209.253])
+	by mx.google.com with ESMTPS id
+	ek9sm24129764bkb.10.2012.01.18.05.35.14 (version=SSLv3 cipher=OTHER);
+	Wed, 18 Jan 2012 05:35:14 -0800 (PST)
+Message-ID: <4F16CA98.70503@gmail.com>
+Date: Wed, 18 Jan 2012 14:35:20 +0100
+From: =?ISO-8859-1?Q?Bj=F6rn_Krombholz?= <pirobk@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20120104 Icedove/8.0
+MIME-Version: 1.0
+To: ML openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Extending meta-toolchain-*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 10:25:23 -0000
+X-List-Received-Date: Wed, 18 Jan 2012 13:42:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-This patch will disable cups for gtk+3.
-The issue could be resolved by adding cups to the DEPENDS,
-however in gtk+2 cups is also disabled, so fixing it here in the same way seems appropriate.
+Hi,
 
-Error message is:
-| checking for cups/cups.h... no
-| configure: error: *** Sorry, cups-config present but cups/cups.h missing.
+I need someone to point me in the right direction.
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+I'm trying to extend meta-toolchain-qte to generate an external 
+toolchain for QTembedded with QWT.
 
-diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
-index 83a0c6d..a08fb00 100644
---- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
-+++ b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
-@@ -30,6 +30,7 @@ EXTRA_OECONF += " \
-                  --enable-gtk2-dependency \
-                  --disable-glibtest \
-                  --enable-modules \
-+                 --disable-cups \
- "
- 
- # Make a symlink to our libtool
--- 
-1.7.5.4
+What are the required steps to add any libraries/headers to toolchains?
 
+I tried adding libqwt-dev to the RDEPENDS of the meta package itself or 
+the affected task-qte-toolchain-target.bb.
+
+This triggers a build of qwt when bitbaking meta-toolchain-qte, but the 
+resulting toolchain tarball doesn't contain anything qwt related.
+
+Any hints?
+
+
+Thx
+Björn
 
 
