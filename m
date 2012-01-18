@@ -1,33 +1,36 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RnY7x-0006oP-M6
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1RnZWs-0004tw-MY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jan 2012 17:12:45 +0100
-Received: by eekd41 with SMTP id d41so208607eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2012 08:05:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GkOY71E2RURLnrgdNNNArGQWTMXT6uqeFEdqGL6mniI=;
-	b=RI3P2HOMMm4gFhUIKy2dQg2gWDfIyvmYYoVifKCFIBB5QLj1Nnu/CZEhpXxg83RAdh
-	p/hwgF44kEKzLjp/Vz9vB6JtCkY0ZyHmvnHAjylE047UppdToGKu2lehkOoGCSa55pB1
-	0JQO7luYfl8vPPitEW7+NNhfABtSGEYpNOa4I=
-Received: by 10.14.11.97 with SMTP id 73mr380906eew.2.1326902707294;
-	Wed, 18 Jan 2012 08:05:07 -0800 (PST)
-Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
-	y12sm101227308eeb.11.2012.01.18.08.05.05
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 Jan 2012 08:05:05 -0800 (PST)
-Date: Wed, 18 Jan 2012 17:05:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120118160503.GA18110@jama.jama.net>
-References: <ED3E0BCACD909541BA94A34C4A164D4C402355CD@post.tritech.se>
+	Wed, 18 Jan 2012 18:42:34 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id EA50D11001B1;
+	Wed, 18 Jan 2012 18:34:57 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 70DF9110018B;
+	Wed, 18 Jan 2012 18:34:56 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+Received: from rhein.familie-heinold.de (g230119221.adsl.alicedsl.de
+	[92.230.119.221]) by mail.familie-heinold.de (Postfix) with ESMTPA;
+	Wed, 18 Jan 2012 18:34:56 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 249523C4B0; Wed, 18 Jan 2012 18:34:55 +0100 (CET)
+Date: Wed, 18 Jan 2012 18:34:55 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Message-ID: <20120118173454.GA27993@mail.familie-heinold.de>
+References: <1326645768-13447-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C402355CD@post.tritech.se>
+In-Reply-To: <1326645768-13447-1-git-send-email-eric@eukrea.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [2011.03-maintenance] Packaged staging -- dependency problem
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java 1/2] openjdk-6-6b24: fix icedtea-launcher-stdc++.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,105 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 16:12:45 -0000
-X-Groupsio-MsgNum: 36562
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="envbJBWh7q8WU6mo"
-Content-Disposition: inline
-
---envbJBWh7q8WU6mo
+X-List-Received-Date: Wed, 18 Jan 2012 17:42:34 -0000
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 18, 2012 at 03:51:37PM +0000, Mats K=E4rrman wrote:
-> Well, now at least it pulls packages from the mirror instead of building =
-them but there is a but.
+On Sun, Jan 15, 2012 at 05:42:47PM +0100, Eric B=E9nard wrote:
+> without this fix I get (on a FC16) :
+> | Checking patches/icedtea-launcher-stdc++.patch
+> | /usr/bin/patch: **** rejecting absolute target file name: /openjdk/ho=
+tspot/make/linux/makefiles/launcher.make
+> | ERROR patch patches/icedtea-launcher-stdc++.patch FAILED!
 >=20
-> When building glib-2.0, do_configure uses autotools and the configure scr=
-ipt of glib-2.0 wants to use sed from sysroots. sed-native exists in the mi=
-rror but has not been installed in sysroots. I am uncertain where the depen=
-dency on sed (or sed-native?) is missing/should be added. In the glib recip=
-e or for autotools class? (this time i looked in master but found no releva=
-nt patches.)
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  .../openjdk-6-6b24/icedtea-launcher-stdc++.patch   |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 >=20
-> Any advice?
+> diff --git a/recipes-core/openjdk/openjdk-6-6b24/icedtea-launcher-stdc+=
++.patch b/recipes-core/openjdk/openjdk-6-6b24/icedtea-launcher-stdc++.pat=
+ch
+> index ebe34e7..b97745d 100644
+> --- a/recipes-core/openjdk/openjdk-6-6b24/icedtea-launcher-stdc++.patch
+> +++ b/recipes-core/openjdk/openjdk-6-6b24/icedtea-launcher-stdc++.patch
+> @@ -1,7 +1,7 @@
+>  Index: openjdk/hotspot/make/linux/makefiles/launcher.make
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>  --- openjdk/hotspot/make/linux/makefiles/launcher.make	2011-12-20 10:3=
+3:37.000000000 +0100
+> -+++ /openjdk/hotspot/make/linux/makefiles/launcher.make	2011-12-20 10:=
+37:54.055022618 +0100
+> ++++ openjdk/hotspot/make/linux/makefiles/launcher.make	2011-12-20 10:3=
+7:54.055022618 +0100
+>  @@ -51,7 +51,7 @@
+>   else
+>     LAUNCHER.o                 =3D launcher.o
+> --=20
+> 1.7.7.5
 >=20
-> BR // Mats
->=20
-> ________________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
-el-bounces@lists.openembedded.org] on behalf of Mats K=E4rrman [Mats.Karrma=
-n@tritech.se]
-> Sent: Wednesday, January 18, 2012 3:57 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [2011.03-maintenance] Packaged staging, anyone?
->=20
-> Hi Tom,
->=20
-> Thanks for answering.
-> I just found the fix in master branch (sorry for not looking there first)=
-, commit       1aeea48674d3e831a5830e43ad4fdcfab295ebd2 on /classes/package=
-d-staging.bbclass.
-> Apparently you helped fixing this issue then :)
-> I have tried the patch and it works for me so I will send you a pull-requ=
-est shortly.
->=20
-> BR // Mats
-> ________________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
-el-bounces@lists.openembedded.org] on behalf of Tom Rini [tom.rini@gmail.co=
-m]
-> Sent: Wednesday, January 18, 2012 3:49 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [2011.03-maintenance] Packaged staging, anyone?
->=20
-> On Wed, Jan 18, 2012 at 2:33 AM, Mats K=E4rrman <Mats.Karrman@tritech.se>=
- wrote:
-> > Hi,
-> >
-> > I'm trying to set up packaged staging for my project. I found some inst=
-ructions in the packaged-staging.bb file header and some info in the mailin=
-g list that I followed but it don't seem to work. Everything is built from =
-scratch anyway -- no error messages.
-> [snip]
->=20
-> After populating the pstage mirror directory, when you do bitbake -e
-> somepkg (where somepkg is in the pstage mirror) do the PSTAGE*
-> variables expand such that the file it's looking for as a pstage
-> exist?  What if you use python or some other trivial http server and
-> try and use the mirror that way?  I seem to recall I had an issue with
-> PSTAGE_MIRROR and file URIs but I forget if there was a good solution
-> to it (or if making use of python -m SImpleHTTPServer was the
-> solution).
->=20
-> --
-> Tom
 
-Hi Mats,
+Thanks Eric,
 
-can you please setup your mail client to prefix the text you're replying
-to with something (e.g. '> ') and write your reply under relevant parts
-of previous discussion?
+Patch is apllied, but I still wonder why I didnt saw it here.
 
-In current format it's hard to see what was written by Tom and what's
-written by you.
+Bye Henning
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---envbJBWh7q8WU6mo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8W7a8ACgkQN1Ujt2V2gByZ+ACfU7bjQNINIxfrnn0lW4nbKm5W
-BcUAoKRztfsAjcfOk/YQfC0VjMhqivkG
-=LnAK
------END PGP SIGNATURE-----
-
---envbJBWh7q8WU6mo--
