@@ -1,37 +1,29 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1RnZYE-00066W-53
+	(envelope-from <tom.rini@gmail.com>) id 1Rnand-0005UU-2k
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jan 2012 18:43:58 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B440211001B1;
-	Wed, 18 Jan 2012 18:36:21 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id EF0D4110018B;
-	Wed, 18 Jan 2012 18:36:20 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-Received: from rhein.familie-heinold.de (g230119221.adsl.alicedsl.de
-	[92.230.119.221]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Wed, 18 Jan 2012 18:36:20 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 320023C4B0; Wed, 18 Jan 2012 18:36:20 +0100 (CET)
-Date: Wed, 18 Jan 2012 18:36:20 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Message-ID: <20120118173619.GB27993@mail.familie-heinold.de>
-References: <1326645768-13447-1-git-send-email-eric@eukrea.com>
-	<1326645768-13447-2-git-send-email-eric@eukrea.com>
+	Wed, 18 Jan 2012 20:03:57 +0100
+Received: by qcsp14 with SMTP id p14so2731737qcs.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Jan 2012 10:56:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=hyGGxlSnborSe9EIIqZODVekrIYQBno5Isqd7rWDb6c=;
+	b=tYcj8KnOkNquQF2LZbNHERjF73FbXW1fO1Nw+3OvnNhCuftYe4qtMNtdXBvfI5bUeY
+	KcVY472Os0DifaAhD7msT7cCdcbvO8vuOtfD51hDddV57M+ABlINEkNgA77rTtB19vWa
+	GVjZEW2tj4zc/qaJYPWUjJa/6hVOevpCdU1iw=
 MIME-Version: 1.0
-In-Reply-To: <1326645768-13447-2-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java 2/2] README: add a note concerning libstdc++-static
+Received: by 10.229.76.91 with SMTP id b27mr9383726qck.124.1326912978051; Wed,
+	18 Jan 2012 10:56:18 -0800 (PST)
+Received: by 10.229.98.149 with HTTP; Wed, 18 Jan 2012 10:56:17 -0800 (PST)
+In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C402355CD@post.tritech.se>
+References: <ED3E0BCACD909541BA94A34C4A164D4C402355CD@post.tritech.se>
+Date: Wed, 18 Jan 2012 11:56:17 -0700
+Message-ID: <CA+M6bX=4QiWzDSe3Vka79cVzk+4_g2+3ZosJyTd1mPvfrUDn9Q@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance] Packaged staging -- dependency problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 17:43:58 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Jan 2012 19:03:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 15, 2012 at 05:42:48PM +0100, Eric B=E9nard wrote:
-> which is required for icedtea6-native
->=20
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> ---
->  README |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
->=20
-> diff --git a/README b/README
-> index 926e5bf..803b4de 100644
-> --- a/README
-> +++ b/README
-> @@ -18,6 +18,8 @@ PREFERRED_VERSION_cacaoh-native =3D "0.99.3"
->  PREFERRED_VERSION_openjdk-6-jre =3D "6b18-1.8.11"
->  PREFERRED_VERSION_icedtea6-native =3D "1.8.11"
-> =20
-> +Please note that libstdc++ static is needed on your host to compile ic=
-edtea6-native
-> +(install libstdc++-static on a Fedora).
-> =20
->  Send pull requests to openembedded-devel@lists.openembedded.org
-> =20
-> --=20
+On Wed, Jan 18, 2012 at 8:51 AM, Mats K=E4rrman <Mats.Karrman@tritech.se> w=
+rote:
+> Well, now at least it pulls packages from the mirror instead of building =
+them but there is a but.
+>
+> When building glib-2.0, do_configure uses autotools and the configure scr=
+ipt of glib-2.0 wants to use sed from sysroots. sed-native exists in the mi=
+rror but has not been installed in sysroots. I am uncertain where the depen=
+dency on sed (or sed-native?) is missing/should be added. In the glib recip=
+e or for autotools class? (this time i looked in master but found no releva=
+nt patches.)
+>
+> Any advice?
 
-I applied this patch. Jamvm and cacao seems to be stable now, so maybe we
-can compile the target openjdk with them again.
+I think you're going to find that without a lot of additional work,
+packaged-staging isn't going to be helpful beyond you and your
+machine.  A lot of the lessons learned in making packaged-staging work
+better are found in sstate-cache in oe-core.  The easiest fix here is
+to add ASSUME_PROVIDED +=3D "sed-native" to your local.conf / similar so
+that sed-native isn't built and your host one is used.
 
-Bye Henning
+--=20
+Tom
 
 
