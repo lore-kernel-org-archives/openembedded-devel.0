@@ -1,31 +1,30 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pirobk@gmail.com>) id 1RnVmv-0002z6-JV
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RnWJ4-0003sA-Si
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jan 2012 14:42:53 +0100
-Received: by bkar19 with SMTP id r19so1254999bka.6
+	Wed, 18 Jan 2012 15:16:06 +0100
+Received: from post.tritech.se (post.tritech.se [10.75.60.100])
+	by tritech.se (8.14.3/8.14.3) with ESMTP id q0IDuODL010568
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2012 05:35:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=0OuKoIek/xSZ7Icx80exwFLEJ5L7+gPE1fMPLP610EA=;
-	b=TB5Xk2JEHc/plO6Ajbe9dEOYjotHpFb1BYK47DmN3/64cJkC3wfrOdrPIOL6oxEtJN
-	k1QLj1xhjWYSbZjArA4RgdQjlYWVIw2YSm/EqwCoso/fDv7iFfS1/RRlxzc47ARmzyHM
-	pGCWYdUMASsrov39BMJs1wwCUOdZhFcArOrNI=
-Received: by 10.205.127.65 with SMTP id gz1mr8886602bkc.12.1326893715286;
-	Wed, 18 Jan 2012 05:35:15 -0800 (PST)
-Received: from [192.168.1.155] (pD9F8D1FD.dip.t-dialin.net. [217.248.209.253])
-	by mx.google.com with ESMTPS id
-	ek9sm24129764bkb.10.2012.01.18.05.35.14 (version=SSLv3 cipher=OTHER);
-	Wed, 18 Jan 2012 05:35:14 -0800 (PST)
-Message-ID: <4F16CA98.70503@gmail.com>
-Date: Wed, 18 Jan 2012 14:35:20 +0100
-From: =?ISO-8859-1?Q?Bj=F6rn_Krombholz?= <pirobk@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20120104 Icedove/8.0
+	Wed, 18 Jan 2012 14:56:29 +0100
+Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
+	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
+	14.02.0247.003; Wed, 18 Jan 2012 14:56:24 +0100
+From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Extending meta-toolchain-*
+Thread-Index: AQHM1eYWN0IHQEXCvEuXcj5Y6VygspYSJZH0
+Date: Wed, 18 Jan 2012 13:56:23 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C40235559@post.tritech.se>
+References: <4F16CA98.70503@gmail.com>
+In-Reply-To: <4F16CA98.70503@gmail.com>
+Accept-Language: en-US, sv-SE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [194.132.137.38]
 MIME-Version: 1.0
-To: ML openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Extending meta-toolchain-*
+Subject: Re: Extending meta-toolchain-*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,29 +38,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 13:42:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 18 Jan 2012 14:16:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-I need someone to point me in the right direction.
-
-I'm trying to extend meta-toolchain-qte to generate an external 
-toolchain for QTembedded with QWT.
-
-What are the required steps to add any libraries/headers to toolchains?
-
-I tried adding libqwt-dev to the RDEPENDS of the meta package itself or 
-the affected task-qte-toolchain-target.bb.
-
-This triggers a build of qwt when bitbaking meta-toolchain-qte, but the 
-resulting toolchain tarball doesn't contain anything qwt related.
-
-Any hints?
-
-
-Thx
-Björn
+Hi Bj=F6rn,=0A=
+=0A=
+I recently had a similar problem.=0A=
+I think it solved itself by some more thorough clean'ing, e.g. clean for bo=
+th the toolchain and the affected tasks.=0A=
+The RDEPENDS of the target task should be the right place.=0A=
+=0A=
+BR // Mats=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Bj=F6rn Krombholz [pirobk@gma=
+il.com]=0A=
+Sent: Wednesday, January 18, 2012 2:35 PM=0A=
+To: ML openembedded-devel=0A=
+Subject: [oe] Extending meta-toolchain-*=0A=
+=0A=
+Hi,=0A=
+=0A=
+I need someone to point me in the right direction.=0A=
+=0A=
+I'm trying to extend meta-toolchain-qte to generate an external=0A=
+toolchain for QTembedded with QWT.=0A=
+=0A=
+What are the required steps to add any libraries/headers to toolchains?=0A=
+=0A=
+I tried adding libqwt-dev to the RDEPENDS of the meta package itself or=0A=
+the affected task-qte-toolchain-target.bb.=0A=
+=0A=
+This triggers a build of qwt when bitbaking meta-toolchain-qte, but the=0A=
+resulting toolchain tarball doesn't contain anything qwt related.=0A=
+=0A=
+Any hints?=0A=
+=0A=
+=0A=
+Thx=0A=
+Bj=F6rn=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 
 
