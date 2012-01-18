@@ -1,31 +1,28 @@
 Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1RnX4q-0005Po-R7
+	(envelope-from <Mats.Karrman@tritech.se>) id 1RnXuz-0006Dp-F8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jan 2012 16:05:28 +0100
+	Wed, 18 Jan 2012 16:59:21 +0100
 Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id q0IEvjGF010789
+	by tritech.se (8.14.3/8.14.3) with ESMTP id q0IFpc71010939
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2012 15:57:50 +0100
+	Wed, 18 Jan 2012 16:51:43 +0100
 Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
 	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
-	14.02.0247.003; Wed, 18 Jan 2012 15:57:45 +0100
+	14.02.0247.003; Wed, 18 Jan 2012 16:51:38 +0100
 From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [2011.03-maintenance] Packaged staging, anyone?
-Thread-Index: AczVwbA+u1Boubb6TNimhWV0/ZIKgQAJks4AAAI5HIk=
-Date: Wed, 18 Jan 2012 14:57:44 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4023559A@post.tritech.se>
-References: <ED3E0BCACD909541BA94A34C4A164D4C402354D3@post.tritech.se>,
-	<CA+M6bXknfM8wUn+4veBsabFL6cRLxpqA+P_NNGpNv0o=zPOrVg@mail.gmail.com>
-In-Reply-To: <CA+M6bXknfM8wUn+4veBsabFL6cRLxpqA+P_NNGpNv0o=zPOrVg@mail.gmail.com>
+Thread-Topic: [oe] [2011.03-maintenance] Packaged staging -- dependency problem
+Thread-Index: AQHM1fgslclPXSKuoUKXq76jtgMtFg==
+Date: Wed, 18 Jan 2012 15:51:37 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C402355CD@post.tritech.se>
 Accept-Language: en-US, sv-SE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [194.132.137.38]
 MIME-Version: 1.0
-Subject: Re: [2011.03-maintenance] Packaged staging, anyone?
+Subject: Re: [2011.03-maintenance] Packaged staging -- dependency problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,17 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 15:05:28 -0000
+X-List-Received-Date: Wed, 18 Jan 2012 15:59:21 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+Well, now at least it pulls packages from the mirror instead of building th=
+em but there is a but.=0A=
+=0A=
+When building glib-2.0, do_configure uses autotools and the configure scrip=
+t of glib-2.0 wants to use sed from sysroots. sed-native exists in the mirr=
+or but has not been installed in sysroots. I am uncertain where the depende=
+ncy on sed (or sed-native?) is missing/should be added. In the glib recipe =
+or for autotools class? (this time i looked in master but found no relevant=
+ patches.)=0A=
+=0A=
+Any advice?=0A=
+=0A=
+BR // Mats=0A=
+=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Mats K=E4rrman [Mats.Karrman@=
+tritech.se]=0A=
+Sent: Wednesday, January 18, 2012 3:57 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] [2011.03-maintenance] Packaged staging, anyone?=0A=
+=0A=
 Hi Tom,=0A=
 =0A=
 Thanks for answering.=0A=
 I just found the fix in master branch (sorry for not looking there first), =
-commit 	1aeea48674d3e831a5830e43ad4fdcfab295ebd2 on /classes/packaged-stagi=
-ng.bbclass.=0A=
+commit       1aeea48674d3e831a5830e43ad4fdcfab295ebd2 on /classes/packaged-=
+staging.bbclass.=0A=
 Apparently you helped fixing this issue then :)=0A=
 I have tried the patch and it works for me so I will send you a pull-reques=
 t shortly.=0A=
@@ -84,6 +103,11 @@ solution).=0A=
 =0A=
 --=0A=
 Tom=0A=
+=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=0A=
 =0A=
 _______________________________________________=0A=
 Openembedded-devel mailing list=0A=
