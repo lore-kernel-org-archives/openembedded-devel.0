@@ -1,30 +1,19 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from stoexhub01.domain01.net ([83.145.59.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RnuFa-0007yq-3D
+	(envelope-from <anders@chargestorm.se>) id 1Rny9w-0001aX-Nb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 16:50:06 +0100
-Received: by vbnl22 with SMTP id l22so33607vbn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2012 07:42:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=5Jw0+9JLtMsSwjCyU14pnl/RGa4UKhFoVoZeBRhZPSM=;
-	b=uLEeV4vPMkbO/yGM83xztSNcLP/Y0Cs/yKMg1AtqbswDNfQfhhGfZP/bwLjiBrfhWk
-	8T3sTE5aVoJKTf/8OIGkerKwZlsi5g2KdaEbok35nWIMUYyWDMKEt0etGKNXR7WRwQsH
-	jfB6sG1Casxx5B0LcaZ7qXAebDmZ6kitLdm2g=
+	Thu, 19 Jan 2012 21:00:32 +0100
+Received: from localhost (85.229.138.125) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server id 8.3.213.0; Thu, 19 Jan 2012
+	20:52:52 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Jan 2012 20:52:53 +0100
+Message-ID: <cover.1327002701.git.anders@chargestorm.se>
+X-Mailer: git-send-email 1.7.8.3
 MIME-Version: 1.0
-Received: by 10.52.26.199 with SMTP id n7mr14185567vdg.17.1326986242307; Thu,
-	19 Jan 2012 07:17:22 -0800 (PST)
-Received: by 10.52.67.171 with HTTP; Thu, 19 Jan 2012 07:17:22 -0800 (PST)
-In-Reply-To: <4F181D44.6020500@gmx.net>
-References: <4F1041E0.7060601@gmx.net>
-	<4F181D44.6020500@gmx.net>
-Date: Thu, 19 Jan 2012 16:17:22 +0100
-Message-ID: <CACW_hTaQ+6-UyDh0SPsRyc+PXsDYVD8K_q=U2vVXfRC6ySnwfQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: FOSDEM 2012 - stand organization thread
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-oe][PATCH v4 0/2] systemd: package split
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +27,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 15:50:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-
-2012/1/19 Robert Schuster <thebohemian@gmx.net>
-
->
-> [...]
->
+X-List-Received-Date: Thu, 19 Jan 2012 20:00:32 -0000
+Content-Type: text/plain
 
 
-> Any news regarding OE people who want come to FOSDEM?
->
+At least while using rpm-packaging, the systemd package (rpm) got a dependency
+on python, as systemd-analyze needs this (in the shebang). When trying to
+create a small image using systemd, this isn't always desirable. Thus the
+splitting of systemd-analyze to a separate package.
 
-I am planning to come but no idea yet if it will be for 1 or 2 days.
 
-Frans
+Conditionally RRECOMMENDS kbd and kbd-consolefonts: if the machine in
+question do not have keyboards, there is no need for kbd and
+kbd-consolefonts. To not make systemd machine dependent, we introduce a
+DISTRO_FEATURE keyboard for systems that want kbd* installed.
+
+The first patch should be fine for pulling. 
+
+The 2nd patch needs coordination with other layers, e.g. angstrom, to not
+remove the RRECOMMENDS on kbd* from their packages. However, using a positive
+DISTRO_FEATURE is more natural, than a negative one, i.e. nokeyboard.
+
+All patches has been verified on a few internal arm-based machines, with a
+custom distro.
+
+
+------------------------------------
+v4: * Remove patch for cairo, as cairo is now a bbappend to oe-core version.
+      The oe-core version already had the desired functionality.
+    * Change the conditionally RRECOMMENDS on kbd* in systemd, to depend 
+      on DISTRO_FEATURES instead of MACHINE_FEATURES.
+
+v3: * Set PACKAGE_ARCH for systemd, as its RRECOMMENDS now depends on
+    MACHINE_FEATURES. 
+
+v2: * The SRC_URI update has been applied to master.
+
+    * Let systemd-analyze RDEPENDS on python-dbus, and RRECOMMENDS
+      python-pycairo. 
+
+    * Add a patch to conditionally enable/disable x11 support when buildling
+      cairo. 
+    
+    * Add patch which makes the systemd's RRECOMMENDS on kbd and
+      kbd-consolefonts conditional on the keyboard MACHINE_FEATURES.
+
+The following changes since commit 3767262f9e626c49638dc886adbdf58b167de61c:
+
+  In LICENSE "&&" should be replaced with "&" (2012-01-16 22:29:22 +0100)
+
+are available in the git repository at:
+  git://github.com/darander/meta-oe systemd-move
+  https://github.com/darander/meta-oe/tree/systemd-move
+
+Anders Darander (2):
+  systemd: split out systemd-analyze
+  systemd: conditionally RRECOMMENDS kbd*
+
+ meta-oe/recipes-core/systemd/systemd_git.bb |   10 +++++++---
+ 1 files changed, 7 insertions(+), 3 deletions(-)
+
+-- 
+1.7.8.3
+
+
 
