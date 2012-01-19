@@ -1,20 +1,35 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jtobias@viaas.com>) id 1RnyRF-0002Nf-Q2
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 21:18:25 +0100
-Received: by wibhr14 with SMTP id hr14so305487wib.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ro0Co-0001AR-DJ for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jan 2012 23:11:38 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ro05P-00048X-Uc for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jan 2012 23:03:59 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jan 2012 23:03:59 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2012 12:10:46 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.180.77.228 with SMTP id v4mr46741676wiw.8.1327003846044; Thu,
-	19 Jan 2012 12:10:46 -0800 (PST)
-Received: by 10.180.87.69 with HTTP; Thu, 19 Jan 2012 12:10:46 -0800 (PST)
-Date: Thu, 19 Jan 2012 12:10:46 -0800
-Message-ID: <CAJfOToU8WxeyhJsParQnx+g=iatJDhquu_UHdy7wQcC87YkE=Q@mail.gmail.com>
-From: John Tobias <jtobias@viaas.com>
+	Thu, 19 Jan 2012 23:03:59 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Network Interfaces (wire & wireless)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 19 Jan 2012 23:03:43 +0100
+Message-ID: <jfa3vv$3ks$1@dough.gmane.org>
+References: <cover.1327002701.git.anders@chargestorm.se>
+	<ba787e718994267f09ff11b8b4122d536175bffc.1327002701.git.anders@chargestorm.se>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <ba787e718994267f09ff11b8b4122d536175bffc.1327002701.git.anders@chargestorm.se>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [meta-oe][PATCH v4 2/2] systemd: conditionally RRECOMMENDS kbd*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,37 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 20:18:25 -0000
+X-List-Received-Date: Thu, 19 Jan 2012 22:11:38 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello All,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have two network interfaces (wire and wireless), both of them are
-connected to the network correctly. It looks like my kernel is using
-the wireless interface to send my data over the network. I would like
-to tell to the kernel which interface should be use if my both
-interfaces are connected to the network. So, I executed the commands
-below and set the phy0 with higher priority than my wifi, but it's not
-working.
-Any idea how to fix it?
+Op 19-01-12 20:53, Anders Darander schreef:
+> Let the distro define a keyboard distro feature, to conditionally
+> include kbd*. (Headless distros might not want to RRECOMMENDS kbd*).
 
-#(wired)
-/sbin/ip route flush table phy0
-/sbin/ip route add table phy0 to 192.168.1.0/24 dev eth0
-/sbin/ip route add table phy0 to default via 192.168.1.1 dev eth0
+DISTRO_FEATURES is the wrong thing for that, so I'm going to NAK it.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-#(wireless)
-/sbin/ip route flush table wifi
-/sbin/ip route add table wifi to 10.0.1.0/24 dev ra0
-/sbin/ip route add table wifi to default via 10.0.1.1 dev ra0
+iEYEARECAAYFAk8Ykz0ACgkQMkyGM64RGpGTVwCeNx5RLmgei+P22TvnVav0FEGI
+Z1wAnAolSXV5em2PN1rLn4PKosx0BAsO
+=JYUg
+-----END PGP SIGNATURE-----
 
-/sbin/ip rule add from 192.168.1.0/24 table phy0 priority 1000
-/sbin/ip rule add from 10.0.1.0/24 table wifi priority 1002
-
-/sbin/ip route flush cache
-
-Thanks,
-
-john
 
 
