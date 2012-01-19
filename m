@@ -1,23 +1,29 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RntxQ-0007UK-TL
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RnuFa-0007yq-3D
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 16:31:21 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 19 Jan 2012 07:17:42 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="108717591"
-Received: from unknown (HELO helios.localnet) ([10.252.122.198])
-	by fmsmga001.fm.intel.com with ESMTP; 19 Jan 2012 07:17:41 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jan 2012 15:17:40 +0000
-Message-ID: <3840466.RevaOU60h8@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <4F181D44.6020500@gmx.net>
-References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
+	Thu, 19 Jan 2012 16:50:06 +0100
+Received: by vbnl22 with SMTP id l22so33607vbn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jan 2012 07:42:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=5Jw0+9JLtMsSwjCyU14pnl/RGa4UKhFoVoZeBRhZPSM=;
+	b=uLEeV4vPMkbO/yGM83xztSNcLP/Y0Cs/yKMg1AtqbswDNfQfhhGfZP/bwLjiBrfhWk
+	8T3sTE5aVoJKTf/8OIGkerKwZlsi5g2KdaEbok35nWIMUYyWDMKEt0etGKNXR7WRwQsH
+	jfB6sG1Casxx5B0LcaZ7qXAebDmZ6kitLdm2g=
 MIME-Version: 1.0
+Received: by 10.52.26.199 with SMTP id n7mr14185567vdg.17.1326986242307; Thu,
+	19 Jan 2012 07:17:22 -0800 (PST)
+Received: by 10.52.67.171 with HTTP; Thu, 19 Jan 2012 07:17:22 -0800 (PST)
+In-Reply-To: <4F181D44.6020500@gmx.net>
+References: <4F1041E0.7060601@gmx.net>
+	<4F181D44.6020500@gmx.net>
+Date: Thu, 19 Jan 2012 16:17:22 +0100
+Message-ID: <CACW_hTaQ+6-UyDh0SPsRyc+PXsDYVD8K_q=U2vVXfRC6ySnwfQ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,46 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 15:31:21 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 19 Jan 2012 15:50:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 19 January 2012 14:40:20 Robert Schuster wrote:
-> Hi everyone,
-> things are starting slowly but steadily.
+2012/1/19 Robert Schuster <thebohemian@gmx.net>
 
-Thanks for your work on this Robert (and everyone else), I'm sure I don't just 
-speak for myself when I say we really appreciate it!
- 
-> Alex and Hening are going to help manning the booth. Philip organises
-> table cloths each with an OE logo on it.
-> 
-> Other topics need attentions though:
-> We still have no idea where the poster is that we used at last year's
-> LinuxTag? Florian, is assume it is with you?
-> 
-> Henning also brings some stand hardware (router et al). Can you add what
-> exactly what it'll be and say something about the number of flyers left?
-> (I assume that there still flyers in our Berlin office.)
-> 
-> Regarding the device tags (which would be extremely cool and we talked
-> about this for years now) I've no idea. Has someone access to a nice (=
-> portable) label printing device?
-> 
+>
+> [...]
+>
+
+
 > Any news regarding OE people who want come to FOSDEM?
+>
 
-FYI I'll be there, and will help out on the stand when possible. I can also 
-bring hardware although I don't have any specific demos prepared.
+I am planning to come but no idea yet if it will be for 1 or 2 days.
 
-All things going to plan I will also be speaking on the topic of OE-Core, the 
-Yocto Project and layers.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Frans
 
