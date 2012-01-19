@@ -1,35 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RnteJ-00071a-AB for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 16:11:35 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RntWv-0006Ng-7Q for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 16:03:57 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2012 16:03:57 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2012 16:03:57 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1RntxQ-0007UK-TL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jan 2012 16:31:21 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 19 Jan 2012 07:17:42 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="108717591"
+Received: from unknown (HELO helios.localnet) ([10.252.122.198])
+	by fmsmga001.fm.intel.com with ESMTP; 19 Jan 2012 07:17:41 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 19 Jan 2012 16:03:40 +0100
-Message-ID: <jf9bcc$20u$1@dough.gmane.org>
-References: <1326731540-15786-1-git-send-email-schnitzeltony@gmx.de>
-	<201201191432.30260.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <201201191432.30260.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [meta-gnome] evince: add cross-compile-fix.patch from classic oe to fix build error
+Date: Thu, 19 Jan 2012 15:17:40 +0000
+Message-ID: <3840466.RevaOU60h8@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.7.3 (Linux/3.0.0-14-generic-pae; KDE/4.7.4; i686; ; )
+In-Reply-To: <4F181D44.6020500@gmx.net>
+References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
+MIME-Version: 1.0
+Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 15:11:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 19 Jan 2012 15:31:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thursday 19 January 2012 14:40:20 Robert Schuster wrote:
+> Hi everyone,
+> things are starting slowly but steadily.
 
-Op 19-01-12 14:32, Andreas Müller schreef:
-> On Monday, January 16, 2012 05:32:20 PM Andreas Müller wrote:
->> error message was
->> 
->> | warning: failed to load external entity |
->> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl" cannot parse |
->> /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl | warning: failed to
->> load external entity |
->> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl" cannot parse |
->> /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl | make[2]: ***
->> [evince-C.omf] Error 1
->> 
->> [1] 
->> http://cgit.openembedded.org/openembedded/tree/recipes/evince/evince/cross
->>
->> 
-- -compile-fix.patch
->> 
->> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-> ping
+Thanks for your work on this Robert (and everyone else), I'm sure I don't just 
+speak for myself when I say we really appreciate it!
+ 
+> Alex and Hening are going to help manning the booth. Philip organises
+> table cloths each with an OE logo on it.
+> 
+> Other topics need attentions though:
+> We still have no idea where the poster is that we used at last year's
+> LinuxTag? Florian, is assume it is with you?
+> 
+> Henning also brings some stand hardware (router et al). Can you add what
+> exactly what it'll be and say something about the number of flyers left?
+> (I assume that there still flyers in our Berlin office.)
+> 
+> Regarding the device tags (which would be extremely cool and we talked
+> about this for years now) I've no idea. Has someone access to a nice (=
+> portable) label printing device?
+> 
+> Any news regarding OE people who want come to FOSDEM?
 
-It's queued, I'll push it later this week.
+FYI I'll be there, and will help out on the stand when possible. I can also 
+bring hardware although I don't have any specific demos prepared.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+All things going to plan I will also be speaking on the topic of OE-Core, the 
+Yocto Project and layers.
 
-iEYEARECAAYFAk8YMMgACgkQMkyGM64RGpFuLQCfdyhONhBnG3+YaV+fLfD2qnBv
-cgQAoJwtF8oSwrBnIBFouxTTXebNf+R7
-=N1X8
------END PGP SIGNATURE-----
+Cheers,
+Paul
 
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
