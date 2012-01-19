@@ -1,39 +1,34 @@
-Received: from 17.mo4.mail-out.ovh.net ([46.105.41.16]
-	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Rnfnn-000543-AZ
+Received: from mail-qw0-f54.google.com ([209.85.216.54])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <kergoth@gmail.com>) id 1RnjLc-0000lD-8n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 01:24:27 +0100
-Received: from mail643.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo4.mail-out.ovh.net (Postfix) with SMTP id 56C49105D0AF
+	Thu, 19 Jan 2012 05:11:36 +0100
+Received: by qaea17 with SMTP id a17so1383600qae.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2012 22:10:26 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Jan 2012 23:08:52 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
-	(82.233.81.124) by ns0.ovh.net with SMTP; 18 Jan 2012 23:08:50 +0200
-Date: Wed, 18 Jan 2012 22:08:40 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Henning Heinold <heinold@inf.fu-berlin.de>
-X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
-Message-ID: <20120118220840.6bc10420@eb-e6520>
-In-Reply-To: <20120118173454.GA27993@mail.familie-heinold.de>
-References: <1326645768-13447-1-git-send-email-eric@eukrea.com>
-	<20120118173454.GA27993@mail.familie-heinold.de>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 3810608235160645098
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeegtddrtdehucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeegtddrtdehucetggdotefuucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java 1/2] openjdk-6-6b24: fix icedtea-launcher-stdc++.patch
+	Wed, 18 Jan 2012 20:03:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Ca5N/BT1gRDyyIHMlOIAw2DeLKNDj2TBTMRBbnbGWdo=;
+	b=LAXmcAarHJYmzqzs3+RoJlms7tYHX63GNwEMPQnLSjwzxPIYg2CGeOqE/qVqnUTJL0
+	JyWoLQ17FiZva0mNM6ma47C9nOIJkkDaq58grI13kLdYBYhl3/EfATVs38VOFZU3R4YO
+	Zfo6AWAH4xOS1Fod0MNLn1+6Iqoaj3hFvSJWw=
+Received: by 10.224.184.73 with SMTP id cj9mr21334171qab.80.1326945836289;
+	Wed, 18 Jan 2012 20:03:56 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.235.211 with HTTP; Wed, 18 Jan 2012 20:03:35 -0800 (PST)
+In-Reply-To: <4F13E118.2020006@juszkiewicz.com.pl>
+References: <CACW_hTbd97GapgqUkRzUfd=i7pPcjA=jKjfq4ZXSmXg-cyTWqA@mail.gmail.com>
+	<CACW_hTbfyowYLekV=ujawq=uivgn5umyGVP7A6Osj8DbgArqew@mail.gmail.com>
+	<4F13E118.2020006@juszkiewicz.com.pl>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 18 Jan 2012 21:03:35 -0700
+X-Google-Sender-Auth: UvvD1GqYXE0vE6EhItRKC5OeTtA
+Message-ID: <CABcZAN=jT3o-_YRiStkK-ieR-6c0RSGJ9OT2wDywqf-qGnYgwg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: #oe topic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,22 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 00:24:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Jan 2012 04:11:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Henning,
+On Mon, Jan 16, 2012 at 1:34 AM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> W dniu 14.01.2012 16:35, Frans Meulenbroeks pisze:
+>
+>> Ping. Almost a week ago.
+>> No one with rights to change the topic ???
+>
+>
+> Current #oe access list:
+>
+> 1 =C2=A0 =C2=A0 kergoth =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0+votsriRfAF [modified ? ago]
+> 2 =C2=A0 =C2=A0 apt =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0+votiA [modified ? ago]
+> 3 =C2=A0 =C2=A0 mickey|zzZZzz =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0+votriA [=
+modified 3 years, 30 weeks, 1 day,
+> 16:10:28 ago]
+> 4 =C2=A0 =C2=A0 *!*@www.xora.org.uk =C2=A0 =C2=A0+votriA [modified 1 year=
+, 42 weeks, 4 days,
+> 15:25:50 ago]
 
-Le Wed, 18 Jan 2012 18:34:55 +0100,
-Henning Heinold <heinold@inf.fu-berlin.de> a =E9crit :
-> Patch is apllied, but I still wonder why I didnt saw it here.
->=20
-patch --version
-patch 2.6.1
-
-Maybe this check was added to a newer patch version and you are using a
-previous one ?
-
-Eric
+Fixed, sorry about the delay. Let me know if anyone wants/needs access
+to the channel, I can adjust the chanserv permissions, or if the
+current topic isn't ideal.
+--=20
+Christopher Larson
 
 
