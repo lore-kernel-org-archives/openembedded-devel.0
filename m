@@ -1,27 +1,35 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1Rnses-00057j-8q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jan 2012 15:08:06 +0100
-Received: (qmail invoked by alias); 19 Jan 2012 13:40:23 -0000
-Received: from unknown (EHLO [172.28.0.22]) [89.1.20.66]
-	by mail.gmx.net (mp009) with SMTP; 19 Jan 2012 14:40:23 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX187KK0hEv87FDDj/W4lKLwN1KRDzTmItipt6K6n3p
-	bDHDlgmGiR+Cyr
-Message-ID: <4F181D44.6020500@gmx.net>
-Date: Thu, 19 Jan 2012 14:40:20 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RnteJ-00071a-AB for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jan 2012 16:11:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RntWv-0006Ng-7Q for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jan 2012 16:03:57 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jan 2012 16:03:57 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jan 2012 16:03:57 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net>
-In-Reply-To: <4F1041E0.7060601@gmx.net>
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Cc: Henning Heinold <h.heinold@tarent.de>
-Subject: Re: FOSDEM 2012 - stand organization thread
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 19 Jan 2012 16:03:40 +0100
+Message-ID: <jf9bcc$20u$1@dough.gmane.org>
+References: <1326731540-15786-1-git-send-email-schnitzeltony@gmx.de>
+	<201201191432.30260.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <201201191432.30260.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [meta-gnome] evince: add cross-compile-fix.patch from classic oe to fix build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,95 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2012 14:08:06 -0000
-X-Groupsio-MsgNum: 36581
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig8751D40DA340DD1D0AD58587"
-
---------------enig8751D40DA340DD1D0AD58587
+X-List-Received-Date: Thu, 19 Jan 2012 15:11:35 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi everyone,
-things are starting slowly but steadily.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Alex and Hening are going to help manning the booth. Philip organises
-table cloths each with an OE logo on it.
+Op 19-01-12 14:32, Andreas Müller schreef:
+> On Monday, January 16, 2012 05:32:20 PM Andreas Müller wrote:
+>> error message was
+>> 
+>> | warning: failed to load external entity |
+>> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl" cannot parse |
+>> /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl | warning: failed to
+>> load external entity |
+>> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl" cannot parse |
+>> /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl | make[2]: ***
+>> [evince-C.omf] Error 1
+>> 
+>> [1] 
+>> http://cgit.openembedded.org/openembedded/tree/recipes/evince/evince/cross
+>>
+>> 
+- -compile-fix.patch
+>> 
+>> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+> ping
 
-Other topics need attentions though:
-We still have no idea where the poster is that we used at last year's
-LinuxTag? Florian, is assume it is with you?
-
-Henning also brings some stand hardware (router et al). Can you add what
-exactly what it'll be and say something about the number of flyers left?
-(I assume that there still flyers in our Berlin office.)
-
-Regarding the device tags (which would be extremely cool and we talked
-about this for years now) I've no idea. Has someone access to a nice (=3D=
-
-portable) label printing device?
-
-Any news regarding OE people who want come to FOSDEM?
-
-All the best,
-Robert
-
-Am 13.01.2012 15:38, schrieb Robert Schuster:
-> Hi all,
-> so the FOSDEM website says there're still 21 days until the event
-> starts. Thanks to our application a month ago we got permission for a
-> rather huge *two tables* stand.
->=20
-> This thread is intended to be used for organizing the OpenEmbedded stan=
-d
-> for FOSDEM 2012. The event takes place on the weekend of the 4th and 5t=
-h
-> February. If you go to this conference for the first time remember that=
-
-> the famous beer event takes place Friday evening already.
->=20
-> A Wiki[0] page mentioning this year's organization details was created.=
-
-> Please fill the respective spaces with your name if you want to help.
-> There is space for people who want to man the stand, bring devices and =
--
-> very important - a bunch of tasks need to be accomplished before the
-> event starts.
->=20
-> Other tasks and new items can be added as well, of course.
->=20
-> Feel free to ask any organizational questions here in this thread.
->=20
-> Regards,
-> Robert
->=20
-> [0] - http://wiki.openembedded.org/index.php/Fosdem_2012
->=20
->=20
->=20
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-
---------------enig8751D40DA340DD1D0AD58587
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+It's queued, I'll push it later this week.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk8YHUQACgkQG9cfwmwwEtrO/gCbBS8yPkDHse/GMdzO4neq9A/2
-0bYAnRq+jrH62qamRkzG/flQu0gVJM89
-=CWTI
+iEYEARECAAYFAk8YMMgACgkQMkyGM64RGpFuLQCfdyhONhBnG3+YaV+fLfD2qnBv
+cgQAoJwtF8oSwrBnIBFouxTTXebNf+R7
+=N1X8
 -----END PGP SIGNATURE-----
 
---------------enig8751D40DA340DD1D0AD58587--
+
+
