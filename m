@@ -1,30 +1,30 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1RoMpx-0004Zu-AB
+	(envelope-from <tworaz666@gmail.com>) id 1RoMvv-0004pG-CZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jan 2012 23:21:33 +0100
-Received: by eaa1 with SMTP id 1so309933eaa.6
+	Fri, 20 Jan 2012 23:27:43 +0100
+Received: by eaa1 with SMTP id 1so311158eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2012 14:13:52 -0800 (PST)
+	Fri, 20 Jan 2012 14:20:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=0YCLvm5Wna31ANfgsD0uoUl6H+x3GmqOaylCy/EPDyk=;
-	b=DDBW8Vb9XVXTY2OvMJ4ZhBQ0Hkb43tX+S/U3PViPz47ZXLDZ9fOpLqu80POEV1bt4/
-	BuAv5yda80UMGeB2AoDF16+wrvzcspnzvLcIwPRj3Ag9FyejHA0bcsaWYmdyzenDMWcJ
-	W1qeQHgK4Uw3HWp2Zf/CN9oSnSznkT2jgjfvs=
-Received: by 10.213.10.136 with SMTP id p8mr32490ebp.91.1327097632084;
-	Fri, 20 Jan 2012 14:13:52 -0800 (PST)
+	bh=dMkWWuFThWSHeeXT5aDgrY8+JOOzSXJwTZi0pqeS7o0=;
+	b=ryeoCa9naCeFZFZAY+GO3YAFLy1iyh+6VbfEYN/3JYb8ue6rTBUHF1DPGxA5HW26Zj
+	cdbBnCRf13P7ML1mPf6WmOqO5qMT9S0XM1k5vnlMdqdgv7p/VRDsM4L9gYAxJnqbQWjU
+	tNGNrLgblI6PRc5crkZsVQy/fY1BQe+s/S8Jc=
+Received: by 10.213.8.135 with SMTP id h7mr39352ebh.52.1327098001714;
+	Fri, 20 Jan 2012 14:20:01 -0800 (PST)
 Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
 	[89.77.50.243])
-	by mx.google.com with ESMTPS id 28sm17093874eed.0.2012.01.20.14.13.51
+	by mx.google.com with ESMTPS id b49sm17012582eec.9.2012.01.20.14.20.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 20 Jan 2012 14:13:51 -0800 (PST)
+	Fri, 20 Jan 2012 14:20:01 -0800 (PST)
 From: Peter Tworek <tworaz666@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jan 2012 23:12:02 +0100
-Message-Id: <1327097522-18915-1-git-send-email-tworaz666@gmail.com>
+Date: Fri, 20 Jan 2012 23:18:10 +0100
+Message-Id: <1327097890-19037-1-git-send-email-tworaz666@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe] Add missing gobject-introspection-native dependency for upower.
+Subject: [meta-oe][PATCH] Add missing librsvg dependency to abiword recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,26 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 22:21:33 -0000
+X-List-Received-Date: Fri, 20 Jan 2012 22:27:43 -0000
 
 Signed-off-by: Peter Tworek <tworaz666@gmail.com>
 ---
- meta-oe/recipes-support/upower/upower_0.9.14.bb |    2 +-
+ meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/upower/upower_0.9.14.bb b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-index a5496d1..312ed58 100644
---- a/meta-oe/recipes-support/upower/upower_0.9.14.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
+index 2d0ec97..07fd989 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
+@@ -1,5 +1,5 @@
+ require abiword-2.5.inc
+-DEPENDS += " loudmouth libwmf-native gtkmathview asio"
++DEPENDS += " librsvg loudmouth libwmf-native gtkmathview asio"
+ RCONFLICTS_${PN} = "abiword-embedded"
  
  PR = "r1"
- 
--DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit"
-+DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit gobject-introspection-native"
- 
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
 -- 
 1.7.3.4
 
