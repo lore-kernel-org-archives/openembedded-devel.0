@@ -1,37 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ro93C-0004Uz-5v for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jan 2012 08:38:18 +0100
+	id 1Ro97U-0004eQ-S1 for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Jan 2012 08:42:44 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ro8vn-0006mo-UE for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jan 2012 08:30:39 +0100
+	id 1Ro906-0000jf-Li for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Jan 2012 08:35:06 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2012 08:30:39 +0100
+	Fri, 20 Jan 2012 08:35:06 +0100
 Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2012 08:30:39 +0100
+	Fri, 20 Jan 2012 08:35:06 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 Jan 2012 08:30:22 +0100
-Message-ID: <jfb56e$f67$1@dough.gmane.org>
-References: <cover.1327002701.git.anders@chargestorm.se>
-	<ba787e718994267f09ff11b8b4122d536175bffc.1327002701.git.anders@chargestorm.se>
-	<jfa3vv$3ks$1@dough.gmane.org>
-	<CAP9ODKoOkSrjWi27BT2Rv9v5oM37fP5fL5oLH8oDB54QJLdczg@mail.gmail.com>
+Date: Fri, 20 Jan 2012 08:31:13 +0100
+Message-ID: <jfb580$f67$2@dough.gmane.org>
+References: <1326978353-5558-1-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKrcCEUoW+6s2MknUSgtjSOxriU2CSkpSjc7_XOAtUR_Xg@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <CAP9ODKoOkSrjWi27BT2Rv9v5oM37fP5fL5oLH8oDB54QJLdczg@mail.gmail.com>
+In-Reply-To: <CAP9ODKrcCEUoW+6s2MknUSgtjSOxriU2CSkpSjc7_XOAtUR_Xg@mail.gmail.com>
 X-Enigmail-Version: 1.3.4
-Subject: Re: [meta-oe][PATCH v4 2/2] systemd: conditionally RRECOMMENDS kbd*
+Subject: Re: [PATCH 1/2] udev: add 177
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 07:38:18 -0000
+X-List-Received-Date: Fri, 20 Jan 2012 07:42:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Op 20-01-12 04:33, Otavio Salvador schreef:
-> On Thu, Jan 19, 2012 at 20:03, Koen Kooi <koen@dominion.thruhere.net>
+Op 20-01-12 04:37, Otavio Salvador schreef:
+> On Thu, Jan 19, 2012 at 11:05, Koen Kooi <koen@dominion.thruhere.net>
 > wrote:
 > 
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 19-01-12 20:53, Anders Darander schreef:
->>> Let the distro define a keyboard distro feature, to conditionally 
->>> include kbd*. (Headless distros might not want to RRECOMMENDS kbd*).
->> 
->> DISTRO_FEATURES is the wrong thing for that, so I'm going to NAK it.
+>> * 'udevadm' moved to ${PN} avoiding the need for the udev-utils package
+>> to be installed, so 'udev' has all the needed programs by itself.
 >> 
 > 
-> What would be your suggestion for this then? I see no other alternative 
-> then distro feature.
+> NACK!
+> 
+> I have some images that use mdev and I use udevadm to tigger events so 
+> please allow for this flexibility.
 
-See what needs kbd and split it out, like we did with vconsole. Actually...
-git grep implies that vconsole is the bit that needs kbd :)
-
+So that's what the package split was for! I'll fix that in v2
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk8ZGAoACgkQMkyGM64RGpECJwCgi/yMgovhSMHJQnKmuzJR5xfn
-YZQAn2ck7oLsFxPphCh2ijCalBdWcIK+
-=BSEa
+iEYEARECAAYFAk8ZGEEACgkQMkyGM64RGpFRrgCgslxtJzS9MubgqUQPHS/RJbW2
+II0An228NmDxGMyoNv5ZFytrWQ10Z3yQ
+=8j/8
 -----END PGP SIGNATURE-----
 
 
