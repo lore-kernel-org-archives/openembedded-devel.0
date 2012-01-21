@@ -1,24 +1,22 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RoP5z-0000Is-5n
+	(envelope-from <radoslav@kolev.info>) id 1Rodfn-0000T6-Me
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jan 2012 01:46:15 +0100
-Received: (qmail 17744 invoked by uid 1003); 21 Jan 2012 00:11:52 -0000
-Received: from unknown (HELO ?192.168.254.1?)
-	(philip@opensdr.com@184.13.219.74)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	21 Jan 2012 00:11:52 -0000
-Message-ID: <4F1A02C1.7060805@balister.org>
-Date: Fri, 20 Jan 2012 19:11:45 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Sat, 21 Jan 2012 17:20:12 +0100
+Received: by vbnl22 with SMTP id l22so1022112vbn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Jan 2012 08:12:29 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.52.74.163 with SMTP id u3mr998495vdv.91.1327160457915; Sat, 21
+	Jan 2012 07:40:57 -0800 (PST)
+Received: by 10.220.6.2 with HTTP; Sat, 21 Jan 2012 07:40:57 -0800 (PST)
+In-Reply-To: <4F1041E0.7060601@gmx.net>
+References: <4F1041E0.7060601@gmx.net>
+Date: Sat, 21 Jan 2012 17:40:57 +0200
+Message-ID: <CAA5cW2zfJx9zWdx8VdDmxrG=U_xwiNJZYAy9Drkt-SCb8yVT5w@mail.gmail.com>
+From: Radoslav Kolev <radoslav@kolev.info>
 To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
-	<201201202019.37497.GNUtoo@no-log.org>
-In-Reply-To: <201201202019.37497.GNUtoo@no-log.org>
-X-Enigmail-Version: 1.1.2
+X-Gm-Message-State: ALoCoQkw/4/XaEu/46fjtSOBig2oVxuwqG6I5D8KwEEiGg17iblFOq4PdkRjuuh10s2X7dnNKV7J
 Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,26 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2012 00:46:15 -0000
+X-List-Received-Date: Sat, 21 Jan 2012 16:20:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 01/20/2012 02:19 PM, Denis 'GNUtoo' Carikli wrote:
->> Any news regarding OE people who want come to FOSDEM?
-> I'm planning to come.
+On Fri, Jan 13, 2012 at 4:38 PM, Robert Schuster <thebohemian@gmx.net> wrote:
+> A Wiki[0] page mentioning this year's organization details was created.
+> Please fill the respective spaces with your name if you want to help.
+> There is space for people who want to man the stand, bring devices and -
+> very important - a bunch of tasks need to be accomplished before the
+> event starts.
 
-I'll be there also. We need to work out who will help staff the stand.
+Hey guys,
 
-Philip
+It's my first time going to FOSDEM, so I don't know how it works out
+exactly. I'm not an Openembedded "master", but have been using it for
+a while and can try to explain to people what it is and why it's
+useful. So, hopefully I can help a bit with the stand too.
 
+As for bringing hardware, what is usually needed here? I have some
+evaluation boards with different ARM SoCs, some with an LCD and touch
+screen that can run Angstrom and QT embedded demo apps, but nothing
+very impressive to show. Would that be useful?
 
-> 
-> Denis.
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Regards and I hope to see you there,
+Radoslav
 
 
