@@ -1,23 +1,43 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <radoslav@kolev.info>) id 1Rodfn-0000T6-Me
+	(envelope-from <raj.khem@gmail.com>) id 1RolEJ-0004dx-12
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jan 2012 17:20:12 +0100
-Received: by vbnl22 with SMTP id l22so1022112vbn.6
+	Sun, 22 Jan 2012 01:24:19 +0100
+Received: by iabz21 with SMTP id z21so3074805iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jan 2012 08:12:29 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.52.74.163 with SMTP id u3mr998495vdv.91.1327160457915; Sat, 21
-	Jan 2012 07:40:57 -0800 (PST)
-Received: by 10.220.6.2 with HTTP; Sat, 21 Jan 2012 07:40:57 -0800 (PST)
-In-Reply-To: <4F1041E0.7060601@gmx.net>
-References: <4F1041E0.7060601@gmx.net>
-Date: Sat, 21 Jan 2012 17:40:57 +0200
-Message-ID: <CAA5cW2zfJx9zWdx8VdDmxrG=U_xwiNJZYAy9Drkt-SCb8yVT5w@mail.gmail.com>
-From: Radoslav Kolev <radoslav@kolev.info>
+	Sat, 21 Jan 2012 16:16:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=to38VThySYt8lsc0NeGd6iqePVp2/a71vb95XFz53cU=;
+	b=fWFQyOEJ+1ra2FyOrzS+Z4KeV71ZnCFcmJjWLywSf4VW1ukuy+aReXhpqJa9xf8gnw
+	jMzRHnK9SH0ygjSekEMJRH1Szb32GVlUJplTppArMa6w+jtV3NkZiINP+v8HSpJS+qRS
+	xedkQ9yOzlmYM7eMwTVqtgGahNmVg+B4X+cSg=
+Received: by 10.50.42.199 with SMTP id q7mr3207321igl.9.1327191396220;
+	Sat, 21 Jan 2012 16:16:36 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id z22sm27721585ibg.5.2012.01.21.16.16.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 21 Jan 2012 16:16:34 -0800 (PST)
+Date: Sat, 21 Jan 2012 16:16:30 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkw/4/XaEu/46fjtSOBig2oVxuwqG6I5D8KwEEiGg17iblFOq4PdkRjuuh10s2X7dnNKV7J
-Subject: Re: FOSDEM 2012 - stand organization thread
+Message-ID: <20120122001630.GF12691@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <cover.1325876341.git.otavio@ossystems.com.br>
+	<b61f46cb503582b669cbc56b0ea04d7fdaafd256.1325876341.git.otavio@ossystems.com.br>
+	<1325879877.3234.2.camel@lenovo.internal.reciva.com>
+	<CAP9ODKqpDS=sJQ-uuP5+E6QOMU7eQheWXqk+TSA4fkpwha6LVw@mail.gmail.com>
+	<4F0763FD.9000801@windriver.com>
+	<CAP9ODKrhfnL_+VJNWFQ0J7uyw3yayZ-e+gnyzsp4gjivxdtL2Q@mail.gmail.com>
+	<CAP9ODKo+uNuXx+jmN6uiFgG9nuwEuTjwc2JDpXnrygyp88j=rQ@mail.gmail.com>
+	<4F0B0F7A.9020907@windriver.com>
+	<CAP9ODKpHL0y6wi6eYtYE979p0kw6P4P9=TjdJroAND53MCEYtA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKpHL0y6wi6eYtYE979p0kw6P4P9=TjdJroAND53MCEYtA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 5/5] udisks: disable manpage building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,29 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2012 16:20:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 22 Jan 2012 00:24:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Jan 13, 2012 at 4:38 PM, Robert Schuster <thebohemian@gmx.net> wrote:
-> A Wiki[0] page mentioning this year's organization details was created.
-> Please fill the respective spaces with your name if you want to help.
-> There is space for people who want to man the stand, bring devices and -
-> very important - a bunch of tasks need to be accomplished before the
-> event starts.
+On (09/01/12 15:19), Otavio Salvador wrote:
+> On Mon, Jan 9, 2012 at 14:02, Mark Hatle <mark.hatle@windriver.com> wrote:
+> 
+> > Hmm, I think the best solution is to fix the docbook problems, but baring
+> > that a static version of the man pages is the next best alternative.
+> >
+> > Advantage to fixing docbook is it will work for the next package.  :)
+> 
+> 
+> I fully agree but I am short in time for our deadline so this wasn't an
+> option thus we choose the shortest route for now.
 
-Hey guys,
+I think if we keep this thing going without addressing underlying
+problem it degrades the quility of metadata. Documentation is important
+aspect of a package and we should make it possible to generate it as
+much
 
-It's my first time going to FOSDEM, so I don't know how it works out
-exactly. I'm not an Openembedded "master", but have been using it for
-a while and can try to explain to people what it is and why it's
-useful. So, hopefully I can help a bit with the stand too.
-
-As for bringing hardware, what is usually needed here? I have some
-evaluation boards with different ARM SoCs, some with an LCD and touch
-screen that can run Angstrom and QT embedded demo apps, but nothing
-very impressive to show. Would that be useful?
-
-Regards and I hope to see you there,
-Radoslav
+no body is going to remove that option later when xsltproc-native starts
+working since this package will be building with or without xslt at that
+time. So in my opion fixing it at the same time is more efficient though
+a bit more effort I concur.
 
 
