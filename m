@@ -1,43 +1,36 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RolEJ-0004dx-12
+	(envelope-from <raj.khem@gmail.com>) id 1RonKU-0000vu-R0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jan 2012 01:24:19 +0100
-Received: by iabz21 with SMTP id z21so3074805iab.6
+	Sun, 22 Jan 2012 03:38:51 +0100
+Received: by iabz21 with SMTP id z21so3181653iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jan 2012 16:16:36 -0800 (PST)
+	Sat, 21 Jan 2012 18:31:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=to38VThySYt8lsc0NeGd6iqePVp2/a71vb95XFz53cU=;
-	b=fWFQyOEJ+1ra2FyOrzS+Z4KeV71ZnCFcmJjWLywSf4VW1ukuy+aReXhpqJa9xf8gnw
-	jMzRHnK9SH0ygjSekEMJRH1Szb32GVlUJplTppArMa6w+jtV3NkZiINP+v8HSpJS+qRS
-	xedkQ9yOzlmYM7eMwTVqtgGahNmVg+B4X+cSg=
-Received: by 10.50.42.199 with SMTP id q7mr3207321igl.9.1327191396220;
-	Sat, 21 Jan 2012 16:16:36 -0800 (PST)
+	:user-agent; bh=AB5+HIHAedO/hGJsMykhMoIg5zt3UusZAxFyvzVkO0c=;
+	b=dnerNJ33vDayjbzvalI30Bf2RHUFXcQmJyqnPz4xuT8VMvlYLB6VWBeyAJQD+XZLji
+	WCbbwoIPWf2Zma54HseyIXbe/r60oN64mpmO4tcMZ8jEmX3R84jW2bhL+DRyBUpMDRjf
+	MV5WgzJe0SH0NzU85k8X2zeNza0xt3MCT05xs=
+Received: by 10.43.131.196 with SMTP id hr4mr3244959icc.55.1327199467662;
+	Sat, 21 Jan 2012 18:31:07 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id z22sm27721585ibg.5.2012.01.21.16.16.33
+	by mx.google.com with ESMTPS id 5sm28881359ibe.8.2012.01.21.18.31.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 21 Jan 2012 16:16:34 -0800 (PST)
-Date: Sat, 21 Jan 2012 16:16:30 -0800
+	Sat, 21 Jan 2012 18:31:05 -0800 (PST)
+Date: Sat, 21 Jan 2012 18:31:55 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120122001630.GF12691@sakrah.homelinux.org>
+Message-ID: <20120122023155.GA27997@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <cover.1325876341.git.otavio@ossystems.com.br>
-	<b61f46cb503582b669cbc56b0ea04d7fdaafd256.1325876341.git.otavio@ossystems.com.br>
-	<1325879877.3234.2.camel@lenovo.internal.reciva.com>
-	<CAP9ODKqpDS=sJQ-uuP5+E6QOMU7eQheWXqk+TSA4fkpwha6LVw@mail.gmail.com>
-	<4F0763FD.9000801@windriver.com>
-	<CAP9ODKrhfnL_+VJNWFQ0J7uyw3yayZ-e+gnyzsp4gjivxdtL2Q@mail.gmail.com>
-	<CAP9ODKo+uNuXx+jmN6uiFgG9nuwEuTjwc2JDpXnrygyp88j=rQ@mail.gmail.com>
-	<4F0B0F7A.9020907@windriver.com>
-	<CAP9ODKpHL0y6wi6eYtYE979p0kw6P4P9=TjdJroAND53MCEYtA@mail.gmail.com>
+References: <CAHPA9DpV__ak869U+fDBh_eFnooTLZpxVKv3FOtG1aEKtHT-Hg@mail.gmail.com>
+	<4F14AD8D.5050609@kernelconcepts.de>
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKpHL0y6wi6eYtYE979p0kw6P4P9=TjdJroAND53MCEYtA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 5/5] udisks: disable manpage building
+In-Reply-To: <4F14AD8D.5050609@kernelconcepts.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: meta-toolchain-qte failing on gcc-cross-sdk_4.5.bb for mini6410
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +44,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jan 2012 00:24:19 -0000
+X-List-Received-Date: Sun, 22 Jan 2012 02:38:51 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (09/01/12 15:19), Otavio Salvador wrote:
-> On Mon, Jan 9, 2012 at 14:02, Mark Hatle <mark.hatle@windriver.com> wrote:
+On (17/01/12 00:06), Florian Boor wrote:
+> Hi,
 > 
-> > Hmm, I think the best solution is to fix the docbook problems, but baring
-> > that a static version of the man pages is the next best alternative.
-> >
-> > Advantage to fixing docbook is it will work for the next package.  :)
+> Am 12.01.2012 20:14, schrieb Trevor Hickey:
+> > I have been trying to bitbake meta-toolchain-qte for the mini6410 and have
+> > been stuck on this linker problem.
 > 
-> 
-> I fully agree but I am short in time for our deadline so this wasn't an
-> option thus we choose the shortest route for now.
+> > /home/balute/tmp/sysroots/i686-linux/usr/armv6/arm-angstrom-linux-gnueabi/bin/ld:
+> > error: emutls_s.o uses VFP register arguments, ./libgcc_s.so.1.tmp does not
 
-I think if we keep this thing going without addressing underlying
-problem it degrades the quility of metadata. Documentation is important
-aspect of a package and we should make it possible to generate it as
-much
+All those offending objects seems to be generated by calling as
+directly.
+I think the problem seems to be how your assembler's default is
+configured. It seems to me that assembler when called directly generated code for
+hardfp calling convention but gcc itself is configured for softfp
+calling convention.
 
-no body is going to remove that option later when xsltproc-native starts
-working since this package will be building with or without xslt at that
-time. So in my opion fixing it at the same time is more efficient though
-a bit more effort I concur.
+can I have a look at one of the offending objects ? say emultls_s.o
+secondly can I see at your full build log i.e. log.do_compile.XXXXX
+file
+
+
+> 
+> that's an interesting one - I see the same problem here but have no found a
+> solution yet. It seems that only ARMv6 architectures are affected since all
+> other I build (ARMv4, ARMv5TE, ARMv7A, MIPSEL, SH4 and some PPC based ones do
+> not seem to suffer from this).
+
+
+> 
+> Greetings
+> 
+> Florian
+> 
+> 
+> -- 
+> The dream of yesterday                  Florian Boor
+> is the hope of today                    Tel: +49 271-771091-15
+> and the reality of tomorrow.            Fax: +49 271-771091-19
+> [Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+>                                         http://www.kernelconcepts.de/en
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+-Khem
 
 
