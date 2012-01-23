@@ -1,26 +1,35 @@
-Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1RpKFo-0003dS-7F
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 14:48:12 +0100
-Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
-	([82.42.142.101] helo=[192.168.1.104])
-	by www.dynamicdevices.co.uk with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1RpIc3-00077r-3w
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 12:03:03 +0000
-Message-ID: <4F1D4CE2.1010401@dynamicdevices.co.uk>
-Date: Mon, 23 Jan 2012 12:04:50 +0000
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RpKMU-0003qT-V4 for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Jan 2012 14:55:07 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RpKF0-0003wC-EA for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Jan 2012 14:47:22 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jan 2012 14:47:22 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jan 2012 14:47:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net> <4F1D47CD.1070507@gmx.net>
-In-Reply-To: <4F1D47CD.1070507@gmx.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: FOSDEM 2012 - stand organization thread
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 23 Jan 2012 14:47:02 +0100
+Message-ID: <jfjocm$edq$1@dough.gmane.org>
+References: <1327304731-4251-1-git-send-email-schnitzeltony@gmx.de>
+	<1327304731-4251-3-git-send-email-schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1327304731-4251-3-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [meta-oe 3/3] gimp: initial add 2.6.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,97 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 13:48:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Jan 2012 13:55:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 23-01-12 08:45, Andreas Müller schreef:
+> * based on oe-classic [1]-[2] * build tested incremental & from scratch
+> in angstrom environment * run tested on overo
+> 
+> [1] http://cgit.openembedded.org/openembedded/tree/recipes/gimp/gimp.inc 
+> [2]
+> http://cgit.openembedded.org/openembedded/tree/recipes/gimp/gimp_2.6.8.bb
+
+I
+> 
+get the following error when building from arm:
+
+|
+/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/sysroots/x86_64-linux/usr/lib/libpangocairo-1.0.so:
+file not recognized: File format not recognized
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFPHWTWMkyGM64RGpERAnuKAJ0cltOqGzu3dE7YKCp8LzhV54CQpwCdG4we
+M6/m3dg0rzDKUYvgs0kULgo=
+=aayv
+-----END PGP SIGNATURE-----
 
 
->Last but not least: There are still some unclaimed tasks on the page
-
-
-If people want to send me details of the tags required I don't mind printing
-out some colour tags. Would need to have input on the design as like most
-on the list I imagine I'm a tech, not a creative ;)
-
-Am flying so can't assist with  displays and such unfortunately.
-
-Regards,
-
-Alex
-
-
-On 23/01/2012 11:43, Robert Schuster wrote:
-> Hi all,
-> first of all, thanks for all the replies so far. It looks like we're
-> having a well manned stand this year. :)
->
-> For those who are available for manning stand add your name to the first
-> list on this page:
-> http://wiki.openembedded.org/index.php/Fosdem_2012
->
-> Also add which day you'd prefer to help out or what other time
-> constraints you have (a bunch of people usually have to leave early on
-> Sunday).
->
-> Having around 3-4 people at the two tables at one time is fine. Those
-> helping out.
->
-> When the event finishes (usually 4-6pm on Sunday) it is usually
-> necessary to clean up the stand and (sometimes) bring the table to
-> another room or fold and lean them against the wall (methinks that was
-> the case last year).
->
-> There is some space under the tables to take your backpack, jackets etc.
-> Although we can also take your laptop, purse and smartphone please
-> remember that we cannot guarantee 100% vigilance all the time. So employ
-> common sense and all is fine. :)
->
-> Last but not least: There are still some unclaimed tasks on the page
-> (see above). Would be cool if we could find a solution.
->
-> All the best,
-> Robert
->
-> Am 13.01.2012 15:38, schrieb Robert Schuster:
->> Hi all,
->> so the FOSDEM website says there're still 21 days until the event
->> starts. Thanks to our application a month ago we got permission for a
->> rather huge *two tables* stand.
->>
->> This thread is intended to be used for organizing the OpenEmbedded stand
->> for FOSDEM 2012. The event takes place on the weekend of the 4th and 5th
->> February. If you go to this conference for the first time remember that
->> the famous beer event takes place Friday evening already.
->>
->> A Wiki[0] page mentioning this year's organization details was created.
->> Please fill the respective spaces with your name if you want to help.
->> There is space for people who want to man the stand, bring devices and -
->> very important - a bunch of tasks need to be accomplished before the
->> event starts.
->>
->> Other tasks and new items can be added as well, of course.
->>
->> Feel free to ask any organizational questions here in this thread.
->>
->> Regards,
->> Robert
->>
->> [0] - http://wiki.openembedded.org/index.php/Fosdem_2012
->>
->>
->>
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
