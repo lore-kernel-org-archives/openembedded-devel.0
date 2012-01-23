@@ -1,23 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
+Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1RpIQN-0003qO-M7
+	(envelope-from <thebohemian@gmx.net>) id 1RpIap-0004Rh-IN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 12:50:59 +0100
-Received: (qmail invoked by alias); 23 Jan 2012 11:43:14 -0000
+	Mon, 23 Jan 2012 13:01:47 +0100
+Received: (qmail invoked by alias); 23 Jan 2012 11:54:02 -0000
 Received: from unknown (EHLO [172.28.0.22]) [89.1.20.66]
-	by mail.gmx.net (mp059) with SMTP; 23 Jan 2012 12:43:14 +0100
+	by mail.gmx.net (mp068) with SMTP; 23 Jan 2012 12:54:02 +0100
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18A2VscWScAKQl3d9JGwmVz3qgge4cQhcBCWtufcp
-	tHLX/eB/VhPfWz
-Message-ID: <4F1D47CD.1070507@gmx.net>
-Date: Mon, 23 Jan 2012 12:43:09 +0100
+X-Provags-ID: V01U2FsdGVkX19FN8p7gdFFZ++1fBdBV47l2kBP20qAsM87IvtovU
+	BLbCAqiMDWO4ns
+Message-ID: <4F1D4A58.9090209@gmx.net>
+Date: Mon, 23 Jan 2012 12:54:00 +0100
 From: Robert Schuster <thebohemian@gmx.net>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4F1041E0.7060601@gmx.net>
-In-Reply-To: <4F1041E0.7060601@gmx.net>
+	<CAA5cW2zfJx9zWdx8VdDmxrG=U_xwiNJZYAy9Drkt-SCb8yVT5w@mail.gmail.com>
+In-Reply-To: <CAA5cW2zfJx9zWdx8VdDmxrG=U_xwiNJZYAy9Drkt-SCb8yVT5w@mail.gmail.com>
 X-Enigmail-Version: 1.1.2
 X-Y-GMX-Trusted: 0
 Subject: Re: FOSDEM 2012 - stand organization thread
@@ -34,82 +35,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 11:50:59 -0000
-X-Groupsio-MsgNum: 36634
+X-List-Received-Date: Mon, 23 Jan 2012 12:01:47 -0000
+X-Groupsio-MsgNum: 36635
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="------------enig1CF1B51DD6166538D99D2F93"
+	boundary="------------enigD9F789BCDBBD3DE998D4AC1D"
 
---------------enig1CF1B51DD6166538D99D2F93
-Content-Type: text/plain; charset=UTF-8
+--------------enigD9F789BCDBBD3DE998D4AC1D
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Hi all,
-first of all, thanks for all the replies so far. It looks like we're
-having a well manned stand this year. :)
+Hi Radoslav,
 
-For those who are available for manning stand add your name to the first
-list on this page:
-http://wiki.openembedded.org/index.php/Fosdem_2012
+Am 21.01.2012 16:40, schrieb Radoslav Kolev:
+> Hey guys,
+>=20
+> It's my first time going to FOSDEM, so I don't know how it works out
+> exactly. I'm not an Openembedded "master", but have been using it for
+> a while and can try to explain to people what it is and why it's
+> useful. So, hopefully I can help a bit with the stand too.
+That's great and you surely can help. I am also not using OE daily but I
+was working long enough for it to be able to tell conference attendees
+what it can ( and why its way cooler than the competition. :P ).
 
-Also add which day you'd prefer to help out or what other time
-constraints you have (a bunch of people usually have to leave early on
-Sunday).
+As it is your first time visit I honestly ask you not to spend too much
+time at our booth (a few hours is fine though) as FOSDEM is a really
+intense and vibrant event. That does not mean we don't want your help
+(quite the contrary) but I want to prevent that you'll get the feeling
+of having missed something. FOSDEM has a lot of superb presentations,
+interesting people you'd like to talk to etc.
 
-Having around 3-4 people at the two tables at one time is fine. Those
-helping out.
+Fair enough, meeting us OE people is probably also part of the bill. :)
 
-When the event finishes (usually 4-6pm on Sunday) it is usually
-necessary to clean up the stand and (sometimes) bring the table to
-another room or fold and lean them against the wall (methinks that was
-the case last year).
-
-There is some space under the tables to take your backpack, jackets etc.
-Although we can also take your laptop, purse and smartphone please
-remember that we cannot guarantee 100% vigilance all the time. So employ
-common sense and all is fine. :)
-
-Last but not least: There are still some unclaimed tasks on the page
-(see above). Would be cool if we could find a solution.
+> As for bringing hardware, what is usually needed here? I have some
+> evaluation boards with different ARM SoCs, some with an LCD and touch
+> screen that can run Angstrom and QT embedded demo apps, but nothing
+> very impressive to show. Would that be useful?
+A good idea for a device might be:
+ - looks interesting
+ - you can tell about the device/OS
+ - it can withstand transport (not too fragile)
 
 All the best,
 Robert
 
-Am 13.01.2012 15:38, schrieb Robert Schuster:
-> Hi all,
-> so the FOSDEM website says there're still 21 days until the event
-> starts. Thanks to our application a month ago we got permission for a
-> rather huge *two tables* stand.
->=20
-> This thread is intended to be used for organizing the OpenEmbedded stan=
-d
-> for FOSDEM 2012. The event takes place on the weekend of the 4th and 5t=
-h
-> February. If you go to this conference for the first time remember that=
-
-> the famous beer event takes place Friday evening already.
->=20
-> A Wiki[0] page mentioning this year's organization details was created.=
-
-> Please fill the respective spaces with your name if you want to help.
-> There is space for people who want to man the stand, bring devices and =
--
-> very important - a bunch of tasks need to be accomplished before the
-> event starts.
->=20
-> Other tasks and new items can be added as well, of course.
->=20
-> Feel free to ask any organizational questions here in this thread.
->=20
-> Regards,
-> Robert
->=20
-> [0] - http://wiki.openembedded.org/index.php/Fosdem_2012
->=20
->=20
->=20
->=20
->=20
+> Regards and I hope to see you there,
+> Radoslav
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -118,7 +89,7 @@ h
 
 
 
---------------enig1CF1B51DD6166538D99D2F93
+--------------enigD9F789BCDBBD3DE998D4AC1D
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -127,9 +98,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.10 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEARECAAYFAk8dR88ACgkQG9cfwmwwEtpVKACgmzISUI/HpV23LZHSEsOCNI+o
-j10An269fL/mpd17VvQVak297XaarGS4
-=Z+el
+iEYEARECAAYFAk8dSlgACgkQG9cfwmwwEtoq8ACeNvPm4CwJx2VGNSplCukZXnXH
+0wIAnRlD2BNZOWupr+U2dg8oOiFRQiqk
+=ka16
 -----END PGP SIGNATURE-----
 
---------------enig1CF1B51DD6166538D99D2F93--
+--------------enigD9F789BCDBBD3DE998D4AC1D--
