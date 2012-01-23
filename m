@@ -1,34 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RpFnk-000755-NS
+	(envelope-from <martin.jansa@gmail.com>) id 1RpFns-0006fE-Pd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 10:02:56 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so912479eek.6
+	Mon, 23 Jan 2012 10:03:04 +0100
+Received: by mail-ey0-f175.google.com with SMTP id l12so265605eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2012 00:55:15 -0800 (PST)
+	Mon, 23 Jan 2012 00:55:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=1OFk+8XqFkZpIvYuKjk9pjCvGqGew3wtusku0RJoh3U=;
-	b=Qnu+RFyyXd0m2PO9LmeHE+KFDWiNchMpyGDxKsM17uke35VtEPMQyFp2toN7PswyC6
-	MYqF/sLB94rUfnJzw1bxNX9dhXW8wlrl1ypJw9QCJ7c9nesehGAsRr3FBcENkjJJ0l9l
-	vMKTfRjPGfiNTMtmLLQFP5WdjtbDe61C5PH2g=
-Received: by 10.14.10.40 with SMTP id 40mr2602912eeu.67.1327308915083;
-	Mon, 23 Jan 2012 00:55:15 -0800 (PST)
+	bh=wRp1VMJ8tOphYVDql6ZrD26U+Fs3Ak6JQtRU1Rz0fb8=;
+	b=GowDWXcUN9mLM4rJSP00SOvm7vDf0UNFVOz9iHUzyZfqQenZJt964EiurlLkVKJXA6
+	lmDT/kWvniVU6IwW9V3CXXa0YMzV+Q383VOXbjaBkpne02eI0h2eyNFoAi/Vrx2IdyfY
+	NO8e3T0/aSWXuZ4OgG+90MkzvqVjr1rE7mn7k=
+Received: by 10.213.114.84 with SMTP id d20mr1470692ebq.100.1327308922273;
+	Mon, 23 Jan 2012 00:55:22 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id r2sm51268518eef.7.2012.01.23.00.55.13
+	by mx.google.com with ESMTPS id c16sm51361068eei.1.2012.01.23.00.55.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 Jan 2012 00:55:14 -0800 (PST)
+	Mon, 23 Jan 2012 00:55:21 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jan 2012 09:54:23 +0100
-Message-Id: <fe09898ffa201f214fe5ae26c23ac206d54277ae.1327308791.git.Martin.Jansa@gmail.com>
+Date: Mon, 23 Jan 2012 09:54:24 +0100
+Message-Id: <7dff4b4d64eefe07def90a318bc53348a63094dd.1327308791.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.4
 In-Reply-To: <26b55fdded7124f4666f372ceda4d8c4d959cc94.1327308791.git.Martin.Jansa@gmail.com>
 References: <26b55fdded7124f4666f372ceda4d8c4d959cc94.1327308791.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1327308791.git.Martin.Jansa@gmail.com>
 References: <cover.1327308791.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][meta-gnome][PATCH 7/8] gpsd: add systemd support
+Subject: [meta-oe][meta-efl][meta-gnome][PATCH 8/8] picocom: import from meta-smartphone/meta-shr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,120 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 09:02:56 -0000
+X-List-Received-Date: Mon, 23 Jan 2012 09:03:04 -0000
+
+* meta-smartphone/7f797c8e54dd4ec28d75269e80573f45069eebb4
+* PR and PRIORITY fields dropped
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-navigation/gpsd/gpsd-2.96/gpsd.service |    9 ++++++++
- .../recipes-navigation/gpsd/gpsd-2.96/gpsd.socket  |    9 ++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb       |   22 +++++++++++++++++--
- 3 files changed, 37 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.service
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.socket
+ meta-oe/recipes-support/picocom/picocom_1.6.bb |   17 +++++++++++++++++
+ 1 files changed, 17 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/picocom/picocom_1.6.bb
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.service b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.service
+diff --git a/meta-oe/recipes-support/picocom/picocom_1.6.bb b/meta-oe/recipes-support/picocom/picocom_1.6.bb
 new file mode 100644
-index 0000000..8deaf75
+index 0000000..b7744aa
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.service
-@@ -0,0 +1,9 @@
-+[Unit]
-+Description=GPS (Global Positioning System) Daemon
-+Requires=gpsd.socket
++++ b/meta-oe/recipes-support/picocom/picocom_1.6.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Lightweight and minimal (~20K) dumb-terminal emulation program."
++SECTION = "console/utils"
++LICENSE = "GPLv2+"
++HOMEPAGE = "http://code.google.com/p/picocom/"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=393a5ca445f6965873eca0259a17f833"
 +
-+[Service]
-+ExecStart=/usr/sbin/gpsd -N
++SRC_URI = "http://picocom.googlecode.com/files/picocom-1.6.tar.gz"
 +
-+[Install]
-+Also=gpsd.socket
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.socket b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.socket
-new file mode 100644
-index 0000000..13c17f2
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd.socket
-@@ -0,0 +1,9 @@
-+[Unit]
-+Description=GPS (Global Positioning System) Daemon Sockets
++CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
 +
-+[Socket]
-+ListenStream=/var/run/gpsd.sock
-+ListenStream=127.0.0.1:2947
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
++}
 +
-+[Install]
-+WantedBy=sockets.target
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-index 69b26b3..ce2ab02 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
-+PR = "r1"
-+
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
-                 --enable-dbus \
-@@ -14,15 +16,21 @@ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
- SRC_URI = "http://download.berlios.de/${PN}/${P}bis.tar.gz;name=gpsd \
-            file://gpsd-default \
-            file://gpsd \
-+           file://gpsd.socket \
-+           file://gpsd.service \
-            file://60-gpsd.rules"
- SRC_URI[gpsd.md5sum] = "52b00cab0fb34bbf1923ae35c7ced6c4"
- SRC_URI[gpsd.sha256sum] = "c6d72565bc06b802c749e69808eb7c6ee165962dc17383971c9001b5e1763690"
- 
--inherit autotools update-rc.d python-dir
-+inherit autotools update-rc.d python-dir systemd
- 
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
- 
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE = "${PN}.socket"
-+
-+
- LDFLAGS += "-L${STAGING_LIBDIR} -lm"
- export STAGING_INCDIR
- export STAGING_LIBDIR
-@@ -60,6 +68,11 @@ do_install_append() {
-     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
-     install -d ${D}${base_libdir}/udev/
-     install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
-+
-+    #support for systemd
-+    install -d ${D}${base_libdir}/systemd/system
-+    install -m 644 ${WORKDIR}/${PN}.socket ${D}${base_libdir}/systemd/system
-+    install -m 644 ${WORKDIR}/${PN}.service ${D}${base_libdir}/systemd/system
- }
- 
- pkg_postinst_${PN}-conf() {
-@@ -70,7 +83,7 @@ pkg_postrm_${PN}-conf() {
- 	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
- }
- 
--PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
-+PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils ${PN}-systemd"
- 
- FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
- 
-@@ -78,7 +91,7 @@ RDEPENDS_${PN} = "gpsd-gpsctl"
- RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev"
- 
- DESCRIPTION_gpsd-udev = "udev relevant files to use gpsd hotplugging"
--FILES_gpsd-udev = "${base_libdir}/* ${sysconfdir}/udev/*"
-+FILES_gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
- RDEPENDS_gpsd-udev += "udev gpsd-conf"
- 
- DESCRIPTION_libgpsd = "C service library used for communicating with gpsd"
-@@ -100,3 +113,6 @@ RDEPENDS_gps-utils = "python-pygps"
- DESCRIPTION_python-pygps = "Python bindings to gpsd"
- FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
- RDEPENDS_python-pygps = "python-core python-curses gpsd python-json"
-+
-+FILES_${PN}-systemd += "${base_libdir}/systemd"
-+RDEPENDS_${PN}-systemd += "${PN}"
++SRC_URI[md5sum] = "426c3d30b82cbc80b0dafdccd6020c6c"
++SRC_URI[sha256sum] = "df5774072de805ff06c6b1420dbcc932b1b00e919b49e22a7be14bcad5a0b3a1"
 -- 
 1.7.8.4
 
