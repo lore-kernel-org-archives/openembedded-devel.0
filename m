@@ -1,23 +1,25 @@
 Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1RpEzx-0004mH-LW
+	(envelope-from <schnitzeltony@gmx.de>) id 1RpF6I-0004zQ-T8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 09:11:29 +0100
-Received: (qmail invoked by alias); 23 Jan 2012 07:43:38 -0000
+	Mon, 23 Jan 2012 09:18:02 +0100
+Received: (qmail invoked by alias); 23 Jan 2012 07:43:39 -0000
 Received: from p5B0A202F.dip.t-dialin.net (EHLO localhost.localdomain)
 	[91.10.32.47]
-	by mail.gmx.net (mp029) with SMTP; 23 Jan 2012 08:43:38 +0100
+	by mail.gmx.net (mp029) with SMTP; 23 Jan 2012 08:43:39 +0100
 X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18THB8aERMTlLxKfOwPwjchpK/rV5oqc1vdO16/+r
-	6qWaHrqXO9HTcP
+X-Provags-ID: V01U2FsdGVkX1+QqHk2xs+QFMHZtZ7WS7bql3fYmrbgnWrzmPdhot
+	nAwwqhp+4sJFQG
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jan 2012 08:45:29 +0100
-Message-Id: <1327304731-4251-1-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 23 Jan 2012 08:45:30 +0100
+Message-Id: <1327304731-4251-2-git-send-email-schnitzeltony@gmx.de>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1327304731-4251-1-git-send-email-schnitzeltony@gmx.de>
+References: <1327304731-4251-1-git-send-email-schnitzeltony@gmx.de>
 MIME-Version: 1.0
 X-Y-GMX-Trusted: 0
-Subject: [meta-oe 1/3] babl: initial add 0.1.6
+Subject: [meta-oe 2/3] gegl: initial add 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,39 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 08:11:29 -0000
+X-List-Received-Date: Mon, 23 Jan 2012 08:18:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-inspired by classic-oe [1]
+based on oe-classic [1]
 
-[1] http://cgit.openembedded.org/openembedded/tree/recipes/gimp/babl_git.bb
+[1] http://cgit.openembedded.org/openembedded/tree/recipes/gimp/gegl_git.bb
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
 ---
- meta-oe/recipes-graphics/babl/babl_0.1.6.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/babl/babl_0.1.6.bb
+ meta-oe/recipes-graphics/gegl/gegl_0.1.8.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/gegl/gegl_0.1.8.bb
 
-diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.6.bb b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
+diff --git a/meta-oe/recipes-graphics/gegl/gegl_0.1.8.bb b/meta-oe/recipes-graphics/gegl/gegl_0.1.8.bb
 new file mode 100644
-index 0000000..005b85e
+index 0000000..5ae2082
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Babl is a dynamic, any to any, pixel format conversion library."
++++ b/meta-oe/recipes-graphics/gegl/gegl_0.1.8.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "GEGL (Generic Graphics Library) is a graph based image processing framework."
 +LICENSE = "LGPL-3.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++DEPENDS = "babl librsvg glib-2.0 gtk+ pango cairo expat zlib libpng jpeg virtual/libsdl"
 +
 +inherit gnome
 +
-+SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "dc960981a5ec5330fc1c177be9f59068"
-+SRC_URI[sha256sum] = "319b9004a5366101fd522da02cc983a5d0f50a17af0fa5cbce3535e31bce19a4"
++EXTRA_OECONF = "--disable-docs "
 +
-+FILES_${PN} += "${libdir}/babl-*/*.so"
-+FILES_${PN}-dev += "${libdir}/babl-*/*.la"
-+FILES_${PN}-dbg += "${libdir}/babl-*/.debug/"
++SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
++SRC_URI[md5sum] = "c8279b86b3d584ee4f503839fc500425"
++SRC_URI[sha256sum] = "106b9574b6d5fb282683794f7a7f090a1a3f4a388890e592b202827a4ca76f75"
++
++FILES_${PN} += "${libdir}/gegl-*/*.so"
++FILES_${PN}-dev += "${libdir}/gegl-*/*.la"
++FILES_${PN}-dbg += "${libdir}/gegl-*/.debug"
 -- 
 1.7.4.4
 
