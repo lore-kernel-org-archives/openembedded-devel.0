@@ -1,27 +1,33 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rpcs0-0000CB-71
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 10:40:54 +0100
-Received: by lags15 with SMTP id s15so2166612lag.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RpefR-0007N6-BW for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jan 2012 12:36:01 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RpeXt-0008Il-GT for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jan 2012 12:28:13 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jan 2012 12:28:13 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 01:33:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=/MweCJb9WT5cSpxkwPZz3vYW8t4oLKDoIHMHMejaOlQ=;
-	b=PJAryzsK9QngnxIO47c05+DU8NJibKy8sJL6fiBrYbNpRsyTsSm4SPelR1xg/Q4y4u
-	dpA7ss16q0+OPw1n5YSx1xP4UKK3QU7JC/MuYbeTqF94gcmIEXEGNWFYt+Nv2VhkNFH0
-	x+NjcYMOjRDpFcfHlSrB78R1D7ucwMOG4/cFU=
-MIME-Version: 1.0
-Received: by 10.112.23.41 with SMTP id j9mr3079616lbf.35.1327397586932; Tue,
-	24 Jan 2012 01:33:06 -0800 (PST)
-Received: by 10.112.102.165 with HTTP; Tue, 24 Jan 2012 01:33:06 -0800 (PST)
-Date: Tue, 24 Jan 2012 10:33:06 +0100
-Message-ID: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Tue, 24 Jan 2012 12:28:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 24 Jan 2012 12:27:55 +0100
+Message-ID: <jfm4js$jg7$1@dough.gmane.org>
+References: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
+X-Enigmail-Version: 1.3.4
 Subject: Re: [meta-oe 1/3] babl: initial add 0.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,22 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2012 09:40:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Jan 2012 11:36:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tuesday, January 24, 2012 01:41:51 AM Khem Raj wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On (23/01/12 08:24), Andreas M=FCller wrote:
-> > +FILES_${PN} +=3D "${libdir}/babl-*/*.so"
+Op 24-01-12 10:33, Andreas Müller schreef:
+> On Tuesday, January 24, 2012 01:41:51 AM Khem Raj wrote:
+> 
+>> On (23/01/12 08:24), Andreas Müller wrote:
+>>> +FILES_${PN} += "${libdir}/babl-*/*.so"
+> 
+>> 
+> 
+>> sometimes .so are symlinks and should really go into -dev packages
+> 
+>> can you double check if thats not the case here ?
+> I checked for babl/gegl/gimp: All these are files. Anyway: AFAIK there 
+> would be a QA message for *.so symlinks - there are none.
 
->
+They are plugins, not shared libraries, so the current recipe is OK.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-> sometimes .so are symlinks and should really go into -dev packages
+iEYEARECAAYFAk8elbkACgkQMkyGM64RGpEeiQCgn3vwqcbS7Od5/ZcT4EqJ7MNO
+9uMAoLSZziI/12oMpisSLbjWC1Qf7n5o
+=vTeq
+-----END PGP SIGNATURE-----
 
-> can you double check if thats not the case here ?
-I checked for babl/gegl/gimp: All these are files. Anyway: AFAIK there
-would be a QA message for *.so symlinks - there are none.
 
-Andreas
 
