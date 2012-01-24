@@ -1,26 +1,26 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1RpheZ-0000eb-8N
+	(envelope-from <andrei@gherzan.ro>) id 1Rphss-0001OT-CE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 15:47:20 +0100
-Received: by wibhq7 with SMTP id hq7so286357wib.6
+	Tue, 24 Jan 2012 16:02:06 +0100
+Received: by eaal12 with SMTP id l12so734348eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 06:39:33 -0800 (PST)
+	Tue, 24 Jan 2012 06:54:21 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.93.132 with SMTP id cu4mr4066663wib.9.1327415973665;
-	Tue, 24 Jan 2012 06:39:33 -0800 (PST)
+Received: by 10.213.35.80 with SMTP id o16mr482192ebd.88.1327416860309;
+	Tue, 24 Jan 2012 06:54:20 -0800 (PST)
 Received: from localhost.localdomain ([89.121.200.106])
-	by mx.google.com with ESMTPS id df2sm19073224wib.4.2012.01.24.06.39.31
+	by mx.google.com with ESMTPS id w46sm36676105eeb.0.2012.01.24.06.54.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 24 Jan 2012 06:39:32 -0800 (PST)
+	Tue, 24 Jan 2012 06:54:19 -0800 (PST)
 From: Andrei Gherzan <andrei@gherzan.ro>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jan 2012 16:39:26 +0200
-Message-Id: <1327415966-511-1-git-send-email-andrei@gherzan.ro>
+Date: Tue, 24 Jan 2012 16:54:14 +0200
+Message-Id: <1327416854-17218-1-git-send-email-andrei@gherzan.ro>
 X-Mailer: git-send-email 1.7.5.4
-X-Gm-Message-State: ALoCoQkoSnvjDg/3Z1cJsGHOShTYkGOzcnIpPBJNy5CF9ucFaS/BboTawwH6lBf5FsPSzAemE2Nt
+X-Gm-Message-State: ALoCoQlrt+2s/jVIZVA5s7spOMCV6zWFv9Ha98qBzqbQy1yOvoBmi9vQj+3m/jTQTWV3QxxSP74l
 Cc: flocirel@gmail.com, Andrei Gherzan <andrei.gherzan@windriver.com>
-Subject: [PATCH] In LICENSE "&&" should be replaced with "&" [forgot .inc files]
+Subject: [meta-oe] In LICENSE "&&" should be replaced with "&" [forgot .inc files]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2012 14:47:20 -0000
+X-List-Received-Date: Tue, 24 Jan 2012 15:02:06 -0000
 
 From: Andrei Gherzan <andrei.gherzan@windriver.com>
 
