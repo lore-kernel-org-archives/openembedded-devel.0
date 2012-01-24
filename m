@@ -1,37 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RpLpb-0003FU-OU for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 16:29:18 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RpLi7-0002tq-FA for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jan 2012 16:21:31 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2012 16:21:31 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1RpUZ2-0008BC-IV
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jan 2012 01:48:44 +0100
+Received: by iabz21 with SMTP id z21so5928166iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2012 16:21:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 23 Jan 2012 16:40:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=pKd1NfqQQZ/ddhELIYPKEYtNxkZripXEc7149B/g/ug=;
+	b=UxRwSIDrzbc41wvHkHMyh7tqzlozRej0i2Hj+VRPQlwS7kabB+iOqmjFH9Qq1cwhCk
+	vDY364/JC6VvjZVLMAvpWsUfXpgsar/qNTHL+QNuwHokngkLtwi2RYilANyc0G6y52m5
+	JqI/JlsrtWA/6+zC68XxrKkVrvkYdxQW1AR4Q=
+Received: by 10.43.133.9 with SMTP id hw9mr11630515icc.34.1327365659199;
+	Mon, 23 Jan 2012 16:40:59 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id ba5sm19540241igb.6.2012.01.23.16.40.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 Jan 2012 16:40:57 -0800 (PST)
+Date: Mon, 23 Jan 2012 16:41:51 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 23 Jan 2012 16:21:17 +0100
-Message-ID: <jfjttb$pqi$1@dough.gmane.org>
-References: <1327304731-4251-1-git-send-email-schnitzeltony@gmx.de>
-	<1327304731-4251-3-git-send-email-schnitzeltony@gmx.de>
-	<jfjocm$edq$1@dough.gmane.org>
-	<201201231514.17050.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <201201231514.17050.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [meta-oe 3/3] gimp: initial add 2.6.11
+Message-ID: <20120124004151.GA11270@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1327303469-12803-1-git-send-email-schnitzeltony@gmx.de>
+MIME-Version: 1.0
+In-Reply-To: <1327303469-12803-1-git-send-email-schnitzeltony@gmx.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe 1/3] babl: initial add 0.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +44,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 15:29:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Jan 2012 00:48:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On (23/01/12 08:24), Andreas Müller wrote:
+> inspired by classic-oe [1]
+> 
+> [1] http://cgit.openembedded.org/openembedded/tree/recipes/gimp/babl_git.bb
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+> ---
+>  meta-oe/recipes-graphics/babl/babl_0.1.6.bb |   13 +++++++++++++
+>  1 files changed, 13 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-graphics/babl/babl_0.1.6.bb
+> 
+> diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.6.bb b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
+> new file mode 100644
+> index 0000000..005b85e
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION = "Babl is a dynamic, any to any, pixel format conversion library."
+> +LICENSE = "LGPL-3.0"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+> +
+> +inherit gnome
+> +
+> +SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "dc960981a5ec5330fc1c177be9f59068"
+> +SRC_URI[sha256sum] = "319b9004a5366101fd522da02cc983a5d0f50a17af0fa5cbce3535e31bce19a4"
+> +
+> +FILES_${PN} += "${libdir}/babl-*/*.so"
 
-Op 23-01-12 15:14, Andreas Müller schreef:
-> On Monday, January 23, 2012 02:47:02 PM Koen Kooi wrote:
->> Op 23-01-12 08:45, Andreas Müller schreef:
->>> * based on oe-classic [1]-[2] * build tested incremental & from
->>> scratch in angstrom environment * run tested on overo
->>> 
->>> [1]
->>> http://cgit.openembedded.org/openembedded/tree/recipes/gimp/gimp.inc 
->>> [2] 
->>> http://cgit.openembedded.org/openembedded/tree/recipes/gimp/gimp_2.6.8.bb
->>
->>
->>> 
-I
->> 
->> get the following error when building from arm:
->> 
->> 
->> /OE/tentacle/build/tmp-angstrom_2010_x-eglibc/sysroots/x86_64-linux/usr/lib
->>
->> 
-/libpangocairo-1.0.so: file not recognized: File format not recognized
->> 
-> If I understand that correct, something tries to access (link against?)
-> native lib (in task compile?). Can you paste the log files somewhere to
-> see when this error exactly occures and to compare with my logs?
+sometimes .so are symlinks and should really go into -dev packages
+can you double check if thats not the case here ?
 
-http://dominion.thruhere.net/koen/angstrom/log.do_configure
-http://dominion.thruhere.net/koen/angstrom/log.do_compile (3.3MB)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+> +FILES_${PN}-dev += "${libdir}/babl-*/*.la"
+> +FILES_${PN}-dbg += "${libdir}/babl-*/.debug/"
+> -- 
+> 1.7.4.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iEYEARECAAYFAk8deusACgkQMkyGM64RGpGg2ACfTgyp8AVUSca4vkxUvkpsGiZq
-2SQAoLdR5mVLNI9lDWpAtuDEiWTrWNN1
-=MaAc
------END PGP SIGNATURE-----
-
+-- 
+-Khem
 
 
