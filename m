@@ -1,35 +1,27 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RpUZ2-0008BC-IV
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rpcs0-0000CB-71
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 01:48:44 +0100
-Received: by iabz21 with SMTP id z21so5928166iab.6
+	Tue, 24 Jan 2012 10:40:54 +0100
+Received: by lags15 with SMTP id s15so2166612lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2012 16:40:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=pKd1NfqQQZ/ddhELIYPKEYtNxkZripXEc7149B/g/ug=;
-	b=UxRwSIDrzbc41wvHkHMyh7tqzlozRej0i2Hj+VRPQlwS7kabB+iOqmjFH9Qq1cwhCk
-	vDY364/JC6VvjZVLMAvpWsUfXpgsar/qNTHL+QNuwHokngkLtwi2RYilANyc0G6y52m5
-	JqI/JlsrtWA/6+zC68XxrKkVrvkYdxQW1AR4Q=
-Received: by 10.43.133.9 with SMTP id hw9mr11630515icc.34.1327365659199;
-	Mon, 23 Jan 2012 16:40:59 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id ba5sm19540241igb.6.2012.01.23.16.40.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 Jan 2012 16:40:57 -0800 (PST)
-Date: Mon, 23 Jan 2012 16:41:51 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120124004151.GA11270@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1327303469-12803-1-git-send-email-schnitzeltony@gmx.de>
+	Tue, 24 Jan 2012 01:33:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=/MweCJb9WT5cSpxkwPZz3vYW8t4oLKDoIHMHMejaOlQ=;
+	b=PJAryzsK9QngnxIO47c05+DU8NJibKy8sJL6fiBrYbNpRsyTsSm4SPelR1xg/Q4y4u
+	dpA7ss16q0+OPw1n5YSx1xP4UKK3QU7JC/MuYbeTqF94gcmIEXEGNWFYt+Nv2VhkNFH0
+	x+NjcYMOjRDpFcfHlSrB78R1D7ucwMOG4/cFU=
 MIME-Version: 1.0
-In-Reply-To: <1327303469-12803-1-git-send-email-schnitzeltony@gmx.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.112.23.41 with SMTP id j9mr3079616lbf.35.1327397586932; Tue,
+	24 Jan 2012 01:33:06 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Tue, 24 Jan 2012 01:33:06 -0800 (PST)
+Date: Tue, 24 Jan 2012 10:33:06 +0100
+Message-ID: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe 1/3] babl: initial add 0.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,55 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2012 00:48:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 24 Jan 2012 09:40:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On (23/01/12 08:24), Andreas Müller wrote:
-> inspired by classic-oe [1]
-> 
-> [1] http://cgit.openembedded.org/openembedded/tree/recipes/gimp/babl_git.bb
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-> ---
->  meta-oe/recipes-graphics/babl/babl_0.1.6.bb |   13 +++++++++++++
->  1 files changed, 13 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-graphics/babl/babl_0.1.6.bb
-> 
-> diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.6.bb b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
-> new file mode 100644
-> index 0000000..005b85e
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/babl/babl_0.1.6.bb
-> @@ -0,0 +1,13 @@
-> +DESCRIPTION = "Babl is a dynamic, any to any, pixel format conversion library."
-> +LICENSE = "LGPL-3.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
-> +
-> +inherit gnome
-> +
-> +SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
-> +SRC_URI[md5sum] = "dc960981a5ec5330fc1c177be9f59068"
-> +SRC_URI[sha256sum] = "319b9004a5366101fd522da02cc983a5d0f50a17af0fa5cbce3535e31bce19a4"
-> +
-> +FILES_${PN} += "${libdir}/babl-*/*.so"
+On Tuesday, January 24, 2012 01:41:51 AM Khem Raj wrote:
 
-sometimes .so are symlinks and should really go into -dev packages
-can you double check if thats not the case here ?
+> On (23/01/12 08:24), Andreas M=FCller wrote:
+> > +FILES_${PN} +=3D "${libdir}/babl-*/*.so"
 
-> +FILES_${PN}-dev += "${libdir}/babl-*/*.la"
-> +FILES_${PN}-dbg += "${libdir}/babl-*/.debug/"
-> -- 
-> 1.7.4.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
--- 
--Khem
+> sometimes .so are symlinks and should really go into -dev packages
 
+> can you double check if thats not the case here ?
+I checked for babl/gegl/gimp: All these are files. Anyway: AFAIK there
+would be a QA message for *.so symlinks - there are none.
+
+Andreas
 
