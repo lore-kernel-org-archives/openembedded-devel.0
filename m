@@ -1,34 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RpefR-0007N6-BW for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 12:36:01 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RpeXt-0008Il-GT for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 12:28:13 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 12:28:13 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 12:28:13 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 24 Jan 2012 12:27:55 +0100
-Message-ID: <jfm4js$jg7$1@dough.gmane.org>
-References: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <CALbNGRQoDcEN3MfyDYCKe94=AgU6vK5rQcE7sWnaHnGyy6C51w@mail.gmail.com>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [meta-oe 1/3] babl: initial add 0.1.6
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1RpeuS-0007lP-Bm
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Jan 2012 12:51:35 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1RpfLg-00068m-PE; Tue, 24 Jan 2012 13:19:40 +0100
+Message-ID: <4F1E996D.6070901@kernelconcepts.de>
+Date: Tue, 24 Jan 2012 12:43:41 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.24) Gecko/20111108 Lightning/1.0b2 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: Robert Schuster <thebohemian@gmx.net>
+References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
+In-Reply-To: <4F181D44.6020500@gmx.net>
+X-Enigmail-Version: 1.1.2
+Cc: openembedded-devel@lists.openembedded.org,
+	Henning Heinold <h.heinold@tarent.de>
+Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2012 11:36:01 -0000
+X-List-Received-Date: Tue, 24 Jan 2012 11:51:35 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Op 24-01-12 10:33, Andreas Müller schreef:
-> On Tuesday, January 24, 2012 01:41:51 AM Khem Raj wrote:
-> 
->> On (23/01/12 08:24), Andreas Müller wrote:
->>> +FILES_${PN} += "${libdir}/babl-*/*.so"
-> 
->> 
-> 
->> sometimes .so are symlinks and should really go into -dev packages
-> 
->> can you double check if thats not the case here ?
-> I checked for babl/gegl/gimp: All these are files. Anyway: AFAIK there 
-> would be a QA message for *.so symlinks - there are none.
+sorry for the silence... I somewhow missed your mail.
 
-They are plugins, not shared libraries, so the current recipe is OK.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Am 19.01.2012 14:40, schrieb Robert Schuster:
+> Other topics need attentions though:
+> We still have no idea where the poster is that we used at last year's
+> LinuxTag? Florian, is assume it is with you?
 
-iEYEARECAAYFAk8elbkACgkQMkyGM64RGpEeiQCgn3vwqcbS7Od5/ZcT4EqJ7MNO
-9uMAoLSZziI/12oMpisSLbjWC1Qf7n5o
-=vTeq
------END PGP SIGNATURE-----
+I have the one with the tags here, the previous one.
 
+> Henning also brings some stand hardware (router et al). Can you add what
+> exactly what it'll be and say something about the number of flyers left?
+> (I assume that there still flyers in our Berlin office.)
+
+500 or more at least... should be enough for FOSDEM. I will take them with me as
+well as our new stand box with TFT, multiplugs, lights and some more useful
+equipment.
+
+> Any news regarding OE people who want come to FOSDEM?
+
+I plan to be there.
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
