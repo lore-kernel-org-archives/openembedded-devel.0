@@ -1,18 +1,29 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RpqUp-000116-1l
+	(envelope-from <raj.khem@gmail.com>) id 1Rps26-00039w-6M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 01:13:51 +0100
-Received: from mizar.localdomain (79.24.249.251) by smtp206.alice.it
-	(8.6.023.02) id 4F1836AD00A4550A; Wed, 25 Jan 2012 01:06:07 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Jan 2012 01:05:58 +0100
-Message-Id: <1327449958-9778-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1327449958-9778-1-git-send-email-andrea.adami@gmail.com>
+	Wed, 25 Jan 2012 02:52:18 +0100
+Received: by lags15 with SMTP id s15so2724479lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jan 2012 17:44:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=kQUvPIFado0m9hsz33jf3TrdyiTghyPvApicQ5BuQtA=;
+	b=c0FdfnB2haDO9ywzCZ+9qA7YSoFDpldTrgOZLS+x8BF7ULCCEi5GYv5jNsXLcROgge
+	ns3U0cFuBOlKYlzxQcv2EiuMET+zHW3mYdv/IdagZXA7s8ZqHgbZ4Tkj80r126j4sS1X
+	ARhCxwbbtf66jQQfWjgqw0XXrfS1zOZInRbnU=
+Received: by 10.112.86.67 with SMTP id n3mr3859324lbz.29.1327455872229; Tue,
+	24 Jan 2012 17:44:32 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.5.201 with HTTP; Tue, 24 Jan 2012 17:44:01 -0800 (PST)
+In-Reply-To: <1327449958-9778-2-git-send-email-andrea.adami@gmail.com>
 References: <1327449958-9778-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe] [PATCH] udev: default disabling DEVCACHE
+	<1327449958-9778-2-git-send-email-andrea.adami@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 24 Jan 2012 17:44:01 -0800
+Message-ID: <CAMKF1sor3Gq4VRmiyWKbwJ8J=bcHQq+oOJH3H5a=SAcLAzE1iQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] [PATCH] udev: default disabling DEVCACHE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,29 +37,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 00:13:51 -0000
+X-List-Received-Date: Wed, 25 Jan 2012 01:52:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* This deprecated mechanism can break boot when root is RO on boot,
-* probably does not cope well with sysvinit initscripts.
-* Ininfluent when using systemd.
+On Tue, Jan 24, 2012 at 4:05 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> * Ininfluent when using systemd.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-oe/recipes-core/udev/udev/default |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/meta-oe/recipes-core/udev/udev/default b/meta-oe/recipes-core/udev/udev/default
-index 5c4937a..d0050b8 100644
---- a/meta-oe/recipes-core/udev/udev/default
-+++ b/meta-oe/recipes-core/udev/udev/default
-@@ -1,4 +1,4 @@
- # Default for /etc/init.d/udev
- 
- # Comment this out to disable device cache
--DEVCACHE="/etc/dev.tar"
-+#DEVCACHE="/etc/dev.tar"
--- 
-1.7.3.4
-
+Did you mean inefficient ?
 
 
