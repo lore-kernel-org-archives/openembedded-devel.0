@@ -1,32 +1,16 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1RpmBk-0003A1-DC
+	(envelope-from <andrea.adami@gmail.com>) id 1RpqUl-000116-Jk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jan 2012 20:37:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 5101C2C800
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 19:29:29 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5eIkYN6OnhZI
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 19:29:20 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 2675A2C7E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 19:29:20 +0000 (UTC)
-Message-ID: <4F1F06B5.2000103@gmail.com>
-Date: Tue, 24 Jan 2012 20:29:57 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
-In-Reply-To: <4F181D44.6020500@gmx.net>
-Subject: Re: FOSDEM 2012 - stand organization thread
+	Wed, 25 Jan 2012 01:13:47 +0100
+Received: from mizar.localdomain (79.24.249.251) by smtp206.alice.it
+	(8.6.023.02) id 4F1836AD00A454AC; Wed, 25 Jan 2012 01:06:01 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Jan 2012 01:05:57 +0100
+Message-Id: <1327449958-9778-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-oe] [PATCH] xinput: remove, recipe is now in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +24,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2012 19:37:52 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Jan 2012 00:13:47 -0000
 
-Robert Schuster ha scritto, Il 19/01/2012 14:40:
+* as per commit id 618da7f65d3f9e3a1a5ee0b35371ae036a219a9a
 
-> Regarding the device tags (which would be extremely cool and we talked
-> about this for years now) I've no idea. Has someone access to a nice (=3D
-> portable) label printing device?
->=20
-> Any news regarding OE people who want come to FOSDEM?
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-app/xinput_1.5.3.bb |    8 --------
+ 1 files changed, 0 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xorg-app/xinput_1.5.3.bb
 
-
-I will be in Brussels from Friday to Sunday morning and at FOSDEM on
-Saturday.
-See you there ;-)
-
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=FCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+diff --git a/meta-oe/recipes-graphics/xorg-app/xinput_1.5.3.bb b/meta-oe/recipes-graphics/xorg-app/xinput_1.5.3.bb
+deleted file mode 100644
+index 3480185..0000000
+--- a/meta-oe/recipes-graphics/xorg-app/xinput_1.5.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require recipes-graphics/xorg-app/xorg-app-common.inc
+-LIC_FILES_CHKSUM = "file://COPYING;md5=22c34ea36136407a77702a8b784f9bd0"
+-DESCRIPTION = "a utility to configure and test XInput devices"
+-DEPENDS += " libxi"
+-PR = "r6"
+-
+-SRC_URI[md5sum] = "1e2f0ad4f3fa833b65c568907f171d28"
+-SRC_URI[sha256sum] = "6aade131cecddaeefc39ddce1dd5e8473f6039c2e4efbfd9fbb5ee2a75885c76"
+-- 
+1.7.3.4
 
 
 
