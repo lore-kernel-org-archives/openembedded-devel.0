@@ -1,29 +1,25 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rps26-00039w-6M
+	(envelope-from <jaap.dejong@nedap.com>) id 1RpxlP-00067d-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 02:52:18 +0100
-Received: by lags15 with SMTP id s15so2724479lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2012 17:44:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=kQUvPIFado0m9hsz33jf3TrdyiTghyPvApicQ5BuQtA=;
-	b=c0FdfnB2haDO9ywzCZ+9qA7YSoFDpldTrgOZLS+x8BF7ULCCEi5GYv5jNsXLcROgge
-	ns3U0cFuBOlKYlzxQcv2EiuMET+zHW3mYdv/IdagZXA7s8ZqHgbZ4Tkj80r126j4sS1X
-	ARhCxwbbtf66jQQfWjgqw0XXrfS1zOZInRbnU=
-Received: by 10.112.86.67 with SMTP id n3mr3859324lbz.29.1327455872229; Tue,
-	24 Jan 2012 17:44:32 -0800 (PST)
+	Wed, 25 Jan 2012 08:59:27 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Wed, 25 Jan 2012
+	08:50:33 +0100
+X-TM-IMSS-Message-ID: <16cb909a00098ef9@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 16cb909a00098ef9 ;
+	Wed, 25 Jan 2012 08:50:27 +0100
+Message-ID: <4F1FB448.3040404@nedap.com>
+Date: Wed, 25 Jan 2012 08:50:32 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.24) Gecko/20111108 Lightning/1.0b2 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Tue, 24 Jan 2012 17:44:01 -0800 (PST)
-In-Reply-To: <1327449958-9778-2-git-send-email-andrea.adami@gmail.com>
-References: <1327449958-9778-1-git-send-email-andrea.adami@gmail.com>
-	<1327449958-9778-2-git-send-email-andrea.adami@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jan 2012 17:44:01 -0800
-Message-ID: <CAMKF1sor3Gq4VRmiyWKbwJ8J=bcHQq+oOJH3H5a=SAcLAzE1iQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] [PATCH] udev: default disabling DEVCACHE
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,12 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 01:52:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Jan 2012 07:59:27 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 24, 2012 at 4:05 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> * Ininfluent when using systemd.
+Hi,
+not sure if this is the right list...
+Running into a failure:
 
-Did you mean inefficient ?
+    MACHINE=at91sam9263ek bitbake console-image-base
+    //
+    //
+    | + rm -f
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-all
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-armv5te
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-at91sam9263ek
 
+    | + true
+    | + '[' -eq 0 ']'
+    |
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/temp/run.do_rootfs.20251:
+    line 214: [: -eq: unary operator expected
+    | + set +x
+    | log_check: Using
+    /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-linux-gnueabi/core-image-base-1.0-r0/temp/log.do_rootfs.20251
+    as logfile
+
+    213    if true; then
+    214        if [ $runtime_script_required -eq 0 ]; then
+    215            # All packages were successfully configured.
+    216            # update-rc.d, base-passwd are no further use, remove
+    them now
+
+
+No error when:
+
+    MACHINE=at91sam9263ek bitbake console-image-base
+
+Thanks!
+Jaap
 
