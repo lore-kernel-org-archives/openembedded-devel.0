@@ -1,34 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rq63j-0001xc-6k for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 17:50:55 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rq5wA-0002IU-Ln for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 17:43:06 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 17:43:06 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ebutera@gmail.com>) id 1Rq6RT-0002r8-V6
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jan 2012 18:15:28 +0100
+Received: by ghrr1 with SMTP id r1so2311104ghr.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 17:43:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 Jan 2012 09:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=rNAveESceIs6s7FBpswN13y/azjvCRDk8fCrn3YHanU=;
+	b=AmWDZxRhhuCztLBpyTHBiV2o5OBaU8Q8zYjx3V//rLB0WHR1ZXskf2Y4ytCnnpq9yd
+	D61K6UWrSb/Q08N2BMU51sojfxIEEGHXqZHs6j5/w5vj4nHa0MTokX4CZT0swo1ylm1J
+	PbMZM9x6NLF+SjSF3aZJHutLycciP/68v6QX4=
+MIME-Version: 1.0
+Received: by 10.236.136.6 with SMTP id v6mr11329008yhi.89.1327510915291; Wed,
+	25 Jan 2012 09:01:55 -0800 (PST)
+Sender: ebutera@gmail.com
+Received: by 10.236.170.163 with HTTP; Wed, 25 Jan 2012 09:01:55 -0800 (PST)
+In-Reply-To: <1986227.xc2nDXUkFr@helios>
+References: <1592899.mTy93uB97i@helios> <20120125141018.GE3843@jama.jama.net>
+	<1986227.xc2nDXUkFr@helios>
+Date: Wed, 25 Jan 2012 18:01:55 +0100
+X-Google-Sender-Auth: 7EzCqKCT19cit7qwqIgRNfjQ04g
+Message-ID: <CA+2YH7v4NYp0DXtO9nwsypL3vsBZNiwR9F5oz-JutRPG=J=1=g@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 25 Jan 2012 17:42:54 +0100
-Message-ID: <jfpbee$l8a$1@dough.gmane.org>
-References: <1327506238-29483-1-git-send-email-eric@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1327506238-29483-1-git-send-email-eric@eukrea.com>
-X-Enigmail-Version: 1.3.4
-Subject: Re: [meta-oe] qt-4.8.0: enable sql features as in 4.7.4
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 16:50:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 25 Jan 2012 17:15:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Jan 25, 2012 at 4:09 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Wednesday 25 January 2012 15:10:18 Martin Jansa wrote:
+>> And that DEFAULT_PREFERRENCE should be respected across layers, IIRC if
+>> you add newer less-well tested version of some recipe (like I did with
+>> libsoup-2.4 in meta-efl) then it's preferred over "stable" version in
+>> oe-core even when it has lower D_P -1.
+>
+> I agree that in its most common usage DEFAULT_PREFERENCE is likely to be more
+> valuable independent of the layer priority - we should consider this. The
+> usefulness in this context is of course dependent on people actually setting
+> DEFAULT_PREFERENCE = "-1" when they add the new recipe however.
 
-Op 25-01-12 16:43, Eric Bénard schreef:
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
+This would be very very useful.
 
-Missing PR(INC) bumps
-
-> --- meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend |    5 +++++ 
-> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend |    5 +++++ 2 files
-> changed, 10 insertions(+), 0 deletions(-) create mode 100644
-> meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend create mode 100644
-> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
-> 
-> diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
-> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend new file mode
-> 100644 index 0000000..9b4ede4 --- /dev/null +++
-> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend @@ -0,0 +1,5 @@ 
-> +DEPENDS += "mysql5 postgresql sqlite" +QT_SQL_DRIVER_FLAGS =
-> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> -plugin-sql-sqlite2 -plugin-sql-sqlite" +QT_CONFIG_FLAGS +=
-> "-I${STAGING_INCDIR}/mysql \ +
-> -I${STAGING_INCDIR}/postgresql" + diff --git
-> a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
-> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend new file mode
-> 100644 index 0000000..9b4ede4 --- /dev/null +++
-> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend @@ -0,0 +1,5 @@ 
-> +DEPENDS += "mysql5 postgresql sqlite" +QT_SQL_DRIVER_FLAGS =
-> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> -plugin-sql-sqlite2 -plugin-sql-sqlite" +QT_CONFIG_FLAGS +=
-> "-I${STAGING_INCDIR}/mysql \ +
-> -I${STAGING_INCDIR}/postgresql" +
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk8gMQwACgkQMkyGM64RGpHsmQCfQSCWdT41PQuxdQ09EQ/CxGoS
-qloAn3Hi35LbSgKL7/n6xB7BN+y+EfQh
-=nOCe
------END PGP SIGNATURE-----
-
+Enrico
 
 
