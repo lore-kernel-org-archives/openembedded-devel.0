@@ -1,29 +1,25 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rq6qC-0003Xe-49
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rq6y0-0003lJ-Sb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 18:41:00 +0100
-Received: by vcbfk26 with SMTP id fk26so3794708vcb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 09:33:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hVyXx92Dkg6a6Snp+5hkNdcjjeIz/6tJamm1TmWEXHM=;
-	b=hFd/rJSIwf1lK4b8UofzKqjuRFGLTWUQQP/OWdLSWVVegy38HJm9PJ7YVGYegXX1pu
-	1OiZQEZmoXvNASIA5rdSgiOHjrcQk49PCi9JEozmUR9Ur/nkpR3EP5970G1JCjHA+FZH
-	HdopjbWuR9dzLhUouJru0Ga19egrLwcAPCaXw=
-MIME-Version: 1.0
-Received: by 10.220.154.135 with SMTP id o7mr8583087vcw.2.1327512793110; Wed,
-	25 Jan 2012 09:33:13 -0800 (PST)
-Received: by 10.52.67.171 with HTTP; Wed, 25 Jan 2012 09:33:13 -0800 (PST)
+	Wed, 25 Jan 2012 18:49:05 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 25 Jan 2012 09:41:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="59931060"
+Received: from unknown (HELO helios.localnet) ([10.252.122.164])
+	by AZSMGA002.ch.intel.com with ESMTP; 25 Jan 2012 09:41:16 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Philip Balister <philip@balister.org>
+Date: Wed, 25 Jan 2012 17:41:15 +0000
+Message-ID: <3543079.3rgjSx9VfG@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
 In-Reply-To: <4F202735.8040405@balister.org>
-References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
-	<1908796.glHMrEiIxU@helios> <4F202735.8040405@balister.org>
-Date: Wed, 25 Jan 2012 18:33:13 +0100
-Message-ID: <CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+References: <1592899.mTy93uB97i@helios> <1908796.glHMrEiIxU@helios>
+	<4F202735.8040405@balister.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,17 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 17:41:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Jan 2012 17:49:05 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-I like the idea of putting toolchains in a layer.
+On Wednesday 25 January 2012 11:00:53 Philip Balister wrote:
+> We should try and have a face to face meeting with OE developers at ELC
+> in a few weeks to talk about some of these issues.
 
-Wrt DP = -1:
-I feel if a recipe needs DP = -1 it is not good enough to be added to
-meta-oe. Probably it is more something for an unstable layer.
-(and DP = -1 encourages the growth of deadwood; I still recall in OE that
-there were some recipes that had the last 3 or 4 versions all with DP = -1;
-let's try to avoid this in oe-core/meta-oe)
+Unfortunately I won't be at ELC in person. Time difference and technology 
+allowing I could be there virtually or have someone who is there represent me, 
+but I do think that we should be able to resolve most things here on the 
+mailing lists (if not fully then at least as preparation for an in-person 
+discussion).
 
-Best regards, Frans.
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
