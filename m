@@ -1,33 +1,33 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rpy11-0006xa-Ok
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RpyXj-0007gK-N7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 09:15:35 +0100
-Received: by eekd41 with SMTP id d41so1595196eek.6
+	Wed, 25 Jan 2012 09:49:23 +0100
+Received: by eekd41 with SMTP id d41so1604084eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 00:07:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=6b4v663652uc/W20VTm0IpPLEG0HfBk2cN3fg7MOsYU=;
-	b=ZNBVnkszz6+G7TcczyNzkUpfhwoRJARFip59/blp8xa4oXunmZkSGK/MXmHlPO9xX1
-	6xCFzuTSL6uutOp4Kro6vfKt3EBnVA5ntmyckXE5wyfv7F1I2OTnV4pmmB/B4RgD82l7
-	sRO9ydW4K4O5qsy34XpLCE0KSUi660QDABpjg=
-Received: by 10.14.16.129 with SMTP id h1mr5780443eeh.46.1327478868580;
-	Wed, 25 Jan 2012 00:07:48 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b49sm78326237eec.9.2012.01.25.00.07.46
+	Wed, 25 Jan 2012 00:41:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=R1KoceX/bddwqSUCZ/na6CXngQhAP4RNAofPfIIWmas=;
+	b=YqkeAnQaq8KE+1+pXv8gL8L+ALP9vtqJXau9bu0H7b0THpV8cSu4dMm5khh6c5VH2N
+	ukUCYXstCPLmmTnYOtPyOt8wghJMABh8oHffx8q5ofUn85mhRmHwjWy3z8oeGxl/TDEP
+	FaN8E4plAPBKTSMrzRy7OxU/sSabey2O3F9jw=
+Received: by 10.14.9.155 with SMTP id 27mr5611742eet.75.1327480897074;
+	Wed, 25 Jan 2012 00:41:37 -0800 (PST)
+Received: from localhost.localdomain (ip-95-222-156-232.unitymediagroup.de.
+	[95.222.156.232])
+	by mx.google.com with ESMTPS id c16sm78749577eei.1.2012.01.25.00.41.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 00:07:47 -0800 (PST)
-Date: Wed, 25 Jan 2012 09:07:45 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 25 Jan 2012 00:41:36 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120125080745.GA3843@jama.jama.net>
-References: <4F1FB448.3040404@nedap.com>
+Date: Wed, 25 Jan 2012 09:41:39 +0100
+Message-Id: <1327480899-14058-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.4
 MIME-Version: 1.0
-In-Reply-To: <4F1FB448.3040404@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: build error
+Subject: [meta-oe] gimp: replace --without-libwmf / --without-wmf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,85 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 08:15:35 -0000
-X-Groupsio-MsgNum: 36656
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/9DWx/yDrRhgMJTb"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Jan 2012 08:49:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---/9DWx/yDrRhgMJTb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+accidently did not commit the latest (tested) changes
 
-On Wed, Jan 25, 2012 at 08:50:32AM +0100, Jaap de Jong wrote:
-> Hi,
-> not sure if this is the right list...
-> Running into a failure:
->=20
->     MACHINE=3Dat91sam9263ek bitbake console-image-base
->     //
->     //
->     | + rm -f
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-all
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-armv5te
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/rootfs/var/lib/opkg/lists/oe-at91sam9263=
-ek
->=20
->     | + true
->     | + '[' -eq 0 ']'
->     |
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/temp/run.do_rootfs.20251:
->     line 214: [: -eq: unary operator expected
->     | + set +x
->     | log_check: Using
->     /media/OpenEmbedded/oe-core/build/tmp-eglibc/work/at91sam9263ek-oe-li=
-nux-gnueabi/core-image-base-1.0-r0/temp/log.do_rootfs.20251
->     as logfile
->=20
->     213    if true; then
->     214        if [ $runtime_script_required -eq 0 ]; then
->     215            # All packages were successfully configured.
->     216            # update-rc.d, base-passwd are no further use, remove
->     them now
->=20
->=20
-> No error when:
->=20
->     MACHINE=3Dat91sam9263ek bitbake console-image-base
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-try this
-http://patchwork.openembedded.org/patch/20111/
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb b/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb
+index 31e8925..f952883 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=878e3965c7b52d85827c75f5a2f3b314"
+ 
+ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webkit-gtk lcms gegl poppler"
+ 
++PR = "r1"
++
+ inherit gnome
+ 
+ SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.6/gimp-${PV}.tar.bz2 \
+@@ -14,7 +16,7 @@ SRC_URI[md5sum] = "bb2939fe13e54fc7255cef5d097bb5dd"
+ SRC_URI[sha256sum] = "9b6d08d0803b3912ea596d1b77b9c21ee13778c23388a225c004b8c1587cb0a1"
+ 
+ EXTRA_OECONF = "--disable-python \
+-                --without-libwmf"
++                --without-wmf"
+ 
+ do_configure_append() {
+ 	find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+-- 
+1.7.6.4
 
-Cheers,
 
->=20
-> Thanks!
-> Jaap
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---/9DWx/yDrRhgMJTb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8fuFEACgkQN1Ujt2V2gByFoACcDokPYjB8tYQ9kaW9yWrDbGsf
-jr4AniJQoYJ/wjYEt6HGkg3CZXrpIKVm
-=iktw
------END PGP SIGNATURE-----
-
---/9DWx/yDrRhgMJTb--
