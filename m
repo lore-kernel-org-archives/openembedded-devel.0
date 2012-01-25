@@ -1,30 +1,22 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from col0-omc4-s1.col0.hotmail.com ([65.55.34.203])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RqBId-0000hf-D9
+	(envelope-from <kyoonn@hotmail.com>) id 1RqBat-00019L-Oa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 23:26:39 +0100
-Received: (qmail 23651 invoked by uid 1003); 25 Jan 2012 22:12:06 -0000
-Received: from unknown (HELO ?192.168.1.104?)
-	(philip@opensdr.com@96.240.160.175)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	25 Jan 2012 22:12:06 -0000
-Message-ID: <4F207E35.3030908@balister.org>
-Date: Wed, 25 Jan 2012 17:12:05 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Wed, 25 Jan 2012 23:45:32 +0100
+Received: from COL120-W44 ([65.55.34.200]) by col0-omc4-s1.col0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 25 Jan 2012 14:36:40 -0800
+Message-ID: <COL120-W44C8BBA66A5989AFCDDD25DD880@phx.gbl>
+X-Originating-IP: [70.137.132.86]
+From: simran singh <kyoonn@hotmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Jan 2012 14:36:40 -0800
+Importance: Normal
 MIME-Version: 1.0
-To: Phil Blundell <philb@gnu.org>
-References: <1592899.mTy93uB97i@helios>
-	<1908796.glHMrEiIxU@helios>		<4F202735.8040405@balister.org>
-	<3543079.3rgjSx9VfG@helios>	
-	<1327514250.29933.37.camel@phil-desktop>
-	<4F2069CC.7060409@balister.org>
-	<1327525435.2716.37.camel@x121e.pbcl.net>
-In-Reply-To: <1327525435.2716.37.camel@x121e.pbcl.net>
-X-Enigmail-Version: 1.1.2
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Splitting meta-oe
+X-OriginalArrivalTime: 25 Jan 2012 22:36:40.0555 (UTC)
+	FILETIME=[CE687BB0:01CCDBB1]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Perl extension for OpenSSL - Net::SSLeay
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,33 +30,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 22:26:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Jan 2012 22:45:32 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 01/25/2012 04:03 PM, Phil Blundell wrote:
-> On Wed, 2012-01-25 at 15:45 -0500, Philip Balister wrote:
->> On 01/25/2012 12:57 PM, Phil Blundell wrote:
->>> Agreed.  I think the mailing lists ought to remain the primary forum for
->>> decision-making.  If there's something that needs to be discussed, let's
->>> do it here.  If we can't reach a consensus, that's what we have the TSC
->>> for.
->>
->> I do not want this to discourage from OE developers talking about things
->> like this when they have the chance. Sometimes, high bandwidth face to
->> face conversations can resolve issues much faster.
-> 
-> Absolutely, folks should feel welcome to discuss this and any other
-> issues whenever they have the chance.  And if no conclusion has emerged
-> by the time ELC comes around then that might indeed be a useful way to
-> move things forward.  But, such face-to-face meetings inevitably involve
-> only a subset of developers and the only way to ensure that all
-> interested parties are able to participate is to hold discussion on the
-> mailing list whenever possible.
 
-Sure. I don't think anyone is suggesting that a few guys get together
-and make binding decisions, just try to work through things a little faster.
+Hello=2C
 
-Philip
+I am not sure if this is the right list.
 
+Trying to add Net::SSLeay perl module=2C I get the following error.
+
+
+
+ NOTE: Running task 204 of 315 (ID: 11=2C=20
+/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blackco=
+re-common/recipes/
+
+net-ssleay/net-ssleay_1.36.bb=2C do_compile)
+
+ERROR: TaskFailed event exception=2C aborting
+
+ERROR: Build of=20
+/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blackco=
+re-common/recipes/net-ssleay/net-ssleay_1.36.bb
+
+ do_compile failed
+
+ERROR: Task 11=20
+(/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blackc=
+ore-common/recipes/net-ssleay/net-ssleay_1.36.bb=2C
+
+ do_compile) failed with 256
+
+ERROR:=20
+'/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blackc=
+ore-common/recipes/net-ssleay/net-ssleay_1.36.bb'
+ failed
+
+NOTE: package net-ssleay-1.36-r0: task do_compile: Started
+
+ERROR: Function do_compile failed
+
+NOTE: Task failed: ('function do_compile failed'=2C=20
+'/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080ds=
+_release/work/
+
+ppce500mc-linux/net-ssleay-1.36-r0/temp/log.do_compile.22680')
+
+ERROR: Logfile of failure stored in:=20
+/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080ds_=
+release/work/ppce500mc-
+
+linux/net-ssleay-1.36-r0/temp/log.do_compile.22680
+
+Log data follows:
+
+| NOTE: make -j 2 -e MAKEFLAGS=3D PASTHRU_INC=3D -fexpensive-optimizations=
+=20
+-frename-registers -fomit-frame-pointer -O2 -g0 CCFLAGS=3D -fexpensive
+
+-optimizations -frename-registers -fomit-frame-pointer -O2 -g0=20
+LD=3Dpowerpc-linux-gnu-gcc -mcpu=3De500mc -maix-struct-return=20
+--sysroot=3D/home/Simran/
+
+Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080ds_release/sysro=
+ots/ppce500mc-linux
+
+| Can't locate ExtUtils/Command.pm in @INC (@INC contains: inc=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release
+
+/sysroots/i686-linux/usr/lib/perl/5.10.1=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release/sysroots/i686-linux/usr/lib
+
+/perl/5.10.1=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release/sysroots/i686-linux/usr/lib/perl/5.10.1
+ /home/
+
+jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_p1023r=
+ds_release/sysroots/i686-linux/usr/lib/perl .).
+
+| BEGIN failed--compilation aborted.
+
+| make: *** [blib/lib/Net/.exists] Error 2
+
+| make: *** Waiting for unfinished jobs....
+
+| Can't locate ExtUtils/Command.pm in @INC (@INC contains: inc=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/
+
+build_p1023rds_release/sysroots/i686-linux/usr/lib/perl/5.10.1=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release
+
+/sysroots/i686-linux/usr/lib/perl/5.10.1=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release/sysroots/i686-linux/usr
+
+/lib/perl/5.10.1=20
+/home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_=
+p1023rds_release/sysroots/i686-linux/usr/lib/perl
+ .).
+
+| BEGIN failed--compilation aborted.
+
+| make: *** [blib/arch/.exists] Error 2
+
+| FATAL: oe_runmake failed
+
+| ERROR: Function do_compile failed
+
+NOTE: package net-ssleay-1.36-r0: task do_compile: Failed
+
+ERROR: TaskFailed event exception=2C aborting
+
+
+
+
+
+I used the libnet-ssleay-perl_1.36.bb=2C I found in the oe-commit archive.
+
+Please advice and thanks.
+
+
+
+Sim Gill 		 	   		  =
 
