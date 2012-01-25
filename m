@@ -1,31 +1,24 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ebutera@gmail.com>) id 1Rq6RT-0002r8-V6
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rq6Sm-0002xt-GF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 18:15:28 +0100
-Received: by ghrr1 with SMTP id r1so2311104ghr.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 09:07:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=rNAveESceIs6s7FBpswN13y/azjvCRDk8fCrn3YHanU=;
-	b=AmWDZxRhhuCztLBpyTHBiV2o5OBaU8Q8zYjx3V//rLB0WHR1ZXskf2Y4ytCnnpq9yd
-	D61K6UWrSb/Q08N2BMU51sojfxIEEGHXqZHs6j5/w5vj4nHa0MTokX4CZT0swo1ylm1J
-	PbMZM9x6NLF+SjSF3aZJHutLycciP/68v6QX4=
+	Wed, 25 Jan 2012 18:16:48 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 25 Jan 2012 06:47:45 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="110627692"
+Received: from unknown (HELO helios.localnet) ([10.252.122.164])
+	by fmsmga001.fm.intel.com with ESMTP; 25 Jan 2012 06:47:44 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Philip Balister <philip@balister.org>
+Date: Wed, 25 Jan 2012 14:47:43 +0000
+Message-ID: <1908796.glHMrEiIxU@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
+In-Reply-To: <4F20130D.2010208@balister.org>
+References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
 MIME-Version: 1.0
-Received: by 10.236.136.6 with SMTP id v6mr11329008yhi.89.1327510915291; Wed,
-	25 Jan 2012 09:01:55 -0800 (PST)
-Sender: ebutera@gmail.com
-Received: by 10.236.170.163 with HTTP; Wed, 25 Jan 2012 09:01:55 -0800 (PST)
-In-Reply-To: <1986227.xc2nDXUkFr@helios>
-References: <1592899.mTy93uB97i@helios> <20120125141018.GE3843@jama.jama.net>
-	<1986227.xc2nDXUkFr@helios>
-Date: Wed, 25 Jan 2012 18:01:55 +0100
-X-Google-Sender-Auth: 7EzCqKCT19cit7qwqIgRNfjQ04g
-Message-ID: <CA+2YH7v4NYp0DXtO9nwsypL3vsBZNiwR9F5oz-JutRPG=J=1=g@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,24 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 17:15:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Jan 2012 17:16:48 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Wed, Jan 25, 2012 at 4:09 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Wednesday 25 January 2012 15:10:18 Martin Jansa wrote:
->> And that DEFAULT_PREFERRENCE should be respected across layers, IIRC if
->> you add newer less-well tested version of some recipe (like I did with
->> libsoup-2.4 in meta-efl) then it's preferred over "stable" version in
->> oe-core even when it has lower D_P -1.
->
-> I agree that in its most common usage DEFAULT_PREFERENCE is likely to be more
-> valuable independent of the layer priority - we should consider this. The
-> usefulness in this context is of course dependent on people actually setting
-> DEFAULT_PREFERENCE = "-1" when they add the new recipe however.
+On Wednesday 25 January 2012 09:34:53 Philip Balister wrote:
+> On 01/25/2012 07:48 AM, Paul Eggleton wrote:
+> > I think what most people want when they enable meta-oe in their layer
+> > configuration is #1, and it's probably OK to get #2 along with it. They do
+> > not however expect versions of toolchains, eglibc or other fairly
+> > fundamental bits and pieces that might cause their build to fail when
+> > everything worked fine just building with OE-Core (#4). Equally I expect
+> > there will be some people who want just #3 and nothing else.
+> 
+> My understanding is the OE-Core toolchains lack the Linaro patches which
+> a extremely useful for people using armv7. So dropping toolchains from
+> meta-oe would be a really bad thing for a large portion of the user base.
 
-This would be very very useful.
+I was suggesting moving these toolchains to a separate layer where those who 
+don't need them aren't tripping over them. Adding such a layer to your 
+configuration is more or less trivial, and once done you would not notice any 
+difference.
 
-Enrico
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
