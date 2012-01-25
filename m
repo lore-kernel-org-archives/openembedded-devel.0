@@ -1,25 +1,28 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rq6y0-0003lJ-Sb
+	(envelope-from <raj.khem@gmail.com>) id 1Rq76C-0003z2-2b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 18:49:05 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 25 Jan 2012 09:41:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="59931060"
-Received: from unknown (HELO helios.localnet) ([10.252.122.164])
-	by AZSMGA002.ch.intel.com with ESMTP; 25 Jan 2012 09:41:16 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Philip Balister <philip@balister.org>
-Date: Wed, 25 Jan 2012 17:41:15 +0000
-Message-ID: <3543079.3rgjSx9VfG@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
-In-Reply-To: <4F202735.8040405@balister.org>
-References: <1592899.mTy93uB97i@helios> <1908796.glHMrEiIxU@helios>
-	<4F202735.8040405@balister.org>
+	Wed, 25 Jan 2012 18:57:32 +0100
+Received: by lags15 with SMTP id s15so3169232lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 09:49:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=GOLnKm+NktlvMohgnGCfMyiIp9UY5roSWur2o3xAlEM=;
+	b=DsZDnLDYh+WBmhniBq/BR3CwaNbcNjDtXm2HF8n7mA0UK1vMh5P2BSNbtI0jRbY4Kf
+	Dx+T+4L2sd9fthGFHNByYrWhBlnC6nCoNiV0vNxP4GL3t7g3ZH0MqjcuFbDFwdvtk/SE
+	VkuXfBsjF0+3pWD8Bu7AqGnJ1Y7y6sYuw7MpM=
+Received: by 10.112.101.34 with SMTP id fd2mr4553725lbb.16.1327513785331; Wed,
+	25 Jan 2012 09:49:45 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+Received: by 10.152.5.201 with HTTP; Wed, 25 Jan 2012 09:49:14 -0800 (PST)
+In-Reply-To: <1592899.mTy93uB97i@helios>
+References: <1592899.mTy93uB97i@helios>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2012 09:49:14 -0800
+Message-ID: <CAMKF1spT9TgXmqQq-D+r1jnoXuv_+koPs_Rr=VhVzZkro5V1Bw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,26 +37,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 17:49:05 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 25 Jan 2012 17:57:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 25 January 2012 11:00:53 Philip Balister wrote:
-> We should try and have a face to face meeting with OE developers at ELC
-> in a few weeks to talk about some of these issues.
+On Wed, Jan 25, 2012 at 4:48 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> As I see it, meta-oe is trying provide the following:
+>
+> =C2=A01) Additional recipes that are not in OE-Core
+>
+> =C2=A02) Additional functionality for OE-Core recipes that we can't enabl=
+e in OE-
+> Core itself (e.g. enabling postgres support in Qt) - mostly just a side-e=
+ffect
+> of #1
+>
+> =C2=A03) A place to preserve old versions of recipes that have been remov=
+ed from
+> OE-Core in favour of newer versions
+>
+> =C2=A04) Newer less-well tested versions of recipes
 
-Unfortunately I won't be at ELC in person. Time difference and technology 
-allowing I could be there virtually or have someone who is there represent me, 
-but I do think that we should be able to resolve most things here on the 
-mailing lists (if not fully then at least as preparation for an in-person 
-discussion).
+meta-oe was started to fill in gaps that oe-core would have for
+existing oe users
+since oe-core will not have all required functionality and so distros
+could migrate
+to using oe-core and not loose the bells and whistles they already have.
+Plus its an umbrella layer which has many layers underneath.
 
-Cheers,
-Paul
+However the problems it sees right now are that there are pieces which
+could be considered
+distro specific and ones, the new untested recipes should not be an
+issue if they are pinned
+properly. recipes that move our of oe-core I agree should be hosted in
+a meta-deprecated or somesuch
 
--- 
+I am happy to move out toolchain bits as well into a separate layer
+under meta-openembedded umbrella
+that will clarify it a bit and should not be a big hassle.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+I think real issue people suffer from is 2 and the duplicate recipes
+in meta-oe which has different configuration
+in oe-core.
+
+So meta-oe meta-toolchain meta-deprecated could be created now we need
+to find maintainer for these layers.
+
+
+All said if it was possible to handpick versions from layers and use
+bitbake -g output pn-depends.dot
+to generate some manifest so indicate which recipe is being picked
+from a set of recipes from different layers would be helpful.
+since there always will be some duplicate recipes no matter what.
 
 
