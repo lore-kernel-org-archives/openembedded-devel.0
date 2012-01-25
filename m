@@ -1,25 +1,21 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rq6Sm-0002xt-GF
+	(envelope-from <eric@eukrea.com>) id 1Rq6ew-0003Er-VJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 18:16:48 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 25 Jan 2012 06:47:45 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="110627692"
-Received: from unknown (HELO helios.localnet) ([10.252.122.164])
-	by fmsmga001.fm.intel.com with ESMTP; 25 Jan 2012 06:47:44 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Philip Balister <philip@balister.org>
-Date: Wed, 25 Jan 2012 14:47:43 +0000
-Message-ID: <1908796.glHMrEiIxU@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
-In-Reply-To: <4F20130D.2010208@balister.org>
-References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
+	Wed, 25 Jan 2012 18:29:23 +0100
+Received: from localhost.localdomain (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 7D7914B0780
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 18:21:34 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Jan 2012 18:21:33 +0100
+Message-Id: <1327512093-30791-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.7.5
+In-Reply-To: <jfpbee$l8a$1@dough.gmane.org>
+References: <jfpbee$l8a$1@dough.gmane.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Splitting meta-oe
+Subject: [PATCH v2] qt-4.8.0: enable sql features as in 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,34 +29,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 17:16:48 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 25 Jan 2012 17:29:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 25 January 2012 09:34:53 Philip Balister wrote:
-> On 01/25/2012 07:48 AM, Paul Eggleton wrote:
-> > I think what most people want when they enable meta-oe in their layer
-> > configuration is #1, and it's probably OK to get #2 along with it. They do
-> > not however expect versions of toolchains, eglibc or other fairly
-> > fundamental bits and pieces that might cause their build to fail when
-> > everything worked fine just building with OE-Core (#4). Equally I expect
-> > there will be some people who want just #3 and nothing else.
-> 
-> My understanding is the OE-Core toolchains lack the Linaro patches which
-> a extremely useful for people using armv7. So dropping toolchains from
-> meta-oe would be a really bad thing for a large portion of the user base.
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+v2: add PRINC
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend |    6 ++++++
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend |    6 ++++++
+ 2 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
 
-I was suggesting moving these toolchains to a separate layer where those who 
-don't need them aren't tripping over them. Adding such a layer to your 
-configuration is more or less trivial, and once done you would not notice any 
-difference.
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+new file mode 100644
+index 0000000..3c1ac5e
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+@@ -0,0 +1,6 @@
++DEPENDS +=3D "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
++PRINC =3D "1"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend b/meta-oe=
+/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
+new file mode 100644
+index 0000000..3c1ac5e
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
+@@ -0,0 +1,6 @@
++DEPENDS +=3D "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS =3D "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -p=
+lugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS +=3D "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
++PRINC =3D "1"
+--=20
+1.7.7.5
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
