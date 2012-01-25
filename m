@@ -1,26 +1,34 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Rq5PY-00018Y-Rn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 17:09:25 +0100
-Received: (qmail 10322 invoked by uid 1003); 25 Jan 2012 16:00:54 -0000
-Received: from unknown (HELO ?192.168.1.104?)
-	(philip@opensdr.com@96.240.160.175)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	25 Jan 2012 16:00:54 -0000
-Message-ID: <4F202735.8040405@balister.org>
-Date: Wed, 25 Jan 2012 11:00:53 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
-	<1908796.glHMrEiIxU@helios>
-In-Reply-To: <1908796.glHMrEiIxU@helios>
-X-Enigmail-Version: 1.1.2
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Splitting meta-oe
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rq63j-0001xc-6k for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jan 2012 17:50:55 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rq5wA-0002IU-Ln for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jan 2012 17:43:06 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 17:43:06 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 17:43:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 25 Jan 2012 17:42:54 +0100
+Message-ID: <jfpbee$l8a$1@dough.gmane.org>
+References: <1327506238-29483-1-git-send-email-eric@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <1327506238-29483-1-git-send-email-eric@eukrea.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: [meta-oe] qt-4.8.0: enable sql features as in 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 16:09:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Jan 2012 16:50:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 01/25/2012 09:47 AM, Paul Eggleton wrote:
-> On Wednesday 25 January 2012 09:34:53 Philip Balister wrote:
->> On 01/25/2012 07:48 AM, Paul Eggleton wrote:
->>> I think what most people want when they enable meta-oe in their layer
->>> configuration is #1, and it's probably OK to get #2 along with it. They do
->>> not however expect versions of toolchains, eglibc or other fairly
->>> fundamental bits and pieces that might cause their build to fail when
->>> everything worked fine just building with OE-Core (#4). Equally I expect
->>> there will be some people who want just #3 and nothing else.
->>
->> My understanding is the OE-Core toolchains lack the Linaro patches which
->> a extremely useful for people using armv7. So dropping toolchains from
->> meta-oe would be a really bad thing for a large portion of the user base.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 25-01-12 16:43, Eric Bénard schreef:
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
+
+Missing PR(INC) bumps
+
+> --- meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend |    5 +++++ 
+> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend |    5 +++++ 2 files
+> changed, 10 insertions(+), 0 deletions(-) create mode 100644
+> meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend create mode 100644
+> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
 > 
-> I was suggesting moving these toolchains to a separate layer where those who 
-> don't need them aren't tripping over them. Adding such a layer to your 
-> configuration is more or less trivial, and once done you would not notice any 
-> difference.
+> diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend new file mode
+> 100644 index 0000000..9b4ede4 --- /dev/null +++
+> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend @@ -0,0 +1,5 @@ 
+> +DEPENDS += "mysql5 postgresql sqlite" +QT_SQL_DRIVER_FLAGS =
+> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
+> -plugin-sql-sqlite2 -plugin-sql-sqlite" +QT_CONFIG_FLAGS +=
+> "-I${STAGING_INCDIR}/mysql \ +
+> -I${STAGING_INCDIR}/postgresql" + diff --git
+> a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
+> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend new file mode
+> 100644 index 0000000..9b4ede4 --- /dev/null +++
+> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend @@ -0,0 +1,5 @@ 
+> +DEPENDS += "mysql5 postgresql sqlite" +QT_SQL_DRIVER_FLAGS =
+> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
+> -plugin-sql-sqlite2 -plugin-sql-sqlite" +QT_CONFIG_FLAGS +=
+> "-I${STAGING_INCDIR}/mysql \ +
+> -I${STAGING_INCDIR}/postgresql" +
 
-We should try and have a face to face meeting with OE developers at ELC
-in a few weeks to talk about some of these issues.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Philip
+iEYEARECAAYFAk8gMQwACgkQMkyGM64RGpHsmQCfQSCWdT41PQuxdQ09EQ/CxGoS
+qloAn3Hi35LbSgKL7/n6xB7BN+y+EfQh
+=nOCe
+-----END PGP SIGNATURE-----
+
 
 
