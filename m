@@ -1,33 +1,33 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jekhor@gmail.com>) id 1Rq0si-0004Q6-Dt
+	(envelope-from <jekhor@gmail.com>) id 1Rq15N-000587-S2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 12:19:12 +0100
-Received: by mail-bk0-f47.google.com with SMTP id q10so4070568bka.6
+	Wed, 25 Jan 2012 12:32:17 +0100
+Received: by bkaq10 with SMTP id q10so4079778bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 03:11:28 -0800 (PST)
+	Wed, 25 Jan 2012 03:24:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=3LWQSihZ1FqFReG9BYUYr+iwCHOVn/6ylhWHHuNxJ/E=;
-	b=knThoyScwIBSglLYH+U3cjoGw3xpsPD6+Og0QjWs6HcL8HYdyjGPNN0uftf5sJggFX
-	yIVDxagrIwsGOPNWi5+pZc8x2uQTX76GXWAiDlFBaksdoM5qcI1bkHabNH2JIJgkRElF
-	zRpQZUIApxxf/RB2TXx14s8qHhebErH7YNpCI=
-Received: by 10.204.156.204 with SMTP id y12mr5274017bkw.113.1327489888268;
-	Wed, 25 Jan 2012 03:11:28 -0800 (PST)
+	bh=KfNO0033FJLUTaDJBxLv0StrRzo3F2JU7tE/zL1XR0Q=;
+	b=GmhF4BN9cOmcKvuLcvQ7jsz6VgLkOKtpPpBCuTxZNczzES+1PongY/30caFTJWrl9g
+	5erUQRtd0oTx9zRXTkfFUML028Onvp/uEV9/B25rrlustqIPaubizVcVO/bmoP10f1fX
+	+KZmnP6oQsoXmnxYwoBAm+ZPncYwnkJ1nmrhA=
+Received: by 10.204.129.200 with SMTP id p8mr6839209bks.114.1327488983195;
+	Wed, 25 Jan 2012 02:56:23 -0800 (PST)
 Received: from localhost.localdomain (mx2.promwad.com. [195.222.87.218])
-	by mx.google.com with ESMTPS id iu2sm309749bkb.0.2012.01.25.03.11.27
+	by mx.google.com with ESMTPS id t17sm89505bke.6.2012.01.25.02.56.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 03:11:27 -0800 (PST)
+	Wed, 25 Jan 2012 02:56:19 -0800 (PST)
 Sender: Yauhen Kharuzhy <jekhor@gmail.com>
 Received: from jek by localhost.localdomain with local (Exim 4.77)
 	(envelope-from <jek@jeknote.loshitsa1.net>)
-	id 1Rq0lC-0007am-R7; Wed, 25 Jan 2012 14:11:26 +0300
+	id 1Rq0WY-0007LK-Oq; Wed, 25 Jan 2012 13:56:18 +0300
 From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2012 14:11:25 +0300
-Message-Id: <1327489885-29156-1-git-send-email-yauhen.kharuzhy@promwad.com>
+Date: Wed, 25 Jan 2012 13:56:16 +0300
+Message-Id: <1327488976-28198-1-git-send-email-yauhen.kharuzhy@promwad.com>
 X-Mailer: git-send-email 1.7.8.3
-Subject: [PATCH 10/10] Add recipe for pure-ftpd 1.0.35
+Subject: [PATCH 05/10] Add recipe for conntrack-tools 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,88 +41,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 11:19:12 -0000
-
-Add pure-ftpd FTP server.
+X-List-Received-Date: Wed, 25 Jan 2012 11:32:18 -0000
 
 Recipe for this package has been taken from Openembedded-classic project.
 
 Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 ---
- ...coded-usr-local-includes-from-configure.a.patch |   36 ++++++++++++++++++++
- .../pure-ftpd/pure-ftpd_1.0.35.bb                  |   20 +++++++++++
- 2 files changed, 56 insertions(+), 0 deletions(-)
- create mode 100644 meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
- create mode 100644 meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
+ .../conntrack-tools/conntrack-tools_1.0.0.bb       |   27 +++++++
+ .../conntrack-tools/files/conntrack-failover       |   77 ++++++++++++++++++++
+ .../conntrack-tools/files/init                     |   77 ++++++++++++++++++++
+ 3 files changed, 181 insertions(+), 0 deletions(-)
+ create mode 100644 meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
+ create mode 100644 meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
+ create mode 100644 meta/recipes-connectivity/conntrack-tools/files/init
 
-diff --git a/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+diff --git a/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb b/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
 new file mode 100644
-index 0000000..202cee9
+index 0000000..06a1f96
 --- /dev/null
-+++ b/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
-@@ -0,0 +1,36 @@
-+From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
-+From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
-+Date: Tue, 10 Jan 2012 19:15:25 +0300
-+Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
-+
-+Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
-+---
-+ configure.ac |   12 ------------
-+ 1 files changed, 0 insertions(+), 12 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index ae00c08..9ba6d8d 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
-+ python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
-+ AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
-+ 
-+-if test -d /usr/local/include; then
-+-  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
-+-fi
-+-
-+-if test -d /usr/kerberos/include; then
-+-  CPPFLAGS="$CPPFLAGS -I/usr/kerberos/include"
-+-fi
-+-
-+-if test -d /usr/local/lib; then
-+-  LDFLAGS="$LDFLAGS -L/usr/local/lib"
-+-fi
-+-
-+ if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
-+   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
-+ fi
-+-- 
-+1.7.7.3
-+
-diff --git a/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb b/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
-new file mode 100644
-index 0000000..5308b1e
---- /dev/null
-+++ b/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
-@@ -0,0 +1,20 @@
-+HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
-+DESCRIPTION = "Pure-FTPd is a free (BSD), secure, production-quality and standard-conformant FTP server"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=00c16e0df3fae485c1b5b7fb2030b5df"
-+
-+DEPENDS = "libcap"
++++ b/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "Connection tracking userspace tools for Linux"
++LICENSE = "GPL"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
++DEPENDS = "libnfnetlink libnetfilter-conntrack"
 +
 +PR = "r0"
 +
-+SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
-+            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
-+            "
-+SRC_URI[md5sum] = "fa53507ff8e9fdca0197917ec8d106a3"
-+SRC_URI[sha256sum] = "eac26c7601b81433211f2b9d6c3e49b832f0274ed077b8d061b5c533b4e63beb"
++SRC_URI = " \
++	http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
++	file://conntrack-failover \
++	file://init \
++	"
++SRC_URI[tar.md5sum] = "5add24d4761baf17af630d5627a71752"
++SRC_URI[tar.sha256sum] = "fe36b044bb494d1810a6d73f0b4ccd25b6e81f72a2fc63c44da79ceebe4817b0"
 +
 +inherit autotools
++inherit update-rc.d
 +
-+EXTRA_OECONF = "--with-minimal"
++INITSCRIPT_NAME = "conntrackd"
++
++do_install_append() {
++	install -d ${D}/${sysconfdir}/conntrackd
++	install -d ${D}/${sysconfdir}/init.d
++	install -m 0644 doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
++	install -m 0755 ${WORKDIR}/conntrack-failover ${D}/${sysconfdir}/init.d/conntrack-failover
++	install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/conntrackd
++}
+diff --git a/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover b/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
+new file mode 100644
+index 0000000..6d92e63
+--- /dev/null
++++ b/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
+@@ -0,0 +1,77 @@
++#!/bin/sh
++# 
++# (C) 2008 by Pablo Neira Ayuso <pablo@netfilter.org>
++# (C) 2009 Roman I Khimov <khimov@altell.ru>
++#
++# This software may be used and distributed according to the terms
++# of the GNU General Public License, incorporated herein by reference.
++#
++# Description:
++#
++# This is the script for primary-backup setups for keepalived
++# (http://www.keepalived.org). You may adapt it to make it work with other
++# high-availability managers.
++#
++# Do not forget to include the required modifications to your keepalived.conf
++# file to invoke this script during keepalived's state transitions.
++#
++# Contributions to improve this script are welcome :).
++#
++## Modified to work as init.d script under pacemaker control
++
++CONNTRACKD_BIN=/usr/sbin/conntrackd
++CONNTRACKD_LOCK=/var/lock/conntrack.lock
++CONNTRACKD_CONFIG=/etc/conntrackd/conntrackd.conf
++
++case "$1" in
++  start)
++    #
++    # commit the external cache into the kernel table
++    #
++    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -c
++    if [ $? -eq 1 ]
++    then
++        logger "ERROR: failed to invoke conntrackd -c"
++    fi
++
++    #
++    # flush the internal and the external caches
++    #
++    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -f
++    if [ $? -eq 1 ]
++    then
++    	logger "ERROR: failed to invoke conntrackd -f"
++    fi
++
++    #
++    # resynchronize my internal cache to the kernel table
++    #
++    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -R
++    if [ $? -eq 1 ]
++    then
++    	logger "ERROR: failed to invoke conntrackd -R"
++    fi
++
++    #
++    # send a bulk update to backups 
++    #
++    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -B
++    if [ $? -eq 1 ]
++    then
++        logger "ERROR: failed to invoke conntrackd -B"
++    fi
++    ;;
++  stop)
++	$CONNTRACKD_BIN -t
++	$CONNTRACKD_BIN -n
++	;;
++  status)
++	;;
++  *)
++    logger "ERROR: unknown command"
++    echo "Usage: conntrack-failover {start|stop|status}"
++    exit 1
++    ;;
++esac
++
++exit 0
+diff --git a/meta/recipes-connectivity/conntrack-tools/files/init b/meta/recipes-connectivity/conntrack-tools/files/init
+new file mode 100644
+index 0000000..6cda750
+--- /dev/null
++++ b/meta/recipes-connectivity/conntrack-tools/files/init
+@@ -0,0 +1,77 @@
++#!/bin/sh
++#
++# /etc/init.d/conntrackd
++#
++# Maximilian Wilhelm <max@rfc2324.org>
++#  -- Mon, 06 Nov 2006 18:39:07 +0100
++#
++# Roman I Khimov <khimov@altell.ru>
++#  -- Tue, 27 Oct 2009 14:34:00 +0300
++
++export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
++
++NAME="conntrackd"
++DAEMON="/usr/sbin/conntrackd"
++CONFIG="/etc/conntrackd/conntrackd.conf"
++PIDFILE="/var/run/${NAME}.pid"
 +
 +
++# Gracefully exit if there is no daemon (debian way of life)
++if [ ! -x "${DAEMON}" ]; then
++	exit 0
++fi
++
++# Check for config file
++if [ ! -f /etc/conntrackd/conntrackd.conf ]; then
++	echo "Error: There is no config file for $NAME" >&2
++	exit 1;
++fi
++
++case "$1" in
++  start)
++        echo -n "Starting $NAME: "
++	for i in nf_conntrack_netlink nf_conntrack_netbios_ns nf_conntrack_proto_dccp nf_conntrack_tftp \
++		nf_conntrack_sane nf_conntrack_pptp nf_conntrack_irc nf_conntrack_amanda nf_conntrack_h323 \
++		nf_conntrack_proto_udplite nf_conntrack_proto_gre nf_conntrack_proto_sctp nf_conntrack_ftp \
++		nf_conntrack_sip; do
++		modprobe $i >/dev/null 2>/dev/null &
++	done
++	start-stop-daemon --start --quiet --make-pidfile --pidfile "/var/run/${NAME}.pid" --background --exec "${DAEMON}"
++	RET=$?
++	if [ "$?" = "0" ]; then
++		sleep 2
++		# Sync with other server
++		conntrackd -n
++		echo "done."
++	else
++		echo "FAILED!"
++	fi
++	exit $RET
++	;;
++  stop)
++        echo -n "Stopping $NAME:"
++	start-stop-daemon --stop --quiet --oknodo --pidfile "/var/run/${NAME}.pid" && echo "done." || echo "FAILED!"
++	;;
++  status)
++	echo -n "conntrackd "
++	start-stop-daemon -q -K -t -x $DAEMON
++	RET=$?
++	if [ "$RET" = "0" ]; then
++                PID=`cat $PIDFILE`
++		echo "($PID) is running"
++	else
++		echo "is not running"
++		exit $RET
++	fi
++	;;
++  restart)
++	$0 stop
++	$0 start
++	;;
++
++  *)
++	echo "Usage: /etc/init.d/conntrackd {start|stop|restart}"
++	exit 1
++esac
++
++exit 0
 -- 
 1.7.6.4
 
