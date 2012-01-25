@@ -1,24 +1,32 @@
-Received: from col0-omc4-s18.col0.hotmail.com ([65.55.34.220])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kyoonn@hotmail.com>) id 1RqBkw-0001Qc-LE
+	(envelope-from <raj.khem@gmail.com>) id 1RqCOo-0003qL-DI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 23:55:55 +0100
-Received: from COL120-W64 ([65.55.34.199]) by col0-omc4-s18.col0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 25 Jan 2012 14:47:04 -0800
-Message-ID: <COL120-W645DB7C0C0B94E04DE82C7DD880@phx.gbl>
-X-Originating-IP: [70.137.132.86]
-From: simran singh <kyoonn@hotmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Jan 2012 14:47:03 -0800
-Importance: Normal
-In-Reply-To: <COL120-W44C8BBA66A5989AFCDDD25DD880@phx.gbl>
-References: <COL120-W44C8BBA66A5989AFCDDD25DD880@phx.gbl>
+	Thu, 26 Jan 2012 00:37:06 +0100
+Received: by lags15 with SMTP id s15so3365527lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 15:29:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=Erg0enzDEzL06Y/4DDHUqNiw06OStyoJrQJJR+zWfGQ=;
+	b=YnnZmBQjvUwztKhDcbn9IF0QoqPvyqPnE6xosv5smhz+7Zc4XQa0bKNngF4CXqy6IK
+	upWboZxkdg1aemTFQHpQetaEHQkM6AJ0vXOFtkHBU0fBKct9Y06UAsu7/LNuUiRk6vzy
+	06vhEq5rGKe4BGMc0Wi4kRWcFJJLHjkjiIw98=
+Received: by 10.112.32.1 with SMTP id e1mr1296600lbi.3.1327534159231; Wed, 25
+	Jan 2012 15:29:19 -0800 (PST)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 25 Jan 2012 22:47:04.0213 (UTC)
-	FILETIME=[42232450:01CCDBB3]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Perl extension for OpenSSL - Net::SSLeay
+Received: by 10.152.5.201 with HTTP; Wed, 25 Jan 2012 15:28:48 -0800 (PST)
+In-Reply-To: <1609637.uEWkOuPr02@helios>
+References: <1592899.mTy93uB97i@helios>
+	<CAMKF1spT9TgXmqQq-D+r1jnoXuv_+koPs_Rr=VhVzZkro5V1Bw@mail.gmail.com>
+	<1609637.uEWkOuPr02@helios>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2012 15:28:48 -0800
+Message-ID: <CAMKF1sppVL76FTbbvLyTn-HkWQaG_2D0n0nBfCSnAkat_dqoqg@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,185 +40,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 22:55:55 -0000
-X-Groupsio-MsgNum: 36696
-Content-Type: multipart/mixed;
-	boundary="_c505ccb4-7b5c-4829-bd59-71f19b104648_"
-
---_c505ccb4-7b5c-4829-bd59-71f19b104648_
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 25 Jan 2012 23:37:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+On Wed, Jan 25, 2012 at 10:39 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Wednesday 25 January 2012 09:49:14 Khem Raj wrote:
+>> meta-oe was started to fill in gaps that oe-core would have for
+>> existing oe users =C2=A0since oe-core will not have all required functio=
+nality
+>> and so distros could migrate to using oe-core and not loose the bells an=
+d
+>> whistles they already have.
+>
+> Sure, that's totally reasonable. I think we've built up some experience i=
+n the
+> time we've had so far that we can apply in order to improve the structure=
+ a
+> little though.
+>
+>> Plus its an umbrella layer which has many layers underneath.
+>
+> To save confusion, I speak only of the meta-oe layer within the meta-
+> openembedded repository. The meta-openembedded repository itself is not a
+> layer of any kind, only the directories within it are. (I really wish we =
+had
+> chosen an entirely distinct name for the repository, but I guess that shi=
+p has
+> sailed.)
+>
+>> However the problems it sees right now are that there are pieces which
+>> could be considered distro specific and ones, the new untested recipes s=
+hould
+>> not be an issue if they are pinned properly.
+>
+> So there ought not to be too much distro-specific in meta-oe; obviously t=
+here
+> is some at the moment due to the small number of distros actively using i=
+t.
+>
+> Unfortunately this pinning (I assume you mean PREFERRED_VERSION_) can onl=
+y
+> really occur within a distro that already includes meta-oe, and then you =
+need
+> to buy into the rest of the policy that that distro provides. If you are
+> starting only from OE-Core or your distro does not typically include meta=
+-oe,
+> it will have no such pinning.
+>
+
+oe-core does have policies see default* files under meta/conf
+however anyone who is using oe has to start with some policies iow distro
+if its a custom one or if its predefined one
+
+>> recipes that move our of oe-core I agree should be hosted in
+>> a meta-deprecated or somesuch
+>>
+>> I am happy to move out toolchain bits as well into a separate layer
+>> under meta-openembedded umbrella
+>> that will clarify it a bit and should not be a big hassle.
+>
+> Sounds great!
+
+toolchain is nothing but an example of conflicting recipes here.
+
+>
+>> I think real issue people suffer from is 2 and the duplicate recipes
+>> in meta-oe which has different configuration
+>> in oe-core.
+>
+> I agree these do need to be well-justified, and should avoid being just
+> manifestations of distro policy. These are gradually being ironed out whe=
+re
+> appropriate, we just need to continue with this process.
+
+yes this area needs some attention and I would request everyone to
+clean this bit.
+
+>
+>> So meta-oe meta-toolchain meta-deprecated could be created now we need
+>> to find maintainer for these layers.
+>
+> It might be a bit presumptuous but I would nominate you for the toolchain
+> layer ;) since you more or less maintain the recipes that would go in it
+> already. (I guess meta-toolchain probably isn't the best name since that
+> already means something in OE.)
+>
+
+I think right now eglibc 2.12 is one of deprecated recipes that moved
+into meta-oe
+and I know angstrom currently depends on it. Sometimes if there are no more=
+ than
+one layer who depends on a deprecared recipe it might be better to
+move it to that layer itself.
+so some careful decision would be involved when moving them around.
+meta-deprecated may sound
+like deprecated but it should actually be a maintained layer.
+
+> As for the other layers I would be happy to assist Koen in maintaining th=
+em if
+> he would like, but I think he's been doing a fine job with meta-oe alread=
+y.
+>
+>> All said if it was possible to handpick versions from layers and use
+>> bitbake -g output pn-depends.dot
+>> to generate some manifest so indicate which recipe is being picked
+>> from a set of recipes from different layers would be helpful.
+>> since there always will be some duplicate recipes no matter what.
+>
+> The bitbake-layers tool is supposed to help at least with the reporting s=
+ide
+> of this, and it does report where bbappends exist and recipes have been
+> overlayed. Right now however it does not report anything if a recipe is
+> overlayed but the version number is different; I'm looking into fixing th=
+at at
+> the moment. BTW I'd appreciate feedback on bitbake-layers as I've not had=
+ a
+> lot since it was extended - feature requests welcome.
+>
+
+hmm I have not used it but I will try. Its I think very important that
+user knows
+which recipe it feeding into the build. Especially when there are
+multiple recipes
+in the layers he/she is using. Second thing would be .bbappends as to
+how the recipe
+was bbappended.
+
+> As an aside, we also still have to consider Richard's proposal for versio=
+n-
+> independent bbappends (i.e. using % as a wildcard in the file name). I do=
+n't
+> think anyone responded to that yet.
+>
+
+We should discuss that in separate thread.
+
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
 
 
-Forgot to attach the recipe. Please find attached.
-> From: kyoonn@hotmail.com
-> To: openembedded-devel@lists.openembedded.org
-> Date: Wed=2C 25 Jan 2012 14:36:40 -0800
-> Subject: [oe] Perl extension for OpenSSL - Net::SSLeay
->=20
->=20
-> Hello=2C
->=20
-> I am not sure if this is the right list.
->=20
-> Trying to add Net::SSLeay perl module=2C I get the following error.
->=20
->=20
->=20
->  NOTE: Running task 204 of 315 (ID: 11=2C=20
-> /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-black=
-core-common/recipes/
->=20
-> net-ssleay/net-ssleay_1.36.bb=2C do_compile)
->=20
-> ERROR: TaskFailed event exception=2C aborting
->=20
-> ERROR: Build of=20
-> /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-black=
-core-common/recipes/net-ssleay/net-ssleay_1.36.bb
->=20
->  do_compile failed
->=20
-> ERROR: Task 11=20
-> (/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blac=
-kcore-common/recipes/net-ssleay/net-ssleay_1.36.bb=2C
->=20
->  do_compile) failed with 256
->=20
-> ERROR:=20
-> '/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/engage-blac=
-kcore-common/recipes/net-ssleay/net-ssleay_1.36.bb'
->  failed
->=20
-> NOTE: package net-ssleay-1.36-r0: task do_compile: Started
->=20
-> ERROR: Function do_compile failed
->=20
-> NOTE: Task failed: ('function do_compile failed'=2C=20
-> '/home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080=
-ds_release/work/
->=20
-> ppce500mc-linux/net-ssleay-1.36-r0/temp/log.do_compile.22680')
->=20
-> ERROR: Logfile of failure stored in:=20
-> /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080d=
-s_release/work/ppce500mc-
->=20
-> linux/net-ssleay-1.36-r0/temp/log.do_compile.22680
->=20
-> Log data follows:
->=20
-> | NOTE: make -j 2 -e MAKEFLAGS=3D PASTHRU_INC=3D -fexpensive-optimization=
-s=20
-> -frename-registers -fomit-frame-pointer -O2 -g0 CCFLAGS=3D -fexpensive
->=20
-> -optimizations -frename-registers -fomit-frame-pointer -O2 -g0=20
-> LD=3Dpowerpc-linux-gnu-gcc -mcpu=3De500mc -maix-struct-return=20
-> --sysroot=3D/home/Simran/
->=20
-> Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080ds_release/sys=
-roots/ppce500mc-linux
->=20
-> | Can't locate ExtUtils/Command.pm in @INC (@INC contains: inc=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release
->=20
-> /sysroots/i686-linux/usr/lib/perl/5.10.1=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release/sysroots/i686-linux/usr/lib
->=20
-> /perl/5.10.1=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release/sysroots/i686-linux/usr/lib/perl/5.10.1
->  /home/
->=20
-> jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/build_p102=
-3rds_release/sysroots/i686-linux/usr/lib/perl .).
->=20
-> | BEGIN failed--compilation aborted.
->=20
-> | make: *** [blib/lib/Net/.exists] Error 2
->=20
-> | make: *** Waiting for unfinished jobs....
->=20
-> | Can't locate ExtUtils/Command.pm in @INC (@INC contains: inc=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/
->=20
-> build_p1023rds_release/sysroots/i686-linux/usr/lib/perl/5.10.1=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release
->=20
-> /sysroots/i686-linux/usr/lib/perl/5.10.1=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release/sysroots/i686-linux/usr
->=20
-> /lib/perl/5.10.1=20
-> /home/jenkins/jenkins/jobs/qoriq-dpaa-iso-step1/workspace/sb-dev.git/buil=
-d_p1023rds_release/sysroots/i686-linux/usr/lib/perl
->  .).
->=20
-> | BEGIN failed--compilation aborted.
->=20
-> | make: *** [blib/arch/.exists] Error 2
->=20
-> | FATAL: oe_runmake failed
->=20
-> | ERROR: Function do_compile failed
->=20
-> NOTE: package net-ssleay-1.36-r0: task do_compile: Failed
->=20
-> ERROR: TaskFailed event exception=2C aborting
->=20
->=20
->=20
->=20
->=20
-> I used the libnet-ssleay-perl_1.36.bb=2C I found in the oe-commit archive=
-.
->=20
-> Please advice and thanks.
->=20
->=20
->=20
-> Sim Gill 		 	   		 =20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
- 		 	   		  =
-
---_c505ccb4-7b5c-4829-bd59-71f19b104648_
-Content-Type: application/octet-stream
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="net-ssleay_1.36.bb"
-
-REVTQ1JJUFRJT04gPSAiTmV0OjpTU0xlYXkgLSBQZXJsIGV4dGVuc2lvbiBmb3IgdXNpbmcgT3Bl
-blNTTCIKU0VDVElPTiA9ICJsaWJzIgpMSUNFTlNFID0gIk9wZW5TU0wiCkRFUEVORFMgPSAib3Bl
-bnNzbCB6bGliIgpSREVQRU5EU18ke1BOfSArPSAiIFwKCXBlcmwtbW9kdWxlLWNhcnAgXAoJcGVy
-bC1tb2R1bGUtZXJybm8gXAoJcGVybC1tb2R1bGUtZXh0dXRpbHMtbWFrZW1ha2VyIFwKCXBlcmwt
-bW9kdWxlLW1pbWUtYmFzZTY0IFwKCXBlcmwtbW9kdWxlLXNvY2tldCBcCgkiCgpCQkNMQVNTRVhU
-RU5EID0gIm5hdGl2ZSIKUFIgPSAicjAiCgpTUkNfVVJJID0gImh0dHA6Ly9zZWFyY2guY3Bhbi5v
-cmcvQ1BBTi9hdXRob3JzL2lkL0YvRkwvRkxPUkEvTmV0LVNTTGVheS0ke1BWfS50YXIuZ3o7bmFt
-ZT1uZXQtc3NsZWF5LSR7UFZ9IgpTUkNfVVJJW25ldC1zc2xlYXktMS4zNi5tZDVzdW1dID0gIjU0
-MDYxNjM4NzIwZGQ2YTMyNTM5NTMzMWM3N2YyMWQ4IgpTUkNfVVJJW25ldC1zc2xlYXktMS4zNi5z
-aGEyNTZzdW1dID0gImUyNjI4OTcyNjNjNWFhOTA5NmUzOWY3ODEzYzdjYjdkNGQwNTUwOGNhNDA2
-YjE3Mzg3OGM0ZWNkZGIyYzUzY2UiCgpTID0gIiR7V09SS0RJUn0vTmV0LVNTTGVheS0ke1BWfSIK
-CmV4cG9ydCBPUEVOU1NMX1BSRUZJWD0iJHtTVEFHSU5HX0lOQ0RJUn0vLi4iCgppbmhlcml0IGNw
-YW4KCgoKCgoKCiNERVNDUklQVElPTiA9ICJOZXQ6OlNTTGVheSBwZXJsIG1vZHVsZSIKI1BSID0g
-InIwIgoKI2luaGVyaXQgY3BhbgoKI0RFUEVORFMgPSAicGVybCBvcGVuc3NsIHpsaWIiCiNSREVQ
-RU5EU18ke1BOfSArPSAiIFwKIyAgICAgICAgICAgIHBlcmwtbW9kdWxlLWNhcnAgXAojICAgICAg
-ICAgICAgcGVybC1tb2R1bGUtZXJybm8gXAojICAgICAgICAgICAgcGVybC1tb2R1bGUtZXh0dXRp
-bHMtbWFrZW1ha2VyIFwKIyAgICAgICAgICAgIHBlcmwtbW9kdWxlLW1pbWUtYmFzZTY0IFwKIyAg
-ICAgICAgICAgIHBlcmwtbW9kdWxlLXNvY2tldCBcCiMJICAgIHBlcmwtbW9kdWxlLWV4dHV0aWxz
-LWNvbW1hbmQgXAojCSAgICBwZXJsLW1vZHVsZS1leHR1dGlscy1jb21tYW5kLW1tIFwKIyAJICAg
-ICIKCiNCQkNMQVNTRVhURU5EID0gIm5hdGl2ZSIKCiNTUkNfVVJJID0gImZpbGU6Ly8ke1BOfS0k
-e1BWfS50YXIuZ3oiCgojUyA9ICIke1dPUktESVJ9L05ldC1TU0xlYXktMS4zNiIKCiNleHBvcnQg
-T1BFTlNTTF9QUkVGSVg9IiR7U1RBR0lOR19JTkNESVJ9Ly4uIgoKI2Zha2Vyb290IGRvX2luc3Rh
-bGwoKSB7CgojCW1rZGlyIC1wICR7RH0vdXNyL2Jpbi9OZXQtU1NMZWF5LTEuMzYKCiMJY2QgTmV0
-LVNTTGVheS0xLjM2CiMJcGVybCBNYWtlZmlsZS5QTCBJTlNUQUxMX0JBU0U9JHtXT1JLRElSfS9p
-bWFnZS91c3IvYmluL05ldC1TU0xlYXktMS4zNgojCXBlcmwgTWFrZWZpbGUuUEwKIwlwZXJsICct
-VjppbnN0YWxsLionCiMJbWFrZSBpbnN0YWxsCgojfQoKI0ZJTEVTXyR7UE59ICs9ICIvdXNyL2Jp
-bi9uZXQtc3NsZWF5Igo=
-
---_c505ccb4-7b5c-4829-bd59-71f19b104648_--
