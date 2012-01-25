@@ -1,33 +1,34 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jekhor@gmail.com>) id 1Rq15N-000587-S2
+	(envelope-from <jekhor@gmail.com>) id 1Rq1Sn-0005jn-4h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 12:32:17 +0100
-Received: by bkaq10 with SMTP id q10so4079778bka.6
+	Wed, 25 Jan 2012 12:56:29 +0100
+Received: by bkaq10 with SMTP id q10so4097098bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 03:24:31 -0800 (PST)
+	Wed, 25 Jan 2012 03:48:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=KfNO0033FJLUTaDJBxLv0StrRzo3F2JU7tE/zL1XR0Q=;
-	b=GmhF4BN9cOmcKvuLcvQ7jsz6VgLkOKtpPpBCuTxZNczzES+1PongY/30caFTJWrl9g
-	5erUQRtd0oTx9zRXTkfFUML028Onvp/uEV9/B25rrlustqIPaubizVcVO/bmoP10f1fX
-	+KZmnP6oQsoXmnxYwoBAm+ZPncYwnkJ1nmrhA=
-Received: by 10.204.129.200 with SMTP id p8mr6839209bks.114.1327488983195;
-	Wed, 25 Jan 2012 02:56:23 -0800 (PST)
+	bh=3BwM+n/OdvLVHTqx3ehYudl2LNow7lX4xQMfjtDuTGA=;
+	b=JA69asqtYnVCv8qOMqvOAMdXGeH8sl0SxCCBJTrZQprrmNj75oJau6k9X8gzzv22Jz
+	3HlPN28wzMpfnpIKgYSaAHR0a9Itj4hHrjXaPrkWCo47vjp6Nxcjppwxxzmae1szvHpE
+	UHoxuCKqqxR7BZqbJcoGkTXo1td+Ye252hZYE=
+Received: by 10.204.154.140 with SMTP id o12mr6816192bkw.102.1327488984749;
+	Wed, 25 Jan 2012 02:56:24 -0800 (PST)
 Received: from localhost.localdomain (mx2.promwad.com. [195.222.87.218])
-	by mx.google.com with ESMTPS id t17sm89505bke.6.2012.01.25.02.56.19
+	by mx.google.com with ESMTPS id ev5sm123319bkb.4.2012.01.25.02.56.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 02:56:19 -0800 (PST)
+	Wed, 25 Jan 2012 02:56:23 -0800 (PST)
 Sender: Yauhen Kharuzhy <jekhor@gmail.com>
 Received: from jek by localhost.localdomain with local (Exim 4.77)
 	(envelope-from <jek@jeknote.loshitsa1.net>)
-	id 1Rq0WY-0007LK-Oq; Wed, 25 Jan 2012 13:56:18 +0300
+	id 1Rq0Wa-0007MU-T7; Wed, 25 Jan 2012 13:56:20 +0300
 From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2012 13:56:16 +0300
-Message-Id: <1327488976-28198-1-git-send-email-yauhen.kharuzhy@promwad.com>
+Date: Wed, 25 Jan 2012 13:56:20 +0300
+Message-Id: <1327488980-28269-1-git-send-email-yauhen.kharuzhy@promwad.com>
 X-Mailer: git-send-email 1.7.8.3
-Subject: [PATCH 05/10] Add recipe for conntrack-tools 1.0.0
+Cc: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
+Subject: [PATCH 07/10] Add recipe for postgresql 9.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,219 +42,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 11:32:18 -0000
+X-List-Received-Date: Wed, 25 Jan 2012 11:56:29 -0000
+
+From: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
 
 Recipe for this package has been taken from Openembedded-classic project.
 
-Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+Signed-off-by: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
 ---
- .../conntrack-tools/conntrack-tools_1.0.0.bb       |   27 +++++++
- .../conntrack-tools/files/conntrack-failover       |   77 ++++++++++++++++++++
- .../conntrack-tools/files/init                     |   77 ++++++++++++++++++++
- 3 files changed, 181 insertions(+), 0 deletions(-)
- create mode 100644 meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
- create mode 100644 meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
- create mode 100644 meta/recipes-connectivity/conntrack-tools/files/init
+ .../postgresql/files/no-ecpg-test.patch            |   12 ++++
+ .../remove.autoconf.version.check.patch            |   13 ++++
+ meta/recipes-support/postgresql/postgresql.inc     |   69 ++++++++++++++++++++
+ .../recipes-support/postgresql/postgresql_9.0.2.bb |    8 ++
+ 4 files changed, 102 insertions(+), 0 deletions(-)
+ create mode 100644 meta/recipes-support/postgresql/files/no-ecpg-test.patch
+ create mode 100644 meta/recipes-support/postgresql/postgresql-9.0.2/remove.autoconf.version.check.patch
+ create mode 100644 meta/recipes-support/postgresql/postgresql.inc
+ create mode 100644 meta/recipes-support/postgresql/postgresql_9.0.2.bb
 
-diff --git a/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb b/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
+diff --git a/meta/recipes-support/postgresql/files/no-ecpg-test.patch b/meta/recipes-support/postgresql/files/no-ecpg-test.patch
 new file mode 100644
-index 0000000..06a1f96
+index 0000000..c0f28f4
 --- /dev/null
-+++ b/meta/recipes-connectivity/conntrack-tools/conntrack-tools_1.0.0.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Connection tracking userspace tools for Linux"
-+LICENSE = "GPL"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-+DEPENDS = "libnfnetlink libnetfilter-conntrack"
++++ b/meta/recipes-support/postgresql/files/no-ecpg-test.patch
+@@ -0,0 +1,12 @@
++diff --git a/src/interfaces/ecpg/Makefile b/src/interfaces/ecpg/Makefile
++index dcd578f..1428423 100644
++--- a/src/interfaces/ecpg/Makefile
+++++ b/src/interfaces/ecpg/Makefile
++@@ -8,7 +8,6 @@ all install installdirs uninstall dep depend distprep:
++ 	$(MAKE) -C ecpglib $@
++ 	$(MAKE) -C compatlib $@
++ 	$(MAKE) -C preproc $@
++-	$(MAKE) -C test $@
++ 
++ clean distclean maintainer-clean:
++ 	-$(MAKE) -C include $@
+diff --git a/meta/recipes-support/postgresql/postgresql-9.0.2/remove.autoconf.version.check.patch b/meta/recipes-support/postgresql/postgresql-9.0.2/remove.autoconf.version.check.patch
+new file mode 100644
+index 0000000..70985d1
+--- /dev/null
++++ b/meta/recipes-support/postgresql/postgresql-9.0.2/remove.autoconf.version.check.patch
+@@ -0,0 +1,13 @@
++--- postgresql-9.0.2.orig/configure.in	2011-12-10 10:40:41.954161101 +0100
+++++ postgresql-9.0.2/configure.in	2011-12-10 10:41:52.203851668 +0100
++@@ -19,10 +19,6 @@
++ 
++ AC_INIT([PostgreSQL], [9.0.2], [pgsql-bugs@postgresql.org])
++ 
++-m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.63], [], [m4_fatal([Autoconf version 2.63 is required.
++-Untested combinations of 'autoconf' and PostgreSQL versions are not
++-recommended.  You can remove the check from 'configure.in' but it is then
++-your responsibility whether the result works or not.])])
++ AC_COPYRIGHT([Copyright (c) 1996-2010, PostgreSQL Global Development Group])
++ AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
++ AC_CONFIG_AUX_DIR(config)
+diff --git a/meta/recipes-support/postgresql/postgresql.inc b/meta/recipes-support/postgresql/postgresql.inc
+new file mode 100644
+index 0000000..17c552f
+--- /dev/null
++++ b/meta/recipes-support/postgresql/postgresql.inc
+@@ -0,0 +1,69 @@
++DESCRIPTION = "PostgreSQL is a powerful, open source relational database system."
++HOMEPAGE = "http://www.postgresql.com"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=7c1fe1ba5f31ccabfa4f6508eee09dc0"
++DEPENDS = "zlib readline tzcode-native"
++INC_PR = "r6"
 +
-+PR = "r0"
++ARM_INSTRUCTION_SET = "arm"
 +
-+SRC_URI = " \
-+	http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
-+	file://conntrack-failover \
-+	file://init \
-+	"
-+SRC_URI[tar.md5sum] = "5add24d4761baf17af630d5627a71752"
-+SRC_URI[tar.sha256sum] = "fe36b044bb494d1810a6d73f0b4ccd25b6e81f72a2fc63c44da79ceebe4817b0"
++#WARNING: this recipe assumes you have the timezone compiler present in /usr/sbin/zic
 +
-+inherit autotools
-+inherit update-rc.d
++SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
 +
-+INITSCRIPT_NAME = "conntrackd"
++LEAD_SONAME = "libpq.so"
 +
-+do_install_append() {
-+	install -d ${D}/${sysconfdir}/conntrackd
-+	install -d ${D}/${sysconfdir}/init.d
-+	install -m 0644 doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-+	install -m 0755 ${WORKDIR}/conntrack-failover ${D}/${sysconfdir}/init.d/conntrack-failover
-+	install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/conntrackd
++# LDFLAGS for shared libraries
++export LDFLAGS_SL = "${LDFLAGS}"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF_sh4 = "--disable-spinlocks"
++
++do_compile_append() {
++         cp /usr/sbin/zic ${S}/src/timezone/
 +}
-diff --git a/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover b/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
++
++PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
++             libecpg-compat-dbg libecpg-compat \
++             libecpg-dbg libecpg libecpg-dev \
++             libpq-dbg libpq libpq-dev \ 
++             libpgtypes-dbg libpgtypes "
++
++FILES_${PN}-client = "${bindir}/clusterdb \
++                ${bindir}/createdb \
++                ${bindir}/createlang \
++                ${bindir}/createuser \
++                ${bindir}/dropdb \
++                ${bindir}/droplang \
++                ${bindir}/dropuser \
++                ${bindir}/pg_dump \
++                ${bindir}/pg_dumpall \
++                ${bindir}/pg_restore \
++                ${bindir}/psql \
++                ${bindir}/reindexdb \
++                ${bindir}/vacuumdb \
++                ${bindir}/vacuumlo \
++                ${datadir}/${PN}/psqlrc.sample"
++
++FILES_${PN}-doc += "${prefix}/doc/"
++FILES_${PN}-timezone = "${datadir}/${PN}/timezone"
++FILES_${PN}-server-dev = "${includedir}/${PN}/server"
++
++FILES_libecpg = "${libdir}/libecpg*.so.*"
++FILES_libecpg-dbg = "${libdir}/.debug/libecpg*"
++FILES_libecpg-dev = "${libdir}/libecpg*.a ${libdir}/libecpg*.so \
++                     ${libdir}/libpgtypes*.a ${libdir}/libpgtypes*.so \
++                     ${includedir}/ecpg*.h ${includedir}/${PN}/ecpg*.h \
++                     ${includedir}/pgtypes*.h ${includedir}/${PN}/informix \
++                     ${includedir}/sql3types.h ${includedir}/sqlca.h"
++
++FILES_libpq = "${libdir}/libpq*.so.*"
++FILES_libpq-dbg = "${libdir}/.debug/libpq* ${libdir}/${PN}/pgxs/src/test/regress/.debug/*"
++FILES_libpq-dev = "${libdir}/libpq*.a ${libdir}/libpq*.so ${libdir}/libpgport.a \
++                   ${includedir}"
++
++FILES_libecpg-compat = "${libdir}/libecpg_compat*.so.*"
++FILES_libecpg-compat-dbg = "${libdir}/.debug/libecpg_compat*"
++FILES_libpgtypes = "${libdir}/libpgtypes*.so.*"
++FILES_libpgtypes-dbg = "${libdir}/.debug/libpgtypes*"
+diff --git a/meta/recipes-support/postgresql/postgresql_9.0.2.bb b/meta/recipes-support/postgresql/postgresql_9.0.2.bb
 new file mode 100644
-index 0000000..6d92e63
+index 0000000..814dc72
 --- /dev/null
-+++ b/meta/recipes-connectivity/conntrack-tools/files/conntrack-failover
-@@ -0,0 +1,77 @@
-+#!/bin/sh
-+# 
-+# (C) 2008 by Pablo Neira Ayuso <pablo@netfilter.org>
-+# (C) 2009 Roman I Khimov <khimov@altell.ru>
-+#
-+# This software may be used and distributed according to the terms
-+# of the GNU General Public License, incorporated herein by reference.
-+#
-+# Description:
-+#
-+# This is the script for primary-backup setups for keepalived
-+# (http://www.keepalived.org). You may adapt it to make it work with other
-+# high-availability managers.
-+#
-+# Do not forget to include the required modifications to your keepalived.conf
-+# file to invoke this script during keepalived's state transitions.
-+#
-+# Contributions to improve this script are welcome :).
-+#
-+## Modified to work as init.d script under pacemaker control
++++ b/meta/recipes-support/postgresql/postgresql_9.0.2.bb
+@@ -0,0 +1,8 @@
++require postgresql.inc
 +
-+CONNTRACKD_BIN=/usr/sbin/conntrackd
-+CONNTRACKD_LOCK=/var/lock/conntrack.lock
-+CONNTRACKD_CONFIG=/etc/conntrackd/conntrackd.conf
++PR = "${INC_PR}.0"
 +
-+case "$1" in
-+  start)
-+    #
-+    # commit the external cache into the kernel table
-+    #
-+    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -c
-+    if [ $? -eq 1 ]
-+    then
-+        logger "ERROR: failed to invoke conntrackd -c"
-+    fi
++SRC_URI += "file://remove.autoconf.version.check.patch"
 +
-+    #
-+    # flush the internal and the external caches
-+    #
-+    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -f
-+    if [ $? -eq 1 ]
-+    then
-+    	logger "ERROR: failed to invoke conntrackd -f"
-+    fi
-+
-+    #
-+    # resynchronize my internal cache to the kernel table
-+    #
-+    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -R
-+    if [ $? -eq 1 ]
-+    then
-+    	logger "ERROR: failed to invoke conntrackd -R"
-+    fi
-+
-+    #
-+    # send a bulk update to backups 
-+    #
-+    $CONNTRACKD_BIN -C $CONNTRACKD_CONFIG -B
-+    if [ $? -eq 1 ]
-+    then
-+        logger "ERROR: failed to invoke conntrackd -B"
-+    fi
-+    ;;
-+  stop)
-+	$CONNTRACKD_BIN -t
-+	$CONNTRACKD_BIN -n
-+	;;
-+  status)
-+	;;
-+  *)
-+    logger "ERROR: unknown command"
-+    echo "Usage: conntrack-failover {start|stop|status}"
-+    exit 1
-+    ;;
-+esac
-+
-+exit 0
-diff --git a/meta/recipes-connectivity/conntrack-tools/files/init b/meta/recipes-connectivity/conntrack-tools/files/init
-new file mode 100644
-index 0000000..6cda750
---- /dev/null
-+++ b/meta/recipes-connectivity/conntrack-tools/files/init
-@@ -0,0 +1,77 @@
-+#!/bin/sh
-+#
-+# /etc/init.d/conntrackd
-+#
-+# Maximilian Wilhelm <max@rfc2324.org>
-+#  -- Mon, 06 Nov 2006 18:39:07 +0100
-+#
-+# Roman I Khimov <khimov@altell.ru>
-+#  -- Tue, 27 Oct 2009 14:34:00 +0300
-+
-+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-+
-+NAME="conntrackd"
-+DAEMON="/usr/sbin/conntrackd"
-+CONFIG="/etc/conntrackd/conntrackd.conf"
-+PIDFILE="/var/run/${NAME}.pid"
-+
-+
-+# Gracefully exit if there is no daemon (debian way of life)
-+if [ ! -x "${DAEMON}" ]; then
-+	exit 0
-+fi
-+
-+# Check for config file
-+if [ ! -f /etc/conntrackd/conntrackd.conf ]; then
-+	echo "Error: There is no config file for $NAME" >&2
-+	exit 1;
-+fi
-+
-+case "$1" in
-+  start)
-+        echo -n "Starting $NAME: "
-+	for i in nf_conntrack_netlink nf_conntrack_netbios_ns nf_conntrack_proto_dccp nf_conntrack_tftp \
-+		nf_conntrack_sane nf_conntrack_pptp nf_conntrack_irc nf_conntrack_amanda nf_conntrack_h323 \
-+		nf_conntrack_proto_udplite nf_conntrack_proto_gre nf_conntrack_proto_sctp nf_conntrack_ftp \
-+		nf_conntrack_sip; do
-+		modprobe $i >/dev/null 2>/dev/null &
-+	done
-+	start-stop-daemon --start --quiet --make-pidfile --pidfile "/var/run/${NAME}.pid" --background --exec "${DAEMON}"
-+	RET=$?
-+	if [ "$?" = "0" ]; then
-+		sleep 2
-+		# Sync with other server
-+		conntrackd -n
-+		echo "done."
-+	else
-+		echo "FAILED!"
-+	fi
-+	exit $RET
-+	;;
-+  stop)
-+        echo -n "Stopping $NAME:"
-+	start-stop-daemon --stop --quiet --oknodo --pidfile "/var/run/${NAME}.pid" && echo "done." || echo "FAILED!"
-+	;;
-+  status)
-+	echo -n "conntrackd "
-+	start-stop-daemon -q -K -t -x $DAEMON
-+	RET=$?
-+	if [ "$RET" = "0" ]; then
-+                PID=`cat $PIDFILE`
-+		echo "($PID) is running"
-+	else
-+		echo "is not running"
-+		exit $RET
-+	fi
-+	;;
-+  restart)
-+	$0 stop
-+	$0 start
-+	;;
-+
-+  *)
-+	echo "Usage: /etc/init.d/conntrackd {start|stop|restart}"
-+	exit 1
-+esac
-+
-+exit 0
++SRC_URI[md5sum] = "fc79ef32b602f75f2ccd37647bc008e9"
++SRC_URI[sha256sum] = "ffb58195850aa0ec9b7b3dcdac51a6dee0c76ea3387b76c805e1c4d186fe2af5"
 -- 
 1.7.6.4
 
