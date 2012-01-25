@@ -1,33 +1,33 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jekhor@gmail.com>) id 1Rq0sh-0004Q6-6d
+	(envelope-from <jekhor@gmail.com>) id 1Rq0si-0004Q6-Dt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 12:19:11 +0100
-Received: by bkaq10 with SMTP id q10so4070568bka.6
+	Wed, 25 Jan 2012 12:19:12 +0100
+Received: by mail-bk0-f47.google.com with SMTP id q10so4070568bka.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 03:11:24 -0800 (PST)
+	Wed, 25 Jan 2012 03:11:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=xh3qOSTNxZMhIGLNBRDze84tzcF2Gjr8yazkaZXSYl0=;
-	b=a+Sob70SYdR8ZZ+u4Kds05tctobkzcJDMUIx7120TIjqtmz+uY6YK9FgPUIFEtXXdK
-	jvBliiNQ//pWfYw+dZ3d6b+na7WxLHTR2L4mpSTlMSJDSbD3EnsZrG7okVB3i5BagQvk
-	ol7HjQsiqscK/IVkNX4dHUEttMox6tm/6yyyk=
-Received: by 10.204.174.13 with SMTP id r13mr6723724bkz.122.1327489884745;
-	Wed, 25 Jan 2012 03:11:24 -0800 (PST)
+	bh=3LWQSihZ1FqFReG9BYUYr+iwCHOVn/6ylhWHHuNxJ/E=;
+	b=knThoyScwIBSglLYH+U3cjoGw3xpsPD6+Og0QjWs6HcL8HYdyjGPNN0uftf5sJggFX
+	yIVDxagrIwsGOPNWi5+pZc8x2uQTX76GXWAiDlFBaksdoM5qcI1bkHabNH2JIJgkRElF
+	zRpQZUIApxxf/RB2TXx14s8qHhebErH7YNpCI=
+Received: by 10.204.156.204 with SMTP id y12mr5274017bkw.113.1327489888268;
+	Wed, 25 Jan 2012 03:11:28 -0800 (PST)
 Received: from localhost.localdomain (mx2.promwad.com. [195.222.87.218])
-	by mx.google.com with ESMTPS id d2sm140121bky.11.2012.01.25.03.11.24
+	by mx.google.com with ESMTPS id iu2sm309749bkb.0.2012.01.25.03.11.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 03:11:24 -0800 (PST)
+	Wed, 25 Jan 2012 03:11:27 -0800 (PST)
 Sender: Yauhen Kharuzhy <jekhor@gmail.com>
 Received: from jek by localhost.localdomain with local (Exim 4.77)
 	(envelope-from <jek@jeknote.loshitsa1.net>)
-	id 1Rq0l7-0007a9-6m; Wed, 25 Jan 2012 14:11:21 +0300
+	id 1Rq0lC-0007am-R7; Wed, 25 Jan 2012 14:11:26 +0300
 From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2012 14:11:19 +0300
-Message-Id: <1327489879-29117-1-git-send-email-yauhen.kharuzhy@promwad.com>
+Date: Wed, 25 Jan 2012 14:11:25 +0300
+Message-Id: <1327489885-29156-1-git-send-email-yauhen.kharuzhy@promwad.com>
 X-Mailer: git-send-email 1.7.8.3
-Subject: [PATCH 09/10] Add recipe for krb5
+Subject: [PATCH 10/10] Add recipe for pure-ftpd 1.0.35
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,122 +41,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 11:19:11 -0000
+X-List-Received-Date: Wed, 25 Jan 2012 11:19:12 -0000
 
-Add building of MIT Kerberos implementation.
+Add pure-ftpd FTP server.
 
-The recipe was picked from OE-Classic & updated to new version
+Recipe for this package has been taken from Openembedded-classic project.
 
 Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 ---
- meta/recipes-connectivity/krb5/krb5_1.8.5.bb |   98 ++++++++++++++++++++++++++
- 1 files changed, 98 insertions(+), 0 deletions(-)
- create mode 100644 meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+ ...coded-usr-local-includes-from-configure.a.patch |   36 ++++++++++++++++++++
+ .../pure-ftpd/pure-ftpd_1.0.35.bb                  |   20 +++++++++++
+ 2 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+ create mode 100644 meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
 
-diff --git a/meta/recipes-connectivity/krb5/krb5_1.8.5.bb b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+diff --git a/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
 new file mode 100644
-index 0000000..2004213
+index 0000000..202cee9
 --- /dev/null
-+++ b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
-@@ -0,0 +1,98 @@
-+DESCRIPTION = "A network authentication protocol"
-+HOMEPAGE = "http://web.mit.edu/Kerberos/"
-+SECTION = "console/network"
++++ b/meta/recipes-connectivity/pure-ftpd/pure-ftpd-1.0.35/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+@@ -0,0 +1,36 @@
++From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
++From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
++Date: Tue, 10 Jan 2012 19:15:25 +0300
++Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
++
++Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
++---
++ configure.ac |   12 ------------
++ 1 files changed, 0 insertions(+), 12 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index ae00c08..9ba6d8d 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
++ python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
++ AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
++ 
++-if test -d /usr/local/include; then
++-  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
++-fi
++-
++-if test -d /usr/kerberos/include; then
++-  CPPFLAGS="$CPPFLAGS -I/usr/kerberos/include"
++-fi
++-
++-if test -d /usr/local/lib; then
++-  LDFLAGS="$LDFLAGS -L/usr/local/lib"
++-fi
++-
++ if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
++   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
++ fi
++-- 
++1.7.7.3
++
+diff --git a/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb b/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
+new file mode 100644
+index 0000000..5308b1e
+--- /dev/null
++++ b/meta/recipes-connectivity/pure-ftpd/pure-ftpd_1.0.35.bb
+@@ -0,0 +1,20 @@
++HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
++DESCRIPTION = "Pure-FTPd is a free (BSD), secure, production-quality and standard-conformant FTP server"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=00c16e0df3fae485c1b5b7fb2030b5df"
++
++DEPENDS = "libcap"
++
 +PR = "r0"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${S}/../README;md5=5595a75ae6fab5f825f579a817baa618"
-+DEPENDS = "perl-native ncurses util-linux e2fsprogs-native"
 +
-+inherit autotools binconfig
++SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
++            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
++            "
++SRC_URI[md5sum] = "fa53507ff8e9fdca0197917ec8d106a3"
++SRC_URI[sha256sum] = "eac26c7601b81433211f2b9d6c3e49b832f0274ed077b8d061b5c533b4e63beb"
 +
-+SRC_URI = "http://web.mit.edu/kerberos/dist/krb5/1.8/krb5-1.8.5-signed.tar"
++inherit autotools
 +
-+S = "${WORKDIR}/${PN}-${PV}/src/"
++EXTRA_OECONF = "--with-minimal"
 +
-+# Will clean this up...
-+EXTRA_OECONF += " --without-tcl krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
-+                  ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
-+                  ac_cv_file__etc_TIMEZONE=no --with-system-et"
-+CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
-+LDFLAGS_append += "-lpthread"
 +
-+FILES_${PN}-doc += /usr/share/examples
-+
-+krb5_do_unpack() {
-+	tar xzf ${WORKDIR}/krb5-1.8.5.tar.gz -C ${WORKDIR}/
-+}
-+
-+python do_unpack() {
-+	bb.build.exec_func('base_do_unpack', d)
-+	bb.build.exec_func('krb5_do_unpack', d)
-+}
-+
-+do_configure() {
-+	oe_runconf
-+}
-+
-+#do_install_append () {
-+#	mv ${D}${bindir}/ftp ${D}${bindir}/ftp.${PN}
-+#	mv ${D}${sbindir}/ftpd ${D}${sbindir}/ftpd.${PN}
-+#	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${PN}
-+#	mv ${D}${sbindir}/telnetd ${D}${sbindir}/telnetd.${PN}
-+#}
-+
-+pkg_postinst_${PN} () {
-+#!/bin/sh
-+	update-alternatives --install ${bindir}/ftp ftp ftp.${PN} 100
-+	update-alternatives --install ${sbindir}/ftpd ftpd ftpd.${PN} 100
-+	update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
-+	update-alternatives --install ${sbindir}/telnetd telnetd telnetd.${PN} 100
-+}
-+
-+pkg_prerm_${PN} () {
-+#!/bin/sh
-+	update-alternatives --remove ftp ftp.${PN} 100
-+	update-alternatives --remove ftpd ftpd.${PN} 100
-+	update-alternatives --remove telnet telnet.${PN} 100
-+	update-alternatives --remove telnetd telnetd.${PN} 100
-+}
-+
-+#do_install() {
-+#	oe_libinstall -so -C util/support libkrb5support ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C util/et libcom_err ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/crypto libk5crypto ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/krb5 libkrb5 ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/gssapi libgssapi_krb5 ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/rpc libgssrpc ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/kdb libkdb5 ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/kadm5/clnt libkadm5clnt ${STAGING_LIBDIR}
-+#	oe_libinstall -so -C lib/kadm5/srv libkadm5srv ${STAGING_LIBDIR}
-+#
-+#	install -d ${STAGING_INCDIR}/krb5
-+#	for X in krb5.h locate_plugin.h
-+#	do
-+#		install -m 0644 ${S}/include/krb5/$X ${STAGING_INCDIR}/krb5/$X
-+#	done
-+#
-+#	install -d ${STAGING_INCDIR}/gssapi
-+#	for X in gssapi_generic.h gssapi.h gssapi_krb5.h
-+#	do
-+#		install -m 0644 ${S}/include/gssapi/$X ${STAGING_INCDIR}/gssapi/$X
-+#	done
-+#	install -m 0644 ${S}/lib/gssapi/mechglue/mechglue.h ${STAGING_INCDIR}/gssapi/mechglue.h
-+#
-+#	install -d ${STAGING_INCDIR}/gssrpc
-+#	for X in auth.h auth_gss.h auth_gssapi.h auth_unix.h clnt.h netdb.h pmap_clnt.h pmap_prot.h pmap_rmt.h rename.h rpc.h rpc_msg.h svc.h svc_auth.h xdr.h types.h
-+#	do
-+#		install -m 0644 ${S}/include/gssrpc/$X ${STAGING_INCDIR}/gssrpc/$X
-+#	done
-+#
-+#	# com_err.h needs to be added here if you choose to use this builtin
-+#	for X in krb5.h profile.h gssapi.h
-+#	do
-+#		install -m 0644 ${S}/include/$X ${STAGING_INCDIR}/$X
-+#	done
-+#}
-+
-+SRC_URI[md5sum] = "48b17caedf19d07d714a8d7a25422c95"
-+SRC_URI[sha256sum] = "7d6989efaaf0b3330ce5b329edb1d0bf33250ca78b789fdd117e02c49c238812"
 -- 
 1.7.6.4
 
