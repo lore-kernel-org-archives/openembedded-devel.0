@@ -1,25 +1,44 @@
-Received: from mga02.intel.com ([134.134.136.20])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rq7s6-0005cM-AU
+Received: from nm21-vm2.bullet.mail.ne1.yahoo.com ([98.138.91.209])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <gkogut@yahoo.com>) id 1Rq8cd-0006qK-8d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 19:47:02 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 25 Jan 2012 10:39:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="100509572"
-Received: from unknown (HELO helios.localnet) ([10.252.122.164])
-	by orsmga001.jf.intel.com with ESMTP; 25 Jan 2012 10:39:13 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2012 18:39:12 +0000
-Message-ID: <1609637.uEWkOuPr02@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
-In-Reply-To: <CAMKF1spT9TgXmqQq-D+r1jnoXuv_+koPs_Rr=VhVzZkro5V1Bw@mail.gmail.com>
-References: <1592899.mTy93uB97i@helios>
-	<CAMKF1spT9TgXmqQq-D+r1jnoXuv_+koPs_Rr=VhVzZkro5V1Bw@mail.gmail.com>
+	Wed, 25 Jan 2012 20:35:07 +0100
+Received: from [98.138.90.52] by nm21.bullet.mail.ne1.yahoo.com with NNFMP;
+	25 Jan 2012 19:24:49 -0000
+Received: from [98.138.89.173] by tm5.bullet.mail.ne1.yahoo.com with NNFMP;
+	25 Jan 2012 19:24:49 -0000
+Received: from [127.0.0.1] by omp1029.mail.ne1.yahoo.com with NNFMP;
+	25 Jan 2012 19:24:49 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 264320.57184.bm@omp1029.mail.ne1.yahoo.com
+Received: (qmail 55721 invoked by uid 60001); 25 Jan 2012 19:24:48 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1327519488; bh=60xOoIAon0w905NGIzi3M02zpBDO6TxZc+0yc4hiqHA=;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=QCw/JR2y7WHgetnmCYB8saCiLVPTP/RSRuQfSXJjNmMgt9hWbN35ZVRnlU0+izZ3gz8DZcNC8viEfjIA+OFJhyisjoVcCWSW2hMHU53XALJZL1XMcBELoozZZcktjQhbxgHjtbeCAh0y7OHSrqQ4JZRzNNtVC6FIfijWIIU1Yl0=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=bEX/uN6KdgslwI3y+tTw43L3jTWN62lrBrkztvQJAVvshuXPQ6rderK3fCxcyToxbQf6qR7ZFBSCt5JADYqw7CPdpxC0s/eXNtM1xsUO2K0uYpxT4FqRgC85ZrFJQyhuOJrpEqTJ1TnYjyc+xddSwyCwHiXHPrfToqXGnK82cUU=;
+X-YMail-OSG: K9o3Jf8VM1nKA04c0D8eGa5uvKO4yNGNguhKaTMb4MJUNzV
+	iRgXesqosLMTCUBoRiRSaRoTvPV6IvvaRnm3q11GbNQLayHcBCowN8RNr7BR
+	4x9tCwlkaWBiCrFCLuRg.oRCXoWnjmRYiR4EqZILZ3.Vp1o4t1dlH_iRVx7I
+	Wr.So9noiaQzA.BxlcOQrJiIYumilCNcWN2zCRFLwMoSppdp_RJThJk1c6Xe
+	_m_cpNMRasWJcw_1DqS4PNww19wO6IMLYj8PoKFOZpPhivpCYic9qMcsbUpH
+	2Tooca.cF1_vI58NZ3ohd2ybEaXFwMxLrFEyKDgdBqhX_90k2ylJRXW539SV
+	LWeV.S5hm3EfDm3pmfGt35jGHHNWA11jaagQ5UznPcUIcaVlsqBETl12YRzP
+	bPWV.fDqQIHu_2eBJ94UWwxMgdinF39isbFrpndKgNEdXLoHGM2zdiir5QyC
+	adnCnsPUkCMPZ
+Received: from [128.49.41.146] by web36906.mail.mud.yahoo.com via HTTP;
+	Wed, 25 Jan 2012 11:24:48 PST
+X-Mailer: YahooMailWebService/0.8.116.331537
+Message-ID: <1327519488.54350.YahooMailNeo@web36906.mail.mud.yahoo.com>
+Date: Wed, 25 Jan 2012 11:24:48 -0800 (PST)
+From: Greg Kogut <gkogut@yahoo.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Subject: Re: Splitting meta-oe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: how to specify alternative library locations from recipes using cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,92 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 18:47:02 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 25 Jan 2012 19:35:07 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 25 January 2012 09:49:14 Khem Raj wrote:
-> meta-oe was started to fill in gaps that oe-core would have for
-> existing oe users  since oe-core will not have all required functionality
-> and so distros could migrate to using oe-core and not loose the bells and
-> whistles they already have.
+I hope this isn't too much of a n00b question.
 
-Sure, that's totally reasonable. I think we've built up some experience in the 
-time we've had so far that we can apply in order to improve the structure a 
-little though.
+I've developed a dozen new recipes (which I'll submit once they're stable)=
+, most of which use cmake.
 
-> Plus its an umbrella layer which has many layers underneath.
+Some of them install libraries to alternative library locations, e.g. '/op=
+t/myprog/lib'. &#65533; This works correctly, and I've verified the librari=
+es are installed to the correct locations in the filesystem image.
 
-To save confusion, I speak only of the meta-oe layer within the meta-
-openembedded repository. The meta-openembedded repository itself is not a 
-layer of any kind, only the directories within it are. (I really wish we had 
-chosen an entirely distinct name for the repository, but I guess that ship has 
-sailed.)
+However, while building binaries dependent on these new libraries, also us=
+ing cmake, cmake tries to point the linker to these directories on the host=
+ machine, not the cross-compiler filesystem. &#65533;With predictable resul=
+ts.
 
-> However the problems it sees right now are that there are pieces which
-> could be considered distro specific and ones, the new untested recipes should
-> not be an issue if they are pinned properly. 
+What is the correct practice for correctly guiding cmake to the right loca=
+tion? &#65533;I've searched the existing recipes which use cmake without fi=
+nding anything.
 
-So there ought not to be too much distro-specific in meta-oe; obviously there 
-is some at the moment due to the small number of distros actively using it.
-
-Unfortunately this pinning (I assume you mean PREFERRED_VERSION_) can only 
-really occur within a distro that already includes meta-oe, and then you need 
-to buy into the rest of the policy that that distro provides. If you are 
-starting only from OE-Core or your distro does not typically include meta-oe, 
-it will have no such pinning.
-
-> recipes that move our of oe-core I agree should be hosted in
-> a meta-deprecated or somesuch
->
-> I am happy to move out toolchain bits as well into a separate layer
-> under meta-openembedded umbrella
-> that will clarify it a bit and should not be a big hassle.
-
-Sounds great!
-
-> I think real issue people suffer from is 2 and the duplicate recipes
-> in meta-oe which has different configuration
-> in oe-core.
-
-I agree these do need to be well-justified, and should avoid being just 
-manifestations of distro policy. These are gradually being ironed out where 
-appropriate, we just need to continue with this process.
-
-> So meta-oe meta-toolchain meta-deprecated could be created now we need
-> to find maintainer for these layers.
-
-It might be a bit presumptuous but I would nominate you for the toolchain 
-layer ;) since you more or less maintain the recipes that would go in it 
-already. (I guess meta-toolchain probably isn't the best name since that 
-already means something in OE.)
-
-As for the other layers I would be happy to assist Koen in maintaining them if 
-he would like, but I think he's been doing a fine job with meta-oe already.
-
-> All said if it was possible to handpick versions from layers and use
-> bitbake -g output pn-depends.dot
-> to generate some manifest so indicate which recipe is being picked
-> from a set of recipes from different layers would be helpful.
-> since there always will be some duplicate recipes no matter what.
-
-The bitbake-layers tool is supposed to help at least with the reporting side 
-of this, and it does report where bbappends exist and recipes have been 
-overlayed. Right now however it does not report anything if a recipe is 
-overlayed but the version number is different; I'm looking into fixing that at 
-the moment. BTW I'd appreciate feedback on bitbake-layers as I've not had a 
-lot since it was extended - feature requests welcome.
-
-As an aside, we also still have to consider Richard's proposal for version-
-independent bbappends (i.e. using % as a wildcard in the file name). I don't 
-think anyone responded to that yet.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
-
+Regards,
+Greg
+From philip@balister.org Wed Jan 25 21:59:30 2012
+Received: from sanddollar.geekisp.com ([216.168.135.167])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1Rq9wH-0003L4-M2
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jan 2012 21:59:29 +0100
+Received: (qmail 13243 invoked by uid 1003); 25 Jan 2012 20:45:01 -0000
+Received: from unknown (HELO ?192.168.1.104?)
+	(philip@opensdr.com@96.240.160.175)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	25 Jan 2012 20:45:01 -0000
+Message-ID: <4F2069CC.7060409@balister.org>
+Date: Wed, 25 Jan 2012 15:45:00 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1592899.mTy93uB97i@helios>
+	<1908796.glHMrEiIxU@helios>	<4F202735.8040405@balister.org>
+	<3543079.3rgjSx9VfG@helios>
+	<1327514250.29933.37.camel@phil-desktop>
+In-Reply-To: <1327514250.29933.37.camel@phil-desktop>
+X-Enigmail-Version: 1.1.2
+Content-Type: text/plain; charset
