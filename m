@@ -1,29 +1,23 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rq78Z-000475-8B
+	(envelope-from <philb@gnu.org>) id 1Rq7De-0004g3-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jan 2012 18:59:59 +0100
-Received: by lags15 with SMTP id s15so3170759lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 09:52:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Gm3zu20+I7yQkOR9SuI3Lj/QenG7uLiaFQNCs6dydCM=;
-	b=sdO9G7fmQvBAkXx9hzXOspFhubdtWyj6o6ygEB1UEIbdqFWICt72fYZYo30mFip1Kd
-	9mDy3rIF1sE41eRt0jalMmM3mVIrCsXo5uS1PGwLzqblasjuzcwXReuRgeP3WOtLdbdQ
-	VNUlzBrPjgS5L9ytss2vpxAbpK/bomU8homaA=
-Received: by 10.112.86.67 with SMTP id n3mr4546330lbz.29.1327513932519; Wed,
-	25 Jan 2012 09:52:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Wed, 25 Jan 2012 09:51:41 -0800 (PST)
-In-Reply-To: <CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
-References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
-	<1908796.glHMrEiIxU@helios> <4F202735.8040405@balister.org>
-	<CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 Jan 2012 09:51:41 -0800
-Message-ID: <CAMKF1soJ1ZA=zgJDLxydt_w7whaxmT6Gtkbt3SNG5qCHJ5XSSw@mail.gmail.com>
+	Wed, 25 Jan 2012 19:05:14 +0100
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1Rq76A-0001eC-1s
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Jan 2012 18:57:30 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Jan 2012 17:57:29 +0000
+In-Reply-To: <3543079.3rgjSx9VfG@helios>
+References: <1592899.mTy93uB97i@helios> <1908796.glHMrEiIxU@helios>
+	<4F202735.8040405@balister.org> <3543079.3rgjSx9VfG@helios>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1327514250.29933.37.camel@phil-desktop>
+Mime-Version: 1.0
 Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,19 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2012 17:59:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Jan 2012 18:05:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 25, 2012 at 9:33 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
->
-> Wrt DP = -1:
-> I feel if a recipe needs DP = -1 it is not good enough to be added to
-> meta-oe. Probably it is more something for an unstable layer.
-> (and DP = -1 encourages the growth of deadwood; I still recall in OE that
-> there were some recipes that had the last 3 or 4 versions all with DP = -1;
-> let's try to avoid this in oe-core/meta-oe)
+On Wed, 2012-01-25 at 17:41 +0000, Paul Eggleton wrote:
+> On Wednesday 25 January 2012 11:00:53 Philip Balister wrote:
+> > We should try and have a face to face meeting with OE developers at ELC
+> > in a few weeks to talk about some of these issues.
+> 
+> Unfortunately I won't be at ELC in person. Time difference and technology 
+> allowing I could be there virtually or have someone who is there represent me, 
+> but I do think that we should be able to resolve most things here on the 
+> mailing lists (if not fully then at least as preparation for an in-person 
+> discussion).
 
-yes no DP = -1 in published layers thats almost useless.
+Agreed.  I think the mailing lists ought to remain the primary forum for
+decision-making.  If there's something that needs to be discussed, let's
+do it here.  If we can't reach a consensus, that's what we have the TSC
+for.
+
+p.
+
+
 
 
