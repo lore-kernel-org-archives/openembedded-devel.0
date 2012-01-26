@@ -1,24 +1,29 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RqEIN-0006WW-JZ
+	(envelope-from <raj.khem@gmail.com>) id 1RqEvn-0007fI-SS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 02:38:37 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 25 Jan 2012 17:30:47 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="60061961"
-Received: from unknown (HELO helios.localnet) ([10.252.122.222])
-	by AZSMGA002.ch.intel.com with ESMTP; 25 Jan 2012 17:30:46 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Jan 2012 01:30:44 +0000
-Message-ID: <1665976.dBvtkiHpGU@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8 rc2 (Linux/3.0.0-15-generic-pae; KDE/4.7.97; i686; ; )
-In-Reply-To: <1326930779-21885-1-git-send-email-andrea.adami@gmail.com>
-References: <1326930779-21885-1-git-send-email-andrea.adami@gmail.com>
+	Thu, 26 Jan 2012 03:19:19 +0100
+Received: by lags15 with SMTP id s15so50156lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2012 18:11:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=+2cPcMvMewqs/5O8DF5EB3YcXddyjhnLUu5HN9v/CWs=;
+	b=g+G0FdpFhefrKMT4gRkKoX6gU94/FZs/veGUEO7MqI8LcbfDHZ9LQxatVH2Ww98Xrn
+	tgsJOpgbxHNoLpXi1Ve4KRfF6HsQcuBEYJ+iKIiYA2wojgo05PwZ7+gBLDWmFvZbR+X5
+	+iSWfdswnhQdVic+0chfp/roHgIHuEBt+ukzk=
+Received: by 10.152.114.169 with SMTP id jh9mr67178lab.20.1327543892249; Wed,
+	25 Jan 2012 18:11:32 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [meta-handheld] [PATCH 0/3] do not force build of linux-kexecboot
+Received: by 10.152.5.201 with HTTP; Wed, 25 Jan 2012 18:11:02 -0800 (PST)
+In-Reply-To: <1327519488.54350.YahooMailNeo@web36906.mail.mud.yahoo.com>
+References: <1327519488.54350.YahooMailNeo@web36906.mail.mud.yahoo.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2012 18:11:02 -0800
+Message-ID: <CAMKF1sqtVB6hsAeC3PQcp6qwDEHdi=f=pFJ0gQwL93Gqf+DiFA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: how to specify alternative library locations from recipes using cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,41 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 01:38:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 26 Jan 2012 02:19:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 19 January 2012 00:52:56 Andrea Adami wrote:
-> * This patchset makes minor changes to the initramfs-kexecboot images
-> * in order to make clear there are two binaries inside.
-> * Following patches are Zaurus-specific and allow to build generic images
-> * without building zaurus-installer (which builds linux-kexecboot)
-> 
-> Andrea Adami (3):
->   initramfs-kexecboot(-klibc)-image: explicitly install kexec(-klibc)
->   kexecboot-cfg: Inhibit toolchain dependencies and echo
->     $DISTRO_VERSION
->   zaurus.inc: decouple build of zaurus-installer (and linux-kexecboot)
-> 
->  conf/machine/include/initramfs-kexecboot.inc       |   18
-> ------------------ conf/machine/include/zaurus.inc                    |  
-> 14 +++++++++----- recipes-bsp/images/initramfs-kexecboot-image.bb    |    2
-> +-
->  .../images/initramfs-kexecboot-klibc-image.bb      |    2 +-
->  recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb         |    6 ++++--
->  5 files changed, 15 insertions(+), 27 deletions(-)
->  delete mode 100644 conf/machine/include/initramfs-kexecboot.inc
+On Wed, Jan 25, 2012 at 11:24 AM, Greg Kogut <gkogut@yahoo.com> wrote:
+> I hope this isn't too much of a n00b question.
+>
+> I've developed a dozen new recipes (which I'll submit once they're stable=
+), most of which use cmake.
+>
+> Some of them install libraries to alternative library locations, e.g. '/o=
+pt/myprog/lib'. =C2=A0 This works correctly, and I've verified the librarie=
+s are installed to the correct locations in the filesystem image.
+>
+> However, while building binaries dependent on these new libraries, also u=
+sing cmake, cmake tries to point the linker to these directories on the hos=
+t machine, not the cross-compiler filesystem. =C2=A0With predictable result=
+s.
+>
+> What is the correct practice for correctly guiding cmake to the right loc=
+ation? =C2=A0I've searched the existing recipes which use cmake without fin=
+ding anything.
+>
 
-Merged to meta-handheld after some minor reworking of 3/3.
+Does adding something like
+set( CMAKE_LIBRARY_PATH ${libdir} /opt/myprog/lib)
+to classes/cmake.bbclass help
 
-Thanks!
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+> Regards,
+> Greg
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
