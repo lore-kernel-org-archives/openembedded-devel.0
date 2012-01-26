@@ -1,30 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RqIiR-0008Ou-SC
+	(envelope-from <martin.jansa@gmail.com>) id 1RqLLo-0003eG-Uy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 07:21:48 +0100
-Received: by yhfq46 with SMTP id q46so103516yhf.6
+	Thu, 26 Jan 2012 10:10:36 +0100
+Received: by eaal12 with SMTP id l12so81468eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 22:14:00 -0800 (PST)
+	Thu, 26 Jan 2012 01:02:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=GImwIyM16fzYS6XzHF9MI7w9d6mcwGgmsPs8fOKnaXw=;
-	b=bHEKSNRM15VhqlspArubTeRSTHgCmUUb924bxV+oe9jxdbIYzHi54oPKU/R4DQsxDr
-	M2oDJTAN7esdWfhcFMxkDuHHfuvjZWn7hN6x16lsu71hP2sHhUKs/taTiJazFlYFN6Vn
-	6oB+7lYUUamtKGYFqxn4RWlsLmQY1uUODzjxI=
-Received: by 10.236.145.230 with SMTP id p66mr947335yhj.27.1327558440049;
-	Wed, 25 Jan 2012 22:14:00 -0800 (PST)
-Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id n72sm5206423yhh.21.2012.01.25.22.13.58
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=vPGd+ywZydUmsB/5+WokuFGpKlRQ7+/npTK13G1x+cU=;
+	b=ICUjqNRXfOhiS+T29S1KoS1EnhecxK8M8YLjEl+78xvPe83Zwtvo7/2bf/YbyWTXEb
+	1P80s29AsffjJXMWCmsKWndpyEiKI5+/RoRL3GVJtU0r0gU55JMrzP4h9zNZ7ik+KwMM
+	B9OVoW+V0jUSq/E0GXRT35dpuohDe1h2OJL+Q=
+Received: by 10.213.29.2 with SMTP id o2mr281853ebc.54.1327568569472;
+	Thu, 26 Jan 2012 01:02:49 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id x4sm12822249eeb.4.2012.01.26.01.02.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 22:13:59 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 26 Jan 2012 01:02:47 -0800 (PST)
+Date: Thu, 26 Jan 2012 10:02:45 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2012 22:13:15 -0800
-Message-Id: <1327558395-19539-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] systemd: Forward port format-replace-m-uclibc.patch
+Message-ID: <20120126090245.GB3747@jama.jama.net>
+References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
+	<1908796.glHMrEiIxU@helios> <4F202735.8040405@balister.org>
+	<CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,243 +43,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 06:21:48 -0000
+X-List-Received-Date: Thu, 26 Jan 2012 09:10:37 -0000
+X-Groupsio-MsgNum: 36706
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="St7VIuEGZ6dlpu13"
+Content-Disposition: inline
 
-This patch was not applying and had to consider more
-fields this time.
+--St7VIuEGZ6dlpu13
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../systemd/systemd/format-replace-m-uclibc.patch  |  109 ++++++++------------
- 1 files changed, 43 insertions(+), 66 deletions(-)
+On Wed, Jan 25, 2012 at 06:33:13PM +0100, Frans Meulenbroeks wrote:
+> I like the idea of putting toolchains in a layer.
+>=20
+> Wrt DP =3D -1:
+> I feel if a recipe needs DP =3D -1 it is not good enough to be added to
+> meta-oe. Probably it is more something for an unstable layer.
+> (and DP =3D -1 encourages the growth of deadwood; I still recall in OE th=
+at
+> there were some recipes that had the last 3 or 4 versions all with DP =3D=
+ -1;
+> let's try to avoid this in oe-core/meta-oe)
 
-diff --git a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-index 2bf5772..1c95023 100644
---- a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-+++ b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-@@ -9,8 +9,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- Index: git/src/mount-setup.c
- ===================================================================
----- git.orig/src/mount-setup.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/mount-setup.c	2011-09-18 19:40:14.635725954 -0700
-+--- git.orig/src/mount-setup.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/mount-setup.c	2012-01-25 21:59:43.897031326 -0800
- @@ -182,10 +182,10 @@
-          (void) fgets(buf, sizeof(buf), f);
-  
-@@ -49,8 +49,8 @@ Index: git/src/mount-setup.c
-                  if (r < 0) {
- Index: git/src/socket-util.c
- ===================================================================
----- git.orig/src/socket-util.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/socket-util.c	2011-09-18 19:38:47.205597702 -0700
-+--- git.orig/src/socket-util.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/socket-util.c	2012-01-25 21:59:43.897031326 -0800
- @@ -192,7 +192,7 @@
-  int socket_address_parse_netlink(SocketAddress *a, const char *s) {
-          int family;
-@@ -79,46 +79,11 @@ Index: git/src/socket-util.c
-          a->sockaddr.nl.nl_family = AF_NETLINK;
-          a->sockaddr.nl.nl_groups = group;
-  
--Index: git/src/cryptsetup-generator.c
--===================================================================
----- git.orig/src/cryptsetup-generator.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/cryptsetup-generator.c	2011-09-18 19:38:47.205597702 -0700
--@@ -263,7 +263,7 @@
-- 
--         for (;;) {
--                 char line[LINE_MAX], *l;
---                char *name = NULL, *device = NULL, *password = NULL, *options = NULL;
--+                char name[50], device[50], password[50], options[50] = NULL;
--                 int k;
-- 
--                 if (!(fgets(line, sizeof(line), f)))
--@@ -275,7 +275,7 @@
--                 if (*l == '#' || *l == 0)
--                         continue;
-- 
---                if ((k = sscanf(l, "%ms %ms %ms %ms", &name, &device, &password, &options)) < 2 || k > 4) {
--+                if ((k = sscanf(l, "%s %s %s %s", &name, &device, &password, &options)) < 2 || k > 4) {
--                         log_error("Failed to parse /etc/crypttab:%u, ignoring.", n);
--                         r = EXIT_FAILURE;
--                         goto next;
--@@ -284,11 +284,7 @@
--                 if (create_disk(name, device, password, options) < 0)
--                         r = EXIT_FAILURE;
-- 
---        next:
---                free(name);
---                free(device);
---                free(password);
---                free(options);
--+        next:;
--         }
-- 
-- finish:
- Index: git/src/swap.c
- ===================================================================
----- git.orig/src/swap.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/swap.c	2011-09-18 19:38:47.205597702 -0700
--@@ -1044,11 +1044,12 @@
-+--- git.orig/src/swap.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/swap.c	2012-01-25 21:59:43.897031326 -0800
-+@@ -1049,11 +1049,12 @@
-          (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
-  
-          for (i = 1;; i++) {
-@@ -133,7 +98,7 @@ Index: git/src/swap.c
-                                  "%*s "  /* type of swap */
-                                  "%*s "  /* swap size */
-                                  "%*s "  /* used */
--@@ -1059,12 +1060,10 @@
-+@@ -1064,12 +1065,10 @@
-                                  break;
-  
-                          log_warning("Failed to parse /proc/swaps:%u.", i);
-@@ -148,35 +113,46 @@ Index: git/src/swap.c
-                          return -ENOMEM;
- Index: git/src/tmpfiles.c
- ===================================================================
----- git.orig/src/tmpfiles.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/tmpfiles.c	2011-09-18 19:38:47.205597702 -0700
--@@ -67,7 +67,7 @@
-+--- git.orig/src/tmpfiles.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/tmpfiles.c	2012-01-25 22:06:58.649052774 -0800
-+@@ -73,8 +73,8 @@
-  typedef struct Item {
--         char type;
-+         ItemType type;
-  
- -        char *path;
-+-        char *argument;
- +        char path[50];
-++        char argument[50];
-          uid_t uid;
-          gid_t gid;
-          mode_t mode;
--@@ -664,7 +664,6 @@
-+@@ -822,7 +822,6 @@
-+         case CREATE_CHAR_DEVICE:
-+         case CREATE_BLOCK_DEVICE:
-+         case IGNORE_PATH:
-+-        case RELABEL_PATH:
-+         case RECURSIVE_RELABEL_PATH:
-+         case WRITE_FILE:
-+                 break;
-+@@ -858,8 +857,6 @@
-  static void item_free(Item *i) {
-          assert(i);
-  
- -        free(i->path);
-+-        free(i->argument);
-          free(i);
-  }
-  
--@@ -699,7 +698,7 @@
-+@@ -906,7 +903,7 @@
-  
-  static int parse_line(const char *fname, unsigned line, const char *buffer) {
-          Item *i, *existing;
- -        char *mode = NULL, *user = NULL, *group = NULL, *age = NULL;
- +        char mode[50], user[50], group[50], age[50];
-+         char type;
-          Hashmap *h;
--         int r;
-- 
--@@ -714,17 +713,17 @@
-+         int r, n = -1;
-+@@ -923,18 +920,18 @@
-  
-          if (sscanf(buffer,
-                     "%c "
-@@ -184,26 +160,27 @@ Index: git/src/tmpfiles.c
- -                   "%ms "
- -                   "%ms "
- -                   "%ms "
---                   "%ms",
-+-                   "%ms "
-++                   "%s "
- +                   "%s "
- +                   "%s "
- +                   "%s "
- +                   "%s "
--+                   "%s",
--                    &i->type,
-+                    "%n",
-+                    &type,
-                     &i->path,
- -                   &mode,
- -                   &user,
- -                   &group,
---                   &age) < 2) {
-+-                   &age,
- +                   mode,
- +                   user,
- +                   group,
--+                   age) < 2) {
-++                   age,
-+                    &n) < 2) {
-                  log_error("[%s:%u] Syntax error.", fname, line);
-                  r = -EIO;
--                 goto finish;
--@@ -825,11 +824,6 @@
-+@@ -1096,11 +1093,6 @@
-          r = 0;
-  
-  finish:
-@@ -217,8 +194,8 @@ Index: git/src/tmpfiles.c
-  
- Index: git/src/mount.c
- ===================================================================
----- git.orig/src/mount.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/mount.c	2011-09-18 19:38:47.215597732 -0700
-+--- git.orig/src/mount.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/mount.c	2012-01-25 21:59:43.901031505 -0800
- @@ -24,6 +24,7 @@
-  #include <mntent.h>
-  #include <sys/epoll.h>
-@@ -227,7 +204,7 @@ Index: git/src/mount.c
-  
-  #include "unit.h"
-  #include "mount.h"
--@@ -1556,7 +1557,13 @@
-+@@ -1561,7 +1562,13 @@
-  static int mount_load_proc_self_mountinfo(Manager *m, bool set_flags) {
-          int r = 0;
-          unsigned i;
-@@ -242,7 +219,7 @@ Index: git/src/mount.c
-  
-          assert(m);
-  
--@@ -1565,26 +1572,26 @@
-+@@ -1570,26 +1577,26 @@
-          for (i = 1;; i++) {
-                  int k;
-  
-@@ -280,7 +257,7 @@ Index: git/src/mount.c
-  
-                          if (k == EOF)
-                                  break;
--@@ -1608,22 +1615,12 @@
-+@@ -1613,22 +1620,12 @@
-                          r = k;
-  
-  clean_up:
-@@ -305,8 +282,8 @@ Index: git/src/mount.c
-          free(o);
- Index: git/src/umount.c
- ===================================================================
----- git.orig/src/umount.c	2011-09-18 19:16:53.000000000 -0700
--+++ git/src/umount.c	2011-09-18 19:38:47.215597732 -0700
-+--- git.orig/src/umount.c	2012-01-25 21:27:23.000000000 -0800
-++++ git/src/umount.c	2012-01-25 21:59:43.901031505 -0800
- @@ -60,7 +60,9 @@
-  
-  static int mount_points_list_get(MountPoint **head) {
--- 
-1.7.5.4
+I'm not proposing to stash multiple versions of same recipe with D_P in
+same layer.
 
+What I'm missing is use-case when for example with libsoup-2.4 I'm
+adding unstable version, because actually webkit-efl has random runtime
+crashes with stable version, but works better with unstable one.
 
+So I want to be able to add recipe with D_P =3D -1 which would say, that
+this recipe is not used unless someone really wants and adds P_V to his
+layer to get it (I guess people using browsers based on webkit-efl).
 
+But right now it will pick this unstable version from meta-oe by default
+and you have to add P_V for that stable version in oe-core (and keep it
+up2date as long as stable version in oe-core is updated).
+
+And I guess the same use-case D_P should be used for all "not so well
+tested" or "deprecated" recipes in meta-oe or any other layer.
+
+Even if there is meta-deprecated layer.. I guess nobody would prefer all
+deprecated recipes, but just some of them (ideally by pinning them with
+P_V).
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--St7VIuEGZ6dlpu13
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk8hFrUACgkQN1Ujt2V2gByVtgCdGz7fFo+xLLOGZNdU1HyMAxeV
+vDkAn1c2X+tr7TIlzfgqLqp+3Ay3Fhgs
+=V0yq
+-----END PGP SIGNATURE-----
+
+--St7VIuEGZ6dlpu13--
