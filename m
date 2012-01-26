@@ -1,31 +1,27 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1RqPPE-000570-7S
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 14:30:24 +0100
-Received: by werc1 with SMTP id c1so395617wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2012 05:22:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=kP3zfn9DUNbWjxtL2Qylcc/NXstiuVjmJ0ML+pH6QE4=;
-	b=QG3yyWmSpAf2iHm32Sd15tTNWXfj9jEcKsbfZn9zRFqbtoxOJrS/6H1UTCaiw7zjBS
-	52cNmffZCetOz56+IYELnhbqFB/194zxN6gowrGJ7g4Ndh/jRCeF4UGGy4KhmeRg4lDW
-	bUiAuSywmBUZEixb6oS8yFqbamr9IfFKC4RfM=
+	(envelope-from <fransmeulenbroeks@gmail.com>)
+	id 1RqRk6-0001iU-3J; Thu, 26 Jan 2012 17:00:06 +0100
+Received: by vcbfk26 with SMTP id fk26so487830vcb.6
+	for <multiple recipients>; Thu, 26 Jan 2012 07:52:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=YlTGwhyXJ64cdfcvJYMF1hYA0R8RGw0H3xA6qDYRRzU=;
+	b=ejsGSpZQ4K3oC+IR3HIk4ns5GQ/Z7sULS9GE/ViaV3yAyhYBmnWZGK5tnRO/lh8s2v
+	Lr0KhZsCCkJUEtCkdbvMp8u5NBiZZwwGEw4riGgLUEdPeUCgbN3zUlaKCkBxBlTfA1IM
+	QEEas6Qj29T0/SYxm5BxYt5NNTRpaHNneMV8A=
 MIME-Version: 1.0
-Received: by 10.216.138.220 with SMTP id a70mr1290782wej.24.1327584156474;
-	Thu, 26 Jan 2012 05:22:36 -0800 (PST)
-Received: by 10.223.117.72 with HTTP; Thu, 26 Jan 2012 05:22:36 -0800 (PST)
-In-Reply-To: <CAMKF1sqtVB6hsAeC3PQcp6qwDEHdi=f=pFJ0gQwL93Gqf+DiFA@mail.gmail.com>
-References: <1327519488.54350.YahooMailNeo@web36906.mail.mud.yahoo.com>
-	<CAMKF1sqtVB6hsAeC3PQcp6qwDEHdi=f=pFJ0gQwL93Gqf+DiFA@mail.gmail.com>
-Date: Thu, 26 Jan 2012 14:22:36 +0100
-Message-ID: <CAGiJk9dwbMe8wyyXahAKYE4T9zULAPC=KxTqntpr-mBdBMYc6Q@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: how to specify alternative library locations from recipes using cmake
+Received: by 10.220.154.135 with SMTP id o7mr1492759vcw.2.1327589745742; Thu,
+	26 Jan 2012 06:55:45 -0800 (PST)
+Received: by 10.52.67.171 with HTTP; Thu, 26 Jan 2012 06:55:45 -0800 (PST)
+Date: Thu, 26 Jan 2012 15:55:45 +0100
+Message-ID: <CACW_hTYUec2LiZCzA42DP1o8G59QK7awNCcFi4VD2t5q3zYYvw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: DEFAULT_PREFERENCE = -1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +35,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 13:30:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jan 2012 16:00:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-2012/1/26 Khem Raj <raj.khem@gmail.com>:
-> On Wed, Jan 25, 2012 at 11:24 AM, Greg Kogut <gkogut@yahoo.com> wrote:
->> I hope this isn't too much of a n00b question.
->>
->> I've developed a dozen new recipes (which I'll submit once they're stabl=
-e), most of which use cmake.
->>
->> Some of them install libraries to alternative library locations, e.g. '/=
-opt/myprog/lib'. =C2=A0 This works correctly, and I've verified the librari=
-es are installed to the correct locations in the filesystem image.
->>
->> However, while building binaries dependent on these new libraries, also =
-using cmake, cmake tries to point the linker to these directories on the ho=
-st machine, not the cross-compiler filesystem. =C2=A0With predictable resul=
-ts.
->>
->> What is the correct practice for correctly guiding cmake to the right lo=
-cation? =C2=A0I've searched the existing recipes which use cmake without fi=
-nding anything.
->>
->
-> Does adding something like
-> set( CMAKE_LIBRARY_PATH ${libdir} /opt/myprog/lib)
-> to classes/cmake.bbclass help
->
->> Regards,
->> Greg
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Dear all,
 
-Since CMake 2.4 it is possible to append without overwriting:
-LIST( APPEND CMAKE_LIBRARY_PATH path_to_libs )
+Triggered by the discussion on oe devel on splitting meta-oe I decided to
+do some quick greps on who uses DEFAULT_PREFERENCE in oe-core and meta-oe.
 
-However, the same thing Khem proposed can be done per recipe,
-apply the following line to your recipe and change it to suit your needs:
-EXTRA_OECMAKE =3D "-DCMAKE_LIBRARY_PATH=3D${libdir} ${path_to_libs}"
+Below are the results.
+My questions:
+- are recipes with D_P = -1 good enough to enter oe core and/or meta oe.
+- is it desirable to have a D_P -1 in an inc file (as happens in
+mesa-dri.inc)
 
+Best regards, Frans.
 
-Maybe it is necessary to use escaped quoting marks like \"${libdir}
-${path_to_libs}\" to group the values.
+PS: I found the -2 ones especially odd. This seems only useful if there is
+someone else already with a -1, which might make the recipe even more
+questionable.
 
---=20
-Regards
-Samuel
-
+frans@frans-desktop:~/workspace$ grep -r DEFAULT_PREFERENCE
+openembedded-core
+openembedded-core/meta/recipes-core/uclibc/uclibc_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-sato/matchbox-theme-sato/matchbox-theme-sato_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-gnome/gnome/gobject-introspection_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-kernel/oprofile/oprofile_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-connectivity/gypsy/gypsy_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-qt/qt4/qt4-embedded_4.8.0.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-qt/qt4/qt4-tools-nativesdk_4.8.0.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-qt/qt4/qt4-native_4.8.0.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/libmatchbox/libmatchbox_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/mutter/mutter_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/xcb/libxcb_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/xcb/xcb-proto_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/clutter/cogl_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/clutter/clutter_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/mesa/mesa-dri_git.bb:DEFAULT_PREFERENCE
+= "-2"
+openembedded-core/meta/recipes-graphics/mesa/mesa-dri.inc:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/mesa/qemugl_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-graphics/mesa/mesa-xlib_git.bb:DEFAULT_PREFERENCE
+= "-2"
+openembedded-core/meta/recipes-devtools/opkg/opkg-nogpg_svn.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/opkg/opkg-nogpg_0.1.8.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/qemu/qemu_git.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/subversion/subversion_1.7.2.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/binutils/binutils_csl-arm-2008q1.bb:DEFAULT_PREFERENCE
+= "-1"
+openembedded-core/meta/recipes-devtools/pseudo/pseudo_git.bb:DEFAULT_PREFERENCE
+= "-1"
+frans@frans-desktop:~/workspace$ grep -r DEFAULT_PREFERENCE
+meta-openembedded/
+meta-openembedded/meta-efl/recipes-support/libsoup/libsoup-2.4_2.37.2.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-efl/recipes-efl/efl/eet_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/eina_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/edbus_svn.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-efl/recipes-efl/efl/efreet_svn.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-efl/recipes-efl/efl/edje_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/embryo_svn.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-efl/recipes-efl/efl/eeze_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/evas_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/eio_svn.bb:DEFAULT_PREFERENCE =
+"-1"
+meta-openembedded/meta-efl/recipes-efl/efl/ecore_svn.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-oe/recipes-core/udev/udev_175.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-oe/recipes-graphics/tslib/tslib_git.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-oe/recipes-devtools/nodejs/nodejs_0.6.8.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/contrib/oe-stylize.py:    'DEFAULT_PREFERENCE',
+meta-openembedded/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:DEFAULT_PREFERENCE
+= "-1"
+meta-openembedded/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_git.bb:DEFAULT_PREFERENCE
+= "-1"
 
