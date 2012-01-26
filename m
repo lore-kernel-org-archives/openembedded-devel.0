@@ -1,35 +1,30 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RqION-0007vF-2I
+	(envelope-from <raj.khem@gmail.com>) id 1RqIiR-0008Ou-SC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 07:01:03 +0100
-Received: by dakf10 with SMTP id f10so165724dak.6
+	Thu, 26 Jan 2012 07:21:48 +0100
+Received: by yhfq46 with SMTP id q46so103516yhf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2012 21:53:14 -0800 (PST)
+	Wed, 25 Jan 2012 22:14:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=MvnDHR/Y24PO09E8ZE7W1lqCsT7ML00csTUaU+a1J2c=;
-	b=D5iCt2Fs+uoNTXVWv0cZ+/qxBV23JgAne1ni7NEkydIa3N/5GqRXygVnUDyBqa5PVk
-	pc0lMFjqr2zvXf6scqozfISaVuhKKuOA11goOWbyIflf5z9tEa1VS69hIb+GuNP2fjIh
-	Bd9tgFHkGbNNfgcoWLXJv66+ozt0E+O1By6yk=
-Received: by 10.68.211.131 with SMTP id nc3mr2397957pbc.17.1327556703295;
-	Wed, 25 Jan 2012 21:45:03 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id li19sm8346816pbb.17.2012.01.25.21.45.01
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=GImwIyM16fzYS6XzHF9MI7w9d6mcwGgmsPs8fOKnaXw=;
+	b=bHEKSNRM15VhqlspArubTeRSTHgCmUUb924bxV+oe9jxdbIYzHi54oPKU/R4DQsxDr
+	M2oDJTAN7esdWfhcFMxkDuHHfuvjZWn7hN6x16lsu71hP2sHhUKs/taTiJazFlYFN6Vn
+	6oB+7lYUUamtKGYFqxn4RWlsLmQY1uUODzjxI=
+Received: by 10.236.145.230 with SMTP id p66mr947335yhj.27.1327558440049;
+	Wed, 25 Jan 2012 22:14:00 -0800 (PST)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id n72sm5206423yhh.21.2012.01.25.22.13.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Jan 2012 21:45:02 -0800 (PST)
-Date: Wed, 25 Jan 2012 21:44:57 -0800
+	Wed, 25 Jan 2012 22:13:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120126054457.GE5566@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1327489879-29117-1-git-send-email-yauhen.kharuzhy@promwad.com>
-MIME-Version: 1.0
-In-Reply-To: <1327489879-29117-1-git-send-email-yauhen.kharuzhy@promwad.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 09/10] Add recipe for krb5
+Date: Wed, 25 Jan 2012 22:13:15 -0800
+Message-Id: <1327558395-19539-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] systemd: Forward port format-replace-m-uclibc.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,154 +38,243 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 06:01:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Jan 2012 06:21:48 -0000
 
-On (25/01/12 14:11), Yauhen Kharuzhy wrote:
-> Add building of MIT Kerberos implementation.
-> 
-> The recipe was picked from OE-Classic & updated to new version
-> 
-> Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
-> ---
->  meta/recipes-connectivity/krb5/krb5_1.8.5.bb |   98 ++++++++++++++++++++++++++
->  1 files changed, 98 insertions(+), 0 deletions(-)
->  create mode 100644 meta/recipes-connectivity/krb5/krb5_1.8.5.bb
-> 
-> diff --git a/meta/recipes-connectivity/krb5/krb5_1.8.5.bb b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
-> new file mode 100644
-> index 0000000..2004213
-> --- /dev/null
-> +++ b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
-> @@ -0,0 +1,98 @@
-> +DESCRIPTION = "A network authentication protocol"
-> +HOMEPAGE = "http://web.mit.edu/Kerberos/"
-> +SECTION = "console/network"
-> +PR = "r0"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://${S}/../README;md5=5595a75ae6fab5f825f579a817baa618"
-> +DEPENDS = "perl-native ncurses util-linux e2fsprogs-native"
-> +
-> +inherit autotools binconfig
+This patch was not applying and had to consider more
+fields this time.
 
-should you inherit perlnative here as well
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../systemd/systemd/format-replace-m-uclibc.patch  |  109 ++++++++------------
+ 1 files changed, 43 insertions(+), 66 deletions(-)
 
-> +
-> +SRC_URI = "http://web.mit.edu/kerberos/dist/krb5/1.8/krb5-1.8.5-signed.tar"
-> +
-> +S = "${WORKDIR}/${PN}-${PV}/src/"
-> +
-> +# Will clean this up...
-> +EXTRA_OECONF += " --without-tcl krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
-> +                  ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
-> +                  ac_cv_file__etc_TIMEZONE=no --with-system-et"
-
-the variable caching should be specified differently
-
-CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes \
-ac_cv_func_regcomp=yes ac_cv_printf_positional=yes
-ac_cv_file__etc_environment=yes ac_cv_file__etc_TIMEZONE=no"
-
-EXTRA_OECONF += "--without-tcl --with-system-et"
-
-
-> +CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
-> +LDFLAGS_append += "-lpthread"
-> +
-
-why append why not just += 
-
-> +FILES_${PN}-doc += /usr/share/examples
-> +
-
-use variables here ${datadir}/examples
-
-> +krb5_do_unpack() {
-> +	tar xzf ${WORKDIR}/krb5-1.8.5.tar.gz -C ${WORKDIR}/
-> +}
-> +
-> +python do_unpack() {
-> +	bb.build.exec_func('base_do_unpack', d)
-> +	bb.build.exec_func('krb5_do_unpack', d)
-> +}
-> +
-> +do_configure() {
-> +	oe_runconf
-> +}
-> +
-> +#do_install_append () {
-> +#	mv ${D}${bindir}/ftp ${D}${bindir}/ftp.${PN}
-> +#	mv ${D}${sbindir}/ftpd ${D}${sbindir}/ftpd.${PN}
-> +#	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${PN}
-> +#	mv ${D}${sbindir}/telnetd ${D}${sbindir}/telnetd.${PN}
-> +#}
-> +
-> +pkg_postinst_${PN} () {
-> +#!/bin/sh
-> +	update-alternatives --install ${bindir}/ftp ftp ftp.${PN} 100
-> +	update-alternatives --install ${sbindir}/ftpd ftpd ftpd.${PN} 100
-> +	update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
-> +	update-alternatives --install ${sbindir}/telnetd telnetd telnetd.${PN} 100
-> +}
-> +
-> +pkg_prerm_${PN} () {
-> +#!/bin/sh
-> +	update-alternatives --remove ftp ftp.${PN} 100
-> +	update-alternatives --remove ftpd ftpd.${PN} 100
-> +	update-alternatives --remove telnet telnet.${PN} 100
-> +	update-alternatives --remove telnetd telnetd.${PN} 100
-> +}
-> +
-> +#do_install() {
-> +#	oe_libinstall -so -C util/support libkrb5support ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C util/et libcom_err ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/crypto libk5crypto ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/krb5 libkrb5 ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/gssapi libgssapi_krb5 ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/rpc libgssrpc ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/kdb libkdb5 ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/kadm5/clnt libkadm5clnt ${STAGING_LIBDIR}
-> +#	oe_libinstall -so -C lib/kadm5/srv libkadm5srv ${STAGING_LIBDIR}
-> +#
-> +#	install -d ${STAGING_INCDIR}/krb5
-> +#	for X in krb5.h locate_plugin.h
-> +#	do
-> +#		install -m 0644 ${S}/include/krb5/$X ${STAGING_INCDIR}/krb5/$X
-> +#	done
-> +#
-> +#	install -d ${STAGING_INCDIR}/gssapi
-> +#	for X in gssapi_generic.h gssapi.h gssapi_krb5.h
-> +#	do
-> +#		install -m 0644 ${S}/include/gssapi/$X ${STAGING_INCDIR}/gssapi/$X
-> +#	done
-> +#	install -m 0644 ${S}/lib/gssapi/mechglue/mechglue.h ${STAGING_INCDIR}/gssapi/mechglue.h
-> +#
-> +#	install -d ${STAGING_INCDIR}/gssrpc
-> +#	for X in auth.h auth_gss.h auth_gssapi.h auth_unix.h clnt.h netdb.h pmap_clnt.h pmap_prot.h pmap_rmt.h rename.h rpc.h rpc_msg.h svc.h svc_auth.h xdr.h types.h
-> +#	do
-> +#		install -m 0644 ${S}/include/gssrpc/$X ${STAGING_INCDIR}/gssrpc/$X
-> +#	done
-> +#
-> +#	# com_err.h needs to be added here if you choose to use this builtin
-> +#	for X in krb5.h profile.h gssapi.h
-> +#	do
-> +#		install -m 0644 ${S}/include/$X ${STAGING_INCDIR}/$X
-> +#	done
-> +#}
-> +
-> +SRC_URI[md5sum] = "48b17caedf19d07d714a8d7a25422c95"
-> +SRC_URI[sha256sum] = "7d6989efaaf0b3330ce5b329edb1d0bf33250ca78b789fdd117e02c49c238812"
-> -- 
-> 1.7.6.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
+index 2bf5772..1c95023 100644
+--- a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
++++ b/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
+@@ -9,8 +9,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Index: git/src/mount-setup.c
+ ===================================================================
+---- git.orig/src/mount-setup.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/mount-setup.c	2011-09-18 19:40:14.635725954 -0700
++--- git.orig/src/mount-setup.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/mount-setup.c	2012-01-25 21:59:43.897031326 -0800
+ @@ -182,10 +182,10 @@
+          (void) fgets(buf, sizeof(buf), f);
+  
+@@ -49,8 +49,8 @@ Index: git/src/mount-setup.c
+                  if (r < 0) {
+ Index: git/src/socket-util.c
+ ===================================================================
+---- git.orig/src/socket-util.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/socket-util.c	2011-09-18 19:38:47.205597702 -0700
++--- git.orig/src/socket-util.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/socket-util.c	2012-01-25 21:59:43.897031326 -0800
+ @@ -192,7 +192,7 @@
+  int socket_address_parse_netlink(SocketAddress *a, const char *s) {
+          int family;
+@@ -79,46 +79,11 @@ Index: git/src/socket-util.c
+          a->sockaddr.nl.nl_family = AF_NETLINK;
+          a->sockaddr.nl.nl_groups = group;
+  
+-Index: git/src/cryptsetup-generator.c
+-===================================================================
+---- git.orig/src/cryptsetup-generator.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/cryptsetup-generator.c	2011-09-18 19:38:47.205597702 -0700
+-@@ -263,7 +263,7 @@
+- 
+-         for (;;) {
+-                 char line[LINE_MAX], *l;
+--                char *name = NULL, *device = NULL, *password = NULL, *options = NULL;
+-+                char name[50], device[50], password[50], options[50] = NULL;
+-                 int k;
+- 
+-                 if (!(fgets(line, sizeof(line), f)))
+-@@ -275,7 +275,7 @@
+-                 if (*l == '#' || *l == 0)
+-                         continue;
+- 
+--                if ((k = sscanf(l, "%ms %ms %ms %ms", &name, &device, &password, &options)) < 2 || k > 4) {
+-+                if ((k = sscanf(l, "%s %s %s %s", &name, &device, &password, &options)) < 2 || k > 4) {
+-                         log_error("Failed to parse /etc/crypttab:%u, ignoring.", n);
+-                         r = EXIT_FAILURE;
+-                         goto next;
+-@@ -284,11 +284,7 @@
+-                 if (create_disk(name, device, password, options) < 0)
+-                         r = EXIT_FAILURE;
+- 
+--        next:
+--                free(name);
+--                free(device);
+--                free(password);
+--                free(options);
+-+        next:;
+-         }
+- 
+- finish:
+ Index: git/src/swap.c
+ ===================================================================
+---- git.orig/src/swap.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/swap.c	2011-09-18 19:38:47.205597702 -0700
+-@@ -1044,11 +1044,12 @@
++--- git.orig/src/swap.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/swap.c	2012-01-25 21:59:43.897031326 -0800
++@@ -1049,11 +1049,12 @@
+          (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
+  
+          for (i = 1;; i++) {
+@@ -133,7 +98,7 @@ Index: git/src/swap.c
+                                  "%*s "  /* type of swap */
+                                  "%*s "  /* swap size */
+                                  "%*s "  /* used */
+-@@ -1059,12 +1060,10 @@
++@@ -1064,12 +1065,10 @@
+                                  break;
+  
+                          log_warning("Failed to parse /proc/swaps:%u.", i);
+@@ -148,35 +113,46 @@ Index: git/src/swap.c
+                          return -ENOMEM;
+ Index: git/src/tmpfiles.c
+ ===================================================================
+---- git.orig/src/tmpfiles.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/tmpfiles.c	2011-09-18 19:38:47.205597702 -0700
+-@@ -67,7 +67,7 @@
++--- git.orig/src/tmpfiles.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/tmpfiles.c	2012-01-25 22:06:58.649052774 -0800
++@@ -73,8 +73,8 @@
+  typedef struct Item {
+-         char type;
++         ItemType type;
+  
+ -        char *path;
++-        char *argument;
+ +        char path[50];
+++        char argument[50];
+          uid_t uid;
+          gid_t gid;
+          mode_t mode;
+-@@ -664,7 +664,6 @@
++@@ -822,7 +822,6 @@
++         case CREATE_CHAR_DEVICE:
++         case CREATE_BLOCK_DEVICE:
++         case IGNORE_PATH:
++-        case RELABEL_PATH:
++         case RECURSIVE_RELABEL_PATH:
++         case WRITE_FILE:
++                 break;
++@@ -858,8 +857,6 @@
+  static void item_free(Item *i) {
+          assert(i);
+  
+ -        free(i->path);
++-        free(i->argument);
+          free(i);
+  }
+  
+-@@ -699,7 +698,7 @@
++@@ -906,7 +903,7 @@
+  
+  static int parse_line(const char *fname, unsigned line, const char *buffer) {
+          Item *i, *existing;
+ -        char *mode = NULL, *user = NULL, *group = NULL, *age = NULL;
+ +        char mode[50], user[50], group[50], age[50];
++         char type;
+          Hashmap *h;
+-         int r;
+- 
+-@@ -714,17 +713,17 @@
++         int r, n = -1;
++@@ -923,18 +920,18 @@
+  
+          if (sscanf(buffer,
+                     "%c "
+@@ -184,26 +160,27 @@ Index: git/src/tmpfiles.c
+ -                   "%ms "
+ -                   "%ms "
+ -                   "%ms "
+--                   "%ms",
++-                   "%ms "
+++                   "%s "
+ +                   "%s "
+ +                   "%s "
+ +                   "%s "
+ +                   "%s "
+-+                   "%s",
+-                    &i->type,
++                    "%n",
++                    &type,
+                     &i->path,
+ -                   &mode,
+ -                   &user,
+ -                   &group,
+--                   &age) < 2) {
++-                   &age,
+ +                   mode,
+ +                   user,
+ +                   group,
+-+                   age) < 2) {
+++                   age,
++                    &n) < 2) {
+                  log_error("[%s:%u] Syntax error.", fname, line);
+                  r = -EIO;
+-                 goto finish;
+-@@ -825,11 +824,6 @@
++@@ -1096,11 +1093,6 @@
+          r = 0;
+  
+  finish:
+@@ -217,8 +194,8 @@ Index: git/src/tmpfiles.c
+  
+ Index: git/src/mount.c
+ ===================================================================
+---- git.orig/src/mount.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/mount.c	2011-09-18 19:38:47.215597732 -0700
++--- git.orig/src/mount.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/mount.c	2012-01-25 21:59:43.901031505 -0800
+ @@ -24,6 +24,7 @@
+  #include <mntent.h>
+  #include <sys/epoll.h>
+@@ -227,7 +204,7 @@ Index: git/src/mount.c
+  
+  #include "unit.h"
+  #include "mount.h"
+-@@ -1556,7 +1557,13 @@
++@@ -1561,7 +1562,13 @@
+  static int mount_load_proc_self_mountinfo(Manager *m, bool set_flags) {
+          int r = 0;
+          unsigned i;
+@@ -242,7 +219,7 @@ Index: git/src/mount.c
+  
+          assert(m);
+  
+-@@ -1565,26 +1572,26 @@
++@@ -1570,26 +1577,26 @@
+          for (i = 1;; i++) {
+                  int k;
+  
+@@ -280,7 +257,7 @@ Index: git/src/mount.c
+  
+                          if (k == EOF)
+                                  break;
+-@@ -1608,22 +1615,12 @@
++@@ -1613,22 +1620,12 @@
+                          r = k;
+  
+  clean_up:
+@@ -305,8 +282,8 @@ Index: git/src/mount.c
+          free(o);
+ Index: git/src/umount.c
+ ===================================================================
+---- git.orig/src/umount.c	2011-09-18 19:16:53.000000000 -0700
+-+++ git/src/umount.c	2011-09-18 19:38:47.215597732 -0700
++--- git.orig/src/umount.c	2012-01-25 21:27:23.000000000 -0800
+++++ git/src/umount.c	2012-01-25 21:59:43.901031505 -0800
+ @@ -60,7 +60,9 @@
+  
+  static int mount_points_list_get(MountPoint **head) {
 -- 
--Khem
+1.7.5.4
+
 
 
