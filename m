@@ -1,31 +1,37 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RqSQb-0002sX-TE
+	(envelope-from <obi@opendreambox.org>) id 1RqUJ3-0005Ra-DP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 17:44:02 +0100
-Received: by lahc1 with SMTP id c1so356833lah.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2012 08:36:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=QsjjzHAKfyOWNaKKWKOjATxpeE14npEj6lLGOe1oveM=;
-	b=W+GJ81pHa5dYMlEvOfonm6A6I6qwy+PN1JtCZooBKDQGfaUn5zLis+LceYpgeTOtqW
-	tJgPoGwkZk5KWJhD6JoiHX7TY6uvKbfh+dBPnWDLXmMZ5Z837yVSHJHaZvBlIoh6a7rL
-	GfvHr6TeSK/bVWoq2m42o2UQoewT7g3nNprEE=
-Received: by 10.112.99.136 with SMTP id eq8mr775806lbb.42.1327595773475; Thu,
-	26 Jan 2012 08:36:13 -0800 (PST)
+	Thu, 26 Jan 2012 19:44:21 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 9B4A531581C1;
+	Thu, 26 Jan 2012 19:36:33 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id oK4RD8WdYoVL; Thu, 26 Jan 2012 19:36:22 +0100 (CET)
+Received: from [172.22.22.61] (drms-590ed503.pool.mediaWays.net [89.14.213.3])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 40A3C315818C;
+	Thu, 26 Jan 2012 19:36:22 +0100 (CET)
+Message-ID: <4F219D25.3050604@opendreambox.org>
+Date: Thu, 26 Jan 2012 19:36:21 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20111229 Thunderbird/9.0
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Thu, 26 Jan 2012 08:35:43 -0800 (PST)
-In-Reply-To: <1327569297.2716.64.camel@x121e.pbcl.net>
-References: <1327489879-29117-1-git-send-email-yauhen.kharuzhy@promwad.com>
-	<20120126054457.GE5566@sakrah.homelinux.org>
-	<1327569297.2716.64.camel@x121e.pbcl.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 26 Jan 2012 08:35:43 -0800
-Message-ID: <CAMKF1sow5EM_BbbZPo3yX9Pmku5uFNEK3fogQjNuc4xssWb_iw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 09/10] Add recipe for krb5
+References: <1592899.mTy93uB97i@helios> <4F20130D.2010208@balister.org>
+	<1908796.glHMrEiIxU@helios> <4F202735.8040405@balister.org>
+	<CACW_hTYpQHcHT3YoN=-G1FFu2-KiUu_FOfkdEPk4P7wMNQEZZw@mail.gmail.com>
+	<20120126090245.GB3747@jama.jama.net>
+	<CACW_hTaYzG9zF+SSWpBFWxQyNMciQqk2zSQ9KJpo+4xc8_H5KQ@mail.gmail.com>
+	<20120126161123.GD3747@jama.jama.net>
+In-Reply-To: <20120126161123.GD3747@jama.jama.net>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 16:44:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jan 2012 18:44:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 26, 2012 at 1:14 AM, Phil Blundell <philb@gnu.org> wrote:
->
-> Can you expand on why exactly this is better? =C2=A0I didn't quite unders=
-tand
-> what the advantage of CACHED_CONFIGUREVARS was meant to be.
->
+On 26.01.2012 17:11, Martin Jansa wrote:
+> On Thu, Jan 26, 2012 at 03:45:52PM +0100, Frans Meulenbroeks wrote:
+>> - and if a recipe is not well enough tested it should probably not end up
+>> in meta-oe anyway (but better e.g. in meta-oe-next or meta-oe-new or
+>> whatever you want to call the super bleeding edge version)
+> 
+> How will Joe Average know that because of webkit-efl he should enable
+> meta-efl-next (or
+> oe-core-next-libsoup-development-version-alpha-centauri-edition layer) 
+>  if he doesn't even know what's happening in layers he is
+> using already (meta-efl for webkit-efl)?
 
-this adds it to the environment by doing
+I think libsoup is not a good example, because the specific version
+doesn't live in meta-oe, but in meta-efl, which is fine IMO.
 
-${CACHED_CONFIGUREVARS} ./configure ....
+Being someone who's just in the process of moving a distribution from
+OE-classic to OE-core + meta-oe, I've already been busy figuring out the
+exact differences between recipes present in both layers. I'd welcome
+any reduction in duplication and versions present in both layers.
 
-not long ago I found a case where ./configure cachedvar=3Dyes ....
-
-did not really work. Its somewhere in ml
-
-> (It looks like at least some of those variables belong in the site files
-> anyway.)
+Regards,
+Andreas
 
 
