@@ -1,31 +1,48 @@
-Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>)
-	id 1RqlMH-0001W6-6u; Fri, 27 Jan 2012 13:56:50 +0100
-Received: by lbol12 with SMTP id l12so80541lbo.6
-	for <multiple recipients>; Fri, 27 Jan 2012 04:48:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=NUwlnro1NLNW7VUcqtuV3UJCPao9XrE+OLp7yP4HXII=;
-	b=PIYzq1aozo121WVYlvuURI9AtEIiwL4VYgTkUJHhJGOqqLzgJq0STLNtkzaxD+HSWu
-	9EhtA+DV7CxkROBS+vLP4nCuocLN2s/BL93mywfiBMa6Jq+5QaExdwiY+lWTXEUEry2Y
-	r77amaJmzPPjqWrs6AmJwGt6YRrm8rs8fNWFs=
-MIME-Version: 1.0
-Received: by 10.112.83.197 with SMTP id s5mr1781215lby.9.1327668536972; Fri,
-	27 Jan 2012 04:48:56 -0800 (PST)
-Received: by 10.112.102.165 with HTTP; Fri, 27 Jan 2012 04:48:56 -0800 (PST)
-In-Reply-To: <CALbNGRQ0+FDE7QisckBOCXBUspQiumZFLjPJYgRf87a1mqtHaw@mail.gmail.com>
-References: <CALbNGRS-WsE45UakTV5VE2T5bAxb1C2iWgPeN+Ys+OTx-i48Rw@mail.gmail.com>
-	<4F21FDA2.5070803@linux.intel.com>
-	<CALbNGRQ0+FDE7QisckBOCXBUspQiumZFLjPJYgRf87a1mqtHaw@mail.gmail.com>
-Date: Fri, 27 Jan 2012 13:48:56 +0100
-Message-ID: <CALbNGRTqHJYvSzbman=ZPQ4D=Cyu8oX0F4JdTA7hrH4oMW_wbA@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1RqlaX-0002b5-1W
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Jan 2012 14:11:33 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RqlT0-00081r-BB>; Fri, 27 Jan 2012 14:03:46 +0100
+Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
+	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1RqlT0-00022g-8B>; Fri, 27 Jan 2012 14:03:46 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by mail.imp.fu-berlin.de with esmtps (MTA Exim 4.72) id
+	1RqlSW-0000tu-Kw (envelope-from <heinold@mi.fu-berlin.de>)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2012 14:03:32 +0100
+Received: from heinold by andorra.imp.fu-berlin.de with local (client Exim
+	4.72) id 1RqlSR-0007Vw-Es
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2012 14:03:11 +0100
+Date: Fri, 27 Jan 2012 14:03:11 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: evince: who is responsible to pack all within usr/lib/evince/3/backends to ${PN}?
+Message-ID: <20120127130311.GA18521@mi.fu-berlin.de>
+References: <20120126054457.GE5566@sakrah.homelinux.org>
+	<1327611041-7681-1-git-send-email-yauhen.kharuzhy@promwad.com>
+MIME-Version: 1.0
+In-Reply-To: <1327611041-7681-1-git-send-email-yauhen.kharuzhy@promwad.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Remote-IP: 160.45.42.84
+X-Spam_Score: -2.9
+X-exim-Spam_Score_Int: -28
+X-exim-Spam_Bar: --
+X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	* -0.0 T_RP_MATCHES_RCVD Envelope sender domain matches handover relay
+	*      domain
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+X-Originating-IP: 160.45.117.149
+Subject: Re: [PATCH v2] Add recipe for krb5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,48 +56,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2012 12:56:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Jan 2012 13:11:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Jan 27, 2012 at 9:43 AM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> On Fri, Jan 27, 2012 at 2:28 AM, Saul Wold <sgw@linux.intel.com> wrote:
->> On 01/26/2012 05:16 PM, Andreas M=FCller wrote:
->>>
->>> I checked: the complete contents of /usr/lib/evince/3/backends go to
->>> evince package and I would like to move *.a to ${PN}-staticdev and
->>> *.la to ${PN}-dev but I don't understand: who is responsible for
->>> adding all this to ${PN}?
->>>
->> bitbake.conf defines where most files should go, but when you get files =
-in
->> sub-directories, such as /usr/lib/evince/..., then the recipe needs to d=
-o a
->> little more work. If you look at the evince_2.32.0.bb, there already is =
-a
->> FILES_${PN}-staticdev that adds some extensions, you need to add this se=
-t of
->> backends to that list, probably same with the .la to the -dev package.
->>
-> Why I asked this: Maybe there is a chance to fix this more globally
-> instead of one by one in each recipe. But therefore I need to know
-> where the path is packed.
->
-I looked around for this a bit: As Saul pointed out, in bitbake.conf we hav=
-e
-FILES_${PN} =3D ... ${libdir}/${BPN}/* ...
+On Thu, Jan 26, 2012 at 11:50:41PM +0300, Yauhen Kharuzhy wrote:
+> Add building of MIT Kerberos implementation.
+> 
+> The recipe was picked from OE-Classic & updated to new version
+> 
+> Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+> ---
+>  meta/recipes-connectivity/krb5/krb5_1.8.5.bb |   39 ++++++++++++++++++++++++++
+>  1 files changed, 39 insertions(+), 0 deletions(-)
+>  create mode 100644 meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+> 
+> diff --git a/meta/recipes-connectivity/krb5/krb5_1.8.5.bb b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+> new file mode 100644
+> index 0000000..2f497a3
+> --- /dev/null
+> +++ b/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+> @@ -0,0 +1,39 @@
+> +DESCRIPTION = "A network authentication protocol"
+> +HOMEPAGE = "http://web.mit.edu/Kerberos/"
+> +SECTION = "console/network"
+> +PR = "r0"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://${S}/../README;md5=5595a75ae6fab5f825f579a817baa618"
+> +DEPENDS = "ncurses util-linux e2fsprogs-native"
+> +
+> +inherit autotools binconfig perlnative
+> +
+> +SRC_URI = "http://web.mit.edu/kerberos/dist/krb5/1.8/krb5-1.8.5-signed.tar"
+> +
+> +S = "${WORKDIR}/${PN}-${PV}/src/"
+> +
+> +EXTRA_OECONF += " --without-tcl --with-system-et"
+> +CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
+> +                  ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
+> +                  ac_cv_file__etc_TIMEZONE=no"
+> +
+> +CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+> +LDFLAGS_append += "-lpthread"
+> +
+> +FILES_${PN}-doc += ${datadir}/examples
+> +
 
-This
-* drags in all below this directory ( e.g *.la / *.a )
-* Forces me to rewrite FILES_${PN} in evince ( e.g just adding
-${libdir}/${BPN}/*/backends/*.a to FILES_${PN}-staticdev fixes nothing
-). This is something I would like to avoid.
+> +krb5_do_unpack() {
+> +	tar xzf ${WORKDIR}/krb5-1.8.5.tar.gz -C ${WORKDIR}/
+> +}
+How do this differ from the unpack in the normal classes?
 
-Suggestions?
+Are you able to clean it up?
+> +
+> +python do_unpack() {
+> +	bb.build.exec_func('base_do_unpack', d)
+> +	bb.build.exec_func('krb5_do_unpack', d)
+> +}
+> +
+> +do_configure() {
+> +	oe_runconf
+> +}
+> +
+> +SRC_URI[md5sum] = "48b17caedf19d07d714a8d7a25422c95"
+> +SRC_URI[sha256sum] = "7d6989efaaf0b3330ce5b329edb1d0bf33250ca78b789fdd117e02c49c238812"
+> -- 
+> 1.7.7.6
+> 
 
-I guess others but evince are also affected.
+Did you check if it is a version which do not have security bugs?
 
-Andreas
+Bye Henning
 
 
