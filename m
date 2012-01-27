@@ -1,26 +1,27 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>) id 1RqWVs-00057C-W2
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RqaYS-0001y7-IX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jan 2012 22:05:45 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 26 Jan 2012 12:56:51 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="100128935"
-Received: from unknown (HELO [10.255.14.96]) ([10.255.14.96])
-	by azsmga001.ch.intel.com with ESMTP; 26 Jan 2012 12:56:50 -0800
-Message-ID: <4F21BE12.3000008@linux.intel.com>
-Date: Thu, 26 Jan 2012 12:56:50 -0800
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111115 Thunderbird/8.0
+	Fri, 27 Jan 2012 02:24:40 +0100
+Received: by lahc1 with SMTP id c1so632627lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jan 2012 17:16:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=wntRkzZyl4HI0APVQ1hx4FzRY3LTdnVneYoyNdqC0Hs=;
+	b=bwabHp+qAZxS70nyF/etuy1PyJdM8tQWkngqAu3K5XcMY3Jy4MQ6NIWMOou9X/ETcL
+	Q3477vqQRWp2/FYU0kzfuoD9RyyI+I6e+9uJqVyjwPSo18E/+VP2zMMYAGc1JaZNaPGK
+	betVYRNMwZYFVUm9BubrFJ3H2dzO4vgULRTZ4=
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	'Patches and discussions about the oe-core layer'
-	<openembedded-core@lists.openembedded.org>, 
-	christopher Larson <kergoth@gmail.com>
-Subject: Source Archiver Class
+Received: by 10.152.132.104 with SMTP id ot8mr2531222lab.17.1327627012110;
+	Thu, 26 Jan 2012 17:16:52 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Thu, 26 Jan 2012 17:16:52 -0800 (PST)
+Date: Fri, 27 Jan 2012 02:16:52 +0100
+Message-ID: <CALbNGRS-WsE45UakTV5VE2T5bAxb1C2iWgPeN+Ys+OTx-i48Rw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: evince: who is responsible to pack all within usr/lib/evince/3/backends to ${PN}?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,94 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 21:05:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2012 01:24:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Since the staticdev update of insane.bbclass in oe-core I get
 
+WARNING: QA Issue: non -staticdev package contains static .a library:
+evince path '/work/armv7a-angstrom-linux-gnueabi/evince-2.32.0-r1/packages-split/evince/usr/lib/evince/3/backends/libtiffdocument.a'
+WARNING: QA Issue: non -staticdev package contains static .a library:
+evince path '/work/armv7a-angstrom-linux-gnueabi/evince-2.32.0-r1/packages-split/evince/usr/lib/evince/3/backends/libpixbufdocument.a'
+WARNING: QA Issue: non -staticdev package contains static .a library:
+evince path '/work/armv7a-angstrom-linux-gnueabi/evince-2.32.0-r1/packages-split/evince/usr/lib/evince/3/backends/libcomicsdocument.a'
+WARNING: QA Issue: non -staticdev package contains static .a library:
+evince path '/work/armv7a-angstrom-linux-gnueabi/evince-2.32.0-r1/packages-split/evince/usr/lib/evince/3/backends/libpdfdocument.a'
 
-This is clearly coming to a head and we need to a better definition of 
-what we are doing and direction we are going.  We recently had the 2 
-different implementation suggested on the list to accomplish WORKDIR 
-archiving along with the existing sourcepkg, distribute_src, 
-copyleft_compliance and other possibly others.
+I checked: the complete contents of /usr/lib/evince/3/backends go to
+evince package and I would like to move *.a to ${PN}-staticdev and
+*.la to ${PN}-dev but I don't understand: who is responsible for
+adding all this to ${PN}?
 
-My understanding of what we are trying to tackle include a variety of 
-legal and policy requirements.
+Regards
 
-This is a progression list of what the source archives should include:
-
-1 - Original Upstream Archive & Patches
-     - 2 archives (tarballs)
-2 - Original Source code & Patches
-     - could include additional code
-     - post unpack
-     - 1 archive
-3 - Original Source code & Patches & temp (scripts & logs)
-     - Could possibly include the .bb and .inc files
-     - 2 archives (from #2 & temp tarball)
-4 - Patched source code
-     - original source code could be removed
-     - post do_patch
-5 - Patched source code & temp
-     - 2 archives (from #4 & temp tarball)
-6 - Configured Source
-     - post do_configure
-7 - SRPM format of Original Source & Patches
-   - rpm will apply the patches
-   - internally contains #2 above
-8 - SRPM various of #3 above
-...
-100 - Buildable SRPM
-   - can actually build, this is way future!
-
-(Patches = patch files & series list)
-
-Each of these build on the previous in some way, the key being that we 
-generate a tarball for the source from the existing state of the 
-WORKDIR, a challenge maybe to create the source snapshot after the build 
-has already occurred.
-
-The SPDX License info could also be included in any of these
-
-After talking with Richard, we think we have a novel approach to make 
-this work. It would entail using the postfuncs feature similar to the 
-way that Shared State does it's work. The existing copyleft_compliance 
-class functionality can be folded into this as a filter. Additional 
-flags could be passed from individual classes to a core set of methods 
-in an archiver class defining the type of data (source, patches, temp, 
-env, recipe info, ...) and format (tar, sprm, ...)
-
-I noted that recipe type code might be better suited as generic code, as 
-I believe there are other places that could benefit from that code.
-
-The sourcepkg class seems to be a basic archiver and differ that 
-includes the metadata/environment (as dumpdata), this could be replaced 
-by the new approach.  While the src_distribute class copies the 
-downloaded archive and then creates a link, into LICENSE directories 
-along with the patches. The src_distribute by default seems to move 
-files and create links (incorrectly btw!). This work can be done by the 
-archiver class.
-
-The Nugget: Create a new core "archiver" class that implements a general 
-functions that can archive the original tarball or workdir at various 
-states along task list with additional metadata (recipe info, temp dir, 
-environment). This class would be inherited by a set of classes that use 
-the postfunc (similar to sstate) that setup what level of archive is 
-needed (based on the list above).
-
-Thoughts, Comments?
-
-Thanks
-
-
-
--- 
-     Sau!
-
-Saul Wold
-Yocto Component Wrangler @ Intel
-Yocto Project / Poky Build System
-
+Andreas
 
 
