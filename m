@@ -1,28 +1,39 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>)
-	id 1RqnkW-0000lC-MV; Fri, 27 Jan 2012 16:30:00 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 27 Jan 2012 07:22:10 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="117088180"
-Received: from unknown (HELO [10.255.14.96]) ([10.255.14.96])
-	by fmsmga002.fm.intel.com with ESMTP; 27 Jan 2012 07:22:10 -0800
-Message-ID: <4F22C122.9030206@linux.intel.com>
-Date: Fri, 27 Jan 2012 07:22:10 -0800
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:8.0) Gecko/20111115 Thunderbird/8.0
+	(envelope-from <jekhor@gmail.com>) id 1Rqnp9-0000wP-Hu
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Jan 2012 16:34:47 +0100
+Received: by bkaq10 with SMTP id q10so1517197bka.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2012 07:26:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=tu9qCC5tIrtow/HhqcRUU2ZI/DRagK/VXNv8c3f4F/I=;
+	b=PZqc+QzPRhYS8BXBkrDSgrbnUTfIs/5IbGr/MhasYCStowg/1HkvX/+G9ZQxaL9jWO
+	3LOrE8zSwfbroPHQsYp7bpQBXL78KgSYtVgpIDQxrg7ji6UwHuscCWvf7gQCc3HTFejo
+	pBitbghqZ8XdlKpNO0t2xyvC03EfGFxT+smEA=
+Received: by 10.204.130.129 with SMTP id t1mr3252973bks.33.1327673937089;
+	Fri, 27 Jan 2012 06:18:57 -0800 (PST)
+Received: from localhost.localdomain (mx2.promwad.com. [195.222.87.218])
+	by mx.google.com with ESMTPS id z15sm13571182bkd.7.2012.01.27.06.18.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 27 Jan 2012 06:18:56 -0800 (PST)
+Sender: Yauhen Kharuzhy <jekhor@gmail.com>
+Received: from jek by localhost.localdomain with local (Exim 4.77)
+	(envelope-from <yauhen.kharuzhy@promwad.com>)
+	id 1Rqmdg-0004lF-8Z; Fri, 27 Jan 2012 17:18:52 +0300
+Date: Fri, 27 Jan 2012 17:18:52 +0300
+From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120127141852.GA17935@jeknote.loshitsa1.net>
+References: <20120126054457.GE5566@sakrah.homelinux.org>
+	<1327611041-7681-1-git-send-email-yauhen.kharuzhy@promwad.com>
+	<20120127130311.GA18521@mi.fu-berlin.de>
 MIME-Version: 1.0
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-References: <CALbNGRS-WsE45UakTV5VE2T5bAxb1C2iWgPeN+Ys+OTx-i48Rw@mail.gmail.com>
-	<4F21FDA2.5070803@linux.intel.com>
-	<CALbNGRQ0+FDE7QisckBOCXBUspQiumZFLjPJYgRf87a1mqtHaw@mail.gmail.com>
-	<CALbNGRTqHJYvSzbman=ZPQ4D=Cyu8oX0F4JdTA7hrH4oMW_wbA@mail.gmail.com>
-In-Reply-To: <CALbNGRTqHJYvSzbman=ZPQ4D=Cyu8oX0F4JdTA7hrH4oMW_wbA@mail.gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] evince: who is responsible to pack all within usr/lib/evince/3/backends to ${PN}?
+In-Reply-To: <20120127130311.GA18521@mi.fu-berlin.de>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH v2] Add recipe for krb5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,58 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2012 15:30:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 27 Jan 2012 15:34:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 01/27/2012 04:48 AM, Andreas Müller wrote:
-> On Fri, Jan 27, 2012 at 9:43 AM, Andreas Müller
-> <schnitzeltony@googlemail.com>  wrote:
->> On Fri, Jan 27, 2012 at 2:28 AM, Saul Wold<sgw@linux.intel.com>  wrote:
->>> On 01/26/2012 05:16 PM, Andreas Müller wrote:
->>>>
->>>> I checked: the complete contents of /usr/lib/evince/3/backends go to
->>>> evince package and I would like to move *.a to ${PN}-staticdev and
->>>> *.la to ${PN}-dev but I don't understand: who is responsible for
->>>> adding all this to ${PN}?
->>>>
->>> bitbake.conf defines where most files should go, but when you get files in
->>> sub-directories, such as /usr/lib/evince/..., then the recipe needs to do a
->>> little more work. If you look at the evince_2.32.0.bb, there already is a
->>> FILES_${PN}-staticdev that adds some extensions, you need to add this set of
->>> backends to that list, probably same with the .la to the -dev package.
->>>
->> Why I asked this: Maybe there is a chance to fix this more globally
->> instead of one by one in each recipe. But therefore I need to know
->> where the path is packed.
->>
-> I looked around for this a bit: As Saul pointed out, in bitbake.conf we have
-> FILES_${PN} = ... ${libdir}/${BPN}/* ...
->
-> This
-> * drags in all below this directory ( e.g *.la / *.a )
-> * Forces me to rewrite FILES_${PN} in evince ( e.g just adding
-> ${libdir}/${BPN}/*/backends/*.a to FILES_${PN}-staticdev fixes nothing
-> ). This is something I would like to avoid.
->
-> Suggestions?
->
-> I guess others but evince are also affected.
->
-Actually the ordering of PACKAGES matters here and since bitbake.conf 
-lists the ${PN}-dev and ${PN}-staticdev package before ${PN}, you can 
-append the ${libdir}/${BPN}/3/backends/*.a to FILES_${PN}-staticdev and 
-it will pull those first before doing the FILES_${PN}. does that make 
-sense?  You don't have to re-write FILES_${PN}.
+On Fri, Jan 27, 2012 at 02:03:11PM +0100, Henning Heinold wrote:
 
-Sau!
+> > +krb5_do_unpack() {
+> > +	tar xzf ${WORKDIR}/krb5-1.8.5.tar.gz -C ${WORKDIR}/
+> > +}
+> How do this differ from the unpack in the normal classes?
+> 
+> Are you able to clean it up?
+krb5 release tarball contains two files: signature and release tarball :)
 
-> Andreas
->
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
->
+> > +
+> > +python do_unpack() {
+> > +	bb.build.exec_func('base_do_unpack', d)
+> > +	bb.build.exec_func('krb5_do_unpack', d)
+> > +}
+> > +
+> > +do_configure() {
+> > +	oe_runconf
+> > +}
+> > +
+> > +SRC_URI[md5sum] = "48b17caedf19d07d714a8d7a25422c95"
+> > +SRC_URI[sha256sum] = "7d6989efaaf0b3330ce5b329edb1d0bf33250ca78b789fdd117e02c49c238812"
+> > -- 
+> > 1.7.7.6
+> > 
+> 
+> Did you check if it is a version which do not have security bugs?
+
+1.8.5 is latest maintenance release of 1.8 branch (02 Nov 2011). Maybe
+1.9.2 is more suitable for OE, but we tested 1.8 as our customer
+required.
+
+-- 
+Yauhen Kharuzhy
+-----------------------------------------------------------
+Promwad Innovation Company
+22, Olshevskogo St.
+Office 809
+220073, Minsk, Belarus
+Phone/Fax: +375 (17) 312-1246
+E-mail: yauhen.kharuzhy@promwad.com
+Skype: jekhor
+Web: www.promwad.com
 
 
