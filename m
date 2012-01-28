@@ -1,22 +1,27 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1Rr29N-00058h-Mt
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Rr896-0001nA-Lu
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Jan 2012 07:52:37 +0100
-Received: from [192.168.2.19] (e180155141.adsl.alicedsl.de [85.180.155.141])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 69C9C58410F; 
-	Sat, 28 Jan 2012 08:24:51 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-Date: Sat, 28 Jan 2012 07:37:13 +0100
-Message-Id: <80CC51B0-8146-4D4D-A66B-A9BED0AADFF7@vanille-media.de>
-References: <003801ccdd67$1b2fa8e0$518efaa0$@com.au>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1251.1)
+	Sat, 28 Jan 2012 14:16:44 +0100
+Received: by vbbff1 with SMTP id ff1so36957vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 28 Jan 2012 05:08:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=ulCfPTRwnOqt4Te+LwEtqJftwuuKgrjNS7Q/sm8EPiw=;
+	b=uvK6kqUiTn9YIIh67Y9j5qXdNubV+oz20ZKJX1/Pe9M0kmTt/RGbTZl+Kp10aDw+S8
+	apZsJKMXnW1vXc0Fr/FbeqdULb8lvgaR2kY5TXxLdPFu7oRjtjJHPEfG8TXGxLDyV2U1
+	Cl7kYa8AayBXfIa5bXFJZ64jJ6L3RVTxMY/R4=
+MIME-Version: 1.0
+Received: by 10.52.26.206 with SMTP id n14mr5270916vdg.51.1327754552282; Sat,
+	28 Jan 2012 04:42:32 -0800 (PST)
+Received: by 10.52.67.171 with HTTP; Sat, 28 Jan 2012 04:42:32 -0800 (PST)
+Date: Sat, 28 Jan 2012 13:42:32 +0100
+Message-ID: <CACW_hTaJXTrAP4YTTA2CwXFe7sYeY3yEFi8JfNbhiEzZbMttqg@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Florin Oprea <florin@adam.com.au>
-Subject: Photos App WebOS Touchpad
+Subject: get OE git hash tag in executable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,48 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jan 2012 06:52:37 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 28 Jan 2012 13:16:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Forwarding to the actual list address...
+Hi,
 
-Anfang der weitergeleiteten E-Mail:
+In order to allow backtracking of the sources for a binary build with OE, I
+would like to (automatically) add the hash of the top level commit (and
+maybe also the branch) of the oe git tree my recipe lives in).
+E.g. in main.c I would like to have a var say:
+const char * const buildfrom = "oe branch 2011.03-maintence hash
+1234567890"; or something like that.
 
-> Von: "Florin Oprea" <florin@adam.com.au>
-> Betreff: Photos App WebOS Touchpad
-> Datum: 28. Januar 2012 03:46:59 MEZ
-> An: <openembedded-devel-owner@lists.openembedded.org>
->=20
-> Hi openembedded team.
->=20
-> I have a  problem with this app. It has stopped syncing with facebook =
-just after I installed ota 3.0.4 webos. A while I blamed it on the =
-update then I found on the webos nation forum a thread about my issue =
-and I left some comments there for the developer team, hoping that the =
-following ota update will fix my issue.
->=20
-> The ota has arrived a few days ago and I installed it, but to my =
-disappointment it has not fixed my issue.=20
->=20
->=20
-> Is there a patch or ... Some sort of an automated script that your =
-team could make available to all of us having this issue?
->=20
-> Thank you in advance.
->=20
-> Florin Oprea
->=20
->=20
-> =20
->=20
->=20
-> __________ Information from ESET Smart Security, version of virus =
-signature database 6765 (20120103) __________
->=20
-> The message was checked by ESET Smart Security.
->=20
-> http://www.eset.com
+What would be the best way to get that info into my program?
+(my best guess at the moment is to use a macro and compile with
+-DOE_IDENT="....." or so and say  char *buildfrom = OE_IDENT; but not
+really sure what the best way is to fill OE_IDENT and pass it to the
+recipe.)
 
+(and of course I'm open to alternate solutions; as long as I can trace back
+the git hash)
+
+Thanks in advance for any suggestions!
+Frans
 
