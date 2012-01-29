@@ -1,35 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1RrcQX-0005X5-TJ
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RrcQY-0005Ws-G6
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 29 Jan 2012 22:36:46 +0100
-Received: by eaal12 with SMTP id l12so993841eaa.6
+Received: by mail-ee0-f47.google.com with SMTP id d41so997212eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2012 13:28:54 -0800 (PST)
+	Sun, 29 Jan 2012 13:28:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=b4vzVMSwFlfE0wvwRV7xz4WkDP3X0wVSzT9iAkP4FtU=;
-	b=okxICmIR+8fWAj9mGxjKKvTSBtV8zsgSyZdNUyRn/XDOVZM68WkbroG6NvwzLqGawE
-	PNyrYQQ5ReuusCT2EaamsKraKwOQuo1WbJbnOQcClA+KCK6dI3mlvJh/BGXV8/PydTfL
-	xU8QRzNbcF2mFjLRsB0IwAfydZsYYsD58hiMk=
-Received: by 10.213.2.145 with SMTP id 17mr2401601ebj.104.1327872533750;
-	Sun, 29 Jan 2012 13:28:53 -0800 (PST)
+	bh=jOh7pY+qlH4/95yDI9tY2cRE1PlkF+1BY7oYfFVkevE=;
+	b=CtodOJQ2gFNg5ea+MJEkU5Bw5c/3Cy4kyo5Dx+oAUcpSZ4TW3500WxPl77oHiN8GqZ
+	XcPtkTsLNo6lAHbMVNDBCFEqyNlua4csoVCfIB6VodkSCpzYMqL+UGeN++QgZM+6vbSw
+	rd17kNMK8N4fOQyX5BlXMEj/UYVbBjTqK6kvg=
+Received: by 10.14.99.76 with SMTP id w52mr4624583eef.85.1327872532746;
+	Sun, 29 Jan 2012 13:28:52 -0800 (PST)
 Received: from localhost.localdomain (p4FDF017C.dip.t-dialin.net.
 	[79.223.1.124])
-	by mx.google.com with ESMTPS id n17sm63740491eei.3.2012.01.29.13.28.52
+	by mx.google.com with ESMTPS id n17sm63740491eei.3.2012.01.29.13.28.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Jan 2012 13:28:53 -0800 (PST)
+	Sun, 29 Jan 2012 13:28:52 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Jan 2012 22:30:57 +0100
-Message-Id: <1327872658-3574-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 29 Jan 2012 22:30:56 +0100
+Message-Id: <1327872658-3574-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1327872658-3574-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1327872658-3574-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][v2 3/4] task-xfce-extended: add xfce4-genmon-plugin
+Subject: [meta-xfce][v2 2/4] xfce4-genmon-plugin: initial add 3.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,33 +47,190 @@ X-List-Received-Date: Sun, 29 Jan 2012 21:36:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* build tested from scratch
+* run tested on overo
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ .../genmon/files/port-to-libxfce4ui.patch          |  150 ++++++++++++++++++++
+ .../genmon/xfce4-genmon-plugin_3.3.1.bb            |   11 ++
+ 2 files changed, 161 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-panel-plugins/genmon/files/port-to-libxfce4ui.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.3.1.bb
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-index 122252f..2dbd9f0 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -3,6 +3,8 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
- 
-+PR = "r1"
+diff --git a/meta-xfce/recipes-panel-plugins/genmon/files/port-to-libxfce4ui.patch b/meta-xfce/recipes-panel-plugins/genmon/files/port-to-libxfce4ui.patch
+new file mode 100644
+index 0000000..b615fe5
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/genmon/files/port-to-libxfce4ui.patch
+@@ -0,0 +1,150 @@
++From 57e2a3787261ccc33f47d4d4061148d720d88d7d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Thu, 26 Jan 2012 00:45:31 +0100
++Subject: [PATCH] port to libxfce4ui
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++Upstream status: pending https://bugzilla.xfce.org/show_bug.cgi?id=8406
 +
- inherit task
- 
- # mandatory
-@@ -30,6 +32,7 @@ RRECOMMENDS_${PN} = " \
-     xfce4-clipman-plugin \
-     xfce4-diskperf-plugin \
-     xfce4-netload-plugin \
-+    xfce4-genmon-plugin \
-     \
-     xfce4-appfinder \
-     xfce4-screenshooter \
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ configure.ac              |    4 ++--
++ panel-plugin/Makefile.am  |    4 ++--
++ panel-plugin/cmdspawn.c   |    2 +-
++ panel-plugin/config_gui.c |    2 +-
++ panel-plugin/config_gui.h |    1 -
++ panel-plugin/main.c       |   17 ++++++-----------
++ 6 files changed, 12 insertions(+), 18 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index b9d5bd3..a04d0ec 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -31,8 +31,8 @@ dnl Check for standard header files
++ AC_HEADER_STDC
++ 
++ dnl configure the panel plugin
++-XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.22])
++-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.2.0])
+++XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.8.0])
+++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.8.0])
++ 
++ dnl Translations
++ XDT_I18N([@LINGUAS@])
++diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
++index 861a466..f819ff6 100644
++--- a/panel-plugin/Makefile.am
+++++ b/panel-plugin/Makefile.am
++@@ -4,11 +4,11 @@ plugin_PROGRAMS = xfce4-genmon-plugin
++ xfce4_genmon_plugin_CFLAGS =					\
++ 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"			\
++ 	@LIBXFCE4PANEL_CFLAGS@					\
++-	@LIBXFCEGUI4_CFLAGS@
+++	@LIBXFCE4UI_CFLAGS@
++ 
++ xfce4_genmon_plugin_LDADD =					\
++ 	@LIBXFCE4PANEL_LIBS@					\
++-	@LIBXFCEGUI4_LIBS@
+++	@LIBXFCE4UI_LIBS@
++ 
++ xfce4_genmon_plugin_SOURCES =	\
++ 	main.c			\
++diff --git a/panel-plugin/cmdspawn.c b/panel-plugin/cmdspawn.c
++index aef7689..ae9de82 100644
++--- a/panel-plugin/cmdspawn.c
+++++ b/panel-plugin/cmdspawn.c
++@@ -49,7 +49,7 @@
++ #include <stdarg.h>
++ #include <errno.h>
++ #include <sys/wait.h>
++-#include <libxfcegui4/libxfcegui4.h>
+++#include <libxfce4ui/libxfce4ui.h>
++ 
++ 
++ /**********************************************************************/
++diff --git a/panel-plugin/config_gui.c b/panel-plugin/config_gui.c
++index 49ef267..3550c35 100644
++--- a/panel-plugin/config_gui.c
+++++ b/panel-plugin/config_gui.c
++@@ -28,7 +28,7 @@
++ #include <gtk/gtk.h>
++ 
++ #include <libxfce4util/libxfce4util.h>
++-#include <libxfcegui4/dialogs.h>
+++#include <libxfce4ui/libxfce4ui.h>
++ #include <libxfce4panel/xfce-panel-plugin.h>
++ 
++ 
++diff --git a/panel-plugin/config_gui.h b/panel-plugin/config_gui.h
++index 84024b2..c6bb672 100644
++--- a/panel-plugin/config_gui.h
+++++ b/panel-plugin/config_gui.h
++@@ -29,7 +29,6 @@
++ #include <gtk/gtk.h>
++ 
++ #include <libxfce4util/libxfce4util.h>
++-#include <libxfcegui4/dialogs.h>
++ #include <libxfce4panel/xfce-panel-plugin.h>
++ 
++ 
++diff --git a/panel-plugin/main.c b/panel-plugin/main.c
++index 1f741ee..14cf778 100644
++--- a/panel-plugin/main.c
+++++ b/panel-plugin/main.c
++@@ -31,8 +31,7 @@
++ #include <gtk/gtk.h>
++ 
++ #include <libxfce4util/libxfce4util.h>
++-#include <libxfcegui4/dialogs.h>
++-#include <libxfcegui4/xfce-exec.h>
+++#include <libxfce4ui/libxfce4ui.h>
++ #include <libxfce4panel/xfce-panel-plugin.h>
++ #include <libxfce4panel/xfce-panel-convenience.h>
++ 
++@@ -98,7 +97,7 @@ static void ExecOnClickCmd (Widget_t p_wSc, void *p_pvPlugin)
++     struct monitor_t *poMonitor = &(poPlugin->oMonitor);
++     GError *error = NULL;
++ 
++-	xfce_exec(poMonitor->onClickCmd, 0, 0, &error);
+++    xfce_spawn_command_line_on_screen( gdk_screen_get_default(), poMonitor->onClickCmd, 0, 0, &error );
++     if (error) {
++         char first[256];
++         g_snprintf (first, sizeof(first), _("Could not run \"%s\""), poMonitor->onClickCmd);
++@@ -592,7 +591,8 @@ static void UpdateConf (void *p_pvPlugin)
++ static void About (Widget_t w, void *unused)
++ /* Called back when the About button in clicked */
++ {
++-    xfce_info (_("%s %s - Generic Monitor\n"
+++    xfce_dialog_show_info (NULL, NULL, 
+++        _("%s %s - Generic Monitor\n"
++         "Cyclically spawns a script/program, captures its output "
++         "and displays the resulting string in the panel\n\n"
++         "(c) 2004 Roger Seguin <roger_seguin@msn.com>\n"
++@@ -646,7 +646,7 @@ static void genmon_create_options (XfcePanelPlugin *plugin,
++ /* Plugin API */
++ /* Create/pop up the configuration/options GUI */
++ {
++-    GtkWidget *dlg, *header, *vbox;
+++    GtkWidget *dlg, *vbox;
++     struct param_t *poConf = &(poPlugin->oConf.oParam);
++     struct gui_t   *poGUI = &(poPlugin->oConf.oGUI);
++     const char     *pcFont = poConf->acFont;
++@@ -667,12 +667,7 @@ static void genmon_create_options (XfcePanelPlugin *plugin,
++ 
++     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
++ 
++-    header = xfce_create_header (NULL, _("Generic Monitor"));
++-    gtk_widget_set_size_request (GTK_BIN (header)->child, -1, 32);
++-    gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
++-    gtk_widget_show (header);
++-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), header,
++-        FALSE, TRUE, 0);
+++    xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dlg), _("Generic Monitor"));
++ 
++     vbox = gtk_vbox_new(FALSE, BORDER);
++     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
++-- 
++1.7.4.4
++
+diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.3.1.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.3.1.bb
+new file mode 100644
+index 0000000..d2ed4fe
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.3.1.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "This plugin cyclically spawns the indicated script/program, captures its output (stdout) and displays the resulting string into the panel."
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-genmon-plugin"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=68ad62c64cc6c620126241fd429e68fe"
++
++inherit xfce-panel-plugin
++
++SRC_URI += "file://port-to-libxfce4ui.patch"
++
++SRC_URI[md5sum] = "e0022e15d4211a87c17d9f252b68e1d3"
++SRC_URI[sha256sum] = "fe439d569f9ba3c8bdbfa907022a7c4a697ae4ae7fc5001a5600dfa5e1793471"
 -- 
 1.7.4.4
 
