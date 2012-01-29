@@ -1,35 +1,33 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1RrSQV-0003pn-OG for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jan 2012 11:56:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q0TAmA1r008693;
-	Sun, 29 Jan 2012 10:48:10 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07750-02; Sun, 29 Jan 2012 10:48:03 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q0TAlxuZ008687
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 29 Jan 2012 10:48:00 GMT
-Message-ID: <1327834082.7807.11.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Date: Sun, 29 Jan 2012 10:48:02 +0000
-In-Reply-To: <2431052.r2DnJ7okSu@helios>
-References: <ED3E0BCACD909541BA94A34C4A164D4C40237014@post.tritech.se>
-	<2431052.r2DnJ7okSu@helios>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	q0TAmA1r008693
-Cc: yocto@yoctoproject.org,
-	Mats =?ISO-8859-1?Q?K=E4rrman?= <Mats.Karrman@tritech.se>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [yocto] exmap-console access forbidden
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RrVNd-0001Yk-Uq
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Jan 2012 15:05:17 +0100
+Received: by eaal12 with SMTP id l12so913780eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Jan 2012 05:57:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=a6CV5jihVltjrX7MlvaYb9qfebPKYQGCkulrXXGiP3w=;
+	b=EIizls/ZLN0ZdNNOzy4EMFKz+eOVvPLI12BHDSecTby1qApevr9v/HxBKSqessXjPV
+	EMhFZPkHRjZ7d9C69432Z/eBKC3Sp/2KR8P2fp0uvy1XIZaKWC+aiOY19w2lFD3bceuE
+	7RmzqfOpkXm7hkjYR3lPDeA8keAf1eU+n8ZK0=
+Received: by 10.213.35.135 with SMTP id p7mr2198609ebd.131.1327845446428;
+	Sun, 29 Jan 2012 05:57:26 -0800 (PST)
+Received: from localhost.localdomain (p4FDF017C.dip.t-dialin.net.
+	[79.223.1.124])
+	by mx.google.com with ESMTPS id t11sm31778265eea.10.2012.01.29.05.57.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 29 Jan 2012 05:57:25 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 29 Jan 2012 14:59:31 +0100
+Message-Id: <1327845574-26155-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-xfce 1/4] README: Changed email address
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2012 10:56:04 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 29 Jan 2012 14:05:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, 2012-01-28 at 14:58 +0000, Paul Eggleton wrote:
-> On Friday 27 January 2012 09:34:26 Mats K=C3=A4rrman wrote:
-> > Does anyone know why the downloads server at yoctoproject.org has the=
- source
-> > tars of exmap-console as "Access Forbidden"? Other tars from the same
-> > server is OK to download.
->=20
-> I seem to be able to download the tarballs from=20
-> http://downloads.yoctoproject.org/releases/exmap-console/... are you st=
-ill=20
-> experiencing this problem?
 
-I did forward the email to Michael and Beth who looked into it and did
-find and resolve a permissions problem. I think they were trying to
-figure out the root cause before replying.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/README |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Anyhow, it should be resolved now.
-
-Cheers,
-
-Richard
+diff --git a/meta-xfce/README b/meta-xfce/README
+index c7186be..6e021e1 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -12,4 +12,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
+ 
+ When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-xfce'
+ 
+-Interim layer maintainer: Andreas Müller <schnitzeltony@gmx.de>
++Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+-- 
+1.7.4.4
 
 
 
