@@ -1,32 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1RrCsQ-0007rS-4w
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Jan 2012 19:19:50 +0100
-Received: by vbbff1 with SMTP id ff1so131575vbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jan 2012 10:11:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=HPAk1eWZESwqvt/Mh84AMhbVDNHI+AedM62OFdbxmX4=;
-	b=uXg7Oe8709N+wLju9Psdxbqim1VH9kZcGRsjmM+EMxPwD2XUrX4rVtI2wr68DUpGEv
-	d22+l1QgRsYy/C5qbpT5Sv590qriEZM5Z3JudpzBC2iweMBePUlma6W9LzaU/GsM7fkj
-	nYh8xQpQFCMN/AIDzfb+/u3e/uojBXuc0wJN4=
-MIME-Version: 1.0
-Received: by 10.52.66.166 with SMTP id g6mr5678774vdt.34.1327774319213; Sat,
-	28 Jan 2012 10:11:59 -0800 (PST)
-Received: by 10.52.67.171 with HTTP; Sat, 28 Jan 2012 10:11:59 -0800 (PST)
-In-Reply-To: <2691471.Q2jpB2kn8z@helios>
-References: <CACW_hTaJXTrAP4YTTA2CwXFe7sYeY3yEFi8JfNbhiEzZbMttqg@mail.gmail.com>
-	<2691471.Q2jpB2kn8z@helios>
-Date: Sat, 28 Jan 2012 19:11:59 +0100
-Message-ID: <CACW_hTaZqYFkGpV8hFdsTNbsJB6geZGqtdr3bGDssLQV9CwCvw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1RrSQV-0003pn-OG for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Jan 2012 11:56:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q0TAmA1r008693;
+	Sun, 29 Jan 2012 10:48:10 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 07750-02; Sun, 29 Jan 2012 10:48:03 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q0TAlxuZ008687
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 29 Jan 2012 10:48:00 GMT
+Message-ID: <1327834082.7807.11.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: get OE git hash tag in executable
+Date: Sun, 29 Jan 2012 10:48:02 +0000
+In-Reply-To: <2431052.r2DnJ7okSu@helios>
+References: <ED3E0BCACD909541BA94A34C4A164D4C40237014@post.tritech.se>
+	<2431052.r2DnJ7okSu@helios>
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	q0TAmA1r008693
+Cc: yocto@yoctoproject.org,
+	Mats =?ISO-8859-1?Q?K=E4rrman?= <Mats.Karrman@tritech.se>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [yocto] exmap-console access forbidden
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,88 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jan 2012 18:19:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 29 Jan 2012 10:56:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-2012/1/28 Paul Eggleton <paul.eggleton@linux.intel.com>
+On Sat, 2012-01-28 at 14:58 +0000, Paul Eggleton wrote:
+> On Friday 27 January 2012 09:34:26 Mats K=C3=A4rrman wrote:
+> > Does anyone know why the downloads server at yoctoproject.org has the=
+ source
+> > tars of exmap-console as "Access Forbidden"? Other tars from the same
+> > server is OK to download.
+>=20
+> I seem to be able to download the tarballs from=20
+> http://downloads.yoctoproject.org/releases/exmap-console/... are you st=
+ill=20
+> experiencing this problem?
 
-> On Saturday 28 January 2012 13:42:32 Frans Meulenbroeks wrote:
-> > In order to allow backtracking of the sources for a binary build with
-> OE, I
-> > would like to (automatically) add the hash of the top level commit (and
-> > maybe also the branch) of the oe git tree my recipe lives in).
-> > E.g. in main.c I would like to have a var say:
-> > const char * const buildfrom = "oe branch 2011.03-maintence hash
-> > 1234567890"; or something like that.
-> >
-> > What would be the best way to get that info into my program?
-> > (my best guess at the moment is to use a macro and compile with
-> > -DOE_IDENT="....." or so and say  char *buildfrom = OE_IDENT; but not
-> > really sure what the best way is to fill OE_IDENT and pass it to the
-> > recipe.)
->
-> Interesting question! Putting the information in a define specified on the
-> compiler command line would be one way; another way would be to have the
-> recipe write to/append to/subsitute into a header file that you can
-> #include in
-> the source. You would also probably want to include ${DATE} in the
-> recipe's PV
-> or use some other mechanism to ensure it gets rebuilt every time you build
-> an
-> image.
->
-> I guess you are still using OE-Classic, but in OE-Core we now have a
-> function
-> in base.bbclass called get_layers_branch_rev that will return the git
-> branch/revision information for all enabled layers. It was split out from
-> the
-> code in the same bbclass that displays this information when BitBake
-> starts,
-> so I guess you could just make a copy of it into your recipe for
-> OE-Classic.
->
-> Cheers,
-> Paul
->
->
-HI Paul,
+I did forward the email to Michael and Beth who looked into it and did
+find and resolve a permissions problem. I think they were trying to
+figure out the root cause before replying.
 
-Thanks for the feedback.
-Indeed I'm still on oe classic; the product in which I am putting this is
-close to release so I
-cannot switch any more.
+Anyhow, it should be resolved now.
 
-Writing into a header file is also something that I considered and that is
-also probably quite feasible.
-(and maybe even simpler, if it is done in a do_configure step or so,
-passing shell varables through bitbake to CFLAGS is not
-really trivial; as far as I know I cannot use things like `git log | head
--1` and assign it to a var in the recipe
-(it might be possbile with some python, but that is outside my league).
+Cheers,
 
-With respect to rebuilding the app. Yeah, didn' t think of that.
-It is not too much of a concern, because all our products are build from
-scratch on an autobuilder and the
-test images and later the release are pulled from that autobuilder, so I
-always know that the app info is correct.
+Richard
 
-Then again, rethinking it, it seems I am making things way too complicated.
-Guess the simplest solution is just to do some postprocessing when the
-rootfs is created and make a file /etc/buildinfo or so and read that from
-the app.
-(We only distribute images, not complete apps).
 
-(Actually I do already something like that in the top level makefile that I
-have to collect all data for the autobuilder).
-
-Thanks alot for your advice.
-
-Frans
-
-PS: saw the reply from Khem while typing this.
-Probably even simpler. add a small makefile rule to the project to create
-the version .h file.
-I seem to recall u-boot does something similar.
-Might need to pass the path from the recipe though, otherwise I'll have to
-come up with something like ../../../../../../openembedded.git or so
 
