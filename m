@@ -1,31 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RrtMG-0004HQ-7k
+	(envelope-from <otavio.salvador@gmail.com>) id 1Rrtd4-0006bv-If
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 16:41:28 +0100
-Received: by eekd41 with SMTP id d41so1199746eek.6
+	Mon, 30 Jan 2012 16:58:50 +0100
+Received: by lahc1 with SMTP id c1so2204946lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 07:33:35 -0800 (PST)
+	Mon, 30 Jan 2012 07:50:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=tLQHKy4tySQHR2AYALopbkEajK32MOLfbEyIFOLE0hE=;
-	b=FxSwfNpcpOsDaNBU/KavfcpCQ6Yd1BUYuUl3mAKr1WSPf1YbWh/IDQa2W/fbDtxaf9
-	QYXwIbEdLd8LIHbJvAIdaFRIzzHbcJED2TjNQbk7T+zS2FIkWrG9IN4SkkDqXkDF9Vbx
-	/1Kfjg/6YAIJi92nsEl1W6FLztuLgw0Ejz9g4=
-Received: by 10.14.3.134 with SMTP id 6mr5804899eeh.51.1327937615283;
-	Mon, 30 Jan 2012 07:33:35 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n17sm73849830eei.3.2012.01.30.07.33.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 07:33:34 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=gwowhTV489T/WTAOs/3AuTPeXrD7/1wkqTqR7AmpOsU=;
+	b=DX36ki/FAvoYs7O3zz8AFGy7B5Uli4MwUNkskweUncZvqNS6PKSzY8PfHQezbx3Tb4
+	nBwD6Ns1kkqOnbTPCogFxGCqLdmob79pLlqLkjIHMjj4t8sft4S2mQJanzdG0ztcE4yy
+	VZo1IL2QLW+YlUqzo9ijT/IUDKCQJrrhsmgg8=
+MIME-Version: 1.0
+Received: by 10.152.112.41 with SMTP id in9mr9214125lab.27.1327938657934; Mon,
+	30 Jan 2012 07:50:57 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.112.46.199 with HTTP; Mon, 30 Jan 2012 07:50:57 -0800 (PST)
+In-Reply-To: <jg68t6$uh9$1@dough.gmane.org>
+References: <jg68t6$uh9$1@dough.gmane.org>
+Date: Mon, 30 Jan 2012 13:50:57 -0200
+X-Google-Sender-Auth: feXC68pDEsrC_AmxYw1qya9qF0k
+Message-ID: <CAP9ODKpt285LxOmMRbP6ZLLB170iCFUQwFGNVk2TOsUoD5rm=w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jan 2012 16:33:26 +0100
-Message-Id: <1327937606-22150-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <1327932996-3624-1-git-send-email-koen@dominion.thruhere.net>
-References: <1327932996-3624-1-git-send-email-koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] udev-180: switch from git checkout to release tarball
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe] udev rollcall
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,54 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 15:41:28 -0000
+X-List-Received-Date: Mon, 30 Jan 2012 15:58:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* problem is with manpage generation, commit
-  http://git.kernel.org/?p=linux/hotplug/udev.git;a=commit;h=6528a3938fe8727b99b210cf504a335d07c94c37
-  assumes that even without xstltproc we can install pregenerated
-  manpages, but they are only in release tarball (e.g. src/udev.7)
-  and without them, build system tries to regenerate and fails:
+On Mon, Jan 30, 2012 at 12:19, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-  /OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/xsltproc -o src/udev.7 -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl src/udev.xml
-  warning: failed to load external entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
-  cannot parse http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+> We currently have udev 173 and 175 in meta-oe and I just sent a patch to
+> add
+> 180. To keep the number of udev recipes sane I'd like to ask people using
+> udev from meta-oe to state which version they are using and if they want to
+> keep it.
+>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/udev/udev_180.bb |    9 +++------
- 1 files changed, 3 insertions(+), 6 deletions(-)
+Please keep 173; I am using it as base of my work of merging it onto
+OE-Core and I can then do 180 too.
 
-diff --git a/meta-oe/recipes-core/udev/udev_180.bb b/meta-oe/recipes-core/udev/udev_180.bb
-index 4d3b0ed..4cabcce 100644
---- a/meta-oe/recipes-core/udev/udev_180.bb
-+++ b/meta-oe/recipes-core/udev/udev_180.bb
-@@ -19,12 +19,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- # kmod: needed for libkmod
- DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
- 
--# f13289ffdf077f75c8710e977ffe538b66885762 -> 180 tag
--SRCREV = "f13289ffdf077f75c8710e977ffe538b66885762"
--
- # version specific SRC_URI
--SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
-+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
-            file://gtk-doc.make"
-+SRC_URI[md5sum] = "7a74429e5b4d5cc3d389945774807e46"
-+SRC_URI[sha256sum] = "d8f021cc940da7c1f928e2e651c6aa00c5695f3227f560de4a65584e2f089115"
- 
- # generic SRC_URI
- SRC_URI += " \
-@@ -32,8 +31,6 @@ SRC_URI += " \
-        file://modprobe.rules \
- "
- 
--S = "${WORKDIR}/git"
--
- # Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
- 
- inherit autotools
 -- 
-1.7.8.4
-
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
