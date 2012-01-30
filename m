@@ -1,29 +1,22 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rrq6i-00023x-NY
+	(envelope-from <fromm@dresearch-fe.de>) id 1Rrr6z-0005Ep-Up
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 13:13:12 +0100
-Received: by eekd41 with SMTP id d41so1140943eek.6
+	Mon, 30 Jan 2012 14:17:34 +0100
+Received: by iaby12 with SMTP id y12so4465995iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 04:05:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=lJmwFZeC9A9oNg78bTyDf6Dblo1T/U3kqkx8zPPccUc=;
-	b=OZRQdDAJ9ovd0+OGfPTZ16XRDdntZwzg+HR6Otk/I6Ds2iQsjl48QkZypmx9djUGrJ
-	La+bvIuwlP0LncYshlr5k7FwPGdZnfhKReqdtw6zJ7i32J9onWXSpiZ0VQgKyh1mvZgD
-	JQckjrvX8sxDIaDFi/icafOaOROhE3C/XogVw=
-Received: by 10.14.4.143 with SMTP id 15mr5363541eej.104.1327925120255;
-	Mon, 30 Jan 2012 04:05:20 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y12sm71782867eeb.11.2012.01.30.04.05.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 04:05:19 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 30 Jan 2012 05:09:40 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.42.168.8 with SMTP id u8mr1528394icy.42.1327928980689; Mon, 30
+	Jan 2012 05:09:40 -0800 (PST)
+Received: by 10.50.155.134 with HTTP; Mon, 30 Jan 2012 05:09:40 -0800 (PST)
+In-Reply-To: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
+References: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
+Date: Mon, 30 Jan 2012 14:09:40 +0100
+Message-ID: <CADZ6=avk8ekCLnXv=wbYwhcYzHpyN9mR2mctUNW4hxFfGJZ5Ug@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jan 2012 13:05:07 +0100
-Message-Id: <1327925107-28946-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][PATCH] libsdl-ttf: fix LICENSE metadata and add LIC_FILES_CHKSUM
+Subject: Re: [meta-java][PATCH] llvm-config: Work around shebang max length issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,30 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 12:13:12 -0000
+X-List-Received-Date: Mon, 30 Jan 2012 13:17:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../libsdl-ttf/libsdl-ttf_2.0.10.bb                |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Hello *.*,
 
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
-index 61b7521..ce4e316 100644
---- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
-@@ -1,7 +1,9 @@
- DESCRIPTION = "Simple DirectMedia Layer truetype font library."
- SECTION = "libs"
- DEPENDS = "virtual/libsdl freetype"
--LICENSE = "LGPL"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
-+
- PR = "r1"
- 
- SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
--- 
-1.7.8.4
+> This patch works around a max shebang length issue
+> in llvm's llvm-config.
+>
 
+Sorry guys, I garbled the patch in the first submission. I already
+changed the first submission's patch state to "not applicable" in
+patchwork and resent it. Just want to make sure no one tries to apply
+my first submission to this issue. Patchwork already has the sane
+diff.
+
+Some feedback on the patch would be great.
+
+Regards,
+Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
