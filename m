@@ -1,29 +1,33 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rs0m3-0002pI-OP
+	(envelope-from <openembedded@emagii.com>) id 1Rs0rj-00037M-JH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jan 2012 00:36:35 +0100
-Received: by mail-lpp01m010-f47.google.com with SMTP id c1so2470074lah.6
+	Tue, 31 Jan 2012 00:42:27 +0100
+Received: from ipb5.telenor.se (ipb5.telenor.se [195.54.127.168])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 05F39C741
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 15:28:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=Q9FxaSt0MQ7/NvXKnhRVCFSpIUXv7d515OLeV6J1OG4=;
-	b=KL4oPscQJ3LhrxzWWpNaeCItxmnubVG+B6niq+fzO9bq2pI/tcGrbMe1arYz2zIB3y
-	YyuDlpF3pM4MVDAAKXtjol77N84+OwqRy53xfUNbgM17MwLc/8SVl1PLTebzHQNkNWTr
-	wokdGAq+sIgPVgAoiCOHkUH6F+zg2W9Cf8naI=
-Received: by 10.112.101.34 with SMTP id fd2mr4991732lbb.16.1327966124305; Mon,
-	30 Jan 2012 15:28:44 -0800 (PST)
+	Tue, 31 Jan 2012 00:05:23 +0100 (CET)
+X-SENDER-IP: [83.227.57.213]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AjkcAPIhJ09T4znVPGdsb2JhbAAMN65vAQEBATeCJAEBAQECAQEBATU2CgYLCxQNFg8JAwIBAgEVARsUBwwGAgEBF4dhCbhlin8BBAIBAgIJBAENBAYBCwEIBQMDCYMRGQQDDAMUBXABAQEBAQGDTgSSc4InklI
+X-IronPort-AV: E=Sophos;i="4.71,592,1320620400"; d="scan'208";a="36380488"
+Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.243]) ([83.227.57.213])
+	by ipb5.telenor.se with ESMTP; 31 Jan 2012 00:05:18 +0100
+Message-ID: <4F27222F.4000305@emagii.com>
+Date: Tue, 31 Jan 2012 00:05:19 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+Organization: eMagii
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20111229 Thunderbird/9.0
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Mon, 30 Jan 2012 15:28:14 -0800 (PST)
-In-Reply-To: <1327959667-24833-1-git-send-email-tworaz666@gmail.com>
-References: <1327959667-24833-1-git-send-email-tworaz666@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 30 Jan 2012 15:28:14 -0800
-Message-ID: <CAMKF1sq3xhoQ6pxiffAr2Wf=T10xXoOHGc-7YpdouL0fuY5umg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] obexd: update to 0.44 and put obex-client into separate package.
+To: openembedded-devel@lists.openembedded.org, 
+	paulepanter@users.sourceforge.net, heinold@inf.fu-berlin.de, 
+	philip@balister.org
+References: <CAAQYJAtg4nTEypofzvD+XgCs5wqi38ubs1hvD+fL7v+H-jJA5w@mail.gmail.com>
+In-Reply-To: <CAAQYJAtg4nTEypofzvD+XgCs5wqi38ubs1hvD+fL7v+H-jJA5w@mail.gmail.com>
+Subject: Re: [oe-classic] schroedinger build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,82 +41,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 23:36:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Jan 2012 23:42:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-thanks for doing it.
+2012-01-06 01:55, Andrea Adami skrev:
+> Hint for the developers still using the org.openembedded.dev
+> repository (oe-classic): i bump this old thread because apparently the
+> issue is not fixed and the build of schroedinger fails as reported on
+> #oe by new guests.
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-April/032042.html
+>
+> I'm sorry but I don't work anymore on oe-classic so can't commit the
+> patch for orc, maybe the issue can be resolved properly using the
+> latest versions.
+>
 
-On Mon, Jan 30, 2012 at 1:41 PM, Peter Tworek <tworaz666@gmail.com> wrote:
-> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
-> ---
-> =C2=A0meta-oe/recipes-connectivity/obex/obexd_0.41.bb | =C2=A0 14 -------=
--------
-> =C2=A0meta-oe/recipes-connectivity/obex/obexd_0.44.bb | =C2=A0 17 +++++++=
-++++++++++
-> =C2=A02 files changed, 17 insertions(+), 14 deletions(-)
-> =C2=A0delete mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.41.bb
-> =C2=A0create mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+The problem seems to be that Philip upgraded orc from orc-0.4.11 to 
+orc-0.4.16.
+
+Here is the log from the recipes/orc directory.
+First 0.4.10 is added by Paul Menzel,
+then 0.4.12 is removed because it is broken (by Henning Heinold)
+who also adds, 0.4.13, but disables it when it is found to break 
+"schroedinger".
+Paul then adds 0.4.11 which still works.
+At the end Philip adds 0.4.16, which again breaks "schroedinger".
+
+I guess that in orc-0.4.12 the header functionality needed by 
+schroedinger is removed
+so the solutions seems to be to
+1. disable the 0.4.16 or
+2. patch 0.4.16 to have the headers needed by schroedinger.
+
+Philip indicates that earlier versions generates seg-faults.
+Can't comment on that.
+
+The reference to uhd seems to be something only a tiny minority is 
+interested in.
+Maybe that can be handled in a local PREFERRED_VERSION.
+
+-------------------------------------
+
+$ git log recipes/orc
+
+commit f6df1033722a95ffbfe50e9725af5ac966edd248
+Author: Philip Balister <philip@balister.org>
+Date:   Fri Dec 9 08:24:23 2011 -0500
+
+     orc : Update to 0.4.16 per customer request.
+
+     uhd needs at least 0.4.12. oe-core already has 0.4.14, so hopefully 
+this
+     does not have the segfault issues reported with other versions of orc.
+
+     Signed-off-by: Philip Balister <philip@balister.org>
+
+commit b5a7a87e736b29307ba889e3c3d1e0ad4a631294
+Author: Paul Menzel <paulepanter@users.sourceforge.net>
+Date:   Wed Apr 20 11:50:37 2011 +0200
+
+     orc: add version 0.4.11
+
+     This version is build tested using `angstrom-2010.x` and 
+`minimal{,-uclibc}` f
+
+     Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+     Acked-by: Peter Gsellmann <pgsellmann@portner-elektronik.at>
+
+commit ddc04b7af7747c9f3fa79826aeb70ca38aa39ddb
+Author: Henning Heinold <heinold@inf.fu-berlin.de>
+Date:   Wed Apr 20 20:53:12 2011 +0200
+
+     orc: DP=-1 for 0.4.13 and some fixups
+
+     * use DEFAULT_PREFERENCE=-1 for 0.4.13 because its breaks schroedinger
+       and segfaults on debian unstable
+     * remove unpinned versions
+     * switched ot INC_PR
+
+commit f3dcc0656e356104d9c5ea3abcbef0c3a2e0c1bb
+Author: Henning Heinold <heinold@inf.fu-berlin.de>
+Date:   Tue Apr 19 14:20:04 2011 +0200
+
+     orc: add new version 0.4.13 and remove non-working 0.4.12
+
+commit f211e50085abf82a390876e50035a8a39ff5e77f
+Author: Paul Menzel <paulepanter@users.sourceforge.net>
+Date:   Thu Mar 24 10:21:23 2011 +0100
+
+     orc: add version 0.4.10
+
+
+
+
+
+
+
+> Regards
 >
-> diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb b/meta-oe/re=
-cipes-connectivity/obex/obexd_0.41.bb
-> deleted file mode 100644
-> index eed01f4..0000000
-> --- a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -DESCRIPTION =3D "OBEX Server and Client"
-> -DEPENDS =3D "openobex glib-2.0 dbus bluez4 libical"
-> -
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "files://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4=
-ca7e"
-> -
-> -SRC_URI =3D "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.g=
-z"
-> -SRC_URI[md5sum] =3D "073a10634d19ecebeea93db815857054"
-> -SRC_URI[sha256sum] =3D "edfa54f7a08d00f81ababe4267d15ec138e9c80dd76d0493=
-dcff451374dac7be"
-> -
-> -inherit autotools
-> -
-> -FILES_${PN} +=3D "${datadir}/dbus-1/"
-> -
-> diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/re=
-cipes-connectivity/obex/obexd_0.44.bb
-> new file mode 100644
-> index 0000000..24edb9d
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION =3D "OBEX Server and Client"
-> +DEPENDS =3D "openobex glib-2.0 dbus bluez4 libical"
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "files://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4=
-ca7e"
-> +
-> +SRC_URI =3D "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.g=
-z"
-> +SRC_URI[md5sum] =3D "3fb9cb9d7ab119753253ff784235a364"
-> +SRC_URI[sha256sum] =3D "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf2=
-60171d8f525da758"
-> +
-> +inherit autotools
-> +
-> +PACKAGES =3D+ "obex-client"
-> +
-> +FILES_${PN} +=3D "${datadir}/dbus-1/services/${PN}.service"
-> +FILES_obex-client =3D "${libexecdir}/obex-client \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 $=
-{datadir}/dbus-1/services/obex-client.service"
-> --
-> 1.7.3.4
->
+> Andrea
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
