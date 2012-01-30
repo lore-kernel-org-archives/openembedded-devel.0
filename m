@@ -1,45 +1,24 @@
-Received: from dgate20.ts.fujitsu.com ([80.70.172.51])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Rainer.Koenig@ts.fujitsu.com>) id 1RrrHQ-0005bP-Cm
+	(envelope-from <koen@dominion.thruhere.net>) id 1Rrs8u-00005F-UE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 14:28:22 +0100
-DomainKey-Signature: s=s1536a; d=ts.fujitsu.com; c=nofws; q=dns;
-	h=X-SBRSScore:X-IronPort-AV:Received:X-IronPort-AV:
-	Received:Message-ID:Date:From:User-Agent:MIME-Version:To:
-	Subject:X-Enigmail-Version:Content-Type:
-	Content-Transfer-Encoding;
-	b=L+C+p+R1+dATIwjXjjWWmftG+YdVEaVzSPWw5xv92783NXkws0qzhWgX
-	osVkMPLTVFm+qDWFjEKLmWqLH7B91FCCRaMrPs9mHnkdoNvG0L/N4vDgS
-	uUWWRljKKddKdp4FLwydYQxR8QDQ8Z02PPraYxwLJt2zeohPlgb4x4Bvu
-	r8ONusWknMelBUQnfvaWTWn8/ZQmoLBiJ7QSTCsG5MpRxpz4pZJTLzlqf
-	KVv7hQY7QLdWiOCci/9/cJlmExYnn;
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=ts.fujitsu.com; i=Rainer.Koenig@ts.fujitsu.com;
-	q=dns/txt; s=s1536b; t=1327929630; x=1359465630;
-	h=message-id:date:from:mime-version:to:subject:
-	content-transfer-encoding;
-	bh=hsPOe9rBs4RgVflTal7ObJ1VCTgtBQm2QUtK1z/ryLY=;
-	b=C3AAoJ/khJ0RDTzFHVwU7FMuIQ2rQ000EjuMbhAPUdDoV4w7joEjFlOP
-	j8+FYgfXktC7UPcOr1XYhy0b2KjaQouEPLDk6FiF8BPVjGdwcdHdZaKD0
-	OdUiXZ2Rv4GcKwOXcEQ/vt/Wq0uqVhd0LP4Di5prRRrR4z62rH/UB6FOq
-	w/qM2hlFFirViwYxYwgckOBnvuZLK+Rk4Uw+NEGCP4XEONHy4jUb+W7VT
-	LNWsvWPF1IHu10+IWffCmhLP7tGel;
-X-SBRSScore: None
-X-IronPort-AV: E=Sophos;i="4.71,591,1320620400"; d="scan'208";a="84836977"
-Received: from abgdgate40u.abg.fsc.net ([172.25.138.90])
-	by dgate20u.abg.fsc.net with ESMTP; 30 Jan 2012 14:19:24 +0100
-X-IronPort-AV: E=Sophos;i="4.71,591,1320620400"; d="scan'208";a="127978342"
-Received: from abg3595c.abg.fsc.net (HELO [172.25.145.158]) ([172.25.145.158])
-	by abgdgate40u.abg.fsc.net with ESMTP; 30 Jan 2012 14:19:25 +0100
-Message-ID: <4F2698DC.8050607@ts.fujitsu.com>
-Date: Mon, 30 Jan 2012 14:19:24 +0100
-From: Rainer Koenig <Rainer.Koenig@ts.fujitsu.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.16) Gecko/20111110 Icedove/3.0.11
-MIME-Version: 1.0
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.0.1
-Subject: xterm-recipe has erros in do_configure
+	Mon, 30 Jan 2012 15:23:36 +0100
+Received: by wgbdt11 with SMTP id dt11so4098394wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jan 2012 06:15:44 -0800 (PST)
+Received: by 10.181.12.106 with SMTP id ep10mr28317546wid.8.1327932944425;
+	Mon, 30 Jan 2012 06:15:44 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id eq5sm52945020wib.2.2012.01.30.06.15.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 Jan 2012 06:15:43 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Jan 2012 15:15:35 +0100
+Message-Id: <1327932935-3587-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [PATCH] udev: add 180
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,51 +32,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 13:28:22 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 30 Jan 2012 14:23:37 -0000
 
-When trying to bitbake the xterm_277 recipe from scratch (empty build
-direcotry) I get errors form the do_qa_configure skript that says:
+* 'blkid' isn't needed anymore, since 176 udev links against libblkid
+* 'modprobe' and 'depmod' aren't needed anymore, udev now links against libkmod
+* The entire source including the license files were re-indented hence the LIC_FILES_CHKSUM changes
 
-ERROR: This autoconf log indicates errors, it looked at host include
-and/or library paths while determining system capabilities.
+Runtime tested on beagleboard/angstrom
 
-Probably one of those lines from the logfile is causing this error:
-checking for a BSD compatible install... /usr/bin/install -c
-checking for xterm... /usr/bin/xterm
-checking for X... libraries
-/srv/oe-core/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/dm814x-evm/usr/lib,
-headers
-/srv/oe-core/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/dm814x-evm/usr/include
-checking for pkg-config...
-/srv/oe-core/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/x86_64-linux/usr/bin/pkg-config
-checking for freetype-config... /usr/bin/freetype-config
-checking for FreeType config... /usr/bin/freetype-config
-checking for /usr/bin/freetype-config cflags... -I/usr/include/freetype2
-checking for /usr/bin/freetype-config libs... -lXft -lfreetype -lz
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-core/udev/udev_180.bb |   89 +++++++++++++++++++++++++++++++++
+ 1 files changed, 89 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-core/udev/udev_180.bb
 
-BTW: I tried to bitbake xterm on another system that had already a
-filled build directory. Here we don't get the configure errors, but then
-errors during building because it has problems with symbols in fontconfig.
-
-Regards
-Rainer
+diff --git a/meta-oe/recipes-core/udev/udev_180.bb b/meta-oe/recipes-core/udev/udev_180.bb
+new file mode 100644
+index 0000000..4d3b0ed
+--- /dev/null
++++ b/meta-oe/recipes-core/udev/udev_180.bb
+@@ -0,0 +1,89 @@
++DESCRIPTION = "udev is a daemon which dynamically creates and removes device nodes from \
++/dev/, handles hotplug events and loads drivers at boot time."
++
++DEFAULT_PREFERENCE = "-1"
++
++# udev 169 and up require kernel 2.6.36 for ARM: 
++# http://git.kernel.org/?p=linux/hotplug/udev.git;a=commit;h=67a77c8bf299f6264f001677becd056316ebce2f
++
++LICENSE = "GPLv2+ & LGPLv2.1+"
++LICENSE_${PN} = "GPLv2+"
++LICENSE_libudev = "LGPLv2.1+"
++LICENSE_libgudev = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://src/COPYING;md5=17c4e5fb495e6707ac92a3864926f979 \
++                    file://src/extras/gudev/COPYING;md5=fb494485a7d0505308cb68e4997cc266"
++
++# glib-2.0: Needed for udev-extras
++# util-linux: Needed for libblkid
++# kmod: needed for libkmod
++DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
++
++# f13289ffdf077f75c8710e977ffe538b66885762 -> 180 tag
++SRCREV = "f13289ffdf077f75c8710e977ffe538b66885762"
++
++# version specific SRC_URI
++SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
++           file://gtk-doc.make"
++
++# generic SRC_URI
++SRC_URI += " \
++       file://touchscreen.rules \
++       file://modprobe.rules \
++"
++
++S = "${WORKDIR}/git"
++
++# Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
++
++inherit autotools
++
++EXTRA_OECONF += " \
++                  --disable-introspection \
++                  --with-pci-ids-path=/usr/share/misc \
++                  ac_cv_file__usr_share_pci_ids=no \
++                  ac_cv_file__usr_share_hwdata_pci_ids=no \
++                  ac_cv_file__usr_share_misc_pci_ids=yes \
++                  --sbindir=${base_sbindir} \
++                  --libexecdir=${base_libdir} \
++                  --with-rootlibdir=${base_libdir} \
++                  --with-rootprefix= \
++                  --disable-gtk-doc-html \
++                  --with-systemdsystemunitdir=${base_libdir}/systemd/system/ \
++"
++
++do_configure_prepend() {
++	cp ${WORKDIR}/gtk-doc.make ${S}
++}
++
++PACKAGES =+ "${PN}-systemd libudev libgudev udev-consolekit udev-utils"
++
++FILES_${PN}-systemd = "${base_libdir}/systemd"
++RDEPENDS_${PN}-systemd += "udev"
++
++FILES_libudev = "${base_libdir}/libudev.so.*"
++FILES_libgudev = "${base_libdir}/libgudev*.so.*"
++
++RDEPENDS_${PN} += "udev-utils"
++RPROVIDES_${PN} = "hotplug"
++FILES_${PN} += "${usrbindir}/* ${usrsbindir}/udevd"
++FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
++
++# udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
++# is ${prefix}/lib64
++FILES_${PN} += "/lib/udev*"
++FILES_${PN}-dbg += "/lib/udev/.debug"
++
++FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
++RDEPENDS_${PN}-consolekit += "consolekit"
++
++FILES_udev-utils = "${bindir}/udevadm"
++
++do_install () {
++	install -d ${D}${usrsbindir} \
++		   ${D}${sbindir}
++	oe_runmake 'DESTDIR=${D}' INSTALL=install install
++
++	install -m 0644 ${WORKDIR}/*.rules         ${D}${sysconfdir}/udev/rules.d/
++}
++
 -- 
-Dipl.-Inf. (FH) Rainer Koenig
-Project Manager Linux Clients
-Dept. PDG WPS R&D SW OSE
+1.7.2.5
 
-Fujitsu Technology Solutions
-Bürgermeister-Ullrich-Str. 100
-86199 Augsburg
-Germany
-
-Telephone: +49-821-804-3321
-Telefax:   +49-821-804-2131
-Mail:      mailto:Rainer.Koenig@ts.fujitsu.com
-
-Internet         ts.fujtsu.com
-Company Details  ts.fujitsu.com/imprint.html
 
 
