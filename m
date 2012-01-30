@@ -1,40 +1,40 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rrz7w-0005ip-EO
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rrz9l-0005qc-Lc
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 22:51:04 +0100
-Received: by eaal12 with SMTP id l12so1293350eaa.6
+	Mon, 30 Jan 2012 22:52:57 +0100
+Received: by lahc1 with SMTP id c1so2427843lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
-Received-SPF: pass (google.com: domain of tworaz666@gmail.com designates
-	10.213.4.148 as permitted sender) client-ip=10.213.4.148; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of tworaz666@gmail.com
-	designates 10.213.4.148 as permitted sender)
-	smtp.mail=tworaz666@gmail.com;
-	dkim=pass header.i=tworaz666@gmail.com
-Received: from mr.google.com ([10.213.4.148])
-	by 10.213.4.148 with SMTP id 20mr3940223ebr.143.1327959791730 (num_hops
-	= 1); Mon, 30 Jan 2012 13:43:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=fQiKhA/uYzh53Gyxj11Zi0UooZiZqbHEjtGhEzzmLbM=;
-	b=MKO25fe0IMPmvRmGNkG8pPj+qd++O5fghH7WalT5iDFMvoGD5S36rNxMqNExr5700f
-	VW24eGiHiGnxfSJwenzZUry+sXcZ31ULa1LCuH1l+AXnCPcLhIMgCHRr/IE1reSu/kHk
-	Pftd+Yx0zFpSeIp8UAhDC3LxiE0KiWRK0zJoU=
-Received: by 10.213.4.148 with SMTP id 20mr2997042ebr.143.1327959791615;
-	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id y54sm77603521eef.8.2012.01.30.13.43.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
-From: Peter Tworek <tworaz666@gmail.com>
+	Mon, 30 Jan 2012 13:45:04 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.112.83.197 as permitted sender)
+	client-ip=10.112.83.197; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.112.83.197 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.112.83.197])
+	by 10.112.83.197 with SMTP id s5mr6148054lby.9.1327959904635 (num_hops
+	= 1); Mon, 30 Jan 2012 13:45:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=PeD4cA98DOOSTF9yPCmamcS6McTJSkcVY1RvN9wnKk0=;
+	b=C6tForH4x1rxhyNm9AqR60sz1XuUqoJtOEX2GbmZWKxiUqhakkNsAR6vLSRgTOYsJE
+	eSgSKZBoz6Szda6fI3v/R+0QSXDo2PT8D7L2Gx9GrVc/qN+q6jvqVSPJdtSRbpuuHvZF
+	Eo5OBnwUiiEHFRSDMAKzJY/De2YtkbQg7Vvkg=
+MIME-Version: 1.0
+Received: by 10.112.83.197 with SMTP id s5mr5059142lby.9.1327959903865; Mon,
+	30 Jan 2012 13:45:03 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Mon, 30 Jan 2012 13:45:03 -0800 (PST)
+In-Reply-To: <1327954536-29427-1-git-send-email-tworaz666@gmail.com>
+References: <1327954536-29427-1-git-send-email-tworaz666@gmail.com>
+Date: Mon, 30 Jan 2012 22:45:03 +0100
+Message-ID: <CALbNGRRFydx6qqfMUCGrTzLsvAp5N+N8K4ox_fJMZUf6cRZtSg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jan 2012 22:41:07 +0100
-Message-Id: <1327959667-24833-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe][PATCH v2] obexd: update to 0.44 and put obex-client into separate package.
+Subject: Re: [meta-xfce][PATCH] Add recipe for xarchiver 0.5.2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,61 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 21:51:04 -0000
+X-List-Received-Date: Mon, 30 Jan 2012 21:52:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- meta-oe/recipes-connectivity/obex/obexd_0.41.bb |   14 --------------
- meta-oe/recipes-connectivity/obex/obexd_0.44.bb |   17 +++++++++++++++++
- 2 files changed, 17 insertions(+), 14 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.41.bb
- create mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+On Mon, Jan 30, 2012 at 9:15 PM, Peter Tworek <tworaz666@gmail.com> wrote:
+> Run tested on netbookpro.
+>
+> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+> ---
+> =A0.../recipes-apps/xarchiver/xarchiver_0.5.2.bb =A0 =A0 =A0| =A0 16 ++++=
+++++++++++++
+> =A01 files changed, 16 insertions(+), 0 deletions(-)
+> =A0create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+>
+> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-x=
+fce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> new file mode 100644
+> index 0000000..b2e5fb6
+> --- /dev/null
+> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "Lightweight desktop independent, GTK+ archive manager"
+> +HOMEPAGE =3D "http://xarchiver.sourceforge.net"
+> +SECTION =3D "x11"
+> +PR =3D "r0"
+> +
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> +
+> +DEPENDS =3D "gtk+ glib-2.0 xfce4-dev-tools"
+Do you need xfce4-dev-tools on the target or isn't
+xfce4-dev-tools-native enough?
 
-diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb b/meta-oe/recipes-connectivity/obex/obexd_0.41.bb
-deleted file mode 100644
-index eed01f4..0000000
---- a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--DESCRIPTION = "OBEX Server and Client"
--DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
--
--SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
--SRC_URI[md5sum] = "073a10634d19ecebeea93db815857054"
--SRC_URI[sha256sum] = "edfa54f7a08d00f81ababe4267d15ec138e9c80dd76d0493dcff451374dac7be"
--
--inherit autotools
--
--FILES_${PN} += "${datadir}/dbus-1/"
--
-diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-new file mode 100644
-index 0000000..24edb9d
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "OBEX Server and Client"
-+DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-+
-+SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
-+SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
-+SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
-+
-+inherit autotools
-+
-+PACKAGES =+ "obex-client"
-+
-+FILES_${PN} += "${datadir}/dbus-1/services/${PN}.service"
-+FILES_obex-client = "${libexecdir}/obex-client \
-+                     ${datadir}/dbus-1/services/obex-client.service"
--- 
-1.7.3.4
-
+Andreas
 
 
