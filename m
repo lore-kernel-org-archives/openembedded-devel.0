@@ -1,30 +1,20 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rrcz2-00074Y-Ry
+	(envelope-from <fromm@dresearch-fe.de>) id 1RrnNH-0001Go-U4
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jan 2012 23:12:24 +0100
-Received: by lahc1 with SMTP id c1so1816326lah.6
+	Mon, 30 Jan 2012 10:18:08 +0100
+Received: by iaby12 with SMTP id y12so4215387iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2012 14:04:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=hxIchzRmWE2vVYaEPaMBHFXcMoe71JCbILY3dNAWSvY=;
-	b=LME9C05F6SiCxHBscBjrlZa2oWV4LyM5RMyWJzNdwjlzE/smQdkapi/KvaKQrdQB5M
-	5d9FTa1g4sTbtyc7dszQRZccFaRafEiP2NjN/iGM2OuSujd/r61r0K2P0tBJmV6K2xtA
-	geE4dEcEotyC2qmoxV15s4m7lQ1j5S3rJlgUo=
+	Mon, 30 Jan 2012 01:10:14 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.152.131.40 with SMTP id oj8mr7973374lab.24.1327874673143; Sun,
-	29 Jan 2012 14:04:33 -0800 (PST)
-Received: by 10.112.102.165 with HTTP; Sun, 29 Jan 2012 14:04:33 -0800 (PST)
-In-Reply-To: <CALbNGRSWM_9QiEjGcGQQCKdyO7trzrta=d90xsM-_L3pmqYjxw@mail.gmail.com>
-References: <CALbNGRSWM_9QiEjGcGQQCKdyO7trzrta=d90xsM-_L3pmqYjxw@mail.gmail.com>
-Date: Sun, 29 Jan 2012 23:04:33 +0100
-Message-ID: <CALbNGRQ48aGdhFxuz8q=-V0mzj5WMu699Hu9KPem=qQ2L=XDtQ@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+Received: by 10.50.189.137 with SMTP id gi9mr3270870igc.29.1327914614849; Mon,
+	30 Jan 2012 01:10:14 -0800 (PST)
+Received: by 10.50.155.134 with HTTP; Mon, 30 Jan 2012 01:10:14 -0800 (PST)
+Date: Mon, 30 Jan 2012 10:10:14 +0100
+Message-ID: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Patchwork: missing status change combobox in webinterface
+Subject: [meta-java][PATCH] llvm-config: Work around shebang max length issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +28,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2012 22:12:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Jan 2012 09:18:08 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 29, 2012 at 10:34 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> Hi,
->
-> usually I changed the status of a patch in the web interface e.g to
-> superseded. Is it intended that this option is no more available?
->
-> Andreas
+This patch works around a max shebang length issue
+in llvm's llvm-config.
 
-Oops I guess it is my change of email address...
+llvm-config is a perl script. meta-java configures
+the llvm sources to use OE's perl which might reside in
+a path longer than 127 chars. llvm's perl script
+will then have a shebang line longer than 127 characters.
+This will break the script.
+In linux, shebang interpreter paths are cut off after 127 bytes.
 
-Andreas
+meta-java's llvm recipe already wraps the perl script llvm-config
+with a small shell script. This patch adds an explicit perl
+interpreter call to this wrapping shell script.
+
+Signed-off-by: Thilo Fromm <github@thilo-fromm.de>
+
+---
+ recipes-core/llvm/llvm-common.bb          |   12 ++++++++++++
+ recipes-core/llvm/llvm-common/llvm-config |    2 +-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-core/llvm/llvm-common.bb b/recipes-core/llvm/llvm-comm=
+on.bb
+index 38ca1ee..3db4af0 100644
+--- a/recipes-core/llvm/llvm-common.bb
++++ b/recipes-core/llvm/llvm-common.bb
+@@ -4,8 +4,20 @@ LIC_FILES_CHKSUM =3D
+"file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3
+
+file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbcb788c80a0384361b4de20420
+\
+                    "
+
++# provide native perl binaries via PATH
++inherit perlnative
++DEPENDS +=3D "perl-native"
++
+ SRC_URI =3D "file://llvm-config"
+
++do_compile() {
++  cd ..
++  # This adds an explicit call to the interpreter in the wrapper script
++  #  so we don't run into shebang max size issues in the
+llvm-configX.X perl script
++  #  if the path to perl-native > 127 chars.
++  sed -i -e "s|@PATH_TO_PERL@|`which perl`|" llvm-config
++}
++
+ do_install() {
+   install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+   install -m 0755 ${WORKDIR}/llvm-config
+${SYSROOT_DESTDIR}${bindir_crossscripts}/
+diff --git a/recipes-core/llvm/llvm-common/llvm-config
+b/recipes-core/llvm/llvm-common/llvm-config
+index a9a416d..08463e5 100644
+--- a/recipes-core/llvm/llvm-common/llvm-config
++++ b/recipes-core/llvm/llvm-common/llvm-config
+@@ -2,7 +2,7 @@
+ # Wrapper script for real llvm-config. Simply calls
+
+ if [ $WANT_LLVM_RELEASE ]; then
+-	exec `dirname $0`/${TARGET_PREFIX}llvm-config$WANT_LLVM_RELEASE ${@}
++	exec "@PATH_TO_PERL@" `dirname
+$0`/${TARGET_PREFIX}llvm-config$WANT_LLVM_RELEASE ${@}
+ else
+   echo "The variable WANT_LLVM_RELEASE is not defined and exported"
+ 	echo "by your build recipe. Go figure."
+--=20
+1.7.5.4
+
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
