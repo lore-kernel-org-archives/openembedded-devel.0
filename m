@@ -1,33 +1,31 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RrsYZ-0001vv-OO
+	(envelope-from <martin.jansa@gmail.com>) id 1RrtMG-0004HQ-7k
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 15:50:07 +0100
-Received: by eaal12 with SMTP id l12so1181023eaa.6
+	Mon, 30 Jan 2012 16:41:28 +0100
+Received: by eekd41 with SMTP id d41so1199746eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 06:42:15 -0800 (PST)
+	Mon, 30 Jan 2012 07:33:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jEp9IsqL59Ksq3SR9B7aRI6juv8jzpOF9Fv0Xvp0+i8=;
-	b=oWpuKSF2/ca1ZO8NWe/VcrS1gab932flecalSwCN7Ga8Nc+Zv1PkAM7y870zR/8Rv2
-	gQWm/EkLJPwq4GwYxnXikR7gQ69MUSt7kugj7JSfRcU6lfXK0R5mHOXb1pXB3JrHsJ17
-	+ZtRTcQZm2EJBUxmR8dhcHfQR3A9xB+NjtliQ=
-Received: by 10.213.15.131 with SMTP id k3mr2775039eba.37.1327934535332;
-	Mon, 30 Jan 2012 06:42:15 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=tLQHKy4tySQHR2AYALopbkEajK32MOLfbEyIFOLE0hE=;
+	b=FxSwfNpcpOsDaNBU/KavfcpCQ6Yd1BUYuUl3mAKr1WSPf1YbWh/IDQa2W/fbDtxaf9
+	QYXwIbEdLd8LIHbJvAIdaFRIzzHbcJED2TjNQbk7T+zS2FIkWrG9IN4SkkDqXkDF9Vbx
+	/1Kfjg/6YAIJi92nsEl1W6FLztuLgw0Ejz9g4=
+Received: by 10.14.3.134 with SMTP id 6mr5804899eeh.51.1327937615283;
+	Mon, 30 Jan 2012 07:33:35 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm24719163eeb.7.2012.01.30.06.42.13
+	by mx.google.com with ESMTPS id n17sm73849830eei.3.2012.01.30.07.33.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 06:42:14 -0800 (PST)
-Date: Mon, 30 Jan 2012 15:42:12 +0100
+	Mon, 30 Jan 2012 07:33:34 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120130144212.GB3577@jama.jama.net>
-References: <jg68t6$uh9$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <jg68t6$uh9$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe] udev rollcall
+Date: Mon, 30 Jan 2012 16:33:26 +0100
+Message-Id: <1327937606-22150-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+In-Reply-To: <1327932996-3624-1-git-send-email-koen@dominion.thruhere.net>
+References: <1327932996-3624-1-git-send-email-koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] udev-180: switch from git checkout to release tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 14:50:08 -0000
-X-Groupsio-MsgNum: 36754
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ADZbWkCsHQ7r3kzd"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Jan 2012 15:41:28 -0000
 
---ADZbWkCsHQ7r3kzd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* problem is with manpage generation, commit
+  http://git.kernel.org/?p=linux/hotplug/udev.git;a=commit;h=6528a3938fe8727b99b210cf504a335d07c94c37
+  assumes that even without xstltproc we can install pregenerated
+  manpages, but they are only in release tarball (e.g. src/udev.7)
+  and without them, build system tries to regenerate and fails:
 
-On Mon, Jan 30, 2012 at 03:19:19PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Hi,
->=20
-> We currently have udev 173 and 175 in meta-oe and I just sent a patch to =
-add
-> 180. To keep the number of udev recipes sane I'd like to ask people using
-> udev from meta-oe to state which version they are using and if they want =
-to
-> keep it.
+  /OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/xsltproc -o src/udev.7 -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl src/udev.xml
+  warning: failed to load external entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+  cannot parse http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
 
-I was testing your previous patch for 177 and it worked fine for me (I
-use only libudev from it). So I'll retest with 180 and I guess that
-we'll switch SHR to it when it's applied.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/udev/udev_180.bb |    9 +++------
+ 1 files changed, 3 insertions(+), 6 deletions(-)
 
-Cheers,
+diff --git a/meta-oe/recipes-core/udev/udev_180.bb b/meta-oe/recipes-core/udev/udev_180.bb
+index 4d3b0ed..4cabcce 100644
+--- a/meta-oe/recipes-core/udev/udev_180.bb
++++ b/meta-oe/recipes-core/udev/udev_180.bb
+@@ -19,12 +19,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+ # kmod: needed for libkmod
+ DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
+ 
+-# f13289ffdf077f75c8710e977ffe538b66885762 -> 180 tag
+-SRCREV = "f13289ffdf077f75c8710e977ffe538b66885762"
+-
+ # version specific SRC_URI
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
+            file://gtk-doc.make"
++SRC_URI[md5sum] = "7a74429e5b4d5cc3d389945774807e46"
++SRC_URI[sha256sum] = "d8f021cc940da7c1f928e2e651c6aa00c5695f3227f560de4a65584e2f089115"
+ 
+ # generic SRC_URI
+ SRC_URI += " \
+@@ -32,8 +31,6 @@ SRC_URI += " \
+        file://modprobe.rules \
+ "
+ 
+-S = "${WORKDIR}/git"
+-
+ # Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
+ 
+ inherit autotools
+-- 
+1.7.8.4
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ADZbWkCsHQ7r3kzd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8mrEQACgkQN1Ujt2V2gBzZIwCgshA0tRGF9Ln1unOUquNHdQQh
-ILEAoKANX/Z4lDzFHSUXAKFv0/5zsq0e
-=KiVQ
------END PGP SIGNATURE-----
-
---ADZbWkCsHQ7r3kzd--
