@@ -1,24 +1,24 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Rrs8u-00005F-UE
+	(envelope-from <koen@dominion.thruhere.net>) id 1RrsA7-0000Ba-1m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 15:23:36 +0100
-Received: by wgbdt11 with SMTP id dt11so4098394wgb.24
+	Mon, 30 Jan 2012 15:24:52 +0100
+Received: by wgbdt11 with SMTP id dt11so4554812wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 06:15:44 -0800 (PST)
-Received: by 10.181.12.106 with SMTP id ep10mr28317546wid.8.1327932944425;
-	Mon, 30 Jan 2012 06:15:44 -0800 (PST)
+	Mon, 30 Jan 2012 06:16:41 -0800 (PST)
+Received: by 10.180.93.194 with SMTP id cw2mr10826741wib.0.1327933001765;
+	Mon, 30 Jan 2012 06:16:41 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id eq5sm52945020wib.2.2012.01.30.06.15.42
+	by mx.google.com with ESMTPS id l12sm31470925wiw.0.2012.01.30.06.16.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 06:15:43 -0800 (PST)
+	Mon, 30 Jan 2012 06:16:40 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jan 2012 15:15:35 +0100
-Message-Id: <1327932935-3587-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 30 Jan 2012 15:16:36 +0100
+Message-Id: <1327932996-3624-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [PATCH] udev: add 180
+Subject: [meta-oe][PATCH v2] udev: add 180
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 14:23:37 -0000
+X-List-Received-Date: Mon, 30 Jan 2012 14:24:52 -0000
 
 * 'blkid' isn't needed anymore, since 176 udev links against libblkid
 * 'modprobe' and 'depmod' aren't needed anymore, udev now links against libkmod
