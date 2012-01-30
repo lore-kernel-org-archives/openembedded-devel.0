@@ -1,26 +1,29 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1Rrnrf-000262-Rq
+	(envelope-from <martin.jansa@gmail.com>) id 1Rrq6i-00023x-NY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 10:49:31 +0100
-Received: by werc1 with SMTP id c1so3197425wer.6
+	Mon, 30 Jan 2012 13:13:12 +0100
+Received: by eekd41 with SMTP id d41so1140943eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 01:41:39 -0800 (PST)
-Received: by 10.216.131.100 with SMTP id l78mr6844034wei.44.1327916499198;
-	Mon, 30 Jan 2012 01:41:39 -0800 (PST)
-Received: from bfg9000.internal.dresearch-fe.de
-	(pd95cb146.dip0.t-ipconnect.de. [217.92.177.70])
-	by mx.google.com with ESMTPS id d9sm28915173wiy.2.2012.01.30.01.41.36
-	(version=SSLv3 cipher=OTHER); Mon, 30 Jan 2012 01:41:38 -0800 (PST)
-From: Thilo Fromm <fromm@dresearch-fe.de>
+	Mon, 30 Jan 2012 04:05:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lJmwFZeC9A9oNg78bTyDf6Dblo1T/U3kqkx8zPPccUc=;
+	b=OZRQdDAJ9ovd0+OGfPTZ16XRDdntZwzg+HR6Otk/I6Ds2iQsjl48QkZypmx9djUGrJ
+	La+bvIuwlP0LncYshlr5k7FwPGdZnfhKReqdtw6zJ7i32J9onWXSpiZ0VQgKyh1mvZgD
+	JQckjrvX8sxDIaDFi/icafOaOROhE3C/XogVw=
+Received: by 10.14.4.143 with SMTP id 15mr5363541eej.104.1327925120255;
+	Mon, 30 Jan 2012 04:05:20 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y12sm71782867eeb.11.2012.01.30.04.05.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 Jan 2012 04:05:19 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jan 2012 10:41:22 +0100
-Message-Id: <1327916482-16069-1-git-send-email-fromm@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
-References: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
-Cc: Thilo Fromm <github@thilo-fromm.de>
-Subject: [PATCH][meta-java] llvm-config: Work around shebang max length issue
+Date: Mon, 30 Jan 2012 13:05:07 +0100
+Message-Id: <1327925107-28946-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][PATCH] libsdl-ttf: fix LICENSE metadata and add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,68 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 09:49:31 -0000
+X-List-Received-Date: Mon, 30 Jan 2012 12:13:12 -0000
 
-    This patch works around a max shebang length issue
-    in llvm's llvm-config.
-
-    llvm-config is a perl script. meta-java configures
-    the llvm sources to use OE's perl which might reside in
-    a path longer than 127 chars. llvm's perl script
-    will then have a shebang line longer than 127 characters.
-    This will break the script.
-    In linux, shebang interpreter paths are cut off after 127 bytes.
-
-    meta-java's llvm recipe already wraps the perl script llvm-config
-    with a small shell script. This patch adds an explicit perl
-    interpreter call to this wrapping shell script.
-
-Signed-off-by: Thilo Fromm <github@thilo-fromm.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-core/llvm/llvm-common.bb          |   12 ++++++++++++
- recipes-core/llvm/llvm-common/llvm-config |    2 +-
- 2 files changed, 13 insertions(+), 1 deletions(-)
+ .../libsdl-ttf/libsdl-ttf_2.0.10.bb                |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-core/llvm/llvm-common.bb b/recipes-core/llvm/llvm-common.bb
-index 38ca1ee..3db4af0 100644
---- a/recipes-core/llvm/llvm-common.bb
-+++ b/recipes-core/llvm/llvm-common.bb
-@@ -4,8 +4,20 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420 \
-                    "
- 
-+# provide native perl binaries via PATH
-+inherit perlnative
-+DEPENDS += "perl-native"
+diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
+index 61b7521..ce4e316 100644
+--- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
++++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
+@@ -1,7 +1,9 @@
+ DESCRIPTION = "Simple DirectMedia Layer truetype font library."
+ SECTION = "libs"
+ DEPENDS = "virtual/libsdl freetype"
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
 +
- SRC_URI = "file://llvm-config"
+ PR = "r1"
  
-+do_compile() {
-+  cd ..
-+  # This adds an explicit call to the interpreter in the wrapper script
-+  #  so we don't run into shebang max size issues in the llvm-configX.X perl script
-+  #  if the path to perl-native > 127 chars.
-+  sed -i -e "s|@PATH_TO_PERL@|`which perl`|" llvm-config
-+}
-+
- do_install() {
-   install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-   install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-diff --git a/recipes-core/llvm/llvm-common/llvm-config b/recipes-core/llvm/llvm-common/llvm-config
-index a9a416d..08463e5 100644
---- a/recipes-core/llvm/llvm-common/llvm-config
-+++ b/recipes-core/llvm/llvm-common/llvm-config
-@@ -2,7 +2,7 @@
- # Wrapper script for real llvm-config. Simply calls
- 
- if [ $WANT_LLVM_RELEASE ]; then
--	exec `dirname $0`/${TARGET_PREFIX}llvm-config$WANT_LLVM_RELEASE ${@}
-+	exec "@PATH_TO_PERL@" `dirname $0`/${TARGET_PREFIX}llvm-config$WANT_LLVM_RELEASE ${@}
- else
-   echo "The variable WANT_LLVM_RELEASE is not defined and exported"
- 	echo "by your build recipe. Go figure."
+ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
 -- 
-1.7.5.4
+1.7.8.4
 
 
 
