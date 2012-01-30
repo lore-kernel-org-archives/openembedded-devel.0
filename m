@@ -1,36 +1,40 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rrxzr-0002c0-4O
+	(envelope-from <tworaz666@gmail.com>) id 1Rrz7w-0005ip-EO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jan 2012 21:38:39 +0100
-Received: by bkaq10 with SMTP id q10so3718890bka.6
+	Mon, 30 Jan 2012 22:51:04 +0100
+Received: by eaal12 with SMTP id l12so1293350eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2012 12:30:46 -0800 (PST)
+	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
+Received-SPF: pass (google.com: domain of tworaz666@gmail.com designates
+	10.213.4.148 as permitted sender) client-ip=10.213.4.148; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of tworaz666@gmail.com
+	designates 10.213.4.148 as permitted sender)
+	smtp.mail=tworaz666@gmail.com;
+	dkim=pass header.i=tworaz666@gmail.com
+Received: from mr.google.com ([10.213.4.148])
+	by 10.213.4.148 with SMTP id 20mr3940223ebr.143.1327959791730 (num_hops
+	= 1); Mon, 30 Jan 2012 13:43:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=2xMWbUiBCl3+a7whZqG0F93WFrT/ti/kTFNlfJUKB5w=;
-	b=mnthq5wNyDGCyN+SngSF2hP0XpS/xITetPdFOucZiFF9KmN5U7vgJx1QsOWU5Peg2u
-	qQOp2ktOorRrRRYiUQjPmtZvinyPVwgcG9uUCIt45JpQ/jo9Daap+wRUzfxJdHHkcsya
-	i+MRWq91iC4b/ZJIv4wtWgpLCxf4O9CYIno+0=
-Received: by 10.204.152.141 with SMTP id g13mr7128912bkw.48.1327955446383;
-	Mon, 30 Jan 2012 12:30:46 -0800 (PST)
-Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
-	by mx.google.com with ESMTPS id
-	x20sm24809868bka.9.2012.01.30.12.30.45 (version=SSLv3 cipher=OTHER);
-	Mon, 30 Jan 2012 12:30:45 -0800 (PST)
-Message-ID: <4F26FD7E.5040908@gmail.com>
-Date: Mon, 30 Jan 2012 21:28:46 +0100
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=fQiKhA/uYzh53Gyxj11Zi0UooZiZqbHEjtGhEzzmLbM=;
+	b=MKO25fe0IMPmvRmGNkG8pPj+qd++O5fghH7WalT5iDFMvoGD5S36rNxMqNExr5700f
+	VW24eGiHiGnxfSJwenzZUry+sXcZ31ULa1LCuH1l+AXnCPcLhIMgCHRr/IE1reSu/kHk
+	Pftd+Yx0zFpSeIp8UAhDC3LxiE0KiWRK0zJoU=
+Received: by 10.213.4.148 with SMTP id 20mr2997042ebr.143.1327959791615;
+	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
+Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
+	[89.77.50.243])
+	by mx.google.com with ESMTPS id y54sm77603521eef.8.2012.01.30.13.43.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 Jan 2012 13:43:11 -0800 (PST)
 From: Peter Tworek <tworaz666@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:9.0) Gecko/20120112 Thunderbird/9.0
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1327952855-28040-1-git-send-email-tworaz666@gmail.com>
-	<jg6sti$vjj$1@dough.gmane.org>
-In-Reply-To: <jg6sti$vjj$1@dough.gmane.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH 3/3] pidgin: Add gconf to RDEPENDS for libpurple.
+Date: Mon, 30 Jan 2012 22:41:07 +0100
+Message-Id: <1327959667-24833-1-git-send-email-tworaz666@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-oe][PATCH v2] obexd: update to 0.44 and put obex-client into separate package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +48,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 20:38:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Jan 2012 21:51:04 -0000
 
-On 01/30/2012 09:00 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 30-01-12 20:47, Peter Tworek schreef:
->> Without it postinst script for libpurple fails when gconf is not
->> installed: //var/lib/opkg/info/libpurple.postinst: line 8: gconftool-2:
->> command not found
-> Why is gconf.bbclass failing to do that?
-As far as I understand it only adds gconf to DEPENDS. If a package 
-contents are not linked with libgconf-2 (libpurple only needs 
-gconftool-2) gconf won't be pulled in as a runtime dependency.
+Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+---
+ meta-oe/recipes-connectivity/obex/obexd_0.41.bb |   14 --------------
+ meta-oe/recipes-connectivity/obex/obexd_0.44.bb |   17 +++++++++++++++++
+ 2 files changed, 17 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.41.bb
+ create mode 100644 meta-oe/recipes-connectivity/obex/obexd_0.44.bb
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iEYEARECAAYFAk8m9u8ACgkQMkyGM64RGpGRTQCgrzWdMpyRtNE3kO2CKw6b7haa
-> j5UAoJ2NPDIIlCsRwYOJSTGTWd2i/hj0
-> =axku
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb b/meta-oe/recipes-connectivity/obex/obexd_0.41.bb
+deleted file mode 100644
+index eed01f4..0000000
+--- a/meta-oe/recipes-connectivity/obex/obexd_0.41.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "OBEX Server and Client"
+-DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+-
+-SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
+-SRC_URI[md5sum] = "073a10634d19ecebeea93db815857054"
+-SRC_URI[sha256sum] = "edfa54f7a08d00f81ababe4267d15ec138e9c80dd76d0493dcff451374dac7be"
+-
+-inherit autotools
+-
+-FILES_${PN} += "${datadir}/dbus-1/"
+-
+diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+new file mode 100644
+index 0000000..24edb9d
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "OBEX Server and Client"
++DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
++
++SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
++SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
++SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
++
++inherit autotools
++
++PACKAGES =+ "obex-client"
++
++FILES_${PN} += "${datadir}/dbus-1/services/${PN}.service"
++FILES_obex-client = "${libexecdir}/obex-client \
++                     ${datadir}/dbus-1/services/obex-client.service"
+-- 
+1.7.3.4
 
 
 
