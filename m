@@ -1,52 +1,30 @@
-Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
-	helo=VA3EHSOBE002.bigfish.com)
+Received: from mail-yw0-f50.google.com ([209.85.213.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1RsHYT-0001MW-Q0
+	(envelope-from <otavio.salvador@gmail.com>) id 1RsHnL-0001mn-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jan 2012 18:31:42 +0100
-Received: from mail182-va3-R.bigfish.com (10.7.14.251) by
-	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
-	14.1.225.23; Tue, 31 Jan 2012 16:53:36 +0000
-Received: from mail182-va3 (localhost [127.0.0.1])	by
-	mail182-va3-R.bigfish.com (Postfix) with ESMTP id 569BF1E00EE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jan 2012 16:53:36 +0000 (UTC)
-X-SpamScore: -19
-X-BigFish: VS-19(zzbb2dI154cP9371I936eK1432N98dKzz1202hzz8275chz2dhc1bhc31hc1ah2a8h668h839h8e2h8e3hbe9k)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail182-va3 (localhost.localdomain [127.0.0.1]) by mail182-va3
-	(MessageSwitch) id 1328028814965888_29174;
-	Tue, 31 Jan 2012 16:53:34 +0000 (UTC)
-Received: from VA3EHSMHS036.bigfish.com (unknown [10.7.14.239])	by
-	mail182-va3.bigfish.com (Postfix) with ESMTP id E3C0438004D	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jan 2012 16:53:34 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS036.bigfish.com
-	(10.7.99.46) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Tue, 31 Jan 2012 16:53:31 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.86]) by
-	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
-	14.01.0355.003; Tue, 31 Jan 2012 10:53:30 -0600
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 3/3] pidgin: Add gconf to RDEPENDS for
-	libpurple.
-Thread-Index: AQHM4Djb//dap7lLjk6uXOpRUwEfpA==
-Date: Tue, 31 Jan 2012 16:53:29 +0000
-Message-ID: <CAEsOVNc+FnZf4hqDrHYE3AcjPO6wM3vFReQkbppJV9uqo=+tqQ@mail.gmail.com>
-References: <1327952855-28040-1-git-send-email-tworaz666@gmail.com>
-	<jg6sti$vjj$1@dough.gmane.org> <4F26FD7E.5040908@gmail.com>
-	<jg87do$beo$1@dough.gmane.org>
-In-Reply-To: <jg87do$beo$1@dough.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [99.47.177.27]
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH 3/3] pidgin: Add gconf to RDEPENDS for libpurple.
+	Tue, 31 Jan 2012 18:47:03 +0100
+Received: by yhpp61 with SMTP id p61so164532yhp.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Jan 2012 09:39:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=534rbjHa5M3Qu18ExJUmhCoNQ8U3a5gOAAFAKe8y9Ts=;
+	b=m6HDvcVVj8SMKBhPYTBA984wcUdeRV97ZSUYMzoPfg5IcL+QIvxWeZeFoKFnQDjI6N
+	LyBHvYXvxI9kVSPKZTeFbGu/bG2n0JXIS9gOAz9yUZw5H0ABUiG6H3BIznrdJL+monmy
+	SbY7nuFT4QfjFw5EGzFG4w43Qt5oESZLIw2Hs=
+Received: by 10.236.79.135 with SMTP id i7mr36720961yhe.4.1328031548867;
+	Tue, 31 Jan 2012 09:39:08 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id 6sm43425979anp.14.2012.01.31.09.39.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 31 Jan 2012 09:39:08 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Jan 2012 17:38:55 +0000
+Message-Id: <cover.1328031500.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/3] Fixes available on O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,34 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2012 17:31:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <25A4F23F8D904D4DBA2C358B9BB44754@freescale.net>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Jan 2012 17:47:03 -0000
 
-On Tue, Jan 31, 2012 at 2:06 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 30-01-12 21:28, Peter Tworek schreef:
->> On 01/30/2012 09:00 PM, Koen Kooi wrote: Op 30-01-12 20:47, Peter Tworek
->> schreef:
->>>>> Without it postinst script for libpurple fails when gconf is not
->>>>> installed: //var/lib/opkg/info/libpurple.postinst: line 8:
->>>>> gconftool-2: command not found
->> Why is gconf.bbclass failing to do that?
->>> As far as I understand it only adds gconf to DEPENDS. If a package
->>> contents are not linked with libgconf-2 (libpurple only needs
->>> gconftool-2) gconf won't be pulled in as a runtime dependency.
->
-> That means it's a bug in gconf.bbclass and needs to get fixed there.
+The following changes since commit a76fff17ea8420686ef81b35f80efac1bef21649:
 
-Really? Do you really want to automatically add gconf deps to the
-misc. packages added by a recipe?
+  ristretto: update to 0.3.4 (2012-01-30 13:03:40 +0100)
 
--M=
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (3):
+  systemd-serialgetty: support machines without serial console
+  systemd.bbclass: depends on systemd
+  busybox: fix busybox-syslog systemd service file
+
+ meta-oe/classes/systemd.bbclass                    |    2 +-
+ .../busybox/busybox/busybox-syslog.service.in      |    2 +-
+ .../recipes-core/busybox/busybox_1.19.3.bbappend   |    2 +-
+ .../recipes-core/systemd/systemd-serialgetty.bb    |   24 +++++++++++++------
+ 4 files changed, 19 insertions(+), 11 deletions(-)
+
+-- 
+1.7.2.5
 
 
 
