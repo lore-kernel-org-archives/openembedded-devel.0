@@ -1,48 +1,52 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
+	helo=VA3EHSOBE002.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1RsHDr-0000qD-Rq
+	(envelope-from <B29882@freescale.com>) id 1RsHYT-0001MW-Q0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jan 2012 18:10:23 +0100
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RsH6G-00009R-3s>; Tue, 31 Jan 2012 18:02:32 +0100
-Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
-	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1RsH6G-0001N9-1A>; Tue, 31 Jan 2012 18:02:32 +0100
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by mail.imp.fu-berlin.de with esmtps (MTA Exim 4.72) id
-	1RsH5v-0004oW-QA (envelope-from <heinold@mi.fu-berlin.de>)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jan 2012 18:02:27 +0100
-Received: from heinold by andorra.imp.fu-berlin.de with local (client Exim
-	4.72) id 1RsH5q-0007UJ-Mj
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jan 2012 18:02:06 +0100
-Date: Tue, 31 Jan 2012 18:02:06 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120131170206.GA27750@mi.fu-berlin.de>
-References: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
-	<CADZ6=avk8ekCLnXv=wbYwhcYzHpyN9mR2mctUNW4hxFfGJZ5Ug@mail.gmail.com>
+	Tue, 31 Jan 2012 18:31:42 +0100
+Received: from mail182-va3-R.bigfish.com (10.7.14.251) by
+	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 31 Jan 2012 16:53:36 +0000
+Received: from mail182-va3 (localhost [127.0.0.1])	by
+	mail182-va3-R.bigfish.com (Postfix) with ESMTP id 569BF1E00EE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Jan 2012 16:53:36 +0000 (UTC)
+X-SpamScore: -19
+X-BigFish: VS-19(zzbb2dI154cP9371I936eK1432N98dKzz1202hzz8275chz2dhc1bhc31hc1ah2a8h668h839h8e2h8e3hbe9k)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail182-va3 (localhost.localdomain [127.0.0.1]) by mail182-va3
+	(MessageSwitch) id 1328028814965888_29174;
+	Tue, 31 Jan 2012 16:53:34 +0000 (UTC)
+Received: from VA3EHSMHS036.bigfish.com (unknown [10.7.14.239])	by
+	mail182-va3.bigfish.com (Postfix) with ESMTP id E3C0438004D	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Jan 2012 16:53:34 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS036.bigfish.com
+	(10.7.99.46) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 31 Jan 2012 16:53:31 +0000
+Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.86]) by
+	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
+	14.01.0355.003; Tue, 31 Jan 2012 10:53:30 -0600
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 3/3] pidgin: Add gconf to RDEPENDS for
+	libpurple.
+Thread-Index: AQHM4Djb//dap7lLjk6uXOpRUwEfpA==
+Date: Tue, 31 Jan 2012 16:53:29 +0000
+Message-ID: <CAEsOVNc+FnZf4hqDrHYE3AcjPO6wM3vFReQkbppJV9uqo=+tqQ@mail.gmail.com>
+References: <1327952855-28040-1-git-send-email-tworaz666@gmail.com>
+	<jg6sti$vjj$1@dough.gmane.org> <4F26FD7E.5040908@gmail.com>
+	<jg87do$beo$1@dough.gmane.org>
+In-Reply-To: <jg87do$beo$1@dough.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [99.47.177.27]
 MIME-Version: 1.0
-In-Reply-To: <CADZ6=avk8ekCLnXv=wbYwhcYzHpyN9mR2mctUNW4hxFfGJZ5Ug@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Remote-IP: 160.45.42.84
-X-Spam_Score: -2.9
-X-exim-Spam_Score_Int: -28
-X-exim-Spam_Bar: --
-X-Spam_Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-	* -0.0 T_RP_MATCHES_RCVD Envelope sender domain matches handover relay
-	*      domain
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
-	*      [score: 0.0000]
-X-Originating-IP: 160.45.117.149
-Subject: Re: [meta-java][PATCH] llvm-config: Work around shebang max length issue
+X-OriginatorOrg: freescale.com
+Subject: Re: [meta-oe][PATCH 3/3] pidgin: Add gconf to RDEPENDS for libpurple.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,33 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2012 17:10:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 31 Jan 2012 17:31:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <25A4F23F8D904D4DBA2C358B9BB44754@freescale.net>
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 30, 2012 at 02:09:40PM +0100, Thilo Fromm wrote:
-> Hello *.*,
-> 
-> > This patch works around a max shebang length issue
-> > in llvm's llvm-config.
-> >
-> 
-> Sorry guys, I garbled the patch in the first submission. I already
-> changed the first submission's patch state to "not applicable" in
-> patchwork and resent it. Just want to make sure no one tries to apply
-> my first submission to this issue. Patchwork already has the sane
-> diff.
-> 
-> Some feedback on the patch would be great.
-> 
-> Regards,
-> Thilo
+On Tue, Jan 31, 2012 at 2:06 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 30-01-12 21:28, Peter Tworek schreef:
+>> On 01/30/2012 09:00 PM, Koen Kooi wrote: Op 30-01-12 20:47, Peter Tworek
+>> schreef:
+>>>>> Without it postinst script for libpurple fails when gconf is not
+>>>>> installed: //var/lib/opkg/info/libpurple.postinst: line 8:
+>>>>> gconftool-2: command not found
+>> Why is gconf.bbclass failing to do that?
+>>> As far as I understand it only adds gconf to DEPENDS. If a package
+>>> contents are not linked with libgconf-2 (libpurple only needs
+>>> gconftool-2) gconf won't be pulled in as a runtime dependency.
+>
+> That means it's a bug in gconf.bbclass and needs to get fixed there.
 
-Hi Thilo,
+Really? Do you really want to automatically add gconf deps to the
+misc. packages added by a recipe?
 
-I am a bit short of time at the moment. So I can not test or apply your patch.
-For the longer term llvm should go to core.
+-M=
 
-Bye Henning
 
 
