@@ -1,27 +1,26 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1RsaCr-0003JR-74
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1Rsak9-0004U7-V7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 14:26:37 +0100
-Received: (qmail invoked by alias); 01 Feb 2012 13:18:39 -0000
-Received: from 41.163.71.86.rev.sfr.net (EHLO [192.168.42.72]) [86.71.163.41]
-	by mail.gmx.net (mp069) with SMTP; 01 Feb 2012 14:18:39 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19yq3FRmt5yixJVRNsvP2K0TGGFONmPgCcoGRupNK
-	TKGMG7/bUrmxSm
-Message-ID: <4F293BA0.4070207@gmx.net>
-Date: Wed, 01 Feb 2012 14:18:24 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
+	Wed, 01 Feb 2012 15:01:02 +0100
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[192.168.1.104])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1RsaaO-0003UY-Go
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Feb 2012 13:50:56 +0000
+Message-ID: <4F2943BA.1070507@dynamicdevices.co.uk>
+Date: Wed, 01 Feb 2012 13:52:58 +0000
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4F1041E0.7060601@gmx.net>
 	<4F181D44.6020500@gmx.net>	<4F1F06B5.2000103@gmail.com>
-	<4F291673.1090701@dynamicdevices.co.uk>
-In-Reply-To: <4F291673.1090701@dynamicdevices.co.uk>
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
+	<4F291673.1090701@dynamicdevices.co.uk> <4F293BA0.4070207@gmx.net>
+In-Reply-To: <4F293BA0.4070207@gmx.net>
 Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,60 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 13:26:37 -0000
-X-Groupsio-MsgNum: 36815
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig59573D1CCC529CF9C1A0B49A"
+X-List-Received-Date: Wed, 01 Feb 2012 14:01:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig59573D1CCC529CF9C1A0B49A
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Hi Robert,
 
-Hi Alex,
+ >There is one in the contrib/artwork folder of the OE repo.
 
-Am 01.02.2012 11:39, schrieb Alex J Lennon:
-> Hi,
->=20
-> Can anybody point me to an SVG graphic for the OpenEmbedded logo to put=
+Perfect, thanks
 
-> on a tag?
-There is one in the contrib/artwork folder of the OE repo.
+ >If you could print a bunch (~10) of blanko tags we could still label 
+them manually (via pen) at the event.
 
-> (I'm still happy to print off tags if people wish to contact me,
-> although I may not have
-> time after today)
-If you could print a bunch (~10) of blanko tags we could still label
-them manually (via pen) at the event. Not the most professional looking
-but at least we can show the name of a device (+ we know that something
-is missing when there is no device next to a tag ;) ).
+What about something like these two?
 
-All the best,
-Robert
+http://dl.dropbox.com/u/12130167/Generic%20Tag%20%28background%29.pdf
+http://dl.dropbox.com/u/12130167/Generic%20Tag.pdf
 
-> Regards,
->=20
-> Alex
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Maybe 10-off A5 of the second with the white background?
+
+Do you need anything else on there?
+
+Cheers,
+
+Alex
 
 
 
---------------enig59573D1CCC529CF9C1A0B49A
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk8pO6IACgkQG9cfwmwwEtoFNACcC74mqIukeU9cPJA1IemTqAEs
-SzAAn01knwN1w3r7qUHyBzY/zCO02W8c
-=KXj6
------END PGP SIGNATURE-----
-
---------------enig59573D1CCC529CF9C1A0B49A--
