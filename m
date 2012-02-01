@@ -1,27 +1,26 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1RsXdD-0001P9-83
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1RsXjB-0001Y3-92
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 11:41:39 +0100
-Received: by wgbdr13 with SMTP id dr13so973296wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 02:33:44 -0800 (PST)
-Received: by 10.180.100.234 with SMTP id fb10mr40567184wib.8.1328092424612;
-	Wed, 01 Feb 2012 02:33:44 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id t15sm43814102wiv.6.2012.02.01.02.33.42
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Feb 2012 02:33:43 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1673681.7VAs90S7L9@helios>
-Date: Wed, 1 Feb 2012 11:33:37 +0100
-Message-Id: <054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
-References: <1592899.mTy93uB97i@helios> <1673681.7VAs90S7L9@helios>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1251.1)
-Subject: Re: Splitting meta-oe
+	Wed, 01 Feb 2012 11:47:49 +0100
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[192.168.1.104])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1RsXZQ-0003RD-8n
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Feb 2012 10:37:44 +0000
+Message-ID: <4F291673.1090701@dynamicdevices.co.uk>
+Date: Wed, 01 Feb 2012 10:39:47 +0000
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4F1041E0.7060601@gmx.net> <4F181D44.6020500@gmx.net>
+	<4F1F06B5.2000103@gmail.com>
+In-Reply-To: <4F1F06B5.2000103@gmail.com>
+Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,66 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 10:41:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Feb 2012 10:47:49 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-Op 1 feb. 2012, om 11:07 heeft Paul Eggleton het volgende geschreven:
+Can anybody point me to an SVG graphic for the OpenEmbedded logo to put 
+on a tag?
 
-> On Wednesday 25 January 2012 12:48:11 Paul Eggleton wrote:
->> The meta-oe layer [1] is becoming the home for additional recipes =
-that we
->> miss from OE-Classic that don't have another obvious layer to go =
-into, and
->> this is a good thing. However I think that meta-oe is already in a =
-state
->> where quite a few people feel the new structure is not working for =
-them.
->>=20
->> As I see it, meta-oe is trying provide the following:
->>=20
->> 1) Additional recipes that are not in OE-Core
->>=20
->> 2) Additional functionality for OE-Core recipes that we can't enable =
-in OE-
->> Core itself (e.g. enabling postgres support in Qt) - mostly just a
->> side-effect of #1
->>=20
->> 3) A place to preserve old versions of recipes that have been removed =
-from
->> OE-Core in favour of newer versions
->>=20
->> 4) Newer less-well tested versions of recipes
->>=20
->> I think what most people want when they enable meta-oe in their layer
->> configuration is #1, and it's probably OK to get #2 along with it. =
-They do
->> not however expect versions of toolchains, eglibc or other fairly
->> fundamental bits and pieces that might cause their build to fail when
->> everything worked fine just building with OE-Core (#4). Equally I =
-expect
->> there will be some people who want just #3 and nothing else.
->>=20
->> I understand there is significant value in providing all of these =
-things, I
->> just think we shouldn't be trying to do them all in one largely =
-indivisible
->> layer. In our new layer structure we should be able to find a way to =
-split
->> the metadata so that people who want any combination can still have =
-what we
->> have in meta-oe today, and yet those who just want one of them don't =
-get
->> unexpected build failures or older/newer versions being built.
->>=20
->> Thoughts?
->>=20
->> [1] http://cgit.openembedded.org/meta-openembedded/tree/meta-oe
->=20
-> Koen, as the maintainer of meta-oe would you like to comment on this =
-thread?
+(I'm still happy to print off tags if people wish to contact me, 
+although I may not have
+time after today)
 
-I'm waiting for FOSDEM and ELC to discuss this face to face.=
+Regards,
+
+Alex
 
 
