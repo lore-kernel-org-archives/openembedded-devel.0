@@ -1,28 +1,29 @@
-Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1Rse2a-0003rV-D8
+	(envelope-from <raj.khem@gmail.com>) id 1RseQd-0000nP-En
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 18:32:19 +0100
-Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
-	([82.42.142.101] helo=[192.168.1.104])
-	by www.dynamicdevices.co.uk with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1Rsdsj-0003ZC-Mj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 17:22:05 +0000
-Message-ID: <4F297538.9020609@dynamicdevices.co.uk>
-Date: Wed, 01 Feb 2012 17:24:08 +0000
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+	Wed, 01 Feb 2012 18:57:07 +0100
+Received: by lahc1 with SMTP id c1so792937lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2012 09:49:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=Z2DvkWLqhQJp/dqiQ3wjgRphArwjhY8FU76dBRrzJ1Q=;
+	b=RJBSWgu4rjn4uiH5O5pFhQkTNDKp7nA7bpeZoIZkyX/E2zQqzDjKo5pRUoLEFsAVV+
+	r4fOfD0ZHAveld1/5xFy0yla0j1m0zp8JpkhnPiKqn0yXzU0oUp1wDrXaC0gUk6Ajjge
+	abJzst/MaleiCYPLLcSl9D129b/jlb6fDlGy8=
+Received: by 10.112.28.169 with SMTP id c9mr1810396lbh.42.1328118552306; Wed,
+	01 Feb 2012 09:49:12 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.152.5.201 with HTTP; Wed, 1 Feb 2012 09:48:42 -0800 (PST)
+In-Reply-To: <4F291A06.4000406@gmail.com>
+References: <4F291A06.4000406@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Feb 2012 09:48:42 -0800
+Message-ID: <CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net>	<4F181D44.6020500@gmx.net>	<4F1F06B5.2000103@gmail.com>	<4F291673.1090701@dynamicdevices.co.uk>
-	<4F293BA0.4070207@gmx.net> <4F2943BA.1070507@dynamicdevices.co.uk>
-	<4F2972E2.2030405@gmx.net>
-In-Reply-To: <4F2972E2.2030405@gmx.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: FOSDEM 2012 - stand organization thread
+Subject: Re: Can't build openembedded: fail in picosam9_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,63 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 17:32:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Feb 2012 17:57:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+2012/2/1 =D0=9B=D0=B5=D0=BE=D0=BD=D0=B8=D0=B4 =D0=A2=D0=B8=D1=82=D0=BE=D0=
+=B2 <leonid.titov@gmail.com>:
+> I've got a problem with building console-image for MACHINE=3Dpicosam9. It
+> fails while processing picosam9_git.bb with these messages:
 
->I'd prefer the blueish one because our table cloths are white. ;)
+do you have machine conf file for picosam9 ?
+recipes and machine confs  are different files.
+you have to show us both files here. That said
+your error is a fetching error which means something
+is wrong with either your SRC_URI or the remote server
+which is feeding the sources of this recipe
 
-I'll see if I can sort out some of both in case the pen looks a bit 
-dodgy on the
-coloured background. I'm starting to think a career change to a 
-"creative" role
-may be in order ;)
-
-On 01/02/2012 17:14, Robert Schuster wrote:
-> Hi Alex,
-> sorry this might come late. Hopefully not too late.
->
-> I'd prefer the blueish one because our table cloths are white. ;)
->
->
-> Am 01.02.2012 14:52, schrieb Alex J Lennon:
->> Hi Robert,
->>
->>> There is one in the contrib/artwork folder of the OE repo.
->> Perfect, thanks
->>
->>> If you could print a bunch (~10) of blanko tags we could still label
->> them manually (via pen) at the event.
->>
->> What about something like these two?
->>
->> http://dl.dropbox.com/u/12130167/Generic%20Tag%20%28background%29.pdf
->> http://dl.dropbox.com/u/12130167/Generic%20Tag.pdf
->>
->> Maybe 10-off A5 of the second with the white background?
->>
->> Do you need anything else on there?
-> Looks perfect otherwise!
->
-> Thanks a lot for this!
->
-> Robert
->
->> Cheers,
->>
->> Alex
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
