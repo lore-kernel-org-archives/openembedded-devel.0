@@ -1,25 +1,30 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1RseX9-00020C-Fy
+	(envelope-from <leonid.titov@gmail.com>) id 1RsfMJ-0000ny-QG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 19:03:52 +0100
-Received: (qmail 20273 invoked by uid 1003); 1 Feb 2012 17:55:54 -0000
-Received: from unknown (HELO ?10.151.252.168?) (philip@opensdr.com@98.191.4.50)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	1 Feb 2012 17:55:54 -0000
-Message-ID: <4F297CA9.3070401@balister.org>
-Date: Wed, 01 Feb 2012 12:55:53 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Wed, 01 Feb 2012 19:56:43 +0100
+Received: by lahc1 with SMTP id c1so827256lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2012 10:48:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=W1cJINtREXEC2TkhulfmMoRvpNW8N6pPu4ruIOMl30E=;
+	b=JpzfPYD3/VsiU9hGN6mM6ib3Q8aQ+fy/QkxmflUPlMOVmvvGqoYEFUXw6lZ+2FfMJc
+	1eK3ft3utBOByAtQK4RTqIcVJl4OuPpa+KFfXyGycwiECnUMcYUBLIU/h7v6E2yUDXzH
+	Ek4oYqkPjae/uomLwXDhbI+MXxVshBOr9bcw4=
 MIME-Version: 1.0
+Received: by 10.112.24.4 with SMTP id q4mr7121997lbf.80.1328122128371; Wed, 01
+	Feb 2012 10:48:48 -0800 (PST)
+Received: by 10.152.24.197 with HTTP; Wed, 1 Feb 2012 10:48:48 -0800 (PST)
+In-Reply-To: <CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
+References: <4F291A06.4000406@gmail.com>
+	<CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
+Date: Wed, 1 Feb 2012 22:48:48 +0400
+Message-ID: <CANLRtZyE_ctYhoJmZd5KUJt70SG=ZU7T1TJCF12viQQgSM063Q@mail.gmail.com>
+From: Leonid Titov <leonid.titov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F1041E0.7060601@gmx.net>
-	<4F181D44.6020500@gmx.net>	<4F1F06B5.2000103@gmail.com>
-	<4F291673.1090701@dynamicdevices.co.uk>
-In-Reply-To: <4F291673.1090701@dynamicdevices.co.uk>
-X-Enigmail-Version: 1.1.2
-Subject: Re: FOSDEM 2012 - stand organization thread
+Subject: Re: Can't build openembedded: fail in picosam9_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,30 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 18:03:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Feb 2012 18:56:43 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-oe.svg in the oe-classic repo.
+I do have a conf/machine/picosam9.conf. It and recipe are exact as in
+repo (http://cgit.openembedded.org/openembedded/tree/conf/machine/picosam9.=
+conf
+and http://cgit.openembedded.org/openembedded/tree/recipes/linux/picosam9_g=
+it.bb).
 
-On 02/01/2012 05:39 AM, Alex J Lennon wrote:
-> Hi,
-> 
-> Can anybody point me to an SVG graphic for the OpenEmbedded logo to put
-> on a tag?
-> 
-> (I'm still happy to print off tags if people wish to contact me,
-> although I may not have
-> time after today)
-> 
-> Regards,
-> 
-> Alex
-> 
+2012/2/1, Khem Raj <raj.khem@gmail.com>:
+> 2012/2/1 Leonid Titov <leonid.titov@gmail.com>:
+>> I've got a problem with building console-image for MACHINE=3Dpicosam9. I=
+t
+>> fails while processing picosam9_git.bb with these messages:
+>
+> do you have machine conf file for picosam9 ?
+> recipes and machine confs  are different files.
+> you have to show us both files here. That said
+> your error is a fetching error which means something
+> is wrong with either your SRC_URI or the remote server
+> which is feeding the sources of this recipe
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+>
+
+
+--=20
+=F3 =D5=D7=C1=D6=C5=CE=C9=C5=CD,
+  =EC=C5=CF=CE=C9=C4.
 
 
