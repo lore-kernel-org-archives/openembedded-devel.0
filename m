@@ -1,30 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rsi33-0007ZJ-H5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rsje4-0002qI-5E
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 22:49:01 +0100
-Received: by eaal10 with SMTP id l10so177108eaa.6
+	Thu, 02 Feb 2012 00:31:20 +0100
+Received: by lahc1 with SMTP id c1so962228lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 13:41:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Rc+rHCKkEzkHl3ly0QFR6ZRGKwgg85m6d9BsUSEWq9A=;
-	b=xwpOCn8brr5Tjm+471mEQMw6B7LmEczqXSo10o33HhC/NHy8duE7PcmTtlP4aO9j5Q
-	T9+PL0eonnmVaoKUwudcgBtwovMssWwgyafQ72xj3Dhop1dy1EESYcM0UbPUbw0vYUtc
-	P/EmVKynLvABDIwKm1vnfIetsEJeqC/Kg/4t0=
-Received: by 10.213.23.20 with SMTP id p20mr1305351ebb.68.1328132465797;
-	Wed, 01 Feb 2012 13:41:05 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id b49sm1050205eec.9.2012.02.01.13.41.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Feb 2012 13:41:05 -0800 (PST)
-From: Peter Tworek <tworaz666@gmail.com>
+	Wed, 01 Feb 2012 15:23:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=dkx5xOsQhhYTwXEVvu4vVA0M38SG90gE4ZANM3sRfYk=;
+	b=lcvBohM1nwQRYdU8ZYxP3vusVBF0DGZKzwiILb9YH3RyTO+OMU9zsbX6LQUMMUoWum
+	g7PLxYzMx+BANR7KpLXinsPHhgOPMXSqiZRX0mzkCVEtG4HMV97yQmovUBy7xeXY05rR
+	Q1iFUZ737ascXD9q4EFUdlSMxZGAOgaVFX2gA=
+MIME-Version: 1.0
+Received: by 10.112.84.170 with SMTP id a10mr158285lbz.22.1328138604224; Wed,
+	01 Feb 2012 15:23:24 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Wed, 1 Feb 2012 15:23:24 -0800 (PST)
+In-Reply-To: <1328132208-15877-1-git-send-email-tworaz666@gmail.com>
+References: <1328132208-15877-1-git-send-email-tworaz666@gmail.com>
+Date: Thu, 2 Feb 2012 00:23:24 +0100
+Message-ID: <CALbNGRSUR4_Ahs-5mUGzfRLL+VbVB-YvZMnBd0YBcnFh=t8=5A@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Feb 2012 22:38:58 +0100
-Message-Id: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe][PATCH] tmux: Add initial recipe for vesion 1.6.
+Subject: Re: [meta-xfce][PATCH v3] xarchiver: Add version 0.5.2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,40 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 21:49:01 -0000
+X-List-Received-Date: Wed, 01 Feb 2012 23:31:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- meta-oe/recipes-extended/tmux/tmux_1.6.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+On Wed, Feb 1, 2012 at 10:36 PM, Peter Tworek <tworaz666@gmail.com> wrote:
+> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> =A0.../recipes-apps/xarchiver/xarchiver_0.5.2.bb =A0 =A0 =A0| =A0 16 ++++=
+++++++++++++
+> =A01 files changed, 16 insertions(+), 0 deletions(-)
+> =A0create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+>
+> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-x=
+fce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> new file mode 100644
+> index 0000000..5c6b7f5
+> --- /dev/null
+> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "Lightweight, desktop independent GTK+ archive manager"
+> +HOMEPAGE =3D "http://xarchiver.sourceforge.net"
+> +SECTION =3D "x11"
+> +
+> +LICENSE =3D "GPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> +
+> +DEPENDS =3D "gtk+ glib-2.0 xfce4-dev-tools-native"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2"
+> +SRC_URI[md5sum] =3D "2bc7f06403cc6582dd4a8029ec9d038d"
+> +SRC_URI[sha256sum] =3D "cea932ff9d505969201fd502470bbebbc5726ab3d6765e14=
+2fc8295aa677ad2a"
+> +
+> +inherit gettext pkgconfig autotools gtk-icon-cache
+> +
+> +RRECOMMENDS_${PN} =3D "lzop zip tar"
+> --
+> 1.7.3.4
+Thanks!
 
-diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-new file mode 100644
-index 0000000..eb6f7df
---- /dev/null
-+++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Terminal multiplexer"
-+HOMEPAGE = "http://tmux.sourceforge.net"
-+SECTION = "console/utils"
-+
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://tmux.c;startline=3;endline=17;md5=f36d9c9e6c1c24996a88891fdf783d04"
-+
-+DEPENDS = "ncurses libevent"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/tmux/${P}.tar.gz"
-+SRC_URI[md5sum] = "3e37db24aa596bf108a0442a81c845b3"
-+SRC_URI[sha256sum] = "faee08ba1bd8c22537cd5b7458881d1bdb4985df88ed6bc5967c56881a7efbd6"
-+
-+inherit autotools
-+
-+do_configure_prepend () {
-+	sed -i -e 's:-I/usr/local/include::' Makefile.am || bb_fatal "sed failed"
-+}
--- 
-1.7.3.4
-
+Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 
 
