@@ -1,36 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rsfjt-0001q6-0Z
+	(envelope-from <raj.khem@gmail.com>) id 1RsgGw-0002pr-Lh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 20:21:05 +0100
-Received: by wgbdr13 with SMTP id dr13so1533321wgb.24
+	Wed, 01 Feb 2012 20:55:14 +0100
+Received: by lbol12 with SMTP id l12so237647lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 11:13:10 -0800 (PST)
+	Wed, 01 Feb 2012 11:47:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type;
-	bh=r/1eyXVa96jrxTq3mGgU3giMMUMH27yqtFiywHxgUOg=;
-	b=baSnjQoEAPxAz7o5A0Mz/gViQ8ZllOogY4BafffX8A2zK5PT5RANC4qOwFL+hgUwJ4
-	W/55lExs2lsh9IV/pOyklB7UKmhGQEsftDoxOoY4n62m3hm8GccN/HPPUEVzhQnRdLME
-	H5rJiZoUJEVzzw2FgA0S572Um8mcZaEjbfxwM=
-Received: by 10.180.104.4 with SMTP id ga4mr13086001wib.17.1328123589956;
-	Wed, 01 Feb 2012 11:13:09 -0800 (PST)
-Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
-	by mx.google.com with ESMTPS id n3sm76375979wiz.9.2012.02.01.11.13.08
-	(version=SSLv3 cipher=OTHER); Wed, 01 Feb 2012 11:13:08 -0800 (PST)
-Message-ID: <4F298E4B.3060706@gmail.com>
-Date: Wed, 01 Feb 2012 20:11:07 +0100
-From: Peter Tworek <tworaz666@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:9.0) Gecko/20120112 Thunderbird/9.0
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=LEH/vNtucuEhuw6a+ZzK30bdbmsY3/QtIygGvkl/AmM=;
+	b=B1co6aGh08y7DNvdr8zCZ+i4sSkwo1I8P1dBGA6PddI/iOSM/N+VqdSVxKOVyy11tM
+	M1YqTwTjqHuvwYcwWMeIcR2IbyDBU4I9adRt6TGcny+LLY6D8GzJohj6SW6XjZ84OHsi
+	0ckuL5ST/UVDqltDNAqC4cV7p3kTeBJr0CkCg=
+Received: by 10.112.86.67 with SMTP id n3mr6994288lbz.29.1328125639292; Wed,
+	01 Feb 2012 11:47:19 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.152.5.201 with HTTP; Wed, 1 Feb 2012 11:46:49 -0800 (PST)
+In-Reply-To: <CANLRtZyE_ctYhoJmZd5KUJt70SG=ZU7T1TJCF12viQQgSM063Q@mail.gmail.com>
+References: <4F291A06.4000406@gmail.com>
+	<CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
+	<CANLRtZyE_ctYhoJmZd5KUJt70SG=ZU7T1TJCF12viQQgSM063Q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Feb 2012 11:46:49 -0800
+Message-ID: <CAMKF1spUMxnuVGb8zw8LM3m5bdUq1tTV74SwjUD8yL0FXysGdg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1328039657-3070-1-git-send-email-tworaz666@gmail.com>
-	<1328087681.4185.3.camel@mattotaupa>
-In-Reply-To: <1328087681.4185.3.camel@mattotaupa>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [meta-xfce][PATCH v2] Add recipe for xarchiver 0.5.2.
+Subject: Re: Can't build openembedded: fail in picosam9_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,72 +39,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 19:21:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 01 Feb 2012 19:55:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02/01/2012 10:14 AM, Paul Menzel wrote:
-> Dear Peter,
+2012/2/1 Leonid Titov <leonid.titov@gmail.com>:
+> I do have a conf/machine/picosam9.conf. It and recipe are exact as in
+> repo (http://cgit.openembedded.org/openembedded/tree/conf/machine/picosam=
+9.conf
+> and http://cgit.openembedded.org/openembedded/tree/recipes/linux/picosam9=
+_git.bb).
 >
->
-> thank you for your patch.
->
-> Am Dienstag, den 31.01.2012, 20:54 +0100 schrieb Peter Tworek:
->
-> Please remember that the commit summary follows a certain pattern [1].
->
-> xarchiver: Add 0.5.2 (initial recipe)
-Thanks for the tip, I didn't know about that.
->
->> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
->> ---
->>   .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |   16 ++++++++++++++++
->>   1 files changed, 16 insertions(+), 0 deletions(-)
->>   create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+
+in picosam9_git.bb you have
+
+
+COMPATIBLE_HOST =3D "arm.*-linux"
+
+make it
+
+COMPATIBLE_HOST =3D "arm.*-linux*"
+
+that said your problem is with fetching and I have seen
+problems with fetching from gitorious using bitbake
+It happens for efikamx kernel which was also hosted on
+gitorious. Is there any other place this repo is mirrored ?
+if yes use that.
+
+> 2012/2/1, Khem Raj <raj.khem@gmail.com>:
+>> 2012/2/1 Leonid Titov <leonid.titov@gmail.com>:
+>>> I've got a problem with building console-image for MACHINE=3Dpicosam9. =
+It
+>>> fails while processing picosam9_git.bb with these messages:
 >>
->> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
->> new file mode 100644
->> index 0000000..66e9273
->> --- /dev/null
->> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
->> @@ -0,0 +1,16 @@
->> +DESCRIPTION = "Lightweight, desktop independent GTK+ archive manager"
->> +HOMEPAGE = "http://xarchiver.sourceforge.net"
-> Does a »/« need to be added at the end?
-I'm not sure I follow. What do you mean by »/?
-
->> +SECTION = "x11"
->> +
->> +LICENSE = "GPLv2"
-> Looking at the FAQ Xarchive is distributed under GPLv2+ [2].
-I wasn't aware that GPLv2+ is a valid license value. Thanks I'll fix it 
-in v3.
-
->
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
->> +
->> +DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native"
->> +
->> +SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2"
->> +SRC_URI[md5sum] = "2bc7f06403cc6582dd4a8029ec9d038d"
->> +SRC_URI[sha256sum] = "cea932ff9d505969201fd502470bbebbc5726ab3d6765e142fc8295aa677ad2a"
->> +
->> +inherit gettext pkgconfig autotools gtk-icon-cache
->> +
->> +RRECOMMENDS_${PN} = "lzop zip tar"
-> With these changes this patch is
->
-> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>> do you have machine conf file for picosam9 ?
+>> recipes and machine confs =C2=A0are different files.
+>> you have to show us both files here. That said
+>> your error is a fetching error which means something
+>> is wrong with either your SRC_URI or the remote server
+>> which is feeding the sources of this recipe
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 >
-> Thanks,
->
-> Paul
->
->
-> [1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-> [2] http://xarchiver.sourceforge.net/doc/ch01s03.html
->
+> --
+> =D0=A1 =D1=83=D0=B2=D0=B0=D0=B6=D0=B5=D0=BD=D0=B8=D0=B5=D0=BC,
+> =C2=A0=D0=9B=D0=B5=D0=BE=D0=BD=D0=B8=D0=B4.
 >
 > _______________________________________________
 > Openembedded-devel mailing list
