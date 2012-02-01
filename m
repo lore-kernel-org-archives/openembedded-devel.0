@@ -1,24 +1,36 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1RscN8-0004le-Ep; Wed, 01 Feb 2012 16:45:22 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 01 Feb 2012 07:37:11 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="101992480"
-Received: from unknown (HELO helios.localnet) ([10.252.122.196])
-	by azsmga001.ch.intel.com with ESMTP; 01 Feb 2012 07:37:09 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: bitbake-devel@lists.openembedded.org
-Date: Wed, 01 Feb 2012 15:37:08 +0000
-Message-ID: <2370505.PRl1Ey1z8e@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-15-generic-pae; KDE/4.8.0; i686; ; )
-In-Reply-To: <4F26B9D3.9010709@gmail.com>
-References: <4F26B9D3.9010709@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, Aleh Arol <aleh.arol@gmail.com>
-Subject: Re: [bitbake-devel] source folder package dependency
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RscPI-00032m-R6 for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Feb 2012 16:47:36 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RscHc-0002ml-3W for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Feb 2012 16:39:40 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2012 16:39:40 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2012 16:39:40 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 01 Feb 2012 16:39:25 +0100
+Message-ID: <jgbmbd$80f$1@dough.gmane.org>
+References: <1592899.mTy93uB97i@helios> <1673681.7VAs90S7L9@helios>
+	<054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
+	<CAP9ODKob+uDFJ8_yutsu1UWVoOWfZQ8xmS0S1np9vNzkBD4pDA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+In-Reply-To: <CAP9ODKob+uDFJ8_yutsu1UWVoOWfZQ8xmS0S1np9vNzkBD4pDA@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 15:45:22 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 01 Feb 2012 15:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Monday 30 January 2012 18:40:03 Aleh Arol wrote:
-> I have a question I don't know how to solve:
-> I have a library, for example, boost, and a part of that
-> library(packaged together I mean), like bjam is required to build it.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 01-02-12 12:11, Otavio Salvador schreef:
+> On Wed, Feb 1, 2012 at 08:33, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
 > 
-> So I have boost-X.Y.Z.bb recipe and src/boost-X.Y.Z folder(I have
-> sources locally) and I need to create bjam recipe. I can make
-> bjam-X.Y.Z.bb where I will refer to folder src/boost-${PV} as ${SRC_URI}
-> and ${S} to find jam sources under. Then if I'll need to have 5
-> different versions of boost I'll need to create 5 different versions of
-> bjam recipe.... although I can use bjam.inc it will still be 5 bjam recipes.
+>> I'm waiting for FOSDEM and ELC to discuss this face to face.
 > 
-> How can I avoid that? Any way to have a version agnostic bjam recipe? Or the
-> right way of doing this.
+> 
+> I won't be on those events but I'd like to participate of the discussion
+> so please use the mailing list.
 
-(I presume this is in the context of OpenEmbedded.) What you describe is the 
-accepted way of doing things - you have a recipe for each version of the piece 
-of software you're building and share the common things with a .inc file, using 
-${PV} to abstract away the version. Each individual recipe ends up quite small 
-with the bulk of the definitions in the inc file.
+THat's fine, but I still won't be participating in this thread till after
+the face to face meetings.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-You could have a recipe which did not specify a version in the recipe filename, 
-and set PV manually instead (possibly with a default); then you could set 
-PV_pn-bjam = "1.1" in your distro or local configuration to pick the version. 
-However I would describe that as unorthodox, and it will not work if you have 
-to handle other differences between versions (e.g. renamed/moved files, 
-additional configuration options, etc.) I will say however that this is more or 
-less how we handle recipes built from a version control system (e.g. git); 
-except in that case we set PV to something including SRCREV e.g. 
-"1.0+gitr${SRCPV}" and then set SRCREV externally.
+iEYEARECAAYFAk8pXKoACgkQMkyGM64RGpGmoACfURPviYRIL0qWqgiMSXe2t3GF
+mUkAoLCU+LASpI/JuHTjVR//2qpckxnx
+=TZCM
+-----END PGP SIGNATURE-----
 
-The question is will you really need 5 different versions? Or just 2-3?
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
