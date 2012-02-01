@@ -1,33 +1,36 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1RsfWA-0001Ue-Qb
+	(envelope-from <tworaz666@gmail.com>) id 1Rsfjt-0001q6-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 20:06:54 +0100
-Received: by eaal10 with SMTP id l10so133438eaa.6
+	Wed, 01 Feb 2012 20:21:05 +0100
+Received: by wgbdr13 with SMTP id dr13so1533321wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 10:58:59 -0800 (PST)
+	Wed, 01 Feb 2012 11:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=jn630ivdxvHKWdIQn2ivhuLeE2L3eeoDnCTk7LIxaMo=;
-	b=nWlUa4MMYRbQecqI035tKSyZFec7w+qxGS7/PptblN/jzVa50O4QZFDUMrUXk9Clj2
-	7Dcbvbvoe6qU4fUZIzlc8OSwjCjN8p4RQu1mL5Xy01g6QE4lqZuhwroC5p1L2IB1tFmZ
-	kHseVwg1pnf2Y5klh+MD7dZ2IW9Yy8YkjMlGo=
-Received: by 10.213.28.132 with SMTP id m4mr14877ebc.3.1328122738940;
-	Wed, 01 Feb 2012 10:58:58 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id o49sm53424384eeb.7.2012.02.01.10.58.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Feb 2012 10:58:58 -0800 (PST)
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type;
+	bh=r/1eyXVa96jrxTq3mGgU3giMMUMH27yqtFiywHxgUOg=;
+	b=baSnjQoEAPxAz7o5A0Mz/gViQ8ZllOogY4BafffX8A2zK5PT5RANC4qOwFL+hgUwJ4
+	W/55lExs2lsh9IV/pOyklB7UKmhGQEsftDoxOoY4n62m3hm8GccN/HPPUEVzhQnRdLME
+	H5rJiZoUJEVzzw2FgA0S572Um8mcZaEjbfxwM=
+Received: by 10.180.104.4 with SMTP id ga4mr13086001wib.17.1328123589956;
+	Wed, 01 Feb 2012 11:13:09 -0800 (PST)
+Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
+	by mx.google.com with ESMTPS id n3sm76375979wiz.9.2012.02.01.11.13.08
+	(version=SSLv3 cipher=OTHER); Wed, 01 Feb 2012 11:13:08 -0800 (PST)
+Message-ID: <4F298E4B.3060706@gmail.com>
+Date: Wed, 01 Feb 2012 20:11:07 +0100
 From: Peter Tworek <tworaz666@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20120112 Thunderbird/9.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Feb 2012 19:56:50 +0100
-Message-Id: <1328122610-16076-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1328044407-30273-1-git-send-email-tworaz666@gmail.com>
-References: <1328044407-30273-1-git-send-email-tworaz666@gmail.com>
-Cc: Piotr Tworek <ptworek@opera.com>
-Subject: [meta-gnome][PATCH v3] gnome-mplayer: Add recipe for version 1.0.5.
+References: <1328039657-3070-1-git-send-email-tworaz666@gmail.com>
+	<1328087681.4185.3.camel@mattotaupa>
+In-Reply-To: <1328087681.4185.3.camel@mattotaupa>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [meta-xfce][PATCH v2] Add recipe for xarchiver 0.5.2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +44,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 19:06:54 -0000
+X-List-Received-Date: Wed, 01 Feb 2012 19:21:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Piotr Tworek <ptworek@opera.com>
+On 02/01/2012 10:14 AM, Paul Menzel wrote:
+> Dear Peter,
+>
+>
+> thank you for your patch.
+>
+> Am Dienstag, den 31.01.2012, 20:54 +0100 schrieb Peter Tworek:
+>
+> Please remember that the commit summary follows a certain pattern [1].
+>
+> xarchiver: Add 0.5.2 (initial recipe)
+Thanks for the tip, I didn't know about that.
+>
+>> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
+>> ---
+>>   .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |   16 ++++++++++++++++
+>>   1 files changed, 16 insertions(+), 0 deletions(-)
+>>   create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+>>
+>> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+>> new file mode 100644
+>> index 0000000..66e9273
+>> --- /dev/null
+>> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+>> @@ -0,0 +1,16 @@
+>> +DESCRIPTION = "Lightweight, desktop independent GTK+ archive manager"
+>> +HOMEPAGE = "http://xarchiver.sourceforge.net"
+> Does a »/« need to be added at the end?
+I'm not sure I follow. What do you mean by »/?
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- .../gnome-mplayer/gnome-mplayer_1.0.5.bb           |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
+>> +SECTION = "x11"
+>> +
+>> +LICENSE = "GPLv2"
+> Looking at the FAQ Xarchive is distributed under GPLv2+ [2].
+I wasn't aware that GPLv2+ is a valid license value. Thanks I'll fix it 
+in v3.
 
-diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
-new file mode 100644
-index 0000000..0927bde
---- /dev/null
-+++ b/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "A GTK+ interface to MPlayer"
-+HOMEPAGE = "http://code.google.com/p/gnome-mplayer"
-+SECTION = "multimedia"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+
-+DEPENDS = "gmtk gtk+ alsa-lib libnotify glib-2.0 dbus-glib virtual/libx11 libxscrnsaver"
-+
-+SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
-+SRC_URI[md5sum] = "1d3ab24c5501b5528e357931ca4dc6da"
-+SRC_URI[sha256sum] = "ac3c179345baecb4ca5237782aa33e83253a87bf8b42ce6eb3a9207a340f61b2"
-+
-+EXTRA_OECONF = "--with-gio --with-alsa --with-dbus --with-libnotify"
-+
-+FILES_${PN} += "${datadir}/gnome-control-center/default-apps/${PN}.xml"
-+
-+inherit gettext pkgconfig mime gtk-icon-cache autotools
-+
-+RDEPENDS_${PN} = "mplayer"
--- 
-1.7.3.4
-
+>
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+>> +
+>> +DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native"
+>> +
+>> +SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2"
+>> +SRC_URI[md5sum] = "2bc7f06403cc6582dd4a8029ec9d038d"
+>> +SRC_URI[sha256sum] = "cea932ff9d505969201fd502470bbebbc5726ab3d6765e142fc8295aa677ad2a"
+>> +
+>> +inherit gettext pkgconfig autotools gtk-icon-cache
+>> +
+>> +RRECOMMENDS_${PN} = "lzop zip tar"
+> With these changes this patch is
+>
+> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>
+>
+> Thanks,
+>
+> Paul
+>
+>
+> [1] http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+> [2] http://xarchiver.sourceforge.net/doc/ch01s03.html
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
