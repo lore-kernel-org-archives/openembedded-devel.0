@@ -1,35 +1,28 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <redzhepoff@gmail.com>) id 1Rsa94-000363-Me
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1RsaCr-0003JR-74
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 14:22:42 +0100
-Received: by eaal10 with SMTP id l10so36082eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 05:14:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=ZwbWcD+kCKAqyVIJWtEeCxMp0CkZV0ciaaPBJQrRo44=;
-	b=kSnFJYPNSTDesXNyGj9K3sSG1t4Ri4BpB3zWzfvOUhIl2ixkr5QwH3eWrYUIjefAd5
-	B4u6Wbrb0p6IJuJ2oU5gIHkWnMMGOfw68GBHXCR1D4epdOE1Kng1lL5fUMZJ2Dr18acx
-	s2AoV9S6SK6F9f8/mCXGT08wWPxamkSQPzzpU=
-Received: by 10.213.35.211 with SMTP id q19mr1127541ebd.10.1328102087884;
-	Wed, 01 Feb 2012 05:14:47 -0800 (PST)
-Received: from localhost.localdomain (host-82-135-33-74.customer.m-online.net.
-	[82.135.33.74])
-	by mx.google.com with ESMTPS id b49sm98915755eec.9.2012.02.01.05.14.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Feb 2012 05:14:47 -0800 (PST)
-Sender: =?UTF-8?B?0JLQu9Cw0LTQuNC80LjRgCDQoNC10LTQttC10L/QvtCy?=
-	<redzhepoff@gmail.com>
-From: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
+	Wed, 01 Feb 2012 14:26:37 +0100
+Received: (qmail invoked by alias); 01 Feb 2012 13:18:39 -0000
+Received: from 41.163.71.86.rev.sfr.net (EHLO [192.168.42.72]) [86.71.163.41]
+	by mail.gmx.net (mp069) with SMTP; 01 Feb 2012 14:18:39 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19yq3FRmt5yixJVRNsvP2K0TGGFONmPgCcoGRupNK
+	TKGMG7/bUrmxSm
+Message-ID: <4F293BA0.4070207@gmx.net>
+Date: Wed, 01 Feb 2012 14:18:24 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Feb 2012 14:14:19 +0100
-Message-Id: <1328102059-9805-2-git-send-email-vladimir.redzhepoff@promwad.com>
-X-Mailer: git-send-email 1.7.6.4
-In-Reply-To: <1328102059-9805-1-git-send-email-vladimir.redzhepoff@promwad.com>
-References: <1328102059-9805-1-git-send-email-vladimir.redzhepoff@promwad.com>
-Cc: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
-Subject: [PATCH] Add recipe for pptp-linux_1.7.2
+References: <4F1041E0.7060601@gmx.net>
+	<4F181D44.6020500@gmx.net>	<4F1F06B5.2000103@gmail.com>
+	<4F291673.1090701@dynamicdevices.co.uk>
+In-Reply-To: <4F291673.1090701@dynamicdevices.co.uk>
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,91 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 13:22:42 -0000
+X-List-Received-Date: Wed, 01 Feb 2012 13:26:37 -0000
+X-Groupsio-MsgNum: 36815
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig59573D1CCC529CF9C1A0B49A"
 
-Recipe for this package has been taken from Openembedded-classic project.
+--------------enig59573D1CCC529CF9C1A0B49A
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
----
- .../pptp-linux/pptp-linux-1.7.2/options.pptp       |   30 ++++++++++++++++++++
- .../pptp-linux/pptp-linux_1.7.2.bb                 |   29 +++++++++++++++++++
- 2 files changed, 59 insertions(+), 0 deletions(-)
- create mode 100644 meta/recipes-connectivity/pptp-linux/pptp-linux-1.7.2/options.pptp
- create mode 100644 meta/recipes-connectivity/pptp-linux/pptp-linux_1.7.2.bb
+Hi Alex,
 
-diff --git a/meta/recipes-connectivity/pptp-linux/pptp-linux-1.7.2/options.pptp b/meta/recipes-connectivity/pptp-linux/pptp-linux-1.7.2/options.pptp
-new file mode 100644
-index 0000000..f446e22
---- /dev/null
-+++ b/meta/recipes-connectivity/pptp-linux/pptp-linux-1.7.2/options.pptp
-@@ -0,0 +1,30 @@
-+#
-+# Lock the port
-+#
-+lock
-+
-+#
-+# We don't need the tunnel server to authenticate itself
-+#
-+noauth
-+
-+#
-+# Turn off transmission protocols we know won't be used
-+#
-+nobsdcomp
-+nodeflate
-+
-+#
-+# We want MPPE
-+# (option naming specific to ppp 2.4.0 with unofficial patch)
-+#
-+#mppe-40
-+mppe-128
-+#mppe-stateless
-+
-+#
-+# We want a sane mtu/mru 
-+# (ppp 2.4.0 with unofficial patch)
-+#
-+#mtu 1000
-+#mru 1000
-diff --git a/meta/recipes-connectivity/pptp-linux/pptp-linux_1.7.2.bb b/meta/recipes-connectivity/pptp-linux/pptp-linux_1.7.2.bb
-new file mode 100644
-index 0000000..e95ba9f
---- /dev/null
-+++ b/meta/recipes-connectivity/pptp-linux/pptp-linux_1.7.2.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "PPTP Client is a Linux, FreeBSD, NetBSD \
-+and OpenBSD client for the proprietary Microsoft Point-to-Point \
-+Tunneling Protocol, PPTP. Allows connection to a PPTP based \
-+Virtual Private Network (VPN) as used by employers and some \
-+cable and ADSL internet service providers."
-+HOMEPAGE = "http://pptpclient.sourceforge.net"
-+SECTION = "network"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-+RDEPENDS_${PN} = "ppp"
-+PR = "r0"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
-+           file://options.pptp"
-+
-+S = "${WORKDIR}/pptp-${PV}"
-+
-+do_compile() {
-+        oe_runmake
-+}
-+do_install() {
-+        install -d ${D}${sbindir} ${D}${sysconfdir}/ppp ${D}${mandir}/man8
-+        install -m 555 pptp ${D}${sbindir}
-+        install -m 644 pptp.8 ${D}${mandir}/man8
-+        install -m 644 ${WORKDIR}/options.pptp ${D}${sysconfdir}/ppp
-+}
-+
-+SRC_URI[md5sum] = "4c3d19286a37459a632c7128c92a9857"
-+SRC_URI[sha256sum] = "e98ae0065d2a39fa3131654ff28cb7070e996f668ed6d0e7d9a445b8d37694bc"
--- 
-1.7.6.4
+Am 01.02.2012 11:39, schrieb Alex J Lennon:
+> Hi,
+>=20
+> Can anybody point me to an SVG graphic for the OpenEmbedded logo to put=
+
+> on a tag?
+There is one in the contrib/artwork folder of the OE repo.
+
+> (I'm still happy to print off tags if people wish to contact me,
+> although I may not have
+> time after today)
+If you could print a bunch (~10) of blanko tags we could still label
+them manually (via pen) at the event. Not the most professional looking
+but at least we can show the name of a device (+ we know that something
+is missing when there is no device next to a tag ;) ).
+
+All the best,
+Robert
+
+> Regards,
+>=20
+> Alex
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
+--------------enig59573D1CCC529CF9C1A0B49A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk8pO6IACgkQG9cfwmwwEtoFNACcC74mqIukeU9cPJA1IemTqAEs
+SzAAn01knwN1w3r7qUHyBzY/zCO02W8c
+=KXj6
+-----END PGP SIGNATURE-----
+
+--------------enig59573D1CCC529CF9C1A0B49A--
