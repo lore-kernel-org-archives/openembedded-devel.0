@@ -1,29 +1,24 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from sanddollar.geekisp.com ([216.168.135.167])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RseQd-0000nP-En
+	(envelope-from <philip@balister.org>) id 1RseVz-0001oP-50
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 18:57:07 +0100
-Received: by lahc1 with SMTP id c1so792937lah.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 09:49:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=Z2DvkWLqhQJp/dqiQ3wjgRphArwjhY8FU76dBRrzJ1Q=;
-	b=RJBSWgu4rjn4uiH5O5pFhQkTNDKp7nA7bpeZoIZkyX/E2zQqzDjKo5pRUoLEFsAVV+
-	r4fOfD0ZHAveld1/5xFy0yla0j1m0zp8JpkhnPiKqn0yXzU0oUp1wDrXaC0gUk6Ajjge
-	abJzst/MaleiCYPLLcSl9D129b/jlb6fDlGy8=
-Received: by 10.112.28.169 with SMTP id c9mr1810396lbh.42.1328118552306; Wed,
-	01 Feb 2012 09:49:12 -0800 (PST)
+	Wed, 01 Feb 2012 19:02:41 +0100
+Received: (qmail 31867 invoked by uid 1003); 1 Feb 2012 17:54:43 -0000
+Received: from unknown (HELO ?10.151.252.168?) (philip@opensdr.com@98.191.4.50)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	1 Feb 2012 17:54:43 -0000
+Message-ID: <4F297C62.9080402@balister.org>
+Date: Wed, 01 Feb 2012 12:54:42 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Wed, 1 Feb 2012 09:48:42 -0800 (PST)
-In-Reply-To: <4F291A06.4000406@gmail.com>
-References: <4F291A06.4000406@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 1 Feb 2012 09:48:42 -0800
-Message-ID: <CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Can't build openembedded: fail in picosam9_git.bb
+References: <4F1041E0.7060601@gmx.net>	<4F181D44.6020500@gmx.net>	<4F1F06B5.2000103@gmail.com>	<4F291673.1090701@dynamicdevices.co.uk>	<4F293BA0.4070207@gmx.net>
+	<4F2943BA.1070507@dynamicdevices.co.uk> <4F2972E2.2030405@gmx.net>
+In-Reply-To: <4F2972E2.2030405@gmx.net>
+X-Enigmail-Version: 1.1.2
+Subject: Re: FOSDEM 2012 - stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,20 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 17:57:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Feb 2012 18:02:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2012/2/1 =D0=9B=D0=B5=D0=BE=D0=BD=D0=B8=D0=B4 =D0=A2=D0=B8=D1=82=D0=BE=D0=
-=B2 <leonid.titov@gmail.com>:
-> I've got a problem with building console-image for MACHINE=3Dpicosam9. It
-> fails while processing picosam9_git.bb with these messages:
+Actually, they are cornsilk :) It is kind of more yellow than I expected :)
 
-do you have machine conf file for picosam9 ?
-recipes and machine confs  are different files.
-you have to show us both files here. That said
-your error is a fetching error which means something
-is wrong with either your SRC_URI or the remote server
-which is feeding the sources of this recipe
+Philip
+
+On 02/01/2012 12:14 PM, Robert Schuster wrote:
+> Hi Alex,
+> sorry this might come late. Hopefully not too late.
+> 
+> I'd prefer the blueish one because our table cloths are white. ;)
+> 
+> 
+> Am 01.02.2012 14:52, schrieb Alex J Lennon:
+>> Hi Robert,
+>>
+>>> There is one in the contrib/artwork folder of the OE repo.
+>>
+>> Perfect, thanks
+>>
+>>> If you could print a bunch (~10) of blanko tags we could still label
+>> them manually (via pen) at the event.
+>>
+>> What about something like these two?
+>>
+>> http://dl.dropbox.com/u/12130167/Generic%20Tag%20%28background%29.pdf
+>> http://dl.dropbox.com/u/12130167/Generic%20Tag.pdf
+>>
+>> Maybe 10-off A5 of the second with the white background?
+>>
+>> Do you need anything else on there?
+> Looks perfect otherwise!
+> 
+> Thanks a lot for this!
+> 
+> Robert
+> 
+>> Cheers,
+>>
+>> Alex
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
