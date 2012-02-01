@@ -1,32 +1,33 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <leonid.titov@gmail.com>) id 1RsXxl-0002K1-3l
+	(envelope-from <otavio.salvador@gmail.com>) id 1RsYDM-0002gy-Th
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 12:02:53 +0100
-Received: by bke17 with SMTP id 17so945405bke.6
+	Wed, 01 Feb 2012 12:19:01 +0100
+Received: by lahc1 with SMTP id c1so576615lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 02:54:58 -0800 (PST)
+	Wed, 01 Feb 2012 03:11:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=2lMTL5K0DlvH5JjtFhf7FwFoXlHht1H+QUzMRiJBcaM=;
-	b=HTcj5CSgoH1qx/rydpNSYiypQQYZ+GEKnyZFMh0JbDOjHyBOc8Ys16HTy+AXiWt95x
-	VC2JR8vLX+T41jNLjBrjwOIO05bpdGDJN9WzKkhbqN3EcHa5DPqTPEh/aUpyrQTr3F8B
-	dbz2Gc1VH9AlNduE0jiO+vLLvYoSlsxQ1kSGo=
-Received: by 10.204.154.136 with SMTP id o8mr12932060bkw.112.1328093698428;
-	Wed, 01 Feb 2012 02:54:58 -0800 (PST)
-Received: from [192.168.0.178] ([84.52.99.11]) by mx.google.com with ESMTPS id
-	ci12sm53307155bkb.13.2012.02.01.02.54.57
-	(version=SSLv3 cipher=OTHER); Wed, 01 Feb 2012 02:54:57 -0800 (PST)
-Message-ID: <4F291A06.4000406@gmail.com>
-Date: Wed, 01 Feb 2012 14:55:02 +0400
-From: =?UTF-8?B?0JvQtdC+0L3QuNC0INCi0LjRgtC+0LI=?=
- <leonid.titov@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.0;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=m9XT+azBNgKa1E5hBNHXHWRqSA7d3ZSofN3HiOY0aSk=;
+	b=DWkdd/OrVML4b4fVV8Jm/uhEDr9I8wyHntj51KwJh3bw6ZAhO/Inn4h/XCo2UF0/Gz
+	3sIv+M+itAlQQyBudeaPOuUZv+96t3CrcHFBWFwjpmNDVCJhlsTqSH36k7lTHFs97BJJ
+	O52QbP5TpWfuCXLF0Hd2TWrg22TYHugz/lSZk=
 MIME-Version: 1.0
+Received: by 10.112.11.10 with SMTP id m10mr6493085lbb.11.1328094665925; Wed,
+	01 Feb 2012 03:11:05 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.112.46.199 with HTTP; Wed, 1 Feb 2012 03:11:05 -0800 (PST)
+In-Reply-To: <054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
+References: <1592899.mTy93uB97i@helios> <1673681.7VAs90S7L9@helios>
+	<054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
+Date: Wed, 1 Feb 2012 09:11:05 -0200
+X-Google-Sender-Auth: YtgLbrQDfzkf5P2mLqkH9_aM5GA
+Message-ID: <CAP9ODKob+uDFJ8_yutsu1UWVoOWfZQ8xmS0S1np9vNzkBD4pDA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Can't build openembedded: fail in picosam9_git.bb
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Splitting meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,62 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 11:02:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Feb 2012 11:19:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello all!
+On Wed, Feb 1, 2012 at 08:33, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-I've got a problem with building console-image for MACHINE=picosam9. It 
-fails while processing picosam9_git.bb with these messages:
+> I'm waiting for FOSDEM and ELC to discuss this face to face.
 
-> NOTE: Running task 1473 of 3919 (ID: 516, 
-> /home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb, do_fetch)
-> --2012-02-01 05:17:36--  
-> http://www.angstrom-distribution.org/unstable/sources/git_gitorious.org.picopc-kernel.kernel.git_5d564f090ee99a0570a2cc912ebc30b65922f7bb.tar.gz 
->
-> Resolving www.angstrom-distribution.org... NOTE: package 
-> picosam9-2.6.32+gitr5d564f090ee99a0570a2cc912ebc30b65922f7bb-r0: task 
-> do_fetch: Started
-> NOTE: fetch 
-> http://www.angstrom-distribution.org/unstable/sources/git_gitorious.org.picopc-kernel.kernel.git_5d564f090ee99a0570a2cc912ebc30b65922f7bb.tar.gz 
->
-> 188.40.83.200
-> Connecting to www.angstrom-distribution.org|188.40.83.200|:80... 
-> connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2012-02-01 05:17:37 ERROR 404: Not Found.
->
-> Cloning into 
-> /home/arm/sources/git/gitorious.org.picopc-kernel.kernel.git...
-> fatal: The remote end hung up unexpectedly
-> fatal: early EOF
-> fatal: index-pack failed
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of 
-> /home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb do_fetch 
-> failed
-> ERROR: Task 516 
-> (/home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb, do_fetch) 
-> failed with 256
-> ERROR: '/home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb' 
-> failed
-> NOTE: Task failed: Fetch failed: Unable to fetch URL 
-> git://gitorious.org/picopc-kernel/kernel.git;protocol=git;branch=minibox-picopc-2.6.32 
-> from any source.
-> NOTE: package 
-> picosam9-2.6.32+gitr5d564f090ee99a0570a2cc912ebc30b65922f7bb-r0: task 
-> do_fetch: Failed
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of 
-> /home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb do_fetch 
-> failed
-> ERROR: Task 516 
-> (/home/arm/stuff/openembedded/recipes/linux/picosam9_git.bb, do_fetch) 
-> failed with 256
 
-What can be a problem?
+I won't be on those events but I'd like to participate of the discussion so
+please use the mailing list.
 
-Thanks in advance!
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
