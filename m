@@ -1,33 +1,40 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RsYDM-0002gy-Th
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1RsZsn-0002Kz-8R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Feb 2012 12:19:01 +0100
-Received: by lahc1 with SMTP id c1so576615lah.6
+	Wed, 01 Feb 2012 14:05:53 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7B7AE22325A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 03:11:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=m9XT+azBNgKa1E5hBNHXHWRqSA7d3ZSofN3HiOY0aSk=;
-	b=DWkdd/OrVML4b4fVV8Jm/uhEDr9I8wyHntj51KwJh3bw6ZAhO/Inn4h/XCo2UF0/Gz
-	3sIv+M+itAlQQyBudeaPOuUZv+96t3CrcHFBWFwjpmNDVCJhlsTqSH36k7lTHFs97BJJ
-	O52QbP5TpWfuCXLF0Hd2TWrg22TYHugz/lSZk=
-MIME-Version: 1.0
-Received: by 10.112.11.10 with SMTP id m10mr6493085lbb.11.1328094665925; Wed,
-	01 Feb 2012 03:11:05 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.112.46.199 with HTTP; Wed, 1 Feb 2012 03:11:05 -0800 (PST)
-In-Reply-To: <054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
-References: <1592899.mTy93uB97i@helios> <1673681.7VAs90S7L9@helios>
-	<054AF572-114E-4927-AC07-C595FAF205FC@dominion.thruhere.net>
-Date: Wed, 1 Feb 2012 09:11:05 -0200
-X-Google-Sender-Auth: YtgLbrQDfzkf5P2mLqkH9_aM5GA
-Message-ID: <CAP9ODKob+uDFJ8_yutsu1UWVoOWfZQ8xmS0S1np9vNzkBD4pDA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed,  1 Feb 2012 13:58:00 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BA7F222325A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Feb 2012 13:57:59 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225005177.adsl.alicedsl.de
+	[92.225.5.177]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Feb 2012 13:57:59 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 568733C4B3; Wed,  1 Feb 2012 13:57:58 +0100 (CET)
+Date: Wed, 1 Feb 2012 13:57:58 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Splitting meta-oe
+Message-ID: <20120201125758.GA21529@mail.familie-heinold.de>
+References: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
+	<CADZ6=avk8ekCLnXv=wbYwhcYzHpyN9mR2mctUNW4hxFfGJZ5Ug@mail.gmail.com>
+	<20120131170206.GA27750@mi.fu-berlin.de>
+	<CADZ6=avTDaSvO4-aMwgJ4OyYtAKt_Ru2eVEbae_LtW6re6uyxQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CADZ6=avTDaSvO4-aMwgJ4OyYtAKt_Ru2eVEbae_LtW6re6uyxQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [meta-java][PATCH] llvm-config: Work around shebang max length issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 11:19:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Feb 2012 13:05:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Feb 1, 2012 at 08:33, Koen Kooi <koen@dominion.thruhere.net> wrote:
+On Wed, Feb 01, 2012 at 09:26:23AM +0100, Thilo Fromm wrote:
+> Hello Henning,
+> 
+> >> > This patch works around a max shebang length issue
+> >> > in llvm's llvm-config.
+> >>
+> >> Some feedback on the patch would be great.
+> >>
+> >
+> > I am a bit short of time at the moment. So I can not test or apply your patch.
+> > For the longer term llvm should go to core.
+> >
+> 
+> Okay. We'll maintain this patch in our HidaV layer (which is
+> https://github.com/DFE/HidaV) for the time being.
+> 
+> Regards,
+> Thilo
 
-> I'm waiting for FOSDEM and ELC to discuss this face to face.
+btw. you can make a pull request.
 
+Bye Henning
 
-I won't be on those events but I'd like to participate of the discussion so
-please use the mailing list.
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
