@@ -1,17 +1,37 @@
-Received: from pd95cbf07.dip0.t-ipconnect.de ([217.92.191.7] helo=localhost)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1Rsxjd-0003Hu-AZ
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Rsy7U-0003mT-S6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 15:34:01 +0100
-Received: by localhost (Postfix, from userid 1000)
-	id 5FCC8C2CA7; Thu,  2 Feb 2012 15:17:24 +0100 (CET)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	Thu, 02 Feb 2012 15:58:40 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BFA2122325A9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Feb 2012 15:50:46 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 06D8022325A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Feb 2012 15:50:46 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225004220.adsl.alicedsl.de
+	[92.225.4.220]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Feb 2012 15:50:45 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 42F183C4B3; Thu,  2 Feb 2012 15:50:40 +0100 (CET)
+Date: Thu, 2 Feb 2012 15:50:40 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Feb 2012 15:16:47 +0100
-Message-Id: <1328192207-13032-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.7
-Cc: Eric BENARD <eric@eukrea.com>
-Subject: [PATCH] net-snmp-5.7.1: fix build error "too few arguments to function 'nl_geterror'"
+Message-ID: <20120202145037.GA5364@rhein.zuhause.netz>
+References: <CAObi9r-f6NA+ARrNqn_GGdr3eL43-B-ZszYS1y1tA12KiHURxQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAObi9r-f6NA+ARrNqn_GGdr3eL43-B-ZszYS1y1tA12KiHURxQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: preventing stripping binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,116 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 14:34:01 -0000
+X-List-Received-Date: Thu, 02 Feb 2012 14:58:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Fixes compile errors with libnl-1_2.0:
-| ...
-| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
-| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
-| ...
+On Thu, Feb 02, 2012 at 03:46:19PM +0200, mgundes wrote:
+>      Hi everyone,
+> 
+>      I use oe-classic. I have two distro type (debug and release) and I
+> want to use same path for my application in release and debug distro
+> type. I wonder if I can tell OE not to strip binaries for specified package
+> in FILES_${PN}? Or can I change installation directory name instead of
+> ".debug" when I use debug package FILES_${PN}-dbg?
+> 
+>      Thanks for your help, regards.
+> 
+> -- 
+> MahmutG
 
-The patch was imported from the net-snmp bug tracker: current libnl 3.0 not
-supported - ID: 3250304 [1]
+He,
 
-[1] <http://sourceforge.net/tracker/index.php?func=detail&aid=3250304&group_id=12694&atid=112694>
+thats what the -dbg packages are for, providing the necessary debug symbols.
+You do not need that two distros.
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- .../net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch   |   65 ++++++++++++++++++++
- recipes/net-snmp/net-snmp_5.7.1.bb                 |    3 +-
- 2 files changed, 67 insertions(+), 1 deletions(-)
- create mode 100644 recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
-
-diff --git a/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
-new file mode 100644
-index 0000000..0879e45
---- /dev/null
-+++ b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
-@@ -0,0 +1,65 @@
-+--- net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c.org	2011-03-27 22:39:13.428728506 +0200
-++++ net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c	2011-03-27 22:39:47.606956561 +0200
-+@@ -555,8 +555,9 @@
-+ static int
-+ tcpTable_load_netlink(void)
-+ {
-++	int err;
-+ 	/*  TODO: perhaps use permanent nl handle? */
-+-	struct nl_handle *nl = nl_handle_alloc();
-++	struct nl_sock *nl = nl_socket_alloc();
-+ 
-+ 	if (nl == NULL) {
-+ 		DEBUGMSGTL(("mibII/tcpTable", "Failed to allocate netlink handle\n"));
-+@@ -564,10 +565,10 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	if (nl_connect(nl, NETLINK_INET_DIAG) < 0) {
-+-		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror()));
-+-		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror());
-+-		nl_handle_destroy(nl);
-++	if ((err = nl_connect(nl, NETLINK_INET_DIAG)) < 0) {
-++		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror(err)));
-++		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror(err));
-++		nl_socket_free(nl);
-+ 		return -1;
-+ 	}
-+ 
-+@@ -579,10 +580,10 @@
-+ 	struct nl_msg *nm = nlmsg_alloc_simple(TCPDIAG_GETSOCK, NLM_F_ROOT|NLM_F_MATCH|NLM_F_REQUEST);
-+ 	nlmsg_append(nm, &req, sizeof(struct inet_diag_req), 0);
-+ 
-+-	if (nl_send_auto_complete(nl, nm) < 0) {
-+-		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror()));
-+-		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror());
-+-		nl_handle_destroy(nl);
-++	if ((err = nl_send_auto_complete(nl, nm)) < 0) {
-++		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror(err)));
-++		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror(err));
-++		nl_socket_free(nl);
-+ 		return -1;
-+ 	}
-+ 	nlmsg_free(nm);
-+@@ -593,9 +594,9 @@
-+ 
-+ 	while (running) {
-+ 		if ((len = nl_recv(nl, &peer, &buf, NULL)) <= 0) {
-+-			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror()));
-+-			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror());
-+-			nl_handle_destroy(nl);
-++			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror(len)));
-++			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror(len));
-++			nl_socket_free(nl);
-+ 			return -1;
-+ 		}
-+ 
-+@@ -644,7 +645,7 @@
-+ 		free(buf);
-+ 	}
-+ 
-+-	nl_handle_destroy(nl);
-++	nl_socket_free(nl);
-+ 
-+ 	if (tcp_head) {
-+ 		DEBUGMSGTL(("mibII/tcpTable", "Loaded TCP Table using netlink\n"));
-diff --git a/recipes/net-snmp/net-snmp_5.7.1.bb b/recipes/net-snmp/net-snmp_5.7.1.bb
-index 08571e9..655d7be 100644
---- a/recipes/net-snmp/net-snmp_5.7.1.bb
-+++ b/recipes/net-snmp/net-snmp_5.7.1.bb
-@@ -1,10 +1,11 @@
- require net-snmp.inc
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
- 
- DEFAULT_PREFERENCE = "1"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-+        file://net-snmp-libnl.patch \
-         file://init \
-         file://snmpd.conf \
-         file://snmptrapd.conf"
--- 
-1.7.7
-
+Bye Henning
 
 
