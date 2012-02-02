@@ -1,30 +1,32 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mgargela@gmail.com>) id 1Rsx79-00022q-MU
+	(envelope-from <obi@opendreambox.org>) id 1RsxO3-0002oI-9g
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 14:54:15 +0100
-Received: by vcdn13 with SMTP id n13so1850469vcd.6
+	Thu, 02 Feb 2012 15:11:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id F21A9315879B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Feb 2012 05:46:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=pWG78RaWC1mHF0Y1ZNpxg485P7urbzj0mZ7fHvzI7Xg=;
-	b=R4y8MpJAu+rz+ZNtMUHie4+cgTP3dGLQdKbNgpuXzQOZQ0wTz5EnKgvtCMI3bowLL2
-	LBpgMTVYtmAx4gizI9TR0RTDGpsDm7qEoN5uxlvZ8xJ1ePCP5pyETF9AwwEzxjMz7v5Q
-	YgAuc+g3zGVQO+ZVkbrIPEB6rkJ8NZNpyyjgk=
+	Thu,  2 Feb 2012 15:03:46 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id ibvYV41do6Df
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Feb 2012 15:03:37 +0100 (CET)
+Received: from [172.22.22.61] (drms-4d0158ce.pool.mediaWays.net [77.1.88.206])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 194123158799
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Feb 2012 15:03:37 +0100 (CET)
+Message-ID: <4F2A97B7.2080709@opendreambox.org>
+Date: Thu, 02 Feb 2012 15:03:35 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20111229 Thunderbird/9.0
 MIME-Version: 1.0
-Received: by 10.220.140.196 with SMTP id j4mr1477802vcu.12.1328190379090; Thu,
-	02 Feb 2012 05:46:19 -0800 (PST)
-Sender: mgargela@gmail.com
-Received: by 10.52.0.133 with HTTP; Thu, 2 Feb 2012 05:46:19 -0800 (PST)
-Date: Thu, 2 Feb 2012 15:46:19 +0200
-X-Google-Sender-Auth: OkTFmGsmhSi13R9GgNkkM5y2rJc
-Message-ID: <CAObi9r-f6NA+ARrNqn_GGdr3eL43-B-ZszYS1y1tA12KiHURxQ@mail.gmail.com>
-From: mgundes <mgcse@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: preventing stripping binaries
+Subject: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,19 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 13:54:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Feb 2012 14:11:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-     Hi everyone,
+If DISTRO_FEATURES doesn't contain x11, libsm is not available.
+As libsm is optional, the dependency is changed to be conditional.
+There's no need to alter configure flags, because without x11,
+libsm cannot be picked up accidentially. Because this just fixes
+a missing dependency failure without x11, no PR bump is required
+either.
 
-     I use oe-classic. I have two distro type (debug and release) and I
-want to use same path for my application in release and debug distro
-type. I wonder if I can tell OE not to strip binaries for specified package
-in FILES_${PN}? Or can I change installation directory name instead of
-".debug" when I use debug package FILES_${PN}-dbg?
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-     Thanks for your help, regards.
-
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+index bd7b495..4e782e2 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+@@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+ 
+ inherit autotools
+ 
+-DEPENDS = "libsm"
++DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'libsm', '', d)}"
+ 
+ PACKAGES += "${PN}-utils"
+ FILES_${PN} = "${libdir}/libgif.so.*"
 -- 
-MahmutG
+1.7.5.4
+
+
+
 
