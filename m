@@ -1,23 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Rss8V-0004sK-BE for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 09:35:19 +0100
-Received: from g225081057.adsl.alicedsl.de ([92.225.81.57]
-	helo=[192.168.178.43])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Rss0y-0004ZL-Qg for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 08:27:33 +0000
-Message-ID: <1328171236.3941.4.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1RssKk-0005Jw-Tv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Feb 2012 09:47:59 +0100
+Received: by eekd41 with SMTP id d41so565758eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Feb 2012 00:40:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=C00D72Em6BEQKstIb9Vo1GCa1i2JN652R/i/04g90XA=;
+	b=i8NiabPbA8U4i9ZrzKh7TL/Rb8qADcaVOSEgEd/vuPX13blNJgmlCKX1C2Js2evTx1
+	DCQGw8Nl5zMFI7lbkkZWff4PR57goL5hrERHkcIIaqIoLkNkCGIYThCHiT+NlCbzULY8
+	sj7fCWqFUWemgWf9BImSi+a1wn+YnmTfNOISA=
+Received: by 10.14.98.203 with SMTP id v51mr634170eef.13.1328172003141;
+	Thu, 02 Feb 2012 00:40:03 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id a58sm6753129eeb.8.2012.02.02.00.40.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 02 Feb 2012 00:40:02 -0800 (PST)
+Date: Thu, 2 Feb 2012 09:40:00 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 02 Feb 2012 09:27:16 +0100
-In-Reply-To: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
-References: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH] tmux: Add initial recipe for vesion 1.6.
+Message-ID: <20120202084000.GD3697@jama.jama.net>
+References: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+	<20120104051849.GG31275@sakrah.homelinux.org>
+	<20120104090523.066ae2d7@eb-e6520>
+	<CA+chaQe-XFR6XVAoept8+d8kqoZ1y2qBoVXgetEPpD2n50nYBA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQe-XFR6XVAoept8+d8kqoZ1y2qBoVXgetEPpD2n50nYBA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe] gdb-cross-canadian: build gdb with python support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,86 +44,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 08:35:19 -0000
-X-Groupsio-MsgNum: 36839
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-b27gsfJb2msVEXLV8OFC"
+X-List-Received-Date: Thu, 02 Feb 2012 08:47:59 -0000
+X-Groupsio-MsgNum: 36840
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eqp4TxRxnD4KrmFZ"
+Content-Disposition: inline
 
---=-b27gsfJb2msVEXLV8OFC
-Content-Type: text/plain; charset="UTF-8"
+--eqp4TxRxnD4KrmFZ
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear Peter,
-
-
-thank you for your latest work. It is much appreciated.
-
-Am Mittwoch, den 01.02.2012, 22:38 +0100 schrieb Peter Tworek:
-
-This is just an optional request from me. I would like to see in the
-commit message what build configuration you used for testing.
-
-> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
-> ---
->  meta-oe/recipes-extended/tmux/tmux_1.6.bb |   18 ++++++++++++++++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+On Thu, Feb 02, 2012 at 08:45:13AM +0100, Martin Jansa wrote:
+> On Wed, Jan 4, 2012 at 9:05 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+> > Hi Khem,
+> >
+> > Le Tue, 3 Jan 2012 21:18:49 -0800,
+> > Khem Raj <raj.khem@gmail.com> a =E9crit :
+> >> On (23/12/11 08:12), Eric B=E9nard wrote:
+> >> > * python support is needed for providing finer scripting control
+> >> > in gdb, and for remote controling gdb for example from qtcreator
+> >> > * gdb/configure tries to autodetect python using python executable
+> >> > with --includes --ldflags --exec-prefix to get the right flags
+> >> > As it's difficult to achieve in OE's context, we generate a
+> >> > script which will return the right values and make gdb's build
+> >> > system happy. This idea was taken from the following article :
+> >> > http://www.mentby.com/doug-evans-2/python-enabled-gdb-on-windows-and=
+-relocation.html
+> >> > * tested using angstrom & armv7/armv5 targets & qtcreator 201005 & 2=
+=2E4.0
+> >>
+> >> I think this change should go into oe-core. Can you please redo it
+> >> w.r.t. oe-core
+> >>
+> > I agree with you, I initally submited it for oe-core and was asked
+> > to put it into meta-oe by Jessica :
+> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/01=
+4828.html
+> > http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/01=
+4833.html
+> >
+> > Eric
 >=20
-> diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-=
-extended/tmux/tmux_1.6.bb
-> new file mode 100644
-> index 0000000..eb6f7df
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "Terminal multiplexer"
-> +HOMEPAGE =3D "http://tmux.sourceforge.net"
-> +SECTION =3D "console/utils"
-> +
-> +LICENSE =3D "ISC"
-> +LIC_FILES_CHKSUM =3D "file://tmux.c;startline=3D3;endline=3D17;md5=3Df36=
-d9c9e6c1c24996a88891fdf783d04"
-> +
-> +DEPENDS =3D "ncurses libevent"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/tmux/${P}.tar.gz"
-> +SRC_URI[md5sum] =3D "3e37db24aa596bf108a0442a81c845b3"
-> +SRC_URI[sha256sum] =3D "faee08ba1bd8c22537cd5b7458881d1bdb4985df88ed6bc5=
-967c56881a7efbd6"
-> +
-> +inherit autotools
-> +
-> +do_configure_prepend () {
-> +	sed -i -e 's:-I/usr/local/include::' Makefile.am || bb_fatal "sed faile=
-d"
+> Hi Eric,
+>=20
+> with this patch I see gdb-cross-canadian_7.3.1.bb failing with:
+> | checking whether to use python...
+> /OE/shr-core/tmp/work/x86_64-nativesdk-oesdk-linux/gdb-cross-canadian-arm=
+/gdb-cross-canadian-arm-7.3.1-r5.1/python
+> | checking for python2.7... no
+> | configure: error: no usable python found at
+> /OE/shr-core/tmp/work/x86_64-nativesdk-oesdk-linux/gdb-cross-canadian-arm=
+/gdb-cross-canadian-arm-7.3.1-r5.1/python
+>=20
+> and
+> /OE/shr-core/tmp/work/x86_64-nativesdk-oesdk-linux/gdb-cross-canadian-arm=
+/gdb-cross-canadian-arm-7.3.1-r5.1/python
+> is really script from this patch
+>=20
+> Any hint how to fix this?
 
-You can ensure that `sed` is available by depending on `sed-native` I
-think. At least in OE-Classic this was available.
+And here are details from:
+gdb-cross-canadian-arm-7.3.1-r5.1/build-arm-oe-linux-gnueabi/gdb/config.log
 
-Additionally it would be great if you could contact upstream and make
-them aware of this problem and maybe even provide a patch. So that in
-the feature no adaptations are needed and other distributions/framework
-can profit too.
+configure:10440: $? =3D 0
+configure:10440: result: yes
+configure:10465: checking whether to use python
+configure:10467: result: /OE/shr-core/tmp/work/x86_64-nativesdk-oesdk-linux=
+/gdb-cross-canadian-arm/gdb-cross-canadian-arm-7.3.1-r5.1/python
+configure:10685: checking for python2.7
+configure:10703: x86_64-oesdk-linux-gcc  --sysroot=3D/OE/shr-core/tmp/sysro=
+ots/x86_64-nativesdk-oesdk-linux -o conftest -isystem/OE/shr-core/tmp/sysro=
+ots/x86_64-oesdk-linux-nativesdk/usr/local/oecore-x86_64-arm/sysroots/x86_6=
+4-oesdk-linux/usr/include -O2 -pipe -isystem/OE/shr-core/tmp/sysroots/x86_6=
+4-oesdk-linux-nativesdk/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-l=
+inux/usr/include  -I/OE/shr-core/tmp/sysroots/x86_64-nativesdk-oesdk-linux/=
+usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-linux/usr/include/python2=
+=2E7/  -L/OE/shr-core/tmp/sysroots/x86_64-oesdk-linux-nativesdk/usr/local/o=
+ecore-x86_64-arm/sysroots/x86_64-oesdk-linux/usr/lib/armv4t-oe-linux-gnueab=
+i -Wl,-rpath-link,/OE/shr-core/tmp/sysroots/x86_64-oesdk-linux-nativesdk/us=
+r/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-linux/usr/lib/armv4t-oe-lin=
+ux-gnueabi -Wl,-rpath,/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-li=
+nux/usr/lib/armv4t-oe-linux-gnueabi -Wl,-O1 -L/OE/shr-core/tmp/sysroots/x86=
+_64-oesdk-linux-nativesdk/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk=
+-linux/lib -Wl,-rpath-link,/OE/shr-core/tmp/sysroots/x86_64-oesdk-linux-nat=
+ivesdk/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-linux/lib -Wl,-rpa=
+th,/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-linux/lib -Wl,-O1 con=
+ftest.c -lncurses -lz -lm    -L/OE/shr-core/tmp/sysroots/x86_64-nativesdk-o=
+esdk-linux/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-linux/usr/lib/=
+armv4t-oe-linux-gnueabi/python2.7/config/config -lpthread -ldl -lutil -lm -=
+lpython2.7 >&5
+conftest.c:91:20: fatal error: Python.h: No such file or directory
+compilation terminated.
 
-> +}
+And Python.h is in
+/OE/shr-core/tmp/sysroots/x86_64-nativesdk-oesdk-linux/usr/local/oecore-x86=
+_64-x86_64/sysroots/x86_64-oesdk-linux/usr/include/python2.7/Python.h
+not
+/OE/shr-core/tmp/sysroots/x86_64-nativesdk-oesdk-linux/usr/local/oecore-x86=
+_64-arm/sysroots/x86_64-oesdk-linux/usr/include/python2.7/
 
+oecore-x86_64-arm doesn't exist at all in /OE/shr-core/tmp/sysroots/x86_64-=
+nativesdk-oesdk-linux/usr/local
 
-Thanks,
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Paul
-
---=-b27gsfJb2msVEXLV8OFC
+--eqp4TxRxnD4KrmFZ
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEABECAAYFAk8qSOQACgkQPX1aK2wOHVgN2gCfX3wj5ATvVh0hn/k2u39U/3+C
-g1YAmwXLSV58mW35BWQRiRa3Hd34++Mz
-=5GV4
+iEYEARECAAYFAk8qS+AACgkQN1Ujt2V2gBzKHACeLBY34v/kvAKT9rDJtCb4as28
+HNoAnRI/l361wscbidaSuMKJT8RsTAii
+=KB+q
 -----END PGP SIGNATURE-----
 
---=-b27gsfJb2msVEXLV8OFC--
+--eqp4TxRxnD4KrmFZ--
