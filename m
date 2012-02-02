@@ -1,21 +1,28 @@
-Received: from smtp-out12.han.skanova.net ([195.67.226.212])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@emagii.com>) id 1Rskyx-0005qW-Ah
+	(envelope-from <raj.khem@gmail.com>) id 1RspwS-0003aU-7w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 01:56:59 +0100
-Received: from [10.175.196.237] (83.227.57.213) by smtp-out12.han.skanova.net
-	(8.5.133) (authenticated as ulf_samuelsson@telia.com)
-	id 4EFC380E008FA849 for openembedded-devel@lists.openembedded.org;
-	Thu, 2 Feb 2012 01:47:52 +0100
-Message-ID: <4F29DD37.6000509@emagii.com>
-Date: Thu, 02 Feb 2012 01:47:51 +0100
-From: Ulf Samuelsson <openembedded@emagii.com>
-Organization: eMagii
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
+	Thu, 02 Feb 2012 07:14:44 +0100
+Received: by lbol12 with SMTP id l12so308621lbo.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2012 22:06:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=8TgGRYQtRhPBQtKRYVi5F1BnVJd5LuGTBiVWX46vHjI=;
+	b=uGIe1JkCSV+McJvUcDeQ035TV9U8o+SSkDaqMegrEwdh9//oIWpPtVRVjr0mX9pkVN
+	WIDwHPz1RpJUs2v8hzaAQCDXdQMRODxOuvO/ZmAX3c58j1hLiH2BIPH94FwcmjTVc+fX
+	z1dL17MWYQ/9xBk20GEyW8itmG6f02zl80QYQ=
+Received: by 10.112.86.67 with SMTP id n3mr389944lbz.29.1328162808357; Wed, 01
+	Feb 2012 22:06:48 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.152.5.201 with HTTP; Wed, 1 Feb 2012 22:06:18 -0800 (PST)
+In-Reply-To: <4F29DD37.6000509@emagii.com>
+References: <4F29DD37.6000509@emagii.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Feb 2012 22:06:18 -0800
+Message-ID: <CAMKF1spf2o+9__d8NRONPrYnDD_4J8CT3usOyhRP5sZfhDy+dQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: =?UTF-8?B?UmVjb21tZW5kZWQgw4VuZ3N0csO2bS9vZS1jb3JlIGltYWdlIHRvIHN0YXJ0ICwgZm9yIGEgZ3JhcGhpYyBhcHBsaWNhdGlvbiA/?=
+Subject: =?UTF-8?B?UmU6IFJlY29tbWVuZGVkIMOFbmdzdHLDtm0vb2UtY29yZSBpbWFnZSB0byBzdGFydCAsIGZvciBhIGdyYXBoaWMgYXBwbGljYXRpb24gPw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,22 +36,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 00:56:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Feb 2012 06:14:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-With openembedded classic, I have mostly been using derivatives of
-x11-gpe-image for demos.
+On Wed, Feb 1, 2012 at 4:47 PM, Ulf Samuelsson <openembedded@emagii.com> wrote:
+> What is close to this image in functionaliy with Angstrom/openembedded core.
 
-What is close to this image in functionaliy with Angstrom/openembedded core.
-
-Tried booting "core-image-sato", but that did not even have a shell...
-Next try, "systemd-gnome-image" is beeing built at the moment,
-but it would be nice to have some advice.
-
--- 
-Best Regards
-Ulf Samuelsson	
-
+probably a good queston for angstrom-distro ml
 
 
