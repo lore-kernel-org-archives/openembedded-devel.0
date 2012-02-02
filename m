@@ -1,32 +1,17 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from pd95cbf07.dip0.t-ipconnect.de ([217.92.191.7] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RsxO3-0002oI-9g
+	(envelope-from <sledz@localhost.localdomain>) id 1Rsxjd-0003Hu-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 15:11:43 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id F21A9315879B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:03:46 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id ibvYV41do6Df
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:03:37 +0100 (CET)
-Received: from [172.22.22.61] (drms-4d0158ce.pool.mediaWays.net [77.1.88.206])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 194123158799
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:03:37 +0100 (CET)
-Message-ID: <4F2A97B7.2080709@opendreambox.org>
-Date: Thu, 02 Feb 2012 15:03:35 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:9.0) Gecko/20111229 Thunderbird/9.0
-MIME-Version: 1.0
+	Thu, 02 Feb 2012 15:34:01 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 5FCC8C2CA7; Thu,  2 Feb 2012 15:17:24 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
+Date: Thu,  2 Feb 2012 15:16:47 +0100
+Message-Id: <1328192207-13032-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Cc: Eric BENARD <eric@eukrea.com>
+Subject: [PATCH] net-snmp-5.7.1: fix build error "too few arguments to function 'nl_geterror'"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +25,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 14:11:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Feb 2012 14:34:01 -0000
 
-If DISTRO_FEATURES doesn't contain x11, libsm is not available.
-As libsm is optional, the dependency is changed to be conditional.
-There's no need to alter configure flags, because without x11,
-libsm cannot be picked up accidentially. Because this just fixes
-a missing dependency failure without x11, no PR bump is required
-either.
+Fixes compile errors with libnl-1_2.0:
+| ...
+| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
+| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
+| ...
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+The patch was imported from the net-snmp bug tracker: current libnl 3.0 not
+supported - ID: 3250304 [1]
+
+[1] <http://sourceforge.net/tracker/index.php?func=detail&aid=3250304&group_id=12694&atid=112694>
+
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 ---
- meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch   |   65 ++++++++++++++++++++
+ recipes/net-snmp/net-snmp_5.7.1.bb                 |    3 +-
+ 2 files changed, 67 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
 
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-index bd7b495..4e782e2 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-@@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+diff --git a/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
+new file mode 100644
+index 0000000..0879e45
+--- /dev/null
++++ b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
+@@ -0,0 +1,65 @@
++--- net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c.org	2011-03-27 22:39:13.428728506 +0200
+++++ net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c	2011-03-27 22:39:47.606956561 +0200
++@@ -555,8 +555,9 @@
++ static int
++ tcpTable_load_netlink(void)
++ {
+++	int err;
++ 	/*  TODO: perhaps use permanent nl handle? */
++-	struct nl_handle *nl = nl_handle_alloc();
+++	struct nl_sock *nl = nl_socket_alloc();
++ 
++ 	if (nl == NULL) {
++ 		DEBUGMSGTL(("mibII/tcpTable", "Failed to allocate netlink handle\n"));
++@@ -564,10 +565,10 @@
++ 		return -1;
++ 	}
++ 
++-	if (nl_connect(nl, NETLINK_INET_DIAG) < 0) {
++-		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror()));
++-		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror());
++-		nl_handle_destroy(nl);
+++	if ((err = nl_connect(nl, NETLINK_INET_DIAG)) < 0) {
+++		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror(err)));
+++		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror(err));
+++		nl_socket_free(nl);
++ 		return -1;
++ 	}
++ 
++@@ -579,10 +580,10 @@
++ 	struct nl_msg *nm = nlmsg_alloc_simple(TCPDIAG_GETSOCK, NLM_F_ROOT|NLM_F_MATCH|NLM_F_REQUEST);
++ 	nlmsg_append(nm, &req, sizeof(struct inet_diag_req), 0);
++ 
++-	if (nl_send_auto_complete(nl, nm) < 0) {
++-		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror()));
++-		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror());
++-		nl_handle_destroy(nl);
+++	if ((err = nl_send_auto_complete(nl, nm)) < 0) {
+++		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror(err)));
+++		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror(err));
+++		nl_socket_free(nl);
++ 		return -1;
++ 	}
++ 	nlmsg_free(nm);
++@@ -593,9 +594,9 @@
++ 
++ 	while (running) {
++ 		if ((len = nl_recv(nl, &peer, &buf, NULL)) <= 0) {
++-			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror()));
++-			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror());
++-			nl_handle_destroy(nl);
+++			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror(len)));
+++			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror(len));
+++			nl_socket_free(nl);
++ 			return -1;
++ 		}
++ 
++@@ -644,7 +645,7 @@
++ 		free(buf);
++ 	}
++ 
++-	nl_handle_destroy(nl);
+++	nl_socket_free(nl);
++ 
++ 	if (tcp_head) {
++ 		DEBUGMSGTL(("mibII/tcpTable", "Loaded TCP Table using netlink\n"));
+diff --git a/recipes/net-snmp/net-snmp_5.7.1.bb b/recipes/net-snmp/net-snmp_5.7.1.bb
+index 08571e9..655d7be 100644
+--- a/recipes/net-snmp/net-snmp_5.7.1.bb
++++ b/recipes/net-snmp/net-snmp_5.7.1.bb
+@@ -1,10 +1,11 @@
+ require net-snmp.inc
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
  
- inherit autotools
+ DEFAULT_PREFERENCE = "1"
  
--DEPENDS = "libsm"
-+DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'libsm', '', d)}"
- 
- PACKAGES += "${PN}-utils"
- FILES_${PN} = "${libdir}/libgif.so.*"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
++        file://net-snmp-libnl.patch \
+         file://init \
+         file://snmpd.conf \
+         file://snmptrapd.conf"
 -- 
-1.7.5.4
-
+1.7.7
 
 
 
