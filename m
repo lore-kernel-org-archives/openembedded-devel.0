@@ -1,33 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rt2OB-0005ex-Ur
+	(envelope-from <tworaz666@gmail.com>) id 1Rt2aJ-0005vU-BU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 20:32:12 +0100
-Received: by eaal10 with SMTP id l10so512266eaa.6
+	Thu, 02 Feb 2012 20:44:43 +0100
+Received: by eekd41 with SMTP id d41so754661eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Feb 2012 11:24:15 -0800 (PST)
+	Thu, 02 Feb 2012 11:36:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=FaLJQy9bdHl3X6gUPYf59znZKmANRRceS4M3WaJclG8=;
-	b=kOXY8I03HXdOPF9qFNqAaLZIf8JD1NsaBJwWScsjSy1leJ3KZCArITFcH0iXakSMt5
-	51krEBxLm8iYAMdlcZ4HmqEuTETQ+1i7HG57JYYGKe+h7KuHjxzJV3cfF0g1Ia27C9Cd
-	M8Cu+N+gN6WrOYNBFoYRZDx0kMEQdu/eTxXgc=
-Received: by 10.213.7.217 with SMTP id e25mr1920547ebe.54.1328210655429;
-	Thu, 02 Feb 2012 11:24:15 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=FB3zCVfokRK6X6EabhgQRtgYQiTUTZ8zhvjA+4J4PYQ=;
+	b=rtuR4Hqg0MLz3CMK/oTCOPjaGMUf/ljXdmFqWfus3vHWzl0NG8DxxYIP8CORWS5HSC
+	JkfcxHZxUYGUNCfso+LGWcOc5PKHqaeiI1mQw1OG+Zydib6ky1Nl0vxJcbQGnXqxkQok
+	+LBkQwELKMRT46AyNE/4TbvzlV8Vj9D3Ylk6g=
+Received: by 10.14.35.84 with SMTP id t60mr1284502eea.126.1328211406938;
+	Thu, 02 Feb 2012 11:36:46 -0800 (PST)
 Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
 	[89.77.50.243])
-	by mx.google.com with ESMTPS id x4sm12473458eeb.4.2012.02.02.11.24.14
+	by mx.google.com with ESMTPS id n56sm12571930eeh.6.2012.02.02.11.36.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Feb 2012 11:24:14 -0800 (PST)
+	Thu, 02 Feb 2012 11:36:46 -0800 (PST)
 From: Peter Tworek <tworaz666@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Feb 2012 20:22:06 +0100
-Message-Id: <1328210526-8694-1-git-send-email-tworaz666@gmail.com>
+Date: Thu,  2 Feb 2012 20:34:39 +0100
+Message-Id: <1328211279-8809-1-git-send-email-tworaz666@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
-References: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
-Cc: Piotr Tworek <ptworek@opera.com>
-Subject: [meta-oe][PATCH v2] tmux: Add initial recipe for vesion 1.6.
+Subject: [meta-gnome][PATCH] libgsf: Remove unnecessary gconf RDEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 19:32:12 -0000
+X-List-Received-Date: Thu, 02 Feb 2012 19:44:43 -0000
 
-From: Piotr Tworek <ptworek@opera.com>
-
-Run tested on netbook pro.
+It's added automatically when including gconf bbclass.
 
 Signed-off-by: Peter Tworek <tworaz666@gmail.com>
 ---
- meta-oe/recipes-extended/tmux/tmux_1.6.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-new file mode 100644
-index 0000000..fa58065
---- /dev/null
-+++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Terminal multiplexer"
-+HOMEPAGE = "http://tmux.sourceforge.net"
-+SECTION = "console/utils"
-+
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://tmux.c;startline=3;endline=17;md5=f36d9c9e6c1c24996a88891fdf783d04"
-+
-+DEPENDS = "ncurses libevent sed-native"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/tmux/${P}.tar.gz"
-+SRC_URI[md5sum] = "3e37db24aa596bf108a0442a81c845b3"
-+SRC_URI[sha256sum] = "faee08ba1bd8c22537cd5b7458881d1bdb4985df88ed6bc5967c56881a7efbd6"
-+
-+inherit autotools
-+
-+do_configure_prepend () {
-+	sed -i -e 's:-I/usr/local/include::' Makefile.am || bb_fatal "sed failed"
-+}
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+index 6119f86..e8cad9c 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+@@ -19,5 +19,3 @@ EXTRA_OECONF = "\
+ 		--without-gnome-vfs --without-bonobo \
+ 		--disable-gtk-doc \
+ 		--with-bz2"
+-
+-RDEPENDS_${PN} = "gconf" 
 -- 
 1.7.3.4
 
