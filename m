@@ -1,37 +1,24 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Rsy7U-0003mT-S6
+Received: from mga02.intel.com ([134.134.136.20])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <josh@linux.intel.com>) id 1Rt0W6-0008Ay-2U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 15:58:40 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BFA2122325A9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:50:46 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 06D8022325A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:50:46 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225004220.adsl.alicedsl.de
-	[92.225.4.220]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 15:50:45 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 42F183C4B3; Thu,  2 Feb 2012 15:50:40 +0100 (CET)
-Date: Thu, 2 Feb 2012 15:50:40 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120202145037.GA5364@rhein.zuhause.netz>
-References: <CAObi9r-f6NA+ARrNqn_GGdr3eL43-B-ZszYS1y1tA12KiHURxQ@mail.gmail.com>
+	Thu, 02 Feb 2012 18:32:14 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 02 Feb 2012 09:23:12 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="103193287"
+Received: from shamshir.jf.intel.com (HELO [10.24.0.213]) ([10.24.0.213])
+	by orsmga001.jf.intel.com with ESMTP; 02 Feb 2012 09:23:12 -0800
+Message-ID: <4F2AC67F.3040002@linux.intel.com>
+Date: Thu, 02 Feb 2012 09:23:11 -0800
+From: Joshua Lock <josh@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0
 MIME-Version: 1.0
-In-Reply-To: <CAObi9r-f6NA+ARrNqn_GGdr3eL43-B-ZszYS1y1tA12KiHURxQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: preventing stripping binaries
+To: openembedded-devel@lists.openembedded.org
+References: <4F29DD37.6000509@emagii.com>
+In-Reply-To: <4F29DD37.6000509@emagii.com>
+Subject: =?UTF-8?B?UmU6IFJlY29tbWVuZGVkIMOFbmdzdHLDtm0vb2UtY29yZSBpbWFnZSB0byBzdGFydCAsIGZvciBhIGdyYXBoaWMgYXBwbGljYXRpb24gPw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 14:58:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Feb 2012 17:32:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 02, 2012 at 03:46:19PM +0200, mgundes wrote:
->      Hi everyone,
-> 
->      I use oe-classic. I have two distro type (debug and release) and I
-> want to use same path for my application in release and debug distro
-> type. I wonder if I can tell OE not to strip binaries for specified package
-> in FILES_${PN}? Or can I change installation directory name instead of
-> ".debug" when I use debug package FILES_${PN}-dbg?
-> 
->      Thanks for your help, regards.
-> 
-> -- 
-> MahmutG
 
-He,
 
-thats what the -dbg packages are for, providing the necessary debug symbols.
-You do not need that two distros.
+On 01/02/12 16:47, Ulf Samuelsson wrote:
+> With openembedded classic, I have mostly been using derivatives of
+> x11-gpe-image for demos.
+>
+> What is close to this image in functionaliy with Angstrom/openembedded
+> core.
+>
+> Tried booting "core-image-sato", but that did not even have a shell...
 
-Bye Henning
+Define shell? core-image-sato has a terminal emulator and the ash shell 
+from busybox.
+
+Cheers,
+Joshua
+-- 
+Joshua Lock
+         Yocto Project "Johannes factotum"
+         Intel Open Source Technology Centre
 
 
