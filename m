@@ -1,30 +1,21 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from smtp-out12.han.skanova.net ([195.67.226.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rsje4-0002qI-5E
+	(envelope-from <openembedded@emagii.com>) id 1Rskyx-0005qW-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 00:31:20 +0100
-Received: by lahc1 with SMTP id c1so962228lah.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Feb 2012 15:23:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=dkx5xOsQhhYTwXEVvu4vVA0M38SG90gE4ZANM3sRfYk=;
-	b=lcvBohM1nwQRYdU8ZYxP3vusVBF0DGZKzwiILb9YH3RyTO+OMU9zsbX6LQUMMUoWum
-	g7PLxYzMx+BANR7KpLXinsPHhgOPMXSqiZRX0mzkCVEtG4HMV97yQmovUBy7xeXY05rR
-	Q1iFUZ737ascXD9q4EFUdlSMxZGAOgaVFX2gA=
+	Thu, 02 Feb 2012 01:56:59 +0100
+Received: from [10.175.196.237] (83.227.57.213) by smtp-out12.han.skanova.net
+	(8.5.133) (authenticated as ulf_samuelsson@telia.com)
+	id 4EFC380E008FA849 for openembedded-devel@lists.openembedded.org;
+	Thu, 2 Feb 2012 01:47:52 +0100
+Message-ID: <4F29DD37.6000509@emagii.com>
+Date: Thu, 02 Feb 2012 01:47:51 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+Organization: eMagii
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.24) Gecko/20111108 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.112.84.170 with SMTP id a10mr158285lbz.22.1328138604224; Wed,
-	01 Feb 2012 15:23:24 -0800 (PST)
-Received: by 10.112.102.165 with HTTP; Wed, 1 Feb 2012 15:23:24 -0800 (PST)
-In-Reply-To: <1328132208-15877-1-git-send-email-tworaz666@gmail.com>
-References: <1328132208-15877-1-git-send-email-tworaz666@gmail.com>
-Date: Thu, 2 Feb 2012 00:23:24 +0100
-Message-ID: <CALbNGRSUR4_Ahs-5mUGzfRLL+VbVB-YvZMnBd0YBcnFh=t8=5A@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce][PATCH v3] xarchiver: Add version 0.5.2.
+Subject: =?UTF-8?B?UmVjb21tZW5kZWQgw4VuZ3N0csO2bS9vZS1jb3JlIGltYWdlIHRvIHN0YXJ0ICwgZm9yIGEgZ3JhcGhpYyBhcHBsaWNhdGlvbiA/?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,48 +29,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2012 23:31:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Feb 2012 00:56:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 1, 2012 at 10:36 PM, Peter Tworek <tworaz666@gmail.com> wrote:
-> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> =A0.../recipes-apps/xarchiver/xarchiver_0.5.2.bb =A0 =A0 =A0| =A0 16 ++++=
-++++++++++++
-> =A01 files changed, 16 insertions(+), 0 deletions(-)
-> =A0create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
->
-> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-x=
-fce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
-> new file mode 100644
-> index 0000000..5c6b7f5
-> --- /dev/null
-> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "Lightweight, desktop independent GTK+ archive manager"
-> +HOMEPAGE =3D "http://xarchiver.sourceforge.net"
-> +SECTION =3D "x11"
-> +
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +
-> +DEPENDS =3D "gtk+ glib-2.0 xfce4-dev-tools-native"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2"
-> +SRC_URI[md5sum] =3D "2bc7f06403cc6582dd4a8029ec9d038d"
-> +SRC_URI[sha256sum] =3D "cea932ff9d505969201fd502470bbebbc5726ab3d6765e14=
-2fc8295aa677ad2a"
-> +
-> +inherit gettext pkgconfig autotools gtk-icon-cache
-> +
-> +RRECOMMENDS_${PN} =3D "lzop zip tar"
-> --
-> 1.7.3.4
-Thanks!
+With openembedded classic, I have mostly been using derivatives of
+x11-gpe-image for demos.
 
-Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+What is close to this image in functionaliy with Angstrom/openembedded core.
+
+Tried booting "core-image-sato", but that did not even have a shell...
+Next try, "systemd-gnome-image" is beeing built at the moment,
+but it would be nice to have some advice.
+
+-- 
+Best Regards
+Ulf Samuelsson	
+
 
 
