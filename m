@@ -1,31 +1,26 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1Rssgr-0006FQ-Vl
+	(envelope-from <fromm@dresearch-fe.de>) id 1RsslN-0006Ol-BL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 10:10:50 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 905CC2C799
+	Thu, 02 Feb 2012 10:15:29 +0100
+Received: by iaby12 with SMTP id y12so3198368iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 09:01:58 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id V429qO5Se+Mj
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 09:01:50 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id CB2652C793
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2012 09:01:49 +0000 (UTC)
-Message-ID: <4F2A5134.6080107@gmail.com>
-Date: Thu, 02 Feb 2012 10:02:44 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+	Thu, 02 Feb 2012 01:07:33 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.50.168.4 with SMTP id zs4mr11156107igb.25.1328173652929; Thu,
+	02 Feb 2012 01:07:32 -0800 (PST)
+Received: by 10.50.155.134 with HTTP; Thu, 2 Feb 2012 01:07:32 -0800 (PST)
+In-Reply-To: <20120201125758.GA21529@mail.familie-heinold.de>
+References: <CADZ6=asn5Tq6adpuysW229BYXDu3ExUVNDWEZtzpjyAUv9PHgQ@mail.gmail.com>
+	<CADZ6=avk8ekCLnXv=wbYwhcYzHpyN9mR2mctUNW4hxFfGJZ5Ug@mail.gmail.com>
+	<20120131170206.GA27750@mi.fu-berlin.de>
+	<CADZ6=avTDaSvO4-aMwgJ4OyYtAKt_Ru2eVEbae_LtW6re6uyxQ@mail.gmail.com>
+	<20120201125758.GA21529@mail.familie-heinold.de>
+Date: Thu, 2 Feb 2012 10:07:32 +0100
+Message-ID: <CADZ6=ataH4f+ekqX+6GU39mvXa_a25geUbLYkwXCdoFt65ah+Q@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4F29DD37.6000509@emagii.com>
-In-Reply-To: <4F29DD37.6000509@emagii.com>
-Subject: =?UTF-8?B?UmU6IFJlY29tbWVuZGVkIMOFbmdzdHLDtm0vb2UtY29yZSBpbWFnZSB0byBzdGFydCAsIGZvciBhIGdyYXBoaWMgYXBwbGljYXRpb24gPw==?=
+Subject: Re: [meta-java][PATCH] llvm-config: Work around shebang max length issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 09:10:50 -0000
+X-List-Received-Date: Thu, 02 Feb 2012 09:15:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Ulf Samuelsson ha scritto, Il 02/02/2012 01:47:
-> With openembedded classic, I have mostly been using derivatives of
-> x11-gpe-image for demos.
-> 
-> What is close to this image in functionaliy with Angstrom/openembedded
-> core.
-> 
-> Tried booting "core-image-sato", but that did not even have a shell...
-> Next try, "systemd-gnome-image" is beeing built at the moment,
-> but it would be nice to have some advice.
-> 
+Hallo Henning,
 
-Ulf,
-this is definitely a good question.
-An answer would imcrease the interest into oe-core.
+>> >> > This patch works around a max shebang length issue
+>> >> > in llvm's llvm-config.
+>> >>
+>> >> Some feedback on the patch would be great.
+>> >
+>> > I am a bit short of time at the moment. So I can not test or apply you=
+r patch.
+>> > For the longer term llvm should go to core.
+>>
+>> Okay. We'll maintain this patch in our HidaV layer (which is
+>> https://github.com/DFE/HidaV) for the time being.
+>
+> btw. you can make a pull request.
+>
 
---
-Marco
+Wouldn't work - we use a .bbappend to meta-java's original llvm-config
+recipe. It's not hard to re-integrate into the original recipe, but a
+pull alone would not do.
+
+Regards,
+Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
