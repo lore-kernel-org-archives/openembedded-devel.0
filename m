@@ -1,32 +1,16 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1RtLDf-0002sW-JI; Fri, 03 Feb 2012 16:38:35 +0100
-Received: by lahc1 with SMTP id c1so1874045lah.6
-	for <multiple recipients>; Fri, 03 Feb 2012 07:30:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=bZjEvC59vM6leJa3k00IoUakBR5q8gHbowcbnuZTDCs=;
-	b=NyDsbTMfDGFODmGi8Xbc2h1hhsWYualWgynvhIRGc5cGB0qJ4mEltn9tvJc4cZxQ9x
-	XI+4ClAk0HdPkL2OStOo8mU/0XgkJIfgU/xdSXO9ckkAV8nKVf12f8G+Yiv4fKIe8KTb
-	jDBNoo26qHpF/n8TkN/au3h97Kht/29NkQ7Xo=
-MIME-Version: 1.0
-Received: by 10.152.114.169 with SMTP id jh9mr3918456lab.20.1328283037520;
-	Fri, 03 Feb 2012 07:30:37 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.112.46.199 with HTTP; Fri, 3 Feb 2012 07:30:37 -0800 (PST)
-In-Reply-To: <20120203131451.GJ3893@jama.jama.net>
-References: <20120201080441.DA76610333@opal>
-	<20120203131451.GJ3893@jama.jama.net>
-Date: Fri, 3 Feb 2012 13:30:37 -0200
-X-Google-Sender-Auth: 5eNbFFlN3crXFaaFtJAY8fh-gfc
-Message-ID: <CAP9ODKqdXtrAqUY=1XHE4QDpRPyNbOV5ZswKihCWbSWU9+L05w@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <sledz@localhost.localdomain>) id 1RtLKf-00033y-Ae
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Feb 2012 16:45:49 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 44A8E443CEA; Fri,  3 Feb 2012 16:37:51 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Otavio Salvador : systemd.bbclass: depends on systemd
+Date: Fri,  3 Feb 2012 16:37:49 +0100
+Message-Id: <1328283469-12067-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [PATCH] ltrace: switch from 0.5.3-2 to 0.5.3-2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +24,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2012 15:38:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 Feb 2012 15:45:49 -0000
 
-On Fri, Feb 3, 2012 at 11:14, Martin Jansa <martin.jansa@gmail.com> wrote:
+Version 0.5.3-2 is no longer fetchable.
 
-> Can we move this only to packages which are really depending on systemd
-> compiled?
->
-> I have use-case where
-> small cpio image has busybox
-> busybox depends on systemd just because of this
-> systemd depends on kernel (because RRECOMMENDS on modules)
-> kernel depends on that cpio image which is used as ramdisk
->
-> So in order to finish cpio.do_rootfs I have to finish kernel and kernel
-> fails to build because doesn't have cpio available yet (DEPENDS = "cpio"
-> is not enough because doesn't need do_rootfs to finish AFAIK).
->
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/ltrace/ltrace_0.5.3.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-I understand your use case but it seems in this case you ought to override
-it in a bbappend. It doesn't seems right as this is the exception, not the
-rule. If we don't depends on it, we can end with the binaries being not
-available in case a rootfs generation.
-
+diff --git a/recipes/ltrace/ltrace_0.5.3.bb b/recipes/ltrace/ltrace_0.5.3.bb
+index 53f4892..c9ff0ab 100644
+--- a/recipes/ltrace/ltrace_0.5.3.bb
++++ b/recipes/ltrace/ltrace_0.5.3.bb
+@@ -11,7 +11,7 @@ COMPATIBLE_TARGET_SYS = (?!sh[34])
+ 
+ SRC_URI = "\
+   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz;name=archive \
+-  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.diff.gz;name=patch \
++  ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.1.diff.gz;name=patch \
+   file://add-sysdep.patch \
+   file://ltrace-compile.patch \
+   file://ltrace-mips-remove-CP.patch \
+@@ -76,5 +76,5 @@ do_install() {
+ 
+ SRC_URI[archive.md5sum] = "3fa7fe715ab879db08bd06d1d59fd90f"
+ SRC_URI[archive.sha256sum] = "5c6627d6d5a98a92ca4661cfc16378b182cc46a9ec479ebf7e6121ee3fe2be32"
+-SRC_URI[patch.md5sum] = "969baa0900646c0262b2d505b9fef154"
+-SRC_URI[patch.sha256sum] = "f647d7c2f2b0d1dbddd632f3a17fef670aed3ebf5fbe6c1633337acac1eba8e3"
++SRC_URI[patch.md5sum] = "38bc944c53ab602a7854aa4fa71c1f46"
++SRC_URI[patch.sha256sum] = "4c57df94020f2bed90d948f757ca7786796ca9218274764b24f61c502d9ef4f6"
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.7
+
+
 
