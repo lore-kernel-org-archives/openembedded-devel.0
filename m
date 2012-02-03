@@ -1,33 +1,30 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rt4sg-0007x1-Hz
+	(envelope-from <andrea.adami@gmail.com>) id 1Rt7TB-0000OZ-1V
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Feb 2012 23:11:50 +0100
-Received: by eekd41 with SMTP id d41so792967eek.6
+	Fri, 03 Feb 2012 01:57:41 +0100
+Received: by pbbb4 with SMTP id b4so2222243pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Feb 2012 14:03:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=p1/OOTRG9kx9QhJuTcy7RVQpvdnuRKuyvR4XC6XbJjc=;
-	b=FhupYssAKlFuj+262knuYpRDjf5nle/E0+qtHTyWcR8g+yxFrrsr0BjQfl4fdXSGy9
-	gNLTrQ3Ij+WB86gV+659cT9YXvgNlddaPX3N4O0tuS248uswM1vyB5It+I92QY1NYQuC
-	umWOEcbnm0Gtb3HTm8/b1LdygIexSLK/Jc2Sc=
-Received: by 10.14.18.141 with SMTP id l13mr1442668eel.103.1328220232700;
-	Thu, 02 Feb 2012 14:03:52 -0800 (PST)
-Received: from localhost.localdomain (p5B0A3966.dip.t-dialin.net.
-	[91.10.57.102])
-	by mx.google.com with ESMTPS id x4sm14036800eeb.4.2012.02.02.14.03.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Feb 2012 14:03:52 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Feb 2012 23:06:01 +0100
-Message-Id: <1328220361-5612-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
+	Thu, 02 Feb 2012 16:49:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=fAdp64CLkQgDpsxALRQdFh0EYjWtlVdneiWDSGDQtfo=;
+	b=uYgbp+8VEMEL0lnt59uy8Z7QROL10/YtdjjqQuSvK+DKffjRBrw54g9eboY2PG6AHL
+	3yxAj8Zf71TBEHOlpcCWR2nUpfw9Q211W2G8MFiIc/HFkqZIUrMZXu/yCDnz/JRgd8Vd
+	CLDjcSYvoO9SW5OKQ+/NCTvrqybzwVU+uTPEo=
 MIME-Version: 1.0
-Subject: [meta-oe] atk_2.2.0.bbappend: remove since oe-core now supports native build
+Received: by 10.68.227.198 with SMTP id sc6mr12208359pbc.131.1328230183244;
+	Thu, 02 Feb 2012 16:49:43 -0800 (PST)
+Received: by 10.143.147.17 with HTTP; Thu, 2 Feb 2012 16:49:43 -0800 (PST)
+In-Reply-To: <4F2AC67F.3040002@linux.intel.com>
+References: <4F29DD37.6000509@emagii.com>
+	<4F2AC67F.3040002@linux.intel.com>
+Date: Fri, 3 Feb 2012 01:49:43 +0100
+Message-ID: <CAAQYJAvndSJ4HOr5PzZ4mx830-R8EJ3fPaCbePpwAwmS8qkYOA@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: =?UTF-8?B?UmU6IFJlY29tbWVuZGVkIMOFbmdzdHLDtm0vb2UtY29yZSBpbWFnZSB0byBzdGFydCAsIGZvciBhIGdyYXBoaWMgYXBwbGljYXRpb24gPw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2012 22:11:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 03 Feb 2012 00:57:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 2, 2012 at 6:23 PM, Joshua Lock <josh@linux.intel.com> wrote:
+>
+>
+> On 01/02/12 16:47, Ulf Samuelsson wrote:
+>>
+>> With openembedded classic, I have mostly been using derivatives of
+>> x11-gpe-image for demos.
+>>
+>> What is close to this image in functionaliy with Angstrom/openembedded
+>> core.
+>>
+>> Tried booting "core-image-sato", but that did not even have a shell...
+>
+>
+> Define shell? core-image-sato has a terminal emulator and the ash shell f=
+rom
+> busybox.
+>
+> Cheers,
+> Joshua
+> --
+
+...and even happens to run (a bit slowly atm) on old Zaurus SL-5600 32MB RA=
+M !
+
+Andrea
 
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-support/atk/atk_2.2.0.bbappend |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
- delete mode 100644 meta-oe/recipes-support/atk/atk_2.2.0.bbappend
-
-diff --git a/meta-oe/recipes-support/atk/atk_2.2.0.bbappend b/meta-oe/recipes-support/atk/atk_2.2.0.bbappend
-deleted file mode 100644
-index d9172b4..0000000
---- a/meta-oe/recipes-support/atk/atk_2.2.0.bbappend
-+++ /dev/null
-@@ -1,2 +0,0 @@
--BBCLASSEXTEND = "native"
--
--- 
-1.7.4.4
-
+> Joshua Lock
+> =A0 =A0 =A0 =A0Yocto Project "Johannes factotum"
+> =A0 =A0 =A0 =A0Intel Open Source Technology Centre
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
