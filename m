@@ -1,16 +1,29 @@
-Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1RtGIl-000458-Qp
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Feb 2012 11:23:31 +0100
-Received: by localhost (Postfix, from userid 1000)
-	id 43B44443CDE; Fri,  3 Feb 2012 11:15:34 +0100 (CET)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	(envelope-from <eric@eukrea.com>)
+	id 1RtGNi-0004F8-9W; Fri, 03 Feb 2012 11:28:38 +0100
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 820BA4B0188;
+	Fri,  3 Feb 2012 11:20:38 +0100 (CET)
+Date: Fri, 3 Feb 2012 11:20:37 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Feb 2012 11:15:30 +0100
-Message-Id: <1328264130-29112-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.7
-Subject: [PATCH] jakarta-libs: fixed SRC_URI for avalon-framework-api-4.3
+Message-ID: <20120203112037.314f9004@eb-e6520>
+In-Reply-To: <20120203094104.GE3893@jama.jama.net>
+References: <1324624336-18713-1-git-send-email-eric@eukrea.com>
+	<20120104051849.GG31275@sakrah.homelinux.org>
+	<20120104090523.066ae2d7@eb-e6520>
+	<CA+chaQe-XFR6XVAoept8+d8kqoZ1y2qBoVXgetEPpD2n50nYBA@mail.gmail.com>
+	<20120202084000.GD3697@jama.jama.net>
+	<20120202091726.GG3697@jama.jama.net>
+	<20120202111127.0b9d886a@eb-e6520>
+	<20120203072808.GB3893@jama.jama.net>
+	<20120203094104.GE3893@jama.jama.net>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: SDK confusion Was: [meta-oe] gdb-cross-canadian: build gdb with python support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,28 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2012 10:23:32 -0000
+X-List-Received-Date: Fri, 03 Feb 2012 10:28:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- recipes/jakarta-libs/avalon-framework-api_4.3.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Hi Martin,
 
-diff --git a/recipes/jakarta-libs/avalon-framework-api_4.3.bb b/recipes/jakarta-libs/avalon-framework-api_4.3.bb
-index 06fde62..3340f5b 100644
---- a/recipes/jakarta-libs/avalon-framework-api_4.3.bb
-+++ b/recipes/jakarta-libs/avalon-framework-api_4.3.bb
-@@ -3,7 +3,7 @@ LICENSE = "AL2.0"
- AUTHOR = "Apache Software Foundation"
- 
- SRC_URI = "\
--	http://www.apache.org/dist/excalibur/avalon-framework/source/${BP}-src.tar.gz;name=archive \
-+	http://archive.apache.org/dist/excalibur/framework/source/${BP}-src.tar.gz;name=archive \
- 	http://www.apache.org/dist/avalon/logkit/source/logkit-1.2.2-src.tar.gz;name=logkit \
- 	"
- 
--- 
-1.7.7
+Le Fri, 3 Feb 2012 10:41:05 +0100,
+Martin Jansa <martin.jansa@gmail.com> a =E9crit :
+> in x86_64-oesdk-linux there are only gcc+binutils crosssdk
+> binutils-crosssdk-2.22-r2  gcc-crosssdk-4.6.2+svnr181430-r22  gcc-crosssd=
+k-initial-4.6.2+svnr181430-r22  gcc-crosssdk-intermediate-4.6.2+svnr181430-=
+r22
+> the rest is in=20
+> x86_64-nativesdk-oesdk-linux
+>=20
+> gdb-cross-canadian-arm is only package were exec_prefix points to oecore-=
+x86_64-arm
+> ./gdb-cross-canadian-arm-7.3.1-r5.1/temp/run.do_configure.1688
+> export exec_prefix=3D"/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-=
+linux/usr"
+>=20
+> while all nativesdk packages are using oecore-x86_64-x86_64
+> ./python-nativesdk-2.7.2-r0.5/temp/run.do_configure.14043
+> export exec_prefix=3D"/usr/local/oecore-x86_64-x86_64/sysroots/x86_64-oes=
+dk-linux/usr"
+>=20
+here is the big difference when using Angstrom :
+python-nativesdk-2.7.2-r0.5/temp/run.do_configure.30951:73:export
+exec_prefix=3D"/usr/local/angstrom-eglibc-x86_64-armv7a/sysroots/x86_64-ang=
+stromsdk-linux/usr"
+I don't yet know where this difference comes from.
 
+Eric
+--=20
+http://eukrea.com/en/news/104-2012
 
 
