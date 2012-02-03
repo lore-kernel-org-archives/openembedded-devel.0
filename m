@@ -1,37 +1,16 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <leonid.titov@gmail.com>) id 1RtQP7-0000Ta-EC
+	(envelope-from <andrea.adami@gmail.com>) id 1RtRuE-00029R-94
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Feb 2012 22:10:45 +0100
-Received: by bke17 with SMTP id 17so3614137bke.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2012 13:02:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=WpZNoLPR32B3MiW1y0usSHZzhAz6IUzRINmrtbGaZa4=;
-	b=ZmDFVrFCH/Lx0T8AZQu31U8OzdlGRIHETPBxFzNzgV9P4HltF6ys+GmoHVlUzulv7i
-	leRhPAI2HCfcu+E1KLfeG0gYrQTebCyrgbcHoZp3pX/l7vFD9ZJRDM4Ec8J08AIz7EqW
-	a9+4weEEafkxS9LVjegon5q5hw5YPcw+qml0Q=
-Received: by 10.205.132.138 with SMTP id hu10mr4111660bkc.117.1328302967571;
-	Fri, 03 Feb 2012 13:02:47 -0800 (PST)
-Received: from [192.168.0.178] ([188.227.12.162])
-	by mx.google.com with ESMTPS id z15sm19819147bkd.7.2012.02.03.13.02.42
-	(version=SSLv3 cipher=OTHER); Fri, 03 Feb 2012 13:02:44 -0800 (PST)
-Message-ID: <4F2C4B6A.7000504@gmail.com>
-Date: Sat, 04 Feb 2012 01:02:34 +0400
-From: =?UTF-8?B?0JvQtdC+0L3QuNC0INCi0LjRgtC+0LI=?=
- <leonid.titov@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.0;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F291A06.4000406@gmail.com>
-	<CAMKF1so7cMo0qiOPLuJrpk7kNuyk3dYEEZpM8nSGFKXMuUdoGQ@mail.gmail.com>
-	<CANLRtZyE_ctYhoJmZd5KUJt70SG=ZU7T1TJCF12viQQgSM063Q@mail.gmail.com>
-	<CAMKF1spUMxnuVGb8zw8LM3m5bdUq1tTV74SwjUD8yL0FXysGdg@mail.gmail.com>
-In-Reply-To: <CAMKF1spUMxnuVGb8zw8LM3m5bdUq1tTV74SwjUD8yL0FXysGdg@mail.gmail.com>
-Subject: Re: Can't build openembedded: fail in picosam9_git.bb
+	Fri, 03 Feb 2012 23:46:58 +0100
+Received: from mizar.localdomain (79.7.167.83) by smtp207.alice.it (8.6.023.02)
+	id 4F05A665035FEB9E; Fri, 3 Feb 2012 23:39:00 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri,  3 Feb 2012 23:38:55 +0100
+Message-Id: <1328308736-3740-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-oe][PATCH 1/2] tzdata_2011g: remove and use the updated recipe in oe-core.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,62 +24,222 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2012 21:10:46 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 03 Feb 2012 22:46:58 -0000
 
-That's helped. Thanks a lot, Khem!
+* The tzdata_2011n recipe in oe-core now provides sane defaults,
+* as committed with id 5304ce429f2c05857f04fbe3b47a067983ca96be
 
-01.02.2012 23:46, Khem Raj пишет:
-> 2012/2/1 Leonid Titov<leonid.titov@gmail.com>:
->> I do have a conf/machine/picosam9.conf. It and recipe are exact as in
->> repo (http://cgit.openembedded.org/openembedded/tree/conf/machine/picosam9.conf
->> and http://cgit.openembedded.org/openembedded/tree/recipes/linux/picosam9_git.bb).
->>
-> in picosam9_git.bb you have
->
->
-> COMPATIBLE_HOST = "arm.*-linux"
->
-> make it
->
-> COMPATIBLE_HOST = "arm.*-linux*"
->
-> that said your problem is with fetching and I have seen
-> problems with fetching from gitorious using bitbake
-> It happens for efikamx kernel which was also hosted on
-> gitorious. Is there any other place this repo is mirrored ?
-> if yes use that.
->
->> 2012/2/1, Khem Raj<raj.khem@gmail.com>:
->>> 2012/2/1 Leonid Titov<leonid.titov@gmail.com>:
->>>> I've got a problem with building console-image for MACHINE=picosam9. It
->>>> fails while processing picosam9_git.bb with these messages:
->>> do you have machine conf file for picosam9 ?
->>> recipes and machine confs  are different files.
->>> you have to show us both files here. That said
->>> your error is a fetching error which means something
->>> is wrong with either your SRC_URI or the remote server
->>> which is feeding the sources of this recipe
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> --
->> С уважением,
->>   Леонид.
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-oe/recipes-extended/tzdata/tzdata.inc      |  177 -----------------------
+ meta-oe/recipes-extended/tzdata/tzdata_2011g.bb |   12 --
+ 2 files changed, 0 insertions(+), 189 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/tzdata/tzdata.inc
+ delete mode 100644 meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
+
+diff --git a/meta-oe/recipes-extended/tzdata/tzdata.inc b/meta-oe/recipes-extended/tzdata/tzdata.inc
+deleted file mode 100644
+index 94f73d8..0000000
+--- a/meta-oe/recipes-extended/tzdata/tzdata.inc
++++ /dev/null
+@@ -1,177 +0,0 @@
+-DESCRIPTION = "Timezone data"
+-SECTION = "base"
+-DEPENDS = "tzcode-native"
+-
+-INC_PR = "r11"
+-
+-DEFAULT_TIMEZONE ?= "Europe/London"
+-
+-RCONFLICTS_${PN} = "timezones timezone-africa timezone-america timezone-antarctica \
+-             timezone-arctic timezone-asia timezone-atlantic \
+-             timezone-australia timezone-europe timezone-indian \
+-             timezone-iso3166.tab timezone-pacific timezone-zone.tab"
+-
+-SRC_URI = "http://www.iana.org/time-zones/repository/releases/tzdata${PV}.tar.gz;subdir=${BPN}-${PV}"
+-
+-TZONES= "africa antarctica asia australasia europe northamerica southamerica  \
+-         factory solar87 solar88 solar89 etcetera backward systemv \
+-        "
+-#        pacificnew \
+-
+-CONFFILES_${PN} = "${sysconfdir}/timezone ${sysconfdir}/localtime"
+-
+-do_compile () {
+-        mkdir -p build
+-        for zone in ${TZONES}; do \
+-            ${STAGING_BINDIR_NATIVE}/zic -d ${S}/build${datadir}/zoneinfo -L /dev/null \
+-                -y ${S}/yearistype.sh ${S}/${zone} ; \
+-            ${STAGING_BINDIR_NATIVE}/zic -d ${S}/build${datadir}/zoneinfo/posix -L /dev/null \
+-                -y ${S}/yearistype.sh ${S}/${zone} ; \
+-            ${STAGING_BINDIR_NATIVE}/zic -d ${S}/build${datadir}/zoneinfo/right -L ${S}/leapseconds \
+-                -y ${S}/yearistype.sh ${S}/${zone} ; \
+-        done
+-}
+-
+-do_install () {
+-        install -d ${D}${prefix} ${D}${datadir}/zoneinfo
+-        cp -pPR ${S}/build${prefix}/* ${D}${prefix}
+-        # Only eglibc is removing zoneinfo files from package
+-        if [ "${LIBC}"x = "eglibc"x ] ; then
+-          cp -pP "${S}/zone.tab" ${D}${datadir}/zoneinfo
+-          cp -pP "${S}/iso3166.tab" ${D}${datadir}/zoneinfo
+-        fi
+-
+-        # Install a sane default for timezones
+-        install -d ${D}${sysconfdir}
+-        echo ${DEFAULT_TIMEZONE} > ${D}${sysconfdir}/timezone
+-        cp -pPR ${S}/build${datadir}/zoneinfo/${DEFAULT_TIMEZONE} ${D}${sysconfdir}/localtime
+-}
+-
+-inherit allarch
+-# Packages primarily organized by directory with a major city
+-# in most time zones in the base package
+-
+-PACKAGES = "${PN}-dbg tzdata tzdata-misc tzdata-posix tzdata-right tzdata-africa \
+-    tzdata-americas tzdata-antarctica tzdata-arctic tzdata-asia \
+-    tzdata-atlantic tzdata-australia tzdata-europe tzdata-pacific"
+-
+-ALLOW_EMPTY_${PN}-dbg = "1"
+-
+-FILES_tzdata-africa += "${datadir}/zoneinfo/Africa/*"
+-RPROVIDES_tzdata-africa = "tzdata-africa"
+-
+-FILES_tzdata-americas += "${datadir}/zoneinfo/America/*  \
+-                ${datadir}/zoneinfo/US/*                \
+-                ${datadir}/zoneinfo/Brazil/*            \
+-                ${datadir}/zoneinfo/Canada/*            \
+-                ${datadir}/zoneinfo/Mexico/*            \
+-                ${datadir}/zoneinfo/Chile/*"
+-RPROVIDES_tzdata-americas = "tzdata-americas"
+-
+-FILES_tzdata-antarctica += "${datadir}/zoneinfo/Antarctica/*"
+-RPROVIDES_tzdata-antarctica = "tzdata-antarctica"
+-
+-FILES_tzdata-arctic += "${datadir}/zoneinfo/Arctic/*"
+-RPROVIDES_tzdata-arctic = "tzdata-arctic"
+-
+-FILES_tzdata-asia += "${datadir}/zoneinfo/Asia/*        \
+-                ${datadir}/zoneinfo/Indian/*            \
+-                ${datadir}/zoneinfo/Mideast/*"
+-RPROVIDES_tzdata-asia = "tzdata-asia"
+-
+-FILES_tzdata-atlantic += "${datadir}/zoneinfo/Atlantic/*"
+-RPROVIDES_tzdata-atlantic = "tzdata-atlantic"
+-
+-FILES_tzdata-australia += "${datadir}/zoneinfo/Australia/*"
+-RPROVIDES_tzdata-australia = "tzdata-australia"
+-
+-FILES_tzdata-europe += "${datadir}/zoneinfo/Europe/*"
+-RPROVIDES_tzdata-europe = "tzdata-europe"
+-
+-FILES_tzdata-pacific += "${datadir}/zoneinfo/Pacific/*"
+-RPROVIDES_tzdata-pacific = "tzdata-pacific"
+-
+-FILES_tzdata-posix += "${datadir}/zoneinfo/posix/*"
+-RPROVIDES_tzdata-posix = "tzdata-posix"
+-
+-FILES_tzdata-right += "${datadir}/zoneinfo/right/*"
+-RPROVIDES_tzdata-right = "tzdata-right"
+-
+-
+-FILES_tzdata-misc += "${datadir}/zoneinfo/Cuba           \
+-                ${datadir}/zoneinfo/Egypt                \
+-                ${datadir}/zoneinfo/Eire                 \
+-                ${datadir}/zoneinfo/Factory              \
+-                ${datadir}/zoneinfo/GB-Eire              \
+-                ${datadir}/zoneinfo/Hongkong             \
+-                ${datadir}/zoneinfo/Iceland              \
+-                ${datadir}/zoneinfo/Iran                 \
+-                ${datadir}/zoneinfo/Israel               \
+-                ${datadir}/zoneinfo/Jamaica              \
+-                ${datadir}/zoneinfo/Japan                \
+-                ${datadir}/zoneinfo/Kwajalein            \
+-                ${datadir}/zoneinfo/Libya                \
+-                ${datadir}/zoneinfo/Navajo               \
+-                ${datadir}/zoneinfo/Poland               \
+-                ${datadir}/zoneinfo/Portugal             \
+-                ${datadir}/zoneinfo/Singapore            \
+-                ${datadir}/zoneinfo/Turkey"
+-RPROVIDES_tzdata-misc = "tzdata-misc"
+-
+-
+-FILES_${PN} += "${datadir}/zoneinfo/Pacific/Honolulu     \
+-                ${datadir}/zoneinfo/America/Anchorage    \
+-                ${datadir}/zoneinfo/America/Los_Angeles  \
+-                ${datadir}/zoneinfo/America/Denver       \
+-                ${datadir}/zoneinfo/America/Chicago      \
+-                ${datadir}/zoneinfo/America/New_York     \
+-                ${datadir}/zoneinfo/America/Caracas      \
+-                ${datadir}/zoneinfo/America/Sao_Paulo    \
+-                ${datadir}/zoneinfo/Europe/London        \
+-                ${datadir}/zoneinfo/Europe/Paris         \
+-                ${datadir}/zoneinfo/Africa/Cairo         \
+-                ${datadir}/zoneinfo/Europe/Moscow        \
+-                ${datadir}/zoneinfo/Asia/Dubai           \
+-                ${datadir}/zoneinfo/Asia/Karachi         \
+-                ${datadir}/zoneinfo/Asia/Dhaka           \
+-                ${datadir}/zoneinfo/Asia/Bankok          \
+-                ${datadir}/zoneinfo/Asia/Hong_Kong       \
+-                ${datadir}/zoneinfo/Asia/Tokyo           \
+-                ${datadir}/zoneinfo/Australia/Perth      \
+-                ${datadir}/zoneinfo/Australia/Darwin     \
+-                ${datadir}/zoneinfo/Australia/Adelaide   \
+-                ${datadir}/zoneinfo/Australia/Brisbane   \
+-                ${datadir}/zoneinfo/Australia/Sydney     \
+-                ${datadir}/zoneinfo/Pacific/Noumea       \
+-                ${datadir}/zoneinfo/CET                  \
+-                ${datadir}/zoneinfo/CST6CDT              \
+-                ${datadir}/zoneinfo/EET                  \
+-                ${datadir}/zoneinfo/EST                  \
+-                ${datadir}/zoneinfo/EST5EDT              \
+-                ${datadir}/zoneinfo/GB                   \
+-                ${datadir}/zoneinfo/GMT                  \
+-                ${datadir}/zoneinfo/GMT+0                \
+-                ${datadir}/zoneinfo/GMT-0                \
+-                ${datadir}/zoneinfo/GMT0                 \
+-                ${datadir}/zoneinfo/Greenwich            \
+-                ${datadir}/zoneinfo/HST                  \
+-                ${datadir}/zoneinfo/MET                  \
+-                ${datadir}/zoneinfo/MST                  \
+-                ${datadir}/zoneinfo/MST7MDT              \
+-                ${datadir}/zoneinfo/NZ                   \
+-                ${datadir}/zoneinfo/NZ-CHAT              \
+-                ${datadir}/zoneinfo/PRC                  \
+-                ${datadir}/zoneinfo/PST8PDT              \
+-                ${datadir}/zoneinfo/ROC                  \
+-                ${datadir}/zoneinfo/ROK                  \
+-                ${datadir}/zoneinfo/UCT                  \
+-                ${datadir}/zoneinfo/UTC                  \
+-                ${datadir}/zoneinfo/Universal            \
+-                ${datadir}/zoneinfo/W-SU                 \
+-                ${datadir}/zoneinfo/WET                  \
+-                ${datadir}/zoneinfo/Zulu                 \
+-                ${datadir}/zoneinfo/Etc/*                \
+-                ${datadir}/zoneinfo/iso3166.tab          \
+-                ${datadir}/zoneinfo/zone.tab             \
+-                ${sysconfdir}/localtime                  \
+-                ${sysconfdir}/timezone                   "
+diff --git a/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb b/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
+deleted file mode 100644
+index 6863b5a..0000000
+--- a/meta-oe/recipes-extended/tzdata/tzdata_2011g.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require tzdata.inc
+-
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://asia;beginline=2;endline=3;md5=06468c0e84ef4d4c97045a4a29b08234"
+-
+-# Note that elsie.nci.nih.gov removes old archives after a new one is
+-# released. So if this doesn't build for you because of missing source file
+-# just bump it to the latest available version, removing the old one
+-
+-PR = "${INC_PR}.0"
+-SRC_URI[md5sum] = "a068c27e7e426fdb12ab0c88506df20d"
+-SRC_URI[sha256sum] = "01a2a189eeda63baacc5e68e6c13afffc7edce182102fffc53acbf35e8703d3c"
+-- 
+1.7.3.4
 
 
 
