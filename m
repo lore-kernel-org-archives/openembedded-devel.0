@@ -1,29 +1,16 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>)
-	id 1RtGNi-0004F8-9W; Fri, 03 Feb 2012 11:28:38 +0100
-Received: from eb-e6520 (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 820BA4B0188;
-	Fri,  3 Feb 2012 11:20:38 +0100 (CET)
-Date: Fri, 3 Feb 2012 11:20:37 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	(envelope-from <sledz@localhost.localdomain>) id 1RtHAa-0005f2-Ld
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Feb 2012 12:19:08 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 86AF6443CE0; Fri,  3 Feb 2012 12:11:11 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120203112037.314f9004@eb-e6520>
-In-Reply-To: <20120203094104.GE3893@jama.jama.net>
-References: <1324624336-18713-1-git-send-email-eric@eukrea.com>
-	<20120104051849.GG31275@sakrah.homelinux.org>
-	<20120104090523.066ae2d7@eb-e6520>
-	<CA+chaQe-XFR6XVAoept8+d8kqoZ1y2qBoVXgetEPpD2n50nYBA@mail.gmail.com>
-	<20120202084000.GD3697@jama.jama.net>
-	<20120202091726.GG3697@jama.jama.net>
-	<20120202111127.0b9d886a@eb-e6520>
-	<20120203072808.GB3893@jama.jama.net>
-	<20120203094104.GE3893@jama.jama.net>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: SDK confusion Was: [meta-oe] gdb-cross-canadian: build gdb with python support
+Date: Fri,  3 Feb 2012 12:11:09 +0100
+Message-Id: <1328267469-29276-1-git-send-email-sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [PATCH] bluez4: fix checksums for bluez-4.95.tar.gz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,40 +24,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2012 10:28:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 03 Feb 2012 11:19:08 -0000
 
-Hi Martin,
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+---
+ recipes/bluez/bluez4_4.95.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Le Fri, 3 Feb 2012 10:41:05 +0100,
-Martin Jansa <martin.jansa@gmail.com> a =E9crit :
-> in x86_64-oesdk-linux there are only gcc+binutils crosssdk
-> binutils-crosssdk-2.22-r2  gcc-crosssdk-4.6.2+svnr181430-r22  gcc-crosssd=
-k-initial-4.6.2+svnr181430-r22  gcc-crosssdk-intermediate-4.6.2+svnr181430-=
-r22
-> the rest is in=20
-> x86_64-nativesdk-oesdk-linux
->=20
-> gdb-cross-canadian-arm is only package were exec_prefix points to oecore-=
-x86_64-arm
-> ./gdb-cross-canadian-arm-7.3.1-r5.1/temp/run.do_configure.1688
-> export exec_prefix=3D"/usr/local/oecore-x86_64-arm/sysroots/x86_64-oesdk-=
-linux/usr"
->=20
-> while all nativesdk packages are using oecore-x86_64-x86_64
-> ./python-nativesdk-2.7.2-r0.5/temp/run.do_configure.14043
-> export exec_prefix=3D"/usr/local/oecore-x86_64-x86_64/sysroots/x86_64-oes=
-dk-linux/usr"
->=20
-here is the big difference when using Angstrom :
-python-nativesdk-2.7.2-r0.5/temp/run.do_configure.30951:73:export
-exec_prefix=3D"/usr/local/angstrom-eglibc-x86_64-armv7a/sysroots/x86_64-ang=
-stromsdk-linux/usr"
-I don't yet know where this difference comes from.
+diff --git a/recipes/bluez/bluez4_4.95.bb b/recipes/bluez/bluez4_4.95.bb
+index 290dff6..23275e4 100644
+--- a/recipes/bluez/bluez4_4.95.bb
++++ b/recipes/bluez/bluez4_4.95.bb
+@@ -4,8 +4,8 @@ SRC_URI = "\
+   ${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-${PV}.tar.gz \
+   file://bluetooth.conf \
+ "
+-SRC_URI[md5sum] = "341294b2849a04a4afff5c96bfbf30b2"
+-SRC_URI[sha256sum] = "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0ce6bebd27fa4120f6"
++SRC_URI[md5sum] = "3e6e77ae06aad73bbedbabed3f0d508e"
++SRC_URI[sha256sum] = "795dc8eb45e07c7848c58e2f2d730a404179ecce3dd1cd7b822cdec5ea7b69c8"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_angstrom = "1"
+-- 
+1.7.7
 
-Eric
---=20
-http://eukrea.com/en/news/104-2012
 
 
