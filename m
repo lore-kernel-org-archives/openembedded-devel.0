@@ -1,37 +1,44 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RtVNc-00010g-LG
+	(envelope-from <raj.khem@gmail.com>) id 1RtVRQ-0001A8-9i
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 03:29:32 +0100
-Received: by pbbb4 with SMTP id b4so3016536pbb.6
+	Sat, 04 Feb 2012 03:33:28 +0100
+Received: by daln34 with SMTP id n34so658930dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2012 18:21:34 -0800 (PST)
+	Fri, 03 Feb 2012 18:25:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=g2miOBrwzzDeSE7cEMYNWWM59zr3xkH3UGPGki0KMyU=;
-	b=PazpgqjV5Dm0we7xDcNZCNeYJrXufeC4GuJlgsXyIIeEOoWfQxtMcnMHGz+qwa5zJ1
-	kgLFnY/c1F/hsOCoQUpN+7w4olsHWzTOi7nQCxHN/CkpV/xzJsOTD9FQxevUMAcg2Ene
-	JDV7f6p2RGRbZDwEmlldWlTp9kF9QMfh32ZIQ=
-Received: by 10.68.193.167 with SMTP id hp7mr22846349pbc.3.1328322093998;
-	Fri, 03 Feb 2012 18:21:33 -0800 (PST)
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=I3fenQAeMMmzXzHFpWeB7jCrXZsLvQJDeaD/NpYwFIU=;
+	b=Qior4kFb9XQn+U0Td12BvdlTfCLXm2BcOIuzEc1+dV3/hUDZTlGgkOrgKe/WRvyGdV
+	/AQzVcsXqBZ6I252m7XJG8a4z3CgVOinb426cASUeOXJjsYy0C9u5N6jW7E7jfx+K7n5
+	m2p7SCypBGsPcSB0QX1VCiTxuOc3FBaKlsc3k=
+Received: by 10.68.232.202 with SMTP id tq10mr22907177pbc.68.1328322329048;
+	Fri, 03 Feb 2012 18:25:29 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id a5sm17311120pbh.15.2012.02.03.18.21.32
+	by mx.google.com with ESMTPS id d1sm354576pbg.13.2012.02.03.18.25.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 03 Feb 2012 18:21:32 -0800 (PST)
-Date: Fri, 3 Feb 2012 18:21:29 -0800
+	Fri, 03 Feb 2012 18:25:27 -0800 (PST)
+Date: Fri, 3 Feb 2012 18:25:23 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120204022129.GC26306@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	nitin.a.kamble@intel.com
-References: <4F2C6842.1040907@promwad.com>
+Message-ID: <20120204022523.GE26306@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20120201080441.DA76610333@opal>
+	<20120203131451.GJ3893@jama.jama.net>
+	<CAP9ODKqdXtrAqUY=1XHE4QDpRPyNbOV5ZswKihCWbSWU9+L05w@mail.gmail.com>
+	<20120203154742.GM3893@jama.jama.net>
+	<CAP9ODKoaqi96Bzktk=TC0dXmz6YV1v-1vAAgaqc+qE02Rpd81Q@mail.gmail.com>
+	<CAAQYJAvfYLRcYw7fKVogjkwuST-b4oYMCH4_VZG6P8Xy5QgjgQ@mail.gmail.com>
+	<jghu9u$dqo$2@dough.gmane.org>
+	<CALbNGRQ+qOr43Nkr5ja6E8V_VVD-e2ZTaFCd1Lga=CYaRVFt-w@mail.gmail.com>
+	<CAPOJ94NwJJYeTm5w-W84u2VL3=Qk0O6X864z5irbR-XGA0fvOg@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4F2C6842.1040907@promwad.com>
+In-Reply-To: <CAPOJ94NwJJYeTm5w-W84u2VL3=Qk0O6X864z5irbR-XGA0fvOg@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: nitin.a.kamble@intel.com
-Subject: Re: Java: meta-java, meta-oracle-java
+Subject: Re: [oe-commits] Otavio Salvador : systemd.bbclass: depends on systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 02:29:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 04 Feb 2012 02:33:28 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On (04/02/12 02:05), Ivan Kuten wrote:
-> Hello,
+On (03/02/12 20:15), Peter Bigot wrote:
+> On Fri, Feb 3, 2012 at 8:00 PM, Andreas Müller
+> <schnitzeltony@googlemail.com> wrote:
+> >>> Which recipes really depend on systemd during build? I know about
+> >>> polkit, something else?
+> >
+> > udisks [1]
 > 
-> I noticed an activity around meta-java layer (OpenJDK based)
-> https://github.com/woglinde/meta-java
-> and recently around Oracle JRE: http://git.yoctoproject.org/cgit/cgit.cgi/meta-oracle-java/
-> 
-> Any plans to combine or coordinate these efforts?
+> Yeah, but that might be a consequence of udisks depending on polkit.
+> It was a libsystemd-login reference in a polkit .la file dependency
+> that made me install that patch so I could get udisks to build.
 
-these are two different layers so they will exist. What coordination
-would you like to see that will help you
 
-> Because now we are working on Java PowerPC e500v2 support and finally would like to upstream
-> to mainline our work.
-> 
-> Best regards,
-> Ivan Kuten, head of R&D at Promwad
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
--Khem
+polkit should also become a distro feature FWIW
 
 
