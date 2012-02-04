@@ -1,32 +1,31 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1RtkXl-0008Hb-PB
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rtkqw-0000sW-9q
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 19:41:02 +0100
-Received: by eekd41 with SMTP id d41so1371120eek.6
+	Sat, 04 Feb 2012 20:00:50 +0100
+Received: by lbol12 with SMTP id l12so755731lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Feb 2012 10:33:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=BEW8iSa5rvb5oxAg0XIoIw0g3OL8l5lqArzzi8Dy7Os=;
-	b=NpCEUUOiXR1rDra/1b/B77xvEFeDD/CtmaOCtfjk7SI0reAy5FsI0lkzfAAByeMgIN
-	jXhmULU0TrpmgH7SSKhk5DpAmEm+W7ZSe3wUUvqI4C6CAifPSQnzvdl9w1vaJvs7xK+K
-	x5tWQv0+kdCTbgD8QyYh8hIlQLO8eG21wohj8=
-Received: by 10.14.126.10 with SMTP id a10mr3255852eei.42.1328380382747;
-	Sat, 04 Feb 2012 10:33:02 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id z47sm30330292eeh.9.2012.02.04.10.33.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 04 Feb 2012 10:33:02 -0800 (PST)
-From: Peter Tworek <tworaz666@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Feb 2012 19:30:49 +0100
-Message-Id: <1328380249-11697-4-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
+	Sat, 04 Feb 2012 10:52:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=I6o/YmrKXb/wro8Sc3bbVZJ5Nn++sSQAhy3b/ev7/tg=;
+	b=tekkgSsFTKsXD8jQEVB7Czl4DrPhZnO/UEwUpGkbw6CvAibmXdA/B22BPYFdAOyfB1
+	kSshroPHnlJu084C+RRfN6B9JnwHDeRCZ6dDG1U2hZ5f6zkYcdGLpf9Wb0uqLE4WBkfo
+	E91t8XHSqpepAQT6e5L5VYnYRTkTWMsDP8kQU=
+MIME-Version: 1.0
+Received: by 10.112.27.165 with SMTP id u5mr3039518lbg.48.1328381571443; Sat,
+	04 Feb 2012 10:52:51 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Sat, 4 Feb 2012 10:52:51 -0800 (PST)
+In-Reply-To: <1328380249-11697-2-git-send-email-tworaz666@gmail.com>
 References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
-Subject: [meta-xfce][PATCH 3/3] xfce4-panel: Disable building of static libraries.
+	<1328380249-11697-2-git-send-email-tworaz666@gmail.com>
+Date: Sat, 4 Feb 2012 19:52:51 +0100
+Message-ID: <CALbNGRSDEbmPKJi1CDNk1ifoLdG2x9C6q6d6pzo=X-NCFtMagQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][PATCH 1/3] xfconf: Update to latest stable version 4.8.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,64 +39,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 18:41:02 -0000
+X-List-Received-Date: Sat, 04 Feb 2012 19:00:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Current recipe triggers several QA warnings about non -staticdev packages
-containing .a files. The offending files are static versions of panel
-plugins. They have no actual use. They're just a byproduct. Xfce4-panel
-contains only one more library libxfce4-panel. Similary to panel plugins
-it's static version is rather useless.
+On Sat, Feb 4, 2012 at 7:30 PM, Peter Tworek <tworaz666@gmail.com> wrote:
+> http://git.xfce.org/xfce/xfconf/tag/?id=3Dxfconf-4.8.1
+>
+> Run tested on netbook pro.
+>
+> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+> ---
+> =A0meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb | =A0 15 ---------------
+> =A0meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb | =A0 13 +++++++++++++
+> =A02 files changed, 13 insertions(+), 15 deletions(-)
+> =A0delete mode 100644 meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb
+> =A0create mode 100644 meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb
+>
+> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb b/meta-xfce/re=
+cipes-xfce/xfconf/xfconf_4.8.0.bb
+> deleted file mode 100644
+> index 65efffd..0000000
+> --- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -DESCRIPTION =3D "Xfce configuration daemon and utilities"
+> -SECTION =3D "x11/wm"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+> -DEPENDS =3D "dbus-glib libxfce4util perl-native"
+> -
+> -PR =3D "r0"
+> -
+> -inherit xfce
+> -
+> -FILES_${PN} +=3D "${libdir}/xfce4/xfconf/xfconfd \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${datadir}/dbus-1/services/org.xfce.Xfco=
+nf.service"
+> -
+> -SRC_URI[md5sum] =3D "0f11ed1ec7789c5c4c3fcc7cdb3c2940"
+> -SRC_URI[sha256sum] =3D "e071d55982238f997a691ff4bb08ef39e4c86bae31cf69b6=
+666bc0cdadd1b85d"
+> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb b/meta-xfce/re=
+cipes-xfce/xfconf/xfconf_4.8.1.bb
+> new file mode 100644
+> index 0000000..51df2ee
+> --- /dev/null
+> +++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "Xfce configuration daemon and utilities"
+> +SECTION =3D "x11/wm"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+> +DEPENDS =3D "dbus-glib libxfce4util perl-native"
+> +
+> +inherit xfce
+> +
+> +FILES_${PN} +=3D "${libdir}/xfce4/xfconf/xfconfd \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${datadir}/dbus-1/services/org.xfce.Xfco=
+nf.service"
+> +
+> +SRC_URI[md5sum] =3D "70b4185aa7eed8a85f015f16c5c86d36"
+> +SRC_URI[sha256sum] =3D "9860737539fab2b852e8c07c50c205a5fbe894b08bcb4488=
+a70e3fd6c75993cb"
+> --
+> 1.7.3.4
+>
+Have same here but did not send because of following issue: After
+setting up 1st session (panels / plugins...). and closing session in
+the 2nd session panel is gone. Restarting manual causes annoying error
+messages. How did you test this one?
 
-Disabling building of static libs makes -dev package smaller and fixes
-all QA warnings.
-
-Run tested on netbook pro.
-
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- .../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb  |   13 +++++--------
- 1 files changed, 5 insertions(+), 8 deletions(-)
-
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-index 0cd8eba..937b078 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-@@ -4,15 +4,17 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
- DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit xfce
- 
-+EXTRA_OECONF = "--disable-static"
-+
- python populate_packages_prepend() {
- 	plugin_dir = bb.data.expand('${libdir}/xfce4/panel/plugins/', d)
- 	plugin_name = bb.data.expand('${PN}-plugin-%s', d)
- 	do_split_packages(d, plugin_dir, '^lib(.*).so$', plugin_name,
--	                  '${PN} plugin for %s', extra_depends='', prepend=True,
-+	                  '${PN} %s plugin', extra_depends='', prepend=True,
- 	                  aux_files_pattern=['${datadir}/xfce4/panel/plugins/%s.desktop',
- 	                                     '${sysconfdir}/xdg/xfce/panel/%s-*',
- 	                                     '${datadir}/icons/hicolor/48x48/apps/*-%s.png',
-@@ -23,12 +25,7 @@ PACKAGES_DYNAMIC = "${PN}-plugin-*"
- 
- FILES_${PN} += "${libdir}/xfce4/panel/migrate \
-                 ${libdir}/xfce4/panel/wrapper"
--
--FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
--		   "
--
--FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
--                   "
-+FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug"
- 
- SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
- SRC_URI[sha256sum] = "66f1266a1242ee5ecada995a4a584dd9802aa24456759b40b0c29227c39bed03"
--- 
-1.7.3.4
-
+Andreas
 
 
