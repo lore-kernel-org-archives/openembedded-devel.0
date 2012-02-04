@@ -1,35 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1RtcZc-00053P-Qy
+	(envelope-from <raj.khem@gmail.com>) id 1Rtinp-0003LF-6Q
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 11:10:24 +0100
-Received: by eaal10 with SMTP id l10so1008963eaa.6
+	Sat, 04 Feb 2012 17:49:29 +0100
+Received: by lahc1 with SMTP id c1so2294099lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Feb 2012 02:02:26 -0800 (PST)
+	Sat, 04 Feb 2012 08:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=nZmlewqKc2icr4gItfJFLtfHFtYni14vwsEA3tHN9kA=;
-	b=AzlFTKkXLy1/rudKP+zERHWvYrzzaOiWHsmYdMPAol63kyJO2Eehn/fwF5wuc740mH
-	nfRFZUqz0hlS7eux2KqChHSoF715zrGVXoEPMzryyIyPaG+QAhwVqlxvGcLcMn7DTgsf
-	VqT6aNqo7Dy3fo+K1G6ge9SSTjslA6r3b/Zt8=
-Received: by 10.213.17.137 with SMTP id s9mr253820eba.111.1328349745862;
-	Sat, 04 Feb 2012 02:02:25 -0800 (PST)
-Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
-	by mx.google.com with ESMTPS id
-	a58sm32856751eeb.8.2012.02.04.02.02.24 (version=SSLv3 cipher=OTHER);
-	Sat, 04 Feb 2012 02:02:25 -0800 (PST)
-Message-ID: <4F2D01B6.90806@gmail.com>
-Date: Sat, 04 Feb 2012 11:00:22 +0100
-From: Peter Tworek <tworaz666@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:9.0) Gecko/20120112 Thunderbird/9.0
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=GhfVrSGhOkeUoWw/jBQUmyxK3VZc3XVjS2y1rlD+53Y=;
+	b=fv6Emer1jHq06I8/t8jZP/DIZfCeq2m+aaryM6J0g5n6mVhx3EDSCr3OOcYXiPgL7I
+	R5sz6zy4WWeDMwmpVUvWqhWm13YohQ1fwV8mwW4oFPVnGD01eAbq6Ang9S4Ppeem4CI5
+	ddoeh+XPg3OAKZv13UP/0kJKTQiaWY//HVRNk=
+Received: by 10.152.123.68 with SMTP id ly4mr580039lab.13.1328373690263; Sat,
+	04 Feb 2012 08:41:30 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.152.5.201 with HTTP; Sat, 4 Feb 2012 08:41:00 -0800 (PST)
+In-Reply-To: <4F2D0090.2040300@gmail.com>
+References: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
+	<1328310612-2098-1-git-send-email-tworaz666@gmail.com>
+	<20120204021443.GA26306@sakrah.homelinux.org>
+	<4F2D0090.2040300@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 4 Feb 2012 08:41:00 -0800
+Message-ID: <CAMKF1spV8HwkSNbxC6AvL9OVMtuhF4u=pBS8qKEtdrwd+PZDPg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1328313811-12627-1-git-send-email-tworaz666@gmail.com>
-	<CALbNGRRRH2QCkdpzKyHwdOzd-jPGkV2Fmhff9cD5aVBggoQS7g@mail.gmail.com>
-In-Reply-To: <CALbNGRRRH2QCkdpzKyHwdOzd-jPGkV2Fmhff9cD5aVBggoQS7g@mail.gmail.com>
-Subject: Re: [meta-xfce][PATCH] xfce4-power-manager: Add initial recipe for version 1.0.10.
+Subject: Re: [meta-oe][PATCH v3] tmux: Add initial recipe for version 1.6.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +40,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 10:10:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 04 Feb 2012 16:49:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02/04/2012 03:50 AM, Andreas Müller wrote:
-> On Sat, Feb 4, 2012 at 1:03 AM, Peter Tworek<tworaz666@gmail.com>  wrote:
->> Run tested on netbook pro.
+On Sat, Feb 4, 2012 at 1:55 AM, Peter Tworek <tworaz666@gmail.com> wrote:
+> On 02/04/2012 03:14 AM, Khem Raj wrote:
 >>
->> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
->> ---
->>   .../xfce4-power-manager_1.0.10.bb                  |   28 ++++++++++++++++++++
->>   1 files changed, 28 insertions(+), 0 deletions(-)
->>   create mode 100644 meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb
+>> On (04/02/12 00:10), Peter Tworek wrote:
+>>>
+>>> Run tested on netbook pro.
+>>>
+>>> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
+>>> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>>> ---
+>>> =C2=A0meta-oe/recipes-extended/tmux/tmux_1.6.bb | =C2=A0 18 +++++++++++=
++++++++
+>>> =C2=A01 files changed, 18 insertions(+), 0 deletions(-)
+>>> =C2=A0create mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>>>
+>>> diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>>> b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>>> new file mode 100644
+>>> index 0000000..fa58065
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>>> @@ -0,0 +1,18 @@
+>>> +DESCRIPTION =3D "Terminal multiplexer"
+>>> +HOMEPAGE =3D "http://tmux.sourceforge.net"
+>>> +SECTION =3D "console/utils"
+>>> +
+>>> +LICENSE =3D "ISC"
 >>
->> diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb
->> new file mode 100644
->> index 0000000..4641178
->> --- /dev/null
->> +++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb
->> @@ -0,0 +1,28 @@
->> +DESCRIPTION = "Power manager for the Xfce desktop environment"
->> +HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-power-manager"
->> +SECTION = "x11"
->> +
->> +LICENSE = "GPLv2+"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->> +
->> +inherit xfce
->> +
->> +DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
->> +           libxrandr virtual/libx11 libxext xfce4-panel"
->> +RDEPENDS_${PN} = "networkmanager udisks upower polkit"
->> +
->> +EXTRA_OECONF = " \
->> +    --enable-polkit \
->> +    --enable-network-manager \
-> networkmanager conflicts with conman. I don't if this makes sense to
-> use conman with xfce (am using networkmanager too). What happens if
-> this option is not set?
+>> what is ISC license ? I thought tmux is more like BSD license here is
+>> what I read in NOTES files
+>>
+>> tmux is intended to be a simple, modern, BSD-licensed alternative....
+>
+>
+> Technically ISC is a BSD license [1]. Looking at the actual license text =
+in
+> tmux [2] it seems that it uses exactly this license. OE-core seems to als=
+o
+> distinguish between BSD and ISC (meta/files/common-licenses/ISC), so I
+> decided to use it.
+>
+> [1] http://en.wikipedia.org/wiki/ISC_license
+> [2]
+> http://tmux.svn.sourceforge.net/viewvc/tmux/trunk/tmux.c?revision=3D2697&=
+view=3Dmarkup
 
-Haven't tested it (yet), but I think it should work fine without 
-networkmanager, event when it's enabled. You'll probably see some 
-warnings in you logs, saying that it can't contact it via dbus, but that 
-should be it. Anyway I'll try to verify my theory...
-
->> +    --enable-panel-plugins \
->> +    "
->> +
->> +PACKAGES += "xfce4-brightness-plugin"
->> +FILES_${PN} += "${datadir}/polkit-1"
->> +FILES_xfce4-brightness-plugin = " \
->> +    ${libdir}/xfce4/panel-plugins/xfce4-brightness-plugin \
->> +    ${datadir}/xfce4/panel-plugins/xfce4-brightness-plugin.desktop \
->> +    "
->> +
->> +SRC_URI[md5sum] = "38cbd272eb30e36ae538d9f38858bd38"
->> +SRC_URI[sha256sum] = "80e4bb44f81c485ec09654dde432d6e28667d49a787625632a4413aac30422f0"
->> --
->> 1.7.3.4
->>
->>
-> This was part of my TODO - Thanks. Give it a test next week.
-You're welcome.
-
-/ptw
+thanks looks fine
+>
+> /ptw
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
