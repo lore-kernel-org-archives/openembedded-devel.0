@@ -1,25 +1,31 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pabigot@gmail.com>) id 1RtVI0-0000kx-Gw
+	(envelope-from <raj.khem@gmail.com>) id 1RtVKW-0000sh-Tp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 03:23:44 +0100
-Received: by wgbdt11 with SMTP id dt11so1949930wgb.0
+	Sat, 04 Feb 2012 03:26:23 +0100
+Received: by pbbb4 with SMTP id b4so3015511pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2012 18:15:46 -0800 (PST)
+	Fri, 03 Feb 2012 18:18:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=pZl15/miMVzSX58kobDAMQ1VEnYLxLKeaJLac5iX6eQ=;
-	b=AM4OIEOGL144Cz4425AA0lu5uWkCr/UxXOHkSAzaCoLAht2oWSNNgGCx7n3xKRAOH8
-	hWZWXy6Rh175ke7UURVD9adcMU/e6XvrZbYhN95e57YEJhNqMMQUOVzw1LbID9ofOUsH
-	VCQUePZ/lNJbEDy18swEq/cBZ+6jC8OZ/HSrM=
-MIME-Version: 1.0
-Received: by 10.180.96.161 with SMTP id dt1mr782539wib.13.1328321746731; Fri,
-	03 Feb 2012 18:15:46 -0800 (PST)
-Sender: pabigot@gmail.com
-Received: by 10.216.51.69 with HTTP; Fri, 3 Feb 2012 18:15:46 -0800 (PST)
-In-Reply-To: <CALbNGRQ+qOr43Nkr5ja6E8V_VVD-e2ZTaFCd1Lga=CYaRVFt-w@mail.gmail.com>
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=rL7KB979Tca/hFb1ucEZvhCv+TbFCyn3a9HXRnYQsFQ=;
+	b=qXgyFwQNX7uONxRUGz9lAsBQjzljhyqvHKrhx1pNWjclWn/At7Yz7QN21LeI8Yh6vx
+	Ebupp/vhLREFU3MTW7mXsncHQXyrSz9CiSWr45tzH0bQQx/Vxd88P2MWGp+IImAzEL29
+	ePQbr+cNzBL27HSGe2eGGKFxlkuCGKsHCE6o0=
+Received: by 10.68.73.103 with SMTP id k7mr21953514pbv.132.1328321902268;
+	Fri, 03 Feb 2012 18:18:22 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id w4sm17312729pbf.4.2012.02.03.18.18.20
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 03 Feb 2012 18:18:21 -0800 (PST)
+Date: Fri, 3 Feb 2012 18:18:17 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120204021817.GB26306@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
 References: <20120201080441.DA76610333@opal>
 	<20120203131451.GJ3893@jama.jama.net>
 	<CAP9ODKqdXtrAqUY=1XHE4QDpRPyNbOV5ZswKihCWbSWU9+L05w@mail.gmail.com>
@@ -28,11 +34,9 @@ References: <20120201080441.DA76610333@opal>
 	<CAAQYJAvfYLRcYw7fKVogjkwuST-b4oYMCH4_VZG6P8Xy5QgjgQ@mail.gmail.com>
 	<jghu9u$dqo$2@dough.gmane.org>
 	<CALbNGRQ+qOr43Nkr5ja6E8V_VVD-e2ZTaFCd1Lga=CYaRVFt-w@mail.gmail.com>
-Date: Fri, 3 Feb 2012 20:15:46 -0600
-X-Google-Sender-Auth: 4I5DaQIySzWlQfgRp-u0as-GvMo
-Message-ID: <CAPOJ94NwJJYeTm5w-W84u2VL3=Qk0O6X864z5irbR-XGA0fvOg@mail.gmail.com>
-From: Peter Bigot <bigotp@acm.org>
-To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQ+qOr43Nkr5ja6E8V_VVD-e2ZTaFCd1Lga=CYaRVFt-w@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [oe-commits] Otavio Salvador : systemd.bbclass: depends on systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,30 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 02:23:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 04 Feb 2012 02:26:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Fri, Feb 3, 2012 at 8:00 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
->>> Which recipes really depend on systemd during build? I know about
->>> polkit, something else?
->
-> udisks [1]
+On (04/02/12 03:00), Andreas Müller wrote:
+> >> Which recipes really depend on systemd during build? I know about
+> >> polkit, something else?
 
-Yeah, but that might be a consequence of udisks depending on polkit.
-It was a libsystemd-login reference in a polkit .la file dependency
-that made me install that patch so I could get udisks to build.
-
->
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-January/=
-037230.html
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+why not make it a globally selectable ?
+so we can make sure that autoconf does not try to guess
+but we tell it if systemd features should {en|dis}abled
+explicitly and something like virtual/init-manager or something
+since I think it has to coexist with sysvinit or upstart
+whatever one chooses.
 
 
