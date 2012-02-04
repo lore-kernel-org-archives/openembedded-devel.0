@@ -1,41 +1,36 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rtadb-0002rP-A6
+	(envelope-from <tworaz666@gmail.com>) id 1RtcUs-0004ui-3A
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 09:06:24 +0100
-Received: by eaal10 with SMTP id l10so989760eaa.6
+	Sat, 04 Feb 2012 11:05:30 +0100
+Received: by eekd41 with SMTP id d41so1238300eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2012 23:58:25 -0800 (PST)
+	Sat, 04 Feb 2012 01:57:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=V/GBhn9bcSgQp2wX2iy/Ix8NclIBd29XKxrcOyev5Fk=;
-	b=tiBmeGySKy6TwSjQi0B6ZSm0VDeRCMAUJLP6ADJdA8472m+Olsceb3beNxQN0+kvF+
-	jv8ODduK8avODLm0RV3/Oa8uZ9YnRAwJA3PUBneVD8zwGMbSK+jmJfcYRVw9RFZMpZpW
-	zBa2fC2vflFJ3g78dNW5Tw/tmoHlem1N6sWS8=
-Received: by 10.213.98.78 with SMTP id p14mr194795ebn.145.1328342304368;
-	Fri, 03 Feb 2012 23:58:24 -0800 (PST)
-Received: from localhost ([94.230.150.14])
-	by mx.google.com with ESMTPS id z47sm24075733eeh.9.2012.02.03.23.58.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 03 Feb 2012 23:58:23 -0800 (PST)
-Date: Sat, 4 Feb 2012 08:58:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120204075822.GA4718@jama.jama.net>
-References: <20120201080441.DA76610333@opal>
-	<20120203131451.GJ3893@jama.jama.net>
-	<CAP9ODKqdXtrAqUY=1XHE4QDpRPyNbOV5ZswKihCWbSWU9+L05w@mail.gmail.com>
-	<20120203154742.GM3893@jama.jama.net>
-	<CAP9ODKoaqi96Bzktk=TC0dXmz6YV1v-1vAAgaqc+qE02Rpd81Q@mail.gmail.com>
-	<CAAQYJAvfYLRcYw7fKVogjkwuST-b4oYMCH4_VZG6P8Xy5QgjgQ@mail.gmail.com>
-	<jghu9u$dqo$2@dough.gmane.org>
-	<CALbNGRQ+qOr43Nkr5ja6E8V_VVD-e2ZTaFCd1Lga=CYaRVFt-w@mail.gmail.com>
-	<CAPOJ94NwJJYeTm5w-W84u2VL3=Qk0O6X864z5irbR-XGA0fvOg@mail.gmail.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=Vz003phxghPCQqSPES3I1fy2R1dxaC7uTWab45heqv4=;
+	b=KqAJIhxNWfjMMzTVOq+Sko4aZVuAHfnulex2BsWJ0C10u8WVRSR1ZQYCzpLp0klxwy
+	Exm3bb2T1n8SShlIUtF6R8ESZV5GQbUMmnU3MmzB9OUWQEAS1OervkTAbLdd/0VMUHJ2
+	uO/ZRIoAIq3yFZA/Q1t5hAelhhXKE3HEVmy7E=
+Received: by 10.14.127.5 with SMTP id c5mr3453996eei.17.1328349451085;
+	Sat, 04 Feb 2012 01:57:31 -0800 (PST)
+Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
+	by mx.google.com with ESMTPS id
+	e12sm32841949eea.5.2012.02.04.01.57.30 (version=SSLv3 cipher=OTHER);
+	Sat, 04 Feb 2012 01:57:30 -0800 (PST)
+Message-ID: <4F2D0090.2040300@gmail.com>
+Date: Sat, 04 Feb 2012 10:55:28 +0100
+From: Peter Tworek <tworaz666@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20120112 Thunderbird/9.0
 MIME-Version: 1.0
-In-Reply-To: <CAPOJ94NwJJYeTm5w-W84u2VL3=Qk0O6X864z5irbR-XGA0fvOg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Otavio Salvador : systemd.bbclass: depends on systemd
+To: openembedded-devel@lists.openembedded.org
+References: <1328132338-15939-1-git-send-email-tworaz666@gmail.com>
+	<1328310612-2098-1-git-send-email-tworaz666@gmail.com>
+	<20120204021443.GA26306@sakrah.homelinux.org>
+In-Reply-To: <20120204021443.GA26306@sakrah.homelinux.org>
+Subject: Re: [meta-oe][PATCH v3] tmux: Add initial recipe for version 1.6.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,66 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 08:06:24 -0000
-X-Groupsio-MsgNum: 36891
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7AUc2qLy4jB3hD7Z"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 04 Feb 2012 10:05:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---7AUc2qLy4jB3hD7Z
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 02/04/2012 03:14 AM, Khem Raj wrote:
+> On (04/02/12 00:10), Peter Tworek wrote:
+>> Run tested on netbook pro.
+>>
+>> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
+>> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>> ---
+>>   meta-oe/recipes-extended/tmux/tmux_1.6.bb |   18 ++++++++++++++++++
+>>   1 files changed, 18 insertions(+), 0 deletions(-)
+>>   create mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>>
+>> diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>> new file mode 100644
+>> index 0000000..fa58065
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+>> @@ -0,0 +1,18 @@
+>> +DESCRIPTION = "Terminal multiplexer"
+>> +HOMEPAGE = "http://tmux.sourceforge.net"
+>> +SECTION = "console/utils"
+>> +
+>> +LICENSE = "ISC"
+> what is ISC license ? I thought tmux is more like BSD license here is
+> what I read in NOTES files
+>
+> tmux is intended to be a simple, modern, BSD-licensed alternative....
 
-On Fri, Feb 03, 2012 at 08:15:46PM -0600, Peter Bigot wrote:
-> On Fri, Feb 3, 2012 at 8:00 PM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> >>> Which recipes really depend on systemd during build? I know about
-> >>> polkit, something else?
-> >
-> > udisks [1]
->=20
-> Yeah, but that might be a consequence of udisks depending on polkit.
-> It was a libsystemd-login reference in a polkit .la file dependency
-> that made me install that patch so I could get udisks to build.
+Technically ISC is a BSD license [1]. Looking at the actual license text 
+in tmux [2] it seems that it uses exactly this license. OE-core seems to 
+also distinguish between BSD and ISC (meta/files/common-licenses/ISC), 
+so I decided to use it.
 
-OK, so I have 21 recipes which inherit systemd and 2 need build-time
-systemd dependency and the rest is fine with RDEPENDS, can we please=20
-move systemd from inherited DEPENDS to those 2 recipe (polkit and
-udisks)?
+[1] http://en.wikipedia.org/wiki/ISC_license
+[2] 
+http://tmux.svn.sourceforge.net/viewvc/tmux/trunk/tmux.c?revision=2697&view=markup
 
-Cheers,
+/ptw
 
->=20
-> >
-> > [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-Januar=
-y/037230.html
-> >
-> > Andreas
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---7AUc2qLy4jB3hD7Z
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8s5R4ACgkQN1Ujt2V2gBwKawCfW+7qD9t/rER/de+UatNWGbvH
-eFQAoJpO3+qjg4Ba+9SWsXPDQZUfg7af
-=z150
------END PGP SIGNATURE-----
-
---7AUc2qLy4jB3hD7Z--
