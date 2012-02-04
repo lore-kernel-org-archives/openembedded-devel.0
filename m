@@ -1,16 +1,16 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RtoDO-0004uO-69
+	(envelope-from <andrea.adami@gmail.com>) id 1RtoXr-0005Ci-4j
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 23:36:14 +0100
-Received: from mizar.localdomain (87.14.255.111) by smtp206.alice.it
-	(8.6.023.02) id 4F1836AD021175E2; Sat, 4 Feb 2012 23:28:15 +0100
+	Sat, 04 Feb 2012 23:57:23 +0100
+Received: from mizar.localdomain (87.14.255.111) by smtp209.alice.it
+	(8.6.023.02) id 4EF08A6304A9DBA7; Sat, 4 Feb 2012 23:49:24 +0100
 From: Andrea Adami <andrea.adami@gmail.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat,  4 Feb 2012 23:28:14 +0100
-Message-Id: <1328394494-6445-1-git-send-email-andrea.adami@gmail.com>
+Date: Sat,  4 Feb 2012 23:49:21 +0100
+Message-Id: <1328395761-19018-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] zaurus.inc: remove module_autoload remnants, now built in kernel
+Subject: [meta-handheld][PATCH] zaurus.inc: remove remnant of kernel26 from MACHINE_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,46 +24,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 22:36:14 -0000
+X-List-Received-Date: Sat, 04 Feb 2012 22:57:23 -0000
+
+* and do some minor cleanings, removing unneeded var for kernel type
+* remove outdated comments about tosa suspend as well
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/include/zaurus.inc |   24 +-----------------------
- 1 files changed, 1 insertions(+), 23 deletions(-)
+ conf/machine/include/zaurus.inc |    8 ++------
+ 1 files changed, 2 insertions(+), 6 deletions(-)
 
 diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index bd0d6f4..099bb3e 100644
+index 099bb3e..a43db8b 100644
 --- a/conf/machine/include/zaurus.inc
 +++ b/conf/machine/include/zaurus.inc
-@@ -82,27 +82,5 @@ MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
- # Install /boot/boot.cfg in target images
- MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS_append = " kexecboot-cfg "
+@@ -35,8 +35,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux"
  
--# Install kernel and symlink in /boot, add kernel-modules metapackage
-+# Install kernel and symlink in /boot
- MACHINE_ESSENTIAL_EXTRA_RDEPENDS_append = " kernel-base kernel-image "
+ # Default bootloader expects "zImage", use "uImage" for u-boot
+ # Note: kexecboot can boot both kind of images
+-ZAURUS_KERNEL_IMAGETYPE ?= "zImage"
+-KERNEL_IMAGETYPE = "${ZAURUS_KERNEL_IMAGETYPE}"
++KERNEL_IMAGETYPE ?= "zImage"
+ 
+ # sane defaults for devices with only 32Mb RAM (see man xz)
+ XZ_COMPRESSION_LEVEL = "-e -7"
+@@ -60,7 +59,7 @@ CMDLINE_poodle = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
+ CMDLINE_spitz = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
+ CMDLINE_tosa = "console=ttyS0,115200n8 console=tty1"
+ 
+-MACHINE_FEATURES = "kernel26 apm alsa pcmcia irda usbgadget keyboard touchscreen screen vfat ext2"
++MACHINE_FEATURES = "apm alsa pcmcia irda usbgadget keyboard touchscreen screen vfat ext2"
+ MACHINE_FEATURES_append_akita = " usbhost"
+ MACHINE_FEATURES_append_spitz = " usbhost"
+ MACHINE_FEATURES_append_tosa  = " usbhost wifi "
+@@ -68,9 +67,6 @@ MACHINE_FEATURES_append_tosa  = " usbhost wifi "
+ MACHINE_EXTRA_RDEPENDS = "zaurusd mtd-utils nandlogical"
+ MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
+ 
+-# Still actual? OHCI suspend/resume fixup
+-# MACHINE_EXTRA_RRECOMMENDS_tosa = "apm-tosa-suspendfix"
 -
--# FIXME
--# blindly import from linux-rp.inc (2.6.2x)
--#
--module_autoload_pxaficp_ir = "pxaficp_ir"
--module_autoload_snd-pcm-oss = "snd-pcm-oss"
--module_autoload_pcmcia_core = "pcmcia_core"
--module_autoload_pxa2xx_cs = "pxa2xx_cs"
--module_autoload_ohci-hcd_tosa = "ohci-hcd"
--module_autoload_snd-soc-corgi_c7x0 = "snd-soc-corgi"
--module_autoload_snd-soc-spitz_akita = "snd-soc-spitz"
--module_autoload_snd-soc-spitz_spitz = "snd-soc-spitz"
--module_autoload_snd-soc-poodle_poodle = "snd-soc-poodle"
--module_autoload_locomo-spi_collie = "locomo-spi"
--module_autoload_mmc_block_collie = "mmc_block"
--module_autoload_mmc_spi = "mmc-spi"
--module_autoload_locomokbd_collie = "locomokbd"
--module_autoload_sa1100-cs_collie = "sa1100_cs"
--module_autoload_collie-ts_collie = "collie-ts"
--module_autoload_leds-locomo_collie = "leds-locomo"
--module_autoload_power_collie = "power"
--# Fixme ? module-snd for tosa
+ ##################################
+ # Zaurus rootfs are booted by
+ # linux-kexecboot
 -- 
 1.7.3.4
 
