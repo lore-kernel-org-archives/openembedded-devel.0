@@ -1,16 +1,23 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from sanddollar.geekisp.com ([216.168.135.167])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RtoXr-0005Ci-4j
+	(envelope-from <philip@balister.org>) id 1Ru0cX-0006tH-9d
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Feb 2012 23:57:23 +0100
-Received: from mizar.localdomain (87.14.255.111) by smtp209.alice.it
-	(8.6.023.02) id 4EF08A6304A9DBA7; Sat, 4 Feb 2012 23:49:24 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat,  4 Feb 2012 23:49:21 +0100
-Message-Id: <1328395761-19018-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] zaurus.inc: remove remnant of kernel26 from MACHINE_FEATURES
+	Sun, 05 Feb 2012 12:51:01 +0100
+Received: (qmail 12651 invoked by uid 1003); 5 Feb 2012 11:43:00 -0000
+Received: from unknown (HELO ?193.191.41.122?)
+	(philip@opensdr.com@193.191.41.122)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	5 Feb 2012 11:43:00 -0000
+Message-ID: <4F2E6B42.8080702@balister.org>
+Date: Sun, 05 Feb 2012 12:42:58 +0100
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-members@lists.openembedded.org
+X-Enigmail-Version: 1.1.2
+Subject: OpenEmbedded Stand at FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,51 +31,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2012 22:57:23 -0000
+X-List-Received-Date: Sun, 05 Feb 2012 11:51:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* and do some minor cleanings, removing unneeded var for kernel type
-* remove outdated comments about tosa suspend as well
+Greetings from FOSDEM. The network is working really well this year!
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- conf/machine/include/zaurus.inc |    8 ++------
- 1 files changed, 2 insertions(+), 6 deletions(-)
+http://www.flickr.com/photos/32615155@N00/6822271361/in/photostream
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 099bb3e..a43db8b 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -35,8 +35,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux"
- 
- # Default bootloader expects "zImage", use "uImage" for u-boot
- # Note: kexecboot can boot both kind of images
--ZAURUS_KERNEL_IMAGETYPE ?= "zImage"
--KERNEL_IMAGETYPE = "${ZAURUS_KERNEL_IMAGETYPE}"
-+KERNEL_IMAGETYPE ?= "zImage"
- 
- # sane defaults for devices with only 32Mb RAM (see man xz)
- XZ_COMPRESSION_LEVEL = "-e -7"
-@@ -60,7 +59,7 @@ CMDLINE_poodle = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
- CMDLINE_spitz = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
- CMDLINE_tosa = "console=ttyS0,115200n8 console=tty1"
- 
--MACHINE_FEATURES = "kernel26 apm alsa pcmcia irda usbgadget keyboard touchscreen screen vfat ext2"
-+MACHINE_FEATURES = "apm alsa pcmcia irda usbgadget keyboard touchscreen screen vfat ext2"
- MACHINE_FEATURES_append_akita = " usbhost"
- MACHINE_FEATURES_append_spitz = " usbhost"
- MACHINE_FEATURES_append_tosa  = " usbhost wifi "
-@@ -68,9 +67,6 @@ MACHINE_FEATURES_append_tosa  = " usbhost wifi "
- MACHINE_EXTRA_RDEPENDS = "zaurusd mtd-utils nandlogical"
- MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
- 
--# Still actual? OHCI suspend/resume fixup
--# MACHINE_EXTRA_RRECOMMENDS_tosa = "apm-tosa-suspendfix"
--
- ##################################
- # Zaurus rootfs are booted by
- # linux-kexecboot
--- 
-1.7.3.4
+A big thanks to Robert and Florian for organizing the booth, and every
+who has helped staff the table.
 
+Philip
 
 
