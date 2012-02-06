@@ -1,28 +1,32 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1RuKhs-0003Jo-Jo; Mon, 06 Feb 2012 10:17:55 +0100
-Received: by wgbdr13 with SMTP id dr13so5309915wgb.24
-	for <multiple recipients>; Mon, 06 Feb 2012 01:09:52 -0800 (PST)
-Received: by 10.180.78.233 with SMTP id e9mr11703191wix.0.1328519392036;
-	Mon, 06 Feb 2012 01:09:52 -0800 (PST)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id ho4sm23950450wib.3.2012.02.06.01.09.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 06 Feb 2012 01:09:51 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1RuL0B-0003mS-EW; Mon, 06 Feb 2012 10:36:48 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q169Sjt8015434;
+	Mon, 6 Feb 2012 09:28:45 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14404-07; Mon,  6 Feb 2012 09:28:39 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q169SXDX015427
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 6 Feb 2012 09:28:35 GMT
+Message-ID: <1328520520.24049.7.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Date: Mon, 06 Feb 2012 09:28:40 +0000
 In-Reply-To: <CALbNGRQ4pvGoiv8DopfhgcujQffqOkPpS2+ON8-ad12GDdfH=w@mail.gmail.com>
-Date: Mon, 6 Feb 2012 10:09:49 +0100
-Message-Id: <DE571684-E868-4851-913C-0A063031BC6A@dominion.thruhere.net>
 References: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
 	<FA3D8228-A311-4588-90C8-0A12F89723AC@dominion.thruhere.net>
 	<CALbNGRQ4pvGoiv8DopfhgcujQffqOkPpS2+ON8-ad12GDdfH=w@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQnQ5Az4WdnQK9QqU+Q1J9x1DerzCiFPc6GNRW8cU4HqJ6gPx/xPdLwFAqYo+W/BJLmhIvCr
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	q169Sjt8015434
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [OE-core] Buildhistory, was Re: do rootfs does not create log files
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -38,45 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2012 09:17:55 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Mon, 06 Feb 2012 09:36:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-
-Op 6 feb. 2012, om 10:04 heeft Andreas M=FCller het volgende geschreven:
-
+On Mon, 2012-02-06 at 10:04 +0100, Andreas M=C3=BCller wrote:
 > On Mon, Feb 6, 2012 at 8:46 AM, Koen Kooi <koen@dominion.thruhere.net> =
 wrote:
->>=20
->> Op 5 feb. 2012, om 23:16 heeft Andreas M=FCller het volgende =
-geschreven:
->>=20
->>> Hi,
->>>=20
->>> is it a bug or a feature that do_rootfs does not create the package
->>> information (packed_files / packages ..) in a deploy sub-folder did =
+> >
+> > Op 5 feb. 2012, om 23:16 heeft Andreas M=C3=BCller het volgende gesch=
+reven:
+> >
+> >> Hi,
+> >>
+> >> is it a bug or a feature that do_rootfs does not create the package
+> >> information (packed_files / packages ..) in a deploy sub-folder did =
 I
->>> miss a switch for this?
->>=20
->> It's this one: =
-http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/commit=
-/?id=3D370a884b2372b7ddd5f0876119b5f28a2b20074f
->>=20
->> The matching commit it missing, but you can add something like this =
-to your local.conf:
->>=20
->> INHERIT +=3D "buildhistory"
->> BUILDHISTORY_COMMIT =3D "1"
->> BUILDHISTORY_DIR =3D "/data/ssd/OE/buildhistory/"
->>=20
->> That will create a tree that looks like =
-https://github.com/Angstrom-distribution/buildhistory/. It it's missing =
-a feature that you were using in testlab, let us know and Paul or I will =
-try to add it to buildhistory.
->>=20
->> regards,
->>=20
->> Koen
+> >> miss a switch for this?
+> >
+> > It's this one: http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/=
+meta-angstrom/commit/?id=3D370a884b2372b7ddd5f0876119b5f28a2b20074f
+> >
+> > The matching commit it missing, but you can add something like this t=
+o your local.conf:
+> >
+> > INHERIT +=3D "buildhistory"
+> > BUILDHISTORY_COMMIT =3D "1"
+> > BUILDHISTORY_DIR =3D "/data/ssd/OE/buildhistory/"
+> >
+> > That will create a tree that looks like https://github.com/Angstrom-d=
+istribution/buildhistory/. It it's missing a feature that you were using =
+in testlab, let us know and Paul or I will try to add it to buildhistory.
+> >
+> > regards,
+> >
+> > Koen
 > Thanks for the info - will give buildhistory a test.
 >=20
 > Without having experience on buildhistory I have a question: As you
@@ -91,17 +91,15 @@ try to add it to buildhistory.
 > If I just rebuild without any PR-bumps I assume buildhistory can do
 > nothing for me. Correct?
 
-No, buildhistory executes at every do_package step, so it will record =
-changes even without PR bumps. Note that OE doesn't sort the RDEPENDS =
-fields and friends, so you might see a diff where there is only a =
-re-ordering.
+Do two build from scratch, one with the changed PACKAGES and one
+without. Keep the same build history data in both builds. You'll then
+see the differences between them recorded.
 
-regards,
+(Or diff the buildhistory from the two builds).
 
-Koen
+Cheers,
 
-regards,
+Richard
 
-Koen=
 
 
