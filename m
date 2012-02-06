@@ -1,33 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1RuQv4-0004GC-Kd; Mon, 06 Feb 2012 16:55:54 +0100
-Received: by eaal10 with SMTP id l10so1660209eaa.6
-	for <multiple recipients>; Mon, 06 Feb 2012 07:47:53 -0800 (PST)
+	(envelope-from <tworaz666@gmail.com>) id 1RuUPD-0001G1-QQ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Feb 2012 20:39:15 +0100
+Received: by eekd41 with SMTP id d41so1947620eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Feb 2012 11:31:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=JXtBzo0TCXH0TTonNgD/KC59wUFvM6lwMEfWT8WCOLE=;
-	b=drGWjtapsUToeUWUQ6BgzPvHSYpRIPnAnZSoFaDr0jp9rsESxyqkAQw0PHm2mVABZP
-	Lp1gnlpTR2YeUhxn1FtvJddTB8D7thz+E3FXfmEwDNIzkpODBEMXnIUNATgwzd6y6cwd
-	dNwrO9+Pr1CaNiJ3xoESsF3gTzPziYxTtIQTc=
-MIME-Version: 1.0
-Received: by 10.213.3.68 with SMTP id 4mr2934194ebm.88.1328543273640; Mon, 06
-	Feb 2012 07:47:53 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.47.10 with HTTP; Mon, 6 Feb 2012 07:47:52 -0800 (PST)
-In-Reply-To: <1408084.uBj8QddilE@helios>
-References: <CAMKF1spO-FVweKU21EdHK-Rs5gc4qun=JRYnwMWc88SOSeQufg@mail.gmail.com>
-	<CAMKF1soq=EaZ4KMb7McFcEjNyTVT2sMHPHvEr11+kL603iCOUQ@mail.gmail.com>
-	<1408084.uBj8QddilE@helios>
-Date: Mon, 6 Feb 2012 13:47:52 -0200
-X-Google-Sender-Auth: FIRVwDJjHhVDTlGMdbdxi9Le__A
-Message-ID: <CAP9ODKpx9_Mc5w9aHy_k1t-L3kLw7HRmtiM9EkjpX6NvvDaFRg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=OGjw6cschQLpEe/8i8t+nFzBbVqWUIppLijYZUwq1YY=;
+	b=BdNqPCIRuJTPU/Hb9FXW/Etog7UtbgmTHz0qffo4rexPahKuMU3V0XQvdcm7Z4WMII
+	5PnstF0Ja30ig0fyTkP9iXD2jD7LsGNpvn8vHyT9xowqdfgKRYZhLUsq12pdGIJuiOGp
+	OmgoxslT0CjChuKT+qNWiwhtrRDFlrnKDE4n0=
+Received: by 10.14.17.72 with SMTP id i48mr5970125eei.113.1328556674201;
+	Mon, 06 Feb 2012 11:31:14 -0800 (PST)
+Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
+	[89.77.50.243])
+	by mx.google.com with ESMTPS id v51sm788722eef.2.2012.02.06.11.31.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 06 Feb 2012 11:31:13 -0800 (PST)
+From: Peter Tworek <tworaz666@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] Duplicate recipes in meta-oe
+Date: Mon,  6 Feb 2012 20:28:59 +0100
+Message-Id: <1328556539-8036-1-git-send-email-tworaz666@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
+References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
+Subject: [meta-xfce][PATCH 3/3 v2] xfce4-panel: Remove static version of panel plugins.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2012 15:55:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Feb 2012 19:39:15 -0000
 
-On Mon, Feb 6, 2012 at 13:39, Paul Eggleton
-<paul.eggleton@linux.intel.com>wrote:
+They have no actual use and trigger QA warnings.
 
-> I talked to Koen at FOSDEM and apparently he prefers having a symlink
-> rather
-> than a copy for the timezone file. I can't express an opinion one way or
-> another but it sounds like this one aspect still needs to be resolved -
-> should
-> this be selectable?
->
+Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+---
+ .../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb  |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-I don't think this is worth to be selectable.
-
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
+index 0cd8eba..6bbbc05 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
+@@ -19,6 +19,10 @@ python populate_packages_prepend() {
+ 	                                     '${bindir}/*%s*'])
+ }
+ 
++do_install_append () {
++    find "${D}/${libdir}/xfce4/panel/plugins" -name '*.a' -exec rm -f {} +
++}
++
+ PACKAGES_DYNAMIC = "${PN}-plugin-*"
+ 
+ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
+@@ -27,8 +31,5 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
+ FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
+ 		   "
+ 
+-FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
+-                   "
+-
+ SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
+ SRC_URI[sha256sum] = "66f1266a1242ee5ecada995a4a584dd9802aa24456759b40b0c29227c39bed03"
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.3.4
+
+
 
