@@ -1,29 +1,16 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from smtp205.alice.it ([82.57.200.101])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1RuBZZ-00044Y-Jl; Mon, 06 Feb 2012 00:32:41 +0100
-Received: by lahc1 with SMTP id c1so2631779lah.6
-	for <multiple recipients>; Sun, 05 Feb 2012 15:24:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=MT2y9g/VLOaFkyna9+GT1cKb624/YSbnWuk3uIYPq9o=;
-	b=Eb7+6KcBAuql3JUeGKwSmxuc9rCMVkgiXeT8SLx4uuvwVoCpeI3FGfhhqjgWn+IkCw
-	PAPmuNsqHBTU3FGOaChyyTACW6bAI0denWVnVCPH8t9zfLKFFkRPGfDM6RyngH42i0l3
-	wHmhuN39oeHxD4VoloJ6n+SFX83+gVDKNHU0k=
-Received: by 10.152.123.68 with SMTP id ly4mr2802643lab.13.1328484280254; Sun,
-	05 Feb 2012 15:24:40 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Sun, 5 Feb 2012 15:24:10 -0800 (PST)
-In-Reply-To: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
-References: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Feb 2012 15:24:10 -0800
-Message-ID: <CAMKF1spvxgnEb39qe1scw2k7Vqk--oSdVO18wcK3RFc5kqTqag@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] do rootfs does not create log files
+	(envelope-from <andrea.adami@gmail.com>) id 1RuCCO-00055q-PI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Feb 2012 01:12:48 +0100
+Received: from mizar.localdomain (79.30.253.248) by smtp205.alice.it
+	(8.6.023.02) id 4EECA2D8070CE0D2; Mon, 6 Feb 2012 01:04:50 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon,  6 Feb 2012 01:04:42 +0100
+Message-Id: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.8 to 3.1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +24,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Feb 2012 23:32:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Feb 2012 00:12:48 -0000
 
-On Sun, Feb 5, 2012 at 2:16 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Hi,
->
-> is it a bug or a feature that do_rootfs does not create the package
-> information (packed_files / packages ..) in a deploy sub-folder did I
-> miss a switch for this?
->
+* apply latest patchset for 3.1 and bump PR of both recipes
+* (Kernel 3.2 is still on hold because we are waiting for klibc_2.0)
 
-which files to be sure ?
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-3.1.inc          |    6 +++---
+ recipes-kernel/linux/linux-kexecboot_3.1.bb |    2 +-
+ recipes-kernel/linux/linux_3.1.bb           |    2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-> Thanks in advance
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
+diff --git a/recipes-kernel/linux/linux-3.1.inc b/recipes-kernel/linux/linux-3.1.inc
+index 8733543..34bf4a8 100644
+--- a/recipes-kernel/linux/linux-3.1.inc
++++ b/recipes-kernel/linux/linux-3.1.inc
+@@ -1,5 +1,5 @@
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=stablepatch \
+            file://defconfig \
+            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+            "
+@@ -15,5 +15,5 @@ SRC_URI_append_poodle = " \
+ 
+ SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+ SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+-SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
+-SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
++SRC_URI[stablepatch.md5sum] = "a8e1c25a93a685ec2a1c3a808715fe9d"
++SRC_URI[stablepatch.sha256sum] = "f25126052d1a083a415ddd313b40c7fcdb3742f40474cb4a826af7e43fee29d3"
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+index 535beb3..28dc370 100644
+--- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
++++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+@@ -1,7 +1,7 @@
+ require linux-kexecboot.inc
+ require linux-${PV}.inc
+ 
+-PR = "${INC_PR}.6"
++PR = "${INC_PR}.7"
+ S = "${WORKDIR}/linux-${PV}"
+ 
+ COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+index 980be11..c8e2a39 100644
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ b/recipes-kernel/linux/linux_3.1.bb
+@@ -1,7 +1,7 @@
+ require linux.inc
+ require linux-${PV}.inc
+ 
+-PR = "${INC_PR}.8"
++PR = "${INC_PR}.9"
+ 
+ COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
+ 
+-- 
+1.7.3.4
+
 
 
