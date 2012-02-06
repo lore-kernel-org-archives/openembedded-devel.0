@@ -1,16 +1,28 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1RuCCO-00055q-PI
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Feb 2012 01:12:48 +0100
-Received: from mizar.localdomain (79.30.253.248) by smtp205.alice.it
-	(8.6.023.02) id 4EECA2D8070CE0D2; Mon, 6 Feb 2012 01:04:50 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon,  6 Feb 2012 01:04:42 +0100
-Message-Id: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.8 to 3.1.10
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1RuJP5-00017P-8c; Mon, 06 Feb 2012 08:54:23 +0100
+Received: by werc1 with SMTP id c1so4556145wer.6
+	for <multiple recipients>; Sun, 05 Feb 2012 23:46:22 -0800 (PST)
+Received: by 10.180.90.225 with SMTP id bz1mr11412263wib.5.1328514382146;
+	Sun, 05 Feb 2012 23:46:22 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id fl2sm7295169wib.1.2012.02.05.23.46.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 05 Feb 2012 23:46:21 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
+Date: Mon, 6 Feb 2012 08:46:19 +0100
+Message-Id: <FA3D8228-A311-4588-90C8-0A12F89723AC@dominion.thruhere.net>
+References: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1251.1)
+X-Gm-Message-State: ALoCoQkTlKhkPRGVZ9KYO/GDZiNSs5M5BTW3fxILcfBPYADj0PFj8rixW2FG359ADPYPMoDscYIn
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Buildhistory, was Re: [OE-core] do rootfs does not create log files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,65 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2012 00:12:48 -0000
+X-List-Received-Date: Mon, 06 Feb 2012 07:54:23 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* apply latest patchset for 3.1 and bump PR of both recipes
-* (Kernel 3.2 is still on hold because we are waiting for klibc_2.0)
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-3.1.inc          |    6 +++---
- recipes-kernel/linux/linux-kexecboot_3.1.bb |    2 +-
- recipes-kernel/linux/linux_3.1.bb           |    2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+Op 5 feb. 2012, om 23:16 heeft Andreas M=FCller het volgende geschreven:
 
-diff --git a/recipes-kernel/linux/linux-3.1.inc b/recipes-kernel/linux/linux-3.1.inc
-index 8733543..34bf4a8 100644
---- a/recipes-kernel/linux/linux-3.1.inc
-+++ b/recipes-kernel/linux/linux-3.1.inc
-@@ -1,5 +1,5 @@
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
--           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stablepatch \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=stablepatch \
-            file://defconfig \
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
-@@ -15,5 +15,5 @@ SRC_URI_append_poodle = " \
- 
- SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
- SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
--SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
--SRC_URI[stablepatch.sha256sum] = "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
-+SRC_URI[stablepatch.md5sum] = "a8e1c25a93a685ec2a1c3a808715fe9d"
-+SRC_URI[stablepatch.sha256sum] = "f25126052d1a083a415ddd313b40c7fcdb3742f40474cb4a826af7e43fee29d3"
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-index 535beb3..28dc370 100644
---- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-+++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-@@ -1,7 +1,7 @@
- require linux-kexecboot.inc
- require linux-${PV}.inc
- 
--PR = "${INC_PR}.6"
-+PR = "${INC_PR}.7"
- S = "${WORKDIR}/linux-${PV}"
- 
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index 980be11..c8e2a39 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -1,7 +1,7 @@
- require linux.inc
- require linux-${PV}.inc
- 
--PR = "${INC_PR}.8"
-+PR = "${INC_PR}.9"
- 
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
- 
--- 
-1.7.3.4
+> Hi,
+>=20
+> is it a bug or a feature that do_rootfs does not create the package
+> information (packed_files / packages ..) in a deploy sub-folder did I
+> miss a switch for this?
 
+It's this one: =
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-angstrom/commit=
+/?id=3D370a884b2372b7ddd5f0876119b5f28a2b20074f
+
+The matching commit it missing, but you can add something like this to =
+your local.conf:
+
+INHERIT +=3D "buildhistory"
+BUILDHISTORY_COMMIT =3D "1"
+BUILDHISTORY_DIR =3D "/data/ssd/OE/buildhistory/"
+
+That will create a tree that looks like =
+https://github.com/Angstrom-distribution/buildhistory/. It it's missing =
+a feature that you were using in testlab, let us know and Paul or I will =
+try to add it to buildhistory.
+
+regards,
+
+Koen=
 
 
