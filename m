@@ -1,35 +1,35 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumql-0001JL-Av
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumql-0001JM-Gs
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 07 Feb 2012 16:20:55 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so2181054eek.6
+Received: by eekd41 with SMTP id d41so2181062eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2012 07:12:55 -0800 (PST)
+	Tue, 07 Feb 2012 07:12:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=cfbXfHo5yuAgzQqcKy52IFKebVLl6dWC/eTxFlIwMlU=;
-	b=F4+q/B0GZUflITvxEwc5QQCFaxptiUw05H8QrQRxWCrnqrqlHMvQFDMuLUJQVsu7HY
-	RzOAF+G6rqQX4xW5FisqrojJmg/iWuyRdeZiEvtC+UEErx6Ve84CNiCtErG/6VcDGUyn
-	UwuFtsZo0DeH7wJZ/dokd/jDvKmytoSxRo4VQ=
-Received: by 10.14.206.133 with SMTP id l5mr7093213eeo.22.1328627575270;
-	Tue, 07 Feb 2012 07:12:55 -0800 (PST)
+	bh=/I/W5niPJ+Yt4z+vhY4BSawmf3WDxiwbuOMLnhBfzsM=;
+	b=vIIMcOqoy/aF9dJTw0Ct2mio6p5vh3m6/U2spfW0/5FqvV7nNXYWW1O3vAbYKLh9oN
+	xQ5fZ2uVmckijM1bhDvI0vv3BSZtfklhU8IPjzItp65aibIt7xYyXRL/Ad/GM1i2x3Q9
+	W1VDNwyK+qhW3koL1lvQgHIetq9BCohsyX4LU=
+Received: by 10.14.99.7 with SMTP id w7mr5741193eef.130.1328627573407;
+	Tue, 07 Feb 2012 07:12:53 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190])
-	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.12.54
+	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.12.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 07:12:54 -0800 (PST)
+	Tue, 07 Feb 2012 07:12:52 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Feb 2012 16:12:29 +0100
-Message-Id: <1328627573-5217-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  7 Feb 2012 16:12:27 +0100
+Message-Id: <1328627573-5217-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
 In-Reply-To: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][RFC 03/27] image.bbclass: inherit initmanager.bbclass and set default value for IMAGE_INIT_MANAGER
+Subject: [meta-oe][RFC 01/27] systemd.bbclass: rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,402 +47,261 @@ X-List-Received-Date: Tue, 07 Feb 2012 15:20:55 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is a copy of image.bbclass with only a few lines added. These are marked.
+let systemd.bbclass do more for us and prepare support images without systemd
 
+* introduce a global variable INIT_MANAGER. For images using systemd, this must
+  contain 'systemd'. This varibale can e.g be set to default in local.conf and
+  then overridden by distro.
+* handle multiple entries in SYSTEMD_SERVICE. Currenly there are no use cases
+  but networkmanager has potential requirements
+* handle multiple entries in SYSTEMD_PACKAGES. Possible use cases are
+  dhcp/dhcp-relay and ntp/ntpdate
+* enhance the checks for SYSTEMD_PACKAGES and SYSTEMD_SERVICE. For package
+  names only <name-of-an-existing-package>-systemd or ${PN} are allowed. In
+  case of using ${PN} a warning is spitted. This was introduced to force recipe
+  maintainers to separate out systemd to own package.
+* all systemd packages are automatically created based on SYSTEMD_PACKAGES
+* for systemd packets and their base packages RDEPENDS/RRECOMMENDS are
+  automatically extended. Hereby it is ensured that all packets for proper
+  systemd operation find their way into the image. Nice side effect:
+  if in all tasks/images the base packets are include insted of *-systemd it is
+  only a matter of INIT_MANAGER if systemd-packets are imaged.
+* all *.socket and *.service files included by SRC_URI are automatically
+  installed from WORKDIR.
+* remove systemd from DEPENDS. Recipes requiring systemd at buildtime, should
+  take care themselves.
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/classes/image.bbclass |  382 +++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 382 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/classes/image.bbclass
+ meta-oe/classes/systemd.bbclass |  173 +++++++++++++++++++++++++++++++++-----
+ 1 files changed, 150 insertions(+), 23 deletions(-)
 
-diff --git a/meta-oe/classes/image.bbclass b/meta-oe/classes/image.bbclass
-new file mode 100644
-index 0000000..250ab40
---- /dev/null
-+++ b/meta-oe/classes/image.bbclass
-@@ -0,0 +1,382 @@
-+inherit rootfs_${IMAGE_PKGTYPE}
-+
-+IMAGETEST ?= "dummy"
-+inherit imagetest-${IMAGETEST}
-+
-+# systemd / sysvinit change start
-+###############################################################################
-+inherit initmanager
-+IMAGE_INIT_MANAGER ?= "${@initmanager_packets(d)}"
-+###############################################################################
-+# systemd / sysvinit change end
-+
-+LICENSE = "MIT"
-+PACKAGES = ""
-+RDEPENDS += "${IMAGE_INSTALL} ${LINGUAS_INSTALL} ${NORMAL_FEATURE_INSTALL}"
-+RRECOMMENDS += "${NORMAL_FEATURE_INSTALL_OPTIONAL}"
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+
-+# IMAGE_FEATURES may contain any available package group
-+IMAGE_FEATURES ?= ""
-+IMAGE_FEATURES[type] = "list"
-+
-+# packages to install from features
-+FEATURE_INSTALL = "${@' '.join(oe.packagegroup.required_packages(oe.data.typed_value('IMAGE_FEATURES', d), d))}"
-+FEATURE_INSTALL_OPTIONAL = "${@' '.join(oe.packagegroup.optional_packages(oe.data.typed_value('IMAGE_FEATURES', d), d))}"
-+
-+# packages to install from features, excluding dev/dbg/doc
-+NORMAL_FEATURE_INSTALL = "${@' '.join(oe.packagegroup.required_packages(normal_groups(d), d))}"
-+NORMAL_FEATURE_INSTALL_OPTIONAL = "${@' '.join(oe.packagegroup.optional_packages(normal_groups(d), d))}"
-+
-+def normal_groups(d):
-+    """Return all the IMAGE_FEATURES, with the exception of our special package groups"""
-+    extras = set(['dev-pkgs', 'doc-pkgs', 'dbg-pkgs'])
-+    features = set(oe.data.typed_value('IMAGE_FEATURES', d))
-+    return features.difference(extras)
-+
-+def normal_pkgs_to_install(d):
-+    import oe.packagedata
-+
-+    to_install = oe.data.typed_value('IMAGE_INSTALL', d)
-+    features = normal_groups(d)
-+    required = list(oe.packagegroup.required_packages(features, d))
-+    optional = list(oe.packagegroup.optional_packages(features, d))
-+    all_packages = to_install + required + optional
-+
-+    recipes = filter(None, [oe.packagedata.recipename(pkg, d) for pkg in all_packages])
-+
-+    return all_packages + recipes
-+
-+PACKAGE_GROUP_dbg-pkgs = "${@' '.join('%s-dbg' % pkg for pkg in normal_pkgs_to_install(d))}"
-+PACKAGE_GROUP_dbg-pkgs[optional] = "1"
-+PACKAGE_GROUP_dev-pkgs = "${@' '.join('%s-dev' % pkg for pkg in normal_pkgs_to_install(d))}"
-+PACKAGE_GROUP_dev-pkgs[optional] = "1"
-+PACKAGE_GROUP_doc-pkgs = "${@' '.join('%s-doc' % pkg for pkg in normal_pkgs_to_install(d))}"
-+PACKAGE_GROUP_doc-pkgs[optional] = "1"
-+
-+# "export IMAGE_BASENAME" not supported at this time
-+IMAGE_INSTALL ?= ""
-+IMAGE_INSTALL[type] = "list"
-+IMAGE_BASENAME[export] = "1"
-+export PACKAGE_INSTALL ?= "${IMAGE_INSTALL} ${FEATURE_INSTALL}"
-+PACKAGE_INSTALL_ATTEMPTONLY ?= "${FEATURE_INSTALL_OPTIONAL}"
-+
-+# Images are generally built explicitly, do not need to be part of world.
-+EXCLUDE_FROM_WORLD = "1"
-+
-+USE_DEVFS ?= "0"
-+
-+PID = "${@os.getpid()}"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+LDCONFIGDEPEND ?= "ldconfig-native:do_populate_sysroot"
-+LDCONFIGDEPEND_libc-uclibc = ""
-+
-+do_rootfs[depends] += "makedevs-native:do_populate_sysroot virtual/fakeroot-native:do_populate_sysroot ${LDCONFIGDEPEND}"
-+do_rootfs[depends] += "virtual/update-alternatives-native:do_populate_sysroot update-rc.d-native:do_populate_sysroot"
-+
-+IMAGE_TYPE = ${@base_contains("IMAGE_FSTYPES", "live", "live", "empty", d)}
-+inherit image-${IMAGE_TYPE}
-+
-+python () {
-+    deps = d.getVarFlag('do_rootfs', 'depends') or ""
-+    for type in (d.getVar('IMAGE_FSTYPES', True) or "").split():
-+        for dep in ((d.getVar('IMAGE_DEPENDS_%s' % type) or "").split() or []):
-+            deps += " %s:do_populate_sysroot" % dep
-+    for dep in (d.getVar('EXTRA_IMAGEDEPENDS', True) or "").split():
-+        deps += " %s:do_populate_sysroot" % dep
-+    d.setVarFlag('do_rootfs', 'depends', deps)
-+
-+    # If we don't do this we try and run the mapping hooks while parsing which is slow
-+    # bitbake should really provide something to let us know this...
-+    if d.getVar('BB_WORKERCONTEXT', True) is not None:
-+        runtime_mapping_rename("PACKAGE_INSTALL", d)
-+        runtime_mapping_rename("PACKAGE_INSTALL_ATTEMPTONLY", d)
-+}
-+
-+#
-+# Get a list of files containing device tables to create.
-+# * IMAGE_DEVICE_TABLE is the old name to an absolute path to a device table file
-+# * IMAGE_DEVICE_TABLES is a new name for a file, or list of files, seached
-+#   for in the BBPATH
-+# If neither are specified then the default name of files/device_table-minimal.txt
-+# is searched for in the BBPATH (same as the old version.)
-+#
-+def get_devtable_list(d):
-+    devtable = d.getVar('IMAGE_DEVICE_TABLE', 1)
-+    if devtable != None:
-+        return devtable
-+    str = ""
-+    devtables = d.getVar('IMAGE_DEVICE_TABLES', 1)
-+    if devtables == None:
-+        devtables = 'files/device_table-minimal.txt'
-+    for devtable in devtables.split():
-+        str += " %s" % bb.which(d.getVar('BBPATH', 1), devtable)
-+    return str
-+
-+IMAGE_CLASSES ?= "image_types"
-+inherit ${IMAGE_CLASSES}
-+
-+IMAGE_POSTPROCESS_COMMAND ?= ""
-+MACHINE_POSTPROCESS_COMMAND ?= ""
-+ROOTFS_POSTPROCESS_COMMAND ?= ""
-+
-+# some default locales
-+IMAGE_LINGUAS ?= "de-de fr-fr en-gb"
-+
-+LINGUAS_INSTALL ?= "${@" ".join(map(lambda s: "locale-base-%s" % s, d.getVar('IMAGE_LINGUAS', 1).split()))}"
-+
-+PSEUDO_PASSWD = "${IMAGE_ROOTFS}"
-+
-+do_rootfs[nostamp] = "1"
-+do_rootfs[dirs] = "${TOPDIR}"
-+do_rootfs[lockfiles] += "${IMAGE_ROOTFS}.lock"
-+do_build[nostamp] = "1"
-+
-+# Must call real_do_rootfs() from inside here, rather than as a separate
-+# task, so that we have a single fakeroot context for the whole process.
-+do_rootfs[umask] = 022
-+
-+fakeroot do_rootfs () {
-+	#set -x
-+    # When use the rpm incremental image generation, don't remove the rootfs
-+    if [ "${INC_RPM_IMAGE_GEN}" != "1" -o "${IMAGE_PKGTYPE}" != "rpm" ]; then
-+        rm -rf ${IMAGE_ROOTFS}
-+    fi
-+	rm -rf ${MULTILIB_TEMP_ROOTFS}
-+	mkdir -p ${IMAGE_ROOTFS}
-+	mkdir -p ${DEPLOY_DIR_IMAGE}
-+
-+	cp ${COREBASE}/meta/files/deploydir_readme.txt ${DEPLOY_DIR_IMAGE}/README_-_DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
-+
-+    # If "${IMAGE_ROOTFS}/dev" exists, then the device had been made by
-+    # the previous build
-+	if [ "${USE_DEVFS}" != "1" -a ! -r "${IMAGE_ROOTFS}/dev" ]; then
-+		for devtable in ${@get_devtable_list(d)}; do
-+            # Always return ture since there maybe already one when use the
-+            # incremental image generation
-+			makedevs -r ${IMAGE_ROOTFS} -D $devtable
-+		done
-+	fi
-+
-+	rootfs_${IMAGE_PKGTYPE}_do_rootfs
-+
-+	insert_feed_uris
-+
-+	if [ "x${LDCONFIGDEPEND}" != "x" ]; then
-+		# Run ldconfig on the image to create a valid cache 
-+		# (new format for cross arch compatibility)
-+		echo executing: ldconfig -r ${IMAGE_ROOTFS} -c new -v
-+		ldconfig -r ${IMAGE_ROOTFS} -c new -v
-+	fi
-+
-+	# (re)create kernel modules dependencies
-+	# This part is done by kernel-module-* postinstall scripts but if image do
-+	# not contains modules at all there are few moments in boot sequence with
-+	# "unable to open modules.dep" message.
-+	if [ -e ${STAGING_KERNEL_DIR}/kernel-abiversion ]; then
-+		KERNEL_VERSION=`cat ${STAGING_KERNEL_DIR}/kernel-abiversion`
-+
-+		mkdir -p ${IMAGE_ROOTFS}/lib/modules/$KERNEL_VERSION
-+		${TARGET_PREFIX}depmod -a -b ${IMAGE_ROOTFS} -F ${STAGING_KERNEL_DIR}/System.map-$KERNEL_VERSION $KERNEL_VERSION
-+	fi
-+
-+	${IMAGE_PREPROCESS_COMMAND}
-+
-+	${@get_imagecmds(d)}
-+
-+	${IMAGE_POSTPROCESS_COMMAND}
-+	
-+	${MACHINE_POSTPROCESS_COMMAND}
-+}
-+
-+insert_feed_uris () {
-+	
-+	echo "Building feeds for [${DISTRO}].."
-+
-+	for line in ${FEED_URIS}
-+	do
-+		# strip leading and trailing spaces/tabs, then split into name and uri
-+		line_clean="`echo "$line"|sed 's/^[ \t]*//;s/[ \t]*$//'`"
-+		feed_name="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\1/p'`"
-+		feed_uri="`echo "$line_clean" | sed -n 's/\(.*\)##\(.*\)/\2/p'`"
-+		
-+		echo "Added $feed_name feed with URL $feed_uri"
-+		
-+		# insert new feed-sources
-+		echo "src/gz $feed_name $feed_uri" >> ${IMAGE_ROOTFS}/etc/opkg/${feed_name}-feed.conf
-+	done
-+}
-+
-+log_check() {
-+	for target in $*
-+	do
-+		lf_path="${WORKDIR}/temp/log.do_$target.${PID}"
-+		
-+		echo "log_check: Using $lf_path as logfile"
-+		
-+		if test -e "$lf_path"
-+		then
-+			${IMAGE_PKGTYPE}_log_check $target $lf_path
-+		else
-+			echo "Cannot find logfile [$lf_path]"
-+		fi
-+		echo "Logfile is clean"
-+	done
-+}
-+
-+MULTILIBRE_ALLOW_REP =. "${base_bindir}|${base_sbindir}|${bindir}|${sbindir}|${libexecdir}|"
-+MULTILIB_CHECK_FILE = "${WORKDIR}/multilib_check.py"
-+MULTILIB_TEMP_ROOTFS = "${WORKDIR}/multilib"
-+
-+multilib_generate_python_file() {
-+  cat >${MULTILIB_CHECK_FILE} <<EOF
-+import sys, os, os.path
-+import re,filecmp
-+
-+allow_rep=re.compile(re.sub("\|$","","${MULTILIBRE_ALLOW_REP}"))
-+error_promt="Multilib check error:"
-+
-+files={}
-+dirs=raw_input()
-+for dir in dirs.split():
-+  for root, subfolers, subfiles in os.walk(dir):
-+    for file in subfiles:
-+      item=os.path.join(root,file)
-+      key=str(os.path.join("/",os.path.relpath(item,dir)))
-+
-+      valid=True;
-+      if files.has_key(key):
-+        #check whether the file is allow to replace
-+        if allow_rep.match(key):
-+          valid=True
-+        else:
-+          if not filecmp.cmp(files[key],item):
-+             valid=False
-+             print("%s duplicate files %s %s is not the same\n" % (error_promt, item, files[key]))
-+             sys.exit(1)
-+
-+      #pass the check, add to list
-+      if valid:
-+        files[key]=item
-+EOF
-+}
-+
-+multilib_sanity_check() {
-+  multilib_generate_python_file
-+  echo $@ | python ${MULTILIB_CHECK_FILE}
-+}
-+
-+get_split_linguas() {
-+    for translation in ${IMAGE_LINGUAS}; do
-+        translation_split=$(echo ${translation} | awk -F '-' '{print $1}')
-+        echo ${translation}
-+        echo ${translation_split}
-+    done | sort | uniq
-+}
-+
-+rootfs_install_all_locales() {
-+    # Generate list of installed packages for which additional locale packages might be available
-+    INSTALLED_PACKAGES=`list_installed_packages | egrep -v -- "(-locale-|^locale-base-|-dev$|-doc$|^kernel|^glibc|^ttf|^task|^perl|^python)"`
-+
-+    # Generate a list of locale packages that exist
-+    SPLIT_LINGUAS=`get_split_linguas`
-+    PACKAGES_TO_INSTALL=""
-+    for lang in $SPLIT_LINGUAS; do
-+        for pkg in $INSTALLED_PACKAGES; do
-+            existing_pkg=`rootfs_check_package_exists $pkg-locale-$lang`
-+            if [ "$existing_pkg" != "" ]; then
-+                PACKAGES_TO_INSTALL="$PACKAGES_TO_INSTALL $existing_pkg"
-+            fi
-+        done
+diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
+index 094a12c..c843e66 100644
+--- a/meta-oe/classes/systemd.bbclass
++++ b/meta-oe/classes/systemd.bbclass
+@@ -1,5 +1,6 @@
+-DEPENDS_append = " systemd systemd-systemctl-native"
++DEPENDS_append = " systemd-systemctl-native"
+ 
++# pre/post-inst/rm for each entry in SYSTEMD_SERVICE
+ systemd_postinst() {
+ OPTS=""
+ 
+@@ -7,34 +8,95 @@ if [ -n "$D" ]; then
+     OPTS="--root=$D"
+ fi
+ 
+-systemctl $OPTS enable ${SYSTEMD_SERVICE}
++for service in ${SYSTEMD_SERVICE} ; do
++    systemctl $OPTS enable $service
++done
+ 
+ if [ -z "$D" ]; then
+-    systemctl start ${SYSTEMD_SERVICE}
++    for service in ${SYSTEMD_SERVICE} ; do
++        systemctl start $service
 +    done
+ fi
+ }
+ 
+ systemd_prerm() {
+ if [ -z "$D" ]; then
+-    systemctl stop ${SYSTEMD_SERVICE}
++    for service in ${SYSTEMD_SERVICE} ; do
++        systemctl stop $service
++    done
+ fi
+ }
+ 
+ systemd_postrm() {
+-systemctl disable ${SYSTEMD_SERVICE}
++for service in ${SYSTEMD_SERVICE} ; do
++    systemctl disable $service
++done
+ }
+ 
+ def systemd_after_parse(d):
+-    if bb.data.getVar('SYSTEMD_PACKAGES', d) == None:
+-        if bb.data.getVar('SYSTEMD_SERVICE', d) == None:
+-            raise bb.build.FuncFailed, "%s inherits systemd but doesn't set SYSTEMD_SERVICE" % bb.data.getVar('FILE', d)
++	def systemd_check_vars():
++		# not for native / only at parse time
++		if d.getVar('BPN', 1) + "-native" != d.getVar('PN', 1) and d.getVar('BB_WORKERCONTEXT', True) is None:
++			bb_filename = d.getVar('FILE')
++			packages = d.getVar('PACKAGES', 1)
 +
-+    # Install the packages, if any
-+    if [ "$PACKAGES_TO_INSTALL" != "" ]; then
-+        rootfs_install_packages $PACKAGES_TO_INSTALL
-+    fi
++			# check SYSTEMD_PACKAGES
++			systemd_pkgs = d.getVar('SYSTEMD_PACKAGES', 1) or ""
++			if systemd_pkgs == "":
++				raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_PACKAGES" % bb_filename
++			for pkg_systemd in systemd_pkgs.split():
++				if pkg_systemd.find("-systemd") == -1:
++					if pkg_systemd != d.getVar('PN', 1):
++						raise (bb.build.FuncFailed,
++							"\n\n%s: %s in SYSTEMD_PACKAGES does not match <base-package-using-systemd>-systemd or ${PN} (deprecated)" %
++							(bb_filename, pkg_systemd))
++					else:
++						bb.warn("%s: it is recommended to set SYSTEMD_PACKAGES as <base-package-using-systemd>-systemd" % bb_filename)
++				else:
++					pkg_systemd_base = pkg_systemd.replace('-systemd', '')
++					if pkg_systemd_base not in packages:
++						raise (bb.build.FuncFailed,
++							"\n\n%s: %s in SYSTEMD_PACKAGES does not match <base-package-using-systemd>-systemd or ${PN} (deprecated)" %
++							( bb_filename, pkg_systemd))
 +
-+    # Workaround for broken shell function dependencies
-+    if false ; then
-+        get_split_linguas
-+        list_installed_packages
-+        rootfs_check_package_exists
-+    fi
++			# check SYSTEMD_SERVICE
++			for pkg_systemd in systemd_pkgs.split():
++				service_pkg = 'SYSTEMD_SERVICE' + "_" + pkg_systemd
++				systemd_services = d.getVar(service_pkg, 1) or d.getVar('SYSTEMD_SERVICE', 1) or ""
++				if systemd_services == "":
++					raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_SERVICE / %s" % (bb_filename, service_pkg)
++
++	# prepend packages not already included
++	def systemd_create_package(pkg_systemd):
++		packages = d.getVar('PACKAGES', 1)
++		if not pkg_systemd in packages:
++			packages = "%s %s" % (pkg_systemd, packages)
++			d.setVar('PACKAGES', packages)
++
++
++	systemd_check_vars()
++	systemd_pkgs = d.getVar('SYSTEMD_PACKAGES', 1)
++	for pkg_systemd in systemd_pkgs.split():
++		systemd_create_package(pkg_systemd)
++
+ 
+ python __anonymous() {
+-    systemd_after_parse(d)
++	systemd_after_parse(d)
 +}
 +
-+# set '*' as the root password so the images
-+# can decide if they want it or not
-+zap_root_password () {
-+	sed 's%^root:[^:]*:%root:*:%' < ${IMAGE_ROOTFS}/etc/passwd >${IMAGE_ROOTFS}/etc/passwd.new
-+	mv ${IMAGE_ROOTFS}/etc/passwd.new ${IMAGE_ROOTFS}/etc/passwd
-+} 
-+
-+# Turn any symbolic /sbin/init link into a file
-+remove_init_link () {
-+	if [ -h ${IMAGE_ROOTFS}/sbin/init ]; then
-+		LINKFILE=${IMAGE_ROOTFS}`readlink ${IMAGE_ROOTFS}/sbin/init`
-+		rm ${IMAGE_ROOTFS}/sbin/init
-+		cp $LINKFILE ${IMAGE_ROOTFS}/sbin/init
++# automatically install all *.service and *.socket supplied in SRC_URI
++do_install_append() {
++    install -d ${D}${base_libdir}/systemd/system
++    for service in `find ${WORKDIR} -maxdepth 1 -name '*.service' -o -name '*.socket'` ; do
++	# ensure installing systemd-files only (e.g not avahi *.service)
++	if grep -q '\[Unit\]' $service ; then
++	        install -m 644 $service ${D}${base_libdir}/systemd/system
 +	fi
-+}
++    done
+ }
+ 
+ python populate_packages_prepend () {
+-	def systemd_package(pkg):
++	def systemd_prepost_instrm(pkg):
+ 		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
+ 		localdata = bb.data.createCopy(d)
+ 		overrides = bb.data.getVar("OVERRIDES", localdata, 1)
+@@ -45,7 +107,7 @@ python populate_packages_prepend () {
+ 		systemd postinst is appended here because pkg_postinst may require to
+ 		execute on the target. Not doing so may cause systemd postinst invoked
+ 		twice to cause unwanted warnings.
+-		""" 
++		"""
+ 		postinst = bb.data.getVar('pkg_postinst', localdata, 1)
+ 		if not postinst:
+ 			postinst = '#!/bin/sh\n'
+@@ -58,23 +120,88 @@ python populate_packages_prepend () {
+ 		prerm += bb.data.getVar('systemd_prerm', localdata, 1)
+ 		bb.data.setVar('pkg_prerm_%s' % pkg, prerm, d)
+ 
+-	        postrm = bb.data.getVar('pkg_postrm', localdata, 1)
+-	        if not postrm:
+-	                postrm = '#!/bin/sh\n'
+-                postrm += bb.data.getVar('systemd_postrm', localdata, 1)
++		postrm = bb.data.getVar('pkg_postrm', localdata, 1)
++		if not postrm:
++			postrm = '#!/bin/sh\n'
++		postrm += bb.data.getVar('systemd_postrm', localdata, 1)
+ 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
+ 
+ 		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
+ 		rdepends.append("systemd")
+ 		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
+ 
++	"""	Setup rdepends / rrecommmends as:
 +
-+make_zimage_symlink_relative () {
-+	if [ -L ${IMAGE_ROOTFS}/boot/zImage ]; then
-+		(cd ${IMAGE_ROOTFS}/boot/ && for i in `ls zImage-* | sort`; do ln -sf $i zImage; done)
-+	fi
-+}
++                  -----------------------------
++                  |  pkg_systemd_base:	'foo' |
++                  -----------------------------
++                             |    ^
++                             |    |                 --------------
++                 rrecommends |    | rdepends        | 'systemd'  |
++                             |    |               ->--------------
++                             V    |              / rdepends
++                  ------------------------------/
++                  | pkg_systemd: 'foo-systemd' |
++                  ------------------------------
++	"""
++	def systemd_rdepend_rrecommends(pkg_systemd):
++		pn_pkg = d.getVar('PN', 1)
++		# RDEPENDS_${pkg_systemd} += pkg_systemd_base systemd
++		rdepends = explode_deps(d.getVar('RDEPENDS_' + pkg_systemd, 1) or "")
++		if not 'systemd' in rdepends:
++			rdepends.append('systemd')
++		pkg_systemd_base = pkg_systemd.replace('-systemd', '')
++		# not rdepending myself / avoid double entries
++		if pkg_systemd != pn_pkg and not pkg_systemd_base in rdepends:
++			rdepends.append(pkg_systemd_base)
++		d.setVar('RDEPENDS_' + pkg_systemd, " " + " ".join(rdepends))
++		# default: just a suggestion - to be discussed?
++		initmanager = d.getVar('INIT_MANAGER', 1) or 'systemd'
++		# RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
++		if initmanager == 'systemd':
++			rrecommends = explode_deps(d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or "")
++			# not rrecommending myself / avoid double entries
++			if pkg_systemd != pn_pkg and not pkg_systemd in rrecommends:
++				rrecommends.append(pkg_systemd)
++				d.setVar('RRECOMMENDS_' + pkg_systemd_base, " " + " ".join(rrecommends))
 +
-+write_image_manifest () {
-+	rootfs_${IMAGE_PKGTYPE}_write_manifest
++	# append systemd files to FILES_*-systemd
++	def systemd_files(pkg_systemd):
++		systemd_services = d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) or d.getVar('SYSTEMD_SERVICE', 1)
++		files_append = ""
++		if len(systemd_pkgs.split()) == 1:
++			# distribute complete ${base_libdir}/systemd/system/ to ${SYSTEMD_PACKAGES}
++			files_append = '${base_libdir}/systemd/system/'
++		else:
++			# distribute files set in SYSTEMD_SERVICE to ${SYSTEMD_PACKAGES}
++			for service in systemd_services.split():
++				files_append += " ${base_libdir}/systemd/system/" + service
 +
-+	rm -f ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.manifest
-+        ln -s ${IMAGE_NAME}.rootfs.manifest ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.manifest
-+}
++		var_name = "FILES_" + pkg_systemd
++		files = d.getVar(var_name, 0) or ""
++		d.setVar(var_name, "%s %s" % (files, files_append))
 +
-+# Make login manager(s) enable automatic login.
-+# Useful for devices where we do not want to log in at all (e.g. phones)
-+set_image_autologin () {
-+        sed -i 's%^AUTOLOGIN=\"false"%AUTOLOGIN="true"%g' ${IMAGE_ROOTFS}/etc/sysconfig/gpelogin
-+}
 +
-+# Can be use to create /etc/timestamp during image construction to give a reasonably 
-+# sane default time setting
-+rootfs_update_timestamp () {
-+	date -u +%2m%2d%2H%2M%4Y >${IMAGE_ROOTFS}/etc/timestamp
-+}
-+
-+# Prevent X from being started
-+rootfs_no_x_startup () {
-+	if [ -f ${IMAGE_ROOTFS}/etc/init.d/xserver-nodm ]; then
-+		chmod a-x ${IMAGE_ROOTFS}/etc/init.d/xserver-nodm
-+	fi
-+}
-+
-+rootfs_trim_schemas () {
-+	for schema in ${IMAGE_ROOTFS}/etc/gconf/schemas/*.schemas
-+	do
-+		# Need this in case no files exist
-+		if [ -e $schema ]; then
-+			oe-trim-schemas $schema > $schema.new
-+        	        mv $schema.new $schema
-+		fi
-+	done
-+}
-+
-+EXPORT_FUNCTIONS zap_root_password remove_init_link do_rootfs make_zimage_symlink_relative set_image_autologin rootfs_update_timestamp rootfs_no_x_startup
-+
-+do_fetch[noexec] = "1"
-+do_unpack[noexec] = "1"
-+do_patch[noexec] = "1"
-+do_configure[noexec] = "1"
-+do_compile[noexec] = "1"
-+do_install[noexec] = "1"
-+do_populate_sysroot[noexec] = "1"
-+do_package[noexec] = "1"
-+do_package_write_ipk[noexec] = "1"
-+do_package_write_deb[noexec] = "1"
-+do_package_write_rpm[noexec] = "1"
-+
-+addtask rootfs before do_build
++	systemd_pkgs = d.getVar('SYSTEMD_PACKAGES', 1)
++	for pkg_systemd in systemd_pkgs.split():
++		systemd_prepost_instrm(pkg_systemd)
++		systemd_rdepend_rrecommends(pkg_systemd)
++		systemd_files(pkg_systemd)
+ 
+-	pkgs = bb.data.getVar('SYSTEMD_PACKAGES', d, 1)
+-	if pkgs == None:
+-		pkgs = bb.data.getVar('PN', d, 1)
+-		packages = (bb.data.getVar('PACKAGES', d, 1) or "").split()
+-		if not pkgs in packages and packages != []:
+-			pkgs = packages[0]
+-	for pkg in pkgs.split():
+-		systemd_package(pkg)
++	# temporary debug output found in do_package.log
++	pn_pkg = d.getVar('PN', 1)
++	print 'base-package info:'
++	print 'DEPENDS: %s' % d.getVar('DEPENDS', 1)
++	print 'PACKAGES: %s' % d.getVar('PACKAGES', 1)
++	print 'RDEPENDS_%s: %s' % (pn_pkg, d.getVar('RDEPENDS_' + pn_pkg, 1))
++	print 'RRECOMMENDS_%s: %s' % (pn_pkg, d.getVar('RRECOMMENDS_' + pn_pkg, 1))
++	print 'systemd-(base-)-packages info:'
++	for pkg_systemd in systemd_pkgs.split():
++		pkg_systemd_base = pkg_systemd.replace('-systemd', '')
++		print 'RDEPENDS_%s: %s' % (pkg_systemd_base, d.getVar('RDEPENDS_' + pkg_systemd_base, 1))
++		print 'RDEPENDS_%s: %s' % (pkg_systemd, d.getVar('RDEPENDS_' + pkg_systemd, 1))
++		print 'RRECOMMENDS_%s: %s' % (pkg_systemd_base, d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1))
++		print 'RRECOMMENDS_%s: %s' % (pkg_systemd, d.getVar('RRECOMMENDS_' + pkg_systemd, 1))
++		print 'FILES_%s: %s' % (pkg_systemd_base, d.getVar('FILES_' + pkg_systemd_base, 1))
++		print 'FILES_%s: %s' % (pkg_systemd, d.getVar('FILES_' + pkg_systemd, 1))
+ }
 -- 
 1.7.6.4
 
