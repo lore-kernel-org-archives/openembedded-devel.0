@@ -1,33 +1,30 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Runrn-0000IU-3v
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Runxr-0000eP-5N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Feb 2012 17:26:03 +0100
-Received: by eekd41 with SMTP id d41so2198680eek.6
+	Tue, 07 Feb 2012 17:32:19 +0100
+Received: by lbol12 with SMTP id l12so1657681lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2012 08:18:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=UlmSqnf5gqwohixUk2QxxIs+okVOT7hvpr++YK/KXXg=;
-	b=Gy3/+U6IT11NMbZaAbWZn1/IMwZC7+Xk/r/1kYSWiQWYOuEhDUcsgAjvqa4WqbcGIJ
-	UO+UXl5pbU+eCdYM6BLFHJjrse7SyWmuK+mRuqEi7cEpRww1UNuVSNdewYbdTJUWpS4o
-	gNyTxsHN0tmkJ4NyRK3sthvix20HuVjZ/Hm5k=
+	Tue, 07 Feb 2012 08:24:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=sk911ZD60tfCvc3+eln/FyZ0AwKF7sGrjAVNNcJl2fg=;
+	b=u+YvZrL+14dVVo6fK2EwS30uLUBc7HggfeK5Zc08Z/+lwvI2I1H+6T0Ouj3Zv9XcIm
+	e3/yYVX7GygPeDdLAw15nT7Z0rJJSjcXvC/bfEtxLIfDf4sKRZTYSuz/kLFzOemxbr3p
+	HSHUtMPnGEMWnQROr0UjHxbZP2VuDevxn4o/4=
 MIME-Version: 1.0
-Received: by 10.14.206.133 with SMTP id l5mr7172549eeo.22.1328631480575; Tue,
-	07 Feb 2012 08:18:00 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Tue, 7 Feb 2012 08:18:00 -0800 (PST)
-In-Reply-To: <jgrhv4$v69$1@dough.gmane.org>
+Received: by 10.112.84.170 with SMTP id a10mr6604362lbz.22.1328631856691; Tue,
+	07 Feb 2012 08:24:16 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Tue, 7 Feb 2012 08:24:16 -0800 (PST)
+In-Reply-To: <jgrhc8$r0l$1@dough.gmane.org>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
-	<jgrhv4$v69$1@dough.gmane.org>
-Date: Tue, 7 Feb 2012 14:18:00 -0200
-X-Google-Sender-Auth: gMvHrW7KY_FUzOc2mTz9MyBNuZI
-Message-ID: <CAP9ODKpwQyOE=xYY_Ezhofw=LcjLNzYJeSvJ+xBEwgX6bVeN0A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<jgrhc8$r0l$1@dough.gmane.org>
+Date: Tue, 7 Feb 2012 17:24:16 +0100
+Message-ID: <CALbNGRTGghjj-Nw5jwokoU22FMqbZpezmPNesSaDSv+yT7K=YQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,20 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 16:26:03 -0000
+X-List-Received-Date: Tue, 07 Feb 2012 16:32:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 7, 2012 at 14:02, Koen Kooi <koen@dominion.thruhere.net> wrote:
-
-> > * I'd like to see sysvinit packages splitted onto ${PN}-sysvinit as well
+On Tue, Feb 7, 2012 at 4:52 PM, Koen Kooi <koen@dominion.thruhere.net> wrot=
+e:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> This would require extra logic to install -sysvinit if -systemd is missing.
+> Op 07-02-12 16:12, Andreas M=FCller schreef:
+>> The RFC series is intended to
+>>
+>> * reduce efforts/pitfalls when implementing native systemd support *
+>> enable a global configuration for selecting of systemd/syvinit (sysvinit
+>> needs further efforts)
+>>
+>> The whole series' can be found at (branches 'systemd' meta-oe:
+>> git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded-systemd.git
+>> meta-angstrom:
+>> git://gitorious.org/schnitzeltony-oe-meta/meta-angstrom-systemd.git
+>>
+>> Notes: * These are my first python experiences - suggestions welcome. *
+>> In local.conf (or in distro) the configuration variable INIT_MANAGER
+>> selects the initmanager to be build into an image. When changing the
+>> selection, a build from scratch is required. INIT_MANAGER currently
+>> defaults to systemd (see image.bbclass and initmanager.bbclass)
+>
+> NAK! The initmanager decision is up the image, not the distro. The distro
+> can use blacklist.bbclass to blacklist the initmanagers it doesn't suppor=
+t
+> if needed.
+It's not possible to let the image decide - e.g for polkit/udisks we
+would need 2 versions: one configured/linked against systemd and one
+without.
+>
+> regards,
+>
+> Koen
 
+regards
 
-And if there's any sysvinit package, it ought to install compat-units too.
+Andreas
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
