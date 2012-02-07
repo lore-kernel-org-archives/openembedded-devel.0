@@ -1,24 +1,30 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rupno-00050L-PW
+	(envelope-from <otavio.salvador@gmail.com>) id 1RusFH-0001OE-E2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Feb 2012 19:30:04 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 07 Feb 2012 10:22:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122087905"
-Received: from unknown (HELO helios.localnet) ([10.252.123.5])
-	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2012 10:22:00 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 07 Feb 2012 22:06:35 +0100
+Received: by yhfq46 with SMTP id q46so3153839yhf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Feb 2012 12:58:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=IY7/c4QeDn8o9h8eeE62+MhaMIsL69wFCJfQ2rQtZc8=;
+	b=hpdxMeBU3s6eg/RX+0l0Itm+k7bnbArcgKBrTIAqv445KZYlJpHG7dX/hsAtYBWR2O
+	h1gH1ULnEm91SEOBEFdIBU6Y9BJUyDtZqwOOQ4zR34lg19+SLFahVQxo+WpDMOKM3IA1
+	T3ap9Queb3xE5+ezDIOyqD/MEtEDeLqM8QwTI=
+Received: by 10.236.136.99 with SMTP id v63mr34023030yhi.46.1328648311970;
+	Tue, 07 Feb 2012 12:58:31 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id o61sm30096056yhk.10.2012.02.07.12.58.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 07 Feb 2012 12:58:31 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 07 Feb 2012 18:21:59 +0000
-Message-ID: <4212390.S23LVBF3Qx@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-15-generic-pae; KDE/4.8.0; i686; ; )
-In-Reply-To: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
-References: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.8 to 3.1.10
+Date: Tue,  7 Feb 2012 20:58:21 +0000
+Message-Id: <cover.1328648257.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/3] O.S. Systems' systemd related changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,80 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 18:30:05 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 07 Feb 2012 21:06:35 -0000
 
-On Monday 06 February 2012 01:04:42 Andrea Adami wrote:
-> * apply latest patchset for 3.1 and bump PR of both recipes
-> * (Kernel 3.2 is still on hold because we are waiting for klibc_2.0)
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  recipes-kernel/linux/linux-3.1.inc          |    6 +++---
->  recipes-kernel/linux/linux-kexecboot_3.1.bb |    2 +-
->  recipes-kernel/linux/linux_3.1.bb           |    2 +-
->  3 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-3.1.inc
-> b/recipes-kernel/linux/linux-3.1.inc index 8733543..34bf4a8 100644
-> --- a/recipes-kernel/linux/linux-3.1.inc
-> +++ b/recipes-kernel/linux/linux-3.1.inc
-> @@ -1,5 +1,5 @@
->  SRC_URI +=
-> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
->         
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stab
-> lepatch \ +          
-> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=sta
-> blepatch \ file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> @@ -15,5 +15,5 @@ SRC_URI_append_poodle = " \
-> 
->  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
->  SRC_URI[kernel.sha256sum] =
-> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
-> -SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
-> -SRC_URI[stablepatch.sha256sum] =
-> "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
-> +SRC_URI[stablepatch.md5sum] = "a8e1c25a93a685ec2a1c3a808715fe9d"
-> +SRC_URI[stablepatch.sha256sum] =
-> "f25126052d1a083a415ddd313b40c7fcdb3742f40474cb4a826af7e43fee29d3" diff
-> --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index 535beb3..28dc370 100644
-> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
-> @@ -1,7 +1,7 @@
->  require linux-kexecboot.inc
->  require linux-${PV}.inc
-> 
-> -PR = "${INC_PR}.6"
-> +PR = "${INC_PR}.7"
->  S = "${WORKDIR}/linux-${PV}"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-> diff --git a/recipes-kernel/linux/linux_3.1.bb
-> b/recipes-kernel/linux/linux_3.1.bb index 980be11..c8e2a39 100644
-> --- a/recipes-kernel/linux/linux_3.1.bb
-> +++ b/recipes-kernel/linux/linux_3.1.bb
-> @@ -1,7 +1,7 @@
->  require linux.inc
->  require linux-${PV}.inc
-> 
-> -PR = "${INC_PR}.8"
-> +PR = "${INC_PR}.9"
-> 
->  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
+The following changes since commit 724ec1ea4ff52b88bf1f6970557e44768214fd7b:
 
-Merged to meta-handheld, thanks.
+  systemd: move to v40 and don't kill user processes on exit (2012-02-07 16:06:19 +0100)
 
-Cheers,
-Paul
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (3):
+  Revert "systemd.bbclass: depends on systemd"
+  udisks: explicitly depends on systemd
+  polkit: depends on systemd
+
+ meta-oe/classes/systemd.bbclass                    |    2 +-
+ .../recipes-extended/polkit/polkit_0.104.bbappend  |    3 +++
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |    4 ++--
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
 
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
