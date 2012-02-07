@@ -1,38 +1,38 @@
 Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1RutyT-0005V7-K2; Tue, 07 Feb 2012 23:57:21 +0100
-Received: by pbbb4 with SMTP id b4so28151pbb.6
-	for <multiple recipients>; Tue, 07 Feb 2012 14:49:18 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>) id 1Ruu2j-00064Q-0g
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Feb 2012 00:01:45 +0100
+Received: by pbbb4 with SMTP id b4so30732pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Feb 2012 14:53:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=tCViV2r46/fXehVQ1CK1EJWfPvHz0LASzGCtQV1v1ok=;
-	b=FEmRxF3Z8Rqg/D+nN+jtbxhkB5gbGR2iPi68+47Qjn2n3RMBXsTeZFSa7ruELeMh5I
-	55Lv1hE1gP5irQpy+MCx9gakKsqxQKFdggz7WqivanHMfHXp7NYumZVICywOSNbH8mFC
-	7Wc4dK3F6uPZiUPJBm6q3v+F07eW94QWP+Eqw=
-Received: by 10.68.219.69 with SMTP id pm5mr62255084pbc.5.1328654958052;
-	Tue, 07 Feb 2012 14:49:18 -0800 (PST)
+	:user-agent; bh=V6M5SbbK5cdMscwUPfZ29zAQsRCxickFeSeFmCX9K58=;
+	b=F3/nDVLyLChieVb0QP7wZicpd8CH1MvCXDpuhmSzJWBcD/Bs3bT2f56r8voSJr1vhT
+	8EOkWqE2+3Hz4n15DgPKcycpmg1nDDJhW64F8Eno8zjSWRwxrc1NOh2mhaLeKorIVNkF
+	CwutcqUGd9/NlwRI6j1ZDWbNph9A0J15WQ82E=
+Received: by 10.68.134.35 with SMTP id ph3mr61832142pbb.29.1328655221652;
+	Tue, 07 Feb 2012 14:53:41 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-142-235.lightspeed.sntcca.sbcglobal.net. [99.57.142.235])
-	by mx.google.com with ESMTPS id o7sm170964pbq.8.2012.02.07.14.49.15
+	by mx.google.com with ESMTPS id p2sm174988pbb.14.2012.02.07.14.53.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 14:49:16 -0800 (PST)
-Date: Tue, 7 Feb 2012 14:49:04 -0800
+	Tue, 07 Feb 2012 14:53:40 -0800 (PST)
+Date: Tue, 7 Feb 2012 14:53:27 -0800
 From: Khem Raj <raj.khem@gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Message-ID: <20120207224904.GC13125@sakrah.homelinux.org>
-Mail-Followup-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <29270F77-234D-4561-974D-C8E266898FA3@beagleboard.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120207225327.GD13125@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
+	<1328627573-5217-3-git-send-email-schnitzeltony@googlemail.com>
+	<2290568.0amlKfqkN1@helios>
+	<CAP9ODKq7OCzMmUgN3hMuZKOghrr=noBShWd+4XxEz_zPuusLfQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <29270F77-234D-4561-974D-C8E266898FA3@beagleboard.org>
+In-Reply-To: <CAP9ODKq7OCzMmUgN3hMuZKOghrr=noBShWd+4XxEz_zPuusLfQ@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [meta-openembedded][RFC] meta-multimedia layer
+Subject: Re: [meta-oe][RFC 02/27] initmanager.bbclass: inital add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,18 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 22:57:22 -0000
+X-List-Received-Date: Tue, 07 Feb 2012 23:01:45 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (07/02/12 12:08), Koen Kooi wrote:
-> Hi,
+On (07/02/12 13:57), Otavio Salvador wrote:
+> On Tue, Feb 7, 2012 at 13:39, Paul Eggleton
+> <paul.eggleton@linux.intel.com>wrote:
 > 
-> During FOSDEM Paul Eggleton and I discussed moving a few multimedia recipes (libav, xbmc, faac, faad, etc) out of meta-oe into a new meta-multimedia layer hosted in the meta-openembedded git repo. This would allow e.g. meta-baryon to drop a number of recipes while avoiding the need to drag in the complete meta-oe layer.
+> > Would it be possible to turn this on its head and merge
+> > systemd.bbclass/update-rc.d.bbclass into one so that it does the
+> > appropriate
+> > thing for whatever INIT_MANAGER is set to for every recipe that uses it?
+> >
 > 
-> Thoughts?
+> I'd say initmanager.bbclass ought to inherit both and handle the packaging
+> for both. As Koen said, I'd prefer to have it as an image decision not an
+> distro decision. We might not build one, if distro drops the feature but by
+> default both ought to be build IMO.
 
-yes idea is fine. Will it then host all multimedia related stuff ? or
-just whats in meta-oe is being moved.
+some of packages depend on availability of one or another e.g. systemd
+if present some recipes compile one way otherwise not
+so a distro using same tmpdir to spit out two images with two different
+init managers can be a challage
 
 
