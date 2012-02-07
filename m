@@ -1,35 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumr1-0001KV-MF
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumr1-0001JN-MM
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 07 Feb 2012 16:21:12 +0100
-Received: by mail-ey0-f175.google.com with SMTP id l10so1955924eaa.6
+Received: by mail-ee0-f47.google.com with SMTP id d41so2181069eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2012 07:13:11 -0800 (PST)
+	Tue, 07 Feb 2012 07:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=NyT1s7XvY0Rc/gaKD5NprOFibFQVvX0ME7Chw3523n4=;
-	b=ApaVSHDla41ePmt/Q87XPN4jSMcPAljf33vdMXv7VhN0AlKCbGAMpXOIcxM5KcbwZ6
-	M1DgjxpI2hdCgkkLRYJj2LdlXYuQRhtW7zeWJaoJeXdNeGbpIcmy6MGIHAciSbxtPAGY
-	fIDOcBgLYJbjkSj18Y+TWthC8723UvwzTXuqA=
-Received: by 10.213.25.146 with SMTP id z18mr3720549ebb.65.1328627591544;
-	Tue, 07 Feb 2012 07:13:11 -0800 (PST)
+	bh=ctOGOxLqO3vI4ljIdDaOYy6MWyDnV5tsFpCmhJKBE0U=;
+	b=bnlqP9o6DI9MXbAuDZTuoVF3dqcQBOTpi8oLpib7YNwFd3lizHMR/CPq/jQTORi5Qc
+	4deONV0E4L+tghPYLrlqlyCAftbs0M0XkSVKzq/athIu2KGEyMhMtUtkjZuEbNAaeqfn
+	LHnwH2DgJAsKl60T2Jlvw28rDPMAeqVfBQdCA=
+Received: by 10.213.15.17 with SMTP id i17mr3723523eba.103.1328627589743;
+	Tue, 07 Feb 2012 07:13:09 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190])
-	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.13.10
+	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.13.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 07:13:10 -0800 (PST)
+	Tue, 07 Feb 2012 07:13:09 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Feb 2012 16:12:43 +0100
-Message-Id: <1328627573-5217-18-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  7 Feb 2012 16:12:42 +0100
+Message-Id: <1328627573-5217-17-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
 In-Reply-To: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][RFC 17/27] udisks: conditional DEPENDS systemd / remove unneeded systemd code
+Subject: [meta-oe][RFC 16/27] slim: inherit systemd / remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +50,55 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/udisks/udisks_1.0.4.bb |   11 ++---------
- 1 files changed, 2 insertions(+), 9 deletions(-)
+ meta-oe/recipes-graphics/slim/slim_1.3.2.bb |    9 ++++-----
+ 1 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-index 55b115e..cddd7ca 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
+diff --git a/meta-oe/recipes-graphics/slim/slim_1.3.2.bb b/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
+index 90f9939..eaec13a 100644
+--- a/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
++++ b/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE="http://slim.berlios.de"
  LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
  
--DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
-+DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0 ${@base_conditional('INIT_MANAGER', 'systemd', 'systemd', '', d)}"
- # optional dependencies: device-mapper parted
+-PR = "r1"
++PR = "r2"
  
- SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-@@ -12,7 +12,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
- SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
- SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
+ DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
  
--PR = "r2"
-+PR = "r3"
+@@ -26,6 +26,9 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "ca1ae6120e6f4b4969f2d6cf94f47b42"
+ SRC_URI[sha256sum] = "f1560125005f253b9b88220598fed7a9575ef405716862c6ca3fcc72dbd482b8"
  
- inherit autotools systemd
++inherit systemd
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE = "slim.service"
  
-@@ -21,11 +21,6 @@ SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
+ EXTRA_OEMAKE += " \
+   USE_PAM=${@base_contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
+@@ -58,14 +61,11 @@ do_install() {
  
- EXTRA_OECONF = "--disable-man-pages"
  
--PACKAGES =+ "${PN}-systemd"
+ RDEPENDS_${PN} = "perl xauth freetype sessreg "
+-FILES_${PN} += "${base_libdir}/systemd/system/"
+ 
+ pkg_postinst_${PN} () {
+ if test "x$D" != "x"; then
+ 	exit 1
+ fi
+-systemctl enable slim.service
 -
--FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
--RDEPENDS_${PN}-systemd = "${PN}"
--
- FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
-                 ${datadir}/dbus-1/ \
-                 ${datadir}/polkit-1 \
-@@ -33,5 +28,3 @@ FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
- "
+ # Register SLiM as default DM
+ mkdir -p ${sysconfdir}/X11/
+ echo "${bindir}/slim" > ${sysconfdir}/X11/default-display-manager
+@@ -75,7 +75,6 @@ pkg_postrm_${PN} () {
+ if test "x$D" != "x"; then
+ 	exit 1
+ fi
+-systemctl disable slim.service
+ sed -i /slim/d $D${sysconfdir}/X11/default-display-manager || true
+ }
  
- FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
--
--
 -- 
 1.7.6.4
 
