@@ -1,24 +1,24 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rupm1-0004qr-3X
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rupno-00050L-PW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Feb 2012 19:28:13 +0100
+	Tue, 07 Feb 2012 19:30:04 +0100
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Feb 2012 10:20:09 -0800
+	by fmsmga102.fm.intel.com with ESMTP; 07 Feb 2012 10:22:01 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122087119"
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122087905"
 Received: from unknown (HELO helios.localnet) ([10.252.123.5])
-	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2012 10:20:08 -0800
+	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2012 10:22:00 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 07 Feb 2012 18:20:08 +0000
-Message-ID: <2342878.vkj0khZiVL@helios>
+Date: Tue, 07 Feb 2012 18:21:59 +0000
+Message-ID: <4212390.S23LVBF3Qx@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.8.0 (Linux/3.0.0-15-generic-pae; KDE/4.8.0; i686; ; )
-In-Reply-To: <1328395761-19018-1-git-send-email-andrea.adami@gmail.com>
-References: <1328395761-19018-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
+References: <1328486682-29754-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] zaurus.inc: remove remnant of kernel26 from MACHINE_FEATURES
+Subject: Re: [meta-handheld][PATCH] linux(-kexecboot): upgrade from 3.1.8 to 3.1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,55 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 18:28:13 -0000
+X-List-Received-Date: Tue, 07 Feb 2012 18:30:05 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Saturday 04 February 2012 23:49:21 Andrea Adami wrote:
-> * and do some minor cleanings, removing unneeded var for kernel type
-> * remove outdated comments about tosa suspend as well
+On Monday 06 February 2012 01:04:42 Andrea Adami wrote:
+> * apply latest patchset for 3.1 and bump PR of both recipes
+> * (Kernel 3.2 is still on hold because we are waiting for klibc_2.0)
 > 
 > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 > ---
->  conf/machine/include/zaurus.inc |    8 ++------
->  1 files changed, 2 insertions(+), 6 deletions(-)
+>  recipes-kernel/linux/linux-3.1.inc          |    6 +++---
+>  recipes-kernel/linux/linux-kexecboot_3.1.bb |    2 +-
+>  recipes-kernel/linux/linux_3.1.bb           |    2 +-
+>  3 files changed, 5 insertions(+), 5 deletions(-)
 > 
-> diff --git a/conf/machine/include/zaurus.inc
-> b/conf/machine/include/zaurus.inc index 099bb3e..a43db8b 100644
-> --- a/conf/machine/include/zaurus.inc
-> +++ b/conf/machine/include/zaurus.inc
-> @@ -35,8 +35,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux"
+> diff --git a/recipes-kernel/linux/linux-3.1.inc
+> b/recipes-kernel/linux/linux-3.1.inc index 8733543..34bf4a8 100644
+> --- a/recipes-kernel/linux/linux-3.1.inc
+> +++ b/recipes-kernel/linux/linux-3.1.inc
+> @@ -1,5 +1,5 @@
+>  SRC_URI +=
+> "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \ - 
+>         
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stab
+> lepatch \ +          
+> ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=sta
+> blepatch \ file://defconfig \
+>             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+>             "
+> @@ -15,5 +15,5 @@ SRC_URI_append_poodle = " \
 > 
->  # Default bootloader expects "zImage", use "uImage" for u-boot
->  # Note: kexecboot can boot both kind of images
-> -ZAURUS_KERNEL_IMAGETYPE ?= "zImage"
-> -KERNEL_IMAGETYPE = "${ZAURUS_KERNEL_IMAGETYPE}"
-> +KERNEL_IMAGETYPE ?= "zImage"
+>  SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+>  SRC_URI[kernel.sha256sum] =
+> "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+> -SRC_URI[stablepatch.md5sum] = "54fac8e4b0b55201e012ef0337a6cc87"
+> -SRC_URI[stablepatch.sha256sum] =
+> "e191f1fd3d3e0a27e3e5116391a97b47b0c2adc3f6f779df1996766b37759d30"
+> +SRC_URI[stablepatch.md5sum] = "a8e1c25a93a685ec2a1c3a808715fe9d"
+> +SRC_URI[stablepatch.sha256sum] =
+> "f25126052d1a083a415ddd313b40c7fcdb3742f40474cb4a826af7e43fee29d3" diff
+> --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> b/recipes-kernel/linux/linux-kexecboot_3.1.bb index 535beb3..28dc370 100644
+> --- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> +++ b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+> @@ -1,7 +1,7 @@
+>  require linux-kexecboot.inc
+>  require linux-${PV}.inc
 > 
->  # sane defaults for devices with only 32Mb RAM (see man xz)
->  XZ_COMPRESSION_LEVEL = "-e -7"
-> @@ -60,7 +59,7 @@ CMDLINE_poodle = "console=ttyS0,115200n8 console=tty1
-> fbcon=rotate:1" CMDLINE_spitz = "console=ttyS0,115200n8 console=tty1
-> fbcon=rotate:1" CMDLINE_tosa = "console=ttyS0,115200n8 console=tty1"
+> -PR = "${INC_PR}.6"
+> +PR = "${INC_PR}.7"
+>  S = "${WORKDIR}/linux-${PV}"
 > 
-> -MACHINE_FEATURES = "kernel26 apm alsa pcmcia irda usbgadget keyboard
-> touchscreen screen vfat ext2" +MACHINE_FEATURES = "apm alsa pcmcia irda
-> usbgadget keyboard touchscreen screen vfat ext2"
-> MACHINE_FEATURES_append_akita = " usbhost"
->  MACHINE_FEATURES_append_spitz = " usbhost"
->  MACHINE_FEATURES_append_tosa  = " usbhost wifi "
-> @@ -68,9 +67,6 @@ MACHINE_FEATURES_append_tosa  = " usbhost wifi "
->  MACHINE_EXTRA_RDEPENDS = "zaurusd mtd-utils nandlogical"
->  MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+> diff --git a/recipes-kernel/linux/linux_3.1.bb
+> b/recipes-kernel/linux/linux_3.1.bb index 980be11..c8e2a39 100644
+> --- a/recipes-kernel/linux/linux_3.1.bb
+> +++ b/recipes-kernel/linux/linux_3.1.bb
+> @@ -1,7 +1,7 @@
+>  require linux.inc
+>  require linux-${PV}.inc
 > 
-> -# Still actual? OHCI suspend/resume fixup
-> -# MACHINE_EXTRA_RRECOMMENDS_tosa = "apm-tosa-suspendfix"
-> -
->  ##################################
->  # Zaurus rootfs are booted by
->  # linux-kexecboot
+> -PR = "${INC_PR}.8"
+> +PR = "${INC_PR}.9"
+> 
+>  COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
 
-All three of the zaurus.inc patches merged to meta-handheld. Thanks!
+Merged to meta-handheld, thanks.
 
 Cheers,
 Paul
