@@ -1,35 +1,35 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumqq-0001Jt-7H
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rumqr-0001KV-AB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Feb 2012 16:21:00 +0100
-Received: by mail-ey0-f175.google.com with SMTP id l10so1955916eaa.6
+	Tue, 07 Feb 2012 16:21:01 +0100
+Received: by eaal10 with SMTP id l10so1955924eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2012 07:13:00 -0800 (PST)
+	Tue, 07 Feb 2012 07:12:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=omshb78+iI1T40uqdGXQWG63gxRlGAtDvpmkG01UMQA=;
-	b=Jc5f4pi7WwsjLX5e8mNCUPKYfibRLes9OC1RjFCGXTt+E0404Wi42Qelg4bF97rmGs
-	ePIMAQBZ8VyXEC8oPNx0YlE8UW/jxPDMfB//VopNrgvQKj/vPlY2wySmx+G7gs98coOm
-	kI8OYS8OmtwuCItVREvfLVlTO3BLiUGptbPig=
-Received: by 10.213.26.8 with SMTP id b8mr2098168ebc.88.1328627580091;
-	Tue, 07 Feb 2012 07:13:00 -0800 (PST)
+	bh=BAEFdm1s3v/DRTXi3GN9HOcmv5843WA0oE2tUeaa4tg=;
+	b=uXfK80cGhIC806gwaFCS9p5qC0VwP55xikjpbR9YTFkWWJvvXhZuNzsgYLUVriWdyP
+	TojCY2nBVQ+29uUqe8fdanESWDwMqaBUUkrhQ1jsbGnyDiCmivojDi4JbM0I/3/vcfmf
+	BjEknEbNfSI6JDy+m6r8rltL6QnjavwOkR6Xg=
+Received: by 10.213.17.19 with SMTP id q19mr3707679eba.85.1328627579084;
+	Tue, 07 Feb 2012 07:12:59 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190])
-	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.12.59
+	by mx.google.com with ESMTPS id n58sm1424741een.10.2012.02.07.07.12.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 07:12:59 -0800 (PST)
+	Tue, 07 Feb 2012 07:12:58 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Feb 2012 16:12:34 +0100
-Message-Id: <1328627573-5217-9-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  7 Feb 2012 16:12:33 +0100
+Message-Id: <1328627573-5217-8-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
 In-Reply-To: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][RFC 08/27] cronie: remove unneeded systemd code
+Subject: [meta-oe][RFC 07/27] gateone: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 15:21:00 -0000
+X-List-Received-Date: Tue, 07 Feb 2012 15:21:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-extended/cronie/cronie_1.4.8.bbappend  |   12 +-----------
- 1 files changed, 1 insertions(+), 11 deletions(-)
+ .../recipes-connectivity/gateone/gateone_git.bb    |    7 ++-----
+ 1 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/cronie/cronie_1.4.8.bbappend b/meta-oe/recipes-extended/cronie/cronie_1.4.8.bbappend
-index e0b9fb9..5aedb21 100644
---- a/meta-oe/recipes-extended/cronie/cronie_1.4.8.bbappend
-+++ b/meta-oe/recipes-extended/cronie/cronie_1.4.8.bbappend
-@@ -1,7 +1,7 @@
- # look for files in the layer first
- FILESEXTRAPATHS := "${THISDIR}/${PN}"
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index 4f9684c..e54acf6 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+ LICENSE = "AGPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
  
--PRINC = "1"
-+PRINC = "2"
+-PR = "r15"
++PR = "r16"
  
- inherit systemd
+ PV = "0.9"
+ SRCREV = "a68444610efa2892842893dae828a28527e64a6e"
+@@ -20,14 +20,11 @@ export prefix = "${localstatedir}/lib"
+ do_install_append() {
+ 	install -d ${D}${localstatedir}/log/${BPN}
  
-@@ -9,13 +9,3 @@ SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE_${PN}-systemd = "crond.service"
- 
- SRC_URI += "file://crond.service"
+-	install -m 0755 -d ${D}${base_libdir}/systemd/system
+-	install -m 0644 ${WORKDIR}/gateone.service ${D}${base_libdir}/systemd/system/
 -
--do_install_append() {
--    install -d ${D}${base_libdir}/systemd/system
--    install -m 644 ${WORKDIR}/crond.service ${D}${base_libdir}/systemd/system
--}
--
--PACKAGES =+ "${PN}-systemd"
--
--FILES_${PN}-systemd += "${base_libdir}/systemd"
--RDEPENDS_${PN}-systemd = "${PN}"
+ 	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+ 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+ }
+ 
+-SYSTEMD_PACKAGES = "${PN}"
++SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE = "gateone.service"
+ 
+ FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir}"
 -- 
 1.7.6.4
 
