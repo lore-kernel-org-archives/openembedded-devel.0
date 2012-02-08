@@ -1,34 +1,33 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RvDQT-0002Pt-GR
+	(envelope-from <otavio.salvador@gmail.com>) id 1RvDct-00071Q-HQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 20:43:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 722A33158A73
+	Wed, 08 Feb 2012 20:56:23 +0100
+Received: by eekd41 with SMTP id d41so256567eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 20:35:31 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id gIIdhP6XW9ai
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 20:35:25 +0100 (CET)
-Received: from [172.22.22.61] (drms-590c4e0c.pool.mediaWays.net [89.12.78.12])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id CA7E83158A6C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 20:35:24 +0100 (CET)
-Message-ID: <4F32CE7B.8050109@opendreambox.org>
-Date: Wed, 08 Feb 2012 20:35:23 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Wed, 08 Feb 2012 11:48:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=CIr9HOxTFLeoueCQ0uRO7Cd2DU8qVEpt1EKfFi+vjT0=;
+	b=f17+UfCZXLlsRIJA0gn+2eN/sDOn1KuOLn6XsnNu2o3upHbvOGgQQ3bCVv9IGagTUD
+	7tZO+ZMbf3vEar+PFIX+P56nko9z7IiWw3wSv0yhf7f4CVGJfukFWfPgTCjFgMoE15LH
+	mg3maVcUTnw/3kvTWwUnFYp5n1gdj1zCwzIUQ=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.14.52.17 with SMTP id d17mr8834503eec.56.1328730499870; Wed,
+	08 Feb 2012 11:48:19 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.14.96.129 with HTTP; Wed, 8 Feb 2012 11:48:19 -0800 (PST)
+In-Reply-To: <4F32CE7B.8050109@opendreambox.org>
 References: <4F2A97B7.2080709@opendreambox.org>
 	<CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
-In-Reply-To: <CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
+	<4F32CE7B.8050109@opendreambox.org>
+Date: Wed, 8 Feb 2012 17:48:19 -0200
+X-Google-Sender-Auth: BYtsueaMg_u3jIPswqLh-YQs2Jc
+Message-ID: <CAP9ODKr+bmWJX8tjesyTvP8_4pEgFDXjOA+s2ZbSq5U+=PC4rw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,44 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 19:43:40 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 19:56:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 08.02.2012 19:41, Otavio Salvador wrote:
-> On Thu, Feb 2, 2012 at 12:03, Andreas Oberritter <obi@opendreambox.org>wrote:
-> 
->> There's no need to alter configure flags, because without x11,
->> libsm cannot be picked up accidentially. Because this just fixes
->> a missing dependency failure without x11, no PR bump is required
->> either.
->>
-> 
-> I do prefer a clear configure option depending on if it is going to use or
-> not libsm otherwise if user has built it, it is going to be taken.
+On Wed, Feb 8, 2012 at 17:35, Andreas Oberritter <obi@opendreambox.org>wrote:
 
-Currently, there are two possibilities:
+> I already explained in the commit message, why a PR bump is not needed.
+> Can you please explain which other possible failures you're expecting,
+> so I can learn why my reasoning may be wrong?
+>
+> This patch only fixes an unavailable build dependency at bitbake level,
+> nothing more.
+>
 
-1.) x11 is in DISTRO_FEATURES
-    -> libsm is built, giflib is built with libsm
-2.) x11 is not in DISTRO_FEATURES
-    -> giflib build is broken, because libsm does not exist in this
-configuration
+Can the user call:
 
-Therefore, the scenario you're describing cannot happen.
+bitbake libsm
 
-> Also,
-> please PR bump in any case since it can help spot other possible failures
-> that we'd not catch otherwise.
+and then build giflib? in case of positive, we need to enforce have or not
+it linked.
 
-I already explained in the commit message, why a PR bump is not needed.
-Can you please explain which other possible failures you're expecting,
-so I can learn why my reasoning may be wrong?
-
-This patch only fixes an unavailable build dependency at bitbake level,
-nothing more.
-
-Regards,
-Andreas
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
