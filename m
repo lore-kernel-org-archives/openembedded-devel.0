@@ -1,35 +1,27 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RuxGR-000378-RV
+	(envelope-from <ka6sox@gmail.com>) id 1RuzDv-0005yO-Nd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 03:28:08 +0100
-Received: by pbcum15 with SMTP id um15so30136pbc.6
+	Wed, 08 Feb 2012 05:33:39 +0100
+Received: by iaby12 with SMTP id y12so333891iab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2012 18:20:04 -0800 (PST)
+	Tue, 07 Feb 2012 20:25:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=sLXGX/9HQ7FUgHobkuvBHWJKaS0yBfNP0C9PgXBSFW0=;
-	b=HUB42dmhmINO9uCtBJDNupwyoyUUyZc/XoHcu5ExS7X2RvOc3jSefF/MFk3kkJQatm
-	l1eXr9oQb0UyqXx0mtmEVuWQxWCfi4rTeCiZx0sNdWxZu33oKGIhKPB2hrwXpxLJDJmE
-	ebyo7FS3/ZZLofiNUjoibVSjTIvOGnblk8z54=
-Received: by 10.68.224.104 with SMTP id rb8mr63675499pbc.107.1328667604067;
-	Tue, 07 Feb 2012 18:20:04 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id r10sm1220677pbs.12.2012.02.07.18.20.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 18:20:02 -0800 (PST)
-Date: Tue, 7 Feb 2012 18:19:54 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120208021937.GA13964@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <4F31CE69.4050107@palm.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=vqRB/qndrjZdg5lpPqsvJj+9pcl1fsM73MdMG+ap/tk=;
+	b=nGimkxBep/t55+05PfKRK3VIw2EQNtZZglU1tZWJLg/N3DGOPY+hCMMwQzRB2edr9d
+	iXMDYLxQUS+yQsAgBelsUaLLF2fQKgqE46HwRmr5XNi/TkYKerWXbj8IZcV0TiqoW8tl
+	tGJxJ7pg6lHm21zKnET91vhmlZ19vkk41/0SY=
 MIME-Version: 1.0
-In-Reply-To: <4F31CE69.4050107@palm.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: bitbake confusion
+Received: by 10.42.158.195 with SMTP id i3mr25375863icx.7.1328675135929; Tue,
+	07 Feb 2012 20:25:35 -0800 (PST)
+Received: by 10.50.170.7 with HTTP; Tue, 7 Feb 2012 20:25:35 -0800 (PST)
+Date: Tue, 7 Feb 2012 20:25:35 -0800
+Message-ID: <CAHQecY6fXhgF643cUyv--y6+8ayNdVeGSVPuy=_P=jzgp4p7-w@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: git, wiki planned outage.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,82 +35,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 02:28:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Feb 2012 04:33:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (07/02/12 17:22), Rich Pixley wrote:
-> I've just started working with current OE, (Palm has been branched
-> for several years).  And I'm a bit confused about how bitbake is
-> supposed to work these days.
+0000-0200UTC 09Feb2012
 
-I would suggest you use the new layered model to start with. We still
-have classic oe there but its not being developed on there is a
-maintenace release of that and that it. latest bitbake has also probably
-not been tested with classic oe metadata.
+Replacement of HD controller bits and defective HD's
 
-in the new model you will have webos as a new layer on top of existing
-oe-core and other layers around it. metadata is maintained in separate
-layers. You can look at angstrom or yocto for how the layers are used
-for a distro.
+Thanks,
 
-> 
-> In the output below, how do I tell where the file with the erroneous
-> line might be?  I mean, I can grep, but that won't necessarily tell
-> me which file bitbake thought led to the failing include.
-> 
-> What am I missing?
-
-so if you still want to use oe classic you have to stick to 1.12 release
-of bitbake I think
-
-
-> 
-> --rich
-> 
-> -*- mode: compilation; default-directory: "/home/rich/projects/webos/" -*-
-> Compilation started at Tue Feb  7 17:17:22
-> 
-> time make
-> BBPATH=`pwd`/build:`pwd`/openembedded `pwd`/bitbake/bin/bitbake -v
-> -D bootstrap-image
-> DEBUG: Removed the following variables from the environment:
-> HISTFILE, LESS, SSH_CLIENT, CVS_RSH, EMACS, MAKEFLAGS, LANGUAGE,
-> SFDIR, SHLVL, HISTSIZE, TMPDIR, EMACSCLIENT, MFLAGS, CVSROOT,
-> NETHACKOPTIONS, EDITOR, INSIDE_EMACS, ignoreeof, XENVIRONMENT, ENV,
-> COLUMNS, TERMCAP, SSH_TTY, MAKELEVEL, TAPE, GWMPATH, RNINIT, MAIL,
-> SSH_CONNECTION, PAGER, MORE
-> DEBUG: Clearing SRCREV cache due to cache policy of: clear
-> DEBUG: Using cache in
-> '/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for
-> codeparser cache
-> DEBUG: collecting .bb files
-> DEBUG: Using cache in
-> '/home/rich/projects/webos/tmp/cache/eglibc/beagleboard'
-> Loading cache: 100% || ETA:  00:00:00
-> Loaded 5 entries from dependency cache.
-> DEBUG: Using cache in
-> '/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for
-> codeparser cache
-> ERROR: Could not include required file abiword-2.5.inc
-> ERROR: Command execution failed: Exited with 1
-> 
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> make: *** [all] Error 1
-> 
-> real    0m2.060s
-> user    0m1.764s
-> sys    0m0.304s
-> 
-> Compilation exited abnormally with code 2 at Tue Feb  7 17:17:24
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
--Khem
-
+tom
+(for the OE infra team)
 
