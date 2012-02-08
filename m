@@ -1,30 +1,24 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Rv75r-0007fw-Pv
+	(envelope-from <koen@dominion.thruhere.net>) id 1Rv76I-0007lS-Hl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 13:57:51 +0100
-Received: by wgbdr13 with SMTP id dr13so459399wgb.24
+	Wed, 08 Feb 2012 13:58:18 +0100
+Received: by werc1 with SMTP id c1so338098wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 04:49:48 -0800 (PST)
-Received: by 10.180.24.202 with SMTP id w10mr40437335wif.9.1328705388513;
-	Wed, 08 Feb 2012 04:49:48 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id ex2sm1933229wib.1.2012.02.08.04.49.46
+	Wed, 08 Feb 2012 04:50:15 -0800 (PST)
+Received: by 10.180.89.67 with SMTP id bm3mr40891709wib.13.1328705415399;
+	Wed, 08 Feb 2012 04:50:15 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id q2sm39520873wiy.7.2012.02.08.04.50.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 08 Feb 2012 04:49:47 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
+	Wed, 08 Feb 2012 04:50:14 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1440338.tNHdM1mVy9@helios>
-Date: Wed, 8 Feb 2012 13:49:39 +0100
-Message-Id: <01352357-6A6C-4926-8623-E463D1103631@dominion.thruhere.net>
-References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKp7S2+HR3umrnd9RzT5JE0X_T_cjWPzi6S5WUdZ-SAzoQ@mail.gmail.com>
-	<jgtov9$fhv$1@dough.gmane.org> <1440338.tNHdM1mVy9@helios>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Feb 2012 13:50:04 +0100
+Message-Id: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe] systemd: split out libraries from ${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,37 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 12:57:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Feb 2012 12:58:18 -0000
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |   14 ++++++++++++--
+ 1 files changed, 12 insertions(+), 2 deletions(-)
 
-Op 8 feb. 2012, om 13:18 heeft Paul Eggleton het volgende geschreven:
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index c1a0117..4c458bd 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r15"
++PR = "r16"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -59,6 +59,11 @@ do_install() {
+ 	ln -s ${base_bindir}/systemd ${D}/init
+ }
+ 
++python populate_packages_prepend (){
++	systemdlibdir = d.getVar("base_libdir", True)
++	do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'Systemd %s library', extra_depends='', allow_links=True)
++}
++
+ PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
+ 
+ USERADD_PACKAGES = "${PN}"
+@@ -79,7 +84,7 @@ FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
+ 
+ RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
+ 
+-FILES_${PN} += " ${base_bindir}/* \
++FILES_${PN} = " ${base_bindir}/* \
+                 ${datadir}/dbus-1/services \
+                 ${datadir}/dbus-1/system-services \
+                 ${datadir}/polkit-1 \
+@@ -93,6 +98,11 @@ FILES_${PN} += " ${base_bindir}/* \
+                 ${bindir}/systemd* \
+                 ${libdir}/tmpfiles.d/*.conf \
+                 ${libdir}/systemd \
++                ${libdir}/binfmt.d \
++                ${libdir}/modules-load.d \
++                ${libdir}/sysctl.d \
++                ${localstatedir} \
++                ${libexecdir} \
+                "
+ 
+ FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
+-- 
+1.7.2.5
 
-> On Wednesday 08 February 2012 13:14:27 Koen Kooi wrote:
->> Images with sysvinit will be working the same as before, just with
->> libsystemd-logind.so.X being installed.
->=20
-> Just out of interest, how large is that file?
-
-A complete overview:
-
-koen@dominion:/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work$ du =
-../deploy/ipk/armv7a/*v40-r16* -hs
-8.0K	../deploy/ipk/armv7a/libsystemd-daemon0_v40-r16_armv7a.ipk
-12K	../deploy/ipk/armv7a/libsystemd-id128-0_v40-r16_armv7a.ipk
-32K	../deploy/ipk/armv7a/libsystemd-journal0_v40-r16_armv7a.ipk
-20K	../deploy/ipk/armv7a/libsystemd-login0_v40-r16_armv7a.ipk
-4.0K	../deploy/ipk/armv7a/systemd-analyze_v40-r16_armv7a.ipk
-5.4M	../deploy/ipk/armv7a/systemd-dbg_v40-r16_armv7a.ipk
-16K	../deploy/ipk/armv7a/systemd-dev_v40-r16_armv7a.ipk
-16K	../deploy/ipk/armv7a/systemd-doc_v40-r16_armv7a.ipk
-4.0K	../deploy/ipk/armv7a/systemd-initramfs_v40-r16_armv7a.ipk
-1.1M	../deploy/ipk/armv7a/systemd_v40-r16_armv7a.ipk
-20K	../deploy/ipk/armv7a/systemd-vconsole-setup_v40-r16_armv7a.ipk
-
-regards,
-
-Koen=
 
 
