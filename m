@@ -1,39 +1,29 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rv6zV-0001R0-48
+	(envelope-from <koen@dominion.thruhere.net>) id 1Rv75r-0007fw-Pv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 13:51:17 +0100
-Received: by eekd41 with SMTP id d41so141215eek.6
+	Wed, 08 Feb 2012 13:57:51 +0100
+Received: by wgbdr13 with SMTP id dr13so459399wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 04:43:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=CNHkglofw2BALHf2EosBjmelfpG6WwJh6Sss85Xziyg=;
-	b=WBbE9tjw06R6AdFtqUoQRihCZO0LkFRjXMUoOH9/F5/4Bh2imbzCVhVxRFQ5A1PXCv
-	EHj1WXhyGVc5VHmDvySlk3I15HtNgSq/vi72jwUxsgWFT7z6CS8ddc58fpyPrNu99iqN
-	eatv9wqlzrUYvxF/9vYwSwq4u7TQ5gCOx+Sh8=
-Received: by 10.14.120.207 with SMTP id p55mr8077841eeh.28.1328704993974;
-	Wed, 08 Feb 2012 04:43:13 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n58sm4810147een.10.2012.02.08.04.43.12
+	Wed, 08 Feb 2012 04:49:48 -0800 (PST)
+Received: by 10.180.24.202 with SMTP id w10mr40437335wif.9.1328705388513;
+	Wed, 08 Feb 2012 04:49:48 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ex2sm1933229wib.1.2012.02.08.04.49.46
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 08 Feb 2012 04:43:13 -0800 (PST)
-Date: Wed, 8 Feb 2012 13:43:11 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120208124311.GB3647@jama.jama.net>
+	Wed, 08 Feb 2012 04:49:47 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1440338.tNHdM1mVy9@helios>
+Date: Wed, 8 Feb 2012 13:49:39 +0100
+Message-Id: <01352357-6A6C-4926-8623-E463D1103631@dominion.thruhere.net>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
-	<4F31C45B.1010600@linux.intel.com> <jgtb5c$8oh$1@dough.gmane.org>
-	<CAP9ODKpDe4Up_mCuRdTqNY6a-Kkxyz2ZR-GR9uQ+VFFW0HGsJQ@mail.gmail.com>
-	<jgtl0v$gd6$1@dough.gmane.org>
 	<CAP9ODKp7S2+HR3umrnd9RzT5JE0X_T_cjWPzi6S5WUdZ-SAzoQ@mail.gmail.com>
-	<jgtov9$fhv$1@dough.gmane.org>
-	<CAP9ODKp7LW3f3-fKk_K_iZsfw2p7R3sH+b_8-QFXNQ89u90+dA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKp7LW3f3-fKk_K_iZsfw2p7R3sH+b_8-QFXNQ89u90+dA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<jgtov9$fhv$1@dough.gmane.org> <1440338.tNHdM1mVy9@helios>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,60 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 12:51:17 -0000
-X-Groupsio-MsgNum: 37012
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zx4FCpZtqtKETZ7O"
-Content-Disposition: inline
-
---zx4FCpZtqtKETZ7O
+X-List-Received-Date: Wed, 08 Feb 2012 12:57:51 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 08, 2012 at 10:28:12AM -0200, Otavio Salvador wrote:
-> On Wed, Feb 8, 2012 at 10:14, Koen Kooi <koen@dominion.thruhere.net> wrot=
-e:
+
+Op 8 feb. 2012, om 13:18 heeft Paul Eggleton het volgende geschreven:
+
+> On Wednesday 08 February 2012 13:14:27 Koen Kooi wrote:
+>> Images with sysvinit will be working the same as before, just with
+>> libsystemd-logind.so.X being installed.
 >=20
-> > Images with sysvinit will be working the same as before, just with
-> > libsystemd-logind.so.X being installed. Images with systemd get working
-> > session tracking.
-> >
->=20
-> AFAIK polkit uses consolekit or systemd. In case you build it with systemd
-> you break consolekit support.
->=20
-> However a stronger point IMO is that some changes, for one or another init
-> system, might involve specific compilation options and thus making their
-> runtime incompatible as it's the case of polkit. Usually people will want
-> one or another init system and I see no gain in have both available.
->=20
-> Forcing user to use a bbappend to have one working well is the wrong way.
+> Just out of interest, how large is that file?
 
-I think that only usable alternative _if it works_ is to build polkit
-linked always to libsystemd-logind.so.X and force users of sysvinit
-to use small part of systemd (libsystemd-logind.so.X packaged in systemd-lo=
-gind).
+A complete overview:
 
-Then we could keep add --enable-systemd to polkit etc., but if this
-breaks stuff which worked with consolekit, then distro policy would be
-better.
+koen@dominion:/OE/tentacle/build/tmp-angstrom_2010_x-eglibc/work$ du =
+../deploy/ipk/armv7a/*v40-r16* -hs
+8.0K	../deploy/ipk/armv7a/libsystemd-daemon0_v40-r16_armv7a.ipk
+12K	../deploy/ipk/armv7a/libsystemd-id128-0_v40-r16_armv7a.ipk
+32K	../deploy/ipk/armv7a/libsystemd-journal0_v40-r16_armv7a.ipk
+20K	../deploy/ipk/armv7a/libsystemd-login0_v40-r16_armv7a.ipk
+4.0K	../deploy/ipk/armv7a/systemd-analyze_v40-r16_armv7a.ipk
+5.4M	../deploy/ipk/armv7a/systemd-dbg_v40-r16_armv7a.ipk
+16K	../deploy/ipk/armv7a/systemd-dev_v40-r16_armv7a.ipk
+16K	../deploy/ipk/armv7a/systemd-doc_v40-r16_armv7a.ipk
+4.0K	../deploy/ipk/armv7a/systemd-initramfs_v40-r16_armv7a.ipk
+1.1M	../deploy/ipk/armv7a/systemd_v40-r16_armv7a.ipk
+20K	../deploy/ipk/armv7a/systemd-vconsole-setup_v40-r16_armv7a.ipk
 
-Cheers,
+regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Koen=
 
---zx4FCpZtqtKETZ7O
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk8ybd8ACgkQN1Ujt2V2gBxNeACfYrH39bU1EdyoNqDRhxkPMoj4
-VZ0An0WgeoYXw6TaiOACqY2fgxe5oPcG
-=Fhja
------END PGP SIGNATURE-----
-
---zx4FCpZtqtKETZ7O--
