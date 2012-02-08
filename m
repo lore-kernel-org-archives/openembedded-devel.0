@@ -1,24 +1,36 @@
-Received: from smtp-relay2.palm.com ([64.28.152.243])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <prvs=378c49496=rich.pixley@palm.com>)
-	id 1RuwO6-0001az-GV for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 02:31:58 +0100
-X-IronPort-AV: E=Sophos;i="4.73,380,1325491200"; d="scan'208";a="11506250"
-Received: from unknown (HELO ushqusdns3.palm.com) ([148.92.223.90])
-	by smtp-relay2.palm.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
-	07 Feb 2012 17:22:49 -0800
-Received: from flamingo.palm.com ([148.92.244.134])
-	by ushqusdns3.palm.com (8.14.4/8.14.4) with ESMTP id q181McAc025813;
-	Tue, 7 Feb 2012 17:22:38 -0800
-Message-ID: <4F31CE69.4050107@palm.com>
-Date: Tue, 07 Feb 2012 17:22:49 -0800
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120202 Thunderbird/11.0
+	(envelope-from <raj.khem@gmail.com>) id 1Rux1R-0002p9-2t
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Feb 2012 03:12:37 +0100
+Received: by lahc1 with SMTP id c1so69919lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Feb 2012 18:04:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=YsuqTWWpZmk4kueH1wuzAgiw7ltHuU1ULcwzXKpQMR8=;
+	b=DEuLjNvPXFlxaOkwp3vRX4Spd/w/rL2NIAnC4U+uKpd05YTsUXV54Se3JKuDPSAAom
+	YLcmAvkILXbetUqSn+nLWCtdg5PnIU9WptqaMeehi9P4H5EIwsR/OHYmYEwAqy956+uO
+	KThiApdVlrWT1nXO0jBU6j04ypUyH56HjNq00=
+Received: by 10.112.86.67 with SMTP id n3mr7115030lbz.29.1328666674256; Tue,
+	07 Feb 2012 18:04:34 -0800 (PST)
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
+Received: by 10.152.5.201 with HTTP; Tue, 7 Feb 2012 18:04:04 -0800 (PST)
+In-Reply-To: <ADD6A3980E8C39419A432FF422031B4C01336BE7@ORSMSX106.amr.corp.intel.com>
+References: <4F2C6842.1040907@promwad.com>
+	<20120204022129.GC26306@sakrah.homelinux.org>
+	<4F2D77AE.7060505@promwad.com>
+	<CAMKF1sqC2h+akQ63gXZLj6gv1pFot258iy-iW_Au2U6UdqevGw@mail.gmail.com>
+	<ADD6A3980E8C39419A432FF422031B4C0133412E@ORSMSX106.amr.corp.intel.com>
+	<ADD6A3980E8C39419A432FF422031B4C01336BE7@ORSMSX106.amr.corp.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 7 Feb 2012 18:04:04 -0800
+Message-ID: <CAMKF1spHuj98D3nAUy1wWjanrs_swFaTjhFMh7FqRsUdFDNvhA@mail.gmail.com>
+To: "Kamble, Nitin A" <nitin.a.kamble@intel.com>
+Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: bitbake confusion
+Subject: Re: Java: meta-java, meta-oracle-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,54 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 01:31:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Feb 2012 02:12:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I've just started working with current OE, (Palm has been branched for 
-several years).  And I'm a bit confused about how bitbake is supposed to 
-work these days.
+On Tue, Feb 7, 2012 at 3:51 PM, Kamble, Nitin A
+<nitin.a.kamble@intel.com> wrote:
+> Ivan,
+> =C2=A0So is adding "virtual/java" in provider is enough to get the two ve=
+rsions of java recipes to work interchangeably ?
 
-In the output below, how do I tell where the file with the erroneous 
-line might be?  I mean, I can grep, but that won't necessarily tell me 
-which file bitbake thought led to the failing include.
+look at meta-java
 
-What am I missing?
+virtual/java-native
+virtual/javac-native
+virtual/javac
 
---rich
+and work with Henning (woglinge) to sort out any other layer APIs you need =
+these
+layers to live amicably
 
--*- mode: compilation; default-directory: "/home/rich/projects/webos/" -*-
-Compilation started at Tue Feb  7 17:17:22
-
-time make
-BBPATH=`pwd`/build:`pwd`/openembedded `pwd`/bitbake/bin/bitbake -v -D 
-bootstrap-image
-DEBUG: Removed the following variables from the environment: HISTFILE, 
-LESS, SSH_CLIENT, CVS_RSH, EMACS, MAKEFLAGS, LANGUAGE, SFDIR, SHLVL, 
-HISTSIZE, TMPDIR, EMACSCLIENT, MFLAGS, CVSROOT, NETHACKOPTIONS, EDITOR, 
-INSIDE_EMACS, ignoreeof, XENVIRONMENT, ENV, COLUMNS, TERMCAP, SSH_TTY, 
-MAKELEVEL, TAPE, GWMPATH, RNINIT, MAIL, SSH_CONNECTION, PAGER, MORE
-DEBUG: Clearing SRCREV cache due to cache policy of: clear
-DEBUG: Using cache in 
-'/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for codeparser cache
-DEBUG: collecting .bb files
-DEBUG: Using cache in 
-'/home/rich/projects/webos/tmp/cache/eglibc/beagleboard'
-Loading cache: 100% || ETA:  00:00:00
-Loaded 5 entries from dependency cache.
-DEBUG: Using cache in 
-'/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for codeparser cache
-ERROR: Could not include required file abiword-2.5.inc
-ERROR: Command execution failed: Exited with 1
-
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-make: *** [all] Error 1
-
-real    0m2.060s
-user    0m1.764s
-sys    0m0.304s
-
-Compilation exited abnormally with code 2 at Tue Feb  7 17:17:24
-
+>
+> Nitin
+>
+>
+>> -----Original Message-----
+>> From: Kamble, Nitin A
+>> Sent: Monday, February 06, 2012 10:00 AM
+>> To: Khem Raj; openembedded-devel@lists.openembedded.org
+>> Subject: RE: [oe] Java: meta-java, meta-oracle-java
+>>
+>> > On Sat, Feb 4, 2012 at 10:23 AM, Ivan Kuten <ivan.kuten@promwad.com>
+>> > wrote:
+>> > > I meant isn't it going to be something like that in local.conf :
+>> > > PREFERRED_PROVIDER_virtual/java =3D "oracle-jre"
+>> > > PREFERRED_PROVIDER_virtual/java =3D "openjdk"
+>> > > in a single meta-java layer...
+>> >
+>> > I think that would be sensible meta-java e.g. do provide
+>> > virtuals I hope oracle java layer does something same.
+>> > >
+>> > > Regards,
+>> > > Ivan
+>> > >
+>> > > On 02/04/2012 05:21 AM, Khem Raj wrote:
+>> > >> On (04/02/12 02:05), Ivan Kuten wrote:
+>> > >>> Hello,
+>> > >>>
+>> > >>> I noticed an activity around meta-java layer (OpenJDK based)
+>> > >>> https://github.com/woglinde/meta-java
+>> > >>> and recently around Oracle JRE:
+>> > http://git.yoctoproject.org/cgit/cgit.cgi/meta-oracle-java/
+>> > >>>
+>> > >>> Any plans to combine or coordinate these efforts?
+>> > >> these are two different layers so they will exist. What
+>> coordination
+>> > >> would you like to see that will help you
+>>
+>> I agree, adding virtual/java in provides is a good thing for end user,
+>> and I will do it in the oracle-java recipes.
+>> And because of license differences it is better to keep these 2
+>> variations of java recipes in different layers.
+>>
+>> Nitin
 
 
