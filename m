@@ -1,27 +1,25 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>)
-	id 1RuuCS-0006Mg-Um; Wed, 08 Feb 2012 00:11:49 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 07 Feb 2012 15:03:45 -0800
+	(envelope-from <josh@linux.intel.com>) id 1RuviZ-0008Hz-BA
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Feb 2012 01:49:03 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Feb 2012 16:39:55 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="105083441"
-Received: from unknown (HELO [10.255.14.116]) ([10.255.14.116])
-	by orsmga001.jf.intel.com with ESMTP; 07 Feb 2012 15:03:44 -0800
-Message-ID: <4F31ADD0.9050206@linux.intel.com>
-Date: Tue, 07 Feb 2012 15:03:44 -0800
-From: Saul Wold <sgw@linux.intel.com>
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122261002"
+Received: from unknown (HELO [10.255.15.17]) ([10.255.15.17])
+	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2012 16:39:55 -0800
+Message-ID: <4F31C45B.1010600@linux.intel.com>
+Date: Tue, 07 Feb 2012 16:39:55 -0800
+From: Joshua Lock <josh@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0
+	rv:10.0) Gecko/20120131 Thunderbird/10.0
 MIME-Version: 1.0
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <29270F77-234D-4561-974D-C8E266898FA3@beagleboard.org>
-	<20120207224904.GC13125@sakrah.homelinux.org>
-In-Reply-To: <20120207224904.GC13125@sakrah.homelinux.org>
-Subject: Re: [OE-core] [meta-openembedded][RFC] meta-multimedia layer
+To: openembedded-devel@lists.openembedded.org
+References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
+In-Reply-To: <CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
+Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,37 +33,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2012 23:11:49 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 00:49:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 02/07/2012 02:49 PM, Khem Raj wrote:
-> On (07/02/12 12:08), Koen Kooi wrote:
->> Hi,
+On 07/02/12 07:55, Otavio Salvador wrote:
+> On Tue, Feb 7, 2012 at 13:12, Andreas Müller
+> <schnitzeltony@googlemail.com>wrote:
+>
+>> * These are my first python experiences - suggestions welcome.
+>> * In local.conf (or in distro) the configuration variable INIT_MANAGER
+>> selects
+>>   the initmanager to be build into an image. When changing the selection,
+>>   a build from scratch is required. INIT_MANAGER currently defaults to
+>> systemd
+>>   (see image.bbclass and initmanager.bbclass)
+>> * In systemd.bbclass debug messages were left in to have a better overview
+>>   what's going on.
+>> * An additional patch series goes out for meta-angstrom.
+>> * This is a huge RFC which might cause serious impacts. What I have already
+>>   detected after a build from scatch is that /var/lib/opkg is missing in the
+>>   image (although it can be found in libopkg.ipk). I will spend the next
+>>   days with my new friend buildhistory (thanks for this!!).
 >>
->> During FOSDEM Paul Eggleton and I discussed moving a few multimedia recipes (libav, xbmc, faac, faad, etc) out of meta-oe into a new meta-multimedia layer hosted in the meta-openembedded git repo. This would allow e.g. meta-baryon to drop a number of recipes while avoiding the need to drag in the complete meta-oe layer.
->>
->> Thoughts?
 >
-> yes idea is fine. Will it then host all multimedia related stuff ? or
-> just whats in meta-oe is being moved.
+> I've looked at your changes and they does seem to be a good base for
+> further work:
+
+I agree, good job!
+
+> * The init system ought to be a DISTRO_FEATURE (as sysvinit ought to be too
+> IMO)
+
+I know there's some disagreement with the suggestion that the init 
+system ought to be a DISTRO_FEATURE but my (admittedly uninformed) 
+opinion is that I can't see how we can avoid it.
+
+It looks like systemd provides various interfaces and API's that 
+packages may or may not use and as more packages adopt these we're going 
+to need to be able to enable/disable more than just some unit 
+files/scripts for init support.
+
+> * I'd like to see sysvinit packages splitted onto ${PN}-sysvinit as well
+
+Agreed. Do we need to think about the case where a systemd based system 
+might *need* an initscript (no units available) vs. when the -sysvinit 
+and -systemd packages both provide similar functionality?
+
+Would it be desirable for the rootfs generation logic to be able to fall 
+back to an alternative "initscript" provider?
+
+> * I'd use rootfs generation to install ${PN}-${INIT_SYSTEM} packages for
+> packages being installed
 >
-This is a good idea, we should get a good proposal so it's clear what's 
-moving where and how.  Currently this should start with meta-oe and we 
-can then evaluate if anything in oe-core should move there.
+> Thoughts?
 
-This is similar to the starting point we have with gnome, but we needed 
-to keep some of that in core.
-
-Thanks for the effort.
-
-Sau!
-
-
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
->
+Cheers,
+Joshua
+-- 
+Joshua Lock
+         Yocto Project "Johannes factotum"
+         Intel Open Source Technology Centre
 
 
