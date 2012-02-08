@@ -1,47 +1,35 @@
-Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RvDB0-0007RR-7E
+	(envelope-from <obi@opendreambox.org>) id 1RvDQT-0002Pt-GR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 20:27:34 +0100
-Received: by lbol12 with SMTP id l12so446301lbo.6
+	Wed, 08 Feb 2012 20:43:39 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 722A33158A73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 11:19:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=5xoEYrz8+PMKp/JNz8YHofG5Cu6l9Mcn3k/CLSZk8vY=;
-	b=t7OJnCPwR/tPY+z3AUa5O0O3DI7HHHNscplF8fZE48sBW/q12TjkD8g9r432jhbNXu
-	piRMykEKs7DLj6jjqV19I0AuPoUjy1tL2DZPh6gRV6FwX51O2t/OmzZf0mBOGVlgsjqZ
-	jxwaUD229+gcQRIimbsP0Ld26HBNm9BljiV0w=
-Received: by 10.112.32.1 with SMTP id e1mr8493809lbi.3.1328728770320; Wed, 08
-	Feb 2012 11:19:30 -0800 (PST)
+	Wed,  8 Feb 2012 20:35:31 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id gIIdhP6XW9ai
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Feb 2012 20:35:25 +0100 (CET)
+Received: from [172.22.22.61] (drms-590c4e0c.pool.mediaWays.net [89.12.78.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id CA7E83158A6C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Feb 2012 20:35:24 +0100 (CET)
+Message-ID: <4F32CE7B.8050109@opendreambox.org>
+Date: Wed, 08 Feb 2012 20:35:23 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Wed, 8 Feb 2012 11:19:00 -0800 (PST)
-In-Reply-To: <CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
-References: <20111117223303.96550@gmx.net>
-	<CAMKF1spxE8kXQwsX3WYnazpGZDDmZoafvmvxLBRBvfZxdfbgdQ@mail.gmail.com>
-	<20111118200047.GD2101@mx.loc>
-	<CAC1BbcTp=fd=wSW6rTs4g4RdSSGJLPtTw1wCw8fy1dy9POVu2A@mail.gmail.com>
-	<CAMKF1spxWumvNh5sCG8wgectH2HvcNjoDoo6VBYzBTKqwuyQaQ@mail.gmail.com>
-	<20120202143311.112290@gmx.net>
-	<CAMKF1sr423aR2GnJ6LQy6pdf8nfB_M+wjae5E_xi7ZUsc-cfQw@mail.gmail.com>
-	<20120202160604.78480@gmx.net>
-	<CAC1BbcTnVS4oqpcbDDbxOuBCDQPcb8cQDznJk58=neVOuC695w@mail.gmail.com>
-	<20120202213801.8530@gmx.net>
-	<CAMKF1srQcXyjwv2e9=gtKo_T+Q4uC6YXivmROCnnFM3aS5xxWg@mail.gmail.com>
-	<4F2BDE2A.3000201@st.com>
-	<CAMKF1srDugybTEsusbc0XG1NM5BGVQEHxTBSw3_1aFCFunsCPw@mail.gmail.com>
-	<CAC1BbcTEmnZFWrS2PKwt1nnM0h1w+UAun37D4Ep7YyYSbaJXaA@mail.gmail.com>
-	<CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
-	<CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Feb 2012 11:19:00 -0800
-Message-ID: <CAMKF1soUL2p=ymicjq6UtiGWvM2_BBMU1JLNR4H+Db+YXOOimw@mail.gmail.com>
-To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-Cc: uclibc@uclibc.org, Peter Mazinger <ps.m@gmx.net>,
-	openembedded-devel@lists.openembedded.org,
-	Carmelo AMOROSO <carmelo.amoroso@st.com>
-Subject: Re: future branch
+To: openembedded-devel@lists.openembedded.org
+References: <4F2A97B7.2080709@opendreambox.org>
+	<CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
+In-Reply-To: <CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 19:27:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Feb 2012 19:43:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 8, 2012 at 10:42 AM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> Core-image-sato does not build for me due to some buggy package that
-> unconditionally uses *netgrp() or the like.
-> Not amused, way out without going beserk?
+On 08.02.2012 19:41, Otavio Salvador wrote:
+> On Thu, Feb 2, 2012 at 12:03, Andreas Oberritter <obi@opendreambox.org>wrote:
+> 
+>> There's no need to alter configure flags, because without x11,
+>> libsm cannot be picked up accidentially. Because this just fixes
+>> a missing dependency failure without x11, no PR bump is required
+>> either.
+>>
+> 
+> I do prefer a clear configure option depending on if it is going to use or
+> not libsm otherwise if user has built it, it is going to be taken.
 
-Yeah with future branch here is my patch. git am it.
+Currently, there are two possibilities:
 
-http://uclibc.org/~kraj/0001-uclibc-git-Update-to-latest-plus-future-branch.patch
+1.) x11 is in DISTRO_FEATURES
+    -> libsm is built, giflib is built with libsm
+2.) x11 is not in DISTRO_FEATURES
+    -> giflib build is broken, because libsm does not exist in this
+configuration
 
-apply that on master of oe-core
+Therefore, the scenario you're describing cannot happen.
 
-then set
+> Also,
+> please PR bump in any case since it can help spot other possible failures
+> that we'd not catch otherwise.
 
-UCLIBCVERSION = "0.9.33+gitr%" in local.conf
+I already explained in the commit message, why a PR bump is not needed.
+Can you please explain which other possible failures you're expecting,
+so I can learn why my reasoning may be wrong?
+
+This patch only fixes an unavailable build dependency at bitbake level,
+nothing more.
+
+Regards,
+Andreas
 
 
