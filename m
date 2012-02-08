@@ -1,25 +1,24 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from smtp-relay2.palm.com ([64.28.152.243])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <josh@linux.intel.com>) id 1RuviZ-0008Hz-BA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 01:49:03 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Feb 2012 16:39:55 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122261002"
-Received: from unknown (HELO [10.255.15.17]) ([10.255.15.17])
-	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2012 16:39:55 -0800
-Message-ID: <4F31C45B.1010600@linux.intel.com>
-Date: Tue, 07 Feb 2012 16:39:55 -0800
-From: Joshua Lock <josh@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120131 Thunderbird/10.0
+	(envelope-from <prvs=378c49496=rich.pixley@palm.com>)
+	id 1RuwO6-0001az-GV for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Feb 2012 02:31:58 +0100
+X-IronPort-AV: E=Sophos;i="4.73,380,1325491200"; d="scan'208";a="11506250"
+Received: from unknown (HELO ushqusdns3.palm.com) ([148.92.223.90])
+	by smtp-relay2.palm.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
+	07 Feb 2012 17:22:49 -0800
+Received: from flamingo.palm.com ([148.92.244.134])
+	by ushqusdns3.palm.com (8.14.4/8.14.4) with ESMTP id q181McAc025813;
+	Tue, 7 Feb 2012 17:22:38 -0800
+Message-ID: <4F31CE69.4050107@palm.com>
+Date: Tue, 07 Feb 2012 17:22:49 -0800
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120202 Thunderbird/11.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
-In-Reply-To: <CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
-Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: bitbake confusion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,66 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 00:49:03 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 01:31:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 07/02/12 07:55, Otavio Salvador wrote:
-> On Tue, Feb 7, 2012 at 13:12, Andreas Müller
-> <schnitzeltony@googlemail.com>wrote:
->
->> * These are my first python experiences - suggestions welcome.
->> * In local.conf (or in distro) the configuration variable INIT_MANAGER
->> selects
->>   the initmanager to be build into an image. When changing the selection,
->>   a build from scratch is required. INIT_MANAGER currently defaults to
->> systemd
->>   (see image.bbclass and initmanager.bbclass)
->> * In systemd.bbclass debug messages were left in to have a better overview
->>   what's going on.
->> * An additional patch series goes out for meta-angstrom.
->> * This is a huge RFC which might cause serious impacts. What I have already
->>   detected after a build from scatch is that /var/lib/opkg is missing in the
->>   image (although it can be found in libopkg.ipk). I will spend the next
->>   days with my new friend buildhistory (thanks for this!!).
->>
->
-> I've looked at your changes and they does seem to be a good base for
-> further work:
+I've just started working with current OE, (Palm has been branched for 
+several years).  And I'm a bit confused about how bitbake is supposed to 
+work these days.
 
-I agree, good job!
+In the output below, how do I tell where the file with the erroneous 
+line might be?  I mean, I can grep, but that won't necessarily tell me 
+which file bitbake thought led to the failing include.
 
-> * The init system ought to be a DISTRO_FEATURE (as sysvinit ought to be too
-> IMO)
+What am I missing?
 
-I know there's some disagreement with the suggestion that the init 
-system ought to be a DISTRO_FEATURE but my (admittedly uninformed) 
-opinion is that I can't see how we can avoid it.
+--rich
 
-It looks like systemd provides various interfaces and API's that 
-packages may or may not use and as more packages adopt these we're going 
-to need to be able to enable/disable more than just some unit 
-files/scripts for init support.
+-*- mode: compilation; default-directory: "/home/rich/projects/webos/" -*-
+Compilation started at Tue Feb  7 17:17:22
 
-> * I'd like to see sysvinit packages splitted onto ${PN}-sysvinit as well
+time make
+BBPATH=`pwd`/build:`pwd`/openembedded `pwd`/bitbake/bin/bitbake -v -D 
+bootstrap-image
+DEBUG: Removed the following variables from the environment: HISTFILE, 
+LESS, SSH_CLIENT, CVS_RSH, EMACS, MAKEFLAGS, LANGUAGE, SFDIR, SHLVL, 
+HISTSIZE, TMPDIR, EMACSCLIENT, MFLAGS, CVSROOT, NETHACKOPTIONS, EDITOR, 
+INSIDE_EMACS, ignoreeof, XENVIRONMENT, ENV, COLUMNS, TERMCAP, SSH_TTY, 
+MAKELEVEL, TAPE, GWMPATH, RNINIT, MAIL, SSH_CONNECTION, PAGER, MORE
+DEBUG: Clearing SRCREV cache due to cache policy of: clear
+DEBUG: Using cache in 
+'/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for codeparser cache
+DEBUG: collecting .bb files
+DEBUG: Using cache in 
+'/home/rich/projects/webos/tmp/cache/eglibc/beagleboard'
+Loading cache: 100% || ETA:  00:00:00
+Loaded 5 entries from dependency cache.
+DEBUG: Using cache in 
+'/home/rich/projects/webos/tmp/cache/bb_codeparser.dat' for codeparser cache
+ERROR: Could not include required file abiword-2.5.inc
+ERROR: Command execution failed: Exited with 1
 
-Agreed. Do we need to think about the case where a systemd based system 
-might *need* an initscript (no units available) vs. when the -sysvinit 
-and -systemd packages both provide similar functionality?
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+make: *** [all] Error 1
 
-Would it be desirable for the rootfs generation logic to be able to fall 
-back to an alternative "initscript" provider?
+real    0m2.060s
+user    0m1.764s
+sys    0m0.304s
 
-> * I'd use rootfs generation to install ${PN}-${INIT_SYSTEM} packages for
-> packages being installed
->
-> Thoughts?
+Compilation exited abnormally with code 2 at Tue Feb  7 17:17:24
 
-Cheers,
-Joshua
--- 
-Joshua Lock
-         Yocto Project "Johannes factotum"
-         Intel Open Source Technology Centre
 
 
