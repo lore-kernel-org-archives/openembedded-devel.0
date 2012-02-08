@@ -1,24 +1,23 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1RvCbM-0006Cp-Ru
+	(envelope-from <raj.khem@gmail.com>) id 1RvDB0-0007RR-7E
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 19:50:44 +0100
-Received: by wgbdr13 with SMTP id dr13so803755wgb.24
+	Wed, 08 Feb 2012 20:27:34 +0100
+Received: by lbol12 with SMTP id l12so446301lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 10:42:41 -0800 (PST)
+	Wed, 08 Feb 2012 11:19:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=P/HN/Rp+sCf1usq7l5wy1gVLTSJRqeIC+Z3MOjKYSqc=;
-	b=updDtbtTkSCEuNKTpSE8h1oVgRJxUez2kyObUjnJu4IBB1eWbm+vPNJHtXK7PuLdo2
-	hbnH0hC33TvHqwl1LwBFC14gpSBhFtBbhFIhM8Cueoa49jAOxAWj3RaJ3hKZFStgwHr1
-	Lqyl/mc/eCgv7lROFl/DEFtDAoITtHVeniyjk=
+	bh=5xoEYrz8+PMKp/JNz8YHofG5Cu6l9Mcn3k/CLSZk8vY=;
+	b=t7OJnCPwR/tPY+z3AUa5O0O3DI7HHHNscplF8fZE48sBW/q12TjkD8g9r432jhbNXu
+	piRMykEKs7DLj6jjqV19I0AuPoUjy1tL2DZPh6gRV6FwX51O2t/OmzZf0mBOGVlgsjqZ
+	jxwaUD229+gcQRIimbsP0Ld26HBNm9BljiV0w=
+Received: by 10.112.32.1 with SMTP id e1mr8493809lbi.3.1328728770320; Wed, 08
+	Feb 2012 11:19:30 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.181.13.113 with SMTP id ex17mr42645316wid.15.1328726561247;
-	Wed, 08 Feb 2012 10:42:41 -0800 (PST)
-Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 10:42:40 -0800 (PST)
-Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 10:42:40 -0800 (PST)
-In-Reply-To: <CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
+Received: by 10.152.5.201 with HTTP; Wed, 8 Feb 2012 11:19:00 -0800 (PST)
+In-Reply-To: <CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
 References: <20111117223303.96550@gmx.net>
 	<CAMKF1spxE8kXQwsX3WYnazpGZDDmZoafvmvxLBRBvfZxdfbgdQ@mail.gmail.com>
 	<20111118200047.GD2101@mx.loc>
@@ -34,11 +33,11 @@ References: <20111117223303.96550@gmx.net>
 	<CAMKF1srDugybTEsusbc0XG1NM5BGVQEHxTBSw3_1aFCFunsCPw@mail.gmail.com>
 	<CAC1BbcTEmnZFWrS2PKwt1nnM0h1w+UAun37D4Ep7YyYSbaJXaA@mail.gmail.com>
 	<CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
-Date: Wed, 8 Feb 2012 19:42:40 +0100
-Message-ID: <CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Feb 2012 11:19:00 -0800
+Message-ID: <CAMKF1soUL2p=ymicjq6UtiGWvM2_BBMU1JLNR4H+Db+YXOOimw@mail.gmail.com>
+To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 Cc: uclibc@uclibc.org, Peter Mazinger <ps.m@gmx.net>,
 	openembedded-devel@lists.openembedded.org,
 	Carmelo AMOROSO <carmelo.amoroso@st.com>
@@ -56,21 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 18:50:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Feb 2012 19:27:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Feb 8, 2012 4:53 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
->
-> On Wed, Feb 8, 2012 at 7:15 AM, Bernhard Reutner-Fischer
-> <rep.dot.nop@gmail.com> wrote:
-> > I am merging your future branch into master ATM. A couple of questions:
->
-> Bernhard
->
-> As i have said earlier currently there are regressions where X does
-> not start. and its hard to tell
+On Wed, Feb 8, 2012 at 10:42 AM, Bernhard Reutner-Fischer
+<rep.dot.nop@gmail.com> wrote:
+> Core-image-sato does not build for me due to some buggy package that
+> unconditionally uses *netgrp() or the like.
+> Not amused, way out without going beserk?
 
-Core-image-sato does not build for me due to some buggy package that
-unconditionally uses *netgrp() or the like.
-Not amused, way out without going beserk?
+Yeah with future branch here is my patch. git am it.
+
+http://uclibc.org/~kraj/0001-uclibc-git-Update-to-latest-plus-future-branch.patch
+
+apply that on master of oe-core
+
+then set
+
+UCLIBCVERSION = "0.9.33+gitr%" in local.conf
+
 
