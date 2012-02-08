@@ -1,32 +1,48 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RvCZp-00065H-UW
+	(envelope-from <rep.dot.nop@gmail.com>) id 1RvCbM-0006Cp-Ru
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 19:49:09 +0100
-Received: by eaal10 with SMTP id l10so229965eaa.6
+	Wed, 08 Feb 2012 19:50:44 +0100
+Received: by wgbdr13 with SMTP id dr13so803755wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 10:41:06 -0800 (PST)
+	Wed, 08 Feb 2012 10:42:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=GJbvDDZkUDWVwUGPfDOK3F5rlqr5KB6PYnoMkL/VomM=;
-	b=pYTnbttY+TUl9GaRI7avF2PrgbwFJemL273fEnJTTbEsa7Zw0BBz/09pF/59MRzCkf
-	P9aT4eC0QYde0BB6F6qT1/2HiKKUj3tW96+1zePFqzjg7zdXbhAhj+SRgaOqfL++jPO5
-	eLIQqmNzButY+06yvGDDH/xmnnJ3MuiZv1ygE=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=P/HN/Rp+sCf1usq7l5wy1gVLTSJRqeIC+Z3MOjKYSqc=;
+	b=updDtbtTkSCEuNKTpSE8h1oVgRJxUez2kyObUjnJu4IBB1eWbm+vPNJHtXK7PuLdo2
+	hbnH0hC33TvHqwl1LwBFC14gpSBhFtBbhFIhM8Cueoa49jAOxAWj3RaJ3hKZFStgwHr1
+	Lqyl/mc/eCgv7lROFl/DEFtDAoITtHVeniyjk=
 MIME-Version: 1.0
-Received: by 10.14.206.133 with SMTP id l5mr8786282eeo.22.1328726464379; Wed,
-	08 Feb 2012 10:41:04 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Wed, 8 Feb 2012 10:41:04 -0800 (PST)
-In-Reply-To: <4F2A97B7.2080709@opendreambox.org>
-References: <4F2A97B7.2080709@opendreambox.org>
-Date: Wed, 8 Feb 2012 16:41:04 -0200
-X-Google-Sender-Auth: P18HFAOm76MyQwhbUSXy5GuUv9Y
-Message-ID: <CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.181.13.113 with SMTP id ex17mr42645316wid.15.1328726561247;
+	Wed, 08 Feb 2012 10:42:41 -0800 (PST)
+Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 10:42:40 -0800 (PST)
+Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 10:42:40 -0800 (PST)
+In-Reply-To: <CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
+References: <20111117223303.96550@gmx.net>
+	<CAMKF1spxE8kXQwsX3WYnazpGZDDmZoafvmvxLBRBvfZxdfbgdQ@mail.gmail.com>
+	<20111118200047.GD2101@mx.loc>
+	<CAC1BbcTp=fd=wSW6rTs4g4RdSSGJLPtTw1wCw8fy1dy9POVu2A@mail.gmail.com>
+	<CAMKF1spxWumvNh5sCG8wgectH2HvcNjoDoo6VBYzBTKqwuyQaQ@mail.gmail.com>
+	<20120202143311.112290@gmx.net>
+	<CAMKF1sr423aR2GnJ6LQy6pdf8nfB_M+wjae5E_xi7ZUsc-cfQw@mail.gmail.com>
+	<20120202160604.78480@gmx.net>
+	<CAC1BbcTnVS4oqpcbDDbxOuBCDQPcb8cQDznJk58=neVOuC695w@mail.gmail.com>
+	<20120202213801.8530@gmx.net>
+	<CAMKF1srQcXyjwv2e9=gtKo_T+Q4uC6YXivmROCnnFM3aS5xxWg@mail.gmail.com>
+	<4F2BDE2A.3000201@st.com>
+	<CAMKF1srDugybTEsusbc0XG1NM5BGVQEHxTBSw3_1aFCFunsCPw@mail.gmail.com>
+	<CAC1BbcTEmnZFWrS2PKwt1nnM0h1w+UAun37D4Ep7YyYSbaJXaA@mail.gmail.com>
+	<CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
+Date: Wed, 8 Feb 2012 19:42:40 +0100
+Message-ID: <CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
+Cc: uclibc@uclibc.org, Peter Mazinger <ps.m@gmx.net>,
+	openembedded-devel@lists.openembedded.org,
+	Carmelo AMOROSO <carmelo.amoroso@st.com>
+Subject: Re: future branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +56,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 18:49:10 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 18:50:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Feb 2, 2012 at 12:03, Andreas Oberritter <obi@opendreambox.org>wrote:
-
-> There's no need to alter configure flags, because without x11,
-> libsm cannot be picked up accidentially. Because this just fixes
-> a missing dependency failure without x11, no PR bump is required
-> either.
+On Feb 8, 2012 4:53 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
 >
+> On Wed, Feb 8, 2012 at 7:15 AM, Bernhard Reutner-Fischer
+> <rep.dot.nop@gmail.com> wrote:
+> > I am merging your future branch into master ATM. A couple of questions:
+>
+> Bernhard
+>
+> As i have said earlier currently there are regressions where X does
+> not start. and its hard to tell
 
-I do prefer a clear configure option depending on if it is going to use or
-not libsm otherwise if user has built it, it is going to be taken. Also,
-please PR bump in any case since it can help spot other possible failures
-that we'd not catch otherwise.
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Core-image-sato does not build for me due to some buggy package that
+unconditionally uses *netgrp() or the like.
+Not amused, way out without going beserk?
 
