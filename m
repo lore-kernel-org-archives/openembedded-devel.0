@@ -1,24 +1,35 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Rv76I-0007lS-Hl
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rv77t-0007t6-TI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 13:58:18 +0100
-Received: by werc1 with SMTP id c1so338098wer.6
+	Wed, 08 Feb 2012 13:59:58 +0100
+Received: by lbol12 with SMTP id l12so227084lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 04:50:15 -0800 (PST)
-Received: by 10.180.89.67 with SMTP id bm3mr40891709wib.13.1328705415399;
-	Wed, 08 Feb 2012 04:50:15 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id q2sm39520873wiy.7.2012.02.08.04.50.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 08 Feb 2012 04:50:14 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Wed, 08 Feb 2012 04:51:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=wl1/f7IirKmmkTvGtBSZfVXFkkmCOHaDGOqpM/aXjkA=;
+	b=MuaeW5BZ78gGO7GqwhlHgMl7afI1eYOkozQu8MCb+6vaeQ7I2dJnZTUNZ0qhxjigkr
+	JYaVqE4YSR4bZe86/4tITdPF1LDVsGVJhE/ybhqE4jhsgPqdPaMSz157DvDFZewgmvQM
+	zETrzc1NFPEN621ZlrIpbh5nN8zsZURWRkpa8=
+MIME-Version: 1.0
+Received: by 10.112.84.170 with SMTP id a10mr7897225lbz.22.1328705514468; Wed,
+	08 Feb 2012 04:51:54 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Wed, 8 Feb 2012 04:51:54 -0800 (PST)
+In-Reply-To: <jgtov9$fhv$1@dough.gmane.org>
+References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
+	<4F31C45B.1010600@linux.intel.com> <jgtb5c$8oh$1@dough.gmane.org>
+	<CAP9ODKpDe4Up_mCuRdTqNY6a-Kkxyz2ZR-GR9uQ+VFFW0HGsJQ@mail.gmail.com>
+	<jgtl0v$gd6$1@dough.gmane.org>
+	<CAP9ODKp7S2+HR3umrnd9RzT5JE0X_T_cjWPzi6S5WUdZ-SAzoQ@mail.gmail.com>
+	<jgtov9$fhv$1@dough.gmane.org>
+Date: Wed, 8 Feb 2012 13:51:54 +0100
+Message-ID: <CALbNGRQOjKkbYCE9ky6ZfNypCO9eNEsgmjPC_LaXduWb-eptnw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2012 13:50:04 +0100
-Message-Id: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe] systemd: split out libraries from ${PN}
+Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,61 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 12:58:18 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 12:59:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-core/systemd/systemd_git.bb |   14 ++++++++++++--
- 1 files changed, 12 insertions(+), 2 deletions(-)
+On Wed, Feb 8, 2012 at 1:14 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> That is why I want to make an exception for polkit and udisks to keep
+> initmanager selection an IMAGE_FEATURE combined with DISTRO_FEATURE. A
+> distro maintainer can then choose to support one or more initmanagers and in
+> the case for multiple it can be set per image.
+>
+> regards,
+>
+> Koen
+I haven't the point: why do we need such quirks to keep initmager an
+image feature? Could you please help me out here?
 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index c1a0117..4c458bd 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -14,7 +14,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r15"
-+PR = "r16"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
-@@ -59,6 +59,11 @@ do_install() {
- 	ln -s ${base_bindir}/systemd ${D}/init
- }
- 
-+python populate_packages_prepend (){
-+	systemdlibdir = d.getVar("base_libdir", True)
-+	do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'Systemd %s library', extra_depends='', allow_links=True)
-+}
-+
- PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
- 
- USERADD_PACKAGES = "${PN}"
-@@ -79,7 +84,7 @@ FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
- 
- RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
- 
--FILES_${PN} += " ${base_bindir}/* \
-+FILES_${PN} = " ${base_bindir}/* \
-                 ${datadir}/dbus-1/services \
-                 ${datadir}/dbus-1/system-services \
-                 ${datadir}/polkit-1 \
-@@ -93,6 +98,11 @@ FILES_${PN} += " ${base_bindir}/* \
-                 ${bindir}/systemd* \
-                 ${libdir}/tmpfiles.d/*.conf \
-                 ${libdir}/systemd \
-+                ${libdir}/binfmt.d \
-+                ${libdir}/modules-load.d \
-+                ${libdir}/sysctl.d \
-+                ${localstatedir} \
-+                ${libexecdir} \
-                "
- 
- FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
--- 
-1.7.2.5
+FYI one of my tests was to build the image I usually work with configured as
 
+INIT_MANAGER = "sysvinit"
+
+and systemd isn't build at all - so no need to take care at specific
+recipes: They will configure for what I (or the distro) want them.
+
+Please see INIT_MANAGER as distro feature. I did not add it to the
+collection of DISTRO_FEATURES to avoid setting multiple initmanages.
+
+Andreas
 
 
