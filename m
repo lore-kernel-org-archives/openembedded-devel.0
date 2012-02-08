@@ -1,24 +1,23 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1RvE5T-0008Gu-Oi
+	(envelope-from <raj.khem@gmail.com>) id 1RvEGn-00008C-18
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 21:25:56 +0100
-Received: by wibhq7 with SMTP id hq7so687024wib.6
+	Wed, 08 Feb 2012 21:37:37 +0100
+Received: by lbol12 with SMTP id l12so483998lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 12:17:52 -0800 (PST)
+	Wed, 08 Feb 2012 12:29:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=aKsEtZf1QXj3gg3GCyJYdbNnPkfX/A/m1y2d0Udkzek=;
-	b=BSFn29niFM+TVC70FZxGWkCsXr/dewUWmypIBRtvX/7lgffc/KhWto4adXRPfIuAMu
-	hbSpBDdCN/Snbsnb6fF+Z7NqHIVep8aVoBr4krOBoOUg+PvHAKmw8bdHE+Bzdnd27djj
-	u2XkB6LCQpKsPfZfwqgnAdNmoosSqpM4/Stqc=
+	bh=+MFr3sN8wkJjOWobpcAPaff0abvNCkCnUNsRZFN7Iq4=;
+	b=ur7ArA7VGjac3klz3WhGJqWOJuxO6uvbeMg/eLcD1xQWN8p1gWMaYNoasYNz4XtQIx
+	iymkT3DohXN9UU/f/bgJ0Ia55jZZmCcr7nIEfcz225j0X4QKKhCfswlGhLZLqbVNxsDD
+	CfVAwzz4moD/pOgSIcPwA6jNFciawGLg5XK4c=
+Received: by 10.152.114.169 with SMTP id jh9mr16477471lab.20.1328732973246;
+	Wed, 08 Feb 2012 12:29:33 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.90.212 with SMTP id by20mr43315220wib.12.1328732272117;
-	Wed, 08 Feb 2012 12:17:52 -0800 (PST)
-Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 12:17:52 -0800 (PST)
-Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 12:17:52 -0800 (PST)
-In-Reply-To: <CAMKF1soUL2p=ymicjq6UtiGWvM2_BBMU1JLNR4H+Db+YXOOimw@mail.gmail.com>
+Received: by 10.152.5.201 with HTTP; Wed, 8 Feb 2012 12:29:03 -0800 (PST)
+In-Reply-To: <CAC1BbcSLYNNTstF8LJoAoGd+J5+-Tba0jhTtmPpm+u+6tNrJFg@mail.gmail.com>
 References: <20111117223303.96550@gmx.net>
 	<CAMKF1spxE8kXQwsX3WYnazpGZDDmZoafvmvxLBRBvfZxdfbgdQ@mail.gmail.com>
 	<20111118200047.GD2101@mx.loc>
@@ -36,11 +35,11 @@ References: <20111117223303.96550@gmx.net>
 	<CAMKF1sr8EKC1tzDTHNEb0k4x_oN1bU6aCz_aJjDVPYEOho799Q@mail.gmail.com>
 	<CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
 	<CAMKF1soUL2p=ymicjq6UtiGWvM2_BBMU1JLNR4H+Db+YXOOimw@mail.gmail.com>
-Date: Wed, 8 Feb 2012 21:17:52 +0100
-Message-ID: <CAC1BbcSLYNNTstF8LJoAoGd+J5+-Tba0jhTtmPpm+u+6tNrJFg@mail.gmail.com>
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAC1BbcSLYNNTstF8LJoAoGd+J5+-Tba0jhTtmPpm+u+6tNrJFg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Feb 2012 12:29:03 -0800
+Message-ID: <CAMKF1soj8DnpXcEDJg0vogUCgL9C_SF37q2oFv66W7pXQ2ZH-g@mail.gmail.com>
+To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 Cc: uclibc@uclibc.org, Peter Mazinger <ps.m@gmx.net>,
 	openembedded-devel@lists.openembedded.org,
 	Carmelo AMOROSO <carmelo.amoroso@st.com>
@@ -58,41 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 20:25:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Feb 2012 20:37:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Feb 8, 2012 8:19 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
+On Wed, Feb 8, 2012 at 12:17 PM, Bernhard Reutner-Fischer
+<rep.dot.nop@gmail.com> wrote:
+> Fcntl{,64} is a nightmare, yes. But your hunk does not strike me as
+> immediately helpful.
+> arm/ioperm hidden def removal is OK, I think, without having sources at
+> hand.
+> The socketcall hunk is nonsense, see my previous reply to Peter in this
+> thread.
 >
-> On Wed, Feb 8, 2012 at 10:42 AM, Bernhard Reutner-Fischer
-> <rep.dot.nop@gmail.com> wrote:
-> > Core-image-sato does not build for me due to some buggy package that
-> > unconditionally uses *netgrp() or the like.
-> > Not amused, way out without going beserk?
+> +-# provided via pthreads builddir +-CSRC-y := $(filter-out $(libc_a_CSRC)
+> $(notdir $(libpthread_libc_OBJS:.o=.c)),$(CSRC-y)) +-SSRC := $(filter-out
+> $(libc_a_SSRC) $(notdir $(libpthread_libc_OBJS:.o=.S)),$(SSRC))
+> Huh? Sounds inappropriate to me.
+> Oh, filtering later on makes sense, so OK, good catch!
 >
-> Yeah with future branch here is my patch. git am it.
->
->
-http://uclibc.org/~kraj/0001-uclibc-git-Update-to-latest-plus-future-branch.patch
->
-> apply that on master of oe-core
+> +-ifeq ($(IS_EABI),y) ++ifeq ($(CONFIG_ARM_EABI),y)
+> But _that_ is a step backwards, NACK.
 
-Fcntl{,64} is a nightmare, yes. But your hunk does not strike me as
-immediately helpful.
-arm/ioperm hidden def removal is OK, I think, without having sources at
-hand.
-The socketcall hunk is nonsense, see my previous reply to Peter in this
-thread.
+yes most of my patches are cobbled up on top to get to a compiling
+state so it could be
+a garbage to hide another garbage
 
-+-# provided via pthreads builddir +-CSRC-y := $(filter-out $(libc_a_CSRC)
-$(notdir $(libpthread_libc_OBJS:.o=.c)),$(CSRC-y)) +-SSRC := $(filter-out
-$(libc_a_SSRC) $(notdir $(libpthread_libc_OBJS:.o=.S)),$(SSRC))
-Huh? Sounds inappropriate to me.
-Oh, filtering later on makes sense, so OK, good catch!
-
-+-ifeq ($(IS_EABI),y) ++ifeq ($(CONFIG_ARM_EABI),y)
-But _that_ is a step backwards, NACK.
->
-> then set
->
-> UCLIBCVERSION = "0.9.33+gitr%" in local.conf
 
