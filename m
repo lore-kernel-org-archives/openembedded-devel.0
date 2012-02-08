@@ -1,34 +1,36 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rv7ZM-00057y-VZ
+	(envelope-from <tworaz666@gmail.com>) id 1Rv8In-0008R3-EC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 14:28:21 +0100
-Received: by lahc1 with SMTP id c1so457387lah.6
+	Wed, 08 Feb 2012 15:15:17 +0100
+Received: by bke17 with SMTP id 17so508320bke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 05:20:17 -0800 (PST)
+	Wed, 08 Feb 2012 06:07:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=aDHkRTuzd135A17hZc7D1pZsImshvriueA9i/YwhAbQ=;
-	b=OYxhsCU3DMlhxrPsFj1tOhMivTjUfMZT8LKkfhXL7A5aq0XtbV763dEg2V7OtUJrkq
-	G35/usro03YjV8/WPL9s7QseqIBzWNARmB7jdV9gMS70PCXdtAZ5cAx1LkFrBplWQKbI
-	91EVCpqH8Bur9RRqDmHbCTl8nO/7FFwslJv+8=
-Received: by 10.152.112.41 with SMTP id in9mr15444644lab.27.1328707217424;
-	Wed, 08 Feb 2012 05:20:17 -0800 (PST)
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=f/AZdX/Uc/RQIq2Eybxf8OCYTRQSf8x2Jpuc5B1nWck=;
+	b=uTMzagd6GHN0k0EwKgptK3uNj7vzjleHpX963IDTcANYSnSBGj59xMBI9cIXr3mE0x
+	XtO9it9oQnZSsPNtOz6P0d3MGLaErsIz9W4EoOEtKFGiksZrZo5NrRLV4OtTjSRQnwn/
+	BSqLJ9us0I6WxI4ysmfDJ+KGCbSHRlk0uoRzc=
+Received: by 10.205.131.13 with SMTP id ho13mr12863340bkc.58.1328710033378;
+	Wed, 08 Feb 2012 06:07:13 -0800 (PST)
+Received: from [192.168.0.44] (cwr150.internetdsl.tpnet.pl. [83.19.125.150])
+	by mx.google.com with ESMTPS id cz3sm4889946bkb.3.2012.02.08.06.07.11
+	(version=SSLv3 cipher=OTHER); Wed, 08 Feb 2012 06:07:12 -0800 (PST)
+Message-ID: <4F32810F.5060801@gmail.com>
+Date: Wed, 08 Feb 2012 15:05:03 +0100
+From: Peter Tworek <tworaz666@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20120112 Thunderbird/9.0
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Wed, 8 Feb 2012 05:19:47 -0800 (PST)
-In-Reply-To: <jgtov9$fhv$1@dough.gmane.org>
-References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
-	<4F31C45B.1010600@linux.intel.com> <jgtb5c$8oh$1@dough.gmane.org>
-	<CAP9ODKpDe4Up_mCuRdTqNY6a-Kkxyz2ZR-GR9uQ+VFFW0HGsJQ@mail.gmail.com>
-	<jgtl0v$gd6$1@dough.gmane.org>
-	<CAP9ODKp7S2+HR3umrnd9RzT5JE0X_T_cjWPzi6S5WUdZ-SAzoQ@mail.gmail.com>
-	<jgtov9$fhv$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Feb 2012 05:19:47 -0800
-Message-ID: <CAMKF1sqHnaU5QncuK_Dz5QFCorkx8p2cbcvy_TS-4JvQ-3J3dQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
+References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
+	<1328380249-11697-2-git-send-email-tworaz666@gmail.com>
+	<CALbNGRSDEbmPKJi1CDNk1ifoLdG2x9C6q6d6pzo=X-NCFtMagQ@mail.gmail.com>
+	<4F2E9C74.2020201@gmail.com>
+In-Reply-To: <4F2E9C74.2020201@gmail.com>
+Subject: Re: [meta-xfce][PATCH 1/3] xfconf: Update to latest stable version 4.8.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,17 +44,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 13:28:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Feb 2012 14:15:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 8, 2012 at 4:14 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> That is why I want to make an exception for polkit and udisks to keep
-> initmanager selection an IMAGE_FEATURE combined with DISTRO_FEATURE. A
-> distro maintainer can then choose to support one or more initmanagers and in
-> the case for multiple it can be set per image.
+On 02/05/2012 04:12 PM, Peter Tworek wrote:
+> On 02/04/2012 07:52 PM, Andreas Müller wrote:
+>> On Sat, Feb 4, 2012 at 7:30 PM, Peter Tworek<tworaz666@gmail.com>  
+>> wrote:
+>>>
+>>>
+>>> Run tested on netbook pro.
+>>>
+>>> Signed-off-by: Peter Tworek<tworaz666@gmail.com>
+>>> ---
+>>>   meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb |   15 ---------------
+>>>   meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb |   13 +++++++++++++
+>>>   2 files changed, 13 insertions(+), 15 deletions(-)
+>>>   delete mode 100644 meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb
+>>>   create mode 100644 meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb
+>>>
+>>> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb 
+>>> b/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb
+>>> deleted file mode 100644
+>>> index 65efffd..0000000
+>>> --- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.0.bb
+>>> +++ /dev/null
+>>> @@ -1,15 +0,0 @@
+>>> -DESCRIPTION = "Xfce configuration daemon and utilities"
+>>> -SECTION = "x11/wm"
+>>> -LICENSE = "GPLv2"
+>>> -LIC_FILES_CHKSUM = 
+>>> "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>>> -DEPENDS = "dbus-glib libxfce4util perl-native"
+>>> -
+>>> -PR = "r0"
+>>> -
+>>> -inherit xfce
+>>> -
+>>> -FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
+>>> -                ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+>>> -
+>>> -SRC_URI[md5sum] = "0f11ed1ec7789c5c4c3fcc7cdb3c2940"
+>>> -SRC_URI[sha256sum] = 
+>>> "e071d55982238f997a691ff4bb08ef39e4c86bae31cf69b6666bc0cdadd1b85d"
+>>> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb 
+>>> b/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb
+>>> new file mode 100644
+>>> index 0000000..51df2ee
+>>> --- /dev/null
+>>> +++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.8.1.bb
+>>> @@ -0,0 +1,13 @@
+>>> +DESCRIPTION = "Xfce configuration daemon and utilities"
+>>> +SECTION = "x11/wm"
+>>> +LICENSE = "GPLv2"
+>>> +LIC_FILES_CHKSUM = 
+>>> "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>>> +DEPENDS = "dbus-glib libxfce4util perl-native"
+>>> +
+>>> +inherit xfce
+>>> +
+>>> +FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
+>>> +                ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+>>> +
+>>> +SRC_URI[md5sum] = "70b4185aa7eed8a85f015f16c5c86d36"
+>>> +SRC_URI[sha256sum] = 
+>>> "9860737539fab2b852e8c07c50c205a5fbe894b08bcb4488a70e3fd6c75993cb"
+>>> -- 
+>>> 1.7.3.4
+>>>
+>> Have same here but did not send because of following issue: After
+>> setting up 1st session (panels / plugins...). and closing session in
+>> the 2nd session panel is gone. Restarting manual causes annoying error
+>> messages. How did you test this one?
+> I haven't tested it with a clean session, just updated exiting version 
+> on my machine, logged out, logged in and it worked. Just for 
+> experiment I've made some changes to my existing panel setup, 
+> restarted the device and the changes are there, everything seems to be 
+> working fine. I'll retest it with clean $HOME, maybe this will trigger 
+> the issue.
+>
+> /ptw
 
+Ok, I've managed  what I think is the same problem you're seeing. What I 
+did was:
+1. Modify xfce4-panel (add some new plugin, remove exiting one etc)
+2. Switch to virtual terminal (chvt 1)
+3. Kill X server.
 
-I think having multiple recipes e.g. polkit and polkit-systemd might
-be one ugly way to do it
+After that when I start xfce4 once again, there is high chance that 
+xfce4-panel will crash. I couldn't reproduce the problem if I cleanly 
+logged out from xfce4. I've tried it several times and everything works 
+as I'd expect it to. My guess is that the problem arises when xfconfd is 
+killed while it's trying to save something to the disk. Looking at the 
+changelog only this [1] commit looks like it might have anything to do 
+with the issue. Other ones seem harmless. I'll try to look into this 
+closer when I'll have some free time.
+
+/ptw
+
+[1] 
+http://git.xfce.org/xfce/xfconf/commit/?h=xfce-4.8&id=2a4673e1dae7d766d095582b47aa2b1c31e3de71
 
 
