@@ -1,23 +1,24 @@
-Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RvEGn-00008C-18
+	(envelope-from <rep.dot.nop@gmail.com>) id 1RvEc7-0000mQ-B1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 21:37:37 +0100
-Received: by lbol12 with SMTP id l12so483998lbo.6
+	Wed, 08 Feb 2012 21:59:39 +0100
+Received: by wgbdr13 with SMTP id dr13so900363wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 12:29:33 -0800 (PST)
+	Wed, 08 Feb 2012 12:51:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=+MFr3sN8wkJjOWobpcAPaff0abvNCkCnUNsRZFN7Iq4=;
-	b=ur7ArA7VGjac3klz3WhGJqWOJuxO6uvbeMg/eLcD1xQWN8p1gWMaYNoasYNz4XtQIx
-	iymkT3DohXN9UU/f/bgJ0Ia55jZZmCcr7nIEfcz225j0X4QKKhCfswlGhLZLqbVNxsDD
-	CfVAwzz4moD/pOgSIcPwA6jNFciawGLg5XK4c=
-Received: by 10.152.114.169 with SMTP id jh9mr16477471lab.20.1328732973246;
-	Wed, 08 Feb 2012 12:29:33 -0800 (PST)
+	bh=PuTe09g4roO4XPN+1zQQhpjLRzZxNBoFnsD+B/p2MIk=;
+	b=opjBHzFgkG+O5jaFeuRdcz/RdLCtlFo1jPA8zNVgPYs+CWFidSCIewytY25OTOKOwp
+	yvL3WyXscmzuHFPqKBjvuXzQ4FoawUURMwoqE/HYBo3wxdTAQGlq0Y02NRx5y+4Lm1BE
+	4SS3B0bpQZcAZpNI7oBkjTvjN/64IqdT8AmhE=
 MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Wed, 8 Feb 2012 12:29:03 -0800 (PST)
-In-Reply-To: <CAC1BbcSLYNNTstF8LJoAoGd+J5+-Tba0jhTtmPpm+u+6tNrJFg@mail.gmail.com>
+Received: by 10.181.13.113 with SMTP id ex17mr43220337wid.15.1328734295712;
+	Wed, 08 Feb 2012 12:51:35 -0800 (PST)
+Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 12:51:35 -0800 (PST)
+Received: by 10.216.93.7 with HTTP; Wed, 8 Feb 2012 12:51:35 -0800 (PST)
+In-Reply-To: <CAMKF1soj8DnpXcEDJg0vogUCgL9C_SF37q2oFv66W7pXQ2ZH-g@mail.gmail.com>
 References: <20111117223303.96550@gmx.net>
 	<CAMKF1spxE8kXQwsX3WYnazpGZDDmZoafvmvxLBRBvfZxdfbgdQ@mail.gmail.com>
 	<20111118200047.GD2101@mx.loc>
@@ -36,10 +37,12 @@ References: <20111117223303.96550@gmx.net>
 	<CAC1BbcTHi_rKU7yjBVYpRBv9V_1vdvHE-qFrs+TG4taxg85Tog@mail.gmail.com>
 	<CAMKF1soUL2p=ymicjq6UtiGWvM2_BBMU1JLNR4H+Db+YXOOimw@mail.gmail.com>
 	<CAC1BbcSLYNNTstF8LJoAoGd+J5+-Tba0jhTtmPpm+u+6tNrJFg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Feb 2012 12:29:03 -0800
-Message-ID: <CAMKF1soj8DnpXcEDJg0vogUCgL9C_SF37q2oFv66W7pXQ2ZH-g@mail.gmail.com>
-To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	<CAMKF1soj8DnpXcEDJg0vogUCgL9C_SF37q2oFv66W7pXQ2ZH-g@mail.gmail.com>
+Date: Wed, 8 Feb 2012 21:51:35 +0100
+Message-ID: <CAC1BbcTpr-=hE7W1jQ-x=VSks5xUvHmJs1Up8vB+nqSor_kixA@mail.gmail.com>
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Cc: uclibc@uclibc.org, Peter Mazinger <ps.m@gmx.net>,
 	openembedded-devel@lists.openembedded.org,
 	Carmelo AMOROSO <carmelo.amoroso@st.com>
@@ -57,29 +60,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 20:37:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Feb 2012 20:59:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Feb 8, 2012 at 12:17 PM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> Fcntl{,64} is a nightmare, yes. But your hunk does not strike me as
-> immediately helpful.
-> arm/ioperm hidden def removal is OK, I think, without having sources at
-> hand.
-> The socketcall hunk is nonsense, see my previous reply to Peter in this
-> thread.
->
-> +-# provided via pthreads builddir +-CSRC-y := $(filter-out $(libc_a_CSRC)
-> $(notdir $(libpthread_libc_OBJS:.o=.c)),$(CSRC-y)) +-SSRC := $(filter-out
-> $(libc_a_SSRC) $(notdir $(libpthread_libc_OBJS:.o=.S)),$(SSRC))
-> Huh? Sounds inappropriate to me.
-> Oh, filtering later on makes sense, so OK, good catch!
->
-> +-ifeq ($(IS_EABI),y) ++ifeq ($(CONFIG_ARM_EABI),y)
-> But _that_ is a step backwards, NACK.
+On Feb 8, 2012 9:29 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
 
-yes most of my patches are cobbled up on top to get to a compiling
-state so it could be
-a garbage to hide another garbage
+I am redoing the full merge now, with my usual (super cautious) hat on.
+Anyway, can you reproduce the ?etnetgrent() stuff with sato?
 
+It is amazing how anybody seems to fail to get recommendations (think
+configure flags) right.
+How hard can it be to have a resolver that provides a set of (virtual,
+inherently) packages that provide their virtual (sub-)duties on one hand,
+and on the other hand (optionally) require a set of duties to be selectable
+(come into play to satisfy a duty)?
 
