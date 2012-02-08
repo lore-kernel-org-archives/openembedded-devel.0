@@ -1,33 +1,31 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RvC7B-0005RO-6o
+	(envelope-from <otavio.salvador@gmail.com>) id 1RvCZp-00065H-UW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 19:19:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id C1EB03158A44
+	Wed, 08 Feb 2012 19:49:09 +0100
+Received: by eaal10 with SMTP id l10so229965eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 19:11:31 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id utB89eBXAt0y
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 19:11:22 +0100 (CET)
-Received: from [172.22.22.61] (drms-590c4e0c.pool.mediaWays.net [89.12.78.12])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id E306B31588D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2012 19:11:21 +0100 (CET)
-Message-ID: <4F32BAC8.2000807@opendreambox.org>
-Date: Wed, 08 Feb 2012 19:11:20 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Wed, 08 Feb 2012 10:41:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=GJbvDDZkUDWVwUGPfDOK3F5rlqr5KB6PYnoMkL/VomM=;
+	b=pYTnbttY+TUl9GaRI7avF2PrgbwFJemL273fEnJTTbEsa7Zw0BBz/09pF/59MRzCkf
+	P9aT4eC0QYde0BB6F6qT1/2HiKKUj3tW96+1zePFqzjg7zdXbhAhj+SRgaOqfL++jPO5
+	eLIQqmNzButY+06yvGDDH/xmnnJ3MuiZv1ygE=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F2A97B7.2080709@opendreambox.org>
+Received: by 10.14.206.133 with SMTP id l5mr8786282eeo.22.1328726464379; Wed,
+	08 Feb 2012 10:41:04 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.14.96.129 with HTTP; Wed, 8 Feb 2012 10:41:04 -0800 (PST)
 In-Reply-To: <4F2A97B7.2080709@opendreambox.org>
+References: <4F2A97B7.2080709@opendreambox.org>
+Date: Wed, 8 Feb 2012 16:41:04 -0200
+X-Google-Sender-Auth: P18HFAOm76MyQwhbUSXy5GuUv9Y
+Message-ID: <CAP9ODKqah-6Y6hp-beD0hUi=-r6VXJ02QD=puXFFYW2Hq8FACw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH] giflib: don't depend on libsm if x11 is unavailable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,40 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 18:19:33 -0000
+X-List-Received-Date: Wed, 08 Feb 2012 18:49:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Ping.
+On Thu, Feb 2, 2012 at 12:03, Andreas Oberritter <obi@opendreambox.org>wrote:
 
-Patchwork URL: http://patches.openembedded.org/patch/20561/
-
-On 02.02.2012 15:03, Andreas Oberritter wrote:
-> If DISTRO_FEATURES doesn't contain x11, libsm is not available.
-> As libsm is optional, the dependency is changed to be conditional.
 > There's no need to alter configure flags, because without x11,
 > libsm cannot be picked up accidentially. Because this just fixes
 > a missing dependency failure without x11, no PR bump is required
 > either.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-> index bd7b495..4e782e2 100644
-> --- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-> +++ b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-> @@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
->  
->  inherit autotools
->  
-> -DEPENDS = "libsm"
-> +DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'libsm', '', d)}"
->  
->  PACKAGES += "${PN}-utils"
->  FILES_${PN} = "${libdir}/libgif.so.*"
+>
 
+I do prefer a clear configure option depending on if it is going to use or
+not libsm otherwise if user has built it, it is going to be taken. Also,
+please PR bump in any case since it can help spot other possible failures
+that we'd not catch otherwise.
 
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
