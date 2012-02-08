@@ -1,25 +1,28 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rv7AX-0008Nb-8s for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 14:02:41 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rv72j-0004bu-RP for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Feb 2012 13:54:37 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 13:54:37 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1Rv7C4-0008TO-Of
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Feb 2012 14:04:16 +0100
+Received: by eaal10 with SMTP id l10so138033eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2012 13:54:37 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 08 Feb 2012 04:56:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=bwAFmLyJn8hNyyHolEiKPyopyZE9sDTH3/u06W9zBNg=;
+	b=u8rE6K2UVuiiMkeCgmnv71XRoJXyqompXkDcDKf399JYHW/m/vgvoQnlZej4yeoS5L
+	a9JO/t81htX9CLh8R2LOpPbJ0RdgEJLG+O6P0FFTyKqU7sm8sFrXqURm9ns1D5wmLwKJ
+	Yde8IR6dTc8aoE3UjM1If4uq4NoTT8gzvEnDQ=
+Received: by 10.14.135.140 with SMTP id u12mr8374150eei.73.1328705773568;
+	Wed, 08 Feb 2012 04:56:13 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id o49sm4947426eeb.7.2012.02.08.04.56.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 08 Feb 2012 04:56:12 -0800 (PST)
+Date: Wed, 8 Feb 2012 13:56:10 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 08 Feb 2012 13:54:23 +0100
-Message-ID: <jgtra1$1u5$1@dough.gmane.org>
+Message-ID: <20120208125610.GC3647@jama.jama.net>
 References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKpi+WWUuf7iP8QgJK2vgmM3KAgS0Fkhbu3eEy80L2eszA@mail.gmail.com>
 	<4F31C45B.1010600@linux.intel.com> <jgtb5c$8oh$1@dough.gmane.org>
@@ -28,13 +31,9 @@ References: <1328627573-5217-1-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKp7S2+HR3umrnd9RzT5JE0X_T_cjWPzi6S5WUdZ-SAzoQ@mail.gmail.com>
 	<jgtov9$fhv$1@dough.gmane.org>
 	<CALbNGRQOjKkbYCE9ky6ZfNypCO9eNEsgmjPC_LaXduWb-eptnw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+MIME-Version: 1.0
 In-Reply-To: <CALbNGRQOjKkbYCE9ky6ZfNypCO9eNEsgmjPC_LaXduWb-eptnw@mail.gmail.com>
-X-Enigmail-Version: 1.3.5
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe][RFC 00/27] systemd / initmanager rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,47 +48,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 13:02:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Feb 2012 13:04:16 -0000
+X-Groupsio-MsgNum: 37017
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="rQ2U398070+RC21q"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--rQ2U398070+RC21q
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 08-02-12 13:51, Andreas Müller schreef:
-> On Wed, Feb 8, 2012 at 1:14 PM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->> That is why I want to make an exception for polkit and udisks to keep 
->> initmanager selection an IMAGE_FEATURE combined with DISTRO_FEATURE. A 
->> distro maintainer can then choose to support one or more initmanagers
->> and in the case for multiple it can be set per image.
->> 
->> regards,
->> 
->> Koen
-> I haven't the point: why do we need such quirks to keep initmager an 
+On Wed, Feb 08, 2012 at 01:51:54PM +0100, Andreas M=FCller wrote:
+> On Wed, Feb 8, 2012 at 1:14 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+> > That is why I want to make an exception for polkit and udisks to keep
+> > initmanager selection an IMAGE_FEATURE combined with DISTRO_FEATURE. A
+> > distro maintainer can then choose to support one or more initmanagers a=
+nd in
+> > the case for multiple it can be set per image.
+> >
+> > regards,
+> >
+> > Koen
+> I haven't the point: why do we need such quirks to keep initmager an
 > image feature? Could you please help me out here?
-> 
-> FYI one of my tests was to build the image I usually work with configured
-> as
-> 
-> INIT_MANAGER = "sysvinit"
-> 
-> and systemd isn't build at all - so no need to take care at specific 
+>=20
+> FYI one of my tests was to build the image I usually work with configured=
+ as
+>=20
+> INIT_MANAGER =3D "sysvinit"
+>=20
+> and systemd isn't build at all - so no need to take care at specific
 > recipes: They will configure for what I (or the distro) want them.
-> 
-> Please see INIT_MANAGER as distro feature.
+>=20
+> Please see INIT_MANAGER as distro feature. I did not add it to the
+> collection of DISTRO_FEATURES to avoid setting multiple initmanages.
 
-It is first and foremost and IMAGE_FEATURE. With your reasoning we need to
-include sysvinit in every initramfs images as well.
+For me it would allow to support palmpre* devices just by slightly
+different image even when it has too old kernel for systemd.
+
+If it's distro feature then we'll have to drop support or find some devs
+still interested enough in palmpre* to port all patches to newer kernel
+and support it.
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--rQ2U398070+RC21q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk8ycHwACgkQMkyGM64RGpE9ngCfd3FXoKJnk/9oFHiVKBELeHov
-m5kAn1B/YA/IugTnjF5FqGs5RVA7ueWJ
-=Adx3
+iEYEARECAAYFAk8ycOkACgkQN1Ujt2V2gByfqgCgqPsGNPgU0I9pLQKUTYxERDvm
+SdsAn0lCj48TlLBvIuEBBGhCz3yJ79zg
+=zGtH
 -----END PGP SIGNATURE-----
 
-
-
+--rQ2U398070+RC21q--
