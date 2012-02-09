@@ -1,29 +1,29 @@
-Received: from smtprelay-b21.telenor.se ([195.54.99.212])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1Rvabs-0007Br-9R
+	(envelope-from <ulf@emagii.com>) id 1Rvb2J-0001T8-9C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Feb 2012 21:28:52 +0100
-Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 7A87EEB8E2
+	Thu, 09 Feb 2012 21:56:11 +0100
+Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id E0132D9CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2012 21:20:46 +0100 (CET)
+	Thu,  9 Feb 2012 21:20:49 +0100 (CET)
 X-SENDER-IP: [83.227.57.213]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AjBLAKEpNE9T4znVPGdsb2JhbABDr18ZAQEBATc0gXIBAQVLAQojEAgUAwECLzkKDAgZCYd2Bq0cAYYVjF8BCQeDOYEWg0MElTCJM4kw
-X-IronPort-AV: E=Sophos;i="4.73,392,1325458800"; d="scan'208";a="47020743"
+X-IronPort-Anti-Spam-Result: AitLAM4pNE9T4znVPGdsb2JhbABDr1sZAQEBATc0gXIBAQVLAQojEAgYMTkKFBkJh3YGq0ABjX2MXwEJB4M5gRYmgx0ElTCSYw
+X-IronPort-AV: E=Sophos;i="4.73,392,1325458800"; d="scan'208";a="1806583042"
 Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.57.213])
-	by ipb3.telenor.se with ESMTP; 09 Feb 2012 21:20:46 +0100
+	by ipb4.telenor.se with ESMTP; 09 Feb 2012 21:20:49 +0100
 From: ulf@emagii.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Feb 2012 21:20:44 +0100
-Message-Id: <1328818845-11049-2-git-send-email-ulf@emagii.com>
+Date: Thu,  9 Feb 2012 21:20:45 +0100
+Message-Id: <1328818845-11049-3-git-send-email-ulf@emagii.com>
 X-Mailer: git-send-email 1.7.4.1
 In-Reply-To: <1328818845-11049-1-git-send-email-ulf@emagii.com>
 References: <1328818845-11049-1-git-send-email-ulf@emagii.com>
 Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH 2/3] perl_5.10.1.bb: Add search for libraries
+Subject: [PATCH 3/3] intltool(-native) Fix dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,96 +37,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 20:28:52 -0000
+X-List-Received-Date: Thu, 09 Feb 2012 20:56:11 -0000
 
 From: Ulf Samuelsson <ulf@emagii.com>
 
-Ubuntu 11.04 i686 has moved around the libraries.
-perl-native will not build due to this.
+intltool used to depend on libxml-parser-perl-native,
+which did not exist.
 
-Backported from 5.14.2
+The patch creates a new native recipe for libxml-parser-perl,
+and let intltool-native depend on this.
+intltool dependency is removed.
 
 Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- .../perl/files/0001-Find-pthread-libraries.patch   |   31 ++++++++++++++++++++
- recipes/perl/perl-native_5.10.1.bb                 |    3 +-
- recipes/perl/perl_5.10.1.bb                        |    4 ++-
- 3 files changed, 36 insertions(+), 2 deletions(-)
- create mode 100644 recipes/perl/files/0001-Find-pthread-libraries.patch
+ recipes/intltool/intltool-native_0.40.3.bb     |    2 +
+ recipes/intltool/intltool_0.40.3.bb            |    2 -
+ recipes/perl/libxml-parser-perl-native_2.36.bb |   32 ++++++++++++++++++++++++
+ 3 files changed, 34 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/perl/libxml-parser-perl-native_2.36.bb
 
-diff --git a/recipes/perl/files/0001-Find-pthread-libraries.patch b/recipes/perl/files/0001-Find-pthread-libraries.patch
+diff --git a/recipes/intltool/intltool-native_0.40.3.bb b/recipes/intltool/intltool-native_0.40.3.bb
+index 750914c..99d9b6a 100644
+--- a/recipes/intltool/intltool-native_0.40.3.bb
++++ b/recipes/intltool/intltool-native_0.40.3.bb
+@@ -1,5 +1,7 @@
+ require intltool_${PV}.bb
+ 
++DEPENDS += " libxml-parser-perl-native"
++
+ inherit native
+ 
+ EXTRA_OEMAKE = "'PERL_TARGET=/usr/bin/env perl'"
+diff --git a/recipes/intltool/intltool_0.40.3.bb b/recipes/intltool/intltool_0.40.3.bb
+index bb2b75d..d81ce1a 100644
+--- a/recipes/intltool/intltool_0.40.3.bb
++++ b/recipes/intltool/intltool_0.40.3.bb
+@@ -2,8 +2,6 @@ require intltool.inc
+ 
+ PR = "${INC_PR}.0"
+ 
+-DEPENDS += " libxml-parser-perl-native"
+-
+ EXTRA_OEMAKE = "'PERL_TARGET=/usr/bin/perl'"
+ 
+ do_configure_prepend() {
+diff --git a/recipes/perl/libxml-parser-perl-native_2.36.bb b/recipes/perl/libxml-parser-perl-native_2.36.bb
 new file mode 100644
-index 0000000..f651dbd
+index 0000000..e46cc59
 --- /dev/null
-+++ b/recipes/perl/files/0001-Find-pthread-libraries.patch
-@@ -0,0 +1,31 @@
-+From 69f418972f17b7f03cdc335ad14af486d06d94b2 Mon Sep 17 00:00:00 2001
-+From: Ulf Samuelsson <ulf@emagii.com>
-+Date: Tue, 31 Jan 2012 09:59:31 +0100
-+Subject: [PATCH] Find pthread libraries
++++ b/recipes/perl/libxml-parser-perl-native_2.36.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "XML::Parser - A perl module for parsing XML documents"
++SECTION = "libs"
++LICENSE = "Artistic|GPLv1+"
++DEPENDS += "expat expat-native"
++PR= "r4"
 +
-+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
-+---
-+ hints/linux.sh |   10 ++++++++++
-+ 1 files changed, 10 insertions(+), 0 deletions(-)
++SRC_URI = "http://www.cpan.org/modules/by-module/XML/XML-Parser-${PV}.tar.gz"
 +
-+diff --git a/hints/linux.sh b/hints/linux.sh
-+index d208129..04a99da 100644
-+--- a/hints/linux.sh
-++++ b/hints/linux.sh
-+@@ -441,3 +441,13 @@ case "$libdb_needs_pthread" in
-+     libswanted="$libswanted pthread"
-+     ;;
-+ esac
-++
-++# plibpth to bypass this check.
-++case "$plibpth" in
-++  '')	plibpth=`gcc -print-search-dirs | grep libraries | cut -f2- -d= | tr ':' $trnl | grep -v 'gcc' | sed -e 's:/$::'`
-++	set X $plibpth # Collapse all entries on one line
-++	shift
-++	plibpth="$*"
-++	;;
-++esac
-++
-+-- 
-+1.7.4.1
++S = "${WORKDIR}/XML-Parser-${PV}"
 +
-diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
-index 80d6937..f37c6cb 100644
---- a/recipes/perl/perl-native_5.10.1.bb
-+++ b/recipes/perl/perl-native_5.10.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Perl is a popular scripting language."
- HOMEPAGE = "http://www.perl.org/"
- SECTION = "libs"
- LICENSE = "Artistic|GPLv1+"
--PR = "r12"
-+PR = "r13"
- NATIVE_INSTALL_WORKS = "1"
- INHIBIT_DEFAULT_DEPS = "1"
- PATCHTOOL = "patch"
-@@ -21,6 +21,7 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
-            file://native-perlinc.patch \
- 	   file://perl-fix-cross-library-check.patch \
-            file://ubuntu-11.04-multiarch.patch \
-+	   file://0001-Find-pthread-libraries.patch \
- 	   "
- 
- SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
-diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
-index 6c0dcb1..68eaaf1 100644
---- a/recipes/perl/perl_5.10.1.bb
-+++ b/recipes/perl/perl_5.10.1.bb
-@@ -75,7 +75,9 @@ SRC_URI = "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
-         file://config.sh-32-be \
-         file://config.sh-64 \
-         file://config.sh-64-le \
--        file://config.sh-64-be"
-+        file://config.sh-64-be \
-+	file://0001-Find-pthread-libraries.patch \
-+	"
- 
- SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
- SRC_URI[perl-5.10.1.sha256sum] = "cb7f26ea4b2b28d6644354d87a269d01cac1b635287dae64e88eeafa24b44f35"
++EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
++
++inherit cpan
++inherit native
++
++do_compile() {
++	export LIBC="$(find ${STAGING_DIR_TARGET}/lib -name 'libc-*.so')"
++	cpan_do_compile
++}
++# 	cpan_do_compile	|| echo expected failure
++
++do_compile_virtclass-native (){
++	cpan_do_compile
++}
++
++FILES_${PN} = "${PERLLIBDIRS}/auto/XML/Parser/Expat/* \
++                ${PERLLIBDIRS}/XML"
++
++BBCLASSEXTEND="native"
++
++SRC_URI[md5sum] = "1b868962b658bd87e1563ecd56498ded"
++SRC_URI[sha256sum] = "9fd529867402456bd826fe0e5588d35b3a2e27e586a2fd838d1352b71c2ed73f"
 -- 
 1.7.4.1
 
