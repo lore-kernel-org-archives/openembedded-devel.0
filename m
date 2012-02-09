@@ -1,29 +1,27 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1Rvb2J-0001T8-9C
+	(envelope-from <ulf@emagii.com>) id 1Rvb4V-0001bN-Jy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Feb 2012 21:56:11 +0100
-Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id E0132D9CD
+	Thu, 09 Feb 2012 21:58:27 +0100
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id DA3A1D413
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2012 21:20:49 +0100 (CET)
+	Thu,  9 Feb 2012 21:20:44 +0100 (CET)
 X-SENDER-IP: [83.227.57.213]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AitLAM4pNE9T4znVPGdsb2JhbABDr1sZAQEBATc0gXIBAQVLAQojEAgYMTkKFBkJh3YGq0ABjX2MXwEJB4M5gRYmgx0ElTCSYw
-X-IronPort-AV: E=Sophos;i="4.73,392,1325458800"; d="scan'208";a="1806583042"
+X-IronPort-Anti-Spam-Result: ArtWAFYqNE9T4znVPGdsb2JhbABDiVqmBRkBAQEBNzSBcgFRAQojGBhqCi2Hf60gAYYRjF8BCQcWgyOBPIMdBJUwkmM
+X-IronPort-AV: E=Sophos;i="4.73,392,1325458800"; d="scan'208";a="266609530"
 Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.57.213])
-	by ipb4.telenor.se with ESMTP; 09 Feb 2012 21:20:49 +0100
+	by ipb1.telenor.se with ESMTP; 09 Feb 2012 21:20:44 +0100
 From: ulf@emagii.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Feb 2012 21:20:45 +0100
-Message-Id: <1328818845-11049-3-git-send-email-ulf@emagii.com>
+Date: Thu,  9 Feb 2012 21:20:43 +0100
+Message-Id: <1328818845-11049-1-git-send-email-ulf@emagii.com>
 X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1328818845-11049-1-git-send-email-ulf@emagii.com>
-References: <1328818845-11049-1-git-send-email-ulf@emagii.com>
 Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH 3/3] intltool(-native) Fix dependencies.
+Subject: [PATCH 1/3] bluez4: Add version to 4.98
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,88 +35,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 20:56:11 -0000
+X-List-Received-Date: Thu, 09 Feb 2012 20:58:27 -0000
 
 From: Ulf Samuelsson <ulf@emagii.com>
 
-intltool used to depend on libxml-parser-perl-native,
-which did not exist.
-
-The patch creates a new native recipe for libxml-parser-perl,
-and let intltool-native depend on this.
-intltool dependency is removed.
-
 Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- recipes/intltool/intltool-native_0.40.3.bb     |    2 +
- recipes/intltool/intltool_0.40.3.bb            |    2 -
- recipes/perl/libxml-parser-perl-native_2.36.bb |   32 ++++++++++++++++++++++++
- 3 files changed, 34 insertions(+), 2 deletions(-)
- create mode 100644 recipes/perl/libxml-parser-perl-native_2.36.bb
+ recipes/bluez/bluez4_4.98.bb |   30 ++++++++++++++++++++++++++++++
+ 1 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/bluez4_4.98.bb
 
-diff --git a/recipes/intltool/intltool-native_0.40.3.bb b/recipes/intltool/intltool-native_0.40.3.bb
-index 750914c..99d9b6a 100644
---- a/recipes/intltool/intltool-native_0.40.3.bb
-+++ b/recipes/intltool/intltool-native_0.40.3.bb
-@@ -1,5 +1,7 @@
- require intltool_${PV}.bb
- 
-+DEPENDS += " libxml-parser-perl-native"
-+
- inherit native
- 
- EXTRA_OEMAKE = "'PERL_TARGET=/usr/bin/env perl'"
-diff --git a/recipes/intltool/intltool_0.40.3.bb b/recipes/intltool/intltool_0.40.3.bb
-index bb2b75d..d81ce1a 100644
---- a/recipes/intltool/intltool_0.40.3.bb
-+++ b/recipes/intltool/intltool_0.40.3.bb
-@@ -2,8 +2,6 @@ require intltool.inc
- 
- PR = "${INC_PR}.0"
- 
--DEPENDS += " libxml-parser-perl-native"
--
- EXTRA_OEMAKE = "'PERL_TARGET=/usr/bin/perl'"
- 
- do_configure_prepend() {
-diff --git a/recipes/perl/libxml-parser-perl-native_2.36.bb b/recipes/perl/libxml-parser-perl-native_2.36.bb
+diff --git a/recipes/bluez/bluez4_4.98.bb b/recipes/bluez/bluez4_4.98.bb
 new file mode 100644
-index 0000000..e46cc59
+index 0000000..e1f371e
 --- /dev/null
-+++ b/recipes/perl/libxml-parser-perl-native_2.36.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "XML::Parser - A perl module for parsing XML documents"
-+SECTION = "libs"
-+LICENSE = "Artistic|GPLv1+"
-+DEPENDS += "expat expat-native"
-+PR= "r4"
++++ b/recipes/bluez/bluez4_4.98.bb
+@@ -0,0 +1,30 @@
++require bluez4.inc
 +
-+SRC_URI = "http://www.cpan.org/modules/by-module/XML/XML-Parser-${PV}.tar.gz"
++SRC_URI = "\
++  ${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-${PV}.tar.gz \
++  file://bluetooth.conf \
++"
++SRC_URI[md5sum] = "362864b716950baa04797de735fc237b"
++SRC_URI[sha256sum] = "9a5b655bada7c7a1921cb3bac83b8a32bbe49893e4c7a1377cdc1b0d35f7d233"
 +
-+S = "${WORKDIR}/XML-Parser-${PV}"
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_angstrom = "1"
 +
-+EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
++DEPENDS += "libsndfile1"
 +
-+inherit cpan
-+inherit native
++PR = "${INC_PR}.0"
 +
-+do_compile() {
-+	export LIBC="$(find ${STAGING_DIR_TARGET}/lib -name 'libc-*.so')"
-+	cpan_do_compile
++# Not all distros have a recent enough udev
++BTUDEV = " --disable-udevrules"
++BTUDEV_angstrom = " --enable-udevrules"
++BTUDEV_shr = " --enable-udevrules"
++
++EXTRA_OECONF += "${BTUDEV}"
++do_configure_append(){
++	echo "#define LIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE" >> ${S}/config.h
 +}
-+# 	cpan_do_compile	|| echo expected failure
 +
-+do_compile_virtclass-native (){
-+	cpan_do_compile
-+}
-+
-+FILES_${PN} = "${PERLLIBDIRS}/auto/XML/Parser/Expat/* \
-+                ${PERLLIBDIRS}/XML"
-+
-+BBCLASSEXTEND="native"
-+
-+SRC_URI[md5sum] = "1b868962b658bd87e1563ecd56498ded"
-+SRC_URI[sha256sum] = "9fd529867402456bd826fe0e5588d35b3a2e27e586a2fd838d1352b71c2ed73f"
++FILES_${PN}-dbg += "\
++  ${base_libdir}/udev/.debug \
++  ${libdir}/*/.debug \
++"
 -- 
 1.7.4.1
 
