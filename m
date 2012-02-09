@@ -1,31 +1,31 @@
 Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1RvdMU-00086l-1B
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rvdv3-0000nw-PE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Feb 2012 00:25:10 +0100
-Received: by lbol12 with SMTP id l12so1147508lbo.6
+	Fri, 10 Feb 2012 01:00:53 +0100
+Received: by lbol12 with SMTP id l12so1160021lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Feb 2012 15:17:04 -0800 (PST)
+	Thu, 09 Feb 2012 15:52:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=0vXjAlKFj6BNKv0gD34OGaiOI4EK6ZfxDfiXbsapLD8=;
-	b=tP3a2QJj9y5DPIhe+D3tNFva5RFyDRS631AMc3pfzFX6/kOXOm6ZfdJfGa6iRhdm77
-	rJ4A5qx3u1HlgF1EAYRZp0RLiFo2iGZFl+qYj9HKWlrHfC6fYHIQFJmMHKFFLg+O5E5b
-	vP3WrYGDvEt+ZyrqNqhJLSIkc3M97/B4Wxtd8=
+	bh=z3gY0e1Og0Fa7qGXUW55BE0Qj0rQzoUoZnMHXJK1KXg=;
+	b=luKkiq5PS9eZd3U5R1WUhms6oWIl7IxbRvc0c7N/YuTfjc1itiG+o+gBwJtdnV59YB
+	kEWKw42GS+uchln7m1iVQuEKnWs15jfWUpEhpt7hp6/4tqv63oYU92D+flFpjeYTNsEv
+	Ev9aCaw2AjSQTlxjHZd50bL2BYycQcGIv47ZA=
 MIME-Version: 1.0
-Received: by 10.152.130.98 with SMTP id od2mr2659884lab.3.1328829424902; Thu,
-	09 Feb 2012 15:17:04 -0800 (PST)
-Received: by 10.112.102.165 with HTTP; Thu, 9 Feb 2012 15:17:04 -0800 (PST)
-In-Reply-To: <1328556539-8036-1-git-send-email-tworaz666@gmail.com>
+Received: by 10.112.27.165 with SMTP id u5mr1302416lbg.48.1328831568012; Thu,
+	09 Feb 2012 15:52:48 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Thu, 9 Feb 2012 15:52:47 -0800 (PST)
+In-Reply-To: <1328380249-11697-3-git-send-email-tworaz666@gmail.com>
 References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
-	<1328556539-8036-1-git-send-email-tworaz666@gmail.com>
-Date: Fri, 10 Feb 2012 00:17:04 +0100
-Message-ID: <CALbNGRRXRVVjAN-soiseru_RBJkM0KQMBWnAzfy4Ah4AEDaDZA@mail.gmail.com>
+	<1328380249-11697-3-git-send-email-tworaz666@gmail.com>
+Date: Fri, 10 Feb 2012 00:52:47 +0100
+Message-ID: <CALbNGRStPPQrjdDjXBHUEWMiwtNE83Ye76y4hLLg2r0ARHUtrA@mail.gmail.com>
 From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce][PATCH 3/3 v2] xfce4-panel: Remove static version of panel plugins.
+Subject: Re: [meta-xfce][PATCH 2/3] xfce4-settings: Update to latest stable version 4.8.3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,52 +39,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 23:25:10 -0000
+X-List-Received-Date: Fri, 10 Feb 2012 00:00:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 6, 2012 at 8:28 PM, Peter Tworek <tworaz666@gmail.com> wrote:
-> They have no actual use and trigger QA warnings.
+On Sat, Feb 4, 2012 at 7:30 PM, Peter Tworek <tworaz666@gmail.com> wrote:
+> http://git.xfce.org/xfce/xfce4-settings/tag/?id=3Dxfce4-settings-4.8.3
+>
+> Run tested on netbook pro.
 >
 > Signed-off-by: Peter Tworek <tworaz666@gmail.com>
 > ---
-> =A0.../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb =A0| =A0 =A07 ++++--=
--
-> =A01 files changed, 4 insertions(+), 3 deletions(-)
+> =A0.../xfce4-settings/xfce4-settings_4.8.2.bb =A0 =A0 =A0 =A0 | =A0 16 --=
+--------------
+> =A0.../xfce4-settings/xfce4-settings_4.8.3.bb =A0 =A0 =A0 =A0 | =A0 14 ++=
+++++++++++++
+> =A02 files changed, 14 insertions(+), 16 deletions(-)
+> =A0delete mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-setting=
+s_4.8.2.bb
+> =A0create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-setting=
+s_4.8.3.bb
 >
-> diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/me=
-ta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-> index 0cd8eba..6bbbc05 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-> @@ -19,6 +19,10 @@ python populate_packages_prepend() {
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 '${bindir}/*%s*'])
-> =A0}
->
-> +do_install_append () {
-> + =A0 =A0find "${D}/${libdir}/xfce4/panel/plugins" -name '*.a' -exec rm -=
-f {} +
-> +}
-> +
-> =A0PACKAGES_DYNAMIC =3D "${PN}-plugin-*"
->
-> =A0FILES_${PN} +=3D "${libdir}/xfce4/panel/migrate \
-> @@ -27,8 +31,5 @@ FILES_${PN} +=3D "${libdir}/xfce4/panel/migrate \
-> =A0FILES_${PN}-dbg +=3D "${libdir}/xfce4/panel/plugins/.debug \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
->
-> -FILES_${PN}-dev +=3D "${libdir}/xfce4/panel/plugins/*.*a \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
+> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.b=
+b b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
+> deleted file mode 100644
+> index 258c238..0000000
+> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
+> +++ /dev/null
+> @@ -1,16 +0,0 @@
+> -DESCRIPTION =3D "Xfce4 settings"
+> -SECTION =3D "x11/wm"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> -DEPENDS =3D "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi vir=
+tual/libx11 xrandr libnotify libxcursor libxklavier"
 > -
-> =A0SRC_URI[md5sum] =3D "9d7bf0503d5867c4044cef04bb5845b1"
-> =A0SRC_URI[sha256sum] =3D "66f1266a1242ee5ecada995a4a584dd9802aa24456759b=
-40b0c29227c39bed03"
+> -PR =3D "r1"
+> -
+> -inherit xfce
+> -
+> -SRC_URI +=3D "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.pa=
+tch"
+> -
+> -SRC_URI[md5sum] =3D "a45420fea20f29265ab6785cb1d07377"
+> -SRC_URI[sha256sum] =3D "3f79865a6a3817f3c868f2412cbf105e73e54810438f6203=
+5699ae5fd72c29d0"
+> -
+> -RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
+> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.3.b=
+b b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.3.bb
+> new file mode 100644
+> index 0000000..c3dd8fd
+> --- /dev/null
+> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.3.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION =3D "Xfce4 settings"
+> +SECTION =3D "x11/wm"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> +DEPENDS =3D "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi vir=
+tual/libx11 xrandr libnotify libxcursor libxklavier"
+> +
+> +inherit xfce
+> +
+> +SRC_URI +=3D "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.pa=
+tch"
+> +
+> +SRC_URI[md5sum] =3D "4669298cc8a4abf0e5a410016b575030"
+> +SRC_URI[sha256sum] =3D "d878cc474e1e677e9607279b9a1007cb90ed35ff078de180=
+259a8b2b8d06bc2e"
+> +
+> +RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
 > --
 > 1.7.3.4
 >
-Sorry for late answer but you forgot PR-bump in V2.
-
-Andreas
+Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 
 
