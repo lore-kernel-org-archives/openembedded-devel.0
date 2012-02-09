@@ -1,30 +1,24 @@
-Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1RvbSI-0002gY-CU
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Feb 2012 22:23:02 +0100
-Received: by lbol12 with SMTP id l12so1093979lbo.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Feb 2012 13:14:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=/FLzXVSY/Tfj3unUja+WAF1Xed8QrBYzFATpSeGyBjQ=;
-	b=SXWwdJJ6h60Rx3VcZdIybNPZWTwQ1J27sWGzcRL/vpKj9KYfMdhzm8I7HfoDhZEja0
-	D9Je/3YoQ4fQZqKpytMgEhArPNpBn6J14DpCxLlUh18/LTtgbDV/qjbVZJ6040nWjERS
-	n9XYB8fTLEReRvaNM+YP5UbkmGIgKMbwY3lns=
-Received: by 10.152.123.68 with SMTP id ly4mr2318165lab.13.1328822097243; Thu,
-	09 Feb 2012 13:14:57 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.5.201 with HTTP; Thu, 9 Feb 2012 13:14:27 -0800 (PST)
-In-Reply-To: <4F34274B.60502@palm.com>
-References: <4F33048E.8030109@palm.com>
-	<CAMKF1so61ndkzii_qK-sLiX6czvHXvaMFvBsxzm78z87zRTQkA@mail.gmail.com>
-	<4F34274B.60502@palm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Feb 2012 13:14:27 -0800
-Message-ID: <CAMKF1spW=804wWenyHN-v6cgs6yo0g9mYMSZVVg2EY+f4M53Wg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: bitbake versions
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Rvd9b-0007da-7C for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Feb 2012 00:11:52 +0100
+Received: from g225175067.adsl.alicedsl.de ([92.225.175.67]
+	helo=[192.168.178.43])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Rvd1w-0005JT-Ms; Thu, 09 Feb 2012 23:03:56 +0000
+Message-ID: <1328828643.29809.7.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: Chris Tapp <opensource@keylevel.com>
+Date: Fri, 10 Feb 2012 00:04:03 +0100
+In-Reply-To: <DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
+References: <1328022931.3975.15.camel@mattotaupa>
+	<DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
+X-Mailer: Evolution 3.2.2-1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Board support package (BSP) layers/distributions for Geode LX800
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,16 +32,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 21:23:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Feb 2012 23:11:52 -0000
+X-Groupsio-MsgNum: 37063
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-Y1xSoo0x1vzxAwVpThC9"
 
-On Thu, Feb 9, 2012 at 12:06 PM, Rich Pixley <rich.pixley@palm.com> wrote:
-> I'll start over from 'core.
+--=-Y1xSoo0x1vzxAwVpThC9
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-yeah right now we know that documentation is a bit of problem and we seek
-people contributing to it as they move into oe-core/layered world
-
-You can look at angstrom e.g. or yocto on how they utilize oe-core
-in a layered design.
+Dear Chris and OE folks,
 
 
+
+I am sorry for forwarding this message to the list that late.
+
+
+Am Mittwoch, den 01.02.2012, 08:14 +0000 schrieb Chris Tapp:
+
+> On 31 Jan 2012, at 15:15, Paul Menzel wrote:
+
+> > searching for a suited build configuration for a Geode LX800 based
+> > system I could only find the discussion about creating a BSP layer for
+> > it [1]. Was this layer created? I could not find it anywhere.
+> >
+> > Additionally could you give recommendations which build =20
+> > configuration is
+> > suited for a Geode system? Especially with OE-Core as the base. Did
+> > someone test the latest OE stuff with a Geode LX800 system recently?
+>=20
+> I've got a rough meta layer that I use with Yocto for the ALIX 3D3 =20
+> (and similar). The aim (when I get a moment) is to make this in to a =20
+> full BSP...
+>=20
+> I've got a modified kernel (linux-wrs 2.6.34.7) so that the ethernet, =
+=20
+> audio and Geode frame buffer are available and USB works.
+
+These are great news!
+
+> Works fine with Poky 4. I had a quick go with 5, but I ended up with =20
+> an image that failed to boot. I've not looked to find out why, but I =20
+> don't expect it to be anything major.
+>=20
+> This isn't in a suitable state to push back (to Yocto), but I'm happy =
+=20
+> to share what I've got if it's going to be of any help.
+
+If you could publish your Git tree somewhere that would be great.
+
+> Sorry for not sending this via the mailing list - the registered e-=20
+> mail account is now just a forwarder and I can't get to the =20
+> subscription page to change it as it's timing out. Please feel free to =
+=20
+> forward this to the list.
+
+Done now. I am sorry that this took so long.
+
+
+
+Thanks,
+
+Paul
+
+
+PS: Please keep Chris in CC and sorry Chris for sending this message
+twice.
+
+
+--=-Y1xSoo0x1vzxAwVpThC9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk80UOMACgkQPX1aK2wOHVgZqACeP7do9r3evif4+72AZszrZ9bl
+l9YAnRScp4t5eUaWakGAMQjghwjaFxpx
+=ChQg
+-----END PGP SIGNATURE-----
+
+--=-Y1xSoo0x1vzxAwVpThC9--
