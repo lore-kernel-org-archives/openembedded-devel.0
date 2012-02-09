@@ -1,24 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-lpp01m020-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Rvd9b-0007da-7C for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Feb 2012 00:11:52 +0100
-Received: from g225175067.adsl.alicedsl.de ([92.225.175.67]
-	helo=[192.168.178.43])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Rvd1w-0005JT-Ms; Thu, 09 Feb 2012 23:03:56 +0000
-Message-ID: <1328828643.29809.7.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: Chris Tapp <opensource@keylevel.com>
-Date: Fri, 10 Feb 2012 00:04:03 +0100
-In-Reply-To: <DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
-References: <1328022931.3975.15.camel@mattotaupa>
-	<DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Board support package (BSP) layers/distributions for Geode LX800
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RvdMU-00086l-1B
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Feb 2012 00:25:10 +0100
+Received: by lbol12 with SMTP id l12so1147508lbo.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Feb 2012 15:17:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=0vXjAlKFj6BNKv0gD34OGaiOI4EK6ZfxDfiXbsapLD8=;
+	b=tP3a2QJj9y5DPIhe+D3tNFva5RFyDRS631AMc3pfzFX6/kOXOm6ZfdJfGa6iRhdm77
+	rJ4A5qx3u1HlgF1EAYRZp0RLiFo2iGZFl+qYj9HKWlrHfC6fYHIQFJmMHKFFLg+O5E5b
+	vP3WrYGDvEt+ZyrqNqhJLSIkc3M97/B4Wxtd8=
+MIME-Version: 1.0
+Received: by 10.152.130.98 with SMTP id od2mr2659884lab.3.1328829424902; Thu,
+	09 Feb 2012 15:17:04 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Thu, 9 Feb 2012 15:17:04 -0800 (PST)
+In-Reply-To: <1328556539-8036-1-git-send-email-tworaz666@gmail.com>
+References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
+	<1328556539-8036-1-git-send-email-tworaz666@gmail.com>
+Date: Fri, 10 Feb 2012 00:17:04 +0100
+Message-ID: <CALbNGRRXRVVjAN-soiseru_RBJkM0KQMBWnAzfy4Ah4AEDaDZA@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][PATCH 3/3 v2] xfce4-panel: Remove static version of panel plugins.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,86 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 23:11:52 -0000
-X-Groupsio-MsgNum: 37063
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-Y1xSoo0x1vzxAwVpThC9"
-
---=-Y1xSoo0x1vzxAwVpThC9
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Feb 2012 23:25:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear Chris and OE folks,
+On Mon, Feb 6, 2012 at 8:28 PM, Peter Tworek <tworaz666@gmail.com> wrote:
+> They have no actual use and trigger QA warnings.
+>
+> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+> ---
+> =A0.../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb =A0| =A0 =A07 ++++--=
+-
+> =A01 files changed, 4 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/me=
+ta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
+> index 0cd8eba..6bbbc05 100644
+> --- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
+> +++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
+> @@ -19,6 +19,10 @@ python populate_packages_prepend() {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 '${bindir}/*%s*'])
+> =A0}
+>
+> +do_install_append () {
+> + =A0 =A0find "${D}/${libdir}/xfce4/panel/plugins" -name '*.a' -exec rm -=
+f {} +
+> +}
+> +
+> =A0PACKAGES_DYNAMIC =3D "${PN}-plugin-*"
+>
+> =A0FILES_${PN} +=3D "${libdir}/xfce4/panel/migrate \
+> @@ -27,8 +31,5 @@ FILES_${PN} +=3D "${libdir}/xfce4/panel/migrate \
+> =A0FILES_${PN}-dbg +=3D "${libdir}/xfce4/panel/plugins/.debug \
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
+>
+> -FILES_${PN}-dev +=3D "${libdir}/xfce4/panel/plugins/*.*a \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
+> -
+> =A0SRC_URI[md5sum] =3D "9d7bf0503d5867c4044cef04bb5845b1"
+> =A0SRC_URI[sha256sum] =3D "66f1266a1242ee5ecada995a4a584dd9802aa24456759b=
+40b0c29227c39bed03"
+> --
+> 1.7.3.4
+>
+Sorry for late answer but you forgot PR-bump in V2.
+
+Andreas
 
 
-
-I am sorry for forwarding this message to the list that late.
-
-
-Am Mittwoch, den 01.02.2012, 08:14 +0000 schrieb Chris Tapp:
-
-> On 31 Jan 2012, at 15:15, Paul Menzel wrote:
-
-> > searching for a suited build configuration for a Geode LX800 based
-> > system I could only find the discussion about creating a BSP layer for
-> > it [1]. Was this layer created? I could not find it anywhere.
-> >
-> > Additionally could you give recommendations which build =20
-> > configuration is
-> > suited for a Geode system? Especially with OE-Core as the base. Did
-> > someone test the latest OE stuff with a Geode LX800 system recently?
->=20
-> I've got a rough meta layer that I use with Yocto for the ALIX 3D3 =20
-> (and similar). The aim (when I get a moment) is to make this in to a =20
-> full BSP...
->=20
-> I've got a modified kernel (linux-wrs 2.6.34.7) so that the ethernet, =
-=20
-> audio and Geode frame buffer are available and USB works.
-
-These are great news!
-
-> Works fine with Poky 4. I had a quick go with 5, but I ended up with =20
-> an image that failed to boot. I've not looked to find out why, but I =20
-> don't expect it to be anything major.
->=20
-> This isn't in a suitable state to push back (to Yocto), but I'm happy =
-=20
-> to share what I've got if it's going to be of any help.
-
-If you could publish your Git tree somewhere that would be great.
-
-> Sorry for not sending this via the mailing list - the registered e-=20
-> mail account is now just a forwarder and I can't get to the =20
-> subscription page to change it as it's timing out. Please feel free to =
-=20
-> forward this to the list.
-
-Done now. I am sorry that this took so long.
-
-
-
-Thanks,
-
-Paul
-
-
-PS: Please keep Chris in CC and sorry Chris for sending this message
-twice.
-
-
---=-Y1xSoo0x1vzxAwVpThC9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEABECAAYFAk80UOMACgkQPX1aK2wOHVgZqACeP7do9r3evif4+72AZszrZ9bl
-l9YAnRScp4t5eUaWakGAMQjghwjaFxpx
-=ChQg
------END PGP SIGNATURE-----
-
---=-Y1xSoo0x1vzxAwVpThC9--
