@@ -1,37 +1,26 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1RvZqu-0005Ve-Ir
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Feb 2012 20:40:20 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id C508022325A8;
-	Thu,  9 Feb 2012 20:32:17 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 30A4522325A7;
-	Thu,  9 Feb 2012 20:32:17 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-Received: from rhein.familie-heinold.de (g229045192.adsl.alicedsl.de
-	[92.229.45.192]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Thu,  9 Feb 2012 20:32:16 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 4FE603C4B6; Thu,  9 Feb 2012 20:32:15 +0100 (CET)
-Date: Thu, 9 Feb 2012 20:32:15 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20120209193214.GA26030@rhein.zuhause.netz>
-References: <4F2A97B7.2080709@opendreambox.org>
-	<4F331951.2010701@opendreambox.org>
-	<4F33BF11.4010009@opendreambox.org> <11868044.ITA0Lum9As@helios>
+Received: from smtp-relay2.palm.com ([64.28.152.243])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <prvs=3794ea513=rich.pixley@palm.com>)
+	id 1RvaPE-0006ou-Iq for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Feb 2012 21:15:48 +0100
+X-IronPort-AV: E=Sophos;i="4.73,392,1325491200"; d="scan'208";a="11547559"
+Received: from unknown (HELO ushqusdns3.palm.com) ([148.92.223.90])
+	by smtp-relay2.palm.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
+	09 Feb 2012 12:06:37 -0800
+Received: from fuji.noir.com ([10.100.2.25])
+	by ushqusdns3.palm.com (8.14.4/8.14.4) with ESMTP id q19K6PTj023809;
+	Thu, 9 Feb 2012 12:06:25 -0800
+Message-ID: <4F34274B.60502@palm.com>
+Date: Thu, 09 Feb 2012 12:06:35 -0800
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-In-Reply-To: <11868044.ITA0Lum9As@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] giflib: don't link against libx11, don't depend on libsm
+To: openembedded-devel@lists.openembedded.org
+References: <4F33048E.8030109@palm.com>
+	<CAMKF1so61ndkzii_qK-sLiX6czvHXvaMFvBsxzm78z87zRTQkA@mail.gmail.com>
+In-Reply-To: <CAMKF1so61ndkzii_qK-sLiX6czvHXvaMFvBsxzm78z87zRTQkA@mail.gmail.com>
+Subject: Re: bitbake versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 19:40:20 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Feb 2012 20:15:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 09, 2012 at 02:02:51PM +0000, Paul Eggleton wrote:
-> I'd agree with disabling it as well. According to google it was Henning who 
-> added libsm as a dependency in OE-Classic. Henning, do you remember the reason 
-> for adding this, and is it still valid?
-> 
-> Cheers,
-> Paul
+Er... wasn't doing so intentionally.  Was just following the "getting 
+started" page on the wiki.
 
-Sorry no idea, why I added it. But I vote for option 1 too, so folks without X11 needs
-do not have to build X11.
+I think that page needs to be adjusted to at least warn folks that it's 
+stale.  That probably isn't the right way to "get started" today.
 
-Bye Henning
+I'll start over from 'core.
+
+--rich
+
+On 2/8/12 17:47 , Khem Raj wrote:
+> On Wed, Feb 8, 2012 at 3:26 PM, Rich Pixley<rich.pixley@palm.com>  wrote:
+>> I'm having trouble even parsing using bitbake>  1.12.
+>>
+>> Am I right in thinking that the openembedded tree isn't ready to be built
+>> with bitbake>  1.12?
+> I have used 1.10.x successfully with old oe classic but that was sometime ago
+> if you want to use oe classic please use the
+> 2011.03-maintenance branch you stand a better chance with that branch
+>
+>
+>> If so, then the getting started document should probably include this info.
+> yes getting started should reflect how to get started with layered oe.
+>
+>> --rich
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
