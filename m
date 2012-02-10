@@ -1,27 +1,34 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1RvozV-0005IQ-Dl
+	(envelope-from <otavio.salvador@gmail.com>) id 1RvpGP-0006Ac-N7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Feb 2012 12:50:14 +0100
-Received: by wgbdr13 with SMTP id dr13so2413597wgb.24
+	Fri, 10 Feb 2012 13:07:41 +0100
+Received: by eekd41 with SMTP id d41so770661eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2012 03:42:07 -0800 (PST)
-Received: by 10.180.7.231 with SMTP id m7mr3326872wia.3.1328874127201; Fri, 10
-	Feb 2012 03:42:07 -0800 (PST)
+	Fri, 10 Feb 2012 03:59:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=LWrG6pBT87lV9k4h0cuWhWFyQeOfiOXAIyIYt5d/QqE=;
+	b=nBQWKrCpR8STVBEFnKBLH/JWz4ePmtoZtgHEBOrU5g/PhjMOKpvbXRzattBC+P7m+g
+	PDvxuczhVIGhiUvT5zV9uPnaV/M9FcLB+3SRko0rzJcOOvMMsN3j7ypR8RA+WDqf7SCn
+	ZJqItU/PuYLw8uJUEsnd26FPzNjhBifUmvUYo=
 MIME-Version: 1.0
-Received: by 10.227.113.67 with HTTP; Fri, 10 Feb 2012 03:41:47 -0800 (PST)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <CALbNGRStPPQrjdDjXBHUEWMiwtNE83Ye76y4hLLg2r0ARHUtrA@mail.gmail.com>
-References: <1328380249-11697-1-git-send-email-tworaz666@gmail.com>
-	<1328380249-11697-3-git-send-email-tworaz666@gmail.com>
-	<CALbNGRStPPQrjdDjXBHUEWMiwtNE83Ye76y4hLLg2r0ARHUtrA@mail.gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 10 Feb 2012 13:41:47 +0200
-Message-ID: <CAK18fxFyXnwuFj-=caU3e-Dy+tGZVwgTpP7NmsZ4opWB_gJCWA@mail.gmail.com>
+Received: by 10.14.48.65 with SMTP id u41mr1970257eeb.39.1328875175692; Fri,
+	10 Feb 2012 03:59:35 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.14.96.129 with HTTP; Fri, 10 Feb 2012 03:59:35 -0800 (PST)
+In-Reply-To: <1328828643.29809.7.camel@mattotaupa>
+References: <1328022931.3975.15.camel@mattotaupa>
+	<DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
+	<1328828643.29809.7.camel@mattotaupa>
+Date: Fri, 10 Feb 2012 09:59:35 -0200
+X-Google-Sender-Auth: Uh1_IthfNsSdh8INg02pit-mxPs
+Message-ID: <CAP9ODKpo4GbQUg_NHf0bp3rBy_bYq_xDMSue-S3+LMk31xg0GQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnZWou+nnfymustjPsk+kQIu1bxI6s+LUObkEe6q6zoC9hZgssVCKGhwQHK/m1I619mbAY/
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-xfce][PATCH 2/3] xfce4-settings: Update to latest stable version 4.8.3.
+Subject: Re: Board support package (BSP) layers/distributions for Geode LX800
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,97 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2012 11:50:14 -0000
+X-List-Received-Date: Fri, 10 Feb 2012 12:07:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 10, 2012 at 01:52, Andreas M=FCller
-<schnitzeltony@googlemail.com>wrote:
+On Thu, Feb 9, 2012 at 21:04, Paul Menzel <paulepanter@users.sourceforge.net
+> wrote:
 
-> On Sat, Feb 4, 2012 at 7:30 PM, Peter Tworek <tworaz666@gmail.com> wrote:
-> > http://git.xfce.org/xfce/xfce4-settings/tag/?id=3Dxfce4-settings-4.8.3
-> >
-> > Run tested on netbook pro.
-> >
-> > Signed-off-by: Peter Tworek <tworaz666@gmail.com>
-> > ---
-> >  .../xfce4-settings/xfce4-settings_4.8.2.bb         |   16
-> ----------------
-> >  .../xfce4-settings/xfce4-settings_4.8.3.bb         |   14
-> ++++++++++++++
-> >  2 files changed, 14 insertions(+), 16 deletions(-)
-> >  delete mode 100644 meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.2.bb
-> >  create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.3.bb
-> >
-> > diff --git a/meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.2.bb b/meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.2.bb
-> > deleted file mode 100644
-> > index 258c238..0000000
-> > --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.2.bb
-> > +++ /dev/null
-> > @@ -1,16 +0,0 @@
-> > -DESCRIPTION =3D "Xfce4 settings"
-> > -SECTION =3D "x11/wm"
-> > -LICENSE =3D "GPLv2"
-> > -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079b=
-ae19f"
-> > -DEPENDS =3D "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi
-> virtual/libx11 xrandr libnotify libxcursor libxklavier"
-> > -
-> > -PR =3D "r1"
-> > -
-> > -inherit xfce
-> > -
-> > -SRC_URI +=3D
-> "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.patch"
-> > -
-> > -SRC_URI[md5sum] =3D "a45420fea20f29265ab6785cb1d07377"
-> > -SRC_URI[sha256sum] =3D
-> "3f79865a6a3817f3c868f2412cbf105e73e54810438f62035699ae5fd72c29d0"
-> > -
-> > -RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
-> > diff --git a/meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.3.bb b/meta-xfce/recipes-xfce/xfce4-settings/
-> xfce4-settings_4.8.3.bb
-> > new file mode 100644
-> > index 0000000..c3dd8fd
-> > --- /dev/null
-> > +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.8.3.bb
-> > @@ -0,0 +1,14 @@
-> > +DESCRIPTION =3D "Xfce4 settings"
-> > +SECTION =3D "x11/wm"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079b=
-ae19f"
-> > +DEPENDS =3D "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi
-> virtual/libx11 xrandr libnotify libxcursor libxklavier"
-> > +
-> > +inherit xfce
-> > +
+> > This isn't in a suitable state to push back (to Yocto), but I'm happy
+> > to share what I've got if it's going to be of any help.
+>
+> If you could publish your Git tree somewhere that would be great.
 >
 
-No PR?
+If you can add it to github or something I might contribute some changes as
+I have Geode working internally at O.S. Systems but not as a separated
+Layer.
 
-
-> > +SRC_URI +=3D
-> "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.patch"
-> > +
-> > +SRC_URI[md5sum] =3D "4669298cc8a4abf0e5a410016b575030"
-> > +SRC_URI[sha256sum] =3D
-> "d878cc474e1e677e9607279b9a1007cb90ed35ff078de180259a8b2b8d06bc2e"
-> > +
-> > +RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
-> > --
-> > 1.7.3.4
-> >
-> Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
