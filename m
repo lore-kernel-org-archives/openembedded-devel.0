@@ -1,34 +1,24 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RvpGP-0006Ac-N7
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Rvptz-0007NB-NZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Feb 2012 13:07:41 +0100
-Received: by eekd41 with SMTP id d41so770661eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2012 03:59:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=LWrG6pBT87lV9k4h0cuWhWFyQeOfiOXAIyIYt5d/QqE=;
-	b=nBQWKrCpR8STVBEFnKBLH/JWz4ePmtoZtgHEBOrU5g/PhjMOKpvbXRzattBC+P7m+g
-	PDvxuczhVIGhiUvT5zV9uPnaV/M9FcLB+3SRko0rzJcOOvMMsN3j7ypR8RA+WDqf7SCn
-	ZJqItU/PuYLw8uJUEsnd26FPzNjhBifUmvUYo=
-MIME-Version: 1.0
-Received: by 10.14.48.65 with SMTP id u41mr1970257eeb.39.1328875175692; Fri,
-	10 Feb 2012 03:59:35 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Fri, 10 Feb 2012 03:59:35 -0800 (PST)
-In-Reply-To: <1328828643.29809.7.camel@mattotaupa>
-References: <1328022931.3975.15.camel@mattotaupa>
-	<DEE6B7FB-FCB8-47BF-A58B-CDD4C6BDC06D@keylevel.com>
-	<1328828643.29809.7.camel@mattotaupa>
-Date: Fri, 10 Feb 2012 09:59:35 -0200
-X-Google-Sender-Auth: Uh1_IthfNsSdh8INg02pit-mxPs
-Message-ID: <CAP9ODKpo4GbQUg_NHf0bp3rBy_bYq_xDMSue-S3+LMk31xg0GQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 10 Feb 2012 13:48:35 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 10 Feb 2012 04:40:28 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="65273279"
+Received: from unknown (HELO helios.localnet) ([10.252.122.199])
+	by AZSMGA002.ch.intel.com with ESMTP; 10 Feb 2012 04:40:27 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Board support package (BSP) layers/distributions for Geode LX800
+Date: Fri, 10 Feb 2012 12:40:26 +0000
+Message-ID: <1972877.1IzvdJB4e7@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-15-generic-pae; KDE/4.8.0; i686; ; )
+In-Reply-To: <CAPw5SVERSLNnu8Fm6SOn3sYraytVmrR5iGYdOJ8NyQ=MQvreZw@mail.gmail.com>
+References: <CAPw5SVERSLNnu8Fm6SOn3sYraytVmrR5iGYdOJ8NyQ=MQvreZw@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: First time user: suggestions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,24 +32,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2012 12:07:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 10 Feb 2012 12:48:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Feb 9, 2012 at 21:04, Paul Menzel <paulepanter@users.sourceforge.net
-> wrote:
+On Thursday 09 February 2012 21:52:53 Nathan Samson wrote:
+> I've talked to someone on FOSDEM about OE, and wanted to try it (I also
+> just started to use OpenWrt for a university project)
+> 
+> These are my first time user notes (and suggestion for improvements).
 
-> > This isn't in a suitable state to push back (to Yocto), but I'm happy
-> > to share what I've got if it's going to be of any help.
->
-> If you could publish your Git tree somewhere that would be great.
->
+Thanks for your suggestions, I'll respond to each one below.
 
-If you can add it to github or something I might contribute some changes as
-I have Geode working internally at O.S. Systems but not as a separated
-Layer.
+> Starting with: http://www.openembedded.org/wiki/Main_Page and especially
+> the "Getting Started" Page. This seems to be outdated (using the classic
+> repos and not the "layered" core. Building the classic branch did not work
+> out for me. Not a very good first user experience. I suggest that the the
+> Getting Started page is replaced with the contents from
+> wiki.yoctoproject.org/wiki/OpenEmbedded-Core (and slighly enhanced).
+
+Yes, this is a known problem. I did promise to start fixing the docs (at least 
+the most visible ones) and I will try to do so over the coming week.
+
+> Building the -core was also problematic. Two packages caused troubles:
+> zlib and another package (don't know the name anymore). Both problems were
+> caused because it could not download some files.
+> 
+> It seems zlib.org removed all downloads prior to 1.2.6, and OE uses 1.2.5.
+> Applying the patch from http://patches.openembedded.org/patch/20641/ fixed
+> the problem.
+> The other package could not be downloaded because it was hosted on
+> kernel.org and the content seemed to have been removed.
+> http://permalink.gmane.org/gmane.comp.handhelds.openembedded.core/14810helpe
+> d me fix the issue.
+
+Yes, upstreams removing source downloads is definitely annoying. Both the Yocto 
+Project and Angstrom have their own source mirrors but they are not enabled by 
+default in OE-Core. The OpenEmbedded TSC (Technical Steering Committee) has 
+had some discussions about having a default source mirror, but I don't recall 
+whether we reached a conclusion on that issue.
+
+> Suggestion 2: These download problems seems not be fixed very rapidly
+> (although they should be quite easy to fix). I wonder why. My theory (but
+> prove me wrong), is that developers won't see this because they have the
+> download cached in their download directory So only new users will discover
+> this.
+> One solution could be to have a dedicated "test" machine that tries to
+> download every package every day (or at least see if it still exists). Once
+> a failure happens it is reported to a log/bug system.
+
+I'm not sure but I think we have a universe fetch test on the Yocto Project 
+autobuilder. Assuming it has our mirrors disabled it should pick up when this 
+occurs.
+
+> Suggestion 3: Create a site like "
+> https://community.dev.fedoraproject.org/packages/" where one can search for
+> packages / recipes. This site should integrate with
+>  * Recipe info (name, maintainer, layer, version info, changelog info, ...)
+>  * Bugs
+>  * Incomping Patches / reviews
+>  * Build results
+
+We have part of this in the Yocto Project:
+
+http://packages.yoctoproject.org/
+
+Since we use the OE-Core metadata it is equally useful as a reference for OE-
+Core. It doesn't have any integration with the bug system or autobuilder 
+though, that would be a nice add-on for the future.
+
+> For build results: (which is suggestion 4):
+> Create dedicated server machines that test each and every package every
+> time it is updated (built without any other packages except for its
+> dependencies, with several toolchain configurations - combinations of
+> target / libc implemenation / gcc version / ...). In the optimal case every
+> package should be tested with every possible combination of enabled
+> features but that is probably not possible. This way errors will be quickly
+> detected.
+
+FYI the Yocto Project has an autobuilder to do this, again we use the same 
+metadata so OE-Core is being build-tested regularly.
+
+http://autobuilder.yoctoproject.org
+
+> I already have to apologize: it seems that these already exists (somewhat),
+> in the form of tinderbox.openembedded.net and garnet.openembedded.org
+> (I've found about them when looking on the Infrastructure Wiki page), but
+> they don't load here... (Are they still maintained / what are they doing
+> exactly?)
+
+Not sure, I think tinderbox has been broken for some time. I heard that we 
+have some hardware available to set up some build servers for OE (which would 
+presumably test stuff outside OE-Core, e.g. meta-oe). I'm not sure what Tom 
+King's plan/timetable for implementing this is though.
+
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
