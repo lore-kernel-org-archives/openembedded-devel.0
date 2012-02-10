@@ -1,25 +1,33 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <josh@linux.intel.com>) id 1Rvvqz-0004ye-KQ
+	(envelope-from <obi@opendreambox.org>) id 1Rvyox-0002T2-7b
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Feb 2012 20:09:53 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 10 Feb 2012 11:00:42 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="106211696"
-Received: from unknown (HELO [10.255.14.248]) ([10.255.14.248])
-	by orsmga001.jf.intel.com with ESMTP; 10 Feb 2012 11:00:42 -0800
-Message-ID: <4F35695A.5020908@linux.intel.com>
-Date: Fri, 10 Feb 2012 11:00:42 -0800
-From: Joshua Lock <josh@linux.intel.com>
+	Fri, 10 Feb 2012 23:19:59 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 2FF653158BC1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Feb 2012 23:11:55 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id dHA1FBh1KwIP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Feb 2012 23:11:48 +0100 (CET)
+Received: from [172.22.22.61] (drms-590ec8a5.pool.mediaWays.net
+	[89.14.200.165])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 31CD73158BC7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Feb 2012 23:11:48 +0100 (CET)
+Message-ID: <4F359623.9080505@opendreambox.org>
+Date: Fri, 10 Feb 2012 23:11:47 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120131 Thunderbird/10.0
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAPw5SVERSLNnu8Fm6SOn3sYraytVmrR5iGYdOJ8NyQ=MQvreZw@mail.gmail.com>
-	<1972877.1IzvdJB4e7@helios> <4F3567E0.8030809@palm.com>
-In-Reply-To: <4F3567E0.8030809@palm.com>
-Subject: Re: First time user: suggestions
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] udev: consolekit package requires x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2012 19:09:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 10 Feb 2012 22:19:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+* consolekit fails to build without x11, so disable
+  creation of udev-consolekit, if x11 is unavailable.
 
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+* I build-tested udev-180 only.
+* Related patch for OE-core:
+  http://lists.linuxtogo.org/pipermail/openembedded-core/2012-February/017681.html
 
-On 10/02/12 10:54, Rich Pixley wrote:
-> On 2/10/12 04:40 , Paul Eggleton wrote:
->> Both the Yocto Project and Angstrom have their own source mirrors but
->> they are not enabled by default in OE-Core.
-> I'm going to need to do this almost immediately for webos. Can you point
-> me to doc on the current mirroring support? Or to the relevant source?
-> Or to where that's done for either yocto or angstrom?
+ meta-oe/recipes-core/udev/udev_173.bb |    2 +-
+ meta-oe/recipes-core/udev/udev_175.bb |    2 +-
+ meta-oe/recipes-core/udev/udev_180.bb |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-A change to enable this went into master recently:
-http://git.openembedded.org/openembedded-core/commit/?id=ca8a3422eb96ea431c322532dfd1be9980d4d48c
-
-Cheers,
-Joshua
+diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core/udev/udev_173.bb
+index e4e634a..cbbe910 100644
+--- a/meta-oe/recipes-core/udev/udev_173.bb
++++ b/meta-oe/recipes-core/udev/udev_173.bb
+@@ -59,7 +59,7 @@ do_configure_prepend() {
+ INITSCRIPT_NAME = "udev"
+ INITSCRIPT_PARAMS = "start 04 S ."
+ 
+-PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
++PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)}"
+ 
+ FILES_${PN}-systemd = "${base_libdir}/systemd"
+ RDEPENDS_${PN}-systemd += "udev"
+diff --git a/meta-oe/recipes-core/udev/udev_175.bb b/meta-oe/recipes-core/udev/udev_175.bb
+index b6484d9..6560b5d 100644
+--- a/meta-oe/recipes-core/udev/udev_175.bb
++++ b/meta-oe/recipes-core/udev/udev_175.bb
+@@ -55,7 +55,7 @@ do_configure_prepend() {
+ 	cp ${WORKDIR}/gtk-doc.make ${S}
+ }
+ 
+-PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
++PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)}"
+ 
+ FILES_${PN}-systemd = "${base_libdir}/systemd"
+ RDEPENDS_${PN}-systemd += "udev"
+diff --git a/meta-oe/recipes-core/udev/udev_180.bb b/meta-oe/recipes-core/udev/udev_180.bb
+index 4cabcce..bc1b8a4 100644
+--- a/meta-oe/recipes-core/udev/udev_180.bb
++++ b/meta-oe/recipes-core/udev/udev_180.bb
+@@ -53,7 +53,7 @@ do_configure_prepend() {
+ 	cp ${WORKDIR}/gtk-doc.make ${S}
+ }
+ 
+-PACKAGES =+ "${PN}-systemd libudev libgudev udev-consolekit udev-utils"
++PACKAGES =+ "${PN}-systemd libudev libgudev ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)} udev-utils"
+ 
+ FILES_${PN}-systemd = "${base_libdir}/systemd"
+ RDEPENDS_${PN}-systemd += "udev"
 -- 
-Joshua Lock
-         Yocto Project "Johannes factotum"
-         Intel Open Source Technology Centre
+1.7.5.4
+
 
 
