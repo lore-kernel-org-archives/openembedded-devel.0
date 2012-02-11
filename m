@@ -1,35 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rw2L7-0002Gc-NR
+	(envelope-from <otavio.salvador@gmail.com>) id 1RwClw-0001yp-KU
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Feb 2012 03:05:30 +0100
-Received: by eaal10 with SMTP id l10so900148eaa.6
+	Sat, 11 Feb 2012 14:13:48 +0100
+Received: by eekd41 with SMTP id d41so1023292eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2012 17:57:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=qDStnjtHabFbXruEYGJqJWkO6FJzUH+dkvPFHLHkK1Y=;
-	b=Y7hy8m+FjK2w0roG0EvFZJA02a/8gDLxhKqVcOyh+FyqsXyB7LpCKRPl8lb/vLoc/t
-	ZMTEqjv9lQAquB20eOwfOKpQO7qTzsw9BBT1PLRHZa+gkcerA7thVoCVzjY2i6SR+fP3
-	Ig3G3/1PYFNziJsxuHZF2iIaFoWZ9baxCcS+0=
-Received: by 10.213.108.212 with SMTP id g20mr1379742ebp.122.1328925436977;
-	Fri, 10 Feb 2012 17:57:16 -0800 (PST)
-Received: from localhost.localdomain (p5B0A16A6.dip.t-dialin.net.
-	[91.10.22.166])
-	by mx.google.com with ESMTPS id n17sm29065006eei.3.2012.02.10.17.57.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Feb 2012 17:57:16 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Feb 2012 03:00:01 +0100
-Message-Id: <1328925603-2967-5-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
+	Sat, 11 Feb 2012 05:05:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=bQpvUpr9NYWJ0B7mBLQVSNVMBivDycM61So7uglohm8=;
+	b=vrQPScCKRAWo5cZOr22AWHLMzlSty55iw+ZkjoiU3iryCquUVDhmtgLTJ4Vq5vmlVF
+	nQNDzilOnatiiqGeAjOEvlav2OeWv+MelCzHZY46mPeSjbojMB3eRPM81Fr92uHIBeZU
+	UV3dBKWRB/WSaaG/0ztmnUz58d8OgKgjPxDVk=
+MIME-Version: 1.0
+Received: by 10.14.52.17 with SMTP id d17mr3139086eec.56.1328965541800; Sat,
+	11 Feb 2012 05:05:41 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.14.96.129 with HTTP; Sat, 11 Feb 2012 05:05:41 -0800 (PST)
 In-Reply-To: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe 5/7] automatically install all *.service and *.socket supplied in recipe's SRC_URI
+Date: Sat, 11 Feb 2012 11:05:41 -0200
+X-Google-Sender-Auth: 0O5VnBd2DhEpM9GTXMroxZsw-FU
+Message-ID: <CAP9ODKrMPr+HebN0fxNAOQ_h-iadrr82op0rDrE==CSOeSsa+Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe 1/7] systemd-systemctl-native: add multiple services support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,40 +40,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2012 02:05:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 11 Feb 2012 13:13:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+On Fri, Feb 10, 2012 at 23:59, Andreas M=FCller
+<schnitzeltony@googlemail.com>wrote:
+
+> Thanks to Otavio Salvador for helping hint [1]
+>
+> [1]
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-February/037=
+856.html
+>
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  .../systemd/systemd-systemctl-native/systemctl     |   75
+> +++++++++++---------
+>  1 files changed, 42 insertions(+), 33 deletions(-)
+>
+> diff --git
+> a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+> b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+> index 54c1a18..72b9da3 100755
+> --- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+> +++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+> @@ -10,50 +10,59 @@ while [ $# !=3D 0 ]; do
+>                enable)
+>                        shift
+>
+> -                       service=3D"$1"
+> +                       services=3D"$1"
+> +                       in_enable=3D"1"
+>                        shift
+>                        ;;
+>                --root=3D*)
+>                        ROOT=3D${opt##--root=3D}
+> +                       in_enable=3D"0"
+>                        shift
+>                        ;;
+>                *)
+> -                       echo "'$opt' is an unkown option; exiting with
+> error"
+> -                       exit 1
+> +                       if [ "$in_enable" =3D "1" ]; then
+> +                               services=3D"$services $opt"
+> +                               shift
+> +                       else
+> +                               echo "'$opt' is an unkown option; exiting
+> with error"
+> +                               exit 1
+> +                       fi
+>                        ;;
+>        esac
+>  done
+>
+> -# find service file
+> -for p in $ROOT/etc/systemd/system \
+> -         $ROOT/lib/systemd/system \
+> -         $ROOT/usr/lib/systemd/system; do
+> -       if [ -e $p/$service ]; then
+> -               service_file=3D$p/$service
+> -               service_file=3D${service_file##$ROOT}
+> +for service in "$services"; do
+> +       # find service file
+> +       for p in $ROOT/etc/systemd/system \
+> +                $ROOT/lib/systemd/system \
+> +                $ROOT/usr/lib/systemd/system; do
+> +               if [ -e $p/$service ]; then
+> +                       service_file=3D$p/$service
+> +                       service_file=3D${service_file##$ROOT}
+> +               fi
+> +       done
+> +       if [ -z "$service_file" ]; then
+> +               echo "'$service' couldn't be found; exiting with error"
+> +               exit 1
+>        fi
+> -done
+> -if [ -z "$service_file" ]; then
+> -       echo "'$service' couldn't be found; exiting with error"
+> -       exit 1
+> -fi
+> -
+> -# create the required symbolic links
+> -wanted_by=3D$(grep WantedBy $ROOT/$service_file \
+> -                | sed 's,WantedBy=3D,,g' \
+> -                | tr ',' '\n' \
+> -                | grep '\.target$')
+> -
+> -for r in $wanted_by; do
+> -       mkdir -p $ROOT/etc/systemd/system/$r.wants
+> -       ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+> -       echo "Enabled $service for $wanted_by."
+> -done
+>
+> -# call us for the other required scripts
+> -also=3D$(grep Also $ROOT/$service_file \
+> -           | sed 's,Also=3D,,g' \
+> -           | tr ',' '\n')
+> -for a in $also; do
+> -       $0 --root=3D$ROOT enable $a
+> +       # create the required symbolic links
+> +       wanted_by=3D$(grep WantedBy $ROOT/$service_file \
+> +                       | sed 's,WantedBy=3D,,g' \
+> +                       | tr ',' '\n' \
+> +                       | grep '\.target$')
+> +
+> +       for r in $wanted_by; do
+> +               mkdir -p $ROOT/etc/systemd/system/$r.wants
+> +               ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+> +               echo "Enabled $service for $wanted_by."
+> +       done
+> +
+> +       # call us for the other required scripts
+> +       also=3D$(grep Also $ROOT/$service_file \
+> +                  | sed 's,Also=3D,,g' \
+> +                  | tr ',' '\n')
+> +       for a in $also; do
+> +               $0 --root=3D$ROOT enable $a
+> +       done
+>  done
+> --
+> 1.7.4.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/classes/systemd.bbclass |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
-index ffcabe9..3c1ed14 100644
---- a/meta-oe/classes/systemd.bbclass
-+++ b/meta-oe/classes/systemd.bbclass
-@@ -74,6 +74,17 @@ python __anonymous() {
-     systemd_after_parse(d)
- }
- 
-+# automatically install all *.service and *.socket supplied in recipe's SRC_URI
-+do_install_append() {
-+    install -d ${D}${base_libdir}/systemd/system
-+    for service in `find ${WORKDIR} -maxdepth 1 -name '*.service' -o -name '*.socket'` ; do
-+	# ensure installing systemd-files only (e.g not avahi *.service)
-+	if grep -q '\[Unit\]' $service ; then
-+	        install -m 644 $service ${D}${base_libdir}/systemd/system
-+	fi
-+    done
-+}
-+
- python populate_packages_prepend () {
- 	def systemd_prepost_instrm(pkg):
- 		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
--- 
-1.7.4.4
-
-
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
