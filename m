@@ -1,32 +1,32 @@
 Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1RwhpE-00039U-Hp
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rwhqn-0003FO-PQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Feb 2012 23:23:16 +0100
-Received: by lahc1 with SMTP id c1so3692096lah.6
+	Sun, 12 Feb 2012 23:24:53 +0100
+Received: by lahc1 with SMTP id c1so3692563lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Feb 2012 14:15:07 -0800 (PST)
+	Sun, 12 Feb 2012 14:16:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=6YcnKKn68QDM7ZlBfrN7JLbuRWzT5ubqGiUsU0v4J3c=;
-	b=nnln3ia8Kw3edWH3z7nAPmSTjFwPkd0EEegXxXgfYnIYmUUEktANuV9yGmrVwacmZE
-	OsWis1yIiTxPyDfsk/NxDbXsRZ8jgH156IxLXMs/eeGifMGBT+H53f71n4BMGcLxrRxO
-	BGQzucuHWxVDqk0yZPSITM1zXMYQQk0JI0oVc=
+	bh=fcQOiOzT5F4X3g4u3Z2wETlHZmLdR9UKRjAVTURCC7w=;
+	b=tx8/TTWXJNlbvDi6f0HwQzsjlCVfZ7vyvbvSbcbzMPRu+f/Arx5jGThbb0f1QJiaV0
+	26YxyAwlKldJ6uARYQQ79jm0j+ZcpoZV6YpPFe9CihivU5x0yQKktuts19iii9Y+uhCq
+	g2zUTGzhPXOu3D4ryukB3dkGxdANtevcwyBJQ=
 MIME-Version: 1.0
-Received: by 10.152.127.136 with SMTP id ng8mr9719463lab.16.1329084907838;
-	Sun, 12 Feb 2012 14:15:07 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Sun, 12 Feb 2012 14:15:07 -0800 (PST)
-In-Reply-To: <CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
+Received: by 10.152.145.137 with SMTP id su9mr9645966lab.23.1329085005137;
+	Sun, 12 Feb 2012 14:16:45 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Sun, 12 Feb 2012 14:16:45 -0800 (PST)
+In-Reply-To: <CAP9ODKrPPETkPqEcuEJ=GocqiG4aQTk4fX_HJmJurgMUVJXz6w@mail.gmail.com>
 References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
-	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
-Date: Sun, 12 Feb 2012 23:15:07 +0100
-Message-ID: <CALbNGRTiMWuLSuXsKfQV4ntHfVY5ovuBYrD0w41790Qa_u79Jg@mail.gmail.com>
+	<1328925603-2967-7-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKrPPETkPqEcuEJ=GocqiG4aQTk4fX_HJmJurgMUVJXz6w@mail.gmail.com>
+Date: Sun, 12 Feb 2012 23:16:45 +0100
+Message-ID: <CALbNGRTUw9nYs4fzJCtSNbHWATm7Ckc=p3qMz0VcO4771-PTSQ@mail.gmail.com>
 From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
+Subject: Re: [meta-oe 7/7] systemd.bbclass: automatically extend RDEPENDS for *-systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Feb 2012 22:23:16 -0000
+X-List-Received-Date: Sun, 12 Feb 2012 22:24:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 11, 2012 at 2:12 PM, Otavio Salvador
+On Sat, Feb 11, 2012 at 2:19 PM, Otavio Salvador
 <otavio@ossystems.com.br> wrote:
 > On Sat, Feb 11, 2012 at 00:00, Andreas M=FCller
 > <schnitzeltony@googlemail.com>wrote:
 >
->> In case SYSTEMD_SERVICE contains only one *.service file, the whole fold=
-er
->> ${base_libdir}/systemd/system/ is added to FILES_* otherwise only the
->> *.service
->> files found in SYSTEMD_SERVICE.
+>> * append systemd (functionalty moved into systemd_add_rdepends)
+>> * append base-pgk
 >>
-Off topic: My intention was to install the whole directory for recipes
-with one service per package AND one *-systemd package (this case is
-not catched by my code - so there will be a V2)
 >
-> It seems you'll need to parse the service file and check if it installs
-> others. For example .socket files usually do that. And then you'll never
-> add the whole dir automatically but dependently of the services it needs =
-to
-> install.
+> This patch is OK but I think it would be nice if the recipe has it includ=
+ed
+> in rdepends byhand we could do a warning saying it's use is deprecated so
+> we can know about it and cleanup the recipes.
 >
-I am afraid this goes a bit to far and causes confusion what is
-packed. I would prefer the simple rule:
-
-If there is one *-systemd package with one entry in SYSTEMD_SERVICE,
-the whole directory is installed - otherwise only the files found in
-SYSTEMD_SERVICE. If a recipe installs too much or something is
-missing, it can be corrected in recipe.
-
-What is common opinion here?
+good suggestion - V2 will have it
 
 Andreas
 
