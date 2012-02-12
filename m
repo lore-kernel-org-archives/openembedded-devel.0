@@ -1,34 +1,31 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RwMoG-0007OY-2A for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Feb 2012 00:56:52 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RwMgN-0003Oa-H9 for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Feb 2012 00:48:43 +0100
-Received: from 108.60.121.130 ([108.60.121.130])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Feb 2012 00:48:43 +0100
-Received: from koen by 108.60.121.130 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Feb 2012 00:48:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rwh7s-0001tb-Mm
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Feb 2012 22:38:30 +0100
+Received: by lahc1 with SMTP id c1so3677928lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Feb 2012 13:30:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=7QCHwOfCFhbx/skocK87deLX+OTy87Pj4DRZy3z1IK8=;
+	b=XDYBJFbBEpZ2kqWrfkZJRNUMnNplEcGOCb8yvfdNREmp4IEjg6eKdlttkIO2lLAfiy
+	EehKvUdwakgRDU8OnXS8Kt4b+JmC0D1TJpK+DEmmomKA+elw4bD9IIkzC5pCsG8T4kmV
+	DU/qos5u6Mk0Dn3CYXIAMiR1tOxubAlwnZnnw=
+MIME-Version: 1.0
+Received: by 10.112.103.8 with SMTP id fs8mr4702935lbb.39.1329082219362; Sun,
+	12 Feb 2012 13:30:19 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Sun, 12 Feb 2012 13:30:19 -0800 (PST)
+In-Reply-To: <jh6qk3$vck$1@dough.gmane.org>
+References: <1328919245-27394-1-git-send-email-schnitzeltony@googlemail.com>
+	<jh6qk3$vck$1@dough.gmane.org>
+Date: Sun, 12 Feb 2012 22:30:19 +0100
+Message-ID: <CALbNGRSpaCQ+0rWxMOrurUVArmmVou6-KsYDSnsPujj+faMVng@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 12 Feb 2012 00:48:35 +0100
-Message-ID: <jh6uoh$nnj$1@dough.gmane.org>
-References: <Pine.LNX.4.64.1202111600300.3065@www.vctlabs.com>
-	<CAHQecY5ARQUHqUScJqReFO_mD3t_U-ViMYQrS=Rox-xoGR3k-A@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 108.60.121.130
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-In-Reply-To: <CAHQecY5ARQUHqUScJqReFO_mD3t_U-ViMYQrS=Rox-xoGR3k-A@mail.gmail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: OE scons cross-compile patch
+Subject: Re: [meta-xfce] xfce4-session: move static libraries to ${PN}-staticdev to avoid QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,85 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2012 23:56:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 12 Feb 2012 21:38:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Shouldn't these go to the oe-core list?
-
-Op 12-02-12 00:24, Tom King schreef:
-> ---------- Forwarded message ---------- From: S. Lockwood-Childs
-> <sjl@vctlabs.com> Date: Sat, Feb 11, 2012 at 4:03 PM Subject: OE scons
-> cross-compile patch To: ka6sox@gmail.com
-> 
-> 
-> commit 9f66f474614696154d50156ada5f4c**1629b1b28c Author: S
-> Lockwood-Childs <sjl@vctlabs.com> Date:   Sat Feb 11 15:07:17 2012 -0800
-> 
-> cross-compile support for SCons
-> 
-> scons build system searches paths for hard-coded tool names like "gcc", 
-> so this patch teaches it to check first for a tool with cross-compile 
-> prefix if the CROSS_COMPILE variable has been set. If not found, it falls
-> back to searching for the un-prefixed tool name.
-> 
-> For example, if CROSS_COMPILE=arm-angstrom-**linux-gnueabi- 
-> SCons.Evironment.Detect('gcc') should find
-> arm-angstrom-linux-gnueabi-gcc SCons.Evironment.Detect('zip') should find
-> plain zip
-> 
-> diff --git
-> a/meta/recipes-devtools/**python/python-scons-native/**scons-cross-toolchain.patch
+On Sat, Feb 11, 2012 at 11:37 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> 
-b/meta/recipes-devtools/**python/python-scons-native/**
-> scons-cross-toolchain.patch new file mode 100644 index 0000000..041279e 
-> --- /dev/null +++
-> b/meta/recipes-devtools/**python/python-scons-native/** 
-> scons-cross-toolchain.patch @@ -0,0 +1,17 @@ +---
-> scons-2.1.0/engine/SCons/**Environment.py.orig       2012-02-10 
-> 16:59:10.000000000 -0800 ++++ scons-2.1.0/engine/SCons/**Environment.py
-> 2012-02-11 13:29:15.000000000 -0800 +@@ -1483,6 +1483,14 @@ +         if
-> not SCons.Util.is_List(progs): +             progs = [ progs ] +
-> for prog in progs: ++            # prefer cross version of program, if it
-> exists ++            if 'CROSS_COMPILE' in self._dict: ++
-> cross_prog = self['CROSS_COMPILE'] + prog ++                #print
-> "Looking for %s" % cross_prog ++                path =
-> self.WhereIs(cross_prog) ++                if path: return cross_prog ++ 
-> ++            #print "Looking for %s" % prog +             path =
-> self.WhereIs(prog) +             if path: return prog +         return
-> None diff --git
-> a/meta/recipes-devtools/**python/python-scons-native_2.**1.0.bb<http://python-scons-native_2.1.0.bb>b/meta/recipes-devtools/
+> Op 11-02-12 01:14, Andreas M=FCller schreef:
+>>
+>> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com> ---
+>> .../xfce4-session/xfce4-session_4.8.2.bb =A0 =A0 =A0 =A0 =A0 | =A0 =A04 =
+++--
 >
-> 
-**python/python-scons-native_2.**1.0.bb<http://python-scons-native_2.1.0.bb>
-> index ff94cf6..c653237 100644 ---
-> a/meta/recipes-devtools/**python/python-scons-native_2.**1.0.bb<http://python-scons-native_2.1.0.bb>
+> Which of the other patches listed in
+> http://patches.openembedded.org/project/oe/list/?q=3Dmeta-xfce should I p=
+ush
+> as well?
 >
-> 
-+++
-b/meta/recipes-devtools/**python/python-scons-native_2.**1.0.bb<http://python-scons-native_2.1.0.bb>
-> @@ -2,4 +2,6 @@ require python-scons_${PV}.bb inherit native DEPENDS =
-> "python-native" RDEPENDS_${PN} = "" -PR = "r1" +PR = "r2" + +SRC_URI +=
-> "file://scons-cross-toolchain.**patch"
-> 
-> 
-> 
-> _______________________________________________ Openembedded-devel
-> mailing list Openembedded-devel@lists.openembedded.org 
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> regards,
+>
+> Koen
+20803: [meta-xfce,3/3,v2] xfce4-panel: Remove static version of panel
+plugins: OK but needs a PR Bump. Who takes care?
+20697: [meta-xfce,3/3] xfce4-panel: Disable building of static
+libraries: Peter: can you please mark this one as superseded in
+patchwork?
+20695: [meta-xfce,2/3] xfce4-settings: Update to latest stable version
+4.8.3: New recipe starts on PR =3D "r1". Who takes care?
+20699: [meta-xfce,1/3] xfconf: Update to latest stable version 4.8.1:
+This can't go in like this. Peter: can you please mark this one as
+superseded or rejected in patchwork?
+20691: [meta-xfce] xfce4-power-manager: Add initial recipe for version
+1.0.10: This one can go in.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk82/lEACgkQMkyGM64RGpG8OQCfcZk0EZs2iyyTwnJsAxpFOZvm
-z+EAoJlGm6KD41LyaFpN3hgMQC3LDitY
-=Lp55
------END PGP SIGNATURE-----
-
+Andreas
 
 
