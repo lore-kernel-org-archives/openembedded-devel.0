@@ -1,32 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rx2ig-0003T5-3D
+	(envelope-from <tworaz666@gmail.com>) id 1Rx2tD-0003hv-VF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Feb 2012 21:41:54 +0100
-Received: by eaal10 with SMTP id l10so1586701eaa.6
+	Mon, 13 Feb 2012 21:52:48 +0100
+Received: by wgbdr13 with SMTP id dr13so4707209wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2012 12:33:44 -0800 (PST)
+	Mon, 13 Feb 2012 12:44:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=wyKwDULADeLBk548Uv+0y19bFUGZKXrME/Z0aIdubwc=;
-	b=U92hRhp49ObUr9Bm3ct/02DW3oIY7pzmvVd46AiloCFeKSM2ehEK2vMoy5edDLl9+/
-	XEG+ih8tQGinrhgribegm5aCbfrYJgwxLVNS1d+AXNXD0nNM+L7ZaWY+Yy5Bq7o6lxiY
-	V/GdYkNZzmMdQVN1W7lZYPeEhvOolOF+mAolQ=
-Received: by 10.14.94.66 with SMTP id m42mr5604207eef.66.1329165224535;
-	Mon, 13 Feb 2012 12:33:44 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id c16sm64722820eei.1.2012.02.13.12.33.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Feb 2012 12:33:43 -0800 (PST)
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=cBr6ab151tytzDb8eURfIJIj+V0eypiRO3t2Kevgdj4=;
+	b=FVZE99dQew4Vp+35QWs5PwFQuWeN09ZGxuZejSJ4VitwAN4yX238S8SmkQJxMSNm6u
+	C+ek3wQZN56dutM04Ty63HVWrE9jEXvqhWvQbLsVI4LiVRuPJVFk+4YEMiUjX6GRLaky
+	nqFLIJgTWelXuUo+oYK+mxxSHmPhynpUEA8+4=
+Received: by 10.216.136.138 with SMTP id w10mr3599212wei.33.1329165878323;
+	Mon, 13 Feb 2012 12:44:38 -0800 (PST)
+Received: from [192.168.0.10] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
+	by mx.google.com with ESMTPS id l8sm50138105wiy.5.2012.02.13.12.44.37
+	(version=SSLv3 cipher=OTHER); Mon, 13 Feb 2012 12:44:37 -0800 (PST)
+Message-ID: <4F3975AF.6090803@gmail.com>
+Date: Mon, 13 Feb 2012 21:42:23 +0100
 From: Peter Tworek <tworaz666@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20120112 Thunderbird/9.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Feb 2012 21:31:22 +0100
-Message-Id: <1329165082-18663-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <CALbNGRRXRVVjAN-soiseru_RBJkM0KQMBWnAzfy4Ah4AEDaDZA@mail.gmail.com>
-References: <CALbNGRRXRVVjAN-soiseru_RBJkM0KQMBWnAzfy4Ah4AEDaDZA@mail.gmail.com>
-Subject: [PATCH 3/3 v3] xfce4-panel: Remove static version of panel plugins.
+References: <1328919245-27394-1-git-send-email-schnitzeltony@googlemail.com>
+	<jh6qk3$vck$1@dough.gmane.org>
+	<CALbNGRSpaCQ+0rWxMOrurUVArmmVou6-KsYDSnsPujj+faMVng@mail.gmail.com>
+In-Reply-To: <CALbNGRSpaCQ+0rWxMOrurUVArmmVou6-KsYDSnsPujj+faMVng@mail.gmail.com>
+Subject: Re: [meta-xfce] xfce4-session: move static libraries to ${PN}-staticdev to avoid QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,50 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 20:41:54 -0000
+X-List-Received-Date: Mon, 13 Feb 2012 20:52:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-They have no actual use and trigger QA warnings.
+On 02/12/2012 10:30 PM, Andreas Müller wrote:
+> On Sat, Feb 11, 2012 at 11:37 PM, Koen Kooi<koen@dominion.thruhere.net>  wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 11-02-12 01:14, Andreas Müller schreef:
+>>> Signed-off-by: Andreas Müller<schnitzeltony@googlemail.com>  ---
+>>> .../xfce4-session/xfce4-session_4.8.2.bb           |    4 ++--
+>> Which of the other patches listed in
+>> http://patches.openembedded.org/project/oe/list/?q=meta-xfce should I push
+>> as well?
+>>
+>> regards,
+>>
+>> Koen
+> 20803: [meta-xfce,3/3,v2] xfce4-panel: Remove static version of panel
+> plugins: OK but needs a PR Bump. Who takes care?
+Done v3 takes care of it. [21213]
+> 20697: [meta-xfce,3/3] xfce4-panel: Disable building of static
+> libraries: Peter: can you please mark this one as superseded in
+> patchwork?
+Done.
+> 20695: [meta-xfce,2/3] xfce4-settings: Update to latest stable version
+> 4.8.3: New recipe starts on PR = "r1". Who takes care?
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- .../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb  |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
+PR added. [21211]
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-index 0cd8eba..a2b3ea9 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
- DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit xfce
- 
-@@ -19,6 +19,10 @@ python populate_packages_prepend() {
- 	                                     '${bindir}/*%s*'])
- }
- 
-+do_install_append () {
-+    find "${D}/${libdir}/xfce4/panel/plugins" -name '*.a' -exec rm -f {} +
-+}
-+
- PACKAGES_DYNAMIC = "${PN}-plugin-*"
- 
- FILES_${PN} += "${libdir}/xfce4/panel/migrate \
-@@ -27,8 +31,5 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
- FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
- 		   "
- 
--FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
--                   "
--
- SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
- SRC_URI[sha256sum] = "66f1266a1242ee5ecada995a4a584dd9802aa24456759b40b0c29227c39bed03"
--- 
-1.7.3.4
+> 20699: [meta-xfce,1/3] xfconf: Update to latest stable version 4.8.1:
+> This can't go in like this. Peter: can you please mark this one as
+> superseded or rejected in patchwork?
+
+Marked as rejected.
+
+> 20691: [meta-xfce] xfce4-power-manager: Add initial recipe for version
+> 1.0.10: This one can go in.
+>
+> Andreas
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
