@@ -1,34 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1RwtWT-0003Co-Vj; Mon, 13 Feb 2012 11:52:42 +0100
-Received: by eaal10 with SMTP id l10so1441466eaa.6
-	for <multiple recipients>; Mon, 13 Feb 2012 02:44:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=5KbCD1T0RMIJuDtyUehXfsjmM6W9ElNr7myDmjXlnA8=;
-	b=Svt4VmASzjq2qhItHDzW69aoGjHI2xPzbnlQblvHc8ISSAbg2LXaWJ2uNEEz0axX7b
-	+E/8mzNClRrH85EyzHI6m50I2hoxwICVp4HcoGOsFD1I4VLtoPzyjB/8d9npOt4Ua6uj
-	XEm9nGgoRph4Ue157k5aeehoj2rKizlheiX1M=
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RwunA-0004iz-4F
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Feb 2012 13:14:00 +0100
+Received: by lahc1 with SMTP id c1so4034964lah.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Feb 2012 04:05:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=4+SA7+IhQiYacAKnXCmrSAwvS40wMiGchZahxQDFiQ0=;
+	b=o6HE6J5dDpEe9TwJhq4F0k+lzSRbZ2fTyV+AZC1fZOO7q8CI/B718HZpnvIHyAbkvN
+	3oXwLOyMuRbJeIyLmEJKO7Z2Ld1NjJgYC0hZ4FGOtHnTOhdpJfrUeFuVpHSdikBYaG3L
+	2/SN8Ec+yrhIM3r+jEiykmKL35j4zVNC44Wuo=
 MIME-Version: 1.0
-Received: by 10.14.53.74 with SMTP id f50mr5153242eec.5.1329129872130; Mon, 13
-	Feb 2012 02:44:32 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Mon, 13 Feb 2012 02:44:32 -0800 (PST)
-In-Reply-To: <CAG4_upR3cPJaRKtvsb_MC8tTDZx7f7+v2zHeYD5wLB6vL8YXbw@mail.gmail.com>
-References: <CAAB-1yw=Hhk7V_suVM9fShLRsQXicsKNZV0KzXAMewZVqnPhWA@mail.gmail.com>
-	<CAG4_upR3cPJaRKtvsb_MC8tTDZx7f7+v2zHeYD5wLB6vL8YXbw@mail.gmail.com>
-Date: Mon, 13 Feb 2012 08:44:32 -0200
-X-Google-Sender-Auth: CTPvk-5_tmNMhysfaskox8aV8uc
-Message-ID: <CAP9ODKriE6zY5apcrYXOxqaz_YWLdVHz03VGntqAVTptUhf8KQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.152.127.136 with SMTP id ng8mr11116784lab.16.1329134750664;
+	Mon, 13 Feb 2012 04:05:50 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Mon, 13 Feb 2012 04:05:50 -0800 (PST)
+In-Reply-To: <CAP9ODKotC11Gh+bcOz9vgqNMacdwykydJ1G=e7rjr_HKVa6U4w@mail.gmail.com>
+References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
+	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
+	<CALbNGRTiMWuLSuXsKfQV4ntHfVY5ovuBYrD0w41790Qa_u79Jg@mail.gmail.com>
+	<CAP9ODKotC11Gh+bcOz9vgqNMacdwykydJ1G=e7rjr_HKVa6U4w@mail.gmail.com>
+Date: Mon, 13 Feb 2012 13:05:50 +0100
+Message-ID: <CALbNGRQDy7E4ND7amsgiBuzo12o=umbW1kokYBgqyPoTaXbTCg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: yocto <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: OpenEmbedded/Yocto Freescale ARM BSP Layer
+Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 10:52:42 -0000
+X-List-Received-Date: Mon, 13 Feb 2012 12:14:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 12, 2012 at 23:10, Chris Verges <kg4ysn@gmail.com> wrote:
-
-> As one of these users, thank you for helping to create a support structure
-> around OpenEmbedded and the Freescale portfolio!  I noticed that the i.MX51
-> is all that is in there right now.  Would this be an appropriate place for
-> the i.MX23 as well?  I wasn't sure if the scope was being limited or if
-> this was an artifact of the newness of the repository.
+On Mon, Feb 13, 2012 at 11:42 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Sun, Feb 12, 2012 at 20:15, Andreas M=FCller
+> <schnitzeltony@googlemail.com>wrote:
 >
+>> If there is one *-systemd package with one entry in SYSTEMD_SERVICE,
+>> the whole directory is installed - otherwise only the files found in
+>> SYSTEMD_SERVICE. If a recipe installs too much or something is
+>> missing, it can be corrected in recipe.
+>>
+>
+> If for example I put two .socket files, your algorithm will break. That's
+> why I said you need to parse it. It is not that difficult as the logic is
+> the same as the wrapper used in rootfs generation.
+Sorry - but which which wrapper do you mean?
 
-Yes, i.MX23 is OK to be put there too.
+Andreas
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
