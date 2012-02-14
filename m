@@ -1,24 +1,23 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RxHyc-0003IF-K8
+	(envelope-from <schnitzeltony@googlemail.com>) id 1RxL4b-0002gM-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Feb 2012 13:59:22 +0100
-Received: by eaal10 with SMTP id l10so1796630eaa.6
+	Tue, 14 Feb 2012 17:17:45 +0100
+Received: by lahc1 with SMTP id c1so124442lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2012 04:51:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=RZXMIbMiMvzX8hyltIhjKDyur/n1vwUlbGOzqO9ayak=;
-	b=Qg5eEzEbuIQ0nGv9fsafsyVgquwwdREF7xL2sh6AJAF/YqkuweYBO2y9dI/lepbA+W
-	9b+UBY2ivVpjPAf8sJJvk9PYLGQW68azQ+nVzuKyNyPOq61GThmLqsN9t7p2npwXjHHv
-	9I8s8YXi+LShvNUtNQSrxJS9MdijBXGueUII0=
+	Tue, 14 Feb 2012 08:09:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=wwxdqssW+d/9P6B8V80xd3kyGcexFCI/awHOo3Vhd08=;
+	b=bNr4w8HuN0Qz0ItJ4YA8IfZ9rA/MgtOOQxfaSPOBHawAkU5yfqGB+r9/hydT2P9Ahj
+	u7nwbJCiQDZSOBVVJE+cOzgZhIw5HWDncZUs34cINe0qtWaLdxyXsq31nQkeCYWF+gcR
+	/pgeQhgj4GdnFMs02559pY0be0Gxbw/08uO+E=
 MIME-Version: 1.0
-Received: by 10.213.14.147 with SMTP id g19mr425224eba.126.1329223871992; Tue,
-	14 Feb 2012 04:51:11 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Tue, 14 Feb 2012 04:51:11 -0800 (PST)
-In-Reply-To: <CALbNGRS-g-kXkEYdxkcwbAum2kqbg5a79=QCoV8eYm2TpwWh9w@mail.gmail.com>
+Received: by 10.152.127.136 with SMTP id ng8mr14938276lab.16.1329235774130;
+	Tue, 14 Feb 2012 08:09:34 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Tue, 14 Feb 2012 08:09:34 -0800 (PST)
+In-Reply-To: <CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
 References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
@@ -29,12 +28,11 @@ References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<CALbNGRQ1uf__SnyW5nz1mfOh45DgKyVmjQ3oFS-VBLOyiHVZig@mail.gmail.com>
 	<CAP9ODKq=i_jLUHcB+L1marL7Ymz261LZGC26Q49Bfvm+E4tm5g@mail.gmail.com>
 	<CALbNGRS-g-kXkEYdxkcwbAum2kqbg5a79=QCoV8eYm2TpwWh9w@mail.gmail.com>
-Date: Tue, 14 Feb 2012 10:51:11 -0200
-X-Google-Sender-Auth: icV9CVOZ2-yMQoOVtmHJ-vO30_A
-Message-ID: <CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
+Date: Tue, 14 Feb 2012 17:09:34 +0100
+Message-ID: <CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,54 +47,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2012 12:59:22 -0000
+X-List-Received-Date: Tue, 14 Feb 2012 16:17:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 14, 2012 at 10:42, Andreas M=FCller
-<schnitzeltony@googlemail.com>wrote:
+On Tue, Feb 14, 2012 at 1:51 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> No; The @ is to allow multiple instance. Look at
+> http://www.freedesktop.org/software/systemd/man/systemd.unit.html
+How about the old strategy for *@.service:
+If there is only one *-systemd package with one entry in
+SYSTEMD_SERVICE it will get *@.service?
 
-> Currently I am testing the automatic parsing for different recipes.
-> Following the 'After=3D' and 'WantedBy=3D' works fine but before sending
-> out I would like to get some comments on the following
-> assumptions/questions:
->
-> * There is no need for recipes to install links for 'WantedBy' entries
-> since systemd-systemctl-native takes care. E.G the code in
-> lightttpd_1.4.30.bbappend for this can be removed (it works on the
-> wrong paths anyway) -> there is no need for systemd.bbclass to follow
-> 'WantedBy'. Correct?
->
+Andreas
 
-Links ought to be kept to be handled by systemd-systemctl-native.
-
-
-> * For dropbear_2011.54.bbappend, the automatic parsing leaves
-> dropbear@.service and dropbear.service ( link to /dev/null ) unpacked.
-> In dropbear.socket there is 'Conflicts=3Ddropbear.service'. Shall the
-> algorithm follow also services linked by Conflicts=3D and pack those
-> service files?
->
-
-The /dev/null link is to force disable the init script. This is difficult
-to do automatically so for now I'd say to do it byhand.
-
-
-> * dropbear_2011.54.bbappend: Is dropbear@.service a candidate for a
-> second *-systemd packet?
->
-
-No; The @ is to allow multiple instance. Look at
-http://www.freedesktop.org/software/systemd/man/systemd.unit.html
-
-
-> * are there other keys which might need follow-up too?
->
-
-Not that I am aware of at this moment.
-
---=20
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
