@@ -1,43 +1,26 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RxLHY-0002yn-HW
+	(envelope-from <anton.komarov@gmail.com>) id 1RxPNG-0001Fa-EQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Feb 2012 17:31:08 +0100
-Received: by eekd41 with SMTP id d41so51708eek.6
+	Tue, 14 Feb 2012 21:53:18 +0100
+Received: by wgbdr13 with SMTP id dr13so273031wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2012 08:22:57 -0800 (PST)
+	Tue, 14 Feb 2012 12:45:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=FddqaBC0jGeey2AnQSk6cgexYUSohfvDlOT8urYoeDI=;
-	b=B8ruHAESvBtySKyQP0FHVDMwOM8gQodoyZJkgIg7/PBHhX36TBJEt+xNS1CmoLnxL/
-	Rnq1Rsl9hqgoyVutGSRHGehIlyClXrmYyR82mlo9f3VJXGaEOpljGbi8EyCET8hZB8Yx
-	4w8DU45WZ6sLjHjsiutXNOwN/ghhcSOUafN24=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=bgcg00fL9y3AGJrWZPrKvhpiJ2A94IFF4LWZAF/qUP4=;
+	b=w2j+T+ryLmutswylji1LRIGlKnO8wUz+Asc5sYItClUJaj03mId/OmYKlOtTffz5GK
+	V4S7nPUL6wXvoui2junVj/e4h77AkEUku7HfMZpO4TuMynN2IB4r/4Oc1i7qoLKIB0JA
+	yelzSoe/IeHPRws9l/1JPoKPIzhJiFr0RRtvw=
+Received: by 10.180.79.229 with SMTP id m5mr31385933wix.6.1329252307431; Tue,
+	14 Feb 2012 12:45:07 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.213.14.147 with SMTP id g19mr576811eba.126.1329236576366; Tue,
-	14 Feb 2012 08:22:56 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.14.96.129 with HTTP; Tue, 14 Feb 2012 08:22:56 -0800 (PST)
-In-Reply-To: <CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
-References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
-	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
-	<CALbNGRTiMWuLSuXsKfQV4ntHfVY5ovuBYrD0w41790Qa_u79Jg@mail.gmail.com>
-	<CAP9ODKotC11Gh+bcOz9vgqNMacdwykydJ1G=e7rjr_HKVa6U4w@mail.gmail.com>
-	<CALbNGRQDy7E4ND7amsgiBuzo12o=umbW1kokYBgqyPoTaXbTCg@mail.gmail.com>
-	<CAP9ODKoXeBf_vctM7pcHTZd2-fMacN+kk8z9af18h9rkyDGVWQ@mail.gmail.com>
-	<CALbNGRQ1uf__SnyW5nz1mfOh45DgKyVmjQ3oFS-VBLOyiHVZig@mail.gmail.com>
-	<CAP9ODKq=i_jLUHcB+L1marL7Ymz261LZGC26Q49Bfvm+E4tm5g@mail.gmail.com>
-	<CALbNGRS-g-kXkEYdxkcwbAum2kqbg5a79=QCoV8eYm2TpwWh9w@mail.gmail.com>
-	<CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
-	<CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
-Date: Tue, 14 Feb 2012 14:22:56 -0200
-X-Google-Sender-Auth: 7qf2YtiE0az6V2KNsG97JJ24iQo
-Message-ID: <CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.216.18.205 with HTTP; Tue, 14 Feb 2012 12:44:47 -0800 (PST)
+From: Anton Komarov <anton.komarov@gmail.com>
+Date: Wed, 15 Feb 2012 00:44:47 +0400
+Message-ID: <CAHKdsmR9A4UMA4Q2cwvnvg6WxnQjO13mydJ-u2D=qxPxFYACQw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
+Subject: Recipe for libmp3splt failed to make packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +34,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2012 16:31:08 -0000
+X-List-Received-Date: Tue, 14 Feb 2012 20:53:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 14, 2012 at 14:09, Andreas M=FCller
-<schnitzeltony@googlemail.com>wrote:
-
-> On Tue, Feb 14, 2012 at 1:51 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
-> > No; The @ is to allow multiple instance. Look at
-> > http://www.freedesktop.org/software/systemd/man/systemd.unit.html
-> How about the old strategy for *@.service:
-> If there is only one *-systemd package with one entry in
-> SYSTEMD_SERVICE it will get *@.service?
+I tried to build libmp3splt library with this recipe, but gets
+following error. I just cannot understand - what am i doing wron?
 
 
-I think so.
+recipe:
 
-It is not easy to predict all possible usages but we ought to take this
-route and adjust it one the way. Once you do it and we start converting all
-recipes that use systemd class in meta-oe we'll most probably find many
-possible corner-cases to deal with.
+DESCRIPTION = "Mp3splt-project is a utility to split mp3 and ogg files
+selecting a begin and an end time position, without decoding."
+HOMEPAGE = "http://mp3splt.sourceforge.net/mp3splt_page/about.php"
+BUGTRACKER = "http://sourceforge.net/tracker/?atid=476061&group_id=55130&func=browse"
+SECTION = "libs"
+LICENSE = "GPLv2"
 
---=20
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+DEPENDS="libmad"
+
+LIC_FILES_CHKSUM = "file://COPYING;md5=678a5e287e539ce6c24384c512373a53"
+
+PR = "r26"
+
+S = "${WORKDIR}/libmp3splt-${PV}"
+
+SRC_URI = "${SOURCEFORGE_MIRROR}/mp3splt/libmp3splt-${PV}.tar.gz"
+
+SRC_URI[md5sum] = "1c982db15bba4efb42a5a227ce87a575"
+SRC_URI[sha256sum] =
+"7b3d485690cd0f076395917bf566314e05babbd7c02a7a99bbc40dcf1ea3ca96"
+
+inherit autotools pkgconfig gettext
+
+PACKAGES =+ "libsplt_mp3 libsplt_ogg"
+FILES_${PN}-dev = "${libdir}/libmp3splt.so ${libdir}/libmp3splt.la
+${libdir}/libmp3splt.a ${libdir}/libmp3splt/*.so*"
+FILES_libsplt_mp3-staticdev="${libdir}/libmp3splt/libsplt_mp3.a"
+FILES_libsplt_ogg-staticdev="${libdir}/libmp3splt/libsplt_ogg.a"
+
+errors:
+
+WARNING: For recipe libmp3splt, the following files/directories were
+installed but not shipped in any package:
+WARNING:   /usr/share
+WARNING:   /usr/include
+WARNING:   /usr/share/aclocal
+WARNING:   /usr/share/aclocal/mp3splt.m4
+WARNING:   /usr/include/libmp3splt
+WARNING:   /usr/include/libmp3splt/mp3splt.h
+WARNING: libmp3splt: The compile log indicates that host include
+and/or library paths were used.  Please check the log
+'/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/temp/log.do_compile'
+for more information.
+WARNING: QA Issue: non -staticdev package contains static .a library:
+libmp3splt path
+'/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-split/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.a'
+WARNING: QA Issue: non -staticdev package contains static .a library:
+libmp3splt path
+'/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-split/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.a'
+ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
+.so: libmp3splt path
+'/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-split/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.so'
+ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
+.so: libmp3splt path
+'/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-split/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.so'
+WARNING: QA Issue: non -staticdev package contains static .a library:
+libmp3splt-dev path
+'/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-split/libmp3splt-dev/usr/lib/libmp3splt.a'
+
 
