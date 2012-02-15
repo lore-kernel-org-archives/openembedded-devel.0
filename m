@@ -1,24 +1,24 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxe9E-0003lQ-4y
+	(envelope-from <otavio.salvador@gmail.com>) id 1RxeDd-0003zZ-6T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 13:39:48 +0100
-Received: by lahc1 with SMTP id c1so965423lah.6
+	Wed, 15 Feb 2012 13:44:22 +0100
+Received: by vcbfl15 with SMTP id fl15so795564vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 04:31:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=4TPzqzo5iZazUsGa5ToPNcsFURcQhPryvse8HZgZK/o=;
-	b=Ndml3JvQ9jquDoUt/4ElddF+4a/r9zhxxg6BTGXkzzrKRkU5hTiu7VLiFVXODey1mE
-	BpkgBz+zp0F40XXjLoj5wMgYtBvHasenvrmmSXZSFpl3QzNgtIlYbQFmZ2azU4jErC5u
-	HYHANa/Ib5oO09u47zB5zPGRlLAVO0O5dHp0Y=
+	Wed, 15 Feb 2012 04:36:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=bPBAy5KJqJPPvEJZe+D2QFbuoOPABTflWghwCSrMgmA=;
+	b=pN4uuDQOZeOnu18B7G+0Qg1HgzmUDLjkoaR6CtQKyfaRZWMoXmsAD9N2fEiX2nivx+
+	8IZ2mRX45xwZhNATKSdl/FdmV93bvNY2BFGyOTADrTpaUFJwjT8gzDYedoVG6BXaHO+q
+	zD04Yprv8kuVfGBJnVTmBEAlEbYSROypOY3u0=
 MIME-Version: 1.0
-Received: by 10.152.129.69 with SMTP id nu5mr17975706lab.9.1329309096145; Wed,
-	15 Feb 2012 04:31:36 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Wed, 15 Feb 2012 04:31:36 -0800 (PST)
-In-Reply-To: <CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
+Received: by 10.52.66.225 with SMTP id i1mr10970861vdt.65.1329309367629; Wed,
+	15 Feb 2012 04:36:07 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.3.84 with HTTP; Wed, 15 Feb 2012 04:36:07 -0800 (PST)
+In-Reply-To: <CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
 References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
@@ -32,10 +32,13 @@ References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
 	<CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
 	<CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
-Date: Wed, 15 Feb 2012 13:31:36 +0100
-Message-ID: <CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	<CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
+Date: Wed, 15 Feb 2012 10:36:07 -0200
+X-Google-Sender-Auth: 1dwMP6jXWSauDnwWqrbO2S0gWd0
+Message-ID: <CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,38 +53,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 12:39:48 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 12:44:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 14, 2012 at 5:22 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Tue, Feb 14, 2012 at 14:09, Andreas M=FCller
-> <schnitzeltony@googlemail.com>wrote:
->
->> On Tue, Feb 14, 2012 at 1:51 PM, Otavio Salvador
->> <otavio@ossystems.com.br> wrote:
->> > No; The @ is to allow multiple instance. Look at
->> > http://www.freedesktop.org/software/systemd/man/systemd.unit.html
->> How about the old strategy for *@.service:
->> If there is only one *-systemd package with one entry in
->> SYSTEMD_SERVICE it will get *@.service?
->
->
-> I think so.
->
-> It is not easy to predict all possible usages but we ought to take this
-> route and adjust it one the way. Once you do it and we start converting a=
-ll
-> recipes that use systemd class in meta-oe we'll most probably find many
-> possible corner-cases to deal with.
->
-Another corner case I would like to understand: What is the role of in
-busybox syslog.service linking to dev/null. Within busybox itself it
-seems not referenced.
+On Wed, Feb 15, 2012 at 10:31, Andreas M=FCller
+<schnitzeltony@googlemail.com>wrote:
 
-Thanks in advance
+> Another corner case I would like to understand: What is the role of in
+> busybox syslog.service linking to dev/null. Within busybox itself it
+> seems not referenced.
+>
 
-Andreas
+To make it to use the .service file and not the init scripts compatibility.
 
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
