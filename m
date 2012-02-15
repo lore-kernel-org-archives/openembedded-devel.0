@@ -1,27 +1,20 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1RxggB-0000XD-9D
+	(envelope-from <holger+oe@freyther.de>) id 1RxjMl-0000eg-1k
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 16:21:59 +0100
-Received: by lahc1 with SMTP id c1so1159677lah.6
+	Wed, 15 Feb 2012 19:14:07 +0100
+Received: from [192.168.1.250] (91-64-82-148-dynip.superkabel.de
+	[91.64.82.148])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 529751B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 07:13:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=lto2gGRVKqvJ88JXc+Z0C3C2ELm/cP1ZmWHVkXeYyZs=;
-	b=JKF7r9RqfBDghJpyZQJcuKdSCNPQchpBCVAleZOqlpGW6uc4rEn3iJXI0K6bxNhKGu
-	bV/nnt7gfSuJhFRfn/94YN0vxAfvmo8TgZmkp98suuVR3M5B961b2OlItmddQAI0P3Sn
-	D6j31t4uvp+dIWyh0iJvYUEB5RG+zioqvr7fo=
+	Wed, 15 Feb 2012 18:03:51 +0000 (UTC)
+Message-ID: <4F3BF21A.30505@freyther.de>
+Date: Wed, 15 Feb 2012 18:57:46 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20120104 Icedove/8.0
 MIME-Version: 1.0
-Received: by 10.112.100.34 with SMTP id ev2mr9219990lbb.13.1329318827230; Wed,
-	15 Feb 2012 07:13:47 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Wed, 15 Feb 2012 07:13:47 -0800 (PST)
-Date: Wed, 15 Feb 2012 16:13:47 +0100
-Message-ID: <CALbNGRQ-czG5egUoonZxZwGTZeKsJ4zBCAFdZuLHUtTL7NrtFQ@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: pending xfce-patches
+Subject: checkroot.sh and fsck the root partition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,16 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 15:21:59 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 18:14:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-to bring xfce-patch-confusion caused by me to an end:
+Hi,
 
-Koen: please take in 21213 & 21151
-Peter: please mark 21211 & 20803 as superseded
+I know most of use ubifs/jffs2 but I have one device with a ext3/ext4
+partition and would like to run fsck as part of the boot (with auto fix up).
+Besides installing the e2fs fsck, fixing the fstab fsck will not be executed.
 
-hope to better next time & thanks in advance
+E.g. if I take a look at this script:
+http://git.openembedded.org/openembedded-core/tree/meta/recipes-core/initscripts/initscripts-1.0/checkroot.sh
 
-Andreas
+it is not clear how 'rootcheck' could ever be 'yes'.
+
+Any comments?
+
+holger
 
 
