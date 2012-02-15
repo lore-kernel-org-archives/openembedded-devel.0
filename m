@@ -1,31 +1,34 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rxea1-0004tA-1L
+	(envelope-from <martin.jansa@gmail.com>) id 1Rxea6-0004si-D7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 14:07:29 +0100
-Received: by eaal10 with SMTP id l10so282398eaa.6
+	Wed, 15 Feb 2012 14:07:36 +0100
+Received: by mail-ee0-f47.google.com with SMTP id d41so302240eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 04:59:17 -0800 (PST)
+	Wed, 15 Feb 2012 04:59:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=mIxtR9AgIWyuYVf0m6nPZnQHqPs8aBabVtu8iOcmObo=;
-	b=pRxnrycvDyLuVT6HgYtzdgs5GPgnXFHjMGWfMKmXG2QUis6VF+mwBM9UUJAxkTzquf
-	c2auogE/qh6CXrsfdau1Bmde/pfJn6BH688Uj8zcfkqfNHGy781CLwlofPtgLJDT/rof
-	F0AaUo/30q8kotTZC+TgcbicevtGm7nJLAPmo=
-Received: by 10.213.33.72 with SMTP id g8mr258341ebd.8.1329310757384;
-	Wed, 15 Feb 2012 04:59:17 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=o1vZohAgC5yDq+2NJn+g9zu8vQpDe+DPgVFKE2jYLwY=;
+	b=nduLvk8wqFAbxBoa2q0eVSqrbtS0TdrLIGmtVsoNmhJOIbDgVs6ba0wailgguYN1Yd
+	ydk9uU6izNxbatj2xezzjhQPbtqIO4TtgiV7/SFx9aPglI8X1/mi0tKa6QN0z4OcWmQJ
+	y8NR/tfE3/BD+fTXKR6kHkRibtS/0YmpelAas=
+Received: by 10.213.105.199 with SMTP id u7mr234094ebo.135.1329310764848;
+	Wed, 15 Feb 2012 04:59:24 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id c16sm10996875eei.1.2012.02.15.04.59.16
+	by mx.google.com with ESMTPS id n56sm10922425eeh.6.2012.02.15.04.59.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Feb 2012 04:59:16 -0800 (PST)
+	Wed, 15 Feb 2012 04:59:24 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Feb 2012 13:59:08 +0100
-Message-Id: <fe6268a256b83d07e711e08db66b2610fd2b4f8e.1329310622.git.Martin.Jansa@gmail.com>
+Date: Wed, 15 Feb 2012 13:59:09 +0100
+Message-Id: <aaef9aa923d6e55ae0463156999b2a0543cb1ef1.1329310622.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.4
+In-Reply-To: <fe6268a256b83d07e711e08db66b2610fd2b4f8e.1329310622.git.Martin.Jansa@gmail.com>
+References: <fe6268a256b83d07e711e08db66b2610fd2b4f8e.1329310622.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1329310622.git.Martin.Jansa@gmail.com>
 References: <cover.1329310622.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 1/2] webkit-efl: resolve build error with missing eina lib when linked by gold
+Subject: [meta-oe][meta-efl][PATCH 2/2] imagemagick: upgrade to 6.7.5 because 6.4.4 is not compatible with zlib-1.2.6 we have now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,68 +42,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 13:07:29 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 13:07:36 -0000
+
+* for zlib-1.2.6 issue see:
+  http://www.imagemagick.org/discourse-server/viewtopic.php?f=2&t=20267
+* dist-lzip removed because it's not supported in our automake yet
+* xml is explicity disabled, wasn't enabled before and if autodetected
+  then fails (see comment above EXTRA_OECONF).
+* LIC_FILES_CHKSUM updated, only formal changes AFAIK see:
+  http://trac.imagemagick.org/log/ImageMagick/trunk/LICENSE
+  for details
+* empty dirs coders and filters added to PN to fix QA warning
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...ore-add-EINA_LIBRARIES-to-shell-build-for.patch |   28 ++++++++++++++++++++
- meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |    2 +
- 2 files changed, 30 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch
+ .../PerlMagic_MakePatch.patch                      |    0
+ .../imagemagick-6.7.5/remove.dist-lzip.patch       |   17 +++++++++++++++++
+ .../{imagemagick_6.4.4.bb => imagemagick_6.7.5.bb} |   19 +++++++++++--------
+ 3 files changed, 28 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick-6.4.4 => imagemagick-6.7.5}/PerlMagic_MakePatch.patch (100%)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_6.4.4.bb => imagemagick_6.7.5.bb} (61%)
 
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMagic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
+similarity index 100%
+rename from meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMagic_MakePatch.patch
+rename to meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch
 new file mode 100644
-index 0000000..6958b9e
+index 0000000..559aa24
 --- /dev/null
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch
-@@ -0,0 +1,28 @@
-+From 079acc344dc12818d8b56bf80a42065d8429f7ef Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Tue, 14 Feb 2012 09:56:53 +0100
-+Subject: [PATCH] JavaScriptCore: add EINA_LIBRARIES to shell build for Efl
++++ b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch
+@@ -0,0 +1,17 @@
++Our automake-1.11.2 doesn't support it yet, see:
++http://lists.gnu.org/archive/html/automake/2011-12/msg00081.html
 +
-+* needed for libwtf_efl
-+* otherwise fails with ../wtf/libwtf_efl.so.0.1.0: error: undefined reference to 'eina_module_free'
++Upstream-Status: Inappropriate [fix or upgrade oe-core automake]
 +
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ Source/JavaScriptCore/shell/PlatformEfl.cmake |    1 +
-+ 1 files changed, 1 insertions(+), 0 deletions(-)
-+
-+diff --git a/Source/JavaScriptCore/shell/PlatformEfl.cmake b/Source/JavaScriptCore/shell/PlatformEfl.cmake
-+index c35af2d..ef3f437 100644
-+--- a/Source/JavaScriptCore/shell/PlatformEfl.cmake
-++++ b/Source/JavaScriptCore/shell/PlatformEfl.cmake
-+@@ -1,6 +1,7 @@
-+ LIST(APPEND JSC_LIBRARIES
-+     ${Glib_LIBRARIES}
-+     ${ECORE_LIBRARIES}
-++    ${EINA_LIBRARIES}
-+     ${CMAKE_DL_LIBS}
-+ )
++diff -uNr ImageMagick-6.7.5-6.orig/configure.ac ImageMagick-6.7.5-6/configure.ac
++--- ImageMagick-6.7.5-6.orig/configure.ac	2012-02-12 18:07:28.000000000 +0100
+++++ ImageMagick-6.7.5-6/configure.ac	2012-02-15 12:55:47.668813474 +0100
++@@ -128,7 +128,7 @@
++ # Ensure that make can run correctly
++ AM_SANITY_CHECK
 + 
-+-- 
-+1.7.8.4
-+
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
-index 77aef02..c0e346c 100644
---- a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
-@@ -11,6 +11,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
++-AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-lzip dist-xz dist-zip])
+++AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-xz dist-zip])
++ 
++ # Enable support for silent build rules
++ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+similarity index 61%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+index d5f95c9..4cecff0 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+@@ -1,27 +1,30 @@
+ DESCRIPTION = "ImageMagick is an image convertion tools"
+ SECTION = "console/utils"
+ LICENSE = "ImageMagick"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e1ebcc1358b9f81eba64255fc5da6892"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
+ # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
  
- SRCREV = "105069"
- PV = "1.7.3+svnr${SRCPV}"
-+PR = "r1"
+-PR = "r10"
+-
+-PATCHSET = "1"
++PATCHSET = "6"
+ SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+            file://PerlMagic_MakePatch.patch \
++	   file://remove.dist-lzip.patch \
+           "
+-SRC_URI[md5sum] = "882ff241f6ad39655541d5055596f93b"
+-SRC_URI[sha256sum] = "5a5b2779707bfd9816cf17d8f53d242c05005092da192a898ac10961b3b19dda"
++SRC_URI[md5sum] = "bcf07cf0822572fa2b47fa6d506f699a"
++SRC_URI[sha256sum] = "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5a7dae01e47bdbd80"
  
- SRCREV_FORMAT = "source"
+-S = "${WORKDIR}/ImageMagick-${PV}"
++S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
  
-@@ -18,6 +19,7 @@ SRC_URI = "\
-   svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;proto=http;subdir=src \
-   svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;proto=http;subdir=src \
-   svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;proto=http;subdir=src \
-+  file://0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch \
-   file://CMakeLists.txt \
- "
+ inherit autotools binconfig pkgconfig
+ 
+-EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
++# xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
++# if someone needs xml support then fix it first
++EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp --without-xml"
+ 
+ FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
+                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
++                ${libdir}/ImageMagick-${PV}/modules-Q16/filters \
++                ${libdir}/ImageMagick-${PV}/modules-Q16/coders \
+                 ${libdir}/ImageMagick-${PV}/config/ \
+                 ${datadir}/ImageMagick-${PV}"
  
 -- 
 1.7.8.4
