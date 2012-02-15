@@ -1,24 +1,24 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxl2h-0003uu-NT
+	(envelope-from <otavio.salvador@gmail.com>) id 1Rxl5G-00042J-6a
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 21:01:31 +0100
-Received: by bkwq11 with SMTP id q11so1392227bkw.6
+	Wed, 15 Feb 2012 21:04:10 +0100
+Received: by vcbfl15 with SMTP id fl15so1164257vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 11:53:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=7Za+vmeH+08mYOFC7HkmB2pxi3rlCr3tH9SdnYe4qGw=;
-	b=qGjsAYjig11MOU7QGc1TvrfzUk5rINGaSUwfRKe9wW7qbYLnlmIA9E7z1t/++WjUym
-	8Agu1kGVd/Efr/X+GfxPIhmjE7vGVwRmMMcIK536ZwsXeBxF0WCNYUIsO5lwFrQa/skx
-	/1PNxACUWmopHtjPOeJx1F98xnWBj79lKabGI=
+	Wed, 15 Feb 2012 11:55:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=2N09P6zZFhWzWLHRyDgt8UPEJjmvW63N9I7R/kB293g=;
+	b=xFgK9hogAUAx8SGowXLgpqO9xmZftReXnAK0HzyeeQhNUGj7Qeq47FlSvtPQsDEIi+
+	e1V0HiHZTTEInUlrq/Q88VAQJkTkZAOcw4dj8k/5iXqbDjS7UOKuDfPwX6LOdJ4joFSl
+	w5v/GuFCYJSG3+nYmxneBDSxuW+bZcd7/K9JI=
 MIME-Version: 1.0
-Received: by 10.112.100.34 with SMTP id ev2mr9573605lbb.13.1329335598885; Wed,
-	15 Feb 2012 11:53:18 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Wed, 15 Feb 2012 11:53:18 -0800 (PST)
-In-Reply-To: <CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
+Received: by 10.52.72.107 with SMTP id c11mr11747566vdv.48.1329335756119; Wed,
+	15 Feb 2012 11:55:56 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.3.84 with HTTP; Wed, 15 Feb 2012 11:55:56 -0800 (PST)
+In-Reply-To: <CALbNGRQp1xFLUECjtg78gy1-8vYpUwB-G4xjCKn_80paA2Ymnw@mail.gmail.com>
 References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
@@ -34,10 +34,13 @@ References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
 	<CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
 	<CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
-Date: Wed, 15 Feb 2012 20:53:18 +0100
-Message-ID: <CALbNGRQp1xFLUECjtg78gy1-8vYpUwB-G4xjCKn_80paA2Ymnw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	<CALbNGRQp1xFLUECjtg78gy1-8vYpUwB-G4xjCKn_80paA2Ymnw@mail.gmail.com>
+Date: Wed, 15 Feb 2012 17:55:56 -0200
+X-Google-Sender-Auth: jC1QdIv_brOTc46TWSfVqV0mPSE
+Message-ID: <CAP9ODKr9O8Ff2PPDBfTmgOYwJT8sExKcGs00-PfvzS=3O31dGw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,36 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 20:01:31 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 20:04:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 15, 2012 at 1:36 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Wed, Feb 15, 2012 at 10:31, Andreas M=FCller
-> <schnitzeltony@googlemail.com>wrote:
+On Wed, Feb 15, 2012 at 17:53, Andreas M=FCller
+<schnitzeltony@googlemail.com>wrote:
+
+> For test I did with a bunch of recipes
 >
->> Another corner case I would like to understand: What is the role of in
->> busybox syslog.service linking to dev/null. Within busybox itself it
->> seems not referenced.
->>
+> 1. build from scratch with unmodified sources
+> 2. Applied sytemd-patches and the 'cleanup'-patches (removing obsolete
+> systemd code in recipes)
+> 3. build recipes again
+> 4. compared the results with buildhistory
 >
-> To make it to use the .service file and not the init scripts compatibilit=
-y.
+> Results are as expected except one issue I don't understand:
 >
-For test I did with a bunch of recipes
+> The sizes of the *-dbg packages are reduced. Some reduce to less than
+> half. Has anybody a good explanation for this?
 
-1. build from scratch with unmodified sources
-2. Applied sytemd-patches and the 'cleanup'-patches (removing obsolete
-systemd code in recipes)
-3. build recipes again
-4. compared the results with buildhistory
 
-Results are as expected except one issue I don't understand:
+No good guess about possible reasoning.
 
-The sizes of the *-dbg packages are reduced. Some reduce to less than
-half. Has anybody a good explanation for this?
-
-Andreas
-
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
