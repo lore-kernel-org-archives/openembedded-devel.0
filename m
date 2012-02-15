@@ -1,35 +1,23 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anton.komarov@gmail.com>) id 1RxXmR-0004VP-Qw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 06:51:51 +0100
-Received: by wibhq7 with SMTP id hq7so296476wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2012 21:43:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=YSXaQkzlR3MBOtu9DmiZj/ERDV6zk/ATmMCoAnC8+UQ=;
-	b=adYWR04H9m47NvbRqWyeuNId5XfFlEUd44usJRFb0dF4fw/KVVo1se17R0uYC3ibSG
-	vu6kHQyxGh8WP+uuhvUkB7164JrNUdaLNCYXYa1A/wONa/Zs0XbNt5VhNuCEKhzFg4Rg
-	REgM+clEUpJrvVPGQ2Zg394u/OaMw58/8V734=
-Received: by 10.180.24.202 with SMTP id w10mr33250767wif.9.1329284620253; Tue,
-	14 Feb 2012 21:43:40 -0800 (PST)
-MIME-Version: 1.0
-Sender: anton.komarov@gmail.com
-Received: by 10.216.18.205 with HTTP; Tue, 14 Feb 2012 21:43:20 -0800 (PST)
-In-Reply-To: <20120214223703.GA3914@jama.jama.net>
-References: <CAHKdsmR9A4UMA4Q2cwvnvg6WxnQjO13mydJ-u2D=qxPxFYACQw@mail.gmail.com>
-	<20120214205955.GA6732@jama.jama.net>
-	<CAHKdsmTjaSAqt7a0+K7J5xkV-toHrJ4yi2YMCF3yQjs3XRw32g@mail.gmail.com>
-	<20120214223703.GA3914@jama.jama.net>
-From: Anton Komarov <akomarov@nvisiongroup.ru>
-Date: Wed, 15 Feb 2012 09:43:20 +0400
-X-Google-Sender-Auth: k1Ss0h3j4GXBJnwYwdxLN2oKZbA
-Message-ID: <CAHKdsmRDPBgaqVjEVkP4vmFOV=3JpGdxELMXD0ebqDYQeYX_Aw@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RxagT-0001lP-Cy for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Feb 2012 09:57:53 +0100
+Received: from f053045066.adsl.alicedsl.de ([78.53.45.66]
+	helo=[192.168.178.43])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1RxaYe-0006aS-O1 for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Feb 2012 08:49:49 +0000
+Message-ID: <1329295762.4465.2.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Recipe for libmp3splt failed to make packages
+Date: Wed, 15 Feb 2012 09:49:22 +0100
+In-Reply-To: <CAO-TFnHKzoDatgkFEtmv6=wtioTkUsAto0k6FE63Qa9V7rCpGQ@mail.gmail.com>
+References: <CAO-TFnHKzoDatgkFEtmv6=wtioTkUsAto0k6FE63Qa9V7rCpGQ@mail.gmail.com>
+X-Mailer: Evolution 3.2.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH] vlan: Port vlan 1.9 recipe from OE Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,310 +31,257 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 05:51:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Feb 2012 08:57:53 -0000
+X-Groupsio-MsgNum: 37127
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-wBqqIMXCHliOfotKZ47z"
+
+--=-wBqqIMXCHliOfotKZ47z
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Martin great thanks again, ok all warnings about packages has gone.
-
-Also i have removed pkgconfig and in do_compile has only 2 lines about
-unsafe cross-compilation
-
-/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-li=
-nux/usr/libexec/armv7a-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueab=
-i/4.5.4/ld:
-warning: library search path "/lib" is unsafe for cross-compilation
-/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-li=
-nux/usr/libexec/armv7a-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueab=
-i/4.5.4/ld:
-warning: library search path "/lib" is unsafe for cross-compilation
-
-Actually i have not much experience with autotools so cannot
-understand from what configuration does it take /lb search path? If
-you have smth to say i would definetly appreciate it. Thanks again!
-
-On Wed, Feb 15, 2012 at 2:37 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Wed, Feb 15, 2012 at 01:54:55AM +0400, Anton Komarov wrote:
->> Martin, thanks for fast responce.
->>
->> So i got the idea about namings and packages.
->>
->> Well i have tweaked recipe now it looks like
->>
->> DESCRIPTION =3D "Mp3splt-project is a utility to split mp3 and ogg files
->> selecting a begin and an end time position, without decoding."
->> HOMEPAGE =3D "http://mp3splt.sourceforge.net/mp3splt_page/about.php"
->> BUGTRACKER =3D "http://sourceforge.net/tracker/?atid=3D476061&group_id=
-=3D55130&func=3Dbrowse"
->> SECTION =3D "libs"
->> LICENSE =3D "GPLv2"
->>
->> DEPENDS=3D"libmad"
->>
->> LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D678a5e287e539ce6c24384c512373=
-a53"
->>
->> PR =3D "r43"
->>
->> SRC_URI =3D "${SOURCEFORGE_MIRROR}/mp3splt/libmp3splt-${PV}.tar.gz"
->>
->> SRC_URI[md5sum] =3D "1c982db15bba4efb42a5a227ce87a575"
->> SRC_URI[sha256sum] =3D
->> "7b3d485690cd0f076395917bf566314e05babbd7c02a7a99bbc40dcf1ea3ca96"
->>
->> inherit autotools pkgconfig gettext
->>
->> EXTRA_OECONF =3D "--libdir=3D${STAGING_LIBDIR} \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --includedir=3D${STAGING_INCDIR} \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --oldincludedir=3D${STAGING_INCDIR} \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --datadir=3D${STAGING_DATADIR}"
->
-> Why did you add those 4 lines? this is all wrong..
->
->> PACKAGES =3D+ "libsplt-mp3 libsplt-ogg libsplt-mp3-dev libsplt-ogg-dev
->> libsplt-mp3-staticdev libsplt-ogg-staticdev"
->> FILES_${PN}=3D"${libdir}/libmp3splt.so.*"
->> FILES_${PN}-dev =3D+ "${includedir}/libmp3splt/mp3splt.h
->> ${libdir}/libmp3splt.so ${libdir}/libmp3splt.la"
->> FILES_${PN}-staticdev =3D+ "${libdir}/libmp3splt.a"
->> FILES_libsplt-mp3=3D"${libdir}/libmp3splt/libsplt_mp3.so.*"
->> FILES_libsplt-ogg=3D"${libdir}/libmp3splt/libsplt_ogg.so.*"
->> FILES_libsplt-mp3-dev=3D"${libdir}/libmp3splt/libsplt_mp3.so
->> ${libdir}/libmp3splt/libsplt_mp3.la"
->> FILES_libsplt-ogg-dev=3D"${libdir}/libmp3splt/libsplt_ogg.so
->> ${libdir}/libmp3splt/libsplt_ogg.la"
->> FILES_libsplt-mp3-staticdev=3D"${libdir}/libmp3splt/libsplt_mp3.a"
->> FILES_libsplt-ogg-staticdev=3D"${libdir}/libmp3splt/libsplt_ogg.a"
->>
->> but i got tons of warnings and still have warning about host libs and in=
-cludes
->>
->> WARNING: For recipe libmp3splt, the following files/directories were
->> installed but not shipped in any package:
->> WARNING: =A0 /stuff
->> WARNING: =A0 /stuff/work
->> WARNING: =A0 /stuff/work/setup-scripts
->> WARNING: =A0 /stuff/work/setup-scripts/build
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/share
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/share/aclocal
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/share/aclocal/mp3splt.m4
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt.a
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt.so.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt.so.0.0.5
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt.la
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/.debug
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/.debug/libmp3splt.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/.debug/libmp3splt.so.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/.debug/libmp3splt.so.0.0.5
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so.0.0.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so.0.0.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.a
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.a
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.la
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.la
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so.0.0.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so.0.0.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so.0
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so
->> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
-sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so.0
->> WARNING: libmp3splt: The compile log indicates that host include
->> and/or library paths were used. =A0Please check the log
->> '/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-=
-angstrom-linux-gnueabi/libmp3splt-0.5.6-r43/temp/log.do_compile'
->> for more information.
->>
->> do_compile log looks like - http://pastebin.com/jWntsdj5
->
-> If you grep for "unsafe" you'll find parts like:
-> arm-angstrom-linux-gnueabi-libtool: compile: =A0ccache
-> arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -fno-tree-vectorize
-> -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a8
-> --sysroot=3D/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sy=
-sroots/beagleboard
-> -DHAVE_CONFIG_H -I. -I.. -I/usr/include -I/usr/include -I/usr/include
-> -I/usr/include -Wall -O2 -pipe -g -feliminate-unused-debug-types
-> -I../include/libmp3splt -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64 -c
-> ogg.c =A0-fPIC -DPIC -o .libs/ogg.o
-> cc1: warning: include location "/usr/include" is unsafe for
-> cross-compilation
->
-> -I/usr/include is bad, -I/usr/include 4 times is super bad (even with
-> the same results) check autotools from where it was added, pkgconfig
-> usually works but ie calling some -config scripts could be more tricky
-> (especially if it's not build yet in your sysroot).
->
-> Regards,
->
->> On Wed, Feb 15, 2012 at 12:59 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->> > On Wed, Feb 15, 2012 at 12:44:47AM +0400, Anton Komarov wrote:
->> >> I tried to build libmp3splt library with this recipe, but gets
->> >> following error. I just cannot understand - what am i doing wron?
->> >>
->> >>
->> >> recipe:
->> >>
->> >> DESCRIPTION =3D "Mp3splt-project is a utility to split mp3 and ogg fi=
-les
->> >> selecting a begin and an end time position, without decoding."
->> >> HOMEPAGE =3D "http://mp3splt.sourceforge.net/mp3splt_page/about.php"
->> >> BUGTRACKER =3D "http://sourceforge.net/tracker/?atid=3D476061&group_i=
-d=3D55130&func=3Dbrowse"
->> >> SECTION =3D "libs"
->> >> LICENSE =3D "GPLv2"
->> >>
->> >> DEPENDS=3D"libmad"
->> >>
->> >> LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D678a5e287e539ce6c24384c512=
-373a53"
->> >>
->> >> PR =3D "r26"
->> >>
->> >> S =3D "${WORKDIR}/libmp3splt-${PV}"
->> >>
->> >> SRC_URI =3D "${SOURCEFORGE_MIRROR}/mp3splt/libmp3splt-${PV}.tar.gz"
->> >>
->> >> SRC_URI[md5sum] =3D "1c982db15bba4efb42a5a227ce87a575"
->> >> SRC_URI[sha256sum] =3D
->> >> "7b3d485690cd0f076395917bf566314e05babbd7c02a7a99bbc40dcf1ea3ca96"
->> >>
->> >> inherit autotools pkgconfig gettext
->> >>
->> >> PACKAGES =3D+ "libsplt_mp3 libsplt_ogg"
->> >> FILES_${PN}-dev =3D "${libdir}/libmp3splt.so ${libdir}/libmp3splt.la
->> >> ${libdir}/libmp3splt.a ${libdir}/libmp3splt/*.so*"
->> >> FILES_libsplt_mp3-staticdev=3D"${libdir}/libmp3splt/libsplt_mp3.a"
->> >> FILES_libsplt_ogg-staticdev=3D"${libdir}/libmp3splt/libsplt_ogg.a"
->> >
->> > there is no libsplt_mp3-staticdev/libsplt_ogg-staticdev in PACKAGES, s=
-o
->> > this is ignored.
->> >
->> > and there is no FILES_libsplt_mp3/FILES_libsplt_ogg
->> >
->> > and don't use _ in subpackage names (and use ${PN} as prefix where
->> > possible, better ${PN}-mp3).
->> >
->> >>
->> >> errors:
->> >>
->> >> WARNING: For recipe libmp3splt, the following files/directories were
->> >> installed but not shipped in any package:
->> >> WARNING: =A0 /usr/share
->> >> WARNING: =A0 /usr/include
->> >> WARNING: =A0 /usr/share/aclocal
->> >> WARNING: =A0 /usr/share/aclocal/mp3splt.m4
->> >> WARNING: =A0 /usr/include/libmp3splt
->> >> WARNING: =A0 /usr/include/libmp3splt/mp3splt.h
->> >
->> > This is because you're overwritting FILES_${PN}-dev not appending to i=
-t
->> >
->> >> WARNING: libmp3splt: The compile log indicates that host include
->> >> and/or library paths were used. =A0Please check the log
->> >> '/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv=
-7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/temp/log.do_compile'
->> >
->> > And you need to read this ^ log to find where it was using host includ=
-e
->> > and/or library paths.
->> >
->> > Sometimes it's just mising library in DEPENDS, sometimes it's wrong
->> > autotools usage and host's library is always found and you have to fix
->> > it to look in sysroot instead.
->> >
->> >> for more information.
->> >> WARNING: QA Issue: non -staticdev package contains static .a library:
->> >> libmp3splt path
->> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
-lit/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.a'
->> >> WARNING: QA Issue: non -staticdev package contains static .a library:
->> >> libmp3splt path
->> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
-lit/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.a'
->> >> ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
->> >> .so: libmp3splt path
->> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
-lit/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.so'
->> >> ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
->> >> .so: libmp3splt path
->> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
-lit/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.so'
->> >> WARNING: QA Issue: non -staticdev package contains static .a library:
->> >> libmp3splt-dev path
->> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
-lit/libmp3splt-dev/usr/lib/libmp3splt.a'
->> >
->> > This is because of those wrong FILES_ entries
->> > --
->> > Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
->> >
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> >
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Dear Kelvin,
 
 
+Am Mittwoch, den 15.02.2012, 00:14 +0000 schrieb Kelvin Lawson:
+
+please add the revision from the OE-Classic repository you took this
+from.
+
+> Signed-off-by: Kelvin Lawson <kelvinl@users.sf.net>
+> ---
+>  meta-oe/recipes-connectivity/vlan/files/ip         |   21 +++++++
+>  .../recipes-connectivity/vlan/files/vlan-post-down |   28 +++++++++
+>  .../recipes-connectivity/vlan/files/vlan-pre-up    |   61 ++++++++++++++=
+++++++
+>  meta-oe/recipes-connectivity/vlan/vlan_1.9.bb      |   39 +++++++++++++
+>  4 files changed, 149 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/vlan/files/ip
+>  create mode 100644 meta-oe/recipes-connectivity/vlan/files/vlan-post-dow=
+n
+>  create mode 100644 meta-oe/recipes-connectivity/vlan/files/vlan-pre-up
+>  create mode 100644 meta-oe/recipes-connectivity/vlan/vlan_1.9.bb
+>=20
+> diff --git a/meta-oe/recipes-connectivity/vlan/files/ip
+> b/meta-oe/recipes-connectivity/vlan/files/ip
+> new file mode 100644
+> index 0000000..d7de05c
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/vlan/files/ip
+> @@ -0,0 +1,21 @@
+> +#!/bin/sh
+> +# This should probably go into ifupdown
+> +# But usually only those with lots of interfaces (vlans) need these
+> +if [ -d "/proc/sys/net/ipv4/conf/$IFACE" ]
+> +then
+> +	if [ -n "$IF_IP_PROXY_ARP" ]; then
+> +		if [ "$IF_IP_PROXY_ARP" -eq "1" ]; then
+> +			echo 1 > "/proc/sys/net/ipv4/conf/$IFACE/proxy_arp"
+> +		else
+> +			echo 0 > "/proc/sys/net/ipv4/conf/$IFACE/proxy_arp"
+> +		fi
+> +	fi
+> +	if [ -n "$IF_IP_RP_FILTER" ]; then
+> +		if [ "$IF_IP_RP_FILTER" -eq "0" ]; then
+> +			echo 0 > "/proc/sys/net/ipv4/conf/$IFACE/rp_filter"
+> +		else
+> +			echo 1 > "/proc/sys/net/ipv4/conf/$IFACE/rp_filter"
+> +		fi
+> +	fi
+> +fi
+> +
+> diff --git a/meta-oe/recipes-connectivity/vlan/files/vlan-post-down
+> b/meta-oe/recipes-connectivity/vlan/files/vlan-post-down
+> new file mode 100644
+> index 0000000..89b16fb
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/vlan/files/vlan-post-down
+> @@ -0,0 +1,28 @@
+> +#!/bin/sh
+> +
+> +# If IFACE is an automagic vlan interface (without the vlan-raw-device
+> +# parameter) then let's try to discover the magic here..  Another way wo=
+uld be
+> +# to just probe for the right device name in /proc/net/vlan
+> +
+> +case "$IFACE" in
+> +  # Ignore any alias (#272891)
+> +  *:*)
+> +    exit 0
+> +  ;;
+> +  eth*.0*|bond*.0*|wlan*.0*)
+> +    IF_VLAN_RAW_DEVICE=3D`echo $IFACE|sed
+> "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9]=
+[0-9]*\)\..*/\1/"`
+
+Your mailer corrupted the patch by adding automatic line breaks.
+
+> +  ;;
+> +  eth*.*|bond*.*|wlan*.*)
+> +    IF_VLAN_RAW_DEVICE=3D`echo $IFACE|sed
+> "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9]=
+[0-9]*\)\..*/\1/"`
+> +  ;;
+> +  # Test for vlan raw device (#196890, #292648)
+> +  *)
+> +    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
+> +  ;;
+> +esac
+> +
+> +if [ ! -x /sbin/vconfig ]; then
+> +    exit 0
+> +fi
+> +
+> +vconfig rem $IFACE
+> diff --git a/meta-oe/recipes-connectivity/vlan/files/vlan-pre-up
+> b/meta-oe/recipes-connectivity/vlan/files/vlan-pre-up
+> new file mode 100644
+> index 0000000..b977be8
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/vlan/files/vlan-pre-up
+> @@ -0,0 +1,61 @@
+> +#!/bin/sh
+> +
+> +# Most of this stuff is to enable vlans
+> +
+> +case "$IFACE" in
+> +  # Ignore any alias (#272891) which uses <interface>:<alabel>
+> +  *:*)
+> +    exit 0
+> +  ;;
+> +  vlan0*)
+> +    vconfig set_name_type VLAN_PLUS_VID
+> +    VLANID=3D`echo $IFACE|sed "s/vlan0*//"`
+> +  ;;
+> +  vlan*)
+> +    vconfig set_name_type VLAN_PLUS_VID_NO_PAD
+> +    VLANID=3D`echo $IFACE|sed "s/vlan0*//"`
+> +  ;;
+> +  eth*.0*|bond*.0*|wlan*.0*)
+> +    vconfig set_name_type DEV_PLUS_VID
+> +    VLANID=3D`echo $IFACE|sed
+> "s/eth[0-9][0-9]*\.0*//g;s/bond[0-9][0-9]*\.0*//;s/wlan[0-9][0-9]*\.0*//"=
+`
+> +    IF_VLAN_RAW_DEVICE=3D`echo $IFACE|sed
+> "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9]=
+[0-9]*\)\..*/\1/"`
+> +  ;;
+> +  eth*.*|bond*.*|wlan*.*)
+> +    vconfig set_name_type DEV_PLUS_VID_NO_PAD
+> +    VLANID=3D`echo $IFACE|sed
+> "s/eth[0-9][0-9]*\.0*//g;s/bond[0-9][0-9]*\.0*//g;s/wlan[0-9][0-9]*\.0*//=
+g"`
+> +    IF_VLAN_RAW_DEVICE=3D`echo $IFACE|sed
+> "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9]=
+[0-9]*\)\..*/\1/"`
+> +  ;;
+> +  *.0*)
+> +    # Silently ignore interfaces which we do not (know how to) support
+> +    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
+> +    vconfig set_name_type DEV_PLUS_VID
+> +    VLANID=3D`echo $IFACE|sed "s/[^.]*\.0*//g"`
+> +  ;;
+> +  *.*)
+> +    # Silently ignore interfaces which we do not (know how to) support
+> +    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
+> +    vconfig set_name_type DEV_PLUS_VID_NO_PAD
+> +    VLANID=3D`echo $IFACE|sed "s/[^.]*\.0*//g"`
+> +  ;;
+> +
+> +  *)
+> +    exit 0
+> +  ;;
+> +esac
+> +
+> +if [ -n "$IF_VLAN_RAW_DEVICE" ]; then
+> +    if [ ! -x /sbin/vconfig ]; then
+> +        exit 0
+> +    fi
+> +    if ! ip link show dev "$IF_VLAN_RAW_DEVICE" > /dev/null; then
+> +        echo "$IF_VLAN_RAW_DEVICE does not exist, unable to create $IFAC=
+E"
+> +        exit 1
+> +    fi
+> +    ip link set up dev $IF_VLAN_RAW_DEVICE
+> +    vconfig add $IF_VLAN_RAW_DEVICE $VLANID
+> +fi
+> +
+> +# This is not vlan specific, and should actually go somewhere else.
+> +if [ -n "$IF_HW_MAC_ADDRESS" ]; then
+> +    ip link set $IFACE address $IF_HW_MAC_ADDRESS
+> +fi
+> diff --git a/meta-oe/recipes-connectivity/vlan/vlan_1.9.bb
+> b/meta-oe/recipes-connectivity/vlan/vlan_1.9.bb
+> new file mode 100644
+> index 0000000..619e039
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/vlan/vlan_1.9.bb
+> @@ -0,0 +1,39 @@
+> +DESCRIPTION =3D "802.1q vlan support program"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D
+> "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=3D801f80980d171dd6425610833a22d=
+be6"
+> +RRECOMMENDS_${PN} =3D "kernel-module-8021q"
+> +PR =3D "r1"
+
+Please start with `r0`.
+
+> +
+> +S =3D "${WORKDIR}/vlan/"
+> +
+> +SRC_URI =3D " \
+> +	http://www.candelatech.com/~greear/vlan/vlan.${PV}.tar.gz \
+> +	file://ip \
+> +	file://vlan-pre-up \
+> +	file://vlan-post-down \
+> +	"
+> +
+> +inherit base
+> +
+> +CCFLAGS =3D "-g -D_GNU_SOURCE -Wall -I${STAGING_INCDIR}"
+> +LDLIBS =3D ""
+> +
+> +do_compile() {
+> +	${CC} ${CCFLAGS} -c vconfig.c
+> +	${CC} ${CCFLAGS} ${LDFLAGS} -o vconfig vconfig.o ${LDLIBS}
+> +}
+> +
+> +do_install() {
+> +	install -d "${D}${sbindir}"
+> +	install -m 755 "${S}/vconfig" "${D}${sbindir}/vconfig"
+> +	install -d ${D}/${sysconfdir}/network/if-pre-up.d
+> +	install -d ${D}/${sysconfdir}/network/if-post-down.d
+> +	install -d ${D}/${sysconfdir}/network/if-up.d
+> +	install -m 0755 ${WORKDIR}/ip ${D}/${sysconfdir}/network/if-up.d/
+> +	install -m 0755 ${WORKDIR}/vlan-pre-up
+> ${D}/${sysconfdir}/network/if-pre-up.d/vlan
+> +	install -m 0755 ${WORKDIR}/vlan-post-down
+> ${D}/${sysconfdir}/network/if-post-down.d/vlan
+> +}
+> +
+> +
+> +SRC_URI[md5sum] =3D "5f0c6060b33956fb16e11a15467dd394"
+> +SRC_URI[sha256sum] =3D
+> "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a77392d9aeb4868842b4cca"
+
+
+Thanks,
+
+Paul
+
+--=-wBqqIMXCHliOfotKZ47z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEABECAAYFAk87cZMACgkQPX1aK2wOHVg4/ACfQQXCoWTPLaEzg8LPnRekxQq6
+/GQAn2NZk34wb0m8ZMJ9mk9sPWsf1mCj
+=O2n0
+-----END PGP SIGNATURE-----
+
+--=-wBqqIMXCHliOfotKZ47z--
