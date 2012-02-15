@@ -1,29 +1,35 @@
-Received: from mail-tul01m020-f175.google.com ([209.85.214.175])
+Received: from mail-wi0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kelvin.a.lawson@gmail.com>) id 1RxSxg-0007sU-5n
+	(envelope-from <anton.komarov@gmail.com>) id 1RxXmR-0004VP-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 01:43:08 +0100
-Received: by obhx4 with SMTP id x4so780826obh.6
+	Wed, 15 Feb 2012 06:51:51 +0100
+Received: by wibhq7 with SMTP id hq7so296476wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2012 16:34:56 -0800 (PST)
+	Tue, 14 Feb 2012 21:43:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=cS4GY/4JD4K/Z+gFV5xHfM0xK18/38to61l19ADHzmY=;
-	b=ToBHKO1uQjj+9H2svc7c2eq95crZ4PkR4BIz0U6WWQFOkQSCfwSnh6puLFtd37mWjc
-	+V+vox1iE4UHne58+YNCKYg6kY+XMqrWDXsM2GQ5Bgj0egesAvJIo99qGHDjliLX9aEb
-	TrQgFiwn1NHmFYzTOoibRd8o3cfV0nE6tPSbg=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=YSXaQkzlR3MBOtu9DmiZj/ERDV6zk/ATmMCoAnC8+UQ=;
+	b=adYWR04H9m47NvbRqWyeuNId5XfFlEUd44usJRFb0dF4fw/KVVo1se17R0uYC3ibSG
+	vu6kHQyxGh8WP+uuhvUkB7164JrNUdaLNCYXYa1A/wONa/Zs0XbNt5VhNuCEKhzFg4Rg
+	REgM+clEUpJrvVPGQ2Zg394u/OaMw58/8V734=
+Received: by 10.180.24.202 with SMTP id w10mr33250767wif.9.1329284620253; Tue,
+	14 Feb 2012 21:43:40 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.60.4.106 with SMTP id j10mr1669073oej.47.1329266096491; Tue,
-	14 Feb 2012 16:34:56 -0800 (PST)
-Sender: kelvin.a.lawson@gmail.com
-Received: by 10.182.134.36 with HTTP; Tue, 14 Feb 2012 16:34:56 -0800 (PST)
-Date: Wed, 15 Feb 2012 00:34:56 +0000
-X-Google-Sender-Auth: RIijN4JEtQ0tSD3sId5vTNxh658
-Message-ID: <CAO-TFnG+O4F8-Kiu8DK1SHR3Caz4xF-AJdHZouPrgv6fqw31NA@mail.gmail.com>
-From: Kelvin Lawson <kelvinl@users.sf.net>
+Sender: anton.komarov@gmail.com
+Received: by 10.216.18.205 with HTTP; Tue, 14 Feb 2012 21:43:20 -0800 (PST)
+In-Reply-To: <20120214223703.GA3914@jama.jama.net>
+References: <CAHKdsmR9A4UMA4Q2cwvnvg6WxnQjO13mydJ-u2D=qxPxFYACQw@mail.gmail.com>
+	<20120214205955.GA6732@jama.jama.net>
+	<CAHKdsmTjaSAqt7a0+K7J5xkV-toHrJ4yi2YMCF3yQjs3XRw32g@mail.gmail.com>
+	<20120214223703.GA3914@jama.jama.net>
+From: Anton Komarov <akomarov@nvisiongroup.ru>
+Date: Wed, 15 Feb 2012 09:43:20 +0400
+X-Google-Sender-Auth: k1Ss0h3j4GXBJnwYwdxLN2oKZbA
+Message-ID: <CAHKdsmRDPBgaqVjEVkP4vmFOV=3JpGdxELMXD0ebqDYQeYX_Aw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] ntpclient: Port 2010_365 recipe from OE Classicntpclient: Port 2010_365 recipe from OE Classic.
+Subject: Re: Recipe for libmp3splt failed to make packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,152 +43,310 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 00:43:08 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 05:51:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
- * Also includes a Makefile fix to reorder the linker parameters.
-Signed-off-by: Kelvin Lawson <kelvinl@users.sf.net>
----
- meta-oe/recipes-connectivity/ntpclient/files/init  |   42 +++++++++++++++++
- .../ntpclient/files/ntpclient-link.patch           |   12 +++++
- .../ntpclient/ntpclient_2010_365.bb                |   47 ++++++++++++++++++++
- 3 files changed, 101 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/ntpclient/files/init
- create mode 100644
-meta-oe/recipes-connectivity/ntpclient/files/ntpclient-link.patch
- create mode 100644 meta-oe/recipes-connectivity/ntpclient/ntpclient_2010_365.bb
+Martin great thanks again, ok all warnings about packages has gone.
 
-diff --git a/meta-oe/recipes-connectivity/ntpclient/files/init
-b/meta-oe/recipes-connectivity/ntpclient/files/init
-new file mode 100644
-index 0000000..7b85902
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/ntpclient/files/init
-@@ -0,0 +1,42 @@
-+#! /bin/sh
-+#
-+# This is an init script for openembedded
-+# Copy it to /etc/init.d/ntpclient and type
-+# > update-rc.d ntpclient defaults 60
-+#
-+ntpclient=/sbin/ntpclient
-+test -x "$ntpclient" || exit 0
-+# Seconds Between Time Checks
-+ntpinterval=600
-+# Upstream NTP Server Name
-+ntpserver=pool.ntp.org
-+
-+case "$1" in
-+  start)
-+    echo -n "Starting NTP Client"
-+    start-stop-daemon --start --quiet --background --make-pidfile
---pidfile /var/run/ntpclient.pid --exec $ntpclient -- -l -i
-$ntpinterval -h $ntpserver
-+    echo "."
-+    ;;
-+  stop)
-+    echo -n "Stopping NTP Client"
-+    start-stop-daemon --stop --quiet --pidfile /var/run/ntpclient.pid
-+    echo "."
-+    ;;
-+  reload|force-reload)
-+    start-stop-daemon --stop --quiet --signal 1 --exec $ntpclient
-+    ;;
-+  restart)
-+    echo -n "Stopping NTP Client"
-+    start-stop-daemon --stop --quiet --pidfile /var/run/ntpclient.pid
-+    echo "."
-+    sleep 1
-+    echo -n "Starting NTP Client"
-+    start-stop-daemon --start --quiet --background --make-pidfile
---pidfile /var/run/ntpclient.pid --exec $ntpclient -- -l -i
-$ntpinterval -h $ntpserver
-+    echo "."
-+    ;;
-+  *)
-+    echo "Usage: /etc/init.d/ntpclient
-{start|stop|reload|restart|force-reload}"
-+    exit 1
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-connectivity/ntpclient/files/ntpclient-link.patch
-b/meta-oe/recipes-connectivity/ntpclient/files/ntpclient-link.patch
-new file mode 100644
-index 0000000..b95fc24
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/ntpclient/files/ntpclient-link.patch
-@@ -0,0 +1,12 @@
-+diff -Naur ntpclient-2010/Makefile ntpclient-2010-patched/Makefile
-+--- ntpclient-2010/Makefile	2010-12-28 06:26:36.000000000 +0000
-++++ ntpclient-2010-patched/Makefile	2012-01-31 00:55:36.000000000 +0000
-+@@ -19,7 +19,7 @@
-+ CFLAGS += -DENABLE_REPLAY
-+ # CFLAGS += -DUSE_OBSOLETE_GETTIMEOFDAY
-+
-+-LDFLAGS += -lrt
-++LDLIBS += -lrt
-+
-+ all: ntpclient
-+
-diff --git a/meta-oe/recipes-connectivity/ntpclient/ntpclient_2010_365.bb
-b/meta-oe/recipes-connectivity/ntpclient/ntpclient_2010_365.bb
-new file mode 100644
-index 0000000..0ee7230
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/ntpclient/ntpclient_2010_365.bb
-@@ -0,0 +1,47 @@
-+DESCRIPTION = "NTP (RFC-1305) client for unix-alike computers"
-+HOMEPAGE = "http://doolittle.icarus.com/ntpclient"
-+AUTHOR = "Larry Doolittle <larry@doolittle.boa.org>"
-+RDEPENDS_${PN} = "busybox"
-+SECTION = "admin"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM =
-"file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-+PR = "r0"
-+# The ntpclient package uses version numbers that include an underscore :(
-+PV = "2010_365"
-+# ntpclient unpacks into a directory that doesn't include version info :(
-+S = "${WORKDIR}/${PN}-2010"
-+
-+SRC_URI = "http://doolittle.icarus.com/ntpclient/ntpclient_${PV}.tar.gz \
-+           file://ntpclient-link.patch \
-+           file://init \
-+          "
-+
-+INITSCRIPT_NAME = "ntpclient"
-+INITSCRIPT_PARAMS = "defaults 65"
-+inherit update-rc.d
-+
-+LDFLAGS += " -lrt "
-+
-+do_compile() {
-+    oe_runmake ntpclient
-+    oe_runmake adjtimex
-+}
-+
-+do_install () {
-+    # Install the binary and tools
-+    install -D -m 0755 ${S}/ntpclient ${D}${base_sbindir}/ntpclient
-+    install -D -m 0755 ${S}/adjtimex ${D}${base_sbindir}/adjtimex.${PN}
-+    install -D -m 0755 ${S}/rate.awk ${D}${sbindir}/ntpclient-drift-rate.awk
-+    install -D -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/ntpclient
-+}
-+
-+pkg_postinst_${PN} () {
-+	update-alternatives --install ${base_sbindir}/adjtimex adjtimex
-adjtimex.${PN} 100
-+}
-+
-+pkg_prerm_${PN} () {
-+	update-alternatives --remove adjtimex adjtimex.${PN}
-+}
-+
-+SRC_URI[md5sum] = "a64689398f2df8933ee0d8da246e9eaa"
-+SRC_URI[sha256sum] =
-"9ad9b028385082fb804167f464e2db0a0b3d33780acd399327e64898b8fcfddd"
--- 
-1.7.1
+Also i have removed pkgconfig and in do_compile has only 2 lines about
+unsafe cross-compilation
+
+/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-li=
+nux/usr/libexec/armv7a-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueab=
+i/4.5.4/ld:
+warning: library search path "/lib" is unsafe for cross-compilation
+/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-li=
+nux/usr/libexec/armv7a-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueab=
+i/4.5.4/ld:
+warning: library search path "/lib" is unsafe for cross-compilation
+
+Actually i have not much experience with autotools so cannot
+understand from what configuration does it take /lb search path? If
+you have smth to say i would definetly appreciate it. Thanks again!
+
+On Wed, Feb 15, 2012 at 2:37 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, Feb 15, 2012 at 01:54:55AM +0400, Anton Komarov wrote:
+>> Martin, thanks for fast responce.
+>>
+>> So i got the idea about namings and packages.
+>>
+>> Well i have tweaked recipe now it looks like
+>>
+>> DESCRIPTION =3D "Mp3splt-project is a utility to split mp3 and ogg files
+>> selecting a begin and an end time position, without decoding."
+>> HOMEPAGE =3D "http://mp3splt.sourceforge.net/mp3splt_page/about.php"
+>> BUGTRACKER =3D "http://sourceforge.net/tracker/?atid=3D476061&group_id=
+=3D55130&func=3Dbrowse"
+>> SECTION =3D "libs"
+>> LICENSE =3D "GPLv2"
+>>
+>> DEPENDS=3D"libmad"
+>>
+>> LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D678a5e287e539ce6c24384c512373=
+a53"
+>>
+>> PR =3D "r43"
+>>
+>> SRC_URI =3D "${SOURCEFORGE_MIRROR}/mp3splt/libmp3splt-${PV}.tar.gz"
+>>
+>> SRC_URI[md5sum] =3D "1c982db15bba4efb42a5a227ce87a575"
+>> SRC_URI[sha256sum] =3D
+>> "7b3d485690cd0f076395917bf566314e05babbd7c02a7a99bbc40dcf1ea3ca96"
+>>
+>> inherit autotools pkgconfig gettext
+>>
+>> EXTRA_OECONF =3D "--libdir=3D${STAGING_LIBDIR} \
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --includedir=3D${STAGING_INCDIR} \
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --oldincludedir=3D${STAGING_INCDIR} \
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --datadir=3D${STAGING_DATADIR}"
+>
+> Why did you add those 4 lines? this is all wrong..
+>
+>> PACKAGES =3D+ "libsplt-mp3 libsplt-ogg libsplt-mp3-dev libsplt-ogg-dev
+>> libsplt-mp3-staticdev libsplt-ogg-staticdev"
+>> FILES_${PN}=3D"${libdir}/libmp3splt.so.*"
+>> FILES_${PN}-dev =3D+ "${includedir}/libmp3splt/mp3splt.h
+>> ${libdir}/libmp3splt.so ${libdir}/libmp3splt.la"
+>> FILES_${PN}-staticdev =3D+ "${libdir}/libmp3splt.a"
+>> FILES_libsplt-mp3=3D"${libdir}/libmp3splt/libsplt_mp3.so.*"
+>> FILES_libsplt-ogg=3D"${libdir}/libmp3splt/libsplt_ogg.so.*"
+>> FILES_libsplt-mp3-dev=3D"${libdir}/libmp3splt/libsplt_mp3.so
+>> ${libdir}/libmp3splt/libsplt_mp3.la"
+>> FILES_libsplt-ogg-dev=3D"${libdir}/libmp3splt/libsplt_ogg.so
+>> ${libdir}/libmp3splt/libsplt_ogg.la"
+>> FILES_libsplt-mp3-staticdev=3D"${libdir}/libmp3splt/libsplt_mp3.a"
+>> FILES_libsplt-ogg-staticdev=3D"${libdir}/libmp3splt/libsplt_ogg.a"
+>>
+>> but i got tons of warnings and still have warning about host libs and in=
+cludes
+>>
+>> WARNING: For recipe libmp3splt, the following files/directories were
+>> installed but not shipped in any package:
+>> WARNING: =A0 /stuff
+>> WARNING: =A0 /stuff/work
+>> WARNING: =A0 /stuff/work/setup-scripts
+>> WARNING: =A0 /stuff/work/setup-scripts/build
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/share
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/share/aclocal
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/share/aclocal/mp3splt.m4
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt.a
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt.so.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt.so.0.0.5
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt.la
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/.debug
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/.debug/libmp3splt.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/.debug/libmp3splt.so.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/.debug/libmp3splt.so.0.0.5
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so.0.0.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so.0.0.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.so.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.a
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.a
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_mp3.la
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/libsplt_ogg.la
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so.0.0.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so.0.0.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so.0
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_mp3.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so
+>> WARNING: =A0 /stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+sysroots/beagleboard/usr/lib/libmp3splt/.debug/libsplt_ogg.so.0
+>> WARNING: libmp3splt: The compile log indicates that host include
+>> and/or library paths were used. =A0Please check the log
+>> '/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-=
+angstrom-linux-gnueabi/libmp3splt-0.5.6-r43/temp/log.do_compile'
+>> for more information.
+>>
+>> do_compile log looks like - http://pastebin.com/jWntsdj5
+>
+> If you grep for "unsafe" you'll find parts like:
+> arm-angstrom-linux-gnueabi-libtool: compile: =A0ccache
+> arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -fno-tree-vectorize
+> -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a8
+> --sysroot=3D/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sy=
+sroots/beagleboard
+> -DHAVE_CONFIG_H -I. -I.. -I/usr/include -I/usr/include -I/usr/include
+> -I/usr/include -Wall -O2 -pipe -g -feliminate-unused-debug-types
+> -I../include/libmp3splt -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64 -c
+> ogg.c =A0-fPIC -DPIC -o .libs/ogg.o
+> cc1: warning: include location "/usr/include" is unsafe for
+> cross-compilation
+>
+> -I/usr/include is bad, -I/usr/include 4 times is super bad (even with
+> the same results) check autotools from where it was added, pkgconfig
+> usually works but ie calling some -config scripts could be more tricky
+> (especially if it's not build yet in your sysroot).
+>
+> Regards,
+>
+>> On Wed, Feb 15, 2012 at 12:59 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>> > On Wed, Feb 15, 2012 at 12:44:47AM +0400, Anton Komarov wrote:
+>> >> I tried to build libmp3splt library with this recipe, but gets
+>> >> following error. I just cannot understand - what am i doing wron?
+>> >>
+>> >>
+>> >> recipe:
+>> >>
+>> >> DESCRIPTION =3D "Mp3splt-project is a utility to split mp3 and ogg fi=
+les
+>> >> selecting a begin and an end time position, without decoding."
+>> >> HOMEPAGE =3D "http://mp3splt.sourceforge.net/mp3splt_page/about.php"
+>> >> BUGTRACKER =3D "http://sourceforge.net/tracker/?atid=3D476061&group_i=
+d=3D55130&func=3Dbrowse"
+>> >> SECTION =3D "libs"
+>> >> LICENSE =3D "GPLv2"
+>> >>
+>> >> DEPENDS=3D"libmad"
+>> >>
+>> >> LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D678a5e287e539ce6c24384c512=
+373a53"
+>> >>
+>> >> PR =3D "r26"
+>> >>
+>> >> S =3D "${WORKDIR}/libmp3splt-${PV}"
+>> >>
+>> >> SRC_URI =3D "${SOURCEFORGE_MIRROR}/mp3splt/libmp3splt-${PV}.tar.gz"
+>> >>
+>> >> SRC_URI[md5sum] =3D "1c982db15bba4efb42a5a227ce87a575"
+>> >> SRC_URI[sha256sum] =3D
+>> >> "7b3d485690cd0f076395917bf566314e05babbd7c02a7a99bbc40dcf1ea3ca96"
+>> >>
+>> >> inherit autotools pkgconfig gettext
+>> >>
+>> >> PACKAGES =3D+ "libsplt_mp3 libsplt_ogg"
+>> >> FILES_${PN}-dev =3D "${libdir}/libmp3splt.so ${libdir}/libmp3splt.la
+>> >> ${libdir}/libmp3splt.a ${libdir}/libmp3splt/*.so*"
+>> >> FILES_libsplt_mp3-staticdev=3D"${libdir}/libmp3splt/libsplt_mp3.a"
+>> >> FILES_libsplt_ogg-staticdev=3D"${libdir}/libmp3splt/libsplt_ogg.a"
+>> >
+>> > there is no libsplt_mp3-staticdev/libsplt_ogg-staticdev in PACKAGES, s=
+o
+>> > this is ignored.
+>> >
+>> > and there is no FILES_libsplt_mp3/FILES_libsplt_ogg
+>> >
+>> > and don't use _ in subpackage names (and use ${PN} as prefix where
+>> > possible, better ${PN}-mp3).
+>> >
+>> >>
+>> >> errors:
+>> >>
+>> >> WARNING: For recipe libmp3splt, the following files/directories were
+>> >> installed but not shipped in any package:
+>> >> WARNING: =A0 /usr/share
+>> >> WARNING: =A0 /usr/include
+>> >> WARNING: =A0 /usr/share/aclocal
+>> >> WARNING: =A0 /usr/share/aclocal/mp3splt.m4
+>> >> WARNING: =A0 /usr/include/libmp3splt
+>> >> WARNING: =A0 /usr/include/libmp3splt/mp3splt.h
+>> >
+>> > This is because you're overwritting FILES_${PN}-dev not appending to i=
+t
+>> >
+>> >> WARNING: libmp3splt: The compile log indicates that host include
+>> >> and/or library paths were used. =A0Please check the log
+>> >> '/stuff/work/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv=
+7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/temp/log.do_compile'
+>> >
+>> > And you need to read this ^ log to find where it was using host includ=
+e
+>> > and/or library paths.
+>> >
+>> > Sometimes it's just mising library in DEPENDS, sometimes it's wrong
+>> > autotools usage and host's library is always found and you have to fix
+>> > it to look in sysroot instead.
+>> >
+>> >> for more information.
+>> >> WARNING: QA Issue: non -staticdev package contains static .a library:
+>> >> libmp3splt path
+>> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
+lit/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.a'
+>> >> WARNING: QA Issue: non -staticdev package contains static .a library:
+>> >> libmp3splt path
+>> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
+lit/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.a'
+>> >> ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
+>> >> .so: libmp3splt path
+>> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
+lit/libmp3splt/usr/lib/libmp3splt/libsplt_mp3.so'
+>> >> ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink
+>> >> .so: libmp3splt path
+>> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
+lit/libmp3splt/usr/lib/libmp3splt/libsplt_ogg.so'
+>> >> WARNING: QA Issue: non -staticdev package contains static .a library:
+>> >> libmp3splt-dev path
+>> >> '/work/armv7a-angstrom-linux-gnueabi/libmp3splt-0.5.6-r27/packages-sp=
+lit/libmp3splt-dev/usr/lib/libmp3splt.a'
+>> >
+>> > This is because of those wrong FILES_ entries
+>> > --
+>> > Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
