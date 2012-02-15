@@ -1,31 +1,44 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Rxkum-0003L8-I5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxl2h-0003uu-NT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 20:53:20 +0100
-Received: by qadz30 with SMTP id z30so3889838qad.6
+	Wed, 15 Feb 2012 21:01:31 +0100
+Received: by bkwq11 with SMTP id q11so1392227bkw.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 11:45:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=a8NWRahxvF4R6+7LESzKKvONv07BKXZiUlbgJBsK/Wk=;
-	b=mR+uXcK2xFrzDAg/q6/GAA1zFZ/Vi8d8w91Um8VZeEpjp8/XHkrm/bNN5OOFNo8diw
-	m7l1siAT4DGk4k08v2cHqeSACQsWJrDnDTmIobkR/XRxLpInUan/IL5MnMDlwLfUcocY
-	8c3LBZVwR0J4ObGuy15tNiq43igYTjetxZpLM=
+	Wed, 15 Feb 2012 11:53:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=7Za+vmeH+08mYOFC7HkmB2pxi3rlCr3tH9SdnYe4qGw=;
+	b=qGjsAYjig11MOU7QGc1TvrfzUk5rINGaSUwfRKe9wW7qbYLnlmIA9E7z1t/++WjUym
+	8Agu1kGVd/Efr/X+GfxPIhmjE7vGVwRmMMcIK536ZwsXeBxF0WCNYUIsO5lwFrQa/skx
+	/1PNxACUWmopHtjPOeJx1F98xnWBj79lKabGI=
 MIME-Version: 1.0
-Received: by 10.229.136.72 with SMTP id q8mr9640055qct.150.1329335107968; Wed,
-	15 Feb 2012 11:45:07 -0800 (PST)
-Sender: kergoth@gmail.com
-Received: by 10.229.224.145 with HTTP; Wed, 15 Feb 2012 11:45:07 -0800 (PST)
-In-Reply-To: <4F3BF21A.30505@freyther.de>
-References: <4F3BF21A.30505@freyther.de>
-Date: Wed, 15 Feb 2012 12:45:07 -0700
-X-Google-Sender-Auth: StwUo1Bsxez1XWr1ET_u5sY1fJk
-Message-ID: <CABcZANn19HyAg_dqrnNKf+1bMLhC+DxcsXQ=YqSvvntLq7RaAw@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+Received: by 10.112.100.34 with SMTP id ev2mr9573605lbb.13.1329335598885; Wed,
+	15 Feb 2012 11:53:18 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Wed, 15 Feb 2012 11:53:18 -0800 (PST)
+In-Reply-To: <CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
+References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
+	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
+	<CALbNGRTiMWuLSuXsKfQV4ntHfVY5ovuBYrD0w41790Qa_u79Jg@mail.gmail.com>
+	<CAP9ODKotC11Gh+bcOz9vgqNMacdwykydJ1G=e7rjr_HKVa6U4w@mail.gmail.com>
+	<CALbNGRQDy7E4ND7amsgiBuzo12o=umbW1kokYBgqyPoTaXbTCg@mail.gmail.com>
+	<CAP9ODKoXeBf_vctM7pcHTZd2-fMacN+kk8z9af18h9rkyDGVWQ@mail.gmail.com>
+	<CALbNGRQ1uf__SnyW5nz1mfOh45DgKyVmjQ3oFS-VBLOyiHVZig@mail.gmail.com>
+	<CAP9ODKq=i_jLUHcB+L1marL7Ymz261LZGC26Q49Bfvm+E4tm5g@mail.gmail.com>
+	<CALbNGRS-g-kXkEYdxkcwbAum2kqbg5a79=QCoV8eYm2TpwWh9w@mail.gmail.com>
+	<CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
+	<CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
+	<CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
+	<CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
+	<CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
+Date: Wed, 15 Feb 2012 20:53:18 +0100
+Message-ID: <CALbNGRQp1xFLUECjtg78gy1-8vYpUwB-G4xjCKn_80paA2Ymnw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: checkroot.sh and fsck the root partition
+Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 19:53:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 15 Feb 2012 20:01:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 2/15/12, Holger Freyther <holger+oe@freyther.de> wrote:
-> I know most of use ubifs/jffs2 but I have one device with a ext3/ext4
-> partition and would like to run fsck as part of the boot (with auto fix up).
-> Besides installing the e2fs fsck, fixing the fstab fsck will not be
-> executed.
+On Wed, Feb 15, 2012 at 1:36 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Wed, Feb 15, 2012 at 10:31, Andreas M=FCller
+> <schnitzeltony@googlemail.com>wrote:
 >
-> E.g. if I take a look at this script:
-> http://git.openembedded.org/openembedded-core/tree/meta/recipes-core/initscripts/initscripts-1.0/checkroot.sh
+>> Another corner case I would like to understand: What is the role of in
+>> busybox syslog.service linking to dev/null. Within busybox itself it
+>> seems not referenced.
+>>
 >
-> it is not clear how 'rootcheck' could ever be 'yes'.
+> To make it to use the .service file and not the init scripts compatibilit=
+y.
+>
+For test I did with a bunch of recipes
 
-My guess, and it is a guess (though potentially comparing against the
-original debian initscripts we started with, or looking through git
-history, may be informative) is that the original default value of
-rootcheck was yes, and hence the conditional in the loop setting
-rootcheck=no made sense, but it was changed at some point in the
-history due to the use of non-checkable filesystems.
+1. build from scratch with unmodified sources
+2. Applied sytemd-patches and the 'cleanup'-patches (removing obsolete
+systemd code in recipes)
+3. build recipes again
+4. compared the results with buildhistory
 
-If we change the default back, we'll break everyone using the stock
-fstab or one based on it, as the default sets pass=1 for the 'rootfs'
-mount. One option would be to source /etc/default/rcS after the
-definition of the defaults prior to the loop, thereby allowing a per
-machine rcS which changes the default value.
--- 
-Christopher Larson
+Results are as expected except one issue I don't understand:
+
+The sizes of the *-dbg packages are reduced. Some reduce to less than
+half. Has anybody a good explanation for this?
+
+Andreas
 
 
