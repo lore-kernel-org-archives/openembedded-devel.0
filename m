@@ -1,49 +1,33 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxm5K-0006A0-6G
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqls-00063o-NH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Feb 2012 22:08:18 +0100
-Received: by lahc1 with SMTP id c1so1583474lah.6
+	Thu, 16 Feb 2012 03:08:32 +0100
+Received: by eaal10 with SMTP id l10so479834eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 13:00:05 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=jJa0ALra9jWzBh4cF/3Lr//4XDu9ErzE8T8CXfI+v/s=;
-	b=FOgMdosae8kDhaMiFYT2P+Vm0kB/Wa6oUT/Lj/qX14E8Vk3/jLwJoNkgHRlWxS586i
-	0Z2HJhwHVhMqbCLwOMgyEx7/klnNvMDUPf9UUDG8lMH/VgIC/vdgTBOpd/eF5JQmP1gI
-	efbs8EmbcAC70Pr5SNfvC5APzD1PMBwNOxHZY=
-MIME-Version: 1.0
-Received: by 10.112.54.36 with SMTP id g4mr9893147lbp.19.1329339605803; Wed,
-	15 Feb 2012 13:00:05 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Wed, 15 Feb 2012 13:00:05 -0800 (PST)
-In-Reply-To: <CALbNGRQ2cK1TBWcXL7SH=OROmAKYW+L02Di2r1PhcCikTngbdg@mail.gmail.com>
-References: <1328925603-2967-1-git-send-email-schnitzeltony@googlemail.com>
-	<1328925603-2967-6-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKqeT+AZKUUiyYkbq4sKmo2espHinOfeBLQ0TfYEJZ3MfA@mail.gmail.com>
-	<CALbNGRTiMWuLSuXsKfQV4ntHfVY5ovuBYrD0w41790Qa_u79Jg@mail.gmail.com>
-	<CAP9ODKotC11Gh+bcOz9vgqNMacdwykydJ1G=e7rjr_HKVa6U4w@mail.gmail.com>
-	<CALbNGRQDy7E4ND7amsgiBuzo12o=umbW1kokYBgqyPoTaXbTCg@mail.gmail.com>
-	<CAP9ODKoXeBf_vctM7pcHTZd2-fMacN+kk8z9af18h9rkyDGVWQ@mail.gmail.com>
-	<CALbNGRQ1uf__SnyW5nz1mfOh45DgKyVmjQ3oFS-VBLOyiHVZig@mail.gmail.com>
-	<CAP9ODKq=i_jLUHcB+L1marL7Ymz261LZGC26Q49Bfvm+E4tm5g@mail.gmail.com>
-	<CALbNGRS-g-kXkEYdxkcwbAum2kqbg5a79=QCoV8eYm2TpwWh9w@mail.gmail.com>
-	<CAP9ODKqXfNBpQ7J6rEcFkFKXX5LspymGtQ0SNBh_jMX=pGyFHQ@mail.gmail.com>
-	<CALbNGRQvP7A=oz6mtM8hZ6wO6+esQQ6KR4nmV4DXhY=eonAAtA@mail.gmail.com>
-	<CAP9ODKo3A3AMqLR701E39V5MykwUS7f55phQmGSNq6WdXFfYtA@mail.gmail.com>
-	<CALbNGRTDR1zLZCUPfpUnXN_ezEpX0ehqo8ubY3Dafr4rw8_jDg@mail.gmail.com>
-	<CAP9ODKq2MjMnz7wEVA+ho5HWntxFw42e6rVuc-7VLob-9hzFfQ@mail.gmail.com>
-	<CALbNGRQp1xFLUECjtg78gy1-8vYpUwB-G4xjCKn_80paA2Ymnw@mail.gmail.com>
-	<CAP9ODKr9O8Ff2PPDBfTmgOYwJT8sExKcGs00-PfvzS=3O31dGw@mail.gmail.com>
-	<CALbNGRRP_veCduOS0wi_5XZZsZ3GbavD3+MExJ_D+RubKwBQaw@mail.gmail.com>
-	<CALbNGRS3vrD00yLaGpkRrU8SXTwdKNQiqEVnV_aB9p7F0rHa-g@mail.gmail.com>
-	<CALbNGRQ2cK1TBWcXL7SH=OROmAKYW+L02Di2r1PhcCikTngbdg@mail.gmail.com>
-Date: Wed, 15 Feb 2012 22:00:05 +0100
-Message-ID: <CALbNGRQG519Y_D+z9oLQxy5S96qx8WiwrwW9VTRYwLEEifUUKQ@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Qe4IERvz2vV8FU1HAP5kJRJbqnQB8CJfzyf4Bsosx5M=;
+	b=TMJPiBxLoknjcAmYwad69JFK5AX9iFUK3wyW1EKn32OPhS9oi81S/jIVvW85BHHjxW
+	RCbqkBGScIVdj24XJY/A7eQalLtBAD3g/nsKZEiDF5zL6dqtDbY5QXaM1VRt0DRW9SQU
+	S0ZTH2ofb1W4ZvOfT+nqu+N8J4ejfdC4/FnsU=
+Received: by 10.14.94.134 with SMTP id n6mr336045eef.63.1329357620295;
+	Wed, 15 Feb 2012 18:00:20 -0800 (PST)
+Received: from localhost.localdomain (p5B0A2E3F.dip.t-dialin.net.
+	[91.10.46.63])
+	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 15 Feb 2012 18:00:19 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 6/7] systemd.bbclass: automatically extend FILES_* for systemd packages
+Date: Thu, 16 Feb 2012 03:02:54 +0100
+Message-Id: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-oe][v2] 00/22] systemd rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,20 +41,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 21:08:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Feb 2012 02:08:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 15, 2012 at 9:39 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> <..>/package/src/debug/
+V1 -> V2:
+[2]  do not check configuration variables for cross and nativesdk
+[3]  rename systemd_package to systemd_generate_package_scripts
+[6]  parse unit files to determine the files to pack
+[7]  create warning if *-systemd package already rdepends
+     it's base package
+added in V2:
+[8]-[20] remove obsolet systemd code from recipes (these were used as
+     test cases)
+[21] dhcp-(relay) test case for multiple systemd packages
+[22] modified to start service
 
-of course this must be
+The following tests were performed:
+* build from scratch with [1]-[7] / run test
+* build from scratch / apply patches / build -> check buildhistory diff
+* build from scratch w/o patches / build from scratch with patches -> check
+  buildhistory diff
 
-<..>/package/usr/src/debug/
+Additional patches were prepared for other recipes inheriting systemd. These are
+not yet send because they move systemd support from ${PN} to ${PN}-systemd which
+currently needs modifications on tasks/images. I'd be happy if a common accepted
+solution would be suggested/implemented (image-feature?).
 
-started a build from scratch with systemd patches...
+This patch series can be pulled from:
+git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded-systemd.git branch systemd2
 
-Andreas
+Andreas Müller (22):
+  systemd-systemctl-native: add multiple services support
+  systemd.bbclass: enhance checks for SYSTEMD_PACKAGES and
+    SYSTEMD_SERVICE
+  systemd.bbclass: cosmetics
+  systemd.bbclass: automatically create packages set in
+    SYSTEMD_PACKAGES
+  automatically install all *.service and *.socket supplied in recipe's
+    SRC_URI
+  systemd.bbclass: automatically extend FILES_* for systemd packages
+  systemd.bbclass: automatically extend RDEPENDS for *-systemd packages
+  connman: remove unneeded systemd code
+  dropbear: remove unneeded systemd code
+  openssh: remove unneeded systemd code
+  elsa: remove unneeded systemd code
+  cronie: remove unneeded systemd code
+  xserver-nodm-init: remove unneeded systemd code
+  atftp: remove unneeded systemd code
+  udisks: remove unneeded systemd code
+  rsyslog: remove unneeded systemd code
+  syslog-ng: remove unneeded systemd code
+  dhcp: remove unneeded systemd code
+  gpsd: remove unneeded systemd code
+  busybox: remove unneeded systemd code
+  dhcp: add native systemd support for dhcp-relay
+  gpsd: use ${PN}.service instead ${PN}.socket in SYSTEMD_SERVICE to
+    enable service
+
+ meta-efl/recipes-efl/efl/elsa_svn.bb               |   11 +--
+ meta-oe/classes/systemd.bbclass                    |  165 ++++++++++++++++++--
+ .../connman/connman_0.78.bbappend                  |    7 +-
+ .../recipes-connectivity/dhcp/dhcp_4.2.0.bbappend  |   18 +--
+ .../dhcp/files/dhcrelay.service                    |   10 ++
+ .../openssh/openssh_5.9p1.bbappend                 |   14 +--
+ .../recipes-core/busybox/busybox_1.19.3.bbappend   |    8 +-
+ .../dropbear/dropbear_2011.54.bbappend             |   11 +--
+ .../systemd/systemd-systemctl-native/systemctl     |   75 +++++----
+ meta-oe/recipes-extended/atftp/atftp_0.7.bb        |   10 +-
+ .../recipes-extended/cronie/cronie_1.4.8.bbappend  |   12 +--
+ meta-oe/recipes-extended/rsyslog/rsyslog.inc       |    7 +-
+ .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |   10 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb       |   14 +--
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |    7 +-
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |    9 +-
+ 16 files changed, 222 insertions(+), 166 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/dhcp/files/dhcrelay.service
+
+-- 
+1.7.4.4
+
 
 
