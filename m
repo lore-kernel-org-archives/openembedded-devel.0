@@ -1,35 +1,32 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RxyWx-0006wQ-FO
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxyvo-0007l9-GS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 11:25:39 +0100
-Received: by vbbff1 with SMTP id ff1so1553003vbb.6
+	Thu, 16 Feb 2012 11:51:20 +0100
+Received: by lahc1 with SMTP id c1so2306483lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2012 02:17:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=obwnaB/73smn4QychukpKXHHwCTbNkPU/MZuDZZzI/Q=;
-	b=DOZHOeDBrdTdmSUGXa4h+qzl7NLCzoYcbvu4E/9W+rNfxhxiJk7TyZi3rXxxPGEtOO
-	5ioACMqvPD6JRhJCDZIwpbuCyZSALqzy9w467pcLspALa2TbLLjduor6VMA1Q4Ku860f
-	q/WIhkfd5KgSRUFqa0rEBINGTiI32EbgGLzX0=
+	Thu, 16 Feb 2012 02:43:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=SPuoDhloUOprO39tgS5aj6SQK8CN7mIleCK8M97xLn8=;
+	b=k/w1SVUqAhnWsH/IUiZASnD2ZPjlcxE/aZ4g3XG0aQid04r7EfdvCnPN2TLSL7p6cx
+	lEpgM9sswOhHBXkscP8xhV4+NeXGhAJ/dU6Ns1H0GBPzEH1lA9OIg7ACBtcIW9J6iJ0/
+	SFiaHfjv2Leqmm4XdVK7wXMnSbtzntRY7lFlI=
 MIME-Version: 1.0
-Received: by 10.52.72.107 with SMTP id c11mr765073vdv.48.1329387445082; Thu,
-	16 Feb 2012 02:17:25 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:17:25 -0800 (PST)
-In-Reply-To: <CALbNGRQRELS3EARwj8ssK0MyuDJaBbebDrDcunGrwRMm89jV8A@mail.gmail.com>
+Received: by 10.152.145.137 with SMTP id su9mr1354061lab.23.1329388986918;
+	Thu, 16 Feb 2012 02:43:06 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Thu, 16 Feb 2012 02:43:06 -0800 (PST)
+In-Reply-To: <CAP9ODKoy3RRkOAjkGQXUnMw9EaU2rXasxw3bvWU+UrdhAJL53Q@mail.gmail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
-	<1329357796-27398-3-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKo=b4rnmQb756h4NoSnVh3+D=SPak=-92rZ9W_5qN_VvA@mail.gmail.com>
-	<CALbNGRQRELS3EARwj8ssK0MyuDJaBbebDrDcunGrwRMm89jV8A@mail.gmail.com>
-Date: Thu, 16 Feb 2012 08:17:25 -0200
-X-Google-Sender-Auth: I7WbH5af8HYeUeCGWmNmhBKcCOo
-Message-ID: <CAP9ODKrX3w4d1_zWZZ6hD0ADeY4m2TpmTj=Jh=pHaR8mw3GP3A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<1329357796-27398-23-git-send-email-schnitzeltony@googlemail.com>
+	<CAP9ODKoy3RRkOAjkGQXUnMw9EaU2rXasxw3bvWU+UrdhAJL53Q@mail.gmail.com>
+Date: Thu, 16 Feb 2012 11:43:06 +0100
+Message-ID: <CALbNGRRvhqQXqECfRD_PBTiK+NpiTrycthsPrU7Nhac4ifsAMQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][v2] 02/22] systemd.bbclass: enhance checks for SYSTEMD_PACKAGES and SYSTEMD_SERVICE
+Subject: Re: [meta-oe][v2] 22/22] gpsd: use ${PN}.service instead ${PN}.socket in SYSTEMD_SERVICE to enable service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 10:25:39 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 10:51:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 16, 2012 at 08:14, Andreas M=FCller
-<schnitzeltony@googlemail.com>wrote:
+On Thu, Feb 16, 2012 at 11:10 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Thu, Feb 16, 2012 at 00:03, Andreas M=FCller
+> <schnitzeltony@googlemail.com>wrote:
+>
+>> =A0SYSTEMD_PACKAGES =3D "${PN}-systemd"
+>> -SYSTEMD_SERVICE =3D "${PN}.socket"
+>> +SYSTEMD_SERVICE =3D "${PN}.service"
+>>
+>
+> Why?
+>
+As far as I can see there is no link from *.socket to *.service (
+*.service requires *.socket) - correct?. Interesting: This was
+highlighted by the systemd.bbclass modification: without this patch
+*.service is not installed. Is there something I have overseen?
 
-> I'll wait a bit in case there are further comments and update the
-> commit messages affected in V3.
+Andreas
 
-
-I think you can do it on the 00/XX message and avoids another cycle to
-remove those from each patch.
-
---=20
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
