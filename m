@@ -1,35 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqm6-00063w-Pe
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqm7-00063o-LD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 03:08:46 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so504564eek.6
+	Thu, 16 Feb 2012 03:08:47 +0100
+Received: by mail-ey0-f175.google.com with SMTP id l10so479834eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 18:00:36 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=brBJIM1xuMP6voPADVjOPt21PyvNb8dFUUtCUsRyV2k=;
-	b=LaPcsGYu1cFzklEO+lxPuT45dL0KUfqE4/gYcRO3PuqMXynyjuHyFfXqrv0EHbRnzv
-	VSAtso/1Vhc6zr+DmK9mzpr2moO+iEAlwYPRqWBsOBE6cvtVG1rquPcx3vFQzgluZ3p9
-	y44AfsL7kCBxdYo3lZsk25LmD/F1/B6njo0ss=
-Received: by 10.14.183.136 with SMTP id q8mr344038eem.60.1329357636649;
-	Wed, 15 Feb 2012 18:00:36 -0800 (PST)
+	bh=69QtyLcQ2QcdOf2eAAPzMDrl//dgSFJtX1VlWHAgNmc=;
+	b=BBOrNHcxgqf3Lu0IN8e40NomwgUprW/YyHQUCiVwYpFS0lGI4am99yUGhkq3IJCdiJ
+	8Nq2mLcVJyNKbfXjm6EbTQQO2VsZzLo4IkAV/jLwHU3hMswKJB6Zwexr2ypi8M+e4Svi
+	YnVOf0N7K6qkD54PmqS41UNRDLoUX972VXbo0=
+Received: by 10.14.181.193 with SMTP id l41mr356575eem.26.1329357637491;
+	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
 Received: from localhost.localdomain (p5B0A2E3F.dip.t-dialin.net.
 	[91.10.46.63])
-	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.35
+	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Feb 2012 18:00:36 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2012 03:03:13 +0100
-Message-Id: <1329357796-27398-20-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 03:03:14 +0100
+Message-Id: <1329357796-27398-21-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][v2] 19/22] gpsd: remove unneeded systemd code
+Subject: [meta-oe][v2] 20/22] busybox: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 02:08:46 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 02:08:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb |   12 ++----------
- 1 files changed, 2 insertions(+), 10 deletions(-)
+ .../recipes-core/busybox/busybox_1.19.3.bbappend   |    8 ++------
+ 1 files changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-index ce2ab02..927107a 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
+diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
+index 7e72a43..6b62bd7 100644
+--- a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
++++ b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
+@@ -1,6 +1,6 @@
+ inherit systemd
  
--PR = "r1"
-+PR = "r2"
+-PRINC := "${@int(PRINC) + 2}"
++PRINC := "${@int(PRINC) + 3}"
  
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
-@@ -68,11 +68,6 @@ do_install_append() {
-     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
-     install -d ${D}${base_libdir}/udev/
-     install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
--
--    #support for systemd
--    install -d ${D}${base_libdir}/systemd/system
--    install -m 644 ${WORKDIR}/${PN}.socket ${D}${base_libdir}/systemd/system
--    install -m 644 ${WORKDIR}/${PN}.service ${D}${base_libdir}/systemd/system
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+@@ -15,7 +15,6 @@ SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
+ do_install_append() {
+ 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
+ 
+-	install -d ${D}${base_libdir}/systemd/system
+ 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
+ 	     > ${D}${base_libdir}/systemd/system/busybox-syslog.service
+ 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
+@@ -24,7 +23,4 @@ do_install_append() {
+ 	ln -sf /dev/null ${D}${base_libdir}/systemd/system/syslog.service
  }
  
- pkg_postinst_${PN}-conf() {
-@@ -83,7 +78,7 @@ pkg_postrm_${PN}-conf() {
- 	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
- }
- 
--PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils ${PN}-systemd"
-+PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
- 
- FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
- 
-@@ -113,6 +108,3 @@ RDEPENDS_gps-utils = "python-pygps"
- DESCRIPTION_python-pygps = "Python bindings to gpsd"
- FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
- RDEPENDS_python-pygps = "python-core python-curses gpsd python-json"
+-PACKAGES += "${PN}-syslog-systemd"
 -
--FILES_${PN}-systemd += "${base_libdir}/systemd"
--RDEPENDS_${PN}-systemd += "${PN}"
+-RDEPENDS_${PN}-syslog-systemd += "${PN}-syslog"
+-FILES_${PN}-syslog-systemd = "${base_libdir}/systemd"
++FILES_${PN}-syslog-systemd += "${base_libdir}/systemd/system/syslog.service"
 -- 
 1.7.4.4
 
