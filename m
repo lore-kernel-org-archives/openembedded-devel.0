@@ -1,33 +1,33 @@
 Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RxyNr-0005lx-Ks
+	(envelope-from <otavio.salvador@gmail.com>) id 1RxyO0-0005lx-I2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 11:16:16 +0100
-Received: by vcbfl15 with SMTP id fl15so1580489vcb.6
+	Thu, 16 Feb 2012 11:16:24 +0100
+Received: by mail-vx0-f175.google.com with SMTP id fl15so1580489vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2012 02:08:02 -0800 (PST)
+	Thu, 16 Feb 2012 02:08:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=QsPV5Ywnq25UQ8PI0YoHEngU+xne+7ZXn1vCiu5waec=;
-	b=aX3FaFieqhKdDsrMISEodQ/dh79kWQJ//+EfUG9kRnhhjMIvKIkAtyt7ncM/25pwt0
-	cWHg1Q3uoUrmNJc8aYSO9YfH/GoDVuCyQy/JStOeEE3jfQswCYw4G313HdRIIeG6IrRt
-	s2QpKmWBR4w7jLPvUZaJGbgapeyW+Knp5t1uU=
+	bh=J3c1+w0RvTxHAvBbrW4n7I9KPWNXVuxGLCin4YR2utg=;
+	b=pS+B5ckHXrGpUwIk5d1New+KfVb12nS/ReOchG/Utfi2X3Q7y1ryP9g2TXqH1evQ+S
+	rPBnrj3dcbyWKzehQWU+lL73ou/tWV+L8hwKafVq7IX+QHDUnvMJB9yr2lIy82Jthku/
+	K5acI/7nuz95PYuqKloUo8tuQuq1MB9PSFGAw=
 MIME-Version: 1.0
-Received: by 10.220.157.83 with SMTP id a19mr970372vcx.54.1329386882016; Thu,
-	16 Feb 2012 02:08:02 -0800 (PST)
+Received: by 10.52.72.107 with SMTP id c11mr754062vdv.48.1329386893778; Thu,
+	16 Feb 2012 02:08:13 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:08:01 -0800 (PST)
-In-Reply-To: <1329357796-27398-16-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:08:13 -0800 (PST)
+In-Reply-To: <1329357796-27398-18-git-send-email-schnitzeltony@googlemail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
-	<1329357796-27398-16-git-send-email-schnitzeltony@googlemail.com>
-Date: Thu, 16 Feb 2012 08:08:01 -0200
-X-Google-Sender-Auth: YEy4_-15LxMxFhe_6ZsV656SkEg
-Message-ID: <CAP9ODKoOWtL3-s1jBvRKYkUQ-3fgD7pKnuVUzQ81zS7J3238PA@mail.gmail.com>
+	<1329357796-27398-18-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 08:08:13 -0200
+X-Google-Sender-Auth: Ec-Ih06qS6xvKDTc_0d6POKOquU
+Message-ID: <CAP9ODKo8Vd41+UHi1qTWhDQ-GBimahpV60zVcnGfnRramBgvRg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][v2] 15/22] udisks: remove unneeded systemd code
+Subject: Re: [meta-oe][v2] 17/22] syslog-ng: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 10:16:16 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 10:16:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -52,45 +52,38 @@ On Thu, Feb 16, 2012 at 00:03, Andreas M=FCller
 
 > Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
->  meta-oe/recipes-support/udisks/udisks_1.0.4.bb |    9 +--------
->  1 files changed, 1 insertions(+), 8 deletions(-)
+>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc |    7 +------
+>  1 files changed, 1 insertions(+), 6 deletions(-)
 >
-> diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bbb/meta-oe/reci=
-pes-support/udisks/
-> udisks_1.0.4.bb
-> index 55b115e..96b6086 100644
-> --- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-> +++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-> @@ -12,7 +12,7 @@ SRC_URI =3D "
-> http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=3D${BPN} \
->  SRC_URI[udisks.md5sum] =3D "86c63b2b5484f2060499a052b5b6256b"
->  SRC_URI[udisks.sha256sum] =3D
-> "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> index 3bbebec..a284e6d 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D7ec1bcc46f28b11f4722e20d9b7dd4d5"
+>  # update-rc.d and update-alternatives is important
+>  RDEPENDS_${PN} +=3D " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT",
+> "none", "", "update-rc.d", d)}"
 >
-> -PR =3D "r2"
-> +PR =3D "r3"
+> -INC_PR =3D "r6"
+> +INC_PR =3D "r7"
 >
 >  inherit autotools systemd
 >
-> @@ -21,11 +21,6 @@ SYSTEMD_SERVICE_${PN}-systemd =3D "udisks-daemon.servi=
-ce"
->
->  EXTRA_OECONF =3D "--disable-man-pages"
+> @@ -47,11 +47,6 @@ do_install_append() {
+>  SYSTEMD_PACKAGES =3D "${PN}-systemd"
+>  SYSTEMD_SERVICE =3D "${PN}.service"
 >
 > -PACKAGES =3D+ "${PN}-systemd"
 > -
-> -FILES_${PN}-systemd =3D "${base_libdir}/systemd/system/"
-> -RDEPENDS_${PN}-systemd =3D "${PN}"
+> -FILES_${PN}-systemd +=3D "${base_libdir}/systemd"
+> -RDEPENDS_${PN}-systemd +=3D "${PN}"
 > -
->  FILES_${PN} +=3D "${libdir}/polkit-1/extensions/*.so \
->                 ${datadir}/dbus-1/ \
->                 ${datadir}/polkit-1 \
-> @@ -33,5 +28,3 @@ FILES_${PN} +=3D "${libdir}/polkit-1/extensions/*.so \
->  "
->
->  FILES_${PN}-dbg +=3D "${base_libdir}/udev/.debug"
-> -
-> -
+>  FILES_${PN} =3D "${bindir}/* ${sbindir}/* ${libexecdir}/*
+> ${libdir}/lib*${SOLIBS} \
+>             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+>             ${base_bindir}/* ${base_sbindir}/* \
 > --
 > 1.7.4.4
 >
