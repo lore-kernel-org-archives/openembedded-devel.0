@@ -1,14 +1,32 @@
-Received: from ffm.saftware.de ([83.141.3.46])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Rxqzz-0000b3-SG
+	(envelope-from <otavio.salvador@gmail.com>) id 1RxyBC-0004cm-Qe
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 03:23:07 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
+	Thu, 16 Feb 2012 11:03:11 +0100
+Received: by vbbff1 with SMTP id ff1so1541908vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Feb 2012 01:54:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=jiQA2ZvTP4RcRy9Np9dEVEoHC8esdSDwfvqn7V2lyOM=;
+	b=E4kdfShzvWx1uLE2hnWpe/gfJh/cZqba9npoMNvG0OCeIdBVQszaVpy525Vx5VLNEX
+	gzq/VGiCLeHG3c/ReJJU4h0+r/Y9ICdV1TFq3q9/9BdWO0YRSODnN3VeGoTYYM1FJe63
+	I2y+t3TTmIrn4lB6muL4hpnjUi7OMIAmMGXYs=
+MIME-Version: 1.0
+Received: by 10.52.173.79 with SMTP id bi15mr744793vdc.31.1329386097353; Thu,
+	16 Feb 2012 01:54:57 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 01:54:57 -0800 (PST)
+In-Reply-To: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 07:54:57 -0200
+X-Google-Sender-Auth: rT8Oev-C4gUKT8jiM3r0Hao8aBs
+Message-ID: <CAP9ODKqzek7gA8K9iuU_MA-USdynLi6jnbVmGdHWaVOQ8yeZkQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2012 03:06:55 +0100
-Message-Id: <1329358015-31996-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] busybox: create /etc/default on do_install
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][v2] 00/22] systemd rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -22,32 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 02:23:08 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 10:03:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* Currently, it's blindly assumed that /etc/default
-  exists, when busybox-syslog gets copied into it.
-  This only works by chance and only if CONFIG_HWCLOCK=y
-  is set.
+On Thu, Feb 16, 2012 at 00:02, Andreas M=FCller
+<schnitzeltony@googlemail.com>wrote:
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../recipes-core/busybox/busybox_1.19.3.bbappend   |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+> Additional patches were prepared for other recipes inheriting systemd.
+> These are
+> not yet send because they move systemd support from ${PN} to ${PN}-system=
+d
+> which
+> currently needs modifications on tasks/images. I'd be happy if a common
+> accepted
+> solution would be suggested/implemented (image-feature?).
+>
 
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-index 7e72a43..98b959f 100644
---- a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-+++ b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-@@ -13,6 +13,7 @@ SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
- SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
- 
- do_install_append() {
-+	install -d ${D}${sysconfdir}/default
- 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
- 
- 	install -d ${D}${base_libdir}/systemd/system
--- 
-1.7.5.4
+Personally I think we'll end doing both: DISTRO_FEATURE and IMAGE_FEATURE.
 
-
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
