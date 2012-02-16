@@ -1,33 +1,33 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RxyO0-0005lx-I2
+	(envelope-from <otavio.salvador@gmail.com>) id 1RxyOK-0005wx-KT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 11:16:24 +0100
-Received: by mail-vx0-f175.google.com with SMTP id fl15so1580489vcb.6
+	Thu, 16 Feb 2012 11:16:44 +0100
+Received: by vbbff1 with SMTP id ff1so1548513vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2012 02:08:13 -0800 (PST)
+	Thu, 16 Feb 2012 02:08:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=J3c1+w0RvTxHAvBbrW4n7I9KPWNXVuxGLCin4YR2utg=;
-	b=pS+B5ckHXrGpUwIk5d1New+KfVb12nS/ReOchG/Utfi2X3Q7y1ryP9g2TXqH1evQ+S
-	rPBnrj3dcbyWKzehQWU+lL73ou/tWV+L8hwKafVq7IX+QHDUnvMJB9yr2lIy82Jthku/
-	K5acI/7nuz95PYuqKloUo8tuQuq1MB9PSFGAw=
+	bh=t+gYk9H7E09JJpG6RsEyXOumj5nfzifQJzz7pLXIicY=;
+	b=i5cdhsaO80QhnR8cpxPXIxJLRe6IbTHrFoEypC7HHHLf0bIarTP+leUwPcqVYIfyti
+	jEBpU0SShrwz+k1tp+eTA7MbVGb6YfOcPxBhknkT9gCvwLnF5CPHQl05kbrer2ejU8r5
+	BAdFW+tGRv4O2HxXaO2TjgkP0eAEGwPFl/aE4=
 MIME-Version: 1.0
-Received: by 10.52.72.107 with SMTP id c11mr754062vdv.48.1329386893778; Thu,
-	16 Feb 2012 02:08:13 -0800 (PST)
+Received: by 10.220.108.70 with SMTP id e6mr941593vcp.74.1329386910069; Thu,
+	16 Feb 2012 02:08:30 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:08:13 -0800 (PST)
-In-Reply-To: <1329357796-27398-18-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:08:30 -0800 (PST)
+In-Reply-To: <1329357796-27398-19-git-send-email-schnitzeltony@googlemail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
-	<1329357796-27398-18-git-send-email-schnitzeltony@googlemail.com>
-Date: Thu, 16 Feb 2012 08:08:13 -0200
-X-Google-Sender-Auth: Ec-Ih06qS6xvKDTc_0d6POKOquU
-Message-ID: <CAP9ODKo8Vd41+UHi1qTWhDQ-GBimahpV60zVcnGfnRramBgvRg@mail.gmail.com>
+	<1329357796-27398-19-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 08:08:30 -0200
+X-Google-Sender-Auth: EgYt-hOHLknS-voVyG1MeJba_Sg
+Message-ID: <CAP9ODKrPg+SBVJbXgm35TUQbo8f9BY-Uxgx4JFpseXhhW3xV2A@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][v2] 17/22] syslog-ng: remove unneeded systemd code
+Subject: Re: [meta-oe][v2] 18/22] dhcp: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 10:16:24 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 10:16:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -50,40 +50,39 @@ Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 On Thu, Feb 16, 2012 at 00:03, Andreas M=FCller
 <schnitzeltony@googlemail.com>wrote:
 
+>
 > Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc |    7 +------
->  1 files changed, 1 insertions(+), 6 deletions(-)
+>  .../recipes-connectivity/dhcp/dhcp_4.2.0.bbappend  |   12 +-----------
+>  1 files changed, 1 insertions(+), 11 deletions(-)
 >
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index 3bbebec..a284e6d 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D7ec1bcc46f28b11f4722e20d9b7dd4d5"
->  # update-rc.d and update-alternatives is important
->  RDEPENDS_${PN} +=3D " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT",
-> "none", "", "update-rc.d", d)}"
+> diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+> b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+> index 4344eaa..829ad3c 100644
+> --- a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+> +++ b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+> @@ -3,19 +3,9 @@ FILESEXTRAPATHS :=3D "${THISDIR}/files"
 >
-> -INC_PR =3D "r6"
-> +INC_PR =3D "r7"
+>  inherit systemd
 >
->  inherit autotools systemd
+> -PRINC :=3D "${@int(PRINC) + 1}"
+> +PRINC :=3D "${@int(PRINC) + 2}"
 >
-> @@ -47,11 +47,6 @@ do_install_append() {
->  SYSTEMD_PACKAGES =3D "${PN}-systemd"
->  SYSTEMD_SERVICE =3D "${PN}.service"
+>  SYSTEMD_PACKAGES =3D "dhcp-server-systemd"
+>  SYSTEMD_SERVICE_dhcp-server-systemd =3D "dhcpd.service"
 >
-> -PACKAGES =3D+ "${PN}-systemd"
+>  SRC_URI +=3D "file://dhcpd.service"
 > -
-> -FILES_${PN}-systemd +=3D "${base_libdir}/systemd"
-> -RDEPENDS_${PN}-systemd +=3D "${PN}"
+> -do_install_append() {
+> -    install -d ${D}${base_libdir}/systemd/system
+> -    install -m 644 ${WORKDIR}/dhcpd.service
+> ${D}${base_libdir}/systemd/system
+> -}
 > -
->  FILES_${PN} =3D "${bindir}/* ${sbindir}/* ${libexecdir}/*
-> ${libdir}/lib*${SOLIBS} \
->             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
->             ${base_bindir}/* ${base_sbindir}/* \
+> -PACKAGES =3D+ "dhcp-server-systemd"
+> -
+> -FILES_dhcp-server-systemd +=3D "${base_libdir}/systemd"
+> -RDEPENDS_dhcp-server-systemd +=3D "dhcp-server"
 > --
 > 1.7.4.4
 >
