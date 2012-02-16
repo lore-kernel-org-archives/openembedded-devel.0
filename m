@@ -1,31 +1,34 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1RxyUK-0006p5-Hl
+	(envelope-from <otavio.salvador@gmail.com>) id 1RxyWx-0006wQ-FO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 11:22:56 +0100
-Received: by lahc1 with SMTP id c1so2277736lah.6
+	Thu, 16 Feb 2012 11:25:39 +0100
+Received: by vbbff1 with SMTP id ff1so1553003vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2012 02:14:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=yew+kF32y930ccXnPofLjlc3gsrt+jh9ia2FcUWyKQ0=;
-	b=M7arDDaSGrC21rRLGnc+Ca6ewfDCDKHrBAyh+uNpq0juivPPq4N6AqxJqrFfpacmUY
-	8NXeVqAo6cu6s7ur3eUAAL6cYuZO01a4jVDWo+iaTJZZS8Fz9/jBR+d5FFbBYgheh523
-	44oLygJWPTFtDNSn95YW8qHCeWdy6qQbRzrNU=
+	Thu, 16 Feb 2012 02:17:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=obwnaB/73smn4QychukpKXHHwCTbNkPU/MZuDZZzI/Q=;
+	b=DOZHOeDBrdTdmSUGXa4h+qzl7NLCzoYcbvu4E/9W+rNfxhxiJk7TyZi3rXxxPGEtOO
+	5ioACMqvPD6JRhJCDZIwpbuCyZSALqzy9w467pcLspALa2TbLLjduor6VMA1Q4Ku860f
+	q/WIhkfd5KgSRUFqa0rEBINGTiI32EbgGLzX0=
 MIME-Version: 1.0
-Received: by 10.152.145.137 with SMTP id su9mr1290102lab.23.1329387283711;
-	Thu, 16 Feb 2012 02:14:43 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Thu, 16 Feb 2012 02:14:43 -0800 (PST)
-In-Reply-To: <CAP9ODKo=b4rnmQb756h4NoSnVh3+D=SPak=-92rZ9W_5qN_VvA@mail.gmail.com>
+Received: by 10.52.72.107 with SMTP id c11mr765073vdv.48.1329387445082; Thu,
+	16 Feb 2012 02:17:25 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.3.84 with HTTP; Thu, 16 Feb 2012 02:17:25 -0800 (PST)
+In-Reply-To: <CALbNGRQRELS3EARwj8ssK0MyuDJaBbebDrDcunGrwRMm89jV8A@mail.gmail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 	<1329357796-27398-3-git-send-email-schnitzeltony@googlemail.com>
 	<CAP9ODKo=b4rnmQb756h4NoSnVh3+D=SPak=-92rZ9W_5qN_VvA@mail.gmail.com>
-Date: Thu, 16 Feb 2012 11:14:43 +0100
-Message-ID: <CALbNGRQRELS3EARwj8ssK0MyuDJaBbebDrDcunGrwRMm89jV8A@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	<CALbNGRQRELS3EARwj8ssK0MyuDJaBbebDrDcunGrwRMm89jV8A@mail.gmail.com>
+Date: Thu, 16 Feb 2012 08:17:25 -0200
+X-Google-Sender-Auth: I7WbH5af8HYeUeCGWmNmhBKcCOo
+Message-ID: <CAP9ODKrX3w4d1_zWZZ6hD0ADeY4m2TpmTj=Jh=pHaR8mw3GP3A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][v2] 02/22] systemd.bbclass: enhance checks for SYSTEMD_PACKAGES and SYSTEMD_SERVICE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,34 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 10:22:56 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 10:25:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 16, 2012 at 10:58 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Thu, Feb 16, 2012 at 00:02, Andreas M=FCller
-> <schnitzeltony@googlemail.com>wrote:
->
->> The code in populate_packages_prepend to set SYSTEMD_PACKAGES to ${PN} a=
-s
->> default was removed.
->>
->> V1 -> V2: Do not check configuration variables for cross and nativesdk
->>
->
-> Those notes ought to be removed in last send, prior merging.
->
->
->> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->>
->
-> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
->
-> --
-I'll wait a bit in case there are further comments and update the
-commit messages affected in V3.
+On Thu, Feb 16, 2012 at 08:14, Andreas M=FCller
+<schnitzeltony@googlemail.com>wrote:
 
-Andreas
+> I'll wait a bit in case there are further comments and update the
+> commit messages affected in V3.
 
+
+I think you can do it on the 00/XX message and avoids another cycle to
+remove those from each patch.
+
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
