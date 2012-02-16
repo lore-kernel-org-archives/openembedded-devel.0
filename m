@@ -1,35 +1,35 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqm7-00063o-LD
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqm8-00063p-FP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 03:08:47 +0100
-Received: by mail-ey0-f175.google.com with SMTP id l10so479834eaa.6
+	Thu, 16 Feb 2012 03:08:48 +0100
+Received: by mail-ey0-f175.google.com with SMTP id l10so479837eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=69QtyLcQ2QcdOf2eAAPzMDrl//dgSFJtX1VlWHAgNmc=;
-	b=BBOrNHcxgqf3Lu0IN8e40NomwgUprW/YyHQUCiVwYpFS0lGI4am99yUGhkq3IJCdiJ
-	8Nq2mLcVJyNKbfXjm6EbTQQO2VsZzLo4IkAV/jLwHU3hMswKJB6Zwexr2ypi8M+e4Svi
-	YnVOf0N7K6qkD54PmqS41UNRDLoUX972VXbo0=
-Received: by 10.14.181.193 with SMTP id l41mr356575eem.26.1329357637491;
-	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
+	bh=w4Y6QzY8540700QgC+bW7fpoAJioGGo5qvcTkDt/PQ8=;
+	b=tJr8ivO+8Sj9WgqKq1eOXWRZlXFqxxRUfU3+EaD7r8ePus9QUTORzm57cUF1afTyjS
+	10VU9NyNb331mGD5egy4XXD1aJ7DY3xDzPxNQvniWpK1Mma9vF14Q0wNkP+BukBnCVr7
+	SD6CZ5NojfG9s5SPMP4h0S6sghoqTKdQolDec=
+Received: by 10.14.94.134 with SMTP id n6mr336601eef.63.1329357638326;
+	Wed, 15 Feb 2012 18:00:38 -0800 (PST)
 Received: from localhost.localdomain (p5B0A2E3F.dip.t-dialin.net.
 	[91.10.46.63])
-	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.36
+	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
 	Wed, 15 Feb 2012 18:00:37 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2012 03:03:14 +0100
-Message-Id: <1329357796-27398-21-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 03:03:15 +0100
+Message-Id: <1329357796-27398-22-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][v2] 20/22] busybox: remove unneeded systemd code
+Subject: [meta-oe][v2] 21/22] dhcp: add native systemd support for dhcp-relay
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +43,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 02:08:47 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 02:08:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-core/busybox/busybox_1.19.3.bbappend   |    8 ++------
- 1 files changed, 2 insertions(+), 6 deletions(-)
+ .../recipes-connectivity/dhcp/dhcp_4.2.0.bbappend  |    8 +++++---
+ .../dhcp/files/dhcrelay.service                    |   10 ++++++++++
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/dhcp/files/dhcrelay.service
 
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-index 7e72a43..6b62bd7 100644
---- a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-+++ b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-@@ -1,6 +1,6 @@
+diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+index 829ad3c..6d1e3df 100644
+--- a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
++++ b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+@@ -3,9 +3,11 @@ FILESEXTRAPATHS := "${THISDIR}/files"
+ 
  inherit systemd
  
 -PRINC := "${@int(PRINC) + 2}"
 +PRINC := "${@int(PRINC) + 3}"
  
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-@@ -15,7 +15,6 @@ SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
- do_install_append() {
- 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
+-SYSTEMD_PACKAGES = "dhcp-server-systemd"
++SYSTEMD_PACKAGES = "dhcp-server-systemd dhcp-relay-systemd"
+ SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
++SYSTEMD_SERVICE_dhcp-relay-systemd = "dhcrelay.service"
  
--	install -d ${D}${base_libdir}/systemd/system
- 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
- 	     > ${D}${base_libdir}/systemd/system/busybox-syslog.service
- 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
-@@ -24,7 +23,4 @@ do_install_append() {
- 	ln -sf /dev/null ${D}${base_libdir}/systemd/system/syslog.service
- }
- 
--PACKAGES += "${PN}-syslog-systemd"
--
--RDEPENDS_${PN}-syslog-systemd += "${PN}-syslog"
--FILES_${PN}-syslog-systemd = "${base_libdir}/systemd"
-+FILES_${PN}-syslog-systemd += "${base_libdir}/systemd/system/syslog.service"
+-SRC_URI += "file://dhcpd.service"
++SRC_URI += "file://dhcpd.service \
++            file://dhcrelay.service"
+diff --git a/meta-oe/recipes-connectivity/dhcp/files/dhcrelay.service b/meta-oe/recipes-connectivity/dhcp/files/dhcrelay.service
+new file mode 100644
+index 0000000..f68f468
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dhcp/files/dhcrelay.service
+@@ -0,0 +1,10 @@
++[Unit]
++Description=DHCP Relay Agent Daemon
++After=syslog.target network.target
++
++[Service]
++EnvironmentFile=/etc/default/dhcp-relay
++ExecStart=/usr/sbin/dhcrelay -d $DHCRELAYARGS
++
++[Install]
++WantedBy=multi-user.target
 -- 
 1.7.4.4
 
