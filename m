@@ -1,35 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqly-00063q-7z
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Rxqlz-00063o-3N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Feb 2012 03:08:38 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so504563eek.6
+	Thu, 16 Feb 2012 03:08:39 +0100
+Received: by mail-ey0-f175.google.com with SMTP id l10so479834eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2012 18:00:28 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=KFzqRaOmNcnlKHEgm4RJpKqJ+xW4bV7WALf6aS6xpzk=;
-	b=MFcJFCDqdArZNnacKKxB+XXxKEmU+bo11HcndCf0/lyzaAw4dAOCekM88QmN54/Fgl
-	qP8xos4xTsBM2OPfyGU5FUqj+8vHJmpJk5K4I7LtvFR9RKFacDEnCnoZYgihXZWB0SYR
-	1lSRTc+nOkGWUGIDEQF4ppkH0hSoq6X2Ukf8I=
-Received: by 10.14.126.68 with SMTP id a44mr327878eei.101.1329357628091;
+	bh=uUbSABbIafIILzuPL+ieDoa1viDUlNijzbn3/CylINM=;
+	b=oy7c4GedjPwivKUU2JnJCjMp+SVlYYYzzhQtfjMCDtUc3qspGKshLv85iDfZvDyKYQ
+	pyBMH7/1A4OR7tHrsdPN87dRveW0/u+gpxGqwbnkG034ZwrQDDaRPxRIxSFubJROoQy9
+	eVIe5CQ6GERqfV/fmwXEvcxGilaeC+OqXTkBk=
+Received: by 10.14.39.148 with SMTP id d20mr332139eeb.90.1329357628926;
 	Wed, 15 Feb 2012 18:00:28 -0800 (PST)
 Received: from localhost.localdomain (p5B0A2E3F.dip.t-dialin.net.
 	[91.10.46.63])
-	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.27
+	by mx.google.com with ESMTPS id n58sm17552669een.10.2012.02.15.18.00.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Feb 2012 18:00:27 -0800 (PST)
+	Wed, 15 Feb 2012 18:00:28 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2012 03:03:03 +0100
-Message-Id: <1329357796-27398-10-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 16 Feb 2012 03:03:04 +0100
+Message-Id: <1329357796-27398-11-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][v2] 09/22] dropbear: remove unneeded systemd code
+Subject: [meta-oe][v2] 10/22] openssh: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2012 02:08:38 -0000
+X-List-Received-Date: Thu, 16 Feb 2012 02:08:39 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../dropbear/dropbear_2011.54.bbappend             |   11 +----------
- 1 files changed, 1 insertions(+), 10 deletions(-)
+ .../openssh/openssh_5.9p1.bbappend                 |   14 +-------------
+ 1 files changed, 1 insertions(+), 13 deletions(-)
 
-diff --git a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
-index 899e1fc..96cc8bd 100644
---- a/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
-+++ b/meta-oe/recipes-core/dropbear/dropbear_2011.54.bbappend
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
+index 3f68e09..de7668f 100644
+--- a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
++++ b/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
 @@ -1,6 +1,6 @@
- inherit systemd
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
  
 -PRINC := "${@int(PRINC) + 1}"
 +PRINC := "${@int(PRINC) + 2}"
  
- # look for files in the layer first
- FILESEXTRAPATHS := "${THISDIR}/${PN}"
-@@ -13,14 +13,5 @@ SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE_${PN}-systemd = "dropbear.socket"
+ SYSTEMD_PACKAGES = "openssh-sshd-systemd"
+ SYSTEMD_SERVICE = "sshd.socket"
+@@ -8,15 +8,3 @@ SYSTEMD_SERVICE = "sshd.socket"
+ inherit systemd
  
- do_install_append() {
--	install -d ${D}${base_libdir}/systemd/system
--	install -m 0644 ${WORKDIR}/dropbearkey.service ${D}${base_libdir}/systemd/system/
--	install -m 0644 ${WORKDIR}/dropbear@.service ${D}${base_libdir}/systemd/system/
--	install -m 0644 ${WORKDIR}/dropbear.socket ${D}${base_libdir}/systemd/system/
- 	ln -sf /dev/null ${D}${base_libdir}/systemd/system/dropbear.service
- }
+ SRC_URI += "file://sshd.socket file://sshd@.service file://sshdgenkeys.service"
 -
--PACKAGES += "${PN}-systemd"
+-do_install_append() {
+-       install -d ${D}${base_libdir}/systemd/system
+-       install -m 644 ${WORKDIR}/sshd.socket ${D}${base_libdir}/systemd/system
+-       install -m 644 ${WORKDIR}/sshd@.service ${D}${base_libdir}/systemd/system
+-       install -m 644 ${WORKDIR}/sshdgenkeys.service ${D}${base_libdir}/systemd/system
+-}
 -
--RDEPENDS_${PN}-systemd += "dropbear"
--FILES_${PN}-systemd = "${base_libdir}/systemd"
+-PACKAGES =+ "openssh-sshd-systemd"
+-
+-FILES_openssh-sshd-systemd += "${base_libdir}/systemd"
+-RDEPENDS_openssh-sshd-systemd += "openssh-sshd"
 -- 
 1.7.4.4
 
