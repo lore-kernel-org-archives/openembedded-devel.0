@@ -1,26 +1,34 @@
-Received: from mail-tul01m020-f175.google.com ([209.85.214.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <zoumpis@gmail.com>) id 1RyCPe-00060s-TD
+	(envelope-from <martin.jansa@gmail.com>) id 1RyKLV-0004ud-5r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Feb 2012 02:15:05 +0100
-Received: by obhx4 with SMTP id x4so4053797obh.6
+	Fri, 17 Feb 2012 10:43:17 +0100
+Received: by eekd41 with SMTP id d41so1122368eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2012 17:06:48 -0800 (PST)
+	Fri, 17 Feb 2012 01:35:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=ZFYjG5zB+lewntHset4LbQRsHzDIn/pIVJWdc4mFe0E=;
-	b=V/j/a9sJC6D10RgHFszRK5YU6J2y5Wtsfq4UVN5/ilbWTgU4P/9igWtmdKROitbkc7
-	yhPUnQ0dzgp/ei49iZthnq408HYBvTeBBolcsi/YN9/glBbI4qeR1MyWkFp3VIHZali2
-	Rf2gP4hZNw/WKHG9fhwALGU4ogWQbTtyARJ3k=
-MIME-Version: 1.0
-Received: by 10.182.155.68 with SMTP id vu4mr3419482obb.61.1329440808586; Thu,
-	16 Feb 2012 17:06:48 -0800 (PST)
-Received: by 10.182.8.40 with HTTP; Thu, 16 Feb 2012 17:06:48 -0800 (PST)
-Date: Fri, 17 Feb 2012 02:06:48 +0100
-Message-ID: <CAEjf2bhPLjjk3nuh4en5qy1Fs0v0BugmZMQB8nd2N5myPQThMg@mail.gmail.com>
-From: Athanasios-Ilias Rousinopoulos <zoumpis@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=xxe07i2Aoiynpw3WEYUyd4XrJzdv2eqteMFQUHA4kNE=;
+	b=wU8CL3EAGfn4Ym8cBEWvY2JTqy0sqwZSlgQxANXgQbALvborm+glM5twR7BTkcWzbp
+	NKqUguRhHnRNRx+S7ENvxNysX/pOKMc2r/XLKX06YacK0U50H8Sj2Kk2Bkv9gDVbmd9X
+	I5bD06cNz2+tPRAsZeYRHF1D6ybZjN7lAgknc=
+Received: by 10.14.100.134 with SMTP id z6mr3439401eef.124.1329471303177;
+	Fri, 17 Feb 2012 01:35:03 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y14sm7173639eef.10.2012.02.17.01.35.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 17 Feb 2012 01:35:01 -0800 (PST)
+Date: Fri, 17 Feb 2012 10:34:59 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Problem while building a simple helloworld.bb recipe....
+Message-ID: <20120217093459.GG5822@jama.jama.net>
+References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
+	<1329357796-27398-6-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1329357796-27398-6-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][v2] 05/22] automatically install all *.service and *.socket supplied in recipe's SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,113 +42,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2012 01:15:06 -0000
-X-Groupsio-MsgNum: 37202
-Content-Type: multipart/mixed; boundary=f46d04478497254d1204b91e8ffe
+X-List-Received-Date: Fri, 17 Feb 2012 09:43:17 -0000
+X-Groupsio-MsgNum: 37203
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="JkW1gnuWHDypiMFO"
+Content-Disposition: inline
 
---f46d04478497254d1204b91e8ffe
-Content-Type: text/plain; charset=ISO-8859-1
+--JkW1gnuWHDypiMFO
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hello everybody,
-
-I face a problem while i build my helloworld recipe. Here i present
-all the information , also i submit the bitbake recipe and the .c
-source. Thanks. Hope someone can help me to overcome this problem and
-configure correctly the recipe. Thanks
-
-Notice : I create a folder called "files" where the .c file is stored.
-Furthermore i did follow the documentation provided by the team
-(http://docs.openembedded.org/usermanual/usermanual.html#recipes_helloworld_example)
+On Thu, Feb 16, 2012 at 03:02:59AM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
 
+After reading today's gentoo systemd news:
+We have decided to move our systemd installation into /usr prefix.
+After the upgrade, the main systemd executable will be installed
+as /usr/bin/systemd and the unit files will be installed
+to /usr/lib/systemd; however, systemd will still look for unit files
+in the /lib location.
 
+I think we should abstract
+${base_libdir}/systemd
+to some variable inside systemd.bbclass, so if we ever decide to move it
+to /usr/lib too, then not only automatically installed *.service files
+=66rom SRC_URI are installalled to right directory.
 
-Error appeared in the terminal while building the .bb recipe : "
+Cheers,
 
-zoumpis@linux-bc34:~> bitbake -b
-/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb
+> ---
+>  meta-oe/classes/systemd.bbclass |   11 +++++++++++
+>  1 files changed, 11 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bb=
+class
+> index 0ea03ee..b2cf775 100644
+> --- a/meta-oe/classes/systemd.bbclass
+> +++ b/meta-oe/classes/systemd.bbclass
+> @@ -78,6 +78,17 @@ python __anonymous() {
+>      systemd_after_parse(d)
+>  }
+> =20
+> +# automatically install all *.service and *.socket supplied in recipe's =
+SRC_URI
+> +do_install_append() {
+> +    install -d ${D}${base_libdir}/systemd/system
+> +    for service in `find ${WORKDIR} -maxdepth 1 -name '*.service' -o -na=
+me '*.socket'` ; do
+> +	# ensure installing systemd-files only (e.g not avahi *.service)
+> +	if grep -q '\[Unit\]' $service ; then
+> +	        install -m 644 $service ${D}${base_libdir}/systemd/system
+> +	fi
+> +    done
+> +}
+> +
+>  python populate_packages_prepend () {
+>  	def systemd_generate_package_scripts(pkg):
+>  		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
+> --=20
+> 1.7.4.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Build Configuration:
-BB_VERSION        = "1.10.2"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "f5626cb"
-TARGET_ARCH       = "i586"
-TARGET_OS         = "linux"
-MACHINE           = "epia"
-DISTRO            = "generic"
-DISTRO_VERSION    = ""
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb
-do_compile failed
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-ERROR: Task 11 (/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb,
-do_compile) failed with 256
-ERROR: '/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb'
-failed
-NOTE: Running task 6 of 14 (ID: 11,
-/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb,
-do_compile)
-NOTE: package myhelloworld-0.1-r0: task do_compile: Started
-ERROR: Function do_compile failed
-NOTE: Task failed: ('function do_compile failed',
-'/usr/local/projects/oetmp/work/i586-linux/myhelloworld-0.1-r0/temp/log.do_compile.10070')
-ERROR: Logfile of failure stored in:
-/usr/local/projects/oetmp/work/i586-linux/myhelloworld-0.1-r0/temp/log.do_compile.10070
-Log data follows:
-| ccache: FATAL: Could not find compiler "i586-linux-gcc" in PATH
-| ERROR: Function do_compile failed
-NOTE: package myhelloworld-0.1-r0: task do_compile: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb
-do_compile failed
-ERROR: Task 11 (/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb,
-do_compile) failed with 256
-ERROR: '/home/zoumpis/work/oe/openembedded/recipes/myhelloworld/myhelloworld_0.1.bb'
-failed
+--JkW1gnuWHDypiMFO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Error log file : "
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-ccache: FATAL: Could not find compiler "i586-linux-gcc" in PATH
-ERROR: Function do_compile failed"
+iEYEARECAAYFAk8+H0MACgkQN1Ujt2V2gBygigCfWQSn14KOjNhRol1+Dhn3QW2b
+ADEAmwT4Js84hbVBICqdKMqX2GNCYe+R
+=SYGt
+-----END PGP SIGNATURE-----
 
-Looking forward for your help!
-
--- 
-
-
-Rousinopoulos Athanasios-Ilias
-
--- About Me--
-http://zoumpis.wordpress.com
-http://www.zoumpis.eu
-http://en.opensuse.org/User:Zoumpis
-http://en.opensuse.org/openSUSE:Medical_team
-
---f46d04478497254d1204b91e8ffe
-Content-Type: application/octet-stream; name="myhelloworld_0.1.bb"
-Content-Disposition: attachment; filename="myhelloworld_0.1.bb"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gyqiumwx0
-
-IApERVNDUklQVElPTiA9ICJIZWxsbyB3b3JsZCBwcm9ncmFtIgpQUiA9ICJyMCIKClNSQ19VUkkg
-PSAiZmlsZTovL215aGVsbG93b3JsZC5jIgoKZG9fY29tcGlsZSgpIHsKICAgICAgICAke0NDfSAk
-e0NGTEFHU30gJHtMREZMQUdTfSAke1dPUktESVJ9L215aGVsbG93b3JsZC5jIC1vIG15aGVsbG93
-b3JsZAp9Cgpkb19pbnN0YWxsKCkgewogICAgICAgIGluc3RhbGwgLW0gMDc1NSAtZCAke0R9JHti
-aW5kaXJ9ICR7RH0ke2RvY2Rpcn0vbXloZWxsb3dvcmxkCiAgICAgICAgaW5zdGFsbCAtbSAwNjQ0
-ICR7U30vbXloZWxsb3dvcmxkICR7RH0ke2JpbmRpcn0KICAgICAgICBpbnN0YWxsIC1tIDA2NDQg
-JHtXT1JLRElSfS9SRUFETUUudHh0ICR7RH0ke2RvY2Rpcn0vbXloZWxsb3dvcmxkCn0KCg==
-
---f46d04478497254d1204b91e8ffe
-Content-Type: text/x-csrc; charset=US-ASCII; name="myhelloworld.c"
-Content-Disposition: attachment; filename="myhelloworld.c"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gyqiuu3l1
-
-I2luY2x1ZGUgPHN0ZGlvLmg+CmludCBtYWluKGludCBhcmdjLCBjaGFyKiogYXJndikKewpwcmlu
-dGYoIkhlbGxvIHdvcmxkIVxuIik7CnJldHVybiAwOwp9Cg==
-
---f46d04478497254d1204b91e8ffe--
+--JkW1gnuWHDypiMFO--
