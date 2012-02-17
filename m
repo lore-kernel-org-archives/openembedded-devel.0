@@ -1,35 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RyRxW-00021v-K9
+	(envelope-from <otavio.salvador@gmail.com>) id 1RyRxY-000221-4H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Feb 2012 18:51:02 +0100
-Received: by ghbf19 with SMTP id f19so1923731ghb.6
+	Fri, 17 Feb 2012 18:51:04 +0100
+Received: by yhfq46 with SMTP id q46so1946136yhf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
+	Fri, 17 Feb 2012 09:42:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=BfpFdliYToiBLoHC0zYJfzpc+FdOQjbdOjOXcMU0BPI=;
-	b=WxCyrR77uukd+uJHVYO2AyveWBPBlZbIjyweEmFh9SJymuK3W+kDDCVytPIuHBwhbY
-	9C76JNP1Hfo29yKirZXyoWHG8P7VKVgwujFZya9dRutt0va35O1DalBXR+bTBPc2Wknv
-	8F4mX8p0ZCZ5nkGB9scl7nmzj/3Mq/1KCZn0E=
-Received: by 10.236.187.5 with SMTP id x5mr10762643yhm.35.1329500567939;
-	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
+	bh=wV7bphCC7fMEJ4Bqd61+kQo9mx+L+2emilP/EXaBpbU=;
+	b=WwGL06uW1in5Ihe8DZfqcqrjOMWJR4uznGe/g65MSIp5nAnfvy2lNOn8ip9tXoiikb
+	q/PtBmIksGrexmCs7i+an2Tyyo40J3Ge5ITCDccQUo+A5v/H2kX9Pwr1oukJJ3ZAQy27
+	0KZcuQgeYWU5HGNGPijmdUv7wadKAWl0gGJfQ=
+Received: by 10.236.184.129 with SMTP id s1mr10966462yhm.21.1329500569460;
+	Fri, 17 Feb 2012 09:42:49 -0800 (PST)
 Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id d5sm15769900anm.22.2012.02.17.09.42.46
+	by mx.google.com with ESMTPS id d5sm15769900anm.22.2012.02.17.09.42.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
+	Fri, 17 Feb 2012 09:42:48 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Feb 2012 17:42:29 +0000
-Message-Id: <b4097e4145cd6bda860464a69c8043893a6f7aa4.1329500479.git.otavio@ossystems.com.br>
+Date: Fri, 17 Feb 2012 17:42:30 +0000
+Message-Id: <9641e5a6fe825a1872ab9e5bcd7dbbab0265ad61.1329500480.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <cover.1329500479.git.otavio@ossystems.com.br>
 References: <cover.1329500479.git.otavio@ossystems.com.br>
 In-Reply-To: <cover.1329500479.git.otavio@ossystems.com.br>
 References: <cover.1329500479.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/7] Revert "systemd.bbclass: depends on systemd"
+Subject: [PATCH][meta-oe 2/7] udisks: explicitly depends on systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2012 17:51:02 -0000
+X-List-Received-Date: Fri, 17 Feb 2012 17:51:04 -0000
 
-This reverts commit c029d4a268de1ac7076fbeb9e337e96fdb1b226d.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/classes/systemd.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
-index 094a12c..2ca7bfc 100644
---- a/meta-oe/classes/systemd.bbclass
-+++ b/meta-oe/classes/systemd.bbclass
-@@ -1,4 +1,4 @@
--DEPENDS_append = " systemd systemd-systemctl-native"
-+DEPENDS_append = " systemd-systemctl-native"
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
+index 55b115e..9ffaca5 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
  
- systemd_postinst() {
- OPTS=""
+-DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
++DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0 systemd"
+ # optional dependencies: device-mapper parted
+ 
+ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+@@ -12,7 +12,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+ SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
+ SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ inherit autotools systemd
+ 
 -- 
 1.7.2.5
 
