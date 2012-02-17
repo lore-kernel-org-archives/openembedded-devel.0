@@ -1,25 +1,30 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1RyLBo-0006YE-3b
+	(envelope-from <otavio.salvador@gmail.com>) id 1RyRxU-00021t-T4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Feb 2012 11:37:20 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 17 Feb 2012 02:29:03 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="67627791"
-Received: from unknown (HELO helios.localnet) ([10.252.123.6])
-	by AZSMGA002.ch.intel.com with ESMTP; 17 Feb 2012 02:29:02 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Athanasios-Ilias Rousinopoulos <zoumpis@gmail.com>
-Date: Fri, 17 Feb 2012 10:29:01 +0000
-Message-ID: <1435009.yvO9RFTQOK@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.0; i686; ; )
-In-Reply-To: <CAEjf2bhPLjjk3nuh4en5qy1Fs0v0BugmZMQB8nd2N5myPQThMg@mail.gmail.com>
-References: <CAEjf2bhPLjjk3nuh4en5qy1Fs0v0BugmZMQB8nd2N5myPQThMg@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Problem while building a simple helloworld.bb recipe....
+	Fri, 17 Feb 2012 18:51:01 +0100
+Received: by yenr5 with SMTP id r5so1932238yen.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Feb 2012 09:42:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=H6eQAYi4r7lvRpKyU3uRN2xoBJjFPn3EhNKcwjLcv9E=;
+	b=hmdqbchu8LUHFDqRGl+k4wUtmVQrZJ+86gw0MW/YjpuFvAJRYQn0M17VZpZPtCxU/T
+	ir91CXSScXYaPRJWNx1ir6Ul8u8m4FoRMSELKskkDgRnOlOF/6lDMrXxTgKTU8VRQESv
+	TyOWwji+5jtnYqp2x9pKEVi5b551yqamGNKvM=
+Received: by 10.101.2.7 with SMTP id e7mr3263715ani.33.1329500566050;
+	Fri, 17 Feb 2012 09:42:46 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id d5sm15769900anm.22.2012.02.17.09.42.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 17 Feb 2012 09:42:45 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Feb 2012 17:42:28 +0000
+Message-Id: <cover.1329500479.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/7] Pending patches in O.S. Systems' tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,33 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2012 10:37:20 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 17 Feb 2012 17:51:01 -0000
 
-On Friday 17 February 2012 02:06:48 Athanasios-Ilias Rousinopoulos wrote:
-> I face a problem while i build my helloworld recipe. Here i present
-> all the information , also i submit the bitbake recipe and the .c
-> source. Thanks. Hope someone can help me to overcome this problem and
-> configure correctly the recipe. Thanks
+The following changes since commit 83281ff6b918b05f0d12d11a0a031db30f7fb1a5:
 
-> zoumpis@linux-bc34:~> bitbake -b
->...
-> ccache: FATAL: Could not find compiler "i586-linux-gcc" in PATH
+  xfce4-settings: Update to latest stable version 4.8.3. (2012-02-14 15:15:54 +0100)
 
-So the answer to this is do not use the -b option unless you've already 
-ensured all the dependencies have been taken care of, because -b will not do 
-that.
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-Simply place the recipe somewhere that bitbake can find it via BBFILES (i.e. 
-next to other recipes) and then use "bitbake helloworld" and it should build 
-fine.
+Otavio Salvador (7):
+  Revert "systemd.bbclass: depends on systemd"
+  udisks: explicitly depends on systemd
+  polkit: depends on systemd
+  net-snmp: sync with 5.7 maintainence branch
+  net-snmp: use netlink support
+  net-snmp: move static libs onto ${PN}-staticdev
+  openbox: add 3.4.11.2
 
-Cheers,
-Paul
+ meta-oe/classes/systemd.bbclass                    |    2 +-
+ .../net-snmp/files/libnl-3-support.patch           |   69 +
+ .../net-snmp/files/sync-with-5.7-branch.patch      |19998 ++++++++++++++++++++
+ meta-oe/recipes-extended/net-snmp/net-snmp.inc     |    9 +-
+ .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |    4 +-
+ .../recipes-extended/polkit/polkit_0.104.bbappend  |    3 +
+ .../openbox/openbox/fix-decorations.patch          |   73 +
+ .../openbox/openbox/fix-dialog-buttons.patch       |   38 +
+ .../openbox/openbox/sync-with-3.4-working.patch    | 2739 +++
+ .../recipes-graphics/openbox/openbox_3.4.11.2.bb   |   40 +
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |    4 +-
+ 11 files changed, 22970 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/net-snmp/files/libnl-3-support.patch
+ create mode 100644 meta-oe/recipes-extended/net-snmp/files/sync-with-5.7-branch.patch
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+ create mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-decorations.patch
+ create mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-dialog-buttons.patch
+ create mode 100644 meta-oe/recipes-graphics/openbox/openbox/sync-with-3.4-working.patch
+ create mode 100644 meta-oe/recipes-graphics/openbox/openbox_3.4.11.2.bb
+
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
