@@ -1,30 +1,35 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1RyRxU-00021t-T4
+	(envelope-from <otavio.salvador@gmail.com>) id 1RyRxW-00021v-K9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Feb 2012 18:51:01 +0100
-Received: by yenr5 with SMTP id r5so1932238yen.6
+	Fri, 17 Feb 2012 18:51:02 +0100
+Received: by ghbf19 with SMTP id f19so1923731ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2012 09:42:46 -0800 (PST)
+	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	bh=H6eQAYi4r7lvRpKyU3uRN2xoBJjFPn3EhNKcwjLcv9E=;
-	b=hmdqbchu8LUHFDqRGl+k4wUtmVQrZJ+86gw0MW/YjpuFvAJRYQn0M17VZpZPtCxU/T
-	ir91CXSScXYaPRJWNx1ir6Ul8u8m4FoRMSELKskkDgRnOlOF/6lDMrXxTgKTU8VRQESv
-	TyOWwji+5jtnYqp2x9pKEVi5b551yqamGNKvM=
-Received: by 10.101.2.7 with SMTP id e7mr3263715ani.33.1329500566050;
-	Fri, 17 Feb 2012 09:42:46 -0800 (PST)
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=BfpFdliYToiBLoHC0zYJfzpc+FdOQjbdOjOXcMU0BPI=;
+	b=WxCyrR77uukd+uJHVYO2AyveWBPBlZbIjyweEmFh9SJymuK3W+kDDCVytPIuHBwhbY
+	9C76JNP1Hfo29yKirZXyoWHG8P7VKVgwujFZya9dRutt0va35O1DalBXR+bTBPc2Wknv
+	8F4mX8p0ZCZ5nkGB9scl7nmzj/3Mq/1KCZn0E=
+Received: by 10.236.187.5 with SMTP id x5mr10762643yhm.35.1329500567939;
+	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
 Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id d5sm15769900anm.22.2012.02.17.09.42.44
+	by mx.google.com with ESMTPS id d5sm15769900anm.22.2012.02.17.09.42.46
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 17 Feb 2012 09:42:45 -0800 (PST)
+	Fri, 17 Feb 2012 09:42:47 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Feb 2012 17:42:28 +0000
-Message-Id: <cover.1329500479.git.otavio@ossystems.com.br>
+Date: Fri, 17 Feb 2012 17:42:29 +0000
+Message-Id: <b4097e4145cd6bda860464a69c8043893a6f7aa4.1329500479.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH][meta-oe 0/7] Pending patches in O.S. Systems' tree
+In-Reply-To: <cover.1329500479.git.otavio@ossystems.com.br>
+References: <cover.1329500479.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1329500479.git.otavio@ossystems.com.br>
+References: <cover.1329500479.git.otavio@ossystems.com.br>
+Subject: [PATCH][meta-oe 1/7] Revert "systemd.bbclass: depends on systemd"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,45 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2012 17:51:01 -0000
+X-List-Received-Date: Fri, 17 Feb 2012 17:51:02 -0000
 
-The following changes since commit 83281ff6b918b05f0d12d11a0a031db30f7fb1a5:
+This reverts commit c029d4a268de1ac7076fbeb9e337e96fdb1b226d.
+---
+ meta-oe/classes/systemd.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-  xfce4-settings: Update to latest stable version 4.8.3. (2012-02-14 15:15:54 +0100)
-
-are available in the git repository at:
-  git://github.com/OSSystems/meta-oe master
-  https://github.com/OSSystems/meta-oe/tree/master
-
-Otavio Salvador (7):
-  Revert "systemd.bbclass: depends on systemd"
-  udisks: explicitly depends on systemd
-  polkit: depends on systemd
-  net-snmp: sync with 5.7 maintainence branch
-  net-snmp: use netlink support
-  net-snmp: move static libs onto ${PN}-staticdev
-  openbox: add 3.4.11.2
-
- meta-oe/classes/systemd.bbclass                    |    2 +-
- .../net-snmp/files/libnl-3-support.patch           |   69 +
- .../net-snmp/files/sync-with-5.7-branch.patch      |19998 ++++++++++++++++++++
- meta-oe/recipes-extended/net-snmp/net-snmp.inc     |    9 +-
- .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |    4 +-
- .../recipes-extended/polkit/polkit_0.104.bbappend  |    3 +
- .../openbox/openbox/fix-decorations.patch          |   73 +
- .../openbox/openbox/fix-dialog-buttons.patch       |   38 +
- .../openbox/openbox/sync-with-3.4-working.patch    | 2739 +++
- .../recipes-graphics/openbox/openbox_3.4.11.2.bb   |   40 +
- meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |    4 +-
- 11 files changed, 22970 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-extended/net-snmp/files/libnl-3-support.patch
- create mode 100644 meta-oe/recipes-extended/net-snmp/files/sync-with-5.7-branch.patch
- create mode 100644 meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
- create mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-decorations.patch
- create mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-dialog-buttons.patch
- create mode 100644 meta-oe/recipes-graphics/openbox/openbox/sync-with-3.4-working.patch
- create mode 100644 meta-oe/recipes-graphics/openbox/openbox_3.4.11.2.bb
-
+diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
+index 094a12c..2ca7bfc 100644
+--- a/meta-oe/classes/systemd.bbclass
++++ b/meta-oe/classes/systemd.bbclass
+@@ -1,4 +1,4 @@
+-DEPENDS_append = " systemd systemd-systemctl-native"
++DEPENDS_append = " systemd-systemctl-native"
+ 
+ systemd_postinst() {
+ OPTS=""
 -- 
 1.7.2.5
 
