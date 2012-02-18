@@ -1,23 +1,43 @@
-Received: from smtp-relay2.palm.com ([64.28.152.243])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <prvs=388a019a3=rich.pixley@palm.com>)
-	id 1RyY5P-0007gS-TQ for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Feb 2012 01:23:36 +0100
-X-IronPort-AV: E=Sophos;i="4.73,441,1325491200"; d="scan'208";a="11750093"
-Received: from unknown (HELO ushqusdns3.palm.com) ([148.92.223.90])
-	by smtp-relay2.palm.com with ESMTP; 17 Feb 2012 16:14:14 -0800
-Received: from joso.noir.com ([10.100.2.14])
-	by ushqusdns3.palm.com (8.14.4/8.14.4) with ESMTP id q1I0E2Qw008750;
-	Fri, 17 Feb 2012 16:14:02 -0800
-Message-ID: <4F3EED56.3080400@palm.com>
-Date: Fri, 17 Feb 2012 16:14:14 -0800
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.1) Gecko/20120208 Thunderbird/10.0.1
+	(envelope-from <otavio.salvador@gmail.com>) id 1RybUU-0005ie-4A
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Feb 2012 05:01:42 +0100
+Received: by vbbff1 with SMTP id ff1so3019224vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Feb 2012 19:53:26 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.52.72.107 as permitted sender) client-ip=10.52.72.107; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.52.72.107 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.52.72.107])
+	by 10.52.72.107 with SMTP id c11mr5488003vdv.48.1329537206823 (num_hops
+	= 1); Fri, 17 Feb 2012 19:53:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=jM9jgm6he2/2lc0sJ9F/MDfwzOThjL8R87UyoVuC5Fk=;
+	b=sBoSt8w57SjmfDYvjImd0EAeE1kw2hEIFkKqmpvrl/2b8Y/uC0YITZR816ptwmwXog
+	W87TeI9qwIUoCTe7Vq14hztWqebw3mj+XIJeOeMxQOoWRfHYhG2lMmxZ4Qp4/rw08x60
+	MvLcHAhrWFDIp1yxM90Q4JFkoGYElIZgdLF8k=
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: runqemu?
+Received: by 10.52.72.107 with SMTP id c11mr4446906vdv.48.1329537205519; Fri,
+	17 Feb 2012 19:53:25 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.3.84 with HTTP; Fri, 17 Feb 2012 19:53:25 -0800 (PST)
+In-Reply-To: <20120217223333.GL5822@jama.jama.net>
+References: <cover.1329500479.git.otavio@ossystems.com.br>
+	<ec40b0cf0436738ab76988ab5d41618a72c4d3c4.1329500480.git.otavio@ossystems.com.br>
+	<20120217223333.GL5822@jama.jama.net>
+Date: Sat, 18 Feb 2012 01:53:25 -0200
+X-Google-Sender-Auth: _8vx_Sdx0r7Z4VgiRzHibJkmX4s
+Message-ID: <CAP9ODKpP-w1BfLpFnmUcTGKCpyBMn7ma=c1HKfBWs4iJZC2qBw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH][meta-oe 3/7] polkit: depends on systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,55 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2012 00:23:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Feb 2012 04:01:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-What do I need to do to be able to run core-image-minimal on 
-Ubuntu-11.10 amd64?
+On Fri, Feb 17, 2012 at 20:33, Martin Jansa <martin.jansa@gmail.com> wrote:
 
---rich
+> On Fri, Feb 17, 2012 at 05:42:31PM +0000, Otavio Salvador wrote:
+> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> > ---
+> >  .../recipes-extended/polkit/polkit_0.104.bbappend  |    3 +++
+> >  1 files changed, 3 insertions(+), 0 deletions(-)
+> >  create mode 100644 meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+>
+> This looks like that old version I had commented before, please update
+> it.
+>
 
-cd /home/rich/projects/webos/openembedded-core && . ./oe-init-build-env 
-&& runqemu qemux86
+Please send me a patch that works for your need since I didn't fully get
+what you wanted on it; in this case I can merge it on our tree and send an
+updated patchset.
 
-### Shell environment set up for builds. ###
-
-You can now run 'bitbake <target>'
-
-Common targets are:
-     core-image-minimal
-     core-image-sato
-     meta-toolchain
-     meta-toolchain-sdk
-     adt-installer
-     meta-ide-support
-
-You can also run generated qemu images with a command like 'runqemu qemux86'
-
-
-Continuing with the following parameters:
-KERNEL: 
-[/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/bzImage-qemux86.bin]
-ROOTFS: 
-[/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/core-image-minimal-qemux86.ext3]
-FSTYPE: [ext3]
-Setting up tap interface under sudo
-Acquiring lockfile for tap0...
-WARNING: distccd not present, no distcc support loaded.
-Running qemu...
-/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin/qemu 
--kernel 
-/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/bzImage-qemux86.bin 
--net nic,vlan=0 -net tap,vlan=0,ifname=tap0,script=no,downscript=no -hda 
-/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/core-image-minimal-qemux86.ext3 
--show-cursor -usb -usbdevice wacom-tablet -vga vmware -enable-gl 
--no-reboot -m 128 --append "vga=0 root=/dev/hda rw mem=128M 
-ip=192.168.7.2::192.168.7.1:255.255.255.0 oprofile.timer=1 "
-Enabling opengl
-Could not initialize SDL(No available video device) - exiting
-Set 'tap0' nonpersistent
-Releasing lockfile of preconfigured tap device 'tap0'
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
