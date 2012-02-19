@@ -1,42 +1,38 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1Rz5cp-0002PW-6p
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1RzBsv-00069S-Ui
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Feb 2012 13:12:19 +0100
-Received: by eaal10 with SMTP id l10so1582564eaa.6
+	Sun, 19 Feb 2012 19:53:21 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 0682522325A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2012 04:04:02 -0800 (PST)
-Received-SPF: pass (google.com: domain of tworaz666@gmail.com designates
-	10.213.28.133 as permitted sender) client-ip=10.213.28.133; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of tworaz666@gmail.com
-	designates 10.213.28.133 as permitted sender)
-	smtp.mail=tworaz666@gmail.com;
-	dkim=pass header.i=tworaz666@gmail.com
-Received: from mr.google.com ([10.213.28.133])
-	by 10.213.28.133 with SMTP id m5mr1372803ebc.62.1329653042867 (num_hops
-	= 1); Sun, 19 Feb 2012 04:04:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=tuHT8rGTHvtomrDILb4zpvNadVHsCi3bqlTXvrrI0TA=;
-	b=Fp01ju/EAMdyHEiRhr3wdO4xXJK6B/w+GkdvCnh0RhfihcM2hKT6NF/B0bxlWNAYae
-	1hlb7cr5dwToS8ZQLPBs1NXLDWB+VUZHK7rwjmE4K/wDcr4Pid9Hr7V23LjGToQRYqx3
-	TwyYf89hjaTtSCg5O3/8FVBIlp5gAN56fJT/Y=
-Received: by 10.213.28.133 with SMTP id m5mr1095249ebc.62.1329653042409;
-	Sun, 19 Feb 2012 04:04:02 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id n56sm63923972eeh.6.2012.02.19.04.04.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 19 Feb 2012 04:04:01 -0800 (PST)
-From: Peter Tworek <tworaz666@gmail.com>
+	Sun, 19 Feb 2012 19:45:07 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 0A56322325A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Feb 2012 19:45:06 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052065100.adsl.alicedsl.de
+	[78.52.65.100]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Feb 2012 19:45:05 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 580F43C4B9; Sun, 19 Feb 2012 19:44:57 +0100 (CET)
+Date: Sun, 19 Feb 2012 19:44:57 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Feb 2012 13:01:32 +0100
-Message-Id: <1329652892-30435-2-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1329652892-30435-1-git-send-email-tworaz666@gmail.com>
-References: <1329652892-30435-1-git-send-email-tworaz666@gmail.com>
-Subject: [meta-oe][PATCH 2/2] farsight2: Fix QA warning about non staticdev containing .a files.
+Message-ID: <20120219184455.GA26592@rhein.zuhause.netz>
+References: <1329600022-8027-1-git-send-email-heinold@inf.fu-berlin.de>
+	<20120219002734.GA9459@sakrah.homelinux.org>
+MIME-Version: 1.0
+In-Reply-To: <20120219002734.GA9459@sakrah.homelinux.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [oe-classic][PATCH 00/12] openjdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,39 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2012 12:12:19 -0000
+X-List-Received-Date: Sun, 19 Feb 2012 18:53:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Sat, Feb 18, 2012 at 04:27:34PM -0800, Khem Raj wrote:
+> On (18/02/12 22:20), Henning Heinold wrote:
+> > Hi,
+> > 
+> > in good old tradition I send this patches for review against
+> > older openembedded.dev branch. It makes openjdk buildable
+> > again and updates it to version 1.11.1.
+> > Work was sponsored by Koan s.a.s. If nobody objects I will
+> > commit it on monday.
+> 
+> the patches look sane. Two things I would think will be nice is
+> 1. are these patches needed on 2011.03 branch ? if yes please submit
+> the pull request for the maintenance branch too
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- .../recipes-support/farsight/farsight2_0.0.22.bb   |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+When there is someone who needs them in 2011.03 he can test and make a pull request.
 
-diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-index 8b92ec3..91fe692 100644
---- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-+++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-@@ -5,7 +5,7 @@ SRC_URI = "http://farsight.freedesktop.org/releases/farsight2/${P}.tar.gz"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
--PR = "r1"
-+PR = "r2"
- 
- DEPENDS = "libnice glib-2.0 libxml2 zlib dbus gstreamer gst-plugins-base"
- 
-@@ -18,7 +18,8 @@ EXTRA_OECONF = " \
- "
- 
- FILES_${PN} += "${libdir}/*/*.so"
--FILES_${PN}-dev += "${libdir}/*/*a"
-+FILES_${PN}-dev += "${libdir}/*/*.la"
-+FILES_${PN}-staticdev += "${libdir}/*/*.a"
- FILES_${PN}-dbg += "${libdir}/*/.debug"
- 
- 
--- 
-1.7.3.4
+> 2. Are any of these patches needed for meta-java or any other
+> layer then they should be forwarded ported to respective layer
+> as well
 
+As beeing the meta-java maintainer only the 1.11.1 recipe will be soon in meta-oe,
+when I find the time.
+
+Bye Henning
 
 
