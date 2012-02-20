@@ -1,38 +1,19 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1RzBsv-00069S-Ui
+Received: from smtp3-g21.free.fr ([212.27.42.3])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1RzOD6-0006u2-0C
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Feb 2012 19:53:21 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 0682522325A8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2012 19:45:07 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 0A56322325A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2012 19:45:06 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052065100.adsl.alicedsl.de
-	[78.52.65.100]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2012 19:45:05 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 580F43C4B9; Sun, 19 Feb 2012 19:44:57 +0100 (CET)
-Date: Sun, 19 Feb 2012 19:44:57 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Mon, 20 Feb 2012 09:03:00 +0100
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id A4E9EA6283;
+	Mon, 20 Feb 2012 08:54:40 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120219184455.GA26592@rhein.zuhause.netz>
-References: <1329600022-8027-1-git-send-email-heinold@inf.fu-berlin.de>
-	<20120219002734.GA9459@sakrah.homelinux.org>
+Date: Mon, 20 Feb 2012 08:54:28 +0100
+Message-Id: <1329724469-2002-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.7.6
 MIME-Version: 1.0
-In-Reply-To: <20120219002734.GA9459@sakrah.homelinux.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [oe-classic][PATCH 00/12] openjdk
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe 1/2] imagemagick: upgrade to latest stable version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,33 +27,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2012 18:53:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Feb 2012 08:03:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 18, 2012 at 04:27:34PM -0800, Khem Raj wrote:
-> On (18/02/12 22:20), Henning Heinold wrote:
-> > Hi,
-> > 
-> > in good old tradition I send this patches for review against
-> > older openembedded.dev branch. It makes openjdk buildable
-> > again and updates it to version 1.11.1.
-> > Work was sponsored by Koan s.a.s. If nobody objects I will
-> > commit it on monday.
-> 
-> the patches look sane. Two things I would think will be nice is
-> 1. are these patches needed on 2011.03 branch ? if yes please submit
-> the pull request for the maintenance branch too
+- 6.4.4 doesn't compile following zlib upgrade to 1.26
+- hack configure.ac to remove lzip requirement for autoconf (which
+is not present in OE and not needed for compiling imagemagick)
 
-When there is someone who needs them in 2011.03 he can test and make a pull request.
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ .../imagemagick-6.4.4/PerlMagic_MakePatch.patch    |   11 ------
+ .../imagemagick-6.7.5/PerlMagic_MakePatch.patch    |   11 ++++++
+ .../imagemagick/imagemagick_6.4.4.bb               |   38 --------------=
+------
+ .../imagemagick/imagemagick_6.7.5.bb               |   37 ++++++++++++++=
++++++
+ 4 files changed, 48 insertions(+), 49 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.4.4=
+/PerlMagic_MakePatch.patch
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.7.5=
+/PerlMagic_MakePatch.patch
+ delete mode 100644 meta-oe/recipes-support/imagemagick/imagemagick_6.4.4=
+.bb
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick_6.7.5=
+.bb
 
-> 2. Are any of these patches needed for meta-java or any other
-> layer then they should be forwarded ported to respective layer
-> as well
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMa=
+gic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.4=
+.4/PerlMagic_MakePatch.patch
+deleted file mode 100644
+index f8ad0af..0000000
+--- a/meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMagic_Mak=
+ePatch.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- /tmp/Makefile.PL.in	2008-10-01 10:39:38.000000000 +0200
+-+++ ImageMagick-6.4.4/PerlMagick/Makefile.PL.in	2008-10-01 10:40:25.0000=
+00000 +0200
+-@@ -87,6 +87,8 @@
+-=20
+-    # Use same compiler as ImageMagick
+-    'PERLMAINCC'	=3D> '@PERLMAINCC@ @OPENMP_CFLAGS@',
+-+   'AR' =3D> '@AR@',
+-+   'LD' =3D> '@PERLMAINCC@',
+-=20
+-    # Set Perl installation prefix to ImageMagick installation prefix
+- #   'PREFIX'	=3D> '@prefix@',
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMa=
+gic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7=
+.5/PerlMagic_MakePatch.patch
+new file mode 100644
+index 0000000..f8ad0af
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_Mak=
+ePatch.patch
+@@ -0,0 +1,11 @@
++--- /tmp/Makefile.PL.in	2008-10-01 10:39:38.000000000 +0200
+++++ ImageMagick-6.4.4/PerlMagick/Makefile.PL.in	2008-10-01 10:40:25.0000=
+00000 +0200
++@@ -87,6 +87,8 @@
++=20
++    # Use same compiler as ImageMagick
++    'PERLMAINCC'	=3D> '@PERLMAINCC@ @OPENMP_CFLAGS@',
+++   'AR' =3D> '@AR@',
+++   'LD' =3D> '@PERLMAINCC@',
++=20
++    # Set Perl installation prefix to ImageMagick installation prefix
++ #   'PREFIX'	=3D> '@prefix@',
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb b/m=
+eta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
+deleted file mode 100644
+index d5f95c9..0000000
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
++++ /dev/null
+@@ -1,38 +0,0 @@
+-DESCRIPTION =3D "ImageMagick is an image convertion tools"
+-SECTION =3D "console/utils"
+-LICENSE =3D "ImageMagick"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De1ebcc1358b9f81eba64255fc5da6=
+892"
+-# FIXME: There is much more checked libraries. All should be added or ex=
+plicitly disabled to get consistent results.
+-DEPENDS =3D "lcms bzip2 jpeg libpng librsvg tiff zlib"
+-
+-PR =3D "r10"
+-
+-PATCHSET =3D "1"
+-SRC_URI =3D "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATC=
+HSET}.tar.bz2 \
+-           file://PerlMagic_MakePatch.patch \
+-          "
+-SRC_URI[md5sum] =3D "882ff241f6ad39655541d5055596f93b"
+-SRC_URI[sha256sum] =3D "5a5b2779707bfd9816cf17d8f53d242c05005092da192a89=
+8ac10961b3b19dda"
+-
+-S =3D "${WORKDIR}/ImageMagick-${PV}"
+-
+-inherit autotools binconfig pkgconfig
+-
+-EXTRA_OECONF =3D "--program-prefix=3D --without-x --without-freetype --w=
+ithout-perl --disable-openmp"
+-
+-FILES_${PN} +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
+-                ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
+-                ${libdir}/ImageMagick-${PV}/config/ \
+-                ${datadir}/ImageMagick-${PV}"
+-
+-FILES_${PN}-dev +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
+-
+-FILES_${PN}-dbg +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/.debug/*=
+"
+-
+-BBCLASSEXTEND =3D "native"
+-
+-LEAD_SONAME =3D "libMagickCore.so.*"
+-
+-do_configure_prepend() {
+-    export ac_cv_sys_file_offset_bits=3Dyes
+-}
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/m=
+eta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+new file mode 100644
+index 0000000..9b8b799
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION =3D "ImageMagick is an image convertion tools"
++SECTION =3D "console/utils"
++LICENSE =3D "ImageMagick"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D944f66dcedc98d5a4e5d964bd3b32=
+e7b"
++# FIXME: There is much more checked libraries. All should be added or ex=
+plicitly disabled to get consistent results.
++DEPENDS =3D "lcms bzip2 jpeg libpng librsvg tiff zlib"
++
++PATCHSET =3D "6"
++SRC_URI =3D "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATC=
+HSET}.tar.bz2 \
++           file://PerlMagic_MakePatch.patch \
++          "
++SRC_URI[md5sum] =3D "bcf07cf0822572fa2b47fa6d506f699a"
++SRC_URI[sha256sum] =3D "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5=
+a7dae01e47bdbd80"
++
++S =3D "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
++
++inherit autotools binconfig pkgconfig
++
++EXTRA_OECONF =3D "--program-prefix=3D --without-x --without-freetype --w=
+ithout-perl --disable-openmp"
++
++FILES_${PN} +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
++                ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
++                ${libdir}/ImageMagick-${PV}/config/ \
++                ${datadir}/ImageMagick-${PV}"
++
++FILES_${PN}-dev +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
++
++FILES_${PN}-dbg +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/.debug/*=
+"
++
++BBCLASSEXTEND =3D "native"
++
++LEAD_SONAME =3D "libMagickCore.so.*"
++
++do_configure_prepend() {
++    export ac_cv_sys_file_offset_bits=3Dyes
++	sed -i -e s:dist-lzip::g ${S}/configure.ac
++}
+--=20
+1.7.7.6
 
-As beeing the meta-java maintainer only the 1.11.1 recipe will be soon in meta-oe,
-when I find the time.
-
-Bye Henning
 
 
