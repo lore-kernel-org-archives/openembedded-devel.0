@@ -1,35 +1,39 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1RzbBu-0004sM-JX
+	(envelope-from <martin.jansa@gmail.com>) id 1RzbcL-0006Ec-US
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Feb 2012 22:54:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 8664031590FA;
-	Mon, 20 Feb 2012 22:46:21 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id MzDhFe69huLt; Mon, 20 Feb 2012 22:46:14 +0100 (CET)
-Received: from [172.22.22.61] (drms-590ecde1.pool.mediaWays.net
-	[89.14.205.225])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 794CC3146807;
-	Mon, 20 Feb 2012 22:46:14 +0100 (CET)
-Message-ID: <4F42BF25.4010100@opendreambox.org>
-Date: Mon, 20 Feb 2012 22:46:13 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-MIME-Version: 1.0
+	Mon, 20 Feb 2012 23:21:57 +0100
+Received: by eaal10 with SMTP id l10so1991169eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.189.9 as permitted sender) client-ip=10.14.189.9; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.189.9 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.189.9])
+	by 10.14.189.9 with SMTP id b9mr11506696een.34.1329776019888 (num_hops
+	= 1); Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/RP7xJJb0idPTS8hI6l1ZVHF1C297HEsDBXvFUy7C5Y=;
+	b=xaC1LJr9fgQxbEj9Tw4slRLAzO9UC7zlwXnQgHLLKKZlPhGTuEK23ZhyXc6h4OJhXq
+	JmVJ73ZsSx8fVziftqJ1Lg8difNnSGpDUKpFc9FRyxOEFmCxsCjPQhTPJxVbvaVIDpoY
+	gm3KWEEOaEkOCECVGTQXAuKx13biyJT3o91oI=
+Received: by 10.14.189.9 with SMTP id b9mr9167083een.34.1329776019489;
+	Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n52sm82332531eea.5.2012.02.20.14.13.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 20 Feb 2012 14:13:38 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1329745909-21013-1-git-send-email-eric@eukrea.com>
-	<4F429115.3070907@opendreambox.org>
-	<CAMKF1soWPAX9S06t3JJb1LZdFUozr+AQ89=apxbXkZWz_ShcVQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soWPAX9S06t3JJb1LZdFUozr+AQ89=apxbXkZWz_ShcVQ@mail.gmail.com>
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-oe] vsftpd: add new package
+Date: Mon, 20 Feb 2012 23:13:30 +0100
+Message-Id: <cover.1329775974.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][meta-efl][PATCH 0/2] polkit and task-illume fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,27 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2012 21:54:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Feb 2012 22:21:58 -0000
 
-On 20.02.2012 21:15, Khem Raj wrote:
-> On Mon, Feb 20, 2012 at 10:29 AM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
->> +LICENSE = "GPL-2.0-with-OpenSSL-exception"
-> 
-> there might be a different way to represent that
+The following changes since commit 143367e4f584ea7054dca2a466f410a46d02e6b1:
 
-Obviously. And maybe someone will eventually find out which different
-way there is and why it's preferred over any other way.
+  busybox: create /etc/default on do_install (2012-02-20 22:55:28 +0100)
 
-Anyway, this was inspired by OE-core's socat recipe, which uses
-"GPL-2.0+-with-OpenSSL-exception".
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
-Any other useful comments?
+Martin Jansa (2):
+  polkit: enable and disable systemd/consolekit support explicitly
+  task-x11-illume: change default ETHEME from e-wm-theme-illume to
+    e-wm-theme-default
 
-Regards,
-Andreas
+ meta-efl/recipes-efl/tasks/task-x11-illume.bb      |    6 +++---
+ .../recipes-extended/polkit/polkit_0.104.bbappend  |    7 +++++--
+ 2 files changed, 8 insertions(+), 5 deletions(-)
+
+-- 
+1.7.8.4
 
 
 
