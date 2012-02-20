@@ -1,39 +1,41 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1RzbcL-0006Ec-US
+	(envelope-from <martin.jansa@gmail.com>) id 1RzbcW-0006F0-E0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Feb 2012 23:21:57 +0100
-Received: by eaal10 with SMTP id l10so1991169eaa.6
+	Mon, 20 Feb 2012 23:22:08 +0100
+Received: by eekd41 with SMTP id d41so2044814eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+	Mon, 20 Feb 2012 14:13:50 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.189.9 as permitted sender) client-ip=10.14.189.9; 
+	10.14.29.66 as permitted sender) client-ip=10.14.29.66; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.189.9 as permitted sender)
+	designates 10.14.29.66 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.189.9])
-	by 10.14.189.9 with SMTP id b9mr11506696een.34.1329776019888 (num_hops
-	= 1); Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+Received: from mr.google.com ([10.14.29.66])
+	by 10.14.29.66 with SMTP id h42mr11382477eea.75.1329776030270 (num_hops
+	= 1); Mon, 20 Feb 2012 14:13:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=/RP7xJJb0idPTS8hI6l1ZVHF1C297HEsDBXvFUy7C5Y=;
-	b=xaC1LJr9fgQxbEj9Tw4slRLAzO9UC7zlwXnQgHLLKKZlPhGTuEK23ZhyXc6h4OJhXq
-	JmVJ73ZsSx8fVziftqJ1Lg8difNnSGpDUKpFc9FRyxOEFmCxsCjPQhTPJxVbvaVIDpoY
-	gm3KWEEOaEkOCECVGTQXAuKx13biyJT3o91oI=
-Received: by 10.14.189.9 with SMTP id b9mr9167083een.34.1329776019489;
-	Mon, 20 Feb 2012 14:13:39 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=H/PREGxYJRke3QooFI3sidjYWwLvn5k7RMY2iTIxDYg=;
+	b=FVERMn5slZb7fFEFJXsXxnXfHc3BKka+qjFhXwQ8GueyabRyWCyxCoWoddGhjZs40c
+	qrwZHcfaMMsCGYYm9ZMT9b7mJQIhGl6qsL5rKdVj/T45SyCsdqWq3t8WM7SdMINdCAH8
+	twKAEHxlHgxY4yUgBSYU9L6NvFefpksPXjXcY=
+Received: by 10.14.29.66 with SMTP id h42mr9049476eea.75.1329776030195;
+	Mon, 20 Feb 2012 14:13:50 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n52sm82332531eea.5.2012.02.20.14.13.38
+	by mx.google.com with ESMTPS id w60sm82350471eeb.4.2012.02.20.14.13.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Feb 2012 14:13:38 -0800 (PST)
+	Mon, 20 Feb 2012 14:13:49 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2012 23:13:30 +0100
-Message-Id: <cover.1329775974.git.Martin.Jansa@gmail.com>
+Date: Mon, 20 Feb 2012 23:13:40 +0100
+Message-Id: <39ee8c2d0d24a2c80eca0afdff9b19ced16f6034.1329775974.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][meta-efl][PATCH 0/2] polkit and task-illume fix
+In-Reply-To: <cover.1329775974.git.Martin.Jansa@gmail.com>
+References: <cover.1329775974.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-efl][PATCH 1/2] polkit: enable and disable systemd/consolekit support explicitly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,25 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2012 22:21:58 -0000
+X-List-Received-Date: Mon, 20 Feb 2012 22:22:08 -0000
 
-The following changes since commit 143367e4f584ea7054dca2a466f410a46d02e6b1:
+* people using sysvinit already have or can set something like
+  task-core-boot.bb does VIRTUAL-RUNTIME_init_manager ?= "sysvinit"
+  to disable systemd explicitly (so it's not picked by shlib when it's
+  available because other packages).
+* and for the rest it will disable consolekit and enable systemd
+  explititly
 
-  busybox: create /etc/default on do_install (2012-02-20 22:55:28 +0100)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (2):
-  polkit: enable and disable systemd/consolekit support explicitly
-  task-x11-illume: change default ETHEME from e-wm-theme-illume to
-    e-wm-theme-default
-
- meta-efl/recipes-efl/tasks/task-x11-illume.bb      |    6 +++---
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  .../recipes-extended/polkit/polkit_0.104.bbappend  |    7 +++++--
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+index 3c43970..d649f61 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
++++ b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+@@ -1,3 +1,6 @@
+-DEPENDS += "systemd"
++PRINC := "${@int(PRINC) + 3}"
+ 
+-PRINC = "1"
++PACKAGECONFIG ??= "${@base_contains('VIRTUAL-RUNTIME_init_manager', 'sysvinit', 'consolekit', 'systemd', d)}"
++PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
++# there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
++PACKAGECONFIG[consolekit] = ",,,consolekit"
 -- 
 1.7.8.4
 
