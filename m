@@ -1,44 +1,23 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rzbcc-0006F0-J0
+	(envelope-from <eric@eukrea.com>) id 1Rzbl5-0007xW-0u
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Feb 2012 23:22:14 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so2044814eek.6
+	Mon, 20 Feb 2012 23:30:59 +0100
+Received: from eb-e6520 (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id D6C45A618D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2012 14:13:58 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.2.67 as permitted sender) client-ip=10.213.2.67; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.2.67 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.2.67])
-	by 10.213.2.67 with SMTP id 3mr2857211ebi.46.1329776038712 (num_hops =
-	1); Mon, 20 Feb 2012 14:13:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=fVLai08AHLSTR16zRiN919r8jrhSU2hTl3mHWF4D/Gs=;
-	b=G8VwGq6HEV8b6iuMojF2bpZ6S5CAgwnc4AULpPkBntLO5GXxUCsak/2v6P7NO8+CPO
-	fu6lUfQ+t807wmxhmFsyrrtwg7+4yafjZ2/JSEAr/ufJy0q1biSb9X7nyrWvI3rs96n1
-	y4mbUdss0AZreDBur47HvpMZTtOBJeiXxEnTA=
-Received: by 10.213.2.67 with SMTP id 3mr2257381ebi.46.1329776038229;
-	Mon, 20 Feb 2012 14:13:58 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id u9sm65284567eem.11.2012.02.20.14.13.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Feb 2012 14:13:57 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 20 Feb 2012 23:22:38 +0100 (CET)
+Date: Mon, 20 Feb 2012 23:22:37 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2012 23:13:41 +0100
-Message-Id: <17ab4f811136f8611964110fcf2098813f30f7ab.1329775974.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <39ee8c2d0d24a2c80eca0afdff9b19ced16f6034.1329775974.git.Martin.Jansa@gmail.com>
-References: <39ee8c2d0d24a2c80eca0afdff9b19ced16f6034.1329775974.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1329775974.git.Martin.Jansa@gmail.com>
-References: <cover.1329775974.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 2/2] task-x11-illume: change default ETHEME from e-wm-theme-illume to e-wm-theme-default
+Message-ID: <20120220232237.39546d3f@eb-e6520>
+In-Reply-To: <4F429115.3070907@opendreambox.org>
+References: <1329745909-21013-1-git-send-email-eric@eukrea.com>
+	<4F429115.3070907@opendreambox.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [meta-oe] vsftpd: add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,40 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2012 22:22:14 -0000
+X-List-Received-Date: Mon, 20 Feb 2012 22:30:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* e-wm-theme-illume is gone with illume1 (see b37564b7355af71595ac48b96bcf7d2087e47c73)
-* found by accident when running distroless build, guess everybody is using own theme anyway
+Hi Andreas,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/tasks/task-x11-illume.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+Le Mon, 20 Feb 2012 19:29:41 +0100,
+Andreas Oberritter <obi@opendreambox.org> a =E9crit :
+> On 20.02.2012 14:51, Eric B=E9nard wrote:
+> > - imported 2.0.5 from oe-classic
+> > - upgrade to 2.3.5 which is latest stable
+> > - tested on ARMv5 with Angstrom
+>=20
+> I created a recipe for vsftpd, too. Here's my version for your=20
+> reference. All patches were taken from the Debian or Ubuntu package.
+>=20
+> It differs from your recipe in these ways:
+> - uses openssl
+> - uses pam if available
+> - uses xinetd
 
-diff --git a/meta-efl/recipes-efl/tasks/task-x11-illume.bb b/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-index e197cc7..6557619 100644
---- a/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-+++ b/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-@@ -3,14 +3,14 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${TOPDIR}/meta-openembedded/meta-efl/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- PV = "1.0"
--PR = "r1"
-+PR = "r2"
- 
- # WORK IN PROGRESS
- 
- inherit task
- 
--# Default illume theme
--ETHEME ?= "e-wm-theme-illume"
-+# Default theme and config
-+ETHEME ?= "e-wm-theme-default"
- ECONFIG ?= "e-wm-config-illume2"
- 
- RDEPENDS_${PN} = "\
--- 
-1.7.8.4
+I'm not sure that depending on xinetd is a good point, I've no strong
+opinion concerning the other points (except I don't need openssl, pam
+& xinetd in my image in the project where I'm using vsftp).
 
+> - allows to set custom default configuration options in bbappends
+
+Isn't that also possible by simply providing a custom vsftpd.conf in
+the project's layer ?
+
+Eric
+--=20
+http://eukrea.com/en/news/104-2012
 
 
