@@ -1,21 +1,40 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1Rzfky-0002Iu-Ij
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1Rzfuk-0002nY-LA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 03:47:08 +0100
-Received: (qmail invoked by alias); 21 Feb 2012 02:32:09 -0000
-Received: from unknown (EHLO pink.cheepee.homedns.org) [95.76.68.223]
-	by mail.gmx.net (mp072) with SMTP; 21 Feb 2012 03:32:09 +0100
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1//WGZu3Mr/dP/PUa5V/zBqRNdv1uqLm6oH2WboWf
-	/+rRQXN2eZpiGF
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
+	Tue, 21 Feb 2012 03:57:14 +0100
+Received: by pbcum15 with SMTP id um15so1240800pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Feb 2012 18:48:55 -0800 (PST)
+Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
+	10.68.132.166 as permitted sender) client-ip=10.68.132.166; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of raj.khem@gmail.com
+	designates 10.68.132.166 as permitted sender)
+	smtp.mail=raj.khem@gmail.com;
+	dkim=pass header.i=raj.khem@gmail.com
+Received: from mr.google.com ([10.68.132.166])
+	by 10.68.132.166 with SMTP id ov6mr68869355pbb.122.1329792535259
+	(num_hops = 1); Mon, 20 Feb 2012 18:48:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=IihehFsRqBiybFlyGhma7A4a/VYp7yDDJWBSa1D6Y/A=;
+	b=Sj9rAkQHJ/Kz2FvQ/Mi3pCXwx4c3YZY07muat08ySBotO+P57l2DChmMncpDUtFvve
+	lvaKUA3/88ONkYJcJv9jnMHs/wnr+GuSW9ZOItEPmCf/bMjjQ+Y3USrfbTUy6vD7lRn+
+	y4WN9qjogeh5uGMEgEJO9laUfMFd0QbbDYm/Y=
+Received: by 10.68.132.166 with SMTP id ov6mr56716710pbb.122.1329792535233;
+	Mon, 20 Feb 2012 18:48:55 -0800 (PST)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id 3sm14749462pbx.66.2012.02.20.18.48.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 20 Feb 2012 18:48:54 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Feb 2012 04:32:04 +0200
-Message-Id: <1329791524-15461-1-git-send-email-cheepeero@gmx.net>
-X-Mailer: git-send-email 1.7.3.4
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe][PATCH] v4l-utils: skip qv4l2 instead of using host toolchain
+Date: Mon, 20 Feb 2012 18:47:37 -0800
+Message-Id: <1329792457-3884-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] udev: Upgrade 180 -> 181
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,84 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 02:47:08 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 02:57:15 -0000
 
-See #2134
+180 does not compile with kmod-5
 
-The makefiles in the project attempt to use the host compilers if
-qmake is installed.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../v4l2apps/files/skip-qv4l2-0.8.4.patch          |   37 ++++++++++++++++++++
- .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |    5 ++-
- 2 files changed, 40 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
+ .../recipes-core/udev/{udev_180.bb => udev_181.bb} |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-core/udev/{udev_180.bb => udev_181.bb} (95%)
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
-new file mode 100644
-index 0000000..c8e8388
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
-@@ -0,0 +1,37 @@
-+diff --git a/utils/Makefile b/utils/Makefile
-+index 71a3cb7..1d23c8b 100644
-+--- a/utils/Makefile
-++++ b/utils/Makefile
-+@@ -11,19 +11,19 @@ all install:
-+ 	fi
-+ 
-+ 	# Test whether qmake is installed, and whether it is for qt4.
-+-	@if which qmake-qt4 >/dev/null 2>&1; then \
-+-		QMAKE=qmake-qt4; \
-+-	else \
-+-		QMAKE=qmake; \
-+-	fi; \
-+-	if which $$QMAKE >/dev/null 2>&1; then \
-+-		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
-+-			if [ ! -f qv4l2/Makefile ]; then \
-+-				(cd qv4l2 && $$QMAKE) || exit 1; \
-+-			fi; \
-+-			$(MAKE) -C qv4l2 -f Makefile.install $@; \
-+-		fi \
-+-	fi
-++#	@if which qmake-qt4 >/dev/null 2>&1; then \
-++#		QMAKE=qmake-qt4; \
-++#	else \
-++#		QMAKE=qmake; \
-++#	fi; \
-++#	if which $$QMAKE >/dev/null 2>&1; then \
-++#		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
-++#			if [ ! -f qv4l2/Makefile ]; then \
-++#				(cd qv4l2 && $$QMAKE) || exit 1; \
-++#			fi; \
-++#			$(MAKE) -C qv4l2 -f Makefile.install $@; \
-++#		fi \
-++#	fi
-+ 
-+ sync-with-kernel:
-+ 	$(MAKE) -C keytable $@
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-index 3252ae3..78ede0e 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "v4l2 and IR applications"
--LICENSE = "GPLv2/LGPLv2.1"
-+LICENSE = "GPLv2 LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
-                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
+diff --git a/meta-oe/recipes-core/udev/udev_180.bb b/meta-oe/recipes-core/udev/udev_181.bb
+similarity index 95%
+rename from meta-oe/recipes-core/udev/udev_180.bb
+rename to meta-oe/recipes-core/udev/udev_181.bb
+index 4cabcce..1e0a02a 100644
+--- a/meta-oe/recipes-core/udev/udev_180.bb
++++ b/meta-oe/recipes-core/udev/udev_181.bb
+@@ -22,8 +22,9 @@ DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
+ # version specific SRC_URI
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
+            file://gtk-doc.make"
+-SRC_URI[md5sum] = "7a74429e5b4d5cc3d389945774807e46"
+-SRC_URI[sha256sum] = "d8f021cc940da7c1f928e2e651c6aa00c5695f3227f560de4a65584e2f089115"
++
++SRC_URI[md5sum] = "86fed9d76060c8157e550ca1b4ee3250"
++SRC_URI[sha256sum] = "b4b0fb6553926bb83ff43b65df44f29a3bce0980a970bcc4a80d5e4f81946f30"
  
-@@ -8,7 +8,8 @@ DEPENDS = "jpeg"
- # libv4l was absorbed into this, let OE know that
- PROVIDES = "libv4l"
- 
--SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
-+SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
-+           file://skip-qv4l2-${PV}.patch"
- SRCREV = "v4l-utils-${PV}"
- 
- S = "${WORKDIR}/git"
+ # generic SRC_URI
+ SRC_URI += " \
 -- 
-1.7.3.4
+1.7.5.4
 
 
 
