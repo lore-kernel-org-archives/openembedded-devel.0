@@ -1,25 +1,38 @@
-Received: from smtp-relay2.palm.com ([64.28.152.243])
+Received: from mail-wi0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <prvs=391ed13fc=rich.pixley@palm.com>)
-	id 1RzueA-0001EZ-M7 for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 19:41:06 +0100
-X-IronPort-AV: E=Sophos;i="4.73,459,1325491200"; d="scan'208";a="11811025"
-Received: from unknown (HELO ushqusdns4.palm.com) ([148.92.223.164])
-	by smtp-relay2.palm.com with ESMTP; 21 Feb 2012 10:32:46 -0800
-Received: from fuji.noir.com ([10.100.2.8])
-	by ushqusdns4.palm.com (8.14.4/8.14.4) with ESMTP id q1LIWjkR005260;
-	Tue, 21 Feb 2012 10:32:46 -0800
-Message-ID: <4F43E34D.8080808@palm.com>
-Date: Tue, 21 Feb 2012 10:32:45 -0800
-From: Rich Pixley <rich.pixley@palm.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.1) Gecko/20120208 Thunderbird/10.0.1
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Rzv65-0002f6-PP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 20:09:57 +0100
+Received: by wibhq7 with SMTP id hq7so3904278wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Feb 2012 11:01:38 -0800 (PST)
+Received-SPF: pass (google.com: domain of rep.dot.nop@gmail.com designates
+	10.180.14.193 as permitted sender) client-ip=10.180.14.193; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of rep.dot.nop@gmail.com
+	designates 10.180.14.193 as permitted sender)
+	smtp.mail=rep.dot.nop@gmail.com;
+	dkim=pass header.i=rep.dot.nop@gmail.com
+Received: from mr.google.com ([10.180.14.193])
+	by 10.180.14.193 with SMTP id r1mr29273350wic.9.1329850898665 (num_hops
+	= 1); Tue, 21 Feb 2012 11:01:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=IgMtOYZ4HNKgWwAkpfN/FQTnRn6xIrPkmioulN8Wbx4=;
+	b=bhQX4RpU0+XGBpisuZLoeZowvsMeqGTg5/RJgWDtU5SdjuBfjSfwJOl1NXTQYMsfDA
+	cAhZaYAy9ce7i1937MJ79XxrkhCqpDnN1tPw0NcqqDcftCA0wWYiNQnNAciO64LD0oer
+	XW7aH9vJgfqMnl2I5IpT3l7PJEFrhxUkhPWHg=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F3EED56.3080400@palm.com>
-	<CAMKF1sovCqJL3MNOSKJ_m+kPSHQtb7PGoXhF=EtDFDTrjDmdOg@mail.gmail.com>
-In-Reply-To: <CAMKF1sovCqJL3MNOSKJ_m+kPSHQtb7PGoXhF=EtDFDTrjDmdOg@mail.gmail.com>
-Subject: Re: runqemu?
+Received: by 10.180.14.193 with SMTP id r1mr24439762wic.9.1329850898562; Tue,
+	21 Feb 2012 11:01:38 -0800 (PST)
+Received: by 10.216.243.203 with HTTP; Tue, 21 Feb 2012 11:01:38 -0800 (PST)
+Received: by 10.216.243.203 with HTTP; Tue, 21 Feb 2012 11:01:38 -0800 (PST)
+Date: Tue, 21 Feb 2012 20:01:38 +0100
+Message-ID: <CAC1BbcT8wRZE_-FNAP-YAQvpU_j9ygGLWYcMnb+M8szKOFeMWQ@mail.gmail.com>
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: DISTRO_FEATURE pthread(s) ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,15 +46,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 18:41:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Feb 2012 19:09:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hm.  Runs for me this morning.  Maybe I had an X11 rendezvous problem 
-previously.
+Hi,
 
-Sorry for the distraction.
+http://sourceware.org/bugzilla/show_bug.cgi?id=9657
 
---rich
-
+Prompts me to question if I can command this with OE ATM?
 
