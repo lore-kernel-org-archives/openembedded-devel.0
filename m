@@ -1,40 +1,34 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Rzia7-0005tH-Vq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 06:48:08 +0100
-Received: by daln34 with SMTP id n34so5413579dal.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Rzick-00069L-4g for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 06:50:50 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1RziUh-0005f8-Sj for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 06:42:31 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Feb 2012 06:42:31 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2012 21:39:46 -0800 (PST)
-Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.68.197.196 as permitted sender) client-ip=10.68.197.196; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.68.197.196 as permitted sender)
-	smtp.mail=raj.khem@gmail.com;
-	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.68.197.196])
-	by 10.68.197.196 with SMTP id iw4mr8077380pbc.133.1329802786764
-	(num_hops = 1); Mon, 20 Feb 2012 21:39:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=HrMyLRKI8mLyJ7lUZVepiBboJohJytLhM/Dh7qUa+Z4=;
-	b=vQFpKtXtoBEozWD4b+u8IZo3qXz/+E/aM57x3KLyG64CvuttZEY6UCf9snELr77lKs
-	FX2W127mDBKJzCt7VNX/3h6TvNHE+lMeG/xrlCcbzgSTXPdA+ZhOfUpgbuHQi1P0chYl
-	FlYnR+at2jVhtoLAACgDs0VIRHPWzRk0VmFnI=
-Received: by 10.68.197.196 with SMTP id iw4mr6425166pbc.133.1329802786708;
-	Mon, 20 Feb 2012 21:39:46 -0800 (PST)
-Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id e10sm26704771pbv.0.2012.02.20.21.39.44
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Feb 2012 21:39:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 21 Feb 2012 06:42:31 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2012 21:38:28 -0800
-Message-Id: <1329802708-23942-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] imagemagick: Upgrade recipes from 6.4.4 -> 6.7.5
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 21 Feb 2012 06:42:21 +0100
+Message-ID: <jhvaro$g4s$1@dough.gmane.org>
+References: <1329802708-23942-1-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+In-Reply-To: <1329802708-23942-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe][PATCH] imagemagick: Upgrade recipes from 6.4.4 -> 6.7.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,87 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 05:48:08 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 05:50:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-6.4.4 does not compile with latest zlib
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../PerlMagic_MakePatch.patch                      |    0
- .../imagemagick/imagemagick-6.7.5/no-lzip.patch    |   19 +++++++++++++++++++
- .../{imagemagick_6.4.4.bb => imagemagick_6.7.5.bb} |   15 ++++++++-------
- 3 files changed, 27 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick-6.4.4 => imagemagick-6.7.5}/PerlMagic_MakePatch.patch (100%)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/no-lzip.patch
- rename meta-oe/recipes-support/imagemagick/{imagemagick_6.4.4.bb => imagemagick_6.7.5.bb} (72%)
+Op 21-02-12 06:38, Khem Raj schreef:
+> 6.4.4 does not compile with latest zlib
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMagic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
-similarity index 100%
-rename from meta-oe/recipes-support/imagemagick/imagemagick-6.4.4/PerlMagic_MakePatch.patch
-rename to meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/no-lzip.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/no-lzip.patch
-new file mode 100644
-index 0000000..38b48e1
---- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/no-lzip.patch
-@@ -0,0 +1,19 @@
-+dist-lzip is not supported by OE autotools
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+
-+Index: ImageMagick-6.7.5-6/configure.ac
-+===================================================================
-+--- ImageMagick-6.7.5-6.orig/configure.ac	2012-02-20 21:19:53.965635662 -0800
-++++ ImageMagick-6.7.5-6/configure.ac	2012-02-20 21:20:31.429637625 -0800
-+@@ -128,7 +128,7 @@
-+ # Ensure that make can run correctly
-+ AM_SANITY_CHECK
-+ 
-+-AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-lzip dist-xz dist-zip])
-++AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-xz dist-zip])
-+ 
-+ # Enable support for silent build rules
-+ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-similarity index 72%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-index d5f95c9..0c24a62 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.4.4.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-@@ -1,20 +1,21 @@
--DESCRIPTION = "ImageMagick is an image convertion tools"
-+DESCRIPTION = "ImageMagick is collection of image manipulation tools"
- SECTION = "console/utils"
- LICENSE = "ImageMagick"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e1ebcc1358b9f81eba64255fc5da6892"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
- 
--PR = "r10"
-+PR = "r0"
- 
--PATCHSET = "1"
-+PATCHSET = "6"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-            file://PerlMagic_MakePatch.patch \
-+           file://no-lzip.patch \
-           "
--SRC_URI[md5sum] = "882ff241f6ad39655541d5055596f93b"
--SRC_URI[sha256sum] = "5a5b2779707bfd9816cf17d8f53d242c05005092da192a898ac10961b3b19dda"
-+SRC_URI[md5sum] = "bcf07cf0822572fa2b47fa6d506f699a"
-+SRC_URI[sha256sum] = "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5a7dae01e47bdbd80"
- 
--S = "${WORKDIR}/ImageMagick-${PV}"
-+S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
- 
- inherit autotools binconfig pkgconfig
- 
--- 
-1.7.5.4
+http://cgit.openembedded.org/meta-openembedded/commit/?id=aaef9aa923d6e55ae0463156999b2a0543cb1ef1
+?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9DLrcACgkQMkyGM64RGpEpAwCfUgZ/jCmzjtt6lwstIY56sae4
+4voAoK9yy95mW4BKktPQMDa15JZu9vM6
+=l9wh
+-----END PGP SIGNATURE-----
 
 
 
