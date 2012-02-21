@@ -1,35 +1,21 @@
-Received: from plane.gmane.org ([80.91.229.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RzeOy-0007Y4-Lt for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 02:20:20 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RzeGu-0003AK-3D for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 02:12:00 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 02:12:00 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 02:12:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <cheepeero@gmx.net>) id 1RzfVL-0001jR-5Y
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 03:30:59 +0100
+Received: (qmail invoked by alias); 21 Feb 2012 02:15:59 -0000
+Received: from unknown (EHLO pink.cheepee.homedns.org) [95.76.68.223]
+	by mail.gmx.net (mp029) with SMTP; 21 Feb 2012 03:15:59 +0100
+X-Authenticated: #14774724
+X-Provags-ID: V01U2FsdGVkX1+S5BVYCsWSmLeNrSB3I4EwNoieSo+gU8KE6ZTeNT
+	OtsDZTwSSkBLAG
+From: Ciprian Ciubotariu <cheepeero@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 21 Feb 2012 02:11:47 +0100
-Message-ID: <jhur0i$j1e$1@dough.gmane.org>
-References: <cover.1329780628.git.andrea.adami@gmail.com>
-	<1329783724-10816-1-git-send-email-andrea.adami@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-In-Reply-To: <1329783724-10816-1-git-send-email-andrea.adami@gmail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe][PATCH] meta-initramfs: initial layer commit
+Date: Tue, 21 Feb 2012 04:15:54 +0200
+Message-Id: <1329790554-14759-1-git-send-email-cheepeero@gmx.net>
+X-Mailer: git-send-email 1.7.3.4
+X-Y-GMX-Trusted: 0
+Subject: [PATCH] v4l-utils: skip qv4l2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +29,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 01:20:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Feb 2012 02:30:59 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+See #2134
 
-Op 21-02-12 01:21, Andrea Adami schreef:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com> --- 
-> meta-initramfs/README          |   14 ++++++++++++++ 
-> meta-initramfs/conf/layer.conf |   11 +++++++++++
+The makefiles in the project attempt to use the hosts' compilers if
+qmake is installed.
+---
+ .../v4l2apps/files/skip-qv4l2-0.8.4.patch          |   37 ++++++++++++++++++++
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |    5 ++-
+ 2 files changed, 40 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
 
-Missing COPYING.MIT
-
-
-> +Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
-
-ehm, no
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk9C71EACgkQMkyGM64RGpFvbwCfbBC326J3smb/3cNCcrXbqlb9
-ygIAoJVYwFqOMHDLD9Ino5KQYKvJSvoN
-=4ho8
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
+new file mode 100644
+index 0000000..c8e8388
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
+@@ -0,0 +1,37 @@
++diff --git a/utils/Makefile b/utils/Makefile
++index 71a3cb7..1d23c8b 100644
++--- a/utils/Makefile
+++++ b/utils/Makefile
++@@ -11,19 +11,19 @@ all install:
++ 	fi
++ 
++ 	# Test whether qmake is installed, and whether it is for qt4.
++-	@if which qmake-qt4 >/dev/null 2>&1; then \
++-		QMAKE=qmake-qt4; \
++-	else \
++-		QMAKE=qmake; \
++-	fi; \
++-	if which $$QMAKE >/dev/null 2>&1; then \
++-		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
++-			if [ ! -f qv4l2/Makefile ]; then \
++-				(cd qv4l2 && $$QMAKE) || exit 1; \
++-			fi; \
++-			$(MAKE) -C qv4l2 -f Makefile.install $@; \
++-		fi \
++-	fi
+++#	@if which qmake-qt4 >/dev/null 2>&1; then \
+++#		QMAKE=qmake-qt4; \
+++#	else \
+++#		QMAKE=qmake; \
+++#	fi; \
+++#	if which $$QMAKE >/dev/null 2>&1; then \
+++#		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
+++#			if [ ! -f qv4l2/Makefile ]; then \
+++#				(cd qv4l2 && $$QMAKE) || exit 1; \
+++#			fi; \
+++#			$(MAKE) -C qv4l2 -f Makefile.install $@; \
+++#		fi \
+++#	fi
++ 
++ sync-with-kernel:
++ 	$(MAKE) -C keytable $@
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+index 3252ae3..78ede0e 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "v4l2 and IR applications"
+-LICENSE = "GPLv2/LGPLv2.1"
++LICENSE = "GPLv2 LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
+                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
+ 
+@@ -8,7 +8,8 @@ DEPENDS = "jpeg"
+ # libv4l was absorbed into this, let OE know that
+ PROVIDES = "libv4l"
+ 
+-SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
++SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
++           file://skip-qv4l2-${PV}.patch"
+ SRCREV = "v4l-utils-${PV}"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.7.3.4
 
 
 
