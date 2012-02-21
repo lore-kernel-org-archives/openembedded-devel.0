@@ -1,21 +1,21 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
+Received: from mailout-de.gmx.net ([213.165.64.22])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1RzfVL-0001jR-5Y
+	(envelope-from <cheepeero@gmx.net>) id 1Rzfky-0002Iu-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 03:30:59 +0100
-Received: (qmail invoked by alias); 21 Feb 2012 02:15:59 -0000
+	Tue, 21 Feb 2012 03:47:08 +0100
+Received: (qmail invoked by alias); 21 Feb 2012 02:32:09 -0000
 Received: from unknown (EHLO pink.cheepee.homedns.org) [95.76.68.223]
-	by mail.gmx.net (mp029) with SMTP; 21 Feb 2012 03:15:59 +0100
+	by mail.gmx.net (mp072) with SMTP; 21 Feb 2012 03:32:09 +0100
 X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1+S5BVYCsWSmLeNrSB3I4EwNoieSo+gU8KE6ZTeNT
-	OtsDZTwSSkBLAG
+X-Provags-ID: V01U2FsdGVkX1//WGZu3Mr/dP/PUa5V/zBqRNdv1uqLm6oH2WboWf
+	/+rRQXN2eZpiGF
 From: Ciprian Ciubotariu <cheepeero@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Feb 2012 04:15:54 +0200
-Message-Id: <1329790554-14759-1-git-send-email-cheepeero@gmx.net>
+Date: Tue, 21 Feb 2012 04:32:04 +0200
+Message-Id: <1329791524-15461-1-git-send-email-cheepeero@gmx.net>
 X-Mailer: git-send-email 1.7.3.4
 X-Y-GMX-Trusted: 0
-Subject: [PATCH] v4l-utils: skip qv4l2
+Subject: [meta-oe][PATCH] v4l-utils: skip qv4l2 instead of using host toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,11 +29,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 02:30:59 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 02:47:08 -0000
 
 See #2134
 
-The makefiles in the project attempt to use the hosts' compilers if
+The makefiles in the project attempt to use the host compilers if
 qmake is installed.
 ---
  .../v4l2apps/files/skip-qv4l2-0.8.4.patch          |   37 ++++++++++++++++++++
