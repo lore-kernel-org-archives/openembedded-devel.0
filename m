@@ -1,20 +1,20 @@
 Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Rzde5-00054f-Dq
+	(envelope-from <andrea.adami@gmail.com>) id 1Rzde7-00054f-72
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 01:31:53 +0100
+	Tue, 21 Feb 2012 01:31:55 +0100
 Received: from mizar.localdomain (87.5.51.74) by smtp207.alice.it (8.6.023.02)
-	id 4F05A6650581AD67; Tue, 21 Feb 2012 01:23:37 +0100
+	id 4F05A6650581AD7F; Tue, 21 Feb 2012 01:23:38 +0100
 From: Andrea Adami <andrea.adami@gmail.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Feb 2012 01:23:24 +0100
-Message-Id: <cf85417b7e245bfdef6b3c0282b2634ec628f62c.1329780587.git.andrea.adami@gmail.com>
+Date: Tue, 21 Feb 2012 01:23:25 +0100
+Message-Id: <ef8b93c13cabd9e766e7f4d96df14710b36c3b87.1329780587.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <cover.1329780587.git.andrea.adami@gmail.com>
 References: <cover.1329780587.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1329780587.git.andrea.adami@gmail.com>
 References: <cover.1329780587.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/3] remove initramfs-images, now in meta-initramfs
+Subject: [meta-handheld][PATCH 3/3] remove linux-kexecboot_3.1, now in meta-initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,61 +28,1033 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 00:31:53 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 00:31:55 -0000
+
+* add .bbappend
+* bump PR and INC_PR
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-bsp/images/initramfs-kexecboot-image.bb    |   28 --------------------
- .../images/initramfs-kexecboot-klibc-image.bb      |    5 ---
- 2 files changed, 0 insertions(+), 33 deletions(-)
- delete mode 100644 recipes-bsp/images/initramfs-kexecboot-image.bb
- delete mode 100644 recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 -----
+ .../linux/linux-kexecboot-3.1/akita/defconfig      |  132 ------------------
+ .../linux/linux-kexecboot-3.1/c7x0/defconfig       |  134 ------------------
+ .../linux/linux-kexecboot-3.1/collie/defconfig     |  144 --------------------
+ .../linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch  |   66 ---------
+ .../linux/linux-kexecboot-3.1/poodle/defconfig     |  136 ------------------
+ .../linux/linux-kexecboot-3.1/spitz/defconfig      |  132 ------------------
+ .../linux/linux-kexecboot-3.1/tosa/defconfig       |  134 ------------------
+ recipes-kernel/linux/linux-kexecboot_3.1.bb        |    7 -
+ recipes-kernel/linux/linux-kexecboot_3.1.bbappend  |   19 +++
+ 10 files changed, 19 insertions(+), 919 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/akita/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/c7x0/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/collie/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/poodle/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-3.1/tosa/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot_3.1.bb
+ create mode 100644 recipes-kernel/linux/linux-kexecboot_3.1.bbappend
 
-diff --git a/recipes-bsp/images/initramfs-kexecboot-image.bb b/recipes-bsp/images/initramfs-kexecboot-image.bb
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch b/recipes-kernel/linux/linux-kexecboot-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
 deleted file mode 100644
-index f306fb5..0000000
---- a/recipes-bsp/images/initramfs-kexecboot-image.bb
+index d86b47d..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
 +++ /dev/null
-@@ -1,28 +0,0 @@
--# Initramfs image providing kexecboot
--# a linux as bootloader implementation
+@@ -1,34 +0,0 @@
+-From 31d99c4c9f14e571ca0e22c5862dd5b6a871e2dd Mon Sep 17 00:00:00 2001
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Date: Fri, 5 Aug 2011 15:32:23 +0400
+-Subject: [PATCH] pcmcia/pxa2xx_sharpsl: retain ops structure on collie
 -
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+-The pxa2xx_sharpsl driver part is also used on collie, which (as
+-a StrongARM board) has different expectations for PCMCIA drivers.
+-So, on collie place sharpsl_pcmcia_ops in .data section rather than
+-in __initdata.
 -
--IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+----
+- drivers/pcmcia/pxa2xx_sharpsl.c |    4 ++++
+- 1 files changed, 4 insertions(+), 0 deletions(-)
 -
--# avoid circular dependencies
--EXTRA_IMAGEDEPENDS = ""
+-diff --git a/drivers/pcmcia/pxa2xx_sharpsl.c b/drivers/pcmcia/pxa2xx_sharpsl.c
+-index 81af2b3..1b5b749 100644
+---- a/drivers/pcmcia/pxa2xx_sharpsl.c
+-+++ b/drivers/pcmcia/pxa2xx_sharpsl.c
+-@@ -222,7 +222,11 @@ static void sharpsl_pcmcia_socket_suspend(struct soc_pcmcia_socket *skt)
+- 	sharpsl_pcmcia_init_reset(skt);
+- }
+- 
+-+#ifdef CONFIG_SA1100_COLLIE
+-+static struct pcmcia_low_level sharpsl_pcmcia_ops = {
+-+#else
+- static struct pcmcia_low_level sharpsl_pcmcia_ops __initdata = {
+-+#endif
+- 	.owner                  = THIS_MODULE,
+- 	.hw_init                = sharpsl_pcmcia_hw_init,
+- 	.hw_shutdown            = sharpsl_pcmcia_hw_shutdown,
+--- 
+-1.7.2.5
 -
--IMAGE_INSTALL = "kexec kexecboot"
--
--# Do not pollute the initrd image with rootfs features
--IMAGE_FEATURES = ""
--
--export IMAGE_BASENAME = "initramfs-kexecboot-image"
--
--IMAGE_LINGUAS = ""
--IMAGE_LOGIN_MANAGER = ""
--IMAGE_INIT_MANAGER = ""
--IMAGE_INITSCRIPTS = ""
--IMAGE_DEV_MANAGER = ""
--
--FEED_DEPLOYDIR_BASE_URI = ""
--ONLINE_PACKAGE_MANAGEMENT = "none"
--
--inherit image
-diff --git a/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb b/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/akita/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/akita/defconfig
 deleted file mode 100644
-index e81f9ee..0000000
---- a/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+index b066839..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/akita/defconfig
 +++ /dev/null
-@@ -1,5 +0,0 @@
--require initramfs-kexecboot-image.bb
+@@ -1,132 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_PXA=y
+-CONFIG_PXA_SHARPSL=y
+-CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
+-CONFIG_MACH_AKITA=y
+-CONFIG_MACH_BORZOI=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_PXA2XX=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_NAND_SHARPSL=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PXA=y
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_MATRIX=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_SPI=y
+-CONFIG_SPI_PXA2XX=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_FB=y
+-CONFIG_FB_PXA=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CORGI=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x16=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_PXA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_PXA=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/c7x0/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/c7x0/defconfig
+deleted file mode 100644
+index b08e27e..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/c7x0/defconfig
++++ /dev/null
+@@ -1,134 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_PXA=y
+-CONFIG_PXA_SHARPSL=y
+-CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
+-CONFIG_MACH_CORGI=y
+-CONFIG_MACH_SHEPHERD=y
+-CONFIG_MACH_HUSKY=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_PXA2XX=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_NAND_SHARPSL=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PXA=y
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_MATRIX=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_PXA=y
+-CONFIG_SPI=y
+-CONFIG_SPI_PXA2XX=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_FB=y
+-CONFIG_FB_W100=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CORGI=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x16=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_PXA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_SA1100=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/collie/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/collie/defconfig
+deleted file mode 100644
+index ce1299d..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/collie/defconfig
++++ /dev/null
+@@ -1,144 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_SA1100=y
+-CONFIG_SA1100_COLLIE=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_SA1100=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_APM_EMULATION=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_CFI=y
+-CONFIG_MTD_JEDECPROBE=y
+-CONFIG_MTD_CFI_ADV_OPTIONS=y
+-CONFIG_MTD_CFI_GEOMETRY=y
+-# CONFIG_MTD_MAP_BANK_WIDTH_1 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_2 is not set
+-# CONFIG_MTD_CFI_I1 is not set
+-# CONFIG_MTD_CFI_I2 is not set
+-CONFIG_MTD_CFI_I4=y
+-CONFIG_MTD_CFI_INTELEXT=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_SA1100=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_LOCOMO=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_SA1100=y
+-CONFIG_SERIAL_SA1100_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_SPI=y
+-CONFIG_SPI_GPIO=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-CONFIG_BATTERY_COLLIE=y
+-# CONFIG_HWMON is not set
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_MCP_SA11X0=y
+-CONFIG_MCP_UCB1200=y
+-CONFIG_MCP_UCB1200_TS=y
+-CONFIG_FB=y
+-CONFIG_FB_SA1100=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-# CONFIG_BACKLIGHT_GENERIC is not set
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x8=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_SPI=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_LOCOMO=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_SA1100=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch
+deleted file mode 100644
+index 0d47ade..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/locomo_kbd_tweak-r2.patch
++++ /dev/null
+@@ -1,66 +0,0 @@
+- drivers/input/keyboard/locomokbd.c |   61 +++++++++++++++++++++++--------------
+- 1 file changed, 39 insertions(+), 22 deletions(-)
 -
--IMAGE_INSTALL = "kexec-klibc kexecboot-klibc"
+-Index: linux-2.6.26-rc4/drivers/input/keyboard/locomokbd.c
+-===================================================================
+---- linux-2.6.26-rc4.orig/drivers/input/keyboard/locomokbd.c	2008-05-26 19:08:11.000000000 +0100
+-+++ linux-2.6.26-rc4/drivers/input/keyboard/locomokbd.c	2008-06-01 18:35:55.000000000 +0100
+-@@ -41,25 +41,32 @@
+- 
+- #define LOCOMOKBD_NUMKEYS	128
+- 
+--#define KEY_ACTIVITY		KEY_F16
+--#define KEY_CONTACT		KEY_F18
+--#define KEY_CENTER		KEY_F15
+-+#define LOCOMO_KEY_CALENDER	KEY_LEFTCTRL
+-+#define LOCOMO_KEY_ADDRESS	KEY_LEFTALT	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_HOME		KEY_SYSRQ	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_MENU		KEY_F12
+-+#define LOCOMO_KEY_MAIL		KEY_F10
+-+#define LOCOMO_KEY_OK		KEY_F11		/* Don't hardwire to KEY_RETURN */
+-+#define LOCOMO_KEY_CANCEL	KEY_POWER
+-+#define LOCOMO_KEY_CENTER	KEY_F5		/* Don't hardwire to KEY_RETURN */
+- 
+--static const unsigned char
+-+#define LOCOMO_KEY_FN		KEY_F9
+-+
+-+static const unsigned char 
+- locomokbd_keycode[LOCOMOKBD_NUMKEYS] __devinitconst = {
+--	0, KEY_ESC, KEY_ACTIVITY, 0, 0, 0, 0, 0, 0, 0,				/* 0 - 9 */
+--	0, 0, 0, 0, 0, 0, 0, KEY_MENU, KEY_HOME, KEY_CONTACT,			/* 10 - 19 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,						/* 20 - 29 */
+--	0, 0, 0, KEY_CENTER, 0, KEY_MAIL, 0, 0, 0, 0,				/* 30 - 39 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,					/* 40 - 49 */
+--	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,		/* 50 - 59 */
+--	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, KEY_ENTER, 0, 0,			/* 60 - 69 */
+--	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,	/* 70 - 79 */
+--	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,		/* 80 - 89 */
+--	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,				/* 90 - 99 */
+--	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,		/* 100 - 109 */
+--	KEY_LEFTSHIFT, KEY_TAB, KEY_LEFTCTRL, 0, 0, 0, 0, 0, 0, 0,		/* 110 - 119 */
+--	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0		/* 120 - 128 */
+-+	0, LOCOMO_KEY_CANCEL, LOCOMO_KEY_CALENDER, LOCOMO_KEY_HOME, 0, 0, 0, 0, 0, 0,	/* 0 - 9 */
+-+	0, 0, 0, 0, 0, 0, 0, LOCOMO_KEY_MENU, 0, LOCOMO_KEY_ADDRESS,			/* 10 - 19 */
+-+	0, 0, 0, 0, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,					/* 20 - 29 */
+-+	0, 0, 0, LOCOMO_KEY_CENTER, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,			/* 30 - 39 */
+-+	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,						/* 40 - 49 */
+-+	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,			/* 50 - 59 */
+-+	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, LOCOMO_KEY_OK, 0, 0,			/* 60 - 69 */
+-+	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,		/* 70 - 79 */
+-+	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,			/* 80 - 89 */
+-+	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,					/* 90 - 99 */
+-+	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,			/* 100 - 109 */
+-+	KEY_LEFTSHIFT, KEY_TAB, LOCOMO_KEY_FN, 0, 0, 0, 0, 0, 0, 0,			/* 110 - 119 */
+-+	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0			/* 120 - 128 */
+- };
+- 
+- #define KB_ROWS			16
+-@@ -68,7 +75,7 @@
+- #define SCANCODE(c,r)		( ((c)<<4) + (r) + 1 )
+- 
+- #define KB_DELAY		8
+--#define SCAN_INTERVAL		(HZ/10)
+-+#define SCAN_INTERVAL		(HZ/20)
+- 
+- struct locomokbd {
+- 	unsigned char keycode[LOCOMOKBD_NUMKEYS];
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/poodle/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/poodle/defconfig
+deleted file mode 100644
+index 68c37e6..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/poodle/defconfig
++++ /dev/null
+@@ -1,136 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_PXA=y
+-CONFIG_PXA_SHARPSL=y
+-CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
+-CONFIG_MACH_POODLE=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_PXA2XX=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_APM_EMULATION=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_NAND_SHARPSL=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PXA=y
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_LOCOMO=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_PXA=y
+-CONFIG_SPI=y
+-CONFIG_SPI_PXA2XX=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_HWMON is not set
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_FB=y
+-CONFIG_FB_PXA=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-# CONFIG_BACKLIGHT_GENERIC is not set
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x8=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_PXA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_LOCOMO=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_SA1100=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/spitz/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/spitz/defconfig
+deleted file mode 100644
+index b066839..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/spitz/defconfig
++++ /dev/null
+@@ -1,132 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_PXA=y
+-CONFIG_PXA_SHARPSL=y
+-CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
+-CONFIG_MACH_AKITA=y
+-CONFIG_MACH_BORZOI=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_PXA2XX=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_NAND_SHARPSL=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PXA=y
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_MATRIX=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_SPI=y
+-CONFIG_SPI_PXA2XX=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_FB=y
+-CONFIG_FB_PXA=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CORGI=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x16=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_PXA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_PXA=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot-3.1/tosa/defconfig b/recipes-kernel/linux/linux-kexecboot-3.1/tosa/defconfig
+deleted file mode 100644
+index 59cf640..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-3.1/tosa/defconfig
++++ /dev/null
+@@ -1,134 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_KERNEL_LZMA=y
+-# CONFIG_SWAP is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE="initramfs.cpio.lzma"
+-CONFIG_RD_LZMA=y
+-CONFIG_INITRAMFS_COMPRESSION_LZMA=y
+-# CONFIG_UID16 is not set
+-# CONFIG_SYSCTL_SYSCALL is not set
+-# CONFIG_KALLSYMS is not set
+-# CONFIG_PRINTK is not set
+-# CONFIG_BUG is not set
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLOB=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_PXA=y
+-CONFIG_PXA_SHARPSL=y
+-CONFIG_PXA_SHARPSL_DETECT_MACH_ID=y
+-CONFIG_MACH_TOSA=y
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_LOAD_CIS is not set
+-CONFIG_PCMCIA_PXA2XX=y
+-CONFIG_NO_HZ=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 loglevel=3"
+-CONFIG_KEXEC=y
+-CONFIG_APM_EMULATION=y
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_VERIFY_WRITE=y
+-CONFIG_MTD_NAND_TMIO=y
+-CONFIG_MTD_UBI=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_ATA=y
+-# CONFIG_ATA_VERBOSE_ERROR is not set
+-# CONFIG_SATA_PMP is not set
+-CONFIG_PATA_PXA=y
+-CONFIG_PATA_PCMCIA=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=480
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=640
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_MATRIX=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-# CONFIG_SERIO is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_DEVKMEM is not set
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_PXA=y
+-CONFIG_SPI=y
+-CONFIG_SPI_PXA2XX=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_HWMON is not set
+-CONFIG_MFD_TC6393XB=y
+-CONFIG_FB=y
+-CONFIG_FB_TMIO=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_TOSA=y
+-CONFIG_BACKLIGHT_TOSA=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_8x16=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_HID_SUPPORT is not set
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_MMC=y
+-CONFIG_MMC_PXA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_DRV_SA1100=y
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-CONFIG_EXT4_FS=y
+-# CONFIG_EXT4_FS_XATTR is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_DNOTIFY is not set
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_TMPFS=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RUBIN=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ENABLE_WARN_DEPRECATED is not set
+-# CONFIG_ENABLE_MUST_CHECK is not set
+-CONFIG_FRAME_WARN=2048
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_ARM_UNWIND is not set
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+deleted file mode 100644
+index 28dc370..0000000
+--- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require linux-kexecboot.inc
+-require linux-${PV}.inc
 -
--export IMAGE_BASENAME = "initramfs-kexecboot-klibc-image"
+-PR = "${INC_PR}.7"
+-S = "${WORKDIR}/linux-${PV}"
+-
+-COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bbappend b/recipes-kernel/linux/linux-kexecboot_3.1.bbappend
+new file mode 100644
+index 0000000..b3d83ef
+--- /dev/null
++++ b/recipes-kernel/linux/linux-kexecboot_3.1.bbappend
+@@ -0,0 +1,19 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
++
++COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
++
++# Note we set loglevel=3 and master console on serial to protect bootlogo.
++CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
++CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++
++# Zaurus machines need kernel size-check.
++KERNEL_IMAGE_MAXSIZE_akita = "1294336"
++KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
++KERNEL_IMAGE_MAXSIZE_collie = "1048576"
++KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
++KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
++KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
 -- 
 1.7.3.4
 
