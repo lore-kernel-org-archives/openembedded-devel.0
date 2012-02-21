@@ -1,33 +1,38 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Rzick-00069L-4g for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 06:50:50 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1RziUh-0005f8-Sj for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 06:42:31 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 06:42:31 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1RzirL-0007D1-D6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 07:05:55 +0100
+Received: by lahc1 with SMTP id c1so7305394lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 06:42:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 21 Feb 2012 06:42:21 +0100
-Message-ID: <jhvaro$g4s$1@dough.gmane.org>
+	Mon, 20 Feb 2012 21:57:36 -0800 (PST)
+Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
+	10.152.147.1 as permitted sender) client-ip=10.152.147.1; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of raj.khem@gmail.com
+	designates 10.152.147.1 as permitted sender)
+	smtp.mail=raj.khem@gmail.com;
+	dkim=pass header.i=raj.khem@gmail.com
+Received: from mr.google.com ([10.152.147.1])
+	by 10.152.147.1 with SMTP id tg1mr17967030lab.22.1329803856772
+	(num_hops = 1); Mon, 20 Feb 2012 21:57:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=rz7cV4elaFRXJeuwsD97lXSUIICfAh9/4XP65XS1Oy4=;
+	b=G26WIwk/5Yv1thSJMsxUXadLHV/seVm9eSEktUgHHbZU9uWTQimDujpHNBdEjRN2u4
+	bsia8Y8AeQ4eDI2FtJKaTzqmKwUIRdpiDHn39QNTFfYDKk0fcQT8yjxWyKS1IopdKIfY
+	wwszj0KwETzynO5ps3mEuvAsx3yPI+IekGY3k=
+Received: by 10.152.147.1 with SMTP id tg1mr14982550lab.22.1329803856314; Mon,
+	20 Feb 2012 21:57:36 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.27.109 with HTTP; Mon, 20 Feb 2012 21:57:06 -0800 (PST)
+In-Reply-To: <jhvaro$g4s$1@dough.gmane.org>
 References: <1329802708-23942-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-In-Reply-To: <1329802708-23942-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.3.5
+	<jhvaro$g4s$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Feb 2012 21:57:06 -0800
+Message-ID: <CAMKF1sqNwbML0DC9paAsbUUGPd6AO9ysq8VVZXtgZNozaNM4ng@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] imagemagick: Upgrade recipes from 6.4.4 -> 6.7.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,26 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 05:50:50 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 06:05:55 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Feb 20, 2012 at 9:42 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 21-02-12 06:38, Khem Raj schreef:
+>> 6.4.4 does not compile with latest zlib
+>
+> http://cgit.openembedded.org/meta-openembedded/commit/?id=aaef9aa923d6e55ae0463156999b2a0543cb1ef1
+> ?
 
-Op 21-02-12 06:38, Khem Raj schreef:
-> 6.4.4 does not compile with latest zlib
 
-http://cgit.openembedded.org/meta-openembedded/commit/?id=aaef9aa923d6e55ae0463156999b2a0543cb1ef1
-?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+yes thats same thing. I was flushing out what I had
+discard it
 
-iEYEARECAAYFAk9DLrcACgkQMkyGM64RGpEpAwCfUgZ/jCmzjtt6lwstIY56sae4
-4voAoK9yy95mW4BKktPQMDa15JZu9vM6
-=l9wh
------END PGP SIGNATURE-----
-
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.11 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iEYEARECAAYFAk9DLrcACgkQMkyGM64RGpEpAwCfUgZ/jCmzjtt6lwstIY56sae4
+> 4voAoK9yy95mW4BKktPQMDa15JZu9vM6
+> =l9wh
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
