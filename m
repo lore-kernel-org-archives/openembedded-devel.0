@@ -1,39 +1,24 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from smtp-relay2.palm.com ([64.28.152.243])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Rzu8W-0000Fz-Ke
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 19:08:24 +0100
-Received: by eekd41 with SMTP id d41so2336931eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 10:00:05 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.28.71 as permitted sender) client-ip=10.14.28.71; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.28.71 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.28.71])
-	by 10.14.28.71 with SMTP id f47mr13642619eea.38.1329847205708 (num_hops
-	= 1); Tue, 21 Feb 2012 10:00:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ox2HyQTkC1vwqwdYkHUH0FGWVKbAcvTGTU9KjPjG1QE=;
-	b=s5in+XDDHMNGZL0zNkxDBroYwG0dM415OSYyHdVUd6Aj6r864AwsZwWt+hjX4vdZFt
-	Urn6Jik0qpyxxa+uSxSlF0gWJbFPUN/bWYoSa79rcLW93kygoXetViYt213IVWgUJsoK
-	8wFfYPA0Qh1tgD05cIqz4HIVzlJ4xlGAsPh3o=
-Received: by 10.14.28.71 with SMTP id f47mr10883648eea.38.1329847199972;
-	Tue, 21 Feb 2012 09:59:59 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n52sm92529822eea.5.2012.02.21.09.59.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Feb 2012 09:59:59 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <prvs=391ed13fc=rich.pixley@palm.com>)
+	id 1Rzubu-00013O-T1 for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 19:38:48 +0100
+X-IronPort-AV: E=Sophos;i="4.73,459,1325491200"; d="scan'208";a="11810950"
+Received: from unknown (HELO ushqusdns4.palm.com) ([148.92.223.164])
+	by smtp-relay2.palm.com with ESMTP; 21 Feb 2012 10:29:21 -0800
+Received: from fuji.noir.com ([10.100.2.8])
+	by ushqusdns4.palm.com (8.14.4/8.14.4) with ESMTP id q1LITKZl001786;
+	Tue, 21 Feb 2012 10:29:20 -0800
+Message-ID: <4F43E280.1090209@palm.com>
+Date: Tue, 21 Feb 2012 10:29:20 -0800
+From: Rich Pixley <rich.pixley@palm.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.1) Gecko/20120208 Thunderbird/10.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Feb 2012 18:59:46 +0100
-Message-Id: <1329847186-10278-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][PATCH] vala: upgrade to newer vala from meta-smartphone/meta-fso layer
+References: <4F3EED56.3080400@palm.com> <4F3F9112.3050700@mlbassoc.com>
+In-Reply-To: <4F3F9112.3050700@mlbassoc.com>
+Subject: Re: runqemu?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,112 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 18:08:25 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 18:38:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...-gen-don-t-append-dirty-if-we-re-not-in-g.patch |   53 ++++++++++++++++++++
- meta-oe/recipes-devtools/vala/vala_0.12.1.bb       |    7 ---
- meta-oe/recipes-devtools/vala/vala_0.14.2.bb       |   14 +++++
- 3 files changed, 67 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
- delete mode 100644 meta-oe/recipes-devtools/vala/vala_0.12.1.bb
- create mode 100644 meta-oe/recipes-devtools/vala/vala_0.14.2.bb
+On 2/18/12 03:52 , Gary Thomas wrote:
+> On 2012-02-17 17:14, Rich Pixley wrote:
+>> What do I need to do to be able to run core-image-minimal on Ubuntu-11.10 amd64?
+>>
+>> --rich
+>>
+>> cd /home/rich/projects/webos/openembedded-core&&  . ./oe-init-build-env&&  runqemu qemux86
+>>
+>> ### Shell environment set up for builds. ###
+>>
+>> You can now run 'bitbake<target>'
+>>
+>> Common targets are:
+>> core-image-minimal
+>> core-image-sato
+>> meta-toolchain
+>> meta-toolchain-sdk
+>> adt-installer
+>> meta-ide-support
+>>
+>> You can also run generated qemu images with a command like 'runqemu qemux86'
+>>
+>>
+>> Continuing with the following parameters:
+>> KERNEL: [/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/bzImage-qemux86.bin]
+>> ROOTFS: [/home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/core-image-minimal-qemux86.ext3]
+>> FSTYPE: [ext3]
+>> Setting up tap interface under sudo
+>> Acquiring lockfile for tap0...
+>> WARNING: distccd not present, no distcc support loaded.
+>> Running qemu...
+>> /home/rich/projects/webos/openembedded-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin/qemu -kernel
+>> /home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/bzImage-qemux86.bin -net nic,vlan=0 -net tap,vlan=0,ifname=tap0,script=no,downscript=no -hda
+>> /home/rich/projects/webos/openembedded-core/build/tmp-eglibc/deploy/images/core-image-minimal-qemux86.ext3 -show-cursor -usb -usbdevice wacom-tablet -vga vmware -enable-gl
+>> -no-reboot -m 128 --append "vga=0 root=/dev/hda rw mem=128M ip=192.168.7.2::192.168.7.1:255.255.255.0 oprofile.timer=1 "
+>> Enabling opengl
+>> Could not initialize SDL(No available video device) - exiting
+>> Set 'tap0' nonpersistent
+>> Releasing lockfile of preconfigured tap device 'tap0'
+> This looks like qemu couldn't find a [graphic] display to use.
+>
+> Did you run this locally from a desktop environment?
+Er... no.  I can't.  I have only X11 access.
 
-diff --git a/meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch b/meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
-new file mode 100644
-index 0000000..e6c7941
---- /dev/null
-+++ b/meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
-@@ -0,0 +1,53 @@
-+From 2460d7b79f7e90dcfeebde5e9c53d9b6798a1f3c Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Tue, 21 Feb 2012 17:12:50 +0100
-+Subject: [PATCH] git-version-gen: don't append -dirty if we're not in git
-+ repo
-+
-+* for example if we have some dirty directory and we unpack clean vala tarball in it, then it will append -dirty
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ build-aux/git-version-gen |   25 ++++++++++++++-----------
-+ 1 files changed, 14 insertions(+), 11 deletions(-)
-+
-+diff --git a/build-aux/git-version-gen b/build-aux/git-version-gen
-+index 0fa6faa..1d1f9d2 100755
-+--- a/build-aux/git-version-gen
-++++ b/build-aux/git-version-gen
-+@@ -126,18 +126,21 @@ fi
-+ 
-+ v=`echo "$v" |sed 's/^v//'`
-+ 
-+-# Don't declare a version "dirty" merely because a time stamp has changed.
-+-git status > /dev/null 2>&1
-++if test -d .git
-++then
-++	# Don't declare a version "dirty" merely because a time stamp has changed.
-++	git status > /dev/null 2>&1
-+ 
-+-dirty=`sh -c 'git diff-index --name-only HEAD' 2>/dev/null` || dirty=
-+-case "$dirty" in
-+-    '') ;;
-+-    *) # Append the suffix only if there isn't one already.
-+-	case $v in
-+-	  *-dirty) ;;
-+-	  *) v="$v-dirty" ;;
-+-	esac ;;
-+-esac
-++	dirty=`sh -c 'git diff-index --name-only HEAD' 2>/dev/null` || dirty=
-++	case "$dirty" in
-++	    '') ;;
-++	    *) # Append the suffix only if there isn't one already.
-++		case $v in
-++		  *-dirty) ;;
-++		  *) v="$v-dirty" ;;
-++		esac ;;
-++	esac
-++fi
-+ 
-+ # Omit the trailing newline, so that m4_esyscmd can use the result directly.
-+ echo "$v" | tr -d '\012'
-+-- 
-+1.7.8.4
-+
-diff --git a/meta-oe/recipes-devtools/vala/vala_0.12.1.bb b/meta-oe/recipes-devtools/vala/vala_0.12.1.bb
-deleted file mode 100644
-index 1049ed6..0000000
---- a/meta-oe/recipes-devtools/vala/vala_0.12.1.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require vala.inc
--SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/vala/0.12/vala-${PV}.tar.bz2"
--
--FILES_${PN} += "${datadir}/vala-0.12/vapi"
--
--SRC_URI[md5sum] = "bf35262cc611de447147d01cbac33767"
--SRC_URI[sha256sum] = "d9a2be21bb8ab88eab838e7f3a4d0aaa2a1fddf35615dca32bef6a0051f58ea8"
-diff --git a/meta-oe/recipes-devtools/vala/vala_0.14.2.bb b/meta-oe/recipes-devtools/vala/vala_0.14.2.bb
-new file mode 100644
-index 0000000..18e6346
---- /dev/null
-+++ b/meta-oe/recipes-devtools/vala/vala_0.14.2.bb
-@@ -0,0 +1,14 @@
-+require recipes-devtools/vala/vala.inc
-+
-+PR = "r1"
-+
-+DEPENDS += "gtk+"
-+
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/vala/0.14/vala-${PV}.tar.xz \
-+           file://0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch \
-+"
-+
-+FILES_${PN} += "${datadir}/vala-0.14/vapi"
-+
-+SRC_URI[md5sum] = "f05263a56c1e328637e4c97a61befdad"
-+SRC_URI[sha256sum] = "807e6978484f66cab3cf4fefd72f37a4293d2831d7a5fd29119bdf9d38a5b3d0"
--- 
-1.7.8.4
-
+--rich
 
 
