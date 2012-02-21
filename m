@@ -1,43 +1,18 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp205.alice.it ([82.57.200.101])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1RzyYo-0003jx-0i
+	(envelope-from <andrea.adami@gmail.com>) id 1RzydY-0003zI-DR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Feb 2012 23:51:50 +0100
-Received: by iaby12 with SMTP id y12so10296717iab.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 14:43:29 -0800 (PST)
-Received-SPF: pass (google.com: domain of giuseppe.condorelli@gmail.com
-	designates 10.50.207.72 as permitted sender)
-	client-ip=10.50.207.72; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	giuseppe.condorelli@gmail.com designates 10.50.207.72 as
-	permitted sender) smtp.mail=giuseppe.condorelli@gmail.com;
-	dkim=pass header.i=giuseppe.condorelli@gmail.com
-Received: from mr.google.com ([10.50.207.72])
-	by 10.50.207.72 with SMTP id lu8mr23091962igc.0.1329864209655 (num_hops
-	= 1); Tue, 21 Feb 2012 14:43:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ktZf7W8Qhxhu4EJZHxU32n5ey9akjtLommq6WOSz8Dg=;
-	b=tPmsnyz/lPIrIGu09jmIzn9SAupjn449uqDxAw8mubZrb0VLc0Xgq4WXiJdfE8CLor
-	yI/Kb1PTGT5rBt/zstyR0Kp6dHkig+7gDcbA+6xHbDe80N6mBw7yiJ1rcRL5o2zxaHLV
-	5t0q91CPN590Tc3Ur+SYWbD8atBw5wK+Mp7u8=
-MIME-Version: 1.0
-Received: by 10.50.207.72 with SMTP id lu8mr18654111igc.0.1329864209573; Tue,
-	21 Feb 2012 14:43:29 -0800 (PST)
-Received: by 10.231.183.67 with HTTP; Tue, 21 Feb 2012 14:43:29 -0800 (PST)
-In-Reply-To: <CABcZANmqnYRC4Gx+HPwJ8k7Dd7-apMFAuuwRT7aH1dy-Fa2kBg@mail.gmail.com>
-References: <CAOHjBZvHtGh1v0LSUkDA=o9F0cHxD1TZ8CtrOQdzeXy8yZk-Dg@mail.gmail.com>
-	<CABcZAN=c1Hi9B5WL96XaDQScypRO4ETF9GtKKdPdZ=Gxqmfq5A@mail.gmail.com>
-	<CAOHjBZtEx8atBFuAji1ba7Lurda4fqG-HTiSOmn8W_w1Yp76jA@mail.gmail.com>
-	<CABcZANmqnYRC4Gx+HPwJ8k7Dd7-apMFAuuwRT7aH1dy-Fa2kBg@mail.gmail.com>
-Date: Tue, 21 Feb 2012 23:43:29 +0100
-Message-ID: <CAOHjBZt8iEt=z8kqiTdcBJF3b35Wm0KRopzSTi+JGkK_fa3H5w@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: CONFIG_SITE usage
+	Tue, 21 Feb 2012 23:56:44 +0100
+Received: from mizar.localdomain (87.5.51.74) by smtp205.alice.it (8.6.023.02)
+	id 4F421F7B00405EA9; Tue, 21 Feb 2012 23:48:25 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Feb 2012 23:48:16 +0100
+Message-Id: <1329864496-27641-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <ef8b93c13cabd9e766e7f4d96df14710b36c3b87.1329780587.git.andrea.adami@gmail.com>
+References: <ef8b93c13cabd9e766e7f4d96df14710b36c3b87.1329780587.git.andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH v3 3/3] remove linux-kexecboot_3.1, now in meta-initramfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,54 +26,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 22:51:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Feb 2012 22:56:44 -0000
 
-I'll try and I 'll let you know. Many thanks Chris. :)
+* add .bbappend
+* bump PR and INC_PR
 
-Il giorno marted=EC 21 febbraio 2012, Chris Larson ha scritto:
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-kexecboot_3.1.bb       |    7 ----
+ recipes-kernel/linux/linux-kexecboot_3.1.bbappend |   36 +++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 7 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot_3.1.bb
+ create mode 100644 recipes-kernel/linux/linux-kexecboot_3.1.bbappend
 
-> On Tue, Feb 21, 2012 at 2:15 PM, Giuseppe Condorelli
-> <giuseppe.condorelli@gmail.com <javascript:;>> wrote:
-> > Il giorno marted=EC 21 febbraio 2012, Chris Larson ha scritto:
-> >
-> >> On Tue, Feb 21, 2012 at 3:48 AM, Giuseppe Condorelli
-> >> <giuseppe.condorelli@gmail.com <javascript:;> <javascript:;>> wrote:
-> >> > I'm in trouble trying to set CONFIG_SITE to allow my build process t=
-o
-> >> load
-> >> > cache from a given file. I've understood CONFIG_SITE can be set from
-> .bb
-> >> > file, but I'm wondering if it could be set on local.conf or
-> >> distro/machine
-> >> > conf file to be inherited by all packages.
-> >>
-> >> CONFIG_SITE is automatically set for all autotools recipes. Read
-> >> siteinfo.bbclass and autotools.bbclass.
-> >
-> >
-> > Yes I know this but I'm wondering how I can overwrite the CONFIG_SITE
-> > default setting (made by autotools) for all packages in one single shot=
-.
-> I
-> > mean, I think that exporting CONFIG_SITE =3D "my *.site files" on one o=
-f
-> the
-> > .conf files I can say to the system to read those instead of the ones s=
-et
-> > as default by autotools.
->
-> CONFIG_SITE is set by a class, which means it overrides the config
-> metadata (e.g. local.conf). You could either set it in the recipes, or
-> set it in the config metadata using an appropriate override (see
-> OVERRIDES).
-> --
-> Christopher Larson
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org <javascript:;>
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bb b/recipes-kernel/linux/linux-kexecboot_3.1.bb
+deleted file mode 100644
+index 28dc370..0000000
+--- a/recipes-kernel/linux/linux-kexecboot_3.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require linux-kexecboot.inc
+-require linux-${PV}.inc
+-
+-PR = "${INC_PR}.7"
+-S = "${WORKDIR}/linux-${PV}"
+-
+-COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+diff --git a/recipes-kernel/linux/linux-kexecboot_3.1.bbappend b/recipes-kernel/linux/linux-kexecboot_3.1.bbappend
+new file mode 100644
+index 0000000..74d63bb
+--- /dev/null
++++ b/recipes-kernel/linux/linux-kexecboot_3.1.bbappend
+@@ -0,0 +1,36 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/linux-kexecboot-${PV}:${THISDIR}/files:"
++
++COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
++
++# Note we set loglevel=3 and master console on serial to protect bootlogo.
++CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
++CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
++CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
++
++# Zaurus machines need kernel size-check.
++KERNEL_IMAGE_MAXSIZE_akita = "1294336"
++KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
++KERNEL_IMAGE_MAXSIZE_collie = "1048576"
++KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
++KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
++KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
++
++LOGO_SIZE ?= "."
++
++SRC_URI += "file://defconfig \
++           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
++           "
++
++SRC_URI_append_collie = " \
++                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
++                         file://locomo_kbd_tweak-r2.patch \
++                         "
++
++SRC_URI_append_poodle = " \
++                         file://locomo_kbd_tweak-r2.patch \
++                         "
++
++
+-- 
+1.7.3.4
+
+
 
