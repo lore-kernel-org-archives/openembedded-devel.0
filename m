@@ -1,49 +1,20 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0DvN-0004gd-7Q
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Feb 2012 16:16:09 +0100
-Received: by eekd41 with SMTP id d41so13872eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2012 07:07:49 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.183.136 as permitted sender) client-ip=10.14.183.136; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.183.136 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.183.136])
-	by 10.14.183.136 with SMTP id q8mr15936591eem.60.1329923269253
-	(num_hops = 1); Wed, 22 Feb 2012 07:07:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GL0ayQ1XEC/JS2gVR4FwxwU3mYXOKUVdoKfnlj2Dc1Y=;
-	b=wS7QXBRFXkI6tKQQQY1IyQbbXTi6Fhe4ZEUxH1p7YGTrBOTwp/iAIy0bHLc/CpO3In
-	71zdq9WwRSOANOZwtDq6kCT62HOPCYeYjUB1RNBFnwhmM781PGq2Lk7aAEoTVFTGLQu/
-	8BgvFrHrx6f/w8U1qpP6pj9H2T1UYI2/cRg8o=
-Received: by 10.14.183.136 with SMTP id q8mr12752917eem.60.1329923269062;
-	Wed, 22 Feb 2012 07:07:49 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y14sm74170409eef.10.2012.02.22.07.07.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Feb 2012 07:07:48 -0800 (PST)
-Date: Wed, 22 Feb 2012 16:07:45 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120222150745.GL3769@jama.jama.net>
-References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
-	<20120220124013.GG3953@jama.jama.net>
-	<CALbNGRTeigkZyBQzHogt6EeZSzK80ZP05CKyqHwEOMnaJFZyuQ@mail.gmail.com>
-	<20120220160415.GH3953@jama.jama.net>
-	<CALbNGRQkNRcf3gHbscAvVFqZv0nGRR5_U2kTHSZ_uVCASWGtYQ@mail.gmail.com>
-	<20120222131548.GK3769@jama.jama.net>
-	<CAP9ODKp48zr4Qdpd6K+EX-jztSst3iiB6iDZRo0QSQ=0uytVNg@mail.gmail.com>
+Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
+	helo=happy.bec-systems.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>)
+	id 1S0Er9-0006iD-KW; Wed, 22 Feb 2012 17:15:52 +0100
+Received: from localhost.localdomain ([127.0.0.1] helo=happy.bec-systems.com)
+	by happy.bec-systems.com with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>)
+	id 1S0Ej3-0000y1-MD; Wed, 22 Feb 2012 11:07:29 -0500
+Date: Wed, 22 Feb 2012 11:07:29 -0500
+Message-Id: <E1S0Ej3-0000y1-MD@happy.bec-systems.com>
+X-Mailer: Nodemailer (0.1.13; +http://www.nodemailer.org)
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKp48zr4Qdpd6K+EX-jztSst3iiB6iDZRo0QSQ=0uytVNg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][v2] 00/22] systemd rework
+Subject: OE Changelog for 2012-02-13 to 2012-02-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,53 +28,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 15:16:09 -0000
-X-Groupsio-MsgNum: 37340
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VBq/nvTu32OVLBUP"
-Content-Disposition: inline
-
---VBq/nvTu32OVLBUP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Feb 2012 16:15:52 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 22, 2012 at 12:45:55PM -0200, Otavio Salvador wrote:
-> On Wed, Feb 22, 2012 at 11:15, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
->=20
-> > Maybe only add that variable for /lib/systemd/system so I can push my
-> > "systemd rework" patchset for meta-smartphone with this variable
-> > already.
-> >
->=20
-> Can you explain why you'd like to move those files?
+Changelog for 2012-02-13 to 2012-02-20.  Projects included in this report:
 
-I don't want to move it.. just wanted to use systemd_unitdir variable as
-discussed here
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg23=
-921.html
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://git.angstrom-distribution.org/meta-angstrom
+meta-yocto: git://git.yoctoproject.org/poky
+meta-texasinstruments: =
+git://git.angstrom-distribution.org/meta-texasinstruments
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-opie: git://git.openembedded.org/meta-opie
+openembedded: git://git.openembedded.org/openembedded
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-gumstix: git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-java: git://github.com/woglinde/meta-java
+meta-mozilla: git://github.com/OSSystems/meta-mozilla
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-telephony: git://gitorious.org/sysmocom-openembedded/meta-telephony.git
+meta-eldk: git://git.denx.de/eldk.git
 
-when I'm updating all recipes in meta-smartphone which are using
-systemd, see:
-http://git.shr-project.org/git/?p=3Dmeta-smartphone.git;a=3Dshortlog;h=3Dre=
-fs/heads/jansa/test
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
-Cheers,
+Caleb Crome (1):
+=20=20Fix parser hang at 0% with single-core machines
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Christopher Larson (2):
+=20=20Merge remote-tracking branch 'kergoth/hang-issue-fix'
+=20=20persist_data: survive if sqlite3 couldn't enable the shared cache
 
---VBq/nvTu32OVLBUP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
 
-iEYEARECAAYFAk9FBMEACgkQN1Ujt2V2gBwv6gCgtPWsxQGFTQJ5MRZTRgVQAZ8j
-hlUAn2UzM94lpciQ4SzWQxCHL07w2082
-=2EhS
------END PGP SIGNATURE-----
+Martin Jansa (2):
+=20=20webkit-efl: resolve build error with missing eina lib when linked by =
+gold
+=20=20imagemagick: upgrade to 6.7.5 because 6.4.4 is not compatible with =
+zlib-1.2.
 
---VBq/nvTu32OVLBUP--
+Peter Tworek (1):
+=20=20xfce4-settings: Update to latest stable version 4.8.3.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-texasinstruments:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Denis 'GNUtoo' Carikli (2):
+=20=20meta-openmoko: om-gta04: add support for jffs2 images
+=20=20base-files: add fstab override for om-gta04
+
+Martin Jansa (8):
+=20=20recipes: bump PR to rebuild .la files without libz.la
+=20=20meta-shr: bump DISTRO_PR and enable gold
+=20=20meta-shr: drop DISTRO_REVISION and DISTRO_PR, they are not used in =
+oe-core :
+=20=20Merge remote-tracking branch 'contrib/shr'
+=20=20meta-nokia, meta-openmoko, u-boot: Always use gnu ld for LD
+=20=20meta-smartphone: move OLDEST_KERNEL setting from machine configs to =
+distro c
+=20=20freesmartphone: use ${S} instead of ${WORKDIR}/git/${PN} when looking =
+for .s
+=20=20Revert "polkit: disable systemd support explicitly until we switch =
+completel
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+Henning Heinold (12):
+=20=20libbecj-bootstrap: use sort for build order of the javafiles and =
+introduce I
+=20=20jamvm-inital: rework libffi detection
+=20=20cacao-native: update hg version
+=20=20icedtea6-native: add linux kernel version 3 support
+=20=20ecj-inital: rename recipe to ecj-initial-native
+=20=20jamvm: add recipes which combines native and target
+=20=20angstrom-jalimo.conf,sane-toolchain-java.inc: use jamvm-git instead =
+of cacao
+=20=20rhino: add version 1.7r2
+=20=20ecj-bootstrap-native: update ecj script
+=20=20openjdk: backport 1.11.1 release from meta-java
+=20=20angstrom-jalimo.conf: prefer icedtea 1.11.1 for openjdk6
+=20=20openjdk-6-common.inc: fix hardcoded path for allowing to build with =
+linux 3.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+Peter Tworek (3):
+=20=20linux-netbookpro: Upgrade to 3.2.6.
+=20=20xserver-kdrive: Xepson use new, accelerated version of the Xserver.
+=20=20linux-netbookpro: Update to newer git snapshot.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+Otavio Salvador (2):
+=20=20chicken-egg-scron: start service at runlevels 2345
+=20=20chicken_install.bbclass: use bitbake lockfiles flag
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+Otavio Salvador (3):
+=20=20openjdk: fix qemu target detection
+=20=20openjdk: fix i586 arch detection for JDK
+=20=20openjdk: use dynamic architecture value when packaging
+
+woglinde (2):
+=20=20Merge pull request #16 from OSSystems/master
+=20=20Merge pull request #17 from OSSystems/master
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mozilla:
+
+Otavio Salvador (18):
+=20=20mozilla-devscripts: add 0.30
+=20=20firefox-l10n: use same firefox license but skip md5sum check for now
+=20=20firefox-l10n: use mozilla-devscripts-native to simplify code
+=20=20firefox: drop series file copied by mistake
+=20=20firefox: enable extensions default profile and use .mozilla
+=20=20scripts/firefox-gen-l10n-recipes: fix use of tmpdir
+=20=20scripts/firefox-gen-l10n-recipes: drop debug echo
+=20=20mozilla.bbclass: add support to change mozconfig at configure
+=20=20firefox: update to 10.0.1
+=20=20firefox-l10n: update to 10.0.1 packages
+=20=20firefox-addon: use mozilla-devscripts-native
+=20=20firefox-addon: add support for addons with multiple .xpi
+=20=20firefox-addon-webconverger: add
+=20=20firefox-addon-full-fullscreen: drop as it doesn't work with Firefox =
+newer th
+=20=20firefox-addon: fix installation path for addons
+=20=20firefox-addon-webconverger: fix install.rdf contributor value
+=20=20firefox-addon-webconverger: set window fullscreen
+=20=20firefox-addon-webconverger: drop fullscreen patch as it does not work
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-telephony:
+
+Holger Hans Peter Freyther (1):
+=20=20openggsn_git: Upgrade to the latest git revision
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-eldk:
+
+
+
+
