@@ -1,42 +1,38 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S00AO-0007sC-NX
+	(envelope-from <andrea.adami@gmail.com>) id 1S00Gw-00085a-2V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Feb 2012 01:34:45 +0100
-Received: by eaal10 with SMTP id l10so2405042eaa.6
+	Wed, 22 Feb 2012 01:41:30 +0100
+Received: by daln34 with SMTP id n34so6237102dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2012 16:26:25 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.9.148 as permitted sender) client-ip=10.213.9.148; 
+	Tue, 21 Feb 2012 16:33:09 -0800 (PST)
+Received-SPF: pass (google.com: domain of andrea.adami@gmail.com designates
+	10.68.74.72 as permitted sender) client-ip=10.68.74.72; 
 Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.9.148 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.9.148])
-	by 10.213.9.148 with SMTP id l20mr4188885ebl.104.1329870385275
-	(num_hops = 1); Tue, 21 Feb 2012 16:26:25 -0800 (PST)
+	spf=pass (google.com: domain of andrea.adami@gmail.com
+	designates 10.68.74.72 as permitted sender)
+	smtp.mail=andrea.adami@gmail.com;
+	dkim=pass header.i=andrea.adami@gmail.com
+Received: from mr.google.com ([10.68.74.72])
+	by 10.68.74.72 with SMTP id r8mr74831181pbv.86.1329870789652 (num_hops
+	= 1); Tue, 21 Feb 2012 16:33:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=xKjPPMQLEmOtjkvKbCc0867uL5wa5CBZ/FcEW2PQC1A=;
-	b=Ip3X4eaSYfWssx6C+1icb/AZGIYZOdRX9O+lnBaUNAO1ukmkWgLi1HZYg7CBlH0y+O
-	NvbnIO/cyJxcFnmEJxPVP9K7QNKaJkuWuZtIzrPVd4qWwqJoJi1QgikMIC3bGSVhSeSZ
-	JKtEGpdnxr79fxAAOdHab5P8ZHrLQDKBsBmGA=
-Received: by 10.213.9.148 with SMTP id l20mr3332846ebl.104.1329870384436;
-	Tue, 21 Feb 2012 16:26:24 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y14sm66675135eef.10.2012.02.21.16.26.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Feb 2012 16:26:23 -0800 (PST)
-Date: Wed, 22 Feb 2012 01:26:21 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120222002621.GF3769@jama.jama.net>
-References: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=L9Bja1BDS2VzDYBhcNiu/RkL6XAbZu14WBXGaXqt5OY=;
+	b=CSj6cAJwNNQuOH1ygco9bidTD7Rz1XDjaVHMcjrW3+FseT5yEMvVVt0I1fiBeaApb8
+	kdFqji+kYHvHViU4EperlHSLbT1E/fKcw88kXe41CWEO177oSJaQ3UKl9I8YxA8QM991
+	uf+qGrZ3daKhoF8EQmELbWq8XX6OnCTVrrxWI=
 MIME-Version: 1.0
+Received: by 10.68.74.72 with SMTP id r8mr61483059pbv.86.1329870789485; Tue,
+	21 Feb 2012 16:33:09 -0800 (PST)
+Received: by 10.143.147.17 with HTTP; Tue, 21 Feb 2012 16:33:09 -0800 (PST)
 In-Reply-To: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+References: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 22 Feb 2012 01:33:09 +0100
+Message-ID: <CAAQYJAvfp4SFyDHuR9p06JZ307RYnCkPk0q_MaofsQ4ZThcC-Q@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-handheld][PATCH 1/1] linux-kexecboot_3.2 and _git: remove and add .bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,42 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 00:34:45 -0000
-X-Groupsio-MsgNum: 37314
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SxgehGEc6vB0cZwN"
-Content-Disposition: inline
-
---SxgehGEc6vB0cZwN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Feb 2012 00:41:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 22, 2012 at 01:20:31AM +0100, Andrea Adami wrote:
+On Wed, Feb 22, 2012 at 1:20 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
+e:
 > * recipes are now in meta-initramfs
->=20
+>
 > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 > ---
->  recipes-core/udev/udev/touchscreen.rules          |   21 ---
->  recipes-core/udev/udev_173.bbappend               |    5 -
->  recipes-kernel/linux/linux-kexecboot.inc          |  150 ---------------=
-------
->  recipes-kernel/linux/linux-kexecboot_3.2.bb       |    5 -
->  recipes-kernel/linux/linux-kexecboot_3.2.bbappend |   38 +++++
->  recipes-kernel/linux/linux-kexecboot_git.bb       |    4 -
->  recipes-kernel/linux/linux-kexecboot_git.bbappend |   38 +++++
->  7 files changed, 76 insertions(+), 185 deletions(-)
->  delete mode 100644 recipes-core/udev/udev/touchscreen.rules
->  delete mode 100644 recipes-core/udev/udev_173.bbappend
-
-is this ^udev^ intentional?
-
->  delete mode 100644 recipes-kernel/linux/linux-kexecboot.inc
->  delete mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bb
->  create mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bbappend
->  delete mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
->  create mode 100644 recipes-kernel/linux/linux-kexecboot_git.bbappend
->=20
+> =A0recipes-core/udev/udev/touchscreen.rules =A0 =A0 =A0 =A0 =A0| =A0 21 -=
+--
+> =A0recipes-core/udev/udev_173.bbappend =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
+=A05 -
+> =A0recipes-kernel/linux/linux-kexecboot.inc =A0 =A0 =A0 =A0 =A0| =A0150 -=
+--------------------
+> =A0recipes-kernel/linux/linux-kexecboot_3.2.bb =A0 =A0 =A0 | =A0 =A05 -
+> =A0recipes-kernel/linux/linux-kexecboot_3.2.bbappend | =A0 38 +++++
+> =A0recipes-kernel/linux/linux-kexecboot_git.bb =A0 =A0 =A0 | =A0 =A04 -
+> =A0recipes-kernel/linux/linux-kexecboot_git.bbappend | =A0 38 +++++
+> =A07 files changed, 76 insertions(+), 185 deletions(-)
+> =A0delete mode 100644 recipes-core/udev/udev/touchscreen.rules
+> =A0delete mode 100644 recipes-core/udev/udev_173.bbappend
+> =A0delete mode 100644 recipes-kernel/linux/linux-kexecboot.inc
+> =A0delete mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bb
+> =A0create mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bbappend
+> =A0delete mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
+> =A0create mode 100644 recipes-kernel/linux/linux-kexecboot_git.bbappend
+>
 > diff --git a/recipes-core/udev/udev/touchscreen.rules b/recipes-core/udev=
 /udev/touchscreen.rules
 > deleted file mode 100644
@@ -98,7 +87,7 @@ is this ^udev^ intentional?
 > -# of the different fields. They provide the following subsitutions:
 > -#
 > -# %n the "kernel number" of the device.
-> -#    For example, 'sda3' has a "kernel number" of '3'
+> -# =A0 =A0For example, 'sda3' has a "kernel number" of '3'
 > -# %e the smallest number for that name which does not matches an existin=
 g node
 > -# %k the kernel name for the device
@@ -204,108 +193,115 @@ MACHINE}"
 > -INITRAMFS_IMAGE =3D "initramfs-kexecboot-klibc-image"
 > -
 > -kernel_conf_variable() {
-> -        CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_$1[ =3D]/d;"
-> -        if test "$2" =3D "n"
-> -        then
-> -                echo "# CONFIG_$1 is not set" >> ${S}/.config
-> -        else
-> -                echo "CONFIG_$1=3D$2" >> ${S}/.config
-> -        fi
+> - =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_$1[ =3D]/d;"
+> - =A0 =A0 =A0 =A0if test "$2" =3D "n"
+> - =A0 =A0 =A0 =A0then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "# CONFIG_$1 is not set" >> ${S}/.c=
+onfig
+> - =A0 =A0 =A0 =A0else
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0echo "CONFIG_$1=3D$2" >> ${S}/.config
+> - =A0 =A0 =A0 =A0fi
 > -}
 > -
 > -do_configure_prepend() {
 > -
-> -        echo "" > ${S}/.config
-> -        CONF_SED_SCRIPT=3D""
+> - =A0 =A0 =A0 =A0echo "" > ${S}/.config
+> - =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D""
 > -
-> -        #
-> -        # CONFIG_CMDLINE mangling
-> -        #
-> -        kernel_conf_variable CMDLINE_BOOL y
-> -        kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0# CONFIG_CMDLINE mangling
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_BOOL y
+> - =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEB=
+UG}\""
 > -
-> -        # mips and x86
-> -        kernel_conf_variable CMDLINE_OVERRIDE y
+> - =A0 =A0 =A0 =A0# mips and x86
+> - =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_OVERRIDE y
 > -
-> -        # sh only
-> -        kernel_conf_variable CMDLINE_OVERWRITE y
-> -        kernel_conf_variable CMDLINE_EXTEND n
+> - =A0 =A0 =A0 =A0# sh only
+> - =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_OVERWRITE y
+> - =A0 =A0 =A0 =A0kernel_conf_variable CMDLINE_EXTEND n
 > -
-> -        #
-> -        # endian support
-> -        #
-> -        if [ "${SITEINFO_ENDIANNESS}" =3D "be" ]; then
-> -                kernel_conf_variable CPU_BIG_ENDIAN y
-> -        fi
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0# endian support
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0if [ "${SITEINFO_ENDIANNESS}" =3D "be" ]; then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable CPU_BIG_ENDIAN y
+> - =A0 =A0 =A0 =A0fi
 > -
-> -        #
-> -        # logo support, if you supply logo_linux_clut224.ppm in SRC_URI,=
- then it is going to be used
-> -        #
-> -        if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
-> -                install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm driver=
-s/video/logo/logo_linux_clut224.ppm
-> -                kernel_conf_variable LOGO y
-> -                kernel_conf_variable LOGO_LINUX_CLUT224 y
-> -        fi
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0# logo support, if you supply logo_linux_clut224.ppm in =
+SRC_URI, then it is going to be used
+> - =A0 =A0 =A0 =A0#
+> - =A0 =A0 =A0 =A0if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0install -m 0644 ${WORKDIR}/logo_linux_cl=
+ut224.ppm drivers/video/logo/logo_linux_clut224.ppm
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable LOGO y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable LOGO_LINUX_CLUT224 =
+y
+> - =A0 =A0 =A0 =A0fi
 > -
-> -        # When enabling thumb for userspace we also need thumb support i=
-n the kernel
-> -        if [ "${ARM_INSTRUCTION_SET}" =3D "thumb" ] ; then
-> -                kernel_conf_variable ARM_THUMB y
-> -        fi
+> - =A0 =A0 =A0 =A0# When enabling thumb for userspace we also need thumb s=
+upport in the kernel
+> - =A0 =A0 =A0 =A0if [ "${ARM_INSTRUCTION_SET}" =3D "thumb" ] ; then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable ARM_THUMB y
+> - =A0 =A0 =A0 =A0fi
 > -
-> -        kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
-> -        kernel_conf_variable LOCALVERSION_AUTO n
+> - =A0 =A0 =A0 =A0kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
+> - =A0 =A0 =A0 =A0kernel_conf_variable LOCALVERSION_AUTO n
 > -
-> -        # Force sane defaults for kexec-enabled kernels and keep size sm=
-all
-> -        kernel_conf_variable BLK_DEV_INITRD y
-> -        kernel_conf_variable KEXEC y
-> -        CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /=3Dm/d;"
-> -        kernel_conf_variable MODULES n
-> -        if ${@base_contains("CMDLINE_DEBUG", "debug", "true", "false", d=
-)}; then
-> -                kernel_conf_variable DEBUG_LL y
-> -                kernel_conf_variable PRINTK y
-> -                kernel_conf_variable EARLY_PRINTK y
-> -                kernel_conf_variable BUG y
-> -                kernel_conf_variable DEBUG_ERRORS y
-> -                kernel_conf_variable DEBUG_BUGVERBOSE y
-> -                kernel_conf_variable DEBUG_KERNEL y
-> -        else
-> -                kernel_conf_variable DEBUG_ERRORS n
-> -                kernel_conf_variable DEBUG_BUGVERBOSE n
-> -                kernel_conf_variable DEBUG_KERNEL n
-> -        fi
+> - =A0 =A0 =A0 =A0# Force sane defaults for kexec-enabled kernels and keep=
+ size small
+> - =A0 =A0 =A0 =A0kernel_conf_variable BLK_DEV_INITRD y
+> - =A0 =A0 =A0 =A0kernel_conf_variable KEXEC y
+> - =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /=3Dm/d;"
+> - =A0 =A0 =A0 =A0kernel_conf_variable MODULES n
+> - =A0 =A0 =A0 =A0if ${@base_contains("CMDLINE_DEBUG", "debug", "true", "f=
+alse", d)}; then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_LL y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable PRINTK y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable EARLY_PRINTK y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable BUG y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL y
+> - =A0 =A0 =A0 =A0else
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_ERRORS n
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_BUGVERBOSE n
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable DEBUG_KERNEL n
+> - =A0 =A0 =A0 =A0fi
 > -
-> -        # Force lzma for arm kernels only
-> -        if [ "${ARCH}" =3D "arm" ] ; then
-> -                CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_KERNEL/d;"
-> -                CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_RD/d;"
-> -                CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_INITRAMFS_CO=
-MPRESSION/d;"
-> -                CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CONFIG_INITRAMFS_SO=
-URCE/d;"
-> -                kernel_conf_variable KERNEL_LZMA y
-> -                kernel_conf_variable RD_LZMA y
-> -                kernel_conf_variable INITRAMFS_COMPRESSION_LZMA y
-> -                kernel_conf_variable INITRAMFS_SOURCE "\"initramfs.cpio.=
-lzma\""
-> -        fi
+> - =A0 =A0 =A0 =A0# Force lzma for arm kernels only
+> - =A0 =A0 =A0 =A0if [ "${ARCH}" =3D "arm" ] ; then
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
+FIG_KERNEL/d;"
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
+FIG_RD/d;"
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
+FIG_INITRAMFS_COMPRESSION/d;"
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CONF_SED_SCRIPT=3D"$CONF_SED_SCRIPT /CON=
+FIG_INITRAMFS_SOURCE/d;"
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable KERNEL_LZMA y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable RD_LZMA y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable INITRAMFS_COMPRESSI=
+ON_LZMA y
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0kernel_conf_variable INITRAMFS_SOURCE "\=
+"initramfs.cpio.lzma\""
+> - =A0 =A0 =A0 =A0fi
 > -
-> -        sed -e "${CONF_SED_SCRIPT}" \
-> -                        < '${WORKDIR}/defconfig' >>'${S}/.config'
+> - =A0 =A0 =A0 =A0sed -e "${CONF_SED_SCRIPT}" \
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0< '${WORKDIR}/defconfig'=
+ >>'${S}/.config'
 > -
-> -        yes '' | oe_runmake oldconfig
+> - =A0 =A0 =A0 =A0yes '' | oe_runmake oldconfig
 > -}
 > -
 > -do_populate_sysroot() {
-> -        :
+> - =A0 =A0 =A0 =A0:
 > -}
 > -
 > -do_install() {
-> -        :
+> - =A0 =A0 =A0 =A0:
 > -}
 > -
 > diff --git a/recipes-kernel/linux/linux-kexecboot_3.2.bb b/recipes-kernel=
@@ -358,18 +354,20 @@ e:1"
 > +LOGO_SIZE ?=3D "."
 > +
 > +SRC_URI +=3D "file://defconfig \
-> +           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-> +           "
+> + =A0 =A0 =A0 =A0 =A0 file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+> + =A0 =A0 =A0 =A0 =A0 "
 > +
 > +SRC_URI_append_collie =3D " \
-> +                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-st=
-ructure-on-collie.patch \
-> +                         file://locomo_kbd_tweak-r2.patch \
-> +                         "
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://0001-pcmcia-pxa2=
+xx_sharpsl-retain-ops-structure-on-collie.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://locomo_kbd_tweak=
+-r2.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
 > +
 > +SRC_URI_append_poodle =3D " \
-> +                         file://locomo_kbd_tweak-r2.patch \
-> +                         "
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://locomo_kbd_tweak=
+-r2.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
 > +
 > +
 > diff --git a/recipes-kernel/linux/linux-kexecboot_git.bb b/recipes-kernel=
@@ -421,42 +419,33 @@ e:1"
 > +LOGO_SIZE ?=3D "."
 > +
 > +SRC_URI +=3D "file://defconfig \
-> +           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-> +           "
+> + =A0 =A0 =A0 =A0 =A0 file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+> + =A0 =A0 =A0 =A0 =A0 "
 > +
 > +SRC_URI_append_collie =3D " \
-> +                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-st=
-ructure-on-collie.patch \
-> +                         file://locomo_kbd_tweak-r2.patch \
-> +                         "
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://0001-pcmcia-pxa2=
+xx_sharpsl-retain-ops-structure-on-collie.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://locomo_kbd_tweak=
+-r2.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
 > +
 > +SRC_URI_append_poodle =3D " \
-> +                         file://locomo_kbd_tweak-r2.patch \
-> +                         "
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 file://locomo_kbd_tweak=
+-r2.patch \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
 > +
 > +
-> --=20
+> --
 > 1.7.3.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Ouch, udev is the innocent victim of this patch.
+Sorry, v2 follows.
 
---SxgehGEc6vB0cZwN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Cough, cough,...
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Regards
 
-iEYEARECAAYFAk9ENi0ACgkQN1Ujt2V2gByyqwCgtizGd2jfmOXf2CN7J0+gyjco
-+P4AoLtNF5GpfgSCotuE6qxMDD1lti+F
-=sj/w
------END PGP SIGNATURE-----
+Andrea
 
---SxgehGEc6vB0cZwN--
+
