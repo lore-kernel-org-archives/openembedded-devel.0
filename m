@@ -1,45 +1,38 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0CPJ-00012Z-Cp
+	(envelope-from <vita.preskovsky@gmail.com>) id 1S0CuK-0002S9-BH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Feb 2012 14:38:57 +0100
-Received: by bkwq11 with SMTP id q11so41633bkw.6
+	Wed, 22 Feb 2012 15:11:00 +0100
+Received: by ghbf19 with SMTP id f19so33074ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2012 05:30:37 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.112.8.68 as permitted sender)
-	client-ip=10.112.8.68; 
+	Wed, 22 Feb 2012 06:02:39 -0800 (PST)
+Received-SPF: pass (google.com: domain of vita.preskovsky@gmail.com designates
+	10.101.179.28 as permitted sender) client-ip=10.101.179.28; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.112.8.68 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.112.8.68])
-	by 10.112.8.68 with SMTP id p4mr599226lba.47.1329917437336 (num_hops =
-	1); Wed, 22 Feb 2012 05:30:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=M+GX9he7TmCnlDua4P6y2v4Hn+uXdE4QlFXOrP6G09Q=;
-	b=CLLVQPrunep8y751SebgdNvlWgwF41QZJnOvp52Htxn7B04Do+K464aMmDdn81IamV
-	iYAXSkY8eM21tMnaRpdmUSV+lSaSsMOkB8xRBHBUF5yC3vAS43Rhosm5qxggGDS5WDeB
-	Wdoa+z9OP5nDgYVklDAfw6ceB5ISkNFyfsKPw=
-MIME-Version: 1.0
-Received: by 10.112.8.68 with SMTP id p4mr499627lba.47.1329917437158; Wed, 22
-	Feb 2012 05:30:37 -0800 (PST)
-Received: by 10.112.108.164 with HTTP; Wed, 22 Feb 2012 05:30:37 -0800 (PST)
-In-Reply-To: <20120222131548.GK3769@jama.jama.net>
-References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
-	<20120220124013.GG3953@jama.jama.net>
-	<CALbNGRTeigkZyBQzHogt6EeZSzK80ZP05CKyqHwEOMnaJFZyuQ@mail.gmail.com>
-	<20120220160415.GH3953@jama.jama.net>
-	<CALbNGRQkNRcf3gHbscAvVFqZv0nGRR5_U2kTHSZ_uVCASWGtYQ@mail.gmail.com>
-	<20120222131548.GK3769@jama.jama.net>
-Date: Wed, 22 Feb 2012 14:30:37 +0100
-Message-ID: <CALbNGRTwehO9j0RPRCSMnxjHBk51cOvxXY=kg2Hw3h5_nCUOzw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	vita.preskovsky@gmail.com designates 10.101.179.28 as permitted
+	sender) smtp.mail=vita.preskovsky@gmail.com;
+	dkim=pass header.i=vita.preskovsky@gmail.com
+Received: from mr.google.com ([10.101.179.28])
+	by 10.101.179.28 with SMTP id g28mr12938956anp.61.1329919359735
+	(num_hops = 1); Wed, 22 Feb 2012 06:02:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=s+u5/jv+tWgJjIq2Jg6BuMryJmXc8Rtx6SHX9ue5J50=;
+	b=LPGenIrEIrQz0AV3RjSzWRaSv0Ds5BsIFpHhxDD/9BMogZ2nI58ni3lIl0edE70mEi
+	F2gEWUNYBv2k2+QXhGQpUEpa/Fcjypo3pRiB+9fw7YdKEJqpwWdVdjO+aD+gY/HPxrs5
+	fE3qsTUPHgN4j9zeH7R2IZoT6Maj7a8HVLPD4=
+Received: by 10.101.179.28 with SMTP id g28mr10060774anp.61.1329919359621;
+	Wed, 22 Feb 2012 06:02:39 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id w44sm62957483yhk.17.2012.02.22.06.02.37
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 22 Feb 2012 06:02:38 -0800 (PST)
+From: Vita Preskovsky <vita.preskovsky@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][v2] 00/22] systemd rework
+Date: Wed, 22 Feb 2012 16:02:07 +0200
+Message-Id: <1329919327-30523-1-git-send-email-vitap@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] bluez4: two patches for 4.98
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,112 +46,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 13:38:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Feb 2012 14:11:00 -0000
 
-On Wed, Feb 22, 2012 at 2:15 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Wed, Feb 22, 2012 at 01:47:07PM +0100, Andreas M=FCller wrote:
->> On Mon, Feb 20, 2012 at 5:04 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> > On Mon, Feb 20, 2012 at 04:56:46PM +0100, Andreas M=FCller wrote:
->> >> On Mon, Feb 20, 2012 at 1:40 PM, Martin Jansa <martin.jansa@gmail.com=
-> wrote:
->> >> > On Thu, Feb 16, 2012 at 03:02:54AM +0100, Andreas M=FCller wrote:
->> >> >> V1 -> V2:
->> >> >> [2] =A0do not check configuration variables for cross and nativesd=
-k
->> >> >> [3] =A0rename systemd_package to systemd_generate_package_scripts
->> >> >> [6] =A0parse unit files to determine the files to pack
->> >> >> [7] =A0create warning if *-systemd package already rdepends
->> >> >> =A0 =A0 =A0it's base package
->> >> >> added in V2:
->> >> >> [8]-[20] remove obsolet systemd code from recipes (these were used=
- as
->> >> >> =A0 =A0 =A0test cases)
->> >> >> [21] dhcp-(relay) test case for multiple systemd packages
->> >> >> [22] modified to start service
->> >> >>
->> >> >> The following tests were performed:
->> >> >> * build from scratch with [1]-[7] / run test
->> >> >> * build from scratch / apply patches / build -> check buildhistory=
- diff
->> >> >> * build from scratch w/o patches / build from scratch with patches=
- -> check
->> >> >> =A0 buildhistory diff
->> >> >>
->> >> >> Additional patches were prepared for other recipes inheriting syst=
-emd. These are
->> >> >> not yet send because they move systemd support from ${PN} to ${PN}=
--systemd which
->> >> >> currently needs modifications on tasks/images. I'd be happy if a c=
-ommon accepted
->> >> >> solution would be suggested/implemented (image-feature?).
->> >> >
->> >> > Today I've noticed one more issue (not sure if it's caused by this
->> >> > patchset or not).
->> >> I think it is
->> >> >
->> >> > Some images are failing for me with:
->> >> > For package xserver-nodm-init-systemd SYSTEMD_SERVICE-entry xserver=
--nodm.service does not exist
->> >> > from systemd.bbclass:populate_packages_prepend
->> >> >
->> >> > I guess it's because sstate package:
->> >> > sstate-xserver-nodm-init-all-oe-linux-2.0-r13-all-2-2ac030a94ddbd20=
-2f54b99c2e32c6312_package.tgz
->> >> >
->> >> > has only
->> >> > package/lib/systemd/system/xserver-nodm.service
->> >> >
->> >> > but systemd.bbclass:populate_packages_prepend is looking only in ${=
-D}
->> >> > (image directory).
->> >> >
->> >> I assume you are working with temp files deleted (don't know the exac=
-t
->> >
->> > Yes temp files were deleted (and inherit rm_work).
->> >
->> >> config option now). To fix: Is there a variable pointing to package
->> >> dir?
->> >
->> > classes/package.bbclass:PKGD =A0 =A0=3D "${WORKDIR}/package"
->> >
->> > should help
->> >
->> I am working on this and checked rm_work.bbclass. Seems that complete
->> package contents are retained / respectively are recovered by sstate.
->> Hence I have another question:
->>
->> Will it cause problems to run the whole code in
->> populate_packages_prepend only (once) in case ${D} exists? Any fallout
->> to expect by this simple solution?
->
-> If I understand you right, then looks good to me.
->
->> Please let me know if so because this would save me from long build test=
-s.
->
-> For me this whole series can go in as it is now and my comments can be
-> implemented as followup patches (which will be easier to review then
-> whole patchset again).
->
-> Maybe only add that variable for /lib/systemd/system so I can push my
-> "systemd rework" patchset for meta-smartphone with this variable
-> already.
->
-I am afraid I have embedded all comments already - will send a new
-version after test...
+* Adding two patches fixing functionality
+of bluez-4.98. The first fixes
+the synchronization between bluetoothd
+and driver. And the second is necessary
+for A2DP to work.
 
-* the modifications will be documented
-* commits untouched will remain Otavio's ack
 
-so efforts for another review are few.
+Signed-off-by: Vita Preskovsky <vitap@ti.com>
+---
+ recipes/bluez/bluez4_4.98.bb                       |    2 +
+ .../files/0001-socket-enable-for-bluez-4_98.patch  |   25 ++++++++++
+ ...synchronization-between-bluetoothd-and-dr.patch |   50 ++++++++++++++++++++
+ 3 files changed, 77 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bluez/files/0001-socket-enable-for-bluez-4_98.patch
+ create mode 100755 recipes/bluez/files/0002-bluez4-fix-synchronization-between-bluetoothd-and-dr.patch
 
-Cheers
+diff --git a/recipes/bluez/bluez4_4.98.bb b/recipes/bluez/bluez4_4.98.bb
+index 2303994..1a5fd21 100644
+--- a/recipes/bluez/bluez4_4.98.bb
++++ b/recipes/bluez/bluez4_4.98.bb
+@@ -3,6 +3,8 @@ require bluez4.inc
+ SRC_URI = "\
+  ${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-${PV}.tar.gz \
+  file://bluetooth.conf \
++ file://0001-socket-enable-for-bluez-4_98.patch \
++ file://0002-bluez4-fix-synchronization-between-bluetoothd-and-dr.patch \
+ "
+ SRC_URI[md5sum] = "362864b716950baa04797de735fc237b"
+ SRC_URI[sha256sum] = "9a5b655bada7c7a1921cb3bac83b8a32bbe49893e4c7a1377cdc1b0d35f7d233"
+diff --git a/recipes/bluez/files/0001-socket-enable-for-bluez-4_98.patch b/recipes/bluez/files/0001-socket-enable-for-bluez-4_98.patch
+new file mode 100644
+index 0000000..05cb2ee
+--- /dev/null
++++ b/recipes/bluez/files/0001-socket-enable-for-bluez-4_98.patch
+@@ -0,0 +1,25 @@
++From e142a28897c0b0fe9e61259a96dad6fb9f818ecd Mon Sep 17 00:00:00 2001
++From: Moosa <moosa.baransi@babcomsoftware.com>
++Date: Wed, 22 Feb 2012 10:06:37 +0200
++Subject: [PATCH] socket enable for bluez 0_98
++
++* This is necessary for working with A2DP
++---
++ audio/audio.conf |    1 +
++ 1 files changed, 1 insertions(+), 0 deletions(-)
++
++diff --git a/audio/audio.conf b/audio/audio.conf
++index 302e046..9533ada 100644
++--- a/audio/audio.conf
+++++ b/audio/audio.conf
++@@ -3,6 +3,7 @@
++ # This section contains options which are not specific to any
++ # particular interface
++ [General]
+++Enable=Socket
++ 
++ # Switch to master role for incoming connections (defaults to true)
++ #Master=true
++-- 
++1.7.1
++
+diff --git a/recipes/bluez/files/0002-bluez4-fix-synchronization-between-bluetoothd-and-dr.patch b/recipes/bluez/files/0002-bluez4-fix-synchronization-between-bluetoothd-and-dr.patch
+new file mode 100755
+index 0000000..4897647
+--- /dev/null
++++ b/recipes/bluez/files/0002-bluez4-fix-synchronization-between-bluetoothd-and-dr.patch
+@@ -0,0 +1,50 @@
++From ddca351e504dc3cb8d91ea10a1863949699c6e50 Mon Sep 17 00:00:00 2001
++From: Vita Preskovsky <vitap@ti.com>
++Date: Tue, 13 Dec 2011 22:54:47 +0200
++Subject: [PATCH] bluez4: fix synchronization between bluetoothd and driver
++  * To fix situation when bluetoothd doesn't get messages
++    it expects to receive from the kernel. Therefore the
++    the required requests are sent again at the stage when device
++    is up. The mismatch caused to the list of adapters to be
++    empty.
++
++Signed-off-by: Vita Preskovsky <vitap@ti.com>
++---
++ plugins/hciops.c |   21 +++++++++++++++++++++
++ 1 files changed, 21 insertions(+), 0 deletions(-)
++
++diff --git a/plugins/hciops.c b/plugins/hciops.c
++index ecc0e86..e2198ee 100644
++--- a/plugins/hciops.c
+++++ b/plugins/hciops.c
++@@ -2512,6 +2512,27 @@ static void device_devup_setup(int index)
++ 	hci_send_cmd(dev->sk, OGF_HOST_CTL, OCF_READ_STORED_LINK_KEY,
++ 					READ_STORED_LINK_KEY_CP_SIZE, &cp);
++ 
+++	/* Even though it shouldn't happen it seems like we might miss 
+++	 * initialization commands that kernel sends. So we check it here
+++	 * to avoid situation when we have device but it is not in the list
+++	 * of adapters. */
+++       if (hci_test_bit(PENDING_FEATURES, &dev->pending))
+++               hci_send_cmd(dev->sk, OGF_INFO_PARAM,
+++                                       OCF_READ_LOCAL_FEATURES, 0, NULL);
+++
+++       if (hci_test_bit(PENDING_VERSION, &dev->pending))
+++               hci_send_cmd(dev->sk, OGF_INFO_PARAM,
+++                                       OCF_READ_LOCAL_VERSION, 0, NULL);
+++
+++       if (hci_test_bit(PENDING_NAME, &dev->pending))
+++               hci_send_cmd(dev->sk, OGF_HOST_CTL,
+++                                       OCF_READ_LOCAL_NAME, 0, NULL);
+++
+++       if (hci_test_bit(PENDING_BDADDR, &dev->pending))
+++               hci_send_cmd(dev->sk, OGF_INFO_PARAM,
+++                                       OCF_READ_BD_ADDR, 0, NULL);
+++
+++
++ 	if (!dev->pending)
++ 		init_adapter(index);
++ }
++-- 
++1.7.0.4
++
+-- 
+1.7.0.4
 
-Andreas
 
 
