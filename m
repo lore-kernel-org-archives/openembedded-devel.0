@@ -1,18 +1,38 @@
-Received: from smtp207.alice.it ([82.57.200.103])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1S00Sf-0008TS-VN
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1S06Y3-00012T-C6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Feb 2012 01:53:38 +0100
-Received: from mizar.localdomain (87.5.51.74) by smtp207.alice.it (8.6.023.02)
-	id 4F05A66505AADE13; Wed, 22 Feb 2012 01:45:18 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2012 01:45:14 +0100
-Message-Id: <1329871514-5997-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1329870032-4952-2-git-send-email-andrea.adami@gmail.com>
-References: <1329870032-4952-2-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe][PATCH v2 1/1] meta-initramfs: import linux-kexecboot_3.2 and _git from meta-handheld
+	Wed, 22 Feb 2012 08:23:37 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1S06Q0-000506-0L from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Feb 2012 23:15:16 -0800
+Received: from SVR-IES-FEM-04.mgc.mentorg.com ([137.202.0.110]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 21 Feb 2012 23:15:16 -0800
+Received: from EU-MBX-03.mgc.mentorg.com ([169.254.2.68]) by
+	SVR-IES-FEM-04.mgc.mentorg.com ([137.202.0.110]) with mapi id
+	14.01.0289.001; Wed, 22 Feb 2012 07:15:13 +0000
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] libedit: Adds version 20110802 (initial
+	recipe)
+Thread-Index: AQHM8N2fPsOAcr0YWUqQDy04adzp75ZIgP2w
+Date: Wed, 22 Feb 2012 07:15:13 +0000
+Message-ID: <365E1805BC95084CBE82381A0B869994050F1CF4@EU-MBX-03.mgc.mentorg.com>
+References: <1329828457-23375-1-git-send-email-noor_ahsan@mentor.com>
+	<CAMKF1sof5d-kmGrbEBqdheawFULL3YkEgpoRXv7+UFKYwxFOjQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sof5d-kmGrbEBqdheawFULL3YkEgpoRXv7+UFKYwxFOjQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.202.0.76]
+MIME-Version: 1.0
+X-OriginalArrivalTime: 22 Feb 2012 07:15:16.0037 (UTC)
+	FILETIME=[B9D57F50:01CCF131]
+Subject: Re: [meta-oe][PATCH] libedit: Adds version 20110802 (initial	recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,68 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 00:53:38 -0000
+X-List-Received-Date: Wed, 22 Feb 2012 07:23:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* bump PR
+Does this block my recipe to be accepted in meta-oe and by your comment bel=
+ow you are suggesting me to upstream that patch to libedit project?
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../recipes-kernel/linux/linux-kexecboot_3.2.bb    |   13 +++++++++++
- .../recipes-kernel/linux/linux-kexecboot_git.bb    |   23 ++++++++++++++++++++
- 2 files changed, 36 insertions(+), 0 deletions(-)
- create mode 100644 meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
- create mode 100644 meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+Sent: Wednesday, February 22, 2012 2:12 AM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-oe][PATCH] libedit: Adds version 20110802 (initial =
+recipe)
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
-new file mode 100644
-index 0000000..3207429
---- /dev/null
-+++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
-@@ -0,0 +1,13 @@
-+require linux-kexecboot.inc
-+
-+PR = "${INC_PR}.1"
-+S = "${WORKDIR}/linux-${PV}"
-+
-+SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
-+           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.1.bz2;apply=yes;name=stablepatch \
-+           "
-+
-+SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
-+SRC_URI[kernel.sha256sum] = "c881fc2b53cf0da7ca4538aa44623a7de043a41f76fd5d0f51a31f6ed699d463"
-+SRC_URI[stablepatch.md5sum] = "31fc34340f11118873463a1d59d47b7f"
-+SRC_URI[stablepatch.sha256sum] = "e9a26dc5faa309ae5172e3c65081fa98b60befab160fb14d9a75816bbde15626"
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb
-new file mode 100644
-index 0000000..b1fc75b
---- /dev/null
-+++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb
-@@ -0,0 +1,23 @@
-+require linux-kexecboot.inc
-+
-+PR = "${INC_PR}.1"
-+
-+KERNEL_RELEASE = "3.2.0-rc7"
-+OLD_KERNEL_RELEASE = "3.1.99"
-+PV = "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
-+
-+SRCREV = "371de6e4e0042adf4f9b54c414154f57414ddd37"
-+
-+CMDLINE_DEBUG = "debug"
-+
-+S = "${WORKDIR}/git"
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git;protocol=git;branch=master"
-+
-+do_configure_prepend() {
-+#otherwise it gets extra '+' "2.6.37+"
-+#because:
-+#$ scripts/setlocalversion . => +
-+#$ make kernelversion => 2.6.37
-+#$ make kernelrelease => 2.6.37+
-+  rm -rf ${S}/.git
-+}
--- 
-1.7.3.4
+On Tue, Feb 21, 2012 at 4:47 AM, Noor, Ahsan <noor_ahsan@mentor.com> wrote:
+>
+> +Upstream-Status: Inappropriate [not author]
 
+hmm thats interesting. We can still push patches upstream with proper
+attribution to author.
+therefore this may not be a reason to make it Inappropriate.
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
