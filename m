@@ -1,18 +1,41 @@
-Received: from smtp208.alice.it ([82.57.200.104])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1S00H2-00085z-K7
+	(envelope-from <andrea.adami@gmail.com>) id 1S00Nv-0008JI-Be
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Feb 2012 01:41:36 +0100
-Received: from mizar.localdomain (87.5.51.74) by smtp208.alice.it (8.6.023.02)
-	id 4F056E850568C405; Wed, 22 Feb 2012 01:33:17 +0100
+	Wed, 22 Feb 2012 01:48:44 +0100
+Received: by daln34 with SMTP id n34so6242014dal.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Feb 2012 16:40:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of andrea.adami@gmail.com designates
+	10.68.197.166 as permitted sender) client-ip=10.68.197.166; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of andrea.adami@gmail.com
+	designates 10.68.197.166 as permitted sender)
+	smtp.mail=andrea.adami@gmail.com;
+	dkim=pass header.i=andrea.adami@gmail.com
+Received: from mr.google.com ([10.68.197.166])
+	by 10.68.197.166 with SMTP id iv6mr4239084pbc.128.1329871223105
+	(num_hops = 1); Tue, 21 Feb 2012 16:40:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=NAX+8Gaw+oEhSlBOhmWzUwXb3yB5a4vb2xPI+wqO9f0=;
+	b=PVkvNeOTTnL4ZRGneqMBk7Zg12VtBQC81FX+L41I8f3izqRNJDungmyrwLQ5zTpWwC
+	r6zZVadnQ9eq/NMUhCmxIocXeJL79bw5WB5qilfZa8UB1oxm+QzsxaNaxMALN1xezKrI
+	Q+7wisn6U4xrbVBgznqVsOifpy7zPrEnr0+ZI=
+MIME-Version: 1.0
+Received: by 10.68.197.166 with SMTP id iv6mr3354541pbc.128.1329871222554;
+	Tue, 21 Feb 2012 16:40:22 -0800 (PST)
+Received: by 10.143.147.17 with HTTP; Tue, 21 Feb 2012 16:40:22 -0800 (PST)
+In-Reply-To: <20120222002601.GE3769@jama.jama.net>
+References: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
+	<1329870032-4952-2-git-send-email-andrea.adami@gmail.com>
+	<20120222002601.GE3769@jama.jama.net>
+Date: Wed, 22 Feb 2012 01:40:22 +0100
+Message-ID: <CAAQYJAv5NW331mFMZT8N-MBFOWD_Qs61r4UWm=VggfbFD5SWVw@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2012 01:32:02 +0100
-Message-Id: <1329870722-5751-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
-References: <1329870032-4952-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH v2 1/1] linux-kexecboot_3.2 and _git: remove and add .bbappend
+Subject: Re: [meta-oe][PATCH 1/1] meta-initramfs: import linux-kexecboot_3.2 and _git from meta-handheld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,291 +49,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 00:41:36 -0000
+X-List-Received-Date: Wed, 22 Feb 2012 00:48:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* recipes are now in meta-initramfs
+On Wed, Feb 22, 2012 at 1:26 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, Feb 22, 2012 at 01:20:32AM +0100, Andrea Adami wrote:
+>> * bump PR
+>>
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+>> ---
+>> =A0meta-initramfs/recipes-kernel/linux/linux-git.inc =A0| =A0 23 +++++++=
++++++++++++++
+>
+> is this ^^ intentional?
+>
+No, it's cruft, Thanks for spotting it!
+Patch v2 follows
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-kexecboot.inc          |  150 ---------------------
- recipes-kernel/linux/linux-kexecboot_3.2.bb       |    5 -
- recipes-kernel/linux/linux-kexecboot_3.2.bbappend |   38 +++++
- recipes-kernel/linux/linux-kexecboot_git.bb       |    4 -
- recipes-kernel/linux/linux-kexecboot_git.bbappend |   38 +++++
- 5 files changed, 76 insertions(+), 159 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-kexecboot.inc
- delete mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bb
- create mode 100644 recipes-kernel/linux/linux-kexecboot_3.2.bbappend
- delete mode 100644 recipes-kernel/linux/linux-kexecboot_git.bb
- create mode 100644 recipes-kernel/linux/linux-kexecboot_git.bbappend
+Andrea
 
-diff --git a/recipes-kernel/linux/linux-kexecboot.inc b/recipes-kernel/linux/linux-kexecboot.inc
-deleted file mode 100644
-index b2758a6..0000000
---- a/recipes-kernel/linux/linux-kexecboot.inc
-+++ /dev/null
-@@ -1,150 +0,0 @@
--DESCRIPTION = "Linux Kernel"
--SECTION = "kernel"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
--
--INC_PR = "r1"
--
--inherit kernel siteinfo
--
--# FILESEXTRAPATHS cannot be used, because it puts extra paths before FILESPATH and we need it at the end
--# only as fallback for patches available only in linux-PV dir and ie defconfigs needs to go from linux-kexecboot-PV
--FILESPATH_append = ":${FILE_DIRNAME}/linux-${PV}"
--
--DEPENDS += "xz-native"
--
--# Kernel bootlogo is distro-specific (default is OE logo).
--# Logo resolution (qvga, vga, ...) is machine-specific.
--LOGO_SIZE ?= "."
--# To use this, add file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 or similar
--# to your kernel recipe, and then structure your logos for each resolution
--# accordingly.
--
--# Set the verbosity of kernel messages during runtime
--# You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour
--CMDLINE_DEBUG ?= "loglevel=3"
--
--# Note how we set loglevel=3 and master console on serial to protect bootlogo.
--CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
--CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
--CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
--CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
--CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
--CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
--
--PACKAGES = ""
--PROVIDES = ""
--
--# Zaurus machines need kernel size-check
--KERNEL_IMAGE_MAXSIZE_akita = "1294336"
--KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
--KERNEL_IMAGE_MAXSIZE_collie = "1048576"
--KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
--KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
--KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
--
--KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-kexecboot-${PV}-${PR}-${MACHINE}"
--KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-kexecboot-${MACHINE}"
--
--LOCALVERSION ?= ""
--
--# we want the smallest size
--INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
--
--kernel_conf_variable() {
--        CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
--        if test "$2" = "n"
--        then
--                echo "# CONFIG_$1 is not set" >> ${S}/.config
--        else
--                echo "CONFIG_$1=$2" >> ${S}/.config
--        fi
--}
--
--do_configure_prepend() {
--
--        echo "" > ${S}/.config
--        CONF_SED_SCRIPT=""
--
--        #
--        # CONFIG_CMDLINE mangling
--        #
--        kernel_conf_variable CMDLINE_BOOL y
--        kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
--
--        # mips and x86
--        kernel_conf_variable CMDLINE_OVERRIDE y
--
--        # sh only
--        kernel_conf_variable CMDLINE_OVERWRITE y
--        kernel_conf_variable CMDLINE_EXTEND n
--
--        #
--        # endian support
--        #
--        if [ "${SITEINFO_ENDIANNESS}" = "be" ]; then
--                kernel_conf_variable CPU_BIG_ENDIAN y
--        fi
--
--        #
--        # logo support, if you supply logo_linux_clut224.ppm in SRC_URI, then it is going to be used
--        #
--        if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
--                install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
--                kernel_conf_variable LOGO y
--                kernel_conf_variable LOGO_LINUX_CLUT224 y
--        fi
--
--        # When enabling thumb for userspace we also need thumb support in the kernel
--        if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
--                kernel_conf_variable ARM_THUMB y
--        fi
--
--        kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
--        kernel_conf_variable LOCALVERSION_AUTO n
--
--        # Force sane defaults for kexec-enabled kernels and keep size small
--        kernel_conf_variable BLK_DEV_INITRD y
--        kernel_conf_variable KEXEC y
--        CONF_SED_SCRIPT="$CONF_SED_SCRIPT /=m/d;"
--        kernel_conf_variable MODULES n
--        if ${@base_contains("CMDLINE_DEBUG", "debug", "true", "false", d)}; then
--                kernel_conf_variable DEBUG_LL y
--                kernel_conf_variable PRINTK y
--                kernel_conf_variable EARLY_PRINTK y
--                kernel_conf_variable BUG y
--                kernel_conf_variable DEBUG_ERRORS y
--                kernel_conf_variable DEBUG_BUGVERBOSE y
--                kernel_conf_variable DEBUG_KERNEL y
--        else
--                kernel_conf_variable DEBUG_ERRORS n
--                kernel_conf_variable DEBUG_BUGVERBOSE n
--                kernel_conf_variable DEBUG_KERNEL n
--        fi
--
--        # Force lzma for arm kernels only
--        if [ "${ARCH}" = "arm" ] ; then
--                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_KERNEL/d;"
--                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_RD/d;"
--                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_INITRAMFS_COMPRESSION/d;"
--                CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_INITRAMFS_SOURCE/d;"
--                kernel_conf_variable KERNEL_LZMA y
--                kernel_conf_variable RD_LZMA y
--                kernel_conf_variable INITRAMFS_COMPRESSION_LZMA y
--                kernel_conf_variable INITRAMFS_SOURCE "\"initramfs.cpio.lzma\""
--        fi
--
--        sed -e "${CONF_SED_SCRIPT}" \
--                        < '${WORKDIR}/defconfig' >>'${S}/.config'
--
--        yes '' | oe_runmake oldconfig
--}
--
--do_populate_sysroot() {
--        :
--}
--
--do_install() {
--        :
--}
--
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.2.bb b/recipes-kernel/linux/linux-kexecboot_3.2.bb
-deleted file mode 100644
-index 8b4b9ce..0000000
---- a/recipes-kernel/linux/linux-kexecboot_3.2.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require linux-kexecboot.inc
--require linux-${PV}.inc
--
--PR = "${INC_PR}.0"
--S = "${WORKDIR}/linux-${PV}"
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.2.bbappend b/recipes-kernel/linux/linux-kexecboot_3.2.bbappend
-new file mode 100644
-index 0000000..375dcdd
---- /dev/null
-+++ b/recipes-kernel/linux/linux-kexecboot_3.2.bbappend
-@@ -0,0 +1,38 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-kexecboot-${PV}:${THISDIR}/files:"
-+
-+DEFAULT_PREFERENCE = "-1"
-+#COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-+COMPATIBLE_MACHINE = "(spitz)"
-+
-+# Note we set loglevel=3 and master console on serial to protect bootlogo.
-+CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
-+CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+
-+# Zaurus machines need kernel size-check.
-+KERNEL_IMAGE_MAXSIZE_akita = "1294336"
-+KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
-+KERNEL_IMAGE_MAXSIZE_collie = "1048576"
-+KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
-+KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
-+KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
-+
-+LOGO_SIZE ?= "."
-+
-+SRC_URI += "file://defconfig \
-+           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-+           "
-+
-+SRC_URI_append_collie = " \
-+                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
-+                         file://locomo_kbd_tweak-r2.patch \
-+                         "
-+
-+SRC_URI_append_poodle = " \
-+                         file://locomo_kbd_tweak-r2.patch \
-+                         "
-+
-+
-diff --git a/recipes-kernel/linux/linux-kexecboot_git.bb b/recipes-kernel/linux/linux-kexecboot_git.bb
-deleted file mode 100644
-index 5671b4f..0000000
---- a/recipes-kernel/linux/linux-kexecboot_git.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require linux-kexecboot.inc
--require linux-git.inc
--
--PR = "${INC_PR}.0"
-diff --git a/recipes-kernel/linux/linux-kexecboot_git.bbappend b/recipes-kernel/linux/linux-kexecboot_git.bbappend
-new file mode 100644
-index 0000000..1acab8a
---- /dev/null
-+++ b/recipes-kernel/linux/linux-kexecboot_git.bbappend
-@@ -0,0 +1,38 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-kexecboot-${PV}:${THISDIR}/files:"
-+
-+DEFAULT_PREFERENCE = "-2"
-+#COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
-+COMPATIBLE_MACHINE = "(spitz)"
-+
-+# Note we set loglevel=3 and master console on serial to protect bootlogo.
-+CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
-+CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+
-+# Zaurus machines need kernel size-check.
-+KERNEL_IMAGE_MAXSIZE_akita = "1294336"
-+KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
-+KERNEL_IMAGE_MAXSIZE_collie = "1048576"
-+KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
-+KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
-+KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
-+
-+LOGO_SIZE ?= "."
-+
-+SRC_URI += "file://defconfig \
-+           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-+           "
-+
-+SRC_URI_append_collie = " \
-+                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
-+                         file://locomo_kbd_tweak-r2.patch \
-+                         "
-+
-+SRC_URI_append_poodle = " \
-+                         file://locomo_kbd_tweak-r2.patch \
-+                         "
-+
-+
--- 
-1.7.3.4
-
+>> =A0.../recipes-kernel/linux/linux-kexecboot_3.2.bb =A0 =A0| =A0 13 +++++=
+++++++
+>> =A0.../recipes-kernel/linux/linux-kexecboot_git.bb =A0 =A0| =A0 23 +++++=
++++++++++++++++
+>> =A03 files changed, 59 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 meta-initramfs/recipes-kernel/linux/linux-git.inc
+>> =A0create mode 100644 meta-initramfs/recipes-kernel/linux/linux-kexecboo=
+t_3.2.bb
+>> =A0create mode 100644 meta-initramfs/recipes-kernel/linux/linux-kexecboo=
+t_git.bb
+>>
+>> diff --git a/meta-initramfs/recipes-kernel/linux/linux-git.inc b/meta-in=
+itramfs/recipes-kernel/linux/linux-git.inc
+>> new file mode 100644
+>> index 0000000..32a6d47
+>> --- /dev/null
+>> +++ b/meta-initramfs/recipes-kernel/linux/linux-git.inc
+>> @@ -0,0 +1,23 @@
+>> +KERNEL_RELEASE =3D "3.2.0-rc7"
+>> +OLD_KERNEL_RELEASE =3D "3.1.99"
+>> +PV =3D "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
+>> +
+>> +SRCREV =3D "371de6e4e0042adf4f9b54c414154f57414ddd37"
+>> +
+>> +CMDLINE_DEBUG =3D "debug"
+>> +
+>> +SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/lin=
+ux-2.6.git;protocol=3Dgit;branch=3Dmaster \
+>> + =A0 =A0 =A0 =A0 =A0 file://defconfig"
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +do_configure_prepend() {
+>> +#otherwise it gets extra '+' "2.6.37+"
+>> +#because:
+>> +#$ scripts/setlocalversion . =3D> +
+>> +#$ make kernelversion =3D> 2.6.37
+>> +#$ make kernelrelease =3D> 2.6.37+
+>> + =A0rm -rf ${S}/.git
+>> +}
+>> +
+>> +# Mark archs/machines that this kernel supports
+>> +DEFAULT_PREFERENCE =3D "-2"
+>> diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb =
+b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+>> new file mode 100644
+>> index 0000000..3207429
+>> --- /dev/null
+>> +++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+>> @@ -0,0 +1,13 @@
+>> +require linux-kexecboot.inc
+>> +
+>> +PR =3D "${INC_PR}.1"
+>> +S =3D "${WORKDIR}/linux-${PV}"
+>> +
+>> +SRC_URI +=3D "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2=
+;name=3Dkernel \
+>> + =A0 =A0 =A0 =A0 =A0 ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.=
+1.bz2;apply=3Dyes;name=3Dstablepatch \
+>> + =A0 =A0 =A0 =A0 =A0 "
+>> +
+>> +SRC_URI[kernel.md5sum] =3D "7ceb61f87c097fc17509844b71268935"
+>> +SRC_URI[kernel.sha256sum] =3D "c881fc2b53cf0da7ca4538aa44623a7de043a41f=
+76fd5d0f51a31f6ed699d463"
+>> +SRC_URI[stablepatch.md5sum] =3D "31fc34340f11118873463a1d59d47b7f"
+>> +SRC_URI[stablepatch.sha256sum] =3D "e9a26dc5faa309ae5172e3c65081fa98b60=
+befab160fb14d9a75816bbde15626"
+>> diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb =
+b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb
+>> new file mode 100644
+>> index 0000000..b1fc75b
+>> --- /dev/null
+>> +++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_git.bb
+>> @@ -0,0 +1,23 @@
+>> +require linux-kexecboot.inc
+>> +
+>> +PR =3D "${INC_PR}.1"
+>> +
+>> +KERNEL_RELEASE =3D "3.2.0-rc7"
+>> +OLD_KERNEL_RELEASE =3D "3.1.99"
+>> +PV =3D "${OLD_KERNEL_RELEASE}+${KERNEL_RELEASE}+gitr${SRCPV}"
+>> +
+>> +SRCREV =3D "371de6e4e0042adf4f9b54c414154f57414ddd37"
+>> +
+>> +CMDLINE_DEBUG =3D "debug"
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/lin=
+ux-2.6.git;protocol=3Dgit;branch=3Dmaster"
+>> +
+>> +do_configure_prepend() {
+>> +#otherwise it gets extra '+' "2.6.37+"
+>> +#because:
+>> +#$ scripts/setlocalversion . =3D> +
+>> +#$ make kernelversion =3D> 2.6.37
+>> +#$ make kernelrelease =3D> 2.6.37+
+>> + =A0rm -rf ${S}/.git
+>> +}
+>> --
+>> 1.7.3.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
