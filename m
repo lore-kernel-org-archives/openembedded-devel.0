@@ -1,41 +1,44 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S0YFc-0007vS-Qr
+	(envelope-from <martin.jansa@gmail.com>) id 1S0YNt-0008S0-Ii
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 13:58:25 +0100
-Received: by pbbjt11 with SMTP id jt11so624854pbb.6
+	Thu, 23 Feb 2012 14:06:57 +0100
+Received: by eekd41 with SMTP id d41so515419eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 04:50:02 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.68.135.34 as permitted sender) client-ip=10.68.135.34; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.68.135.34 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.68.135.34])
-	by 10.68.135.34 with SMTP id pp2mr2398836pbb.106.1330001402870
-	(num_hops = 1); Thu, 23 Feb 2012 04:50:02 -0800 (PST)
+	Thu, 23 Feb 2012 04:58:36 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.201.8 as permitted sender) client-ip=10.14.201.8; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.201.8 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.201.8])
+	by 10.14.201.8 with SMTP id a8mr779860eeo.106.1330001916471 (num_hops =
+	1); Thu, 23 Feb 2012 04:58:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=iIMCkOl1EYDolJVcWarxDMQYY57xTW9G1D4vI9IA3Pg=;
-	b=vWeFgue7LHz3NUbEGJjcGMggq4yEdKQEhWdviEOCh9MJwKg0+2JehKz7VpVPuN/bmZ
-	JwI6tdvHn0adsyhbldaxVHysYRGvBE2UnlcA6daYllxc6tvQ0ImKyXXRRvZo6PPbEVPu
-	pMY9EENh9EJIS7U6hHrUChjX7bqxxaDpil6eY=
-MIME-Version: 1.0
-Received: by 10.68.135.34 with SMTP id pp2mr2057043pbb.106.1330001402832; Thu,
-	23 Feb 2012 04:50:02 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.210.71 with HTTP; Thu, 23 Feb 2012 04:50:02 -0800 (PST)
-In-Reply-To: <1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=D7QVcfeoSyPpLGnYkqik2elDlgQTXfiiSI7toNNyVCg=;
+	b=pdfVWpATS72lruKg0a2QCFcCZvSH5BFmNYJRFjESzSH/fh4yyJtnIqaHBAus7jAy5/
+	z1Y7VlH/TG0U2RqwqH/auDv27gzbNOvRWMqhILuPJaLCSN79IBScxBuOsncrEPUR01Ga
+	FGX4pBfQU9FV6kmPKyetylSOSqCq9NBoX/lro=
+Received: by 10.14.201.8 with SMTP id a8mr613520eeo.106.1330001916410;
+	Thu, 23 Feb 2012 04:58:36 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id a58sm5121467eeb.8.2012.02.23.04.58.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 23 Feb 2012 04:58:34 -0800 (PST)
+Date: Thu, 23 Feb 2012 13:58:33 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120223125833.GS3769@jama.jama.net>
 References: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
 	<1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Thu, 23 Feb 2012 10:50:02 -0200
-X-Google-Sender-Auth: NKbjavqGKQKaOG9kZ4ob5NltvKk
-Message-ID: <CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+	<CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe][PATCH] gateone, networkmanager, cloud9, ntp: use systemd_unitdir variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,21 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 12:58:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Feb 2012 13:06:57 -0000
+X-Groupsio-MsgNum: 37399
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="E1BPhOSoTthPQdPL"
+Content-Disposition: inline
+
+--E1BPhOSoTthPQdPL
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 23, 2012 at 10:40, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * maybe we should move systemd_unitdir definition outside systemd.bbclass
-> =A0because it's used in few more recipes which doesn't inherit systemd
+On Thu, Feb 23, 2012 at 10:50:02AM -0200, Otavio Salvador wrote:
+> On Thu, Feb 23, 2012 at 10:40, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> > * maybe we should move systemd_unitdir definition outside systemd.bbcla=
+ss
+> > =A0because it's used in few more recipes which doesn't inherit systemd
+>=20
+> Please split this patch and do PR bump so we get them rebuild.
 
-Please split this patch and do PR bump so we get them rebuild.
+why? the output is 100% the same.
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--E1BPhOSoTthPQdPL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk9GN/kACgkQN1Ujt2V2gByObgCcCPIkCATkpL3ie2yTexg1GHAp
+H7oAn0dTM88ojCg4d/JQCfQt8ZZ3Qlbf
+=+p0j
+-----END PGP SIGNATURE-----
+
+--E1BPhOSoTthPQdPL--
