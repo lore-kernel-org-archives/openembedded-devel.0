@@ -1,44 +1,41 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0Y5b-0007UZ-Ky
+	(envelope-from <martin.jansa@gmail.com>) id 1S0Y69-0007Zd-N7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 13:48:03 +0100
-Received: by eaal10 with SMTP id l10so518986eaa.6
+	Thu, 23 Feb 2012 13:48:37 +0100
+Received: by eaal10 with SMTP id l10so519174eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 04:39:42 -0800 (PST)
+	Thu, 23 Feb 2012 04:40:16 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.119.194 as permitted sender) client-ip=10.14.119.194; 
+	10.14.48.7 as permitted sender) client-ip=10.14.48.7; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.119.194 as permitted sender)
+	designates 10.14.48.7 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.119.194])
-	by 10.14.119.194 with SMTP id n42mr745879eeh.113.1330000782576
-	(num_hops = 1); Thu, 23 Feb 2012 04:39:42 -0800 (PST)
+Received: from mr.google.com ([10.14.48.7])
+	by 10.14.48.7 with SMTP id u7mr742063eeb.89.1330000816633 (num_hops =
+	1); Thu, 23 Feb 2012 04:40:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=SSVjg/HlsDsSSIJKeV9uHMEmzcDXND8LxEUObOs4GHE=;
-	b=NxzmCAnmzLK1dYDGRvV4tCcFusx3WhPrh7AEogITtX+i+7opwz0vVV2eMlZlkEDp1E
-	GKxsDkmKuomR1XpYhyYAxee46H6A5KRfkiKKyj2OXCUc3OOo/p1axsisCMfvktRY0DEv
-	vSdV5NZI4C9eDqCodL8ZkiaKfc648YGqbotmE=
-Received: by 10.14.119.194 with SMTP id n42mr589563eeh.113.1330000782474;
-	Thu, 23 Feb 2012 04:39:42 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=O33p99n64yaxGeHKo6o+L9R+lhVaGH98IP/qtaz1OhU=;
+	b=Kn+ropRmGi9eO8geunYXzRI0yoqcJGnALhf0xIL2CXMjUuY7f5zWtgxfSEzeIvIhxf
+	JENSXkC2sqKfciwp0kxUoMovE4mGk3kp+BAJJsCnuaqhvzadtiRzyW7WfoIXO5UhPR5f
+	dmVW2EEKhVlKp0e3e0U5WkHPDTCNwPWWuFHas=
+Received: by 10.14.48.7 with SMTP id u7mr588398eeb.89.1330000816419;
+	Thu, 23 Feb 2012 04:40:16 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v51sm5016409eef.2.2012.02.23.04.39.40
+	by mx.google.com with ESMTPS id a58sm4964287eeb.8.2012.02.23.04.40.14
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 04:39:41 -0800 (PST)
-Date: Thu, 23 Feb 2012 13:39:38 +0100
+	Thu, 23 Feb 2012 04:40:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120223123938.GQ3769@jama.jama.net>
-References: <1329999054-23112-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
-MIME-Version: 1.0
+Date: Thu, 23 Feb 2012 13:40:07 +0100
+Message-Id: <1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
 In-Reply-To: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe V3 00/23] systemd rework
+References: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
+Subject: [meta-oe][PATCH] gateone, networkmanager, cloud9, ntp: use systemd_unitdir variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,77 +49,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 12:48:03 -0000
-X-Groupsio-MsgNum: 37394
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="90KBcPA0h13nTGdQ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Feb 2012 12:48:37 -0000
 
---90KBcPA0h13nTGdQ
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* maybe we should move systemd_unitdir definition outside systemd.bbclass
+  because it's used in few more recipes which doesn't inherit systemd
 
-On Thu, Feb 23, 2012 at 10:31:26AM -0200, Otavio Salvador wrote:
-> On Thu, Feb 23, 2012 at 10:10, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> > V2 -> V3:
-> > (Hopefully) all suggestions and comments were incorporated =A0/ rebased
->=20
-> This patchset is ready for merging IMO.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-connectivity/gateone/gateone_git.bb    |    4 ++--
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
+ meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb    |    6 +++---
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb         |    8 ++++----
+ 4 files changed, 10 insertions(+), 10 deletions(-)
 
-Agreed, just tested in my build and looks good.
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index 4f9684c..84da893 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -20,8 +20,8 @@ export prefix = "${localstatedir}/lib"
+ do_install_append() {
+ 	install -d ${D}${localstatedir}/log/${BPN}
+ 
+-	install -m 0755 -d ${D}${base_libdir}/systemd/system
+-	install -m 0644 ${WORKDIR}/gateone.service ${D}${base_libdir}/systemd/system/
++	install -m 0755 -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system/
+ 
+ 	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+ 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+index 1dcc3cf..df269e0 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+@@ -70,7 +70,7 @@ FILES_${PN} += " \
+ 		${datadir}/polkit-1 \
+ 		${datadir}/dbus-1 \
+ 		${base_libdir}/udev/* \
+-        ${base_libdir}/systemd \
++        ${systemd_unitdir} \
+ "
+ 
+ RRECOMMENDS_${PN} += "iptables"
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+index 4e95075..bef2f36 100644
+--- a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
++++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+@@ -98,8 +98,8 @@ do_install () {
+  install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/o3.js
+  install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/o3.node
+ 
+- install -m 0755 -d ${D}${base_libdir}/systemd/system
+- install -m 0644 ${WORKDIR}/cloud9.service ${D}${base_libdir}/systemd/system/
++ install -m 0755 -d ${D}${systemd_unitdir}/system
++ install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system/
+ 
+   install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+   install -m 0644 ${WORKDIR}/cloud9-avahi.service ${D}${sysconfdir}/avahi/services/
+@@ -109,7 +109,7 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
+                     ${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/.debug \
+                    "
+ 
+-FILES_${PN} += "${base_libdir}/systemd/system"
++FILES_${PN} += "${systemd_unitdir}/system"
+ RDEPENDS_${PN} = "nodejs gzip"
+ 
+ inherit systemd
+diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+index 063d82a..292a1f6 100644
+--- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
++++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+@@ -29,14 +29,14 @@ do_install_append() {
+ 	install -d ${D}/${sysconfdir}/network/if-up.d
+ 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
+ 
+-	install -d ${D}${base_libdir}/systemd/system
+-	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${base_libdir}/systemd/system/
+-	install -m 0644 ${WORKDIR}/ntpd.service ${D}${base_libdir}/systemd/system/
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
++	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+ }
+ 
+ PACKAGES =+ "${PN}-systemd"
+ 
+-FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
++FILES_${PN}-systemd = "${systemd_unitdir}/system/"
+ RDEPENDS_${PN}-systemd = "${PN}"
+ 
+ FILES_${PN}-bin = "${bindir}/ntp-wait ${bindir}/ntpdc ${bindir}/ntpq ${bindir}/ntptime ${bindir}/ntptrace"
+-- 
+1.7.8.4
 
-Great work Andreas!
 
-> Checking remaining recipes that might be change to use
-> ${systemd_unitdir} I found:
 
-I have patch for few:=20
-> meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
-> meta-oe/recipes-connectivity/gateone/gateone_git.bb
-> meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
-and networkmanager
-
-but the rest doesn't inherit systemd (yet), so we should update it when
-changing them to use systemd.bbclass.
-=20
-> meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-> meta-oe/recipes-connectivity/cherokee/cherokee.inc
-> meta-oe/recipes-core/systemd/systemd-compat-units.bb
-> meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-> meta-oe/recipes-core/systemd/systemd_git.bb
-> meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-> meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
-> meta-oe/recipes-graphics/slim/slim_1.3.2.bb
->=20
-> I dropped udev ones as I am working on them :-)
->=20
-> --=20
-> Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.oss=
-ystems.com.br
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---90KBcPA0h13nTGdQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9GM4oACgkQN1Ujt2V2gBy+SQCdFa1mU4o38zaEX1otYEhn8cGD
-AyIAn16Xvy9oFJkT9HvxlWos4+/mNXkx
-=EXLw
------END PGP SIGNATURE-----
-
---90KBcPA0h13nTGdQ--
