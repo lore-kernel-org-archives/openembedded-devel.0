@@ -1,39 +1,41 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0ift-0007Mx-V5
+	(envelope-from <martin.jansa@gmail.com>) id 1S0ig5-0007NF-7G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 01:06:14 +0100
-Received: by eekd41 with SMTP id d41so861176eek.6
+	Fri, 24 Feb 2012 01:06:25 +0100
+Received: by eaal10 with SMTP id l10so870978eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 15:57:52 -0800 (PST)
+	Thu, 23 Feb 2012 15:58:03 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.47.8 as permitted sender) client-ip=10.14.47.8; 
+	10.14.99.1 as permitted sender) client-ip=10.14.99.1; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.47.8 as permitted sender)
+	designates 10.14.99.1 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.47.8])
-	by 10.14.47.8 with SMTP id s8mr2057297eeb.91.1330041472159 (num_hops =
-	1); Thu, 23 Feb 2012 15:57:52 -0800 (PST)
+Received: from mr.google.com ([10.14.99.1])
+	by 10.14.99.1 with SMTP id w1mr2061567eef.49.1330041483599 (num_hops =
+	1); Thu, 23 Feb 2012 15:58:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=+dI//7UO92ZB7EftdTbEcSSW7DYBkEVz+stf3tvVVCQ=;
-	b=ZpgdWAUpi6mleR1bplwPhnfH8V2bfCX0o02uKXa4F/462pswt1NeG1ZqzcCyduRZE5
-	BQ9eMzmtgYEwsPRgox8ALwyD2DJjBV26t4335j7O2jO24Khl9XNwY5gOJnjD4R1e9ZTe
-	H4zoTFX9sps/kau8Mc6Qpo1b/vn8uknaF3SDc=
-Received: by 10.14.47.8 with SMTP id s8mr1586219eeb.91.1330041472009;
-	Thu, 23 Feb 2012 15:57:52 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=X46x3ZffY4H+3CdLl3TZlpJk3J+2YC7hO5KUd8p8Y2A=;
+	b=C1IsGlEiG5yjP7FgBS7wnyJKhf/OeqpKiHQlQp7GyCOTOYOfXf+VMTqTUc/3pkCMbh
+	Zyi7eIgE3FH8q9LAEKv/7+GfHt2pqeKZ5Z+sRUsmb1COQck0HjzczndcJgahyzjlEk60
+	6PktjGkEfgKyBp541i18RkIyl4CWWCHn/UXc8=
+Received: by 10.14.99.1 with SMTP id w1mr1589813eef.49.1330041483425;
+	Thu, 23 Feb 2012 15:58:03 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm11173871eeb.7.2012.02.23.15.57.50
+	by mx.google.com with ESMTPS id y14sm11144325eef.10.2012.02.23.15.58.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 15:57:51 -0800 (PST)
+	Thu, 23 Feb 2012 15:58:02 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 00:57:43 +0100
-Message-Id: <cover.1330041429.git.Martin.Jansa@gmail.com>
+Date: Fri, 24 Feb 2012 00:57:53 +0100
+Message-Id: <280e44ecc1bb5cdb682cf9d369986b6c34bed125.1330041429.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][PATCH 0/3] Small updates for sstate
+In-Reply-To: <cover.1330041429.git.Martin.Jansa@gmail.com>
+References: <cover.1330041429.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/3] mysql5: PR bump after including *_config in default SSTATE_SCAN_FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,25 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 00:06:14 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 00:06:25 -0000
 
-The following changes since commit 3c50d83184d58eba36f72c7e2e7116d2a8e92a71:
-
-  toscoterm: add (2012-02-23 17:57:04 +0100)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (3):
-  mysql5: PR bump after including *_config in default SSTATE_SCAN_FILES
-  meta-oe: include pointercal-xinput in SIGGEN_EXCLUDERECIPES_ABISAFE
-  meta-oe: include systemd-serialgetty in SIGGEN_EXCLUDERECIPES_ABISAFE
-
- meta-oe/conf/layer.conf                         |    2 ++
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  meta-oe/recipes-support/mysql/mysql5_5.1.40.inc |    2 +-
- 2 files changed, 3 insertions(+), 1 deletions(-)
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index ae1cf00..44de2a2 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
+ 
+ DEPENDS = "ncurses"
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
+            file://configure.in.patch \
 -- 
 1.7.8.4
 
