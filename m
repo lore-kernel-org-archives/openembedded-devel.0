@@ -1,50 +1,39 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0b6W-0004U3-DV
+	(envelope-from <martin.jansa@gmail.com>) id 1S0bBM-0004aY-FW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 17:01:12 +0100
-Received: by eekd41 with SMTP id d41so621786eek.6
+	Thu, 23 Feb 2012 17:06:12 +0100
+Received: by eaal10 with SMTP id l10so637175eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 07:52:51 -0800 (PST)
+	Thu, 23 Feb 2012 07:57:51 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.28.75 as permitted sender) client-ip=10.213.28.75; 
+	10.14.100.80 as permitted sender) client-ip=10.14.100.80; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.28.75 as permitted sender)
+	designates 10.14.100.80 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.28.75])
-	by 10.213.28.75 with SMTP id l11mr606717ebc.47.1330012371206 (num_hops
-	= 1); Thu, 23 Feb 2012 07:52:51 -0800 (PST)
+Received: from mr.google.com ([10.14.100.80])
+	by 10.14.100.80 with SMTP id y56mr1229693eef.68.1330012671224 (num_hops
+	= 1); Thu, 23 Feb 2012 07:57:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Px+W/qEebmdCopkoSeuUE0a1v3Qd0KrQDH+WvLhSlFE=;
-	b=BcGhHGpjMbYz3LSQr7Imru7W3i2S4l+nfHUvJQjq1DTf3xzcCgYwy69CwUuR8KZj68
-	VjnVqY/hi1m9zPkfYh5FRbQeQn6aqUQ3JO3LGNkQGwRiTpH5Qb4CV83Z3X3fnJd5aGwB
-	JXYqhnHEpJWxIGZRfnWJS0ltUoIOjNZMlaE6w=
-Received: by 10.213.28.75 with SMTP id l11mr477907ebc.47.1330012371014;
-	Thu, 23 Feb 2012 07:52:51 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=ks0IAhcx3GnNrurftUL9It80ZO2LYcyRunBY/Hl4p58=;
+	b=B80tUTm3ZzvdxqjSIlERWwVgk4UhJU+cAkOAOpcCRew7nHOzYZ8Fd11guNOcOjOXhT
+	WZow/ZH11BFapPX8n4IrYP3vRcFp4Busodn0uHxj+AlaKOFZIDHM9CU7N+Ijb8EKbBR1
+	M2fE1+EP3vMlVnQSiEgkbejrYLD14epgRECLs=
+Received: by 10.14.100.80 with SMTP id y56mr970275eef.68.1330012670982;
+	Thu, 23 Feb 2012 07:57:50 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q49sm6454819eeh.1.2012.02.23.07.52.49
+	by mx.google.com with ESMTPS id n17sm6752656eei.3.2012.02.23.07.57.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 07:52:50 -0800 (PST)
-Date: Thu, 23 Feb 2012 16:52:48 +0100
+	Thu, 23 Feb 2012 07:57:50 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120223155248.GX3769@jama.jama.net>
-References: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
-	<1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
-	<20120223125833.GS3769@jama.jama.net>
-	<CAP9ODKqGbUADkfqjBDTaD2ASKhZbxAnEMmJ22MsK1w+UKKX8yA@mail.gmail.com>
-	<20120223145305.GW3769@jama.jama.net>
-	<CAP9ODKq0aY94-hZVpYkPVY47tgQ5FBvWStroQsyLpbmXsaB0=w@mail.gmail.com>
-	<ji5mse$lbq$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <ji5mse$lbq$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] gateone, networkmanager, cloud9, ntp: use systemd_unitdir variable
+Date: Thu, 23 Feb 2012 16:57:42 +0100
+Message-Id: <cover.1330012507.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][PATCH 0/7] PACKAGECONFIG for polkit and foxtrotgps upgrade - added more patches for systemd and sstate
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,69 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 16:01:12 -0000
-X-Groupsio-MsgNum: 37406
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="je0mZywpqEo4t1RU"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Feb 2012 16:06:12 -0000
 
---je0mZywpqEo4t1RU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+First 2 patches are the same,
 
-On Thu, Feb 23, 2012 at 04:44:27PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 23-02-12 15:58, Otavio Salvador schreef:
-> > On Thu, Feb 23, 2012 at 12:53, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >> splitted and with PR bumps in contrib/jansa/pull
-> >=20
-> > I think Koen would prefer if you resend them so he can get them from=20
-> > patchwork. Not sure though...
->=20
-> I'm fine with jansa/pull as well. As a rule of thumb: resending allows mo=
-re
-> people to review them again.
+Added 4 more patches for systemd_unitdir variable and 1 patch for sstate
 
-OK, will resend
+The following changes since commit 4751336bc02d6881efff1c0c6a1b449a156eb723:
 
-will remove not changed patches from pull-* so they are not resent by
-send-pull-request (probably easiest way to send new patches in same
-branch without spamming ML with patches which weren't changed at all)
+  vsftpd: add new package (2012-02-22 12:23:16 +0100)
 
-Cheers,
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iEYEARECAAYFAk9GXtkACgkQMkyGM64RGpHLXACgqZNixEjxlA2vC4/8dy264qoz
-> 36sAoLi9mt5kyUTIPjIPDHP5Do7ZHbCE
-> =3DmlVt
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Martin Jansa (7):
+  foxtrotgps: upgrade to 1.1.0
+  polkit: enable and disable systemd/consolekit support explicitly
+  postgresql: include Makefile.global in SSTATE_SCAN_FILES
+  gateone: use systemd_unitdir variable
+  networkmanager: use systemd_unitdir variable
+  cloud9: use systemd_unitdir variable
+  ntp: use systemd_unitdir variable
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+ .../recipes-connectivity/gateone/gateone_git.bb    |    6 +-
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    4 +-
+ meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb    |    8 ++--
+ .../recipes-extended/polkit/polkit_0.104.bbappend  |    7 ++-
+ .../foxtrotgps-1.0.1/remove.unused.header.patch    |   40 --------------------
+ .../{foxtrotgps_1.0.1.bb => foxtrotgps_1.1.0.bb}   |    8 +--
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb         |   10 ++--
+ meta-oe/recipes-support/postgresql/postgresql.inc  |    4 +-
+ 8 files changed, 25 insertions(+), 62 deletions(-)
+ delete mode 100644 meta-oe/recipes-navigation/foxtrotgps/foxtrotgps-1.0.1/remove.unused.header.patch
+ rename meta-oe/recipes-navigation/foxtrotgps/{foxtrotgps_1.0.1.bb => foxtrotgps_1.1.0.bb} (61%)
 
---je0mZywpqEo4t1RU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+-- 
+1.7.8.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk9GYNAACgkQN1Ujt2V2gBxpcQCeNhyEGbqwctPsBMRttaY5MJd7
-TNwAn0ruX3xReAKU55+5jJjZEEDOY020
-=UQ2Q
------END PGP SIGNATURE-----
 
---je0mZywpqEo4t1RU--
