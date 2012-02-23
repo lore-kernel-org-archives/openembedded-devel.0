@@ -1,45 +1,45 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0Xdu-0004lJ-Hw
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0Xdx-0004lK-Am
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 13:19:28 +0100
-Received: by mail-ey0-f175.google.com with SMTP id l10so506551eaa.6
+	Thu, 23 Feb 2012 13:19:29 +0100
+Received: by mail-ey0-f175.google.com with SMTP id l10so506553eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 04:11:07 -0800 (PST)
+	Thu, 23 Feb 2012 04:11:10 -0800 (PST)
 Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.101.134 as permitted sender)
-	client-ip=10.14.101.134; 
+	designates 10.213.20.1 as permitted sender)
+	client-ip=10.213.20.1; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.101.134 as
+	schnitzeltony@googlemail.com designates 10.213.20.1 as
 	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
 	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.101.134])
-	by 10.14.101.134 with SMTP id b6mr705247eeg.81.1329999067245 (num_hops
-	= 1); Thu, 23 Feb 2012 04:11:07 -0800 (PST)
+Received: from mr.google.com ([10.213.20.1])
+	by 10.213.20.1 with SMTP id d1mr358159ebb.65.1329999070370 (num_hops =
+	1); Thu, 23 Feb 2012 04:11:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=H/7cTJNABPF005IEvoSr8/LrQ6IpeYoySGgQ+xZhJmo=;
-	b=cXTybsvzQmpcnX2YyjVvdgeBlysp3T5ZzKfKKwp5PjDCEEKWTklFwnoCgIf42CsTOc
-	Lgy8q23Ka+hEDncF88G8Y1EJW0xjpBkmcfo35JUn0noaCdZwtAzAooYa6E4nHFmlSp46
-	M1+jGkq9ns7132WlbpMLH4rUQvT0OYSOs/PHs=
-Received: by 10.14.101.134 with SMTP id b6mr561042eeg.81.1329999067162;
-	Thu, 23 Feb 2012 04:11:07 -0800 (PST)
+	bh=NWeQqZY+sR6h70DVaLbuuPdBmXuG2IWNv9I9W+GHo5s=;
+	b=h402ib6H+/ON0EVascRcSWjtd3jfiOciR+dEBU32CGb3aRCRNRBr92IP9/lpkVPYCu
+	g/SyqLnb8m8uWybg4XBRyQoor1ddiO48YEmw0H647kTBtIfpLsxDoLLIXZ9Y2MUFhyIk
+	z93z6s3lPGeCVZaYsNvDJClH4RmW/nF+pZftw=
+Received: by 10.213.20.1 with SMTP id d1mr283987ebb.65.1329999069734;
+	Thu, 23 Feb 2012 04:11:09 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190])
-	by mx.google.com with ESMTPS id n52sm4739136eea.5.2012.02.23.04.11.05
+	by mx.google.com with ESMTPS id n52sm4739136eea.5.2012.02.23.04.11.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 04:11:06 -0800 (PST)
+	Thu, 23 Feb 2012 04:11:09 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Feb 2012 13:10:50 +0100
-Message-Id: <1329999054-23112-20-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 23 Feb 2012 13:10:53 +0100
+Message-Id: <1329999054-23112-23-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
 In-Reply-To: <1329999054-23112-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1329999054-23112-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe V3 19/23] syslog-ng: remove unneeded systemd code / use ${systemd_unitdir}
+Subject: [meta-oe V3 22/23] busybox: remove unneeded systemd code / use ${systemd_unitdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,43 +59,42 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc |    9 ++-------
- 1 files changed, 2 insertions(+), 7 deletions(-)
+ .../recipes-core/busybox/busybox_1.19.3.bbappend   |   15 +++++----------
+ 1 files changed, 5 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 3bbebec..3489ac5 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7ec1bcc46f28b11f4722e20d9b7dd4d5"
- # update-rc.d and update-alternatives is important
- RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
+diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
+index 98b959f..2c73732 100644
+--- a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
++++ b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
+@@ -1,6 +1,6 @@
+ inherit systemd
  
--INC_PR = "r6"
-+INC_PR = "r7"
+-PRINC := "${@int(PRINC) + 2}"
++PRINC := "${@int(PRINC) + 3}"
  
- inherit autotools systemd
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+@@ -16,16 +16,11 @@ do_install_append() {
+ 	install -d ${D}${sysconfdir}/default
+ 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
  
-@@ -26,7 +26,7 @@ EXTRA_OECONF = " \
-   --disable-pcre \
-   --disable-sql \
-   --enable-systemd \
--  --with-systemdsystemunitdir=${base_libdir}/systemd/system \
-+  --with-systemdsystemunitdir=${systemd_unitdir}/system \
- "
+-	install -d ${D}${base_libdir}/systemd/system
+ 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
+-	     > ${D}${base_libdir}/systemd/system/busybox-syslog.service
++	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
+ 	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
+-	     > ${D}${base_libdir}/systemd/system/busybox-klogd.service
++	     > ${D}${systemd_unitdir}/system/busybox-klogd.service
  
- do_configure_prepend() {
-@@ -47,11 +47,6 @@ do_install_append() {
- SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE = "${PN}.service"
- 
--PACKAGES =+ "${PN}-systemd"
+-	ln -sf /dev/null ${D}${base_libdir}/systemd/system/syslog.service
++	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
+ }
 -
--FILES_${PN}-systemd += "${base_libdir}/systemd"
--RDEPENDS_${PN}-systemd += "${PN}"
+-PACKAGES += "${PN}-syslog-systemd"
 -
- FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-             ${base_bindir}/* ${base_sbindir}/* \
+-RDEPENDS_${PN}-syslog-systemd += "${PN}-syslog"
+-FILES_${PN}-syslog-systemd = "${base_libdir}/systemd"
++FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
 -- 
 1.7.6.4
 
