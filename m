@@ -1,44 +1,39 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S0YZF-0000Aw-2b
+	(envelope-from <martin.jansa@gmail.com>) id 1S0aA7-0002oz-8X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 14:18:41 +0100
-Received: by daln34 with SMTP id n34so1090848dal.6
+	Thu, 23 Feb 2012 16:00:51 +0100
+Received: by eaal10 with SMTP id l10so593372eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 05:10:19 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.68.226.170 as permitted sender) client-ip=10.68.226.170; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.68.226.170 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.68.226.170])
-	by 10.68.226.170 with SMTP id rt10mr3758574pbc.127.1330002619100
-	(num_hops = 1); Thu, 23 Feb 2012 05:10:19 -0800 (PST)
+	Thu, 23 Feb 2012 06:52:30 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.53.74 as permitted sender) client-ip=10.14.53.74; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.53.74 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.53.74])
+	by 10.14.53.74 with SMTP id f50mr1140970eec.5.1330008750101 (num_hops =
+	1); Thu, 23 Feb 2012 06:52:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=q/eXK3t8GNQNgsFasJcCVWTkbeIF2WKcWftolzsuv0Q=;
-	b=IiLu41RJGEFqAK8zS96LwWzgsn+S7QE4iDiCcvCOCUaNDoGefBhHnmzSknTIRmHuth
-	9NeVzdpem+iVKeohuKxw3Jd1mSkzWcwHv10jbu3KQoKcU0ic2AF+/hvxyQ0sCQr98ZcN
-	LfnfDK2AnJiqizKKoKa+loPUEWLbhfGK5QfVA=
-MIME-Version: 1.0
-Received: by 10.68.226.170 with SMTP id rt10mr3194618pbc.127.1330002618986;
-	Thu, 23 Feb 2012 05:10:18 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.210.71 with HTTP; Thu, 23 Feb 2012 05:10:18 -0800 (PST)
-In-Reply-To: <20120223125833.GS3769@jama.jama.net>
-References: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
-	<1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
-	<20120223125833.GS3769@jama.jama.net>
-Date: Thu, 23 Feb 2012 11:10:18 -0200
-X-Google-Sender-Auth: uHdGIgPSYaZhTB9bJ1D6R96rK4Y
-Message-ID: <CAP9ODKqGbUADkfqjBDTaD2ASKhZbxAnEMmJ22MsK1w+UKKX8yA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=T5eecdbe+XvDh9ZhJbK90yTk9pjYtLqQrSjjt/3dLWM=;
+	b=wc8g4R3eDCUq7nM/fw6pgOn7ppgWIaT/veR5uqd+m6IYFuqHz3a7wy0vAN27aWZwdt
+	fWI4aXN3VvK7KXOFktnKSoti87dBjB6anplUvxmV2KJE89CFoIac28fUyOmuLMwPpIjr
+	7BXsTux773Yo+M2KPjSNdpZlhZMiz+vB/0wm0=
+Received: by 10.14.53.74 with SMTP id f50mr893695eec.5.1330008750000;
+	Thu, 23 Feb 2012 06:52:30 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n17sm6173331eei.3.2012.02.23.06.52.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 23 Feb 2012 06:52:29 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] gateone, networkmanager, cloud9, ntp: use systemd_unitdir variable
+Date: Thu, 23 Feb 2012 15:52:21 +0100
+Message-Id: <1330008741-22543-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [PATCH 3/7] postgresql: include Makefile.global in SSTATE_SCAN_FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 13:18:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Feb 2012 15:00:51 -0000
 
-On Thu, Feb 23, 2012 at 10:58, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Feb 23, 2012 at 10:50:02AM -0200, Otavio Salvador wrote:
->> On Thu, Feb 23, 2012 at 10:40, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
->> > * maybe we should move systemd_unitdir definition outside systemd.bbcl=
-ass
->> > =A0because it's used in few more recipes which doesn't inherit systemd
->>
->> Please split this patch and do PR bump so we get them rebuild.
->
-> why? the output is 100% the same.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/postgresql/postgresql.inc |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-Well; from previous experience any change can have strange results so
-I'd prefer to build them again.
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index 53c38df..ab6aea4 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
+ HOMEPAGE = "http://www.postgresql.com"
+ LICENSE = "BSD"
+ DEPENDS = "zlib readline tzcode-native"
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -23,6 +23,8 @@ do_compile_append() {
+          cp /usr/sbin/zic ${S}/src/timezone/
+ }
+ 
++SSTATE_SCAN_FILES += "Makefile.global"
++
+ PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
+              libecpg-compat-dbg libecpg-compat \
+              libecpg-dbg libecpg libecpg-dev \
+-- 
+1.7.8.4
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
 
 
