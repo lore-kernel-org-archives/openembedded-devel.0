@@ -1,43 +1,41 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0SQF-0006EW-HO
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0U8t-00020Q-Oi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 07:44:59 +0100
-Received: by eaal10 with SMTP id l10so395271eaa.6
+	Thu, 23 Feb 2012 09:35:11 +0100
+Received: by lahc1 with SMTP id c1so1195831lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2012 22:36:38 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.202.130 as permitted sender) client-ip=10.14.202.130; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.202.130 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.202.130])
-	by 10.14.202.130 with SMTP id d2mr20138eeo.83.1329978998591 (num_hops =
-	1); Wed, 22 Feb 2012 22:36:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=MCGozcCn6r2jWcl3rtLaxNKXoS4XMDe9xO7Sn/wuhyw=;
-	b=gbX02MnF1oR5HRXYTz7A6VYteG6Te0pIKlUiqCSnp6PU/hYb5wqepnH4pFEh1xJBVV
-	5C6TUs/vGPIgaNaTCOl6W9CJS/qNbf2WmNh2DTcHlBDb23UCH+udtEbHNrfMnAufjv24
-	SFpC3I9qsMNAlR2OxBWfhU186pKLwbhI8UrhU=
-Received: by 10.14.202.130 with SMTP id d2mr15875eeo.83.1329978998354;
-	Wed, 22 Feb 2012 22:36:38 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s48sm1885266eem.0.2012.02.22.22.36.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Feb 2012 22:36:37 -0800 (PST)
-Date: Thu, 23 Feb 2012 07:36:35 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120223063635.GM3769@jama.jama.net>
-References: <1329949688-15070-1-git-send-email-andrea.adami@gmail.com>
+	Thu, 23 Feb 2012 00:26:50 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.112.8.68 as permitted sender)
+	client-ip=10.112.8.68; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.112.8.68 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.112.8.68])
+	by 10.112.8.68 with SMTP id p4mr159779lba.47.1329985610455 (num_hops =
+	1); Thu, 23 Feb 2012 00:26:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=2ncjHda4SHSdB0SyLq486xC0gGDKn9zapPrIIR/ZxjQ=;
+	b=WFZku1keYMNINOlsagMcSiPlFYqoCgDMnk8caLed3MLII/eF8pGL+wCLSo1mVgLoPZ
+	idqPd3TTXfWaSzkiq4VeBIFSImSsuUGIvma82r3sNNy3YsXRlrH0ia6bg6F1PvXuMQhF
+	33G0Og7IW93DCgU5W6/FbE23JyG8cG9W/K8LU=
 MIME-Version: 1.0
-In-Reply-To: <1329949688-15070-1-git-send-email-andrea.adami@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-handheld][PATCH] linux_3.2: update from 3.2.1 to 3.2.7
+Received: by 10.112.8.68 with SMTP id p4mr136186lba.47.1329985610375; Thu, 23
+	Feb 2012 00:26:50 -0800 (PST)
+Received: by 10.112.108.164 with HTTP; Thu, 23 Feb 2012 00:26:50 -0800 (PST)
+In-Reply-To: <20120220124013.GG3953@jama.jama.net>
+References: <1329357796-27398-1-git-send-email-schnitzeltony@googlemail.com>
+	<20120220124013.GG3953@jama.jama.net>
+Date: Thu, 23 Feb 2012 09:26:50 +0100
+Message-ID: <CALbNGRQ-drXQR9AfSQxOp7EfeL184-RstqOezfPfAdWJiY3zpw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][v2] 00/22] systemd rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,93 +49,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 06:44:59 -0000
-X-Groupsio-MsgNum: 37363
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EOHJn1TVIJfeVXv2"
-Content-Disposition: inline
-
---EOHJn1TVIJfeVXv2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Feb 2012 08:35:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 22, 2012 at 11:28:08PM +0100, Andrea Adami wrote:
-> * apply latest patchset
-> * bump INC_PR
+On Mon, Feb 20, 2012 at 1:40 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Feb 16, 2012 at 03:02:54AM +0100, Andreas M=FCller wrote:
+>> V1 -> V2:
+>> [2] =A0do not check configuration variables for cross and nativesdk
+>> [3] =A0rename systemd_package to systemd_generate_package_scripts
+>> [6] =A0parse unit files to determine the files to pack
+>> [7] =A0create warning if *-systemd package already rdepends
+>> =A0 =A0 =A0it's base package
+>> added in V2:
+>> [8]-[20] remove obsolet systemd code from recipes (these were used as
+>> =A0 =A0 =A0test cases)
+>> [21] dhcp-(relay) test case for multiple systemd packages
+>> [22] modified to start service
+>>
+>> The following tests were performed:
+>> * build from scratch with [1]-[7] / run test
+>> * build from scratch / apply patches / build -> check buildhistory diff
+>> * build from scratch w/o patches / build from scratch with patches -> ch=
+eck
+>> =A0 buildhistory diff
+>>
+>> Additional patches were prepared for other recipes inheriting systemd. T=
+hese are
+>> not yet send because they move systemd support from ${PN} to ${PN}-syste=
+md which
+>> currently needs modifications on tasks/images. I'd be happy if a common =
+accepted
+>> solution would be suggested/implemented (image-feature?).
+>
+> Today I've noticed one more issue (not sure if it's caused by this
+> patchset or not).
+>
+> Some images are failing for me with:
+> For package xserver-nodm-init-systemd SYSTEMD_SERVICE-entry xserver-nodm.=
+service does not exist
+> from systemd.bbclass:populate_packages_prepend
+>
+> I guess it's because sstate package:
+> sstate-xserver-nodm-init-all-oe-linux-2.0-r13-all-2-2ac030a94ddbd202f54b9=
+9c2e32c6312_package.tgz
+>
+> has only
+> package/lib/systemd/system/xserver-nodm.service
+>
+> but systemd.bbclass:populate_packages_prepend is looking only in ${D}
+> (image directory).
+>
+I prepared V3 and up to now all tests look good. Regarding this issue:
+What is a test case to reproduce if the modification are OK?
 
-Looking at this commit and almost the same in meta-initramfs, why
-haven't you moved linux-3.2.inc to meta-initramfs and use that from
-meta-handheld as it already depends on meta-initramfs layer for
-kexecboot?
+Andreas
 
-Cheers,
 
-> ---
->  recipes-kernel/linux/linux-3.2.inc |    6 +++---
->  recipes-kernel/linux/linux_3.2.bb  |    2 +-
->  2 files changed, 4 insertions(+), 4 deletions(-)
->=20
-> diff --git a/recipes-kernel/linux/linux-3.2.inc b/recipes-kernel/linux/li=
-nux-3.2.inc
-> index 8dd30d9..3a37200 100644
-> --- a/recipes-kernel/linux/linux-3.2.inc
-> +++ b/recipes-kernel/linux/linux-3.2.inc
-> @@ -3,12 +3,12 @@ DEFAULT_PREFERENCE =3D "-1"
->  COMPATIBLE_MACHINE =3D "(spitz)"
-> =20
->  SRC_URI +=3D "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;=
-name=3Dkernel \
-> -           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.1.bz2;apply=
-=3Dyes;name=3Dstablepatch \
-> +           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=
-=3Dyes;name=3Dstablepatch \
->             file://defconfig \
->             file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
->             "
-> =20
->  SRC_URI[kernel.md5sum] =3D "7ceb61f87c097fc17509844b71268935"
->  SRC_URI[kernel.sha256sum] =3D "c881fc2b53cf0da7ca4538aa44623a7de043a41f7=
-6fd5d0f51a31f6ed699d463"
-> -SRC_URI[stablepatch.md5sum] =3D "31fc34340f11118873463a1d59d47b7f"
-> -SRC_URI[stablepatch.sha256sum] =3D "e9a26dc5faa309ae5172e3c65081fa98b60b=
-efab160fb14d9a75816bbde15626"
-> +SRC_URI[stablepatch.md5sum] =3D "899624bffed6a19578613b672cc9483f"
-> +SRC_URI[stablepatch.sha256sum] =3D "779c548f4418f0baa782252d15a54fadf3c8=
-8d79fc547ee5801d31798020e701"
-> diff --git a/recipes-kernel/linux/linux_3.2.bb b/recipes-kernel/linux/lin=
-ux_3.2.bb
-> index 28564b6..6c15a88 100644
-> --- a/recipes-kernel/linux/linux_3.2.bb
-> +++ b/recipes-kernel/linux/linux_3.2.bb
-> @@ -1,4 +1,4 @@
->  require linux.inc
->  require linux-${PV}.inc
-> =20
-> -PR =3D "${INC_PR}.0"
-> +PR =3D "${INC_PR}.1"
-> --=20
-> 1.7.3.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---EOHJn1TVIJfeVXv2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9F3nMACgkQN1Ujt2V2gBz67QCbBnSwZDIoMCqzozVxMoc8rshH
-Z8MAoJpRKHazlJMFmxz1x1t2TRjMPSTo
-=EaHx
------END PGP SIGNATURE-----
-
---EOHJn1TVIJfeVXv2--
