@@ -1,46 +1,45 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0aAi-0002tu-Qv
+	(envelope-from <otavio.salvador@gmail.com>) id 1S0aFr-00038s-CG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Feb 2012 16:01:28 +0100
-Received: by eaal10 with SMTP id l10so593627eaa.6
+	Thu, 23 Feb 2012 16:06:47 +0100
+Received: by pbbjt11 with SMTP id jt11so723112pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 06:53:07 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.7.80 as permitted sender) client-ip=10.213.7.80; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.7.80 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.7.80])
-	by 10.213.7.80 with SMTP id c16mr559057ebc.7.1330008787668 (num_hops =
-	1); Thu, 23 Feb 2012 06:53:07 -0800 (PST)
+	Thu, 23 Feb 2012 06:58:25 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.68.213.136 as permitted sender) client-ip=10.68.213.136; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.68.213.136 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.68.213.136])
+	by 10.68.213.136 with SMTP id ns8mr5197659pbc.43.1330009105282
+	(num_hops = 1); Thu, 23 Feb 2012 06:58:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=xWt3MHKRxAT9corvesTws6DyHw4fJSgpbuo08GK/bJA=;
-	b=d+CsZjWWF3G9YDrEkuIBeGTG8gZ85bYUCeGw8mU0mlz1oMq9Y9NtVyG800UBmfBFpF
-	DuATX10ZzMOkRHedmFFGCDIEH2IkPCtBmskQ9K+QWyRE/D6O2yt8UcucYPb8pHnpCyru
-	IoxEp3RUmjgjyUSKULW7cxPFqxBAORCBc5yeE=
-Received: by 10.213.7.80 with SMTP id c16mr441617ebc.7.1330008787577;
-	Thu, 23 Feb 2012 06:53:07 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a58sm6129568eeb.8.2012.02.23.06.53.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 06:53:06 -0800 (PST)
-Date: Thu, 23 Feb 2012 15:53:05 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120223145305.GW3769@jama.jama.net>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Oc0l4WMKbAgSult0OeqemGEvYa3MQhABz176+oCE6YE=;
+	b=cpLQ+rT/pG+G7vJXmjduKAk/WB3WEHp4ETeKe0oC5e65z3nWW9YMHFRaJLmSym8hW8
+	p1Rfk2Tp3l4enrlz3TNsewKsUxTQ6k2gW7Oev+4oxOVQJIQGmWjwnjPnIjiBB36FP6mC
+	Sv3YUOfUaeJ2S0ZiyPYnFoOE65AZE3IiJijoU=
+MIME-Version: 1.0
+Received: by 10.68.213.136 with SMTP id ns8mr4423857pbc.43.1330009105217; Thu,
+	23 Feb 2012 06:58:25 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.210.71 with HTTP; Thu, 23 Feb 2012 06:58:25 -0800 (PST)
+In-Reply-To: <20120223145305.GW3769@jama.jama.net>
 References: <CAP9ODKoFvg4s4Omew3pdtw3GVZyvpAF+cZCKKP6StJkjWhua9A@mail.gmail.com>
 	<1330000807-30379-1-git-send-email-Martin.Jansa@gmail.com>
 	<CAP9ODKpLMpBNSqx0MUuzUbYCcapGrJccojjyQrYHjaN6TNqcSA@mail.gmail.com>
 	<20120223125833.GS3769@jama.jama.net>
 	<CAP9ODKqGbUADkfqjBDTaD2ASKhZbxAnEMmJ22MsK1w+UKKX8yA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKqGbUADkfqjBDTaD2ASKhZbxAnEMmJ22MsK1w+UKKX8yA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20120223145305.GW3769@jama.jama.net>
+Date: Thu, 23 Feb 2012 12:58:25 -0200
+X-Google-Sender-Auth: NLNlyWqOzJdOKgcH6ynIiG2Pzuo
+Message-ID: <CAP9ODKq0aY94-hZVpYkPVY47tgQ5FBvWStroQsyLpbmXsaB0=w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] gateone, networkmanager, cloud9, ntp: use systemd_unitdir variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,52 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 15:01:28 -0000
-X-Groupsio-MsgNum: 37402
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pEAjBjStGYT6H+Py"
-Content-Disposition: inline
-
---pEAjBjStGYT6H+Py
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Feb 2012 15:06:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 23, 2012 at 11:10:18AM -0200, Otavio Salvador wrote:
-> On Thu, Feb 23, 2012 at 10:58, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> > On Thu, Feb 23, 2012 at 10:50:02AM -0200, Otavio Salvador wrote:
-> >> On Thu, Feb 23, 2012 at 10:40, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> >> > * maybe we should move systemd_unitdir definition outside systemd.bb=
-class
-> >> > =A0because it's used in few more recipes which doesn't inherit syste=
-md
-> >>
-> >> Please split this patch and do PR bump so we get them rebuild.
-> >
-> > why? the output is 100% the same.
->=20
-> Well; from previous experience any change can have strange results so
-> I'd prefer to build them again.
+On Thu, Feb 23, 2012 at 12:53, Martin Jansa <martin.jansa@gmail.com> wrote:
+> splitted and with PR bumps in contrib/jansa/pull
 
-splitted and with PR bumps in contrib/jansa/pull
-
-Cheers,
+I think Koen would prefer if you resend them so he can get them from
+patchwork. Not sure though...
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
---pEAjBjStGYT6H+Py
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9GUtEACgkQN1Ujt2V2gBz4oQCfZ0ytJF4ma9NAQbLr4jGnnGOy
-Y1gAn2QUOAn2/kpAN3Ua0pezgWu5wUh9
-=X6/e
------END PGP SIGNATURE-----
-
---pEAjBjStGYT6H+Py--
