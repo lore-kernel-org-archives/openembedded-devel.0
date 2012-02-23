@@ -1,45 +1,45 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0Xdk-0004lJ-1c
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0Xdk-0004lM-TD
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 23 Feb 2012 13:19:16 +0100
-Received: by mail-ey0-f175.google.com with SMTP id l10so506551eaa.6
+Received: by mail-ee0-f47.google.com with SMTP id d41so492439eek.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 23 Feb 2012 04:10:57 -0800 (PST)
 Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.120.201 as permitted sender)
-	client-ip=10.14.120.201; 
+	designates 10.14.94.202 as permitted sender)
+	client-ip=10.14.94.202; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.120.201 as
+	schnitzeltony@googlemail.com designates 10.14.94.202 as
 	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
 	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.120.201])
-	by 10.14.120.201 with SMTP id p49mr707048eeh.74.1329999057088 (num_hops
+Received: from mr.google.com ([10.14.94.202])
+	by 10.14.94.202 with SMTP id n50mr699604eef.65.1329999057944 (num_hops
 	= 1); Thu, 23 Feb 2012 04:10:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=HP7KhjGA2GIxQhwquZ6IVPyWuWxSj4vMTgklXUPGT0Q=;
-	b=Y0LrrGJVhAVnAOVouqJemhKa+5pRT5S27PsU0+5mHdybbNv5pLvjCoMR4Zz82SyINW
-	BxCo/76H1/0qyz6dYyD1D6nF3WAQI0LPsZpp43lJpUmGT7+nftfSX4Hs06AwVSsm3pWs
-	uYGunYgoVvXBX4W/dKyviV5WAtFo0N857+JKY=
-Received: by 10.14.120.201 with SMTP id p49mr557593eeh.74.1329999057014;
+	bh=LtXJU23VLWkjBl5sXnasOtJF6GEiQB7WqYw5XSDPllY=;
+	b=taM81Rfup89ro2TdSXMe8B6GqlnGFsu9ldzBFaZiojCTnipmAjbXiAL6R+4BPN2FuA
+	Kh5p3+zSPeQh2Hf+qzRAhjtl+6Cq+dRms70LBOrwzP/svik2FB07BqS/UNwUyP1Vyqu1
+	nVRWOPKLml7PlDUFC8jZXjJHbcdIFFP2p0iA0=
+Received: by 10.14.94.202 with SMTP id n50mr554128eef.65.1329999057845;
 	Thu, 23 Feb 2012 04:10:57 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190])
-	by mx.google.com with ESMTPS id n52sm4739136eea.5.2012.02.23.04.10.56
+	by mx.google.com with ESMTPS id n52sm4739136eea.5.2012.02.23.04.10.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 04:10:56 -0800 (PST)
+	Thu, 23 Feb 2012 04:10:57 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Feb 2012 13:10:40 +0100
-Message-Id: <1329999054-23112-10-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 23 Feb 2012 13:10:41 +0100
+Message-Id: <1329999054-23112-11-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
 In-Reply-To: <1329999054-23112-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1329999054-23112-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe V3 09/23] systemd.bbclass: automatically extend RDEPENDS for *-systemd packages
+Subject: [meta-oe V3 10/23] connman: remove unneeded systemd code / use ${systemd_unitdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,61 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2012 12:19:16 -0000
+X-List-Received-Date: Thu, 23 Feb 2012 12:19:17 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* append systemd functionalty moved into systemd_add_rdepends
-* append base-pgk in case receipe does not set RDEPENDS for *-systemd package
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/classes/systemd.bbclass |   21 +++++++++++++++++----
- 1 files changed, 17 insertions(+), 4 deletions(-)
+ .../connman/connman_0.78.bbappend                  |    9 ++-------
+ 1 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
-index c712e17..dd423b5 100644
---- a/meta-oe/classes/systemd.bbclass
-+++ b/meta-oe/classes/systemd.bbclass
-@@ -122,10 +122,6 @@ python populate_packages_prepend () {
- 		postrm += bb.data.getVar('systemd_postrm', localdata, 1)
- 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
+diff --git a/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend b/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend
+index d6f756c..f1b05aa 100644
+--- a/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend
++++ b/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend
+@@ -1,13 +1,8 @@
+ inherit systemd
  
--		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
--		rdepends.append("systemd")
--		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
+-EXTRA_OECONF += "--with-systemdunitdir=${base_libdir}/systemd/system/"
++EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
+ 
+-PRINC := "${@int(PRINC) + 1}"
++PRINC := "${@int(PRINC) + 2}"
+ 
+ SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
 -
- 	# add files to FILES_*-systemd if existent and not already done
- 	def systemd_append_file(pkg_systemd, file_append):
- 		appended = False
-@@ -185,10 +181,27 @@ python populate_packages_prepend () {
- 					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entry %s does not exist" % \
- 						(pkg_systemd, service)
- 
-+	# *-systemd packages get RDEPENDS to systemd and their base package
-+	def systemd_add_rdepends(pkg_systemd):
-+		# RDEPENDS_${pkg_systemd} += pkg_systemd_base systemd
-+		rdepends = d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
-+		rdepends_arr = rdepends.split()
-+		if not 'systemd' in rdepends_arr:
-+			rdepends = '%s %s' % (rdepends, 'systemd')
-+		pkg_systemd_base = pkg_systemd.replace('-systemd', '')
-+		# no automatism for:
-+		# recipes setting rdepends themselves AND
-+		# not rdepending myself AND
-+		# avoid double entries
-+		if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
-+			rdepends = '%s %s' % (rdepends, pkg_systemd_base)
-+		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
-+
- 
- 	# run all modifications once when creating package
- 	if os.path.exists('${D}'):
- 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
- 			systemd_generate_package_scripts(pkg_systemd)
-+			systemd_add_rdepends(pkg_systemd)
- 		systemd_check_services()
- }
+-# systemd files
+-PACKAGES =+ "${PN}-systemd"
+-FILES_${PN}-systemd += "${base_libdir}/systemd"
+-RDEPENDS_${PN}-systemd += "${PN}"
 -- 
 1.7.6.4
 
