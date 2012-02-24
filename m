@@ -1,44 +1,43 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0igH-0007Mx-Fq
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0jRN-0000Tg-F1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 01:06:37 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so861176eek.6
+	Fri, 24 Feb 2012 01:55:17 +0100
+Received: by eaal10 with SMTP id l10so884499eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 15:58:17 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.105.140 as permitted sender) client-ip=10.213.105.140; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.105.140 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.105.140])
-	by 10.213.105.140 with SMTP id t12mr75014ebo.71.1330041497939 (num_hops
-	= 1); Thu, 23 Feb 2012 15:58:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=qSec3196L7Sz/enChj7tu8t0k3mXJFOzhEHmYC1YrJM=;
-	b=VtXCFU8yi3NGzI4F2T16i4weg9MQ588+wsF6aHMw19MIuHYcvPCABwPC+iKmT58xfn
-	qh0SYVkQvcbUNEs9KVjD8+XBiar9RFAh0xRGrw1pPKEI/8TvF8VjJoE+r61fDosJwYsc
-	IfcWJHNM1CecekbFlxg06IzakG01QP9rVesMA=
-Received: by 10.213.105.140 with SMTP id t12mr48069ebo.71.1330041497873;
-	Thu, 23 Feb 2012 15:58:17 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v51sm11225436eef.2.2012.02.23.15.58.16
+	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.14.204.73 as permitted sender)
+	client-ip=10.14.204.73; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.14.204.73 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.14.204.73])
+	by 10.14.204.73 with SMTP id g49mr33607eeo.57.1330044415804 (num_hops =
+	1); Thu, 23 Feb 2012 16:46:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=e7DWk+6DD32xPVpacQ+26IUfcbBDRTFzxp7b+63mZyg=;
+	b=ehC+ZxMSXIBjew54Yl4jpC6UoGEu7vspqNmUYQM9m4jChajl62oMCdTg4itmzrqn0S
+	NjuqAajZK4SOY5ybgdLVUedG+5tl4GC8LmOsw07O5BUfrwsQ02XgaDDpznQtUcIiada1
+	AsCMx+Cw6hMN3dKYEYmNwcZ1tXldQtYpiTgQM=
+Received: by 10.14.204.73 with SMTP id g49mr21192eeo.57.1330044415684;
+	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
+Received: from localhost.localdomain (p5B0A23FB.dip.t-dialin.net.
+	[91.10.35.251])
+	by mx.google.com with ESMTPS id z47sm11578274eeh.9.2012.02.23.16.46.54
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 15:58:17 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 00:57:55 +0100
-Message-Id: <ae5ffb9395228a23b41045fc703e1920932529ae.1330041429.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <280e44ecc1bb5cdb682cf9d369986b6c34bed125.1330041429.git.Martin.Jansa@gmail.com>
-References: <280e44ecc1bb5cdb682cf9d369986b6c34bed125.1330041429.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1330041429.git.Martin.Jansa@gmail.com>
-References: <cover.1330041429.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] meta-oe: include systemd-serialgetty in SIGGEN_EXCLUDERECIPES_ABISAFE
+Date: Fri, 24 Feb 2012 01:49:54 +0100
+Message-Id: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-oe] dhcp: follow oe-core's update to 4.2.3-P2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,25 +51,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 00:06:37 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 00:55:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/conf/layer.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ ...{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-connectivity/dhcp/{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} (100%)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 0a3a9ef..cf13a71 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -23,4 +23,4 @@ BBFILE_PATTERN_openembedded-layer := "^${LAYERDIR}/"
- 
- BBFILE_PRIORITY_openembedded-layer = "6"
- 
--SIGGEN_EXCLUDERECIPES_ABISAFE += "pointercal-xinput"
-+SIGGEN_EXCLUDERECIPES_ABISAFE += "pointercal-xinput systemd-serialgetty"
+diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
+similarity index 100%
+rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
 -- 
-1.7.8.4
+1.7.4.4
 
 
 
