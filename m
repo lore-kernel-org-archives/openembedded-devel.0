@@ -1,44 +1,20 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0rv5-0006GJ-70
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1S0sHr-0006oz-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 10:58:31 +0100
-Received: by eekd41 with SMTP id d41so1027389eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 01:50:08 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.94.66 as permitted sender) client-ip=10.14.94.66; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.94.66 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.94.66])
-	by 10.14.94.66 with SMTP id m42mr990486eef.66.1330077008944 (num_hops =
-	1); Fri, 24 Feb 2012 01:50:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NVimFwt+//SvPTBPAwETec5CQZEKBqPF3v7hsPnUhr4=;
-	b=rvl90T9OkeJEjFLhzZ69LE/H+a/dPXQ6kLgQCOm4rG03MYXtuBg6aPuPosD6mHMExA
-	5Jkb6ov2ERgBXiq25OVCs8qgta+Gvrn/gzMKAsFZ2PIBQfJ+bCSx9fu6XDuNqKUZsFAr
-	hpw67jZz4obdxOKzNzxkShYAz54lJX0BlzhDQ=
-Received: by 10.14.94.66 with SMTP id m42mr752137eef.66.1330077008850;
-	Fri, 24 Feb 2012 01:50:08 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id u11sm8990258eeb.1.2012.02.24.01.50.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Feb 2012 01:50:07 -0800 (PST)
-Date: Fri, 24 Feb 2012 10:50:05 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 24 Feb 2012 11:22:03 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 24 Feb 2012 02:13:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="114422017"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.123.5])
+	by orsmga002.jf.intel.com with ESMTP; 24 Feb 2012 02:12:38 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120224095005.GG3769@jama.jama.net>
-References: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe] systemd: split out libraries from ${PN}
+Date: Fri, 24 Feb 2012 10:12:34 +0000
+Message-Id: <cover.1330078260.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH 0/2] Tidy up some files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,101 +28,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 09:58:31 -0000
-X-Groupsio-MsgNum: 37431
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zgr1mbP1ee4HJQ5m"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Feb 2012 10:22:03 -0000
 
---zgr1mbP1ee4HJQ5m
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Pick off some low-hanging fruit.
 
-On Wed, Feb 08, 2012 at 01:50:04PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+The following changes since commit 9cca08ee27f166395e500718bf184fa86112c224:
 
-I'm using this for some time in meta-oe-contrib/shr
+  systemd: split out libraries from ${PN} (2012-02-24 10:55:49 +0100)
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib paule/tidy
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/tidy
 
-> ---
->  meta-oe/recipes-core/systemd/systemd_git.bb |   14 ++++++++++++--
->  1 files changed, 12 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipe=
-s-core/systemd/systemd_git.bb
-> index c1a0117..4c458bd 100644
-> --- a/meta-oe/recipes-core/systemd/systemd_git.bb
-> +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-> @@ -14,7 +14,7 @@ inherit gitpkgv
->  PKGV =3D "v${GITPKGVTAG}"
-> =20
->  PV =3D "git"
-> -PR =3D "r15"
-> +PR =3D "r16"
-> =20
->  inherit useradd pkgconfig autotools vala perlnative
-> =20
-> @@ -59,6 +59,11 @@ do_install() {
->  	ln -s ${base_bindir}/systemd ${D}/init
->  }
-> =20
-> +python populate_packages_prepend (){
-> +	systemdlibdir =3D d.getVar("base_libdir", True)
-> +	do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'System=
-d %s library', extra_depends=3D'', allow_links=3DTrue)
-> +}
-> +
->  PACKAGES =3D+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-anal=
-yze"
-> =20
->  USERADD_PACKAGES =3D "${PN}"
-> @@ -79,7 +84,7 @@ FILES_${PN}-vconsole-setup =3D "${base_libdir}/systemd/=
-systemd-vconsole-setup \
-> =20
->  RRECOMMENDS_$PN}-vconsole-setup =3D "kbd kbd-consolefonts"
-> =20
-> -FILES_${PN} +=3D " ${base_bindir}/* \
-> +FILES_${PN} =3D " ${base_bindir}/* \
->                  ${datadir}/dbus-1/services \
->                  ${datadir}/dbus-1/system-services \
->                  ${datadir}/polkit-1 \
-> @@ -93,6 +98,11 @@ FILES_${PN} +=3D " ${base_bindir}/* \
->                  ${bindir}/systemd* \
->                  ${libdir}/tmpfiles.d/*.conf \
->                  ${libdir}/systemd \
-> +                ${libdir}/binfmt.d \
-> +                ${libdir}/modules-load.d \
-> +                ${libdir}/sysctl.d \
-> +                ${localstatedir} \
-> +                ${libexecdir} \
->                 "
-> =20
->  FILES_${PN}-dbg +=3D "${base_libdir}/systemd/.debug ${base_libdir}/syste=
-md/*/.debug ${base_libdir}/security/.debug/"
-> --=20
-> 1.7.2.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Paul Eggleton (2):
+  python-setuptools: remove
+  Tidy up unused files
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+ .../eglibc/ldconfig-native-2.12.1/32and64bit.patch |  331 --------------
+ .../eglibc/ldconfig-native-2.12.1/README           |    8 -
+ .../endian-ness_handling.patch                     |  454 -------------------
+ .../ldconfig-native-2.12.1/endianess-header.patch  |  113 -----
+ .../eglibc/ldconfig-native-2.12.1/flag_fix.patch   |   24 -
+ .../ldconfig-native-2.12.1.tar.bz2                 |  Bin 21491 -> 0 bytes
+ .../eglibc/ldconfig-native-2.12.1/ldconfig.patch   |  471 --------------------
+ .../ldconfig_aux-cache_path_fix.patch              |   36 --
+ .../python/python-setuptools_0.6c11.bb             |   33 --
+ .../0001-don-t-try-to-run-generated-binaries.patch |   68 ---
+ .../cups/cups-1.4.6/use_echo_only_in_init.patch    |   11 -
+ meta-oe/recipes-support/cups/cups14.inc            |   84 ----
+ 12 files changed, 0 insertions(+), 1633 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/32and64bit.patch
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/README
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/endian-ness_handling.patch
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/endianess-header.patch
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/flag_fix.patch
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/ldconfig-native-2.12.1.tar.bz2
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/ldconfig.patch
+ delete mode 100644 meta-oe/recipes-core/eglibc/ldconfig-native-2.12.1/ldconfig_aux-cache_path_fix.patch
+ delete mode 100644 meta-oe/recipes-devtools/python/python-setuptools_0.6c11.bb
+ delete mode 100644 meta-oe/recipes-support/cups/cups-1.4.6/0001-don-t-try-to-run-generated-binaries.patch
+ delete mode 100644 meta-oe/recipes-support/cups/cups-1.4.6/use_echo_only_in_init.patch
+ delete mode 100644 meta-oe/recipes-support/cups/cups14.inc
 
---zgr1mbP1ee4HJQ5m
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+-- 
+1.7.5.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
 
-iEYEARECAAYFAk9HXU0ACgkQN1Ujt2V2gBxG9gCffcmXKXh73RGok2YQJQESeMVm
-hB4AoIBXy/OWS2/vA0sOsmEX1qVHjs7G
-=xdXs
------END PGP SIGNATURE-----
 
---zgr1mbP1ee4HJQ5m--
