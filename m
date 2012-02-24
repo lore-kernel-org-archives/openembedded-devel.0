@@ -1,42 +1,40 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0uO0-0000c5-1g
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0wSi-0002cM-1q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 13:36:32 +0100
-Received: by eekd41 with SMTP id d41so1086878eek.6
+	Fri, 24 Feb 2012 15:49:32 +0100
+Received: by bkwq11 with SMTP id q11so2167194bkw.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 04:28:09 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.32.133 as permitted sender) client-ip=10.213.32.133; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.32.133 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.32.133])
-	by 10.213.32.133 with SMTP id c5mr679874ebd.119.1330086489794 (num_hops
-	= 1); Fri, 24 Feb 2012 04:28:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Uktu+PSkzoZmpb+zUAbY7lxwlhyyBsMaKiO3P3mgqv8=;
-	b=Ij3Se1eEQ59JCi7fv+ofuQtOw/1yTkuKGoksR2/s/33G3YtnTP2jhrxwVJn3rnoany
-	x24deAbUKlVKqrtb96v4XTKo+/JwIl2NnNOx6HzG0AtVrhS/fWQYW/r/mCEAx0mVKgZ6
-	2jms6SACF+SkVh/wfWFKI4nSIE4+9i6Qtztxs=
-Received: by 10.213.32.133 with SMTP id c5mr513882ebd.119.1330086489652;
-	Fri, 24 Feb 2012 04:28:09 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm17640189eeb.7.2012.02.24.04.28.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Feb 2012 04:28:08 -0800 (PST)
-Date: Fri, 24 Feb 2012 13:28:07 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120224122806.GI3769@jama.jama.net>
-References: <1330084384-1267-1-git-send-email-schnitzeltony@googlemail.com>
+	Fri, 24 Feb 2012 06:41:09 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.112.29.34 as permitted sender)
+	client-ip=10.112.29.34; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.112.29.34 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.112.29.34])
+	by 10.112.29.34 with SMTP id g2mr1102782lbh.40.1330094469453 (num_hops
+	= 1); Fri, 24 Feb 2012 06:41:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=YVZOFpE0hiTDcv5tyArmURDtDYHUP88UrgwuKQpBCr4=;
+	b=RQgtQIAob7+6WJDpaKNxwbEwFYmi6RFpSpwCimfS6M19HMsP7n33m71L6B4jUjSn+i
+	GRQNdrkRlZu/Ul2/fxVKpVRiyj1k5nXj6p5H5h2T5Sg3nVueFYTsGb/gEW+yUsxghspO
+	o9JQMCpEAYqIpFOZGDm8fQARRaCikLcDehm+Q=
 MIME-Version: 1.0
-In-Reply-To: <1330084384-1267-1-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Received: by 10.112.29.34 with SMTP id g2mr908744lbh.40.1330094468139; Fri, 24
+	Feb 2012 06:41:08 -0800 (PST)
+Received: by 10.112.29.74 with HTTP; Fri, 24 Feb 2012 06:41:08 -0800 (PST)
+In-Reply-To: <20120224122806.GI3769@jama.jama.net>
+References: <1330084384-1267-1-git-send-email-schnitzeltony@googlemail.com>
+	<20120224122806.GI3769@jama.jama.net>
+Date: Fri, 24 Feb 2012 15:41:08 +0100
+Message-ID: <CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-mozilla 1/2] firefox: change URI to fetchable ftp / bump to 10.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,46 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 12:36:32 -0000
-X-Groupsio-MsgNum: 37437
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yBd94+RIx/Fx7UDH"
-Content-Disposition: inline
-
---yBd94+RIx/Fx7UDH
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Feb 2012 14:49:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 24, 2012 at 12:53:03PM +0100, Andreas M=FCller wrote:
-> build tested from scratch
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  ...l10n-af_10.0.1.bb =3D> firefox-l10n-af_10.0.2.bb} |    4 ++--
->  ...l10n-ak_10.0.1.bb =3D> firefox-l10n-ak_10.0.2.bb} |    4 ++--
->  ...l10n-ar_10.0.1.bb =3D> firefox-l10n-ar_10.0.2.bb} |    4 ++--
->  ...l10n-as_10.0.1.bb =3D> firefox-l10n-as_10.0.2.bb} |    4 ++--
->  .../firefox-l10n/firefox-l10n-ast_10.0.1.bb        |    9 ---------
->  .../firefox-l10n/firefox-l10n-ast_10.0.2.bb        |    9 +++++++++
+On Fri, Feb 24, 2012 at 1:28 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Fri, Feb 24, 2012 at 12:53:03PM +0100, Andreas M=FCller wrote:
+>> build tested from scratch
+>>
+>> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+>> ---
+>> =A0...l10n-af_10.0.1.bb =3D> firefox-l10n-af_10.0.2.bb} | =A0 =A04 ++--
+>> =A0...l10n-ak_10.0.1.bb =3D> firefox-l10n-ak_10.0.2.bb} | =A0 =A04 ++--
+>> =A0...l10n-ar_10.0.1.bb =3D> firefox-l10n-ar_10.0.2.bb} | =A0 =A04 ++--
+>> =A0...l10n-as_10.0.1.bb =3D> firefox-l10n-as_10.0.2.bb} | =A0 =A04 ++--
+>> =A0.../firefox-l10n/firefox-l10n-ast_10.0.1.bb =A0 =A0 =A0 =A0| =A0 =A09=
+ ---------
+>> =A0.../firefox-l10n/firefox-l10n-ast_10.0.2.bb =A0 =A0 =A0 =A0| =A0 =A09=
+ +++++++++
+>
+> Interesting that it detected rename in first 4 locales and then the rest
+> is add/del, but otherwise look ok.
+>
+> Please reset those PR in those locale files to ${INC_PR}.0.
+>
+> Cheers,
+>
+Ehm I did not create them: I let the very nice script in /scripts do
+that - a bit off topic: I already started to create such a script
+before I saw it is already there :( So Otavio what was your intention
+on starting at ${INC_PR}.1?
 
-Interesting that it detected rename in first 4 locales and then the rest
-is add/del, but otherwise look ok.=20
+Cheers
 
-Please reset those PR in those locale files to ${INC_PR}.0.
+Andreas
 
-Cheers,
 
---yBd94+RIx/Fx7UDH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9HglYACgkQN1Ujt2V2gBz70gCgnQcVv3xcylzfW0jWUHXsJhPz
-rwoAnjl+o5ZTKZjEunUV7RgH9jTblNvH
-=BPAW
------END PGP SIGNATURE-----
-
---yBd94+RIx/Fx7UDH--
