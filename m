@@ -1,41 +1,43 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S0jjC-00015v-R0
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S0joV-0001Bz-Um
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 02:13:43 +0100
-Received: by daln34 with SMTP id n34so1634187dal.6
+	Fri, 24 Feb 2012 02:19:11 +0100
+Received: by eekd41 with SMTP id d41so881479eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 17:05:19 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.68.217.42 as permitted sender) client-ip=10.68.217.42; 
+	Thu, 23 Feb 2012 17:10:50 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.213.21.142 as permitted sender)
+	client-ip=10.213.21.142; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.68.217.42 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.68.217.42])
-	by 10.68.217.42 with SMTP id ov10mr1110478pbc.85.1330045519848
-	(num_hops = 1); Thu, 23 Feb 2012 17:05:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
+	schnitzeltony@googlemail.com designates 10.213.21.142 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.213.21.142])
+	by 10.213.21.142 with SMTP id j14mr49982ebb.53.1330045850095 (num_hops
+	= 1); Thu, 23 Feb 2012 17:10:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
 	:content-transfer-encoding;
-	bh=CXHGM7qZ8KH2W9x5PFMNYA611IRdkXvjhKmOujlHsec=;
-	b=Ecl2mvd7EJNqjc51unmkDZGdJ3aVH6TOjjYAHqktdORVNc59DWBaWvTprWv5BElM8E
-	3AZmyd5u4FtM5Sg9GneWWSVGZQBqbPEDiaePbizfItxxKl+L11T1Ktz3q2VHOfP/bfiw
-	auUUD7FIrNRTFEwzExDhxTIC6JdewmjtW3xII=
-MIME-Version: 1.0
-Received: by 10.68.217.42 with SMTP id ov10mr914476pbc.85.1330045519754; Thu,
-	23 Feb 2012 17:05:19 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.231.36 with HTTP; Thu, 23 Feb 2012 17:05:19 -0800 (PST)
-In-Reply-To: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Thu, 23 Feb 2012 23:05:19 -0200
-X-Google-Sender-Auth: 8aYhE1odYBw_k2ZLE_lh2RUBe5k
-Message-ID: <CAP9ODKpDgFYKp+HvpMKsnbe=CLY9=ifY+8oVSa-5uWwnm2e6Tg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	bh=EG4gu5Rnv5xbuEMUy5S5HS05O7Q6klk22v0odg7KIck=;
+	b=nJPo6bhwKv5excXPQOb6cIGmkkPG6ZxGdlwPQ3RJxdlaxKZ4MJlckp0hGuWgI3Gl1x
+	u5lqcn3WqdpycWusjPEW5BIFyR6KqVjOYABaGr5E76GUPtAtN6g3nF94enyQzvc9K9w/
+	IjxOZPvJKOBpc4SNVa5TBvU8m33u9HXPl0sQY=
+Received: by 10.213.21.142 with SMTP id j14mr35375ebb.53.1330045849994;
+	Thu, 23 Feb 2012 17:10:49 -0800 (PST)
+Received: from localhost.localdomain (p5B0A23FB.dip.t-dialin.net.
+	[91.10.35.251])
+	by mx.google.com with ESMTPS id v51sm11847840eef.2.2012.02.23.17.10.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 23 Feb 2012 17:10:49 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] dhcp: follow oe-core's update to 4.2.3-P2
+Date: Fri, 24 Feb 2012 02:13:49 +0100
+Message-Id: <1330046029-8749-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-oe V2] dhcp: follow oe-core's update to 4.2.3-P2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 01:13:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Feb 2012 01:19:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Feb 23, 2012 at 22:49, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
-> rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
 
-Change PRINC back to + 1 plz.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ...{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename meta-oe/recipes-connectivity/dhcp/{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} (91%)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
+similarity index 91%
+rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
+index 6d1e3df..edd44c1 100644
+--- a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
++++ b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
+@@ -3,7 +3,7 @@ FILESEXTRAPATHS := "${THISDIR}/files"
+ 
+ inherit systemd
+ 
+-PRINC := "${@int(PRINC) + 3}"
++PRINC := "${@int(PRINC) + 1}"
+ 
+ SYSTEMD_PACKAGES = "dhcp-server-systemd dhcp-relay-systemd"
+ SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
+-- 
+1.7.4.4
+
 
 
