@@ -1,45 +1,39 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1S11sd-0001cQ-CC
+	(envelope-from <otavio.salvador@gmail.com>) id 1S12Iw-0002Lr-4G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 21:36:39 +0100
-Received: by pbbrp12 with SMTP id rp12so953142pbb.6
+	Fri, 24 Feb 2012 22:03:50 +0100
+Received: by yhfq46 with SMTP id q46so1342608yhf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 12:28:15 -0800 (PST)
-Received-SPF: pass (google.com: domain of tom.rini@gmail.com designates
-	10.68.194.65 as permitted sender) client-ip=10.68.194.65; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of tom.rini@gmail.com
-	designates 10.68.194.65 as permitted sender)
-	smtp.mail=tom.rini@gmail.com;
-	dkim=pass header.i=tom.rini@gmail.com
-Received: from mr.google.com ([10.68.194.65])
-	by 10.68.194.65 with SMTP id hu1mr12105640pbc.75.1330115295297
-	(num_hops = 1); Fri, 24 Feb 2012 12:28:15 -0800 (PST)
+	Fri, 24 Feb 2012 12:55:26 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.236.145.230 as permitted sender) client-ip=10.236.145.230; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.236.145.230 as
+	permitted sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.236.145.230])
+	by 10.236.145.230 with SMTP id p66mr7937224yhj.27.1330116926932
+	(num_hops = 1); Fri, 24 Feb 2012 12:55:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=sSZHHXf0F2biSUYGBMdNQZq7JYPxHiZMYyfZHRD3CGg=;
-	b=kYnMSgoVu5hV8q0IRfq4yQzHtUTUOB54KExyxBG/2byK80pmjkHZDfMAGLOH5+aYXi
-	1WaR+E8lSBJ+JoB6hCwW9ZTCFIWaZwFp61Y2slOezvsZU88srjrGirO6CuQXKF/VO6w0
-	WkzPIHS6XdM5tlVFxYDb3VSVS1EppZTede3oQ=
-Received: by 10.68.194.65 with SMTP id hu1mr10015991pbc.75.1330115295241;
-	Fri, 24 Feb 2012 12:28:15 -0800 (PST)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id q1sm5189845pbq.68.2012.02.24.12.28.14
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=aB0vvLKYwx1aw80OAgAgj5G3Kc/BYY9Jv149ZriMCkU=;
+	b=n1RpXvSDY8i4dweJFHpzp3IjOcHo/nQJGy0DsjgrFubZU05aokE5uZzmspd6YQNmYY
+	s31StGicQGMYyWWq84iiT9F4V+C06Fu3NEStKz7UHH7OhRT0NQbsJBPEtmb1jQGouQbM
+	/FKIFb6XxuPwv7DwJHrNT28r62u1tQi1HQXYg=
+Received: by 10.236.145.230 with SMTP id p66mr6015179yhj.27.1330116926830;
+	Fri, 24 Feb 2012 12:55:26 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id d66sm15203291yhh.12.2012.02.24.12.55.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Feb 2012 12:28:14 -0800 (PST)
-Date: Fri, 24 Feb 2012 13:28:17 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20120224202817.GC14969@bill-the-cat>
-References: <cover.1330097955.git.sledz@dresearch-fe.de>
-	<cec64cfd68283964f8b8310a09c98479f9df1aab.1330097955.git.sledz@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <cec64cfd68283964f8b8310a09c98479f9df1aab.1330097955.git.sledz@dresearch-fe.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 7/7] ltrace: switch from 0.5.3-2 to 0.5.3-2.1
+	Fri, 24 Feb 2012 12:55:26 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Feb 2012 20:55:15 +0000
+Message-Id: <cover.1330116875.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/2] Pending patches from O.S. Systems' tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,17 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 20:36:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Feb 2012 21:03:50 -0000
 
-On Fri, Feb 24, 2012 at 04:47:24PM +0100, Steffen Sledz wrote:
+The following changes since commit 2eaec194016ba357bb02db8859b2b3737d759865:
 
-> Version 0.5.3-2 is no longer fetchable.
+  meta-multimedia: initial add (2012-02-24 13:53:17 +0100)
 
-Same comment about snapshot.debian.org, thanks!
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (2):
+  openbox: add missing depends
+  systemd.bbclass: do not mangle PACKAGES variable in native, nativesdk
+    and cross
+
+ meta-oe/classes/systemd.bbclass                    |   72 ++++++++++----------
+ .../recipes-graphics/openbox/openbox_3.4.11.2.bb   |    3 +
+ 2 files changed, 39 insertions(+), 36 deletions(-)
 
 -- 
-Tom
+1.7.2.5
+
 
 
