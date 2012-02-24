@@ -1,47 +1,47 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S0pkV-00020h-M7
+	(envelope-from <raj.khem@gmail.com>) id 1S0qeO-0002nO-Qc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 08:39:27 +0100
-Received: by pbbrp12 with SMTP id rp12so363608pbb.6
+	Fri, 24 Feb 2012 09:37:13 +0100
+Received: by daln34 with SMTP id n34so1938210dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 23:31:04 -0800 (PST)
+	Fri, 24 Feb 2012 00:28:49 -0800 (PST)
 Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.68.208.136 as permitted sender) client-ip=10.68.208.136; 
+	10.68.74.74 as permitted sender) client-ip=10.68.74.74; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.68.208.136 as permitted sender)
+	designates 10.68.74.74 as permitted sender)
 	smtp.mail=raj.khem@gmail.com;
 	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.68.208.136])
-	by 10.68.208.136 with SMTP id me8mr4108498pbc.55.1330068664743
-	(num_hops = 1); Thu, 23 Feb 2012 23:31:04 -0800 (PST)
+Received: from mr.google.com ([10.68.74.74])
+	by 10.68.74.74 with SMTP id r10mr4631681pbv.83.1330072129837 (num_hops
+	= 1); Fri, 24 Feb 2012 00:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:mail-followup-to:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=PumzQz9XdFH+CNbYj1MS4ACBJIZd7CY38xYdS73YqS4=;
-	b=VYzuSRFbVrMWd6Vpl61agSqdwBh7pdBBe5Er1UgScRqoscu2MPyN50M9x3Iufom16c
-	r1gd1eG4XL7FKdytClVV6y3CrY4vg+8DbaX9+VIVXBwZUz8NGWJUUjJa+a4wQ9Z1IRhu
-	qc9Crz6NUC+UGWl6tDU7O8Qsyx8nD3eDSm4RE=
-Received: by 10.68.208.136 with SMTP id me8mr3396839pbc.55.1330068664592;
-	Thu, 23 Feb 2012 23:31:04 -0800 (PST)
+	:user-agent; bh=sJaZl3PoOu2SGR4B7SSsiyW39DEa0dDz9HcwQW8fykc=;
+	b=G2rLGu+nChIGmPRNRzXCb0G/uygKod72OPvl0e35V4q5kNCQJwKoq15IzBKvcdogXK
+	dQs1tGarD1TuY9f+4KM/FJv1l7e2nYqSe848NHRZKkO/fL6u9cXNZzBsITs7RzvXw/Y8
+	A5/nnx9jZvD0oyYkNGNWr3a/3iTBmZgokdWB4=
+Received: by 10.68.74.74 with SMTP id r10mr3859266pbv.83.1330072129595;
+	Fri, 24 Feb 2012 00:28:49 -0800 (PST)
 Received: from sakrah.homelinux.org
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id p8sm3649633pbs.51.2012.02.23.23.31.02
+	by mx.google.com with ESMTPS id r10sm3788242pbs.12.2012.02.24.00.28.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 23:31:03 -0800 (PST)
-Date: Thu, 23 Feb 2012 23:31:53 -0800
+	Fri, 24 Feb 2012 00:28:48 -0800 (PST)
+Date: Fri, 24 Feb 2012 00:29:39 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120224073153.GB2479@sakrah.homelinux.org>
+Message-ID: <20120224082939.GC2519@sakrah.homelinux.org>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1329828457-23375-1-git-send-email-noor_ahsan@mentor.com>
-	<CAMKF1sof5d-kmGrbEBqdheawFULL3YkEgpoRXv7+UFKYwxFOjQ@mail.gmail.com>
-	<365E1805BC95084CBE82381A0B869994050F1CF4@EU-MBX-03.mgc.mentorg.com>
+References: <1329940246-28769-1-git-send-email-msm@freescale.com>
+	<CAMKF1soS46XnYge0YoU5Zt+4tUX5SJKP=BhdHhn0CR+Hi9avjQ@mail.gmail.com>
+	<CAEsOVNcYjwCPq625HP3Oj5hswupj-qNnGCxKFmS2VCkYwpU_ZA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <365E1805BC95084CBE82381A0B869994050F1CF4@EU-MBX-03.mgc.mentorg.com>
+In-Reply-To: <CAEsOVNcYjwCPq625HP3Oj5hswupj-qNnGCxKFmS2VCkYwpU_ZA@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][PATCH] libedit: Adds version 20110802 (initial recipe)
+Subject: Re: [meta-oe] gcc-4_6-branch-linaro-backports.inc: allow GCC-4_6-BRANCH-LINARO-BACKPORTS to be overridden
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,37 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 07:39:27 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 08:37:13 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (22/02/12 07:15), Ahsan, Noor wrote:
-> Does this block my recipe to be accepted in meta-oe and by your comment below you are suggesting me to upstream that patch to libedit project?
-> 
-
-Well I am ok since it has something in there may be just change it to
-'Pending' so that if someone later wants to upstream this patch he gets
-a right message and it does not hurt to get patches run via upstream in
-any case.
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Wednesday, February 22, 2012 2:12 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] libedit: Adds version 20110802 (initial recipe)
-> 
-> On Tue, Feb 21, 2012 at 4:47 AM, Noor, Ahsan <noor_ahsan@mentor.com> wrote:
+On (23/02/12 01:43), McClintock Matthew-B29882 wrote:
+> On Wed, Feb 22, 2012 at 3:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Wed, Feb 22, 2012 at 11:50 AM, Matthew McClintock <msm@freescale.com> wrote:
+> >> This is useful when we want to include meta-oe as is, and also
+> >> want to modify the toolchain such that these patches don't apply
+> >> cleanly
 > >
-> > +Upstream-Status: Inappropriate [not author]
+> > I think the right thing to do is to spin this out into a layer of its
+> > own. which we discussed on another thread.
+> > if your intention is to just get non/oe-core overridden recipes from
+> > meta-oe. This patch not really incorrect
+> > but can be then avoided.
 > 
-> hmm thats interesting. We can still push patches upstream with proper
-> attribution to author.
-> therefore this may not be a reason to make it Inappropriate.
+> How can I avoid this? If I add the meta-oe layer and I'm using gcc-4.6
+> then these seem to always get pulled in via SRC_URI_append? Is there a
+> better work around here?
+
+Right now no unless we move it out into a layer of its own
+
 > 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> gcc-4.6.bbappend:
+> 
+> SRC_URI_append = " ${GCC-4_6-BRANCH-LINARO-BACKPORTS}"
+> 
+> -M
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
