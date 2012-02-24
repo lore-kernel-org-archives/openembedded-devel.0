@@ -1,43 +1,41 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0jRN-0000Tg-F1
+	(envelope-from <otavio.salvador@gmail.com>) id 1S0jjC-00015v-R0
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 01:55:17 +0100
-Received: by eaal10 with SMTP id l10so884499eaa.6
+	Fri, 24 Feb 2012 02:13:43 +0100
+Received: by daln34 with SMTP id n34so1634187dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.204.73 as permitted sender)
-	client-ip=10.14.204.73; 
+	Thu, 23 Feb 2012 17:05:19 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.68.217.42 as permitted sender) client-ip=10.68.217.42; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.204.73 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.204.73])
-	by 10.14.204.73 with SMTP id g49mr33607eeo.57.1330044415804 (num_hops =
-	1); Thu, 23 Feb 2012 16:46:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	otavio.salvador@gmail.com designates 10.68.217.42 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.68.217.42])
+	by 10.68.217.42 with SMTP id ov10mr1110478pbc.85.1330045519848
+	(num_hops = 1); Thu, 23 Feb 2012 17:05:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=e7DWk+6DD32xPVpacQ+26IUfcbBDRTFzxp7b+63mZyg=;
-	b=ehC+ZxMSXIBjew54Yl4jpC6UoGEu7vspqNmUYQM9m4jChajl62oMCdTg4itmzrqn0S
-	NjuqAajZK4SOY5ybgdLVUedG+5tl4GC8LmOsw07O5BUfrwsQ02XgaDDpznQtUcIiada1
-	AsCMx+Cw6hMN3dKYEYmNwcZ1tXldQtYpiTgQM=
-Received: by 10.14.204.73 with SMTP id g49mr21192eeo.57.1330044415684;
-	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
-Received: from localhost.localdomain (p5B0A23FB.dip.t-dialin.net.
-	[91.10.35.251])
-	by mx.google.com with ESMTPS id z47sm11578274eeh.9.2012.02.23.16.46.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 16:46:55 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 01:49:54 +0100
-Message-Id: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
+	bh=CXHGM7qZ8KH2W9x5PFMNYA611IRdkXvjhKmOujlHsec=;
+	b=Ecl2mvd7EJNqjc51unmkDZGdJ3aVH6TOjjYAHqktdORVNc59DWBaWvTprWv5BElM8E
+	3AZmyd5u4FtM5Sg9GneWWSVGZQBqbPEDiaePbizfItxxKl+L11T1Ktz3q2VHOfP/bfiw
+	auUUD7FIrNRTFEwzExDhxTIC6JdewmjtW3xII=
 MIME-Version: 1.0
-Subject: [meta-oe] dhcp: follow oe-core's update to 4.2.3-P2
+Received: by 10.68.217.42 with SMTP id ov10mr914476pbc.85.1330045519754; Thu,
+	23 Feb 2012 17:05:19 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.231.36 with HTTP; Thu, 23 Feb 2012 17:05:19 -0800 (PST)
+In-Reply-To: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1330044594-17032-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 23 Feb 2012 23:05:19 -0200
+X-Google-Sender-Auth: 8aYhE1odYBw_k2ZLE_lh2RUBe5k
+Message-ID: <CAP9ODKpDgFYKp+HvpMKsnbe=CLY9=ifY+8oVSa-5uWwnm2e6Tg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] dhcp: follow oe-core's update to 4.2.3-P2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +49,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 00:55:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 24 Feb 2012 01:13:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Feb 23, 2012 at 22:49, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
+> rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-connectivity/dhcp/{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} (100%)
+Change PRINC back to + 1 plz.
 
-diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
-similarity index 100%
-rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
-rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
--- 
-1.7.4.4
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
