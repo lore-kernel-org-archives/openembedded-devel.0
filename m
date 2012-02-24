@@ -1,44 +1,43 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S13hw-0003ey-VW
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S14nX-0005Jp-Is
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 23:33:45 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so1346543eek.6
+	Sat, 25 Feb 2012 00:43:35 +0100
+Received: by eaal10 with SMTP id l10so1368621eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 14:25:24 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.202.200 as permitted sender) client-ip=10.14.202.200; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.202.200 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.202.200])
-	by 10.14.202.200 with SMTP id d48mr2574782eeo.24.1330122324311
-	(num_hops = 1); Fri, 24 Feb 2012 14:25:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=6TVTzcP+jgKM0kodlxU/mqeRzfyNm/lRGAvAjPEFvgw=;
-	b=xnZwB09YTMCdHskTclEr1Dg6bp1rXaJuhj0sk4Lr9Gkp/rEJ1xfddlg3N+vg0t57VP
-	iARBnBMEV6EmNvYH6UXm3Ag0HB+SGffsc7ze+dsrtwzgwZ9TCcvWiRjRkUH3kZyhkx2P
-	hyvyugmr68F5TX3UW9fxFWoxqfKXuw3Z0HKyo=
-Received: by 10.14.202.200 with SMTP id d48mr1915771eeo.24.1330122324261;
-	Fri, 24 Feb 2012 14:25:24 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w60sm23253711eeb.4.2012.02.24.14.25.23
+	Fri, 24 Feb 2012 15:35:12 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.14.94.66 as permitted sender)
+	client-ip=10.14.94.66; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.14.94.66 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.14.94.66])
+	by 10.14.94.66 with SMTP id m42mr2558459eef.66.1330126512580 (num_hops
+	= 1); Fri, 24 Feb 2012 15:35:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=wAta/yjvN0Sio5nDZbBAadSrG3rwbANLaY0IOQanxUU=;
+	b=NeIZTzc2D9WA6Mo+ObaXH51N2JC3ghl1OsAINCzW+fOpyzars+YHui3owCc7l+V9Ct
+	wl+CMh4rjfgcMEeX5bkBNT1t/nIZHOstWTGCplLWW9CAnTB1qIEC9UQ5WmBK9tRu8FLZ
+	F11ZsPZwEF/YKINFKABAOJRMqPdAdLWN+QEcI=
+Received: by 10.14.94.66 with SMTP id m42mr1911683eef.66.1330126512420;
+	Fri, 24 Feb 2012 15:35:12 -0800 (PST)
+Received: from localhost.localdomain (p5B0A1464.dip.t-dialin.net.
+	[91.10.20.100])
+	by mx.google.com with ESMTPS id u11sm16588122eeb.1.2012.02.24.15.35.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Feb 2012 14:25:23 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 24 Feb 2012 15:35:11 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 23:24:42 +0100
-Message-Id: <a2a63c079259009a676d5614df9c619b60ff874a.1330122206.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <aa725d9f76cd10dbf229311041896507b0806039.1330122206.git.Martin.Jansa@gmail.com>
-References: <aa725d9f76cd10dbf229311041896507b0806039.1330122206.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1330122206.git.Martin.Jansa@gmail.com>
-References: <cover.1330122206.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] meta-oe: add mplayer-common to SIGGEN_EXCLUDERECIPES_ABISAFE
+Date: Sat, 25 Feb 2012 00:38:14 +0100
+Message-Id: <1330126696-4716-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-mozilla, v2 1/3] firefox-gen-l10n-recipes: INC_PR as PR for l10n-recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,29 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 22:33:45 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 23:43:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/conf/layer.conf |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
+ scripts/firefox-gen-l10n-recipes |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index cf13a71..7369df1 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -23,4 +23,8 @@ BBFILE_PATTERN_openembedded-layer := "^${LAYERDIR}/"
+diff --git a/scripts/firefox-gen-l10n-recipes b/scripts/firefox-gen-l10n-recipes
+index 435697b..65126a2 100755
+--- a/scripts/firefox-gen-l10n-recipes
++++ b/scripts/firefox-gen-l10n-recipes
+@@ -26,7 +26,7 @@ cat > firefox-l10n-${lang_code}_$1.bb <<EOF
  
- BBFILE_PRIORITY_openembedded-layer = "6"
+ require firefox-l10n.inc
  
--SIGGEN_EXCLUDERECIPES_ABISAFE += "pointercal-xinput systemd-serialgetty"
-+SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-+  pointercal-xinput \
-+  systemd-serialgetty \
-+  mplayer-common \
-+"
+-PR = "\${INC_PR}.1"
++PR = "\${INC_PR}"
+ 
+ SRC_URI[md5sum] = "$md5"
+ SRC_URI[sha256sum] = "$sha256"
 -- 
-1.7.8.4
+1.7.4.4
 
 
 
