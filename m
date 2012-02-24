@@ -1,19 +1,21 @@
 Received: from pd95cbf07.dip0.t-ipconnect.de ([217.92.191.7] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1S0xUv-0003yG-NC
+	(envelope-from <sledz@localhost.localdomain>) id 1S0xUy-0003yW-V1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 16:55:53 +0100
+	Fri, 24 Feb 2012 16:55:57 +0100
 Received: by localhost (Postfix, from userid 1000)
-	id 860EBC2CBB; Fri, 24 Feb 2012 16:47:30 +0100 (CET)
+	id C20B9C2CBB; Fri, 24 Feb 2012 16:47:33 +0100 (CET)
 From: Steffen Sledz <sledz@dresearch-fe.de>
 To: Tom Rini <tom.rini@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 16:47:18 +0100
-Message-Id: <c0d07af8a377e188decbae614de96fcf1e78af91.1330097955.git.sledz@dresearch-fe.de>
+Date: Fri, 24 Feb 2012 16:47:19 +0100
+Message-Id: <562d0d44a950d86ec19d98621d837e4a227db73a.1330097955.git.sledz@dresearch-fe.de>
 X-Mailer: git-send-email 1.7.7
+In-Reply-To: <c0d07af8a377e188decbae614de96fcf1e78af91.1330097955.git.sledz@dresearch-fe.de>
+References: <c0d07af8a377e188decbae614de96fcf1e78af91.1330097955.git.sledz@dresearch-fe.de>
 In-Reply-To: <cover.1330097955.git.sledz@dresearch-fe.de>
 References: <cover.1330097955.git.sledz@dresearch-fe.de>
-Subject: [2011.03-maintenance 1/7] net-snmp-5.7.1: fix build error "too few arguments to function 'nl_geterror'"
+Subject: [2011.03-maintenance 2/7] fakeroot-native: update to 1.14.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,114 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 15:55:53 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 15:55:57 -0000
 
-Fixes compile errors with libnl-1_2.0:
-| ...
-| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
-| mibII/tcpTable.c:579: error: too few arguments to function 'nl_geterror'
-| ...
-
-The patch was imported from the net-snmp bug tracker: current libnl 3.0 not
-supported - ID: 3250304 [1]
-
-[1] <http://sourceforge.net/tracker/index.php?func=detail&aid=3250304&group_id=12694&atid=112694>
+* version 1.9.6 is no longer fetchable
+* recipe for version 1.9.6 is not removed yet because of pinnings in
+  various distro configurations
 
 Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 ---
- .../net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch   |   65 ++++++++++++++++++++
- recipes/net-snmp/net-snmp_5.7.1.bb                 |    3 +-
- 2 files changed, 67 insertions(+), 1 deletions(-)
- create mode 100644 recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
+ recipes/fakeroot/fakeroot-native_1.14.5.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/fakeroot/fakeroot-native_1.14.5.bb
 
-diff --git a/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
+diff --git a/recipes/fakeroot/fakeroot-native_1.14.5.bb b/recipes/fakeroot/fakeroot-native_1.14.5.bb
 new file mode 100644
-index 0000000..0879e45
+index 0000000..bb57d84
 --- /dev/null
-+++ b/recipes/net-snmp/net-snmp-5.7.1/net-snmp-libnl.patch
-@@ -0,0 +1,65 @@
-+--- net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c.org	2011-03-27 22:39:13.428728506 +0200
-++++ net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c	2011-03-27 22:39:47.606956561 +0200
-+@@ -555,8 +555,9 @@
-+ static int
-+ tcpTable_load_netlink(void)
-+ {
-++	int err;
-+ 	/*  TODO: perhaps use permanent nl handle? */
-+-	struct nl_handle *nl = nl_handle_alloc();
-++	struct nl_sock *nl = nl_socket_alloc();
-+ 
-+ 	if (nl == NULL) {
-+ 		DEBUGMSGTL(("mibII/tcpTable", "Failed to allocate netlink handle\n"));
-+@@ -564,10 +565,10 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	if (nl_connect(nl, NETLINK_INET_DIAG) < 0) {
-+-		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror()));
-+-		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror());
-+-		nl_handle_destroy(nl);
-++	if ((err = nl_connect(nl, NETLINK_INET_DIAG)) < 0) {
-++		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror(err)));
-++		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror(err));
-++		nl_socket_free(nl);
-+ 		return -1;
-+ 	}
-+ 
-+@@ -579,10 +580,10 @@
-+ 	struct nl_msg *nm = nlmsg_alloc_simple(TCPDIAG_GETSOCK, NLM_F_ROOT|NLM_F_MATCH|NLM_F_REQUEST);
-+ 	nlmsg_append(nm, &req, sizeof(struct inet_diag_req), 0);
-+ 
-+-	if (nl_send_auto_complete(nl, nm) < 0) {
-+-		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror()));
-+-		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror());
-+-		nl_handle_destroy(nl);
-++	if ((err = nl_send_auto_complete(nl, nm)) < 0) {
-++		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror(err)));
-++		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror(err));
-++		nl_socket_free(nl);
-+ 		return -1;
-+ 	}
-+ 	nlmsg_free(nm);
-+@@ -593,9 +594,9 @@
-+ 
-+ 	while (running) {
-+ 		if ((len = nl_recv(nl, &peer, &buf, NULL)) <= 0) {
-+-			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror()));
-+-			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror());
-+-			nl_handle_destroy(nl);
-++			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror(len)));
-++			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror(len));
-++			nl_socket_free(nl);
-+ 			return -1;
-+ 		}
-+ 
-+@@ -644,7 +645,7 @@
-+ 		free(buf);
-+ 	}
-+ 
-+-	nl_handle_destroy(nl);
-++	nl_socket_free(nl);
-+ 
-+ 	if (tcp_head) {
-+ 		DEBUGMSGTL(("mibII/tcpTable", "Loaded TCP Table using netlink\n"));
-diff --git a/recipes/net-snmp/net-snmp_5.7.1.bb b/recipes/net-snmp/net-snmp_5.7.1.bb
-index 08571e9..655d7be 100644
---- a/recipes/net-snmp/net-snmp_5.7.1.bb
-+++ b/recipes/net-snmp/net-snmp_5.7.1.bb
-@@ -1,10 +1,11 @@
- require net-snmp.inc
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
- 
- DEFAULT_PREFERENCE = "1"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-+        file://net-snmp-libnl.patch \
-         file://init \
-         file://snmpd.conf \
-         file://snmptrapd.conf"
++++ b/recipes/fakeroot/fakeroot-native_1.14.5.bb
+@@ -0,0 +1,23 @@
++require fakeroot_${PV}.bb
++
++RDEPENDS_${PN} = "util-linux-native"
++
++SRC_URI += "file://fix-prefix.patch "
++S = "${WORKDIR}/fakeroot-${PV}"
++
++inherit native
++
++EXTRA_OECONF = " --program-prefix="
++
++# Compatability for the rare systems not using or having SYSV
++python () {
++    if bb.data.getVar('HOST_NONSYSV', d, True) and bb.data.getVar('HOST_NONSYSV', d, True) != '0':
++        bb.data.setVar('EXTRA_OECONF', ' --with-ipc=tcp --program-prefix= ', d)
++}
++
++do_stage_append () {
++    oe_libinstall -so libfakeroot ${STAGING_LIBDIR}/libfakeroot/
++}
++
++SRC_URI[md5sum] = "659a1f3a36554abfc2a3eaad2fdc0604"
++SRC_URI[sha256sum] = "b035c834944bf9482027f48c388de8492e96609825265ac03f05408d0b3aae68"
 -- 
 1.7.7
 
