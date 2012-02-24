@@ -1,39 +1,41 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0wSi-0002cM-1q
+	(envelope-from <otavio.salvador@gmail.com>) id 1S0xA5-0003VU-7u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 15:49:32 +0100
-Received: by bkwq11 with SMTP id q11so2167194bkw.6
+	Fri, 24 Feb 2012 16:34:21 +0100
+Received: by vcbfl15 with SMTP id fl15so348932vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 06:41:09 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.112.29.34 as permitted sender)
-	client-ip=10.112.29.34; 
+	Fri, 24 Feb 2012 07:25:58 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.52.99.231 as permitted sender) client-ip=10.52.99.231; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.112.29.34 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.112.29.34])
-	by 10.112.29.34 with SMTP id g2mr1102782lbh.40.1330094469453 (num_hops
-	= 1); Fri, 24 Feb 2012 06:41:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=YVZOFpE0hiTDcv5tyArmURDtDYHUP88UrgwuKQpBCr4=;
-	b=RQgtQIAob7+6WJDpaKNxwbEwFYmi6RFpSpwCimfS6M19HMsP7n33m71L6B4jUjSn+i
-	GRQNdrkRlZu/Ul2/fxVKpVRiyj1k5nXj6p5H5h2T5Sg3nVueFYTsGb/gEW+yUsxghspO
-	o9JQMCpEAYqIpFOZGDm8fQARRaCikLcDehm+Q=
+	otavio.salvador@gmail.com designates 10.52.99.231 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.52.99.231])
+	by 10.52.99.231 with SMTP id et7mr1404527vdb.114.1330097158140
+	(num_hops = 1); Fri, 24 Feb 2012 07:25:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=J63BepMPoofY5La8JnoD6Bt92ImRV/XCH4e8+IeWINw=;
+	b=RPJXXqxCLkesqB6acJAftrnIT/ViFU4RY6OCNzhHSwCdhb3NTxkf1jChWCY0SvtpEC
+	eT2zZYvlsfwR4z5pR2wiOji90Pm3Vtqcar8PTehzYCo/nrWa9O3f5HnQhUQFp5gBRWRB
+	iQUP9bwh9DxuTYMoUvApcnPpZvQAvRNbp0/0E=
 MIME-Version: 1.0
-Received: by 10.112.29.34 with SMTP id g2mr908744lbh.40.1330094468139; Fri, 24
-	Feb 2012 06:41:08 -0800 (PST)
-Received: by 10.112.29.74 with HTTP; Fri, 24 Feb 2012 06:41:08 -0800 (PST)
-In-Reply-To: <20120224122806.GI3769@jama.jama.net>
+Received: by 10.52.99.231 with SMTP id et7mr1123601vdb.114.1330097157747; Fri,
+	24 Feb 2012 07:25:57 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.203.74 with HTTP; Fri, 24 Feb 2012 07:25:57 -0800 (PST)
+In-Reply-To: <CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
 References: <1330084384-1267-1-git-send-email-schnitzeltony@googlemail.com>
 	<20120224122806.GI3769@jama.jama.net>
-Date: Fri, 24 Feb 2012 15:41:08 +0100
-Message-ID: <CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	<CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
+Date: Fri, 24 Feb 2012 13:25:57 -0200
+X-Google-Sender-Auth: Qqoxook_Ii_rZ-fQJMd7qToE4EE
+Message-ID: <CAP9ODKpk1HbWZx8zxpDAxJ7wFei0mMHhzYJbUoMC+YEhyB7-MQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-mozilla 1/2] firefox: change URI to fetchable ftp / bump to 10.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -49,40 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 14:49:32 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 15:34:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 24, 2012 at 1:28 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Fri, Feb 24, 2012 at 12:53:03PM +0100, Andreas M=FCller wrote:
->> build tested from scratch
->>
->> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->> ---
->> =A0...l10n-af_10.0.1.bb =3D> firefox-l10n-af_10.0.2.bb} | =A0 =A04 ++--
->> =A0...l10n-ak_10.0.1.bb =3D> firefox-l10n-ak_10.0.2.bb} | =A0 =A04 ++--
->> =A0...l10n-ar_10.0.1.bb =3D> firefox-l10n-ar_10.0.2.bb} | =A0 =A04 ++--
->> =A0...l10n-as_10.0.1.bb =3D> firefox-l10n-as_10.0.2.bb} | =A0 =A04 ++--
->> =A0.../firefox-l10n/firefox-l10n-ast_10.0.1.bb =A0 =A0 =A0 =A0| =A0 =A09=
- ---------
->> =A0.../firefox-l10n/firefox-l10n-ast_10.0.2.bb =A0 =A0 =A0 =A0| =A0 =A09=
- +++++++++
->
-> Interesting that it detected rename in first 4 locales and then the rest
-> is add/del, but otherwise look ok.
->
-> Please reset those PR in those locale files to ${INC_PR}.0.
->
-> Cheers,
->
-Ehm I did not create them: I let the very nice script in /scripts do
-that - a bit off topic: I already started to create such a script
-before I saw it is already there :( So Otavio what was your intention
-on starting at ${INC_PR}.1?
+On Fri, Feb 24, 2012 at 12:41, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> Ehm I did not create them: I let the very nice script in /scripts do
+> that - a bit off topic: I already started to create such a script
+> before I saw it is already there :( So Otavio what was your intention
+> on starting at ${INC_PR}.1?
 
-Cheers
+In fact no; my fault ;-)
 
-Andreas
+You can fix this as well ...
+
+If you have a github account you can queue a pull request otherwise
+just send the patches here and I grab them.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
