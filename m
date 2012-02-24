@@ -1,44 +1,41 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0ovi-0000oY-0r
+	(envelope-from <martin.jansa@gmail.com>) id 1S0p9a-0001Oj-JG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 07:46:58 +0100
-Received: by eaal10 with SMTP id l10so972065eaa.6
+	Fri, 24 Feb 2012 08:01:18 +0100
+Received: by eekd41 with SMTP id d41so968643eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 22:38:35 -0800 (PST)
+	Thu, 23 Feb 2012 22:52:56 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.95.141 as permitted sender) client-ip=10.14.95.141; 
+	10.14.202.200 as permitted sender) client-ip=10.14.202.200; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.95.141 as permitted sender)
+	designates 10.14.202.200 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.95.141])
-	by 10.14.95.141 with SMTP id p13mr610743eef.73.1330065515853 (num_hops
-	= 1); Thu, 23 Feb 2012 22:38:35 -0800 (PST)
+Received: from mr.google.com ([10.14.202.200])
+	by 10.14.202.200 with SMTP id d48mr683502eeo.24.1330066376618 (num_hops
+	= 1); Thu, 23 Feb 2012 22:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hjYnAlmj6mES41aH7qFRz/9lrZhGB3k9FI2ANcOmYrU=;
-	b=U5xeof9hZu2P/ol4xro+X7nQez6rFqlPWJ+7P4LEYpf9zmhKGJiPBPoW7eTwBySLic
-	q4ZOb3Fo51cSrCH/uvyVEaE/jK05lxIulO/TktwkCusdYE1ypEgw9adN8DV9qvevr76M
-	LFFdi/oyJ6L5rrU/0erQkswAdvF85Eln0MP4o=
-Received: by 10.14.95.141 with SMTP id p13mr454691eef.73.1330065515742;
-	Thu, 23 Feb 2012 22:38:35 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=esliUKyH1vrNnwCVjXmkbKNpHwlfGB85Tdg5+X62Yz8=;
+	b=xdOFA2lKFauwtSYb0aW7HFdI1h5KL2i7IgJ3wGApD+SKywaZ+c936Q0gm8eNCeV/os
+	qxdt5DK/s0/p7FjfxO5/z+0WztJpQuFRxNqTTYG4Cq2n5ZgDIXXVZzNNEKX7+LOftV+I
+	yzI6zLJu2Pb6R5AYeGa5gEOByOp6CKgLmyLnI=
+Received: by 10.14.202.200 with SMTP id d48mr510040eeo.24.1330066376512;
+	Thu, 23 Feb 2012 22:52:56 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id s48sm14661257eem.0.2012.02.23.22.38.33
+	by mx.google.com with ESMTPS id u9sm14687740eem.11.2012.02.23.22.52.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 22:38:34 -0800 (PST)
-Date: Fri, 24 Feb 2012 07:38:32 +0100
+	Thu, 23 Feb 2012 22:52:55 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120224063832.GF3769@jama.jama.net>
-References: <1315576997-18349-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAEsOVNc5A2dwjKpnu2X0cbXu+_+UXfhNFHBAQE4+QWbZ_wiCVA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAEsOVNc5A2dwjKpnu2X0cbXu+_+UXfhNFHBAQE4+QWbZ_wiCVA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] udev-173: use tar.gz instead of git checkout
+Date: Fri, 24 Feb 2012 07:52:46 +0100
+Message-Id: <cover.1330066140.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+In-Reply-To: <cover.1330041429.git.Martin.Jansa@gmail.com>
+References: <cover.1330041429.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 0/4] Small updates for sstate, added fix for kmod build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,76 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 06:46:58 -0000
-X-Groupsio-MsgNum: 37426
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3y/CVJp2vtgPOhvS"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Feb 2012 07:01:18 -0000
 
---3y/CVJp2vtgPOhvS
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+First 3 are the same, not resend
 
-On Fri, Feb 24, 2012 at 04:27:42AM +0000, McClintock Matthew-B29882 wrote:
-> On Fri, Sep 9, 2011 at 9:03 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> > * today it's easier to find right tar.gz stored somewhere then working =
-git.kernel.org
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> > =A0meta-oe/recipes-core/udev/udev_173.bb | =A0 =A09 ++++-----
-> > =A01 files changed, 4 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-co=
-re/udev/udev_173.bb
-> > index e1383d3..df39d42 100644
-> > --- a/meta-oe/recipes-core/udev/udev_173.bb
-> > +++ b/meta-oe/recipes-core/udev/udev_173.bb
-> > @@ -16,11 +16,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D75141926=
-0aa954499f7abaabaa882bbe \
-> > =A0# Needed for udev-extras
-> > =A0DEPENDS =3D "gperf-native usbutils acl glib-2.0"
-> >
-> > -SRCREV =3D "${PV}"
-> > =A0PR =3D "r0"
-> >
-> > =A0# version specific SRC_URI
-> > -SRC_URI =3D "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;proto=
-col=3Dgit \
-> > +SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}=
-=2Etar.gz \
->=20
-> This tarball is no longer availabe... did they pull
-> 'http://kernel.org/pub/linux/utils/kernel/hotplug/udev-173.tar.gz' for
-> some reason?
+Added small fix to disable man in kmod because we don't have working xsltproc
 
-I don't know.. I'm using 181 now..
+The following changes since commit 3c50d83184d58eba36f72c7e2e7116d2a8e92a71:
 
-Cheers,
+  toscoterm: add (2012-02-23 17:57:04 +0100)
 
->=20
-> -M
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Martin Jansa (4):
+  mysql5: PR bump after including *_config in default SSTATE_SCAN_FILES
+  meta-oe: include pointercal-xinput in SIGGEN_EXCLUDERECIPES_ABISAFE
+  meta-oe: include systemd-serialgetty in SIGGEN_EXCLUDERECIPES_ABISAFE
+  kmod: disable man pages generation because we don't have working
+    xsltproc
 
---3y/CVJp2vtgPOhvS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ meta-oe/conf/layer.conf                            |    2 +
+ ...-man-page-generation-because-we-don-t-hav.patch |   26 ++++++++++++++++++++
+ meta-oe/recipes-kernel/kmod/kmod_git.bb            |    6 +++-
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc    |    2 +-
+ 4 files changed, 33 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+-- 
+1.7.8.4
 
-iEYEARECAAYFAk9HMGgACgkQN1Ujt2V2gBwkIACdHgzOiGnUABKVXlgNJE/ypGg8
-F/cAoLRGlX3hU/EgZUMrussj5IUXET1l
-=89sQ
------END PGP SIGNATURE-----
 
---3y/CVJp2vtgPOhvS--
+
