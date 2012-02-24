@@ -1,44 +1,47 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S0p9m-0001Oj-ES
+	(envelope-from <raj.khem@gmail.com>) id 1S0pkV-00020h-M7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 08:01:30 +0100
-Received: by mail-ee0-f47.google.com with SMTP id d41so968643eek.6
+	Fri, 24 Feb 2012 08:39:27 +0100
+Received: by pbbrp12 with SMTP id rp12so363608pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 22:53:10 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.14.28.205 as permitted sender) client-ip=10.14.28.205; 
+	Thu, 23 Feb 2012 23:31:04 -0800 (PST)
+Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
+	10.68.208.136 as permitted sender) client-ip=10.68.208.136; 
 Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.14.28.205 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.14.28.205])
-	by 10.14.28.205 with SMTP id g53mr581900eea.130.1330066390551 (num_hops
-	= 1); Thu, 23 Feb 2012 22:53:10 -0800 (PST)
+	spf=pass (google.com: domain of raj.khem@gmail.com
+	designates 10.68.208.136 as permitted sender)
+	smtp.mail=raj.khem@gmail.com;
+	dkim=pass header.i=raj.khem@gmail.com
+Received: from mr.google.com ([10.68.208.136])
+	by 10.68.208.136 with SMTP id me8mr4108498pbc.55.1330068664743
+	(num_hops = 1); Thu, 23 Feb 2012 23:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=fFX8Q/7tBuGXOKVpXA155s2FNG8oP0I+vfU2k8dMWws=;
-	b=jZSNJ3WhgXzz23HC82ig4BQ1N8XxdSQCLGklLQeOWTaYpz9EJC1whhB/jileurklPb
-	xmqRcA1zuFZQq6akKqqLIPqEGp6Rc3AerT37hHxTCrYFxFyyIreAhgBeGwwTq/rlb8bv
-	3kakW1KLpdCU4ARQ4cbzcJTyP52X0PZbwsIdg=
-Received: by 10.14.28.205 with SMTP id g53mr441389eea.130.1330066390477;
-	Thu, 23 Feb 2012 22:53:10 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm14730180eeb.7.2012.02.23.22.53.09
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=PumzQz9XdFH+CNbYj1MS4ACBJIZd7CY38xYdS73YqS4=;
+	b=VYzuSRFbVrMWd6Vpl61agSqdwBh7pdBBe5Er1UgScRqoscu2MPyN50M9x3Iufom16c
+	r1gd1eG4XL7FKdytClVV6y3CrY4vg+8DbaX9+VIVXBwZUz8NGWJUUjJa+a4wQ9Z1IRhu
+	qc9Crz6NUC+UGWl6tDU7O8Qsyx8nD3eDSm4RE=
+Received: by 10.68.208.136 with SMTP id me8mr3396839pbc.55.1330068664592;
+	Thu, 23 Feb 2012 23:31:04 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id p8sm3649633pbs.51.2012.02.23.23.31.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 22:53:09 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 23 Feb 2012 23:31:03 -0800 (PST)
+Date: Thu, 23 Feb 2012 23:31:53 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 07:53:00 +0100
-Message-Id: <41737570e153add481d7f7008fb1e070d1f63a37.1330066140.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <cover.1330041429.git.Martin.Jansa@gmail.com>
-References: <cover.1330041429.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1330066140.git.Martin.Jansa@gmail.com>
-References: <cover.1330066140.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] kmod: disable man pages generation because we don't have working xsltproc
+Message-ID: <20120224073153.GB2479@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1329828457-23375-1-git-send-email-noor_ahsan@mentor.com>
+	<CAMKF1sof5d-kmGrbEBqdheawFULL3YkEgpoRXv7+UFKYwxFOjQ@mail.gmail.com>
+	<365E1805BC95084CBE82381A0B869994050F1CF4@EU-MBX-03.mgc.mentorg.com>
+MIME-Version: 1.0
+In-Reply-To: <365E1805BC95084CBE82381A0B869994050F1CF4@EU-MBX-03.mgc.mentorg.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][PATCH] libedit: Adds version 20110802 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,71 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 07:01:30 -0000
+X-List-Received-Date: Fri, 24 Feb 2012 07:39:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...-man-page-generation-because-we-don-t-hav.patch |   26 ++++++++++++++++++++
- meta-oe/recipes-kernel/kmod/kmod_git.bb            |    6 +++-
- 2 files changed, 30 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
+On (22/02/12 07:15), Ahsan, Noor wrote:
+> Does this block my recipe to be accepted in meta-oe and by your comment below you are suggesting me to upstream that patch to libedit project?
+> 
 
-diff --git a/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch b/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
-new file mode 100644
-index 0000000..5361b84
---- /dev/null
-+++ b/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
-@@ -0,0 +1,26 @@
-+From ce6f0cabb65e67dd4d31e1e555db8bc6eaf435d3 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Fri, 24 Feb 2012 07:35:38 +0100
-+Subject: [PATCH] man: disable man page generation because we don't have
-+ working xsltproc
-+
-+Upstream-Status: Inappropriate [build system specific change]
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ Makefile.am |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 141c102..a8bdfd1 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1,4 +1,4 @@
-+-SUBDIRS = . libkmod/docs man
-++SUBDIRS = . libkmod/docs
-+ 
-+ DISTCLEAN_LOCAL_HOOKS =
-+ EXTRA_DIST =
-+-- 
-+1.7.8.4
-+
-diff --git a/meta-oe/recipes-kernel/kmod/kmod_git.bb b/meta-oe/recipes-kernel/kmod/kmod_git.bb
-index 14c59a3..c382ffc 100644
---- a/meta-oe/recipes-kernel/kmod/kmod_git.bb
-+++ b/meta-oe/recipes-kernel/kmod/kmod_git.bb
-@@ -3,13 +3,15 @@ DESCRIPTION = "kmod - handle kernel modules"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit autotools gitpkgv
- 
- PKGV = "${GITPKGVTAG}"
- SRCREV = "80e54cb675d08f4f81b093a1919465ea86110a3b"
--SRC_URI = "git://git.profusion.mobi/kmod.git"
-+SRC_URI = "git://git.profusion.mobi/kmod.git \
-+           file://0001-man-disable-man-page-generation-because-we-don-t-hav.patch \
-+"
- 
- S = "${WORKDIR}/git"
- 
+Well I am ok since it has something in there may be just change it to
+'Pending' so that if someone later wants to upstream this patch he gets
+a right message and it does not hurt to get patches run via upstream in
+any case.
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+> Sent: Wednesday, February 22, 2012 2:12 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] libedit: Adds version 20110802 (initial recipe)
+> 
+> On Tue, Feb 21, 2012 at 4:47 AM, Noor, Ahsan <noor_ahsan@mentor.com> wrote:
+> >
+> > +Upstream-Status: Inappropriate [not author]
+> 
+> hmm thats interesting. We can still push patches upstream with proper
+> attribution to author.
+> therefore this may not be a reason to make it Inappropriate.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 -- 
-1.7.8.4
-
+-Khem
 
 
