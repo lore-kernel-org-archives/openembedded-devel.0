@@ -1,43 +1,50 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
+	helo=VA3EHSOBE008.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S0joV-0001Bz-Um
+	(envelope-from <B29882@freescale.com>) id 1S0mt7-0003zM-9R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 02:19:11 +0100
-Received: by eekd41 with SMTP id d41so881479eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2012 17:10:50 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.213.21.142 as permitted sender)
-	client-ip=10.213.21.142; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.213.21.142 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.213.21.142])
-	by 10.213.21.142 with SMTP id j14mr49982ebb.53.1330045850095 (num_hops
-	= 1); Thu, 23 Feb 2012 17:10:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=EG4gu5Rnv5xbuEMUy5S5HS05O7Q6klk22v0odg7KIck=;
-	b=nJPo6bhwKv5excXPQOb6cIGmkkPG6ZxGdlwPQ3RJxdlaxKZ4MJlckp0hGuWgI3Gl1x
-	u5lqcn3WqdpycWusjPEW5BIFyR6KqVjOYABaGr5E76GUPtAtN6g3nF94enyQzvc9K9w/
-	IjxOZPvJKOBpc4SNVa5TBvU8m33u9HXPl0sQY=
-Received: by 10.213.21.142 with SMTP id j14mr35375ebb.53.1330045849994;
-	Thu, 23 Feb 2012 17:10:49 -0800 (PST)
-Received: from localhost.localdomain (p5B0A23FB.dip.t-dialin.net.
-	[91.10.35.251])
-	by mx.google.com with ESMTPS id v51sm11847840eef.2.2012.02.23.17.10.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Feb 2012 17:10:49 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2012 02:13:49 +0100
-Message-Id: <1330046029-8749-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
+	Fri, 24 Feb 2012 05:36:09 +0100
+Received: from mail99-va3-R.bigfish.com (10.7.14.253) by
+	VA3EHSOBE008.bigfish.com (10.7.40.28) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 24 Feb 2012 04:27:46 +0000
+Received: from mail99-va3 (localhost [127.0.0.1])	by mail99-va3-R.bigfish.com
+	(Postfix) with ESMTP id 5DFF56049A	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Feb 2012 04:27:46 +0000 (UTC)
+X-SpamScore: -7
+X-BigFish: VS-7(zz9371I1432N98dKzz1202hzz8275bh8275dhz2dh2a8h668h839h8e2h8e3hbe9k)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail99-va3 (localhost.localdomain [127.0.0.1]) by mail99-va3
+	(MessageSwitch) id 1330057664143434_28574;
+	Fri, 24 Feb 2012 04:27:44 +0000 (UTC)
+Received: from VA3EHSMHS020.bigfish.com (unknown [10.7.14.238])	by
+	mail99-va3.bigfish.com (Postfix) with ESMTP id 1DB8F20048	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Feb 2012 04:27:44 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS020.bigfish.com
+	(10.7.99.30) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 24 Feb 2012 04:27:43 +0000
+Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.244]) by
+	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
+	14.01.0355.003; Thu, 23 Feb 2012 22:27:43 -0600
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] udev-173: use tar.gz instead of git
+	checkout
+Thread-Index: AQHM8qymM+LzgvaCJ06ZIv86vrjxRg==
+Date: Fri, 24 Feb 2012 04:27:42 +0000
+Message-ID: <CAEsOVNc5A2dwjKpnu2X0cbXu+_+UXfhNFHBAQE4+QWbZ_wiCVA@mail.gmail.com>
+References: <1315576997-18349-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1315576997-18349-1-git-send-email-Martin.Jansa@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [99.47.177.27]
 MIME-Version: 1.0
-Subject: [meta-oe V2] dhcp: follow oe-core's update to 4.2.3-P2
+X-OriginatorOrg: freescale.com
+Subject: Re: [meta-oe][PATCH] udev-173: use tar.gz instead of git checkout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 01:19:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 24 Feb 2012 04:36:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <4067C9E700C6874790A4C20796518ED1@mgd.freescale.com>
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Sep 9, 2011 at 9:03 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> * today it's easier to find right tar.gz stored somewhere then working gi=
+t.kernel.org
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+> =A0meta-oe/recipes-core/udev/udev_173.bb | =A0 =A09 ++++-----
+> =A01 files changed, 4 insertions(+), 5 deletions(-)
+>
+> diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core=
+/udev/udev_173.bb
+> index e1383d3..df39d42 100644
+> --- a/meta-oe/recipes-core/udev/udev_173.bb
+> +++ b/meta-oe/recipes-core/udev/udev_173.bb
+> @@ -16,11 +16,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260a=
+a954499f7abaabaa882bbe \
+> =A0# Needed for udev-extras
+> =A0DEPENDS =3D "gperf-native usbutils acl glib-2.0"
+>
+> -SRCREV =3D "${PV}"
+> =A0PR =3D "r0"
+>
+> =A0# version specific SRC_URI
+> -SRC_URI =3D "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protoco=
+l=3Dgit \
+> +SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.t=
+ar.gz \
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
- rename meta-oe/recipes-connectivity/dhcp/{dhcp_4.2.0.bbappend => dhcp_4.2.3-P2.bbappend} (91%)
+This tarball is no longer availabe... did they pull
+'http://kernel.org/pub/linux/utils/kernel/hotplug/udev-173.tar.gz' for
+some reason?
 
-diff --git a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
-similarity index 91%
-rename from meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
-rename to meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
-index 6d1e3df..edd44c1 100644
---- a/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.0.bbappend
-+++ b/meta-oe/recipes-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
-@@ -3,7 +3,7 @@ FILESEXTRAPATHS := "${THISDIR}/files"
- 
- inherit systemd
- 
--PRINC := "${@int(PRINC) + 3}"
-+PRINC := "${@int(PRINC) + 1}"
- 
- SYSTEMD_PACKAGES = "dhcp-server-systemd dhcp-relay-systemd"
- SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
--- 
-1.7.4.4
+-M=
 
 
 
