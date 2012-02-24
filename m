@@ -1,47 +1,44 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S0qeO-0002nO-Qc
+	(envelope-from <martin.jansa@gmail.com>) id 1S0rv5-0006GJ-70
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 09:37:13 +0100
-Received: by daln34 with SMTP id n34so1938210dal.6
+	Fri, 24 Feb 2012 10:58:31 +0100
+Received: by eekd41 with SMTP id d41so1027389eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 00:28:49 -0800 (PST)
-Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.68.74.74 as permitted sender) client-ip=10.68.74.74; 
+	Fri, 24 Feb 2012 01:50:08 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.94.66 as permitted sender) client-ip=10.14.94.66; 
 Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.68.74.74 as permitted sender)
-	smtp.mail=raj.khem@gmail.com;
-	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.68.74.74])
-	by 10.68.74.74 with SMTP id r10mr4631681pbv.83.1330072129837 (num_hops
-	= 1); Fri, 24 Feb 2012 00:28:49 -0800 (PST)
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.94.66 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.94.66])
+	by 10.14.94.66 with SMTP id m42mr990486eef.66.1330077008944 (num_hops =
+	1); Fri, 24 Feb 2012 01:50:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=sJaZl3PoOu2SGR4B7SSsiyW39DEa0dDz9HcwQW8fykc=;
-	b=G2rLGu+nChIGmPRNRzXCb0G/uygKod72OPvl0e35V4q5kNCQJwKoq15IzBKvcdogXK
-	dQs1tGarD1TuY9f+4KM/FJv1l7e2nYqSe848NHRZKkO/fL6u9cXNZzBsITs7RzvXw/Y8
-	A5/nnx9jZvD0oyYkNGNWr3a/3iTBmZgokdWB4=
-Received: by 10.68.74.74 with SMTP id r10mr3859266pbv.83.1330072129595;
-	Fri, 24 Feb 2012 00:28:49 -0800 (PST)
-Received: from sakrah.homelinux.org
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id r10sm3788242pbs.12.2012.02.24.00.28.48
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=NVimFwt+//SvPTBPAwETec5CQZEKBqPF3v7hsPnUhr4=;
+	b=rvl90T9OkeJEjFLhzZ69LE/H+a/dPXQ6kLgQCOm4rG03MYXtuBg6aPuPosD6mHMExA
+	5Jkb6ov2ERgBXiq25OVCs8qgta+Gvrn/gzMKAsFZ2PIBQfJ+bCSx9fu6XDuNqKUZsFAr
+	hpw67jZz4obdxOKzNzxkShYAz54lJX0BlzhDQ=
+Received: by 10.14.94.66 with SMTP id m42mr752137eef.66.1330077008850;
+	Fri, 24 Feb 2012 01:50:08 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id u11sm8990258eeb.1.2012.02.24.01.50.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Feb 2012 00:28:48 -0800 (PST)
-Date: Fri, 24 Feb 2012 00:29:39 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 24 Feb 2012 01:50:07 -0800 (PST)
+Date: Fri, 24 Feb 2012 10:50:05 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120224082939.GC2519@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1329940246-28769-1-git-send-email-msm@freescale.com>
-	<CAMKF1soS46XnYge0YoU5Zt+4tUX5SJKP=BhdHhn0CR+Hi9avjQ@mail.gmail.com>
-	<CAEsOVNcYjwCPq625HP3Oj5hswupj-qNnGCxKFmS2VCkYwpU_ZA@mail.gmail.com>
+Message-ID: <20120224095005.GG3769@jama.jama.net>
+References: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <CAEsOVNcYjwCPq625HP3Oj5hswupj-qNnGCxKFmS2VCkYwpU_ZA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe] gcc-4_6-branch-linaro-backports.inc: allow GCC-4_6-BRANCH-LINARO-BACKPORTS to be overridden
+In-Reply-To: <1328705404-24406-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe] systemd: split out libraries from ${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,42 +52,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 08:37:13 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 24 Feb 2012 09:58:31 -0000
+X-Groupsio-MsgNum: 37431
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zgr1mbP1ee4HJQ5m"
 Content-Disposition: inline
 
-On (23/02/12 01:43), McClintock Matthew-B29882 wrote:
-> On Wed, Feb 22, 2012 at 3:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Wed, Feb 22, 2012 at 11:50 AM, Matthew McClintock <msm@freescale.com> wrote:
-> >> This is useful when we want to include meta-oe as is, and also
-> >> want to modify the toolchain such that these patches don't apply
-> >> cleanly
-> >
-> > I think the right thing to do is to spin this out into a layer of its
-> > own. which we discussed on another thread.
-> > if your intention is to just get non/oe-core overridden recipes from
-> > meta-oe. This patch not really incorrect
-> > but can be then avoided.
-> 
-> How can I avoid this? If I add the meta-oe layer and I'm using gcc-4.6
-> then these seem to always get pulled in via SRC_URI_append? Is there a
-> better work around here?
+--zgr1mbP1ee4HJQ5m
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Right now no unless we move it out into a layer of its own
+On Wed, Feb 08, 2012 at 01:50:04PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-> 
-> gcc-4.6.bbappend:
-> 
-> SRC_URI_append = " ${GCC-4_6-BRANCH-LINARO-BACKPORTS}"
-> 
-> -M
-> 
+I'm using this for some time in meta-oe-contrib/shr
+
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+> ---
+>  meta-oe/recipes-core/systemd/systemd_git.bb |   14 ++++++++++++--
+>  1 files changed, 12 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipe=
+s-core/systemd/systemd_git.bb
+> index c1a0117..4c458bd 100644
+> --- a/meta-oe/recipes-core/systemd/systemd_git.bb
+> +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+> @@ -14,7 +14,7 @@ inherit gitpkgv
+>  PKGV =3D "v${GITPKGVTAG}"
+> =20
+>  PV =3D "git"
+> -PR =3D "r15"
+> +PR =3D "r16"
+> =20
+>  inherit useradd pkgconfig autotools vala perlnative
+> =20
+> @@ -59,6 +59,11 @@ do_install() {
+>  	ln -s ${base_bindir}/systemd ${D}/init
+>  }
+> =20
+> +python populate_packages_prepend (){
+> +	systemdlibdir =3D d.getVar("base_libdir", True)
+> +	do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'System=
+d %s library', extra_depends=3D'', allow_links=3DTrue)
+> +}
+> +
+>  PACKAGES =3D+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-anal=
+yze"
+> =20
+>  USERADD_PACKAGES =3D "${PN}"
+> @@ -79,7 +84,7 @@ FILES_${PN}-vconsole-setup =3D "${base_libdir}/systemd/=
+systemd-vconsole-setup \
+> =20
+>  RRECOMMENDS_$PN}-vconsole-setup =3D "kbd kbd-consolefonts"
+> =20
+> -FILES_${PN} +=3D " ${base_bindir}/* \
+> +FILES_${PN} =3D " ${base_bindir}/* \
+>                  ${datadir}/dbus-1/services \
+>                  ${datadir}/dbus-1/system-services \
+>                  ${datadir}/polkit-1 \
+> @@ -93,6 +98,11 @@ FILES_${PN} +=3D " ${base_bindir}/* \
+>                  ${bindir}/systemd* \
+>                  ${libdir}/tmpfiles.d/*.conf \
+>                  ${libdir}/systemd \
+> +                ${libdir}/binfmt.d \
+> +                ${libdir}/modules-load.d \
+> +                ${libdir}/sysctl.d \
+> +                ${localstatedir} \
+> +                ${libexecdir} \
+>                 "
+> =20
+>  FILES_${PN}-dbg +=3D "${base_libdir}/systemd/.debug ${base_libdir}/syste=
+md/*/.debug ${base_libdir}/security/.debug/"
+> --=20
+> 1.7.2.5
+>=20
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
--- 
--Khem
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--zgr1mbP1ee4HJQ5m
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk9HXU0ACgkQN1Ujt2V2gBxG9gCffcmXKXh73RGok2YQJQESeMVm
+hB4AoIBXy/OWS2/vA0sOsmEX1qVHjs7G
+=xdXs
+-----END PGP SIGNATURE-----
+
+--zgr1mbP1ee4HJQ5m--
