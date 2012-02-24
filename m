@@ -1,42 +1,45 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S0xA5-0003VU-7u
+	(envelope-from <martin.jansa@gmail.com>) id 1S0xEc-0003d2-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Feb 2012 16:34:21 +0100
-Received: by vcbfl15 with SMTP id fl15so348932vcb.6
+	Fri, 24 Feb 2012 16:39:02 +0100
+Received: by eaal10 with SMTP id l10so1175055eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 07:25:58 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.52.99.231 as permitted sender) client-ip=10.52.99.231; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.52.99.231 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.52.99.231])
-	by 10.52.99.231 with SMTP id et7mr1404527vdb.114.1330097158140
-	(num_hops = 1); Fri, 24 Feb 2012 07:25:58 -0800 (PST)
+	Fri, 24 Feb 2012 07:30:40 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.101.6 as permitted sender) client-ip=10.14.101.6; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.101.6 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.101.6])
+	by 10.14.101.6 with SMTP id a6mr1853081eeg.27.1330097440310 (num_hops =
+	1); Fri, 24 Feb 2012 07:30:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=J63BepMPoofY5La8JnoD6Bt92ImRV/XCH4e8+IeWINw=;
-	b=RPJXXqxCLkesqB6acJAftrnIT/ViFU4RY6OCNzhHSwCdhb3NTxkf1jChWCY0SvtpEC
-	eT2zZYvlsfwR4z5pR2wiOji90Pm3Vtqcar8PTehzYCo/nrWa9O3f5HnQhUQFp5gBRWRB
-	iQUP9bwh9DxuTYMoUvApcnPpZvQAvRNbp0/0E=
-MIME-Version: 1.0
-Received: by 10.52.99.231 with SMTP id et7mr1123601vdb.114.1330097157747; Fri,
-	24 Feb 2012 07:25:57 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.203.74 with HTTP; Fri, 24 Feb 2012 07:25:57 -0800 (PST)
-In-Reply-To: <CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=fUfde2qur+jFZ/hHmCY4YH9Pg2u/PLLrZX22gKsnBJY=;
+	b=kO38h/7Yc6lwSw0ZIywR5A2mNwKGLfIavfKncAtZkt5QUDKHL1ab5qMg3aXh1hESF7
+	sOGpFU1zJSHQfe1dP7TamWkbMOh/y/OWFWkBkaRCQ7/hCdf4Z+Imbb+miedQsiJcjZAJ
+	EtNPVNdX0Wrm+XNBiDHyYD8X8P3U+WprFQWUE=
+Received: by 10.14.101.6 with SMTP id a6mr1394069eeg.27.1330097440157;
+	Fri, 24 Feb 2012 07:30:40 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z47sm19225633eeh.9.2012.02.24.07.30.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 24 Feb 2012 07:30:39 -0800 (PST)
+Date: Fri, 24 Feb 2012 16:30:37 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120224153037.GK3769@jama.jama.net>
 References: <1330084384-1267-1-git-send-email-schnitzeltony@googlemail.com>
 	<20120224122806.GI3769@jama.jama.net>
 	<CALbNGRTSMK=jUUNasU+4TAOajUMythNBxys8xLHGzN6b+7peAw@mail.gmail.com>
-Date: Fri, 24 Feb 2012 13:25:57 -0200
-X-Google-Sender-Auth: Qqoxook_Ii_rZ-fQJMd7qToE4EE
-Message-ID: <CAP9ODKpk1HbWZx8zxpDAxJ7wFei0mMHhzYJbUoMC+YEhyB7-MQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+	<CAP9ODKpk1HbWZx8zxpDAxJ7wFei0mMHhzYJbUoMC+YEhyB7-MQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKpk1HbWZx8zxpDAxJ7wFei0mMHhzYJbUoMC+YEhyB7-MQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-mozilla 1/2] firefox: change URI to fetchable ftp / bump to 10.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,29 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2012 15:34:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 Feb 2012 15:39:02 -0000
+X-Groupsio-MsgNum: 37440
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zQZ31nKYDGgulmZX"
+Content-Disposition: inline
+
+--zQZ31nKYDGgulmZX
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 24, 2012 at 12:41, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> Ehm I did not create them: I let the very nice script in /scripts do
-> that - a bit off topic: I already started to create such a script
-> before I saw it is already there :( So Otavio what was your intention
-> on starting at ${INC_PR}.1?
+On Fri, Feb 24, 2012 at 01:25:57PM -0200, Otavio Salvador wrote:
+> On Fri, Feb 24, 2012 at 12:41, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+> > Ehm I did not create them: I let the very nice script in /scripts do
+> > that - a bit off topic: I already started to create such a script
+> > before I saw it is already there :( So Otavio what was your intention
+> > on starting at ${INC_PR}.1?
+>=20
+> In fact no; my fault ;-)
+>=20
+> You can fix this as well ...
 
-In fact no; my fault ;-)
+Than please also reset INC_PR in .inc file. Or when all files are almost
+the same and generated by script why not drop INC_PR and PR to keep them
+just with default -r0? PKGV is long enough already :).
 
-You can fix this as well ...
+Cheers,
 
-If you have a github account you can queue a pull request otherwise
-just send the patches here and I grab them.
+> If you have a github account you can queue a pull request otherwise
+> just send the patches here and I grab them.
+>=20
+> --=20
+> Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0O.S. Systems
+> E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.oss=
+ystems.com.br
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--zQZ31nKYDGgulmZX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.18 (GNU/Linux)
+
+iEYEARECAAYFAk9HrR0ACgkQN1Ujt2V2gBw30ACfelUviwU+HtXxw/AtneP4fCw1
+69kAniUWKYe4qcyqt1FlxV12uo9j4uZD
+=tLbk
+-----END PGP SIGNATURE-----
+
+--zQZ31nKYDGgulmZX--
