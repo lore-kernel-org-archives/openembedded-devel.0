@@ -1,23 +1,41 @@
-Received: from col0-omc3-s6.col0.hotmail.com ([65.55.34.144])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kyoonn@hotmail.com>) id 1S15RS-0006P1-LP
+	(envelope-from <otavio.salvador@gmail.com>) id 1S16JM-0007ND-Aq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Feb 2012 01:24:50 +0100
-Received: from COL120-W40 ([65.55.34.137]) by col0-omc3-s6.col0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 24 Feb 2012 16:15:19 -0800
-Message-ID: <COL120-W40B503FFC0574E4957B971DD6B0@phx.gbl>
-X-Originating-IP: [70.137.141.9]
-From: simran singh <kyoonn@hotmail.com>
-To: <openembedded-core@lists.openembedded.org>,
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 Feb 2012 16:15:19 -0800
-Importance: Normal
+	Sat, 25 Feb 2012 02:20:32 +0100
+Received: by vcbfl13 with SMTP id fl13so5791vcb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Feb 2012 17:12:08 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.220.156.139 as permitted sender) client-ip=10.220.156.139; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.220.156.139 as
+	permitted sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.220.156.139])
+	by 10.220.156.139 with SMTP id x11mr3011852vcw.18.1330132328676
+	(num_hops = 1); Fri, 24 Feb 2012 17:12:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZxSDSKglzzQqt1CY718PiIWnXVOU/g4vq9Syhw5gQ9M=;
+	b=XV7I1Rz9kjU4yxcXADyacTe32YNmk82z92XUC5r/HDbvVFAU1APWK9ZF8P1PGwrwgY
+	mS3ArAu74K9HaPk3l/BlRxaiQ7vVKtcdHbLVcpi7enVYRd/XTu0Vc2XCm3vAxH35MvhE
+	XiJzFZA0pOqdsVOCnEV6FonWSS1a0su8yXkv0=
 MIME-Version: 1.0
-X-OriginalArrivalTime: 25 Feb 2012 00:15:19.0049 (UTC)
-	FILETIME=[8E7F7F90:01CCF352]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: BOTAN crypto library
+Received: by 10.220.156.139 with SMTP id x11mr2371462vcw.18.1330132327884;
+	Fri, 24 Feb 2012 17:12:07 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Fri, 24 Feb 2012 17:12:07 -0800 (PST)
+In-Reply-To: <1330126696-4716-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1330126696-4716-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 24 Feb 2012 23:12:07 -0200
+X-Google-Sender-Auth: kk0NBbu4qaVZ1IueeUmEop5UVPc
+Message-ID: <CAP9ODKqb-AN5rW+Cpgq7OudwdqGfHwXAYP28irskS+kU8BRXRQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-mozilla, v2 1/3] firefox-gen-l10n-recipes: INC_PR as PR for l10n-recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,56 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2012 00:24:50 -0000
-X-Groupsio-MsgNum: 37467
-Content-Type: multipart/mixed;
-	boundary="_1ed1f953-ee02-48c3-99e9-b4747e4ff39e_"
-
---_1ed1f953-ee02-48c3-99e9-b4747e4ff39e_
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Sat, 25 Feb 2012 01:20:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+Applied.
 
-Hello=2C
+On Fri, Feb 24, 2012 at 21:38, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+>
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+> =A0scripts/firefox-gen-l10n-recipes | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/scripts/firefox-gen-l10n-recipes b/scripts/firefox-gen-l10n-=
+recipes
+> index 435697b..65126a2 100755
+> --- a/scripts/firefox-gen-l10n-recipes
+> +++ b/scripts/firefox-gen-l10n-recipes
+> @@ -26,7 +26,7 @@ cat > firefox-l10n-${lang_code}_$1.bb <<EOF
+>
+> =A0require firefox-l10n.inc
+>
+> -PR =3D "\${INC_PR}.1"
+> +PR =3D "\${INC_PR}"
+>
+> =A0SRC_URI[md5sum] =3D "$md5"
+> =A0SRC_URI[sha256sum] =3D "$sha256"
+> --
+> 1.7.4.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I hope this is right place to ask for help regarding this. I am trying to b=
-uild the Botan crytpo library using
-system builder. I created a recipe for this and I am getting an error when =
-I try to $make the library.
-This is the error I am getting:
 
-| /usr/bin/ld: /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder=
-/build_p4080ds_release/sysroots/
-ppce500mc-linux/usr/lib/crti.o: Relocations in generic ELF (EM: 20)
-| /usr/bin/ld: /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder=
-/build_p4080ds_release/sysroots/
-ppce500mc-linux/usr/lib/crti.o: Relocations in generic ELF (EM: 20)
-| /home/Simran/Freescale/QorIQ-DPAA-SDK-20111026-systembuilder/build_p4080d=
-s_release/sysroots/
-ppce500mc-linux/usr/lib/crti.o: could not read symbols: File in wrong forma=
-t
-| collect2: ld returned 1 exit status
-| make: *** [libbotan-1.10.so.0.1] Error 1
-| ERROR: Function do_install failed
 
-I am guessing this has to do something with the linking of the libbotan-1.1=
-0.so.0.1 file. Please advice. I have attached
-the recipe that I created
-Thank you for any help.
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
-Simran
- 		 	   		  =
 
---_1ed1f953-ee02-48c3-99e9-b4747e4ff39e_
-Content-Type: application/octet-stream
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="botan_1.0.bb"
-
-REVTQ1JJUFRJT04gPSAiQm90YW4gbGlicmFyeSIKUFIgPSAicjAiClNSQ19VUkkgPSAiZmlsZTov
-LyR7UE59LSR7UFZ9LnRhci5neiIKCmluaGVyaXQgYXV0b3Rvb2xzCgpTID0gIiR7V09SS0RJUn0i
-Cgpkb19pbnN0YWxsKCkgewoKCW1rZGlyIC1wICR7RH0vdXNyL2JvdGFuCgljZCBCb3Rhbi0xLjEw
-LjEKIwlweXRob24gY29uZmlndXJlLnB5IC0tcHJlZml4PSR7RH0vdXNyL2JvdGFuCglweXRob24g
-Y29uZmlndXJlLnB5CgltYWtlCiMJbWFrZSBpbnN0YWxsCgp9CgpGSUxFU18ke1BOfSArPSAiL3Vz
-ci9iaW4vYm90YW4iCg==
-
---_1ed1f953-ee02-48c3-99e9-b4747e4ff39e_--
