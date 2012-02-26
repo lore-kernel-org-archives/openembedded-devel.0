@@ -1,39 +1,43 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S1ei2-0005PV-51
+	(envelope-from <rolandu@gmail.com>) id 1S1hqT-0008Gg-Pq
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Feb 2012 15:04:18 +0100
-Received: by eaae1 with SMTP id e1so219661eaa.6
+	Sun, 26 Feb 2012 18:25:14 +0100
+Received: by lahc1 with SMTP id c1so4698417lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Feb 2012 05:55:53 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.33.142 as permitted sender) client-ip=10.213.33.142; 
+	Sun, 26 Feb 2012 09:16:48 -0800 (PST)
+Received-SPF: pass (google.com: domain of rolandu@gmail.com designates
+	10.112.102.37 as permitted sender) client-ip=10.112.102.37; 
 Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.33.142 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.33.142])
-	by 10.213.33.142 with SMTP id h14mr2886616ebd.43.1330264553438
-	(num_hops = 1); Sun, 26 Feb 2012 05:55:53 -0800 (PST)
+	spf=pass (google.com: domain of rolandu@gmail.com
+	designates 10.112.102.37 as permitted sender)
+	smtp.mail=rolandu@gmail.com;
+	dkim=pass header.i=rolandu@gmail.com
+Received: from mr.google.com ([10.112.102.37])
+	by 10.112.102.37 with SMTP id fl5mr4133595lbb.95.1330276608712
+	(num_hops = 1); Sun, 26 Feb 2012 09:16:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=BB7iimYEKpLkYeNJfwo5jDW9MNFV72kWm4UReexnuvg=;
-	b=nj1mLGnlplouBIT0TmsqyroVXK4IlaQnpqCDJ7u+sIyf9OyB+0xBryMO1Fk/KNTUkB
-	kkpkaiVhZwaJldUZt/GjnGcZZZ0jabGemYDj/xmRqJmf06on1YXpARvbmOEIK/jPvy6J
-	HKcpNuuxQcgHhhwv+XLhPC6wkPZ9v7Wu8L12s=
-Received: by 10.213.33.142 with SMTP id h14mr2200339ebd.43.1330264553385;
-	Sun, 26 Feb 2012 05:55:53 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z47sm45330445eeh.9.2012.02.26.05.55.52
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=SFW9oKIz0dDEax1X22lz1puYK8UpqFtZhQQP6kG0Y3U=;
+	b=lOfNRRq59fyqYjeJGFQWP2Eg6952njdcPvGeK5azGUtU3wALrLVfiTU0+qplM4f4jJ
+	a9aExCAvwOErCPE95MBCaOx54U9Ox940Eqvezl1MwIcyV8qlCcNN71HrKEDOVrwOHawA
+	HrztsgzKj+k3DVgTSK4bVpkbcM5GJwnj8X5X0=
+Received: by 10.112.102.37 with SMTP id fl5mr3502188lbb.95.1330276608521;
+	Sun, 26 Feb 2012 09:16:48 -0800 (PST)
+Received: from [192.168.1.50] (89-235-208-74.saturn.infonet.ee.
+	[89.235.208.74])
+	by mx.google.com with ESMTPS id k4sm14416318lbw.10.2012.02.26.09.16.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 26 Feb 2012 05:55:52 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 26 Feb 2012 09:16:47 -0800 (PST)
+Message-ID: <4F4A68FE.2020109@gmail.com>
+Date: Sun, 26 Feb 2012 19:16:46 +0200
+From: Roland <rolandu@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Feb 2012 14:55:45 +0100
-Message-Id: <1330264545-16277-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][PATCHv2] xinput-calibrator: disable gtk gui explicitly
+Subject: angstrom site down, where to find mirrors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +51,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 14:04:18 -0000
+X-List-Received-Date: Sun, 26 Feb 2012 17:25:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* if gtk is autodetected then gtkmm, glibmm, libcairomm-1.0-1,
-  libpangomm-1.4-1, libsigc-2.0-0 are pulled to image like here:
-  http://git.shr-project.org/git/?p=buildhistory.git;a=blobdiff;f=images/crespo/eglibc/shr-image/installed-package-names.txt;h=83e1a027de80d97421564226685a74298d2a5b80;hp=470b765b53eb6c795dc9dfb9ea5c30ec19d25f64;hb=0ab60c7419522ef527d744bc0ad756124b9d432a;hpb=21fe622ab8fe123a3a45369440eaaa3785be2516
+Hi.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+It looks like my first experiments with openembedded started at a bad time.
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-index 0c75293..f0e85cf 100644
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-+++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT-X"
- LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
- DEPENDS = "virtual/libx11 libxi"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit autotools
- 
-@@ -14,6 +14,9 @@ SRC_URI[sha256sum] = "baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475
- 
- S = "${WORKDIR}/xinput_calibrator-${PV}"
- 
-+# force native X11 ui as we don't have gtk+ in DEPENDS
-+EXTRA_OECONF += "--with-gui=x11"
-+
- do_install_append() {
-         install -d ${D}${bindir}
-         install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
--- 
-1.7.8.4
+angstrom distribution's website is down, so some files which are needed 
+to build anything are gone.
+
+I'm trying to create the crosscompiler, but running 
+recipes/gnu-config/gnu-config_git.bb, do_fetch is impossible since 
+angstrom website is down, and none of the mirrors work.
+
+So my question is:
+
+where can I find mirrors for this file, and how do I add the mirrors to 
+the build system.
+
+Thanks for any advise You can give me,
+Roland
+
+
+
+
+---- ERROR LOG
+
+NOTE: Running task 2 of 19 (ID: 8, 
+/media/ssd-data/roland/workdir/OE/openembedde
+d/recipes/gnu-config/gnu-config_git.bb, do_fetch)
+--2012-02-26 18:11:30-- 
+http://www.angstrom-distribution.org/unstable/sources/g
+it_git.savannah.gnu.org.config.git_e35217687ee5f39b428119fe31c7e954f6de64f0.tar.
+gz
+NOTE: package 
+gnu-config-git-r1+gitre35217687ee5f39b428119fe31c7e954f6de64f0: ta
+sk do_fetch: Started
+  Resolving www.angstrom-distribution.org... 140.211.169.179
+  Connecting to www.angstrom-distribution.org|140.211.169.179|:80... 
+connected.
+  HTTP request sent, awaiting response... 404 Not Found
+  2012-02-26 18:11:31 ERROR 404: Not Found.
+
+  --2012-02-26 18:11:31-- 
+http://mirrors.openembedded.org/git_git.savannah.gnu.o
+rg.config.git_e35217687ee5f39b428119fe31c7e954f6de64f0.tar.gz
+  Resolving mirrors.openembedded.org... 82.197.159.157
+  Connecting to mirrors.openembedded.org|82.197.159.157|:80... failed: 
+No route t
+o host.
+  --2012-02-26 18:11:33-- 
+http://sources.openembedded.org/git_git.savannah.gnu.o
+rg.config.git_e35217687ee5f39b428119fe31c7e954f6de64f0.tar.gz
+  Resolving sources.openembedded.org... 140.211.169.152
+  Connecting to sources.openembedded.org|140.211.169.152|:80... connected.
+  HTTP request sent, awaiting response... 404 Not Found
+  2012-02-26 18:11:34 ERROR 404: Not Found.
 
 
 
