@@ -1,39 +1,39 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S1egP-0005K5-Js
+	(envelope-from <martin.jansa@gmail.com>) id 1S1ei2-0005PV-51
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Feb 2012 15:02:37 +0100
-Received: by eekc1 with SMTP id c1so94160eek.6
+	Sun, 26 Feb 2012 15:04:18 +0100
+Received: by eaae1 with SMTP id e1so219661eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+	Sun, 26 Feb 2012 05:55:53 -0800 (PST)
 Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.26.216 as permitted sender) client-ip=10.213.26.216; 
+	10.213.33.142 as permitted sender) client-ip=10.213.33.142; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.26.216 as permitted sender)
+	designates 10.213.33.142 as permitted sender)
 	smtp.mail=martin.jansa@gmail.com;
 	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.26.216])
-	by 10.213.26.216 with SMTP id f24mr2172505ebc.16.1330264452571
-	(num_hops = 1); Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+Received: from mr.google.com ([10.213.33.142])
+	by 10.213.33.142 with SMTP id h14mr2886616ebd.43.1330264553438
+	(num_hops = 1); Sun, 26 Feb 2012 05:55:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=sshWLikhGDxaWx4PJdziKwHQMdG2gykXGpyPdEBp7Ys=;
-	b=sPP4AZrEi4J0Uuup/5z+ZaPwQXpp55S+UvEfUI46HjpR1VCp2O7SPCeEx5iTfa1d+I
-	I8mTOxx6MjOXIHPUlrDjNjVYWg61R4KAR5Ek/+wTNhqso4GChWm04TdeUxyiTuIUys6I
-	RWmll8ZNnK2vraVq7RCXAkCEbaxhBqyeGjxU0=
-Received: by 10.213.26.216 with SMTP id f24mr1651229ebc.16.1330264452345;
-	Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+	bh=BB7iimYEKpLkYeNJfwo5jDW9MNFV72kWm4UReexnuvg=;
+	b=nj1mLGnlplouBIT0TmsqyroVXK4IlaQnpqCDJ7u+sIyf9OyB+0xBryMO1Fk/KNTUkB
+	kkpkaiVhZwaJldUZt/GjnGcZZZ0jabGemYDj/xmRqJmf06on1YXpARvbmOEIK/jPvy6J
+	HKcpNuuxQcgHhhwv+XLhPC6wkPZ9v7Wu8L12s=
+Received: by 10.213.33.142 with SMTP id h14mr2200339ebd.43.1330264553385;
+	Sun, 26 Feb 2012 05:55:53 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n17sm45365816eei.3.2012.02.26.05.54.10
+	by mx.google.com with ESMTPS id z47sm45330445eeh.9.2012.02.26.05.55.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 26 Feb 2012 05:54:11 -0800 (PST)
+	Sun, 26 Feb 2012 05:55:52 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Feb 2012 14:54:03 +0100
-Message-Id: <1330264443-16191-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 26 Feb 2012 14:55:45 +0100
+Message-Id: <1330264545-16277-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.4
-Subject: [meta-oe][PATCH] xinput-calibrator: disable gtk gui explicitly
+Subject: [meta-oe][PATCHv2] xinput-calibrator: disable gtk gui explicitly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,7 +47,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 14:02:37 -0000
+X-List-Received-Date: Sun, 26 Feb 2012 14:04:18 -0000
 
 * if gtk is autodetected then gtkmm, glibmm, libcairomm-1.0-1,
   libpangomm-1.4-1, libsigc-2.0-0 are pulled to image like here:
@@ -59,19 +59,19 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
  1 files changed, 4 insertions(+), 1 deletions(-)
 
 diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-index 81d773d..fecb959 100644
+index 0c75293..f0e85cf 100644
 --- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
 +++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
 @@ -4,7 +4,7 @@ LICENSE = "MIT-X"
  LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
  DEPENDS = "virtual/libx11 libxi"
  
--PR = "r3"
-+PR = "r4"
+-PR = "r1"
++PR = "r2"
  
- inherit autotools systemd
+ inherit autotools
  
-@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475
+@@ -14,6 +14,9 @@ SRC_URI[sha256sum] = "baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475
  
  S = "${WORKDIR}/xinput_calibrator-${PV}"
  
