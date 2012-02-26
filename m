@@ -1,22 +1,39 @@
-Received: from smtp3-g21.free.fr ([212.27.42.3])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1S1iAG-00005s-QU
+	(envelope-from <martin.jansa@gmail.com>) id 1S1mCo-00045I-DJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Feb 2012 18:45:41 +0100
-Received: from eb-e6520 (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 01D38A62A6;
-	Sun, 26 Feb 2012 18:37:12 +0100 (CET)
-Date: Sun, 26 Feb 2012 18:37:11 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Roland <rolandu@gmail.com>
-Message-ID: <20120226183711.312b7e58@eb-e6520>
-In-Reply-To: <4F4A68FE.2020109@gmail.com>
-References: <4F4A68FE.2020109@gmail.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: angstrom site down, where to find mirrors
+	Sun, 26 Feb 2012 23:04:34 +0100
+Received: by eekc1 with SMTP id c1so211326eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Feb 2012 13:56:09 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.213.13.212 as permitted sender) client-ip=10.213.13.212; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.213.13.212 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.213.13.212])
+	by 10.213.13.212 with SMTP id d20mr3276027eba.99.1330293369309
+	(num_hops = 1); Sun, 26 Feb 2012 13:56:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=hatAsxEasLHIPFOGxMtFX2TlCLFtu2PKussSpDXXc6o=;
+	b=UJ9JAdAq1xsPjJcjMLTEclTw6cA7qQe1jv+SGHvg++1XK+7yECAx6QK8gxOCyvqXa+
+	p+7OJtN5j1V2nqSNPHfWHUj7KUTGESsKQFYqhzDDhDuY++nYTi3I8ithXjVXKrDJZj1Y
+	w+EpEbzaIIA/8uuMoMuUe3LWZQT8vXoEVWEHs=
+Received: by 10.213.13.212 with SMTP id d20mr2441897eba.99.1330293368964;
+	Sun, 26 Feb 2012 13:56:08 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n52sm50003573eea.5.2012.02.26.13.56.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 26 Feb 2012 13:56:08 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 26 Feb 2012 22:55:59 +0100
+Message-Id: <1330293360-14909-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][PATCH 1/2] lua5: drop unused NATIVE_INSTALL_WORKS without quotes too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,45 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 17:45:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 26 Feb 2012 22:04:34 -0000
 
-Hi Roland,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-Le Sun, 26 Feb 2012 19:16:46 +0200,
-Roland <rolandu@gmail.com> a =E9crit :
+diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+index 5591c4c..eca7755 100644
+--- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
++++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+@@ -39,7 +39,6 @@ do_install () {
+ 	install -d ${D}${libdir}/pkgconfig
+ 	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
+ }
+-NATIVE_INSTALL_WORKS = 1
+ BBCLASSEXTEND = "native"
+ 
+ SRC_URI[md5sum] = "d0870f2de55d59c1c8419f36e8fac150"
+-- 
+1.7.8.4
 
-> Hi.
->=20
-> It looks like my first experiments with openembedded started at a bad tim=
-e.
->=20
-> angstrom distribution's website is down, so some files which are needed=20
-> to build anything are gone.
->=20
-> I'm trying to create the crosscompiler, but running=20
-> recipes/gnu-config/gnu-config_git.bb, do_fetch is impossible since=20
-> angstrom website is down, and none of the mirrors work.
->=20
-> So my question is:
->=20
-> where can I find mirrors for this file, and how do I add the mirrors to=20
-> the build system.
->=20
-> Thanks for any advise You can give me,
->
-you can remove angstrom mirrors by editing :
-sources/meta-angstrom/conf/distro/include/angstrom.inc
-and commentting out line 96 :
-# INHERIT +=3D "angstrom-mirrors"=20
-
-Even when angstrom mirror is up it can be quite slow so you may save
-some time by not using the mirror (but some downloads may fail if the
-original source is no more available online).
-
-Eric
---=20
-http://eukrea.com/en/news/104-2012
 
 
