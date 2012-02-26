@@ -1,43 +1,39 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S1czx-0003Wc-GT
+	(envelope-from <martin.jansa@gmail.com>) id 1S1egP-0005K5-Js
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Feb 2012 13:14:41 +0100
-Received: by lahc1 with SMTP id c1so4544359lah.6
+	Sun, 26 Feb 2012 15:02:37 +0100
+Received: by eekc1 with SMTP id c1so94160eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Feb 2012 04:06:16 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.152.147.1 as permitted sender)
-	client-ip=10.152.147.1; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.152.147.1 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.152.147.1])
-	by 10.152.147.1 with SMTP id tg1mr7902848lab.22.1330257976541 (num_hops
-	= 1); Sun, 26 Feb 2012 04:06:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=6CGhIhA2vEERdYfWWwX7f5bkzAt7rrr/vOxrH84tG/4=;
-	b=ipKn6Rf+D05azv3QNKobKoUsJgQvbtKg1Z3cIZDbEUceJSqTduUEPe3AHmv8xcgfWV
-	tLU30OAsOGQuHWwQr6Mh8+e5pCbjbX0vsgdRZ/qh99mZaFQBfb/D3et1jEnecCpTwDmN
-	LnbR1CmPmfG6SnygOCxKcqmzIaHvEJK6qoRQ8=
-MIME-Version: 1.0
-Received: by 10.152.147.1 with SMTP id tg1mr6587284lab.22.1330257976465; Sun,
-	26 Feb 2012 04:06:16 -0800 (PST)
-Received: by 10.112.29.74 with HTTP; Sun, 26 Feb 2012 04:06:16 -0800 (PST)
-In-Reply-To: <CAP9ODKqyQAteyfXFWxX5akvq8u6eJ4RLg7qpsb9RrbTsKmrEzQ@mail.gmail.com>
-References: <cover.1330116875.git.otavio@ossystems.com.br>
-	<6dcaffb8068eb5a1d62c00c44f93e37a070c6065.1330116875.git.otavio@ossystems.com.br>
-	<CAP9ODKrBwMjUg+WUY1b18k_PyKHDgjhEH7hXLjB+1wJ78-u2_g@mail.gmail.com>
-	<CAP9ODKqyQAteyfXFWxX5akvq8u6eJ4RLg7qpsb9RrbTsKmrEzQ@mail.gmail.com>
-Date: Sun, 26 Feb 2012 13:06:16 +0100
-Message-ID: <CALbNGRTuwLVTJx=rjCZGuwGa_B0So8+EwpWbrmDxDQVcYS+etQ@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.213.26.216 as permitted sender) client-ip=10.213.26.216; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.213.26.216 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.213.26.216])
+	by 10.213.26.216 with SMTP id f24mr2172505ebc.16.1330264452571
+	(num_hops = 1); Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=sshWLikhGDxaWx4PJdziKwHQMdG2gykXGpyPdEBp7Ys=;
+	b=sPP4AZrEi4J0Uuup/5z+ZaPwQXpp55S+UvEfUI46HjpR1VCp2O7SPCeEx5iTfa1d+I
+	I8mTOxx6MjOXIHPUlrDjNjVYWg61R4KAR5Ek/+wTNhqso4GChWm04TdeUxyiTuIUys6I
+	RWmll8ZNnK2vraVq7RCXAkCEbaxhBqyeGjxU0=
+Received: by 10.213.26.216 with SMTP id f24mr1651229ebc.16.1330264452345;
+	Sun, 26 Feb 2012 05:54:12 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n17sm45365816eei.3.2012.02.26.05.54.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 26 Feb 2012 05:54:11 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe 2/2] systemd.bbclass: do not mangle PACKAGES variable in native, nativesdk and cross
+Date: Sun, 26 Feb 2012 14:54:03 +0100
+Message-Id: <1330264443-16191-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][PATCH] xinput-calibrator: disable gtk gui explicitly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +47,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 12:14:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 26 Feb 2012 14:02:37 -0000
 
-On Sat, Feb 25, 2012 at 3:33 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Fri, Feb 24, 2012 at 23:44, Otavio Salvador <otavio@ossystems.com.br> =
-wrote:
->> On Fri, Feb 24, 2012 at 18:55, Otavio Salvador <otavio@ossystems.com.br>=
- wrote:
->>> =A0meta-oe/classes/systemd.bbclass | =A0 72 +++++++++++++++++++--------=
------------
->>> =A01 files changed, 36 insertions(+), 36 deletions(-)
->>
->> This broke it; I am fixing it and will send a patch soon.
->
-> I ended sending two patches to fix this. The second one is the right
-> to be take since it fix the packaging and parsing. Sorry by this
-> mistake.
->
-I was about to send a revert - but it's too late now -because I
-haven't understood what the original patch is for. Could you please
-tell us what it fixes / enhances?
+* if gtk is autodetected then gtkmm, glibmm, libcairomm-1.0-1,
+  libpangomm-1.4-1, libsigc-2.0-0 are pulled to image like here:
+  http://git.shr-project.org/git/?p=buildhistory.git;a=blobdiff;f=images/crespo/eglibc/shr-image/installed-package-names.txt;h=83e1a027de80d97421564226685a74298d2a5b80;hp=470b765b53eb6c795dc9dfb9ea5c30ec19d25f64;hb=0ab60c7419522ef527d744bc0ad756124b9d432a;hpb=21fe622ab8fe123a3a45369440eaaa3785be2516
 
-Andreas
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
+index 81d773d..fecb959 100644
+--- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
++++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT-X"
+ LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
+ DEPENDS = "virtual/libx11 libxi"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ inherit autotools systemd
+ 
+@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475
+ 
+ S = "${WORKDIR}/xinput_calibrator-${PV}"
+ 
++# force native X11 ui as we don't have gtk+ in DEPENDS
++EXTRA_OECONF += "--with-gui=x11"
++
+ do_install_append() {
+         install -d ${D}${bindir}
+         install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
+-- 
+1.7.8.4
+
 
 
