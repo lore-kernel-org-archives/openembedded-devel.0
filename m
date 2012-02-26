@@ -1,44 +1,43 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S1ZBh-000871-TF
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S1czx-0003Wc-GT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Feb 2012 09:10:33 +0100
-Received: by mail-ee0-f47.google.com with SMTP id c1so32672eek.6
+	Sun, 26 Feb 2012 13:14:41 +0100
+Received: by lahc1 with SMTP id c1so4544359lah.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Feb 2012 00:02:11 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.32.133 as permitted sender) client-ip=10.213.32.133; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.32.133 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.32.133])
-	by 10.213.32.133 with SMTP id c5mr2667905ebd.119.1330243331559
-	(num_hops = 1); Sun, 26 Feb 2012 00:02:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=0OHkpUYxtviIOCyITAezwcvCbkRKZzrhpf/lRuwItng=;
-	b=LLCwbVpFQC5L0yIHsLCP5xZwP+TP2RBROFTVfQ9bbKNdGmkOSSMCe/207kCoS78KA1
-	o4Y0Of/KrkzRFEuVb04rDD819oXK2+nZ7xnwePz4OqWxidNxROgXnilUBDsD7c91+xiS
-	TJBoFDD0x1bc1cpsotfuFEZC1oGwja8Pmyofg=
-Received: by 10.213.32.133 with SMTP id c5mr2001187ebd.119.1330243331445;
-	Sun, 26 Feb 2012 00:02:11 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm41842458eeb.7.2012.02.26.00.02.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 26 Feb 2012 00:02:10 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 26 Feb 2012 04:06:16 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.152.147.1 as permitted sender)
+	client-ip=10.152.147.1; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.152.147.1 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.152.147.1])
+	by 10.152.147.1 with SMTP id tg1mr7902848lab.22.1330257976541 (num_hops
+	= 1); Sun, 26 Feb 2012 04:06:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=6CGhIhA2vEERdYfWWwX7f5bkzAt7rrr/vOxrH84tG/4=;
+	b=ipKn6Rf+D05azv3QNKobKoUsJgQvbtKg1Z3cIZDbEUceJSqTduUEPe3AHmv8xcgfWV
+	tLU30OAsOGQuHWwQr6Mh8+e5pCbjbX0vsgdRZ/qh99mZaFQBfb/D3et1jEnecCpTwDmN
+	LnbR1CmPmfG6SnygOCxKcqmzIaHvEJK6qoRQ8=
+MIME-Version: 1.0
+Received: by 10.152.147.1 with SMTP id tg1mr6587284lab.22.1330257976465; Sun,
+	26 Feb 2012 04:06:16 -0800 (PST)
+Received: by 10.112.29.74 with HTTP; Sun, 26 Feb 2012 04:06:16 -0800 (PST)
+In-Reply-To: <CAP9ODKqyQAteyfXFWxX5akvq8u6eJ4RLg7qpsb9RrbTsKmrEzQ@mail.gmail.com>
+References: <cover.1330116875.git.otavio@ossystems.com.br>
+	<6dcaffb8068eb5a1d62c00c44f93e37a070c6065.1330116875.git.otavio@ossystems.com.br>
+	<CAP9ODKrBwMjUg+WUY1b18k_PyKHDgjhEH7hXLjB+1wJ78-u2_g@mail.gmail.com>
+	<CAP9ODKqyQAteyfXFWxX5akvq8u6eJ4RLg7qpsb9RrbTsKmrEzQ@mail.gmail.com>
+Date: Sun, 26 Feb 2012 13:06:16 +0100
+Message-ID: <CALbNGRTuwLVTJx=rjCZGuwGa_B0So8+EwpWbrmDxDQVcYS+etQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Feb 2012 09:01:34 +0100
-Message-Id: <7f37409e0a7f528df15eef0d44f78ecae0b20f6c.1330243124.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.4
-In-Reply-To: <64ab53576a0a55c3cb21c0bd690b6b4f95ab2769.1330243124.git.Martin.Jansa@gmail.com>
-References: <64ab53576a0a55c3cb21c0bd690b6b4f95ab2769.1330243124.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1330243124.git.Martin.Jansa@gmail.com>
-References: <cover.1330243124.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 5/5] e-wm: fix memory usage with illume causing OOM
+Subject: Re: [PATCH][meta-oe 2/2] systemd.bbclass: do not mangle PACKAGES variable in native, nativesdk and cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,179 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 08:10:34 -0000
+X-List-Received-Date: Sun, 26 Feb 2012 12:14:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...ume-Remove-the-popup.-It-s-not-needed-now.patch |  135 ++++++++++++++++++++
- meta-efl/recipes-efl/e17/e-wm_svn.bb               |    3 +-
- 2 files changed, 137 insertions(+), 1 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch
+On Sat, Feb 25, 2012 at 3:33 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Fri, Feb 24, 2012 at 23:44, Otavio Salvador <otavio@ossystems.com.br> =
+wrote:
+>> On Fri, Feb 24, 2012 at 18:55, Otavio Salvador <otavio@ossystems.com.br>=
+ wrote:
+>>> =A0meta-oe/classes/systemd.bbclass | =A0 72 +++++++++++++++++++--------=
+-----------
+>>> =A01 files changed, 36 insertions(+), 36 deletions(-)
+>>
+>> This broke it; I am fixing it and will send a patch soon.
+>
+> I ended sending two patches to fix this. The second one is the right
+> to be take since it fix the packaging and parsing. Sorry by this
+> mistake.
+>
+I was about to send a revert - but it's too late now -because I
+haven't understood what the original patch is for. Could you please
+tell us what it fixes / enhances?
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch b/meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch
-new file mode 100644
-index 0000000..c4a18d0
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch
-@@ -0,0 +1,135 @@
-+From c7f54838d09cc94dd23ed060889bae780758c391 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sun, 19 Feb 2012 23:09:07 +0100
-+Subject: [PATCH] Revert "Illume: Remove the popup. It's not needed now."
-+
-+This reverts commit cba0bc9833689900930272fa5c4a2cd2529d3028.
-+---
-+ src/modules/illume-indicator/e_mod_ind_win.c |   23 ++++++++++++++++++++---
-+ src/modules/illume-indicator/e_mod_ind_win.h |    1 +
-+ 2 files changed, 21 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/modules/illume-indicator/e_mod_ind_win.c b/src/modules/illume-indicator/e_mod_ind_win.c
-+index d3657d6..4a593fd 100644
-+--- a/src/modules/illume-indicator/e_mod_ind_win.c
-++++ b/src/modules/illume-indicator/e_mod_ind_win.c
-+@@ -57,6 +57,11 @@ e_mod_ind_win_new(E_Zone *zone)
-+    /* set this window to not accept or take focus */
-+    ecore_x_icccm_hints_set(iwin->win->evas_win, 0, 0, 0, 0, 0, 0, 0);
-+ 
-++   /* create the popup */
-++   iwin->popup = e_popup_new(zone, 0, 0, zone->w, h);
-++   e_popup_name_set(iwin->popup, "indicator");
-++   e_popup_layer_set(iwin->popup, 200);
-++
-+    /* create our event rectangle */
-+    iwin->o_event = evas_object_rectangle_add(iwin->win->evas);
-+    evas_object_color_set(iwin->o_event, 0, 0, 0, 0);
-+@@ -85,6 +90,8 @@ e_mod_ind_win_new(E_Zone *zone)
-+    evas_object_move(iwin->o_base, 0, 0);
-+    evas_object_show(iwin->o_base);
-+ 
-++   e_popup_edje_bg_object_set(iwin->popup, iwin->o_base);
-++
-+    /* create our gadget container */
-+    iwin->gadcon = e_gadcon_swallowed_new("illume-indicator", zone->id, 
-+                                          iwin->o_base, "e.swallow.content");
-+@@ -133,12 +140,15 @@ e_mod_ind_win_new(E_Zone *zone)
-+ 
-+    /* set minimum size of this window & popup */
-+    e_win_size_min_set(iwin->win, zone->w, h);
-++   ecore_evas_size_min_set(iwin->popup->ecore_evas, zone->w, h);
-+ 
-+    /* position and resize this window */
-+    e_win_move_resize(iwin->win, zone->x, zone->y, zone->w, h);
-++   e_popup_move_resize(iwin->popup, zone->x, zone->y, zone->w, h);
-+ 
-+    /* show the window */
-+    e_win_show(iwin->win);
-++   e_popup_show(iwin->popup);
-+ 
-+    /* set this window on proper zone */
-+    e_border_zone_set(iwin->win->border, zone);
-+@@ -188,6 +198,9 @@ _e_mod_ind_win_cb_free(Ind_Win *iwin)
-+    /* tell conformant apps our position and size */
-+    ecore_x_e_illume_indicator_geometry_set(iwin->zone->black_win, 0, 0, 0, 0);
-+ 
-++   if (iwin->popup) e_object_del(E_OBJECT(iwin->popup));
-++   iwin->popup = NULL;
-++
-+    /* delete the window */
-+    if (iwin->win) e_object_del(E_OBJECT(iwin->win));
-+    iwin->win = NULL;
-+@@ -214,6 +227,7 @@ _e_mod_ind_win_cb_win_prop(void *data, int type __UNUSED__, void *event)
-+ 
-+    /* set minimum size of this window */
-+    e_win_size_min_set(iwin->win, iwin->zone->w, h);
-++   ecore_evas_size_min_set(iwin->popup->ecore_evas, iwin->zone->w, h);
-+ 
-+    /* NB: Not sure why, but we need to tell this border to fetch icccm 
-+     * size position hints now :( (NOTE: This was not needed a few days ago) 
-+@@ -222,6 +236,7 @@ _e_mod_ind_win_cb_win_prop(void *data, int type __UNUSED__, void *event)
-+ 
-+    /* resize this window */
-+    e_win_resize(iwin->win, iwin->zone->w, h);
-++   e_popup_resize(iwin->popup, iwin->zone->w, h);
-+ 
-+    /* tell conformant apps our position and size */
-+    ecore_x_e_illume_indicator_geometry_set(iwin->zone->black_win, 
-+@@ -246,6 +261,7 @@ _e_mod_ind_win_cb_zone_resize(void *data, int type __UNUSED__, void *event)
-+ 
-+    /* set minimum size of this window to match zone size */
-+    e_win_size_min_set(iwin->win, ev->zone->w, h);
-++   ecore_evas_size_min_set(iwin->popup->ecore_evas, ev->zone->w, h);
-+ 
-+    return ECORE_CALLBACK_PASS_ON;
-+ }
-+@@ -256,6 +272,7 @@ _e_mod_ind_win_cb_resize(E_Win *win)
-+    Ind_Win *iwin;
-+ 
-+    if (!(iwin = win->data)) return;
-++   if (iwin->popup) e_popup_resize(iwin->popup, win->w, win->h);
-+    if (iwin->o_event) evas_object_resize(iwin->o_event, win->w, win->h);
-+    if (iwin->o_base) evas_object_resize(iwin->o_base, win->w, win->h);
-+    if (iwin->gadcon->o_container)
-+@@ -427,7 +444,7 @@ _e_mod_ind_win_cb_mouse_move(void *data, Evas *evas __UNUSED__, Evas_Object *obj
-+              bd->y = ny;
-+              bd->changes.pos = 1;
-+              bd->changed = 1;
-+-             e_win_move(iwin->win, iwin->win->x, ny);
-++             e_popup_move(iwin->popup, iwin->popup->x, ny);
-+           }
-+      }
-+ }
-+@@ -553,7 +570,7 @@ _e_mod_ind_win_cb_border_hide(void *data, int type __UNUSED__, void *event)
-+    if (!(iwin = data)) return ECORE_CALLBACK_PASS_ON;
-+    ev = event;
-+    if (ev->border != iwin->win->border) return ECORE_CALLBACK_PASS_ON;
-+-   e_win_hide(iwin->win);
-++   e_popup_hide(iwin->popup);
-+    return ECORE_CALLBACK_PASS_ON;
-+ }
-+ 
-+@@ -566,6 +583,6 @@ _e_mod_ind_win_cb_border_show(void *data, int type __UNUSED__, void *event)
-+    if (!(iwin = data)) return ECORE_CALLBACK_PASS_ON;
-+    ev = event;
-+    if (ev->border != iwin->win->border) return ECORE_CALLBACK_PASS_ON;
-+-   e_win_show(iwin->win);
-++   e_popup_show(iwin->popup);
-+    return ECORE_CALLBACK_PASS_ON;
-+ }
-+diff --git a/src/modules/illume-indicator/e_mod_ind_win.h b/src/modules/illume-indicator/e_mod_ind_win.h
-+index aa2dd1c..d41a861 100644
-+--- a/src/modules/illume-indicator/e_mod_ind_win.h
-++++ b/src/modules/illume-indicator/e_mod_ind_win.h
-+@@ -14,6 +14,7 @@ struct _Ind_Win
-+    Eina_List *hdls;
-+ 
-+    E_Win *win;
-++   E_Popup *popup;
-+    Evas_Object *o_base, *o_event;
-+    E_Gadcon *gadcon;
-+    E_Menu *menu;
-+-- 
-+1.7.8.4
-+
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index e931967..25aa865 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
--PR = "r23"
-+PR = "r24"
- SRCREV = "${EFL_SRCREV}"
- 
- inherit e update-alternatives gettext
-@@ -12,6 +12,7 @@ S = "${WORKDIR}/${SRCNAME}"
- 
- SRC_URI = "\
-   ${E_SVN}/trunk;module=${SRCNAME};proto=http \
-+  file://0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch \
-   file://enlightenment_start.oe \
-   file://applications.menu \
- "
--- 
-1.7.8.4
-
+Andreas
 
 
