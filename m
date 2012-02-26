@@ -1,43 +1,39 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S17a4-0000gv-Nz
+	(envelope-from <martin.jansa@gmail.com>) id 1S1ZB5-00083C-7G
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Feb 2012 03:41:52 +0100
-Received: by vbbff1 with SMTP id ff1so2195047vbb.6
+	Sun, 26 Feb 2012 09:09:55 +0100
+Received: by eaae1 with SMTP id e1so160716eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2012 18:33:29 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.52.172.196 as permitted sender) client-ip=10.52.172.196; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.52.172.196 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.52.172.196])
-	by 10.52.172.196 with SMTP id be4mr2555110vdc.80.1330137209187
-	(num_hops = 1); Fri, 24 Feb 2012 18:33:29 -0800 (PST)
+	Sun, 26 Feb 2012 00:01:30 -0800 (PST)
+Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
+	10.14.124.211 as permitted sender) client-ip=10.14.124.211; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of martin.jansa@gmail.com
+	designates 10.14.124.211 as permitted sender)
+	smtp.mail=martin.jansa@gmail.com;
+	dkim=pass header.i=martin.jansa@gmail.com
+Received: from mr.google.com ([10.14.124.211])
+	by 10.14.124.211 with SMTP id x59mr5313916eeh.51.1330243290781
+	(num_hops = 1); Sun, 26 Feb 2012 00:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fDGXS2L1Z+djHJJSz9od1uPRjthx8Akm1hAW5mI0ZqY=;
-	b=wC8Rv1PTPxJDLRTGp/mUcAGPhEeZYgc+ux8kVzg6duf30EFVa6rod+uZb27oB0f4Ax
-	Hbp7VQvoaWTJHzGBDDZBRcoJUrnKQN8+yaAcRlnAQFOkRKVrILI5jSRFCxpFGh4KrSAC
-	q2cs7rmWp3KD4A9DlfHuGGhkVhdn4481LJ2HA=
-MIME-Version: 1.0
-Received: by 10.52.172.196 with SMTP id be4mr2028444vdc.80.1330137209136; Fri,
-	24 Feb 2012 18:33:29 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.7.208 with HTTP; Fri, 24 Feb 2012 18:33:29 -0800 (PST)
-In-Reply-To: <CAP9ODKrBwMjUg+WUY1b18k_PyKHDgjhEH7hXLjB+1wJ78-u2_g@mail.gmail.com>
-References: <cover.1330116875.git.otavio@ossystems.com.br>
-	<6dcaffb8068eb5a1d62c00c44f93e37a070c6065.1330116875.git.otavio@ossystems.com.br>
-	<CAP9ODKrBwMjUg+WUY1b18k_PyKHDgjhEH7hXLjB+1wJ78-u2_g@mail.gmail.com>
-Date: Sat, 25 Feb 2012 00:33:29 -0200
-X-Google-Sender-Auth: ZiURlij__-tHMe001FEwGBN1g3M
-Message-ID: <CAP9ODKqyQAteyfXFWxX5akvq8u6eJ4RLg7qpsb9RrbTsKmrEzQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=bJYmh5xdII19ZTbLoL3XBSebmfjllUTGPWWaPmChtzg=;
+	b=aelNaqa2H4SX9Mzg7Erc4uo6ZrhYJvEi+09F/oxbo6KRQcUvlrNkz5A/RAnUpvA5ng
+	WuevObAjw7VPlYhK72ruzkWnEyOuXElBBunpJHZtFFuf5IVfcUz54KSxfthpzaSz8dAY
+	Jm1pqTlQaoO9j6G1EQW1MO/hTTINnlYVXsyLw=
+Received: by 10.14.124.211 with SMTP id x59mr4013391eeh.51.1330243290695;
+	Sun, 26 Feb 2012 00:01:30 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n17sm41873462eei.3.2012.02.26.00.01.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 26 Feb 2012 00:01:29 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe 2/2] systemd.bbclass: do not mangle PACKAGES variable in native, nativesdk and cross
+Date: Sun, 26 Feb 2012 09:01:21 +0100
+Message-Id: <cover.1330243124.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.4
+Subject: [meta-oe][meta-efl][PATCH 0/5] EFL upgrade and small sstate improvements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2012 02:41:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 26 Feb 2012 08:09:55 -0000
 
-On Fri, Feb 24, 2012 at 23:44, Otavio Salvador <otavio@ossystems.com.br> wr=
-ote:
-> On Fri, Feb 24, 2012 at 18:55, Otavio Salvador <otavio@ossystems.com.br> =
-wrote:
->> =A0meta-oe/classes/systemd.bbclass | =A0 72 +++++++++++++++++++---------=
-----------
->> =A01 files changed, 36 insertions(+), 36 deletions(-)
->
-> This broke it; I am fixing it and will send a patch soon.
+The following changes since commit 504f2e084cfd14778f223c807ab5250becd32a7a:
 
-I ended sending two patches to fix this. The second one is the right
-to be take since it fix the packaging and parsing. Sorry by this
-mistake.
+  systemd.bbclass: fix regression caused by c9f5703aded (2012-02-25 09:51:54 +0100)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+
+Martin Jansa (5):
+  wmiconfig: don't export CC
+  layer.conf: add task-x11-server to SIGGEN_EXCLUDERECIPES_ABISAFE
+  e-base: bump EFL_SRCREV again
+  e-tasks: addapt to newer elementary
+  e-wm: fix memory usage with illume causing OOM
+
+ meta-efl/classes/e-base.bbclass                    |    2 +-
+ .../e-tasks/0001-depend-on-eina-not-eina-0.patch   |   26 ++
+ ...mentary-genlist_item_insert_before-API-c.patch} |   23 ++-
+ ...API.patch => 0003-adapt-to-newer-elm-API.patch} |    8 +-
+ ....patch => 0004-fix-changed-callback-name.patch} |    8 +-
+ .../e-tasks/0005-adapt-to-even-newer-elm-API.patch |  182 ++++++++++++
+ .../e17/e-tasks/0006-remove-deprecated-API.patch   |  296 ++++++++++++++++++++
+ .../e17/e-tasks/0007-db_sqlite-fix-warning.patch   |   35 +++
+ ...-warning-about-incompatible-pointer-types.patch |   79 ++++++
+ .../recipes-efl/e17/e-tasks/depends.eina.patch     |   12 -
+ meta-efl/recipes-efl/e17/e-tasks_svn.bb            |   15 +-
+ ...ume-Remove-the-popup.-It-s-not-needed-now.patch |  135 +++++++++
+ meta-efl/recipes-efl/e17/e-wm_svn.bb               |    3 +-
+ meta-efl/recipes-efl/e17/eve_svn.bb                |    3 +-
+ meta-oe/conf/layer.conf                            |    1 +
+ meta-oe/recipes-support/wmiconfig/wmiconfig_svn.bb |    4 +-
+ 16 files changed, 795 insertions(+), 37 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0001-depend-on-eina-not-eina-0.patch
+ rename meta-efl/recipes-efl/e17/e-tasks/{genlist_item_insert_before.api.patch => 0002-adapt-to-elementary-genlist_item_insert_before-API-c.patch} (41%)
+ rename meta-efl/recipes-efl/e17/e-tasks/{0001-adapt-to-newer-elm-API.patch => 0003-adapt-to-newer-elm-API.patch} (99%)
+ rename meta-efl/recipes-efl/e17/e-tasks/{0001-fix-changed-callback-name.patch => 0004-fix-changed-callback-name.patch} (88%)
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0005-adapt-to-even-newer-elm-API.patch
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0006-remove-deprecated-API.patch
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0007-db_sqlite-fix-warning.patch
+ create mode 100644 meta-efl/recipes-efl/e17/e-tasks/0008-fix-warning-about-incompatible-pointer-types.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/depends.eina.patch
+ create mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch
+
+-- 
+1.7.8.4
+
 
 
