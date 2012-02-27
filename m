@@ -1,41 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1S1uZ5-0007op-6z
+	(envelope-from <koansoftware@gmail.com>) id 1S1xqY-0002rz-Dg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Feb 2012 08:00:07 +0100
-Received: by wgbdr12 with SMTP id dr12so1334457wgb.24
+	Mon, 27 Feb 2012 11:30:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 33C962C812
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Feb 2012 22:51:41 -0800 (PST)
-Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
-	10.180.84.170 as permitted sender) client-ip=10.180.84.170; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of sledz@dresearch-fe.de
-	designates 10.180.84.170 as permitted sender)
-	smtp.mail=sledz@dresearch-fe.de
-Received: from mr.google.com ([10.180.84.170])
-	by 10.180.84.170 with SMTP id a10mr15622872wiz.9.1330325501421
-	(num_hops = 1); Sun, 26 Feb 2012 22:51:41 -0800 (PST)
-Received: by 10.180.84.170 with SMTP id a10mr12321002wiz.9.1330325501360;
-	Sun, 26 Feb 2012 22:51:41 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id d7sm50767822wiz.6.2012.02.26.22.51.39
-	(version=SSLv3 cipher=OTHER); Sun, 26 Feb 2012 22:51:40 -0800 (PST)
-Message-ID: <4F4B27FA.3050504@dresearch-fe.de>
-Date: Mon, 27 Feb 2012 07:51:38 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Mon, 27 Feb 2012 10:20:08 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ftRvVbWOQOUh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Feb 2012 10:19:56 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 580132C793
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Feb 2012 10:19:56 +0000 (UTC)
+Message-ID: <4F4B5938.7000908@gmail.com>
+Date: Mon, 27 Feb 2012 11:21:44 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-To: Tom Rini <tom.rini@gmail.com>
-References: <cover.1330097955.git.sledz@dresearch-fe.de>
-	<562d0d44a950d86ec19d98621d837e4a227db73a.1330097955.git.sledz@dresearch-fe.de>
-	<20120224202626.GA14969@bill-the-cat>
-In-Reply-To: <20120224202626.GA14969@bill-the-cat>
-X-Enigmail-Version: 1.3.5
-X-Gm-Message-State: ALoCoQkpXxU1TQHxa7EWeg3pAVR62JSTAxdVkdaotEWdxuG28CsdagtmqDT/nKgEyzMrPh6Cqwqc
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 2/7] fakeroot-native: update to 1.14.5
+To: openembedded-devel@lists.openembedded.org
+References: <4F4A68FE.2020109@gmail.com> <20120226183711.312b7e58@eb-e6520>
+In-Reply-To: <20120226183711.312b7e58@eb-e6520>
+Subject: Re: angstrom site down, where to find mirrors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,37 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 07:00:07 -0000
+X-List-Received-Date: Mon, 27 Feb 2012 10:30:22 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-On 24.02.2012 21:26, Tom Rini wrote:
-> On Fri, Feb 24, 2012 at 04:47:19PM +0100, Steffen Sledz wrote:
-> 
->> * version 1.9.6 is no longer fetchable
-> 
-> It _IS_ fetchable if you use a versioned string on snapshot.debian.org.
-> Please use this instead (and we have an example or two already, possibly
-> even for fakeroot I'd have sworn).
+Eric B=C3=A9nard ha scritto, Il 26/02/2012 18:37:
 
-Hmmmm?
+> you can remove angstrom mirrors by editing :
+> sources/meta-angstrom/conf/distro/include/angstrom.inc
+> and commentting out line 96 :
+> # INHERIT +=3D "angstrom-mirrors"=20
+>=20
+> Even when angstrom mirror is up it can be quite slow so you may save
+> some time by not using the mirror (but some downloads may fail if the
+> original source is no more available online).
+>=20
 
-It's a pity that these comments did not came up, when the commits were proposed to oe-classic master some weeks before. Now they made it their way to the master branch (and our application) as they are.
+Eric
+Where alre defined the URLs used by "angstrom-mirrors" ?
 
-I would prefer if they make it to 2011.03-maintenance the same way to avoid confusions with master branch.
 
-Regards,
-Steffen
-
-PS: Can you explain for a non-debian user what you exactly mean with "use a versioned string on snapshot.debian.org". Thx
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--
+Marco
 
 
