@@ -1,40 +1,40 @@
 Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S2T4t-0003Qp-SV
+	(envelope-from <raj.khem@gmail.com>) id 1S2TE5-0003xn-GO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 20:51:16 +0100
-Received: by daln34 with SMTP id n34so5698504dal.6
+	Tue, 28 Feb 2012 21:00:45 +0100
+Received: by daln34 with SMTP id n34so5706287dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 11:42:47 -0800 (PST)
+	Tue, 28 Feb 2012 11:52:17 -0800 (PST)
 Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.68.194.8 as permitted sender) client-ip=10.68.194.8; 
+	10.68.208.196 as permitted sender) client-ip=10.68.208.196; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.68.194.8 as permitted sender)
+	designates 10.68.208.196 as permitted sender)
 	smtp.mail=raj.khem@gmail.com;
 	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.68.194.8])
-	by 10.68.194.8 with SMTP id hs8mr57625382pbc.113.1330458167344
-	(num_hops = 1); Tue, 28 Feb 2012 11:42:47 -0800 (PST)
+Received: from mr.google.com ([10.68.208.196])
+	by 10.68.208.196 with SMTP id mg4mr58903201pbc.108.1330458737231
+	(num_hops = 1); Tue, 28 Feb 2012 11:52:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=YYhEJ3e+AyiXJfrTm7ji6ruwSSdMzn3NbV77284xN+o=;
-	b=ucwphzZ0nCYlKE8GvmPj4yIqub9ucHwiZPZw14vQwgZxaOVZ81tPFtNyTU25+RAf5z
-	01ypbic7x9eVsagHLUwRmbq+goOn2e9ht3Wjo8OyQ4gcws0usEXYMSTDTcFpHGgHrf6i
-	bTH51aHa/TIB5T2KEULBDYVGuby/dFhOBfWfY=
-Received: by 10.68.194.8 with SMTP id hs8mr48589795pbc.113.1330458167117;
-	Tue, 28 Feb 2012 11:42:47 -0800 (PST)
+	bh=2S6/MYF/wje2d1wLZeag0c7WStAdALE1BkdIpU+RcBU=;
+	b=BKt1hGhruX3jRF5/a9pox0fN0D/PTz39nDGdyAnlHYmVGVIFkEni9Mv5qTXuCGp6Y8
+	lqiY6HVLKxx5letOjOYed/lu4+BcxCqNuMx++Iw7dcLL0EpDQJikaY5hP+jnDUpUTO8f
+	0Z1tcWmDgGduxCd2oKxPL3rO51qGzqxeISa6Y=
+Received: by 10.68.208.196 with SMTP id mg4mr49723469pbc.108.1330458736942;
+	Tue, 28 Feb 2012 11:52:16 -0800 (PST)
 Received: from leto.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id g4sm251637pbs.17.2012.02.28.11.42.45
+	by mx.google.com with ESMTPS id f3sm16442979pbr.61.2012.02.28.11.52.14
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 28 Feb 2012 11:42:46 -0800 (PST)
+	Tue, 28 Feb 2012 11:52:15 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 11:42:35 -0800
-Message-Id: <1330458155-3487-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 28 Feb 2012 11:52:06 -0800
+Message-Id: <1330458726-7562-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9
-Subject: [meta-java][PATCH] meta-java: Fix quote errors
+Subject: [meta-opie][PATCH] meta-opie: Fix quoting errors found by latest bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,92 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 19:51:16 -0000
-
-new bitbake is strict about quoting so fix them
+X-List-Received-Date: Tue, 28 Feb 2012 20:00:45 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/java.bbclass                    |   18 +++++++++---------
- recipes-core/xml-commons/dom4j_1.6.1.bb |    2 +-
- recipes-core/xml-commons/jaxen_1.1.1.bb |    2 +-
- recipes-core/xml-commons/jdom_1.1.bb    |    2 +-
- 4 files changed, 12 insertions(+), 12 deletions(-)
+ .../opie-irdaapplet/opie-irdaapplet_git.bb         |    2 +-
+ recipes-opie/opie-reader/uqtreader_1.2.5.bb        |    2 +-
+ recipes-opie/opie-reader/uqtreader_git.bb          |    2 +-
+ recipes-qtopia/qpegps/qpegps.inc                   |    2 +-
+ recipes-qtopia/scummvm/scummvm_1.1.1.bb            |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/classes/java.bbclass b/classes/java.bbclass
-index 49c4c29..235ab23 100644
---- a/classes/java.bbclass
-+++ b/classes/java.bbclass
-@@ -5,21 +5,21 @@
- # the Debian distribution.
- 
- # Jar location on target
--datadir_java ?= ${datadir}/java
-+datadir_java ?= "${datadir}/java"
- 
- # JNI library location on target
--libdir_jni ?= ${libdir}/jni
-+libdir_jni ?= "${libdir}/jni"
- 
- # JVM bundle location on target
--libdir_jvm ?= ${libdir}/jvm
-+libdir_jvm ?= "${libdir}/jvm"
- 
--STAGING_DATADIR_JAVA ?= ${STAGING_DATADIR}/java
--STAGING_LIBDIR_JNI ?= ${STAGING_LIBDIR}/jni
--STAGING_LIBDIR_JVM ?= ${STAGING_LIBDIR}/jvm
-+STAGING_DATADIR_JAVA ?= "${STAGING_DATADIR}/java"
-+STAGING_LIBDIR_JNI ?= "${STAGING_LIBDIR}/jni"
-+STAGING_LIBDIR_JVM ?= "${STAGING_LIBDIR}/jvm"
- 
--STAGING_DATADIR_JAVA_NATIVE ?= ${STAGING_DATADIR_NATIVE}/java
--STAGING_LIBDIR_JNI_NATIVE ?= ${STAGING_LIBDIR_NATIVE}/jni
--STAGING_LIBDIR_JVM_NATIVE ?= ${STAGING_LIBDIR_NATIVE}/jvm
-+STAGING_DATADIR_JAVA_NATIVE ?= "${STAGING_DATADIR_NATIVE}/java"
-+STAGING_LIBDIR_JNI_NATIVE ?= "${STAGING_LIBDIR_NATIVE}/jni"
-+STAGING_LIBDIR_JVM_NATIVE ?= "${STAGING_LIBDIR_NATIVE}/jvm"
- 
- oe_jarinstall() {
-   # Purpose: Install a jar file and create all the given symlinks to it.
-diff --git a/recipes-core/xml-commons/dom4j_1.6.1.bb b/recipes-core/xml-commons/dom4j_1.6.1.bb
-index 94bd807..d26d2ee 100644
---- a/recipes-core/xml-commons/dom4j_1.6.1.bb
-+++ b/recipes-core/xml-commons/dom4j_1.6.1.bb
+diff --git a/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb b/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
+index 7af53fb..dffc2b9 100644
+--- a/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
++++ b/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
 @@ -1,7 +1,7 @@
- DESCRIPTION = "dom4j is a simple and flexible Java library for working with XML, XPath and XSLT"
- LICENSE = "BSD"
+ require ${PN}.inc
  
--HOMEPAGE = "http://dom4j.org
-+HOMEPAGE = "http://dom4j.org"
+ PV = "${OPIE_GIT_PV}"
+-PR = r3
++PR = "r3"
  
- DEPENDS = "fastjar-native xerces-j xalan-j xpp2 xpp3 jaxen"
+ SRC_URI = "${OPIE_GIT};protocol=git;subpath=core/applets/irdaapplet \
+            ${OPIE_GIT};protocol=git;subpath=pics \
+diff --git a/recipes-opie/opie-reader/uqtreader_1.2.5.bb b/recipes-opie/opie-reader/uqtreader_1.2.5.bb
+index ec70e15..73dfae4 100644
+--- a/recipes-opie/opie-reader/uqtreader_1.2.5.bb
++++ b/recipes-opie/opie-reader/uqtreader_1.2.5.bb
+@@ -66,7 +66,7 @@ FILES_${PN}-codeclib = "${libdir}/libreader_codec.so.*"
+ FILES_${PN}-codec-aportis = "${libdir}/uqtreader/codecs/libAportis.so"
+ FILES_${PN}-codec-arrierego = "${libdir}/uqtreader/codecs/libArriereGo.so"
+ FILES_${PN}-codec-chm = "${libdir}/uqtreader/codecs/libCHM.so"
+-DEBIAN_NOAUTONAME_${PN}-codec-plucker = 1
++DEBIAN_NOAUTONAME_${PN}-codec-plucker = "1"
+ FILES_${PN}-codec-plucker = "${libdir}/uqtreader/codecs/libPlucker.so ${libdir}/lib*plucker*.so.* ${libdir}/uqtreader/support/libpluckerdecompress.so"
+ FILES_${PN}-codec-reb = "${libdir}/uqtreader/codecs/libReb.so"
+ FILES_${PN}-codec-weasel = "${libdir}/uqtreader/codecs/libWeasel.so"
+diff --git a/recipes-opie/opie-reader/uqtreader_git.bb b/recipes-opie/opie-reader/uqtreader_git.bb
+index ad6c223..019d8c0 100644
+--- a/recipes-opie/opie-reader/uqtreader_git.bb
++++ b/recipes-opie/opie-reader/uqtreader_git.bb
+@@ -62,7 +62,7 @@ FILES_${PN}-codeclib = "${libdir}/libreader_codec.so.*"
+ FILES_${PN}-codec-aportis = "${libdir}/uqtreader/codecs/libAportis.so"
+ FILES_${PN}-codec-arrierego = "${libdir}/uqtreader/codecs/libArriereGo.so"
+ FILES_${PN}-codec-chm = "${libdir}/uqtreader/codecs/libCHM.so"
+-DEBIAN_NOAUTONAME_${PN}-codec-plucker = 1
++DEBIAN_NOAUTONAME_${PN}-codec-plucker = "1"
+ FILES_${PN}-codec-plucker = "${libdir}/uqtreader/codecs/libPlucker.so ${libdir}/lib*plucker*.so.* ${libdir}/uqtreader/support/libpluckerdecompress.so"
+ FILES_${PN}-codec-reb = "${libdir}/uqtreader/codecs/libReb.so"
+ FILES_${PN}-codec-weasel = "${libdir}/uqtreader/codecs/libWeasel.so"
+diff --git a/recipes-qtopia/qpegps/qpegps.inc b/recipes-qtopia/qpegps/qpegps.inc
+index 8292915..6dd0767 100644
+--- a/recipes-qtopia/qpegps/qpegps.inc
++++ b/recipes-qtopia/qpegps/qpegps.inc
+@@ -18,7 +18,7 @@ inherit palmtop
+ QMAKE_PROFILES = "qpegps.pro"
+ EXTRA_QMAKEVARS_POST = "LIBS=-lqpe LIBS+=-lgps"
+ OE_QMAKE_CFLAGS += " -DQWS "
+-OE_QMAKE_LIBS_QT = ${QT_LIBRARY}
++OE_QMAKE_LIBS_QT = "${QT_LIBRARY}"
  
-diff --git a/recipes-core/xml-commons/jaxen_1.1.1.bb b/recipes-core/xml-commons/jaxen_1.1.1.bb
-index 7180dda..147ccf9 100644
---- a/recipes-core/xml-commons/jaxen_1.1.1.bb
-+++ b/recipes-core/xml-commons/jaxen_1.1.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "XPath library written in Java"
- LICENSE = "BSD"
+ do_install() {
+         install -d ${D}${palmtopdir}/bin \
+diff --git a/recipes-qtopia/scummvm/scummvm_1.1.1.bb b/recipes-qtopia/scummvm/scummvm_1.1.1.bb
+index 90fc136..fba22d5 100644
+--- a/recipes-qtopia/scummvm/scummvm_1.1.1.bb
++++ b/recipes-qtopia/scummvm/scummvm_1.1.1.bb
+@@ -15,7 +15,7 @@ SRC_URI_OVERRIDES_PACKAGE_ARCH = "1"
  
--HOMEPAGE = "http://jaxen.codehaus.org/
-+HOMEPAGE = "http://jaxen.codehaus.org/"
+ # Make this a plugin enabled build. Bigger binary, less memory usage. Makes more games run on lower end platforms.
+ # These plugins are not normal Linux shared libs so will fall foul of the sanity checker.
+-INSANE_SKIP_${PN} = True
++INSANE_SKIP_${PN} = "1"
+ EXTRA_OECONF += " --enable-plugins --default-dynamic "
  
- DEPENDS = "fastjar-native xerces-j xom"
- 
-diff --git a/recipes-core/xml-commons/jdom_1.1.bb b/recipes-core/xml-commons/jdom_1.1.bb
-index 1a77f05..cb53734 100644
---- a/recipes-core/xml-commons/jdom_1.1.bb
-+++ b/recipes-core/xml-commons/jdom_1.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Parses, manipulates, and outputs XML using standard Java constructs"
- LICENSE = "BSD"
- 
--HOMEPAGE = "http://jdom.org/
-+HOMEPAGE = "http://jdom.org/"
- 
- DEPENDS = "fastjar-native jaxen"
- 
+ # Workaround, because some env variables aren't recognised correctly
 -- 
 1.7.9
 
