@@ -1,42 +1,39 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S2Law-0005QU-Io
+	(envelope-from <sledz@dresearch-fe.de>) id 1S2M1p-00069x-Pi
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 12:51:50 +0100
-Received: by eaae1 with SMTP id e1so835778eaa.6
+	Tue, 28 Feb 2012 13:19:37 +0100
+Received: by bkcjg15 with SMTP id jg15so2257669bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 03:43:23 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.37.7 as permitted sender) client-ip=10.14.37.7;
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.37.7 as permitted
-	sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.37.7])
-	by 10.14.37.7 with SMTP id x7mr10446309eea.90.1330429403045 (num_hops =
-	1); Tue, 28 Feb 2012 03:43:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=Jru8Bk+lyugIn5Dc/1fBxvlfyxWTKaM+RqAtJH6DEr8=;
-	b=MM4oynXLOr7EMCy8v15ow2OmkGvuWRb6a8YmzQnKGkyXDor3vIh51t5o3zDDpvN75N
-	WpXkRzjqWSV81Z1B5gdUbn6eM2UNxrBAmvT8dxmURaAgGWwSXwrMmpL20DiJwyQ938LS
-	UVSDTOSOrCY00X0lJBeI1R3zZtSEAOMzbB438=
-Received: by 10.14.37.7 with SMTP id x7mr7795576eea.90.1330429402938;
-	Tue, 28 Feb 2012 03:43:22 -0800 (PST)
-Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
-	[95.223.250.190])
-	by mx.google.com with ESMTPS id r5sm57116123eef.6.2012.02.28.03.43.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 28 Feb 2012 03:43:22 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 12:43:22 +0100
-Message-Id: <1330429402-2946-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.4
+	Tue, 28 Feb 2012 04:11:10 -0800 (PST)
+Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
+	10.204.129.7 as permitted sender) client-ip=10.204.129.7; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of sledz@dresearch-fe.de
+	designates 10.204.129.7 as permitted sender)
+	smtp.mail=sledz@dresearch-fe.de
+Received: from mr.google.com ([10.204.129.7])
+	by 10.204.129.7 with SMTP id m7mr9047058bks.13.1330431070118 (num_hops
+	= 1); Tue, 28 Feb 2012 04:11:10 -0800 (PST)
+Received: by 10.204.129.7 with SMTP id m7mr7252682bks.13.1330431069893;
+	Tue, 28 Feb 2012 04:11:09 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id x11sm30811267bkd.2.2012.02.28.04.11.09
+	(version=SSLv3 cipher=OTHER); Tue, 28 Feb 2012 04:11:09 -0800 (PST)
+Message-ID: <4F4CC45C.8010501@dresearch-fe.de>
+Date: Tue, 28 Feb 2012 13:11:08 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-Subject: [meta-oe] gcc: same patches for all gccs with shared sources
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <4F4C9DB8.5050203@dresearch-fe.de> <1567078.cdBARgH5ks@helios>
+In-Reply-To: <1567078.cdBARgH5ks@helios>
+X-Enigmail-Version: 1.3.5
+X-Gm-Message-State: ALoCoQnyVFMrMbQ9RHf42E1sNrONNhUhAkFL8VJgN81tmW7NQCM+5Qnvnl1L4mT1wCG5mNPSeE99
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Use python in variable assigment of a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,58 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 11:51:50 -0000
+X-List-Received-Date: Tue, 28 Feb 2012 12:19:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* different patching on same sources caused race contition [1]
-* build tested from scratch
+On 28.02.2012 10:55, Paul Eggleton wrote:
+> On Tuesday 28 February 2012 10:26:16 Steffen Sledz wrote:
+>> According to the user manual it is possible to use python code in variable
+>> assignments by using ${@...}.
+>>
+>> I like to use a function (subprocess.check_output) here which requires an
+>> import statement. Where do i have to place this import?
+> 
+> If you've got more than one line of Python then you should probably define a 
+> normal Python function (just use "def" as you would in a normal python script 
+> - there are plenty of examples of this) and then call this using ${@...}.
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-core/2012-February/018296.html
+Works. Thx.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-devtools/gcc/gcc-4.5.inc        |    4 +++-
- meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb |    2 --
- 2 files changed, 3 insertions(+), 3 deletions(-)
+>> And another question. Is it possible to determine the path to the recipe
+>> itself from with it?
+> 
+> I think you just need to get the value of the FILE variable e.g
+> 
+>  d.getVar('FILE', True)
 
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-index 82dd157..d1802b5 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-+++ b/meta-oe/recipes-devtools/gcc/gcc-4.5.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
- 
- 
- PV = "4.5"
--PR = "r45"
-+PR = "r46"
- 
- # BINV should be incremented after updating to a revision
- # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
-@@ -233,6 +233,8 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
-        file://use-defaults.h-and-t-oe-in-B.patch \
-        file://gcc-with-linker-hash-style.patch \
-        file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
-+       \
-+       file://fortran-cross-compile-hack.patch \
-        "
- 
- # Language Overrides
-diff --git a/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb b/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
-index a34ab40..e3b2d4e 100644
---- a/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
-+++ b/meta-oe/recipes-devtools/gcc/gcc-runtime_4.5.bb
-@@ -3,8 +3,6 @@ require recipes-devtools/gcc/gcc-${PV}.inc
- require recipes-devtools/gcc/gcc-configure-runtime.inc
- require recipes-devtools/gcc/gcc-package-runtime.inc
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
--
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
- EXTRA_OECONF += "--disable-libunwind-exceptions"
+Because i'm working with oe-classic i tried this (found in some other examples):
+
+  MYVAR = "${@my_func()}"
+
+  def my_func():
+      bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
+      ...
+
+But this leads to an error:
+
+  NameError: global name 'd' is not defined
+
+:(
+
 -- 
-1.7.6.4
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
