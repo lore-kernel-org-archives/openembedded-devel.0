@@ -1,34 +1,25 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S2JVt-0002eW-Sq for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 10:38:29 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S2JNj-0008Un-QD for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 10:30:03 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 10:30:03 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 10:30:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 28 Feb 2012 10:27:43 +0100
-Message-ID: <jii6me$ae8$2@dough.gmane.org>
-References: <1330368617-28664-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-In-Reply-To: <1330368617-28664-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe][PATCH] mplayer2: drop virtual/kernel dependency and s/ARM/arm/ in ARM_INSTRUCTION_SET
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1S2Jub-0003Mz-Ae
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Feb 2012 11:04:01 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 28 Feb 2012 01:55:33 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="71248383"
+Received: from unknown (HELO helios.localnet) ([10.252.123.68])
+	by AZSMGA002.ch.intel.com with ESMTP; 28 Feb 2012 01:55:32 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Date: Tue, 28 Feb 2012 09:55:31 +0000
+Message-ID: <1567078.cdBARgH5ks@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.0; i686; ; )
+In-Reply-To: <4F4C9DB8.5050203@dresearch-fe.de>
+References: <4F4C9DB8.5050203@dresearch-fe.de>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Use python in variable assigment of a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,59 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 09:38:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Feb 2012 10:04:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 27-02-12 19:50, Martin Jansa schreef:
-> * virtual/kernel was needed only to provide omapfb.h in staging but
-> that's now moved to BSP layers, no need to make sstate hash machine
-> specific here.
+On Tuesday 28 February 2012 10:26:16 Steffen Sledz wrote:
+> According to the user manual it is possible to use python code in variable
+> assignments by using ${@...}.
 > 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
-> meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |    4 ++-- 1 files
-> changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb index
-> 3e4d369..fd25ec0 100644 ---
-> a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb +++
-> b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb @@ -1,7 +1,7 @@ 
-> DESCRIPTION = "Open Source multimedia player." SECTION = "multimedia" 
-> HOMEPAGE = "http://www.mplayerhq.hu/" -DEPENDS = "libvpx live555
-> libdvdread libtheora virtual/libsdl ffmpeg xsp zlib libpng jpeg liba52
-> freetype fontconfig alsa-lib lzo ncurses lame libxv virtual/libx11
-> virtual/kernel libass \ +DEPENDS = "libvpx live555 libdvdread libtheora
-> virtual/libsdl ffmpeg xsp zlib libpng jpeg liba52 freetype fontconfig
-> alsa-lib lzo ncurses lame libxv virtual/libx11 libass \ 
-> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lame',
-> d)}"
-> 
-> RDEPENDS_${PN} = "mplayer-common" @@ -18,7 +18,7 @@ SRC_URI =
-> "git://repo.or.cz/mplayer.git;protocol=git;branch=master \
-> 
-> SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
-> 
-> -ARM_INSTRUCTION_SET = "ARM" +ARM_INSTRUCTION_SET = "arm"
-> 
-> PV = "2.0+gitr${SRCPV}" PR = "r7"
+> I like to use a function (subprocess.check_output) here which requires an
+> import statement. Where do i have to place this import?
 
-Can you please bump PR as well?
+If you've got more than one line of Python then you should probably define a 
+normal Python function (just use "def" as you would in a normal python script 
+- there are plenty of examples of this) and then call this using ${@...}.
+ 
+> And another question. Is it possible to determine the path to the recipe
+> itself from with it?
 
-regards,
+I think you just need to get the value of the FILE variable e.g
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+ d.getVar('FILE', True)
 
-iEYEARECAAYFAk9Mng8ACgkQMkyGM64RGpEZEgCbB1JZBiHUh7Uauhmv14O2xTf1
-9rgAnjD8skwE/Hsu3JHRVq/gaS2pv8ke
-=9Ymq
------END PGP SIGNATURE-----
+Cheers,
+Paul
 
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
