@@ -1,42 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S2OdO-0004Hb-05
+	(envelope-from <raj.khem@gmail.com>) id 1S2T4t-0003Qp-SV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 16:06:34 +0100
-Received: by vbbfr13 with SMTP id fr13so2075229vbb.6
+	Tue, 28 Feb 2012 20:51:16 +0100
+Received: by daln34 with SMTP id n34so5698504dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 06:58:06 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.52.71.80 as permitted sender) client-ip=10.52.71.80; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.52.71.80 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.52.71.80])
-	by 10.52.71.80 with SMTP id s16mr13231020vdu.131.1330441086352
-	(num_hops = 1); Tue, 28 Feb 2012 06:58:06 -0800 (PST)
+	Tue, 28 Feb 2012 11:42:47 -0800 (PST)
+Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
+	10.68.194.8 as permitted sender) client-ip=10.68.194.8; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of raj.khem@gmail.com
+	designates 10.68.194.8 as permitted sender)
+	smtp.mail=raj.khem@gmail.com;
+	dkim=pass header.i=raj.khem@gmail.com
+Received: from mr.google.com ([10.68.194.8])
+	by 10.68.194.8 with SMTP id hs8mr57625382pbc.113.1330458167344
+	(num_hops = 1); Tue, 28 Feb 2012 11:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=IKoYMJPmAr1kAC5FsbNnCpxhlaJpfq3Btlgm6PVIQQs=;
-	b=D6IV0J4Fg5TZpKa5FDuVpHoza4egBUbgQ8DlO4NWYNa090Q/vh1IgL0rKeu7OZ4DeI
-	XmkOZB2UyiSq14X/y5rm7AZhZXwbXsGbRLgy+LOyTGeHm+fMYAOlJYqQWj896oLhfw76
-	WiJS1ffGyGJfJ2q+CddxbZNTnbgPcxiPp8DUI=
-MIME-Version: 1.0
-Received: by 10.52.71.80 with SMTP id s16mr10933671vdu.131.1330441086058; Tue,
-	28 Feb 2012 06:58:06 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.7.208 with HTTP; Tue, 28 Feb 2012 06:58:06 -0800 (PST)
-In-Reply-To: <CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
-References: <1330435070-30907-1-git-send-email-koen@dominion.thruhere.net>
-	<CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
-Date: Tue, 28 Feb 2012 11:58:06 -0300
-X-Google-Sender-Auth: y5FNP_fNXyDW9CVbD1fRaxROSc4
-Message-ID: <CAP9ODKoddtFdzFVESfzeKA8zxzOb0D=4j-prRcLG54wxO=ak8Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=YYhEJ3e+AyiXJfrTm7ji6ruwSSdMzn3NbV77284xN+o=;
+	b=ucwphzZ0nCYlKE8GvmPj4yIqub9ucHwiZPZw14vQwgZxaOVZ81tPFtNyTU25+RAf5z
+	01ypbic7x9eVsagHLUwRmbq+goOn2e9ht3Wjo8OyQ4gcws0usEXYMSTDTcFpHGgHrf6i
+	bTH51aHa/TIB5T2KEULBDYVGuby/dFhOBfWfY=
+Received: by 10.68.194.8 with SMTP id hs8mr48589795pbc.113.1330458167117;
+	Tue, 28 Feb 2012 11:42:47 -0800 (PST)
+Received: from leto.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id g4sm251637pbs.17.2012.02.28.11.42.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 28 Feb 2012 11:42:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] xinput-calibrator 0.7.5: fix calibration script
+Date: Tue, 28 Feb 2012 11:42:35 -0800
+Message-Id: <1330458155-3487-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9
+Subject: [meta-java][PATCH] meta-java: Fix quote errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 15:06:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Feb 2012 19:51:16 -0000
 
-On Tue, Feb 28, 2012 at 10:58, Andrea Adami <andrea.adami@gmail.com> wrote:
-> do you think the recipe is now mature enough to be committed in oe-core?
-> This would follow xinput commit and could make easier the unification
-> of xserver-nodm-init between oe-core and meta-oe.
->
-> I think thi sis needed because at the moment xserver ts calibration is
-> not working when using oe-core (xtscal fails because XCALIBRATE ext
-> has been removed).
+new bitbake is strict about quoting so fix them
 
-The touchscreens we have here do not work with it as it doesn't handle
-the swap and reverse properly.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/java.bbclass                    |   18 +++++++++---------
+ recipes-core/xml-commons/dom4j_1.6.1.bb |    2 +-
+ recipes-core/xml-commons/jaxen_1.1.1.bb |    2 +-
+ recipes-core/xml-commons/jdom_1.1.bb    |    2 +-
+ 4 files changed, 12 insertions(+), 12 deletions(-)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/classes/java.bbclass b/classes/java.bbclass
+index 49c4c29..235ab23 100644
+--- a/classes/java.bbclass
++++ b/classes/java.bbclass
+@@ -5,21 +5,21 @@
+ # the Debian distribution.
+ 
+ # Jar location on target
+-datadir_java ?= ${datadir}/java
++datadir_java ?= "${datadir}/java"
+ 
+ # JNI library location on target
+-libdir_jni ?= ${libdir}/jni
++libdir_jni ?= "${libdir}/jni"
+ 
+ # JVM bundle location on target
+-libdir_jvm ?= ${libdir}/jvm
++libdir_jvm ?= "${libdir}/jvm"
+ 
+-STAGING_DATADIR_JAVA ?= ${STAGING_DATADIR}/java
+-STAGING_LIBDIR_JNI ?= ${STAGING_LIBDIR}/jni
+-STAGING_LIBDIR_JVM ?= ${STAGING_LIBDIR}/jvm
++STAGING_DATADIR_JAVA ?= "${STAGING_DATADIR}/java"
++STAGING_LIBDIR_JNI ?= "${STAGING_LIBDIR}/jni"
++STAGING_LIBDIR_JVM ?= "${STAGING_LIBDIR}/jvm"
+ 
+-STAGING_DATADIR_JAVA_NATIVE ?= ${STAGING_DATADIR_NATIVE}/java
+-STAGING_LIBDIR_JNI_NATIVE ?= ${STAGING_LIBDIR_NATIVE}/jni
+-STAGING_LIBDIR_JVM_NATIVE ?= ${STAGING_LIBDIR_NATIVE}/jvm
++STAGING_DATADIR_JAVA_NATIVE ?= "${STAGING_DATADIR_NATIVE}/java"
++STAGING_LIBDIR_JNI_NATIVE ?= "${STAGING_LIBDIR_NATIVE}/jni"
++STAGING_LIBDIR_JVM_NATIVE ?= "${STAGING_LIBDIR_NATIVE}/jvm"
+ 
+ oe_jarinstall() {
+   # Purpose: Install a jar file and create all the given symlinks to it.
+diff --git a/recipes-core/xml-commons/dom4j_1.6.1.bb b/recipes-core/xml-commons/dom4j_1.6.1.bb
+index 94bd807..d26d2ee 100644
+--- a/recipes-core/xml-commons/dom4j_1.6.1.bb
++++ b/recipes-core/xml-commons/dom4j_1.6.1.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "dom4j is a simple and flexible Java library for working with XML, XPath and XSLT"
+ LICENSE = "BSD"
+ 
+-HOMEPAGE = "http://dom4j.org
++HOMEPAGE = "http://dom4j.org"
+ 
+ DEPENDS = "fastjar-native xerces-j xalan-j xpp2 xpp3 jaxen"
+ 
+diff --git a/recipes-core/xml-commons/jaxen_1.1.1.bb b/recipes-core/xml-commons/jaxen_1.1.1.bb
+index 7180dda..147ccf9 100644
+--- a/recipes-core/xml-commons/jaxen_1.1.1.bb
++++ b/recipes-core/xml-commons/jaxen_1.1.1.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "XPath library written in Java"
+ LICENSE = "BSD"
+ 
+-HOMEPAGE = "http://jaxen.codehaus.org/
++HOMEPAGE = "http://jaxen.codehaus.org/"
+ 
+ DEPENDS = "fastjar-native xerces-j xom"
+ 
+diff --git a/recipes-core/xml-commons/jdom_1.1.bb b/recipes-core/xml-commons/jdom_1.1.bb
+index 1a77f05..cb53734 100644
+--- a/recipes-core/xml-commons/jdom_1.1.bb
++++ b/recipes-core/xml-commons/jdom_1.1.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Parses, manipulates, and outputs XML using standard Java constructs"
+ LICENSE = "BSD"
+ 
+-HOMEPAGE = "http://jdom.org/
++HOMEPAGE = "http://jdom.org/"
+ 
+ DEPENDS = "fastjar-native jaxen"
+ 
+-- 
+1.7.9
+
 
 
