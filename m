@@ -1,44 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S2Nyy-0001cG-Cp
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 15:24:48 +0100
-Received: by mail-ey0-f175.google.com with SMTP id e1so881086eaa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S2OS3-0003T8-Tv for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Feb 2012 15:54:51 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S2OJq-0002Jf-Cz for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Feb 2012 15:46:22 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2012 15:46:22 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 06:16:23 -0800 (PST)
-Received-SPF: pass (google.com: domain of martin.jansa@gmail.com designates
-	10.213.14.80 as permitted sender) client-ip=10.213.14.80; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of martin.jansa@gmail.com
-	designates 10.213.14.80 as permitted sender)
-	smtp.mail=martin.jansa@gmail.com;
-	dkim=pass header.i=martin.jansa@gmail.com
-Received: from mr.google.com ([10.213.14.80])
-	by 10.213.14.80 with SMTP id f16mr5679983eba.135.1330438583347
-	(num_hops = 1); Tue, 28 Feb 2012 06:16:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=k0y4TnJk6SnmUvfUGyf10Z7utWuSEGpkZB8DQRe/U3g=;
-	b=binM5YQBSGlOyjTIzq5LixttziTCw+dCSdwlLcRZ15nF7x/ScHAnHak+FDxVhjYHLR
-	CT/M3mJL80XE+dA1nuUqI3Lt0I7OCKmfKoiB3k31M344xKzKhBFFwYp4MvhRvMpgaMk1
-	W6H6Lh3rwAuBEDuLIulV4U3yPG6mZ1IAdiJ/w=
-Received: by 10.213.14.80 with SMTP id f16mr4242807eba.135.1330438583274;
-	Tue, 28 Feb 2012 06:16:23 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z7sm24021354eef.9.2012.02.28.06.16.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 28 Feb 2012 06:16:22 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 28 Feb 2012 15:46:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 15:14:44 +0100
-Message-Id: <5f9b2212a0aa455e58facbb15e1745d0d065c4e2.1330438403.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <6999c8bfc7f9aefbaba4f93d26e7540dc74e3472.1330438403.git.Martin.Jansa@gmail.com>
-References: <6999c8bfc7f9aefbaba4f93d26e7540dc74e3472.1330438403.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1330438403.git.Martin.Jansa@gmail.com>
-References: <cover.1330438403.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 13/14] tiff: rename bbappend to match new version from oe-core
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 28 Feb 2012 15:46:04 +0100
+Message-ID: <jiipbb$vb5$1@dough.gmane.org>
+References: <1330435070-30907-1-git-send-email-koen@dominion.thruhere.net>
+	<CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
+In-Reply-To: <CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe] xinput-calibrator 0.7.5: fix calibration script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,20 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 14:24:52 -0000
+X-List-Received-Date: Tue, 28 Feb 2012 14:54:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../{tiff_3.9.5.bbappend => tiff_4.0.1.bbappend}   |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-multimedia/libtiff/{tiff_3.9.5.bbappend => tiff_4.0.1.bbappend} (100%)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-multimedia/libtiff/tiff_3.9.5.bbappend b/meta-oe/recipes-multimedia/libtiff/tiff_4.0.1.bbappend
-similarity index 100%
-rename from meta-oe/recipes-multimedia/libtiff/tiff_3.9.5.bbappend
-rename to meta-oe/recipes-multimedia/libtiff/tiff_4.0.1.bbappend
--- 
-1.7.8.5
+Op 28-02-12 14:58, Andrea Adami schreef:
+> On Tue, Feb 28, 2012 at 2:17 PM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>> The 'auto' format switched to 'xorg.conf.d' which broke the script. The
+>> pointercal package also installed an 'empty' pointercal by default,
+>> which also broke the script. Fix these 2 in one go.
+>> 
+>> Also remove the hal script since hal isn't supported in the oe-core
+>> universe anymore
+>> 
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> ---
+> 
+> Koen,
+> 
+> do you think the recipe is now mature enough to be committed in oe-core?
+
+Well, there is too much in oe-core already, it needs to shrink, not grow :(
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9M6KoACgkQMkyGM64RGpHtNgCgtOc4D2DkDh6U52dwYngDD5Zj
+gq8An2Anp4rYkcz0zsXC8EWL0fFtJjUS
+=5h+N
+-----END PGP SIGNATURE-----
 
 
 
