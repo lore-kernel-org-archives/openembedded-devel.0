@@ -1,29 +1,36 @@
-Received: from smtprelay-b21.telenor.se ([195.54.99.212])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1S2GIH-000254-6k
+	(envelope-from <sledz@dresearch-fe.de>) id 1S2JSG-0002Q1-MU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 07:12:13 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 5559CCAEC
+	Tue, 28 Feb 2012 10:34:44 +0100
+Received: by bkcjg15 with SMTP id jg15so2128416bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 07:03:44 +0100 (CET)
-X-SENDER-IP: [83.227.57.213]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AkdIAEhtTE9T4znVPGdsb2JhbABDs3EZAQEBATc0gXMBAQVWIxAIFAMBAi85CgwIGYgKB7hsiWmDfgYFCYUTCjINAQYPg0EElT2Sb4FT
-X-IronPort-AV: E=Sophos;i="4.73,494,1325458800"; d="scan'208";a="273354970"
-Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	localhost) ([83.227.57.213])
-	by ipb2.telenor.se with ESMTP; 28 Feb 2012 07:03:44 +0100
-From: ulf@emagii.com
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 07:03:22 +0100
-Message-Id: <1330409002-31186-2-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.7.4.1
-In-Reply-To: <1330409002-31186-1-git-send-email-ulf@emagii.com>
-References: <1330409002-31186-1-git-send-email-ulf@emagii.com>
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [meta-oe] ca-certificates: Bump version to 20120212
+	Tue, 28 Feb 2012 01:26:17 -0800 (PST)
+Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
+	10.204.132.72 as permitted sender) client-ip=10.204.132.72; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of sledz@dresearch-fe.de
+	designates 10.204.132.72 as permitted sender)
+	smtp.mail=sledz@dresearch-fe.de
+Received: from mr.google.com ([10.204.132.72])
+	by 10.204.132.72 with SMTP id a8mr7840828bkt.42.1330421177519 (num_hops
+	= 1); Tue, 28 Feb 2012 01:26:17 -0800 (PST)
+Received: by 10.204.132.72 with SMTP id a8mr6280499bkt.42.1330421177294;
+	Tue, 28 Feb 2012 01:26:17 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id x11sm29816631bkd.2.2012.02.28.01.26.16
+	(version=SSLv3 cipher=OTHER); Tue, 28 Feb 2012 01:26:17 -0800 (PST)
+Message-ID: <4F4C9DB8.5050203@dresearch-fe.de>
+Date: Tue, 28 Feb 2012 10:26:16 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.3.5
+X-Gm-Message-State: ALoCoQnGyAloFz2aNOWJJtaZFf3TcRiDLBNEykfuOyiDqR6DI9HrRapFHbpdUqn7oIJ73i7njzZB
+Subject: Use python in variable assigment of a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,208 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 06:12:13 -0000
+X-List-Received-Date: Tue, 28 Feb 2012 09:34:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Ulf Samuelsson <ulf@emagii.com>
+According to the user manual it is possible to use python code in variable assignments by using ${@...}.
 
-20111211 has disappeared from the server
+I like to use a function (subprocess.check_output) here which requires an import statement. Where do i have to place this import?
 
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- ...01-update-ca-certificates-remove-c-rehash.patch |   45 ++++++++++++++++++++
- .../ca-certificates/remove-c-rehash.patch          |   29 -------------
- .../ca-certificates/ca-certificates_20111211.bb    |   42 ------------------
- .../ca-certificates/ca-certificates_20120212.bb    |   42 ++++++++++++++++++
- 4 files changed, 87 insertions(+), 71 deletions(-)
- create mode 100644 meta-oe/recipes-support/ca-certificates/ca-certificates/0001-update-ca-certificates-remove-c-rehash.patch
- delete mode 100644 meta-oe/recipes-support/ca-certificates/ca-certificates/remove-c-rehash.patch
- delete mode 100644 meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb
- create mode 100644 meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb
+And another question. Is it possible to determine the path to the recipe itself from with it?
 
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates/0001-update-ca-certificates-remove-c-rehash.patch b/meta-oe/recipes-support/ca-certificates/ca-certificates/0001-update-ca-certificates-remove-c-rehash.patch
-new file mode 100644
-index 0000000..ccb0efc
---- /dev/null
-+++ b/meta-oe/recipes-support/ca-certificates/ca-certificates/0001-update-ca-certificates-remove-c-rehash.patch
-@@ -0,0 +1,45 @@
-+From 111e905fe931da1a3800accfc675cc01c8ee080c Mon Sep 17 00:00:00 2001
-+From: Ulf Samuelsson <ulf@emagii.com>
-+Date: Tue, 28 Feb 2012 06:42:58 +0100
-+Subject: [PATCH] update-ca-certificates: remove c rehash
-+
-+Updated earlier patch to apply clean on 2012-02-12
-+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
-+---
-+ sbin/update-ca-certificates |   20 ++++++++++----------
-+ 1 files changed, 10 insertions(+), 10 deletions(-)
-+
-+diff --git a/sbin/update-ca-certificates b/sbin/update-ca-certificates
-+index 5375950..c567e3d 100755
-+--- a/sbin/update-ca-certificates
-++++ b/sbin/update-ca-certificates
-+@@ -132,16 +132,16 @@ rm -f "$CERTBUNDLE"
-+ ADDED_CNT=$(wc -l < "$ADDED")
-+ REMOVED_CNT=$(wc -l < "$REMOVED")
-+ 
-+-if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
-+-then
-+-  # only run if set of files has changed
-+-  if [ "$verbose" = 0 ]
-+-  then
-+-    c_rehash . > /dev/null
-+-  else
-+-    c_rehash .
-+-  fi
-+-fi
-++#if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
-++#then
-++#  # only run if set of files has changed
-++#  if [ "$verbose" = 0 ]
-++#  then
-++#    c_rehash . > /dev/null
-++#  else
-++#    c_rehash .
-++#  fi
-++#fi
-+ 
-+ chmod 0644 "$TEMPBUNDLE"
-+ mv -f "$TEMPBUNDLE" "$CERTBUNDLE"
-+-- 
-+1.7.4.1
-+
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates/remove-c-rehash.patch b/meta-oe/recipes-support/ca-certificates/ca-certificates/remove-c-rehash.patch
-deleted file mode 100644
-index 9d9b8ad..0000000
---- a/meta-oe/recipes-support/ca-certificates/ca-certificates/remove-c-rehash.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
----- ca-certificates-20090814/sbin/update-ca-certificates.orig	2010-02-25 19:25:08.272807308 +0100
--+++ ca-certificates-20090814/sbin/update-ca-certificates	2010-02-25 19:25:33.962806273 +0100
--@@ -133,16 +133,16 @@
-- ADDED_CNT=$(wc -l < "$ADDED")
-- REMOVED_CNT=$(wc -l < "$REMOVED")
-- 
---if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
---then
---  # only run if set of files has changed
---  if [ "$verbose" = 0 ]
---  then
---    c_rehash . > /dev/null
---  else
---    c_rehash .
---  fi
---fi
--+#if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
--+#then
--+#  # only run if set of files has changed
--+#  if [ "$verbose" = 0 ]
--+#  then
--+#    c_rehash . > /dev/null
--+#  else
--+#    c_rehash .
--+#  fi
--+#fi
-- 
-- echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
-- 
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb
-deleted file mode 100644
-index b79f5b1..0000000
---- a/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb
-+++ /dev/null
-@@ -1,42 +0,0 @@
--DESCRIPTION = "Common CA certificates"
--HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
--SECTION = "misc"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
--
--SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
--           file://remove-c-rehash.patch"
--
--SRC_URI[md5sum] = "f99a90a91b23338b4df765c0d18eba73"
--SRC_URI[sha256sum] = "6f0633136d17ffef3ed0adfb171a00136a320f0fd79c9c75733ac02662a754a7"
--
--inherit autotools allarch
--
--do_install_prepend() {
--        mkdir -p ${D}/usr/share/ca-certificates
--        mkdir -p ${D}/usr/sbin
--        mkdir -p ${D}/etc/ssl/certs
--        mkdir -p ${D}/etc/ca-certificates/update.d
--}
--
--do_install_append() {
--        cd ${D}/usr/share/ca-certificates
--        echo "# Lines starting with # will be ignored" > ${D}/etc/ca-certificates.conf
--        echo "# Lines starting with ! will remove certificate on next update" >> ${D}/etc/ca-certificates.conf
--        echo "#" >> ${D}/etc/ca-certificates.conf
--        for crt in $(find . -type f -name '*.crt' -print)
--        do
--                crt=$(echo $crt | sed -e 's/\.\///')
--                echo $crt >> ${D}/etc/ca-certificates.conf
--        done
--}
--
--pkg_postinst_${PN} () {
--if [ -n "$D" ] ; then
--	exit 1
--fi
--
--${sbindir}/update-ca-certificates
--}
--
--CONFFILES_${PN} = "/etc/ca-certificates.conf"
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb
-new file mode 100644
-index 0000000..b3d7b9c
---- /dev/null
-+++ b/meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "Common CA certificates"
-+HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
-+SECTION = "misc"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
-+
-+SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
-+           file://0001-update-ca-certificates-remove-c-rehash.patch"
-+
-+SRC_URI[md5sum] = "391dea8d827db935ca0d0d1e6641bf23"
-+SRC_URI[sha256sum] = "95f3eac93dad4433b5731bc9e106a26e2ccf210acace1927e597477b24187dce"
-+
-+inherit autotools allarch
-+
-+do_install_prepend() {
-+        mkdir -p ${D}/usr/share/ca-certificates
-+        mkdir -p ${D}/usr/sbin
-+        mkdir -p ${D}/etc/ssl/certs
-+        mkdir -p ${D}/etc/ca-certificates/update.d
-+}
-+
-+do_install_append() {
-+        cd ${D}/usr/share/ca-certificates
-+        echo "# Lines starting with # will be ignored" > ${D}/etc/ca-certificates.conf
-+        echo "# Lines starting with ! will remove certificate on next update" >> ${D}/etc/ca-certificates.conf
-+        echo "#" >> ${D}/etc/ca-certificates.conf
-+        for crt in $(find . -type f -name '*.crt' -print)
-+        do
-+                crt=$(echo $crt | sed -e 's/\.\///')
-+                echo $crt >> ${D}/etc/ca-certificates.conf
-+        done
-+}
-+
-+pkg_postinst_${PN} () {
-+if [ -n "$D" ] ; then
-+	exit 1
-+fi
-+
-+${sbindir}/update-ca-certificates
-+}
-+
-+CONFFILES_${PN} = "/etc/ca-certificates.conf"
+Thx,
+Steffen
+
 -- 
-1.7.4.1
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
