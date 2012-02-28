@@ -1,27 +1,29 @@
-Received: from smtprelay-b22.telenor.se ([195.54.99.213])
+Received: from smtprelay-b21.telenor.se ([195.54.99.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf@emagii.com>) id 1S2GI2-00024G-Nu
+	(envelope-from <ulf@emagii.com>) id 1S2GIH-000254-6k
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 07:11:58 +0100
-Received: from ipb3.telenor.se (ipb3.telenor.se [195.54.127.166])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id C14C9C209
+	Tue, 28 Feb 2012 07:12:13 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 5559CCAEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 07:03:30 +0100 (CET)
+	Tue, 28 Feb 2012 07:03:44 +0100 (CET)
 X-SENDER-IP: [83.227.57.213]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AkFIAO5sTE9T4znVPGdsb2JhbABDs3EZAQEBATc0gXMBXCMYFAMBAmgKDCGICge4aolpg34GBQmFEwoyDQEGD4NBBJU9km+BUw
-X-IronPort-AV: E=Sophos;i="4.73,494,1325458800"; d="scan'208";a="55755245"
+X-IronPort-Anti-Spam-Result: AkdIAEhtTE9T4znVPGdsb2JhbABDs3EZAQEBATc0gXMBAQVWIxAIFAMBAi85CgwIGYgKB7hsiWmDfgYFCYUTCjINAQYPg0EElT2Sb4FT
+X-IronPort-AV: E=Sophos;i="4.73,494,1325458800"; d="scan'208";a="273354970"
 Received: from c-d539e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.57.213])
-	by ipb3.telenor.se with ESMTP; 28 Feb 2012 07:03:30 +0100
+	by ipb2.telenor.se with ESMTP; 28 Feb 2012 07:03:44 +0100
 From: ulf@emagii.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 07:03:21 +0100
-Message-Id: <1330409002-31186-1-git-send-email-ulf@emagii.com>
+Date: Tue, 28 Feb 2012 07:03:22 +0100
+Message-Id: <1330409002-31186-2-git-send-email-ulf@emagii.com>
 X-Mailer: git-send-email 1.7.4.1
+In-Reply-To: <1330409002-31186-1-git-send-email-ulf@emagii.com>
+References: <1330409002-31186-1-git-send-email-ulf@emagii.com>
 Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH] ca-certificates: Bump version to 20120212
+Subject: [meta-oe] ca-certificates: Bump version to 20120212
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 06:11:58 -0000
+X-List-Received-Date: Tue, 28 Feb 2012 06:12:13 -0000
 
 From: Ulf Samuelsson <ulf@emagii.com>
 
