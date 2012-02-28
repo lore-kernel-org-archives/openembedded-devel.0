@@ -1,37 +1,30 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1S2UIE-0005TJ-62
+Received: from bear.ext.ti.com ([192.94.94.41])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <chase.maupin@ti.com>) id 1S2UuM-0006GZ-3w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 22:09:06 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 9F2D622325B1
+	Tue, 28 Feb 2012 22:48:30 +0100
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1SLahDm027144
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 22:00:40 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 50F1222325B0
+	Tue, 28 Feb 2012 15:36:43 -0600
+Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1SLafel026734
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 22:00:40 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052235117.adsl.alicedsl.de
-	[78.52.235.117]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 22:00:40 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 36FA63C4B9; Tue, 28 Feb 2012 22:00:39 +0100 (CET)
-Date: Tue, 28 Feb 2012 22:00:39 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120228210038.GB4573@rhein.zuhause.netz>
-References: <1330458155-3487-1-git-send-email-raj.khem@gmail.com>
+	Wed, 29 Feb 2012 03:06:42 +0530 (IST)
+Received: from dbdp31.itg.ti.com (172.24.170.98) by dbde70.ent.ti.com
+	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Feb 2012 03:06:41 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1SLacgh017059;
+	Wed, 29 Feb 2012 03:06:40 +0530 (IST)
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Feb 2012 15:36:35 -0600
+Message-ID: <1330464996-24176-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-In-Reply-To: <1330458155-3487-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java][PATCH] meta-java: Fix quote errors
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [meta-oe][PATCH 0/1] meta-oe: add nbench-byte recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,14 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 21:09:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Feb 2012 21:48:30 -0000
+Content-Type: text/plain
 
-Hi again,
+All,
 
-applied now.
+This patch adds the nbench-byte recipe from the OE classic repo to the
+recipes-benchmark directory.  I hope I got this patch right to give
+proper credit to the original authors, as well as to update the
+Upstream-Status of the nbench_32bits.patch file.
 
-Bye Henning
+Please let me know if there is something else I need to do to give
+proper credit.
+
+Chase Maupin (1):
+  nbench-byte: import recipe for oe-classic
+
+ .../nbench-byte/nbench-byte/nbench_32bits.patch    |   46 ++++++++++++++++++++
+ .../nbench-byte/nbench-byte_2.2.3.bb               |   26 +++++++++++
+ 2 files changed, 72 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+
 
 
