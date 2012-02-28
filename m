@@ -1,34 +1,41 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S2OS3-0003T8-Tv for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 15:54:51 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S2OJq-0002Jf-Cz for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 15:46:22 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 15:46:22 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1S2OdO-0004Hb-05
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Feb 2012 16:06:34 +0100
+Received: by vbbfr13 with SMTP id fr13so2075229vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 15:46:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 28 Feb 2012 15:46:04 +0100
-Message-ID: <jiipbb$vb5$1@dough.gmane.org>
+	Tue, 28 Feb 2012 06:58:06 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.52.71.80 as permitted sender) client-ip=10.52.71.80; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.52.71.80 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.52.71.80])
+	by 10.52.71.80 with SMTP id s16mr13231020vdu.131.1330441086352
+	(num_hops = 1); Tue, 28 Feb 2012 06:58:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=IKoYMJPmAr1kAC5FsbNnCpxhlaJpfq3Btlgm6PVIQQs=;
+	b=D6IV0J4Fg5TZpKa5FDuVpHoza4egBUbgQ8DlO4NWYNa090Q/vh1IgL0rKeu7OZ4DeI
+	XmkOZB2UyiSq14X/y5rm7AZhZXwbXsGbRLgy+LOyTGeHm+fMYAOlJYqQWj896oLhfw76
+	WiJS1ffGyGJfJ2q+CddxbZNTnbgPcxiPp8DUI=
+MIME-Version: 1.0
+Received: by 10.52.71.80 with SMTP id s16mr10933671vdu.131.1330441086058; Tue,
+	28 Feb 2012 06:58:06 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Tue, 28 Feb 2012 06:58:06 -0800 (PST)
+In-Reply-To: <CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
 References: <1330435070-30907-1-git-send-email-koen@dominion.thruhere.net>
 	<CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:9.0) Gecko/20111222 Thunderbird/9.0.1
-In-Reply-To: <CAAQYJAv0-czYNsmCCqaXs3jpu-OJmRPd+fZU-C2zhG0xKaP0XQ@mail.gmail.com>
-X-Enigmail-Version: 1.3.5
+Date: Tue, 28 Feb 2012 11:58:06 -0300
+X-Google-Sender-Auth: y5FNP_fNXyDW9CVbD1fRaxROSc4
+Message-ID: <CAP9ODKoddtFdzFVESfzeKA8zxzOb0D=4j-prRcLG54wxO=ak8Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe] xinput-calibrator 0.7.5: fix calibration script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,38 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 14:54:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Feb 2012 15:06:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 28-02-12 14:58, Andrea Adami schreef:
-> On Tue, Feb 28, 2012 at 2:17 PM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->> The 'auto' format switched to 'xorg.conf.d' which broke the script. The
->> pointercal package also installed an 'empty' pointercal by default,
->> which also broke the script. Fix these 2 in one go.
->> 
->> Also remove the hal script since hal isn't supported in the oe-core
->> universe anymore
->> 
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> ---
-> 
-> Koen,
-> 
+On Tue, Feb 28, 2012 at 10:58, Andrea Adami <andrea.adami@gmail.com> wrote:
 > do you think the recipe is now mature enough to be committed in oe-core?
+> This would follow xinput commit and could make easier the unification
+> of xserver-nodm-init between oe-core and meta-oe.
+>
+> I think thi sis needed because at the moment xserver ts calibration is
+> not working when using oe-core (xtscal fails because XCALIBRATE ext
+> has been removed).
 
-Well, there is too much in oe-core already, it needs to shrink, not grow :(
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+The touchscreens we have here do not work with it as it doesn't handle
+the swap and reverse properly.
 
-iEYEARECAAYFAk9M6KoACgkQMkyGM64RGpHtNgCgtOc4D2DkDh6U52dwYngDD5Zj
-gq8An2Anp4rYkcz0zsXC8EWL0fFtJjUS
-=5h+N
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
