@@ -1,25 +1,23 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1S2NEE-0008Uw-52
+	(envelope-from <philb@gnu.org>) id 1S2NJo-0000Gs-Q6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 14:36:30 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 28 Feb 2012 05:28:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122510919"
-Received: from unknown (HELO helios.localnet) ([10.252.123.68])
-	by fmsmga001.fm.intel.com with ESMTP; 28 Feb 2012 05:28:01 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Date: Tue, 28 Feb 2012 13:28 +0000
-Message-ID: <19009938.gXoWXZHh4x@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.0; i686; ; )
+	Tue, 28 Feb 2012 14:42:16 +0100
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1S2NBf-0003HS-JK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Feb 2012 14:33:51 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Feb 2012 13:33:50 +0000
 In-Reply-To: <4F4CC45C.8010501@dresearch-fe.de>
 References: <4F4C9DB8.5050203@dresearch-fe.de> <1567078.cdBARgH5ks@helios>
 	<4F4CC45C.8010501@dresearch-fe.de>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1330436031.14363.384.camel@phil-desktop>
+Mime-Version: 1.0
 Subject: Re: Use python in variable assigment of a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,13 +32,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 13:36:30 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 28 Feb 2012 13:42:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 28 February 2012 13:11:08 Steffen Sledz wrote:
-> Because i'm working with oe-classic i tried this (found in some other
-> examples):
+On Tue, 2012-02-28 at 13:11 +0100, Steffen Sledz wrote:
+> Because i'm working with oe-classic i tried this (found in some other examples):
 > 
 >   MYVAR = "${@my_func()}"
 > 
@@ -51,23 +48,17 @@ On Tuesday 28 February 2012 13:11:08 Steffen Sledz wrote:
 > But this leads to an error:
 > 
 >   NameError: global name 'd' is not defined
+> 
+> :(
 
-If you pass in d it should work, i.e.:
+MYVAR = "${@my_func(d)}"
 
-   MYVAR = "${@my_func(d)}"
- 
-   def my_func(d):
-       bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
+def my_func(d):
+   ...
 
-BTW, d.getVar() should work fine in OE-Classic (or to be fully correct, it 
-should work fine with older versions of bitbake).
+p.
 
-Cheers,
-Paul
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
