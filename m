@@ -1,24 +1,28 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from moutng.kundenserver.de ([212.227.17.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1S2NJo-0000Gs-Q6
+	(envelope-from <robert@projekt131.de>) id 1S2NQU-0000WR-4M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 14:42:16 +0100
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1S2NBf-0003HS-JK
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Feb 2012 14:33:51 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 13:33:50 +0000
-In-Reply-To: <4F4CC45C.8010501@dresearch-fe.de>
-References: <4F4C9DB8.5050203@dresearch-fe.de> <1567078.cdBARgH5ks@helios>
-	<4F4CC45C.8010501@dresearch-fe.de>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1330436031.14363.384.camel@phil-desktop>
-Mime-Version: 1.0
-Subject: Re: Use python in variable assigment of a recipe
+	Tue, 28 Feb 2012 14:49:10 +0100
+Received: from freya ([129.217.182.56])
+	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
+	id 0McAfD-1RkPlO1Q7r-00JeSD; Tue, 28 Feb 2012 13:59:37 +0100
+From: "Robert Budde" <robert@projekt131.de>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Feb 2012 13:59:36 +0100
+Message-ID: <00ec01ccf618$d3302ea0$79908be0$@projekt131.de>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: Acz2GFrv9WaDj0tkTWeKt/cKNSERAw==
+X-Provags-ID: V02:K0:LePY0huf83JvaTDcPLM4rlRetGrsQqtVLTA81svB2rZ
+	TU1VT5bw1W5C1ubwiZqNJ5Oy/IC+y4Wyc9O53hnDpMN6YpNw82
+	/k78xfkVmktIUNj9SLeqR/otMa1NRuU/+zVsxwEGjDLzGvTH0S
+	9uth96ogi6kOde+E029yyI/IR9RYya00Epi1pdS5YMODDXrd0u
+	0BqUV1cw1yq/YtDB/vSw78Np2gZEc3rtv15f7w+5Ygl0oH31Mn
+	SSLyi0YzJK9zYjNItXlo26H/wPBmoIGleCVt+/WAGEL0WpzQc/
+	h3LA75AbtKxj9lhndx/jCiA81Vc5Y158yEUfQrtdQt3Gjy7QP7
+	8uHEmh+U70VuQhZW+9RSR4E9SSE6J3x5b4MQx9PcL
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Use existing file instead of pkg_postinst/pkg_postrm etc definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,33 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 13:42:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 28 Feb 2012 13:49:10 -0000
+Content-Language: de
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2012-02-28 at 13:11 +0100, Steffen Sledz wrote:
-> Because i'm working with oe-classic i tried this (found in some other examples):
-> 
->   MYVAR = "${@my_func()}"
-> 
->   def my_func():
->       bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
->       ...
-> 
-> But this leads to an error:
-> 
->   NameError: global name 'd' is not defined
-> 
-> :(
+Hi!
 
-MYVAR = "${@my_func(d)}"
+ 
 
-def my_func(d):
-   ...
+Is it possible to use an existing file in the WORKDIR as a source for
+example for the pkg_postinst action? The reason for this is that I am
+repackaging some deb-packages and there are already the scripts in there.
+Same could happen if the scripts are quite long and one wants to avoid
+cluttering the .bb/.inc without an additional .inc-file.
 
-p.
+ 
 
+Best regards,
 
-
+Robert
 
 
