@@ -1,18 +1,18 @@
 Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1S2YQf-0003Ti-5U
+	(envelope-from <andrea.adami@gmail.com>) id 1S2YQg-0003Ti-Ch
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 02:34:05 +0100
+	Wed, 29 Feb 2012 02:34:06 +0100
 Received: from mizar.localdomain (87.14.251.210) by smtp206.alice.it
-	(8.6.023.02) id 4F1836AD05100EB9; Wed, 29 Feb 2012 02:25:39 +0100
+	(8.6.023.02) id 4F1836AD05100ED0; Wed, 29 Feb 2012 02:25:40 +0100
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Feb 2012 02:25:24 +0100
-Message-Id: <1330478725-31090-2-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 29 Feb 2012 02:25:25 +0100
+Message-Id: <1330478725-31090-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <1330478725-31090-1-git-send-email-andrea.adami@gmail.com>
 References: <1330478725-31090-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] klibc_1.5.25: Fetcher and QA fixes
+Subject: [meta-handheld][PATCH] linux_3.2: update from 3.2.7 to 3.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,141 +26,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Feb 2012 01:34:05 -0000
+X-List-Received-Date: Wed, 29 Feb 2012 01:34:06 -0000
 
-* fix unfetchable SRC_URI and use git fetcher instead
-* and remove checksums file
-* adapt ${S}
-* fix QA about non -staticdev package contains static .a library
-* fix QA about /bin installed but not shipped
-* fix license and relative QA
+* apply latest stable patchset to match linux-yocto_3.2
+* (work in progress to use linux-yocto as default kernel)
 * bump INC_PR
-* patchset untouched awaiting klibc_2.0, expected in March 2012
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-devtools/klibc/klcc-cross_1.5.25.bb    |    1 -
- .../klibc/klibc-checksums_1.5.25.inc               |    2 --
- .../klibc/klibc-static-utils_1.5.25.bb             |    1 -
- .../recipes-devtools/klibc/klibc-utils_1.5.25.bb   |    1 -
- meta-initramfs/recipes-devtools/klibc/klibc.inc    |   10 +++++-----
- .../recipes-devtools/klibc/klibc_1.5.25.bb         |   11 ++++-------
- 6 files changed, 9 insertions(+), 17 deletions(-)
- delete mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-checksums_1.5.25.inc
+ recipes-kernel/linux/linux-3.2.inc |    6 +++---
+ recipes-kernel/linux/linux_3.2.bb  |    2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.25.bb
-index 922c8d8..ad7c07e 100644
---- a/meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.25.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.25.bb
-@@ -1,7 +1,6 @@
- PR = "${INC_PR}.0"
+diff --git a/recipes-kernel/linux/linux-3.2.inc b/recipes-kernel/linux/linux-3.2.inc
+index 3a37200..03302a7 100644
+--- a/recipes-kernel/linux/linux-3.2.inc
++++ b/recipes-kernel/linux/linux-3.2.inc
+@@ -3,12 +3,12 @@ DEFAULT_PREFERENCE = "-1"
+ COMPATIBLE_MACHINE = "(spitz)"
  
- require klibc.inc
--require klibc-checksums_${PV}.inc
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stablepatch \
+            file://defconfig \
+            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+            "
  
- export KLCC_INST = "${STAGING_DIR_TARGET}/lib/klibc"
+ SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
+ SRC_URI[kernel.sha256sum] = "c881fc2b53cf0da7ca4538aa44623a7de043a41f76fd5d0f51a31f6ed699d463"
+-SRC_URI[stablepatch.md5sum] = "899624bffed6a19578613b672cc9483f"
+-SRC_URI[stablepatch.sha256sum] = "779c548f4418f0baa782252d15a54fadf3c88d79fc547ee5801d31798020e701"
++SRC_URI[stablepatch.md5sum] = "202cb750babdda078d6cc2816ab353b1"
++SRC_URI[stablepatch.sha256sum] = "1853d2bd4222e554fb4c2c5d818b953be9e3c658636b58a0a5b3860d23312cda"
+diff --git a/recipes-kernel/linux/linux_3.2.bb b/recipes-kernel/linux/linux_3.2.bb
+index 6c15a88..8a7ab22 100644
+--- a/recipes-kernel/linux/linux_3.2.bb
++++ b/recipes-kernel/linux/linux_3.2.bb
+@@ -1,4 +1,4 @@
+ require linux.inc
+ require linux-${PV}.inc
  
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-checksums_1.5.25.inc b/meta-initramfs/recipes-devtools/klibc/klibc-checksums_1.5.25.inc
-deleted file mode 100644
-index ebba658..0000000
---- a/meta-initramfs/recipes-devtools/klibc/klibc-checksums_1.5.25.inc
-+++ /dev/null
-@@ -1,2 +0,0 @@
--SRC_URI[md5sum] = "5bc4dcd63e9142b934787729133c2766"
--SRC_URI[sha256sum] = "0b910ec0b2a97d4c775ed06e44ad7bca7be150efdf2a77a19253a573e16367d3"
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_1.5.25.bb
-index c9749f0..484134e 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_1.5.25.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_1.5.25.bb
-@@ -14,4 +14,3 @@ FILES_${PN} = ""
- 
- require klibc-utils.inc
- require klibc.inc
--require klibc-checksums_${PV}.inc
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_1.5.25.bb
-index b26dda4..37cab84 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc-utils_1.5.25.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils_1.5.25.bb
-@@ -14,4 +14,3 @@ FILES_${PN} = ""
- 
- require klibc-utils.inc
- require klibc.inc
--require klibc-checksums_${PV}.inc
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 1b1f7c6..bd365da 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -3,7 +3,7 @@ SECTION = "libs"
- DESCRIPTION = "klibc is intended to be a minimalistic libc subset for \
- use with initramfs.  It is deliberately written for small size, \
- minimal entaglement, and portability, not speed."
--LICENSE = "BSD-ADV"
-+LICENSE = "BSD-3-Clause & GPL-2.0 & Zlib"
- LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- # debugsources.list: No such file or directory:
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- 
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- KLIBC_ARCH = '${TARGET_ARCH}'
- KLIBC_ARCH_armeb = 'arm'
-@@ -23,8 +23,8 @@ KLIBC_ARCH_i586 = 'i386'
- KLIBC_ARCH_i686 = 'i386'
- KLIBC_ARCH_pentium = 'i386'
- 
--KLIBC_FETCHDIR = "1.5"
--SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/${KLIBC_FETCHDIR}/klibc-${PV}.tar.bz2"
-+SRCREV = "ff0a614bd724f6c4c6a5014a9955dc1bc028f336"
-+SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
- 
- SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
- SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch"
-@@ -36,7 +36,7 @@ SRC_URI += "file://fstype-sane-vfat-and-jffs2-for-1.5.patch \
-             file://staging.patch \
-             "
- 
--S = "${WORKDIR}/klibc-${PV}"
-+S = "${WORKDIR}/git"
- 
- EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'CROSS_COMPILE=${TARGET_PREFIX}' \
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-index a313bfd..8a50628 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-@@ -8,8 +8,9 @@ do_install() {
- 
-         # the crosscompiler is packaged by klcc-cross
-         # remove klcc
--        # remove also from FILES_libklibc-dev
-         rm ${D}${base_bindir}/klcc
-+        # remove now empty dir
-+        rmdir ${D}${base_bindir}
- 
-         # remove Linux headers .install and ..install.cmd files
-         find ${D}${base_libdir}/klibc/include -name '.install' -delete
-@@ -21,15 +22,11 @@ do_install() {
- 
- }
- 
--PACKAGES = "libklibc libklibc-dev"
-+PACKAGES = "libklibc libklibc-staticdev libklibc-dev"
- FILES_libklibc = "${base_libdir}/klibc-*.so"
-+FILES_libklibc-staticdev = "${base_libdir}/klibc/lib/libc.a"
- FILES_libklibc-dev = "${base_libdir}/klibc.so \
-                       ${base_libdir}/klibc/lib/* \
-                       ${base_libdir}/klibc/include/* \
-                       "
--# see above
--# do not package it in -dev
--#                      ${base_bindir}/klcc \
--
- require klibc.inc
--require klibc-checksums_${PV}.inc
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
 -- 
 1.7.3.4
 
