@@ -1,41 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S2k3I-0004a9-R0
+	(envelope-from <koen@dominion.thruhere.net>) id 1S2kNt-0005dY-Me
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 14:58:45 +0100
-Received: by ghbz2 with SMTP id z2so1635094ghb.6
+	Wed, 29 Feb 2012 15:20:01 +0100
+Received: by wgbds1 with SMTP id ds1so3262622wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Feb 2012 05:50:16 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.236.157.10 as permitted sender) client-ip=10.236.157.10; 
+	Wed, 29 Feb 2012 06:11:33 -0800 (PST)
+Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
+	designates 10.180.107.2 as permitted sender)
+	client-ip=10.180.107.2; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.236.157.10 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.236.157.10])
-	by 10.236.157.10 with SMTP id n10mr595421yhk.41.1330523416035 (num_hops
-	= 1); Wed, 29 Feb 2012 05:50:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=+23DGPgAgegANr+9lqCNg5l754FSg4iOe2K+sJ5t09M=;
-	b=NhjTNZ2Qpbc3v+fREra32+drDbueZRRZeQFgpbD6aS7G/oWmCQ6MadEe3FU2pG/Z0Y
-	GxCOmDxN8bmW1khNGXeInC3OR7JKrkDBGbtXW8A5N5o6bJFAoP8dKEhhOpir9fIQh7sE
-	YGMpV6wrD1YRB+zB0HedILJKJYp0XVsePpCIY=
-Received: by 10.236.157.10 with SMTP id n10mr469071yhk.41.1330523415967;
-	Wed, 29 Feb 2012 05:50:15 -0800 (PST)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id f40sm34442349ani.16.2012.02.29.05.50.14
+	koen@dominion.thruhere.net designates 10.180.107.2 as permitted
+	sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.107.2])
+	by 10.180.107.2 with SMTP id gy2mr1213002wib.12.1330524693333 (num_hops
+	= 1); Wed, 29 Feb 2012 06:11:33 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.107.2 with SMTP id gy2mr983296wib.12.1330524693114;
+	Wed, 29 Feb 2012 06:11:33 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id er8sm87763175wib.1.2012.02.29.06.11.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 29 Feb 2012 05:50:15 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 29 Feb 2012 06:11:32 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Feb 2012 13:50:07 +0000
-Message-Id: <f02b204f1c714d7aa3b83ca0aed94f42694089b4.1330523387.git.otavio@ossystems.com.br>
+Date: Wed, 29 Feb 2012 15:11:25 +0100
+Message-Id: <1330524685-8908-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1330523387.git.otavio@ossystems.com.br>
-References: <cover.1330523387.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] More quotting fixes
+X-Gm-Message-State: ALoCoQk3UEIARSVl2zq1sX8gbIcDYm32Lqf2WIpsVtFbz4RMr5ZslEPe0SOlGCfu0o1vXBj8c4pD
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] gtk+3: update to 3.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Feb 2012 13:58:45 -0000
+X-List-Received-Date: Wed, 29 Feb 2012 14:20:01 -0000
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-connectivity/gnuradio/gnuradio.inc |    2 +-
- meta-oe/recipes-support/mysql/mysql5_5.1.40.inc    |    2 +-
- meta-oe/recipes-support/opencv/opencv_2.3.bb       |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ .../gtk+/{gtk+3_3.2.2.bb => gtk+3_3.2.3.bb}        |    8 +++-----
+ 1 files changed, 3 insertions(+), 5 deletions(-)
+ rename meta-gnome/recipes-gnome/gtk+/{gtk+3_3.2.2.bb => gtk+3_3.2.3.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc b/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
-index 80ac407..144d588 100644
---- a/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
-+++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
-@@ -10,7 +10,7 @@ INC_PR = "r1"
- inherit distutils-base autotools pkgconfig
+diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
+rename to meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
+index 0f1ec69..2dc4c64 100644
+--- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
++++ b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
+@@ -5,8 +5,6 @@ HOMEPAGE = "http://www.gtk.org"
+ BUGTRACKER = "https://bugzilla.gnome.org/"
+ SECTION = "libs"
  
- export BUILD_SYS
--export HOST_SYS=${MULTIMACH_TARGET_SYS}
-+export HOST_SYS="${MULTIMACH_TARGET_SYS}"
+-PR = "r1"
+-
+ DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
+            gtk-doc-native docbook-utils-native libxrandr libgcrypt \
+            libxdamage libxrender libxcomposite cairo gdk-pixbuf gtk+-native"
+@@ -18,9 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+                     file://gdk/gdk.h;endline=27;md5=07db285ec208fb3e0bf7d861b0614202 \
+                     file://tests/testgtk.c;endline=27;md5=ac85be7b810a1e9b00479af8e2018053"
  
- EXTRA_OECONF = " \
-   --program-prefix= \
-diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-index 44de2a2..865deb2 100644
---- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-+++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-@@ -28,7 +28,7 @@ INITSCRIPT_PACKAGES = "${PN}-server"
- INITSCRIPT_NAME = "mysqld"
- INITSCRIPT_PARAMS = "start 45 S . stop 45 0 6 1 ."
+-SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "afc3a739d6ff39d3b81cf69119833c46"
+-SRC_URI[sha256sum] = "feef531b33f379015537f1aeb31e5121776671e5e8c2aa3e58ca1f8fac51e802"
++SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.xz"
++SRC_URI[md5sum] = "b4edcc69e39159dd7be17828249afb46"
++SRC_URI[sha256sum] = "e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d"
  
--export ac_cv_path_PS=/bin/ps
-+export ac_cv_path_PS="/bin/ps"
- export ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null"
- PARALLEL_MAKE = " "
- EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.3.bb b/meta-oe/recipes-support/opencv/opencv_2.3.bb
-index 1a4bb4f..fdb56a9 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.3.bb
-@@ -31,7 +31,7 @@ inherit distutils-base pkgconfig cmake
- export BUILD_SYS
- export HOST_SYS
- export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
--export PYTHON=${STAGING_BINDIR_NATIVE}/python
-+export PYTHON="${STAGING_BINDIR_NATIVE}/python"
- 
- TARGET_CC_ARCH += "-I${S}/include "
+ inherit autotools pkgconfig
  
 -- 
 1.7.2.5
