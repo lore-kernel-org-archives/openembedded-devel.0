@@ -1,30 +1,16 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1S2X8S-0001Xb-Sf
+	(envelope-from <andrea.adami@gmail.com>) id 1S2YQe-0003Ti-Ha
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 01:11:13 +0100
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1T02gNV013410
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2012 18:02:43 -0600
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1T02fXG011986
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Feb 2012 05:32:42 +0530 (IST)
-Received: from dbdp31.itg.ti.com (172.24.170.98) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Wed, 29 Feb 2012 05:32:40 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1T02c6I023390;
-	Wed, 29 Feb 2012 05:32:40 +0530 (IST)
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Feb 2012 18:02:35 -0600
-Message-ID: <1330473755-21491-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [meta-oe][PATCHv2] nbench-byte-2.3.3: import recipe from oe-classic
+	Wed, 29 Feb 2012 02:34:04 +0100
+Received: from mizar.localdomain (87.14.251.210) by smtp206.alice.it
+	(8.6.023.02) id 4F1836AD05100E99; Wed, 29 Feb 2012 02:25:36 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Feb 2012 02:25:23 +0100
+Message-Id: <1330478725-31090-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-initramfs][PATCH] linux-kexecboot_3.2: update from 3.2.7 to 3.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,121 +24,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Feb 2012 00:11:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Feb 2012 01:34:04 -0000
 
-* Import the nbench-byte recipe from the oe-classic git repo at
-  git://git.openembedded.org/openembedded commit id:
-    * 6fe7cef27069415f2eba36bc640cf59013d4979b
-* Update LICENSE checksums
-* Tested on an AM335x EVM which is the same processor as the
-  beaglebone.
+* apply latest stable patchset to match linux-yocto_3.2
+* (work in progress about using linux-yocto-tiny as base for kexecboot)
+* bump PR
 
-* Original Author:
-    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-* Modifications by:
-    * Koen Kooi <koen@openembedded.org>
-    * Martin Jansa <Martin.Jansa@gmail.com>
-    * Chris Larson <chris_larson@mentor.com>
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
-* Updated in version 2
-    * Addressed commit message comments by Paul Menzel
-    * Changed the PR down to r0
----
- .../nbench-byte/nbench-byte/nbench_32bits.patch    |   46 ++++++++++++++++++++
- .../nbench-byte/nbench-byte_2.2.3.bb               |   26 +++++++++++
- 2 files changed, 72 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+ .../recipes-kernel/linux/linux-kexecboot_3.2.bb    |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
-new file mode 100644
-index 0000000..1b8a4dc
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
-@@ -0,0 +1,46 @@
-+From 81f4043a6787060029ef20eed21cdcf3e50337df Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Tue, 28 Feb 2012 14:58:35 -0600
-+Subject: [PATCH] nbench: modify Makefile for 32bit
-+
-+* Patch taken from OE classic git repository as of commit id
-+  ad42bf9065928b2902d7d9534709d3ccea7ec956 and was added by:
-+    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-+* Notes from original patch were:
-+
-+BYTE Magazine's native benchmarks (also called BYTEmark) designed to
-+expose the capabilities of a system's CPU, FPU and memory system.
-+
-+http://www.tux.org/~mayer/linux/
-+
-+Recipe from old Atmel overlay.
-+
-+Upstream-Status: Inappropriate [no upstream]
-+
-+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-+---
-+ Makefile |    8 ++------
-+ 1 files changed, 2 insertions(+), 6 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 5045c77..915866d 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -119,12 +119,8 @@ emfloat.o: emfloat.h emfloat.c nmglobal.h pointer.h Makefile
-+ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+ 		-c emfloat.c
-+ 
-+-pointer.h: pointer Makefile
-+-	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+-		-o pointer pointer.c
-+-	rm -f pointer.h
-+-	if [ "4" = `./pointer` ] ; then touch pointer.h ;\
-+-	else echo "#define LONG64" >pointer.h ; fi
-++pointer.h: Makefile
-++	touch pointer.h ;
-+ 
-+ misc.o: misc.h misc.c Makefile
-+ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+-- 
-+1.7.0.4
-+
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-new file mode 100644
-index 0000000..daee7b1
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
-+designed to expose the capabilities of a system's CPU, FPU, \
-+and memory system."
-+HOMEPAGE = "http://www.tux.org/~mayer/linux/"
-+LICENSE = "freely distributable"
-+LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
-+SECTION = "console/utils"
-+
-+SRC_URI = "http://www.tux.org/~mayer/linux/${PN}-${PV}.tar.gz \
-+           file://nbench_32bits.patch"
-+
-+PR = "r0"
-+
-+TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
-+do_compile() {
-+	oe_runmake
-+}
-+
-+do_install () {
-+	install -d ${D}${bindir}
-+	install -m 0644 NNET.DAT ${D}${bindir}/
-+	install -m 0755 nbench ${D}${bindir}/
-+}
-+
-+SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
-+SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+index a900776..29b465e 100644
+--- a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
++++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+@@ -1,13 +1,13 @@
+ require linux-kexecboot.inc
+ 
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ S = "${WORKDIR}/linux-${PV}"
+ 
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.7.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.8.bz2;apply=yes;name=stablepatch \
+            "
+ 
+ SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
+ SRC_URI[kernel.sha256sum] = "c881fc2b53cf0da7ca4538aa44623a7de043a41f76fd5d0f51a31f6ed699d463"
+-SRC_URI[stablepatch.md5sum] = "899624bffed6a19578613b672cc9483f"
+-SRC_URI[stablepatch.sha256sum] = "779c548f4418f0baa782252d15a54fadf3c88d79fc547ee5801d31798020e701"
++SRC_URI[stablepatch.md5sum] = "202cb750babdda078d6cc2816ab353b1"
++SRC_URI[stablepatch.sha256sum] = "1853d2bd4222e554fb4c2c5d818b953be9e3c658636b58a0a5b3860d23312cda"
 -- 
-1.7.0.4
+1.7.3.4
 
 
 
