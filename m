@@ -1,35 +1,16 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1S2kNt-0005dY-Me
+	(envelope-from <andrea.adami@gmail.com>) id 1S2qhi-0002f9-DL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 15:20:01 +0100
-Received: by wgbds1 with SMTP id ds1so3262622wgb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Feb 2012 06:11:33 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.107.2 as permitted sender)
-	client-ip=10.180.107.2; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.107.2 as permitted
-	sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.107.2])
-	by 10.180.107.2 with SMTP id gy2mr1213002wib.12.1330524693333 (num_hops
-	= 1); Wed, 29 Feb 2012 06:11:33 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.180.107.2 with SMTP id gy2mr983296wib.12.1330524693114;
-	Wed, 29 Feb 2012 06:11:33 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id er8sm87763175wib.1.2012.02.29.06.11.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 29 Feb 2012 06:11:32 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Wed, 29 Feb 2012 22:04:55 +0100
+Received: from mizar.localdomain (87.14.251.210) by smtp206.alice.it
+	(8.6.023.02) id 4F1836AD052E9FCA; Wed, 29 Feb 2012 21:56:25 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Feb 2012 15:11:25 +0100
-Message-Id: <1330524685-8908-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQk3UEIARSVl2zq1sX8gbIcDYm32Lqf2WIpsVtFbz4RMr5ZslEPe0SOlGCfu0o1vXBj8c4pD
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] gtk+3: update to 3.2.3
+Date: Wed, 29 Feb 2012 21:56:15 +0100
+Message-Id: <1330548975-5970-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-initramfs][PATCH] klibc: add MIT License
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +24,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Feb 2012 14:20:01 -0000
+X-List-Received-Date: Wed, 29 Feb 2012 21:04:55 -0000
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+* After a talk with Beth Flanagan licensing is now clear:
+* "LICENSE = "BSD-3-Clause & GPL-2.0 & MIT" (If it's --without-zlib).
+* If not then it's: LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
+* bump INC_PR
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../gtk+/{gtk+3_3.2.2.bb => gtk+3_3.2.3.bb}        |    8 +++-----
- 1 files changed, 3 insertions(+), 5 deletions(-)
- rename meta-gnome/recipes-gnome/gtk+/{gtk+3_3.2.2.bb => gtk+3_3.2.3.bb} (95%)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
-rename to meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
-index 0f1ec69..2dc4c64 100644
---- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.2.bb
-+++ b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
-@@ -5,8 +5,6 @@ HOMEPAGE = "http://www.gtk.org"
- BUGTRACKER = "https://bugzilla.gnome.org/"
- SECTION = "libs"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index bd365da..0f7cbbe 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ DESCRIPTION = "klibc is intended to be a minimalistic libc subset for \
+ use with initramfs.  It is deliberately written for small size, \
+ minimal entaglement, and portability, not speed."
+-LICENSE = "BSD-3-Clause & GPL-2.0 & Zlib"
++LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
+ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
  
--PR = "r1"
--
- DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
-            gtk-doc-native docbook-utils-native libxrandr libgcrypt \
-            libxdamage libxrender libxcomposite cairo gdk-pixbuf gtk+-native"
-@@ -18,9 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://gdk/gdk.h;endline=27;md5=07db285ec208fb3e0bf7d861b0614202 \
-                     file://tests/testgtk.c;endline=27;md5=ac85be7b810a1e9b00479af8e2018053"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # debugsources.list: No such file or directory:
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
  
--SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.bz2"
--SRC_URI[md5sum] = "afc3a739d6ff39d3b81cf69119833c46"
--SRC_URI[sha256sum] = "feef531b33f379015537f1aeb31e5121776671e5e8c2aa3e58ca1f8fac51e802"
-+SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.xz"
-+SRC_URI[md5sum] = "b4edcc69e39159dd7be17828249afb46"
-+SRC_URI[sha256sum] = "e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d"
+-INC_PR = "r1"
++INC_PR = "r2"
  
- inherit autotools pkgconfig
- 
+ KLIBC_ARCH = '${TARGET_ARCH}'
+ KLIBC_ARCH_armeb = 'arm'
 -- 
-1.7.2.5
+1.7.3.4
 
 
 
