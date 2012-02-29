@@ -1,24 +1,30 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1S2WcL-0000dq-5H
+	(envelope-from <chase.maupin@ti.com>) id 1S2X8S-0001Xb-Sf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 00:38:01 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 28 Feb 2012 15:29:32 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="122820594"
-Received: from unknown (HELO helios.localnet) ([10.252.123.82])
-	by fmsmga001.fm.intel.com with ESMTP; 28 Feb 2012 15:29:30 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Feb 2012 23:29:29 +0000
-Message-ID: <10009618.BkDii0CkQl@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.0; i686; ; )
-In-Reply-To: <1330458726-7562-1-git-send-email-raj.khem@gmail.com>
-References: <1330458726-7562-1-git-send-email-raj.khem@gmail.com>
+	Wed, 29 Feb 2012 01:11:13 +0100
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1T02gNV013410
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2012 18:02:43 -0600
+Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1T02fXG011986
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Feb 2012 05:32:42 +0530 (IST)
+Received: from dbdp31.itg.ti.com (172.24.170.98) by dbde70.ent.ti.com
+	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Feb 2012 05:32:40 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1T02c6I023390;
+	Wed, 29 Feb 2012 05:32:40 +0530 (IST)
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Feb 2012 18:02:35 -0600
+Message-ID: <1330473755-21491-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Subject: Re: [meta-opie][PATCH] meta-opie: Fix quoting errors found by latest bitbake
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [meta-oe][PATCHv2] nbench-byte-2.3.3: import recipe from oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,100 +38,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 23:38:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 29 Feb 2012 00:11:13 -0000
+Content-Type: text/plain
 
-On Tuesday 28 February 2012 11:52:06 Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../opie-irdaapplet/opie-irdaapplet_git.bb         |    2 +-
->  recipes-opie/opie-reader/uqtreader_1.2.5.bb        |    2 +-
->  recipes-opie/opie-reader/uqtreader_git.bb          |    2 +-
->  recipes-qtopia/qpegps/qpegps.inc                   |    2 +-
->  recipes-qtopia/scummvm/scummvm_1.1.1.bb            |    2 +-
->  5 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
-> b/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb index
-> 7af53fb..dffc2b9 100644
-> --- a/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
-> +++ b/recipes-opie/opie-irdaapplet/opie-irdaapplet_git.bb
-> @@ -1,7 +1,7 @@
->  require ${PN}.inc
-> 
->  PV = "${OPIE_GIT_PV}"
-> -PR = r3
-> +PR = "r3"
-> 
->  SRC_URI = "${OPIE_GIT};protocol=git;subpath=core/applets/irdaapplet \
->             ${OPIE_GIT};protocol=git;subpath=pics \
-> diff --git a/recipes-opie/opie-reader/uqtreader_1.2.5.bb
-> b/recipes-opie/opie-reader/uqtreader_1.2.5.bb index ec70e15..73dfae4 100644
-> --- a/recipes-opie/opie-reader/uqtreader_1.2.5.bb
-> +++ b/recipes-opie/opie-reader/uqtreader_1.2.5.bb
-> @@ -66,7 +66,7 @@ FILES_${PN}-codeclib = "${libdir}/libreader_codec.so.*"
->  FILES_${PN}-codec-aportis = "${libdir}/uqtreader/codecs/libAportis.so"
->  FILES_${PN}-codec-arrierego = "${libdir}/uqtreader/codecs/libArriereGo.so"
->  FILES_${PN}-codec-chm = "${libdir}/uqtreader/codecs/libCHM.so"
-> -DEBIAN_NOAUTONAME_${PN}-codec-plucker = 1
-> +DEBIAN_NOAUTONAME_${PN}-codec-plucker = "1"
->  FILES_${PN}-codec-plucker = "${libdir}/uqtreader/codecs/libPlucker.so
-> ${libdir}/lib*plucker*.so.*
-> ${libdir}/uqtreader/support/libpluckerdecompress.so" FILES_${PN}-codec-reb
-> = "${libdir}/uqtreader/codecs/libReb.so"
->  FILES_${PN}-codec-weasel = "${libdir}/uqtreader/codecs/libWeasel.so"
-> diff --git a/recipes-opie/opie-reader/uqtreader_git.bb
-> b/recipes-opie/opie-reader/uqtreader_git.bb index ad6c223..019d8c0 100644
-> --- a/recipes-opie/opie-reader/uqtreader_git.bb
-> +++ b/recipes-opie/opie-reader/uqtreader_git.bb
-> @@ -62,7 +62,7 @@ FILES_${PN}-codeclib = "${libdir}/libreader_codec.so.*"
->  FILES_${PN}-codec-aportis = "${libdir}/uqtreader/codecs/libAportis.so"
->  FILES_${PN}-codec-arrierego = "${libdir}/uqtreader/codecs/libArriereGo.so"
->  FILES_${PN}-codec-chm = "${libdir}/uqtreader/codecs/libCHM.so"
-> -DEBIAN_NOAUTONAME_${PN}-codec-plucker = 1
-> +DEBIAN_NOAUTONAME_${PN}-codec-plucker = "1"
->  FILES_${PN}-codec-plucker = "${libdir}/uqtreader/codecs/libPlucker.so
-> ${libdir}/lib*plucker*.so.*
-> ${libdir}/uqtreader/support/libpluckerdecompress.so" FILES_${PN}-codec-reb
-> = "${libdir}/uqtreader/codecs/libReb.so"
->  FILES_${PN}-codec-weasel = "${libdir}/uqtreader/codecs/libWeasel.so"
-> diff --git a/recipes-qtopia/qpegps/qpegps.inc
-> b/recipes-qtopia/qpegps/qpegps.inc index 8292915..6dd0767 100644
-> --- a/recipes-qtopia/qpegps/qpegps.inc
-> +++ b/recipes-qtopia/qpegps/qpegps.inc
-> @@ -18,7 +18,7 @@ inherit palmtop
->  QMAKE_PROFILES = "qpegps.pro"
->  EXTRA_QMAKEVARS_POST = "LIBS=-lqpe LIBS+=-lgps"
->  OE_QMAKE_CFLAGS += " -DQWS "
-> -OE_QMAKE_LIBS_QT = ${QT_LIBRARY}
-> +OE_QMAKE_LIBS_QT = "${QT_LIBRARY}"
-> 
->  do_install() {
->          install -d ${D}${palmtopdir}/bin \
-> diff --git a/recipes-qtopia/scummvm/scummvm_1.1.1.bb
-> b/recipes-qtopia/scummvm/scummvm_1.1.1.bb index 90fc136..fba22d5 100644
-> --- a/recipes-qtopia/scummvm/scummvm_1.1.1.bb
-> +++ b/recipes-qtopia/scummvm/scummvm_1.1.1.bb
-> @@ -15,7 +15,7 @@ SRC_URI_OVERRIDES_PACKAGE_ARCH = "1"
-> 
->  # Make this a plugin enabled build. Bigger binary, less memory usage. Makes
-> more games run on lower end platforms. # These plugins are not normal Linux
-> shared libs so will fall foul of the sanity checker. -INSANE_SKIP_${PN} =
-> True
-> +INSANE_SKIP_${PN} = "1"
->  EXTRA_OECONF += " --enable-plugins --default-dynamic "
-> 
->  # Workaround, because some env variables aren't recognised correctly
+* Import the nbench-byte recipe from the oe-classic git repo at
+  git://git.openembedded.org/openembedded commit id:
+    * 6fe7cef27069415f2eba36bc640cf59013d4979b
+* Update LICENSE checksums
+* Tested on an AM335x EVM which is the same processor as the
+  beaglebone.
 
-Merged to meta-handheld master, thanks.
+* Original Author:
+    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+* Modifications by:
+    * Koen Kooi <koen@openembedded.org>
+    * Martin Jansa <Martin.Jansa@gmail.com>
+    * Chris Larson <chris_larson@mentor.com>
 
-Cheers,
-Paul
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+* Updated in version 2
+    * Addressed commit message comments by Paul Menzel
+    * Changed the PR down to r0
+---
+ .../nbench-byte/nbench-byte/nbench_32bits.patch    |   46 ++++++++++++++++++++
+ .../nbench-byte/nbench-byte_2.2.3.bb               |   26 +++++++++++
+ 2 files changed, 72 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
 
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
+new file mode 100644
+index 0000000..1b8a4dc
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
+@@ -0,0 +1,46 @@
++From 81f4043a6787060029ef20eed21cdcf3e50337df Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Tue, 28 Feb 2012 14:58:35 -0600
++Subject: [PATCH] nbench: modify Makefile for 32bit
++
++* Patch taken from OE classic git repository as of commit id
++  ad42bf9065928b2902d7d9534709d3ccea7ec956 and was added by:
++    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
++* Notes from original patch were:
++
++BYTE Magazine's native benchmarks (also called BYTEmark) designed to
++expose the capabilities of a system's CPU, FPU and memory system.
++
++http://www.tux.org/~mayer/linux/
++
++Recipe from old Atmel overlay.
++
++Upstream-Status: Inappropriate [no upstream]
++
++Signed-off-by: Chase Maupin <chase.maupin@ti.com>
++---
++ Makefile |    8 ++------
++ 1 files changed, 2 insertions(+), 6 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 5045c77..915866d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -119,12 +119,8 @@ emfloat.o: emfloat.h emfloat.c nmglobal.h pointer.h Makefile
++ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
++ 		-c emfloat.c
++ 
++-pointer.h: pointer Makefile
++-	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
++-		-o pointer pointer.c
++-	rm -f pointer.h
++-	if [ "4" = `./pointer` ] ; then touch pointer.h ;\
++-	else echo "#define LONG64" >pointer.h ; fi
+++pointer.h: Makefile
+++	touch pointer.h ;
++ 
++ misc.o: misc.h misc.c Makefile
++ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
++-- 
++1.7.0.4
++
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+new file mode 100644
+index 0000000..daee7b1
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
++designed to expose the capabilities of a system's CPU, FPU, \
++and memory system."
++HOMEPAGE = "http://www.tux.org/~mayer/linux/"
++LICENSE = "freely distributable"
++LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
++SECTION = "console/utils"
++
++SRC_URI = "http://www.tux.org/~mayer/linux/${PN}-${PV}.tar.gz \
++           file://nbench_32bits.patch"
++
++PR = "r0"
++
++TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
++do_compile() {
++	oe_runmake
++}
++
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0644 NNET.DAT ${D}${bindir}/
++	install -m 0755 nbench ${D}${bindir}/
++}
++
++SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
++SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
 -- 
+1.7.0.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
