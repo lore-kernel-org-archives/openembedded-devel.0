@@ -1,30 +1,41 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1S2j8w-0000Xp-Ef
+	(envelope-from <otavio.salvador@gmail.com>) id 1S2k3I-0004a9-R0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Feb 2012 14:00:30 +0100
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1TCl5VH007915
+	Wed, 29 Feb 2012 14:58:45 +0100
+Received: by ghbz2 with SMTP id z2so1635094ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Feb 2012 06:47:06 -0600
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1TCl3FG002755
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Feb 2012 18:17:04 +0530 (IST)
-Received: from dbdp31.itg.ti.com (172.24.170.98) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Wed, 29 Feb 2012 18:17:03 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1TCl0j6008917;
-	Wed, 29 Feb 2012 18:17:02 +0530 (IST)
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Feb 2012 06:46:59 -0600
-Message-ID: <1330519619-27890-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [meta-oe][PATCHv3] nbench-byte-2.3.3: import recipe from oe-classic
+	Wed, 29 Feb 2012 05:50:16 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.236.157.10 as permitted sender) client-ip=10.236.157.10; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.236.157.10 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.236.157.10])
+	by 10.236.157.10 with SMTP id n10mr595421yhk.41.1330523416035 (num_hops
+	= 1); Wed, 29 Feb 2012 05:50:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=+23DGPgAgegANr+9lqCNg5l754FSg4iOe2K+sJ5t09M=;
+	b=NhjTNZ2Qpbc3v+fREra32+drDbueZRRZeQFgpbD6aS7G/oWmCQ6MadEe3FU2pG/Z0Y
+	GxCOmDxN8bmW1khNGXeInC3OR7JKrkDBGbtXW8A5N5o6bJFAoP8dKEhhOpir9fIQh7sE
+	YGMpV6wrD1YRB+zB0HedILJKJYp0XVsePpCIY=
+Received: by 10.236.157.10 with SMTP id n10mr469071yhk.41.1330523415967;
+	Wed, 29 Feb 2012 05:50:15 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id f40sm34442349ani.16.2012.02.29.05.50.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 29 Feb 2012 05:50:15 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Feb 2012 13:50:07 +0000
+Message-Id: <f02b204f1c714d7aa3b83ca0aed94f42694089b4.1330523387.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <cover.1330523387.git.otavio@ossystems.com.br>
+References: <cover.1330523387.git.otavio@ossystems.com.br>
+Subject: [PATCH][meta-oe 1/1] More quotting fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,122 +49,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Feb 2012 13:00:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Feb 2012 13:58:45 -0000
 
-* Import the nbench-byte recipe from the oe-classic git repo at
-  git://git.openembedded.org/openembedded commit id:
-    * 6fe7cef27069415f2eba36bc640cf59013d4979b
-* Update LICENSE checksums
-* Tested on an AM335x EVM which is the same processor as the
-  beaglebone.
-
-* Original Author:
-    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-* Modifications by:
-    * Koen Kooi <koen@openembedded.org>
-    * Martin Jansa <Martin.Jansa@gmail.com>
-    * Chris Larson <chris_larson@mentor.com>
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
-* Updated in version 2:
-    * Addressed commit message comments by Paul Menzel
-    * Changed the PR down to r0
-* Updated in version 3:
-    * Removed the PR since r0 is the default
-    * Moved the checksums to just under the SRC_URI
----
- .../nbench-byte/nbench-byte/nbench_32bits.patch    |   46 ++++++++++++++++++++
- .../nbench-byte/nbench-byte_2.2.3.bb               |   24 ++++++++++
- 2 files changed, 70 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+ meta-oe/recipes-connectivity/gnuradio/gnuradio.inc |    2 +-
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc    |    2 +-
+ meta-oe/recipes-support/opencv/opencv_2.3.bb       |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
-new file mode 100644
-index 0000000..1b8a4dc
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/nbench_32bits.patch
-@@ -0,0 +1,46 @@
-+From 81f4043a6787060029ef20eed21cdcf3e50337df Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Tue, 28 Feb 2012 14:58:35 -0600
-+Subject: [PATCH] nbench: modify Makefile for 32bit
-+
-+* Patch taken from OE classic git repository as of commit id
-+  ad42bf9065928b2902d7d9534709d3ccea7ec956 and was added by:
-+    * Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-+* Notes from original patch were:
-+
-+BYTE Magazine's native benchmarks (also called BYTEmark) designed to
-+expose the capabilities of a system's CPU, FPU and memory system.
-+
-+http://www.tux.org/~mayer/linux/
-+
-+Recipe from old Atmel overlay.
-+
-+Upstream-Status: Inappropriate [no upstream]
-+
-+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-+---
-+ Makefile |    8 ++------
-+ 1 files changed, 2 insertions(+), 6 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 5045c77..915866d 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -119,12 +119,8 @@ emfloat.o: emfloat.h emfloat.c nmglobal.h pointer.h Makefile
-+ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+ 		-c emfloat.c
-+ 
-+-pointer.h: pointer Makefile
-+-	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+-		-o pointer pointer.c
-+-	rm -f pointer.h
-+-	if [ "4" = `./pointer` ] ; then touch pointer.h ;\
-+-	else echo "#define LONG64" >pointer.h ; fi
-++pointer.h: Makefile
-++	touch pointer.h ;
-+ 
-+ misc.o: misc.h misc.c Makefile
-+ 	$(CC) $(MACHINE) $(DEFINES) $(CFLAGS)\
-+-- 
-+1.7.0.4
-+
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-new file mode 100644
-index 0000000..8dd289b
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
-+designed to expose the capabilities of a system's CPU, FPU, \
-+and memory system."
-+HOMEPAGE = "http://www.tux.org/~mayer/linux/"
-+LICENSE = "freely distributable"
-+LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
-+SECTION = "console/utils"
-+
-+SRC_URI = "http://www.tux.org/~mayer/linux/${PN}-${PV}.tar.gz \
-+           file://nbench_32bits.patch"
-+
-+SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
-+SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
-+
-+TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
-+do_compile() {
-+	oe_runmake
-+}
-+
-+do_install () {
-+	install -d ${D}${bindir}
-+	install -m 0644 NNET.DAT ${D}${bindir}/
-+	install -m 0755 nbench ${D}${bindir}/
-+}
+diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc b/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
+index 80ac407..144d588 100644
+--- a/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
++++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio.inc
+@@ -10,7 +10,7 @@ INC_PR = "r1"
+ inherit distutils-base autotools pkgconfig
+ 
+ export BUILD_SYS
+-export HOST_SYS=${MULTIMACH_TARGET_SYS}
++export HOST_SYS="${MULTIMACH_TARGET_SYS}"
+ 
+ EXTRA_OECONF = " \
+   --program-prefix= \
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index 44de2a2..865deb2 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -28,7 +28,7 @@ INITSCRIPT_PACKAGES = "${PN}-server"
+ INITSCRIPT_NAME = "mysqld"
+ INITSCRIPT_PARAMS = "start 45 S . stop 45 0 6 1 ."
+ 
+-export ac_cv_path_PS=/bin/ps
++export ac_cv_path_PS="/bin/ps"
+ export ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null"
+ PARALLEL_MAKE = " "
+ EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.3.bb b/meta-oe/recipes-support/opencv/opencv_2.3.bb
+index 1a4bb4f..fdb56a9 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.3.bb
+@@ -31,7 +31,7 @@ inherit distutils-base pkgconfig cmake
+ export BUILD_SYS
+ export HOST_SYS
+ export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
+-export PYTHON=${STAGING_BINDIR_NATIVE}/python
++export PYTHON="${STAGING_BINDIR_NATIVE}/python"
+ 
+ TARGET_CC_ARCH += "-I${S}/include "
+ 
 -- 
-1.7.0.4
+1.7.2.5
 
 
 
