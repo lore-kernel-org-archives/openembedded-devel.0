@@ -1,16 +1,14 @@
 Received: from ffm.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1S358P-0004zW-QS
+	(envelope-from <obi@opendreambox.org>) id 1S358R-0004zd-66
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Mar 2012 13:29:25 +0100
+	Thu, 01 Mar 2012 13:29:27 +0100
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Mar 2012 13:20:40 +0100
-Message-Id: <1330604440-8121-2-git-send-email-obi@opendreambox.org>
+Date: Thu,  1 Mar 2012 13:20:39 +0100
+Message-Id: <1330604440-8121-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <1330604440-8121-1-git-send-email-obi@opendreambox.org>
-References: <1330604440-8121-1-git-send-email-obi@opendreambox.org>
-Subject: [meta-oe][PATCH 2/2][resend] udev: consolekit package requires x11
+Subject: [meta-oe][PATCH 1/2][resend] giflib: don't link against libx11, don't depend on libsm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,57 +22,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2012 12:29:25 -0000
+X-List-Received-Date: Thu, 01 Mar 2012 12:29:27 -0000
 
-* consolekit fails to build without x11, so disable
-  creation of udev-consolekit, if x11 is unavailable.
+libsm wasn't used unless libx11 was built before giflib. Therefore
+drop the dependency on libsm and disable x11 unconditionally like
+Debian does.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-core/udev/udev_173.bb |    2 +-
- meta-oe/recipes-core/udev/udev_175.bb |    2 +-
- meta-oe/recipes-core/udev/udev_181.bb |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core/udev/udev_173.bb
-index e4e634a..cbbe910 100644
---- a/meta-oe/recipes-core/udev/udev_173.bb
-+++ b/meta-oe/recipes-core/udev/udev_173.bb
-@@ -59,7 +59,7 @@ do_configure_prepend() {
- INITSCRIPT_NAME = "udev"
- INITSCRIPT_PARAMS = "start 04 S ."
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+index bd7b495..e1a0777 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+@@ -2,13 +2,13 @@ DESCRIPTION = "shared library for GIF images"
+ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+-PR = "r2"
++PR = "r3"
  
--PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
-+PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)}"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
  
- FILES_${PN}-systemd = "${base_libdir}/systemd"
- RDEPENDS_${PN}-systemd += "udev"
-diff --git a/meta-oe/recipes-core/udev/udev_175.bb b/meta-oe/recipes-core/udev/udev_175.bb
-index b6484d9..6560b5d 100644
---- a/meta-oe/recipes-core/udev/udev_175.bb
-+++ b/meta-oe/recipes-core/udev/udev_175.bb
-@@ -55,7 +55,7 @@ do_configure_prepend() {
- 	cp ${WORKDIR}/gtk-doc.make ${S}
- }
+ inherit autotools
  
--PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
-+PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)}"
+-DEPENDS = "libsm"
++EXTRA_OECONF = "--disable-x11"
  
- FILES_${PN}-systemd = "${base_libdir}/systemd"
- RDEPENDS_${PN}-systemd += "udev"
-diff --git a/meta-oe/recipes-core/udev/udev_181.bb b/meta-oe/recipes-core/udev/udev_181.bb
-index 1e0a02a..99b66b1 100644
---- a/meta-oe/recipes-core/udev/udev_181.bb
-+++ b/meta-oe/recipes-core/udev/udev_181.bb
-@@ -54,7 +54,7 @@ do_configure_prepend() {
- 	cp ${WORKDIR}/gtk-doc.make ${S}
- }
- 
--PACKAGES =+ "${PN}-systemd libudev libgudev udev-consolekit udev-utils"
-+PACKAGES =+ "${PN}-systemd libudev libgudev ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)} udev-utils"
- 
- FILES_${PN}-systemd = "${base_libdir}/systemd"
- RDEPENDS_${PN}-systemd += "udev"
+ PACKAGES += "${PN}-utils"
+ FILES_${PN} = "${libdir}/libgif.so.*"
 -- 
 1.7.5.4
 
