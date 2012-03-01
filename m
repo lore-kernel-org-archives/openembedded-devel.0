@@ -1,41 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S36RH-0006fj-Td
+	(envelope-from <sledz@dresearch-fe.de>) id 1S36Sp-0006mo-Nm
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Mar 2012 14:53:00 +0100
-Received: by ghbz2 with SMTP id z2so170795ghb.6
+	Thu, 01 Mar 2012 14:54:35 +0100
+Received: by bkcjg15 with SMTP id jg15so505840bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2012 05:44:29 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.236.186.1 as permitted sender) client-ip=10.236.186.1; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.236.186.1 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.236.186.1])
-	by 10.236.186.1 with SMTP id v1mr7275819yhm.4.1330609469929 (num_hops =
-	1); Thu, 01 Mar 2012 05:44:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=Vg2+83tIp7t9REgsaWep3UqnrDdmFrL0zrYi0BhxMXY=;
-	b=hkzHP2PLA6phhorOUrCaf8edOnLXiFb2X3CF38ca/wgIX/uMYEKkWUVHlqfuoF/Qyq
-	4A5DF2oO/bCw0i9k6YQAWjPswDjoTOFWXKsSgTzz25CDm3awyLYcu21H31qSeSrwGQgB
-	ULr99TiNDUQGTl9wwZCJKG0YSyq600VG0iejg=
-Received: by 10.236.186.1 with SMTP id v1mr5670803yhm.4.1330609469884;
-	Thu, 01 Mar 2012 05:44:29 -0800 (PST)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id 32sm3085547anu.14.2012.03.01.05.44.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Mar 2012 05:44:29 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Mar 2012 13:44:21 +0000
-Message-Id: <f11d949f4308dfac11d367a72761c155f1c69d01.1330609446.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1330609446.git.otavio@ossystems.com.br>
-References: <cover.1330609446.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] numlockx: add 1.2
+	Thu, 01 Mar 2012 05:46:06 -0800 (PST)
+Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
+	10.204.157.155 as permitted sender) client-ip=10.204.157.155; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of sledz@dresearch-fe.de
+	designates 10.204.157.155 as permitted sender)
+	smtp.mail=sledz@dresearch-fe.de
+Received: from mr.google.com ([10.204.157.155])
+	by 10.204.157.155 with SMTP id b27mr2600147bkx.103.1330609565997
+	(num_hops = 1); Thu, 01 Mar 2012 05:46:05 -0800 (PST)
+Received: by 10.204.157.155 with SMTP id b27mr2077903bkx.103.1330609565763;
+	Thu, 01 Mar 2012 05:46:05 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id ew15sm3657881bkc.10.2012.03.01.05.46.05
+	(version=SSLv3 cipher=OTHER); Thu, 01 Mar 2012 05:46:05 -0800 (PST)
+Message-ID: <4F4F7D9C.8070300@dresearch-fe.de>
+Date: Thu, 01 Mar 2012 14:46:04 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.3.5
+X-Gm-Message-State: ALoCoQkBtmjI7C9hcTW1OEc+Xw+3DBW/n8MBqWWcHhQm4YrOtN/P1rRdoY1add+sdA3OYgVNu5mS
+Subject: bitbake dependency cache problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,42 +44,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2012 13:53:00 -0000
+X-List-Received-Date: Thu, 01 Mar 2012 13:54:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
----
- meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb |   21 +++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
+I'm working with oe-classic and BitBake Build Tool Core version 1.12.0, bitbake version 1.12.0.
 
-diff --git a/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb b/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
-new file mode 100644
-index 0000000..0d4d9ff
---- /dev/null
-+++ b/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Enable NumLock in X11 sessions"
-+HOMEPAGE = "http://home.kde.org/~seli/numlockx/"
-+SECTION = "x11/apps"
-+DEPENDS = "imake-native virtual/libx11 libxtst"
-+LICENSE = "MIT-X"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=dcb1cc75e21540a4a66b54e38d95b047"
-+
-+SRC_URI = "http://home.kde.org/~seli/numlockx/numlockx-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "be9109370447eae23f6f3f8527bb1a67"
-+SRC_URI[sha256sum] = "e468eb9121c94c9089dc6a287eeb347e900ce04a14be37da29d7696cbce772e4"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--x-includes=${STAGING_INCDIR} \
-+                --x-libraries=${STAGING_LIBDIR}"
-+
-+do_configure_prepend() {
-+    # remove this from acinclude.m4 or build fails
-+    sed -i '/_AC_PATH_X_XMKMF/d' ${S}/acinclude.m4
-+}
+Because of some special development requirements we like to generate the Package Version from the SVN Revision (not the Last Changed Rev!) of the bitbake recipe in the local workspace.
+
+Therefor the recipe contains this:
+
+---------------->snip<-----------------
+PR = "r8"
+PV = "svnr${@svn_revision(d)}"
+
+inherit svn-helper
+---------------->snip<-----------------
+
+The svn-helper.bbclass contains a little helper function to determine the needed value:
+
+---------------->snip<-----------------
+def svn_revision(d):
+     import subprocess
+     bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
+     return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
+---------------->snip<-----------------
+
+After this changes i make a first build and everything works fine. Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is generated.
+
+Now i make an "svn update" inside the workspace and the SVN Revision increases to 66.
+
+A call of "bitbake foo" now results in an "Tasks Summary: Attempted 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no new ipg is generated. :(
+
+The log generated by "bitbake -DDDDDvvvvv foo" contains
+
+---------------->snip<-----------------
+DEBUG: providers for foo are: ['foo']
+NOTE: checking PREFERRED_PROVIDER_foo
+NOTE: checking PREFERRED_PROVIDER_foo-svnr42
+NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
+---------------->snip<-----------------
+
+Why does bitbake not respects the new PV and generates a foo-svnr66-r8.ipk here???
+
+Regards,
+Steffen
+
 -- 
-1.7.2.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
