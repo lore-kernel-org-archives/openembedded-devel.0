@@ -1,36 +1,26 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1S36Sp-0006mo-Nm
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1S37AW-000703-5I
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Mar 2012 14:54:35 +0100
-Received: by bkcjg15 with SMTP id jg15so505840bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2012 05:46:06 -0800 (PST)
-Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
-	10.204.157.155 as permitted sender) client-ip=10.204.157.155; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of sledz@dresearch-fe.de
-	designates 10.204.157.155 as permitted sender)
-	smtp.mail=sledz@dresearch-fe.de
-Received: from mr.google.com ([10.204.157.155])
-	by 10.204.157.155 with SMTP id b27mr2600147bkx.103.1330609565997
-	(num_hops = 1); Thu, 01 Mar 2012 05:46:05 -0800 (PST)
-Received: by 10.204.157.155 with SMTP id b27mr2077903bkx.103.1330609565763;
-	Thu, 01 Mar 2012 05:46:05 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id ew15sm3657881bkc.10.2012.03.01.05.46.05
-	(version=SSLv3 cipher=OTHER); Thu, 01 Mar 2012 05:46:05 -0800 (PST)
-Message-ID: <4F4F7D9C.8070300@dresearch-fe.de>
-Date: Thu, 01 Mar 2012 14:46:04 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Thu, 01 Mar 2012 15:39:44 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 01 Mar 2012 06:31:13 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="116538972"
+Received: from unknown (HELO helios.localnet) ([10.252.123.90])
+	by orsmga002.jf.intel.com with ESMTP; 01 Mar 2012 06:31:12 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 01 Mar 2012 14:31:11 +0000
+Message-ID: <13179298.lVtZb3KUcf@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.0; i686; ; )
+In-Reply-To: <CALbNGRQBCeQj=0dHAwAddM5cvJZhKLzyk8J5+WLAh7QFQBx_rg@mail.gmail.com>
+References: <CALbNGRSc52k3sqGsh+T93ex2X2+62DCoVq8RB4dk-Ooy-j3qRg@mail.gmail.com>
+	<FA3D8228-A311-4588-90C8-0A12F89723AC@dominion.thruhere.net>
+	<CALbNGRQBCeQj=0dHAwAddM5cvJZhKLzyk8J5+WLAh7QFQBx_rg@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.3.5
-X-Gm-Message-State: ALoCoQkBtmjI7C9hcTW1OEc+Xw+3DBW/n8MBqWWcHhQm4YrOtN/P1rRdoY1add+sdA3OYgVNu5mS
-Subject: bitbake dependency cache problem
+Subject: Re: Buildhistory, was Re: [OE-core] do rootfs does not create log files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,59 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2012 13:54:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 01 Mar 2012 14:39:44 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-I'm working with oe-classic and BitBake Build Tool Core version 1.12.0, bitbake version 1.12.0.
+On Thursday 01 March 2012 13:38:04 Andreas M=FCller wrote:
+> Would it be big effort to have the package scripts (pre-/postinst,
+> postrm) handled by buildhistory?
 
-Because of some special development requirements we like to generate the Package Version from the SVN Revision (not the Last Changed Rev!) of the bitbake recipe in the local workspace.
+Do you mean you would like the contents of the scripts recorded in=20
+buildhistory? If so, I guess this is possible; if we just output each s=
+cript=20
+to a separate file I don't think it should be too difficult. Making it =
+work=20
+nicely if you switch back to the old (symlinked) mode would be an extra=
+ trick,=20
+though I'm starting to wonder if that's worth continuing to support.
 
-Therefor the recipe contains this:
+Cheers,
+Paul
 
----------------->snip<-----------------
-PR = "r8"
-PV = "svnr${@svn_revision(d)}"
+--=20
 
-inherit svn-helper
----------------->snip<-----------------
-
-The svn-helper.bbclass contains a little helper function to determine the needed value:
-
----------------->snip<-----------------
-def svn_revision(d):
-     import subprocess
-     bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
-     return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
----------------->snip<-----------------
-
-After this changes i make a first build and everything works fine. Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is generated.
-
-Now i make an "svn update" inside the workspace and the SVN Revision increases to 66.
-
-A call of "bitbake foo" now results in an "Tasks Summary: Attempted 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no new ipg is generated. :(
-
-The log generated by "bitbake -DDDDDvvvvv foo" contains
-
----------------->snip<-----------------
-DEBUG: providers for foo are: ['foo']
-NOTE: checking PREFERRED_PROVIDER_foo
-NOTE: checking PREFERRED_PROVIDER_foo-svnr42
-NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
----------------->snip<-----------------
-
-Why does bitbake not respects the new PV and generates a foo-svnr66-r8.ipk here???
-
-Regards,
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
