@@ -1,44 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S3FmD-0006o8-LC
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Mar 2012 00:51:13 +0100
-Received: by ghbz2 with SMTP id z2so560775ghb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S3NoL-0001xw-8F for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Mar 2012 09:25:57 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S3Ng7-0002p1-Ul for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Mar 2012 09:17:27 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Mar 2012 09:17:27 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2012 15:42:42 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.236.192.230 as permitted sender) client-ip=10.236.192.230; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.236.192.230 as
-	permitted sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.236.192.230])
-	by 10.236.192.230 with SMTP id i66mr10117997yhn.116.1330645362968
-	(num_hops = 1); Thu, 01 Mar 2012 15:42:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=1QWhIN5WMmUMC8Q0lolMdplAvXNoQSnBm87+KAzDJvA=;
-	b=YE2lPmzHPs6LO0XXdXFkeae5yj4eos6Kn8QTzK6TPmjrNkW0arIQqlainfc08PTs0O
-	LQReqaLLMsbRhAt1LDYTmwTZjKIrtRYkptqbW2/YoXuwAyOQ3lRjUnBI0dqXYBl4UNIc
-	OTEPEI7ri6P4O/3avgBdsMgfpuSYnr06kqNB0e6KZupTQXCmUVhkPsWiwDegNM/PIjWE
-	x9XAA0VWfU8RpntnqV/AZrIIQQYpgCTV+nAtoVATXcGuKq5xzR6F8RgjqTqswOILOn1l
-	kzlFqZEQ+VzH1TtY3fVAznIHN+e+yMPx5NfKVI5Pnq4rf2u8AJQ1s9t2pbe0QRxuDXHi
-	LAXA==
-Received: by 10.236.192.230 with SMTP id i66mr8026093yhn.116.1330645362916;
-	Thu, 01 Mar 2012 15:42:42 -0800 (PST)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id b6sm5845638anc.3.2012.03.01.15.42.24
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 01 Mar 2012 15:42:25 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 02 Mar 2012 09:17:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Mar 2012 23:42:18 +0000
-Message-Id: <46abda05bc9fd0b2156cb7f6fffaf8acb0d180f1.1330645326.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1330645326.git.otavio@ossystems.com.br>
-References: <cover.1330645326.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] numlockx: add 1.2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 02 Mar 2012 09:17:17 +0100
+Message-ID: <jipvmb$14d$1@dough.gmane.org>
+References: <1330604440-8121-1-git-send-email-obi@opendreambox.org>
+	<1330604440-8121-2-git-send-email-obi@opendreambox.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <1330604440-8121-2-git-send-email-obi@opendreambox.org>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe][PATCH 2/2][resend] udev: consolekit package requires x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2012 23:51:13 -0000
+X-List-Received-Date: Fri, 02 Mar 2012 08:25:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb |   21 +++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb b/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
-new file mode 100644
-index 0000000..daa2c52
---- /dev/null
-+++ b/meta-oe/recipes-graphics/numlockx/numlockx_1.2.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Enable NumLock in X11 sessions"
-+HOMEPAGE = "http://home.kde.org/~seli/numlockx/"
-+SECTION = "x11/apps"
-+LICENSE = "MIT-X"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=dcb1cc75e21540a4a66b54e38d95b047"
-+DEPENDS = "imake-native virtual/libx11 libxtst"
-+
-+SRC_URI = "http://home.kde.org/~seli/numlockx/numlockx-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "be9109370447eae23f6f3f8527bb1a67"
-+SRC_URI[sha256sum] = "e468eb9121c94c9089dc6a287eeb347e900ce04a14be37da29d7696cbce772e4"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--x-includes=${STAGING_INCDIR} \
-+                --x-libraries=${STAGING_LIBDIR}"
-+
-+do_configure_prepend() {
-+    # remove this from acinclude.m4 or build fails
-+    sed -i '/_AC_PATH_X_XMKMF/d' ${S}/acinclude.m4
-+}
--- 
-1.7.2.5
+Op 01-03-12 13:20, Andreas Oberritter schreef:
+> * consolekit fails to build without x11, so disable creation of
+> udev-consolekit, if x11 is unavailable.
+> 
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org> --- 
+> meta-oe/recipes-core/udev/udev_173.bb |    2 +- 
+> meta-oe/recipes-core/udev/udev_175.bb |    2 +- 
+> meta-oe/recipes-core/udev/udev_181.bb |    2 +- 3 files changed, 3
+> insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-core/udev/udev_173.bb
+> b/meta-oe/recipes-core/udev/udev_173.bb index e4e634a..cbbe910 100644 ---
+> a/meta-oe/recipes-core/udev/udev_173.bb +++
+> b/meta-oe/recipes-core/udev/udev_173.bb @@ -59,7 +59,7 @@
+> do_configure_prepend() { INITSCRIPT_NAME = "udev" INITSCRIPT_PARAMS =
+> "start 04 S ."
+> 
+> -PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit" 
+> +PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils
+> ${@base_contains('DISTRO_FEATURES', 'x11', 'udev-consolekit', '', d)}"
+
+What does this actually accomplish? If the package is empty it won't get
+generated anyway and if it isn't empty you just introduced a QA error.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9QggsACgkQMkyGM64RGpE5IACgh7qgjWEzWhgUWGBMxCjM86GY
+lD4AnRj/2+bgRdsJAt/PJ0Xm0jmK+rVb
+=9tpQ
+-----END PGP SIGNATURE-----
 
 
 
