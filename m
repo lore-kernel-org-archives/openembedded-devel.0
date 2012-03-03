@@ -1,39 +1,44 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1S3Vaf-0000fz-8V
+	(envelope-from <otavio.salvador@gmail.com>) id 1S3gnj-0001KF-H1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Mar 2012 17:44:21 +0100
-Received: by wera1 with SMTP id a1so1220691wer.6
+	Sat, 03 Mar 2012 05:42:35 +0100
+Received: by yhjj56 with SMTP id j56so1079680yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2012 08:35:50 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.107.2 as permitted sender)
-	client-ip=10.180.107.2; 
+	Fri, 02 Mar 2012 20:34:03 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.236.76.198 as permitted sender) client-ip=10.236.76.198; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.107.2 as permitted
-	sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.107.2])
-	by 10.180.107.2 with SMTP id gy2mr7001965wib.12.1330706150414 (num_hops
-	= 1); Fri, 02 Mar 2012 08:35:50 -0800 (PST)
-Received: by 10.180.107.2 with SMTP id gy2mr5606310wib.12.1330706150345;
-	Fri, 02 Mar 2012 08:35:50 -0800 (PST)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id k6sm4627323wiy.7.2012.03.02.08.35.48
+	otavio.salvador@gmail.com designates 10.236.76.198 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.236.76.198])
+	by 10.236.76.198 with SMTP id b46mr17190311yhe.25.1330749243517
+	(num_hops = 1); Fri, 02 Mar 2012 20:34:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=sj4H3yjj94CpcsPPq69a5v6LP1vWhixu6jD4+QVNodg=;
+	b=fyu+WxWlMuApDAr86c9k/ClYc+Lh8QnlIClQz4u6I1JqwQNvCHjwCSdIXpB3rB0OCY
+	dI3KyXQh+Pnikk89+Je3I+9BPUHNlgGwizDymcY2peaczzmCu7CnenXMHN5b1ijOSfXT
+	7WhLtsjKEXmTYPyuTbJvuQvzTjbU6mCxxIX2doYW8KzVbH5Q02SfzhYHn3/ETaYbldkm
+	1wDcXcGK/swg7Cgojh7CucKVLtZ5hzo11YKuAQJTzfGRG4nAnE8l5c3zALGqe5b2B0vi
+	PJ5il+Rc6KSHzZFJOlnw9GHeKUXOjIevpdhZCXPkmN59qLGqF4+j/dXznjkOrgAoMm21
+	hQBg==
+Received: by 10.236.76.198 with SMTP id b46mr13655113yhe.25.1330749243458;
+	Fri, 02 Mar 2012 20:34:03 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id 34sm12651999anu.6.2012.03.02.20.34.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 02 Mar 2012 08:35:49 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4F50F2C9.5000407@mlbassoc.com>
-Date: Fri, 2 Mar 2012 17:35:47 +0100
-Message-Id: <C46426C7-428A-429F-B5B3-DEE03C557EEB@dominion.thruhere.net>
-References: <4F50F2C9.5000407@mlbassoc.com>
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQkqQHFTKmROWGLHOzegtxmglferBDXoQjRke/pKtN7P3WG1ec4Ay8NUfd8+7ErANYTY7mM4
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Angstrom-devel] Why can't I build firefox?
+	Fri, 02 Mar 2012 20:34:02 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Mar 2012 04:33:54 +0000
+Message-Id: <405a0c3dbd45bd3877a5a80c2add9b463045c97c.1330749219.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <cover.1330749219.git.otavio@ossystems.com.br>
+References: <cover.1330749219.git.otavio@ossystems.com.br>
+Subject: [PATCH][meta-oe 1/1] atftp: fix atftpd's systemd service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,17 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2012 16:44:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 03 Mar 2012 04:42:35 -0000
 
-Op 2 mrt. 2012, om 17:18 heeft Gary Thomas het volgende geschreven:
+The atftpd do not create the pid file and systemd sends a SIGTERM to
+it if the pid file cannot be found.
 
-> I'd like to test firefox on my BeagleBone using my latest Angstrom
-> setup, so I added the meta-mozilla layer to my layers & now have this
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-extended/atftp/atftp_0.7.bb        |    2 +-
+ .../recipes-extended/atftp/files/atftpd.service    |    1 -
+ 2 files changed, 1 insertions(+), 2 deletions(-)
 
-Angstrom includes meta-mozilla by default, so it looks like you don't =
-actually have an angstrom setup. FWIW, an up to date firefox is in the =
-feeds for at least armv7a.=
+diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
+index 6bd44a0..1af4b63 100644
+--- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
++++ b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
+@@ -3,7 +3,7 @@ SECTION = "network"
+ HOMEPAGE = "http://packages.debian.org/atftp"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive \
+            ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \
+diff --git a/meta-oe/recipes-extended/atftp/files/atftpd.service b/meta-oe/recipes-extended/atftp/files/atftpd.service
+index c7aa29c..480bc70 100644
+--- a/meta-oe/recipes-extended/atftp/files/atftpd.service
++++ b/meta-oe/recipes-extended/atftp/files/atftpd.service
+@@ -4,7 +4,6 @@ After=syslog.target network.target
+ 
+ [Service]
+ Type=forking
+-PIDFile=/var/run/atftpd.pid
+ ExecStart=/usr/sbin/atftpd --daemon --port 69
+ 
+ [Install]
+-- 
+1.7.2.5
+
 
 
