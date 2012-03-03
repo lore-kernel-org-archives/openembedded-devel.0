@@ -1,44 +1,46 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S3gnj-0001KF-H1
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S3nsO-0003xt-3m
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Mar 2012 05:42:35 +0100
-Received: by yhjj56 with SMTP id j56so1079680yhj.6
+	Sat, 03 Mar 2012 13:15:52 +0100
+Received: by eaae1 with SMTP id e1so717191eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2012 20:34:03 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.236.76.198 as permitted sender) client-ip=10.236.76.198; 
+	Sat, 03 Mar 2012 04:07:20 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.14.45.80 as permitted sender)
+	client-ip=10.14.45.80; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.236.76.198 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.236.76.198])
-	by 10.236.76.198 with SMTP id b46mr17190311yhe.25.1330749243517
-	(num_hops = 1); Fri, 02 Mar 2012 20:34:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=sj4H3yjj94CpcsPPq69a5v6LP1vWhixu6jD4+QVNodg=;
-	b=fyu+WxWlMuApDAr86c9k/ClYc+Lh8QnlIClQz4u6I1JqwQNvCHjwCSdIXpB3rB0OCY
-	dI3KyXQh+Pnikk89+Je3I+9BPUHNlgGwizDymcY2peaczzmCu7CnenXMHN5b1ijOSfXT
-	7WhLtsjKEXmTYPyuTbJvuQvzTjbU6mCxxIX2doYW8KzVbH5Q02SfzhYHn3/ETaYbldkm
-	1wDcXcGK/swg7Cgojh7CucKVLtZ5hzo11YKuAQJTzfGRG4nAnE8l5c3zALGqe5b2B0vi
-	PJ5il+Rc6KSHzZFJOlnw9GHeKUXOjIevpdhZCXPkmN59qLGqF4+j/dXznjkOrgAoMm21
-	hQBg==
-Received: by 10.236.76.198 with SMTP id b46mr13655113yhe.25.1330749243458;
-	Fri, 02 Mar 2012 20:34:03 -0800 (PST)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id 34sm12651999anu.6.2012.03.02.20.34.02
+	schnitzeltony@googlemail.com designates 10.14.45.80 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.14.45.80])
+	by 10.14.45.80 with SMTP id o56mr7718254eeb.88.1330776440045 (num_hops
+	= 1); Sat, 03 Mar 2012 04:07:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=3USVQoJJcW5Dgm9EvVESqLca3BfuCeZt3W6TcIdWvYk=;
+	b=HKbps43MVV81qFc5PdgXyhtEw7saNVXhELEEd1qH87w2NhZaDH+Q+/oaVxUVjp1G+9
+	GXwIXaU0yEqloF5pvDFxtCTvdOQbn6uk/Rz7NX7OmHHO/e+wJL76zxIeVOsCEjmhST4M
+	8wJPNNp1YBmU/LxMq3NmFToZF725WMq1x45ZCQnoxLtBHBUpCqHMwpY0jKDTNMZPcct3
+	Mg0ijKU/bpOtUwXSE1tZu6tdM72vldfaVZoqywVjGQAHk52l3pmg9PV0nNJKGYQbRqri
+	Of/s2yliKdg+A9bd+1NSZUbxadNkpRM4IIi4HQFBoXnBjH/d7/yEblbkDs5VUkiMgkmI
+	6aIw==
+Received: by 10.14.45.80 with SMTP id o56mr5932339eeb.88.1330776439560;
+	Sat, 03 Mar 2012 04:07:19 -0800 (PST)
+Received: from localhost.localdomain (p4FDF1A4D.dip.t-dialin.net.
+	[79.223.26.77])
+	by mx.google.com with ESMTPS id i10sm33195646eea.8.2012.03.03.04.07.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 02 Mar 2012 20:34:02 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 03 Mar 2012 04:07:18 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Mar 2012 04:33:54 +0000
-Message-Id: <405a0c3dbd45bd3877a5a80c2add9b463045c97c.1330749219.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1330749219.git.otavio@ossystems.com.br>
-References: <cover.1330749219.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] atftp: fix atftpd's systemd service
+Date: Sat,  3 Mar 2012 13:10:52 +0100
+Message-Id: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-xfce 1/3] garcon: update to 0.1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 04:42:35 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 12:15:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The atftpd do not create the pid file and systemd sends a SIGTERM to
-it if the pid file cannot be found.
+run-tested on overo
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-extended/atftp/atftp_0.7.bb        |    2 +-
- .../recipes-extended/atftp/files/atftpd.service    |    1 -
- 2 files changed, 1 insertions(+), 2 deletions(-)
+ .../garcon/{garcon_0.1.9.bb => garcon_0.1.10.bb}   |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+ rename meta-xfce/recipes-xfce/garcon/{garcon_0.1.9.bb => garcon_0.1.10.bb} (63%)
 
-diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-index 6bd44a0..1af4b63 100644
---- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-+++ b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
-@@ -3,7 +3,7 @@ SECTION = "network"
- HOMEPAGE = "http://packages.debian.org/atftp"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
--PR = "r2"
-+PR = "r3"
+diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
+similarity index 63%
+rename from meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
+rename to meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
+index e99cb4d..2e88b97 100644
+--- a/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
++++ b/meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
+@@ -4,11 +4,9 @@ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
+ DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util"
  
- SRC_URI = "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive \
-            ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \
-diff --git a/meta-oe/recipes-extended/atftp/files/atftpd.service b/meta-oe/recipes-extended/atftp/files/atftpd.service
-index c7aa29c..480bc70 100644
---- a/meta-oe/recipes-extended/atftp/files/atftpd.service
-+++ b/meta-oe/recipes-extended/atftp/files/atftpd.service
-@@ -4,7 +4,6 @@ After=syslog.target network.target
+-PR = "r0"
+-
+ inherit xfce
  
- [Service]
- Type=forking
--PIDFile=/var/run/atftpd.pid
- ExecStart=/usr/sbin/atftpd --daemon --port 69
+ FILES_${PN} += " ${datadir}/desktop-directories"
  
- [Install]
+-SRC_URI[md5sum] = "a3ca1e54ad731c98f688900f6398fc20"
+-SRC_URI[sha256sum] = "485e23c8ec1af0d3af423aa244e05467dd2f96afbb66efc70ca7689222cf31d5"
++SRC_URI[md5sum] = "e53514e79c4da2631dd74994452d3c96"
++SRC_URI[sha256sum] = "c2497a2991101fc1e621dc712ef72aba7c238f6e5f5a1733c9572f9b23761316"
 -- 
-1.7.2.5
+1.7.4.4
 
 
 
