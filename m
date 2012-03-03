@@ -1,46 +1,48 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S3nsO-0003xt-3m
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S3nsO-0003xu-Ss
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 03 Mar 2012 13:15:52 +0100
-Received: by eaae1 with SMTP id e1so717191eaa.6
+Received: by eekc1 with SMTP id c1so746810eek.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 03 Mar 2012 04:07:20 -0800 (PST)
 Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.45.80 as permitted sender)
-	client-ip=10.14.45.80; 
+	designates 10.213.6.207 as permitted sender)
+	client-ip=10.213.6.207; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.45.80 as
+	schnitzeltony@googlemail.com designates 10.213.6.207 as
 	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
 	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.45.80])
-	by 10.14.45.80 with SMTP id o56mr7718254eeb.88.1330776440045 (num_hops
+Received: from mr.google.com ([10.213.6.207])
+	by 10.213.6.207 with SMTP id a15mr315741eba.179.1330776440956 (num_hops
 	= 1); Sat, 03 Mar 2012 04:07:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=3USVQoJJcW5Dgm9EvVESqLca3BfuCeZt3W6TcIdWvYk=;
-	b=HKbps43MVV81qFc5PdgXyhtEw7saNVXhELEEd1qH87w2NhZaDH+Q+/oaVxUVjp1G+9
-	GXwIXaU0yEqloF5pvDFxtCTvdOQbn6uk/Rz7NX7OmHHO/e+wJL76zxIeVOsCEjmhST4M
-	8wJPNNp1YBmU/LxMq3NmFToZF725WMq1x45ZCQnoxLtBHBUpCqHMwpY0jKDTNMZPcct3
-	Mg0ijKU/bpOtUwXSE1tZu6tdM72vldfaVZoqywVjGQAHk52l3pmg9PV0nNJKGYQbRqri
-	Of/s2yliKdg+A9bd+1NSZUbxadNkpRM4IIi4HQFBoXnBjH/d7/yEblbkDs5VUkiMgkmI
-	6aIw==
-Received: by 10.14.45.80 with SMTP id o56mr5932339eeb.88.1330776439560;
-	Sat, 03 Mar 2012 04:07:19 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=zoeN5gf2d2suU2lJAsMsxnIu2Io0xdDEQ9+2Es+ql/8=;
+	b=Kl+u1dfJRNUeLfAMuzHtm7Zp6g11+SoOgu1CgtcyRV0jKWiSwmZc5ye2lXgxWLHUjz
+	ppQgIdTAPx6fD4ZPgR7A6xmoRRM5ZH31M8PrOrlf4i1puOQX49jhfBuFKdNyLFDC5rGc
+	qRyl99emKtzQOPnOK1L5m+eAVYPqbsywrc/uyH7kdTOQlkKeGVUMK6BU2LVUJ0wvuGyx
+	4JnQIUUMJAsGpW0k95bJEC6ygAHNVRLoFqeFyu6kELXqIuBL/yfv19P+ytJEZJs9HW9V
+	xAI4VauDoHXQPq99mWDQxBGA2NiEOALd+jy19rvp3hl/2mqOVclylfhFbhUiTQPAYUcl
+	1X0w==
+Received: by 10.213.6.207 with SMTP id a15mr242409eba.179.1330776440508;
+	Sat, 03 Mar 2012 04:07:20 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1A4D.dip.t-dialin.net.
 	[79.223.26.77])
-	by mx.google.com with ESMTPS id i10sm33195646eea.8.2012.03.03.04.07.18
+	by mx.google.com with ESMTPS id i10sm33195646eea.8.2012.03.03.04.07.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 04:07:18 -0800 (PST)
+	Sat, 03 Mar 2012 04:07:20 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Mar 2012 13:10:52 +0100
-Message-Id: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat,  3 Mar 2012 13:10:53 +0100
+Message-Id: <1330776654-2913-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 1/3] garcon: update to 0.1.10
+Subject: [meta-xfce 2/3] xfce4-session: update to 4.8.3 / fix QA warnings static libs in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 12:15:52 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 12:15:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -62,31 +64,37 @@ run-tested on overo
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../garcon/{garcon_0.1.9.bb => garcon_0.1.10.bb}   |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.1.9.bb => garcon_0.1.10.bb} (63%)
+ ...ce4-session_4.8.2.bb => xfce4-session_4.8.3.bb} |    8 +++-----
+ 1 files changed, 3 insertions(+), 5 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.8.2.bb => xfce4-session_4.8.3.bb} (79%)
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
-similarity index 63%
-rename from meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
-rename to meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
-index e99cb4d..2e88b97 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.1.9.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_0.1.10.bb
-@@ -4,11 +4,9 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
- DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
+similarity index 79%
+rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
+rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
+index 6c23c68..2db465b 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.2.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
+@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+ DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
+ RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth"
  
--PR = "r0"
+-PR = "r1"
 -
  inherit xfce
  
- FILES_${PN} += " ${datadir}/desktop-directories"
+ # protect from frightening message that xfce might not work correctly
+@@ -21,7 +19,7 @@ FILES_${PN} += "${libdir}/xfce4/*/*/*.so \
  
--SRC_URI[md5sum] = "a3ca1e54ad731c98f688900f6398fc20"
--SRC_URI[sha256sum] = "485e23c8ec1af0d3af423aa244e05467dd2f96afbb66efc70ca7689222cf31d5"
-+SRC_URI[md5sum] = "e53514e79c4da2631dd74994452d3c96"
-+SRC_URI[sha256sum] = "c2497a2991101fc1e621dc712ef72aba7c238f6e5f5a1733c9572f9b23761316"
+ FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
+ 
+-FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.*a"
++FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.*a"
+ 
+-SRC_URI[md5sum] = "48780cbcf784ab64debc9312f17765f2"
+-SRC_URI[sha256sum] = "31bca2a559e05a8a859f150394a901517e5842414ef171a85c5da234e344c0d0"
++SRC_URI[md5sum] = "461cc38bbd37cab881adbdf943f9a402"
++SRC_URI[sha256sum] = "f0801b8c0ffa7e5d41b29b8df281ac127adf467bf50e8ded8aebe5a02bd99338"
 -- 
 1.7.4.4
 
