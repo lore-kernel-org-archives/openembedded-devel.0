@@ -1,48 +1,46 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S3nsP-0003xv-KU
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S3ohl-00053E-Ae
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Mar 2012 13:15:53 +0100
-Received: by eekc1 with SMTP id c1so746812eek.6
+	Sat, 03 Mar 2012 14:08:57 +0100
+Received: by eaae1 with SMTP id e1so724882eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Mar 2012 04:07:21 -0800 (PST)
+	Sat, 03 Mar 2012 05:00:25 -0800 (PST)
 Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.125.3 as permitted sender)
-	client-ip=10.14.125.3; 
+	designates 10.14.194.134 as permitted sender)
+	client-ip=10.14.194.134; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.125.3 as
+	schnitzeltony@googlemail.com designates 10.14.194.134 as
 	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
 	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.125.3])
-	by 10.14.125.3 with SMTP id y3mr8080534eeh.9.1330776441861 (num_hops =
-	1); Sat, 03 Mar 2012 04:07:21 -0800 (PST)
+Received: from mr.google.com ([10.14.194.134])
+	by 10.14.194.134 with SMTP id m6mr8081575een.4.1330779625457 (num_hops
+	= 1); Sat, 03 Mar 2012 05:00:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=0MAMxi+adbzjpZMQM9dIDJHXxmj68uVWev2+MxgI1yg=;
-	b=SP7YBHbIEUlAxI7HFKab/uW7iGPxbm2cHF7/F8NIA+NjE6RSpCopayYt1w9Nw00AAd
-	MWrjB+aj+GxQOwUQs3KXYlzjwyMVtokda281pn86XLIKoKGrtthqV12zdz7QHFErvko7
-	HIMTVUngThyGyLkJX02TmitEHU4VlAMA1++dNZFvcgCvCGI2UUnsOyV/54/8D1bKePIJ
-	JLo0fEL8s3vYs3ODLJUtBZfkN533iAEC1VWvPrcowbmhvtgSTdUqeRapYieDMZrIOIx9
-	xzHtvN+qar1PaDMy92CBo4PuNJpNyAxNqOtCiY0Y+b4n0XTmA6QhTe+rGJNdgvAQHgv5
-	T6yg==
-Received: by 10.14.125.3 with SMTP id y3mr6203410eeh.9.1330776441434;
-	Sat, 03 Mar 2012 04:07:21 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=CHtOIZsCO2TzflVi6RxDCzwz/XTdAfZG1qe3r3VUamo=;
+	b=qv5sUkCTQUinj6gQ8JmRt10vjLrAHylgdZ1raHKukzsVky+WgAaCC+IuE83LLKJecZ
+	izX/dupNoxwh41WI3YhBIawstAuh3v5F7enGApqlgF8y+QHjwf9Soqt8htiy09TGy5Lp
+	Qll4SqkKWFcXGASm1YDNk2+znwgji8UzTegrStLAysS0tGcKk3D1pV3NcqkwRuf4b3T/
+	eA4Oh3F1wXmFc+22C+7vWQZmHV991/yPENp0NoW4rfMcvqqac5VlNisAxCZAaBH7e3qP
+	m0ZnGDHPUbu4G0LFj2spWywa2VKenwrBsNeUvWJqaVtnd1RLYxRjR06BRhA7HZeZ9vsf
+	4vPA==
+Received: by 10.14.194.134 with SMTP id m6mr6205122een.4.1330779625367;
+	Sat, 03 Mar 2012 05:00:25 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1A4D.dip.t-dialin.net.
 	[79.223.26.77])
-	by mx.google.com with ESMTPS id i10sm33195646eea.8.2012.03.03.04.07.20
+	by mx.google.com with ESMTPS id n17sm33808936eei.3.2012.03.03.05.00.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 04:07:20 -0800 (PST)
+	Sat, 03 Mar 2012 05:00:24 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Mar 2012 13:10:54 +0100
-Message-Id: <1330776654-2913-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat,  3 Mar 2012 14:04:01 +0100
+Message-Id: <1330779841-3649-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1330776654-2913-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 3/3] xfce4-panel: fix QA warnings static libs in dev package
+Subject: [meta-oe] systemd-systemctl-native: multiple service files not looped properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,47 +54,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 12:15:53 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 13:08:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There was a patch sent already for fixing [1]. In that patch the static
-libraries of panel plugins were deleted during install. Here all static libs
-are packed into ${PN}-staticdev. The decision for this solution is based on:
-
-* Keep recipes as simple as possible
-* Although unlikely there might be a use case for having static libs for panel
-  plugins
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-February/037926.html
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb  |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../systemd/systemd-systemctl-native/systemctl     |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-index 0cd8eba..5baffae 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
- DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
+diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+index 72b9da3..b86f3cd 100755
+--- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
++++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+@@ -31,7 +31,7 @@ while [ $# != 0 ]; do
+ 	esac
+ done
  
--PR = "r1"
-+PR = "r2"
- 
- inherit xfce
- 
-@@ -27,7 +27,7 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
- FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
- 		   "
- 
--FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
-+FILES_${PN}-staticdev += "${libdir}/xfce4/panel/plugins/*.*a \
-                    "
- 
- SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
+-for service in "$services"; do
++for service in $services; do
+ 	# find service file
+ 	for p in $ROOT/etc/systemd/system \
+ 		 $ROOT/lib/systemd/system \
 -- 
 1.7.4.4
 
