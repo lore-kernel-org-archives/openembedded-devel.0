@@ -1,46 +1,25 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S3ohl-00053E-Ae
+	(envelope-from <koen@dominion.thruhere.net>) id 1S4Bg2-0007qw-Is
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Mar 2012 14:08:57 +0100
-Received: by eaae1 with SMTP id e1so724882eaa.6
+	Sun, 04 Mar 2012 14:40:42 +0100
+Received: by wgbdr12 with SMTP id dr12so2433042wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Mar 2012 05:00:25 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.14.194.134 as permitted sender)
-	client-ip=10.14.194.134; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.14.194.134 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.14.194.134])
-	by 10.14.194.134 with SMTP id m6mr8081575een.4.1330779625457 (num_hops
-	= 1); Sat, 03 Mar 2012 05:00:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=CHtOIZsCO2TzflVi6RxDCzwz/XTdAfZG1qe3r3VUamo=;
-	b=qv5sUkCTQUinj6gQ8JmRt10vjLrAHylgdZ1raHKukzsVky+WgAaCC+IuE83LLKJecZ
-	izX/dupNoxwh41WI3YhBIawstAuh3v5F7enGApqlgF8y+QHjwf9Soqt8htiy09TGy5Lp
-	Qll4SqkKWFcXGASm1YDNk2+znwgji8UzTegrStLAysS0tGcKk3D1pV3NcqkwRuf4b3T/
-	eA4Oh3F1wXmFc+22C+7vWQZmHV991/yPENp0NoW4rfMcvqqac5VlNisAxCZAaBH7e3qP
-	m0ZnGDHPUbu4G0LFj2spWywa2VKenwrBsNeUvWJqaVtnd1RLYxRjR06BRhA7HZeZ9vsf
-	4vPA==
-Received: by 10.14.194.134 with SMTP id m6mr6205122een.4.1330779625367;
-	Sat, 03 Mar 2012 05:00:25 -0800 (PST)
-Received: from localhost.localdomain (p4FDF1A4D.dip.t-dialin.net.
-	[79.223.26.77])
-	by mx.google.com with ESMTPS id n17sm33808936eei.3.2012.03.03.05.00.24
+	Sun, 04 Mar 2012 05:32:09 -0800 (PST)
+Received: by 10.180.86.230 with SMTP id s6mr7226889wiz.16.1330867929228;
+	Sun, 04 Mar 2012 05:32:09 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id hn8sm44636656wib.11.2012.03.04.05.32.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 05:00:24 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sun, 04 Mar 2012 05:32:08 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Mar 2012 14:04:01 +0100
-Message-Id: <1330779841-3649-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-MIME-Version: 1.0
-Subject: [meta-oe] systemd-systemctl-native: multiple service files not looped properly
+Date: Sun,  4 Mar 2012 14:32:02 +0100
+Message-Id: <1330867925-23330-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQmAMJ187nGpTkEQ3hI+VnYkA17VNjE7IbI9JaB1I5d+vpRIN+aH1fHITjtJOiUHRA8uwA49
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe 1/4] python-tornado: update to the 2.2 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,31 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 13:08:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 04 Mar 2012 13:40:42 -0000
 
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../systemd/systemd-systemctl-native/systemctl     |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../0001-disable-AI_ADDRCONFIG-flag.patch          |    2 +-
+ .../recipes-devtools/python/python-tornado_git.bb  |    7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-index 72b9da3..b86f3cd 100755
---- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-+++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-@@ -31,7 +31,7 @@ while [ $# != 0 ]; do
- 	esac
- done
+diff --git a/meta-oe/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch b/meta-oe/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
+index a3efbca..3c3ec7c 100644
+--- a/meta-oe/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
++++ b/meta-oe/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
+@@ -24,7 +24,7 @@ index cfff0ba..c181f24 100644
+ -        # exist on some platforms (specifically WinXP, although
+ -        # newer versions of windows have it)
+ -        flags |= socket.AI_ADDRCONFIG
+-     for res in socket.getaddrinfo(address, port, family, socket.SOCK_STREAM,
++     for res in set(socket.getaddrinfo(address, port, family, socket.SOCK_STREAM,
+                                    0, flags):
+          af, socktype, proto, canonname, sockaddr = res
+ -- 
+diff --git a/meta-oe/recipes-devtools/python/python-tornado_git.bb b/meta-oe/recipes-devtools/python/python-tornado_git.bb
+index 22078bc..693b454 100644
+--- a/meta-oe/recipes-devtools/python/python-tornado_git.bb
++++ b/meta-oe/recipes-devtools/python/python-tornado_git.bb
+@@ -2,10 +2,9 @@ DESCRIPTION = "Tornado is an open source version of the scalable, non-blocking w
+ LICENSE = "Apache"
+ LIC_FILES_CHKSUM = "file://README;md5=e7fb9954003d7cd93322ccf282210d1c"
  
--for service in "$services"; do
-+for service in $services; do
- 	# find service file
- 	for p in $ROOT/etc/systemd/system \
- 		 $ROOT/lib/systemd/system \
+-PV = "2.1.1"
+-PR = "r4"
+-SRCREV = "112fdb48b06b754d1f94335ea9e2fd62a07a5fe3"
+-SRC_URI = "git://github.com/facebook/tornado.git \
++PV = "2.2"
++SRCREV = "02bc76155de5bf4dca243e4d0c019c0ac4c8b3be"
++SRC_URI = "git://github.com/facebook/tornado.git;branch=branch2.2 \
+            file://0001-disable-AI_ADDRCONFIG-flag.patch \
+           "
+ 
 -- 
-1.7.4.4
+1.7.2.5
 
 
 
