@@ -1,23 +1,35 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1S4Dly-0003JH-Gd
+	(envelope-from <craigswank@gmail.com>) id 1S4Iqp-0001On-J5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Mar 2012 16:54:58 +0100
-Received: (qmail 16709 invoked by uid 1003); 4 Mar 2012 15:46:24 -0000
-Received: from unknown (HELO ?192.168.1.104?) (philip@opensdr.com@71.171.18.53)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	4 Mar 2012 15:46:24 -0000
-Message-ID: <4F538E4F.6020406@balister.org>
-Date: Sun, 04 Mar 2012 10:46:23 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Sun, 04 Mar 2012 22:20:19 +0100
+Received: by iaag37 with SMTP id g37so4518857iaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Mar 2012 13:11:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=Yz3W+xxI9QGqA7vuw0furufAJR/ZeQDod5BQG3indqU=;
+	b=0lehi2q106SK0KTyZr2QNM0B5tkimMeAK/0W7uexzNpasDsVc+g2K1sMOsF8/Hy15k
+	chnHiHNF2QzTNP76D55QGiNGRvage+ctk5eH/SBB6tJ9BKeuas8htfjfb8wP/WDFsxmf
+	+Oriffp6BvTMyXlUn1M+TftVmaLefElsCkPBPbtMkFIJSvmN3hi0gCWvD63o7wA/PwPM
+	nDGHIXOwSPhZL0fX1i9MwG7Z5lVRyaIynjw7qqvBISjhRWx2LW8uiUBzKKto5bRovrZH
+	YcVDZuNH30u5rdNHcz9tFM77LI3qEUcCze7nst9+W49b1eso0kP97wt9SGkmD2FOvIYS
+	6lxA==
+Received: by 10.50.188.167 with SMTP id gb7mr3949463igc.37.1330895505477;
+	Sun, 04 Mar 2012 13:11:45 -0800 (PST)
+Received: from [192.168.1.9] (184-99-250-219.hlrn.qwest.net. [184.99.250.219])
+	by mx.google.com with ESMTPS id
+	cx9sm9300690igc.12.2012.03.04.13.11.44 (version=SSLv3 cipher=OTHER);
+	Sun, 04 Mar 2012 13:11:44 -0800 (PST)
+Message-ID: <4F53DA8F.5050109@gmail.com>
+Date: Sun, 04 Mar 2012 14:11:43 -0700
+From: Craig Swank <craigswank@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <308727D9E105A34D845E688AECAF6F4718EB279B@DNCE03.ent.ti.com>
-In-Reply-To: <308727D9E105A34D845E688AECAF6F4718EB279B@DNCE03.ent.ti.com>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [PATCH] update iperf version
+Subject: ncurses
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,36 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2012 15:54:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 04 Mar 2012 21:20:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/04/2012 09:28 AM, Baransi, Moosa wrote:
-> Ping on this
-> 
-> From: Baransi, Moosa
-> Sent: Monday, January 30, 2012 4:39 PM
-> To: 'openembedded-devel@lists.openembedded.org'
-> Subject: [PATCH] update iperf version
-> 
-> Hi,
-> 
-> Please consider this patch which updates the iPerf to version 2.0.5
+Hello,
+I'm getting an error when I try to bitbake ncurses.  I set up my 
+openembedded environment according to the instructions at:
+http://www.angstrom-distribution.org/building-angstrom
 
-Is the patch intended for OE classic or meta-oe? If meta-oe look at the
-README in the layer for info on submitting patches.
+when I do bitbake ncurses I get the following error:
 
-Koen is skimming the list looking for the [meta-oe] tag in subjects :)
+| error: unknown type name 'SIG_ATOMIC_T'
+| In file included from 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/build.priv.h:85:0,
+|                  from 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/tinfo/make_keys.c:40:
+| 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/../include/nc_alloc.h:97:0: 
+warning: "strdup" redefined [enabled by default]
+| /usr/include/x86_64-linux-gnu/bits/string2.h:1316:0: note: this is the 
+location of the previous definition
+| 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/curses.priv.h:1165:1: 
+error: unknown type name 'SIG_ATOMIC_T'
+| In file included from 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/curses.priv.h:1444:0,
+|                  from 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/tinfo/access.c:33:
+| 
+/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/../include/nc_alloc.h:97:0: 
+warning: "strdup" redefined [enabled by default]
+| /usr/include/x86_64-linux-gnu/bits/string2.h:1316:0: note: this is the 
+location of the previous definition
+| make[1]: *** [../obj_s/access.o] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+| make[1]: Leaving directory 
+`/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/narrowc/ncurses'
+| make: *** [libs] Error 2
+| make: Leaving directory 
+`/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/narrowc'
+| ERROR: oe_runmake failed
+NOTE: package ncurses-native-5.9-r4.1: task do_compile: Failed
+ERROR: Task 219 
+(virtual:native:/home/craig/Projects/OE/setup-scripts/sources/openembedded-core/meta/recipes-core/ncurses/ncurses_5.9.bb, 
+do_compile) failed with exit code '1'
 
-Philip
+Can anyone suggest how I can get it working?
 
-> 
-> Regards,
-> Moosa Baransi
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Just in case you need this:
+
+OS: Ubuntu 11.10
+Processor: quad core AMD (64 bit)
+
+
+Craig
 
 
