@@ -1,35 +1,40 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <craigswank@gmail.com>) id 1S4Iqp-0001On-J5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S4JUY-0002Hp-3z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Mar 2012 22:20:19 +0100
-Received: by iaag37 with SMTP id g37so4518857iaa.6
+	Sun, 04 Mar 2012 23:01:22 +0100
+Received: by lagw12 with SMTP id w12so4087427lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Mar 2012 13:11:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=Yz3W+xxI9QGqA7vuw0furufAJR/ZeQDod5BQG3indqU=;
-	b=0lehi2q106SK0KTyZr2QNM0B5tkimMeAK/0W7uexzNpasDsVc+g2K1sMOsF8/Hy15k
-	chnHiHNF2QzTNP76D55QGiNGRvage+ctk5eH/SBB6tJ9BKeuas8htfjfb8wP/WDFsxmf
-	+Oriffp6BvTMyXlUn1M+TftVmaLefElsCkPBPbtMkFIJSvmN3hi0gCWvD63o7wA/PwPM
-	nDGHIXOwSPhZL0fX1i9MwG7Z5lVRyaIynjw7qqvBISjhRWx2LW8uiUBzKKto5bRovrZH
-	YcVDZuNH30u5rdNHcz9tFM77LI3qEUcCze7nst9+W49b1eso0kP97wt9SGkmD2FOvIYS
-	6lxA==
-Received: by 10.50.188.167 with SMTP id gb7mr3949463igc.37.1330895505477;
-	Sun, 04 Mar 2012 13:11:45 -0800 (PST)
-Received: from [192.168.1.9] (184-99-250-219.hlrn.qwest.net. [184.99.250.219])
-	by mx.google.com with ESMTPS id
-	cx9sm9300690igc.12.2012.03.04.13.11.44 (version=SSLv3 cipher=OTHER);
-	Sun, 04 Mar 2012 13:11:44 -0800 (PST)
-Message-ID: <4F53DA8F.5050109@gmail.com>
-Date: Sun, 04 Mar 2012 14:11:43 -0700
-From: Craig Swank <craigswank@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:7.0.1) Gecko/20110929 Thunderbird/7.0.1
+	Sun, 04 Mar 2012 13:52:48 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.112.48.200 as permitted sender)
+	client-ip=10.112.48.200; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.112.48.200 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.112.48.200])
+	by 10.112.48.200 with SMTP id o8mr8541159lbn.54.1330897968413 (num_hops
+	= 1); Sun, 04 Mar 2012 13:52:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=mJQCIYgQkUAb5dLv7LgnHR1W5xwIZBPI2JrxNlwhcSo=;
+	b=TJo9+VNhHzQnGH9HNL5lPi0AQoq2JWYhRft8LUtDJmUQ/whbeJiFgizZnu57DiRCgq
+	6cPqSUhuJi89kJUgZb76RWo6XMTkqmjFwlmdDCAAFbJAHJZqDyyb5hTv7b//7+qfZjyK
+	6llXyuJNJqh0RliHhNIbDWJ7n0GKWyjMtO82tC4FJeSbjwQkGeIDqrduH3woDSutjvS1
+	B8gT5vTkOmp/GqGcBPKAHjBLjKBNzhc3s9mFstiBE6gJ4wy3zmGSffvS72fMvrwWIdYB
+	zWcBNqc9a61H4y5pgIV+0bPCxd4/S1etcAHLwdTwIJ1qFbqU5rLOTBtYwN4WgcUhGhFM
+	kuDw==
 MIME-Version: 1.0
+Received: by 10.112.48.200 with SMTP id o8mr7014338lbn.54.1330897968283; Sun,
+	04 Mar 2012 13:52:48 -0800 (PST)
+Received: by 10.112.29.74 with HTTP; Sun, 4 Mar 2012 13:52:48 -0800 (PST)
+Date: Sun, 4 Mar 2012 22:52:48 +0100
+Message-ID: <CALbNGRR-jB0_h6u-g6KswZAQkfwUVmK4V=U_OL=GbLF3UWB1gw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: ncurses
+Subject: libertas seems broken since udev 180
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,60 +48,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2012 21:20:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Mar 2012 22:01:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
-I'm getting an error when I try to bitbake ncurses.  I set up my 
-openembedded environment according to the instructions at:
-http://www.angstrom-distribution.org/building-angstrom
+Hi,
 
-when I do bitbake ncurses I get the following error:
+this problem I face since a while but didn't find the time to take
+care. Since udev 180 overo's wlan does not work (marvel) and  I get:
 
-| error: unknown type name 'SIG_ATOMIC_T'
-| In file included from 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/build.priv.h:85:0,
-|                  from 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/tinfo/make_keys.c:40:
-| 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/../include/nc_alloc.h:97:0: 
-warning: "strdup" redefined [enabled by default]
-| /usr/include/x86_64-linux-gnu/bits/string2.h:1316:0: note: this is the 
-location of the previous definition
-| 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/curses.priv.h:1165:1: 
-error: unknown type name 'SIG_ATOMIC_T'
-| In file included from 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/curses.priv.h:1444:0,
-|                  from 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/tinfo/access.c:33:
-| 
-/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/ncurses/../include/nc_alloc.h:97:0: 
-warning: "strdup" redefined [enabled by default]
-| /usr/include/x86_64-linux-gnu/bits/string2.h:1316:0: note: this is the 
-location of the previous definition
-| make[1]: *** [../obj_s/access.o] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-| make[1]: Leaving directory 
-`/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/narrowc/ncurses'
-| make: *** [libs] Error 2
-| make: Leaving directory 
-`/home/craig/Projects/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/x86_64-linux/ncurses-native-5.9-r4.1/ncurses-5.9/narrowc'
-| ERROR: oe_runmake failed
-NOTE: package ncurses-native-5.9-r4.1: task do_compile: Failed
-ERROR: Task 219 
-(virtual:native:/home/craig/Projects/OE/setup-scripts/sources/openembedded-core/meta/recipes-core/ncurses/ncurses_5.9.bb, 
-do_compile) failed with exit code '1'
+at early user space:
+udevd[77]: starting version 181
+Starting POSIX Message Queue File System...
+Started Configuration File System                                      [  OK  ]
+Started Security File System                                           [  OK  ]
+Started FUSE Control File System                                       [  OK  ]
+Started udev Kernel Device Manager                                     [  OK  ]
+Started Lock Directory                                                 [  OK  ]
+Started Runtime Directory                                              [  OK  ]
+Started Media Directory                                                [  OK  ]
+Started Remount API VFS                                                [  OK  ]
+Started Apply Kernel Variables                                         [  OK  ]
+Started Debug File System                                              [  OK  ]
+Started File System Check on Root Device                               [  OK  ]
+Started POSIX Message Queue File System                                [  OK  ]
+Starting Remount Root FS...
+Started udev Coldplug all Devices                                      [  OK  ]
+_regulator_get: spi1.0 supply vcc not found, using dummy regulator
+ads7846 spi1.0: touchscreen, irq 274
+ads7846 spi1.0: no device detected, test read result was 0x00000000
+cfg80211: Calling CRDA to update world regulatory domain
+Started Remount Root FS                                                [  OK  ]
+libertas_sdio: Libertas SDIO driver
+libertas_sdio: Copyright Pierre Ossman
 
-Can anyone suggest how I can get it working?
+Right after login prompt:
+libertas_sdio mmc1:0001:1: (unregistered net_device):
+ff:ff:ff:ff:ff:ff, fw 0.0.0p0, cap 0x00000000
+libertas_sdio mmc1:0001:1: (unregistered net_device): unidentified
+region code; using the default (USA)
+libertas_sdio mmc1:0001:1: wlan0: Marvell WLAN 802.11 adapter
 
-Just in case you need this:
+and cyclic ~every 3s
 
-OS: Ubuntu 11.10
-Processor: quad core AMD (64 bit)
+libertas_sdio mmc1:0001:1: wlan0: command 0x0000 timed out
+libertas_sdio mmc1:0001:1: wlan0: Timeout submitting command 0x0000
 
 
-Craig
+
+With udev 175 wlan is working properly and I get after boot prompt
+(please ignore 'Network Manager Wait Online'-lines. This is for test
+and it looks same with unmodified networkmanager):
+
+Angstrom v2012.03-core - Kernel 3.0.17+
+
+overo login: cfg80211: Calling CRDA to update world regulatory domain
+Started Network Manager                                                [  OK  ]
+Starting Network Manager Wait Online...
+Failed to start Network Manager Wait Online                            [FAILED]
+See 'systemctl status NetworkManager-wait-online.service' for details.
+Starting Network Time Service...
+smsc911x smsc911x.0: eth0: SMSC911x/921x identified at 0xd0808000, IRQ: 336
+Started Network Time Service                                           [  OK  ]
+libertas_sdio: Libertas SDIO driver
+libertas_sdio: Copyright Pierre Ossman
+Starting Getty on tty1...
+Started Getty on tty1                                                  [  OK  ]
+libertas_sdio mmc1:0001:1: (unregistered net_device):
+00:19:88:20:72:5c, fw 9.70.3p14, cap 0x00000303
+libertas_sdio mmc1:0001:1: wlan0: Marvell WLAN 802.11 adapter
+
+Any suggestions where to get further information on how to solve? Is
+it possible that the changed sequence causes adapter not yet started
+up when reading MAC / firmware info?
+
+Thanks in advance
+
+Andreas
 
 
