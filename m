@@ -1,37 +1,33 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1S4Bg6-0007qx-7n
+	(envelope-from <moosab@ti.com>) id 1S4CYh-0000vD-FV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Mar 2012 14:40:46 +0100
-Received: by mail-ww0-f43.google.com with SMTP id dr12so2433057wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Mar 2012 05:32:15 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.103.35 as permitted sender)
-	client-ip=10.180.103.35; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.103.35 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.103.35])
-	by 10.180.103.35 with SMTP id ft3mr8997607wib.0.1330867935252 (num_hops
-	= 1); Sun, 04 Mar 2012 05:32:15 -0800 (PST)
+	Sun, 04 Mar 2012 15:37:11 +0100
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q24ESXvQ004981;
+	Sun, 4 Mar 2012 08:28:33 -0600
+Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q24ESWG1021453;
+	Sun, 4 Mar 2012 08:28:33 -0600 (CST)
+Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
+	DNCE73.ent.ti.com ([fe80::a454:462:d009:b2c%21]) with mapi id
+	14.01.0323.003; Sun, 4 Mar 2012 15:28:32 +0100
+From: "Baransi, Moosa" <moosab@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] update iperf version
+Thread-Index: AczfXONmH53FU+igT7yxuJ0COb8DLQatc4FQ
+Date: Sun, 4 Mar 2012 14:28:31 +0000
+Message-ID: <308727D9E105A34D845E688AECAF6F4718EB279B@DNCE03.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-Received: by 10.180.103.35 with SMTP id ft3mr7185147wib.0.1330867935203;
-	Sun, 04 Mar 2012 05:32:15 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id w10sm30523674wiy.3.2012.03.04.05.32.14
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 04 Mar 2012 05:32:14 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Mar 2012 14:32:05 +0100
-Message-Id: <1330867925-23330-4-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1330867925-23330-1-git-send-email-koen@dominion.thruhere.net>
-References: <1330867925-23330-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlnR6Cfgg2wzvv5LcpsOXAW+D39mcsfWYrcXc7GJUYG6mGxjpYedL1AhOQanaqQPUjWofbT
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe 4/4] polkit 0.104 bbappend: append to PACkAGECONFIG instead of overwriting it
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Moosa Baransi <moosa.baransi@babcomsoftware.com>
+Subject: Re: [PATCH] update iperf version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2012 13:40:46 -0000
+X-List-Received-Date: Sun, 04 Mar 2012 14:37:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-extended/polkit/polkit_0.104.bbappend  |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Ping on this
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-index 1e2cccd..2383c5b 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-@@ -1,6 +1,8 @@
- PRINC := "${@int(PRINC) + 3}"
- 
--PACKAGECONFIG ??= "systemd"
-+POLKITAUTH ??= "systemd"
-+
-+PACKAGECONFIG += "${POLKITAUTH}"
- PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
- # there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
- PACKAGECONFIG[consolekit] = ",,,consolekit"
--- 
-1.7.2.5
+From: Baransi, Moosa
+Sent: Monday, January 30, 2012 4:39 PM
+To: 'openembedded-devel@lists.openembedded.org'
+Subject: [PATCH] update iperf version
 
+Hi,
 
+Please consider this patch which updates the iPerf to version 2.0.5
+
+Regards,
+Moosa Baransi
 
