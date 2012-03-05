@@ -1,40 +1,30 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S4S1p-0005RK-Vl
-	for openembedded-devel@openembedded.org; Mon, 05 Mar 2012 08:08:18 +0100
-Received: by lagw12 with SMTP id w12so4452726lag.6
-	for <openembedded-devel@openembedded.org>;
-	Sun, 04 Mar 2012 22:59:43 -0800 (PST)
-Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.152.122.74 as permitted sender) client-ip=10.152.122.74; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.152.122.74 as permitted sender)
-	smtp.mail=raj.khem@gmail.com;
-	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.152.122.74])
-	by 10.152.122.74 with SMTP id lq10mr19249637lab.7.1330930783621
-	(num_hops = 1); Sun, 04 Mar 2012 22:59:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=OFr3cq4zceZ3T+NrG9BdNzNiY6uxewNRTaXqBsyQAjc=;
-	b=OTCbzJx34Cx0tykqvG9wGHfThSvty6OGQ0rooUcuFhM7NzGrpWOIQuHCgxL58zob9y
-	bQkFcncCyczn3EflM5EXOvTbhz5UA8a2O0u/T8d6pri/PToVlh0pXDedRmjEBEAB84oA
-	NL21sqcLzca/YAAsgYqoPfrv8uHnbc8sXzlwwALrJ1huYz+eLwXN16rdFDBd/eZ0gtmg
-	dw3YRCl5YJvy02feqsReUTao1yIEE73QiFjjAXqhXq3smaW9YSF5xI5umaVcUWUMr6pi
-	m75S5WVrF/jeZUavnb83bLC/lavFUrY8cxL0jY2xDD4hS0JesXqV8oChY0BmSB0EzNi6
-	p1Ng==
-Received: by 10.152.122.74 with SMTP id lq10mr15770739lab.7.1330930783491;
-	Sun, 04 Mar 2012 22:59:43 -0800 (PST)
+	(envelope-from <sledz@dresearch-fe.de>) id 1S4SuE-0000VB-Nq
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2012 09:04:30 +0100
+Received: by wera1 with SMTP id a1so2253680wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Mar 2012 23:55:56 -0800 (PST)
+Received: by 10.180.100.196 with SMTP id fa4mr12249416wib.0.1330934156705;
+	Sun, 04 Mar 2012 23:55:56 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id df3sm19194044wib.1.2012.03.04.23.55.55
+	(version=SSLv3 cipher=OTHER); Sun, 04 Mar 2012 23:55:56 -0800 (PST)
+Message-ID: <4F54718B.3090900@dresearch-fe.de>
+Date: Mon, 05 Mar 2012 08:55:55 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-Received: by 10.152.27.109 with HTTP; Sun, 4 Mar 2012 22:59:13 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 4 Mar 2012 22:59:13 -0800
-Message-ID: <CAMKF1sqgtVAabFSJ0L0W6DPrvWw8xwHTezJbiVJg3ARVyf8Aug@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: gcc -4.7 available for testing
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <4F4F7D9C.8070300@dresearch-fe.de>
+In-Reply-To: <4F4F7D9C.8070300@dresearch-fe.de>
+X-Enigmail-Version: 1.3.5
+X-Gm-Message-State: ALoCoQlQQsXtq9IazwBqHcaldq1/N/6PKQdOUCAWfz3MIXuZGSYMbpk7kxoT/q6DzIIJfk158MD6
+Cc: bitbake-devel@lists.openembedded.org
+Subject: Re: bitbake dependency cache problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 07:08:18 -0000
+X-List-Received-Date: Mon, 05 Mar 2012 08:04:30 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi OEers
+On 01.03.2012 14:46, Steffen Sledz wrote:
+> I'm working with oe-classic and BitBake Build Tool Core version 1.12.0, bitbake version 1.12.0.
+> 
+> Because of some special development requirements we like to generate the Package Version from the SVN Revision (not the Last Changed Rev!) of the bitbake recipe in the local workspace.
+> 
+> Therefor the recipe contains this:
+> 
+> ---------------->snip<-----------------
+> PR = "r8"
+> PV = "svnr${@svn_revision(d)}"
+> 
+> inherit svn-helper
+> ---------------->snip<-----------------
+> 
+> The svn-helper.bbclass contains a little helper function to determine the needed value:
+> 
+> ---------------->snip<-----------------
+> def svn_revision(d):
+>      import subprocess
+>      bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
+>      return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
+> ---------------->snip<-----------------
+> 
+> After this changes i make a first build and everything works fine. Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is generated.
+> 
+> Now i make an "svn update" inside the workspace and the SVN Revision increases to 66.
+> 
+> A call of "bitbake foo" now results in an "Tasks Summary: Attempted 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no new ipg is generated. :(
+> 
+> The log generated by "bitbake -DDDDDvvvvv foo" contains
+> 
+> ---------------->snip<-----------------
+> DEBUG: providers for foo are: ['foo']
+> NOTE: checking PREFERRED_PROVIDER_foo
+> NOTE: checking PREFERRED_PROVIDER_foo-svnr42
+> NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
+> ---------------->snip<-----------------
+> 
+> Why does bitbake not respects the new PV and generates a foo-svnr66-r8.ipk here???
 
-Since gcc-4.7 branch has been started I have prepared initial set of
-recipes for it which are here
+Ping!
 
-http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-4.7
+Can anyone of the bitbake gurus lease give a feedback here?
 
-(You need the top 3 patches really)
+Thx,
+Steffen
 
-It can build sato images and minimal images in OE core for all
-supported qemu machines
-
-GCC test results are here
-
-http://sakrah.dontexist.org/files/gcc-4.7-tests/
-
-if you are using oe-core settings then you need is set
-
-GCCVERSION = "4.7%"
-
-in local.conf
-
-Enjoy
-
--Khem
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
