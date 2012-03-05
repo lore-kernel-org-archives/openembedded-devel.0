@@ -1,34 +1,29 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <moosab@ti.com>) id 1S4Yuf-00083T-Oo
+	(envelope-from <gary@mlbassoc.com>) id 1S4Z7q-0008IK-Pr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 15:29:22 +0100
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q25EKkpu030569
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Mar 2012 08:20:46 -0600
-Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q25EKjSl011631
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Mar 2012 08:20:45 -0600 (CST)
-Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
-	DNCE73.ent.ti.com ([fe80::a454:462:d009:b2c%21]) with mapi id
-	14.01.0323.003; Mon, 5 Mar 2012 15:20:45 +0100
-From: "Baransi, Moosa" <moosab@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] update iperf version
-Thread-Index: AczfXONmH53FU+igT7yxuJ0COb8DLQ==
-Date: Mon, 5 Mar 2012 14:20:44 +0000
-Message-ID: <308727D9E105A34D845E688AECAF6F4718EB2A01@DNCE03.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.131.83]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+	Mon, 05 Mar 2012 15:42:59 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id BF950F81260; Mon,  5 Mar 2012 07:34:25 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 51A00F8125E;
+	Mon,  5 Mar 2012 07:34:24 -0700 (MST)
+Message-ID: <4F54CEF0.70902@mlbassoc.com>
+Date: Mon, 05 Mar 2012 07:34:24 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [meta-oe][PATCH] update iperf version
+To: openembedded-devel@lists.openembedded.org
+References: <4F54C8C2.5020003@mlbassoc.com>
+	<CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
+In-Reply-To: <CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
+Subject: Re: [meta-mozilla] Can't access any HTTPS page
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 14:29:22 -0000
-X-Groupsio-MsgNum: 37595
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_"
-
---_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 05 Mar 2012 14:42:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On 2012-03-05 07:18, Andreas M=FCller wrote:
+> On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> I've added firefox to my platform by adding the meta-mozilla layer
+>> (and it's requirements).  To include firefox, all I did was
+>>   CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
+>>
+>> With this setup, firefox works, but not with any SSL page,
+>> e.g. trying to access https://google.com/mail gives me this
+>> error screen:
+>>
+>> Secure Connection Failed
+>>            An error occurred during a connection to accounts.google.co=
+m.
+>>        security library: memory allocation failure.
+>>        (Error code: sec_error_no_memory)
+>>
+>>   The page you are trying to view can not be shown because the authent=
+icity
+>> of the received data could not be verified.
+>>   Please contact the website owners to inform them of this problem.
+>> Alternatively, use the command found in the help menu to report this b=
+roken
+>> site.
+>>
+>> Did I miss something?  Has anyone else tried this?
+>>
+>> Thanks
+>>
+> Is the time of your system valid ( if I remember right I had similar
+> when system time was unbuffered initial at 01.01.2000 )?
 
-Please consider this patch which updates the iPerf to version 2.0.5
+Yes, the time is set correctly.
 
-Regards,
-Moosa Baransi
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
---_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_
-Content-Type: application/octet-stream;
-	name="0001-update-iperf-version.patch"
-Content-Description: 0001-update-iperf-version.patch
-Content-Disposition: attachment; filename="0001-update-iperf-version.patch";
-	size=882; creation-date="Mon, 30 Jan 2012 14:31:19 GMT";
-	modification-date="Mon, 30 Jan 2012 14:28:28 GMT"
-Content-Transfer-Encoding: base64
 
-RnJvbSAyYmU0OGJkYjg2ODkzNzgxNTRjMTM1ZGJiOTM3ZjYzMjMxN2M2OGFiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBNb29zYSA8bW9vc2EuYmFyYW5zaUBiYWJjb21zb2Z0d2FyZS5j
-b20+CkRhdGU6IE1vbiwgMzAgSmFuIDIwMTIgMTY6Mjc6MjkgKzAyMDAKU3ViamVjdDogW1BBVENI
-XSB1cGRhdGUgaXBlcmYgdmVyc2lvbgoKKiBWZXJzaW9uIHVwZGF0ZWQgdG8gaVBlcmYgMi4wLjUK
-ClNpZ25lZC1vZmYtYnk6IE1vb3NhIEJhcmFuc2kgPG1vb3NhYkB0aS5jb20+Ci0tLQogcmVjaXBl
-cy9pcGVyZi9pcGVyZl8yLjAuNS5iYiB8ICAgMTEgKysrKysrKysrKysKIDEgZmlsZXMgY2hhbmdl
-ZCwgMTEgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCBy
-ZWNpcGVzL2lwZXJmL2lwZXJmXzIuMC41LmJiCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy9pcGVyZi9p
-cGVyZl8yLjAuNS5iYiBiL3JlY2lwZXMvaXBlcmYvaXBlcmZfMi4wLjUuYmIKbmV3IGZpbGUgbW9k
-ZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMGVmNTg3ZgotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lw
-ZXMvaXBlcmYvaXBlcmZfMi4wLjUuYmIKQEAgLTAsMCArMSwxMSBAQAorcmVxdWlyZSBpcGVyZi5p
-bmMKKworUFIgPSAiJHtJTkNfUFJ9LjEiCisKK1NSQ19VUkkgPSAiIFwKKwkke1NPVVJDRUZPUkdF
-X01JUlJPUn0vaXBlcmYvaXBlcmYtJHtQVn0udGFyLmd6IFwKKwkiCisKK1NSQ19VUklbbWQ1c3Vt
-XSA9ICI0NGI1NTM2YjY3NzE5ZjQyNTBmYWVkNjMyYTNjZDAxNiIKK1NSQ19VUklbc2hhMjU2c3Vt
-XSA9ICI2MzZiNGVmZjA0MzFjZWE4MDY2N2VhODVhNjdjZTRjNjg2OTg3NjBhOTgzN2UxZTlkMTMw
-OTZkMjAzNjIyNjViIgorCi0tIAoxLjcuMQoK
-
---_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_--
