@@ -1,46 +1,48 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S4aCd-0001yf-Bv
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S4aCe-0001yh-33
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 16:51:59 +0100
-Received: by bkcjg15 with SMTP id jg15so3484503bkc.6
+	Mon, 05 Mar 2012 16:52:00 +0100
+Received: by bkcjg15 with SMTP id jg15so3484525bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+	Mon, 05 Mar 2012 07:43:25 -0800 (PST)
 Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.204.136.198 as permitted sender)
-	client-ip=10.204.136.198; 
+	designates 10.204.173.11 as permitted sender)
+	client-ip=10.204.173.11; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.204.136.198 as
+	schnitzeltony@googlemail.com designates 10.204.173.11 as
 	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
 	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.204.136.198])
-	by 10.204.136.198 with SMTP id s6mr8420354bkt.129.1330962204776
-	(num_hops = 1); Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+Received: from mr.google.com ([10.204.173.11])
+	by 10.204.173.11 with SMTP id n11mr10864979bkz.120.1330962205710
+	(num_hops = 1); Mon, 05 Mar 2012 07:43:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=W+8D+MUzJ1WB7GK2lMFqnYaSYY57h209G1nv0zcObKU=;
-	b=MkzsvTrVcVHg+XUmNJd+P/xZdHnsBVssTxHHDD1N8oZn7tMxODKFm+btN9FxiE9907
-	xRBpDkY+EP3E69dGjZgU38/Grjwe4gwkS7qoCWfFP3esTTcoq0BLSesPCpv4dQLS/Qew
-	5DUmUDHE741yDrVMG0qNdYQWMdl3TkkqhAl6csXPQHi26yUoLxi0RTzyV3tY1VB83kck
-	iTllxbckMQ5ViHApuukettt3BX/JIaakszhVfoG/ygxBHBBSNp22UDVWU2XJLk1g1CXt
-	SC+0aHqcQVESWAJtoXnZlaXHJEUEoszxssL+pHU4cEN/Ak/9R7nkRpqHkB5od7vDltsT
-	lhEw==
-Received: by 10.204.136.198 with SMTP id s6mr6620216bkt.129.1330962204628;
-	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=ZLCPRu5DNbvxcYnEwehVpuYh2vbdBKlPYkFLawNaKy4=;
+	b=sI0x3P+OHg0Ggkz998QMHXmzf8nTYf5Qn4gxx+RxgyCMJqcf9zeHi/YbpAjQsp09s8
+	hr672b5AAMsZH0KPQpQz+UZAGNvJOCdCoto87OIFSGdqgO5MYKWWl/DT/HoQy/NTdglK
+	XCNKTCNZPzUgMhxWWyHzwkntgMFuTA/E+HeS3OhMGgKC7lSAWZK8UCri0LTHc+jiGbaO
+	s0mw3IfXu6gzaBV8mRkWen6VAgmZ6L9Is1aZOjHiRyTZGa9/iISQBPGfiabrmb9wC4ey
+	gLcK2uIvF51OaXyGbwTEsQ/fJbo6SoefOZsD3+bWSwGcMhbLpShu7lIkwGhUgATvMjP0
+	Hnmw==
+Received: by 10.204.173.11 with SMTP id n11mr8593754bkz.120.1330962205459;
+	Mon, 05 Mar 2012 07:43:25 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
 	[95.223.250.190]) by mx.google.com with ESMTPS id
-	jr13sm21901631bkb.14.2012.03.05.07.43.23
+	jr13sm21901631bkb.14.2012.03.05.07.43.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
 	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Mar 2012 16:43:22 +0100
-Message-Id: <1330962204-2504-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon,  5 Mar 2012 16:43:23 +0100
+Message-Id: <1330962204-2504-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.4
+In-Reply-To: <1330962204-2504-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1330962204-2504-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe 1/3] gateone: remove unneeded systemd code
+Subject: [meta-oe 2/3] networkmanager: inherit systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,39 +56,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 15:51:59 -0000
+X-List-Received-Date: Mon, 05 Mar 2012 15:52:00 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+networkmanager-systemd was not yet created to avoid fallout in images. The
+warning for this created at parse time is our reminder.
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-connectivity/gateone/gateone_git.bb    |    5 +----
- 1 files changed, 1 insertions(+), 4 deletions(-)
+ .../networkmanager/networkmanager_0.9.2.0.bb       |   30 ++++----------------
+ 1 files changed, 6 insertions(+), 24 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-index aee88f3..6f13da8 100644
---- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-+++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
- LICENSE = "AGPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+index 45f98be..6bbbce5 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+@@ -4,10 +4,10 @@ SECTION = "net/misc"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
  
--PR = "r16"
-+PR = "r17"
+-PR = "r4"
++PR = "r5"
  
- PV = "0.9"
- SRCREV = "a68444610efa2892842893dae828a28527e64a6e"
-@@ -20,9 +20,6 @@ export prefix = "${localstatedir}/lib"
- do_install_append() {
- 	install -d ${D}${localstatedir}/log/${BPN}
+ DEPENDS = "systemd libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
+-inherit gnome gettext
++inherit gnome gettext systemd
  
--	install -m 0755 -d ${D}${systemd_unitdir}/system
--	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system/
--
- 	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
- 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
+     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
+@@ -56,14 +56,15 @@ do_install_append () {
+ 	install -d ${D}/etc/NetworkManager/VPN
  }
+ 
++SYSTEMD_PACKAGES = "${PN}"
++SYSTEMD_SERVICE = "NetworkManager.service"
++
+ PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
+ 
+ FILES_libnmutil += "${libdir}/libnm-util.so.*"
+ FILES_libnmglib += "${libdir}/libnm_glib.so.*"
+ FILES_libnmglib-vpn += "${libdir}/libnm_glib_vpn.so.*"
+ 
+-systemd_unitdir = "${base_libdir}/systemd/system"
+-
+ FILES_${PN} += " \
+ 		${libexecdir} \
+ 		${libdir}/pppd/*/nm-pppd-plugin.so \
+@@ -71,7 +72,7 @@ FILES_${PN} += " \
+ 		${datadir}/polkit-1 \
+ 		${datadir}/dbus-1 \
+ 		${base_libdir}/udev/* \
+-        ${systemd_unitdir} \
++                ${systemd_unitdir}/system/NetworkManager-wait-online.service \
+ "
+ 
+ RRECOMMENDS_${PN} += "iptables"
+@@ -95,22 +96,3 @@ FILES_${PN}-tests = "${bindir}/nm-tool \
+                      ${bindir}/nm-online \
+                      ${bindir}/nm-supplicant \
+                      ${bindir}/nm-testdevices"
+-
+-
+-pkg_postinst_${PN}() {
+-    # can't do this offline
+-    if [ "x$D" != "x" ]; then
+-        exit 1
+-    fi
+-    
+-    systemctl enable NetworkManager.service
+-}
+-
+-pkg_prerm_${PN}() {
+-    # can't do this offline
+-    if [ "x$D" != "x" ]; then
+-        exit 1
+-    fi
+-
+-    systemctl disable NetworkManager.service
+-}
 -- 
 1.7.6.4
 
