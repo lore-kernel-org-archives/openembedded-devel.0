@@ -1,43 +1,47 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tworaz666@gmail.com>) id 1S4f2u-0004I9-FE
+	(envelope-from <otavio.salvador@gmail.com>) id 1S4f4W-0004Nz-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 22:02:16 +0100
-Received: by eekc1 with SMTP id c1so1371982eek.6
+	Mon, 05 Mar 2012 22:03:56 +0100
+Received: by vcbfl13 with SMTP id fl13so3991494vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 12:53:41 -0800 (PST)
-Received-SPF: pass (google.com: domain of tworaz666@gmail.com designates
-	10.14.37.78 as permitted sender) client-ip=10.14.37.78; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of tworaz666@gmail.com
-	designates 10.14.37.78 as permitted sender)
-	smtp.mail=tworaz666@gmail.com;
-	dkim=pass header.i=tworaz666@gmail.com
-Received: from mr.google.com ([10.14.37.78])
-	by 10.14.37.78 with SMTP id x54mr1572385eea.42.1330980821621 (num_hops
-	= 1); Mon, 05 Mar 2012 12:53:41 -0800 (PST)
+	Mon, 05 Mar 2012 12:55:21 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.52.66.228 as permitted sender) client-ip=10.52.66.228; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.52.66.228 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.52.66.228])
+	by 10.52.66.228 with SMTP id i4mr36471286vdt.12.1330980921467 (num_hops
+	= 1); Mon, 05 Mar 2012 12:55:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=O6lOKnUU//fu40A85dlrEtZ9kWoMXFmN3yAISyhRjYQ=;
-	b=Ij7H8tdIRzuS4nkUR9VADWqZUKi+gdEqkQ7BFc2xkop0MYZEdmFPxOZi2LytxcXwMs
-	uIKQIY1hEREtWD2MLDPEo8RX6wAzaIrIJdzV8Qz9PxTCxGBkuc7GDLC0exAdBFVh/cLZ
-	bKjq1RGxGVR3ECnQANpRZOes7t6fMWumYGXkJ3qCycJu/gJAuDKzAKsIiPBeN8HRFBKP
-	jG1785Hr0auGWNZ1gnzlcpa6aAmhyGE52J5+G3CAyWU62vd/Aq1ANrSXU8gZuTv9By8V
-	rRxZIn53TCNtWcbpQxDdHvPDDJyAJcgODlYR1svkusp2IveeGCjmGPdm6oG9rw+3oaPE
-	0Tdg==
-Received: by 10.14.37.78 with SMTP id x54mr1194745eea.42.1330980821385;
-	Mon, 05 Mar 2012 12:53:41 -0800 (PST)
-Received: from localhost.localdomain (89-77-50-243.dynamic.chello.pl.
-	[89.77.50.243])
-	by mx.google.com with ESMTPS id y11sm4390600eem.3.2012.03.05.12.53.39
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 05 Mar 2012 12:53:40 -0800 (PST)
-From: Peter Tworek <tworaz666@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=v//BGfNvTQOeGR5y0420fJue3/rEZUHMYMhESqoi7G4=;
+	b=HF3ngBJXxvKcNPx7y9SVJoUrDCDEJpAFEapVuIMK0dLc4x8ZTj66JL2/77knkVjz1Y
+	Yf32kanRUlmtrwBrF56hm663KKDZFJSMS1QPAaO83Ow4Dypq6laQqniev0CKRpouHzn4
+	Kts8tPXKWqF2FQQ1ClVb9PeeNO4KwohG0xWgbHjsAFzUtGjXQxwpz/+Gcj0I1WcLTWtt
+	3+JS0EE3wc0K3cpchKmG4NNznw+aQskU99A1nV6r8NhLRSi4lqbcWI1yYpDkQIqPiCbG
+	//wPQSbHk71/ZtNFrRyncDtGvp1nijfUATvGlWfvh0Uo3N6lcNcg4EAdBPSO6Xi/Eye+
+	c/7A==
+MIME-Version: 1.0
+Received: by 10.52.66.228 with SMTP id i4mr31184971vdt.12.1330980921385; Mon,
+	05 Mar 2012 12:55:21 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Mon, 5 Mar 2012 12:55:21 -0800 (PST)
+In-Reply-To: <jj37mf$dsm$1@dough.gmane.org>
+References: <1330969051-9867-1-git-send-email-koen@dominion.thruhere.net>
+	<1330969051-9867-3-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKoGobJnLbOHjWWRupWNDJAUNJ8o4ROBm6EDKN4uiWu=rQ@mail.gmail.com>
+	<jj37mf$dsm$1@dough.gmane.org>
+Date: Mon, 5 Mar 2012 17:55:21 -0300
+X-Google-Sender-Auth: r9CgSobIWAdFDdokPFvPwJvRgT4
+Message-ID: <CAP9ODKrLhkyTHF8n3BVsKWG=-5bMieT7+Dua0+VF4sGFXcmD4g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Mar 2012 21:53:21 +0100
-Message-Id: <1330980801-19523-1-git-send-email-tworaz666@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe] zsh: Add initial recipe for version 4.3.17.
+Subject: Re: [meta-oe 3/3] systemd: enable logging to disk instead of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,75 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 21:02:16 -0000
+X-List-Received-Date: Mon, 05 Mar 2012 21:03:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Run tested on netbook pro.
+On Mon, Mar 5, 2012 at 17:29, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 05-03-12 19:12, Otavio Salvador schreef:
+>> On Mon, Mar 5, 2012 at 14:37, Koen Kooi <koen@dominion.thruhere.net>
+>> wrote:
+>>> + =A0 =A0 =A0 # create dir for journal + =A0 =A0 =A0 install -d
+>>> ${D}${localstatedir}/log/journal
+>>
+>> I'd prefer if journal could default to use a buffer or something similar
+>> instead of writting to disk as we ought to be careful about space in
+>> embedded devices, in general.
+>
+> And that's why patch 1/3 enables xz compression :)
 
-Signed-off-by: Peter Tworek <tworaz666@gmail.com>
----
- meta-oe/recipes-extended/zsh/zsh_4.3.17.bb |   51 ++++++++++++++++++++++++++++
- 1 files changed, 51 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+I understand however I think that write the log to the disk by default
+is wrong. We can do it by machine basis or other type of override by
+by default we ought to avoid writting to disk.
 
-diff --git a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
-new file mode 100644
-index 0000000..9192f20
---- /dev/null
-+++ b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
-@@ -0,0 +1,51 @@
-+DESCRIPTION = "UNIX Shell similar to the Korn shell"
-+HOMEPAGE="http://www.zsh.org"
-+SECTION = "base/shell"
-+
-+LICENSE = "ZSH"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=ad234d4b46db63491c4a9789da4fb341"
-+
-+DEPENDS = "ncurses libcap libpcre gdbm groff-native"
-+
-+SRC_URI = "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
-+SRC_URI[md5sum] = "8258967060b2654f30001a011946ac6a"
-+SRC_URI[sha256sum] = "054e0452afd9c742c9f1489465175e1d4d7db50d88b602d132551d850cf7a704"
-+
-+FILES_${PN}-dbg += "\
-+    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
-+    "
-+
-+inherit autotools
-+
-+EXTRA_OECONF = " \
-+    --bindir=${base_bindir} \
-+    --enable-etcdir=${sysconfdir} \
-+    --enable-fndir=${datadir}/${PN}/${PV}/functions \
-+    --enable-site-fndir=${datadir}/${PN}/site-functions \
-+    --enable-function-subdirs \
-+    --with-term-lib='ncursesw ncurses' \
-+    --with-tcsetpgrp \
-+    --enable-pcre \
-+    --enable-cap \
-+    --enable-multibyte \
-+    --enable-gdbm \
-+    --enable-dynamic \
-+    zsh_cv_shared_environ=yes \
-+    "
-+
-+do_configure () {
-+    oe_runconf
-+}
-+
-+pkg_postinst_${PN} () {
-+    touch $D${sysconfdir}/shells
-+    grep -q "bin/zsh" $D${sysconfdir}/shells || echo "/bin/zsh" >> $D${sysconfdir}/shells
-+}
-+
-+pkg_postrm_${PN} () {
-+    if [ -e $D${sysconfdir}/shells ]; then
-+        sed -i -e '/\/bin\/zsh/d' $D${sysconfdir}/shells
-+    fi
-+}
--- 
-1.7.3.4
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
