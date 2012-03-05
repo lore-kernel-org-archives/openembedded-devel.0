@@ -1,31 +1,46 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1S4ZnR-0001GQ-Ja
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S4aCd-0001yf-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 16:25:57 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id DE51CF811F8; Mon,  5 Mar 2012 08:17:23 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 46FA0F811F6;
-	Mon,  5 Mar 2012 08:17:22 -0700 (MST)
-Message-ID: <4F54D902.90304@mlbassoc.com>
-Date: Mon, 05 Mar 2012 08:17:22 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
-MIME-Version: 1.0
+	Mon, 05 Mar 2012 16:51:59 +0100
+Received: by bkcjg15 with SMTP id jg15so3484503bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.204.136.198 as permitted sender)
+	client-ip=10.204.136.198; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.204.136.198 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.204.136.198])
+	by 10.204.136.198 with SMTP id s6mr8420354bkt.129.1330962204776
+	(num_hops = 1); Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=W+8D+MUzJ1WB7GK2lMFqnYaSYY57h209G1nv0zcObKU=;
+	b=MkzsvTrVcVHg+XUmNJd+P/xZdHnsBVssTxHHDD1N8oZn7tMxODKFm+btN9FxiE9907
+	xRBpDkY+EP3E69dGjZgU38/Grjwe4gwkS7qoCWfFP3esTTcoq0BLSesPCpv4dQLS/Qew
+	5DUmUDHE741yDrVMG0qNdYQWMdl3TkkqhAl6csXPQHi26yUoLxi0RTzyV3tY1VB83kck
+	iTllxbckMQ5ViHApuukettt3BX/JIaakszhVfoG/ygxBHBBSNp22UDVWU2XJLk1g1CXt
+	SC+0aHqcQVESWAJtoXnZlaXHJEUEoszxssL+pHU4cEN/Ak/9R7nkRpqHkB5od7vDltsT
+	lhEw==
+Received: by 10.204.136.198 with SMTP id s6mr6620216bkt.129.1330962204628;
+	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
+	[95.223.250.190]) by mx.google.com with ESMTPS id
+	jr13sm21901631bkb.14.2012.03.05.07.43.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 05 Mar 2012 07:43:24 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F54C8C2.5020003@mlbassoc.com>
-	<CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
-	<4F54CEF0.70902@mlbassoc.com>
-	<CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
-In-Reply-To: <CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
-Subject: Re: [meta-mozilla] Can't access any HTTPS page
+Date: Mon,  5 Mar 2012 16:43:22 +0100
+Message-Id: <1330962204-2504-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.4
+MIME-Version: 1.0
+Subject: [meta-oe 1/3] gateone: remove unneeded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,61 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 15:25:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Mar 2012 15:51:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2012-03-05 08:04, Andreas M=FCller wrote:
-> On Mon, Mar 5, 2012 at 3:34 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
->> On 2012-03-05 07:18, Andreas M=FCller wrote:
->>>
->>> On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas<gary@mlbassoc.com>    wro=
-te:
->>>>
->>>> I've added firefox to my platform by adding the meta-mozilla layer
->>>> (and it's requirements).  To include firefox, all I did was
->>>>   CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
->>>>
->>>> With this setup, firefox works, but not with any SSL page,
->>>> e.g. trying to access https://google.com/mail gives me this
->>>> error screen:
->>>>
->>>> Secure Connection Failed
->>>>            An error occurred during a connection to accounts.google.=
-com.
->>>>        security library: memory allocation failure.
->>>>        (Error code: sec_error_no_memory)
->>>>
->>>>   The page you are trying to view can not be shown because the
->>>> authenticity
->>>> of the received data could not be verified.
->>>>   Please contact the website owners to inform them of this problem.
->>>> Alternatively, use the command found in the help menu to report this
->>>> broken
->>>> site.
->>>>
->>>> Did I miss something?  Has anyone else tried this?
->>>>
->>>> Thanks
->>>>
->>> Is the time of your system valid ( if I remember right I had similar
->>> when system time was unbuffered initial at 01.01.2000 )?
->>
->>
->> Yes, the time is set correctly.
->>
-> AArgh - the system time caused trouble on cookies - other issue sorry.
->
-> In midori it helped to install glib-networking ( see meta-oe commit
-> a56bff13b9d22b608352501fbb3ef124e7147bda ). Maybe this helps for
-> firefox too?
 
-Sorry, no change.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../recipes-connectivity/gateone/gateone_git.bb    |    5 +----
+ 1 files changed, 1 insertions(+), 4 deletions(-)
 
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index aee88f3..6f13da8 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+ LICENSE = "AGPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
+ 
+-PR = "r16"
++PR = "r17"
+ 
+ PV = "0.9"
+ SRCREV = "a68444610efa2892842893dae828a28527e64a6e"
+@@ -20,9 +20,6 @@ export prefix = "${localstatedir}/lib"
+ do_install_append() {
+ 	install -d ${D}${localstatedir}/log/${BPN}
+ 
+-	install -m 0755 -d ${D}${systemd_unitdir}/system
+-	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system/
+-
+ 	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+ 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+ }
+-- 
+1.7.6.4
+
 
 
