@@ -1,44 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S4cWT-0008PQ-GX
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 19:20:37 +0100
-Received: by vbbfr13 with SMTP id fr13so3794379vbb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S4efG-0003YV-Tl for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2012 21:37:51 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S4eWx-00063g-Nz for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2012 21:29:15 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Mar 2012 21:29:15 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 10:12:02 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.52.99.231 as permitted sender) client-ip=10.52.99.231; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.52.99.231 as permitted
-	sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.52.99.231])
-	by 10.52.99.231 with SMTP id et7mr36712442vdb.114.1330971122266
-	(num_hops = 1); Mon, 05 Mar 2012 10:12:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=WjAw1U9CxxWV3JxFyX1ovpI4vXY5dVrEY8iT//0hu+k=;
-	b=oE0SPZwPuaKfkR8b/9DinJ9tY1yrrKqqagrTbN5hBdtR/vU8CKAjwEHa9HsciDwy0q
-	bEJqvk7R5K8ji2jbz1ijYTmLtVSv7ho53mKQXZGev+CM55vyCXBgIRAXTsYnLkWOACyE
-	ZeoK8fG2Qu6AxvbHzp4c7ggpmrzwC1cfQFQHf205OoQHAYj2iU7YelLMzMscxWyFmv4s
-	W/INczlvO/RJtxweCp0oNQ0B2JWRjm8y71SyA67lji0uutBdT1+rZ9nxQjCmV07t4mVP
-	z9yuLhLP/xq6qcX2qAWfI2e7FS8kDFuBhvm1ya/IBaiKI3pIl6OFkMP4bPqLLLZfNySQ
-	em1g==
-MIME-Version: 1.0
-Received: by 10.52.99.231 with SMTP id et7mr31459167vdb.114.1330971122128;
-	Mon, 05 Mar 2012 10:12:02 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.7.208 with HTTP; Mon, 5 Mar 2012 10:12:02 -0800 (PST)
-In-Reply-To: <1330969051-9867-3-git-send-email-koen@dominion.thruhere.net>
+	Mon, 05 Mar 2012 21:29:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 05 Mar 2012 21:29:03 +0100
+Message-ID: <jj37mf$dsm$1@dough.gmane.org>
 References: <1330969051-9867-1-git-send-email-koen@dominion.thruhere.net>
 	<1330969051-9867-3-git-send-email-koen@dominion.thruhere.net>
-Date: Mon, 5 Mar 2012 15:12:02 -0300
-X-Google-Sender-Auth: Y0RWRGTkuCihQ-43Ie_MUmlm7sM
-Message-ID: <CAP9ODKoGobJnLbOHjWWRupWNDJAUNJ8o4ROBm6EDKN4uiWu=rQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+	<CAP9ODKoGobJnLbOHjWWRupWNDJAUNJ8o4ROBm6EDKN4uiWu=rQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <CAP9ODKoGobJnLbOHjWWRupWNDJAUNJ8o4ROBm6EDKN4uiWu=rQ@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
 Subject: Re: [meta-oe 3/3] systemd: enable logging to disk instead of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -53,23 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 18:20:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Mar 2012 20:37:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 5, 2012 at 14:37, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> + =A0 =A0 =A0 # create dir for journal
-> + =A0 =A0 =A0 install -d ${D}${localstatedir}/log/journal
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'd prefer if journal could default to use a buffer or something
-similar instead of writting to disk as we ought to be careful about
-space in embedded devices, in general.
+Op 05-03-12 19:12, Otavio Salvador schreef:
+> On Mon, Mar 5, 2012 at 14:37, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>> +       # create dir for journal +       install -d
+>> ${D}${localstatedir}/log/journal
+> 
+> I'd prefer if journal could default to use a buffer or something similar
+> instead of writting to disk as we ought to be careful about space in
+> embedded devices, in general.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+And that's why patch 1/3 enables xz compression :)
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9VIg0ACgkQMkyGM64RGpH14QCbBuH7m537WtbnT6RdxR1O15CF
+FTMAmQHZzg42rc/O0OLPmllHAYeDAe5y
+=3Zig
+-----END PGP SIGNATURE-----
+
 
 
