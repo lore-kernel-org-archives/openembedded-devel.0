@@ -1,34 +1,25 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S4b1u-0004k4-0u for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 17:44:58 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S4atc-0001Vl-8I for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 17:36:24 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 17:36:24 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen@dominion.thruhere.net>) id 1S4bzB-0007GU-6T
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2012 18:46:13 +0100
+Received: by wera1 with SMTP id a1so2626956wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 17:36:24 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Mon, 05 Mar 2012 09:37:38 -0800 (PST)
+Received: by 10.180.107.162 with SMTP id hd2mr13409284wib.8.1330969058409;
+	Mon, 05 Mar 2012 09:37:38 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id er8sm65122247wib.1.2012.03.05.09.37.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 05 Mar 2012 09:37:37 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 05 Mar 2012 17:36:08 +0100
-Message-ID: <jj2q1o$oun$1@dough.gmane.org>
-References: <308727D9E105A34D845E688AECAF6F4718EB2A01@DNCE03.ent.ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <308727D9E105A34D845E688AECAF6F4718EB2A01@DNCE03.ent.ti.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe][PATCH] update iperf version
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Mar 2012 18:37:29 +0100
+Message-Id: <1330969051-9867-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQmPA8kBvBI1/SmocvYDC+vkJXe2H0arZfE56kVAnOB6PdVztHyGkjUClYnKej9MVmcL4FQs
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe 1/3] systemd: enable xz compression for journald
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 16:44:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Mar 2012 17:46:13 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-Op 05-03-12 15:20, Baransi, Moosa schreef:
-> Hi,
-> 
-> Please consider this patch which updates the iPerf to version 2.0.5
-
-Can you please delete the old version and fix the commit message to adhere
-to the commit guidelines?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk9U63YACgkQMkyGM64RGpG3awCbB+Lv08nlLB9Nn+KpuyTvAOik
-ec8An2gXyjPL/381sh8roBHTBRzQ9sv/
-=4yei
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 62a326e..2b549a0 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-DEPENDS = "docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
++DEPENDS = "xz docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+ SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r17"
++PR = "r18"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -44,6 +44,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
+                  --with-rootlibdir=${base_libdir} \
+                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
+                  --disable-gtk \
++                 --enable-xz \
+                "
+ 
+ # There's no docbook-xsl-native, so for the xsltproc check to false
+-- 
+1.7.2.5
 
 
 
