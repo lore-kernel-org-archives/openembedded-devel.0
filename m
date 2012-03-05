@@ -1,40 +1,31 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1S4Zdg-0000y4-5w
+	(envelope-from <gary@mlbassoc.com>) id 1S4ZnR-0001GQ-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 16:15:52 +0100
-Received: by bkcjg15 with SMTP id jg15so3439485bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 07:07:17 -0800 (PST)
-Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
-	10.204.155.84 as permitted sender) client-ip=10.204.155.84; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of sledz@dresearch-fe.de
-	designates 10.204.155.84 as permitted sender)
-	smtp.mail=sledz@dresearch-fe.de
-Received: from mr.google.com ([10.204.155.84])
-	by 10.204.155.84 with SMTP id r20mr10700219bkw.35.1330960037814
-	(num_hops = 1); Mon, 05 Mar 2012 07:07:17 -0800 (PST)
-Received: by 10.204.155.84 with SMTP id r20mr8487270bkw.35.1330960037585;
-	Mon, 05 Mar 2012 07:07:17 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id y9sm26048071bkw.5.2012.03.05.07.07.16
-	(version=SSLv3 cipher=OTHER); Mon, 05 Mar 2012 07:07:17 -0800 (PST)
-Message-ID: <4F54D6A4.9080904@dresearch-fe.de>
-Date: Mon, 05 Mar 2012 16:07:16 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Mon, 05 Mar 2012 16:25:57 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id DE51CF811F8; Mon,  5 Mar 2012 08:17:23 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 46FA0F811F6;
+	Mon,  5 Mar 2012 08:17:22 -0700 (MST)
+Message-ID: <4F54D902.90304@mlbassoc.com>
+Date: Mon, 05 Mar 2012 08:17:22 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-References: <4F4F7D9C.8070300@dresearch-fe.de> <1330954103.17022.15.camel@ted>
-In-Reply-To: <1330954103.17022.15.camel@ted>
-X-Enigmail-Version: 1.3.5
-X-Gm-Message-State: ALoCoQkdelsMuTV2qKHTDa+PTMEUDCuW27M4EHXumqILehCgoCpG7u8RF7u0NafGCeXGN+jtbflw
-Cc: bitbake-devel@lists.openembedded.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: bitbake dependency cache problem
+To: openembedded-devel@lists.openembedded.org
+References: <4F54C8C2.5020003@mlbassoc.com>
+	<CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
+	<4F54CEF0.70902@mlbassoc.com>
+	<CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
+In-Reply-To: <CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
+Subject: Re: [meta-mozilla] Can't access any HTTPS page
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,81 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 15:15:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Mar 2012 15:25:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 05.03.2012 14:28, Richard Purdie wrote:
-> On Thu, 2012-03-01 at 14:46 +0100, Steffen Sledz wrote:
->> I'm working with oe-classic and BitBake Build Tool Core version
->> 1.12.0, bitbake version 1.12.0.
+On 2012-03-05 08:04, Andreas M=FCller wrote:
+> On Mon, Mar 5, 2012 at 3:34 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> On 2012-03-05 07:18, Andreas M=FCller wrote:
+>>>
+>>> On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas<gary@mlbassoc.com>    wro=
+te:
+>>>>
+>>>> I've added firefox to my platform by adding the meta-mozilla layer
+>>>> (and it's requirements).  To include firefox, all I did was
+>>>>   CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
+>>>>
+>>>> With this setup, firefox works, but not with any SSL page,
+>>>> e.g. trying to access https://google.com/mail gives me this
+>>>> error screen:
+>>>>
+>>>> Secure Connection Failed
+>>>>            An error occurred during a connection to accounts.google.=
+com.
+>>>>        security library: memory allocation failure.
+>>>>        (Error code: sec_error_no_memory)
+>>>>
+>>>>   The page you are trying to view can not be shown because the
+>>>> authenticity
+>>>> of the received data could not be verified.
+>>>>   Please contact the website owners to inform them of this problem.
+>>>> Alternatively, use the command found in the help menu to report this
+>>>> broken
+>>>> site.
+>>>>
+>>>> Did I miss something?  Has anyone else tried this?
+>>>>
+>>>> Thanks
+>>>>
+>>> Is the time of your system valid ( if I remember right I had similar
+>>> when system time was unbuffered initial at 01.01.2000 )?
 >>
->> Because of some special development requirements we like to generate
->> the Package Version from the SVN Revision (not the Last Changed Rev!)
->> of the bitbake recipe in the local workspace.
 >>
->> Therefor the recipe contains this:
+>> Yes, the time is set correctly.
 >>
->> ---------------->snip<-----------------
->> PR = "r8"
->> PV = "svnr${@svn_revision(d)}"
->>
->> inherit svn-helper
->> ---------------->snip<-----------------
->>
->> The svn-helper.bbclass contains a little helper function to determine
->> the needed value:
->>
->> ---------------->snip<-----------------
->> def svn_revision(d):
->>      import subprocess
->>      bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
->>      return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
->> ---------------->snip<-----------------
->>
->> After this changes i make a first build and everything works fine.
->> Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is
->> generated.
->>
->> Now i make an "svn update" inside the workspace and the SVN Revision
->> increases to 66.
->>
->> A call of "bitbake foo" now results in an "Tasks Summary: Attempted
->> 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no
->> new ipg is generated. :(
->>
->> The log generated by "bitbake -DDDDDvvvvv foo" contains
->>
->> ---------------->snip<-----------------
->> DEBUG: providers for foo are: ['foo']
->> NOTE: checking PREFERRED_PROVIDER_foo
->> NOTE: checking PREFERRED_PROVIDER_foo-svnr42
->> NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
->> ---------------->snip<-----------------
->>
->> Why does bitbake not respects the new PV and generates a
->> foo-svnr66-r8.ipk here???
-> 
-> Bitbake has no idea that the PV has changed and that it needs to ignore
-> the cache value and reparse the metadata for that file. The similar
-> example is when autorev is used with a source control system. You can
-> can see the code for this in lib/bb/fetch2/__init__.py in get_autorev().
-> In summary, if you set __BB_DONT_CACHE = "1" in your recipe, I think it
-> will do what you expect, at the cost that it will reparse the recipe
-> every time (which it has to in case PV changes).
+> AArgh - the system time caused trouble on cookies - other issue sorry.
+>
+> In midori it helped to install glib-networking ( see meta-oe commit
+> a56bff13b9d22b608352501fbb3ef124e7147bda ). Maybe this helps for
+> firefox too?
 
-This solution seems to work. :)
+Sorry, no change.
 
-Thx,
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
