@@ -1,43 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S4YsU-0007xa-Ji
+	(envelope-from <moosab@ti.com>) id 1S4Yuf-00083T-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 15:27:06 +0100
-Received: by eekc1 with SMTP id c1so1195396eek.6
+	Mon, 05 Mar 2012 15:29:22 +0100
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q25EKkpu030569
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 06:18:32 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.112.85.199 as permitted sender)
-	client-ip=10.112.85.199; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.112.85.199 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.112.85.199])
-	by 10.112.85.199 with SMTP id j7mr9996231lbz.26.1330957112038 (num_hops
-	= 1); Mon, 05 Mar 2012 06:18:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=JMTB+i0BHlYHNQ77Tn+bAOVhwKSwDxR+AZeJAZrLFyA=;
-	b=mLFuRuuUTffDgVMLPAEbEDJQGwMDasQ3ssnT0xvB83poMMic/eIIrq+ZGC2M6eUcEU
-	ILVifAWFKXJr1956prbKq6cWsAioIhm8fmBEEQUdVU2C6KXXFfG8eWfcGTLWaQYiSvFL
-	Xk1S9r3b3TAgDuTHPEmyMFOF3MYzHEUWsyJ6GgDN1FRYrgdjW99j/RBRTN/IjyQqqb4H
-	iT2TVsvtMJbayoK1k29aQDVPQx80qn01QTqckZ+0VjBrbkVrciVjtjgJLTwSY1d4xE9F
-	TDgVWZjR7sOXMlsG6BqjuhgSZuP11MwVGF7LzIB9Vx4VJ8tH8p08Jsv/0F/2lH8kZuKW
-	/W+A==
+	Mon, 5 Mar 2012 08:20:46 -0600
+Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q25EKjSl011631
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 5 Mar 2012 08:20:45 -0600 (CST)
+Received: from DNCE03.ent.ti.com ([fe80::19cb:d761:16a6:9b51]) by
+	DNCE73.ent.ti.com ([fe80::a454:462:d009:b2c%21]) with mapi id
+	14.01.0323.003; Mon, 5 Mar 2012 15:20:45 +0100
+From: "Baransi, Moosa" <moosab@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH] update iperf version
+Thread-Index: AczfXONmH53FU+igT7yxuJ0COb8DLQ==
+Date: Mon, 5 Mar 2012 14:20:44 +0000
+Message-ID: <308727D9E105A34D845E688AECAF6F4718EB2A01@DNCE03.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-Received: by 10.112.85.199 with SMTP id j7mr8229057lbz.26.1330957111904; Mon,
-	05 Mar 2012 06:18:31 -0800 (PST)
-Received: by 10.112.29.74 with HTTP; Mon, 5 Mar 2012 06:18:31 -0800 (PST)
-In-Reply-To: <4F54C8C2.5020003@mlbassoc.com>
-References: <4F54C8C2.5020003@mlbassoc.com>
-Date: Mon, 5 Mar 2012 15:18:31 +0100
-Message-ID: <CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-mozilla] Can't access any HTTPS page
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [meta-oe][PATCH] update iperf version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 14:27:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 05 Mar 2012 14:29:22 -0000
+X-Groupsio-MsgNum: 37595
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_"
+
+--_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> I've added firefox to my platform by adding the meta-mozilla layer
-> (and it's requirements). =A0To include firefox, all I did was
-> =A0CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
->
-> With this setup, firefox works, but not with any SSL page,
-> e.g. trying to access https://google.com/mail gives me this
-> error screen:
->
-> Secure Connection Failed
-> =A0 =A0 =A0 =A0 =A0 An error occurred during a connection to accounts.goo=
-gle.com.
-> =A0 =A0 =A0 security library: memory allocation failure.
-> =A0 =A0 =A0 (Error code: sec_error_no_memory)
->
-> =A0The page you are trying to view can not be shown because the authentic=
-ity
-> of the received data could not be verified.
-> =A0Please contact the website owners to inform them of this problem.
-> Alternatively, use the command found in the help menu to report this brok=
-en
-> site.
->
-> Did I miss something? =A0Has anyone else tried this?
->
-> Thanks
->
-Is the time of your system valid ( if I remember right I had similar
-when system time was unbuffered initial at 01.01.2000 )?
+Hi,
 
-Andreas
+Please consider this patch which updates the iPerf to version 2.0.5
 
+Regards,
+Moosa Baransi
 
+--_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_
+Content-Type: application/octet-stream;
+	name="0001-update-iperf-version.patch"
+Content-Description: 0001-update-iperf-version.patch
+Content-Disposition: attachment; filename="0001-update-iperf-version.patch";
+	size=882; creation-date="Mon, 30 Jan 2012 14:31:19 GMT";
+	modification-date="Mon, 30 Jan 2012 14:28:28 GMT"
+Content-Transfer-Encoding: base64
+
+RnJvbSAyYmU0OGJkYjg2ODkzNzgxNTRjMTM1ZGJiOTM3ZjYzMjMxN2M2OGFiIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBNb29zYSA8bW9vc2EuYmFyYW5zaUBiYWJjb21zb2Z0d2FyZS5j
+b20+CkRhdGU6IE1vbiwgMzAgSmFuIDIwMTIgMTY6Mjc6MjkgKzAyMDAKU3ViamVjdDogW1BBVENI
+XSB1cGRhdGUgaXBlcmYgdmVyc2lvbgoKKiBWZXJzaW9uIHVwZGF0ZWQgdG8gaVBlcmYgMi4wLjUK
+ClNpZ25lZC1vZmYtYnk6IE1vb3NhIEJhcmFuc2kgPG1vb3NhYkB0aS5jb20+Ci0tLQogcmVjaXBl
+cy9pcGVyZi9pcGVyZl8yLjAuNS5iYiB8ICAgMTEgKysrKysrKysrKysKIDEgZmlsZXMgY2hhbmdl
+ZCwgMTEgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCBy
+ZWNpcGVzL2lwZXJmL2lwZXJmXzIuMC41LmJiCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy9pcGVyZi9p
+cGVyZl8yLjAuNS5iYiBiL3JlY2lwZXMvaXBlcmYvaXBlcmZfMi4wLjUuYmIKbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMGVmNTg3ZgotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lw
+ZXMvaXBlcmYvaXBlcmZfMi4wLjUuYmIKQEAgLTAsMCArMSwxMSBAQAorcmVxdWlyZSBpcGVyZi5p
+bmMKKworUFIgPSAiJHtJTkNfUFJ9LjEiCisKK1NSQ19VUkkgPSAiIFwKKwkke1NPVVJDRUZPUkdF
+X01JUlJPUn0vaXBlcmYvaXBlcmYtJHtQVn0udGFyLmd6IFwKKwkiCisKK1NSQ19VUklbbWQ1c3Vt
+XSA9ICI0NGI1NTM2YjY3NzE5ZjQyNTBmYWVkNjMyYTNjZDAxNiIKK1NSQ19VUklbc2hhMjU2c3Vt
+XSA9ICI2MzZiNGVmZjA0MzFjZWE4MDY2N2VhODVhNjdjZTRjNjg2OTg3NjBhOTgzN2UxZTlkMTMw
+OTZkMjAzNjIyNjViIgorCi0tIAoxLjcuMQoK
+
+--_004_308727D9E105A34D845E688AECAF6F4718EB2A01DNCE03entticom_--
