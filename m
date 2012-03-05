@@ -1,29 +1,29 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1S4SuE-0000VB-Nq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 09:04:30 +0100
-Received: by wera1 with SMTP id a1so2253680wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Mar 2012 23:55:56 -0800 (PST)
-Received: by 10.180.100.196 with SMTP id fa4mr12249416wib.0.1330934156705;
-	Sun, 04 Mar 2012 23:55:56 -0800 (PST)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id df3sm19194044wib.1.2012.03.04.23.55.55
-	(version=SSLv3 cipher=OTHER); Sun, 04 Mar 2012 23:55:56 -0800 (PST)
-Message-ID: <4F54718B.3090900@dresearch-fe.de>
-Date: Mon, 05 Mar 2012 08:55:55 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <4F4F7D9C.8070300@dresearch-fe.de>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1S4Y6E-0006mM-0b for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Mar 2012 14:37:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q25DScX8006663;
+	Mon, 5 Mar 2012 13:28:38 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04530-07; Mon,  5 Mar 2012 13:28:33 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q25DSRMu006656
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 5 Mar 2012 13:28:30 GMT
+Message-ID: <1330954103.17022.15.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Date: Mon, 05 Mar 2012 05:28:23 -0800
 In-Reply-To: <4F4F7D9C.8070300@dresearch-fe.de>
-X-Enigmail-Version: 1.3.5
-X-Gm-Message-State: ALoCoQlQQsXtq9IazwBqHcaldq1/N/6PKQdOUCAWfz3MIXuZGSYMbpk7kxoT/q6DzIIJfk158MD6
-Cc: bitbake-devel@lists.openembedded.org
+References: <4F4F7D9C.8070300@dresearch-fe.de>
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: bitbake dependency cache problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,14 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 08:04:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Mar 2012 13:37:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On 01.03.2012 14:46, Steffen Sledz wrote:
-> I'm working with oe-classic and BitBake Build Tool Core version 1.12.0, bitbake version 1.12.0.
+On Thu, 2012-03-01 at 14:46 +0100, Steffen Sledz wrote:
+> I'm working with oe-classic and BitBake Build Tool Core version
+> 1.12.0, bitbake version 1.12.0.
 > 
-> Because of some special development requirements we like to generate the Package Version from the SVN Revision (not the Last Changed Rev!) of the bitbake recipe in the local workspace.
+> Because of some special development requirements we like to generate
+> the Package Version from the SVN Revision (not the Last Changed Rev!)
+> of the bitbake recipe in the local workspace.
 > 
 > Therefor the recipe contains this:
 > 
@@ -56,7 +59,8 @@ On 01.03.2012 14:46, Steffen Sledz wrote:
 > inherit svn-helper
 > ---------------->snip<-----------------
 > 
-> The svn-helper.bbclass contains a little helper function to determine the needed value:
+> The svn-helper.bbclass contains a little helper function to determine
+> the needed value:
 > 
 > ---------------->snip<-----------------
 > def svn_revision(d):
@@ -65,11 +69,16 @@ On 01.03.2012 14:46, Steffen Sledz wrote:
 >      return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
 > ---------------->snip<-----------------
 > 
-> After this changes i make a first build and everything works fine. Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is generated.
+> After this changes i make a first build and everything works fine.
+> Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is
+> generated.
 > 
-> Now i make an "svn update" inside the workspace and the SVN Revision increases to 66.
+> Now i make an "svn update" inside the workspace and the SVN Revision
+> increases to 66.
 > 
-> A call of "bitbake foo" now results in an "Tasks Summary: Attempted 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no new ipg is generated. :(
+> A call of "bitbake foo" now results in an "Tasks Summary: Attempted
+> 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no
+> new ipg is generated. :(
 > 
 > The log generated by "bitbake -DDDDDvvvvv foo" contains
 > 
@@ -80,22 +89,20 @@ On 01.03.2012 14:46, Steffen Sledz wrote:
 > NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
 > ---------------->snip<-----------------
 > 
-> Why does bitbake not respects the new PV and generates a foo-svnr66-r8.ipk here???
+> Why does bitbake not respects the new PV and generates a
+> foo-svnr66-r8.ipk here???
 
-Ping!
+Bitbake has no idea that the PV has changed and that it needs to ignore
+the cache value and reparse the metadata for that file. The similar
+example is when autorev is used with a source control system. You can
+can see the code for this in lib/bb/fetch2/__init__.py in get_autorev().
+In summary, if you set __BB_DONT_CACHE = "1" in your recipe, I think it
+will do what you expect, at the cost that it will reparse the recipe
+every time (which it has to in case PV changes).
 
-Can anyone of the bitbake gurus lease give a feedback here?
+Cheers,
 
-Thx,
-Steffen
+Richard
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
 
 
