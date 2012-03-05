@@ -1,45 +1,40 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S4Zb6-0000qh-US
+	(envelope-from <sledz@dresearch-fe.de>) id 1S4Zdg-0000y4-5w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 16:13:13 +0100
-Received: by lagw12 with SMTP id w12so4928676lag.6
+	Mon, 05 Mar 2012 16:15:52 +0100
+Received: by bkcjg15 with SMTP id jg15so3439485bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 07:04:38 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.152.110.6 as permitted sender)
-	client-ip=10.152.110.6; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.152.110.6 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.152.110.6])
-	by 10.152.110.6 with SMTP id hw6mr18769312lab.8.1330959878309 (num_hops
-	= 1); Mon, 05 Mar 2012 07:04:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=iJ5Vb8JzB5DA3TLcRUPLtqeEtWrgnLRtHrcDKy8HziE=;
-	b=a++pXRklfv8nwl2vEbD+9v0bFzCIf0dN4odg5sBHHh4GZ0yHL2niKgIoDalr0u+t/a
-	UNat89BePmWSgQDx7tzYjgfnZgLm5tH6UtlnPgFUoX0KjCDyg4ifQx6BYVYq03MxZM25
-	sUBj/gcIhghX46VEM2cJN/Ya0uASGKs3MtSLLKejW0eveUiUT8Fi8o62/2wnBI3dLIhE
-	zMI7thX++/1w9CZgkKWPjC1d6ajlcZLQXU20VlslzW3hefkycZKtqXogm2TxmjgFljvR
-	//Z5aApDhGePNLZDQ3gX9tv7QjqLBF4RZRC0J0CiXBE3QvvNKT6O0kK7veDEeprvSqEf
-	5IqQ==
+	Mon, 05 Mar 2012 07:07:17 -0800 (PST)
+Received-SPF: pass (google.com: domain of sledz@dresearch-fe.de designates
+	10.204.155.84 as permitted sender) client-ip=10.204.155.84; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of sledz@dresearch-fe.de
+	designates 10.204.155.84 as permitted sender)
+	smtp.mail=sledz@dresearch-fe.de
+Received: from mr.google.com ([10.204.155.84])
+	by 10.204.155.84 with SMTP id r20mr10700219bkw.35.1330960037814
+	(num_hops = 1); Mon, 05 Mar 2012 07:07:17 -0800 (PST)
+Received: by 10.204.155.84 with SMTP id r20mr8487270bkw.35.1330960037585;
+	Mon, 05 Mar 2012 07:07:17 -0800 (PST)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id y9sm26048071bkw.5.2012.03.05.07.07.16
+	(version=SSLv3 cipher=OTHER); Mon, 05 Mar 2012 07:07:17 -0800 (PST)
+Message-ID: <4F54D6A4.9080904@dresearch-fe.de>
+Date: Mon, 05 Mar 2012 16:07:16 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-Received: by 10.152.110.6 with SMTP id hw6mr15401936lab.8.1330959878248; Mon,
-	05 Mar 2012 07:04:38 -0800 (PST)
-Received: by 10.112.29.74 with HTTP; Mon, 5 Mar 2012 07:04:38 -0800 (PST)
-In-Reply-To: <4F54CEF0.70902@mlbassoc.com>
-References: <4F54C8C2.5020003@mlbassoc.com>
-	<CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
-	<4F54CEF0.70902@mlbassoc.com>
-Date: Mon, 5 Mar 2012 16:04:38 +0100
-Message-ID: <CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-mozilla] Can't access any HTTPS page
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+References: <4F4F7D9C.8070300@dresearch-fe.de> <1330954103.17022.15.camel@ted>
+In-Reply-To: <1330954103.17022.15.camel@ted>
+X-Enigmail-Version: 1.3.5
+X-Gm-Message-State: ALoCoQkdelsMuTV2qKHTDa+PTMEUDCuW27M4EHXumqILehCgoCpG7u8RF7u0NafGCeXGN+jtbflw
+Cc: bitbake-devel@lists.openembedded.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: bitbake dependency cache problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,53 +48,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 15:13:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Mar 2012 15:15:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Mar 5, 2012 at 3:34 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> On 2012-03-05 07:18, Andreas M=FCller wrote:
+On 05.03.2012 14:28, Richard Purdie wrote:
+> On Thu, 2012-03-01 at 14:46 +0100, Steffen Sledz wrote:
+>> I'm working with oe-classic and BitBake Build Tool Core version
+>> 1.12.0, bitbake version 1.12.0.
 >>
->> On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas<gary@mlbassoc.com> =A0wrote:
->>>
->>> I've added firefox to my platform by adding the meta-mozilla layer
->>> (and it's requirements). =A0To include firefox, all I did was
->>> =A0CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
->>>
->>> With this setup, firefox works, but not with any SSL page,
->>> e.g. trying to access https://google.com/mail gives me this
->>> error screen:
->>>
->>> Secure Connection Failed
->>> =A0 =A0 =A0 =A0 =A0 An error occurred during a connection to accounts.g=
-oogle.com.
->>> =A0 =A0 =A0 security library: memory allocation failure.
->>> =A0 =A0 =A0 (Error code: sec_error_no_memory)
->>>
->>> =A0The page you are trying to view can not be shown because the
->>> authenticity
->>> of the received data could not be verified.
->>> =A0Please contact the website owners to inform them of this problem.
->>> Alternatively, use the command found in the help menu to report this
->>> broken
->>> site.
->>>
->>> Did I miss something? =A0Has anyone else tried this?
->>>
->>> Thanks
->>>
->> Is the time of your system valid ( if I remember right I had similar
->> when system time was unbuffered initial at 01.01.2000 )?
->
->
-> Yes, the time is set correctly.
->
-AArgh - the system time caused trouble on cookies - other issue sorry.
+>> Because of some special development requirements we like to generate
+>> the Package Version from the SVN Revision (not the Last Changed Rev!)
+>> of the bitbake recipe in the local workspace.
+>>
+>> Therefor the recipe contains this:
+>>
+>> ---------------->snip<-----------------
+>> PR = "r8"
+>> PV = "svnr${@svn_revision(d)}"
+>>
+>> inherit svn-helper
+>> ---------------->snip<-----------------
+>>
+>> The svn-helper.bbclass contains a little helper function to determine
+>> the needed value:
+>>
+>> ---------------->snip<-----------------
+>> def svn_revision(d):
+>>      import subprocess
+>>      bbpath = os.path.dirname(bb.data.getVar('FILE',d,1))
+>>      return subprocess.check_output(["svn", "info", bbpath]).partition("Revision: ")[2].splitlines()[0]
+>> ---------------->snip<-----------------
+>>
+>> After this changes i make a first build and everything works fine.
+>> Assuming the SVN Revsion is 42 a package called foo-svnr42-r8.ipk is
+>> generated.
+>>
+>> Now i make an "svn update" inside the workspace and the SVN Revision
+>> increases to 66.
+>>
+>> A call of "bitbake foo" now results in an "Tasks Summary: Attempted
+>> 1182 tasks of which 1182 didn't need to be rerun and 0 failed." an no
+>> new ipg is generated. :(
+>>
+>> The log generated by "bitbake -DDDDDvvvvv foo" contains
+>>
+>> ---------------->snip<-----------------
+>> DEBUG: providers for foo are: ['foo']
+>> NOTE: checking PREFERRED_PROVIDER_foo
+>> NOTE: checking PREFERRED_PROVIDER_foo-svnr42
+>> NOTE: checking PREFERRED_PROVIDER_foo-svnr42-r8
+>> ---------------->snip<-----------------
+>>
+>> Why does bitbake not respects the new PV and generates a
+>> foo-svnr66-r8.ipk here???
+> 
+> Bitbake has no idea that the PV has changed and that it needs to ignore
+> the cache value and reparse the metadata for that file. The similar
+> example is when autorev is used with a source control system. You can
+> can see the code for this in lib/bb/fetch2/__init__.py in get_autorev().
+> In summary, if you set __BB_DONT_CACHE = "1" in your recipe, I think it
+> will do what you expect, at the cost that it will reparse the recipe
+> every time (which it has to in case PV changes).
 
-In midori it helped to install glib-networking ( see meta-oe commit
-a56bff13b9d22b608352501fbb3ef124e7147bda ). Maybe this helps for
-firefox too?
+This solution seems to work. :)
 
-Andreas
+Thx,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
