@@ -1,32 +1,25 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1S4giS-0008Du-Ru
+	(envelope-from <denis@denix.org>) id 1S4hsM-0001Nk-8e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Mar 2012 23:49:17 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id B8F4EF811FE; Mon,  5 Mar 2012 15:40:42 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id B72D4F811F0;
-	Mon,  5 Mar 2012 15:40:40 -0700 (MST)
-Message-ID: <4F5540E8.7030305@mlbassoc.com>
-Date: Mon, 05 Mar 2012 15:40:40 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
-MIME-Version: 1.0
+	Tue, 06 Mar 2012 01:03:34 +0100
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M0F00ACUOYMGIV3@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	05 Mar 2012 16:54:23 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0D68B20264; Mon,
+	05 Mar 2012 17:54:22 -0500 (EST)
+Date: Mon, 05 Mar 2012 17:54:22 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4F54C8C2.5020003@mlbassoc.com>
-	<CALbNGRRNwFXh0Ppwr1JrUWp4TwsJXELVM74OxfpVY=X5NpVU2Q@mail.gmail.com>
-	<4F54CEF0.70902@mlbassoc.com>
-	<CALbNGRQk__t-U0VmHpQ=sXeoCXrjA7vbREFbBYjy-+v2F97a_Q@mail.gmail.com>
-	<4F54D902.90304@mlbassoc.com>
-In-Reply-To: <4F54D902.90304@mlbassoc.com>
-Subject: Re: [meta-mozilla] Can't access any HTTPS page
+Message-id: <20120305225422.GD2030@denix.org>
+References: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
+MIME-version: 1.0
+In-reply-to: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Disable GNU Hash check ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,67 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 22:49:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Mar 2012 00:03:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 2012-03-05 08:17, Gary Thomas wrote:
-> On 2012-03-05 08:04, Andreas M=FCller wrote:
->> On Mon, Mar 5, 2012 at 3:34 PM, Gary Thomas<gary@mlbassoc.com> wrote:
->>> On 2012-03-05 07:18, Andreas M=FCller wrote:
->>>>
->>>> On Mon, Mar 5, 2012 at 3:08 PM, Gary Thomas<gary@mlbassoc.com> wrote=
-:
->>>>>
->>>>> I've added firefox to my platform by adding the meta-mozilla layer
->>>>> (and it's requirements). To include firefox, all I did was
->>>>> CORE_EXTRA_IMAGE_INSTALL +=3D "firefox"
->>>>>
->>>>> With this setup, firefox works, but not with any SSL page,
->>>>> e.g. trying to access https://google.com/mail gives me this
->>>>> error screen:
->>>>>
->>>>> Secure Connection Failed
->>>>> An error occurred during a connection to accounts.google.com.
->>>>> security library: memory allocation failure.
->>>>> (Error code: sec_error_no_memory)
->>>>>
->>>>> The page you are trying to view can not be shown because the
->>>>> authenticity
->>>>> of the received data could not be verified.
->>>>> Please contact the website owners to inform them of this problem.
->>>>> Alternatively, use the command found in the help menu to report thi=
-s
->>>>> broken
->>>>> site.
->>>>>
->>>>> Did I miss something? Has anyone else tried this?
->>>>>
->>>>> Thanks
->>>>>
->>>> Is the time of your system valid ( if I remember right I had similar
->>>> when system time was unbuffered initial at 01.01.2000 )?
->>>
->>>
->>> Yes, the time is set correctly.
->>>
->> AArgh - the system time caused trouble on cookies - other issue sorry.
->>
->> In midori it helped to install glib-networking ( see meta-oe commit
->> a56bff13b9d22b608352501fbb3ef124e7147bda ). Maybe this helps for
->> firefox too?
->
-> Sorry, no change.
->
+On Mon, Mar 05, 2012 at 06:53:05PM +0100, Hauser, Wolfgang (external) wrote:
+> Hello,
+> 
+> I have to create a package containing static and dynamic libraries and
+> some files.
+> The libraries are delivered by a vendor and we have to use(install) them
+> as they are.
+> 
+> While bitbaking the QA procedure complains about missing GNU Hashes. 
+> 
+> Is there a possibility to disable this check for a single recipe ?
+> 
+> I am using bitbake 1.10.2 and an OE mainenance-2011.03 based tree.
 
-The real question though is "does firefox HTTPS built from meta-mozilla
-actually work for anyone?"  If so, what configuration (target platform,
-etc) works?
+INSANE_SKIP_${PN} = "True"
 
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+-- 
+Denys
 
 
