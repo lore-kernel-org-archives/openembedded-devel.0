@@ -1,48 +1,48 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pz0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S4io5-0002SI-NC
+	(envelope-from <raj.khem@gmail.com>) id 1S4jnC-0003lk-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 02:03:13 +0100
-Received: by eekc1 with SMTP id c1so1412856eek.6
+	Tue, 06 Mar 2012 03:06:26 +0100
+Received: by dady9 with SMTP id y9so5527620dad.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2012 16:54:38 -0800 (PST)
-Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
-	designates 10.213.35.18 as permitted sender)
-	client-ip=10.213.35.18; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	schnitzeltony@googlemail.com designates 10.213.35.18 as
-	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
-	dkim=pass header.i=schnitzeltony@googlemail.com
-Received: from mr.google.com ([10.213.35.18])
-	by 10.213.35.18 with SMTP id n18mr1813991ebd.92.1330995278898 (num_hops
-	= 1); Mon, 05 Mar 2012 16:54:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=pt80HJeGr78gxwTjURzBQ9N8MllvmxRG2zPGfXP3vgQ=;
-	b=knL4StPml6za0aaMYNLbl5VNrRSAQ5c7N6G9L0p/5CxqPqdHvvyazaHn5ZlX2D/8VI
-	xmasYL6S8CHUel4+iOomS1896K8DPoKnrSfrAsPnD8dtt/RovPtrAbV11z430jOjGgFC
-	5QulA96t02QNJvuSzFskGF0x4uM+znadjWl83EmPuSopCQrEnIPjQqa6n4mh/HTP8s2g
-	ELDFXI8DXddLEd8J0pMcih54y/E9VO32OVxDFYI+yaFbQmW5KYylSbRkusNSUfHO8054
-	LPWBsjoN8MLKoldaty93if97cgmR2mi/+YLuhaw+KN1zgphtW5kLYp0nT7jL0BLsBQQe
-	SfJQ==
-Received: by 10.213.35.18 with SMTP id n18mr1358868ebd.92.1330995278648;
-	Mon, 05 Mar 2012 16:54:38 -0800 (PST)
-Received: from localhost.localdomain (p4FDF114E.dip.t-dialin.net.
-	[79.223.17.78])
-	by mx.google.com with ESMTPS id s48sm67842976eem.0.2012.03.05.16.54.37
+	Mon, 05 Mar 2012 17:57:46 -0800 (PST)
+Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
+	10.68.237.66 as permitted sender) client-ip=10.68.237.66; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of raj.khem@gmail.com
+	designates 10.68.237.66 as permitted sender)
+	smtp.mail=raj.khem@gmail.com;
+	dkim=pass header.i=raj.khem@gmail.com
+Received: from mr.google.com ([10.68.237.66])
+	by 10.68.237.66 with SMTP id va2mr43709054pbc.32.1330999066874
+	(num_hops = 1); Mon, 05 Mar 2012 17:57:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=VmA11wOxe7VQe6QozvXDp/LRkXdS8Vj9qgNhW3n/0EI=;
+	b=Gjbm7gc6Xxq1+2xIu6ckKytKG6Hk28V/j2Kr31hxP4nW14kw57Yf35W9po1UuyfKhP
+	vYqlHfR0qu52OUq8DDw/eZZZ3PXV5NIXQOVtRd8rUKHkF36zPcdQilfRggGZYLzAv7tC
+	Qb3FUIrLb3rpV5Xtu5kgqRye9yPkiTEgeqdRd4eyxMzu7ebcAlzWfe2UX7TObECpnoCa
+	VoNyKZRMTpKDdIRdrlqPUdglk2xaiEcPOnkVq7v0w2jrbmdsHshM+/5Av5HMc1weyeTs
+	bkhFNhELEpFCyL67uMmCp2uapiMTSEZmca8DXBqMXD2BoHlnwN5dWnx0LIARN4M459s4
+	2hhg==
+Received: by 10.68.237.66 with SMTP id va2mr37788380pbc.32.1330999066711;
+	Mon, 05 Mar 2012 17:57:46 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id f7sm5934197pbr.3.2012.03.05.17.57.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 05 Mar 2012 16:54:38 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 05 Mar 2012 17:57:45 -0800 (PST)
+Date: Mon, 5 Mar 2012 17:59:41 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2012 01:58:16 +0100
-Message-Id: <1330995497-10440-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1330995497-10440-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1330995497-10440-1-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20120306015941.GC6841@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1330980801-19523-1-git-send-email-tworaz666@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe, v2 2/3] networkmanager: inherit systemd
+In-Reply-To: <1330980801-19523-1-git-send-email-tworaz666@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe] zsh: Add initial recipe for version 4.3.17.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,87 +56,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 01:03:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 06 Mar 2012 02:06:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-networkmanager-systemd was not yet created to avoid fallout in images. The
-warning for this created at parse time is our reminder.
+On (05/03/12 21:53), Peter Tworek wrote:
+> Run tested on netbook pro.
+> 
+> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+> ---
+>  meta-oe/recipes-extended/zsh/zsh_4.3.17.bb |   51 ++++++++++++++++++++++++++++
+>  1 files changed, 51 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+> 
+> diff --git a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+> new file mode 100644
+> index 0000000..9192f20
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+> @@ -0,0 +1,51 @@
+> +DESCRIPTION = "UNIX Shell similar to the Korn shell"
+> +HOMEPAGE="http://www.zsh.org"
+> +SECTION = "base/shell"
+> +
+> +LICENSE = "ZSH"
+> +LIC_FILES_CHKSUM = "file://LICENCE;md5=ad234d4b46db63491c4a9789da4fb341"
+> +
+> +DEPENDS = "ncurses libcap libpcre gdbm groff-native"
+> +
+> +SRC_URI = "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
+> +SRC_URI[md5sum] = "8258967060b2654f30001a011946ac6a"
+> +SRC_URI[sha256sum] = "054e0452afd9c742c9f1489465175e1d4d7db50d88b602d132551d850cf7a704"
+> +
+> +FILES_${PN}-dbg += "\
+> +    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
+> +    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
+> +    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
+> +    "
+> +
+> +inherit autotools
+> +
+> +EXTRA_OECONF = " \
+> +    --bindir=${base_bindir} \
+> +    --enable-etcdir=${sysconfdir} \
+> +    --enable-fndir=${datadir}/${PN}/${PV}/functions \
+> +    --enable-site-fndir=${datadir}/${PN}/site-functions \
+> +    --enable-function-subdirs \
+> +    --with-term-lib='ncursesw ncurses' \
+> +    --with-tcsetpgrp \
+> +    --enable-pcre \
+> +    --enable-cap \
+> +    --enable-multibyte \
+> +    --enable-gdbm \
+> +    --enable-dynamic \
+> +    zsh_cv_shared_environ=yes \
+> +    "
+> +
+> +do_configure () {
+> +    oe_runconf
+> +}
+> +
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../networkmanager/networkmanager_0.9.2.0.bb       |   30 ++++----------------
- 1 files changed, 6 insertions(+), 24 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-index 45f98be..6bbbce5 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-@@ -4,10 +4,10 @@ SECTION = "net/misc"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
- 
--PR = "r4"
-+PR = "r5"
- 
- DEPENDS = "systemd libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
--inherit gnome gettext
-+inherit gnome gettext systemd
- 
- SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
-     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-@@ -56,14 +56,15 @@ do_install_append () {
- 	install -d ${D}/etc/NetworkManager/VPN
- }
- 
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE = "NetworkManager.service"
-+
- PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
- 
- FILES_libnmutil += "${libdir}/libnm-util.so.*"
- FILES_libnmglib += "${libdir}/libnm_glib.so.*"
- FILES_libnmglib-vpn += "${libdir}/libnm_glib_vpn.so.*"
- 
--systemd_unitdir = "${base_libdir}/systemd/system"
--
- FILES_${PN} += " \
- 		${libexecdir} \
- 		${libdir}/pppd/*/nm-pppd-plugin.so \
-@@ -71,7 +72,7 @@ FILES_${PN} += " \
- 		${datadir}/polkit-1 \
- 		${datadir}/dbus-1 \
- 		${base_libdir}/udev/* \
--        ${systemd_unitdir} \
-+                ${systemd_unitdir}/system/NetworkManager-wait-online.service \
- "
- 
- RRECOMMENDS_${PN} += "iptables"
-@@ -95,22 +96,3 @@ FILES_${PN}-tests = "${bindir}/nm-tool \
-                      ${bindir}/nm-online \
-                      ${bindir}/nm-supplicant \
-                      ${bindir}/nm-testdevices"
--
--
--pkg_postinst_${PN}() {
--    # can't do this offline
--    if [ "x$D" != "x" ]; then
--        exit 1
--    fi
--    
--    systemctl enable NetworkManager.service
--}
--
--pkg_prerm_${PN}() {
--    # can't do this offline
--    if [ "x$D" != "x" ]; then
--        exit 1
--    fi
--
--    systemctl disable NetworkManager.service
--}
--- 
-1.7.4.4
-
+why do you need to run oe_runconf explicitly.
 
 
