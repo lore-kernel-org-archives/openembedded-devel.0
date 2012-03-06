@@ -1,23 +1,46 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S4tHJ-0004BS-VQ for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 13:14:05 +0100
-Received: from g225138053.adsl.alicedsl.de ([92.225.138.53]
-	helo=[192.168.178.43])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S4t95-00012b-EL for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 12:05:35 +0000
-Message-ID: <1331035530.6166.23.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S4tWn-0005w7-Hg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Mar 2012 13:30:05 +0100
+Received: by lagw12 with SMTP id w12so6176798lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Mar 2012 04:21:29 -0800 (PST)
+Received-SPF: pass (google.com: domain of schnitzeltony@googlemail.com
+	designates 10.152.112.100 as permitted sender)
+	client-ip=10.152.112.100; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	schnitzeltony@googlemail.com designates 10.152.112.100 as
+	permitted sender) smtp.mail=schnitzeltony@googlemail.com;
+	dkim=pass header.i=schnitzeltony@googlemail.com
+Received: from mr.google.com ([10.152.112.100])
+	by 10.152.112.100 with SMTP id ip4mr22354453lab.1.1331036489941
+	(num_hops = 1); Tue, 06 Mar 2012 04:21:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=0YQesCRfcBK07/TPGrA49iQoeCep3t+WPbO6Z6q0kXY=;
+	b=GSt3K3UjYGqwqMzUtacpLHuEbpZHMIaFe1NRn2io1yQ8kL9l/eDuXuY7PeEHe60I4C
+	n/c3AzSrdAIVt/reGVAe9N8/0ji9rMCCVjyTlJv2ByPb2sPbWDXfPOCuMe00acRq14w0
+	pSojDbUoG/t2Eumd5AKpuCoQVLoA4iShRrZKt5C1PM5zMVjHTYWXLjRp4iSxg7HQgZhl
+	EWRbw2GRg6p1QP8fSNwLCAEuhOo/vGtoqEMOuoCvhd8yfeTLXZ7zyOA9+FzRqtcb8NJc
+	6XPKiYu/CfuxUBOKh64jNMJIcxDG8ZT/rqKqICHalDj0w21ZsHXtq2AEHEFmTZyKjh+1
+	hZbA==
+MIME-Version: 1.0
+Received: by 10.152.112.100 with SMTP id ip4mr18306626lab.1.1331036489794;
+	Tue, 06 Mar 2012 04:21:29 -0800 (PST)
+Received: by 10.112.29.74 with HTTP; Tue, 6 Mar 2012 04:21:29 -0800 (PST)
+In-Reply-To: <CAP9ODKovkJ_pHu+-__yUA=tshBiBvQwuJN7xN93P_6nrViZULw@mail.gmail.com>
+References: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
+	<1331025741-26216-2-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKo+i3d31+xUt8RnOgFeDQbUw4hSkHeoR1LomZvxF5oa8A@mail.gmail.com>
+	<CAP9ODKovkJ_pHu+-__yUA=tshBiBvQwuJN7xN93P_6nrViZULw@mail.gmail.com>
+Date: Tue, 6 Mar 2012 13:21:29 +0100
+Message-ID: <CALbNGRTiaqQQPb_UqkCKrevZYJk4+LLUh9E2VDzAcHHC6v_sTw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 06 Mar 2012 13:05:30 +0100
-In-Reply-To: <1331030173-21724-1-git-send-email-jluebbe@debian.org>
-References: <1331030173-21724-1-git-send-email-jluebbe@debian.org>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [PATCH 1/3] proj: add recipe
+Subject: Re: [meta-oe][PATCH v2 2/3] systemd: enable logging to disk instead of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,101 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 12:14:06 -0000
-X-Groupsio-MsgNum: 37634
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-pNSrcd2ID9jENBz+4kVL"
-
---=-pNSrcd2ID9jENBz+4kVL
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 06 Mar 2012 12:30:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear Jan,
+On Tue, Mar 6, 2012 at 12:59 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Tue, Mar 6, 2012 at 06:22, Koen Kooi <koen@dominion.thruhere.net> wrot=
+e:
+>> + =A0 =A0 =A0 # create dir for journal
+>> + =A0 =A0 =A0 install -d ${D}${localstatedir}/log/journal
+>
+> I am not against it creating the path for storing the logs but the
+> default configuration ought to use a memory buffer IMO.
+>
+> What people think?
+>
+To make up mind: Which amount of memory do we expect per boot
+approximately (uncompressed/compressed)?
+
+Andreas
 
 
-thank you for your patch.
-
-Am Dienstag, den 06.03.2012, 11:36 +0100 schrieb Jan Luebbe:
-
-Could you please add the version number to the commit summary?
-
-How did you test this package?
-
-> Signed-off-by: Jan Luebbe <jluebbe@debian.org>
-> ---
->  meta-oe/recipes-navigation/proj/proj.inc      |   13 +++++++++++++
->  meta-oe/recipes-navigation/proj/proj_4.7.0.bb |    7 +++++++
-
-There seems to be 4.9 in OE-Classic? Is that not usable?
-
->  2 files changed, 20 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-navigation/proj/proj.inc
->  create mode 100644 meta-oe/recipes-navigation/proj/proj_4.7.0.bb
->=20
-> diff --git a/meta-oe/recipes-navigation/proj/proj.inc b/meta-oe/recipes-n=
-avigation/proj/proj.inc
-> new file mode 100644
-> index 0000000..f6275d1
-> --- /dev/null
-> +++ b/meta-oe/recipes-navigation/proj/proj.inc
-> @@ -0,0 +1,13 @@
-> +DESCRIPTION =3D "PROJ.4 - Cartographic Projections Library"
-> +HOMEPAGE =3D "http://trac.osgeo.org/proj/"
-> +SECTION =3D "libs"
-> +
-> +INC_PR =3D "r0"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D74d9aaec5fa0cd734341e8c4dc91b=
-608"
-> +
-> +SRC_URI =3D "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
-> +
-> +inherit autotools pkgconfig
-> +
-
-Please no new line at the end.
-
-> diff --git a/meta-oe/recipes-navigation/proj/proj_4.7.0.bb b/meta-oe/reci=
-pes-navigation/proj/proj_4.7.0.bb
-> new file mode 100644
-> index 0000000..8e4f901
-> --- /dev/null
-> +++ b/meta-oe/recipes-navigation/proj/proj_4.7.0.bb
-> @@ -0,0 +1,7 @@
-> +require proj.inc
-> +
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI[md5sum] =3D "927d34623b52e0209ba2bfcca18fe8cd"
-> +SRC_URI[sha256sum] =3D "fc5440002a496532bfaf423c28bdfaf9e26cc96c84ccefcd=
-efde911efbd98986"
-> +
-
-Please no new line at the end.
-
-Also you do not need a INC file, because in OE-Core and meta-oe we try
-to only have one version included.
-
-Some of the comments also apply to your other patches.
-
-
-Thanks,
-
-Paul
-
---=-pNSrcd2ID9jENBz+4kVL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEABECAAYFAk9V/YoACgkQPX1aK2wOHViYxQCeOsxwbhp5muMlxdyA7uRKxtOA
-dm0AnRkEthphl1xcoRq+s4IHgfBzdb6W
-=tscx
------END PGP SIGNATURE-----
-
---=-pNSrcd2ID9jENBz+4kVL--
