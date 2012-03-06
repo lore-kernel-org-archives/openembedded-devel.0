@@ -1,34 +1,35 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S4qJ8-0006U6-DK for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 10:03:46 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S4qAq-0007bi-OU for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 09:55:12 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 09:55:12 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen@dominion.thruhere.net>) id 1S4qjW-000716-T5
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Mar 2012 10:31:03 +0100
+Received: by wgbdr12 with SMTP id dr12so3795647wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 09:55:12 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Tue, 06 Mar 2012 01:22:27 -0800 (PST)
+Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
+	designates 10.180.83.198 as permitted sender)
+	client-ip=10.180.83.198; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	koen@dominion.thruhere.net designates 10.180.83.198 as
+	permitted sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.83.198])
+	by 10.180.83.198 with SMTP id s6mr2383760wiy.8.1331025747603 (num_hops
+	= 1); Tue, 06 Mar 2012 01:22:27 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.83.198 with SMTP id s6mr1863740wiy.8.1331025747426;
+	Tue, 06 Mar 2012 01:22:27 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id hn8sm76113583wib.11.2012.03.06.01.22.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Mar 2012 01:22:26 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 06 Mar 2012 09:54:57 +0100
-Message-ID: <jj4jcv$dnp$1@dough.gmane.org>
-References: <1330986957-24272-1-git-send-email-obi@opendreambox.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <1330986957-24272-1-git-send-email-obi@opendreambox.org>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe][PATCH v2] udev: consolekit package requires x11
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Mar 2012 10:22:19 +0100
+Message-Id: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQkssy06WQFqvQPZzEB40IN7BbMO9I/EoO6Yryl2XvqM/zkLNohf5Pp5EgxZN6x37ahFKz/e
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH v2 1/3] systemd: enable xz compression for journald
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,77 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 09:03:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 06 Mar 2012 09:31:03 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-Op 05-03-12 23:35, Andreas Oberritter schreef:
-> * consolekit fails to build without x11, so drop the runtime dependency
-> on consolekit if x11 is unavailable.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org> --- v1->v2:
-> Instead of removing the package, drop the runtime dependency on
-> consolekit.
-
-It's only missing a PR bump now :)
-
-regards,
-
-Koen
-
-
-> 
-> meta-oe/recipes-core/udev/udev_173.bb |    2 +- 
-> meta-oe/recipes-core/udev/udev_175.bb |    2 +- 
-> meta-oe/recipes-core/udev/udev_181.bb |    2 +- 3 files changed, 3
-> insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-core/udev/udev_173.bb
-> b/meta-oe/recipes-core/udev/udev_173.bb index e4e634a..a111f11 100644 ---
-> a/meta-oe/recipes-core/udev/udev_173.bb +++
-> b/meta-oe/recipes-core/udev/udev_173.bb @@ -81,7 +81,7 @@ FILES_${PN} +=
-> "/lib/udev*" FILES_${PN}-dbg += "/lib/udev/.debug"
-> 
-> FILES_${PN}-consolekit += "${libdir}/ConsoleKit" 
-> -RDEPENDS_${PN}-consolekit += "consolekit" +RDEPENDS_${PN}-consolekit +=
-> "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
-> 
-> do_install () { install -d ${D}${usrsbindir} \ diff --git
-> a/meta-oe/recipes-core/udev/udev_175.bb
-> b/meta-oe/recipes-core/udev/udev_175.bb index b6484d9..114dbe9 100644 ---
-> a/meta-oe/recipes-core/udev/udev_175.bb +++
-> b/meta-oe/recipes-core/udev/udev_175.bb @@ -77,7 +77,7 @@ FILES_${PN} +=
-> "/lib/udev*" FILES_${PN}-dbg += "/lib/udev/.debug"
-> 
-> FILES_${PN}-consolekit += "${libdir}/ConsoleKit" 
-> -RDEPENDS_${PN}-consolekit += "consolekit" +RDEPENDS_${PN}-consolekit +=
-> "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
-> 
-> do_install () { install -d ${D}${usrsbindir} \ diff --git
-> a/meta-oe/recipes-core/udev/udev_181.bb
-> b/meta-oe/recipes-core/udev/udev_181.bb index 1e0a02a..5e27706 100644 ---
-> a/meta-oe/recipes-core/udev/udev_181.bb +++
-> b/meta-oe/recipes-core/udev/udev_181.bb @@ -73,7 +73,7 @@ FILES_${PN} +=
-> "/lib/udev*" FILES_${PN}-dbg += "/lib/udev/.debug"
-> 
-> FILES_${PN}-consolekit += "${libdir}/ConsoleKit" 
-> -RDEPENDS_${PN}-consolekit += "consolekit" +RDEPENDS_${PN}-consolekit +=
-> "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
-> 
-> FILES_udev-utils = "${bindir}/udevadm"
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk9V0N8ACgkQMkyGM64RGpEd0gCcC49CpgTooJffNtAtfnDqUJhG
-AzYAnA3AWyRgf+wGGXvHQeYIGlOjvHWM
-=Zt3c
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index 62a326e..2b549a0 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-DEPENDS = "docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
++DEPENDS = "xz docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+ SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r17"
++PR = "r18"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -44,6 +44,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
+                  --with-rootlibdir=${base_libdir} \
+                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
+                  --disable-gtk \
++                 --enable-xz \
+                "
+ 
+ # There's no docbook-xsl-native, so for the xsltproc check to false
+-- 
+1.7.2.5
 
 
 
