@@ -1,24 +1,46 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jluebbe@lasnet.de>) id 1S4sBW-0000lf-SD
+	(envelope-from <otavio.salvador@gmail.com>) id 1S4tBU-0003zF-NY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 12:04:02 +0100
-Received: from [89.204.154.91] (helo=polaris.fritz.box)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1S4rkx-0006KD-1f by authid <polaris@lasnet.de> with
-	srv_auth_cram_md5 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 11:36:40 +0100
-From: Jan Luebbe <jluebbe@debian.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2012 11:36:11 +0100
-Message-Id: <1331030173-21724-1-git-send-email-jluebbe@debian.org>
-X-Mailer: git-send-email 1.7.9.1
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: [PATCH 1/3] proj: add recipe
+	Tue, 06 Mar 2012 13:08:04 +0100
+Received: by vbbfr13 with SMTP id fr13so4516481vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Mar 2012 03:59:28 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.220.147.135 as permitted sender) client-ip=10.220.147.135; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.220.147.135 as
+	permitted sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.220.147.135])
+	by 10.220.147.135 with SMTP id l7mr2001858vcv.28.1331035168706
+	(num_hops = 1); Tue, 06 Mar 2012 03:59:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=IJZOcxrOls/1VS3KlJZ2bfCoh6MXCZ/tqcxKCsOR2/A=;
+	b=R1co0Xe5ErIJKGZR+l4dwXMIH8Thih396tLjlTtRWyNbge8llppNWnW5dZcfdbWLQe
+	qq4BYxoqLEILP/Y0lKf8omswhIrfXFCFe05+pjnbpYsN6WdI81ZlYjkx5Ktt75HEyT16
+	lqFfeal3DleZu1QQ/jPm6mRan1lAp2FavaepX95Cs2fSpMNcEK36sqGj5XkJWISQsDqT
+	c0E0Ajxkx3QnMXSXlbgxGKo2Y6klScwvvUzCxBESHBN++gHyaRsEhppNImOk9SOq2xLt
+	opfTVTr6NNrzI52Pj8NXCY0bQk+idYD0DKENUw5bZO9T2FfnyclOLvTF/ohEjribXR/i
+	wFUQ==
+MIME-Version: 1.0
+Received: by 10.220.147.135 with SMTP id l7mr1690603vcv.28.1331035168444; Tue,
+	06 Mar 2012 03:59:28 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Tue, 6 Mar 2012 03:59:28 -0800 (PST)
+In-Reply-To: <CAP9ODKo+i3d31+xUt8RnOgFeDQbUw4hSkHeoR1LomZvxF5oa8A@mail.gmail.com>
+References: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
+	<1331025741-26216-2-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKo+i3d31+xUt8RnOgFeDQbUw4hSkHeoR1LomZvxF5oa8A@mail.gmail.com>
+Date: Tue, 6 Mar 2012 08:59:28 -0300
+X-Google-Sender-Auth: 4fFveM8ibdoH7CU6tXUZYC0isz4
+Message-ID: <CAP9ODKovkJ_pHu+-__yUA=tshBiBvQwuJN7xN93P_6nrViZULw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2 2/3] systemd: enable logging to disk instead of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,50 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 11:04:03 -0000
+X-List-Received-Date: Tue, 06 Mar 2012 12:08:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jan Luebbe <jluebbe@debian.org>
----
- meta-oe/recipes-navigation/proj/proj.inc      |   13 +++++++++++++
- meta-oe/recipes-navigation/proj/proj_4.7.0.bb |    7 +++++++
- 2 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/proj/proj.inc
- create mode 100644 meta-oe/recipes-navigation/proj/proj_4.7.0.bb
+On Tue, Mar 6, 2012 at 06:22, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> + =A0 =A0 =A0 # create dir for journal
+> + =A0 =A0 =A0 install -d ${D}${localstatedir}/log/journal
 
-diff --git a/meta-oe/recipes-navigation/proj/proj.inc b/meta-oe/recipes-navigation/proj/proj.inc
-new file mode 100644
-index 0000000..f6275d1
---- /dev/null
-+++ b/meta-oe/recipes-navigation/proj/proj.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "PROJ.4 - Cartographic Projections Library"
-+HOMEPAGE = "http://trac.osgeo.org/proj/"
-+SECTION = "libs"
-+
-+INC_PR = "r0"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
-+
-+SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
-+
-+inherit autotools pkgconfig
-+
-diff --git a/meta-oe/recipes-navigation/proj/proj_4.7.0.bb b/meta-oe/recipes-navigation/proj/proj_4.7.0.bb
-new file mode 100644
-index 0000000..8e4f901
---- /dev/null
-+++ b/meta-oe/recipes-navigation/proj/proj_4.7.0.bb
-@@ -0,0 +1,7 @@
-+require proj.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "927d34623b52e0209ba2bfcca18fe8cd"
-+SRC_URI[sha256sum] = "fc5440002a496532bfaf423c28bdfaf9e26cc96c84ccefcdefde911efbd98986"
-+
--- 
-1.7.9.1
+I am not against it creating the path for storing the logs but the
+default configuration ought to use a memory buffer IMO.
 
+What people think?
+
+--
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
+
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
