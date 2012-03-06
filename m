@@ -1,47 +1,47 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S4yXl-0005FB-Eh
+	(envelope-from <tworaz666@gmail.com>) id 1S4zz5-00075P-V5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 18:51:25 +0100
-Received: by ghbz2 with SMTP id z2so2309687ghb.6
+	Tue, 06 Mar 2012 20:23:44 +0100
+Received: by wera1 with SMTP id a1so3457582wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 09:42:49 -0800 (PST)
-Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
-	10.236.197.103 as permitted sender) client-ip=10.236.197.103; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	otavio.salvador@gmail.com designates 10.236.197.103 as
-	permitted sender) smtp.mail=otavio.salvador@gmail.com;
-	dkim=pass header.i=otavio.salvador@gmail.com
-Received: from mr.google.com ([10.236.197.103])
-	by 10.236.197.103 with SMTP id s67mr36140571yhn.5.1331055769291
-	(num_hops = 1); Tue, 06 Mar 2012 09:42:49 -0800 (PST)
+	Tue, 06 Mar 2012 11:15:08 -0800 (PST)
+Received-SPF: pass (google.com: domain of tworaz666@gmail.com designates
+	10.216.136.202 as permitted sender) client-ip=10.216.136.202; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of tworaz666@gmail.com
+	designates 10.216.136.202 as permitted sender)
+	smtp.mail=tworaz666@gmail.com;
+	dkim=pass header.i=tworaz666@gmail.com
+Received: from mr.google.com ([10.216.136.202])
+	by 10.216.136.202 with SMTP id w52mr6810525wei.109.1331061307985
+	(num_hops = 1); Tue, 06 Mar 2012 11:15:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=QtaWvs9RtsgD4lOvYA6sEL7lya9xdugfKlEbTmiiQto=;
-	b=JUNk385hpmI82thUl1OVILKh8G4x18AE3sx2LL8MYN/1b1LlbGlUAq7hNXk6+B5tLL
-	lG2WTxg+96aASMs1UUbOXHi/lwcifK62pUlWjY9G9lQTljZVrDwIncp05AZGFEU5KVq8
-	wRGkAlPVy8ds+w8a/MCqGZigk8gBjJg1xntePFxPDOjMsQc7ItuwWm0mmCpWixnBFyks
-	HHmbbzD6VFtdckAQMHcZuGgEG8dM1gWDWu799rfisPB3HEhO81A3VPJDeBG4V0SBYT7z
-	kaTn5MyBeBYx3+uD5JT8XJHqDSQlhoOWqWvMijaQbhiwgIe41ZJ9cdO7FZZk9O0e27Q5
-	lyJA==
-Received: by 10.236.197.103 with SMTP id s67mr28700742yhn.5.1331055769238;
-	Tue, 06 Mar 2012 09:42:49 -0800 (PST)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id v26sm50765044yhk.1.2012.03.06.09.42.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 06 Mar 2012 09:42:48 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=rKqGsNNpH/m63woV+BnIlarjhbE8e7Rdc0Knd3fV5g8=;
+	b=yR0Hw8ipX70Cfiy6BYGlobPuXxh4owbCb53XSZ+3+iUXMAfGWBLr5MVcmp3vyjQiq9
+	xWQ2zZyysnc+BNSi30mATp2C0hzNGtBIRZaVwxlzx5shbt0iLkDvvToe26hDRh5GFoRZ
+	UoR8xLQwoMd0Lq3infDUpEkjpNKBF3SdTD85VSI9G6F11ebhawPdroymMygRM1Co1+GF
+	etvFcbsOvZoXmn2N+UPGwl2v7YSE36qU2vi/NZ1H2PWRg+3IPfi8rBua7mhYgW9V5jRC
+	nz80WKVRLaIO0REqoUCGcPsY2W+uxZj2rUTQtxFW+pdp32l/vulmvbwM7VjQbfCEWtMq
+	Cu4A==
+Received: by 10.216.136.202 with SMTP id w52mr5480176wei.109.1331061307856;
+	Tue, 06 Mar 2012 11:15:07 -0800 (PST)
+Received: from [192.168.0.14] (89-77-50-243.dynamic.chello.pl. [89.77.50.243])
+	by mx.google.com with ESMTPS id 9sm82958302wid.2.2012.03.06.11.15.06
+	(version=SSLv3 cipher=OTHER); Tue, 06 Mar 2012 11:15:07 -0800 (PST)
+Message-ID: <4F56622F.8040803@gmail.com>
+Date: Tue, 06 Mar 2012 20:14:55 +0100
+From: Piotr Tworek <tworaz666@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.1) Gecko/20120301 Thunderbird/10.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2012 17:42:39 +0000
-Message-Id: <c4f88151e3c636375023c71822f0c2ff75c2b760.1331055666.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1331055665.git.otavio@ossystems.com.br>
-References: <cover.1331055665.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1331055665.git.otavio@ossystems.com.br>
-References: <cover.1331055665.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] systemd-compat-units: rename service to run postinst scripts
+References: <1330980801-19523-1-git-send-email-tworaz666@gmail.com>
+	<20120306015941.GC6841@sakrah.homelinux.org>
+In-Reply-To: <20120306015941.GC6841@sakrah.homelinux.org>
+Subject: Re: [meta-oe] zsh: Add initial recipe for version 4.3.17.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,69 +55,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 17:51:25 -0000
+X-List-Received-Date: Tue, 06 Mar 2012 19:23:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-OE-Core uses run-postinsts script to trigger package configuration on
-first boot so the service ought to be named the same, for consistency.
+On 03/06/2012 02:59 AM, Khem Raj wrote:
+> On (05/03/12 21:53), Peter Tworek wrote:
+>> Run tested on netbook pro.
+>>
+>> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
+>> ---
+>>  meta-oe/recipes-extended/zsh/zsh_4.3.17.bb |   51 ++++++++++++++++++++++++++++
+>>  1 files changed, 51 insertions(+), 0 deletions(-)
+>>  create mode 100644 meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+>>
+>> diff --git a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+>> new file mode 100644
+>> index 0000000..9192f20
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+>> @@ -0,0 +1,51 @@
+>> +DESCRIPTION = "UNIX Shell similar to the Korn shell"
+>> +HOMEPAGE="http://www.zsh.org"
+>> +SECTION = "base/shell"
+>> +
+>> +LICENSE = "ZSH"
+>> +LIC_FILES_CHKSUM = "file://LICENCE;md5=ad234d4b46db63491c4a9789da4fb341"
+>> +
+>> +DEPENDS = "ncurses libcap libpcre gdbm groff-native"
+>> +
+>> +SRC_URI = "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
+>> +SRC_URI[md5sum] = "8258967060b2654f30001a011946ac6a"
+>> +SRC_URI[sha256sum] = "054e0452afd9c742c9f1489465175e1d4d7db50d88b602d132551d850cf7a704"
+>> +
+>> +FILES_${PN}-dbg += "\
+>> +    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
+>> +    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
+>> +    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
+>> +    "
+>> +
+>> +inherit autotools
+>> +
+>> +EXTRA_OECONF = " \
+>> +    --bindir=${base_bindir} \
+>> +    --enable-etcdir=${sysconfdir} \
+>> +    --enable-fndir=${datadir}/${PN}/${PV}/functions \
+>> +    --enable-site-fndir=${datadir}/${PN}/site-functions \
+>> +    --enable-function-subdirs \
+>> +    --with-term-lib='ncursesw ncurses' \
+>> +    --with-tcsetpgrp \
+>> +    --enable-pcre \
+>> +    --enable-cap \
+>> +    --enable-multibyte \
+>> +    --enable-gdbm \
+>> +    --enable-dynamic \
+>> +    zsh_cv_shared_environ=yes \
+>> +    "
+>> +
+>> +do_configure () {
+>> +    oe_runconf
+>> +}
+>> +
+> why do you need to run oe_runconf explicitly.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-core/systemd/systemd-compat-units.bb   |    8 ++++----
- .../{opkg.service => run-postinsts.service}        |    6 +++---
- 2 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-core/systemd/systemd-compat-units/{opkg.service => run-postinsts.service} (64%)
+Because I want to avoid invoking autotools, I just need to run
+configure. I wrote this recipe some time ago, but from what I remember
+zsh comes with some preloaded m4 macros that cause problems when default
+autootols do_configure() step is executed. The preloaded configure
+scripts works fine, even when cross-compiling. IMO it's better to use it
+than to patch the package.
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units.bb b/meta-oe/recipes-core/systemd/systemd-compat-units.bb
-index 9b60bbc..2cbce67 100644
---- a/meta-oe/recipes-core/systemd/systemd-compat-units.bb
-+++ b/meta-oe/recipes-core/systemd/systemd-compat-units.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
- 
--PR = "r14"
-+PR = "r15"
- 
- inherit allarch
- 
-@@ -12,9 +12,9 @@ SRC_URI = "file://*.service"
- do_install() {
- 	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
- 	install -d ${D}${base_libdir}/systemd/system/sysinit.target.wants/
--	install -m 0644 ${WORKDIR}/opkg.service ${D}${base_libdir}/systemd/system
--	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/basic.target.wants/
--	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
-+	install -m 0644 ${WORKDIR}/run-postinsts.service ${D}${base_libdir}/systemd/system
-+	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-+	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
- 
- 	install -m 0644 ${WORKDIR}/machineid.service ${D}${base_libdir}/systemd/system
- 	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
-diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service b/meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-similarity index 64%
-rename from meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service
-rename to meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-index 36cedf2..879a251 100644
---- a/meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service
-+++ b/meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-@@ -1,12 +1,12 @@
- [Unit]
--Description=Opkg first boot configure
-+Description=Run pending postinsts
- DefaultDependencies=no
--ConditionPathExists=|/etc/rcS.d/S98configure
-+ConditionPathExists=|/etc/rcS.d/S98run-postinsts
- After=remount-rootfs.service
- Before=sysinit.target
- 
- [Service]
--ExecStart=/etc/rcS.d/S98configure
-+ExecStart=/etc/rcS.d/S98run-postinsts
- RemainAfterExit=No
- Type=oneshot
- StandardOutput=syslog
--- 
-1.7.2.5
+/ptw
 
 
 
