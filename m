@@ -1,48 +1,31 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail2.eads.net ([80.156.45.114] helo=mail.eads.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1S4qjb-00071c-93
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 10:31:07 +0100
-Received: by wera1 with SMTP id a1so3051013wer.6
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1S4rf0-0008Lb-BN for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Mar 2012 11:30:26 +0100
+Received: from gsx3071-vs5.mxchg.m.corp ([53.147.176.148])
+	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id q26A8HXJ009263
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 01:22:32 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.216.137.97 as permitted sender)
-	client-ip=10.216.137.97; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.216.137.97 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.216.137.97])
-	by 10.216.137.97 with SMTP id x75mr7948086wei.25.1331025752033
-	(num_hops = 1); Tue, 06 Mar 2012 01:22:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references:x-gm-message-state;
-	bh=AN+YfspFaPuv6OSz8GpG6+KO1Zb083mPeTVgif+gbwM=;
-	b=X3hSTS1Ic6XI2FAcrbS2laJQ8IpDo+XwifjJ5lvL/VkRBmLxoniI56pvaKSNsEyJmj
-	Dmskk5w9p9G2VUXWpmxC4NOAfbrVJ9Lt0UqHNiYejkNbm6rdERU+s9aVngNrANnkpKat
-	VkNJbW/0FDHgPJVL/yqYBm3vVhwuodNODhIEXnSv3quBh7DNVKS/33mTBQy84+DzlZqd
-	9RTl71fXWRXJ4B+KAZNk4yRRkvOlXe2dLO1ha0lqsCRqv/QPzJkeSLTsFupoTpuPoqbc
-	Mbm250QLgK2/154EaEHXhURkWD3jAX9XJOv5KEKcCaQquF97OZgK5xpHOu33dD19EccH
-	qf+g==
+	Tue, 6 Mar 2012 11:08:18 +0100
+Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
+	gsx3071-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 6 Mar 2012 11:08:19 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.216.137.97 with SMTP id x75mr6370832wei.25.1331025751936;
-	Tue, 06 Mar 2012 01:22:31 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id r8sm50455224wiw.10.2012.03.06.01.22.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 06 Mar 2012 01:22:31 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2012 10:22:21 +0100
-Message-Id: <1331025741-26216-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
-References: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmHCLEdtplSFY6BUgRjcZzGsVvgMEvSDKnkakyY1PasQvuBEFetLnE+kxX7Bse5AgSMRjmT
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH v2 3/3] systemd: update to latest git
+Date: Tue, 6 Mar 2012 11:08:18 +0100
+Message-ID: <0C757E680E33864AB113392C7E83F910BE52D2@GSX300A.mxchg.m.corp>
+In-Reply-To: <20120305225422.GD2030@denix.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Disable GNU Hash check ?
+Thread-Index: Acz7K3i1crZXoHLFRRGV02DvA+D72gAVUxuA
+References: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
+	<20120305225422.GD2030@denix.org>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 06 Mar 2012 10:08:19.0720 (UTC)
+	FILETIME=[0E5C8880:01CCFB81]
+Subject: Re: Disable GNU Hash check ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,174 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 09:31:07 -0000
+X-List-Received-Date: Tue, 06 Mar 2012 10:30:26 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-This is in preparation for the v44 release.
 
-* drop 2 patches that aren't needed anymore
-* fix more endianness problems
-* fix journal crashes with large files
+>> INSANE_SKIP_${PN} =3D "True"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../0001-docs-fix-build-without-xsltproc.patch     |   41 --------------------
- .../0001-systemd-journald-fix-endianess-bug.patch  |   29 --------------
- meta-oe/recipes-core/systemd/systemd_git.bb        |   15 +++----
- 3 files changed, 7 insertions(+), 78 deletions(-)
- delete mode 100644 meta-oe/recipes-core/systemd/systemd/0001-docs-fix-build-without-xsltproc.patch
- delete mode 100644 meta-oe/recipes-core/systemd/systemd/0001-systemd-journald-fix-endianess-bug.patch
+>> --=20
+>> Denys
 
-diff --git a/meta-oe/recipes-core/systemd/systemd/0001-docs-fix-build-without-xsltproc.patch b/meta-oe/recipes-core/systemd/systemd/0001-docs-fix-build-without-xsltproc.patch
-deleted file mode 100644
-index 390d65c..0000000
---- a/meta-oe/recipes-core/systemd/systemd/0001-docs-fix-build-without-xsltproc.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 7395173a5af08e9e58aed33e831d0bfc6515891d Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 2 Oct 2011 19:54:29 +0200
--Subject: [PATCH 1/2] docs: fix build without xsltproc
--
--Make would choke on missing rules for man/systemd.1
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
--
--Upstream-status: rejected [fix your docbook install]
--
-----
-- Makefile.am |    5 +++++
-- 1 files changed, 5 insertions(+), 0 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index f1f975f..53f99a1 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -649,6 +649,7 @@ EXTRA_DIST += \
-- 	src/acl-util.h \
-- 	src/logs-show.h
-- 
--+if HAVE_XSLTPROC
-- MANPAGES = \
-- 	man/systemd.1 \
-- 	man/systemctl.1 \
--@@ -721,6 +722,10 @@ EXTRA_DIST += \
-- 	$(XML_IN_FILES) \
-- 	${nodist_man_MANS:=.in} \
-- 	${XML_IN_FILES:.xml.in=.html.in}
--+else
--+MANPAGES =
--+MANPAGES_ALIAS =
--+endif
-- 
-- systemd_SOURCES = \
-- 	src/main.c
---- 
--1.7.2.5
--
-diff --git a/meta-oe/recipes-core/systemd/systemd/0001-systemd-journald-fix-endianess-bug.patch b/meta-oe/recipes-core/systemd/systemd/0001-systemd-journald-fix-endianess-bug.patch
-deleted file mode 100644
-index b41d5eb..0000000
---- a/meta-oe/recipes-core/systemd/systemd/0001-systemd-journald-fix-endianess-bug.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From d228134ff5af3bd0ef1087e9bee66583c1546553 Mon Sep 17 00:00:00 2001
--From: Dirk Eibach <eibach@gdsys.de>
--Date: Wed, 29 Feb 2012 12:45:46 +0100
--Subject: [PATCH] systemd-journald: fix endianess bug
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
--
--Upstream-status: Submitted
--
-- src/journal/journal-file.c |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/src/journal/journal-file.c b/src/journal/journal-file.c
--index 20ca3f6..275caea 100644
----- a/src/journal/journal-file.c
--+++ b/src/journal/journal-file.c
--@@ -238,7 +238,7 @@ static int journal_file_allocate(JournalFile *f, uint64_t offset, uint64_t size)
--         if (fstat(f->fd, &f->last_stat) < 0)
--                 return -errno;
-- 
---        f->header->arena_size = new_size - htole64(f->header->arena_offset);
--+        f->header->arena_size = htole64(new_size - le64toh(f->header->arena_offset));
-- 
--         return 0;
-- }
---- 
--1.7.7.4
--
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index 4a8e9a1..918b314 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "xz docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
-+DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
-@@ -14,16 +14,14 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r19"
-+PR = "r21"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
--SRCREV = "d26e4270409506cd398875216413b651d6ee7de6"
-+SRCREV = "48496df65c3ad1e3ad055d2b4632da7b73211715"
- 
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
--           file://0001-docs-fix-build-without-xsltproc.patch \
-            file://0002-systemd-logind-don-t-kill-user-processes-on-exit.patch \
--           file://0001-systemd-journald-fix-endianess-bug.patch \
-            ${UCLIBCPATCHES} \
-           "
- UCLIBCPATCHES = ""
-@@ -45,6 +43,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
-                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
-                  --disable-gtk \
-                  --enable-xz \
-+                 --disable-manpages \
-                "
- 
- # There's no docbook-xsl-native, so for the xsltproc check to false
-@@ -58,7 +57,7 @@ do_install() {
- 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
- 
- 	# provide support for initramfs
--	ln -s ${base_bindir}/systemd ${D}/init
-+	ln -s ${base_libdir}/systemd/systemd ${D}/init
- 
- 	# create dir for journal
- 	install -d ${D}${localstatedir}/log/journal
-@@ -134,7 +133,7 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
- # u-a for runlevel and telinit
- 
- pkg_postinst_systemd () {
--update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
-+update-alternatives --install ${base_sbindir}/init init ${base_libdir}/systemd/systemd 300
- update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
- update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
- update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
-@@ -142,7 +141,7 @@ update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/s
- }
- 
- pkg_prerm_systemd () {
--update-alternatives --remove init ${base_bindir}/systemd
-+update-alternatives --remove init ${base_libdir}/systemd/systemd
- update-alternatives --remove halt ${base_bindir}/systemctl
- update-alternatives --remove reboot ${base_bindir}/systemctl
- update-alternatives --remove shutdown ${base_bindir}/systemctl
--- 
-1.7.2.5
+Thanks for that hint, but it is=20
 
+INSANE_SKIP_${PN} =3D True
+INSANE_SKIP_${PN}-dev =3D True
+INSANE_SKIP_${PN}-dbg =3D True
+
+That solves the problem.
+
+Regards
+Wolfgang
 
 
