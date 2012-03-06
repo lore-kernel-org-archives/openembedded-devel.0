@@ -1,27 +1,24 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1S50JE-0007Oi-1s
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <normanschleicher@gmx.de>) id 1S51rR-0000ty-5S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 20:44:32 +0100
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0H00KO77JTAM60@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	06 Mar 2012 12:33:30 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 992DE20272; Tue,
-	06 Mar 2012 13:33:29 -0500 (EST)
-Date: Tue, 06 Mar 2012 13:33:29 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 06 Mar 2012 22:23:57 +0100
+Received: (qmail invoked by alias); 06 Mar 2012 21:08:40 -0000
+Received: from 178-27-184-116-dynip.superkabel.de (EHLO [192.168.178.46])
+	[178.27.184.116]
+	by mail.gmx.net (mp002) with SMTP; 06 Mar 2012 22:08:40 +0100
+X-Authenticated: #8134161
+X-Provags-ID: V01U2FsdGVkX19RfNgOlwxROB7pja35uANbDDiaKp/aBXMeIfcxQv
+	dvy1lzIsQsEFz4
+Message-ID: <4F567CD3.4080604@gmx.de>
+Date: Tue, 06 Mar 2012 22:08:35 +0100
+From: Norman Schleicher <normanschleicher@gmx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120306183329.GD3781@denix.org>
-References: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
-	<20120305225422.GD2030@denix.org>
-	<DUB107-W44EE86246B83196B29212098510@phx.gbl>
-MIME-version: 1.0
-In-reply-to: <DUB107-W44EE86246B83196B29212098510@phx.gbl>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: Disable GNU Hash check ?
+X-Y-GMX-Trusted: 0
+Subject: ca-certificates no longer available, upgrade needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,58 +32,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 19:44:32 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 06 Mar 2012 21:23:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 06, 2012 at 09:49:55AM +0100, Luca Bolognini wrote:
-> 
-> 
-> And what if I want to disable this check only for a specific 
-> executable/library inside a package (not a complete package)?
+Hello,
+during build following error occours:
 
-Cannot do it on a per-file basis, only on a per-package. Split your package 
-into sub-packages and then do INSANE_SKIP_${PN}-pkg = "True".
+ERROR: Task 3064 (/var/lib/jenkins/jobs/pandaboard-angstrom/workspace/setup-scripts/sources/meta-openembedded/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb, do_fetch) failed with exit code '1'
 
--- 
-Denys
+a patch is available:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-February/038319.html
 
+can someone fix please ?
 
-> -------------------------Luca Bologninil.bolognini@hotmail.it
-> 
-> 
-> > Date: Mon, 5 Mar 2012 17:54:22 -0500
-> > From: denis@denix.org
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] Disable GNU Hash check ?
-> > 
-> > On Mon, Mar 05, 2012 at 06:53:05PM +0100, Hauser, Wolfgang (external) wrote:
-> > > Hello,
-> > > 
-> > > I have to create a package containing static and dynamic libraries and
-> > > some files.
-> > > The libraries are delivered by a vendor and we have to use(install) them
-> > > as they are.
-> > > 
-> > > While bitbaking the QA procedure complains about missing GNU Hashes. 
-> > > 
-> > > Is there a possibility to disable this check for a single recipe ?
-> > > 
-> > > I am using bitbake 1.10.2 and an OE mainenance-2011.03 based tree.
-> > 
-> > INSANE_SKIP_${PN} = "True"
-> > 
-> > -- 
-> > Denys
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->  		 	   		  
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Cheers Norman
+
 
 
