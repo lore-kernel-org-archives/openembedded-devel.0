@@ -1,42 +1,42 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S4yGX-0004th-Vi
+	(envelope-from <otavio.salvador@gmail.com>) id 1S4yXj-0005FA-SC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Mar 2012 18:33:38 +0100
-Received: by lagw12 with SMTP id w12so6523654lag.6
+	Tue, 06 Mar 2012 18:51:24 +0100
+Received: by yhjj56 with SMTP id j56so2319887yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2012 09:25:02 -0800 (PST)
-Received-SPF: pass (google.com: domain of raj.khem@gmail.com designates
-	10.112.30.73 as permitted sender) client-ip=10.112.30.73; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of raj.khem@gmail.com
-	designates 10.112.30.73 as permitted sender)
-	smtp.mail=raj.khem@gmail.com;
-	dkim=pass header.i=raj.khem@gmail.com
-Received: from mr.google.com ([10.112.30.73])
-	by 10.112.30.73 with SMTP id q9mr12029906lbh.30.1331054702113 (num_hops
-	= 1); Tue, 06 Mar 2012 09:25:02 -0800 (PST)
+	Tue, 06 Mar 2012 09:42:47 -0800 (PST)
+Received-SPF: pass (google.com: domain of otavio.salvador@gmail.com designates
+	10.236.186.1 as permitted sender) client-ip=10.236.186.1; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	otavio.salvador@gmail.com designates 10.236.186.1 as permitted
+	sender) smtp.mail=otavio.salvador@gmail.com;
+	dkim=pass header.i=otavio.salvador@gmail.com
+Received: from mr.google.com ([10.236.186.1])
+	by 10.236.186.1 with SMTP id v1mr36161994yhm.4.1331055767705 (num_hops
+	= 1); Tue, 06 Mar 2012 09:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=XFQoDPaHiiUhDiakofQTuHeplvWjQVCYlZ2IIGbqYzY=;
-	b=yftKFNoFXP82RPQ91INxJan/4JNt5gokXBKFauAFpyabVRVF67gx+EMghDc2JCBlZq
-	hbgialUoL7yV3LgENiiQ82jI1hv1Ixirfk5ZJ2EPMB9+6TuF649tdXkG/yd2Vho5TliZ
-	e9ShoTlfcjBBgD5norK45gjCFL/BNK1kjYZ9edPojydpyCGEg/A2CdbFeqFGH5XLPk77
-	3foJ0PoKSt2PRkiqw9T1ZyR+IAlEOZrLJfEfFHAFnvhwvkdhCnw5GMcGuYMUTeZxVV40
-	5l+PVwytvsbzoaUYCnpOFA8QJifobgxUwHFr/4+W5jpIj+txE3OTX03yBhA9VFyNOB1C
-	eJfQ==
-Received: by 10.112.30.73 with SMTP id q9mr9836950lbh.30.1331054702021; Tue,
-	06 Mar 2012 09:25:02 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.27.109 with HTTP; Tue, 6 Mar 2012 09:24:25 -0800 (PST)
-In-Reply-To: <1331054494-22912-1-git-send-email-raj.khem@gmail.com>
-References: <1331054494-22912-1-git-send-email-raj.khem@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 6 Mar 2012 09:24:25 -0800
-Message-ID: <CAMKF1srJC1FtZ3W_RPpyuU51is9U9ZB-6QOB9dZm4APg-P5m-Q@mail.gmail.com>
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=Z4DVQrBFOHRAgpSdvNHR0cK2h2mzgJ+KReFG877iwxY=;
+	b=0jxUBkcN7lU40vKZtQCZRUhArC8vE2fjZ1caPV8K747HxUZP0JeO1tKna6qUtCoPug
+	HfeOG5tB+Hs8y/uOcT/DNm2mrukbhbCcAHcz7EcZsQ49nQ9azgVgyJ9wTOwkfke2zIiT
+	61b+OV3GtsQ/MzgMuzC3LOx2hqeOdBOv1uN+nSsFZ3jQUg94JopTE2A7YIrU8O7S70aN
+	3zXDAlkHU1arN5HxrGbOpQR4nYLUufsnA7u3K+D01O7bbov7erKG7eP0sG3CvBdacdP5
+	SIXM9fc08/JnwuryV1/Scx3EIq7n/OzjFSBf1JIc/eAfZD4wffKbEpe+FSOE8XTqx5DH
+	f/VA==
+Received: by 10.236.186.1 with SMTP id v1mr28677011yhm.4.1331055767655;
+	Tue, 06 Mar 2012 09:42:47 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id v26sm50765044yhk.1.2012.03.06.09.42.45
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Mar 2012 09:42:46 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] gcc-4.6: Adjust to match gcc 4.6.3 from OE-Core
+Date: Tue,  6 Mar 2012 17:42:38 +0000
+Message-Id: <cover.1331055665.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/1] Postinst trigger improvements for images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,14 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 17:33:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 06 Mar 2012 17:51:24 -0000
 
-On Tue, Mar 6, 2012 at 9:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Update linaro patches
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Please ONLY merge this after the equivalent changes are merged onto OE-Core.
 
-Please apply after corresponding patch to OE-Core has been installed.
+The following changes since commit 13354c9e1993f6196c2c9f714a8c815f4fe27b54:
+
+  networkmanager: cleanup (2012-03-06 10:01:14 +0100)
+
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
+
+Otavio Salvador (1):
+  systemd-compat-units: rename service to run postinst scripts
+
+ .../recipes-core/systemd/systemd-compat-units.bb   |    8 ++++----
+ .../{opkg.service => run-postinsts.service}        |    6 +++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-core/systemd/systemd-compat-units/{opkg.service => run-postinsts.service} (64%)
+
+-- 
+1.7.2.5
+
 
 
