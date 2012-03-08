@@ -1,40 +1,32 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S5hlQ-0003Xt-CW
+	(envelope-from <martin.jansa@gmail.com>) id 1S5iEO-0003oi-Or
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Mar 2012 19:08:32 +0100
-Received: by vcbfl13 with SMTP id fl13so642020vcb.6
+	Thu, 08 Mar 2012 19:38:28 +0100
+Received: by eekc1 with SMTP id c1so201290eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Mar 2012 09:59:53 -0800 (PST)
+	Thu, 08 Mar 2012 10:29:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=g/Tc2zxjrpQs+r/5wM3KzpYK6pCs0CkRUbhfy/VoZUQ=;
-	b=riqknnmaMM3zFJywfqsCaGrQW4hTAC8gS6GBKsbkaXJ7LqZDa6mWLenjqsCuMkuNBy
-	CIGl8Wv+03APJStu7m2rourl2s1miPinw0JDzEUEaGz+luQo1oUTqPKmRhZF5/u8np+K
-	0f9/zNonbql//NtqbvAngSl9ZJophrRdTRpzUBQjH23Zm8LeJPjjumb+thM4gw+ApRyA
-	HNYDp9zOkJPBInHC/qM/w0d0vi46DE4m46fOo/GBna86M+GZRybsHuP1m33Ewvf5/SiA
-	f3FyMsMlJyOQzRkHAh+ugDWY01yk61aXCzQT74ZGLpSm2MPy1xFokWWs/R9/Jw1AvVZ+
-	hqmQ==
-MIME-Version: 1.0
-Received: by 10.52.99.231 with SMTP id et7mr11308547vdb.114.1331229593548;
-	Thu, 08 Mar 2012 09:59:53 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.7.208 with HTTP; Thu, 8 Mar 2012 09:59:53 -0800 (PST)
-In-Reply-To: <CALbNGRT1iEb8G=OXNog5aU9CZgO1j_Gc8bmD_pbDQ9UU96YL-Q@mail.gmail.com>
-References: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
-	<1331025741-26216-2-git-send-email-koen@dominion.thruhere.net>
-	<CAP9ODKo+i3d31+xUt8RnOgFeDQbUw4hSkHeoR1LomZvxF5oa8A@mail.gmail.com>
-	<CAP9ODKovkJ_pHu+-__yUA=tshBiBvQwuJN7xN93P_6nrViZULw@mail.gmail.com>
-	<CALbNGRTiaqQQPb_UqkCKrevZYJk4+LLUh9E2VDzAcHHC6v_sTw@mail.gmail.com>
-	<CALbNGRT1iEb8G=OXNog5aU9CZgO1j_Gc8bmD_pbDQ9UU96YL-Q@mail.gmail.com>
-Date: Thu, 8 Mar 2012 14:59:53 -0300
-X-Google-Sender-Auth: gLG5gdOLcHlcVL0pQMuOAeLjaFE
-Message-ID: <CAP9ODKrpiLEAyxx+2MHLxSaM_RkUh=AsMuA=8FECFz9TwkBdcw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lxOs0THMJrFWs5ZDZYGZCNcAfTFHqIoHMwbPHhERKLc=;
+	b=mzw8Jw3qmORRScCiltKm8DLBo6gGx6WFfbKJP9Nyqs1gmM49V642WSrCwUAsubPb7a
+	nH718GJx5CVRl1XRqFXwlvxjUIQu4op6ZNzbxv5Gpkb2GZDZlDWNfcd/yuaGMReq9E+U
+	accSrHYFItD97PSA2BZMXRQQdMFTLjBpbIIKKMzVXLGjED4NlhSQ6SJLoUvHogDdj/j2
+	l3IImb0T93EvpMnEHU1pvCcLZCyr6BqczAtzCCjfvYDiG85qnL8a1Yvt9GSkUIOvw3s5
+	ZO+TbQHF/eRdmmTf5xsmVAiKzxsGCihkHIz9YFwXSYC1IX+VqHarMrOBCRVbUsOB9gzz
+	iFAw==
+Received: by 10.14.127.139 with SMTP id d11mr2545686eei.74.1331231390322;
+	Thu, 08 Mar 2012 10:29:50 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y11sm8911166eem.3.2012.03.08.10.29.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 08 Mar 2012 10:29:49 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2 2/3] systemd: enable logging to disk instead of tmpfs
+Date: Thu,  8 Mar 2012 19:29:40 +0100
+Message-Id: <cover.1331231195.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.5
+Subject: [meta-oe][meta-efl][PATCH 0/7] PR bumps and DEPENDS fixes after tiff upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 18:08:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Mar 2012 18:38:28 -0000
 
-On Thu, Mar 8, 2012 at 14:15, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> My personal opinion: since RAM is most expensive prefer flash/disk as
-> default ( as Koen already pointed out this default can be simply
-> overridden by deleting /var/log/journal [2][3] )
+The following changes since commit 5b3974ed483418b206678acca7414b81bcf749a7:
 
-If this is the case, then let's make this patch ensure this works out
-of box ... I do think most people will get full flash/disk without
-knowing why.
+  udev: consolekit package requires x11 (2012-03-07 15:17:13 +0100)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+
+Martin Jansa (7):
+  e-base: bump EFL_SRCREV
+  poppler: add tiff to DEPENDS to make builds more deterministic
+  elementary: add poppler to DEPENDS
+  epdf: another PR bump for libtiff3->libtiff5
+  python-elementary: another PR bump for libtiff3->libtiff5
+  lcms: add tiff to DEPENDS
+  eve: another PR bump for libtiff3->libtiff5
+
+ meta-efl/classes/e-base.bbclass                    |    2 +-
+ .../python/python-elementary_svn.bb                |    2 +-
+ ...ume-Remove-the-popup.-It-s-not-needed-now.patch |  135 --------------------
+ meta-efl/recipes-efl/e17/e-wm_svn.bb               |    1 -
+ meta-efl/recipes-efl/e17/eve_svn.bb                |    2 +-
+ meta-efl/recipes-efl/efl/elementary_svn.bb         |    4 +-
+ meta-efl/recipes-efl/efl/epdf_svn.bb               |    2 +-
+ meta-oe/recipes-support/lcms/lcms_1.17.bb          |    3 +-
+ meta-oe/recipes-support/poppler/poppler.inc        |    2 +-
+ meta-oe/recipes-support/poppler/poppler_0.18.0.bb  |    2 +-
+ 10 files changed, 10 insertions(+), 145 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch
+
+-- 
+1.7.8.5
+
 
 
