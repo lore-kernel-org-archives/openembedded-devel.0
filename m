@@ -1,16 +1,16 @@
 Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gthomas@mail.chez-thomas.org>) id 1S5fB9-0002cl-NA
+	(envelope-from <gthomas@mail.chez-thomas.org>) id 1S5fEB-0002kf-0H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Mar 2012 16:22:55 +0100
+	Thu, 08 Mar 2012 16:26:03 +0100
 Received: by mail.chez-thomas.org (Postfix, from userid 996)
-	id 18556F811E3; Thu,  8 Mar 2012 08:14:19 -0700 (MST)
+	id 8C022F811DF; Thu,  8 Mar 2012 08:11:47 -0700 (MST)
 From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Mar 2012 08:14:18 -0700
-Message-Id: <1331219658-28720-1-git-send-email-gary@mlbassoc.com>
+Date: Thu,  8 Mar 2012 08:11:46 -0700
+Message-Id: <1331219506-28503-1-git-send-email-gary@mlbassoc.com>
 X-Mailer: git-send-email 1.7.7.6
-Subject: [meta-oe] README: fix typo
+Subject: [meta-oe] midori: needs GNOME icons to function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,29 +24,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 15:22:55 -0000
+X-List-Received-Date: Thu, 08 Mar 2012 15:26:03 -0000
 
-Without this change, 'git send-email' complains of a missing argument.
-Tested with git 1.7.7.6 on Fedora 16.
+Without GNOME icons installed, e.g. when using only core-image-sato,
+midori dies violently:
+   # midori
+   The configuration couldn't be loaded: No such file or directory
+   (midori:2915): Gtk-WARNING **: Error loading theme icon 'stock_new-tab' for stock: Icon 'stock_new-tab' not present in theme
+   (midori:2915): Gtk-WARNING **: Error loading theme icon 'bookmark-new' for stock: Icon 'bookmark-new' not present in theme
+   (midori:2915): Gtk-WARNING **: Error loading theme icon 'stock_add-bookmark' for stock: Icon 'stock_add-bookmark' not present in theme
+   Segmentation fault
 
 Signed-off-by: Gary Thomas <gary@mlbassoc.com>
 ---
- meta-oe/README |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/recipes-connectivity/midori/midori.inc     |    2 +-
+ .../recipes-connectivity/midori/midori_0.4.3.bb    |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/README b/meta-oe/README
-index a195919..ed14866 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -6,7 +6,7 @@ revision: HEAD
+diff --git a/meta-oe/recipes-connectivity/midori/midori.inc b/meta-oe/recipes-connectivity/midori/midori.inc
+index 6837bfb..4c7147e 100644
+--- a/meta-oe/recipes-connectivity/midori/midori.inc
++++ b/meta-oe/recipes-connectivity/midori/midori.inc
+@@ -31,7 +31,7 @@ do_install() {
+ 	oe_runmake DESTDIR=${D} install
+ }
  
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
+-RRECOMMENDS_${PN} += "glib-networking ca-certificates"
++RRECOMMENDS_${PN} += "glib-networking ca-certificates gnome-icon-theme"
  
--When sending single patches, please use something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-oe'
-+When sending single patches, please use something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe'
+ FILES_${PN}-dev += "${datadir}/vala/vapi"
  
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.3.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.3.bb
+index 635eb9e..195bcb3 100644
+--- a/meta-oe/recipes-connectivity/midori/midori_0.4.3.bb
++++ b/meta-oe/recipes-connectivity/midori/midori_0.4.3.bb
+@@ -1,6 +1,6 @@
+ require midori.inc
  
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
+            file://waf \
 -- 
 1.7.7.6
 
