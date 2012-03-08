@@ -1,38 +1,35 @@
-Received: from sputnik.urmx.de ([88.198.51.18])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Eibach@gdsys.de>) id 1S5eKT-00058k-HO
+	(envelope-from <otavio.salvador@gmail.com>) id 1S5f36-0002LS-Pp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Mar 2012 15:28:29 +0100
-Received: from mailrelay.gdsys.de (unknown [217.6.197.20])
-	by sputnik.urmx.de (Postfix) with ESMTP id 6D0AB60010CE
+	Thu, 08 Mar 2012 16:14:37 +0100
+Received: by vbbfr13 with SMTP id fr13so429849vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Mar 2012 15:19:51 +0100 (CET)
-Received: from mailsgw.gdsys.de (localhost [127.0.0.1])
-	by mailsgw.gdsys.de (Postfix) with ESMTP id 58D4A1F8802
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Mar 2012 15:19:51 +0100 (CET)
-X-Spam-Processed: srv201.gdsys.de, Thu, 08 Mar 2012 15:19:50 +0100
-	(not processed: message from trusted or authenticated source)
-X-Return-Path: Eibach@gdsys.de
-X-Envelope-From: Eibach@gdsys.de
-X-MDaemon-Deliver-To: openembedded-devel@lists.openembedded.org
+	Thu, 08 Mar 2012 07:05:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ifdtqdWh5soLhb+kF7UbjBa1K2X8IfQh16kn/aKCp2I=;
+	b=Efv8l39WSKyVW1LnsM/A1KoPcqeYXVS+Qk1KEve7ApQ0mswToAlA3z84JyW9MPpPHB
+	z/FDyxbuIMjZgJLqskyZV5526FsqPybu5Oph6Onz6wP500m16eUaeIWHYq64vXw7Tahn
+	ThYyEF2gGLpPbGlxXbteC6ZeIPvGmi1PyvJxkURPZ94XS9VP+Y/nYci8An1c0O6f+u/w
+	VmcJTNhZQ8g0NsZH0YfRhZyGLcCnxKsBDaMdd2rwk8YflfU0hRqgyPBeqwIjf3uWvc5l
+	StinBjZ4Dh+M1SlemGjXy5ip9t99sYFplOMaXycEj4Js/G7RAOdx0FY+BNIl3JRpzotY
+	Y5vA==
 MIME-Version: 1.0
-Importance: normal
-Priority: normal
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.4913
-Date: Thu, 8 Mar 2012 15:19:47 +0100
-Message-ID: <48D3D52125C49B43AE880038E2E5314BB5BFAF@SRV101.gdsys.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [meta-java] Compiling log4j1.2-native fails
-thread-index: Acz9AceD+HmHOvf4T5KK+7RrsbQEhwANHvfQ
+Received: by 10.52.95.74 with SMTP id di10mr10322059vdb.46.1331219158076; Thu,
+	08 Mar 2012 07:05:58 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Thu, 8 Mar 2012 07:05:58 -0800 (PST)
+In-Reply-To: <48D3D52125C49B43AE880038E2E5314BB5BFAF@SRV101.gdsys.de>
 References: <48D3D52125C49B43AE880038E2E5314BB5BFAB@SRV101.gdsys.de>
-From: "Eibach, Dirk" <Eibach@gdsys.de>
-To: <openembedded-devel@lists.openembedded.org>,
-	<heinold@inf.fu-berlin.de>
-X-SafeGuard_MailGateway: Version: 5.60.3.11066 SGMG Date: 20120308141951Z
-X-AntiVirus: checked by AntiVir MailGate (version: 2.0.2-5; AVE: 7.9.10.14;
-	VDF: 7.11.24.230; host: mailrelay)
+	<48D3D52125C49B43AE880038E2E5314BB5BFAF@SRV101.gdsys.de>
+Date: Thu, 8 Mar 2012 12:05:58 -0300
+X-Google-Sender-Auth: HGy9Uyo5VsoBRqyvon1EBvmSlJM
+Message-ID: <CAP9ODKq4YxX2EqTRd=wNOD=pWuQSTe+5h-gzBrMEAg96qFEucQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-java] Compiling log4j1.2-native fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,33 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 14:28:29 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Class: urn:content-classes:message
+X-List-Received-Date: Thu, 08 Mar 2012 15:14:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Mar 8, 2012 at 11:19, Eibach, Dirk <Eibach@gdsys.de> wrote:
+> Rebuilding with a freshly checked out system without parallelization did
+> not show this bug. So maybe one of this nasty parallelization issues...
 
-> With latest git of meta-java compiling 
-> log4j1.2-native-1.2.15-r0 fails while building openjdk-6, 
-> main problem seems to be:
-> 
-> | 32. ERROR in 
-> src/main/java/org/apache/log4j/net/SMTPAppender.java (at
-> line 1)
-> | 	/*
-> | 	^
-> | The type javax.mail.MessagingException cannot be resolved. It is
-> indirectly referenced from required .class files
-> 
-> Any ideas?
+I've seen some build failures and I also believe it is parallelism related.
 
-Rebuilding with a freshly checked out system without parallelization did
-not show this bug. So maybe one of this nasty parallelization issues...
-
-Cheers
-Dirk
-
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
