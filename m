@@ -1,34 +1,38 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1S5Yrz-0005DL-UQ
+Received: from sputnik.urmx.de ([88.198.51.18])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Eibach@gdsys.de>) id 1S5Z7i-0005WW-2r
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Mar 2012 09:38:44 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B8ADA2232636;
-	Thu,  8 Mar 2012 09:30:07 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 6C4262232635;
-	Thu,  8 Mar 2012 09:30:06 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-Received: from rhein.familie-heinold.de (g225007197.adsl.alicedsl.de
-	[92.225.7.197]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Thu,  8 Mar 2012 09:30:06 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 79F653C4B9; Thu,  8 Mar 2012 09:30:04 +0100 (CET)
-Date: Thu, 8 Mar 2012 09:30:04 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: "Eibach, Dirk" <Eibach@gdsys.de>
-Message-ID: <20120308083003.GA3376@rhein.zuhause.netz>
-References: <48D3D52125C49B43AE880038E2E5314BB5BFAB@SRV101.gdsys.de>
+	Thu, 08 Mar 2012 09:54:58 +0100
+Received: from mailrelay.gdsys.de (unknown [217.6.197.20])
+	by sputnik.urmx.de (Postfix) with ESMTP id 731DE60000A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Mar 2012 09:46:20 +0100 (CET)
+Received: from mailsgw.gdsys.de (localhost [127.0.0.1])
+	by mailsgw.gdsys.de (Postfix) with ESMTP id 134641F8802
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Mar 2012 09:46:21 +0100 (CET)
+X-Spam-Processed: srv201.gdsys.de, Thu, 08 Mar 2012 09:46:18 +0100
+	(not processed: message from trusted or authenticated source)
+X-Return-Path: Eibach@gdsys.de
+X-Envelope-From: Eibach@gdsys.de
+X-MDaemon-Deliver-To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-In-Reply-To: <48D3D52125C49B43AE880038E2E5314BB5BFAB@SRV101.gdsys.de>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel@lists.openembedded.org
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.4913
+Importance: normal
+Priority: normal
+Date: Thu, 8 Mar 2012 09:46:16 +0100
+Message-ID: <48D3D52125C49B43AE880038E2E5314BB5BFAC@SRV101.gdsys.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [meta-java] Compiling log4j1.2-native fails
+thread-index: Acz9BblWG7jyHWrJSxGrxpf9KKWMBQAAbnqA
+References: <48D3D52125C49B43AE880038E2E5314BB5BFAB@SRV101.gdsys.de>
+	<20120308083003.GA3376@rhein.zuhause.netz>
+From: "Eibach, Dirk" <Eibach@gdsys.de>
+To: <openembedded-devel@lists.openembedded.org>
+X-SafeGuard_MailGateway: Version: 5.60.3.11066 SGMG Date: 20120308084621Z
+X-AntiVirus: checked by AntiVir MailGate (version: 2.0.2-5; AVE: 7.9.10.14;
+	VDF: 7.11.24.222; host: mailrelay)
 Subject: Re: [meta-java] Compiling log4j1.2-native fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,31 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 08:38:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Mar 2012 08:54:58 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Class: urn:content-classes:message
 
-On Thu, Mar 08, 2012 at 09:13:37AM +0100, Eibach, Dirk wrote:
+ 
+> > With latest git of meta-java compiling 
+> log4j1.2-native-1.2.15-r0 fails 
+> > while building openjdk-6, main problem seems to be:
+> > 
+> > | 32. ERROR in src/main/java/org/apache/log4j/net/SMTPAppender.java 
+> > | (at
+> > line 1)
+> > | 	/*
+> > | 	^
+> > | The type javax.mail.MessagingException cannot be resolved. It is
+> > indirectly referenced from required .class files
+> > 
+> > Any ideas?
+> > 
+> > Cheers
+> > Dirk
 > 
-> With latest git of meta-java compiling log4j1.2-native-1.2.15-r0 fails
-> while building openjdk-6, main problem seems to be:
+> Hi,
 > 
-> | 32. ERROR in src/main/java/org/apache/log4j/net/SMTPAppender.java (at
-> line 1)
-> | 	/*
-> | 	^
-> | The type javax.mail.MessagingException cannot be resolved. It is
-> indirectly referenced from required .class files
+> I never before saw this problem. What did you choose as 
+> java-native compiler?
 > 
-> Any ideas?
-> 
-> Cheers
-> Dirk
+> Bye Henning
 
-Hi,
+I am using angstrom distribution. "bitbake -e" says:
+PREFERRED_PROVIDER_virtual/java-native="jamvm-native"
+PREFERRED_PROVIDER_virtual/javac-native="ecj-bootstrap-native"
 
-I never before saw this problem. What did you choose as java-native compiler?
+Cheers
+Dirk
 
-Bye Henning
+
 
 
