@@ -1,30 +1,36 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S5wa9-0003bV-Ia
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S5wy3-0004Fp-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 10:57:53 +0100
-Received: by iaag37 with SMTP id g37so1868795iaa.6
+	Fri, 09 Mar 2012 11:22:35 +0100
+Received: by wera1 with SMTP id a1so1016539wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2012 01:49:10 -0800 (PST)
+	Fri, 09 Mar 2012 02:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=rJbKEvqNKdcZpDvVAaDHZb2znPW74CSUz51ZO5Xv0yg=;
-	b=hgpWHta5vlfC/bDVZ/BuyglYaym+pHD796qhNbu876HYWRnx/vtZAFkj7MwY8k0R2S
-	Xd9/X2C9o3RZXf7j0hLtj/qVfwRuv2uuxokGS5L02vb8ZE/rPRBtBLnTyIqKTUWcb+T1
-	T29R7nCwHkcwsHNmNBcTOFCEccdso/JS7tMCXmL0AfZL4cQjZPljFfHpw8fCnLXj3ifc
-	vjqwLi8M2UOAsDThSI91HmVFWpysJpF81YiCGulsXbLza8lV+zScU3ojnEjx+GlRsedN
-	NpTkjtBKlqR1Qz/rWV+Grvopqc4VnKypQbeJStbEqQIH/xtFYzWWJTsL4Xu4/F0bk6EZ
-	q3sw==
-MIME-Version: 1.0
-Received: by 10.50.190.167 with SMTP id gr7mr1866674igc.53.1331286550809; Fri,
-	09 Mar 2012 01:49:10 -0800 (PST)
-Received: by 10.42.75.137 with HTTP; Fri, 9 Mar 2012 01:49:10 -0800 (PST)
-Date: Fri, 9 Mar 2012 10:49:10 +0100
-Message-ID: <CALbNGRS6OTEqfUyGw=EwDdtfyXWLF+Xb+rRJ_HBK+RnPBSD-XA@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=DG5SO33VsVi9OoGNOQPHlyjnOiAoTSNUNmZHZNCyNBM=;
+	b=GlTGyyiA4PXkMCcGPkJnTjWAXcp6ZexkMGc51HGX78o4uOBMQiRw5dL+1UhyFmnGQi
+	zbU/GX2W1vdBakjYf00BUsh0R/lJa6b2gTXtjVBnx81eTGBPOYbD3uV1mj2kMgUSMJLr
+	Tbm4VV8K566GzDKSeFQb+1B21pvzrVwFiQf6HSb2ew6AyIuaeJ2YPf0BCduKuIxMH8ZR
+	j9GBulGLEd4VlELz9tQUR5YPyvg/8A/HlllVS2GW1xs2oM4sOlp4HhY5wSrZPGXf0wxp
+	v0Zds+bC+Uu7dhKTIF1RNo6MSxdwJlZlZdsM87OMPRWDQKchKdOTTsnYrGRQKtUv53Aq
+	waWQ==
+Received: by 10.180.97.41 with SMTP id dx9mr3319760wib.9.1331288036295;
+	Fri, 09 Mar 2012 02:13:56 -0800 (PST)
+Received: from localhost.localdomain (ip-95-223-250-190.unitymediagroup.de.
+	[95.223.250.190])
+	by mx.google.com with ESMTPS id bg3sm3899212wib.10.2012.03.09.02.13.54
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Mar 2012 02:13:55 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: meta-oe github sync?
+Date: Fri,  9 Mar 2012 11:13:50 +0100
+Message-Id: <1331288035-9678-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.4
+MIME-Version: 1.0
+Subject: [meta-oe 1/6] cherokee.inc: add DEPENDS to mysql5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,14 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 09:57:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Mar 2012 10:22:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi
+error in do_configure.log was:
+checking for mysql_config... /usr/bin/mysql_config
+checking for MySQL libraries... yes
+checking for mysql.h (using mysql_config --cflags)... no
+checking if MySQL version is >= 5.0.0... yes
+...
 
-I just updated meta-oe from but today's patches are missing. What is
-the expected synchronization frequency?
+ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+Rerun configure task after fixing this. The path was '/home/andreas/tmp/oe-core-eglibc/work/armv7a-angstrom-linux-gnueabi/cherokee-1.2.98-r0.0/cherokee-1.2.98'
+ERROR: Function failed: do_qa_configure
 
-Andreas
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-connectivity/cherokee/cherokee.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/cherokee/cherokee.inc b/meta-oe/recipes-connectivity/cherokee/cherokee.inc
+index 114dbba..1e09dbf 100644
+--- a/meta-oe/recipes-connectivity/cherokee/cherokee.inc
++++ b/meta-oe/recipes-connectivity/cherokee/cherokee.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ INC_PR = "r0"
+ 
+-DEPENDS = "libpcre openssl ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++DEPENDS = "libpcre openssl mysql5 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+ SRC_URI = "http://www.cherokee-project.com/download/1.2/${PV}/cherokee-${PV}.tar.gz \
+            file://cherokee.init \
+-- 
+1.7.6.4
+
 
 
