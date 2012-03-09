@@ -1,14 +1,40 @@
-Received: from ffm.saftware.de ([83.141.3.46])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1S5luz-0000zU-V3
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Mar 2012 23:34:42 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S5tlq-0003IW-RH for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2012 07:57:46 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S5tdU-00072y-TC for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2012 07:49:08 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Mar 2012 07:49:08 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Mar 2012 07:49:08 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Mar 2012 23:26:01 +0100
-Message-Id: <1331245561-21771-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] bzip2: bump PR of all recipes depending on bzip2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 09 Mar 2012 07:48:58 +0100
+Message-ID: <jjc94n$uin$1@dough.gmane.org>
+References: <1331025741-26216-1-git-send-email-koen@dominion.thruhere.net>
+	<1331025741-26216-2-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKo+i3d31+xUt8RnOgFeDQbUw4hSkHeoR1LomZvxF5oa8A@mail.gmail.com>
+	<CAP9ODKovkJ_pHu+-__yUA=tshBiBvQwuJN7xN93P_6nrViZULw@mail.gmail.com>
+	<CALbNGRTiaqQQPb_UqkCKrevZYJk4+LLUh9E2VDzAcHHC6v_sTw@mail.gmail.com>
+	<CALbNGRT1iEb8G=OXNog5aU9CZgO1j_Gc8bmD_pbDQ9UU96YL-Q@mail.gmail.com>
+	<CAP9ODKrpiLEAyxx+2MHLxSaM_RkUh=AsMuA=8FECFz9TwkBdcw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <CAP9ODKrpiLEAyxx+2MHLxSaM_RkUh=AsMuA=8FECFz9TwkBdcw@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe][PATCH v2 2/3] systemd: enable logging to disk instead of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -22,87 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 22:34:42 -0000
+X-List-Received-Date: Fri, 09 Mar 2012 06:57:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* Commit e27af1f273e9a7348dd8f5542df9206acd9210f3 of OE-core
-  split bzip2 into binary and library packages.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb    |    2 +-
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb  |    2 +-
- meta-oe/recipes-multimedia/xbmc/xbmc_git.bb        |    2 +-
- .../imagemagick/imagemagick_6.7.5.bb               |    2 +-
- meta-oe/recipes-support/opencv/opencv_2.3.bb       |    2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+Op 08-03-12 18:59, Otavio Salvador schreef:
+> On Thu, Mar 8, 2012 at 14:15, Andreas Müller 
+> <schnitzeltony@googlemail.com> wrote:
+>> My personal opinion: since RAM is most expensive prefer flash/disk as 
+>> default ( as Koen already pointed out this default can be simply 
+>> overridden by deleting /var/log/journal [2][3] )
+> 
+> If this is the case, then let's make this patch ensure this works out of
+> box ... I do think most people will get full flash/disk without knowing
+> why.
 
-diff --git a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-index c09c8be..0b39f1b 100644
---- a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-+++ b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-@@ -13,7 +13,7 @@ DEPENDS = "libxml2 gconf dbus bzip2 gnome-mime-data zlib"
- RRECOMMENDS_${PN} = "gnome-vfs-plugin-file shared-mime-info"
- # Some legacy packages will require gnome-mime-data to be installed, but use of
- # it is deprecated.
--PR = "r0"
-+PR = "r1"
- 
- inherit gnome
- 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-index bd770ae..20331bd 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
-                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
- 
--PR = "r2"
-+PR = "r3"
- 
- SECTION = "libs"
- 
-diff --git a/meta-oe/recipes-multimedia/xbmc/xbmc_git.bb b/meta-oe/recipes-multimedia/xbmc/xbmc_git.bb
-index 2c922e7..7f27ca6 100644
---- a/meta-oe/recipes-multimedia/xbmc/xbmc_git.bb
-+++ b/meta-oe/recipes-multimedia/xbmc/xbmc_git.bb
-@@ -9,7 +9,7 @@ DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2d
- SRCREV = "f38655f1b565926846c1e17e0e7801c811037b1f"
- 
- PV = "11.0"
--PR = "r10"
-+PR = "r11"
- PR_append = "+gitr${SRCPV}"
- SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
-            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-index 1869a41..b0af84b 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
- 
--PR = "r1"
-+PR = "r2"
- 
- PATCHSET = "6"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.3.bb b/meta-oe/recipes-support/opencv/opencv_2.3.bb
-index fdb56a9..0534c27 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.3.bb
-@@ -16,7 +16,7 @@ SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
- SRCREV = "7198"
- 
- PV = "2.3.1"
--PR = "r2"
-+PR = "r3"
- 
- S = "${WORKDIR}/opencv"
- 
--- 
-1.7.5.4
+We're working on it with the systemd people to see what is causing the
+'runaway' logs.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9Zp9gACgkQMkyGM64RGpEdEQCgrvRjHfFYxa8ZSwi647xeQffa
+47IAnR/aaqwUVbVBPiE5+XV7KtYcBrrA
+=x8rX
+-----END PGP SIGNATURE-----
 
 
 
