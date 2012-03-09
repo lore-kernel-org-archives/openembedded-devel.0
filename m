@@ -1,33 +1,38 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1S62gj-0002aV-8Y
+	(envelope-from <otavio.salvador@gmail.com>) id 1S62gk-0002aW-N5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 17:29:05 +0100
-Received: by yhjj56 with SMTP id j56so912695yhj.6
+	Fri, 09 Mar 2012 17:29:06 +0100
+Received: by ggcy3 with SMTP id y3so904405ggc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2012 08:20:25 -0800 (PST)
+	Fri, 09 Mar 2012 08:20:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	bh=mlaefyQQvmPL1jtCEDJr54il45FjLaKau4q31TsmBbg=;
-	b=Hf+h9hBHRh4IdBaSoanXFKSC6XeIh+17I8E5wvkVc/t6oBi/aMoI2G/IKSHGnXuHu4
-	kON2voSYGnjFnelOv851WFUF+Qxrskmr9oWuy2J6IkDOIsIy2OOoH+UsWS+Ak6GcRpIQ
-	duulomPg34fvmvSXMNCOKo8r8WPvemD1udAI68+6cfFtqnXqs9ImO4uKYBgPYfRtN+CO
-	I6Ys55sENBQ5kwKI3RwVgOy0cg5pb5cbmO/YEEfOg7sC5IZMcFSFrgzssryfvXnX/zJP
-	990Z430DW3shxbLF1OCuPQDHRqNOcm6241kLB4eQ6fTAwHgNnYfzVZKpWNDwWMpRbWmD
-	AJCQ==
-Received: by 10.236.78.5 with SMTP id f5mr2947547yhe.103.1331310025354;
-	Fri, 09 Mar 2012 08:20:25 -0800 (PST)
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=QtaWvs9RtsgD4lOvYA6sEL7lya9xdugfKlEbTmiiQto=;
+	b=L5VSkFN0KE0UbPgMeJ4pqKLFRXkWe0CRLz90JjVyFxCDLK5oDkxdxUVa4HmnzJ4nu5
+	aokoNWn8BVLKR8zrqSBUh/2Hma+t6N6Ydpxg8KDU6fi8meI8HVyjyxsisYLsoiGN9Pls
+	yrgC7Oq/9hXq1dIJvUUxB4ZoWdO4RJE+0i9QAWtX5VHiVwEA4jKZ3MQu46hrQ4+RMC+q
+	j+ENUeXPtvEr3rqsajbmN5ui9ZJCXrO+I85k45+IG56fUIffQZ+EwUJbEcSknHW30t81
+	58lkG+78NsQx3UWQBtqz/uhaFSYyOj1YZkYyr9tpRRo4D/5qXWrthkh4rbFvyt03vNFE
+	NqbA==
+Received: by 10.101.135.32 with SMTP id m32mr920340ann.84.1331310026963;
+	Fri, 09 Mar 2012 08:20:26 -0800 (PST)
 Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id v26sm15023935yhk.1.2012.03.09.08.20.22
+	by mx.google.com with ESMTPS id v26sm15023935yhk.1.2012.03.09.08.20.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Mar 2012 08:20:23 -0800 (PST)
+	Fri, 09 Mar 2012 08:20:26 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Mar 2012 16:20:14 +0000
-Message-Id: <cover.1331309928.git.otavio@ossystems.com.br>
+Date: Fri,  9 Mar 2012 16:20:15 +0000
+Message-Id: <c236b1ab3a2bc48dc7419fac6fedc032a36f12e7.1331309928.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH][meta-oe 0/3] Pending patches in O.S. Systems' tree
+In-Reply-To: <cover.1331309928.git.otavio@ossystems.com.br>
+References: <cover.1331309928.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1331309928.git.otavio@ossystems.com.br>
+References: <cover.1331309928.git.otavio@ossystems.com.br>
+Subject: [PATCH][meta-oe 1/3] systemd-compat-units: rename service to run postinst scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +46,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 16:29:05 -0000
+X-List-Received-Date: Fri, 09 Mar 2012 16:29:06 -0000
 
-Bear on mind that all those patches depends on changes not yet merged
-on OE-Core.
+OE-Core uses run-postinsts script to trigger package configuration on
+first boot so the service ought to be named the same, for consistency.
 
-The following changes since commit 7d398784eef650c6a26b886393222f191a8c3caf:
-
-  README: fix typo (2012-03-09 07:54:41 +0100)
-
-are available in the git repository at:
-  git://github.com/OSSystems/meta-oe master
-  https://github.com/OSSystems/meta-oe/tree/master
-
-Otavio Salvador (3):
-  systemd-compat-units: rename service to run postinst scripts
-  connman: update to 0.79
-  openbox: update to 3.5.0
-
- ...connman_0.78.bbappend => connman_0.79.bbappend} |    2 +-
- .../recipes-core/systemd/systemd-compat-units.bb   |    8 +-
- .../{opkg.service => run-postinsts.service}        |    6 +-
- .../openbox/openbox/fix-decorations.patch          |   73 -
- .../openbox/openbox/fix-dialog-buttons.patch       |   38 -
- .../openbox/openbox/sync-with-3.4-working.patch    | 2739 --------------------
- .../{openbox_3.4.11.2.bb => openbox_3.5.0.bb}      |   10 +-
- 7 files changed, 11 insertions(+), 2865 deletions(-)
- rename meta-oe/recipes-connectivity/connman/{connman_0.78.bbappend => connman_0.79.bbappend} (85%)
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-core/systemd/systemd-compat-units.bb   |    8 ++++----
+ .../{opkg.service => run-postinsts.service}        |    6 +++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
  rename meta-oe/recipes-core/systemd/systemd-compat-units/{opkg.service => run-postinsts.service} (64%)
- delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-decorations.patch
- delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-dialog-buttons.patch
- delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/sync-with-3.4-working.patch
- rename meta-oe/recipes-graphics/openbox/{openbox_3.4.11.2.bb => openbox_3.5.0.bb} (81%)
 
+diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units.bb b/meta-oe/recipes-core/systemd/systemd-compat-units.bb
+index 9b60bbc..2cbce67 100644
+--- a/meta-oe/recipes-core/systemd/systemd-compat-units.bb
++++ b/meta-oe/recipes-core/systemd/systemd-compat-units.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+ 
+-PR = "r14"
++PR = "r15"
+ 
+ inherit allarch
+ 
+@@ -12,9 +12,9 @@ SRC_URI = "file://*.service"
+ do_install() {
+ 	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
+ 	install -d ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+-	install -m 0644 ${WORKDIR}/opkg.service ${D}${base_libdir}/systemd/system
+-	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/basic.target.wants/
+-	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
++	install -m 0644 ${WORKDIR}/run-postinsts.service ${D}${base_libdir}/systemd/system
++	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/basic.target.wants/
++	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+ 
+ 	install -m 0644 ${WORKDIR}/machineid.service ${D}${base_libdir}/systemd/system
+ 	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service b/meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
+similarity index 64%
+rename from meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service
+rename to meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
+index 36cedf2..879a251 100644
+--- a/meta-oe/recipes-core/systemd/systemd-compat-units/opkg.service
++++ b/meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
+@@ -1,12 +1,12 @@
+ [Unit]
+-Description=Opkg first boot configure
++Description=Run pending postinsts
+ DefaultDependencies=no
+-ConditionPathExists=|/etc/rcS.d/S98configure
++ConditionPathExists=|/etc/rcS.d/S98run-postinsts
+ After=remount-rootfs.service
+ Before=sysinit.target
+ 
+ [Service]
+-ExecStart=/etc/rcS.d/S98configure
++ExecStart=/etc/rcS.d/S98run-postinsts
+ RemainAfterExit=No
+ Type=oneshot
+ StandardOutput=syslog
 -- 
 1.7.2.5
 
