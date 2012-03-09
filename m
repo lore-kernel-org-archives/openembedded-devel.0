@@ -1,22 +1,33 @@
-Received: from mailbackup.lpgfinance.com ([46.18.228.1] helo=CARAMBAR.lpg.priv)
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Daniel.MONDON@lpgsystems.com>) id 1S60ZE-0008UF-86
+	(envelope-from <otavio.salvador@gmail.com>) id 1S62gj-0002aV-8Y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 15:13:12 +0100
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 9 Mar 2012 15:02:28 +0100
-Message-ID: <D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
-In-Reply-To: <jjcoo5$1eu$1@dough.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: JavaFX 2.1 Application on X86 and Arm
-Thread-Index: Acz95flUHe04lNRjTvmmEimfJk9YxAADgt7A
-References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
-	<jjcoo5$1eu$1@dough.gmane.org>
-From: "MONDON Daniel" <Daniel.MONDON@lpgsystems.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: JavaFX 2.1 Application on X86 and Arm
+	Fri, 09 Mar 2012 17:29:05 +0100
+Received: by yhjj56 with SMTP id j56so912695yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Mar 2012 08:20:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=mlaefyQQvmPL1jtCEDJr54il45FjLaKau4q31TsmBbg=;
+	b=Hf+h9hBHRh4IdBaSoanXFKSC6XeIh+17I8E5wvkVc/t6oBi/aMoI2G/IKSHGnXuHu4
+	kON2voSYGnjFnelOv851WFUF+Qxrskmr9oWuy2J6IkDOIsIy2OOoH+UsWS+Ak6GcRpIQ
+	duulomPg34fvmvSXMNCOKo8r8WPvemD1udAI68+6cfFtqnXqs9ImO4uKYBgPYfRtN+CO
+	I6Ys55sENBQ5kwKI3RwVgOy0cg5pb5cbmO/YEEfOg7sC5IZMcFSFrgzssryfvXnX/zJP
+	990Z430DW3shxbLF1OCuPQDHRqNOcm6241kLB4eQ6fTAwHgNnYfzVZKpWNDwWMpRbWmD
+	AJCQ==
+Received: by 10.236.78.5 with SMTP id f5mr2947547yhe.103.1331310025354;
+	Fri, 09 Mar 2012 08:20:25 -0800 (PST)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id v26sm15023935yhk.1.2012.03.09.08.20.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Mar 2012 08:20:23 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Mar 2012 16:20:14 +0000
+Message-Id: <cover.1331309928.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH][meta-oe 0/3] Pending patches in O.S. Systems' tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,32 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 14:13:12 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Mar 2012 16:29:05 -0000
 
-Hi,
+Bear on mind that all those patches depends on changes not yet merged
+on OE-Core.
 
-I'm checking if i can translate my (flash player) application into
-JavaFX.
-I've got 2 hardwares : X86 (Ubuntu) and Arm (Angstrom).
+The following changes since commit 7d398784eef650c6a26b886393222f191a8c3caf:
 
-Depending of
-http://docs.oracle.com/javafx/2.0/release_notes_linux/jfxpub-release_not
-es_linux.htm
-I've make a Hello JavaFX application running on X86 (Ubuntu 11.04).
+  README: fix typo (2012-03-09 07:54:41 +0100)
 
-But i don't found if "JDk 6 update 26 or higher" is implemented on
-Angstrom. I already have a JDK 6 Update 24, but not enought for JavaFX.
+are available in the git repository at:
+  git://github.com/OSSystems/meta-oe master
+  https://github.com/OSSystems/meta-oe/tree/master
 
-I already have gtk2 2.10.0 : what about gtk2 2.18+?
+Otavio Salvador (3):
+  systemd-compat-units: rename service to run postinst scripts
+  connman: update to 0.79
+  openbox: update to 3.5.0
 
-Thanks,
-Daniel.
+ ...connman_0.78.bbappend => connman_0.79.bbappend} |    2 +-
+ .../recipes-core/systemd/systemd-compat-units.bb   |    8 +-
+ .../{opkg.service => run-postinsts.service}        |    6 +-
+ .../openbox/openbox/fix-decorations.patch          |   73 -
+ .../openbox/openbox/fix-dialog-buttons.patch       |   38 -
+ .../openbox/openbox/sync-with-3.4-working.patch    | 2739 --------------------
+ .../{openbox_3.4.11.2.bb => openbox_3.5.0.bb}      |   10 +-
+ 7 files changed, 11 insertions(+), 2865 deletions(-)
+ rename meta-oe/recipes-connectivity/connman/{connman_0.78.bbappend => connman_0.79.bbappend} (85%)
+ rename meta-oe/recipes-core/systemd/systemd-compat-units/{opkg.service => run-postinsts.service} (64%)
+ delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-decorations.patch
+ delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/fix-dialog-buttons.patch
+ delete mode 100644 meta-oe/recipes-graphics/openbox/openbox/sync-with-3.4-working.patch
+ rename meta-oe/recipes-graphics/openbox/{openbox_3.4.11.2.bb => openbox_3.5.0.bb} (81%)
 
-
+-- 
+1.7.2.5
 
 
 
