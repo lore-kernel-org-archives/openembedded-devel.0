@@ -1,39 +1,30 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1S67CU-0002oG-Vt
+Received: from asmtpout021.mac.com ([17.148.16.96])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <daniel.zauner@me.com>) id 1S67Hl-0002wB-KG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 22:18:11 +0100
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 0431C2232636
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2012 22:09:33 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 678222232635
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2012 22:09:32 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (f052234175.adsl.alicedsl.de
-	[78.52.234.175]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2012 22:09:32 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id C09D63C4B9; Fri,  9 Mar 2012 22:09:30 +0100 (CET)
-Date: Fri, 9 Mar 2012 22:09:30 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 09 Mar 2012 22:23:37 +0100
+Received: from localhost.localdomain
+	(pd9f67e87.dip.t-dialin.net [217.246.126.135])
+	by asmtp021.mac.com (Oracle Communications Messaging Server 7u4-23.01
+	(7.0.4.23.0) 64bit (built Aug 10 2011))
+	with ESMTPSA id <0M0M005Q0W8M9S80@asmtp021.mac.com> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	09 Mar 2012 20:14:52 +0000 (GMT)
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.6.7498,1.0.260,0.0.0000
+	definitions=2012-03-09_04:2012-03-09, 2012-03-09,
+	1970-01-01 signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 suspectscore=4 phishscore=0 bulkscore=0 adultscore=0
+	classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=6.0.2-1012030000
+	definitions=main-1203090209
+From: Daniel Zauner <daniel.zauner@me.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120309210930.GA12854@rhein.zuhause.netz>
-References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
-	<jjcoo5$1eu$1@dough.gmane.org>
-	<D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
-MIME-Version: 1.0
-In-Reply-To: <D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: JavaFX 2.1 Application on X86 and Arm
+Date: Fri, 09 Mar 2012 07:07:47 +0100
+Message-id: <1331273267-17295-1-git-send-email-daniel.zauner@me.com>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH v2 [2011.03-maintenance]] Changed the Source-URI from (currently?) dead openmoko SVN-Server to new git-repository at git.yoctoproject.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +38,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 21:18:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Mar 2012 21:23:37 -0000
+Content-transfer-encoding: 7BIT
 
-On Fri, Mar 09, 2012 at 03:02:28PM +0100, MONDON Daniel wrote:
-> Hi,
-> 
-> I'm checking if i can translate my (flash player) application into
-> JavaFX.
-> I've got 2 hardwares : X86 (Ubuntu) and Arm (Angstrom).
-> 
-> Depending of
-> http://docs.oracle.com/javafx/2.0/release_notes_linux/jfxpub-release_not
-> es_linux.htm
-> I've make a Hello JavaFX application running on X86 (Ubuntu 11.04).
-> 
-> But i don't found if "JDk 6 update 26 or higher" is implemented on
-> Angstrom. I already have a JDK 6 Update 24, but not enought for JavaFX.
-> 
-> I already have gtk2 2.10.0 : what about gtk2 2.18+?
-> 
-> Thanks,
-> Daniel.
+Signed-off-by: Daniel Zauner <daniel.zauner@me.com>
+---
+ recipes/opkg-utils/opkg-utils_git.bb |   27 +++++++++++++++++++++++++++
+ recipes/opkg-utils/opkg-utils_svn.bb |   25 -------------------------
+ 2 files changed, 27 insertions(+), 25 deletions(-)
+ create mode 100644 recipes/opkg-utils/opkg-utils_git.bb
+ delete mode 100644 recipes/opkg-utils/opkg-utils_svn.bb
 
-Hi,
+diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
+new file mode 100644
+index 0000000..6adc7c1
+--- /dev/null
++++ b/recipes/opkg-utils/opkg-utils_git.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "OPKG Package Manager Utilities"
++SECTION = "base"
++HOMEPAGE = "http://wiki.openmoko.org/wiki/Opkg"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++RDEPENDS_${PN} = "python"
++RDEPENDS_${PN}_virtclass-native = ""
++SRCREV = "002d29bc605d7c2d02e4cf20a43c5277c15f5597"
++PV = "0.1.8+gitr${SRCPV}"
++PR = "r0"
++
++SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
++           file://index-ignore-filenotfound.patch \
++           file://arfile_header_split.patch \
++           file://mtime-int.patch"
++
++S = "${WORKDIR}/git"
++
++# Avoid circular dependencies from package_ipk.bbclass
++PACKAGES_virtclass-native = ""
++
++do_install() {
++        oe_runmake PREFIX=${prefix} DESTDIR=${D} install
++}
++
++BBCLASSEXTEND = "native"
++TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/recipes/opkg-utils/opkg-utils_svn.bb b/recipes/opkg-utils/opkg-utils_svn.bb
+deleted file mode 100644
+index 6b8d3ea..0000000
+--- a/recipes/opkg-utils/opkg-utils_svn.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "OPKG Package Manager Utilities"
+-SECTION = "base"
+-HOMEPAGE = "http://wiki.openmoko.org/wiki/Opkg"
+-PRIORITY = "optional"
+-RDEPENDS_${PN} = "python"
+-RDEPENDS_${PN}_virtclass-native = ""
+-SRCREV = "4747"
+-PV = "0.1.8+svnr${SRCPV}"
+-PR = "r6"
+-
+-SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http \
+-           file://index-ignore-filenotfound.patch \
+-           file://mtime-int.patch"
+-
+-S = "${WORKDIR}/opkg-utils"
+-
+-# Avoid circular dependencies from package_ipk.bbclass
+-PACKAGES_virtclass-native = ""
+-
+-do_install() {
+-        oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+-}
+-
+-BBCLASSEXTEND = "native"
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-- 
+1.7.2.5
 
-you can try the meta-java layer located at https://github.com/woglinde/meta-java which has
-icedtea 1.11.1 with openjdk b24.
-
-Bye Henning
 
 
