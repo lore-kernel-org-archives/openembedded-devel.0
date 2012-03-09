@@ -1,31 +1,33 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S5xv5-0003jm-Jx
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 12:23:35 +0100
-Received: by iaag37 with SMTP id g37so1951191iaa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S5xvf-0003oo-Q3 for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2012 12:24:11 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S5xnE-0003vI-Si for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2012 12:15:28 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Mar 2012 12:15:28 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2012 03:14:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=+QLvrJAaOh944FDBlJhGgkKWqrE2jCm0HKE00MsDlsg=;
-	b=W7O9Tk5xLwkuRU9XSWDBoj3DszEFI8f45eteEGxQk/mOkhEKCrWRcSTRGE3xmS+ekr
-	yEaOk2d/Q23OFi1tmYJ9l3XdLxs+NysGjAcMZaNp5U7bYdKt+k3wtGvWnB36Er8U5Hod
-	IO9xL6jaxWI1rwDZhy7H6d6P4M+eShI1KJd3l5bHBR5t7qAFPkrCkL8dmuajYEBzhFhR
-	us9rmjKNeuSOR9xU9TVBSAcrfsAYV1XvlNqiRNn2K+0SsBb15Fuks9Q6bNoTMmPl2EgF
-	zfZz1gUiefGlh+dsMvikwGeqjs1UNxPXtUFChBODcdMUgDoTbKfgdvxvXHCGxgfbFtOP
-	36jw==
-MIME-Version: 1.0
-Received: by 10.43.45.10 with SMTP id ui10mr2483385icb.32.1331291695995; Fri,
-	09 Mar 2012 03:14:55 -0800 (PST)
-Received: by 10.42.75.137 with HTTP; Fri, 9 Mar 2012 03:14:55 -0800 (PST)
-In-Reply-To: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
-References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
-Date: Fri, 9 Mar 2012 12:14:55 +0100
-Message-ID: <CALbNGRT0fiiDj6c+5JUnyPv2M+w-sffJioD=NPOx8YcBRxRTag@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Fri, 09 Mar 2012 12:15:28 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 09 Mar 2012 12:15:21 +0100
+Message-ID: <jjcoo5$1eu$1@dough.gmane.org>
+References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
+X-Enigmail-Version: 1.3.5
 Subject: Re: [meta-oe 5/6] cloud9: remove unneded systemd code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,14 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 11:23:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Mar 2012 11:24:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Mar 9, 2012 at 12:05 PM, Kridner, Jason <jdk@ti.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 09-03-12 12:05, Kridner, Jason schreef:
 > How is it that the service to start the server running is unneeded?
->
-The installations are done automatically by systemd.bbclass.
 
-Andreas
+It's already handled by systemd.bbclass:
+
+> diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+> b/meta-oe/recipes-devtools/cloud9/cloud9_0.5.1.bb
+
+> 
+> inherit systemd
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9Z5kcACgkQMkyGM64RGpGwUgCfQsYIjUowtseCnqwTVKw03wpM
+Q5IAnRLjcbDIp8HECVYNefGFjrSRrs9g
+=/r1q
+-----END PGP SIGNATURE-----
+
 
 
