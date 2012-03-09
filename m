@@ -1,34 +1,39 @@
-Received: from plane.gmane.org ([80.91.229.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S670Q-0002dH-AS for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 22:05:42 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S66s3-0007jM-7X for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2012 21:57:03 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2012 21:57:03 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1S67CU-0002oG-Vt
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Mar 2012 22:18:11 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 0431C2232636
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2012 21:57:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri,  9 Mar 2012 22:09:33 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 678222232635
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Mar 2012 22:09:32 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (f052234175.adsl.alicedsl.de
+	[78.52.234.175]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Mar 2012 22:09:32 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id C09D63C4B9; Fri,  9 Mar 2012 22:09:30 +0100 (CET)
+Date: Fri, 9 Mar 2012 22:09:30 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 09 Mar 2012 21:56:56 +0100
-Message-ID: <jjdqql$k7i$1@dough.gmane.org>
-References: <cover.1331309928.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <cover.1331309928.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [PATCH][meta-oe 0/3] Pending patches in O.S. Systems' tree
+Message-ID: <20120309210930.GA12854@rhein.zuhause.netz>
+References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
+	<jjcoo5$1eu$1@dough.gmane.org>
+	<D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
+MIME-Version: 1.0
+In-Reply-To: <D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: JavaFX 2.1 Application on X86 and Arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 21:05:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Mar 2012 21:18:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Mar 09, 2012 at 03:02:28PM +0100, MONDON Daniel wrote:
+> Hi,
+> 
+> I'm checking if i can translate my (flash player) application into
+> JavaFX.
+> I've got 2 hardwares : X86 (Ubuntu) and Arm (Angstrom).
+> 
+> Depending of
+> http://docs.oracle.com/javafx/2.0/release_notes_linux/jfxpub-release_not
+> es_linux.htm
+> I've make a Hello JavaFX application running on X86 (Ubuntu 11.04).
+> 
+> But i don't found if "JDk 6 update 26 or higher" is implemented on
+> Angstrom. I already have a JDK 6 Update 24, but not enought for JavaFX.
+> 
+> I already have gtk2 2.10.0 : what about gtk2 2.18+?
+> 
+> Thanks,
+> Daniel.
 
-Op 09-03-12 17:20, Otavio Salvador schreef:
-> Bear on mind that all those patches depends on changes not yet merged on
-> OE-Core.
+Hi,
 
-As I mentioned on IRC: I'm on vacation next week, you can lean on Khem to
-push the patches you need to get in to match OE-core (e.g. 1 and 2).
+you can try the meta-java layer located at https://github.com/woglinde/meta-java which has
+icedtea 1.11.1 with openjdk b24.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iEYEARECAAYFAk9abpYACgkQMkyGM64RGpG+ygCfbbefPPk+nrbXB4NyPp2bvKym
-jCEAoKgiBkKMkUMRP5rbjFmq/Dtzw2PG
-=rJ//
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
