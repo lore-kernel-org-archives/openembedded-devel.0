@@ -1,35 +1,32 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@gmail.com>) id 1S6hbH-0004cE-9a
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1S6hzx-0004wm-Vw
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2012 13:10:11 +0100
-Received: by wera1 with SMTP id a1so2401210wer.6
+	Sun, 11 Mar 2012 13:35:42 +0100
+Received: by vcbfl13 with SMTP id fl13so3317783vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2012 05:01:29 -0700 (PDT)
+	Sun, 11 Mar 2012 05:26:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=5GOUrj1AnagKcUXdLGDgtLsvzIqXJK71YGcPsFbbl+I=;
-	b=ly4T5H5L13kGOY1CRpv6X1/ZuIdC7UWi+u+l3edk9AJBVXN9m0La5RQN1y8fmLhvP9
-	2tIclYsvBOZwx+2Xbc6ybuIrswSM2KmiQoY95tTmX1r1SM/HR7xZ79iULWODQvGNzyI0
-	RbcBIprjOUS5bKoIlJ7HsVsJUhV7cK+UiiVQC7bro9gJvuJLD+YU+EOGKaQVCOSwSF3q
-	zy2z4Dxrg/cqEwmN5d7CjkWYTLTTG7/GY1c0+NjxIKA9PVojeozEghBGFhYVUeKUIbg5
-	WCoMz8FpFrvufJSP3CX/g2w3ZpTHSdfhvG5AabI08jkFfStAMgq9KQ1kq1D3gv/UdQrR
-	SRbg==
-Received: by 10.180.78.225 with SMTP id e1mr19085416wix.0.1331467289448;
-	Sun, 11 Mar 2012 05:01:29 -0700 (PDT)
-Received: from localhost.localdomain
-	(cpc9-live20-0-0-cust612.know.cable.virginmedia.com. [82.42.142.101])
-	by mx.google.com with ESMTPS id fl2sm41380799wib.4.2012.03.11.05.01.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 11 Mar 2012 05:01:28 -0700 (PDT)
-Sender: Alex Lennon <ajlennon@gmail.com>
-From: ajlennon@dynamicdevices.co.uk
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=J3ks2AzD/w4PYLtYU31J20R3lGEjGXXse9aYAP3wrBg=;
+	b=MDL4DYMW7YgYMflub4Yfq6ImeycxKDgMWKOjIEQ2JDyAuL1uXk+uSTpkyS60S4Vsay
+	wOs4ZYzOuYWAUzX5AJIBtlQ5AlSeYT1iYsPXjIyceoJo5ka66o+8QATuO26w/vHvHUoh
+	11kfWSJYY6vvQzaRtBEl2pOemtpNG3xOHNCN9Ireq/TTbdTWYd/8RnvWbSq/MLSOsapN
+	DHhGvXFcrd6A2Md2zirmWM4gaRPkhfdENPhitbvuNzLWKuHE96fZJ8yUfC8UXXxBv1nV
+	WlvaXPlc5KxyDKWbiSQx9v5js6bjW082tczg/i3uc7fyxSZfeZ3p0fMo9nquuXQ8A6RQ
+	vctw==
+MIME-Version: 1.0
+Received: by 10.52.240.177 with SMTP id wb17mr12158603vdc.63.1331468819676;
+	Sun, 11 Mar 2012 05:26:59 -0700 (PDT)
+Received: by 10.52.30.98 with HTTP; Sun, 11 Mar 2012 05:26:59 -0700 (PDT)
+In-Reply-To: <1331464418-6339-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+References: <1331464418-6339-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+Date: Sun, 11 Mar 2012 13:26:59 +0100
+Message-ID: <CACW_hTaHRCEGf5YqdCAh549KVquJJ8H6YUKNK5084ObURdRLQA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Mar 2012 12:01:17 +0000
-Message-Id: <1331467277-7665-1-git-send-email-ajlennon@dynamicdevices.co.uk>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Alex J Lennon <ajlennon@gmail.com>
-Subject: [PATCH] Backported libgdiplus 2.10 from meta-mono
+Subject: Re: [PATCH] Replaced libpng 1.2.47 recipe with 1.2.48 as source tarball no longer available from SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,91 +40,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2012 12:10:11 -0000
+X-List-Received-Date: Sun, 11 Mar 2012 12:35:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Alex J Lennon <ajlennon@gmail.com>
+2012/3/11 Alex J Lennon <ajlennon@dynamicdevices.co.uk>:
+> From: Alex J Lennon <ajlennon@gmail.com>
+>
+> Signed-off-by: Alex J Lennon <ajlennon@gmail.com>
+> ---
+> =A0recipes/libpng/libpng_1.2.47.bb | =A0 =A06 ------
+> =A0recipes/libpng/libpng_1.2.48.bb | =A0 =A06 ++++++
+> =A02 files changed, 6 insertions(+), 6 deletions(-)
+> =A0delete mode 100644 recipes/libpng/libpng_1.2.47.bb
+> =A0create mode 100644 recipes/libpng/libpng_1.2.48.bb
+>
+> diff --git a/recipes/libpng/libpng_1.2.47.bb b/recipes/libpng/libpng_1.2.=
+47.bb
+> deleted file mode 100644
+> index 8d594f1..0000000
+> --- a/recipes/libpng/libpng_1.2.47.bb
+> +++ /dev/null
+> @@ -1,6 +0,0 @@
+> -require libpng.inc
+> -
+> -PR =3D "${INC_PR}.0"
+> -
+> -SRC_URI[libpng.md5sum] =3D "4389dab9fcd2f9d57ac14701b9115f59"
+> -SRC_URI[libpng.sha256sum] =3D "f0bfa4a33b419a61cf97935cd6a15f5cbda84d116=
+c72fa4b3489b0605a00a7a2"
+> diff --git a/recipes/libpng/libpng_1.2.48.bb b/recipes/libpng/libpng_1.2.=
+48.bb
+> new file mode 100644
+> index 0000000..50a3c03
+> --- /dev/null
+> +++ b/recipes/libpng/libpng_1.2.48.bb
+> @@ -0,0 +1,6 @@
+> +require libpng.inc
+> +
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI[libpng.md5sum] =3D "7612af5660cd4b5e8c433ce53bea01a7"
+> +SRC_URI[libpng.sha256sum] =3D "f6db51aff81b6920203678b29e8c68a5e3703cf5b=
+39ae5e9e56370d17f31b1c4"
+> --
+> 1.7.5.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Signed-off-by: Alex J Lennon <ajlennon@gmail.com>
----
- recipes/libgdiplus/files/cairo/configure.in.diff |   31 ++++++++++++++++++++++
- recipes/libgdiplus/libgdiplus_2.10.bb            |   28 +++++++++++++++++++
- 2 files changed, 59 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libgdiplus/files/cairo/configure.in.diff
- create mode 100644 recipes/libgdiplus/libgdiplus_2.10.bb
+Pushed, thanks.
 
-diff --git a/recipes/libgdiplus/files/cairo/configure.in.diff b/recipes/libgdiplus/files/cairo/configure.in.diff
-new file mode 100644
-index 0000000..3465bf4
---- /dev/null
-+++ b/recipes/libgdiplus/files/cairo/configure.in.diff
-@@ -0,0 +1,31 @@
-+--- libgdiplus-2.10.orig/cairo/configure.in	2012-01-23 15:09:19.198498003 -0500
-++++ libgdiplus-2.10/cairo/configure.in	2012-01-23 15:08:24.922498003 -0500
-+@@ -26,23 +26,23 @@
-+ # libtool shared library version
-+ 
-+ # Increment if the interface has additions, changes, removals.
-+-LT_CURRENT=19
-++m4_define(lt_current, 19)
-+ 
-+ # Increment any time the source changes; set to
-+ # 0 if you increment CURRENT
-+-LT_REVISION=5
-++m4_define(lt_revision, 5)
-+ 
-+ # Increment if any interfaces have been added; set to 0
-+ # if any interfaces have been removed. removal has
-+ # precedence over adding, so set to 0 if both happened.
-+-LT_AGE=17
-++m4_define(lt_age, 17)
-+ 
-+ dnl ===========================================================================
-+ 
-+-VERSION_INFO="$LT_CURRENT:$LT_REVISION:$LT_AGE"
-++VERSION_INFO="lt_current:lt_revision:lt_age"
-+ AC_SUBST(VERSION_INFO)
-+ 
-+-LT_CURRENT_MINUS_AGE=`expr $LT_CURRENT - $LT_AGE`
-++LT_CURRENT_MINUS_AGE=`expr lt_current - lt_age`
-+ AC_SUBST(LT_CURRENT_MINUS_AGE)
-+ 
-+ CAIRO_VERSION_MAJOR=cairo_version_major()
-diff --git a/recipes/libgdiplus/libgdiplus_2.10.bb b/recipes/libgdiplus/libgdiplus_2.10.bb
-new file mode 100644
-index 0000000..c24f551
---- /dev/null
-+++ b/recipes/libgdiplus/libgdiplus_2.10.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "An Open Source implementation of the GDI+ API"
-+DESCRIPTION = "This is part of the Mono project - http://mono-project.com"
-+HOMEPAGE = "http://mono-project.com"
-+BUGTRACKER = "http://bugzilla.xamarin.com/"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fe7364dfce9f3689eb6995e7cdd56879"
-+
-+SRC_URI = "http://download.mono-project.com/sources/libgdiplus/libgdiplus-${PV}.tar.bz2 \
-+           file://cairo/configure.in.diff"
-+
-+inherit autotools pkgconfig
-+
-+DEPENDS =+ "cairo freetype fontconfig libxft libpng"
-+
-+PR = "r0"
-+
-+SRC_URI[md5sum] = "451966e8f637e3a1f02d1d30f900255d"
-+SRC_URI[sha256sum] = "2d9e0397ef5583ed855eaafcdac8cabbe1d58463ed1e4b545be6dde5b63712a4"
-+
-+
-+FILES_${PN} += "${libdir}/libgdiplus.so"
-+INSANE_SKIP_${PN} += "dev-so"
-+
-+do_install_append() {
-+  # fix pkgconfig .pc file
-+  sed -i -e s#I${STAGING_DIR_HOST}#I#g ${D}${libdir}/pkgconfig/*.pc
-+}
--- 
-1.7.5.4
+I have this one pending for the maintenance branch too, but had
+connectiivty problems yesterday
 
+will submit that later
+
+Frans
 
 
