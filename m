@@ -1,25 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S6m4W-0003W2-TG for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2012 17:56:40 +0100
-Received: from f053036207.adsl.alicedsl.de ([78.53.36.207]
-	helo=[192.168.178.43])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S6lwM-0002dC-VO for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2012 16:48:15 +0000
-Message-ID: <1331484468.3414.34.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1S6mBm-00040Q-96
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Mar 2012 18:04:10 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2F9AB2232636;
+	Sun, 11 Mar 2012 17:55:30 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 540272232635;
+	Sun, 11 Mar 2012 17:55:29 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+Received: from rhein.familie-heinold.de (g225164073.adsl.alicedsl.de
+	[92.225.164.73]) by mail.familie-heinold.de (Postfix) with ESMTPA;
+	Sun, 11 Mar 2012 17:55:29 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id E12C23C4B9; Sun, 11 Mar 2012 17:55:27 +0100 (CET)
+Date: Sun, 11 Mar 2012 17:55:27 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Mar 2012 17:47:48 +0100
-In-Reply-To: <1329916893.4422.8.camel@jethro.cheepee.homedns.org>
-References: <1329869118-16435-1-git-send-email-cheepeero@gmx.net>
-	<ji29qe$565$1@dough.gmane.org>
-	<1329916893.4422.8.camel@jethro.cheepee.homedns.org>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2] v4l-utils: skip qv4l2 instead of using host toolchain
+Message-ID: <20120311165527.GA24330@rhein.zuhause.netz>
+References: <1331467277-7665-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <1331467277-7665-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Alex J Lennon <ajlennon@gmail.com>
+Subject: Re: [PATCH] Backported libgdiplus 2.10 from meta-mono
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,71 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2012 16:56:41 -0000
-X-Groupsio-MsgNum: 37721
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-yFFKpXfb1SG2Bo/MjOwf"
+X-List-Received-Date: Sun, 11 Mar 2012 17:04:10 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-yFFKpXfb1SG2Bo/MjOwf
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Mar 11, 2012 at 12:01:17PM +0000, ajlennon@dynamicdevices.co.uk wrote:
+> From: Alex J Lennon <ajlennon@gmail.com>
+> +SRC_URI[md5sum] = "451966e8f637e3a1f02d1d30f900255d"
+> +SRC_URI[sha256sum] = "2d9e0397ef5583ed855eaafcdac8cabbe1d58463ed1e4b545be6dde5b63712a4"
+> +
+> +
+> +FILES_${PN} += "${libdir}/libgdiplus.so"
+> +INSANE_SKIP_${PN} += "dev-so"
+> +
+> +do_install_append() {
+> +  # fix pkgconfig .pc file
+> +  sed -i -e s#I${STAGING_DIR_HOST}#I#g ${D}${libdir}/pkgconfig/*.pc
+> +}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dear Ciprian,
+I tought this is handled by the pkgconfigi.bbclass which you inherit.
 
-
-thank you for your patch, but please adhere to the netiquette [1]. In
-particular please use interleaved quoting style.
-
-
-Am Mittwoch, den 22.02.2012, 15:21 +0200 schrieb Ciprian Ciubotariu:
-
-> On Wed, 2012-02-22 at 09:42 +0100, Koen Kooi wrote:
-> >=20
-> > Op 22-02-12 01:05, Ciprian Ciubotariu schreef:
-> > > See #2134
-> >=20
-> > What does that mean?
->
-> It's a reference to our internal issue tracker, which scans commit
-> messages for such 'See #blah' references and makes a nice list of
-> commits attached to each issue.
->=20
-> I can strip that if needed.
->=20
-> I was actually wondering how one can obey commit policies of more than
-> one community, and still make use of git's DSCM abilities.
-
-Well you could provide more context so that it does not disturb the
-reader. Either appending
-
-        =C2=BBThis issue is reported as ticket #2134 in the internal issue
-        tracker of *your company name*.=C2=AB
-
-or including it with more context in the commit message.
-
-Additionally more importantly your patch is missing the Signed-off-by
-line.
+Bye Henning
 
 
-Thanks,
-
-Paul
-
-
-[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
-
---=-yFFKpXfb1SG2Bo/MjOwf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEABECAAYFAk9c1zQACgkQPX1aK2wOHVgn0gCfXY+D89m5o9pQmFnd+aI9iTni
-B9UAniLLfSYwNe8zmgVlZuAI802W16cK
-=naVl
------END PGP SIGNATURE-----
-
---=-yFFKpXfb1SG2Bo/MjOwf--
