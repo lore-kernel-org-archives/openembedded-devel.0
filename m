@@ -1,32 +1,25 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1S6lDX-0002uT-4x
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Mar 2012 17:01:55 +0100
-Received: by lagw12 with SMTP id w12so3048504lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2012 08:53:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=rrakj164E/0u+vR+4Ef3cPuKE/ZhmBJvvQo3mA30xII=;
-	b=0XbfqqkwhEaGjN0OfDfEHaNpAeEauCnMaetIzxiORWEZNWipc1D8NfHDboK1k20oO+
-	+q4BGe/vk9nBCE3szCgN2cDmmfOLjNadLkBbCR8679SKNbRVAwy3y2QOz8WWNiOttTnr
-	GeRk49DSS6ms42IUpYr8gUoL/hX6o1qaCP/LKx5iZb56H8MzJDWE6suhjYupRr5aqa98
-	I7HOlNcl8CNZ0/He1Xd3v4lgHiDMjZFbsNcEJRbqtTINR18oiSifczCBDHcJbVa2PeZJ
-	4RxMhl/hbeerf9RezVN4nHhpyZLXutTMMws/1UCGVyaT45tnGSQjuyrkHomhbHF/ljR3
-	WwKg==
-Received: by 10.112.29.200 with SMTP id m8mr3467996lbh.44.1331481193314; Sun,
-	11 Mar 2012 08:53:13 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.27.109 with HTTP; Sun, 11 Mar 2012 08:52:43 -0700 (PDT)
-In-Reply-To: <1328211279-8809-1-git-send-email-tworaz666@gmail.com>
-References: <1328211279-8809-1-git-send-email-tworaz666@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Mar 2012 08:52:43 -0700
-Message-ID: <CAMKF1soDZ1aTJRvCr_WPjLDZHpzRwpPQWW79a7LyOjpHfma3mA@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1S6m4W-0003W2-TG for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Mar 2012 17:56:40 +0100
+Received: from f053036207.adsl.alicedsl.de ([78.53.36.207]
+	helo=[192.168.178.43])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1S6lwM-0002dC-VO for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Mar 2012 16:48:15 +0000
+Message-ID: <1331484468.3414.34.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome][PATCH] libgsf: Remove unnecessary gconf RDEPENDS.
+Date: Sun, 11 Mar 2012 17:47:48 +0100
+In-Reply-To: <1329916893.4422.8.camel@jethro.cheepee.homedns.org>
+References: <1329869118-16435-1-git-send-email-cheepeero@gmx.net>
+	<ji29qe$565$1@dough.gmane.org>
+	<1329916893.4422.8.camel@jethro.cheepee.homedns.org>
+X-Mailer: Evolution 3.2.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH v2] v4l-utils: skip qv4l2 instead of using host toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +33,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2012 16:01:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 11 Mar 2012 16:56:41 -0000
+X-Groupsio-MsgNum: 37721
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-yFFKpXfb1SG2Bo/MjOwf"
+
+--=-yFFKpXfb1SG2Bo/MjOwf
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 2, 2012 at 11:34 AM, Peter Tworek <tworaz666@gmail.com> wrote:
-> It's added automatically when including gconf bbclass.
->
-> Signed-off-by: Peter Tworek <tworaz666@gmail.com>
-
-can you also bump the PR and resubmit plz.
-
-> ---
-> =C2=A0meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb | =C2=A0 =C2=A02 =
---
-> =C2=A01 files changed, 0 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gno=
-me/recipes-gnome/libgsf/libgsf_1.14.21.bb
-> index 6119f86..e8cad9c 100644
-> --- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-> +++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-> @@ -19,5 +19,3 @@ EXTRA_OECONF =3D "\
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--without-gnome-vf=
-s --without-bonobo \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--disable-gtk-doc =
-\
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--with-bz2"
-> -
-> -RDEPENDS_${PN} =3D "gconf"
-> --
-> 1.7.3.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Dear Ciprian,
 
 
+thank you for your patch, but please adhere to the netiquette [1]. In
+particular please use interleaved quoting style.
+
+
+Am Mittwoch, den 22.02.2012, 15:21 +0200 schrieb Ciprian Ciubotariu:
+
+> On Wed, 2012-02-22 at 09:42 +0100, Koen Kooi wrote:
+> >=20
+> > Op 22-02-12 01:05, Ciprian Ciubotariu schreef:
+> > > See #2134
+> >=20
+> > What does that mean?
+>
+> It's a reference to our internal issue tracker, which scans commit
+> messages for such 'See #blah' references and makes a nice list of
+> commits attached to each issue.
+>=20
+> I can strip that if needed.
+>=20
+> I was actually wondering how one can obey commit policies of more than
+> one community, and still make use of git's DSCM abilities.
+
+Well you could provide more context so that it does not disturb the
+reader. Either appending
+
+        =C2=BBThis issue is reported as ticket #2134 in the internal issue
+        tracker of *your company name*.=C2=AB
+
+or including it with more context in the commit message.
+
+Additionally more importantly your patch is missing the Signed-off-by
+line.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://en.opensuse.org/openSUSE:Mailing_list_netiquette
+
+--=-yFFKpXfb1SG2Bo/MjOwf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEABECAAYFAk9c1zQACgkQPX1aK2wOHVgn0gCfXY+D89m5o9pQmFnd+aI9iTni
+B9UAniLLfSYwNe8zmgVlZuAI802W16cK
+=naVl
+-----END PGP SIGNATURE-----
+
+--=-yFFKpXfb1SG2Bo/MjOwf--
