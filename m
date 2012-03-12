@@ -1,29 +1,22 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1S77eq-0002OR-95
+	(envelope-from <eric@eukrea.com>) id 1S77ya-0003E9-V5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Mar 2012 16:59:36 +0100
-Received: by ggcy3 with SMTP id y3so2680048ggc.6
+	Mon, 12 Mar 2012 17:20:01 +0100
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 0AA364B0012
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2012 08:50:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=Se+29/K848ogG5fibvLIJylovBsdn/CYUAetxr8bXyU=;
-	b=Xb6OSbmuOBxaDJ09s9E4pmUWoTNtxzh2qh04QStXIYjHG1hYex+CsJb9gezpgLcfPB
-	mK5DT6Gw3MNz+ssZ8tjESJckwP8txuJqxyTsC9Wnosm3osJLJvmkt4pbzKJgoG/wIgUM
-	aT15EVx++EIEaD/DADtZ//D7kNLee+K3EGEhezkoETGUCJkvRF6haj/e4W6YQVEwNy+g
-	EZnD9JmQ9za6eJ/zjCH9IkFAdGflArdz2PRmYdPvEW2byFboDWLZr7DwGZEG89/4IwRh
-	JF4qjyB4W+gQv6ZPIqmIXU+wCRkUsyzlQU0fyvXCHdI26IyYOybDTpgHNc5Pf8ArWSE/
-	ImoA==
-MIME-Version: 1.0
-Received: by 10.60.25.65 with SMTP id a1mr8905312oeg.23.1331567452686; Mon, 12
-	Mar 2012 08:50:52 -0700 (PDT)
-Received: by 10.60.23.169 with HTTP; Mon, 12 Mar 2012 08:50:52 -0700 (PDT)
-Date: Mon, 12 Mar 2012 10:50:52 -0500
-Message-ID: <CAOd_LFz=vdziR_t_fKR=139=b=vzBgK4hyWxytXS+e0xf7ZTRQ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: login problem
+	Mon, 12 Mar 2012 17:11:15 +0100 (CET)
+Date: Mon, 12 Mar 2012 17:11:14 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120312171114.31605333@eb-e6520>
+In-Reply-To: <CAOd_LFz=vdziR_t_fKR=139=b=vzBgK4hyWxytXS+e0xf7ZTRQ@mail.gmail.com>
+References: <CAOd_LFz=vdziR_t_fKR=139=b=vzBgK4hyWxytXS+e0xf7ZTRQ@mail.gmail.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: login problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,25 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2012 15:59:36 -0000
+X-List-Received-Date: Mon, 12 Mar 2012 16:20:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I have a customer who would prefer to use sysvinit (over systemd), so
-I'm trying various non-systemd images.  core-image-minimal built with
-recent oe-core, meta-oe, and meta-angstrom is giving me the following
-when I try to log in:
+Hi Cliff,
 
-beagleboard login: root
-login: no valid shadow password
+Le Mon, 12 Mar 2012 10:50:52 -0500,
+Cliff Brake <cliff.brake@gmail.com> a =E9crit :
 
-Wondering if anyone else has tried this recently, and should it work?
-Are we still trying to keep sysvinit images working in Angstrom?
+> I have a customer who would prefer to use sysvinit (over systemd), so
+> I'm trying various non-systemd images.  core-image-minimal built with
+> recent oe-core, meta-oe, and meta-angstrom is giving me the following
+> when I try to log in:
+>=20
+> beagleboard login: root
+> login: no valid shadow password
+>=20
+> Wondering if anyone else has tried this recently, and should it work?
+> Are we still trying to keep sysvinit images working in Angstrom?
+>=20
+with this :
+IMAGE_INSTALL +=3D "angstrom-task-boot dropbear initscripts"
 
-Thanks,
-Cliff
+IMAGE_LOGIN_MANAGER =3D "shadow"
+IMAGE_DEV_MANAGER =3D "busybox-mdev"
+IMAGE_INIT_MANAGER =3D "sysvinit sysvinit-pidof"
+IMAGE_INITSCRIPTS =3D "initscripts"
 
--- 
-=================
-http://bec-systems.com
+IMAGE_INSTALL +=3D "\
+	task-boot \
+	${IMAGE_INITSCRIPTS} \
+	${IMAGE_DEV_MANAGER} \
+	${IMAGE_INIT_MANAGER} \
+	${IMAGE_LOGIN_MANAGER} \
+	..."
+
+
+it works fine here (oe-core + meta-oe + meta-angstrom)
+
+Eric
+--=20
+http://eukrea.com/en/news/104-2012
 
 
