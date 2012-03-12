@@ -1,35 +1,21 @@
-Received: from nk11p03mm-asmtp995.mac.com ([17.158.233.226]
-	helo=nk11p99mm-asmtpout005.mac.com)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <daniel.zauner@me.com>) id 1S7Cap-0002OB-AJ
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <cheepeero@gmx.net>) id 1S7E3p-0007lC-QT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Mar 2012 22:15:47 +0100
-MIME-version: 1.0
-Received: from [10.0.1.2] (pD9F67E87.dip.t-dialin.net [217.246.126.135])
-	by nk11p03mm-asmtp995.mac.com
-	(Oracle Communications Messaging Server 7u4-23.01(7.0.4.23.0) 64bit
-	(built Aug
-	10 2011)) with ESMTPSA id <0M0S00IA6INAMY80@nk11p03mm-asmtp995.mac.com>
-	for openembedded-devel@lists.openembedded.org; Mon,
-	12 Mar 2012 21:06:49 +0000 (GMT)
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.6.7498,1.0.260,0.0.0000
-	definitions=2012-03-12_05:2012-03-12, 2012-03-12,
-	1970-01-01 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=1 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx scancount=1 engine=6.0.2-1012030000
-	definitions=main-1203120246
-From: Daniel Zauner <daniel.zauner@me.com>
-In-reply-to: <20120312210046.GC9300@denix.org>
-Date: Mon, 12 Mar 2012 22:06:45 +0100
-Message-id: <CD70E85B-DF24-4844-8DD7-09D893416344@me.com>
-References: <1331273267-17295-1-git-send-email-daniel.zauner@me.com>
-	<20120312210046.GC9300@denix.org>
+	Mon, 12 Mar 2012 23:49:49 +0100
+Received: (qmail invoked by alias); 12 Mar 2012 22:41:06 -0000
+Received: from unknown (EHLO jethro.cheepee.homedns.org) [95.76.68.223]
+	by mail.gmx.net (mp016) with SMTP; 12 Mar 2012 23:41:06 +0100
+X-Authenticated: #14774724
+X-Provags-ID: V01U2FsdGVkX1/+sYBWyfL+dd7lReo86kNEqPtkP7SNBhaEFGGNxo
+	iuo/Xzi+bimSFU
+From: Ciprian Ciubotariu <cheepeero@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1257)
-Subject: Re: [PATCH v2 [2011.03-maintenance]] Changed the Source-URI from (currently?) dead openmoko SVN-Server to new git-repository at git.yoctoproject.org
+Date: Tue, 13 Mar 2012 00:40:56 +0200
+Message-Id: <1331592056-13949-1-git-send-email-cheepeero@gmx.net>
+X-Mailer: git-send-email 1.7.3.4
+X-Y-GMX-Trusted: 0
+Subject: [oe-core][PATCH] qt-mobility: fix build in the absence of opengl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,115 +29,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2012 21:15:47 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; CHARSET=US-ASCII
+X-List-Received-Date: Mon, 12 Mar 2012 22:49:49 -0000
 
-Thanks, will do. 
-Do you want me to re-submit the patch?
+QMake pro files don't explicitly define QT_NO_OPENGL if the
+configuration lacks opengl, but example code relies on this define.
+---
+ .../qt4/files/qt-mobility-no-opengl.patch          |   36 ++++++++++++++++++++
+ meta/recipes-qt/qt4/qt-mobility_1.2.0.inc          |    3 +-
+ 2 files changed, 38 insertions(+), 1 deletions(-)
+ create mode 100644 meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
 
-Daniel
-
-Am 12.03.2012 um 22:00 schrieb Denys Dmytriyenko:
-
-> Two comments:
-> 
-> 1. The patch description got messed up and went all in the Subject. Don't use 
-> nested square brackets [[]], use them in sequence [][] or just one of those.
-> 
-> 2. Use -M flag to git-format-patch so it catches the rename and makes the 
-> patch readable again.
-> 
-> -- 
-> Denys
-> 
-> 
-> On Fri, Mar 09, 2012 at 07:07:47AM +0100, Daniel Zauner wrote:
->> Signed-off-by: Daniel Zauner <daniel.zauner@me.com>
->> ---
->> recipes/opkg-utils/opkg-utils_git.bb |   27 +++++++++++++++++++++++++++
->> recipes/opkg-utils/opkg-utils_svn.bb |   25 -------------------------
->> 2 files changed, 27 insertions(+), 25 deletions(-)
->> create mode 100644 recipes/opkg-utils/opkg-utils_git.bb
->> delete mode 100644 recipes/opkg-utils/opkg-utils_svn.bb
->> 
->> diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
->> new file mode 100644
->> index 0000000..6adc7c1
->> --- /dev/null
->> +++ b/recipes/opkg-utils/opkg-utils_git.bb
->> @@ -0,0 +1,27 @@
->> +DESCRIPTION = "OPKG Package Manager Utilities"
->> +SECTION = "base"
->> +HOMEPAGE = "http://wiki.openmoko.org/wiki/Opkg"
->> +PRIORITY = "optional"
->> +LICENSE = "GPLv2"
->> +RDEPENDS_${PN} = "python"
->> +RDEPENDS_${PN}_virtclass-native = ""
->> +SRCREV = "002d29bc605d7c2d02e4cf20a43c5277c15f5597"
->> +PV = "0.1.8+gitr${SRCPV}"
->> +PR = "r0"
->> +
->> +SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
->> +           file://index-ignore-filenotfound.patch \
->> +           file://arfile_header_split.patch \
->> +           file://mtime-int.patch"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +# Avoid circular dependencies from package_ipk.bbclass
->> +PACKAGES_virtclass-native = ""
->> +
->> +do_install() {
->> +        oe_runmake PREFIX=${prefix} DESTDIR=${D} install
->> +}
->> +
->> +BBCLASSEXTEND = "native"
->> +TARGET_CC_ARCH += "${LDFLAGS}"
->> diff --git a/recipes/opkg-utils/opkg-utils_svn.bb b/recipes/opkg-utils/opkg-utils_svn.bb
->> deleted file mode 100644
->> index 6b8d3ea..0000000
->> --- a/recipes/opkg-utils/opkg-utils_svn.bb
->> +++ /dev/null
->> @@ -1,25 +0,0 @@
->> -DESCRIPTION = "OPKG Package Manager Utilities"
->> -SECTION = "base"
->> -HOMEPAGE = "http://wiki.openmoko.org/wiki/Opkg"
->> -PRIORITY = "optional"
->> -RDEPENDS_${PN} = "python"
->> -RDEPENDS_${PN}_virtclass-native = ""
->> -SRCREV = "4747"
->> -PV = "0.1.8+svnr${SRCPV}"
->> -PR = "r6"
->> -
->> -SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http \
->> -           file://index-ignore-filenotfound.patch \
->> -           file://mtime-int.patch"
->> -
->> -S = "${WORKDIR}/opkg-utils"
->> -
->> -# Avoid circular dependencies from package_ipk.bbclass
->> -PACKAGES_virtclass-native = ""
->> -
->> -do_install() {
->> -        oe_runmake PREFIX=${prefix} DESTDIR=${D} install
->> -}
->> -
->> -BBCLASSEXTEND = "native"
->> -TARGET_CC_ARCH += "${LDFLAGS}"
->> -- 
->> 1.7.2.5
->> 
->> 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+new file mode 100644
+index 0000000..aa15683
+--- /dev/null
++++ b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+@@ -0,0 +1,36 @@
++diff --git a/examples/declarative-camera/declarative-camera.pro b/examples/declarative-camera/declarative-camera.pro
++index 8164fbc..54fd8ad 100644
++--- a/examples/declarative-camera/declarative-camera.pro
+++++ b/examples/declarative-camera/declarative-camera.pro
++@@ -5,10 +5,10 @@ TEMPLATE=app
++ 
++ QT += declarative network
++ 
++-!maemo5 {
++-    contains(QT_CONFIG, opengl) {
++-        QT += opengl
++-    }
+++contains(QT_CONFIG, opengl): !maemo5 {
+++   QT += opengl
+++} else {
+++   DEFINES += QT_NO_OPENGL
++ }
++ 
++ win32 {
++diff --git a/examples/videographicsitem/videographicsitem.pro b/examples/videographicsitem/videographicsitem.pro
++index 8461beb..eedee2f 100644
++--- a/examples/videographicsitem/videographicsitem.pro
+++++ b/examples/videographicsitem/videographicsitem.pro
++@@ -9,7 +9,11 @@ MOBILITY = multimedia
++ 
++ QMAKE_RPATHDIR += $$DESTDIR
++ 
++-!symbian:contains(QT_CONFIG, opengl): QT += opengl
+++contains(QT_CONFIG, opengl): !symbian {
+++   QT += opengl
+++} else {
+++   DEFINES += QT_NO_OPENGL
+++}
++ 
++ HEADERS   += videoplayer.h \
++              videoitem.h
+diff --git a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
+index 593cbd6..fe9c812 100644
+--- a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
++++ b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
+@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24 \
+ 
+ SRC_URI = "http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-${PV}.tar.gz \
+            file://qt-mobility-configure.patch \
+-           file://0001-gstvideoconnector-fixed-buffers-allocation.patch"
++           file://0001-gstvideoconnector-fixed-buffers-allocation.patch \
++           file://qt-mobility-no-opengl.patch"
+ 
+ SRC_URI[md5sum]="ea5db5a8d3dd4709c2926dceda646bd8"
+ SRC_URI[sha256sum]="ee3c88975e04139ac9589f76d4be646d44fcbc4c8c1cf2db621abc154cf0ba44"
+-- 
+1.7.3.4
 
 
 
