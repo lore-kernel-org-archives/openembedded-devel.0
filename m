@@ -1,21 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1S73s3-0003PA-PC
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>) id 1S77eq-0002OR-95
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Mar 2012 12:56:59 +0100
-Received: (qmail invoked by alias); 12 Mar 2012 11:48:16 -0000
-Received: from unknown (EHLO pink.cheepee.homedns.org) [95.76.68.223]
-	by mail.gmx.net (mp038) with SMTP; 12 Mar 2012 12:48:16 +0100
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX187e8JPX0w7T4bxaphN3ylmMhjxT0lJBiPKQnWee5
-	jBjcNyWAhNbeSd
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Mar 2012 13:48:07 +0200
-Message-Id: <1331552887-13464-1-git-send-email-cheepeero@gmx.net>
-X-Mailer: git-send-email 1.7.3.4
-X-Y-GMX-Trusted: 0
-Subject: [meta-oe][PATCH v3] v4l-utils: skip qv4l2 instead of using host toolchain
+	Mon, 12 Mar 2012 16:59:36 +0100
+Received: by ggcy3 with SMTP id y3so2680048ggc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Mar 2012 08:50:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Se+29/K848ogG5fibvLIJylovBsdn/CYUAetxr8bXyU=;
+	b=Xb6OSbmuOBxaDJ09s9E4pmUWoTNtxzh2qh04QStXIYjHG1hYex+CsJb9gezpgLcfPB
+	mK5DT6Gw3MNz+ssZ8tjESJckwP8txuJqxyTsC9Wnosm3osJLJvmkt4pbzKJgoG/wIgUM
+	aT15EVx++EIEaD/DADtZ//D7kNLee+K3EGEhezkoETGUCJkvRF6haj/e4W6YQVEwNy+g
+	EZnD9JmQ9za6eJ/zjCH9IkFAdGflArdz2PRmYdPvEW2byFboDWLZr7DwGZEG89/4IwRh
+	JF4qjyB4W+gQv6ZPIqmIXU+wCRkUsyzlQU0fyvXCHdI26IyYOybDTpgHNc5Pf8ArWSE/
+	ImoA==
+MIME-Version: 1.0
+Received: by 10.60.25.65 with SMTP id a1mr8905312oeg.23.1331567452686; Mon, 12
+	Mar 2012 08:50:52 -0700 (PDT)
+Received: by 10.60.23.169 with HTTP; Mon, 12 Mar 2012 08:50:52 -0700 (PDT)
+Date: Mon, 12 Mar 2012 10:50:52 -0500
+Message-ID: <CAOd_LFz=vdziR_t_fKR=139=b=vzBgK4hyWxytXS+e0xf7ZTRQ@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: login problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,82 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2012 11:56:59 -0000
+X-List-Received-Date: Mon, 12 Mar 2012 15:59:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The makefiles in the project attempt to use the host compilers if
-qmake is installed.
----
- .../v4l2apps/files/skip-qv4l2-0.8.4.patch          |   37 ++++++++++++++++++++
- .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |    5 ++-
- 2 files changed, 40 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
+I have a customer who would prefer to use sysvinit (over systemd), so
+I'm trying various non-systemd images.  core-image-minimal built with
+recent oe-core, meta-oe, and meta-angstrom is giving me the following
+when I try to log in:
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
-new file mode 100644
-index 0000000..c8e8388
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/v4l2apps/files/skip-qv4l2-0.8.4.patch
-@@ -0,0 +1,37 @@
-+diff --git a/utils/Makefile b/utils/Makefile
-+index 71a3cb7..1d23c8b 100644
-+--- a/utils/Makefile
-++++ b/utils/Makefile
-+@@ -11,19 +11,19 @@ all install:
-+ 	fi
-+ 
-+ 	# Test whether qmake is installed, and whether it is for qt4.
-+-	@if which qmake-qt4 >/dev/null 2>&1; then \
-+-		QMAKE=qmake-qt4; \
-+-	else \
-+-		QMAKE=qmake; \
-+-	fi; \
-+-	if which $$QMAKE >/dev/null 2>&1; then \
-+-		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
-+-			if [ ! -f qv4l2/Makefile ]; then \
-+-				(cd qv4l2 && $$QMAKE) || exit 1; \
-+-			fi; \
-+-			$(MAKE) -C qv4l2 -f Makefile.install $@; \
-+-		fi \
-+-	fi
-++#	@if which qmake-qt4 >/dev/null 2>&1; then \
-++#		QMAKE=qmake-qt4; \
-++#	else \
-++#		QMAKE=qmake; \
-++#	fi; \
-++#	if which $$QMAKE >/dev/null 2>&1; then \
-++#		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
-++#			if [ ! -f qv4l2/Makefile ]; then \
-++#				(cd qv4l2 && $$QMAKE) || exit 1; \
-++#			fi; \
-++#			$(MAKE) -C qv4l2 -f Makefile.install $@; \
-++#		fi \
-++#	fi
-+ 
-+ sync-with-kernel:
-+ 	$(MAKE) -C keytable $@
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-index 3252ae3..0e361de 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "v4l2 and IR applications"
--LICENSE = "GPLv2/LGPLv2.1"
-+LICENSE = "GPLv2 | LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
-                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
- 
-@@ -8,7 +8,8 @@ DEPENDS = "jpeg"
- # libv4l was absorbed into this, let OE know that
- PROVIDES = "libv4l"
- 
--SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
-+SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
-+           file://skip-qv4l2-${PV}.patch"
- SRCREV = "v4l-utils-${PV}"
- 
- S = "${WORKDIR}/git"
+beagleboard login: root
+login: no valid shadow password
+
+Wondering if anyone else has tried this recently, and should it work?
+Are we still trying to keep sysvinit images working in Angstrom?
+
+Thanks,
+Cliff
+
 -- 
-1.7.3.4
-
+=================
+http://bec-systems.com
 
 
