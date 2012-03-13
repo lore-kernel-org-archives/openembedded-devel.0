@@ -1,32 +1,32 @@
-Received: from asmtpout023.mac.com ([17.148.16.98])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <daniel.zauner@me.com>) id 1S7X9b-0000oD-SY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Mar 2012 20:13:05 +0100
-Received: from localhost.localdomain
-	(p5B0A23D2.dip.t-dialin.net [91.10.35.210]) by asmtp023.mac.com
-	(Oracle Communications Messaging Server 7u4-23.01(7.0.4.23.0) 64bit
-	(built Aug
-	10 2011)) with ESMTPSA id <0M0U005N24UJUZ20@asmtp023.mac.com> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	13 Mar 2012 18:04:04 +0000 (GMT)
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.6.7498,1.0.260,0.0.0000
-	definitions=2012-03-13_05:2012-03-13, 2012-03-13,
-	1970-01-01 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=4 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx scancount=1 engine=6.0.2-1012030000
-	definitions=main-1203130175
-From: Daniel Zauner <daniel.zauner@me.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Mar 2012 19:03:51 +0100
-Message-id: <1331661831-1684-1-git-send-email-daniel.zauner@me.com>
-X-Mailer: git-send-email 1.7.2.5
-In-reply-to: <20120313175009.GA12674@bill-the-cat>
-References: <20120313175009.GA12674@bill-the-cat>
-Subject: [PATCH v3][2011.03-maintenance] Changed the Source-URI from (currently?) dead openmoko SVN-Server to new git-repository at git.yoctoproject.org
+	(envelope-from <jefro.net@gmail.com>)
+	id 1S7aD3-0004Oq-HU; Tue, 13 Mar 2012 23:28:49 +0100
+Received: by iaag37 with SMTP id g37so1318707iaa.6
+	for <multiple recipients>; Tue, 13 Mar 2012 15:20:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=aJVdWY2sHyGNDqWBHFcjUrxkhaJNCZNlAvsjz7iPa2g=;
+	b=yV11yOc3N+oC/0pQOG1G0nJDjNUr1EaVKIvCVAAt2FKfMlAzmJ18SBuFsdwpy4wjXN
+	hA9weLo0SakQsARUQ7kbxPd4zCgG3j6qjB2gYKStFJvM7PyjbleGi7Qu27/g+FLSztKE
+	3/AuCeMfXcKVHNWVqdvuSopwM9ds6U2qyziE6rZlCmd2dEfJImrlxkPZsqZMxMTtWIuy
+	3Jp3CB/S/RReYE0JrfZNmAZ5Udfk6lY9jzggZNMZEls1/1K4flITpRZ84KxK26GrOlhi
+	gRXcmMmVmnWsWuUdPPyNgldkUFO1y245PGDcj3qW0Hhw5DRSbHBdI+37JikaJBwBmbvd
+	cnLQ==
+MIME-Version: 1.0
+Received: by 10.50.89.168 with SMTP id bp8mr7713440igb.3.1331677203452; Tue,
+	13 Mar 2012 15:20:03 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.50.127.38 with HTTP; Tue, 13 Mar 2012 15:20:03 -0700 (PDT)
+Date: Tue, 13 Mar 2012 15:20:03 -0700
+X-Google-Sender-Auth: WkS1n4q585wJn78eehhc6xNIRGo
+Message-ID: <CA+YB3rapmuP1868ag1CjQ3-_=-PEFZR5VEc85asUtVhepQB06Q@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, tsc <tsc@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: OE TSC Minutes: 15 Feb 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,49 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Mar 2012 19:13:05 -0000
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Tue, 13 Mar 2012 22:28:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Daniel Zauner <daniel.zauner@me.com>
----
- .../{opkg-utils_svn.bb => opkg-utils_git.bb}       |   12 +++++++-----
- 1 files changed, 7 insertions(+), 5 deletions(-)
- rename recipes/opkg-utils/{opkg-utils_svn.bb => opkg-utils_git.bb} (68%)
+NOTE: I apologize for the lateness of these minutes; they go a lot faster
+when the meeting is held online!
 
-diff --git a/recipes/opkg-utils/opkg-utils_svn.bb b/recipes/opkg-utils/opkg-utils_git.bb
-similarity index 68%
-rename from recipes/opkg-utils/opkg-utils_svn.bb
-rename to recipes/opkg-utils/opkg-utils_git.bb
-index 6b8d3ea..6adc7c1 100644
---- a/recipes/opkg-utils/opkg-utils_svn.bb
-+++ b/recipes/opkg-utils/opkg-utils_git.bb
-@@ -2,17 +2,19 @@ DESCRIPTION = "OPKG Package Manager Utilities"
- SECTION = "base"
- HOMEPAGE = "http://wiki.openmoko.org/wiki/Opkg"
- PRIORITY = "optional"
-+LICENSE = "GPLv2"
- RDEPENDS_${PN} = "python"
- RDEPENDS_${PN}_virtclass-native = ""
--SRCREV = "4747"
--PV = "0.1.8+svnr${SRCPV}"
--PR = "r6"
-+SRCREV = "002d29bc605d7c2d02e4cf20a43c5277c15f5597"
-+PV = "0.1.8+gitr${SRCPV}"
-+PR = "r0"
- 
--SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http \
-+SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
-            file://index-ignore-filenotfound.patch \
-+           file://arfile_header_split.patch \
-            file://mtime-int.patch"
- 
--S = "${WORKDIR}/opkg-utils"
-+S = "${WORKDIR}/git"
- 
- # Avoid circular dependencies from package_ipk.bbclass
- PACKAGES_virtclass-native = ""
+OpenEmbedded Technical Steering Committee
+15 February, 2012
+face-to-face meeting at Embedded Linux Conference
+
+Attending:
+
+Richard Purdie
+Mark Hatle
+Tom Rini
+Khem Raj
+Paul Eggleton
+minutes: Jeff Osier-Mixon
+
+Agenda:
+
+There was no fixed agenda for this meeting - the notes below
+describe what was discussed.
+
+Yocto Project DevDay discussion
+  The Yocto Project had its first Developer Day the day before this
+  meeting. There were several presentations as well as hands-on labs
+  for both new and experienced users.
+
+BitBake interrupts
+  When BitBake hangs, there is no feedback from it, can't ctrl-c
+  Richard believes it is a threading problem, following up with Chris L
+  UPDATE: found to be a double shutdown, patches have been merged
+
+Moving to Python 3
+  Possible, not really a problem if want to do it
+  Many technical issues discussed, no action items assigned
+
+Elections
+  After next week, remind the board
+  Mark is up now, then Tom, then cycle is done
+
+zlib
+  Khem, Matt McClintock submitted many patches
+  Have been doing shakeout, decided not to inflict on issues
+  Gary Thomas found many isses as well
+  Issue - enabling basic hash, should resolve zlib issue in future
+  Proposal on oe list, doing this in yocto, could do in oe-core
+  AR: RP did this after meeting
+
+TSC Retrospective meeting with board
+  Agreed to meet with board for lunch for an annual retrospective
+
+memory usage issues
+  Discussion about current BitBake memory footprint growth
+  Use of fetchers to fetch metadata, suggested from previous
+    discussions - Jeremy Puhlman, Richard, Paul
+    do as part of bb build process or as separate step
+  Many other memory issues discussed
+  Found some memory issue and changes merged recently to improve
+    the codeparser cache.
+
+
 -- 
-1.7.2.5
-
-
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
