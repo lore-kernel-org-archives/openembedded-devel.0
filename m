@@ -1,36 +1,33 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S7QnB-00022S-Jf
+	(envelope-from <schuknecht@dresearch-fe.de>) id 1S7TRr-0005Jd-4J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Mar 2012 13:25:29 +0100
-Received: by wibhj13 with SMTP id hj13so4574603wib.6
+	Tue, 13 Mar 2012 16:15:39 +0100
+Received: by ghbz2 with SMTP id z2so638090ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Mar 2012 05:16:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=5e4Uvv0VIPeiSVSqkPaT+op60mRgihUpO6IK14sdh/I=;
-	b=Ko5Mw9/wew37aQ4/le63rWvKq48ufgkJxwsJdY3l4I/V+4A+2BGK12Dq4RwDGlqMSD
-	w2cYXsYasMyJ6M3VQt09jTzCfJNOEkRdFJyKN64i+3YLeWoq0yicQ5Y0tnBZek1is9rf
-	dJVY9aEhPYbRqBGjGFWhCTQqKLgi7cu7eoKTLDRD/IVcZK7zayZrDY4/J43v6nUghAbx
-	LhzGqCYvNfTucbe8KeBYfXStA4ks61UURmbV/3Q3V6XkGVZWz5XjwlW0VkU5h/bV2Ymi
-	9R0/4YzPf+0hj5f50yx3Luaim+vfRcVMYG4hF9kUJMk5MquDjvVowElicO67txYM3j3K
-	eZmQ==
-Received: by 10.180.95.129 with SMTP id dk1mr8130124wib.3.1331641005359;
-	Tue, 13 Mar 2012 05:16:45 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id 9sm1631941wid.2.2012.03.13.05.16.44
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Mar 2012 05:16:44 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Mar 2012 13:16:43 +0100
-Message-Id: <1331641003-31546-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	Tue, 13 Mar 2012 08:06:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type
+	:x-gm-message-state;
+	bh=Jw1T2wd5zykrMYj7qrPXgNn1NSSLg8AEzVFevEMH1uE=;
+	b=VdHX3hlhAhlzBkYWVBcEWzm1O6NNlUztoMBDuInmFS36jrwyT0c+a76Zw3e/Yhsu5K
+	SDMi0OYmNAQhsXx2udD2Tkzbod6LzhQprz6jpGfaz1cgpHmbtcfbyKnYXQMELTqky3hf
+	ZrDDdZGGFvmzS4NnMZd1szTYM+Ne5SPrv3qGEzlssRtJjT90QlzABCcL2oYlHf9/jJ8e
+	GGKKCbiW5SjgNOTl+/2YOWWt8ueFMo+0PI9WWhLT/SAI/85l9hGHzElyRQ2rGXp9L7dS
+	ZbNVRaFYMb1mdd+cPeFBv9GRS9IedzTVV7gjlnxc8v33u3ADQU7ka9ML4SiwEvAtJ9T2
+	NLdQ==
 MIME-Version: 1.0
-Subject: [meta-oe] connman: follow oe-core to 0.79
+Received: by 10.60.3.99 with SMTP id b3mr8408721oeb.72.1331651214374; Tue, 13
+	Mar 2012 08:06:54 -0700 (PDT)
+Received: by 10.182.60.199 with HTTP; Tue, 13 Mar 2012 08:06:54 -0700 (PDT)
+Date: Tue, 13 Mar 2012 16:06:54 +0100
+Message-ID: <CAAwVp3u7i6ptQ=dvCV_RGwctHqDWKLXXPXKjGwZJ_okhDx8gwg@mail.gmail.com>
+From: Mario Schuknecht <schuknecht@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQkxB2aMdnrf38JGifzHjJuiQD00UTbKG8a/MiRhZJA1Su4Ub32hgq+bHepPtcrwc2F+pMTM
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: udev_141 vs. udev_network_queue.sh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Mar 2012 12:25:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 Mar 2012 15:15:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+Hi,
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...connman_0.78.bbappend => connman_0.79.bbappend} |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/connman/{connman_0.78.bbappend => connman_0.79.bbappend} (84%)
+we use udev_141.bb and an USB-WLAN modem. The WLAN modem is configured in
+/etc/network/interfaces as ra0 and ifup ra0 works fine.
+After a boot of our system the WLAN modem network interface is not
+configured. I think the problem is that udev starts prior to networking.
+root@3065-4-00001:~# ls -l /etc/rcS.d/
+...
+lrwxrwxrwx 1 root root 14 Mar 9 16:34 S03udev -> ../init.d/udev
+...
+lrwxrwxrwx 1 root root 20 Mar 9 16:34 S40networking -> ../init.d/networking
+...
 
-diff --git a/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend b/meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
-similarity index 84%
-rename from meta-oe/recipes-connectivity/connman/connman_0.78.bbappend
-rename to meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
-index f1b05aa..167165f 100644
---- a/meta-oe/recipes-connectivity/connman/connman_0.78.bbappend
-+++ b/meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
-@@ -2,7 +2,5 @@ inherit systemd
- 
- EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
- 
--PRINC := "${@int(PRINC) + 2}"
--
- SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
--- 
-1.7.6.5
+The udev script /etc/udev/scripts/network.sh writes all not configured
+interfaces into the file /dev/udev_network_queue
+root@3065-4-00001:~# cat /dev/udev_network_queue
+eth0
+lo
+ra0
+But no script or program check this file.
+I googled  udev_network_queue and found an old bitbake recipe
+http://svn.nslu2-linux.org/svnroot/slugos/releases/slugos-3.10-beta/openemb=
+edded/packages/udev/udev_084.bb
+that
+installs  udev_network_queue.sh.
+That script checks this files and starts the interfaces.
 
+Why is this file not installed any longer? Is there any other way or
+concept to handle this situation?
 
+Kind regards,
+
+Mario
+
+--=20
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+
+Tel: +49 30 515932-240  mailto:schuknecht@dresearch-fe.de
+Fax: +49 30 515932-299
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
