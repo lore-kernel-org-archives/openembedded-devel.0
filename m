@@ -1,21 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1S7E3p-0007lC-QT
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Mar 2012 23:49:49 +0100
-Received: (qmail invoked by alias); 12 Mar 2012 22:41:06 -0000
-Received: from unknown (EHLO jethro.cheepee.homedns.org) [95.76.68.223]
-	by mail.gmx.net (mp016) with SMTP; 12 Mar 2012 23:41:06 +0100
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1/+sYBWyfL+dd7lReo86kNEqPtkP7SNBhaEFGGNxo
-	iuo/Xzi+bimSFU
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Mar 2012 00:40:56 +0200
-Message-Id: <1331592056-13949-1-git-send-email-cheepeero@gmx.net>
-X-Mailer: git-send-email 1.7.3.4
-X-Y-GMX-Trusted: 0
-Subject: [oe-core][PATCH] qt-mobility: fix build in the absence of opengl
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <jefro.net@gmail.com>)
+	id 1S7Fps-0001jm-NE; Tue, 13 Mar 2012 01:43:32 +0100
+Received: by iaag37 with SMTP id g37so7219822iaa.6
+	for <multiple recipients>; Mon, 12 Mar 2012 17:34:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=UkREer0mShOQmez2pKWUXOIcQHRFCQBN2PUebTg/+NQ=;
+	b=sKxl+c3LTAzD62ZFOnWy+y0eTPNsnI8ehpkkuRAi7qmFRx1wcuGH/Otqp8kOU9UDbc
+	ereoDTMKWtZ+4Ctx3AMALVf2SyXOLI3vOuUrXTXYPs0OvYW2VNZB8xOFwpYUD4NZoQND
+	dOFjtx9u0B0hleVDVc5NMqh1UpJ2pm8BcfaO6U3oRlS3LROdsFci0kL391hnAvHRMoTG
+	64muBB5vDoa+fxggtUT8W8orPYUiwrw5st4Ij7ksvpp6q//louWYR/ILpSffu9N+rDcb
+	qA/RX+mDuS/mZNXSAMC+gaLVKfwe0OZfp/jQr6VV5huRmQJNM+vRj6hGtbVucxMkhuHl
+	hVQg==
+MIME-Version: 1.0
+Received: by 10.50.11.201 with SMTP id s9mr1530038igb.3.1331598888283; Mon, 12
+	Mar 2012 17:34:48 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.50.127.38 with HTTP; Mon, 12 Mar 2012 17:34:48 -0700 (PDT)
+Date: Mon, 12 Mar 2012 17:34:48 -0700
+X-Google-Sender-Auth: W7ZUQThvhWPTkp-c5uYRb7fE3GA
+Message-ID: <CA+YB3rYaH8enP8htuvXX-XHExJWwL7cepX5ckKtq7QMqFD-q3g@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, 
+	openembedded-members@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Linux Foundation Collaboration Summit April 3-5 San Francisco
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,74 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2012 22:49:49 -0000
+X-List-Received-Date: Tue, 13 Mar 2012 00:43:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-QMake pro files don't explicitly define QT_NO_OPENGL if the
-configuration lacks opengl, but example code relies on this define.
----
- .../qt4/files/qt-mobility-no-opengl.patch          |   36 ++++++++++++++++++++
- meta/recipes-qt/qt4/qt-mobility_1.2.0.inc          |    3 +-
- 2 files changed, 38 insertions(+), 1 deletions(-)
- create mode 100644 meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+The Linux Foundation is holding their annual Collaboration Summit in San
+Francisco April 3-5. This is a free, invitation-only event that is set up
+as a place for Linux Foundation workgroups to collaborate. This year the
+Yocto Project will host a day-long working session on Wednesday, April
+4, outlined on the Collab Summit schedule at
+https://events.linuxfoundation.org/events/collaboration-summit/schedule. As
+the Yocto Project's community manager, I want to encourage you to request
+an invitation and attend the Yocto Project workday,
 
-diff --git a/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
-new file mode 100644
-index 0000000..aa15683
---- /dev/null
-+++ b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
-@@ -0,0 +1,36 @@
-+diff --git a/examples/declarative-camera/declarative-camera.pro b/examples/declarative-camera/declarative-camera.pro
-+index 8164fbc..54fd8ad 100644
-+--- a/examples/declarative-camera/declarative-camera.pro
-++++ b/examples/declarative-camera/declarative-camera.pro
-+@@ -5,10 +5,10 @@ TEMPLATE=app
-+ 
-+ QT += declarative network
-+ 
-+-!maemo5 {
-+-    contains(QT_CONFIG, opengl) {
-+-        QT += opengl
-+-    }
-++contains(QT_CONFIG, opengl): !maemo5 {
-++   QT += opengl
-++} else {
-++   DEFINES += QT_NO_OPENGL
-+ }
-+ 
-+ win32 {
-+diff --git a/examples/videographicsitem/videographicsitem.pro b/examples/videographicsitem/videographicsitem.pro
-+index 8461beb..eedee2f 100644
-+--- a/examples/videographicsitem/videographicsitem.pro
-++++ b/examples/videographicsitem/videographicsitem.pro
-+@@ -9,7 +9,11 @@ MOBILITY = multimedia
-+ 
-+ QMAKE_RPATHDIR += $$DESTDIR
-+ 
-+-!symbian:contains(QT_CONFIG, opengl): QT += opengl
-++contains(QT_CONFIG, opengl): !symbian {
-++   QT += opengl
-++} else {
-++   DEFINES += QT_NO_OPENGL
-++}
-+ 
-+ HEADERS   += videoplayer.h \
-+              videoitem.h
-diff --git a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-index 593cbd6..fe9c812 100644
---- a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-+++ b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24 \
- 
- SRC_URI = "http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-${PV}.tar.gz \
-            file://qt-mobility-configure.patch \
--           file://0001-gstvideoconnector-fixed-buffers-allocation.patch"
-+           file://0001-gstvideoconnector-fixed-buffers-allocation.patch \
-+           file://qt-mobility-no-opengl.patch"
- 
- SRC_URI[md5sum]="ea5db5a8d3dd4709c2926dceda646bd8"
- SRC_URI[sha256sum]="ee3c88975e04139ac9589f76d4be646d44fcbc4c8c1cf2db621abc154cf0ba44"
+You can request an invitation here:
+https://events.linuxfoundation.org/events/collaboration-summit/request-an-invitation
+
+Please note: the number of attendees at Collab Summit is very limited and
+invitation requests are *not* guaranteed to provide invitations. Also
+please note that I have no control over who receives an invitation. :)
+ Hope to see you there.
+
 -- 
-1.7.3.4
-
-
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
