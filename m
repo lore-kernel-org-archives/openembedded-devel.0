@@ -1,37 +1,38 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1S7W1t-0005MF-RA
+	(envelope-from <tom.rini@gmail.com>) id 1S7W6Q-0002wf-Hq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Mar 2012 19:01:02 +0100
-Received: by iaag37 with SMTP id g37so1032387iaa.6
+	Tue, 13 Mar 2012 19:05:48 +0100
+Received: by yhjj56 with SMTP id j56so852403yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Mar 2012 10:52:17 -0700 (PDT)
+	Tue, 13 Mar 2012 10:56:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=RWp/mFAF2HHGYJpgt90eaYuwk3Uhr0NFtA7lRmDfYas=;
-	b=pX9acwSKE6txs9j4TQTy9PoSj31ZiWsIS/nntmUsbUdTRSbltcv746G6Bc7TVl/zn8
-	dbdRvtMYhB4LcoxHif3fppHWZdHdbxhyYjr3trLbHgkfIV8s2tyPoJOTMxUwaghf4WkW
-	+M6q6BT+15zDXrO2e95Ti4IWt7CH48qs6fW4pA/ySYJZzmG4vMnfdGrTrYnU4EdhQPP3
-	PhmerXCw8DaidWXqA/HjpFm0b4hJum8Op5QdLhR08egq9gaR+IF/9YAVgrsOV4BzUpsN
-	cWiEp23Lk+KunvO+h6ZgOH0VuUU+daYZeYqU/q0wMhgQ88FkkcdvD2Dj+PlfQlZEae3f
-	ZW8Q==
-Received: by 10.50.156.229 with SMTP id wh5mr6402947igb.28.1331661137049;
-	Tue, 13 Mar 2012 10:52:17 -0700 (PDT)
+	:user-agent; bh=cFqJ3445WRmLEgyOB0DT/Ln47pvn0vBzskvfLuVJZpA=;
+	b=HEUEfzz1CpmRl/TLolNZckdeQUKSCYib8SkWh8OhyHqzP822dEFQ+3QSKhAmCkhJgM
+	m+UvJ+aHSsP8Noe+s8y829TzSNWDulO5GP7MfM9R+6pSCWiv4nw9gueS0O/z2jJAUdFl
+	w+SOyHNh7eKRtuojln3bfn4vmNb6LmpW0D8GkKMG2ClqjCSpGXppXzipPPj6mWVB2H+/
+	KAOz8VplL3TvXPzbBAIwtLkyRyxd17HdpUfLUmSFYA3tACuDVaThHaZhBccFtVMIjpsj
+	HR9OxyyUPOQEba15RAY36Ql33G9KDn7oFaoZXAGbtifA8byCGc+ryrYZ+FeYxLpPf0Tz
+	c2Ww==
+Received: by 10.68.236.73 with SMTP id us9mr7491779pbc.116.1331661417600;
+	Tue, 13 Mar 2012 10:56:57 -0700 (PDT)
 Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id wp4sm10784069igc.3.2012.03.13.10.52.15
+	by mx.google.com with ESMTPS id k3sm267879pbd.17.2012.03.13.10.56.56
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 13 Mar 2012 10:52:16 -0700 (PDT)
-Date: Tue, 13 Mar 2012 10:52:23 -0700
+	Tue, 13 Mar 2012 10:56:56 -0700 (PDT)
+Date: Tue, 13 Mar 2012 10:57:04 -0700
 From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120313175223.GB12674@bill-the-cat>
+Message-ID: <20120313175704.GC12674@bill-the-cat>
 References: <1331472732-28668-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1331472732-28668-2-git-send-email-fransmeulenbroeks@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1331472732-28668-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1331472732-28668-2-git-send-email-fransmeulenbroeks@gmail.com>
 Organization: Texas Instruments
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [2011.03-maintenance] [PATCH 1/2] tzcode/tzdata: moved to 2012b; changed src location
+Subject: Re: [2011.03-maintenance] [PATCH 2/2] libpng: moved from 1.2.44 to 1.2.48
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,17 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Mar 2012 18:01:02 -0000
+X-List-Received-Date: Tue, 13 Mar 2012 18:05:50 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sun, Mar 11, 2012 at 02:32:11PM +0100, Frans Meulenbroeks wrote:
+On Sun, Mar 11, 2012 at 02:32:12PM +0100, Frans Meulenbroeks wrote:
 
-> elsie does not respond, so moved to ftp.iana.org (also used by oe-core)
+> upstream does not retain old versions so moved to the latest
+> version to make things buildable again
+> 
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-A quick check and I see that ftp.iana.org does NOT delete old versions
-so we can finally fix that problem too.  Please rework to use the new
-URL but not to change versions.  Thanks!
+This does exist at
+http://snapshot.debian.org/archive/debian/20110301/pool/main/libp/libpng/libpng_1.2.44.orig.tar.bz2
+so please rework the patch, thanks!
 
 -- 
 Tom
