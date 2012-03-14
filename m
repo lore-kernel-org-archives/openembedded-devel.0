@@ -1,21 +1,21 @@
 Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1S7mbs-0002OG-UG
+	(envelope-from <sledz@localhost.localdomain>) id 1S7mbt-0002OH-08
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 12:43:16 +0100
+	Wed, 14 Mar 2012 12:43:17 +0100
 Received: by localhost (Postfix, from userid 1000)
-	id CAE5A44401A; Wed, 14 Mar 2012 12:34:31 +0100 (CET)
+	id 0728444401E; Wed, 14 Mar 2012 12:34:31 +0100 (CET)
 From: Steffen Sledz <sledz@dresearch-fe.de>
 To: Tom Rini <tom.rini@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Mar 2012 12:34:25 +0100
-Message-Id: <2542376c7475e275c3642c6dd034413b15c5a9f0.1331724547.git.sledz@dresearch-fe.de>
+Date: Wed, 14 Mar 2012 12:34:24 +0100
+Message-Id: <a3c6f6ca349727996d058881bbad58599edb9cf0.1331724547.git.sledz@dresearch-fe.de>
 X-Mailer: git-send-email 1.7.7
 In-Reply-To: <036da2df4162966386581ee32c39236c4cdab1d7.1331724547.git.sledz@dresearch-fe.de>
 References: <036da2df4162966386581ee32c39236c4cdab1d7.1331724547.git.sledz@dresearch-fe.de>
 In-Reply-To: <cover.1331724547.git.sledz@dresearch-fe.de>
 References: <cover.1331724547.git.sledz@dresearch-fe.de>
-Subject: [2011.03-maintenance 3/7] bluez4: Add version 4.95
+Subject: [2011.03-maintenance 2/7] fakeroot-1.9.6: Update URI to a functioning one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,51 +31,27 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 14 Mar 2012 11:43:17 -0000
 
-From: Vita Preskovsky <vitap@ti.com>
+We have to use a specific date to the debian snapshot mirror to get this
+version of the file.
 
-Signed-off-by: Vita Preskovsky <vitap@ti.com>
-Signed-off-by: Koen Kooi <koen@openembedded.org>
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 ---
- recipes/bluez/bluez4_4.95.bb |   30 ++++++++++++++++++++++++++++++
- 1 files changed, 30 insertions(+), 0 deletions(-)
- create mode 100644 recipes/bluez/bluez4_4.95.bb
+ recipes/fakeroot/fakeroot_1.9.6.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/bluez/bluez4_4.95.bb b/recipes/bluez/bluez4_4.95.bb
-new file mode 100644
-index 0000000..290dff6
---- /dev/null
-+++ b/recipes/bluez/bluez4_4.95.bb
-@@ -0,0 +1,30 @@
-+require bluez4.inc
-+
-+SRC_URI = "\
-+  ${KERNELORG_MIRROR}/pub/linux/bluetooth/bluez-${PV}.tar.gz \
-+  file://bluetooth.conf \
-+"
-+SRC_URI[md5sum] = "341294b2849a04a4afff5c96bfbf30b2"
-+SRC_URI[sha256sum] = "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0ce6bebd27fa4120f6"
-+
-+DEFAULT_PREFERENCE = "-1"
-+DEFAULT_PREFERENCE_angstrom = "1"
-+
-+DEPENDS += "libsndfile1"
-+
-+PR = "${INC_PR}.0"
-+
-+# Not all distros have a recent enough udev
-+BTUDEV = " --disable-udevrules"
-+BTUDEV_angstrom = " --enable-udevrules"
-+BTUDEV_shr = " --enable-udevrules"
-+
-+EXTRA_OECONF += "${BTUDEV}"
-+do_configure_append(){
-+	echo "#define LIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE" >> ${S}/config.h
-+}
-+
-+FILES_${PN}-dbg += "\
-+  ${base_libdir}/udev/.debug \
-+  ${libdir}/*/.debug \
-+"
+diff --git a/recipes/fakeroot/fakeroot_1.9.6.bb b/recipes/fakeroot/fakeroot_1.9.6.bb
+index 0a3ea93..0666910 100644
+--- a/recipes/fakeroot/fakeroot_1.9.6.bb
++++ b/recipes/fakeroot/fakeroot_1.9.6.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPL"
+ RDEPENDS_${PN} = "util-linux"
+ PR = "r3"
+ 
+-SRC_URI = "${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.tar.gz \
++SRC_URI = "http://snapshot.debian.org/archive/debian/20080803T000000Z/pool/main/f/fakeroot/fakeroot_${PV}.tar.gz \
+            file://configure-libtool.patch"
+ 	    
+ inherit autotools
 -- 
 1.7.7
 
