@@ -1,40 +1,32 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S7p83-0001uE-7h
+	(envelope-from <martin.jansa@gmail.com>) id 1S7uUO-0004Lv-0h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 15:24:39 +0100
-Received: by wibhj13 with SMTP id hj13so6268852wib.6
+	Wed, 14 Mar 2012 21:08:04 +0100
+Received: by wera1 with SMTP id a1so2113842wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Mar 2012 07:15:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PA6rgO9xTggwvVb3ZewWnI0ejbSZexVoc3J19x/3LrY=;
-	b=Gy2zCUiRLc2aX41ux1qrr/PdwxPrfqbyO3AJSarR6jx4J6zbJVPuJ8ulocynC4Jlt6
-	cMDLvQrIj98y/biRJvT840Qyt4cl6rW/gLhY4Y9QpH5EPn3CTkduB835UojgsJOicrKk
-	0mZPqKQhTud6QNFQ9WqgAYLky3dTQjU5i7VuVrhbrve2lR1mkl/xR1WD6UBP1i7HOUt4
-	GScfowLdDpD7yn8dcofWG3O8HRd40cRQGjeoR108rna2/5vDf2ED8SntwYQzQBHdKoL9
-	4wExTlgwZYu3ptYoIMWoJh5TMBKIkoOTPZAOBzsbI+q17/BLarDGXxInQCsCjJKNPe9E
-	BPiQ==
-Received: by 10.180.81.37 with SMTP id w5mr6748208wix.16.1331734554109;
-	Wed, 14 Mar 2012 07:15:54 -0700 (PDT)
+	Wed, 14 Mar 2012 12:59:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=D5H+aUlwIJEWVS2LjmpslMn7hxahYG5X2c+YQnTXFcE=;
+	b=dRg9UWpm+gN8g3rtpXrraO9Bi0oI8GKED0e9iYMGhnZtdhKPnVU0rFtMMtSEqcfjNB
+	8yLCqFxTN9yirHKWRi+APxsYsdBdz+fILR1QFdunI9dcBLOj2JGtc5mbYaQx1z984o+D
+	IZaa2mLDQKP/Uo8tJKK1af4eJFok4xK2HjU2mXrNkDAeCm6W/1CsNTFaDK5HC/aGAGx1
+	qX1LLfq4cfiP0FCQcFq9PTKk0HsA2dI+QtpRE8niV+sSAcxN8eLDDjgfUUVx1qcgU00q
+	0nxV75Qudw5/bTuIf08LIIq7F7/I9YlgkDb1iQ1VxmidqvV06M5DvIEKo5g5K9i06pFi
+	yUrA==
+Received: by 10.180.80.104 with SMTP id q8mr9408330wix.14.1331755158400;
+	Wed, 14 Mar 2012 12:59:18 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n8sm16994491wix.10.2012.03.14.07.15.52
+	by mx.google.com with ESMTPS id n15sm54333765wiw.6.2012.03.14.12.59.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Mar 2012 07:15:53 -0700 (PDT)
-Date: Wed, 14 Mar 2012 15:15:51 +0100
+	Wed, 14 Mar 2012 12:59:17 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120314141551.GH3919@jama.jama.net>
-References: <20120313114820.9572210335@opal>
-	<20120314070803.GB3919@jama.jama.net>
-	<20120314084016.GD3919@jama.jama.net>
-	<4F60A1A6.4090204@opendreambox.org>
-MIME-Version: 1.0
-In-Reply-To: <4F60A1A6.4090204@opendreambox.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Andreas Oberritter : qt4: fix deps in libQtWebkit.la and QtWebKit.pc
+Date: Wed, 14 Mar 2012 20:59:09 +0100
+Message-Id: <cover.1331754944.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.5
+Subject: [meta-oe][meta-efl][PATCH 0/5] Midori and enlightenment upgrades
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,84 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Mar 2012 14:24:39 -0000
-X-Groupsio-MsgNum: 37762
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AqCDj3hiknadvR6t"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Mar 2012 20:08:04 -0000
 
---AqCDj3hiknadvR6t
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 4586a3b9abd6f01592b1f4b27f8a2b6c51fb9668:
 
-On Wed, Mar 14, 2012 at 02:48:22PM +0100, Andreas Oberritter wrote:
-> On 14.03.2012 09:40, Martin Jansa wrote:
-> > On Wed, Mar 14, 2012 at 08:08:03AM +0100, Martin Jansa wrote:
-> >> On Tue, Mar 13, 2012 at 11:48:20AM +0000, git@git.openembedded.org wro=
-te:
-> >>> Module: openembedded-core.git
-> >>> Branch: master
-> >>> Commit: 4c41a3204ef72f53813ddc86fe525fa9c6714daa
-> >>> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dco=
-mmit;h=3D4c41a3204ef72f53813ddc86fe525fa9c6714daa
-> >>>
-> >>> Author: Andreas Oberritter <obi@opendreambox.org>
-> >>> Date:   Wed Mar  7 21:36:28 2012 +0100
-> >>>
-> >>> qt4: fix deps in libQtWebkit.la and QtWebKit.pc
-> >>>
-> >>> * Both files contain -L../../WebCore/release -L../../JavaScriptCore/r=
-elease -lwebcore -ljscore
-> >>> * These paths and libs don't get installed.
-> >>> * When building a shared lib with libtool, that links
-> >>>   with libQtWebKit, libtool adds these unneeded parameters
-> >>>   to the linker command-line, thus linking fails.
-> >>
-> >> BTW: here with bitbake having R/W to rootfs every qt4-x11-free build
-> >> creates /include/WebCore/libdummy.prl (yes really in root)
-> >> anynone seen this?
-> >> -rw-r--r-- 1 bitbake bitbake 680 Mar 14 01:13 /include/WebCore/libdumm=
-y.prl
->=20
-> I'm only using qt4-embedded, with which I haven't noticed this file.
+  xarchiver: add unzip to RRECOMMENDS_${PN} (2012-03-13 20:03:37 -0700)
 
-I guess it fails on most builders as user running bitbake doesn't have
-right to create it (my is special because it's minimal chroot
-environment owned by same user as who is running bitbake process).
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
-> >> Maybe it's sign of another small issue in qt4 build.
-> >=20
-> > It's created during do_configure and probably caused by
-> > ./qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/WebKit2=
-/Makefile:all: Makefile /include/WebCore/libdummy.prl  /include/WebCore/$(T=
-ARGET)
-> > ./qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/WebKit2=
-/Makefile:/include/WebCore/libdummy.prl:
-> >=20
-> > But in unpacked sources closest thing to libdummy.prl is=20
-> > ./Source/WebKit2/DerivedSources.pro:TARGET =3D dummy
->=20
-> I thought that Qt 4.8 didn't use WebKit2 by default. Did you enable it
-> manually?
+Martin Jansa (5):
+  midori: upgrade to 0.4.4
+  elementary: package new datetime_input_ctxpopup module
+  e-tasks: drop local patches and use our github repo instead
+  eina: fix QA warning about unpackaged dir
+  e-base: bump EFL_SRCREV again to get elementary-1.0 API
 
-No everything default oe-core+meta-oe.
+ meta-efl/classes/e-base.bbclass                    |    2 +-
+ .../e-tasks/0001-depend-on-eina-not-eina-0.patch   |   26 -
+ ...ementary-genlist_item_insert_before-API-c.patch |   27 -
+ .../e17/e-tasks/0003-adapt-to-newer-elm-API.patch  |  656 --------------------
+ .../e-tasks/0004-fix-changed-callback-name.patch   |   40 --
+ .../e-tasks/0005-adapt-to-even-newer-elm-API.patch |  182 ------
+ .../e17/e-tasks/0006-remove-deprecated-API.patch   |  296 ---------
+ .../e17/e-tasks/0007-db_sqlite-fix-warning.patch   |   35 -
+ ...-warning-about-incompatible-pointer-types.patch |   79 ---
+ .../e17/{e-tasks_svn.bb => e-tasks_git.bb}         |   17 +-
+ meta-efl/recipes-efl/efl/eina.inc                  |    4 +
+ meta-efl/recipes-efl/efl/elementary_svn.bb         |    8 +-
+ meta-oe/recipes-connectivity/midori/midori/waf     |  Bin 92569 -> 0 bytes
+ .../recipes-connectivity/midori/midori_0.4.3.bb    |   13 -
+ .../recipes-connectivity/midori/midori_0.4.4.bb    |    8 +
+ 15 files changed, 24 insertions(+), 1369 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0001-depend-on-eina-not-eina-0.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0002-adapt-to-elementary-genlist_item_insert_before-API-c.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0003-adapt-to-newer-elm-API.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0004-fix-changed-callback-name.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0005-adapt-to-even-newer-elm-API.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0006-remove-deprecated-API.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0007-db_sqlite-fix-warning.patch
+ delete mode 100644 meta-efl/recipes-efl/e17/e-tasks/0008-fix-warning-about-incompatible-pointer-types.patch
+ rename meta-efl/recipes-efl/e17/{e-tasks_svn.bb => e-tasks_git.bb} (62%)
+ delete mode 100755 meta-oe/recipes-connectivity/midori/midori/waf
+ delete mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.3.bb
+ create mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
 
-Cheers,
+-- 
+1.7.8.5
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---AqCDj3hiknadvR6t
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9gqBcACgkQN1Ujt2V2gBxutgCcC2iDICg2wCPnsewwwwmQTd+k
-FrwAni0FCCGDe5I9TvkslLKTdPwjXgyH
-=eI8V
------END PGP SIGNATURE-----
-
---AqCDj3hiknadvR6t--
