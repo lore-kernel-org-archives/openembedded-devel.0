@@ -1,33 +1,24 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1S7p1I-0001kH-2x
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1S7p7z-0001ty-Cv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 15:17:40 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id F0150315A13E;
-	Wed, 14 Mar 2012 15:08:56 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id gWNfrnJLf-JQ; Wed, 14 Mar 2012 15:08:46 +0100 (CET)
-Received: from [172.22.22.61] (drms-590ecefe.pool.mediaWays.net
-	[89.14.206.254])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 0D781315A13C;
-	Wed, 14 Mar 2012 15:08:46 +0100 (CET)
-Message-ID: <4F60A66D.2040504@opendreambox.org>
-Date: Wed, 14 Mar 2012 15:08:45 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+	Wed, 14 Mar 2012 15:24:35 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 14 Mar 2012 07:15:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="117619882"
+Received: from unknown (HELO helios.localnet) ([10.252.123.190])
+	by orsmga001.jf.intel.com with ESMTP; 14 Mar 2012 07:15:47 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andreas Oberritter <obi@opendreambox.org>
+Date: Wed, 14 Mar 2012 14:15:46 +0000
+Message-ID: <22576063.QXOBWGH1Gr@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.1; i686; ; )
+In-Reply-To: <4F60A66D.2040504@opendreambox.org>
+References: <20120313114820.9572210335@opal> <1451828.nMSFA2UD84@helios>
+	<4F60A66D.2040504@opendreambox.org>
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <20120313114820.9572210335@opal>
-	<20120314084016.GD3919@jama.jama.net>
-	<4F60A1A6.4090204@opendreambox.org> <1451828.nMSFA2UD84@helios>
-In-Reply-To: <1451828.nMSFA2UD84@helios>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] Andreas Oberritter : qt4: fix deps in libQtWebkit.la and QtWebKit.pc
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,21 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Mar 2012 14:17:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Mar 2012 14:24:35 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 14.03.2012 15:02, Paul Eggleton wrote:
-> On Wednesday 14 March 2012 14:48:22 Andreas Oberritter wrote:
->> I thought that Qt 4.8 didn't use WebKit2 by default. Did you enable it
->> manually?
+On Wednesday 14 March 2012 15:08:45 Andreas Oberritter wrote:
+> On 14.03.2012 15:02, Paul Eggleton wrote:
+> > On Wednesday 14 March 2012 14:48:22 Andreas Oberritter wrote:
+> >> I thought that Qt 4.8 didn't use WebKit2 by default. Did you enable it
+> >> manually?
+> > 
+> > FYI our Qt 4.8 recipes enable QtWebkit by default.
 > 
-> FYI our Qt 4.8 recipes enable QtWebkit by default.
+> Yes, but QtWebKit 2.2, which is included in Qt 4.8, uses WebKit, not
+> WebKit2, right?
 
-Yes, but QtWebKit 2.2, which is included in Qt 4.8, uses WebKit, not
-WebKit2, right?
+Ah, sorry I missed what you were asking. I'm not sure I'm afraid.
 
-Regards,
-Andreas
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
