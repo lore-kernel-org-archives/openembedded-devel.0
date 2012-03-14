@@ -1,37 +1,23 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S7uV5-0004MH-8l
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S7vjY-0006En-V7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 21:08:47 +0100
-Received: by mail-wi0-f177.google.com with SMTP id hj13so2795037wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Mar 2012 13:00:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=qENdslE15Q6FVLVse0KqOZkyUJupepjP5+oPwxo9d3Q=;
-	b=Seoe7lZaaHdBi2BbKMMYOu1EOxldzRolbHzQCcwaTPsMAF/D5zizsNSzReKy8kzV4e
-	yzWX6d2/53RPQpk0PrfUqWDy3tujef//lwm98lpfMmqwGCC0IYxC+67XL8cfFI0StEDU
-	+nl2UL0rPbYtptyzLDUGow+fHdm4AHEXtGZOFMtY8HM4nq24OdFvde5MWykX/n/RuFhF
-	fBDnXfZXFHRkhTBNuKORzp8QOGturqOo/7pp7QcwCRvdHZV0rcuzSNM0gldDfLyzhZHD
-	Xms8lgtoXJMNF3eOq840Evct8XHVHp4CNYEYrNb6fRuaDUp/aW/+khwvll4/yLE5jKTu
-	IfMQ==
-Received: by 10.180.83.97 with SMTP id p1mr9267110wiy.19.1331755203941;
-	Wed, 14 Mar 2012 13:00:03 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fi4sm14076682wib.4.2012.03.14.13.00.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Mar 2012 13:00:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 14 Mar 2012 22:27:49 +0100
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S7vam-0007Cp-2z
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Mar 2012 21:18:44 +0000
+Message-ID: <4F610B38.5060309@dynamicdevices.co.uk>
+Date: Wed, 14 Mar 2012 21:18:48 +0000
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Mar 2012 20:59:21 +0100
-Message-Id: <c1fad08e7920dead23b5a7a7dd3c1d49496a72e0.1331754944.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <7ab914b2620b85f3d8363fed900c056ff1f5650a.1331754944.git.Martin.Jansa@gmail.com>
-References: <7ab914b2620b85f3d8363fed900c056ff1f5650a.1331754944.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1331754944.git.Martin.Jansa@gmail.com>
-References: <cover.1331754944.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 5/5] e-base: bump EFL_SRCREV again to get elementary-1.0 API
+Subject: oe-core layer including support for i.MX28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Mar 2012 20:08:47 -0000
+X-List-Received-Date: Wed, 14 Mar 2012 21:27:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/classes/e-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Hi,
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index b337530..58636ec 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -1,6 +1,6 @@
- HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
- 
--EFL_SRCREV ?= "68387"
-+EFL_SRCREV ?= "69323"
- 
- ARM_INSTRUCTION_SET = "arm"
--- 
-1.7.8.5
+I'm trying to begin the migration from oe-classic to oe-core, focussing 
+on Freescale's
+i.MX28 and i.MX51. I recall there was i.MX28 kit being demo'd at FOSDEM 
+but I can't
+seem to find support anywhere for the i.MX28, which I thought might be 
+in meta-fsl-arm?
+
+Can anybody point me in the right direction? (I've half a mind to try 
+adding the support
+into meta-fsl-arm myself but that would seem somewhat wasteful if it's 
+already been
+done)
+
+Thanks,
+
+Alex/
 
 
 
