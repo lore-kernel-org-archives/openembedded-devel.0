@@ -1,36 +1,44 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1S7jtI-000578-0H; Wed, 14 Mar 2012 09:49:04 +0100
-Received: by wibhj13 with SMTP id hj13so5837759wib.6
-	for <multiple recipients>; Wed, 14 Mar 2012 01:40:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=DqXaGvGonqmimstFAsG/WrmN6uHFdAg/EwnhPjEyT1k=;
-	b=nf1yznUoURad512ET0fPoK+3Ep3eiAUMQSzMEtXmyxRNDzQ2CxQx6g47C6huwgISXk
-	QYQE8d5iTs6PKdywz4n6ssj9/ASVeB9XoBosSKGpoiLVhTLaozWI7KgZpmMMyLrjq89+
-	ITM5nhKMfGzu8Iq/F8qT4xF/A+QqeKHcwn9Mrj0o8vn+5mLiorOl9le2cIO2FXlU9aL3
-	o+i2sxktVAbL+zq1ySxMv9JoGC67UluaLuajpLDSl4wYEZKbCJM+C0DxdBgfJQprVD/D
-	hkN254ISPTa27PwDaOE5IBqgvRLxBfHLO6myK2YnuIg0iaFO6OA1fKtgGqbPpqla2kGb
-	Tr+Q==
-Received: by 10.180.95.74 with SMTP id di10mr10659621wib.1.1331714418999;
-	Wed, 14 Mar 2012 01:40:18 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fi4sm9921478wib.4.2012.03.14.01.40.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Mar 2012 01:40:18 -0700 (PDT)
-Date: Wed, 14 Mar 2012 09:40:16 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120314084016.GD3919@jama.jama.net>
-References: <20120313114820.9572210335@opal>
-	<20120314070803.GB3919@jama.jama.net>
+	(envelope-from <sledz@dresearch-fe.de>) id 1S7k94-0005p3-22
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Mar 2012 10:05:22 +0100
+Received: by bkcjg15 with SMTP id jg15so1156432bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Mar 2012 01:56:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=gJxy0pBvvpktDj/wgXMkesLli+Kj9mMU0C3AHbFUfnE=;
+	b=D8sguGJ6dJvmW9Ds1kV7FyXMBWHvvtfUFzKA4OmcJOUZa/9hrTztq2ejhu/hOq6H+e
+	pa4Nl1fUgw2GZuhDtaPW2XLWLOQRIsrmWao/XvHObBPN/UxCQLjg9sOcV+ujqk28r2kp
+	b9LG6RUNgceG249kVfP+SoW8Aijm1hlIkbC+rO/JYHN3ZpunRVxeYhBoo7s1sSUlprwF
+	u0bEVkjg9sjauvq0E40pRUW1mxt1ZlwWQJDSL0zgu2MBQmOjX7SZn8mhSKK/lG4cleAr
+	+vO7IPfnDpOImjiioex/Q72ht6g2yosK7zpHILhUv1sHbTuGDC3fnuJUsZk019enKT8f
+	4x/g==
+Received: by 10.205.132.71 with SMTP id ht7mr650755bkc.19.1331715396769;
+	Wed, 14 Mar 2012 01:56:36 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id je3sm6284587bkb.15.2012.03.14.01.56.35
+	(version=SSLv3 cipher=OTHER); Wed, 14 Mar 2012 01:56:35 -0700 (PDT)
+Message-ID: <4F605D42.6020109@dresearch-fe.de>
+Date: Wed, 14 Mar 2012 09:56:34 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-In-Reply-To: <20120314070803.GB3919@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [oe-commits] Andreas Oberritter : qt4: fix deps in libQtWebkit.la and QtWebKit.pc
+To: Tom Rini <tom.rini@gmail.com>
+References: <cover.1330097955.git.sledz@dresearch-fe.de>
+	<562d0d44a950d86ec19d98621d837e4a227db73a.1330097955.git.sledz@dresearch-fe.de>
+	<20120224202626.GA14969@bill-the-cat>
+In-Reply-To: <20120224202626.GA14969@bill-the-cat>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQnE1sJnUTvM4+HS2bY8A98UmRJHkm6JMAdBC6aYfOscMLTOOzLl5fNIIeBvkwclCjSUr/Ga
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 2/7] fakeroot-native: update to 1.14.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,72 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Mar 2012 08:49:04 -0000
-X-Groupsio-MsgNum: 37746
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MAH+hnPXVZWQ5cD/"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Mar 2012 09:05:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---MAH+hnPXVZWQ5cD/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 24.02.2012 21:26, Tom Rini wrote:
+> On Fri, Feb 24, 2012 at 04:47:19PM +0100, Steffen Sledz wrote:
+> 
+>> * version 1.9.6 is no longer fetchable
+> 
+> It _IS_ fetchable if you use a versioned string on snapshot.debian.org.
+> Please use this instead (and we have an example or two already, possibly
+> even for fakeroot I'd have sworn).
 
-On Wed, Mar 14, 2012 at 08:08:03AM +0100, Martin Jansa wrote:
-> On Tue, Mar 13, 2012 at 11:48:20AM +0000, git@git.openembedded.org wrote:
-> > Module: openembedded-core.git
-> > Branch: master
-> > Commit: 4c41a3204ef72f53813ddc86fe525fa9c6714daa
-> > URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcomm=
-it;h=3D4c41a3204ef72f53813ddc86fe525fa9c6714daa
-> >=20
-> > Author: Andreas Oberritter <obi@opendreambox.org>
-> > Date:   Wed Mar  7 21:36:28 2012 +0100
-> >=20
-> > qt4: fix deps in libQtWebkit.la and QtWebKit.pc
-> >=20
-> > * Both files contain -L../../WebCore/release -L../../JavaScriptCore/rel=
-ease -lwebcore -ljscore
-> > * These paths and libs don't get installed.
-> > * When building a shared lib with libtool, that links
-> >   with libQtWebKit, libtool adds these unneeded parameters
-> >   to the linker command-line, thus linking fails.
->=20
-> BTW: here with bitbake having R/W to rootfs every qt4-x11-free build
-> creates /include/WebCore/libdummy.prl (yes really in root)
-> anynone seen this?
-> -rw-r--r-- 1 bitbake bitbake 680 Mar 14 01:13 /include/WebCore/libdummy.p=
-rl
->=20
-> Maybe it's sign of another small issue in qt4 build.
+I tried to fetch from <http://snapshot.debian.org/archive/debian/20080803T000000Z/pool/main/f/fakeroot/fakeroot_1.9.6.tar.gz> but this resulted in an checksum mismatch error. :(
 
-It's created during do_configure and probably caused by
-=2E/qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/WebKit2/M=
-akefile:all: Makefile /include/WebCore/libdummy.prl  /include/WebCore/$(TAR=
-GET)
-=2E/qt-everywhere-opensource-src-4.8.0/src/3rdparty/webkit/Source/WebKit2/M=
-akefile:/include/WebCore/libdummy.prl:
+ERROR: The checksums for "/home/sledz/sources/fakeroot_1.9.6.tar.gz" did not match.
+  MD5: expected "9441c981bfd4e521abcd5d93385f71d8", got "2f1c02c186eb34f29a15cef8c33ac6e4"
+  SHA256: expected "06c2772ae6e446227f6798ad8994fcdb1fe64385bc83a34f7e29fd8af2e4f5da", got "55b727aa5c8bac0447504c1e7fd7308b80b8a193913b4bc604cf6c3bc6d042b0"
 
-But in unpacked sources closest thing to libdummy.prl is=20
-=2E/Source/WebKit2/DerivedSources.pro:TARGET =3D dummy
+I'm not sure if we still should use this version?
 
-Any idea if we really need that?
+Regards,
+Steffen
 
-Cheers,
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MAH+hnPXVZWQ5cD/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9gWXAACgkQN1Ujt2V2gBxovQCfSe9eTx+s+dV+mCMczSi80KuA
-2osAn2DxZstfmWh1UK7Bl+jKwQRv1yj6
-=UTSN
------END PGP SIGNATURE-----
-
---MAH+hnPXVZWQ5cD/--
