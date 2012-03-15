@@ -1,39 +1,26 @@
-Received: from sputnik.urmx.de ([88.198.51.18])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Eibach@gdsys.de>) id 1S8BV0-0005e7-MH
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S8Dlg-0008AC-Uy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2012 15:17:50 +0100
-Received: from mailrelay.gdsys.de (unknown [217.6.197.20])
-	by sputnik.urmx.de (Postfix) with ESMTP id 651296000098
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2012 15:09:04 +0100 (CET)
-Received: from mailsgw.gdsys.de (localhost [127.0.0.1])
-	by mailsgw.gdsys.de (Postfix) with ESMTP id 85F761F8801
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2012 15:09:05 +0100 (CET)
-X-Spam-Processed: srv201.gdsys.de, Thu, 15 Mar 2012 15:09:02 +0100
-	(not processed: message from trusted or authenticated source)
-X-Return-Path: Eibach@gdsys.de
-X-Envelope-From: Eibach@gdsys.de
-X-MDaemon-Deliver-To: openembedded-devel@lists.openembedded.org
+	Thu, 15 Mar 2012 17:43:12 +0100
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S8Dcs-0007mq-1x
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Mar 2012 16:34:06 +0000
+Message-ID: <4F6219FC.7010506@dynamicdevices.co.uk>
+Date: Thu, 15 Mar 2012 16:34:04 +0000
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
 MIME-Version: 1.0
-Importance: normal
-Priority: normal
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.4913
-Date: Thu, 15 Mar 2012 15:08:59 +0100
-Message-ID: <48D3D52125C49B43AE880038E2E5314BB5BFBB@SRV101.gdsys.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] jdk 6 u26+
-thread-index: Ac0CtGdmVNky0VKjR5+GtbzbJ/afGgAADvBg
-References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com><jjcoo5$1eu$1@dough.gmane.org><D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv><20120309210930.GA12854@rhein.zuhause.netz><D604D5FB4D200642AA2FAAE94E392586017FA3E6@CARAMBAR.lpg.priv><D604D5FB4D200642AA2FAAE94E392586017FA481@CARAMBAR.lpg.priv><20120315140402.52a27366@eb-e6520>
-	<20120315140251.GA21069@mi.fu-berlin.de>
-From: "Eibach, Dirk" <Eibach@gdsys.de>
-To: <openembedded-devel@lists.openembedded.org>
-X-SafeGuard_MailGateway: Version: 5.60.3.11066 SGMG Date: 20120315140905Z
-X-AntiVirus: checked by AntiVir MailGate (version: 2.0.2-5; AVE: 7.9.10.20;
-	VDF: 7.11.25.110; host: mailrelay)
-Subject: Re: jdk 6 u26+
+To: openembedded-devel@lists.openembedded.org
+References: <4F610B38.5060309@dynamicdevices.co.uk>
+	<CAP9ODKo_RMjJ1BsP9QQHJY8xwmRzBie3L0DuB1e7jr=N_kuekQ@mail.gmail.com>
+In-Reply-To: <CAP9ODKo_RMjJ1BsP9QQHJY8xwmRzBie3L0DuB1e7jr=N_kuekQ@mail.gmail.com>
+Subject: Re: oe-core layer including support for i.MX28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 14:17:50 -0000
-Content-Class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Thu, 15 Mar 2012 16:43:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Hi Otavio,
 
-> openjdk7 is comming soon.
+ >I am working on that; my current work in progress can be seen at 
+https://github.com/OSSystems/meta-fsl-arm
 
-Good new. Getting Caciocavallo started should be much easier this way
-...
+Thanks for that. I had a quick go ad building and as you say I saw 
+bitbake fails as it's trying to build up a patched linux-imx kernel.
 
-Cheers
-Dirk
+"include/linux/pagemap.h: In function 'fault_in_pages_readable':"
 
+Maybe the best way for me to proceed would be to put in a pull request 
+on your wip-imx28 branch and see if I can add my oe-classic imx28 
+specifics into the copy?
+
+Best Regards,
+
+Alex
 
 
 
