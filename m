@@ -1,25 +1,36 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1S8B4Z-0004nL-Bw
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1S8BP0-0005Vp-Lt
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2012 14:50:31 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Mar 2012 06:41:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="139325206"
-Received: from unknown (HELO helios.localnet) ([10.252.123.170])
-	by fmsmga002.fm.intel.com with ESMTP; 15 Mar 2012 06:41:42 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andrea Adami <andrea.adami@gmail.com>
-Date: Thu, 15 Mar 2012 13:41:41 +0000
-Message-ID: <2452142.3c7HBX69ER@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.1; i686; ; )
-In-Reply-To: <1331162943-4863-1-git-send-email-andrea.adami@gmail.com>
-References: <1331162943-4863-1-git-send-email-andrea.adami@gmail.com>
+	Thu, 15 Mar 2012 15:11:38 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1S8BGY-0002LC-AT>; Thu, 15 Mar 2012 15:02:54 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1S8BGY-0005LC-4j>; Thu, 15 Mar 2012 15:02:54 +0100
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1S8BGW-0000AK-1w; Thu, 15 Mar 2012 15:02:52 +0100
+Date: Thu, 15 Mar 2012 15:02:52 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120315140251.GA21069@mi.fu-berlin.de>
+References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
+	<jjcoo5$1eu$1@dough.gmane.org>
+	<D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
+	<20120309210930.GA12854@rhein.zuhause.netz>
+	<D604D5FB4D200642AA2FAAE94E392586017FA3E6@CARAMBAR.lpg.priv>
+	<D604D5FB4D200642AA2FAAE94E392586017FA481@CARAMBAR.lpg.priv>
+	<20120315140402.52a27366@eb-e6520>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH 1/3] linux-3.1: remove CONFIG_RAMOOPS=y from Zaurus defconfigs
+In-Reply-To: <20120315140402.52a27366@eb-e6520>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Cc: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+Subject: Re: jdk 6 u26+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,110 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 13:50:31 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 15 Mar 2012 14:11:38 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thursday 08 March 2012 00:29:01 Andrea Adami wrote:
-> * this was enabled by mistake, nonsense on Zaurus
+On Thu, Mar 15, 2012 at 02:04:02PM +0100, Eric Bénard wrote:
+> Hi Daniel,
 > 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  recipes-kernel/linux/linux-3.1/akita/defconfig  |    1 -
->  recipes-kernel/linux/linux-3.1/c7x0/defconfig   |    1 -
->  recipes-kernel/linux/linux-3.1/collie/defconfig |    1 -
->  recipes-kernel/linux/linux-3.1/poodle/defconfig |    1 -
->  recipes-kernel/linux/linux-3.1/spitz/defconfig  |    1 -
->  recipes-kernel/linux/linux-3.1/tosa/defconfig   |    1 -
->  6 files changed, 0 insertions(+), 6 deletions(-)
+> Le Thu, 15 Mar 2012 13:56:15 +0100,
+> "MONDON Daniel" <Daniel.MONDON@lpgsystems.com> a écrit :
+> > When OpenEmbedded JDk 6 update 26 or higher will be available (running
+> > on ARM)?
+> > 
+> you can start from https://github.com/woglinde/meta-java and upgrade
+> it to the newer version you need, then you can send the patches as
+> described in the readme so that all the community can benefit from this
+> upgrade.
 > 
-> diff --git a/recipes-kernel/linux/linux-3.1/akita/defconfig
-> b/recipes-kernel/linux/linux-3.1/akita/defconfig index 9b5bafb..dfab582
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/akita/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/akita/defconfig
-> @@ -179,7 +179,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_PXA=y
->  CONFIG_SERIAL_PXA_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_SPI=y
->  CONFIG_SPI_PXA2XX=y
->  CONFIG_GPIO_SYSFS=y
-> diff --git a/recipes-kernel/linux/linux-3.1/c7x0/defconfig
-> b/recipes-kernel/linux/linux-3.1/c7x0/defconfig index cbcd789..025008b
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/c7x0/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/c7x0/defconfig
-> @@ -168,7 +168,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_PXA=y
->  CONFIG_SERIAL_PXA_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_I2C=y
->  CONFIG_I2C_PXA=y
->  CONFIG_SPI=y
-> diff --git a/recipes-kernel/linux/linux-3.1/collie/defconfig
-> b/recipes-kernel/linux/linux-3.1/collie/defconfig index b6b4315..679532b
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/collie/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/collie/defconfig
-> @@ -175,7 +175,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_SA1100=y
->  CONFIG_SERIAL_SA1100_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_I2C=y
->  CONFIG_SPI=y
->  CONFIG_GPIO_SYSFS=y
-> diff --git a/recipes-kernel/linux/linux-3.1/poodle/defconfig
-> b/recipes-kernel/linux/linux-3.1/poodle/defconfig index a2dc2ec..0124824
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/poodle/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/poodle/defconfig
-> @@ -167,7 +167,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_PXA=y
->  CONFIG_SERIAL_PXA_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_I2C=y
->  CONFIG_I2C_PXA=y
->  CONFIG_SPI=y
-> diff --git a/recipes-kernel/linux/linux-3.1/spitz/defconfig
-> b/recipes-kernel/linux/linux-3.1/spitz/defconfig index 9b5bafb..dfab582
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/spitz/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/spitz/defconfig
-> @@ -179,7 +179,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_PXA=y
->  CONFIG_SERIAL_PXA_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_SPI=y
->  CONFIG_SPI_PXA2XX=y
->  CONFIG_GPIO_SYSFS=y
-> diff --git a/recipes-kernel/linux/linux-3.1/tosa/defconfig
-> b/recipes-kernel/linux/linux-3.1/tosa/defconfig index 7f10c29..187bab2
-> 100644
-> --- a/recipes-kernel/linux/linux-3.1/tosa/defconfig
-> +++ b/recipes-kernel/linux/linux-3.1/tosa/defconfig
-> @@ -180,7 +180,6 @@ CONFIG_SERIAL_8250=m
->  CONFIG_SERIAL_8250_CS=m
->  CONFIG_SERIAL_PXA=y
->  CONFIG_SERIAL_PXA_CONSOLE=y
-> -CONFIG_RAMOOPS=y
->  CONFIG_I2C=y
->  CONFIG_I2C_PXA=y
->  CONFIG_SPI=y
+> Thanks in advance,
+> 
+> Eric
+> -- 
+> http://eukrea.com/en/news/104-2012
+> 
 
-Merged to meta-handheld, thanks.
+openjdk7 is comming soon.
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Bye Henning
 
 
