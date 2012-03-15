@@ -1,38 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S88Ku-0000SZ-EC
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S88Lb-0000Xn-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2012 11:55:12 +0100
-Received: by wera1 with SMTP id a1so2673100wer.6
+	Thu, 15 Mar 2012 11:55:55 +0100
+Received: by ghbz2 with SMTP id z2so2843748ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2012 03:46:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=d0q18iJ1y8s9KTOwOGdH+zd21jBlxba5YCiW0jYthzs=;
-	b=g6hj0TTQP/RCQe4SlhWf5M/NUmR9tzOEe/72oTlYpL1kNf1ImDG5zyOEVGw/LtxXWf
-	X6EBod6fWdq4JoeWBh7shabEjdn1NCV+7MSxBBMyge7/foBwd5BmUJER9+bJgfVzkIOT
-	QIrt6/9fqugU6MGNO8Et2R7+MWUF9sKCedu20bYcJGPKJGz9CMy/gWrG7PbemlHkqxRK
-	pfcDup7LAA8N6Ex03TUI9eWTGGoaEGmqNBs7MIRb3EZV+AsPo9s/5lncNuD4Uq738E6z
-	+Vfq/kBcQvKuZHGrkTzfg2tm6RxvF2yNylSE5LI98t9NHlhJUvvLUWcNJd/xdL1EpPGB
-	RTbw==
-Received: by 10.216.136.13 with SMTP id v13mr3640312wei.32.1331808386129;
-	Thu, 15 Mar 2012 03:46:26 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm4092265wia.11.2012.03.15.03.46.24
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Mar 2012 03:46:25 -0700 (PDT)
-Date: Thu, 15 Mar 2012 11:46:23 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20120315104623.GG4973@jama.jama.net>
+	Thu, 15 Mar 2012 03:47:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=FNQkhxfAjUtD/3HTFaw69UXKNcZas6hAyjg5SmsnuVg=;
+	b=K3S44TflteW0cGkWnoEiOaN5lCgFONZX9/kXv9KDmj4kSozQP3M1rmJMqdvD8S1Dc6
+	MjRTkjN6CFvOtW8zjQOvuWWvl2fAn7mqfJawJwNUhZowwY92gpRR8MjbSPxYini8zcSK
+	PCruvJJl+ESBz6LuCRUgLN5oHFFUkZq4eEPcZv/YgJYfO95Gt6M65dp/YzyqLVR+EuoR
+	ET+ktK7aD6253liyyCOFIrBJpPVKNPY6y9OBexGadVC07d4F7K4uSxfnZvjJPmiTN7aU
+	SYGaZl3r8AYqWlU1kbr/FSG+6pKz4Ugf7Xz/SxvSGt2vrbbGfXlLqWSiaRwQm0+9DP+j
+	RshQ==
+MIME-Version: 1.0
+Received: by 10.224.200.8 with SMTP id eu8mr6805315qab.95.1331808428633; Thu,
+	15 Mar 2012 03:47:08 -0700 (PDT)
+Received: by 10.229.230.67 with HTTP; Thu, 15 Mar 2012 03:47:08 -0700 (PDT)
+In-Reply-To: <CALbNGRSPmMZ2MGutnXuJtwerv=y8BDGiQnBUK-Lh6nk+5y9a1A@mail.gmail.com>
 References: <cover.1331754944.git.Martin.Jansa@gmail.com>
 	<7ab914b2620b85f3d8363fed900c056ff1f5650a.1331754944.git.Martin.Jansa@gmail.com>
-	<4F61C710.3030901@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <4F61C710.3030901@mlbassoc.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
+	<CALbNGRSPmMZ2MGutnXuJtwerv=y8BDGiQnBUK-Lh6nk+5y9a1A@mail.gmail.com>
+Date: Thu, 15 Mar 2012 11:47:08 +0100
+Message-ID: <CALbNGRTG+FrLjeNWhJn3Cz_qQT=e7tZRx4kKEgGrxM9QvdywCA@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][meta-efl][PATCH 1/5] midori: upgrade to 0.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,54 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 10:55:12 -0000
-X-Groupsio-MsgNum: 37779
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ahP6B03r4gLOj5uD"
-Content-Disposition: inline
-
---ahP6B03r4gLOj5uD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Mar 2012 10:55:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 15, 2012 at 04:40:16AM -0600, Gary Thomas wrote:
-> On 2012-03-14 13:59, Martin Jansa wrote:
-> > * custom waf to fix dirty vala version was dropped
-> > * I've fixed our vala to stop reporting dirty even for valid released t=
-arballs
-> >    so you can still get dirty version but it's not so common to keep th=
-is ugly binary here.
-> > * disable PARALLEL_MAKE to improve our chances agains build hangs
-> >    (btw fedora is doing the same
-> >     http://osdir.com/ml/scm-fedora-commits/2011-11/msg04672.html)
-> >
-> > Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
->=20
-> I have a few questions about midori that I'm having trouble with.
-> * Where does this come from?  Is there a project web page?  There's
->    no real indication in the recipes that I can find.
-> * Who/where can I go to with problems and/or questions?  The version
->    I've been using (0.4.3) isn't very stable and has some "interesting"
->    behaviours I'd like to have addressed.
->=20
-> Any pointers happily accepted, thanks
+On Thu, Mar 15, 2012 at 11:21 AM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Wed, Mar 14, 2012 at 8:59 PM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+>> * custom waf to fix dirty vala version was dropped
+>> * I've fixed our vala to stop reporting dirty even for valid released ta=
+rballs
+>> =A0so you can still get dirty version but it's not so common to keep thi=
+s ugly binary here.
+>> * disable PARALLEL_MAKE to improve our chances agains build hangs
+>> =A0(btw fedora is doing the same
+>> =A0 http://osdir.com/ml/scm-fedora-commits/2011-11/msg04672.html)
+>>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> ---
+>> =A0meta-oe/recipes-connectivity/midori/midori/waf =A0 =A0 | =A0Bin 92569=
+ -> 0 bytes
+>> =A0.../recipes-connectivity/midori/midori_0.4.3.bb =A0 =A0| =A0 13 -----=
+--------
+>> =A0.../recipes-connectivity/midori/midori_0.4.4.bb =A0 =A0| =A0 =A08 +++=
++++++
+>> =A03 files changed, 8 insertions(+), 13 deletions(-)
+>> =A0delete mode 100755 meta-oe/recipes-connectivity/midori/midori/waf
+>> =A0delete mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.3.b=
+b
+>> =A0create mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.4.b=
+b
+>>
+> I wanted to test this but task do_compile seems to run forever (now
+> for 1,5h) and I have an empty log.do_compile. Any pointers where to
+> look after?
+>
+I did cleansstate and rebuild midori with success now. I had similar
+from time to time but with task do_configure.
 
-http://www.twotoasts.de/index.php?/pages/midori_summary.html
+Andreas
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ahP6B03r4gLOj5uD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9hyH8ACgkQN1Ujt2V2gBwedwCgruilmqSKn3YXgDbWK0rAnq0V
-TW0AoIyra7yvdruVcYdri+YErE6zr+gU
-=zpxp
------END PGP SIGNATURE-----
-
---ahP6B03r4gLOj5uD--
