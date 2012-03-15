@@ -1,38 +1,39 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S882z-0008RZ-01
+	(envelope-from <sledz@dresearch-fe.de>) id 1S887f-00008R-13
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2012 11:36:41 +0100
-Received: by wera1 with SMTP id a1so2657882wer.6
+	Thu, 15 Mar 2012 11:41:31 +0100
+Received: by bkcjg15 with SMTP id jg15so2151939bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2012 03:27:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=H782gDMWlepSVR3wWmHCNfz4WrQfYuuxb0TWyOnEyLA=;
-	b=NwpYgimwWCWJRRo5GDqxmlghijRJNUcJ+knyamk+DS9DPww/7MDfiLm8Ihjts/90KS
-	YIqmiUmfzsm4Gk4M0Dlk8Fs3biBQx1CxrOPwOWF1nTmLRHx0+4eLEk46MD4fQMn4I92X
-	UsmSI8XH7JvC7JJCkmcJrtxjq5hcfEOXGDKngPQWrjNae7kMkVv7Fzo5olZxR9I1YrTp
-	gQ+DqIJL4aiSvexbTQL3COmnYpLJXSF8rsFoiczvihQLIHmUO7NMLiivUhpTfilzMpwb
-	lIjkh8nX3dk34lHcUMAS9zklyrORQQhSkodyYJSmCGH80cCVZcCR5oZYbANC1Rga2lbZ
-	GoZw==
-Received: by 10.216.138.38 with SMTP id z38mr3486969wei.63.1331807274820;
-	Thu, 15 Mar 2012 03:27:54 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fw5sm4064696wib.0.2012.03.15.03.27.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Mar 2012 03:27:53 -0700 (PDT)
-Date: Thu, 15 Mar 2012 11:27:52 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120315102752.GF4973@jama.jama.net>
-References: <cover.1331754944.git.Martin.Jansa@gmail.com>
-	<7ab914b2620b85f3d8363fed900c056ff1f5650a.1331754944.git.Martin.Jansa@gmail.com>
-	<CALbNGRSPmMZ2MGutnXuJtwerv=y8BDGiQnBUK-Lh6nk+5y9a1A@mail.gmail.com>
+	Thu, 15 Mar 2012 03:32:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:x-enigmail-version:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=raXrfxYjCD0qDwPRE/rTsCwwMuWTYO4jEYqvN4w6340=;
+	b=F2Uf1utFqgHYDbVxwjm7tjcxK5yLjZfUmGPGJip1qDm6fTpy2HmpA03wfyzup1cuea
+	OZY6mZUOjuLj856bKYXuQIq4ONOnt6qGafgLeYHfj20NpI4eCVPrHr6L9pPwjvzWMD3R
+	sL0dNvp0zy1AqErFus6o/lo0SYQOli3d3S7W2Oeny7rWnu4OwkdJtFideZLc91oyHJEQ
+	r223FJJ3TV0OBZ7/n6KAGRSj9mzhWlOp6B0zHfYeocmksckpWRIFfptGywjo6oFaxAhM
+	pBkGRyTel9DF8Caji3V9OReTBT0MTA8jxO7+tuqpKqZQcv/1VvAhXmIE5RBq6+yMUddL
+	l9ew==
+Received: by 10.204.9.198 with SMTP id m6mr2193301bkm.38.1331807564682;
+	Thu, 15 Mar 2012 03:32:44 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id bw9sm2781874bkb.8.2012.03.15.03.32.43
+	(version=SSLv3 cipher=OTHER); Thu, 15 Mar 2012 03:32:44 -0700 (PDT)
+Message-ID: <4F61C54B.1000609@dresearch-fe.de>
+Date: Thu, 15 Mar 2012 11:32:43 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRSPmMZ2MGutnXuJtwerv=y8BDGiQnBUK-Lh6nk+5y9a1A@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-efl][PATCH 1/5] midori: upgrade to 0.4.4
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQlW5eic7bld5QoP4sN4T6gHMxjr8Kb0o8FLgmKUIbt+pPbuYnvoPPPCXIGrbqCyjq4i8hXk
+Subject: libmatthew-java-0.7.1.tar.gz not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,76 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 10:36:41 -0000
-X-Groupsio-MsgNum: 37776
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="65ImJOski3p8EhYV"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Mar 2012 10:41:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---65ImJOski3p8EhYV
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+libmatthew-java-0.7.1.tar.gz (used in 2011.03-maintenance branch) is no longer fetchable from it's original location (the maintainer provides the latests version only). And i did not found another reliable source.
 
-On Thu, Mar 15, 2012 at 11:21:27AM +0100, Andreas M=FCller wrote:
-> On Wed, Mar 14, 2012 at 8:59 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > * custom waf to fix dirty vala version was dropped
-> > * I've fixed our vala to stop reporting dirty even for valid released t=
-arballs
-> > =A0so you can still get dirty version but it's not so common to keep th=
-is ugly binary here.
-> > * disable PARALLEL_MAKE to improve our chances agains build hangs
-> > =A0(btw fedora is doing the same
-> > =A0 http://osdir.com/ml/scm-fedora-commits/2011-11/msg04672.html)
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> > =A0meta-oe/recipes-connectivity/midori/midori/waf =A0 =A0 | =A0Bin 9256=
-9 -> 0 bytes
-> > =A0.../recipes-connectivity/midori/midori_0.4.3.bb =A0 =A0| =A0 13 ----=
----------
-> > =A0.../recipes-connectivity/midori/midori_0.4.4.bb =A0 =A0| =A0 =A08 ++=
-++++++
-> > =A03 files changed, 8 insertions(+), 13 deletions(-)
-> > =A0delete mode 100755 meta-oe/recipes-connectivity/midori/midori/waf
-> > =A0delete mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.3.=
-bb
-> > =A0create mode 100644 meta-oe/recipes-connectivity/midori/midori_0.4.4.=
-bb
-> >
-> I wanted to test this but task do_compile seems to run forever (now
-> for 1,5h) and I have an empty log.do_compile. Any pointers where to
-> look after?
+Can someone put the tarball into the OE and/or Angstrom mirrors?
 
-It happens to me on one host too :/.
+Thx,
+Steffen
 
-Disabling gtk+ and PARALLEL_MAKE is only improving our chances against
-build hangs not fixing them completely.
+PS: I can send the tarball on request.
 
-Sometimes it hangs in do_configure sometimes in do_compile (last line in
-do_configure is checking locales, but I belive the problem is in
-glib-genmarshal call).
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
-But the same I had with 0.4.2 and 0.4.3 so it's not "new" issue.
 
-Interestingly running run.do_configure and run.do_compile by hand in
-terminal usually works.
-
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---65ImJOski3p8EhYV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
-
-iEYEARECAAYFAk9hxCgACgkQN1Ujt2V2gBzSOACfcl4nFfI7X+mJv38Buwt2PdoW
-SMgAoKPL3ITgnMHlPH2po+Ax5WXVhzNR
-=LiEd
------END PGP SIGNATURE-----
-
---65ImJOski3p8EhYV--
