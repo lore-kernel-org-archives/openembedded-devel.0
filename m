@@ -1,40 +1,27 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S86E5-00062J-FP
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S86tM-0007Do-6Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Mar 2012 09:40:01 +0100
-Received: by wera1 with SMTP id a1so2563773wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Mar 2012 01:31:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=MM2gL90b3XjbQPjj0Iz1Iea7DTqHVIGfQ5CVODoUTIc=;
-	b=Y8/RFfZBY9Oc+qMNrD2G5rzBkATO/emK2Rf3QUFmL+dA87AlNJaFHui2nPwyMAsvIm
-	gwxskVL+RgRlXv6bfl83jUWgjGNG+2v+TBcKinIpxyeco539l9SVgFdLy0aKSiNTT6UE
-	AOGcDOHzNLRYe7pxLhIG4C0EZCAx+42NYVbRkbxDRq4b3TAExXSJ9IiRNEgqNfN5Uqk1
-	tQgHv4nCmJ18xLObrRwIeKYZgu2XSYx8Hju3nXMruaDoOWI8Ywlu5cKs0oXntMpB4caL
-	ostHhpbS2uhmb0JNPPZUkx5itdUhOg/KNm6+YiWqh9aHn6PthyZZcM9Lp8vaxHWApJqb
-	iYdw==
-Received: by 10.216.136.157 with SMTP id w29mr3517522wei.23.1331800275132;
-	Thu, 15 Mar 2012 01:31:15 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n15sm3332462wiw.6.2012.03.15.01.31.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Mar 2012 01:31:14 -0700 (PDT)
-Date: Thu, 15 Mar 2012 09:31:12 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120315083112.GD4973@jama.jama.net>
-References: <2ig0lhu1ti0mhyknnc4ow74t.1331291074225@email.android.com>
-	<jjcoo5$1eu$1@dough.gmane.org>
-	<D604D5FB4D200642AA2FAAE94E392586017F9D95@CARAMBAR.lpg.priv>
-	<20120309210930.GA12854@rhein.zuhause.netz>
-	<D604D5FB4D200642AA2FAAE94E392586017FA3E6@CARAMBAR.lpg.priv>
+	Thu, 15 Mar 2012 10:22:40 +0100
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S86kZ-0007V0-8m
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Mar 2012 09:13:35 +0000
+Message-ID: <4F61B2C0.2010200@dynamicdevices.co.uk>
+Date: Thu, 15 Mar 2012 09:13:36 +0000
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
 MIME-Version: 1.0
-In-Reply-To: <D604D5FB4D200642AA2FAAE94E392586017FA3E6@CARAMBAR.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: GTK2 2.18+
+To: openembedded-devel@lists.openembedded.org
+References: <4F610B38.5060309@dynamicdevices.co.uk>
+	<CAGiJk9c+bcDHk5MCOE_bRRyi-c9tDy6cjPvFgcrpiXtHpPGOWg@mail.gmail.com>
+	<CALbNGRTRjx=MdV_cmisCaXrR_GT0nVyzzs29FT-sHymCYh48=A@mail.gmail.com>
+In-Reply-To: <CALbNGRTRjx=MdV_cmisCaXrR_GT0nVyzzs29FT-sHymCYh48=A@mail.gmail.com>
+Subject: Re: oe-core layer including support for i.MX28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 08:40:01 -0000
-X-Groupsio-MsgNum: 37773
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HWvPVVuAAfuRc6SZ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Mar 2012 09:22:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
---HWvPVVuAAfuRc6SZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 15, 2012 at 09:28:41AM +0100, MONDON Daniel wrote:
-> Hi,
->=20
-> When OpenEmbedded GTK2 2.18 or more will be available (running on ARM)?
+>did the meta-fsl-arm developers merge the meta-freescale repository?
 
-http://git.openembedded.org/openembedded-core/tree/meta/recipes-gnome/gtk+
-has 2.24.8
+Thanks Andreas, Samuel. I shall take a look.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Best Regards,
 
---HWvPVVuAAfuRc6SZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Alex
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+On 15/03/2012 08:27, Andreas Müller wrote:
+> On Thu, Mar 15, 2012 at 8:17 AM, Samuel Stirtzel
+> <s.stirtzel@googlemail.com>  wrote:
+>> 2012/3/14 Alex J Lennon<ajlennon@dynamicdevices.co.uk>:
+>>> Hi,
+>> Hi,
+>>> I'm trying to begin the migration from oe-classic to oe-core, focussing on
+>>> Freescale's
+>>> i.MX28 and i.MX51. I recall there was i.MX28 kit being demo'd at FOSDEM but
+>>> I can't
+>>> seem to find support anywhere for the i.MX28, which I thought might be in
+>>> meta-fsl-arm?
+>> did the meta-fsl-arm developers merge the meta-freescale repository?
+>> AFAICT there was support for i.MX28 in Andreas git repository:
+>> http://gitorious.org/schnitzeltony-oe-meta/meta-freescale
+>>
+>>> Can anybody point me in the right direction? (I've half a mind to try adding
+>>> the support
+>>> into meta-fsl-arm myself but that would seem somewhat wasteful if it's
+>>> already been
+>>> done)
+>> The meta-freescale repository might need some work, but it is a starting point.
+>>
+> meta-freescale merge to meta-arm-fsl is in progress - thanks Otavio:)
+>
+> Andreas
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iEYEARECAAYFAk9hqNAACgkQN1Ujt2V2gByZWgCfaalonIEGDX08JBJHxRIlzlHH
-CvMAoLAt3jYb+tGzEp4wRK/t4kBi+S1f
-=B3mC
------END PGP SIGNATURE-----
 
---HWvPVVuAAfuRc6SZ--
+
