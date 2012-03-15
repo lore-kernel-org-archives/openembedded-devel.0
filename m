@@ -1,23 +1,32 @@
-Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S7vjY-0006En-V7
+	(envelope-from <s.stirtzel@googlemail.com>) id 1S855B-0004LJ-2v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 22:27:49 +0100
-Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
-	([82.42.142.101] helo=[127.0.0.1])
-	by www.dynamicdevices.co.uk with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1S7vam-0007Cp-2z
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Mar 2012 21:18:44 +0000
-Message-ID: <4F610B38.5060309@dynamicdevices.co.uk>
-Date: Wed, 14 Mar 2012 21:18:48 +0000
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+	Thu, 15 Mar 2012 08:26:45 +0100
+Received: by wera1 with SMTP id a1so2515164wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Mar 2012 00:17:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=VJMEDJnCnit5L75dgtw2MwW1DnsWPs1uAp4Opr19ePI=;
+	b=lqyzWNOotp9EOAyLJfmTOqIZRrMKYOKs0sN2VvgwUiy1QKDQY8GqUsInmVC4WjMU8R
+	qA8k/tVTtijRRzWRdn51aAkfgTUZWZRjYvxgymEwW1p868ALyL55RaXtnYlBeIyjvVMJ
+	QLYLghDf6w1Lh72gByzzZ27rWt9CcyrK5cBtIqk/LXcK7HIPDvCKRXjUFMRNyQQTeMPK
+	Z/d2Dn9Fyn3JYeUPBSXdKljGMwSJr2Q/23ZauKW2WBQD2bLcX8ECaH4K5VXuGVolGFQe
+	fz8P4ehf4Fa67VaJiMkyhRJc9BtG1LH90iq6YpTI2Uq7zelmydzVlYB2nP/Lli/faRsL
+	KPgQ==
 MIME-Version: 1.0
+Received: by 10.180.104.137 with SMTP id ge9mr12810504wib.20.1331795878710;
+	Thu, 15 Mar 2012 00:17:58 -0700 (PDT)
+Received: by 10.223.101.202 with HTTP; Thu, 15 Mar 2012 00:17:58 -0700 (PDT)
+In-Reply-To: <4F610B38.5060309@dynamicdevices.co.uk>
+References: <4F610B38.5060309@dynamicdevices.co.uk>
+Date: Thu, 15 Mar 2012 08:17:58 +0100
+Message-ID: <CAGiJk9c+bcDHk5MCOE_bRRyi-c9tDy6cjPvFgcrpiXtHpPGOWg@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: oe-core layer including support for i.MX28
+Subject: Re: oe-core layer including support for i.MX28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,28 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Mar 2012 21:27:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Mar 2012 07:26:45 -0000
+Content-Type: text/plain; charset=UTF-8
+
+2012/3/14 Alex J Lennon <ajlennon@dynamicdevices.co.uk>:
+> Hi,
 
 Hi,
+>
+> I'm trying to begin the migration from oe-classic to oe-core, focussing on
+> Freescale's
+> i.MX28 and i.MX51. I recall there was i.MX28 kit being demo'd at FOSDEM but
+> I can't
+> seem to find support anywhere for the i.MX28, which I thought might be in
+> meta-fsl-arm?
 
-I'm trying to begin the migration from oe-classic to oe-core, focussing 
-on Freescale's
-i.MX28 and i.MX51. I recall there was i.MX28 kit being demo'd at FOSDEM 
-but I can't
-seem to find support anywhere for the i.MX28, which I thought might be 
-in meta-fsl-arm?
+did the meta-fsl-arm developers merge the meta-freescale repository?
+AFAICT there was support for i.MX28 in Andreas git repository:
+http://gitorious.org/schnitzeltony-oe-meta/meta-freescale
 
-Can anybody point me in the right direction? (I've half a mind to try 
-adding the support
-into meta-fsl-arm myself but that would seem somewhat wasteful if it's 
-already been
-done)
+>
+> Can anybody point me in the right direction? (I've half a mind to try adding
+> the support
+> into meta-fsl-arm myself but that would seem somewhat wasteful if it's
+> already been
+> done)
 
-Thanks,
+The meta-freescale repository might need some work, but it is a starting point.
 
-Alex/
 
+-- 
+Regards
+Samuel
 
 
