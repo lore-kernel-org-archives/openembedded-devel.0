@@ -1,36 +1,33 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S8Vqy-0002fO-2w
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1S8XQ7-0004m4-Hj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Mar 2012 13:01:52 +0100
-Received: by wera1 with SMTP id a1so3856079wer.6
+	Fri, 16 Mar 2012 14:42:15 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1S8XHe-0005DG-2B>; Fri, 16 Mar 2012 14:33:30 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1S8XHd-0005XZ-P0>; Fri, 16 Mar 2012 14:33:29 +0100
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1S8XHc-0003S0-MA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2012 04:53:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=J3oqw7pt6u54mk+6blqw26rqID+gg04BDmhQfhnyitI=;
-	b=WgWb5nWRNmrGz+vUowNVEcO7+90RFHPBcXgQ0U0mxdui67iOyb2+ilWv5UyBDfKWRK
-	nYNs6uj8m9O9fqs8EOuV5Cyy1Ap8sPIfjccIbAYQj/EgeXghbkMKVKvd5vaRfQ5ZdtZM
-	GMxNTS3Gp5CuO8vu78JBhkL8LvO6uFIspNdipYb3qALd6KHIKcoRRkv+/DkcDYqwaDJI
-	yWI1SOqJ/BP8ppW/1S47ZLjzBNk/8EjiqBJrbGVdsRtrsk9jnp63smFvLnG3jakYKv7W
-	nRUZWhO/DsAIfVL7TJDKC7bzreCl3iJevrzv8c/3zZm2sy0bSGwX1JDpG9+AdFhpQ29Y
-	N3cw==
-Received: by 10.180.94.33 with SMTP id cz1mr5866941wib.13.1331898784471;
-	Fri, 16 Mar 2012 04:53:04 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id df3sm13197857wib.1.2012.03.16.04.53.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Mar 2012 04:53:03 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 16 Mar 2012 14:33:28 +0100
+Date: Fri, 16 Mar 2012 14:33:28 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Mar 2012 12:53:01 +0100
-Message-Id: <1331898781-4682-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+Message-ID: <20120316133328.GA13219@mi.fu-berlin.de>
+References: <4F62FFB7.5070401@nedap.com>
 MIME-Version: 1.0
-Subject: [PATCH] libass.inc: fix typo OE_EXTRACONF -> EXTRA_OECONF
+In-Reply-To: <4F62FFB7.5070401@nedap.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: remove dbg and dev packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,38 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2012 12:01:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 16 Mar 2012 13:42:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Fri, Mar 16, 2012 at 09:54:15AM +0100, Jaap de Jong wrote:
+> Hi!
+> 
+> is there an option (in local.conf?) to not build (or not add to the
+> repository of) the dbg and dev packages?
+> 
+> Thanks!
+> Jaap
 
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-multimedia/libass/libass.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Why dont write a shell skript which deletes all dbg and dev packages and calles the opkg index command afterwards?
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
-index 9fc0e07..fbf4424 100644
---- a/meta-oe/recipes-multimedia/libass/libass.inc
-+++ b/meta-oe/recipes-multimedia/libass/libass.inc
-@@ -6,13 +6,13 @@ LICENSE = "ISC"
- 
- DEPENDS = "enca fontconfig freetype libpng"
- 
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.bz2"
- 
- inherit autotools pkgconfig
- 
--OE_EXTRACONF = " \
-+EXTRA_OECONF = " \
- 	--enable-enca \
- 	--enable-fontconfig \
- 	--enable-png \
--- 
-1.7.6.5
-
+Bye Henning
 
 
