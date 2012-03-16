@@ -1,23 +1,39 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1S8ZeO-0008QO-GO
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <tom.rini@gmail.com>) id 1S8b8u-0002xU-DZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Mar 2012 17:05:08 +0100
-Received: (qmail invoked by alias); 16 Mar 2012 15:56:20 -0000
-Received: from unknown (EHLO jethro.cheepee.homedns.org) [95.76.68.223]
-	by mail.gmx.net (mp002) with SMTP; 16 Mar 2012 16:56:20 +0100
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1/N+nJD01XN7n3XFX6/rL5reC/TAgG98+8zGXbCd1
-	5U/I1wM71StPMb
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Mar 2012 17:56:09 +0200
-Message-Id: <1331913369-31149-1-git-send-email-cheepeero@gmx.net>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <4F5F7E1F.4000901@linux.intel.com>
-References: <4F5F7E1F.4000901@linux.intel.com>
-X-Y-GMX-Trusted: 0
-Subject: [oe-core][PATCH v2] qt-mobility: fix build in the absence of opengl
+	Fri, 16 Mar 2012 18:40:44 +0100
+Received: by dado14 with SMTP id o14so6824642dad.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Mar 2012 10:31:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=//7DIpzJT5pCySFB7NW/nQLB8qYV41z4oJQ6xJtXdE8=;
+	b=w8STHBQJVTgjM5RsNVINDKAnNxPFHoA44fWLPSLJJxhibY2r7YxvmDfUFzEIDFUATa
+	kfO0OtFffaiRAVDJPq6frvlt7lfwTTx7ImCvDrlnJMGyZrplRXtbmk/HA+tWvC/FO3gv
+	XhUUZ7h5pbOmvxXyJm0cWJpV1NsOFXDRuIXDEiL5cT/0KR5qxMlLVsnglz98DYRErtM0
+	Siu4Tt0bjBzOYXMdRcED7pX7MWdSNRWmxakAo80E1d0J0HEEqw/VhUtbl+QDR4yP0Wgm
+	Pdr+rEl/9osA0GFWandxWirwJJ0WcP9K3eICnkIKA220NqM6GHth9lFc3mgdgn/s9uT6
+	cQsw==
+Received: by 10.68.230.230 with SMTP id tb6mr17100298pbc.40.1331919115082;
+	Fri, 16 Mar 2012 10:31:55 -0700 (PDT)
+Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id r9sm4711507pbi.53.2012.03.16.10.31.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 16 Mar 2012 10:31:54 -0700 (PDT)
+Date: Fri, 16 Mar 2012 10:31:52 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <20120316173152.GA31661@bill-the-cat>
+References: <cover.1330097955.git.sledz@dresearch-fe.de>
+	<cover.1331724547.git.sledz@dresearch-fe.de>
+MIME-Version: 1.0
+In-Reply-To: <cover.1331724547.git.sledz@dresearch-fe.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Koen Kooi <koen@openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/7] pull request 20120314
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,80 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2012 16:05:08 -0000
+X-List-Received-Date: Fri, 16 Mar 2012 17:40:44 -0000
+X-Groupsio-MsgNum: 37809
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="liOOAslEiF7prFVr"
+Content-Disposition: inline
 
-QMake pro files don't explicitly define QT_NO_OPENGL if the
-configuration lacks opengl, but example code relies on this define.
----
- .../qt4/files/qt-mobility-no-opengl.patch          |   36 ++++++++++++++++++++
- meta/recipes-qt/qt4/qt-mobility_1.2.0.inc          |    5 ++-
- 2 files changed, 39 insertions(+), 2 deletions(-)
- create mode 100644 meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+--liOOAslEiF7prFVr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
-new file mode 100644
-index 0000000..aa15683
---- /dev/null
-+++ b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
-@@ -0,0 +1,36 @@
-+diff --git a/examples/declarative-camera/declarative-camera.pro b/examples/declarative-camera/declarative-camera.pro
-+index 8164fbc..54fd8ad 100644
-+--- a/examples/declarative-camera/declarative-camera.pro
-++++ b/examples/declarative-camera/declarative-camera.pro
-+@@ -5,10 +5,10 @@ TEMPLATE=app
-+ 
-+ QT += declarative network
-+ 
-+-!maemo5 {
-+-    contains(QT_CONFIG, opengl) {
-+-        QT += opengl
-+-    }
-++contains(QT_CONFIG, opengl): !maemo5 {
-++   QT += opengl
-++} else {
-++   DEFINES += QT_NO_OPENGL
-+ }
-+ 
-+ win32 {
-+diff --git a/examples/videographicsitem/videographicsitem.pro b/examples/videographicsitem/videographicsitem.pro
-+index 8461beb..eedee2f 100644
-+--- a/examples/videographicsitem/videographicsitem.pro
-++++ b/examples/videographicsitem/videographicsitem.pro
-+@@ -9,7 +9,11 @@ MOBILITY = multimedia
-+ 
-+ QMAKE_RPATHDIR += $$DESTDIR
-+ 
-+-!symbian:contains(QT_CONFIG, opengl): QT += opengl
-++contains(QT_CONFIG, opengl): !symbian {
-++   QT += opengl
-++} else {
-++   DEFINES += QT_NO_OPENGL
-++}
-+ 
-+ HEADERS   += videoplayer.h \
-+              videoitem.h
-diff --git a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-index 593cbd6..2ac2253 100644
---- a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-+++ b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
-@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24 \
- 
- SRC_URI = "http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-${PV}.tar.gz \
-            file://qt-mobility-configure.patch \
--           file://0001-gstvideoconnector-fixed-buffers-allocation.patch"
-+           file://0001-gstvideoconnector-fixed-buffers-allocation.patch \
-+           file://qt-mobility-no-opengl.patch"
- 
- SRC_URI[md5sum]="ea5db5a8d3dd4709c2926dceda646bd8"
- SRC_URI[sha256sum]="ee3c88975e04139ac9589f76d4be646d44fcbc4c8c1cf2db621abc154cf0ba44"
- 
--PR = "r2"
-+PR = "r3"
- 
- S = "${WORKDIR}/qt-mobility-opensource-src-${PV}"
- 
--- 
-1.7.3.4
+On Wed, Mar 14, 2012 at 12:34:06PM +0100, Steffen Sledz wrote:
 
+> Hi Tom,
+>=20
+> please pull these commits cherry-picked from oe.dev.
+>=20
+> The first one fixes a build problem with net-snmp and libnl.
+> The others fix various fetch problems. All are well tested in
+> our own environment.
+>=20
+> This request replaces my pull request 20120224 which was rejected
+> by you with the wish to use shapshot.debian.org for various SRC_URIs.
 
+Applied, thanks!
 
+--=20
+Tom
+
+--liOOAslEiF7prFVr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAk9jeQgACgkQdZngf2G4WwOT4wCeJVjCVWw1A1caCEFTGp38xt/I
+7PAAniP/bd02QIdMRn9xYNx0FduZV1U6
+=kofw
+-----END PGP SIGNATURE-----
+
+--liOOAslEiF7prFVr--
