@@ -1,36 +1,23 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1S9Aeo-0005xp-3b
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Mar 2012 08:36:02 +0100
-Received: by wera1 with SMTP id a1so5090258wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2012 00:27:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=MkL8/YTVO9zu+eHIWG1fufPGyk6fzPmoTphPWO9pc4o=;
-	b=LU1yz8vX6j8afdfSLeJlwFGCOJya364PfZp0OdahAGo01hVyvCxRqS8LExOBYfNkCg
-	Bqz7rENXkyu23FTtaZc6h6QQY3BPXqXfMegmzM4559FVBDIDIF4/RvzR7jt52r2B3Hmu
-	eHfERtwABlqBsl2zdlBHXH7GBPrn6F1naBMlZliBbfcidE4X2KUItUmb2YBPvxF4XYKB
-	wSyuCJt22spvKRAupgmMz3Vl5s/YpQZoCNIWuKP2hY0LtwUKsNSQyavhPAvsgpTL76o0
-	GrbyEHia9Pe+0vhXlCu8iXMsXWjkaNuHumR57bg45cP+dq7P73xmkovRY/X8NEMhz3sQ
-	bBLA==
-Received: by 10.180.94.33 with SMTP id cz1mr10844315wib.13.1332055632214;
-	Sun, 18 Mar 2012 00:27:12 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k7sm23274086wia.5.2012.03.18.00.27.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 18 Mar 2012 00:27:11 -0700 (PDT)
-Date: Sun, 18 Mar 2012 08:27:09 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1S9C0P-0007WK-ST for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Mar 2012 10:02:25 +0100
+Received: from f053036091.adsl.alicedsl.de ([78.53.36.91]
+	helo=[192.168.178.43])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1S9Bs8-0000FI-4q for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Mar 2012 08:53:52 +0000
+Message-ID: <1332060803.7678.2.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120318072709.GI3855@jama.jama.net>
-References: <1332029635-5078-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1332029635-5078-1-git-send-email-andrea.adami@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-handheld][PATCH] keymaps: edit script to reuse 2.6 kernel keymaps
+Date: Sun, 18 Mar 2012 09:53:23 +0100
+In-Reply-To: <1331926860-2964-1-git-send-email-gary@mlbassoc.com>
+References: <1331926860-2964-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: Evolution 3.2.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH] midori: Add project home page info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,88 +31,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2012 07:36:02 -0000
-X-Groupsio-MsgNum: 37814
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ogUXNSQj4OI1q3LQ"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 18 Mar 2012 09:02:26 -0000
+X-Groupsio-MsgNum: 37815
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-TMiKrYQdG6xDmkBReIqi"
 
---ogUXNSQj4OI1q3LQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-TMiKrYQdG6xDmkBReIqi
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Mar 18, 2012 at 01:13:55AM +0100, Andrea Adami wrote:
-> * The keymap.sh script installed by oe-core recipe has a check
-> * for KERNEL_MAJMIN=3D`uname -r | cut -d '.' -f 1,2`
-> * so the keymaps-2.6.map's are ignored when running 3.x kernels
-> * Thus, we replace the suffix of the runtime kernel with "2.6" in the .bb=
-append.
-> * Bump PR
-
-Anyone interested in systemd support for keymaps?=20
-Here is .bbappend and .service I'm using:
-
-meta-smartphone/meta-shr/recipes-bsp/keymaps/
-
-And it's also assuming keymaps-2.6.map file.
-
-Cheers,
-
->=20
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Am Freitag, den 16.03.2012, 13:41 -0600 schrieb Gary Thomas:
+> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
 > ---
->  recipes-bsp/keymaps/keymaps_1.0.bbappend |    7 ++++++-
->  1 files changed, 6 insertions(+), 1 deletions(-)
+>  meta-oe/recipes-connectivity/midori/midori.inc |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
 >=20
-> diff --git a/recipes-bsp/keymaps/keymaps_1.0.bbappend b/recipes-bsp/keyma=
-ps/keymaps_1.0.bbappend
-> index d3310c1..039b30c 100644
-> --- a/recipes-bsp/keymaps/keymaps_1.0.bbappend
-> +++ b/recipes-bsp/keymaps/keymaps_1.0.bbappend
-> @@ -1,4 +1,4 @@
-> -PRINC =3D "1"
-> +PRINC =3D "2"
-> =20
->  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/files:"
-> =20
-> @@ -20,6 +20,11 @@ SRC_URI_append_jornada6xx   =3D " file://keymap-uk-620=
--660.map \
->  				file://keymap-uk.map \
->  				"
-> =20
-> +# we still use keymap-2.6.map files
-> +do_configure_append () {
-> +    sed -i -e 's/KERNEL_MAJMIN=3D.*$/KERNEL_MAJMIN=3D"2.6"/' ${WORKDIR}/=
-keymap.sh
-> +}
-> +
->  do_install_append () {
->      case ${MACHINE} in
->          c7x0 | tosa | akita | spitz | collie | poodle | h2200 | h4000 | =
-hx4700 | jornada6xx )
-> --=20
-> 1.7.3.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> diff --git a/meta-oe/recipes-connectivity/midori/midori.inc b/meta-oe/rec=
+ipes-connectivity/midori/midori.inc
+> index 4c7147e..dccb3ee 100644
+> --- a/meta-oe/recipes-connectivity/midori/midori.inc
+> +++ b/meta-oe/recipes-connectivity/midori/midori.inc
+> @@ -1,4 +1,5 @@
+>  DESCRIPTION =3D "Midori is a lightweight web browser."
+> +HOMEPAGE =3D "http://www.twotoasts.de/index.php?/pages/midori_summary.ht=
+ml"
+>  LICENSE =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
---ogUXNSQj4OI1q3LQ
+
+Thanks,
+
+Paul
+
+--=-TMiKrYQdG6xDmkBReIqi
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAk9ljk0ACgkQN1Ujt2V2gBz1kACgtnTx5cM7AGjyRbB4pipECiNo
-51cAnjKSe0XL1oroOhRhjljupbvAcAZl
-=oBqe
+iEYEABECAAYFAk9looMACgkQPX1aK2wOHVhsyACfel55XyBlXXGIUVTeUpptpd9Q
+DacAn20RVYtFVoki2PHVGylPl5LIaJE3
+=BpQ2
 -----END PGP SIGNATURE-----
 
---ogUXNSQj4OI1q3LQ--
+--=-TMiKrYQdG6xDmkBReIqi--
