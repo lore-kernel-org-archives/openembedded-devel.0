@@ -1,38 +1,23 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S9NH0-0000gb-Nk
+Received: from mx194.callplus.net.nz ([202.180.66.194]
+	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <roystonvasey@slingshot.co.nz>) id 1S9Orj-0002Xe-R0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Mar 2012 22:04:18 +0100
-Received: by wibhj13 with SMTP id hj13so2604238wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2012 13:55:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=EkYExJH9KTP8o6PqDjJwVpxYsswtaU/n27tLU0J7tQg=;
-	b=ijAOMAtKL5TvQHtaSI/eTIWUGYN21i5tExFUtIywpH6gWUvB9mIoowGKZvr9kEHkyh
-	shgpFVL3a101Tp5SzXWGhCJyIpLHRFsjsJwvi3JHEFPGy5XkAYaG7P/fXaGEe6VtUHuE
-	j9XuuDY0JRixhz7rI2kdRjoWd95zxcFOygPMDIFzdpCqRiUyfkLDmEW4fSygWjGFaVnq
-	IrRYR2vAS77Rbspl+DyV5d6dB3+WwgPnP9nb3seTtujptZIJcTbGiT6Iny+frJmakTwz
-	vU/Psl5mBNO4GEHU79q5hiTryA1Nk40VEbW69eq67TfqaT410yRv5aSB+XpLK/ra+uED
-	5uqA==
-Received: by 10.216.225.12 with SMTP id y12mr5271189wep.39.1332104128289;
-	Sun, 18 Mar 2012 13:55:28 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0D2E.dip.t-dialin.net.
-	[79.223.13.46])
-	by mx.google.com with ESMTPS id k6sm19902201wie.9.2012.03.18.13.55.26
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 18 Mar 2012 13:55:27 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Mar 2012 21:59:29 +0100
-Message-Id: <1332104369-4485-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1332104369-4485-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1332104369-4485-1-git-send-email-schnitzeltony@googlemail.com>
+	Sun, 18 Mar 2012 23:46:20 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Ai0KALFiZk/LYgoS/2dsb2JhbABCgk+ybAOCFIIQCAIjWQUGB1soFwEEHgWHeZ1rhkGRFBOLE4I0gyIEphCCfA
+X-IronPort-AV: E=Sophos;i="4.73,608,1325415600"; 
+	d="scan'208,217";a="250875190"
+Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
+	by ismtp2.tranzpeer.net with ESMTP; 19 Mar 2012 11:36:25 +1300
+From: "R U Local" <roystonvasey@slingshot.co.nz>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 19 Mar 2012 11:36:22 +1300
+Message-ID: <018b01cd0557$8bbd8740$a33895c0$@slingshot.co.nz>
 MIME-Version: 1.0
-Subject: [meta-oe 2/2] midori: add librsvg-native to DEPENDS
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: Ac0FUrUVKjCMg1rgQoq85ebphL1EZA==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: BSP advice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2012 21:04:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 18 Mar 2012 22:46:20 -0000
+Content-Language: en-nz
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-configure found rsvg-convert on host:
-...
-Checking for program rsvg-convert           : /usr/bin/rsvg-convert
-...
+Dear List,
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../recipes-connectivity/midori/midori_0.4.4.bb    |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Is it possible to build an Angstrom rootfs without building x-load, u-boot
+and kernel image?
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-index 7c51641..3561440 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
- HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
-+DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
-+
-+PR = "r1"
+We have a new development that uses an AM3517 based unit.
+
+The SDK comes with pre-patched source code for x-load, u-boot and kernel.
+There are also compiled binary images.
+
+To get things working quickly I'd like to build a rootfs with our software
+and dependent packages and use the supplied binaries during installation.
+
  
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--- 
-1.7.4.4
 
+Would setting ASSUME_PROVIDED in the machine BSP achieve this? 
+
+ 
+
+Cheers Mike.
+
+ 
+
+ 
 
 
