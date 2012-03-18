@@ -1,23 +1,24 @@
-Received: from mx194.callplus.net.nz ([202.180.66.194]
-	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roystonvasey@slingshot.co.nz>) id 1S9Orj-0002Xe-R0
+Received: from sanddollar.geekisp.com ([216.168.135.167])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1S9PzO-0003iC-MR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Mar 2012 23:46:20 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ai0KALFiZk/LYgoS/2dsb2JhbABCgk+ybAOCFIIQCAIjWQUGB1soFwEEHgWHeZ1rhkGRFBOLE4I0gyIEphCCfA
-X-IronPort-AV: E=Sophos;i="4.73,608,1325415600"; 
-	d="scan'208,217";a="250875190"
-Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
-	by ismtp2.tranzpeer.net with ESMTP; 19 Mar 2012 11:36:25 +1300
-From: "R U Local" <roystonvasey@slingshot.co.nz>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 Mar 2012 11:36:22 +1300
-Message-ID: <018b01cd0557$8bbd8740$a33895c0$@slingshot.co.nz>
+	Mon, 19 Mar 2012 00:58:18 +0100
+Received: (qmail 17129 invoked by uid 1003); 18 Mar 2012 23:49:26 -0000
+Received: from unknown (HELO ?184.48.57.244?)
+	(philip@opensdr.com@184.48.57.244)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	18 Mar 2012 23:49:25 -0000
+Message-ID: <4F66747E.504@balister.org>
+Date: Sun, 18 Mar 2012 17:49:18 -0600
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Ac0FUrUVKjCMg1rgQoq85ebphL1EZA==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: BSP advice
+To: openembedded-devel@lists.openembedded.org
+References: <018b01cd0557$8bbd8740$a33895c0$@slingshot.co.nz>
+In-Reply-To: <018b01cd0557$8bbd8740$a33895c0$@slingshot.co.nz>
+X-Enigmail-Version: 1.1.2
+Subject: Re: BSP advice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2012 22:46:20 -0000
-Content-Language: en-nz
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sun, 18 Mar 2012 23:58:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Dear List,
+On 03/18/2012 04:36 PM, R U Local wrote:
+> Dear List,
+> 
+> Is it possible to build an Angstrom rootfs without building x-load, u-boot
+> and kernel image?
+> 
+> We have a new development that uses an AM3517 based unit.
+> 
+> The SDK comes with pre-patched source code for x-load, u-boot and kernel.
+> There are also compiled binary images.
+> 
+> To get things working quickly I'd like to build a rootfs with our software
+> and dependent packages and use the supplied binaries during installation.
+> 
+>  
+> 
+> Would setting ASSUME_PROVIDED in the machine BSP achieve this? 
 
-Is it possible to build an Angstrom rootfs without building x-load, u-boot
-and kernel image?
+How are you going to handle the kernel modules?
 
-We have a new development that uses an AM3517 based unit.
+Build something close and ignore the packages you do not need :)
 
-The SDK comes with pre-patched source code for x-load, u-boot and kernel.
-There are also compiled binary images.
-
-To get things working quickly I'd like to build a rootfs with our software
-and dependent packages and use the supplied binaries during installation.
-
- 
-
-Would setting ASSUME_PROVIDED in the machine BSP achieve this? 
-
- 
-
-Cheers Mike.
-
- 
-
- 
+Philip
 
 
