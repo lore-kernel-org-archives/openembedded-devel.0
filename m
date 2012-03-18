@@ -1,25 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S9HCA-0007pD-1G for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Mar 2012 15:34:54 +0100
-Received: from f053036091.adsl.alicedsl.de ([78.53.36.91]
-	helo=[192.168.178.43])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1S9H3s-000170-B4 for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Mar 2012 14:26:20 +0000
-Message-ID: <1332080764.7678.29.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S9Mz4-000880-1M
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Mar 2012 21:45:46 +0100
+Received: by wibhj13 with SMTP id hj13so2594716wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Mar 2012 13:36:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=A1gQHeIqR/st/bYcfQF8k8IvCGpUKZqC2Hu5jlxDyDk=;
+	b=L2GF80EcgVi0BiJt/c0KnhPJfYhHXsYDbfA4UOhXNJH2ItuDH+oM6DpFDLflJfsXxN
+	ZLJbKo2tNLPxyoOvA9vP7jas/XuD6DRkMMuDND2AY5/RB/uc7gpBSi28PhCA2aFF6QwG
+	BLom8a6GTYJRi1p6m7rNOUSF7fc8YwasdX18S2NM328WsXQwl5njCS3Vs2NbWQf/2zoo
+	er+mQkqwFf2Q219O835tty8liUll2aYPVQr5xHE9kB3FDqajIIlw/y1qDqSAVBAIbPEd
+	biAxexuvJPMvr8buNKNjMXmOENoxiHcxqt/oV0n6zZ3/XvGnFi82hx8ZNk7BstYIUPT8
+	eibw==
+Received: by 10.216.144.138 with SMTP id n10mr5637457wej.56.1332103015237;
+	Sun, 18 Mar 2012 13:36:55 -0700 (PDT)
+Received: from localhost.localdomain (p4FDF0D2E.dip.t-dialin.net.
+	[79.223.13.46])
+	by mx.google.com with ESMTPS id l5sm19761891wia.11.2012.03.18.13.36.52
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 18 Mar 2012 13:36:52 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Mar 2012 15:26:04 +0100
-In-Reply-To: <4F65E225.4080400@mlbassoc.com>
-References: <1331926860-2964-1-git-send-email-gary@mlbassoc.com>
-	<jk4j25$dat$1@dough.gmane.org> <20120318121834.GL3855@jama.jama.net>
-	<4F65E225.4080400@mlbassoc.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH] midori: Add project home page info
+Date: Sun, 18 Mar 2012 21:40:49 +0100
+Message-Id: <1332103254-3729-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-oe 1/6] mpd: initial add 0.16.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,69 +44,545 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2012 14:34:54 -0000
-X-Groupsio-MsgNum: 37820
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-aUuY1gm0OlvGaLu5tDs+"
+X-List-Received-Date: Sun, 18 Mar 2012 20:45:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-aUuY1gm0OlvGaLu5tDs+
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-multimedia/musicpd/mpd/mpd       |   43 +++
+ meta-oe/recipes-multimedia/musicpd/mpd/mpd.conf  |  420 ++++++++++++++++++++++
+ meta-oe/recipes-multimedia/musicpd/mpd_0.16.7.bb |   42 +++
+ 3 files changed, 505 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/musicpd/mpd/mpd
+ create mode 100644 meta-oe/recipes-multimedia/musicpd/mpd/mpd.conf
+ create mode 100644 meta-oe/recipes-multimedia/musicpd/mpd_0.16.7.bb
 
-Am Sonntag, den 18.03.2012, 07:24 -0600 schrieb Gary Thomas:
-> On 2012-03-18 06:18, Martin Jansa wrote:
-> > On Sun, Mar 18, 2012 at 01:05:20PM +0100, Koen Kooi wrote:
-> >> -----BEGIN PGP SIGNED MESSAGE-----
-> >> Hash: SHA1
-> >>
-> >> Op 16-03-12 20:41, Gary Thomas schreef:
-> >>> Signed-off-by: Gary Thomas<gary@mlbassoc.com>  ---
-> >>> meta-oe/recipes-connectivity/midori/midori.inc |    1 + 1 files chang=
-ed,
-> >>> 1 insertions(+), 0 deletions(-)
-> >>>
-> >>> diff --git a/meta-oe/recipes-connectivity/midori/midori.inc
-> >>> b/meta-oe/recipes-connectivity/midori/midori.inc index 4c7147e..dccb3=
-ee
-> >>> 100644 --- a/meta-oe/recipes-connectivity/midori/midori.inc +++
-> >>> b/meta-oe/recipes-connectivity/midori/midori.inc @@ -1,4 +1,5 @@
-> >>> DESCRIPTION =3D "Midori is a lightweight web browser." +HOMEPAGE =3D
-> >>> "http://www.twotoasts.de/index.php?/pages/midori_summary.html" LICENS=
-E =3D
-> >>> "LGPLv2.1" LIC_FILES_CHKSUM =3D
-> >>> "file://COPYING;md5=3Dfbc093901857fcd118f065f900982c24"
-> >>
-> >> Missing PR bump
-> >
-> > Khem applied it before my version upgrade, so it should be fine in
-> > feeds.
->=20
-> Plus, it's informational only, so why bump the PR?
+diff --git a/meta-oe/recipes-multimedia/musicpd/mpd/mpd b/meta-oe/recipes-multimedia/musicpd/mpd/mpd
+new file mode 100644
+index 0000000..f71142a
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/musicpd/mpd/mpd
+@@ -0,0 +1,43 @@
++#!/bin/sh
++DESC="The Music Player Daemon"
++DAEMON=/usr/bin/mpd
++MPDCONF=/etc/mpd.conf
++PIDFILE=$(sed -n 's/^[[:space:]]*pid_file[[:space:]]*"\?\([^"]*\)\"\?/\1/p' $MPDCONF)
++DBFILE=$(sed -n 's/^[[:space:]]*db_file[[:space:]]*"\?\([^"]*\)\"\?/\1/p' $MPDCONF)
++
++case "$1" in
++  start)
++    if [ -z "$PIDFILE" -o -z "$DBFILE" ]; then
++        echo "$MPDCONF must have db_file and pid_file set; cannot start daemon."
++        exit 1
++    fi
++
++    PIDDIR=$(dirname "$PIDFILE")
++    if [ ! -d "$PIDDIR" ]; then
++        mkdir -m 0755 $PIDDIR
++        chown mpd:audio $PIDDIR
++    fi
++
++    echo "Starting $DESC"
++    start-stop-daemon --start --quiet --oknodo --pidfile "$PIDFILE" --exec "$DAEMON" "$MPDCONF"
++    ;;
++
++  stop)
++    if [ -z "$PIDFILE" ]; then
++        echo "$MPDCONF must have pid_file set; cannot stop daemon."
++        exit 1
++    fi
++    echo "Stopping $DESC"
++    $DAEMON --kill "$MPDCONF"
++    ;;
++
++  restart)
++    $0 stop >/dev/null 2>&1
++    $0 start
++    ;;
++
++  *)
++    echo "Usage: $0 {start|stop|restart}"
++    exit 0
++    ;;
++esac
+diff --git a/meta-oe/recipes-multimedia/musicpd/mpd/mpd.conf b/meta-oe/recipes-multimedia/musicpd/mpd/mpd.conf
+new file mode 100644
+index 0000000..3a99d8a
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/musicpd/mpd/mpd.conf
+@@ -0,0 +1,420 @@
++# An example configuration file for MPD
++# See the mpd.conf man page for a more detailed description of each parameter.
++
++
++# Files and directories #######################################################
++#
++# This setting controls the top directory which MPD will search to discover the
++# available audio files and add them to the daemon's online database. This
++# setting defaults to the XDG directory, otherwise the music directory will be
++# be disabled and audio files will only be accepted over ipc socket (using
++# file:// protocol) or streaming files over an accepted protocol.
++#
++music_directory		"/var/lib/mpd/music"
++#
++# This setting sets the MPD internal playlist directory. The purpose of this
++# directory is storage for playlists created by MPD. The server will use
++# playlist files not created by the server but only if they are in the MPD
++# format. This setting defaults to playlist saving being disabled.
++#
++playlist_directory		"/var/lib/mpd/playlists"
++#
++# This setting sets the location of the MPD database. This file is used to
++# load the database at server start up and store the database while the
++# server is not up. This setting defaults to disabled which will allow
++# MPD to accept files over ipc socket (using file:// protocol) or streaming
++# files over an accepted protocol.
++#
++db_file			"/var/lib/mpd/mpd.db"
++#
++# These settings are the locations for the daemon log files for the daemon.
++# These logs are great for troubleshooting, depending on your log_level
++# settings.
++#
++# The special value "syslog" makes MPD use the local syslog daemon. This
++# setting defaults to logging to syslog, otherwise logging is disabled.
++#
++log_file			"/var/log/mpd.log"
++#
++# This setting sets the location of the file which stores the process ID
++# for use of mpd --kill and some init scripts. This setting is disabled by
++# default and the pid file will not be stored.
++#
++pid_file			"/var/run/mpd/mpd.pid"
++#
++# This setting sets the location of the file which contains information about
++# most variables to get MPD back into the same general shape it was in before
++# it was brought down. This setting is disabled by default and the server
++# state will be reset on server start up.
++#
++state_file		"/var/lib/mpd/state"
++#
++# The location of the sticker database.  This is a database which
++# manages dynamic information attached to songs.
++#
++#sticker_file			"~/.mpd/sticker.sql"
++#
++###############################################################################
++
++
++# General music daemon options ################################################
++#
++# This setting specifies the user that MPD will run as. MPD should never run as
++# root and you may use this setting to make MPD change its user ID after
++# initialization. This setting is disabled by default and MPD is run as the
++# current user.
++#
++user "mpd"
++#
++# This setting specifies the group that MPD will run as. If not specified
++# primary group of user specified with "user" setting will be used (if set).
++# This is useful if MPD needs to be a member of group such as "audio" to
++# have permission to use sound card.
++#
++group				"audio"
++#
++# This setting sets the address for the daemon to listen on. Careful attention
++# should be paid if this is assigned to anything other then the default, any.
++# This setting can deny access to control of the daemon.
++#
++# For network
++bind_to_address		"any"
++#
++# And for Unix Socket
++#bind_to_address		"~/.mpd/socket"
++#
++# This setting is the TCP port that is desired for the daemon to get assigned
++# to.
++#
++#port				"6600"
++#
++# This setting controls the type of information which is logged. Available
++# setting arguments are "default", "secure" or "verbose". The "verbose" setting
++# argument is recommended for troubleshooting, though can quickly stretch
++# available resources on limited hardware storage.
++#
++#log_level			"default"
++#
++# If you have a problem with your MP3s ending abruptly it is recommended that
++# you set this argument to "no" to attempt to fix the problem. If this solves
++# the problem, it is highly recommended to fix the MP3 files with vbrfix
++# (available from <http://www.willwap.co.uk/Programs/vbrfix.php>), at which
++# point gapless MP3 playback can be enabled.
++#
++#gapless_mp3_playback			"yes"
++#
++# This setting enables MPD to create playlists in a format usable by other
++# music players.
++#
++#save_absolute_paths_in_playlists	"no"
++#
++# This setting defines a list of tag types that will be extracted during the
++# audio file discovery process. Optionally, 'comment' can be added to this
++# list.
++#
++#metadata_to_use	"artist,album,title,track,name,genre,date,composer,performer,disc"
++#
++# This setting enables automatic update of MPD's database when files in
++# music_directory are changed.
++#
++#auto_update	"yes"
++#
++# Limit the depth of the directories being watched, 0 means only watch
++# the music directory itself.  There is no limit by default.
++#
++#auto_update_depth "3"
++#
++###############################################################################
++
++
++# Symbolic link behavior ######################################################
++#
++# If this setting is set to "yes", MPD will discover audio files by following
++# symbolic links outside of the configured music_directory.
++#
++#follow_outside_symlinks	"yes"
++#
++# If this setting is set to "yes", MPD will discover audio files by following
++# symbolic links inside of the configured music_directory.
++#
++#follow_inside_symlinks		"yes"
++#
++###############################################################################
++
++
++# Zeroconf / Avahi Service Discovery ##########################################
++#
++# If this setting is set to "yes", service information will be published with
++# Zeroconf / Avahi.
++#
++#zeroconf_enabled		"yes"
++#
++# The argument to this setting will be the Zeroconf / Avahi unique name for
++# this MPD server on the network.
++#
++#zeroconf_name			"Music Player"
++#
++###############################################################################
++
++
++# Permissions #################################################################
++#
++# If this setting is set, MPD will require password authorization. The password
++# can setting can be specified multiple times for different password profiles.
++#
++#password                        "password@read,add,control,admin"
++#
++# This setting specifies the permissions a user has who has not yet logged in.
++#
++#default_permissions             "read,add,control,admin"
++#
++###############################################################################
++
++
++# Input #######################################################################
++#
++
++input {
++        plugin "curl"
++#       proxy "proxy.isp.com:8080"
++#       proxy_user "user"
++#       proxy_password "password"
++}
++
++#
++###############################################################################
++
++# Audio Output ################################################################
++#
++# MPD supports various audio output types, as well as playing through multiple
++# audio outputs at the same time, through multiple audio_output settings
++# blocks. Setting this block is optional, though the server will only attempt
++# autodetection for one sound card.
++#
++# See <http://mpd.wikia.com/wiki/Configuration#Audio_Outputs> for examples of
++# other audio outputs.
++#
++# board specific examples #####################################################
++# (feel free to add futher)
++#
++# overo (tested with TOBI expansion board)
++#audio_output {
++#	type		"alsa"
++#	name		"overo"
++#	mixer_control	"Headset"
++#	mixer_index	"0"
++#}
++#
++# general examples ############################################################
++#
++# An example of an ALSA output:
++#
++#audio_output {
++#	type		"alsa"
++#	name		"My ALSA Device"
++##	device		"hw:0,0"	# optional
++##	format		"44100:16:2"	# optional
++##	mixer_type      "hardware"	# optional
++##	mixer_device	"default"	# optional
++##	mixer_control	"PCM"		# optional
++##	mixer_index	"0"		# optional
++#}
++#
++# An example of an OSS output:
++#
++#audio_output {
++#	type		"oss"
++#	name		"My OSS Device"
++##	device		"/dev/dsp"	# optional
++##	format		"44100:16:2"	# optional
++##	mixer_type      "hardware"	# optional
++##	mixer_device	"/dev/mixer"	# optional
++##	mixer_control	"PCM"		# optional
++#}
++#
++# An example of a shout output (for streaming to Icecast):
++#
++#audio_output {
++#	type		"shout"
++#	encoding	"ogg"			# optional
++#	name		"My Shout Stream"
++#	host		"localhost"
++#	port		"8000"
++#	mount		"/mpd.ogg"
++#	password	"hackme"
++#	quality		"5.0"
++#	bitrate		"128"
++#	format		"44100:16:1"
++##	protocol	"icecast2"		# optional
++##	user		"source"		# optional
++##	description	"My Stream Description"	# optional
++##	genre		"jazz"			# optional
++##	public		"no"			# optional
++##	timeout		"2"			# optional
++##	mixer_type      "software"		# optional
++#}
++#
++# An example of a recorder output:
++#
++#audio_output {
++#	type		"recorder"
++#	name		"My recorder"
++#	encoder		"vorbis"		# optional, vorbis or lame
++#	path		"/var/lib/mpd/recorder/mpd.ogg"
++##	quality		"5.0"			# do not define if bitrate is defined
++#	bitrate		"128"			# do not define if quality is defined
++#	format		"44100:16:1"
++#}
++#
++# An example of a httpd output (built-in HTTP streaming server):
++#
++#audio_output {
++#	type		"httpd"
++#	name		"My HTTP Stream"
++#	encoder		"vorbis"		# optional, vorbis or lame
++#	port		"8000"
++#	bind_to_address	"0.0.0.0"		# optional, IPv4 or IPv6
++##	quality		"5.0"			# do not define if bitrate is defined
++#	bitrate		"128"			# do not define if quality is defined
++#	format		"44100:16:1"
++#	max_clients	"0"			# optional 0=no limit
++#}
++#
++# An example of a pulseaudio output (streaming to a remote pulseaudio server)
++#
++#audio_output {
++#	type		"pulse"
++#	name		"My Pulse Output"
++##	server		"remote_server"		# optional
++##	sink		"remote_server_sink"	# optional
++#}
++#
++## Example "pipe" output:
++#
++#audio_output {
++#	type		"pipe"
++#	name		"my pipe"
++#	command		"aplay -f cd 2>/dev/null"
++## Or if you're want to use AudioCompress
++#	command		"AudioCompress -m | aplay -f cd 2>/dev/null"
++## Or to send raw PCM stream through PCM:
++#	command		"nc example.org 8765"
++#	format		"44100:16:2"
++#}
++#
++## An example of a null output (for no audio output):
++#
++#audio_output {
++#	type		"null"
++#	name		"My Null Output"
++#	mixer_type      "none"			# optional
++#}
++#
++# This setting will change all decoded audio to be converted to the specified
++# format before being passed to the audio outputs. By default, this setting is
++# disabled.
++#
++#audio_output_format		"44100:16:2"
++#
++# If MPD has been compiled with libsamplerate support, this setting specifies
++# the sample rate converter to use.  Possible values can be found in the
++# mpd.conf man page or the libsamplerate documentation. By default, this is
++# setting is disabled.
++#
++#samplerate_converter		"Fastest Sinc Interpolator"
++#
++###############################################################################
++
++
++# Normalization automatic volume adjustments ##################################
++#
++# This setting specifies the type of ReplayGain to use. This setting can have
++# the argument "off", "album" or "track". See <http://www.replaygain.org>
++# for more details. This setting is off by default.
++#
++#replaygain			"album"
++#
++# This setting sets the pre-amp used for files that have ReplayGain tags. By
++# default this setting is disabled.
++#
++#replaygain_preamp		"0"
++#
++# This setting enables on-the-fly normalization volume adjustment. This will
++# result in the volume of all playing audio to be adjusted so the output has
++# equal "loudness". This setting is disabled by default.
++#
++#volume_normalization		"no"
++#
++###############################################################################
++
++
++# MPD Internal Buffering ######################################################
++#
++# This setting adjusts the size of internal decoded audio buffering. Changing
++# this may have undesired effects. Don't change this if you don't know what you
++# are doing.
++#
++#audio_buffer_size		"2048"
++#
++# This setting controls the percentage of the buffer which is filled before
++# beginning to play. Increasing this reduces the chance of audio file skipping,
++# at the cost of increased time prior to audio playback.
++#
++#buffer_before_play		"10%"
++#
++###############################################################################
++
++
++# Resource Limitations ########################################################
++#
++# These settings are various limitations to prevent MPD from using too many
++# resources. Generally, these settings should be minimized to prevent security
++# risks, depending on the operating resources.
++#
++#connection_timeout		"60"
++#max_connections		"10"
++#max_playlist_length		"16384"
++#max_command_list_size		"2048"
++#max_output_buffer_size		"8192"
++#
++###############################################################################
++
++
++# Character Encoding ##########################################################
++#
++# If file or directory names do not display correctly for your locale then you
++# may need to modify this setting.
++#
++#filesystem_charset		"UTF-8"
++#
++# This setting controls the encoding that ID3v1 tags should be converted from.
++#
++#id3v1_encoding			"ISO-8859-1"
++#
++###############################################################################
++
++
++# SIDPlay decoder #############################################################
++#
++# songlength_database:
++#  Location of your songlengths file, as distributed with the HVSC.
++#  The sidplay plugin checks this for matching MD5 fingerprints.
++#  See http://www.c64.org/HVSC/DOCUMENTS/Songlengths.faq
++#
++# default_songlength:
++#  This is the default playing time in seconds for songs not in the
++#  songlength database, or in case you're not using a database.
++#  A value of 0 means play indefinitely.
++#
++# filter:
++#  Turns the SID filter emulation on or off.
++#
++#decoder {
++#	plugin			"sidplay"
++#	songlength_database	"/media/C64Music/DOCUMENTS/Songlengths.txt"
++#	default_songlength	"120"
++#	filter "true"
++#}
++#
++###############################################################################
++
+diff --git a/meta-oe/recipes-multimedia/musicpd/mpd_0.16.7.bb b/meta-oe/recipes-multimedia/musicpd/mpd_0.16.7.bb
+new file mode 100644
+index 0000000..bc07415
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/musicpd/mpd_0.16.7.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "Music Player Daemon"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++HOMEPAGE ="http://sourceforge.net/projects/musicpd"
++
++DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 \
++           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad lame libid3tag', d)}"
++
++SRC_URI = " \
++    ${SOURCEFORGE_MIRROR}/musicpd/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
++    file://mpd \
++    file://mpd.conf \
++"
++
++SRC_URI[md5sum] = "3d0e7c36646e80386b32966bd4268e8d"
++SRC_URI[sha256sum] = "47c10553389752c7fa072cf87c2bd30c552de75819fcf8286f3e7cc14ff0e32e"
++
++inherit autotools update-rc.d useradd
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${localstatedir}/lib/mpd \
++    --groups audio \
++    --user-group mpd"
++
++INITSCRIPT_NAME = "mpd"
++INITSCRIPT_PARAMS = "defaults 95"
++
++do_install_append() {
++    install -d ${D}/${sysconfdir}/init.d
++    install -m 755 ${WORKDIR}/mpd ${D}/${sysconfdir}/init.d
++    install -m 644 ${WORKDIR}/mpd.conf ${D}/${sysconfdir}/mpd.conf
++
++    install -d ${D}/${localstatedir}/lib/mpd/music
++    chown -R mpd ${D}/${localstatedir}/lib/mpd
++    chmod 775 ${D}/${localstatedir}/lib/mpd/music
++
++    install -d ${D}/${localstatedir}/lib/mpd/playlists
++}
++
++EXTRA_OECONF = "enable_bzip2=yes"
+-- 
+1.7.4.4
 
-Because the metadata is included in packages as far as I know. So
-package manager can display the homepage field.
-
-> That's silly.
-
-Please use another wording next time.
 
 
-Thanks,
-
-Paul
-
---=-aUuY1gm0OlvGaLu5tDs+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEABECAAYFAk9l8HwACgkQPX1aK2wOHVil/QCdHsCv2rf4UvXpuxgUsxOYh0EL
-bTMAn2PapA6JuJmVBeEpcYGC6KaTzgov
-=+b0M
------END PGP SIGNATURE-----
-
---=-aUuY1gm0OlvGaLu5tDs+--
