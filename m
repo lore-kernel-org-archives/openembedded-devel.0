@@ -1,41 +1,34 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1S9XTa-0002VM-F7
+	(envelope-from <philipp.zabel@gmail.com>) id 1S9YWY-0006G1-3m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 08:57:58 +0100
-Received: by bkcjg15 with SMTP id jg15so4383478bkc.6
+	Mon, 19 Mar 2012 10:05:06 +0100
+Received: by yenm3 with SMTP id m3so5136745yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 00:49:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=UFdjARcRJiuZAnEn3VbBplMtoCFa/Gr4qTVJqb9JtFs=;
-	b=f0G4SJ8W2vQ/t42IUN3cWqZDWWb95UxUV5zaAwCywxJ9407xgQw6gQyJpcSrywpmIw
-	UsZHj5MVDw0T4/itSpqIACR/APUeL6UgWINPeIReWe8cnGv9fLy7v9xcJdyJZy4cb4Xd
-	e7wDCrymsB7NoHdjz7VHxW6Yave4/ESHkcfqf2fX8Smcd+3rTd4vIN4E/+ZosSxKqWnT
-	iq9Dtg9svaage9KweStJ9MXLu5G3UAGSu0KQ1oOA8Y3RROA2Rv5yWoQ0hxp8GGl4XL13
-	FKmjb1M7Gfm5rSntfyAXiByNo1oMxSEH68eTE4eMNlbVkzjyhuFfesy3GDMlAdMq9Fyf
-	RyXQ==
-Received: by 10.204.136.197 with SMTP id s5mr4343354bkt.9.1332143347403;
-	Mon, 19 Mar 2012 00:49:07 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id s16sm23741755bkt.3.2012.03.19.00.49.06
-	(version=SSLv3 cipher=OTHER); Mon, 19 Mar 2012 00:49:06 -0700 (PDT)
-Message-ID: <4F66E4F2.2000909@dresearch-fe.de>
-Date: Mon, 19 Mar 2012 08:49:06 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Mon, 19 Mar 2012 01:56:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=I66Za3IzJ339TpdVL1mT1Au70rcUjrUZCO8y+69KqrI=;
+	b=tHdgQq59cQV+WlaC2BDGNIfQdWbYG4CcPuF1+cHjpw/0dYoxdrHrmczcsaBa2FqGRi
+	OFGLC65JGHjSl3jNW52jphLlfl01tbTOLunmO76RSiDI20CrbSmLwpQnKmzycQ+7sJxn
+	ioghdzbvLQWWCCbTQztK3KAo+SVpI8mHl6aDBdsez9BhzVLm4LiHxad4jY624dndC5Hx
+	BrDOIwQbte5+bFZhBvRiT4s6xwHLNEqhQ/D+tzvF50haEcN+RrwkK9pRGPTcVzqgRhGC
+	l7Xr6PeSths/ORM7ZdVgNeXhe3MqdQpw45mqRtKJUoSg9NTzZlYEFYVg/6NR0GlvLBEs
+	BwmA==
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <4F61C54B.1000609@dresearch-fe.de>
-In-Reply-To: <4F61C54B.1000609@dresearch-fe.de>
-X-Enigmail-Version: 1.4
-X-Gm-Message-State: ALoCoQn2naTyMxgzKd1Tn7ZdYAScb/84dooEZdr081hdFHTazM/npRbRemWYDgsZmoYgem9Q9sOs
-Subject: Re: libmatthew-java-0.7.1.tar.gz not fetchable
+Received: by 10.60.4.105 with SMTP id j9mr12827913oej.29.1332147374477; Mon,
+	19 Mar 2012 01:56:14 -0700 (PDT)
+Received: by 10.182.11.71 with HTTP; Mon, 19 Mar 2012 01:56:14 -0700 (PDT)
+In-Reply-To: <4F61EF82.6060609@dresearch-fe.de>
+References: <CAAwVp3u7i6ptQ=dvCV_RGwctHqDWKLXXPXKjGwZJ_okhDx8gwg@mail.gmail.com>
+	<4F61EF82.6060609@dresearch-fe.de>
+Date: Mon, 19 Mar 2012 09:56:14 +0100
+Message-ID: <CA+gwMcdbyWg4wYoT9abUE90+t7bDnDcCM+DiX8nxM0WpJtPuJg@mail.gmail.com>
+From: Philipp Zabel <philipp.zabel@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: udev_141 vs. udev_network_queue.sh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 07:57:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 Mar 2012 09:05:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 15.03.2012 11:32, Steffen Sledz wrote:
-> libmatthew-java-0.7.1.tar.gz (used in 2011.03-maintenance branch) is no longer fetchable from it's original location (the maintainer provides the latests version only). And i did not found another reliable source.
-> 
-> Can someone put the tarball into the OE and/or Angstrom mirrors?
+On Thu, Mar 15, 2012 at 2:32 PM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
+e:
+> On 13.03.2012 16:06, Mario Schuknecht wrote:
+>> The udev script /etc/udev/scripts/network.sh writes all not configured
+>> interfaces into the file /dev/udev_network_queue
+>> root@3065-4-00001:~# cat /dev/udev_network_queue
+>> eth0
+>> lo
+>> ra0
+>> But no script or program check this file.
+>> I googled =A0udev_network_queue and found an old bitbake recipe
+>> http://svn.nslu2-linux.org/svnroot/slugos/releases/slugos-3.10-beta/open=
+embedded/packages/udev/udev_084.bb
+>> that
+>> installs =A0udev_network_queue.sh.
+>> That script checks this files and starts the interfaces.
+>>
+>> Why is this file not installed any longer? Is there any other way or
+>> concept to handle this situation?
+>
+> It seems that the installation of this script was lost in between udev_08=
+4 and udev_089. The latter was introduced by Philipp Zabel (commit 83e3ce3d=
+bc5f49a7c8ee4b535ed14d8938c252aa).
+>
+> Can someone remember if this script wasn't installed any longer by intent=
+ion or by mistake?
+>
+> Should it be installed in later udev versions again?
 
-Ping!
+I do not remember removing this script consciously.
+If it still solves a real use case, maybe it should be added back again.
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+regards
+Philipp
 
 
