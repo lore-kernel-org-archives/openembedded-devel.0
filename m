@@ -1,34 +1,33 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1S9eUg-00088h-Mr
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S9ea9-0008R7-SB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 16:27:34 +0100
-Received: by dado14 with SMTP id o14so10385378dad.6
+	Mon, 19 Mar 2012 16:33:14 +0100
+Received: by iaag37 with SMTP id g37so9422356iaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 08:18:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Mon, 19 Mar 2012 08:24:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=YYFsWY3t1QY0gTLvDIwuCoPo/AoolCHfnqq2WsWDNC0=;
-	b=sg6g/z638ni5IE6oepyez0C4XRAxSfPg2NrN9Y3JJ/W3h/Ak/DMFI9yROz7DmW6fow
-	gnXsm4vaxZjNSUKkdhyND0xB3kvTvyCwCQeuQTy3jEBO6iQXeS/mmuRXOfnr/35KdOnb
-	zW0rgcqZKfZR8deoz/aWFhLpEJp4Sc3i7jpHKE+LsIVheaH2TEwH+XyLuJnD7GEK5iGt
-	kVkF3lS4OqPfUVqj/NXPn0FX8/zZw0nCRVSH3lLLnkj2gMKGFmtzqXD5kAeM0Vta7G6I
-	1RFoFW32pIFWbVWMfDJCNK4iQe7Vnf1lVJ1ovtA4ZnjgdcYvwhp6CkJpDhGjMEVi7R0r
-	ohZQ==
+	:content-type; bh=tahvxAievg/drHqRuLeLZ98S/1MdASfL8QyX0r8Fygs=;
+	b=G2uVAgh+M12HmIJR0vW6KVof17mXU++e/u0iBSYF40SiRmUqnGDI3sIY2Nq1XtW9HF
+	ga4APEzXV78gbqgXfmE1ek0WD+a/dg6k5QKdWI+nz+3FrNm+xgBOyapmuLrJFGqo11Re
+	lbe2EMN8X2iSOAsLFI+OH5JGSYeVM+QYLbPbaAGxjdhV9h0DdtY+m8JgG723fwVxcPS8
+	krqEelxn2O71OJ5qcbmS3Oqxq6t9ZJm2xArYI0Y/gflNl+LCf1Vvb2kKhd0WkYrpkA7z
+	nygVjBq8TRXTlMyxzYmB66yUN6tKDs3b7rDRmrl9We+DfQo+dvZ53zdwEyICxb1V7ZEA
+	MF9g==
 MIME-Version: 1.0
-Received: by 10.68.217.97 with SMTP id ox1mr40533388pbc.81.1332170322363; Mon,
-	19 Mar 2012 08:18:42 -0700 (PDT)
-Received: by 10.142.241.4 with HTTP; Mon, 19 Mar 2012 08:18:42 -0700 (PDT)
-In-Reply-To: <4F66E4F2.2000909@dresearch-fe.de>
-References: <4F61C54B.1000609@dresearch-fe.de>
-	<4F66E4F2.2000909@dresearch-fe.de>
-Date: Mon, 19 Mar 2012 08:18:42 -0700
-Message-ID: <CA+M6bXmpiegfSspYOwybxKSLf4Ukg5tjRL4VR1aq8T4EFyaaRg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>, Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: libmatthew-java-0.7.1.tar.gz not fetchable
+Received: by 10.42.159.201 with SMTP id m9mr6916327icx.32.1332170661610; Mon,
+	19 Mar 2012 08:24:21 -0700 (PDT)
+Received: by 10.42.75.137 with HTTP; Mon, 19 Mar 2012 08:24:21 -0700 (PDT)
+In-Reply-To: <jk7aa6$bjh$1@dough.gmane.org>
+References: <1332103254-3729-1-git-send-email-schnitzeltony@googlemail.com>
+	<jk7aa6$bjh$1@dough.gmane.org>
+Date: Mon, 19 Mar 2012 16:24:21 +0100
+Message-ID: <CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe 1/6] mpd: initial add 0.16.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 15:27:34 -0000
+X-List-Received-Date: Mon, 19 Mar 2012 15:33:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Mar 19, 2012 at 12:49 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> On 15.03.2012 11:32, Steffen Sledz wrote:
->> libmatthew-java-0.7.1.tar.gz (used in 2011.03-maintenance branch) is no longer fetchable from it's original location (the maintainer provides the latests version only). And i did not found another reliable source.
->>
->> Can someone put the tarball into the OE and/or Angstrom mirrors?
+On Mon, Mar 19, 2012 at 1:54 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> +DESC="The Music Player Daemon" +DAEMON=/usr/bin/mpd
+>> +MPDCONF=/etc/mpd.conf
 >
-> Ping!
+> The above hardcodes $bindir and $sysconfdir, which it shouldn't do.
+mpd.in + sed in V2. OK?
 
-If someone points Khem at a copy, this can happen...
+> Furthermore I'd like to stop maintaining our own initsystem in meta-oe and
+> switch to upstream initscripts as much as possible
+The package itself does not contain an initscript so I implemented it
+close to that found in debian-lenny package. What upstream source do
+you suggest (matching also above requirement not hardcoding paths)?
 
--- 
-Tom
+> and include systemd units by default as well.
+This requirement I did not know and did not find any source for that -
+some suggestion?
+
+> The above script is missing LSB headers as well.
+This initscript as is does not need.
+
+> Move EXTRA_OECONF above do_install
+V2
+
+regards
+
+Andreas
 
 
