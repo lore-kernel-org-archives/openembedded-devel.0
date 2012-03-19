@@ -1,38 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1S9df6-00059r-Hg
+	(envelope-from <tom.rini@gmail.com>) id 1S9eUg-00088h-Mr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 15:34:16 +0100
-Received: by wibhj13 with SMTP id hj13so3333557wib.6
+	Mon, 19 Mar 2012 16:27:34 +0100
+Received: by dado14 with SMTP id o14so10385378dad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 07:25:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=55aAH5dvx3vpanWLvVooS6WDDs9V8/xerHhHfpbMXRI=;
-	b=TUgMqXcO/R9HQCXRCpVEd4zpn3JoJaCiCaghSXrljTl9Q1emBF3HaEAt+KQ1qz4w7W
-	BTBVjTEPq8HD/ghVrkOm0ErZ/8p5IHbSDt7Ob2udavblXQSBkJObMaf0byNFkT8yxoPA
-	d2vStd0sojQtGkjLE+t5ApzRkqZs20FsQ775sxPaaktzmlaXyxN4njCMaziL3+D2+hj/
-	Ljt5ONSlOjX5/nEU7kZUwigbljVOpSje+nnFV1yzNLvioRZcCP7zWofEgblqA4vB/yLA
-	PUiaXvxeWRUg/DguNQfw505AjzUXNwpFc+2u5TOSvUDeQq6i9BUbJ5sAY5nrG55q3N+W
-	9R+Q==
-Received: by 10.216.135.225 with SMTP id u75mr6661903wei.97.1332167125285;
-	Mon, 19 Mar 2012 07:25:25 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id fl2sm41884944wib.4.2012.03.19.07.25.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Mar 2012 07:25:24 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2012 15:25:14 +0100
-Message-Id: <1332167114-24083-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1332167114-24083-1-git-send-email-koen@dominion.thruhere.net>
-References: <1332167114-24083-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlW6qjyQYvn7P2+m5okSVfP+GcPLWNvsdGX0CXsiOm42AyQCo2/qVVRW4TxRBUkqcLbqx8V
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe 3/3] busybox: update bbappend to match update recipe in oe-core
+	Mon, 19 Mar 2012 08:18:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=YYFsWY3t1QY0gTLvDIwuCoPo/AoolCHfnqq2WsWDNC0=;
+	b=sg6g/z638ni5IE6oepyez0C4XRAxSfPg2NrN9Y3JJ/W3h/Ak/DMFI9yROz7DmW6fow
+	gnXsm4vaxZjNSUKkdhyND0xB3kvTvyCwCQeuQTy3jEBO6iQXeS/mmuRXOfnr/35KdOnb
+	zW0rgcqZKfZR8deoz/aWFhLpEJp4Sc3i7jpHKE+LsIVheaH2TEwH+XyLuJnD7GEK5iGt
+	kVkF3lS4OqPfUVqj/NXPn0FX8/zZw0nCRVSH3lLLnkj2gMKGFmtzqXD5kAeM0Vta7G6I
+	1RFoFW32pIFWbVWMfDJCNK4iQe7Vnf1lVJ1ovtA4ZnjgdcYvwhp6CkJpDhGjMEVi7R0r
+	ohZQ==
+MIME-Version: 1.0
+Received: by 10.68.217.97 with SMTP id ox1mr40533388pbc.81.1332170322363; Mon,
+	19 Mar 2012 08:18:42 -0700 (PDT)
+Received: by 10.142.241.4 with HTTP; Mon, 19 Mar 2012 08:18:42 -0700 (PDT)
+In-Reply-To: <4F66E4F2.2000909@dresearch-fe.de>
+References: <4F61C54B.1000609@dresearch-fe.de>
+	<4F66E4F2.2000909@dresearch-fe.de>
+Date: Mon, 19 Mar 2012 08:18:42 -0700
+Message-ID: <CA+M6bXmpiegfSspYOwybxKSLf4Ukg5tjRL4VR1aq8T4EFyaaRg@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>, Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: libmatthew-java-0.7.1.tar.gz not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,82 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 14:34:16 -0000
+X-List-Received-Date: Mon, 19 Mar 2012 15:27:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-core/busybox/busybox_1.19.3.bbappend   |   26 --------------------
- .../recipes-core/busybox/busybox_1.19.4.bbappend   |   26 ++++++++++++++++++++
- 2 files changed, 26 insertions(+), 26 deletions(-)
- delete mode 100644 meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
- create mode 100644 meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+On Mon, Mar 19, 2012 at 12:49 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+> On 15.03.2012 11:32, Steffen Sledz wrote:
+>> libmatthew-java-0.7.1.tar.gz (used in 2011.03-maintenance branch) is no longer fetchable from it's original location (the maintainer provides the latests version only). And i did not found another reliable source.
+>>
+>> Can someone put the tarball into the OE and/or Angstrom mirrors?
+>
+> Ping!
 
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-deleted file mode 100644
-index 2c73732..0000000
---- a/meta-oe/recipes-core/busybox/busybox_1.19.3.bbappend
-+++ /dev/null
-@@ -1,26 +0,0 @@
--inherit systemd
--
--PRINC := "${@int(PRINC) + 3}"
--
--# look for files in the layer first
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--
--SRC_URI += "file://busybox-syslog.service.in \
--            file://busybox-klogd.service.in \
--            file://busybox-syslog.default"
--
--SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
--SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
--
--do_install_append() {
--	install -d ${D}${sysconfdir}/default
--	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
--
--	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
--	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
--	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
--	     > ${D}${systemd_unitdir}/system/busybox-klogd.service
--
--	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
--}
--FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-new file mode 100644
-index 0000000..2c73732
---- /dev/null
-+++ b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-@@ -0,0 +1,26 @@
-+inherit systemd
-+
-+PRINC := "${@int(PRINC) + 3}"
-+
-+# look for files in the layer first
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+SRC_URI += "file://busybox-syslog.service.in \
-+            file://busybox-klogd.service.in \
-+            file://busybox-syslog.default"
-+
-+SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
-+SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
-+
-+do_install_append() {
-+	install -d ${D}${sysconfdir}/default
-+	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
-+
-+	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
-+	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
-+	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
-+	     > ${D}${systemd_unitdir}/system/busybox-klogd.service
-+
-+	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
-+}
-+FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
+If someone points Khem at a copy, this can happen...
+
 -- 
-1.7.2.5
-
+Tom
 
 
