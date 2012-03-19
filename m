@@ -1,34 +1,34 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philipp.zabel@gmail.com>) id 1S9YWY-0006G1-3m
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 10:05:06 +0100
-Received: by yenm3 with SMTP id m3so5136745yen.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S9cC2-0005rO-C5 for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2012 14:00:10 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S9c3T-0002Do-HE for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2012 13:51:19 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Mar 2012 13:51:19 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 01:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=I66Za3IzJ339TpdVL1mT1Au70rcUjrUZCO8y+69KqrI=;
-	b=tHdgQq59cQV+WlaC2BDGNIfQdWbYG4CcPuF1+cHjpw/0dYoxdrHrmczcsaBa2FqGRi
-	OFGLC65JGHjSl3jNW52jphLlfl01tbTOLunmO76RSiDI20CrbSmLwpQnKmzycQ+7sJxn
-	ioghdzbvLQWWCCbTQztK3KAo+SVpI8mHl6aDBdsez9BhzVLm4LiHxad4jY624dndC5Hx
-	BrDOIwQbte5+bFZhBvRiT4s6xwHLNEqhQ/D+tzvF50haEcN+RrwkK9pRGPTcVzqgRhGC
-	l7Xr6PeSths/ORM7ZdVgNeXhe3MqdQpw45mqRtKJUoSg9NTzZlYEFYVg/6NR0GlvLBEs
-	BwmA==
-MIME-Version: 1.0
-Received: by 10.60.4.105 with SMTP id j9mr12827913oej.29.1332147374477; Mon,
-	19 Mar 2012 01:56:14 -0700 (PDT)
-Received: by 10.182.11.71 with HTTP; Mon, 19 Mar 2012 01:56:14 -0700 (PDT)
-In-Reply-To: <4F61EF82.6060609@dresearch-fe.de>
-References: <CAAwVp3u7i6ptQ=dvCV_RGwctHqDWKLXXPXKjGwZJ_okhDx8gwg@mail.gmail.com>
-	<4F61EF82.6060609@dresearch-fe.de>
-Date: Mon, 19 Mar 2012 09:56:14 +0100
-Message-ID: <CA+gwMcdbyWg4wYoT9abUE90+t7bDnDcCM+DiX8nxM0WpJtPuJg@mail.gmail.com>
-From: Philipp Zabel <philipp.zabel@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: udev_141 vs. udev_network_queue.sh
+	Mon, 19 Mar 2012 13:51:19 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Mar 2012 13:50:57 +0100
+Message-ID: <jk7a3p$8i0$1@dough.gmane.org>
+References: <1332104369-4485-1-git-send-email-schnitzeltony@googlemail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <1332104369-4485-1-git-send-email-schnitzeltony@googlemail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe 1/2] midori: remove midori.inc and oe-stylize
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,43 +42,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 09:05:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Mar 2012 13:00:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Mar 15, 2012 at 2:32 PM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
-e:
-> On 13.03.2012 16:06, Mario Schuknecht wrote:
->> The udev script /etc/udev/scripts/network.sh writes all not configured
->> interfaces into the file /dev/udev_network_queue
->> root@3065-4-00001:~# cat /dev/udev_network_queue
->> eth0
->> lo
->> ra0
->> But no script or program check this file.
->> I googled =A0udev_network_queue and found an old bitbake recipe
->> http://svn.nslu2-linux.org/svnroot/slugos/releases/slugos-3.10-beta/open=
-embedded/packages/udev/udev_084.bb
->> that
->> installs =A0udev_network_queue.sh.
->> That script checks this files and starts the interfaces.
->>
->> Why is this file not installed any longer? Is there any other way or
->> concept to handle this situation?
->
-> It seems that the installation of this script was lost in between udev_08=
-4 and udev_089. The latter was introduced by Philipp Zabel (commit 83e3ce3d=
-bc5f49a7c8ee4b535ed14d8938c252aa).
->
-> Can someone remember if this script wasn't installed any longer by intent=
-ion or by mistake?
->
-> Should it be installed in later udev versions again?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I do not remember removing this script consciously.
-If it still solves a real use case, maybe it should be added back again.
+Op 18-03-12 21:59, Andreas Müller schreef:
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com> --- 
+> meta-oe/recipes-connectivity/midori/midori.inc     |   39
+> ------------------ .../recipes-connectivity/midori/midori_0.4.4.bb    |
+> 42 ++++++++++++++++++- 2 files changed, 39 insertions(+), 42
+> deletions(-) delete mode 100644
+> meta-oe/recipes-connectivity/midori/midori.inc
+> 
+> diff --git a/meta-oe/recipes-connectivity/midori/midori.inc
+> b/meta-oe/recipes-connectivity/midori/midori.inc deleted file mode
+> 100644 index dccb3ee..0000000 ---
+> a/meta-oe/recipes-connectivity/midori/midori.inc +++ /dev/null @@ -1,39
+> +0,0 @@ -DESCRIPTION = "Midori is a lightweight web browser." -HOMEPAGE =
+> "http://www.twotoasts.de/index.php?/pages/midori_summary.html" -LICENSE =
+> "LGPLv2.1" -LIC_FILES_CHKSUM =
+> "file://COPYING;md5=fbc093901857fcd118f065f900982c24" - -DEPENDS =
+> "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native
+> python-docutils-native" - -inherit gtk-icon-cache pkgconfig - 
+> -do_configure() { -    sed -i -e 's:, shell=False::g' -e
+> s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript -    ./configure
+> \ -            --prefix=${prefix} \ -            --bindir=${bindir} \ -
+> --sbindir=${sbindir} \ -            --libexecdir=${libexecdir} \ -
+> --datadir=${datadir} \ -            --sysconfdir=${sysconfdir} \ -
+> --sharedstatedir=${sharedstatedir} \ -
+> --localstatedir=${localstatedir} \ -            --libdir=${libdir} \ -
+> --includedir=${includedir} \ -            --infodir=${infodir} \ -
+> --mandir=${mandir} \ -            --disable-hildon \ -
+> --disable-gtk3 \ -} - -LDFLAGS_append = " -ljavascriptcoregtk-1.0 " - 
+> -do_install() { -	oe_runmake DESTDIR=${D} install -} - -RRECOMMENDS_${PN}
+> += "glib-networking ca-certificates gnome-icon-theme" - -FILES_${PN}-dev
+> += "${datadir}/vala/vapi" - -TARGET_CC_ARCH += "${LDFLAGS}" diff --git
+> a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
+> b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb index
+> 827eb19..7c51641 100644 ---
+> a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb +++
+> b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb @@ -1,8 +1,44 @@ 
+> -require midori.inc - -PARALLEL_MAKE = "" +DESCRIPTION = "Midori is a
+> lightweight web browser." +HOMEPAGE =
+> "http://www.twotoasts.de/index.php?/pages/midori_summary.html" +LICENSE =
+> "LGPLv2.1" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=fbc093901857fcd118f065f900982c24" +DEPENDS =
+> "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native
+> python-docutils-native"
+> 
+> SRC_URI =
+> "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori
+> \ " SRC_URI[midori.md5sum] = "a6578ebfd237c0f22cce49113b95f70c" 
+> SRC_URI[midori.sha256sum] =
+> "fadd43f76c1c9f6a16483e60a804e58fb6817c6a595b1acdd59bcbdd7b35bca2" + 
+> +inherit gtk-icon-cache pkgconfig + +do_configure() { +    sed -i -e 's:,
+> shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g
+> wscript +    ./configure \ +            --prefix=${prefix} \ +
+> --bindir=${bindir} \ +            --sbindir=${sbindir} \ +
+> --libexecdir=${libexecdir} \ +            --datadir=${datadir} \ +
+> --sysconfdir=${sysconfdir} \ +
+> --sharedstatedir=${sharedstatedir} \ +
+> --localstatedir=${localstatedir} \ +            --libdir=${libdir} \ +
+> --includedir=${includedir} \ +            --infodir=${infodir} \ +
+> --mandir=${mandir} \ +            --disable-hildon \ +
+> --disable-gtk3 \ +} +do_install() { +    oe_runmake DESTDIR=${D} install 
+> +} + +RRECOMMENDS_${PN} += "glib-networking ca-certificates
+> gnome-icon-theme" + +FILES_${PN}-dev += "${datadir}/vala/vapi"
 
-regards
-Philipp
+The idea of oe-stylize is to group variables close to the funciton they are
+used in, the ones below are for do_compile, so please moves those inbetween
+do_configure and do_install
+
+> +LDFLAGS_append = " -ljavascriptcoregtk-1.0 " + +PARALLEL_MAKE = "" + 
+> +TARGET_CC_ARCH += "${LDFLAGS}"
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9nK64ACgkQMkyGM64RGpEnNQCfS50Bi4dEh4nbE1peR8UBGxZN
+1AsAoLbL5YaMkb/dphBqUCV+cOlgAzJq
+=/XfP
+-----END PGP SIGNATURE-----
+
 
 
