@@ -1,27 +1,36 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1S9hwv-0001Ei-6d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 20:09:02 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id q2JFsIt7020729
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S9hyq-0001LK-IT for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2012 20:10:56 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1S9hqH-0006mD-LR for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Mar 2012 20:02:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Mar 2012 20:02:05 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 08:54:18 -0700 (PDT)
-Received: from Macintosh-5.local (172.25.36.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
-	Mon, 19 Mar 2012 08:54:18 -0700
-Message-ID: <4F6756A9.7020106@windriver.com>
-Date: Mon, 19 Mar 2012 10:54:17 -0500
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
+	Mon, 19 Mar 2012 20:02:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Mar 2012 20:01:55 +0100
+Message-ID: <jk7vr4$482$1@dough.gmane.org>
+References: <1332103254-3729-1-git-send-email-schnitzeltony@googlemail.com>
+	<jk7aa6$bjh$1@dough.gmane.org>
+	<CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
 	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <4F62FFB7.5070401@nedap.com>
-In-Reply-To: <4F62FFB7.5070401@nedap.com>
-Subject: Re: remove dbg and dev packages
+In-Reply-To: <CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [meta-oe 1/6] mpd: initial add 0.16.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 19:09:02 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Mar 2012 19:10:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 3/16/12 3:54 AM, Jaap de Jong wrote:
-> Hi!
->
-> is there an option (in local.conf?) to not build (or not add to the
-> repository of) the dbg and dev packages?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-You have to build the dev packages, otherwise you can't (cross) compile the 
-software in the development environment.
+Op 19-03-12 16:24, Andreas Müller schreef:
+> On Mon, Mar 19, 2012 at 1:54 PM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>>> +DESC="The Music Player Daemon" +DAEMON=/usr/bin/mpd 
+>>> +MPDCONF=/etc/mpd.conf
+>> 
+>> The above hardcodes $bindir and $sysconfdir, which it shouldn't do.
+> mpd.in + sed in V2. OK?
 
-The dbg packages are optional, but if you disable them then things may or may 
-not be stripped and the filesizes on the target may increase.  (It's been a 
-while since I tried it w/o dbg packages...)
+sound good to me.
 
-Is there a reason why you don't want the dev and dbg packages to be generated? 
-They should only be installed onto a target filesystem if you've requested them 
-(or a package has a dependency on them).  Normal, non-dev, filesystems shouldn't 
-be installed any of those components... if they are, there is a packaging bug in 
-something.
+>> Furthermore I'd like to stop maintaining our own initsystem in meta-oe
+>> and switch to upstream initscripts as much as possible
+> The package itself does not contain an initscript so I implemented it 
+> close to that found in debian-lenny package. What upstream source do you
+> suggest (matching also above requirement not hardcoding paths)?
+> 
+>> and include systemd units by default as well.
+> This requirement I did not know and did not find any source for that - 
+> some suggestion?
 
-See the meta/conf/local.conf.sample.extended:
+Fedora or arch should have one.
 
-# Uncomment this to disable the split of the debug information into -dbg files
-# INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+> 
+>> The above script is missing LSB headers as well.
+> This initscript as is does not need.
 
-(There are also other settings to control the specific mechanisms of the package 
-split.. "debian" style or "fedora" style...)
+AIUI OE-core requires lsb headers for all sysvinitscripts and systemd works
+a lot better when those headers are present as well.
 
---Mark
+regards,
 
-> Thanks!
-> Jaap
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iEYEARECAAYFAk9ngp8ACgkQMkyGM64RGpE97QCdFLCl80NB97Vug3qfiJladmA8
+gGQAoIKOWTiq6QGM+mjqdJnAx+T7S1Q+
+=okI0
+-----END PGP SIGNATURE-----
 
 
 
