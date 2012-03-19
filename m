@@ -1,36 +1,32 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S9hyq-0001LK-IT for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 20:10:56 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1S9hqH-0006mD-LR for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 20:02:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 20:02:05 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 20:02:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 19 Mar 2012 20:01:55 +0100
-Message-ID: <jk7vr4$482$1@dough.gmane.org>
-References: <1332103254-3729-1-git-send-email-schnitzeltony@googlemail.com>
-	<jk7aa6$bjh$1@dough.gmane.org>
-	<CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe 1/6] mpd: initial add 0.16.7
+	(envelope-from <jefro.net@gmail.com>)
+	id 1S9ktW-00057x-MU; Mon, 19 Mar 2012 23:17:39 +0100
+Received: by iaag37 with SMTP id g37so9892458iaa.6
+	for <multiple recipients>; Mon, 19 Mar 2012 15:08:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=k5BU3xtrypltcmMghAgfVA5mQ9LWAKAT+F9ol9+sZxs=;
+	b=InrsN7PQeFeBOo1ESFr3BvzOFogyKXCF7JVoEqkbgSuAO+fTDXCLtoqAE0aMsu9QEF
+	APuHlQzeluqHSbmI+8eC+YThN1s3uC47wJXrVQS0mwmBNmrWLwplHWF5W3h/Lgzo4lcp
+	5YtJIPvlb7todLOmykrPFjnjjyfdRRPxRcHmBFx7oGdIxhLyu1mE29dLsMOG8PDFcEJT
+	FayKvKJ8mZECLClW8MV41ZvSKHQvGolyvLTUgvkxLloJ2F8eiZtv4VwZeTh9n/7K6Qrk
+	41SD4pyxhKRlfIhkoCAzLxFyi/+MnVxBo+tSOH/FVOiYjB8cOBg1s8XDi/fvS5kMlCfD
+	9JPg==
+MIME-Version: 1.0
+Received: by 10.43.44.202 with SMTP id uh10mr7878827icb.3.1332194925671; Mon,
+	19 Mar 2012 15:08:45 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.50.127.38 with HTTP; Mon, 19 Mar 2012 15:08:45 -0700 (PDT)
+Date: Mon, 19 Mar 2012 15:08:45 -0700
+X-Google-Sender-Auth: NE5gT7X1cbR808ZPgZ8XkFXIYQw
+Message-ID: <CA+YB3rb2qL4q2Zrhh16aVSSx52sqYWcCnk+bRP0HZ2mvk8MOEw@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, tsc <tsc@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: MINUTES: OE TSC 28 February 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +40,317 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 19:10:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 Mar 2012 22:17:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+OpenEmbedded Technical Steering Committee
+28 February, 2012
 
-Op 19-03-12 16:24, Andreas Müller schreef:
-> On Mon, Mar 19, 2012 at 1:54 PM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->>> +DESC="The Music Player Daemon" +DAEMON=/usr/bin/mpd 
->>> +MPDCONF=/etc/mpd.conf
->> 
->> The above hardcodes $bindir and $sysconfdir, which it shouldn't do.
-> mpd.in + sed in V2. OK?
+Attending: Khem, Richard, Mark, Paul
+Apologies: Tom
+Minutes: Jefro
 
-sound good to me.
+________________________________________________
+Agenda
 
->> Furthermore I'd like to stop maintaining our own initsystem in meta-oe
->> and switch to upstream initscripts as much as possible
-> The package itself does not contain an initscript so I implemented it 
-> close to that found in debian-lenny package. What upstream source do you
-> suggest (matching also above requirement not hardcoding paths)?
-> 
->> and include systemd units by default as well.
-> This requirement I did not know and did not find any source for that - 
-> some suggestion?
+1. pick a chair
+   RP (by default)
 
-Fedora or arch should have one.
+2. open issues
+   resolved at ELC, only status is left
 
-> 
->> The above script is missing LSB headers as well.
-> This initscript as is does not need.
+3. status
 
-AIUI OE-core requires lsb headers for all sysvinitscripts and systemd works
-a lot better when those headers are present as well.
+   a. oe-core
+      lots of churn, patches coming in heavily
+      RP thinks most things merged
 
-regards,
+   b. python 3 transition
+      going slowly
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+   c. bitbake quoting fix merged, now enforce syntax, e.g. FOO = "1"
 
-iEYEARECAAYFAk9ngp8ACgkQMkyGM64RGpE97QCdFLCl80NB97Vug3qfiJladmA8
-gGQAoIKOWTiq6QGM+mjqdJnAx+T7S1Q+
-=okI0
------END PGP SIGNATURE-----
+   d. khem worked on some wiki pages last week
 
+   e. hobv2 merged, please play with it
 
+   f. 4.7 upgrade not yet posted (khem), hold until after April release
+
+   g. agreement on toolchain issue:
+      toolchains not in oe-core will be split out into their own layers,
+      including toolchains in meta-oe
+
+   h. collab summit, bsp summit
+      coming up in April
+
+________________________________________________
+Raw Transcript
+
+(9:00:04 AM) bluelightning: hi folks
+(9:02:12 AM) RP__: hi bluelightning
+(9:02:16 AM) RP__: hi khem
+(9:02:19 AM) RP__: fray: ping?
+(9:02:35 AM) khem: hi RP__
+(9:02:37 AM) RP__: I think I saw an email saying Tom couldn't make it?
+(9:02:38 AM) fray: hey I'm here..
+(9:02:44 AM) fray: ya, he's out
+(9:02:48 AM) khem: I will grab a cup of tea
+(9:02:57 AM) RP__: cool, we have everyone who will be here then
+(9:02:58 AM) khem: too many police officers on road today :)
+(9:03:32 AM) ***fray is really sick last couple of days.. at least the room
+stopped spinning finally
+(9:03:45 AM) ***fray 's temper is a bit short though.. :(
+(9:04:49 AM) RP__: fray: Sorry to hear that, I hope you have a swift
+recovery
+(9:05:00 AM) RP__: Jefro: do we have an agenda?
+(9:05:18 AM) fray: so do I.. I'm supposed to give an intro to Yocto talk
+and hands-on w/ Poky class at RTECC in Dallas next tuesday.. :P
+(9:06:15 AM) RP__: fray: I'm just getting stressed out by the amount of
+stuff I need to do before I go away on Saturday
+(9:06:35 AM) ***RP__ found water all over the garage floor before. Seems to
+be coming from the Daytona which is scary
+(9:06:45 AM) fray: I understand.. I was supposed to have the hard drive
+prepared for imaging yesterday..
+(9:06:54 AM) RP__: Does anyone have topics for discussion?
+(9:06:57 AM) fray: needless to say, I'm still working on it.. (I was
+completely useless on Sunday and Montday)
+(9:07:00 AM) fray: I don't have anything
+(9:07:15 AM) fray: did we want to mention the wiki day?  (do we want to
+schedule that yet?)
+(9:07:24 AM) khem: I dont have any pressing topics
+(9:07:28 AM) RP__: I think it would be good to give people some notice
+(9:07:37 AM) RP__: Sometime after next week though! ;-)
+(9:07:41 AM) khem: 2 weeks would be good time
+(9:07:43 AM) fray: yes
+(9:07:57 AM) fray: we said mid march in the ELC meetings
+(9:08:12 AM) RP__: so that all approximately fits together
+(9:08:22 AM) RP__: who is going to send out a proposal?
+(9:08:51 AM) bluelightning: I can do it
+(9:09:55 AM) Jefro: sorry - fell of the net again (*)&%
+(9:10:00 AM) RP__: bluelightning: thanks
+(9:10:20 AM) Jefro: we actually fulfilled the major topics at the f2f,
+status is all we have to discuss today
+(9:10:28 AM) RP__: Jefro: thanks
+(9:10:40 AM) RP__: We've had a lot of churn with the patches coming in
+rather heavily
+(9:10:45 AM) RP__: I think most things have merged
+(9:11:00 AM) RP__: I know there are some patches from Khem I've not taken
+yet and need to discuss in more detail
+(9:11:39 AM) RP__: There are some cleanups I would like to make such as the
+", 1" -> ", True" substituition, use appendVar in places and so on
+(9:12:06 AM) khem: RP__: is there plan to go for python 3.x for bitbake
+(9:12:08 AM) RP__: I don't seem to manage to find time to get to those
+though and a merge window is a bad time due to the amount of patches that
+would fail to apply
+(9:12:18 AM) fray: yup
+(9:12:30 AM) RP__: khem: we've done a lot of the ground work so far
+(9:12:36 AM) RP__: khem: so its being worked on slowly
+(9:12:49 AM) khem: ok.
+(9:12:50 AM) fray: we should investigate bitbake w/ python 3 after the
+current release cycle..
+(9:12:59 AM) fray: just to get any idea how close (or not) we are..
+(9:13:24 AM) ***RP__ agrees
+(9:13:33 AM) RP__: I also merged the bitbake quoting fix
+(9:13:44 AM) RP__: nbbody was going to fix things until I did :/
+(9:14:02 AM) fray: which quoting fix?
+(9:14:11 AM) ***bluelightning has already added a note on quoting to the
+metadata migration wiki page, FYI
+(9:14:21 AM) khem: Generally bitbake's error recovery sucks a bit imo
+(9:14:38 AM) khem: I did touch some wiki page's last week
+(9:14:48 AM) khem: to mention about oe-core/oe-dev
+(9:14:54 AM) RP__: fray: We now enforce FOO = "1"
+(9:14:56 AM) bluelightning: khem: I'd like to think we've improved error
+handling quite a bit lately, are there any outstanding error situations you
+can point to?
+(9:14:57 AM) khem: one of the page was getting started page
+(9:15:01 AM) fray: ahh ok
+(9:15:02 AM) RP__: fray: FOO = 1 wont' work
+(9:15:13 AM) fray: excellent
+(9:15:19 AM) RP__: khem: I think bitbake's error handling has massively
+improved thanks to Paul's work
+(9:15:37 AM) khem: RP__: I agree on that it has improved
+(9:15:39 AM) RP__: Or my favourite: FOO = "1 \
+(9:15:43 AM) bluelightning: if I've missed anything by all means highlight
+it so I can attack it :)
+(9:15:48 AM) RP__: with a following blank line
+(9:16:01 AM) RP__: khem: right, if you see issues, file bugs
+(9:16:02 AM) bluelightning: RP__: yes that's a nice one... never realised
+that was legal...
+(9:16:12 AM) RP__: bluelightning: it wasn't meant to be legal
+(9:16:49 AM) khem: multiline strings and multiline comments are tricky even
+C compilers sucked in past on them
+(9:17:38 AM) RP__: So anything else we need to talk about
+(9:17:41 AM) RP__: ?
+(9:17:53 AM) RP__: We should be going into a bit of a stability/bug fixing
+drive now
+(9:18:04 AM) bluelightning: I've got nothing, most of my long-pending
+patches are getting merged finally :)
+(9:18:08 AM) RP__: also,hobv2 merged
+(9:18:14 AM) RP__: people should play with it :)
+(9:18:25 AM) Jefro: I can chime in with one thing - the Yocto event at
+Collab Summit. Philip mentioned that he'd like to have several OE folks
+there.
+(9:18:28 AM) fray: ahh I knew hobv2 was going in soon, but it's there now?
+(9:18:31 AM) ***RP__ has a stack of patches outstanding :(
+(9:18:44 AM) RP__: fray: its in
+(9:18:54 AM) fray: excellent!
+(9:18:56 AM) RP__: fray: run "hob"
+(9:19:03 AM) khem: RP__: I have a working gcc 4.7 which is uncovering
+interting bugs
+(9:19:15 AM) khem: so I will post fixes as I see and fix them
+(9:19:29 AM) RP__: khem: I've held off the gcc patch just yet until I can
+have more of a look at it
+(9:19:36 AM) khem: sure.
+(9:19:48 AM) khem: I did not post 4.7 upgrade yet
+(9:19:53 AM) RP__: khem: we should try and push some of these fixes direct
+to the upstreams
+(9:19:56 AM) khem: since I wanted the prework to first go in
+(9:20:12 AM) khem: RP__: yes, true
+(9:20:30 AM) RP__: khem: right, I'd really like to hold 4.7 on a branch
+until after the April release
+(9:20:36 AM) fray: is 4.7 "stable" release out yet?  or any idea when it
+will be?
+(9:20:40 AM) khem: nooo
+(9:20:47 AM) khem: its a prework
+(9:21:02 AM) fray: I'm almost say a toolchain layer until 4.7 can be
+merged.. maybe a toolchain-next layer?
+(9:21:09 AM) RP__: khem: I know but we are supposed to be entering a
+stablisation window at this point
+(9:21:14 AM) khem: so we can use it offficially the same day its released
+and help gcc find and fix some bugs in return
+(9:21:32 AM) khem: RP__: that noo was meant for fray
+(9:21:57 AM) RP__: fray: I think a branch should be ok
+(9:22:02 AM) fray: ya, I thought 4.7 was still too far off to consider it
+for right now
+(9:22:16 AM) khem: RP__: the reason I did not post 4.7 patches is same
+(9:22:23 AM) bluelightning: I forgot to ask people; were there significant
+discussions at ELC about oe-core/meta-oe reorg that are worth discussing
+here?
+(9:22:37 AM) khem: I wanted prework to be in there so folks can then use
+the 4.7 branch to try it out
+(9:22:40 AM) ***RP__ wasn't party to those
+(9:22:56 AM) khem: bluelightning: I talked a bit
+(9:22:57 AM) RP__: khem: I agree we should put it somewhere obvious so
+people can try it
+(9:22:59 AM) khem: with koen
+(9:23:11 AM) khem: RP__: master-next ?
+(9:23:17 AM) khem: oh well a contrib branch is ok too
+(9:23:39 AM) bluelightning: khem: ah ok... I talked to him at FOSDEM about
+it as well, took some notes... haven't had a chance to formulate a coherent
+plan yet
+(9:23:50 AM) khem: bluelightning: I think we should keep the discussion
+about sprilling meta-oe going
+(9:23:52 AM) RP__: khem: it might be appropriate for master-next, yes
+(9:24:12 AM) bluelightning: khem: definitely... we have a tentative plan I
+think from our existing discussion
+(9:24:25 AM) bluelightning: (on the mailing list)
+(9:24:30 AM) khem: I think, I did some work on oe-core/meta-oe duplication
+but thats pretty much it
+(9:24:55 AM) bluelightning: khem: yes I saw that, thanks for that work :)
+(9:25:32 AM) khem: biggest issue is toolchain for many folks
+(9:25:41 AM) khem: so I think that should be the first one to be spun out
+(9:25:50 AM) RP__: khem: people want 4.5?
+(9:26:01 AM) khem: RP__: angstrom stable uses it
+(9:26:11 AM) khem: and angstrom uses for long cycles
+(9:26:15 AM) RP__: khem: with no plans to update?
+(9:26:25 AM) khem: so I am expecting it to be in use for couple of years
+from now at least
+(9:26:57 AM) khem: RP__: I think once meta-oe releases then there would be
+a chance to have 2012 angstrom
+(9:27:10 AM) bluelightning: is there still concern about arm in gcc > 4.5 ?
+or was that never a serious issue?
+(9:27:55 AM) khem: bluelightning: no idea. I think gcc 4.5 is stable and
+angstrom does not like to tinker with toolchain too much
+(9:28:08 AM) bluelightning: ok
+(9:28:33 AM) fray: but would anyone use 4.5 with an updated oe-core?
+(9:28:46 AM) fray: I'd expect that if you stay with an older toolchain,
+you'd also stay with an older oe-core/angstrom
+(9:28:51 AM) bluelightning: fray: well, angstrom does right now...
+(9:28:51 AM) khem: so far angstrom  has been doing that yes
+(9:29:12 AM) khem: usually its not a problem
+(9:29:17 AM) fray: that very well could be a distro choice, so we need to
+enable the ability to do it.. but do we need it in oe-core itself?
+(9:29:39 AM) khem: its not in oe-core
+(9:29:44 AM) khem: its in meta-oe
+(9:29:49 AM) fray: ohh ok, I misunderstood then
+(9:30:02 AM) khem: same is true for eglibc 2.12
+(9:30:13 AM) bluelightning: fray: it's in meta-oe, but what would make it
+easier is if it was in its own layer (which may well be in the
+meta-openembedded repo still)
+(9:30:27 AM) fray: yes, I agree..
+(9:30:29 AM) khem: and I would love to see X11 from meta-oe/oe-core merge
+(9:30:44 AM) fray: at Wind River we have a tendency to make our toolchains
+into layers, so they are easily replacable (upgradeable)..
+(9:31:12 AM) khem: fray: yes we should have done it to start with but we
+were so new to layers we were afraid of them :)
+(9:31:42 AM) RP__: khem: X11?
+(9:31:45 AM) fray: well there is the fine line between not enough layers
+and too many.. ;)
+(9:31:51 AM) RP__: khem: I thought we had most X11 things sorted now?
+(9:32:07 AM) fray: I didn't realize that meta-oe had anything unique for
+X11 anymore..
+(9:32:18 AM) RP__: I think splitting the toolchain pieces in meta-oe apart
+is a fine idea and nobody seems to object to that :)
+(9:32:20 AM) fray: I thought it had been merged, other then a few utilities
+(9:33:37 AM) khem: I tried core-image-sato build with meta-oe enabled
+(9:33:40 AM) khem: did not work
+(9:34:07 AM) RP__: khem: hmm, any idea what the issue was
+(9:34:11 AM) khem: so I vehemently blamed it
+(9:34:14 AM) RP__: we need to find and deal with things like this
+(9:34:46 AM) khem: RP__: yes, we should but then something else pops up :)
+(9:34:50 AM) fray: yes..  we should probably have someone look into meta-oe
+and plan for a merge if reasonable..  or at least identify issues like this
+(9:35:11 AM) khem: my point is it should be easily overlayed on oe-core and
+not regress oe-core
+(9:36:13 AM) RP__: khem: agreed, just need someone with some time to look
+at it
+(9:36:17 AM) fray: yes
+(9:36:30 AM) khem: bluelightning: will you send follow up to the layer
+split discussions of your meeting at FOSDEM
+(9:36:43 AM) bluelightning: khem: will do yes
+(9:36:57 AM) khem: that should get us some  further in decision process
+(9:37:21 AM) bluelightning: khem: I think we should just press ahead on the
+toolchain split out though
+(9:37:35 AM) RP__: As the TSC, I think we can agree that?
+(9:37:39 AM) khem: bluelightning: yeah
+(9:38:03 AM) fray: yes
+(9:38:05 AM) ***Jefro listens for detractors
+(9:38:16 AM) khem: ok.
+(9:38:45 AM) khem: Jefro: when/where is Collab Summit
+(9:38:54 AM) Jefro: Collab Summit is April 3-5 in San Francisco
+(9:39:07 AM) Jefro: there will be a Yocto working day all day on Weds Apr 4
+(9:39:21 AM) Jefro: Collab is invitation-only- I am working to secure a
+certain number of invitations
+(9:39:22 AM) khem: ok and thats in Fremont ?
+(9:39:40 AM) Jefro: no - there is also an invitation-only Yocto BSP Summit
+in Fremont, that is on April 2
+(9:39:48 AM) khem: Jefro: extend to me if you have spare :)
+(9:40:00 AM) Jefro: khem I will definitely try
+(9:40:09 AM) khem: both yocto/collab that is
+(9:40:22 AM) khem: oh brb
+(9:40:55 AM) RP__: The bsp summit is to try and get everyone on the same
+page around BSPs and layers, the various definitions and so on
+(9:41:21 AM) bluelightning: hmm that would be interesting...
+(9:41:39 AM) RP__: if the yocto people can't reach a consensus amongst
+themselves it seems crazy to involve more people in the discussion
+(9:41:39 AM) Jefro: bluelightning you should have gotten an invitation. any
+chance you'll be in town?
+(9:41:56 AM) RP__: I don't think there is that much of an issue, just need
+to get people together and spend some time talking through what we have
+today
+(9:42:02 AM) RP__: and then see where things go
+(9:43:04 AM) bluelightning: Jefro: I'm not sure... I need to check if I'm
+available, and also would depend on travel approval
+(9:43:17 AM) Jefro: yes, travel will be a problem
+(9:44:03 AM) Jefro: I'm planning to at least record parts of the event.
+Will also talk to Mentor to see if we can let people join via webex, but
+interactive participation would be limited.
+(9:46:00 AM) Jefro: any other items?
+(9:46:21 AM) bluelightning: khem's still afk I think
+(9:46:33 AM) RP__: nothing from me
+(9:46:43 AM) bluelightning: nothing from me either
+
+-- 
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
