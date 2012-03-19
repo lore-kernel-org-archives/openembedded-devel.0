@@ -1,38 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S9lCf-0005bs-5b
+	(envelope-from <schnitzeltony@googlemail.com>) id 1S9lCm-0005cS-1Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 23:37:25 +0100
-Received: by mail-we0-f175.google.com with SMTP id a1so6358958wer.6
+	Mon, 19 Mar 2012 23:37:32 +0100
+Received: by wgbdr12 with SMTP id dr12so961206wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 15:28:35 -0700 (PDT)
+	Mon, 19 Mar 2012 15:28:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=IbDK+Gz59u2MLl3kvLAj4YlBeInhM/NsNXvWlqlykuA=;
-	b=oxIZWr2uxrk8JB9u8x2FsMr8qgB8CgxAsWzRG8cOJaNhk1Aibc9KEeaXV0iZUKYojV
-	I9wY6m9uoYF3+vzoP6W4hXlq7xx1WhCs8N0gJjpt75n6ok4/HfBVDtJ7fNOshvyZNrie
-	Dqx6jqUP2+GA6rp3k9nsaCBcE6E6kVXkpQHuEnjpr78CoIcotQ/pBOxyRXahkr25eGpg
-	e6ZXc9eKgx86Eu1gMnN5airK0RgI613mly+SjQ5HbZNMew2LlKmqQ5fzPXlZ5qRX9cw7
-	VYx3CEw/M7U85e4MdxEwo53I/50t25sFUlyZSWz/9xiY2ZVCUvWT6CYtiaa46vj4v4JH
-	P8sQ==
-Received: by 10.180.107.164 with SMTP id hd4mr23228626wib.18.1332196115398;
-	Mon, 19 Mar 2012 15:28:35 -0700 (PDT)
+	bh=+5QHVF0QZeCayW84U/svbM7zhCy7qKMHjiZFXreF0SM=;
+	b=kl8VajxXe3/ZKxRXxdjOr+dUQ2BLpuONMLr25nlL4tVZe88mZpFxtR3pUeEp0kQ9p9
+	PJugR2wPds7f6LpdFW5BqUS3ycRxdmlgYIGfLtehdAnmAYnxeG3nFChqnZmGb/BBVnH1
+	fF8h6/XKHi0/UrAEaAa1KnVxA8EqKyY3U2rpUVWRqllyOIi54Z+pz+I5WE8CpICoSlCA
+	7fHWqJXUvZ2hnAaIapCYZ7CjfXvdwhgksc34IYAQfL9gGJQp5/0yd/Va5vYx3mdr4saq
+	jUJLbgMFkHxBG+Ymtalu9P9KQl/IOsqPs0rMPOlsEwz/iEPU1fA0Nfw4lynU8rpD2+DZ
+	cxaw==
+Received: by 10.216.134.233 with SMTP id s83mr7934779wei.104.1332196120179;
+	Mon, 19 Mar 2012 15:28:40 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3D1A.dip.t-dialin.net.
 	[91.10.61.26])
-	by mx.google.com with ESMTPS id fw5sm29043430wib.0.2012.03.19.15.28.33
+	by mx.google.com with ESMTPS id fw5sm29043430wib.0.2012.03.19.15.28.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Mar 2012 15:28:34 -0700 (PDT)
+	Mon, 19 Mar 2012 15:28:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2012 23:32:39 +0100
-Message-Id: <1332196360-3171-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 19 Mar 2012 23:32:40 +0100
+Message-Id: <1332196360-3171-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1332196360-3171-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1332196360-3171-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe v2 1/2] midori: remove midori.inc and oe-stylize
+Subject: [meta-oe v2 2/2] midori: add librsvg-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,115 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 22:37:25 -0000
+X-List-Received-Date: Mon, 19 Mar 2012 22:37:32 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+configure found rsvg-convert on host:
+...
+Checking for program rsvg-convert           : /usr/bin/rsvg-convert
+...
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-connectivity/midori/midori.inc     |   39 ------------------
- .../recipes-connectivity/midori/midori_0.4.4.bb    |   42 ++++++++++++++++++-
- 2 files changed, 39 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/midori/midori.inc
+ .../recipes-connectivity/midori/midori_0.4.4.bb    |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori.inc b/meta-oe/recipes-connectivity/midori/midori.inc
-deleted file mode 100644
-index dccb3ee..0000000
---- a/meta-oe/recipes-connectivity/midori/midori.inc
-+++ /dev/null
-@@ -1,39 +0,0 @@
--DESCRIPTION = "Midori is a lightweight web browser."
--HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
--
--DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
--
--inherit gtk-icon-cache pkgconfig
--
--do_configure() {
--    sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
--    ./configure \
--            --prefix=${prefix} \
--            --bindir=${bindir} \
--            --sbindir=${sbindir} \
--            --libexecdir=${libexecdir} \
--            --datadir=${datadir} \
--            --sysconfdir=${sysconfdir} \
--            --sharedstatedir=${sharedstatedir} \
--            --localstatedir=${localstatedir} \
--            --libdir=${libdir} \
--            --includedir=${includedir} \
--            --infodir=${infodir} \
--            --mandir=${mandir} \
--            --disable-hildon \
--            --disable-gtk3 \
--}
--
--LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
--
--do_install() {
--	oe_runmake DESTDIR=${D} install
--}
--
--RRECOMMENDS_${PN} += "glib-networking ca-certificates gnome-icon-theme"
--
--FILES_${PN}-dev += "${datadir}/vala/vapi"
--
--TARGET_CC_ARCH += "${LDFLAGS}"
 diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-index 827eb19..bccc7b3 100644
+index bccc7b3..a317b5a 100644
 --- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
 +++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-@@ -1,8 +1,44 @@
--require midori.inc
--
--PARALLEL_MAKE = ""
-+DESCRIPTION = "Midori is a lightweight web browser."
-+HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
+@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
+ HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
++DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
++
++PR = "r1"
  
  SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
            "
- SRC_URI[midori.md5sum] = "a6578ebfd237c0f22cce49113b95f70c"
- SRC_URI[midori.sha256sum] = "fadd43f76c1c9f6a16483e60a804e58fb6817c6a595b1acdd59bcbdd7b35bca2"
-+
-+inherit gtk-icon-cache pkgconfig
-+
-+do_configure() {
-+    sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
-+    ./configure \
-+            --prefix=${prefix} \
-+            --bindir=${bindir} \
-+            --sbindir=${sbindir} \
-+            --libexecdir=${libexecdir} \
-+            --datadir=${datadir} \
-+            --sysconfdir=${sysconfdir} \
-+            --sharedstatedir=${sharedstatedir} \
-+            --localstatedir=${localstatedir} \
-+            --libdir=${libdir} \
-+            --includedir=${includedir} \
-+            --infodir=${infodir} \
-+            --mandir=${mandir} \
-+            --disable-hildon \
-+            --disable-gtk3 \
-+}
-+
-+LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
-+}
-+
-+RRECOMMENDS_${PN} += "glib-networking ca-certificates gnome-icon-theme"
-+
-+FILES_${PN}-dev += "${datadir}/vala/vapi"
-+
-+PARALLEL_MAKE = ""
 -- 
 1.7.4.4
 
