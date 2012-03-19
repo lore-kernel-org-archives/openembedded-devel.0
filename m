@@ -1,27 +1,41 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1S9XLA-0001fq-5V
+	(envelope-from <sledz@dresearch-fe.de>) id 1S9XTa-0002VM-F7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 08:49:16 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Mon, 19 Mar 2012
-	08:40:21 +0100
-X-TM-IMSS-Message-ID: <2cd8a07800140f27@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 2cd8a07800140f27 ;
-	Mon, 19 Mar 2012 08:40:27 +0100
-Message-ID: <4F66E2E5.4030108@nedap.com>
-Date: Mon, 19 Mar 2012 08:40:21 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.27) Gecko/20120216 Lightning/1.0b2 Thunderbird/3.1.19
+	Mon, 19 Mar 2012 08:57:58 +0100
+Received: by bkcjg15 with SMTP id jg15so4383478bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Mar 2012 00:49:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=UFdjARcRJiuZAnEn3VbBplMtoCFa/Gr4qTVJqb9JtFs=;
+	b=f0G4SJ8W2vQ/t42IUN3cWqZDWWb95UxUV5zaAwCywxJ9407xgQw6gQyJpcSrywpmIw
+	UsZHj5MVDw0T4/itSpqIACR/APUeL6UgWINPeIReWe8cnGv9fLy7v9xcJdyJZy4cb4Xd
+	e7wDCrymsB7NoHdjz7VHxW6Yave4/ESHkcfqf2fX8Smcd+3rTd4vIN4E/+ZosSxKqWnT
+	iq9Dtg9svaage9KweStJ9MXLu5G3UAGSu0KQ1oOA8Y3RROA2Rv5yWoQ0hxp8GGl4XL13
+	FKmjb1M7Gfm5rSntfyAXiByNo1oMxSEH68eTE4eMNlbVkzjyhuFfesy3GDMlAdMq9Fyf
+	RyXQ==
+Received: by 10.204.136.197 with SMTP id s5mr4343354bkt.9.1332143347403;
+	Mon, 19 Mar 2012 00:49:07 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id s16sm23741755bkt.3.2012.03.19.00.49.06
+	(version=SSLv3 cipher=OTHER); Mon, 19 Mar 2012 00:49:06 -0700 (PDT)
+Message-ID: <4F66E4F2.2000909@dresearch-fe.de>
+Date: Mon, 19 Mar 2012 08:49:06 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <4F62FFB7.5070401@nedap.com>
-	<20120316133328.GA13219@mi.fu-berlin.de>
-In-Reply-To: <20120316133328.GA13219@mi.fu-berlin.de>
-Subject: Re: remove dbg and dev packages
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <4F61C54B.1000609@dresearch-fe.de>
+In-Reply-To: <4F61C54B.1000609@dresearch-fe.de>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQn2naTyMxgzKd1Tn7ZdYAScb/84dooEZdr081hdFHTazM/npRbRemWYDgsZmoYgem9Q9sOs
+Subject: Re: libmatthew-java-0.7.1.tar.gz not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +49,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 07:49:16 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Mar 2012 07:57:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-That was my first guess too.
-If I remove them from the build/deploy/glibc/ipk/* directories and then 
-do 'bitbake package-index' that would do the trick?
-But I would have to remove them after every package I build...
+On 15.03.2012 11:32, Steffen Sledz wrote:
+> libmatthew-java-0.7.1.tar.gz (used in 2011.03-maintenance branch) is no longer fetchable from it's original location (the maintainer provides the latests version only). And i did not found another reliable source.
+> 
+> Can someone put the tarball into the OE and/or Angstrom mirrors?
 
-On 03/16/2012 02:33 PM, Henning Heinold wrote:
-> On Fri, Mar 16, 2012 at 09:54:15AM +0100, Jaap de Jong wrote:
->> Hi!
->>
->> is there an option (in local.conf?) to not build (or not add to the
->> repository of) the dbg and dev packages?
->>
->> Thanks!
->> Jaap
->
-> Why dont write a shell skript which deletes all dbg and dev packages and calles the opkg index command afterwards?
->
-> Bye Henning
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Ping!
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
