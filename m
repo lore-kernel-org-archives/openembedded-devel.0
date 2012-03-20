@@ -1,35 +1,36 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-qa0-f54.google.com ([209.85.216.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SA2wU-0000FJ-Cw for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2012 18:33:54 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SA2nu-0002Sl-UF for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2012 18:25:02 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2012 18:25:02 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vwyodapink@gmail.com>) id 1SA6sL-0004Ib-Dc
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Mar 2012 22:45:53 +0100
+Received: by qao25 with SMTP id 25so326661qao.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2012 18:25:02 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=s6FSOamL0nrZyX5fHubQbGmQ2PuX89WwIti9Aq5DFrs=;
+	b=sZ/g4wYy48C8ShsCHmdvAXwHdtjcYYf1Nhf0rWQGy9B2c/jb4U7PUlLswQhjMAFkDv
+	aLyY2ytubDg42Uy8IzzKfoPXiCVbl5U/aV7I1nDvh1641sI5ODuG4eO3sgR6XIcNWkpy
+	48SEybu6iXsaNzfhTrzJU97nVZkNzKWZWUz8hMYcZNoDNs1bzV2w+PYO5z04Ay/WFsOF
+	8Go+9HiBbUlJdRRqZsBRrqZaMy7/UucNzwAlza6y97jpWAuP2hGGzhkSx6E031zW8dCK
+	fqi1HLQXLQvV3kPGdRqItqcuQ5CGln2bZp9A5im1y9ntRFabPLQ83E3p+NoBCefzik0U
+	4oUA==
+Received: by 10.224.31.84 with SMTP id x20mr2976704qac.63.1332279419930;
+	Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
+Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
+	by mx.google.com with ESMTPS id j17sm4726058qaj.9.2012.03.20.14.36.55
+	(version=SSLv3 cipher=OTHER); Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
+Message-ID: <4F68F86D.3020606@gmail.com>
+Date: Tue, 20 Mar 2012 14:36:45 -0700
+From: j <vwyodapink@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120314 Thunderbird/11.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 20 Mar 2012 18:23:03 +0100
-Message-ID: <jkaedo$358$2@dough.gmane.org>
-References: <1332196360-3171-1-git-send-email-schnitzeltony@googlemail.com>
-	<1332196360-3171-2-git-send-email-schnitzeltony@googlemail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <1332196360-3171-2-git-send-email-schnitzeltony@googlemail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [meta-oe v2 1/2] midori: remove midori.inc and oe-stylize
+References: <4F66789C.7010503@gmail.com>
+In-Reply-To: <4F66789C.7010503@gmail.com>
+Subject: Re: having issues with libprelude and libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,98 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2012 17:33:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 20 Mar 2012 21:45:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 03/18/2012 05:06 PM, j wrote:
+> I am trying to get libpam to build which fails due to not finding the 
+> header from the libprelude build, which currently also fails to build 
+> for me. I am hoping someone knows of a fix or can point me to the 
+> right place to dig for a solution, I do not see any listed fixes or 
+> workarounds from my digging online. I have attached the build logs for 
+> each as well, since they were long if the preferred method is 
+> different, sorry and please let me know how to post those. In the 
+> libprelude error its saying there are files that seem to have moved, 
+> but they actually exsist in the location it says it does not.
+>
+> I am running on Ubuntu 11.04 32bit (up to date). Bitbake branch 1.12, 
+> OE branch overo-2011.03 (both up to date). I know this is not your 
+> guys branch but have not gotten any feed back on gumstix in relation 
+> to issues building these packages, so checked them verse what I 
+> believe was the master branch and they had no diff. If I can give more 
+> info on system specs or anything like that please let me know. I 
+> believe I know the "issues" just not sure how to go about solving 
+> them, as libprelude seems like a more serious error. These are the 
+> only two packages that fail to build for image that do not rely on 
+> these lib's. I also have both of these installed on the build machine 
+> itself, I also built everything each rely on for the build, at least I 
+> believe I did none failed.
+>
+> Thanks a ton for any help or info.
 
-Op 19-03-12 23:32, Andreas Müller schreef:
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com> --- 
-> meta-oe/recipes-connectivity/midori/midori.inc     |   39
-> ------------------ .../recipes-connectivity/midori/midori_0.4.4.bb    |
-> 42 ++++++++++++++++++- 2 files changed, 39 insertions(+), 42
-> deletions(-) delete mode 100644
-> meta-oe/recipes-connectivity/midori/midori.inc
-> 
-> diff --git a/meta-oe/recipes-connectivity/midori/midori.inc
-> b/meta-oe/recipes-connectivity/midori/midori.inc deleted file mode
-> 100644 index dccb3ee..0000000 ---
-> a/meta-oe/recipes-connectivity/midori/midori.inc +++ /dev/null @@ -1,39
-> +0,0 @@ -DESCRIPTION = "Midori is a lightweight web browser." -HOMEPAGE =
-> "http://www.twotoasts.de/index.php?/pages/midori_summary.html" -LICENSE =
-> "LGPLv2.1" -LIC_FILES_CHKSUM =
-> "file://COPYING;md5=fbc093901857fcd118f065f900982c24" - -DEPENDS =
-> "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native
-> python-docutils-native" - -inherit gtk-icon-cache pkgconfig - 
-> -do_configure() { -    sed -i -e 's:, shell=False::g' -e
-> s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript -    ./configure
-> \ -            --prefix=${prefix} \ -            --bindir=${bindir} \ -
-> --sbindir=${sbindir} \ -            --libexecdir=${libexecdir} \ -
-> --datadir=${datadir} \ -            --sysconfdir=${sysconfdir} \ -
-> --sharedstatedir=${sharedstatedir} \ -
-> --localstatedir=${localstatedir} \ -            --libdir=${libdir} \ -
-> --includedir=${includedir} \ -            --infodir=${infodir} \ -
-> --mandir=${mandir} \ -            --disable-hildon \ -
-> --disable-gtk3 \ -} - -LDFLAGS_append = " -ljavascriptcoregtk-1.0 " - 
-> -do_install() { -	oe_runmake DESTDIR=${D} install -} - -RRECOMMENDS_${PN}
-> += "glib-networking ca-certificates gnome-icon-theme" - -FILES_${PN}-dev
-> += "${datadir}/vala/vapi" - -TARGET_CC_ARCH += "${LDFLAGS}" diff --git
-> a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-> b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb index
-> 827eb19..bccc7b3 100644 ---
-> a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb +++
-> b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb @@ -1,8 +1,44 @@ 
-> -require midori.inc - -PARALLEL_MAKE = "" +DESCRIPTION = "Midori is a
-> lightweight web browser." +HOMEPAGE =
-> "http://www.twotoasts.de/index.php?/pages/midori_summary.html" +LICENSE =
-> "LGPLv2.1" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=fbc093901857fcd118f065f900982c24" +DEPENDS =
-> "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native
-> python-docutils-native"
-> 
-> SRC_URI =
-> "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori
-> \ " SRC_URI[midori.md5sum] = "a6578ebfd237c0f22cce49113b95f70c" 
-> SRC_URI[midori.sha256sum] =
-> "fadd43f76c1c9f6a16483e60a804e58fb6817c6a595b1acdd59bcbdd7b35bca2" + 
-> +inherit gtk-icon-cache pkgconfig + +do_configure() { +    sed -i -e 's:,
-> shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g
-> wscript +    ./configure \ +            --prefix=${prefix} \ +
-> --bindir=${bindir} \ +            --sbindir=${sbindir} \ +
-> --libexecdir=${libexecdir} \ +            --datadir=${datadir} \ +
-> --sysconfdir=${sysconfdir} \ +
-> --sharedstatedir=${sharedstatedir} \ +
-> --localstatedir=${localstatedir} \ +            --libdir=${libdir} \ +
-> --includedir=${includedir} \ +            --infodir=${infodir} \ +
-> --mandir=${mandir} \ +            --disable-hildon \ +
-> --disable-gtk3 \ +} + +LDFLAGS_append = " -ljavascriptcoregtk-1.0 " 
-> +TARGET_CC_ARCH += "${LDFLAGS}" + +do_install() { +    oe_runmake
-> DESTDIR=${D} install +} + +RRECOMMENDS_${PN} += "glib-networking
-> ca-certificates gnome-icon-theme" + +FILES_${PN}-dev +=
-> "${datadir}/vala/vapi" + +PARALLEL_MAKE = ""
+Well switching to the mainline branch but still bitbake 1.12 both still 
+fail to build for me in the same manner. Does anyone have any ideas for 
+libprelude that I can maybe try or try and track down further? As libpam 
+should build once libprelude does.
 
-You missed PARALLEL_MAKE :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPaLz0AAoJEHZqAkdh1vT6zp4P/ArqfiSyTF+0b2ioQMcTgd/7
-xWtP53rcd9m51XV67mqOlsoRreTC4GAGeK5kM2mGx834GZk53lZWzMQgo4txuIaf
-GgSmWa5Z9dy4sgtPT7LlrnPIUFuMD//pqcqTIsb55VxnAE5Hv8eUmuaWwMajqa1X
-VgdxzD/lOqxYX4tZHBwrUOGwGZO7gTAzk4SiS/xfBg/wF/TBcgK3CYg9DDz0ABjF
-7nizbZqG3obYAvmWm/FrrsJ8V6ztTU2ecVG8+0/1SQsYCThfcxvBjveWXnB8G9cl
-kGsZcOhj4yEiP0ClWYz42nABB71YVlpOkWsPNiLREbDayoA0/o26TZoQPGIT1Yhl
-EalA+iy5oZyw2ygCktri/zzbd0xVCdP3IJzuW2Z8GwTWy0xlW8SR5ZvR/rngYxjZ
-YbyNm/6zmOaEXC0ILL9/lF3MfIak4d6WbdudNulA7O06h7B6NmowDbLUA7wgU12Q
-oVgTy0J6spoaCfoRWXrRpFCjuSXX7PeqR7a/uSCuKnAevRVNE/5Ywm1AFLBFcbiS
-aJJqNXqQghJKKGq9QqAWVVRvUWAm1zxr6woXZFVOdBMxEhmiERngwRMgs/jipEYV
-Kx/4C4fW2fqwGY7JiU0VHNTEPXWvEqBRSHYsd+a9y/GIpYdQwFqdW3OqwlMnRlQe
-cuuCEF4LDfXngP0lepYp
-=OlQq
------END PGP SIGNATURE-----
-
+Thanks for any help.
 
 
