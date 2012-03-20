@@ -1,36 +1,20 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S9uhx-0007bM-2b
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1S9vyz-00014z-S4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2012 09:46:22 +0100
-Received: by iaag37 with SMTP id g37so10545064iaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2012 01:37:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=W+AzgBlHCNJuOqxf3YpeMz89c7hUikWVATek8e+uVIc=;
-	b=rpp98I/R3LE/u0TGTUmYcYLzBHQEteLUOBMcpj6LqXkI9PN0S8PuSyH2Wz7X2+XN0m
-	uHASjpOlE0Uot9QIGC3Yn9YpDqa0pm5mmZq8zdnBXoYH2SIcEgGnR3MUtykcVzH8FbPK
-	CO2x7QQfKorDTexKR49L1HDvs/lm7w6k3Z12JgaOElRP7H7W7mAwoH79ZI7J667DDGzj
-	hrhMU3tcokDR8DmVSNTsH/WDqlGQkTuquBoWSgjqBlK6FiSo8QNXy+ojopDWSNmsrAkT
-	NvlrjfuQ/RvPfdi5F5J/lDUWgqpBCKdZ0Uwpb1PHTPRtY0eG1TdiFLaOC4XO2D//uAKU
-	QEUg==
-MIME-Version: 1.0
-Received: by 10.42.159.201 with SMTP id m9mr8672704icx.32.1332232647909; Tue,
-	20 Mar 2012 01:37:27 -0700 (PDT)
-Received: by 10.42.75.137 with HTTP; Tue, 20 Mar 2012 01:37:27 -0700 (PDT)
-In-Reply-To: <jk7vr4$482$1@dough.gmane.org>
-References: <1332103254-3729-1-git-send-email-schnitzeltony@googlemail.com>
-	<jk7aa6$bjh$1@dough.gmane.org>
-	<CALbNGRRx041cARMx4bWrZbOzoCJg5qL5v+i4s+mudXPMKAOgYw@mail.gmail.com>
-	<jk7vr4$482$1@dough.gmane.org>
-Date: Tue, 20 Mar 2012 09:37:27 +0100
-Message-ID: <CALbNGRR0Z2pFGOxBGNuyPUDd7h1dUCqOLeqHpBM8qOC_3eY-_Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Tue, 20 Mar 2012 11:08:02 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 20 Mar 2012 02:59:08 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="119471941"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.123.195])
+	by orsmga001.jf.intel.com with ESMTP; 20 Mar 2012 02:59:07 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 1/6] mpd: initial add 0.16.7
+Date: Tue, 20 Mar 2012 09:59:03 +0000
+Message-Id: <cover.1332237450.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe] [PATCH 0/2] Couple of tidy-ups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,49 +28,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2012 08:46:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Mar 2012 10:08:02 -0000
 
-On Mon, Mar 19, 2012 at 8:01 PM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 19-03-12 16:24, Andreas M=FCller schreef:
->> On Mon, Mar 19, 2012 at 1:54 PM, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>>> +DESC=3D"The Music Player Daemon" +DAEMON=3D/usr/bin/mpd
->>>> +MPDCONF=3D/etc/mpd.conf
->>>
->>> The above hardcodes $bindir and $sysconfdir, which it shouldn't do.
->> mpd.in + sed in V2. OK?
->
-> sound good to me.
->
->>> Furthermore I'd like to stop maintaining our own initsystem in meta-oe
->>> and switch to upstream initscripts as much as possible
->> The package itself does not contain an initscript so I implemented it
->> close to that found in debian-lenny package. What upstream source do you
->> suggest (matching also above requirement not hardcoding paths)?
->>
->>> and include systemd units by default as well.
->> This requirement I did not know and did not find any source for that -
->> some suggestion?
->
-> Fedora or arch should have one.
->
->>
->>> The above script is missing LSB headers as well.
->> This initscript as is does not need.
->
-> AIUI OE-core requires lsb headers for all sysvinitscripts and systemd wor=
-ks
-> a lot better when those headers are present as well.
->
-Another question: How about adding the mpd stuff into meta-multimedia
-( as a starter - e.g. in subdir recipes-audio )?
+Remove python-imaging and qmake2 recipes since their functionality is
+now in OE-Core.
 
-Andreas
+The following changes since commit b0a7f2e761f79e8967b1d3f7c67177283805bf75:
+
+  systemd: update to v44 + CVE fix (2012-03-18 13:04:15 +0100)
+
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib paule/tidy2
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/tidy
+
+Paul Eggleton (2):
+  python-imaging: remove
+  qmake2: remove
+
+ ...ing-setup.py-force-paths-for-zlib-freetyp.patch |   55 -------
+ .../python/python-imaging_1.1.7.bb                 |   41 ------
+ .../recipes-qt/qt4/qmake2-sdk/linux-oe-qmake.conf  |    1 -
+ meta-oe/recipes-qt/qt4/qmake2.inc                  |   72 ---------
+ .../recipes-qt/qt4/qmake2/0001-fix-mkspecs.patch   |  152 --------------------
+ meta-oe/recipes-qt/qt4/qmake2/linux-oe-qmake.conf  |    1 -
+ meta-oe/recipes-qt/qt4/qmake2/qmake-hack.diff      |   15 --
+ meta-oe/recipes-qt/qt4/qmake2/qt-config.patch      |   21 ---
+ .../recipes-qt/qt4/qmake2/use-lflags-last.patch    |   22 ---
+ meta-oe/recipes-qt/qt4/qmake2_2.10a.bb             |   60 --------
+ 10 files changed, 0 insertions(+), 440 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/python/python-imaging/0001-python-imaging-setup.py-force-paths-for-zlib-freetyp.patch
+ delete mode 100644 meta-oe/recipes-devtools/python/python-imaging_1.1.7.bb
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2-sdk/linux-oe-qmake.conf
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2.inc
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/0001-fix-mkspecs.patch
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/linux-oe-qmake.conf
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/qmake-hack.diff
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/qt-config.patch
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2/use-lflags-last.patch
+ delete mode 100644 meta-oe/recipes-qt/qt4/qmake2_2.10a.bb
+
+-- 
+1.7.5.4
+
 
 
