@@ -1,38 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1S9lCm-0005cS-1Z
+	(envelope-from <jtobias@viaas.com>) id 1S9oVK-0001c5-1y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Mar 2012 23:37:32 +0100
-Received: by wgbdr12 with SMTP id dr12so961206wgb.24
+	Tue, 20 Mar 2012 03:08:54 +0100
+Received: by lagw12 with SMTP id w12so5343107lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2012 15:28:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=+5QHVF0QZeCayW84U/svbM7zhCy7qKMHjiZFXreF0SM=;
-	b=kl8VajxXe3/ZKxRXxdjOr+dUQ2BLpuONMLr25nlL4tVZe88mZpFxtR3pUeEp0kQ9p9
-	PJugR2wPds7f6LpdFW5BqUS3ycRxdmlgYIGfLtehdAnmAYnxeG3nFChqnZmGb/BBVnH1
-	fF8h6/XKHi0/UrAEaAa1KnVxA8EqKyY3U2rpUVWRqllyOIi54Z+pz+I5WE8CpICoSlCA
-	7fHWqJXUvZ2hnAaIapCYZ7CjfXvdwhgksc34IYAQfL9gGJQp5/0yd/Va5vYx3mdr4saq
-	jUJLbgMFkHxBG+Ymtalu9P9KQl/IOsqPs0rMPOlsEwz/iEPU1fA0Nfw4lynU8rpD2+DZ
-	cxaw==
-Received: by 10.216.134.233 with SMTP id s83mr7934779wei.104.1332196120179;
-	Mon, 19 Mar 2012 15:28:40 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A3D1A.dip.t-dialin.net.
-	[91.10.61.26])
-	by mx.google.com with ESMTPS id fw5sm29043430wib.0.2012.03.19.15.28.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Mar 2012 15:28:36 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2012 23:32:40 +0100
-Message-Id: <1332196360-3171-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1332196360-3171-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1332196360-3171-1-git-send-email-schnitzeltony@googlemail.com>
+	Mon, 19 Mar 2012 19:00:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:x-gm-message-state;
+	bh=nO1SN18W0fo0Z7zmtVzHngKpDeb+KiSSIs+hJ6Cc3PM=;
+	b=QfileMkMeCTWE1QmL/ZAOq/0e/eTPZcGAkInT71YXj99IZt9rRD8u9ius89bzzFCHr
+	kHc4tVE8AAafQbi5NEJdac/lj9h7dxnkO1F4bU3qtfadl4R0S83bwO9N6iLTFbN0pU19
+	DXscu82SYuSplehoOD99QGOGHpeVSAQaYkCFQs/f2f2lY/RU1BaHBMkk00EGQA0Q9JA8
+	cse6gAPxVo+u1rZS/iiHYhF3YsLnUX6O9GxDRT70Jc18moPSwOuUku5gnsY2aH2DZjkN
+	9y23aKEdprwfklzwAMsaYU68TqUZ+J52rympKyLIB3vLIKlOj9ven461ER2kMLFWn/Fy
+	6mcA==
 MIME-Version: 1.0
-Subject: [meta-oe v2 2/2] midori: add librsvg-native to DEPENDS
+Received: by 10.112.11.9 with SMTP id m9mr5098168lbb.60.1332208801838; Mon, 19
+	Mar 2012 19:00:01 -0700 (PDT)
+Received: by 10.112.68.75 with HTTP; Mon, 19 Mar 2012 19:00:01 -0700 (PDT)
+Date: Mon, 19 Mar 2012 19:00:01 -0700
+Message-ID: <CAJfOToXzfR=k1scimzw-dS_Wsmcqp15c=_iT=QFG_XFXa=ktzw@mail.gmail.com>
+From: John Tobias <jtobias@viaas.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQknxaelNkpIkOtnUEnJeHB/wcpRzYg5sKC5XUJPtUYqU/+rzl/JWgERiB8wXa4wqi1U2slG
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Failing SD Card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 22:37:32 -0000
+X-List-Received-Date: Tue, 20 Mar 2012 02:08:54 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-configure found rsvg-convert on host:
-...
-Checking for program rsvg-convert           : /usr/bin/rsvg-convert
-...
+Hello,
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../recipes-connectivity/midori/midori_0.4.4.bb    |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Is there anyone encountered the following errors in your sd card?.
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-index bccc7b3..a317b5a 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
- HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
-+DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
-+
-+PR = "r1"
- 
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--- 
-1.7.4.4
+Thanks,
 
+john
 
+EXT3-fs error (device mmcblk0p1): ext3_free_blocks: Freeing blocks in
+system zones - Block = 256, count = 1
+Aborting journal on device mmcblk0p1.
+ext3_free_blocks_sb: aborting transaction: Journal has aborted in
+__ext3_journal_get_undo_access<2>EXT3-fs error (device mmcblk0p1) in
+ext3_free_blocks_sb: Journal has aborted
+ext3_free_blocks_sb: aborting transaction: Journal has aborted in
+__ext3_journal_get_undo_access<2>EXT3-fs error (device mmcblk0p1) in
+ext3_free_blocks_sb: Journal has aborted
+ext3_reserve_inode_write: aborting transaction: Journal has aborted in
+__ext3_journal_get_write_access<2>EXT3-fs error (device mmcblk0p1) in
+ext3_reserve_inode_write: Journal has aborted
+EXT3-fs error (device mmcblk0p1) in ext3_truncate: Journal has aborted
+ext3_reserve_inode_write: aborting transaction: Journal has aborted in
+__ext3_journal_get_write_access<2>EXT3-fs error (device mmcblk0p1) in
+ext3_reserve_inode_write: Journal has aborted
+EXT3-fs error (device mmcblk0p1) in ext3_orphan_del: Journal has aborted
+ext3_reserve_inode_write: aborting transaction: Journal has aborted in
+__ext3_journal_get_write_access<2>ext3_abort called.
+EXT3-fs error (device mmcblk0p1): ext3_journal_start_sb: Detected aborted
+journal
+Remounting filesystem read-only
+EXT3-fs error (device mmcblk0p1) in ext3_reserve_inode_write: Journal has
+aborted
+EXT3-fs error (device mmcblk0p1) in ext3_delete_inode: Journal has aborted
+__journal_remove_journal_head: freeing b_committed_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_committed_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_committed_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_frozen_data
+__journal_remove_journal_head: freeing b_committed_data
+__journal_remove_journal_head: freeing b_frozen_data
 
