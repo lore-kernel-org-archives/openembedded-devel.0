@@ -1,36 +1,25 @@
-Received: from mail-qa0-f54.google.com ([209.85.216.54])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SA6sL-0004Ib-Dc
+	(envelope-from <sgw@linux.intel.com>) id 1SA7yc-00034Y-QV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Mar 2012 22:45:53 +0100
-Received: by qao25 with SMTP id 25so326661qao.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=s6FSOamL0nrZyX5fHubQbGmQ2PuX89WwIti9Aq5DFrs=;
-	b=sZ/g4wYy48C8ShsCHmdvAXwHdtjcYYf1Nhf0rWQGy9B2c/jb4U7PUlLswQhjMAFkDv
-	aLyY2ytubDg42Uy8IzzKfoPXiCVbl5U/aV7I1nDvh1641sI5ODuG4eO3sgR6XIcNWkpy
-	48SEybu6iXsaNzfhTrzJU97nVZkNzKWZWUz8hMYcZNoDNs1bzV2w+PYO5z04Ay/WFsOF
-	8Go+9HiBbUlJdRRqZsBRrqZaMy7/UucNzwAlza6y97jpWAuP2hGGzhkSx6E031zW8dCK
-	fqi1HLQXLQvV3kPGdRqItqcuQ5CGln2bZp9A5im1y9ntRFabPLQ83E3p+NoBCefzik0U
-	4oUA==
-Received: by 10.224.31.84 with SMTP id x20mr2976704qac.63.1332279419930;
-	Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id j17sm4726058qaj.9.2012.03.20.14.36.55
-	(version=SSLv3 cipher=OTHER); Tue, 20 Mar 2012 14:36:59 -0700 (PDT)
-Message-ID: <4F68F86D.3020606@gmail.com>
-Date: Tue, 20 Mar 2012 14:36:45 -0700
-From: j <vwyodapink@gmail.com>
+	Tue, 20 Mar 2012 23:56:27 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 20 Mar 2012 15:47:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="119752732"
+Received: from unknown (HELO [10.255.15.160]) ([10.255.15.160])
+	by orsmga001.jf.intel.com with ESMTP; 20 Mar 2012 15:47:26 -0700
+Message-ID: <4F6908FE.8020608@linux.intel.com>
+Date: Tue, 20 Mar 2012 15:47:26 -0700
+From: Saul Wold <sgw@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120314 Thunderbird/11.0
+	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4F66789C.7010503@gmail.com>
-In-Reply-To: <4F66789C.7010503@gmail.com>
-Subject: Re: having issues with libprelude and libpam
+References: <4F5F7E1F.4000901@linux.intel.com>
+	<1331913369-31149-1-git-send-email-cheepeero@gmx.net>
+In-Reply-To: <1331913369-31149-1-git-send-email-cheepeero@gmx.net>
+Subject: Re: [oe-core][PATCH v2] qt-mobility: fix build in the absence of opengl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +33,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2012 21:45:53 -0000
+X-List-Received-Date: Tue, 20 Mar 2012 22:56:27 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/18/2012 05:06 PM, j wrote:
-> I am trying to get libpam to build which fails due to not finding the 
-> header from the libprelude build, which currently also fails to build 
-> for me. I am hoping someone knows of a fix or can point me to the 
-> right place to dig for a solution, I do not see any listed fixes or 
-> workarounds from my digging online. I have attached the build logs for 
-> each as well, since they were long if the preferred method is 
-> different, sorry and please let me know how to post those. In the 
-> libprelude error its saying there are files that seem to have moved, 
-> but they actually exsist in the location it says it does not.
+On 03/16/2012 08:56 AM, Ciprian Ciubotariu wrote:
+> QMake pro files don't explicitly define QT_NO_OPENGL if the
+> configuration lacks opengl, but example code relies on this define.
+> ---
+>   .../qt4/files/qt-mobility-no-opengl.patch          |   36 ++++++++++++++++++++
+>   meta/recipes-qt/qt4/qt-mobility_1.2.0.inc          |    5 ++-
+>   2 files changed, 39 insertions(+), 2 deletions(-)
+>   create mode 100644 meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
 >
-> I am running on Ubuntu 11.04 32bit (up to date). Bitbake branch 1.12, 
-> OE branch overo-2011.03 (both up to date). I know this is not your 
-> guys branch but have not gotten any feed back on gumstix in relation 
-> to issues building these packages, so checked them verse what I 
-> believe was the master branch and they had no diff. If I can give more 
-> info on system specs or anything like that please let me know. I 
-> believe I know the "issues" just not sure how to go about solving 
-> them, as libprelude seems like a more serious error. These are the 
-> only two packages that fail to build for image that do not rely on 
-> these lib's. I also have both of these installed on the build machine 
-> itself, I also built everything each rely on for the build, at least I 
-> believe I did none failed.
+> diff --git a/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+> new file mode 100644
+> index 0000000..aa15683
+> --- /dev/null
+> +++ b/meta/recipes-qt/qt4/files/qt-mobility-no-opengl.patch
+> @@ -0,0 +1,36 @@
+> +diff --git a/examples/declarative-camera/declarative-camera.pro b/examples/declarative-camera/declarative-camera.pro
+> +index 8164fbc..54fd8ad 100644
+> +--- a/examples/declarative-camera/declarative-camera.pro
+> ++++ b/examples/declarative-camera/declarative-camera.pro
+> +@@ -5,10 +5,10 @@ TEMPLATE=app
+> +
+> + QT += declarative network
+> +
+> +-!maemo5 {
+> +-    contains(QT_CONFIG, opengl) {
+> +-        QT += opengl
+> +-    }
+> ++contains(QT_CONFIG, opengl): !maemo5 {
+> ++   QT += opengl
+> ++} else {
+> ++   DEFINES += QT_NO_OPENGL
+> + }
+> +
+> + win32 {
+> +diff --git a/examples/videographicsitem/videographicsitem.pro b/examples/videographicsitem/videographicsitem.pro
+> +index 8461beb..eedee2f 100644
+> +--- a/examples/videographicsitem/videographicsitem.pro
+> ++++ b/examples/videographicsitem/videographicsitem.pro
+> +@@ -9,7 +9,11 @@ MOBILITY = multimedia
+> +
+> + QMAKE_RPATHDIR += $$DESTDIR
+> +
+> +-!symbian:contains(QT_CONFIG, opengl): QT += opengl
+> ++contains(QT_CONFIG, opengl): !symbian {
+> ++   QT += opengl
+> ++} else {
+> ++   DEFINES += QT_NO_OPENGL
+> ++}
+> +
+> + HEADERS   += videoplayer.h \
+> +              videoitem.h
+> diff --git a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
+> index 593cbd6..2ac2253 100644
+> --- a/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
+> +++ b/meta/recipes-qt/qt4/qt-mobility_1.2.0.inc
+> @@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24 \
 >
-> Thanks a ton for any help or info.
+>   SRC_URI = "http://get.qt.nokia.com/qt/add-ons/qt-mobility-opensource-src-${PV}.tar.gz \
+>              file://qt-mobility-configure.patch \
+> -           file://0001-gstvideoconnector-fixed-buffers-allocation.patch"
+> +           file://0001-gstvideoconnector-fixed-buffers-allocation.patch \
+> +           file://qt-mobility-no-opengl.patch"
+>
+>   SRC_URI[md5sum]="ea5db5a8d3dd4709c2926dceda646bd8"
+>   SRC_URI[sha256sum]="ee3c88975e04139ac9589f76d4be646d44fcbc4c8c1cf2db621abc154cf0ba44"
+>
+> -PR = "r2"
+> +PR = "r3"
+>
+>   S = "${WORKDIR}/qt-mobility-opensource-src-${PV}"
+>
 
-Well switching to the mainline branch but still bitbake 1.12 both still 
-fail to build for me in the same manner. Does anyone have any ideas for 
-libprelude that I can maybe try or try and track down further? As libpam 
-should build once libprelude does.
+Merged into OE-Core
 
-Thanks for any help.
+Thanks
+	Sau!
 
 
