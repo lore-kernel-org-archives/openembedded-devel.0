@@ -1,38 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SARw4-0000Pn-9K
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 21:15:08 +0100
-Received: by wibhj13 with SMTP id hj13so6130850wib.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SASvr-0001vM-Tu for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Mar 2012 22:18:59 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SASnF-00039P-85 for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Mar 2012 22:10:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Mar 2012 22:10:05 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 13:06:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=4m/fcEf1YQNTa7FBj9fzX4nraU/mpc68Skr6ZSXtogI=;
-	b=BcurciKpdpYrJ6AWcxGZFI02rOXIHLExFtSkcHZVbilXVomqS2c2fcc+r1PRif6KZN
-	sAZ9VEON0JxMR48HIoxuqL1MoFYQNSy9iq4w9zSSZ8vBImxu93TkwHabur5WmBy7X776
-	/duDHytrUpGx9FWX4cf4a0cZHpVH4mwl9Jfq5MpP9KCNbQDUpfuuPnQJDJwhv6MaUbRz
-	giOz9WPElNnMijL0IoUSmf1fWtSTuw8xl+1qi4qc2F+IEBpFewa/K3zDw7BfTU0oD/8u
-	EIWt6sjtd6b6fZkbOL4vAeD4Db71DU84kagDoKc1HiiWqOhTeWsq16I5Rd3rivwFkB36
-	GN9Q==
-Received: by 10.180.104.65 with SMTP id gc1mr11918642wib.13.1332360374457;
-	Wed, 21 Mar 2012 13:06:14 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF1EA7.dip.t-dialin.net.
-	[79.223.30.167])
-	by mx.google.com with ESMTPS id l5sm7021769wia.11.2012.03.21.13.06.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Mar 2012 13:06:13 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Wed, 21 Mar 2012 22:10:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2012 21:10:19 +0100
-Message-Id: <1332360619-3060-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe 2/2] midori: add librsvg-native to DEPENDS
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 21 Mar 2012 22:09:58 +0100
+Message-ID: <jkdg34$om0$1@dough.gmane.org>
+References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
+X-Enigmail-Version: 1.3.5
+Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 20:15:08 -0000
+X-List-Received-Date: Wed, 21 Mar 2012 21:19:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-configure found rsvg-convert on host:
-...
-Checking for program rsvg-convert           : /usr/bin/rsvg-convert
-...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../recipes-connectivity/midori/midori_0.4.4.bb    |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Op 21-03-12 15:17, Samuel Stirtzel schreef:
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-index 87855b1..a408d73 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
- HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native"
-+DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
-+
-+PR = "r1"
- 
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--- 
-1.7.4.4
+OE-core needs to slim down, not get fatter. You are basically saying "layer
+suck, let's move back to oe-classic"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPakOkAAoJEHZqAkdh1vT6zyQP/R7/viIEf4trbFzR3ZaD2cRd
+D4U4q7eDF5DM/fC85yoLBj7byBfryB/I2JWDir9YOAcGgaBysvpL5vApTWFt1hJZ
+MOc3NFNdIsALL/jnMzjmY4OB5bIAYHj4nC0XGiRj6CuEvkyz6IueAAR3k2O6NU64
+L32Ou0iGD0GKg6gl8LSBfixVKYAjIFfehP5rWv1L0P7cJiYmVy4Gj7CalmmRpPZz
+zMhmwoUze4dIx9z6X5WSIXs44aBOFs3MZjtYRfBQsUDkjBheLWI5tMIekhFX0Ega
+wKjU9GUwerPzI0oI2DG+9n7nS1wlBJesrHAQKh3pwCWRC19NQuqFjArdaF80DwPk
+ZHZNnTzB5Dd/NbPcSkRG5V0DAFYB54Xty6A2w7ONbPoQs5h3vjS4g8V560Kvgqaa
+O/efrZi2VgYA/1RAaz7COjNkMF/OBeH9aE9oRNPweOBYcwMFzhbrTEXPUL/pZ7gg
+5oI0JdJj5lmqi6q9+jk8hDVJvYIkM45l9xqy6nDnIa0tUnDTzCRxj+jr7LEyPp/R
+p+/6GO5aPG8S4JPbmgFbmJN7hrLzNyg6JS962VVYiOhw0cIVwkj/hX+9oYPE4pRe
+AHXoBtWrfflkL4RIadYI64uMJHNpHzfuzd6+0JljL8sA969nh36GXsd4OwMdUx6b
+AVqAIeCDYo30C3i9BXRL
+=1Xye
+-----END PGP SIGNATURE-----
 
 
 
