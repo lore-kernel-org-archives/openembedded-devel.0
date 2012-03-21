@@ -1,34 +1,34 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SALFl-0003eC-6y
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SAMV5-0000OV-7F
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 14:07:01 +0100
-Received: by vbbfr13 with SMTP id fr13so509930vbb.6
+	Wed, 21 Mar 2012 15:26:55 +0100
+Received: by wibhm17 with SMTP id hm17so5464949wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=vRxV2ajDDrB8nMlgUjcCavzPiZ4KylDHpoU7m5LQmQI=;
-	b=Q0AAZPCXq4vbRNMlbbtM7rUAAnf++Hnu9RHm9S+sZTUe06oXoO+1++e6kNt2uxfMFb
-	dUqDb45L7inLW596Ol+XNG2aNouk9n3BjPMCx2VCxt5XOXKd/JZpJXOPdp3jml7IAfUO
-	ztV1J+uYvvs3nFrrfmUcD0AjsWSs6+HUcQzHisxj0YwwmA9sTJQmaFkpabSoymFfuXIS
-	LLyVmQ7mGn2m7t4xGO3DuZ7QWSvnVCW+u+szRZ2LKCmf0wpC9Q6P++xjOQB0EAPJz/mz
-	MUxuBEa7G4cGHz+kyxZSansBbtlfFYjg/uTUhrU78y7ybo8NsP9AoGe3XQ76agBGziNs
-	e8Tw==
-MIME-Version: 1.0
-Received: by 10.220.198.135 with SMTP id eo7mr1824492vcb.35.1332334687209;
-	Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
-Received: by 10.52.69.37 with HTTP; Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
-In-Reply-To: <1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
-References: <4F69AF4A.8050809@dresearch-fe.de>
-	<1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
-Date: Wed, 21 Mar 2012 13:58:07 +0100
-Message-ID: <CACW_hTajN1uYw1XkE9=zbFnG7rx4sjR0i_sd0B8TVaH4TudF+A@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] libmatthew-0.7.1: SRC_URI updated
+	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=nzUY3CmTF3VmfQujvf76pNDDXoQvuyWWrpQollDToYU=;
+	b=HyvzPwlDEZV+m9Yvb8KAAgGB5W/NiEsRP5CP7dmXbVn+0SRwf6YAAQTl6mnOQC4AlI
+	xvDyjd0ghZydK8lMd1gzeI+R6Xap7LWztmu9aLvXzN/tEQp0CKaDj9lLOaiI5aVa5X3I
+	eWOGm3ZIWYEw3Cqn63NiCMy0/DCvgSivS39+Kn5TkLny5ct9s5aWqx78n7DdFzeF35un
+	23+Fx6UK5DoKYOVd8wrctnmUzFZb43mhc+wP3e9ratbbmAp3WI4aeoa5WD/DyYCS22/+
+	mTez7bREort+vOKAuJwqTPXNh1HV4+irK1WYTnrknyahDHCHcaluetAG2S9S0Cxu86KX
+	S7vQ==
+Received: by 10.180.85.70 with SMTP id f6mr38871946wiz.5.1332339481504;
+	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id fn2sm8095968wib.0.2012.03.21.07.18.00
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Mar 2012 15:17:31 +0100
+Message-Id: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] [meta-oe] giflib: Move to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 13:07:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Mar 2012 14:26:55 -0000
 
-2012/3/21 Steffen Sledz <sledz@dresearch-fe.de>:
-> libmatthew-java-0.7.1.tar.gz is no longer available at the original
-> location.
->
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> ---
-> =A0recipes/libmatthew/libmatthew_0.7.1.bb | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/libmatthew/libmatthew_0.7.1.bb b/recipes/libmatthew/=
-libmatthew_0.7.1.bb
-> index 266a0d4..6916e56 100644
-> --- a/recipes/libmatthew/libmatthew_0.7.1.bb
-> +++ b/recipes/libmatthew/libmatthew_0.7.1.bb
-> @@ -2,7 +2,7 @@ require libmatthew.inc
->
-> =A0PR =3D "r0"
->
-> -SRC_URI =3D "http://www.matthew.ath.cx/projects/java/libmatthew-java-${P=
-V}.tar.gz \
-> +SRC_URI =3D "http://pkgs.fedoraproject.org/repo/pkgs/libmatthew-java/lib=
-matthew-java-0.7.1.tar.gz/6a4db221129f230c64a0f937d00bb703/libmatthew-java-=
-${PV}.tar.gz \
-> =A0 =A0 =A0 =A0 =A0 =A0file://Makefile-0.7.patch"
->
->
-> --
-> 1.7.7
->
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |   20 --------------------
+ 1 files changed, 0 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+deleted file mode 100644
+index bd7b495..0000000
+--- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "shared library for GIF images"
+-SECTION = "libs"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+-PR = "r2"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+-
+-inherit autotools
+-
+-DEPENDS = "libsm"
+-
+-PACKAGES += "${PN}-utils"
+-FILES_${PN} = "${libdir}/libgif.so.*"
+-FILES_${PN}-utils = "${bindir}"
+-
+-BBCLASSEXTEND = "native"
+-
+-SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
+-SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
+-- 
+1.7.5.4
+
 
 
