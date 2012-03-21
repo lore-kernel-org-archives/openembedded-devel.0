@@ -1,35 +1,34 @@
 Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SALE1-0003Hi-Sz
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SALFl-0003eC-6y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 14:05:14 +0100
-Received: by vbbfr13 with SMTP id fr13so509008vbb.6
+	Wed, 21 Mar 2012 14:07:01 +0100
+Received: by vbbfr13 with SMTP id fr13so509930vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 05:56:20 -0700 (PDT)
+	Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=EmboT0Axug7s/Nv69XmSY27ql+ETFHgTmu/J5BK1AFQ=;
-	b=Ww92GzJ8/TXQ5C5e9vFz83swJecrOkvtGKMZZafmWDNS5SxrtDaVJsAdjPwkzQDzYH
-	mKMwu8UFbLghG/YV7+FK3LLDKYbHUWZLjOkgopSvTBYQjPNlV43Fv1LxnsjXEmTJxi7I
-	dL6GrZo8FPqGX5vDNj/cyB5TDflnvijxHKc9h8mAbWGyj3GH0HFgiDBslR6JgjXJ0+zg
-	p0zYHCTJjYspQqYAwCOzkQnBaPiI5VQirs/8EmwwYZV9FSi/ja7jJE+TjDOoUqQPPHn6
-	AFAwfAm7UowygXLDGGt/MCpWbrXxbYv1933+z1BdDlMoXMJ/mA1CHLkVi/ES5rxB2GB1
-	svYg==
+	:cc:content-type:content-transfer-encoding;
+	bh=vRxV2ajDDrB8nMlgUjcCavzPiZ4KylDHpoU7m5LQmQI=;
+	b=Q0AAZPCXq4vbRNMlbbtM7rUAAnf++Hnu9RHm9S+sZTUe06oXoO+1++e6kNt2uxfMFb
+	dUqDb45L7inLW596Ol+XNG2aNouk9n3BjPMCx2VCxt5XOXKd/JZpJXOPdp3jml7IAfUO
+	ztV1J+uYvvs3nFrrfmUcD0AjsWSs6+HUcQzHisxj0YwwmA9sTJQmaFkpabSoymFfuXIS
+	LLyVmQ7mGn2m7t4xGO3DuZ7QWSvnVCW+u+szRZ2LKCmf0wpC9Q6P++xjOQB0EAPJz/mz
+	MUxuBEa7G4cGHz+kyxZSansBbtlfFYjg/uTUhrU78y7ybo8NsP9AoGe3XQ76agBGziNs
+	e8Tw==
 MIME-Version: 1.0
-Received: by 10.220.116.10 with SMTP id k10mr1835288vcq.25.1332334579955; Wed,
-	21 Mar 2012 05:56:19 -0700 (PDT)
-Received: by 10.52.69.37 with HTTP; Wed, 21 Mar 2012 05:56:19 -0700 (PDT)
-In-Reply-To: <jkcgem$agm$1@dough.gmane.org>
-References: <1332263919-19283-1-git-send-email-koen@dominion.thruhere.net>
-	<1332263919-19283-4-git-send-email-koen@dominion.thruhere.net>
-	<CALbNGRRwoJ7MqVFdoCWQC5bmf+HgZD_QV1jUj2Q1nR-jXZWXfg@mail.gmail.com>
-	<jkcgem$agm$1@dough.gmane.org>
-Date: Wed, 21 Mar 2012 13:56:19 +0100
-Message-ID: <CACW_hTZ_EvDtsMosYJef9NDWgi2E-9Pf_vYONvXn3JcEz+Xv_w@mail.gmail.com>
+Received: by 10.220.198.135 with SMTP id eo7mr1824492vcb.35.1332334687209;
+	Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
+Received: by 10.52.69.37 with HTTP; Wed, 21 Mar 2012 05:58:07 -0700 (PDT)
+In-Reply-To: <1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
+References: <4F69AF4A.8050809@dresearch-fe.de>
+	<1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
+Date: Wed, 21 Mar 2012 13:58:07 +0100
+Message-ID: <CACW_hTajN1uYw1XkE9=zbFnG7rx4sjR0i_sd0B8TVaH4TudF+A@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 4/4] udev: remove 175
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libmatthew-0.7.1: SRC_URI updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 13:05:14 -0000
+X-List-Received-Date: Wed, 21 Mar 2012 13:07:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2012/3/21 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+2012/3/21 Steffen Sledz <sledz@dresearch-fe.de>:
+> libmatthew-java-0.7.1.tar.gz is no longer available at the original
+> location.
 >
-> Op 21-03-12 08:49, Andreas M=FCller schreef:
->> On Tue, Mar 20, 2012 at 6:18 PM, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+> ---
+> =A0recipes/libmatthew/libmatthew_0.7.1.bb | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
 >
->> Could we wait with this until libertas works with udev >=3D 177 [1]?
+> diff --git a/recipes/libmatthew/libmatthew_0.7.1.bb b/recipes/libmatthew/=
+libmatthew_0.7.1.bb
+> index 266a0d4..6916e56 100644
+> --- a/recipes/libmatthew/libmatthew_0.7.1.bb
+> +++ b/recipes/libmatthew/libmatthew_0.7.1.bb
+> @@ -2,7 +2,7 @@ require libmatthew.inc
 >
-> I'd rather live with the breakage so people are motivated to fix the
-> libertas driver. Unless someone commits to maintain the 175 recipe, of co=
-urse.
+> =A0PR =3D "r0"
 >
-> regards,
+> -SRC_URI =3D "http://www.matthew.ath.cx/projects/java/libmatthew-java-${P=
+V}.tar.gz \
+> +SRC_URI =3D "http://pkgs.fedoraproject.org/repo/pkgs/libmatthew-java/lib=
+matthew-java-0.7.1.tar.gz/6a4db221129f230c64a0f937d00bb703/libmatthew-java-=
+${PV}.tar.gz \
+> =A0 =A0 =A0 =A0 =A0 =A0file://Makefile-0.7.patch"
 >
-> Koen
-
-Interesting point of view.
-I still recall the flak someone gave when some breakage occurred
-because some old recipes were removed....
-Seems the world is improving after all ;-)
-
-Have fun!
-Frans
-
-PS: not volunteering to maintain 175; My products are still perfectly
-happy with static device tables.
+>
+> --
+> 1.7.7
+>
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
