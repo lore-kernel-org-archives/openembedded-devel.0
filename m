@@ -1,44 +1,49 @@
-Received: from am1ehsobe002.messaging.microsoft.com ([213.199.154.205]
-	helo=am1outboundpool.messaging.microsoft.com)
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1SAGx9-000368-I2
+	(envelope-from <sledz@dresearch-fe.de>) id 1SAJ3C-0008Ou-H8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 09:31:31 +0100
-Received: from mail99-am1-R.bigfish.com (10.3.201.245) by
-	AM1EHSOBE005.bigfish.com (10.3.204.25) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 21 Mar 2012 07:52:24 +0000
-Received: from mail99-am1 (localhost [127.0.0.1])	by mail99-am1-R.bigfish.com
-	(Postfix) with ESMTP id EE5C6C0366	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 07:52:23 +0000 (UTC)
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1202hzz8275bh8275dhz2dh2a8h668h839hd24h)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-Received: from mail99-am1 (localhost.localdomain [127.0.0.1]) by mail99-am1
-	(MessageSwitch) id 1332316342781397_25935;
-	Wed, 21 Mar 2012 07:52:22 +0000 (UTC)
-Received: from AM1EHSMHS011.bigfish.com (unknown [10.3.201.240])	by
-	mail99-am1.bigfish.com (Postfix) with ESMTP id B0B651A0063	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 07:52:22 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS011.bigfish.com
-	(10.3.207.111) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 21 Mar 2012 07:52:22 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.1.355.3; Wed, 21 Mar 2012 02:52:26 -0500
-Received: from localhost.localdomain (bjsimics-desktop.ap.freescale.net
-	[10.192.208.197])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id q2L7qMoI022016;	Wed, 21 Mar 2012 00:52:23 -0700
-From: <b19537@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Mar 2012 16:02:34 +0800
-Message-ID: <1332316954-11131-1-git-send-email-b19537@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
+	Wed, 21 Mar 2012 11:45:54 +0100
+Received: by bkcjg15 with SMTP id jg15so839616bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Mar 2012 03:37:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=A/HfXaDFE+d+nKWnfALVlKNBzRxN0Ns3SqpFd2/V5QE=;
+	b=aktHGhf/cXepdUTPUE9pcp/gIqsw88d3o+26ryUGjH2GZgrrw7Zpxkp9h05myxl6yg
+	ikVcND6vowWN/1Miydracr5VNUkj/NwcVW5zlxBYrYvLLPfDObZrna9BbJ6hdis7cXPk
+	8zIUY0qseUu2uzXHTLR+pG1/zss+82RemXMgzLSl/ELkBY0I7zyNKYODvnVJmjxRQ93N
+	sqUtZQw4VxvBNIhGJmB96mBXKrP1bqSopN/9NdwQAsaNtlDoQuFkzORjcMsELsi7520l
+	ZocdT/L6HI2Agoen3zFdgrn9mN5Ys7Jh1lo5siIchF0RKxEY/qoDNoJ4csXB5tds+jYY
+	S7jQ==
+Received: by 10.204.129.13 with SMTP id m13mr1287694bks.119.1332326219676;
+	Wed, 21 Mar 2012 03:36:59 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id h16sm2507391bkk.12.2012.03.21.03.36.58
+	(version=SSLv3 cipher=OTHER); Wed, 21 Mar 2012 03:36:59 -0700 (PDT)
+Message-ID: <4F69AF4A.8050809@dresearch-fe.de>
+Date: Wed, 21 Mar 2012 11:36:58 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe v2] strongswan: upgrade to 4.6.2
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <4F61C54B.1000609@dresearch-fe.de>
+	<4F66E4F2.2000909@dresearch-fe.de>
+	<CA+M6bXmpiegfSspYOwybxKSLf4Ukg5tjRL4VR1aq8T4EFyaaRg@mail.gmail.com>
+	<CACW_hTbMZ5R6VB_BChH+3rxx-tqV3jqxioX8Q5ZWsoiHJWZ=7w@mail.gmail.com>
+	<20120319162122.GA19810@bill-the-cat>
+	<4F682E0C.4030101@dresearch-fe.de>
+	<CACW_hTZaNQSiUDPPC2VyDqzeBenFwyKXUT6uaqR96LooaNiDRg@mail.gmail.com>
+	<CA+M6bXnkir38b07V+w5A8szcHDvOaNzQV7pe-FOVGULOwG+wwg@mail.gmail.com>
+	<4F69796D.5040708@dresearch-fe.de>
+In-Reply-To: <4F69796D.5040708@dresearch-fe.de>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQlHOmdMNQCHn92L/gqjUQuUF0WzkIrN6b9kBHxaSueBOnfbeA0shRjVu2NZkGX5P9/TyvRb
+Subject: Re: libmatthew-java-0.7.1.tar.gz not fetchable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,85 +57,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 08:31:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Mar 2012 10:45:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Zhenhua Luo <b19537@freescale.com>
+On 21.03.2012 07:47, Steffen Sledz wrote:
+> On 20.03.2012 15:22, Tom Rini wrote:
+>> On Tue, Mar 20, 2012 at 12:42 AM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>>> 2012/3/20 Steffen Sledz <sledz@dresearch-fe.de>:
+>>>> On 19.03.2012 17:21, Tom Rini wrote:
+>>>>> On Mon, Mar 19, 2012 at 04:44:10PM +0100, Frans Meulenbroeks wrote:
+>>>>>> ...
+>>>>>> http://pkgs.fedoraproject.org/repo/pkgs/libmatthew-java/libmatthew-java-0.7.1.tar.gz/6a4db221129f230c64a0f937d00bb703/libmatthew-java-0.7.1.tar.gz
+>>>>>>
+>>>>>> It might be useful to update the recipe itself as well.
+>>>>>> Furthermore we might consider running a fetchall and put all fetched
+>>>>>> on the mirror.
+>>>>>
+>>>>> Does pkgs.fedoraproject.org have a policy about forever, ala
+>>>>> snapshot.debian.org?  Otherwise, we're just making a problem for
+>>>>> ourselves in the future.  WRT an everything mirror, I think bandwidth
+>>>>> usage is a concern there, ala what I think happened with the angstrom
+>>>>> everything mirror.
+>>>
+>>> I don't know about the policy fedora has for retaining packages.
+>>> There might also be a copy on debian. Google gave a fair number of hits.
+>>
+>> I see one under
+>> http://snapshot.debian.org/archive/debian/20110301/pool/main/libm/libmatthew-java/
+>> so a patch to switch to that would be good with me.
+> 
+> The file <http://snapshot.debian.org/archive/debian/20110228T220053Z/pool/main/libm/libmatthew-java/libmatthew-java_0.7.1.orig.tar.gz>
+> does not seem to be the same file we're looking for. At least the checksums differ.
+> 
+> --------------------> snip <-------------------
+>> wget http://snapshot.debian.org/archive/debian/20110228T220053Z/pool/main/libm/libmatthew-java/libmatthew-java_0.7.1.orig.tar.gz
+> asking libproxy about url 'http://snapshot.debian.org/archive/debian/20110228T220053Z/pool/main/libm/libmatthew-java/libmatthew-java_0.7.1.orig.tar.gz'
+> libproxy suggest to use 'direct://'
+> --2012-03-21 07:41:30--  http://snapshot.debian.org/archive/debian/20110228T220053Z/pool/main/libm/libmatthew-java/libmatthew-java_0.7.1.orig.tar.gz
+> Resolving snapshot.debian.org (snapshot.debian.org)... 193.62.202.30, 206.12.19.150, 2607:f8f0:610:4000:1a1a:0:ce0c:1396, ...
+> Connecting to snapshot.debian.org (snapshot.debian.org)|193.62.202.30|:80... connected.
+> HTTP request sent, awaiting response... 200 OK
+> Length: 38375 (37K) [application/x-tar]
+> Saving to: `libmatthew-java_0.7.1.orig.tar.gz'
+> 
+> 100%[==================================================================================================================>] 38.375      --.-K/s   in 0,1s
+> 
+> 2012-03-21 07:41:30 (330 KB/s) - `libmatthew-java_0.7.1.orig.tar.gz' saved [38375/38375]
+> 
+>> md5sum libmatthew-java_0.7.1.orig.tar.gz
+> d6145d37c6d289713d68c5745eab23af  libmatthew-java_0.7.1.orig.tar.gz
+> 
+>> grep md5 recipes/libmatthew/libmatthew_0.7.1.bb
+> SRC_URI[md5sum] = "6a4db221129f230c64a0f937d00bb703"
+> --------------------> snip <-------------------
 
-Signed-off-by: Zhenhua Luo <b19537@freescale.com>
----
- .../recipes-support/strongswan/strongswan_4.5.1.bb |   21 --------------
- .../recipes-support/strongswan/strongswan_4.6.2.bb |   30 ++++++++++++++++++++
- 2 files changed, 30 insertions(+), 21 deletions(-)
- delete mode 100644 meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
- create mode 100644 meta-oe/recipes-support/strongswan/strongswan_4.6.2.bb
+I prepared a patch using the fedoraproject url because the snapshot.debian.org version differs from the one used by the recipe.
 
-diff --git a/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb b/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
-deleted file mode 100644
-index 3276fdd..0000000
---- a/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "strongSwan is an OpenSource IPsec implementation for the \
--Linux operating system."
--HOMEPAGE = "http://www.strongswan.org"
--SECTION = "console/network"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
--DEPENDS = "gmp openssl flex-native flex bison-native"
--
--SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
--SRC_URI[md5sum] = "81a4a699c4a1a49b74061dfa47b5a033"
--SRC_URI[sha256sum] = "252d7369d94aa2d79e6fad078853b07ca897ea811ab1e1a2b008bcec0d1e758a"
--
--EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \
--		--enable-gmp --disable-mysql --disable-sqlite \
--		--enable-openssl"
--
--inherit autotools
--
--RRECOMMENDS_${PN} = "kernel-module-ipsec"
--
--FILES_${PN}-dbg += "${libexecdir}/ipsec/.debug ${libexecdir}/ipsec/plugins/.debug"
-diff --git a/meta-oe/recipes-support/strongswan/strongswan_4.6.2.bb b/meta-oe/recipes-support/strongswan/strongswan_4.6.2.bb
-new file mode 100644
-index 0000000..5b553da
---- /dev/null
-+++ b/meta-oe/recipes-support/strongswan/strongswan_4.6.2.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "strongSwan is an OpenSource IPsec implementation for the \
-+Linux operating system."
-+HOMEPAGE = "http://www.strongswan.org"
-+SECTION = "console/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+DEPENDS = "gmp openssl flex-native flex bison-native"
-+
-+SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "ed64e6746011930a70f3a271dc0e3c9e"
-+SRC_URI[sha256sum] = "a5ecb3fc60a94ded9197532c7ebf42e8e321223311e4a4834ea15219aa1625e4"
-+
-+EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \
-+		--enable-gmp --disable-mysql --disable-sqlite \
-+		--enable-openssl"
-+
-+inherit autotools
-+
-+RRECOMMENDS_${PN} = "kernel-module-ipsec"
-+
-+FILES_${PN} += "${baselib}/systemd/system/strongswan.service"
-+FILES_${PN}-dbg += "${libexecdir}/ipsec/.debug \
-+			${libexecdir}/ipsec/plugins/.debug \
-+			${libdir}/ipsec/plugins/.debug \
-+			${libdir}/ipsec/.debug"
-+FILES_${PN}-dev += "${libdir}/ipsec/lib*.la \
-+			${libdir}/ipsec/lib*.a ${libdir}/ipsec/lib*.so* \
-+			${libdir}/ipsec/plugins/lib*.la \
-+			${libdir}/ipsec/plugins/lib*.a \
-+			${libdir}/ipsec/plugins/lib*.so*"
+Hope this will be accepted by Tom for the maintenace branch too.
+
+Regards,
+Steffen
+
 -- 
-1.7.0.4
-
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
