@@ -1,34 +1,23 @@
-Received: from plane.gmane.org ([80.91.229.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SASvr-0001vM-Tu for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 22:18:59 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SASnF-00039P-85 for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 22:10:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 22:10:05 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 22:10:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 21 Mar 2012 22:09:58 +0100
-Message-ID: <jkdg34$om0$1@dough.gmane.org>
-References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
+Received: from mx194.callplus.net.nz ([202.180.66.194]
+	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <roystonvasey@slingshot.co.nz>) id 1SAT18-000284-1X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Mar 2012 22:24:26 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Ap4EAIxEak/LYgoS/2dsb2JhbABEgka1TIIQCAIeBVkFBmI/AQQeBYd5l3OGQZluE41MgyIEpgaCfQ
+X-IronPort-AV: E=Sophos;i="4.73,626,1325415600"; 
+	d="scan'208,217";a="252166662"
+Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
+	by ismtp2.tranzpeer.net with ESMTP; 22 Mar 2012 10:15:30 +1300
+From: "R U Local" <roystonvasey@slingshot.co.nz>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 22 Mar 2012 10:15:26 +1300
+Message-ID: <003901cd07a7$bc69de00$353d9a00$@slingshot.co.nz>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: Ac0Hpu+Vn/JkFbkGQ7Orqoii6jlUfQ==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: ti-eula-unpack problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 21:19:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Mar 2012 21:24:26 -0000
+Content-Language: en-nz
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dear List,
 
-Op 21-03-12 15:17, Samuel Stirtzel schreef:
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+A resent change to ti-eula-unpack.inc to test for 32 bit compatability on 64
+bit systems has broken the build on Ubuntu x64 11.10.
 
-OE-core needs to slim down, not get fatter. You are basically saying "layer
-suck, let's move back to oe-classic"
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Ubuntu created multi-arch functionality between 11.4 and 11.10. There is are
+now  /lib /lib64 and /lib32 directories and no symlinks.
 
-iQIcBAEBAgAGBQJPakOkAAoJEHZqAkdh1vT6zyQP/R7/viIEf4trbFzR3ZaD2cRd
-D4U4q7eDF5DM/fC85yoLBj7byBfryB/I2JWDir9YOAcGgaBysvpL5vApTWFt1hJZ
-MOc3NFNdIsALL/jnMzjmY4OB5bIAYHj4nC0XGiRj6CuEvkyz6IueAAR3k2O6NU64
-L32Ou0iGD0GKg6gl8LSBfixVKYAjIFfehP5rWv1L0P7cJiYmVy4Gj7CalmmRpPZz
-zMhmwoUze4dIx9z6X5WSIXs44aBOFs3MZjtYRfBQsUDkjBheLWI5tMIekhFX0Ega
-wKjU9GUwerPzI0oI2DG+9n7nS1wlBJesrHAQKh3pwCWRC19NQuqFjArdaF80DwPk
-ZHZNnTzB5Dd/NbPcSkRG5V0DAFYB54Xty6A2w7ONbPoQs5h3vjS4g8V560Kvgqaa
-O/efrZi2VgYA/1RAaz7COjNkMF/OBeH9aE9oRNPweOBYcwMFzhbrTEXPUL/pZ7gg
-5oI0JdJj5lmqi6q9+jk8hDVJvYIkM45l9xqy6nDnIa0tUnDTzCRxj+jr7LEyPp/R
-p+/6GO5aPG8S4JPbmgFbmJN7hrLzNyg6JS962VVYiOhw0cIVwkj/hX+9oYPE4pRe
-AHXoBtWrfflkL4RIadYI64uMJHNpHzfuzd6+0JljL8sA969nh36GXsd4OwMdUx6b
-AVqAIeCDYo30C3i9BXRL
-=1Xye
------END PGP SIGNATURE-----
+The following patch corrects this on my system but I have no idea of its
+effect on others.
 
+ 
+
+diff --git a/recipes-ti/includes/ti-eula-unpack.inc
+b/recipes-ti/includes/ti-eula-unpack.inc
+
+index dcabe9d..f37f026 100644
+
+--- a/recipes-ti/includes/ti-eula-unpack.inc
+
++++ b/recipes-ti/includes/ti-eula-unpack.inc
+
+@@ -21,7 +21,7 @@ python ti_bin_do_unpack() {
+
+     # InstallJammer requires 32bit version of glibc
+
+     lib32path = '/lib'
+
+-    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+os.path.islink('/lib') ):
+
++    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+os.path.islink('/lib') or os.path.exists('/lib32')):
+
+        lib32path = '/lib32'
+
+     if not os.path.exists('%s/libc.so.6' % lib32path):
+
+        raise bb.build.FuncFailed, \
+
+ 
+
+Cheers Mike.
+
+ 
+
+ 
 
 
