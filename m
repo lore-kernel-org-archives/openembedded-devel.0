@@ -1,37 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SATXs-0003Nr-VX
+	(envelope-from <martin.jansa@gmail.com>) id 1SATXy-0003G6-9X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 22:58:17 +0100
-Received: by wgbdr12 with SMTP id dr12so828202wgb.24
+	Wed, 21 Mar 2012 22:58:22 +0100
+Received: by mail-we0-f175.google.com with SMTP id a1so1348298wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 14:49:23 -0700 (PDT)
+	Wed, 21 Mar 2012 14:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=jRRM6MzfcBtVqR8SxQrYA3+Su5V+2ee2Z92V43YDq0U=;
-	b=rFqKgzHk7MQdQuHv8d7pJaUSiVx27fe6XBfEyJDdCvHqm55X4vTg7W9XZF88p2J7ui
-	jLMK6KHWZshdHuFxnglNFwpcZrlPZrrcbSKbSU397wGeJqkVxf8dzsnTCDK6UJRq/Qs8
-	hOBv85UXXjkVfbIH7T2ZzI56GLoqtZn+Zr7CBioocx0m8iF99g3NfYR/9sEFi2GxL00D
-	AxhB3PRz/dxSADG6nsiwEi7AESdnz0WQPIuafGyT4VgTQ6zbCxWC/mkF7uBvMZ+8fPeA
-	YUjX9B/njoeXP5H9Z7z/muNy7cWtu5n1Iq9vw/rMxdzhDuT3PKQbNrXtjzG3lHlce59s
-	iNIQ==
-Received: by 10.216.45.146 with SMTP id p18mr3172822web.47.1332366562946;
-	Wed, 21 Mar 2012 14:49:22 -0700 (PDT)
+	bh=KBFXRkLfKjufuaaUDxTup+A1YrS5e1PM0hjKafICx8c=;
+	b=gNiwNuLD/Vpv/oCMXIcVeK81zlUfRA6G/noR4HEHK/44o5Aupy5zTPmGvRJh1D24xV
+	3QhxCgGxP1S9egxfvlxFywItLqODJlY5yFC/TT6YfSAwuiwI5TwvyqVen/xNj4rTK3Jv
+	qBy/w/4bTs3mJrb0e6oeHL9D+Q+jtes0xcmvil7paxlp/2nCVKbve5TegkKOPN3Cs+sD
+	85qqFB6ei2E2QEEMYM3QV+eV0Ese2cMukd9ltBX1Yi/5I7NZvAzPXzQbO9QvWFN0FKwz
+	Q1RXij/5qJwSeP0JvYGQY15FOKQwCXq8kR4YPjhprGrYASJij1lcq3XgwJRnRJLUcBdK
+	lXNw==
+Received: by 10.180.107.162 with SMTP id hd2mr41490952wib.8.1332366570010;
+	Wed, 21 Mar 2012 14:49:30 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gg2sm12526115wib.7.2012.03.21.14.49.21
+	by mx.google.com with ESMTPS id b3sm7768769wib.4.2012.03.21.14.49.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Mar 2012 14:49:22 -0700 (PDT)
+	Wed, 21 Mar 2012 14:49:29 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2012 22:49:01 +0100
-Message-Id: <9d61ed2fa58b77777cb4a40a4395e0477d69c3a5.1332366214.git.Martin.Jansa@gmail.com>
+Date: Wed, 21 Mar 2012 22:49:02 +0100
+Message-Id: <3e021b4a64d691edde6218c713a34bbc2b5f524d.1332366214.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
 In-Reply-To: <f155e80f9a8c90337e79928293daa7f807328b45.1332366214.git.Martin.Jansa@gmail.com>
 References: <f155e80f9a8c90337e79928293daa7f807328b45.1332366214.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1332366214.git.Martin.Jansa@gmail.com>
 References: <cover.1332366214.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/4] libusb*: remove native support, was moved to oe-core
+Subject: [meta-oe][PATCH 4/4] pango: native support and --disable-introspection moved to oe-core pango.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 21:58:17 -0000
+X-List-Received-Date: Wed, 21 Mar 2012 21:58:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../libusb/libusb-compat_0.1.3.bbappend            |    6 ------
- .../recipes-support/libusb/libusb1_1.0.8.bbappend  |    1 -
- 2 files changed, 0 insertions(+), 7 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
- delete mode 100644 meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
+ meta-oe/recipes-graphics/pango/pango_1.29.4.bb |    5 -----
+ 1 files changed, 0 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend b/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
-deleted file mode 100644
-index 5b50d6b..0000000
---- a/meta-oe/recipes-support/libusb/libusb-compat_0.1.3.bbappend
-+++ /dev/null
-@@ -1,6 +0,0 @@
--PROVIDES += "virtual/libusb0"
--PROVIDES_virtclass-native += "virtual/libusb0-native"
--BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
+index b14430f..ea79a63 100644
+--- a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
++++ b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
+@@ -1,8 +1,5 @@
+ require recipes-graphics/pango/pango.inc
+ 
+-BBCLASSEXTEND = "native"
+-DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
 -
--inherit lib_package
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+ 
+ SRC_URI[archive.md5sum] = "a5ee785f4f31d6bdd8625a09ea3f8b4b"
+@@ -11,5 +8,3 @@ SRC_URI[archive.sha256sum] = "f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a
+ SRC_URI += "file://no-tests.patch"
+ 
+ PR = "r4"
 -
-diff --git a/meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend b/meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
-deleted file mode 100644
-index 608377e..0000000
---- a/meta-oe/recipes-support/libusb/libusb1_1.0.8.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND = "native nativesdk"
+-EXTRA_OECONF += "--disable-introspection"
 -- 
 1.7.8.5
 
