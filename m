@@ -1,34 +1,33 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SAMV5-0000OV-7F
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SAMYN-0000ZB-GT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 15:26:55 +0100
-Received: by wibhm17 with SMTP id hm17so5464949wib.0
+	Wed, 21 Mar 2012 15:30:19 +0100
+Received: by wera1 with SMTP id a1so987161wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
+	Wed, 21 Mar 2012 07:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=nzUY3CmTF3VmfQujvf76pNDDXoQvuyWWrpQollDToYU=;
-	b=HyvzPwlDEZV+m9Yvb8KAAgGB5W/NiEsRP5CP7dmXbVn+0SRwf6YAAQTl6mnOQC4AlI
-	xvDyjd0ghZydK8lMd1gzeI+R6Xap7LWztmu9aLvXzN/tEQp0CKaDj9lLOaiI5aVa5X3I
-	eWOGm3ZIWYEw3Cqn63NiCMy0/DCvgSivS39+Kn5TkLny5ct9s5aWqx78n7DdFzeF35un
-	23+Fx6UK5DoKYOVd8wrctnmUzFZb43mhc+wP3e9ratbbmAp3WI4aeoa5WD/DyYCS22/+
-	mTez7bREort+vOKAuJwqTPXNh1HV4+irK1WYTnrknyahDHCHcaluetAG2S9S0Cxu86KX
-	S7vQ==
-Received: by 10.180.85.70 with SMTP id f6mr38871946wiz.5.1332339481504;
-	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id fn2sm8095968wib.0.2012.03.21.07.18.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Mar 2012 07:18:01 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=OiOaXwg2HwOv+J/d71B1uavbvu7sU+iXbH2eFgmwPpw=;
+	b=JhRQ6oZ+7HE5nQ28bkKVyO89ALP2bO2QMxJmXtLbvUq0XfUO+xB5g3TSXjU+/KWoKu
+	5OMwywcsHitBK+igMTLHxyl9PT64h/JB3sRg3fXiVg/18K3eAHQaKolgDj3uFgFPqGLw
+	j2zPY6/Bj+PbL4uGxE0nFxdOIIJLjgLpSxZPi+3Kos7MOBDwWxJoReZiNFBOOPgWr3my
+	SelYDxHAiEPB/cBFHodC6GFq1Qtrd1RroQAG7iSZY4aDifDf0PUyDbgiN76KOi9Vg/DI
+	GimoO31+eeqVOECzY2kaTKfMscoClojCudZwgzX1GXlbSf0EHLWhWNDru09/5+YwsJ/T
+	KkAg==
+MIME-Version: 1.0
+Received: by 10.180.101.72 with SMTP id fe8mr9608795wib.4.1332339685848; Wed,
+	21 Mar 2012 07:21:25 -0700 (PDT)
+Received: by 10.223.97.77 with HTTP; Wed, 21 Mar 2012 07:21:25 -0700 (PDT)
+In-Reply-To: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
+References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
+Date: Wed, 21 Mar 2012 15:21:25 +0100
+Message-ID: <CAGiJk9dVLGRqMXatZp4bwn=L0X-ogQ4J9jawNhviaWMEHW487w@mail.gmail.com>
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2012 15:17:31 +0100
-Message-Id: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [PATCH] [meta-oe] giflib: Move to OE-Core
+Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +41,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 14:26:55 -0000
+X-List-Received-Date: Wed, 21 Mar 2012 14:30:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |   20 --------------------
- 1 files changed, 0 insertions(+), 20 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+Seems like my commit message got lost sorry,
+this was requested from a tester of meta-kde who doesn't use meta-openembed=
+ded.
 
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-deleted file mode 100644
-index bd7b495..0000000
---- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "shared library for GIF images"
--SECTION = "libs"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
--PR = "r2"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
--
--inherit autotools
--
--DEPENDS = "libsm"
--
--PACKAGES += "${PN}-utils"
--FILES_${PN} = "${libdir}/libgif.so.*"
--FILES_${PN}-utils = "${bindir}"
--
--BBCLASSEXTEND = "native"
--
--SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
--SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
--- 
-1.7.5.4
+2012/3/21 Samuel Stirtzel <s.stirtzel@googlemail.com>:
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> ---
+> =C2=A0meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb | =C2=A0 20 -------=
+-------------
+> =C2=A01 files changed, 0 insertions(+), 20 deletions(-)
+> =C2=A0delete mode 100644 meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+>
+> diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/re=
+cipes-devtools/giflib/giflib_4.1.6.bb
+> deleted file mode 100644
+> index bd7b495..0000000
+> --- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -DESCRIPTION =3D "shared library for GIF images"
+> -SECTION =3D "libs"
+> -LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dae11c61b04b2917be39b11f78d715=
+19a"
+> -PR =3D "r2"
+> -
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+> -
+> -inherit autotools
+> -
+> -DEPENDS =3D "libsm"
+> -
+> -PACKAGES +=3D "${PN}-utils"
+> -FILES_${PN} =3D "${libdir}/libgif.so.*"
+> -FILES_${PN}-utils =3D "${bindir}"
+> -
+> -BBCLASSEXTEND =3D "native"
+> -
+> -SRC_URI[md5sum] =3D "7125644155ae6ad33dbc9fc15a14735f"
+> -SRC_URI[sha256sum] =3D "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d22=
+85e8e1f3b93f2bed"
+> --
+> 1.7.5.4
+>
 
+
+
+--=20
+Regards
+Samuel
 
 
