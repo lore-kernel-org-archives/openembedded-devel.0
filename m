@@ -1,40 +1,37 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SAezr-00080K-SU for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 11:11:56 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SAerH-00060h-4j for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 11:03:03 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 11:03:03 +0100
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1SAf4g-0008Da-BV
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Mar 2012 11:16:54 +0100
+Received: by wibhj13 with SMTP id hj13so445086wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 11:03:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 22 Mar 2012 03:07:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=G11rB303DV0mLVn8ZoNc90ftLOoun53zn2I6SEsDxBg=;
+	b=BHNGc+Bui0Y18Gdg/ImnH+fj5ld73BV31Da5WScojGxhks2kVCVecb15gMq52WeBRm
+	mqAkIs2Y10vdQhRAqL5zC4ngFZ3xTTRSyevzC6ONTVvhVuTgryb7WkPZbS9+tmk9jUNj
+	3ibHRQaHUBSZwavch/ngjm8dFbBWdRHLwYuVOe+x4zBlsi7ns9tajVjzY3ozqMDdDi7O
+	P620f4n0EZFKQuc/PnwY4vxzdTjz1FiZ7MQhl9E5t4370zzk6XFARqQ5i9RdPKLbVnzC
+	emRk4tFCIuiaW7ekL3VFs80IUl0up8ZqqmEtA4lN8VU733ZbpwEuFvH8unIEsOiinaJv
+	ZL1A==
+Received: by 10.180.96.228 with SMTP id dv4mr3534664wib.14.1332410879638;
+	Thu, 22 Mar 2012 03:07:59 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id fl2sm6987440wib.4.2012.03.22.03.07.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Mar 2012 03:07:58 -0700 (PDT)
+Date: Thu, 22 Mar 2012 11:07:58 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 22 Mar 2012 11:02:53 +0100
-Message-ID: <jketcd$1lo$1@dough.gmane.org>
-References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-	<jkdg34$om0$1@dough.gmane.org>
-	<CAGiJk9cG0mySg454zxYS8VJLc9etr2jAAxxtBSMbN9boq0EnRg@mail.gmail.com>
-	<20120322092859.GE4010@jama.jama.net>
-	<CAGiJk9ex0qxUQrxyCSjH33dpH_sg40MmLj+Gq5SSgW2AkyoL_w@mail.gmail.com>
-	<20120322104009.6a4ed04e@eb-e6520> <jkes69$nt2$1@dough.gmane.org>
-	<20120322104517.0600295f@eb-e6520>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-In-Reply-To: <20120322104517.0600295f@eb-e6520>
-X-Enigmail-Version: 1.3.5
-Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
+Message-ID: <20120322100758.GG4010@jama.jama.net>
+References: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [RFC][meta-oe][meta-toolchain][PATCH] meta-toolchain: populate with gcc and binutils from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,63 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 10:11:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Mar 2012 10:16:54 -0000
+X-Groupsio-MsgNum: 37911
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4eRLI4hEmsdu6Npr"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--4eRLI4hEmsdu6Npr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 22-03-12 10:45, Eric Bénard schreef:
-> Le Thu, 22 Mar 2012 10:42:33 +0100, Koen Kooi
-> <koen@dominion.thruhere.net> a écrit :
-> 
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 22-03-12 10:40, Eric Bénard schreef:
->>> Le Thu, 22 Mar 2012 10:35:31 +0100, Samuel Stirtzel 
->>> <s.stirtzel@googlemail.com> a écrit :
->>>> 2012/3/22 Martin Jansa <martin.jansa@gmail.com>:
->>>>> why not add meta-oe dependency to meta-kde/README?
->>>> 
->>>> It is already listed as dependency [1]. But somehow it seems like
->>>> that there are users, interested in testing this layer, with an use
->>>> case which excludes the meta-oe layer.
->>>> 
->>>> 
->>> can you describe this use case so that meta-oe gets a chance to
->>> adapt.
->>> 
->>> One problem I can see with meta-oe is the fact that it makes changes
->>> to the oe-core toolchain : that would be great to put all the
->>> toolchain changes in a meta-toolchain (but I think that's what is
->>> scheduled with meta-linaro).
->> 
->> In the mean time I bet Khem would love to have people sending patches
->> to move the toolchain bits to a meta-toolchain layer inside the 
->> meta-openembedded repo.
->> 
-> ok so expect patches by this weekend for this point.
+On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-I sent an RFC patch to get some more peoples attention :)
+Why not move them?
+
+Or create stub of meta-toolchain in 1st patch for people to add it to
+bblayers and then move it in 2nd.
+
+If it was copied just that people doesn't have to=20
+update bblayers at the same time as git pull from meta-oe.
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--4eRLI4hEmsdu6Npr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.18 (GNU/Linux)
 
-iQIcBAEBAgAGBQJPavjLAAoJEHZqAkdh1vT6wU4P/ioH3asxsreEWPmdYsYP+K+Q
-JaLTLlXYqv6asne9a7+Gmro7WaHboalmrUQgISgWNjF7iTrBuKAby2zV1PjC1vJg
-eXkpLv25xSdFVlbhHSl46iJvzBlXhFKqodxMwYavgMD+XGS+1ABaYlr5vgZsPdVR
-ZDl036PrRhnLN8qYhYy7jatTN7obndwH6DUycc6HbQ/OAg4KDYQnZQ+PSuChfhT/
-HIs721q7JOV4fBGEnx2lEm12JW3jy/4SJH4WFK44hCQ6YcHt7dkHWYH7o+HOmO50
-SRhWqLtSTTqQiG6hHoVmWHe6jWhlqsmeyYSHOHI5K80nI51ADaweppFEHe4+r2LC
-S6WZTN1lvJdnqCtH9aSrUNMlR/+hqLKyO/R892fv9R2wTF1ZVMW3eJHGnr9LfCBq
-b77xdq4ErniMWFoP7Oyd/GocHmH7K5NJgFqwMgIRokVmUxU+Y+EzEZoEeR2Ju7So
-nancX5XScBRspz4zZDDZkQCBKycG13iTUoT/56ZXelP75y7f42vK9nvHvnwJu+TL
-9yn2dCK1bS9e/3cc+yG5/qRlJwLmqeSxfPtrasgcaH0BI+yIKL9CpoYee2Rj6i7P
-ZszerMxGBvQEXUoQ5yX3VMC2hrGGJUVoqCNK5UtQUipLOZh3pYNRTB/ThXW3t37h
-8bVIjvb5ptE9XAD7ypYt
-=dGZ8
+iEYEARECAAYFAk9q+f4ACgkQN1Ujt2V2gBw8fQCePOwY0LxXHv8a8hv6G5DgF7Dz
+jLwAnimJ9RwM3/15F5jTXOwSuHu+sBxT
+=w0oO
 -----END PGP SIGNATURE-----
 
-
-
+--4eRLI4hEmsdu6Npr--
