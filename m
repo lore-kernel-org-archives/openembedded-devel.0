@@ -1,33 +1,37 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SAhCC-0005f2-Go
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 13:32:48 +0100
-Received: by lbbgi4 with SMTP id gi4so1568963lbb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SAhKE-0007t4-0p for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Mar 2012 13:41:06 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SAhBa-0003U1-4J for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Mar 2012 13:32:10 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Mar 2012 13:32:10 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 05:23:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=1wnfZz6jbYwAsHXccO7Nb2+xafOe97Y8FC2TFFmT62A=;
-	b=sZ3cs94Unl2cfJAJbFiaFhrr8Q62LXxxocW0XGB/N/5WwSIu2oaRtouU9RJu0/XUgm
-	GZA0vlFaoNXUl7NozUe4aOvI1/uivqevRXM8Atyztsjkk27PLMePLA+iAIThs3uURbS9
-	1mK2o9ZkfGHqNOxIL6fW7kqy7Paxj4JKLQSJIQ8QXtilIiajT/XiwYaNdiVCcyxwulzp
-	xdQuusGgA+iJ9daEtdEtyh3tQEaN0sMaSpGD95PLBgjXkVFmuDBrQ77KO5KSa3pNKtJR
-	qLnYd4tgNlfJgcNOFtEAiICvyXOGJFkAN9ZbGPHB9IxgaBSXkNWYSTrbCSif9b2a1h4B
-	DZww==
-Received: by 10.112.37.73 with SMTP id w9mr2783523lbj.22.1332419030639; Thu,
-	22 Mar 2012 05:23:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.2.71 with HTTP; Thu, 22 Mar 2012 05:23:20 -0700 (PDT)
-In-Reply-To: <jkeurg$cb8$1@dough.gmane.org>
+	Thu, 22 Mar 2012 13:32:10 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 22 Mar 2012 13:32:01 +0100
+Message-ID: <jkf63s$8hf$1@dough.gmane.org>
 References: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
 	<20120322100758.GG4010@jama.jama.net>
 	<FD67157F-A373-42D4-93CE-3FF8A142CA56@dominion.thruhere.net>
 	<jkeurg$cb8$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 22 Mar 2012 05:23:20 -0700
-Message-ID: <CAMKF1sqXOfFU+qG-8xzP0TqGTYVADxf44rHW112eLiVHzJH=NQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CAMKF1sqXOfFU+qG-8xzP0TqGTYVADxf44rHW112eLiVHzJH=NQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <CAMKF1sqXOfFU+qG-8xzP0TqGTYVADxf44rHW112eLiVHzJH=NQ@mail.gmail.com>
+X-Enigmail-Version: 1.3.5
 Subject: Re: [RFC][meta-oe][meta-toolchain][PATCH] meta-toolchain: populate with gcc and binutils from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,70 +46,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 12:32:48 -0000
+X-List-Received-Date: Thu, 22 Mar 2012 12:41:06 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 22, 2012 at 3:27 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 22-03-12 11:15, Koen Kooi schreef:
->>
->> Op 22 mrt. 2012, om 11:07 heeft Martin Jansa het volgende geschreven:
->>
->>> On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
->>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->>>
->>> Why not move them?
->>
->> This was done to have people test it in the oe-core + meta-toolchain
->> setup. And to avoid bblayers.conf conflicts
->>
->>> Or create stub of meta-toolchain in 1st patch for people to add it to
->>> bblayers and then move it in 2nd.
->>
->> That sounds like a better way to do it. Maybe Eric will do that in his
->> patchset :)
->
-> I don't have a strong opinion on this and if Eric wants me to respin the RFC
-> I'll gladly do that. But I would prefer that I can be lazy and just merge
-> other peoples patches :)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-yes git move should be better since then we can do git log --follow I
-dont know if that works with copied files too or not.
+Op 22-03-12 13:23, Khem Raj schreef:
+> On Thu, Mar 22, 2012 at 3:27 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote: Op 22-03-12 11:15, Koen Kooi schreef:
+>>>> 
+>>>> Op 22 mrt. 2012, om 11:07 heeft Martin Jansa het volgende
+>>>> geschreven:
+>>>> 
+>>>>> On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
+>>>>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>>>> 
+>>>>> Why not move them?
+>>>> 
+>>>> This was done to have people test it in the oe-core +
+>>>> meta-toolchain setup. And to avoid bblayers.conf conflicts
+>>>> 
+>>>>> Or create stub of meta-toolchain in 1st patch for people to add
+>>>>> it to bblayers and then move it in 2nd.
+>>>> 
+>>>> That sounds like a better way to do it. Maybe Eric will do that in
+>>>> his patchset :)
+> 
+> I don't have a strong opinion on this and if Eric wants me to respin the
+> RFC I'll gladly do that. But I would prefer that I can be lazy and just
+> merge other peoples patches :)
+> 
+>> yes git move should be better since then we can do git log --follow I 
+>> dont know if that works with copied files too or not.
+> 
+>> meta-toolchain may not be the best name since we already have 
+>> meta-toolchain as a target for sdk generation. that should actually 
+>> have been called sdk but here we will create a confusion. but may be 
+>> target in OE-Core should ve renamed too
 
-meta-toolchain may not be the best name since we already have
-meta-toolchain as a target for sdk generation. that should actually
-have been called sdk but here we will create a confusion. but may be
-target in OE-Core should ve renamed too
+I'm fine with calling it 'toolchain-layer' and not using the 'meta' prefix.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iQIcBAEBAgAGBQJPav6tAAoJEHZqAkdh1vT6zcYP/2CHId7lbxYDDC2sMa8fb7Nt
-> +FIRDOIDyF+laMlAwuMMuN0NN6228mxnxmCD0tkrcq6wJnaBJ5+LKkHmwYAUnjrY
-> q4ayrZTWGGTIkcYVpeizZCh15AomFLuBzTKP/XdOUESQscheV/zdWgT26hqVRQrS
-> 3spk1oS2kzevvmmSqjxBxUUmFMGi85ZcjcsN0aIUpf11+dkU1SpIrGIr7BnybGr/
-> FEXzWFCHRtSsmI9J6n6dhrDrm3d2fMxV+9AbqeE1SQbaGV+lA+vag5aDhYdfpbOF
-> S+aPYCCm0rrDsFvNqYTq/IU5Fx2/WUa6zHZlnWoUd1iyvPOaiRezGS7diQfV0R3v
-> OxCy/75j2cq2ofPebJWG5zGhDvDk9TWW6BqC791WAm9VJjD4ztFhvtE12nXYqIoC
-> 9TDAoURNPNX4FBnLQkX0p6Luo4P5c9hgo6BBwQZR2fwmov4R1nq91AFsMrKJRyxh
-> VCAqSbzaTJq1zJhh5UZNwRB0SyvDgLbi58NFVOGItX/DUUCUbjC+/aXyIV4Czf75
-> OeQ29f8vPvzed9wryg8rdogccbuJ2QY9MGaBfEkUOwBNt/HzhYFY4WpcGvvpqsqA
-> VzPe0wst0+ncGdB2/MewNETXPGy3Mp8xvUTvlabaXnOzRmZqUxkqONVnSZkQqGOy
-> BCepRNuESem5ktLHCKQS
-> =5mMh
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+iQIcBAEBAgAGBQJPaxu+AAoJEHZqAkdh1vT6GL8P/3ctciJfWKTgKaOLlSdtTvCD
+M1f6p06mm81ZRy2jvrxiB0Ui/TVI7QBRnRZ7Cq+FaCe9vOFXLmINL1ljIYSB3Fkz
+CxZBc+wj6BDuPGk6SHN13lhYJgZmKcTY/mfYT2sp4R+VEC/Zv4M8o2SB7qUuLxuY
+wWtP8O1/ydJTvdk/IcPMDSoRtNRM+pHBd/grt20N2l7c8/80SYM2xFQAG/ACDNmt
+oHFFzNfg46c9YaB9aAey02OLaC/sh0r9NrZ6vQcRZp1bDf0RlIprTpBBDANfp2ss
+hEQhZTZmYN44JtmrJBK7fnpxxjNvRK1E24+rWFQSR+0rFzFNBsOtOGypegxN5VAs
+ypcOjUBvNF4TivxZUAcxLOTEN4YgW93pbp/lDVhGgiGIAPYMclHPP8By8dhI6ErE
+JLbWrQGAV87wux+KKAkYzXzO25NeMGo0TZc35wnTsT+P+/q4aqZyK9eV9b+p73lF
+O1GqN5MyGHWOGM8Xbfjx6ycaeArrUxBqdk5omcxlmM/ieeDwAQWrGKWNxChmXbN9
+Mu7dMqSLCnCV4d8xSX8HCZuIhhdqDGVmL5MSTAW5930+6Sdaa8OfdRd6m9Y26Mpf
+SYAparX2d6YBdvTCDrO8O1Bukx+6LXXN5PThP975euhdL5pasOwjl3M77J87LGJh
+oznZSDS/uXbq9lRFSx6+
+=nkR0
+-----END PGP SIGNATURE-----
+
 
 
