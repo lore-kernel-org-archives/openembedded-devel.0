@@ -1,37 +1,35 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SAfGu-0000Hz-Ip
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 11:29:32 +0100
-Received: by wibhj13 with SMTP id hj13so456841wib.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SAfOK-0000WB-5S for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Mar 2012 11:37:12 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SAfFg-0008SY-TE for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Mar 2012 11:28:16 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Mar 2012 11:28:16 +0100
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 03:20:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=FYLg6PHOYuc8f9s8cslDPQ0VqOceGuHQptsGVRcZnOo=;
-	b=TQouScQ/mVxXFCnczife6JguCAbY7iDAwsJi3CDNG+UA4faLgYA8B/Va4Q2OAPewHL
-	fgrFSzwbdK3su1zpY8WNx2NVJgm0+ZM2sJYREJOGlevBJRccr84Z5HCgzBIiwtFXdH7p
-	CeS5L+rGeb4TwcCKT7pPyM2nlQeX1nEVVKwvG33sKQQ8jsZ9OZjz/xvuZGyRwtKgxgIH
-	+zPwMQReupROOa2Zj0g2kpNBwyW+M0oarOSlMiUv30z2fLzWswuLTGLnWnxqZDcD02m1
-	1K8K6s3LbYcAN8YMChD9s3MsXgSkVq+Rx7SQc5uyAHawMXzInn3tzjZ1CyH5p/18l2pB
-	f2Dg==
-Received: by 10.216.135.141 with SMTP id u13mr4178675wei.79.1332411637968;
-	Thu, 22 Mar 2012 03:20:37 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id df3sm4168540wib.1.2012.03.22.03.20.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Mar 2012 03:20:37 -0700 (PDT)
-Date: Thu, 22 Mar 2012 11:20:36 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 22 Mar 2012 11:28:16 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120322102036.GH4010@jama.jama.net>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 22 Mar 2012 11:27:59 +0100
+Message-ID: <jkeurg$cb8$1@dough.gmane.org>
 References: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
 	<20120322100758.GG4010@jama.jama.net>
-	<20120322111208.4530c234@eb-e6520>
-MIME-Version: 1.0
-In-Reply-To: <20120322111208.4530c234@eb-e6520>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<FD67157F-A373-42D4-93CE-3FF8A142CA56@dominion.thruhere.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+In-Reply-To: <FD67157F-A373-42D4-93CE-3FF8A142CA56@dominion.thruhere.net>
+X-Enigmail-Version: 1.3.5
 Subject: Re: [RFC][meta-oe][meta-toolchain][PATCH] meta-toolchain: populate with gcc and binutils from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,55 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 10:29:32 -0000
-X-Groupsio-MsgNum: 37916
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6cMF9JLEeZkfJjkP"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Mar 2012 10:37:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---6cMF9JLEeZkfJjkP
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Mar 22, 2012 at 11:12:08AM +0100, Eric B=E9nard wrote:
-> Le Thu, 22 Mar 2012 11:07:58 +0100,
-> Martin Jansa <martin.jansa@gmail.com> a =E9crit :
->=20
-> > On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
-> > > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> >=20
-> > Why not move them?
-> >=20
-> > Or create stub of meta-toolchain in 1st patch for people to add it to
-> > bblayers and then move it in 2nd.
-> >=20
-> > If it was copied just that people doesn't have to=20
-> > update bblayers at the same time as git pull from meta-oe.
-> >=20
-> I think the next step is a patch removing them from meta-oe to make
-> the change less intrusive than a one shot move and give people the
-> time to update their bblayers.conf.
+Op 22-03-12 11:15, Koen Kooi schreef:
+> 
+> Op 22 mrt. 2012, om 11:07 heeft Martin Jansa het volgende geschreven:
+> 
+>> On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
+>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> 
+>> Why not move them?
+> 
+> This was done to have people test it in the oe-core + meta-toolchain
+> setup. And to avoid bblayers.conf conflicts
+> 
+>> Or create stub of meta-toolchain in 1st patch for people to add it to 
+>> bblayers and then move it in 2nd.
+> 
+> That sounds like a better way to do it. Maybe Eric will do that in his
+> patchset :)
 
-yup that's why I proposed to create empty, but valid meta-toolchain stub
-so people can add it to bblayers.conf now and later we can populate it
-by git move with whatever we decide we want :).
+I don't have a strong opinion on this and if Eric wants me to respin the RFC
+I'll gladly do that. But I would prefer that I can be lazy and just merge
+other peoples patches :)
 
-Cheers,
+regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---6cMF9JLEeZkfJjkP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.18 (GNU/Linux)
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk9q/PQACgkQN1Ujt2V2gBxnGwCgibSTET2w+qV32CJXtR1AsYut
-xHQAn1gu8GZeAJrbei0vqbLi6RvuwyJe
-=Yxzx
+iQIcBAEBAgAGBQJPav6tAAoJEHZqAkdh1vT6zcYP/2CHId7lbxYDDC2sMa8fb7Nt
++FIRDOIDyF+laMlAwuMMuN0NN6228mxnxmCD0tkrcq6wJnaBJ5+LKkHmwYAUnjrY
+q4ayrZTWGGTIkcYVpeizZCh15AomFLuBzTKP/XdOUESQscheV/zdWgT26hqVRQrS
+3spk1oS2kzevvmmSqjxBxUUmFMGi85ZcjcsN0aIUpf11+dkU1SpIrGIr7BnybGr/
+FEXzWFCHRtSsmI9J6n6dhrDrm3d2fMxV+9AbqeE1SQbaGV+lA+vag5aDhYdfpbOF
+S+aPYCCm0rrDsFvNqYTq/IU5Fx2/WUa6zHZlnWoUd1iyvPOaiRezGS7diQfV0R3v
+OxCy/75j2cq2ofPebJWG5zGhDvDk9TWW6BqC791WAm9VJjD4ztFhvtE12nXYqIoC
+9TDAoURNPNX4FBnLQkX0p6Luo4P5c9hgo6BBwQZR2fwmov4R1nq91AFsMrKJRyxh
+VCAqSbzaTJq1zJhh5UZNwRB0SyvDgLbi58NFVOGItX/DUUCUbjC+/aXyIV4Czf75
+OeQ29f8vPvzed9wryg8rdogccbuJ2QY9MGaBfEkUOwBNt/HzhYFY4WpcGvvpqsqA
+VzPe0wst0+ncGdB2/MewNETXPGy3Mp8xvUTvlabaXnOzRmZqUxkqONVnSZkQqGOy
+BCepRNuESem5ktLHCKQS
+=5mMh
 -----END PGP SIGNATURE-----
 
---6cMF9JLEeZkfJjkP--
+
+
