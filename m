@@ -1,38 +1,42 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SAf9Q-0008Vi-3I
+	(envelope-from <koen@dominion.thruhere.net>) id 1SAfBn-0000Ah-IY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 11:21:48 +0100
-Received: by wibhj13 with SMTP id hj13so465202wib.6
+	Thu, 22 Mar 2012 11:24:15 +0100
+Received: by wera1 with SMTP id a1so1668360wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 03:12:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=CqsoRoTzI/+4/j+aX5+fMWzEkYPUTWD7wFIUa5scJVU=;
-	b=QLu6sqnaZEK7VKuI4+dLgHPcSJI4UP3ArPfPms439e4kBQqkL+l5sb3GU9aBUqEwb6
-	OFA2J+ohllIvRbDwWj74Cw4xGWewgMVMKowWM8R+FzIIgxdCkemhTPd5ZZhocHiTLBn8
-	RSDay+SMC2auAUUaOzPuUqgbvClY20z/dvgt/sI5HwDo6G2CC6lbYa8+5Z9chq9S7Zzo
-	bCIg6655Y4k9cydb9F/JGe0ZFlhTpkp1WabCIIopcGyN9MzeS32mT49Vh5hqJ36cC0zk
-	mR9CHAdJE98EPLcsSpCJRdVraLmc51sSopo5xgFjxMN88ED4FQJl4ql87rJ4rHYef7Ae
-	njfw==
-MIME-Version: 1.0
-Received: by 10.180.100.2 with SMTP id eu2mr3788993wib.1.1332411173535; Thu,
-	22 Mar 2012 03:12:53 -0700 (PDT)
-Received: by 10.223.97.77 with HTTP; Thu, 22 Mar 2012 03:12:53 -0700 (PDT)
-In-Reply-To: <20120322104009.6a4ed04e@eb-e6520>
-References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-	<jkdg34$om0$1@dough.gmane.org>
-	<CAGiJk9cG0mySg454zxYS8VJLc9etr2jAAxxtBSMbN9boq0EnRg@mail.gmail.com>
-	<20120322092859.GE4010@jama.jama.net>
-	<CAGiJk9ex0qxUQrxyCSjH33dpH_sg40MmLj+Gq5SSgW2AkyoL_w@mail.gmail.com>
-	<20120322104009.6a4ed04e@eb-e6520>
-Date: Thu, 22 Mar 2012 11:12:53 +0100
-Message-ID: <CAGiJk9cUPhrLHQicRsDfa-e_vn=0OdmE=BuyXxvi7cJX1XUfrw@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
+	Thu, 22 Mar 2012 03:15:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=5HkI5ob57epwTMAEIZO+Vdkd3plzRwzVsvqEc291S00=;
+	b=OPI3zNow1twoot8hf4l2HTDecLXdek5i/6qmoVEXwDf/B701QtXmoelv2DSt8OjDUd
+	A8Qvhb4sZRxqw6Va7fzTGxC2YRxotx3GwT/g/TwZaU6mZ5kNrHlF5JDspdOFiuV2zDI7
+	Tat7Rn8NQUXYLCm/4AtlDGWseeyX1pHg60pTZD2fuvcdfjfZ2h6eIvoXxX9e4cegJ35P
+	5XZo3FhBoaWxC85aVEPuckj1c4txEYADYkuXzCMeoQbZKTK+1c4DBW0bjZI91E+IbhGe
+	1Aq78Eze/WVAxsZB0mjWuTcaPyEDCjD6KI0KymRSUSxDyxBPeQ9NxJDGAoPcx359Fd7i
+	GVvA==
+Received: by 10.180.78.225 with SMTP id e1mr3783699wix.0.1332411321034;
+	Thu, 22 Mar 2012 03:15:21 -0700 (PDT)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id n15sm4095372wiw.6.2012.03.22.03.15.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Mar 2012 03:15:19 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20120322100758.GG4010@jama.jama.net>
+Date: Thu, 22 Mar 2012 11:15:17 +0100
+Message-Id: <FD67157F-A373-42D4-93CE-3FF8A142CA56@dominion.thruhere.net>
+References: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
+	<20120322100758.GG4010@jama.jama.net>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQmVGDgnuUrXFglpNujxxynSjcDNvUI2YBYFPiywoxgHrCiubQ9SAdSi4fkdccjXeMOkob+I
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC][meta-oe][meta-toolchain][PATCH] meta-toolchain: populate with gcc and binutils from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +50,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 10:21:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Mar 2012 10:24:15 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-2012/3/22 Eric B=C3=A9nard <eric@eukrea.com>:
-> Le Thu, 22 Mar 2012 10:35:31 +0100,
-> Samuel Stirtzel <s.stirtzel@googlemail.com> a =C3=A9crit :
->> 2012/3/22 Martin Jansa <martin.jansa@gmail.com>:
->> > why not add meta-oe dependency to meta-kde/README?
->>
->> It is already listed as dependency [1].
->> But somehow it seems like that there are users, interested in testing
->> this layer, with an use case which excludes the meta-oe layer.
->>
->>
-> can you describe this use case so that meta-oe gets a chance to adapt.
 
-Since I have the common use case of the installation provided from the
-setup-scripts and I don't know the exact use case,
-I cannot provide this information myself right now.
+Op 22 mrt. 2012, om 11:07 heeft Martin Jansa het volgende geschreven:
 
+> On Thu, Mar 22, 2012 at 11:01:39AM +0100, Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>=20
+> Why not move them?
 
-This "only" involves me as I was requested to add a copy of the giflib
-recipe to meta-kde,
-to support the testing of meta-kde with a non meta-oe use case.
+This was done to have people test it in the oe-core + meta-toolchain =
+setup. And to avoid bblayers.conf conflicts
 
-Since I don't think that recipe redundancy will be of any use, I
-suggested to move giflib to oe-core.
+> Or create stub of meta-toolchain in 1st patch for people to add it to
+> bblayers and then move it in 2nd.
 
->
-> One problem I can see with meta-oe is the fact that it makes changes to
-> the oe-core toolchain : that would be great to put all the toolchain
-> changes in a meta-toolchain (but I think that's what is scheduled with
-> meta-linaro).
->
-> Eric
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+That sounds like a better way to do it. Maybe Eric will do that in his =
+patchset :)
 
+regards,
 
-
---=20
-Regards
-Samuel
+Koen=
 
 
