@@ -1,25 +1,45 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SAZgn-0002Mt-PK
+	(envelope-from <sledz@dresearch-fe.de>) id 1SAcAP-0001z3-Dr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 05:31:53 +0100
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M1900HPKO21MYP1@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	21 Mar 2012 22:22:50 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B08402016F; Wed,
-	21 Mar 2012 23:22:49 -0400 (EDT)
-Date: Wed, 21 Mar 2012 23:22:49 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20120322032249.GH6857@denix.org>
-References: <003901cd07a7$bc69de00$353d9a00$@slingshot.co.nz>
-MIME-version: 1.0
-In-reply-to: <003901cd07a7$bc69de00$353d9a00$@slingshot.co.nz>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: ti-eula-unpack problem
+	Thu, 22 Mar 2012 08:10:37 +0100
+Received: by bkcjg15 with SMTP id jg15so1636351bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Mar 2012 00:01:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=I1Tz/wg+JzvgFT0HweY0/Z0FjDgYw1MNKEfagfEGYE0=;
+	b=ZFU8PTcvMqtE3xgwZ625t0kaz06aKCpM5RdtrxXfiSKvz9TVMo0DPmh20GnyDHZcKg
+	CVsgP/kN1Z0bcPwMyUcrJf2xFRaPtw+FhFVpk/Qxm+I+cfNoaK7RBiRSaSRPoOx5/l36
+	ES2TOWTy01P0v3smCIBhwT/VEC9cGX6rxNFBm3yPtyvVZK5W1YllxWHz8DZEDmF9gMwG
+	I/+7tiV4UD7wHPtj0KyxJ9xy6FKClOcwiZ3CllQoLld/utV21NNpbWFdcSqOe2JJG85u
+	Qees/+jI6N7SGahAy4lBVVNGcWWSFm+fcdCKASasEhrLX6MCA5isBlUY9eM/6x/keHgP
+	hjbw==
+Received: by 10.204.154.201 with SMTP id p9mr2555818bkw.125.1332399702705;
+	Thu, 22 Mar 2012 00:01:42 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id jr13sm7756989bkb.14.2012.03.22.00.01.41
+	(version=SSLv3 cipher=OTHER); Thu, 22 Mar 2012 00:01:42 -0700 (PDT)
+Message-ID: <4F6ACE55.2070002@dresearch-fe.de>
+Date: Thu, 22 Mar 2012 08:01:41 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
+MIME-Version: 1.0
+To: Tom Rini <tom.rini@gmail.com>
+References: <4F69AF4A.8050809@dresearch-fe.de>
+	<1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
+	<CA+M6bXnXmFf0syVz-71Y_Ovkq1pvsw8DBjZcfx1=dvZ4pD48wg@mail.gmail.com>
+	<CA+M6bXmJ9YWR74eEWj-0pNYVziCNb+8Ac-DKPNG1inPaELKAiA@mail.gmail.com>
+In-Reply-To: <CA+M6bXmJ9YWR74eEWj-0pNYVziCNb+8Ac-DKPNG1inPaELKAiA@mail.gmail.com>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQmU8u52cg2byDA9eKeBcRcGumaItADL0of+CJJvIGb5O0qq5ZJStboEXZTz0Eh3bAfjkM8o
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libmatthew-0.7.1: SRC_URI updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,68 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 04:31:54 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 22 Mar 2012 07:10:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Mar 22, 2012 at 10:15:26AM +1300, R U Local wrote:
-> Dear List,
+On 21.03.2012 15:46, Tom Rini wrote:
+> On Wed, Mar 21, 2012 at 7:44 AM, Tom Rini <tom.rini@gmail.com> wrote:
+>> On Wed, Mar 21, 2012 at 3:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>> libmatthew-java-0.7.1.tar.gz is no longer available at the original
+>>> location.
+>>>
+>>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+>>
+>> NAK, please switch it to the snapshot.debian.org URL I provided so we
+>> don't have to change this recipe at some point in the future again.
 > 
-> A resent change to ti-eula-unpack.inc to test for 32 bit compatability on 64
-> bit systems has broken the build on Ubuntu x64 11.10.
+> On third thought, lemme think about this.  I don't like pointing
+> somewhere that might remove it, again, but I also don't like changing
+> checksums for folks that already have it down.  So, unless someone
+> else disagrees, we'll favor same checksums over retention and if
+> fedoraproject removes it, we'll just point at the copy on the OE
+> server.
 
-Ah, you cross-posted this to different mailing lists, but not the correct 
-one... :) This should have gone to meta-ti, which this change belongs to and 
-where I copied the reply to:
+So finally that's an ACK for my patch?
 
-https://lists.yoctoproject.org/listinfo/meta-ti
-
-> Ubuntu created multi-arch functionality between 11.4 and 11.10. There is are
-> now  /lib /lib64 and /lib32 directories and no symlinks.
-> 
-> The following patch corrects this on my system but I have no idea of its
-> effect on others.
-> 
->  
-> 
-> diff --git a/recipes-ti/includes/ti-eula-unpack.inc
-> b/recipes-ti/includes/ti-eula-unpack.inc
-> 
-> index dcabe9d..f37f026 100644
-> 
-> --- a/recipes-ti/includes/ti-eula-unpack.inc
-> 
-> +++ b/recipes-ti/includes/ti-eula-unpack.inc
-> 
-> @@ -21,7 +21,7 @@ python ti_bin_do_unpack() {
-> 
->      # InstallJammer requires 32bit version of glibc
-> 
->      lib32path = '/lib'
-> 
-> -    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
-> os.path.islink('/lib') ):
-> 
-> +    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
-> os.path.islink('/lib') or os.path.exists('/lib32')):
-> 
->         lib32path = '/lib32'
-> 
->      if not os.path.exists('%s/libc.so.6' % lib32path):
-> 
->         raise bb.build.FuncFailed, \
-> 
->  
-> 
-> Cheers Mike.
-> 
->  
-> 
->  
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
