@@ -1,42 +1,34 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SAhOR-00080O-Rr
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SAhSJ-00087r-38
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 13:45:27 +0100
-Received: by wibhj13 with SMTP id hj13so606345wib.6
+	Thu, 22 Mar 2012 13:49:27 +0100
+Received: by wibhj13 with SMTP id hj13so591054wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 05:36:33 -0700 (PDT)
+	Thu, 22 Mar 2012 05:40:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=7EVCgly9pORhEIsSXGL8EcQqGLO54FP2bZOg/f+Ivfw=;
-	b=hyscs9bmKcFxHxAGIP/dyM4B75CTMw0tzXHIMarSpYBEWxnKqydyO8uVWrweRxOnxz
-	i2aJ8bJeLzpB2VB0K4/+AgE1JTx+kpG1Mcs47zGus9NsySgVj+22j0u6qwZ9iorHUw1h
-	qw3RDn4V6AnjdWuPclTzShc3h1xN3gcyh/ChksvywJh5jDtL+wbX12gXr3nbDiq3pxGW
-	8ciYylMQ4lVpgDrNfSO7qvSAKRRcRb7rqWluUi7Uwy+to3tmR87ZmaQ5lGBPZoEl4qtj
-	y/s01uloPF8DFGCJuGFgu00gKr5wjcMCuZB4eMiD5hIH3FZWlVQDlYHikwbj+zGpWnCb
-	lCSg==
-MIME-Version: 1.0
-Received: by 10.180.100.2 with SMTP id eu2mr4886078wib.1.1332419793039; Thu,
-	22 Mar 2012 05:36:33 -0700 (PDT)
-Received: by 10.223.97.77 with HTTP; Thu, 22 Mar 2012 05:36:32 -0700 (PDT)
-In-Reply-To: <jkf4r1$u81$1@dough.gmane.org>
-References: <1332339451-26902-1-git-send-email-s.stirtzel@googlemail.com>
-	<jkdg34$om0$1@dough.gmane.org>
-	<CAGiJk9cG0mySg454zxYS8VJLc9etr2jAAxxtBSMbN9boq0EnRg@mail.gmail.com>
-	<20120322092859.GE4010@jama.jama.net>
-	<CAGiJk9ex0qxUQrxyCSjH33dpH_sg40MmLj+Gq5SSgW2AkyoL_w@mail.gmail.com>
-	<20120322104009.6a4ed04e@eb-e6520>
-	<CAGiJk9cUPhrLHQicRsDfa-e_vn=0OdmE=BuyXxvi7cJX1XUfrw@mail.gmail.com>
-	<jkf2bu$9pb$1@dough.gmane.org>
-	<CAGiJk9fXnA24HKjF9rkhkoimDO1etb9eEExNG1Div1bze=XQSA@mail.gmail.com>
-	<jkf4r1$u81$1@dough.gmane.org>
-Date: Thu, 22 Mar 2012 13:36:32 +0100
-Message-ID: <CAGiJk9eyv-rb5opXU6s3PC935yD0yLABrSu6_syzFpy6QaSJhw@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=1a2hS0kW+tgC2qQ+rnajaAYF7EoW67rfcx4WI8u2BIk=;
+	b=irA6TCcLrrjQvOprk/dp/hY5ERCpMB+d8+Eh5snBdiZKsuSGvGrU/denzaLReYwMoI
+	4w2AVUfiQ5sWRvXN5UAJWag4sfLF0p1zhd4u7ClvKdUP1/9KbtnW327tShzyyDDyIFG/
+	MS/uXEZpF3CPrw693tA6St+UgmP32vhfggkvQburbSbTI1SGlwvj08SrkWxl7nN0x+sV
+	jN3Ywnnu0z7B2lctKZewq4QR9AE7jAV4guvocs2WqGi+bJVs72+t9cyxm2dI4ebY9fyA
+	ALNBen1lxXyQobqLJ/Z8fVlcQ9XrzRQIypZ9SKMnsvUX3llCznVsycRVH/Qi1pAva3jO
+	NLmw==
+Received: by 10.216.133.96 with SMTP id p74mr4595314wei.30.1332420032401;
+	Thu, 22 Mar 2012 05:40:32 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id o2sm8351974wiv.11.2012.03.22.05.40.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Mar 2012 05:40:31 -0700 (PDT)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] [meta-oe] giflib: Move to OE-Core
+Date: Thu, 22 Mar 2012 13:40:14 +0100
+Message-Id: <1332420014-3653-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH v2] [meta-oe] giflib: Move to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,81 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 12:45:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Mar 2012 12:49:27 -0000
 
-2012/3/22 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 22-03-12 12:38, Samuel Stirtzel schreef:
->> 2012/3/22 Koen Kooi <koen@dominion.thruhere.net>: Op 22-03-12 11:12,
->> Samuel Stirtzel schreef:
->>>>> 2012/3/22 Eric B=C3=A9nard <eric@eukrea.com>:
->>>>>> Le Thu, 22 Mar 2012 10:35:31 +0100, Samuel Stirtzel
->>>>>> <s.stirtzel@googlemail.com> a =C3=A9crit :
->>>>>>> 2012/3/22 Martin Jansa <martin.jansa@gmail.com>:
->>>>>>>> why not add meta-oe dependency to meta-kde/README?
->>>>>>>
->>>>>>> It is already listed as dependency [1]. But somehow it seems
->>>>>>> like that there are users, interested in testing this layer,
->>>>>>> with an use case which excludes the meta-oe layer.
->>>>>>>
->>>>>>>
->>>>>> can you describe this use case so that meta-oe gets a chance to
->>>>>> adapt.
->>>>>
->>>>> Since I have the common use case of the installation provided from
->>>>> the setup-scripts and I don't know the exact use case, I cannot
->>>>> provide this information myself right now.
->>
->> So you can't explain why it should move to oe-core, that should be enoug=
-h
->> to NAK this patch without even looking at it.
->>
->>> If the explanation that an user group that has another use case
->
-> No, an *alledged* user group that *might* have an *alledged* use case for
-> which you say yourself you cannot provide the information. That is what I=
-'m
-> complaining about, the degrees of hearsay and hypotheticals in your argum=
-ent.
+* Allow Poky users to test and use meta-kde.
+* Allow Users with an use case that excludes meta-oe to test and use meta-kde.
 
-Ok I will send a V2 with a proper commit message and a proper target
-audience / use case.
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb |   20 --------------------
+ 1 files changed, 0 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
 
->
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iQIcBAEBAgAGBQJPaxajAAoJEHZqAkdh1vT6+PgP/13/oayQIuLVdpEx2uslB0LZ
-> XV5ctwGBoPW6VCIXg/GpTe0BzdIe8hUdnCLZt0gLf2UMN44Wy3RNVZ86000s0GM3
-> R1/cJ+qNCjrjvNQtUYazG5fklvOk1MtHQnhvyznmkhrSYdaPsMQeeZHkdGey35X6
-> MZavWe0ufOdKwJG7xgRb5LETduk8IgK6l7sYXr8lIvqq+TRzOqwkDO8ny1cQz1O6
-> yKFPDisAQGsn4IKwwxPnpoS9/78y8HK4oo6jq5KWoLkQHIGmqe224mTTv7F+EV0b
-> Ph/TwCQO6oNFLj64oaW9lQpBO1sSTBAMj51Oxvs8cHdQsZeswiAYH9qm8rbrNlRy
-> QM0QRPxx6aB1K242ZcQfAlMXjgiw0akiMxtxMknJJTzVIpXINV+ZLn2TxsRVHRh+
-> buuL7HCOiwGYXXzheXLaX4fS+Ctf4i6y0oI8o1F3vscAcj5z7n0YCEG0xu4wWddd
-> bVbKQ/NHAnkdEE2PKYoP3jJirzFAfh/1X2NCWgD0CJSYoNkukZ3Tx1reINHg4mW5
-> r3pFkaxo3B/5QaEHgo6Q8w/bGHu6toOjc3xt7yZPVp1Ita8yRxFEulrBcecd+UbO
-> zzorKmBkJ96y98C6q2ihbo+SqrCGn/5Sx1b/8y7r70DWXyuECasdWM+5ASBmiiJs
-> TAl4oHGfVVoedxmuD7fJ
-> =3DAxKX
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+deleted file mode 100644
+index bd7b495..0000000
+--- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "shared library for GIF images"
+-SECTION = "libs"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+-PR = "r2"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+-
+-inherit autotools
+-
+-DEPENDS = "libsm"
+-
+-PACKAGES += "${PN}-utils"
+-FILES_${PN} = "${libdir}/libgif.so.*"
+-FILES_${PN}-utils = "${bindir}"
+-
+-BBCLASSEXTEND = "native"
+-
+-SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
+-SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
+-- 
+1.7.5.4
 
-
-
---=20
-Regards
-Samuel
 
 
