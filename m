@@ -1,33 +1,25 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SAiEi-0000vL-Lf
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SAjED-00028U-9h
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 14:39:28 +0100
-Received: by wera1 with SMTP id a1so1805093wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 06:30:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=gCOLxzPIDpXhKfAte461w/QTkRbNuLAzcYLDBLlGv9M=;
-	b=GkHrCC4gSJOrXaQTGhTALPInTxMkcZHoYZ3VIRGiakpQTzfsQZFoUBliw4u/jbj4P1
-	y24O7F10cB86BCL1l04V04ZRCoxQAJw/06tGrRXGh2iDxwhKJRZ93Jjn/lcqIAlqqHE6
-	Cs1jWzAHYGKes1NwAAmgMGN7Uo5QYUUEydp9Iza0OO0iVoAnCFVxysOssEuuRH7NWboO
-	A1Fr0zTl9LTzoEEYXQMsHwx6+/XoGjRE3d8/ojhK9zqE8GLyZBlXCRIWH+J3s5LWwOEz
-	FChmdLJD86NYSTAjKhZhUZLei7HAxx8F3PBA5HZLrXibIg4cON3oHmwgTc3S7nndNKwr
-	U2vA==
-MIME-Version: 1.0
-Received: by 10.180.101.72 with SMTP id fe8mr5298604wib.4.1332423033550; Thu,
-	22 Mar 2012 06:30:33 -0700 (PDT)
-Received: by 10.223.97.77 with HTTP; Thu, 22 Mar 2012 06:30:33 -0700 (PDT)
-In-Reply-To: <jkf820$orr$1@dough.gmane.org>
-References: <1332420014-3653-1-git-send-email-s.stirtzel@googlemail.com>
-	<jkf820$orr$1@dough.gmane.org>
-Date: Thu, 22 Mar 2012 14:30:33 +0100
-Message-ID: <CAGiJk9dfFD8HFiVC7oJjPQdBb7xmrgqw6NZA9yULiZJeSFo_bg@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Thu, 22 Mar 2012 15:43:01 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 22 Mar 2012 07:34:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="121986690"
+Received: from unknown (HELO helios.localnet) ([10.252.123.227])
+	by azsmga001.ch.intel.com with ESMTP; 22 Mar 2012 07:34:00 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2] [meta-oe] giflib: Move to OE-Core
+Date: Thu, 22 Mar 2012 14:33:59 +0000
+Message-ID: <1370783.bcqOXY37du@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.1; i686; ; )
+In-Reply-To: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
+References: <1332410499-18183-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [RFC][meta-oe][meta-toolchain][PATCH] meta-toolchain: populate with gcc and binutils from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,54 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 13:39:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Mar 2012 14:43:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-2012/3/22 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 22-03-12 13:40, Samuel Stirtzel schreef:
->
->> * Allow Users with an use case that excludes meta-oe to test and use
->> meta-kde.
->
-> What's that usecase? As other people said in a different thread: please explain.
+On Thursday 22 March 2012 11:01:39 Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  COPYING.MIT => meta-toolchain/COPYING.MIT          |    0
 
-The first comment is a direct explicit target group / use case.
-Then second comment is about a generic use case.
-So it is rather making meta-kde more independent of meta-oe than any
-specific development setup.
+Sorry to be a pain but can we please call this something other than meta-
+toolchain? We already have meta-toolchain as a well-known recipe and there's 
+enough name duplication in OE as it is.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iQIcBAEBAgAGBQJPayOBAAoJEHZqAkdh1vT6nLgP/3yrPJGfjPfDjPN3YNQ8EVDJ
-> p87Vx1lFzs2zwdxU3PsOVI9jTANCSye386YsQxlQUQbw4EmNAXWck0eYSEbRvlK4
-> 8M6+o+O2g1wUoBu+z0WH+GZxkHDkKXbUgE5bEjImyDJVSdxQgIuYZipo2LGQ7E4G
-> zJg+1GaYd8wA6VnxiK2Q/pwKCWjiW2D1NrAouVfNN2cyawVdMkh8NsgaHyGDmgVh
-> 9hsKxquaXAWKkqj8T/NIPUXvOCbKlFlTTl5Aqmj4KEM4Y5bPlMuOmkp6oFApaGWn
-> k2f6c6GO8tSzdXVfMjus7jLeXIz1qIU+4YPi8N/vErnk05miFKo6rCXUFJV3BVDs
-> Hbpnir9ufWl2H0Q3SG0otxqtj5Mwg9j7fB7iVQOudbYDlW8PGKfV01c9KYyLrgtY
-> 9wFy1204AS+MsoGaWMA12dmhZeBaypm0FND85gVs0AsTRBrEsi7zVdhauOXpGZcg
-> GHoUV+LIoWSHBjsaU+97aflH2+8la+zyDNVdzpBmik3sxlT9Xh8KffJOOHhkyy90
-> NQKeZ3lB+52GdXCh31MrAJz2huPESFAcLa+18mU+i8rxeYZYLh9/9QQMJmZyZFBT
-> myP8Oj/2EGWRMCpH+D2NMxEZWKvqLuXjffLirr6pF3jwI6xMsCQzq7OmR+1pR2DL
-> ijrM+EtzEDEOeog+HTbC
-> =LzmU
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+Thanks,
+Paul
 
 -- 
-Regards
-Samuel
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
