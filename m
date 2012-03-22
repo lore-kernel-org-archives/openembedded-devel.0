@@ -1,37 +1,25 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SATXy-0003G6-9X
+	(envelope-from <denis@denix.org>) id 1SAZgn-0002Mt-PK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Mar 2012 22:58:22 +0100
-Received: by mail-we0-f175.google.com with SMTP id a1so1348298wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2012 14:49:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=KBFXRkLfKjufuaaUDxTup+A1YrS5e1PM0hjKafICx8c=;
-	b=gNiwNuLD/Vpv/oCMXIcVeK81zlUfRA6G/noR4HEHK/44o5Aupy5zTPmGvRJh1D24xV
-	3QhxCgGxP1S9egxfvlxFywItLqODJlY5yFC/TT6YfSAwuiwI5TwvyqVen/xNj4rTK3Jv
-	qBy/w/4bTs3mJrb0e6oeHL9D+Q+jtes0xcmvil7paxlp/2nCVKbve5TegkKOPN3Cs+sD
-	85qqFB6ei2E2QEEMYM3QV+eV0Ese2cMukd9ltBX1Yi/5I7NZvAzPXzQbO9QvWFN0FKwz
-	Q1RXij/5qJwSeP0JvYGQY15FOKQwCXq8kR4YPjhprGrYASJij1lcq3XgwJRnRJLUcBdK
-	lXNw==
-Received: by 10.180.107.162 with SMTP id hd2mr41490952wib.8.1332366570010;
-	Wed, 21 Mar 2012 14:49:30 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b3sm7768769wib.4.2012.03.21.14.49.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Mar 2012 14:49:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 22 Mar 2012 05:31:53 +0100
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1900HPKO21MYP1@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	21 Mar 2012 22:22:50 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B08402016F; Wed,
+	21 Mar 2012 23:22:49 -0400 (EDT)
+Date: Wed, 21 Mar 2012 23:22:49 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2012 22:49:02 +0100
-Message-Id: <3e021b4a64d691edde6218c713a34bbc2b5f524d.1332366214.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <f155e80f9a8c90337e79928293daa7f807328b45.1332366214.git.Martin.Jansa@gmail.com>
-References: <f155e80f9a8c90337e79928293daa7f807328b45.1332366214.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1332366214.git.Martin.Jansa@gmail.com>
-References: <cover.1332366214.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] pango: native support and --disable-introspection moved to oe-core pango.inc
+Message-id: <20120322032249.GH6857@denix.org>
+References: <003901cd07a7$bc69de00$353d9a00$@slingshot.co.nz>
+MIME-version: 1.0
+In-reply-to: <003901cd07a7$bc69de00$353d9a00$@slingshot.co.nz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: ti-eula-unpack problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +33,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 21:58:22 -0000
+X-List-Received-Date: Thu, 22 Mar 2012 04:31:54 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-graphics/pango/pango_1.29.4.bb |    5 -----
- 1 files changed, 0 insertions(+), 5 deletions(-)
+On Thu, Mar 22, 2012 at 10:15:26AM +1300, R U Local wrote:
+> Dear List,
+> 
+> A resent change to ti-eula-unpack.inc to test for 32 bit compatability on 64
+> bit systems has broken the build on Ubuntu x64 11.10.
 
-diff --git a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
-index b14430f..ea79a63 100644
---- a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
-+++ b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
-@@ -1,8 +1,5 @@
- require recipes-graphics/pango/pango.inc
- 
--BBCLASSEXTEND = "native"
--DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
--
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
- 
- SRC_URI[archive.md5sum] = "a5ee785f4f31d6bdd8625a09ea3f8b4b"
-@@ -11,5 +8,3 @@ SRC_URI[archive.sha256sum] = "f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a
- SRC_URI += "file://no-tests.patch"
- 
- PR = "r4"
--
--EXTRA_OECONF += "--disable-introspection"
--- 
-1.7.8.5
+Ah, you cross-posted this to different mailing lists, but not the correct 
+one... :) This should have gone to meta-ti, which this change belongs to and 
+where I copied the reply to:
 
+https://lists.yoctoproject.org/listinfo/meta-ti
+
+> Ubuntu created multi-arch functionality between 11.4 and 11.10. There is are
+> now  /lib /lib64 and /lib32 directories and no symlinks.
+> 
+> The following patch corrects this on my system but I have no idea of its
+> effect on others.
+> 
+>  
+> 
+> diff --git a/recipes-ti/includes/ti-eula-unpack.inc
+> b/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> index dcabe9d..f37f026 100644
+> 
+> --- a/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> +++ b/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> @@ -21,7 +21,7 @@ python ti_bin_do_unpack() {
+> 
+>      # InstallJammer requires 32bit version of glibc
+> 
+>      lib32path = '/lib'
+> 
+> -    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+> os.path.islink('/lib') ):
+> 
+> +    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+> os.path.islink('/lib') or os.path.exists('/lib32')):
+> 
+>         lib32path = '/lib32'
+> 
+>      if not os.path.exists('%s/libc.so.6' % lib32path):
+> 
+>         raise bb.build.FuncFailed, \
+> 
+>  
+> 
+> Cheers Mike.
+> 
+>  
+> 
+>  
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
