@@ -1,37 +1,37 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SB4J0-0002jU-WA
+	(envelope-from <martin.jansa@gmail.com>) id 1SB4J5-0002dA-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Mar 2012 14:13:23 +0100
-Received: by wibhm17 with SMTP id hm17so1682057wib.0
+	Fri, 23 Mar 2012 14:13:28 +0100
+Received: by mail-wg0-f43.google.com with SMTP id dr12so1857378wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2012 06:04:26 -0700 (PDT)
+	Fri, 23 Mar 2012 06:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=2XT/yygpFOBNL+6efPvOxCiwzy/Ak7KcxialhZKSiV8=;
-	b=BZfG2CwLIqvwUuKl6+f5GaqmNfWbP+s6BhWgoV6Q9r7lBNY0l8z5CPQptDBJIvXkd8
-	dwuC1KIj3Khs8OFH0nREzj4D1UeYumuIZ1eZ8CTChHJRtaQqVuzfZMuuYvsqHWnZ0wpI
-	4n3aClNdEN97QzgAX1gaTT+icrucbrR5Gr/TQTBIXQJTViwsS7yjW2MDlTITIWieFai5
-	D/M+c8DXmogGFnf1QqNVgilnWa5z8NRqhoevrjsrtUQ6xLgUTlgrRIaa+hTpd3dm0lS8
-	wi0l4VV0UXCZ6G4cVbuXxnO1Q1uRML6RCRNUmYOf54FtyO++P/Q0TGGyHTzS/N7w7vWa
-	LIHg==
-Received: by 10.180.95.1 with SMTP id dg1mr6363621wib.21.1332507866180;
-	Fri, 23 Mar 2012 06:04:26 -0700 (PDT)
+	bh=KWIVXGTUYhcv0C3TBmpE5EAFLeXfDN8dYAMp6GaGeiI=;
+	b=eI+Nh66wGo2h+Br2ChE+6feXY4deZCVfAnQAi1X9JRw9Ma82Cj3cJnnwsECBRrUpJK
+	+UQ2d6crviXwYxL9uvGEht7AHj0BIYyqi0wro37fvsLRqj2sLvcxUgm/CKyFsr3imoWC
+	0X88iW4yPxjMk6+z9O9W7hzp+KmI89arCCLlPhCEqTbMm3DYserJTOIslYRREEXLwd4w
+	Tip0Tc4fzeUR80W5M2XLP3gNk2Csfjf5otFbcnZWOoPgHNyt3S8y1JFS1IGd4ZmvpR9g
+	4AldV+JWYgTdHdfaRfWPlTEuuAucfpYC3HAaA5w1/7LSdH+fb01Pv+ufSDJLSDGXwd61
+	Dbbw==
+Received: by 10.180.89.9 with SMTP id bk9mr6396519wib.11.1332507874207;
+	Fri, 23 Mar 2012 06:04:34 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gd4sm10250059wib.6.2012.03.23.06.04.25
+	by mx.google.com with ESMTPS id fn2sm22877081wib.0.2012.03.23.06.04.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 23 Mar 2012 06:04:25 -0700 (PDT)
+	Fri, 23 Mar 2012 06:04:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Mar 2012 14:04:11 +0100
-Message-Id: <0683eac11a18f65c19f75ead09b16106aab9a911.1332507730.git.Martin.Jansa@gmail.com>
+Date: Fri, 23 Mar 2012 14:04:12 +0100
+Message-Id: <b16115c16837e5aa6a3ad556a37832192c128f43.1332507730.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
 In-Reply-To: <3fca50b933c63bab6cff938db607bcecde86fd3d.1332507730.git.Martin.Jansa@gmail.com>
 References: <3fca50b933c63bab6cff938db607bcecde86fd3d.1332507730.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1332507730.git.Martin.Jansa@gmail.com>
 References: <cover.1332507730.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/5] kernel.bbclass: fix extra + in kernelrelease
+Subject: [meta-oe][PATCH 3/5] linux: import shared linux.inc so we have just one copy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +45,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2012 13:13:23 -0000
+X-List-Received-Date: Fri, 23 Mar 2012 13:13:28 -0000
 
-* see http://lists.linuxtogo.org/pipermail/openembedded-core/2011-December/014308.html
+* in my env I have 7 copies now
+  ./meta-smartphone/meta-htc/recipes-kernel/linux/linux.inc
+  ./meta-smartphone/meta-nokia/recipes-kernel/linux/linux.inc
+  ./meta-smartphone/meta-openmoko/recipes-kernel/linux/linux.inc
+  ./meta-smartphone/meta-samsung/recipes-kernel/linux/linux.inc
+  ./meta-smartphone/meta-palm/recipes-kernel/linux/linux.inc
+  ./meta-ti/recipes-kernel/linux/linux.inc
+  ./meta-handheld/recipes-kernel/linux/linux.inc
+  meta-smartphone's are 100% identical, meta-handheld is slightly
+  different (ARM_KEEP_OABI can be set in recipe after require .inc) and
+  meta-ti seems like much older version of linux.inc
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/classes/kernel.bbclass |    6 ++++++
- 1 files changed, 6 insertions(+), 0 deletions(-)
+ meta-oe/recipes-kernel/linux/linux.inc |  131 ++++++++++++++++++++++++++++++++
+ 1 files changed, 131 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/linux/linux.inc
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 02d0ca5..d87b177 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -209,6 +209,12 @@ sysroot_stage_all_append() {
- }
- 
- kernel_do_configure() {
-+	# fixes extra + in /lib/modules/2.6.37+
-+	# $ scripts/setlocalversion . => +
-+	# $ make kernelversion => 2.6.37
-+	# $ make kernelrelease => 2.6.37+
-+	touch ${B}/.scmversion
+diff --git a/meta-oe/recipes-kernel/linux/linux.inc b/meta-oe/recipes-kernel/linux/linux.inc
+new file mode 100644
+index 0000000..2b2fbf3
+--- /dev/null
++++ b/meta-oe/recipes-kernel/linux/linux.inc
+@@ -0,0 +1,131 @@
++DESCRIPTION = "Linux Kernel"
++SECTION = "kernel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 +
- 	# Copy defconfig to .config if .config does not exist. This allows
- 	# recipes to manage the .config themselves in do_configure_prepend().
- 	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
++INC_PR = "r0"
++
++inherit kernel siteinfo
++
++# Enable OABI compat for people stuck with obsolete userspace
++ARM_KEEP_OABI ?= "0"
++
++# Set the verbosity of kernel messages during runtime
++# You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour
++CMDLINE_DEBUG ?= "loglevel=3"
++
++# Kernel bootlogo is distro-specific (default is OE logo).
++# Logo resolution (qvga, vga, ...) is machine-specific.
++LOGO_SIZE ?= '${@base_conditional("MACHINE_GUI_CLASS", "bigscreen", "vga", "qvga", d)}'
++# To use this, add file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 or similar
++# to your kernel recipe, and then structure your logos for each resolution
++# accordingly.
++
++LOCALVERSION ?= ""
++
++#kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
++kernel_conf_variable() {
++	CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
++	if test "$2" = "n"
++	then
++		echo "# CONFIG_$1 is not set" >> ${S}/.config
++	else
++		echo "CONFIG_$1=$2" >> ${S}/.config
++	fi
++}
++
++do_configure_prepend() {
++        echo "" > ${S}/.config
++	CONF_SED_SCRIPT=""
++
++        #
++        # logo support, if you supply logo_linux_clut224.ppm in SRC_URI, then it's going to be used
++        #
++        if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
++                install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
++		kernel_conf_variable LOGO y
++		kernel_conf_variable LOGO_LINUX_CLUT224 y
++        fi
++
++        #
++        # oabi / eabi support
++        #
++	kernel_conf_variable AEABI y
++	if [ "${ARM_KEEP_OABI}" = "1" ] ; then
++		kernel_conf_variable OABI_COMPAT y
++	else
++		kernel_conf_variable OABI_COMPAT n
++	fi
++
++        # When enabling thumb for userspace we also need thumb support in the kernel
++        if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
++		kernel_conf_variable ARM_THUMB y
++        fi
++
++	kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
++
++	kernel_conf_variable LOCALVERSION "\"${LOCALVERSION}\""
++	kernel_conf_variable LOCALVERSION_AUTO n
++
++	kernel_conf_variable SYSFS_DEPRECATED n
++	kernel_conf_variable SYSFS_DEPRECATED_V2 n
++        kernel_conf_variable HOTPLUG y
++        kernel_conf_variable UEVENT_HELPER_PATH \"\"
++        kernel_conf_variable UNIX y
++        kernel_conf_variable SYSFS y
++        kernel_conf_variable PROC_FS y
++        kernel_conf_variable TMPFS y
++        kernel_conf_variable INOTIFY_USER y
++        kernel_conf_variable SIGNALFD y
++        kernel_conf_variable TMPFS_POSIX_ACL y
++        kernel_conf_variable BLK_DEV_BSG y
++        kernel_conf_variable DEVTMPFS y
++        kernel_conf_variable DEVTMPFS_MOUNT y
++
++        # Newer inits like systemd need cgroup support
++        if [ "${KERNEL_ENABLE_CGROUPS}" = "1" ] ; then
++            kernel_conf_variable CGROUP_SCHED y
++            kernel_conf_variable CGROUPS y
++            kernel_conf_variable CGROUP_NS y
++            kernel_conf_variable CGROUP_FREEZER y
++            kernel_conf_variable CGROUP_DEVICE y
++            kernel_conf_variable CPUSETS y
++            kernel_conf_variable PROC_PID_CPUSET y
++            kernel_conf_variable CGROUP_CPUACCT y
++            kernel_conf_variable RESOURCE_COUNTERS y
++        fi
++
++        #
++        # root-over-nfs-over-usb-eth support. Limited, but should cover some cases.
++        # Enable this by setting a proper CMDLINE_NFSROOT_USB.
++        #
++        if [ ! -z "${CMDLINE_NFSROOT_USB}" ]; then
++                bbnote "Configuring the kernel for root-over-nfs-over-usb-eth with CMDLINE ${CMDLINE_NFSROOT_USB}"
++                kernel_conf_variable INET y
++                kernel_conf_variable IP_PNP y
++                kernel_conf_variable USB_GADGET y
++                kernel_conf_variable USB_GADGET_SELECTED y
++                kernel_conf_variable USB_ETH y
++                kernel_conf_variable NFS_FS y
++                kernel_conf_variable ROOT_NFS y
++                kernel_conf_variable CMDLINE \"${CMDLINE_NFSROOT_USB} ${CMDLINE_DEBUG}\"
++        fi
++
++        sed -e "${CONF_SED_SCRIPT}" \
++		< '${WORKDIR}/defconfig' >>'${S}/.config'
++
++	yes '' | oe_runmake oldconfig
++}
++
++do_configure_append() {
++        if test -e scripts/Makefile.fwinst ; then
++		sed -i -e "s:-m0644:-m 0644:g" scripts/Makefile.fwinst
++	fi
++}
++
++do_install_append() {
++	oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
++}
++
++PACKAGES =+ "kernel-headers"
++FILES_kernel-headers = "${exec_prefix}/src/linux*"
 -- 
 1.7.8.5
 
