@@ -1,37 +1,47 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SAyRh-000630-VE
+	(envelope-from <sledz@dresearch-fe.de>) id 1SAydt-0007Ui-QF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Mar 2012 07:57:58 +0100
-Received: by mail-wg0-f43.google.com with SMTP id dr12so1655903wgb.24
+	Fri, 23 Mar 2012 08:10:33 +0100
+Received: by bkcjg15 with SMTP id jg15so2581648bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 23:49:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=GTsU0VD+2GioB+evm0Y6OziXIGx+TuE+/kO9IrrLTHc=;
-	b=eGRxETvOwjBQOnuqdYEo6jHawg4sEQXphKgLGcgiGKt6G7PNXNhkuQx6fhG38Bl+BW
-	6pK/XxA50z61GY3lCvg7mKroGOtv4/vegIdvq+E/ijbPkeRD8fRD0tMzHzh7OZB/4cMx
-	6gvEKLuMH+9KtBEt5DxUAsfF5vPbSgsG6TPtY7GOm+UxoQitSM1OF12GuG1DEZqTkXq7
-	nbWASNcZWVopaAXS99NCqK+opiFdvPjeHw4fSsqucu9N4DQq0gEruxeAAZPR2qADjSvA
-	yl6W2VBtRZXuXGhd0qdE8NdHY8ElvnossAvdqwZcvZIO7199ptHKyyx0sA8CSjtcmCiD
-	1tow==
-Received: by 10.180.84.164 with SMTP id a4mr3858562wiz.2.1332485342757;
-	Thu, 22 Mar 2012 23:49:02 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b3sm11396505wib.4.2012.03.22.23.49.01
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Mar 2012 23:49:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Mar 2012 07:48:43 +0100
-Message-Id: <d8ef36fc72da33dc38af72faee0bcbd893c55433.1332485253.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <c49db2c3482e38a5a2671b147a0a8dbcbcb5baa4.1332485253.git.Martin.Jansa@gmail.com>
-References: <c49db2c3482e38a5a2671b147a0a8dbcbcb5baa4.1332485253.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1332485253.git.Martin.Jansa@gmail.com>
-References: <cover.1332485253.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] kernel.bbclass: populate /etc/modules-load.d/ with module_autoload entries too
+	Fri, 23 Mar 2012 00:01:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=4llpz0USzIPxJp5lqBZx8rL6yEXeK4h8I+Nzsy4SRcQ=;
+	b=XC7cXGbQ7aFXSiBeapeEo8uEl+5p+nl8+FCgZZ5NK+PtLOsTvgFHHUe5lC2t44h+Sv
+	3btjL+mwm5yjni0H9u0PxpQ0f2ORDWj2R9kmLRGlSkurKP2cREcYhDquxS+b4a3XHxfv
+	b9FrLmVEEz+vypcNGmhMgw5/P1qIm0wtZt2U3zbaJ1cQEkvA7y5Y9lDL95h/ge953OhV
+	FcWyVjCjj9ZqERLFhALt3XktiaXDn5Jliuz5TKZQRpXwQBh1O4vnmgG2QoPeowsohPnZ
+	hQclGiQQaihDKvNaoGeRREJydKUEkKx7CEKCoqPLTdpDIZBUhuh1YqV0z8wayWEus2iz
+	Zyhw==
+Received: by 10.204.154.139 with SMTP id o11mr4159135bkw.4.1332486097924;
+	Fri, 23 Mar 2012 00:01:37 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id u14sm14234913bkp.2.2012.03.23.00.01.36
+	(version=SSLv3 cipher=OTHER); Fri, 23 Mar 2012 00:01:37 -0700 (PDT)
+Message-ID: <4F6C1FD0.3080307@dresearch-fe.de>
+Date: Fri, 23 Mar 2012 08:01:36 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
+MIME-Version: 1.0
+To: Tom Rini <tom.rini@gmail.com>
+References: <4F69AF4A.8050809@dresearch-fe.de>
+	<1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
+	<CA+M6bXnXmFf0syVz-71Y_Ovkq1pvsw8DBjZcfx1=dvZ4pD48wg@mail.gmail.com>
+	<CA+M6bXmJ9YWR74eEWj-0pNYVziCNb+8Ac-DKPNG1inPaELKAiA@mail.gmail.com>
+	<4F6ACE55.2070002@dresearch-fe.de>
+	<20120322221323.GE28378@bill-the-cat>
+In-Reply-To: <20120322221323.GE28378@bill-the-cat>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQn4k244ygu795XmJGl0nupDdSLNpl5IJmCJBUUn9xXhYOiRLVL3W4J7PoWrsq4kvdIkgfho
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libmatthew-0.7.1: SRC_URI updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,59 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2012 06:57:58 -0000
+X-List-Received-Date: Fri, 23 Mar 2012 07:10:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* /etc/modules-load.d/foo.conf is used by systemd like /etc/modutils/foo was with sysvinit
+On 22.03.2012 23:13, Tom Rini wrote:
+> On Thu, Mar 22, 2012 at 08:01:41AM +0100, Steffen Sledz wrote:
+>> On 21.03.2012 15:46, Tom Rini wrote:
+>>> On Wed, Mar 21, 2012 at 7:44 AM, Tom Rini <tom.rini@gmail.com> wrote:
+>>>> On Wed, Mar 21, 2012 at 3:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>>>>> libmatthew-java-0.7.1.tar.gz is no longer available at the original
+>>>>> location.
+>>>>>
+>>>>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+>>>>
+>>>> NAK, please switch it to the snapshot.debian.org URL I provided so we
+>>>> don't have to change this recipe at some point in the future again.
+>>>
+>>> On third thought, lemme think about this.  I don't like pointing
+>>> somewhere that might remove it, again, but I also don't like changing
+>>> checksums for folks that already have it down.  So, unless someone
+>>> else disagrees, we'll favor same checksums over retention and if
+>>> fedoraproject removes it, we'll just point at the copy on the OE
+>>> server.
+>>
+>> So finally that's an ACK for my patch?
+> 
+> Yes, thanks.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/classes/kernel.bbclass |   10 ++++++++--
- 1 files changed, 8 insertions(+), 2 deletions(-)
+OK, pushed to oe-classic master.
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index cd36e55..41a741f 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -127,6 +127,7 @@ kernel_do_install() {
- 	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
- 	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
- 	install -d ${D}/etc/modutils
-+	install -d ${D}/etc/modules-load.d
- 	install -d ${D}/etc/modprobe.d
- 
- 	#
-@@ -416,6 +417,11 @@ python populate_packages_prepend () {
- 			for m in autoload.split():
- 				f.write('%s\n' % m)
- 			f.close()
-+			name = '%s/etc/modules-load.d/%s.conf' % (dvar, basename)
-+			f = open(name, 'w')
-+			for m in autoload.split():
-+				f.write('%s\n' % m)
-+			f.close()
- 			postinst = d.getVar('pkg_postinst_%s' % pkg, True)
- 			if not postinst:
- 				bb.fatal("pkg_postinst_%s not defined" % pkg)
-@@ -431,7 +437,7 @@ python populate_packages_prepend () {
- 			f.close()
- 
- 		files = d.getVar('FILES_%s' % pkg, True)
--		files = "%s /etc/modutils/%s /etc/modutils/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename, basename)
-+		files = "%s /etc/modutils/%s /etc/modutils/%s.conf /etc/modules-load.d/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename, basename, basename)
- 		d.setVar('FILES_%s' % pkg, files)
- 
- 		if vals.has_key("description"):
-@@ -461,7 +467,7 @@ python populate_packages_prepend () {
- 	# avoid warnings. removedirs only raises an OSError if an empty
- 	# directory cannot be removed.
- 	dvar = d.getVar('PKGD', True)
--	for dir in ["%s/etc/modutils" % (dvar), "%s/etc/modprobe.d" % (dvar)]:
-+	for dir in ["%s/etc/modutils" % (dvar), "%s/etc/modprobe.d" % (dvar), "%s/etc/modules-load.d" % (dvar)]:
- 		if len(os.listdir(dir)) == 0:
- 			os.rmdir(dir)
- 
+Tom, do you need an extra pull request for 2011.03-maintenance branch?
+
 -- 
-1.7.8.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
