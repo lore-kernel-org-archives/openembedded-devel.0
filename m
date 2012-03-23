@@ -1,42 +1,32 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SAqOh-0000gz-9Z
+	(envelope-from <martin.jansa@gmail.com>) id 1SAyRJ-00062M-O6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Mar 2012 23:22:19 +0100
-Received: by obqv19 with SMTP id v19so1961530obq.6
+	Fri, 23 Mar 2012 07:57:33 +0100
+Received: by wibhm17 with SMTP id hm17so1402065wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2012 15:13:23 -0700 (PDT)
+	Thu, 22 Mar 2012 23:48:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=gD6DD/MJFb7X9M1CkfDxyRTFSMZWiRlohIzjcZ5T8MY=;
-	b=jaCJ+UQKPWeJ9RzKHLXw+ON70Yc7vvF1FHIycvTa45w+NrMuNRjuXdLIESai/Vc5eF
-	hWWxvtcSyniYIOyq5fCmNt41JxkBWFv8kY7X8JL00Igoh3xYQacpGrsCRRd4Gry09BN+
-	N3Ot1Y92V8OqmTtjNEPh5gfBMEWn7l8P2IFyr8TM4CifVh+QUm4el4+dZPq0uZl87Hkj
-	JJbhlyjRsNcMvLz8Y71lS17dShrQJIt92omiTDKoFROIr8LE4/UNPLlstcFEnDjd9+Sl
-	tdgsxmL/ZREhmjEA8l4ZhXyBeHiaZGFkW63BkKCvcCtwR/UY6mlbei2MIddZbak9Nyqr
-	9w1Q==
-Received: by 10.182.179.68 with SMTP id de4mr12330950obc.13.1332454403518;
-	Thu, 22 Mar 2012 15:13:23 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id d6sm4711772oeh.3.2012.03.22.15.13.21
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=H3Xce/JVG6m+yF2VP9IeOMhQpRV/O5+zzTE1PRirGCQ=;
+	b=ubESz3y4Zo+4REFuTg58M20q49QzekUoTHubrC/Za27CoAA8WvC5hbOg7zW1LasUD+
+	5PbtUQuSax+jJRGzpFvVfJ6zs5MIllTCy5mAbuU1SdagKtWLjMrRztENzrEVjPsQZ7Vg
+	lax4G4IiyM1uy7CFvRnUgARp9sA2pPZ9DCcxc6hMu2kS+C5wLp8hAfAryLNmEQJGdZkg
+	gEwQc1ujflVHfXIX1OBRYjkJR1TXlPiMpz1wqsjYiGUXnZru2PJEEoze8ix4hwSZrO27
+	iX2VsRVmpbhGx+9HDRnWRdTWLT8v7zZ6SVzRF0X3po05+AzhX/bKrE0Zejkr9+4Bfu9i
+	70tw==
+Received: by 10.216.134.155 with SMTP id s27mr7230563wei.80.1332485318165;
+	Thu, 22 Mar 2012 23:48:38 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id k7sm19111376wia.5.2012.03.22.23.48.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Mar 2012 15:13:22 -0700 (PDT)
-Date: Thu, 22 Mar 2012 15:13:23 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20120322221323.GE28378@bill-the-cat>
-References: <4F69AF4A.8050809@dresearch-fe.de>
-	<1332326252-7381-1-git-send-email-sledz@dresearch-fe.de>
-	<CA+M6bXnXmFf0syVz-71Y_Ovkq1pvsw8DBjZcfx1=dvZ4pD48wg@mail.gmail.com>
-	<CA+M6bXmJ9YWR74eEWj-0pNYVziCNb+8Ac-DKPNG1inPaELKAiA@mail.gmail.com>
-	<4F6ACE55.2070002@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <4F6ACE55.2070002@dresearch-fe.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] libmatthew-0.7.1: SRC_URI updated
+	Thu, 22 Mar 2012 23:48:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Mar 2012 07:48:32 +0100
+Message-Id: <cover.1332485253.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.5
+Subject: [meta-oe][PATCH 0/3] kernel.bbclass update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 22:22:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Mar 2012 06:57:34 -0000
 
-On Thu, Mar 22, 2012 at 08:01:41AM +0100, Steffen Sledz wrote:
-> On 21.03.2012 15:46, Tom Rini wrote:
-> > On Wed, Mar 21, 2012 at 7:44 AM, Tom Rini <tom.rini@gmail.com> wrote:
-> >> On Wed, Mar 21, 2012 at 3:37 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> >>> libmatthew-java-0.7.1.tar.gz is no longer available at the original
-> >>> location.
-> >>>
-> >>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> >>
-> >> NAK, please switch it to the snapshot.debian.org URL I provided so we
-> >> don't have to change this recipe at some point in the future again.
-> > 
-> > On third thought, lemme think about this.  I don't like pointing
-> > somewhere that might remove it, again, but I also don't like changing
-> > checksums for folks that already have it down.  So, unless someone
-> > else disagrees, we'll favor same checksums over retention and if
-> > fedoraproject removes it, we'll just point at the copy on the OE
-> > server.
-> 
-> So finally that's an ACK for my patch?
+The following changes since commit 986de01251408605161e0f8343866a0e7ffe7910:
 
-Yes, thanks.
+  qmake2: remove (2012-03-21 13:50:44 +0100)
+
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/kernel
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/kernel
+
+Martin Jansa (3):
+  kernel.bbclass: import s/1/True/ changes from oe-core version
+  kernel.bbclass: import QA warning fix for unpackaged files from
+    oe-core
+  kernel.bbclass: populate /etc/modules-load.d/ with module_autoload
+    entries too
+
+ meta-oe/classes/kernel.bbclass |   64 +++++++++++++++++++++++++---------------
+ 1 files changed, 40 insertions(+), 24 deletions(-)
 
 -- 
-Tom
+1.7.8.5
+
 
 
