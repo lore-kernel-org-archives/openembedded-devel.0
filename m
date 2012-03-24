@@ -1,37 +1,16 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SBCO1-0005iW-S1
+	(envelope-from <sledz@localhost.localdomain>) id 1SBKTg-0007f3-Lx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Mar 2012 22:51:06 +0100
-Received: by obqv19 with SMTP id v19so2947945obq.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2012 14:42:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=Lj2ZeKQH7YFYbZs+1Oweo28rxFaDVXZpPbmjOUh6cc8=;
-	b=XKpJcqGLNl3xlkoPVx4Le5BzY4eYPt9Em4Mz9/kCZt6cVAof5+6dxaW+t/neCXV+Ox
-	VKLBNcQc944kSwpM7iZdjnuDVRn4LI7qh0Lhbni6LwgECmr074dZJI9aJxHUnadD9bYY
-	+rqU7f6L7NGOBHKrFC571QiQQ+Mi4bqSCW1Q7nWQ4AeT5sBkYhLWob9bmujJiJKQEdir
-	OaZFBRPP7hbmLopuXACGbDsFmUrF4MMe4GW1YsDCHW3cco4Lhxw67ZlFKRSL1hxku0Yq
-	LlVybH1IpO5NZ0+ChkjY3clNtm3mpQ2lghIsQ1KRaJ5ITaXiXJ6QYLzojAe70/feUJ4Z
-	NcYg==
-Received: by 10.182.85.39 with SMTP id e7mr16251849obz.51.1332538928754;
-	Fri, 23 Mar 2012 14:42:08 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id w4sm8900467obx.2.2012.03.23.14.42.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 23 Mar 2012 14:42:07 -0700 (PDT)
-Date: Fri, 23 Mar 2012 14:42:10 -0700
-From: Tom Rini <tom.rini@gmail.com>
+	Sat, 24 Mar 2012 07:29:28 +0100
+Received: by localhost (Postfix, from userid 1000)
+	id 6A76C4439DF; Sat, 24 Mar 2012 07:20:31 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120323214210.GJ9551@bill-the-cat>
-References: <1332537058-13783-1-git-send-email-heinold@inf.fu-berlin.de>
-MIME-Version: 1.0
-In-Reply-To: <1332537058-13783-1-git-send-email-heinold@inf.fu-berlin.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] relocatable.bbclass: do not erease already existing ORIGIN
+Date: Sat, 24 Mar 2012 07:20:23 +0100
+Message-Id: <cover.1332569901.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [2011.03-maintenance 0/1] pull request 20120324
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +24,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2012 21:51:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 24 Mar 2012 06:29:28 -0000
 
-On Fri, Mar 23, 2012 at 10:10:57PM +0100, Henning Heinold wrote:
+Hi Tom,
 
-> Hi,
-> 
-> while building openjdk I discovered that relocatable.bbclass strips
-> all PATHS with ORIGIN, that is problematic, when binaries like an jdk
-> is installed not in the standard paths /lib or /usr/lib.
-> 
-> This patch let all exisiting ORIGIN stay in the binary. So
-> far I only saw problems with some perl-native libs, where chrpath fails
-> now, because the path is to long. But it seems they work anyway.
+here's the pull request for the libmatthew fetch problem fix.
 
-Perhaps my memory is hazy, but this feels like an openjdk problem.  Why
-is openjdk putting things other than were our $ORIGIN mangle expects
-them to have been placed?
+Thx,
+Steffen
+
+The following changes since commit 8d2c8f49312f6a0318dc82b6ce85e50bc08dfcb2:
+
+  ltrace-0.5.3: Update URI to a functioning one (2012-03-14 12:13:19 +0100)
+
+are available in the git repository at:
+  git://git.openembedded.org/openembedded sledz/pull2
+  http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=sledz/pull2
+
+Steffen Sledz (1):
+  libmatthew-0.7.1: SRC_URI updated
+
+ recipes/libmatthew/libmatthew_0.7.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
 -- 
-Tom
+1.7.7
+
 
 
