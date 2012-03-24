@@ -1,34 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SBM1Y-0005Yi-Nt
+	(envelope-from <martin.jansa@gmail.com>) id 1SBM1f-0005cn-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Mar 2012 09:08:32 +0100
-Received: by wgbdr12 with SMTP id dr12so2353674wgb.24
+	Sat, 24 Mar 2012 09:08:39 +0100
+Received: by wibhm17 with SMTP id hm17so2343033wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2012 00:59:35 -0700 (PDT)
+	Sat, 24 Mar 2012 00:59:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=BnjAi4EoH2Im9OHWH28VHZwd0RbnXDLUcMcF+pwFBEU=;
-	b=KGBwk3gQkhZMzzG4QGDq795GbpB0kcUoxJ5KkB8dVIPgoqfF0o0etFrkenwR+nWwJA
-	wRJtPWfYo79rgidSGuZxE969CxBBvpPrpWv1UQ7RtST3YnG+eRYV8wo47gjLqUUFBQa5
-	uZ/K6/jO07LgzC+yjXkB1xC6M2PxjxGFdXPGcftMJOsxx3G07BLQ4stJt1lktO5yV/RD
-	fTFZS53xQucAZvYDOGAEiEtvh/R0KU1aoBdBVntB0k324NQFQ5GAB5PteyTSaMRNybeZ
-	IkSW5YfQhdT/qG1ajS7vc/PQ/DJlnYpO3xZATMiHdKExPSxs77yxKcYUFH9MjhyBHsli
-	7nVA==
-Received: by 10.180.78.225 with SMTP id e1mr3352890wix.0.1332575975928;
-	Sat, 24 Mar 2012 00:59:35 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=kZPDVz9b8PVVb+QX28Ayq87YMz5e2Lmnu7mviPkU1Lk=;
+	b=J9jW54gcrHkk65LnQ7JaZiVfDxA8iRRE5wOzDc9PSc1R+YT8jdzaqUCh8jpdbCsH+g
+	9v6OgAou/QUoRNjZuE502jYtrtdL22yywi8k9AbEDLRH0/DtmmComH2CPEsHb0ke1A2y
+	HV/cFTyV5CBtW2ROl/FhlEJPENCn3Oglh4lE+/3xHmNfSdUQKQYc8EhXM67K9II/LBk1
+	FBNa7aUrYOJd/S16E9owb5j++ox8QEJ+lyp+fShWPgdlmz06Aus3gCq7dixdX1TNBQdC
+	dCIIIC+jik72imGgRFFN1r9ryqce3bCLGl7SPwWusxzOWmZTAOafENWgD+FJqVRAtbc6
+	tEyA==
+Received: by 10.180.89.9 with SMTP id bk9mr3296981wib.11.1332575982952;
+	Sat, 24 Mar 2012 00:59:42 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w10sm34200048wiy.3.2012.03.24.00.59.33
+	by mx.google.com with ESMTPS id n8sm34128825wix.10.2012.03.24.00.59.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 24 Mar 2012 00:59:34 -0700 (PDT)
+	Sat, 24 Mar 2012 00:59:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Mar 2012 08:59:29 +0100
-Message-Id: <caec63e12fc6f93d292da393985032c2d407d6f8.1332575856.git.Martin.Jansa@gmail.com>
+Date: Sat, 24 Mar 2012 08:59:30 +0100
+Message-Id: <3f310c7f5d6120ff6a1b744089b48b2ae982bfa7.1332575856.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
+In-Reply-To: <caec63e12fc6f93d292da393985032c2d407d6f8.1332575856.git.Martin.Jansa@gmail.com>
+References: <caec63e12fc6f93d292da393985032c2d407d6f8.1332575856.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1332575856.git.Martin.Jansa@gmail.com>
 References: <cover.1332575856.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 1/3] e-base: bump EFL_SRCREV
+Subject: [meta-efl][PATCH 2/3] emotion: fix upgrade path from libemotion0 to libemotion1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2012 08:08:32 -0000
-
-Newer efl alpha was released today, so I hope that next bump will be with released tarballs.
-
-This EFL_SRCREV is a bit older but worth upgrading as it finishes python-elementary changes
-for elementary-1.0 APIs and also includes .so changes for release (so switch to tarballs should
-be rather formality with bugfixes).
-
-All elementary based apps need PR bump.
+X-List-Received-Date: Sat, 24 Mar 2012 08:08:39 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/classes/e-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-efl/recipes-efl/efl/emotion_svn.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index 58636ec..32f0b28 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -1,6 +1,6 @@
- HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
+diff --git a/meta-efl/recipes-efl/efl/emotion_svn.bb b/meta-efl/recipes-efl/efl/emotion_svn.bb
+index 2588256..f9ae8f6 100644
+--- a/meta-efl/recipes-efl/efl/emotion_svn.bb
++++ b/meta-efl/recipes-efl/efl/emotion_svn.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
+ # we no longer build the libxine backend, since the gstreamer backend seems more promising
+ DEPENDS = "eet eeze evas ecore edje gstreamer gst-plugins-base"
+ PV = "0.2.0+svnr${SRCPV}"
+-PR = "r1"
++PR = "r2"
+ SRCREV = "${EFL_SRCREV}"
  
--EFL_SRCREV ?= "69323"
-+EFL_SRCREV ?= "69500"
- 
- ARM_INSTRUCTION_SET = "arm"
+ inherit efl
+@@ -16,3 +16,5 @@ EXTRA_OECONF = "--disable-xine --enable-gstreamer --with-edje-cc=${STAGING_BINDI
+ PACKAGES =+ "emotion-backend-gstreamer"
+ FILES_emotion-backend-gstreamer = "${libdir}/emotion/*.so"
+ RRECOMMENDS_${PN} = "emotion-backend-gstreamer"
++# upgrade path from libemotion0 to libemotion1
++RREPLACES_${PN} = "libemotion0"
 -- 
 1.7.8.5
 
