@@ -1,37 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SBM1k-0005Yi-Pt
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1SBOs6-0002EP-SN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Mar 2012 09:08:44 +0100
-Received: by mail-wg0-f43.google.com with SMTP id dr12so2353674wgb.24
+	Sat, 24 Mar 2012 12:10:58 +0100
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id AE915223263A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2012 00:59:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=zdYTdsW0aHM7V3aT/lrzCE9ORxVDOx8V1TwYueCRWLo=;
-	b=biCl8Gbsvr8UgsMbTN/K4ycQsnDJTw2T3tXBM4ypWTGHhwwRxvjZIstGf1Cj0ohj6n
-	rIWbsdWDO4vGUzXAJyil/O8JoutHr1SAdHHBmLEXIe765xaqjR0Z16ZnowtlnJJ30lOb
-	P+D4TO5HH0QR9bZpEvCATp+xRkkjmBZ8lRDhSIeo9C8ciJL3nbAIA/PKRG6RXorHci70
-	jXw2wLbAWT8Ld3h46V6flJXGqsNNDGZxif8utgmGwdAfaSBhuutjVWoo7Bc77ca4Vfi1
-	R4fIingQdenXEQ1JV+Hj52XYMpmL4J38vfi/QtKj9RM5RhslgOyfObOlRpQ5oFAj+z68
-	KRRQ==
-Received: by 10.180.95.1 with SMTP id dg1mr3262998wib.21.1332575990038;
-	Sat, 24 Mar 2012 00:59:50 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fl2sm34192392wib.4.2012.03.24.00.59.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 24 Mar 2012 00:59:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 24 Mar 2012 12:02:03 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 18B0D2232639
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Mar 2012 12:02:03 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225005117.adsl.alicedsl.de
+	[92.225.5.117]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Mar 2012 12:02:02 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id C6DF53C4C0; Sat, 24 Mar 2012 12:02:01 +0100 (CET)
+Date: Sat, 24 Mar 2012 12:02:01 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Mar 2012 08:59:31 +0100
-Message-Id: <f1ce43bfab41093ce9739759a29b62de49ac1597.1332575856.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <caec63e12fc6f93d292da393985032c2d407d6f8.1332575856.git.Martin.Jansa@gmail.com>
-References: <caec63e12fc6f93d292da393985032c2d407d6f8.1332575856.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1332575856.git.Martin.Jansa@gmail.com>
-References: <cover.1332575856.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 3/3] e-tasks: bump PR
+Message-ID: <20120324110201.GA19971@rhein.zuhause.netz>
+References: <1332537058-13783-1-git-send-email-heinold@inf.fu-berlin.de>
+	<jkjq2i$2v5$2@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <jkjq2i$2v5$2@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [PATCH] relocatable.bbclass: do not erease already existing ORIGIN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2012 08:08:44 -0000
+X-List-Received-Date: Sat, 24 Mar 2012 11:10:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/e-tasks_git.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+On Sat, Mar 24, 2012 at 07:37:07AM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Wrong list, oe-core maybe?
 
-diff --git a/meta-efl/recipes-efl/e17/e-tasks_git.bb b/meta-efl/recipes-efl/e17/e-tasks_git.bb
-index 5196f42..dea6f03 100644
---- a/meta-efl/recipes-efl/e17/e-tasks_git.bb
-+++ b/meta-efl/recipes-efl/e17/e-tasks_git.bb
-@@ -10,6 +10,7 @@ inherit autotools
- 
- SRCREV = "b640f0e7287877983645d9d9a36f85a0b6a54631"
- PV = "0.0.2+gitr${SRCPV}"
-+PR = "r1"
- 
- SRC_URI = "git://github.com/shr-project/e-tasks.git;protocol=git;branch=master \
- "
--- 
-1.7.8.5
+Yes,
 
+sorry was late when I send it yesterday.
+
+Bye Henning
 
 
