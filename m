@@ -1,38 +1,36 @@
-Received: from mail-qa0-f47.google.com ([209.85.216.47])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SCBuY-0001G1-SV
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SCCla-0002E4-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Mar 2012 17:32:47 +0200
-Received: by qatm19 with SMTP id m19so2508179qat.6
+	Mon, 26 Mar 2012 18:27:34 +0200
+Received: by wibhj13 with SMTP id hj13so4146690wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2012 08:23:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+SVn5DyeOig7LW4D6jCSbhH9cnmcWbbem2PMeg6lY98=;
-	b=C8YhoHuTf+gbuOxhLG2tCducv5r9SB0DGfnp0LL3PjEFmSVAnH26F4uRM4LP8fAeR4
-	+i01TSoqwvqI2ruFGC4EaAYVPCII9iIfZXOhWvkShrvE9CY9Szz2TF8XonCFJgCGBxJh
-	4c+IPXqhrUJoXcHlq0Vfse22GEHSSGRXbtnVZ3ulSz8gRCwJOwRIj34/EAj3N0BlmyCh
-	pRnf/ZXflGhko33A5SUmftKW9XoaZnsVwMgR9OlJAvmA+Ar3So9QN0rAGBtBhgHjIu8T
-	hdXVBQTpJroSnnjG2q5EO8LuDJmRUa8QibIosUb2ZOmFaNPjaW8NnVpW1FOMD5UiS1il
-	HI6Q==
-Received: by 10.60.25.73 with SMTP id a9mr28584763oeg.63.1332775426410;
-	Mon, 26 Mar 2012 08:23:46 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id h7sm12870596oeh.9.2012.03.26.08.23.44
+	Mon, 26 Mar 2012 09:18:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=QBXGgQwwyE2mG7aBvTMzhPi8iWpDuKlAFIxAPy72EMo=;
+	b=M6O65z0Hk9TodcnqZ+qi0FtcT0WHUDGV5C5V+x6L9dsb7u0Z+FDQ2NCUYSKAPn7Fiw
+	QCY/i2Og3YGp62e6qutv0Bl1S8/G0xnF09B4QG6l2Zi6xlhKW4KMUadi4nd0JrEo9Ojv
+	3qBfomgcW3zmycX024wD++BpFwT/Xo0uSR+3fA4+bzxXNstStEEYnZtfUGUVPF7CMz4Q
+	GBuFhYEA+kNwRcyYa6YPrmLV2JJHjPCsnGMSqPviua45mGXCkXM4ZPH5Z2axnnJNKMCe
+	fAYQs1NoUpRzB306MRvbiYg7On9vnO2cy0d5c8X4Wsxl/4L0bBkcN9uGlQCVpsYIEYgn
+	1cHQ==
+Received: by 10.216.134.24 with SMTP id r24mr12662333wei.84.1332778710899;
+	Mon, 26 Mar 2012 09:18:30 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id gg2sm68798034wib.7.2012.03.26.09.18.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Mar 2012 08:23:45 -0700 (PDT)
-Date: Mon, 26 Mar 2012 08:23:43 -0700
-From: Tom Rini <tom.rini@gmail.com>
+	Mon, 26 Mar 2012 09:18:30 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120326152343.GB21518@bill-the-cat>
-References: <1332537058-13783-1-git-send-email-heinold@inf.fu-berlin.de>
-	<20120323214210.GJ9551@bill-the-cat>
-	<20120324110546.GB19971@rhein.zuhause.netz>
+Date: Mon, 26 Mar 2012 18:18:30 +0200
+Message-Id: <1332778710-28970-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-In-Reply-To: <20120324110546.GB19971@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] relocatable.bbclass: do not erease already existing ORIGIN
+Subject: [meta-oe] evince: Fix QA warnings / clean packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2012 15:32:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 Mar 2012 16:27:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Mar 24, 2012 at 12:05:46PM +0100, Henning Heinold wrote:
-> On Fri, Mar 23, 2012 at 02:42:10PM -0700, Tom Rini wrote:
-> > On Fri, Mar 23, 2012 at 10:10:57PM +0100, Henning Heinold wrote:
-> > 
-> > > Hi,
-> > > 
-> > > while building openjdk I discovered that relocatable.bbclass strips
-> > > all PATHS with ORIGIN, that is problematic, when binaries like an jdk
-> > > is installed not in the standard paths /lib or /usr/lib.
-> > > 
-> > > This patch let all exisiting ORIGIN stay in the binary. So
-> > > far I only saw problems with some perl-native libs, where chrpath fails
-> > > now, because the path is to long. But it seems they work anyway.
-> > 
-> > Perhaps my memory is hazy, but this feels like an openjdk problem.  Why
-> > is openjdk putting things other than were our $ORIGIN mangle expects
-> > them to have been placed?
-> 
-> Hi Tom,
-> 
-> we install openjdk to /usr/lib/jvm/icedteaX-native  where it has bin jre lib under jre you have
-> lib/server/$ARCH/lib1 lib2 .. . Openjdk links from /usr/lib/jvm/icedteaX-native/bin to $ORIGIN/../jre/lib/$ARCH/lib1 .
-> So relocatable.bbclass strips this path from rpath.
+run tested on overo
 
-I need to kick off a build and poke some stuff since perl does something
-similar, or needed to be doing so.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-gnome/recipes-gnome/evince/evince_2.32.0.bb |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
+diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+index ec54fbc..f92a599 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
+ SECTION = "x11/office"
+ DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ inherit gnome pkgconfig gtk-icon-cache
+ 
+@@ -30,8 +30,10 @@ PACKAGES =+ "${PN}-nautilus-extension"
+ FILES_${PN} += "${datadir}/dbus-1"
+ FILES_${PN}-dbg += "${libdir}/*/*/.debug \
+                     ${libdir}/*/*/*/.debug"
+-FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
+-FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
++FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
++                    ${libdir}/evince/*/backends/*.la"
++FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
++                          ${libdir}/evince/*/backends/*.a"
+ FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+ 
+ pkg_postinst_${PN} () {
 -- 
-Tom
+1.7.6.5
+
 
 
