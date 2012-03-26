@@ -1,32 +1,36 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <slapinid@gmail.com>) id 1SC7M1-0008Nt-NN
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Mar 2012 12:40:50 +0200
-Received: by wera1 with SMTP id a1so4059352wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2012 03:31:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=W30W4dFcaH46vI/0qtVUJ7++dPFyJsd4FFZlSu7RrMU=;
-	b=u7ez5lj1qMfreSqRd+WnNCcZb7/R8qQ3w2O/qNMuoy5tmzXLZHcLbweTHJE0pO6f0k
-	5+zwppNsC24LiGeh/LP3pHgEiO2PIt6SJwpwyrpTdgG6TlqeibkxqyvF3M/OTncjKfMY
-	jh38KBG+Mta1/VIsZ1lBAIoKXF+T9TbdPyzAwuNJvLizcCJvFKeYpfXpZdDTdaFYvg/S
-	cqvPWDMAl4dtX+owXmkD7ltQTU4Mnxwx08Pdjm/+r77H4hyd2qJ8btzd2FHG9nmF5uGX
-	DOs0hwD6fRLI7fUwSUUXi5eraAWjC/TqHF/VcRHoFb42GN5qrZ5XFvmQDZLFR1AJ+N4M
-	lmmQ==
+	(envelope-from <andrei@gherzan.ro>) id 1SC7V9-0000Ak-6r
+	for Openembedded-devel@lists.openembedded.org;
+	Mon, 26 Mar 2012 12:50:15 +0200
+Received: by iaag37 with SMTP id g37so8728364iaa.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Mar 2012 03:41:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=IvTPeuKyip5/gHrJzoe+vqlT4+JKHpiGM1SgMYLnU0k=;
+	b=M08RLnzLE+4guz0cW60abeq99lJSuPWjaz40DN9jzjhdj1XPNt0wIB6ZrL7NYvBesR
+	yrUy9Ey3crVLeg3cjyb+rR+n25K9avxBEHUuKUaO6F4F6AeC2lCoYqZ1p0GdFPws1x7g
+	MhuRsSNjl7F8ZbNurHds10xqZBSkPTjIe64Xalb+m07wlMsjqgYZcs0RdHRj/jVCsKyu
+	yavtq2qpNNGFEQLg+5RwqdN5hO0KO2klyhMArC99IL5Lus3/2gjj1GgZvYGzY39VfJZr
+	Kv4V0QCq9iaNFtMTXk1Hic/rFY/zkM8kNpUX5dw/nB0SDt97ISMbBTA+9FjSO+xPXTEp
+	N44Q==
+Received: by 10.50.181.132 with SMTP id dw4mr5044284igc.62.1332758474958;
+	Mon, 26 Mar 2012 03:41:14 -0700 (PDT)
+Received: from [128.224.170.210] ([89.121.200.106])
+	by mx.google.com with ESMTPS id df1sm9950763igb.12.2012.03.26.03.41.13
+	(version=SSLv3 cipher=OTHER); Mon, 26 Mar 2012 03:41:14 -0700 (PDT)
+Message-ID: <4F7047C8.10403@gherzan.ro>
+Date: Mon, 26 Mar 2012 13:41:12 +0300
+From: Andrei Gherzan <andrei@gherzan.ro>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
 MIME-Version: 1.0
-Received: by 10.216.137.149 with SMTP id y21mr12357236wei.110.1332757910137;
-	Mon, 26 Mar 2012 03:31:50 -0700 (PDT)
-Received: by 10.216.29.196 with HTTP; Mon, 26 Mar 2012 03:31:50 -0700 (PDT)
-In-Reply-To: <4F703D96.6020102@nedap.com>
-References: <4F6B28B0.6010801@nedap.com>
-	<4F703D96.6020102@nedap.com>
-Date: Mon, 26 Mar 2012 14:31:50 +0400
-Message-ID: <CAFZPMoYNvc4XFdSy9_xH-CYb8R1MOR8-7XsWU0medQFBnWTs8g@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: foreign repository
+To: Openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnt903bMXP9eVJ8yYSpaBTEChYqpx8qhRM0xauV2Qmqs3PWdNfRjkNvatTSj/0w200iCnd7
+Subject: Build from precompiled rpms?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,16 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2012 10:40:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Mar 2012 10:50:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 26, 2012 at 1:57 PM, Jaap de Jong <jaap.dejong@nedap.com> wrote:
-> Anyone?
-> Any idea?
-You can read OE wiki regarding overlays/layers.
-Also, you can use Koen's Angstrom scripts for no-brains configuration process.
-Also, bitbake manual and OE existing layers are your friends.
+Hello everybody!
 
-S.
+I want to speed up my build process by using rpm's from older builds.
+
+For example, i want to have a build with a new layer meta-yyy. On a new 
+build i want to build only packages from this layer and all the other 
+layers built from rpm's already generated on a previously finished build.
+
+
+@g
 
 
