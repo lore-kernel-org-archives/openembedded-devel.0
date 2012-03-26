@@ -1,36 +1,27 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1SC7V9-0000Ak-6r
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 26 Mar 2012 12:50:15 +0200
-Received: by iaag37 with SMTP id g37so8728364iaa.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2012 03:41:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=IvTPeuKyip5/gHrJzoe+vqlT4+JKHpiGM1SgMYLnU0k=;
-	b=M08RLnzLE+4guz0cW60abeq99lJSuPWjaz40DN9jzjhdj1XPNt0wIB6ZrL7NYvBesR
-	yrUy9Ey3crVLeg3cjyb+rR+n25K9avxBEHUuKUaO6F4F6AeC2lCoYqZ1p0GdFPws1x7g
-	MhuRsSNjl7F8ZbNurHds10xqZBSkPTjIe64Xalb+m07wlMsjqgYZcs0RdHRj/jVCsKyu
-	yavtq2qpNNGFEQLg+5RwqdN5hO0KO2klyhMArC99IL5Lus3/2gjj1GgZvYGzY39VfJZr
-	Kv4V0QCq9iaNFtMTXk1Hic/rFY/zkM8kNpUX5dw/nB0SDt97ISMbBTA+9FjSO+xPXTEp
-	N44Q==
-Received: by 10.50.181.132 with SMTP id dw4mr5044284igc.62.1332758474958;
-	Mon, 26 Mar 2012 03:41:14 -0700 (PDT)
-Received: from [128.224.170.210] ([89.121.200.106])
-	by mx.google.com with ESMTPS id df1sm9950763igb.12.2012.03.26.03.41.13
-	(version=SSLv3 cipher=OTHER); Mon, 26 Mar 2012 03:41:14 -0700 (PDT)
-Message-ID: <4F7047C8.10403@gherzan.ro>
-Date: Mon, 26 Mar 2012 13:41:12 +0300
-From: Andrei Gherzan <andrei@gherzan.ro>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+	(envelope-from <jaap.dejong@nedap.com>) id 1SC8on-0002az-0l
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Mar 2012 14:14:37 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Mon, 26 Mar 2012
+	14:05:36 +0200
+X-TM-IMSS-Message-ID: <51d7da3200158051@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 51d7da3200158051 ;
+	Mon, 26 Mar 2012 14:05:42 +0200
+Message-ID: <4F705B90.2000408@nedap.com>
+Date: Mon, 26 Mar 2012 14:05:36 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.27) Gecko/20120216 Lightning/1.0b2 Thunderbird/3.1.19
 MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnt903bMXP9eVJ8yYSpaBTEChYqpx8qhRM0xauV2Qmqs3PWdNfRjkNvatTSj/0w200iCnd7
-Subject: Build from precompiled rpms?
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4F6B28B0.6010801@nedap.com>	<4F703D96.6020102@nedap.com>
+	<CAFZPMoYNvc4XFdSy9_xH-CYb8R1MOR8-7XsWU0medQFBnWTs8g@mail.gmail.com>
+In-Reply-To: <CAFZPMoYNvc4XFdSy9_xH-CYb8R1MOR8-7XsWU0medQFBnWTs8g@mail.gmail.com>
+Subject: Re: foreign repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,19 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2012 10:50:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 26 Mar 2012 12:14:37 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello everybody!
+Thanks!
 
-I want to speed up my build process by using rpm's from older builds.
+It was never my intention to create new recipes for all the packages 
+that are in this foreign repository.
+I would have to update every 2 weeks or so to keep in sync with that 
+repository.
+Don't want that!
 
-For example, i want to have a build with a new layer meta-yyy. On a new 
-build i want to build only packages from this layer and all the other 
-layers built from rpm's already generated on a previously finished build.
+I only want to install the package that is in that repository and its 
+dependencies.
+
+This is what I did.
+Added the foreign repository in: angstrom-feed-configs.bbappend
+So with 'opkg update' it is read.
+Created an empty 'placeholder' recipe for the package to include.
+When I bitbake my image this empty package is included in the rootfs.
+Now i only have to 'opkg update/upgrade' to get the actual packages in.
+This is by far the easiest solution (I think...)
+
+Thanks again!
+Jaap
 
 
-@g
+On 03/26/2012 12:31 PM, Sergey Lapin wrote:
+> On Mon, Mar 26, 2012 at 1:57 PM, Jaap de Jong<jaap.dejong@nedap.com>  wrote:
+>> Anyone?
+>> Any idea?
+> You can read OE wiki regarding overlays/layers.
+> Also, you can use Koen's Angstrom scripts for no-brains configuration process.
+> Also, bitbake manual and OE existing layers are your friends.
+>
+> S.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
