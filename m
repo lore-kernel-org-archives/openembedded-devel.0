@@ -1,41 +1,38 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-qa0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1SCBtG-0001As-04
+	(envelope-from <tom.rini@gmail.com>) id 1SCBuY-0001G1-SV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Mar 2012 17:31:26 +0200
-Received: by bkcjg15 with SMTP id jg15so4517784bkc.6
+	Mon, 26 Mar 2012 17:32:47 +0200
+Received: by qatm19 with SMTP id m19so2508179qat.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2012 08:22:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=pJnlD0h12mLNrLYG/ohiwiSbqtBvuP0U/Cp4ltnD6R4=;
-	b=I52Z9cy7V1K8dR4odqRhhAjK0GuBzGNA6qc+oKDoKTwNVCHUBaCpZqYrwNGit9VCeT
-	Qp1Y/CDVqs24a6wdnADd2ockoupsHBgPCwvE8Fa4t41Q6U31ZixRoYDaMcg6hU0+ErTq
-	6ZnOOE267JMXb8vDzmTMmEbsp9BZMx6kGC9T+M1SZqHvGxkmzGVRpGIW43fvqvRTEtxg
-	/by7Ln+z34KooRc9MEh+lGR4ud2mC1SXjkDza95lVO8zjgRiICblc+eek8QmHySoS5f/
-	Y3OBbKGhNTVWqp0swuRsVpChKHTdjaI/TV5w7VPOgzFn2p54CO5yGRtYA23bemqwgt3n
-	c0VQ==
-Received: by 10.204.130.13 with SMTP id q13mr8280726bks.128.1332775346118;
-	Mon, 26 Mar 2012 08:22:26 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id je3sm33189542bkb.15.2012.03.26.08.22.24
-	(version=SSLv3 cipher=OTHER); Mon, 26 Mar 2012 08:22:25 -0700 (PDT)
-Message-ID: <4F7089B0.6040302@dresearch-fe.de>
-Date: Mon, 26 Mar 2012 17:22:24 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0) Gecko/20120129 Thunderbird/10.0
+	Mon, 26 Mar 2012 08:23:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=+SVn5DyeOig7LW4D6jCSbhH9cnmcWbbem2PMeg6lY98=;
+	b=C8YhoHuTf+gbuOxhLG2tCducv5r9SB0DGfnp0LL3PjEFmSVAnH26F4uRM4LP8fAeR4
+	+i01TSoqwvqI2ruFGC4EaAYVPCII9iIfZXOhWvkShrvE9CY9Szz2TF8XonCFJgCGBxJh
+	4c+IPXqhrUJoXcHlq0Vfse22GEHSSGRXbtnVZ3ulSz8gRCwJOwRIj34/EAj3N0BlmyCh
+	pRnf/ZXflGhko33A5SUmftKW9XoaZnsVwMgR9OlJAvmA+Ar3So9QN0rAGBtBhgHjIu8T
+	hdXVBQTpJroSnnjG2q5EO8LuDJmRUa8QibIosUb2ZOmFaNPjaW8NnVpW1FOMD5UiS1il
+	HI6Q==
+Received: by 10.60.25.73 with SMTP id a9mr28584763oeg.63.1332775426410;
+	Mon, 26 Mar 2012 08:23:46 -0700 (PDT)
+Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id h7sm12870596oeh.9.2012.03.26.08.23.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 26 Mar 2012 08:23:45 -0700 (PDT)
+Date: Mon, 26 Mar 2012 08:23:43 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120326152343.GB21518@bill-the-cat>
+References: <1332537058-13783-1-git-send-email-heinold@inf.fu-berlin.de>
+	<20120323214210.GJ9551@bill-the-cat>
+	<20120324110546.GB19971@rhein.zuhause.netz>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <4F697AC1.5060709@dresearch-fe.de>
-In-Reply-To: <4F697AC1.5060709@dresearch-fe.de>
-X-Enigmail-Version: 1.4
-X-Gm-Message-State: ALoCoQnYfWu9ES98wfdQpVmA9oZMxNZrmyfkVzdT/8+oJZ6DTESrTFiVAzehZM5SnMcNqFLbTqQL
-Subject: Re: [admin] please delete obsolete branches
+In-Reply-To: <20120324110546.GB19971@rhein.zuhause.netz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] relocatable.bbclass: do not erease already existing ORIGIN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2012 15:31:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 26 Mar 2012 15:32:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 21.03.2012 07:52, Steffen Sledz wrote:
-> Hi git admins,
+On Sat, Mar 24, 2012 at 12:05:46PM +0100, Henning Heinold wrote:
+> On Fri, Mar 23, 2012 at 02:42:10PM -0700, Tom Rini wrote:
+> > On Fri, Mar 23, 2012 at 10:10:57PM +0100, Henning Heinold wrote:
+> > 
+> > > Hi,
+> > > 
+> > > while building openjdk I discovered that relocatable.bbclass strips
+> > > all PATHS with ORIGIN, that is problematic, when binaries like an jdk
+> > > is installed not in the standard paths /lib or /usr/lib.
+> > > 
+> > > This patch let all exisiting ORIGIN stay in the binary. So
+> > > far I only saw problems with some perl-native libs, where chrpath fails
+> > > now, because the path is to long. But it seems they work anyway.
+> > 
+> > Perhaps my memory is hazy, but this feels like an openjdk problem.  Why
+> > is openjdk putting things other than were our $ORIGIN mangle expects
+> > them to have been placed?
 > 
-> can someone please delete the following obsolete branches in oe-classic.
+> Hi Tom,
 > 
->   sledz/maintenance
->   sledz/pull
->   sledz/pull2
+> we install openjdk to /usr/lib/jvm/icedteaX-native  where it has bin jre lib under jre you have
+> lib/server/$ARCH/lib1 lib2 .. . Openjdk links from /usr/lib/jvm/icedteaX-native/bin to $ORIGIN/../jre/lib/$ARCH/lib1 .
+> So relocatable.bbclass strips this path from rpath.
 
-Ping!
+I need to kick off a build and poke some stuff since perl does something
+similar, or needed to be doing so.
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Tom
 
 
