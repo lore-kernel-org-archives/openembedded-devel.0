@@ -1,35 +1,36 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1SCW8S-0006Wv-L5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SCWCB-0006fN-1u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2012 15:08:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 0D90D315A8D6;
-	Tue, 27 Mar 2012 14:59:30 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id d3SA5fX+wl+z; Tue, 27 Mar 2012 14:59:18 +0200 (CEST)
-Received: from [172.22.22.61] (drms-4d014418.pool.mediaWays.net [77.1.68.24])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 96DB2315A8DD;
-	Tue, 27 Mar 2012 14:59:18 +0200 (CEST)
-Message-ID: <4F71B9A5.3080405@opendreambox.org>
-Date: Tue, 27 Mar 2012 14:59:17 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120310 Thunderbird/11.0
+	Tue, 27 Mar 2012 15:12:19 +0200
+Received: by wera1 with SMTP id a1so4882504wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Mar 2012 06:03:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=oZ0U33pT2Hgz77YtQ8gK//O4174mxPVx9rIgD5XtK0I=;
+	b=xj7+vLWcYnLWITLGAwuiO2q4HcpKv1ieMph4Z24QiG+gRjfK7asM3nw4RBBZ3zV9PZ
+	xjQsBVjIktZCack0CGDU3GssKYi4k8mxcBrwdo7R/L+ZvrzgOFTg+JRsnlqiQxv9gGxF
+	A0AvyhtUqjabWQPu/jx4X743uIhiHgrYWD6++iRQ+gSooAhi7FTqufW2GUz/njHslqXz
+	YQWw1GUiOrUOLa9WzSni/NOxT9s5Z77+XENeqvCj0C8hfUwmAFRmhFuuykStDG3qLl6i
+	ubNlvXlSyQZ1rb7KW5I4RDqYd4+xE7ilr8L2Z9I84zK6EF6b7JxPM5idBO/V4okAUsNL
+	n5PA==
+Received: by 10.216.136.13 with SMTP id v13mr14553348wei.32.1332853398145;
+	Tue, 27 Mar 2012 06:03:18 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id 6sm12618089wiz.1.2012.03.27.06.03.16
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 27 Mar 2012 06:03:17 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Mar 2012 15:03:15 +0200
+Message-Id: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-To: Steffen Sledz <sledz@dresearch-fe.de>
-References: <8c581985c4eb9edd0843595fb0b735f70a899c48.1332849864.git.sledz@dresearch-fe.de>
-	<71df8a759f91e821a2daee22f34eaa3a31708775.1332849864.git.sledz@dresearch-fe.de>
-	<4F71B620.7020304@opendreambox.org>
-	<4F71B7BF.6010707@dresearch-fe.de>
-In-Reply-To: <4F71B7BF.6010707@dresearch-fe.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 3/3] python-2.6.6: Fix python-2.6.6 build failure on linux-3.x
+Subject: [PATCH 1/4] libcgroup: fix QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2012 13:08:28 -0000
+X-List-Received-Date: Tue, 27 Mar 2012 13:12:19 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 27.03.2012 14:51, Steffen Sledz wrote:
-> On 27.03.2012 14:44, Andreas Oberritter wrote:
->> On 27.03.2012 14:07, Steffen Sledz wrote:
->>> From: Ulf Samuelsson <ulf_samuelsson@telia.com>
->>>
->>> python-2.6.6 build will crash when host is running linux kernel 3.x.
->>>
->>> Fix backported from openembedded-core.
->>> meta/recipes-devtools/python/python/07-linux3-regen-fix.patch
->>
->> This patch has been superseded by a backport from upstream python,
->> causing linux2 to be used for all kernel versions. See commit
->> accb2b728ab10cae20be59253a56ac6410b8de10 in oe-core.
-> 
-> Is this patch available in oe-classic master?
+fix the following warnings:
+WARNING: For recipe libcgroup, the following files/directories were installed but not shipped in any package:
+WARNING:   /lib/security/pam_cgroup.la
+WARNING:   /lib/security/.debug
+WARNING:   /lib/security/.debug/pam_cgroup.so.0.0.0
+WARNING:   /lib/security/.debug/pam_cgroup.so
+WARNING:   /lib/security/.debug/pam_cgroup.so.0
 
-I don't know.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-> I'm just trying to keep the 2011.03-maintenance branch usable with a minimum of work. And the one from the pull request is good enough for me at the moment.
+diff --git a/meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb b/meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb
+index 91829fa..68eef2a 100644
+--- a/meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb
++++ b/meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb
+@@ -3,6 +3,8 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
++PR = "r1"
++
+ inherit autotools pkgconfig
+ 
+ DEPENDS = "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+@@ -18,6 +20,8 @@ PARALLEL_MAKE = ""
+ 
+ PACKAGES =+ "cgroups-pam-plugin"
+ FILES_cgroups-pam-plugin = "${base_libdir}/security/pam_cgroup.so*"
++FILES_${PN}-dbg += "${base_libdir}/security/.debug"
++FILES_${PN}-staticdev = "${base_libdir}/security/*.la"
+ 
+ # We really need the symlink so :(
+ ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
+-- 
+1.7.6.5
 
-I don't want to block your pull request. I was just trying to make you
-aware of problems that have already been fixed in oe-core. Building
-python on 32-bit vs. 64-bit build systems and on 2.x vs. 3.x kernels
-(running on the build system) produces different results, even with this
-patch applied. Some of these problems have already been fixed in
-oe-core, some are still pending (patches were sent to the oe-core
-mailing list).
-
-Regards,
-Andreas
 
 
