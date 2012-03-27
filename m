@@ -1,38 +1,46 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SCWCH-0006gt-Qa
+	(envelope-from <sledz@dresearch-fe.de>) id 1SCWFc-00070E-26
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2012 15:12:25 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr12so4394229wgb.24
+	Tue, 27 Mar 2012 15:15:52 +0200
+Received: by bkcjg15 with SMTP id jg15so5343805bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 06:03:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=cO4cMSDUCOVAJp48Zwqufjt3uIz7SrKkI4ToYhMzdaA=;
-	b=t5DFm7ASCInaz3tGSfs90isNlJsAMaBtX7dDSvfrQGhTz1AuKK4d0xjggnjjtwkc8g
-	y1baAvSP4Cl3h+hU04Zy88SWnFggDU9SbmmE+edeaZcSD4bwqGxqd52hDGgvlgLJ07wg
-	2A6kSLqDea4LAW+w2jkeMTlhifZLRGfyc37n4ppgPL4opM6fe/JIMK6JEE4J/pokxuVT
-	unr1zbUPoVCCxudqiOVH3YcEh7eBGWm1IlXFvMh4Joq/GtVGIIsVO8guwz5mTKUN9Umb
-	3fLsgwiPwQy7vLK66ruDZV4y+qaKf3ps/ANGjnbg5qr6EkyYNR56yTxalhp4WpxaYY5G
-	QEkA==
-Received: by 10.180.102.3 with SMTP id fk3mr27605202wib.9.1332853407248;
-	Tue, 27 Mar 2012 06:03:27 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id 6sm12618089wiz.1.2012.03.27.06.03.24
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Mar 2012 06:03:25 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 15:03:18 +0200
-Message-Id: <1332853398-9501-4-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
+	Tue, 27 Mar 2012 06:06:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=uLj4+LTdawDsR/u5Zonp/Rx4bWOdHbcdxy07B2IYE2Y=;
+	b=HuFQTVRunH/G4Drd+6USZ5sCYndukQQtnasrq2bT/i3Hul53IQaWcmZU5xysReVHBt
+	DDGuj9RRpxbQ+WeimgyhkkX5OnTTh4YOIjy5oWdG9PptxCqJRJ7i8k+sDrCSsKtF+6g4
+	ktadusAViB5dw4g37ItX8y0EfzATZgGgQftHhgP+Zp9v1XzHST+Gk3JOhxOwtnzBdC7e
+	C8kFsyWt7A9SaSVyhiTyIUoNfHR0PN0WiG6jQafZm1dymmre0tfpFdjkQAZ/zjxg448Z
+	LV9D2ZkD0eBwVQri45JxQKAvrVHEi3q92zuv3pmTaDWQYIrHfxHUY61TUYIQxBZIEhaF
+	OWYw==
+Received: by 10.204.143.151 with SMTP id v23mr10308076bku.63.1332853611121;
+	Tue, 27 Mar 2012 06:06:51 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de
+	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id f6sm39033966bkg.10.2012.03.27.06.06.50
+	(version=SSLv3 cipher=OTHER); Tue, 27 Mar 2012 06:06:50 -0700 (PDT)
+Message-ID: <4F71BB69.5010202@dresearch-fe.de>
+Date: Tue, 27 Mar 2012 15:06:49 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-Subject: [PATCH 4/4] obexd: fix QA warnings
+To: Tom Rini <tom.rini@gmail.com>
+References: <8c581985c4eb9edd0843595fb0b735f70a899c48.1332849864.git.sledz@dresearch-fe.de>
+	<71df8a759f91e821a2daee22f34eaa3a31708775.1332849864.git.sledz@dresearch-fe.de>
+	<4F71B620.7020304@opendreambox.org>
+	<4F71B7BF.6010707@dresearch-fe.de>
+	<4F71B9A5.3080405@opendreambox.org>
+In-Reply-To: <4F71B9A5.3080405@opendreambox.org>
+X-Enigmail-Version: 1.4
+X-Gm-Message-State: ALoCoQmDQlzeXW4Eb8zpEeFna79+GeWYgND3z1PLkmmmFq0Huwe2Baun8DHPsoLPhs6NRU6Ilanq
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 3/3] python-2.6.6: Fix python-2.6.6 build failure on linux-3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2012 13:12:25 -0000
+X-List-Received-Date: Tue, 27 Mar 2012 13:15:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-fix the following warnings:
-WARNING: For recipe obexd, the following files/directories were installed but not shipped in any package:
-WARNING:   /usr/lib
-WARNING:   /usr/lib/obex
-WARNING:   /usr/lib/obex/plugins
+On 27.03.2012 14:59, Andreas Oberritter wrote:
+> On 27.03.2012 14:51, Steffen Sledz wrote:
+>> On 27.03.2012 14:44, Andreas Oberritter wrote:
+>>> On 27.03.2012 14:07, Steffen Sledz wrote:
+>>>> From: Ulf Samuelsson <ulf_samuelsson@telia.com>
+>>>>
+>>>> python-2.6.6 build will crash when host is running linux kernel 3.x.
+>>>>
+>>>> Fix backported from openembedded-core.
+>>>> meta/recipes-devtools/python/python/07-linux3-regen-fix.patch
+>>>
+>>> This patch has been superseded by a backport from upstream python,
+>>> causing linux2 to be used for all kernel versions. See commit
+>>> accb2b728ab10cae20be59253a56ac6410b8de10 in oe-core.
+>>
+>> Is this patch available in oe-classic master?
+> 
+> I don't know.
+> 
+>> I'm just trying to keep the 2011.03-maintenance branch usable with a minimum of work. And the one from the pull request is good enough for me at the moment.
+> 
+> I don't want to block your pull request. I was just trying to make you
+> aware of problems that have already been fixed in oe-core. Building
+> python on 32-bit vs. 64-bit build systems and on 2.x vs. 3.x kernels
+> (running on the build system) produces different results, even with this
+> patch applied. Some of these problems have already been fixed in
+> oe-core, some are still pending (patches were sent to the oe-core
+> mailing list).
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-connectivity/obex/obexd_0.44.bb |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+Tom, would be nice, if you accept my pull request for the moment.
 
-diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-index 24edb9d..c53bfdc 100644
---- a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-+++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-@@ -4,12 +4,19 @@ DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
- 
-+PR = "r1"
-+
- SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
- SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
- SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
- 
- inherit autotools
- 
-+do_install_append() {
-+    # remove empty plugins dir
-+    rm -rf ${D}${libdir}
-+}
-+
- PACKAGES =+ "obex-client"
- 
- FILES_${PN} += "${datadir}/dbus-1/services/${PN}.service"
+*If* i have some time later i can try to have a look at oe-core stuff. Or may be someone else.
+
+Thx,
+Steffen
+
 -- 
-1.7.6.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
