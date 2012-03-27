@@ -1,36 +1,39 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SCCla-0002E4-Iv
+	(envelope-from <otavio.salvador@gmail.com>) id 1SCMAT-00036r-Fm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Mar 2012 18:27:34 +0200
-Received: by wibhj13 with SMTP id hj13so4146690wib.6
+	Tue, 27 Mar 2012 04:29:53 +0200
+Received: by vcbfl13 with SMTP id fl13so5622525vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2012 09:18:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	Mon, 26 Mar 2012 19:20:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=QBXGgQwwyE2mG7aBvTMzhPi8iWpDuKlAFIxAPy72EMo=;
-	b=M6O65z0Hk9TodcnqZ+qi0FtcT0WHUDGV5C5V+x6L9dsb7u0Z+FDQ2NCUYSKAPn7Fiw
-	QCY/i2Og3YGp62e6qutv0Bl1S8/G0xnF09B4QG6l2Zi6xlhKW4KMUadi4nd0JrEo9Ojv
-	3qBfomgcW3zmycX024wD++BpFwT/Xo0uSR+3fA4+bzxXNstStEEYnZtfUGUVPF7CMz4Q
-	GBuFhYEA+kNwRcyYa6YPrmLV2JJHjPCsnGMSqPviua45mGXCkXM4ZPH5Z2axnnJNKMCe
-	fAYQs1NoUpRzB306MRvbiYg7On9vnO2cy0d5c8X4Wsxl/4L0bBkcN9uGlQCVpsYIEYgn
-	1cHQ==
-Received: by 10.216.134.24 with SMTP id r24mr12662333wei.84.1332778710899;
-	Mon, 26 Mar 2012 09:18:30 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id gg2sm68798034wib.7.2012.03.26.09.18.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Mar 2012 09:18:30 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Mar 2012 18:18:30 +0200
-Message-Id: <1332778710-28970-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	bh=pTd2peStPXpWTug67wiszwhG/ExIFwKu05G2gFtPo04=;
+	b=X7POljBBdJhottwl6Tnh+tcKdSiuE8Qfmg444DhHj+BGgezX1iIG5nB4BO9VCBYnC/
+	yQegft4Pp52aliSkwoBvwSEabtXmE4RgBAImiAFepGdWmdYJyO7mqHmfl2TJxPYN9QEf
+	E7TLgUDjEZnVKL2OMKGYvoqEpIiGB1iB689zRqMMND4u1uMhaWQW8wxQJqBteDL8Rdka
+	0tMy9P0OLGGN8vinQLpNkz/yMiwAncKYjA4wjHpAhz07RGLk2WliM6e12p1tJS8EUCqW
+	0Ix4boGqaHSP9EI/Q6bKia2GDDq/Jt4qZWp/8OhnFVG3lSB4EmAIwseU3umpIRBhPtG5
+	FjxQ==
 MIME-Version: 1.0
-Subject: [meta-oe] evince: Fix QA warnings / clean packaging
+Received: by 10.220.58.197 with SMTP id i5mr4714962vch.38.1332814852501; Mon,
+	26 Mar 2012 19:20:52 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.7.208 with HTTP; Mon, 26 Mar 2012 19:20:52 -0700 (PDT)
+In-Reply-To: <CALbNGRSB1YTihC36UL1d3M92gz+GyOjXY=D3nHZxfvFVD37nfw@mail.gmail.com>
+References: <1332263919-19283-1-git-send-email-koen@dominion.thruhere.net>
+	<1332263919-19283-3-git-send-email-koen@dominion.thruhere.net>
+	<CALbNGRQpfgBgu-nSax+5r9ucXLKsQYZr+QJOGx2JLjZR3zTUpg@mail.gmail.com>
+	<CALbNGRRq6C-mO_LG6YRpu_8VPHKv2gZrYsEkgVRM04TjO=+Egw@mail.gmail.com>
+	<CALbNGRSB1YTihC36UL1d3M92gz+GyOjXY=D3nHZxfvFVD37nfw@mail.gmail.com>
+Date: Mon, 26 Mar 2012 23:20:52 -0300
+X-Google-Sender-Auth: GjX_1rttW1DBhvrHz9W1hHq5S5o
+Message-ID: <CAP9ODKrnm4QuLpSgg_19iVFB7sPTtq2QG_jd63+omDRZD6fPPg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe 3/4] udev: remove 173
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,45 +47,199 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2012 16:27:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Mar 2012 02:29:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-run tested on overo
+NACK! 175+ breaks libertas ... or has it been fixed?
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-gnome/recipes-gnome/evince/evince_2.32.0.bb |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+On Sun, Mar 25, 2012 at 07:20, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Sun, Mar 25, 2012 at 12:16 PM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+>> On Sun, Mar 25, 2012 at 12:15 PM, Andreas M=FCller
+>> <schnitzeltony@googlemail.com> wrote:
+>>> On Tue, Mar 20, 2012 at 6:18 PM, Koen Kooi <koen@dominion.thruhere.net>=
+ wrote:
+>>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>>> ---
+>>>> =A0meta-oe/recipes-core/udev/udev_173.bb | =A0116 --------------------=
+-------------
+>>>> =A01 files changed, 0 insertions(+), 116 deletions(-)
+>>>> =A0delete mode 100644 meta-oe/recipes-core/udev/udev_173.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-c=
+ore/udev/udev_173.bb
+>>>> deleted file mode 100644
+>>>> index b7d7ed3..0000000
+>>>> --- a/meta-oe/recipes-core/udev/udev_173.bb
+>>>> +++ /dev/null
+>>>> @@ -1,116 +0,0 @@
+>>>> -DESCRIPTION =3D "udev is a daemon which dynamically creates and remov=
+es device nodes from \
+>>>> -/dev/, handles hotplug events and loads drivers at boot time. It repl=
+aces \
+>>>> -the hotplug package and requires a kernel not older than 2.6.27."
+>>>> -
+>>>> -# udev 169 and up require kernel 2.6.36 for ARM:
+>>>> -# http://git.kernel.org/?p=3Dlinux/hotplug/udev.git;a=3Dcommit;h=3D67=
+a77c8bf299f6264f001677becd056316ebce2f
+>>>> -
+>>>> -LICENSE =3D "GPLv2+ & LGPLv2.1+"
+>>>> -LICENSE_${PN} =3D "GPLv2+"
+>>>> -LICENSE_libudev =3D "LGPLv2.1+"
+>>>> -LICENSE_libgudev =3D "LGPLv2.1+"
+>>>> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa=
+882bbe \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0file://libudev/COPYING;md5=3D=
+a6f89e2100d9b6cdffcea4f398e37343 \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0file://extras/gudev/COPYING;m=
+d5=3Da6f89e2100d9b6cdffcea4f398e37343"
+>>>> -
+>>>> -# Needed for udev-extras
+>>>> -DEPENDS =3D "gperf-native usbutils acl glib-2.0"
+>>>> -
+>>>> -PR =3D "r4"
+>>>> -
+>>>> -# version specific SRC_URI
+>>>> -SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV=
+}.tar.gz \
+>>>> - =A0 =A0 =A0 =A0 =A0 file://0001-rip-put-doc-generation-it-depends-on=
+-a-working-docto.patch \
+>>>> - =A0 =A0 =A0 =A0 =A0 file://gtk-doc.make"
+>>>> -
+>>>> -# generic SRC_URI
+>>>> -SRC_URI +=3D " \
+>>>> - =A0 =A0 =A0 file://touchscreen.rules \
+>>>> - =A0 =A0 =A0 file://modprobe.rules \
+>>>> - =A0 =A0 =A0 file://default \
+>>>> - =A0 =A0 =A0 file://init \
+>>>> - =A0 =A0 =A0 file://cache \
+>>>> -"
+>>>> -
+>>>> -SRC_URI[md5sum] =3D "2afd20ee1c790eac6d7abe0498ebb414"
+>>>> -SRC_URI[sha256sum] =3D "0f753ad9c3022a074d1c052bcee9139581db825283771=
+ac78c0be0d1de109d0c"
+>>>> -
+>>>> -# Machine specific udev rules should be in their own recipe that ${PN=
+} can add to RRECOMMENDS
+>>>> -
+>>>> -inherit update-rc.d autotools
+>>>> -
+>>>> -EXTRA_OECONF +=3D " \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-introspection \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-pci-ids-path=3D/usr/share/=
+misc \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ac_cv_file__usr_share_pci_ids=3Dn=
+o \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ac_cv_file__usr_share_hwdata_pci_=
+ids=3Dno \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ac_cv_file__usr_share_misc_pci_id=
+s=3Dyes \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--sbindir=3D${base_sbindir} \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--libexecdir=3D${base_libdir}/ude=
+v \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-rootlibdir=3D${base_libdir=
+} \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-gtk-doc-html \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-systemdsystemunitdir=3D${b=
+ase_libdir}/systemd/system/ \
+>>>> -"
+>>>> -
+>>>> -do_configure_prepend() {
+>>>> - =A0 =A0 =A0 cp ${WORKDIR}/gtk-doc.make ${S}
+>>>> -}
+>>>> -
+>>>> -INITSCRIPT_NAME =3D "udev"
+>>>> -INITSCRIPT_PARAMS =3D "start 04 S ."
+>>>> -
+>>>> -PACKAGES =3D+ "${PN}-systemd libudev libgudev udev-utils udev-console=
+kit"
+>>>> -
+>>>> -FILES_${PN}-systemd =3D "${base_libdir}/systemd"
+>>>> -RDEPENDS_${PN}-systemd +=3D "udev"
+>>>> -
+>>>> -FILES_libudev =3D "${base_libdir}/libudev.so.*"
+>>>> -FILES_libgudev =3D "${base_libdir}/libgudev*.so.*"
+>>>> -
+>>>> -FILES_udev-utils =3D "${bindir}/udevinfo ${bindir}/udevtest ${base_sb=
+indir}/udevadm"
+>>>> -
+>>>> -RPROVIDES_${PN} =3D "hotplug"
+>>>> -FILES_${PN} +=3D "${usrbindir}/* ${usrsbindir}/udevd"
+>>>> -FILES_${PN}-dbg +=3D "${usrbindir}/.debug ${usrsbindir}/.debug"
+>>>> -RDEPENDS_${PN} +=3D "module-init-tools-depmod udev-utils"
+>>>> -RRECOMMENDS_${PN} +=3D "util-linux-blkid"
+>>>> -
+>>>> -# udev installs binaries under $(udev_prefix)/lib/udev, even if ${lib=
+dir}
+>>>> -# is ${prefix}/lib64
+>>>> -FILES_${PN} +=3D "/lib/udev*"
+>>>> -FILES_${PN}-dbg +=3D "/lib/udev/.debug"
+>>>> -
+>>>> -FILES_${PN}-consolekit +=3D "${libdir}/ConsoleKit"
+>>>> -RDEPENDS_${PN}-consolekit +=3D "${@base_contains('DISTRO_FEATURES', '=
+x11', 'consolekit', '', d)}"
+>>>> -
+>>>> -do_install () {
+>>>> - =A0 =A0 =A0 install -d ${D}${usrsbindir} \
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${D}${sbindir}
+>>>> - =A0 =A0 =A0 oe_runmake 'DESTDIR=3D${D}' INSTALL=3Dinstall install
+>>>> - =A0 =A0 =A0 install -d ${D}${sysconfdir}/init.d
+>>>> - =A0 =A0 =A0 install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d=
+/udev
+>>>> - =A0 =A0 =A0 install -m 0755 ${WORKDIR}/cache ${D}${sysconfdir}/init.=
+d/udev-cache
+>>>> -
+>>>> - =A0 =A0 =A0 install -d ${D}${sysconfdir}/default
+>>>> - =A0 =A0 =A0 install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/def=
+ault/udev
+>>>> -
+>>>> - =A0 =A0 =A0 install -m 0644 ${WORKDIR}/*.rules =A0 =A0 =A0 =A0 ${D}$=
+{sysconfdir}/udev/rules.d/
+>>>> -
+>>>> - =A0 =A0 =A0 touch ${D}${sysconfdir}/udev/saved.uname
+>>>> - =A0 =A0 =A0 touch ${D}${sysconfdir}/udev/saved.cmdline
+>>>> - =A0 =A0 =A0 touch ${D}${sysconfdir}/udev/saved.devices
+>>>> - =A0 =A0 =A0 touch ${D}${sysconfdir}/udev/saved.atags
+>>>> -
+>>>> - =A0 =A0 =A0 # disable udev-cache sysv script on systemd installs
+>>>> - =A0 =A0 =A0 ln -sf /dev/null ${D}/${base_libdir}/systemd/system/udev=
+-cache.service
+>>>> -}
+>>>> -
+>>>> -# Create the cache after checkroot has run
+>>>> -pkg_postinst_udev_append() {
+>>>> - =A0 =A0 =A0 if test "x$D" !=3D "x"; then
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 OPT=3D"-r $D"
+>>>> - =A0 =A0 =A0 else
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 OPT=3D"-s"
+>>>> - =A0 =A0 =A0 fi
+>>>> - =A0 =A0 =A0 update-rc.d $OPT udev-cache start 36 S .
+>>>> -}
+>>>> --
+>>>> 1.7.2.5
+>>> Acked-by: Koen Kooi <schnitzeltony@googlemail.com>
+>>
+>> OOps Copy & paste error lead to strange identities...
+>>
+>> Andreas M=FCller <schnitzeltony@googlemail.com>
+> no further without coffee - sorry for the noise
+>
+> Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-index ec54fbc..f92a599 100644
---- a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
- SECTION = "x11/office"
- DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit gnome pkgconfig gtk-icon-cache
- 
-@@ -30,8 +30,10 @@ PACKAGES =+ "${PN}-nautilus-extension"
- FILES_${PN} += "${datadir}/dbus-1"
- FILES_${PN}-dbg += "${libdir}/*/*/.debug \
-                     ${libdir}/*/*/*/.debug"
--FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
--FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
-+FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
-+                    ${libdir}/evince/*/backends/*.la"
-+FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
-+                          ${libdir}/evince/*/backends/*.a"
- FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
- 
- pkg_postinst_${PN} () {
--- 
-1.7.6.5
 
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
