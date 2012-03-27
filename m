@@ -1,21 +1,21 @@
 Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@localhost.localdomain>) id 1SCVJq-0004qo-Te
+	(envelope-from <sledz@localhost.localdomain>) id 1SCVJs-0004qt-1o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2012 14:16:11 +0200
+	Tue, 27 Mar 2012 14:16:12 +0200
 Received: by localhost (Postfix, from userid 1000)
-	id 52117443AF7; Tue, 27 Mar 2012 14:07:10 +0200 (CEST)
+	id 74E1E4439E3; Tue, 27 Mar 2012 14:07:11 +0200 (CEST)
 From: Steffen Sledz <sledz@dresearch-fe.de>
 To: Tom Rini <tom.rini@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 14:07:04 +0200
-Message-Id: <9af6c62ba6943c6381838fb144a159a515e18714.1332849864.git.sledz@dresearch-fe.de>
+Date: Tue, 27 Mar 2012 14:07:05 +0200
+Message-Id: <71df8a759f91e821a2daee22f34eaa3a31708775.1332849864.git.sledz@dresearch-fe.de>
 X-Mailer: git-send-email 1.7.7
 In-Reply-To: <8c581985c4eb9edd0843595fb0b735f70a899c48.1332849864.git.sledz@dresearch-fe.de>
 References: <8c581985c4eb9edd0843595fb0b735f70a899c48.1332849864.git.sledz@dresearch-fe.de>
 In-Reply-To: <cover.1332849864.git.sledz@dresearch-fe.de>
 References: <cover.1332849864.git.sledz@dresearch-fe.de>
-Subject: [2011.03-maintenance 2/3] python-2.6.6: backport pkgconfig support from version 2.7.1 and bump PR
+Subject: [2011.03-maintenance 3/3] python-2.6.6: Fix python-2.6.6 build failure on linux-3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,142 +29,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2012 12:16:11 -0000
+X-List-Received-Date: Tue, 27 Mar 2012 12:16:12 -0000
 
-From: Simon Busch <morphis@gravedo.de>
+From: Ulf Samuelsson <ulf_samuelsson@telia.com>
 
-Version 2.6.6 of python does not have support for pkgconfig and 2.7.1 is not yet ready in
-OE so I back-ported the new pkgconfig feature to 2.6.6.
+python-2.6.6 build will crash when host is running linux kernel 3.x.
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
-Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+Fix backported from openembedded-core.
+meta/recipes-devtools/python/python/07-linux3-regen-fix.patch
+
+Signed-Off-By:	Ulf Samuelsson <ulf.samuelsson@telia.com>
 ---
- .../python/python-2.6.6/pkgconfig-support.patch    |   94 ++++++++++++++++++++
- recipes/python/python_2.6.6.bb                     |    3 +-
- 2 files changed, 96 insertions(+), 1 deletions(-)
- create mode 100644 recipes/python/python-2.6.6/pkgconfig-support.patch
+ .../python/python-2.6.6/07-linux3-regen-fix.patch  |   18 ++++++++++++++++++
+ recipes/python/python_2.6.6.bb                     |    3 ++-
+ 2 files changed, 20 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/python/python-2.6.6/07-linux3-regen-fix.patch
 
-diff --git a/recipes/python/python-2.6.6/pkgconfig-support.patch b/recipes/python/python-2.6.6/pkgconfig-support.patch
+diff --git a/recipes/python/python-2.6.6/07-linux3-regen-fix.patch b/recipes/python/python-2.6.6/07-linux3-regen-fix.patch
 new file mode 100644
-index 0000000..d970b00
+index 0000000..a059605
 --- /dev/null
-+++ b/recipes/python/python-2.6.6/pkgconfig-support.patch
-@@ -0,0 +1,94 @@
-+diff -Naur Python-2.6.6-orig/Makefile.pre.in Python-2.6.6/Makefile.pre.in
-+--- Python-2.6.6-orig/Makefile.pre.in	2010-08-02 00:05:31.000000000 +0200
-++++ Python-2.6.6/Makefile.pre.in	2011-05-24 21:16:19.943550002 +0200
-+@@ -763,6 +763,9 @@
-+ 	(cd $(DESTDIR)$(BINDIR); $(LN) python$(VERSION)$(EXE) $(PYTHON))
-+ 	-rm -f $(DESTDIR)$(BINDIR)/python-config
-+ 	(cd $(DESTDIR)$(BINDIR); $(LN) -s python$(VERSION)-config python-config)
-++	-test -d $(DESTDIR)$(LIBPC) || $(INSTALL) -d -m $(DIRMODE) $(DESTDIR)$(LIBPC)
-++	-rm -f $(DESTDIR)$(LIBPC)/python.pc
-++	(cd $(DESTDIR)$(LIBPC); $(LN) -s python-$(VERSION).pc python.pc)
-+ 
-+ # Install the interpreter with $(VERSION) affixed
-+ # This goes into $(exec_prefix)
-+@@ -936,8 +939,12 @@
-+ # Install the library and miscellaneous stuff needed for extending/embedding
-+ # This goes into $(exec_prefix)
-+ LIBPL=		$(LIBP)/config
-++
-++# pkgconfig directory
-++LIBPC=		$(LIBDIR)/pkgconfig
-++
-+ libainstall:	all
-+-	@for i in $(LIBDIR) $(LIBP) $(LIBPL); \
-++	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
-+ 	do \
-+ 		if test ! -d $(DESTDIR)$$i; then \
-+ 			echo "Creating directory $$i"; \
-+@@ -964,6 +971,7 @@
-+ 	$(INSTALL_DATA) Modules/Setup $(DESTDIR)$(LIBPL)/Setup
-+ 	$(INSTALL_DATA) Modules/Setup.local $(DESTDIR)$(LIBPL)/Setup.local
-+ 	$(INSTALL_DATA) Modules/Setup.config $(DESTDIR)$(LIBPL)/Setup.config
-++	$(INSTALL_DATA) Misc/python.pc $(DESTDIR)$(LIBPC)/python-$(VERSION).pc
-+ 	$(INSTALL_SCRIPT) $(srcdir)/Modules/makesetup $(DESTDIR)$(LIBPL)/makesetup
-+ 	$(INSTALL_SCRIPT) $(srcdir)/install-sh $(DESTDIR)$(LIBPL)/install-sh
-+ 	# Substitution happens here, as the completely-expanded BINDIR
-+@@ -1159,7 +1167,8 @@
-+ # Keep configure and Python-ast.[ch], it's possible they can't be generated
-+ distclean: clobber
-+ 	-rm -f core Makefile Makefile.pre config.status \
-+-		Modules/Setup Modules/Setup.local Modules/Setup.config
-++		Modules/Setup Modules/Setup.local Modules/Setup.config \
-++		Misc/python.pc
-+ 	find $(srcdir) '(' -name '*.fdc' -o -name '*~' \
-+ 			   -o -name '[@,#]*' -o -name '*.old' \
-+ 			   -o -name '*.orig' -o -name '*.rej' \
-+diff -Naur Python-2.6.6-orig/Misc/python.pc.in Python-2.6.6/Misc/python.pc.in
-+--- Python-2.6.6-orig/Misc/python.pc.in	1970-01-01 01:00:00.000000000 +0100
-++++ Python-2.6.6/Misc/python.pc.in	2011-05-24 21:09:22.733550002 +0200
-+@@ -0,0 +1,13 @@
-++prefix=@prefix@
-++exec_prefix=@exec_prefix@
-++libdir=@libdir@
-++includedir=@includedir@
-++
-++Name: Python
-++Description: Python library
-++Requires: 
-++Version: @VERSION@
-++Libs.private: @LIBS@
-++Libs: -L${libdir} -lpython@VERSION@
-++Cflags: -I${includedir}/python@VERSION@ 
-++
-+diff -Naur Python-2.6.6-orig/configure Python-2.6.6/configure
-+--- Python-2.6.6-orig/configure	2010-05-25 04:27:03.000000000 +0200
-++++ Python-2.6.6/configure	2011-05-24 21:14:55.553550001 +0200
-+@@ -12863,7 +12863,7 @@
-+ $as_echo "done" >&6; }
-+ 
-+ # generate output files
-+-ac_config_files="$ac_config_files Makefile.pre Modules/Setup.config"
-++ac_config_files="$ac_config_files Makefile.pre Modules/Setup.config Misc/python.pc"
-+ 
-+ cat >confcache <<\_ACEOF
-+ # This file is a shell script that caches the results of configure
-+@@ -13557,6 +13557,7 @@
-+     "Mac/Resources/app/Info.plist") CONFIG_FILES="$CONFIG_FILES Mac/Resources/app/Info.plist" ;;
-+     "Makefile.pre") CONFIG_FILES="$CONFIG_FILES Makefile.pre" ;;
-+     "Modules/Setup.config") CONFIG_FILES="$CONFIG_FILES Modules/Setup.config" ;;
-++    "Misc/python.pc") CONFIG_FILES="$CONFIG_FILES Misc/python.pc" ;;
-+ 
-+   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
-+   esac
-+diff -Naur Python-2.6.6-orig/configure.in Python-2.6.6/configure.in
-+--- Python-2.6.6-orig/configure.in	2010-05-25 04:27:03.000000000 +0200
-++++ Python-2.6.6/configure.in	2011-05-24 21:09:53.733550001 +0200
-+@@ -3935,7 +3935,7 @@
-+ AC_MSG_RESULT(done)
-+ 
-+ # generate output files
-+-AC_CONFIG_FILES(Makefile.pre Modules/Setup.config)
-++AC_CONFIG_FILES(Makefile.pre Modules/Setup.config Misc/python.pc)
-+ AC_OUTPUT
-+ 
-+ echo "creating Modules/Setup"
++++ b/recipes/python/python-2.6.6/07-linux3-regen-fix.patch
+@@ -0,0 +1,18 @@
++Upstream-Status: Inappropriate [embedded specific]
++
++Without this patch it calls cross-compiled python if host is running linux-3.0
++python$EXE ../../Tools/scripts/h2py.py -i '(u_long)' /usr/include/netinet/in.h
++| ./regen: line 3: /OE/shr-core/tmp/work/armv4t-oe-linux-gnueabi/python-2.6.6-nk2.8/Python-2.6.6/python: cannot execute binary file
++
++diff -uNr Python-2.6.6.orig//Lib/plat-linux3/regen Python-2.6.6/Lib/plat-linux3/regen
++--- Python-2.6.6.orig//Lib/plat-linux3/regen 1970-01-01 01:00:00.000000000 +0100
+++++ Python-2.6.6/Lib/plat-linux3/regen 2001-08-09 14:48:17.000000000 +0200
++@@ -0,0 +1,8 @@
+++#! /bin/sh
+++case `uname` in
+++Linux*) ;;
+++*) echo Probably not on a Linux system 1>&2
+++ exit 1;;
+++esac
+++set -v
+++h2py -i '(u_long)' /usr/include/sys/types.h /usr/include/netinet/in.h /usr/include/dlfcn.h
 diff --git a/recipes/python/python_2.6.6.bb b/recipes/python/python_2.6.6.bb
-index 3c054bb..eacc5c2 100644
+index eacc5c2..5b47fec 100644
 --- a/recipes/python/python_2.6.6.bb
 +++ b/recipes/python/python_2.6.6.bb
 @@ -3,7 +3,7 @@ DEPENDS = "python-native db gdbm openssl readline sqlite3 tcl zlib\
             ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}"
  DEPENDS_sharprom = "python-native db readline zlib gdbm openssl"
  # set to .0 on every increase of INC_PR
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
  
  SRC_URI = "\
    http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
-@@ -17,6 +17,7 @@ SRC_URI = "\
+@@ -14,6 +14,7 @@ SRC_URI = "\
+   file://04-default-is-optimized.patch \
+   file://05-enable-ctypes-cross-build.patch \
+   file://06-ctypes-libffi-fix-configure.patch \
++  file://07-linux3-regen-fix.patch \
    file://ipv6-cross.patch \
    file://python-module-rpath-fix.patch \
    file://sitecustomize.py \
-+  file://pkgconfig-support.patch \
- "
- SRC_URI[md5sum] = "cf4e6881bb84a7ce6089e4a307f71f14"
- SRC_URI[sha256sum] = "134c5e0736bae2e5570d0b915693374f11108ded63c35a23a35d282737d2ce83"
 -- 
 1.7.7
 
