@@ -1,41 +1,20 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from pd95cb174.dip0.t-ipconnect.de ([217.92.177.116] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SCUY4-0003hI-6M
+	(envelope-from <sledz@localhost.localdomain>) id 1SCVJh-0004qN-DJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Mar 2012 13:26:48 +0200
-Received: by vbbfr13 with SMTP id fr13so3614920vbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 04:17:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=DPEZ3njRguV+m6xqBn1Xi+Wtv1huAJFTdvdKNdeHq3A=;
-	b=x/koCpGPM6/fjeUFFKeaaqT+6RKmPVGpPyWjdspSP80phRnyVV4SFwZB34RWFysWlp
-	MBsU2ZNiki4Uqu+Xqhgx8QoBD6Yy7VVb8DbSNRsNxpn0qFWsrUzK29Y9hs+x5mgJwbHK
-	pDvgrHeHPEEEZ3wIh0Tp/kAcrS3vnSssYzAmG5R+0kx7twStl8y4kQ4C2w+6BCMD4auN
-	Bnquwgoh1YrupjGoP94rPVzrpb62HcXKtV9j55+xksKlw6yPo+xPaVFyCJZ1OIcU3lo/
-	rbDOGHkJGTXpznWko6ju+cNIfSbciduhmvJ+yDYvQpqwFNGPKKflYJVmaONO47DexYRR
-	WFsA==
+	Tue, 27 Mar 2012 14:16:01 +0200
+Received: by localhost (Postfix, from userid 1000)
+	id 3E4194439D8; Tue, 27 Mar 2012 14:07:00 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Tom Rini <tom.rini@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Mar 2012 14:06:47 +0200
+Message-Id: <cover.1332849864.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
 MIME-Version: 1.0
-Received: by 10.220.58.197 with SMTP id i5mr5354760vch.38.1332847066950; Tue,
-	27 Mar 2012 04:17:46 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.7.208 with HTTP; Tue, 27 Mar 2012 04:17:46 -0700 (PDT)
-In-Reply-To: <CALbNGRReWAk12G3z9u1rkP=G=N5B2oQyX-joZsbYAsviSRfvQg@mail.gmail.com>
-References: <1332263919-19283-1-git-send-email-koen@dominion.thruhere.net>
-	<1332263919-19283-3-git-send-email-koen@dominion.thruhere.net>
-	<CALbNGRQpfgBgu-nSax+5r9ucXLKsQYZr+QJOGx2JLjZR3zTUpg@mail.gmail.com>
-	<CALbNGRRq6C-mO_LG6YRpu_8VPHKv2gZrYsEkgVRM04TjO=+Egw@mail.gmail.com>
-	<CALbNGRSB1YTihC36UL1d3M92gz+GyOjXY=D3nHZxfvFVD37nfw@mail.gmail.com>
-	<CAP9ODKrnm4QuLpSgg_19iVFB7sPTtq2QG_jd63+omDRZD6fPPg@mail.gmail.com>
-	<CALbNGRReWAk12G3z9u1rkP=G=N5B2oQyX-joZsbYAsviSRfvQg@mail.gmail.com>
-Date: Tue, 27 Mar 2012 08:17:46 -0300
-X-Google-Sender-Auth: FoNGO5LJqH2aXZlOMNAPdLFzjhE
-Message-ID: <CAP9ODKrDTsgtKPu0wwb-dkE05Pb=X92qWbjW2CeLW=eAgGHGVw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 3/4] udev: remove 173
+Cc: Ulf Samuelsson <ulf.samuelsson@telia.com>,
+	Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: [2011.03-maintenance 0/3] pull request 20120327
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +28,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2012 11:26:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Mar 2012 12:16:01 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 27, 2012 at 03:20, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> On Tue, Mar 27, 2012 at 4:20 AM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->> NACK! 175+ breaks libertas ... or has it been fixed?
-> 177+ breaks we have 175 left
+Hi Tom,
 
-So, fine by me.
+please pull these commits cherry-picked from oe.dev.
+The fix some python build problems.
+All are well tested in our own environment.
+
+Thx,
+Steffen
+
+The following changes since commit ec639a6b04449ef8e064e7bf35660ab31c3e2e=
+ee:
+
+  libmatthew-0.7.1: SRC_URI updated (2012-03-24 07:16:26 +0100)
+
+are available in the git repository at:
+  git://git.openembedded.org/openembedded sledz/pull3
+  http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Dsledz/pull3
+
+Paul Menzel (1):
+  python-scons_1.3.0: add `python-native` to `DEPENDS_virtclass-native`
+
+Simon Busch (1):
+  python-2.6.6: backport pkgconfig support from version 2.7.1 and bump PR
+
+Ulf Samuelsson (1):
+  python-2.6.6: Fix python-2.6.6 build failure on linux-3.x
+
+ .../python/python-2.6.6/07-linux3-regen-fix.patch  |   18 ++++
+ .../python/python-2.6.6/pkgconfig-support.patch    |   94 ++++++++++++++=
+++++++
+ recipes/python/python-scons_1.3.0.bb               |    1 +
+ recipes/python/python_2.6.6.bb                     |    4 +-
+ 4 files changed, 116 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/python/python-2.6.6/07-linux3-regen-fix.patch
+ create mode 100644 recipes/python/python-2.6.6/pkgconfig-support.patch
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+1.7.7
+
 
 
