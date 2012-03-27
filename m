@@ -1,38 +1,38 @@
 Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SCWCH-0006gt-15
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SCWCH-0006gt-Qa
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 27 Mar 2012 15:12:25 +0200
-Received: by wgbdr12 with SMTP id dr12so4394229wgb.24
+Received: by mail-wg0-f43.google.com with SMTP id dr12so4394229wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 06:03:24 -0700 (PDT)
+	Tue, 27 Mar 2012 06:03:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=UjVexw3RY2J4QnkOM02I7x6fkr62+9OZavKZSkdTqZo=;
-	b=K1nIrG+uxHkJNlR3JyYIxZkJ6VY9eIyIyhxO5rkGugHXhcQx7pQd/0TNqJQaO8Cpnv
-	F41dk7/cDLRzuD2CjQXOo0i3GDmlBg9gqPQ+mSeWnG0M1j2EcJLEK9Q4GkQYgUMb7t0f
-	tuhM8qLNxXMgSBXEDzJ51OR8NgBa4fcOW0RqkxjF4fwmVgFMqq95UN5C7TNsS+XHsd8h
-	+twGbOZB2LK3ZuEF1OcuZTiPJ22R4GYNPYd7YpVLgxNM7uwGxqU9n2BrAAZM59c1o5va
-	rYkk/kX2FqGD400cA1chudBE51EWmNs2+zaHYBR75uHCRkuKKwNgcDapjakb5zTZuWf2
-	oR5w==
-Received: by 10.216.136.100 with SMTP id v78mr14847057wei.88.1332853404350;
-	Tue, 27 Mar 2012 06:03:24 -0700 (PDT)
+	bh=cO4cMSDUCOVAJp48Zwqufjt3uIz7SrKkI4ToYhMzdaA=;
+	b=t5DFm7ASCInaz3tGSfs90isNlJsAMaBtX7dDSvfrQGhTz1AuKK4d0xjggnjjtwkc8g
+	y1baAvSP4Cl3h+hU04Zy88SWnFggDU9SbmmE+edeaZcSD4bwqGxqd52hDGgvlgLJ07wg
+	2A6kSLqDea4LAW+w2jkeMTlhifZLRGfyc37n4ppgPL4opM6fe/JIMK6JEE4J/pokxuVT
+	unr1zbUPoVCCxudqiOVH3YcEh7eBGWm1IlXFvMh4Joq/GtVGIIsVO8guwz5mTKUN9Umb
+	3fLsgwiPwQy7vLK66ruDZV4y+qaKf3ps/ANGjnbg5qr6EkyYNR56yTxalhp4WpxaYY5G
+	QEkA==
+Received: by 10.180.102.3 with SMTP id fk3mr27605202wib.9.1332853407248;
+	Tue, 27 Mar 2012 06:03:27 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
 	[95.222.156.83])
-	by mx.google.com with ESMTPS id 6sm12618089wiz.1.2012.03.27.06.03.19
+	by mx.google.com with ESMTPS id 6sm12618089wiz.1.2012.03.27.06.03.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Mar 2012 06:03:20 -0700 (PDT)
+	Tue, 27 Mar 2012 06:03:25 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 15:03:17 +0200
-Message-Id: <1332853398-9501-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 27 Mar 2012 15:03:18 +0200
+Message-Id: <1332853398-9501-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/4] libatasmart: fix QA warnings
+Subject: [PATCH 4/4] obexd: fix QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +51,40 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 fix the following warnings:
-WARNING: For recipe libatasmart, the following files/directories were installed but not shipped in any package:
-WARNING:   /usr/share/vala
-WARNING:   /usr/share/vala/vapi
-WARNING:   /usr/share/vala/vapi/atasmart.vapi
+WARNING: For recipe obexd, the following files/directories were installed but not shipped in any package:
+WARNING:   /usr/lib
+WARNING:   /usr/lib/obex
+WARNING:   /usr/lib/obex/plugins
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../libatasmart/libatasmart_0.17.bb                |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+ meta-oe/recipes-connectivity/obex/obexd_0.44.bb |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb b/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-index c8f75f8..6162b58 100644
---- a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-+++ b/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-@@ -2,6 +2,8 @@ DESCRIPTION = "ATA S.M.A.R.T. Reading and Parsing Library"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1"
+diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+index 24edb9d..c53bfdc 100644
+--- a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
++++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+@@ -4,12 +4,19 @@ DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
  
 +PR = "r1"
 +
- DEPENDS = "udev"
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
+ SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
+ SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
  
- SRCREV = "v${PV}"
-@@ -15,3 +17,6 @@ inherit autotools lib_package
- do_install_append() {
- 	sed -i -e s://:/:g -e 's:=${libdir}/libudev.la:-ludev:g' ${D}${libdir}/libatasmart.la
- }
+ inherit autotools
+ 
++do_install_append() {
++    # remove empty plugins dir
++    rm -rf ${D}${libdir}
++}
 +
-+PACKAGES =+ "${PN}-dev-vala"
-+FILES_${PN}-dev-vala = "${datadir}/vala"
+ PACKAGES =+ "obex-client"
+ 
+ FILES_${PN} += "${datadir}/dbus-1/services/${PN}.service"
 -- 
 1.7.6.5
 
