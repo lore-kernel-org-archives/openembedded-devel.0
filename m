@@ -1,26 +1,32 @@
-Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SCqTJ-0005eM-Et
+	(envelope-from <martin.jansa@gmail.com>) id 1SCr8U-0004cF-D7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 12:51:21 +0200
-Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
-	([82.42.142.101] helo=[127.0.0.1])
-	by www.dynamicdevices.co.uk with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SCpvG-0007WH-Mb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 10:16:10 +0000
-Message-ID: <4F72E4F9.5080402@dynamicdevices.co.uk>
-Date: Wed, 28 Mar 2012 11:16:25 +0100
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
-MIME-Version: 1.0
+	Wed, 28 Mar 2012 13:33:54 +0200
+Received: by wera1 with SMTP id a1so573519wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Mar 2012 04:24:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=pM4NrNGInVwzMXPjqPRdIwWh1EibdQXqgR2SDzCbPNY=;
+	b=vwB1iO+Wp/X6n17uVhkgSuxdpGV9uzaXJ4PQJalLjhdy+0bO7M9aVnWdXJJzsfkDUs
+	RHj59Q+Gtzd90VkK1tdZqngEON9rCsU2cg/N2rQ1d7N8/+Oy2aXoRrT/sXSCgp7NoCk/
+	Zu7wa6LWAwCrV34mcwc3807YTsU4+c9NIGfOxVC7NhetcX+sRB7xyY9dcp+1JdNFfczj
+	WMRNvVEL23JwH9zAPYxPY8jSbyotQgOsE33lldAyl83VHjurV5I4KUwaHXQPvTmK5mWk
+	nIKyCqERWzQot+NpwiQMG5ZJ7oMjAhmUqzviWltwZvJ8UI5PVz9hBvObZfi9laiCHhvr
+	SBsA==
+Received: by 10.180.98.8 with SMTP id ee8mr6205397wib.14.1332933892607;
+	Wed, 28 Mar 2012 04:24:52 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 6sm20525474wiz.1.2012.03.28.04.24.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 28 Mar 2012 04:24:51 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1332888458-15872-1-git-send-email-ajlennon@dynamicdevices.co.uk>
-	<CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
-In-Reply-To: <CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
-Subject: Re: [PATCH] Modified fetch() checksums to be correct for libpng 1.4.28 released 15/3/12 (current) instead of previous 8/3/12 release
+Date: Wed, 28 Mar 2012 13:24:44 +0200
+Message-Id: <cover.1332933826.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.5
+Subject: [meta-oe][PATCH 0/4] Small changes 20120328
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,69 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 10:51:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Mar 2012 11:33:54 -0000
 
+The following changes since commit faf10fc6f3651b687ded55b660ae62520e105512:
 
->You mean upstream changed their source tarball (or whatever) without
+  xbmc: update from rc2 to final release (2012-03-26 15:05:47 +0200)
 
-That's correct. I compared my cached tar.bz2 with what's current from 
-their SRC_URI
-and sure enough there are differences, the most obvious being they've 
-changed the
-dates I reference. Yuk indeed, but it happens not infrequently I believe?
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull2
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull2
 
->Guess we might want to mirror a version and pull from the mirror.
+Martin Jansa (4):
+  linux-kexecboot-3.2: upgrade to 3.2.12
+  keymaps: import systemd support from meta-shr layer
+  kernel.bbclass: touch .scmversion also in ${S}
+  xinput-calibrator: add systemd service
 
-I think that would be an excellent idea.
+ .../recipes-kernel/linux/linux-kexecboot_3.2.bb    |    8 ++++----
+ meta-oe/classes/kernel.bbclass                     |    2 +-
+ .../recipes-bsp/keymaps/keymaps/keymaps.service    |    9 +++++++++
+ meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend   |    8 ++++++++
+ .../xinput-calibrator/xinput-calibrator.service    |   11 +++++++++++
+ .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |   11 ++++++++---
+ 6 files changed, 41 insertions(+), 8 deletions(-)
+ create mode 100644 meta-oe/recipes-bsp/keymaps/keymaps/keymaps.service
+ create mode 100644 meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend
+ create mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
 
-Cheers,
-
-Alex
-
-On 28/03/2012 09:34, Frans Meulenbroeks wrote:
-> 2012/3/28<ajlennon@dynamicdevices.co.uk>:
->> From: Alex J Lennon<ajlennon@gmail.com>
->>
->> Signed-off-by: Alex J Lennon<ajlennon@gmail.com>
->> ---
->>   recipes/libpng/libpng_1.2.48.bb |    4 ++--
->>   1 files changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/recipes/libpng/libpng_1.2.48.bb b/recipes/libpng/libpng_1.2.48.bb
->> index 50a3c03..534962d 100644
->> --- a/recipes/libpng/libpng_1.2.48.bb
->> +++ b/recipes/libpng/libpng_1.2.48.bb
->> @@ -2,5 +2,5 @@ require libpng.inc
->>
->>   PR = "${INC_PR}.0"
->>
->> -SRC_URI[libpng.md5sum] = "7612af5660cd4b5e8c433ce53bea01a7"
->> -SRC_URI[libpng.sha256sum] = "f6db51aff81b6920203678b29e8c68a5e3703cf5b39ae5e9e56370d17f31b1c4"
->> +SRC_URI[libpng.md5sum] = "74c8c261bdf9a75274e22875183fda07"
->> +SRC_URI[libpng.sha256sum] = "b4c92df11eadf3e81705a58253dbffc4b95169186899e28abdfc8aada8a20fcc"
->> --
->> 1.7.5.4
->>
-> You mean upstream changed their source tarball (or whatever) without
-> updating the version number.
-> Yuk.
->
-> Guess we might want to mirror a version and pull from the mirror.
-> (changing the checksum alone creates issues because other people might
-> already have the version with the old checksum in their downloads.
->
-> Frans
->
-> PS: thinking of it: we might be able to resolve the latter issue by
-> forcing the removal of a file from downloads (and trigger a refetch)
-> if the .md5 does not match the md5 in the recipe.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+1.7.8.5
 
 
 
