@@ -1,32 +1,37 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SCr8U-0004cF-D7
+	(envelope-from <martin.jansa@gmail.com>) id 1SCr98-0004db-AD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 13:33:54 +0200
-Received: by wera1 with SMTP id a1so573519wer.6
+	Wed, 28 Mar 2012 13:34:34 +0200
+Received: by wera1 with SMTP id a1so573859wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 04:24:52 -0700 (PDT)
+	Wed, 28 Mar 2012 04:25:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=pM4NrNGInVwzMXPjqPRdIwWh1EibdQXqgR2SDzCbPNY=;
-	b=vwB1iO+Wp/X6n17uVhkgSuxdpGV9uzaXJ4PQJalLjhdy+0bO7M9aVnWdXJJzsfkDUs
-	RHj59Q+Gtzd90VkK1tdZqngEON9rCsU2cg/N2rQ1d7N8/+Oy2aXoRrT/sXSCgp7NoCk/
-	Zu7wa6LWAwCrV34mcwc3807YTsU4+c9NIGfOxVC7NhetcX+sRB7xyY9dcp+1JdNFfczj
-	WMRNvVEL23JwH9zAPYxPY8jSbyotQgOsE33lldAyl83VHjurV5I4KUwaHXQPvTmK5mWk
-	nIKyCqERWzQot+NpwiQMG5ZJ7oMjAhmUqzviWltwZvJ8UI5PVz9hBvObZfi9laiCHhvr
-	SBsA==
-Received: by 10.180.98.8 with SMTP id ee8mr6205397wib.14.1332933892607;
-	Wed, 28 Mar 2012 04:24:52 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=X4Tk5oTpwMLs3jR0dzmMpNBys3rrdfThO71uBRCYJew=;
+	b=nHzv+Ste0isy1tGUlTGEkMPQHH9USWSUe6WSF83n1Cf2Q3xICXY9J4AqwA6QrUk/V3
+	oWhEhqwf2jkGXDXVqlZeviZsMrngMEUGdwzFCW8l11LX1Jj6yzQmLqFiGgitg+1dQihh
+	4KWY2Yf6hWRd+jytcIbkGkSs2+8BnF0c1qyE5iy09rWhLsFZGRuRqNYYR1IllHFKiYqo
+	d46LONC31rzhy3pnTcb6UtYpPBY4c2nUBz1fWgJ7IEGzcHbj01v6eHjOGQjK8xrEqCGJ
+	e1nqDMoBrhkhQREyux3ch8pSIM/htLnIIa1XQgAR5cCNuFkDWGpU0CrJ7ayLta30DBdV
+	FH0g==
+Received: by 10.180.83.72 with SMTP id o8mr6235724wiy.5.1332933932448;
+	Wed, 28 Mar 2012 04:25:32 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 6sm20525474wiz.1.2012.03.28.04.24.50
+	by mx.google.com with ESMTPS id fl2sm12250143wib.4.2012.03.28.04.25.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 04:24:51 -0700 (PDT)
+	Wed, 28 Mar 2012 04:25:31 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Mar 2012 13:24:44 +0200
-Message-Id: <cover.1332933826.git.Martin.Jansa@gmail.com>
+Date: Wed, 28 Mar 2012 13:25:23 +0200
+Message-Id: <5a7fc35885c7f07840731881c5e07b5c68299838.1332933826.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
-Subject: [meta-oe][PATCH 0/4] Small changes 20120328
+In-Reply-To: <cover.1332933826.git.Martin.Jansa@gmail.com>
+References: <cover.1332933826.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1332933826.git.Martin.Jansa@gmail.com>
+References: <cover.1332933826.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/4] linux-kexecboot-3.2: upgrade to 3.2.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 11:33:54 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 11:34:34 -0000
 
-The following changes since commit faf10fc6f3651b687ded55b660ae62520e105512:
-
-  xbmc: update from rc2 to final release (2012-03-26 15:05:47 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull2
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull2
-
-Martin Jansa (4):
-  linux-kexecboot-3.2: upgrade to 3.2.12
-  keymaps: import systemd support from meta-shr layer
-  kernel.bbclass: touch .scmversion also in ${S}
-  xinput-calibrator: add systemd service
-
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  .../recipes-kernel/linux/linux-kexecboot_3.2.bb    |    8 ++++----
- meta-oe/classes/kernel.bbclass                     |    2 +-
- .../recipes-bsp/keymaps/keymaps/keymaps.service    |    9 +++++++++
- meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend   |    8 ++++++++
- .../xinput-calibrator/xinput-calibrator.service    |   11 +++++++++++
- .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |   11 ++++++++---
- 6 files changed, 41 insertions(+), 8 deletions(-)
- create mode 100644 meta-oe/recipes-bsp/keymaps/keymaps/keymaps.service
- create mode 100644 meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend
- create mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+index 5492183..8cb19aa 100644
+--- a/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
++++ b/meta-initramfs/recipes-kernel/linux/linux-kexecboot_3.2.bb
+@@ -1,13 +1,13 @@
+ require linux-kexecboot.inc
+ 
+-PR = "${INC_PR}.4"
++PR = "${INC_PR}.5"
+ S = "${WORKDIR}/linux-${PV}"
+ 
+ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.9.bz2;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.12.bz2;apply=yes;name=stablepatch \
+            "
+ 
+ SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
+ SRC_URI[kernel.sha256sum] = "c881fc2b53cf0da7ca4538aa44623a7de043a41f76fd5d0f51a31f6ed699d463"
+-SRC_URI[stablepatch.md5sum] = "4610f3e62a5446422d1e81a90ab3cd06"
+-SRC_URI[stablepatch.sha256sum] = "7836685dee161a4ffaf887b8e2f8dd3cb7712e690d0942fefb1db09bb6ad3871"
++SRC_URI[stablepatch.md5sum] = "377a6d731cd246aaa0c0f6a432b7aece"
++SRC_URI[stablepatch.sha256sum] = "c6991964901ef7797cca09ff9d1b4ed7abda27e2796ad55cad09a266eaaebb5d"
 -- 
 1.7.8.5
 
