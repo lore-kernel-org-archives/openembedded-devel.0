@@ -1,38 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SCorO-0001fw-Lo
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SCorP-0001g1-Rx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 11:08:06 +0200
-Received: by wgbdr12 with SMTP id dr12so652733wgb.24
+	Wed, 28 Mar 2012 11:08:07 +0200
+Received: by wibhj13 with SMTP id hj13so5727578wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 01:59:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Wed, 28 Mar 2012 01:59:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=UjVexw3RY2J4QnkOM02I7x6fkr62+9OZavKZSkdTqZo=;
-	b=aR98FpPZzjucryxjHTBdxZv1HnU8d50k46te99uab4xN5T+Xfqc4hfmhFOSn4+gBBP
-	40Lmvfs398+Irc4ghciaG/p4sVVvc/hHMUY61NWp91kAuEpu4pMl75DEB8bP3quXR5wy
-	4xYTOoJ/3X6MDaAdmvooPLa/hkHkhEcOietZhNgqMNEGCnTkjdKWwC3w4UaTBIhC3xUD
-	+vXiHP+qzw1ipPUrTh+E7W9zqqS+azfn1bv4ufBhBTvcLcEf1lFMW1UMLSwJy9usQHQv
-	s2voFy0ZZ1Y158H0oHnnxBG5GWyYNgeLy7QqMh7gsAyY47jcjXLDu9GZ//Keki+JHdY2
-	VDjw==
-Received: by 10.180.105.69 with SMTP id gk5mr6006602wib.3.1332925144658;
-	Wed, 28 Mar 2012 01:59:04 -0700 (PDT)
+	bh=Ip9O1aYgQLuKXvb49U84iQysXZq0fNIm0X6aHLo3LqM=;
+	b=gad46M2/xBfL9iWUqzMd/9Pe0A/RgPL5E3EBlzbVOxiS6ngXGH43tfojao/AsLeUAr
+	AvN0fjKwypSgzxbTkb7a+vS0nj+8LWUcCfOPIBGl9fDy54lnnhG0OMCtsgvIMXlXYpJR
+	wz3y4/pidt2QjnLEnz3HpT0+DOFkBuNuG8PTEiERkt5014a/TlaGvzoY0486uqcLYDpn
+	63d0fjtIJFINuf8mvzfFKnEWgzjaYZdBqvaRegwD/wARTU+5MEz+YKCnRNrnQWGs7JgM
+	r3DJHqyvaLD+kQwrUrWPE3sR/OGdNtfQeZX6Eo7iaD3W/3UycibPFMXUVzVi/zX6A/u4
+	xsUg==
+Received: by 10.180.8.231 with SMTP id u7mr5079080wia.9.1332925145935;
+	Wed, 28 Mar 2012 01:59:05 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
 	[95.222.156.83])
-	by mx.google.com with ESMTPS id ex2sm10807133wib.8.2012.03.28.01.59.03
+	by mx.google.com with ESMTPS id ex2sm10807133wib.8.2012.03.28.01.59.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 01:59:03 -0700 (PDT)
+	Wed, 28 Mar 2012 01:59:05 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Mar 2012 10:58:57 +0200
-Message-Id: <1332925138-28464-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 28 Mar 2012 10:58:58 +0200
+Message-Id: <1332925138-28464-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1332925138-28464-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1332925138-28464-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe, v2 3/4] libatasmart: fix QA warnings
+Subject: [meta-oe, v2 4/4] obexd: fix QA warnings by creating empty package obex-plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 09:08:06 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 09:08:07 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 fix the following warnings:
-WARNING: For recipe libatasmart, the following files/directories were installed but not shipped in any package:
-WARNING:   /usr/share/vala
-WARNING:   /usr/share/vala/vapi
-WARNING:   /usr/share/vala/vapi/atasmart.vapi
+WARNING: For recipe obexd, the following files/directories were installed but not shipped in any package:
+WARNING:   /usr/lib
+WARNING:   /usr/lib/obex
+WARNING:   /usr/lib/obex/plugins
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../libatasmart/libatasmart_0.17.bb                |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+ meta-oe/recipes-connectivity/obex/obexd_0.44.bb |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb b/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-index c8f75f8..6162b58 100644
---- a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-+++ b/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-@@ -2,6 +2,8 @@ DESCRIPTION = "ATA S.M.A.R.T. Reading and Parsing Library"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1"
+diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+index 24edb9d..77d7f1e 100644
+--- a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
++++ b/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
+@@ -4,14 +4,18 @@ DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
  
 +PR = "r1"
 +
- DEPENDS = "udev"
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
+ SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
+ SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
  
- SRCREV = "v${PV}"
-@@ -15,3 +17,6 @@ inherit autotools lib_package
- do_install_append() {
- 	sed -i -e s://:/:g -e 's:=${libdir}/libudev.la:-ludev:g' ${D}${libdir}/libatasmart.la
- }
-+
-+PACKAGES =+ "${PN}-dev-vala"
-+FILES_${PN}-dev-vala = "${datadir}/vala"
+ inherit autotools
+ 
+-PACKAGES =+ "obex-client"
++PACKAGES =+ "obex-client obex-plugins"
+ 
+ FILES_${PN} += "${datadir}/dbus-1/services/${PN}.service"
+ FILES_obex-client = "${libexecdir}/obex-client \
+                      ${datadir}/dbus-1/services/obex-client.service"
++# currently the plugins are empty
++FILES_obex-plugins = "${libdir}/obex/plugins"
 -- 
 1.7.6.5
 
