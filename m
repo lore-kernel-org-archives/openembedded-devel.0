@@ -1,25 +1,32 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1SCzgN-0003yz-Rw
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SCzmJ-000489-K1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 22:41:28 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 28 Mar 2012 13:32:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="126246625"
-Received: from unknown (HELO helios.localnet) ([10.252.123.243])
-	by orsmga002.jf.intel.com with ESMTP; 28 Mar 2012 13:32:22 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-Date: Wed, 28 Mar 2012 21:32:21 +0100
-Message-ID: <5366685.RG9uTzE68W@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.0 (Linux/3.0.0-16-generic-pae; KDE/4.8.1; i686; ; )
+	Wed, 28 Mar 2012 22:47:36 +0200
+Received: by vcbfl13 with SMTP id fl13so1181448vcb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Mar 2012 13:38:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=PKhHgkZ9JUOlVbJyIu0Ktf3AE+2OVvvycmQ1w9IRWbE=;
+	b=uN7GX9elVn4UR7E9mgOItZcAtbdZY5jyxn1XHzDQkQ25F0rlLcWe9GoISJlS1R/WJI
+	44oXH9UkJF5bl8A6XVoshje3eJlowsDQnjICEpMOXHtZljArK+fGgT7yRjeWm9RkpgxX
+	n6vRbZ79AGe3RGoalfphEorIVxPpkk8st4UQ3PEE/7+SVIZ2LiA6LllgRkprDVNkSCLw
+	ez2U8QTpYqe9RUBTtqngMiPN3X7zM7hWD9zRIHOJYAhQD5LumefV+vfOh3NIDqr8Lpea
+	N5zsSXrCBQ2aro2GX/9KMcgsfljGGzQmFwA80pkECEIOhrgb949/M7rXvp9ULMmpnH4X
+	rQPg==
+MIME-Version: 1.0
+Received: by 10.220.116.68 with SMTP id l4mr14828031vcq.4.1332967110994; Wed,
+	28 Mar 2012 13:38:30 -0700 (PDT)
+Received: by 10.52.88.228 with HTTP; Wed, 28 Mar 2012 13:38:30 -0700 (PDT)
 In-Reply-To: <4F736B9F.9050304@dynamicdevices.co.uk>
 References: <1332888458-15872-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+	<CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
 	<2372633.2CZh3kKOpL@helios> <4F736B9F.9050304@dynamicdevices.co.uk>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Mar 2012 22:38:30 +0200
+Message-ID: <CACW_hTa3mPsLrW8GkkYD+sQCfbajR30jVDOZijujDirLAqhzRA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] Modified fetch() checksums to be correct for libpng 1.4.28 released 15/3/12 (current) instead of previous 8/3/12 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,38 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 20:41:28 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 28 Mar 2012 20:47:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wednesday 28 March 2012 20:50:55 Alex J Lennon wrote:
-> Paul,
-> 
-> >FYI, I'm pretty sure that fetch2 from the version of bitbake we use with
-> >OE-
-> I thought it might. Does it still do that if the checksum fails though?
+2012/3/28 Alex J Lennon <ajlennon@dynamicdevices.co.uk>:
 
-Yes, I believe (without having tested it recently) that a SRC_URI checksum 
-failure is considered in the same way as if the download failed.
+>> FYI, I'm pretty sure that fetch2 from the version of bitbake we use with
+>> OE-
+>> Core will skip to the next available option (mirror) if the downloaded
+>> file
+>> doesn't match the SRC_URI checksum. Of course that's assuming there is a
+>> mirror available.
 
-> >Of course that's assuming there is a mirror available.
-> 
-> I'm happy to host a 2nd copy and mod the .bb to add another source if
-> that helps (the
-> libpng repo seems to have a history of deleting versions from what I saw
-> of the patch
-> history so it might be a good idea?). Is that ok for everybody?
+There is an official oe mirror iirc. Not really sure who is exactly
+responsible for it. Perhaps khem or kasox6
 
-No harm in it, however I believe it may be better to get it on 
-sources.openembedded.org - I think the usual procedure is to ping Tom King 
-(ka6sox on IRC) and then send get the files to him so he can upload them there.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Frans
 
 
