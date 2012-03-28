@@ -1,35 +1,33 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SCi2r-0004oy-0l
+	(envelope-from <raj.khem@gmail.com>) id 1SCiEa-0005O8-SH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 03:51:29 +0200
-Received: by pbcum15 with SMTP id um15so956697pbc.6
+	Wed, 28 Mar 2012 04:03:37 +0200
+Received: by pbcum15 with SMTP id um15so968710pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 18:42:26 -0700 (PDT)
+	Tue, 27 Mar 2012 18:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=JJldfI2KS8/go8snLKRBzZdGB5RbantwJJhyKXNiyBw=;
-	b=o8BH2S1HBADpyneYLSwUHnZy0S6bFkIaA3v1BFVDFonzfyh8LNE/rRc9yLL1ydQjHP
-	WYgU0ujbreGMNszNjP5hMaXE4Pp7HAM8ARgtIwygEMhdc69JvWSWIrIjggdqcy66lJEF
-	Q0d1EINTApH3ZMuMOWvYnTXBBkZOblZjSVGPRZu8W8+5lKqCe4OkYwMPSrMsL7YE56gl
-	yJigR8hgaa0qUNLKN2ouFon79dO3853Bx2xi3JagaVBPYdbfvFiKmj8wk7/3NsL5Vy2u
-	bgZb8wy00iBPIta+6j/ebb3XAjctFczUoBO70YXzo4Fvc/B6ATINh+ljTdEGUnlrOH3Z
-	Ukrw==
-Received: by 10.68.196.163 with SMTP id in3mr67933144pbc.118.1332898946867;
-	Tue, 27 Mar 2012 18:42:26 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=iwLpNwdvMe+31J1Fd+oJm0ooTDB4G4ZwjdkHXrVvo74=;
+	b=GymOnsQM6cvUmjXsiCOjICcVG56OVzki5F3oNQtnuHOF3GR5uaNob7zmcpz3GtOR5S
+	kEXaqJepQxFj1ajSgKfFrpsXczcJ+mMaVpcJSsEEGDWjk+FQmMx9MHItW0rYZ06olH0W
+	uf/qZLrYj6k9myjw2xm+t61EZxOTznxFcMV7ApBH/F0FshmeKLaovDhwcZGW7J+Oiz0l
+	c6gwHWokwXcCnsU8BQR/cZCkjQ+eXmDeAUGe4uyxmY7ZFMv7Gw6H3XDyiZ8K3QfeUIov
+	Rb/0XR3qRG9CzM9svMn/7iORdQDE1dkQ9lgIWJLdKmtoyXDC5nNLdWSls3caopjfCnoL
+	RmkQ==
+Received: by 10.68.191.69 with SMTP id gw5mr52327969pbc.141.1332899674585;
+	Tue, 27 Mar 2012 18:54:34 -0700 (PDT)
 Received: from leto.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id f5sm1532418pbe.26.2012.03.27.18.42.24
+	by mx.google.com with ESMTPS id o2sm1545200pbb.45.2012.03.27.18.54.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Mar 2012 18:42:25 -0700 (PDT)
+	Tue, 27 Mar 2012 18:54:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 18:42:07 -0700
-Message-Id: <1332898927-17745-2-git-send-email-raj.khem@gmail.com>
+Date: Tue, 27 Mar 2012 18:54:22 -0700
+Message-Id: <1332899662-28335-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.1
-In-Reply-To: <1332898927-17745-1-git-send-email-raj.khem@gmail.com>
-References: <1332898927-17745-1-git-send-email-raj.khem@gmail.com>
-Subject: [toolchain-layer][PATCH 2/2] gcc-4.5: Fix meta-toolchain builds with gcc 4.5
+Subject: [toolchain-layer][PATCH 2/2 V2] gcc-4.5: Fix meta-toolchain builds with gcc 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,20 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 01:51:29 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 02:03:37 -0000
 
 Correct a typo
 
+Make license parsable by license manage
+
+Fixes messages like
+
+WARNING: libgcc-nativesdk: No generic license file exists for: RUNTIME
+in any provider
+WARNING: libgcc-nativesdk: No generic license file exists for: LIBRARY
+in any provider
+WARNING: libgcc-nativesdk: No generic license file exists for: EXCEPTION
+in any provider
+NOTE: package libgcc-nativesdk-4.5-r48+svnr184907: task do_populate_lic:
+Succeeded
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc   |    2 +-
+ toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc   |    4 ++--
  .../recipes-devtools/gcc/gcc-cross-canadian_4.5.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc b/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
-index b23b322..4602df8 100644
+index b23b322..ee4a434 100644
 --- a/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
 +++ b/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
+@@ -4,7 +4,7 @@ ARM_INSTRUCTION_SET = "arm"
+ DEPENDS =+ "mpfr gmp libmpc elfutils"
+ NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native elfutils-native"
+ 
+-LICENSE="GCC RUNTIME LIBRARY EXCEPTION & GPLv2 & GPLv3 & LGPLv2.1 & LGPLv3"
++LICENSE="GPL-3.0-with-GCC-exception & GPLv2 & GPLv3 & LGPLv2.1 & LGPLv3"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+                     file://COPYING3;md5=d32239bcb673463ab874e80d47fae504 \
 @@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
  
  
