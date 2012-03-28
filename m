@@ -1,33 +1,24 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SCiEa-0005O8-SH
+	(envelope-from <denis@denix.org>) id 1SCicm-0005d7-2j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 04:03:37 +0200
-Received: by pbcum15 with SMTP id um15so968710pbc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 18:54:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=iwLpNwdvMe+31J1Fd+oJm0ooTDB4G4ZwjdkHXrVvo74=;
-	b=GymOnsQM6cvUmjXsiCOjICcVG56OVzki5F3oNQtnuHOF3GR5uaNob7zmcpz3GtOR5S
-	kEXaqJepQxFj1ajSgKfFrpsXczcJ+mMaVpcJSsEEGDWjk+FQmMx9MHItW0rYZ06olH0W
-	uf/qZLrYj6k9myjw2xm+t61EZxOTznxFcMV7ApBH/F0FshmeKLaovDhwcZGW7J+Oiz0l
-	c6gwHWokwXcCnsU8BQR/cZCkjQ+eXmDeAUGe4uyxmY7ZFMv7Gw6H3XDyiZ8K3QfeUIov
-	Rb/0XR3qRG9CzM9svMn/7iORdQDE1dkQ9lgIWJLdKmtoyXDC5nNLdWSls3caopjfCnoL
-	RmkQ==
-Received: by 10.68.191.69 with SMTP id gw5mr52327969pbc.141.1332899674585;
-	Tue, 27 Mar 2012 18:54:34 -0700 (PDT)
-Received: from leto.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id o2sm1545200pbb.45.2012.03.27.18.54.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Mar 2012 18:54:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 28 Mar 2012 04:28:36 +0200
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1K00FFEMC885A0@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	27 Mar 2012 20:19:26 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 90551200AB; Tue,
+	27 Mar 2012 21:19:20 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 18:54:22 -0700
-Message-Id: <1332899662-28335-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.1
-Subject: [toolchain-layer][PATCH 2/2 V2] gcc-4.5: Fix meta-toolchain builds with gcc 4.5
+Date: Tue, 27 Mar 2012 21:19:00 -0400
+Message-id: <1332897540-7626-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.7.8.5
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-oe][toolchain-layer] eglibc: move to toolchain-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,66 +32,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 02:03:37 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 02:28:36 -0000
 
-Correct a typo
+From: Denys Dmytriyenko <denys@ti.com>
 
-Make license parsable by license manage
-
-Fixes messages like
-
-WARNING: libgcc-nativesdk: No generic license file exists for: RUNTIME
-in any provider
-WARNING: libgcc-nativesdk: No generic license file exists for: LIBRARY
-in any provider
-WARNING: libgcc-nativesdk: No generic license file exists for: EXCEPTION
-in any provider
-NOTE: package libgcc-nativesdk-4.5-r48+svnr184907: task do_populate_lic:
-Succeeded
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc   |    4 ++--
- .../recipes-devtools/gcc/gcc-cross-canadian_4.5.bb |    2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ .../eglibc/cross-localedef-native_2.12.bb          |    0
+ .../eglibc/eglibc-2.12/IO-acquire-lock-fix.patch   |    0
+ .../eglibc-2.12/armv4-eabi-compile-fix.patch       |    0
+ .../eglibc-svn-arm-lowlevellock-include-tls.patch  |    0
+ .../recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf |    0
+ .../eglibc/eglibc-2.12/generate-supported.mk       |    0
+ .../eglibc/eglibc-2.12/ld-search-order.patch       |    0
+ .../eglibc/eglibc-2.12/mips-rld-map-check.patch    |    0
+ .../eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch   |    0
+ .../eglibc-2.12/shorten-build-commands.patch       |    0
+ .../recipes-core/eglibc/eglibc-initial_2.12.bb     |    0
+ .../recipes-core/eglibc/eglibc-locale_2.12.bb      |    0
+ .../recipes-core/eglibc/eglibc_2.12.bb             |    0
+ 13 files changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/cross-localedef-native_2.12.bb (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/IO-acquire-lock-fix.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/armv4-eabi-compile-fix.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/eglibc-svn-arm-lowlevellock-include-tls.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/generate-supported.mk (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/ld-search-order.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/mips-rld-map-check.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-2.12/shorten-build-commands.patch (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-initial_2.12.bb (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc-locale_2.12.bb (100%)
+ rename {meta-oe => toolchain-layer}/recipes-core/eglibc/eglibc_2.12.bb (100%)
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc b/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
-index b23b322..ee4a434 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-4.5.inc
-@@ -4,7 +4,7 @@ ARM_INSTRUCTION_SET = "arm"
- DEPENDS =+ "mpfr gmp libmpc elfutils"
- NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native elfutils-native"
- 
--LICENSE="GCC RUNTIME LIBRARY EXCEPTION & GPLv2 & GPLv3 & LGPLv2.1 & LGPLv3"
-+LICENSE="GPL-3.0-with-GCC-exception & GPLv2 & GPLv3 & LGPLv2.1 & LGPLv3"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
-                     file://COPYING3;md5=d32239bcb673463ab874e80d47fae504 \
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
- 
- 
- PV = "4.5"
--PR = "r47"
-+PR = "r48"
- 
- # BINV should be incremented after updating to a revision
- # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.5.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.5.bb
-index 97e1a2b..0afc907 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.5.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.5.bb
-@@ -11,7 +11,7 @@ RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
- 
- SYSTEMHEADERS = "/usr/include"
- SYSTEMLIBS = "/lib/"
--SYSTEMLIB. = "/usr/lib/"
-+SYSTEMLIBS1 = "/usr/lib/"
- 
- EXTRA_OECONF += "--disable-libunwind-exceptions --disable-libssp \
- 		--disable-libgomp --disable-libmudflap \
+diff --git a/meta-oe/recipes-core/eglibc/cross-localedef-native_2.12.bb b/toolchain-layer/recipes-core/eglibc/cross-localedef-native_2.12.bb
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/cross-localedef-native_2.12.bb
+rename to toolchain-layer/recipes-core/eglibc/cross-localedef-native_2.12.bb
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/IO-acquire-lock-fix.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/IO-acquire-lock-fix.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/IO-acquire-lock-fix.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/IO-acquire-lock-fix.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/armv4-eabi-compile-fix.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/armv4-eabi-compile-fix.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/armv4-eabi-compile-fix.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/armv4-eabi-compile-fix.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/eglibc-svn-arm-lowlevellock-include-tls.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/eglibc-svn-arm-lowlevellock-include-tls.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/eglibc-svn-arm-lowlevellock-include-tls.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/eglibc-svn-arm-lowlevellock-include-tls.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/etc/ld.so.conf
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/generate-supported.mk b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/generate-supported.mk
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/generate-supported.mk
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/generate-supported.mk
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/ld-search-order.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/ld-search-order.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/ld-search-order.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/ld-search-order.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/mips-rld-map-check.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/mips-rld-map-check.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/mips-rld-map-check.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/mips-rld-map-check.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/ppc-enable-603e-cpu.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-2.12/shorten-build-commands.patch b/toolchain-layer/recipes-core/eglibc/eglibc-2.12/shorten-build-commands.patch
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-2.12/shorten-build-commands.patch
+rename to toolchain-layer/recipes-core/eglibc/eglibc-2.12/shorten-build-commands.patch
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-initial_2.12.bb b/toolchain-layer/recipes-core/eglibc/eglibc-initial_2.12.bb
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-initial_2.12.bb
+rename to toolchain-layer/recipes-core/eglibc/eglibc-initial_2.12.bb
+diff --git a/meta-oe/recipes-core/eglibc/eglibc-locale_2.12.bb b/toolchain-layer/recipes-core/eglibc/eglibc-locale_2.12.bb
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc-locale_2.12.bb
+rename to toolchain-layer/recipes-core/eglibc/eglibc-locale_2.12.bb
+diff --git a/meta-oe/recipes-core/eglibc/eglibc_2.12.bb b/toolchain-layer/recipes-core/eglibc/eglibc_2.12.bb
+similarity index 100%
+rename from meta-oe/recipes-core/eglibc/eglibc_2.12.bb
+rename to toolchain-layer/recipes-core/eglibc/eglibc_2.12.bb
 -- 
-1.7.9.1
+1.7.8.5
 
 
 
