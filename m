@@ -1,35 +1,27 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@gmail.com>) id 1SCfJn-00027G-Uk
+	(envelope-from <denis@denix.org>) id 1SChiP-0004Sf-7C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 00:56:48 +0200
-Received: by wibhj13 with SMTP id hj13so353470wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2012 15:47:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=dEdkOPcSbrIadwOVv74azSHeNS+oMR9FGUDaDNs8j4U=;
-	b=ZfxAD/gWWqzzJHqsOIQ3Q8Fbj14LrhdZ1sOyKMTvk8ayd1YWIxtwYY2o6GpC8y9/OI
-	rCE+X+z59edTrBJRk4Ng7P2WWkD6z5DXCAzBAmRnqwQqfTfUknFXGjcUoy3qLjm3Vook
-	HgsoqQ7P9sTWCmn9sSA4v79buuK1GsfN7GYpXqWbHMuPcFSb2M8I6x/D0XNjHuB8WnDZ
-	2XXKM0EPtbiLG4kaASCzGORaKoASQWifEXOJL13yP2JomerO7rnPqDgx5pjcmBuE9+0f
-	DGQG6LsN+7kmi3dyStKyl7xlNz/j5p2MgBESluVDa4/jslEywkA/9q8RDGMhEbUweONp
-	FkMg==
-Received: by 10.180.24.66 with SMTP id s2mr1656474wif.7.1332888466464;
-	Tue, 27 Mar 2012 15:47:46 -0700 (PDT)
-Received: from localhost.localdomain
-	(cpc9-live20-0-0-cust612.know.cable.virginmedia.com. [82.42.142.101])
-	by mx.google.com with ESMTPS id gd4sm4940680wib.6.2012.03.27.15.47.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Mar 2012 15:47:45 -0700 (PDT)
-Sender: Alex Lennon <ajlennon@gmail.com>
-From: ajlennon@dynamicdevices.co.uk
+	Wed, 28 Mar 2012 03:30:21 +0200
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1K005UDJMM0880@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	27 Mar 2012 19:20:47 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C183B201F9; Tue,
+	27 Mar 2012 20:20:46 -0400 (EDT)
+Date: Tue, 27 Mar 2012 20:20:46 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <CAMKF1srMQNAREe-ttJR1bH-gfG1LLRZ04o8L2L_YtxZJPxJd1Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Mar 2012 23:47:38 +0100
-Message-Id: <1332888458-15872-1-git-send-email-ajlennon@dynamicdevices.co.uk>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Alex J Lennon <ajlennon@gmail.com>
-Subject: [PATCH] Modified fetch() checksums to be correct for libpng 1.4.28 released 15/3/12 (current) instead of previous 8/3/12 release
+Message-id: <20120328002046.GB17470@denix.org>
+MIME-version: 1.0
+References: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
+	<1332853398-9501-4-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1srMQNAREe-ttJR1bH-gfG1LLRZ04o8L2L_YtxZJPxJd1Q@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH 4/4] obexd: fix QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2012 22:56:48 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 01:30:21 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
+Content-disposition: inline
 
-From: Alex J Lennon <ajlennon@gmail.com>
+On Tue, Mar 27, 2012 at 02:39:24PM -0700, Khem Raj wrote:
+> On Tue, Mar 27, 2012 at 6:03 AM, Andreas M??ller
+> <schnitzeltony@googlemail.com> wrote:
+> > +do_install_append() {
+> > + =A0 =A0# remove empty plugins dir
+> > + =A0 =A0rm -rf ${D}${libdir}
+> > +}
+> > +
+>=20
+> can you use use rmdir instead so it gets flagged when the dir
+> is not empty ?
 
-Signed-off-by: Alex J Lennon <ajlennon@gmail.com>
----
- recipes/libpng/libpng_1.2.48.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Can we instead create obex-plugins in PACKAGES, even if it's empty no=
+w?
 
-diff --git a/recipes/libpng/libpng_1.2.48.bb b/recipes/libpng/libpng_1.2.48.bb
-index 50a3c03..534962d 100644
---- a/recipes/libpng/libpng_1.2.48.bb
-+++ b/recipes/libpng/libpng_1.2.48.bb
-@@ -2,5 +2,5 @@ require libpng.inc
- 
- PR = "${INC_PR}.0"
- 
--SRC_URI[libpng.md5sum] = "7612af5660cd4b5e8c433ce53bea01a7"
--SRC_URI[libpng.sha256sum] = "f6db51aff81b6920203678b29e8c68a5e3703cf5b39ae5e9e56370d17f31b1c4"
-+SRC_URI[libpng.md5sum] = "74c8c261bdf9a75274e22875183fda07"
-+SRC_URI[libpng.sha256sum] = "b4c92df11eadf3e81705a58253dbffc4b95169186899e28abdfc8aada8a20fcc"
--- 
-1.7.5.4
+--=20
+Denys
 
 
 
