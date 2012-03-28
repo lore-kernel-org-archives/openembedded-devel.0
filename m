@@ -1,37 +1,45 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from va3ehsobe005.messaging.microsoft.com ([216.32.180.31]
+	helo=va3outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SCttq-00083K-Q5
+	(envelope-from <B19537@freescale.com>) id 1SCvCn-00014i-Hk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 16:30:58 +0200
-Received: by wera1 with SMTP id a1so682588wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 07:21:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=uqRSeEXBcw4ikR+iR1/GKM5pWesju24aRub+piq+5PI=;
-	b=MdfQwo7UAiSXxQC6z2Dt+APzfHjN5KoBLH1U1FGLs7wEoMXJfVoSCWp4YI8tGWO0l9
-	wc7Fk0iks1ISO27JH5fpLSY1iitTKK8Fb3ZSWQEut1J9ftzj+BLxAj+qEyDNlfguH/eR
-	vAIu0EBH85/Ney1IxuKv7+z8IGW9tzv46j5bExOAOjJj7ilf/Tai3Re3/Rn8zdJyMGEI
-	I6+LHODDRfivqQlWc0IWuDNqiay47/uIL966nhikcSPo58BnCCQ2hYdBiyZ9FY2E5VR+
-	j9ycb2/CTR1XqVyGA9VSjgr7OTi4whmFn3Aj0UhVH7hMSWI2oGZegpUXI0sY+uBpvCyd
-	CFLg==
-Received: by 10.180.88.169 with SMTP id bh9mr7675922wib.5.1332944516166;
-	Wed, 28 Mar 2012 07:21:56 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fl2sm13976189wib.4.2012.03.28.07.21.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 07:21:55 -0700 (PDT)
-Date: Wed, 28 Mar 2012 16:21:55 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120328142155.GD4004@jama.jama.net>
-References: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
-	<1332360619-3060-3-git-send-email-schnitzeltony@googlemail.com>
+	Wed, 28 Mar 2012 17:54:37 +0200
+Received: from mail7-va3-R.bigfish.com (10.7.14.245) by
+	VA3EHSOBE009.bigfish.com (10.7.40.29) with Microsoft SMTP Server id
+	14.1.225.23; Wed, 28 Mar 2012 15:00:14 +0000
+Received: from mail7-va3 (localhost [127.0.0.1])	by mail7-va3-R.bigfish.com
+	(Postfix) with ESMTP id 93CCE38010E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Mar 2012 15:00:14 +0000 (UTC)
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1202hzz8275ch8275bhz2dh2a8h668h839hd24h)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+Received: from mail7-va3 (localhost.localdomain [127.0.0.1]) by mail7-va3
+	(MessageSwitch) id 1332946812881327_7207;
+	Wed, 28 Mar 2012 15:00:12 +0000 (UTC)
+Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.243])	by
+	mail7-va3.bigfish.com (Postfix) with ESMTP id CFEA6120052	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Mar 2012 15:00:12 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS016.bigfish.com
+	(10.7.99.26) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 28 Mar 2012 15:00:11 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server (TLS) id 14.1.355.3; Wed, 28 Mar 2012 10:00:11 -0500
+Received: from localhost.localdomain
+	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
+	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id q2SF09wO015743;
+	Wed, 28 Mar 2012 08:00:10 -0700
+From: <b19537@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Mar 2012 23:10:49 +0800
+Message-ID: <1332947449-3431-1-git-send-email-b19537@freescale.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-In-Reply-To: <1332360619-3060-3-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe 2/2] midori: add librsvg-native to DEPENDS
+X-OriginatorOrg: freescale.com
+Subject: [PATCH] tclap: add v1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,74 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 14:30:58 -0000
-X-Groupsio-MsgNum: 38038
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="F8dlzb82+Fcn6AgP"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 28 Mar 2012 15:54:37 -0000
+Content-Type: text/plain
 
---F8dlzb82+Fcn6AgP
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Zhenhua Luo <b19537@freescale.com>
 
-On Wed, Mar 21, 2012 at 09:10:19PM +0100, Andreas M=FCller wrote:
-> configure found rsvg-convert on host:
-> ...
-> Checking for program rsvg-convert           : /usr/bin/rsvg-convert
-> ...
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+Signed-off-by: Zhenhua Luo <b19537@freescale.com>
+---
+ meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb |   15 +++++++++++++++
+ 1 files changed, 15 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+new file mode 100644
+index 0000000..85d6493
+--- /dev/null
++++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Templatized C++ Command Line Parser" 
++HOMEPAGE = "http://tclap.sourceforge.net/" 
++SECTION = "tclap" 
++LICENSE = "MIT" 
++LIC_FILES_CHKSUM = "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"
++
++SRCREV = "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
++SRC_URI = "git://tclap.git.sourceforge.net/gitroot/tclap/tclap;protocal=git;branch=master" 
++
++S = "${WORKDIR}/git"
++inherit autotools
++
++do_install_prepend() {
++    install -d ${S}/docs/html
++}
+-- 
+1.7.0.4
 
-> ---
->  .../recipes-connectivity/midori/midori_0.4.4.bb    |    4 +++-
->  1 files changed, 3 insertions(+), 1 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-o=
-e/recipes-connectivity/midori/midori_0.4.4.bb
-> index 87855b1..a408d73 100644
-> --- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-> +++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-> @@ -2,7 +2,9 @@ DESCRIPTION =3D "Midori is a lightweight web browser."
->  HOMEPAGE =3D "http://www.twotoasts.de/index.php?/pages/midori_summary.ht=
-ml"
->  LICENSE =3D "LGPLv2.1"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
-c24"
-> -DEPENDS =3D "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-n=
-ative python-docutils-native"
-> +DEPENDS =3D "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-n=
-ative python-docutils-native librsvg-native"
-> +
-> +PR =3D "r1"
-> =20
->  SRC_URI =3D "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.ta=
-r.bz2;name=3Dmidori \
->            "
-> --=20
-> 1.7.4.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---F8dlzb82+Fcn6AgP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk9zHoMACgkQN1Ujt2V2gBw9oQCfWe1iIYQ+aRJgntv1jiuvyQkz
-cw0Anj8c8HjyDem7mT9/TzG2BrG5eowE
-=tmba
------END PGP SIGNATURE-----
-
---F8dlzb82+Fcn6AgP--
