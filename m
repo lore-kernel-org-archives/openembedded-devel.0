@@ -1,33 +1,14 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from ffm.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SCzmJ-000489-K1
+	(envelope-from <obi@opendreambox.org>) id 1SD0Qf-0004zP-Sx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 22:47:36 +0200
-Received: by vcbfl13 with SMTP id fl13so1181448vcb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 13:38:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=PKhHgkZ9JUOlVbJyIu0Ktf3AE+2OVvvycmQ1w9IRWbE=;
-	b=uN7GX9elVn4UR7E9mgOItZcAtbdZY5jyxn1XHzDQkQ25F0rlLcWe9GoISJlS1R/WJI
-	44oXH9UkJF5bl8A6XVoshje3eJlowsDQnjICEpMOXHtZljArK+fGgT7yRjeWm9RkpgxX
-	n6vRbZ79AGe3RGoalfphEorIVxPpkk8st4UQ3PEE/7+SVIZ2LiA6LllgRkprDVNkSCLw
-	ez2U8QTpYqe9RUBTtqngMiPN3X7zM7hWD9zRIHOJYAhQD5LumefV+vfOh3NIDqr8Lpea
-	N5zsSXrCBQ2aro2GX/9KMcgsfljGGzQmFwA80pkECEIOhrgb949/M7rXvp9ULMmpnH4X
-	rQPg==
-MIME-Version: 1.0
-Received: by 10.220.116.68 with SMTP id l4mr14828031vcq.4.1332967110994; Wed,
-	28 Mar 2012 13:38:30 -0700 (PDT)
-Received: by 10.52.88.228 with HTTP; Wed, 28 Mar 2012 13:38:30 -0700 (PDT)
-In-Reply-To: <4F736B9F.9050304@dynamicdevices.co.uk>
-References: <1332888458-15872-1-git-send-email-ajlennon@dynamicdevices.co.uk>
-	<CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
-	<2372633.2CZh3kKOpL@helios> <4F736B9F.9050304@dynamicdevices.co.uk>
-Date: Wed, 28 Mar 2012 22:38:30 +0200
-Message-ID: <CACW_hTa3mPsLrW8GkkYD+sQCfbajR30jVDOZijujDirLAqhzRA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 28 Mar 2012 23:29:17 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Modified fetch() checksums to be correct for libpng 1.4.28 released 15/3/12 (current) instead of previous 8/3/12 release
+Date: Wed, 28 Mar 2012 23:20:13 +0200
+Message-Id: <1332969613-445-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] faad2: create -staticdev packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,21 +22,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 20:47:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Mar 2012 21:29:18 -0000
 
-2012/3/28 Alex J Lennon <ajlennon@dynamicdevices.co.uk>:
+* Fixes QA warnings:
 
->> FYI, I'm pretty sure that fetch2 from the version of bitbake we use with
->> OE-
->> Core will skip to the next available option (mirror) if the downloaded
->> file
->> doesn't match the SRC_URI checksum. Of course that's assuming there is a
->> mirror available.
+| faad2-2.7: non -staticdev package contains static .a library: libfaad-dev
+| faad2-2.7: non -staticdev package contains static .a library: libmp4ff-dev
 
-There is an official oe mirror iirc. Not really sure who is exactly
-responsible for it. Perhaps khem or kasox6
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ meta-oe/recipes-multimedia/faad2/faad2_2.7.bb |   10 ++++++----
+ 1 files changed, 6 insertions(+), 4 deletions(-)
 
-Frans
+diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
+index 462837f..3a64b6b 100644
+--- a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
++++ b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Library for reading some sort of media format."
+ SECTION = "libs"
+ LICENSE = "GPLv2"
++PR = "r1"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
+ 
+@@ -12,13 +13,14 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-${PV}/${PN}-${PV}.tar.bz2;
+ SRC_URI[faad2.md5sum] = "4c332fa23febc0e4648064685a3d4332"
+ SRC_URI[faad2.sha256sum] = "14561b5d6bc457e825bfd3921ae50a6648f377a9396eaf16d4b057b39a3f63b5"
+ 
+-PACKAGES =+ "libfaad libfaad-dev libmp4ff libmp4ff-dev"
++PACKAGES =+ "libfaad libfaad-dev libfaad-staticdev libmp4ff libmp4ff-dev libmp4ff-staticdev"
+ 
+ FILES_${PN} = "${bindir}/faad"
+ 
+ FILES_libfaad = "${libdir}/libfaad.so.*"
+-FILES_libfaad-dev = "${libdir}/libfaad.so ${libdir}/libfaad.la ${libdir}/libfaad.a ${includedir}/faad.h"
++FILES_libfaad-dev = "${libdir}/libfaad.so ${libdir}/libfaad.la ${includedir}/faad.h"
++FILES_libfaad-staticdev = "${libdir}/libfaad.a"
+ 
+ FILES_libmp4ff = "${libdir}/libmp4ff.so.*"
+-FILES_libmp4ff-dev = "${libdir}/libmp4ff.so ${libdir}/libmp4ff.la ${libdir}/libmp4ff.a ${includedir}/mp4ff.h"
+-
++FILES_libmp4ff-dev = "${libdir}/libmp4ff.so ${libdir}/libmp4ff.la ${includedir}/mp4ff.h"
++FILES_libmp4ff-staticdev = "${libdir}/libmp4ff.a"
+-- 
+1.7.5.4
+
 
 
