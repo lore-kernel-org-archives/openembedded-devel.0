@@ -1,27 +1,28 @@
-Received: from vms173015pub.verizon.net ([206.46.173.15])
+Received: from vms173021pub.verizon.net ([206.46.173.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SChiP-0004Sf-7C
+	(envelope-from <denis@denix.org>) id 1SChmP-0004ar-3D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 03:30:21 +0200
+	Wed, 28 Mar 2012 03:34:29 +0200
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173015.mailsrvcs.net
+	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M1K005UDJMM0880@vms173015.mailsrvcs.net> for
+	2009)) with ESMTPA id <0M1K00A3WJU9I6G1@vms173021.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	27 Mar 2012 19:20:47 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C183B201F9; Tue,
-	27 Mar 2012 20:20:46 -0400 (EDT)
-Date: Tue, 27 Mar 2012 20:20:46 -0400
+	27 Mar 2012 19:25:22 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B3D5E201F9; Tue,
+	27 Mar 2012 20:25:21 -0400 (EDT)
+Date: Tue, 27 Mar 2012 20:25:21 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <CAMKF1srMQNAREe-ttJR1bH-gfG1LLRZ04o8L2L_YtxZJPxJd1Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120328002046.GB17470@denix.org>
+Message-id: <20120328002521.GC17470@denix.org>
+References: <1332487454-14897-1-git-send-email-koen@dominion.thruhere.net>
+	<20120323140606.00eb484a@eb-e6520>
+	<CAMKF1sq742W527ubkcaqyOu5uQ_hDD4ijSHdKq8CeFZKFs5i_Q@mail.gmail.com>
+	<CAMKF1spjKz_vGs1=3Yz3230mvBL3nhV4+GVSGJEAnBNYH4W_PA@mail.gmail.com>
 MIME-version: 1.0
-References: <1332853398-9501-1-git-send-email-schnitzeltony@googlemail.com>
-	<1332853398-9501-4-git-send-email-schnitzeltony@googlemail.com>
-	<CAMKF1srMQNAREe-ttJR1bH-gfG1LLRZ04o8L2L_YtxZJPxJd1Q@mail.gmail.com>
+In-reply-to: <CAMKF1spjKz_vGs1=3Yz3230mvBL3nhV4+GVSGJEAnBNYH4W_PA@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 4/4] obexd: fix QA warnings
+Subject: Re: [meta-oe][toolchain-layer][PATCH] toolchain-layer: move binutils and gcc from meta-oe into here
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 01:30:21 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
+X-List-Received-Date: Wed, 28 Mar 2012 01:34:29 -0000
+Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Mar 27, 2012 at 02:39:24PM -0700, Khem Raj wrote:
-> On Tue, Mar 27, 2012 at 6:03 AM, Andreas M??ller
-> <schnitzeltony@googlemail.com> wrote:
-> > +do_install_append() {
-> > + =A0 =A0# remove empty plugins dir
-> > + =A0 =A0rm -rf ${D}${libdir}
-> > +}
-> > +
->=20
-> can you use use rmdir instead so it gets flagged when the dir
-> is not empty ?
+On Fri, Mar 23, 2012 at 08:06:15AM -0700, Khem Raj wrote:
+> On Fri, Mar 23, 2012 at 8:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Fri, Mar 23, 2012 at 6:06 AM, Eric B??nard <eric@eukrea.com> wrote:
+> >> Le Fri, 23 Mar 2012 08:24:14 +0100,
+> >> Koen Kooi <koen@dominion.thruhere.net> a ??crit :
+> >>
+> >>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> >> Acked-by: Eric B??nard <eric@eukrea.com>
+> >>
+> >
+> > Looks good now
+> >
+> > Acked-by: Khem Raj <raj.khem@gmail.com>
+> 
+> Koen
+> 
+> While you are at it I think eglibc 2.12 should either move to
+> toolchain-layer or to meta-angstrom layer I dont know if there are any
+> other consumers of eglibc 2.12
 
-Can we instead create obex-plugins in PACKAGES, even if it's empty no=
-w?
+Yes, there are other consumers. :)
 
---=20
+-- 
 Denys
-
 
 
