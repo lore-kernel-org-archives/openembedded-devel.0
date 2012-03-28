@@ -1,37 +1,37 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SCraC-0005m1-Ls
+	(envelope-from <martin.jansa@gmail.com>) id 1SCttX-00082x-9u
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 14:02:32 +0200
-Received: by wibhm17 with SMTP id hm17so5422536wib.0
+	Wed, 28 Mar 2012 16:30:39 +0200
+Received: by wgbds1 with SMTP id ds1so4195492wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 04:53:30 -0700 (PDT)
+	Wed, 28 Mar 2012 07:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=v+cyVh7nKBc4cWJfRj1ueO+/AUROioRqYMTTdnyC3+E=;
-	b=iwT47npjrrDiWdk6O9j1rtRVnLsCmQ5v5n5gwKBCU/lCiUZ/M//7GpYxbg0Isn0iRb
-	KXVz2regssjag5p7b0qDr8xYMGZyjtAOXFPtyoFniZUi6VJcZ6rGEjOPDmb2RxQ4LC/8
-	aY6MLbnpDbllStaDxmwzKJxRB02AvevYzRyeaOs0m4vRMTqc65XRdNhI5m4RROCiVKRy
-	0g7Z0YdGBD5CE4iYgYxrY8g8ZyAKH/vGyiQAROrsGR8Acnjx+zkZLRJ2CHRLmdd4H8IY
-	GOAv18LTIc2qiqYlL0Bm+uoAjiUQx1NwamiMkZbbj79aOP94EYOULAvg7kwtMHOcPTfe
-	lHVw==
-Received: by 10.180.97.41 with SMTP id dx9mr6384757wib.9.1332935610822;
-	Wed, 28 Mar 2012 04:53:30 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=CkRgn7laNLfiDUT57JcZWH86z4zJldKpRwyucxZzHTs=;
+	b=YWEm0F5gaP2ookn3y2S3b8tQFQx8ml2dvuL8Y/Zf6jKvry5EBvZ9gB8lVRTo8rb4Hi
+	KW/7d1GUzFFxb3WgxMf9hy5QvPg85Zb1dvHOxESP6mKAkRQL+f9K4Kl5RHESLQP2ICTM
+	hok2ZrzuTIRsLuYKkKhoH+BS/+fJcEZRNxYQTkewXyR1KxVgf+78sWcd/06JNgQZma++
+	sNafYEXHpui6EDeZpssfrRvsWMy2rBds45TIpzkx/uw8xfov4YiKKs5HCSti6E6KX51L
+	T/SXZHn40kzwBCWYKowGjXm5wY/02REgE8aUrLHU2jBF/U/POFiS3usLY7i43Ph9ACk8
+	ZTTg==
+Received: by 10.180.82.136 with SMTP id i8mr7469582wiy.19.1332944496997;
+	Wed, 28 Mar 2012 07:21:36 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n20sm1278973wiw.5.2012.03.28.04.53.29
+	by mx.google.com with ESMTPS id ff9sm58326246wib.2.2012.03.28.07.21.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 04:53:30 -0700 (PDT)
+	Wed, 28 Mar 2012 07:21:34 -0700 (PDT)
+Date: Wed, 28 Mar 2012 16:21:34 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Mar 2012 13:53:16 +0200
-Message-Id: <b30d8e20d1266b48766704a0dfc0b6c06a5b2b16.1332935553.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <79dc4a79b7c57d77cce43110ba011012a9b39f6d.1332935553.git.Martin.Jansa@gmail.com>
-References: <79dc4a79b7c57d77cce43110ba011012a9b39f6d.1332935553.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1332935553.git.Martin.Jansa@gmail.com>
-References: <cover.1332935553.git.Martin.Jansa@gmail.com>
-Subject: [meta-handheld][PATCH 2/2] formfactor, keymaps, udev: use better form of PRINC
+Message-ID: <20120328142134.GC4004@jama.jama.net>
+References: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
+	<1332360619-3060-2-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1332360619-3060-2-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe 1/2] midori: remove midori.inc and oe-stylize
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +45,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 12:02:32 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 14:30:39 -0000
+X-Groupsio-MsgNum: 38037
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GZVR6ND4mMseVXL/"
+Content-Disposition: inline
 
-* this way we can stack multiple bbappends from different layers without overwritting PRINC value
+--GZVR6ND4mMseVXL/
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-bsp/formfactor/formfactor_0.0.bbappend |    2 +-
- recipes-bsp/keymaps/keymaps_1.0.bbappend       |    2 +-
- recipes-core/udev/udev_173.bbappend            |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+On Wed, Mar 21, 2012 at 09:10:18PM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 
-diff --git a/recipes-bsp/formfactor/formfactor_0.0.bbappend b/recipes-bsp/formfactor/formfactor_0.0.bbappend
-index 5152da5..e406684 100644
---- a/recipes-bsp/formfactor/formfactor_0.0.bbappend
-+++ b/recipes-bsp/formfactor/formfactor_0.0.bbappend
-@@ -1,4 +1,4 @@
--PRINC = "1"
-+PRINC := "${@int(PRINC) + 1}"
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
- 
-diff --git a/recipes-bsp/keymaps/keymaps_1.0.bbappend b/recipes-bsp/keymaps/keymaps_1.0.bbappend
-index 039b30c..ca8e236 100644
---- a/recipes-bsp/keymaps/keymaps_1.0.bbappend
-+++ b/recipes-bsp/keymaps/keymaps_1.0.bbappend
-@@ -1,4 +1,4 @@
--PRINC = "2"
-+PRINC := "${@int(PRINC) + 2}"
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
- 
-diff --git a/recipes-core/udev/udev_173.bbappend b/recipes-core/udev/udev_173.bbappend
-index 4770c5b..446ea84 100644
---- a/recipes-core/udev/udev_173.bbappend
-+++ b/recipes-core/udev/udev_173.bbappend
-@@ -1,5 +1,5 @@
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
--PRINC = "1"
-+PRINC := "${@int(PRINC) + 1}"
- 
--- 
-1.7.8.5
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
+> ---
+>  meta-oe/recipes-connectivity/midori/midori.inc     |   39 --------------=
+-----
+>  .../recipes-connectivity/midori/midori_0.4.4.bb    |   41 ++++++++++++++=
+++++-
+>  2 files changed, 38 insertions(+), 42 deletions(-)
+>  delete mode 100644 meta-oe/recipes-connectivity/midori/midori.inc
+>=20
+> diff --git a/meta-oe/recipes-connectivity/midori/midori.inc b/meta-oe/rec=
+ipes-connectivity/midori/midori.inc
+> deleted file mode 100644
+> index dccb3ee..0000000
+> --- a/meta-oe/recipes-connectivity/midori/midori.inc
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -DESCRIPTION =3D "Midori is a lightweight web browser."
+> -HOMEPAGE =3D "http://www.twotoasts.de/index.php?/pages/midori_summary.ht=
+ml"
+> -LICENSE =3D "LGPLv2.1"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
+> -
+> -DEPENDS =3D "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-n=
+ative python-docutils-native"
+> -
+> -inherit gtk-icon-cache pkgconfig
+> -
+> -do_configure() {
+> -    sed -i -e 's:, shell=3DFalse::g' -e s:/usr/X11R6/include::g -e s:/us=
+r/X11R6/lib::g wscript
+> -    ./configure \
+> -            --prefix=3D${prefix} \
+> -            --bindir=3D${bindir} \
+> -            --sbindir=3D${sbindir} \
+> -            --libexecdir=3D${libexecdir} \
+> -            --datadir=3D${datadir} \
+> -            --sysconfdir=3D${sysconfdir} \
+> -            --sharedstatedir=3D${sharedstatedir} \
+> -            --localstatedir=3D${localstatedir} \
+> -            --libdir=3D${libdir} \
+> -            --includedir=3D${includedir} \
+> -            --infodir=3D${infodir} \
+> -            --mandir=3D${mandir} \
+> -            --disable-hildon \
+> -            --disable-gtk3 \
+> -}
+> -
+> -LDFLAGS_append =3D " -ljavascriptcoregtk-1.0 "
+> -
+> -do_install() {
+> -	oe_runmake DESTDIR=3D${D} install
+> -}
+> -
+> -RRECOMMENDS_${PN} +=3D "glib-networking ca-certificates gnome-icon-theme"
+> -
+> -FILES_${PN}-dev +=3D "${datadir}/vala/vapi"
+> -
+> -TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-o=
+e/recipes-connectivity/midori/midori_0.4.4.bb
+> index 827eb19..87855b1 100644
+> --- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
+> +++ b/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
+> @@ -1,8 +1,43 @@
+> -require midori.inc
+> -
+> -PARALLEL_MAKE =3D ""
+> +DESCRIPTION =3D "Midori is a lightweight web browser."
+> +HOMEPAGE =3D "http://www.twotoasts.de/index.php?/pages/midori_summary.ht=
+ml"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
+> +DEPENDS =3D "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-n=
+ative python-docutils-native"
+> =20
+>  SRC_URI =3D "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.ta=
+r.bz2;name=3Dmidori \
+>            "
+>  SRC_URI[midori.md5sum] =3D "a6578ebfd237c0f22cce49113b95f70c"
+>  SRC_URI[midori.sha256sum] =3D "fadd43f76c1c9f6a16483e60a804e58fb6817c6a5=
+95b1acdd59bcbdd7b35bca2"
+> +
+> +inherit gtk-icon-cache pkgconfig
+> +
+> +do_configure() {
+> +    sed -i -e 's:, shell=3DFalse::g' -e s:/usr/X11R6/include::g -e s:/us=
+r/X11R6/lib::g wscript
+> +    ./configure \
+> +            --prefix=3D${prefix} \
+> +            --bindir=3D${bindir} \
+> +            --sbindir=3D${sbindir} \
+> +            --libexecdir=3D${libexecdir} \
+> +            --datadir=3D${datadir} \
+> +            --sysconfdir=3D${sysconfdir} \
+> +            --sharedstatedir=3D${sharedstatedir} \
+> +            --localstatedir=3D${localstatedir} \
+> +            --libdir=3D${libdir} \
+> +            --includedir=3D${includedir} \
+> +            --infodir=3D${infodir} \
+> +            --mandir=3D${mandir} \
+> +            --disable-hildon \
+> +            --disable-gtk3 \
+> +}
+> +
+> +PARALLEL_MAKE =3D ""
+> +LDFLAGS_append =3D " -ljavascriptcoregtk-1.0 "
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> +
+> +do_install() {
+> +    oe_runmake DESTDIR=3D${D} install
+> +}
+> +
+> +RRECOMMENDS_${PN} +=3D "glib-networking ca-certificates gnome-icon-theme"
+> +
+> +FILES_${PN}-dev +=3D "${datadir}/vala/vapi"
+> --=20
+> 1.7.4.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--GZVR6ND4mMseVXL/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk9zHm4ACgkQN1Ujt2V2gBznrQCgrsYNtLoUSV5KXxu8UVWe+tX8
+agYAnRN+NGliq3d6GyJ5qAWIijZ26h69
+=px40
+-----END PGP SIGNATURE-----
+
+--GZVR6ND4mMseVXL/--
