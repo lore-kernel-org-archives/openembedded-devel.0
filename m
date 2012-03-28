@@ -1,33 +1,26 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SCowH-00022t-P2
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SCqTJ-0005eM-Et
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Mar 2012 11:13:09 +0200
-Received: by iaag37 with SMTP id g37so1192599iaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 02:04:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=vmJ1//mn1hI0i4kXKry4ldD0rI7WGUj4y1MJ4zFHjmo=;
-	b=oSkG0SswKflFeAxpIQmWFbly9VBu1tNN2WQevD2NXf+mwjpQApJko251bP83hJJlw+
-	2EppWCd5UYOLjZaLiWVJJc7Ho2Chs0C9pnrHv1Ax3rOOarHkjOat3bUPVUFMm9NVo9Lm
-	Bw3/Qp3uYWIV4/SPiMUduNJQB0dlJF1csc/KpkahXMkCNr/WkInocSj5Mnc9hEepEcDA
-	NaP+o6KjN3QzHwWToRC3d0qBF1P8TG+AuTmFLfXlqaxVsqQ7g+stnKSyvg8ERoXStTV+
-	bEdFuYyC6Hwnxstsz2nsucKwV7uWAq7DgETYzL6XAWEfH5D3k64S8CS8lRHtdQd45eL+
-	fhmA==
+	Wed, 28 Mar 2012 12:51:21 +0200
+Received: from cpc9-live20-0-0-cust612.know.cable.virginmedia.com
+	([82.42.142.101] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SCpvG-0007WH-Mb
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Mar 2012 10:16:10 +0000
+Message-ID: <4F72E4F9.5080402@dynamicdevices.co.uk>
+Date: Wed, 28 Mar 2012 11:16:25 +0100
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
 MIME-Version: 1.0
-Received: by 10.50.156.135 with SMTP id we7mr1611713igb.0.1332925447155; Wed,
-	28 Mar 2012 02:04:07 -0700 (PDT)
-Received: by 10.42.165.137 with HTTP; Wed, 28 Mar 2012 02:04:07 -0700 (PDT)
-In-Reply-To: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Wed, 28 Mar 2012 11:04:07 +0200
-Message-ID: <CALbNGRRbDLWOWrfzfb+GNX6Wh6cNracvkCYj3B5yUkL4aKj3Ow@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe 0/2] midori: cleanup
+References: <1332888458-15872-1-git-send-email-ajlennon@dynamicdevices.co.uk>
+	<CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
+In-Reply-To: <CACW_hTZ1Bu7X12=BLq+dfX-xHQzy829_w-fjwDX0VEeSTuBw7Q@mail.gmail.com>
+Subject: Re: [PATCH] Modified fetch() checksums to be correct for libpng 1.4.28 released 15/3/12 (current) instead of previous 8/3/12 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +34,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 09:13:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Mar 2012 10:51:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 21, 2012 at 9:10 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> v1 -> v2:
-> change order variables/functions as suggested in [1]
+
+>You mean upstream changed their source tarball (or whatever) without
+
+That's correct. I compared my cached tar.bz2 with what's current from 
+their SRC_URI
+and sure enough there are differences, the most obvious being they've 
+changed the
+dates I reference. Yuk indeed, but it happens not infrequently I believe?
+
+>Guess we might want to mirror a version and pull from the mirror.
+
+I think that would be an excellent idea.
+
+Cheers,
+
+Alex
+
+On 28/03/2012 09:34, Frans Meulenbroeks wrote:
+> 2012/3/28<ajlennon@dynamicdevices.co.uk>:
+>> From: Alex J Lennon<ajlennon@gmail.com>
+>>
+>> Signed-off-by: Alex J Lennon<ajlennon@gmail.com>
+>> ---
+>>   recipes/libpng/libpng_1.2.48.bb |    4 ++--
+>>   1 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes/libpng/libpng_1.2.48.bb b/recipes/libpng/libpng_1.2.48.bb
+>> index 50a3c03..534962d 100644
+>> --- a/recipes/libpng/libpng_1.2.48.bb
+>> +++ b/recipes/libpng/libpng_1.2.48.bb
+>> @@ -2,5 +2,5 @@ require libpng.inc
+>>
+>>   PR = "${INC_PR}.0"
+>>
+>> -SRC_URI[libpng.md5sum] = "7612af5660cd4b5e8c433ce53bea01a7"
+>> -SRC_URI[libpng.sha256sum] = "f6db51aff81b6920203678b29e8c68a5e3703cf5b39ae5e9e56370d17f31b1c4"
+>> +SRC_URI[libpng.md5sum] = "74c8c261bdf9a75274e22875183fda07"
+>> +SRC_URI[libpng.sha256sum] = "b4c92df11eadf3e81705a58253dbffc4b95169186899e28abdfc8aada8a20fcc"
+>> --
+>> 1.7.5.4
+>>
+> You mean upstream changed their source tarball (or whatever) without
+> updating the version number.
+> Yuk.
 >
-> v2 -> v3
-> change order variables/functions as suggested in [2]
+> Guess we might want to mirror a version and pull from the mirror.
+> (changing the checksum alone creates issues because other people might
+> already have the version with the old checksum in their downloads.
 >
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-March/03=
-8650.html
-> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-March/03=
-8684.html
+> Frans
 >
-> Andreas M=FCller (2):
-> =A0midori: remove midori.inc and oe-stylize
-> =A0midori: add librsvg-native to DEPENDS
+> PS: thinking of it: we might be able to resolve the latter issue by
+> forcing the removal of a file from downloads (and trigger a refetch)
+> if the .md5 does not match the md5 in the recipe.
 >
-> =A0meta-oe/recipes-connectivity/midori/midori.inc =A0 =A0 | =A0 39 ------=
--------------
-> =A0.../recipes-connectivity/midori/midori_0.4.4.bb =A0 =A0| =A0 41 ++++++=
-+++++++++++++-
-> =A02 files changed, 39 insertions(+), 41 deletions(-)
-> =A0delete mode 100644 meta-oe/recipes-connectivity/midori/midori.inc
->
-> --
-> 1.7.4.4
->
-ping?
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
