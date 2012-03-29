@@ -1,29 +1,40 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SDIY3-0004Ty-FO
+	(envelope-from <tom.rini@gmail.com>) id 1SDJ2n-0005Gl-2n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 18:50:07 +0200
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M1N0053JKUUTTX0@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	29 Mar 2012 10:40:07 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0237A200AB; Thu,
-	29 Mar 2012 11:40:05 -0400 (EDT)
-Date: Thu, 29 Mar 2012 11:40:05 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <20120329134519.GL4004@jama.jama.net>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20120329154005.GF17470@denix.org>
-MIME-version: 1.0
-References: <cover.1333002899.git.Martin.Jansa@gmail.com>
-	<082c61be8baa1e3b863ef083ff98ac97a6c594aa.1333002899.git.Martin.Jansa@gmail.com>
-	<3065bcbfb2b5c24a3e316375b0afbedadf265665.1333002899.git.Martin.Jansa@gmail.com>
-	<CAAQYJAts20KyLfPtXY3wUCd8R9awthfsPue+sbw6UuWcuujW0g@mail.gmail.com>
-	<20120329134519.GL4004@jama.jama.net>
+	Thu, 29 Mar 2012 19:21:53 +0200
+Received: by yhjj56 with SMTP id j56so1678550yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 10:12:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=Sur7TfMkrgavOQahKALUdmzL6ygSGHQlW0zaGA4nayM=;
+	b=Eq27Y/E/csdoCqwFZSOcye/QmokwQxG3QWD4A5+49XYIv6Zw3m0unGFK6MD7QEwVpe
+	dyXjp+IGohEImlss/Y+x79qmqFu9qf1jU7djb4jA5rLirYQIuVctyJXi3vBRvur7yFuq
+	EmbJEs63GG+ve8H2ZW7GwTzCLEJOFPeydfBJNAaM3QEbqP88C70qrKuIMg1QhrpXSktp
+	GaEmEVwrpZwYdYG8Bb5pIOpdnu5DVfxvRyFcRxeKhZGzYDTtJRtKzyQSUH2l/DVK0llm
+	gsttJyS/k48xCSsA+KlWWZ4eVQDKuMEaWcwjXfxaCh/eVhi0cazbpj5I7r0D+A9iR5Je
+	4h0A==
+Received: by 10.60.2.198 with SMTP id 6mr44452224oew.34.1333041168485;
+	Thu, 29 Mar 2012 10:12:48 -0700 (PDT)
+Received: from bill-the-cat ([68.230.54.74])
+	by mx.google.com with ESMTPS id n10sm6627074obu.23.2012.03.29.10.12.46
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 29 Mar 2012 10:12:46 -0700 (PDT)
+Date: Thu, 29 Mar 2012 10:12:44 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <20120329171244.GA2418@bill-the-cat>
+References: <cover.1332849864.git.sledz@dresearch-fe.de>
+MIME-Version: 1.0
+In-Reply-To: <cover.1332849864.git.sledz@dresearch-fe.de>
+Organization: Texas Instruments
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-handheld][PATCH 2/2] recipes-kernel: use shared linux.inc from meta-oe
+Cc: Ulf Samuelsson <ulf.samuelsson@telia.com>,
+	openembedded-devel@lists.openembedded.org,
+	Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [2011.03-maintenance 0/3] pull request 20120327
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +48,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 16:50:07 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Thu, 29 Mar 2012 17:21:53 -0000
+X-Groupsio-MsgNum: 38077
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ReaqsoxgOBHFXBhH"
+Content-Disposition: inline
 
-On Thu, Mar 29, 2012 at 03:45:19PM +0200, Martin Jansa wrote:
-> On Thu, Mar 29, 2012 at 11:52:15AM +0200, Andrea Adami wrote:
-> > On Thu, Mar 29, 2012 at 8:35 AM, Martin Jansa <martin.jansa@gmail=
-.com> wrote:
-> > > * notice that ARM_KEEP_OABI default value is now 0 instead of 1
-> > > =A0but only linux-hackndev and linux-handhelds-2.6-2.6.21 had
-> > > =A0CONFIG_OABI_COMPAT=3Dy in defconfigs so this shouldn't chang=
-e anything
-> > >
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > ---
-> >=20
-> > Martin,
-> >=20
-> > I have some concerns here, because I don't think meta-handeld sho=
-uld
-> > depend on meta-oe.
-> > (I know udev .bbappend requires it now but talking with Paul we f=
-ound
-> > a better solution and udev will disappear from layer soon).
->=20
-> Denis wanted linux.inc also in some smaller layer then meta-oe, so =
-maybe
-> we can create meta-bsp-support in meta-opememebedded repository and=
- move
-> it there?
->=20
-> Having linux.inc copy for each BSP is wrong.
+--ReaqsoxgOBHFXBhH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Remind me, what was the reason to have linux.inc as a separate file i=
-n the=20
-first place? I mean, can we roll it back to kernel.bbclass in OE-Core=
-? If not,=20
-maybe it would be easier to push it as is to OE-Core, since it's much=
- cleaner=20
-now?
+On Tue, Mar 27, 2012 at 02:06:47PM +0200, Steffen Sledz wrote:
+
+> Hi Tom,
+>=20
+> please pull these commits cherry-picked from oe.dev.
+> The fix some python build problems.
+> All are well tested in our own environment.
+>=20
+> Thx,
+> Steffen
+>=20
+> The following changes since commit ec639a6b04449ef8e064e7bf35660ab31c3e2e=
+ee:
+>=20
+>   libmatthew-0.7.1: SRC_URI updated (2012-03-24 07:16:26 +0100)
+>=20
+> are available in the git repository at:
+>   git://git.openembedded.org/openembedded sledz/pull3
+>   http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Dsledz/pull3
+>=20
+> Paul Menzel (1):
+>   python-scons_1.3.0: add `python-native` to `DEPENDS_virtclass-native`
+>=20
+> Simon Busch (1):
+>   python-2.6.6: backport pkgconfig support from version 2.7.1 and bump PR
+>=20
+> Ulf Samuelsson (1):
+>   python-2.6.6: Fix python-2.6.6 build failure on linux-3.x
+>=20
+>  .../python/python-2.6.6/07-linux3-regen-fix.patch  |   18 ++++
+>  .../python/python-2.6.6/pkgconfig-support.patch    |   94 ++++++++++++++=
+++++++
+>  recipes/python/python-scons_1.3.0.bb               |    1 +
+>  recipes/python/python_2.6.6.bb                     |    4 +-
+>  4 files changed, 116 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/python/python-2.6.6/07-linux3-regen-fix.patch
+>  create mode 100644 recipes/python/python-2.6.6/pkgconfig-support.patch
+
+Applied, thanks!
 
 --=20
-Denys
+Tom
 
+--ReaqsoxgOBHFXBhH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEARECAAYFAk90mAwACgkQdZngf2G4WwMJ6QCcCaS2mrz5L5DSbEJeZMTo1hLN
+xLAAoI3qGVD+98CkXbCSymmLchBRhTI2
+=EjSZ
+-----END PGP SIGNATURE-----
+
+--ReaqsoxgOBHFXBhH--
