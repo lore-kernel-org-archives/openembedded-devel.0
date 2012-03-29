@@ -1,37 +1,32 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SD90Z-0008Uu-R6
+	(envelope-from <martin.jansa@gmail.com>) id 1SD96O-0000IB-Ip
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 08:38:55 +0200
-Received: by eekc1 with SMTP id c1so621283eek.6
+	Thu, 29 Mar 2012 08:44:56 +0200
+Received: by eekc1 with SMTP id c1so625836eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2012 23:29:53 -0700 (PDT)
+	Wed, 28 Mar 2012 23:35:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=G3biMaWfh793dRP3b18Z0/KflGpfcaU75S+umF3EB+A=;
-	b=FhufsfHdd74vJedWPknAc7XCdBLEfNos7diWzhyEdsCYuAHnTfsWt47AC0JnRKcuTq
-	cuN01cEaqDSq/WVuPTkWvtUmOCjRp75i+3gvWnDTB2trKcu7ElfevBLdbPYPFXi0bQyj
-	gBoDgYe2unI9B1y/U/282VU02SIr/knKOZI7PQVW5J7j3jRJCXxM7IbcUF2lCkCyJ+fr
-	Ly3GIy74y9uBzTnlsWiBC6tF86RJyQY9YfPMZPkn8e0LcBq0xZyflCjn2Oze//yT4+Ai
-	RqOnl2ZjwGrsnS52cGn+NdIN3+jz4zSqGs+bz6Jk99xGwmoFnKQnPmrdGiuYz5c/2ZGT
-	czKA==
-Received: by 10.180.104.231 with SMTP id gh7mr2470478wib.10.1333002593123;
-	Wed, 28 Mar 2012 23:29:53 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=MkIdLct27NtNXpCTZNHtkNZFcpLnRBiazrUy7+4GX2Y=;
+	b=EqvxicgHPpt5hnfoo/X7c4Tz4q7px5R0nu2Dq4zTR0rYcJ5MFv69NDBg9H3Ua/7EuZ
+	cNhH+hd38H6P09wlo57LFHO/xaNFacP4SliiYBdNtdV0Po93I1PzgLxHaobvClv71Rnc
+	E/7QbbpBoBmamTNYzjBqs5NQrhly0U5vJWDl/HhImGQtDu79w3ThJNYOEyIQ+fi/W/wS
+	XaXoYPfcSDqO/RdjAVlQUql/6784T1dFFfDBhTb/mcB69WCsvkeUdiyqKCbA1xXQ/LMi
+	1EqLIlCDHNkVA377vM1DcB8/mB3jONnwD2PHQ5k7I4e2oxrxt9COFdZoocj2hM2KARc3
+	fGpA==
+Received: by 10.180.82.132 with SMTP id i4mr2501779wiy.12.1333002953823;
+	Wed, 28 Mar 2012 23:35:53 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j3sm24064989wiw.1.2012.03.28.23.29.51
+	by mx.google.com with ESMTPS id 17sm2995053wis.0.2012.03.28.23.35.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 23:29:52 -0700 (PDT)
+	Wed, 28 Mar 2012 23:35:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Mar 2012 08:29:40 +0200
-Message-Id: <c32bd0451da9fb904f408607012d9fbad7adcce8.1333002292.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Mar 2012 08:35:45 +0200
+Message-Id: <cover.1333002899.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <a778a584bcb8f57690598ebcc401a5181eb56e19.1333002292.git.Martin.Jansa@gmail.com>
-References: <a778a584bcb8f57690598ebcc401a5181eb56e19.1333002292.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1333002292.git.Martin.Jansa@gmail.com>
-References: <cover.1333002292.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] kernel.bbclass: unify white spaces
+Subject: [meta-handheld][PATCH 0/2] kernel cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,151 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 06:38:55 -0000
+X-List-Received-Date: Thu, 29 Mar 2012 06:44:56 -0000
 
-* indentation was with spaces and tabs, unify to use tabs instead of
-  spaces, because "python populate_packages" expects tabs (or 8 spaces)
-  and we're doing populate_packages_preppend here
+The following changes since commit 1cbe2f0aa8e051f256792701da1bb8ca0fbbfac9:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/classes/kernel.bbclass |   78 ++++++++++++++++++++--------------------
- 1 files changed, 39 insertions(+), 39 deletions(-)
+  formfactor, keymaps, udev: use better form of PRINC (2012-03-28 21:47:00 +0100)
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 1ef8e2a..cfcd5e9 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -11,20 +11,20 @@ INITRAMFS_IMAGE ?= ""
- INITRAMFS_TASK ?= ""
- 
- python __anonymous () {
--    kerneltype = d.getVar('KERNEL_IMAGETYPE', True) or ''
--    if kerneltype == 'uImage':
--    	depends = d.getVar("DEPENDS", True)
--    	depends = "%s u-boot-mkimage-native" % depends
--    	d.setVar("DEPENDS", depends)
-+	kerneltype = d.getVar('KERNEL_IMAGETYPE', True) or ''
-+	if kerneltype == 'uImage':
-+		depends = d.getVar("DEPENDS", True)
-+		depends = "%s u-boot-mkimage-native" % depends
-+		d.setVar("DEPENDS", depends)
- 
--    image = d.getVar('INITRAMFS_IMAGE', True)
--    if image:
--    	d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
-+	image = d.getVar('INITRAMFS_IMAGE', True)
-+	if image:
-+		d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
- 
--    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
-+	machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
- 
--    if machine_kernel_pr:
--    	d.setVar('PR', machine_kernel_pr)
-+	if machine_kernel_pr:
-+		d.setVar('PR', machine_kernel_pr)
- }
- 
- inherit kernel-arch deploy
-@@ -96,7 +96,7 @@ kernel_do_compile() {
- do_compile_kernelmodules() {
- 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
- 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
--		oe_runmake ${PARALLEL_MAKE} modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-+		oe_runmake ${PARALLEL_MAKE} modules CC="${KERNEL_CC}" LD="${KERNEL_LD}"
- 	else
- 		bbnote "no modules to compile"
- 	fi
-@@ -120,7 +120,7 @@ kernel_do_install() {
- 
- 	#
- 	# Install various kernel output (zImage, map file, config, module support files)
--	#	
-+	#
- 	install -d ${D}/${KERNEL_IMAGEDEST}
- 	install -d ${D}/boot
- 	install -m 0644 ${KERNEL_OUTPUT} ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}
-@@ -193,7 +193,7 @@ kernel_do_install() {
- 	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
- 	           arch/powerpc/boot/mktree"
- 	for entry in $bin_files; do
--	        rm -f $kerneldir/$entry
-+		rm -f $kerneldir/$entry
- 	done
- }
- 
-@@ -391,10 +391,10 @@ python populate_packages_prepend () {
- 		return deps
- 	
- 	def get_dependencies(file, pattern, format):
--                # file no longer includes PKGD
-+		# file no longer includes PKGD
- 		file = file.replace(d.getVar('PKGD', True) or '', '', 1)
--                # instead is prefixed with /lib/modules/${KERNEL_VERSION}
--                file = file.replace("/lib/modules/%s/" % d.getVar('KERNEL_VERSION', True) or '', '', 1)
-+		# instead is prefixed with /lib/modules/${KERNEL_VERSION}
-+		file = file.replace("/lib/modules/%s/" % d.getVar('KERNEL_VERSION', True) or '', '', 1)
- 
- 		if module_deps.has_key(file):
- 			import re
-@@ -498,34 +498,34 @@ python populate_packages_prepend () {
- do_sizecheck() {
- 	if [ ! -z "${KERNEL_IMAGE_MAXSIZE}" ]; then
- 		size=`ls -l ${KERNEL_OUTPUT} | awk '{ print $5}'`
--        	if [ $size -ge ${KERNEL_IMAGE_MAXSIZE} ]; then
-+		if [ $size -ge ${KERNEL_IMAGE_MAXSIZE} ]; then
- 			rm ${KERNEL_OUTPUT}
--                	die  "This kernel (size=$size > ${KERNEL_IMAGE_MAXSIZE}) is too big for your device. Please reduce the size of the kernel by making more of it modular."
--        	fi
--    	fi
-+			die "This kernel (size=$size > ${KERNEL_IMAGE_MAXSIZE}) is too big for your device. Please reduce the size of the kernel by making more of it modular."
-+		fi
-+	fi
- }
- 
- addtask sizecheck before do_install after do_compile
- 
- do_uboot_mkimage() {
--    if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
--        ENTRYPOINT=${UBOOT_ENTRYPOINT}
--        if test -n "${UBOOT_ENTRYSYMBOL}"; then
--            ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
--                   awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'`
--        fi
--        if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
--            ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
--            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
--            rm -f linux.bin
--        else
--            ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
--            rm -f linux.bin.gz
--            gzip -9 linux.bin
--            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
--            rm -f linux.bin.gz
--        fi
--    fi
-+	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
-+		ENTRYPOINT=${UBOOT_ENTRYPOINT}
-+		if test -n "${UBOOT_ENTRYSYMBOL}"; then
-+			ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
-+				awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'`
-+		fi
-+		if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
-+			${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
-+			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
-+			rm -f linux.bin
-+		else
-+			${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
-+			rm -f linux.bin.gz
-+			gzip -9 linux.bin
-+			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
-+			rm -f linux.bin.gz
-+		fi
-+	fi
- }
- 
- addtask uboot_mkimage before do_install after do_compile
+are available in the git repository at:
+  git://gitorious.org/shr/meta-handheld jansa/pull
+
+Martin Jansa (2):
+  linux-git: drop setversion fix, it's fixed in kernel.bbclass now
+  recipes-kernel: use shared linux.inc from meta-oe
+
+ recipes-kernel/linux/linux.inc             |  130 ----------------------------
+ recipes-kernel/linux/linux_2.6.29.bb       |    2 +-
+ recipes-kernel/linux/linux_3.0.1.bb        |    2 +-
+ recipes-kernel/linux/linux_3.1.bb          |    2 +-
+ recipes-kernel/linux/linux_3.2.bb          |    2 +-
+ recipes-kernel/linux/linux_git.bb          |   11 +--
+ recipes-kernel/linux/openezx-kernel_git.bb |    2 +-
+ 7 files changed, 6 insertions(+), 145 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux.inc
+
 -- 
 1.7.8.5
 
