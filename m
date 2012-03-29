@@ -1,36 +1,18 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1SDD4r-0005H4-0C
+	(envelope-from <gthomas@mail.chez-thomas.org>) id 1SDDBd-0005kH-7y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 12:59:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 620F2315A423
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Mar 2012 12:50:35 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id S2fhJdZiPdBF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Mar 2012 12:50:25 +0200 (CEST)
-Received: from [172.22.22.61] (drms-590cf1a1.pool.mediaWays.net
-	[89.12.241.161])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 6682E315A702
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Mar 2012 12:50:25 +0200 (CEST)
-Message-ID: <4F743E70.1080502@opendreambox.org>
-Date: Thu, 29 Mar 2012 12:50:24 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120310 Thunderbird/11.0
-MIME-Version: 1.0
+	Thu, 29 Mar 2012 13:06:37 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 996)
+	id 146D8F8121B; Thu, 29 Mar 2012 04:57:35 -0600 (MDT)
+From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1332969613-445-1-git-send-email-obi@opendreambox.org>
-	<CALbNGRSbH0aoR3BY3=kUM_KZfz2QVyvPMdrkwCR7zMv5qshCJg@mail.gmail.com>
-In-Reply-To: <CALbNGRSbH0aoR3BY3=kUM_KZfz2QVyvPMdrkwCR7zMv5qshCJg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] faad2: create -staticdev packages
+Date: Thu, 29 Mar 2012 04:57:30 -0600
+Message-Id: <1333018650-987-2-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 1.7.7.6
+In-Reply-To: <1333018650-987-1-git-send-email-gary@mlbassoc.com>
+References: <1333018650-987-1-git-send-email-gary@mlbassoc.com>
+Subject: [meta-oe 2/2] python-zopeinterface: update to latest upstream version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +26,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 10:59:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Mar 2012 11:06:37 -0000
 
-On 29.03.2012 08:29, Andreas M=FCller wrote:
-> On Wed, Mar 28, 2012 at 11:20 PM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
->> * Fixes QA warnings:
->>
->> | faad2-2.7: non -staticdev package contains static .a library: libfaa=
-d-dev
->> | faad2-2.7: non -staticdev package contains static .a library: libmp4=
-ff-dev
->>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  meta-oe/recipes-multimedia/faad2/faad2_2.7.bb |   10 ++++++----
->>  1 files changed, 6 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb b/meta-oe/r=
-ecipes-multimedia/faad2/faad2_2.7.bb
->> index 462837f..3a64b6b 100644
->> --- a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
->> +++ b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
->> @@ -1,6 +1,7 @@
->>  DESCRIPTION =3D "Library for reading some sort of media format."
->>  SECTION =3D "libs"
->>  LICENSE =3D "GPLv2"
->> +PR =3D "r1"
->>
->>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D381c8cbe277a7bc1ee2ae6083a=
-04c958"
->>
->> @@ -12,13 +13,14 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/faac/faad2-src/=
-faad2-${PV}/${PN}-${PV}.tar.bz2;
->>  SRC_URI[faad2.md5sum] =3D "4c332fa23febc0e4648064685a3d4332"
->>  SRC_URI[faad2.sha256sum] =3D "14561b5d6bc457e825bfd3921ae50a6648f377a=
-9396eaf16d4b057b39a3f63b5"
->>
->> -PACKAGES =3D+ "libfaad libfaad-dev libmp4ff libmp4ff-dev"
->> +PACKAGES =3D+ "libfaad libfaad-dev libfaad-staticdev libmp4ff libmp4f=
-f-dev libmp4ff-staticdev"
->>
->>  FILES_${PN} =3D "${bindir}/faad"
->>
->>  FILES_libfaad =3D "${libdir}/libfaad.so.*"
->> -FILES_libfaad-dev =3D "${libdir}/libfaad.so ${libdir}/libfaad.la ${li=
-bdir}/libfaad.a ${includedir}/faad.h"
->> +FILES_libfaad-dev =3D "${libdir}/libfaad.so ${libdir}/libfaad.la ${in=
-cludedir}/faad.h"
->> +FILES_libfaad-staticdev =3D "${libdir}/libfaad.a"
->>
->>  FILES_libmp4ff =3D "${libdir}/libmp4ff.so.*"
->> -FILES_libmp4ff-dev =3D "${libdir}/libmp4ff.so ${libdir}/libmp4ff.la $=
-{libdir}/libmp4ff.a ${includedir}/mp4ff.h"
->> -
->> +FILES_libmp4ff-dev =3D "${libdir}/libmp4ff.so ${libdir}/libmp4ff.la $=
-{includedir}/mp4ff.h"
->> +FILES_libmp4ff-staticdev =3D "${libdir}/libmp4ff.a"
->> --
-> Looks like
->=20
-> http://patches.openembedded.org/patch/24713/
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+---
+ .../python/python-zopeinterface_3.5.1.bb           |   22 --------------------
+ .../python/python-zopeinterface_3.8.0.bb           |   22 ++++++++++++++++++++
+ 2 files changed, 22 insertions(+), 22 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
+ create mode 100644 meta-oe/recipes-devtools/python/python-zopeinterface_3.8.0.bb
 
-Oops! I didn't notice your patch. :-)
+diff --git a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb b/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
+deleted file mode 100644
+index 106e836..0000000
+--- a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Interface definitions for Zope products"
+-SECTION = "console/network"
+-
+-LICENSE = "ZPL-2.1"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
+-
+-SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
+-SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
+-SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
+-
+-S = "${WORKDIR}/zope.interface-${PV}"
+-
+-inherit setuptools
+-
+-RPROVIDES_${PN} += "zope-interfaces"
+-FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
+-FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.c"
+-FILES_${PN}-doc += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.txt"
+-FILES_${PN}-tests = " \
+-        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/tests \
+-        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/common/tests \
+-"
+diff --git a/meta-oe/recipes-devtools/python/python-zopeinterface_3.8.0.bb b/meta-oe/recipes-devtools/python/python-zopeinterface_3.8.0.bb
+new file mode 100644
+index 0000000..106e836
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-zopeinterface_3.8.0.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Interface definitions for Zope products"
++SECTION = "console/network"
++
++LICENSE = "ZPL-2.1"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
++
++SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
++SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
++SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
++
++S = "${WORKDIR}/zope.interface-${PV}"
++
++inherit setuptools
++
++RPROVIDES_${PN} += "zope-interfaces"
++FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
++FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.c"
++FILES_${PN}-doc += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.txt"
++FILES_${PN}-tests = " \
++        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/tests \
++        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/common/tests \
++"
+-- 
+1.7.7.6
 
-Regards,
-Andreas
 
 
