@@ -1,24 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.dream-property.net ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1SDDpS-0006Z5-1t
+	(envelope-from <obi@opendreambox.org>) id 1SDDpe-0006e2-P9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 13:47:46 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1SDDgh-0004EQ-Cu from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 04:38:43 -0700
-Received: from pkl-noor-ubuntu.mgc.mentorg.com ([137.202.157.70]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 29 Mar 2012 13:38:41 +0200
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+	Thu, 29 Mar 2012 13:47:58 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id D4E9F315AA03
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 13:38:57 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id COtGbaEh-5no
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 13:38:47 +0200 (CEST)
+Received: from [172.22.22.61] (drms-590cf1a1.pool.mediaWays.net
+	[89.12.241.161])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id EFBB4315A9A8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 13:38:46 +0200 (CEST)
+Message-ID: <4F7449C6.8090004@opendreambox.org>
+Date: Thu, 29 Mar 2012 13:38:46 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120310 Thunderbird/11.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Mar 2012 16:38:28 +0500
-Message-Id: <1333021108-27962-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.9
-X-OriginalArrivalTime: 29 Mar 2012 11:38:42.0148 (UTC)
-	FILETIME=[7DE1A240:01CD0DA0]
-Subject: [PATCH] libedit: Remove files folder as no patch was being used
+References: <1333018650-987-1-git-send-email-gary@mlbassoc.com>
+In-Reply-To: <1333018650-987-1-git-send-email-gary@mlbassoc.com>
+Subject: Re: [meta-oe 1/2] python-twisted: update to latest upstream version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,169 +43,310 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 11:47:46 -0000
+X-List-Received-Date: Thu, 29 Mar 2012 11:47:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
+Hi Gary,
 
-* No patch file was being used in the recipe so removed the folder to make it bit clean.
+I was going to submit a similar patch. See my comments inline.
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- .../libedit/files/20031222-debian-to-gentoo.patch  |  125 --------------------
- .../libedit/files/libedit-add-soname.diff          |   12 --
- 2 files changed, 0 insertions(+), 137 deletions(-)
+On 29.03.2012 12:57, Gary Thomas wrote:
+> diff --git a/meta-oe/recipes-devtools/python/python-twisted_12.0.0.bb b/meta-oe/recipes-devtools/python/python-twisted_12.0.0.bb
+> new file mode 100644
+> index 0000000..a642656
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-twisted_12.0.0.bb
+> @@ -0,0 +1,234 @@
+> +DESCRIPTION = "Twisted is an event-driven networking framework written in Python and licensed under the LGPL. \
+> +Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
+> +(including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
+> +HOMEPAGE = "http://www.twistedmatrix.com"
+> +SECTION = "console/network"
+> +
+> +#twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=fc0f9dafb8baecfd2b77ff4bf64e6eaf"
 
-diff --git a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch b/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
-deleted file mode 100644
-index 62069d5..0000000
---- a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
-+++ /dev/null
-@@ -1,125 +0,0 @@
--This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93. 
--
--Upstream-Status: Inappropriate [not author]
--diff -ur netbsd-cvs/Makefile libedit-20031222/Makefile
----- netbsd-cvs/Makefile	2003-12-22 13:44:24.798012752 -0500
--+++ libedit-20031222/Makefile	2003-12-22 14:55:15.133863488 -0500
--@@ -5,6 +5,7 @@
-- 
-- WARNS=	3
-- LIB=	edit
--+LIBS=-lncurses
-- 
-- OSRCS=	chared.c common.c el.c emacs.c fcns.c help.c hist.c key.c map.c \
-- 	parse.c prompt.c read.c refresh.c search.c sig.c term.c tty.c vi.c
--@@ -22,9 +23,10 @@
-- 	editline.3 tok_line.3 editline.3 tok_str.3
-- 
-- # For speed and debugging
---#SRCS=   ${OSRCS} tokenizer.c history.c readline.c
--+SRCS=   ${OSRCS} tokenizer.c history.c readline.c vis.c unvis.c fgetln.c strlcat.c strlcpy.c
-- # For protection
---SRCS=	editline.c tokenizer.c history.c readline.c
--+#SRCS=	editline.c tokenizer.c history.c readline.c
--+OOBJS= $(patsubst %.c,%.o,$(SRCS))
-- 
-- LIBEDITDIR?=${.CURDIR}
-- 
--@@ -38,6 +40,7 @@
-- CPPFLAGS+=-I. -I${.CURDIR}
-- CPPFLAGS+=#-DDEBUG_TTY -DDEBUG_KEY -DDEBUG_READ -DDEBUG -DDEBUG_REFRESH
-- CPPFLAGS+=#-DDEBUG_PASTE -DDEBUG_EDIT
--+CFLAGS+=-I. -include ../glibc-bsd-glue/bsdcompat.h -I../glibc-compat -I../glibc-bsd-glue
-- 
-- AHDR=vi.h emacs.h common.h 
-- ASRC=${LIBEDITDIR}/vi.c ${LIBEDITDIR}/emacs.c ${LIBEDITDIR}/common.c
--@@ -46,46 +49,56 @@
-- CLEANFILES+=	${AHDR} fcns.h help.h fcns.c help.c
-- 
-- SUBDIR=	readline
--+HOST_SH=sh
--+LIBEDITDIR=.
--+all: .depend libedit.a libedit.so
-- 
-- vi.h: vi.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/vi.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- emacs.h: emacs.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/emacs.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- common.h: common.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/common.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- fcns.h: ${AHDR} makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- fcns.c: ${AHDR} fcns.h help.h makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- help.c: ${ASRC} makelist 
---	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- help.h: ${ASRC} makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- editline.c: ${OSRCS}
---	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- test.o:	${LIBEDITDIR}/TEST/test.c
-- 	
-- test:	libedit.a test.o 
---	${CC} ${LDFLAGS} ${.ALLSRC} -o ${.TARGET} libedit.a ${LDADD} -ltermcap
--+	${CC} ${LDFLAGS} ${.ALLSRC} -o $@ libedit.a ${LDADD} -ltermcap
-- 
---.include <bsd.lib.mk>
---.include <bsd.subdir.mk>
--+.depend: vi.h emacs.h common.h fcns.h help.h help.c
--+	-mkdir .a .so
--+.c.o:
--+	${CC} ${CFLAGS} -c $< -o .a/$*
--+	${CC} ${CFLAGS} -fPIC -c $< -o .so/$*
--+libedit.a: ${OOBJS}
--+	ar -r $@ .a/*
--+libedit.so: ${OOBJS}
--+	${CC} --shared -o $@ .so/* ${LIBS}
--diff -ur netbsd-cvs/el.c libedit-20031222/el.c
----- netbsd-cvs/el.c	2003-12-22 13:44:25.474909848 -0500
--+++ libedit-20031222/el.c	2003-12-22 15:00:15.545194024 -0500
--@@ -439,8 +439,10 @@
-- 		static const char elpath[] = "/.editrc";
-- 		char path[MAXPATHLEN];
-- 
--+#if 0
-- 		if (issetugid())
-- 			return (-1);
--+#endif
-- 		if ((ptr = getenv("HOME")) == NULL)
-- 			return (-1);
-- 		if (strlcpy(path, ptr, sizeof(path)) >= sizeof(path))
-diff --git a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff b/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
-deleted file mode 100644
-index 6b0434c..0000000
---- a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
-+++ /dev/null
-@@ -1,12 +0,0 @@
--Add sonmae option in compiler switches. This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93
--
--Upstream-Status: Inappropriate [not author]
--
----- Makefile.orig	2005-04-20 18:12:45.000000000 +0200
--+++ Makefile	2005-04-20 18:14:37.000000000 +0200
--@@ -101,4 +101,4 @@
-- libedit.a: ${OOBJS}
-- 	ar -r $@ .a/*
-- libedit.so: ${OOBJS}
---	${CC} --shared -o $@ .so/* ${LIBS}
--+	${CC} --shared -Wl,-soname=libedit.so.0 -o $@ .so/* ${LIBS}
--- 
-1.7.9
+I used "file://LICENSE;beginline=40;md5=3fced11d6df719b47505837a51c16ae5", so the checksum
+doesn't change when the header containing years and authors changes.
 
+> +SRC_URI = "http://pypi.python.org/packages/source/T/Twisted/Twisted-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "cf49a8676c21c50faf1b42b528049471"
+> +SRC_URI[sha256sum] = "e5561c9714583fd052ea9e0b10331609a719b3878f9d2593e4c57eab0ba0effd"
+> +
+> +S = "${WORKDIR}/Twisted-${PV}"
+> +
+> +inherit setuptools
+> +
+> +do_install_append() {
+> +    # remove some useless files before packaging
+> +    find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" -exec rm {} \;
+> +}
+> +
+> +PACKAGES += "\
+> +  ${PN}-zsh \
+> +  ${PN}-test \
+> +  ${PN}-protocols \
+> +  ${PN}-bin \
+> +  ${PN}-conch \
+> +  ${PN}-lore \
+> +  ${PN}-mail \
+> +  ${PN}-names \
+> +  ${PN}-news \
+> +  ${PN}-runner \
+> +  ${PN}-web \
+> +  ${PN}-words \
+> +  ${PN}-flow \
+> +  ${PN}-pair \
+> +  ${PN}-core \
+> +"
+> +
+> +RDEPENDS_${PN} = "python-core \
+> +	          python-io \
+> +		  python-fcntl \
+> +		  python-netclient \
+> +		  python-netserver \
+> +                  python-stringold \
+> +		  python-threading \
+> +		  python-zopeinterface"
+
+This seems wrong, because ${PN} is an empty meta package. I guess most users
+only want some parts of twisted, like twisted-web etc. So the RDEPENDS should
+be set for the individual packages.
+
+> +RDEPENDS_${PN} += "\
+> +  ${PN}-bin \
+> +  ${PN}-conch \
+> +  ${PN}-core \
+> +  ${PN}-lore \
+> +  ${PN}-mail \
+> +  ${PN}-names \
+> +  ${PN}-news \
+> +  ${PN}-protocols \
+> +  ${PN}-runner \
+> +  ${PN}-web \
+> +  ${PN}-words \
+> +"
+> +
+> +ALLOW_EMPTY = "1"
+> +FILES_${PN} = ""
+> +
+> +FILES_${PN}-test = " \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
+> +"
+
+RDEPENDS_${PN}-test = "${PN}"
+
+> +
+> +FILES_${PN}-protocols = " \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
+> +"
+> +
+> +FILES_${PN}-zsh = " \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
+> +"
+> +
+> +# Note: these don't seem to be built
+> +FILES_${PN}-bin = " \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/_c_urlarg.so \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/cBanana.so \
+> +"
+> +
+> +FILES_${PN}-conch = " \
+> +  ${bindir}/ckeygen \
+> +  ${bindir}/tkconch \
+> +  ${bindir}/conch \
+> +  ${bindir}/conchftp \
+> +  ${bindir}/cftp \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_conch.py* \
+> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/conch  \
+> +"
+> +
+
+RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
+
+> +FILES_${PN}-core = " \
+> +${bindir}/manhole \
+> +${bindir}/mktap \
+> +${bindir}/twistd \
+> +${bindir}/tap2deb \
+> +${bindir}/tap2rpm \
+> +${bindir}/tapconvert \
+> +${bindir}/tkmktap \
+> +${bindir}/trial \
+> +${bindir}/easy_install* \
+> +${bindir}/pyhtmlizer \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.so \
+
+It may be better to list the individual .so files, because twisted/python is
+also used by other packages, e.g. ${PN}-zsh:
+
+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_epoll.so \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_initgroups.so \
+
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__init__.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/notestplugin.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/testplugin.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_ftp.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_inet.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_manhole.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_portforward.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_socks.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_telnet.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_trial.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/dropin.cache \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/application \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/cred \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/enterprise \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/internet \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/persisted \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols\
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python\
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/timeoutqueue.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/filepath.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dxprofile.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/plugin.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/htmlizer.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__init__.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dispatch.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/hook.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadpool.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/otp.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/usage.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/roots.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/versions.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/urlpath.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/util.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/components.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/logfile.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/runtime.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/reflect.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/context.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadable.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/rebuild.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/failure.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/lockfile.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/formmethod.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/finalize.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/win32.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dist.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/shortcut.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zipstream.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/release.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/syslog.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/log.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/compat.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/procutils.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/text.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_twisted_zsh_stub \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/scripts/ \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/ \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/tap/ \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/trial/ \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/__init__.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/_version.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/copyright.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/im.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/*.py* \
+> +"
+
+RDEPENDS_${PN}-core = "python-core python-zopeinterface"
+
+> +
+> +FILES_${PN}-lore = " \
+> +${bindir}/bookify \
+> +${bindir}/lore \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_lore.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/lore \
+> +"
+
+RDEPENDS_${PN}-lore = "${PN}-core"
+
+> +
+> +FILES_${PN}-mail = " \
+> +${bindir}/mailmail \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_mail.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/mail \
+> +"
+> +
+
+RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
+
+> +FILES_${PN}-names = " \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_names.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/names \
+> +"
+
+RDEPENDS_${PN}-names = "${PN}-core"
+
+> +
+> +FILES_${PN}-news = " \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_news.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/news \
+> +"
+
+RDEPENDS_${PN}-news = "${PN}-core ${PN}-protocols"
+
+> +
+> +FILES_${PN}-runner = " \
+> +${libdir}/site-packages/twisted/runner/portmap.so \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/runner\
+> +"
+
+RDEPENDS_${PN}-runner = "${PN}-core ${PN}-protocols"
+
+> +
+> +FILES_${PN}-web = " \
+> +${bindir}/websetroot \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_web.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/web\
+> +"
+
+RDEPENDS_${PN}-web += "${PN}-core ${PN}-protocols"
+
+> +
+> +FILES_${PN}-words = " \
+> +${bindir}/im \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_words.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/words\
+> +"
+
+RDEPENDS_${PN}-words += "${PN}-core"
+
+> +
+> +FILES_${PN}-flow = " \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_flow.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/flow \"
+
+RDEPENDS_${PN}-flow += "${PN}-core"
+
+> +
+> +FILES_${PN}-pair = " \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_pair.py* \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/pair \
+> +"
+
+RDEPENDS_${PN}-pair += "${PN}-core"
+
+> +
+> +FILES_${PN}-dbg += " \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
+> +${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
+> +"
+> +
+
+RDEPENDS_${PN}-dbg = "${PN}"
+
+Regards,
+Andreas
 
 
