@@ -1,29 +1,24 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1SDEpL-0008Tj-CA
+	(envelope-from <eric@eukrea.com>) id 1SDF3g-0000cJ-9O
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 14:51:43 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id B2BA7F811E9; Thu, 29 Mar 2012 06:42:41 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id D324AF811E9;
-	Thu, 29 Mar 2012 06:42:40 -0600 (MDT)
-Message-ID: <4F7458C0.5050501@mlbassoc.com>
-Date: Thu, 29 Mar 2012 06:42:40 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
-MIME-Version: 1.0
+	Thu, 29 Mar 2012 15:06:32 +0200
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 2B6BE4B0153
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 14:57:26 +0200 (CEST)
+Date: Thu, 29 Mar 2012 14:57:25 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120329145725.7e179a8b@eb-e6520>
+In-Reply-To: <4F7458C0.5050501@mlbassoc.com>
 References: <4F7444E0.400@mlbassoc.com> <4F7446F9.9090304@opendreambox.org>
 	<4F744944.7070701@mlbassoc.com>
 	<20120329115328.GA20337@novatech.datenfreihafen.org>
-In-Reply-To: <20120329115328.GA20337@novatech.datenfreihafen.org>
+	<4F7458C0.5050501@mlbassoc.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
 Subject: Re: Where are my patches going?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,39 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 12:51:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Mar 2012 13:06:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-03-29 05:53, Stefan Schmidt wrote:
-> Hello.
->
-> On Thu, 2012-03-29 at 05:36, Gary Thomas wrote:
->> On 2012-03-29 05:26, Andreas Oberritter wrote:
->>>
->>> On 29.03.2012 13:17, Gary Thomas wrote:
->>>> A number of times when I've sent patches to the list via 'git send-email',
->>>> they seem to never arrive.  How can I figure out where they are going?
->>>
->>> your patches arrived. You can find submitted patches in OE's patchwork
->>> installation [1] or in the mailing list archive [2] some minutes after
->>> they have been sent.
->>
->> That's good to hear, but why am I not seeing them on the list?
->
-> If you have been on the CC list, IIRC default option in git
-> send-email, it is likely that mailman has just dropped you from the
-> receiver list for these mails as you already got it in CC thus
-> avoiding duplicates. Something that can be configured in
-> mailman if desired.
+Le Thu, 29 Mar 2012 06:42:40 -0600,
+Gary Thomas <gary@mlbassoc.com> a =E9crit :
+> I don't see any way to adjust this on this list - there doesn't
+> seem to be a "my account settings" link on the info page.
+>=20
+you can add  --suppress-cc=3Dself to you git send-email command
 
-I don't see any way to adjust this on this list - there doesn't
-seem to be a "my account settings" link on the info page.
+Eric
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+--=20
+http://eukrea.com/en/news/104-2012
 
 
