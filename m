@@ -1,30 +1,36 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1SDEel-00089G-HT
+	(envelope-from <ebutera@gmail.com>) id 1SDEeo-00089M-EN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 14:40:47 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 7A60EF8121B; Thu, 29 Mar 2012 06:31:45 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 91A53F811ED;
-	Thu, 29 Mar 2012 06:31:43 -0600 (MDT)
-Message-ID: <4F74562F.1040306@mlbassoc.com>
-Date: Thu, 29 Mar 2012 06:31:43 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
+	Thu, 29 Mar 2012 14:40:50 +0200
+Received: by vbbfr13 with SMTP id fr13so1584208vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Mar 2012 05:31:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=0SMn6s0RYarnAGKDAhvTmKaoewQHrflNhj66NGfLmBs=;
+	b=iv8r6wjO6EcyKqkvRVBvrSfgfNF88Af0nGOqLxmIFV4BVgZdWQ9qs2m687PbulukNn
+	BMXbKApI2sb8GgWPVPOOJPfkjFh6kDPEYs1X5vLnRfU9Rg9jO/5+xXReDLg/DkA+wLJn
+	Sfog09gNSs38YCngqXckAlPIRfWy3WtFRfu639wwPpWp8Fbd3XI05S9wY36LTBfrHoz9
+	O97MMfGLWXJ5TAyXKASjr9TRUUCChyHW2AO1wMdhfrG7Qax4dl4lKVwXV6FjuolbfMSh
+	lrqbGqE2xnIQ1hR0cYjti8fI5nPFQ4EgAVB2c5Ef8QZYwYBxCa3PyJtCFBn3BRzH8lRl
+	nSsg==
 MIME-Version: 1.0
+Received: by 10.220.115.82 with SMTP id h18mr16072484vcq.18.1333024305951;
+	Thu, 29 Mar 2012 05:31:45 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.220.148.68 with HTTP; Thu, 29 Mar 2012 05:31:45 -0700 (PDT)
+In-Reply-To: <4F744944.7070701@mlbassoc.com>
+References: <4F7444E0.400@mlbassoc.com> <4F7446F9.9090304@opendreambox.org>
+	<4F744944.7070701@mlbassoc.com>
+Date: Thu, 29 Mar 2012 14:31:45 +0200
+X-Google-Sender-Auth: 2z3ZjCjJjpq6Eca9a-HaF8BRlXs
+Message-ID: <CA+2YH7udxSwoROJk6+qV9Qa7QUTdnaxEhtLy-bW6q8RJKp9JtA@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1333018650-987-1-git-send-email-gary@mlbassoc.com>
-	<4F7449C6.8090004@opendreambox.org> <4F744BD1.1070309@mlbassoc.com>
-	<4F744D81.1090202@opendreambox.org>
-In-Reply-To: <4F744D81.1090202@opendreambox.org>
-Subject: Re: [meta-oe 1/2] python-twisted: update to latest upstream version
+Subject: Re: Where are my patches going?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,81 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 12:40:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Mar 2012 12:40:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-03-29 05:54, Andreas Oberritter wrote:
-> On 29.03.2012 13:47, Gary Thomas wrote:
->> On 2012-03-29 05:38, Andreas Oberritter wrote:
->>> Hi Gary,
->>>
->>> I was going to submit a similar patch. See my comments inline.
+On Thu, Mar 29, 2012 at 1:36 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2012-03-29 05:26, Andreas Oberritter wrote:
 >>
->> Feel free to submit yours - I have no investment in my version, it was
->> purely
->> an update of the one in the current repo with a couple of tweaks.
+>> Hi Gary,
+>>
+>> On 29.03.2012 13:17, Gary Thomas wrote:
+>>>
+>>> A number of times when I've sent patches to the list via 'git
+>>> send-email',
+>>> they seem to never arrive. =A0How can I figure out where they are going=
+?
+>>
+>>
+>> your patches arrived. You can find submitted patches in OE's patchwork
+>> installation [1] or in the mailing list archive [2] some minutes after
+>> they have been sent.
 >
-> I held it back, because I haven't decided yet what to do with the
-> unpackaged files:
 >
-> WARNING: For recipe python-twisted, the following files/directories were installed but not shipped in any package:
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/top_level.txt
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/requires.txt
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/SOURCES.txt
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/PKG-INFO
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/dependency_links.txt
-> WARNING:   /usr/lib/python2.7/site-packages/Twisted-12.0.0-py2.7.egg-info/not-zip-safe
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/topfiles
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/topfiles/README
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/topfiles/NEWS
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/topfiles/CREDITS
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/topfiles/ChangeLog.Old
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/python/_initgroups.c
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/python/twisted-completion.zsh
-> WARNING:   /usr/lib/python2.7/site-packages/twisted/python/_epoll.c
+> That's good to hear, but why am I not seeing them on the list?
 
-I see these as well - I'm not sure if it's useful to package them as they
-are just [human readable] information...  Not terribly important on _my_
-embedded platform :-)
+maybe because the mailing list server knows they were sent by you
+and/or you are on cc so it doesn't send them again?
 
->
-> I also wonder why _initgroups.c and _epoll.c don't get deleted by the command
-> in do_install_append(). Did you observe the same behaviour?
-
-Looks like at least a typo and something strange with the quoting?  I just tried this:
-
-diff --git a/packages/python/python-twisted_12.0.0.bb b/packages/python/python-twisted_12.0.0.bb
-index a642656..536296f 100644
---- a/packages/python/python-twisted_12.0.0.bb
-+++ b/packages/python/python-twisted_12.0.0.bb
-@@ -18,7 +18,8 @@ inherit setuptools
-
-  do_install_append() {
-      # remove some useless files before packaging
--    find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" -exec rm {} \;
-+    find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" -print -exec rm \{} \;
-+    find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" | xargs -t rm
-  }
-
-The first command (which I think needs the \{} instead of {} - at least that's how
-I've always seen it used) only finds a single .h file.  The second version works
-properly (and is "cheaper" since all the files are deleted at once)
-
->
->> BTW, I couldn't figure out how to get 'git' to recognize this as a rename
->> with changes when I commited the change.  Any hints?
->
-> It depends on the percentage of changed lines. See the --find-renames option
-> of git-diff(1).
-
-Thanks
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Enrico
 
 
