@@ -1,23 +1,14 @@
-Received: from smtp3-g21.free.fr ([212.27.42.3])
+Received: from ffm.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1SDkA2-0008Dj-VP
+	(envelope-from <obi@opendreambox.org>) id 1SDkhC-0000J9-5V
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Mar 2012 00:19:11 +0200
-Received: from eb-e6520 (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 599E1A621F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Mar 2012 00:10:02 +0200 (CEST)
-Date: Sat, 31 Mar 2012 00:10:01 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Sat, 31 Mar 2012 00:53:26 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120331001001.4b4f485d@eb-e6520>
-In-Reply-To: <jl53jb$bbv$1@dough.gmane.org>
-References: <jk7ah9$ct6$1@dough.gmane.org> <jl4ui1$5d2$1@dough.gmane.org>
-	<20120330210411.0e514243@eb-e6520> <jl53jb$bbv$1@dough.gmane.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [meta-oe] matching release branch for upcoming oe-core release
+Date: Sat, 31 Mar 2012 00:43:52 +0200
+Message-Id: <1333147432-24643-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] qt4: move from 4.8.0 to 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,33 +22,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2012 22:19:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Mar 2012 22:53:26 -0000
 
-Le Fri, 30 Mar 2012 13:04:07 -0700,
-Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
-> Op 30-03-12 12:04, Eric B=E9nard schreef:
-> > Le Fri, 30 Mar 2012 11:38:07 -0700, Koen Kooi
-> > <koen@dominion.thruhere.net> a =E9crit :
-> >> Op 19-03-12 05:58, Koen Kooi schreef:
-> >>> Any volunteers for maintaining a releasebranch that matches the
-> >>> upcoming oe-core release in ~4 weeks?
-> >>=20
-> >> No one?
-> >=20
-> > when is planned the release ?
->=20
-> Not entirely sure, the yocto folks never publish the schedule to OE lists=
- :(
->=20
-> - From what I have been able to piece together: in ~2 weeks.
->=20
-I can help to maintain this release branch.
+* Follow OE-Core.
 
-Please note that I won't be connected from 21st of April to 1st of May
-included so I hope the release won't be delayed after the 20th of April.
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+* NOTE: Currently, the patch is only in OE-Core's master-next branch.
 
-Eric
+ ..._4.8.0.bbappend => qt4-embedded_4.8.1.bbappend} |    0
+ ..._4.8.0.bbappend => qt4-x11-free_4.8.1.bbappend} |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-qt/qt4/{qt4-embedded_4.8.0.bbappend => qt4-embedded_4.8.1.bbappend} (100%)
+ rename meta-oe/recipes-qt/qt4/{qt4-x11-free_4.8.0.bbappend => qt4-x11-free_4.8.1.bbappend} (100%)
+
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.1.bbappend
+similarity index 100%
+rename from meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+rename to meta-oe/recipes-qt/qt4/qt4-embedded_4.8.1.bbappend
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
+similarity index 100%
+rename from meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
+rename to meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
+-- 
+1.7.5.4
+
 
 
