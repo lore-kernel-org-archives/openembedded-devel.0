@@ -1,34 +1,24 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SDVFd-0004Yt-LJ
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1SDVn5-00055M-FG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Mar 2012 08:23:59 +0200
-Received: by lagw12 with SMTP id w12so376726lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Mar 2012 23:14:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=pVaY0edq2HUJgMUWQWzQYdmMZGJzvwPbngjdJC/EHr0=;
-	b=whFeq6l+7NgU0u1pqw7egiJm9QOlm45vxLcVsnWp+x4SJDWtf1NU845/FYPHmW0L0h
-	P/0xyQ3TpIUfl1j3OLRjOsjjDaoiVXUYf7zqE+fdN8DuTsn4aKiR0X8IWS3yuQCHy8g6
-	9xoXODfUPUpcxqMTp5NxPNV4PDw/1aiG3V74b5XoK9OPVyYzAqaq9YS8t5uT7WzxUGMz
-	1lqY2A8i+l5r1YzCPWCCxjcBy3LCzg5b4v4+UIrE24Lxxl8pXMdZnn0X0WN/aBYIIoob
-	pKMFq4wHDIEVwNTusm7T4PviwNVNkFIc6MNJd/kQOEUlKubdw20CBJG0iLrWtVsBBXMY
-	75Qw==
-Received: by 10.152.146.163 with SMTP id td3mr1175378lab.31.1333088093548;
-	Thu, 29 Mar 2012 23:14:53 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.3.161 with HTTP; Thu, 29 Mar 2012 23:14:23 -0700 (PDT)
-In-Reply-To: <jl35h2$lbg$1@dough.gmane.org>
-References: <1332898927-17745-1-git-send-email-raj.khem@gmail.com>
-	<20120328022305.GD17470@denix.org> <jl1qhd$fna$1@dough.gmane.org>
-	<CAMKF1sqM8T=jEbcy4+=iRCtKH+uQtuACXaRJr9q75-3grFG66A@mail.gmail.com>
-	<jl35h2$lbg$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 29 Mar 2012 23:14:23 -0700
-Message-ID: <CAMKF1sppQDC6eRUM0zXOKXE+L9fhBkZMEj-7EO6X1Cze3vk0BA@mail.gmail.com>
+	Fri, 30 Mar 2012 08:58:31 +0200
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1SDVeJ-00035D-98 from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Mar 2012 23:49:27 -0700
+Received: from pkl-noor-ubuntu.mgc.mentorg.com ([137.202.157.70]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 30 Mar 2012 08:49:25 +0200
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [toolchain-layer][PATCH 1/2] eglibc-2.12: Move to toolchain-layer
+Date: Fri, 30 Mar 2012 11:49:09 +0500
+Message-Id: <1333090149-28611-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.9
+X-OriginalArrivalTime: 30 Mar 2012 06:49:26.0048 (UTC)
+	FILETIME=[3F40B200:01CD0E41]
+Subject: [PATCH][meta-oe] libedit: Remove files folder as no patch was being used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +32,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2012 06:23:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 30 Mar 2012 06:58:31 -0000
 
-On Thu, Mar 29, 2012 at 7:24 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> On Thu, Mar 29, 2012 at 7:11 AM, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>>
->>> Sadly both of them didn't make it into patchwork :(
->>
->> probably too big in size.
->
-> Can either of you provide a git tree, or easier for me, have Khem directly
-> push it?
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-git://git.openembedded.org/meta-openembedded-contrib kraj/eglibc-move
+* No patch file was being used in the recipe so removed the folder to make it bit clean.
+
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ .../libedit/files/20031222-debian-to-gentoo.patch  |  125 --------------------
+ .../libedit/files/libedit-add-soname.diff          |   12 --
+ 2 files changed, 0 insertions(+), 137 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch b/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
+deleted file mode 100644
+index 62069d5..0000000
+--- a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
++++ /dev/null
+@@ -1,125 +0,0 @@
+-This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93. 
+-
+-Upstream-Status: Inappropriate [not author]
+-diff -ur netbsd-cvs/Makefile libedit-20031222/Makefile
+---- netbsd-cvs/Makefile	2003-12-22 13:44:24.798012752 -0500
+-+++ libedit-20031222/Makefile	2003-12-22 14:55:15.133863488 -0500
+-@@ -5,6 +5,7 @@
+- 
+- WARNS=	3
+- LIB=	edit
+-+LIBS=-lncurses
+- 
+- OSRCS=	chared.c common.c el.c emacs.c fcns.c help.c hist.c key.c map.c \
+- 	parse.c prompt.c read.c refresh.c search.c sig.c term.c tty.c vi.c
+-@@ -22,9 +23,10 @@
+- 	editline.3 tok_line.3 editline.3 tok_str.3
+- 
+- # For speed and debugging
+--#SRCS=   ${OSRCS} tokenizer.c history.c readline.c
+-+SRCS=   ${OSRCS} tokenizer.c history.c readline.c vis.c unvis.c fgetln.c strlcat.c strlcpy.c
+- # For protection
+--SRCS=	editline.c tokenizer.c history.c readline.c
+-+#SRCS=	editline.c tokenizer.c history.c readline.c
+-+OOBJS= $(patsubst %.c,%.o,$(SRCS))
+- 
+- LIBEDITDIR?=${.CURDIR}
+- 
+-@@ -38,6 +40,7 @@
+- CPPFLAGS+=-I. -I${.CURDIR}
+- CPPFLAGS+=#-DDEBUG_TTY -DDEBUG_KEY -DDEBUG_READ -DDEBUG -DDEBUG_REFRESH
+- CPPFLAGS+=#-DDEBUG_PASTE -DDEBUG_EDIT
+-+CFLAGS+=-I. -include ../glibc-bsd-glue/bsdcompat.h -I../glibc-compat -I../glibc-bsd-glue
+- 
+- AHDR=vi.h emacs.h common.h 
+- ASRC=${LIBEDITDIR}/vi.c ${LIBEDITDIR}/emacs.c ${LIBEDITDIR}/common.c
+-@@ -46,46 +49,56 @@
+- CLEANFILES+=	${AHDR} fcns.h help.h fcns.c help.c
+- 
+- SUBDIR=	readline
+-+HOST_SH=sh
+-+LIBEDITDIR=.
+-+all: .depend libedit.a libedit.so
+- 
+- vi.h: vi.c makelist
+- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/vi.c \
+--	    > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	    > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- emacs.h: emacs.c makelist
+- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/emacs.c \
+--	    > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	    > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- common.h: common.c makelist
+- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/common.c \
+--	    > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	    > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- fcns.h: ${AHDR} makelist
+--	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- fcns.c: ${AHDR} fcns.h help.h makelist
+--	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- help.c: ${ASRC} makelist 
+--	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- help.h: ${ASRC} makelist
+--	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- editline.c: ${OSRCS}
+--	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > ${.TARGET}.tmp && \
+--	    mv ${.TARGET}.tmp ${.TARGET}
+-+	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > $@.tmp && \
+-+	    mv $@.tmp $@
+- 
+- test.o:	${LIBEDITDIR}/TEST/test.c
+- 	
+- test:	libedit.a test.o 
+--	${CC} ${LDFLAGS} ${.ALLSRC} -o ${.TARGET} libedit.a ${LDADD} -ltermcap
+-+	${CC} ${LDFLAGS} ${.ALLSRC} -o $@ libedit.a ${LDADD} -ltermcap
+- 
+--.include <bsd.lib.mk>
+--.include <bsd.subdir.mk>
+-+.depend: vi.h emacs.h common.h fcns.h help.h help.c
+-+	-mkdir .a .so
+-+.c.o:
+-+	${CC} ${CFLAGS} -c $< -o .a/$*
+-+	${CC} ${CFLAGS} -fPIC -c $< -o .so/$*
+-+libedit.a: ${OOBJS}
+-+	ar -r $@ .a/*
+-+libedit.so: ${OOBJS}
+-+	${CC} --shared -o $@ .so/* ${LIBS}
+-diff -ur netbsd-cvs/el.c libedit-20031222/el.c
+---- netbsd-cvs/el.c	2003-12-22 13:44:25.474909848 -0500
+-+++ libedit-20031222/el.c	2003-12-22 15:00:15.545194024 -0500
+-@@ -439,8 +439,10 @@
+- 		static const char elpath[] = "/.editrc";
+- 		char path[MAXPATHLEN];
+- 
+-+#if 0
+- 		if (issetugid())
+- 			return (-1);
+-+#endif
+- 		if ((ptr = getenv("HOME")) == NULL)
+- 			return (-1);
+- 		if (strlcpy(path, ptr, sizeof(path)) >= sizeof(path))
+diff --git a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff b/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
+deleted file mode 100644
+index 6b0434c..0000000
+--- a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
++++ /dev/null
+@@ -1,12 +0,0 @@
+-Add sonmae option in compiler switches. This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93
+-
+-Upstream-Status: Inappropriate [not author]
+-
+---- Makefile.orig	2005-04-20 18:12:45.000000000 +0200
+-+++ Makefile	2005-04-20 18:14:37.000000000 +0200
+-@@ -101,4 +101,4 @@
+- libedit.a: ${OOBJS}
+- 	ar -r $@ .a/*
+- libedit.so: ${OOBJS}
+--	${CC} --shared -o $@ .so/* ${LIBS}
+-+	${CC} --shared -Wl,-soname=libedit.so.0 -o $@ .so/* ${LIBS}
+-- 
+1.7.9
+
 
 
