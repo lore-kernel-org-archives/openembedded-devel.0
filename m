@@ -1,24 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1SDVn5-00055M-FG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Mar 2012 08:58:31 +0200
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1SDVeJ-00035D-98 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Mar 2012 23:49:27 -0700
-Received: from pkl-noor-ubuntu.mgc.mentorg.com ([137.202.157.70]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 30 Mar 2012 08:49:25 +0200
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SDgqo-000135-GD for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Mar 2012 20:47:06 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SDgi2-0006CM-Rt for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Mar 2012 20:38:02 +0200
+Received: from 69.38.219.78 ([69.38.219.78])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Mar 2012 20:38:02 +0200
+Received: from koen by 69.38.219.78 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Mar 2012 20:38:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2012 11:49:09 +0500
-Message-Id: <1333090149-28611-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.9
-X-OriginalArrivalTime: 30 Mar 2012 06:49:26.0048 (UTC)
-	FILETIME=[3F40B200:01CD0E41]
-Subject: [PATCH][meta-oe] libedit: Remove files folder as no patch was being used
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 30 Mar 2012 11:38:07 -0700
+Message-ID: <jl4ui1$5d2$1@dough.gmane.org>
+References: <jk7ah9$ct6$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 69.38.219.78
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120313 Thunderbird/11.0
+In-Reply-To: <jk7ah9$ct6$1@dough.gmane.org>
+X-Enigmail-Version: 1.4
+Subject: Re: [meta-oe] matching release branch for upcoming oe-core release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,169 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2012 06:58:31 -0000
+X-List-Received-Date: Fri, 30 Mar 2012 18:47:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-* No patch file was being used in the recipe so removed the folder to make it bit clean.
+Op 19-03-12 05:58, Koen Kooi schreef:
+> Hi,
+> 
+> Any volunteers for maintaining a releasebranch that matches the upcoming 
+> oe-core release in ~4 weeks?
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- .../libedit/files/20031222-debian-to-gentoo.patch  |  125 --------------------
- .../libedit/files/libedit-add-soname.diff          |   12 --
- 2 files changed, 0 insertions(+), 137 deletions(-)
+No one?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch b/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
-deleted file mode 100644
-index 62069d5..0000000
---- a/meta-oe/recipes-devtools/libedit/files/20031222-debian-to-gentoo.patch
-+++ /dev/null
-@@ -1,125 +0,0 @@
--This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93. 
--
--Upstream-Status: Inappropriate [not author]
--diff -ur netbsd-cvs/Makefile libedit-20031222/Makefile
----- netbsd-cvs/Makefile	2003-12-22 13:44:24.798012752 -0500
--+++ libedit-20031222/Makefile	2003-12-22 14:55:15.133863488 -0500
--@@ -5,6 +5,7 @@
-- 
-- WARNS=	3
-- LIB=	edit
--+LIBS=-lncurses
-- 
-- OSRCS=	chared.c common.c el.c emacs.c fcns.c help.c hist.c key.c map.c \
-- 	parse.c prompt.c read.c refresh.c search.c sig.c term.c tty.c vi.c
--@@ -22,9 +23,10 @@
-- 	editline.3 tok_line.3 editline.3 tok_str.3
-- 
-- # For speed and debugging
---#SRCS=   ${OSRCS} tokenizer.c history.c readline.c
--+SRCS=   ${OSRCS} tokenizer.c history.c readline.c vis.c unvis.c fgetln.c strlcat.c strlcpy.c
-- # For protection
---SRCS=	editline.c tokenizer.c history.c readline.c
--+#SRCS=	editline.c tokenizer.c history.c readline.c
--+OOBJS= $(patsubst %.c,%.o,$(SRCS))
-- 
-- LIBEDITDIR?=${.CURDIR}
-- 
--@@ -38,6 +40,7 @@
-- CPPFLAGS+=-I. -I${.CURDIR}
-- CPPFLAGS+=#-DDEBUG_TTY -DDEBUG_KEY -DDEBUG_READ -DDEBUG -DDEBUG_REFRESH
-- CPPFLAGS+=#-DDEBUG_PASTE -DDEBUG_EDIT
--+CFLAGS+=-I. -include ../glibc-bsd-glue/bsdcompat.h -I../glibc-compat -I../glibc-bsd-glue
-- 
-- AHDR=vi.h emacs.h common.h 
-- ASRC=${LIBEDITDIR}/vi.c ${LIBEDITDIR}/emacs.c ${LIBEDITDIR}/common.c
--@@ -46,46 +49,56 @@
-- CLEANFILES+=	${AHDR} fcns.h help.h fcns.c help.c
-- 
-- SUBDIR=	readline
--+HOST_SH=sh
--+LIBEDITDIR=.
--+all: .depend libedit.a libedit.so
-- 
-- vi.h: vi.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/vi.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- emacs.h: emacs.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/emacs.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- common.h: common.c makelist
-- 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/common.c \
---	    > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	    > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- fcns.h: ${AHDR} makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- fcns.c: ${AHDR} fcns.h help.h makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- help.c: ${ASRC} makelist 
---	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- help.h: ${ASRC} makelist
---	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- editline.c: ${OSRCS}
---	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > ${.TARGET}.tmp && \
---	    mv ${.TARGET}.tmp ${.TARGET}
--+	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > $@.tmp && \
--+	    mv $@.tmp $@
-- 
-- test.o:	${LIBEDITDIR}/TEST/test.c
-- 	
-- test:	libedit.a test.o 
---	${CC} ${LDFLAGS} ${.ALLSRC} -o ${.TARGET} libedit.a ${LDADD} -ltermcap
--+	${CC} ${LDFLAGS} ${.ALLSRC} -o $@ libedit.a ${LDADD} -ltermcap
-- 
---.include <bsd.lib.mk>
---.include <bsd.subdir.mk>
--+.depend: vi.h emacs.h common.h fcns.h help.h help.c
--+	-mkdir .a .so
--+.c.o:
--+	${CC} ${CFLAGS} -c $< -o .a/$*
--+	${CC} ${CFLAGS} -fPIC -c $< -o .so/$*
--+libedit.a: ${OOBJS}
--+	ar -r $@ .a/*
--+libedit.so: ${OOBJS}
--+	${CC} --shared -o $@ .so/* ${LIBS}
--diff -ur netbsd-cvs/el.c libedit-20031222/el.c
----- netbsd-cvs/el.c	2003-12-22 13:44:25.474909848 -0500
--+++ libedit-20031222/el.c	2003-12-22 15:00:15.545194024 -0500
--@@ -439,8 +439,10 @@
-- 		static const char elpath[] = "/.editrc";
-- 		char path[MAXPATHLEN];
-- 
--+#if 0
-- 		if (issetugid())
-- 			return (-1);
--+#endif
-- 		if ((ptr = getenv("HOME")) == NULL)
-- 			return (-1);
-- 		if (strlcpy(path, ptr, sizeof(path)) >= sizeof(path))
-diff --git a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff b/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
-deleted file mode 100644
-index 6b0434c..0000000
---- a/meta-oe/recipes-devtools/libedit/files/libedit-add-soname.diff
-+++ /dev/null
-@@ -1,12 +0,0 @@
--Add sonmae option in compiler switches. This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93
--
--Upstream-Status: Inappropriate [not author]
--
----- Makefile.orig	2005-04-20 18:12:45.000000000 +0200
--+++ Makefile	2005-04-20 18:14:37.000000000 +0200
--@@ -101,4 +101,4 @@
-- libedit.a: ${OOBJS}
-- 	ar -r $@ .a/*
-- libedit.so: ${OOBJS}
---	${CC} --shared -o $@ .so/* ${LIBS}
--+	${CC} --shared -Wl,-soname=libedit.so.0 -o $@ .so/* ${LIBS}
--- 
-1.7.9
+iQIcBAEBAgAGBQJPdf2NAAoJEHZqAkdh1vT6Z7kP/3PiBj9D26CQFV4dREvYnRmz
++QPLA8LJ70tyJdgqAuAS65hzXq0nV4ZIqrp65js6DXtfEtHPb92ZWFTfAlCtHnSu
+OMViJ3Hn2JCSPxDsBfkx4akiEjLGKSCBki1IHV9mJZ7CYgLFSx6n9rSLA1HPRyjD
+hfW114gF+o7l8LSzlIktmZnBUcw6kzQ2AY5z9TukohNvJ19EhvaRRKb83V4W7XNX
+xAjkqFsYpV1MdLAMsauY4eXNgXuYcT12UksUzCr6nrYL4v5ZpnUmwVSnNOy1fwp7
+9oLMVEcNpAGpNrsP0VA+5g3q4PpphToN/uJ2mck/EZRXN0nOU1BA5kCFUNIs5HP4
+4An277J1Mdbith45JSx1adgNUNzAlcZ1Bd796GzQhPBHQb8o3dp+PpQLO6rFAfrq
+2kqHE9ut6n+dY9Y/VDSLyFCbly5e9Drsl4COkx9HajLzWPc7Hq39VmFhDBEtW/79
+npSkQy9LCepdAesTtQnHQcVQR1F2Sc+b+RTEagIUPywBVtV1tI0/6OX4RMxKjBAi
+xcgQAOJuzFPxKDajPcBtg7wqoNfp+SRh5dSV2VHR1u/yJKpzMKxkQzurt/ai+Kek
+XlOanLW9SmzCYOkkuEw2/J3BBqTn2vmZDm6xNN4HKH0hVibLgP2y5lEe+jtp7XwE
+Lwn43E1xKJz2H+2FsVqW
+=BLrR
+-----END PGP SIGNATURE-----
 
 
 
