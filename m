@@ -1,23 +1,25 @@
-Received: from mx194.callplus.net.nz ([202.180.66.194]
-	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roystonvasey@slingshot.co.nz>) id 1SEWXz-0004o3-Tb
+Received: from mga01.intel.com ([192.55.52.88])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SEfIm-0001hC-U2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2012 03:59:09 +0200
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ap4EAKcEeU/LYgoS/2dsb2JhbABEugOCCQEBAQEDAQEBBQIeEjQXAQMCBgMRBAEBKAcZDgEeCQgCBBMLBYd4DLlOE4JBjkgEkzaDPI8egnw
-X-IronPort-AV: E=Sophos;i="4.75,354,1330858800"; d="scan'208";a="255471975"
-Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
-	by ismtp2.tranzpeer.net with ESMTP; 02 Apr 2012 13:49:58 +1200
-From: "R U Local" <roystonvasey@slingshot.co.nz>
-To: <openembedded-devel@lists.openembedded.org>
-References: <CABMxt4hhGnOdqfqK8GfS1tg9pTS=3o3z4PULj+feY9e=of7xdA@mail.gmail.com>
-In-Reply-To: <CABMxt4hhGnOdqfqK8GfS1tg9pTS=3o3z4PULj+feY9e=of7xdA@mail.gmail.com>
-Date: Mon, 2 Apr 2012 13:49:57 +1200
-Message-ID: <00c301cd1072$e8c62bb0$ba528310$@slingshot.co.nz>
+	Mon, 02 Apr 2012 13:20:01 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 02 Apr 2012 04:10:51 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="136542063"
+Received: from unknown (HELO helios.localnet) ([10.252.123.252])
+	by fmsmga001.fm.intel.com with ESMTP; 02 Apr 2012 04:10:50 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Mon, 02 Apr 2012 12:10:48 +0100
+Message-ID: <3232177.RSLRf5oIft@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.0 (Linux/3.0.0-17-generic-pae; KDE/4.8.1; i686; ; )
+In-Reply-To: <1333237424-22209-1-git-send-email-andrea.adami@gmail.com>
+References: <1333237424-22209-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQL9lYz4b+cQcwVN+nZ82JmhvJ6e8ZQlte2Q
-Subject: Re: [OpenEmbedded] [SocketCan] compiling error on mcp251x
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] udev: generalize the check in touchscreen rule
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,335 +33,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2012 01:59:09 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-nz
+X-List-Received-Date: Mon, 02 Apr 2012 11:20:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The svn 917 modules are very old now. I think they are only useful for
-kernels that don't have IP link support pre 2.6.28 I think.
-SocketCan and its associated drivers were moved into the mainline kernel so
-you need to select the drivers in the kernel .config
-I'm surprised that you are using the MCP251x as the AM3517 has native
-High-End Can Controller (HECC) that performs significantly better than the
-MCP251x part.
+On Sunday 01 April 2012 01:43:44 Andrea Adami wrote:
+> * The rule only works for devices reporting ts pressure
+> * and ignores the other touchscreens (happens e.g. on ipaq h1940).
+> * a0,1,*18   a = absolute axes (ABS_X 0x00 ABS_Y 0x01 ABS_PRESSURE 0x18)
+> * (see include/linux/input.h)
+> *
+> * Guidelines for touchscreen suggest only ABS_X and ABS_Y are mandatory
+> * (http://kernel.org/doc/Documentation/input/event-codes.txt)
+> *
+> * Side-effect of the patch is to remove a dependency on meta-oe
+> * but using older udev from oe-core.
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  recipes-core/udev/udev/local.rules       |   34
+> ++++++++++++++++++++++++++++++ recipes-core/udev/udev/touchscreen.rules |  
+> 21 ------------------ recipes-core/udev/udev_164.bbappend      |    5 ++++
+>  recipes-core/udev/udev_173.bbappend      |    5 ----
+>  4 files changed, 39 insertions(+), 26 deletions(-)
+>  create mode 100644 recipes-core/udev/udev/local.rules
+>  delete mode 100644 recipes-core/udev/udev/touchscreen.rules
+>  create mode 100644 recipes-core/udev/udev_164.bbappend
+>  delete mode 100644 recipes-core/udev/udev_173.bbappend
+> 
+> diff --git a/recipes-core/udev/udev/local.rules
+> b/recipes-core/udev/udev/local.rules new file mode 100644
+> index 0000000..49e8d28
+> --- /dev/null
+> +++ b/recipes-core/udev/udev/local.rules
+> @@ -0,0 +1,34 @@
+> +# There are a number of modifiers that are allowed to be used in some
+> +# of the different fields. They provide the following subsitutions:
+> +#
+> +# %n the "kernel number" of the device.
+> +#    For example, 'sda3' has a "kernel number" of '3'
+> +# %e the smallest number for that name which does not matches an existing
+> node +# %k the kernel name for the device
+> +# %M the kernel major number for the device
+> +# %m the kernel minor number for the device
+> +# %b the bus id for the device
+> +# %c the string returned by the PROGRAM
+> +# %s{filename} the content of a sysfs attribute
+> +# %% the '%' char itself
+> +#
+> +
+> +# Media automounting
+> +SUBSYSTEM=="block", ACTION=="add"    RUN+="/etc/udev/scripts/mount.sh"
+> +SUBSYSTEM=="block", ACTION=="remove" RUN+="/etc/udev/scripts/mount.sh"
+> +
+> +# Handle network interface setup
+> +SUBSYSTEM=="net", ACTION=="add" RUN+="/etc/udev/scripts/network.sh"
+> +SUBSYSTEM=="net", ACTION=="remove" RUN+="/etc/udev/scripts/network.sh"
+> +
+> +# The first framebuffer is symlinked to /dev/fb
+> +KERNEL=="fb0", SYMLINK+="fb"
+> +
+> +# The first rtc device is symlinked to /dev/rtc
+> +KERNEL=="rtc0", SYMLINK+="rtc"
+> +
+> +# Try and modprobe for drivers for new hardware
+> +ACTION=="add", DEVPATH=="/devices/*", ENV{MODALIAS}=="?*",
+> RUN+="/sbin/modprobe $env{MODALIAS}" +
+> +# Create a symlink to any touchscreen input device
+> +SUBSYSTEM=="input", KERNEL=="event[0-9]*",
+> ATTRS{modalias}=="input:*-e0*,3,*a0,1,*", SYMLINK+="input/touchscreen0"
+> diff --git a/recipes-core/udev/udev/touchscreen.rules
+> b/recipes-core/udev/udev/touchscreen.rules deleted file mode 100644
+> index b2307cf..0000000
+> --- a/recipes-core/udev/udev/touchscreen.rules
+> +++ /dev/null
+> @@ -1,21 +0,0 @@
+> -# There are a number of modifiers that are allowed to be used in some
+> -# of the different fields. They provide the following subsitutions:
+> -#
+> -# %n the "kernel number" of the device.
+> -#    For example, 'sda3' has a "kernel number" of '3'
+> -# %e the smallest number for that name which does not matches an existing
+> node -# %k the kernel name for the device
+> -# %M the kernel major number for the device
+> -# %m the kernel minor number for the device
+> -# %b the bus id for the device
+> -# %c the string returned by the PROGRAM
+> -# %s{filename} the content of a sysfs attribute
+> -# %% the '%' char itself
+> -#
+> -
+> -# Create a symlink to any touchscreen input device
+> -SUBSYSTEM=="input", KERNEL=="event[0-9]*",
+> ATTRS{modalias}=="input:*-e0*,3,*a0,1,*18,*", SYMLINK+="input/touchscreen0"
+> -SUBSYSTEM=="input", KERNEL=="event[0-9]*", ATTRS{modalias}=="ads7846",
+> SYMLINK+="input/touchscreen0" -# This one is necessary for h1940
+> -SUBSYSTEM=="input", KERNEL=="event[0-9]*",
+> ATTRS{modalias}=="input:*-e0*,3,*a0,1,*", SYMLINK+="input/touchscreen0" -
+> diff --git a/recipes-core/udev/udev_164.bbappend
+> b/recipes-core/udev/udev_164.bbappend new file mode 100644
+> index 0000000..4770c5b
+> --- /dev/null
+> +++ b/recipes-core/udev/udev_164.bbappend
+> @@ -0,0 +1,5 @@
+> +
+> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+> +
+> +PRINC = "1"
+> +
+> diff --git a/recipes-core/udev/udev_173.bbappend
+> b/recipes-core/udev/udev_173.bbappend deleted file mode 100644
+> index 4770c5b..0000000
+> --- a/recipes-core/udev/udev_173.bbappend
+> +++ /dev/null
+> @@ -1,5 +0,0 @@
+> -
+> -FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+> -
+> -PRINC = "1"
+> -
 
-To get SocketCAN support select:
-CONFIG_CAN=y
-CONFIG_CAN_RAW=y
-CONFIG_CAN_DEV=y
-CONFIG_CAN_CALC_BITTIMING=y
-For the HECC drivers
-CONFIG_CAN_TI_HECC=y
-For MCP251x drivers
-CONFIG_CAN_MCP251X=y
+Merged to meta-handheld (with some rebasing), thanks.
 
-In your kernel config and rebuild your kernel.
+FWIW I'd like to see this more generalised rule in OE-Core, but as we're in 
+stabilisation at the moment I don't think now is the time. For the moment we 
+can test it in meta-handheld.
 
-Cheers Mike.
+Cheers,
+Paul
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Mohamed HAMZAOUI
-Sent: Sunday, 1 April 2012 23:55
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] [OpenEmbedded] [SocketCan] compiling error on mcp251x
+-- 
 
-Hi,
-
-I tried to bitbake the socketcan-modules with this command :
-bitbake socketcan-modules
-
-i have a compiling problem and the building failed.
-Can you help me on this issue please ?
-
-the compiling trace :
-
-Loading cache: 100%
-|#######################################################################
-|#######################################################################
-|#################|
-Time: 00:00:01
-Loaded 7086 entries from dependency cache.
-NOTE: angstrom DOES NOT support bash-noemu because doesn't work on the
-target
-                                  | ETA:  --:--:--
-NOTE: angstrom DOES NOT support linux-hotplug because hotplug functionality
-is provided by udev
-NOTE: angstrom DOES NOT support bluez-utils because bluez-utils 3.x has been
-replaced by bluez4
-NOTE: angstrom DOES NOT support linux-hotplug because hotplug functionality
-is provided by udev
-NOTE: angstrom DOES NOT support xcursor-watchonly-theme because
-xcursor-transparent-theme is good enough
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv
-replacement is used
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv
-replacement is used
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred
-multimedia library
-NOTE: angstrom DOES NOT support hotplug2 because hotplug functionality is
-provided by udev
-NOTE: angstrom DOES NOT support ipkg because ipkg has been superseded by
-opkg
-NOTE: angstrom DOES NOT support libiconv because the glibc builtin iconv
-replacement is used
-NOTE: angstrom DOES NOT support bluez-utils because bluez-utils 3.x has been
-replaced by bluez4
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred
-multimedia library
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred
-multimedia library
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been
-replaced by bluez4
-NOTE: angstrom DOES NOT support hotplug-ng because hotplug functionality is
-provided by udev
-NOTE: angstrom DOES NOT support ffmpeg because libav is the preferred
-multimedia library
-NOTE: angstrom DOES NOT support fso-apm because regular apmd is good
-enough#######
-                                   | ETA:  00:00:09
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been
-replaced by bluez4
-                              | ETA:  00:00:07
-NOTE: angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been
-replaced by bluez4###################################################
-                             | ETA:  00:00:01
-NOTE: angstrom DOES NOT support hotplug-ng because hotplug functionality is
-provided by udev Parsing recipes: 100%
-|#######################################################################
-|#######################################################################
-|###############|
-Time: 00:00:07
-Parsing of 7216 .bb files complete (6437 cached, 779 parsed). 7884 targets,
-328 skipped, 0 masked, 0 errors.
-
-Build Configuration:
-BB_VERSION        = "1.12.0"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "4e75705"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "am3517-crane"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v2012.04"
-TARGET_FPU        = "hard"
-
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing RunQueue Tasks
-NOTE: Running task 498 of 752 (ID: 13,
-/media/dev/stuff/openembedded/recipes/socketcan/socketcan-modules_svn.bb,
-do_compile)
-NOTE: package socketcan-modules-0.0+svnr917-r102: task do_compile: Started
-ERROR: Logfile of failure stored in:
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/temp/log.do_compile.31020
-Log data follows:
-| + do_compile
-| + module_do_compile
-| + unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS oe_runmake
-KERNEL_PATH=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueab
-i/kernel
-KERNEL_SRC=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kerne
-l
-KERNELDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/
-kernel
-KERNEL_DIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KERNEL_VERSION=2.6.32 'CC=arm-angstrom-linux-gnueabi-gcc
- -mno-thumb-interwork -mno-thumb' 'LD=arm-angstrom-linux-gnueabi-ld
---sysroot=/media/dev/stuff/tmp/sysroots/armv7a-angstrom-linux-gnueabi '
-'AR=arm-angstrom-linux-gnueabi-ar '
-| + oenote make -e MAKEFLAGS=
-KERNEL_PATH=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueab
-i/kernel
-KERNEL_SRC=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kerne
-l
-KERNELDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/
-kernel
-KERNEL_DIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KERNEL_VERSION=2.6.32 'CC=arm-angstrom-linux-gnueabi-gcc
- -mno-thumb-interwork -mno-thumb' 'LD=arm-angstrom-linux-gnueabi-ld
---sysroot=/media/dev/stuff/tmp/sysroots/armv7a-angstrom-linux-gnueabi '
-'AR=arm-angstrom-linux-gnueabi-ar '
-| + echo NOTE: 'make -e MAKEFLAGS=
-KERNEL_PATH=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueab
-i/kernel
-KERNEL_SRC=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kerne
-l
-KERNELDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/
-kernel
-KERNEL_DIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KERNEL_VERSION=2.6.32 CC=arm-angstrom-linux-gnueabi-gcc
--mno-thumb-interwork -mno-thumb LD=arm-angstrom-linux-gnueabi-ld
---sysroot=/media/dev/stuff/tmp/sysroots/armv7a-angstrom-linux-gnueabi
- AR=arm-angstrom-linux-gnueabi-ar '
-| NOTE: make -e MAKEFLAGS=
-KERNEL_PATH=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueab
-i/kernel
-KERNEL_SRC=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kerne
-l
-KERNELDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/
-kernel
-KERNEL_DIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KERNEL_VERSION=2.6.32 CC=arm-angstrom-linux-gnueabi-gcc
--mno-thumb-interwork -mno-thumb LD=arm-angstrom-linux-gnueabi-ld
---sysroot=/media/dev/stuff/tmp/sysroots/armv7a-angstrom-linux-gnueabi
- AR=arm-angstrom-linux-gnueabi-ar
-| + make -e MAKEFLAGS=
-KERNEL_PATH=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueab
-i/kernel
-KERNEL_SRC=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kerne
-l
-KERNELDIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/
-kernel
-KERNEL_DIR=/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi
-/kernel
-KERNEL_VERSION=2.6.32 'CC=arm-angstrom-linux-gnueabi-gcc
- -mno-thumb-interwork -mno-thumb' 'LD=arm-angstrom-linux-gnueabi-ld
---sysroot=/media/dev/stuff/tmp/sysroots/armv7a-angstrom-linux-gnueabi '
-'AR=arm-angstrom-linux-gnueabi-ar '
-| make -C
-/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kernel
-M=/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-mo
-dules-0.0+svnr917-r102/trunk/kernel/2.6
-modules
-TOPDIR=/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketc
-an-modules-0.0+svnr917-r102/trunk/kernel/2.6
-| make[1]: Entering directory
-`/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kernel'
-|   CC [M]
- 
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.o
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:
-In function 'mcp251x_setup':
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:652:2:
-error: implicit declaration of function 'can_set_bittiming'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:
-In function 'mcp251x_do_get_state':
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:771:12:
-error: 'CAN_STATE_BUS_PASSIVE' undeclared (first use in this function)
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:771:12:
-note: each undeclared identifier is reported only once for each function it
-appears in
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:773:12:
-error: 'CAN_STATE_BUS_WARNING' undeclared (first use in this function)
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:775:12:
-error: 'CAN_STATE_ACTIVE' undeclared (first use in this function)
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:
-In function 'alloc_mcp251x_netdev':
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:994:2:
-error: too few arguments to function 'alloc_candev'
-| include/linux/can/dev.h:63:20: note: declared here
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1000:5:
-error: 'struct net_device' has no member named 'open'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1001:5:
-error: 'struct net_device' has no member named 'stop'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1002:5:
-error: 'struct net_device' has no member named 'hard_start_xmit'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1003:5:
-error: 'struct net_device' has no member named 'tx_timeout'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1007:27:
-warning: assignment from incompatible pointer type
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:
-In function 'mcp251x_can_probe':
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1040:21:
-error: 'struct can_bittiming' has no member named 'clock'
-|
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.c:1044:3:
-warning: 'DMA_nnBIT_MASK' is deprecated
-| make[3]: ***
-[/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-mod
-ules-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can/mcp251x.o]
-Error 1
-| make[2]: ***
-[/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-mod
-ules-0.0+svnr917-r102/trunk/kernel/2.6/drivers/net/can]
-Error 2
-| make[1]: ***
-[_module_/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socke
-tcan-modules-0.0+svnr917-r102/trunk/kernel/2.6]
-Error 2
-| make[1]: Leaving directory
-`/media/dev/stuff/tmp/sysroots/am3517-crane-angstrom-linux-gnueabi/kernel'
-| make: *** [modules] Error 2
-| + die 'oe_runmake failed'
-| + oefatal 'oe_runmake failed'
-| + echo FATAL: 'oe_runmake failed'
-| FATAL: oe_runmake failed
-| + exit 1
-NOTE: package socketcan-modules-0.0+svnr917-r102: task do_compile: Failed
-ERROR: Function 'do_compile' failed (see
-/media/dev/stuff/tmp/work/am3517-crane-angstrom-linux-gnueabi/socketcan-modu
-les-0.0+svnr917-r102/temp/log.do_compile.31020
-for further information)
-ERROR: Task 13 (/media/dev/stuff/openembedded/recipes/socketcan/
-socketcan-modules_svn.bb, do_compile) failed with exit code '1'
-ERROR: '/media/dev/stuff/openembedded/recipes/socketcan/
-socketcan-modules_svn.bb' failed
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-__________ Information from ESET NOD32 Antivirus, version of virus signature
-database 7018 (20120401) __________
-
-The message was checked by ESET NOD32 Antivirus.
-
-http://www.eset.com
-
-
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
