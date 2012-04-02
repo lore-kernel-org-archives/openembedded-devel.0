@@ -1,43 +1,36 @@
-Received: from bosmailout08.eigbox.net ([66.96.184.8])
-	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from
-	<SRS0=EB+tnJ=CI=mindchasers.com=openembedded@eigbox.net>)
-	id 1SEphN-0004dU-1g for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2012 00:26:05 +0200
-Received: from bosmailscan04.eigbox.net ([10.20.15.4])
-	by bosmailout08.eigbox.net with esmtp (Exim) id 1SEp4R-0001LC-Pv
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <andrei@gherzan.ro>) id 1SEqCP-000516-MP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2012 17:45:51 -0400
-Received: from bosimpout02.eigbox.net ([10.20.55.2])
-	by bosmailscan04.eigbox.net with esmtp (Exim) id 1SEp4R-0004AW-IC
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2012 17:45:51 -0400
-Received: from bosauthsmtp13.eigbox.net ([10.20.18.13])
-	by bosimpout02.eigbox.net with NO UCE
-	id t9lr1i0030GvDVm019lrYq; Mon, 02 Apr 2012 17:45:51 -0400
-X-Authority-Analysis: v=2.0 cv=BexvJMR2 c=1 sm=1
-	a=1tk2KXT9X5KuiK9ZGSyBkw==:17 a=mn2ndCrYJZwA:10 a=Na1N3YiFAQsA:10
-	a=9__qD4EXiBwA:10 a=Lk7aQFya1KUA:10 a=8nJEP1OIZ-IA:10
-	a=RJKT5QAX3-Obpx91Eg4A:9 a=wPNLvfGTeEIA:10
-	a=UH8/iCWBfdUmbm4Ft4Vi3Q==:117
-X-EN-OrigOutIP: 10.20.18.13
-X-EN-IMPSID: t9lr1i0030GvDVm019lrYq
-Received: from [108.25.140.29] (helo=[192.168.1.41])
-	by bosauthsmtp13.eigbox.net with esmtpa (Exim) id 1SEp4R-0001ZU-8U
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Apr 2012 17:45:51 -0400
-Message-ID: <4F7A1E0C.9030201@mindchasers.com>
-Date: Mon, 02 Apr 2012 17:45:48 -0400
-From: Bob Cochran <openembedded@mindchasers.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120310 Thunderbird/11.0
+	Tue, 03 Apr 2012 00:58:09 +0200
+Received: by wgbdr12 with SMTP id dr12so2713603wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Apr 2012 15:49:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=0tcNDU37Y/g3sARZZRVulo/+fDmenOgD3Lu5VB4Dg0k=;
+	b=ij2puqJTm4qzCte6KtTCX0rkNNCufVi8VFnpQ1oFYBQiJB/5sv6PDWE4KsLUnUgAH3
+	I372WT9q/t4dA9+mjN86E55oMgRlLWPj+Nl1JbwXfvnY+3qlOV95h59S3LZGqUx4/Al3
+	O2kjPxvoZ2yKZA3ZtkV52MSfY3aVYqryLQ8BCT6/s16ty5wRH4at0gwZmyNMg6IHXUvP
+	Oqn1kITxBnx6s+BjYb9yQZedQgM5srgog35tySCqop2pTw5zdU7ccitoT+06yGxXO4yA
+	j/arMzt1y/f+ATkm77gROwNVoTWZXU1ivjxJ1Ua++/twBk3R4cAtTXWWMbpVBrDevVIR
+	e3HA==
+Received: by 10.180.76.240 with SMTP id n16mr29590632wiw.10.1333406940774;
+	Mon, 02 Apr 2012 15:49:00 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.227.158.16 with HTTP; Mon, 2 Apr 2012 15:48:40 -0700 (PDT)
+X-Originating-IP: [79.115.103.32]
+In-Reply-To: <20120402210435.GA10553@hermes>
+References: <20120402210435.GA10553@hermes>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Tue, 3 Apr 2012 01:48:40 +0300
+Message-ID: <CAK18fxG5zusOY+WwnhBatbQ-3Kt8PUmHaafWoHTO=eWYzZ0Kyw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-EN-UserInfo: cb6d325fe03740ac93d537d78041f599:2186c883651a1065ea1e15c5a112545a
-X-EN-AuthUser: bcochran@mindchasers.com
-Sender: Bob Cochran <openembedded@mindchasers.com>
-X-EN-OrigIP: 108.25.140.29
-X-EN-OrigHost: unknown
-Subject: Is boa still a decent choice for an embedded web server?
+X-Gm-Message-State: ALoCoQnf6c68Ibo1iBY7CPI9tSnuThJBCTxGOkFRTroy16X3UITAfw1bk/7hLzIyQVP0EH8hnEic
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Package build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,38 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2012 22:26:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Apr 2012 22:58:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-*** apologies: I accidentally sent this out the first time on the wrong 
-OE (commits) list ****
+On Tue, Apr 3, 2012 at 00:04, Apelete Seketeli <apelete@seketeli.net> wrote:
 
-
-Hello Group,
-
-I would appreciate any thoughts about the relevancy & security of boa 
-for an embedded system that needs to support up to several active web 
-requests at a time.
-
-The code is getting old and some of the system calls are deprecated or 
-obsolete (e.g., gethostbyname()).
-
-Apache appears to be overkill for what we're doing.
-
-Ultimately, our web server won't just serve static pages but also serve 
-a low volume of python / django pages, too.  I realize that CGI 
-performance with boa is bad, but it seems that there are options to 
-increase performance over simply exec'ing the python scripts.
-
-
-Thanks,
-
-Bob
-
-
-
-
-
-
+> Hello,
+>
+> I'm currently trying to learn how to build OE packages. For that
+> purpose I set up an OE 'classic' (not oe-core) environment with the
+> following configuration:
+>
+> DL_DIR = "${HOME}/devel/bitbake/sources"
+> BBFILES := "${HOME}/devel/openembedded/master/recipes/*/*.bb"
+> MACHINE = "ben-nanonote"
+> DISTRO = "jlime-2010.1"
+> PARALLEL_MAKE = "-j 2"
+> BB_NUMBER_THREADS = "2"
+> BBINCLUDELOGS = "yes"
+>
+>
+> As a test I issued the 'bitbake nano' command, and after a while the
+> build fails with the following error:
+>
+> svn: OPTIONS of 'http://svn.openmoko.org/trunk/src/host/opkg-utils':
+> could not connect to server (http://svn.openmoko.org)
+> NOTE: package opkg-utils-native-0.1.8+svnr4747-r7: task Fetch failed:
+> Unable to fetch URL svn://
+> svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http from any
+> source.: Failed
+> ERROR: Function 'Fetch failed: Unable to fetch URL svn://
+> svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http from any
+> source.' failed
+> ERROR: Task 70
+> (virtual:native:/home/apelete/devel/openembedded/master/recipes/opkg-utils/
+> opkg-utils_svn.bb, do_fetch) failed with exit code '1'
+> ERROR: '/home/apelete/devel/openembedded/master/recipes/gcc/
+> gcc-cross_4.5.bb' failed
+> ERROR:
+> 'virtual:native:/home/apelete/devel/openembedded/master/recipes/opkg-utils/
+> opkg-utils_svn.bb' failed
+>
+>
+> It seems http://svn.openmoko.org is unreachable.
+> How can I resolve this issue ?
+>
+>
+You actually cant solve this issue as the upstream link is down. You have
+two simple choices:
+1. Find an upstream mirror
+2. Use a local archive instead.
 
