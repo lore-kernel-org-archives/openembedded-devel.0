@@ -1,33 +1,31 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ebutera@gmail.com>) id 1SEyYK-0001fz-Q2
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SF1RB-0004nL-PS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2012 09:53:20 +0200
-Received: by vbbfr13 with SMTP id fr13so2455921vbb.6
+	Tue, 03 Apr 2012 12:58:09 +0200
+Received: by wibhj13 with SMTP id hj13so3339227wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2012 00:44:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Aj46kQPXBlyfEF7fc+baH3xEy/5+UoeZOmSux+71YME=;
-	b=oC+n+lR2T7FGCbE6t3mDPi20WSKiYpORIpfVcvtvQEJCLARh0H9xMk+4ppm35Ai5MU
-	DIbmV5r+vFoztNr3i3VbT+KtQ4jTPernhF30Dr2LJQPTji3r4FmGTr0J8EJjmlWfyZCh
-	4wtciBDdzXWGcoNfwnwgcXs/2e78NoB7BHjev+rY9rxhqu9AHc8CvfBgzOgJLoyq0iRO
-	C9MK/6Pc3IYXBVHBziEqqMO0bx2uzxOsc823/BQzAQkftaPUUyF6wb8rVNrXseoQI/ii
-	PBWLAvRftaMLNtSBwB/XsroIRbE4D+Spp1HTNdmI+r0iiO2PkyAlx5ByQX5Sgi0tW9Xc
-	rMrg==
+	Tue, 03 Apr 2012 03:49:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=Q6Q93edEfgAiOmqZTVOrd5TTLt7haS1LYHcWp9ku5I4=;
+	b=h9j0LvlZke4iYigA9/JHtspmdXyBLknAJCr1Q8s0qELYe25T1EpmGMWd7dmXVwlB/U
+	J6cNHRAND4p/MuWioJUCEZd/PYbAGYD0Vxp9hpOeJWWfkZFE9Za0ZGpM9kqB1x+wJ14d
+	rMjcsHxZPzY2nkUm+fwL2sbrSH2OMy0Cw2NQFVtpZV/qclMAwgnCKgj4dHmhjXYiYeiU
+	6YnPOHWUcs1Ww/xJFruYKlJMsXTNGmjIvHYpw2Ua3gas1dVjRwSin278z26Xbtn64CDh
+	sanWqHX/oN5Jp2yr1TlP1nbLn1pZOXCspQ8zRQqXz20+9ImIVIpJmUp++Y1dYWFcoVct
+	kKQg==
 MIME-Version: 1.0
-Received: by 10.52.67.11 with SMTP id j11mr4597248vdt.40.1333439051165; Tue,
-	03 Apr 2012 00:44:11 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.220.148.68 with HTTP; Tue, 3 Apr 2012 00:44:07 -0700 (PDT)
+Received: by 10.180.92.130 with SMTP id cm2mr35299726wib.4.1333450140722; Tue,
+	03 Apr 2012 03:49:00 -0700 (PDT)
+Received: by 10.223.89.83 with HTTP; Tue, 3 Apr 2012 03:49:00 -0700 (PDT)
 In-Reply-To: <4F7A1E0C.9030201@mindchasers.com>
 References: <4F7A1E0C.9030201@mindchasers.com>
-Date: Tue, 3 Apr 2012 09:44:07 +0200
-X-Google-Sender-Auth: eYMSgdV1qSBSVemFly7eB1QRGPk
-Message-ID: <CA+2YH7vBzdrHcRVJ4kxHBfsQYmjmAar+X7V997jF5H_tx-tTGg@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
+Date: Tue, 3 Apr 2012 12:49:00 +0200
+Message-ID: <CAGiJk9exshoDYHjgU=1853zpdwcw-QhrK3FUgBTit83mimfEUQ@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: Is boa still a decent choice for an embedded web server?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,12 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2012 07:53:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Apr 2012 10:58:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 2, 2012 at 11:45 PM, Bob Cochran
-<openembedded@mindchasers.com> wrote:
+2012/4/2 Bob Cochran <openembedded@mindchasers.com>:
+> *** apologies: I accidentally sent this out the first time on the wrong O=
+E
+> (commits) list ****
+>
+>
+>
 > Hello Group,
 >
 > I would appreciate any thoughts about the relevancy & security of boa for=
@@ -56,6 +59,10 @@ On Mon, Apr 2, 2012 at 11:45 PM, Bob Cochran
 > embedded system that needs to support up to several active web requests a=
 t a
 > time.
+
+You can be almost sure that it will not meet (any) security
+anticipation, if Wikipedia is correct about the last release date.
+
 >
 > The code is getting old and some of the system calls are deprecated or
 > obsolete (e.g., gethostbyname()).
@@ -63,15 +70,27 @@ t a
 > Apache appears to be overkill for what we're doing.
 >
 > Ultimately, our web server won't just serve static pages but also serve a
-> low volume of python / django pages, too. =A0I realize that CGI performan=
-ce
+> low volume of python / django pages, too. =C2=A0I realize that CGI perfor=
+mance
 > with boa is bad, but it seems that there are options to increase performa=
 nce
 > over simply exec'ing the python scripts.
+>
+>
+> Thanks,
+>
+> Bob
+>
 
-Did you already try/evaluate lighttpd? I'm using it on an arm board,
-but security is not my main concern.
 
-Enrico
+Maybe Cherokee is worth a try.
+It looks simple to configure,  don't know how secure it is.
+But I also don't know your expectations of "how secure it has to be" anyway=
+s.
+
+
+--=20
+Regards
+Samuel
 
 
