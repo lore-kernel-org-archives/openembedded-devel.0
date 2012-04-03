@@ -1,33 +1,34 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SF1RB-0004nL-PS
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SF5Zi-0004Qm-KX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2012 12:58:09 +0200
-Received: by wibhj13 with SMTP id hj13so3339227wib.6
+	Tue, 03 Apr 2012 17:23:14 +0200
+Received: by wera1 with SMTP id a1so2373889wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2012 03:49:00 -0700 (PDT)
+	Tue, 03 Apr 2012 08:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=Q6Q93edEfgAiOmqZTVOrd5TTLt7haS1LYHcWp9ku5I4=;
-	b=h9j0LvlZke4iYigA9/JHtspmdXyBLknAJCr1Q8s0qELYe25T1EpmGMWd7dmXVwlB/U
-	J6cNHRAND4p/MuWioJUCEZd/PYbAGYD0Vxp9hpOeJWWfkZFE9Za0ZGpM9kqB1x+wJ14d
-	rMjcsHxZPzY2nkUm+fwL2sbrSH2OMy0Cw2NQFVtpZV/qclMAwgnCKgj4dHmhjXYiYeiU
-	6YnPOHWUcs1Ww/xJFruYKlJMsXTNGmjIvHYpw2Ua3gas1dVjRwSin278z26Xbtn64CDh
-	sanWqHX/oN5Jp2yr1TlP1nbLn1pZOXCspQ8zRQqXz20+9ImIVIpJmUp++Y1dYWFcoVct
-	kKQg==
-MIME-Version: 1.0
-Received: by 10.180.92.130 with SMTP id cm2mr35299726wib.4.1333450140722; Tue,
-	03 Apr 2012 03:49:00 -0700 (PDT)
-Received: by 10.223.89.83 with HTTP; Tue, 3 Apr 2012 03:49:00 -0700 (PDT)
-In-Reply-To: <4F7A1E0C.9030201@mindchasers.com>
-References: <4F7A1E0C.9030201@mindchasers.com>
-Date: Tue, 3 Apr 2012 12:49:00 +0200
-Message-ID: <CAGiJk9exshoDYHjgU=1853zpdwcw-QhrK3FUgBTit83mimfEUQ@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=IUNrS3r9bnzN80sthuKEGgrpL0meizVziz8OB+DPP1Y=;
+	b=VqCzGwZurl7wQO8qYwEz98HQFi/uZ2sZRjhe0uMSP0Qxrd7puj0BR8TFroc7FLbaN6
+	i+ulUT5J4J1UVldLW4P3TL7dyUns+5OeoVOUlf6W1lCeH5xdGVZafITjfafCnMFyRfSa
+	zAOzQCMYN5djx0Pt4q+Vts/d5ke4cxxKPjl29EGnDQvMpRKXGmAIVZR7GXaMA2cEtPDW
+	DkeRQOMmYx9+8N6NJVonQ9okW77EtHut09+F8XfBdFsbW2CSfaIJJoKfo3ODSjaU3dOU
+	uyofXadnxnD6CHarRbtrAzMJok17jzu93oqtbo59YdKUrPqCBLf6g9ey5p/mfTvYLvYS
+	o2Qw==
+Received: by 10.180.91.165 with SMTP id cf5mr37416087wib.2.1333466044991;
+	Tue, 03 Apr 2012 08:14:04 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id fz9sm43522568wib.3.2012.04.03.08.14.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 03 Apr 2012 08:14:04 -0700 (PDT)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Is boa still a decent choice for an embedded web server?
+Date: Tue,  3 Apr 2012 17:13:51 +0200
+Message-Id: <1333466031-3328-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] [meta-oe] mysql5: Fix QA warnings, move .a files to staticdev.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2012 10:58:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 03 Apr 2012 15:23:15 -0000
 
-2012/4/2 Bob Cochran <openembedded@mindchasers.com>:
-> *** apologies: I accidentally sent this out the first time on the wrong O=
-E
-> (commits) list ****
->
->
->
-> Hello Group,
->
-> I would appreciate any thoughts about the relevancy & security of boa for=
- an
-> embedded system that needs to support up to several active web requests a=
-t a
-> time.
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc |   34 +++++++++++++++++++----
+ 1 files changed, 28 insertions(+), 6 deletions(-)
 
-You can be almost sure that it will not meet (any) security
-anticipation, if Wikipedia is correct about the last release date.
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index 865deb2..d436333 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -78,8 +78,8 @@ pkg_postrm_mysql5-server () {
+ }
+ 
+ PACKAGES = "${PN}-dbg ${PN} \
+-libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-dbg \
+-libmysqlclient libmysqlclient-dev libmysqlclient-dbg \
++libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
++libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
+ ${PN}-client ${PN}-server ${PN}-leftovers"
+ CONFFILES_${PN}-server += "${sysconfdir}/my.cnf"
+ 
+@@ -87,18 +87,40 @@ FILES_${PN} = " "
+ RDEPENDS_${PN} = "${PN}-client ${PN}-server"
+ ALLOW_EMPTY_${PN} = "1"
+ 
+-FILES_libmysqlclient = "${libdir}/libmysqlclient.so.*"
++FILES_libmysqlclient = "\
++${libdir}/libmysqlclient.so.* \
++${libdir}/plugin/*.so.*"
+ FILES_libmysqlclient-dev = " \
+ ${includedir}/mysql/ \
+-${libdir}/lib* \
+-${libdir}/plugin/* \
++${libdir}/libmysqlclient.so \
++${libdir}/libmysqlclient.la \
++${libdir}/plugin/*.so \
++${libdir}/plugin/*.la \
+ ${sysconfdir}/aclocal \
+ ${bindir}/mysql_config"
++FILES_libmysqlclient-staticdev = "\
++${libdir}/libmysqlclient.a \
++${libdir}/libmysys.a \
++${libdir}/libmyisam.a \
++${libdir}/libmysqld.a \
++${libdir}/libheap.a \
++${libdir}/libvio.a \
++${libdir}/libmystrings.a \
++${libdir}/libdbug.a \
++${libdir}/libmyisammrg.a \
++${libdir}/plugin/ha_innodb_plugin.a \
++${libdir}/plugin/ha_example.a \
++${libdir}/plugin/ha_blackhole.a \
++${libdir}/plugin/ha_federated.a \
++${libdir}/plugin/ha_archive.a"
+ FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
+ /usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
+ 
+ FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
+-FILES_libmysqlclient-r-dev = "${libdir}/libmysqlclient_r.*"
++FILES_libmysqlclient-r-dev = "\
++${libdir}/libmysqlclient_r.so \
++${libdir}/libmysqlclient_r.la"
++FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
+ FILES_libmysqlclient-r-dbg = "${libdir}/plugin/.debuglibmysqlclient_r.so.*"
+ 
+ FILES_${PN}-client = "\
+-- 
+1.7.5.4
 
->
-> The code is getting old and some of the system calls are deprecated or
-> obsolete (e.g., gethostbyname()).
->
-> Apache appears to be overkill for what we're doing.
->
-> Ultimately, our web server won't just serve static pages but also serve a
-> low volume of python / django pages, too. =C2=A0I realize that CGI perfor=
-mance
-> with boa is bad, but it seems that there are options to increase performa=
-nce
-> over simply exec'ing the python scripts.
->
->
-> Thanks,
->
-> Bob
->
-
-
-Maybe Cherokee is worth a try.
-It looks simple to configure,  don't know how secure it is.
-But I also don't know your expectations of "how secure it has to be" anyway=
-s.
-
-
---=20
-Regards
-Samuel
 
 
