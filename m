@@ -1,33 +1,34 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SF5bV-0004Wt-Pm
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SF5hr-0004f5-8o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2012 17:25:05 +0200
-Received: by wgbdr12 with SMTP id dr12so3324406wgb.24
+	Tue, 03 Apr 2012 17:31:39 +0200
+Received: by wibhj13 with SMTP id hj13so3373384wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2012 08:15:56 -0700 (PDT)
+	Tue, 03 Apr 2012 08:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=XBLy2PS/6A7rkFQXByaZQD3AezC9IPtRLz3CkOUbkpk=;
-	b=hXPE8AL9Xi4nSxXLsI+Sz6+HEcCIeQVf8mZ+94zJ8zroOJbd+9uSe5oZBhAmCt/5Vx
-	TjjJwdaCs0rYQGqmkHV6V5IYiOsZKqhU1RdJjArOuDy4Z25s4GdekHvY2GgEya3oD8+I
-	25WlogzJuV61AULtp1ZNVJnLtl9YHGhbXDxEGn26Rm9MlgoBDJcBPtEmIrvEHx59dTNU
-	no8WUYI9L7RV/kJAvl/z6d0vbw/Cap9Y6s8IYlOBVTaV/R90sec+JAi/LEYar32/zRE5
-	QgyO6tSsRB/XFjfgpTVJfrjwn6mrztcPhjVn6oyKMZ28NF/tpk6k1CQ8Cfe3xEROgNL8
-	66rg==
-MIME-Version: 1.0
-Received: by 10.180.92.130 with SMTP id cm2mr37450589wib.4.1333466156134; Tue,
-	03 Apr 2012 08:15:56 -0700 (PDT)
-Received: by 10.223.89.83 with HTTP; Tue, 3 Apr 2012 08:15:56 -0700 (PDT)
-In-Reply-To: <1333466031-3328-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1333466031-3328-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Tue, 3 Apr 2012 17:15:56 +0200
-Message-ID: <CAGiJk9eNVMWQznpqqeKmQ_NQwxFVq5rka6RL-PaZGuBbRAw6Yg@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=X/LNLCMGTOMwCW0e2eLHpm5ATX4kYSHW9qvSauvQFRM=;
+	b=RFkSNTuusk2QKzSpO3HgO+9xLs4C+NmV+Q/A8XlR9tUBniV0sH85F/1fANZeyC7Yv9
+	ATF94H654Pbrn8Hgl5WA0b1PgvpdLLLBaK51TqyfqllgIDuY4Q08ooFKeNAvuTmBAgCk
+	LSqHVXlgmt7NV4m2aqrDtNQCicW8M8XEquMAdqrj6zBLwbXf83XE6x+LUq7hiAO/V/zX
+	7F/c1fwFC/p5qNp4IzuiDbWy71wRV6KHMMG739y48bwa87YD2627VEuRafwRxrmLCpDL
+	BcXfx4NcaCpQBXTmHSqtcD8lDvISUy2TIp/U0QK0BD7TuZFcZkCPMsTWlchKh05eQl1O
+	zauQ==
+Received: by 10.180.92.228 with SMTP id cp4mr7445205wib.2.1333466550105;
+	Tue, 03 Apr 2012 08:22:30 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id l5sm43563380wia.11.2012.04.03.08.22.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 03 Apr 2012 08:22:27 -0700 (PDT)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] [meta-oe] mysql5: Fix QA warnings, move .a files to staticdev.
+Date: Tue,  3 Apr 2012 17:22:16 +0200
+Message-Id: <1333466536-3582-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] [meta-oe, v2] mysql5: Fix QA warnings, move .a files to staticdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,89 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2012 15:25:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 03 Apr 2012 15:31:39 -0000
 
-2012/4/3 Samuel Stirtzel <s.stirtzel@googlemail.com>:
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-> ---
-> =C2=A0meta-oe/recipes-support/mysql/mysql5_5.1.40.inc | =C2=A0 34 +++++++=
-++++++++++++----
-> =C2=A01 files changed, 28 insertions(+), 6 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/re=
-cipes-support/mysql/mysql5_5.1.40.inc
-> index 865deb2..d436333 100644
-> --- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-> +++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-> @@ -78,8 +78,8 @@ pkg_postrm_mysql5-server () {
-> =C2=A0}
->
-> =C2=A0PACKAGES =3D "${PN}-dbg ${PN} \
-> -libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-dbg \
-> -libmysqlclient libmysqlclient-dev libmysqlclient-dbg \
-> +libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysq=
-lclient-r-dbg \
-> +libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclien=
-t-dbg \
-> =C2=A0${PN}-client ${PN}-server ${PN}-leftovers"
-> =C2=A0CONFFILES_${PN}-server +=3D "${sysconfdir}/my.cnf"
->
-> @@ -87,18 +87,40 @@ FILES_${PN} =3D " "
-> =C2=A0RDEPENDS_${PN} =3D "${PN}-client ${PN}-server"
-> =C2=A0ALLOW_EMPTY_${PN} =3D "1"
->
-> -FILES_libmysqlclient =3D "${libdir}/libmysqlclient.so.*"
-> +FILES_libmysqlclient =3D "\
-> +${libdir}/libmysqlclient.so.* \
-> +${libdir}/plugin/*.so.*"
-> =C2=A0FILES_libmysqlclient-dev =3D " \
-> =C2=A0${includedir}/mysql/ \
-> -${libdir}/lib* \
-> -${libdir}/plugin/* \
-> +${libdir}/libmysqlclient.so \
-> +${libdir}/libmysqlclient.la \
-> +${libdir}/plugin/*.so \
-> +${libdir}/plugin/*.la \
-> =C2=A0${sysconfdir}/aclocal \
-> =C2=A0${bindir}/mysql_config"
-> +FILES_libmysqlclient-staticdev =3D "\
-> +${libdir}/libmysqlclient.a \
-> +${libdir}/libmysys.a \
-> +${libdir}/libmyisam.a \
-> +${libdir}/libmysqld.a \
-> +${libdir}/libheap.a \
-> +${libdir}/libvio.a \
-> +${libdir}/libmystrings.a \
-> +${libdir}/libdbug.a \
-> +${libdir}/libmyisammrg.a \
-> +${libdir}/plugin/ha_innodb_plugin.a \
-> +${libdir}/plugin/ha_example.a \
-> +${libdir}/plugin/ha_blackhole.a \
-> +${libdir}/plugin/ha_federated.a \
-> +${libdir}/plugin/ha_archive.a"
-> =C2=A0FILES_libmysqlclient-dbg =3D "${libdir}/plugin/.debug/ \
-> =C2=A0/usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
->
-> =C2=A0FILES_libmysqlclient-r =3D "${libdir}/libmysqlclient_r.so.*"
-> -FILES_libmysqlclient-r-dev =3D "${libdir}/libmysqlclient_r.*"
-> +FILES_libmysqlclient-r-dev =3D "\
-> +${libdir}/libmysqlclient_r.so \
-> +${libdir}/libmysqlclient_r.la"
-> +FILES_libmysqlclient-r-staticdev =3D "${libdir}/libmysqlclient_r.a"
-> =C2=A0FILES_libmysqlclient-r-dbg =3D "${libdir}/plugin/.debuglibmysqlclie=
-nt_r.so.*"
->
-> =C2=A0FILES_${PN}-client =3D "\
-> --
-> 1.7.5.4
->
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc |   22 ++++++++++++++++------
+ 1 files changed, 16 insertions(+), 6 deletions(-)
 
-Sorry sent the wrong patch version V2 will come soon.
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index 865deb2..9699dec 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -78,8 +78,8 @@ pkg_postrm_mysql5-server () {
+ }
+ 
+ PACKAGES = "${PN}-dbg ${PN} \
+-libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-dbg \
+-libmysqlclient libmysqlclient-dev libmysqlclient-dbg \
++libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
++libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
+ ${PN}-client ${PN}-server ${PN}-leftovers"
+ CONFFILES_${PN}-server += "${sysconfdir}/my.cnf"
+ 
+@@ -87,18 +87,28 @@ FILES_${PN} = " "
+ RDEPENDS_${PN} = "${PN}-client ${PN}-server"
+ ALLOW_EMPTY_${PN} = "1"
+ 
+-FILES_libmysqlclient = "${libdir}/libmysqlclient.so.*"
++FILES_libmysqlclient = "\
++${libdir}/libmysqlclient.so.* \
++${libdir}/plugin/*.so.*"
+ FILES_libmysqlclient-dev = " \
+ ${includedir}/mysql/ \
+-${libdir}/lib* \
+-${libdir}/plugin/* \
++${libdir}/libmysqlclient.so \
++${libdir}/libmysqlclient.la \
++${libdir}/plugin/*.so \
++${libdir}/plugin/*.la \
+ ${sysconfdir}/aclocal \
+ ${bindir}/mysql_config"
++FILES_libmysqlclient-staticdev = "\
++${libdir}/*.a \
++${libdir}/plugin/*.a"
+ FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
+ /usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
+ 
+ FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
+-FILES_libmysqlclient-r-dev = "${libdir}/libmysqlclient_r.*"
++FILES_libmysqlclient-r-dev = "\
++${libdir}/libmysqlclient_r.so \
++${libdir}/libmysqlclient_r.la"
++FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
+ FILES_libmysqlclient-r-dbg = "${libdir}/plugin/.debuglibmysqlclient_r.so.*"
+ 
+ FILES_${PN}-client = "\
+-- 
+1.7.5.4
 
---=20
-Regards
-Samuel
 
 
