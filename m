@@ -1,36 +1,35 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1SEqCP-000516-MP
+	(envelope-from <ebutera@gmail.com>) id 1SEyYK-0001fz-Q2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Apr 2012 00:58:09 +0200
-Received: by wgbdr12 with SMTP id dr12so2713603wgb.24
+	Tue, 03 Apr 2012 09:53:20 +0200
+Received: by vbbfr13 with SMTP id fr13so2455921vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Apr 2012 15:49:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=0tcNDU37Y/g3sARZZRVulo/+fDmenOgD3Lu5VB4Dg0k=;
-	b=ij2puqJTm4qzCte6KtTCX0rkNNCufVi8VFnpQ1oFYBQiJB/5sv6PDWE4KsLUnUgAH3
-	I372WT9q/t4dA9+mjN86E55oMgRlLWPj+Nl1JbwXfvnY+3qlOV95h59S3LZGqUx4/Al3
-	O2kjPxvoZ2yKZA3ZtkV52MSfY3aVYqryLQ8BCT6/s16ty5wRH4at0gwZmyNMg6IHXUvP
-	Oqn1kITxBnx6s+BjYb9yQZedQgM5srgog35tySCqop2pTw5zdU7ccitoT+06yGxXO4yA
-	j/arMzt1y/f+ATkm77gROwNVoTWZXU1ivjxJ1Ua++/twBk3R4cAtTXWWMbpVBrDevVIR
-	e3HA==
-Received: by 10.180.76.240 with SMTP id n16mr29590632wiw.10.1333406940774;
-	Mon, 02 Apr 2012 15:49:00 -0700 (PDT)
+	Tue, 03 Apr 2012 00:44:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Aj46kQPXBlyfEF7fc+baH3xEy/5+UoeZOmSux+71YME=;
+	b=oC+n+lR2T7FGCbE6t3mDPi20WSKiYpORIpfVcvtvQEJCLARh0H9xMk+4ppm35Ai5MU
+	DIbmV5r+vFoztNr3i3VbT+KtQ4jTPernhF30Dr2LJQPTji3r4FmGTr0J8EJjmlWfyZCh
+	4wtciBDdzXWGcoNfwnwgcXs/2e78NoB7BHjev+rY9rxhqu9AHc8CvfBgzOgJLoyq0iRO
+	C9MK/6Pc3IYXBVHBziEqqMO0bx2uzxOsc823/BQzAQkftaPUUyF6wb8rVNrXseoQI/ii
+	PBWLAvRftaMLNtSBwB/XsroIRbE4D+Spp1HTNdmI+r0iiO2PkyAlx5ByQX5Sgi0tW9Xc
+	rMrg==
 MIME-Version: 1.0
-Received: by 10.227.158.16 with HTTP; Mon, 2 Apr 2012 15:48:40 -0700 (PDT)
-X-Originating-IP: [79.115.103.32]
-In-Reply-To: <20120402210435.GA10553@hermes>
-References: <20120402210435.GA10553@hermes>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Tue, 3 Apr 2012 01:48:40 +0300
-Message-ID: <CAK18fxG5zusOY+WwnhBatbQ-3Kt8PUmHaafWoHTO=eWYzZ0Kyw@mail.gmail.com>
+Received: by 10.52.67.11 with SMTP id j11mr4597248vdt.40.1333439051165; Tue,
+	03 Apr 2012 00:44:11 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.220.148.68 with HTTP; Tue, 3 Apr 2012 00:44:07 -0700 (PDT)
+In-Reply-To: <4F7A1E0C.9030201@mindchasers.com>
+References: <4F7A1E0C.9030201@mindchasers.com>
+Date: Tue, 3 Apr 2012 09:44:07 +0200
+X-Google-Sender-Auth: eYMSgdV1qSBSVemFly7eB1QRGPk
+Message-ID: <CA+2YH7vBzdrHcRVJ4kxHBfsQYmjmAar+X7V997jF5H_tx-tTGg@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnf6c68Ibo1iBY7CPI9tSnuThJBCTxGOkFRTroy16X3UITAfw1bk/7hLzIyQVP0EH8hnEic
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Package build failure
+Subject: Re: Is boa still a decent choice for an embedded web server?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2012 22:58:09 -0000
+X-List-Received-Date: Tue, 03 Apr 2012 07:53:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 3, 2012 at 00:04, Apelete Seketeli <apelete@seketeli.net> wrote:
+On Mon, Apr 2, 2012 at 11:45 PM, Bob Cochran
+<openembedded@mindchasers.com> wrote:
+> Hello Group,
+>
+> I would appreciate any thoughts about the relevancy & security of boa for=
+ an
+> embedded system that needs to support up to several active web requests a=
+t a
+> time.
+>
+> The code is getting old and some of the system calls are deprecated or
+> obsolete (e.g., gethostbyname()).
+>
+> Apache appears to be overkill for what we're doing.
+>
+> Ultimately, our web server won't just serve static pages but also serve a
+> low volume of python / django pages, too. =A0I realize that CGI performan=
+ce
+> with boa is bad, but it seems that there are options to increase performa=
+nce
+> over simply exec'ing the python scripts.
 
-> Hello,
->
-> I'm currently trying to learn how to build OE packages. For that
-> purpose I set up an OE 'classic' (not oe-core) environment with the
-> following configuration:
->
-> DL_DIR = "${HOME}/devel/bitbake/sources"
-> BBFILES := "${HOME}/devel/openembedded/master/recipes/*/*.bb"
-> MACHINE = "ben-nanonote"
-> DISTRO = "jlime-2010.1"
-> PARALLEL_MAKE = "-j 2"
-> BB_NUMBER_THREADS = "2"
-> BBINCLUDELOGS = "yes"
->
->
-> As a test I issued the 'bitbake nano' command, and after a while the
-> build fails with the following error:
->
-> svn: OPTIONS of 'http://svn.openmoko.org/trunk/src/host/opkg-utils':
-> could not connect to server (http://svn.openmoko.org)
-> NOTE: package opkg-utils-native-0.1.8+svnr4747-r7: task Fetch failed:
-> Unable to fetch URL svn://
-> svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http from any
-> source.: Failed
-> ERROR: Function 'Fetch failed: Unable to fetch URL svn://
-> svn.openmoko.org/trunk/src/host/;module=opkg-utils;proto=http from any
-> source.' failed
-> ERROR: Task 70
-> (virtual:native:/home/apelete/devel/openembedded/master/recipes/opkg-utils/
-> opkg-utils_svn.bb, do_fetch) failed with exit code '1'
-> ERROR: '/home/apelete/devel/openembedded/master/recipes/gcc/
-> gcc-cross_4.5.bb' failed
-> ERROR:
-> 'virtual:native:/home/apelete/devel/openembedded/master/recipes/opkg-utils/
-> opkg-utils_svn.bb' failed
->
->
-> It seems http://svn.openmoko.org is unreachable.
-> How can I resolve this issue ?
->
->
-You actually cant solve this issue as the upstream link is down. You have
-two simple choices:
-1. Find an upstream mirror
-2. Use a local archive instead.
+Did you already try/evaluate lighttpd? I'm using it on an arm board,
+but security is not my main concern.
+
+Enrico
+
 
