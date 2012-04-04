@@ -1,33 +1,17 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from pd95cbf07.dip0.t-ipconnect.de ([217.92.191.7] helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SFKrx-0000eA-Ok
+	(envelope-from <sledz@localhost.localdomain>) id 1SFNMw-0003Af-OT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 09:43:05 +0200
-Received: by wibhj13 with SMTP id hj13so233130wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2012 00:33:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=xpF3IuiNtpMRZY525qXq4OUMq38F09vO3Eetxk5OSGE=;
-	b=IhfxrDPAWqWg0R+7XGO0ykWF5VE8yoDJ3RI4/2ZwAt0cYmoNyfuQQj9Mw7+wtVpVQg
-	rZualNTPgy4npyR5HWiIkvvKGcg6boIF3a0SQgyQxI8pOJ7L7QtUzpOviTrPtxY8Bw5K
-	J2nMyFfzK/zV1rQwmS+DpjmxwjGvxxQvyj4rWB7cbjca7mIPTuP8jGdcr+t388fLCyGR
-	il0hKInrY+ds/CKhAkAFeu0T9xm48krsZuPtkcE9XC2J0xmSm5SmbvBXVa/bHC6UVQgs
-	b6+Mz7mUL40fdIOq0lNXIXrw/Mt2iVitZVoYEimNLqOfJzXKajoXiFR54d7vjSxhBzvp
-	d0ZQ==
-MIME-Version: 1.0
-Received: by 10.180.79.72 with SMTP id h8mr2765658wix.1.1333524835738; Wed, 04
-	Apr 2012 00:33:55 -0700 (PDT)
-Received: by 10.223.104.68 with HTTP; Wed, 4 Apr 2012 00:33:55 -0700 (PDT)
-In-Reply-To: <20120404091720.4b743c5b@eb-e6520>
-References: <20120404091720.4b743c5b@eb-e6520>
-Date: Wed, 4 Apr 2012 09:33:55 +0200
-Message-ID: <CAGiJk9f-i=-tg=o_8qoxn8pBVaaeYwebVZeMu8H2jLuux4ah5w@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: build meta-oe without systemd
+	Wed, 04 Apr 2012 12:23:14 +0200
+Received: by localhost (Postfix, from userid 1000)
+	id 061CDC2CC0; Wed,  4 Apr 2012 12:14:03 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Tom Rini <tom.rini@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Apr 2012 12:13:56 +0200
+Message-Id: <cover.1333534095.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.7
+Subject: [2011.03-maintenance 0/1] pull request 20120404
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,31 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 07:43:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Apr 2012 10:23:15 -0000
 
-2012/4/4 Eric B=C3=A9nard <eric@eukrea.com>:
-> Hi,
->
-> would that make sense to support systemd as a DISTRO_FEATURES ?
-> That would make builds using older udev (< 174) possible with meta-oe as
-> this actually fails because of systemd.
->
-> Eric
->
+Hi Tom,
 
-Hi,
-there was that discussion before,
-Martin already gave an overview.
+please pull this commit backported from oe-core fixing a problem with docbook-utils-native.
 
-You can read the previous discussion here:
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg23=
-720.html
+Thx,
+Steffen
 
+The following changes since commit 71df8a759f91e821a2daee22f34eaa3a31708775:
 
---=20
-Regards
-Samuel
+  python-2.6.6: Fix python-2.6.6 build failure on linux-3.x (2012-03-27 13:08:38 +0200)
+
+are available in the git repository at:
+  git://github.com/sledz/oe pull-request-1
+  https://github.com/sledz/oe/tree/pull-request-1
+
+Steffen Sledz (1):
+  docbook-utils-native: fix syntax problem in jw.in
+
+ .../docbook-utils/docbook-utils-0.6.14/re.patch    |   29 ++++++++++++++++++++
+ .../docbook-utils/docbook-utils-native_0.6.14.bb   |    8 ++++-
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/docbook-utils/docbook-utils-0.6.14/re.patch
+
+-- 
+1.7.7
+
 
 
