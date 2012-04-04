@@ -1,21 +1,34 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1SFRn8-0001Xn-OM
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 17:06:34 +0200
-Received: from localhost.localdomain (hanuta.TechFak.Uni-Bielefeld.DE
-	[129.70.129.229])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 746F2A5;
-	Wed,  4 Apr 2012 16:47:28 +0200 (CEST)
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SFUZZ-0006WL-O5 for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Apr 2012 20:04:45 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SFUQi-0006Kx-LI for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Apr 2012 19:55:36 +0200
+Received: from 50-1-53-18.dedicated.static.sonic.net ([50.1.53.18])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Apr 2012 19:55:36 +0200
+Received: from koen by 50-1-53-18.dedicated.static.sonic.net with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Apr 2012 19:55:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2012 16:46:52 +0200
-Message-Id: <1333550812-12948-1-git-send-email-stefan@herbrechtsmeier.net>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
-Subject: [meta-oe][PATCH] v4l-utils: correct license delimiter
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 04 Apr 2012 10:55:26 -0700
+Message-ID: <jli1uf$7nt$1@dough.gmane.org>
+References: <20120404091720.4b743c5b@eb-e6520>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 50-1-53-18.dedicated.static.sonic.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <20120404091720.4b743c5b@eb-e6520>
+X-Enigmail-Version: 1.4
+Subject: Re: build meta-oe without systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,37 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 15:06:34 -0000
+X-List-Received-Date: Wed, 04 Apr 2012 18:04:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
----
- .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Op 04-04-12 00:17, Eric Bénard schreef:
+> Hi,
+> 
+> would that make sense to support systemd as a DISTRO_FEATURES ? That
+> would make builds using older udev (< 174) possible with meta-oe as this
+> actually fails because of systemd.
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-index 3252ae3..c6100c1 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "v4l2 and IR applications"
--LICENSE = "GPLv2/LGPLv2.1"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
-                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
- 
-@@ -8,6 +8,8 @@ DEPENDS = "jpeg"
- # libv4l was absorbed into this, let OE know that
- PROVIDES = "libv4l"
- 
-+PR = "r1"
-+
- SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
- SRCREV = "v4l-utils-${PV}"
- 
--- 
-1.7.0.4
+We talked about this during the yocto bsp summit this week and I'm working
+on a patchset to send as RFC later this month (post 1.2 release):
+
+commit b98d45b1bc2d9cf9ba41629240e6c21f19ddceff
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue Apr 3 14:13:59 2012 -0700
+
+    meta-systemd: move over systemd from meta-oe
+
+    Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+commit 59c57bd73d1f157dfada233df889852fdb4a692f
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue Apr 3 14:12:42 2012 -0700
+
+    meta-systemd: create layer
+
+    Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPfIsKAAoJEHZqAkdh1vT6Xq0QALgix1tbsk+pl9hmjHus9ZQr
+OgFmzRO3158a7yMeTJiwwG4fZ1nUWXt/xxAtUqJeDykRUDPPIxf47dPfe+z07iiL
+Y5T3ZFulCCtmNnvxZXDzoN+ksp0adKF2CSvp/1azinJQyau//iKGRpJIlINa1DA/
+aHUclT70E81lGMuKoL6Corsc1I4d9eCd+K1SFi+ZCcRW0DN3VjpXzHShmovpx6CS
+MwFydTZHmNjrYRxRMmCs8Ifn9mlA6APWF4+aukQOwafm0wVGSW4K197VpSmeIPqb
+ODO+C7+MxcVOOatCYHzJ+QsQ9oc7aBKmPA+9moCj3BkiFV/X58xLMLm/SomvsekY
+LE00WcDyGwa5aBJRW4rVX/o8hQHv4rAv2703MHhbteYOGo0M70IDd7AA602GQDCY
+QvVjycuTww2ciHAYxrOublWkPZJijfuq4iRi1Qrx4YdUv4esFWKklz7GgS789oEN
+/MLraT2ICmIH2STwc7bMiTzq2AYwxE2/WSMQZ6K378SiftQ36SgkotMxGA7GSyVS
+r8eWr5s4l9TU0vVxObYys1zJ8LbtqKgNnn+N753BTenQ7ypzYnx3Uh3ifN244TGd
+FHLwaYWSAHxkNni2yuwNkBBLLjPlsJo+//vNuee4TtzE0IJOl0lRDVyY8haiC5Re
+IxuJvhNxkY5GW+C/R1u/
+=2Mdp
+-----END PGP SIGNATURE-----
 
 
 
