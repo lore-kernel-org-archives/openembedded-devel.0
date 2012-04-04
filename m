@@ -1,38 +1,21 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SFPXZ-00079O-6L
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1SFRn8-0001Xn-OM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 14:42:21 +0200
-Received: by ghbz2 with SMTP id z2so65833ghb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2012 05:33:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=XAlc67JMHI/KhM4HUxWALXvhM1aJLUmCR3WLSNiR6Do=;
-	b=tN0br/K0n7bbHumx8Rarwjs3pAAocLPfG0eD50QPZeokjG4BOfJHLbavyC9+iq/7Rv
-	kWQ33XrNoBh7nDruhnJoxDUS/thPvt77Rgz+7gX55hfd83qhHlYa5EKhxv2Dah9O4Hhi
-	H4gqxcHvgJsx25FbQlkvjNcxh9Jj2arc7CmEaAUkb499VsefS/Lf3gmPFBEp8ozZROBB
-	W+WgAyQjK34tvXV5IyQ4nm5NCaRZRqcNt3C3nj/7xSuIwSSV/bZOlbcJ4+a8jTODlFS7
-	OpnSLl3tdoUXGu8pGWy8Mwcw5XOKzkamEAi8uEsDyzXSPQNDw7YwixjpYu8jOqBYlh9K
-	Uttg==
-Received: by 10.101.175.37 with SMTP id c37mr4532418anp.59.1333542790409;
-	Wed, 04 Apr 2012 05:33:10 -0700 (PDT)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id d25sm2044087yhe.4.2012.04.04.05.33.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Apr 2012 05:33:09 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 04 Apr 2012 17:06:34 +0200
+Received: from localhost.localdomain (hanuta.TechFak.Uni-Bielefeld.DE
+	[129.70.129.229])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id 746F2A5;
+	Wed,  4 Apr 2012 16:47:28 +0200 (CEST)
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2012 12:32:54 +0000
-Message-Id: <cf352c8c43cd88f95c06bc2c21cddcad4ed48ac2.1333542709.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1333542709.git.otavio@ossystems.com.br>
-References: <cover.1333542709.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1333542709.git.otavio@ossystems.com.br>
-References: <cover.1333542709.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 3/3] systemd-systemctl-native: add support to disable services
+Date: Wed,  4 Apr 2012 16:46:52 +0200
+Message-Id: <1333550812-12948-1-git-send-email-stefan@herbrechtsmeier.net>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
+Subject: [meta-oe][PATCH] v4l-utils: correct license delimiter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,103 +29,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 12:42:21 -0000
+X-List-Received-Date: Wed, 04 Apr 2012 15:06:34 -0000
 
-This adds support to disable services making possible to it to be done
-during rootfs generation.
+From: Stefan Herbrechtsmeier <sherbrec@cit-ec.uni-bielefeld.de>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 ---
- .../systemd/systemd-systemctl-native.bb            |    2 +-
- .../systemd/systemd-systemctl-native/systemctl     |   32 +++++++++++++++----
- 2 files changed, 26 insertions(+), 8 deletions(-)
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native.bb b/meta-oe/recipes-core/systemd/systemd-systemctl-native.bb
-index dcd67ee..78eb8f3 100644
---- a/meta-oe/recipes-core/systemd/systemd-systemctl-native.bb
-+++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Wrapper to enable of systemd services"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+index 3252ae3..c6100c1 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "v4l2 and IR applications"
+-LICENSE = "GPLv2/LGPLv2.1"
++LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
+                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
  
--PR = "r1"
-+PR = "r2"
+@@ -8,6 +8,8 @@ DEPENDS = "jpeg"
+ # libv4l was absorbed into this, let OE know that
+ PROVIDES = "libv4l"
  
- inherit native
- 
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-index b86f3cd..c4a0a3f 100755
---- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-+++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-@@ -3,6 +3,7 @@
- ROOT=
- 
- # parse command line params
-+action=
- while [ $# != 0 ]; do
- 	opt="$1"
- 
-@@ -10,17 +11,26 @@ while [ $# != 0 ]; do
- 		enable)
- 			shift
- 
-+			action="$opt"
- 			services="$1"
--			in_enable="1"
-+			cmd_args="1"
-+			shift
-+			;;
-+		disable)
-+			shift
++PR = "r1"
 +
-+			action="$opt"
-+			services="$1"
-+			cmd_args="1"
- 			shift
- 			;;
- 		--root=*)
- 			ROOT=${opt##--root=}
--			in_enable="0"
-+			cmd_args="0"
- 			shift
- 			;;
- 		*)
--			if [ "$in_enable" = "1" ]; then
-+			if [ "$cmd_args" = "1" ]; then
- 				services="$services $opt" 
- 				shift
- 			else
-@@ -53,9 +63,15 @@ for service in $services; do
- 		        | grep '\.target$')
+ SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
+ SRCREV = "v4l-utils-${PV}"
  
- 	for r in $wanted_by; do
--		mkdir -p $ROOT/etc/systemd/system/$r.wants
--		ln -s $service_file $ROOT/etc/systemd/system/$r.wants
--		echo "Enabled $service for $wanted_by."
-+		if [ "$action" = "enable" ]; then
-+			mkdir -p $ROOT/etc/systemd/system/$r.wants
-+			ln -s $service_file $ROOT/etc/systemd/system/$r.wants
-+			echo "Enabled $service for $wanted_by."
-+		else
-+			rm -f $ROOT/etc/systemd/system/$r.wants/$service_file
-+			rmdirs -p $ROOT/etc/systemd/system/$r.wants
-+			echo "Disabled $service for $wanted_by."
-+		fi
- 	done
- 
- 	# call us for the other required scripts
-@@ -63,6 +79,8 @@ for service in $services; do
- 		   | sed 's,Also=,,g' \
- 		   | tr ',' '\n')
- 	for a in $also; do
--		$0 --root=$ROOT enable $a
-+		if [ "$action" = "enable" ]; then
-+			$0 --root=$ROOT enable $a
-+		fi
- 	done
- done
 -- 
-1.7.2.5
+1.7.0.4
 
 
 
