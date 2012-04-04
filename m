@@ -1,19 +1,19 @@
 Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1SFNSx-0003Mj-Ep
+	(envelope-from <eric@eukrea.com>) id 1SFNUX-0003SH-6F
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 12:29:27 +0200
+	Wed, 04 Apr 2012 12:31:05 +0200
 Received: from eb-e6520 (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 334A64B0147
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 06C694B0042
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2012 12:20:14 +0200 (CEST)
-Date: Wed, 4 Apr 2012 12:20:13 +0200
+	Wed,  4 Apr 2012 12:21:52 +0200 (CEST)
+Date: Wed, 4 Apr 2012 12:21:51 +0200
 From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120404122013.5f98850b@eb-e6520>
-In-Reply-To: <20120404072419.GC4181@jama.jama.net>
+Message-ID: <20120404122151.44484ec7@eb-e6520>
+In-Reply-To: <CAGiJk9f-i=-tg=o_8qoxn8pBVaaeYwebVZeMu8H2jLuux4ah5w@mail.gmail.com>
 References: <20120404091720.4b743c5b@eb-e6520>
-	<20120404072419.GC4181@jama.jama.net>
+	<CAGiJk9f-i=-tg=o_8qoxn8pBVaaeYwebVZeMu8H2jLuux4ah5w@mail.gmail.com>
 Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
 X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
@@ -31,24 +31,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 10:29:27 -0000
+X-List-Received-Date: Wed, 04 Apr 2012 10:31:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Le Wed, 4 Apr 2012 09:24:19 +0200,
-Martin Jansa <martin.jansa@gmail.com> a =E9crit :
-
-> On Wed, Apr 04, 2012 at 09:17:20AM +0200, Eric B=E9nard wrote:
-> > Hi,
-> >=20
-> > would that make sense to support systemd as a DISTRO_FEATURES ?
-> > That would make builds using older udev (< 174) possible with meta-oe as
-> > this actually fails because of systemd.
+Le Wed, 4 Apr 2012 09:33:55 +0200,
+Samuel Stirtzel <s.stirtzel@googlemail.com> a =E9crit :
+> You can read the previous discussion here:
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg=
+23720.html
 >=20
-> You mean without runtime dependency on systemd or even without build
-> time dep?
->=20
-I mean build time dependency.
+yes I saw that. What I mean is building oe without triggering systemd
+build.
 
 Eric
 
