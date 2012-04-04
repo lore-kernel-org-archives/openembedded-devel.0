@@ -1,33 +1,38 @@
 Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SFPXT-00078p-VL
+	(envelope-from <otavio.salvador@gmail.com>) id 1SFPXU-00078p-Vu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 14:42:16 +0200
-Received: by ggcy3 with SMTP id y3so65910ggc.6
+	Wed, 04 Apr 2012 14:42:17 +0200
+Received: by mail-gx0-f175.google.com with SMTP id y3so65910ggc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2012 05:33:05 -0700 (PDT)
+	Wed, 04 Apr 2012 05:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	bh=2wUADmuQJi4METc0kbD/7mDubrg+NzN74QMPCIogne0=;
-	b=eXWuk+CNPhZEvg+ur4y6CbolPsQuFUGFxtCOWXKav6VQ7sY/KtkY9p5ZuhoqTJgw0h
-	EudS6w9MGl2Zwz5uygzmxM4XipdSPZ+yNJca2RhI2BHTi1cuPz2yyK9j2MuqZPXxIZGD
-	lamWldTxjGRfCEc19KRkusHV9wcJQ/vAez658Lcuhskd7u+ihV2csWuna7LgCY80x2lj
-	7lGEY9Yv8jZ1RHMrpkW7t72HgT0UkKEmSiBsxk03DNDtHNxKI0BCoxQuNKcMujV0Zmed
-	8CTmEbx/wv3wo5idH8rrb7apgtw+a4JLntQo+Lp/iiBfzcTzGLaFDoPNhZuBVSarem2+
-	3K2Q==
-Received: by 10.236.79.195 with SMTP id i43mr14547268yhe.53.1333542784978;
-	Wed, 04 Apr 2012 05:33:04 -0700 (PDT)
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=XfHXSa1mdIwwOdOMI9XSjydGP3F0Vne4N/c2oxokZog=;
+	b=yG/kkMoudiQHwEM9w+7TiAMFT3FkbTvSROj0X4HfubPiPkp2uLtw/U5CO6LuRZa6uY
+	e5slE1h0KCoRTl+9OkfwvPjvatn4mZ5qdof37uVkKOPxdh7AXdJHSSboYlEeypJy1j4s
+	UMC9Qrs8V11L/WRJoJI7yv2VzHPVQW9PdPrxRyFdcZGp8MckFzDMU2BYleL6d17n+gSX
+	eBEHQ0baOCxv2tASGFHGR+/tJj3sdga5ll4KXmhFIohnQaIIawS2NoXmD6q52Ch24yMv
+	GOEPouxOxOTic4FszwESXESeWZwsG1tGCSV0YIws5eP6xmyz9Zb9pTp5MHDb86/lRcvb
+	uuWg==
+Received: by 10.236.134.211 with SMTP id s59mr14543591yhi.131.1333542788615;
+	Wed, 04 Apr 2012 05:33:08 -0700 (PDT)
 Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id d25sm2044087yhe.4.2012.04.04.05.33.02
+	by mx.google.com with ESMTPS id d25sm2044087yhe.4.2012.04.04.05.33.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Apr 2012 05:33:03 -0700 (PDT)
+	Wed, 04 Apr 2012 05:33:07 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2012 12:32:51 +0000
-Message-Id: <cover.1333542709.git.otavio@ossystems.com.br>
+Date: Wed,  4 Apr 2012 12:32:53 +0000
+Message-Id: <5b082f1f7fb949976d047f7238283d83d2112331.1333542709.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH][meta-oe 0/3] Pending patches from O.S. Systems' tree
+In-Reply-To: <cover.1333542709.git.otavio@ossystems.com.br>
+References: <cover.1333542709.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1333542709.git.otavio@ossystems.com.br>
+References: <cover.1333542709.git.otavio@ossystems.com.br>
+Subject: [PATCH][meta-oe 2/3] openmotif: add 2.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +46,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 12:42:16 -0000
+X-List-Received-Date: Wed, 04 Apr 2012 12:42:17 -0000
 
-The following changes since commit d248ea6ada38ba9070f45f4fd2ab107bc6ed0246:
-
-  libedit: Remove files folder as no patch was being used (2012-03-31 16:48:43 +0200)
-
-are available in the git repository at:
-  git://github.com/OSSystems/meta-oe master
-  https://github.com/OSSystems/meta-oe/tree/master
-
-Otavio Salvador (3):
-  xbitmaps: add 1.1.1 version
-  openmotif: add 2.3.3
-  systemd-systemctl-native: add support to disable services
-
- .../systemd/systemd-systemctl-native.bb            |    2 +-
- .../systemd/systemd-systemctl-native/systemctl     |   32 +++++++++++++----
- .../recipes-graphics/xorg-data/xbitmaps_1.1.1.bb   |   10 +++++
- .../xorg-data/xorg-data-common.inc                 |   10 +++++
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
  .../openmotif/openmotif/configure.patch            |   15 ++++++++
  .../recipes-support/openmotif/openmotif_2.3.3.bb   |   38 ++++++++++++++++++++
- 6 files changed, 99 insertions(+), 8 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
- create mode 100644 meta-oe/recipes-graphics/xorg-data/xorg-data-common.inc
+ 2 files changed, 53 insertions(+), 0 deletions(-)
  create mode 100644 meta-oe/recipes-support/openmotif/openmotif/configure.patch
  create mode 100644 meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
 
+diff --git a/meta-oe/recipes-support/openmotif/openmotif/configure.patch b/meta-oe/recipes-support/openmotif/openmotif/configure.patch
+new file mode 100644
+index 0000000..8868e80
+--- /dev/null
++++ b/meta-oe/recipes-support/openmotif/openmotif/configure.patch
+@@ -0,0 +1,15 @@
++--- a/configure.ac~	2009-10-27 14:10:23.000000000 -0200
+++++ b/configure.ac	2011-05-31 10:51:00.207232036 -0300
++@@ -3,12 +3,6 @@
++ AC_CONFIG_SRCDIR([lib/Xm/Form.c])
++ AC_PREREQ(2.52)
++ AC_CONFIG_AUX_DIR(.)
++-AC_CHECK_FILE(/usr/X/include/X11/X.h,
++-  AC_PREFIX_DEFAULT(/usr/X),
++-  AC_PREFIX_DEFAULT(/usr))
++-AC_CHECK_FILE(/usr/X11R6/include/X11/X.h,
++-  AC_PREFIX_DEFAULT(/usr/X11R6),
++-  AC_PREFIX_DEFAULT(/usr))
++ 
++ dnl AM_MAINTAINER_MODE
++ AC_CANONICAL_TARGET
+diff --git a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+new file mode 100644
+index 0000000..2e9c2de
+--- /dev/null
++++ b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+@@ -0,0 +1,38 @@
++SECTION = "libs"
++DESCRIPTION = "OSM/Motif implementation."
++LICENSE = "OGPL"
++DEPENDS = "xbitmaps virtual/libx11 libxt libxp"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=14f692c82491db3d52419929d2f3b343"
++
++SRC_URI = "http://openmotif.com/files/public_downloads/openmotif/2.3/2.3.3/openmotif-2.3.3.tar.gz \
++           file://configure.patch;patch=1"
++
++SRC_URI[md5sum] = "fd27cd3369d6c7d5ef79eccba524f7be"
++SRC_URI[sha256sum] = "c85f5545e218fa0c59a3789192132d472fc5a33e914a221a568eee4fc10cd103"
++
++inherit autotools
++
++PACKAGES += "${PN}-bin"
++
++FILES_${PN}-bin = "${bindir}"
++
++do_compile() {
++	(
++		# HACK: build a native binaries need during the build
++		unset CC LD CXX CCLD CFLAGS
++		oe_runmake -C config/util CC="${BUILD_CC}" LD="${BUILD_LD}" CXX="${BUILD_CXX}" LIBS="" makestrs
++    )
++    if [ "$?" != "0" ]; then
++        exit 1
++    fi
++    oe_runmake -C lib
++    oe_runmake -C include
++}
++
++do_install() {
++    oe_runmake DESTDIR=${D} -C lib install
++    oe_runmake DESTDIR=${D} -C include install
++}
++
++LEAD_SONAME = "libXm.so.4"
 -- 
 1.7.2.5
 
