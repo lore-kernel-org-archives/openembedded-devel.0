@@ -1,35 +1,32 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SFKig-0000V3-ND
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SFKrx-0000eA-Ok
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Apr 2012 09:33:30 +0200
-Received: by wibhj13 with SMTP id hj13so215561wib.6
+	Wed, 04 Apr 2012 09:43:05 +0200
+Received: by wibhj13 with SMTP id hj13so233130wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2012 00:24:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=YUMaPBzcV3PNgE3gff+q24OzzNSrjSdxJrCyYc8zYJM=;
-	b=oE/tBO26aSxxcofJlnuYMkctlmUwm1+0A2CcwNHdA3Pa/Jj9z108ftzChgl/fl6V6Z
-	J6Jql3/F6QrWbfp7E1s+aVo2/pwcNKoOFlSh7zSXv8za8azx6cGZJdqektTuzlFu/Soe
-	zgVfd+kUAVS9AU05S2zFQtQKIUplgKyrxjAxIXAa0zRO6ZIXqu2BSrAySYyxpQQORq1x
-	XYq4uB7EtKBXKkCEEgiph3m+jOYeg7WIV/ErcOTvqrKmWCDFbgomvPkL3QBuogTNdiKn
-	RRa3dE8i4Hw7uzO/x4YsmXON5Su2Rlpo3OpA1FEDolB4daPhC7OqKNw2t8chmOhtDPew
-	X58g==
-Received: by 10.180.104.230 with SMTP id gh6mr2560393wib.22.1333524260711;
-	Wed, 04 Apr 2012 00:24:20 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e6sm2676011wix.8.2012.04.04.00.24.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Apr 2012 00:24:20 -0700 (PDT)
-Date: Wed, 4 Apr 2012 09:24:19 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120404072419.GC4181@jama.jama.net>
-References: <20120404091720.4b743c5b@eb-e6520>
+	Wed, 04 Apr 2012 00:33:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=xpF3IuiNtpMRZY525qXq4OUMq38F09vO3Eetxk5OSGE=;
+	b=IhfxrDPAWqWg0R+7XGO0ykWF5VE8yoDJ3RI4/2ZwAt0cYmoNyfuQQj9Mw7+wtVpVQg
+	rZualNTPgy4npyR5HWiIkvvKGcg6boIF3a0SQgyQxI8pOJ7L7QtUzpOviTrPtxY8Bw5K
+	J2nMyFfzK/zV1rQwmS+DpjmxwjGvxxQvyj4rWB7cbjca7mIPTuP8jGdcr+t388fLCyGR
+	il0hKInrY+ds/CKhAkAFeu0T9xm48krsZuPtkcE9XC2J0xmSm5SmbvBXVa/bHC6UVQgs
+	b6+Mz7mUL40fdIOq0lNXIXrw/Mt2iVitZVoYEimNLqOfJzXKajoXiFR54d7vjSxhBzvp
+	d0ZQ==
 MIME-Version: 1.0
+Received: by 10.180.79.72 with SMTP id h8mr2765658wix.1.1333524835738; Wed, 04
+	Apr 2012 00:33:55 -0700 (PDT)
+Received: by 10.223.104.68 with HTTP; Wed, 4 Apr 2012 00:33:55 -0700 (PDT)
 In-Reply-To: <20120404091720.4b743c5b@eb-e6520>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+References: <20120404091720.4b743c5b@eb-e6520>
+Date: Wed, 4 Apr 2012 09:33:55 +0200
+Message-ID: <CAGiJk9f-i=-tg=o_8qoxn8pBVaaeYwebVZeMu8H2jLuux4ah5w@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: build meta-oe without systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,47 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2012 07:33:30 -0000
-X-Groupsio-MsgNum: 38106
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GPJrCs/72TxItFYR"
-Content-Disposition: inline
-
---GPJrCs/72TxItFYR
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Apr 2012 07:43:05 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 04, 2012 at 09:17:20AM +0200, Eric B=E9nard wrote:
+2012/4/4 Eric B=C3=A9nard <eric@eukrea.com>:
 > Hi,
->=20
+>
 > would that make sense to support systemd as a DISTRO_FEATURES ?
 > That would make builds using older udev (< 174) possible with meta-oe as
 > this actually fails because of systemd.
+>
+> Eric
+>
 
-You mean without runtime dependency on systemd or even without build
-time dep?
+Hi,
+there was that discussion before,
+Martin already gave an overview.
 
-Because tricky runtime dependency is imho only in polkit which needs to
-be changed in .bbappend and then carefull selection of task-* and their
-content.
+You can read the previous discussion here:
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg23=
+720.html
 
-I was using meta-oe without systemd runtime till last week.
 
-Cheers,
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Regards
+Samuel
 
---GPJrCs/72TxItFYR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk979yMACgkQN1Ujt2V2gByeyACdGrePqy4JI1V7rQBMyaZMRZai
-hO8AoKl53fkVnaHNrUYBnpsaiqtVxosO
-=CRYS
------END PGP SIGNATURE-----
-
---GPJrCs/72TxItFYR--
