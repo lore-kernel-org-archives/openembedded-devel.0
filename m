@@ -1,34 +1,24 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nagos1@gmail.com>) id 1SG2FH-00056y-QH
+	(envelope-from <eric@eukrea.com>) id 1SG3Ue-0006MM-MD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2012 08:02:05 +0200
-Received: by bkcjg15 with SMTP id jg15so1914164bkc.6
+	Fri, 06 Apr 2012 09:22:01 +0200
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 45E8E4B0192
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Apr 2012 22:52:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=bLB1GBXexExOSY350sSixdaSX299nA4wPw5QzMrvIAs=;
-	b=c3M4RK3B71ZYgX80ZXz2Fgt/aR1qy2FDWz2yeELzDGidxt9jJLoy2Umy7dO9EsO98u
-	HxOM5w/LX4kq++I52MI5iLSKg2jJDBtnWC5mcgg4vL2ZaTiAcy2AUGRt5xOAzdwsLDeJ
-	8NABPMkMSoEWywWZt/NuDiQnMSNNsoaSGr889i8vFjqrGdOUxxJ+HaetNFV2u0PP6rXO
-	X3mu+YRbcDpCCu1cbsIDy1mnR8yAbAvBb77e+7cU+6owt6dMmNTyMPQIIEpQDak4u5Hj
-	COV4oODOXayfG/g0RjZNwjue3enabRW+Nj4LRS0cE7bhUA3qBM6x2G7H2pYp/y7wD1Wq
-	+IvQ==
-Received: by 10.204.153.215 with SMTP id l23mr2572948bkw.11.1333691571251;
-	Thu, 05 Apr 2012 22:52:51 -0700 (PDT)
-Received: from localhost.localdomain ([188.134.85.103])
-	by mx.google.com with ESMTPS id f11sm1814294bkw.6.2012.04.05.22.52.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 05 Apr 2012 22:52:50 -0700 (PDT)
-Sender: =?UTF-8?B?0JLQu9Cw0LTQuNC80LjRgCDQr9C60L7QstC70LXQsg==?=
-	<nagos1@gmail.com>
-From: Vladimir Yakovlev <nagos@inbox.ru>
+	Fri,  6 Apr 2012 09:12:44 +0200 (CEST)
+Date: Fri, 6 Apr 2012 09:12:43 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Apr 2012 09:52:43 +0400
-Message-Id: <1333691563-4317-1-git-send-email-nagos@inbox.ru>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] New version of picocom-1.7 with corrected URI
+Message-ID: <20120406091243.1f1969d2@eb-e6520>
+In-Reply-To: <jllb47$64q$1@dough.gmane.org>
+References: <20120404091720.4b743c5b@eb-e6520> <jli1uf$7nt$1@dough.gmane.org>
+	<CABcZANngH2BSmSdBPkaPyJcG1RFuKLxc9DnJWhe7_b9xcSGjxA@mail.gmail.com>
+	<jllb47$64q$1@dough.gmane.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: build meta-oe without systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2012 06:02:05 -0000
+X-List-Received-Date: Fri, 06 Apr 2012 07:22:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Used URI from project on googlecode.
+Hi Koen,
 
-Signed-off-by: Vladimir Yakovlev <nagos@inbox.ru>
----
- recipes/picocom/picocom_1.7.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 recipes/picocom/picocom_1.7.bb
+Le Thu, 05 Apr 2012 16:50:32 -0700,
+Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
+> I would appreciate people sending decent bugreports to the list, because =
+it
+> is *NOT* supposed to break this way. The breakage needs to get fixed befo=
+re
+> we merge it into oe-core.
+>=20
+to reproduce the problem I met, simply add to a conf file :
+PREFERRED_VERSION_udev =3D "164"
 
-diff --git a/recipes/picocom/picocom_1.7.bb b/recipes/picocom/picocom_1.7.bb
-new file mode 100644
-index 0000000..5633584
---- /dev/null
-+++ b/recipes/picocom/picocom_1.7.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Lightweight and minimal (~20K) dumb-terminal emulation program."
-+SECTION = "console/utils"
-+PRIORITY = "optional"
-+LICENSE = "GPL"
-+PR = "r2"
-+
-+SRC_URI = "http://picocom.googlecode.com/files/picocom-${PV}.tar.gz \
-+           file://gcc4.patch"
-+
-+CFLAGS_append = ' -DVERSION_STR=\\"${PV}\\"'
-+
-+do_install () {
-+	install -d ${D}${bindir}
-+	install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
-+}
-+
-+SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
-+SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9a2348c89e02a84935517002b3bc2c1129e"
--- 
-1.7.1
+and using oe-core + meta-oe try to build anything which has "inherit
+systemd" (even if in the end you don't install the corresponding
+${PN}-systemd in the target's rootfs) : systemd's configure will fail
+because it requires a more recent udev.
 
+Eric
 
 
