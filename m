@@ -1,31 +1,31 @@
 Received: from ramkesd003-e.ra.rockwell.com ([205.175.240.251]
 	helo=ramilwsmtp01.ra.rockwell.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mkes@ra.rockwell.com>) id 1SG7EA-0001ip-0L
+	(envelope-from <mkes@ra.rockwell.com>) id 1SG7WV-00023L-9P
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2012 13:21:14 +0200
+	Fri, 06 Apr 2012 13:40:11 +0200
 Received: from cze.ra.rockwell.com ([10.70.136.58])
 	by ramilwsmtp01.ra.rockwell.com
-	with ESMTP id 2012040606115940-264213 ;
-	Fri, 6 Apr 2012 06:11:59 -0500 
-Received: (qmail 44373 invoked from network); 6 Apr 2012 11:11:58 -0000
+	with ESMTP id 2012040606305783-264402 ;
+	Fri, 6 Apr 2012 06:30:57 -0500 
+Received: (qmail 44455 invoked from network); 6 Apr 2012 11:30:57 -0000
 Received: from unknown (HELO [10.70.138.164]) ([10.70.138.164])
 	(envelope-sender <mkes@ra.rockwell.com>)
 	by euczprgmult004.cze.ra.rockwell.com (qmail-ldap-1.03) with SMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	6 Apr 2012 11:11:58 -0000
-Message-ID: <4F7ECF80.6010405@ra.rockwell.com>
-Date: Fri, 06 Apr 2012 13:12:00 +0200
+	6 Apr 2012 11:30:57 -0000
+Message-ID: <4F7ED3F3.6070103@ra.rockwell.com>
+Date: Fri, 06 Apr 2012 13:30:59 +0200
 From: Miroslav Kes <mkes@ra.rockwell.com>
 User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:10.0.1) Gecko/20120314 Thunderbird/10.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 X-MIMETrack: Itemize by SMTP Server on RAMilwSMTP01/Milwaukee/RA/Rockwell at
-	04/06/2012 06:11:59 AM,
+	04/06/2012 06:30:58 AM,
 	Serialize by Router on RAMilwSMTP01/Milwaukee/RA/Rockwell at 04/06/2012
-	06:12:03 AM, Serialize complete at 04/06/2012 06:12:03 AM
-Subject: Re: openembedded-devel@lists.openembedded.org
+	06:31:00 AM, Serialize complete at 04/06/2012 06:31:00 AM
+Subject: Re: openssl build broken for distros without IPv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,9 +39,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2012 11:21:14 -0000
+X-List-Received-Date: Fri, 06 Apr 2012 11:40:11 -0000
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset=ISO-8859-1
+
+Once more with the correct subject to keep track of the thread.
 
 > Hi,
 >
@@ -50,7 +52,7 @@ Content-Type: text/plain; charset=ISO-8859-1
 >
 > Bye Henning
 
-I'm sorry, it looks like some auto formating tool split the long lines
+I'm sorry, it looks like, some auto formatting tool split the long lines
 and made it unreadable. I'm trying again (see bellow).
 
 I've looked closer in the meantime what the sed command was trying to
@@ -87,7 +89,7 @@ Here is the diff again:
 <         {
 <         if (BIO_dgram_should_retry(ret))
 <             {
-<             BIO_set_retry_write(b); 
+<             BIO_set_retry_write(b);
 <             data->_errno = get_last_socket_error();
 <
 < #if 0 /* higher layers are responsible for querying MTU, if necessary */
@@ -170,6 +172,5 @@ Here is the diff again:
 <             case AF_INET6:
 <                 memcpy(&data->peer,to,sizeof(data->peer.sa_in6));
 <                 break;
-
 
 
