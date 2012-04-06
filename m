@@ -1,31 +1,20 @@
-Received: from ramkesd003-e.ra.rockwell.com ([205.175.240.251]
-	helo=ramilwsmtp01.ra.rockwell.com)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mkes@ra.rockwell.com>) id 1SG7WV-00023L-9P
+	(envelope-from <eric@eukrea.com>) id 1SG8R2-0002qJ-W8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2012 13:40:11 +0200
-Received: from cze.ra.rockwell.com ([10.70.136.58])
-	by ramilwsmtp01.ra.rockwell.com
-	with ESMTP id 2012040606305783-264402 ;
-	Fri, 6 Apr 2012 06:30:57 -0500 
-Received: (qmail 44455 invoked from network); 6 Apr 2012 11:30:57 -0000
-Received: from unknown (HELO [10.70.138.164]) ([10.70.138.164])
-	(envelope-sender <mkes@ra.rockwell.com>)
-	by euczprgmult004.cze.ra.rockwell.com (qmail-ldap-1.03) with SMTP
+	Fri, 06 Apr 2012 14:38:37 +0200
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id B41694B0103
 	for <openembedded-devel@lists.openembedded.org>;
-	6 Apr 2012 11:30:57 -0000
-Message-ID: <4F7ED3F3.6070103@ra.rockwell.com>
-Date: Fri, 06 Apr 2012 13:30:59 +0200
-From: Miroslav Kes <mkes@ra.rockwell.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120314 Thunderbird/10.0.1
-MIME-Version: 1.0
+	Fri,  6 Apr 2012 14:29:22 +0200 (CEST)
+Date: Fri, 6 Apr 2012 14:29:21 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-MIMETrack: Itemize by SMTP Server on RAMilwSMTP01/Milwaukee/RA/Rockwell at
-	04/06/2012 06:30:58 AM,
-	Serialize by Router on RAMilwSMTP01/Milwaukee/RA/Rockwell at 04/06/2012
-	06:31:00 AM, Serialize complete at 04/06/2012 06:31:00 AM
-Subject: Re: openssl build broken for distros without IPv6
+Message-ID: <20120406142921.323c069d@eb-e6520>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: toolchain-layer -> ld: error: cannot find -lm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,138 +28,244 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2012 11:40:11 -0000
+X-List-Received-Date: Fri, 06 Apr 2012 12:38:37 -0000
+X-Groupsio-MsgNum: 38144
+Content-Type: multipart/mixed; boundary="MP_/kpdIkIhkIy.Fu.m4sp+t=/m"
+
+--MP_/kpdIkIhkIy.Fu.m4sp+t=/m
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=ISO-8859-1
+Content-Disposition: inline
 
-Once more with the correct subject to keep track of the thread.
+Hi,
 
-> Hi,
->
-> the diff is unreadable, but you could have fixed it by using a patch
-> rather than the sed command.
->
-> Bye Henning
+using :
+BB_VERSION        = "1.15.1"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "imx53qsb"
+DISTRO            = ""
+DISTRO_VERSION    = "oe-core.0"
+TUNE_FEATURES     = "armv7a vfp neon cortexa8"
+TARGET_FPU        = "vfp-neon"
+meta              = "master:1a82989345fb98becb487d270fd93a5e6dffeb47"
+meta-fsl-arm      = "master:d162f248a4229e534d94f978601848e1f3c913e9"
+meta-oe           
+meta-gnome        
+meta-xfce         
+toolchain-layer   = "master:a6790d602eb91069b1f618697e66a38619bcd690"
 
-I'm sorry, it looks like, some auto formatting tool split the long lines
-and made it unreadable. I'm trying again (see bellow).
+leads to :
+| /home/ebenard/WORK/MX53/oecore/build/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv7a-vfp-neon-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.6.4/ld: error: cannot find -lm
+(compressed log.do_compile attached)
 
-I've looked closer in the meantime what the sed command was trying to
-achieve. The intention was likely to eliminate IPv6 specific cases in
-the C switch command erasing everything between the "case AF_INET6:" and
-the corresponding "break;"
-The problem is that it uses only the "AF_INET6" string in its pattern to
-find the first line to be deleted. If the AF_INET6 macro is used in a
-different context in the code, it blindly erases everything until the
-next break command.
+The host is a Fedora 16 x86_64.
+The problem was also reproduced on a Ubuntu 11.10 x86_64 and with a qemuarm target.
+I don't seem to reproduce the problem without the toolchain-layer.
 
-I think that the whole idea of doing it by sed is bad. The IPv6 code is
-surrounded by #if OPENSSL_USE_IPV6 ... #endif so the correct approach
-would be to ensure that the preprocessor includes or skips that code.
+Do you have any idea of what could be wrong here ?
 
+Thanks,
+Eric
 
-Mira Kes
+--MP_/kpdIkIhkIy.Fu.m4sp+t=/m
+Content-Type: application/x-gzip
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=log.do_compile.11581.gz
 
-Here is the diff again:
+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
 
-345,402d344
-<         else if (data->peer.sa.sa_family == AF_INET6)
-<             peerlen = sizeof(data->peer.sa_in6);
-< #endif
-< #if defined(NETWARE_CLIB) && defined(NETWARE_BSDSOCK)
-<         ret=sendto(b->num, (char *)in, inl, 0, &data->peer.sa, peerlen);
-< #else
-<         ret=sendto(b->num, in, inl, 0, &data->peer.sa, peerlen);
-< #endif
-<         }
-<
-<     BIO_clear_retry_flags(b);
-<     if (ret <= 0)
-<         {
-<         if (BIO_dgram_should_retry(ret))
-<             {
-<             BIO_set_retry_write(b);
-<             data->_errno = get_last_socket_error();
-<
-< #if 0 /* higher layers are responsible for querying MTU, if necessary */
-<             if ( data->_errno == EMSGSIZE)
-<                 /* retrieve the new MTU */
-<                 BIO_ctrl(b, BIO_CTRL_DGRAM_QUERY_MTU, 0, NULL);
-< #endif
-<             }
-<         }
-<     return(ret);
-<     }
-<
-< static long dgram_ctrl(BIO *b, int cmd, long num, void *ptr)
-<     {
-<     long ret=1;
-<     int *ip;
-<     struct sockaddr *to = NULL;
-<     bio_dgram_data *data = NULL;
-< #if defined(IP_MTU_DISCOVER) || defined(IP_MTU)
-<     long sockopt_val = 0;
-<     unsigned int sockopt_len = 0;
-< #endif
-< #ifdef OPENSSL_SYS_LINUX
-<     socklen_t addr_len;
-<     union    {
-<         struct sockaddr    sa;
-<         struct sockaddr_in s4;
-< #if OPENSSL_USE_IPV6
-<         struct sockaddr_in6 s6;
-< #endif
-<         } addr;
-< #endif
-<
-<     data = (bio_dgram_data *)b->ptr;
-<
-<     switch (cmd)
-<         {
-<     case BIO_CTRL_RESET:
-<         num=0;
-<     case BIO_C_FILE_SEEK:
-<         ret=0;
-<         break;
-451,453d392
-<                 case AF_INET6:
-<                     memcpy(&data->peer,to,sizeof(data->peer.sa_in6));
-<                     break;
-483,488d421
-<         case AF_INET6:
-<             sockopt_val = IPV6_PMTUDISC_DO;
-<             if ((ret = setsockopt(b->num, IPPROTO_IPV6, IPV6_MTU_DISCOVER,
-<                 &sockopt_val, sizeof(sockopt_val))) < 0)
-<                 perror("setsockopt");
-<             break;
-526,540d458
-<         case AF_INET6:
-<             if ((ret = getsockopt(b->num, IPPROTO_IPV6, IPV6_MTU,
-(void *)&sockopt_val,
-<                 &sockopt_len)) < 0 || sockopt_val < 0)
-<                 {
-<                 ret = 0;
-<                 }
-<             else
-<                 {
-<                 /* we assume that the transport protocol is UDP and no
-<                  * IPV6 options are used.
-<                  */
-<                 data->mtu = sockopt_val - 8 - 40;
-<                 ret = data->mtu;
-<                 }
-<             break;
-569,571d486
-<                 case AF_INET6:
-<                     memcpy(&data->peer,to,sizeof(data->peer.sa_in6));
-<                     break;
-591,593d505
-<             case AF_INET6:
-<                 ret=sizeof(data->peer.sa_in6);
-<                 break;
-611,613d522
-<             case AF_INET6:
-<                 memcpy(&data->peer,to,sizeof(data->peer.sa_in6));
-<                 break;
-
-
+--MP_/kpdIkIhkIy.Fu.m4sp+t=/m--
