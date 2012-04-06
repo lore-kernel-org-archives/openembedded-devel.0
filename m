@@ -1,24 +1,33 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1SG3Ue-0006MM-MD
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1SG5GO-00086C-8D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2012 09:22:01 +0200
-Received: from eb-e6520 (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 45E8E4B0192
+	Fri, 06 Apr 2012 11:15:24 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SG57V-0004eH-O0>; Fri, 06 Apr 2012 11:06:13 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SG57V-0007wK-Ld>; Fri, 06 Apr 2012 11:06:13 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1SG57U-0001sL-Ib
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Apr 2012 09:12:44 +0200 (CEST)
-Date: Fri, 6 Apr 2012 09:12:43 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Fri, 06 Apr 2012 11:06:12 +0200
+Date: Fri, 6 Apr 2012 11:06:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120406091243.1f1969d2@eb-e6520>
-In-Reply-To: <jllb47$64q$1@dough.gmane.org>
-References: <20120404091720.4b743c5b@eb-e6520> <jli1uf$7nt$1@dough.gmane.org>
-	<CABcZANngH2BSmSdBPkaPyJcG1RFuKLxc9DnJWhe7_b9xcSGjxA@mail.gmail.com>
-	<jllb47$64q$1@dough.gmane.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: build meta-oe without systemd
+Message-ID: <20120406090612.GA6542@mi.fu-berlin.de>
+References: <OF169404D2.136201F5-ONC12579D7.0035BDC1-C12579D7.003FCEB6@ra.rockwell.com>
+MIME-Version: 1.0
+In-Reply-To: <OF169404D2.136201F5-ONC12579D7.0035BDC1-C12579D7.003FCEB6@ra.rockwell.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: openssl build broken for distros without IPv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2012 07:22:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Apr 2012 09:15:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Koen,
+Hi,
 
-Le Thu, 05 Apr 2012 16:50:32 -0700,
-Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
-> I would appreciate people sending decent bugreports to the list, because =
-it
-> is *NOT* supposed to break this way. The breakage needs to get fixed befo=
-re
-> we merge it into oe-core.
->=20
-to reproduce the problem I met, simply add to a conf file :
-PREFERRED_VERSION_udev =3D "164"
+the diff is unreadable, but you could have fixed it by using a patch
+rather than the sed command.
 
-and using oe-core + meta-oe try to build anything which has "inherit
-systemd" (even if in the end you don't install the corresponding
-${PN}-systemd in the target's rootfs) : systemd's configure will fail
-because it requires a more recent udev.
-
-Eric
+Bye Henning
 
 
