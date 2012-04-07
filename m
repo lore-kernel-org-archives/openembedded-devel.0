@@ -1,33 +1,39 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SGGvh-0001ud-S7
+	(envelope-from <raj.khem@gmail.com>) id 1SGMsV-0007Zz-0S
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Apr 2012 23:42:49 +0200
-Received: by lagw12 with SMTP id w12so2394209lag.6
+	Sat, 07 Apr 2012 06:03:55 +0200
+Received: by pbcum15 with SMTP id um15so2610377pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Apr 2012 14:33:36 -0700 (PDT)
+	Fri, 06 Apr 2012 20:54:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=PgsuNPAxS7BcZXAXeLM2+BGN2tfgJX830WaC27xjOY0=;
-	b=Qfnp+KSgYb8p8oRxK3ua2OHs/h5Cg7CnwTIsEtR5BWJ9/vxxk7p/YY3YU2yhKyfLG6
-	n3qxbVDEMPcrMhBap4Kd4QaiEwe1GeoSI5Duz5NdF6Ut9ZZGrFOmtHxS5ovX6Br33gId
-	Ry332I2NAMxWh6MLOEF1WzECWUvGkDxGgnp3Hv+YFvFBEepYbf9BZOKFRET03hEdEieZ
-	qXnVfXPUs2+nENVNEFPD8d6wVUMwBTAUC6IXRY5kQZ2j2sl8LEGzv6TDWWGFKD2XvKjR
-	yakG+iMNuFz8KqOwk7Rt/ADdG/fw2gdHY2IRnSohg/RbfSSC7FfGGFdFnCNJTkeBzBMb
-	3Rjw==
-Received: by 10.152.115.38 with SMTP id jl6mr10632941lab.24.1333748016390;
-	Fri, 06 Apr 2012 14:33:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.129.134 with HTTP; Fri, 6 Apr 2012 14:33:05 -0700 (PDT)
-In-Reply-To: <20120406220702.3a710cad@eb-e6520>
-References: <20120406142921.323c069d@eb-e6520>
-	<20120406220702.3a710cad@eb-e6520>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	bh=B6JEfCIeMM/XHTfbzOC+lekJL3c6dYfgJy7cf3iCTm8=;
+	b=mOvG849o6XhwA/l72wnPuuRjPl0d8S/aFa59HGj7ZGMsVGfeh51lVbb5qnA5LKnPgX
+	0gw/0p59PJ63Mniv2xJdBteRju7M1yH37czwj9W1KphdIAmeS1oDM/+HThqi8LcSSgkX
+	m9MP7jw9O7rRmbmoPDRl3X1Jq3wHdFHncnvy9qklmDHtOtmPSiHEI82LwhetZzkSyPzM
+	hVoaaoIJf/LWjCLZrmuoL4lK+Hp2HAoZPQEIymYf5SnHIza4Y8rHQOyd5uOkpB5RJXyG
+	p12SuJkczSM9IKf6ZCgPzG98jT82GFywVsrTbTq/wIQJWq5Xt729M0NLXuH3Uzccvv2z
+	LYKQ==
+Received: by 10.68.74.197 with SMTP id w5mr420534pbv.129.1333770880680;
+	Fri, 06 Apr 2012 20:54:40 -0700 (PDT)
+Received: from [192.168.1.79] (99-57-140-209.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.209])
+	by mx.google.com with ESMTPS id y5sm8045936pbk.5.2012.04.06.20.54.38
+	(version=SSLv3 cipher=OTHER); Fri, 06 Apr 2012 20:54:39 -0700 (PDT)
+Message-ID: <4F7FBA7D.7060400@gmail.com>
+Date: Fri, 06 Apr 2012 20:54:37 -0700
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Apr 2012 14:33:05 -0700
-Message-ID: <CAMKF1sr2rDgCbuRpPH9Xw+xLK53OF8=ZCbTo0orP5r9Sf=KZeg@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:11.0) Gecko/20120402 Thunderbird/11.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: toolchain-layer -> ld: error: cannot find -lm
+References: <4F66789C.7010503@gmail.com>
+In-Reply-To: <4F66789C.7010503@gmail.com>
+X-Enigmail-Version: 1.4
+Subject: Re: having issues with libprelude and libpam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +47,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2012 21:42:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 07 Apr 2012 04:03:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 6, 2012 at 1:07 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> gnueabi/4.6.4/ld: error: cannot find -lm
->> (compressed log.do_compile attached)
->>
->> The host is a Fedora 16 x86_64.
->> The problem was also reproduced on a Ubuntu 11.10 x86_64 and with a qemu=
-arm target.
->> I don't seem to reproduce the problem without the toolchain-layer.
->>
->> Do you have any idea of what could be wrong here ?
->>
-> FWIW : adding meta-angstrom and using angstrom-bleeding doens't exhibit
-> the problem so I assume I miss something in the configuration when I
-> only have oe-core + meta-oe
->
-> Eric
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-what are your distro settings ? especially show me the content of
-DISTRO_FEATURES and DISTRO_FEATURES_LIBC variables
+On 03/18/2012 05:06 PM, j wrote:
+> I am trying to get libpam to build which fails due to not finding
+> the header from the libprelude build, which currently also fails to
+> build for me. I am hoping someone knows of a fix or can point me to
+> the right place to dig for a solution, I do not see any listed
+> fixes or workarounds from my digging online. I have attached the
+> build logs for each as well, since they were long if the preferred
+> method is different, sorry and please let me know how to post
+> those. In the libprelude error its saying there are files that seem
+> to have moved, but they actually exsist in the location it says it
+> does not.
+> 
+> I am running on Ubuntu 11.04 32bit (up to date). Bitbake branch
+> 1.12, OE branch overo-2011.03 (both up to date). I know this is not
+> your guys branch but have not gotten any feed back on gumstix in
+> relation to issues building these packages, so checked them verse
+> what I believe was the master branch and they had no diff. If I can
+> give more info on system specs or anything like that please let me
+> know. I believe I know the "issues" just not sure how to go about
+> solving them, as libprelude seems like a more serious error. These
+> are the only two packages that fail to build for image that do not
+> rely on these lib's. I also have both of these installed on the
+> build machine itself, I also built everything each rely on for the
+> build, at least I believe I did none failed.
+> 
+> Thanks a ton for any help or info.
+
+problem seems to be that libprelude has restrict mentioned in some
+function signature for a variable definition so you have to patch
+it up and rename them just adding _ before them should be ok
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk9/unwACgkQuwUzVZGdMxTDdwCeJTrj74/2nWyvERCeBI9X1Oc4
+S0cAniaPMfiH+CO2YQPpC45AEnKQKtiO
+=+TDj
+-----END PGP SIGNATURE-----
 
 
