@@ -1,31 +1,16 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <matti.kaasinen@gmail.com>) id 1SHJNo-0006i1-NN
+	(envelope-from <andrea.adami@gmail.com>) id 1SHM80-00006q-4x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Apr 2012 20:32:08 +0200
-Received: by iaag37 with SMTP id g37so6229195iaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2012 11:22:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Hp3U0Dex0m2fYPbNu2XPxiErUwSgYTCRWhpUpyWNN7c=;
-	b=WTV3zwPqztoImrOsI9HX/xlBwEY5q6shau9d8rpFCrdPPxkRkmsQHUWFXS42m5K6q2
-	HJzMjpz6G3alpFGIa3C70iyGBSKe6RLmhTD8/Mwn/qLhdrB1iipXWiE5qCe+DODtQDlq
-	1HQHetwg9GpMSTZ+Ata9rpOfJ96B9vMSMMlkedHA+T3PIYLi9/PC/cs5kf4QPnCxyx6U
-	xsox3LlqM4eSTFZFaz5TqiMU6PSiu8LGAmhW/nmjwlbsZgle64IarQYRt9jyCgjGkRXU
-	45npJ9n0D9javiXmmuczvkwTHr5NLmQ+ccKSzLR2dCNSSvh3OML+JH6odn04uxT13cjR
-	oJfw==
-MIME-Version: 1.0
-Received: by 10.50.222.233 with SMTP id qp9mr6730283igc.58.1333995771276; Mon,
-	09 Apr 2012 11:22:51 -0700 (PDT)
-Received: by 10.42.154.5 with HTTP; Mon, 9 Apr 2012 11:22:51 -0700 (PDT)
-In-Reply-To: <CADnUhn2NQbrW9GAUpvS=0VhPjAAvGdkv1TvAMWbi9SWEcw_6qA@mail.gmail.com>
-References: <CADnUhn2NQbrW9GAUpvS=0VhPjAAvGdkv1TvAMWbi9SWEcw_6qA@mail.gmail.com>
-Date: Mon, 9 Apr 2012 21:22:51 +0300
-Message-ID: <CADnUhn14JkSBPgPp5qeqCph6e4867-brrSA+nskcmD7mU7BKpA@mail.gmail.com>
-From: matti kaasinen <matti.kaasinen@gmail.com>
+	Mon, 09 Apr 2012 23:28:00 +0200
+Received: from mizar.localdomain (79.17.249.93) by smtp208.alice.it
+	(8.6.023.02) id 4F056E850AB51323; Mon, 9 Apr 2012 23:18:43 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: DOCUMENTATION of R* variables like RDEPENDS
+Date: Mon,  9 Apr 2012 23:18:39 +0200
+Message-Id: <1334006320-5810-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld][PATCH 1/2] linux: add CONFIG_GPIO_PCA953X=y to akita defconfigs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +24,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2012 18:32:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Apr 2012 21:28:00 -0000
 
-Hi developers!
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-3.1/akita/defconfig |    1 +
+ recipes-kernel/linux/linux-3.2/akita/defconfig |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
 
-I was faced with problems when using RDEPENDS dependencies without
-_${PN} extensions. Actually both conventions were mixed with my
-OE-classic design. I was guided to correct direction by Angstrom
-community's kind guidance. However, I feel OE official User Manual
-has documentation problem regarding these R* variables that
-link below describes in more details:
+diff --git a/recipes-kernel/linux/linux-3.1/akita/defconfig b/recipes-kernel/linux/linux-3.1/akita/defconfig
+index dfab582..3dc0ee3 100644
+--- a/recipes-kernel/linux/linux-3.1/akita/defconfig
++++ b/recipes-kernel/linux/linux-3.1/akita/defconfig
+@@ -22,6 +22,7 @@ CONFIG_MODULE_FORCE_UNLOAD=y
+ CONFIG_IOSCHED_DEADLINE=m
+ CONFIG_IOSCHED_CFQ=m
+ CONFIG_ARCH_PXA=y
++CONFIG_GPIO_PCA953X=y
+ CONFIG_PXA_SHARPSL=y
+ CONFIG_MACH_AKITA=y
+ CONFIG_MACH_BORZOI=y
+diff --git a/recipes-kernel/linux/linux-3.2/akita/defconfig b/recipes-kernel/linux/linux-3.2/akita/defconfig
+index f2e32de..8e9ce4f 100644
+--- a/recipes-kernel/linux/linux-3.2/akita/defconfig
++++ b/recipes-kernel/linux/linux-3.2/akita/defconfig
+@@ -22,6 +22,7 @@ CONFIG_MODULE_FORCE_UNLOAD=y
+ CONFIG_IOSCHED_DEADLINE=m
+ CONFIG_IOSCHED_CFQ=m
+ CONFIG_ARCH_PXA=y
++CONFIG_GPIO_PCA953X=y
+ CONFIG_PXA_SHARPSL=y
+ CONFIG_MACH_AKITA=y
+ CONFIG_MACH_BORZOI=y
+-- 
+1.7.3.4
 
-http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2012-April/005944.html
-
-take care,
-Matti
 
 
