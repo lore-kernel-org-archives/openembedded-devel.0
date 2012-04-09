@@ -1,38 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SHGTQ-0001du-9d
+	(envelope-from <koen@dominion.thruhere.net>) id 1SHGTS-0001ds-6e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Apr 2012 17:25:44 +0200
-Received: by mail-we0-f175.google.com with SMTP id a1so2626913wer.6
+	Mon, 09 Apr 2012 17:25:46 +0200
+Received: by mail-wi0-f171.google.com with SMTP id hj13so2131488wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2012 08:16:30 -0700 (PDT)
+	Mon, 09 Apr 2012 08:16:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=odp7McaJ13SoxRYLOXXrjThCsNie9rzR4KVPvMWM+9Q=;
-	b=jRzAqUWbps9tSkH76vtzh7m9GnatWLpeYF848Mg3TMOAq1LgiAJAUBnx2rgM57NJKH
-	YrM7E2ILNAL0OIh09Lh4VTQvgkBOXZdqKG5iFNiXEyPjFP4Y71GLzKY29QR3zobcUrb+
-	tBeOMzxRyyIM1m2yCzwJUl9Ul4M7TuzbOrZIFQzl1rdrGFif+bZQUo6l1xCzOj3tqgfi
-	cUadcjTTXYz+oPkZwXihdqlvy8AH6bajIuq8o6697t9oOq6/qqj3kbC/QT7GKBwVTOgI
-	nqi6PWko3i/kttJ5WJW7LCvCnlH9DjCGvMvnm4yaeE0uqaNcWgql1rbuJ6wF2D3vfi0j
-	tJiw==
-Received: by 10.180.92.228 with SMTP id cp4mr16973489wib.2.1333984589993;
-	Mon, 09 Apr 2012 08:16:29 -0700 (PDT)
+	bh=GejuU/wmOAu/Gq1IAzglbsB0bd8sN/O91JHB79yAw9Y=;
+	b=dqKv6F97KsnlVs6KrKtafdwT+BqC3dk3ahj9ukGzdt4ZON636ylqJO+/5DS6Tsugd9
+	RhZ5Qa+7k7wyybJeu49STEKEHPqRNZbEN4tMxhq1jqT3d4ohPNEtyhOtZbHHVBd4J64f
+	eazLdhU9KsYYCfIfe7ch5aAPmSBQwQ47m+9ws6tJZO9gC6McLSB48QfkKanKw020Pupg
+	z+Q6WSbmUf054+syCCLUS0Hhh11GywOmngH17kHbmeRD68VpRlwj1l5d+p7CYjek0C+H
+	UJCaTR/FWn/pMcNFPNow8x2/wskhYOfckh+W4K50fAUk7hT6WH5dzoQBm04u7e55V7Lx
+	fnEg==
+Received: by 10.180.100.230 with SMTP id fb6mr19372577wib.3.1333984591861;
+	Mon, 09 Apr 2012 08:16:31 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id l5sm30956670wia.11.2012.04.09.08.16.28
+	by mx.google.com with ESMTPS id n20sm50103968wiw.5.2012.04.09.08.16.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 09 Apr 2012 08:16:28 -0700 (PDT)
+	Mon, 09 Apr 2012 08:16:31 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Apr 2012 17:16:10 +0200
-Message-Id: <1333984573-28464-7-git-send-email-koen@dominion.thruhere.net>
+Date: Mon,  9 Apr 2012 17:16:11 +0200
+Message-Id: <1333984573-28464-8-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1333984573-28464-1-git-send-email-koen@dominion.thruhere.net>
 References: <1333984573-28464-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkJAmwAIwf5sHVLMgJ2pUHjDdVrRnyVjqkbs8pJRHHXP+DKxex95lc7TBkD48c9/tGn6g9V
+X-Gm-Message-State: ALoCoQnqihnaGQsJlO72fL6kocRM89/h+/wY79b9HtIL0rDzRE4F6QAq50ARe3xFHa8gFCwdGSih
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 07/10] systemd: fix vconsole-setup dependencies
+Subject: [meta-oe][PATCH 08/10] gvfs-gdu-volume-monitor 1.8.2: remove conflicting files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2012 15:25:44 -0000
+X-List-Received-Date: Mon, 09 Apr 2012 15:25:46 -0000
+
+ * check_data_file_clashes: Package gvfs-gdu-volume-monitor wants to install file /usr/share/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
+        But that file is already provided by package  * gvfs
+ * check_data_file_clashes: Package gvfs-gdu-volume-monitor wants to install file /usr/share/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
+        But that file is already provided by package  * gvfs
+ * check_data_file_clashes: Package gvfs-gdu-volume-monitor wants to install file /usr/share/GConf/gsettings/gvfs-dns-sd.convert
+        But that file is already provided by package  * gvfs
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-core/systemd/systemd_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index d38bbc1..becbc90 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -14,7 +14,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+index c87b63e..689f455 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+@@ -4,7 +4,7 @@ BPN = "gvfs"
  
- PV = "git"
--PR = "r24"
-+PR = "r25"
+ DEPENDS = "gvfs gnome-disk-utility"
  
- inherit useradd pkgconfig autotools vala perlnative
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
  
-@@ -86,7 +86,7 @@ FILES_${PN}-vconsole-setup = "${systemd_unitdir}/systemd-vconsole-setup \
-                               ${systemd_unitdir}/system/systemd-vconsole-setup.service \
-                               ${systemd_unitdir}/system/sysinit.target.wants/systemd-vconsole-setup.service"
- 
--RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
-+RRECOMMENDS_${PN}-vconsole-setup = "kbd kbd-consolefonts"
- 
- FILES_${PN} = " ${base_bindir}/* \
-                 ${datadir}/dbus-1/services \
+ # we need gdu files only: reduce files to delete in libexecdir
+ EXTRA_OECONF += "--disable-gphoto2"
+@@ -15,6 +15,8 @@ do_install_append() {
+ 	rm -rf ${D}${includedir}
+ 	rm -rf ${D}${libdir}
+ 	rm -rf ${D}${datadir}/gvfs/mounts
++	rm -rf ${D}${datadir}/glib-2.0
++	rm -rf ${D}${datadir}/GConf
+ 	rm -f ${D}${datadir}/dbus-1/services/gvfs-*
+ 	rm -f ${D}${libexecdir}/gvfsd*
+ 	rm -f ${D}${libexecdir}/gvfs-fuse-daemon
 -- 
 1.7.2.5
 
