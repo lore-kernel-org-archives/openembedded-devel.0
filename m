@@ -1,37 +1,25 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SGl9m-0005Nm-0D for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Apr 2012 07:59:22 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SGl0p-0002nF-3J for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Apr 2012 07:50:07 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Apr 2012 07:50:07 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Apr 2012 07:50:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1SH2rf-0007pw-UO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Apr 2012 02:53:52 +0200
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M260003ASP3ARC0@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	08 Apr 2012 19:44:06 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 199E8201CF; Sun,
+	08 Apr 2012 20:43:50 -0400 (EDT)
+Date: Sun, 08 Apr 2012 20:43:50 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 08 Apr 2012 07:50:06 +0200
-Message-ID: <jlr8u5$ndo$1@dough.gmane.org>
-References: <20120404091720.4b743c5b@eb-e6520> <jli1uf$7nt$1@dough.gmane.org>
-	<CABcZANngH2BSmSdBPkaPyJcG1RFuKLxc9DnJWhe7_b9xcSGjxA@mail.gmail.com>
-	<jllb47$64q$1@dough.gmane.org> <20120406091243.1f1969d2@eb-e6520>
-	<CABcZANnkYkLQEtpem_-eHskm9VzECkKodZBHyJOwuReoA4DY-A@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <CABcZANnkYkLQEtpem_-eHskm9VzECkKodZBHyJOwuReoA4DY-A@mail.gmail.com>
-X-Enigmail-Version: 1.4
-Subject: Re: build meta-oe without systemd
+Message-id: <20120409004350.GA10246@denix.org>
+References: <4F80ACD6.8080901@gmail.com>
+MIME-version: 1.0
+In-reply-to: <4F80ACD6.8080901@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: meta-linaro and toolchain-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,53 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2012 05:59:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Apr 2012 00:53:52 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 06-04-12 17:02, Chris Larson schreef:
-> On Fri, Apr 6, 2012 at 12:12 AM, Eric Bénard <eric@eukrea.com> wrote:
->> Le Thu, 05 Apr 2012 16:50:32 -0700, Koen Kooi
->> <koen@dominion.thruhere.net> a écrit :
->>> I would appreciate people sending decent bugreports to the list,
->>> because it is *NOT* supposed to break this way. The breakage needs to
->>> get fixed before we merge it into oe-core.
->>> 
->> to reproduce the problem I met, simply add to a conf file : 
->> PREFERRED_VERSION_udev = "164"
->> 
->> and using oe-core + meta-oe try to build anything which has "inherit 
->> systemd" (even if in the end you don't install the corresponding 
->> ${PN}-systemd in the target's rootfs) : systemd's configure will fail 
->> because it requires a more recent udev.
+On Sat, Apr 07, 2012 at 02:08:38PM -0700, Khem Raj wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> In addition, for me, at least in the past, I hit an issue where systemd
-> sucks in x11 bits, which means any DISTRO lacking the 'x11' distro
-> feature fails miserably at even building busybox.
+> Hi,
+> 
+> Ken Werner @ Linaro has created a meta-linaro layer. I have created a
+> github repo of same here https://github.com/kraj/meta-linaro
 
-Patches to add the missing PACKAGECONFIG options will be greatly appreciated
+FWIW, I've been closely monitoring the progress of meta-linaro layer for past 
+month and its status as applicable to meta-ti:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+https://lists.yoctoproject.org/pipermail/meta-ti/2012-March/000747.html
 
-iQIcBAEBAgAGBQJPgScMAAoJEHZqAkdh1vT6Z2wP/2/JQZUKy50rlwUBEOTojSBc
-5kMpMxlmxvW34M7MBZJe0JJcTkAGQrzFy2r9moPW4HGgrTenn0OD7C6BuT5dFHOk
-5l8XVot4IIUesECyFLr7zu7LP7zN5uHYhnx/xT3YO9Om9wHZRu7yVS0S4WiMy1OH
-ceoCbkCQyBOcalngMi4lW7jMmumsfyZmrQOwQUX/dHRrCqr2Xd5yK5Dz1Kn7zWMb
-NepVy0i3+aPQI6X7+X4uAsMekLxy8Zw7MjaegqMisHyw4kFzNE7CWPNnLNYi6cvf
-vz7aMR0XjMOFZF6nTwNeyA939ijHsk3yd6G4L9J+H0YGvU9g+gEsMaeSenhuz7HT
-fithzz6GYMo4hLTojBlMhU9gj+/wRDLesPvroNSCU9rSbyGc2hqKnjqXwnQMPIh7
-+vLbhdgoQ7VGaUSCQv4Rd1YKn2Z/bTKQ05ZbESL1kQLlMhM5afsj+cPp37VLsNXu
-jRGTeaC2wZFDezYlPa39xRLmev+OvIuhmrhqmLUaKwDIHYVkocvpUXEVMl/e7mZv
-ll2UQmJDT5i/aMXb4iZVzvsLofjrAI6AAOWxpluG6OsWdkdHU9wyRSJtWhkYERFF
-rQ+1kGxMtlIaGkYlX2c/l223QA6IcekpdFNxiFLx5WItR62ZjhtV46pzok28lyKH
-otPwJ5SMif+RUUtLwIfG
-=+G/Y
------END PGP SIGNATURE-----
+When I tried it last time to build some of our machines in meta-ti, there were 
+issues, but I didn't have time to follow up or investigate and I was busy with 
+the BSP presentation at the time...
 
+As a parallel effort, I was looking into working on the prebuilt toolchain 
+support - i.e. recipes to use binary Linaro toolchain in OE/Yocto. I grabbed 
+the latest 2012.03 release before leaving for the BSP Summit and Linux Collab 
+and will give it a try ASAP.
+
+
+> Moving forward soon gcc 4.7 will land in OE-Core and 4.6 will be
+> more or less retired. In natural progression it would move to
+> toolchain-layer if there are consumers of it.
+> 
+> linaro is also working on gcc-4.7 improvements in  same manner as
+> 4.6  and there could be more tools e.g. gdb binutils etc. that could
+> be useful for armv7+ from that layer.
+> 
+> I would like to propose few things we could do.
+> 
+> Use gcc-4.6 from meta-linaro and retire it from toolchain-layer
+> which means toolchain layer only has gcc-4.5 and eventually
+> This also means that we don't move gcc-4.6 into toolchain-layer
+> when its relegated from OE-Core
+> 
+> In similar fashion add recipes for gcc-linaro-4.7 whenever linaro
+> makes first 4.7 based release
+> 
+> Does anybody see downsides to this approach ?
+
+Sounds like a decent plan, but we need to validate the newest toolchain 
+versions with the real hardware before making the switch and dropping the old 
+versions - 4.5 is still the most stable build for me and the broad range of 
+architectures and platforms I work with at TI from ARM9 to Cortex-A15...
+
+
+> This could mean that distro may have multiple compilers for different
+> architectures e.g. linaro toolchain for arm
+> architecture and may be OE-Core provided toolchain for rest of them
+> 
+> another option is that we do the same thing where we cherry-pick
+> linaro patches into toolchain-layer and append them on top gcc from
+> OE-Core which we have been doing with 4.6 it does mean extra work
+> validation and maintenance that I would like to avoid.
+
+-- 
+Denys
 
 
