@@ -1,16 +1,18 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SHNXR-0004Ml-Ic
+	(envelope-from <andrea.adami@gmail.com>) id 1SHO1x-00058n-Dd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 00:58:22 +0200
-Received: from mizar.localdomain (79.17.249.93) by smtp205.alice.it
-	(8.6.023.02) id 4F421F7B059D1FBE; Tue, 10 Apr 2012 00:49:02 +0200
+	Tue, 10 Apr 2012 01:29:54 +0200
+Received: from mizar.localdomain (79.17.249.93) by smtp208.alice.it
+	(8.6.023.02) id 4F056E850AB653A8; Tue, 10 Apr 2012 01:20:34 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2012 00:48:56 +0200
-Message-Id: <1334011736-9053-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 10 Apr 2012 01:20:27 +0200
+Message-Id: <1334013627-10533-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] Initial commit of linux-yocto-tiny_3.2 for Zaurus
+In-Reply-To: <1334011736-9053-1-git-send-email-andrea.adami@gmail.com>
+References: <1334011736-9053-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH v2] Initial commit of linux-yocto-tiny_3.2 for Zaurus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,10 +26,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2012 22:58:22 -0000
+X-List-Received-Date: Mon, 09 Apr 2012 23:29:54 -0000
 
 * first testing, reuse full defconfigs as $machine.cfg
 * (which can/need to be reduced down to a few fragments)
+* v2 removes mistakenly added PR
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
@@ -53,8 +56,8 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
  .../linux/linux-yocto-tiny/tosa/tosa-tiny.scc      |    7 +
  .../linux/linux-yocto-tiny/tosa/tosa.cfg           | 2694 ++++++++++++++++++++
  .../linux/linux-yocto-tiny/tosa/tosa.scc           |    7 +
- recipes-kernel/linux/linux-yocto-tiny_3.2.bbappend |   36 +
- 23 files changed, 15648 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-yocto-tiny_3.2.bbappend |   35 +
+ 23 files changed, 15647 insertions(+), 0 deletions(-)
  create mode 100644 recipes-kernel/linux/linux-yocto-tiny/akita/akita-tiny.scc
  create mode 100644 recipes-kernel/linux/linux-yocto-tiny/akita/akita.cfg
  create mode 100644 recipes-kernel/linux/linux-yocto-tiny/akita/akita.scc
@@ -15825,13 +15828,12 @@ index 0000000..2197aa3
 +#include cfg/fs.scc
 diff --git a/recipes-kernel/linux/linux-yocto-tiny_3.2.bbappend b/recipes-kernel/linux/linux-yocto-tiny_3.2.bbappend
 new file mode 100644
-index 0000000..48ebff4
+index 0000000..34a57d9
 --- /dev/null
 +++ b/recipes-kernel/linux/linux-yocto-tiny_3.2.bbappend
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,35 @@
 +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:${THISDIR}/files:"
 +
-+PR = "${INC_PR}.1"
 +COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
 +
 +KMACHINE_akita = "akita"
