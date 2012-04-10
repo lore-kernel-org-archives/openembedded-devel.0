@@ -1,35 +1,35 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SHVmk-0001eO-Db for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 09:46:42 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SHVdj-0007mo-RI for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 09:37:23 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2012 09:37:23 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2012 09:37:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1SHW0S-0002F5-F4; Tue, 10 Apr 2012 10:00:52 +0200
+Received: by wgbdr12 with SMTP id dr12so4014843wgb.24
+	for <multiple recipients>; Tue, 10 Apr 2012 00:51:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=fUg7LGCs+tLl9FGjL+xBTfdW7yvm1WynzPtuavhlK+I=;
+	b=KhDePXo8PKA59HaPZqOPG+ZSSJSErklhf7j1EWCEM1mBgYKcWxjGY44rLA8iqKmfC0
+	ZsOGZAE+jDwaifH1eSeAN9GyyYyg7WnIJAsZs31LyBuvTtY6kiPqykN3X8bK55iog/2H
+	Q1r/jcJHZngkQp7pFpuMTKTqdlqgow0i6dDrH4QyV/JD9arYcwHyUOXzIektHCauoojl
+	mRZfioflDfaZc2cxVTMR+G6l20CKFlLr0ZWEr450DqUOHNKFn5/bubGGNiH58RsMmi3c
+	TWiVQlbCQsggUPr+bU3sDx4yJNSL7QlJzLRK5/ZVRVaGSBIhkdqNO41Co5xfadqik4Oh
+	5Hig==
+Received: by 10.216.139.25 with SMTP id b25mr5484608wej.41.1334044294911;
+	Tue, 10 Apr 2012 00:51:34 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id b3sm35993241wib.4.2012.04.10.00.51.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 Apr 2012 00:51:34 -0700 (PDT)
+Date: Tue, 10 Apr 2012 09:51:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 10 Apr 2012 09:37:28 +0200
-Message-ID: <jm0nva$1rk$1@dough.gmane.org>
-References: <1332488120-28631-1-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRSxbZf3-9VoZU6S5V3WoUDA+80kdS-z3tuZ-aF94DXv4Q@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <CALbNGRSxbZf3-9VoZU6S5V3WoUDA+80kdS-z3tuZ-aF94DXv4Q@mail.gmail.com>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-xfce] thunar-volman: add eject to RDEPENDS
+Message-ID: <20120410075133.GB3583@jama.jama.net>
+References: <1333829385-32212-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1333829385-32212-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: [toolchain-layer][PATCH] gcc-4.6: Update to 2012.03 linaro release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,95 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 07:46:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Apr 2012 08:00:52 -0000
+X-Groupsio-MsgNum: 38185
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--XOIedfhf+7KOe/yw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 10-04-12 09:27, Andreas Müller schreef:
-> On Fri, Mar 23, 2012 at 8:35 AM, Andreas Müller 
-> <schnitzeltony@googlemail.com> wrote:
->> Ejecting USB-memory stick caused: Error starting job: Failed to execute
->> child process "eject" (No such file or directory)
->> 
->> run-tested with angstrom/meta-oe environment on overo
->> 
->> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com> --- 
->> .../thunar-volman/thunar-volman_0.6.0.bb           |    3 +++ 1 files
->> changed, 3 insertions(+), 0 deletions(-)
->> 
->> diff --git
->> a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb
->> b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb index
->> c581d78..c7cc0ed 100644 ---
->> a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb +++
->> b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.6.0.bb @@ -3,8
->> +3,11 @@ SECTION = "x11" LICENSE = "GPLv2" LIC_FILES_CHKSUM =
->> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" DEPENDS = "exo
->> gtk+ libxfce4ui libxfce4util xfconf libnotify udev" +PR = "r1"
->> 
->> inherit xfce
->> 
->> SRC_URI[md5sum] = "2f166662dd100d5195da238af417f305" SRC_URI[sha256sum]
->> = "b1afd2b3b285cfcf07c11caa3d37fa5ff1fc06f7dc68fcca07f9a0d70daa694f" + 
->> +RDEPENDS_${PN} = "eject" -- 1.7.6.5
->> 
-> ping?
+On Sat, Apr 07, 2012 at 01:09:45PM -0700, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../gcc-4.6/linaro/gcc-4.6-linaro-r106876.patch    |  109 ++++
+>  .../gcc-4.6/linaro/gcc-4.6-linaro-r106877.patch    |  239 ++++++++
+>  .../gcc-4.6/linaro/gcc-4.6-linaro-r106878.patch    |   69 +++
+>  .../gcc-4.6/linaro/gcc-4.6-linaro-r106879.patch    |  643 ++++++++++++++=
+++++++
+>  .../gcc-4.6/linaro/gcc-4.6-linaro-r106882.patch    |   53 ++
+>  .../gcc/gcc-4_6-branch-linaro-backports.inc        |    5 +
+>  .../recipes-devtools/gcc/gcc-common-4.6.inc        |    2 +-
+>  7 files changed, 1119 insertions(+), 1 deletions(-)
+>  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
+cc-4.6-linaro-r106876.patch
+>  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
+cc-4.6-linaro-r106877.patch
+>  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
+cc-4.6-linaro-r106878.patch
+>  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
+cc-4.6-linaro-r106879.patch
+>  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
+cc-4.6-linaro-r106882.patch
 
-I've queued this and others:
+FWIW: this upgrade again triggered gcc-cross-initiall do_compile errors
+for incremental builds, it failed for 3 from 4 archs I'm building and
+each with different error. Reexecuting the same target again worked fine,=
+=20
+so I still belive there is some sort of race condition with shared gcc work=
+dir.
 
-koen@dominion:/OE/tentacle/sources/meta-openembedded$ git cherry -v
-+ d03ee17c2e40dcbbed9c6623f2e5169b4729f2e3 nodejs 0.6.x: update to 0.6.14
-+ 05203855acb5c484af45e3abdae6a2cc3e9ddfd7 nodejs 0.4.12: rename to node4 to
-make it parallel installable with 0.6.x
-+ da0fb166a41bdbcfd6c902389c919a278ba31477 cloud9 0.5.1: use nodejs4 instead
-of nodejs
-+ c2dee445739d62c0c428550bf98f1e12b74b3698 cloud9: add 0.6
-+ 15cc3fb0ced0daf18673a8683cf276c159e498b6 cloud9: remove 0.5.1
-+ bd0a6a465f73168b86dded0e1d938c170ba45fc6 systemd: bump SRCREV
-+ 5fced1d76e2771be2a90495fd26362f8645411b2 systemd: fix vconsole-setup
-dependencies
-+ 839eeb13b83c2dda89901a2fe1b7f726d5b20b6b gvfs-gdu-volume-monitor 1.8.2:
-remove conflicting files
-+ 06366a8833d2de85a0641134aa27a1c90577bfb5 xbmc: update to head of the Eden
-release branch
-+ cd06a14023c12002a40e2ad585d45b521e624ad2 xbmc: fix .desktop for ARM
-+ 9d030d368ccffe10a7ab13f82addb1968f339947 network-manager-applet: Fix
-missing DEPENDS and QA warnings.
-+ 8f6027c1bd6659bc393bb652727456f3daa80832 xserver-nodm-init: use
-/etc/X11/Xserver from service file instead of Xorg directly
-+ 2cb1ae5c172d51df200cc09eb04ddae66bef6b6c xserver-nodm-init: add
-EnvironmentFile
-+ f9213eb41af2434f3cb044819f4ff84ba2a71a4d thunar-volman: add eject to RDEPENDS
-+ a6d45578d95f7d5cce658ab0472ada6ce4794a9f midori: remove midori.inc and
-oe-stylize
-+ 8a9e1dc63d9aadb3da17edfd31da9ccf833bfeb1 midori: add librsvg-native to DEPENDS
-koen@dominion:/OE/tentacle/sources/meta-openembedded$
+I've uploaded cooker and do_compile logs here:
+http://build.shr-project.org/tests/jama/gcc-upgrade-issue/
 
+Cheers,
 
-regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Koen
+--XOIedfhf+7KOe/yw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iQIcBAEBAgAGBQJPg+M2AAoJEHZqAkdh1vT6vEsQAKDjkCg0Ia6qJKCO8SluLLzj
-YIOpiluL8ivQx2UMGJpBmiBaQ/LkWUMI5qn9JDZ7+JsbbTnR6hmDyZyKMyzRTl2o
-GLl2MbpO6BA6aTDFVB6pc07dWh3ZjpwfcQjvNrCHdUUq8IBLuhz6OiCJfu/zE6Eq
-e3XZQS1ZUfMOfUgoXa+TyE1uGCqn4B16tePHAyooFrOJjED4q5FZz5ON7zA8dbPI
-E6B5PMCJ8pBRQoubKXfif0u15P4bXFuemud/PQqfFcgOryAaTHBYmK/0kjonYGY2
-skMe6swa98kz80mxkQPaxoqxnk6rHOXRREBwkUpnNOXuNCAhRpOc4ogSHnBGm3lF
-jVkV7y8eQFKLCgAE9bVhMUS5lfHt4jtbyxF4ozkKU0yWASwQ2GuZVaqizTI7q059
-ylwRGK45AOuEI5aLnnSk4UEbmuoXmq0dfwyybHOgjsVlXs7GtLIme8J9p60eFdSO
-ovYZB3SQ68Jgu9mqskFykXffWLGZ4frVjpLavkYaGkZBSMMUuMnfRsAjvMQ0xYa3
-BSq/1BTtEeMUsbimXVLSw+cJqLB2mt65cIhlXOTOBefp2QmJpMwJid1EsDojwemg
-7pGDKrKpihP1QXEWniqjWEJpZy3EEfADr9L29PIKgWH6MXb4VW6oRbRR8hIlrP+J
-+1k5ucHBD4p6fZsEc3cJ
-=2J4y
+iEYEARECAAYFAk+D5oUACgkQN1Ujt2V2gBym2ACgsy5oVcJt05tj/N5PuE6Q8T1M
+sjoAnidUcqs4hJYHu2J6tF3jv3p9uQXO
+=S1dG
 -----END PGP SIGNATURE-----
 
-
-
+--XOIedfhf+7KOe/yw--
