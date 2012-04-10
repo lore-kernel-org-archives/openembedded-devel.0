@@ -1,36 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SHUug-0008MG-77
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SHVc3-0000qd-Ke
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 08:50:50 +0200
-Received: by wera1 with SMTP id a1so3003564wer.6
+	Tue, 10 Apr 2012 09:35:39 +0200
+Received: by iaag37 with SMTP id g37so7062379iaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2012 23:41:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ojl+QQvIGuzux/5XqKScShWHkWy2jNIvpf2kq7JGDp0=;
-	b=d//HEBaN3Sh8rHonNLnqYzoAYhJ/dGlX5wPD1h220TY6D2q5HsvLPtnZhcy+tY30TP
-	iZtBuNqddMmTfEqQ3hURaeuYspCV//tV6lbhQ5uTNRRvvDuCVvKSwNXk1ynJqLSuFf5+
-	LK2PVEUr8wx4UyabhItdKG0CxwMZbsEOuejZVcTtSIr13eQuxvXbYcNZJ3GmmUHhQfvG
-	7n5KIn2Y6lFihhXGZQMbyymr8+gJMTyZ5Poxqa+DHAAkdNTl5S1pq+LgBroEDtnTnx3Q
-	4rinoFoufP+EJzJY/4HiETsjlvW1khNFh5m4e5sQStHWVA28eO2xaHRx9UOD0PEOUOSi
-	3u6A==
-Received: by 10.180.100.2 with SMTP id eu2mr4145477wib.1.1334040092953;
-	Mon, 09 Apr 2012 23:41:32 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k6sm35610752wiy.7.2012.04.09.23.41.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 09 Apr 2012 23:41:31 -0700 (PDT)
-Date: Tue, 10 Apr 2012 08:41:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120410064131.GA3583@jama.jama.net>
-References: <4F80ACD6.8080901@gmail.com>
+	Tue, 10 Apr 2012 00:26:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=MDF2umSGQvBBOQXQbzSSSYnO0kLQgZEyfDl7HWpiqv8=;
+	b=ylSeyvKSRs/BGMT9L6Y/+fx3DpilD8zyYG63tb0t6D4oJULrqJ0pAW/GGlnS2Fpyw6
+	D6i5ENKSBXTKuh4mVDDXNrxBRGtHL9G8aAb38tiww0u+bWYHPSrVuq5GYO1zXW8eS7Da
+	fzHJwWmmDqnC48xlyvnyLILsxG1LVjAUerLA0jMVBvDabggxs9ShF6qKzm8N2lvC9Ezo
+	5/nqGTt4W7odDszxWquAXGCj0cJ/sTDIGIWjtcCb5M81HH3pW88ZjLuLxf0/7JQzkrJa
+	88bII7lmaJ7fyG3c1JaS32nacRaYAoqudBDE+blgMoit423wUSUW2v5NFFccbImBDtBp
+	JpxA==
 MIME-Version: 1.0
-In-Reply-To: <4F80ACD6.8080901@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: meta-linaro and toolchain-layer
+Received: by 10.50.47.162 with SMTP id e2mr1337192ign.0.1334042781507; Tue, 10
+	Apr 2012 00:26:21 -0700 (PDT)
+Received: by 10.42.165.137 with HTTP; Tue, 10 Apr 2012 00:26:21 -0700 (PDT)
+In-Reply-To: <CALbNGRRbDLWOWrfzfb+GNX6Wh6cNracvkCYj3B5yUkL4aKj3Ow@mail.gmail.com>
+References: <1332360619-3060-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRRbDLWOWrfzfb+GNX6Wh6cNracvkCYj3B5yUkL4aKj3Ow@mail.gmail.com>
+Date: Tue, 10 Apr 2012 09:26:21 +0200
+Message-ID: <CALbNGRQ-+49e0uvCT-kBPx3phDyvaE842kwcyXZm_+EBzLrS0A@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe 0/2] midori: cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,69 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 06:50:50 -0000
-X-Groupsio-MsgNum: 38181
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
-Content-Disposition: inline
-
---huq684BweRXVnRxX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Apr 2012 07:35:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 07, 2012 at 02:08:38PM -0700, Khem Raj wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Hi,
->=20
-> Ken Werner @ Linaro has created a meta-linaro layer. I have created a
-> github repo of same here https://github.com/kraj/meta-linaro
->=20
-> Moving forward soon gcc 4.7 will land in OE-Core and 4.6 will be
-> more or less retired. In natural progression it would move to
-> toolchain-layer if there are consumers of it.
->=20
-> linaro is also working on gcc-4.7 improvements in  same manner as
-> 4.6  and there could be more tools e.g. gdb binutils etc. that could
-> be useful for armv7+ from that layer.
->=20
-> I would like to propose few things we could do.
->=20
-> Use gcc-4.6 from meta-linaro and retire it from toolchain-layer
-> which means toolchain layer only has gcc-4.5 and eventually
-> This also means that we don't move gcc-4.6 into toolchain-layer
-> when its relegated from OE-Core
+On Wed, Mar 28, 2012 at 11:04 AM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Wed, Mar 21, 2012 at 9:10 PM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+>> v1 -> v2:
+>> change order variables/functions as suggested in [1]
+>>
+>> v2 -> v3
+>> change order variables/functions as suggested in [2]
+>>
+>> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-March/0=
+38650.html
+>> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-March/0=
+38684.html
+>>
+>> Andreas M=FCller (2):
+>> =A0midori: remove midori.inc and oe-stylize
+>> =A0midori: add librsvg-native to DEPENDS
+>>
+>> =A0meta-oe/recipes-connectivity/midori/midori.inc =A0 =A0 | =A0 39 -----=
+--------------
+>> =A0.../recipes-connectivity/midori/midori_0.4.4.bb =A0 =A0| =A0 41 +++++=
+++++++++++++++-
+>> =A02 files changed, 39 insertions(+), 41 deletions(-)
+>> =A0delete mode 100644 meta-oe/recipes-connectivity/midori/midori.inc
+>>
+>> --
+>> 1.7.4.4
+>>
+> ping?
+Something wrong with this series?
 
-I haven't tried gcc-4.7 on my armv4t machines yet, because I fear
-similar issues like with binutils gold (which are still not resolved),
-because nobody uses armv4t much nowadays :/.
+Andreas
 
-The same I fear from 4.6 from meta-linaro, but maybe they will be
-responsive as you were, when I reported issues on armv4t with some new
-patch added by linaro..
 
-So using meta-linaro for gcc-4.6 and gcc-4.7 is fine, but please keep
-current "snapshot" of gcc-4.6 (oe-core+toolchain-layer patches)
-somewhere as safe version before meta-linaro 4.6 is well tested on all
-devices.
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---huq684BweRXVnRxX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+D1hsACgkQN1Ujt2V2gBwt7QCglGmAC5Cm9quQYVU3aThkwSQh
-dTgAn3OAuR02g7m5/h2d3tB8nZaYmgPZ
-=lwIe
------END PGP SIGNATURE-----
-
---huq684BweRXVnRxX--
