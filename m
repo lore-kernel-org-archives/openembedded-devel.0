@@ -1,35 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1SHW0S-0002F5-F4; Tue, 10 Apr 2012 10:00:52 +0200
-Received: by wgbdr12 with SMTP id dr12so4014843wgb.24
-	for <multiple recipients>; Tue, 10 Apr 2012 00:51:35 -0700 (PDT)
+	(envelope-from <otavio.salvador@gmail.com>) id 1SHZHC-0000dO-CN
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2012 13:30:22 +0200
+Received: by vbbfr13 with SMTP id fr13so3151854vbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2012 04:21:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fUg7LGCs+tLl9FGjL+xBTfdW7yvm1WynzPtuavhlK+I=;
-	b=KhDePXo8PKA59HaPZqOPG+ZSSJSErklhf7j1EWCEM1mBgYKcWxjGY44rLA8iqKmfC0
-	ZsOGZAE+jDwaifH1eSeAN9GyyYyg7WnIJAsZs31LyBuvTtY6kiPqykN3X8bK55iog/2H
-	Q1r/jcJHZngkQp7pFpuMTKTqdlqgow0i6dDrH4QyV/JD9arYcwHyUOXzIektHCauoojl
-	mRZfioflDfaZc2cxVTMR+G6l20CKFlLr0ZWEr450DqUOHNKFn5/bubGGNiH58RsMmi3c
-	TWiVQlbCQsggUPr+bU3sDx4yJNSL7QlJzLRK5/ZVRVaGSBIhkdqNO41Co5xfadqik4Oh
-	5Hig==
-Received: by 10.216.139.25 with SMTP id b25mr5484608wej.41.1334044294911;
-	Tue, 10 Apr 2012 00:51:34 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b3sm35993241wib.4.2012.04.10.00.51.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 Apr 2012 00:51:34 -0700 (PDT)
-Date: Tue, 10 Apr 2012 09:51:33 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120410075133.GB3583@jama.jama.net>
-References: <1333829385-32212-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=uWkqi61chH8jl5AM8SGbKgkJE7NeBoI/xrkyZ/+yfOk=;
+	b=c/PbKM/tvreHYfc36Hb68ZMdLKptnyQKU9j6MANKuAcWdd/JlqU6WF0YWtvH3PXi5z
+	SYkHWIng5IHW/bcC4efUsmcjKJ3ayb4Ujsk9unQtZHTxdc9eIuBOlem1vod9LQF7WkfX
+	0aTR5qqRFQT9c33q5ljTua2EOkpL8RKxTGjGERi9mvUCfjaqidqu4JKOsMYERjbGLZQn
+	5Us6mpwOCJOOSz7QEmYZFj6aU5u2JeDZrYX6xEULgDYVwkjfsuYjieNrWxgSgvfOW3yv
+	EdQEVB9SuDdbBjHLqvHGL6FGH2xrKoI4O+BKAb85J/YX87vMSsoGwQVE+/rmTLijA6Q/
+	yd0Q==
 MIME-Version: 1.0
-In-Reply-To: <1333829385-32212-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [toolchain-layer][PATCH] gcc-4.6: Update to 2012.03 linaro release
+Received: by 10.52.66.11 with SMTP id b11mr4484864vdt.67.1334056864504; Tue,
+	10 Apr 2012 04:21:04 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.2.195 with HTTP; Tue, 10 Apr 2012 04:21:04 -0700 (PDT)
+In-Reply-To: <c55ca91ae7203a1fe164a1a91230b970fc075759.1334037469.git.Martin.Jansa@gmail.com>
+References: <cover.1334037469.git.Martin.Jansa@gmail.com>
+	<447016b1ed3811830299ad0145a8e3216abd50c4.1334037469.git.Martin.Jansa@gmail.com>
+	<c55ca91ae7203a1fe164a1a91230b970fc075759.1334037469.git.Martin.Jansa@gmail.com>
+Date: Tue, 10 Apr 2012 08:21:04 -0300
+X-Google-Sender-Auth: AouC76CRcmbNbXl2W7TVb6oQcHo
+Message-ID: <CAP9ODKo2F1TReTMFrXgKKH7-g9n_DbNUJHLM6uZGUdYbxF_T8Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 2/2] xserver-nodm-init: add EnvironmentFile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,65 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 08:00:52 -0000
-X-Groupsio-MsgNum: 38185
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
-Content-Disposition: inline
-
---XOIedfhf+7KOe/yw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Apr 2012 11:30:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 07, 2012 at 01:09:45PM -0700, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../gcc-4.6/linaro/gcc-4.6-linaro-r106876.patch    |  109 ++++
->  .../gcc-4.6/linaro/gcc-4.6-linaro-r106877.patch    |  239 ++++++++
->  .../gcc-4.6/linaro/gcc-4.6-linaro-r106878.patch    |   69 +++
->  .../gcc-4.6/linaro/gcc-4.6-linaro-r106879.patch    |  643 ++++++++++++++=
-++++++
->  .../gcc-4.6/linaro/gcc-4.6-linaro-r106882.patch    |   53 ++
->  .../gcc/gcc-4_6-branch-linaro-backports.inc        |    5 +
->  .../recipes-devtools/gcc/gcc-common-4.6.inc        |    2 +-
->  7 files changed, 1119 insertions(+), 1 deletions(-)
->  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
-cc-4.6-linaro-r106876.patch
->  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
-cc-4.6-linaro-r106877.patch
->  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
-cc-4.6-linaro-r106878.patch
->  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
-cc-4.6-linaro-r106879.patch
->  create mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-4.6/linaro/g=
-cc-4.6-linaro-r106882.patch
+On Tue, Apr 10, 2012 at 02:59, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * used to set HOME variable before /etc/X11/Xsession is started
+> * e.g. enlightenment is creating ${HOME}/.e and without this it ends in
+> =A0/tmp/.e and during startup HOME gets defined and switched to
+> =A0/home/root/.e
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-FWIW: this upgrade again triggered gcc-cross-initiall do_compile errors
-for incremental builds, it failed for 3 from 4 archs I'm building and
-each with different error. Reexecuting the same target again worked fine,=
-=20
-so I still belive there is some sort of race condition with shared gcc work=
-dir.
+Agreed :-)
 
-I've uploaded cooker and do_compile logs here:
-http://build.shr-project.org/tests/jama/gcc-upgrade-issue/
-
-Cheers,
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
---XOIedfhf+7KOe/yw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+D5oUACgkQN1Ujt2V2gBym2ACgsy5oVcJt05tj/N5PuE6Q8T1M
-sjoAnidUcqs4hJYHu2J6tF3jv3p9uQXO
-=S1dG
------END PGP SIGNATURE-----
-
---XOIedfhf+7KOe/yw--
