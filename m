@@ -1,37 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SHUGN-0007dp-Kr
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 08:09:11 +0200
-Received: by wibhj13 with SMTP id hj13so2591729wib.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SHUZt-00084y-V8 for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2012 08:29:22 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SHUQt-0003bh-Rg for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Apr 2012 08:20:05 +0200
+Received: from ABTS-KK-dynamic-104.29.172.122.airtelbroadband.in
+	([ABTS-KK-dynamic-104.29.172.122.airtelbroadband.in])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2012 08:20:03 +0200
+Received: from surendra.dhobalelinux by
+	ABTS-KK-dynamic-104.29.172.122.airtelbroadband.in with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2012 22:59:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=fgvoDFOsaI7WPeOtXGPM0mzdVnUyRSBTgzjm7sULKN8=;
-	b=HsCOcMa4TfaRT1uSvEtWFAG8VXF/vQyTw5IMwp7/XTWqzCHTeecmVbUBctPaCk2wyK
-	OEHxUTEGZf8JRx75LeTxbTfgsx4ZEcCbZULuFe0VVFQPodJSdQ4+Qpfwb7YDZ4fTqepQ
-	+o3iCaFNffZY/wHT2NI266vwqmPT+brB9P+63r5b9+WKsutimEQ6xV4PtWnbGS6+pDUP
-	ZGKLtbSjIaGLkiXzOs8IVZdJThGCuFTuHNCs6qLbf/xCD+3z7usZIUyvjejBdm4VCCU5
-	8kJV4io5rSZh8jYq7KnKgK5ptvZeyD4sfSD23/xmWw8RCXceABiUfnFNIoGCzuayTAAL
-	WeDA==
-Received: by 10.180.95.74 with SMTP id di10mr4535428wib.1.1334037594557;
-	Mon, 09 Apr 2012 22:59:54 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gd4sm57484887wib.6.2012.04.09.22.59.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 09 Apr 2012 22:59:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 10 Apr 2012 08:20:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2012 07:59:39 +0200
-Message-Id: <c55ca91ae7203a1fe164a1a91230b970fc075759.1334037469.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <447016b1ed3811830299ad0145a8e3216abd50c4.1334037469.git.Martin.Jansa@gmail.com>
-References: <447016b1ed3811830299ad0145a8e3216abd50c4.1334037469.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1334037469.git.Martin.Jansa@gmail.com>
-References: <cover.1334037469.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] xserver-nodm-init: add EnvironmentFile
+From: surendra dhobale <surendra.dhobalelinux@gmail.com>
+Date: Tue, 10 Apr 2012 06:10:58 +0000 (UTC)
+Message-ID: <loom.20120410T074726-240@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 122.172.29.104 (Mozilla/5.0 (X11; Ubuntu; Linux i686;
+	rv:11.0) Gecko/20100101 Firefox/11.0)
+Subject: Error: while applying the new patch...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,71 +42,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 06:09:11 -0000
+X-List-Received-Date: Tue, 10 Apr 2012 06:29:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-* used to set HOME variable before /etc/X11/Xsession is started
-* e.g. enlightenment is creating ${HOME}/.e and without this it ends in
-  /tmp/.e and during startup HOME gets defined and switched to
-  /home/root/.e
+Hi,
+I am working with open embedded arago project. 
+I had setup all the open
+embedded build enviornment. 
+Now i have started with modification of the
+u-boot source code in the in the working directory(S).
+I made some changes in S directory and
+ create the patch of the changes
+using thegit work-flow as mentioned in 
+yocto project user manual.
+The patch create successfully. This patch, now added in the 
+corresponding bit bake file andrecipe.
+but when i start to built 
+it gives the errors while do_patch state
+and error of quilt.
+Error Logs:-
+utc-arago@utc-arago-desktop:~/oe$ MACHINE=am335x-evm bitbake u-boot
+NOTE: Handling BitBake files: | (7691/7691) [100 %]
+Parsing of 7691 .bb files complete (7228 cached, 463 parsed).
+ 7887 targets, 451
+skipped, 585 masked, 0 errors.
+Build Configuration:
+BB_VERSION        = "1.10.2"
+METADATA_BRANCH   = "master"
+METADATA_REVISION = "da378da"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "am335x-evm"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2011.09"
+TARGET_FPU        = "hard"
+NOTE: Resolving any missing task queue 
+dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 396 of 649 (ID: 11,
+/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb,
+do_setscene)
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_setscene: Started
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+695466ccf32c19d0453f94724987cf063024b60:
+task do_setscene: Succeeded
+NOTE: Running task 397 of 649 (ID: 9,
+/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb, do_fetch)
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_fetch: Started
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_fetch: Succeeded
+NOTE: Running task 398 of 649 (ID: 0,
+/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb, do_unpack)
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_unpack: Started
+NOTE: Unpacking
+downloads/git_arago-project.org.git.projects.u-boot-am33x.git_
+1695466ccf32c19d0453f94724987cf063024b60.tar.gz
+to
+arago-tmp/work/am335x-evm-arago-linux-gnueabi/
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60/
+FATAL: Execution of 'quilt
+--quiltrc=/home/utc-arago/oe/arago-tmp/sysroots/
+i686-linux/
+usr/bin/quiltrc push'
+failed with exit code 1:
+Applying patch 0001-Surendra-after-change.patch
+patching file board/ti/am335x/evm.c
+Hunk #2 FAILED at 704.
+1 out of 2 hunks FAILED -- rejects in file
+ board/ti/am335x/evm.c
+patching file board/ti/am335x/mux.c
+Hunk #1 FAILED at 675.
+1 out of 1 hunk FAILED -- rejects in file board/ti/am335x/mux.c
+Patch 0001-Surendra-after-change.patch does
+ not apply (enforce with -f)
+ERROR: Function patch_do_patch failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb
+do_patch failed
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_unpack: Succeeded
+ERROR: Task 1
+(/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb,
+do_patch) failed with exit code 1
+ERROR:
+'/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb' failed
+NOTE: Running task 405 of 649 (ID: 1,
+/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb, do_patch)
+NOTE: package
+u-boot-2011.09-psp04.06.00.06-r11.0+gitr0+
+1695466ccf32c19d0453f94724987cf063024b60:
+task do_patch: Started
+NOTE: Applying patch '0001-Surendra-after-change.patch'
+(arago/recipes/u-boot/u-boot-2011.09-psp04.06.00.06/
+0001-Surendra-after-change.patch)
+FATAL: Execution of 'quilt
+--quiltrc=/home/utc-arago/oe/arago-tmp/sysroots/
+i686-linux/
+usr/bin/quiltrc push'
+failed with exit code 1:
+Applying patch 0001-Surendra-after-change.patch
+patching file board/ti/am335x/evm.c
+Hunk #2 FAILED at 704.
+1 out of 2 hunks FAILED -- rejects in file 
+board/ti/am335x/evm.c
+patching file board/ti/am335x/mux.c
+Hunk #1 FAILED at 675.
+1 out of 1 hunk FAILED -- rejects in file
+board/ti/am335x/mux.c
+Patch 0001-Surendra-after-change.patch 
+does not apply (enforce with -f)
+ERROR:
+'/home/utc-arago/oe/arago/recipes/u-boot/
+u-boot_2011.09-psp04.06.00.06.bb' failed
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../xserver-nodm-init-2.0/xserver-nodm.conf        |    1 +
- .../xserver-nodm-init-2.0/xserver-nodm.service     |    1 +
- .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |    7 ++++++-
- 3 files changed, 8 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
-
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
-new file mode 100644
-index 0000000..3c0582a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
-@@ -0,0 +1 @@
-+HOME=/home/root
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-index a35d70e..c15a772 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-@@ -2,6 +2,7 @@
- Description=Xserver startup with a display manager
- 
- [Service]
-+EnvironmentFile=/etc/default/xserver-nodm
- ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
- 
- [Install]
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-index 36d9bfc..62c33c9 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-@@ -3,10 +3,11 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SECTION = "x11"
- 
--PR = "r14"
-+PR = "r16"
- 
- SRC_URI = "file://xserver-nodm \
-            file://xserver-nodm.service \
-+           file://xserver-nodm.conf \
-            file://gplv2-license.patch \
- "
- S = "${WORKDIR}"
-@@ -25,7 +26,11 @@ SYSTEMD_SERVICE_${PN}-systemd = "xserver-nodm.service"
- do_install() {
- 	install -d ${D}${sysconfdir}/init.d
- 	install xserver-nodm ${D}${sysconfdir}/init.d
-+	install -d ${D}${sysconfdir}/default
-+	install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
- }
- 
-+FILES_${PN}-systemd += "${sysconfdir}/default/xserver-nodm"
-+
- RDEPENDS_${PN} = "xserver-common (>= 1.30) xinit"
- RDEPENDS_${PN}-systemd += "xserver-common (>= 1.30) xinit"
--- 
-1.7.8.5
 
 
 
