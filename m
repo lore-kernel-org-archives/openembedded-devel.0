@@ -1,32 +1,25 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SHcHS-0005NV-6p
+	(envelope-from <denis@denix.org>) id 1SHdXa-0007a2-DK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Apr 2012 16:42:50 +0200
-Received: by pbcum15 with SMTP id um15so40378pbc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2012 07:33:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=4GITRZKcv6ivQr7qd/aDcys/ApSjQcQCY/IUIMSlz1w=;
-	b=eVZ4XPokkuBavSipozNctrLC5DIOEO4DI7JuI3ofUzTVMCSpb36jDU3G5h2luowu74
-	dVbpjn+qZ0Er9DI09gx/oX5sZFK9pCMaYi2fczNBsiw7n1xwp9suNoAuW3q/85lnHrc6
-	UhEJOvsISuSvaIsooEnYmuZcQvbZpn92kcNTLQKEgpVOqa6o2rMl6YEKCcNOk0e7BEBX
-	c6fDgBVBJjWzfQYGqvCEkaVCSU306QGzwlsqsS70xseEE6EoecbvwoKQm0bf+0UtFhJ3
-	AjhhWwAZExEOW8cXVuq4uN6RfmqyyfwHFCgJEEW2b5Kx3YhhNLnQgRRtg0RgvoEoGrFs
-	39zw==
-MIME-Version: 1.0
-Received: by 10.68.218.198 with SMTP id pi6mr29782620pbc.100.1334068411524;
-	Tue, 10 Apr 2012 07:33:31 -0700 (PDT)
-Received: by 10.142.180.4 with HTTP; Tue, 10 Apr 2012 07:33:31 -0700 (PDT)
-In-Reply-To: <1334013627-10533-1-git-send-email-andrea.adami@gmail.com>
-References: <1334011736-9053-1-git-send-email-andrea.adami@gmail.com>
-	<1334013627-10533-1-git-send-email-andrea.adami@gmail.com>
-Date: Tue, 10 Apr 2012 16:33:31 +0200
-Message-ID: <CAAQYJAs1049A9Re12=8925Y12eEQ=oCt6wA-OepbqEzSxFwJoQ@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 10 Apr 2012 18:03:34 +0200
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M29009WXTHKX1C0@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	10 Apr 2012 10:53:44 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0272220210; Tue,
+	10 Apr 2012 11:53:43 -0400 (EDT)
+Date: Tue, 10 Apr 2012 11:53:43 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH v2] Initial commit of linux-yocto-tiny_3.2 for Zaurus
+Message-id: <20120410155343.GH10246@denix.org>
+References: <4F80ACD6.8080901@gmail.com> <20120410064131.GA3583@jama.jama.net>
+MIME-version: 1.0
+In-reply-to: <20120410064131.GA3583@jama.jama.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: meta-linaro and toolchain-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +33,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 14:42:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 10 Apr 2012 16:03:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Patch v3 will follow later this evening
+On Tue, Apr 10, 2012 at 08:41:31AM +0200, Martin Jansa wrote:
+> On Sat, Apr 07, 2012 at 02:08:38PM -0700, Khem Raj wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> > 
+> > Hi,
+> > 
+> > Ken Werner @ Linaro has created a meta-linaro layer. I have created a
+> > github repo of same here https://github.com/kraj/meta-linaro
+> > 
+> > Moving forward soon gcc 4.7 will land in OE-Core and 4.6 will be
+> > more or less retired. In natural progression it would move to
+> > toolchain-layer if there are consumers of it.
+> > 
+> > linaro is also working on gcc-4.7 improvements in  same manner as
+> > 4.6  and there could be more tools e.g. gdb binutils etc. that could
+> > be useful for armv7+ from that layer.
+> > 
+> > I would like to propose few things we could do.
+> > 
+> > Use gcc-4.6 from meta-linaro and retire it from toolchain-layer
+> > which means toolchain layer only has gcc-4.5 and eventually
+> > This also means that we don't move gcc-4.6 into toolchain-layer
+> > when its relegated from OE-Core
+> 
+> I haven't tried gcc-4.7 on my armv4t machines yet, because I fear
+> similar issues like with binutils gold (which are still not resolved),
+> because nobody uses armv4t much nowadays :/.
+> 
+> The same I fear from 4.6 from meta-linaro, but maybe they will be
+> responsive as you were, when I reported issues on armv4t with some new
+> patch added by linaro..
+> 
+> So using meta-linaro for gcc-4.6 and gcc-4.7 is fine, but please keep
+> current "snapshot" of gcc-4.6 (oe-core+toolchain-layer patches)
+> somewhere as safe version before meta-linaro 4.6 is well tested on all
+> devices.
 
-* Fixes:
-* missing KMACHINE_spitz = "spitz in linux-yocto-tiny
-* refactored linux-yocto-tiny recipe (remove LOGO_SIZE variable),
-explicit overrides per-machine
+FWIW, Linaro only cares about actively supporting Cortex-A8 and up (armv7). 
+While they promise to not break any older archs intentionally, they are not 
+even testing them regularly. But if something gets accidentally broken, they 
+will probably accept the fix...
 
-Sorry for the noise...
-
-Regards
-Andrea
+-- 
+Denys
 
 
