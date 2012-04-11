@@ -1,26 +1,35 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SI2NO-0001l5-8q
+	(envelope-from <koen@dominion.thruhere.net>) id 1SI33l-0002gL-P2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2012 20:34:42 +0200
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M2B003OPSCSY2W0@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	11 Apr 2012 12:24:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 718BB200AB; Wed,
-	11 Apr 2012 13:24:27 -0400 (EDT)
-Date: Wed, 11 Apr 2012 13:24:27 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 11 Apr 2012 21:18:29 +0200
+Received: by wibhj13 with SMTP id hj13so1069601wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Apr 2012 12:09:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=PdTQ9Bgj+ZadwvGhaUuYt8dVq1aO6x0X09Ymm7f9VXE=;
+	b=JC1zicEyAcJE6mm//MBH7t7lAxBNv1/A1stjw5lVXHDUocbexVe8aFG+rqTcVwFji3
+	iclxfoCkr1M/r83sDCSBEC9oh6t3rO8MJIr70MmdfEDwOB20T1ElkkSFkS5PMean6Rjr
+	ZyFpfU/qbum/koCpobf/E+2Vazph0TmR2VNUK1C+PIQ3mSkNwsVqkx1RRv95TlMOSX6g
+	Qn8J3EXtnUCDY3dfMfdG4iXyErgla/EEp+rVo8yxL5BOrilQ9BUBJZ/oCuNhIQcxsZhT
+	fggdR4zmYVEnTYI4yRpU7W0TEPQNYFCyZNSIRcA9SzRcxn6r2/eKG5U8Yx5m2gGXZpU0
+	feiQ==
+Received: by 10.180.79.135 with SMTP id j7mr9050872wix.19.1334171350767;
+	Wed, 11 Apr 2012 12:09:10 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id gg2sm12584920wib.7.2012.04.11.12.09.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 11 Apr 2012 12:09:09 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120411172427.GB23477@denix.org>
-References: <4F80ACD6.8080901@gmail.com> <20120410064131.GA3583@jama.jama.net>
-	<CAMKF1sotvfR6o0rU7dkVxwFVPcApWorM8bLsov+Gk8-OPKRU5Q@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAMKF1sotvfR6o0rU7dkVxwFVPcApWorM8bLsov+Gk8-OPKRU5Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: meta-linaro and toolchain-layer
+Date: Wed, 11 Apr 2012 21:09:05 +0200
+Message-Id: <1334171345-8703-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQlV9wy7bxAZuaSUUqiT2DsqOjaNl1aImafgxAm+XDHnO+okPQRZDdHndxDDr3UF+YenC1gy
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe] cpuburn-neon: add cpuburn app for neon and neon-cortexa8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +43,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2012 18:34:42 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 11 Apr 2012 19:18:29 -0000
 
-On Tue, Apr 10, 2012 at 03:48:26PM -0700, Khem Raj wrote:
-> On Mon, Apr 9, 2012 at 11:41 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> >
-> > I haven't tried gcc-4.7 on my armv4t machines yet, because I fear
-> > similar issues like with binutils gold (which are still not resolved),
-> > because nobody uses armv4t much nowadays :/.
-> 
-> yes I have tried qemuarm/armv4t build along with qemuarm/armv5t build
-> as a test on 4.7
-> it boots systemd-image fine. But I would expect others to chime in and
-> provide some
-> testing help on their platforms/machines, I am still actively fixing
-> and rebasing
-> the 4.7 patches so expect a bit of churn there
-> 
-> >
-> > The same I fear from 4.6 from meta-linaro, but maybe they will be
-> > responsive as you were, when I reported issues on armv4t with some new
-> > patch added by linaro..
-> 
-> I will make sure that happens and I will be maintaining the layer at
-> above location
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb |   31 +++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
 
-Why? Do we need another fork? Can you upstream your fixes?
-
-
-> and see how the interaction goes and will help in maintaining the layer
-> > So using meta-linaro for gcc-4.6 and gcc-4.7 is fine, but please keep
-> > current "snapshot" of gcc-4.6 (oe-core+toolchain-layer patches)
-> > somewhere as safe version before meta-linaro 4.6 is well tested on all
-> > devices.
-> 
-> yes essentially we can recover is any time and in worst case I have to maintain
-> meta-linaro in which case we can merge both into one and maintain it
-> but I will actively
-> seek linaro's help in maintaining the layer.
-
+diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
+new file mode 100644
+index 0000000..bb9ca1c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
+@@ -0,0 +1,31 @@
++DESCRIPTION = "CPU burn app that loads the NEON coprocessor fully"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://burn.S;md5=823abc72c2cd448e87df9bc5355a4456"
++
++PR = "r1"
++
++# only for ARM systems infact it should check for MACHINE_FEATURE
++# neon or something. For now we spare non arm arches from picking this up
++
++COMPATIBLE_HOST = "arm.*"
++
++SRC_URI = "http://hardwarebug.org/files/burn.S;name=mru \
++           http://github.com/downloads/ssvb/ssvb.github.com/ssvb-cpuburn-a8.S;name=ssvb"
++SRC_URI[mru.md5sum] = "823abc72c2cd448e87df9bc5355a4456"
++SRC_URI[mru.sha256sum] = "01d9fc04f83740c513c25401dcc89c11b2a5a6013e70bfca42b7b02129f88cd2"
++SRC_URI[ssvb.md5sum] = "f1af41dcd56e4f0f7e92b67109dc01ed"
++SRC_URI[ssvb.sha256sum] = "95e2267a684be0d848dd6f935e769fa3ed810274ebacddc3fe8ddac4b34838c2"
++
++S = "${WORKDIR}"
++
++do_compile() {
++	${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
++	${CC} ${CFLAGS} ${LDFLAGS} ssvb-cpuburn-a8.S -o burn-neona8
++}
++
++do_install() {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/burn ${D}${bindir}/burn-neon
++	install -m 0755 ${S}/burn-neona8 ${D}${bindir}/
++}
++
 -- 
-Denys
+1.7.2.5
+
 
 
