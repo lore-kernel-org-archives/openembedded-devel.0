@@ -1,17 +1,14 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from [109.190.26.176] (helo=localhost)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SI5WQ-0002TM-Mt
+	(envelope-from <apelete@localhost.seketeli.org>) id 1SI5Yk-0002bE-0B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2012 23:56:14 +0200
-Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id C8BDCEA040;
-	Thu, 12 Apr 2012 00:03:26 +0200 (CEST)
+	Wed, 11 Apr 2012 23:58:38 +0200
 Received: by localhost (Postfix, from userid 1000)
-	id BB20C60FD9; Wed, 11 Apr 2012 23:46:54 +0200 (CEST)
+	id 8971C60FCC; Wed, 11 Apr 2012 23:42:22 +0200 (CEST)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Apr 2012 23:46:32 +0200
-Message-Id: <1334180792-20535-1-git-send-email-apelete@seketeli.net>
+Date: Wed, 11 Apr 2012 23:39:42 +0200
+Message-Id: <1334180382-20367-1-git-send-email-apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 Subject: [PATCH] opkg-utils: Update SRC_URI to git.yoctoproject.org
@@ -28,7 +25,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2012 21:56:14 -0000
+X-List-Received-Date: Wed, 11 Apr 2012 21:58:38 -0000
 
 This updates SRC_URI as the svn.openmoko.org repository is now down.
 All the changes of this patch were picked from oe-core and brought
