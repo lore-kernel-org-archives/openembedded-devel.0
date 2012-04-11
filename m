@@ -1,36 +1,35 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SI1Cv-0000QX-JM
+	(envelope-from <koen@dominion.thruhere.net>) id 1SI2CC-0001Ys-Ol
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2012 19:19:49 +0200
-Received: by vbbfr13 with SMTP id fr13so860191vbb.6
+	Wed, 11 Apr 2012 20:23:08 +0200
+Received: by wibhm17 with SMTP id hm17so3971901wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2012 10:10:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=v65hTGef9Ur7ovkaWMbvlOVPEpE131J2WzbhgyvYTNU=;
-	b=Ioajg4kRMnKDFVlgLj/8DO+IegDO4IpOVDM+c0/SUqifZvmF9Qy10IxQs/atqlmgpp
-	ydYJc/jork3K+LWL2oI4Hup8K5vZis5HTKLq5fm1Zl9z9NM9aqSD68CctYxfaEAbqtHc
-	cwxFt6v6Fe+Ly6NTMl0I+2O9zFN3bg+Ww4k2xTZXydJTptDgbx49U+hExWdg3ygMr7+f
-	FTsJrUP1tmgvcD4jvRMN10QQ45rXDH7xFA7UhRjqr7J8U/ASUSqiiI+ASL+wdhKKdW5T
-	Bm3zndabtb4koqnAGFfJibJ6J654EXvEeYm/YcDoinBJ6VanXA7QQATnBeZ+eZN69wTz
-	O1Kw==
-MIME-Version: 1.0
-Received: by 10.220.107.208 with SMTP id c16mr8054904vcp.65.1334164230009;
-	Wed, 11 Apr 2012 10:10:30 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.2.195 with HTTP; Wed, 11 Apr 2012 10:10:29 -0700 (PDT)
-In-Reply-To: <447016b1ed3811830299ad0145a8e3216abd50c4.1334037469.git.Martin.Jansa@gmail.com>
-References: <cover.1334037469.git.Martin.Jansa@gmail.com>
-	<447016b1ed3811830299ad0145a8e3216abd50c4.1334037469.git.Martin.Jansa@gmail.com>
-Date: Wed, 11 Apr 2012 14:10:29 -0300
-X-Google-Sender-Auth: fwu-aLfKh55gEaMfdTNcI-wRXmI
-Message-ID: <CAP9ODKoOVXFWX074wkmy0pQ2-0KDO5AF-tM1E6U6qy+e5DNYtw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 11 Apr 2012 11:13:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=6809Wx2JaLBZe8VZY4SPbi7xuLVTbrintP+A+LDYMTs=;
+	b=e7bJ6wtSajB+nHYc9KRDjlPpKtyr/VJOHwcQQK1lqlEb9emq6QNVz1bLIEOfg5GUDc
+	/ZEDaJuFSPOiUEaJhhcfSa7WTUFAR62uVEVvxbXYgZmOL0DfIyZIkedvJJDdtOSTWFK7
+	IohtTlalKEN/gAD2cXJPnOdU/CU3sFdlzEJFZTO6ambEd8ZI4E217/LrTx/YfR8dZZ6X
+	TWONJKAvrnbqm/yolF/j+bcGl1hurjh/ph5/OBNDyn5LRNn6MdaNsAzkhR74r7hR7zaM
+	tO67oL1TbnZd/56t9H1wtZolXPfQFAvt2TDhc7ZWQKI7RV9K/00NXIzGIqfseh9SkQp0
+	32zA==
+Received: by 10.180.88.164 with SMTP id bh4mr8693216wib.22.1334168029559;
+	Wed, 11 Apr 2012 11:13:49 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id gg2sm12097739wib.7.2012.04.11.11.13.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 11 Apr 2012 11:13:48 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/2] xserver-nodm-init: use /etc/X11/Xserver from service file instead of Xorg directly
+Date: Wed, 11 Apr 2012 20:13:44 +0200
+Message-Id: <1334168024-27789-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQnauIWvzQQPujcv29KD5W+SPxDc6D3rpE4pc8BmK70wOKJ5lfyjt15tai8Y4mERQpMltwWo
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe] xinput-calibrator 0.7.5: run xinput_calibrator_once.sh using XDG autostart mechanism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,22 +43,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2012 17:19:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Apr 2012 18:23:08 -0000
 
-On Tue, Apr 10, 2012 at 02:59, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * /etc/X11/Xserver is provided by xserver-common and sets correct DPI
-> =A0before starting Xorg (or other xserver)
+This runs when the session starts so after the DM. Not a great solution, but at least it will popup a calibration dialog automatically and restore calibration on subsequent sessions.
 
-This breaks the images using systemd only as it depends on init.d/functions=
- now.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../xinput-calibrator-autostart.desktop            |    8 ++++++++
+ .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |    7 ++++++-
+ 2 files changed, 14 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator-autostart.desktop
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator-autostart.desktop b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator-autostart.desktop
+new file mode 100644
+index 0000000..3f3d613
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator-autostart.desktop
+@@ -0,0 +1,8 @@
++[Desktop Entry]
++Name=Calibrate Touchscreen
++Exec=xinput_calibrator_once.sh
++Terminal=false
++Type=Application
++Icon=xinput_calibrator
++StartupNotify=true
++Categories=System;Settings;
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
+index d823e0e..a50a0cf 100644
+--- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
++++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
+@@ -4,13 +4,14 @@ LICENSE = "MIT-X"
+ LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
+ DEPENDS = "virtual/libx11 libxi"
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ inherit autotools systemd
+ 
+ SRC_URI = "http://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-${PV}.tar.gz \
+            file://0001-xinput_calibrator_pointercal.sh-specify-output-type-.patch \
+            file://xinput-calibrator.service \
++           file://xinput-calibrator-autostart.desktop \
+ "
+ SRC_URI[md5sum] = "20da0a2055a5a75962add8c6b44f60fa"
+ SRC_URI[sha256sum] = "baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475d3d971"
+@@ -23,10 +24,14 @@ EXTRA_OECONF += "--with-gui=x11"
+ do_install_append() {
+         install -d ${D}${bindir}
+         install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
++
++        install -d ${D}${sysconfdir}/xdg/autostart
++        install -m 0644 ${WORKDIR}/xinput-calibrator-autostart.desktop ${D}${sysconfdir}/xdg/autostart
+ }
+ 
+ SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE = "${PN}.service"
+ 
++FILES_${PN} += "${sysconfdir}/xdg/autostart"
+ RDEPENDS_${PN} = "xinput"
+ RRECOMMENDS_${PN} = "pointercal-xinput"
+-- 
+1.7.2.5
+
 
 
