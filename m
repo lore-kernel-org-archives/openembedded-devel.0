@@ -1,32 +1,27 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SHv1A-0004jz-DC
+	(envelope-from <gary@mlbassoc.com>) id 1SHv5O-0004rq-Cp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2012 12:43:16 +0200
-Received: by iaag37 with SMTP id g37so1138706iaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2012 03:33:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=xRXsvK392PSyr1+3GpM5skXCVktPXhPuxerrVX/HHDc=;
-	b=BoJVaTb+7llOjGc1gPTqG9CoGqWrp2D+11SBDmqI3QH7tsXoGNouSxTXT5M5T3fn6B
-	F3E8j/Fh8mdmIocDiZ/pK0NeqcIP3Ftwo6QKkqRfN5wwDEi8/DS4nP/RBzISl0n1VbIN
-	jXYozOOwD7Hqxp6bcdTf7uQVMxe2Hk+OMil8qjsLWsNMDyyFfvNm9k3aSxcsP6PUtYCF
-	lA4qXqNDC/bjF2MOJ6jV+xc9eDBXq7xx3n3TcSeo6Nxarf6/WGlAlWUZiAlRxLk44q5O
-	1FSism1OHavBgEN6dxY49R9Nx1ZJws2fAQAfZQgTbHrjVs5pN2dk11ZpJ5TkuslpGa/l
-	/1KQ==
+	Wed, 11 Apr 2012 12:47:38 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id BF96AF81204; Wed, 11 Apr 2012 04:38:20 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id CB012F811FF;
+	Wed, 11 Apr 2012 04:38:18 -0600 (MDT)
+Message-ID: <4F855F1A.6090700@mlbassoc.com>
+Date: Wed, 11 Apr 2012 04:38:18 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
 MIME-Version: 1.0
-Received: by 10.50.212.97 with SMTP id nj1mr1425173igc.65.1334140436785; Wed,
-	11 Apr 2012 03:33:56 -0700 (PDT)
-Received: by 10.231.170.15 with HTTP; Wed, 11 Apr 2012 03:33:56 -0700 (PDT)
-In-Reply-To: <CAOHjBZuGf-wG2jpSR1R9sM_KawN+5H9ZS_ivikYgfMvLJVVtXQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 References: <CAOHjBZuGf-wG2jpSR1R9sM_KawN+5H9ZS_ivikYgfMvLJVVtXQ@mail.gmail.com>
-Date: Wed, 11 Apr 2012 12:33:56 +0200
-Message-ID: <CAOHjBZsuo=mrkE+gbkMT3-p04ZS-=U11M=Fg-3z7wfFUyRPDAA@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+In-Reply-To: <CAOHjBZuGf-wG2jpSR1R9sM_KawN+5H9ZS_ivikYgfMvLJVVtXQ@mail.gmail.com>
 Subject: Re: [oe-core] THISDIR usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,27 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2012 10:43:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Apr 2012 10:47:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Sorry, I used FILESEXTRAPATHS but the result is the same. I'm using
-openembedded-core-2011-1 sources.
-
-Il giorno mercoled=EC 11 aprile 2012, Giuseppe Condorelli ha scritto:
-
+On 2012-04-11 04:23, Giuseppe Condorelli wrote:
 > Hi, I moved to OE-Core (working on stable version dowloaded as tar file
 > from cgit.openembedded.org).
 > I'm in trouble trying to include a source through .bbappend file, located
-> under my meta-<personal> subtree.
+> under my meta-<personal>  subtree.
 >
-> FILESPATHBASE_prepend :=3D "${THISDIR}/files:"
-> SRC_URI +=3D "file://myfile.tar.gz"
+> FILESPATHBASE_prepend := "${THISDIR}/files:"
+> SRC_URI += "file://myfile.tar.gz"
 >
 > results in a no such file or directory. Please can you tell me if I'm
 > missing anything?
->
-> Thanks,
-> Giuseppe
->
+
+Assuming your tree looks something like this [partial]:
+
+   meta-giuseppe:
+     recipes:
+       some-recipe:
+         some-recipe_1.2.3.bbappend
+         files:
+           myfile.tar.gz
+
+Try using this instead
+   FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
+
 
