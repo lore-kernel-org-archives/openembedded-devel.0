@@ -1,21 +1,33 @@
-Received: from stoexhub02.domain01.net ([83.145.59.143])
+Received: from mail-pz0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1SHr1p-0001bk-Ey
+	(envelope-from <andrea.adami@gmail.com>) id 1SHspk-00045E-Mq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2012 08:27:43 +0200
-Received: from localhost (193.235.91.228) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server id 8.3.245.1; Wed, 11 Apr 2012
-	08:17:18 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Apr 2012 08:17:01 +0200
-Message-ID: <73d31a874262a0853376d76dd925b5f2fb025d8b.1334124991.git.anders@chargestorm.se>
-X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <cover.1334124991.git.anders@chargestorm.se>
-References: <cover.1334124991.git.anders@chargestorm.se>
+	Wed, 11 Apr 2012 10:23:20 +0200
+Received: by dadz8 with SMTP id z8so853370dad.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Apr 2012 01:14:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=xQ5gOe//p4nDoI10/RIHJfrAiC4VX1iGE2gDkL3GZDY=;
+	b=Tl5SoguANI9ZUkSxLdiIecxyKgwA92L6Ro91MlEA/E/U8pTLkfXgg7q3iANrsi4E4A
+	DcZBHEVsemkZB1JEximUTVQEwTz3vhwehTdxADDIWnrj3/2htyjjQM4D20q5efa8D8rJ
+	BDxZMvPPU3AJ5LDjVvGxwHpv/3VJ4+UWBfghUsasD10k/ylaYwKcf2SfRZ1hH9XJCyeW
+	vXzJLteKrXfHYHWZ9fbiA8emTqwFRFcz/xh+nrCWFCpsEaSYBIFxnui/QuB6lKuWYko6
+	GD59PCadQygXyQbf2SCZC+l8wSr2C8/aE2NPfktbQ3UhdEkvPjZK5YrKhHJizgXQ/o1t
+	ltvw==
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Subject: [meta-oe][PATCH v2 1/1] sqlite: cp instead of mv in do_configure
+Received: by 10.68.220.134 with SMTP id pw6mr35411912pbc.149.1334132041160;
+	Wed, 11 Apr 2012 01:14:01 -0700 (PDT)
+Received: by 10.142.180.4 with HTTP; Wed, 11 Apr 2012 01:14:01 -0700 (PDT)
+In-Reply-To: <CAAQYJAs1049A9Re12=8925Y12eEQ=oCt6wA-OepbqEzSxFwJoQ@mail.gmail.com>
+References: <1334011736-9053-1-git-send-email-andrea.adami@gmail.com>
+	<1334013627-10533-1-git-send-email-andrea.adami@gmail.com>
+	<CAAQYJAs1049A9Re12=8925Y12eEQ=oCt6wA-OepbqEzSxFwJoQ@mail.gmail.com>
+Date: Wed, 11 Apr 2012 10:14:01 +0200
+Message-ID: <CAAQYJAvBiKE-njwGHr4cr_OC0N3Desd-YC1ZzQcdZBwzjP2Rrg@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH v2] Initial commit of linux-yocto-tiny_3.2 for Zaurus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,32 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2012 06:27:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Apr 2012 08:23:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The use of mv in do_configure() made bitbake error out if a second run
-of do_configure was requested. Copy the file instead.
+With the help of Darren and Bruce I'm smoothing the last rough edges.
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+The patch v3 was merging the two .scc in one but this was leading to
+wrong .config.
+The patch v4 did resplit the .scc and could configure valid kernels.
 
-diff --git a/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb b/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-index b8e03c4..733bb9e 100644
---- a/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-+++ b/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-@@ -22,7 +22,7 @@ inherit autotools pkgconfig
- do_configure() {
-     echo "main.mk is patched, no need to configure"
-     # make pkgconfig.bbclass pick this up
--    mv ${WORKDIR}/sqlite.pc ${S}
-+    cp ${WORKDIR}/sqlite.pc ${S}
- }
- 
- do_compile() {
--- 
-1.7.5.4
+Patch is temporarly available at:
 
+https://github.com/andrea-adami/meta-handheld
+
+As it is, the linux-yocto-tiny recipe builds valid kernels: some more
+testing and I'll resend.
+
+Regards
+
+Andrea
 
 
