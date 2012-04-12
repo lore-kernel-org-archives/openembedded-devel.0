@@ -1,35 +1,29 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pz0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SINlT-00039L-4l for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Apr 2012 19:24:59 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SINcS-0005Cx-5w for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Apr 2012 19:15:40 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2012 19:15:40 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <aguirre.nicolas@gmail.com>) id 1SIO7t-0003VW-C8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Apr 2012 19:48:09 +0200
+Received: by dadz8 with SMTP id z8so2816888dad.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2012 19:15:40 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 12 Apr 2012 10:38:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=ABYWrVVi/5sRkWiXckjQ+VqixrqKrmy/0YVoD1x3IwQ=;
+	b=sF52FMRY1xfmzPWP4Bvj3bj2Pa5jV8wGkGMx3OxllKGq60WukzsZrlwdKAccJOnzaL
+	kgwaLHG3SHuGjhnX71jYtN8hQPgWAKyCs5g0ETsaTAXUwwftGWHSZOfDW84i2edd+NPi
+	aEUVaxqCmCHj65mUds9QGFKEIFqrM68FszvilJkG4bjjiRewF07kuGebQgT2CMb+Edgb
+	Q8GKQkYoafh8qlf4b3pKMRVoJr3/vZn/0mdudnn3Leu+ruJ7siAdp+/06PQIdPjM8IYt
+	ofIx83jm6ncNflk8+O/lowR5dEC2Ypv8Wo+7UbNRhCu6FOhbv2rFZnYbqlUDMC+aym2W
+	CZSg==
+Received: by 10.68.213.104 with SMTP id nr8mr4361451pbc.91.1334252328010; Thu,
+	12 Apr 2012 10:38:48 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.68.21.68 with HTTP; Thu, 12 Apr 2012 10:38:27 -0700 (PDT)
+From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
+Date: Thu, 12 Apr 2012 19:38:27 +0200
+Message-ID: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 12 Apr 2012 19:15:28 +0200
-Message-ID: <jm72ji$3r7$1@dough.gmane.org>
-References: <1334185891-25460-1-git-send-email-philip@balister.org>	<1334185891-25460-3-git-send-email-philip@balister.org>
-	<jm5ue3$ggg$1@dough.gmane.org> <4F870D05.5070308@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <4F870D05.5070308@balister.org>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-oe 2/5] python-cheetah : Remove DEPENDS on python native packages.
+Subject: Hard floating point support for armv7a wmmx2 processor in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +37,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2012 17:24:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Apr 2012 17:48:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Op 12-04-12 19:12, Philip Balister schreef:
-> On 04/11/2012 11:58 PM, Koen Kooi wrote:
->> Op 12-04-12 01:11, philip@balister.org schreef:
->>> From: Philip Balister <philip@opensdr.com>
->> 
->>> The oe-core recipe no longer explicitly provides various -native 
->>> packages. THe recipe builds fine without them.
->> 
->> These are _R_DEPENDS, have you verified that it runs without them?
-> 
-> The -native versions are only needed at build time.
-> 
-> I do not have an easy way to runtime test the build quite yet, but I 
-> would like to get the recipes in meta-oe building something that is more 
-> useful than the existing recipes. I can handle small fixes in updates.
+I'm building an oe-core minimal image and toolchain for the cubox[1]
+which has a Marvell Armada 510 SoC, also known as Dove.
+It's a armv7 Arm processor with wmmx2 instruction set [2].
 
-This one introduces a big breakage, so it isn't going in.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I setup a new machine for the cubox and added :
+require conf/machine/include/arm/arch-armv7a.inc
+in my cubox.conf file
 
-iQIcBAEBAgAGBQJPhw2uAAoJEHZqAkdh1vT6Pz0P/30LQ1aXP83KmOWkkqWHB2Xy
-EEHX6oXohG0oYGQ4zSEOwtRmhOXu/P1fSnf2QaZb6mq7gdKxem7qpUiAzsnhBiZc
-iePFPiByj88Do+tCVxHy+IpaL4JnBa7bKWmtHkGdOlwfISFMjJ6RZLu4FK7tF0gu
-RRSgJ4qSSFawbAyMYoUIngUA+TCOj4c+Vv4Tvf7+OgZZxf23fMoHSUiOwlXJkRVI
-8LKDAJVLuwYyQd5C4PIImnQnri277Oxhn8chtb3beXKvKhlWGl0jBNUdsPcCL01b
-Kq39RgZfCU92ziZ9duobHvu6rFoE4qJdIKDPeD84aiwcepK+wtIuV1pNtDJVML7S
-nwAmf3Ti6b62R6Tn8MIBEhmQC1q6Szrm70S1DN2wnnK49KPyPlYUlrJg07LwTiBD
-aiEwPj5R8YenMRtER42V0E0MsPworH4+8dQscL2lPr6sUIj2GpyG4U2/bzW+V0NO
-XEjjnA1o8G2Pj5I8dmgLOs25HzjL6DjMSLsQBkuveUxPuv0tJLFbUT2ec9detq5m
-gLYJbJIfO9B2x+aUrclO0T+Tnzg931KQzY6zRblg5K6/+kHlQOtBeSZG6hLpJHSP
-3zRAUilGyetI8gwijNOKAkhwi1+c5z/HgEHv2dd/KfDOYPEmqcgVCOZ+Fc3DSX5j
-HQUmdjL7QUI0kLSdggO5
-=PjhG
------END PGP SIGNATURE-----
+I also added
+ARM_FP_MODE = "hardfp"
+TARGET_FPU = "hardfp"
+in my local.conf file.
 
+It finished the build sucessfully for angstrom efl-nodm-image.
+
+I don't know exactly which option enable and where to add it to enable
+hard floating point.
+I see in meta-oe/meta/conf/machine/include/arm/arch-armv7a.inc
+references to the armv7ahf architecture but without idea how to
+activate it.
+
+Btw is the 'a' after armv7 important for me ? As it seems that this
+arm core is an armv7 and not armv7a. I dont find arch-armv7.inc file
+in oe-core.
+
+Another problem is, how to add support for wmmx2 instruction set ?
+There is tune-iwmmxt.inc but it seems to refer to armv5 arch. There is
+a way to enable this instruction set ?
+
+Any help would be appreciate :)
+
+[1] http://www.solid-run.com/products/cubox
+[2] http://www.marvell.com/application-processors/armada-500/
+
+regards,
+-- 
+Nicolas Aguirre
+Mail: aguirre.nicolas@gmail.com
+Web: http://enna.geexbox.org
+Blog: http://dev.enlightenment.fr/~captainigloo/
 
 
