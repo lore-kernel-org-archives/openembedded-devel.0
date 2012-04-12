@@ -1,36 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1SIQ4q-0000Ih-6l
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Apr 2012 21:53:08 +0200
-Received: by wgbdr12 with SMTP id dr12so1976339wgb.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SIQBg-0000o0-AK for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Apr 2012 22:00:12 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SIQ2d-0004Ek-B2 for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Apr 2012 21:50:51 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Apr 2012 21:50:51 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2012 12:43:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=MC4RbNrAJefGMxSVqbOH9lZCZ7dGQYzHI8pKawJb7WU=;
-	b=VGf+5cWNI5KU85zjlA/vTdFAi6Z3zIfhHTM5s8jISz6g3N24rYF7AlhpGpmUxaHOW/
-	PdZO/xLWhFEnpgkTtlwISqlFSh2SQHcvHbVxIgSzmsIqNWnTSSIRvaDPCxdSrAmP8Iko
-	HNl8yCuJuh50uaqUf4PaCaqGSFXrXZjVD7YxoPHZ8k9lcVkrSpIDeaRBwt8abKCnd3uH
-	kLQ9j2RNxe2nD8hPs+vcSErEAcMDQ5A3N5uGR0phnJZfcs9lCYkYtwJ15u5G4fmVzJtB
-	IFB3BjlekhRMyRmaV2fIo5FYUWTv990kD87vaJWbI+91rQ4mkCfkyFPvl5kYhrCkao8H
-	njwg==
-MIME-Version: 1.0
-Received: by 10.180.24.66 with SMTP id s2mr8739105wif.7.1334259827768; Thu, 12
-	Apr 2012 12:43:47 -0700 (PDT)
-Received: by 10.227.158.16 with HTTP; Thu, 12 Apr 2012 12:43:47 -0700 (PDT)
-X-Originating-IP: [93.114.75.57]
-Received: by 10.227.158.16 with HTTP; Thu, 12 Apr 2012 12:43:47 -0700 (PDT)
-In-Reply-To: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
-References: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
-Date: Thu, 12 Apr 2012 22:43:47 +0300
-Message-ID: <CAK18fxEdrbDY+-be7v9rxOB2tEScHx71BjbfxDnk2eqMiQTpiA@mail.gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
+	Thu, 12 Apr 2012 21:50:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkBtoEztcpDJ8/ZIf/s0SvYQDT0pdQ14ZxWzOrYDMtSxvBgki+7ICdleVRMe1YRY7ZhFoJB
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 12 Apr 2012 21:50:41 +0200
+Message-ID: <jm7bmi$dla$1@dough.gmane.org>
+References: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
+X-Enigmail-Version: 1.4
 Subject: Re: Hard floating point support for armv7a wmmx2 processor in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,59 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2012 19:53:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Apr 2012 20:00:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Cubox as in that 2cm^3 board?
-On Apr 12, 2012 8:39 PM, "Nicolas Aguirre" <aguirre.nicolas@gmail.com>
-wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+Op 12-04-12 19:38, Nicolas Aguirre schreef:
 > Hi,
->
-> I'm building an oe-core minimal image and toolchain for the cubox[1]
-> which has a Marvell Armada 510 SoC, also known as Dove.
-> It's a armv7 Arm processor with wmmx2 instruction set [2].
->
-> I setup a new machine for the cubox and added :
-> require conf/machine/include/arm/arch-armv7a.inc
-> in my cubox.conf file
->
-> I also added
-> ARM_FP_MODE = "hardfp"
-> TARGET_FPU = "hardfp"
-> in my local.conf file.
->
+> 
+> I'm building an oe-core minimal image and toolchain for the cubox[1] 
+> which has a Marvell Armada 510 SoC, also known as Dove. It's a armv7 Arm
+> processor with wmmx2 instruction set [2].
+> 
+> I setup a new machine for the cubox and added : require
+> conf/machine/include/arm/arch-armv7a.inc in my cubox.conf file
+> 
+> I also added ARM_FP_MODE = "hardfp" TARGET_FPU = "hardfp" in my
+> local.conf file.
+> 
 > It finished the build sucessfully for angstrom efl-nodm-image.
->
-> I don't know exactly which option enable and where to add it to enable
+> 
+> I don't know exactly which option enable and where to add it to enable 
 > hard floating point.
-> I see in meta-oe/meta/conf/machine/include/arm/arch-armv7a.inc
-> references to the armv7ahf architecture but without idea how to
-> activate it.
->
-> Btw is the 'a' after armv7 important for me ? As it seems that this
-> arm core is an armv7 and not armv7a. I dont find arch-armv7.inc file
-> in oe-core.
->
-> Another problem is, how to add support for wmmx2 instruction set ?
-> There is tune-iwmmxt.inc but it seems to refer to armv5 arch. There is
-> a way to enable this instruction set ?
->
-> Any help would be appreciate :)
->
-> [1] http://www.solid-run.com/products/cubox
-> [2] http://www.marvell.com/application-processors/armada-500/
->
-> regards,
-> --
-> Nicolas Aguirre
-> Mail: aguirre.nicolas@gmail.com
-> Web: http://enna.geexbox.org
-> Blog: http://dev.enlightenment.fr/~captainigloo/
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+Hard floating point as in using the VFP coproc or hard floating point as in
+that overhyped ABI that is incompatible with everything else?
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPhzIPAAoJEHZqAkdh1vT6R68P/2PExTB9bX2Tgvv3eG1N7d0A
+wgdGPDB694TQmV5QByTlqDGV/+hpb07rPQMZzH4RMYlzohrCO3dhyfylZXF34ju6
+84qxXyfiB6aIhsK+oCz9mQhSH755PX6k6Wa4dspxYHbDJaHII5GlUDFZaUi9D/ve
+efu2pWbZ9JMNqY8NhEpV5fatUVG1lLaWV2zliwqDaeO1h2zr+2eb4lO2/V60XvmI
+tJIxUOm21l68n9SOzGjt+UQfM93GTFexRvC2EC9uk5TQaNOWIP499khxWjpdiCWN
+s5AvSaIy/Y0u2XuTmpU0wkx+QviZINCDItV1qeovZXAzA0pbgOWh3D6hkdm3Aw89
+B1HtLw7LFqidXIhN5BLwpIq8HhIiJG9Vej60eGEUj/dTdNTAuM7qTOIDvbQ4pPwu
+ezLTgwGimCrOc1jwqxuGJ/QR7HjaQllXc6kS1RNRU3ePNv5ySVkT0IoGKfPV4ulQ
+sy4u6yDCh9ZqpZvsfxFOJXkBJF6ZubEPKfF9a+24gmW6Icx2BJK4bPTPXVQNDIt+
+vT8jzKZsr3tnfSELNhe2/R0Usk1TeH9OyRjy4i8I3A0UZx20gNmsQHtXa9SMNU5M
+xONIOzpYa9zo90VMnrv6/eYMpfOHH+Jv/8fMECnXWPpm+tDIm/fnV3q9iWSqXnqx
+ThR4S3hryDV7XQka/pA5
+=pMxB
+-----END PGP SIGNATURE-----
+
+
 
