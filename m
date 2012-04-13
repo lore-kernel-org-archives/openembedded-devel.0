@@ -1,25 +1,29 @@
-Received: from sender1.zohomail.com ([72.5.230.103])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <k_q_11@zoho.com>) id 1SIT54-0004Ao-FJ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Apr 2012 01:05:34 +0200
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=message-id:date:from:user-agent:mime-version:to:subject:content-type; 
-	b=BCLPQ+qZIflDx66SRKjH5BRAAsJqTf46kH52L78ovjwdlG8FRM7C/OW1y7g4pksxkXNU0PPWxgn/
-	ybl8dF2aVCZ4TddcVb78quGHgkiqu+FatzuYf9GIEih/NZYYEAzw  
-Received: from [192.168.2.6] (ip3.c1.obr134.cust.comxnet.dk [87.72.227.215])
-	by mx.zohomail.com with SMTPS id 1334268504824601.9011041670644;
-	Thu, 12 Apr 2012 15:08:24 -0700 (PDT)
-Message-ID: <4F875256.1010100@zoho.com>
-Date: Fri, 13 Apr 2012 00:08:22 +0200
-From: Kevin Qiu <k_q_11@zoho.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.28) Gecko/20120313 Thunderbird/3.1.20
+	(envelope-from <raj.khem@gmail.com>) id 1SIYeS-0005pu-RM
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 13 Apr 2012 07:02:28 +0200
+Received: by lbky2 with SMTP id y2so2023466lbk.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Apr 2012 21:53:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=EEiazA9EgnYqiv9ZjhrNICGn1pyWcab1Er+/wlpK8DA=;
+	b=g60wlX3kY/GgfhDQbpe42YP8605AUAZvKRoabRaR+QtT1MRWf6ULUxEJBwA4mo8WRV
+	NQ6FPwGH8MksZ8KzJiLX3OAyG//Q73TT/YSXdSsZ+TR6Tx88+DINdz3dsYmB2SlITN6v
+	2ISr2emYdhwFtX7/7KeZytEYyiTquyGlgh0xEnCL1JPx0PIC+iK6NNeRXehYbSTcGWLq
+	X9nthZKcmlH5nh6cG6N+rQ7u2tfiQr6Qw2fK5fEOKesFbV2O2l5nZVOpzpx0KXt0sk+3
+	nL3Iwz3StnhMv0pY1eHzA95FoqJZPqWvHqQb7U99XAVS1f2bzvNhSZOgITT4o2yNgTs1
+	PpAA==
+Received: by 10.112.100.170 with SMTP id ez10mr135338lbb.15.1334292787825;
+	Thu, 12 Apr 2012 21:53:07 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-ZohoMailClient: External
-X-Zoho-Virus-Status: 2
-Subject: Apply patches on embedded linux board
+Received: by 10.152.129.134 with HTTP; Thu, 12 Apr 2012 21:52:37 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 12 Apr 2012 21:52:37 -0700
+Message-ID: <CAMKF1sr14M_sdr9Mr1yiVxG63FVpUQw+zCJqQeq7ULtOrV+JQw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: unfs-server-nativesdk multimachine compile issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,14 +37,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2012 23:05:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Apr 2012 05:02:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-   I am a newbie on Linux. I need to apply the following patch to fix 
-the user button http://patches.openembedded.org/patch/7091/. However, I 
-am not sure if I do need the kernel source to apply the patch. I am just 
-using the Angstrom distro coming with the board.
+Hi
 
+I am seeing a problem when building meta-toolchain for more than one
+architectures in same tmpdir
+
+it keeps rebuilding unfs-server-nativesdk for every machine build and
+then in second case it fails since
+it can not configure the preconfigured tree. Anyone seeing this issue ?
 
 
