@@ -1,36 +1,36 @@
-Received: from mail-qa0-f41.google.com ([209.85.216.41])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SIkWi-0006w4-U0
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SIkjV-0007Av-Oc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Apr 2012 19:43:17 +0200
-Received: by qafl39 with SMTP id l39so6153175qaf.7
+	Fri, 13 Apr 2012 19:56:29 +0200
+Received: by wibhj13 with SMTP id hj13so2915402wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2012 10:33:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=zeCVzjvbvl0VM3cPfuH4Lyyw9k/fEP8JGuakSbeU7Uc=;
-	b=PG80xhf515l+gpMOC+mno4o9iTRJ0rrEeMmq1aMhj9+wYt1T/afa9w7GJ2XIBWuPxX
-	2PuWVjA66zPAZ3vw4IpgsbT2rkO6XR2DP3f5/SkWEQ3wMkWucEgKJ9zLCCT2Krul0LOB
-	oQEaob6mJuMbtEBnVfoZ1CHxZGbl/QFextSZ+eFx0uYIEj9HwkMqVZi8PLnl0yVA4YDn
-	Uf5oMLAY++8gGmekkkRTdlBflcUzTms2FOM9jgvmyzRE7G/QVdgvvGfWHT92/rqCgtJh
-	ucY8nNGhQwIt1AhdEnfWgZ2tjPFaZIUy4m2xENrW2kU6W6W8wNN1whg94KZiR3w63pRD
-	UOLQ==
-Received: by 10.224.207.131 with SMTP id fy3mr3776585qab.74.1334338435116;
-	Fri, 13 Apr 2012 10:33:55 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id de7sm18578083qab.16.2012.04.13.10.33.49
-	(version=SSLv3 cipher=OTHER); Fri, 13 Apr 2012 10:33:54 -0700 (PDT)
-Message-ID: <4F886373.1020700@gmail.com>
-Date: Fri, 13 Apr 2012 10:33:39 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
-MIME-Version: 1.0
+	Fri, 13 Apr 2012 10:47:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=H3Us60YKEgXjLS87QjbdivfB1irQLWoHnrLvMPUBNi0=;
+	b=Sk8P9KMFKAe4eqpCBwARyGieEziGg4O2MQ8nM6EECwoIev1SWvb0hhmniexi1sUkgR
+	mgA8E3T3lcF5wGQphNtFeW2nDs8ADh69WFvqica78kDP08vaOCu/A04FgQm83npjM+g2
+	oiHmDg2bY4pMS7hPUSuxWw211ee6rfhgezPwMpfw6W2hVAUN59+FQdgTBzB5z0VWzyM1
+	5ZZa4n1Yc6ywpHO7kXKe5coSkZNhm6aBtRtfXgBFrFySF2/80XKwERLJCL7xMR/L0P6A
+	gMNDa0ud6KQk33eOPaUiEdqbwTseYfNXw1McL9dHPPELPyjQFenFZB/bMVc3Jjz2v/Xi
+	DFLw==
+Received: by 10.180.101.136 with SMTP id fg8mr6789830wib.4.1334339228388;
+	Fri, 13 Apr 2012 10:47:08 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id j3sm10249272wiw.1.2012.04.13.10.47.05
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 13 Apr 2012 10:47:05 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F8860F4.8050002@gmail.com>
-In-Reply-To: <4F8860F4.8050002@gmail.com>
-Subject: Re: libxcursor-1.1.12.bbappend
+Date: Fri, 13 Apr 2012 19:46:56 +0200
+Message-Id: <1334339216-5824-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-oe] libxcursor_1.1.12.bbappend: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2012 17:43:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Apr 2012 17:56:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 04/13/2012 10:23 AM, j wrote:
-> I just updated hoping it would help with another build issue I am 
-> having and after the update I can no longer build anything I always 
-> get the error.
-> ERROR: No recipes available for:
->   
-> /home/beagle/OE/setup-scripts/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend
-> ERROR: Command execution failed: Exited with 1
->
-> Anyone know how to fix this? The append is there but the recipe it is 
-> appending is not. Either that or I can not find it. I only see 
-> 1.1.13.bb but not the 1.1.12.bb and both appends are there.
->
-> Thanks.
-Just moving the file from the tree made builds continue. Was this recipe 
-something that should have been deleted but was missed?
+Error message during parse was:
+ERROR: No recipes available for:
+  /oe-core/sources/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend
+ERROR: Command execution failed: Exited with 1
 
-Thanks
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../xorg-lib/libxcursor_1.1.12.bbappend            |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend
+
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend
+deleted file mode 100644
+index d3267ac..0000000
+--- a/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.12.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-BBCLASSEXTEND = "native"
+-- 
+1.7.6.5
+
 
 
