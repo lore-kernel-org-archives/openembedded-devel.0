@@ -1,36 +1,35 @@
-Received: from mail-qc0-f175.google.com ([209.85.216.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SIpT5-000860-8A
+	(envelope-from <koen@dominion.thruhere.net>) id 1SJ3oX-0003wK-PS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Apr 2012 00:59:51 +0200
-Received: by qcso7 with SMTP id o7so2277879qcs.6
+	Sat, 14 Apr 2012 16:18:57 +0200
+Received: by wera1 with SMTP id a1so2502891wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2012 15:50:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=wk6xhtr+7bYyyd3p1hIRtgMn29YDsoYCUk4GV5lwfgw=;
-	b=hRu7GgZJXW/4cihUTfH2oooW1es7WjO/2ZV9VBRuaWgST1R+GR4KL2gcmsab1CB7Hh
-	iLE8QmDopt1FhGfuoj/6bDlVjqtEkVLNOi5r/W9FqKuxOa98rgLxXsUzRPbI7s84+scT
-	ws/n0hslKRqtO2iN0nSXyTVEOxImqjco5f6O46s5LceNKmqEvXOs/WpTG7cttP+RgUeu
-	EsVwS+lrVHtRDw+l+jyYR57nUOEBYiGKy7oB8CvzSAFiyESiU0mBtLl6b4HfIkeUCfNK
-	ID+BE67nlnJ9CkxAcIMF8tyNrpcm9j4jv9kw7ELZeeXtm7LRWHREFExO3diKJniotZqf
-	3Big==
-Received: by 10.229.135.211 with SMTP id o19mr1395887qct.113.1334357429211;
-	Fri, 13 Apr 2012 15:50:29 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id dm8sm19938524qab.18.2012.04.13.15.50.23
-	(version=SSLv3 cipher=OTHER); Fri, 13 Apr 2012 15:50:28 -0700 (PDT)
-Message-ID: <4F88ADA3.5030804@gmail.com>
-Date: Fri, 13 Apr 2012 15:50:11 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
-MIME-Version: 1.0
+	Sat, 14 Apr 2012 07:09:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=HIxd183Q5t1W1woJIimblW6GgyO+7xeyokZ8msRByjU=;
+	b=OCtDrsc4zFyB+Rh5vqEf3akzcaWsLuNuOM6pHw9IH1MLbPu/oGjOjZYgkBaCS+AcUX
+	AvC6Zm2V9p/5WEYBhtwzkluH6mFSquSv0AIyRG9GAmqWwFYZct5DCDLAmMaBcy6/daJs
+	RTESwruD/ANXMxC+JtVW+YFRQKv7TZqD5zz8iwz1sNLcza6pgERDWIn3EJ1jzIKJ5Pop
+	y68Vk0rGrVOIRS8krWqq5ey4oaMDMHoe+e9ZnlfB90Uo4VFfFdOLadj1XU8o5ITszT1O
+	ogBmr+STyJlye4HigyVBlNS9b9WE350EZvVv+xA6nBHRG4fQWqHS840Y6zLMA1ebusET
+	HQZg==
+Received: by 10.180.102.101 with SMTP id fn5mr4453567wib.6.1334412575239;
+	Sat, 14 Apr 2012 07:09:35 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id e6sm4655896wix.8.2012.04.14.07.09.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 14 Apr 2012 07:09:34 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4F88ACCE.1030202@gmail.com>
-In-Reply-To: <4F88ACCE.1030202@gmail.com>
-Subject: Re: ld segfault cant figure it out
+Date: Sat, 14 Apr 2012 16:09:32 +0200
+Message-Id: <1334412572-19597-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQk/xHTAjyB8k5vM3av4DfYG85z2hnLFHAP3n7bXYn24qQh0UlDhS/536jxwIR+xHKAnoAou
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe] systemd: create empty machine-id to fix first boot failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,47 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2012 22:59:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 14 Apr 2012 14:18:57 -0000
 
-On 04/13/2012 03:46 PM, j wrote:
-> There seems to be a couple of packages when I build that cause ld 
-> segfaults such as
-> [ 6635.846581] ld[14419]: segfault at 8 ip 0077f1bf sp bfbf4a8c error 
-> 4 in libc-2.13.so[73d000+15c000]
-> [ 6656.831878] ld[20772]: segfault at 8 ip 00ba61bf sp bfaf1bfc error 
-> 4 in libc-2.13.so[b64000+15c000]
->
-> I can not seem to be able to track down the package/packages that are 
-> causing this. I have tried with a clean build dir and only building 
-> nano and I get it so it is something in the getting environment ready 
-> steps. Is there a way I can easily track down the build/builds that 
-> are causing this? Am I even on the right track in this thinking? 
-> Nothing fails to build and other than task-native-sdk all result in 
-> what seem to be working packages.
->
-> Any info on what or how to figure it out would be greatly appreciated.
-> building for bbxm on 11.04(uptodate), build environment setup with 
-> Angstrom scripts and all is up to date.
->
-> Thank you
-Sorry forgot the info from qa.log
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-core/systemd/systemd_git.bb |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc.a'
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcov.a'
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc_eh.a'
-bash-4.2: bash: Found a reference to /usr/ in 
-/home/beagle/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/bash-4.2-r2/packages-split/bash/bin/bashbug
-bash-4.2: Shell scripts in base_bindir and base_sbindir should not 
-reference anything in exec_prefix
+diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
+index b23e5f5..f4ca72a 100644
+--- a/meta-oe/recipes-core/systemd/systemd_git.bb
++++ b/meta-oe/recipes-core/systemd/systemd_git.bb
+@@ -14,7 +14,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r26"
++PR = "r27"
+ 
+ inherit useradd pkgconfig autotools vala perlnative
+ 
+@@ -64,6 +64,10 @@ do_install() {
+ 
+ 	# create dir for journal
+ 	install -d ${D}${localstatedir}/log/journal
++
++	# create machine-id
++	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
++	touch ${D}${sysconfdir}/machine-id
+ }
+ 
+ python populate_packages_prepend (){
+-- 
+1.7.2.5
 
-Any other places to check, as these I do not think relate to a segfault?
 
 
