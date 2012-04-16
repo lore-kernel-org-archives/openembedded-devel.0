@@ -1,28 +1,28 @@
 Received: from mail-qc0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SJucU-0007Nj-Kp
+	(envelope-from <vwyodapink@gmail.com>) id 1SJueO-0007Vg-Cf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2012 00:42:02 +0200
-Received: by qcso7 with SMTP id o7so3504866qcs.6
+	Tue, 17 Apr 2012 00:44:00 +0200
+Received: by qcso7 with SMTP id o7so3505662qcs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2012 15:32:37 -0700 (PDT)
+	Mon, 16 Apr 2012 15:34:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=ryC7qCX4HeyPHZ3vyL4iAnAf4iu2gpJhhaEztBlFQ4A=;
-	b=UJvjhVnmKK1PazKy3om6PqK6Tm1cEKZi8pCpjejufdUWg4DGuIK8C7vCz/POA9OMFh
-	qp0k19BL00sg28zCk3LTyg84GQfn21hQ1TtWygCsfAiZsfFj3syfJ5kAruxzKMxDztNs
-	IVK/3CpSJRoW990ih5g7ParuSKWUwmfcWbws7dRLNSAPQ+Ge0fWuoJRLHhv5mlkSDpuo
-	ERQs+Ggw4yrxDt2EMMNY3/Uyx5MSDnCcbdX/rtDmx/xO8ZiDoVxWFWK7nykCJxCKZq8V
-	iHy76S3tJFnNpPXAJN3dYCn93GLpvi3c0nx5KxtVxTQ3kTwPbTlZZK812RzK8OCvvou4
-	4fyA==
-Received: by 10.229.78.134 with SMTP id l6mr5355971qck.55.1334615556984;
-	Mon, 16 Apr 2012 15:32:36 -0700 (PDT)
+	bh=L7oMUXNf0bmXyYLUkSiAmFWKT3Pmy5R83ktohoXJNFg=;
+	b=lSOH5V+jotyyZ2wQE3Ba02ZjD1HekbVkQSSpxjNPd0wWE2ta2uJp+357wt2LvopqYF
+	gdQleIdxrdDlOiOYR+2H8oMPg/ow3zdbXTyDUY8QeksUljnhm0Cs7jS+Z4CThkWbOX0b
+	wtrezU+A8SEAKZFkSByE4DY2g9Two1PpboTPH4ipt/zU1fbfjlbVlA8TW3bsw1ea+6Y+
+	8LqCwkjCiY4Ez70F7ED324GpEx2PmEXFB4HqlxURk9HKtm2CPApgHZs2S7UAibY49SM4
+	EVeWGPAn7XmGHMgvu8lc3F70QInIxSgcaFDOe13szJCJP7VKg5/xIZAB4rlObCZ7iGwY
+	M5Iw==
+Received: by 10.224.31.204 with SMTP id z12mr17611066qac.89.1334615674709;
+	Mon, 16 Apr 2012 15:34:34 -0700 (PDT)
 Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id gy2sm36684037qab.10.2012.04.16.15.32.30
-	(version=SSLv3 cipher=OTHER); Mon, 16 Apr 2012 15:32:36 -0700 (PDT)
-Message-ID: <4F8C9DEE.7010904@gmail.com>
-Date: Mon, 16 Apr 2012 15:32:14 -0700
+	by mx.google.com with ESMTPS id y13sm33133698qac.14.2012.04.16.15.34.28
+	(version=SSLv3 cipher=OTHER); Mon, 16 Apr 2012 15:34:34 -0700 (PDT)
+Message-ID: <4F8C9E68.9050106@gmail.com>
+Date: Mon, 16 Apr 2012 15:34:16 -0700
 From: j <vwyodapink@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
@@ -45,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 22:42:02 -0000
+X-List-Received-Date: Mon, 16 Apr 2012 22:44:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -144,15 +144,7 @@ On 04/16/2012 03:28 PM, Gary Thomas wrote:
 > this is all on the same hardware?   Have you tried a different build
 > host (i.e. hardware/box)?
 >
-sadly the only other hardware I have is to old to try a build on. Would 
-take me weeks to get a complete image.
-
-So this could be a hardware problem on my end? If so any chance you know 
-what I could search for in logs or anything like that to try and track 
-down what on the hardware side is causing it?
-
-Thanks a bunch for your reply though is not something I took in to 
-account, reason being is I can build the gumstix overo chain (oe-classic 
-I believe it is) on the same hardware with out running into this issue.
+Also it seems to happen around when bitbake starts building gcc-4.5 from 
+a fresh install that is why I posted the QA info about it.
 
 
