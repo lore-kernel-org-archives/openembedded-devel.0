@@ -1,26 +1,23 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SJ5kQ-0005mq-NT
+	(envelope-from <Kai.Kang@windriver.com>) id 1SJcJg-0002fF-UN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Apr 2012 18:22:51 +0200
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M2H000GY91O29D6@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	14 Apr 2012 11:13:01 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7D97F2016B; Sat,
-	14 Apr 2012 12:13:00 -0400 (EDT)
-Date: Sat, 14 Apr 2012 12:13:00 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20120414161300.GB24515@denix.org>
-References: <1334412572-19597-1-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1334412572-19597-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe] systemd: create empty machine-id to fix first boot failures
+	Mon, 16 Apr 2012 05:09:25 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q3G2KtmV014329
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 15 Apr 2012 19:20:55 -0700 (PDT)
+Received: from localhost.localdomain (128.224.162.202) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.1.255.0; Sun, 15 Apr 2012 19:20:55 -0700
+From: Kang Kai <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Apr 2012 10:20:30 +0800
+Message-ID: <1334542833-27552-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.7.5.4
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.202]
+Subject: [meta-kde] enable kdelib4-native to build makekdewidgets.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,50 +31,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Apr 2012 16:22:51 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 16 Apr 2012 03:09:25 -0000
+Content-Type: text/plain
 
-On Sat, Apr 14, 2012 at 04:09:32PM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Hi All,
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
+The original kdelibs4-native recipe is from Samuel Stirtzel, and I update qt4
+to enable kdelib4-native to build makekdewidgets.
 
-> ---
->  meta-oe/recipes-core/systemd/systemd_git.bb |    6 +++++-
->  1 files changed, 5 insertions(+), 1 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-> index b23e5f5..f4ca72a 100644
-> --- a/meta-oe/recipes-core/systemd/systemd_git.bb
-> +++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-> @@ -14,7 +14,7 @@ inherit gitpkgv
->  PKGV = "v${GITPKGVTAG}"
->  
->  PV = "git"
-> -PR = "r26"
-> +PR = "r27"
->  
->  inherit useradd pkgconfig autotools vala perlnative
->  
-> @@ -64,6 +64,10 @@ do_install() {
->  
->  	# create dir for journal
->  	install -d ${D}${localstatedir}/log/journal
-> +
-> +	# create machine-id
-> +	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
-> +	touch ${D}${sysconfdir}/machine-id
->  }
->  
->  python populate_packages_prepend (){
-> -- 
-> 1.7.2.5
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,
+Kai
+
 
 
