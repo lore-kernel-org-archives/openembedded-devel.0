@@ -1,37 +1,29 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SJiVh-0000o0-7a
+	(envelope-from <andrea.adami@gmail.com>) id 1SJiuX-0001s5-QP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Apr 2012 11:46:13 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hj13so7339715wib.6
+	Mon, 16 Apr 2012 12:11:54 +0200
+Received: by pbcum15 with SMTP id um15so5192997pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2012 02:36:50 -0700 (PDT)
+	Mon, 16 Apr 2012 03:02:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=5ZP1+6AugTbeboJHt/GiUKziG//oUsjaUmT9VFyltDs=;
-	b=eha36QoHhtdzKTgT+EHMegV5oO0yOdVVU38MVcQCzqwQzs9twSAxKVa3DCYjE6VihF
-	LMRcS2RhBgZ837sSC3tS01cNrWZKb+D2B2ukWrA/8xnkbEB95kBZ2HKgUC1Kj/TWgC7Z
-	uetc10iljMiwGS1H8zYYJ6AoJjhtb5esKHtQ8XmZbINLNbWBtFbLVGvCuaZjKeuAWw62
-	Mb8r1L13p//EH0i5dJ/Ycg0fRqYMviZ2JLzEZMw9lGXn4QznfMjlge/Wp7KE/AtQQ+VZ
-	NQrsuiDf+fMq8wDsoIv2ADPyCZWxfebWnVAamNnul114HlBlMtDqIBkfyDnbEKoh3UiA
-	KXhw==
-Received: by 10.180.82.132 with SMTP id i4mr9380182wiy.12.1334569010715;
-	Mon, 16 Apr 2012 02:36:50 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n20sm29864546wiw.5.2012.04.16.02.36.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Apr 2012 02:36:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=WoCXP0RCzBaWSoGA75OO1EkE+SwzXddKW8LM3qZR6cE=;
+	b=LRB+cKitVQN01kE1xGlyPevcuXLq+j4S1iOJmnF58f3ipqFsL8/jlUI7Kb53SlJegF
+	jRRSFIqpJ9dpZ4JfLTKBGvIfIPuu3mg734/m99KkFoCo8P+4VdAy0+WO8ivX56iRJwyZ
+	iTkbMaAxPSsyPesyz5PaT3MZN+iG9z5PJ2g+aqMduOE9l7ruq2bTvFEr1Y30R3MIpicB
+	F5CaLJE3Uw8p5fD6cIQ0HLoCPFiW37gkBy6nCSPahXUZNkfi7GNoYLNP1B0qaJ880eh8
+	Bfxcm7u4To4K2HwqforpyWM9+I8T2MfO2maXAWwJ5Xbu2FH0sgUcRTei5caqKe7HJRCe
+	9v9g==
+MIME-Version: 1.0
+Received: by 10.68.220.134 with SMTP id pw6mr26544647pbc.149.1334570548106;
+	Mon, 16 Apr 2012 03:02:28 -0700 (PDT)
+Received: by 10.142.180.4 with HTTP; Mon, 16 Apr 2012 03:02:28 -0700 (PDT)
+Date: Mon, 16 Apr 2012 12:02:28 +0200
+Message-ID: <CAAQYJAu+Go+CMGauY7CJWrrOj8Ec9yCEPO=JJyGrkde1PkhE4g@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Apr 2012 11:36:28 +0200
-Message-Id: <b71bfc587af9ec4db178f900457e0de8cef418ba.1334568930.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.5
-In-Reply-To: <62de43c3c2201f1dc73e7c4c9eb6aba0c131d1b4.1334568930.git.Martin.Jansa@gmail.com>
-References: <62de43c3c2201f1dc73e7c4c9eb6aba0c131d1b4.1334568930.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1334568930.git.Martin.Jansa@gmail.com>
-References: <cover.1334568930.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 3/3] lighttpd: lastest oe-core installs lighttpd.conf directly to /etc/
+Subject: [meta-handheld] Linux yocto & linux-yocto-tiny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,45 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 09:46:13 -0000
+X-List-Received-Date: Mon, 16 Apr 2012 10:11:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Radek Dostal <rd@radekdostal.com>
+Hi,
+with the help of Bruce Ashfield I've reworked the recipes which are
+now tested and stable enough to be committed.
 
-Signed-off-by: Radek Dostal <rd@radekdostal.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../lighttpd/lighttpd/lighttpd.service             |    2 +-
- .../lighttpd/lighttpd_1.4.30.bbappend              |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+https://github.com/andrea-adami/meta-handheld
 
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service b/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service
-index 18b752f..f4564f3 100644
---- a/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service
-+++ b/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service
-@@ -5,7 +5,7 @@ After=syslog.target
- [Service]
- Type=oneshot
- EnvironmentFile=-/etc/sysconfig/lighttpd
--ExecStart=/usr/sbin/lighttpd -D -f /etc/lighttpd/lighttpd.conf
-+ExecStart=/usr/sbin/lighttpd -D -f /etc/lighttpd.conf
- RemainAfterExit=yes
- 
- [Install]
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-index 5449b1a..1341405 100644
---- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-+++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-@@ -1,6 +1,6 @@
- FILESEXTRAPATHS := "${THISDIR}/${PN}"
-- 
--PRINC = "2"
-+
-+PRINC := "${@int(PRINC) + 3}"
- 
- inherit systemd
- 
--- 
-1.7.8.5
+I've tested the build and the kernels on three Zaurus machines
+switching the PREFERRED_PROVIDER_virtual/kernel to linux-yocto and
+linux-yocto-tiny.
+The recipe can be extended and support other out-of-yocto-tree
+devices, initially reusing the kernel defconfig of the linux recipes.
+Cleaning and polishing the machine.cfg can be done in a second pass.
 
+Please test and add your comments.
+
+Thanks
+
+Andrea
 
 
