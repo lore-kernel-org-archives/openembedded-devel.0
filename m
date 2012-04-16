@@ -1,25 +1,28 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Kai.Kang@windriver.com>) id 1SJcmi-00033n-JE
+	(envelope-from <Kai.Kang@windriver.com>) id 1SJdw9-0007wF-VC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Apr 2012 05:39:24 +0200
+	Mon, 16 Apr 2012 06:53:14 +0200
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id q3G2Kxh6001776
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q3G4hkF1015200
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 15 Apr 2012 19:20:59 -0700 (PDT)
-Received: from localhost.localdomain (128.224.162.202) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.1.255.0; Sun, 15 Apr 2012 19:20:59 -0700
-From: Kang Kai <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Apr 2012 10:20:33 +0800
-Message-ID: <1334542833-27552-4-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <1334542833-27552-1-git-send-email-kai.kang@windriver.com>
-References: <1334542833-27552-1-git-send-email-kai.kang@windriver.com>
+	Sun, 15 Apr 2012 21:43:46 -0700 (PDT)
+Received: from [128.224.162.202] (128.224.162.202) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
+	Sun, 15 Apr 2012 21:43:46 -0700
+Message-ID: <4F8BA38A.9080905@windriver.com>
+Date: Mon, 16 Apr 2012 12:43:54 +0800
+From: Kang Kai <Kai.Kang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
 MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1334542833-27552-1-git-send-email-kai.kang@windriver.com>
+In-Reply-To: <1334542833-27552-1-git-send-email-kai.kang@windriver.com>
 X-Originating-IP: [128.224.162.202]
-Subject: [PATCH 3/3] kdelib4-native: build makekdewidgets
+X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
+	q3G4hkF1015200
+Subject: Re: [meta-kde] enable kdelib4-native to build makekdewidgets.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,67 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 03:39:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Apr 2012 04:53:14 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-qt4-native has been updated and open phonon and openssl support,
-makekdewidgets could be successfully build. So build it.
+On 2012=E5=B9=B404=E6=9C=8816=E6=97=A5 10:20, Kang Kai wrote:
+> Hi All,
+>
+> The original kdelibs4-native recipe is from Samuel Stirtzel, and I upda=
+te qt4
+> to enable kdelib4-native to build makekdewidgets.
+>
+> Regards,
+> Kai
+>
+Hi Samuel,
 
-Signed-off-by: Kang Kai <kai.kang@windriver.com>
----
- recipes-kde-base/kdelibs4-native_git.bb |   14 ++++++--------
- 1 files changed, 6 insertions(+), 8 deletions(-)
+I had put you email as a argument for 'git send-email', but I don't know=20
+why it didn't effect.
+Cc to you.
 
-diff --git a/recipes-kde-base/kdelibs4-native_git.bb b/recipes-kde-base/kdelibs4-native_git.bb
-index decba41..36241fa 100644
---- a/recipes-kde-base/kdelibs4-native_git.bb
-+++ b/recipes-kde-base/kdelibs4-native_git.bb
-@@ -2,18 +2,15 @@ LICENSE = "GPLv2"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
- 
--DEPENDS = "automoc4-native giflib-native attica-native perl-native"
--#strigi-native
--#soprano-native
--# jpeg-native libpng-native
--
-+DEPENDS = "automoc4-native giflib-native attica-native perl-native libdbusmenu-qt-native"
- 
- inherit kde_cmake kde_without_docs mime native perlnative
- 
--
- SRC_URI = "git://anongit.kde.org/kdelibs.git;branch=v4.8.0 \
- 	  file://0001-Don-t-build-documentation-disable-Strigi.patch \
- 	  file://0002-Fix-openssl-check.patch \
-+	  file://0003-Fix-FindKDE4Internals-cmake-file.patch \
-+	  file://0004-Fix-the-path-to-Icemaker.patch \
- 	  file://0005-Remove-docs-so-they-don-t-get-pulled-in-elsewhere.patch \
- 	  "
- 
-@@ -32,12 +29,13 @@ EXTRA_OECMAKE =+ "\
- 		  -DKJS_FORCE_DISABLE_PCRE=TRUE \
- 		  -DSTRIGI_REQUIRED=FALSE \
- 		  -DSTRIGI_INCLUDE_DIR=TRUE \
-+		  -DOE_CROSSCOMPILING=FALSE \
- 		 "
- 
- do_compile() {
-   cd ${S}/build && make -C kdecore/kconfig_compiler
-   cd ${S}/build && make -C kjs icemaker
--#  cd ${S}/build && oe_runmake CC="${CC}" CXX="${CXX}"
-+  cd ${S}/build && make -C kdewidgets makekdewidgets
- }
- 
- do_install() {
-@@ -45,5 +43,5 @@ do_install() {
- 
-   install -m 0755 ${S}/build/bin/icemaker ${D}${bindir}
-   install -m 0755 ${S}/build/bin/kconfig_compiler ${D}${bindir}
--#  install -m 0755 ${S}/build/bin/makekdewidgets ${D}${bindir}
-+  install -m 0755 ${S}/build/bin/makekdewidgets ${D}${bindir}
- }
--- 
-1.7.5.4
+Thanks,
+Kai
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
