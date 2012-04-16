@@ -1,35 +1,28 @@
-Received: from mail-qc0-f175.google.com ([209.85.216.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SJuI2-00071s-8W
+	(envelope-from <gary@mlbassoc.com>) id 1SJuYt-0007Gf-NK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2012 00:20:54 +0200
-Received: by qcso7 with SMTP id o7so3495749qcs.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2012 15:11:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=EZM/61VIrXAt6RGC4YwCKmDasxCCtVhX+Zh/g9xRAfE=;
-	b=c1V/GrJrz1vQqLcoyWow6unuOlEKFbnHXOrQuqWsLS8dVnd2rsd8VQF3KD9lgLZydg
-	8b3nKaxOjlcAAC3l9v/hvy/WvmTL6avcfMcIZqLomveVrCaKOdDs/RCj+Xof8qJTsq03
-	gb5etYPipgdLrDKGh1sXeXLjVe5eXuQuIk7p6Yx9OvN0OJSbBf0BLknTPUP+e5VWXsr6
-	+pU+bKGoPAHBgitetqAE8/b32W4KHd0NPZIMYVcq29IVFQwSPMCBrMSrqJCj7Bko49cr
-	ZH70HF6v7VOcAA7sgMVxhdKB0dWXbvo4souaAilucu0xDt0k8OCJZSFoyE8UWtLtxjPT
-	jwUQ==
-Received: by 10.224.196.131 with SMTP id eg3mr17885330qab.63.1334614288608;
-	Mon, 16 Apr 2012 15:11:28 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id gy7sm14362792qab.22.2012.04.16.15.11.23
-	(version=SSLv3 cipher=OTHER); Mon, 16 Apr 2012 15:11:27 -0700 (PDT)
-Message-ID: <4F8C9902.8020904@gmail.com>
-Date: Mon, 16 Apr 2012 15:11:14 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
+	Tue, 17 Apr 2012 00:38:20 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 2DD97F8120D; Mon, 16 Apr 2012 16:28:55 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 41544F81208;
+	Mon, 16 Apr 2012 16:28:54 -0600 (MDT)
+Message-ID: <4F8C9D26.9050500@mlbassoc.com>
+Date: Mon, 16 Apr 2012 16:28:54 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
-In-Reply-To: <4F88ADA3.5030804@gmail.com>
+	<4F8C9902.8020904@gmail.com>
+In-Reply-To: <4F8C9902.8020904@gmail.com>
 Subject: Re: [oe-core] ld segfault cant figure it out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,85 +37,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 22:20:54 -0000
+X-List-Received-Date: Mon, 16 Apr 2012 22:38:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 04/13/2012 03:50 PM, j wrote:
-> On 04/13/2012 03:46 PM, j wrote:
->> There seems to be a couple of packages when I build that cause ld 
->> segfaults such as
->> [ 6635.846581] ld[14419]: segfault at 8 ip 0077f1bf sp bfbf4a8c error 
->> 4 in libc-2.13.so[73d000+15c000]
->> [ 6656.831878] ld[20772]: segfault at 8 ip 00ba61bf sp bfaf1bfc error 
->> 4 in libc-2.13.so[b64000+15c000]
+On 2012-04-16 16:11, j wrote:
+> On 04/13/2012 03:50 PM, j wrote:
+>> On 04/13/2012 03:46 PM, j wrote:
+>>> There seems to be a couple of packages when I build that cause ld segfaults such as
+>>> [ 6635.846581] ld[14419]: segfault at 8 ip 0077f1bf sp bfbf4a8c error 4 in libc-2.13.so[73d000+15c000]
+>>> [ 6656.831878] ld[20772]: segfault at 8 ip 00ba61bf sp bfaf1bfc error 4 in libc-2.13.so[b64000+15c000]
+>>>
+>>> I can not seem to be able to track down the package/packages that are causing this. I have tried with a clean build dir and only building nano and I get it so it is something in
+>>> the getting environment ready steps. Is there a way I can easily track down the build/builds that are causing this? Am I even on the right track in this thinking? Nothing fails
+>>> to build and other than task-native-sdk all result in what seem to be working packages.
+>>>
+>>> Any info on what or how to figure it out would be greatly appreciated.
+>>> building for bbxm on 11.04(uptodate), build environment setup with Angstrom scripts and all is up to date.
+>>>
+>>> Thank you
+>> Sorry forgot the info from qa.log
 >>
->> I can not seem to be able to track down the package/packages that are 
->> causing this. I have tried with a clean build dir and only building 
->> nano and I get it so it is something in the getting environment ready 
->> steps. Is there a way I can easily track down the build/builds that 
->> are causing this? Am I even on the right track in this thinking? 
->> Nothing fails to build and other than task-native-sdk all result in 
->> what seem to be working packages.
+>> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
+>> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc.a'
+>> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
+>> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcov.a'
+>> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
+>> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc_eh.a'
+>> bash-4.2: bash: Found a reference to /usr/ in
+>> /home/beagle/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/bash-4.2-r2/packages-split/bash/bin/bashbug
+>> bash-4.2: Shell scripts in base_bindir and base_sbindir should not reference anything in exec_prefix
 >>
->> Any info on what or how to figure it out would be greatly appreciated.
->> building for bbxm on 11.04(uptodate), build environment setup with 
->> Angstrom scripts and all is up to date.
->>
->> Thank you
-> Sorry forgot the info from qa.log
+>> Any other places to check, as these I do not think relate to a segfault?
 >
-> libgcc-4.5: non -staticdev package contains static .a library: 
-> libgcc-dev path 
-> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc.a'
-> libgcc-4.5: non -staticdev package contains static .a library: 
-> libgcc-dev path 
-> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcov.a'
-> libgcc-4.5: non -staticdev package contains static .a library: 
-> libgcc-dev path 
+> I have now tried the build on 3 different OS's the most recent being Arch. All give the same QA log's and all give me segfaults. That are all basically close to the same errors
+> just differing libc versions.
+>
+> I have tried Ubuntu 10.04 11.04 Fedora 16 and now Arch. What is causing the segfaults? Is it what is in the QA log?
+>
+>
+>
+> Most current
+> [ 6433.379801] ld[22955]: segfault at 403 ip 00007f703ddcc435 sp 00007fffb0bd9f50 error 4 in libc-2.15.so[7f703dd85000+197000]
+> [ 6444.526227] ld[31806]: segfault at 403 ip 00007f0dffc51435 sp 00007fffc0a990d0 error 4 in libc-2.15.so[7f0dffc0a000+197000]
+>
+> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
 > '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc_eh.a'
-> bash-4.2: bash: Found a reference to /usr/ in 
-> /home/beagle/OE/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/bash-4.2-r2/packages-split/bash/bin/bashbug
-> bash-4.2: Shell scripts in base_bindir and base_sbindir should not 
-> reference anything in exec_prefix
+> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
+> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc.a'
+> libgcc-4.5: non -staticdev package contains static .a library: libgcc-dev path
+> '/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcov.a'
+> bash-4.2: bash: Found a reference to /usr/ in
+> /home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/bash-4.2-r2/packages-split/bash/bin/bashbug
+> bash-4.2: Shell scripts in base_bindir and base_sbindir should not reference anything in exec_prefix
 >
-> Any other places to check, as these I do not think relate to a segfault?
+>
+> The only reason I am concerned with this and it may be un related is that every time I build task-native-sdk it does not build a working sdk for my device. BB-xm. Yes I know I can
+> install one from the repo, but I want to figure out what is wrong with building one for me.
+>
+> Does anyone have input, advice something?
 
-I have now tried the build on 3 different OS's the most recent being 
-Arch. All give the same QA log's and all give me segfaults. That are all 
-basically close to the same errors just differing libc versions.
+You've tried different Operating Systems, but one would assume that
+this is all on the same hardware?   Have you tried a different build
+host (i.e. hardware/box)?
 
-I have tried Ubuntu 10.04 11.04 Fedora 16 and now Arch. What is causing 
-the segfaults? Is it what is in the QA log?
-
-
-
-Most current
-[ 6433.379801] ld[22955]: segfault at 403 ip 00007f703ddcc435 sp 
-00007fffb0bd9f50 error 4 in libc-2.15.so[7f703dd85000+197000]
-[ 6444.526227] ld[31806]: segfault at 403 ip 00007f0dffc51435 sp 
-00007fffc0a990d0 error 4 in libc-2.15.so[7f0dffc0a000+197000]
-
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc_eh.a'
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcc.a'
-libgcc-4.5: non -staticdev package contains static .a library: 
-libgcc-dev path 
-'/work/armv7a-angstrom-linux-gnueabi/libgcc-4.5-r48+svnr184907/packages-split/libgcc-dev/usr/lib/arm-angstrom-linux-gnueabi/4.5.4/libgcov.a'
-bash-4.2: bash: Found a reference to /usr/ in 
-/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/armv7a-angstrom-linux-gnueabi/bash-4.2-r2/packages-split/bash/bin/bashbug
-bash-4.2: Shell scripts in base_bindir and base_sbindir should not 
-reference anything in exec_prefix
-
-
-The only reason I am concerned with this and it may be un related is 
-that every time I build task-native-sdk it does not build a working sdk 
-for my device. BB-xm. Yes I know I can install one from the repo, but I 
-want to figure out what is wrong with building one for me.
-
-Does anyone have input, advice something?
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
