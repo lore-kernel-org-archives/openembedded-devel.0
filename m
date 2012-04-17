@@ -1,29 +1,25 @@
-Received: from smtprelay-b12.telenor.se ([62.127.194.21])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@emagii.com>) id 1SKHY2-00036H-9s
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SKHde-0003Db-IV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 01:10:58 +0200
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 827E9DF5C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2012 00:35:29 +0200 (CEST)
-X-SENDER-IP: [83.227.58.214]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsrAL3ujU9T4zrWPGdsb2JhbAANN4oopSCCDgEBAQE3gnx9NAIyJwYCAQHBcY0/gyQElW+BEZIO
-X-IronPort-AV: E=Sophos;i="4.75,438,1330902000"; d="scan'208";a="314088211"
-Received: from c-d63ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.243]) ([83.227.58.214])
-	by ipb2.telenor.se with ESMTP; 18 Apr 2012 00:35:28 +0200
-Message-ID: <4F8DF031.60109@emagii.com>
-Date: Wed, 18 Apr 2012 00:35:29 +0200
-From: Ulf Samuelsson <openembedded@emagii.com>
-Organization: eMagii
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.28) Gecko/20120313 Thunderbird/3.1.20
+	Wed, 18 Apr 2012 01:16:46 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 17 Apr 2012 16:07:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="154881177"
+Received: from unknown (HELO helios.localnet) ([10.252.120.85])
+	by fmsmga002.fm.intel.com with ESMTP; 17 Apr 2012 16:07:18 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Ulf Samuelsson <openembedded@emagii.com>
+Date: Wed, 18 Apr 2012 00:07:17 +0100
+Message-ID: <2900608.HO3vnnHahd@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.2 (Linux/3.0.0-17-generic-pae; KDE/4.8.2; i686; ; )
+In-Reply-To: <4F8DF031.60109@emagii.com>
+References: <4F8DF031.60109@emagii.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: RFC: Support for R/W git in bitbake
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: RFC: Support for R/W git in bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2012 23:10:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Apr 2012 23:16:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Today bitbake supports read only git access in recipes.
-For various reasons, I would like to be able to do recipes
-which would check out in a read/write mode.
+On Wednesday 18 April 2012 00:35:29 Ulf Samuelsson wrote:
+> Today bitbake supports read only git access in recipes.
+> For various reasons, I would like to be able to do recipes
+> which would check out in a read/write mode.
 
-I.E: have bitbake do "git clone git@emagii.com:myproject"
+Could you elaborate on "various reasons"?
 
-Did a prototype extension to bitbake that assumes the following URI
-     wgit://emagii.com/myproject
+Would the new externalsrc bbclass be useful in your case?
 
-Any objections to such an extension?
-Suggestions for an alternative implementation?
+Cheers,
+Paul
 
 -- 
-Best Regards
-Ulf Samuelsson
-ulf@emagii.com
 
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
