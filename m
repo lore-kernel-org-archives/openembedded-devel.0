@@ -1,32 +1,32 @@
 Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SKB8z-0003cj-IP
+	(envelope-from <vwyodapink@gmail.com>) id 1SKBBW-0003kN-W2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Apr 2012 18:20:42 +0200
-Received: by vcbfl13 with SMTP id fl13so4765445vcb.6
+	Tue, 17 Apr 2012 18:23:19 +0200
+Received: by vcbfl13 with SMTP id fl13so4767586vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2012 09:11:15 -0700 (PDT)
+	Tue, 17 Apr 2012 09:13:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=piF/oqsj89lWxLVdJWPFrLBUdF47LilMPtCRg3M3Q5A=;
-	b=NzdHdC+44sZMoallBFsvsSoLWf19me6IfNoUPyKS11dlpvySVnanCgJ2v+JtD4GPhn
-	EnZENAmxGNxgJDzVHYWG8gnw1BNHsgd3HdouCn0A4WZ0104qJYAcZaaINm9XCFngkynI
-	83kt0B3+Zav3c/GXm/cJWupw/+0+Ewuk4IiESyHUbtDUFB/kwQ3WkyYS+eQMjZQmasUK
-	o0K9kyz6g3m9SZbaoKZ+bt7tbuLkHiisxz1Fh4yLLRGsXgDG5g4JVH02jSK43PE4DMZI
-	jCtr1Qc8OAvi/079jOKfasfMTyEim4Mu/CY1wPmi1fPxjbri7ERT74afiT1EVMZwdGej
-	cfIA==
+	:content-type; bh=AERI6nXoSoW+Dx/YIWT6Mkq8gUanQB40o2mwwD3QFDw=;
+	b=ejhrabOCABTYQRp+cFOQy2Pik8nByxliI5vMrsunye93k0wKrEuEZW4TRPtIUAhgsf
+	vUCTces19A4zg57utESlNEkzya7XgUu0EGxdy42MKIgrfUKiW/RQVfX43Ti+4NEx+Glg
+	LtKPu8PKpkar2lq3CXp9XZ45EHUgkgC/wyDtdSCbpEuKg/2KHn/IZZIy7oAcfnQfPDGl
+	3c4DbzmhgyR1HBPgw8hshyR6zcR4YxPtuZvKmNoy7GvyGbFwPnhVoUix8GwCW93Q7Ova
+	yNNSXDwjx+UK2rNtnBoMOAgFPSrnnbSoPKRcEJaCZUVBJRMgSk0lUVcKDqdDLKvln6PE
+	uW5A==
 MIME-Version: 1.0
-Received: by 10.52.95.42 with SMTP id dh10mr6869456vdb.37.1334679074893; Tue,
-	17 Apr 2012 09:11:14 -0700 (PDT)
-Received: by 10.220.151.209 with HTTP; Tue, 17 Apr 2012 09:11:14 -0700 (PDT)
+Received: by 10.220.150.208 with SMTP id z16mr1439417vcv.57.1334679232146;
+	Tue, 17 Apr 2012 09:13:52 -0700 (PDT)
+Received: by 10.220.151.209 with HTTP; Tue, 17 Apr 2012 09:13:52 -0700 (PDT)
 In-Reply-To: <4F8D9245.3080908@mlbassoc.com>
 References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
 	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
 	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
 	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
 	<4F8D9245.3080908@mlbassoc.com>
-Date: Tue, 17 Apr 2012 09:11:14 -0700
-Message-ID: <CAHJAAqf=x2aArhBCAHF+yW=ge5-ZtqDH8031fc70L06qcV8FsA@mail.gmail.com>
+Date: Tue, 17 Apr 2012 09:13:52 -0700
+Message-ID: <CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
 From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
@@ -44,46 +44,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2012 16:20:42 -0000
+X-List-Received-Date: Tue, 17 Apr 2012 16:23:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-OS - Arch Linux i686 fully up to date, Kernel's tried 3.3.1 3.0.27
+I forgot to note angstrom version being used
+DISTRO   = "angstrom-2010.x"
 
-Build machines: 1. Toshiba qosmio x505-887 laptop
-2. Dell XPS tower
-I can give exact hardware specs if needed.
-
-Setup how Angstrom site says to for their build environment setup secripts.
-Packages installed are all on OE and your distro plus I was also missing
-cpio.
-
-OE Build Configuration:
-BB_VERSION        = "1.15.1"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "beagleboard"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v2012.04-core"
-TUNE_FEATURES     = "armv7a vfp neon cortexa8"
-TARGET_FPU        = "vfp-neon"
-
-Once the environment is setup, I source my environment file then I just run
-bitbake perl
-or
-bitbake virtual/kernel
-
-both give the segfaults. It appears the segfaults happen during teh build
-tools setup. Right around when bitbake pulls gcc into the line up to start
-building.
-
-That is all I have done each time.
-
-If there is more info you need please let me know and I will gladly reply
-with it.
-
-I thank you emensly for your continued help with this Gary!!
-
-JL
 
 On Tue, Apr 17, 2012 at 8:54 AM, Gary Thomas <gary@mlbassoc.com> wrote:
 
