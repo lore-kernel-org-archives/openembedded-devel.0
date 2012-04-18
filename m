@@ -1,22 +1,30 @@
-Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
-	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <johan.hovold@lundinova.se>) id 1SKTfV-0000W5-HM
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SKVOG-00028B-QV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 14:07:29 +0200
-Received: from pi (unknown [10.240.22.136])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailhost.lundinova.se (Postfix) with ESMTP id 91F65E826A;
-	Wed, 18 Apr 2012 13:28:38 +0200 (CEST)
-Received: from johan by pi with local (Exim 4.77) (envelope-from <johan@pi>)
-	id 1SKT3u-00061F-Gw; Wed, 18 Apr 2012 13:28:38 +0200
-From: Johan Hovold <johan.hovold@lundinova.se>
+	Wed, 18 Apr 2012 15:57:48 +0200
+Received: by yhjj56 with SMTP id j56so3688383yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Apr 2012 06:48:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=4gY5I/2Zh2k8K/FjcXIi9dSx2OpUM+z+r/F4PKlErHU=;
+	b=YV56jKZdS5fZoBlugrXGUllfVaA2p4uRo7H6w/A7Ww3NEPTT9nYHoGfda6ZKt3U3Gz
+	iKGlnOYfpaQNxwHKvRmj3mQercg8A1VTZgbC6k8rvlkwn2nJDtO3TEqx49UDPVhYm6vE
+	WsFlJlktjEFnpNWwNBVizC7O5p4dPwkZwz8etEOhHRUrPipKuyNvWqp0opUpD4mJcNDR
+	svUclMxgBP8fVaD4gKZYxYrxyfLEu4X2GAj1rGBiiElukPreNyhm5TvH1bansvlEKCQO
+	rRJ7iZf2gmOVVSHjvhr0Hjtq4/DPyLlzhY06yECohLyddvMRYKP37iCeyHuYGWlv0/b5
+	yw+A==
+MIME-Version: 1.0
+Received: by 10.50.163.71 with SMTP id yg7mr1999191igb.32.1334756900866; Wed,
+	18 Apr 2012 06:48:20 -0700 (PDT)
+Received: by 10.231.67.134 with HTTP; Wed, 18 Apr 2012 06:48:20 -0700 (PDT)
+Date: Wed, 18 Apr 2012 15:48:20 +0200
+Message-ID: <CAOHjBZu=T6TrSomYSOW+Sp5afFwHTu5f4zGKx-3T361gdrJdmg@mail.gmail.com>
+From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Apr 2012 13:27:01 +0200
-Message-Id: <1334748421-22883-1-git-send-email-johan.hovold@lundinova.se>
-X-Mailer: git-send-email 1.7.8.5
-Sender: <johan.hovold@lundinova.se>
-Subject: [meta-oe][PATCH] gpsd: fix gpsd init script
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [oe-core] build for 32bit architecture
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,77 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 12:07:29 -0000
+X-List-Received-Date: Wed, 18 Apr 2012 13:57:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Replace return with exit where appropriate.
+Hi All,
 
-Current init script uses return outside of functions resulting in
-warnings such as the following when using bash as interpreter:
+I need to build the native packages for a 32bit architecture, although I'm
+working on a 64bit machine.
+So I need to pass the -m32 option to the compiler and my question is about
+the right place where to put it
+to be inherited by all native packages.
 
-/etc/init.d/gpsd: line 98: return: can only `return' from a function or sourced script
-
-Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
----
- meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd |   10 +++++-----
- meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb   |    2 +-
- 2 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
-index 3687d24..ba73daf 100755
---- a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
-@@ -95,19 +95,19 @@ case "$1" in
-   start)
- 		echo "Starting $DESC" "$NAME"
- 		do_start
--		return $?
-+		exit $?
- 	;;
-   stop)
- 	echo "Stopping $DESC" "$NAME"
- 	do_stop
--	return $?
-+	exit $?
- 	;;
-   status)
-        ;;
-   reload|force-reload)
- 	echo "Reloading $DESC" "$NAME"
- 	do_reload
--	return $?
-+	exit $?
- 	;;
-   restart)
- 	#
-@@ -119,11 +119,11 @@ case "$1" in
- 	case "$?" in
- 	  0|1)
- 		do_start
--		return $?
-+		exit $?
- 		;;
- 	  *)
- 	 	# Failed to stop
--		return 1
-+		exit 1
- 		;;
- 	esac
- 	;;
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-index 927107a..7e2a96c 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
--PR = "r2"
-+PR = "r3"
- 
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
--- 
-1.7.8.5
-
-
+Please let me know, best regards.
+Giuseppe
 
