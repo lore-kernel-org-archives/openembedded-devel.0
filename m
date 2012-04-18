@@ -1,30 +1,28 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SKVOG-00028B-QV
+	(envelope-from <gary@mlbassoc.com>) id 1SKVjJ-0002hS-A9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 15:57:48 +0200
-Received: by yhjj56 with SMTP id j56so3688383yhj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2012 06:48:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=4gY5I/2Zh2k8K/FjcXIi9dSx2OpUM+z+r/F4PKlErHU=;
-	b=YV56jKZdS5fZoBlugrXGUllfVaA2p4uRo7H6w/A7Ww3NEPTT9nYHoGfda6ZKt3U3Gz
-	iKGlnOYfpaQNxwHKvRmj3mQercg8A1VTZgbC6k8rvlkwn2nJDtO3TEqx49UDPVhYm6vE
-	WsFlJlktjEFnpNWwNBVizC7O5p4dPwkZwz8etEOhHRUrPipKuyNvWqp0opUpD4mJcNDR
-	svUclMxgBP8fVaD4gKZYxYrxyfLEu4X2GAj1rGBiiElukPreNyhm5TvH1bansvlEKCQO
-	rRJ7iZf2gmOVVSHjvhr0Hjtq4/DPyLlzhY06yECohLyddvMRYKP37iCeyHuYGWlv0/b5
-	yw+A==
+	Wed, 18 Apr 2012 16:19:33 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id B96B2F81240; Wed, 18 Apr 2012 08:10:06 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id B077FF8123C;
+	Wed, 18 Apr 2012 08:10:05 -0600 (MDT)
+Message-ID: <4F8ECB3D.7040200@mlbassoc.com>
+Date: Wed, 18 Apr 2012 08:10:05 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
 MIME-Version: 1.0
-Received: by 10.50.163.71 with SMTP id yg7mr1999191igb.32.1334756900866; Wed,
-	18 Apr 2012 06:48:20 -0700 (PDT)
-Received: by 10.231.67.134 with HTTP; Wed, 18 Apr 2012 06:48:20 -0700 (PDT)
-Date: Wed, 18 Apr 2012 15:48:20 +0200
-Message-ID: <CAOHjBZu=T6TrSomYSOW+Sp5afFwHTu5f4zGKx-3T361gdrJdmg@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [oe-core] build for 32bit architecture
+References: <CAOHjBZu=T6TrSomYSOW+Sp5afFwHTu5f4zGKx-3T361gdrJdmg@mail.gmail.com>
+In-Reply-To: <CAOHjBZu=T6TrSomYSOW+Sp5afFwHTu5f4zGKx-3T361gdrJdmg@mail.gmail.com>
+Subject: Re: [oe-core] build for 32bit architecture
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 13:57:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 18 Apr 2012 14:19:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 2012-04-18 07:48, Giuseppe Condorelli wrote:
+> Hi All,
+>
+> I need to build the native packages for a 32bit architecture, although I'm
+> working on a 64bit machine.
+> So I need to pass the -m32 option to the compiler and my question is about
+> the right place where to put it
+> to be inherited by all native packages.
 
-I need to build the native packages for a 32bit architecture, although I'm
-working on a 64bit machine.
-So I need to pass the -m32 option to the compiler and my question is about
-the right place where to put it
-to be inherited by all native packages.
+Why would you need 32bit native packages when your build host is 64bit?
+The native packages are only used to provide functionality during the
+build and hence (it makes sense to me at least) they should match the
+build host native environment.
 
-Please let me know, best regards.
-Giuseppe
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
+
 
