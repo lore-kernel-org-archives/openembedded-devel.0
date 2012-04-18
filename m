@@ -1,35 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1SKRLm-0001ix-Sd; Wed, 18 Apr 2012 11:38:58 +0200
-Received: by wgbdr12 with SMTP id dr12so6051084wgb.24
-	for <multiple recipients>; Wed, 18 Apr 2012 02:29:32 -0700 (PDT)
+	(envelope-from <aguirre.nicolas@gmail.com>) id 1SKSIM-0004v6-Qq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Apr 2012 12:39:31 +0200
+Received: by pbcum15 with SMTP id um15so7457304pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Apr 2012 03:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=h8xOpqs4hPThkGA8z2/gkZGZTWssqo4X2r4j5CpPNxM=;
-	b=cRVw1Ly7+8stQbLjXRFCvf4aPZE8rNNM75qxTgoqAs5va6laiU7+749iuWxEL0NV1g
-	/BwgwGGBWoZcz5tL99Ef4em9TOA1rQmz7DMD8ZkKWwi7sWqloENhxwdrT8WsFt8OCk1A
-	UfSyRamfGL4LXdLvaeC5IJa536q06pkry+npBZr8ldL7E6+g5mxsiz9h6/xJVTdpMSeY
-	VFO+oY247OruW+XokBfnl9iwuj9LbZ/Rwm2MUHUiAHF35gylsiVyM6jeib3mKpufCvi7
-	Z9kilSI21PFGSlbmGLYLpFbPSiM6/aYb30tK27P0m+gwN+AEUz1TmHvqVKm5b+i1NfO/
-	wBpQ==
-Received: by 10.180.104.231 with SMTP id gh7mr4455820wib.10.1334741370783;
-	Wed, 18 Apr 2012 02:29:30 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ca3sm33297342wib.6.2012.04.18.02.29.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 Apr 2012 02:29:30 -0700 (PDT)
-Date: Wed, 18 Apr 2012 11:29:30 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120418092930.GF3635@jama.jama.net>
-References: <20120418085611.C6AA710216@opal>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=rvR2wDLjG32mFG/swQQ8+I4t2Ti9P8TRlWkZlIjYmFw=;
+	b=EP3+55S2Xk4lWni2qnWsI2QeJLzE6sorHGaqJNPUYjqwP8IjhvBn69X0ck4sWLMHRR
+	TKw0L+B3xv6GUa3CtwjrTpGWi3sr+xmtAgYgFExdUeg4p+EckvyLz+lt7KDCnPlXxHeT
+	gwzK790t9wTYQLGvmhT87f7nzmA5C/c346leQ7wFCbJBm5/ZHgO2g8TnvHAuZy7AVFAD
+	bKrN5wpHmGc71Wi1pcvW+Fo1XmAiXWwRIvxuCGOlB4yLJW71unyGwIwaiXTm+V+97V8S
+	3edwL30IJ4en3qgP5AcrORAb98R9cM8wz+p4EHNGtS6UbHEtHP+OXcxoXcxE/ciNOkDJ
+	ITfQ==
+Received: by 10.68.231.233 with SMTP id tj9mr5650057pbc.49.1334745001746; Wed,
+	18 Apr 2012 03:30:01 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20120418085611.C6AA710216@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : gateone: silence systemd bbclass WARNING, ${PN}-systemd is unwanted
+Received: by 10.68.225.232 with HTTP; Wed, 18 Apr 2012 03:29:40 -0700 (PDT)
+In-Reply-To: <4F871E0E.7080500@windriver.com>
+References: <CAHTvVMen9K_AGfn8O7GMgKvY0XZ-oiDg3oOmSz_sBK6GSGChtQ@mail.gmail.com>
+	<4F871E0E.7080500@windriver.com>
+From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
+Date: Wed, 18 Apr 2012 10:29:40 +0000
+Message-ID: <CAHTvVMcj_ADZxYCBvvcJcsTxXxW3uupq8xvWf-p=7xnrc=_n0Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Hard floating point support for armv7a wmmx2 processor in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,82 +41,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 09:38:59 -0000
-X-Groupsio-MsgNum: 38309
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oFbHfjnMgUMsrGjO"
-Content-Disposition: inline
-
---oFbHfjnMgUMsrGjO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Apr 2012 10:39:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 18, 2012 at 08:56:10AM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: ca5e7197524efef0961bdbbe111f6dd16f1d46b4
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3Dca5e7197524efef0961bdbbe111f6dd16f1d46b4
->=20
-> Author: Koen Kooi <koen@dominion.thruhere.net>
-> Date:   Wed Apr 18 10:45:41 2012 +0200
->=20
-> gateone: silence systemd bbclass WARNING, ${PN}-systemd is unwanted
->=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->=20
-> ---
->=20
->  .../recipes-connectivity/gateone/gateone_git.bb    |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-o=
-e/recipes-connectivity/gateone/gateone_git.bb
-> index 2469f9e..983dc24 100644
-> --- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-> +++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-> @@ -24,6 +24,7 @@ do_install_append() {
->  	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avah=
-i/services/
->  }
-> =20
-> +NATIVE_SYSTEMD_SUPPORT =3D "1"
+Le 12 avril 2012 18:25, Mark Hatle <mark.hatle@windriver.com> a =E9crit :
+> On 4/12/12 12:38 PM, Nicolas Aguirre wrote:
+>>
+>> Hi,
+>>
+>> I'm building an oe-core minimal image and toolchain for the cubox[1]
+>> which has a Marvell Armada 510 SoC, also known as Dove.
+>> It's a armv7 Arm processor with wmmx2 instruction set [2].
+>>
+>> I setup a new machine for the cubox and added :
+>> require conf/machine/include/arm/arch-armv7a.inc
+>> in my cubox.conf file
+>>
+>> I also added
+>> ARM_FP_MODE =3D "hardfp"
+>> TARGET_FPU =3D "hardfp"
+>> in my local.conf file.
+>
+>
+> That is not how to enable the mode with the newer tune infrastructure. =
+=A0You
+> need to simply enable a tune, in your machine configuration, that matches
+> the desired output.
+>
+> The following are the defined VFP (hard float requires VFP) tunes for har=
+d
+> float:
+>
+> armv7ahf armv7athf armv7ahf-neon armv7athf-neon
+>
+> the "t" varients support thumb, but don't have it enabled by default..
+>
+> the -neon variants also enabled the neon instructions.
+>
+> I do not know what the "wmmx2" instructions are, if they are different fr=
+om
+> VFP and Neon, then it sounds like you need a custom tune.
+>
+> Your machine configure should set DEFAULTTUNE =3D "..." where "..." is th=
+e
+> tune you want for that given machine. =A0(armv7ahf should be a safe place=
+ to
+> start.)
+>
 
-what exactly do you mean by native support?
+Hi Mark,
 
-gateone.service is added to SRC_URI like in other systemd supporting
-recipes and packaging it in own subpackage would silence the warning=20
-it too.
+Thanks for your detailed explanation
 
-I'm fine with those changes, just wondering what's the advantage and
-"native" here.
 
-Cheers,
+I'm now able to build a minimal core image with hardfp enabled. The
+detail of the OE Build :
+TUNE_FEATURES     =3D "armv7a vfp callconvention-hard"
+TARGET_FPU        =3D "vfp"
 
->  SYSTEMD_PACKAGES =3D "${PN}"
->  SYSTEMD_SERVICE =3D "gateone.service"
-> =20
->=20
->=20
+I pushed my layer on github : https://github.com/naguirre/meta-cubox
+Nothing interesting for now and binaries have not been tested.
+
+I encountered some problems during the build, due to a bad fetch
+operation of mime-support package. I need to fetch it by hand, the
+.tar.gz was corrupted and contains an html page.
+
+Another problem i encountered, was during the build of cpufrequtils.
+And it seems that this point is related to harfp. cpufreq is linked
+against libcpufreq which are not compatible each other. I don't know
+if it's a problem in cpufreq recipe, i need to investigate more.
+
+Another problem was during the build of libvpx which seems to be not
+compatible with armv7ahf, only with armv7a.
+
+ERROR: Logfile of failure stored in:
+/home/nico/e17_src/cubox/setup-scripts/build/tmp-angstrom_2010_x-eglibc/wor=
+k/armv7ahf-vfp-angstrom-linux-gnueabi/libvpx-0.9.5-r3.0/temp/log.do_configu=
+re.9887
+Log data follows:
+| ERROR: Function failed: do_configure (see
+/home/nico/e17_src/cubox/setup-scripts/build/tmp-angstrom_2010_x-eglibc/wor=
+k/armv7ahf-vfp-angstrom-linux-gnueabi/libvpx-0.9.5-r3.0/temp/log.do_configu=
+re.9887
+for further information)
+| Configuring selected codecs
+|   enabling vp8_encoder
+|   enabling vp8_decoder
+| Configuring for target 'armv7-linux-gcc'
+|   enabling armv7
+|   enabling armv6
+|   enabling armv5te
+|   enabling fast_unaligned
+| Toolchain is unable to link executables
+|
+| Configuration failed. This could reflect a misconfiguration of your
+| toolchains, improper options selected, or another problem. If you
+| don't see any useful error messages above, the next step is to look
+| at the configure error log file (config.err) to determine what
+| configure was trying to do when it died.
+NOTE: package libvpx-0.9.5-r3.0: task do_configure: Failed
+
+I now understand why Koen said that hardfp is not compatible with anything =
+:)
+
+
+> Figure out the correct set of commands for gcc to support this processor,
+> and I can help you define a custom tune file.
+>
+
+I need to dig more about wmmx2 instructions set, to see how to enable it in=
+ gcc
+I will maybe come back with more questions :)
+
+Thanks for your time,
+Nicolas
+
+> The few references I found in a quick google search seem to indicate that
+> the core does support thumb, it should use the armv7-a compilation, and
+> there is little to no support for the wmmx2 instructions.
+>
+> --Mark
+>
+>
+>> Any help would be appreciate :)
+>>
+>> [1] http://www.solid-run.com/products/cubox
+>> [2] http://www.marvell.com/application-processors/armada-500/
+>>
+>> regards,
+>
+>
+>
 > _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Nicolas Aguirre
+Mail: aguirre.nicolas@gmail.com
+Web: http://enna.geexbox.org
+Blog: http://dev.enlightenment.fr/~captainigloo/
 
---oFbHfjnMgUMsrGjO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+OiXoACgkQN1Ujt2V2gBwNEACgk6GOdYNHgnX7i0qL8dCA+GtX
-hCcAnRD5xcoNpp3UqspdZqaA96MxHLo5
-=snk+
------END PGP SIGNATURE-----
-
---oFbHfjnMgUMsrGjO--
