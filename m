@@ -1,27 +1,34 @@
-Received: from vms173015pub.verizon.net ([206.46.173.15])
+Received: from mail-qa0-f41.google.com ([209.85.216.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SKZBF-0000Ul-1s
+	(envelope-from <autifk@gmail.com>) id 1SKZxr-0002uS-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 20:00:38 +0200
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M2O005S6S8APJ00@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	18 Apr 2012 12:50:35 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C3A9B2009A; Wed,
-	18 Apr 2012 13:50:34 -0400 (EDT)
-Date: Wed, 18 Apr 2012 13:50:34 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 18 Apr 2012 20:50:51 +0200
+Received: by qafl39 with SMTP id l39so914712qaf.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Apr 2012 11:41:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=Ch3L77Ya5+L0pZm6SMYYgLEqrTJxRN/kfp1xRPMOmWI=;
+	b=oblxGX5Wep1t72R/JVjVv0I6q2P3IJZU5j7s0gJHnJi8HYaeniE5hgAFwHiq4FVOms
+	G9tgy+DADaDFSx5B/G9oo3WDPo1NBhRBENkXWlUGQzEJdowSOfNift1wWVjS+KtR/Vlq
+	Z4Fql5d6m6hpQG2wWK3cVAG3kr2uMiOQ1X/bZE1dy6r3uAXSVU/1LJc/Bo6eWOh0Lv+C
+	uze+yrs/c60Clu1xG2Jd44TTfVMQUgiQAPNhJKqlD6DimCwj2+z1dIP/8pXrM9wpXLmy
+	2yAWA7bk/X2iQsMFpIcLf9bqeV/5JrgnW/VNdPBuZd/9CJh4bwxd3qGct7ebTXQRH5d8
+	Upqg==
+Received: by 10.224.198.70 with SMTP id en6mr5112296qab.62.1334774483275;
+	Wed, 18 Apr 2012 11:41:23 -0700 (PDT)
+Received: from localhost.localdomain
+	(static-72-93-90-226.bstnma.fios.verizon.net. [72.93.90.226])
+	by mx.google.com with ESMTPS id eg9sm47480202qab.19.2012.04.18.11.41.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 18 Apr 2012 11:41:22 -0700 (PDT)
+From: Autif Khan <autifk@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120418175034.GB6343@denix.org>
-References: <CAOHjBZu=T6TrSomYSOW+Sp5afFwHTu5f4zGKx-3T361gdrJdmg@mail.gmail.com>
-	<4F8ECB3D.7040200@mlbassoc.com>
-	<CAOHjBZudcfECWJA-7Ey3dTjEBNBFK3Zj5+tek5V3uQ_EH8P9Yw@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAOHjBZudcfECWJA-7Ey3dTjEBNBFK3Zj5+tek5V3uQ_EH8P9Yw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [oe-core] build for 32bit architecture
+Date: Wed, 18 Apr 2012 14:41:10 -0400
+Message-Id: <1334774470-20325-1-git-send-email-autifk@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Cc: Autif Khan <autifk@gmail.com>
+Subject: [PATCH 1/1] Fixed the URL for git repo for meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,36 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 18:00:41 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 18 Apr 2012 18:50:51 -0000
 
-On Wed, Apr 18, 2012 at 04:17:30PM +0200, Giuseppe Condorelli wrote:
-> 2012/4/18 Gary Thomas <gary@mlbassoc.com>
-> 
-> > On 2012-04-18 07:48, Giuseppe Condorelli wrote:
-> >
-> >> Hi All,
-> >>
-> >> I need to build the native packages for a 32bit architecture, although I'm
-> >> working on a 64bit machine.
-> >> So I need to pass the -m32 option to the compiler and my question is about
-> >> the right place where to put it
-> >> to be inherited by all native packages.
-> >>
-> >
-> > Why would you need 32bit native packages when your build host is 64bit?
-> > The native packages are only used to provide functionality during the
-> > build and hence (it makes sense to me at least) they should match the
-> > build host native environment.
 
-> I need to build cross tools at 32bit for my goal.
+Signed-off-by: Autif Khan <autifk@gmail.com>
+---
+ README |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Well, that's cross, not native, as you previously said.
-
-For what you want look at SDKMACHINE in your local.conf
-
+diff --git a/README b/README
+index 5fafd9d..9f441f5 100644
+--- a/README
++++ b/README
+@@ -10,7 +10,7 @@ URI: git://git.openembedded.org/openembedded-core
+ branch: master
+ revision: HEAD
+ 
+-URI: git://git.openembedded.net/meta-openembedded
++URI: git://git.openembedded.org/meta-openembedded
+ branch: master
+ revision: HEAD
+ 
 -- 
-Denys
+1.7.5.4
+
 
 
