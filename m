@@ -1,33 +1,22 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SKSRs-0005A6-QC
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <johan.hovold@lundinova.se>) id 1SKTfV-0000W5-HM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 12:49:20 +0200
-Received: by wgbdr12 with SMTP id dr12so6107716wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2012 03:39:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=eyn0l3WJx+lA2D9pOBQFm6Mv9CXrtuGZQ92LhoP9rPs=;
-	b=HQyjix3Vv+RFtxVFQ4MDiSHOK0mfriVHvrSuaIxCOu4j0hARr8Cy4nNIuO3ONwp3Fu
-	v4B7i03bZzwxDW4CH+OHB6LFQKrfOwIY6GASiGEkKJF7TskdM74YaF/vtul5at9P8J6b
-	/M2eJ0r5QdNIWDd3ib6Hwifc/mMDVR+9sffQ73wouZkSfe4wcVCpD8URhOOPypeJX8p9
-	Sw/u72Yx+Owbp8J3Jld4z9KrdESnkwfSVcbj7cPdisz2Hw7Gt/RnGEP0GDw0K1ohWa1K
-	+NBCfHa3PSsAptGGSN7KFycETHfy13xbxoxtFVV56FQXi0v/v8wwaaUwR6MlcpruFkUp
-	wqQw==
-Received: by 10.216.135.225 with SMTP id u75mr1041071wei.97.1334745593685;
-	Wed, 18 Apr 2012 03:39:53 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j3sm54010270wiw.1.2012.04.18.03.39.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 Apr 2012 03:39:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 18 Apr 2012 14:07:29 +0200
+Received: from pi (unknown [10.240.22.136])
+	(using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailhost.lundinova.se (Postfix) with ESMTP id 91F65E826A;
+	Wed, 18 Apr 2012 13:28:38 +0200 (CEST)
+Received: from johan by pi with local (Exim 4.77) (envelope-from <johan@pi>)
+	id 1SKT3u-00061F-Gw; Wed, 18 Apr 2012 13:28:38 +0200
+From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Apr 2012 12:39:45 +0200
-Message-Id: <1334745585-29731-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 18 Apr 2012 13:27:01 +0200
+Message-Id: <1334748421-22883-1-git-send-email-johan.hovold@lundinova.se>
 X-Mailer: git-send-email 1.7.8.5
-Cc: Luca Vaudano <vaudano@gmail.com>
-Subject: [meta-oe][PATCH] mime-support: Update to version 3.48
+Sender: <johan.hovold@lundinova.se>
+Subject: [meta-oe][PATCH] gpsd: fix gpsd init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +30,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 10:49:21 -0000
+X-List-Received-Date: Wed, 18 Apr 2012 12:07:29 -0000
 
-From: Luca Vaudano <vaudano@gmail.com>
+Replace return with exit where appropriate.
 
-Signed-off-by: Luca Vaudano <vaudano@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Current init script uses return outside of functions resulting in
+warnings such as the following when using bash as interpreter:
+
+/etc/init.d/gpsd: line 98: return: can only `return' from a function or sourced script
+
+Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
 ---
- .../{mime-support_3.44.bb => mime-support_3.48.bb} |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/mime-support/{mime-support_3.44.bb => mime-support_3.48.bb} (93%)
+ meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd |   10 +++++-----
+ meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb   |    2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.44.bb b/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-similarity index 93%
-rename from meta-oe/recipes-support/mime-support/mime-support_3.44.bb
-rename to meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-index fe84a63..f281f6d 100644
---- a/meta-oe/recipes-support/mime-support/mime-support_3.44.bb
-+++ b/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
+index 3687d24..ba73daf 100755
+--- a/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
++++ b/meta-oe/recipes-navigation/gpsd/gpsd-2.96/gpsd
+@@ -95,19 +95,19 @@ case "$1" in
+   start)
+ 		echo "Starting $DESC" "$NAME"
+ 		do_start
+-		return $?
++		exit $?
+ 	;;
+   stop)
+ 	echo "Stopping $DESC" "$NAME"
+ 	do_stop
+-	return $?
++	exit $?
+ 	;;
+   status)
+        ;;
+   reload|force-reload)
+ 	echo "Reloading $DESC" "$NAME"
+ 	do_reload
+-	return $?
++	exit $?
+ 	;;
+   restart)
+ 	#
+@@ -119,11 +119,11 @@ case "$1" in
+ 	case "$?" in
+ 	  0|1)
+ 		do_start
+-		return $?
++		exit $?
+ 		;;
+ 	  *)
+ 	 	# Failed to stop
+-		return 1
++		exit 1
+ 		;;
+ 	esac
+ 	;;
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
+index 927107a..7e2a96c 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_2.96.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+ DEPENDS = "dbus-glib ncurses python libusb1"
+ PROVIDES = "virtual/gpsd"
  
- DEPENDS = "file"
- RRECOMMENDS_${PN} = "file"
 -PR = "r2"
++PR = "r3"
  
- SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
- S = "${WORKDIR}/${PN}"
-@@ -55,5 +54,5 @@ do_install () {
- 	cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz print.1.gz
- }
- 
--SRC_URI[md5sum] = "048aa29c31f067382cd669ee20934b9e"
--SRC_URI[sha256sum] = "4f65183200955540c097b82bfb18f5d21b636ca79f47cd018a4ea8b89cd2998c"
-+SRC_URI[md5sum] = "d6e5d715e331147352c50c158dbdec6d"
-+SRC_URI[sha256sum] = "a529c7892cb786f514af71f4ca5a4c3ebc58b538a49ff959c0d97592d38f040a"
+ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
+                 --x-libraries=${STAGING_LIBDIR} \
 -- 
 1.7.8.5
 
