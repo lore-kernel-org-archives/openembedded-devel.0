@@ -1,34 +1,26 @@
-Received: from mail-qa0-f41.google.com ([209.85.216.41])
+Received: from vms173021pub.verizon.net ([206.46.173.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <autifk@gmail.com>) id 1SKZxr-0002uS-Ij
+	(envelope-from <denis@denix.org>) id 1SKaU7-0003jc-74
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 20:50:51 +0200
-Received: by qafl39 with SMTP id l39so914712qaf.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2012 11:41:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ch3L77Ya5+L0pZm6SMYYgLEqrTJxRN/kfp1xRPMOmWI=;
-	b=oblxGX5Wep1t72R/JVjVv0I6q2P3IJZU5j7s0gJHnJi8HYaeniE5hgAFwHiq4FVOms
-	G9tgy+DADaDFSx5B/G9oo3WDPo1NBhRBENkXWlUGQzEJdowSOfNift1wWVjS+KtR/Vlq
-	Z4Fql5d6m6hpQG2wWK3cVAG3kr2uMiOQ1X/bZE1dy6r3uAXSVU/1LJc/Bo6eWOh0Lv+C
-	uze+yrs/c60Clu1xG2Jd44TTfVMQUgiQAPNhJKqlD6DimCwj2+z1dIP/8pXrM9wpXLmy
-	2yAWA7bk/X2iQsMFpIcLf9bqeV/5JrgnW/VNdPBuZd/9CJh4bwxd3qGct7ebTXQRH5d8
-	Upqg==
-Received: by 10.224.198.70 with SMTP id en6mr5112296qab.62.1334774483275;
-	Wed, 18 Apr 2012 11:41:23 -0700 (PDT)
-Received: from localhost.localdomain
-	(static-72-93-90-226.bstnma.fios.verizon.net. [72.93.90.226])
-	by mx.google.com with ESMTPS id eg9sm47480202qab.19.2012.04.18.11.41.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 18 Apr 2012 11:41:22 -0700 (PDT)
-From: Autif Khan <autifk@gmail.com>
+	Wed, 18 Apr 2012 21:24:11 +0200
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M2O00CZYW4I7HL1@vms173021.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	18 Apr 2012 14:14:43 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 6050F20099; Wed,
+	18 Apr 2012 15:14:42 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Apr 2012 14:41:10 -0400
-Message-Id: <1334774470-20325-1-git-send-email-autifk@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Autif Khan <autifk@gmail.com>
-Subject: [PATCH 1/1] Fixed the URL for git repo for meta-openembedded
+Date: Wed, 18 Apr 2012 15:14:34 -0400
+Message-id: <1334776474-20923-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.7.8.5
+In-reply-to: <1334774470-20325-1-git-send-email-autifk@gmail.com>
+References: <1334774470-20325-1-git-send-email-autifk@gmail.com>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-oe] README: fix meta-efl, meta-gpe and meta-xfce to point to openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,19 +34,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 18:50:51 -0000
+X-List-Received-Date: Wed, 18 Apr 2012 19:24:11 -0000
 
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Autif Khan <autifk@gmail.com>
+Fix README files for meta-efl, meta-gpe and meta-xfce to point to the correct
+openembedded.org address instead of the outdated openembedded.net in git URIs.
+Reported by Autif Khan for one of the layers.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- README |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-efl/README  |    3 +--
+ meta-gpe/README  |    3 +--
+ meta-xfce/README |    2 +-
+ 3 files changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/README b/README
-index 5fafd9d..9f441f5 100644
---- a/README
-+++ b/README
-@@ -10,7 +10,7 @@ URI: git://git.openembedded.org/openembedded-core
+diff --git a/meta-efl/README b/meta-efl/README
+index 25be47e..41effe6 100644
+--- a/meta-efl/README
++++ b/meta-efl/README
+@@ -4,7 +4,7 @@ URI: git://git.openembedded.org/openembedded-core
+ branch: master
+ revision: HEAD
+ 
+-URI: git://git.openembedded.net/meta-openembedded
++URI: git://git.openembedded.org/meta-openembedded
+ branch: master
+ revision: HEAD
+ 
+@@ -13,4 +13,3 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-efl]
+ When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-efl'
+ 
+ Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+-
+diff --git a/meta-gpe/README b/meta-gpe/README
+index ebe0cea..d967dc1 100644
+--- a/meta-gpe/README
++++ b/meta-gpe/README
+@@ -4,11 +4,10 @@ URI: git://git.openembedded.org/openembedded-core
+ branch: master
+ revision: HEAD
+ 
+-URI: git://git.openembedded.net/meta-openembedded
++URI: git://git.openembedded.org/meta-openembedded
+ branch: master
+ revision: HEAD
+ 
+ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gpe]' in the subject'
+ 
+ Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+-
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 6e021e1..1a503c9 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -4,7 +4,7 @@ URI: git://git.openembedded.org/openembedded-core
  branch: master
  revision: HEAD
  
@@ -64,7 +98,7 @@ index 5fafd9d..9f441f5 100644
  revision: HEAD
  
 -- 
-1.7.5.4
+1.7.8.5
 
 
 
