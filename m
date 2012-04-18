@@ -1,42 +1,49 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SKd4x-0004xX-Uk
+Received: from nm9-vm0.bullet.mail.ne1.yahoo.com ([98.138.91.67])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <maniacbug@ymail.com>) id 1SKegk-0006G4-Bo
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 00:10:24 +0200
-Received: by lagw12 with SMTP id w12so5736929lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2012 15:00:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=vxSFsNhWptrqaf94qgmzBMf3u0RpNi86edqkuLk+r7k=;
-	b=nLSLrWNBqJzQcW20VCyCxmPKbIyzGpFkylrf/nQ/GljQ3zGxtiXg1ep0MZ+cLPoBK7
-	rEgpE+XR5n+04au0EXh0WopcDCOKCrBDz9TUmWPC5rMuHP9tSluPCX0TdorddQJtKJhm
-	4ZJUAfxra1btpp5kObkA4qlmqsGC79YSOgJZT1xv4hB/ByqyaoCOEe8KUpZf+NMcWKpQ
-	+3V8F9XofForlRUjvWljBuT/0Zr55A6AxWYGo+NyYSxkwns1TsRceXUsyF0jVZ0iZ5Pf
-	mD9L+KdFcs/v6KvgSic6K/LvHcTFxGIH3SjmDN4UmXbPGPXV10PDwd3nKCRvOOpUOVO1
-	PvwA==
-Received: by 10.112.103.8 with SMTP id fs8mr1909093lbb.29.1334786456097; Wed,
-	18 Apr 2012 15:00:56 -0700 (PDT)
+	Thu, 19 Apr 2012 01:53:30 +0200
+Received: from [98.138.90.49] by nm9.bullet.mail.ne1.yahoo.com with NNFMP;
+	18 Apr 2012 23:42:02 -0000
+Received: from [98.138.87.8] by tm2.bullet.mail.ne1.yahoo.com with NNFMP;
+	18 Apr 2012 23:42:02 -0000
+Received: from [127.0.0.1] by omp1008.mail.ne1.yahoo.com with NNFMP;
+	18 Apr 2012 23:42:02 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 419506.78886.bm@omp1008.mail.ne1.yahoo.com
+Received: (qmail 62584 invoked by uid 60001); 18 Apr 2012 23:42:02 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ymail.com; s=s1024;
+	t=1334792522; bh=C4Cru8QNrwKF/T2dmvdcBEh9IJdGdECyBXyW14GdkTo=;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=EYkBTs9mdULEZYHvZ+c2fBxjpxx67t4nHIctkC3O8wgtwu2FTF87JOPf6FU1n0WeDOEDgGpXc2Eb4YJiatTOsI+kQvvTm4BFnfGEgGMoW0dyncLkYol+RYpcQ3/Id/C5gYNOkR48VO9GSQI31uic/Zzhw0CVhk/HAEK+/ToalwA=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=ymail.com;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=CDxypvlSb8QIYKzYHg94vsGJ1Zzcc3AH6fZq74jEjLJV4rozxFvPJNJQ0kqt023P6JM0URFnCi7F9xN4cC/WMO/PgTbv87rELX1RIXIbxyTiou/nobnYO1Zlrx9IX9g+SuIlmK2URT0a06XdzBVg5zJCpfFxgw4Pu2tOf/IWhKs=;
+X-YMail-OSG: OBNUwIYVM1la467a_.ZjozuFNzY5rsQbgYtOEUNI9ZF94cJ
+	AT8Cw1ezzEZGIFMmnCnnrPtFYKt0lX9p5tn2wcAiGxn_hQkh9ekanLZXWEm_
+	EphapSmVT5xD93weCx3xwhbEJIZhDv9nCzZs3zKlY5g2MWlksGdojCEEIRgM
+	isZn7jJCMstOs5MDq8Oi9PcfMckQv3TcJ2k42B4NisEcLsQEo6s4EGdHshOH
+	0Qblu9dBfypReu0ur3Ro9uct1BwqFr1uGrnWRTJTr5Z36d141XgrVaOUOGl7
+	x2xxO7GqJqkyX.6lW_8Z5oEFkSzwRyvwp1Ky6PSQkVj1wpk9gemhqXDmQwUU
+	.7lW0aWzrYhxhjJQX_SXqAEQOiu7X457BkYht.iLiTbZ3dYrTcVwzDsOilDL
+	6piuYgaYkrGMbGkmVynBd0QR0p1KrbRLHgicJRCFsArTSQdzk.6RMT.6g49W
+	kp3vmo7QpFejhzlsLlqQY3k_xyo18T5fSUSAQqUEGrnDMDOUuHTvai0ecOk.
+	YO9XkSHWUCXQg8tnF0Vy7_gpemdTQaJOs6CPm3EsmuvSCz8L3tVdd9_ZRI3J
+	hmCLvekiMrj3PCwgYzVNlk9Hai7NRttHqDsy6gErCZvSWN3XWY56dZOsJKf3
+	nYtzQ1FP2gzgzTtuzkLkM2xfctGrhTaRH5vYwQsPZAG_zQLWSWTGUk0M1Rjg
+	sIHeegAK1a6_q85TW8g2DdV4A1t5.P4jpg37vMVyKRmVxhPwjBT6awJ8gbjF
+	ecOGZYTI7FXsex6ao_FSoozbJchZnBGfN996Y5dCdEj1uwYxS114rfKFZhd8
+	U0y5xzd9cVFi_4dw199FncNkGEcw6L46kXm.G1nmX4UgGnw--
+Received: from [131.107.0.86] by web121604.mail.ne1.yahoo.com via HTTP;
+	Wed, 18 Apr 2012 16:42:02 PDT
+X-Mailer: YahooMailWebService/0.8.117.340979
+Message-ID: <1334792522.59161.YahooMailNeo@web121604.mail.ne1.yahoo.com>
+Date: Wed, 18 Apr 2012 16:42:02 -0700 (PDT)
+From: maniacbug <maniacbug@ymail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Received: by 10.152.129.134 with HTTP; Wed, 18 Apr 2012 15:00:24 -0700 (PDT)
-In-Reply-To: <4F8E53DD.6060404@gmail.com>
-References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
-	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
-	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
-	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
-	<4F8D9245.3080908@mlbassoc.com>
-	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
-	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
-	<4F8DC939.90208@gmail.com>
-	<4F8DCFC4.9010508@gmail.com> <4F8DDDB7.5010605@gmail.com>
-	<4F8E0CDF.6040401@gmail.com>
-	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-	<4F8E53DD.6060404@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Apr 2012 15:00:24 -0700
-Message-ID: <CAMKF1spO2U+Va9pUnr9pABL9rw_Bc1GBZvrpggXNNfcUg7XrGA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-core] ld segfault cant figure it out
+Subject: Help with first compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +57,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 22:10:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 18 Apr 2012 23:53:30 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 17, 2012 at 10:40 PM, j <vwyodapink@gmail.com> wrote:
->
-> Sorry to sound so dumb but if there is no recipe failing and 2 separate
-> systems are segfaulting in similar manners and both result with not fully
-> functioning images/packages where else can I look for info? I posted all the
-> logs to one of the builds, and the QA log seems to be the only thing really
-> spitting out anything. I am open to trying and or sharing any and all
-> relevant info to help sort it out or get me on track to sorting it out.
-
-what I am hearing is that your build succeeds despite these ld
-segfaults. Am I right ?
-but then when you run the resulting images then the images dont
-function correctly
-on your target
-
-and you also mentioned that its expat package when being built that
-causes the ld
-segfaults. Are you sure about that ? You could somehow forge ulimit to unlimited
-that will dump
-
-on ubuntu edit /etc/security/limits.conf on build host and then add
-*         soft    core    unlimited
-
-that should generate core files. After this search for core* files in build tree
-and see if there are any then debug them with gdb to diagnose it further
-
-Now I am not sure if those segfaults directly relate to malfunction of image
-if thats the case but its likely. You should also try to explore the reasons why
-the image fails to behave as expected.
+Hi.=A0 I am trying to bring up OE for the first time, following this guide:=
+=A0 http://docs.openembedded.org/usermanual/usermanual.html.=A0 Running on =
+Ubuntu 11.10.=0A=0AI've followed every step precisely through "Building Sof=
+tware".=A0 Then I try "bitbake base-image", and get pages of errors.=A0 The=
+ top lines are listed below.=A0 Is this doc out of date?=A0 Or, is it possi=
+ble to divine from this what error I may have made?=0A=0AThanks!=0A=0A----=
+=0A=0Amb@mb:~/Source/oe/build$ echo $PATH=0A/home/mb/Source/oe/bitbake/bin:=
+/opt/cs/arm-uclinux/bin:/home/mb/bin:/usr/local/sbin:/usr/local/bin:/usr/sb=
+in:/usr/bin:/sbin:/bin:/usr/games=0Amb@mb:~/Source/oe/build$ echo $BBPATH=
+=0A/home/mb/Source/oe/build:/home/mb/Source/oe/openembedded=0Amb@mb:~/Sourc=
+e/oe/build$ echo $OEBASE=0A/home/mb/Source/oe=0Amb@mb:~/Source/oe/build$ ca=
+t conf/local.conf=0ABBFILES =3D "${OEBASE}/openembedded/recipes/*/*.bb"=0AD=
+ISTRO =3D "angstrom-2008.1"=0AMACHINE =3D "om-gta01"=0A=0A----=0A=0AERROR: =
+Could not inherit file classes/rootfs_${IMAGE_PKGTYPE}.bbclass while parsin=
+g /home/mb/Source/oe/openembedded/recipes/preboot/initramfs-preboot-image.b=
+b=0ANOTE: <type 'exceptions.SyntaxError'>:EOL while scanning string literal=
+ (<string>, line 1) while evaluating:=0A${@':'.join(uniq(os.path.normpath(o=
+s.path.join(fp, p, o)) for fp in '/home/mb/Source/oe/openembedded/recipes/a=
+ngstrom'.split(':') for p in 'angstrom-version-2_${DISTRO_VERSION}-r9:angst=
+rom-version-${DISTRO_VERSION}:angstrom-version:angstrom-version-${DISTRO_VE=
+RSION}:angstrom-version:files:.'.split(':') for o in reversed([''] + filter=
+(None, 'pn-angstrom-version:fail-fast:build-linux:arm:INVALID:angstrom-2008=
+.1:om-gta01:local'.split(':')))))}=0ANOTE: <type 'exceptions.SyntaxError'>:=
+EOL while scanning string literal (<string>, line 1) while evaluating:=0A${=
+@patch_deps(d)}=0AERROR: EOL while scanning string literal (<string>, line =
+1) while parsing /home/mb/Source/oe/openembedded/recipes/angstrom/angstrom-=
+version.bb=0ANOTE: <type 'exceptions.TypeError'>:list indices must be integ=
+ers, not NoneType while evaluating:=0Ahttp://projects.linuxtogo.org/frs/dow=
+nload.php/14/prismstumbler-0.7.4pre1.tar.gz=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0 file://gpsapi.patch=A0=A0=A0=A0=A0=A0 ${@['', 'file://wireless.patch'][=
+bb.data.getVar('PREFERRED_VERSION_linux-libc-headers', d, 1) and bb.data.ge=
+tVar('PREFERRED_VERSION_linux-libc-headers', d, 1).split('.')[2] < '30']}=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://fix-includes.patch;striplevel=3D0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://libgps-check.patch=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0 file://replace-gps_query.patch=0AERROR: Error in executi=
+ng: /home/mb/Source/oe/openembedded/recipes/prismstumbler/prismstumbler_0.7=
+.3+0.7.4pre1.bb=0AERROR: Exception:<type 'exceptions.TypeError'> Message:li=
+st indices must be integers, not NoneType=0AERROR: Printing the environment=
+ of the function=0AERROR:=A0 0001:def __anonfunc():=0AERROR:=A0 0002:=A0=A0=
+=A0 __anon_185__home_mb_Source_oe_openembedded_classes_staging_bbclass(d)=
+=0AERROR:=A0 0003:=A0=A0=A0 __anon_90__home_mb_Source_oe_openembedded_class=
+es_packaged_staging_bbclass(d)=0AERROR:=A0 0004:=A0=A0=A0 __anon_419_classe=
+s_base_bbclass(d)=0AERROR:=A0 0005:=A0=A0=A0 __anon_102__home_mb_Source_oe_=
+openembedded_classes_siteinfo_bbclass(d)=0AERROR: list indices must be inte=
+gers, not NoneType while parsing /home/mb/Source/oe/openembedded/recipes/pr=
+ismstumbler/prismstumbler_0.7.3+0.7.4pre1.bb=0ANOTE: <type 'exceptions.Synt=
+axError'>:EOL while scanning string literal (<string>, line 1) while evalua=
+ting:=0A${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${PRE=
+FERRED_PROVIDER_virtual/update-alternatives}", d)}=A0=A0=A0=A0
 
 
