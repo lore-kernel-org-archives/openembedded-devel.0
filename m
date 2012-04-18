@@ -1,45 +1,25 @@
-Received: from mail-qa0-f54.google.com ([209.85.216.54])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SKNmg-0004IU-1T
+	(envelope-from <ospite@studenti.unina.it>) id 1SKOYC-0005EH-Pa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Apr 2012 07:50:31 +0200
-Received: by qao25 with SMTP id 25so209894qao.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2012 22:41:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=q0dfr/3Ihk1aFlesQJxjA5t0i10YPNs68c6c4oUZv+4=;
-	b=ats6xeOuuMoU3QFyOOZTFIgbS1mzYaxJc2IfZ/B1cKVHDgNNWqbQA5LBGhY6nCsWI7
-	y4FlL4yREFmNrWlmy2O1UI8z6UQjCwojH1vU9OvuhwWznkX4KLqAkA85jlddrByL62PJ
-	oMOlSA/dqpwOeW4CF9ZH6tiWkJqVCB7Esg84QtuGW5B8DYot1IuQ06li9zRfBEM/bNQH
-	j+6dUM19ryp6vm/ewl742OGm9J/oapOdmy88t+7cyudK+VnGMXSMJob/akWQF38yaOT0
-	knwcj17q2R++7CP7azA1WIxW65T868TIztwNDl9YDY9LscwvS5ICmn7EOI2hCEaEAEQD
-	nDGA==
-Received: by 10.224.199.202 with SMTP id et10mr1769220qab.60.1334727662683;
-	Tue, 17 Apr 2012 22:41:02 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id fo9sm44382476qab.21.2012.04.17.22.40.57
-	(version=SSLv3 cipher=OTHER); Tue, 17 Apr 2012 22:41:02 -0700 (PDT)
-Message-ID: <4F8E53DD.6060404@gmail.com>
-Date: Tue, 17 Apr 2012 22:40:45 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
-MIME-Version: 1.0
+	Wed, 18 Apr 2012 08:39:36 +0200
+Received: from jcn (82.61.46.63) by smtp208.alice.it (8.6.023.02)
+	(authenticated as fospite@alice.it)
+	id 4F056E850BABBCDE; Wed, 18 Apr 2012 08:24:26 +0200
+Date: Wed, 18 Apr 2012 08:24:23 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
-	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
-	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
-	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
-	<4F8D9245.3080908@mlbassoc.com>
-	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
-	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
-	<4F8DC939.90208@gmail.com> <4F8DCFC4.9010508@gmail.com>
-	<4F8DDDB7.5010605@gmail.com> <4F8E0CDF.6040401@gmail.com>
-	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-Subject: Re: [oe-core] ld segfault cant figure it out
+Message-Id: <20120418082423.25389159b88a4b29186f05b4@studenti.unina.it>
+In-Reply-To: <4F8E1A23.4030606@emagii.com>
+References: <4F8DF031.60109@emagii.com> <2900608.HO3vnnHahd@helios>
+	<4F8E1A23.4030606@emagii.com>
+X-Mailer: Sylpheed 3.2.0beta7 (GTK+ 2.24.10; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+Subject: Re: RFC: Support for R/W git in bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,47 +33,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 05:50:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Apr 2012 06:39:36 -0000
+X-Groupsio-MsgNum: 38305
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Wed__18_Apr_2012_08_24_23_+0200_S5Vu_PneoB_B/6+_"
 
-On 04/17/2012 10:30 PM, Khem Raj wrote:
-> On Tue, Apr 17, 2012 at 5:37 PM, j<vwyodapink@gmail.com>  wrote:
->> Well finally caught what I think is the package the segfault kicks on expat.
->> Though not sure what I should look for to be able to sort it out but will
->> see where I get.
->>
->> Though I still get the gcc and bash messages in the QA log. If anyone is
->> willing to share some info on what or how I can figure out how to find what
->> causes the segfault in the recipe or if I am even catching the correct one.
->>
-> you are not giving out enough information. Looking at dmesg is not
-> going to give much info
-> if ld segfaults which I assume is cross ld here then the corresponding
-> recipe should fail
-> and then you should look in the build of that package and the commands
-> causing the segfaults
-> should be in log.do_compile or log.do_install.
+--Signature=_Wed__18_Apr_2012_08_24_23_+0200_S5Vu_PneoB_B/6+_
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 18 Apr 2012 03:34:27 +0200
+Ulf Samuelsson <openembedded@emagii.com> wrote:
+
+> On 2012-04-18 01:07, Paul Eggleton wrote:
+> > On Wednesday 18 April 2012 00:35:29 Ulf Samuelsson wrote:
+> >> Today bitbake supports read only git access in recipes.
+> >> For various reasons, I would like to be able to do recipes
+> >> which would check out in a read/write mode.
+> > Could you elaborate on "various reasons"?
+> >
+> > Would the new externalsrc bbclass be useful in your case?
+> >
+> > Cheers,
+> > Paul
+> >
+>=20
+> 1. If I am busy working on an application, then it simplifies the=20
+> development process.
+>      I can modify the code in the tree and push.
+>      This is mainly for kernel development.
 >
-> Thanks
-> -Khem
+
+for that you can pass "protocol=3Dfile" to make the git fetcher use the
+"file" transport, see
+
+http://ao2.it/en/blog/2010/05/27/neat-compilerun-cycle-git-and-openembedded
+
+basically, in the .bb recipe, you can fetch from a local clone where
+you do your normal work.
+
+> 2. If I work on a prerelease of some S/W drivers/Applications under NDA,
+>      then I cannot make that code publicly available
+>      but I still want to put  that on my Internet accessible git server.
+>      Typicailly this is before the release of a new chip and info about=20
+> the chip should not be
+>      made public before the chip is released.
+>=20
+> 3.  I want to be able to ship something similar to the Angstrom setup=20
+> scripts
+>       to someone else, and have them build an image, but it should not=20
+> be available
+>       to anyone not accepted (without public key at the git server).
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-See thats the thing no recipe is failing but the system segfaults. The 
-resulting images have had quirks which is what led me to trying to sort 
-out the segfault issue.
 
-Sorry to sound so dumb but if there is no recipe failing and 2 separate 
-systems are segfaulting in similar manners and both result with not 
-fully functioning images/packages where else can I look for info? I 
-posted all the logs to one of the builds, and the QA log seems to be the 
-only thing really spitting out anything. I am open to trying and or 
-sharing any and all relevant info to help sort it out or get me on track 
-to sorting it out.
+maybe you can pass "protocol=3Dssh" as well to the git fetcher as well,
+but I haven't tried that, when you say "R/W mode" you are basically
+saying "ssh transport" for git, right? Let us know if that works.
 
-Thank you for all the continued effort.
+> There are other uses for such a functionality, but those are my=20
+> immediate needs.
+>=20
+> As you see, this is mostly for development.
+> Once the code is released, then the recipe would be changed to the=20
+> normal git access.
+>=20
+> Didn't know anything about the externalsrc bbclass, but after checking,=20
+> I would say no.
+> It won't do the two things above. I do see the use of it though.
+>
 
+Ciao,
+   Antonio
 
+--=20
+Antonio Ospite
+http://ao2.it
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+
+--Signature=_Wed__18_Apr_2012_08_24_23_+0200_S5Vu_PneoB_B/6+_
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAk+OXhcACgkQ5xr2akVTsAEhPgCfcISIxDU1kF140Iwz+eul55s5
+vlcAnjN5D/aucyNwuys82qHte9C6Fg8u
+=D1rB
+-----END PGP SIGNATURE-----
+
+--Signature=_Wed__18_Apr_2012_08_24_23_+0200_S5Vu_PneoB_B/6+_--
