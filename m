@@ -1,31 +1,38 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SKuXk-0007fH-6W
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 18:49:16 +0200
-Received: by lagw12 with SMTP id w12so6314583lag.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SKup4-0008LG-S7 for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Apr 2012 19:07:11 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SKufv-00066h-LU for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Apr 2012 18:57:43 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Apr 2012 18:57:43 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 09:39:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=m1X2KHURc3ED0yh2F+uMQGR0CD9G/TK+rXAoGWjBamk=;
-	b=jYwebKuKqUx/3iwUYj5Z5s6UXPgPfgGsLzVZoB7M6EJk9FEdEXZnH5oiyXCpensE7I
-	ROzpuMhTiqdNOBWFUoy+f+PwR95FKJSnB+2K/jJhU3lpN3ldGsXrYeBJxCII8/1CFnt5
-	dI5vio6f2ZDa1fJh50OuDOz3aGCa5SwT44b5BdRDP8vAezRPB9qoTR7+DBOx8QiPGHx3
-	ErcZ2HZi2O8w6g9INwXMq9EnUq88FOpmdN4zpLDKsR+wluXuZsD+SQ8aQVrNrQfO9C9R
-	7HbJFlA5Up8SFOEcnJ31P0mXUY+t9CW1Zulyt2R38Ehe7odJ5E6+j0V96yUJCnQapbyf
-	jQkA==
-Received: by 10.152.146.234 with SMTP id tf10mr2613230lab.31.1334853587298;
-	Thu, 19 Apr 2012 09:39:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.129.134 with HTTP; Thu, 19 Apr 2012 09:39:17 -0700 (PDT)
-In-Reply-To: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
-References: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 19 Apr 2012 09:39:17 -0700
-Message-ID: <CAMKF1sqi4v85hPqEqtWs1P367ySWd1vbARC8HtdZyt6NRiuzGQ@mail.gmail.com>
+	Thu, 19 Apr 2012 18:57:43 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-core] gcc-runtime failure
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 19 Apr 2012 18:57:39 +0200
+Message-ID: <jmpg5o$52s$1@dough.gmane.org>
+References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
+	<jmmst9$r5o$1@dough.gmane.org>
+	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
+	<jmomha$co7$1@dough.gmane.org>
+	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
+X-Enigmail-Version: 1.4
+Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,15 +46,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2012 16:49:16 -0000
+X-List-Received-Date: Thu, 19 Apr 2012 17:07:11 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 19, 2012 at 3:54 AM, Giuseppe Condorelli
-<giuseppe.condorelli@gmail.com> wrote:
->
-> Please clarify this to me... :)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-gcc-runtime does not need target libgmp or libmpfr or libmpc
-infact its just the cross compiler which needs it.
+Op 19-04-12 16:03, Samuel Stirtzel schreef:
+> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12 11:09,
+> Samuel Stirtzel schreef:
+>>>>>> Feel free to comment on the images.
+>>>>> 
+>>>>> Giving them a spin now :)
+>>>> 
+>>>> Thanks.
+>>>> 
+>>>> Just to let you know: Yesterday I accidentally added "inherit
+>>>> allarch" to kde-wallpapers, this will produce an error, I want to
+>>>> push my patch for this but Gitorious seems to be down.
+> 
+> Gitorious is down a lot, which is (partly) why I switched away from it.
+> 
+>>>> Removing allarch from kde-wallpapers will do the trick.
+> 
+> I'll update the repo in a minute. Some other things I ran into:
+> 
+> * rasqal needs PARALLEL_MAKE = ""
+> 
+>> Done, committed it to master. (68edc1551c703bd83a60aa05edb898a7bdfa9ff9
+>> if anyone wants to cherry-pick)
+> 
+> * soprano-native is needed for the onto2something binary, I did 'yum
+> install soprano' instead
+> 
+>> Which recipe is failing with the soprano-native error? The
+>> kdelibs4-native recipe should only optionally depend on it.
+
+I forgot which recipe, sorry. I do managed to build the images after a few
+tries. There were some more PARALLEL_MAKE and/or missing DEPENDS related
+problems, but rerunning the build a few times made those go away.
+The buildhistory output:
+https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
+
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPkEP+AAoJEHZqAkdh1vT6auoQAI0W65GOytfYs3PPpam6ZMKB
+Po2rlF1PPQ+uOMw+F+aO1rCevKZZp8st9fQMrHabBHn4EHB36LcMnwItYdfSCOQj
+uGS3j8POV5eo09CcJ5bWpckOe3CrhnGrMdgh2FdyELY7sbTd+mva2UWvgQKVZUvK
+hSAn0ZL3i5zgJZF6ShUipoglh8V/E+vOV0HJjge/FM0ayNxQkWnPaPuQacioIy4I
+YPDnjzScYOuI/Fc0GTar1ROSLVP8l2oM+Pj/JxMpTqk8R1NK09VAfEwJ7Vo+KUbL
+y2N8wlr99oqaiJAyqlZoOR14Bj9d0HQaphYNogWMZiJsm2BHyT82b43R1x/jd0/E
+rrZ/hrH3cfSp8TM9BIJ8CuJNGJRZkEW66bLk4nemuP85Jvbt/ZZmADee1Yik9aBA
+i8yRmV2qhJmbtU1hlZbPgNKwnlSOS/LeFfqsxqknwOazHdUsLleRDX9JCubBpXl3
+iD66b+XB+dvPoHnUtDpVJvqfeo7mTwWvRJi7RE4E5ktgKOmZf4GbqHfRKF8s1M8p
+PTZtQkeKasNt4Mdan3SUTwX4yZODzZ9DxfL4F1bijIT+tpOCfhPOff9IHQb1wnMv
+VuTEhnNTfnHfHy3sk/Ij8MNNcQ1sIV6oKFzImvh502cTt/c2kMKxm5WIuoxDutXv
+06cb01/g0O5N7AXNtz8B
+=9d4s
+-----END PGP SIGNATURE-----
+
 
 
