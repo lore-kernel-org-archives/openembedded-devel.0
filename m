@@ -1,36 +1,30 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SKnzc-000350-9L for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 11:49:36 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SKnqT-0005kd-3a for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 11:40:09 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 11:40:09 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SKp9h-0004cL-DM
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Apr 2012 13:04:05 +0200
+Received: by iaag37 with SMTP id g37so12039045iaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 11:40:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 19 Apr 2012 03:54:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=zln2Xg47hCTGrj1U5DtE0nPxMj28y6apNtwrxf+JFds=;
+	b=VNPLIdzHlkd4Fl6nMt8fXNzwHIDBpuCBkRORqgSQ+4V/d1q/F82RbMuYY6Zpjc+Ip5
+	E6YbBx636NIvMwOUSZPyNNh9A7mnMYo7JnLK1E/chvTNRI+tKBu/lvdCDvRM5yrOdX7s
+	bRG9/PNQGLiMk+gWZE/zpP0ki6da2jyJqU9U4q9HIQhmrfmHPHwmKQNRqRo0PUO2HGKl
+	K+W62VYVZMGyRkKBaiqKxWu7j6gi9dOggtQQumiPUhGNhajlYjJJ6D+65qR2kwH4nHoP
+	YQ3MdGYWV8Ltr3HuQ7kkBvayuQFKiQx6WJGQ3mzdqiACF/M2ROfStm++gWLuAsU1/yw6
+	BibQ==
+MIME-Version: 1.0
+Received: by 10.50.15.162 with SMTP id y2mr870077igc.32.1334832876243; Thu, 19
+	Apr 2012 03:54:36 -0700 (PDT)
+Received: by 10.231.67.134 with HTTP; Thu, 19 Apr 2012 03:54:36 -0700 (PDT)
+Date: Thu, 19 Apr 2012 12:54:36 +0200
+Message-ID: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
+From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 19 Apr 2012 11:40:02 +0200
-Message-ID: <jmomha$co7$1@dough.gmane.org>
-References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
-	<jmmst9$r5o$1@dough.gmane.org>
-	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [oe-core] gcc-runtime failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2012 09:49:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Apr 2012 11:04:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi All,
 
-Op 19-04-12 11:09, Samuel Stirtzel schreef:
->>> Feel free to comment on the images.
->> 
->> Giving them a spin now :)
-> 
-> Thanks.
-> 
-> Just to let you know: Yesterday I accidentally added "inherit allarch" to
-> kde-wallpapers, this will produce an error, I want to push my patch for
-> this but Gitorious seems to be down.
+a question about gcc-runtime package.
+It fails building due to the lack of gmp/mpfr/mpc libraries/headers.
+Indeed the native ones were correctly built and looking at the config.log
+file I can see
+the problem is due to libraries wrong format (in fact I'm building for sh
+arch and the gmp/mpfr/mpc libs it
+includes are the native ones).
+The question is: should the package build the target libraries given that
+there is the DEPENDS =+ "gmp mpfr libmpc" string in the
+gcc_4.6.inc file?
+I think yes, but actually this doesn't happen.
+Moreover I can think gcc-runtime is not intended for target but for
+something else. Isn't it?
 
-Gitorious is down a lot, which is (partly) why I switched away from it.
-
-> Removing allarch from kde-wallpapers will do the trick.
-
-I'll update the repo in a minute. Some other things I ran into:
-
-* rasqal needs PARALLEL_MAKE = ""
-* soprano-native is needed for the onto2something binary, I did 'yum install
-soprano' instead
-
-The build has restarted due to the gcc patch and OEBasicHash, so it will be
-a while before I can test these images.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPj91wAAoJEHZqAkdh1vT60T0QAKPi3WeWUixdKnYVEblnoOC3
-qLw9kVglZ4RAbulOYylznNrDBzIxyDFi3aofO5M68vOLa0ng8V7EFZ+lOZgI3goI
-wwd76JIXbu9P/pojE5jXhpU1gZiISnCwJrdkso6MRVXzi6UlS/PGEyORPhcX6KcS
-IGSeV1aP+3LfJCbd0BVS3LZKALPcVlz6cVSqMi6KpmKvzeFaAN5PUtEH5soNCNh6
-LR+hh9Q/Kz1wur3pk2mAWzj9B1uy+VtWN1vI/ywtEb1zXlvokI6NcwgKS/ZzBTOM
-8KjaF4GqBpBSvHLJjyZrtjpTjIW6HMcic5IWAM1H/ta5X4mb6eOYFieGNnnaNU2v
-t2uUDYqyxWvgNrhChrG3foF6/AMPhmyz53iDVwjdaG9/NuC3fniB80Cp7E9ejwrj
-sPWJ2tZ/LcraDlMfvYEqe8KSa0UuV9PrD1FMA48JmWwR8s92lc4Ug67HsGv728KB
-bRmQh3g/OKPupYrnwj8eddY30Anxz4sZADtXD5St5TTJKbuq3yidK/OA/bb/M1b1
-CfTdvsWoYnPAAAcJkiQaptKf2g7NI7GYrXbdvcMDDbdj3NX9qfFAlHyGWsNThoNm
-U8uievGsgyR8A1PxGPKdq72BauoZM28bJN9vZMEpgAJpx9kuO5wnZRzu7s/ZLuHg
-1sWvYGV98ReHoDEMGNHA
-=Z5pO
------END PGP SIGNATURE-----
-
-
+Please clarify this to me... :)
+Cheers,
+Giuseppe
 
