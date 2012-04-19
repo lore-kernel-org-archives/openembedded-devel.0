@@ -1,38 +1,16 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SKup4-0008LG-S7 for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 19:07:11 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SKufv-00066h-LU for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 18:57:43 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 18:57:43 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 18:57:43 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <andrea.adami@gmail.com>) id 1SL19M-00088a-N4
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2012 01:52:32 +0200
+Received: from mizar.localdomain (82.58.229.52) by smtp207.alice.it
+	(8.6.023.02) id 4F05A6650C36FC65; Fri, 20 Apr 2012 01:43:03 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 19 Apr 2012 18:57:39 +0200
-Message-ID: <jmpg5o$52s$1@dough.gmane.org>
-References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
-	<jmmst9$r5o$1@dough.gmane.org>
-	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
-	<jmomha$co7$1@dough.gmane.org>
-	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
+Date: Fri, 20 Apr 2012 01:41:52 +0200
+Message-Id: <1334878912-24226-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-initramfs] [PATCH] linux-yocto-tiny-kexecboot: initial commit of version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,71 +24,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2012 17:07:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Apr 2012 23:52:32 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* this is the skeleton for .bbappend recipes
+* residing in the BSP layers
 
-Op 19-04-12 16:03, Samuel Stirtzel schreef:
-> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12 11:09,
-> Samuel Stirtzel schreef:
->>>>>> Feel free to comment on the images.
->>>>> 
->>>>> Giving them a spin now :)
->>>> 
->>>> Thanks.
->>>> 
->>>> Just to let you know: Yesterday I accidentally added "inherit
->>>> allarch" to kde-wallpapers, this will produce an error, I want to
->>>> push my patch for this but Gitorious seems to be down.
-> 
-> Gitorious is down a lot, which is (partly) why I switched away from it.
-> 
->>>> Removing allarch from kde-wallpapers will do the trick.
-> 
-> I'll update the repo in a minute. Some other things I ran into:
-> 
-> * rasqal needs PARALLEL_MAKE = ""
-> 
->> Done, committed it to master. (68edc1551c703bd83a60aa05edb898a7bdfa9ff9
->> if anyone wants to cherry-pick)
-> 
-> * soprano-native is needed for the onto2something binary, I did 'yum
-> install soprano' instead
-> 
->> Which recipe is failing with the soprano-native error? The
->> kdelibs4-native recipe should only optionally depend on it.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../linux/linux-yocto-tiny-kexecboot_3.2.bb        |   17 +++++++++++++++++
+ 1 files changed, 17 insertions(+), 0 deletions(-)
+ create mode 100644 meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
 
-I forgot which recipe, sorry. I do managed to build the images after a few
-tries. There were some more PARALLEL_MAKE and/or missing DEPENDS related
-problems, but rerunning the build a few times made those go away.
-The buildhistory output:
-https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
-
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPkEP+AAoJEHZqAkdh1vT6auoQAI0W65GOytfYs3PPpam6ZMKB
-Po2rlF1PPQ+uOMw+F+aO1rCevKZZp8st9fQMrHabBHn4EHB36LcMnwItYdfSCOQj
-uGS3j8POV5eo09CcJ5bWpckOe3CrhnGrMdgh2FdyELY7sbTd+mva2UWvgQKVZUvK
-hSAn0ZL3i5zgJZF6ShUipoglh8V/E+vOV0HJjge/FM0ayNxQkWnPaPuQacioIy4I
-YPDnjzScYOuI/Fc0GTar1ROSLVP8l2oM+Pj/JxMpTqk8R1NK09VAfEwJ7Vo+KUbL
-y2N8wlr99oqaiJAyqlZoOR14Bj9d0HQaphYNogWMZiJsm2BHyT82b43R1x/jd0/E
-rrZ/hrH3cfSp8TM9BIJ8CuJNGJRZkEW66bLk4nemuP85Jvbt/ZZmADee1Yik9aBA
-i8yRmV2qhJmbtU1hlZbPgNKwnlSOS/LeFfqsxqknwOazHdUsLleRDX9JCubBpXl3
-iD66b+XB+dvPoHnUtDpVJvqfeo7mTwWvRJi7RE4E5ktgKOmZf4GbqHfRKF8s1M8p
-PTZtQkeKasNt4Mdan3SUTwX4yZODzZ9DxfL4F1bijIT+tpOCfhPOff9IHQb1wnMv
-VuTEhnNTfnHfHy3sk/Ij8MNNcQ1sIV6oKFzImvh502cTt/c2kMKxm5WIuoxDutXv
-06cb01/g0O5N7AXNtz8B
-=9d4s
------END PGP SIGNATURE-----
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
+new file mode 100644
+index 0000000..edf8f3f
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
+@@ -0,0 +1,17 @@
++require recipes-kernel/linux/linux-yocto-tiny_3.2.bb
++
++PACKAGES = ""
++PROVIDES = ""
++
++KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${PR}-${MACHINE}"
++KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
++
++INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
++
++do_populate_sysroot() {
++        :
++}
++
++do_install() {
++        :
++}
+-- 
+1.7.3.4
 
 
 
