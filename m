@@ -1,30 +1,32 @@
 Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SKp9h-0004cL-DM
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SKrOZ-0006q2-OS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Apr 2012 13:04:05 +0200
-Received: by iaag37 with SMTP id g37so12039045iaa.6
+	Thu, 19 Apr 2012 15:27:35 +0200
+Received: by iaag37 with SMTP id g37so12194295iaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 03:54:36 -0700 (PDT)
+	Thu, 19 Apr 2012 06:18:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=zln2Xg47hCTGrj1U5DtE0nPxMj28y6apNtwrxf+JFds=;
-	b=VNPLIdzHlkd4Fl6nMt8fXNzwHIDBpuCBkRORqgSQ+4V/d1q/F82RbMuYY6Zpjc+Ip5
-	E6YbBx636NIvMwOUSZPyNNh9A7mnMYo7JnLK1E/chvTNRI+tKBu/lvdCDvRM5yrOdX7s
-	bRG9/PNQGLiMk+gWZE/zpP0ki6da2jyJqU9U4q9HIQhmrfmHPHwmKQNRqRo0PUO2HGKl
-	K+W62VYVZMGyRkKBaiqKxWu7j6gi9dOggtQQumiPUhGNhajlYjJJ6D+65qR2kwH4nHoP
-	YQ3MdGYWV8Ltr3HuQ7kkBvayuQFKiQx6WJGQ3mzdqiACF/M2ROfStm++gWLuAsU1/yw6
-	BibQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=GaM1j6RxVrkhLAIHYGmHAGF3JrOKcgLRK+agBPdCjio=;
+	b=t+BqWKFrnzWYZiy5qnTp1PyqwXeQFgituOqQbK+XVB1LAPas3cnUegJoVBZe8xNfnE
+	7gV4PFBE1BUNMiIrp5TI+HnRZQ1zmd0EZCPqjYDbAYyvnnrGZMafRcI+Y6Iz8YNfvTmm
+	MzPoMTXeNiiFgTt/wKUnrbXsQ33yHOn4GeHhIQpsIg+HTpk8Crl2hlNAJccR/9/2jQku
+	sN/PaSW8ToV7ocSlJ2Duh8J9P3sTIy9GP9msqq6bsvTFQXn66YSYqQoSQf7vhSbIfNkM
+	yQ0gmgEbGM0x+iajXHgL6MFJ/rK68AUVdL5fKDn8jx1QPVGHRTHV7BJ9TJ7Ul/0TFHDL
+	YnNw==
 MIME-Version: 1.0
-Received: by 10.50.15.162 with SMTP id y2mr870077igc.32.1334832876243; Thu, 19
-	Apr 2012 03:54:36 -0700 (PDT)
-Received: by 10.231.67.134 with HTTP; Thu, 19 Apr 2012 03:54:36 -0700 (PDT)
-Date: Thu, 19 Apr 2012 12:54:36 +0200
-Message-ID: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
+Received: by 10.50.15.162 with SMTP id y2mr1570123igc.32.1334841486446; Thu,
+	19 Apr 2012 06:18:06 -0700 (PDT)
+Received: by 10.231.67.134 with HTTP; Thu, 19 Apr 2012 06:18:06 -0700 (PDT)
+In-Reply-To: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
+References: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
+Date: Thu, 19 Apr 2012 15:18:06 +0200
+Message-ID: <CAOHjBZvEAiHvNh-nxKTAo8b6ytTYdz2TS4q_aaDfsc=-cE8HYA@mail.gmail.com>
 From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [oe-core] gcc-runtime failure
+Subject: Re: [oe-core] gcc-runtime failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,26 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2012 11:04:05 -0000
+X-List-Received-Date: Thu, 19 Apr 2012 13:27:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+Well indeed I discovered why gmp and Co. are not included, because
+INHIBIT_DEFAULT_DEPS = "1" is set in the gcc-configre-runtime.inc.
+But if I hack this, or put gmp etc... in the below DEPENDS setting I fall in
+a circular dependency that I'm not able to solve.
+Please can you help me?
 
-a question about gcc-runtime package.
-It fails building due to the lack of gmp/mpfr/mpc libraries/headers.
-Indeed the native ones were correctly built and looking at the config.log
-file I can see
-the problem is due to libraries wrong format (in fact I'm building for sh
-arch and the gmp/mpfr/mpc libs it
-includes are the native ones).
-The question is: should the package build the target libraries given that
-there is the DEPENDS =+ "gmp mpfr libmpc" string in the
-gcc_4.6.inc file?
-I think yes, but actually this doesn't happen.
-Moreover I can think gcc-runtime is not intended for target but for
-something else. Isn't it?
-
-Please clarify this to me... :)
-Cheers,
+Thanks,
 Giuseppe
+
+2012/4/19 Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+
+> Hi All,
+>
+> a question about gcc-runtime package.
+> It fails building due to the lack of gmp/mpfr/mpc libraries/headers.
+> Indeed the native ones were correctly built and looking at the config.log
+> file I can see
+> the problem is due to libraries wrong format (in fact I'm building for sh
+> arch and the gmp/mpfr/mpc libs it
+> includes are the native ones).
+> The question is: should the package build the target libraries given that
+> there is the DEPENDS =+ "gmp mpfr libmpc" string in the
+> gcc_4.6.inc file?
+> I think yes, but actually this doesn't happen.
+> Moreover I can think gcc-runtime is not intended for target but for
+> something else. Isn't it?
+>
+> Please clarify this to me... :)
+> Cheers,
+> Giuseppe
+>
 
