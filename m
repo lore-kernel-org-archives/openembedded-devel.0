@@ -1,28 +1,36 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-qc0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1SLEm0-0007wb-R4
+	(envelope-from <kergoth@gmail.com>) id 1SLEpB-00084D-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 16:25:21 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 3D446F81249; Fri, 20 Apr 2012 08:15:52 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 51A84F811F4;
-	Fri, 20 Apr 2012 08:15:50 -0600 (MDT)
-Message-ID: <4F916F96.8050901@mlbassoc.com>
-Date: Fri, 20 Apr 2012 08:15:50 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
+	Fri, 20 Apr 2012 16:28:37 +0200
+Received: by qcso7 with SMTP id o7so5912118qcs.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Apr 2012 07:19:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=XVrwacnyIvTrPnzRquAju0158Fl6ipaFzxavVot19mM=;
+	b=bAhbk3rtX0EHzZ0aCp6N6O9j/fuGjveSG4ZO3i596kcL5LMGR3uZy44KKO5U4dxmBg
+	CUWbCfmGxJK2qqnAD/N/bbMbGMUuNRLCBI5ZtFhkM4mpbQqvFGd24ZkDEzhNU6evb6cl
+	Vi6bBEAjAn/WVdtx5jD7EYnYdn2QbFd964B2qMm+4LuAov12pIM6CqfOziLyI/+2W0F2
+	dTy8HpuNNRwB77Ou4FBCLrw3mnvRYMlXq9ZK4O8c71qdgqTLgNJMX+/eZbrMGslfBjk7
+	89shA1MFyiV3Q0yrC5QNaNo0RyI1FnCPkgEQ4mC62pA6b3iSqKYkfhWjoVQzU0BZ5QQ9
+	21oQ==
+Received: by 10.224.108.193 with SMTP id g1mr7281725qap.7.1334931547255; Fri,
+	20 Apr 2012 07:19:07 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Sender: kergoth@gmail.com
+Received: by 10.229.79.79 with HTTP; Fri, 20 Apr 2012 07:18:47 -0700 (PDT)
+In-Reply-To: <4F916F96.8050901@mlbassoc.com>
 References: <4F916294.6090706@mlbassoc.com>
 	<CABcZAN=ATv+2NUzf1nNq6w1O4Kg+trD1S3kuKM0Eq4=yq4PL2Q@mail.gmail.com>
-In-Reply-To: <CABcZAN=ATv+2NUzf1nNq6w1O4Kg+trD1S3kuKM0Eq4=yq4PL2Q@mail.gmail.com>
+	<4F916F96.8050901@mlbassoc.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 20 Apr 2012 07:18:47 -0700
+X-Google-Sender-Auth: momLsfLQa0IrIZDq3vNz3DzRwj0
+Message-ID: <CABcZANmiQX8yWht6Sxm5Rer3e4OCG1NkJ7M=TdxoDGA=OGio5g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,34 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 14:25:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Apr 2012 14:28:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-04-20 08:04, Chris Larson wrote:
-> On Fri, Apr 20, 2012 at 6:20 AM, Gary Thomas<gary@mlbassoc.com>  wrote:
->> I'm writing a .bbappend for a recipe which contains a COMPATIBLE_MACHINE
->> pattern like this:
->>   COMPATIBLE_MACHINE = "(machine1|machine2|machine3)"
+On Fri, Apr 20, 2012 at 7:15 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2012-04-20 08:04, Chris Larson wrote:
 >>
->> Is there a way my .bbappend file can add to this pattern?  I don't want
->> to disturb what's there, just add my machine as well.
+>> On Fri, Apr 20, 2012 at 6:20 AM, Gary Thomas<gary@mlbassoc.com> =C2=A0wr=
+ote:
+>>>
+>>> I'm writing a .bbappend for a recipe which contains a COMPATIBLE_MACHIN=
+E
+>>> pattern like this:
+>>> =C2=A0COMPATIBLE_MACHINE =3D "(machine1|machine2|machine3)"
+>>>
+>>> Is there a way my .bbappend file can add to this pattern? =C2=A0I don't=
+ want
+>>> to disturb what's there, just add my machine as well.
+>>
+>>
+>> It's just a standard regular expression.
+>>
+>> COMPATIBLE_MACHINE =3D "(machine1|machine2|machine3)"
+>> COMPATIBLE_MACHINE .=3D "|machine4"
+>>
+>> Will result in a value of "(machine1|machine2|machine3)|machine4",
+>> which is still a perfectly valid pattern, as far as I can tell.
 >
-> It's just a standard regular expression.
 >
-> COMPATIBLE_MACHINE = "(machine1|machine2|machine3)"
-> COMPATIBLE_MACHINE .= "|machine4"
->
-> Will result in a value of "(machine1|machine2|machine3)|machine4",
-> which is still a perfectly valid pattern, as far as I can tell.
+> Yes, this does seem to work. =C2=A0Any clues why most uses of COMPATIBLE_=
+MACHINE
+> use the regex "(x|y|z)" instead of just "x|y|z"? =C2=A0Aren't they the sa=
+me?
 
-Yes, this does seem to work.  Any clues why most uses of COMPATIBLE_MACHINE
-use the regex "(x|y|z)" instead of just "x|y|z"?  Aren't they the same?
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+They are. No idea why people use the grouping.
+--=20
+Christopher Larson
 
 
