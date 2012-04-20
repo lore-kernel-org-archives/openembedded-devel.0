@@ -1,49 +1,39 @@
-Received: from mail-vx0-f175.google.com ([209.85.220.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SL22X-0000ml-9N
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 02:49:33 +0200
-Received: by vcbfl13 with SMTP id fl13so6808958vcb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SL6c2-0000Ed-FF for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2012 07:42:30 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SL6Ss-0006yS-NG for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2012 07:33:02 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Apr 2012 07:33:02 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2012 17:40:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=xqEdGfK29WB5+n8xbogUFPoejEdUCbovTKYHAZbzkww=;
-	b=Vf9trwu8G1zi3LRS+k4fAU4VQR255Qrm4d85BfB/i2dAeH8su1nXpH52mOo3AKy8vL
-	rfh+G6nXT9yKVRfdAW8PAopKDVsqnt87hszQkBg+uoyEcASTSN9z/cvYtxcCUtgw/QbY
-	Zjdopd0d+dHW5AagwTVnZ2IpNfbncdRTriT4qYdlp5gvLOWa5VopKIUy3WrMb7xLCbbJ
-	9fioNpNs+zkQ39zg17G1wXOX5EP3K4tJrVZIS3SvC1SeFe794WjHtjyXRxq1W7ZiMhSh
-	ts4A4dcTSclw9f/yAIgotCKUU27mftqyhDtzDDjIJa3ESu7H0SQcv3+7AltAqWIpAYm/
-	dX5A==
-Received: by 10.220.38.8 with SMTP id z8mr2666452vcd.68.1334882403814;
-	Thu, 19 Apr 2012 17:40:03 -0700 (PDT)
-Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id e4sm4639033vdh.10.2012.04.19.17.39.59
-	(version=SSLv3 cipher=OTHER); Thu, 19 Apr 2012 17:40:02 -0700 (PDT)
-Message-ID: <4F90B056.5020209@gmail.com>
-Date: Thu, 19 Apr 2012 17:39:50 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
-MIME-Version: 1.0
+	Fri, 20 Apr 2012 07:33:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
-	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
-	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
-	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
-	<4F8D9245.3080908@mlbassoc.com>
-	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
-	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
-	<4F8DC939.90208@gmail.com> <4F8DCFC4.9010508@gmail.com>
-	<4F8DDDB7.5010605@gmail.com> <4F8E0CDF.6040401@gmail.com>
-	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-	<4F8E53DD.6060404@gmail.com>
-	<CAMKF1spO2U+Va9pUnr9pABL9rw_Bc1GBZvrpggXNNfcUg7XrGA@mail.gmail.com>
-	<4F8F8749.8000803@gmail.com>
-	<CAMKF1spNs63FypJRj332WJzwL9M_eoMFqbiVYzM7BLCim6-9MQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spNs63FypJRj332WJzwL9M_eoMFqbiVYzM7BLCim6-9MQ@mail.gmail.com>
-Subject: Re: [oe-core] ld segfault cant figure it out
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 20 Apr 2012 07:32:57 +0200
+Message-ID: <jmqsdv$ic7$1@dough.gmane.org>
+References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
+	<jmmst9$r5o$1@dough.gmane.org>
+	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
+	<jmomha$co7$1@dough.gmane.org>
+	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
+	<jmpg5o$52s$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <jmpg5o$52s$1@dough.gmane.org>
+X-Enigmail-Version: 1.4
+Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,42 +47,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 00:49:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 20 Apr 2012 05:42:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 04/18/2012 11:24 PM, Khem Raj wrote:
-> On Wed, Apr 18, 2012 at 8:32 PM, j<vwyodapink@gmail.com>  wrote:
->>> on ubuntu edit /etc/security/limits.conf on build host and then add
->>> *         soft    core    unlimited
->
-> btw. reboot your machine after this change is made
->
->>> that should generate core files. After this search for core* files in
->>> build tree
->>> and see if there are any then debug them with gdb to diagnose it further
->>>
->>> Now I am not sure if those segfaults directly relate to malfunction of
->>> image
->>> if thats the case but its likely. You should also try to explore the
->>> reasons why
->>> the image fails to behave as expected.
->> I will do as suggested as well as do a full image build again and see if I
->> can find out all that is not working. Thank you for the extra debugging info
->> and suggestions. Are there any keywords to search through all the files for
->> including the normal log files, it may help me track down things even
->> further.
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-did the reboot went through the build but yet did not produce any core 
-files. But I noticed ulimit was still 0 so changed it to unlimited now 
-and building again, hopefully that will get some core dumps. Will post 
-back once I have more info and will separate anything by which machine 
-as even the 2nd borrowed machine segfaults in the same way.
+Op 19-04-12 18:57, Koen Kooi schreef:
+> Op 19-04-12 16:03, Samuel Stirtzel schreef:
+>> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12 11:09, 
+>> Samuel Stirtzel schreef:
+>>>>>>> Feel free to comment on the images.
+>>>>>> 
+>>>>>> Giving them a spin now :)
+>>>>> 
+>>>>> Thanks.
+>>>>> 
+>>>>> Just to let you know: Yesterday I accidentally added "inherit 
+>>>>> allarch" to kde-wallpapers, this will produce an error, I want
+>>>>> to push my patch for this but Gitorious seems to be down.
+> 
+>> Gitorious is down a lot, which is (partly) why I switched away from
+>> it.
+> 
+>>>>> Removing allarch from kde-wallpapers will do the trick.
+> 
+>> I'll update the repo in a minute. Some other things I ran into:
+> 
+>> * rasqal needs PARALLEL_MAKE = ""
+> 
+>>> Done, committed it to master.
+>>> (68edc1551c703bd83a60aa05edb898a7bdfa9ff9 if anyone wants to
+>>> cherry-pick)
+> 
+>> * soprano-native is needed for the onto2something binary, I did 'yum 
+>> install soprano' instead
+> 
+>>> Which recipe is failing with the soprano-native error? The 
+>>> kdelibs4-native recipe should only optionally depend on it.
+> 
+> I forgot which recipe, sorry. I do managed to build the images after a
+> few tries. There were some more PARALLEL_MAKE and/or missing DEPENDS
+> related problems, but rerunning the build a few times made those go
+> away. The buildhistory output: 
+> https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
 
-Thanks again for the help
+The
+> 
+binaries don't run, lots of missing symbols to SessionManagement, do I
+need to build qt4-x11 differently (apart from the GLES changes I forgot)?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPkPUHAAoJEHZqAkdh1vT6dfcP/jJmlp/RlOMTuh6NTFe3Dv/3
+r/TDi/vjlasQsI5PJ1e9dyLnJGvsUDXaAJBseTZWzWYJ2a9KTHIqVfuTiolvr8Jv
+4cMfeKLvoCTBYDlaoTsS8R5aYiQ4TTgntRQRJpyAkitL348cGW867tbbvLg6K+IG
+DVjDAZAf3hXg+DFHNnE99dxHCSAQg9ZizIcPre5VORhHlyGzJZi1yNuRm/KgiUIm
+APBQbQuWd3JbREuOxLftMpARudYsi/+pINH5NQlDRJxkLeW4slT34rUhNF2zjWlR
+XjRzmnADQLvQVN95x7hZiyy7yILhPfRKA6/o1H/bEAYPttPkVfxBfO/qXS67bRHB
+857w/B/e+m3kVkYgVoarCuvdRZtL52t6QFXTPAEyhOFYdDi92ccHp3vZHzlMFeuv
+9Whv9VRZnSLyk7Y3BBeSqRZ0pROl3XoTxHBzmYe5DJdKNAlTxJ6FeDjdQhO1p9bM
+Douyg8QeS+Ai5C/vtfWjFn0Kz8z0z/yYXjqM1gLxtTvU8tXwpOpvDXe1yzMiWB1v
+XN1IUjCDq5FEg4lnHwxwf5HpQehCYCmoTAx3Gieq6cqrpmqYLBH79gXvr2cjB3W+
+eDwtCGK8o+oNCm/3y3c1avfV3QHrVJNx65n2f7k8AhemPd0tzg1TainmVNyJjt9M
+zK3ctXBv59B2BUnAFLxc
+=m4Hh
+-----END PGP SIGNATURE-----
+
 
 
