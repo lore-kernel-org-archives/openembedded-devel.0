@@ -1,44 +1,50 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SLG6q-0002sL-D3 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 17:50:56 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SLFxd-00076f-W9 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 17:41:26 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2012 17:41:25 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vwyodapink@gmail.com>) id 1SLGfl-0003SR-Mq
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2012 18:27:01 +0200
+Received: by yhjj56 with SMTP id j56so5367359yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2012 17:41:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 20 Apr 2012 09:17:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=B7K29RriIjpJa43pfg/DQusg7xlVvKh5/YIdfG0BX28=;
+	b=QXMbg3Tx07Wb8iblLRSMVVx8gv3cuo1bWGDEiPzvjDzxEaJUS1JvsliM3qZp62R7Ij
+	fvcITKPJ/ZS4sfdoAjogzvqJWOxnOusIbS7vUgbC7kumMcO+xKuBTx2ECwK0Ejaa9qkD
+	hDulOE52wBMVVb/7P5+w4tB+AQCBMK8ikYglkqXg6xDZb3w9BnQv6ghZkegbCspHUCmv
+	Ixxder3zbCW16DkJEbUOH/yofWsmqBmqH4sZYGUTHEgfvi2eZTEjhDPkPM+ZFxShu9ei
+	77kL20NHKAM3kjAP+1pKURBUmpgPjeZ6w68WbqcEWaY4cu+GnGpzxx2is94FSf10j2Qw
+	eQhA==
+Received: by 10.236.190.39 with SMTP id d27mr6371154yhn.57.1334938651396;
+	Fri, 20 Apr 2012 09:17:31 -0700 (PDT)
+Received: from [192.168.1.3] (dpc674485156.direcpc.com. [67.44.85.156])
+	by mx.google.com with ESMTPS id i7sm4210044ani.17.2012.04.20.09.17.25
+	(version=SSLv3 cipher=OTHER); Fri, 20 Apr 2012 09:17:30 -0700 (PDT)
+Message-ID: <4F918C0E.4040107@gmail.com>
+Date: Fri, 20 Apr 2012 09:17:18 -0700
+From: j <vwyodapink@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 Apr 2012 17:41:13 +0200
-Message-ID: <jms02o$577$1@dough.gmane.org>
-References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
-	<jmmst9$r5o$1@dough.gmane.org>
-	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
-	<jmomha$co7$1@dough.gmane.org>
-	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
-	<jmpg5o$52s$1@dough.gmane.org> <jmqsdv$ic7$1@dough.gmane.org>
-	<CAGiJk9eh0KqA-qE96uc5BwHOu9n7VmGuZzgWcAisa+HhjGagzQ@mail.gmail.com>
-	<jmrdgc$cq4$1@dough.gmane.org>
-	<CAGiJk9cexZwA0SY5gSfpbMctg4wzjxZ6BAUxZgkY6ApR93SuAg@mail.gmail.com>
-	<jmrfan$q6g$1@dough.gmane.org>
-	<CAGiJk9eBf_d5pOZtL_Vrmb7aisGBadSzA36yohZJbO7MTPPnFw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <CAGiJk9eBf_d5pOZtL_Vrmb7aisGBadSzA36yohZJbO7MTPPnFw@mail.gmail.com>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
+References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
+	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
+	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
+	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
+	<4F8D9245.3080908@mlbassoc.com>
+	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
+	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
+	<4F8DC939.90208@gmail.com> <4F8DCFC4.9010508@gmail.com>
+	<4F8DDDB7.5010605@gmail.com> <4F8E0CDF.6040401@gmail.com>
+	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
+	<4F8E53DD.6060404@gmail.com>
+	<CAMKF1spO2U+Va9pUnr9pABL9rw_Bc1GBZvrpggXNNfcUg7XrGA@mail.gmail.com>
+	<4F8F8749.8000803@gmail.com>
+	<CAMKF1spNs63FypJRj332WJzwL9M_eoMFqbiVYzM7BLCim6-9MQ@mail.gmail.com>
+	<4F90B056.5020209@gmail.com> <4F9144BE.1070508@mlbassoc.com>
+In-Reply-To: <4F9144BE.1070508@mlbassoc.com>
+Subject: Re: [oe-core] ld segfault cant figure it out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,145 +58,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 15:50:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Apr 2012 16:27:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 20-04-12 13:28, Samuel Stirtzel schreef:
-> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
->> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->> 
->> Op 20-04-12 12:45, Samuel Stirtzel schreef:
->>> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
->>>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
->>>> 
->>>> Op 20-04-12 09:59, Samuel Stirtzel schreef:
->>>>> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12
->>>>> 18:57, Koen Kooi schreef:
->>>>>>>> Op 19-04-12 16:03, Samuel Stirtzel schreef:
->>>>>>>>> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op 
->>>>>>>>> 19-04-12 11:09, Samuel Stirtzel schreef:
->>>>>>>>>>>>>> Feel free to comment on the images.
->>>>>>>>>>>>> 
->>>>>>>>>>>>> Giving them a spin now :)
->>>>>>>>>>>> 
->>>>>>>>>>>> Thanks.
->>>>>>>>>>>> 
->>>>>>>>>>>> Just to let you know: Yesterday I accidentally
->>>>>>>>>>>> added "inherit allarch" to kde-wallpapers, this
->>>>>>>>>>>> will produce an error, I want to push my patch for
->>>>>>>>>>>> this but Gitorious seems to be down.
->>>>>>>> 
->>>>>>>>> Gitorious is down a lot, which is (partly) why I
->>>>>>>>> switched away from it.
->>>>>>>> 
->>>>>>>>>>>> Removing allarch from kde-wallpapers will do the 
->>>>>>>>>>>> trick.
->>>>>>>> 
->>>>>>>>> I'll update the repo in a minute. Some other things I
->>>>>>>>> ran into:
->>>>>>>> 
->>>>>>>>> * rasqal needs PARALLEL_MAKE = ""
->>>>>>>> 
->>>>>>>>>> Done, committed it to master. 
->>>>>>>>>> (68edc1551c703bd83a60aa05edb898a7bdfa9ff9 if anyone
->>>>>>>>>> wants to cherry-pick)
->>>>>>>> 
->>>>>>>>> * soprano-native is needed for the onto2something binary,
->>>>>>>>> I did 'yum install soprano' instead
->>>>>>>> 
->>>>>>>>>> Which recipe is failing with the soprano-native error?
->>>>>>>>>> The kdelibs4-native recipe should only optionally
->>>>>>>>>> depend on it.
->>>>>>>> 
->>>>>>>> I forgot which recipe, sorry. I do managed to build the
->>>>>>>> images after a few tries. There were some more
->>>>>>>> PARALLEL_MAKE and/or missing DEPENDS related problems, but
->>>>>>>> rerunning the build a few times made those go away. The
->>>>>>>> buildhistory output: 
->>>>>>>> https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
+On 04/20/2012 04:13 AM, Gary Thomas wrote:
+> On 2012-04-19 18:39, j wrote:
+>> On 04/18/2012 11:24 PM, Khem Raj wrote:
+>>> On Wed, Apr 18, 2012 at 8:32 PM, j<vwyodapink@gmail.com> wrote:
+>>>>> on ubuntu edit /etc/security/limits.conf on build host and then add
+>>>>> * soft core unlimited
+>>>
+>>> btw. reboot your machine after this change is made
+>>>
+>>>>> that should generate core files. After this search for core* files in
+>>>>> build tree
+>>>>> and see if there are any then debug them with gdb to diagnose it 
+>>>>> further
 >>>>>
->>>>>>>>
->>>>>>
->>>>>>>>
+>>>>> Now I am not sure if those segfaults directly relate to 
+>>>>> malfunction of
+>>>>> image
+>>>>> if thats the case but its likely. You should also try to explore the
+>>>>> reasons why
+>>>>> the image fails to behave as expected.
+>>>> I will do as suggested as well as do a full image build again and 
+>>>> see if I
+>>>> can find out all that is not working. Thank you for the extra 
+>>>> debugging info
+>>>> and suggestions. Are there any keywords to search through all the 
+>>>> files for
+>>>> including the normal log files, it may help me track down things even
+>>>> further.
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >>
->>>>>>>> 
-The diff from my buildhistory installed-packages.txt looks good.
->>>>>> Although it seems like I have "some" strange kernel module 
->>>>>> installed [1].
->>>>> 
->>>>>> The "+kde-wallpapers" and other shows that you have it
->>>>>> installed in the image while I installed it as package when I
->>>>>> noticed it was missing, so it is alright.
->>>>> 
->>>>> 
->>>>> The
->>>>>>>> 
->>>>> binaries don't run, lots of missing symbols to SessionManagement,
->>>>> do I need to build qt4-x11 differently (apart from the GLES
->>>>> changes I forgot)?
->>>>> 
->>>>>> The qt4-x11-free_4.8.0.bbappend [2] should have done that. I
->>>>>> can look into it if you provide the log.do_configure for
->>>>>> kdelibs4.
->>>>> 
->>>>>> At the first glance it looks like the .bbappend needs a PRINC,
->>>>>> you could verify that with grep "-no-accessibility -no-sm" in
->>>>>> your qt4-x11-free logfile dir.
->>>> 
->>>> That probably it, I had already built qt4.
->>> 
->>> Pushed a commit, 244b03bb14a0d4646861df6e9952c03fea84e21e if you want
->>> to cherry pick it.
->>> 
->>> Currently working on a cmake cross compilation issue, as side effect
->>> it could resolve the PARALLEL_MAKE problems too.
->> 
->> I think the bbappend needs to do:
->> 
->> PRINC := "${@int(PRINC) + 1}"
->> 
->> instead of
->> 
->> PRINC = "1"
->> 
->> Since meta-oe has a bbappend as well (patches to fix that will show up
->> soon)
-> 
-> Done, thanks for pointing that out.
+>> did the reboot went through the build but yet did not produce any 
+>> core files. But I noticed ulimit was still 0 so changed it to 
+>> unlimited now and building again, hopefully that
+>> will get some core dumps. Will post back once I have more info and 
+>> will separate anything by which machine as even the 2nd borrowed 
+>> machine segfaults in the same way.
+>
+> Is your borrowed machine also running ArchLinux?  If so, have
+> you tried anything else - Ubuntu, Fedora, etc?  As far as I can
+> tell, you're the only one suffering these problems and also you
+> seem to be the only one using ArchLinux.
 
-I have it sort of running, but I get a lot:
+I have installed Ubuntu 10.04 and Fedora 16 on the borrowed machine as 
+well. And still failing in the same manner. I am trying to do what Khem 
+suggested and get core files but for some reason, even though it is 
+saying I have it set to unlimited it is still not spitting anything out.
 
-Soprano: "org.freedesktop.DBus.Error.ServiceUnknown - The name
-org.kde.nepomuk.services.nepomukstorage was not provided by any .service files"
+I have abandoned Arch on the build machines for now as to keep that out 
+of the variables.
 
+>
+> Note: I tried to duplicate your problems here, but I've never used
+> ArchLinux and it's so primitive and hard to use (compared to what
+> I use everyday) that I simply don't have the time to mess with it
+> any more.
+>
+It is not the only OS that does this for me. I am honestly surprised to 
+hear Arch is hard, as that is how I see OE and trying to get a 
+functioning build machine. :P
 
-And do you have a bbappend for qt to enable GLES?
+I just got my 2nd borrowed machine today and starting to set it up now. 
+Installing Ubuntu on it.
 
-regards,
+If there is a single OS to install and try on all 3 I will happily do it 
+again. But this is a non OS dependent thing is my guess since I am on 2 
+machines now that have done this.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+My QA.log's are still basically the same as well. all relating to LD 
+type issues.
 
-iQIcBAEBAgAGBQJPkYOWAAoJEHZqAkdh1vT6MFsQAIOgM0HGktHd/uGyagP7pn2/
-3NHsfWvsZxE5VGel19XGYlH9vIPkT98Jhfgj31t3LB8Y2S5A6jZmGiV+2qn3oEEl
-3OG8MEHkt1KLOW3p/79WZO0SPcXjx2D/UljrZ4epWgL2WJltjqOfSkonu5dFqbPg
-j+mhWl5FB23hc73pGXPILKj+Mykmal/DE8Lw2Mm434iDCVC0D0Qu3nf7GdghMYK6
-Op87xr+441p1YzQ22NlsXfMY2jM0bJG/jjOUo1mY8/UsR2DSMpEQSAHazmr4cfII
-P+s3GN1YBj0WbtxytDTKzSeR3Qzr6pw9ZCb60VsF6w/BIjwkeHsQVzjUZExIiSHA
-60+6VsP7Ok0nSrOfT+1ZVv50mqS2fJi/ZHDxcrZtsQ+l/vH6G/qbBDmUbbAPzh9d
-kMzelmfERq5B0V74y8fqbec9KMIkHYlVsL1IKnbgL7Xtz8n6wNZndGX4cGqPRGcz
-xJT7MKd8ACETYVb3H6dFWo8XjkETCz9MzBZg/i0ZDMIlw82Pamtiw+Pvr6UXwFsQ
-J7DAT3/M0/DGHU6/PlgYNQezLoRzRlwdNpj355DsPEqKWlcbSjOznkR/AqyK0GXi
-/XQBsUdNjlLcTdDvHqsQz+JB18H3FDN+Zd859uIitD3k5tK4TCqAjFl5Mhb7EjHy
-Hzxjgmli9qfcSApDJ/lx
-=Xsxg
------END PGP SIGNATURE-----
+I am still working through getting the image built on th1st borrowed 
+machine it is slow and starting the
 
+Again OE classic(gumstix branch does not segfault on my machine that 
+started all this it only started happening once I started trying to 
+build a BBXM image on a new install on the same machine.
+
+If there is a OS and configuration to specifically try then outside of 
+what is listed on the Angstrom pages and OE and your Distro pages please 
+fill me in and will try. But as it stands now 2 totally different 
+machines have gone through 3+ OS changes all have the same issue, all 
+relatively the same issues and logs that were posted before. Should I 
+attach more logs?
 
 
