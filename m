@@ -1,39 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SL6c2-0000Ed-FF for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 07:42:30 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SL6Ss-0006yS-NG for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 07:33:02 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2012 07:33:02 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SL82L-0001mQ-8W
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Apr 2012 09:13:45 +0200
+Received: by iaag37 with SMTP id g37so13315499iaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2012 07:33:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 20 Apr 2012 00:04:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=16/P+VrtwFluwymWKgW1bkRzPD5zeZJbjGqWMITgMvY=;
+	b=I+OtTHysSrgllYUu9vlIZn63I/rtJw/BbTaO0ZEwnlEWtX2NO4XgdFsoh5CVG0GJ8l
+	eeh7+cVx2WG3wKoxjAs0V3YCvW8+6Ij+I+v+sN/MDg4zBOBBLtFKqqVIJLLsfKs4GLs3
+	9RUnI0kEpsTGDrYZgkYyyIivfG4jQKKQ85mpzJqQOf+vZOVsxwx/yoTqY1QnggzRYQLL
+	YPmgnCZkTlkDhcpfpf4Dw9yzdva+sGd2utpPxhPfSuWXedZj+Ah6T9nRLCupcolKrEfN
+	m/1mZ9zxTJmX+lui7gh4nOxK4GaovaV8xydxNOARiXWQQ150G6K9ZS7wRSz135yMQYva
+	qIgg==
+MIME-Version: 1.0
+Received: by 10.50.140.71 with SMTP id re7mr4611072igb.67.1334905455019; Fri,
+	20 Apr 2012 00:04:15 -0700 (PDT)
+Received: by 10.231.67.134 with HTTP; Fri, 20 Apr 2012 00:04:14 -0700 (PDT)
+In-Reply-To: <CAMKF1sqi4v85hPqEqtWs1P367ySWd1vbARC8HtdZyt6NRiuzGQ@mail.gmail.com>
+References: <CAOHjBZtTxc7L8OpwMsSFr_xqc6WVXRRWK7eV95BDxnOLrjMqyQ@mail.gmail.com>
+	<CAMKF1sqi4v85hPqEqtWs1P367ySWd1vbARC8HtdZyt6NRiuzGQ@mail.gmail.com>
+Date: Fri, 20 Apr 2012 09:04:14 +0200
+Message-ID: <CAOHjBZuCkW7FspM51tb9a4=CUWCM6pdOf0zOyh8ob0oj6Ed=Xg@mail.gmail.com>
+From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 Apr 2012 07:32:57 +0200
-Message-ID: <jmqsdv$ic7$1@dough.gmane.org>
-References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
-	<jmmst9$r5o$1@dough.gmane.org>
-	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
-	<jmomha$co7$1@dough.gmane.org>
-	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
-	<jmpg5o$52s$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <jmpg5o$52s$1@dough.gmane.org>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe-core] gcc-runtime failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,78 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 05:42:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Apr 2012 07:13:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Many thanks guys,
 
-Op 19-04-12 18:57, Koen Kooi schreef:
-> Op 19-04-12 16:03, Samuel Stirtzel schreef:
->> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12 11:09, 
->> Samuel Stirtzel schreef:
->>>>>>> Feel free to comment on the images.
->>>>>> 
->>>>>> Giving them a spin now :)
->>>>> 
->>>>> Thanks.
->>>>> 
->>>>> Just to let you know: Yesterday I accidentally added "inherit 
->>>>> allarch" to kde-wallpapers, this will produce an error, I want
->>>>> to push my patch for this but Gitorious seems to be down.
-> 
->> Gitorious is down a lot, which is (partly) why I switched away from
->> it.
-> 
->>>>> Removing allarch from kde-wallpapers will do the trick.
-> 
->> I'll update the repo in a minute. Some other things I ran into:
-> 
->> * rasqal needs PARALLEL_MAKE = ""
-> 
->>> Done, committed it to master.
->>> (68edc1551c703bd83a60aa05edb898a7bdfa9ff9 if anyone wants to
->>> cherry-pick)
-> 
->> * soprano-native is needed for the onto2something binary, I did 'yum 
->> install soprano' instead
-> 
->>> Which recipe is failing with the soprano-native error? The 
->>> kdelibs4-native recipe should only optionally depend on it.
-> 
-> I forgot which recipe, sorry. I do managed to build the images after a
-> few tries. There were some more PARALLEL_MAKE and/or missing DEPENDS
-> related problems, but rerunning the build a few times made those go
-> away. The buildhistory output: 
-> https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
+just yesterday evening I was able to build gcc-runtime fixing the
+configuration.
 
-The
-> 
-binaries don't run, lots of missing symbols to SessionManagement, do I
-need to build qt4-x11 differently (apart from the GLES changes I forgot)?
+Cheers,
+Giuseppe
 
-regards,
+2012/4/19 Khem Raj <raj.khem@gmail.com>
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPkPUHAAoJEHZqAkdh1vT6dfcP/jJmlp/RlOMTuh6NTFe3Dv/3
-r/TDi/vjlasQsI5PJ1e9dyLnJGvsUDXaAJBseTZWzWYJ2a9KTHIqVfuTiolvr8Jv
-4cMfeKLvoCTBYDlaoTsS8R5aYiQ4TTgntRQRJpyAkitL348cGW867tbbvLg6K+IG
-DVjDAZAf3hXg+DFHNnE99dxHCSAQg9ZizIcPre5VORhHlyGzJZi1yNuRm/KgiUIm
-APBQbQuWd3JbREuOxLftMpARudYsi/+pINH5NQlDRJxkLeW4slT34rUhNF2zjWlR
-XjRzmnADQLvQVN95x7hZiyy7yILhPfRKA6/o1H/bEAYPttPkVfxBfO/qXS67bRHB
-857w/B/e+m3kVkYgVoarCuvdRZtL52t6QFXTPAEyhOFYdDi92ccHp3vZHzlMFeuv
-9Whv9VRZnSLyk7Y3BBeSqRZ0pROl3XoTxHBzmYe5DJdKNAlTxJ6FeDjdQhO1p9bM
-Douyg8QeS+Ai5C/vtfWjFn0Kz8z0z/yYXjqM1gLxtTvU8tXwpOpvDXe1yzMiWB1v
-XN1IUjCDq5FEg4lnHwxwf5HpQehCYCmoTAx3Gieq6cqrpmqYLBH79gXvr2cjB3W+
-eDwtCGK8o+oNCm/3y3c1avfV3QHrVJNx65n2f7k8AhemPd0tzg1TainmVNyJjt9M
-zK3ctXBv59B2BUnAFLxc
-=m4Hh
------END PGP SIGNATURE-----
-
-
+> On Thu, Apr 19, 2012 at 3:54 AM, Giuseppe Condorelli
+> <giuseppe.condorelli@gmail.com> wrote:
+> >
+> > Please clarify this to me... :)
+>
+> gcc-runtime does not need target libgmp or libmpfr or libmpc
+> infact its just the cross compiler which needs it.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
