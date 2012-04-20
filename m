@@ -1,34 +1,26 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SLDIK-0004Di-Ra
+	(envelope-from <gary@mlbassoc.com>) id 1SLDuJ-0005oA-9v
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 14:50:36 +0200
-Received: by bkcjk7 with SMTP id jk7so1210257bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2012 05:41:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=DR0CQvOJH02mO9uE9oh27CyXdxdSmXoWXIQh8y2DP+w=;
-	b=vDmxrYHCR3XBvg88T4t0CqA4XcY6EC138faJHR7ZGy1xMfOhMfMDaNiGcYYX57JC45
-	kJEIvXLJwxo4XTr0pghf49p1mnUgv3gku0nEoLOZLjUuOhIGt4tUyMUnyOr8iKQQOj4a
-	NAmDr3og5aAiOsxsrmmZpUz3Fn+L5SdePLIaPRHael4/rHiV7kQxK+l2vysWx5wEHNy3
-	mDN+3Rw7TcyfvsuGgk3Mqf1/hUpYKKAW92rN2b4s9Zb9pMZiuM6IFexZ4mcEgDa0/dYN
-	xEg2vK9IBzC9+lw59oosG/ozQvvluJV9DS0B6T9NPirGNWKT6GCIkWLDzRVUCH3Fcau3
-	j+QA==
-Received: by 10.205.138.9 with SMTP id iq9mr1854780bkc.139.1334925667175;
-	Fri, 20 Apr 2012 05:41:07 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id f11sm9834418bkw.6.2012.04.20.05.41.04
-	(version=SSLv3 cipher=OTHER); Fri, 20 Apr 2012 05:41:05 -0700 (PDT)
-Message-ID: <4F9158F3.8000702@gmail.com>
-Date: Fri, 20 Apr 2012 14:39:15 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
+	Fri, 20 Apr 2012 15:29:51 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 22C05F811F4; Fri, 20 Apr 2012 07:20:22 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id B2253F811E4;
+	Fri, 20 Apr 2012 07:20:20 -0600 (MDT)
+Message-ID: <4F916294.6090706@mlbassoc.com>
+Date: Fri, 20 Apr 2012 07:20:20 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Problems building parts of python using openembedded
+Subject: COMPATIBLE_MACHINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 12:50:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 20 Apr 2012 13:29:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi.
+I'm writing a .bbappend for a recipe which contains a COMPATIBLE_MACHINE
+pattern like this:
+   COMPATIBLE_MACHINE = "(machine1|machine2|machine3)"
 
-I'm using OE to build for OMAP4, when compiling python, OE reports
-success, however only the core python seems to be built successfully.
-Looking at the log files however, we see a lot of ld errors, when it
-tries to link to x86_64 libraries. As an example, the following is
-output with ncurses:
+Is there a way my .bbappend file can add to this pattern?  I don't want
+to disturb what's there, just add my machine as well.
 
-Looking in ncursesw for
-['/home/martin/Cisco/openembedded/oe/build/tmp-nimbus_2012_x-eglibc/sysroots/nimbus-panda/usr/lib']
+Thanks
 
-Found
-/home/martin/Cisco/openembedded/oe/build/tmp-nimbus_2012_x-eglibc/sysroots/nimbus-panda/usr/lib/libncursesw.so
-
-...
-...
-/home/martin/Cisco/openembedded/oe/build/tmp-nimbus_2012_x-eglibc/sysroots/x86_64-linux/usr/lib/libncursesw.so.5:
-file not recognized: File format not recognized
-
-Any ideas why this happens, and what we can do to fix it?
-
-Best Regards
-Martin Ertsaas
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
