@@ -1,42 +1,41 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1SLBv5-0001DV-FM
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SLCA3-0001To-No
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Apr 2012 13:22:31 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id E3471F8124B; Fri, 20 Apr 2012 05:13:02 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 185DDF81249;
-	Fri, 20 Apr 2012 05:13:02 -0600 (MDT)
-Message-ID: <4F9144BE.1070508@mlbassoc.com>
-Date: Fri, 20 Apr 2012 05:13:02 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:11.0) Gecko/20120329 Thunderbird/11.0.1
+	Fri, 20 Apr 2012 13:37:59 +0200
+Received: by wgbdr12 with SMTP id dr12so7987155wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Apr 2012 04:28:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=YY3cxcaoVRcFUYQKCbic2py9/fczXBe+oQnpCT4rFbk=;
+	b=EgfxLFhZlN3RsIYDOVevi30l79igw7Gglbg7EpuJkEuo6bKhEfQZDLg40xh8ySQZgY
+	4T3PZ1X9egGelahc9ltx5q12kruQyAdtbt2P44HBl2gRF8RKSwZQlxw5haLd2/5vI2GC
+	M/aEJV2nHWxuVQOYpn/OJ8auCgQ5LHdUcSALO8pbBN6LcvKtITcKmHIb+T6i2iGQNlor
+	AcIy7gDSlSoDlmE9shkfXFbyhneYZJRJbx6wL2fx6TpnC3Pw/g19hlRCZph2SXOVP1xg
+	76kPzzSzp/XYzgTDgnAwPUJP0ABn1KUsv0Ci0YkSAdjXfR8aOOgkGuYAyIISHM9VhSez
+	hSxw==
 MIME-Version: 1.0
+Received: by 10.216.132.40 with SMTP id n40mr3606068wei.68.1334921310000; Fri,
+	20 Apr 2012 04:28:30 -0700 (PDT)
+Received: by 10.223.14.149 with HTTP; Fri, 20 Apr 2012 04:28:29 -0700 (PDT)
+In-Reply-To: <jmrfan$q6g$1@dough.gmane.org>
+References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
+	<jmmst9$r5o$1@dough.gmane.org>
+	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
+	<jmomha$co7$1@dough.gmane.org>
+	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
+	<jmpg5o$52s$1@dough.gmane.org> <jmqsdv$ic7$1@dough.gmane.org>
+	<CAGiJk9eh0KqA-qE96uc5BwHOu9n7VmGuZzgWcAisa+HhjGagzQ@mail.gmail.com>
+	<jmrdgc$cq4$1@dough.gmane.org>
+	<CAGiJk9cexZwA0SY5gSfpbMctg4wzjxZ6BAUxZgkY6ApR93SuAg@mail.gmail.com>
+	<jmrfan$q6g$1@dough.gmane.org>
+Date: Fri, 20 Apr 2012 13:28:29 +0200
+Message-ID: <CAGiJk9eBf_d5pOZtL_Vrmb7aisGBadSzA36yohZJbO7MTPPnFw@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
-	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
-	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
-	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
-	<4F8D9245.3080908@mlbassoc.com>
-	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
-	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
-	<4F8DC939.90208@gmail.com> <4F8DCFC4.9010508@gmail.com>
-	<4F8DDDB7.5010605@gmail.com> <4F8E0CDF.6040401@gmail.com>
-	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-	<4F8E53DD.6060404@gmail.com>
-	<CAMKF1spO2U+Va9pUnr9pABL9rw_Bc1GBZvrpggXNNfcUg7XrGA@mail.gmail.com>
-	<4F8F8749.8000803@gmail.com>
-	<CAMKF1spNs63FypJRj332WJzwL9M_eoMFqbiVYzM7BLCim6-9MQ@mail.gmail.com>
-	<4F90B056.5020209@gmail.com>
-In-Reply-To: <4F90B056.5020209@gmail.com>
-Subject: Re: [oe-core] ld segfault cant figure it out
+Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,54 +49,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 11:22:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Apr 2012 11:38:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2012-04-19 18:39, j wrote:
-> On 04/18/2012 11:24 PM, Khem Raj wrote:
->> On Wed, Apr 18, 2012 at 8:32 PM, j<vwyodapink@gmail.com> wrote:
->>>> on ubuntu edit /etc/security/limits.conf on build host and then add
->>>> * soft core unlimited
->>
->> btw. reboot your machine after this change is made
->>
->>>> that should generate core files. After this search for core* files in
->>>> build tree
->>>> and see if there are any then debug them with gdb to diagnose it further
->>>>
->>>> Now I am not sure if those segfaults directly relate to malfunction of
->>>> image
->>>> if thats the case but its likely. You should also try to explore the
->>>> reasons why
->>>> the image fails to behave as expected.
->>> I will do as suggested as well as do a full image build again and see if I
->>> can find out all that is not working. Thank you for the extra debugging info
->>> and suggestions. Are there any keywords to search through all the files for
->>> including the normal log files, it may help me track down things even
->>> further.
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> did the reboot went through the build but yet did not produce any core files. But I noticed ulimit was still 0 so changed it to unlimited now and building again, hopefully that
-> will get some core dumps. Will post back once I have more info and will separate anything by which machine as even the 2nd borrowed machine segfaults in the same way.
+> Op 20-04-12 12:45, Samuel Stirtzel schreef:
+>> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
+>>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
+>>>
+>>> Op 20-04-12 09:59, Samuel Stirtzel schreef:
+>>>> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>: Op 19-04-12 18:57,
+>>>> Koen Kooi schreef:
+>>>>>>> Op 19-04-12 16:03, Samuel Stirtzel schreef:
+>>>>>>>> 2012/4/19 Koen Kooi <koen@dominion.thruhere.net>: Op
+>>>>>>>> 19-04-12 11:09, Samuel Stirtzel schreef:
+>>>>>>>>>>>>> Feel free to comment on the images.
+>>>>>>>>>>>>
+>>>>>>>>>>>> Giving them a spin now :)
+>>>>>>>>>>>
+>>>>>>>>>>> Thanks.
+>>>>>>>>>>>
+>>>>>>>>>>> Just to let you know: Yesterday I accidentally added
+>>>>>>>>>>> "inherit allarch" to kde-wallpapers, this will produce
+>>>>>>>>>>> an error, I want to push my patch for this but
+>>>>>>>>>>> Gitorious seems to be down.
+>>>>>>>
+>>>>>>>> Gitorious is down a lot, which is (partly) why I switched
+>>>>>>>> away from it.
+>>>>>>>
+>>>>>>>>>>> Removing allarch from kde-wallpapers will do the
+>>>>>>>>>>> trick.
+>>>>>>>
+>>>>>>>> I'll update the repo in a minute. Some other things I ran
+>>>>>>>> into:
+>>>>>>>
+>>>>>>>> * rasqal needs PARALLEL_MAKE = ""
+>>>>>>>
+>>>>>>>>> Done, committed it to master.
+>>>>>>>>> (68edc1551c703bd83a60aa05edb898a7bdfa9ff9 if anyone wants
+>>>>>>>>> to cherry-pick)
+>>>>>>>
+>>>>>>>> * soprano-native is needed for the onto2something binary, I
+>>>>>>>> did 'yum install soprano' instead
+>>>>>>>
+>>>>>>>>> Which recipe is failing with the soprano-native error? The
+>>>>>>>>> kdelibs4-native recipe should only optionally depend on
+>>>>>>>>> it.
+>>>>>>>
+>>>>>>> I forgot which recipe, sorry. I do managed to build the images
+>>>>>>> after a few tries. There were some more PARALLEL_MAKE and/or
+>>>>>>> missing DEPENDS related problems, but rerunning the build a
+>>>>>>> few times made those go away. The buildhistory output:
+>>>>>>> https://github.com/Angstrom-distribution/buildhistory/commit/c4790bbe1534c8c536f6cacf509d93b14cf6050c
+>>>>
+>>>>>>>
+>>>>>
+>>>>>>>
+> The diff from my buildhistory installed-packages.txt looks good.
+>>>>> Although it seems like I have "some" strange kernel module
+>>>>> installed [1].
+>>>>
+>>>>> The "+kde-wallpapers" and other shows that you have it installed in
+>>>>> the image while I installed it as package when I noticed it was
+>>>>> missing, so it is alright.
+>>>>
+>>>>
+>>>> The
+>>>>>>>
+>>>> binaries don't run, lots of missing symbols to SessionManagement, do
+>>>> I need to build qt4-x11 differently (apart from the GLES changes I
+>>>> forgot)?
+>>>>
+>>>>> The qt4-x11-free_4.8.0.bbappend [2] should have done that. I can
+>>>>> look into it if you provide the log.do_configure for kdelibs4.
+>>>>
+>>>>> At the first glance it looks like the .bbappend needs a PRINC, you
+>>>>> could verify that with grep "-no-accessibility -no-sm" in your
+>>>>> qt4-x11-free logfile dir.
+>>>
+>>> That probably it, I had already built qt4.
+>>
+>> Pushed a commit, 244b03bb14a0d4646861df6e9952c03fea84e21e if you want to
+>> cherry pick it.
+>>
+>> Currently working on a cmake cross compilation issue, as side effect it
+>> could resolve the PARALLEL_MAKE problems too.
+>
+> I think the bbappend needs to do:
+>
+> PRINC := "${@int(PRINC) + 1}"
+>
+> instead of
+>
+> PRINC = "1"
+>
+> Since meta-oe has a bbappend as well (patches to fix that will show up soon)
 
-Is your borrowed machine also running ArchLinux?  If so, have
-you tried anything else - Ubuntu, Fedora, etc?  As far as I can
-tell, you're the only one suffering these problems and also you
-seem to be the only one using ArchLinux.
+Done,
+thanks for pointing that out.
 
-Note: I tried to duplicate your problems here, but I've never used
-ArchLinux and it's so primitive and hard to use (compared to what
-I use everyday) that I simply don't have the time to mess with it
-any more.
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Regards
+Samuel
 
 
