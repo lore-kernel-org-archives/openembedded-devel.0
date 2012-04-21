@@ -1,16 +1,21 @@
-Received: from smtp205.alice.it ([82.57.200.101])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SLNUy-0005xf-9B
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <cheepeero@gmx.net>) id 1SLOd2-0006u2-RT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Apr 2012 01:44:20 +0200
-Received: from mizar.localdomain (87.8.252.249) by smtp205.alice.it
-	(8.6.023.02) id 4F421F7B06F691DC; Sat, 21 Apr 2012 01:34:50 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 21 Apr 2012 02:56:44 +0200
+Received: (qmail invoked by alias); 21 Apr 2012 00:47:14 -0000
+Received: from unknown (EHLO jethro.cheepee.homedns.org) [95.76.68.223]
+	by mail.gmx.net (mp017) with SMTP; 21 Apr 2012 02:47:14 +0200
+X-Authenticated: #14774724
+X-Provags-ID: V01U2FsdGVkX18pJu0yGeYp4msNCuK1/Dom27ipOZMxtO/tzFaIZD
+	6kGbjKJkeHk6sZ
+From: Ciprian Ciubotariu <cheepeero@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Apr 2012 01:34:39 +0200
-Message-Id: <1334964879-24189-1-git-send-email-andrea.adami@gmail.com>
+Date: Sat, 21 Apr 2012 03:47:09 +0300
+Message-Id: <1334969229-8249-1-git-send-email-cheepeero@gmx.net>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH] linux-kexecboot_3.2: set console to tty1 to hide cursor
+X-Y-GMX-Trusted: 0
+Subject: [oe-core] Fix bad linkage towards host qt-mobility sensors module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,38 +29,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 23:44:20 -0000
+X-List-Received-Date: Sat, 21 Apr 2012 00:56:45 -0000
 
-* revert accidental change
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Prevent qmake from using mobilityconfig.prf from host system when build webkit.
 ---
- recipes-kernel/linux/linux-kexecboot_3.2.bbappend |   12 ++++++------
- 1 files changed, 6 insertions(+), 6 deletions(-)
+ meta/recipes-qt/qt4/qt-4.8.0.inc                  |    1 +
+ meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch |   52 +++++++++++++++++++++
+ meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb         |    2 +-
+ 3 files changed, 54 insertions(+), 1 deletions(-)
+ create mode 100644 meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
 
-diff --git a/recipes-kernel/linux/linux-kexecboot_3.2.bbappend b/recipes-kernel/linux/linux-kexecboot_3.2.bbappend
-index b3f98b1..909bf9e 100644
---- a/recipes-kernel/linux/linux-kexecboot_3.2.bbappend
-+++ b/recipes-kernel/linux/linux-kexecboot_3.2.bbappend
-@@ -7,12 +7,12 @@ PR = "${INC_PR}.1"
- COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+diff --git a/meta/recipes-qt/qt4/qt-4.8.0.inc b/meta/recipes-qt/qt4/qt-4.8.0.inc
+index c0d90cd..ccd75e6 100644
+--- a/meta/recipes-qt/qt4/qt-4.8.0.inc
++++ b/meta/recipes-qt/qt4/qt-4.8.0.inc
+@@ -20,6 +20,7 @@ SRC_URI = "http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-${PV}.
+            file://pulseaudio-config.patch \
+            file://g++.conf \
+            file://linux.conf \
++	   file://no-qt-mobility.patch \
+            "
  
- # Note we set loglevel=3 and master console on serial to protect bootlogo.
--CMDLINE_c7x0 = "console=tty0 console=ttyS0,115200n8"
--CMDLINE_tosa = "console=tty0 console=ttyS0,115200n8"
--CMDLINE_poodle = "console=tty0 console=ttyS0,115200n8 fbcon=rotate:1"
--CMDLINE_akita = "console=tty0 console=ttyS0,115200n8 fbcon=rotate:1"
--CMDLINE_collie = "console=tty0 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
--CMDLINE_spitz = "console=tty0 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_c7x0 = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_tosa = "console=tty1 console=ttyS0,115200n8"
-+CMDLINE_poodle = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_akita = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
-+CMDLINE_collie = "console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M"
-+CMDLINE_spitz = "console=tty1 console=ttyS0,115200n8 fbcon=rotate:1"
+ SRC_URI[md5sum] = "e8a5fdbeba2927c948d9f477a6abe904"
+diff --git a/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch b/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
+new file mode 100644
+index 0000000..ed66509
+--- /dev/null
++++ b/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
+@@ -0,0 +1,52 @@
++diff --git a/src/3rdparty/webkit/Source/WebCore/features.pri b/src/3rdparty/webkit/Source/WebCore/features.pri
++index f04d0b4..aac0482 100644
++--- a/src/3rdparty/webkit/Source/WebCore/features.pri
+++++ b/src/3rdparty/webkit/Source/WebCore/features.pri
++@@ -14,7 +14,7 @@ meegotouch {
++ }
++ 
++ ## load mobilityconfig if mobility is available
++-load(mobilityconfig, true)
+++#load(mobilityconfig, true)
++ 
++ ## Define default features macros for optional components
++ ## (look for defs in config.h and included files!)
++diff --git a/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro b/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
++index 80cecb3..856351a 100644
++--- a/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
+++++ b/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
++@@ -4,7 +4,7 @@ TEMPLATE = lib
++ CONFIG += plugin
++ 
++ ## load mobilityconfig if mobility is available
++-load(mobilityconfig, true)
+++#load(mobilityconfig, true)
++ 
++ # HTML5 Media Support
++ # We require QtMultimedia
++diff --git a/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro b/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
++index fd31e1e..52f1b46 100644
++--- a/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
+++++ b/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
++@@ -11,7 +11,7 @@ QT       += core gui \
++             xml
++ 
++ ## load mobilityconfig if mobility is available
++-load(mobilityconfig, true)
+++#load(mobilityconfig, true)
++ 
++ isEmpty(OUTPUT_DIR): OUTPUT_DIR = ../../../..
++ 
++diff --git a/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri b/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
++index 812fe93..ccbc5a0 100644
++--- a/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
+++++ b/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
++@@ -7,7 +7,7 @@ CONFIG(QTDIR_build) { load(qttest_p4) }
++ ELSE { TARGET = tst_$$TARGET }
++ 
++ # Load mobilityconfig if Qt Mobility is available
++-load(mobilityconfig, true)
+++#load(mobilityconfig, true)
++ contains(MOBILITY_CONFIG, multimedia) {
++     # This define is used by tests depending on Qt Multimedia
++     DEFINES -= WTF_USE_QT_MULTIMEDIA=0
+diff --git a/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb b/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
+index 6a0b0b8..63a3769 100644
+--- a/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
++++ b/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
+@@ -1,7 +1,7 @@
+ require qt4-x11-free.inc
+ require qt-${PV}.inc
  
- # Zaurus machines need kernel size-check.
- KERNEL_IMAGE_MAXSIZE_akita = "1294336"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
 -- 
 1.7.3.4
 
