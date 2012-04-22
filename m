@@ -1,25 +1,16 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1SLixP-0004yI-0W
+Received: from smtp205.alice.it ([82.57.200.101])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <andrea.adami@gmail.com>) id 1SM5Hd-0000Kl-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Apr 2012 00:39:07 +0200
-Received: (qmail invoked by alias); 21 Apr 2012 22:29:35 -0000
-Received: from unknown (EHLO [192.168.1.14]) [95.76.68.223]
-	by mail.gmx.net (mp033) with SMTP; 22 Apr 2012 00:29:35 +0200
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1/z/ectOoLzTXhqDh8xyWU4V2WyNN6oB8GYNnsYPk
-	cucUdGpuDKNPn5
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
+	Mon, 23 Apr 2012 00:29:29 +0200
+Received: from mizar.localdomain (87.5.26.19) by smtp205.alice.it (8.6.023.02)
+	id 4F421F7B071BFD26; Mon, 23 Apr 2012 00:19:56 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20120421053056.GA3656@jama.jama.net>
-References: <1334969229-8249-1-git-send-email-cheepeero@gmx.net>
-	<20120421053056.GA3656@jama.jama.net>
-Date: Sun, 22 Apr 2012 01:29:34 +0300
-Message-ID: <1335047374.4508.0.camel@jethro.cheepee.homedns.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-X-Y-GMX-Trusted: 0
-Subject: Re: [oe-core] Fix bad linkage towards host qt-mobility sensors module
+Date: Mon, 23 Apr 2012 00:19:47 +0200
+Message-Id: <cover.1335132155.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-handheld][PATCH 0/3] Zaurus: (ab)use of linux-yocto as virtual/kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,124 +24,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Apr 2012 22:39:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 22 Apr 2012 22:29:29 -0000
 
-Fixed indentation and sent to oe-core mailing list.
+* This series of patches does the initial commit of
+* the linux-yocto-* recipes for the meta-handheld layer.
+* With minor refinements, the kernel configuration tools used by 
+* the Yocto Project could allow us to have a modular managed kernel.
+* The 'production' kernel is based on linux-yocto while the 
+* 'kexecboot powered' is based on linux-yocto-tiny.
+* Unfortunately the configuration tools are requiring one 
+* directory for each machine containing all required .scc, .cfg and
+* patches (there are other ways but keep it simple at the beginning).
+* Tested on Zaurus (c7x0, poodle, spitz).
+* The linux-yocto-tiny-kexecboot does not build atm because of a
+* klibc incompatibility.
+* Patch for klibc unlocking the new yocto-based kernel will be sent
+* separately.
 
-On Sat, 2012-04-21 at 07:30 +0200, Martin Jansa wrote:
-> On Sat, Apr 21, 2012 at 03:47:09AM +0300, Ciprian Ciubotariu wrote:
-> > Prevent qmake from using mobilityconfig.prf from host system when build webkit.
-> > ---
-> >  meta/recipes-qt/qt4/qt-4.8.0.inc                  |    1 +
-> >  meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch |   52 +++++++++++++++++++++
-> >  meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb         |    2 +-
-> >  3 files changed, 54 insertions(+), 1 deletions(-)
-> >  create mode 100644 meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
-> > 
-> > diff --git a/meta/recipes-qt/qt4/qt-4.8.0.inc b/meta/recipes-qt/qt4/qt-4.8.0.inc
-> > index c0d90cd..ccd75e6 100644
-> > --- a/meta/recipes-qt/qt4/qt-4.8.0.inc
-> > +++ b/meta/recipes-qt/qt4/qt-4.8.0.inc
-> > @@ -20,6 +20,7 @@ SRC_URI = "http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-${PV}.
-> >             file://pulseaudio-config.patch \
-> >             file://g++.conf \
-> >             file://linux.conf \
-> > +	   file://no-qt-mobility.patch \
-> 
-> Please don't mix tabs and spaces for indentation and this patch belongs
-> to openembedded-core ML.
-> 
-> Cheers,
-> 
-> >             "
-> >  
-> >  SRC_URI[md5sum] = "e8a5fdbeba2927c948d9f477a6abe904"
-> > diff --git a/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch b/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
-> > new file mode 100644
-> > index 0000000..ed66509
-> > --- /dev/null
-> > +++ b/meta/recipes-qt/qt4/qt-4.8.0/no-qt-mobility.patch
-> > @@ -0,0 +1,52 @@
-> > +diff --git a/src/3rdparty/webkit/Source/WebCore/features.pri b/src/3rdparty/webkit/Source/WebCore/features.pri
-> > +index f04d0b4..aac0482 100644
-> > +--- a/src/3rdparty/webkit/Source/WebCore/features.pri
-> > ++++ b/src/3rdparty/webkit/Source/WebCore/features.pri
-> > +@@ -14,7 +14,7 @@ meegotouch {
-> > + }
-> > + 
-> > + ## load mobilityconfig if mobility is available
-> > +-load(mobilityconfig, true)
-> > ++#load(mobilityconfig, true)
-> > + 
-> > + ## Define default features macros for optional components
-> > + ## (look for defs in config.h and included files!)
-> > +diff --git a/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro b/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
-> > +index 80cecb3..856351a 100644
-> > +--- a/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
-> > ++++ b/src/3rdparty/webkit/Source/WebKit/qt/examples/platformplugin/platformplugin.pro
-> > +@@ -4,7 +4,7 @@ TEMPLATE = lib
-> > + CONFIG += plugin
-> > + 
-> > + ## load mobilityconfig if mobility is available
-> > +-load(mobilityconfig, true)
-> > ++#load(mobilityconfig, true)
-> > + 
-> > + # HTML5 Media Support
-> > + # We require QtMultimedia
-> > +diff --git a/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro b/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
-> > +index fd31e1e..52f1b46 100644
-> > +--- a/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
-> > ++++ b/src/3rdparty/webkit/Source/WebKit/qt/symbian/platformplugin/platformplugin.pro
-> > +@@ -11,7 +11,7 @@ QT       += core gui \
-> > +             xml
-> > + 
-> > + ## load mobilityconfig if mobility is available
-> > +-load(mobilityconfig, true)
-> > ++#load(mobilityconfig, true)
-> > + 
-> > + isEmpty(OUTPUT_DIR): OUTPUT_DIR = ../../../..
-> > + 
-> > +diff --git a/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri b/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
-> > +index 812fe93..ccbc5a0 100644
-> > +--- a/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
-> > ++++ b/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pri
-> > +@@ -7,7 +7,7 @@ CONFIG(QTDIR_build) { load(qttest_p4) }
-> > + ELSE { TARGET = tst_$$TARGET }
-> > + 
-> > + # Load mobilityconfig if Qt Mobility is available
-> > +-load(mobilityconfig, true)
-> > ++#load(mobilityconfig, true)
-> > + contains(MOBILITY_CONFIG, multimedia) {
-> > +     # This define is used by tests depending on Qt Multimedia
-> > +     DEFINES -= WTF_USE_QT_MULTIMEDIA=0
-> > diff --git a/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb b/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
-> > index 6a0b0b8..63a3769 100644
-> > --- a/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
-> > +++ b/meta/recipes-qt/qt4/qt4-x11-free_4.8.0.bb
-> > @@ -1,7 +1,7 @@
-> >  require qt4-x11-free.inc
-> >  require qt-${PV}.inc
-> >  
-> > -PR = "${INC_PR}.1"
-> > +PR = "${INC_PR}.2"
-> >  
-> >  DEFAULT_PREFERENCE = "-1"
-> >  
-> > -- 
-> > 1.7.3.4
-> > 
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Andrea Adami (3):
+  linux-yocto: initial commit of v. 3.2 for Zaurus
+  linux-yocto-tiny-kexecboot: initial commit of v. 3.2 for Zaurus
+  zaurus: use linux-yocto as virtual/kernel
+
+ conf/machine/include/zaurus.inc                    |    2 +-
+ .../akita/akita-kexecboot.cfg                      | 1698 ++++++++++++
+ .../akita/akita-tiny.scc                           |    7 +
+ .../akita/revert-check-on-console-device.patch     |   41 +
+ .../c7x0/c7x0-kexecboot.cfg                        | 1692 ++++++++++++
+ .../linux-yocto-tiny-kexecboot/c7x0/c7x0-tiny.scc  |    7 +
+ .../c7x0/revert-check-on-console-device.patch      |   41 +
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 +
+ .../collie/collie-kexecboot.cfg                    | 1596 ++++++++++++
+ .../collie/collie-tiny.scc                         |    7 +
+ .../collie/collie_remove_irq_to_gpio.patch         |   31 +
+ .../collie/locomo_kbd_tweak-r2.patch               |   80 +
+ .../collie/revert-check-on-console-device.patch    |   41 +
+ .../poodle/locomo_kbd_tweak-r2.patch               |   80 +
+ .../poodle/poodle-kexecboot.cfg                    | 1600 ++++++++++++
+ .../poodle/poodle-tiny.scc                         |    7 +
+ .../poodle/revert-check-on-console-device.patch    |   41 +
+ .../spitz/revert-check-on-console-device.patch     |   41 +
+ .../spitz/spitz-kexecboot.cfg                      | 1697 ++++++++++++
+ .../spitz/spitz-tiny.scc                           |    7 +
+ .../tosa/revert-check-on-console-device.patch      |   41 +
+ .../tosa/tosa-kexecboot.cfg                        | 1601 ++++++++++++
+ .../linux-yocto-tiny-kexecboot/tosa/tosa-tiny.scc  |    7 +
+ .../linux/linux-yocto-tiny-kexecboot_3.2.bbappend  |   71 +
+ .../linux/linux-yocto/akita/akita-standard.scc     |   13 +
+ recipes-kernel/linux/linux-yocto/akita/akita.cfg   | 2692 +++++++++++++++++++
+ .../linux/linux-yocto/c7x0/c7x0-standard.scc       |   13 +
+ recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg     | 2412 ++++++++++++++++++
+ ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 +
+ .../linux/linux-yocto/collie/collie-standard.scc   |   13 +
+ recipes-kernel/linux/linux-yocto/collie/collie.cfg | 2420 ++++++++++++++++++
+ .../collie/collie_remove_irq_to_gpio.patch         |   31 +
+ .../linux-yocto/collie/locomo_kbd_tweak-r2.patch   |   80 +
+ .../linux-yocto/poodle/locomo_kbd_tweak-r2.patch   |   80 +
+ .../linux/linux-yocto/poodle/poodle-standard.scc   |   13 +
+ recipes-kernel/linux/linux-yocto/poodle/poodle.cfg | 2422 ++++++++++++++++++
+ .../linux/linux-yocto/spitz/spitz-standard.scc     |   13 +
+ recipes-kernel/linux/linux-yocto/spitz/spitz.cfg   | 2691 +++++++++++++++++++
+ .../linux/linux-yocto/tosa/tosa-standard.scc       |   13 +
+ recipes-kernel/linux/linux-yocto/tosa/tosa.cfg     | 2694 ++++++++++++++++++++
+ recipes-kernel/linux/linux-yocto_3.2.bbappend      |   57 +
+ 41 files changed, 26160 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie_remove_irq_to_gpio.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/revert-check-on-console-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-kexecboot.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-tiny.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+ create mode 100644 recipes-kernel/linux/linux-yocto/akita/akita-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/akita/akita.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto/c7x0/c7x0-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto/collie/collie-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/collie/collie.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto/collie/collie_remove_irq_to_gpio.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto/collie/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto/poodle/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto/poodle/poodle-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto/spitz/spitz-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto/tosa/tosa-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto_3.2.bbappend
+
+-- 
+1.7.3.4
 
 
 
