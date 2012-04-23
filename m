@@ -1,20 +1,14 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from ffm.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SM5Hq-0000Kl-UF
+	(envelope-from <obi@opendreambox.org>) id 1SM78d-00025t-G0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2012 00:29:42 +0200
-Received: from mizar.localdomain (87.5.26.19) by smtp205.alice.it (8.6.023.02)
-	id 4F421F7B071BFE01; Mon, 23 Apr 2012 00:20:12 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 23 Apr 2012 02:28:19 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Apr 2012 00:19:50 +0200
-Message-Id: <e3ea4434356f8c3cd627eb13db7b74caf58f4854.1335132155.git.andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <cover.1335132155.git.andrea.adami@gmail.com>
-References: <cover.1335132155.git.andrea.adami@gmail.com>
-In-Reply-To: <cover.1335132155.git.andrea.adami@gmail.com>
-References: <cover.1335132155.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 3/3] zaurus: use linux-yocto as virtual/kernel
+Date: Mon, 23 Apr 2012 02:18:43 +0200
+Message-Id: <1335140323-10305-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] oe-stylize.py: Add SUMMARY variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,30 +22,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Apr 2012 22:29:43 -0000
+X-List-Received-Date: Mon, 23 Apr 2012 00:28:19 -0000
 
-* tested 3.2 on c7x0, poodle, spitz
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- conf/machine/include/zaurus.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ contrib/oe-stylize.py |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index a43db8b..1ef3213 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -31,7 +31,7 @@ PREFERRED_PROVIDER_virtual/libgl = "mesa-xlib"
- # kernel
- ########
+diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
+index e254b6a..07ed4f6 100755
+--- a/contrib/oe-stylize.py
++++ b/contrib/oe-stylize.py
+@@ -28,6 +28,7 @@ __version__ = "$Revision: 0.5 $"
  
--PREFERRED_PROVIDER_virtual/kernel = "linux"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
- 
- # Default bootloader expects "zImage", use "uImage" for u-boot
- # Note: kexecboot can boot both kind of images
+ # The standard set of variables often found in .bb files in the preferred order
+ OE_vars = [
++    'SUMMARY',
+     'DESCRIPTION',
+     'AUTHOR',
+     'HOMEPAGE',
 -- 
-1.7.3.4
+1.7.5.4
 
 
 
