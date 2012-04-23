@@ -1,33 +1,46 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SMF6V-0004Ma-3n
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2012 10:58:39 +0200
-Received: by wibhj13 with SMTP id hj13so2247475wib.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SMIpD-00088G-4P for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Apr 2012 14:57:03 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SMIfz-0003et-7H for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Apr 2012 14:47:31 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Apr 2012 14:47:31 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2012 01:49:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=GfKLKULMHSuIE16T15ci8sx9LYfr1s1nDtKBPDZTGPk=;
-	b=BYdaKCxWR01zuiCY6Z3mM7d/fEa1jyHxJ7cEvmvGaNcppYf4dx4tdDkdM8J6yYTnzd
-	REQ+lBnsdVKKpX8Mo2q1hQi7veaIVwg+YEknW4zTIS4aPHRTscAalIA8Trown0Tn6D0j
-	IhdKOeYQPATDm4TsvMtrs+XoaNYR2vdR2ysgDFfBsBzVuT8Y6WYmijHlLXVoS2xYb1o4
-	aVGvsPBYN7DZUU2D/MQ7Mvab9HYZDs+Xg5F6ZlZa+ZSp34CoT3Ok1jKM/jTgFJ76CaDv
-	p9pdm0nWK+hJ7XesFCb/c0Q82EDe6nRsBm5dN0L0Hz7vtrZJANyfx0FSBDotTuGER6HK
-	19ow==
-MIME-Version: 1.0
-Received: by 10.180.83.72 with SMTP id o8mr19329312wiy.5.1335170939255; Mon,
-	23 Apr 2012 01:48:59 -0700 (PDT)
-Received: by 10.223.159.15 with HTTP; Mon, 23 Apr 2012 01:48:59 -0700 (PDT)
-In-Reply-To: <jmrfmb$s29$1@dough.gmane.org>
-References: <CAGiJk9eeDabHUuKAnHZtWw_ChX7jVEDvsN+LEpsZomvH_Ky94w@mail.gmail.com>
-	<jmrfmb$s29$1@dough.gmane.org>
-Date: Mon, 23 Apr 2012 10:48:59 +0200
-Message-ID: <CAGiJk9cqTnLJKjTg1SVzioNQZypBmd13CURtWxmD1V8JDKeBmg@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Mon, 23 Apr 2012 14:47:31 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Some packages don't get deployed to the staging directory?
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 23 Apr 2012 14:47:14 +0200
+Message-ID: <jn3j0k$1h7$1@dough.gmane.org>
+References: <CAGiJk9c8ThXrLqsrgYQb03hShObTJynt+fxsRxG9VzYOkOsyUg@mail.gmail.com>
+	<jmmst9$r5o$1@dough.gmane.org>
+	<CAGiJk9e4vZoO1d1cCbh8Lq26m6h3M5rrOOe40CS1ov2VHqh9eQ@mail.gmail.com>
+	<jmomha$co7$1@dough.gmane.org>
+	<CAGiJk9fy3p550fUxadQUYmahhx4DVRYeEt_GDYgjBhMVpHzBMw@mail.gmail.com>
+	<jmpg5o$52s$1@dough.gmane.org> <jmqsdv$ic7$1@dough.gmane.org>
+	<CAGiJk9eh0KqA-qE96uc5BwHOu9n7VmGuZzgWcAisa+HhjGagzQ@mail.gmail.com>
+	<jmrdgc$cq4$1@dough.gmane.org>
+	<CAGiJk9cexZwA0SY5gSfpbMctg4wzjxZ6BAUxZgkY6ApR93SuAg@mail.gmail.com>
+	<jmrfan$q6g$1@dough.gmane.org>
+	<CAGiJk9eBf_d5pOZtL_Vrmb7aisGBadSzA36yohZJbO7MTPPnFw@mail.gmail.com>
+	<jms02o$577$1@dough.gmane.org>
+	<CAGiJk9c8ZuD_+BpcJXDo2-f9Ra4NKeoGk-Mvm+VAGA5=w1payw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <CAGiJk9c8ZuD_+BpcJXDo2-f9Ra4NKeoGk-Mvm+VAGA5=w1payw@mail.gmail.com>
+X-Enigmail-Version: 1.4
+Subject: Re: [meta-kde] Test images (was: Re: [OE-core] RFC: Porting KDE Plasma Active (WIP))
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,53 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2012 08:58:39 -0000
+X-List-Received-Date: Mon, 23 Apr 2012 12:57:03 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 20-04-12 12:15, Samuel Stirtzel schreef:
->> Hi, my observation shows that e.g. libphonon.so from the package
->> libqtphonon4-dev will not get installed to the staging sysroot.
->>
->> Is this intended or a bug?
->>
->>
->> The same happened with other non -dev packages like
->> meta-kde/recipes-base/kde-runtime_git.bb. The package
->> kde-runtime-declarative-scriptengine will get installed but it's content
->> is missing in the staging sysroot (not an issue but still confusing).
->>
->> I'm currently fixing race conditions in meta-kde and set strict explicit
->> behavior on search paths for libraries (not searching native/hosts
->> directories for libs). kdelibs4 obviously fails over this with
->> "libphonon.so no rule to make target", but that goes too much into the
->> details.
->
-> AIUI OE uses a whitelist to stage directories (correct me if I'm wrong), so
-> not everything ends up in sysroots. I have a similar problem with files in
-> /lib/firmware that I'd like to have end up in sysroots.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-In my case it is only a symlink that is missing.
+Op 23-04-12 09:17, Samuel Stirtzel schreef:
+> 2012/4/20 Koen Kooi <koen@dominion.thruhere.net>:
 
-Would adding
-do_install_append() {
-cp ${S}/lib/libphonon.so ${STAGING_LIBDIR}/libphonon.so
-}
-to my Qt .bbappend be a bad idea?
+> And do you have a bbappend for qt to enable GLES?
+> 
+>> The "recipes-misc-support/qt4-x11-free_4.8.0.bbappend" [1] enables GLES
+>> for Qt on the soc family omap3.
 
+Actually it doesn't :) That enables EGL mode, but 'desktop GL' as Qt calls it:
 
->
-> regards,
->
-> Koen
+OpenGL support ......... yes (Desktop OpenGL)
 
+So I did:
+
++++ b/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
+@@ -1,7 +1,7 @@
+- -QT_GLFLAGS_omap3 = "-egl"
++QT_GLFLAGS_omap3 = "-opengl es2 "
+
+And I get:
+
+[koen@Angstrom-F16-vm-rpm qt4-x11-free-4.8.0-r43.1]$ grep OpenGL
+temp/log.do_configure
+OpenGL ES 2.x auto-detection... ()
+OpenGL ES 2.x enabled.
+OpenGL support ......... yes (OpenGL ES 2.x)
+
+I'm going to see if that actually builds. If so, I'll send a patch to fix it
+and add more TI opengl platforms. And I'll poke my ex coworkers about having
+a bbappend in meta-ti to enable opengl for the respective platforms, doing
+it in meta-kde feels wrong, but works for me at the moment.
+
+regards,
+
+Koen
 
 
--- 
-Regards
-Samuel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPlU9PAAoJEHZqAkdh1vT6k5EQAJY7nM5HKsP21hMPW5n/1DUg
+tKddTM25pBFST+7CUfswt0iC12tLn2yAvzxKFlbq9cvvV2oBlVEdEGZJwEhCZW4y
+f8x3kgwd6Q0T4qyzL0ZcqJEmX9e7nDRSKkcn7qnZLfZ5l00lnroOwUOwNWUD540l
+X9EZiO7TsNITmVkJkvT18xIVwwg7cRgwMEp72pPYCA6YPhDLHNlAkKq9/nflUBW1
+I6zaNIK23JS8EJmeRncQyINB0sefnsutKRTqo3Md74/qCYAD7pL5adSjn7YDwdcq
+XDw9+FqaE5KHOMcECH4SsW2/sUwaX+PrsSuqgYr6deOKpJ4iXb9xaD1JMyk32GPt
+OI98v3q8OCC4xQ9Ve4CbNNCvc9/qwqhcWwwwDs2v6kGkBCR4EKH0IBPJS1jIqVbz
+kZtCP3d1ziCEK7dicR1qNiZSZWf8izMIRxLxVVCyaMEpmqXRSNohjpphkOxQ6VsD
+K551C500Mu0PsJfMYDEvdS+cQ2gUjUkpaCjYbV/owYWz2YqTR/NnNXPafuuklnbY
+XAa00gjBPX+yBYQmY9kMVOz5TEurgN12Kpu9X8SNCD8wGJHknPll1UhOpBJx7zVo
+RiSAh0ctU2J6ftAdlsqFrA4RaISxqTq4YBMh0YJfZOU90pceMOr4lg3dhso6Hpnf
+SanxQ3j15KLJPEpik9jy
+=zVVi
+-----END PGP SIGNATURE-----
+
 
 
