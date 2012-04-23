@@ -1,35 +1,34 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SMKMO-0003d2-Gv
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SMLKh-0006J8-L4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2012 16:35:24 +0200
-Received: by wgbdr12 with SMTP id dr12so9975777wgb.24
+	Mon, 23 Apr 2012 17:37:43 +0200
+Received: by wera1 with SMTP id a1so7644077wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2012 07:25:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=zKcLYxknguBMv6603qA11JsfFOywNmNHPNEDz6HE8MM=;
-	b=NDziQsdjTw8SlT3YN274/f2U1++aMpTusPP1+HfbJhHIFW/As95O/bqmp4Ov8FK/iY
-	85slTGub5E6cT+k1PDd8RUg5kktxMSx4a1KSk+wVoNRe6toA7QFsxp9A8vBGw1QnnnWT
-	2r1NwjtdhGgJ8/xHQyIhmHlcOWecYTgNETitUIU5Nq4upR+yaW8iE36hKVQSZnnaP4DV
-	udl/arywXkXYd9jh5UgeZm1XFqMlDFKNWbxv6mRG7R+KPVQp5yc/0hz67Yox9CKb+Igx
-	dKiBa/6uY8YCYRHnAsHBrUmJHbdZOa+D7D83ejRf+h5YDniojktO1Y/lLGWhYzSYYvfn
-	V1oQ==
-Received: by 10.216.138.38 with SMTP id z38mr2564077wei.63.1335191151037;
-	Mon, 23 Apr 2012 07:25:51 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ca3sm22917421wib.6.2012.04.23.07.25.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 Apr 2012 07:25:50 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Mon, 23 Apr 2012 08:28:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=YwR9XqZIwgu6ITRL68rUnKwHTj1eT+QK/ltBok/7XHs=;
+	b=ULLwpR5GiFc1jiH4L2AeRV9fe0G8WwEGEHKWs6nnn54WgCdf106ekfYSqyiDTDfVG6
+	PmrPXcOv0HbfMKCVZmYEziOrMjOckfZX/HlMuAacGGsscxYHbBzuFkAQiw46QWj6/t4S
+	dhS/TMuNTXpGHQF5kF0B7HxyDY9JBGfksipjX3mvZC9ycGb3/+8+e3jEfQBGnDh/q9e5
+	Ia2wGSEiNW5K/T0Tsi1vxaI5ZPiQEc63wEdzmnYgaSpPZI0YJpXQFO56stQ0Sql/GcY2
+	N8ui85kGbX0MAo2Wd7lVLNS+jO6FpmmwmFaDAEKsHgUITmD3LlCwCXyntW75mIwCZTa0
+	FcdA==
+MIME-Version: 1.0
+Received: by 10.180.88.169 with SMTP id bh9mr22605694wib.5.1335194889969; Mon,
+	23 Apr 2012 08:28:09 -0700 (PDT)
+Received: by 10.223.159.15 with HTTP; Mon, 23 Apr 2012 08:28:09 -0700 (PDT)
+In-Reply-To: <1335191135-6762-1-git-send-email-koen@dominion.thruhere.net>
+References: <1335191135-6762-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 23 Apr 2012 17:28:09 +0200
+Message-ID: <CAGiJk9cpZH1gTD0=C0LH3JSoqHTwdhtbOaYg477cWUEfdJRh2g@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Apr 2012 16:25:35 +0200
-Message-Id: <1335191135-6762-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQm+S+bus+QFE5cruzGZkIVss13Z2asw2wCa5IYUx2XYrs0vKJrZCtfOsyvVOyatYYJFsk6i
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-kde][PATCH] qt4-x11-free 4.8.0 bbappend: fix GLES configure switch and turn it on for AM335x SoCs as well
+Subject: Re: [meta-kde][PATCH] qt4-x11-free 4.8.0 bbappend: fix GLES configure switch and turn it on for AM335x SoCs as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2012 14:35:24 -0000
+X-List-Received-Date: Mon, 23 Apr 2012 15:37:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-misc-support/qt4-x11-free_4.8.0.bbappend |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+2012/4/23 Koen Kooi <koen@dominion.thruhere.net>:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+> =C2=A0recipes-misc-support/qt4-x11-free_4.8.0.bbappend | =C2=A0 =C2=A05 +=
+++--
+> =C2=A01 files changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend b/recipes-m=
+isc-support/qt4-x11-free_4.8.0.bbappend
+> index b5a3c16..4895893 100644
+> --- a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
+> +++ b/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
+> @@ -1,7 +1,8 @@
+> -QT_GLFLAGS_omap3 =3D "-egl"
+> +QT_GLFLAGS_omap3 =3D "-opengl es2 "
+> =C2=A0DEPENDS_append_omap3 =3D " libgles-omap3"
+> +DEPENDS_append_ti33x =3D " libgles-omap3"
+>
+> =C2=A0# Needed by kdelibs
+> =C2=A0QT_DISTRO_FLAGS =3D "-accessibility -sm"
+>
+> -PRINC :=3D "${@int(PRINC) + 1}"
+> \ No newline at end of file
+> +PRINC :=3D "${@int(PRINC) + 2}"
+> --
+> 1.7.7.6
+>
 
-diff --git a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend b/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
-index b5a3c16..4895893 100644
---- a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
-+++ b/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
-@@ -1,7 +1,8 @@
--QT_GLFLAGS_omap3 = "-egl"
-+QT_GLFLAGS_omap3 = "-opengl es2 "
- DEPENDS_append_omap3 = " libgles-omap3"
-+DEPENDS_append_ti33x = " libgles-omap3"
- 
- # Needed by kdelibs
- QT_DISTRO_FLAGS = "-accessibility -sm"
- 
--PRINC := "${@int(PRINC) + 1}"
-\ No newline at end of file
-+PRINC := "${@int(PRINC) + 2}"
--- 
-1.7.7.6
 
+Applied, thanks.
+
+You don't need QT_GLFLAGS_ti33x =3D "-opengl es2 " in the .bbappend?
+
+
+--=20
+Regards
+Samuel
 
 
