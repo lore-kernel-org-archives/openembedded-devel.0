@@ -1,16 +1,18 @@
 Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SMR05-0008QB-0a
+	(envelope-from <andrea.adami@gmail.com>) id 1SMR05-0008QB-Un
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Apr 2012 23:40:49 +0200
+	Mon, 23 Apr 2012 23:40:50 +0200
 Received: from mizar.localdomain (87.5.26.19) by smtp206.alice.it (8.6.023.02)
-	id 4F1836AD0B30A562; Mon, 23 Apr 2012 23:31:17 +0200
+	id 4F1836AD0B30A572; Mon, 23 Apr 2012 23:31:18 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Apr 2012 23:31:12 +0200
-Message-Id: <1335216674-11159-1-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 23 Apr 2012 23:31:13 +0200
+Message-Id: <1335216674-11159-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-handheld][PATCH 1/3] zaurus-installer: use linux-yocto-tiny-kexecboot kernel
+In-Reply-To: <1335216674-11159-1-git-send-email-andrea.adami@gmail.com>
+References: <1335216674-11159-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH 2/3] zaurus.inc: update references to linux-kexecboot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,49 +26,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2012 21:40:49 -0000
+X-List-Received-Date: Mon, 23 Apr 2012 21:40:50 -0000
 
-* bump PR
+* now using linux-yocto-tiny-kexecboot
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-bsp/zaurus-utils/zaurus-installer.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ conf/machine/include/zaurus.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/zaurus-utils/zaurus-installer.bb b/recipes-bsp/zaurus-utils/zaurus-installer.bb
-index 785836f..62f01c8 100644
---- a/recipes-bsp/zaurus-utils/zaurus-installer.bb
-+++ b/recipes-bsp/zaurus-utils/zaurus-installer.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Installkit for kexecboot-kernel"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
--DEPENDS = "${@base_conditional('MACHINE', 'collie', 'linux-kexecboot', 'zaurus-updater linux-kexecboot', d)}"
-+DEPENDS = "${@base_conditional('MACHINE', 'collie', 'linux-yocto-tiny-kexecboot', 'zaurus-updater linux-yocto-tiny-kexecboot', d)}"
- DEPENDS += "${@base_conditional('MACHINE', 'spitz', 'zaurus-legacy-tar', '', d)}"
--PR = "r6"
-+PR = "r7"
+diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
+index 1ef3213..268b9fd 100644
+--- a/conf/machine/include/zaurus.inc
++++ b/conf/machine/include/zaurus.inc
+@@ -69,10 +69,10 @@ MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
  
- INHIBIT_DEFAULT_DEPS = "1"
+ ##################################
+ # Zaurus rootfs are booted by
+-# linux-kexecboot
++# linux-yocto-tiny-kexecboot
+ ##################################
  
-@@ -14,7 +14,7 @@ do_compile() {
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- PACKAGES = ""
+-# If set here, each image will also build linux-kexecboot and the updater
++# If set here, each image will also build linux-yocto-tiny-kexecboot and the updater
+ # EXTRA_IMAGEDEPENDS += "zaurus-installer"
  
--COMPATIBLE_MACHINE = "(collie|poodle|c7x0|spitz|akita|tosa)"
-+COMPATIBLE_MACHINE = "collie|poodle|c7x0|spitz|akita|tosa"
- 
- inherit deploy
- 
-@@ -24,7 +24,7 @@ do_deploy() {
-         cd ${DEPLOY_DIR_IMAGE}
-         rm -rf ${DEPLOY_DIR_IMAGE}/installkit-${MACHINE}/
-         mkdir installkit-${MACHINE}/
--        [ -f "${KERNEL_IMAGETYPE}-kexecboot-${MACHINE}.bin" ] && cp ${KERNEL_IMAGETYPE}-kexecboot-${MACHINE}.bin installkit-${MACHINE}/${KERNEL_IMAGETYPE}
-+        [ -f "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}.bin" ] && cp ${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}.bin installkit-${MACHINE}/${KERNEL_IMAGETYPE}
-         if [ ! "${MACHINE}" = "collie" ]; then
-                 cp updater.sh installkit-${MACHINE}/updater.sh
-         fi
+ # Install /boot/boot.cfg in target images
 -- 
 1.7.3.4
 
