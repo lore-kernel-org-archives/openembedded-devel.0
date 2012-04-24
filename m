@@ -1,29 +1,28 @@
-Received: from mail-qc0-f175.google.com ([209.85.216.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SMmwu-0002V3-Pt
+	(envelope-from <vwyodapink@gmail.com>) id 1SMmxM-0003Pv-RH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Apr 2012 23:07:01 +0200
-Received: by qcso7 with SMTP id o7so663195qcs.6
+	Tue, 24 Apr 2012 23:07:29 +0200
+Received: by ghbz2 with SMTP id z2so784738ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2012 13:57:25 -0700 (PDT)
+	Tue, 24 Apr 2012 13:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=iVJv6SemJAcyoL4M1uiLRe9gVeGD4Pa29PwuVpEvcSY=;
-	b=Jy3aOdq051s09WBFAi84uUrAwSfpBtjbKKDwQs0hIvEf80ec/47S3IDbhTew/ZwrWV
-	nBhv0K5dh2P2Rf+1Ezi7q0VPjujS9tOPFhon2qBWlpYcMRakyHLsuOGP5mpyb2ID5AQA
-	kdGN4KsKcnr4Rn+UQo2VrWq2spNJqNnsBbA7FUv1NwwxVio7H/rdeQrpi+BTm9jeGB1I
-	896uUwxMyef+LobF2ve/GBaoroB7YgWahPnDyfvuhxkZbYxDdbPXmBlWjn7jAafiUZ3o
-	zJ39+b62ctFfaChgk6qIgFiLsDmSJV2JOoQ3OUUSf4hCV57C/c4BQ5YfPEQrBpryuX72
-	29aA==
-Received: by 10.224.198.70 with SMTP id en6mr338734qab.62.1335301045381;
-	Tue, 24 Apr 2012 13:57:25 -0700 (PDT)
+	bh=15PUsbeMY/lzZq4e4ghjXnIb6qY2bWNWYJ91MSpe2Oc=;
+	b=j+OrgLoIPxk3ysE5J47/KarIH+kut44OOtXZTBZDQUBSyWCelGTPb+CcqFYuL4/r+I
+	w9kcaA1Kk5/Y1xWXZ9MklcINA4mZUKdx6wp3mjY5xpNroQ+ZJsPHKcCTW/+HFw++yODQ
+	za8+kO9/Z15BKlDyxQj6J9PP0ufnDVT+cb+q5G1lKz11i/JYOzTEpEQutHvMnepLvsY1
+	f5yj9NrpxWvgwFAgRautsJlmU1XwUmSNblfYtTxNM1NjDEsuRGbaSWCxfzenFXeZyClb
+	y7voHeyMxzR58hNyHMn+SKSfd8xV01+J3QrdpN9LJT8YM3dQLF/nUP41DUV5FEl9+2Uy
+	10Wg==
+Received: by 10.236.179.70 with SMTP id g46mr45029yhm.28.1335301073507;
+	Tue, 24 Apr 2012 13:57:53 -0700 (PDT)
 Received: from [192.168.1.14] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id
-	bm15sm28530512qab.17.2012.04.24.13.57.19
-	(version=SSLv3 cipher=OTHER); Tue, 24 Apr 2012 13:57:24 -0700 (PDT)
-Message-ID: <4F9713A3.4010803@gmail.com>
-Date: Tue, 24 Apr 2012 13:57:07 -0700
+	by mx.google.com with ESMTPS id f40sm12444161ani.16.2012.04.24.13.57.49
+	(version=SSLv3 cipher=OTHER); Tue, 24 Apr 2012 13:57:53 -0700 (PDT)
+Message-ID: <4F9713C4.2020908@gmail.com>
+Date: Tue, 24 Apr 2012 13:57:40 -0700
 From: j <vwyodapink@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
@@ -62,7 +61,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Apr 2012 21:07:01 -0000
+X-List-Received-Date: Tue, 24 Apr 2012 21:07:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -204,5 +203,7 @@ anything on a fresh install
 or build a complete image such as xfce-nm-image or systemd-gnome-image.
 
 I change nothing else in the configs.
+
+Thank you for your time!
 
 
