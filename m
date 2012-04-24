@@ -1,19 +1,34 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-qc0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1SMmlc-0003Hi-9y
+	(envelope-from <vwyodapink@gmail.com>) id 1SMmwu-0002V3-Pt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Apr 2012 22:55:20 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.6])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1SMmcN-0001cg-JH
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Apr 2012 22:45:47 +0200
-Message-ID: <1335300289.3133.136.camel@x121e.pbcl.net>
-From: Phil Blundell <philb@gnu.org>
+	Tue, 24 Apr 2012 23:07:01 +0200
+Received: by qcso7 with SMTP id o7so663195qcs.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Apr 2012 13:57:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=iVJv6SemJAcyoL4M1uiLRe9gVeGD4Pa29PwuVpEvcSY=;
+	b=Jy3aOdq051s09WBFAi84uUrAwSfpBtjbKKDwQs0hIvEf80ec/47S3IDbhTew/ZwrWV
+	nBhv0K5dh2P2Rf+1Ezi7q0VPjujS9tOPFhon2qBWlpYcMRakyHLsuOGP5mpyb2ID5AQA
+	kdGN4KsKcnr4Rn+UQo2VrWq2spNJqNnsBbA7FUv1NwwxVio7H/rdeQrpi+BTm9jeGB1I
+	896uUwxMyef+LobF2ve/GBaoroB7YgWahPnDyfvuhxkZbYxDdbPXmBlWjn7jAafiUZ3o
+	zJ39+b62ctFfaChgk6qIgFiLsDmSJV2JOoQ3OUUSf4hCV57C/c4BQ5YfPEQrBpryuX72
+	29aA==
+Received: by 10.224.198.70 with SMTP id en6mr338734qab.62.1335301045381;
+	Tue, 24 Apr 2012 13:57:25 -0700 (PDT)
+Received: from [192.168.1.14] (dpc674485156.direcpc.com. [67.44.85.156])
+	by mx.google.com with ESMTPS id
+	bm15sm28530512qab.17.2012.04.24.13.57.19
+	(version=SSLv3 cipher=OTHER); Tue, 24 Apr 2012 13:57:24 -0700 (PDT)
+Message-ID: <4F9713A3.4010803@gmail.com>
+Date: Tue, 24 Apr 2012 13:57:07 -0700
+From: j <vwyodapink@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120406 Thunderbird/11.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Apr 2012 21:44:49 +0100
-In-Reply-To: <4F970F9C.7030508@gmail.com>
 References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
 	<4F8C9902.8020904@gmail.com> <4F8C9D26.9050500@mlbassoc.com>
 	<4F8C9E68.9050106@gmail.com> <4F8CCAAA.6050406@gmail.com>
@@ -31,8 +46,8 @@ References: <4F88ACCE.1030202@gmail.com> <4F88ADA3.5030804@gmail.com>
 	<4F90B056.5020209@gmail.com> <4F9144BE.1070508@mlbassoc.com>
 	<4F91A4E4.2090608@gmail.com> <4F932ADB.7040003@gmail.com>
 	<4F970F9C.7030508@gmail.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
+	<1335300289.3133.136.camel@x121e.pbcl.net>
+In-Reply-To: <1335300289.3133.136.camel@x121e.pbcl.net>
 Subject: Re: [oe-core] 3 build machines all failing in the same manner - was:ld segfault cant figure it out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,26 +62,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Apr 2012 20:55:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 24 Apr 2012 21:07:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2012-04-24 at 13:39 -0700, j wrote:
-> So the qa.log I attached previously is meaningless? The 
-> warnings/messages mean nothing? To me the ld segfault is the reason most 
-> of qa.log has messages. Also why would oe-classic build on my laptop and 
-> one of the borrowed machines with no segfaults and no issues with the 
-> completed images, but then doing the new setup and version used gives me 
-> the build issues on multiple machines. I also do not understand why if 
-> while building, the build machine segfaults while building some package 
-> but the "offending" package does not fail.
+On 04/24/2012 01:44 PM, Phil Blundell wrote:
+> On Tue, 2012-04-24 at 13:39 -0700, j wrote:
+>> So the qa.log I attached previously is meaningless? The
+>> warnings/messages mean nothing? To me the ld segfault is the reason most
+>> of qa.log has messages. Also why would oe-classic build on my laptop and
+>> one of the borrowed machines with no segfaults and no issues with the
+>> completed images, but then doing the new setup and version used gives me
+>> the build issues on multiple machines. I also do not understand why if
+>> while building, the build machine segfaults while building some package
+>> but the "offending" package does not fail.
+> What exactly do you mean by "the build machine segfaults"?  What
+> precisely is the problem that you're having, and which particular
+> messages in qa.log do you think are associated with "the ld segfault"?
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+The build machines all give messages like this just vary on libc version 
+listed
 
-What exactly do you mean by "the build machine segfaults"?  What
-precisely is the problem that you're having, and which particular
-messages in qa.log do you think are associated with "the ld segfault"?
+[47152.769257] ld[22617]: segfault at 403 ip 00007f2149cfd435 sp 
+00007fffb83ccb50 error 4 in libc-2.15.so[7f2149cb6000+197000]
+2012-04-18T14:50:08-07:00 localhost kernel: [47163.860996] ld[31096]: 
+segfault at 403 ip 00007fc2da152435 sp 00007fffab491c30 error 4 in 
+libc-2.15.so[7fc2da10b000+197000]
 
-p.
+qa.log has more than these messages but every machines logs are the same 
+like this
+
+udev-182: udev: 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/udev-182-r0/packages-split/libgudev/lib/libgudev-1.0.so.0.1.1 
+links to something under exec_prefix
+udev-182: ldd reports:     libudev.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libudev.so.0 
+(0xdead1000)
+     libgobject-2.0.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libgobject-2.0.so.0 
+(0xdead2000)
+     libffi.so.5 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libffi.so.5 
+(0xdead3000)
+     libgthread-2.0.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libgthread-2.0.so.0 
+(0xdead4000)
+     libpthread.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libpthread.so.0 
+(0xdead5000)
+     libglib-2.0.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libglib-2.0.so.0 
+(0xdead6000)
+     librt.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/librt.so.1 
+(0xdead7000)
+     libc.so.6 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libc.so.6 
+(0xdead8000)
+     libgcc_s.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libgcc_s.so.1 
+(0xdead9000)
+     /lib/ld-linux.so.3 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/ld-linux.so.3 
+(0xdeada000)
+
+udev-182: udev: 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/udev-182-r0/packages-split/udev/lib/udev/udevd 
+links to something under exec_prefix
+udev-182: ldd reports:     libblkid.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libblkid.so.1 
+(0xdead1000)
+     libkmod.so.2 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libkmod.so.2 
+(0xdead2000)
+     librt.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/librt.so.1 
+(0xdead3000)
+     libc.so.6 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libc.so.6 
+(0xdead4000)
+     libuuid.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libuuid.so.1 
+(0xdead5000)
+     libpthread.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libpthread.so.0 
+(0xdead6000)
+     /lib/ld-linux.so.3 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/ld-linux.so.3 
+(0xdead7000)
+
+libcgroup-0.37.1: libcgroup: 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/libcgroup-0.37.1-r1/packages-split/cgroups-pam-plugin/lib/security/pam_cgroup.so.0.0.0 
+links to something under exec_prefix
+libcgroup-0.37.1: ldd reports:     libcgroup.so.1 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/usr/lib/libcgroup.so.1 
+(0xdead1000)
+     libpthread.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libpthread.so.0 
+(0xdead2000)
+     libpam.so.0 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libpam.so.0 
+(0xdead3000)
+     libdl.so.2 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libdl.so.2 
+(0xdead4000)
+     libc.so.6 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/libc.so.6 
+(0xdead5000)
+     /lib/ld-linux.so.3 => 
+/home/gusterson/OpenEmbed/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/beagleboard/lib/ld-linux.so.3 
+(0xdead6000)
 
 
+each one of the machines from a fresh install have this problem. The 
+resulting image boots but does not fully function. I have issues such as 
+the native sdk does not install all the packages correctly.
+example would be install.
+normall you would find it
+/usr/bin/install
+I end up with
+/home/bill/OE/usr/bin/install
+
+How I have done each mahine
+fresh install Ubuntu
+reconfigure dash
+install required packages as per OE and your distro
+update then reboot
+git clone angstrom setup-scripts
+configure machine as beagleboard.
+source the environment
+build either just perl first. to save time as it will segfault building 
+anything on a fresh install
+or build a complete image such as xfce-nm-image or systemd-gnome-image.
+
+I change nothing else in the configs.
 
 
