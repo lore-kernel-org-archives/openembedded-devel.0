@@ -1,32 +1,34 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1SNKLr-00085o-KB
+	(envelope-from <tasskjapp@gmail.com>) id 1SNKLz-000869-7x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Apr 2012 10:46:59 +0200
-Received: by lbjn8 with SMTP id n8so743017lbj.6
+	Thu, 26 Apr 2012 10:47:07 +0200
+Received: by lagw12 with SMTP id w12so748160lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2012 01:37:22 -0700 (PDT)
+	Thu, 26 Apr 2012 01:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=piJEA2QMoVkko7hhnshko+RL4FIc7CY+mw4dg9KnqBs=;
-	b=J8U76UhcMwwTDx1DjHBZ4UZeaCy9qz87cqQ+lBJD9VcDP83EedotKE95grefTc9Euc
-	I3sVH9guvUuvpe2Kih1q61X1TM2/QdnWF9XOs1HBQUFWMxwkwrAs8ktdsN7r4+UFdsAm
-	IseKRS7s4TcCd+NAPRsUgypbfJSC9FWScjUeIlTfcmx/03vPejbzS9VEFwM7WCepQUM7
-	D8j5rWGmCiNLHTtEZ0sFCahWCvwxEd+aWVFPizGOmPaBLXz4EoUTNoTJPD/z4lDFfDjH
-	cX5aoS5W+16kR9sSJWoZ7FSKciYtx3eBd/obobsS1CCbEK9/iqYD31RVO0Yif9keNjGK
-	5HYg==
-Received: by 10.112.38.36 with SMTP id d4mr2862171lbk.72.1335429442470;
-	Thu, 26 Apr 2012 01:37:22 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=u5Hr26EtCMIDBxeUPa3QWqlW8aMjNWa6r9Kc52rV3Ek=;
+	b=Qx+TXqYim5C9BH8CgDV6sB/zSapQzpLqrKe1vxp2B/YJ/OLg3SdTOCECQRqXG26MiQ
+	zmhc41yNZwjEFgS+UVayIBZLgO7zLgOIsgWoba+3pEV5EOuVwqxUWI7tfE3nt/ixV2P6
+	TvxsTN84nfJe4OZ8/q8EVla50TH8TRihwXokLhBRdbPiXjwL70cb2iH+OYjQlkC9mKKV
+	Jhu3DFk3Lk3fkC1bYguSWUYxyWTh0cQfJjvc7sNKTfYQ3WYsXDnIOU8lSg1TRhuVuTJp
+	CyF8K84UNd4DTgvuTaE3DXciri0CGZPVDQgJ/xMtXuRawdH15ngMXjH/GStFIqwyk29f
+	n61w==
+Received: by 10.152.147.161 with SMTP id tl1mr3183485lab.15.1335429450403;
+	Thu, 26 Apr 2012 01:37:30 -0700 (PDT)
 Received: from arpc01.inne.proxdynamics.com ([84.49.231.147])
-	by mx.google.com with ESMTPS id oi3sm2394428lab.12.2012.04.26.01.37.20
+	by mx.google.com with ESMTPS id oi3sm2394428lab.12.2012.04.26.01.37.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 26 Apr 2012 01:37:21 -0700 (PDT)
+	Thu, 26 Apr 2012 01:37:29 -0700 (PDT)
 From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2012 22:35:44 +0200
-Message-Id: <1335472546-9653-1-git-send-email-tasskjapp@gmail.com>
+Date: Thu, 26 Apr 2012 22:35:45 +0200
+Message-Id: <1335472546-9653-2-git-send-email-tasskjapp@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH] Recipe for Synergy 1.3.8
+In-Reply-To: <1335472546-9653-1-git-send-email-tasskjapp@gmail.com>
+References: <1335472546-9653-1-git-send-email-tasskjapp@gmail.com>
+Subject: [meta-oe] Recipe for Synergy 1.3.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,10 +42,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2012 08:46:59 -0000
+X-List-Received-Date: Thu, 26 Apr 2012 08:47:07 -0000
 
-
-Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
 ---
  meta-oe/recipes-support/synergy/synergy_1.3.8.bb |   22 ++++++++++++++++++++++
  1 file changed, 22 insertions(+)
