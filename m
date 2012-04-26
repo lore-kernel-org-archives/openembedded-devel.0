@@ -1,37 +1,37 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SNOK6-0006Lc-7g
+	(envelope-from <martin.jansa@gmail.com>) id 1SNOK9-00068S-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Apr 2012 15:01:26 +0200
-Received: by wera1 with SMTP id a1so778718wer.6
+	Thu, 26 Apr 2012 15:01:30 +0200
+Received: by mail-we0-f175.google.com with SMTP id a1so778636wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2012 05:51:40 -0700 (PDT)
+	Thu, 26 Apr 2012 05:51:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=hkEwSUqk45KRaCSySygY/0h9xB3gcmAVEuiP8mQnqzI=;
-	b=pANWW2z2E6pRK0YkBBMiWLZBe/s9K1/p6IYgTQykHa6DkGfoRRww4wkH1d/GdJexb4
-	i0+Fe04ZSbZdjOpNL3JGqJMt5uxr+X7jq0OFQPEXwA8BJ3dvnqb0gZv9upq7fnePmRUX
-	Iuh8NOEcVoq/LGdnGf1uNkdStmTPpAse524Wl7ZYJuAeg+fxMMN7om6qHbEXGEkADZbA
-	jGewh2F2DfBWoyMXUi5Q6A7PQASDblsTYHjCqOwh+pyFLg796wfbNeV7xArWJk2An1zT
-	YUTZuLXo89J8mnuk3rfs1OdxbuMGOw+bU7WeM4MdIgAttmxtyvqIv0+YeDLMe0zcVfSZ
-	MDRg==
-Received: by 10.180.104.230 with SMTP id gh6mr16228146wib.22.1335444700462;
-	Thu, 26 Apr 2012 05:51:40 -0700 (PDT)
+	bh=KVl2hM0EbvywBykYECt+i8XUr4Zi6kMpa9goBVRW+8I=;
+	b=blwIZqbcPLUWnkQrVM3RiQ+KMYRr7m3TYyYd8rKW5qgnMlC9mTu7zzq4MPygh4ATtr
+	iTmMZYm9XXzvQRtJcjC788hfrsaNhyIlj2UFMwmSHWgmGYI/mp5AUq8msHPIR3I5Oc/F
+	boNJoQeW6fXmB4HwCXiqy56uKZ0R3ZbjjOMLY4KAe2m18ASqvZhHAYxC22wTyq1aW6O2
+	cw9dG0J/atty1Ed1+UXmP2Ft8eJsuVFnJYakSiri0p+z2Mt4CwVcmxTeXpZOCu2A7Yhr
+	jPu3iuP+nEdf6vCmFKHJzIR5gSiZgjghfblITEgeXkI+3g40Vvev/dxUcHdtFqMDUn7f
+	xyVg==
+Received: by 10.216.138.202 with SMTP id a52mr4140640wej.53.1335444714956;
+	Thu, 26 Apr 2012 05:51:54 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k6sm44580217wiy.7.2012.04.26.05.51.39
+	by mx.google.com with ESMTPS id o2sm10773605wiv.11.2012.04.26.05.51.53
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 26 Apr 2012 05:51:39 -0700 (PDT)
+	Thu, 26 Apr 2012 05:51:54 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2012 14:50:15 +0200
-Message-Id: <1e6431adca3b45ac710a0f8ed3b56604910af052.1335444528.git.Martin.Jansa@gmail.com>
+Date: Thu, 26 Apr 2012 14:50:17 +0200
+Message-Id: <5cee0a2325b26e849590b041edd47607b56c5af3.1335444528.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.5
 In-Reply-To: <cover.1335444528.git.Martin.Jansa@gmail.com>
 References: <cover.1335444528.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335444528.git.Martin.Jansa@gmail.com>
 References: <cover.1335444528.git.Martin.Jansa@gmail.com>
-Subject: [[meta-oe][meta-efl] 10/15] expedite: add LIC_FILES_CHKSUM
+Subject: [[meta-oe][meta-efl] 12/15] qt4: rename bbappends to match 4.8.1 from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2012 13:01:27 -0000
+X-List-Received-Date: Thu, 26 Apr 2012 13:01:31 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/expedite.inc |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ ..._4.8.0.bbappend => qt4-embedded_4.8.1.bbappend} |    0
+ ..._4.8.0.bbappend => qt4-x11-free_4.8.1.bbappend} |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-qt/qt4/{qt4-embedded_4.8.0.bbappend => qt4-embedded_4.8.1.bbappend} (100%)
+ rename meta-oe/recipes-qt/qt4/{qt4-x11-free_4.8.0.bbappend => qt4-x11-free_4.8.1.bbappend} (100%)
 
-diff --git a/meta-efl/recipes-efl/e17/expedite.inc b/meta-efl/recipes-efl/e17/expedite.inc
-index f529963..9399d82 100644
---- a/meta-efl/recipes-efl/e17/expedite.inc
-+++ b/meta-efl/recipes-efl/e17/expedite.inc
-@@ -1,6 +1,7 @@
- DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
- DEPENDS = "eet evas"
- LICENSE = "MIT BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d70bc65d46237e4ef386beebe7d0fe5b"
- 
- INC_PR = "r0"
- 
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.1.bbappend
+similarity index 100%
+rename from meta-oe/recipes-qt/qt4/qt4-embedded_4.8.0.bbappend
+rename to meta-oe/recipes-qt/qt4/qt4-embedded_4.8.1.bbappend
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
+similarity index 100%
+rename from meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.0.bbappend
+rename to meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
 -- 
 1.7.8.5
 
