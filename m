@@ -1,38 +1,32 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1SNmHI-0000Q7-OI
+	(envelope-from <rep.dot.nop@gmail.com>) id 1SNmMo-00012j-9b
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 16:36:08 +0200
-Received: by bkcjm19 with SMTP id jm19so585551bkc.6
+	Fri, 27 Apr 2012 16:41:50 +0200
+Received: by wera1 with SMTP id a1so505755wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 07:26:30 -0700 (PDT)
+	Fri, 27 Apr 2012 07:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=5nIKqqhdt/6YO9Yk5TrH/dFi2WD6k0NmshQ5qP/FxcA=;
-	b=K22TfXt1Vz+bVcuEc4qKk1OazyqCQ7X+/Kc/Xb0q8UkmhxXMwE9dXVic0htuRHZWTb
-	CoojWpVIUzD3eT7au185hbK+21FhnZfxQZ9yzQHAzpybBgy7rjQj/Rg+WxMa6fai+rJj
-	53b9+6Im52UYvqKwqdM+60srMBBQI59nKrKo780N2EeJTTV8Yv9q6jLhJ8R07ZICqYqn
-	Ehi6RZZ1smmAdxqPIPAdpUr+fuPxYCFnCZxnADzIM+Zr3AhdA0vwd2dVakLZ6Ne4BnHE
-	eXecQlYM3N9k6n1qUIg/N5CjCxcL39Z6yrj4vXazYalbDD+5uSWLrft80TQl5xhQSqKv
-	pyOw==
-Received: by 10.204.149.208 with SMTP id u16mr676566bkv.81.1335536790511;
-	Fri, 27 Apr 2012 07:26:30 -0700 (PDT)
-Received: from s42.loc (85-127-86-115.dynamic.xdsl-line.inode.at.
-	[85.127.86.115])
-	by mx.google.com with ESMTPS id f11sm12060091bkw.6.2012.04.27.07.26.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 Apr 2012 07:26:29 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.77)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1SNm7v-0000QE-4J; Fri, 27 Apr 2012 16:26:27 +0200
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=WYv1vspD99uC/ZoW7Egho9O5r154qvErUUQQLOQMyEo=;
+	b=D++fDXca0GpJC1D5MqUwnWs8rJd3C88KMTxWNm2BQ0tYErlX3YznMEEavGjItji6bQ
+	PWqBt0QSamEiYMenXSsz1X8/1ExhJQyroQlLQrP3Mwsdh0hUGz9DfnPGDZj1zcTjpyvt
+	cTu6gwpdFMbXy0koH2nHEsO2xm46sYTqkXw1LTVD4yEFNMbnIHVxURxiBGGx1xCM6f9C
+	R2bBAmRpXW8OksVKVzPDk86pCHSdxnkR5IMVBG+VunN+lKhCVV0uluPEnqXWSTJ2B+ds
+	Ri8Ob/0j3rYqOTheSZkxcwELSzvnMraI5lj90cpWEMaRZiNroMpd708AY1NspjWg9fR1
+	otcw==
+MIME-Version: 1.0
+Received: by 10.180.98.8 with SMTP id ee8mr6581044wib.14.1335537132219; Fri,
+	27 Apr 2012 07:32:12 -0700 (PDT)
+Received: by 10.216.178.70 with HTTP; Fri, 27 Apr 2012 07:32:12 -0700 (PDT)
+In-Reply-To: <1335536773-1543-1-git-send-email-rep.dot.nop@gmail.com>
+References: <1335536773-1543-1-git-send-email-rep.dot.nop@gmail.com>
+Date: Fri, 27 Apr 2012 16:32:12 +0200
+Message-ID: <CAC1BbcTbQ44eXxaG6tU_6WeqV6yc_1kCEj_Q9UvD+P2HB2wRhw@mail.gmail.com>
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Apr 2012 16:26:24 +0200
-Message-Id: <1335536785-1585-4-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.7.9.1
-In-Reply-To: <1335536785-1585-1-git-send-email-rep.dot.nop@gmail.com>
-References: <1335536785-1585-1-git-send-email-rep.dot.nop@gmail.com>
-Subject: [PATCH 4/5] runqemu: add and use error()
+Subject: Re: [PATCH 1/2][meta-micro] busybox: mdev was removed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,188 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 14:36:10 -0000
+X-List-Received-Date: Fri, 27 Apr 2012 14:41:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- scripts/runqemu |   71 ++++++++++++++++++++-----------------------------------
- 1 file changed, 25 insertions(+), 46 deletions(-)
+Forgot to hint that these 2 are against meta-micro, sorry.
+thanks,
 
-diff --git a/scripts/runqemu b/scripts/runqemu
-index dfa7f4b..231b1bf 100755
---- a/scripts/runqemu
-+++ b/scripts/runqemu
-@@ -46,6 +46,11 @@ if [ "x$1" = "x" ]; then
-     usage
- fi
- 
-+error() {
-+    echo "Error: "$*
-+    usage
-+}
-+
- MACHINE=${MACHINE:=""}
- KERNEL=""
- FSTYPE=""
-@@ -65,12 +70,8 @@ process_filename() {
-     case /$EXT/ in
- 	/bin/)
- 		# A file ending in .bin is a kernel
--		if [ -z "$KERNEL" ]; then
--		    KERNEL=$filename
--		else
--		    echo "Error: conflicting KERNEL args [$KERNEL] and [$filename]"
--		    usage
--		fi
-+		[ -z "$KERNEL" ] && KERNEL=$filename || \
-+		    error "conflicting KERNEL args [$KERNEL] and [$filename]"
- 		;;
- 	/ext[234]/|/jffs2/|/btrfs/)
- 		# A file ending in a supportted fs type is a rootfs image
-@@ -78,13 +79,11 @@ process_filename() {
- 		    FSTYPE=$EXT
- 		    ROOTFS=$filename
- 		else
--		    echo "Error: conflicting FSTYPE types [$FSTYPE] and [$EXT]"
--		    usage
-+		    error "conflicting FSTYPE types [$FSTYPE] and [$EXT]"
- 		fi
- 		;;
- 	*)
--		echo "Error: unknown file arg [$filename]"
--		usage
-+		error "unknown file arg [$filename]"
- 		;;
-     esac
- }
-@@ -97,20 +96,12 @@ while [ $i -le $# ]; do
-     arg=${!i}
-     case $arg in
-         "qemux86" | "qemux86-64" | "qemuarm" | "qemumips" | "qemuppc")
--            if [ -z "$MACHINE" ]; then
--                MACHINE=$arg
--            else
--                echo "Error: conflicting MACHINE types [$MACHINE] and [$arg]"
--                usage
--            fi
-+            [ -z "$MACHINE" ] && MACHINE=$arg || \
-+                error "conflicting MACHINE types [$MACHINE] and [$arg]"
-             ;;
-         "ext2" | "ext3" | "jffs2" | "nfs" | "btrfs")
--            if [ -z "$FSTYPE" -o "$FSTYPE" = "$arg" ]; then
--                FSTYPE=$arg
--            else
--                echo "Error: conflicting FSTYPE types [$FSTYPE] and [$arg]"
--                usage
--            fi
-+            [ -z "$FSTYPE" -o "$FSTYPE" = "$arg" ] && FSTYPE=$arg || \
-+                error "conflicting FSTYPE types [$FSTYPE] and [$arg]"
-             ;;
-         *-image*)
-             if [ -z "$ROOTFS" ]; then
-@@ -127,8 +118,7 @@ while [ $i -le $# ]; do
-                     LAZY_ROOTFS="true"
-                 fi
-             else
--                echo "Error: conflicting ROOTFS args [$ROOTFS] and [$arg]"
--                usage
-+                error "conflicting ROOTFS args [$ROOTFS] and [$arg]"
-             fi
-             ;;
-         "nographic")
-@@ -146,10 +136,8 @@ while [ $i -le $# ]; do
-             # to use simplified options instead
-             serial_option=`expr "$SCRIPT_QEMU_EXTRA_OPT" : '.*\(-serial\)'`
-             kvm_option=`expr "$SCRIPT_QEMU_EXTRA_OPT" : '.*\(-enable-kvm\)'`
--            if [ ! -z "$serial_option" -o ! -z "$kvm_option" ]; then
--                echo "Error: Please use simplified serial or kvm options instead"
--                usage
--            fi
-+            [ ! -z "$serial_option" -o ! -z "$kvm_option" ] && \
-+                error "Please use simplified serial or kvm options instead"
-             ;;
-         "bootparams="*)
-             SCRIPT_KERNEL_OPT="$SCRIPT_KERNEL_OPT ${arg##bootparams=}"
-@@ -172,21 +160,18 @@ while [ $i -le $# ]; do
-                 if [ -z "$FSTYPE" -o "$FSTYPE" = "nfs" ]; then
-                     FSTYPE=nfs
-                 else
--                    echo "Error: conflicting FSTYPE types [$arg] and nfs"
--                    usage
-+                    error "conflicting FSTYPE types [$arg] and nfs"
-                 fi
- 
-                 if [ -z "$ROOTFS" ]; then
-                     ROOTFS=$arg
-                 else
--                    echo "Error: conflicting ROOTFS args [$ROOTFS] and [$arg]"
--                    usage
-+                    error "conflicting ROOTFS args [$ROOTFS] and [$arg]"
-                 fi
-             elif [ -f "$arg" ]; then
-                 process_filename $arg
-             else
--                echo "Error: unable to classify arg [$arg]"
--                usage
-+                error "unable to classify arg [$arg]"
-             fi
-             ;;
-     esac
-@@ -229,19 +214,16 @@ fi
- 
- # Report errors for missing combinations of options
- if [ -z "$MACHINE" -a -z "$KERNEL" ]; then
--    echo "Error: you must specify at least a MACHINE or KERNEL argument"
--    usage
-+    error "you must specify at least a MACHINE or KERNEL argument"
- fi
- if [ "$FSTYPE" = "nfs" -a -z "$ROOTFS" ]; then
--    echo "Error: NFS booting without an explicit ROOTFS path is not yet supported"
--    usage
-+    error "NFS booting without an explicit ROOTFS path is not yet supported"
- fi
- 
- if [ -z "$MACHINE" ]; then
-     MACHINE=`basename $KERNEL | sed 's/.*-\(qemux86-64\|qemux86\|qemuarm\|qemumips\|qemuppc\).*/\1/'`
-     if [ -z "$MACHINE" ]; then
--        echo "Error: Unable to set MACHINE from kernel filename [$KERNEL]"
--        usage
-+        error "Unable to set MACHINE from kernel filename [$KERNEL]"
-     fi
-     echo "Set MACHINE to [$MACHINE] based on kernel [$KERNEL]"
- fi
-@@ -349,8 +331,7 @@ if [ -z "$KERNEL" ]; then
-     KERNEL=$OE_TMPDIR/deploy/images/$kernel_file
- 
-     if [ -z "$KERNEL" ]; then
--        echo "Error: Unable to determine default kernel for MACHINE [$MACHINE]"
--        usage
-+        error "Unable to determine default kernel for MACHINE [$MACHINE]"
-     fi
- fi
- # KERNEL is now set for all cases
-@@ -359,8 +340,7 @@ if [ -z "$FSTYPE" ]; then
-     eval FSTYPE=\$${machine2}_DEFAULT_FSTYPE
- 
-     if [ -z "$FSTYPE" ]; then
--        echo "Error: Unable to determine default fstype for MACHINE [$MACHINE]"
--        usage
-+        error "Unable to determine default fstype for MACHINE [$MACHINE]"
-     fi
- fi
- 
-@@ -381,8 +361,7 @@ if [ -z "$ROOTFS" ]; then
-     findimage $T $MACHINE $FSTYPE
- 
-     if [ -z "$ROOTFS" ]; then
--        echo "Error: Unable to determine default rootfs for MACHINE [$MACHINE]"
--        usage
-+        error "Unable to determine default rootfs for MACHINE [$MACHINE]"
-     fi
- fi
- # ROOTFS is now set for all cases
--- 
-1.7.10
-
+On 27 April 2012 16:26, Bernhard Reutner-Fischer <rep.dot.nop@gmail.com> wr=
+ote:
+> bea936913fcf684c23d36f740050dea118d5caad removed mdev, so rm now unused
+> file, too.
+>
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> ---
+> =A0recipes/busybox/files/mdev | =A0 =A09 ---------
+> =A01 file changed, 9 deletions(-)
+> =A0delete mode 100644 recipes/busybox/files/mdev
+>
+> diff --git a/recipes/busybox/files/mdev b/recipes/busybox/files/mdev
+> deleted file mode 100644
+> index 14ba837..0000000
+> --- a/recipes/busybox/files/mdev
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -#!/bin/sh
+> -
+> -mount proc /proc -t proc
+> -mount sys /sys -t sysfs
+> -mount -t tmpfs tmpfs /dev =A0-o size=3D64k,mode=3D0755
+> -mkdir /dev/pts /dev/shm
+> -mount -t devpts devpts /dev/pts
+> -echo "/sbin/mdev" > /proc/sys/kernel/hotplug
+> -mdev -s
+> --
+> 1.7.10
+>
 
 
