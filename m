@@ -1,55 +1,37 @@
-Received: from mail-qa0-f47.google.com ([209.85.216.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SNow9-00048v-G3
+	(envelope-from <martin.jansa@gmail.com>) id 1SNqD5-0005MS-Dl
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 19:26:29 +0200
-Received: by qabg1 with SMTP id g1so554181qab.6
+	Fri, 27 Apr 2012 20:48:03 +0200
+Received: by wgbdr1 with SMTP id dr1so812740wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 10:16:50 -0700 (PDT)
+	Fri, 27 Apr 2012 11:38:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=+HTxQgUzjIEpr5JrBy30c3xuPdsXPZ9OM5Cp5M1tcmw=;
-	b=X0+xYsLGJB+//QE6GaV/r5uusQp5Lt3a3hrNeHFqV/GdTgxYm2RHsBhnmIMXJ71Hml
-	mcriA22rXiLwi2JMRlSF+QRj6YIssDXmP1wRW7WWohLvL6gPKLgx2otZ06XpwEQqsJPY
-	Rkq6KN5zwF2Ixar71fQuVphsI+WUhqNu/LT8cD4DRQIYGiDmahkueI1r4brBKVlkCSVd
-	IyDELIS/JRaYy7VwCzxKA2I0H2UH1Ed2ZBYMaA12TfksNPuLVuSh3XBfHlymHY5ZmdBj
-	eTz3EP+WPJBE1R1zu771/XHkm0iyZJ/buY2qXNskqWjBpwjP1SWaSqr298cCJKWwvVGf
-	T3Kg==
-Received: by 10.229.135.146 with SMTP id n18mr2986292qct.44.1335547010652;
-	Fri, 27 Apr 2012 10:16:50 -0700 (PDT)
-Received: from [192.168.1.14] (dpc674485156.direcpc.com. [67.44.85.156])
-	by mx.google.com with ESMTPS id dv1sm11285123qab.22.2012.04.27.10.16.46
-	(version=SSLv3 cipher=OTHER); Fri, 27 Apr 2012 10:16:49 -0700 (PDT)
-Message-ID: <4F9AD478.9010500@gmail.com>
-Date: Fri, 27 Apr 2012 10:16:40 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:12.0) Gecko/20120425 Thunderbird/12.0
-MIME-Version: 1.0
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=1Dt5iOjj/FEDGbKe5SlIPTFZtpwFHBghjkBF/upCtfw=;
+	b=mJC3nEWmu/xBnHvjhIJM4QU3xFyGBgETRCgg49tIcGH0u04AL2hl/6V2Bal8IpVXTn
+	/AJD0pyExvJcBMbSHRWJFLRFsb/6M6uU26jQj40w510/G4pj087FcejIOrWTVz+ndQjm
+	MVw06TKNNTrhqByaGFsFUsPTHd0o+KrUZTuaEYXAeR5DZyJJKPObgW5HQACLpsdhFOCM
+	DhANvXLZmzcikcAt6E3E2WQ9yJN72/UTFaHXZETW/JlBeDDf2B04AQ3zLu1tIcH4xpVB
+	Eco1Ft1LrQa7ovu86uOKlBW820rm03CHpvcTX+zsHBZcORca3mD1pZO4S2LblO2bwrhd
+	J8Dg==
+Received: by 10.180.101.8 with SMTP id fc8mr8393510wib.12.1335551540114;
+	Fri, 27 Apr 2012 11:32:20 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id ea6sm6289069wib.5.2012.04.27.11.32.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 27 Apr 2012 11:32:19 -0700 (PDT)
+Date: Fri, 27 Apr 2012 20:32:22 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F88ACCE.1030202@gmail.com> <4F8C9E68.9050106@gmail.com>
-	<4F8CCAAA.6050406@gmail.com>
-	<CAHJAAqeFgtzf1x934XB-2AP2bomie29g7Ns4Ztt51MLLaOA+hw@mail.gmail.com>
-	<4F8D9245.3080908@mlbassoc.com>
-	<CAHJAAqcf7O8i9tOegb=GeP9Da8z4Vgw5ohd1JgHLeQg8LTK3ig@mail.gmail.com>
-	<4F8DBFF3.2060508@gmail.com> <4F8DC5B5.600@windriver.com>
-	<4F8DC939.90208@gmail.com> <4F8DCFC4.9010508@gmail.com>
-	<4F8DDDB7.5010605@gmail.com> <4F8E0CDF.6040401@gmail.com>
-	<CAMKF1sqys83Vu1pv-_3r-RpUe894vQrwpJ1K7NCsyfHXb8vBYA@mail.gmail.com>
-	<4F8E53DD.6060404@gmail.com>
-	<CAMKF1spO2U+Va9pUnr9pABL9rw_Bc1GBZvrpggXNNfcUg7XrGA@mail.gmail.com>
-	<4F8F8749.8000803@gmail.com>
-	<CAMKF1spNs63FypJRj332WJzwL9M_eoMFqbiVYzM7BLCim6-9MQ@mail.gmail.com>
-	<4F90B056.5020209@gmail.com> <4F9144BE.1070508@mlbassoc.com>
-	<4F91A4E4.2090608@gmail.com> <4F932ADB.7040003@gmail.com>
-	<4F970F9C.7030508@gmail.com>
-	<1335300289.3133.136.camel@x121e.pbcl.net>
-	<4F9713C4.2020908@gmail.com>
-	<1335301431.3133.144.camel@x121e.pbcl.net>
-	<4F9717ED.9020503@gmail.com>
-In-Reply-To: <4F9717ED.9020503@gmail.com>
-Subject: Re: [oe-core] 3 build machines all failing in the same manner - was:ld segfault cant figure it out
+Message-ID: <20120427183222.GE3635@jama.jama.net>
+References: <1335531435-25806-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1335531435-25806-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] busybox 1.19.4 bbapped: create dir before installing into it, fixes build failures on the autobuilder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,22 +45,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 17:26:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Apr 2012 18:48:03 -0000
+X-Groupsio-MsgNum: 38440
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zjcmjzIkjQU2rmur"
+Content-Disposition: inline
 
-On 04/24/2012 02:15 PM, j wrote:
-> <snip>
->
-> Thank you
+--zjcmjzIkjQU2rmur
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-After updating all build machines again last night to the most recent OE 
-and letting each download new source files. none segfaulted in the 
-resulting build, qa.log has a few similar entries and some new ones, but 
-all appears to be good. Testing first image now, first quick run through 
-shows even the SDK installed properly this time.
+On Fri, Apr 27, 2012 at 02:57:15PM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Thanks for whatever the fix was and for putting up with and helping me 
-with suggestions and information.
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
+> ---
+>  meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-=
+oe/recipes-core/busybox/busybox_1.19.4.bbappend
+> index 2c73732..786e1d5 100644
+> --- a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+> +++ b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+> @@ -1,6 +1,6 @@
+>  inherit systemd
+> =20
+> -PRINC :=3D "${@int(PRINC) + 3}"
+> +PRINC :=3D "${@int(PRINC) + 4}"
+> =20
+>  # look for files in the layer first
+>  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
+> @@ -16,6 +16,7 @@ do_install_append() {
+>  	install -d ${D}${sysconfdir}/default
+>  	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/def=
+ault/busybox-syslog
+> =20
+> +	install -d ${D}${systemd_unitdir}/system
+>  	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.se=
+rvice.in \
+>  	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
+>  	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.ser=
+vice.in \
+> --=20
+> 1.7.10
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--zjcmjzIkjQU2rmur
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk+a5jYACgkQN1Ujt2V2gBzs7QCgqyIJ6VPUJntINXZOBdXsD1K7
+j2MAnA6K3lDrsB3SB5jkuet+sCUL5pdh
+=haKL
+-----END PGP SIGNATURE-----
+
+--zjcmjzIkjQU2rmur--
