@@ -1,38 +1,35 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SNg1X-0007Ed-PT
+	(envelope-from <koen@dominion.thruhere.net>) id 1SNgLc-0007oJ-Ed
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 09:55:27 +0200
-Received: by wgbdr1 with SMTP id dr1so321159wgb.24
+	Fri, 27 Apr 2012 10:16:12 +0200
+Received: by wibhj13 with SMTP id hj13so292015wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 00:45:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=awLTcEYuBgu9UbycNWYAzkrwNKSyodRcMCTivN/8Rus=;
-	b=zqs+j6eysMy4RlVnw50T8l6gjBixJ3xZwg6J+Av3poMhid1T2lMx4Lhx1ENBU7IJke
-	VvPQJE92mINSTTHIe25GrEOifSQYEPzZR+PiUqYkp/PjpYdERIAgac67ycn8cXs4ycy4
-	wbSs7wjpj/EKnKxKvNjCntO2+Ww5r7B2xP0vzUq5o8W0GeSfrn+vmJTSvmIz+iLjCVKi
-	bTMJTq9WQJlASK2EPCTT/w99S3USbcaaXTcBNORD1JiOeQwR1FKc1iXdEHRcJ0OuvvAP
-	URw7uGVtbvoIrzfLvLclBs5UoJximC5sBW0qiFkWU4o8fxvXm64Fesd2QWv/ktQiHxf6
-	WpHg==
-Received: by 10.216.218.193 with SMTP id k43mr6085018wep.104.1335512749759;
-	Fri, 27 Apr 2012 00:45:49 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id du4sm4730322wib.10.2012.04.27.00.45.46
+	Fri, 27 Apr 2012 01:06:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=ECepKG4oZqalKnS9esyoW+mNSimtw2zbeK0J/rrqQAc=;
+	b=M/a8RpQOYy6vxi8eJs0XJJuzP0WfCI9TyzNw7C37YGyoAo/il93NkeMRIpoFX1SSFc
+	F6Gn06tCRfKJbNFAK8Sc+AIt9i2xfZW4GvlR+pjCMc8ZfV0bkHPGGH8rYkBlPMOD4Q5n
+	LsG2ZOc/fC3ALLuxEz894k+JqDehiuUi04K3xDqTURF3fzlzccMFSQQi678N1EbQs26H
+	/Sp/Q/3hI4o0LjGd7kpHSWEuDzgDgCZ1wiJJNSAuZ2QcS9uXoka4B1wSF3/0mbind5E1
+	RZeWin+TYpBaXV/YFb2FDj/7pVCm7cuRkpMDTvenNkTjt1ol4WpR7O96WCUhvMhd97Iq
+	lpbQ==
+Received: by 10.180.92.130 with SMTP id cm2mr3549770wib.4.1335513994518;
+	Fri, 27 Apr 2012 01:06:34 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id gd4sm4922425wib.6.2012.04.27.01.06.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 Apr 2012 00:45:47 -0700 (PDT)
-Date: Fri, 27 Apr 2012 09:45:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 27 Apr 2012 01:06:33 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120427074550.GB3635@jama.jama.net>
-References: <cover.1335444528.git.Martin.Jansa@gmail.com>
-	<56a34a9e60b825908e84e340b3fb06f6842aa82f.1335444528.git.Martin.Jansa@gmail.com>
-	<jndi4g$6vv$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <jndi4g$6vv$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [[meta-oe][meta-efl] 01/15] kernel.bbclass: resync with oe-core version
+Date: Fri, 27 Apr 2012 10:06:28 +0200
+Message-Id: <1335513988-4447-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQnVtPB5AP/I0aYBakYIWJrrFTAkxfF1pypbyzsjoZ0zuCwDL35Ff9IkDx4drUu4LxmtVqyW
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] kernel bbclass: recreate uImage unless KEEPUIMAGE is set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,74 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 07:55:27 -0000
-X-Groupsio-MsgNum: 38425
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="s2ZSL+KKDSLx8OML"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Apr 2012 08:16:12 -0000
 
---s2ZSL+KKDSLx8OML
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The intent of the uImage code in this class includes the following
 
-On Fri, Apr 27, 2012 at 09:33:37AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 26-04-12 14:50, Martin Jansa schreef:
-> > * 4 spaces for anonymous python * don't recreate uImage if it already
-> > exists
->=20
-> Crap. I'll send a follow up patch that *does* recreate uImage. That is the
-> whole point of that code, to clean up after the kernel.
+1) be able to specify custom load addresses without needing to patch the kernel
+2) add better information to the uImage description field
 
-Can you send it to oe-core people too?
+The current state is a NOP anyway, the kernel will always build a uImage when you tell it to 'make uImage'.
 
-Or make it configurable as suggested here?
-http://lists.linuxtogo.org/pipermail/openembedded-core/2012-March/020243.ht=
-ml
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/classes/kernel.bbclass |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers,
+diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
+index b7e9f54..98320fe 100644
+--- a/meta-oe/classes/kernel.bbclass
++++ b/meta-oe/classes/kernel.bbclass
+@@ -512,7 +512,7 @@ KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
+ 
+ do_uboot_mkimage() {
+ 	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
+-		if test ! -e arch/${ARCH}/boot/uImage ; then
++		if test "x${KEEPUIMAGE}" = "x" ; then
+ 			ENTRYPOINT=${UBOOT_ENTRYPOINT}
+ 			if test -n "${UBOOT_ENTRYSYMBOL}"; then
+ 				ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
+-- 
+1.7.10
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.11 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iQIcBAEBAgAGBQJPmkvNAAoJEHZqAkdh1vT6+KwQAIeJ98cGO0l/nwc3JduPX65x
-> q2nw/f6mpfGUa0LRFcelCD1/GD7TCrSRKXykvu9iqLR/EE0b9JIdFPFtQvpM4vCg
-> 0BfvJEkA6b6OTVCKyGgE1xVYuurqypXMaaij0aghptVZl5yCUYY3UIAIT9HX46zW
-> dNYMwjb6Qed8rzMEM/r0cJrM1erRWh6SfdbSJ/D952ZLWg8XH5sZCcLekY9eLAfX
-> 3Itub9oj3ENfvz/APItTNwotGIpFvaVcG8qIeX33sk+V+N9HdCpfBuaXJ4sJwR2X
-> YnfchX+d2pyPbF9xJBiL9pEl8jVimbLQiKAIRBTdW6Wq2EQsFkRTbkqpPKDTDV8K
-> timcdV7q3RFjj3OF7YA2WB+4oh9PPeOP2HgELdhMtG8Hje9ma1HPFu7lmWybYt/V
-> yyqJEFwsjQ3bmAWTzQCPM0BkRhV1Swb1YsGRuQIs72CyVlRjZ+5iL2EMZOWCh97C
-> 4jJIRDhs+CfG9HxHTApUe3haPlvpKM/40QDyRA2eeLUaV8PDvCO6UhPqIl76+hI9
-> RimwseKgjbJCsN1Flw/ct6OcS8v8zFHa+7F4yEto5OfIipbLIwx/NGrf/bfGXDZK
-> 3bYr2aQUtzmBrRDUTnSYri7tUjMmJ72JkMZ23dJgY1hVZSk0xtq5ZA4c29grbc9d
-> jlCpEup+Oi20B6dCiXDC
-> =3D0Qgb
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---s2ZSL+KKDSLx8OML
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+aTq4ACgkQN1Ujt2V2gBxhoACgkwJ4U0nUS/rIqzxJF5h0JrSc
-cS0AnR3xtvGrIyeBHyrq5mXw9r+HVBHO
-=sscT
------END PGP SIGNATURE-----
-
---s2ZSL+KKDSLx8OML--
