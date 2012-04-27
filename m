@@ -1,35 +1,34 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SNgLc-0007oJ-Ed
+	(envelope-from <martiert@gmail.com>) id 1SNkcD-0005lY-6H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 10:16:12 +0200
-Received: by wibhj13 with SMTP id hj13so292015wib.6
+	Fri, 27 Apr 2012 14:49:37 +0200
+Received: by eekc1 with SMTP id c1so144939eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 01:06:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=ECepKG4oZqalKnS9esyoW+mNSimtw2zbeK0J/rrqQAc=;
-	b=M/a8RpQOYy6vxi8eJs0XJJuzP0WfCI9TyzNw7C37YGyoAo/il93NkeMRIpoFX1SSFc
-	F6Gn06tCRfKJbNFAK8Sc+AIt9i2xfZW4GvlR+pjCMc8ZfV0bkHPGGH8rYkBlPMOD4Q5n
-	LsG2ZOc/fC3ALLuxEz894k+JqDehiuUi04K3xDqTURF3fzlzccMFSQQi678N1EbQs26H
-	/Sp/Q/3hI4o0LjGd7kpHSWEuDzgDgCZ1wiJJNSAuZ2QcS9uXoka4B1wSF3/0mbind5E1
-	RZeWin+TYpBaXV/YFb2FDj/7pVCm7cuRkpMDTvenNkTjt1ol4WpR7O96WCUhvMhd97Iq
-	lpbQ==
-Received: by 10.180.92.130 with SMTP id cm2mr3549770wib.4.1335513994518;
-	Fri, 27 Apr 2012 01:06:34 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gd4sm4922425wib.6.2012.04.27.01.06.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 Apr 2012 01:06:33 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Fri, 27 Apr 2012 05:39:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=j1xhImOUjDirlP5gYZJgyiF2EWVagUd4exJ8HLXUWN4=;
+	b=YVmWA5lHmQUhxw09IDwo7MZiQYITDB7R+sutPt7h1Sy0dpHGaPzu928X8fqvODcfVO
+	L4bZsCjgtgXdeNbq0tcIK5BGWpY7IXRF87RX0xb61+oPEZGdJHxsKxdfyDos/dHo4P19
+	DGe13no0lPTd/HzUe6MKG+cCbI0b9mKXoSQgU5zNQ8fNOOI+aTnfDpF82La7x8MI14KM
+	Yp8NcbB0ZD1rdTQumylMl1x0MfXF17S2hkDGtF6vyCzcLRj8cjhj4H2e/XavKuHXx6eF
+	biq8rhzcTnkQhLOMdvfT0yquYv4xk0nibpS9c4HyBAmLuPZzPxSoNgZA6Ha+EUVP1NqP
+	JsYQ==
+Received: by 10.14.185.143 with SMTP id u15mr2742130eem.94.1335530399077;
+	Fri, 27 Apr 2012 05:39:59 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id y53sm29930127eea.3.2012.04.27.05.39.57
+	(version=SSLv3 cipher=OTHER); Fri, 27 Apr 2012 05:39:57 -0700 (PDT)
+Message-ID: <4F9A932F.1020400@gmail.com>
+Date: Fri, 27 Apr 2012 14:38:07 +0200
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Apr 2012 10:06:28 +0200
-Message-Id: <1335513988-4447-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQnVtPB5AP/I0aYBakYIWJrrFTAkxfF1pypbyzsjoZ0zuCwDL35Ff9IkDx4drUu4LxmtVqyW
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] kernel bbclass: recreate uImage unless KEEPUIMAGE is set
+Subject: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 08:16:12 -0000
+X-List-Received-Date: Fri, 27 Apr 2012 12:49:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-The intent of the uImage code in this class includes the following
+Hi.
 
-1) be able to specify custom load addresses without needing to patch the kernel
-2) add better information to the uImage description field
+I'm working on a pandaboard with OMAP4460. Were trying to use the newest
+PVR drivers, which conforms to the result that arose from
+https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
 
-The current state is a NOP anyway, the kernel will always build a uImage when you tell it to 'make uImage'.
+We have applied the patch at the bottom of that page gcc, and also a
+patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
+instead of ld-linux. Problem is, this gives us a kernel panic when it
+tries to run init. Linking ld-linux.so.3 to ld-linux-armhf.so.3 does not
+work, and we're kind of in the dark as to what is missing.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/classes/kernel.bbclass |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+We tried fixing this by renaming the toolchain to be
+arm-none-linux-gnueabihf instead of arm-none-linux-gnueabi, as we heard
+this might be a problem with hardfloats, but this needed a lot of extra
+patches, and some patchwork on other packages like openssl and shadow.
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index b7e9f54..98320fe 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -512,7 +512,7 @@ KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
- 
- do_uboot_mkimage() {
- 	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
--		if test ! -e arch/${ARCH}/boot/uImage ; then
-+		if test "x${KEEPUIMAGE}" = "x" ; then
- 			ENTRYPOINT=${UBOOT_ENTRYPOINT}
- 			if test -n "${UBOOT_ENTRYSYMBOL}"; then
- 				ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
--- 
-1.7.10
+My question is, are there any ongoing plans to fix this, and make sure
+that if we have set hard float we make ld-linux-armhf in openembedded?
 
+For the record we are using eglibc2.15 and gcc4.6 from openembedded-core.
+
+Best regards
+Martin Ertsaas
 
 
