@@ -1,32 +1,29 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1SNmMo-00012j-9b
+	(envelope-from <mark.hatle@windriver.com>) id 1SNmrt-0001sb-An
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 16:41:50 +0200
-Received: by wera1 with SMTP id a1so505755wer.6
+	Fri, 27 Apr 2012 17:13:57 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q3RF4HVu025241
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 07:32:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=WYv1vspD99uC/ZoW7Egho9O5r154qvErUUQQLOQMyEo=;
-	b=D++fDXca0GpJC1D5MqUwnWs8rJd3C88KMTxWNm2BQ0tYErlX3YznMEEavGjItji6bQ
-	PWqBt0QSamEiYMenXSsz1X8/1ExhJQyroQlLQrP3Mwsdh0hUGz9DfnPGDZj1zcTjpyvt
-	cTu6gwpdFMbXy0koH2nHEsO2xm46sYTqkXw1LTVD4yEFNMbnIHVxURxiBGGx1xCM6f9C
-	R2bBAmRpXW8OksVKVzPDk86pCHSdxnkR5IMVBG+VunN+lKhCVV0uluPEnqXWSTJ2B+ds
-	Ri8Ob/0j3rYqOTheSZkxcwELSzvnMraI5lj90cpWEMaRZiNroMpd708AY1NspjWg9fR1
-	otcw==
+	Fri, 27 Apr 2012 08:04:17 -0700 (PDT)
+Received: from msp-dhcp12.wrs.com (172.25.34.12) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
+	Fri, 27 Apr 2012 08:04:17 -0700
+Message-ID: <4F9AB570.4090906@windriver.com>
+Date: Fri, 27 Apr 2012 10:04:16 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
+	rv:12.0) Gecko/20120420 Thunderbird/12.0
 MIME-Version: 1.0
-Received: by 10.180.98.8 with SMTP id ee8mr6581044wib.14.1335537132219; Fri,
-	27 Apr 2012 07:32:12 -0700 (PDT)
-Received: by 10.216.178.70 with HTTP; Fri, 27 Apr 2012 07:32:12 -0700 (PDT)
-In-Reply-To: <1335536773-1543-1-git-send-email-rep.dot.nop@gmail.com>
-References: <1335536773-1543-1-git-send-email-rep.dot.nop@gmail.com>
-Date: Fri, 27 Apr 2012 16:32:12 +0200
-Message-ID: <CAC1BbcTbQ44eXxaG6tU_6WeqV6yc_1kCEj_Q9UvD+P2HB2wRhw@mail.gmail.com>
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2][meta-micro] busybox: mdev was removed
+To: <openembedded-devel@lists.openembedded.org>
+References: <4F9A932F.1020400@gmail.com>
+In-Reply-To: <4F9A932F.1020400@gmail.com>
+X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
+	q3RF4HVu025241
+Subject: Re: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +37,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 14:41:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Apr 2012 15:13:57 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Forgot to hint that these 2 are against meta-micro, sorry.
-thanks,
+On 4/27/12 7:38 AM, Martin Erts=E5s wrote:
+> Hi.
+>
+> I'm working on a pandaboard with OMAP4460. Were trying to use the newes=
+t
+> PVR drivers, which conforms to the result that arose from
+> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
+>
+> We have applied the patch at the bottom of that page gcc, and also a
+> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
+> instead of ld-linux. Problem is, this gives us a kernel panic when it
+> tries to run init. Linking ld-linux.so.3 to ld-linux-armhf.so.3 does no=
+t
+> work, and we're kind of in the dark as to what is missing.
+>
+> We tried fixing this by renaming the toolchain to be
+> arm-none-linux-gnueabihf instead of arm-none-linux-gnueabi, as we heard
+> this might be a problem with hardfloats, but this needed a lot of extra
+> patches, and some patchwork on other packages like openssl and shadow.
+>
+> My question is, are there any ongoing plans to fix this, and make sure
+> that if we have set hard float we make ld-linux-armhf in openembedded?
+>
+> For the record we are using eglibc2.15 and gcc4.6 from openembedded-cor=
+e.
 
-On 27 April 2012 16:26, Bernhard Reutner-Fischer <rep.dot.nop@gmail.com> wr=
-ote:
-> bea936913fcf684c23d36f740050dea118d5caad removed mdev, so rm now unused
-> file, too.
+The ARM EABI + HF isn't well tested (to my knowledge) of oe-core.  I was =
+under=20
+the impressions a few people did use it, and it was working successfully =
+for=20
+them.  (Generally speaking people seem to agree that there is a place for=
+ ARM=20
+EABI + HF, but the performance increase to the couple of items where it h=
+elps is=20
+generally not worth the pain of incompatibility with the core ARM EABI.  =
+Thus=20
+it's not used very much in OE.)
+
+Could you verify that the stock configuration (without any of the changes=
+ you=20
+described above) is working and will boot w/o a kernel panic at init?
+
+If so then it'll be easier to help you track down the particulars of the =
+ld.so=20
+name change and related items.
+
+--Mark
+
+> Best regards
+> Martin Ertsaas
 >
-> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> ---
-> =A0recipes/busybox/files/mdev | =A0 =A09 ---------
-> =A01 file changed, 9 deletions(-)
-> =A0delete mode 100644 recipes/busybox/files/mdev
->
-> diff --git a/recipes/busybox/files/mdev b/recipes/busybox/files/mdev
-> deleted file mode 100644
-> index 14ba837..0000000
-> --- a/recipes/busybox/files/mdev
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -#!/bin/sh
-> -
-> -mount proc /proc -t proc
-> -mount sys /sys -t sysfs
-> -mount -t tmpfs tmpfs /dev =A0-o size=3D64k,mode=3D0755
-> -mkdir /dev/pts /dev/shm
-> -mount -t devpts devpts /dev/pts
-> -echo "/sbin/mdev" > /proc/sys/kernel/hotplug
-> -mdev -s
-> --
-> 1.7.10
->
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
