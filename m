@@ -1,39 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SOErJ-0003yz-ET
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Apr 2012 23:07:13 +0200
-Received: by pbbrq2 with SMTP id rq2so1958573pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Apr 2012 13:57:32 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1SOGNU-0005FH-DE; Sun, 29 Apr 2012 00:44:32 +0200
+Received: by lbbgo4 with SMTP id go4so1221419lbb.6
+	for <multiple recipients>; Sat, 28 Apr 2012 15:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=EkRokV1UgkEkkz+6/xCxYXt4D1S3aEzTDs4FBoJ9rLY=;
-	b=BwzzYYr8Cz6tKmVwpdT76kadn7WiOgM/p9TCGEsw5qIMp5Id8kPhbMpEmJao73EaoZ
-	JWuk9XSvnpXRc6X3tj6HjBycXr8/YczyI5CfnVkvO+H9pLPkxpMhtcxmmsI/TuoWA2aW
-	01JBK7xpO2A1pFfSJMPShb4wAp9dGdDxEzziCIEUV74+I/vTkCVzv8BQZxiJv3Pek2Eg
-	IiLRJuGi+GAGKKGM4+po+t7a/UZJ1a0wc7UoFtzcVyDynXqZVKRgITWpgUOAWvoYZ9nt
-	Ms4qozrwc0C8icGJOB0UV3/FBi5T3G5ftioHOBgSmLUALicJ9DOXwway8LoNRRyMRpXe
-	E4vQ==
-Received: by 10.68.242.101 with SMTP id wp5mr8609391pbc.146.1335646652937;
-	Sat, 28 Apr 2012 13:57:32 -0700 (PDT)
-Received: from [192.168.1.104] (99-57-140-209.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.209])
-	by mx.google.com with ESMTPS id qe7sm10659081pbc.56.2012.04.28.13.57.30
-	(version=SSLv3 cipher=OTHER); Sat, 28 Apr 2012 13:57:31 -0700 (PDT)
-Message-ID: <4F9C59B8.9000106@gmail.com>
-Date: Sat, 28 Apr 2012 13:57:28 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:11.0) Gecko/20120411 Thunderbird/11.0.1
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=YiCYo84/kn75+nurtuMu1tYRMDOApYBXtJWpbZ59Lc8=;
+	b=CG8+AoCO31KkIztPokuCoLAAmLAGtH/Oj3BZp985O/5S4E1oIEBLa0zYpdC0ZmlSaN
+	2vI0S4jxZ+AUAQn938i6PzdxKJzyfzD9xppd+AgqfEBUfGUZBlTZFg5cPc0fBI0ntghv
+	X0B3WVSXDH3I6HyTXLqN5sVta3Xt1tdaG+F1b9aHAzGV2HHKJ+kQVzyNF9bZu/YN3Y37
+	NQCjLg/CROZYKppRXR6g8/IcaEuSLNXkNcc1feGpwfAqxFujfSc7JQMyf9DRC/oMstGE
+	o4SsSF8I7paPRvgYRbd0bBw/f5lG4gfA04fNsNmmytv96WN/2oIqmuGrs3l6QDvfElit
+	UwQA==
+Received: by 10.112.32.72 with SMTP id g8mr1674857lbi.43.1335652492051; Sat,
+	28 Apr 2012 15:34:52 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAOHjBZuGf-wG2jpSR1R9sM_KawN+5H9ZS_ivikYgfMvLJVVtXQ@mail.gmail.com>
-In-Reply-To: <CAOHjBZuGf-wG2jpSR1R9sM_KawN+5H9ZS_ivikYgfMvLJVVtXQ@mail.gmail.com>
-X-Enigmail-Version: 1.4.1
-Subject: Re: [oe-core] THISDIR usage
+Received: by 10.152.129.134 with HTTP; Sat, 28 Apr 2012 15:34:21 -0700 (PDT)
+In-Reply-To: <CADkTA4PEsqyFvjsUkj_4zzRO7MtxLv-B7gKE7ZOYtjg=0WX19g@mail.gmail.com>
+References: <1335513988-4447-1-git-send-email-koen@dominion.thruhere.net>
+	<4F9BFF8D.6040702@windriver.com>
+	<03646974-A740-46EE-9C85-63302F61595E@dominion.thruhere.net>
+	<CADkTA4PEsqyFvjsUkj_4zzRO7MtxLv-B7gKE7ZOYtjg=0WX19g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 28 Apr 2012 15:34:21 -0700
+Message-ID: <CAMKF1sqr1b16vgQHNZ4+afqyu4dQH1e8y1p4E1YHb9=cGN4CZg@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [meta-oe][PATCH] kernel bbclass: recreate uImage unless KEEPUIMAGE is set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +43,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Apr 2012 21:07:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 28 Apr 2012 22:44:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sat, Apr 28, 2012 at 8:05 AM, Bruce Ashfield
+<bruce.ashfield@gmail.com> wrote:
+> On Sat, Apr 28, 2012 at 10:57 AM, Koen Kooi <koen@dominion.thruhere.net> =
+wrote:
+>>
+>> Op 28 apr. 2012, om 16:32 heeft Bruce Ashfield het volgende geschreven:
+>>
+>>> On 12-04-27 4:06 AM, Koen Kooi wrote:
+>>>> The intent of the uImage code in this class includes the following
+>>>>
+>>>> 1) be able to specify custom load addresses without needing to patch t=
+he kernel
+>>>> 2) add better information to the uImage description field
+>>>>
+>>>> The current state is a NOP anyway, the kernel will always build a uIma=
+ge when you tell it to 'make uImage'.
+>>>>
+>>>> Signed-off-by: Koen Kooi<koen@dominion.thruhere.net>
+>>>> ---
+>>>> =C2=A0meta-oe/classes/kernel.bbclass | =C2=A0 =C2=A02 +-
+>>>> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.b=
+bclass
+>>>> index b7e9f54..98320fe 100644
+>>>> --- a/meta-oe/classes/kernel.bbclass
+>>>> +++ b/meta-oe/classes/kernel.bbclass
+>>>> @@ -512,7 +512,7 @@ KERNEL_IMAGE_SYMLINK_NAME ?=3D "${KERNEL_IMAGETYPE=
+}-${MACHINE}"
+>>>>
+>>>> =C2=A0do_uboot_mkimage() {
+>>>> =C2=A0 =C2=A0 =C2=A0if test "x${KERNEL_IMAGETYPE}" =3D "xuImage" ; the=
+n
+>>>> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if test ! -e arch/${ARCH}/b=
+oot/uImage ; then
+>>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if test "x${KEEPUIMAGE}" =
+=3D "x" ; then
+>>>
+>>> I realize this is targeted meta-oe, and not directly to oe-core (but
+>>> openembedded-core is cc'd + it's Saturday morning with no coffee here
+>>> yet which means I may be misreading) .. so I thought I'd comment as
+>>> this whizzed past.
+>>>
+>>> The existing users on top of the oe-core class expect (whether they
+>>> know it or not) the opposite of this (i.e. do nothing, get the kernel's
+>>> uImage). To keep their old behaviour, they now need to explicitly set a
+>>> flag. I know that I'd have quite a few layers to update if this went
+>>> directly into oe-core.
+>>>
+>>> How are the current meta-oe and related BSPs currently overriding
+>>> the behaviour (I didn't go look, I'm invoking my Saturday morning claus=
+e
+>>> again :) ? Is it a class override ? If so, can the layers that
+>>> currently have an override set a flag (which is a simpler override) to
+>>> get the behaviour they used to have, while leaving the boards with no
+>>> override the behaviour that they used to have ?
+>>
+>> "used to have" is quite vague, since the OE-classic behaviour is to alwa=
+ys replace the uImage. And that's where I'm migrating machines from.
+>
+> That's why I referenced oe-core, that's all I'm talking about. It's
+> behaviour for
+> every tagged release has been what I'm talking about. This is a change in
+> that behaviour, and if that's the intended target for this, it is relevan=
+t.
+>
 
-On 04/11/2012 03:23 AM, Giuseppe Condorelli wrote:
-> Hi, I moved to OE-Core (working on stable version dowloaded as tar
-> file from cgit.openembedded.org). I'm in trouble trying to include
-> a source through .bbappend file, located under my meta-<personal>
-> subtree.
-> 
-> FILESPATHBASE_prepend := "${THISDIR}/files:" SRC_URI +=
-> "file://myfile.tar.gz"
-> 
+I think keeping OE-Core's behavior and introducing a variable
+(REDO_UIMAGE_BECAUSE_KERNEL_BUILT_UIMAGE_IS_CRAP_FOR_MY_MACHINE or
+something) to indicate regenerate my uImage might be a better
+compromise here.
 
-assuming you have set the layer properly and bitbake is able to find
-it and parse it you will do
-
-FILESEXTRAPATHS := "${THISDIR}/files"
-SRC_URI += "file://myfile.tar.gz"
-
-that should do it.
-
-Check first if your layer is being added to the parse it should be shown
-in build header that is dumped first by bitbake before it starts
-building its also in cooker.log file in build dir.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk+cWbgACgkQuwUzVZGdMxTXOwCdH0ltQ+crP/jqJG2q/hS/QYwY
-BEgAnjrSE5qYynydngZL/i1ZfRywV/DU
-=v7Cy
------END PGP SIGNATURE-----
+> Cheers,
+>
+> Bruce
+>
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
+>
+>
+>
+> --
+> "Thou shalt not follow the NULL pointer, for chaos and madness await
+> thee at its end"
+>
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
 
