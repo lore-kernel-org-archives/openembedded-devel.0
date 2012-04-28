@@ -1,37 +1,43 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SNqD5-0005MS-Dl
+	(envelope-from <koen@dominion.thruhere.net>) id 1SO9Eo-0003E7-3p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Apr 2012 20:48:03 +0200
-Received: by wgbdr1 with SMTP id dr1so812740wgb.24
+	Sat, 28 Apr 2012 17:07:06 +0200
+Received: by wera1 with SMTP id a1so1095063wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2012 11:38:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1Dt5iOjj/FEDGbKe5SlIPTFZtpwFHBghjkBF/upCtfw=;
-	b=mJC3nEWmu/xBnHvjhIJM4QU3xFyGBgETRCgg49tIcGH0u04AL2hl/6V2Bal8IpVXTn
-	/AJD0pyExvJcBMbSHRWJFLRFsb/6M6uU26jQj40w510/G4pj087FcejIOrWTVz+ndQjm
-	MVw06TKNNTrhqByaGFsFUsPTHd0o+KrUZTuaEYXAeR5DZyJJKPObgW5HQACLpsdhFOCM
-	DhANvXLZmzcikcAt6E3E2WQ9yJN72/UTFaHXZETW/JlBeDDf2B04AQ3zLu1tIcH4xpVB
-	Eco1Ft1LrQa7ovu86uOKlBW820rm03CHpvcTX+zsHBZcORca3mD1pZO4S2LblO2bwrhd
-	J8Dg==
-Received: by 10.180.101.8 with SMTP id fc8mr8393510wib.12.1335551540114;
-	Fri, 27 Apr 2012 11:32:20 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ea6sm6289069wib.5.2012.04.27.11.32.18
+	Sat, 28 Apr 2012 07:57:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=L8+LryYQ/wB5QvAyGWdoLZxgBcafQjO041XHSyx50Fs=;
+	b=UfpfiFzVgIEi7GeH9jzVAUXei0IfIV2m51AI4K6EdkdJOkgm4CaAm7Tgxc78+gr/6m
+	n8ylfWaZgnjqkHCJJS5zm2vHt7qdi1aI2DIbuqbIBaoRJU1p98PQ8ccZvNys/UjEQPjF
+	qJV/iCxfxHr5TIQO6YZEPG72l53YiCtXikugi3Flp3OzSVfz8XsWRKBhggRSxe6hWgZY
+	dvMGm9Guh/5jE56QDuhKBwbIgzruaPQxEIlFIMupNahKbjafMDzNqk17E6YNEyou8UMW
+	KbO8dVTFCHsLGKMRFFJf84h6c1zNTge5nYPMWT3nHr1ODf3UlAmMvuz3EFldI6i8VvXb
+	D7uA==
+Received: by 10.180.98.8 with SMTP id ee8mr15228823wib.14.1335625046303;
+	Sat, 28 Apr 2012 07:57:26 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id fz9sm13216034wib.3.2012.04.28.07.57.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 Apr 2012 11:32:19 -0700 (PDT)
-Date: Fri, 27 Apr 2012 20:32:22 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120427183222.GE3635@jama.jama.net>
-References: <1335531435-25806-1-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1335531435-25806-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] busybox 1.19.4 bbapped: create dir before installing into it, fixes build failures on the autobuilder
+	Sat, 28 Apr 2012 07:57:24 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4F9BFF8D.6040702@windriver.com>
+Date: Sat, 28 Apr 2012 16:57:23 +0200
+Message-Id: <03646974-A740-46EE-9C85-63302F61595E@dominion.thruhere.net>
+References: <1335513988-4447-1-git-send-email-koen@dominion.thruhere.net>
+	<4F9BFF8D.6040702@windriver.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQnQbbft+RzC4C8jkxQbEmIRWotzAtBHlI0KOJapb7ZXpKFbV6rcCLBRVOVUYDn4GQ9jlOuY
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [meta-oe][PATCH] kernel bbclass: recreate uImage unless	KEEPUIMAGE is set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,72 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2012 18:48:03 -0000
-X-Groupsio-MsgNum: 38440
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zjcmjzIkjQU2rmur"
-Content-Disposition: inline
-
---zjcmjzIkjQU2rmur
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 28 Apr 2012 15:07:06 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 27, 2012 at 02:57:15PM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Op 28 apr. 2012, om 16:32 heeft Bruce Ashfield het volgende geschreven:
 
-> ---
->  meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> On 12-04-27 4:06 AM, Koen Kooi wrote:
+>> The intent of the uImage code in this class includes the following
+>>=20
+>> 1) be able to specify custom load addresses without needing to patch =
+the kernel
+>> 2) add better information to the uImage description field
+>>=20
+>> The current state is a NOP anyway, the kernel will always build a =
+uImage when you tell it to 'make uImage'.
+>>=20
+>> Signed-off-by: Koen Kooi<koen@dominion.thruhere.net>
+>> ---
+>>  meta-oe/classes/kernel.bbclass |    2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>=20
+>> diff --git a/meta-oe/classes/kernel.bbclass =
+b/meta-oe/classes/kernel.bbclass
+>> index b7e9f54..98320fe 100644
+>> --- a/meta-oe/classes/kernel.bbclass
+>> +++ b/meta-oe/classes/kernel.bbclass
+>> @@ -512,7 +512,7 @@ KERNEL_IMAGE_SYMLINK_NAME ?=3D =
+"${KERNEL_IMAGETYPE}-${MACHINE}"
+>>=20
+>>  do_uboot_mkimage() {
+>>  	if test "x${KERNEL_IMAGETYPE}" =3D "xuImage" ; then
+>> -		if test ! -e arch/${ARCH}/boot/uImage ; then
+>> +		if test "x${KEEPUIMAGE}" =3D "x" ; then
 >=20
-> diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-=
-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-> index 2c73732..786e1d5 100644
-> --- a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-> +++ b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-> @@ -1,6 +1,6 @@
->  inherit systemd
-> =20
-> -PRINC :=3D "${@int(PRINC) + 3}"
-> +PRINC :=3D "${@int(PRINC) + 4}"
-> =20
->  # look for files in the layer first
->  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
-> @@ -16,6 +16,7 @@ do_install_append() {
->  	install -d ${D}${sysconfdir}/default
->  	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/def=
-ault/busybox-syslog
-> =20
-> +	install -d ${D}${systemd_unitdir}/system
->  	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.se=
-rvice.in \
->  	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
->  	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.ser=
-vice.in \
-> --=20
-> 1.7.10
+> I realize this is targeted meta-oe, and not directly to oe-core (but
+> openembedded-core is cc'd + it's Saturday morning with no coffee here
+> yet which means I may be misreading) .. so I thought I'd comment as
+> this whizzed past.
 >=20
+> The existing users on top of the oe-core class expect (whether they
+> know it or not) the opposite of this (i.e. do nothing, get the =
+kernel's
+> uImage). To keep their old behaviour, they now need to explicitly set =
+a
+> flag. I know that I'd have quite a few layers to update if this went
+> directly into oe-core.
 >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> How are the current meta-oe and related BSPs currently overriding
+> the behaviour (I didn't go look, I'm invoking my Saturday morning =
+clause
+> again :) ? Is it a class override ? If so, can the layers that
+> currently have an override set a flag (which is a simpler override) to
+> get the behaviour they used to have, while leaving the boards with no
+> override the behaviour that they used to have ?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+"used to have" is quite vague, since the OE-classic behaviour is to =
+always replace the uImage. And that's where I'm migrating machines from.
 
---zjcmjzIkjQU2rmur
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAk+a5jYACgkQN1Ujt2V2gBzs7QCgqyIJ6VPUJntINXZOBdXsD1K7
-j2MAnA6K3lDrsB3SB5jkuet+sCUL5pdh
-=haKL
------END PGP SIGNATURE-----
 
---zjcmjzIkjQU2rmur--
