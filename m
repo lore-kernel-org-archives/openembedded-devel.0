@@ -1,37 +1,37 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkKT-0004G7-RE
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkKd-0004Pt-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:43:25 +0200
-Received: by mail-wi0-f177.google.com with SMTP id hj13so2124807wib.6
+	Mon, 30 Apr 2012 08:43:35 +0200
+Received: by wera1 with SMTP id a1so1806017wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:33:46 -0700 (PDT)
+	Sun, 29 Apr 2012 23:33:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=QVCgexLHMlSJ5sbdaUzNpwy5Xqaf7gSVc/Y5rlRiYsY=;
-	b=pTh/n5I6W2d7PKvyAqEErKfyNiTCuX5Ks7k2xnBZrN/bbP3dIW336rLlDVgj7WAlqR
-	H1aAhumc4//Ev0ONnxTcNnqjHobdtXgdI9soXx5XaEci/Cdw700AGmRgkXKkgpe26lwi
-	vJrDj3rV0PkMaD8ri3WzHluf9/rFpOHPdvOJ/eJWg+ss9zc9pLlyWZdBLF7WpXnBRpfx
-	RLXfwsQmB8B7x5mmAA0xm5kQgyAkIxdqVu656OpRooWubETy+5Dr0sGAenj1NAvtvKrO
-	dUv9hK9hZFArsZP3N4zjhx301W77I5J/TFgBHKBUyeZ1iAz/uX6cxi0zEe2tju2SlHNy
-	tcRw==
-Received: by 10.180.75.241 with SMTP id f17mr26210477wiw.11.1335767626642;
-	Sun, 29 Apr 2012 23:33:46 -0700 (PDT)
+	bh=Xo/RM+V4eZP0Vg65UIKMDer/0UBQOnjHmPB5Rj0skOA=;
+	b=zGoTErHMaVYg86fxpnctsLjkWwEFaWIca6Z9UHd6W+dRXncQ5vxEYZX/JbMfHki0o0
+	scDoZ9MZmbTsHbSND2KONlYnMtngfNIOYtqXdV++79vW71yNMUAsFFZuNDQL4ci5b3C2
+	wTPkzsSrrS4sbHtWX4+613+pqCqRHzHd/1k93JmKxGeXHsjVhyHTQVe8dfk518yT2CDw
+	G6CUfK74mlooVwZA0OaceaCwDwOOkTUuSVeCaIByJan2TSTfsRh/bRkGt8cq9kaYvtj5
+	/aHKDrGCBZP2lNeM4o6pkqpfn7hftRiRsOpXOyZXaSz2Vd0yAvqoe3gQvDViNvCRGN7j
+	NkFg==
+Received: by 10.180.97.4 with SMTP id dw4mr26008230wib.18.1335767633709;
+	Sun, 29 Apr 2012 23:33:53 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm26418870wia.11.2012.04.29.23.33.42
+	by mx.google.com with ESMTPS id ca3sm26396543wib.6.2012.04.29.23.33.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:33:43 -0700 (PDT)
+	Sun, 29 Apr 2012 23:33:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:33:00 +0200
-Message-Id: <054be7129a1fb427cde94be2c3044f25e359f6bc.1335767139.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:33:01 +0200
+Message-Id: <bf0abb70b022b006ae372d2a09c9b9f6eda96550.1335767139.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 03/16] gpsd-3.4: minor style issues
+Subject: [meta-oe][PATCH 04/16] gpsd-3.4: drop pkgconfig=''
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,81 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:43:25 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:43:35 -0000
+
+* this is wrong, it's used as path where to install .pc files
+  and we expect them in  not directly in sysroot
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb |   29 ++++++++++++--------------
- 1 files changed, 13 insertions(+), 16 deletions(-)
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
 diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-index 972871a..0e67555 100644
+index 0e67555..9584e55 100644
 --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
 +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-@@ -5,16 +5,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
+@@ -34,7 +34,6 @@ EXTRA_OESCONS = " \
+   debug='true' \
+   strip='false' \
+   systemd='true' \
+-  pkgconfig='${PKG_CONFIG_DIR}' \
+ "
  
--PR = "r0"
--
--SRC_URI = "http://download.savannah.gnu.org/releases/gpsd/gpsd-${PV}.tar.gz;name=gpsd \
--           file://gpsd-default \
--           file://gpsd \
--           file://gpsd.socket \
--           file://gpsd.service \
--           file://60-gpsd.rules"
--SRC_URI[gpsd.md5sum] = "c01353459faa68834309109d4e868460"
--SRC_URI[gpsd.sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
-+SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-+  file://gpsd-default \
-+  file://gpsd \
-+  file://gpsd.socket \
-+  file://gpsd.service \
-+  file://60-gpsd.rules \
-+"
-+SRC_URI[md5sum] = "c01353459faa68834309109d4e868460"
-+SRC_URI[sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
- 
- inherit scons update-rc.d python-dir systemd
- 
-@@ -24,7 +23,6 @@ INITSCRIPT_PARAMS = "defaults 35"
- SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE = "${PN}.socket"
- 
--
- LDFLAGS += "-L${STAGING_LIBDIR} -lm"
- export STAGING_INCDIR
- export STAGING_LIBDIR
-@@ -66,13 +64,10 @@ do_install_append() {
-     install -m 0644 ${WORKDIR}/60-gpsd.rules ${D}/${sysconfdir}/udev/rules.d
-     install -d ${D}${base_libdir}/udev/
-     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
--    install -d ${D}${base_libdir}/udev/
- 
-     #support for python
-     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
--    for f in ${S}/gps/* ;do
--        install $f ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
--    done
-+    install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
- }
- 
- pkg_postinst_${PN}-conf() {
-@@ -80,11 +75,13 @@ pkg_postinst_${PN}-conf() {
- }
- 
- pkg_postrm_${PN}-conf() {
--	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
-+	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
- }
- 
- PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
- 
-+FILES_gpsd-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc"
-+
- FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
- 
- RDEPENDS_${PN} = "gpsd-gpsctl"
+ do_compile_prepend() {
 -- 
 1.7.8.6
 
