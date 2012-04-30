@@ -1,32 +1,37 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkIA-0003WQ-Iv
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkIH-0003Wd-JQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:41:02 +0200
-Received: by wera1 with SMTP id a1so1805040wer.6
+	Mon, 30 Apr 2012 08:41:09 +0200
+Received: by wgbdr1 with SMTP id dr1so2076709wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:31:21 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=PTfr8aWNvLOnDaHqvRM8gfzOBI7+a9Xt50u53/WDVxs=;
-	b=XA1VFdQ795TVpgxS2/WvqQRGg2xBi7fS7wX7z09FXj/g9fiMIIAYHch9FkucnPouLw
-	MkdWPuS9vfMEiYYUjAW7/PL0KhJOu96pWxmx8bKtNonZRwZu82qny5JE1Z8BaW67GS3+
-	YKT/4Gidh+hZ/KIE1dBKXdLGm/XABuaFuaxYc6ob/Djz+TI2g/eX27P2O7Xkd7kUahay
-	ViBWgb0xgAsn4w9uSUceUj0b+PKJFG9Y045fZpDk33r70bZ18fLNZBWetkR9Khmk5QJZ
-	G/DyEs9ZHSOc7VZZk0mDsdiJ4aWG3ZO3PeyOTQo0GVfyBROXJ2GPQWZvWwG4w/YF2q+F
-	lH/w==
-Received: by 10.180.88.169 with SMTP id bh9mr1679960wib.5.1335767481065;
-	Sun, 29 Apr 2012 23:31:21 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=e/frHP0A8DlFHj3/hdoBPHmJ/3e7Y6bi/M1dTaTu79Y=;
+	b=gJApPytfz9ew3pMeb5tOzggC3+5FAjuTmoMSh3vyhQpi3XwQBoJPayUmQWj1+JfaKg
+	hvQb+zm91WiyfFG+THY3w4QGq9hm+1nfsoZitw2Bn0dfluCpty+7vadCQ1EPkJts+4vC
+	w0SuTt45eZVBB9QEP4gqgJAfPgRrnDgfZkS3D62kTMsAc3qZQXEgz8d1azt3ie2OAztk
+	O9WqW/3VHEFFNbd5PYmHLJg0izB/cVhAOVxUpINW264Hkp1hFWC+6NVD09Vvuarr8s5n
+	rShMkOX9D0fqBEsbWIABJ9Yf+g6Dc5m4jcNkKzkbdQTh/U4+K3YzChYKwNOKnOzFPTsf
+	cjww==
+Received: by 10.180.97.4 with SMTP id dw4mr25994225wib.18.1335767488259;
+	Sun, 29 Apr 2012 23:31:28 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fz9sm26385314wib.3.2012.04.29.23.31.19
+	by mx.google.com with ESMTPS id ff2sm41871698wib.9.2012.04.29.23.31.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:31:20 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:31:07 +0200
-Message-Id: <cover.1335766581.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:31:08 +0200
+Message-Id: <92a51d2df35aea2d72186ff7c6f0d6e9c20dc504.1335766581.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][meta-efl][PATCH 0/6] fixes for gcc, glib-2.0 upgrade
+In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
+References: <cover.1335766581.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
+References: <cover.1335766581.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-efl][PATCH 1/6] libsoup-2.4, gobject-introspection: upgraded in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,54 +45,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:41:02 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:41:09 -0000
 
-Tested only with this patchset applied:
-http://lists.linuxtogo.org/pipermail/openembedded-core/2012-April/021626.html
-so it would be nice to apply it after that.
-
-Thanks
-
-The following changes since commit 8f9b2e3a102e66426ce5b269a6827fc6a3218bef:
-
-  kernel bbclass: recreate uImage unless KEEPUIMAGE is set (2012-04-27 21:57:32 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull2
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull2
-
-Martin Jansa (6):
-  libsoup-2.4, gobject-introspection: upgraded in oe-core
-  midori: upgrade to 0.4.5
-  libgpewidget: fix build with glib-2.32
-  epdfview: fix build with glib-2.32
-  tangogps: fix build with glib-2.32
-  webkit-efl: fix build with gcc-4.7
-
- meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch  |   12 +++
- meta-efl/recipes-efl/efl/epdfview_0.1.8.bb         |    6 +-
- ...t-pass-P-to-the-preprocessor-when-running.patch |   76 ++++++++++++++++++++
- meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |    3 +-
- .../recipes-support/libsoup/libsoup-2.4_2.37.2.bb  |   25 -------
- .../use-usr-bin-env-for-python.patch               |   20 -----
- .../gobject-introspection_0.9.10.bb                |   32 --------
- .../gobject-introspection_git.bb                   |   34 ---------
- .../libgpewidget/libgpewidget/glib-2.32.patch      |   11 +++
- .../libgpewidget/libgpewidget_0.117.bb             |   10 ++-
- .../midori/{midori_0.4.4.bb => midori_0.4.5.bb}    |    6 +-
- .../tangogps/tangogps-0.99.4/glib-2.32.patch       |   11 +++
- .../recipes-navigation/tangogps/tangogps_0.99.4.bb |    6 +-
- 13 files changed, 128 insertions(+), 124 deletions(-)
- create mode 100644 meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch
- create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-CMake-Do-not-pass-P-to-the-preprocessor-when-running.patch
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-support/libsoup/libsoup-2.4_2.37.2.bb  |   25 --------------
+ .../use-usr-bin-env-for-python.patch               |   20 -----------
+ .../gobject-introspection_0.9.10.bb                |   32 ------------------
+ .../gobject-introspection_git.bb                   |   34 --------------------
+ 4 files changed, 0 insertions(+), 111 deletions(-)
  delete mode 100644 meta-efl/recipes-support/libsoup/libsoup-2.4_2.37.2.bb
  delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch
  delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_0.9.10.bb
  delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_git.bb
- create mode 100644 meta-gpe/recipes-graphics/libgpewidget/libgpewidget/glib-2.32.patch
- rename meta-oe/recipes-connectivity/midori/{midori_0.4.4.bb => midori_0.4.5.bb} (89%)
- create mode 100644 meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/glib-2.32.patch
 
+diff --git a/meta-efl/recipes-support/libsoup/libsoup-2.4_2.37.2.bb b/meta-efl/recipes-support/libsoup/libsoup-2.4_2.37.2.bb
+deleted file mode 100644
+index 4810b3a..0000000
+--- a/meta-efl/recipes-support/libsoup/libsoup-2.4_2.37.2.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "An HTTP library implementation in C"
+-HOMEPAGE = "http://www.gnome.org/"
+-BUGTRACKER = "https://bugzilla.gnome.org/"
+-
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+-
+-PR = "r1"
+-
+-# unstable version
+-DEFAULT_PREFERENCE = "-1"
+-
+-SECTION = "x11/gnome/libs"
+-
+-DEPENDS = "glib-2.0 gnutls libxml2 libproxy sqlite3 libgnome-keyring"
+-
+-SRC_URI = "${GNOME_MIRROR}/libsoup/2.37/libsoup-${PV}.tar.xz"
+-
+-SRC_URI[md5sum] = "7737dd5238efd593452ba3c365e63e8c"
+-SRC_URI[sha256sum] = "df82c51b67f67c3128979d1f3bf20a8ceeea369b6e43aceb16d576d8fc4e8423"
+-
+-S = "${WORKDIR}/libsoup-${PV}"
+-
+-inherit autotools pkgconfig
+-
+diff --git a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch b/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch
+deleted file mode 100644
+index 67b8547..0000000
+--- a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection/use-usr-bin-env-for-python.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-Index: gobject-introspection-0.9.10/tools/g-ir-annotation-tool.in
+-===================================================================
+---- gobject-introspection-0.9.10.orig/tools/g-ir-annotation-tool.in
+-+++ gobject-introspection-0.9.10/tools/g-ir-annotation-tool.in
+-@@ -1,4 +1,4 @@
+--#!@PYTHON@
+-+#!/usr/bin/env python
+- # -*- Mode: Python -*-
+- # GObject-Introspection - a framework for introspecting GObject libraries
+- # Copyright (C) 2008  Johan Dahlin
+-Index: gobject-introspection-0.9.10/tools/g-ir-scanner.in
+-===================================================================
+---- gobject-introspection-0.9.10.orig/tools/g-ir-scanner.in
+-+++ gobject-introspection-0.9.10/tools/g-ir-scanner.in
+-@@ -1,4 +1,4 @@
+--#!@PYTHON@
+-+#!/usr/bin/env python
+- # -*- Mode: Python -*-
+- # GObject-Introspection - a framework for introspecting GObject libraries
+- # Copyright (C) 2008  Johan Dahlin
+diff --git a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_0.9.10.bb b/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_0.9.10.bb
+deleted file mode 100644
+index f1a46a1..0000000
+--- a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_0.9.10.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-# NOTE: WIP! This recipe does not cross-compile atm., only -native
+-SECTION = "libs"
+-DEPENDS = "glib-2.0 libffi bison-native"
+-BBCLASSEXTEND = "native"
+-PR = "r1"
+-
+-LICENSE = "GPLv2+ & LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=90d577535a3898e1ae5dbf0ae3509a8c \
+-                    file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
+-                    file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7"
+-
+-SRC_URI[md5sum] = "e5cd63d6bcc5c105e898e7c33cf42175"
+-SRC_URI[sha256sum] = "4bf244db75df04499dea704e7734376c0fc5a3a17fb59be2123c8d76111e6fb8"
+-
+-SRC_URI = "\
+-  ${GNOME_MIRROR}/gobject-introspection/0.9/${BPN}-${PV}.tar.bz2 \
+-  file://use-usr-bin-env-for-python.patch \
+-"
+-S = "${WORKDIR}/${BPN}-${PV}"
+-
+-inherit autotools
+-
+-do_configure_prepend() {
+-	touch -f gtk-doc.make
+-}
+-
+-EXTRA_OECONF = "\
+-  --disable-gtk-doc \
+-  --disable-gtk-doc-html \
+-  --disable-gtk-doc-pdf \
+-  --disable-tests \
+-"
+diff --git a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_git.bb b/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_git.bb
+deleted file mode 100644
+index f7e8907..0000000
+--- a/meta-gnome/recipes-gnome/gobject-introspection/gobject-introspection_git.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-# NOTE: WIP! This recipe does not cross-compile atm., only -native
+-DEPENDS = "glib-2.0 libffi python-native gobject-introspection-native"
+-DEPENDS_virtclass-native = "glib-2.0-native libffi-native python-native bison-native flex-native"
+-BBCLASSEXTEND = "native"
+-
+-SRC_URI = "git://git.gnome.org/gobject-introspection;protocol=git \
+-  file://use-usr-bin-env-for-python.patch \
+-"
+-
+-LICENSE = "GPLv2+ & LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING.tools;md5=94d55d512a9ba36caa9b7df079bae19f \
+-		    file://COPYING.lib;md5=3bf50002aefd002f49e7bb854063f7e7"
+-
+-SRCREV = "8d64bc23d2b837421ecf9c7b0e4b8d5d95ca0d21"
+-PV = "1.29.0+gitr${SRCPV}"
+-PR = "r1"
+-DEFAULT_PREFERENCE = "-1"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools
+-
+-BBCLASSEXTEND = "native"
+-
+-do_configure_prepend () {
+-        echo "EXTRA_DIST = " > ${S}/gtk-doc.make
+-}
+-
+-EXTRA_OECONF = "\
+-  --disable-gtk-doc \
+-  --disable-gtk-doc-html \
+-  --disable-gtk-doc-pdf \
+-  --disable-tests \
+-"
 -- 
 1.7.8.6
 
