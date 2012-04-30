@@ -1,33 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f50.google.com ([209.85.210.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SOxj0-0006Wo-PI
+	(envelope-from <raj.khem@gmail.com>) id 1SOxj2-0006Wp-F6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 23:01:39 +0200
-Received: by pbbrq2 with SMTP id rq2so3528955pbb.6
+	Mon, 30 Apr 2012 23:01:40 +0200
+Received: by dakh32 with SMTP id h32so4274886dak.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Apr 2012 13:51:55 -0700 (PDT)
+	Mon, 30 Apr 2012 13:51:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=JRZHnxhwzmRSzoIt+0crJWA2suaAx3GAfsGd9ZiEOqs=;
-	b=geXy6Isrnj2lZIHFIkLWJ8KwMG548me2bMywFDlMmwHWxf9pkq9sKsq7AktPfCd0ST
-	cme+Up1lbHVYxYyYQkqv//nxv3PmYB9V3Nr2ZoqBsSjVxwDW5yUWkiktX7W85FcwkveV
-	DtZHtBO13vDKgVPtMfp9L3JvLTELsIpw/5s74HuasCGV13qIry/fSwNY9z7ozzZ6afx8
-	xJV9KvJtsSvhajxQI/ZGOLu6TqbOv6siEmm94sm1VJDLXTpzONAfhuCNrjUCDE34ptDJ
-	bNBByJ7raH0TJ4eqrhI8DM9j86OmpMYlVjUP5T6KhGjGh0UItOcga4unpI+ge+LZK1w8
-	jzYA==
-Received: by 10.68.240.135 with SMTP id wa7mr51285321pbc.7.1335819115671;
-	Mon, 30 Apr 2012 13:51:55 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=UFx42ddN0L72a3Eg2H86/tHxvZ2TiZX9DXGp7M3HMHk=;
+	b=SicsK1F2W9V4kXf7jCtTv01D+Mdsj0mdjKaKhJvPKNrNCIWCvW7XzG8a43DdFIAqlb
+	uWNv7SxVMrkca1EKRvJCe+alppDfJ7ap/6gzZofXfmF/Fc1b20ouBciofEwUGirQwUnT
+	yXWhXnLSqk+cZNaW5kNZL8WL4zeHpwDPl6FfTqtbHRyaQNUYDHSwW+bnw0JoaI1OMck2
+	wkjwuNqjN4Wq9oF7ydqbWxPiw9TzvcTTJ6AgkoXwH5c8+en9LtSkWwatjG98+Uo/kcJ4
+	5F1o6tZsG4B33SS6t3yLyXIWiwsWkRRxUxf7GqkguviAiilTFgYqC6fbYKyyruaEA+UK
+	43aA==
+Received: by 10.68.228.195 with SMTP id sk3mr41500353pbc.20.1335819117594;
+	Mon, 30 Apr 2012 13:51:57 -0700 (PDT)
 Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id pk5sm7012726pbb.68.2012.04.30.13.51.53
+	by mx.google.com with ESMTPS id pk5sm7012726pbb.68.2012.04.30.13.51.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Apr 2012 13:51:54 -0700 (PDT)
+	Mon, 30 Apr 2012 13:51:56 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 13:51:02 -0700
-Message-Id: <1335819064-29468-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 30 Apr 2012 13:51:03 -0700
+Message-Id: <1335819064-29468-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.5.4
-Subject: [toolchain-layer][PATCH 1/3] gcc-4.5: Match with OE-Core on building procedure for libgcc and gcc-runtime
+In-Reply-To: <1335819064-29468-1-git-send-email-raj.khem@gmail.com>
+References: <1335819064-29468-1-git-send-email-raj.khem@gmail.com>
+Subject: [toolchain-layer][PATCH 2/3] gcc-crosssdk-intermediate_4.5.bb: with-headers has been moved from common include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,95 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 21:01:39 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 21:01:40 -0000
+
+To accomodate gcc 4.7 which needed a different option
+than --with-header this option setting has been moved
+into version specific recipes
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb |   47 +++++++++++++++-----
- 1 files changed, 36 insertions(+), 11 deletions(-)
+ .../gcc/gcc-crosssdk-intermediate_4.5.bb           |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-index 1579c8b..ecef5e7 100644
---- a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-@@ -1,33 +1,46 @@
- require recipes-devtools/gcc/gcc-${PV}.inc
- 
+diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb b/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
+index 971f3ba..61a0dfb 100644
+--- a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
++++ b/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
+@@ -1,3 +1,3 @@
+ require recipes-devtools/gcc/gcc-cross-intermediate_${PV}.bb
+ require recipes-devtools/gcc/gcc-crosssdk-intermediate.inc
 -
- INHIBIT_DEFAULT_DEPS = "1"
-+
- DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
- 
- PACKAGES = "\
-   ${PN} \
-   ${PN}-dev \
-+  ${PN}-dbg \
-+  libgcov-dev \
-   "
- 
- FILES_${PN} = "${base_libdir}/libgcc*.so.*"
- FILES_${PN}-dev = " \
-   ${base_libdir}/libgcc*.so \
-   ${libdir}/${TARGET_SYS}/${BINV}/crt* \
--  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a \
-   ${libdir}/${TARGET_SYS}/${BINV}/libgcc*"
-+FILES_libgcov-dev = " \
-+  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a"
- 
--do_fetch[noexec] = "1"
--do_unpack[noexec] = "1"
--do_patch[noexec] = "1"
--do_configure[noexec] = "1"
--do_compile[noexec] = "1"
-+FILES_${PN}-dbg += "${base_libdir}/.debug/"
- 
--do_install () {
-+do_configure () {
- 	target=`echo ${MULTIMACH_TARGET_SYS} | sed -e s#-nativesdk##`
--
--	# Install libgcc from our gcc-cross saved data
- 	install -d ${D}${base_libdir} ${D}${libdir}
--	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${D}
-+	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${B}
-+	mkdir -p ${B}/${PN}
-+	cd ${B}/${PN}
-+	chmod a+x ${S}/${PN}/configure
-+	${S}/${PN}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-+}
-+
-+do_compile () {
-+	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
-+	cd ${B}/${PN}
-+	oe_runmake MULTIBUILDTOP=${B}/$target/${PN}/
-+}
-+
-+do_install () {
-+	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
-+	cd ${B}/${PN}
-+	oe_runmake 'DESTDIR=${D}' MULTIBUILDTOP=${B}/$target/${PN}/ install
- 
- 	# Move libgcc_s into /lib
- 	mkdir -p ${D}${base_libdir}
-@@ -36,7 +49,19 @@ do_install () {
- 	else
- 		mv ${D}${libdir}/libgcc* ${D}${base_libdir} || true
- 	fi
-+
-+	# install the runtime in /usr/lib/ not in /usr/lib/gcc on target
-+	# so that cross-gcc can find it in the sysroot
-+
-+	mv ${D}${libdir}/gcc/* ${D}${libdir}
-+	rm -rf ${D}${libdir}/gcc/
- }
- 
-+do_package_write_ipk[depends] += "virtual/${MLPREFIX}libc:do_package"
-+do_package_write_deb[depends] += "virtual/${MLPREFIX}libc:do_package"
-+do_package_write_rpm[depends] += "virtual/${MLPREFIX}libc:do_package"
-+
- BBCLASSEXTEND = "nativesdk"
- 
-+INSANE_SKIP_libgcc-dev = "staticdev"
-+INSANE_SKIP_libgcov-dev = "staticdev"
++EXTRA_OECONF += " --with-headers=${STAGING_DIR_TCBOOTSTRAP}${SYSTEMHEADERS} "
 -- 
 1.7.5.4
 
