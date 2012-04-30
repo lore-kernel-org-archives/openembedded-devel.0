@@ -1,39 +1,33 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SOxdG-000620-Qj
+	(envelope-from <raj.khem@gmail.com>) id 1SOxj0-0006Wo-PI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 22:55:42 +0200
-Received: by lagw12 with SMTP id w12so2117582lag.6
+	Mon, 30 Apr 2012 23:01:39 +0200
+Received: by pbbrq2 with SMTP id rq2so3528955pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Apr 2012 13:46:00 -0700 (PDT)
+	Mon, 30 Apr 2012 13:51:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=DnMFYBmnNAHlL82DGfXcQ7NrvBCQ8cBWS7Vipd/PRU4=;
-	b=iBA55Z6Cv+YWyeDyI4DE00miBho6dcHksm8f8Gn1Nr7KYH1sWOIPG8kQooaH3ZgKv4
-	douUTL7GlWkKV8fjS6IxZAcN8qhTXuqQn+s5hW8lChuhJQ6e149pOM7q/dkB12ZeAFzu
-	H6E71l5rsqlc/rIx+ImIYa4BZrjglUhaAJCSPhLfu2BRvXIY0VNZKEWfULqKadcgo6vC
-	k9KNpW11/jmTAMllXmukd/KlEEIwFl6XlLPpwXv5hSX+osOHDPcBxvqJNwi8Z/ICxHbj
-	OfGQyuPFpQ2y2uKb6ZRxkrJo+pwVU74MTYsI1OqM+KC49L/FBHKaisW5pXKR87pX1iNo
-	dzcA==
-Received: by 10.112.32.72 with SMTP id g8mr4565285lbi.43.1335818756095; Mon,
-	30 Apr 2012 13:45:56 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.152.129.134 with HTTP; Mon, 30 Apr 2012 13:45:24 -0700 (PDT)
-In-Reply-To: <4E6C197A-8F6B-47BF-AD7C-2741978F2833@mac.com>
-References: <92932941-A66D-45AF-8CDC-8F56D66C4E02@gmail.com>
-	<CAMKF1soQ+eShsN+r5ZPA60vSEmEKZmKCM-WTt0mhghVUAteOUg@mail.gmail.com>
-	<169F7DFB-B916-4EA8-BC37-C451F76E466A@gmail.com>
-	<CAMKF1sqdoJsqdyG-gG-Tzif4kZ-wMB3jbunC5n7ru5H1CALy1Q@mail.gmail.com>
-	<A7836DF4-B075-4275-8BB8-9C595AE0A9C4@gmail.com>
-	<4E6C197A-8F6B-47BF-AD7C-2741978F2833@mac.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=JRZHnxhwzmRSzoIt+0crJWA2suaAx3GAfsGd9ZiEOqs=;
+	b=geXy6Isrnj2lZIHFIkLWJ8KwMG548me2bMywFDlMmwHWxf9pkq9sKsq7AktPfCd0ST
+	cme+Up1lbHVYxYyYQkqv//nxv3PmYB9V3Nr2ZoqBsSjVxwDW5yUWkiktX7W85FcwkveV
+	DtZHtBO13vDKgVPtMfp9L3JvLTELsIpw/5s74HuasCGV13qIry/fSwNY9z7ozzZ6afx8
+	xJV9KvJtsSvhajxQI/ZGOLu6TqbOv6siEmm94sm1VJDLXTpzONAfhuCNrjUCDE34ptDJ
+	bNBByJ7raH0TJ4eqrhI8DM9j86OmpMYlVjUP5T6KhGjGh0UItOcga4unpI+ge+LZK1w8
+	jzYA==
+Received: by 10.68.240.135 with SMTP id wa7mr51285321pbc.7.1335819115671;
+	Mon, 30 Apr 2012 13:51:55 -0700 (PDT)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id pk5sm7012726pbb.68.2012.04.30.13.51.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 Apr 2012 13:51:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 30 Apr 2012 13:45:24 -0700
-Message-ID: <CAMKF1soBh12AN=oay4xWOvYFegJqJ369jdkMKbrxCSkQJutyYw@mail.gmail.com>
-To: Elvis Dowson <elvis.dowson@mac.com>
-Cc: Neil MacMunn <neil@gumstix.com>, OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: gcc-4.4.1 assembler error: offset out of range
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Apr 2012 13:51:02 -0700
+Message-Id: <1335819064-29468-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [toolchain-layer][PATCH 1/3] gcc-4.5: Match with OE-Core on building procedure for libgcc and gcc-runtime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,14 +41,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 20:55:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Apr 2012 21:01:39 -0000
 
-On Mon, Apr 30, 2012 at 1:01 PM, Elvis Dowson <elvis.dowson@mac.com> wrote:
->
-> gcc-4.5.x compiled successfully, as soon as I switched to binutils-2.21.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb |   47 +++++++++++++++-----
+ 1 files changed, 36 insertions(+), 11 deletions(-)
 
-OK so its an assembler issue, yeah using 2.21 and gcc 4.4.1 you have a
-better chance of succeeding now.
+diff --git a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
+index 1579c8b..ecef5e7 100644
+--- a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
++++ b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
+@@ -1,33 +1,46 @@
+ require recipes-devtools/gcc/gcc-${PV}.inc
+ 
+-
+ INHIBIT_DEFAULT_DEPS = "1"
++
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
+ 
+ PACKAGES = "\
+   ${PN} \
+   ${PN}-dev \
++  ${PN}-dbg \
++  libgcov-dev \
+   "
+ 
+ FILES_${PN} = "${base_libdir}/libgcc*.so.*"
+ FILES_${PN}-dev = " \
+   ${base_libdir}/libgcc*.so \
+   ${libdir}/${TARGET_SYS}/${BINV}/crt* \
+-  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a \
+   ${libdir}/${TARGET_SYS}/${BINV}/libgcc*"
++FILES_libgcov-dev = " \
++  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a"
+ 
+-do_fetch[noexec] = "1"
+-do_unpack[noexec] = "1"
+-do_patch[noexec] = "1"
+-do_configure[noexec] = "1"
+-do_compile[noexec] = "1"
++FILES_${PN}-dbg += "${base_libdir}/.debug/"
+ 
+-do_install () {
++do_configure () {
+ 	target=`echo ${MULTIMACH_TARGET_SYS} | sed -e s#-nativesdk##`
+-
+-	# Install libgcc from our gcc-cross saved data
+ 	install -d ${D}${base_libdir} ${D}${libdir}
+-	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${D}
++	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${B}
++	mkdir -p ${B}/${PN}
++	cd ${B}/${PN}
++	chmod a+x ${S}/${PN}/configure
++	${S}/${PN}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
++}
++
++do_compile () {
++	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
++	cd ${B}/${PN}
++	oe_runmake MULTIBUILDTOP=${B}/$target/${PN}/
++}
++
++do_install () {
++	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
++	cd ${B}/${PN}
++	oe_runmake 'DESTDIR=${D}' MULTIBUILDTOP=${B}/$target/${PN}/ install
+ 
+ 	# Move libgcc_s into /lib
+ 	mkdir -p ${D}${base_libdir}
+@@ -36,7 +49,19 @@ do_install () {
+ 	else
+ 		mv ${D}${libdir}/libgcc* ${D}${base_libdir} || true
+ 	fi
++
++	# install the runtime in /usr/lib/ not in /usr/lib/gcc on target
++	# so that cross-gcc can find it in the sysroot
++
++	mv ${D}${libdir}/gcc/* ${D}${libdir}
++	rm -rf ${D}${libdir}/gcc/
+ }
+ 
++do_package_write_ipk[depends] += "virtual/${MLPREFIX}libc:do_package"
++do_package_write_deb[depends] += "virtual/${MLPREFIX}libc:do_package"
++do_package_write_rpm[depends] += "virtual/${MLPREFIX}libc:do_package"
++
+ BBCLASSEXTEND = "nativesdk"
+ 
++INSANE_SKIP_libgcc-dev = "staticdev"
++INSANE_SKIP_libgcov-dev = "staticdev"
+-- 
+1.7.5.4
+
 
 
