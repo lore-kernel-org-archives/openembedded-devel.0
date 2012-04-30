@@ -1,37 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkLP-0004jm-L4
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkLZ-00052p-LW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:44:23 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so2078332wgb.24
+	Mon, 30 Apr 2012 08:44:33 +0200
+Received: by wibhj13 with SMTP id hj13so2125563wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:34:44 -0700 (PDT)
+	Sun, 29 Apr 2012 23:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=c4jnr1E9SR8w42sZ9Ac27Ze5HkAo6DzDC+hmDK6858A=;
-	b=B2jnIqPrXQcTnoDRacMwKOT9oqDsxrtrjqUXiepWbo4DjNVj+dtrNt/+erOYY+Mx38
-	Btx3XY4apwaot/aOccsylf8DTxN99DhligIZUSB7ynkb/SMeVH87l9ulEDsjIUT46a1o
-	ekkV1izYVh9+UqC1Yli2QNkHzujRPtyGUksMyhTSvEyUsK1QJKn0L5xfpFvXN6iP0Xgw
-	D4cAvRMxCXiGMl+W9KapRnH9UzoDjbtY862ZtNQ8NHTaHUFIcZH1hZuwF95mN/CdPV2g
-	nofTeniTVtY71apHBSHd5I0VR9w85WGQqG7BeHTeYXLnuJ9DpQQbZK9yYUkqNPp8qek+
-	0Wpw==
-Received: by 10.216.139.67 with SMTP id b45mr5817947wej.0.1335767684385;
-	Sun, 29 Apr 2012 23:34:44 -0700 (PDT)
+	bh=+YWMOaYLG/d4QqUkuAH/r+NX/p/iX57xzUAx6eNTkYY=;
+	b=RxlWYrzN80Y1RLZbCIulGektb82w3NSLyTyHeVcZnsQbN++FoAcbC3U1O476QCXWI1
+	4Fxs5ywB3LB4hT22BFJ/GtSdJpbrjxFZZtdEgDGpOi/gFaS652phVb8E6z5NbImxkj6A
+	V6r/TxCG4dS5o+6zVw2vRJsOQ1KsCHS6smn3z/tH9J/jwLMJXElP7PvicHi/tiy5vbfz
+	UlnYig93uScU7icz6BxmHCN0HH+Ys1Q1X7gzmSEDjyYSlADxwhaMAukXtR4+HeiZnxyK
+	wq77lBR0y8yg2x9asctiQBP/YmWpmRJRiRxblZQNxmQqV1ZOnJ/iOSbnKZLKFAIS4QXy
+	2nEQ==
+Received: by 10.216.136.100 with SMTP id v78mr7729995wei.88.1335767691611;
+	Sun, 29 Apr 2012 23:34:51 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fz9sm26404350wib.3.2012.04.29.23.34.43
+	by mx.google.com with ESMTPS id ca3sm26401994wib.6.2012.04.29.23.34.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:34:43 -0700 (PDT)
+	Sun, 29 Apr 2012 23:34:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:33:08 +0200
-Message-Id: <82c5c27596d90f65a3e9b11dda8efed6342d971b.1335767139.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:33:09 +0200
+Message-Id: <e0daf8c15aee69422a5229436473accbf28bd119.1335767139.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/16] gpsd: add recipe for 3.5 with negative D_P for testing
+Subject: [meta-oe][PATCH 12/16] gpsd: add git recipe with negative D_P for tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,67 +45,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:44:23 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:44:33 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...strptime-prototype-is-not-provided-unless.patch |   39 ++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb        |  126 ++++++++++++++++++++
- 2 files changed, 165 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0003-Revert-The-strptime-prototype-is-not-provided-unless.patch
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
+ meta-oe/recipes-navigation/gpsd/gpsd_git.bb |  129 +++++++++++++++++++++++++++
+ 1 files changed, 129 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd_git.bb
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0003-Revert-The-strptime-prototype-is-not-provided-unless.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0003-Revert-The-strptime-prototype-is-not-provided-unless.patch
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
 new file mode 100644
-index 0000000..c2d191c
+index 0000000..8bb0d3e
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/0003-Revert-The-strptime-prototype-is-not-provided-unless.patch
-@@ -0,0 +1,39 @@
-+From c6bb11767172407bfaaebd962b4d12cd8e8a1fb0 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Tue, 24 Apr 2012 14:57:04 +0200
-+Subject: [PATCH 3/4] Revert "The strptime prototype is not provided unless
-+ explicitly requested."
-+
-+* This reverts commit 615d3eb14ea4833ce38ea89ec385308f4f679b33.
-+* with _XOPEN_SOURCE defined, we don't have
-+  CLOCK_REALTIME and timespec defined and build fails:
-+  | arm-oe-linux-gnueabi-gcc -march=armv4t -mthumb -mthumb-interwork -mtune=arm920t --sysroot=/OE/shr-core/tmp-eglibc/sysroots/om-gta02 -o gpsutils.os -c -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/OE/shr-core/tmp-eglibc/sysroots/om-gta02 -O2 -fPIC gpsutils.c
-+  | gpsutils.c: In function 'timestamp':
-+  | gpsutils.c:299:22: error: storage size of 'ts' isn't known
-+  | gpsutils.c:300:34: error: 'CLOCK_REALTIME' undeclared (first use in this function)
-+  | gpsutils.c:300:34: note: each undeclared identifier is reported only once for each function it appears in
-+  | gpsutils.c: In function 'unix_to_iso8601':
-+  | gpsutils.c:385:11: warning: incompatible implicit declaration of built-in function 'snprintf' [enabled by default]
-+---
-+ gpsutils.c |    5 -----
-+ 1 files changed, 0 insertions(+), 5 deletions(-)
-+
-+diff --git a/gpsutils.c b/gpsutils.c
-+index 60c4ae9..a1530ec 100644
-+--- a/gpsutils.c
-++++ b/gpsutils.c
-+@@ -3,11 +3,6 @@
-+  * This file is Copyright (c) 2010 by the GPSD project
-+  * BSD terms apply: see the file COPYING in the distribution root for details.
-+  */
-+-
-+-/* The strptime prototype is not provided unless explicitly requested.
-+- *  So add the define that POSIX says to to avoid: */
-+-#define _XOPEN_SOURCE
-+-
-+ #include <stdio.h>
-+ #include <time.h>
-+ #include <sys/time.h>
-+-- 
-+1.7.8.5
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-new file mode 100644
-index 0000000..bd65eae
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-@@ -0,0 +1,126 @@
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+@@ -0,0 +1,129 @@
 +DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
 +SECTION = "console/network"
 +LICENSE = "BSD"
@@ -113,8 +66,12 @@ index 0000000..bd65eae
 +DEPENDS = "dbus dbus-glib ncurses python libusb1"
 +PROVIDES = "virtual/gpsd"
 +
++SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
++
 +DEFAULT_PREFERENCE = "-1"
-+SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
++PV = "3.5+gitr${SRCPV}"
++
++SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
 +  file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
 +  file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
 +  file://0003-Revert-The-strptime-prototype-is-not-provided-unless.patch \
@@ -123,8 +80,7 @@ index 0000000..bd65eae
 +  file://gpsd \
 +  file://60-gpsd.rules \
 +"
-+SRC_URI[md5sum] = "e96881798a0ab67aa3cd5f3249f0e536"
-+SRC_URI[sha256sum] = "5ebb0b00c49421eb8fbead81342e5ce63e82065e5ff27da586f10e342b999171"
++S = "${WORKDIR}/git"
 +
 +inherit scons update-rc.d python-dir systemd
 +
