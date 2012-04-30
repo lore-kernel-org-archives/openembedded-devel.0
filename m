@@ -1,37 +1,37 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkLZ-00052p-LW
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkLe-0004jm-37
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:44:33 +0200
-Received: by wibhj13 with SMTP id hj13so2125563wib.6
+	Mon, 30 Apr 2012 08:44:38 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dr1so2078332wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:34:52 -0700 (PDT)
+	Sun, 29 Apr 2012 23:34:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=+YWMOaYLG/d4QqUkuAH/r+NX/p/iX57xzUAx6eNTkYY=;
-	b=RxlWYrzN80Y1RLZbCIulGektb82w3NSLyTyHeVcZnsQbN++FoAcbC3U1O476QCXWI1
-	4Fxs5ywB3LB4hT22BFJ/GtSdJpbrjxFZZtdEgDGpOi/gFaS652phVb8E6z5NbImxkj6A
-	V6r/TxCG4dS5o+6zVw2vRJsOQ1KsCHS6smn3z/tH9J/jwLMJXElP7PvicHi/tiy5vbfz
-	UlnYig93uScU7icz6BxmHCN0HH+Ys1Q1X7gzmSEDjyYSlADxwhaMAukXtR4+HeiZnxyK
-	wq77lBR0y8yg2x9asctiQBP/YmWpmRJRiRxblZQNxmQqV1ZOnJ/iOSbnKZLKFAIS4QXy
-	2nEQ==
-Received: by 10.216.136.100 with SMTP id v78mr7729995wei.88.1335767691611;
-	Sun, 29 Apr 2012 23:34:51 -0700 (PDT)
+	bh=Z69C2TgvoHLEsPGGCwFe4bF4XxX8im6qZvsI/J35Nb8=;
+	b=tpkRpkuXfRC6ufBjX/VHhEmMnTUgnS4QXUgX3Azsz68zzCodeauJQfOGbeMrVxEReL
+	7bqrmvYf3zdPcmCmznXX7zciWcqxNZ5flz90kC3QBWC1OMz8aUcpAaWKU8qsGSga94o4
+	ZZu6qkIK5GErzvTqefL8HDMHqegO3Y5WGvMhZg0B7c7PfIKLqVbJRd2wq2x/0vRcYL6k
+	0Qqhi2sZmY6KmPX3bjSjLiIcvILnCapW/G63mPWsKKrrqapQgiMpy8XYjvpAUJY5wquX
+	uFQI8O2yfZJOxS+OhU+fiHzEPycwR2r7oyfestnoM1J3+dQU3JWERZqFKDw9WaO+Wxfw
+	ugQg==
+Received: by 10.180.79.135 with SMTP id j7mr26017636wix.19.1335767698739;
+	Sun, 29 Apr 2012 23:34:58 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ca3sm26401994wib.6.2012.04.29.23.34.50
+	by mx.google.com with ESMTPS id ff2sm41902048wib.9.2012.04.29.23.34.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:34:50 -0700 (PDT)
+	Sun, 29 Apr 2012 23:34:58 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:33:09 +0200
-Message-Id: <e0daf8c15aee69422a5229436473accbf28bd119.1335767139.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:33:10 +0200
+Message-Id: <c6135b0d88a39354ba4213e71ef0941c48d88707.1335767139.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335767139.git.Martin.Jansa@gmail.com>
 References: <cover.1335767139.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/16] gpsd: add git recipe with negative D_P for tests
+Subject: [meta-oe][PATCH 13/16] gpsd-3.4: fix python paths and RPATHs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,149 +45,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:44:33 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:44:38 -0000
+
+* see included patch for description
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_git.bb |  129 +++++++++++++++++++++++++++
- 1 files changed, 129 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+ ...prefix-includepy-with-sysroot-and-drop-sy.patch |   72 ++++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb        |    1 +
+ 2 files changed, 73 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.4/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.4/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.4/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
 new file mode 100644
-index 0000000..8bb0d3e
+index 0000000..27c6aad
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
-@@ -0,0 +1,129 @@
-+DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
-+SECTION = "console/network"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
-+DEPENDS = "dbus dbus-glib ncurses python libusb1"
-+PROVIDES = "virtual/gpsd"
++++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.4/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+@@ -0,0 +1,72 @@
++From bc224302f1665078c8d15138318709c1a1c2c0a0 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Tue, 24 Apr 2012 18:45:14 +0200
++Subject: [PATCH] SConstruct: prefix includepy with sysroot and drop sysroot
++ from python_lib_dir
 +
-+SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
++* without PYTHONPATH, distutil's sysconfig returns INCLUDEPY without sysroot prefix
++  and with PYTHONPATH from OE it's pointing to native python dir
 +
-+DEFAULT_PREFERENCE = "-1"
-+PV = "3.5+gitr${SRCPV}"
++    $ export PYTHONPATH=/OE/shr-core/tmp-eglibc/sysroots/om-gta02/usr/lib/python2.7/
++    $ python
++    Python 2.7.2 (default, Apr 18 2012, 09:19:59)
++    [GCC 4.6.2] on linux2
++    Type "help", "copyright", "credits" or "license" for more information.
++    >>> from distutils import sysconfig
++    >>> sysconfig.get_config_vars('INCLUDEPY')
++    ['/OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/python2.7']
++    >>>
++    $ unset PYTHONPATH
++    $ python
++    Python 2.7.2 (default, Apr 18 2012, 09:19:59)
++    [GCC 4.6.2] on linux2
++    Type "help", "copyright", "credits" or "license" for more information.
++    >>> from distutils import sysconfig
++    >>> sysconfig.get_config_vars('INCLUDEPY')
++    ['/python2.7']
++    >>> import sysconfig
++    >>> sysconfig.get_config_vars('INCLUDEPY')
++    ['/OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/python2.7']
++* python_lib_dir = python_lib_dir.replace(env['sysroot'], '')
++  returns path to target sysroot
 +
-+SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
-+  file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
-+  file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-+  file://0003-Revert-The-strptime-prototype-is-not-provided-unless.patch \
-+  file://0004-SConstruct-remove-rpath.patch \
-+  file://gpsd-default \
-+  file://gpsd \
-+  file://60-gpsd.rules \
-+"
-+S = "${WORKDIR}/git"
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ SConstruct |    9 +++++++++
++ 1 files changed, 9 insertions(+), 0 deletions(-)
 +
-+inherit scons update-rc.d python-dir systemd
++diff --git a/SConstruct b/SConstruct
++index 9ff00c1..9c0f751 100644
++--- a/SConstruct
+++++ b/SConstruct
++@@ -924,6 +924,12 @@ else:
++         if vars[i] is None:
++             vars[i] = ""
++     (cc, cxx, opt, basecflags, ccshared, ldshared, so_ext, includepy) = vars
+++
+++    if env['sysroot']:
+++        print "Prefixing includepy '%s' with sysroot prefix" % includepy
+++        includepy = os.path.normpath("%s/%s/%s/%s" % (env['sysroot'], env['prefix'], env['includedir'], includepy))
+++        print "'%s'" % includepy
+++
++     # in case CC/CXX was set to the scan-build wrapper,
++     # ensure that we build the python modules with scan-build, too
++     if env['CC'] is None or env['CC'].find('scan-build') < 0:
++@@ -1158,11 +1164,14 @@ if not env['python']:
++     python_install = []
++ else:
++     python_lib_dir = sysconfig.get_python_lib(plat_specific=1)
+++    python_lib_dir = python_lib_dir.replace(env['sysroot'], '')
++     python_module_dir = python_lib_dir + os.sep + 'gps'
++     python_extensions_install = python_env.Install( DESTDIR + python_module_dir,
++                                                     python_built_extensions)
++     if not env['debug'] or env['profiling']:
++         python_env.AddPostAction(python_extensions_install, '$STRIP $TARGET')
+++    env.AddPostAction(python_extensions_install, '$CHRPATH -r "%s" "$TARGET"' \
+++                     % (python_lib_dir, ))
++ 
++     python_modules_install = python_env.Install( DESTDIR + python_module_dir,
++                                                 python_modules)
++-- 
++1.7.8.5
 +
-+INITSCRIPT_NAME = "gpsd"
-+INITSCRIPT_PARAMS = "defaults 35"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE = "${PN}.socket"
-+
-+export STAGING_INCDIR
-+export STAGING_LIBDIR
-+
-+EXTRA_OESCONS = " \
-+  sysroot=${STAGING_DIR_TARGET} \
-+  libQgpsmm='false' \
-+  debug='true' \
-+  strip='false' \
-+  systemd='true' \
-+"
-+# this cannot be used, because then chrpath is not found and only static lib is built
-+# target=${HOST_SYS}
-+
-+do_compile_prepend() {
-+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
-+    export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
-+    export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
-+
-+    export BUILD_SYS="${BUILD_SYS}"
-+    export HOST_SYS="${HOST_SYS}"
-+}
-+
-+do_install() {
-+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
-+    export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
-+    export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
-+
-+    export BUILD_SYS="${BUILD_SYS}"
-+    export HOST_SYS="${HOST_SYS}"
-+
-+    export DESTDIR="${D}"
-+    # prefix is used for RPATH and DESTDIR/prefix for instalation
-+    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} install ${EXTRA_OESCONS}|| \
-+      bbfatal "scons install execution failed."
-+}
-+
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/init.d
-+    install -m 0755 ${WORKDIR}/gpsd ${D}/${sysconfdir}/init.d/
-+    install -d ${D}/${sysconfdir}/default
-+    install -m 0644 ${WORKDIR}/gpsd-default ${D}/${sysconfdir}/default/gpsd.default
-+
-+    #support for udev
-+    install -d ${D}/${sysconfdir}/udev/rules.d
-+    install -m 0644 ${WORKDIR}/60-gpsd.rules ${D}/${sysconfdir}/udev/rules.d
-+    install -d ${D}${base_libdir}/udev/
-+    install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
-+
-+    #support for python
-+    install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-+    install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-+
-+    #support for systemd
-+    install -d ${D}${systemd_unitdir}/system/
-+    install -m 0644 ${S}/systemd/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-+    install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/system/${PN}.socket
-+}
-+
-+pkg_postinst_${PN}-conf() {
-+	update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
-+}
-+
-+pkg_postrm_${PN}-conf() {
-+	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
-+}
-+
-+PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
-+
-+FILES_gpsd-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc"
-+
-+FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
-+
-+RDEPENDS_${PN} = "gpsd-gpsctl"
-+RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev"
-+
-+DESCRIPTION_gpsd-udev = "udev relevant files to use gpsd hotplugging"
-+FILES_gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
-+RDEPENDS_gpsd-udev += "udev gpsd-conf"
-+
-+DESCRIPTION_libgpsd = "C service library used for communicating with gpsd"
-+FILES_libgpsd = "${libdir}/libgpsd.so.*"
-+
-+DESCRIPTION_libgps = "C service library used for communicating with gpsd"
-+FILES_libgps = "${libdir}/libgps.so.*"
-+
-+DESCRIPTION_gpsd-conf = "gpsd configuration files and init scripts"
-+FILES_gpsd-conf = "${sysconfdir}"
-+
-+DESCRIPTION_gpsd-gpsctl = "Tool for tweaking GPS modes"
-+FILES_gpsd-gpsctl = "${bindir}/gpsctl"
-+
-+DESCRIPTION_gps-utils = "Utils used for simulating, monitoring,... a GPS"
-+FILES_gps-utils = "${bindir}/*"
-+RDEPENDS_gps-utils = "python-pygps"
-+
-+DESCRIPTION_python-pygps = "Python bindings to gpsd"
-+FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
-+RDEPENDS_python-pygps = "python-core python-curses gpsd python-json"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
+index 0796c34..37bd319 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
+@@ -10,6 +10,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+   file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
+   file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+   file://0004-SConstruct-remove-rpath.patch \
++  file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+   file://gpsd-default \
+   file://gpsd \
+   file://60-gpsd.rules \
 -- 
 1.7.8.6
 
