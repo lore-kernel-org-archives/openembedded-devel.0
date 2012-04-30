@@ -1,37 +1,37 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkId-0003pZ-28
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkIi-0003WQ-D6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:41:31 +0200
-Received: by wibhj13 with SMTP id hj13so2041429wib.6
+	Mon, 30 Apr 2012 08:41:36 +0200
+Received: by mail-we0-f175.google.com with SMTP id a1so1805040wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:31:49 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=cGVDTGvQOanRBsS+G2N9CqP/UPH1D4Sckk3/qL4WKRY=;
-	b=HcHgiR3LjQ5jCybQyUlPRoAAls3v6L7m6mYflTpCXBDtDYRzSlUexEAjMdKF+ihwTt
-	J5hZ8X/hgZfBWbw7qyK+hT2/lCrdhlCUyCmskkIRhcHHirBN64hZZi0tU91mQzoT0kfy
-	YJQIBxTCLihRTtYYNdRTNMARJymeiT4cOVgxTj2l60JUmJOzCQWlVjY2AH5pO9T61BNF
-	GfIXVefEpWDSYV+ora8H8xGrBG46noaI5j7BUiaEPqk2OilELbHmrit0Fvk5SS4tOv1/
-	tt51CyxMsKbk9zqQ0jJdicuqMSGYg8CQYxpWmRUissJB0jj63onG9e+QAxaouIyUeI0j
-	MZCA==
-Received: by 10.180.84.4 with SMTP id u4mr15184919wiy.2.1335767509736;
-	Sun, 29 Apr 2012 23:31:49 -0700 (PDT)
+	bh=iTthc7LoCdv+GIbNWqFE7eLsUS6AhPAJfFxWMITZ/iM=;
+	b=w59MskQgxabT2gatjelKVfr8lVmhbS3jyafSFLDE8M7x2nCmo6BPsM5UL6fyZRN4Oq
+	WVGHm7nBPKt+Q24MNzwFPIj+VE2OhXhye6xICmW9kbpY8MdPSWJ2Pa2mSKLiKVczKnvF
+	zS1dN3wt+pO80zvTmvj6mpfQ8TYGo0Nxpmgm6OGg+Qh/8Z2Hoyr8dSWL1kK4aPxXgsIo
+	tJ7WCeMbfWG5bM0xQqxI/YYE8c1CNCKn0tDWCtTY8DthvT55QpyV3mGkQw9wOFLpQTbZ
+	wlN2h7986YHgUeJUoOqi/uXVOQGo4uZwCZgk58xqjL0tdhY9UJp9qw8UQuj6gyZEdAfc
+	KoQQ==
+Received: by 10.180.96.228 with SMTP id dv4mr4387120wib.14.1335767516977;
+	Sun, 29 Apr 2012 23:31:56 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm26408331wia.11.2012.04.29.23.31.48
+	by mx.google.com with ESMTPS id fl2sm41899630wib.2.2012.04.29.23.31.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:31:48 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:31:11 +0200
-Message-Id: <34f0d3bce05751b1328ab39ff45a9f16381cd3cf.1335766581.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:31:12 +0200
+Message-Id: <a34b7affb9e7f37246e9256659102a14e263609d.1335766581.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
 References: <cover.1335766581.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
 References: <cover.1335766581.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 4/6] epdfview: fix build with glib-2.32
+Subject: [meta-oe][meta-efl][PATCH 5/6] tangogps: fix build with glib-2.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,54 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:41:31 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:41:36 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch |   12 ++++++++++++
- meta-efl/recipes-efl/efl/epdfview_0.1.8.bb        |    6 ++++--
- 2 files changed, 16 insertions(+), 2 deletions(-)
- create mode 100644 meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch
+ .../tangogps/tangogps-0.99.4/glib-2.32.patch       |   11 +++++++++++
+ .../recipes-navigation/tangogps/tangogps_0.99.4.bb |    6 ++++--
+ 2 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/glib-2.32.patch
 
-diff --git a/meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch b/meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch
+diff --git a/meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/glib-2.32.patch b/meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/glib-2.32.patch
 new file mode 100644
-index 0000000..e08584c
+index 0000000..0579455
 --- /dev/null
-+++ b/meta-efl/recipes-efl/efl/epdfview/glib-2.32.patch
-@@ -0,0 +1,12 @@
-+diff -uNr epdfview-0.1.8.orig/src/gtk/StockIcons.h epdfview-0.1.8/src/gtk/StockIcons.h
-+--- epdfview-0.1.8.orig/src/gtk/StockIcons.h	2011-05-28 12:24:57.000000000 +0200
-++++ epdfview-0.1.8/src/gtk/StockIcons.h	2012-04-30 07:48:08.528285594 +0200
-+@@ -18,8 +18,6 @@
-+ #if !defined (__STOCK_ICONS_H__)
-+ #define __STOCK_ICONS_H__
++++ b/meta-oe/recipes-navigation/tangogps/tangogps-0.99.4/glib-2.32.patch
+@@ -0,0 +1,11 @@
++diff -uNr tangogps-0.99.4.orig/src/map_management.c tangogps-0.99.4/src/map_management.c
++--- tangogps-0.99.4.orig/src/map_management.c	2010-06-25 11:40:05.000000000 +0200
+++++ tangogps-0.99.4/src/map_management.c	2012-04-30 07:43:58.551301271 +0200
++@@ -2,7 +2,6 @@
 + 
-+-#include <glib/gmacros.h>
-+-
-+ G_BEGIN_DECLS
-+ 
-+ // ePDFView stock icons.
-diff --git a/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
-index 5f6bbf4..c16137e 100644
---- a/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
-+++ b/meta-efl/recipes-efl/efl/epdfview_0.1.8.bb
-@@ -5,12 +5,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- SECTION = "x11/applications"
- DEPENDS = "gtk+ poppler"
- 
++ #include <glib.h>
++ #include <gtk/gtk.h>
++-#include <glib/gstring.h>
++ #include <glib/gprintf.h>
++ #include <gconf/gconf.h>
++ #include <math.h>
+diff --git a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+index 3a1ea3d..5a4231a 100644
+--- a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
++++ b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+@@ -5,10 +5,12 @@ SECTION = "x11/applications"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4 bluez4"
 -PR = "r1"
 +PR = "r2"
  
- EXTRA_OECONF += "--without-cups"
- 
- inherit autotools gettext
- 
--SRC_URI = "http://www.emma-soft.com/projects/epdfview/chrome/site/releases/epdfview-${PV}.tar.bz2"
-+SRC_URI = "http://www.emma-soft.com/projects/${BPN}/chrome/site/releases/${BP}.tar.bz2 \
-+  file://glib-2.32.patch \
+ SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz \
+-           file://remove.unused.header.patch"
++           file://remove.unused.header.patch \
++           file://glib-2.32.patch \
 +"
- SRC_URI[md5sum] = "e50285b01612169b2594fea375f53ae4"
- SRC_URI[sha256sum] = "948648ae7c9d7b3b408d738bd4f48d87375b1196cae1129d6b846a8de0f2f8f0"
+ SRC_URI[md5sum] = "0f07ede94a21eb84f5e017fa88a1fc3d"
+ SRC_URI[sha256sum] = "660fdf89ef3c379f2fc0c2a9d0c9d3bfa5345835786b72bf9f513ba9ec2c812a"
+ 
 -- 
 1.7.8.6
 
