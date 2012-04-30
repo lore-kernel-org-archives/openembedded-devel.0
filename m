@@ -1,37 +1,37 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOjmo-00037f-MA
+	(envelope-from <martiert@gmail.com>) id 1SOjpd-0003Dh-MB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:08:38 +0200
-Received: by wibhm17 with SMTP id hm17so2016339wib.0
+	Mon, 30 Apr 2012 08:11:33 +0200
+Received: by wera1 with SMTP id a1so1793466wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 22:58:57 -0700 (PDT)
+	Sun, 29 Apr 2012 23:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=VMsIoTAopLgKBoBIuhmuamDrCL2H021laWj6TeumpHw=;
-	b=X/7wUTCN6q+QO10OmdcH+ihxfGiv71wEJH6zwPNS5a2BcUE/w/I4u7LeTRqc6vM2hk
-	vk/U1t0vCgKDx76sdZnbqjosbEcSQCQ3q1L+h65ZbKgfWCubvkTnaRGcufa220RVjuWW
-	wuhNi+gbRubcnCCn0kARQe/xXQ4ZBT3E615evMTHVN9CLMYoe/7Z+c1zjcbvNFK8wdlQ
-	NV/wtE/OqetkQM5RNIPKzWoXLOE4RGzuyq8p5c5UOqBansCBwOnPB0gHvWWD3YDAyAs1
-	s6mEBSTfSIOcmupEApkNDBfEy5w7OTJrbs4jVqQneELoBdnFP0n14lnXdofjJHj0B9M2
-	SVxw==
-Received: by 10.216.137.149 with SMTP id y21mr4689297wei.110.1335765537189;
-	Sun, 29 Apr 2012 22:58:57 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gg2sm41582925wib.7.2012.04.29.22.58.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 22:58:53 -0700 (PDT)
-Date: Mon, 30 Apr 2012 07:58:52 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120430055852.GA3664@jama.jama.net>
-References: <1335481339-4539-1-git-send-email-tasskjapp@gmail.com>
-	<1335851575-20786-1-git-send-email-tasskjapp@gmail.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type;
+	bh=NwstMu10REeJ6XzYrDnSs4KSwCn9poQefkNzpOUjv8U=;
+	b=Mx2nCb+9/9jZdKuMSMB7lCtKmBvGkeQ+w4oYIbfXllVAnLkLw/zte5RQKs8rs1Gpwp
+	dOU+s6zKOvSLQDPx6KeRmh1dipZWnJeS18iuAoQqvv/fsUz9D/tTY3yLuF9x9ZJSaPSt
+	kzaBcKJzwIhE0oCmw5QHuf37DfDRSM4Tjpn4bB3X94iIIaXR4XJgKgu9qTszhpl0aPjC
+	i1fm6SCSyWvlmeH+vZ5eAMJZ3uZB7spsU1CLZb9sYcSEmsNNKTodhmjZ72Ocd3eD7luu
+	gEGPuGtvsI+ySYB3oiRYaqXH0+z4ViGeY2IpKcxbJ4AEs2NJh/25wXdsUsoPY8t4Xdds
+	umcA==
+Received: by 10.180.100.2 with SMTP id eu2mr26117382wib.1.1335765712353;
+	Sun, 29 Apr 2012 23:01:52 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id ca3sm26208911wib.6.2012.04.29.23.01.47
+	(version=SSLv3 cipher=OTHER); Sun, 29 Apr 2012 23:01:48 -0700 (PDT)
+Message-ID: <4F9E2A64.6040302@gmail.com>
+Date: Mon, 30 Apr 2012 08:00:04 +0200
+From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
 MIME-Version: 1.0
-In-Reply-To: <1335851575-20786-1-git-send-email-tasskjapp@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v3] synergy: add synergy 1.3.8
+To: openembedded-devel@lists.openembedded.org
+References: <4F9A932F.1020400@gmail.com>
+	<CAMKF1spP9gnvy7JWQhLxA7VcfhUzWS4Ra1pH3XGA8eEguTporA@mail.gmail.com>
+In-Reply-To: <CAMKF1spP9gnvy7JWQhLxA7VcfhUzWS4Ra1pH3XGA8eEguTporA@mail.gmail.com>
+Subject: Re: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,89 +45,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:08:38 -0000
-X-Groupsio-MsgNum: 38458
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IJpNTDwzlM2Ie8A6"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Apr 2012 06:11:33 -0000
+X-Groupsio-MsgNum: 38459
+Content-Type: multipart/mixed; boundary="------------070703030807090104020607"
 
---IJpNTDwzlM2Ie8A6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--------------070703030807090104020607
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, May 01, 2012 at 07:52:54AM +0200, Tasslehoff Kjappfot wrote:
->=20
-
-v2 was applied already few days ago..
-http://git.openembedded.org/meta-openembedded/commit/?id=3D5a3d0de38a3af92d=
-07503184fb214df6e9f57610
-
-so if you want to fix it, then rebase it on top of meta-oe and send follow-=
-up patch
-
-> Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-> ---
->  meta-oe/recipes-support/synergy/synergy_1.3.8.bb |   22 ++++++++++++++++=
-++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-support/synergy/synergy_1.3.8.bb
->=20
-> diff --git a/meta-oe/recipes-support/synergy/synergy_1.3.8.bb b/meta-oe/r=
-ecipes-support/synergy/synergy_1.3.8.bb
-> new file mode 100644
-> index 0000000..b8d1e6c
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/synergy/synergy_1.3.8.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION =3D "Synergy - control multiple computers with one keyboard =
-and mouse"
-> +HOMEPAGE =3D "http://synergy.googlecode.com"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9772a11e3569985855e2ce450e56f=
-991"
-> +LICENSE =3D "GPL-2.0"
-> +SECTION =3D "x11/utils"
-> +
-> +DEPENDS =3D "libx11 libxtst"
-> +
-> +SRC_URI =3D "http://synergy.googlecode.com/files/synergy-${PV}-Source.ta=
-r.gz"
-> +
-> +SRC_URI[md5sum] =3D "3534c65ecfa6e47d7899c57975442f03"
-> +SRC_URI[sha256sum] =3D "0afc83e4ed0b46ed497d4229b2b2854e8d3c581a112f4da0=
-5110943edbfacc03"
-> +
-> +S =3D "${WORKDIR}/${PN}-${PV}-Source"
-> +
-> +inherit cmake
-> +
-> +do_install() {
-> +	install -d ${D}/usr/bin
-> +	install -m 0755 ${S}/bin/synergy* ${D}/usr/bin/
-> +}
-> +
-> --=20
-> 1.7.9.5
->=20
->=20
+On 04/29/12 04:40, Khem Raj wrote:
+> On Fri, Apr 27, 2012 at 5:38 AM, Martin Ertsås <martiert@gmail.com> wrote:
+>> Hi.
+>>
+>> I'm working on a pandaboard with OMAP4460. Were trying to use the newest
+>> PVR drivers, which conforms to the result that arose from
+>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
+>>
+>> We have applied the patch at the bottom of that page gcc, and also a
+>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
+>> instead of ld-linux. Problem is, this gives us a kernel panic when it
+>> tries to run init. Linking ld-linux.so.3 to ld-linux-armhf.so.3 does not
+>> work, and we're kind of in the dark as to what is missing.
+>>
+>> We tried fixing this by renaming the toolchain to be
+>> arm-none-linux-gnueabihf instead of arm-none-linux-gnueabi, as we heard
+>> this might be a problem with hardfloats, but this needed a lot of extra
+>> patches, and some patchwork on other packages like openssl and shadow.
+>>
+>> My question is, are there any ongoing plans to fix this, and make sure
+>> that if we have set hard float we make ld-linux-armhf in openembedded?
+>>
+>> For the record we are using eglibc2.15 and gcc4.6 from openembedded-core.
+> would you show the patches so I can take a look what you did and whats going on
+Sure, the patches are attached.
+>> Best regards
+>> Martin Ertsaas
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---IJpNTDwzlM2Ie8A6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--------------070703030807090104020607
+Content-Type: text/x-patch;
+ name="add-armhf-so.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="add-armhf-so.patch"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+--- a/ports/sysdeps/arm/shlib-versions  2011-05-10 09:49:03.000000000 -0600
++++ b/ports/sysdeps/arm/shlib-versions  2012-04-13 22:52:46.790815748 -0600
+@@ -1,4 +1,4 @@
+ arm.*-.*-linux-gnueabi.*	DEFAULT			GLIBC_2.4
 
-iEYEARECAAYFAk+eKhwACgkQN1Ujt2V2gBz+IgCdEaQ5Z33Nxaix8wiMNprFDzhK
-KKsAnjcFUkezpkoJ5GF7keZFOGDm9ZMS
-=R8Fm
------END PGP SIGNATURE-----
+-arm.*-.*-linux-gnueabi.*	ld=ld-linux.so.3
++arm.*-.*-linux-gnueabi.*	ld=ld-linux-armhf.so.3
+ arm.*-.*-linux.*	ld=ld-linux.so.2
 
---IJpNTDwzlM2Ie8A6--
+--------------070703030807090104020607
+Content-Type: text/x-patch;
+ name="handle-ld-linux-armhf-name.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="handle-ld-linux-armhf-name.patch"
+
+--- a/elf/dl-load.c      2012-04-14 12:11:37.000000000 +0000
++++ b/elf/dl-load.c   2012-04-15 00:39:36.558765502 +0000
+@@ -2086,10 +2086,13 @@
+	  soname = ((const char *) D_PTR (l, l_info[DT_STRTAB])
+		    + l->l_info[DT_SONAME]->d_un.d_val);
+	  if (strcmp (name, soname) != 0)
++#ifdef __arm__
++	    if (strcmp(name, "ld-linux.so.3") || strcmp(soname, "ld-linux-armhf.so.3"))
++#endif
+	    continue;
+
+	  /* We have a match on a new name -- cache it.  */
+-	  add_name_to_object (l, soname);
++	  add_name_to_object (l, name);
+	  l->l_soname_added = 1;
+	}
+
+
+--------------070703030807090104020607
+Content-Type: text/x-patch;
+ name="arm-dynamic-linker.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="arm-dynamic-linker.patch"
+
+# DP: For ARM hard float, set the dynamic linker to
+# DP: /lib/ld-linux-armhf.so.3.
+
+diff --git a/gcc/config/arm/linux-eabi.h b/gcc/config/arm/linux-eabi.h
+index 80bd825..8c9d2e7 100644
+--- a/gcc/config/arm/linux-eabi.h
++++ b/gcc/config/arm/linux-eabi.h
+@@ -62,7 +62,11 @@
+ /* Use ld-linux.so.3 so that it will be possible to run "classic"
+    GNU/Linux binaries on an EABI system.  */
+ #undef  GLIBC_DYNAMIC_LINKER
+-#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.3"
++#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "/lib/ld-linux.so.3"
++#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT "/lib/ld-linux-armhf.so.3"
++#define GLIBC_DYNAMIC_LINKER \
++   "%{mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_HARD_FLOAT "} \
++    %{!mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "}"
+
+ /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
+    use the GNU/Linux version, not the generic BPABI version.  */
+
+
+--------------070703030807090104020607--
