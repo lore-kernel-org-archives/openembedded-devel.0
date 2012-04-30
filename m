@@ -1,37 +1,37 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SOkIM-0003WQ-Gz
+	(envelope-from <martin.jansa@gmail.com>) id 1SOkIT-0003Wd-N3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 08:41:14 +0200
-Received: by mail-we0-f175.google.com with SMTP id a1so1805040wer.6
+	Mon, 30 Apr 2012 08:41:21 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dr1so2076709wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2012 23:31:35 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=uV1ElhpeSdEH8VRFuX34yniOastJstTx7j9nvzWbyUk=;
-	b=qlhdDyxRW+Ir+IVkosPtbh1Z6xjBOvrV6uJftg32uKiY/ntpGBTKAUCQ0IVdF1iw96
-	Sz+yqdjwu5+bDF7cWDrSI+5NwZNDtwnAJ6I/a/3GGBFumUrkARqlWzUbHXvObf+aaulV
-	GuYmtyR/fRfdHZv7X+rN3/SkUqproZvRH9nBZodsK6nBb8lLgeMbHRigqbIzqECQVspt
-	PGdXGqORJMzTq49QPkSbwgNExf8FUPBBJ+KXFOcVteKGuFmttyTTBHXC024pXkRv4v9Z
-	asYcwyyb/IPlGrSpgI7SHsewj9K61Xy/7BuLySPhrQi09L34PO8ypyA+jSy6ZJ0b22Y9
-	8/tQ==
-Received: by 10.216.132.140 with SMTP id o12mr11835269wei.67.1335767495273;
-	Sun, 29 Apr 2012 23:31:35 -0700 (PDT)
+	bh=TlO2wNYUiGIdqXEdESY7yuPNK+U+GbfnN/yzWMom4FI=;
+	b=zxHcPHLW9GuAnHRCHe9kCiOrZmjh+Fi1nprTkR3o4aeDAc/FrNeNg8ejdMorPeuCnv
+	eD7XS0/dxPkET06ekNua0PmUgSBm+CxEDQgaTDAco8AURLODkFbmJmNzJOgjMRMdzbE3
+	V4HrDojeZyzBsDy/ZEY1FbIS27EpIsRXPFPYTCcidSQENDjQlCFtnW1/Jm0ct/KT5WOQ
+	BgD250enxxYIOV6l7z00tetC7rgkCm5n8iuHe+vq6dWPtVBK5FIVmkGfy17pMsbjnpuP
+	2wW8Z5owdEgv3KnsJsFruu8dtiofg8zKoDrjwj9rFLtcZ/K9AjeG7/IwXmokRTBE0sYN
+	LRuA==
+Received: by 10.180.79.72 with SMTP id h8mr3274895wix.1.1335767502472;
+	Sun, 29 Apr 2012 23:31:42 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w10sm41892146wiy.3.2012.04.29.23.31.34
+	by mx.google.com with ESMTPS id ff9sm26389912wib.2.2012.04.29.23.31.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Apr 2012 23:31:34 -0700 (PDT)
+	Sun, 29 Apr 2012 23:31:41 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 08:31:09 +0200
-Message-Id: <09dd720f3e9084f05371be893333da8798cec6ee.1335766581.git.Martin.Jansa@gmail.com>
+Date: Mon, 30 Apr 2012 08:31:10 +0200
+Message-Id: <3ab85cdf1c9217ff1a9f0055aba7faa8f159191a.1335766581.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
 References: <cover.1335766581.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
 References: <cover.1335766581.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 2/6] midori: upgrade to 0.4.5
+Subject: [meta-oe][meta-efl][PATCH 3/6] libgpewidget: fix build with glib-2.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2012 06:41:14 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:41:21 -0000
+
+* SRC_URI needs to be after inherit gpe
+  and pkgconfig.patch wasn't ever used
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../midori/{midori_0.4.4.bb => midori_0.4.5.bb}    |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/midori/{midori_0.4.4.bb => midori_0.4.5.bb} (89%)
+ .../libgpewidget/libgpewidget/glib-2.32.patch      |   11 +++++++++++
+ .../libgpewidget/libgpewidget_0.117.bb             |   10 ++++++----
+ 2 files changed, 17 insertions(+), 4 deletions(-)
+ create mode 100644 meta-gpe/recipes-graphics/libgpewidget/libgpewidget/glib-2.32.patch
 
-diff --git a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb b/meta-oe/recipes-connectivity/midori/midori_0.4.5.bb
-similarity index 89%
-rename from meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-rename to meta-oe/recipes-connectivity/midori/midori_0.4.5.bb
-index a408d73..4cdd82d 100644
---- a/meta-oe/recipes-connectivity/midori/midori_0.4.4.bb
-+++ b/meta-oe/recipes-connectivity/midori/midori_0.4.5.bb
-@@ -4,12 +4,10 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
+diff --git a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget/glib-2.32.patch b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget/glib-2.32.patch
+new file mode 100644
+index 0000000..f590caa
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget/glib-2.32.patch
+@@ -0,0 +1,11 @@
++diff -uNr libgpewidget-0.117.orig/gpehelp.c libgpewidget-0.117/gpehelp.c
++--- libgpewidget-0.117.orig/gpehelp.c	2006-10-12 12:20:33.000000000 +0200
+++++ libgpewidget-0.117/gpehelp.c	2012-04-30 07:45:57.813293792 +0200
++@@ -33,7 +33,6 @@
++ #include <gdk-pixbuf/gdk-pixbuf.h>
++ #include <gdk/gdk.h>
++ #include <glib.h>
++-#include <glib/gkeyfile.h>
++ 
++ 
++ /* helper function definitions*/
+diff --git a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
+index c4497de..e8abc43 100644
+--- a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
++++ b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
+@@ -5,16 +5,18 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d8045f3b8f929c1cb29a1e3fd737b499"
  
+ DEPENDS = "gtk+ cairo libxinerama libxcomposite libxrender gtk-doc"
 -PR = "r1"
--
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--SRC_URI[midori.md5sum] = "a6578ebfd237c0f22cce49113b95f70c"
--SRC_URI[midori.sha256sum] = "fadd43f76c1c9f6a16483e60a804e58fb6817c6a595b1acdd59bcbdd7b35bca2"
-+SRC_URI[midori.md5sum] = "14288197a1e2251b7c0803e1448daa0e"
-+SRC_URI[midori.sha256sum] = "7b57cf3ebb56eef586351f2ae9f71ec9683aedff0b79a071b70b811d9876ff84"
++PR = "r2"
  
- inherit gtk-icon-cache pkgconfig
+-SRC_URI += "file://pkgconfig.patch;striplevel=0"
++inherit gpe pkgconfig autotools
++
++SRC_URI += "file://pkgconfig.patch;striplevel=0 \
++  file://glib-2.32.patch \
++"
+ SRC_URI[md5sum] = "b85a839264a35d0faf9a1a38c486e189"
+ SRC_URI[sha256sum] = "f96d30c09b0395ea4e146730fd52d9ea303b619bb139051d9f12d3f868a9e18c"
+ 
+ GPE_TARBALL_SUFFIX = "bz2"
+ 
+-inherit gpe pkgconfig autotools
+-
+ EXTRA_OECONF = "--enable-cairo"
+ LDFLAGS += " -L${STAGING_LIBDIR}"
  
 -- 
 1.7.8.6
