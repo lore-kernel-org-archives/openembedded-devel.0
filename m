@@ -1,29 +1,29 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1SPFkC-0001Jd-EE
-	for openembedded-devel@openembedded.org; Tue, 01 May 2012 18:16:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q41FoPHi015328;
-	Tue, 1 May 2012 16:50:25 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15117-01; Tue,  1 May 2012 16:50:21 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q41FoEaB015322
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 1 May 2012 16:50:16 +0100
-Message-ID: <1335887416.7415.125.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel <openembedded-devel@openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>, yocto
-	<yocto@yoctoproject.org>
-Date: Tue, 01 May 2012 16:50:16 +0100
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: 1.3 Planning Process
+Received: from mail-qa0-f48.google.com ([209.85.216.48])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gizero@gmail.com>) id 1SPIck-0004Kf-8O
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 May 2012 21:20:34 +0200
+Received: by qady23 with SMTP id y23so2722099qad.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 May 2012 12:10:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=B5VF6fsnHzMvFl6m5mQ+z3le8dEjwJw92kKJc1NxEuM=;
+	b=GA1EIOknQbBUrgfWzK90t8twiAHYzdfiRmanZyEjPblV+kMa5nIIHkHh0/A6KvuNt/
+	WjDtXRTwJSFU0Y7xYDMB3DcfMjWI62j+8dcB4qEsi3gQcGh7CxrQi37YR6tFXbnzHqQQ
+	GoE5uEk5dwb+Z1oz0GqdzQoJocdFxtQwU6WTQ/fdhbuccBEr4jTnM6O32HfTEnDXCkCp
+	K2vC8Z3epXqLNAJglewX1r2DyibymeoXgT7zbacJdpvzhP0KF6+ieHmwR4aKBYrTJJR7
+	aUcKbBxBPYQBhFCaJMDurS1odG6sT1oh/Oc8OH4bPYurO/Lq8U1JEyLaxClq5Pz7pW9J
+	EMTw==
+MIME-Version: 1.0
+Received: by 10.229.135.138 with SMTP id n10mr6796629qct.110.1335899450487;
+	Tue, 01 May 2012 12:10:50 -0700 (PDT)
+Received: by 10.229.217.200 with HTTP; Tue, 1 May 2012 12:10:50 -0700 (PDT)
+Date: Tue, 1 May 2012 21:10:50 +0200
+Message-ID: <CAC+thW1MhdQD9ofG1tyY7voJDPQXETvj2iFAgC9uNFDNUPJ6NA@mail.gmail.com>
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: right directory for a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 16:16:04 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 May 2012 19:20:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I just wanted to highlight that the planning process for the next Yocto
-Project release (tentatively '1.3') is well under way now. I sent out a
-previous email about this but this is a quick reminder.
+Hi,
 
-We use the bugzilla (bugzilla.yoctoproject.org) to track proposed ideas
-and these will ultimately end up on
-https://wiki.yoctoproject.org/wiki/Yocto_1.3_Features as in previous
-releases as we work through the planning process. The aims and
-objectives for the next release are listed there (Continuity / Refresh,
-Continuity / Refresh and Usability).
+I'm planning to port a recipe from oe-classic to meta-openembedded and
+submit patches to the list. The particular recipe is libmodbus, but my
+question is more general.
+I looked around for documentation suggesting how meta-oe/ dir is laid
+out, but found nothing in particular. Any pointer here?
+What would be the right directory to put libmodbus in? I understand
+recipes-* names are somewhat self explanatory, but I'm still confused
+if "recipes-extended", "recipes-support" or anything else is the best
+choice.
 
-I can't promise things listed will happen or in what time frame but I do
-know if they're not there, they're much less likely to happen! :)
-
-Alternatively if anyone does want to discuss the future direction of the
-project(s), now is a good time to do it. Whilst I'm copying various
-lists, I'd suggest this discussion happens on OE-Core unless the
-question is clearly more appropriate elsewhere.
-
-Cheers,
-
-Richard
-
-
-
-
-
+TIA
+Andrea
 
 
