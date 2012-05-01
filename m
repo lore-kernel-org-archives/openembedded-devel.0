@@ -1,33 +1,38 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SPCPu-0002Sv-4f
+	(envelope-from <martiert@gmail.com>) id 1SPCZd-0002fk-Bm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 14:42:54 +0200
-Received: by lagw12 with SMTP id w12so2442414lag.6
+	Tue, 01 May 2012 14:52:57 +0200
+Received: by lbbgo4 with SMTP id go4so2452080lbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 05:33:11 -0700 (PDT)
+	Tue, 01 May 2012 05:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=ORD3y9kB8oM4WeeJDA219mBdhM+TqpOD8BCInTXlbEY=;
-	b=tlStgeDquV9VE3Kq9H0nem3hyssOR7Ui7EIaavX0Z234Y3y4jQaSlP5Rj71uv2Xhg9
-	OvzVTrGNqw0h9y2Jf4ljyVj/8jsV4xsK9UJqhchxBeIp3tBntSdtIhHZ1y7adG5mV7Ip
-	zmHsDHPH20dlb1TZr0xOYL6YmQPZ2thj0f6+xfNozn9/QQ8EeOWpIE8p7xVB9S19JBMM
-	SDc2+66V+ERybJeBN3aZKv8nkjFU1SRzWZfYxO5jdolxTQEHjhkhfucNgFmH36BOlx+y
-	kBBqF7YLbb77HcfwHmQ2Bs+oWflHhoScZXy91mbGUIC/svawX99DSc4L2/B0WdtDReSw
-	ePWw==
-Received: by 10.152.111.198 with SMTP id ik6mr23091325lab.38.1335875590953;
-	Tue, 01 May 2012 05:33:10 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=nYFcyW7Jo4a9G4fcTeBnNkQVcI1oKLUG/FawnshHfl8=;
+	b=KAVvOmJrmDKwstSXIj7GLpHUsFCDUl4v4dtQLlQ3v/VsMraIsYR2p4KQl8xdoclLV0
+	O9YEe/CluvD9Vs8Cv0C2o4Cqf9CwJLrVPt8zvJMIVRhFIuVHo/6ioYnyegjd9aWqX0nc
+	JsLD3Wn6p2FD4MyDQdRV+dI0gBF1SLlyibEVEddgyp/aq69VbAva6JA0EdLr2IXNltkX
+	/up/lHdojBouo5ofnoYARGk+I8byzhl3iAwduc5oVFaxgpPGDjO0UX13WVolaj+KJTUm
+	w4x/YCREjv93jw9C2pXCnQjSovR76PPzlXRW04SE1JeyNcGhljU1bijh1ffMCIIq3zKy
+	L0LA==
+Received: by 10.152.108.171 with SMTP id hl11mr23068722lab.29.1335876194124;
+	Tue, 01 May 2012 05:43:14 -0700 (PDT)
+Received: from [192.168.1.104] ([37.191.128.59])
+	by mx.google.com with ESMTPS id fx5sm24578047lbb.5.2012.05.01.05.43.12
+	(version=SSLv3 cipher=OTHER); Tue, 01 May 2012 05:43:12 -0700 (PDT)
+Message-ID: <4F9FDA5F.1080400@gmail.com>
+Date: Tue, 01 May 2012 14:43:11 +0200
+From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.3) Gecko/20120324 Thunderbird/10.0.3
 MIME-Version: 1.0
-Received: by 10.152.129.134 with HTTP; Tue, 1 May 2012 05:32:40 -0700 (PDT)
-In-Reply-To: <4F9F8630.3070901@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 References: <4F9A932F.1020400@gmail.com>
 	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
 	<4F9F8630.3070901@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 1 May 2012 05:32:40 -0700
-Message-ID: <CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
+In-Reply-To: <CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
 Subject: Re: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,45 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 12:42:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 May 2012 12:52:57 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, Apr 30, 2012 at 11:44 PM, Martin Erts=C3=A5s <martiert@gmail.com> w=
-rote:
-> On 05/01/12 00:05, Khem Raj wrote:
->>
->> On Fri, Apr 27, 2012 at 5:38 AM, Martin Erts=C3=A5s<martiert@gmail.com> =
-=C2=A0wrote:
+On 05/01/12 14:32, Khem Raj wrote:
+> On Mon, Apr 30, 2012 at 11:44 PM, Martin Ertsås<martiert@gmail.com>  wrote:
+>> On 05/01/12 00:05, Khem Raj wrote:
+>>> On Fri, Apr 27, 2012 at 5:38 AM, Martin Ertsås<martiert@gmail.com>    wrote:
+>>>> I'm working on a pandaboard with OMAP4460. Were trying to use the newest
+>>>> PVR drivers, which conforms to the result that arose from
+>>>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
+>>>>
+>>>> We have applied the patch at the bottom of that page gcc, and also a
+>>>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
+>>>> instead of ld-linux. Problem is, this gives us a kernel panic when it
+>>>> tries to run init.
+>>> interesting bits are why kernel panics ?
+>>> what error do you get from kernel ?
+>>> is it some illegal instruction or something like that ?
+>>> Do you have VFP enabled
 >>>
->>> I'm working on a pandaboard with OMAP4460. Were trying to use the newes=
-t
->>> PVR drivers, which conforms to the result that arose from
->>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
->>>
->>> We have applied the patch at the bottom of that page gcc, and also a
->>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
->>> instead of ld-linux. Problem is, this gives us a kernel panic when it
->>> tries to run init.
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> Found out the problem why kernel panics. The patches I posted were the
+>> correct ones, but before this I used
 >>
->> interesting bits are why kernel panics ?
->> what error do you get from kernel ?
->> is it some illegal instruction or something like that ?
->> Do you have VFP enabled
+>> SYSLIB_PATH or something before "/lib/ld-linux-armhf.so.3", so the output
+>> actually was /lib/lib/ld-linux-armhf.so.3
 >>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> ok good. I would be interested if you test the patchset i posted
+> it will help a lot
 >
-> Found out the problem why kernel panics. The patches I posted were the
-> correct ones, but before this I used
->
-> SYSLIB_PATH or something before "/lib/ld-linux-armhf.so.3", so the output
-> actually was /lib/lib/ld-linux-armhf.so.3
->
-
-ok good. I would be interested if you test the patchset i posted
-it will help a lot
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I'll try them tomorrow and send a mail telling the findings.
 
 
