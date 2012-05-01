@@ -1,35 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <npavel@mini-box.com>) id 1SPApn-0000e6-7k
+	(envelope-from <radoslav@kolev.info>) id 1SPAy9-0000or-CB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 13:01:31 +0200
-Received: by iakk32 with SMTP id k32so5703096iak.6
+	Tue, 01 May 2012 13:10:09 +0200
+Received: by vcbfl13 with SMTP id fl13so2913795vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 03:51:45 -0700 (PDT)
+	Tue, 01 May 2012 04:00:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=ODEhSmNCXWwsOqsat/yLrRqPRxEwV9KSx/39Z0pu2wQ=;
-	b=pcNKoY3x35+egirQ1VQ8ME93Bf13lGvmgoe/BAWsjxlAzALai+VX+qVHY1kpQ+aWpy
-	HBQB0KtKlGNqVrDrJtBi3EqKeJagi3y8EndVPrzrg/GjlWfAVcRDaug8hjOE3EIIJQc4
-	R6nDxR9Ojymq55LA2Pu6WiE1bHcs5iCUyq21WzQqluRTTarG/eP6uWtvOgQ3dG6/fw1L
-	JkkBI7kMMES/wnzuVy1+1aasGd/mjS3+nqftrEN86uTK0dJIVaNhUY68HZiDXiGgeGIU
-	C/bwBBZyI7mshSUreofOnEu57X7Gx/lbokN/c17wTiA+52o2ktDQaF66QW3TBicZPbii
-	O9Xg==
+	:content-type:x-gm-message-state;
+	bh=/swDj6n589QrHXMR8FEAyF61I49GR6xp0a7i5ykJS0E=;
+	b=pIA62v19H56gi1wnI3j03v/Ir7hTTXePq3YRIt1D6tJV/O2IODHedJNk9j1PaZyklB
+	d1QeEUcXPQhrUNraDTmj9xWVvIfsh9qdKgmDhMcNWCUm+ojFuaqlcfbTLKLx0SITQAq9
+	WhyHjGlxg5nDlCbEsC5LrF64nL6y3/IejLMYQuKoBfGgseCwkG8Zma6Eih+r6yA2rb5G
+	iLjf2grxfQz1S2+LKzEJvKgf2uf+jqlTfsRWA9yHw2Cr6iFdq2HftrKH3D6qt6ZYpz5a
+	1bmZ8/fodKkRTIJKsR3PAiz5BBgo9m8drwy4TLoNJosk8lXUBTwHKHTghmObRXlKxZDO
+	KKxw==
 MIME-Version: 1.0
-Received: by 10.50.194.163 with SMTP id hx3mr1153049igc.49.1335869504986; Tue,
-	01 May 2012 03:51:44 -0700 (PDT)
-Received: by 10.64.55.197 with HTTP; Tue, 1 May 2012 03:51:44 -0700 (PDT)
-In-Reply-To: <CAMKF1somCnr2JHQ_x0om2iyVo=D7jhLmUQ4+e-09xETP8NpHhA@mail.gmail.com>
-References: <CAL9MRr=VckWCzbq=+t9SJZ9CiLfPcAp4CrYNihUS1cOYc0-NFA@mail.gmail.com>
-	<CAMKF1somCnr2JHQ_x0om2iyVo=D7jhLmUQ4+e-09xETP8NpHhA@mail.gmail.com>
-Date: Tue, 1 May 2012 13:51:44 +0300
-Message-ID: <CAL9MRr=-Kfh_avCagGVvi1jUE4URAHnEedca0gZ3G=7eN+XtPQ@mail.gmail.com>
-From: Nicu Pavel <npavel@mini-box.com>
+Received: by 10.52.178.129 with SMTP id cy1mr20750065vdc.8.1335870025945; Tue,
+	01 May 2012 04:00:25 -0700 (PDT)
+Received: by 10.220.27.139 with HTTP; Tue, 1 May 2012 04:00:25 -0700 (PDT)
+In-Reply-To: <DB8F1B3EEF94C3439BFFE674EB05E3CC014CB5@HKNPRD0204MB116.apcprd02.prod.outlook.com>
+References: <DB8F1B3EEF94C3439BFFE674EB05E3CC014CB5@HKNPRD0204MB116.apcprd02.prod.outlook.com>
+Date: Tue, 1 May 2012 14:00:25 +0300
+Message-ID: <CAA5cW2yko=hnX5Li=b-o846tbTo3hvdLg7m5609__-OdgJpm3w@mail.gmail.com>
+From: Radoslav Kolev <radoslav@kolev.info>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlr+S9pEoN0+EvutInucJDILfnEks98UXFfs0VbNT7ygXoVlIkaaiFE7Jq9iMr0khAXlhuP
-Subject: Re: Adding a board support layer.
+X-Gm-Message-State: ALoCoQkP3oz5LTVxVZcKbOD7+lo+B2tA7ZNVsnDoCxnztia7anWYmkiA+GZFkDNfPGCa9iNvrjIJ
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 11:01:31 -0000
+X-List-Received-Date: Tue, 01 May 2012 11:10:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Tue, May 1, 2012 at 10:57 AM, Craig McQueen
+<craig.mcqueen@beamcommunications.com> wrote:
+> I am new to OE. I am trying to build OE from the git repository, for Freescale i.MX28, following the instructions here:
 
-On Mon, Apr 30, 2012 at 1:28 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Apr 24, 2012 at 3:24 AM, Nicu Pavel <npavel@mini-box.com> wrote:
->> Hi,
->>
->> What's the proper way of adding a new board support layer ? Should I
->> just add a meta-picosam9 with our kernel recipes and board
->> configuration and submit a patch ?
->
-> It seems you are interested in layered model which means you will
-> base your work on oe-core and other layers. Yes writing your own
-> machine layer is a preferred approach. However you need to host
-> and maintain the layer. For hosting gihub bitbucket gitorious etc
-> work good. If you maintain the layer in pretty good shape many
-> distro's like angstrom might include your machine layer in the
-> default build
->
-> There are some machine layers mentioned here
->
-> =A0http://www.openembedded.org/wiki/LayerIndex
->
-> You can use one of those for reference and modelling its upto you
+If you're starting a new project may be it's better to base it on
+oe-core. Have a look here:
+http://groups.google.com/group/meta-fsl-arm
 
-Thanks for the info, I added a layer for our board here:
+> I am having a build failure trying to fetch elftosb-10.12.01.tar.gz. The command I run is:
 
-git://gitorious.org/picopc-tools/meta-picosam9.git
+change the SRC_URI to this one in the elftosb recipe:
 
-I successfully build kernel and console-image from meta-angstrom layer with=
- it.
+SRC_URI = "http://repository.timesys.com/buildsources/e/elftosb/elftosb-${PV}/elftosb-${PV}.tar.gz"
 
-Thanks,
-Nicu Pavel
+Regards,
+Rado
 
 
