@@ -1,39 +1,29 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SPCZd-0002fk-Bm
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 14:52:57 +0200
-Received: by lbbgo4 with SMTP id go4so2452080lbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 05:43:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=nYFcyW7Jo4a9G4fcTeBnNkQVcI1oKLUG/FawnshHfl8=;
-	b=KAVvOmJrmDKwstSXIj7GLpHUsFCDUl4v4dtQLlQ3v/VsMraIsYR2p4KQl8xdoclLV0
-	O9YEe/CluvD9Vs8Cv0C2o4Cqf9CwJLrVPt8zvJMIVRhFIuVHo/6ioYnyegjd9aWqX0nc
-	JsLD3Wn6p2FD4MyDQdRV+dI0gBF1SLlyibEVEddgyp/aq69VbAva6JA0EdLr2IXNltkX
-	/up/lHdojBouo5ofnoYARGk+I8byzhl3iAwduc5oVFaxgpPGDjO0UX13WVolaj+KJTUm
-	w4x/YCREjv93jw9C2pXCnQjSovR76PPzlXRW04SE1JeyNcGhljU1bijh1ffMCIIq3zKy
-	L0LA==
-Received: by 10.152.108.171 with SMTP id hl11mr23068722lab.29.1335876194124;
-	Tue, 01 May 2012 05:43:14 -0700 (PDT)
-Received: from [192.168.1.104] ([37.191.128.59])
-	by mx.google.com with ESMTPS id fx5sm24578047lbb.5.2012.05.01.05.43.12
-	(version=SSLv3 cipher=OTHER); Tue, 01 May 2012 05:43:12 -0700 (PDT)
-Message-ID: <4F9FDA5F.1080400@gmail.com>
-Date: Tue, 01 May 2012 14:43:11 +0200
-From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120324 Thunderbird/10.0.3
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F9A932F.1020400@gmail.com>
-	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
-	<4F9F8630.3070901@gmail.com>
-	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-In-Reply-To: <CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-Subject: Re: Openembedded and ld-linux-armhf.so.3
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1SPFkC-0001Jd-EE
+	for openembedded-devel@openembedded.org; Tue, 01 May 2012 18:16:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q41FoPHi015328;
+	Tue, 1 May 2012 16:50:25 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15117-01; Tue,  1 May 2012 16:50:21 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q41FoEaB015322
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 1 May 2012 16:50:16 +0100
+Message-ID: <1335887416.7415.125.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>, yocto
+	<yocto@yoctoproject.org>
+Date: Tue, 01 May 2012 16:50:16 +0100
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: 1.3 Planning Process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,44 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 12:52:57 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 May 2012 16:16:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On 05/01/12 14:32, Khem Raj wrote:
-> On Mon, Apr 30, 2012 at 11:44 PM, Martin Ertsås<martiert@gmail.com>  wrote:
->> On 05/01/12 00:05, Khem Raj wrote:
->>> On Fri, Apr 27, 2012 at 5:38 AM, Martin Ertsås<martiert@gmail.com>    wrote:
->>>> I'm working on a pandaboard with OMAP4460. Were trying to use the newest
->>>> PVR drivers, which conforms to the result that arose from
->>>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
->>>>
->>>> We have applied the patch at the bottom of that page gcc, and also a
->>>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
->>>> instead of ld-linux. Problem is, this gives us a kernel panic when it
->>>> tries to run init.
->>> interesting bits are why kernel panics ?
->>> what error do you get from kernel ?
->>> is it some illegal instruction or something like that ?
->>> Do you have VFP enabled
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> Found out the problem why kernel panics. The patches I posted were the
->> correct ones, but before this I used
->>
->> SYSLIB_PATH or something before "/lib/ld-linux-armhf.so.3", so the output
->> actually was /lib/lib/ld-linux-armhf.so.3
->>
-> ok good. I would be interested if you test the patchset i posted
-> it will help a lot
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-I'll try them tomorrow and send a mail telling the findings.
+I just wanted to highlight that the planning process for the next Yocto
+Project release (tentatively '1.3') is well under way now. I sent out a
+previous email about this but this is a quick reminder.
+
+We use the bugzilla (bugzilla.yoctoproject.org) to track proposed ideas
+and these will ultimately end up on
+https://wiki.yoctoproject.org/wiki/Yocto_1.3_Features as in previous
+releases as we work through the planning process. The aims and
+objectives for the next release are listed there (Continuity / Refresh,
+Continuity / Refresh and Usability).
+
+I can't promise things listed will happen or in what time frame but I do
+know if they're not there, they're much less likely to happen! :)
+
+Alternatively if anyone does want to discuss the future direction of the
+project(s), now is a good time to do it. Whilst I'm copying various
+lists, I'd suggest this discussion happens on OE-Core unless the
+question is clearly more appropriate elsewhere.
+
+Cheers,
+
+Richard
+
+
+
+
+
 
 
