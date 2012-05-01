@@ -1,37 +1,35 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SP9PA-0007Wq-KO
+	(envelope-from <npavel@mini-box.com>) id 1SPApn-0000e6-7k
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 11:29:56 +0200
-Received: by wera1 with SMTP id a1so2571433wer.6
+	Tue, 01 May 2012 13:01:31 +0200
+Received: by iakk32 with SMTP id k32so5703096iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 02:20:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=9TkEII/7BKB9ULnYFTGjuktYXsISpLw7gzQ4yiJHntI=;
-	b=fXYXyj+uYH7ULBDaWJdivYVhT2IRbpZ5N7R/fL0XJ87mQ+hVfuTm25JeC11bYstpiF
-	hZBNEIVSBpwY9OunUzZwdnl7HoeKl1xyK4WiJnHnzApUCEXCcyHzdNgR7p48KrkvE2e1
-	OfQDjD/BafI5k8m6g7U7aSFUj6/MgjayIlFQUx5QM/YE+EHgkHX9At13ehrBEOp0ph61
-	DwdfZrW/Mjo1L3TwWwT3CFxCLVQJ/Ws33AWLQBLhT8X8QSAYBDlxc0SaM5NshHRerChU
-	Y95ABcLa2ImF78oznErm10Geqq/FRwlNXz5kS1EKfWeBwfC1Zpjr0r8NVAy9ZGAREd9B
-	u6fQ==
-Received: by 10.216.132.229 with SMTP id o79mr6492329wei.64.1335864013279;
-	Tue, 01 May 2012 02:20:13 -0700 (PDT)
-Received: from [192.168.1.33] (240.Red-88-6-19.staticIP.rima-tde.net.
-	[88.6.19.240])
-	by mx.google.com with ESMTPS id n20sm55496820wiw.5.2012.05.01.02.20.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 May 2012 02:20:12 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <DB8F1B3EEF94C3439BFFE674EB05E3CC014CB5@HKNPRD0204MB116.apcprd02.prod.outlook.com>
-Date: Tue, 1 May 2012 11:20:09 +0200
-Message-Id: <BF50FEBF-0916-4B94-B200-FB76DE687D7E@gmail.com>
-References: <DB8F1B3EEF94C3439BFFE674EB05E3CC014CB5@HKNPRD0204MB116.apcprd02.prod.outlook.com>
+	Tue, 01 May 2012 03:51:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=ODEhSmNCXWwsOqsat/yLrRqPRxEwV9KSx/39Z0pu2wQ=;
+	b=pcNKoY3x35+egirQ1VQ8ME93Bf13lGvmgoe/BAWsjxlAzALai+VX+qVHY1kpQ+aWpy
+	HBQB0KtKlGNqVrDrJtBi3EqKeJagi3y8EndVPrzrg/GjlWfAVcRDaug8hjOE3EIIJQc4
+	R6nDxR9Ojymq55LA2Pu6WiE1bHcs5iCUyq21WzQqluRTTarG/eP6uWtvOgQ3dG6/fw1L
+	JkkBI7kMMES/wnzuVy1+1aasGd/mjS3+nqftrEN86uTK0dJIVaNhUY68HZiDXiGgeGIU
+	C/bwBBZyI7mshSUreofOnEu57X7Gx/lbokN/c17wTiA+52o2ktDQaF66QW3TBicZPbii
+	O9Xg==
+MIME-Version: 1.0
+Received: by 10.50.194.163 with SMTP id hx3mr1153049igc.49.1335869504986; Tue,
+	01 May 2012 03:51:44 -0700 (PDT)
+Received: by 10.64.55.197 with HTTP; Tue, 1 May 2012 03:51:44 -0700 (PDT)
+In-Reply-To: <CAMKF1somCnr2JHQ_x0om2iyVo=D7jhLmUQ4+e-09xETP8NpHhA@mail.gmail.com>
+References: <CAL9MRr=VckWCzbq=+t9SJZ9CiLfPcAp4CrYNihUS1cOYc0-NFA@mail.gmail.com>
+	<CAMKF1somCnr2JHQ_x0om2iyVo=D7jhLmUQ4+e-09xETP8NpHhA@mail.gmail.com>
+Date: Tue, 1 May 2012 13:51:44 +0300
+Message-ID: <CAL9MRr=-Kfh_avCagGVvi1jUE4URAHnEedca0gZ3G=7eN+XtPQ@mail.gmail.com>
+From: Nicu Pavel <npavel@mini-box.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1257)
-Subject: Re: cannot download elftosb-10.12.01.tar.gz
+X-Gm-Message-State: ALoCoQlr+S9pEoN0+EvutInucJDILfnEks98UXFfs0VbNT7ygXoVlIkaaiFE7Jq9iMr0khAXlhuP
+Subject: Re: Adding a board support layer.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 09:29:56 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 01 May 2012 11:01:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Craig,
+Hi,
 
-On May 1, 2012, at 9:57 AM, Craig McQueen wrote:
+On Mon, Apr 30, 2012 at 1:28 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Apr 24, 2012 at 3:24 AM, Nicu Pavel <npavel@mini-box.com> wrote:
+>> Hi,
+>>
+>> What's the proper way of adding a new board support layer ? Should I
+>> just add a meta-picosam9 with our kernel recipes and board
+>> configuration and submit a patch ?
+>
+> It seems you are interested in layered model which means you will
+> base your work on oe-core and other layers. Yes writing your own
+> machine layer is a preferred approach. However you need to host
+> and maintain the layer. For hosting gihub bitbucket gitorious etc
+> work good. If you maintain the layer in pretty good shape many
+> distro's like angstrom might include your machine layer in the
+> default build
+>
+> There are some machine layers mentioned here
+>
+> =A0http://www.openembedded.org/wiki/LayerIndex
+>
+> You can use one of those for reference and modelling its upto you
 
-> NOTE: Running task 1299 of 4060 (ID: 844, =
-virtual:native:/home/craigm/openembedded/stuff/openembedded/recipes/freesc=
-ale/elftosb_10.12.01.bb, do_fetch)
-> NOTE: package elftosb-native-10.12.01-r0: task do_fetch: Started
-> --2012-05-01 15:12:26--  =
-http://foss.doredevelopment.dk/mirrors/imx/elftosb-10.12.01.tar.gz
-> Resolving foss.doredevelopment.dk... 62.95.78.42
-> Connecting to foss.doredevelopment.dk|62.95.78.42|:80... failed: =
-Connection timed out.
-> Retrying.
+Thanks for the info, I added a layer for our board here:
 
-The problem you are facing is because those files are not available.
+git://gitorious.org/picopc-tools/meta-picosam9.git
 
-There are a couple of options, you can=20
+I successfully build kernel and console-image from meta-angstrom layer with=
+ it.
 
-a. modify the elftosb_10.12.01.bb recipe and make sure that it points to =
-a valid location.
-
-or=20
-
-b. if you already have a downloaded source package =
-elftosb-10.12.01.tar.gz, from somewhere in your iMX SDK, modify the =
-recipe so that it looks for a file, rather than a URL.
-
-Best regards,
-
-Elvis Dowson=
+Thanks,
+Nicu Pavel
 
 
