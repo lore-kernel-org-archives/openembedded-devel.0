@@ -1,16 +1,39 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SOd7E-0000xc-VQ
+	(envelope-from <tasskjapp@gmail.com>) id 1SOjhc-0002wl-28
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Apr 2012 01:01:17 +0200
-Received: from mizar.localdomain (82.60.186.61) by smtp205.alice.it
-	(8.6.023.02) id 4F421F7B07E9DB8D; Mon, 30 Apr 2012 00:51:35 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 30 Apr 2012 08:03:16 +0200
+Received: by lbbgo4 with SMTP id go4so1617822lbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Apr 2012 22:53:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=Yy4xNe99N6kaxY3ytSMn0siVG/9aOuINzmFu02I4+NI=;
+	b=qedyu4RkdbaulQF1aO797Z5r//CzvJw7mSkeTDG3Vv2dLq0cyzyG9oeGhsRnwk8O39
+	1o2lCJpr4nX0Zsg/mXZYK3Nms0QDVqgj1Vr5pFttvKnzpdgisGaQ/JJk/ZymGEZrhzFq
+	tb6orQRMy3+Hzmc/TIp0bnsNzjacZD2vnNkXahCceW1jeXhzn1DtixZbbuqiY2cU/HBq
+	v3EGR/32ZmGs1bwgmVD96FalAkIi8R5B4oIJgmU3FQPvx3LLw29Hm9wHp1bNoWrjLlcS
+	slGD9PRh0sKxn2BOjIxfcXgYKgKrwoVL/g4UlBRwl4HKy4UB14B+Uwdo5ltyP1TcYY4D
+	lcEA==
+Received: by 10.112.8.5 with SMTP id n5mr9691631lba.48.1335765212970;
+	Sun, 29 Apr 2012 22:53:32 -0700 (PDT)
+Received: from [192.168.0.121] (147.84-49-231.nextgentel.com. [84.49.231.147])
+	by mx.google.com with ESMTPS id
+	r5sm19207929lbj.12.2012.04.29.22.53.29 (version=SSLv3 cipher=OTHER);
+	Sun, 29 Apr 2012 22:53:29 -0700 (PDT)
+Message-ID: <4F9F79F8.9000706@gmail.com>
+Date: Tue, 01 May 2012 07:51:52 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120410 Thunderbird/11.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2012 00:51:33 +0200
-Message-Id: <1335739893-1064-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-initramfs][PATCH] ubi-utils-klibc: initial commit of version 1.4.9
+References: <1335472546-9653-1-git-send-email-tasskjapp@gmail.com>
+	<1335481339-4539-1-git-send-email-tasskjapp@gmail.com>
+	<CAMKF1sqPuudkP78FbnCR6cd0-RBEurcGScYms-3ZSmwQwsVU8Q@mail.gmail.com>
+In-Reply-To: <CAMKF1sqPuudkP78FbnCR6cd0-RBEurcGScYms-3ZSmwQwsVU8Q@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH v2] synergy: add synergy 1.3.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,265 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2012 23:01:17 -0000
+X-List-Received-Date: Mon, 30 Apr 2012 06:03:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* Initially only ubiattach was targeted (for kexecboot project).
-* Based on klibc_1.5.25, will be revised once new klibc is out.
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../mtd/ubi-utils-klibc/Makefile.patch             |   50 +++++++++++++
- .../mtd/ubi-utils-klibc/common.mk.patch            |    8 ++
- .../mtd/ubi-utils-klibc/libmtd.c.patch             |   24 +++++++
- .../mtd/ubi-utils-klibc/libubi.c.patch             |   73 ++++++++++++++++++++
- .../recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb  |   53 ++++++++++++++
- 5 files changed, 208 insertions(+), 0 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/Makefile.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/common.mk.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/Makefile.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/Makefile.patch
-new file mode 100644
-index 0000000..2802afe
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/Makefile.patch
-@@ -0,0 +1,50 @@
-+--- a/Makefile	2012-04-29 18:15:30.000000000 +0200
-++++ b/Makefile	2012-04-29 00:43:03.000000000 +0200
-+@@ -16,27 +16,11 @@
-+ 
-+ TESTS = tests
-+ 
-+-MTD_BINS = \
-+-	ftl_format flash_erase nanddump doc_loadbios \
-+-	ftl_check mkfs.jffs2 flash_lock flash_unlock \
-+-	flash_otp_info flash_otp_dump mtd_debug flashcp nandwrite nandtest \
-+-	jffs2dump \
-+-	nftldump nftl_format docfdisk \
-+-	rfddump rfdformat \
-+-	serve_image recv_image \
-+-	sumtool jffs2reader
-+-UBI_BINS = \
-+-	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
-+-	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol
-+-
-+-BINS = $(MTD_BINS)
-+-BINS += mkfs.ubifs/mkfs.ubifs
-+-BINS += $(addprefix ubi-utils/,$(UBI_BINS))
-+-SCRIPTS = flash_eraseall
-++UBI_BINS = ubiupdatevol ubimkvol ubirmvol ubinfo ubiattach ubidetach ubirename mtdinfo ubirsvol
-++
-++BINS = $(addprefix ubi-utils/,$(UBI_BINS))
-+ 
-+ TARGETS = $(BINS)
-+-TARGETS += lib/libmtd.a
-+-TARGETS += ubi-utils/libubi.a
-+ 
-+ OBJDEPS = $(BUILDDIR)/include/version.h
-+ 
-+@@ -58,7 +42,7 @@
-+ 	rm -f $(BUILDDIR)/include/version.h
-+ 	$(MAKE) -C $(TESTS) clean
-+ 
-+-install:: $(addprefix $(BUILDDIR)/,${BINS}) ${SCRIPTS}
-++install:: $(addprefix $(BUILDDIR)/,${BINS})
-+ 	mkdir -p ${DESTDIR}/${SBINDIR}
-+ 	install -m 0755 $^ ${DESTDIR}/${SBINDIR}/
-+ 	mkdir -p ${DESTDIR}/${MANDIR}/man1
-+@@ -88,7 +72,6 @@
-+ LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
-+ LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
-+ 
-+-$(foreach v,$(MTD_BINS),$(eval $(call mkdep,,$(v))))
-+ 
-+ #
-+ # Common libmtd
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/common.mk.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/common.mk.patch
-new file mode 100644
-index 0000000..0a48416
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/common.mk.patch
-@@ -0,0 +1,8 @@
-+--- a/common.mk	2012-04-29 18:15:30.000000000 +0200
-++++ b/common.mk	2012-04-29 00:51:53.000000000 +0200
-+@@ -1,4 +1,4 @@
-+-CC := $(CROSS)gcc
-++CC := $(CROSS)klcc
-+ AR := $(CROSS)ar
-+ RANLIB := $(CROSS)ranlib
-+ 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
-new file mode 100644
-index 0000000..f32fb70
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
-@@ -0,0 +1,24 @@
-+--- a/lib/libmtd.c	2012-04-29 21:44:52.000000000 +0200
-++++ b/lib/libmtd.c	2012-04-29 21:43:04.000000000 +0200
-+@@ -441,8 +441,8 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	major = major(st.st_rdev);
-+-	minor = minor(st.st_rdev);
-++	major = __major(st.st_rdev);
-++	minor = __minor(st.st_rdev);
-+ 
-+ 	if (mtd_get_info((libmtd_t *)lib, &info))
-+ 		return -1;
-+@@ -1381,8 +1381,8 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	major = major(st.st_rdev);
-+-	minor = minor(st.st_rdev);
-++	major = __major(st.st_rdev);
-++	minor = __minor(st.st_rdev);
-+ 
-+ 	if (mtd_get_info((libmtd_t *)lib, &info))
-+ 		return -1;
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-new file mode 100644
-index 0000000..e603859
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-@@ -0,0 +1,73 @@
-+--- a/ubi-utils/libubi.c	2012-04-29 21:44:52.000000000 +0200
-++++ b/ubi-utils/libubi.c	2012-04-29 21:43:52.000000000 +0200
-+@@ -36,6 +36,26 @@
-+ #include "libubi_int.h"
-+ #include "common.h"
-+ 
-++/* parts of mtd/ubi-user.h */
-++
-++/* Set an UBI volume property */
-++#define UBI_IOCSETPROP _IOW(UBI_VOL_IOC_MAGIC, 6, struct ubi_set_prop_req)
-++
-++/**
-++ * struct ubi_set_prop_req - a data structure used to set an ubi volume
-++ *                           property.
-++ * @property: property to set (%UBI_PROP_DIRECT_WRITE)
-++ * @padding: reserved for future, not used, has to be zeroed
-++ * @value: value to set
-++ */
-++struct ubi_set_prop_req {
-++	uint8_t  property;
-++	uint8_t  padding[7];
-++	uint64_t value;
-++}  __attribute__ ((packed));
-++
-++/* end parts of mtd/ubi-user.h */
-++
-+ /**
-+  * mkpath - compose full path from 2 given components.
-+  * @path: the first component
-+@@ -382,8 +402,8 @@
-+ 		return errmsg("\"%s\" is not a character device", node);
-+ 	}
-+ 
-+-	major = major(st.st_rdev);
-+-	minor = minor(st.st_rdev);
-++	major = __major(st.st_rdev);
-++	minor = __minor(st.st_rdev);
-+ 
-+ 	if (minor == 0) {
-+ 		errno = EINVAL;
-+@@ -448,8 +468,8 @@
-+ 		return errmsg("\"%s\" is not a character device", node);
-+ 	}
-+ 
-+-	major = major(st.st_rdev);
-+-	minor = minor(st.st_rdev);
-++	major = __major(st.st_rdev);
-++	minor = __minor(st.st_rdev);
-+ 
-+ 	if (minor != 0) {
-+ 		errno = EINVAL;
-+@@ -757,8 +777,8 @@
-+ 				  mtd_dev_node);
-+ 	}
-+ 
-+-	major = major(sb.st_rdev);
-+-	minor = minor(sb.st_rdev);
-++	major = __major(sb.st_rdev);
-++	minor = __minor(sb.st_rdev);
-+ 
-+ 	if (major != MTD_CHAR_MAJOR) {
-+ 		errno = EINVAL;
-+@@ -866,8 +886,8 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	major = major(st.st_rdev);
-+-	minor = minor(st.st_rdev);
-++	major = __major(st.st_rdev);
-++	minor = __minor(st.st_rdev);
-+ 
-+ 	if (ubi_get_info((libubi_t *)lib, &info))
-+ 		return -1;
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-new file mode 100644
-index 0000000..da0efc0
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-@@ -0,0 +1,53 @@
-+DESCRIPTION = "Tools for managing memory technology devices."
-+SECTION = "base"
-+DEPENDS = "zlib lzo e2fsprogs util-linux"
-+HOMEPAGE = "http://www.linux-mtd.infradead.org/"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-+                    file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
-+
-+
-+PR = "r0"
-+
-+inherit klibc
-+
-+# ubicrc32 needs 'feof' (in klibc_2.0)
-+# ubinize needs 'atof'
-+# ubiformat needs 'scanf'equivalent for klibc
-+
-+SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=995cfe51b0a3cf32f381c140bf72b21bf91cef1b \
-+            file://Makefile.patch \
-+            file://common.mk.patch \
-+            file://libmtd.c.patch \
-+            file://libubi.c.patch \
-+            "
-+
-+S = "${WORKDIR}/git/"
-+
-+EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -I${S}ubi-utils/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
-+
-+do_install () {
-+    install -d ${D}${sbindir}
-+    install -m 755 ubi-utils/ubinfo ${D}${sbindir}/ubinfo
-+    install -m 755 ubi-utils/ubiattach ${D}${sbindir}/ubiattach
-+    install -m 755 ubi-utils/ubidetach ${D}${sbindir}/ubidetach
-+    install -m 755 ubi-utils/mtdinfo ${D}${sbindir}/mtdinfo
-+    install -m 755 ubi-utils/ubiupdatevol ${D}${sbindir}/ubiupdatevol
-+    install -m 755 ubi-utils/ubimkvol ${D}${sbindir}/ubimkvol
-+    install -m 755 ubi-utils/ubirename ${D}${sbindir}/ubirename
-+    install -m 755 ubi-utils/ubirmvol ${D}${sbindir}/ubirmvol
-+    install -m 755 ubi-utils/ubirsvol ${D}${sbindir}/ubirsvol
-+}
-+
-+PACKAGES =+ "ubinfo-klibc ubiattach-klibc ubidetach-klibc mtdinfo-klibc ubiupdatevol-klibc \
-+             ubimkvol-klibc ubirename-klibc ubirmvol-klibc ubirsvol-klibc"
-+
-+FILES_ubinfo-klibc = "${sbindir}/ubinfo"
-+FILES_ubiattach-klibc = "${sbindir}/ubiattach"
-+FILES_ubidetach-klibc = "${sbindir}/ubidetach"
-+FILES_mtdinfo-klibc = "${sbindir}/mtdinfo"
-+FILES_ubiupdatevol-klibc = "${sbindir}/ubiupdatevol"
-+FILES_ubimkvol-klibc = "${sbindir}/ubimkvol"
-+FILES_ubirename-klibc = "${sbindir}/ubirename"
-+FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
-+FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
--- 
-1.7.3.4
+On 04/30/2012 12:33 AM, Khem Raj wrote:
+> On Thu, Apr 26, 2012 at 4:02 PM, Tasslehoff Kjappfot
+> <tasskjapp@gmail.com>  wrote:
+>> Signed-off-by: Tasslehoff Kjappfot<tasskjapp@gmail.com>
+>> ---
+>>   meta-oe/recipes-support/synergy/synergy_1.3.8.bb |   22 ++++++++++++++++++++++
+>>   1 file changed, 22 insertions(+)
+>>   create mode 100644 meta-oe/recipes-support/synergy/synergy_1.3.8.bb
+>>
+>> diff --git a/meta-oe/recipes-support/synergy/synergy_1.3.8.bb b/meta-oe/recipes-support/synergy/synergy_1.3.8.bb
+>> new file mode 100644
+>> index 0000000..40efcb1
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/synergy/synergy_1.3.8.bb
+>> @@ -0,0 +1,22 @@
+>> +DESCRIPTION = "Synergy - control multiple computers with one keyboard and mouse"
+>> +HOMEPAGE = "http://synergy.googlecode.com"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=9772a11e3569985855e2ce450e56f991"
+>> +LICENSE = "GPLv2"
+> use GPL-2.0
+Will do.
+>
+>> +SECTION = "x11/utils"
+>> +
+>> +DEPENDS = "libx11 libxtst"
+>> +
+>> +SRC_URI = "http://synergy.googlecode.com/files/synergy-${PV}-Source.tar.gz"
+>> +
+>> +SRC_URI[md5sum] = "3534c65ecfa6e47d7899c57975442f03"
+>> +SRC_URI[sha256sum] = "0afc83e4ed0b46ed497d4229b2b2854e8d3c581a112f4da05110943edbfacc03"
+>> +
+>> +S = "${WORKDIR}/${PN}-${PV}-Source"
+>> +
+>> +inherit cmake siteinfo
+>> +
+> why is siteinfo needed ?
+Leftover from a copy-paste from another recipe using cmake.
 
 
 
