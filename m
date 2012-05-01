@@ -1,34 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SPBdc-0001j6-G6
+	(envelope-from <raj.khem@gmail.com>) id 1SPCPu-0002Sv-4f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 13:53:00 +0200
-Received: by wera1 with SMTP id a1so2634400wer.6
+	Tue, 01 May 2012 14:42:54 +0200
+Received: by lagw12 with SMTP id w12so2442414lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 04:43:17 -0700 (PDT)
+	Tue, 01 May 2012 05:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=4KtZADjp7YVCMbVJc2VoTOKZqMfeuqRRyqmZGSLpstA=;
-	b=cdaybpFMK1stw6SYUiYCeENaCMB345r/JdaQM9iSXIpWIDk48jpqugMiEJt0nDrqdX
-	hCFM0qSuThji+JWipxxT6Ot2Lp5zWepRNGQE0EunYBczBMVJJt7949etDrUy7EnUqwJd
-	fQ/w0kJ6ks25iHweY23CUaJZAEDlwvSsCmbqF9van86/tNoyedwswhht0B8sEuogdFoP
-	fQCEIojVPFoo5KxgGmOnLWVy0dSeIRX/KdjzO93fjfugxOSd2XO4Ilm0qguDj0U87AUb
-	iKd8k3MerJe8q22MJI+i7sWjPeY1TigKgnNlDx7wPup1KKcvPdKvP4LXbgmWjiFKhe9p
-	//ww==
-Received: by 10.180.93.196 with SMTP id cw4mr4567523wib.19.1335872597625;
-	Tue, 01 May 2012 04:43:17 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ex2sm56750715wib.8.2012.05.01.04.43.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 May 2012 04:43:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=ORD3y9kB8oM4WeeJDA219mBdhM+TqpOD8BCInTXlbEY=;
+	b=tlStgeDquV9VE3Kq9H0nem3hyssOR7Ui7EIaavX0Z234Y3y4jQaSlP5Rj71uv2Xhg9
+	OvzVTrGNqw0h9y2Jf4ljyVj/8jsV4xsK9UJqhchxBeIp3tBntSdtIhHZ1y7adG5mV7Ip
+	zmHsDHPH20dlb1TZr0xOYL6YmQPZ2thj0f6+xfNozn9/QQ8EeOWpIE8p7xVB9S19JBMM
+	SDc2+66V+ERybJeBN3aZKv8nkjFU1SRzWZfYxO5jdolxTQEHjhkhfucNgFmH36BOlx+y
+	kBBqF7YLbb77HcfwHmQ2Bs+oWflHhoScZXy91mbGUIC/svawX99DSc4L2/B0WdtDReSw
+	ePWw==
+Received: by 10.152.111.198 with SMTP id ik6mr23091325lab.38.1335875590953;
+	Tue, 01 May 2012 05:33:10 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.152.129.134 with HTTP; Tue, 1 May 2012 05:32:40 -0700 (PDT)
+In-Reply-To: <4F9F8630.3070901@gmail.com>
+References: <4F9A932F.1020400@gmail.com>
+	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
+	<4F9F8630.3070901@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 1 May 2012 05:32:40 -0700
+Message-ID: <CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 May 2012 13:43:10 +0200
-Message-Id: <1335872590-4387-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
-References: <cover.1335766581.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 10/10] xorg: remove BBCLASSEXTENDs for gtk+-native they should be in oe-core
+Subject: Re: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,97 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 11:53:00 -0000
+X-List-Received-Date: Tue, 01 May 2012 12:42:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This reverts commit 1ab99af784f5f1564f28f6afc4718d630b42a606.
+On Mon, Apr 30, 2012 at 11:44 PM, Martin Erts=C3=A5s <martiert@gmail.com> w=
+rote:
+> On 05/01/12 00:05, Khem Raj wrote:
+>>
+>> On Fri, Apr 27, 2012 at 5:38 AM, Martin Erts=C3=A5s<martiert@gmail.com> =
+=C2=A0wrote:
+>>>
+>>> I'm working on a pandaboard with OMAP4460. Were trying to use the newes=
+t
+>>> PVR drivers, which conforms to the result that arose from
+>>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
+>>>
+>>> We have applied the patch at the bottom of that page gcc, and also a
+>>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
+>>> instead of ld-linux. Problem is, this gives us a kernel panic when it
+>>> tries to run init.
+>>
+>> interesting bits are why kernel panics ?
+>> what error do you get from kernel ?
+>> is it some illegal instruction or something like that ?
+>> Do you have VFP enabled
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> Found out the problem why kernel panics. The patches I posted were the
+> correct ones, but before this I used
+>
+> SYSLIB_PATH or something before "/lib/ld-linux-armhf.so.3", so the output
+> actually was /lib/lib/ld-linux-armhf.so.3
+>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../xorg-lib/libxcomposite_0.4.3.bbappend          |    1 -
- .../xorg-lib/libxcursor_1.1.13.bbappend            |    1 -
- .../xorg-lib/libxdamage_1.1.3.bbappend             |    1 -
- .../xorg-lib/libxfixes_5.0.bbappend                |    1 -
- .../xorg-lib/libxrandr_1.3.2.bbappend              |    1 -
- .../xorg-proto/compositeproto_0.4.2.bbappend       |    1 -
- .../xorg-proto/damageproto_1.2.1.bbappend          |    1 -
- .../xorg-proto/fixesproto_5.0.bbappend             |    1 -
- .../xorg-proto/randrproto_1.3.2.bbappend           |    1 -
- 9 files changed, 0 insertions(+), 9 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcomposite_0.4.3.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.13.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxdamage_1.1.3.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-lib/libxrandr_1.3.2.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-proto/compositeproto_0.4.2.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-proto/damageproto_1.2.1.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-proto/fixesproto_5.0.bbappend
- delete mode 100644 meta-oe/recipes-graphics/xorg-proto/randrproto_1.3.2.bbappend
-
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcomposite_0.4.3.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxcomposite_0.4.3.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxcomposite_0.4.3.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.13.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.13.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxcursor_1.1.13.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxdamage_1.1.3.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxdamage_1.1.3.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxdamage_1.1.3.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxfixes_5.0.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxrandr_1.3.2.bbappend b/meta-oe/recipes-graphics/xorg-lib/libxrandr_1.3.2.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-lib/libxrandr_1.3.2.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-proto/compositeproto_0.4.2.bbappend b/meta-oe/recipes-graphics/xorg-proto/compositeproto_0.4.2.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-proto/compositeproto_0.4.2.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-proto/damageproto_1.2.1.bbappend b/meta-oe/recipes-graphics/xorg-proto/damageproto_1.2.1.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-proto/damageproto_1.2.1.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-proto/fixesproto_5.0.bbappend b/meta-oe/recipes-graphics/xorg-proto/fixesproto_5.0.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-proto/fixesproto_5.0.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
-diff --git a/meta-oe/recipes-graphics/xorg-proto/randrproto_1.3.2.bbappend b/meta-oe/recipes-graphics/xorg-proto/randrproto_1.3.2.bbappend
-deleted file mode 100644
-index d6f5869..0000000
---- a/meta-oe/recipes-graphics/xorg-proto/randrproto_1.3.2.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--BBCLASSEXTEND += "native"
--- 
-1.7.8.6
-
+ok good. I would be interested if you test the patchset i posted
+it will help a lot
 
 
