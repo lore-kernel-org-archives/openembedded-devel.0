@@ -1,29 +1,26 @@
-Received: from mail-qa0-f48.google.com ([209.85.216.48])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gizero@gmail.com>) id 1SPIck-0004Kf-8O
+	(envelope-from <philip@balister.org>) id 1SPIgW-0004SY-JZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 May 2012 21:20:34 +0200
-Received: by qady23 with SMTP id y23so2722099qad.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 May 2012 12:10:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=B5VF6fsnHzMvFl6m5mQ+z3le8dEjwJw92kKJc1NxEuM=;
-	b=GA1EIOknQbBUrgfWzK90t8twiAHYzdfiRmanZyEjPblV+kMa5nIIHkHh0/A6KvuNt/
-	WjDtXRTwJSFU0Y7xYDMB3DcfMjWI62j+8dcB4qEsi3gQcGh7CxrQi37YR6tFXbnzHqQQ
-	GoE5uEk5dwb+Z1oz0GqdzQoJocdFxtQwU6WTQ/fdhbuccBEr4jTnM6O32HfTEnDXCkCp
-	K2vC8Z3epXqLNAJglewX1r2DyibymeoXgT7zbacJdpvzhP0KF6+ieHmwR4aKBYrTJJR7
-	aUcKbBxBPYQBhFCaJMDurS1odG6sT1oh/Oc8OH4bPYurO/Lq8U1JEyLaxClq5Pz7pW9J
-	EMTw==
+	Tue, 01 May 2012 21:24:28 +0200
+Received: (qmail 12909 invoked by uid 1003); 1 May 2012 19:14:44 -0000
+Received: from unknown (HELO ?192.168.1.102?)
+	(philip@opensdr.com@71.171.22.246)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	1 May 2012 19:14:43 -0000
+Message-ID: <4FA0361F.3090709@balister.org>
+Date: Tue, 01 May 2012 15:14:39 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.229.135.138 with SMTP id n10mr6796629qct.110.1335899450487;
-	Tue, 01 May 2012 12:10:50 -0700 (PDT)
-Received: by 10.229.217.200 with HTTP; Tue, 1 May 2012 12:10:50 -0700 (PDT)
-Date: Tue, 1 May 2012 21:10:50 +0200
-Message-ID: <CAC+thW1MhdQD9ofG1tyY7voJDPQXETvj2iFAgC9uNFDNUPJ6NA@mail.gmail.com>
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: right directory for a recipe
+To: openembedded-members@lists.openembedded.org
+References: <20120417170125.GA8228@denix.org>
+	<20120430170636.GA19710@denix.org>
+In-Reply-To: <20120430170636.GA19710@denix.org>
+X-Enigmail-Version: 1.1.2
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Call for Candidates: Technical Steering Committee
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,22 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 19:20:34 -0000
+X-List-Received-Date: Tue, 01 May 2012 19:24:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 04/30/2012 01:06 PM, Denys Dmytriyenko wrote:
+> On Tue, Apr 17, 2012 at 01:01:25PM -0400, Denys Dmytriyenko wrote:
+>> Dear members,
+>>
+>> According to our schedule, we are up for the final round of TSC elections in 
+>> the cycle, which started almost a year ago with Richard's re-election last 
+>> June/July.
+> 
+> Just a reminder - we have one more day for candidate nominations. Tom Rini is 
+> stepping down and will not stand for re-election. Koen Kooi has expressed his 
+> interest in running for the vacant seat and he is now the only candidate.
+> 
+> If anybody else is interested in serving on the TSC, please send your 
+> nominations ASAP - the window of opportunity will close in 24 hours. Thanks.
+> 
 
-I'm planning to port a recipe from oe-classic to meta-openembedded and
-submit patches to the list. The particular recipe is libmodbus, but my
-question is more general.
-I looked around for documentation suggesting how meta-oe/ dir is laid
-out, but found nothing in particular. Any pointer here?
-What would be the right directory to put libmodbus in? I understand
-recipes-* names are somewhat self explanatory, but I'm still confused
-if "recipes-extended", "recipes-support" or anything else is the best
-choice.
+I realize the window closed a couple of hours ago, but we really would
+like a contested election for TSC. (We need to remember how to use the
+voting procedure).
 
-TIA
-Andrea
+If you have the time, please consider asking to be considered as a
+candidate for the TSC.
+
+Philip
 
 
