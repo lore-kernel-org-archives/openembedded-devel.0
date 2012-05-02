@@ -1,39 +1,34 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SPW9W-0007B3-9a
+	(envelope-from <martin.jansa@gmail.com>) id 1SPW9W-0007B3-QD
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 02 May 2012 11:47:18 +0200
-Received: by bkcjm2 with SMTP id jm2so278550bkc.6
+Received: by mail-bk0-f47.google.com with SMTP id jm2so278550bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2012 02:37:34 -0700 (PDT)
+	Wed, 02 May 2012 02:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=8ck+AS7bGZbIycRGmhRn8GyB/Vl0x7xaWIM6Kn+MbE4=;
-	b=b/XLVorMAssg9W9ZeKrp709hgC5UqxXY763XdZhkqOF/Af6lH4T/QrnpU1HeAItPFi
-	MN3R7MeopTFLjWnYiAZFDu7+RNstMgqRXxyb0FxlejLASJ8jIhPHwLh5VcDXruyoIiUj
-	tRbod+d/SfAM+/KldnPDsXyRO75CcXc6GMg0rDcdMpBbU0odzZuT9/ItK3gwBQwIPTlH
-	5amKS1jcO3hRs/66w7CevDuMzxI5Qw+ggS2Ch6v7kzXC86vtuEZyDYOZVKP/2E3o1r0F
-	t9fi8xPXkehSzP4BsiebeN1txnB7Jtf55hJukV4ESBMG4r3AU0kS9eO5j4npEm9EhAT2
-	zsfA==
-Received: by 10.204.148.82 with SMTP id o18mr9597096bkv.108.1335951454212;
-	Wed, 02 May 2012 02:37:34 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id e20sm2332384bkv.10.2012.05.02.02.37.31
-	(version=SSLv3 cipher=OTHER); Wed, 02 May 2012 02:37:32 -0700 (PDT)
-Message-ID: <4FA0FFD5.6080201@gmail.com>
-Date: Wed, 02 May 2012 11:35:17 +0200
-From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
-MIME-Version: 1.0
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=9RIKoVU0RHmxWX9yKx2GP0G+bP9Dsxp5U05leL2+KSw=;
+	b=IJL4O//DE3F7F6IKo0HilGev1sLD2pt3o/f06U0Kn2c4rvM7g6cFPENycb+3I1ltpf
+	2lfDqSDNhWtkibuGP4/pNJIJmETDPAHxLbfq4NdTglK0pA2GKgiFnXejvTnp+UBa2WIG
+	UkDv2F5putCAmvUJlOPshCq65DdlWjAzX2jKWCs73YDmWpqH/XYbwge/CEcyXHHqFdLP
+	IcDshzruDvCPTmG5hM2T08AnVT3Wq1JF4twOzOz662fsUYEac50bvRvDh9zCemSPRk9M
+	4pnkE37lBwM8EbJ3VPNrOPdtoJPhYVsPBbVWrEosDy5FMSZnHmiac1ksDJwjD02kKR7P
+	lqTg==
+Received: by 10.205.119.130 with SMTP id fu2mr15010bkc.120.1335951456950;
+	Wed, 02 May 2012 02:37:36 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id s20sm2349886bks.2.2012.05.02.02.37.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 02 May 2012 02:37:36 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4F9A932F.1020400@gmail.com>
-	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
-	<4F9F8630.3070901@gmail.com>
-	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-In-Reply-To: <CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-Subject: Re: Openembedded and ld-linux-armhf.so.3
+Date: Wed,  2 May 2012 11:37:30 +0200
+Message-Id: <1335951450-28468-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+In-Reply-To: <cover.1335766581.git.Martin.Jansa@gmail.com>
+References: <cover.1335766581.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-efl][PATCH 11/11] libgee: upgrade to 0.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +43,52 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 02 May 2012 09:47:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-On 05/01/12 14:32, Khem Raj wrote:
-> On Mon, Apr 30, 2012 at 11:44 PM, Martin Ertsås <martiert@gmail.com> wrote:
->> On 05/01/12 00:05, Khem Raj wrote:
->>> On Fri, Apr 27, 2012 at 5:38 AM, Martin Ertsås<martiert@gmail.com>  wrote:
->>>> I'm working on a pandaboard with OMAP4460. Were trying to use the newest
->>>> PVR drivers, which conforms to the result that arose from
->>>> https://wiki.linaro.org/OfficeofCTO/HardFloat/LinkerPathCallApr2012
->>>>
->>>> We have applied the patch at the bottom of that page gcc, and also a
->>>> patch for making eglibc make ld-linux-armhf, and load ld-linux-armhf
->>>> instead of ld-linux. Problem is, this gives us a kernel panic when it
->>>> tries to run init.
->>> interesting bits are why kernel panics ?
->>> what error do you get from kernel ?
->>> is it some illegal instruction or something like that ?
->>> Do you have VFP enabled
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> Found out the problem why kernel panics. The patches I posted were the
->> correct ones, but before this I used
->>
->> SYSLIB_PATH or something before "/lib/ld-linux-armhf.so.3", so the output
->> actually was /lib/lib/ld-linux-armhf.so.3
->>
-> ok good. I would be interested if you test the patchset i posted
-> it will help a lot
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-The patches posted seems to be working fine. I at least didn't have any
-problems with them.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/libgee/libgee_0.6.0.bb |   12 ------------
+ meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb |   11 +++++++++++
+ 2 files changed, 11 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.6.0.bb
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
+
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.6.0.bb b/meta-oe/recipes-devtools/libgee/libgee_0.6.0.bb
+deleted file mode 100644
+index 4e305b6..0000000
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.6.0.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require libgee.inc
+-PE = "1"
+-PR = "${INC_PR}.1"
+-#autoreconf needs introspection.m4 (staged by gobject-introspection-native) after http://git.gnome.org/browse/libgee/commit/?id=d026a29b38ca1a3388981c6e75a92602212373d8
+-DEPENDS += "gobject-introspection-native"
+-DEPENDS_virtclass-native += "gobject-introspection-native"
+-
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/0.6/${BPN}-${PV}.tar.bz2"
+-S = "${WORKDIR}/${BPN}-${PV}"
+-
+-SRC_URI[md5sum] = "4eb513b23ab6ea78884989518a4acf6f"
+-SRC_URI[sha256sum] = "e586678d0a88637abeaaf850b62231000772e79ea6d9c4b45dc3cea99f778a7a"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb b/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
+new file mode 100644
+index 0000000..4e2c643
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
+@@ -0,0 +1,11 @@
++require libgee.inc
++PE = "1"
++PR = "${INC_PR}.0"
++#autoreconf needs introspection.m4 (staged by gobject-introspection-native) after http://git.gnome.org/browse/libgee/commit/?id=d026a29b38ca1a3388981c6e75a92602212373d8
++DEPENDS += "gobject-introspection-native"
++DEPENDS_virtclass-native += "gobject-introspection-native"
++
++SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
++SRC_URI[md5sum] = "a32bf498cf33d5e3417823a7b252ad22"
++SRC_URI[sha256sum] = "55f39f3b28e676f6cbd9377d83edd031084436a4da41280a9503c94faffb1665"
+-- 
+1.7.8.6
+
 
 
