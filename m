@@ -1,38 +1,38 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SPWHk-0007dU-U3
+	(envelope-from <koen@dominion.thruhere.net>) id 1SPWHm-0007oF-Qh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 May 2012 11:55:49 +0200
-Received: by wgbds1 with SMTP id ds1so3659055wgb.0
+	Wed, 02 May 2012 11:55:50 +0200
+Received: by wibhj13 with SMTP id hj13so348602wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2012 02:46:05 -0700 (PDT)
+	Wed, 02 May 2012 02:46:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=VoYtmFUd4n6t48y3urPK5c/pdxz/XwT0dPs4F+N1faM=;
-	b=S1wlkVdAqqOuBvzMPDOCkyBXiFV8G0wV9GGeIfdnfmDhcnDmhYpSg1e31M5Q499rRK
-	HXPKNpyLpw4mkvxzMYsOtGYMJEp3PGKParSmTuATVBluQVQmc/OxMiN029Nj5kcmBRCM
-	42eq3QArmH4ILFCEzGg6gzUuubDlbi8CobWIWQ/aywJpS5C04Bu2tE6GwpmDkdMDPOgZ
-	3bCNFtJaii0cKoTkU64Ua9/8n6MqLnaASATDgtDr1czyoRTYcE/7r7N3OUOWoCgsCkDN
-	1MzI6UzdrQTU2fncSw4vfY0+idzdZEJHqW1OlJYpQk9S5i5bEK5J/j5PVKAvswRHlBGn
-	fl5A==
-Received: by 10.216.131.34 with SMTP id l34mr16589007wei.54.1335951964949;
-	Wed, 02 May 2012 02:46:04 -0700 (PDT)
+	bh=uOQ23T5HAXuUN/I9Xq+SAaXVn3gnAIGi2fLNLngEIsQ=;
+	b=ggtTT+89xNynX4QKoUrW7CmD/umXRLtfDhaYIopK7XTCrq8qS3HLdMW4xL7VQ32wBg
+	LQBbJXqerXSgd1A5JsVSB4933cVqr5a6JwDPFL+qdJeZiZbCkN1Zuf2RnIDd+fkn5dku
+	JqI2gOU03h1TeEFaMQI7F9r8jkIJzHJsOhHNEdKuWRkuZ7d7tZgHbTL3gTEx3MbOVjW2
+	16Y5yiB2bh3AieVCfArh7qUj/kFSMIzr95MUfhpkQkJajp9bixOLiB7v1HqLK08RkDYI
+	ye7vk6U0gMwxB+fAhPpN0n9jow9cDr/nBbAftM+A3um9ldH7Jn4hAVAQpJ7MDllJwZ6H
+	a8Eg==
+Received: by 10.180.101.136 with SMTP id fg8mr12580298wib.4.1335951966926;
+	Wed, 02 May 2012 02:46:06 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ca3sm43149489wib.6.2012.05.02.02.46.03
+	by mx.google.com with ESMTPS id ea6sm43146192wib.5.2012.05.02.02.46.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 02:46:03 -0700 (PDT)
+	Wed, 02 May 2012 02:46:06 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 May 2012 11:45:31 +0200
-Message-Id: <1335951932-6143-5-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  2 May 2012 11:45:32 +0200
+Message-Id: <1335951932-6143-6-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
 References: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlylYJQZXR0M+Uqfnve4/FGwri9EgwpCQOogjBLcqFUZdXg4rPDxMdHbziSlpObIS2nDlhG
+X-Gm-Message-State: ALoCoQk1mbOYvMlTJad4F7Xni8TJyEmpTXJKumX8cOtmWpl+2jIQiIAPIIE3wMNMEodSVcgJluwB
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe/denzil][PATCH 5/6] gcc-crosssdk-intermediate_4.5.bb: with-headers has been moved from common include
+Subject: [meta-oe/denzil][PATCH 6/6] libgcc-4.5: Fix nativesdk build problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +46,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 09:55:49 -0000
+X-List-Received-Date: Wed, 02 May 2012 09:55:51 -0000
 
 From: Khem Raj <raj.khem@gmail.com>
 
-To accomodate gcc 4.7 which needed a different option
-than --with-header this option setting has been moved
-into version specific recipes
+We need to use BPN instead of PN so we
+access libgcc and not libgcc-nativesdk
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Tested-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb            |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb |   32 +++++++++++---------
+ 1 file changed, 18 insertions(+), 14 deletions(-)
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb b/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
-index 971f3ba..61a0dfb 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.bb
-@@ -1,3 +1,3 @@
- require recipes-devtools/gcc/gcc-cross-intermediate_${PV}.bb
- require recipes-devtools/gcc/gcc-crosssdk-intermediate.inc
+diff --git a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
+index ecef5e7..3f63931 100644
+--- a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
++++ b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
+@@ -4,11 +4,14 @@ INHIBIT_DEFAULT_DEPS = "1"
+ 
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
+ 
++PKGSUFFIX = ""
++PKGSUFFIX_virtclass-nativesdk = "-nativesdk"
++
+ PACKAGES = "\
+   ${PN} \
+   ${PN}-dev \
+   ${PN}-dbg \
+-  libgcov-dev \
++  libgcov${PKGSUFFIX}-dev \
+   "
+ 
+ FILES_${PN} = "${base_libdir}/libgcc*.so.*"
+@@ -16,31 +19,31 @@ FILES_${PN}-dev = " \
+   ${base_libdir}/libgcc*.so \
+   ${libdir}/${TARGET_SYS}/${BINV}/crt* \
+   ${libdir}/${TARGET_SYS}/${BINV}/libgcc*"
+-FILES_libgcov-dev = " \
+-  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a"
 -
-+EXTRA_OECONF += " --with-headers=${STAGING_DIR_TCBOOTSTRAP}${SYSTEMHEADERS} "
++FILES_libgcov${PKGSUFFIX}-dev = " \
++  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a \
++  "
+ FILES_${PN}-dbg += "${base_libdir}/.debug/"
+ 
+ do_configure () {
+ 	target=`echo ${MULTIMACH_TARGET_SYS} | sed -e s#-nativesdk##`
+ 	install -d ${D}${base_libdir} ${D}${libdir}
+ 	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${B}
+-	mkdir -p ${B}/${PN}
+-	cd ${B}/${PN}
+-	chmod a+x ${S}/${PN}/configure
+-	${S}/${PN}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
++	mkdir -p ${B}/${BPN}
++	cd ${B}/${BPN}
++	chmod a+x ${S}/${BPN}/configure
++	${S}/${BPN}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
+ }
+ 
+ do_compile () {
+ 	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
+-	cd ${B}/${PN}
+-	oe_runmake MULTIBUILDTOP=${B}/$target/${PN}/
++	cd ${B}/${BPN}
++	oe_runmake MULTIBUILDTOP=${B}/$target/${BPN}/
+ }
+ 
+ do_install () {
+ 	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
+-	cd ${B}/${PN}
+-	oe_runmake 'DESTDIR=${D}' MULTIBUILDTOP=${B}/$target/${PN}/ install
++	cd ${B}/${BPN}
++	oe_runmake 'DESTDIR=${D}' MULTIBUILDTOP=${B}/$target/${BPN}/ install
+ 
+ 	# Move libgcc_s into /lib
+ 	mkdir -p ${D}${base_libdir}
+@@ -63,5 +66,6 @@ do_package_write_rpm[depends] += "virtual/${MLPREFIX}libc:do_package"
+ 
+ BBCLASSEXTEND = "nativesdk"
+ 
+-INSANE_SKIP_libgcc-dev = "staticdev"
+-INSANE_SKIP_libgcov-dev = "staticdev"
++INSANE_SKIP_${PN}-dev = "staticdev"
++INSANE_SKIP_libgcov${PKGSUFFIX}-dev = "staticdev"
++
 -- 
 1.7.10
 
