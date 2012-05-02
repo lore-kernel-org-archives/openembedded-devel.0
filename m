@@ -1,20 +1,35 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1SPdm1-000329-S0
-	for openembedded-devel@openembedded.org; Wed, 02 May 2012 19:55:34 +0200
-Received: (qmail 20085 invoked by uid 1003); 2 May 2012 17:45:48 -0000
-Received: from unknown (HELO localhost.localdomain)
-	(philip@balister.org@71.171.22.246)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	2 May 2012 17:45:48 -0000
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@openembedded.org
-Date: Wed,  2 May 2012 13:45:45 -0400
-Message-Id: <1335980745-29862-2-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1335980745-29862-1-git-send-email-philip@balister.org>
-References: <1335980745-29862-1-git-send-email-philip@balister.org>
-Subject: [meta-oe 1/1] lxc : Add recipe for building Linux Containers tools.
+	(envelope-from <raj.khem@gmail.com>) id 1SPeE7-0003oE-6f
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 May 2012 20:24:35 +0200
+Received: by lbol5 with SMTP id l5so497804lbo.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 May 2012 11:14:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=kjcA5wycHuK1/Ae/UXov7EuAE5ScWAek6FEELYzuYzs=;
+	b=bRMgFuWqiFDHDtQtZOwDU9/HbJZH6fT5/uFvXWFksYgQ6v1k5yQeIwdnXtzW8SHf+u
+	EeXozKXXeL4R0z1lBaZrp4bpayJtNMay8jQV0Xo/SXnIgvyWupNaD/dkWaiL1RodcBzq
+	V5wtMGFDgent11OvQLAw2lJxslS/+f4/QQA/7aDexr8RB1/a+Z3tuh/t/+lqxT4aH2iz
+	6M1N8AgXrmDFRyaTKP217C7Jd3B0BJgN1cp2NUO6OFIjR2EK+CrRarDLpS+E0rhRgCeo
+	28ksU9oGbGZu5iHnkJ1AVXj8TUk+iK42FJfshc4iMCu1fDu5XMmGRWjtgZjuJsUupMeH
+	8jJg==
+Received: by 10.112.86.101 with SMTP id o5mr14010894lbz.1.1335982490659; Wed,
+	02 May 2012 11:14:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.152.129.134 with HTTP; Wed, 2 May 2012 11:14:20 -0700 (PDT)
+In-Reply-To: <20120502095150.GA3682@jama.jama.net>
+References: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
+	<1335951932-6143-4-git-send-email-koen@dominion.thruhere.net>
+	<20120502095150.GA3682@jama.jama.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 May 2012 11:14:20 -0700
+Message-ID: <CAMKF1spM9urWo1VBXG=qdWOcC_5_2kw-vBGqWv3Lg0xBPWiADA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe/denzil][PATCH 4/6] gcc-4.5: Match with OE-Core on building procedure for libgcc and gcc-runtime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,47 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 17:55:34 -0000
+X-List-Received-Date: Wed, 02 May 2012 18:24:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Linux containers are a lightweight virtualization system.
+On Wed, May 2, 2012 at 2:51 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>
+> I'm not using gcc-4.5, but aren't those 3 patches only for master? As
+> gcc-4.7 and other gcc changes were in oe-core only after release AFAIK.
+>
 
-Compile tested on F15 and lightly run tested on a pandaboard.
-
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-extended/lxc/lxc_git.bb |   21 +++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/lxc/lxc_git.bb
-
-diff --git a/meta-oe/recipes-extended/lxc/lxc_git.bb b/meta-oe/recipes-extended/lxc/lxc_git.bb
-new file mode 100644
-index 0000000..8f22e77
---- /dev/null
-+++ b/meta-oe/recipes-extended/lxc/lxc_git.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Linux Containers tools"
-+DESCRIPTION = "Linux containers are a light weight isolation system for Linux."
-+HOMEPAGE = "http://lxc.sourceforge.net"
-+LICENSE = "LGPLv2.1"
-+
-+PV = "0.8.0-rc2"
-+
-+RDEPENDS_${PN} = "perl perl-modules"
-+
-+SRC_URI = "git://lxc.git.sourceforge.net/gitroot/lxc/lxc"
-+SRCREV = "ed55bf5203aca88809d979b289d6b2280a18e79c"
-+
-+inherit autotools
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECONF = "--disable-doc --disable-rpath"
-+
-+FILES_${PN}-dbg += "${libexecdir}/lxc/.debug"
--- 
-1.7.3.4
-
+Yes they are strictly for master to accomodate basic changes in build sequence
+we did for gcc 4.7 that said, I think now that denzil has released we should
+reconsider maintaining gcc 4.5 in toolchain-layer and same goes for other
+recipes in the layer. Infact I feel the whole layer can be dropped.
 
 
