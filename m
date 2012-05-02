@@ -1,38 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SPWHg-0007Xj-3l
+	(envelope-from <koen@dominion.thruhere.net>) id 1SPWHh-0007an-H8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 May 2012 11:55:44 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so330147wgb.24
+	Wed, 02 May 2012 11:55:45 +0200
+Received: by wera1 with SMTP id a1so281079wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2012 02:46:02 -0700 (PDT)
+	Wed, 02 May 2012 02:46:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=z7CPh7DpRibba8l3dtBOu1f+utTx27HuNNoRSaBoBAM=;
-	b=K++p1e6d36lg3KGgVVwQ/HG+0215sDdITx9ZhX8GjTzdWFpOs3/dCEoA1lw44H/OdL
-	aeNtXHGM391orgELYmREw5AHWVif8pWe+CjlBDqV1LHBQexCRf8UXZ9xZr6iR7dj/7Ak
-	3vdUNV1qU1I1GkiDOWdJ1mdZn7jx78lnPdkgnoF4bBvcD4iOzG73qafyVYp+lb8Gh6+d
-	eXfKAWe5InLtnZ7cZj3cgfA3Xaxd+apijQULVyIT2pZI8mjqTpVeQvxhmeVIFr5Y2tv5
-	hSm4CBr0qDEw4jRRNVZFNjXb3z5NoBehmMBbji5QHG2yeL9gf5f9GGZidUprB89NlJT+
-	rjIA==
-Received: by 10.216.137.97 with SMTP id x75mr1292425wei.25.1335951962203;
-	Wed, 02 May 2012 02:46:02 -0700 (PDT)
+	bh=LykLrHGHzw7DdWZo3iysfCRflRYUGXE3WQ1RQFz28pQ=;
+	b=fX1+y78ulzM0I8yRuBI5MnlCQoCZ46dClg6tISsnaYVH50rwtdeiNBaSU8ST2v5Fss
+	5WCqV5A+XTtkZbVH4naElDlJ5CpXv1/jgjZ8x+tXg0siyVrIWJe99RDKcMTS5Oxi/jtl
+	+heYYXLnfrkXrqLD/3TMC13+Qtgyh8c6JTd8dOgCs01bqTJRNrwHFehNre6d6oWquz5b
+	c3Sx4JmXsTb5vCdjbbLr90ucodOTOv3SF5d39DUyDlpxKLGzTmVjbAGHo8xStMiboqqV
+	630qOwYn2wBtRD8IAqzmh+eTH1yWWgyQuZ6uhJ1EBEvGUXawDTvsKKKHxmod1XI/lJhx
+	c+0w==
+Received: by 10.180.107.104 with SMTP id hb8mr12484400wib.8.1335951952220;
+	Wed, 02 May 2012 02:45:52 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ca3sm43149214wib.6.2012.05.02.02.46.00
+	by mx.google.com with ESMTPS id fz9sm43142925wib.3.2012.05.02.02.45.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 02:46:01 -0700 (PDT)
+	Wed, 02 May 2012 02:45:51 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 May 2012 11:45:30 +0200
-Message-Id: <1335951932-6143-4-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  2 May 2012 11:45:28 +0200
+Message-Id: <1335951932-6143-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
 References: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQk11IeKNxDgEoEXe6Msb4x8977b/amR5sPD0dL69IQIW74aICJpQifwptxHM8Q6aQoFsCnz
+X-Gm-Message-State: ALoCoQmVAHtjSzQyzhT5VAGJhNkBEYOh7MExQVdbn0Q89k3mITIybJM1S/XMpzYwfGlMJKl/hRrK
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe/denzil][PATCH 4/6] gcc-4.5: Match with OE-Core on building procedure for libgcc and gcc-runtime
+Subject: [meta-oe/denzil][PATCH 2/6] v4l-utils: update to 0.8.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,99 +46,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 09:55:44 -0000
+X-List-Received-Date: Wed, 02 May 2012 09:55:45 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Tested-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb |   47 +++++++++++++++-----
- 1 file changed, 36 insertions(+), 11 deletions(-)
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb |   40 --------------------
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb |   39 +++++++++++++++++++
+ 2 files changed, 39 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-index 1579c8b..ecef5e7 100644
---- a/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/libgcc_4.5.bb
-@@ -1,33 +1,46 @@
- require recipes-devtools/gcc/gcc-${PV}.inc
- 
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
+deleted file mode 100644
+index c6100c1..0000000
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.4.bb
++++ /dev/null
+@@ -1,40 +0,0 @@
+-DESCRIPTION = "v4l2 and IR applications"
+-LICENSE = "GPLv2 & LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
+-                    file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 -
- INHIBIT_DEFAULT_DEPS = "1"
+-DEPENDS = "jpeg"
+-
+-# libv4l was absorbed into this, let OE know that
+-PROVIDES = "libv4l"
+-
+-PR = "r1"
+-
+-SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
+-SRCREV = "v4l-utils-${PV}"
+-
+-S = "${WORKDIR}/git"
+-
+-EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
+-
+-do_compile() {
+-	# fix up some ASNEEDED things
+-	for i in $(find ${S} -name "Makefile") ; do
+-		sed -i 's:-lrt:-lrt -lpthread:g' $i
+-	done
+-
+-	oe_runmake
+-}
+-
+-do_install() {
+-	oe_runmake install
+-}
+-
+-PACKAGES =+ "rc-keymaps libv4l libv4l-dbg libv4l-dev"
+-
+-FILES_rc-keymaps = "${sysconfdir}/rc*"
+-FILES_${PN} = "${bindir} ${sbindir} ${base_libdir}/udev/rules.d/70-infrared.rules"
+-FILES_libv4l += "${libdir}/libv4l/* ${libdir}/*.so.*"
+-FILES_libv4l-dbg += "${libdir}/libv4l/.debug"
+-FILES_libv4l-dev += "${libdir}/*.so ${includedir}/lib* ${libdir}/pkgconfig/lib*"
+-
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+new file mode 100644
+index 0000000..18f361f
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+@@ -0,0 +1,39 @@
++DESCRIPTION = "v4l2 and IR applications"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
++                    file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 +
- DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
- 
- PACKAGES = "\
-   ${PN} \
-   ${PN}-dev \
-+  ${PN}-dbg \
-+  libgcov-dev \
-   "
- 
- FILES_${PN} = "${base_libdir}/libgcc*.so.*"
- FILES_${PN}-dev = " \
-   ${base_libdir}/libgcc*.so \
-   ${libdir}/${TARGET_SYS}/${BINV}/crt* \
--  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a \
-   ${libdir}/${TARGET_SYS}/${BINV}/libgcc*"
-+FILES_libgcov-dev = " \
-+  ${libdir}/${TARGET_SYS}/${BINV}/libgcov.a"
- 
--do_fetch[noexec] = "1"
--do_unpack[noexec] = "1"
--do_patch[noexec] = "1"
--do_configure[noexec] = "1"
--do_compile[noexec] = "1"
-+FILES_${PN}-dbg += "${base_libdir}/.debug/"
- 
--do_install () {
-+do_configure () {
- 	target=`echo ${MULTIMACH_TARGET_SYS} | sed -e s#-nativesdk##`
--
--	# Install libgcc from our gcc-cross saved data
- 	install -d ${D}${base_libdir} ${D}${libdir}
--	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${D}
-+	cp -fpPR ${STAGING_INCDIR_NATIVE}/gcc-build-internal-$target/* ${B}
-+	mkdir -p ${B}/${PN}
-+	cd ${B}/${PN}
-+	chmod a+x ${S}/${PN}/configure
-+	${S}/${PN}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
++DEPENDS = "jpeg"
++
++# libv4l was absorbed into this, let OE know that
++PROVIDES = "libv4l"
++
++SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
++# 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
++SRCREV = "54f16ca8183dd8ae8bf4ccc07949795aff0301f5"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
++
++do_compile() {
++	# fix up some ASNEEDED things
++	for i in $(find ${S} -name "Makefile") ; do
++		sed -i 's:-lrt:-lrt -lpthread:g' $i
++	done
++
++	oe_runmake
 +}
 +
-+do_compile () {
-+	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
-+	cd ${B}/${PN}
-+	oe_runmake MULTIBUILDTOP=${B}/$target/${PN}/
++do_install() {
++	oe_runmake install
 +}
 +
-+do_install () {
-+	target=`echo ${TARGET_SYS} | sed -e s#-nativesdk##`
-+	cd ${B}/${PN}
-+	oe_runmake 'DESTDIR=${D}' MULTIBUILDTOP=${B}/$target/${PN}/ install
- 
- 	# Move libgcc_s into /lib
- 	mkdir -p ${D}${base_libdir}
-@@ -36,7 +49,19 @@ do_install () {
- 	else
- 		mv ${D}${libdir}/libgcc* ${D}${base_libdir} || true
- 	fi
++PACKAGES =+ "rc-keymaps libv4l libv4l-dbg libv4l-dev"
 +
-+	# install the runtime in /usr/lib/ not in /usr/lib/gcc on target
-+	# so that cross-gcc can find it in the sysroot
++FILES_rc-keymaps = "${sysconfdir}/rc*"
++FILES_${PN} = "${bindir} ${sbindir} ${base_libdir}/udev/rules.d/70-infrared.rules"
++FILES_libv4l += "${libdir}/libv4l/* ${libdir}/*.so.*"
++FILES_libv4l-dbg += "${libdir}/libv4l/.debug"
++FILES_libv4l-dev += "${libdir}/*.so ${includedir}/lib* ${libdir}/pkgconfig/lib*"
 +
-+	mv ${D}${libdir}/gcc/* ${D}${libdir}
-+	rm -rf ${D}${libdir}/gcc/
- }
- 
-+do_package_write_ipk[depends] += "virtual/${MLPREFIX}libc:do_package"
-+do_package_write_deb[depends] += "virtual/${MLPREFIX}libc:do_package"
-+do_package_write_rpm[depends] += "virtual/${MLPREFIX}libc:do_package"
-+
- BBCLASSEXTEND = "nativesdk"
- 
-+INSANE_SKIP_libgcc-dev = "staticdev"
-+INSANE_SKIP_libgcov-dev = "staticdev"
 -- 
 1.7.10
 
