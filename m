@@ -1,44 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-vx0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SPXDH-0005Yl-Lm
+	(envelope-from <otavio.salvador@gmail.com>) id 1SPaO6-0007l9-NY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 May 2012 12:55:19 +0200
-Received: by wibhj13 with SMTP id hj13so3768931wib.6
+	Wed, 02 May 2012 16:18:38 +0200
+Received: by vcbfl13 with SMTP id fl13so468630vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 May 2012 03:45:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=hXB6BmzGJF9GrkK1sypyosInNAmVMcdN1omB2D5mCD0=;
-	b=AiupFOtD/M0SUbILlisUb2f1waoJ9EPvVsDz7WIxodUplPn0rhrkZQZ1Lp2hu7kmaM
-	yzrCttwJd5Q+uOHNWtgyCFjK6+wKOPEDmWl0RlphhMcn2w4+1Clj03fpf7Ie3GcsN0DO
-	3RLFhdKpMQ5Jvh83ZjDoO7BLL6y5f1EzmDS2yXszP/AqzvVLyArRrGDirPCw4qtEy3+5
-	zbvz49tZxgxi7oJ1Gf0ZMtX3anEDV1W5AYUItslA4QZZtfQeJIMtPULUcnNuSyodZmwL
-	WIlwneHBFGFsrT9Fm/pl7c7VVUGHhZSKVqFOo/lXfGuvKtH7meEk5oaM4KdvdsPMKWlP
-	GFhw==
-Received: by 10.180.83.38 with SMTP id n6mr13024960wiy.4.1335955529308;
-	Wed, 02 May 2012 03:45:29 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235]) by mx.google.com with ESMTPS id
-	ev10sm43461985wid.10.2012.05.02.03.45.27
+	Wed, 02 May 2012 07:08:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=cpTVEyDq9mKhdOAUvKYSJQw6hQNOMdERISwoKYcQvKA=;
+	b=Fkt17z812oZj/mH9YtE8FNrxnVw/3XnVoJ2WLa2U/Q9YwHLlkRwD2+QLRhgUaVQKMR
+	6g1aJykS6o/sl0wcisnWDr5wIhXGTwJ/vncXRpAT0KbXjXLQcInMpalexdkaDAq1gveh
+	pdF/qDqIjtiGfc/jyPe3Q4ByP3hUKqOCrPexhqSNdkZ0DwMW0fzt7gfhddMjT6mcHkW7
+	5YGbo6MOolT/5naefc3HIL3fo8Wk/leySpDSOu1FCPg3suJKXHO9B9ewPSrN1IxtJC5f
+	udc7QPiihjgxWFY5/2uBcwvrzkTg0zcJ+bI6zussRSQ62eNlJyF2vfXQkx+HjYHIVvH+
+	VPzw==
+Received: by 10.220.150.14 with SMTP id w14mr20842286vcv.59.1335967733865;
+	Wed, 02 May 2012 07:08:53 -0700 (PDT)
+Received: from localhost.localdomain ([186.218.100.214])
+	by mx.google.com with ESMTPS id fc7sm3086000vdc.13.2012.05.02.07.08.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 03:45:28 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120502123556.0f72b7da@eb-e6520>
-Date: Wed, 2 May 2012 12:45:20 +0200
-Message-Id: <7680A3B1-C1E4-4B6B-ADFB-CC9FD44B5B71@dominion.thruhere.net>
-References: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
-	<1335951932-6143-4-git-send-email-koen@dominion.thruhere.net>
-	<20120502095150.GA3682@jama.jama.net>
-	<20120502123556.0f72b7da@eb-e6520>
-To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQn2x60Q76yi5rmtAnNSYnRjjDh7tZFbSwimJp/Ubg1bNBNp1OKlKZaN3I/AqDs1nnmYDZK1
-Cc: openembedded-devel@lists.openembedded.org, martin.jansa@gmail.com
-Subject: Re: [meta-oe/denzil][PATCH 4/6] gcc-4.5: Match with OE-Core on building procedure for libgcc and gcc-runtime
+	Wed, 02 May 2012 07:08:52 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  2 May 2012 11:08:43 -0300
+Message-Id: <1335967723-11333-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe] systemd-systemctl-native: fixed systemctl wrapper's `disable' action
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 10:55:19 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 02 May 2012 14:18:38 -0000
 
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 
-Op 2 mei 2012, om 12:35 heeft Eric B=E9nard het volgende geschreven:
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../systemd/systemd-systemctl-native/systemctl     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-> Hi,
->=20
-> Le Wed, 2 May 2012 11:51:50 +0200,
-> Martin Jansa <martin.jansa@gmail.com> a =E9crit :
->=20
->> On Wed, May 02, 2012 at 11:45:30AM +0200, Koen Kooi wrote:
->>> From: Khem Raj <raj.khem@gmail.com>
->>=20
->> I'm not using gcc-4.5, but aren't those 3 patches only for master? As
->> gcc-4.7 and other gcc changes were in oe-core only after release =
-AFAIK.
->>=20
-> as I'm supposed to maintain meta-oe/denzil I would prefer that we keep =
-a
-> few days before pushing patches to this branch.
+diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+index c4a0a3f..6e7a05d 100755
+--- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
++++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
+@@ -68,8 +68,8 @@ for service in $services; do
+ 			ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+ 			echo "Enabled $service for $wanted_by."
+ 		else
+-			rm -f $ROOT/etc/systemd/system/$r.wants/$service_file
+-			rmdirs -p $ROOT/etc/systemd/system/$r.wants
++			rm -f $ROOT/etc/systemd/system/$r.wants/$service
++			rmdir --ignore-fail-on-non-empty -p $ROOT/etc/systemd/system/$r.wants
+ 			echo "Disabled $service for $wanted_by."
+ 		fi
+ 	done
+-- 
+1.7.2.5
 
-The OE-classic release branches usually had rules like "wait at least 24 =
-hours between post and push", so your idea makes a lot of sense.
-
-regards,
-
-Koen=
 
 
