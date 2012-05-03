@@ -1,38 +1,41 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SPqwC-0002yq-Mw for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 09:58:56 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SPqmm-0000FS-Ha for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 09:49:12 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 09:49:12 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martiert@gmail.com>) id 1SPr0u-0003UR-PA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 03 May 2012 10:03:48 +0200
+Received: by bkcjm2 with SMTP id jm2so1190584bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 09:49:12 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 03 May 2012 00:54:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type;
+	bh=grXQ83LP2t4/lGS89fLnjH8VQY9OZFTJxkgmxIELOIY=;
+	b=PYJot3TZNQ6Dxf838Z3wroUxju2O2sUMzEsSNmsiFoBpYA7OYQZSlPEIPvMQSSztRl
+	hVNRy4a79ZUC2AbhWVLamJ8LHhRdjlJmmxTvd47EzqwbIFMg2sX86e4MY1w5Y+8VtGL4
+	kKfecxyuAkqS4CFvqwAGccN6kJCIFrLC1a8ph+OrYNXYCV57DCKsOgJvz2LaJ5aZ5PZG
+	fA1gkO+Kpgy0e4EpH3HVnF7aRdFNSYqQJBSfRfqjUxgKjCO8b/CxBiyfbsKOHnde7TsC
+	5Z7byt8Iw8sM4tZmLxAv9DWR6Ug7W9iRNbD4Os7F79c9ATPevgYqeAGGYg/Aok385AXY
+	y7Hg==
+Received: by 10.204.145.79 with SMTP id c15mr391212bkv.60.1336031643599;
+	Thu, 03 May 2012 00:54:03 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id v2sm8330970bkw.16.2012.05.03.00.54.01
+	(version=SSLv3 cipher=OTHER); Thu, 03 May 2012 00:54:02 -0700 (PDT)
+Message-ID: <4FA23915.6040604@gmail.com>
+Date: Thu, 03 May 2012 09:51:49 +0200
+From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 03 May 2012 09:48:57 +0200
-Message-ID: <jntd9a$pip$1@dough.gmane.org>
 References: <4F9A932F.1020400@gmail.com>
 	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
 	<4F9F8630.3070901@gmail.com>
 	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
 	<4FA0FFD5.6080201@gmail.com> <4FA1A1C8.3030705@gmail.com>
-	<4FA22A58.3040100@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <4FA22A58.3040100@gmail.com>
-X-Enigmail-Version: 1.4
+	<4FA22A58.3040100@gmail.com> <jntd9a$pip$1@dough.gmane.org>
+In-Reply-To: <jntd9a$pip$1@dough.gmane.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Openembedded and ld-linux-armhf.so.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,55 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 07:58:56 -0000
+X-List-Received-Date: Thu, 03 May 2012 08:03:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 05/03/12 09:48, Koen Kooi wrote:
+> Op 03-05-12 08:48, Martin Ertsås schreef:
+> > On 05/02/12 23:06, Khem Raj wrote:
+> >> On 05/02/2012 02:35 AM, Martin Ertsås wrote:
+> >>> The patches posted seems to be working fine. I at least didn't have
+> >>> any problems with them.
+> >>
+> >>
+> >> thanks for trying them out. GCC patch is final but eglibc patch I still
+> >> got to improve that its not final version yet.
+>
+> > No problem. Is there also plans for renaming the toolchains created to
+> > arm-none-linux-gnueabihf when using hardfloats?
+>
+> What's the point in that? Renaming the toolchain won't grant it magical
+> powers and setting a targetvendor is perfectly valid.
+>
+> I've seen too many presentations this year at ELC and Collab where someone
+> says "renaming the toolchain fixed it" when they actually mean "using a
+> bare-metal toolchain for userspace doesn't really work".
+> Just look at the building the kernel with LLVM talk, a third of Marks
+> presentation was about challenges with calling the right toolchain
+> with the
+> right arguments.
+>
+> </rant>
 
-Op 03-05-12 08:48, Martin Ertsås schreef:
-> On 05/02/12 23:06, Khem Raj wrote:
->> On 05/02/2012 02:35 AM, Martin Ertsås wrote:
->>> The patches posted seems to be working fine. I at least didn't have 
->>> any problems with them.
->> 
->> 
->> thanks for trying them out. GCC patch is final but eglibc patch I still
->> got to improve that its not final version yet.
-> 
-> No problem. Is there also plans for renaming the toolchains created to 
-> arm-none-linux-gnueabihf when using hardfloats?
+Fair point, I was just told that some packages might look at the name of
+the toolchain, and perhaps not give the optimal path for hard floats
+with the name of linux-gnueabi. Clearly some packages do actually look
+at the name of the toolchain, but for most cases at least, the only
+difference will be the hardfloat flag given to the compiler. Also seen
+quite a few toolchains using hardfloats which has the hf prefix, to show
+that this is actually a hardfloat toolchain.
 
-What's the point in that? Renaming the toolchain won't grant it magical
-powers and setting a targetvendor is perfectly valid.
-
-I've seen too many presentations this year at ELC and Collab where someone
-says "renaming the toolchain fixed it" when they actually mean "using a
-bare-metal toolchain for userspace doesn't really work".
-Just look at the building the kernel with LLVM talk, a third of Marks
-presentation was about challenges with calling the right toolchain with the
-right arguments.
-
-</rant>
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPojhnAAoJEHZqAkdh1vT63s0P/2yoPsNlXRcLHGfeH7SCtEHP
-2fxZMUmxRzZjPF/rwqWCBwyHEseGtL15AfetHK2Ylvi+Pzw0Z+d5GpNlzwj4pBNo
-JguZ6+4xo6Kd0mKxk9PN99ebcPYsQo23Hqs6Bpk6roYJNoBtmqUusZ/M0VoS+k/E
-7KwUwYUjL1mONDpKWjPkuC2apkjjI/XQ/a9r0RlQ8qzKaMJDg8rJkRFV8Yzzrlxu
-0DRjs+EyTjM/VUGXTxdnjsQwV4lbZC0bw9rZhISsXwG5JFEJVjkZ9pMMexqkAX7C
-pE6YBWxAZ8g3ZAWd9AVwne4xR99xCPtYyqVr3smeEi+mxu+SLkZFaZvyFLhHsaBj
-uRM9sKinrnnUdpWxCZ4qoNJ4j0h2tT7/wqBXsNyK5+0XmfJba58ZfyY2t8xSi4qn
-d89gQ/iYTHCDpW+7Rogp5WNzhS2Y8a+ecvbP1zQHZitEfaA4TXUxB1x9hsqWVuT8
-2RbVAIMgytCrj9sshdlAaWkFReF7CKSp7zMwn3FLCKFPLSsS7P260MQRWqpGJXjS
-yPTaFgFeWBRbSOMtg8l2LP5gDVuyg1BrdmiRVycX/gOgj4ZTfMPOooyAWttVMj95
-4cZO1yiCU4de8Fd2+8QW4KrUJhnKcI+pHZn0pP4qHMuKUoh+o0dbCz/O7OCK9now
-VqIPweynKVrQ5SF8ZhYa
-=F3G4
------END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
