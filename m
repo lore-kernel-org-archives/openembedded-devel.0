@@ -1,36 +1,36 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SPwFE-0003za-0U
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 15:38:56 +0200
-Received: by bkcjm2 with SMTP id jm2so1472131bkc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SPwGE-00047V-Sg for openembedded-devel@lists.openembedded.org;
+	Thu, 03 May 2012 15:39:59 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SPw6o-0007JI-Lz for openembedded-devel@lists.openembedded.org;
+	Thu, 03 May 2012 15:30:14 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 May 2012 15:30:14 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 06:29:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=SUMFer32cwX48nLSR0ZuoFX1/itErBrprk5M9ixIh+s=;
-	b=u5P/SglBmZQB/EGfqkiy8JMzmBOb1m8o77WtgVA/mTR8S2psGvK+s+ETE2Q3OWirLH
-	Bzfkqpj+NGH3+jhqsAsrCmJ6fzKITLa8PCWnog5vnejWHttxA8foKTcUoLCW3JeQpnhm
-	8hKLrWhe4ikBIAHi8LBO4GXN+3I2NyiKrslKcR1jDs5ZD4fukKHrJ+I0uUMozDy4fP+p
-	+lrelmR5HYsSSeEvByMIi+YihJ0KcdK8W7JSW30ulFNvfSmgZ5Ji4hz9uHJ2A97IHTGA
-	D52A8URbe68Q4NZO+OIDTyqMkV3AWVDpPEFbXPgyzXl8VFhRSeXJmOuGqUjui6DmSOrL
-	3g7g==
-Received: by 10.204.152.13 with SMTP id e13mr786844bkw.46.1336051750648;
-	Thu, 03 May 2012 06:29:10 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z17sm10600686bkw.12.2012.05.03.06.29.08
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 May 2012 06:29:09 -0700 (PDT)
-Date: Thu, 3 May 2012 15:29:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 03 May 2012 15:30:14 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120503132911.GA14648@jama.jama.net>
-References: <4FA287CB.6040503@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <4FA287CB.6040503@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: how to rebuild packages
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 03 May 2012 15:30:03 +0200
+Message-ID: <jnu18r$n5e$1@dough.gmane.org>
+References: <4FA26C26.7080105@nedap.com>
+	<CACW_hTb3huecpjkFWmm1zXAij-_hx+NBXfrA0ou6DvafGTWtEw@mail.gmail.com>
+	<4FA27A3F.60500@nedap.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:8.0) Gecko/20111105 Thunderbird/8.0
+In-Reply-To: <4FA27A3F.60500@nedap.com>
+X-Enigmail-Version: 1.3.4
+Subject: Re: upgrading from oe-classic to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 13:38:56 -0000
-X-Groupsio-MsgNum: 38563
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AqsLC8rIMeq19msA"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 May 2012 13:39:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---AqsLC8rIMeq19msA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, May 03, 2012 at 03:27:39PM +0200, Jaap de Jong wrote:
-> Probably a total stupid question...
->=20
-> In oe-classic I used to use
->=20
->      bitbake -c clean packageX
->      bitbake packageX
->=20
-> This does not seem to work on oe-core.
-> Even removing the directory=20
-> build/tmp-angstrom_2010_x-eglibc/work/armv5te-angstrom-linux-gnueabi/pack=
-ageX*
-> does not help...
-> What is the way to do this?
+Op 03-05-12 14:29, Jaap de Jong schreef:
+> 
+> 
+> On 05/03/2012 01:40 PM, Frans Meulenbroeks wrote:
+>> Op 3 mei 2012 13:29 heeft Jaap de Jong<jaap.dejong@nedap.com>  het 
+>> volgende geschreven:
+>>> Hi All, If I have devices running on oe-classic and I want to upgrade
+>>> them to oe-core, will the upgrade be without worries? It will
+>>> probably download all packages? Or do I have to takes special steps?
+>> Depends on the devices and how well they are supported in yocto (e.g. 
+>> is there a bsp for them) And on the actual packages you want to have on
+>> your device.
+>> 
+>> If you have some recipes of your own, you definitely will have some 
+>> work upgrading these.
+>> 
+> That part is clear! And I'm working on that right now.
+> 
+> What I ment is: I have these devices with all those packages on them
+> build with oe-classic. I would really like to have an idea what will
+> happen when I do a 'opkg update ; opkg upgrade' on them. Anyone done
+> that?
 
--c cleansstate
-
-> Thanks,
-> Jaap
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---AqsLC8rIMeq19msA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+It won't work, various packages have been renamed, combined or split up. Not
+to mention that the toolchains are vastly different.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAk+iiCcACgkQN1Ujt2V2gBxsaQCfdJTBMdV6h2B4xXCUSjXWseRv
-U7YAniRZaFKBdYY25OiyYskuAQ3MKOiK
-=44uo
+iD8DBQFPoohbMkyGM64RGpERAvwaAJ9AbIIQLNmptpY6zCk7LcqKctebdwCeJydH
+x9SAtsiTqH4kU3jwoqY/xRg=
+=OW43
 -----END PGP SIGNATURE-----
 
---AqsLC8rIMeq19msA--
+
+
