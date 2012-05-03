@@ -1,42 +1,30 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SPr0u-0003UR-PA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1SPr8Q-0003ed-BH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 10:03:48 +0200
-Received: by bkcjm2 with SMTP id jm2so1190584bkc.6
+	Thu, 03 May 2012 10:11:34 +0200
+Received: by pbbrq2 with SMTP id rq2so1855098pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 00:54:03 -0700 (PDT)
+	Thu, 03 May 2012 01:01:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	bh=grXQ83LP2t4/lGS89fLnjH8VQY9OZFTJxkgmxIELOIY=;
-	b=PYJot3TZNQ6Dxf838Z3wroUxju2O2sUMzEsSNmsiFoBpYA7OYQZSlPEIPvMQSSztRl
-	hVNRy4a79ZUC2AbhWVLamJ8LHhRdjlJmmxTvd47EzqwbIFMg2sX86e4MY1w5Y+8VtGL4
-	kKfecxyuAkqS4CFvqwAGccN6kJCIFrLC1a8ph+OrYNXYCV57DCKsOgJvz2LaJ5aZ5PZG
-	fA1gkO+Kpgy0e4EpH3HVnF7aRdFNSYqQJBSfRfqjUxgKjCO8b/CxBiyfbsKOHnde7TsC
-	5Z7byt8Iw8sM4tZmLxAv9DWR6Ug7W9iRNbD4Os7F79c9ATPevgYqeAGGYg/Aok385AXY
-	y7Hg==
-Received: by 10.204.145.79 with SMTP id c15mr391212bkv.60.1336031643599;
-	Thu, 03 May 2012 00:54:03 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id v2sm8330970bkw.16.2012.05.03.00.54.01
-	(version=SSLv3 cipher=OTHER); Thu, 03 May 2012 00:54:02 -0700 (PDT)
-Message-ID: <4FA23915.6040604@gmail.com>
-Date: Thu, 03 May 2012 09:51:49 +0200
-From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120326 Thunderbird/10.0.3
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=LJnKcXGVow7ZYUK0OdQz+ER2lRgayTZVY9UAJJaU8+o=;
+	b=WfWyqa1TrKsxm5yIqoV3iUbdqsFJhVChiEcB+6TukxdWITLihsH6sdwp7OsBFUpwGw
+	nxEw3NOFK9yXnbE0K4JgweLgBWkCCsSJRMpuJOq+Y4aXsCsCwywTuPnAmMDYS4xG0uAD
+	wRV1dkeoye2nNR8in3WTI1WYsGkp3x4eLsSXFLjzmUfKnL7norUWOEHN2ysbCsz3fznj
+	2VYeDKwHYOiCxcunWkAKraKFX2W1C8IvhEY53ovwgoWP2baBl5XI3Sop+IlVGmAUnYW3
+	p8KdMMcPhS4tldE51wRU6tj88ckoZw3+tuafaRPvqXyf7sxu8S6mXwzqfML8oCbEpVFE
+	VDbQ==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F9A932F.1020400@gmail.com>
-	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
-	<4F9F8630.3070901@gmail.com>
-	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-	<4FA0FFD5.6080201@gmail.com> <4FA1A1C8.3030705@gmail.com>
-	<4FA22A58.3040100@gmail.com> <jntd9a$pip$1@dough.gmane.org>
-In-Reply-To: <jntd9a$pip$1@dough.gmane.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Openembedded and ld-linux-armhf.so.3
+Received: by 10.68.242.193 with SMTP id ws1mr4221930pbc.10.1336032108235; Thu,
+	03 May 2012 01:01:48 -0700 (PDT)
+Received: by 10.68.48.164 with HTTP; Thu, 3 May 2012 01:01:48 -0700 (PDT)
+Date: Thu, 3 May 2012 10:01:48 +0200
+Message-ID: <CACW_hTb5BO+mS07Xnd534N5V-ETtwrXc=NNo67kxcemQPGuJog@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: yocto@yoctoproject.org, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: yocto 1.2: 2nd experiences: image building problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,51 +38,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 08:03:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 03 May 2012 08:11:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 05/03/12 09:48, Koen Kooi wrote:
-> Op 03-05-12 08:48, Martin Ertsås schreef:
-> > On 05/02/12 23:06, Khem Raj wrote:
-> >> On 05/02/2012 02:35 AM, Martin Ertsås wrote:
-> >>> The patches posted seems to be working fine. I at least didn't have
-> >>> any problems with them.
-> >>
-> >>
-> >> thanks for trying them out. GCC patch is final but eglibc patch I still
-> >> got to improve that its not final version yet.
->
-> > No problem. Is there also plans for renaming the toolchains created to
-> > arm-none-linux-gnueabihf when using hardfloats?
->
-> What's the point in that? Renaming the toolchain won't grant it magical
-> powers and setting a targetvendor is perfectly valid.
->
-> I've seen too many presentations this year at ELC and Collab where someone
-> says "renaming the toolchain fixed it" when they actually mean "using a
-> bare-metal toolchain for userspace doesn't really work".
-> Just look at the building the kernel with LLVM talk, a third of Marks
-> presentation was about challenges with calling the right toolchain
-> with the
-> right arguments.
->
-> </rant>
+Dear all,
 
-Fair point, I was just told that some packages might look at the name of
-the toolchain, and perhaps not give the optimal path for hard floats
-with the name of linux-gnueabi. Clearly some packages do actually look
-at the name of the toolchain, but for most cases at least, the only
-difference will be the hardfloat flag given to the compiler. Also seen
-quite a few toolchains using hardfloats which has the hf prefix, to show
-that this is actually a hardfloat toolchain.
+I'm migrating a project from oe-classic to yocto 1.2.
+This goes fairly smoothly. Got some warnings I reported before.
 
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+If I build my app it runs fine (with the uclibc from oe-classic that
+is already on the board).
+Next step was to try to build a complete image.
 
+There I encountered two issues.
+The first one was that my image recipe had a few SRC_URI += lines.
+This to get the static device table I am using and two files I needed
+in my IMAGE_POSTPRCESS_COMMAND.
+However yocto immediately goes into do_rootfs, and does not have a
+fetch/unpack step (as oe-classic used to have).
+
+I have worked around this by adding
+
+python do_get_src () {
+    bb.build.exec_func('base_do_fetch', d)
+    bb.build.exec_func('base_do_unpack', d)
+}
+addtask do_get_src before do_rootfs
+
+to my image recipe. I think it would be nice to have this
+automatically done if a non-empty SRC_URI is found (but unfortunately
+I am not enough of a python wiz to provide a patch).
+Anyway that kept me moving.
+
+The second issue is probably lib related. As I need a small footprint
+(not too much storage available) my project uses uclibc.
+When building the image I get some 15 or so of these:
+| 	rtld(GNU_HASH) is needed by busybox-1.19.4-r6.ppce300c3
+| 	rtld(GNU_HASH) is needed by i2c-tools-3.0.3-r0.ppce300c3
+| 	rtld(GNU_HASH) is needed by libz1-1.2.6-r1.ppce300c3
+...
+
+I noticed that eglibc has this:
+meta/recipes-core/eglibc/eglibc-package.inc:RPROVIDES_${PN} =
+"glibc${PKGSUFFIX} rtld(GNU_HASH)"
+
+but I did not find a similar RPROVIDES for uclibc.
+Not sure whether it is missing there, or whether the dependencies for
+the packages like busybox and libz1 are wrong.
+Anyone any advice ?
+
+Thanks, Frans
 
 
