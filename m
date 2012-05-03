@@ -1,41 +1,26 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gizero@gmail.com>) id 1SPylZ-0000ww-AP
+	(envelope-from <sgw@linux.intel.com>) id 1SQ0jK-0002iu-BX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 18:20:29 +0200
-Received: by wibhm17 with SMTP id hm17so464038wib.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 09:10:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=references:in-reply-to:mime-version:content-transfer-encoding
-	:content-type:message-id:cc:x-mailer:from:subject:date:to;
-	bh=C5aBBYiYvBvMrnFNMvqZ7LQ2c6+8OQTCZz/tSJNbPwE=;
-	b=Y7WsvZ2/K1xwNm1HYFZOHU03wnWtCDXPiM7iGwd4I3tCXACO414pwuLAXgo22CmT0r
-	VIdoWHRoQKeucYe0o/MUD/6JoT4yKStgwEfgUYTsvW4IFG565K/WUjSoSXRXuHW502GH
-	jX2vzqeUXogjqA/Iak4I1+d3OKK42D+ttETNnmGleSOaHllK1rkeI1SlM1MScNs8UUxz
-	5xqMV9P0F/tnstnupr6cadhGfnzNon/F8lQfdphU4vj9qWrxC2odFMI0ykEgjyld2R8N
-	JWrb8p+MVa61rzGHdWCsE0RanJoIfd3m0hA3uaMzFynEnLIZzqcbaAb4qy7gxN7E1cWs
-	81mg==
-Received: by 10.180.105.69 with SMTP id gk5mr5386523wib.3.1336061443680;
-	Thu, 03 May 2012 09:10:43 -0700 (PDT)
-Received: from [151.37.171.129] (adsl-129-171.37-151.net24.it.
-	[151.37.171.129])
-	by mx.google.com with ESMTPS id j3sm4562172wiw.1.2012.05.03.09.10.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 May 2012 09:10:41 -0700 (PDT)
-References: <CAC+thW1MhdQD9ofG1tyY7voJDPQXETvj2iFAgC9uNFDNUPJ6NA@mail.gmail.com>
-	<CAA5cW2w1pE6tZoZG6EL2AVRxQnKK14Cre4CMcXTQvvNjcJ4OCg@mail.gmail.com>
-In-Reply-To: <CAA5cW2w1pE6tZoZG6EL2AVRxQnKK14Cre4CMcXTQvvNjcJ4OCg@mail.gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <CD33EA34-A7BC-4E8E-8780-5695958D0260@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: iPhone Mail (9B176)
-From: Andrea Galbusera <gizero@gmail.com>
-Date: Thu, 3 May 2012 18:10:24 +0200
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: right directory for a recipe
+	Thu, 03 May 2012 20:26:22 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 03 May 2012 11:16:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="149027415"
+Received: from unknown (HELO [10.255.12.171]) ([10.255.12.171])
+	by fmsmga001.fm.intel.com with ESMTP; 03 May 2012 11:16:30 -0700
+Message-ID: <4FA2CB7E.7080600@linux.intel.com>
+Date: Thu, 03 May 2012 11:16:30 -0700
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:12.0) Gecko/20120424 Thunderbird/12.0
+MIME-Version: 1.0
+To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+References: <CACW_hTb5BO+mS07Xnd534N5V-ETtwrXc=NNo67kxcemQPGuJog@mail.gmail.com>
+In-Reply-To: <CACW_hTb5BO+mS07Xnd534N5V-ETtwrXc=NNo67kxcemQPGuJog@mail.gmail.com>
+Cc: yocto@yoctoproject.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [yocto] yocto 1.2: 2nd experiences: image building problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,42 +34,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 16:20:29 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Thu, 03 May 2012 18:26:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Rado,
+On 05/03/2012 01:01 AM, Frans Meulenbroeks wrote:
+> Dear all,
+>
+> I'm migrating a project from oe-classic to yocto 1.2.
+> This goes fairly smoothly. Got some warnings I reported before.
+>
+> If I build my app it runs fine (with the uclibc from oe-classic that
+> is already on the board).
+> Next step was to try to build a complete image.
+>
+> There I encountered two issues.
+> The first one was that my image recipe had a few SRC_URI += lines.
+> This to get the static device table I am using and two files I needed
+> in my IMAGE_POSTPRCESS_COMMAND.
+> However yocto immediately goes into do_rootfs, and does not have a
+> fetch/unpack step (as oe-classic used to have).
+>
+> I have worked around this by adding
+>
+> python do_get_src () {
+>      bb.build.exec_func('base_do_fetch', d)
+>      bb.build.exec_func('base_do_unpack', d)
+> }
+> addtask do_get_src before do_rootfs
+>
+> to my image recipe. I think it would be nice to have this
+> automatically done if a non-empty SRC_URI is found (but unfortunately
+> I am not enough of a python wiz to provide a patch).
+> Anyway that kept me moving.
+>
+Can you file a enhancement bug for the above issue.
 
-Il giorno 02/mag/2012, alle ore 22:06, Radoslav Kolev <radoslav@kolev.info> h=
-a scritto:
+> The second issue is probably lib related. As I need a small footprint
+> (not too much storage available) my project uses uclibc.
+> When building the image I get some 15 or so of these:
+> | 	rtld(GNU_HASH) is needed by busybox-1.19.4-r6.ppce300c3
+> | 	rtld(GNU_HASH) is needed by i2c-tools-3.0.3-r0.ppce300c3
+> | 	rtld(GNU_HASH) is needed by libz1-1.2.6-r1.ppce300c3
+> ...
+>
+> I noticed that eglibc has this:
+> meta/recipes-core/eglibc/eglibc-package.inc:RPROVIDES_${PN} =
+> "glibc${PKGSUFFIX} rtld(GNU_HASH)"
+>
+> but I did not find a similar RPROVIDES for uclibc.
+> Not sure whether it is missing there, or whether the dependencies for
+> the packages like busybox and libz1 are wrong.
+> Anyone any advice ?
+>
+Khem might be able to help with this maybe.
 
-> On Tue, May 1, 2012 at 10:10 PM, Andrea Galbusera <gizero@gmail.com> wrote=
-:
->> What would be the right directory to put libmodbus in? I understand
->> recipes-* names are somewhat self explanatory, but I'm still confused
->> if "recipes-extended", "recipes-support" or anything else is the best
->> choice.
->=20
-> Hi Andrea,
->=20
-> the others seem busy, and I don't have the answer to your question,
-> but here's my advice - go ahead and port the recipe. Pick the best
-> directory you think suits it and submit the patches. Even if then
-> another directory is recommended the move shouldn't be much work.
+Thanks
+	Sau!
 
-I'll certainly do as you suggest, as soon as I cleanup the new recipe. Just w=
-anted to ask before, to check if I was missing some policy here. I see you a=
-re the submitter of the original recipe in "classic": good to have you in th=
-e audience ;-)
-
->=20
-> Regards,
-> Rado
->=20
+> Thanks, Frans
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+>
+>
 
 
