@@ -1,44 +1,41 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SPwbS-0004xJ-OD
+	(envelope-from <gizero@gmail.com>) id 1SPylZ-0000ww-AP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 May 2012 16:01:54 +0200
-Received: by pbbrq2 with SMTP id rq2so2150535pbb.6
+	Thu, 03 May 2012 18:20:29 +0200
+Received: by wibhm17 with SMTP id hm17so464038wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 May 2012 06:52:08 -0700 (PDT)
+	Thu, 03 May 2012 09:10:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=tj6f2ZrkwXr5xCDaKHQEEj5GBuE7JxiGw9xMbTYy//4=;
-	b=ryctd4HvKbLb4NehjyZkyo4o3BkDeZ+0d4SRyuukOXU7X5FTSxkgm+TtX1wwzZGSvH
-	KEVqlOEWNVG/KlmP7Pvy3Q84dUXOQH6/CMDtWhADFcMtI+GVkeF+ANUkmzE6LbZw+RI3
-	5wj6e1iaOIdlxbNprCVa3RgkUkxVGqxpS32tX1HDwT1e/ZKLlnNmePCKeQe/NJ84Mbgx
-	PCvsLS5Ji8S3b07jyFQ6RKItRlu+s3n4kPHse4YJ+e+VoEV2AjofqN8uztxmp+MhDcLN
-	4WgAcqGRmznB0kjtdzCQyMbaNyvhx7G+7ybe6gYAcu/KvlilE/pFL/7y2TlouTjtu438
-	AIsg==
-Received: by 10.68.221.133 with SMTP id qe5mr8143164pbc.24.1336053128318;
-	Thu, 03 May 2012 06:52:08 -0700 (PDT)
-Received: from [172.23.4.147] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id nt8sm5382556pbb.12.2012.05.03.06.52.06
-	(version=SSLv3 cipher=OTHER); Thu, 03 May 2012 06:52:06 -0700 (PDT)
-Message-ID: <4FA28D83.90604@gmail.com>
-Date: Thu, 03 May 2012 06:52:03 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:11.0) Gecko/20120411 Thunderbird/11.0.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4F9A932F.1020400@gmail.com>
-	<CAMKF1sroFDS7vqn+DMRRjd368h=YsUX-ijMobhfddkvCp_uNyQ@mail.gmail.com>
-	<4F9F8630.3070901@gmail.com>
-	<CAMKF1spxTuL1b6yMN=N68tq=MLfJGT9jmgd6VzHmY+TwZvNLsA@mail.gmail.com>
-	<4FA0FFD5.6080201@gmail.com> <4FA1A1C8.3030705@gmail.com>
-	<4FA22A58.3040100@gmail.com> <jntd9a$pip$1@dough.gmane.org>
-	<4FA23915.6040604@gmail.com>
-In-Reply-To: <4FA23915.6040604@gmail.com>
-X-Enigmail-Version: 1.4.1
-Subject: Re: Openembedded and ld-linux-armhf.so.3
+	h=references:in-reply-to:mime-version:content-transfer-encoding
+	:content-type:message-id:cc:x-mailer:from:subject:date:to;
+	bh=C5aBBYiYvBvMrnFNMvqZ7LQ2c6+8OQTCZz/tSJNbPwE=;
+	b=Y7WsvZ2/K1xwNm1HYFZOHU03wnWtCDXPiM7iGwd4I3tCXACO414pwuLAXgo22CmT0r
+	VIdoWHRoQKeucYe0o/MUD/6JoT4yKStgwEfgUYTsvW4IFG565K/WUjSoSXRXuHW502GH
+	jX2vzqeUXogjqA/Iak4I1+d3OKK42D+ttETNnmGleSOaHllK1rkeI1SlM1MScNs8UUxz
+	5xqMV9P0F/tnstnupr6cadhGfnzNon/F8lQfdphU4vj9qWrxC2odFMI0ykEgjyld2R8N
+	JWrb8p+MVa61rzGHdWCsE0RanJoIfd3m0hA3uaMzFynEnLIZzqcbaAb4qy7gxN7E1cWs
+	81mg==
+Received: by 10.180.105.69 with SMTP id gk5mr5386523wib.3.1336061443680;
+	Thu, 03 May 2012 09:10:43 -0700 (PDT)
+Received: from [151.37.171.129] (adsl-129-171.37-151.net24.it.
+	[151.37.171.129])
+	by mx.google.com with ESMTPS id j3sm4562172wiw.1.2012.05.03.09.10.40
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 03 May 2012 09:10:41 -0700 (PDT)
+References: <CAC+thW1MhdQD9ofG1tyY7voJDPQXETvj2iFAgC9uNFDNUPJ6NA@mail.gmail.com>
+	<CAA5cW2w1pE6tZoZG6EL2AVRxQnKK14Cre4CMcXTQvvNjcJ4OCg@mail.gmail.com>
+In-Reply-To: <CAA5cW2w1pE6tZoZG6EL2AVRxQnKK14Cre4CMcXTQvvNjcJ4OCg@mail.gmail.com>
+Mime-Version: 1.0 (1.0)
+Message-Id: <CD33EA34-A7BC-4E8E-8780-5695958D0260@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: iPhone Mail (9B176)
+From: Andrea Galbusera <gizero@gmail.com>
+Date: Thu, 3 May 2012 18:10:24 +0200
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: right directory for a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,33 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 14:01:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 03 May 2012 16:20:29 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Rado,
 
-On 05/03/2012 12:51 AM, Martin Ertsås wrote:
-> Fair point, I was just told that some packages might look at the
-> name of the toolchain, and perhaps not give the optimal path for
-> hard floats with the name of linux-gnueabi. Clearly some packages
-> do actually look at the name of the toolchain, but for most cases
-> at least, the only difference will be the hardfloat flag given to
-> the compiler. Also seen quite a few toolchains using hardfloats
-> which has the hf prefix, to show that this is actually a hardfloat
-> toolchain.
+Il giorno 02/mag/2012, alle ore 22:06, Radoslav Kolev <radoslav@kolev.info> h=
+a scritto:
 
-some distros may rely on triplet and if it makes into gcc and gcc
-starts relying on it we will have to reconsider but at present I dont
-see a need to change triplet
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+> On Tue, May 1, 2012 at 10:10 PM, Andrea Galbusera <gizero@gmail.com> wrote=
+:
+>> What would be the right directory to put libmodbus in? I understand
+>> recipes-* names are somewhat self explanatory, but I'm still confused
+>> if "recipes-extended", "recipes-support" or anything else is the best
+>> choice.
+>=20
+> Hi Andrea,
+>=20
+> the others seem busy, and I don't have the answer to your question,
+> but here's my advice - go ahead and port the recipe. Pick the best
+> directory you think suits it and submit the patches. Even if then
+> another directory is recommended the move shouldn't be much work.
 
-iEYEARECAAYFAk+ijYMACgkQuwUzVZGdMxQoGACfSjsIVwB+uPW/cDbtUbQR87oC
-r/gAniC35ygSHDUIe0O1urrsO/w+gcEl
-=ZLo8
------END PGP SIGNATURE-----
+I'll certainly do as you suggest, as soon as I cleanup the new recipe. Just w=
+anted to ask before, to check if I was missing some policy here. I see you a=
+re the submitter of the original recipe in "classic": good to have you in th=
+e audience ;-)
+
+>=20
+> Regards,
+> Rado
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
