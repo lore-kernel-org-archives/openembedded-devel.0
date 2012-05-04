@@ -1,39 +1,33 @@
-Received: from mail-gh0-f175.google.com ([209.85.160.175]
-	helo=mail-gy0-f175.google.com)
+Received: from mail-wg0-f46.google.com ([74.125.82.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SQOjO-0007B4-Jm
+	(envelope-from <gizero@gmail.com>) id 1SQQCM-0000LI-6F
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 May 2012 22:03:58 +0200
-Received: by ghbz2 with SMTP id z2so3254697ghb.6
+	Fri, 04 May 2012 23:37:58 +0200
+Received: by wgbdq10 with SMTP id dq10so2810879wgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 May 2012 12:54:11 -0700 (PDT)
+	Fri, 04 May 2012 14:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=/PXQRRwI23hnfbwdAfuOwkw0R9BTPS96D9wbLe8KP9o=;
-	b=IW8Rwix3MJSY6YeOxLd/AXBtn4aJaiVq/pDvU0eFsiWfR1jP5VLK/TflrBqP3FDjYo
-	YhUhz/N0vMW8tjMDjZC7a6AamNdwnlZxV8ZjKfFue6PHsegXpGqrS2dDkxqWCB83+kFh
-	7n1B2WcNgerGnv5hIJqm75ic9SZ7xYPp3tyfVqkvzjO3Ab7YOtVwnrxGzUAnstJqBLtZ
-	53Wz4WWgauEDDclvnJVsA/JWa7sbOluE4sKzKDnkVPtjNRhXSicrBoHtOvycKNXHYjvE
-	xKYaLo4pufEqVV6DzDFMhnppvx8XoqZunw4hspz1mTVcZ+QiJpBEtsFw+9d/SYGh5LBv
-	WLQQ==
-Received: by 10.60.0.201 with SMTP id 9mr10111457oeg.59.1336161251163;
-	Fri, 04 May 2012 12:54:11 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id j10sm9987188oba.4.2012.05.04.12.54.09
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=8tjBdfyY6m9XGj5FS/pqLgUs2W/cvoHiDY8Rr6RKjB4=;
+	b=THrb4UgOekBTDIvvxOKLQvu2enyS0kbQjDdi2FSuEwymdeUBsxKMX5ZSQl/NWuZiAW
+	Tf+Ii/gSTcggDd8RYoVl4EKvOZo1XU7dvFecSxt41l65Kp5SH+LXV2c07yfp4y8zX3T+
+	zLD+NwrC5TMCIx0UFfhaMGGFxCHUmpWRYntvriGAwAyLChfqDYt5gh5HlrbmyhIcshhz
+	IKxtII00F1rj4cRLK1D5q0ToX8Ld0dkz7rfwbo8raeMtaVRu9QboT4ybGkGJK+1MhuWg
+	PCwCANQ5X3MGelHNd4yh37no81032FLmPpCfsezOfMb7d/ptUV+s08ShytxyHdgQeadD
+	Jy0A==
+Received: by 10.180.88.233 with SMTP id bj9mr1063094wib.1.1336166890950;
+	Fri, 04 May 2012 14:28:10 -0700 (PDT)
+Received: from localhost.localdomain
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
+	by mx.google.com with ESMTPS id f19sm702406wiw.11.2012.05.04.14.28.09
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 May 2012 12:54:09 -0700 (PDT)
-Date: Fri, 4 May 2012 12:54:13 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20120504195413.GA13779@bill-the-cat>
-References: <cover.1336052839.git.sledz@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <cover.1336052839.git.sledz@dresearch-fe.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/1] pull request 20120503
+	Fri, 04 May 2012 14:28:09 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 May 2012 23:25:08 +0200
+Message-Id: <1336166708-14019-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [PATCH] libmodbus: ported recipe from classic and updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,55 +41,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2012 20:03:58 -0000
-X-Groupsio-MsgNum: 38575
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RnlQjJ0d97Da+TV1"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 04 May 2012 21:37:58 -0000
 
---RnlQjJ0d97Da+TV1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* based on recipe by Radoslav Kolev which was in classic
+* updated to latest released version 3.0.2
+* also provide an _git version with up-to-date SRCREV and
+DEFAULT_PREFERENCE = "-1"
+* common part factorized as libmodbus.inc
 
-On Thu, May 03, 2012 at 03:51:38PM +0200, Steffen Sledz wrote:
-> Hi Tom,
->=20
-> please pull this commit into 2011.03-maintenance branch.
-> It fixes a build problem with icedtea6-native and newer glibc versions.
-> The fix is well tested in our own environment.
->=20
-> Thx,
-> Steffen
->=20
-> The following changes since commit 21613e405cad072feef779c8e9b374a2f09841=
-58:
->=20
->   docbook-utils-native: fix syntax problem in jw.in (2012-04-04 12:06:08 =
-+0200)
->=20
-> are available in the git repository at:
->   git://github.com/sledz/oe pull-request-1
->   https://github.com/sledz/oe/tree/pull-request-1
->=20
-> Steffen Sledz (1):
->   icedtea6-native-1.7.10: backport S7103224
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+---
+ meta-oe/recipes-extended/libmodbus/libmodbus.inc   |   13 +++++++++++++
+ .../recipes-extended/libmodbus/libmodbus_3.0.2.bb  |    8 ++++++++
+ .../recipes-extended/libmodbus/libmodbus_git.bb    |   13 +++++++++++++
+ 3 files changed, 34 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus.inc
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_git.bb
 
-Applied, thanks!
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus.inc b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+new file mode 100644
+index 0000000..8e0e011
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+@@ -0,0 +1,13 @@
++SUMMARY = "A Modbus library"
++DESCRIPTION = "libmodbus is a C library designed to provide a fast and robust \
++implementation of the Modbus protocol. It runs on Linux, Mac OS X, FreeBSD, \
++QNX and Windows."
++HOMEPAGE = "http://www.libmodbus.org/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
++
++INC_PR = "r0"
++
++inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+new file mode 100644
+index 0000000..7a99f72
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+@@ -0,0 +1,8 @@
++require libmodbus.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI = "http://github.com/downloads/stephane/libmodbus/libmodbus-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "1aaacce9d9779d3a84f7d1a75774c943"
++SRC_URI[sha256sum] = "927ec90e0e299a7d4ec7086b1e2590566bdfc3bbc22e12204229361c029f2615"
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_git.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_git.bb
+new file mode 100644
+index 0000000..793a9d6
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_git.bb
+@@ -0,0 +1,13 @@
++require libmodbus.inc
++
++SRCREV = "23dd803f3f2b7be668408fa938e8d665249b4fba"
++
++PV = "3.0.2+gitr${SRCPV}"
++
++PR = "${INC_PR}.0"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=git"
++S = "${WORKDIR}/git"
++
+-- 
+1.7.5.4
 
---=20
-Tom
 
---RnlQjJ0d97Da+TV1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk+kM+UACgkQdZngf2G4WwP2HwCfajwrFZsm8DngY+C1QxsoiCNZ
-jsIAnRy62mC93Om4TUduxHTqrthLxpYm
-=7Uen
------END PGP SIGNATURE-----
-
---RnlQjJ0d97Da+TV1--
