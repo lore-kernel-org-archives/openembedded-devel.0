@@ -1,35 +1,36 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SQDQF-00058H-JC
+	(envelope-from <martin.jansa@gmail.com>) id 1SQDdk-0005sO-QJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 May 2012 09:59:27 +0200
-Received: by wibhj13 with SMTP id hj13so951137wib.6
+	Fri, 04 May 2012 10:13:24 +0200
+Received: by bkcjm2 with SMTP id jm2so2164246bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 May 2012 00:49:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=IV05cn+qsrA4gCvnxwP+0yBQW4ACqUUMkZsJFJwmOdU=;
-	b=kSNcc7Dw33OHM7JQxifNbDOSkiC/seAEk/SfBjB/xgLW0pR8wb90/A89qTVQK8Eg82
-	T5IJahG58ugUFtp7inzKPuQyC8oJStmNuHuHVXrz60k/cdRUWPqdMCsU7emnoWwfL7b1
-	IQRbmtnxB8GjsmYc/E/qM5RMf2hmjByKUxCIPLW+LK4EtMs/Q1XjwjR5qGWK1F4t3Uks
-	qI/hu0DFjNWWvgPEly42wXYmBR3vb2dZfgfX8up5jSaIdk1VRi0xncoagjsFo9OCKeqo
-	aCuC/QOFBMt6w01juGtqNTxe7m/8Cdem/5dvYdU0P5Nr6H4W5iyFSZ/YE9dw0NCiz+L6
-	qoQQ==
-Received: by 10.180.96.228 with SMTP id dv4mr10371469wib.14.1336117781097;
-	Fri, 04 May 2012 00:49:41 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gg2sm12425470wib.7.2012.05.04.00.49.39
+	Fri, 04 May 2012 01:03:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=R2NBGvbwfk6Yd9hYcUf7pyq471/YxsTdhBcgofaK4oY=;
+	b=uQ+tCKLWI0pbJEYvJAZYGFxWkbw6d5Jgowif/Gb4qoTe2ZWtdG1f9iHW7P/9XIkZT+
+	BD274esD5aSR20ZCzNpEa2xUnsHQy3nyjmmws/dEkgj0vyD9IxLsA+NYW4tAaB1hru5t
+	aid3RxK2bfspKuNN05D4r+bLtQ4WTUM+/3DhuNkMmQDJnwwOj/2AxQajZ4iDONy1Yq8M
+	1AemvjcrYMd3l+Dglmaet5Hpkx7PdfaiOIwa86AnP7LlJyPbo9zPWH+qjYIV+kQhQ7rp
+	9E3Jcgc0WS64dAtDZEktwkczpf9oUaJg+k7/7QtGwa/ioN9EBzuViZRPrfpX5/QYNy7P
+	Vv2A==
+Received: by 10.204.150.92 with SMTP id x28mr1786006bkv.61.1336118618394;
+	Fri, 04 May 2012 01:03:38 -0700 (PDT)
+Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
+	zx16sm15096829bkb.13.2012.05.04.01.03.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 May 2012 00:49:40 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Fri, 04 May 2012 01:03:37 -0700 (PDT)
+Date: Fri, 4 May 2012 10:03:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 May 2012 09:49:35 +0200
-Message-Id: <1336117775-20242-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQnXbML1S7YHIKdkcavGj1Va/L3z/7fv8dT8bUSGXp7ox2X28udPVrhG9/P0mO2yYDSnX7i9
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] xinput-calibrator 0.7.5: add xterm to RDEPENDS, the menu item doesn't work without it
+Message-ID: <20120504080307.GE3163@jama.jama.net>
+References: <1336117775-20242-1-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1336117775-20242-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] xinput-calibrator 0.7.5: add xterm to RDEPENDS, the menu item doesn't work without it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2012 07:59:27 -0000
+X-List-Received-Date: Fri, 04 May 2012 08:13:24 -0000
+X-Groupsio-MsgNum: 38572
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="U3BNvdZEnlJXqmh+"
+Content-Disposition: inline
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb  |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--U3BNvdZEnlJXqmh+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-index a50a0cf..765dcf2 100644
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-+++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT-X"
- LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
- DEPENDS = "virtual/libx11 libxi"
- 
--PR = "r5"
-+PR = "r6"
- 
- inherit autotools systemd
- 
-@@ -33,5 +33,5 @@ SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE = "${PN}.service"
- 
- FILES_${PN} += "${sysconfdir}/xdg/autostart"
--RDEPENDS_${PN} = "xinput"
-+RDEPENDS_${PN} = "xinput xterm"
- RRECOMMENDS_${PN} = "pointercal-xinput"
--- 
-1.7.10
+On Fri, May 04, 2012 at 09:49:35AM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
+> ---
+>  .../recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.bb  |    =
+4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator=
+_0.7.5.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.=
+7.5.bb
+> index a50a0cf..765dcf2 100644
+> --- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.=
+bb
+> +++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_0.7.5.=
+bb
+> @@ -4,7 +4,7 @@ LICENSE =3D "MIT-X"
+>  LIC_FILES_CHKSUM =3D "file://src/calibrator.cpp;endline=3D22;md5=3D998e2=
+38a7638a7446eaeb02398f691fc"
+>  DEPENDS =3D "virtual/libx11 libxi"
+> =20
+> -PR =3D "r5"
+> +PR =3D "r6"
+> =20
+>  inherit autotools systemd
+> =20
+> @@ -33,5 +33,5 @@ SYSTEMD_PACKAGES =3D "${PN}-systemd"
+>  SYSTEMD_SERVICE =3D "${PN}.service"
+> =20
+>  FILES_${PN} +=3D "${sysconfdir}/xdg/autostart"
+> -RDEPENDS_${PN} =3D "xinput"
+> +RDEPENDS_${PN} =3D "xinput xterm"
+>  RRECOMMENDS_${PN} =3D "pointercal-xinput"
+> --=20
+> 1.7.10
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--U3BNvdZEnlJXqmh+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk+jjVwACgkQN1Ujt2V2gBzOuACeOFvacWmRate1Cb9t+846GIP9
+dMkAnR+Tb+3rwIhIpk9Gia7cssMSLDAK
+=pGqE
+-----END PGP SIGNATURE-----
+
+--U3BNvdZEnlJXqmh+--
