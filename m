@@ -1,14 +1,39 @@
-Received: from ffm.saftware.de ([83.141.3.46])
+Received: from mail-gh0-f175.google.com ([209.85.160.175]
+	helo=mail-gy0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1SQOLJ-0006Qx-U4
+	(envelope-from <tom.rini@gmail.com>) id 1SQOjO-0007B4-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 May 2012 21:39:05 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 May 2012 21:29:13 +0200
-Message-Id: <1336159753-10759-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] xfsprogs: misc fixes for recipe
+	Fri, 04 May 2012 22:03:58 +0200
+Received: by ghbz2 with SMTP id z2so3254697ghb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 May 2012 12:54:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=/PXQRRwI23hnfbwdAfuOwkw0R9BTPS96D9wbLe8KP9o=;
+	b=IW8Rwix3MJSY6YeOxLd/AXBtn4aJaiVq/pDvU0eFsiWfR1jP5VLK/TflrBqP3FDjYo
+	YhUhz/N0vMW8tjMDjZC7a6AamNdwnlZxV8ZjKfFue6PHsegXpGqrS2dDkxqWCB83+kFh
+	7n1B2WcNgerGnv5hIJqm75ic9SZ7xYPp3tyfVqkvzjO3Ab7YOtVwnrxGzUAnstJqBLtZ
+	53Wz4WWgauEDDclvnJVsA/JWa7sbOluE4sKzKDnkVPtjNRhXSicrBoHtOvycKNXHYjvE
+	xKYaLo4pufEqVV6DzDFMhnppvx8XoqZunw4hspz1mTVcZ+QiJpBEtsFw+9d/SYGh5LBv
+	WLQQ==
+Received: by 10.60.0.201 with SMTP id 9mr10111457oeg.59.1336161251163;
+	Fri, 04 May 2012 12:54:11 -0700 (PDT)
+Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id j10sm9987188oba.4.2012.05.04.12.54.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 04 May 2012 12:54:09 -0700 (PDT)
+Date: Fri, 4 May 2012 12:54:13 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <20120504195413.GA13779@bill-the-cat>
+References: <cover.1336052839.git.sledz@dresearch-fe.de>
+MIME-Version: 1.0
+In-Reply-To: <cover.1336052839.git.sledz@dresearch-fe.de>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/1] pull request 20120503
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -22,79 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2012 19:39:06 -0000
+X-List-Received-Date: Fri, 04 May 2012 20:03:58 -0000
+X-Groupsio-MsgNum: 38575
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="RnlQjJ0d97Da+TV1"
+Content-Disposition: inline
 
-* Only libhandle's license is the LGPLv2.1, all tools are
-  licensed under the GPLv2.
-* Create seperate package for libhandle.
-* Create seperate packages for mkfs.xfs and fsck.xfs
-  to save space.
-* Use real license file for LIC_FILES_CHKSUM.
-* Fix libhandle.so symlink.
-* Remove unneeded symlinks from ${base_libdir}
+--RnlQjJ0d97Da+TV1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb |   31 ++++++++++----------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+On Thu, May 03, 2012 at 03:51:38PM +0200, Steffen Sledz wrote:
+> Hi Tom,
+>=20
+> please pull this commit into 2011.03-maintenance branch.
+> It fixes a build problem with icedtea6-native and newer glibc versions.
+> The fix is well tested in our own environment.
+>=20
+> Thx,
+> Steffen
+>=20
+> The following changes since commit 21613e405cad072feef779c8e9b374a2f09841=
+58:
+>=20
+>   docbook-utils-native: fix syntax problem in jw.in (2012-04-04 12:06:08 =
++0200)
+>=20
+> are available in the git repository at:
+>   git://github.com/sledz/oe pull-request-1
+>   https://github.com/sledz/oe/tree/pull-request-1
+>=20
+> Steffen Sledz (1):
+>   icedtea6-native-1.7.10: backport S7103224
 
-diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
-index 3830887..3bc4897 100644
---- a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
-+++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
-@@ -1,11 +1,11 @@
- DESCRIPTION = "XFS Filesystem Utilities"
- HOMEPAGE = "http://oss.sgi.com/projects/xfs"
- SECTION = "base"
--LICENSE = "LGPL2.1"
--
--LIC_FILES_CHKSUM = "file://Makefile;endline=3;md5=def2844770bb44eba37bc9ca8610fad4"
--
-+LICENSE = "GPLv2"
-+LICENSE_libhandle = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
- DEPENDS = "util-linux"
-+PR = "r1"
- 
- SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
- 	file://remove-install-as-user.patch \
-@@ -15,8 +15,13 @@ SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d7
- 
- inherit autotools
- 
--FILES_${PN}-dev += "${base_libdir}/libhandle.la \
--                    ${base_libdir}/libhandle.so"
-+PACKAGES =+ "${PN}-fsck ${PN}-mkfs libhandle"
-+
-+RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs"
-+
-+FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
-+FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
-+FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
- 
- EXTRA_OECONF = "--enable-gettext=no"
- do_configure () {
-@@ -34,13 +39,9 @@ do_install () {
- 	oe_runmake install
- 	# needed for xfsdump
- 	oe_runmake install-dev
--	# replace extra links to /usr/lib with relative links (otherwise autotools_prepackage_lamangler fails to read nonexistent link)
--	rm -f ${D}/${base_libdir}/libhandle.la
--	rm -f ${D}/${base_libdir}/libhandle.a
--	ln -s ../usr/lib/libhandle.la ${D}/${base_libdir}/libhandle.la
--	ln -s ../usr/lib/libhandle.a ${D}/${base_libdir}/libhandle.a
--
--	# and link from /usr/lib/libhandle.so to /lib/libhandle.so
--	rm -f ${D}/${libdir}/libhandle.so
--	ln -s ../../lib/libhandle.a ${D}/${libdir}/libhandle.so
-+	rm ${D}${base_libdir}/libhandle.a
-+	rm ${D}${base_libdir}/libhandle.la
-+	rm ${D}${base_libdir}/libhandle.so
-+	rm ${D}${libdir}/libhandle.so
-+	ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
- }
--- 
-1.7.9.5
+Applied, thanks!
 
+--=20
+Tom
 
+--RnlQjJ0d97Da+TV1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk+kM+UACgkQdZngf2G4WwP2HwCfajwrFZsm8DngY+C1QxsoiCNZ
+jsIAnRy62mC93Om4TUduxHTqrthLxpYm
+=7Uen
+-----END PGP SIGNATURE-----
+
+--RnlQjJ0d97Da+TV1--
