@@ -1,37 +1,33 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SRTxz-0002dH-0n
+	(envelope-from <raj.khem@gmail.com>) id 1SRUG7-0004Ro-6N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 21:51:31 +0200
-Received: by wibhj13 with SMTP id hj13so3222959wib.6
+	Mon, 07 May 2012 22:10:15 +0200
+Received: by pbbrq2 with SMTP id rq2so5926714pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 May 2012 12:41:40 -0700 (PDT)
+	Mon, 07 May 2012 13:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Li2zy1pwU/iN+o1W2r2TzMiW6zFIf1V1NuauzaLH+90=;
-	b=0bs/71uh/IHrgpAJEzXEHU1q1jTIGAHlsoRpIOqrNUadIMtXhLaqk1dicPM/ytLSs0
-	SHrzX7wSQw1hKcT9Oo4K5ZBg68RiQoSkzEYj93u6f0VN16xzXLIRP6N2QWsLB5eHBpmK
-	MNkJXHG4+0QNqEu8aHuckjXIhIFNRFtt5pSlKufdL+CN8exZH+sgcS9m+0itOzNVOqIr
-	UP9f0rBkacPNMx2SQ66FQIRCIe8/N2Dzx5tCYX0uChsbKgQio9hpJvoYr3M4y9TEo32C
-	417PTVZAjG/1Id30Ql6sKcizTWcsxsIVs0FTMClVJojoPwaRFRFN5wW0yXken+cusrjh
-	y8Pg==
-Received: by 10.180.104.168 with SMTP id gf8mr14793932wib.12.1336419700419;
-	Mon, 07 May 2012 12:41:40 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f19sm37244097wiw.11.2012.05.07.12.41.38
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=fGAEeVOSIy9FDRIIItR/vfcZ8WfzIkpAuXM/W4eki8k=;
+	b=Jd4mjAR3iZeTKDcMGKEdxzRijUL5mzrq1DYEFDAPeRyYk003kqH+1UIS//aafDeU45
+	HCZCu2XLG+U3J3L8szr/AA43jjlB8EGMzGNZ32Nx4TGT9/OF0luLZsNQ4QiK+iN6W0zN
+	QKDfZUK8Rao55Q2AKHWmALDbesHllRA1ab/Hgku2eQrFOZPfrKEA424YJnYfSojM99Qi
+	JtkOfjqr6hDBSKjlSVZhpzKZw9qRVlJanW4FultAnyARL9pQl8vt4uH14jvjF0D/9IhJ
+	iIt/axcycV3TYd1voXONARWb1JG5QPmHOZ9eoHo66BA+ndYvLec/wHYNMPc/s27v0hQ9
+	4GQA==
+Received: by 10.68.228.2 with SMTP id se2mr7961098pbc.109.1336420823429;
+	Mon, 07 May 2012 13:00:23 -0700 (PDT)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id pn5sm19211438pbb.71.2012.05.07.13.00.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 07 May 2012 12:41:39 -0700 (PDT)
-Date: Mon, 7 May 2012 21:41:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 07 May 2012 13:00:22 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120507194138.GA3146@jama.jama.net>
-References: <cover.1336418115.git.Martin.Jansa@gmail.com>
-	<5c22d88fe27592f4ef279e562cba063676f8d1fe.1336418115.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <5c22d88fe27592f4ef279e562cba063676f8d1fe.1336418115.git.Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-efl][meta-gpe][PATCH 7/7] kernel.bbclass: Use kmod-native instead of module-init-tools-cross
+Date: Mon,  7 May 2012 12:59:51 -0700
+Message-Id: <1336420791-4944-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] kmod: Delete in favor of OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,118 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 19:51:31 -0000
-X-Groupsio-MsgNum: 38607
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="h31gzZEtNLTqOjlF"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 07 May 2012 20:10:15 -0000
 
---h31gzZEtNLTqOjlF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/classes/kernel.bbclass          |    2 +-
+ meta-oe/recipes-kernel/kmod/kmod_git.bb |   24 ------------------------
+ 2 files changed, 1 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/kmod/kmod_git.bb
 
-On Mon, May 07, 2012 at 09:17:02PM +0200, Martin Jansa wrote:
-> From: Khem Raj <raj.khem@gmail.com>
+diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
+index 98320fe..81612da 100644
+--- a/meta-oe/classes/kernel.bbclass
++++ b/meta-oe/classes/kernel.bbclass
+@@ -1,7 +1,7 @@
+ inherit linux-kernel-base module_strip
+ 
+ PROVIDES += "virtual/kernel"
+-DEPENDS += "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
++DEPENDS += "virtual/${TARGET_PREFIX}gcc kmod-native virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
+ 
+ # we include gcc above, we dont need virtual/libc
+ INHIBIT_DEFAULT_DEPS = "1"
+diff --git a/meta-oe/recipes-kernel/kmod/kmod_git.bb b/meta-oe/recipes-kernel/kmod/kmod_git.bb
+deleted file mode 100644
+index aae9e7f..0000000
+--- a/meta-oe/recipes-kernel/kmod/kmod_git.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "kmod - handle kernel modules"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-
+-PR = "r3"
+-
+-inherit autotools gitpkgv
+-
+-PKGV = "${GITPKGVTAG}"
+-SRCREV = "8885ced062131214448fae056ef453f094303805"
+-SRC_URI = "git://git.profusion.mobi/kmod.git \
+-           file://0001-man-disable-man-page-generation-because-we-don-t-hav.patch \
+-"
+-
+-S = "${WORKDIR}/git"
+-
+-do_configure_prepend() {
+-	gtkdocize --docdir ${S}/libkmod/docs || touch ${S}/libkmod/docs/gtk-doc.make
+-}
+-
+-PACKAGES =+ "libkmod"
+-FILES_libkmod = "${libdir}/lib*${SOLIBS}"
+-
+-- 
+1.7.5.4
 
-This is needed in meta-oe because without module-init-tools in oe-core
-we get failures like this:
 
-ERROR: Nothing PROVIDES 'virtual/arm-oe-linux-gnueabi-depmod' (but
-/OE/shr-core/meta-smartphone/meta-openmoko/recipes-kernel/linux/linux-openm=
-oko_3.2.bb,
-/OE/shr-core/meta-smartphone/meta-samsung/recipes-kernel/linux/linux-samsun=
-g-crespo_git.bb,
-/OE/shr-core/meta-handheld/recipes-kernel/linux/linux_3.0.1.bb DEPENDS
-on or otherwise requires it)
-NOTE: Runtime target 'kernel' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['kernel',
-'virtual/arm-oe-linux-gnueabi-depmod']
 
-kmod recipes should be droped from meta-oe too to get rid of this
-warning:
-ERROR: Multiple .bb files are due to be built which each provide kmod
-(/OE/shr-core/openembedded-core/meta/recipes-kernel/kmod/kmod_git.bb
-/OE/shr-core/meta-openembedded/meta-oe/recipes-kernel/kmod/kmod_git.bb).
-
-I have patch for it in jansa/pull2 too, but
-ERROR: Package version for package kmod went backwards which would break
-package feeds from (0:git-r3 to
-0:7+git02629fa02e96763db7460a930239cc93649a52f8-r0.0)
-so we need PE bump preferably in oe-core.
-
-And also libkmod*so.* is now packaged in kmod package not libkmod but that's
-probably bug in oe-core recipe... because
-FILES_libkmod =3D "${base_libdir}/libkmod*${SOLIBS}"
-and they are installed in ${libdir}.
-probably that's from where this comment in kmod recipe comes from
-# libdir =3D "${base_libdir}"
-
-Cheers,
-
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/classes/kernel.bbclass |    7 +++----
->  1 files changed, 3 insertions(+), 4 deletions(-)
->=20
-> diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbcl=
-ass
-> index 66398ef..b431f8e 100644
-> --- a/meta-oe/classes/kernel.bbclass
-> +++ b/meta-oe/classes/kernel.bbclass
-> @@ -1,7 +1,7 @@
->  inherit linux-kernel-base module_strip
-> =20
->  PROVIDES +=3D "virtual/kernel"
-> -DEPENDS +=3D "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod=
- virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
-> +DEPENDS +=3D "virtual/${TARGET_PREFIX}gcc kmod-native virtual/${TARGET_P=
-REFIX}gcc${KERNEL_CCSUFFIX} update-modules"
-> =20
->  # we include gcc above, we dont need virtual/libc
->  INHIBIT_DEFAULT_DEPS =3D "1"
-> @@ -274,7 +274,7 @@ if [ ! -e "$D/lib/modules/${KERNEL_VERSION}" ]; then
->  	mkdir -p $D/lib/modules/${KERNEL_VERSION}
->  fi
->  if [ -n "$D" ]; then
-> -	${HOST_PREFIX}depmod -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KER=
-NEL_VERSION} ${KERNEL_VERSION}
-> +	depmod -a -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} $=
-{KERNEL_VERSION}
->  else
->  	depmod -a
->  fi
-> @@ -352,9 +352,8 @@ python populate_packages_prepend () {
->  		if m:
->  			kernelver_stripped =3D m.group(1)
->  		path =3D d.getVar("PATH", True)
-> -		host_prefix =3D d.getVar("HOST_PREFIX", True) or ""
-> =20
-> -		cmd =3D "PATH=3D\"%s\" %sdepmod -n -a -r -b %s -F %s/boot/System.map-%=
-s %s" % (path, host_prefix, dvar, dvar, kernelver, kernelver_stripped)
-> +		cmd =3D "PATH=3D\"%s\" depmod -n -a -b %s -F %s/boot/System.map-%s %s"=
- % (path, dvar, dvar, kernelver, kernelver_stripped)
->  		f =3D os.popen(cmd, 'r')
-> =20
->  		deps =3D {}
-> --=20
-> 1.7.8.6
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---h31gzZEtNLTqOjlF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+oJXIACgkQN1Ujt2V2gBz/uACfa7dI36HW4UKEXSZbRtPUcvb1
-7yIAoKuFngDkw8/CFF0inHf67Jo5bIiI
-=KcVS
------END PGP SIGNATURE-----
-
---h31gzZEtNLTqOjlF--
