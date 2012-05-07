@@ -1,35 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SRHym-0000sb-My
+	(envelope-from <koen@dominion.thruhere.net>) id 1SRHyo-0000sc-C6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 09:03:32 +0200
-Received: by wgbdr1 with SMTP id dr1so3873992wgb.24
+	Mon, 07 May 2012 09:03:34 +0200
+Received: by werb13 with SMTP id b13so533211wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 May 2012 23:53:42 -0700 (PDT)
+	Sun, 06 May 2012 23:53:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=YQnDXgzkLNyWSQPTrUvpNeBLljt+3duFfFRJbjYVVv4=;
-	b=OOtkJHepGIM0LP3n+vwCa0+pwQAeeo1ShMn/PV0hfH8pbASM0DS1wJ3rwP+it0pQvX
-	Lu+BN+4bLj5CFKzAXwatv5/HVYsY81Mv6gmGijHQX2REYA3pFWX2S4R115TIMj3chGOa
-	Xk9yPcm0IHtuX2O+rjxYyNMuJEkOgaOEqRU7aYdw01XPwJNp78OAudvROL7dK1CvxqRO
-	zhjRQeBVxr5kKM0v56kG9lFjabFqHuyPCCnnIhYnepoDWFMslnA0VfsAeyyddIDWb+QE
-	tBbMru0jf/+baTihffcre4WoqAFLo7C4UlG3sSdHaNzQjrStjStNqdR7opGZ+nr2wwEx
-	Ev9w==
-Received: by 10.180.24.66 with SMTP id s2mr22772880wif.7.1336373622667;
-	Sun, 06 May 2012 23:53:42 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=cjMA3zCx4fXega4wqLC9DUv9VO0cDaHYJY78V4Wh67Y=;
+	b=a83amsFBvkv7LWhLmwJSVNKwbvkghCOI/e9hO1pfMpvtsJ4CzEIlnsIZ3ZINef94nW
+	tCXRf5Si5u4hVvUbLyLKrHM6WDyD9aVtgNnwcgFh/IXWnCJXkJyoHp52ULFgYEYXO9Gl
+	5SrJ3OpxcHUwRbq2/TeLHTwc+YOtuNvHn9eThkAd0Up0dXDssQPbCc1cw17empz551os
+	SarWS3rX4VHwNuX17yXnC/Lv9TFfh3rM8ykqDEZiDW6X4K4Zm7oQjFX5NNQt68iP/AFl
+	N4cnDWx1ibpuCQrHFdxXjU3Df3rbs9kH2OBrl6OXLICYra6LYFtfvDI69yt6uOPeutW7
+	mnSA==
+Received: by 10.216.213.219 with SMTP id a69mr8604685wep.16.1336373624519;
+	Sun, 06 May 2012 23:53:44 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id n20sm31035977wiw.5.2012.05.06.23.53.40
+	by mx.google.com with ESMTPS id fn2sm31060672wib.0.2012.05.06.23.53.43
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 May 2012 23:53:41 -0700 (PDT)
+	Sun, 06 May 2012 23:53:43 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 May 2012 08:53:30 +0200
-Message-Id: <1336373612-18607-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon,  7 May 2012 08:53:31 +0200
+Message-Id: <1336373612-18607-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQln3GhOHc1vJ8a8Y4LmG6XrbRqMOx7Sol+fcn9ATL9U0RYtUMab22E+nEL9zgILu3eCCzwo
+In-Reply-To: <1336373612-18607-1-git-send-email-koen@dominion.thruhere.net>
+References: <1336373612-18607-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQkMCBe0S3wq6CN5GVoYOvuludScjgbyUbJXT96qzjhX2iUkeOE6dq/k7PhoQqmiqVnjFFE9
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 1/3] gnome-session: add dependency on libxtst6
+Subject: [meta-oe][PATCH 2/3] gnome-settings-daemon: add dependency on libxtst6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 07:03:32 -0000
+X-List-Received-Date: Mon, 07 May 2012 07:03:34 -0000
 
 It's autodetected and leads to sstate based breakage on autobuilders:
 
 This ends up in the package:
 
-Package: gnome-session
-Version: 2.32.1-r1
-Depends: libx11-6 (>= 1.4.4), hicolor-icon-theme, libxrender1 (>= 0.9.7), libdbus-1-3 (>= 1.4.16), libdbus-glib-1-2 (>= 0.98), gconf, libxtst6 (>= 1.2.1),
+Package: gnome-settings-daemon
+Version: 2.32.1-r3
+Depends: libltdl7 (>= 2.4.2), hicolor-icon-theme, libjson0 (>= 0.9), libxcb1 (>= 1.8.1), libxrender1 (>= 0.9.7), libpixman-1-0 (>= 0.25.2), libxml2 (>= 2.7.8), libxext6 (>= 1.3.1), libz1 (>= 1.2.6), libxtst6 (>= 1.2.1),
 
 But libxtst hasn't been built.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb |    4 ++--
+ .../gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb          |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-index fe199a8..6c10156 100644
---- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-@@ -2,10 +2,10 @@ DESCRIPTION = "Gnome session manager"
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+index 31ee373..fc678b9 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "GNOME settings daemon"
  LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
--PR = "r1"
-+PR = "r2"
+-PR = "r3"
++PR = "r4"
  
- SECTION = "x11/gnome"
--DEPENDS = "gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
-+DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
+-DEPENDS = "glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
++DEPENDS = "libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
  
- inherit gnome 
+ inherit gtk-doc gnome
  
 -- 
 1.7.10
