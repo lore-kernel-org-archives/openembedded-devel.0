@@ -1,37 +1,37 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SRTPt-0001v9-W4
+	(envelope-from <martin.jansa@gmail.com>) id 1SRTPy-0001j1-A2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 21:16:18 +0200
-Received: by wgbds1 with SMTP id ds1so3199635wgb.0
+	Mon, 07 May 2012 21:16:22 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dr1so4416002wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 May 2012 12:06:27 -0700 (PDT)
+	Mon, 07 May 2012 12:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=tzlYazwyUEs0u2V9Ft67/zva0tIbQy1GOD6/cXwMHEY=;
-	b=04Dkl2nG0S96/xmOW0/91Mx8QJBfk+FRFafVDz3kwYD+xXRgqXkBCTf6QxUsksReC1
-	YtLjnJImxPLEDSVQ1L6mm6SfhYeRj84SK4B/MdOhwevTHXfrJmF2RD2xh0YhqjGL6dpV
-	JAiuPVI9fMVcj7qNY8DMby5WkGUCeDxF/EDIeMs3MUf3arYD85vk6SqnSuqDpuYNoGPH
-	4QMoADlfMjq3uiH4moHVk6YyZXXtUA9pGzGz84bm1A6y3l5mdT9VtSBc88ct8VHEVGaP
-	XrfDFpVGV5SoW33BruXdayhbStp6SBlaqnoo0bNnfYzLnOwW0N9FlP2Gk/zSPB8OgNyZ
-	uRbA==
-Received: by 10.180.101.136 with SMTP id fg8mr37919773wib.4.1336417586884;
-	Mon, 07 May 2012 12:06:26 -0700 (PDT)
+	bh=oMQL/n71aA1AM5OXiGGg5fOA0AHEMkYDdM4cpAs2H/s=;
+	b=sMvM+bEVnY0FJ0RJyBhJRLdtAik9bKI7C65i+U0Wr40iRH8mtsgMzBIVZ1tVUkemnn
+	VxRAeBXIDOqW8A/9Z2XJkTINsYv3RgLaPSS0I9Qye0Q2mHtu0Qmo3PplOu7o/dgqZ5Tn
+	MwDSU7Oc5zzdJEf8qMwLxNHQ5N9qlGwYHEPIpLiWguAmB7pH7m6LU248ojkpR4gGMy+s
+	xOekjMEXCqDh05KxLtHxZN1sOqlM5C1oHeo2BYIOQucUm4srbv79RDeeej5g/1ILSDgS
+	/KTVBG4lDii1pYVx0kU2ioHTCSDYPkaritB4Ee5yzJ3YppjLKks7iyZSCP0bHW0SnSF/
+	Cfeg==
+Received: by 10.216.143.147 with SMTP id l19mr1210385wej.45.1336417593946;
+	Mon, 07 May 2012 12:06:33 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fo7sm22224432wib.9.2012.05.07.12.06.25
+	by mx.google.com with ESMTPS id j3sm36952293wiw.1.2012.05.07.12.06.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 07 May 2012 12:06:26 -0700 (PDT)
+	Mon, 07 May 2012 12:06:33 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 May 2012 21:05:46 +0200
-Message-Id: <fd0343f3b67ae3c4917b18a394bc4361a5599735.1336417488.git.Martin.Jansa@gmail.com>
+Date: Mon,  7 May 2012 21:05:47 +0200
+Message-Id: <ac3f69755e0e6a0d9c1ebd49594cca2140e02c5b.1336417488.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1336417488.git.Martin.Jansa@gmail.com>
 References: <cover.1336417488.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1336417488.git.Martin.Jansa@gmail.com>
 References: <cover.1336417488.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][meta-gpe][PATCH 4/5] loudmouth: fix build with glib-2.32
+Subject: [meta-oe][meta-efl][meta-gpe][PATCH 5/5] gpe-scap: migrate to use libsoup-2.4 instead of libsoup-2.2 API
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +45,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 19:16:18 -0000
+X-List-Received-Date: Mon, 07 May 2012 19:16:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../loudmouth/loudmouth-1.4.3/glib-2.32.patch      |   10 ++++++++++
- .../loudmouth/loudmouth_1.4.3.bb                   |    5 ++++-
- 2 files changed, 14 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
+ .../gpe-scap/gpe-scap/use.libsoup-2.4.patch        |   42 ++++++++++++++++++++
+ meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb |    8 ++-
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 meta-gpe/recipes-graphics/gpe-scap/gpe-scap/use.libsoup-2.4.patch
 
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
+diff --git a/meta-gpe/recipes-graphics/gpe-scap/gpe-scap/use.libsoup-2.4.patch b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap/use.libsoup-2.4.patch
 new file mode 100644
-index 0000000..b6c9422
+index 0000000..3cfe5d7
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
-@@ -0,0 +1,10 @@
-+--- loudmouth-1.4.3.orig/loudmouth/lm-error.c	2008-10-29 21:48:15.000000000 +0100
-++++ loudmouth-1.4.3/loudmouth/lm-error.c	2012-05-06 08:27:07.455739440 +0200
-+@@ -19,7 +19,6 @@
-+  */
++++ b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap/use.libsoup-2.4.patch
+@@ -0,0 +1,42 @@
++diff -uNr gpe-scap-1.4.orig/configure.ac gpe-scap-1.4/configure.ac
++--- gpe-scap-1.4.orig/configure.ac	2009-03-05 18:53:53.000000000 +0100
+++++ gpe-scap-1.4/configure.ac	2012-05-06 10:18:29.348308322 +0200
++@@ -24,7 +24,7 @@
++ AC_SUBST(LDFLAGS)
 + 
-+ #include <config.h>
-+-#include <glib/gerror.h>
-+ #include "lm-error.h"
++ dnl libraries
++-GTK_MODULES="gtk+-2.0 >= 2.6.0 gthread-2.0 libsoup-2.2"
+++GTK_MODULES="gtk+-2.0 >= 2.6.0 gthread-2.0 libsoup-2.4"
++ PKG_CHECK_MODULES(GTK, $GTK_MODULES)
++ AC_SUBST(GTK_CFLAGS)
++ AC_SUBST(GTK_LIBS)
++diff -uNr gpe-scap-1.4.orig/src/scr-shot-common.c gpe-scap-1.4/src/scr-shot-common.c
++--- gpe-scap-1.4.orig/src/scr-shot-common.c	2009-03-05 12:13:20.000000000 +0100
+++++ gpe-scap-1.4/src/scr-shot-common.c	2012-05-06 10:30:52.299371576 +0200
++@@ -182,12 +182,12 @@
++   /* create session and message */
++   session = soup_session_sync_new ();
++   message = soup_message_new ("POST", url);
++-  soup_message_add_header (message->request_headers, "User-Agent", "gpe-scap/" VERSION);
++-  soup_message_add_header (message->request_headers, "Accept",
+++  soup_message_headers_append (message->request_headers, "User-Agent", "gpe-scap/" VERSION);
+++  soup_message_headers_append (message->request_headers, "Accept",
++ 			   "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
++-/*  soup_message_add_header (message->request_headers, "Accept-Charset", "Accept-Charset=ISO-8859-1,utf-8;q=0.7,*;q=0.7");
++-  soup_message_add_header (message->request_headers, "Keep-Alive", "100");
++-  soup_message_add_header (message->request_headers, "Connection", "keep-alive");
+++/*  soup_message_headers_append (message->request_headers, "Accept-Charset", "Accept-Charset=ISO-8859-1,utf-8;q=0.7,*;q=0.7");
+++  soup_message_headers_append (message->request_headers, "Keep-Alive", "100");
+++  soup_message_headers_append (message->request_headers, "Connection", "keep-alive");
++   soup_message_wire	add_header (message->request_headers, "Accept-Encoding", "gzip,deflate");
++ */
++   /* build message body */
++@@ -207,7 +207,7 @@
++   memcpy (body + strlen (cmd) + len, tail, strlen (tail));
 + 
-+ /**
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-index f91fdff..87852ee 100644
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-+++ b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-@@ -8,7 +8,10 @@ DEPENDS = "glib-2.0 check openssl"
++   soup_message_set_request (message, "multipart/form-data; boundary="SEP,
++-                            SOUP_BUFFER_SYSTEM_OWNED, body, content_len);
+++                            SOUP_MEMORY_TAKE, body, content_len);
++ 
++   soup_session_send_message (session, message);
++ 
+diff --git a/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
+index 9577f2f..c416ff5 100644
+--- a/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
++++ b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
+@@ -4,9 +4,9 @@ SECTION = "gpe"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
  
- inherit gnomebase
+-DEPENDS = "glib-2.0 gtk+ libgpewidget libglade libsoup"
++DEPENDS = "glib-2.0 gtk+ libgpewidget libglade libsoup-2.4"
  
--SRC_URI += "file://04-use-pkg-config-for-gnutls.patch"
-+PR = "r1"
-+
-+SRC_URI += "file://04-use-pkg-config-for-gnutls.patch \
-+            file://glib-2.32.patch"
+-PR = "r2"
++PR = "r3"
  
- SRC_URI[archive.md5sum] = "55339ca42494690c3942ee1465a96937"
- SRC_URI[archive.sha256sum] = "95a93f5d009b71ea8193d994aa11f311bc330a3efe1b7cd74dc48f11c7f929e3"
+ SRC_URI[md5sum] = "eaf545561b0ad981c9d01833f30fcf95"
+ SRC_URI[sha256sum] = "762778421fae7c62d5ec6a9d27986166c0dbbe2ff51fc10bb9b8baff5c367534"
+@@ -15,7 +15,9 @@ GPE_TARBALL_SUFFIX = "bz2"
+ 
+ inherit gpe autotools
+ 
+-SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.patch"
++SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.patch \
++  file://use.libsoup-2.4.patch \
++"
+ 
+ RREPLACES_${PN} = "gpe-screenshot"
+ 
 -- 
 1.7.8.6
 
