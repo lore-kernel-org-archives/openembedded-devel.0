@@ -1,35 +1,32 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SRVrM-0005vl-0W
+	(envelope-from <martin.jansa@gmail.com>) id 1SRW7K-0006Yp-Nm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 23:52:48 +0200
-Received: by wibhn14 with SMTP id hn14so34527wib.0
+	Tue, 08 May 2012 00:09:18 +0200
+Received: by werb13 with SMTP id b13so1115315wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 May 2012 14:42:57 -0700 (PDT)
+	Mon, 07 May 2012 14:59:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=kwW/E6zcubV0sn4pK0zjE5Ibm1uzvuMiUiNzQ6aHGmM=;
-	b=lf8P5MjmY/+yjVFdKX/P6WvzsWh70OFgf+1JVEcUufakYo1CUd1ytAVJ9MzyRSCuN0
-	dyZC+7lQiO/eeqdnXbu4p62DEkLjKqwU7fX2UJnHIXu0E/owOt1l8AtnKXzK+XzG6y6K
-	qZJcVp60soIx7U8ZrihxBZptGMrsKK9NpxRkxF1zFOjNGgBdwgHcr8g1F2v5REJpk3tc
-	E+sq4YnClC8gY4n+6pPvdcMI8Z0SKAdDBxmpuYcio3NNrxB58VRiMFBGnAwbxP5BxH8g
-	1dvUNcbmylndZ6dfAIquEKa/BmJCgcuZdt8uWSMtNbLoZxwpN/Fdy51n3gp+psCA+2iw
-	17KQ==
-Received: by 10.180.77.4 with SMTP id o4mr9195209wiw.17.1336426977434; Mon, 07
-	May 2012 14:42:57 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.23.66 with HTTP; Mon, 7 May 2012 14:42:27 -0700 (PDT)
-In-Reply-To: <1336424471.2074.4.camel@dasty-laptop>
-References: <1336391680.3417.7.camel@dasty-laptop>
-	<4FA7B9DF.60304@mlbassoc.com>
-	<1336394035.3417.12.camel@dasty-laptop>
-	<CAMKF1sonQpWBRYNSapa16EDGyyQCiRr5AmKoSx02xnqzzn+5yA@mail.gmail.com>
-	<1336424471.2074.4.camel@dasty-laptop>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 May 2012 14:42:27 -0700
-Message-ID: <CAMKF1soY2jQ4Cm1wriqB+aZgPpfQqYK6BpAsSYzLZC9ovM8rkQ@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=LqAsubHWGymW8xcVJgy4vwSB42Ew/iNo7QK3O4dx7u0=;
+	b=uu4BXHffyaaFhiwg+lnyVEtfy1RJsmnO6a1cgHixkG5Jpa2EaO3qBzfIjQKaYzXmcU
+	DbdrvXaIvqGV2v6H3ZlANu3Nexgo7AudH0A85zxpX60NUGK2aieD7jDDP5a+TO1782NP
+	2R+yFvfEeXIVth0ycQYRMRZZ3oebQ4Ix0rUQk6+3PWaZj4+f4jat1rgSO+FpNiyIUZS2
+	PndP8ny0iAsQaGVbDjp/Jdte/6kX3DegaOHsM3yv1ZrWSpUFp/Q2U8br58A1kMcWcpfx
+	CTWtqhpf8swJ4NWf/RYig4sblvVbL+AEr1a4zDfjToXFlwFhBh0jpjoqKX/Gntm+EQ6O
+	iVSg==
+Received: by 10.180.83.72 with SMTP id o8mr38959366wiy.5.1336427968021;
+	Mon, 07 May 2012 14:59:28 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id fn2sm38483776wib.0.2012.05.07.14.59.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 May 2012 14:59:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Simultaneous build of two intree packages
+Date: Mon,  7 May 2012 23:59:15 +0200
+Message-Id: <1336427955-8168-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH] libxaw: upgrade to 1.0.10 to fix -Werror=pointer-to-int-cast when building for x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,20 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 21:52:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 May 2012 22:09:18 -0000
 
-On Mon, May 7, 2012 at 2:01 PM, Radek Dostal <rd@radekdostal.com> wrote:
-> Because ln -sf first do symlink(1) unlink(2) and symlink(3) again. In
-> case link is created by another process between 2 and 3 than ln fails.
->
-> It is quite well described here:
-> http://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html
->
+* 1.0.9 fails with:
+  | XawIm.c:1410:23: error: cast from pointer to integer of different size [-Werror=pointer-to-int-cast]
+  | XawIm.c:1415:23: error: cast from pointer to integer of different size [-Werror=pointer-to-int-cast]
+* fixed upstream:
+  http://cgit.freedesktop.org/xorg/lib/libXaw/commit/?id=49c0a2441946f0d70fbd2612f193c95b84dde102
+* COPYING changed only formally, stripping trailing spaces in
+  http://cgit.freedesktop.org/xorg/lib/libXaw/commit/COPYING?id=37ffe69b10ae29e8f91de6ef647d06804b9d159b
 
-Do you think I don't know how ln works ?
-all I was asking why are same symlinks being created
-by two different packages that seems broken to me. Fix the
-packages
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../xorg-lib/{libxaw_1.0.9.bb => libxaw_1.0.10.bb} |    7 +++----
+ 1 files changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-lib/{libxaw_1.0.9.bb => libxaw_1.0.10.bb} (75%)
+
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
+similarity index 75%
+rename from meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb
+rename to meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
+index ea4f38b..89338d9 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.9.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
+@@ -2,13 +2,12 @@ require recipes-graphics/xorg-lib/xorg-lib-common.inc
+ DESCRIPTION = "X Athena Widget Set"
+ DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp printproto libxau xmlto-native"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f1beacbc336a5a256bb28dbfcf01c2be"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+ 
+ PE = "1"
+-PR = "r12"
+ 
+-SRC_URI[md5sum] = "ccc57478c41b7a75b9702241b889b1d4"
+-SRC_URI[sha256sum] = "a83977546b78e24ac5dca86affc10b6404a87c16272405b05386feca1a2db037"
++SRC_URI[md5sum] = "f1ea52debce7a18cc26b21647a00ad8b"
++SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239ee1bdd"
+ 
+ # disable docs as groff detection doesn't work on some hosts while cross compilling
+ EXTRA_OECONF += " --disable-docs "
+-- 
+1.7.8.6
+
 
 
