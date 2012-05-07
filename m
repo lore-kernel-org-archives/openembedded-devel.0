@@ -1,38 +1,23 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SRHyq-0000sv-QH
+	(envelope-from <Jackie.Huang@windriver.com>) id 1SRKSx-0003YP-1W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 09:03:37 +0200
-Received: by wibhj13 with SMTP id hj13so2790406wib.6
+	Mon, 07 May 2012 11:42:51 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q479X0Nn009167
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 May 2012 23:53:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=QtXUZlvqx3FrZKmJGwk++8nAZqSBASAz9PQ7Z2tErPQ=;
-	b=UXzO0CCBlYtLkTPZv225NRZjBb8XI69mAa+5vGhxVi9ldNjUdqoZmaVj3lLv6UEWqf
-	LEADuQTwr7oxqfEI2fpCfHWeRSCnaIFrc++XOo62afMbFnl6UPrGpSBa7Nzqb7RrhU12
-	n4uI/1eIKJYfUtQ35tfP3526oeUikh5r8ou5P9j3YTXbWlXTpsIUNh2o8eJxWOydyOCW
-	hOaHR7Xcqxo/Crg/OMkQorklOwy+TwD77pIPcaELdIcZZGLWiIsDG8Td93dHut3XabS1
-	xCrJnyNn4rq+ixJ3ko0S9flFdoIockMQFvJs0dDJ7M+iBXHoJQGCfm5I3M7GcPav3Ue2
-	rcjA==
-Received: by 10.180.78.105 with SMTP id a9mr2397449wix.20.1336373626318;
-	Sun, 06 May 2012 23:53:46 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id r2sm13045425wif.7.2012.05.06.23.53.45
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 May 2012 23:53:45 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 May 2012 08:53:32 +0200
-Message-Id: <1336373612-18607-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1336373612-18607-1-git-send-email-koen@dominion.thruhere.net>
-References: <1336373612-18607-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnK+Xm35KlQPdC3x8LGM8M0Lnfja2x2DJi3VWpqQOIy9swM5gPKG8Rmmk2y4RF6gjs9zrJG
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 3/3] gnome-settings-daemon: add dependency on libsndfile
+	Mon, 7 May 2012 02:33:00 -0700 (PDT)
+Received: from localhost.localdomain (128.224.162.28) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.1.255.0; Mon, 7 May 2012 02:33:00 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 7 May 2012 17:37:20 +0800
+Message-ID: <1336383440-20489-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH] lm_sensors: added recipe for v3.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 07:03:37 -0000
+X-List-Received-Date: Mon, 07 May 2012 09:42:51 -0000
+Content-Type: text/plain
 
-It's autodetected and leads to sstate based breakage on autobuilders:
+From: Jackie Huang <jackie.huang@windriver.com>
 
-This ends up in the package:
+lm_sensors: added recipe for v3.3.2
 
-Package: gnome-settings-daemon
-Version: 2.32.1-r3
-Depends: [..] libdbus-1-3 (>= 1.4.16), libx11-6 (>= 1.4.4), libogg0 (>= 1.3.0), libsndfile1 (>= 1.0.25),
+* Adapted from the recipe for v3.2.0
+* Added MANDIR in EXTRA_OEMAKE instead of the moving operation for
+  manuals in do_install
+* put .a files in _staticdev package
 
-But libsndfile hasn't been built.
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb          |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes/lm_sensors/lmsensors-apps_3.3.2.bb |   48 ++++++++++++++++++++++++++++
+ 1 files changed, 48 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/lm_sensors/lmsensors-apps_3.3.2.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-index fc678b9..20bb65d 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "GNOME settings daemon"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
--PR = "r4"
-+PR = "r5"
- 
--DEPENDS = "libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
-+DEPENDS = "libsndfile libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
- 
- inherit gtk-doc gnome
- 
+diff --git a/recipes/lm_sensors/lmsensors-apps_3.3.2.bb b/recipes/lm_sensors/lmsensors-apps_3.3.2.bb
+new file mode 100644
+index 0000000..57a6f3e
+--- /dev/null
++++ b/recipes/lm_sensors/lmsensors-apps_3.3.2.bb
+@@ -0,0 +1,48 @@
++SUMMARY = "A hardware health monitoring package for Linux"
++DESCRIPTION = "Lm-sensors is a hardware health monitoring package for Linux. \
++               It allows you to access information from temperature, voltage, \
++               and fan speed sensors."
++HOMEPAGE = "http://www.lm-sensors.org/"
++DEPENDS = "sysfsutils virtual/libiconv \
++           bison-native flex-native"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
++                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
++
++PR = "r1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "f357ba00b080ab102a170f7bf8bb2578"
++SRC_URI[sha256sum] = "f13dd885406841a7352ccfb8b9ccb23c4c057abe3de4258da5444c149a9e3ae1"
++
++S = "${WORKDIR}/lm_sensors-${PV}"
++
++EXTRA_OEMAKE = 'LINUX=${STAGING_KERNEL_DIR} EXLDFLAGS="${LDFLAGS}" \
++		MACHINE=${TARGET_ARCH} PREFIX=${prefix} CC="${CC}" \
++		AR="${AR}" MANDIR=${mandir}'
++
++do_compile() {
++	oe_runmake user PROG_EXTRA=sensors
++}
++
++do_install() {
++	oe_runmake user_install DESTDIR=${D}
++}
++
++PACKAGES =+ "libsensors libsensors-dev libsensors-staticdev libsensors-dbg libsensors-doc"
++PACKAGES =+ "lmsensors-sensors lmsensors-sensors-dbg lmsensors-sensors-doc"
++PACKAGES =+ "lmsensors-scripts"
++
++FILES_lmsensors-scripts = "${bindir}/*.pl ${bindir}/ddcmon ${sbindir}/fancontrol* ${sbindir}/pwmconfig ${sbindir}/sensors-detect"
++RDEPENDS_lmsensors-scripts += "lmsensors-sensors perl bash"
++
++FILES_lmsensors-sensors = "${bindir}/sensors ${sysconfdir}"
++FILES_lmsensors-sensors-dbg += "${bindir}/.debug/sensors"
++FILES_lmsensors-sensors-doc = "${mandir}/man1 ${mandir}/man5"
++FILES_libsensors = "${libdir}/libsensors.so.*"
++FILES_libsensors-dbg += "${libdir}/.debug"
++FILES_libsensors-dev = "${libdir}/libsensors.so ${includedir}"
++FILES_libsensors-staticdev = "${libdir}/libsensors.a"
++FILES_libsensors-doc = "${mandir}/man3"
 -- 
-1.7.10
+1.7.0.4
 
 
 
