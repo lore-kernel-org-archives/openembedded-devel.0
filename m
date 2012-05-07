@@ -1,25 +1,27 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1SRS4m-0003cV-9q
+	(envelope-from <mark.hatle@windriver.com>) id 1SRS7m-00008c-HI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 19:50:24 +0200
-Received: (qmail 9206 invoked by uid 1003); 7 May 2012 17:40:33 -0000
-Received: from unknown (HELO ?192.168.1.102?)
-	(philip@opensdr.com@71.171.22.246)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	7 May 2012 17:40:32 -0000
-Message-ID: <4FA8090F.6080701@balister.org>
-Date: Mon, 07 May 2012 13:40:31 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Mon, 07 May 2012 19:53:30 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q47HhcWL017565
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 7 May 2012 10:43:38 -0700 (PDT)
+Received: from Macintosh-5.local (172.25.36.229) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
+	Mon, 7 May 2012 10:43:37 -0700
+Message-ID: <4FA809C8.1000504@windriver.com>
+Date: Mon, 7 May 2012 12:43:36 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1335980745-29862-1-git-send-email-philip@balister.org>	<1335980745-29862-2-git-send-email-philip@balister.org>
-	<jnrvsr$4jc$1@dough.gmane.org>
-In-Reply-To: <jnrvsr$4jc$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [meta-oe 1/1] lxc : Add recipe for building Linux Containers tools.
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAOHjBZusy84GNLJ+YXY598E4Zd5M-zAZo=hb==wVJhwTQqDPkA@mail.gmail.com>
+In-Reply-To: <CAOHjBZusy84GNLJ+YXY598E4Zd5M-zAZo=hb==wVJhwTQqDPkA@mail.gmail.com>
+Subject: Re: [oe-core] Prefix in rpms packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,57 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 17:50:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 May 2012 17:53:30 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 05/02/2012 02:54 PM, Koen Kooi wrote:
-> Op 02-05-12 19:45, Philip Balister schreef:
->> Linux containers are a lightweight virtualization system.
-> 
->> Compile tested on F15 and lightly run tested on a pandaboard.
-> 
->> Signed-off-by: Philip Balister <philip@balister.org> --- 
->> meta-oe/recipes-extended/lxc/lxc_git.bb |   21 +++++++++++++++++++++ 1
->> files changed, 21 insertions(+), 0 deletions(-) create mode 100644
->> meta-oe/recipes-extended/lxc/lxc_git.bb
-> 
->> diff --git a/meta-oe/recipes-extended/lxc/lxc_git.bb
->> b/meta-oe/recipes-extended/lxc/lxc_git.bb new file mode 100644 index
->> 0000000..8f22e77 --- /dev/null +++
->> b/meta-oe/recipes-extended/lxc/lxc_git.bb @@ -0,0 +1,21 @@ +SUMMARY =
->> "Linux Containers tools" +DESCRIPTION = "Linux containers are a light
->> weight isolation system for Linux." +HOMEPAGE =
->> "http://lxc.sourceforge.net" +LICENSE = "LGPLv2.1"
-> 
-> Move LIC_FILES_CHKSUM to here
-> 
->> + +PV = "0.8.0-rc2"
-> 
-> That violates the versioning policy
-> 
->> + +RDEPENDS_${PN} = "perl perl-modules"
-> 
-> That needs to go below do_install() and specify the actual modules it needs,
-> not the blanket meta-package.
+On 5/7/12 5:30 AM, Giuseppe Condorelli wrote:
+> Hi All,
+>
+> after having built my own image, I've looked at the resultant rpms under
+> the deploy directory and I saw
+> no relocation is possible (rpm -qpli<package>). This because Prefix is not
+> set during spec file creation
+> (package_rpm.bbclass).
+> As far as you know, is it possible to set Prefix somehow?
 
-It looks like the perl RDEPENDS will go away. I'll submit a revised
-patch when I have checked that. Meanwhile I'll carry it on git hub while
-I sort out the details.
+What type of packages are you trying to relocate?
 
-Philip
+For target packages I don't expect that it would ever work.  The items built by 
+the build system often have internal paths and expectations.
 
-> 
-> Speaking of lxc, have you tried systemd-nspawn to launch containers yet?
-> 
-> regards,
-> 
-> Koen
+For SDK packages (i.e. things that run on the host), it might be possible to 
+make them relocatable, but it would be specific to those style packages.  (Any 
+relocatable package has to have the inbuilt knowledge to move and change 
+configuration files as necessary.  Also you have to have the right set of 
+packages to install into the environment and such.  I don't believe we use RPM 
+to install any native/SDK packages today.)
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--Mark
+
+> Please let me know.
+> Thanks,
+> Giuseppe
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
