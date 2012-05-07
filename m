@@ -1,33 +1,25 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SRR02-0002yf-HJ
+	(envelope-from <philip@balister.org>) id 1SRS4m-0003cV-9q
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 18:41:26 +0200
-Received: by yenm3 with SMTP id m3so4380917yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 May 2012 09:31:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=owMJjSRk94Y9585cEkw8vYxzWY9WVDiAjacjUs79MoU=;
-	b=M50dz8vDJKNqyjo+J6/pSQguKup4d2bPUSHKBNok/8nj0/wKuTX1SzW/43CuSxIKjM
-	wrxSEvRVws027AlXS/I+59vwPRjCrrTjS82kdpCgRipk2k98pj1uwml/DG+PrRCVK3z4
-	KYcp/FgF9/t3EmsQWBa29kFKDiR+E0f40pPI7NNPzOW3wkK4Tecrp5/ER1G1OE+QkfHw
-	opEF8Wm/ck1cC3IaFvPcynXkRvjsljouW3h+7L+YyBOiwzxyWLIW/xaE05FrzRTmaMfk
-	ROeBkvev6qTjk5s5GHYZ67fHgtRqkK6w0dT/KkRa7GfVNJ0m3VB/XSxuQMi4jw7QCsjl
-	m+qA==
+	Mon, 07 May 2012 19:50:24 +0200
+Received: (qmail 9206 invoked by uid 1003); 7 May 2012 17:40:33 -0000
+Received: from unknown (HELO ?192.168.1.102?)
+	(philip@opensdr.com@71.171.22.246)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	7 May 2012 17:40:32 -0000
+Message-ID: <4FA8090F.6080701@balister.org>
+Date: Mon, 07 May 2012 13:40:31 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.236.125.234 with SMTP id z70mr19998206yhh.18.1336408295593;
-	Mon, 07 May 2012 09:31:35 -0700 (PDT)
-Received: by 10.236.23.9 with HTTP; Mon, 7 May 2012 09:31:35 -0700 (PDT)
-In-Reply-To: <92a51d2df35aea2d72186ff7c6f0d6e9c20dc504.1335766581.git.Martin.Jansa@gmail.com>
-References: <cover.1335766581.git.Martin.Jansa@gmail.com>
-	<92a51d2df35aea2d72186ff7c6f0d6e9c20dc504.1335766581.git.Martin.Jansa@gmail.com>
-Date: Mon, 7 May 2012 18:31:35 +0200
-Message-ID: <CA+chaQcL3MRbYXO4HPcdCmC3TNKecK=iZsTb+M2q6q60cjSfEA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-efl][PATCH 1/6] libsoup-2.4, gobject-introspection: upgraded in oe-core
+References: <1335980745-29862-1-git-send-email-philip@balister.org>	<1335980745-29862-2-git-send-email-philip@balister.org>
+	<jnrvsr$4jc$1@dough.gmane.org>
+In-Reply-To: <jnrvsr$4jc$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.2
+Subject: Re: [meta-oe 1/1] lxc : Add recipe for building Linux Containers tools.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +33,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 16:41:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 May 2012 17:50:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 30, 2012 at 8:31 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> =C2=A0.../recipes-support/libsoup/libsoup-2.4_2.37.2.bb =C2=A0| =C2=A0 25=
- --------------
-> =C2=A0.../use-usr-bin-env-for-python.patch =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 20 -----------
-> =C2=A0.../gobject-introspection_0.9.10.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 32 ------------------
-> =C2=A0.../gobject-introspection_git.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 34 --------------------
-> =C2=A04 files changed, 0 insertions(+), 111 deletions(-)
-> =C2=A0delete mode 100644 meta-efl/recipes-support/libsoup/libsoup-2.4_2.3=
-7.2.bb
-> =C2=A0delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/g=
-object-introspection/use-usr-bin-env-for-python.patch
-> =C2=A0delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/g=
-object-introspection_0.9.10.bb
-> =C2=A0delete mode 100644 meta-gnome/recipes-gnome/gobject-introspection/g=
-object-introspection_git.bb
+On 05/02/2012 02:54 PM, Koen Kooi wrote:
+> Op 02-05-12 19:45, Philip Balister schreef:
+>> Linux containers are a lightweight virtualization system.
+> 
+>> Compile tested on F15 and lightly run tested on a pandaboard.
+> 
+>> Signed-off-by: Philip Balister <philip@balister.org> --- 
+>> meta-oe/recipes-extended/lxc/lxc_git.bb |   21 +++++++++++++++++++++ 1
+>> files changed, 21 insertions(+), 0 deletions(-) create mode 100644
+>> meta-oe/recipes-extended/lxc/lxc_git.bb
+> 
+>> diff --git a/meta-oe/recipes-extended/lxc/lxc_git.bb
+>> b/meta-oe/recipes-extended/lxc/lxc_git.bb new file mode 100644 index
+>> 0000000..8f22e77 --- /dev/null +++
+>> b/meta-oe/recipes-extended/lxc/lxc_git.bb @@ -0,0 +1,21 @@ +SUMMARY =
+>> "Linux Containers tools" +DESCRIPTION = "Linux containers are a light
+>> weight isolation system for Linux." +HOMEPAGE =
+>> "http://lxc.sourceforge.net" +LICENSE = "LGPLv2.1"
+> 
+> Move LIC_FILES_CHKSUM to here
+> 
+>> + +PV = "0.8.0-rc2"
+> 
+> That violates the versioning policy
+> 
+>> + +RDEPENDS_${PN} = "perl perl-modules"
+> 
+> That needs to go below do_install() and specify the actual modules it needs,
+> not the blanket meta-package.
 
-Now it's applied in oe-core, I'll send updated pull request from
-jansa/pull2 with 4 more patches tonight..
+It looks like the perl RDEPENDS will go away. I'll submit a revised
+patch when I have checked that. Meanwhile I'll carry it on git hub while
+I sort out the details.
 
-Cheers,
+Philip
+
+> 
+> Speaking of lxc, have you tried systemd-nspawn to launch containers yet?
+> 
+> regards,
+> 
+> Koen
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
