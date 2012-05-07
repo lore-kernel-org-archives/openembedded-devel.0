@@ -1,49 +1,34 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dasty@dasty.net>) id 1SRVYt-0000ur-0H
+	(envelope-from <raj.khem@gmail.com>) id 1SRVr4-0005sQ-HO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 May 2012 23:33:43 +0200
-Received: by wgbds1 with SMTP id ds1so23334wgb.0
+	Mon, 07 May 2012 23:52:30 +0200
+Received: by wibhj13 with SMTP id hj13so25214wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 May 2012 14:23:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dasty.net; s=gmail;
-	h=sender:subject:from:to:in-reply-to:references:content-type:date
-	:message-id:mime-version:x-mailer:content-transfer-encoding;
-	bh=JqxZABSOfwvRN19LC67d/m2CDAZkkiYxpYd0bBRPbFY=;
-	b=TbVADYXXdpTieUJdZI1kY8KgLtP8TEhzi8+ehkD9dkwlSNIMggUulIVt2bZvpRpcvJ
-	qDD/nmlHRh2ibENcYP8OlDYEnAXWuTlnxYJvDAqwvWREjbT0+/+7GoYUnlxIcD2OluDs
-	ExD7vHq3gki/jeH0H3pQWFJzT66EydHOGydKw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=sender:subject:from:to:in-reply-to:references:content-type:date
-	:message-id:mime-version:x-mailer:content-transfer-encoding
-	:x-gm-message-state;
-	bh=JqxZABSOfwvRN19LC67d/m2CDAZkkiYxpYd0bBRPbFY=;
-	b=HuUkiLE9AH5Ci1IPVsB1NOs1vTRm2rFVcyEeWXcjPdCicimtj4RfgiflQNFFC34k+Q
-	epBBCJmHYn6cSwN9s/wY2IVm8behArFnWKZWkmLA1X1WBXR3vo/ZIK5ajQd9h9nRiBHH
-	VAqdw5yk2SZnKjvZNfKEqB0/3efpxlznn4MDiEmJGznEfEuENK379tLA6gFakOAt9QK9
-	QG9yYD2ZfvrC0WAeGEVUCs1H32N4pZIhaT46tthHWhOsuic+RacE10GkIqKoHiYgC/xN
-	NZXyVQ8f722nK+OI1eoY4PxIud+NLhEBcCFyHDLMxG6WinPUpGb1uU4Ldd9e4WuJLlV8
-	u3Iw==
-Received: by 10.180.106.9 with SMTP id gq9mr38618933wib.17.1336425832418;
-	Mon, 07 May 2012 14:23:52 -0700 (PDT)
-Received: from [192.168.1.20] (85-127-117-46.dynamic.xdsl-line.inode.at.
-	[85.127.117.46])
-	by mx.google.com with ESMTPS id r2sm20157018wif.7.2012.05.07.14.23.50
-	(version=SSLv3 cipher=OTHER); Mon, 07 May 2012 14:23:51 -0700 (PDT)
-Sender: Radek Dostal <dasty@dasty.net>
-From: Radek Dostal <rd@radekdostal.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4FA839CD.4020203@mlbassoc.com>
+	Mon, 07 May 2012 14:42:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=kwW/E6zcubV0sn4pK0zjE5Ibm1uzvuMiUiNzQ6aHGmM=;
+	b=AInW1W16EjxLRrxcCuVI5fM8IUykqZ3FYcja7dZOf3cmsfUK9Ze08JKuh3qABEFDBS
+	3rGFd1zxeikf8f3G5/e6UDJ/8djAV28sxnZDEEIV/DvkaW25e5gnDJpBjoEbdQZEMC0r
+	I585wX2/p5ihAANtQzg0EikoU6or/hUsxhHO2cPQ+K3f+YmQonyJmySfnmemJ7LIhwTZ
+	96Cp03zTg8cmmUU6XZLaRSCObewr15kzKLoSkonV2UiVVG0ahjiBpUSmGuMTnwl1EUMW
+	u2TnMrvj0oH4EbGeCATBDiN1GQDGtzeTLfu0woOhc+TUiLm551rww0bITLwo/ysOnV3f
+	eTqg==
+Received: by 10.180.106.9 with SMTP id gq9mr38714967wib.17.1336426959925; Mon,
+	07 May 2012 14:42:39 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.2.132 with HTTP; Mon, 7 May 2012 14:42:06 -0700 (PDT)
+In-Reply-To: <1336424471.2074.4.camel@dasty-laptop>
 References: <1336391680.3417.7.camel@dasty-laptop>
-	<4FA7B9DF.60304@mlbassoc.com> <1336394035.3417.12.camel@dasty-laptop>
+	<4FA7B9DF.60304@mlbassoc.com>
+	<1336394035.3417.12.camel@dasty-laptop>
 	<CAMKF1sonQpWBRYNSapa16EDGyyQCiRr5AmKoSx02xnqzzn+5yA@mail.gmail.com>
-	<1336424471.2074.4.camel@dasty-laptop> <4FA839CD.4020203@mlbassoc.com>
-Date: Mon, 07 May 2012 23:23:48 +0200
-Message-ID: <1336425828.2074.11.camel@dasty-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3
-X-Gm-Message-State: ALoCoQkLfj0ZTIPK7RYOHUclrNXvjmJS4DjCfQx/AZCvgT5KmQsyY9C5M7MPKEUPgB6nDS/Ff47Q
+	<1336424471.2074.4.camel@dasty-laptop>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 7 May 2012 14:42:06 -0700
+Message-ID: <CAMKF1srQ65u9rLUkHx8V_doV6iZNqs4VQ03m7Zhe=NJ2YegoLQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Simultaneous build of two intree packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -58,32 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 21:33:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 May 2012 21:52:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, 2012-05-07 at 15:08 -0600, Gary Thomas wrote:
-> I think that your recipes are not well behaved - two recipes probably
-> should not be creating the same file in such a way.
-> 
-> Can you post the recipes, or at least the code snippets that break? 
+On Mon, May 7, 2012 at 2:01 PM, Radek Dostal <rd@radekdostal.com> wrote:
+> Because ln -sf first do symlink(1) unlink(2) and symlink(3) again. In
+> case link is created by another process between 2 and 3 than ln fails.
+>
+> It is quite well described here:
+> http://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html
+>
 
-I agree usually it should not be a case, but since both of the recipes
-are in-tree recipes within the same tree, than obviously tree is the
-shared resource.
-
-Pasting the recipes would probably not be very helpful. Only thing they
-do is that they call the cmake bellow and actual error occurs within
-cmake scripts. 
-
-Just in order to give overview: First whole structure is configured.
-Configuration is shared between all the recipes. Second actual make is
-called on different subdirectories. Cmake in its nature is not designed
-to be able to started multiple time over same tread (with exception of
-starting it via -jX).
-
-Thanks,
-Radek
-
+Do you think I don't know how ln works ?
+all I was asking why are same symlinks being created
+by two different packages that seems broken to me. Fix the
+packages
 
 
