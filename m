@@ -1,35 +1,32 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1SRmrK-0007wT-Ma
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1SRs4e-0005bo-NP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 May 2012 18:01:54 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1987822325AE;
-	Tue,  8 May 2012 17:52:05 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8F70622325AD;
-	Tue,  8 May 2012 17:52:04 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: **
-X-Spam-Status: No, score=2.0 required=5.0 tests=BAYES_50 autolearn=no
-	version=3.3.1
-Received: from rhein.familie-heinold.de (g225146021.adsl.alicedsl.de
-	[92.225.146.21]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Tue,  8 May 2012 17:52:04 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 3B8AF3C4E9; Tue,  8 May 2012 17:52:01 +0200 (CEST)
-Date: Tue, 8 May 2012 17:52:01 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 08 May 2012 23:36:00 +0200
+Received: by wibhj13 with SMTP id hj13so1048773wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 May 2012 14:26:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=3fhBT99mAJOx11cty+IqlapLStJjwaCWg3OYNdnqYuw=;
+	b=c8rpID2O1SjWIfYRruZMWYyrVcpY6dl3StnWjKDkmdZx4H5eMjOupp3zDIVXXCPGAS
+	ztDnvEQBGlky50vBod7rE7F5wVjoFSRyhn6EaQdfjbqJ8ZmyEqqHlipMLaKEvyCm7m9f
+	WLJDhak/3L2MlR3zCMrru6T6jwwBhPi0YaYYNOU3loE1GVTbK1EjAapXBEmnQ/dInLQK
+	0mikdt0ZK92TCkyuIK5PXDoBZho1f/Py880uHSJ+DXkoKOnzvws/Oc4d+zemaVUpNPDG
+	+8s9wmo7E4uqJYR8N8KuXtu8L9hCIv1I1lPiZ7lAd4tDbb+8bN870Izdclec3y9vNeT/
+	Rzzw==
+Received: by 10.180.75.241 with SMTP id f17mr48135040wiw.11.1336512368866;
+	Tue, 08 May 2012 14:26:08 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e8sm31671410wiy.3.2012.05.08.14.26.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 08 May 2012 14:26:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120508155200.GA23334@rhein.zuhause.netz>
-References: <4FA84B6E.6080306@kernelconcepts.de>
-MIME-Version: 1.0
-In-Reply-To: <4FA84B6E.6080306@kernelconcepts.de>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: Linuxtag 2012
+Date: Tue,  8 May 2012 23:26:02 +0200
+Message-Id: <1336512362-8693-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH] openssh: rename bbappends to match new oe-core version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,37 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2012 16:01:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 May 2012 21:36:00 -0000
 
-On Tue, May 08, 2012 at 12:23:42AM +0200, Florian Boor wrote:
-> Hallo list!
-> 
-> We have been accepted for a project booth at LinuxTag [1] again this year!
-> This means that we have a booth at the largest Linux fair in Europe and the
-> opportunity to get in touch with users, companies and other projects there.
-> 
-> LinuxTag takes place in Berlin, Germany from May 23 to 26.
-> 
-> We need several people who want to help manning the booth. The years before was
-> able to attend myself but this year I still do not know if I'll be able to do
-> so. So if you are able to attend please take this chance to represent OE at
-> LinuxTag!
-> 
-> We have a big box with useful things for the booth (TFT, table cloth with OE
-> logo, lamps, flyers...). This box will be available at the event location.
-> Something useful to bring yourself are all sorts of devices OE supports.
-> 
-> Greetings
-> 
-> Florian
-> 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...enssh_5.9p1.bbappend => openssh_6.0p1.bbappend} |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename meta-oe/recipes-connectivity/openssh/{openssh_5.9p1.bbappend => openssh_6.0p1.bbappend} (88%)
 
-Fine,
+diff --git a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend b/meta-oe/recipes-connectivity/openssh/openssh_6.0p1.bbappend
+similarity index 88%
+rename from meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
+rename to meta-oe/recipes-connectivity/openssh/openssh_6.0p1.bbappend
+index de7668f..a459065 100644
+--- a/meta-oe/recipes-connectivity/openssh/openssh_5.9p1.bbappend
++++ b/meta-oe/recipes-connectivity/openssh/openssh_6.0p1.bbappend
+@@ -1,6 +1,6 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+-PRINC := "${@int(PRINC) + 2}"
++PRINC := "${@int(PRINC) + 1}"
+ 
+ SYSTEMD_PACKAGES = "openssh-sshd-systemd"
+ SYSTEMD_SERVICE = "sshd.socket"
+-- 
+1.7.8.6
 
-I can help out one day at least.
-
-Bye Henning
 
 
