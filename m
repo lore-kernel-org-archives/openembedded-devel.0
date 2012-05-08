@@ -1,30 +1,22 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SRlkm-0003IB-9x
+	(envelope-from <eric@eukrea.com>) id 1SRmGX-0004qv-0g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 May 2012 16:51:04 +0200
-Received: by eekc1 with SMTP id c1so1574728eek.6
+	Tue, 08 May 2012 17:23:53 +0200
+Received: from eb-e6520 (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 9CA22A6269
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 May 2012 07:41:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=74CK0NB9PAWgmAIu07Qqj5i3VcTW2vte2KrDkbouwwQ=;
-	b=HRzZBwjqpUk0pa+ovzgyp4VpuHfEz9CjTuZrjsScw5ZA9JPBUfM/kszkr8zyZJ2C2x
-	nfCirFYmj7w0XBnBdzDQdj7zta6ahTCG1jL0yYJ7/UK8F0gh/OVhITGr8odma1MHKvjr
-	zkJ09ttjz5azqsQrkSrk/WMANAy8xY92BnztkwqrHadEhrEGEJjq++186/UlwCKaT5EK
-	Y0t/xMDJ2Y3elNBerBOHCEwaJPqusQFbO/710OTyHCdNk/PTCyd1lns1lF8z1UgS5bl0
-	StHm0FMbeMSUOcNbohIzN2K6Zu5k2r2fb7zLnAPwHMp0AQJfK60xEigo2wGK22UT/MUT
-	3CIQ==
-MIME-Version: 1.0
-Received: by 10.50.194.163 with SMTP id hx3mr10666928igc.49.1336488072457;
-	Tue, 08 May 2012 07:41:12 -0700 (PDT)
-Received: by 10.231.49.134 with HTTP; Tue, 8 May 2012 07:41:12 -0700 (PDT)
-Date: Tue, 8 May 2012 16:41:12 +0200
-Message-ID: <CAOHjBZud0iQwc+FUQSkzxkVVWhZwgbCowNw8KSscOxtHmFcE0g@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+	Tue,  8 May 2012 17:13:58 +0200 (CEST)
+Date: Tue, 8 May 2012 17:13:57 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [oe-core] How to produce toolchain sdk
+Message-ID: <20120508171357.36ca109f@eb-e6520>
+In-Reply-To: <CAOHjBZud0iQwc+FUQSkzxkVVWhZwgbCowNw8KSscOxtHmFcE0g@mail.gmail.com>
+References: <CAOHjBZud0iQwc+FUQSkzxkVVWhZwgbCowNw8KSscOxtHmFcE0g@mail.gmail.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [oe-core] How to produce toolchain sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,18 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2012 14:51:04 -0000
+X-List-Received-Date: Tue, 08 May 2012 15:23:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+Hi Giuseppe,
 
-as you have understood from my previous requests, I'm a newbe of OE-Core
-and I'm wondering
-which is the better way to build a toolchain sdk.
-I'm understanding it's different respect the classic openembedded tree
-(where I was able to build it).
-Please can you help me?
+Le Tue, 8 May 2012 16:41:12 +0200,
+Giuseppe Condorelli <giuseppe.condorelli@gmail.com> a =E9crit :
+> as you have understood from my previous requests, I'm a newbe of OE-Core
+> and I'm wondering
+> which is the better way to build a toolchain sdk.
+> I'm understanding it's different respect the classic openembedded tree
+> (where I was able to build it).
+> Please can you help me?
+>=20
+you can try :
+bitbake meta-toolchain
+or for qt embedded :
+bitbake meta-toolchain-qte
 
-Thanks,
-Giuseppe
+Eric
+
 
