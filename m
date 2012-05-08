@@ -1,21 +1,14 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from ffm.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1SRWUn-0006qi-2D
-	for openembedded-devel@openembedded.org; Tue, 08 May 2012 00:33:33 +0200
-Received: from [77.182.6.79] (helo=[192.168.1.184])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1SRX82-0000YQ-I9
-	for openembedded-devel@openembedded.org; Tue, 08 May 2012 01:14:06 +0200
-Message-ID: <4FA84B6E.6080306@kernelconcepts.de>
-Date: Tue, 08 May 2012 00:23:42 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.28) Gecko/20120313 Lightning/1.0b2 Thunderbird/3.1.20
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@openembedded.org>
-X-Enigmail-Version: 1.1.2
-Subject: Linuxtag 2012
+	(envelope-from <obi@opendreambox.org>) id 1SRfF9-0002e3-Ep
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 May 2012 09:53:59 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 May 2012 09:44:02 +0200
+Message-Id: <1336463042-11751-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] lighttpd: get rid of annoying warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,39 +22,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2012 22:33:33 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 May 2012 07:53:59 -0000
 
-Hallo list!
+* Fixes:
+| lighttpd_1.4.30.bb: it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
 
-We have been accepted for a project booth at LinuxTag [1] again this year!
-This means that we have a booth at the largest Linux fair in Europe and the
-opportunity to get in touch with users, companies and other projects there.
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ .../lighttpd/lighttpd_1.4.30.bbappend              |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-LinuxTag takes place in Berlin, Germany from May 23 to 26.
-
-We need several people who want to help manning the booth. The years before was
-able to attend myself but this year I still do not know if I'll be able to do
-so. So if you are able to attend please take this chance to represent OE at
-LinuxTag!
-
-We have a big box with useful things for the booth (TFT, table cloth with OE
-logo, lamps, flyers...). This box will be available at the event location.
-Something useful to bring yourself are all sorts of devices OE supports.
-
-Greetings
-
-Florian
-
-[1] http://www.linuxtag.org
-
+diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+index 1341405..e7f4a16 100644
+--- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
++++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+@@ -1,10 +1,10 @@
+ FILESEXTRAPATHS := "${THISDIR}/${PN}"
+ 
+-PRINC := "${@int(PRINC) + 3}"
++PRINC := "${@int(PRINC) + 4}"
+ 
+ inherit systemd
+ 
+ SRC_URI += "file://lighttpd.service"
+ 
+-SYSTEMD_PACKAGES = "${PN}"
+-SYSTEMD_SERVICE_${PN} = "lighttpd.service"
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE_${PN}-systemd = "lighttpd.service"
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+1.7.9.5
 
 
 
