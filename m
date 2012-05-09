@@ -1,36 +1,33 @@
-Received: from smtprelay-b21.telenor.se ([195.54.99.212])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@emagii.com>) id 1SS7JP-0006Hh-Rg
+	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SS7XI-0006zB-Cx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2012 15:52:15 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 73DF5EBE77
+	Wed, 09 May 2012 16:06:36 +0200
+Received: by yhjj56 with SMTP id j56so304749yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2012 15:09:22 +0200 (CEST)
-X-SENDER-IP: [83.227.58.214]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ah0bAK5rqk9T4zrWPGdsb2JhbAANN7NtAQEBATeCQAEBAQECAQEBATc0CwULCxguIQYBGxQGE4gAAwYQsXcNiVOKIWuFL2MEk0+CLoERii2Hbg
-X-IronPort-AV: E=Sophos;i="4.75,557,1330902000"; d="scan'208";a="331748821"
-Received: from c-d63ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.232]) ([83.227.58.214])
-	by ipb1.telenor.se with ESMTP; 09 May 2012 15:09:22 +0200
-References: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
-	<20120305225422.GD2030@denix.org>
-	<0C757E680E33864AB113392C7E83F910BE52D2@GSX300A.mxchg.m.corp>
-	<4FA98B43.3090200@emagii.com>
-	<CAMKF1sod9Lrh1LL_JQDuLTB655Np4sTvKpHTYhfZnHgc7KuReA@mail.gmail.com>
-In-Reply-To: <CAMKF1sod9Lrh1LL_JQDuLTB655Np4sTvKpHTYhfZnHgc7KuReA@mail.gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <0FE30F74-8F48-47AF-A0FF-0D9C589A0F91@emagii.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-From: Ulf Samuelsson <openembedded@emagii.com>
-Date: Wed, 9 May 2012 14:34:07 +0200
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: iPad Mail (9B176)
-Subject: Re: Disable GNU Hash check ?
+	Wed, 09 May 2012 06:56:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=raicBT97f5L0TFa7U+G7blI4Iy2cvmgJ20CngYRUUIA=;
+	b=MobgWsdLfO7Br7jOymVm1tew4/j4o+3Xi+KSoPRM6uSWGXRgcoBc9UMpGgsrW4FNoH
+	4IyQBifQtTkZyDPThQz2YOp5zhBj/u/9NjDkaR/TNd11rcS+bMfwwtrDBf8L2oGm7yAF
+	fjybbmrzZOSV5SwsOebJ31MnpUeYD/gY8l2YFd1iC39TbC3QduFyL4M6qNupn/+2S8sv
+	gLewFNSyzT0kYVd5V5GbURx1gjCr5g1OPjKZjYh3Ifc/XMJrPLBigj4r2HMRwiLgSyiK
+	y9QEuDPpGiuENeKE79WRACjmQZqd9ZB3mRHTtoPnuMsGzRp5fVmG2De4b06HHHG/Pp5u
+	/3VQ==
+MIME-Version: 1.0
+Received: by 10.42.28.135 with SMTP id n7mr60129icc.46.1336571802958; Wed, 09
+	May 2012 06:56:42 -0700 (PDT)
+Received: by 10.231.49.134 with HTTP; Wed, 9 May 2012 06:56:42 -0700 (PDT)
+In-Reply-To: <20120508171357.36ca109f@eb-e6520>
+References: <CAOHjBZud0iQwc+FUQSkzxkVVWhZwgbCowNw8KSscOxtHmFcE0g@mail.gmail.com>
+	<20120508171357.36ca109f@eb-e6520>
+Date: Wed, 9 May 2012 15:56:42 +0200
+Message-ID: <CAOHjBZvwr98gshdES5nKvnSu7+6NOmQS5bFxLNVfbtLj6YnHSQ@mail.gmail.com>
+From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe-core] How to produce toolchain sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,39 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 13:52:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 May 2012 14:06:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Still using OE 2011.03 for this
-Would like to migrate this to OE-core, but it is not my call..
-.
+Hi Eric, All
 
-Best Regards
-Ulf Samuelsson
-ulf@emagii.com
-+46  (722) 427 437
+thanks for your reply.
 
+you can try :
+> bitbake meta-toolchain
+> or for qt embedded :
+> bitbake meta-toolchain-qte
+>
+> Indeed I already tested meta-toolchain and got  NoProvider: meta-toolchain
+the same for meta-toolchain-qte.
 
-9 maj 2012 kl. 02:46 skrev Khem Raj <raj.khem@gmail.com>:
+I tried to create adhoc recipe for my toolchain following the ones already
+available as example but I
+got alway the same message NoProvider: meta-toolchain-<name>
+I'm wondering how to solve this blocking issue.
 
-> On Tue, May 8, 2012 at 2:08 PM, Ulf Samuelsson <openembedded@emagii.com> w=
-rote:
->>=20
->> I'd rather fix the root cause than do the workaround,
->> but splitting up the build into two steps is really not supported by the
->> package.
->>=20
->> Would appreciate some comments.
->=20
-> in OE-Core the default hash style is now gnu hash for toolchain on all
-> except mips
-> since mips can not support gnu hash. you should not need to add
-> commandline parameters to indicate it.
->=20
+Many thanks.
+Giuseppe
+
+> Eric
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+>
 
