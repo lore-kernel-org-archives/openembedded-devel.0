@@ -1,38 +1,42 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SSDi8-0008Oy-ET
+	(envelope-from <martin.jansa@gmail.com>) id 1SSE9E-0007tl-Vh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2012 22:42:12 +0200
-Received: by werb13 with SMTP id b13so554829wer.6
+	Wed, 09 May 2012 23:10:14 +0200
+Received: by wgbdr1 with SMTP id dr1so692266wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2012 13:32:19 -0700 (PDT)
+	Wed, 09 May 2012 14:00:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+wIWzk0XyD3tNGBbjq9SLMC+OUdT5RhRUU3FK+MMvHA=;
-	b=zHkGACzn/3wzAJs6xKVS3G4x07PgvaWm9yVAEU/hS+AsSVHeDEOtfnawpu+mCUL9/M
-	mcNugVP/RUWSdKcKGj8x18Mpm3aUi7hluYTKav+Z3w3m+ukipWgRZ9MwMM3aEtUp7Rsw
-	hwk+kHWN26kQGMMje+maH0vbchY2r9R5+K6Mga+qGtTAH0+AQB7ivw7+YA/YlVuzNNCn
-	SyibuWpdBWn2d49oPQ6TClJFFl2Qa28ZGh22VXOtBs7zZuCHFEasfmxjJPukYnYE5CXa
-	LSgxKoIpJjI6f3msrlrbAebr+ne6YUlVoeQp4Xx98wbKamsuOtjw+xj3qyacI+FUoaim
-	Jkpw==
-Received: by 10.180.104.65 with SMTP id gc1mr3358652wib.13.1336595539014;
-	Wed, 09 May 2012 13:32:19 -0700 (PDT)
+	bh=wUVEiDhZez11SQLNe9B7wtLtsLqrfVR3GxekuTy+YOg=;
+	b=dxVgTbi4PgFFYG4OVe5WzSUNK8M8lWtsqhE4+FcwVCkdWMNDGA0zTzsrhEbW4DmHxp
+	8gJSgPsFDnJwrYzvVQ/1WtsKi+vAV58n+Rs2q+S0uB4oOnbVjgmgwhpjDMJVvjM2vzb0
+	mKQioCDqp3TK3KP7K0K8HwPj442dVydE0Jd+G9P8ClDfDXTG/2kLD93j5qPTbU+PlPVU
+	XuDJbF8e2TkMPTODQb/ONkJ0YLKrWsS1J3Eb1eT0eCtxkTG2C2s6tRC1GEmKXlmNBtDg
+	vccIoMo4lEJccSFy5bkzhSSP+vBt7sSBoJT3VxkpppgKWw23q4ulZ/fNs19yJaCqSrmZ
+	9Xbg==
+Received: by 10.180.98.137 with SMTP id ei9mr3592277wib.0.1336597219993;
+	Wed, 09 May 2012 14:00:19 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fn2sm13174909wib.0.2012.05.09.13.32.17
+	by mx.google.com with ESMTPS id ez4sm2162221wid.3.2012.05.09.14.00.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 May 2012 13:32:17 -0700 (PDT)
-Date: Wed, 9 May 2012 22:32:19 +0200
+	Wed, 09 May 2012 14:00:19 -0700 (PDT)
+Date: Wed, 9 May 2012 23:00:20 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120509203219.GH12898@jama.jama.net>
-References: <1336594013-19408-1-git-send-email-Martin.Jansa@gmail.com>
-	<1336594013-19408-2-git-send-email-Martin.Jansa@gmail.com>
-	<20120509200910.GG12898@jama.jama.net>
+To: Apelete Seketeli <apelete@seketeli.net>
+Message-ID: <20120509210020.GI12898@jama.jama.net>
+References: <1334180792-20535-1-git-send-email-apelete@seketeli.net>
+	<20120411125503.GB3637@jama.jama.net>
+	<20120412204417.GD3256@hermes>
+	<20120412210108.GA3945@jama.jama.net>
+	<20120502210040.GB3781@hermes> <20120509191656.GP3781@hermes>
 MIME-Version: 1.0
-In-Reply-To: <20120509200910.GG12898@jama.jama.net>
+In-Reply-To: <20120509191656.GP3781@hermes>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 2/2] ttf-fonts: call update-fonts only on target, not during do_rootfs
+Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] opkg-utils: Update SRC_URI to git.yoctoproject.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,260 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 20:42:12 -0000
-X-Groupsio-MsgNum: 38643
+X-List-Received-Date: Wed, 09 May 2012 21:10:14 -0000
+X-Groupsio-MsgNum: 38644
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NzX0AQGjRQPusK/O"
+	protocol="application/pgp-signature"; boundary="4LwthZj+AV2mq5CX"
 Content-Disposition: inline
 
---NzX0AQGjRQPusK/O
-Content-Type: text/plain; charset=us-ascii
+--4LwthZj+AV2mq5CX
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 09, 2012 at 10:09:10PM +0200, Martin Jansa wrote:
-> On Wed, May 09, 2012 at 10:06:53PM +0200, Martin Jansa wrote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
+On Wed, May 09, 2012 at 09:16:56PM +0200, Apelete Seketeli wrote:
+> Hi,
 >=20
-> ignore this one.. only on ML I've noticed that
-> pkg_postrm_append() {
-> should be even improved to
-> pkg_postrm_${PN}_append() {
+> Le 02-May-12, Apelete Seketeli a =E9crit:
+> >=20
+> > Okay, I finally got some time to works on this.
+> > I asked on the yocto ML to get the original patches applied, and they
+> > actually got applied (thanks to Richard Purdie).
+> >=20
+> > Please find attached the patch to get the changes into oe-classic. I
+> > don't know if I should create a new thread to submit it, I would
+> > gladly do so if asked to.
+>=20
+> The patch has just been applied in oe-classic, thanks to Kristoffer
+> Ericson.
+>=20
+> http://cgit.openembedded.org/openembedded/commit/?id=3D1ff63aa26e3088ba2d=
+30e491d74a31caf25c3d83
+>=20
+> I am new to the list, so I am not used to the process, but would you
+> please tell me what the rule for the author and committer field is ?
+> I would have naively expect to see my name there.
 
-Grr, otherway around.. v1 was better because recipes including ttf.inc
-does e.g.
-ttf-ubuntu-font-family_0.69.bb:
-PACKAGES =3D "${PN}-dbg ttf-ubuntu-mono ttf-ubuntu-sans ttf-ubuntu-serif"
+You did it almost right and Kristoffer's name should be only in committer=
+=20
+field and yours in author.
 
-so we need this postins/postrm in all subpackages (except ${PN}-dbg
-where I have noticed it first).
-
-So better to apply it for all then for none (ttf-ubuntu-font-family
-=3D=3D ${PN} doesn't exist)
-
-I'll update patchwork status to keep only right one.
-
-Sorry for noise..
+Next time when sending new version use PATCHv2 prefix and don't send
+your patch in reply as inline. If you download mbox version from
+patchwork
+http://patchwork.openembedded.org/patch/26863/
+you'll see that e.g. my reply to you get's included in commit message of
+such patch which doesn't belong there and committer needs to use=20
+git commit --amend  -s
+to strip unwanted text..
 
 Cheers,
-
->=20
->=20
-> Cheers,
->=20
-> >  .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    2 +-
-> >  .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    2 +-
-> >  .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    1 +
-> >  .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    2 +-
-> >  .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    2 +-
-> >  .../ttf-fonts/ttf-liberation_0.2.bb                |    2 +-
-> >  .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    2 +-
-> >  .../ttf-fonts/ttf-sazanami_20040629.bb             |    2 +-
-> >  .../ttf-fonts/ttf-ubuntu-font-family_0.69.bb       |    2 +-
-> >  .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    2 +-
-> >  meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    8 ++++++--
-> >  11 files changed, 16 insertions(+), 11 deletions(-)
-> >=20
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_200802=
-16.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-> > index 10fb922..97b67b2 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-> > @@ -4,7 +4,7 @@ LICENSE =3D "Arphic Public License"
-> >  LIC_FILES_CHKSUM =3D "file://README;md5=3D62be011094b7865ddc4d1a648444=
-d31a"
-> >  SRC_DISTRIBUTE_LICENSES +=3D "${PN}"
-> >  RPROVIDES_${PN} =3D "virtual-chinese-font"
-> > -PR =3D "r3"
-> > +PR =3D "r4"
-> > =20
-> >  SRC_URI =3D \
-> >  "http://archive.ubuntu.com/ubuntu/pool/main/t/ttf-arphic-uming/ttf-arp=
-hic-uming_0.2.${PV}.1.orig.tar.gz"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb b/me=
-ta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
-> > index d4ddf16..d7b3977 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
-> > @@ -12,7 +12,7 @@ RDEPENDS_${PN}-sans-condensed =3D "${PN}-common"
-> >  RDEPENDS_${PN}-serif =3D "${PN}-common"
-> >  RDEPENDS_${PN}-serif-condensed =3D "${PN}-common"
-> >  RDEPENDS_${PN}-common =3D ""
-> > -PR =3D "r4"
-> > +PR =3D "r5"
-> > =20
-> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.b=
-z2 \
-> >             file://30-dejavu-aliases.conf"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb b/meta=
--oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
-> > index e0a6c65..2c3bf2e 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
-> > @@ -6,6 +6,7 @@ LICENSE =3D "Apache-2.0"
-> >  LIC_FILES_CHKSUM =3D "file://README.txt;md5=3D83544262a86f1f1ec761e758=
-97df92bc"
-> >  SRCREV =3D "21e6e2de1f0062f949fcc52d0b4559dfa3246e0e"
-> >  PV =3D "0.1+gitr${SRCPV}"
-> > +PR =3D "r1"
-> > =20
-> >  SRC_URI =3D "git://github.com/android/platform_frameworks_base.git;pro=
-tocol=3Dgit;branch=3Dmaster"
-> > =20
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb b/m=
-eta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
-> > index b00bd75..ee27c12 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
-> > @@ -4,7 +4,7 @@ DESCRIPTION =3D "Gentium fonts - TTF Version"
-> >  HOMEPAGE =3D "http://scripts.sil.org/gentium"
-> >  LICENSE =3D "SIL Open Font License"
-> >  LICENSE_URL =3D "http://scripts.sil.org/cms/scripts/page.php?site_id=
-=3Dnrsi&item_id=3DOFL"
-> > -PR =3D "r4"
-> > +PR =3D "r5"
-> > =20
-> >  SRC_URI =3D "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.ori=
-g.tar.gz \
-> >             file://OFL.gz"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb=
- b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
-> > index f841f1a..a2ef0cf 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
-> > @@ -3,7 +3,7 @@ require ttf.inc
-> >  DESCRIPTION =3D "Hunky fonts - TTF Version"
-> >  HOMEPAGE =3D "http://sourceforge.net/projects/hunkyfonts"
-> >  LICENSE =3D "LGPL"
-> > -PR =3D "r4"
-> > +PR =3D "r5"
-> > =20
-> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
-> > =20
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb b=
-/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
-> > index 104915e..c0d77fd 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
-> > @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9b=
-a36caa9b7df079bae19f \
-> >                      file://License.txt;md5=3D5b171c5100029d884fcea21d9=
-a2b7543 \
-> >  "
-> > =20
-> > -PR =3D "r4"
-> > +PR =3D "r5"
-> > =20
-> >  SRC_URI =3D "http://fedorahosted.org/liberation-fonts/export/807b6dfd0=
-69b998cd9b4d3158da98817ef23c79d/F-9/liberation-fonts-ttf-3.tar.gz"
-> >  S =3D "${WORKDIR}/liberation-fonts-${PV}"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta=
--oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-> > index 62acf82..ab9be35 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-> > @@ -3,7 +3,7 @@ require ttf.inc
-> >  DESCRIPTION =3D "MPlus font - TTF Edition"
-> >  HOMEPAGE =3D "http://dejavu.sourceforge.net/wiki/"
-> >  LICENSE =3D "${PN}"
-> > -PR =3D "r1"
-> > +PR =3D "r2"
-> > =20
-> >  SRC_URI =3D "http://osdn.dl.sourceforge.jp/mplus-fonts/6650/mplus-TEST=
-FLIGHT-${PV}.tar.gz"
-> >  S =3D "${WORKDIR}/mplus-TESTFLIGHT-${PV}"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.b=
-b b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-> > index 1e84fea..3c4cb26 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-> > @@ -9,7 +9,7 @@ LICENSE =3D "Public domain"
-> >  LIC_FILES_CHKSUM =3D "file://README;md5=3D97d739900be6e852830f55aa3c07=
-d4a0"
-> >  SRC_DISTRIBUTE_LICENSES +=3D "${PN}"
-> >  RPROVIDES_${PN} =3D "virtual-japanese-font"
-> > -PR =3D "r6"
-> > +PR =3D "r7"
-> > =20
-> >  SRC_URI =3D "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-200406=
-29.tar.bz2"
-> >  S =3D "${WORKDIR}/sazanami-20040629"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_=
-0.69.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
-> > index 1c71b1b..22a7aec 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
-> > @@ -3,7 +3,7 @@ require ttf.inc
-> >  DESCRIPTION =3D "Ubuntu Font Family - TTF Version"
-> >  HOMEPAGE =3D "http://font.ubuntu.com"
-> >  LICENSE =3D "UFL"
-> > -PR =3D "r1"
-> > +PR =3D "r2"
-> > =20
-> >  SRC_URI =3D "http://font.ubuntu.com/download/ubuntu-font-family-${PV}+=
-ufl.zip"
-> >  SRC_URI[md5sum] =3D "2c3287ea72f81ce025095f7a6d68af28"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.b=
-b b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
-> > index 06de002..f1eb6ff 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
-> > @@ -4,7 +4,7 @@ DESCRIPTION =3D "WenQuanYi Zen Hei - A Hei-Ti Style Chi=
-nese font"
-> >  AUTHOR =3D "Qianqian Fang and The WenQuanYi Project Contributors"
-> >  HOMEPAGE =3D "http://wqy.sourceforge.net/en/"
-> >  LICENSE =3D "GPLv2"
-> > -PR =3D "r1"
-> > +PR =3D "r2"
-> > =20
-> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
-> >  S =3D "${WORKDIR}/wqy-zenhei"
-> > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc b/meta-oe/recip=
-es-graphics/ttf-fonts/ttf.inc
-> > index bba94bd..d48f692 100644
-> > --- a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
-> > @@ -12,11 +12,15 @@ do_install() {
-> >  }
-> > =20
-> >  pkg_postinst_append() {
-> > -    update-fonts
-> > +    if [ -z "$D" ]; then
-> > +        update-fonts
-> > +    fi
-> >  }
-> > =20
-> >  pkg_postrm_append() {
-> > -    update-fonts
-> > +    if [ -z "$D" ]; then
-> > +        update-fonts
-> > +    fi
-> >  }
-> > =20
-> >  inherit allarch
-> > --=20
-> > 1.7.8.6
-> >=20
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---NzX0AQGjRQPusK/O
+--4LwthZj+AV2mq5CX
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAk+q1FMACgkQN1Ujt2V2gByAWACgmaaHcP8NYacUcBEvHajm1vVF
-vsgAn1NGHPHFhx6aq4dlMyTMNf/JXgBE
-=bkDS
+iEYEARECAAYFAk+q2uQACgkQN1Ujt2V2gBwbigCgieCjmLuThfZbXu1KeaQHgI8M
+FI8AoJ7GFH6V49chiAkjiMVtEe6EIM2w
+=wkTW
 -----END PGP SIGNATURE-----
 
---NzX0AQGjRQPusK/O--
+--4LwthZj+AV2mq5CX--
