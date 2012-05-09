@@ -1,32 +1,37 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefro.net@gmail.com>)
-	id 1SSDJs-0003h1-UU; Wed, 09 May 2012 22:17:09 +0200
-Received: by yhjj56 with SMTP id j56so753163yhj.6
-	for <multiple recipients>; Wed, 09 May 2012 13:07:15 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>) id 1SSDLj-0006Qh-04
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 May 2012 22:19:17 +0200
+Received: by wgbds1 with SMTP id ds1so1963808wgb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 May 2012 13:09:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=kwXJERDRhLsra1QxmSn7yq4/gseZ0y1OzxtK6fXM/6g=;
-	b=gRnS4wqZ6f5Eh7eq+nLPMWTHvezRdwUx79ylztzOLSr5UdGPu1TZDuSD+sLOqIi64C
-	hkCIna4Bu9K4MCzZvaR+l2chFvCmIzreCFtah3p2uozO5URDLkuclB7YuTbDCMU3AHm4
-	GTjuwpQgKuN1igEALPQUfr/A4WRWCTs7x6fuIfU5BpHudlR4TL3+uzQKleWjBOVbyBs7
-	XPdgtIxl/m78h4ENTosMVnvSKCoOQMYBsTtDDxM4OQiZnBqsXTjLlA3ncOwW8XUdkj9I
-	w9fyQibwzKVMvUCfB7WzgoryF17joRoQq14ESHHGPTvF2shiPm6dVMIEk0Q7VKcY0TPO
-	WoWg==
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=7gGn70Os6dM/DJc0Wuaam7fpkXiot2bnMmgd94oJON8=;
+	b=QU6jeN6zpuX3iPj5IG9UvFm5pDAM+oZbJbzIWnL08fzIxuyG/A6eHA6+QvZrk2OMx7
+	k65FCTPKeg5ybXenuBJoIxkC4LPfRJbLeAAbqvQvg3dP5UUPduLHk8hPb49aMETkb9MR
+	tVzYFwiPaUPBI/nxrHzZ289OiRri7p4flveMOg/2AED37cMqNlrwo8Lin8guL6R3k6XQ
+	NfyZq2uVsqYu63vubI+C5HdsB2dkBhO1JfH7W8SMnc1ZuqjtAiYLj5STHDW2g+4GW0qL
+	SfCiTgcNxNb6rmbDP/4J6iO5K9RDeLxYOL3/uKN3hBcZ8SntnQ9nRoVtEzdmqt/J8goT
+	K6Dg==
+Received: by 10.180.78.164 with SMTP id c4mr9952819wix.10.1336594150069;
+	Wed, 09 May 2012 13:09:10 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id m4sm6605579wix.0.2012.05.09.13.09.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 May 2012 13:09:09 -0700 (PDT)
+Date: Wed, 9 May 2012 22:09:10 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120509200910.GG12898@jama.jama.net>
+References: <1336594013-19408-1-git-send-email-Martin.Jansa@gmail.com>
+	<1336594013-19408-2-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Received: by 10.50.182.133 with SMTP id ee5mr808138igc.63.1336594034932; Wed,
-	09 May 2012 13:07:14 -0700 (PDT)
-Sender: jefro.net@gmail.com
-Received: by 10.50.92.7 with HTTP; Wed, 9 May 2012 13:07:14 -0700 (PDT)
-Date: Wed, 9 May 2012 13:07:14 -0700
-X-Google-Sender-Auth: YKzpv5ODuKS4VSYeEyJYwJi3i1A
-Message-ID: <CA+YB3rb7vfWy7KfeK7qPYPJcgXKahUF-RzCr2-YF6-pusEsOaQ@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-To: tsc <tsc@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-Subject: MINUTES: OE TSC 24-April 2012
+In-Reply-To: <1336594013-19408-2-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 2/2] ttf-fonts: call update-fonts only on target, not during do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,250 +45,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 20:17:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 May 2012 20:19:29 -0000
+X-Groupsio-MsgNum: 38640
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L1c6L/cjZjI9d0Eq"
+Content-Disposition: inline
 
-OpenEmbedded Technical Steering Committee
-24 April 2012
+--L1c6L/cjZjI9d0Eq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Attending:
- Richard Purdie (RP)
- Paul Eggleton (bluelightning)
- Mark Hatle (fray)
- Tom Rini (Tartarus)
+On Wed, May 09, 2012 at 10:06:53PM +0200, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
 
-Apologies:
- Khem (khem)
-
-Minutes: Jefro (Jefro)
-
-________________________________________________
-Agenda & Summary
-
-1. pick a chair
-   RP
-
-2. lingering issues
-
- a. raise awareness of "janitor" list, QA "bugs"
-  => fray to start publicity about "janitor" bugs
-  look at promoting after 1.2
-
-3. new issues
-
- a. discuss communication with OE community about
-          release-oriented phases
-   => fray willing to manage page as TSC activity
-   => RP to send email updates, TSC to handle in future
-   => future agenda: document release process
-   =>  fray will stay in sync with Dave/RP/Song & create wiki when appropriate
-   Song sent out email, putting out docs re processes, proceeding reasonably
-
- b. mips/mips32 tuning issue
-   =>  fray will summarize to list with possible options & ask for comments
-   done - resolved with a workaround by email
-
- c. Yocto entering 1.3 planning phase
- => spell out on oe-core, oe-devel, yocto mailing lists (RP)
-
-4. status
-
- a. oe-core release
-   more quality issues than expected, bug work started too late
-   next time make m4 bugfix only
-   release name 2012-1
-   update-alternatives "a bit of a mess", discuss on list
-
- b. elections
-   call for candidates out, no replies yet - outreach possible
-
- c. infrastructure
-   no news is good news
-   query re new testing hardware, deferred to next meeting
-
-key:
-=> action item (indented = older or remaining from prior meetings)
--> note from prior meetings
-
-________________________________________________
-Raw Transcript
-
-(8:56:55 AM) Jefro: Hi all - trying something new today, agenda in a
-collaborative workspace: http://collabedit.com/jjn5r
-(9:00:14 AM) RP: Jefro: looks interesting
-(9:00:52 AM) RP: bluelightning: here?
-(9:01:01 AM) bluelightning: RP: yep
-(9:01:03 AM) bluelightning: hi all
-(9:02:05 AM) RP: missing khem...
-(9:02:05 AM) Jefro: fray & Tartarus here?
-(9:02:11 AM) fray: :)
-(9:02:12 AM) Tartarus: pong
-(9:02:22 AM) Jefro: yep, everyone but khem - I have pinged him
-(9:03:28 AM) RP: ok, we can give it a few minutes, then start
-(9:03:48 AM) RP: I can chair for a change, I don't think I've done it
-for a while?
-(9:04:02 AM) Jefro: ok
-(9:04:57 AM) Jefro: feel free to add any new issues to the collabedit
-page, or let me know & I'll add them
-(9:08:04 AM) RP: ok, might as well start
-(9:08:45 AM) RP: So on the janitor issue, I think that is ongoing
-(9:08:57 AM) RP: Once 1.2 is out we can really start looking at
-promotion of that
-(9:09:06 AM) fray: ypu
-(9:09:08 AM) fray: 'er.. yup
-(9:09:17 AM) RP: Moving on to 3a, Song did send out emails
-(9:09:36 AM) RP: he is also putting out documentation about processes
-and so forth
-(9:09:53 AM) RP: So I think discussion is ongoing there and proceeding
-reasonably
-(9:10:02 AM) Tartarus: llok
-(9:10:04 AM) RP: I'm not sure there is any specific action that needs
-taking at this point?
-(9:10:26 AM) bluelightning: not right now, just keep in mind for the
-next dev cycle I think
-(9:10:45 AM) RP: yes, worth keeping on the agenda to provoke us to
-action at the right time
-(9:10:54 AM) RP: I suppose its worth mentioning Yocto entering 1.3
-planning phase
-(9:11:02 AM) fray: ya.. keep it open so I can manager the wiki stuff
-when 1.2 is wrapped
-(9:11:03 AM) RP: It might be worth spelling this out on the mailing list?
-(9:11:06 AM) fray: (next week?)
-(9:11:35 AM) RP: hmm, I skipped to 3c unintentionally :)
-(9:11:47 AM) RP: I did send out an email previously, I will perhaps
-reply to that and remind people
-(9:11:49 AM) ***Jefro just added it
-(9:11:59 AM) Tartarus: So
-(9:12:02 AM) Tartarus: "the" mailing list?
-(9:12:09 AM) RP: Something on OE-Core would be good
-(9:12:10 AM) Tartarus: I think it needs to be a few, to make sure all
-the folks see it
-(9:12:15 AM) Tartarus: oe-core, oe-devel
-(9:12:19 AM) fray: 3b is dealt with..
-(9:12:21 AM) Tartarus: and the yocto list
-(9:12:34 AM) RP: Tartarus: ok, I'll ensure it goes to those
-(9:12:47 AM) fray: result of 3b was an email.. only one person had an
-issue.. and it was resolved with a workaround....
-(9:13:04 AM) ***RP agrees 3b was resolved. I don't thing Andreas liked
-the decision :(
-(9:13:05 AM) fray: not the resolution the person really wanted, but
-based on demand was the right choice at the time IMHO
-(9:13:11 AM) fray: yup
-(9:13:46 AM) RP: I think it was the right decision and we'll figure
-out ways forward from here
-(9:14:37 AM) RP: Any further discussion on 3)?
-(9:15:09 AM) RP: ok, let me switch 4 around
-(9:15:24 AM) RP: :)
-(9:15:28 AM) RP: OE-Core release
-(9:15:42 AM) fray: quality issues resolving themselves, or is this
-still an ongoing item?
-(9:15:46 AM) RP: This has been rather hard the past couple of weeks
-(9:16:09 AM) RP: well, there are a lot of more minor issues which
-whilst we have fixes aren't going to make the release
-(9:16:13 AM) fray: IMHO we needed the freeze and stabilize.. there
-were a lot more quality issues then I realized...
-(9:16:27 AM) RP: The reason is one of destabilisation risk
-(9:16:36 AM) fray: should be noted that Saul is stagging post 1.2 work
-already.. and I've been tracking it.. things seem good in that branch
-(9:16:51 AM) RP: We've made good progress but I think next time, the
-M4 milestone just needs to be bugfix only
-(9:16:57 AM) RP: people started too late on bugs
-(9:17:09 AM) bluelightning: yes :(
-(9:17:29 AM) RP: So I think we're in a reasonable place to release but
-I'm not happy about how we got there
-(9:17:34 AM) bluelightning: there were also some holes either in our
-QA or us looking at the QA reports
-(9:17:52 AM) RP: I've been working all hours trying to fix the most
-critical issues including over the weekends :(
-(9:18:07 AM) RP: fc17 testing happened too late for example too
-(9:18:18 AM) RP: So the status is we have a "denzil" release branch
-(9:18:26 AM) fray: holes in the QA I assume will be addressed.. we're
-pretty good at identifying the hole.. lets see if tests can get
-added..
-(9:18:27 AM) RP: I put my argument for the naming in an email
-(9:18:53 AM) RP: There is an open question of the release version for OE-Core
-(9:19:02 AM) RP: we can just tag it as 2012-1
-(9:19:46 AM) RP: That is what I'm thinking of doing in the absence of
-other arguments
-(9:20:13 AM) RP: For work going forward, I've pulled things into
-master-next and am trying to stage pending changes there
-(9:20:20 AM) fray: 2012-1 is what i would expect
-(9:20:25 AM) RP: fray: We need to talk about the update-alternatives stuff btw
-(9:20:32 AM) fray: yup.. it's a bit of a mess..
-(9:20:43 AM) fray: do we want to discuss it here, or the list?
-(9:20:45 AM) RP: fray: I'm just holding off until I have the time to
-deal with it
-(9:20:55 AM) RP: fray: list and not now, just indicating why its not all there
-(9:21:09 AM) RP: I'm going to continue to queue on master-next for a
-while longer
-(9:21:31 AM) fray: that is fine..
-(9:21:34 AM) RP: this gives some time to test it properly and also
-give me a little bit of a break
-(9:21:41 AM) fray: there are still anohter 8 packages that need to be
-fixed (if I remember correctly)
-(9:21:56 AM) RP: I'll also probably start queueing some bits on
-denzil-next until release
-(9:21:59 AM) fray: also i want to rework the update-alternatives to
-work more like the useradd class.. (allow subpackage stuff and some
-more complicated settings)
-(9:22:08 AM) fray: that should get rid of all of the manual
-update-alternative cases..
-(9:22:23 AM) RP: fray: right, I think I just want to fix the class
-properly in one go
-(9:22:40 AM) RP: any comments on OE-Core status?
-(9:23:08 AM) RP: next, elections
-(9:23:22 AM) RP: There is a call for candidates out and I've not seen
-any replies
-(9:23:35 AM) RP: Should we start worrying?
-(9:23:44 AM) fray: I have not either..
-(9:23:45 AM) Tartarus: Not yet, no
-(9:23:52 AM) bluelightning: Tartarus: are you standing again?
-(9:23:57 AM) RP: Is there anyone we'd approach and suggest they submit
-their candidacy ?
-(9:24:02 AM) Tartarus: I'm thinking it over
-(9:24:10 AM) Tartarus: But if I don't I expect at least one person to step up
-(9:24:18 AM) bluelightning: RP: what about Phil Blundell?
-(9:24:50 AM) RP: bluelightning: Phil is a good candidate and has been
-on the TSC before but had time issues. I don't know if that has
-changed
-(9:24:56 AM) bluelightning: ok
-(9:25:10 AM) RP: I also wondered if we should ping Stefan ?
-(9:25:13 AM) ***Jefro interrupts briefly - just heard from khem, he
-can't join us
-(9:25:35 AM) RP: Jefro: ok, thanks :/
-(9:25:47 AM) Tartarus: Bah, need to see why mutt didn't see the
-oe-members email in imap, too
-(9:26:04 AM) RP: bluelightning: I think if Phil wanted to stand he'd
-have done so tbh
-(9:26:17 AM) RP: he does read a lot of the emails :)
-(9:26:18 AM) bluelightning: RP: yeah, we can't volunteer people...
-(9:26:44 AM) RP: anyhow, I'd leave people with the thought this may be
-worth socialising with people
-(9:27:16 AM) fray: I agree.. I don't want to fall short on the number in the TSC
-(9:27:28 AM) RP: For the infrastructure topic, I don't have anything
-(9:27:49 AM) fray: nothing here
-(9:27:50 AM) bluelightning: any news on the testing hardware that Tom
-had received / was going to set up?
-(9:27:55 AM) bluelightning: (Tom King)
-(9:28:12 AM) RP: bluelightning: we really need to ask Khem
-(9:28:20 AM) Jefro: I may be able to ask him - 1 sec
-(9:28:59 AM) Jefro: Khem is having trrouble connecting to freenode,
-but I have him on google chat
-(9:29:33 AM) Jefro: may have lost him there as well
-(9:29:34 AM) bluelightning: there's always the web gateway...
-(9:29:43 AM) bluelightning: I guess he is on a cell connection?
-(9:29:45 AM) Jefro: yep
-(9:31:00 AM) RP: I suggest we defer that to the next meeting
-(9:31:05 AM) RP: Any other business?
-(9:31:22 AM) fray: nothing here
-(9:31:23 AM) bluelightning: none here
-(9:31:42 AM) Tartarus: I'm good
-(9:31:53 AM) RP: In which case I'll close the meeting at near enough
-half time, thanks all! :)
+ignore this one.. only on ML I've noticed that
+pkg_postrm_append() {
+should be even improved to
+pkg_postrm_${PN}_append() {
 
 
--- 
-Jeff Osier-Mixon http://jefro.net/blog
-Yocto Project Community Manager @Intel http://yoctoproject.org
+Cheers,
 
+>  .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    2 +-
+>  .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    2 +-
+>  .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    1 +
+>  .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    2 +-
+>  .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    2 +-
+>  .../ttf-fonts/ttf-liberation_0.2.bb                |    2 +-
+>  .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    2 +-
+>  .../ttf-fonts/ttf-sazanami_20040629.bb             |    2 +-
+>  .../ttf-fonts/ttf-ubuntu-font-family_0.69.bb       |    2 +-
+>  .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    2 +-
+>  meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    8 ++++++--
+>  11 files changed, 16 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216=
+=2Ebb b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+> index 10fb922..97b67b2 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+> @@ -4,7 +4,7 @@ LICENSE =3D "Arphic Public License"
+>  LIC_FILES_CHKSUM =3D "file://README;md5=3D62be011094b7865ddc4d1a648444d3=
+1a"
+>  SRC_DISTRIBUTE_LICENSES +=3D "${PN}"
+>  RPROVIDES_${PN} =3D "virtual-chinese-font"
+> -PR =3D "r3"
+> +PR =3D "r4"
+> =20
+>  SRC_URI =3D \
+>  "http://archive.ubuntu.com/ubuntu/pool/main/t/ttf-arphic-uming/ttf-arphi=
+c-uming_0.2.${PV}.1.orig.tar.gz"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb b/meta=
+-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+> index d4ddf16..d7b3977 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+> @@ -12,7 +12,7 @@ RDEPENDS_${PN}-sans-condensed =3D "${PN}-common"
+>  RDEPENDS_${PN}-serif =3D "${PN}-common"
+>  RDEPENDS_${PN}-serif-condensed =3D "${PN}-common"
+>  RDEPENDS_${PN}-common =3D ""
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2=
+ \
+>             file://30-dejavu-aliases.conf"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb b/meta-o=
+e/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+> index e0a6c65..2c3bf2e 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+> @@ -6,6 +6,7 @@ LICENSE =3D "Apache-2.0"
+>  LIC_FILES_CHKSUM =3D "file://README.txt;md5=3D83544262a86f1f1ec761e75897=
+df92bc"
+>  SRCREV =3D "21e6e2de1f0062f949fcc52d0b4559dfa3246e0e"
+>  PV =3D "0.1+gitr${SRCPV}"
+> +PR =3D "r1"
+> =20
+>  SRC_URI =3D "git://github.com/android/platform_frameworks_base.git;proto=
+col=3Dgit;branch=3Dmaster"
+> =20
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb b/met=
+a-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+> index b00bd75..ee27c12 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION =3D "Gentium fonts - TTF Version"
+>  HOMEPAGE =3D "http://scripts.sil.org/gentium"
+>  LICENSE =3D "SIL Open Font License"
+>  LICENSE_URL =3D "http://scripts.sil.org/cms/scripts/page.php?site_id=3Dn=
+rsi&item_id=3DOFL"
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  SRC_URI =3D "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.orig.=
+tar.gz \
+>             file://OFL.gz"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb b=
+/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
+> index f841f1a..a2ef0cf 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
+> @@ -3,7 +3,7 @@ require ttf.inc
+>  DESCRIPTION =3D "Hunky fonts - TTF Version"
+>  HOMEPAGE =3D "http://sourceforge.net/projects/hunkyfonts"
+>  LICENSE =3D "LGPL"
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
+> =20
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb b/m=
+eta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+> index 104915e..c0d77fd 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba3=
+6caa9b7df079bae19f \
+>                      file://License.txt;md5=3D5b171c5100029d884fcea21d9a2=
+b7543 \
+>  "
+> =20
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  SRC_URI =3D "http://fedorahosted.org/liberation-fonts/export/807b6dfd069=
+b998cd9b4d3158da98817ef23c79d/F-9/liberation-fonts-ttf-3.tar.gz"
+>  S =3D "${WORKDIR}/liberation-fonts-${PV}"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-o=
+e/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+> index 62acf82..ab9be35 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+> @@ -3,7 +3,7 @@ require ttf.inc
+>  DESCRIPTION =3D "MPlus font - TTF Edition"
+>  HOMEPAGE =3D "http://dejavu.sourceforge.net/wiki/"
+>  LICENSE =3D "${PN}"
+> -PR =3D "r1"
+> +PR =3D "r2"
+> =20
+>  SRC_URI =3D "http://osdn.dl.sourceforge.jp/mplus-fonts/6650/mplus-TESTFL=
+IGHT-${PV}.tar.gz"
+>  S =3D "${WORKDIR}/mplus-TESTFLIGHT-${PV}"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb =
+b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+> index 1e84fea..3c4cb26 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+> @@ -9,7 +9,7 @@ LICENSE =3D "Public domain"
+>  LIC_FILES_CHKSUM =3D "file://README;md5=3D97d739900be6e852830f55aa3c07d4=
+a0"
+>  SRC_DISTRIBUTE_LICENSES +=3D "${PN}"
+>  RPROVIDES_${PN} =3D "virtual-japanese-font"
+> -PR =3D "r6"
+> +PR =3D "r7"
+> =20
+>  SRC_URI =3D "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629=
+=2Etar.bz2"
+>  S =3D "${WORKDIR}/sazanami-20040629"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.=
+69.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
+> index 1c71b1b..22a7aec 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
+> @@ -3,7 +3,7 @@ require ttf.inc
+>  DESCRIPTION =3D "Ubuntu Font Family - TTF Version"
+>  HOMEPAGE =3D "http://font.ubuntu.com"
+>  LICENSE =3D "UFL"
+> -PR =3D "r1"
+> +PR =3D "r2"
+> =20
+>  SRC_URI =3D "http://font.ubuntu.com/download/ubuntu-font-family-${PV}+uf=
+l.zip"
+>  SRC_URI[md5sum] =3D "2c3287ea72f81ce025095f7a6d68af28"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb =
+b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+> index 06de002..f1eb6ff 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION =3D "WenQuanYi Zen Hei - A Hei-Ti Style Chine=
+se font"
+>  AUTHOR =3D "Qianqian Fang and The WenQuanYi Project Contributors"
+>  HOMEPAGE =3D "http://wqy.sourceforge.net/en/"
+>  LICENSE =3D "GPLv2"
+> -PR =3D "r1"
+> +PR =3D "r2"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
+>  S =3D "${WORKDIR}/wqy-zenhei"
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc b/meta-oe/recipes=
+-graphics/ttf-fonts/ttf.inc
+> index bba94bd..d48f692 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
+> @@ -12,11 +12,15 @@ do_install() {
+>  }
+> =20
+>  pkg_postinst_append() {
+> -    update-fonts
+> +    if [ -z "$D" ]; then
+> +        update-fonts
+> +    fi
+>  }
+> =20
+>  pkg_postrm_append() {
+> -    update-fonts
+> +    if [ -z "$D" ]; then
+> +        update-fonts
+> +    fi
+>  }
+> =20
+>  inherit allarch
+> --=20
+> 1.7.8.6
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--L1c6L/cjZjI9d0Eq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk+qzuYACgkQN1Ujt2V2gByXTQCgqqNlpp2g42ylxvyNG4Ok6DWK
+JcQAnjpvwL0OMIirWRHlbb6/MuuVrHDF
+=ecbp
+-----END PGP SIGNATURE-----
+
+--L1c6L/cjZjI9d0Eq--
