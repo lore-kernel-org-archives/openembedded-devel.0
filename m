@@ -1,28 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1SRu6x-0008Ax-BO
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1SRvD4-0000zT-I8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2012 01:46:31 +0200
-Received: (qmail invoked by alias); 08 May 2012 23:36:39 -0000
-Received: from unknown (EHLO [192.168.1.14]) [95.76.68.223]
-	by mail.gmx.net (mp036) with SMTP; 09 May 2012 01:36:39 +0200
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX180S/Zq0lY0DwfuE9gXUIL1D0euajqIxMLJddddqd
-	Mv8xOyc9Fo6RZ1
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
+	Wed, 09 May 2012 02:56:54 +0200
+Received: by eaae1 with SMTP id e1so1716471eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 May 2012 17:47:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=qXvN9HgOt2WLGAvlhHmBDeh0BPVaYPgSCFnfIwj6NhQ=;
+	b=nj5PpNu1ozSJOwUicWuHbRQO/2Mp41plLFJgsqmgANoiuCFyThbzBevbH3MFdXX9BK
+	OcbsE2AgY+ghA/K37jAkMBgRPj6UI3MNGbwLVsgHdrqlkMnEJj1OFmFYaNK+IVaZzknc
+	d9OleDTLU39hV4ToFWg20pl7HtJ2igxFmGyfWoQbFPmSlLQ8ac5gIe+0vJoasygRsvVX
+	NXRzEYJghFrACNJeA3wL7GWNxuNTNYLPjPPEwqwdLNRSL1P66nmnTPOQFCbnCwI8Hy8p
+	CmQWleMVjYnfpk28QPimZy6Em+zDJfU+hRpB2oasY9kGEzPS6snAvkdE8Ahzwx+Sshe/
+	RAKQ==
+Received: by 10.14.187.1 with SMTP id x1mr3816651eem.101.1336524422501; Tue,
+	08 May 2012 17:47:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.2.132 with HTTP; Tue, 8 May 2012 17:46:31 -0700 (PDT)
+In-Reply-To: <4FA98B43.3090200@emagii.com>
+References: <0C757E680E33864AB113392C7E83F910BE52CF@GSX300A.mxchg.m.corp>
+	<20120305225422.GD2030@denix.org>
+	<0C757E680E33864AB113392C7E83F910BE52D2@GSX300A.mxchg.m.corp>
+	<4FA98B43.3090200@emagii.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 8 May 2012 17:46:31 -0700
+Message-ID: <CAMKF1sod9Lrh1LL_JQDuLTB655Np4sTvKpHTYhfZnHgc7KuReA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1336425828.2074.11.camel@dasty-laptop>
-References: <1336391680.3417.7.camel@dasty-laptop>
-	<4FA7B9DF.60304@mlbassoc.com> <1336394035.3417.12.camel@dasty-laptop>
-	<CAMKF1sonQpWBRYNSapa16EDGyyQCiRr5AmKoSx02xnqzzn+5yA@mail.gmail.com>
-	<1336424471.2074.4.camel@dasty-laptop> <4FA839CD.4020203@mlbassoc.com>
-	<1336425828.2074.11.camel@dasty-laptop>
-Date: Wed, 09 May 2012 02:36:38 +0300
-Message-ID: <1336520198.4528.40.camel@jethro.cheepee.homedns.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.32.3 
-X-Y-GMX-Trusted: 0
-Subject: Re: Simultaneous build of two intree packages
+Subject: Re: Disable GNU Hash check ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,43 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2012 23:46:31 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 May 2012 00:56:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Not sure if it applies, but if all build dirs share the same
-configuration step, you could create a single recipe and split the
-results into more packages.
+On Tue, May 8, 2012 at 2:08 PM, Ulf Samuelsson <openembedded@emagii.com> wrote:
+>
+> I'd rather fix the root cause than do the workaround,
+> but splitting up the build into two steps is really not supported by the
+> package.
+>
+> Would appreciate some comments.
 
-On Mon, 2012-05-07 at 23:23 +0200, Radek Dostal wrote:
-> On Mon, 2012-05-07 at 15:08 -0600, Gary Thomas wrote:
-> > I think that your recipes are not well behaved - two recipes probably
-> > should not be creating the same file in such a way.
-> > 
-> > Can you post the recipes, or at least the code snippets that break? 
-> 
-> I agree usually it should not be a case, but since both of the recipes
-> are in-tree recipes within the same tree, than obviously tree is the
-> shared resource.
-> 
-> Pasting the recipes would probably not be very helpful. Only thing they
-> do is that they call the cmake bellow and actual error occurs within
-> cmake scripts. 
-> 
-> Just in order to give overview: First whole structure is configured.
-> Configuration is shared between all the recipes. Second actual make is
-> called on different subdirectories. Cmake in its nature is not designed
-> to be able to started multiple time over same tread (with exception of
-> starting it via -jX).
-> 
-> Thanks,
-> Radek
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+in OE-Core the default hash style is now gnu hash for toolchain on all
+except mips
+since mips can not support gnu hash. you should not need to add
+commandline parameters to indicate it.
 
 
