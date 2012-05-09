@@ -1,32 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SSDJb-0003XU-TY
+	(envelope-from <martin.jansa@gmail.com>) id 1SSDJj-0003Yj-9y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2012 22:16:51 +0200
-Received: by werb13 with SMTP id b13so541062wer.6
+	Wed, 09 May 2012 22:16:59 +0200
+Received: by wgbdr1 with SMTP id dr1so662268wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2012 13:06:59 -0700 (PDT)
+	Wed, 09 May 2012 13:07:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=HT2kScspbZcHwY5AsbcsEOc1ppcq6+lPK4Uw+oTuhbs=;
-	b=cZyz0ZGns4Ix5AEDHKgZw/eZAyFacoeLWCNLMv/wrFAA7Ji07qe1rSmKieC5VzDo99
-	FWcWpKHAVyrMRm5FZdWBVlOtQzRpI/CNfa2SYt1b1TND7Hnc9QG1f2cGRBkjrBuWjDOm
-	6dlK2jlrx8HgrK8fVJ3jlXnDXJnl0m68ffrwgxCJxuVyjEpDpl6J56h8vktKEvEOwS+I
-	9dtVLVWCpeDFm3yy+pwUksKPckDvD3bKkZJ5g7FKAl1r1DKPoMb4Zlvssj8dI2eyZsIC
-	1bKG2doQYM8NHgDqikYep17/9Nc34MEr1AZOeTKRR7XloZQpLW4K8U2PyKSy+wso5xBZ
-	eRSg==
-Received: by 10.216.51.210 with SMTP id b60mr715459wec.90.1336594018918;
-	Wed, 09 May 2012 13:06:58 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=ONVQwpKPvo4Q9jaNy5TsKYFhHxFX5Sa9xL4Z9oDyZuA=;
+	b=fAO1oN79bdUKhQDb6X/I6CVU5tqsCpIWnbnc4FVkRDLRzFTHo3WOvBnzzWGJ0yD7GG
+	Ir5h2dR2kTG4XiQZDF2HN9d828P8JSH7yH61vKMrTo6WhXUsG1wgB/iQkQgSNACP5/4u
+	prw11rHSORX2a6AUuQGOBoN8EFX8L8MSWs2X5umYK2D/mj7fqo6mDFgtaQ7CyIBrAkF6
+	zu1YQlqTHio8SPqJObp04ODQB7zOajFMqDGX4Y553jFGWlyboV8E15gAVhcQodDBIbVP
+	DiSnOCZcObtL4oXFHnbE0Mx879hnQDwPau0pNIiako1M1OAUJzSq/sZUg+XjUXud7nqs
+	mJ0Q==
+Received: by 10.180.97.4 with SMTP id dw4mr9808048wib.18.1336594026117;
+	Wed, 09 May 2012 13:07:06 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id bn9sm21486880wib.5.2012.05.09.13.06.57
+	by mx.google.com with ESMTPS id e6sm38589895wix.8.2012.05.09.13.07.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 May 2012 13:06:58 -0700 (PDT)
+	Wed, 09 May 2012 13:07:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2012 22:06:52 +0200
-Message-Id: <1336594013-19408-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  9 May 2012 22:06:53 +0200
+Message-Id: <1336594013-19408-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][PATCH 1/2] kmod: drop from meta-oe
+In-Reply-To: <1336594013-19408-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1336594013-19408-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] ttf-fonts: call update-fonts only on target, not during do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,80 +42,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 20:16:52 -0000
-
-* it was added to oe-core
+X-List-Received-Date: Wed, 09 May 2012 20:16:59 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...-man-page-generation-because-we-don-t-hav.patch |   26 --------------------
- meta-oe/recipes-kernel/kmod/kmod_git.bb            |   24 ------------------
- 2 files changed, 0 insertions(+), 50 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
- delete mode 100644 meta-oe/recipes-kernel/kmod/kmod_git.bb
+ .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    1 +
+ .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    2 +-
+ .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    2 +-
+ .../ttf-fonts/ttf-liberation_0.2.bb                |    2 +-
+ .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    2 +-
+ .../ttf-fonts/ttf-sazanami_20040629.bb             |    2 +-
+ .../ttf-fonts/ttf-ubuntu-font-family_0.69.bb       |    2 +-
+ .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    2 +-
+ meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    8 ++++++--
+ 11 files changed, 16 insertions(+), 11 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch b/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
-deleted file mode 100644
-index 5361b84..0000000
---- a/meta-oe/recipes-kernel/kmod/kmod/0001-man-disable-man-page-generation-because-we-don-t-hav.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From ce6f0cabb65e67dd4d31e1e555db8bc6eaf435d3 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Fri, 24 Feb 2012 07:35:38 +0100
--Subject: [PATCH] man: disable man page generation because we don't have
-- working xsltproc
--
--Upstream-Status: Inappropriate [build system specific change]
--
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- Makefile.am |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 141c102..a8bdfd1 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,4 +1,4 @@
---SUBDIRS = . libkmod/docs man
--+SUBDIRS = . libkmod/docs
-- 
-- DISTCLEAN_LOCAL_HOOKS =
-- EXTRA_DIST =
---- 
--1.7.8.4
--
-diff --git a/meta-oe/recipes-kernel/kmod/kmod_git.bb b/meta-oe/recipes-kernel/kmod/kmod_git.bb
-deleted file mode 100644
-index aae9e7f..0000000
---- a/meta-oe/recipes-kernel/kmod/kmod_git.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--DESCRIPTION = "kmod - handle kernel modules"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+index 10fb922..97b67b2 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+@@ -4,7 +4,7 @@ LICENSE = "Arphic Public License"
+ LIC_FILES_CHKSUM = "file://README;md5=62be011094b7865ddc4d1a648444d31a"
+ SRC_DISTRIBUTE_LICENSES += "${PN}"
+ RPROVIDES_${PN} = "virtual-chinese-font"
 -PR = "r3"
--
--inherit autotools gitpkgv
--
--PKGV = "${GITPKGVTAG}"
--SRCREV = "8885ced062131214448fae056ef453f094303805"
--SRC_URI = "git://git.profusion.mobi/kmod.git \
--           file://0001-man-disable-man-page-generation-because-we-don-t-hav.patch \
--"
--
--S = "${WORKDIR}/git"
--
--do_configure_prepend() {
--	gtkdocize --docdir ${S}/libkmod/docs || touch ${S}/libkmod/docs/gtk-doc.make
--}
--
--PACKAGES =+ "libkmod"
--FILES_libkmod = "${libdir}/lib*${SOLIBS}"
--
++PR = "r4"
+ 
+ SRC_URI = \
+ "http://archive.ubuntu.com/ubuntu/pool/main/t/ttf-arphic-uming/ttf-arphic-uming_0.2.${PV}.1.orig.tar.gz"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+index d4ddf16..d7b3977 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+@@ -12,7 +12,7 @@ RDEPENDS_${PN}-sans-condensed = "${PN}-common"
+ RDEPENDS_${PN}-serif = "${PN}-common"
+ RDEPENDS_${PN}-serif-condensed = "${PN}-common"
+ RDEPENDS_${PN}-common = ""
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
+            file://30-dejavu-aliases.conf"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+index e0a6c65..2c3bf2e 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+@@ -6,6 +6,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://README.txt;md5=83544262a86f1f1ec761e75897df92bc"
+ SRCREV = "21e6e2de1f0062f949fcc52d0b4559dfa3246e0e"
+ PV = "0.1+gitr${SRCPV}"
++PR = "r1"
+ 
+ SRC_URI = "git://github.com/android/platform_frameworks_base.git;protocol=git;branch=master"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+index b00bd75..ee27c12 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "Gentium fonts - TTF Version"
+ HOMEPAGE = "http://scripts.sil.org/gentium"
+ LICENSE = "SIL Open Font License"
+ LICENSE_URL = "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=OFL"
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz \
+            file://OFL.gz"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
+index f841f1a..a2ef0cf 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
+@@ -3,7 +3,7 @@ require ttf.inc
+ DESCRIPTION = "Hunky fonts - TTF Version"
+ HOMEPAGE = "http://sourceforge.net/projects/hunkyfonts"
+ LICENSE = "LGPL"
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+index 104915e..c0d77fd 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://License.txt;md5=5b171c5100029d884fcea21d9a2b7543 \
+ "
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "http://fedorahosted.org/liberation-fonts/export/807b6dfd069b998cd9b4d3158da98817ef23c79d/F-9/liberation-fonts-ttf-3.tar.gz"
+ S = "${WORKDIR}/liberation-fonts-${PV}"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+index 62acf82..ab9be35 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+@@ -3,7 +3,7 @@ require ttf.inc
+ DESCRIPTION = "MPlus font - TTF Edition"
+ HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
+ LICENSE = "${PN}"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://osdn.dl.sourceforge.jp/mplus-fonts/6650/mplus-TESTFLIGHT-${PV}.tar.gz"
+ S = "${WORKDIR}/mplus-TESTFLIGHT-${PV}"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+index 1e84fea..3c4cb26 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+@@ -9,7 +9,7 @@ LICENSE = "Public domain"
+ LIC_FILES_CHKSUM = "file://README;md5=97d739900be6e852830f55aa3c07d4a0"
+ SRC_DISTRIBUTE_LICENSES += "${PN}"
+ RPROVIDES_${PN} = "virtual-japanese-font"
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2"
+ S = "${WORKDIR}/sazanami-20040629"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
+index 1c71b1b..22a7aec 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
+@@ -3,7 +3,7 @@ require ttf.inc
+ DESCRIPTION = "Ubuntu Font Family - TTF Version"
+ HOMEPAGE = "http://font.ubuntu.com"
+ LICENSE = "UFL"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}+ufl.zip"
+ SRC_URI[md5sum] = "2c3287ea72f81ce025095f7a6d68af28"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+index 06de002..f1eb6ff 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
+ AUTHOR = "Qianqian Fang and The WenQuanYi Project Contributors"
+ HOMEPAGE = "http://wqy.sourceforge.net/en/"
+ LICENSE = "GPLv2"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
+ S = "${WORKDIR}/wqy-zenhei"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc b/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
+index bba94bd..d48f692 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf.inc
+@@ -12,11 +12,15 @@ do_install() {
+ }
+ 
+ pkg_postinst_append() {
+-    update-fonts
++    if [ -z "$D" ]; then
++        update-fonts
++    fi
+ }
+ 
+ pkg_postrm_append() {
+-    update-fonts
++    if [ -z "$D" ]; then
++        update-fonts
++    fi
+ }
+ 
+ inherit allarch
 -- 
 1.7.8.6
 
