@@ -1,42 +1,30 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SSE9E-0007tl-Vh
+	(envelope-from <lloydchang@gmail.com>) id 1SSEBJ-00080X-4w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 May 2012 23:10:14 +0200
-Received: by wgbdr1 with SMTP id dr1so692266wgb.24
+	Wed, 09 May 2012 23:12:21 +0200
+Received: by werb13 with SMTP id b13so569232wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2012 14:00:20 -0700 (PDT)
+	Wed, 09 May 2012 14:02:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wUVEiDhZez11SQLNe9B7wtLtsLqrfVR3GxekuTy+YOg=;
-	b=dxVgTbi4PgFFYG4OVe5WzSUNK8M8lWtsqhE4+FcwVCkdWMNDGA0zTzsrhEbW4DmHxp
-	8gJSgPsFDnJwrYzvVQ/1WtsKi+vAV58n+Rs2q+S0uB4oOnbVjgmgwhpjDMJVvjM2vzb0
-	mKQioCDqp3TK3KP7K0K8HwPj442dVydE0Jd+G9P8ClDfDXTG/2kLD93j5qPTbU+PlPVU
-	XuDJbF8e2TkMPTODQb/ONkJ0YLKrWsS1J3Eb1eT0eCtxkTG2C2s6tRC1GEmKXlmNBtDg
-	vccIoMo4lEJccSFy5bkzhSSP+vBt7sSBoJT3VxkpppgKWw23q4ulZ/fNs19yJaCqSrmZ
-	9Xbg==
-Received: by 10.180.98.137 with SMTP id ei9mr3592277wib.0.1336597219993;
-	Wed, 09 May 2012 14:00:19 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ez4sm2162221wid.3.2012.05.09.14.00.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 May 2012 14:00:19 -0700 (PDT)
-Date: Wed, 9 May 2012 23:00:20 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Apelete Seketeli <apelete@seketeli.net>
-Message-ID: <20120509210020.GI12898@jama.jama.net>
-References: <1334180792-20535-1-git-send-email-apelete@seketeli.net>
-	<20120411125503.GB3637@jama.jama.net>
-	<20120412204417.GD3256@hermes>
-	<20120412210108.GA3945@jama.jama.net>
-	<20120502210040.GB3781@hermes> <20120509191656.GP3781@hermes>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Zad98AHjj4vLCo3bVQ+zCRoL0hh0eDB07hrXtn44F4Y=;
+	b=FOOjWsQtYXKAYJKZhIqurYhwfN3UU2ihpI38W14L6L7IPSycAyrQ/PM2183I9Q64B8
+	fgTLnntewaE7ipWsH+o2xSk58qSGF/eAHuiYcNOfHMfThuECr8UIUoAk0bWYgtQdGqZa
+	vzznUBbBXSG8vieZbjpriQv4iMZCpJ4MDnjlZIlUeONi5fbromujw8j99yZUAszWxyXj
+	/D9A2CLSU8mdfWv4cCAQbyaTOgmwpZ/WpQfdzjybZS+4WxSZ8qku2mSoMlVXu9PeNQjV
+	qWBcga7qFI87w8ktzR1YZXEFj5O0kd1XckiJ8EhcgIGZ97WNhC/d5gtU+d9bJVAApnOM
+	fupg==
 MIME-Version: 1.0
-In-Reply-To: <20120509191656.GP3781@hermes>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] opkg-utils: Update SRC_URI to git.yoctoproject.org
+Received: by 10.216.137.232 with SMTP id y82mr828938wei.82.1336597348116; Wed,
+	09 May 2012 14:02:28 -0700 (PDT)
+Received: by 10.180.106.133 with HTTP; Wed, 9 May 2012 14:02:28 -0700 (PDT)
+Date: Wed, 9 May 2012 14:02:28 -0700
+Message-ID: <CAKbR+sx-4vD69rHekVvwbDeVT5=0-Ouk0AmS6G_3JzZg_Hqa-A@mail.gmail.com>
+From: Lloyd Chang <lloydchang@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: oe-made-easy and Getting Started
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,68 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 21:10:14 -0000
-X-Groupsio-MsgNum: 38644
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4LwthZj+AV2mq5CX"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 May 2012 21:12:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---4LwthZj+AV2mq5CX
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello fellow openembedded-devel members!
 
-On Wed, May 09, 2012 at 09:16:56PM +0200, Apelete Seketeli wrote:
-> Hi,
->=20
-> Le 02-May-12, Apelete Seketeli a =E9crit:
-> >=20
-> > Okay, I finally got some time to works on this.
-> > I asked on the yocto ML to get the original patches applied, and they
-> > actually got applied (thanks to Richard Purdie).
-> >=20
-> > Please find attached the patch to get the changes into oe-classic. I
-> > don't know if I should create a new thread to submit it, I would
-> > gladly do so if asked to.
->=20
-> The patch has just been applied in oe-classic, thanks to Kristoffer
-> Ericson.
->=20
-> http://cgit.openembedded.org/openembedded/commit/?id=3D1ff63aa26e3088ba2d=
-30e491d74a31caf25c3d83
->=20
-> I am new to the list, so I am not used to the process, but would you
-> please tell me what the rule for the author and committer field is ?
-> I would have naively expect to see my name there.
 
-You did it almost right and Kristoffer's name should be only in committer=
-=20
-field and yours in author.
+I'm sharing because you may find this useful -- especially newcomers
+to our OE-Core.  In my personal efforts in condensing our Getting
+Started documentation succinctly, I codified it into one line:
 
-Next time when sending new version use PATCHv2 prefix and don't send
-your patch in reply as inline. If you download mbox version from
-patchwork
-http://patchwork.openembedded.org/patch/26863/
-you'll see that e.g. my reply to you get's included in commit message of
-such patch which doesn't belong there and committer needs to use=20
-git commit --amend  -s
-to strip unwanted text..
 
-Cheers,
+    git clone git://github.com/lloydchang/oe-made-easy.git;
+./oe-made-easy/core-image-minimal
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---4LwthZj+AV2mq5CX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+User interface design wise, my intent of this one liner is to allow
+everyone getting started to easily bootstrap core-image-minimal onto
+various computers (before diving into details).  If our community
+consensus finds oe-made-easy useful, please let me know and I'll start
+updating our openembedded.org wiki pages to reference this one liner
+or equivalent.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAk+q2uQACgkQN1Ujt2V2gBwbigCgieCjmLuThfZbXu1KeaQHgI8M
-FI8AoJ7GFH6V49chiAkjiMVtEe6EIM2w
-=wkTW
------END PGP SIGNATURE-----
+And if you personally find oe-made-easy useful, feel free to test it
+further, fork it and/or send me pull requests via
+https://github.com/lloydchang/oe-made-easy
 
---4LwthZj+AV2mq5CX--
+(for now, oe-made-easy is defaulting to qemux86_64, qemux86 and qemuarm targets)
+
+
+Your feedback is greatly appreciated!
+
+
+Thanks :-)
+
+Lloyd
+
