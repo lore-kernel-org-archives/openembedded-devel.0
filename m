@@ -1,31 +1,32 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SSExt-0005kJ-0r
+	(envelope-from <raj.khem@gmail.com>) id 1SSLcn-0005zB-Vs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 May 2012 00:02:33 +0200
-Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 09D2EEA040;
-	Thu, 10 May 2012 00:05:36 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 2B41264387; Wed,  9 May 2012 23:52:38 +0200 (CEST)
-Date: Wed, 9 May 2012 23:52:38 +0200
-From: Apelete Seketeli <apelete@seketeli.net>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20120509215237.GR3781@hermes>
-References: <1334180792-20535-1-git-send-email-apelete@seketeli.net>
-	<20120411125503.GB3637@jama.jama.net>
-	<20120412204417.GD3256@hermes>
-	<20120412210108.GA3945@jama.jama.net>
-	<20120502210040.GB3781@hermes> <20120509191656.GP3781@hermes>
-	<20120509210020.GI12898@jama.jama.net>
+	Thu, 10 May 2012 07:09:14 +0200
+Received: by eekd49 with SMTP id d49so147634eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 May 2012 21:59:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=p40vtuiL3gRdOn0JZHZaTRksdU/Sv9dCjdIgFasuudQ=;
+	b=CwUCNbWrNxbnXIe34MWKY6YtR08dakFxqpgKminxwgNK5JGMllgTMbc1OnaO/wn1t2
+	PhrTdLaTV//wmY7ipubvqmGowaLvyV2GiheYsp0ozx/gK7R0kWpKczEpnTEKeB3n8xE1
+	pcOM+Cl8DF7AiS3AxEplpU8tLccTaX38HDmDYOGMlCnm7k3gF7egS22EEPE0OIRVyKuq
+	wWRc5hK7rPI2m5rU3qp3MN2jW7xzl5BTGw9JPHucX9+b1wwMJkXOUH87KNF7q5Xp+Wzj
+	eAY37LudU2pSwg9hYwrIxzs1/qhso0H5H/ORrJuZlE2MTtein71OowL5zoM7PnnByWnk
+	Il1w==
+Received: by 10.14.187.1 with SMTP id x1mr519952eem.101.1336625960372; Wed, 09
+	May 2012 21:59:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20120509210020.GI12898@jama.jama.net>
-X-Operating-System: Debian GNU/Linux wheezy/sid
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] opkg-utils: Update SRC_URI to git.yoctoproject.org
+Received: by 10.14.2.132 with HTTP; Wed, 9 May 2012 21:58:50 -0700 (PDT)
+In-Reply-To: <CAA5cW2zfvw65-vtwCZWfTsnfAO8e-jA=qsd0zqXvStYfhhy8bQ@mail.gmail.com>
+References: <CAA5cW2zfvw65-vtwCZWfTsnfAO8e-jA=qsd0zqXvStYfhhy8bQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 May 2012 21:58:50 -0700
+Message-ID: <CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Provide a master/setup layer - best practice?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,57 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2012 22:02:33 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 May 2012 05:09:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Le 09-May-12, Martin Jansa a =E9crit:
-> On Wed, May 09, 2012 at 09:16:56PM +0200, Apelete Seketeli wrote:
-> > Hi,
-> >=20
-> > Le 02-May-12, Apelete Seketeli a =E9crit:
-> > >=20
-> > > Okay, I finally got some time to works on this.
-> > > I asked on the yocto ML to get the original patches applied, and th=
-ey
-> > > actually got applied (thanks to Richard Purdie).
-> > >=20
-> > > Please find attached the patch to get the changes into oe-classic. =
-I
-> > > don't know if I should create a new thread to submit it, I would
-> > > gladly do so if asked to.
-> >=20
-> > The patch has just been applied in oe-classic, thanks to Kristoffer
-> > Ericson.
-> >=20
-> > http://cgit.openembedded.org/openembedded/commit/?id=3D1ff63aa26e3088=
-ba2d30e491d74a31caf25c3d83
-> >=20
-> > I am new to the list, so I am not used to the process, but would you
-> > please tell me what the rule for the author and committer field is ?
-> > I would have naively expect to see my name there.
->=20
-> You did it almost right and Kristoffer's name should be only in committ=
-er=20
-> field and yours in author.
->=20
-> Next time when sending new version use PATCHv2 prefix and don't send
-> your patch in reply as inline. If you download mbox version from
-> patchwork
-> http://patchwork.openembedded.org/patch/26863/
-> you'll see that e.g. my reply to you get's included in commit message o=
-f
-> such patch which doesn't belong there and committer needs to use=20
-> git commit --amend  -s
-> to strip unwanted text..
+On Wed, May 9, 2012 at 1:13 PM, Radoslav Kolev <radoslav@kolev.info> wrote:
+>
+> It seems like there's some "reinventing the wheel" going on. =C2=A0What
+> would be your advice for the best approach and starting point in this
+> situation?
 
-Thanks for the detailed explanation. I get your point, I will follow
-these instructions next time and submit the patch as a separate mail
-in a thread.
-
-Cheers.
---=20
-        Apelete
+all of them have + and - points give or take. So choose your battles
+is I can tell.
+combo-layers is a good way to start hopefully you will help improving it.
 
 
