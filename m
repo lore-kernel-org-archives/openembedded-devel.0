@@ -1,30 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-qa0-f48.google.com ([209.85.216.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SSLcn-0005zB-Vs
+	(envelope-from <kergoth@gmail.com>) id 1SSLgQ-000663-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 May 2012 07:09:14 +0200
-Received: by eekd49 with SMTP id d49so147634eek.6
+	Thu, 10 May 2012 07:13:01 +0200
+Received: by qady23 with SMTP id y23so72104qad.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2012 21:59:20 -0700 (PDT)
+	Wed, 09 May 2012 22:03:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=p40vtuiL3gRdOn0JZHZaTRksdU/Sv9dCjdIgFasuudQ=;
-	b=CwUCNbWrNxbnXIe34MWKY6YtR08dakFxqpgKminxwgNK5JGMllgTMbc1OnaO/wn1t2
-	PhrTdLaTV//wmY7ipubvqmGowaLvyV2GiheYsp0ozx/gK7R0kWpKczEpnTEKeB3n8xE1
-	pcOM+Cl8DF7AiS3AxEplpU8tLccTaX38HDmDYOGMlCnm7k3gF7egS22EEPE0OIRVyKuq
-	wWRc5hK7rPI2m5rU3qp3MN2jW7xzl5BTGw9JPHucX9+b1wwMJkXOUH87KNF7q5Xp+Wzj
-	eAY37LudU2pSwg9hYwrIxzs1/qhso0H5H/ORrJuZlE2MTtein71OowL5zoM7PnnByWnk
-	Il1w==
-Received: by 10.14.187.1 with SMTP id x1mr519952eem.101.1336625960372; Wed, 09
-	May 2012 21:59:20 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=d9YMMtGC9mffsTunhDyCKBkomh/FQun93k9tGYEe534=;
+	b=S5+yMMcJEpeIv5AOJbcJh4JwS9JziVl/kU7HvkCZYJH4+gas8rviUrfRD31+Cndler
+	/hbVuWeLI2vkp16DvS8/dUoy/AKlpV39qY5Xl7203OYBnU+Nat0cumuahZ9eeT+Y9DSf
+	Ks7t9TV/92yCZUqHcegQxl0WuAfJClrOHGrsgGodGjABJ+8f4VgG7+NeSVfXkYC36Xss
+	0G0nlK4N1iroplxyjkCNmrW7F71AHr7eDTCZ6/fEYnp0ty3IdXtt/Us0pvmH5aYYEfoQ
+	TV29jDgjUsymqYn4Z+NDUJJM1iVH75xdO5TZYBlqkZCRyXZsE67SJVn3TwLtzOZOB/Kc
+	AjdA==
+Received: by 10.224.185.204 with SMTP id cp12mr9436194qab.42.1336626184801;
+	Wed, 09 May 2012 22:03:04 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.2.132 with HTTP; Wed, 9 May 2012 21:58:50 -0700 (PDT)
-In-Reply-To: <CAA5cW2zfvw65-vtwCZWfTsnfAO8e-jA=qsd0zqXvStYfhhy8bQ@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.229.214.81 with HTTP; Wed, 9 May 2012 22:02:44 -0700 (PDT)
+In-Reply-To: <CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
 References: <CAA5cW2zfvw65-vtwCZWfTsnfAO8e-jA=qsd0zqXvStYfhhy8bQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 9 May 2012 21:58:50 -0700
-Message-ID: <CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
+	<CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 9 May 2012 22:02:44 -0700
+X-Google-Sender-Auth: cEG73EdHueMCrGh4hy6CJY8iaXw
+Message-ID: <CABcZANkRnVmNdceAf5o-Lqw+GH8vjs06GeJpB8fcCg=G5qL6Ww@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: Provide a master/setup layer - best practice?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,18 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2012 05:09:14 -0000
+X-List-Received-Date: Thu, 10 May 2012 05:13:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 9, 2012 at 1:13 PM, Radoslav Kolev <radoslav@kolev.info> wrote:
->
-> It seems like there's some "reinventing the wheel" going on. =C2=A0What
-> would be your advice for the best approach and starting point in this
-> situation?
+On Wed, May 9, 2012 at 9:58 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, May 9, 2012 at 1:13 PM, Radoslav Kolev <radoslav@kolev.info> wrot=
+e:
+>>
+>> It seems like there's some "reinventing the wheel" going on. =C2=A0What
+>> would be your advice for the best approach and starting point in this
+>> situation?
 
-all of them have + and - points give or take. So choose your battles
-is I can tell.
-combo-layers is a good way to start hopefully you will help improving it.
+If there was one 'best' option for any given situation, we wouldn't
+have this much so-called wheel reinvention. People have different
+needs.
+--=20
+Christopher Larson
 
 
