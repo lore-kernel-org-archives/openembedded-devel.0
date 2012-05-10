@@ -1,36 +1,32 @@
-Received: from mail-qa0-f48.google.com ([209.85.216.48])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1SSLgQ-000663-Qi
+	(envelope-from <raj.khem@gmail.com>) id 1SSLhN-0006DW-NY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 May 2012 07:13:01 +0200
-Received: by qady23 with SMTP id y23so72104qad.7
+	Thu, 10 May 2012 07:13:57 +0200
+Received: by eaal1 with SMTP id l1so318198eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2012 22:03:04 -0700 (PDT)
+	Wed, 09 May 2012 22:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=d9YMMtGC9mffsTunhDyCKBkomh/FQun93k9tGYEe534=;
-	b=S5+yMMcJEpeIv5AOJbcJh4JwS9JziVl/kU7HvkCZYJH4+gas8rviUrfRD31+Cndler
-	/hbVuWeLI2vkp16DvS8/dUoy/AKlpV39qY5Xl7203OYBnU+Nat0cumuahZ9eeT+Y9DSf
-	Ks7t9TV/92yCZUqHcegQxl0WuAfJClrOHGrsgGodGjABJ+8f4VgG7+NeSVfXkYC36Xss
-	0G0nlK4N1iroplxyjkCNmrW7F71AHr7eDTCZ6/fEYnp0ty3IdXtt/Us0pvmH5aYYEfoQ
-	TV29jDgjUsymqYn4Z+NDUJJM1iVH75xdO5TZYBlqkZCRyXZsE67SJVn3TwLtzOZOB/Kc
-	AjdA==
-Received: by 10.224.185.204 with SMTP id cp12mr9436194qab.42.1336626184801;
-	Wed, 09 May 2012 22:03:04 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=qyFoxJVv86jqrz7whflqsOzR7vXda7gN8EQXU/9J5/Q=;
+	b=cq/73ZChksFME7+BQfZk7jZP7R5tY4XACoa0nqpVXEw8D+EyA6Wj4zlE7bdHEERZTw
+	72VSceUKBB55XoM41Qe7R4/KmUsfPQyZJgypqaQQfvDhSnO06qKMqKCoSIKVeyr2h/m8
+	rAM8IJR4dcA/B6JnLK93/dHY/9GOtg/MvwA6ppsiG0/Xpng5qQbENanJYNUY7Byy2Qxc
+	edyM9oBdF32tkWwEusRE5MMSq0+lzmWioXf9eVDVLYobi0ryBjvTXgPtMkyDEbHtLYiY
+	jqhmPqHPw8OxK3AlNstYsNGnu33moSpUi6saEv4pgOkW+KiaTQV1hGeEVcd9vOo0hNoi
+	z6dg==
+Received: by 10.213.105.78 with SMTP id s14mr1123529ebo.84.1336626244254; Wed,
+	09 May 2012 22:04:04 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.214.81 with HTTP; Wed, 9 May 2012 22:02:44 -0700 (PDT)
-In-Reply-To: <CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
-References: <CAA5cW2zfvw65-vtwCZWfTsnfAO8e-jA=qsd0zqXvStYfhhy8bQ@mail.gmail.com>
-	<CAMKF1soMDLn4nEPtL8SBvooG0o2PmtnN4EzebO7r8HmLeEFK9w@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 9 May 2012 22:02:44 -0700
-X-Google-Sender-Auth: cEG73EdHueMCrGh4hy6CJY8iaXw
-Message-ID: <CABcZANkRnVmNdceAf5o-Lqw+GH8vjs06GeJpB8fcCg=G5qL6Ww@mail.gmail.com>
+Received: by 10.14.2.132 with HTTP; Wed, 9 May 2012 22:03:34 -0700 (PDT)
+In-Reply-To: <CAKbR+sx-4vD69rHekVvwbDeVT5=0-Ouk0AmS6G_3JzZg_Hqa-A@mail.gmail.com>
+References: <CAKbR+sx-4vD69rHekVvwbDeVT5=0-Ouk0AmS6G_3JzZg_Hqa-A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 May 2012 22:03:34 -0700
+Message-ID: <CAMKF1soiguyAXwmYo9LhHPnmQkbW7KTipDTEYXpazOFKn+dYLA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Provide a master/setup layer - best practice?
+Subject: Re: oe-made-easy and Getting Started
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,22 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2012 05:13:01 -0000
+X-List-Received-Date: Thu, 10 May 2012 05:13:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 9, 2012 at 9:58 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Wed, May 9, 2012 at 1:13 PM, Radoslav Kolev <radoslav@kolev.info> wrot=
-e:
->>
->> It seems like there's some "reinventing the wheel" going on. =C2=A0What
->> would be your advice for the best approach and starting point in this
->> situation?
+On Wed, May 9, 2012 at 2:02 PM, Lloyd Chang <lloydchang@gmail.com> wrote:
+> Hello fellow openembedded-devel members!
+>
+>
+> I'm sharing because you may find this useful -- especially newcomers
+> to our OE-Core. =C2=A0In my personal efforts in condensing our Getting
+> Started documentation succinctly, I codified it into one line:
+>
+>
+> =C2=A0 =C2=A0git clone git://github.com/lloydchang/oe-made-easy.git;
+> ./oe-made-easy/core-image-minimal
+>
+>
+> User interface design wise, my intent of this one liner is to allow
+> everyone getting started to easily bootstrap core-image-minimal onto
+> various computers (before diving into details). =C2=A0If our community
+> consensus finds oe-made-easy useful, please let me know and I'll start
+> updating our openembedded.org wiki pages to reference this one liner
+> or equivalent.
+>
+>
+> And if you personally find oe-made-easy useful, feel free to test it
+> further, fork it and/or send me pull requests via
+> https://github.com/lloydchang/oe-made-easy
+>
+> (for now, oe-made-easy is defaulting to qemux86_64, qemux86 and qemuarm t=
+argets)
+>
+>
+> Your feedback is greatly appreciated!
 
-If there was one 'best' option for any given situation, we wouldn't
-have this much so-called wheel reinvention. People have different
-needs.
---=20
-Christopher Larson
+you can add this to OE wiki in some form.
+
+>
+>
+> Thanks :-)
+>
+> Lloyd
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
