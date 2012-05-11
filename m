@@ -1,36 +1,35 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SSqBi-0007JR-4o
+	(envelope-from <koen@dominion.thruhere.net>) id 1SStEr-0002Rn-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 May 2012 15:47:18 +0200
-Received: by wibhm14 with SMTP id hm14so1170693wib.6
+	Fri, 11 May 2012 19:02:46 +0200
+Received: by wgbdr1 with SMTP id dr1so2537108wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2012 06:37:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=uYpWS++9yP7NXF98PBG7AcRd87fw50+LwKk62eRwT4c=;
-	b=ckIF9HFM/n+358WtjgoEwoKEWCsSv2FbTKL6qHNuwb6851qWmlcZWQU8fdYnERENP8
-	1MLIwPcYlAu7bvWdYWvB4wXaNjonV1sPTyRx2nbFbFJrvE6/+vcTb06WdRmC1j23gIis
-	7v+kAfM90exzs6fMOnaVoZrZSt17tXsv3xO8ny/teZgXQjAL2WMyqHBAQcKXuy6Or1UF
-	zy+ZpHEGXJ16M8TfYAVphDjOdrRqTwhMZQJLQqOyOiHHpFceEfvfcZuwcOG7BORuupUQ
-	l67z1aP6RwCHbsVAl6IAKI4SG8DQofbFNQI5uuiuhmJE+c1Fn1qw/qaO9VjNSSpBvJA7
-	rvvg==
-Received: by 10.216.143.200 with SMTP id l50mr1633863wej.58.1336743443049;
-	Fri, 11 May 2012 06:37:23 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fl2sm17266561wib.2.2012.05.11.06.37.21
+	Fri, 11 May 2012 09:52:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=DhuLn7+ptVPhFh5OlNmjAKi5DwHrZBJEp4GZp8876+I=;
+	b=jlofzKNfE2nh2y74VOrErYb62tv2i1PhfmvIrWpzPtlwmd07oP9pcuWmsJJDlBp2oi
+	75EkZBLoDJYll6Hwmxyk3UU3/KDYEig35Uc085IWtrKRfsGjE6FjOSFrI4qPA0f4x66m
+	KeT8lU1rKaW/Zp3RkIbwD7lxqYc/9x3JchjMnUk7WWPiCRBTms16DuBfg3CI0kD/QnNI
+	9BunHW+ujWr9iKz7C/ii1WZebXarVNiRfAMTWK62H3EcbQB28MseP9eRpQSvXmuWBrmp
+	Q3JnmaKywlmAX552vxTiB3N6ZKS6MUyRUC9hF6LFSEKTKuPQaElipzMl+18fI0U91Sqq
+	FJJA==
+Received: by 10.216.27.200 with SMTP id e50mr1967134wea.23.1336755170439;
+	Fri, 11 May 2012 09:52:50 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id ca3sm11655361wib.6.2012.05.11.09.52.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 May 2012 06:37:21 -0700 (PDT)
-Date: Fri, 11 May 2012 15:37:25 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 11 May 2012 09:52:49 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120511133724.GD3166@jama.jama.net>
-References: <4FAD09FE.4040101@mindchasers.com>
-MIME-Version: 1.0
-In-Reply-To: <4FAD09FE.4040101@mindchasers.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: finding mime-support in multiple oe trees?
+Date: Fri, 11 May 2012 18:52:44 +0200
+Message-Id: <1336755164-22911-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQmzs/IpaX2cHAqeTkvQotOctND3/M8ClGXoHBPETJ4yPWSb7VRd+baXbI85pAgr/9rvw2EB
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [PATCH] nodejs: update to 0.6.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2012 13:47:18 -0000
-X-Groupsio-MsgNum: 38655
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fXStkuK2IQBfcDe+"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 May 2012 17:02:46 -0000
 
---fXStkuK2IQBfcDe+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The license is unchanged, only some sections were clarified with different wording.
 
-On Fri, May 11, 2012 at 08:45:50AM -0400, Bob Cochran wrote:
-> Hello,
->=20
-> I can find recipes for mime-support in both meta-openembedded and=20
-> meta-openembedded-contrib under meta-oe/recipes-support.  The former has=
-=20
-> a 3.48 recipe and the latter has a 3.44 recipe.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../nodejs/{nodejs_0.6.14.bb => nodejs_0.6.17.bb}                |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_0.6.14.bb => nodejs_0.6.17.bb} (87%)
 
-meta-openembedded-contrib is used for pushing stuff by developers which
-then send pull request to pull it to main meta-openembedded repo.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.17.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_0.6.14.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_0.6.17.bb
+index 4f85bf3..1be5ce1 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.14.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.17.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d66c1f33ba9b89616e45f588e7606ee6"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=914812f2875eef849b5c509cc25dcb4f"
+ 
+ DEPENDS = "openssl"
+ 
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz"
+-SRC_URI[md5sum] = "3033a866e230cca64e212ee8f2af27dd"
+-SRC_URI[sha256sum] = "e41922308155c5197c2d048948ca9cd76ea5f9a51f977e1591bd93fe17d4cf1f"
++SRC_URI[md5sum] = "55641d5d280cdd4e0c030c203107599d"
++SRC_URI[sha256sum] = "8dfe5948de27e37a14af184f06e7bd89a23c3b248af44c8ef5cffcd0e4c65778"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+1.7.10
 
-So it's normal that meta-openembedded-contrib has sometimes some newer
-stuff and then the branches are not updated anymore and gets old.
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---fXStkuK2IQBfcDe+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+tFhQACgkQN1Ujt2V2gBzXigCfRplsD4TGg0vTJYj+H4w8biyN
-KQEAn08S0Um4WDLfEQLJsyOxAeFyjxic
-=BORY
------END PGP SIGNATURE-----
-
---fXStkuK2IQBfcDe+--
