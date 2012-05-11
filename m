@@ -1,25 +1,30 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1SSbGz-00037d-Mh
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SSnUA-0001oJ-F2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 May 2012 23:51:45 +0200
-Received: (qmail 30735 invoked by uid 1003); 10 May 2012 21:41:50 -0000
-Received: from unknown (HELO ?192.168.1.102?)
-	(philip@opensdr.com@71.171.22.246)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	10 May 2012 21:41:50 -0000
-Message-ID: <4FAC361D.60609@balister.org>
-Date: Thu, 10 May 2012 17:41:49 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Fri, 11 May 2012 12:54:10 +0200
+Received: by yhjj56 with SMTP id j56so2602417yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2012 03:44:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Wi0sbFGPgTU2c4WnBrC5mNwQqPS42vqeZCnzm/7ounw=;
+	b=SOA9mRwZz6FktvIsq4JUm5QfHg0Rwf1zWC/S4Y3gSWJgOe65OndovqMI0p3CDdj8zU
+	tLiXkvQZ+Gz7YGmtDZicUvSH4Taw+nETrffhlbxc5pSj9lha0zbpP+kWkGQ87uGBPzrW
+	mwuvTdhWr/sE0lhfs50YmbDtqKN766bTHh8+E5eeXdQdx97HQNBLQITyuiEkWQPLjSgv
+	0ukV3Z6J0D+RU6L8Wtirp2zoCQ7+xBbhN171X1+i3gpKpnw0cjJz9N4oAkEV8bPFYR7Q
+	/XryYp6LwxfHAjt/Y3DkMUnFVQT8TFj1giR2kv3yB3EGB773iGsElJL3c+yrVAONp3jm
+	jgew==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-members@lists.openembedded.org, 
-	Yocto Project <yocto@yoctoproject.org>
-X-Enigmail-Version: 1.1.2
-Subject: Linuxtag 2012
+Received: by 10.50.158.134 with SMTP id wu6mr1332944igb.47.1336733054656; Fri,
+	11 May 2012 03:44:14 -0700 (PDT)
+Received: by 10.231.209.139 with HTTP; Fri, 11 May 2012 03:44:14 -0700 (PDT)
+Date: Fri, 11 May 2012 12:44:14 +0200
+Message-ID: <CAGiJk9coc2zTnkX0CoM+cM52CDMwvpSwUN4DjjYoyrHnn5jD7Q@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-kde] Status of the meta-kde layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,78 +38,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2012 21:51:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 May 2012 10:54:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Sorry for the massive crossposting here, but I want to reach the widest
-audience.
+Hi,
 
-In previous years, Florian has done a really good job working for
-OpenEmbedded at LinuxTag. However, this year, he is not certain if he
-can attend, so he needs our help with the stand.
+it has been some time since this all started, in the case you haven't
+heard of this layer yet I wrote an introduction.
 
-Basically, we need people at the booth for the entire show to explain
-what OpenEmbedded is and field questions about OpenEmbedded and the
-Yocto Project. (You will get lots of people wanting to know what the
-difference is between the Yocto project and OpenEmbedded). You do not
-need to be an expert OE person to do a good job.
 
-I encourage anyone involved in OpenEmbedded who can get to Linuxtag for
-even a day to help it. It is a really fun time, and Berlin is a really
-nice place to visit.
+Introduction:
+This layer provides recipes for KDE 4 and plasma active.
+Plasma Active is the "next generation" GUI - optimized for touch
+screen input methods (see http://plasma-active.org/).
 
-We encourage people to bring devices that are made with OpenEmbedded and
-related technology to show off at the stand.
+This layer also provides Plasma Desktop (although it is not exactly
+suited for embedded devices).
+It is no longer necessary to install kdelibs-dev or something like
+that, currently it just lacks one tool for non KDE hosts and that is
+work in progress.
 
-If you can help, or have questions about helping please reply to this email.
+The layer can be found here:
+https://gitorious.org/openembedded-core-layers/meta-kde
 
-Philip
 
--------- Original Message --------
-Subject: [oe] Linuxtag 2012
-Date: Tue, 08 May 2012 00:23:42 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-Reply-To: openembedded-devel@lists.openembedded.org
-To: openembedded-devel <openembedded-devel@openembedded.org>
 
-Hallo list!
+To provide some visual content, here are some screenshots of KDE
+Plasma Desktop cross compiled with OE:
 
-We have been accepted for a project booth at LinuxTag [1] again this year!
-This means that we have a booth at the largest Linux fair in Europe and the
-opportunity to get in touch with users, companies and other projects there.
+Gumstix Overo KDE 4.8.2
+https://docs.google.com/open?id=0Bx-m3uk1yDB-bkVXZk1EUUk2Y00
+Gumstix Overo KDE 4.8.2 - konqueror
+https://docs.google.com/open?id=0Bx-m3uk1yDB-VDZjc0hXU1lna00
+Gumstix Overo KDE 4.8.2 - plasma netbook
+https://docs.google.com/open?id=0Bx-m3uk1yDB-YWRuc09qZkR5RG8
+Gumstix Overo KDE 4.8.2 - alt+tab graphic performance
+https://docs.google.com/open?id=0Bx-m3uk1yDB-cWZjbGx0OEx5ZzQ
 
-LinuxTag takes place in Berlin, Germany from May 23 to 26.
+The device is a Gumstix Overo Water running the Angstrom distribution.
+The window manager kwin_gles works good with the SGX 530 / OpenGL ES
+hardware acceleration.
 
-We need several people who want to help manning the booth. The years
-before was
-able to attend myself but this year I still do not know if I'll be able
-to do
-so. So if you are able to attend please take this chance to represent OE at
-LinuxTag!
+Overall this could be considered "usable", but the time it takes to
+start Plasma Desktop seems to be a bit too long for a coffee break.
 
-We have a big box with useful things for the booth (TFT, table cloth with OE
-logo, lamps, flyers...). This box will be available at the event location.
-Something useful to bring yourself are all sorts of devices OE supports.
+Maybe I can provide a video in the future, but it doesn't look any
+different from the usual KDE stuff (except that it is slower).
+Koen Kooi made a video of the Plasma Active system-settings running on
+a beagleboard, you can find it here:
+http://www.youtube.com/watch?v=LtevobU3A1g
 
-Greetings
 
-Florian
 
-[1] http://www.linuxtag.org
+Current issues:
+soprano-native
+- The onto2vocabulary application is needed in a native flavor.
+- This is necessary to build this layer, if the build machine itself
+does not have soprano installed
+
+plasma-active / kde-runtime
+- Plasma active needs the appletscript declarative scriptengine to work.
+- Currently the related library does not work properly.
+
+okular / kconfig_compiler
+- This issue blocks all builds of the KDE office suite Calligra, which
+has wonderful alternatives to well known office / paint programs (e.g.
+Krita)
+
+There are other issues but these have the highest impact.
+
+
+
+Testing meta-kde:
+Currently it won't work until you can provide soprano-native from your
+host or elsewhere.
+After this issue is resolved it will be easy to archive on
+OpenEmbedded if you use the branch sst-test-images:
+https://gitorious.org/openembedded-core-layers/meta-kde/trees/sst-test-images/recipes-images
+*just talking to myself* Maybe it would be a good idea to have a git
+subtree providing the images, so parsing won't fail over
+"systemd-image.bb not found" on Poky?
+
+
+
+Yocto Project Poky and meta-kde:
+A few off-list mails indicate that there is quite some interest in
+running Plasma Active on top of the Poky stack.
+It is planned to support Poky, and chances are good that after
+soprano-native is finished, KDE can be build with Poky.
+
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+Regards
+Samuel
 
 
