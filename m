@@ -1,34 +1,29 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-qa0-f48.google.com ([209.85.216.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1STE2f-0002Ts-Er for openembedded-devel@lists.openembedded.org;
-	Sat, 12 May 2012 17:15:33 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1STDt2-00051h-LA for openembedded-devel@lists.openembedded.org;
-	Sat, 12 May 2012 17:05:36 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 May 2012 17:05:36 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <gizero@gmail.com>) id 1STEAV-0002kO-E8
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 May 2012 17:23:39 +0200
+Received: by qady23 with SMTP id y23so2771106qad.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 May 2012 17:05:36 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 12 May 2012 08:13:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=2LnIRdS3QXIjzVWFa36HjdcHBqyYfkM3ad8nzpl8A6g=;
+	b=Vy8vVwunKhnejWqVPJm63VbE/uHVS+ukkybJd+BPOym+dv7ZJOAC89FGdVf7VBrOfn
+	c9IDjTYfxq1Hit43LtfhR4w1P1tlVvjE2Es/7s0OXdoySZOvI+dZuKNaxYCf7+QyaUpi
+	HjxfpRzLza4oxYPuH98PLmIYcXHtN8AtsSr6LLU7PoM9xFsZORsweYQKQWtbF8Vc5zYb
+	u7YFnXFzQ9zvonkphbro+YUiSUaP/TL+hh5prC2ydJzSr4IyPryBEZJMUnTmE2twsnrG
+	ZCsbEi/bpTDMCboshCvX9RfRbzx9qHn9qs0QELO5I5QdlvCWnXWWV4MUPcJLGd3yDTKx
+	+qGA==
+MIME-Version: 1.0
+Received: by 10.224.72.131 with SMTP id m3mr3028935qaj.82.1336835622339; Sat,
+	12 May 2012 08:13:42 -0700 (PDT)
+Received: by 10.229.217.200 with HTTP; Sat, 12 May 2012 08:13:42 -0700 (PDT)
+Date: Sat, 12 May 2012 17:13:42 +0200
+Message-ID: <CAC+thW2MuHaF_TG-zC1ed=k+LMtieowigBVh_cefdW90eEEpXQ@mail.gmail.com>
+From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 12 May 2012 17:05:21 +0200
-Message-ID: <jolu7i$t0k$1@dough.gmane.org>
-References: <1336650961-11681-1-git-send-email-rd@radekdostal.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
-In-Reply-To: <1336650961-11681-1-git-send-email-rd@radekdostal.com>
-X-Enigmail-Version: 1.4
-Subject: Re: [meta-oe][PATCH] libopus: adding libopus_0.9.10
+Subject: meta-java: adding support for gradle build tool and gradle based recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,75 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 May 2012 15:15:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 12 May 2012 15:23:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Op 10-05-12 13:56, Radek Dostal schreef:
+I'd like to estimate the feasibility of bringing some java libraries
+and tools to the embedded platforms that I manage with variants of
+oe/yocto stacks.
+I looked around and noticed a meta-java layer is available: I hope
+this is the right place to ask about it, since I found no
+layer-specific list. If I'm off topic here, please suggest more
+suitable pointers.
 
-Re: [oe] [meta-oe][PATCH] libopus: adding libopus_0.9.10
+Said java libs and tools require gradle [1] to build. My guess is that
+a native recipe for gradle will be needed first. This appear to be a
+"ant-like" problem, since gradle is said to be using gradle itself to
+build.
+I had a look at it's build documentation and source code. There is a
+shell script setting up suitable parameters for JVM, then downloading
+a wrapper class which builds the tool from sources.
 
-Nitpick: it's 'add', not 'adding', so:
+Before going for experimentations...
+1. Did anybody already try to set up a recipe for gradle?
+2. What are the expected challenges I'm supposed to meet in setting up
+a native java based recipe leveraging meta-java? Is there any
+particular limitation in current native environment used i.e for
+building ant?
+3. Could it be a reasonable approach to temporarily use a host build
+of gradle as a jump start for building final libs and tools? If so,
+what will be the required setup to instruct other recipes for using
+the host version of gradle. I know this is evil, but I expect more
+trouble in building gradle than gradle based recipes. Of course, this
+might be a completely wrong perception! ;-)
 
-Subject: libopus: add 0.9.10
+Hope the java masters will forgive me if my questions sound silly. I'm
+not a "building-for-java" expert at all: I hope this could be an
+opportunity to learn something new!
 
-> Signed-off-by: Radek Dostal <rd@radekdostal.com> --- 
-> .../recipes-multimedia/libopus/libopus_0.9.10.bb   |   22
-> ++++++++++++++++++++ 1 files changed, 22 insertions(+), 0 deletions(-) 
-> create mode 100644 meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
-> 
-> diff --git a/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
-> b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb new file mode
-> 100644 index 0000000..27d8a75 --- /dev/null +++
-> b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb @@ -0,0 +1,22 @@ 
-> +SUMMARY = "Celt Audio Codec"
+[1] http://www.gradle.org
 
-No mention of opus?
-
-> +DEPENDS = ""
-
-drop that
-
-> + +PR = "r0"
-
-And drop that
-
-> + +SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz" 
-> +
-
-No newline here
-
-> +SRC_URI[md5sum] = "afbda2fd20dc08e6075db0f60297a137" +SRC_URI[sha256sum]
-> = "4e379a98ba95bbbfe9087ef10fdd05c8ac9060b6d695f587ea82a7b43a0df4fe"
-
-But add a newline here
-
-> +S = "${WORKDIR}/opus-${PV}" + +inherit autotools pkgconfig + 
-> +EXTRA_OECONF = "--enable-fixed-point"
-
-That should probably check TARGET_FPU (or TUNEFEATURES, I forget)
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPrnwvAAoJEHZqAkdh1vT6UXEQAIfN+nscFo1DWz8eQrxV8BYX
-ulqhSBMwvnHOoWxoZXTgV4wVMRdCGASqC+rUmswlLITrlVNy0B4TOGyR2faKJsQz
-GpQUcthXV1TQQKpiF9C8yUcJxuZNE3fhmAHH5b63zKgKaRVeankbpdJotCTt+i+n
-18FYHkjTcLYG7jpjxXmHXouidIGeEfLBiAJkfxk1jNFfmale4El1INCW+/v68Ywa
-Ilk6ciM9rPLZM8udUcUCEA+5Q7GHttOSWiOCpU/j+82wj7GS+L/OQ0TWtU70S5kI
-GwMMsEoy2QmDKNDb+YdkzewjjAxwp1eJscncyIfW/fBQ41BgNNDQsksvOq75AsWv
-JAGt0stEJVAI9sLqTxOQ0CpNO1vsvyMJfl3Zf3OxAX+bft/i+ii8b9/2MZUDCCRp
-OBziy91Bq96JZ3JeoD0vGWRqDHrEdFH28A7II27A2lmWjQn9BVpwhJ3vO+LrmloM
-CFHO4VotDqou8E58AZP3jqo0k7zoR+yXw0X8GYm04KH7bTbv3iRcun9xqnl4DWFX
-ppMb1fJwrejG+NVMKmTDGU2ydlyP4Hx2dxZ46IrtyliGLMaKusBKIuMvpIzSjYlI
-HjlIJnj6J8/m8PAd32UUAoR1yDpAxCgeWNMZr2ISlldImTdrlbZzQKq75NZNgxhy
-sfrMOySRtP915fUbYI7H
-=83KG
------END PGP SIGNATURE-----
-
+Regards,
+Andrea
 
 
