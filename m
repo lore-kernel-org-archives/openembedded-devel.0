@@ -1,32 +1,34 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SSxzF-0004Nn-Mt
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 May 2012 00:06:58 +0200
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4BLn8Gd003852
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1STE2f-0002Ts-Er for openembedded-devel@lists.openembedded.org;
+	Sat, 12 May 2012 17:15:33 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1STDt2-00051h-LA for openembedded-devel@lists.openembedded.org;
+	Sat, 12 May 2012 17:05:36 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 May 2012 17:05:36 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2012 16:49:08 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4BLn8KC002481
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2012 16:49:08 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 11 May 2012 16:49:08 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4BLn24V030037;
-	Fri, 11 May 2012 16:49:06 -0500
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 11 May 2012 16:52:24 -0500
-Message-ID: <1336773144-9706-2-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1336773144-9706-1-git-send-email-Chase.Maupin@ti.com>
-References: <1336773144-9706-1-git-send-email-Chase.Maupin@ti.com>
-MIME-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [meta-oe][PATCH 2/2] orbit2: Update LICENSE field to contain GPL version
+	Sat, 12 May 2012 17:05:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 12 May 2012 17:05:21 +0200
+Message-ID: <jolu7i$t0k$1@dough.gmane.org>
+References: <1336650961-11681-1-git-send-email-rd@radekdostal.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:11.0) Gecko/20120327 Thunderbird/11.0.1
+In-Reply-To: <1336650961-11681-1-git-send-email-rd@radekdostal.com>
+X-Enigmail-Version: 1.4
+Subject: Re: [meta-oe][PATCH] libopus: adding libopus_0.9.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2012 22:06:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 12 May 2012 15:15:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Updated the LICENSE field to contain the GPL version as
-  indicated in the sources.  This is GPLv2+
-* Bump the PRs to pickup the LICENSE change
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- meta-gnome/recipes-gnome/orbit2/orbit2.inc        |    2 +-
- meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Op 10-05-12 13:56, Radek Dostal schreef:
 
-diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2.inc b/meta-gnome/recipes-gnome/orbit2/orbit2.inc
-index 5197890..8fe62eb 100644
---- a/meta-gnome/recipes-gnome/orbit2/orbit2.inc
-+++ b/meta-gnome/recipes-gnome/orbit2/orbit2.inc
-@@ -1,4 +1,4 @@
--LICENSE = "GPL"
-+LICENSE = "GPLv2+"
- DESCRIPTION = "CORBA ORB"
- SECTION = "x11/gnome/libs"
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/ORBit2/2.14/ORBit2-${PV}.tar.bz2 \
-diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-index 8709cc0..f12b561 100644
---- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-+++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-@@ -1,6 +1,6 @@
- require orbit2.inc
- 
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI[md5sum] = "10bfb957fa4a8935a0b4afaee7d71df7"
- SRC_URI[sha256sum] = "62bfce3f678f9347a19c766944e8aef7b89bc32b25ac23eb3e4c25929ce8974c"
--- 
-1.7.0.4
+Re: [oe] [meta-oe][PATCH] libopus: adding libopus_0.9.10
+
+Nitpick: it's 'add', not 'adding', so:
+
+Subject: libopus: add 0.9.10
+
+> Signed-off-by: Radek Dostal <rd@radekdostal.com> --- 
+> .../recipes-multimedia/libopus/libopus_0.9.10.bb   |   22
+> ++++++++++++++++++++ 1 files changed, 22 insertions(+), 0 deletions(-) 
+> create mode 100644 meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
+> 
+> diff --git a/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
+> b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb new file mode
+> 100644 index 0000000..27d8a75 --- /dev/null +++
+> b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb @@ -0,0 +1,22 @@ 
+> +SUMMARY = "Celt Audio Codec"
+
+No mention of opus?
+
+> +DEPENDS = ""
+
+drop that
+
+> + +PR = "r0"
+
+And drop that
+
+> + +SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz" 
+> +
+
+No newline here
+
+> +SRC_URI[md5sum] = "afbda2fd20dc08e6075db0f60297a137" +SRC_URI[sha256sum]
+> = "4e379a98ba95bbbfe9087ef10fdd05c8ac9060b6d695f587ea82a7b43a0df4fe"
+
+But add a newline here
+
+> +S = "${WORKDIR}/opus-${PV}" + +inherit autotools pkgconfig + 
+> +EXTRA_OECONF = "--enable-fixed-point"
+
+That should probably check TARGET_FPU (or TUNEFEATURES, I forget)
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPrnwvAAoJEHZqAkdh1vT6UXEQAIfN+nscFo1DWz8eQrxV8BYX
+ulqhSBMwvnHOoWxoZXTgV4wVMRdCGASqC+rUmswlLITrlVNy0B4TOGyR2faKJsQz
+GpQUcthXV1TQQKpiF9C8yUcJxuZNE3fhmAHH5b63zKgKaRVeankbpdJotCTt+i+n
+18FYHkjTcLYG7jpjxXmHXouidIGeEfLBiAJkfxk1jNFfmale4El1INCW+/v68Ywa
+Ilk6ciM9rPLZM8udUcUCEA+5Q7GHttOSWiOCpU/j+82wj7GS+L/OQ0TWtU70S5kI
+GwMMsEoy2QmDKNDb+YdkzewjjAxwp1eJscncyIfW/fBQ41BgNNDQsksvOq75AsWv
+JAGt0stEJVAI9sLqTxOQ0CpNO1vsvyMJfl3Zf3OxAX+bft/i+ii8b9/2MZUDCCRp
+OBziy91Bq96JZ3JeoD0vGWRqDHrEdFH28A7II27A2lmWjQn9BVpwhJ3vO+LrmloM
+CFHO4VotDqou8E58AZP3jqo0k7zoR+yXw0X8GYm04KH7bTbv3iRcun9xqnl4DWFX
+ppMb1fJwrejG+NVMKmTDGU2ydlyP4Hx2dxZ46IrtyliGLMaKusBKIuMvpIzSjYlI
+HjlIJnj6J8/m8PAd32UUAoR1yDpAxCgeWNMZr2ISlldImTdrlbZzQKq75NZNgxhy
+sfrMOySRtP915fUbYI7H
+=83KG
+-----END PGP SIGNATURE-----
 
 
 
