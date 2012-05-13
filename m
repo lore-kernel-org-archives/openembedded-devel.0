@@ -1,16 +1,18 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1STiPj-0007A8-5E
+	(envelope-from <andrea.adami@gmail.com>) id 1STigr-0007MV-2K
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 01:41:23 +0200
-Received: from mizar.localdomain (87.9.251.174) by smtp205.alice.it
-	(8.6.023.02) id 4F421F7B09724D77; Mon, 14 May 2012 01:31:24 +0200
+	Mon, 14 May 2012 01:59:05 +0200
+Received: from mizar.localdomain (87.9.251.174) by smtp206.alice.it
+	(8.6.023.02) id 4F9BF1D301A33C64; Mon, 14 May 2012 01:49:08 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2012 01:31:13 +0200
-Message-Id: <1336951873-22151-1-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 14 May 2012 01:49:02 +0200
+Message-Id: <1336952942-15164-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-Subject: [meta-oe][meta-initramfs][PATCH] klibc: upgrade to latest git (pre 2.0)
+In-Reply-To: <1336951873-22151-1-git-send-email-andrea.adami@gmail.com>
+References: <1336951873-22151-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-oe][meta-initramfs][PATCH v2] klibc: upgrade to latest git (pre 2.0)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,13 +26,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 May 2012 23:41:23 -0000
+X-List-Received-Date: Sun, 13 May 2012 23:59:05 -0000
 
 * remove cherry-picked patch applied in master
 * remove comments in klcc recipe
 * remove slashes from paths in klibc recipe
 * revert involontary oe_runmake install changes
 * reset INC_PR
+* v2 removes obolete cleanings wrt headers_install
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
@@ -62,9 +65,9 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
  .../klibc/klibc-utils_1.5.26+2.0.bb                |   16 +
  .../recipes-devtools/klibc/klibc-utils_1.5.26.bb   |   16 -
  meta-initramfs/recipes-devtools/klibc/klibc.inc    |    9 +-
- .../recipes-devtools/klibc/klibc_1.5.26+2.0.bb     |   32 +
+ .../recipes-devtools/klibc/klibc_1.5.26+2.0.bb     |   28 +
  .../recipes-devtools/klibc/klibc_1.5.26.bb         |   32 -
- 30 files changed, 2753 insertions(+), 2805 deletions(-)
+ 30 files changed, 2749 insertions(+), 2805 deletions(-)
  create mode 100644 meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.26+2.0.bb
  delete mode 100644 meta-initramfs/recipes-devtools/klibc/klcc-cross_1.5.26.bb
  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-1.5.26+2.0/dash_readopt.patch
@@ -5786,10 +5789,10 @@ index f89af9d..3706598 100644
  }
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.26+2.0.bb b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.26+2.0.bb
 new file mode 100644
-index 0000000..8a50628
+index 0000000..8eaab2c
 --- /dev/null
 +++ b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.26+2.0.bb
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,28 @@
 +PR = "${INC_PR}.0"
 +
 +export INST = "${D}"
@@ -5803,10 +5806,6 @@ index 0000000..8a50628
 +        rm ${D}${base_bindir}/klcc
 +        # remove now empty dir
 +        rmdir ${D}${base_bindir}
-+
-+        # remove Linux headers .install and ..install.cmd files
-+        find ${D}${base_libdir}/klibc/include -name '.install' -delete
-+        find ${D}${base_libdir}/klibc/include -name '..install.cmd' -delete
 +
 +        install -d ${D}${base_libdir}
 +        install -m 755 usr/klibc/klibc-*.so ${D}${base_libdir}
