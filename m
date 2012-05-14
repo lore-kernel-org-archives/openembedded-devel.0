@@ -1,38 +1,33 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elizabeth.flanagan@intel.com>) id 1STzGr-0005jn-Aa
+	(envelope-from <cazfi74@gmail.com>) id 1STzRK-000603-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 19:41:21 +0200
-Received: from mail-lb0-f180.google.com ([209.85.217.180])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 14 May 2012 10:30:16 -0700
-Received: by lbbgh12 with SMTP id gh12so3119066lbb.25
+	Mon, 14 May 2012 19:52:10 +0200
+Received: by yenl13 with SMTP id l13so3937027yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 10:30:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
+	Mon, 14 May 2012 10:42:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=PFDbO4vPEqu9xqooKwRiOQjWZVI185WBnQcUBiXeyMk=;
-	b=LHJuYLs1VRSxX69+ir4yq9o6Ac1ahHG4PnnUlJ5nXAvM3PwLzkZuQjxAc+ctt+kOsT
-	YY5e1MjuQCnmUhv+I0q51wDthPU0VvAaRyqRJ62UPP8aP/TqV3GtCTpQ+m63B3Wyl6ur
-	r1MQ/Okosbwx6/1B5IqMHDZkMsS2OWWFknSC5rNBMcKn/vKj2URCUXNk1wkeQQRgCyjg
-	GgGH1ktT775MgVv9e/M1cLEh87/I2aRr72yy0Q8gwdFgztksh1ok7CEDiV+tRQqZ3vO+
-	aUAcWI+mRd/hqntlDSo3OFxO/iNDCxvwRHj+8Tn6kaIIjDMByh3GJsrtGj+Tdt3fnpQO
-	yE0w==
+	:content-type; bh=7DwG6jTYcqOEapRCmbW5joPVChiR0uc5DIeSsf4iazY=;
+	b=kH7IJQ9RqBw1kqyaGNr5CBbGZ1zS2Nec1/7/YcJcrllkjESEiBa4+ZI++fckA2bbKY
+	Zn9tm9dam00YYrOtWuGqUqSniogyaH1B0dH4cjGvkYaNC7s2NrruHcxg9MdejBSw1Hi7
+	+WrbzMLQuEAACMuI6C97OVFCk8/ofMmJfc9SQE2YBgm1jOK6nukHx/W/oWqbUjgRrbJB
+	mmx+dYLdNxCnQkbeQHye/qwPDeScQXLzd5QBF53Yzmw9klfb0VnshSGvXap0t5IAk+fP
+	WGPqE4OZ5c0GTj7PV+nuM8FBgylS/sDiS5Vf0WUOMv1YRGyLPX0A5A+Y82AzBWL9Ngym
+	Qb2w==
 MIME-Version: 1.0
-Received: by 10.112.28.230 with SMTP id e6mr4172861lbh.34.1337016614096; Mon,
-	14 May 2012 10:30:14 -0700 (PDT)
-Received: by 10.112.107.137 with HTTP; Mon, 14 May 2012 10:30:14 -0700 (PDT)
-In-Reply-To: <1337011834-24879-13-git-send-email-Chase.Maupin@ti.com>
-References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
-	<1337011834-24879-13-git-send-email-Chase.Maupin@ti.com>
-Date: Mon, 14 May 2012 10:30:14 -0700
-Message-ID: <CAPhnLPDYGfet15Wek+2yRpiJK1+FwLi5+HyZv63khU5v9WCrcw@mail.gmail.com>
-From: "Flanagan, Elizabeth" <elizabeth.flanagan@intel.com>
+Received: by 10.50.94.200 with SMTP id de8mr4776062igb.21.1337017331206; Mon,
+	14 May 2012 10:42:11 -0700 (PDT)
+Received: by 10.64.59.130 with HTTP; Mon, 14 May 2012 10:42:11 -0700 (PDT)
+In-Reply-To: <CADZ6=au=JZVMD9_PNbcbSmv6JzxtZWeQD6suneG=fk9Ks4pHCg@mail.gmail.com>
+References: <CADZ6=auhe9BbFPd-F-QNLcTksuWzZdY8tUb31P2JVm38LDjCsw@mail.gmail.com>
+	<CAF6bG8cN5ecwtehSBxy5M1JvR+Fbo_=q7mm7O+AJcz-9ZU79yw@mail.gmail.com>
+	<CADZ6=au=JZVMD9_PNbcbSmv6JzxtZWeQD6suneG=fk9Ks4pHCg@mail.gmail.com>
+Date: Mon, 14 May 2012 20:42:11 +0300
+Message-ID: <CAF6bG8fEnVNtkEO9iHtrpB822w-SNWzTd-4WSTr_SgNqNpHTtg@mail.gmail.com>
+From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkkBn9evwZjL1XkhScgrQHadIVdLCDCmpw6iWGDuPctohww0iIm9kNk5/yox4iM1QJVAxU9
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [PATCH 12/69] atk: Update LICENSE field version
+Subject: Re: New kmod {libdir} breaks udev, systemd build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,63 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 17:41:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 May 2012 17:52:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, May 14, 2012 at 9:09 AM, Chase Maupin <Chase.Maupin@ti.com> wrote:
-> * Update LICENSE field version from generic LGPL to GPLv2+ and
-> =A0LGPLv2+ to reflect the real license version.
-> * This change was based on setting in oe-core as well as code
-> =A0inspection.
+On 14 May 2012 20:23, Thilo Fromm <fromm@dresearch-fe.de> wrote:
 >
-> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> ---
-> =A0recipes/atk/atk_1.30.0.bb | =A0 =A04 ++--
-> =A01 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/atk/atk_1.30.0.bb b/recipes/atk/atk_1.30.0.bb
-> index b3505bf..23c6685 100644
-> --- a/recipes/atk/atk_1.30.0.bb
-> +++ b/recipes/atk/atk_1.30.0.bb
-> @@ -1,9 +1,9 @@
-> =A0DESCRIPTION =3D "An accessibility toolkit for GNOME."
-> =A0SECTION =3D "x11/libs"
-> =A0PRIORITY =3D "optional"
-> -LICENSE =3D "LGPL"
-> +LICENSE =3D "GPLv2+ LGPLv2+"
+> openembedded-core only features udev-164 (vs. -182 in meta-oe). -164
+> in oe-core does not use libkmod, so there's no issue with libkmod in
+> oe-core. It's no surprise that it "worked for you", you were building
+> anicent tools.
 
-This should be:
-
-LICENSE =3D "GPLv2+ & LGPLv2+"
-
-or whatever the operator is (Most likely & or |)
-
-The license field needs to be ast parsable in order for the license
-system to work.
-
--b
-
->
-> -PR =3D "r1"
-> +PR =3D "r2"
->
-> =A0inherit gnome
->
-> --
-> 1.7.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+ I know. I were asking why versions are setup like this. If -182 makes
+more sensible default, why it's not one in -core. My main point was
+that seemingly unrelated change to build xterm to my image (requiring
+meta-oe layer) caused *default* udev version to change (I'm not
+setting PREFERRED_VERSION anywhere). Shouldn't -core versions be the
+default ones, that one may override?
 
 
-
---=20
-Elizabeth Flanagan
-Yocto Project
-Build and Release
+ - ML
 
 
