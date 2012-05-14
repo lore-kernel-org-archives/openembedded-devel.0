@@ -1,32 +1,32 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STxyH-0004MH-Qm
+	(envelope-from <chase.maupin@ti.com>) id 1STxyK-0004bv-F9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:18:06 +0200
+	Mon, 14 May 2012 18:18:09 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG86YC024687
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG89ME026124
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:08:06 -0500
+	Mon, 14 May 2012 11:08:09 -0500
 Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG86Ba008909
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG89LF008942
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:08:06 -0500
+	Mon, 14 May 2012 11:08:09 -0500
 Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
 	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:08:06 -0500
+	Mon, 14 May 2012 11:08:09 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AIK028612;
-	Mon, 14 May 2012 11:08:04 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AIL028612;
+	Mon, 14 May 2012 11:08:07 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:10:07 -0500
-Message-ID: <1337011834-24879-43-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:10:08 -0500
+Message-ID: <1337011834-24879-44-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 42/69] libsoup-2.4: Update LICENSE field version
+Subject: [PATCH 43/69] libvisual: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:18:08 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:18:09 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to LGPLv2 to
-  reflect the real license version.
-* This change was based on setting in oe-core as well as code
-  inspection.
+* Updated LICENSE field version from generic LGPL/GPL to LGPLv2.1+
+  and GPLv2 to reflect the real license version.
+* This change was based on code inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/gnome/libsoup-2.4_2.32.2.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/libvisual/libvisual_0.4.0.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/gnome/libsoup-2.4_2.32.2.bb b/recipes/gnome/libsoup-2.4_2.32.2.bb
-index 5bc793c..dbafa76 100644
---- a/recipes/gnome/libsoup-2.4_2.32.2.bb
-+++ b/recipes/gnome/libsoup-2.4_2.32.2.bb
-@@ -1,8 +1,10 @@
- DESCRIPTION = "An HTTP library implementation in C"
- SECTION = "x11/gnome/libs"
--LICENSE = "GPL"
-+LICENSE = "LGPLv2"
- DEPENDS = "libproxy glib-2.0 gnutls libxml2 sqlite3 gnome-keyring"
+diff --git a/recipes/libvisual/libvisual_0.4.0.bb b/recipes/libvisual/libvisual_0.4.0.bb
+index b8f6fd8..b7e898c 100644
+--- a/recipes/libvisual/libvisual_0.4.0.bb
++++ b/recipes/libvisual/libvisual_0.4.0.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "A cross platform audio visualization library"
+ HOMEPAGE = "http://libvisual.sf.net"
+ SECTION = "libs"
+ PRIORITY = "optional"
+-LICENSE = "LGPL GPL"
+-PR = "r1"
++LICENSE = "LGPLv2.1+ GPLv2"
++PR = "r2"
  
-+PR = "r1"
-+
- inherit gnome
- 
- SRC_URI = "${GNOME_MIRROR}/libsoup/${@gnome_verdir("${PV}")}/libsoup-${PV}.tar.bz2;name=libsoup"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libvisual/libvisual-${PV}.tar.gz \
+            file://no-libdir.patch \
 -- 
 1.7.0.4
 
