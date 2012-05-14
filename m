@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STxxi-0003VF-Tz
+	(envelope-from <chase.maupin@ti.com>) id 1STxxl-0003c4-Uu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:17:31 +0200
+	Mon, 14 May 2012 18:17:34 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG7VME026044
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG7YXg027485
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:07:31 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG7V2G008370
+	Mon, 14 May 2012 11:07:34 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG7YCw008391
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:07:31 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:07:31 -0500
+	Mon, 14 May 2012 11:07:34 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 May 2012 11:07:34 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AI7028612;
-	Mon, 14 May 2012 11:07:29 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AI8028612;
+	Mon, 14 May 2012 11:07:32 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:09:54 -0500
-Message-ID: <1337011834-24879-30-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:09:55 -0500
+Message-ID: <1337011834-24879-31-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 29/69] libmodplug: Update LICENSE field version
+Subject: [PATCH 30/69] lame: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:17:31 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:17:34 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to PD to
-  reflect the change from GPL to the Public Domain license.
-* This change was back-ported from oe-core.
+* Updated LICENSE field version from generic LGPL to LGPLv2+ to
+  reflect the real license version.
+* This change was based on setting in oe-core as well as code
+  inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/libmodplug/libmodplug_0.8.7.bb |    4 ++--
+ recipes/lame/lame_3.98.2.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/libmodplug/libmodplug_0.8.7.bb b/recipes/libmodplug/libmodplug_0.8.7.bb
-index 7d198a9..3df4d4c 100644
---- a/recipes/libmodplug/libmodplug_0.8.7.bb
-+++ b/recipes/libmodplug/libmodplug_0.8.7.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Library for reading mod-like audio files."
- HOMEPAGE = "http://modplug-xmms.sf.net"
- SECTION = "libs"
--LICENSE = "GPL"
-+LICENSE = "PD"
+diff --git a/recipes/lame/lame_3.98.2.bb b/recipes/lame/lame_3.98.2.bb
+index d4791a8..453b96f 100644
+--- a/recipes/lame/lame_3.98.2.bb
++++ b/recipes/lame/lame_3.98.2.bb
+@@ -1,7 +1,7 @@
+ SECTION = "console/utils"
+ DESCRIPTION = "Not an MP3 encoder"
+-LICENSE = "LGPL"
+-PR = "r0"
++LICENSE = "LGPLv2+"
++PR = "r1"
  
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz"
- 
+ S = "${WORKDIR}/${PN}-398-2"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}-398-2.tar.gz \
 -- 
 1.7.0.4
 
