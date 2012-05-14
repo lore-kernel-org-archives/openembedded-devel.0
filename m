@@ -1,32 +1,32 @@
 Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STy51-0001xL-KC
+	(envelope-from <chase.maupin@ti.com>) id 1STy52-0001xL-Hi
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 14 May 2012 18:25:04 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG6w5n027189
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG6OvY026866
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:06:58 -0500
-Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6wU5007892
+	Mon, 14 May 2012 11:06:24 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6OlJ007324
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:06:58 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle71.ent.ti.com
-	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:06:59 -0500
+	Mon, 14 May 2012 11:06:24 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 May 2012 11:06:24 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHt028612;
-	Mon, 14 May 2012 11:06:57 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHg028612;
+	Mon, 14 May 2012 11:06:22 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:09:42 -0500
-Message-ID: <1337011834-24879-18-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:09:29 -0500
+Message-ID: <1337011834-24879-5-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 17/69] libcroco: Update LICENSE field version
+Subject: [PATCH 04/69] canutils: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:25:04 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:25:05 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic LGPL to LGPLv2 and
-  LGPLv2.1 to reflect the real license version.
-* This change was based on setting in oe-core as well as code
-  inspection.
+* Updated LICENSE field version from generic LGPL to GPLv2 to
+  reflect the actual license and license version of the code.
+* This change was back-ported from oe-core
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/libcroco/libcroco_0.6.2.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/socketcan/canutils.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/libcroco/libcroco_0.6.2.bb b/recipes/libcroco/libcroco_0.6.2.bb
-index e502e95..07a224d 100644
---- a/recipes/libcroco/libcroco_0.6.2.bb
-+++ b/recipes/libcroco/libcroco_0.6.2.bb
-@@ -1,7 +1,9 @@
- DESCRIPTION = "The Libcroco project is an effort to build a generic Cascading Style Sheet (CSS) parsing and manipulation toolkit"
- SECTION = "x11/utils"
- DEPENDS = "glib-2.0 libxml2"
+diff --git a/recipes/socketcan/canutils.inc b/recipes/socketcan/canutils.inc
+index a4edeea..6ee6bbd 100644
+--- a/recipes/socketcan/canutils.inc
++++ b/recipes/socketcan/canutils.inc
+@@ -3,10 +3,10 @@ AUTHOR = "Luotao Fu"
+ HOMEPAGE = "http://www.pengutronix.de"
+ SECTION = "console/network"
+ PRIORITY = "optional"
 -LICENSE = "LGPL"
-+LICENSE = "LGPLv2 LGPLv2.1"
-+
-+PR = "r1"
++LICENSE = "GPLv2"
+ DEPENDS = "libsocketcan"
+ RCONFLICTS_${PN} = "socketcan-utils-test"
+-INC_PR = "r1"
++INC_PR = "r2"
  
- inherit gnome
- 
+ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git;tag=${TAG} \
+         "
 -- 
 1.7.0.4
 
