@@ -1,36 +1,32 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1STxtr-0000T2-Ii
+	(envelope-from <chase.maupin@ti.com>) id 1STxwZ-0002ts-A2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:13:32 +0200
-Received: by bkcjm2 with SMTP id jm2so4215560bkc.6
+	Mon, 14 May 2012 18:16:19 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG6Jsm024464
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 09:03:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=I+8Gjp8ya6doxPj/2ickL3HEg0SgvslVYexxd7GPgu0=;
-	b=tBMspAPoBbMSdpngO8zL/Quh6DqFuu12peh5Ey7CakbfjPkP7WuhCXYIJW+BmsWnVq
-	iakbCP7JmULer3BAdNlnHWum3OWEaLxU0o2+CwXvXZPOTbhL6KtZx1QDltY1PZ4l1/iI
-	kQ6KH6bp3JLU1KfGz1u1E3KAq1kMVtkKLCAFdtf+w4YVr+tooW9FMfu7Z4W/zHT6WUva
-	/4OSvs/gAIm9ZK1okEbVVwdIxBdbDE5mMNfDl60W8Y8heCVTbJKX34qMdI3BWpi5wsOV
-	ICPqaQeU6fxQCQHbSiOzpWrhIT+ZF0HqGF0bNkZA1FM1CS8iCVW1bd9uYgKwOt6pheJn
-	PISQ==
-Received: by 10.204.148.79 with SMTP id o15mr2444284bkv.87.1337011412480;
-	Mon, 14 May 2012 09:03:32 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id ig1sm35829510bkc.4.2012.05.14.09.03.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 May 2012 09:03:31 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2012 18:03:27 +0200
-Message-Id: <1337011407-3889-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	Mon, 14 May 2012 11:06:19 -0500
+Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6JeF007245
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 May 2012 11:06:19 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 May 2012 11:06:19 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHe028612;
+	Mon, 14 May 2012 11:06:17 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 14 May 2012 11:09:27 -0500
+Message-ID: <1337011834-24879-3-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
+References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: [meta-oe] gvfs: fix build
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH 02/69] libtasn1: update LICENSE setting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,77 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:13:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 14 May 2012 16:16:19 -0000
+Content-Type: text/plain
 
-Error message was:
-| In file included from gvfsfusedaemon.c:44:0:
-| /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/include/glib-2.0/glib/gurifuncs.h:24:2: error: #error "Only <glib.h> can be included directly."
+* Updated the LICENSE field setting based on settings in oe-core
+  as well as code inspection.
+* Inherit lib_package to separate out the GPLv3 binaries from the
+  LGPLv2.1 libraries
+* Bump the PR
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- .../0001-gvfsfusedaemon.c-fix-glib-build.patch     |   31 ++++++++++++++++++++
- meta-gnome/recipes-gnome/gvfs/gvfs.inc             |    3 +-
- 2 files changed, 33 insertions(+), 1 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
+ recipes/gnutls/libtasn1_1.7.bb |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch b/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
-new file mode 100644
-index 0000000..3db44a8
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
-@@ -0,0 +1,31 @@
-+From c339eaaa514b8edcfe8de5c9610b8f2591ec221a Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Mon, 14 May 2012 17:36:37 +0200
-+Subject: [PATCH] gvfsfusedaemon.c: fix glib build
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+Upstream-status: Applied but we can not use it because newer versions depend
-+on gnome-disk-utiltity >= V3.02 which depends on gtk+ V3
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ client/gvfsfusedaemon.c |    2 --
-+ 1 files changed, 0 insertions(+), 2 deletions(-)
-+
-+diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
-+index bc3090d..f2e708e 100644
-+--- a/client/gvfsfusedaemon.c
-++++ b/client/gvfsfusedaemon.c
-+@@ -41,8 +41,6 @@
-+ #include <glib/gprintf.h>
-+ #include <gio/gio.h>
-+ 
-+-#include <glib/gurifuncs.h>
-+-
-+ /* stuff from common/ */
-+ #include <gdaemonmount.h>
-+ #include <gvfsdaemonprotocol.h>
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-index b6a0526..903a8ba 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-@@ -4,10 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+diff --git a/recipes/gnutls/libtasn1_1.7.bb b/recipes/gnutls/libtasn1_1.7.bb
+index 44da659..0603949 100644
+--- a/recipes/gnutls/libtasn1_1.7.bb
++++ b/recipes/gnutls/libtasn1_1.7.bb
+@@ -1,11 +1,13 @@
+ DESCRIPTION = "Library for ASN.1 and DER manipulation"
+-LICENSE = "LGPL"
++LICENSE = "GPLv3+ LGPLv2.1+"
++LICENSE_${PN}-bin = "GPLv3+"
++LICENSE_${PN} = "LGPLv2.1+"
  
- inherit gnome
+-PR = "r1"
++PR = "r2"
  
--INC_PR = "r6"
-+INC_PR = "r7"
+ SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/libtasn1/libtasn1-${PV}.tar.gz"
  
- SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
- SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
-+SRC_URI += "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
+-inherit autotools binconfig
++inherit autotools binconfig lib_package
  
- EXTRA_OECONF = "--disable-samba \
-                 --with-samba-includes=${STAGING_INCDIR} \
+ SRC_URI[md5sum] = "ebfd69b3514d8e8830057f0e9df6a5f9"
+ SRC_URI[sha256sum] = "9431f8e41acbeb5b5b89ec87a092b1a1fe9ef0a229a9a90806f4774707ca1f1f"
 -- 
-1.7.6.5
+1.7.0.4
 
 
 
