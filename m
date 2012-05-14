@@ -1,32 +1,32 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STxzR-0007DI-JR
+	(envelope-from <chase.maupin@ti.com>) id 1STy08-00084S-Jx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:19:19 +0200
+	Mon, 14 May 2012 18:20:14 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG9Iju024843
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG74gR025986
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:09:18 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG9Itv010020
+	Mon, 14 May 2012 11:07:04 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG74VA007997
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:09:18 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:09:18 -0500
+	Mon, 14 May 2012 11:07:04 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 May 2012 11:07:04 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AIl028612;
-	Mon, 14 May 2012 11:09:16 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHv028612;
+	Mon, 14 May 2012 11:07:02 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:10:34 -0500
-Message-ID: <1337011834-24879-70-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:09:44 -0500
+Message-ID: <1337011834-24879-20-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 69/69] time: Update LICENSE field version
+Subject: [PATCH 19/69] faac: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:19:21 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:20:23 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to GPLv2+ to
+* Updated LICENSE field version from generic LGPL to LGPLv2 to
   reflect the real license version.
-* This change was back-ported from oe-core.
+* This change was based on code inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/time/time.inc |    4 ++--
+ recipes/faac/faac_1.24.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/time/time.inc b/recipes/time/time.inc
-index c5e37d4..777142a 100644
---- a/recipes/time/time.inc
-+++ b/recipes/time/time.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "time measures many of the CPU resources, such as time and \
- memory, that other programs use."
- HOMEPAGE = "http://www.gnu.org/software/time/"
- SECTION = "utils"
--LICENSE = "GPL"
+diff --git a/recipes/faac/faac_1.24.bb b/recipes/faac/faac_1.24.bb
+index b635b32..a7e548b 100644
+--- a/recipes/faac/faac_1.24.bb
++++ b/recipes/faac/faac_1.24.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "Library for reading some sort of media format."
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = ""
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2 LGPLv2.1"
+ 
 -PR = "r1"
-+LICENSE = "GPLv2+"
 +PR = "r2"
  
- # We only want rename for update-alternatives on the target
- do_install_append_pn-time () {
+ inherit autotools
+ 
 -- 
 1.7.0.4
 
