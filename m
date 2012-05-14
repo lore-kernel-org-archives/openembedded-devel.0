@@ -1,30 +1,39 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STzng-0003Mk-3P
+	(envelope-from <martin.jansa@gmail.com>) id 1STzve-0003Zv-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 20:15:16 +0200
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EI5GQi018161
+	Mon, 14 May 2012 20:23:30 +0200
+Received: by wibhm14 with SMTP id hm14so3367617wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 13:05:16 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EI5G6C007919
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 13:05:16 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 13:05:16 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EI5DeG006059;
-	Mon, 14 May 2012 13:05:14 -0500
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 13:09:40 -0500
-Message-ID: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+	Mon, 14 May 2012 11:13:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=+oC+L98ti5CLLQefsmV8C0s4cSyI9Ch3X6aSqdXV3ws=;
+	b=Hn4iqkVjz9zAxYokzqvrVgwA2ggbsPRfTFBv/zk1ei5deiEkvfNkFV87HO5WCujupe
+	EQVeB0E7Gi5NS888d/NH+9/AnMuSUtUzWvsbnLwQ43+U8AOiMIaZvjQaSuaG7303Nx+q
+	Ce9MVIlYG0T2BHz2YWz+vkFU2tNmCqb9020BHByztmuRug6H65LexuWAwqBtdWcB1+3g
+	C63FYUc58W4pQ1oqNxbliusAW6kHz9KVx3cI/dHvVd11U9pXSKgUBwgSeRL+SK3dTtCJ
+	ClhH8oYLqujV7VbcTAASIPtiYxnnwShSZ25xVEaBMK7W99o9R5hC+FoSqFSsba4cNPwh
+	8iHw==
+Received: by 10.180.8.69 with SMTP id p5mr22279009wia.17.1337019211336;
+	Mon, 14 May 2012 11:13:31 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id fo7sm36600099wib.9.2012.05.14.11.13.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 May 2012 11:13:29 -0700 (PDT)
+Date: Mon, 14 May 2012 20:13:29 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120514181329.GB3166@jama.jama.net>
+References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
+	<1337011834-24879-13-git-send-email-Chase.Maupin@ti.com>
+	<CAPhnLPDYGfet15Wek+2yRpiJK1+FwLi5+HyZv63khU5v9WCrcw@mail.gmail.com>
+	<7D46E86EC0A8354091174257B2FED10138E31694@DLEE12.ent.ti.com>
 MIME-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [2011.03-maintenance] Pull request 20120514
+In-Reply-To: <7D46E86EC0A8354091174257B2FED10138E31694@DLEE12.ent.ti.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 12/69] atk: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,177 +47,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 18:15:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 May 2012 18:23:30 -0000
+X-Groupsio-MsgNum: 38752
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jho1yZJdad60DJr+"
+Content-Disposition: inline
 
-Tom,
+--jho1yZJdad60DJr+
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please pull the following commits that update the LICENSE field to
-list the actual license version for licenses like GPL and LGPL.  These
-patches have previously been sent to the list with each patch identifying
-where it was derived from.  I have also submitted patches for oe-core where
-appropriate.
+On Mon, May 14, 2012 at 05:49:26PM +0000, Maupin, Chase wrote:
+> > -----Original Message-----
+> > From: Flanagan, Elizabeth [mailto:elizabeth.flanagan@intel.com]
+> > Sent: Monday, May 14, 2012 12:30 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Maupin, Chase
+> > Subject: Re: [oe] [PATCH 12/69] atk: Update LICENSE field version
+> >=20
+> > On Mon, May 14, 2012 at 9:09 AM, Chase Maupin
+> > <Chase.Maupin@ti.com> wrote:
+> > > * Update LICENSE field version from generic LGPL to GPLv2+ and
+> > > =A0LGPLv2+ to reflect the real license version.
+> > > * This change was based on setting in oe-core as well as code
+> > > =A0inspection.
+> > >
+> > > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> > > ---
+> > > =A0recipes/atk/atk_1.30.0.bb | =A0 =A04 ++--
+> > > =A01 files changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/recipes/atk/atk_1.30.0.bb
+> > b/recipes/atk/atk_1.30.0.bb
+> > > index b3505bf..23c6685 100644
+> > > --- a/recipes/atk/atk_1.30.0.bb
+> > > +++ b/recipes/atk/atk_1.30.0.bb
+> > > @@ -1,9 +1,9 @@
+> > > =A0DESCRIPTION =3D "An accessibility toolkit for GNOME."
+> > > =A0SECTION =3D "x11/libs"
+> > > =A0PRIORITY =3D "optional"
+> > > -LICENSE =3D "LGPL"
+> > > +LICENSE =3D "GPLv2+ LGPLv2+"
+> >=20
+> > This should be:
+> >=20
+> > LICENSE =3D "GPLv2+ & LGPLv2+"
+> >=20
+> > or whatever the operator is (Most likely & or |)
+>=20
+> I know that & works in oe-core, but when I use this in oe-classic I get b=
+uild errors like:
+>=20
+> NOTE: Running task 432 of 513 (ID: 1, /home/a0271661/projects/arago-4.7/a=
+rago-oe-dev/recipes/atk/atk_1.30.0.bb, do_patch)
+> ERROR: Function SRC_DISTRIBUTECOMMAND failed
+> NOTE: Task failed: ('function SRC_DISTRIBUTECOMMAND failed', '/home/a0271=
+661/projects/arago-4.7/arago-tmp/work/armv7a-arago-linux-gnueabi/atk-1.30.0=
+-r2/temp/log.SRC_DISTRIBUTECOMMAND.27742')
+> ERROR: Logfile of failure stored in: /home/a0271661/projects/arago-4.7/ar=
+ago-tmp/work/armv7a-arago-linux-gnueabi/atk-1.30.0-r2/temp/log.SRC_DISTRIBU=
+TECOMMAND.27742
+> Log data follows:
+> | /home/a0271661/projects/arago-4.7/arago-tmp/work/armv7a-arago-linux-gnu=
+eabi/atk-1.30.0-r2/temp/run.SRC_DISTRIBUTECOMMAND.27742: line 1288: /atk: N=
+o such file or directory
+> | ERROR: Function SRC_DISTRIBUTECOMMAND failed
+> NOTE: package atk-1.30.0-r2: task do_distribute_sources: Failed
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of /home/a0271661/projects/arago-4.7/arago-oe-dev/recipes/at=
+k/atk_1.30.0.bb do_distribute_sources failed
+> ERROR: Task 16 (/home/a0271661/projects/arago-4.7/arago-oe-dev/recipes/at=
+k/atk_1.30.0.bb, do_distribute_sources) failed with exit code 1
+>=20
+> The line (1288) that is causing this error looks like:
+>=20
+> cd /home/a0271661/projects/arago-4.7/arago-tmp/deploy/glibc/sources/&/atk
+> SRC_DISTRIBUTECOMMAND
+>=20
+> Looking at other recipes I noticed that when they had multiple licenses t=
+hey used a space separated list and in the case of an or license option |.
+>=20
+> Any input on this would be appreciated.  I don't believe / is right becau=
+se that would make it look like a path for the classes that use the license.
 
-I'm looking for feedback on how to properly mark a package as having two
-licenses in oe-classic since "&" causes issues.  If these patches are OK
-then they can be pulled.  If there is a better way to mark the dual licensing
-then I'll update them accordingly.
+yes, special characters like '+'
+http://git.openembedded.org/openembedded/commit/?id=3D1c25e6c73b219dc807778=
+0567fb0fb515092b5cf
+or '&' or even spaces
+http://git.openembedded.org/openembedded/commit/?id=3D819fa4c451ea5a811b8dd=
+78bbcbb38dc38c68aa4
 
-The following changes since commit 36a56cbb69cda0c89f478e01183d61c6a66525c9:
-  Steffen Sledz (1):
-        icedtea6-native-1.7.10: backport S7103224
+break oe-classic, more about it
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-May/032579.html
 
-are available in the git repository at:
+Cheers,
 
-  http://arago-project.org/git/projects/arago-oe-amsdk.git update-licenses
+>=20
+> >=20
+> > The license field needs to be ast parsable in order for the
+> > license
+> > system to work.
+> >=20
+> > -b
+> >=20
+> > >
+> > > -PR =3D "r1"
+> > > +PR =3D "r2"
+> > >
+> > > =A0inherit gnome
+> > >
+> > > --
+> > > 1.7.0.4
+> > >
+> > >
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.linuxtogo.org/cgi-
+> > bin/mailman/listinfo/openembedded-devel
+> >=20
+> >=20
+> >=20
+> > --
+> > Elizabeth Flanagan
+> > Yocto Project
+> > Build and Release
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Chase Maupin (69):
-      gnutls: update LICENSE setting
-      libtasn1: update LICENSE setting
-      bonnie: Update LICENSE field version
-      canutils: Update LICENSE field version
-      debianutils: Update LICENSE field version
-      gtk+: Update LICENSE field version for 2.20.1
-      gnome-keyring: Update LICENSE field version
-      gnome-vfs: Update LICENSE field version
-      hicolor-icon-theme: Update LICENSE field version
-      hostap-daemon: Update LICENSE field version
-      liba52: Update LICENSE field version
-      atk: Update LICENSE field version
-      audiofile: Update LICENSE field version
-      avahi: Update LICENSE field version
-      cairo: Update LICENSE field version
-      libcap2: Update LICENSE field version
-      libcroco: Update LICENSE field version
-      esound: Update LICENSE field version
-      faac: Update LICENSE field version
-      faad2: Update LICENSE field version
-      flac: Update LICENSE field version
-      libgcrypt: Update LICENSE field version
-      gdbm: Update LICENSE field version
-      libgpg-error: Update LICENSE field version
-      libical: Update LICENSE field version
-      libid3tag: Update LICENSE field version
-      libidl: Update LICENSE field version
-      libmad: Update LICENSE field version
-      libmodplug: Update LICENSE field version
-      lame: Update LICENSE field version
-      mpeg2dec: Update LICENSE field version
-      mysql5: Update LICENSE field version
-      libnl: Update LICENSE field version
-      libproxy: Update LICENSE field version
-      librsvg: Update LICENSE field version
-      libsamplerate0: Update LICENSE field version
-      schroedinger: Update LICENSE field version
-      libsdl: Update LICENSE field version
-      libsidplay: Update LICENSE field version
-      libsndfile1: Update LICENSE field version
-      libsocketcan: Update LICENSE field version
-      libsoup-2.4: Update LICENSE field version
-      libvisual: Update LICENSE field version
-      x264: Update LICENSE field version
-      libxv: Update LICENSE field version
-      lmbench: Update LICENSE field version
-      makedevs: Update LICENSE field version
-      nfs-utils: Update LICENSE field version
-      orbit2: Update LICENSE field version
-      pango: Update LICENSE field version
-      shared-mime-info: Update LICENSE field version
-      wireless-tools: Update LICENSE field version
-      gnome-common: Update LICENSE field version
-      cups: Update LICENSE field version
-      gnome-mime-data: Update LICENSE field version
-      gtk-doc: Update LICENSE field version
-      intltool: Update LICENSE field version
-      libart-lgpl: Update LICENSE field version
-      libdaemon: Update LICENSE field version
-      libdiscid: Update LICENSE field version
-      libglade: Update LICENSE field version
-      libmikmod: Update LICENSE field version
-      libmusicbrainz: Update LICENSE field version
-      neon: Update LICENSE field version
-      libnfnetlink: Update LICENSE field version
-      python-pycairo: Update LICENSE field version
-      python-pygobject: Update LICENSE field version
-      python-pygtk: Update LICENSE field version
-      time: Update LICENSE field version
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
- recipes/atk/atk_1.30.0.bb                          |    4 ++--
- recipes/audiofile/audiofile_0.2.6.bb               |    4 ++--
- recipes/avahi/avahi.inc                            |    4 ++--
- recipes/bonnie/bonnie++.inc                        |    3 ++-
- recipes/cairo/cairo_1.10.0.bb                      |    4 +++-
- recipes/cups/cups_1.2.12.bb                        |    4 ++--
- recipes/debianutils/debianutils.inc                |    4 ++--
- recipes/esound/esound_0.2.36.bb                    |    4 ++--
- recipes/faac/faac_1.24.bb                          |    4 ++--
- recipes/faad2/faad2_2.7.bb                         |    4 +++-
- recipes/flac/flac_1.2.1.bb                         |    4 +++-
- recipes/gdbm/gdbm_1.8.3.bb                         |    4 ++--
- recipes/gnome/gnome-common.inc                     |    2 +-
- recipes/gnome/gnome-common_2.28.0.bb               |    2 ++
- recipes/gnome/gnome-keyring_2.28.2.bb              |    4 ++--
- recipes/gnome/gnome-mime-data_2.18.0.bb            |    4 ++--
- recipes/gnome/gnome-vfs_2.24.1.bb                  |    4 ++--
- recipes/gnome/libart-lgpl.inc                      |    4 ++--
- recipes/gnome/libproxy_0.2.3.bb                    |    4 ++--
- recipes/gnome/libsoup-2.4_2.32.2.bb                |    4 +++-
- recipes/gnome/orbit2_2.14.17.bb                    |    4 ++++
- recipes/gnutls/gnutls.inc                          |   10 +++++++---
- recipes/gnutls/libtasn1_1.7.bb                     |    8 +++++---
- recipes/gtk+/gtk+_2.20.1.bb                        |    4 +++-
- recipes/gtk-doc/gtk-doc.bb                         |    4 ++--
- .../hicolor-icon-theme/hicolor-icon-theme_0.11.bb  |    4 ++--
- recipes/hostap/hostap-daemon-0.7.inc               |    2 +-
- recipes/hostap/hostap-daemon_0.7.3.bb              |    2 +-
- recipes/intltool/intltool.inc                      |    4 ++--
- recipes/lame/lame_3.98.2.bb                        |    4 ++--
- recipes/liba52/liba52_0.7.4.bb                     |    4 ++--
- recipes/libcap/libcap2_2.20.bb                     |    4 ++--
- recipes/libcroco/libcroco_0.6.2.bb                 |    4 +++-
- recipes/libdaemon/libdaemon_0.13.bb                |    4 ++--
- recipes/libdiscid/libdiscid.inc                    |    2 +-
- recipes/libdiscid/libdiscid_0.2.2.bb               |    2 ++
- recipes/libgcrypt/libgcrypt_1.4.1.bb               |    4 ++++
- recipes/libglade/libglade_2.6.4.bb                 |    4 ++++
- recipes/libgpg-error/libgpg-error_1.4.bb           |    4 +++-
- recipes/libical/libical_0.44.bb                    |    4 ++--
- recipes/libid3tag/libid3tag_0.15.1b.bb             |    4 ++--
- recipes/libidl/libidl-native_0.8.13.bb             |    2 +-
- recipes/libidl/libidl.inc                          |    2 +-
- recipes/libidl/libidl_0.8.13.bb                    |    2 +-
- recipes/libmad/libmad_0.15.1b.bb                   |    4 ++--
- recipes/libmikmod/libmikmod_3.1.12.bb              |    4 ++--
- recipes/libmodplug/libmodplug_0.8.7.bb             |    4 ++--
- recipes/libnfnetlink/libnfnetlink_1.0.0.bb         |    4 +++-
- recipes/libnl/libnl_2.0.bb                         |    5 ++++-
- recipes/librsvg/librsvg_2.26.2.bb                  |    4 ++--
- recipes/libsamplerate/libsamplerate0_0.1.7.bb      |    4 ++--
- recipes/libsdl/libsdl-1.2.14.inc                   |    4 ++--
- recipes/libsidplay/libsidplay_1.36.59.bb           |    4 ++--
- recipes/libsndfile/libsndfile1_1.0.24.bb           |    4 ++--
- recipes/libvisual/libvisual_0.4.0.bb               |    4 ++--
- recipes/lmbench/lmbench_3.0-a9.bb                  |    4 ++--
- recipes/makedevs/makedevs_1.0.0.bb                 |    4 ++--
- recipes/mpeg2dec/mpeg2dec_0.4.0b.bb                |    4 ++--
- recipes/musicbrainz/libmusicbrainz.inc             |    2 +-
- recipes/musicbrainz/libmusicbrainz_3.0.2.bb        |    2 +-
- recipes/mysql/mysql5_5.1.40.inc                    |    4 ++--
- recipes/neon/neon_0.25.5.bb                        |    4 ++--
- recipes/nfs-utils/nfs-utils_1.1.2.bb               |    4 ++--
- recipes/pango/pango_1.24.4.bb                      |    4 +++-
- recipes/python/python-pycairo_1.8.0.bb             |    4 ++--
- recipes/python/python-pygobject_2.20.0.bb          |    4 ++--
- recipes/python/python-pygtk_2.16.0.bb              |    4 ++--
- recipes/schroedinger/schroedinger_1.0.9.bb         |    4 +++-
- recipes/shared-mime-info/shared-mime-info_0.51.bb  |    4 +++-
- recipes/socketcan/canutils.inc                     |    4 ++--
- recipes/socketcan/libsocketcan.inc                 |    4 ++--
- recipes/time/time.inc                              |    4 ++--
- recipes/vlc/x264_r2245.bb                          |    4 ++--
- recipes/wireless-tools/wireless-tools.inc          |    2 +-
- recipes/wireless-tools/wireless-tools_29.bb        |    2 +-
- recipes/xorg-lib/libxv_1.0.6.bb                    |    4 ++--
- 76 files changed, 168 insertions(+), 120 deletions(-)
+--jho1yZJdad60DJr+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAk+xS0kACgkQN1Ujt2V2gBxMBQCfe9AJOG8Gx0zPO2Xcs59gcsIx
+uOQAn2yNY4s1Cjg0g3qIxRa9/nUknnPc
+=WrPt
+-----END PGP SIGNATURE-----
+
+--jho1yZJdad60DJr+--
