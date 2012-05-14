@@ -1,32 +1,32 @@
 Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STy1g-00084S-Tu
+	(envelope-from <chase.maupin@ti.com>) id 1STy1i-00084S-Fq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:21:37 +0200
+	Mon, 14 May 2012 18:21:39 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG6bID025908
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG6dmj025919
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:06:37 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6bMt007540
+	Mon, 14 May 2012 11:06:39 -0500
+Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6dUq007575
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:06:37 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:06:37 -0500
+	Mon, 14 May 2012 11:06:39 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle71.ent.ti.com
+	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 May 2012 11:06:40 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHl028612;
-	Mon, 14 May 2012 11:06:35 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AHm028612;
+	Mon, 14 May 2012 11:06:38 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:09:34 -0500
-Message-ID: <1337011834-24879-10-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:09:35 -0500
+Message-ID: <1337011834-24879-11-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 09/69] hicolor-icon-theme: Update LICENSE field version
+Subject: [PATCH 10/69] hostap-daemon: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:21:38 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:21:39 -0000
 Content-Type: text/plain
 
 * Updated LICENSE field version from generic GPL to GPLv2 to
   reflect the real license version.
-* This change was based on setting in oe-core as well as code
-  inspection
+* This change was based on code inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- .../hicolor-icon-theme/hicolor-icon-theme_0.11.bb  |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/hostap/hostap-daemon-0.7.inc  |    2 +-
+ recipes/hostap/hostap-daemon_0.7.3.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/hicolor-icon-theme/hicolor-icon-theme_0.11.bb b/recipes/hicolor-icon-theme/hicolor-icon-theme_0.11.bb
-index a980570..f8f8677 100644
---- a/recipes/hicolor-icon-theme/hicolor-icon-theme_0.11.bb
-+++ b/recipes/hicolor-icon-theme/hicolor-icon-theme_0.11.bb
-@@ -1,11 +1,11 @@
- SECTION = "unknown"
+diff --git a/recipes/hostap/hostap-daemon-0.7.inc b/recipes/hostap/hostap-daemon-0.7.inc
+index 49f2650..187cec5 100644
+--- a/recipes/hostap/hostap-daemon-0.7.inc
++++ b/recipes/hostap/hostap-daemon-0.7.inc
+@@ -1,7 +1,7 @@
+ HOMEPAGE = "http://hostap.epitest.fi"
+ SECTION = "kernel/userland"
+ PRIORITY = "optional"
 -LICENSE = "GPL"
 +LICENSE = "GPLv2"
- inherit autotools gtk-icon-cache
+ DEPENDS = "libnl openssl"
  
- # Override RDEPENDS_${PN} = hicolor-icon-theme from gtk-icon-cache
- RDEPENDS_${PN} = ""
- RDEPENDS_${PN} = ""
--PR = "r1"
-+PR = "r2"
+ inherit update-rc.d
+diff --git a/recipes/hostap/hostap-daemon_0.7.3.bb b/recipes/hostap/hostap-daemon_0.7.3.bb
+index 5a8aee7..99297a9 100644
+--- a/recipes/hostap/hostap-daemon_0.7.3.bb
++++ b/recipes/hostap/hostap-daemon_0.7.3.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
  
- SRC_URI = "http://icon-theme.freedesktop.org/releases/${P}.tar.gz"
+ require hostap-daemon-0.7.inc
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ DEFAULT_PREFERENCE = "-1"
  
 -- 
 1.7.0.4
