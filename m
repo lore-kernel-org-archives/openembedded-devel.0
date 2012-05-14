@@ -1,26 +1,31 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SU1Lr-00042D-1o
+	(envelope-from <raj.khem@gmail.com>) id 1SU2v8-0005So-VX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 21:54:39 +0200
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4100DY32TM09B2@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	14 May 2012 14:44:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 71C6D20173; Mon,
-	14 May 2012 15:44:09 -0400 (EDT)
-Date: Mon, 14 May 2012 15:44:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 14 May 2012 23:35:11 +0200
+Received: by eaal1 with SMTP id l1so1655031eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 May 2012 14:25:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=5Uri/9lWehJ0DArZMoqApDsKe+QsVBvOI0q64A+fQNM=;
+	b=IqeXvUgEjXawusxnMibADIFK0mg2lKN8KY0/ScrnT6JmN5zZUXhGJWb4wR5g5cqyEx
+	lGkCFNwjm+nBmxywfFuA1FegSbcq9GRUuuEIljrbkB85r2UxODgTLZ9mnOZN0RtYdAPs
+	x6ENbXU2DF+Q4TROWAJ06WtL2M0vvaM7SgB/0X2ZUCmxdagaDFMzNppeSunl4dLImnvU
+	kOK17b5RdAjU6Ue5DWynFd4t8jlfFzagLr/Qrj93JqjQ1Ah5KkSD4bmDEbr15d/zCEmS
+	z17OK0htXw+WmMUU24aGUo+RKpw4LzFnmA2yS8MNo6WiocXQmIJ89pjG2FpChcLzSiW1
+	uUCg==
+Received: by 10.213.20.200 with SMTP id g8mr1810910ebb.103.1337030711616; Mon,
+	14 May 2012 14:25:11 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.2.132 with HTTP; Mon, 14 May 2012 14:24:41 -0700 (PDT)
+In-Reply-To: <4FB0F450.7050404@gmail.com>
+References: <4FB0F450.7050404@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 14 May 2012 14:24:41 -0700
+Message-ID: <CAMKF1spY7bTJYzxHhmrvpGurZTDgciQOC0vFPT5HnvbOEFOdeQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120514194409.GD8995@denix.org>
-References: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-MIME-version: 1.0
-In-reply-to: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [2011.03-maintenance] Pull request 20120514
+Subject: Re: License attributions for a system built with OpenEmbedded.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,194 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 19:54:39 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 14 May 2012 21:35:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, May 14, 2012 at 01:09:40PM -0500, Chase Maupin wrote:
-> Tom,
-> 
-> Please pull the following commits that update the LICENSE field to
-> list the actual license version for licenses like GPL and LGPL.  These
-> patches have previously been sent to the list with each patch identifying
-> where it was derived from.  I have also submitted patches for oe-core where
-> appropriate.
-> 
-> I'm looking for feedback on how to properly mark a package as having two
-> licenses in oe-classic since "&" causes issues.  If these patches are OK
-> then they can be pulled.  If there is a better way to mark the dual licensing
-> then I'll update them accordingly.
+On Mon, May 14, 2012 at 5:02 AM, Tasslehoff Kjappfot
+<tasskjapp@gmail.com> wrote:
+> Hi.
+>
+> I have made a rootfs and an SDK with OE-classic. We use the SDK to
+> compile our own application, which links dynamically with some open
+> source libraries.
+>
+> I have listed the LGPL libraries our application uses and linked to
+> http://www.gnu.org/licenses/lgpl.txt, but I don't know how/if to
+> attribute OpenEmbedded. Should I include attributions for every single
+> open source software in the rootfs+SDK, or is it sufficient to say that
+> I have compiled them using OpenEmbedded?
 
-As far as I recall, we don't use "&" in oe-classic for dual licenses.
+most part of OE metadata are MIT licensed some parts may be GPL
 
-
-> The following changes since commit 36a56cbb69cda0c89f478e01183d61c6a66525c9:
->   Steffen Sledz (1):
->         icedtea6-native-1.7.10: backport S7103224
-> 
-> are available in the git repository at:
-> 
->   http://arago-project.org/git/projects/arago-oe-amsdk.git update-licenses
-
-Also the same in different format:
-
-Pull URL: git://arago-project.org/git/projects/arago-oe-amsdk.git
-  Branch: update-licenses
-  Browse: http://arago-project.org/git/projects/?p=arago-oe-amsdk.git;a=shortlog;h=refs/heads/update-licenses
+well while booting you could use OE splash screen instead of your company one :)
 
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
-
-
-> Chase Maupin (69):
->       gnutls: update LICENSE setting
->       libtasn1: update LICENSE setting
->       bonnie: Update LICENSE field version
->       canutils: Update LICENSE field version
->       debianutils: Update LICENSE field version
->       gtk+: Update LICENSE field version for 2.20.1
->       gnome-keyring: Update LICENSE field version
->       gnome-vfs: Update LICENSE field version
->       hicolor-icon-theme: Update LICENSE field version
->       hostap-daemon: Update LICENSE field version
->       liba52: Update LICENSE field version
->       atk: Update LICENSE field version
->       audiofile: Update LICENSE field version
->       avahi: Update LICENSE field version
->       cairo: Update LICENSE field version
->       libcap2: Update LICENSE field version
->       libcroco: Update LICENSE field version
->       esound: Update LICENSE field version
->       faac: Update LICENSE field version
->       faad2: Update LICENSE field version
->       flac: Update LICENSE field version
->       libgcrypt: Update LICENSE field version
->       gdbm: Update LICENSE field version
->       libgpg-error: Update LICENSE field version
->       libical: Update LICENSE field version
->       libid3tag: Update LICENSE field version
->       libidl: Update LICENSE field version
->       libmad: Update LICENSE field version
->       libmodplug: Update LICENSE field version
->       lame: Update LICENSE field version
->       mpeg2dec: Update LICENSE field version
->       mysql5: Update LICENSE field version
->       libnl: Update LICENSE field version
->       libproxy: Update LICENSE field version
->       librsvg: Update LICENSE field version
->       libsamplerate0: Update LICENSE field version
->       schroedinger: Update LICENSE field version
->       libsdl: Update LICENSE field version
->       libsidplay: Update LICENSE field version
->       libsndfile1: Update LICENSE field version
->       libsocketcan: Update LICENSE field version
->       libsoup-2.4: Update LICENSE field version
->       libvisual: Update LICENSE field version
->       x264: Update LICENSE field version
->       libxv: Update LICENSE field version
->       lmbench: Update LICENSE field version
->       makedevs: Update LICENSE field version
->       nfs-utils: Update LICENSE field version
->       orbit2: Update LICENSE field version
->       pango: Update LICENSE field version
->       shared-mime-info: Update LICENSE field version
->       wireless-tools: Update LICENSE field version
->       gnome-common: Update LICENSE field version
->       cups: Update LICENSE field version
->       gnome-mime-data: Update LICENSE field version
->       gtk-doc: Update LICENSE field version
->       intltool: Update LICENSE field version
->       libart-lgpl: Update LICENSE field version
->       libdaemon: Update LICENSE field version
->       libdiscid: Update LICENSE field version
->       libglade: Update LICENSE field version
->       libmikmod: Update LICENSE field version
->       libmusicbrainz: Update LICENSE field version
->       neon: Update LICENSE field version
->       libnfnetlink: Update LICENSE field version
->       python-pycairo: Update LICENSE field version
->       python-pygobject: Update LICENSE field version
->       python-pygtk: Update LICENSE field version
->       time: Update LICENSE field version
-> 
->  recipes/atk/atk_1.30.0.bb                          |    4 ++--
->  recipes/audiofile/audiofile_0.2.6.bb               |    4 ++--
->  recipes/avahi/avahi.inc                            |    4 ++--
->  recipes/bonnie/bonnie++.inc                        |    3 ++-
->  recipes/cairo/cairo_1.10.0.bb                      |    4 +++-
->  recipes/cups/cups_1.2.12.bb                        |    4 ++--
->  recipes/debianutils/debianutils.inc                |    4 ++--
->  recipes/esound/esound_0.2.36.bb                    |    4 ++--
->  recipes/faac/faac_1.24.bb                          |    4 ++--
->  recipes/faad2/faad2_2.7.bb                         |    4 +++-
->  recipes/flac/flac_1.2.1.bb                         |    4 +++-
->  recipes/gdbm/gdbm_1.8.3.bb                         |    4 ++--
->  recipes/gnome/gnome-common.inc                     |    2 +-
->  recipes/gnome/gnome-common_2.28.0.bb               |    2 ++
->  recipes/gnome/gnome-keyring_2.28.2.bb              |    4 ++--
->  recipes/gnome/gnome-mime-data_2.18.0.bb            |    4 ++--
->  recipes/gnome/gnome-vfs_2.24.1.bb                  |    4 ++--
->  recipes/gnome/libart-lgpl.inc                      |    4 ++--
->  recipes/gnome/libproxy_0.2.3.bb                    |    4 ++--
->  recipes/gnome/libsoup-2.4_2.32.2.bb                |    4 +++-
->  recipes/gnome/orbit2_2.14.17.bb                    |    4 ++++
->  recipes/gnutls/gnutls.inc                          |   10 +++++++---
->  recipes/gnutls/libtasn1_1.7.bb                     |    8 +++++---
->  recipes/gtk+/gtk+_2.20.1.bb                        |    4 +++-
->  recipes/gtk-doc/gtk-doc.bb                         |    4 ++--
->  .../hicolor-icon-theme/hicolor-icon-theme_0.11.bb  |    4 ++--
->  recipes/hostap/hostap-daemon-0.7.inc               |    2 +-
->  recipes/hostap/hostap-daemon_0.7.3.bb              |    2 +-
->  recipes/intltool/intltool.inc                      |    4 ++--
->  recipes/lame/lame_3.98.2.bb                        |    4 ++--
->  recipes/liba52/liba52_0.7.4.bb                     |    4 ++--
->  recipes/libcap/libcap2_2.20.bb                     |    4 ++--
->  recipes/libcroco/libcroco_0.6.2.bb                 |    4 +++-
->  recipes/libdaemon/libdaemon_0.13.bb                |    4 ++--
->  recipes/libdiscid/libdiscid.inc                    |    2 +-
->  recipes/libdiscid/libdiscid_0.2.2.bb               |    2 ++
->  recipes/libgcrypt/libgcrypt_1.4.1.bb               |    4 ++++
->  recipes/libglade/libglade_2.6.4.bb                 |    4 ++++
->  recipes/libgpg-error/libgpg-error_1.4.bb           |    4 +++-
->  recipes/libical/libical_0.44.bb                    |    4 ++--
->  recipes/libid3tag/libid3tag_0.15.1b.bb             |    4 ++--
->  recipes/libidl/libidl-native_0.8.13.bb             |    2 +-
->  recipes/libidl/libidl.inc                          |    2 +-
->  recipes/libidl/libidl_0.8.13.bb                    |    2 +-
->  recipes/libmad/libmad_0.15.1b.bb                   |    4 ++--
->  recipes/libmikmod/libmikmod_3.1.12.bb              |    4 ++--
->  recipes/libmodplug/libmodplug_0.8.7.bb             |    4 ++--
->  recipes/libnfnetlink/libnfnetlink_1.0.0.bb         |    4 +++-
->  recipes/libnl/libnl_2.0.bb                         |    5 ++++-
->  recipes/librsvg/librsvg_2.26.2.bb                  |    4 ++--
->  recipes/libsamplerate/libsamplerate0_0.1.7.bb      |    4 ++--
->  recipes/libsdl/libsdl-1.2.14.inc                   |    4 ++--
->  recipes/libsidplay/libsidplay_1.36.59.bb           |    4 ++--
->  recipes/libsndfile/libsndfile1_1.0.24.bb           |    4 ++--
->  recipes/libvisual/libvisual_0.4.0.bb               |    4 ++--
->  recipes/lmbench/lmbench_3.0-a9.bb                  |    4 ++--
->  recipes/makedevs/makedevs_1.0.0.bb                 |    4 ++--
->  recipes/mpeg2dec/mpeg2dec_0.4.0b.bb                |    4 ++--
->  recipes/musicbrainz/libmusicbrainz.inc             |    2 +-
->  recipes/musicbrainz/libmusicbrainz_3.0.2.bb        |    2 +-
->  recipes/mysql/mysql5_5.1.40.inc                    |    4 ++--
->  recipes/neon/neon_0.25.5.bb                        |    4 ++--
->  recipes/nfs-utils/nfs-utils_1.1.2.bb               |    4 ++--
->  recipes/pango/pango_1.24.4.bb                      |    4 +++-
->  recipes/python/python-pycairo_1.8.0.bb             |    4 ++--
->  recipes/python/python-pygobject_2.20.0.bb          |    4 ++--
->  recipes/python/python-pygtk_2.16.0.bb              |    4 ++--
->  recipes/schroedinger/schroedinger_1.0.9.bb         |    4 +++-
->  recipes/shared-mime-info/shared-mime-info_0.51.bb  |    4 +++-
->  recipes/socketcan/canutils.inc                     |    4 ++--
->  recipes/socketcan/libsocketcan.inc                 |    4 ++--
->  recipes/time/time.inc                              |    4 ++--
->  recipes/vlc/x264_r2245.bb                          |    4 ++--
->  recipes/wireless-tools/wireless-tools.inc          |    2 +-
->  recipes/wireless-tools/wireless-tools_29.bb        |    2 +-
->  recipes/xorg-lib/libxv_1.0.6.bb                    |    4 ++--
->  76 files changed, 168 insertions(+), 120 deletions(-)
-> 
+>
+> - Tasslehoff
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
