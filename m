@@ -1,32 +1,32 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1STxyw-0005hN-Ge
+	(envelope-from <chase.maupin@ti.com>) id 1STxz1-0005m8-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 18:18:46 +0200
+	Mon, 14 May 2012 18:18:51 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG8loG028397
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4EG8qk0002849
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:08:47 -0500
+	Mon, 14 May 2012 11:08:52 -0500
 Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG8lQ2009600
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG8qZj009674
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 11:08:47 -0500
+	Mon, 14 May 2012 11:08:52 -0500
 Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
 	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 May 2012 11:08:47 -0500
+	Mon, 14 May 2012 11:08:52 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AIZ028612;
-	Mon, 14 May 2012 11:08:45 -0500
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4EG6AIb028612;
+	Mon, 14 May 2012 11:08:50 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 May 2012 11:10:22 -0500
-Message-ID: <1337011834-24879-58-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 14 May 2012 11:10:24 -0500
+Message-ID: <1337011834-24879-60-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337011834-24879-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 57/69] intltool: Update LICENSE field version
+Subject: [PATCH 59/69] libdaemon: Update LICENSE field version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 16:18:47 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:18:52 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to GPLv2 to
+* Updated LICENSE field version from generic LGPL to LGPLv2.1+ to
   reflect the real license version.
-* This change was based on setting in oe-core as well as code
-  inspection.
+* This change was back-ported from oe-core.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/intltool/intltool.inc |    4 ++--
+ recipes/libdaemon/libdaemon_0.13.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/intltool/intltool.inc b/recipes/intltool/intltool.inc
-index 6beb337..5b333a2 100644
---- a/recipes/intltool/intltool.inc
-+++ b/recipes/intltool/intltool.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Utility scripts for internationalizing XML"
- PRIORITY = "optional"
- SECTION = "devel"
--LICENSE = "GPL"
-+LICENSE = "GPLv2"
- DEPENDS += "libxml-parser-perl-native"
--INC_PR = "r4"
-+INC_PR = "r5"
+diff --git a/recipes/libdaemon/libdaemon_0.13.bb b/recipes/libdaemon/libdaemon_0.13.bb
+index 3ad47dd..0ff13a4 100644
+--- a/recipes/libdaemon/libdaemon_0.13.bb
++++ b/recipes/libdaemon/libdaemon_0.13.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "libdaemon is a lightweight C library that eases the writing of UN
+ SECTION = "libs"
+ AUTHOR = "Lennart Poettering <lennart@poettering.net>"
+ HOMEPAGE = "http://0pointer.de/lennart/projects/libdaemon/"
+-LICENSE = "LGPL"
+-PR = "r0"
++LICENSE = "LGPLv2.1+"
++PR = "r1"
  
- URLV="${@'.'.join(bb.data.getVar('PV',d,1).split('.')[0:2])}"
- SRC_URI = "${GNOME_MIRROR}/intltool/${URLV}/intltool-${PV}.tar.bz2"
+ SRC_URI = "http://0pointer.de/lennart/projects/libdaemon/libdaemon-${PV}.tar.gz"
+ 
 -- 
 1.7.0.4
 
