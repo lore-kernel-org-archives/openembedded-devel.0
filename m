@@ -1,35 +1,36 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1STvnA-0001kB-WC
+	(envelope-from <schnitzeltony@googlemail.com>) id 1STxtr-0000T2-Ii
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 15:58:29 +0200
-Received: by vbbfr13 with SMTP id fr13so5262674vbb.6
+	Mon, 14 May 2012 18:13:32 +0200
+Received: by bkcjm2 with SMTP id jm2so4215560bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 06:48:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=cpTVEyDq9mKhdOAUvKYSJQw6hQNOMdERISwoKYcQvKA=;
-	b=SByzXQywpNuS8WWB1wgcJZ+s2wrjCODg8n0vTsBmmkoaFKV8MGLtU7WEDg540nM8+R
-	iyfbWE1f0uIzLT/9Z+Da99r6MxskSXNdN9867sTzgE0yJM+M4bMz2uEXMEn+D9S8pSio
-	eWcOy2jj1XMg3OAU1EYr8zldVBfV9MAfjJqg/sWeHX0fPxQ6n9VJr6IooZ3jSeg5Up6L
-	Uche0HnhNSslYY1HullpBonpBFygYGwQoljxPS4FNUx/J8SCRabZiPgttM9HX4q5PtZx
-	FTuCAgGHr9KEfs8IRuAGS6jQg7nTaNnk6LAymEMzkTXARGPQTxzumNyKZvMPjMtREKF+
-	XVdQ==
-Received: by 10.52.89.226 with SMTP id br2mr1081447vdb.83.1337003309759;
-	Mon, 14 May 2012 06:48:29 -0700 (PDT)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id dc7sm21867612vdc.6.2012.05.14.06.48.28
+	Mon, 14 May 2012 09:03:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=I+8Gjp8ya6doxPj/2ickL3HEg0SgvslVYexxd7GPgu0=;
+	b=tBMspAPoBbMSdpngO8zL/Quh6DqFuu12peh5Ey7CakbfjPkP7WuhCXYIJW+BmsWnVq
+	iakbCP7JmULer3BAdNlnHWum3OWEaLxU0o2+CwXvXZPOTbhL6KtZx1QDltY1PZ4l1/iI
+	kQ6KH6bp3JLU1KfGz1u1E3KAq1kMVtkKLCAFdtf+w4YVr+tooW9FMfu7Z4W/zHT6WUva
+	/4OSvs/gAIm9ZK1okEbVVwdIxBdbDE5mMNfDl60W8Y8heCVTbJKX34qMdI3BWpi5wsOV
+	ICPqaQeU6fxQCQHbSiOzpWrhIT+ZF0HqGF0bNkZA1FM1CS8iCVW1bd9uYgKwOt6pheJn
+	PISQ==
+Received: by 10.204.148.79 with SMTP id o15mr2444284bkv.87.1337011412480;
+	Mon, 14 May 2012 09:03:32 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id ig1sm35829510bkc.4.2012.05.14.09.03.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 May 2012 06:48:28 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 14 May 2012 09:03:31 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2012 10:48:23 -0300
-Message-Id: <2992b9e4d0ad49610137a76273ad1ea44cfb5e86.1337003295.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1337003295.git.otavio@ossystems.com.br>
-References: <cover.1337003295.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 1/1] systemd-systemctl-native: fixed systemctl wrapper's `disable' action
+Date: Mon, 14 May 2012 18:03:27 +0200
+Message-Id: <1337011407-3889-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-oe] gvfs: fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 13:58:30 -0000
+X-List-Received-Date: Mon, 14 May 2012 16:13:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Mario Domenech Goulart <mario@ossystems.com.br>
+Error message was:
+| In file included from gvfsfusedaemon.c:44:0:
+| /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/include/glib-2.0/glib/gurifuncs.h:24:2: error: #error "Only <glib.h> can be included directly."
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../systemd/systemd-systemctl-native/systemctl     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../0001-gvfsfusedaemon.c-fix-glib-build.patch     |   31 ++++++++++++++++++++
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |    3 +-
+ 2 files changed, 33 insertions(+), 1 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-index c4a0a3f..6e7a05d 100755
---- a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-+++ b/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-@@ -68,8 +68,8 @@ for service in $services; do
- 			ln -s $service_file $ROOT/etc/systemd/system/$r.wants
- 			echo "Enabled $service for $wanted_by."
- 		else
--			rm -f $ROOT/etc/systemd/system/$r.wants/$service_file
--			rmdirs -p $ROOT/etc/systemd/system/$r.wants
-+			rm -f $ROOT/etc/systemd/system/$r.wants/$service
-+			rmdir --ignore-fail-on-non-empty -p $ROOT/etc/systemd/system/$r.wants
- 			echo "Disabled $service for $wanted_by."
- 		fi
- 	done
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch b/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
+new file mode 100644
+index 0000000..3db44a8
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
+@@ -0,0 +1,31 @@
++From c339eaaa514b8edcfe8de5c9610b8f2591ec221a Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Mon, 14 May 2012 17:36:37 +0200
++Subject: [PATCH] gvfsfusedaemon.c: fix glib build
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++Upstream-status: Applied but we can not use it because newer versions depend
++on gnome-disk-utiltity >= V3.02 which depends on gtk+ V3
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ client/gvfsfusedaemon.c |    2 --
++ 1 files changed, 0 insertions(+), 2 deletions(-)
++
++diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
++index bc3090d..f2e708e 100644
++--- a/client/gvfsfusedaemon.c
+++++ b/client/gvfsfusedaemon.c
++@@ -41,8 +41,6 @@
++ #include <glib/gprintf.h>
++ #include <gio/gio.h>
++ 
++-#include <glib/gurifuncs.h>
++-
++ /* stuff from common/ */
++ #include <gdaemonmount.h>
++ #include <gvfsdaemonprotocol.h>
++-- 
++1.7.6.5
++
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+index b6a0526..903a8ba 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+@@ -4,10 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+ 
+ inherit gnome
+ 
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
+ SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
++SRC_URI += "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
+ 
+ EXTRA_OECONF = "--disable-samba \
+                 --with-samba-includes=${STAGING_INCDIR} \
 -- 
-1.7.2.5
+1.7.6.5
 
 
 
