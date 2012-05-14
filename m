@@ -1,34 +1,35 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1STuAZ-00040a-0f
+	(envelope-from <otavio.salvador@gmail.com>) id 1STucG-000826-TE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 May 2012 14:14:31 +0200
-Received: by lbol5 with SMTP id l5so3220256lbo.6
+	Mon, 14 May 2012 14:43:09 +0200
+Received: by yhjj56 with SMTP id j56so4328322yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2012 05:04:32 -0700 (PDT)
+	Mon, 14 May 2012 05:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=UTIxh7/2VatxpR+1VBLDSaaB3pBOQKwUQTlXiekJ+xk=;
-	b=F7F/X9ZNC/j0e0WGIRpRYKkJprgAmYv+HuchhBw5cBli+gZNBCX5nGAY1ULzyd5Qm9
-	aazXxi3Yszn7I5JsP0zMd4NfinwWewtCV8S9TVQ37tKbHBHsonu3kZ+Jnrrob80a/Zzg
-	2PFO+a1zzX+rCN+pT82/Z0HzM5YDxlOGPmTjFH+yeUbOqcw778KqE/8DPcsLT4O2VV42
-	Dn+Ln8tMnwV8NFGudOGK+v8YIMgvRa+MxTsm9oQpSzS3tabhvaEpImRmkK/j+natuSmF
-	mnc9TfCmnbRwVKaTPqBA4ZcimdIJHhKrWgRTto/Ink7/E1xhWu5gCFEwq8UpCefRINkf
-	Vzfw==
-Received: by 10.152.106.9 with SMTP id gq9mr7976000lab.14.1336997072178;
-	Mon, 14 May 2012 05:04:32 -0700 (PDT)
-Received: from [192.168.0.121] ([84.49.231.147])
-	by mx.google.com with ESMTPS id gi19sm2554583lab.16.2012.05.14.05.04.30
-	(version=SSLv3 cipher=OTHER); Mon, 14 May 2012 05:04:31 -0700 (PDT)
-Message-ID: <4FB0F450.7050404@gmail.com>
-Date: Mon, 14 May 2012 14:02:24 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=PDhdTDUqLF9jDhkrjG8aHzerZ18DOKN54Xuc/AHx5HM=;
+	b=SHn2tA8PovZr74scyJX+3FaiVy1BA+/98PSXu+pMGfCeZP1Y8RvBJEDWDU3AOBkkh4
+	jdtWcTYgjAFtQa0kEm7LpqBEO/QhjbpAvD4sHAURgvweAf5Zx+sQIFEGOrfLtp9aBpAl
+	fKoaYtP1saoedIQxU9aEmxnsXuqaumFaiiIkKu58cQyE95fyInjKSLnfyAlGO0rS5lOv
+	FUZLoEgbLd2zZM0jaQXibln5CVco+oZsUIDTRl2ltYwqE2tnt+uRXcurCHkLQ3XI76f6
+	T+fH3AQWiq+K8YFmt4Y4AnC/Mob/Cj6K5PfP304OFrPdzWZZHzmdnEH4Fvh+Sc7an8t7
+	7p/A==
 MIME-Version: 1.0
+Received: by 10.220.141.207 with SMTP id n15mr4909516vcu.68.1336998789531;
+	Mon, 14 May 2012 05:33:09 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.152.82 with HTTP; Mon, 14 May 2012 05:33:09 -0700 (PDT)
+In-Reply-To: <CADZ6=avMrT89BZA=awFOhCQFMhTDo1n67ZQya7J3Z9BSQeZHqw@mail.gmail.com>
+References: <CADZ6=avMrT89BZA=awFOhCQFMhTDo1n67ZQya7J3Z9BSQeZHqw@mail.gmail.com>
+Date: Mon, 14 May 2012 09:33:09 -0300
+X-Google-Sender-Auth: AB6ckohr8DtwVNA8wWuWyUVvJ5I
+Message-ID: <CAP9ODKrUgckJvtxK4rtHccD2JRTCwW_6rTeeZRUayd-=GXSioQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: License attributions for a system built with OpenEmbedded.
+Subject: Re: New kmod {libdir} breaks udev 182 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2012 12:14:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 May 2012 12:43:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi.
+On Mon, May 14, 2012 at 8:18 AM, Thilo Fromm <fromm@dresearch-fe.de> wrote:
+> I've got an issue with
+> openembedded-core/meta/recipes-kernel/kmod/kmod_git.bb, with the way
+> {libdir} is set in line 19:
+>
+> libdir =3D "${base_libdir}"
+>
+> "git blame" claims this was added by Khem Raj on 2012-05-08. This line
+> causes libkmod to put its pkgconfig ".pc" file in the staging area at
+> "/lib/pkgconfig/libkmod.pc". This is sad because other recipes would
+> only look at /usr/lib/pkgconfig/ and /usr/share/pkgconfig.
+>
+> Take meta-openembedded/meta-oe/recipes-core/udev/udev_182.bb, for
+> example. The build predictably fails with
+>
+> checking for KMOD... no
+> configure: error: Package requirements (libkmod >=3D 5) were not met:
+>
+> No package 'libkmod' found
+>
+>
+> So what's the right thing do do here? Use a different package install
+> path for libkmod, or point udev to /lib/pkgconfig by extending its
+> PKG_CONFIG_PATH correspondingly?
 
-I have made a rootfs and an SDK with OE-classic. We use the SDK to
-compile our own application, which links dynamically with some open
-source libraries.
+I have some build failure.
 
-I have listed the LGPL libraries our application uses and linked to
-http://www.gnu.org/licenses/lgpl.txt, but I don't know how/if to
-attribute OpenEmbedded. Should I include attributions for every single
-open source software in the rootfs+SDK, or is it sufficient to say that
-I have compiled them using OpenEmbedded?
-
-- Tasslehoff
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
