@@ -1,36 +1,27 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SUGMi-0001et-6x
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SUGxp-0003gy-8v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 13:56:32 +0200
-Received: by bkcjm2 with SMTP id jm2so4991469bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 04:46:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=BzZ5uh4zqCetiW8jo2X8+Dc7HECtQPh6/PC1XydVXI8=;
-	b=zIkGAYLIIPS/Gk5ZuwbUIhwac3JwBAfispcb8+l6ivisGeEH+Qu8CtjJnnZaRXQv7f
-	5wAp5vMpN/mERu0ibosPfm9YAT/XUCaKQQ6t2VAUr5WfdpV9B0hfXGihq4/Ca9Cxduaw
-	aWZyozXmJ99v9JQ7dyX2hzSclQ1vx4eyE1hR1g9gi/S7YYViwAKKbOJvH03AmyQ7RpNg
-	lm4CyqTbqBYHw4zYAcEbpPZ4k0mI2QhMptO+4UbjvilwvMLhRc9km3Q6viXrnIBIGCNT
-	QycYe14PzWLu9hUXc+8GLVBDvpBuT6mOwBnsLNsTOAzrg+F5O4HQ26SDq8Ar5P7G5LUU
-	5XPw==
-Received: by 10.204.10.70 with SMTP id o6mr4605290bko.70.1337082391968;
-	Tue, 15 May 2012 04:46:31 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id h18sm41066671bkh.8.2012.05.15.04.46.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 May 2012 04:46:31 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2012 13:46:26 +0200
-Message-Id: <1337082386-18780-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	Tue, 15 May 2012 14:34:53 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 15 May 2012 05:24:21 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="140835655"
+Received: from unknown (HELO helios.localnet) ([10.252.120.119])
+	by orsmga001.jf.intel.com with ESMTP; 15 May 2012 05:24:20 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+Date: Tue, 15 May 2012 13:24:19 +0100
+Message-ID: <53487189.7itrN9qUEW@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.2 (Linux/3.0.0-19-generic-pae; KDE/4.8.2; i686; ; )
+In-Reply-To: <4FB23F7C.1060302@gmail.com>
+References: <4FB0F450.7050404@gmail.com>
+	<CAMKF1spY7bTJYzxHhmrvpGurZTDgciQOC0vFPT5HnvbOEFOdeQ@mail.gmail.com>
+	<4FB23F7C.1060302@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe] florence: make it build by aligning includes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: License attributions for a system built with OpenEmbedded.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,77 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 11:56:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 May 2012 12:34:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+On Tuesday 15 May 2012 13:35:24 Tasslehoff Kjappfot wrote:
+> I've already written that I use OpenEmbedded as a build system, and
+> included the MIT license. I also used create_manifest.sh from Arago to
+> get a list of everything included in the rootfs. What I really wonder is
+> if I must add all that information as well.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../florence/files/0001-Fix-glib-includes.patch    |   33 ++++++++++++++++++++
- meta-oe/recipes-support/florence/florence_0.5.1.bb |    5 ++-
- 2 files changed, 37 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-support/florence/files/0001-Fix-glib-includes.patch
+[Disclaimer: I'm not a lawyer, this is not legal advice, etc.]
 
-diff --git a/meta-oe/recipes-support/florence/files/0001-Fix-glib-includes.patch b/meta-oe/recipes-support/florence/files/0001-Fix-glib-includes.patch
-new file mode 100644
-index 0000000..06f10bd
---- /dev/null
-+++ b/meta-oe/recipes-support/florence/files/0001-Fix-glib-includes.patch
-@@ -0,0 +1,33 @@
-+From c8419ef05ff92ffa3de2e626eb6acd5d2df3baa1 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 15 May 2012 13:40:05 +0200
-+Subject: [PATCH] Fix glib includes
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+Upstream status: unknown
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ src/trace.c |    5 +----
-+ 1 files changed, 1 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/trace.c b/src/trace.c
-+index 5ea5c13..774c56d 100644
-+--- a/src/trace.c
-++++ b/src/trace.c
-+@@ -21,10 +21,7 @@
-+ 
-+ #include "trace.h"
-+ #include "system.h"
-+-#include <glib/gprintf.h>
-+-#include <glib/gutils.h>
-+-#include <glib/gslist.h>
-+-#include <glib/gstrfuncs.h>
-++#include <glib.h>
-+ #include <stdio.h>
-+ #include <stdarg.h>
-+ 
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-oe/recipes-support/florence/florence_0.5.1.bb b/meta-oe/recipes-support/florence/florence_0.5.1.bb
-index dbffac7..dcbcefa 100644
---- a/meta-oe/recipes-support/florence/florence_0.5.1.bb
-+++ b/meta-oe/recipes-support/florence/florence_0.5.1.bb
-@@ -6,9 +6,12 @@ HOMEPAGE = "http://florence.sourceforge.net/english.html"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
-+PR = "r1"
-+
- DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native"
- 
--SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2"
-+SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
-+           file://0001-Fix-glib-includes.patch"
- SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
- SRC_URI[sha256sum] = "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8719a68b192d5bc62"
- 
+Ultimately you have to comply with the terms set out in the licenses of the 
+code you're distributing. For example, if those licenses require you to 
+provide the source code (or a written offer for same) regardless of whether you 
+have changed the source or not, then that's what you have to do for the 
+software you distribute under that license.
+
+At the very least you should check all of the licenses to make sure you 
+understand your obligations.
+
+Cheers,
+Paul
+
 -- 
-1.7.6.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
