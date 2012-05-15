@@ -1,33 +1,27 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gizero@gmail.com>) id 1SUN9j-0003h0-5e
+	(envelope-from <denis@denix.org>) id 1SUOKn-0008A7-Fr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 21:11:35 +0200
-Received: by werg55 with SMTP id g55so3167687wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 12:01:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=8xaOf9x4lAU05RkDXJUAkY+58VQWUSKoS4KR7nMyf2w=;
-	b=Xo+s53i2940jjRTapwF3CgWZJ+XH5SpCsp98gwcLSROG3fVuxqNox2t5WMj68v/pNY
-	OVkxb9Nu4484av7ZwoOVUQarc71zrfjMNqEzeeAVM43+rvMaOHozqNeicOFFdzRe4h4r
-	owCIUoAfGa2ftS2qhzAa0Q3Dr3OKVBAtyEvVgb7Y2gXxPMOTXWsIFhot1cn15rr4wJIt
-	kY+r6Nr2kDYH731D4aVvjEEeQ8krw8c8QsHWgDcndwAc1eSCo4QI9mgst9ykD2kp1AtS
-	NgySeY5eigkUVmDPOFfBA6IvfN3mkLOzFJy/LPHFUrG//7UdtwxFUQ5uoSO3+gIIpL+O
-	yCIQ==
-Received: by 10.180.80.35 with SMTP id o3mr365032wix.7.1337108494446;
-	Tue, 15 May 2012 12:01:34 -0700 (PDT)
-Received: from localhost.localdomain
-	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
-	by mx.google.com with ESMTPS id z3sm44908250wix.0.2012.05.15.12.01.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 May 2012 12:01:33 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
+	Tue, 15 May 2012 22:27:05 +0200
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M4200KH6YZ9YY41@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	15 May 2012 15:16:27 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D38CE2010D; Tue,
+	15 May 2012 16:16:20 -0400 (EDT)
+Date: Tue, 15 May 2012 16:16:20 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <CADZ6=at4UmAFwAgggrDYOs0L-rMQBNU1idmD+Eo9FGMoqnKq1g@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2012 21:01:02 +0200
-Message-Id: <1337108462-14996-1-git-send-email-gizero@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH v3] libmodbus: ported recipe from classic and updated
+Message-id: <20120515201620.GA14162@denix.org>
+MIME-version: 1.0
+References: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
+	<3578934.ouGGrvIU0p@helios>
+	<CADZ6=at4UmAFwAgggrDYOs0L-rMQBNU1idmD+Eo9FGMoqnKq1g@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Where do I override DISTRO_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,48 +35,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 19:11:35 -0000
+X-List-Received-Date: Tue, 15 May 2012 20:27:06 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
+Content-disposition: inline
 
- * based on recipe by Radoslav Kolev which was in classic
- * updated to latest released version 3.0.2
+On Tue, May 15, 2012 at 06:44:10PM +0200, Thilo Fromm wrote:
+> Hello,
+>=20
+> >> I'm trying to remove an element from DISTRO_FEATURES (specifical=
+ly
+> >> "ld-is-gold"), but I am unable to find the right spot to do it. =
+The
+> >> distribution we're using (Angstrom, as it happens) sets this in
+> >> conf/distro/angstrom-v2012.x.conf. My machine configuration is t=
+he
+> >> wrong spot to modify DISTRO_FEATURES, since it will be processed
+> >> first. local.conf is not working, too.
+> >>
+> >> So could anybody please tell me where I need to put my
+> >>
+> >> DISTRO_FEATURES =3D "${@'${DISTRO_FEATURES}}'.replace('ld-is-gol=
+d', =A0'')}"
+> >>
+> >> so it applies for the build?
+> >
+> > Unfortunately such hacks only work for variables that are not set=
+ within the
+> > distro configuration, which is applied after local.conf.
+>=20
+> I see. Fortunately I can require conf/distro/angstrom-v2012.x.conf =
+in
+> my own distro config file.
+>=20
+> > Ultimately you shouldn't really do this. If you want to change di=
+stro policy
+> > then you really ought to have your own distro configuration, or t=
+ry to work
+> > with the existing distro to fix whatever problem exists.
+>=20
+> It's a backwards compatibility thing: we're bound to gcc-4.5 (we ha=
+ve
+> kernel build issues with newer gcc versions; we're nailed to
+> linux-2.6.37 thanks to lack of support by Texas Instruments) which
+> fails to detect the correct version of binutils GOLD (LD would work=
+)
+> and therefore misses critical features which break the build later =
+on.
+> I won't, however, try to convince the Angstrom guys to further supp=
+ort
+> ancient toolchains and make gold optional again just because of TI'=
+s
+> laziness.
 
- v2:
- * drop git version of recipe
- * drop no longer used PRIORITY
+I think you are severely misinformed! Above issues (binutils-2.20/gcc=
+-4.5=20
+requirement and gold ld problem with Thumb) were already fixed. I've =
+been=20
+testing the builds with gcc-4.6 and binutils-2.22 for few weeks and e=
+ven=20
+gcc-4.7 with gold linker since last week. I don't know what layer you=
+ are=20
+using, but you may need to update, if you are using meta-ti.
 
- v3:
- * drop PR = "r0"
+Otherwise, if your platform is not directly supported by meta-ti, ple=
+ase send=20
+the bug report with the error message to meta-ti mailing list and I'l=
+l try to=20
+address it.
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
----
- .../recipes-extended/libmodbus/libmodbus_3.0.2.bb  |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+As of linux-2.6.37 for your specific platform - this one I can't help=
+ with,=20
+you would need to talk to your TI rep from the division that makes th=
+e=20
+platform and convince them to provide support for newer kernels.
 
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
-new file mode 100644
-index 0000000..03b7fcc
---- /dev/null
-+++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "A Modbus library"
-+DESCRIPTION = "libmodbus is a C library designed to provide a fast and robust \
-+implementation of the Modbus protocol. It runs on Linux, Mac OS X, FreeBSD, \
-+QNX and Windows."
-+HOMEPAGE = "http://www.libmodbus.org/"
-+SECTION = "libs"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
-+
-+SRC_URI = "http://github.com/downloads/stephane/libmodbus/libmodbus-${PV}.tar.gz"
-+
-+inherit autotools pkgconfig
-+
-+SRC_URI[md5sum] = "1aaacce9d9779d3a84f7d1a75774c943"
-+SRC_URI[sha256sum] = "927ec90e0e299a7d4ec7086b1e2590566bdfc3bbc22e12204229361c029f2615"
--- 
-1.7.5.4
+--=20
+Denys
 
 
 
