@@ -1,35 +1,37 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SUCeF-00048l-Fk for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 09:58:23 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SUCUa-0002An-1J for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 09:48:24 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 09:48:23 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fromm@dresearch-fe.de>) id 1SUDOf-0001Ri-5j
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 10:46:21 +0200
+Received: by lbol5 with SMTP id l5so3966240lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 09:48:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 15 May 2012 01:36:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=mfLGCZWZciQ81VKn1F628AynCe8sk+juDh11QuKFetw=;
+	b=mcdGUvRNkv7DnH4ZyUfT1H1IRSBN24kXakpYhqfIYh0OuW6itJkkwIukfTK2eDPjts
+	LGKj+kDi8XVj5epUGOf4jCMOS1hYM0E1Z4XntELXWIDAmDmihGhGqMuN3/Q4ImXTAzVC
+	IioE8p0EwcPMLrIxiU0sOiYvkqG8NZDuOtUQaYfL7TzLZ1mepCrpwJkTUvRdVmldxxDi
+	DAoxDbgWgPQKdRKySN00L4zCB5Cdk5nDA3dHb2KtPR7942Fvb/PORsZL4yuY/QfEfKw8
+	ML9c5dL1dqy9ZTDMdauIKLKKCBxQe0ZULEqNlBv00QUN+hyntbqY66Sd/C4OWoJyIeDd
+	/+oQ==
+MIME-Version: 1.0
+Received: by 10.112.86.71 with SMTP id n7mr4937655lbz.33.1337070981202; Tue,
+	15 May 2012 01:36:21 -0700 (PDT)
+Received: by 10.112.10.201 with HTTP; Tue, 15 May 2012 01:36:21 -0700 (PDT)
+In-Reply-To: <CAF6bG8fEnVNtkEO9iHtrpB822w-SNWzTd-4WSTr_SgNqNpHTtg@mail.gmail.com>
+References: <CADZ6=auhe9BbFPd-F-QNLcTksuWzZdY8tUb31P2JVm38LDjCsw@mail.gmail.com>
+	<CAF6bG8cN5ecwtehSBxy5M1JvR+Fbo_=q7mm7O+AJcz-9ZU79yw@mail.gmail.com>
+	<CADZ6=au=JZVMD9_PNbcbSmv6JzxtZWeQD6suneG=fk9Ks4pHCg@mail.gmail.com>
+	<CAF6bG8fEnVNtkEO9iHtrpB822w-SNWzTd-4WSTr_SgNqNpHTtg@mail.gmail.com>
+Date: Tue, 15 May 2012 10:36:21 +0200
+Message-ID: <CADZ6=atHgy6XtoO0=ju=5kb-XG7+BhtWcFCRU_TrEHNQvLN7iw@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 15 May 2012 09:48:02 +0200
-Message-ID: <jot1nl$vcb$1@dough.gmane.org>
-References: <1336166708-14019-1-git-send-email-gizero@gmail.com>
-	<1336233109-26164-1-git-send-email-gizero@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <1336233109-26164-1-git-send-email-gizero@gmail.com>
-X-Enigmail-Version: 1.4.1
-Subject: Re: [meta-oe][PATCH v2] libmodbus: ported recipe from classic and updated
+X-Gm-Message-State: ALoCoQl/2WV99vzh2lLUAPVhakaxzlAKW8Te/XIO9FTDPj4b47U/xux5/plTlKY8yRIlu0Vw+Iqd
+Subject: Re: New kmod {libdir} breaks udev, systemd build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 07:58:23 -0000
+X-List-Received-Date: Tue, 15 May 2012 08:46:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-Op 05-05-12 17:51, Andrea Galbusera schreef:
-> * based on recipe by Radoslav Kolev which was in classic * updated to
-> latest released version 3.0.2 * v2 drops git version of recipe * v2 drops
-> no longer used PRIORITY
-> 
-> Signed-off-by: Andrea Galbusera <gizero@gmail.com> --- 
-> .../recipes-extended/libmodbus/libmodbus_3.0.2.bb  |   18
-> ++++++++++++++++++ 1 files changed, 18 insertions(+), 0 deletions(-) 
-> create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
-> 
-> diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
-> b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb new file mode
-> 100644 index 0000000..5926bc4 --- /dev/null +++
-> b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb @@ -0,0 +1,18 @@ 
-> +SUMMARY = "A Modbus library" +DESCRIPTION = "libmodbus is a C library
-> designed to provide a fast and robust \ +implementation of the Modbus
-> protocol. It runs on Linux, Mac OS X, FreeBSD, \ +QNX and Windows." 
-> +HOMEPAGE = "http://www.libmodbus.org/" +SECTION = "libs" + +LICENSE =
-> "LGPLv2.1+" +LIC_FILES_CHKSUM =
-> "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c" + +PR =
-> "r0"
+>> openembedded-core only features udev-164 (vs. -182 in meta-oe). -164
+>> in oe-core does not use libkmod, so there's no issue with libkmod in
+>> oe-core. It's no surprise that it "worked for you", you were building
+>> anicent tools.
+>
+> =C2=A0I know. I were asking why versions are setup like this. If -182 mak=
+es
+> more sensible default, why it's not one in -core. My main point was
+> that seemingly unrelated change to build xterm to my image (requiring
+> meta-oe layer) caused *default* udev version to change (I'm not
+> setting PREFERRED_VERSION anywhere). Shouldn't -core versions be the
+> default ones, that one may override?
 
-Drop that
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I don't know; this is more of a political decision. If oe-core should
+be the default then oe-core should always provide the most current
+version, imho. But I'm just a bystander anyways; I think this has to
+be resolved between oe-core, meta-oe, and Angstrom (which we happen to
+use, too).
 
-iQIcBAEBAgAGBQJPsgoyAAoJEHZqAkdh1vT6jHsP/3FzoPMuoKnCpE8DS8r/7Tj6
-iE126Y0KV7O8qb0Myr9EeUAFhuiuwp2RXJlznrMHVqNVOJa46dvAnmbcq6v/r/xR
-QQQGuRnqLOJwSJpWuphxRqbUHKFIAQYePSuIdzqAydJxEH017yz+btAryoxHQd/g
-He78sRYvpFkavoFhjBpcFXDYcW9JZFHc7iFKThv3qDaWNbbabd2p4McM8x1O0FjJ
-pybhuLaAbsae5pB2BWItncf60IEY1BiKhjraJ6658XSLNZf8oEt8XOh3BzNRMTSC
-AFwWZpvfIiz8h6IG7nYv5Cfnrw59mYoH+c5hLr8tRNpCsUSYr95uQc+oa1Y6ldrN
-24bsgkQv4VPwH7yRVDruZSb3FJna99pP9KSmTzvOYCeJio/vIq1LyskCCSyiX09i
-iB/P0QFubAH67k3m2VNrbFB+YZE/VSe7KJDAPbONKduaNKQQCSapAngi+4TWlsGR
-5lR/e+LsPk4YpqWcm97L/beJfSLpwlNkhWrkGYjYtkxOztkvO7Tj1OoLiYMoFnIz
-rW+FnLNk4pmhM6fD76yNpn9YtJCOCPIvNvTkKcfkRDR6UPK3Jvy9nWvNlgZvqnPr
-F4PQ5mcqdR/3l9TM9iAIA6zX4tiIOMBef2Mxzk3z0MmGtIM6+FcZFGAin39ggA+z
-dZyJP6aXgvnQehZhhAU4
-=YKDQ
------END PGP SIGNATURE-----
+Regards,
+Thilo
 
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
