@@ -1,37 +1,25 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1SUPU7-0006cZ-56
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 23:40:47 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B770422325AD
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 23:30:48 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 537E422325AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 23:30:48 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g230117152.adsl.alicedsl.de
-	[92.230.117.152]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 23:30:48 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 9A7D03C4E9; Tue, 15 May 2012 23:30:46 +0200 (CEST)
-Date: Tue, 15 May 2012 23:30:46 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120515213046.GA24022@rhein.zuhause.netz>
-References: <CALbNGRQ-sLsjDS9VV2TJ3JOzLzFhrXfCcMH2uxVJR1JboueLAg@mail.gmail.com>
+Received: from mail.kernelconcepts.de ([212.60.202.196])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1SUPXT-0000Fw-DD; Tue, 15 May 2012 23:44:15 +0200
+Received: from [77.9.74.237] (helo=[192.168.1.184])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1SUQBd-0001pu-Gt; Wed, 16 May 2012 00:25:45 +0200
+Message-ID: <4FB2CBD7.8070700@kernelconcepts.de>
+Date: Tue, 15 May 2012 23:34:15 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQ-sLsjDS9VV2TJ3JOzLzFhrXfCcMH2uxVJR1JboueLAg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-chromium] chromium build fails
+To: openembedded-devel@lists.openembedded.org
+References: <4FAC361D.60609@balister.org>
+In-Reply-To: <4FAC361D.60609@balister.org>
+X-Enigmail-Version: 1.5pre
+Cc: openembedded-members@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Linuxtag 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,16 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 21:40:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 May 2012 21:44:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi all,
 
-looks like you are building on 64bit machine and you do not have installed
-the ia32 compat-dev libs. chromium builds some parts for the js engine natively
-and that needs to be 32bit.
+Am 10.05.2012 23:41, schrieb Philip Balister:
+> I encourage anyone involved in OpenEmbedded who can get to Linuxtag for
+> even a day to help it. It is a really fun time, and Berlin is a really
+> nice place to visit.
 
-bye Henning
+unluckily there was not much of feedback so far :-(
+We have a deadline for ordering exhibitor passes ending tomorrow 6pm. It makes
+sense to have a two or three of us with these in order to be able to enter the
+buildings before the visitors.
+
+> We encourage people to bring devices that are made with OpenEmbedded and
+> related technology to show off at the stand.
+
+I want to emphasize this one more time. It is very unlikely that I will be able
+to make it there and if I do not get a few people together who will man the
+booth I will have to cancel our presence there :-(.
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
