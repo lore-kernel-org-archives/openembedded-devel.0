@@ -1,36 +1,29 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from metis.ext.pengutronix.de ([92.198.50.35])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SUEcV-0005Xz-4a
+	(envelope-from <jlu@pengutronix.de>) id 1SUEdo-0005dw-RT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 12:04:43 +0200
-Received: by bkcjm2 with SMTP id jm2so4896704bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 02:54:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=f4s55cJeMEoZwjWup9Vce7/MQbl+GGyNwnbKlod77ns=;
-	b=B3LIzXZqfN2ClNIyvWl8vLbSmMv+AlyZbqyJDUWOtQLpLkhPXj2ZcodFkGRvlZYrDA
-	wEW9FnU1LTRMhsedyQJymllhL/4B+Ucp+7e/rJ5RBfp6eJUR+Egk69ZkcghRWDKTE+Kl
-	YREUKrHpM2i+4qBwUX99p7QeH2NcRKgnZLL5WhLF05niypRFjYYBMb5YR7btQuREVXDA
-	9159sm/S0deWuySgRKJCbAhwwqBXFrOE2GcNoG3Mv5cuZ5zKvUK34gJTIL3dsp+znWkk
-	TqXz4slUVLzpvKEZ6j4GrSVeC3RP8lNe0GqmNQY3/hcYkp2dblQbWoav/RoPhC1eo7Gj
-	walg==
-Received: by 10.204.154.138 with SMTP id o10mr4316839bkw.34.1337075683321;
-	Tue, 15 May 2012 02:54:43 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id e20sm8275446bkw.3.2012.05.15.02.54.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 May 2012 02:54:42 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Tue, 15 May 2012 12:06:04 +0200
+Received: from dude.hi.pengutronix.de ([2001:6f8:1178:2:21e:67ff:fe11:9c5c])
+	by metis.ext.pengutronix.de with esmtp (Exim 4.72)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1SUEU8-00049S-Ui; Tue, 15 May 2012 11:56:04 +0200
+Received: from jlu by dude.hi.pengutronix.de with local (Exim 4.77)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1SUEU8-0002Gz-Tn; Tue, 15 May 2012 11:56:04 +0200
+From: Jan Luebbe <jlu@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2012 11:54:38 +0200
-Message-Id: <1337075678-10009-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-MIME-Version: 1.0
-Subject: [meta-chromium] Add bbappend for gnome-settings-daemon to make it build (deteministc) when using meta-chromium
+Date: Tue, 15 May 2012 11:56:02 +0200
+Message-Id: <1337075762-8696-1-git-send-email-jlu@pengutronix.de>
+X-Mailer: git-send-email 1.7.10
+In-Reply-To: <4FA2448C.6050401@nedap.com>
+References: <4FA2448C.6050401@nedap.com>
+X-SA-Exim-Connect-IP: 2001:6f8:1178:2:21e:67ff:fe11:9c5c
+X-SA-Exim-Mail-From: jlu@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+	SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Cc: Jan Luebbe <jlu@pengutronix.de>
+Subject: [meta-java][PATCH] llvm2.8: fix llvm compile error by including unistd.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 10:04:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 May 2012 10:06:05 -0000
 
-After including meta-chromium configure of gnome-settings-daemon detects nss
-and fails during compile with
+Thanks to Jaap de Jong and Khem Raj for reporing the problem and suggesting the fix.
 
-| In file included from gsd-smartcard-manager.h:27:0,
-|                  from gsd-smartcard-manager.c:25:
-| gsd-smartcard.h:26:20: fatal error: secmod.h: No such file or directory
-| compilation terminated.
-| In file included from gsd-smartcard.c:21:0:
-| gsd-smartcard.h:26:20: fatal error: secmod.h: No such file or directory
-| compilation terminated.
-
-The append makes build deterministic and fixes build error.
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
 ---
- .../gnome-settings-daemon_2.32.1.bbappend          |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
- create mode 100644 recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappend
+ recipes-core/llvm/llvm2.8/add-unistd.patch |   12 ++++++++++++
+ recipes-core/llvm/llvm2.8_2.8.bb           |    3 +++
+ 2 files changed, 15 insertions(+)
+ create mode 100644 recipes-core/llvm/llvm2.8/add-unistd.patch
 
-diff --git a/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappend b/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappend
+diff --git a/recipes-core/llvm/llvm2.8/add-unistd.patch b/recipes-core/llvm/llvm2.8/add-unistd.patch
 new file mode 100644
-index 0000000..01e607d
+index 0000000..1c51b30
 --- /dev/null
-+++ b/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappend
-@@ -0,0 +1,3 @@
-+DEPENDS += "nss"
++++ b/recipes-core/llvm/llvm2.8/add-unistd.patch
+@@ -0,0 +1,12 @@
++Index: llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp
++===================================================================
++--- llvm-2.8.orig/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:31:21.008318473 +0200
+++++ llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:32:53.523734850 +0200
++@@ -19,6 +19,7 @@
++ #include "llvm/Support/ErrorHandling.h"
++ #include "llvm/System/DynamicLibrary.h"
++ #include "llvm/Config/config.h"
+++#include <unistd.h>
++ using namespace llvm;
++ 
++ // AtExitHandlers - List of functions to call when the program exits,
+diff --git a/recipes-core/llvm/llvm2.8_2.8.bb b/recipes-core/llvm/llvm2.8_2.8.bb
+index 310e94e..3459885 100644
+--- a/recipes-core/llvm/llvm2.8_2.8.bb
++++ b/recipes-core/llvm/llvm2.8_2.8.bb
+@@ -4,9 +4,12 @@ require llvm.inc
+ LICENSE = "NCSA"
+ LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
+ 
++PR = "r1"
 +
-+CFLAGS += "-I${STAGING_INCDIR}/mozilla/nss"
+ SRC_URI += " \
+             file://30may-llvm2.8-pr399-ppc-arm.patch \
+             file://0019-issue6065.patch \
++            file://add-unistd.patch \
+            "
+ 
+ SRC_URI_append_arm = " file://llvm-mc_disable.patch "
 -- 
-1.7.6.5
+1.7.10
 
 
 
