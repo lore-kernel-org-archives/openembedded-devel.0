@@ -1,25 +1,36 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1SUEKF-0004oR-Bs
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SUEVu-0004zF-H3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 11:45:51 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 15 May 2012 02:35:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="140783189"
-Received: from unknown (HELO helios.localnet) ([10.252.120.119])
-	by orsmga001.jf.intel.com with ESMTP; 15 May 2012 02:35:37 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Marko Lindqvist <cazfi74@gmail.com>
-Date: Tue, 15 May 2012 10:35:36 +0100
-Message-ID: <167138120.T8PAYiiqZy@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.2 (Linux/3.0.0-19-generic-pae; KDE/4.8.2; i686; ; )
-In-Reply-To: <CAF6bG8e9WW3S_OrP_Ad085-9XB4eBCrd9aCAh_xsrOPZ_kuisA@mail.gmail.com>
-References: <CAF6bG8e9WW3S_OrP_Ad085-9XB4eBCrd9aCAh_xsrOPZ_kuisA@mail.gmail.com>
+	Tue, 15 May 2012 11:57:54 +0200
+Received: by bkcjm2 with SMTP id jm2so4890646bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 02:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=QTJlOMa1TayiPnFAIqwj4A/QUWF4obIEXQGoHLFtOm0=;
+	b=XNxBX5mbU6cJgy5yJk8BQUti9vH7hVjCahoLZTWh+JebnXgzV98fV5SA4WNAoMRc5R
+	jHReVJdB98eA3zQtparIRRKHYtK6101zxdCrgNNt+hEC5QPJ2WpUWN2++SEQitBtk0Y/
+	WUY9qTNMrvxWtxBF+hvMIWng4yBdl63Bcxi6nkpPIH0fGkq1FSOvBJTBzroi9TlPgdMY
+	774HZ5rgvssyiWZkPebni1bHM5ET1DcyWO7lnxjGnnVBRqq+Yd/S1QaJGThr8rgSuJ/k
+	+zQ6T1WrBPxvNqO+ch09qqQjgrmVK7yNeCI0kXoge3ziZj+AD++iUEBTWGxlOz++7c1t
+	E2qQ==
+Received: by 10.204.133.199 with SMTP id g7mr4598909bkt.47.1337075272705;
+	Tue, 15 May 2012 02:47:52 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id 9sm40236255bku.9.2012.05.15.02.47.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 15 May 2012 02:47:51 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 May 2012 11:47:47 +0200
+Message-Id: <1337075267-9817-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-games layer
+Subject: [meta-gnome] gnome-settings-daemon: fix staticdev QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,36 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 09:45:51 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 15 May 2012 09:57:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tuesday 15 May 2012 03:02:08 Marko Lindqvist wrote:
-> Do you maintain any kind of list of freely available recipes provided
-> by third parties? If I need some library for which there is no recipe
-> in openembedded-core or meta-openembedded, I'd like to check if
-> someone else has already made it and not to reinvent the Wheel myself.
-> 
-> I found layers list http://www.openembedded.org/wiki/LayerIndex . Is
-> there some criteria what layers are accepted to that list? I just
-> wonder if I should/could add my new project to provide basic recipes
-> for some open source games, called meta-games layer (
-> https://github.com/cazfi/meta-games ), to that list.
 
-The only real criteria would be that there's someone willing to maintain the 
-layer; the layer has a reasonably well-defined purpose (i.e. not just "bob's 
-miscellaneous recipes"), and doesn't overlap too much with other existing 
-layers assuming the existing layers are well-maintained.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../gnome-settings-daemon_2.32.1.bb                |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-meta-games looks like it definitely qualifies - I've added it to the layer 
-index. Thanks!
-
-Cheers,
-Paul
-
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+index 55e6b78..6567080 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME settings daemon"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-PR = "r5"
++PR = "r6"
+ 
+ DEPENDS = "libsndfile1 libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
+ 
+@@ -30,4 +30,6 @@ FILES_${PN} += "${libdir}/gnome-settings-daemon-2.0/*.so ${libdir}/gnome-setting
+                 ${datadir}/xsession*"
+ 
+ FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
+-FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.a ${libdir}/gnome-settings-daemon-2.0/*.la"
++FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
++FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
++
 -- 
+1.7.6.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
