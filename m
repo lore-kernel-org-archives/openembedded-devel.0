@@ -1,25 +1,26 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1SUIDt-0008EG-Uh; Tue, 15 May 2012 15:55:34 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 15 May 2012 06:45:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="153182159"
-Received: from unknown (HELO helios.localnet) ([10.252.120.119])
-	by fmsmga001.fm.intel.com with ESMTP; 15 May 2012 06:45:31 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-Date: Tue, 15 May 2012 14:45:30 +0100
-Message-ID: <7192456.4O7Cf6LSyd@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.2 (Linux/3.0.0-19-generic-pae; KDE/4.8.2; i686; ; )
-In-Reply-To: <CAOHjBZv+ox9dJh+g1rjFqqnYvcQvLuRboV8ANZssKXTv0NSO7Q@mail.gmail.com>
+	(envelope-from <apelete@seketeli.net>) id 1SUIHM-0008MR-95
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 15:59:08 +0200
+Received: from localhost (unknown [91.224.149.44])
+	by ms.seketeli.net (Postfix) with ESMTP id 4FAE7EA040;
+	Tue, 15 May 2012 16:01:22 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 035D6202FB; Tue, 15 May 2012 15:49:08 +0200 (CEST)
+Date: Tue, 15 May 2012 15:49:08 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120515134908.GB4846@kilowog>
 References: <CAOHjBZto_R5S777po-K8mXG-Z9XLYNVzE05-kq_TOCeo4YgyoQ@mail.gmail.com>
-	<4FB25A88.3000100@mlbassoc.com>
-	<CAOHjBZv+ox9dJh+g1rjFqqnYvcQvLuRboV8ANZssKXTv0NSO7Q@mail.gmail.com>
+	<20120515130625.GD3166@jama.jama.net>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
+In-Reply-To: <20120515130625.GD3166@jama.jama.net>
+X-Operating-System: Debian GNU/Linux 6.0
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
 	openembedded-core@lists.openembedded.org
 Subject: Re: [oe-core] Packages broken URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -35,34 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 13:55:34 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 15 May 2012 13:59:08 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tuesday 15 May 2012 15:36:37 Giuseppe Condorelli wrote:
->On Tuesday 15 May 2012 07:30:48 Gary Thomas wrote:
->> On 2012-05-15 07:19, Giuseppe Condorelli wrote:
->> > For example building git-1.7.7 fails fetching the source.
->>
->> Works fine for me:
->> ...
->
-> That's right, but why the git.inc contains a undownloadable url?
+Le 15-May-12, Martin Jansa a =E9crit:
+> On Tue, May 15, 2012 at 03:02:37PM +0200, Giuseppe Condorelli wrote:
+> > Hi All,
+> >=20
+> > there are a number of packages having a broken SRC_URI, for example g=
+it.
+> > Has someone met this issue?
+> > For sure we can correct those links adding a dedicated .bbappend file=
+ for
+> > each failing package but
+> > I think we could also update the main package fixing the errors.
+>=20
+> This should go to oe-core ML:
+> openembedded-core@lists.openembedded.org
+>=20
+> And yes it should be fixed in original recipe.
 
-This should probably be fixed by moving the SRC_URI from the .bb to the .inc, 
-yes.
+I have also experienced fetch issues while trying to build some
+packages lately, and I am using oe-classic (because the distribution I
+am working with is not available in oe-core yet).
 
-> This can create a mistake in my opinion.
+For instance, yesterday I submitted a patch to fix a fetch error on
+util-linux-ng in oe-classic:
 
-Only if you create your own recipe that uses git.inc but doesn't set its own 
-SRC_URI; the current 1.7.7 recipe does set one.
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-May/039576.h=
+tml
 
-Cheers,
-Paul
+Like you said, Martin, I am trying to fix these kind of issues
+directly in the recipe (if it hasn't been fixed in oe-core or yocto
+already, in which case I just bring the fix over to oe-classic).
 
--- 
+Martin, Kristoffer, can one of you review that patch by the way ?
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Cheers.
+--=20
+        Apelete
 
 
