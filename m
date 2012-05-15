@@ -1,34 +1,35 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dasty82@gmail.com>) id 1SUBuc-0003k9-Qm
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 09:11:14 +0200
-Received: by wgbdr1 with SMTP id dr1so4850615wgb.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SUCeF-00048l-Fk for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 09:58:23 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SUCUa-0002An-1J for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 09:48:24 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 09:48:23 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 00:01:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=mUTyRmGBG/3sIpq5W1BhgcPhs0xEoW3keMDXO4K+zmw=;
-	b=zf+H+VMzCLlK2u1M1WomnDKAh+zacs+EUkfHzk6Yp/ZcY2x43iOzRw4JcuHgcQ1sWU
-	/JVG70vKGfpVj80WLjLm0vYeUSgV3ewTr+2Z8dErqv4oalxlwoR5t9hxxlNcuE/WMHMK
-	nxpOU5tC5LyZWvh61U/fzGWeALIhjsvGUbmW2dZ1FKGh7i10ay0dzDUsJd+D3JHvHuMA
-	xqvV1W5tc1vtY3qkIgj7ZjTdBh+wBlFeO3ioExUmHbXutrcTYvMqjA3NJ4X9Swk5BZei
-	Trixzm2wS0biTXtz7rhS5tyl7AyyCuMNXP7Ed3XdqyrZqxK8TzPoVBygfVO5i9C2Fi5k
-	CoDQ==
-Received: by 10.180.84.4 with SMTP id u4mr5371591wiy.2.1337065275174;
-	Tue, 15 May 2012 00:01:15 -0700 (PDT)
-Received: from localhost.localdomain
-	(83-64-248-68.inzersdorf.xdsl-line.inode.at. [83.64.248.68])
-	by mx.google.com with ESMTPS id gd4sm63737936wib.6.2012.05.15.00.01.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 15 May 2012 00:01:14 -0700 (PDT)
-Sender: Radek Dostal <dasty82@gmail.com>
-From: Radek Dostal <rd@radekdostal.com>
+	Tue, 15 May 2012 09:48:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2012 09:00:11 +0200
-Message-Id: <1337065211-7593-1-git-send-email-rd@radekdostal.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] libopus: add libopus_0.9.10
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 15 May 2012 09:48:02 +0200
+Message-ID: <jot1nl$vcb$1@dough.gmane.org>
+References: <1336166708-14019-1-git-send-email-gizero@gmail.com>
+	<1336233109-26164-1-git-send-email-gizero@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <1336233109-26164-1-git-send-email-gizero@gmail.com>
+X-Enigmail-Version: 1.4.1
+Subject: Re: [meta-oe][PATCH v2] libmodbus: ported recipe from classic and updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 07:11:14 -0000
+X-List-Received-Date: Tue, 15 May 2012 07:58:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Radek Dostal <rd@radekdostal.com>
----
- meta-oe/recipes-multimedia/libopus/libopus-fpu.inc |    6 ++++++
- .../recipes-multimedia/libopus/libopus_0.9.10.bb   |   20 ++++++++++++++++++++
- 2 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
- create mode 100644 meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc b/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
-new file mode 100644
-index 0000000..ed16602
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
-@@ -0,0 +1,6 @@
-+
-+def get_libopus_fpu_setting(bb, d):
-+	if d.getVar('TARGET_FPU', True) in [ 'soft' ]:
-+		return "--enable-fixed-point"
-+	return ""
-+
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
-new file mode 100644
-index 0000000..392836f
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_0.9.10.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Opus Audio Codec"
-+DESCRIPTION = "The Opus codec is designed for interactive \
-+speech and audio transmission over the Internet. It is \
-+designed by the IETF Codec Working Group and incorporates \
-+technology from Skype's SILK codec and Xiph.Org's CELT codec."
-+HOMEPAGE = "http://www.opus-codec.org/"
-+SECTION = "libs/multimedia"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6d9f9b3714db6bbcfb6e42170d9c664d"
-+
-+SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-+SRC_URI[md5sum] = "afbda2fd20dc08e6075db0f60297a137"
-+SRC_URI[sha256sum] = "4e379a98ba95bbbfe9087ef10fdd05c8ac9060b6d695f587ea82a7b43a0df4fe"
-+
-+S = "${WORKDIR}/opus-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+require libopus-fpu.inc
-+EXTRA_OECONF = "${@get_libopus_fpu_setting(bb, d)}"
--- 
-1.7.5.4
+Op 05-05-12 17:51, Andrea Galbusera schreef:
+> * based on recipe by Radoslav Kolev which was in classic * updated to
+> latest released version 3.0.2 * v2 drops git version of recipe * v2 drops
+> no longer used PRIORITY
+> 
+> Signed-off-by: Andrea Galbusera <gizero@gmail.com> --- 
+> .../recipes-extended/libmodbus/libmodbus_3.0.2.bb  |   18
+> ++++++++++++++++++ 1 files changed, 18 insertions(+), 0 deletions(-) 
+> create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+> 
+> diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+> b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb new file mode
+> 100644 index 0000000..5926bc4 --- /dev/null +++
+> b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb @@ -0,0 +1,18 @@ 
+> +SUMMARY = "A Modbus library" +DESCRIPTION = "libmodbus is a C library
+> designed to provide a fast and robust \ +implementation of the Modbus
+> protocol. It runs on Linux, Mac OS X, FreeBSD, \ +QNX and Windows." 
+> +HOMEPAGE = "http://www.libmodbus.org/" +SECTION = "libs" + +LICENSE =
+> "LGPLv2.1+" +LIC_FILES_CHKSUM =
+> "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c" + +PR =
+> "r0"
+
+Drop that
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPsgoyAAoJEHZqAkdh1vT6jHsP/3FzoPMuoKnCpE8DS8r/7Tj6
+iE126Y0KV7O8qb0Myr9EeUAFhuiuwp2RXJlznrMHVqNVOJa46dvAnmbcq6v/r/xR
+QQQGuRnqLOJwSJpWuphxRqbUHKFIAQYePSuIdzqAydJxEH017yz+btAryoxHQd/g
+He78sRYvpFkavoFhjBpcFXDYcW9JZFHc7iFKThv3qDaWNbbabd2p4McM8x1O0FjJ
+pybhuLaAbsae5pB2BWItncf60IEY1BiKhjraJ6658XSLNZf8oEt8XOh3BzNRMTSC
+AFwWZpvfIiz8h6IG7nYv5Cfnrw59mYoH+c5hLr8tRNpCsUSYr95uQc+oa1Y6ldrN
+24bsgkQv4VPwH7yRVDruZSb3FJna99pP9KSmTzvOYCeJio/vIq1LyskCCSyiX09i
+iB/P0QFubAH67k3m2VNrbFB+YZE/VSe7KJDAPbONKduaNKQQCSapAngi+4TWlsGR
+5lR/e+LsPk4YpqWcm97L/beJfSLpwlNkhWrkGYjYtkxOztkvO7Tj1OoLiYMoFnIz
+rW+FnLNk4pmhM6fD76yNpn9YtJCOCPIvNvTkKcfkRDR6UPK3Jvy9nWvNlgZvqnPr
+F4PQ5mcqdR/3l9TM9iAIA6zX4tiIOMBef2Mxzk3z0MmGtIM6+FcZFGAin39ggA+z
+dZyJP6aXgvnQehZhhAU4
+=YKDQ
+-----END PGP SIGNATURE-----
 
 
 
