@@ -1,34 +1,37 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SUDRW-0001YK-Hj
+	(envelope-from <martiert@gmail.com>) id 1SUDWW-0001g1-1b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 10:49:18 +0200
-Received: by lbol5 with SMTP id l5so3967588lbo.6
+	Tue, 15 May 2012 10:54:28 +0200
+Received: by bkcjm2 with SMTP id jm2so4836228bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 01:39:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=DeY1zqmkM+f63c4RNN2QPEl0B56yz1GS+CZ5aUvfgH0=;
-	b=a34Tzs+f7E52wQQM7OBFaRYBPgm7+BG1OcBAaI8j58Vz3fjZFuFRgGCZu5elrt3YVg
-	lYryvgsGkTEG2c27e0v8sVrq/gTNpA/KHfAalpguO+6eE6UYHjfTPI73ShQblPPK6lsm
-	z7tb3XkPTof50PTLJTJn4SaVgfQJJO259mwgkIG9FLBSRIJPkOOktfUFnCZbI0gcMxUk
-	uKot0LB3cNQ9UVHzD+kFi5HqIuuNflC2iSaEXLyqVaIzgyAYcFVTNRKevGXWADfybDRj
-	GDc5naC8owcdhpksyHQ/gKD184OoZcx8Jl3gFhd6JrfevoFBU4tViyEzeAMge22+WVd/
-	qLrg==
+	Tue, 15 May 2012 01:44:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=zbTN5UmVaFB6MgNBUudm2DDXmXP+Ii9g8G3dg0mMWcQ=;
+	b=cDSBhpwWmLJQPssdeQoZ1AnbnR7V8KAZVmto00hQlQmhyFk9sLap4UEfZ4K3DqdxI+
+	CWB4LAwWVc18C3xc0bDcVzePs2H0zWN9jourQG1ud/9AxTW8dRVX60IszksUvGb4Wkrk
+	sXQHsMLwwjth2mX9KbsYbVX7/N56OQKdmgY+NsUpCkXA9CGE6eSG/EuUCL4GdYP7Gv0K
+	cJTl42fvuTdOqeQ+LnkKCOq1iDItPrYLKzxVK4qPzv2YU+1dLQFWu4TSaE/KMNEY0VKL
+	zX+13Ef/wKhP0Dd3DF5h265kGwkuFOp5KpON8zt31rqVeXCvIrr/QJeohfkks7nWSlTd
+	JDWA==
+Received: by 10.204.151.130 with SMTP id c2mr4398545bkw.125.1337071468176;
+	Tue, 15 May 2012 01:44:28 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id m2sm7504085bkm.2.2012.05.15.01.44.26
+	(version=SSLv3 cipher=OTHER); Tue, 15 May 2012 01:44:27 -0700 (PDT)
+Message-ID: <4FB216D2.6010108@gmail.com>
+Date: Tue, 15 May 2012 10:41:54 +0200
+From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
 MIME-Version: 1.0
-Received: by 10.152.148.101 with SMTP id tr5mr2702792lab.36.1337071158626;
-	Tue, 15 May 2012 01:39:18 -0700 (PDT)
-Received: by 10.112.10.201 with HTTP; Tue, 15 May 2012 01:39:18 -0700 (PDT)
-In-Reply-To: <CAMKF1sqCxAnukfORLmDT9vxg-V8ABcUgjXYTP5b1jc=LZfDu1w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 References: <CADZ6=avMrT89BZA=awFOhCQFMhTDo1n67ZQya7J3Z9BSQeZHqw@mail.gmail.com>
 	<CAMKF1sqCxAnukfORLmDT9vxg-V8ABcUgjXYTP5b1jc=LZfDu1w@mail.gmail.com>
-Date: Tue, 15 May 2012 10:39:18 +0200
-Message-ID: <CADZ6=auir8z1R2eQ0c++EcdLWizOQ+=OhbqM5q6Fms1=G0CJhw@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmE1kHd0ulbDoH1QKJVfnbXkRiPm6bK482CLlO3v3y5WyNxf8YBRs5u9okB7bUI9/EsScrK
+	<CADZ6=auir8z1R2eQ0c++EcdLWizOQ+=OhbqM5q6Fms1=G0CJhw@mail.gmail.com>
+In-Reply-To: <CADZ6=auir8z1R2eQ0c++EcdLWizOQ+=OhbqM5q6Fms1=G0CJhw@mail.gmail.com>
 Subject: Re: New kmod {libdir} breaks udev 182 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,66 +46,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 08:49:18 -0000
+X-List-Received-Date: Tue, 15 May 2012 08:54:28 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hello Khem,
-
->> I've got an issue with
->> openembedded-core/meta/recipes-kernel/kmod/kmod_git.bb, with the way
->> {libdir} is set in line 19:
->>
->> libdir =3D "${base_libdir}"
->>
->> "git blame" claims this was added by Khem Raj on 2012-05-08. This line
->> causes libkmod to put its pkgconfig ".pc" file in the staging area at
->> "/lib/pkgconfig/libkmod.pc". This is sad because other recipes would
->> only look at /usr/lib/pkgconfig/ and /usr/share/pkgconfig.
->>
->> Take meta-openembedded/meta-oe/recipes-core/udev/udev_182.bb, for
->> example. The build predictably fails with
->>
->> checking for KMOD... no
->> configure: error: Package requirements (libkmod >=3D 5) were not met:
->>
->> No package 'libkmod' found
->>
->>
->> So what's the right thing do do here? Use a different package install
->> path for libkmod, or point udev to /lib/pkgconfig by extending its
->> PKG_CONFIG_PATH correspondingly?
+On 05/15/12 10:39, Thilo Fromm wrote:
+> Hello Khem,
 >
-> One solution is to fix kmod to install pc files in /usr/lib with right pa=
-ths
-> to access libkmod
+>>> I've got an issue with
+>>> openembedded-core/meta/recipes-kernel/kmod/kmod_git.bb, with the way
+>>> {libdir} is set in line 19:
+>>>
+>>> libdir = "${base_libdir}"
+>>>
+>>> "git blame" claims this was added by Khem Raj on 2012-05-08. This line
+>>> causes libkmod to put its pkgconfig ".pc" file in the staging area at
+>>> "/lib/pkgconfig/libkmod.pc". This is sad because other recipes would
+>>> only look at /usr/lib/pkgconfig/ and /usr/share/pkgconfig.
+>>>
+>>> Take meta-openembedded/meta-oe/recipes-core/udev/udev_182.bb, for
+>>> example. The build predictably fails with
+>>>
+>>> checking for KMOD... no
+>>> configure: error: Package requirements (libkmod >= 5) were not met:
+>>>
+>>> No package 'libkmod' found
+>>>
+>>>
+>>> So what's the right thing do do here? Use a different package install
+>>> path for libkmod, or point udev to /lib/pkgconfig by extending its
+>>> PKG_CONFIG_PATH correspondingly?
+>> One solution is to fix kmod to install pc files in /usr/lib with right paths
+>> to access libkmod
+>>
+>> second solution is to look for pc files in ${base_libdir} while building udev
+>> can you try this option.
+> Yes, I was trying to state these two possible resolutions in my first
+> mail. I already tried adding
 >
-> second solution is to look for pc files in ${base_libdir} while building =
-udev
-> can you try this option.
+> PKG_CONFIG_PATH =
+> "${PKG_CONFIG_DIR}:${STAGING_DATADIR}/pkgconfig:${PKG_CONFIG_SYSROOT_DIR}/${base_libdir}/pkgconfig/"
+>
+> to udev-182 and systemd (which is also affected) recipes. It works
+> around the bug. Still, I think kmod is publishing its .pc files in the
+> wrong directory.
+>
+> Regards,
+> Thilo
+>
+We are also having this issue, and have just added this hack in a
+bbappend for udev and systemd. Not a pretty solution, but found it to be
+a lot of work to make only the .pc files be put in /usr/lib/pkgconfig
+instead of /lib/pkgconfig. I totally agree that kmod publishes it's .pc
+files in the wrong directory, as every distro I have tried uses
+/usr/lib/pkgconfig as the pkgconfig directory. Guess we will keep this
+hack until kmod is fixed upstream though.
 
-Yes, I was trying to state these two possible resolutions in my first
-mail. I already tried adding
-
-PKG_CONFIG_PATH =3D
-"${PKG_CONFIG_DIR}:${STAGING_DATADIR}/pkgconfig:${PKG_CONFIG_SYSROOT_DIR}/$=
-{base_libdir}/pkgconfig/"
-
-to udev-182 and systemd (which is also affected) recipes. It works
-around the bug. Still, I think kmod is publishing its .pc files in the
-wrong directory.
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+- Martin
 
 
