@@ -1,33 +1,25 @@
-Received: from mail-qc0-f175.google.com ([209.85.216.175])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jtobias@viaas.com>) id 1SUQUD-0007to-BW
+	(envelope-from <denis@denix.org>) id 1SUQhK-0002HY-HP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 00:44:57 +0200
-Received: by qcso7 with SMTP id o7so75366qcs.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 15:34:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=+SQx8xFgahJvHngT3V3LbXrO6O60OI1JtqiG5AAw5MQ=;
-	b=bEVOJy+jjaekBDsnB/H9NPeTRp1D/LVBYpaxsnkGak8ysTDlI4gjv2kTuakHpw8spu
-	b3oVMxrQpiMU0QQflKQg1IhmWhWKZDGY1/kVGtt9z9UrMknFuMs3J85ASKa6tSOBzZtB
-	L7ewCwXYcbF0xykHprEvLMFKenNSokJp2kd+IgCKRpcoCi2rw5I6mhgKI5cv/ra6Ae8t
-	cY4oFC1t+y+Nqwo01hQToerddCiEQKv89Dk6cBSmMzMSpDlxfQLNGX0SNc0/NyEC5L4H
-	Y+nVGwVKJtYt+6xhcmmREJrPnj6SX5xBOzifwBVUW/buDJKl0H7VBVHsXU7SN2moaGmO
-	rSjA==
-MIME-Version: 1.0
-Received: by 10.224.105.202 with SMTP id u10mr6453317qao.54.1337121296476;
-	Tue, 15 May 2012 15:34:56 -0700 (PDT)
-Received: by 10.229.81.195 with HTTP; Tue, 15 May 2012 15:34:56 -0700 (PDT)
-Date: Tue, 15 May 2012 15:34:56 -0700
-Message-ID: <CAJfOToUiw6yqaY8ski5XHXja1c_PNeNTO-MDJjVZhZb308WahA@mail.gmail.com>
-From: John Tobias <jtobias@viaas.com>
+	Wed, 16 May 2012 00:58:45 +0200
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M4300I5G6039DH1@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	15 May 2012 17:48:04 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 81792201B8; Tue,
+	15 May 2012 18:48:03 -0400 (EDT)
+Date: Tue, 15 May 2012 18:48:02 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQllu5Mb/VQq2HYI2l+Fz8c6hhe27ej3CbI0dZf24VpTcVsf8Gk2MQsy7PyXj03VLzKokOUj
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: 169.254 subnet
+Message-id: <20120515224802.GJ14763@denix.org>
+References: <CAJfOToUiw6yqaY8ski5XHXja1c_PNeNTO-MDJjVZhZb308WahA@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAJfOToUiw6yqaY8ski5XHXja1c_PNeNTO-MDJjVZhZb308WahA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: 169.254 subnet
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 22:44:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 May 2012 22:58:45 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello All,
+On Tue, May 15, 2012 at 03:34:56PM -0700, John Tobias wrote:
+> Hello All,
+> 
+> My board has a eth0 and wireless interfaces. I manually executed the
+> following commands to configured my network interfaces:
+> 
+> 1. ifconfig eth0 192.168.3.139 netmask 255.255.255.0 up
+> 2. ifconfig wlan0:1 inet 169.254.6.199 netmask 255.255.0.0 broadcast
+> 169.254.255.255 up
+> 
+> 
+> My Routing table:
+> Kernel IP routing table
+> Destination     Gateway         Genmask         Flags Metric Ref    Use
+> Iface
+> 192.168.3.0     *               255.255.255.0   U     0      0        0 eth0
+> 169.254.0.0     *               255.255.0.0     U     0      0        0 ra0
+> 
+> 
+> My other machine is in 192.168.3.x subnet and I am able to ping the
+> 192.168.3.139. But, the problem is I can ping the 169.254.6.199 too.
+> 
+> Is there any special on 169.254 because by using the said subnet it seems
+> the two interfaces has a cross over routing?.
 
-My board has a eth0 and wireless interfaces. I manually executed the
-following commands to configured my network interfaces:
+http://en.wikipedia.org/wiki/Link-local_address
 
-1. ifconfig eth0 192.168.3.139 netmask 255.255.255.0 up
-2. ifconfig wlan0:1 inet 169.254.6.199 netmask 255.255.0.0 broadcast
-169.254.255.255 up
+-- 
+Denys
 
-
-My Routing table:
-Kernel IP routing table
-Destination     Gateway         Genmask         Flags Metric Ref    Use
-Iface
-192.168.3.0     *               255.255.255.0   U     0      0        0 eth0
-169.254.0.0     *               255.255.0.0     U     0      0        0 ra0
-
-
-My other machine is in 192.168.3.x subnet and I am able to ping the
-192.168.3.139. But, the problem is I can ping the 169.254.6.199 too.
-
-Is there any special on 169.254 because by using the said subnet it seems
-the two interfaces has a cross over routing?.
-Any idea how to resolve the issue?.
-
-Thanks,
-
-john
 
