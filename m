@@ -1,34 +1,26 @@
-Received: from mail-gg0-f175.google.com ([209.85.161.175])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <giuseppe.condorelli@gmail.com>) id 1SUI5F-0005Iz-Sw
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 15:46:38 +0200
-Received: by ggnp4 with SMTP id p4so1745173ggn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 06:36:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=d7vgq8pa6oIfACo7IzLwSBqfDSC6aCOqaMNkPhdkb2Q=;
-	b=FHK2NW02l6w6EJ82JhvHlVzDzcn91mbRAC/mE1yDw+iIzOc5EeH4iWEp1GJIlhHPht
-	pXva69vxWymIuRRUToqEoKpwVw2IqLaXzr2hMpravCADMEqTrsfgTmY1ZzXTHKFE+SdL
-	2CLXE1qpqZOMXh8r6ZoyXWtexxjbsyR40oY0Q2mB8UEb+QppJX2v8qvnv8yq5kkrAdrU
-	E4c/9+MKZZ1sAojZfZ5zSj1/oEDvk0cdGg+SIzsJsYYEZVK5FFn0P71NyVLGkPTHwrXN
-	7iDYPfGHiN7Dendv/pfXg4dQspki6HLG7Tgp81VBnyQm1b7TZFvayPCEfqzZHQKNdE9o
-	HrSg==
-MIME-Version: 1.0
-Received: by 10.50.185.232 with SMTP id ff8mr2374131igc.5.1337088997112; Tue,
-	15 May 2012 06:36:37 -0700 (PDT)
-Received: by 10.231.241.3 with HTTP; Tue, 15 May 2012 06:36:37 -0700 (PDT)
-In-Reply-To: <4FB25A88.3000100@mlbassoc.com>
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1SUIDt-0008EG-Uh; Tue, 15 May 2012 15:55:34 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 15 May 2012 06:45:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="153182159"
+Received: from unknown (HELO helios.localnet) ([10.252.120.119])
+	by fmsmga001.fm.intel.com with ESMTP; 15 May 2012 06:45:31 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
+Date: Tue, 15 May 2012 14:45:30 +0100
+Message-ID: <7192456.4O7Cf6LSyd@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.2 (Linux/3.0.0-19-generic-pae; KDE/4.8.2; i686; ; )
+In-Reply-To: <CAOHjBZv+ox9dJh+g1rjFqqnYvcQvLuRboV8ANZssKXTv0NSO7Q@mail.gmail.com>
 References: <CAOHjBZto_R5S777po-K8mXG-Z9XLYNVzE05-kq_TOCeo4YgyoQ@mail.gmail.com>
-	<4FB2575C.3070407@mlbassoc.com>
-	<CAOHjBZtfhFoZN=Hva3W_0yf7sRNS0xymrj1MHER9yHEeW=RHyw@mail.gmail.com>
 	<4FB25A88.3000100@mlbassoc.com>
-Date: Tue, 15 May 2012 15:36:37 +0200
-Message-ID: <CAOHjBZv+ox9dJh+g1rjFqqnYvcQvLuRboV8ANZssKXTv0NSO7Q@mail.gmail.com>
-From: Giuseppe Condorelli <giuseppe.condorelli@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAOHjBZv+ox9dJh+g1rjFqqnYvcQvLuRboV8ANZssKXTv0NSO7Q@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
 Subject: Re: [oe-core] Packages broken URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,75 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 13:46:38 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 May 2012 13:55:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-That's right, but why the git.inc contains a undownloadable url?
-This can create a mistake in my opinion.
+On Tuesday 15 May 2012 15:36:37 Giuseppe Condorelli wrote:
+>On Tuesday 15 May 2012 07:30:48 Gary Thomas wrote:
+>> On 2012-05-15 07:19, Giuseppe Condorelli wrote:
+>> > For example building git-1.7.7 fails fetching the source.
+>>
+>> Works fine for me:
+>> ...
+>
+> That's right, but why the git.inc contains a undownloadable url?
 
-2012/5/15 Gary Thomas <gary@mlbassoc.com>
+This should probably be fixed by moving the SRC_URI from the .bb to the .inc, 
+yes.
 
-> On 2012-05-15 07:19, Giuseppe Condorelli wrote:
->
->> For example building git-1.7.7 fails fetching the source.
->>
->
-> Works fine for me:
->
->  $ wget http://git-core.googlecode.**com/files/git-1.7.7.tar.gz<http://gi=
-t-core.googlecode.com/files/git-1.7.7.tar.gz>
->  --2012-05-15 07:29:43--  http://git-core.googlecode.**
-> com/files/git-1.7.7.tar.gz<http://git-core.googlecode.com/files/git-1.7.7=
-.tar.gz>
->  Resolving git-core.googlecode.com... 209.85.225.82
->  Connecting to git-core.googlecode.com|209.85.225.82|:80..**. connected.
->  HTTP request sent, awaiting response... 200 OK
->  Length: 3475448 (3.3M) [application/octet-stream]
->  Saving to: =93git-1.7.7.tar.gz=94
->
->  100%[=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D**=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D**=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D>]
-> 3,475,448    477K/s   in 7.3s
->
->  2012-05-15 07:29:50 (466 KB/s) - =93git-1.7.7.tar.gz=94 saved
-> [3475448/3475448]
->
-> What error/problem are you having?
->
->  2012/5/15 Gary Thomas<gary@mlbassoc.com>
->>
->>  On 2012-05-15 07:02, Giuseppe Condorelli wrote:
->>>
->>>  Hi All,
->>>>
->>>> there are a number of packages having a broken SRC_URI, for example gi=
-t.
->>>> Has someone met this issue?
->>>> For sure we can correct those links adding a dedicated .bbappend file
->>>> for
->>>> each failing package but
->>>> I think we could also update the main package fixing the errors.
->>>>
->>>>
->>> Details?  People build using oe-core all the time, so providing
->>> more info on the problems _you_ are having would go a long way
->>> towards finding&  fixing them.
->>>
->>
-> --
-> ------------------------------**------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------**------------------------------
->
-> ______________________________**_________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.open=
-embedded.org>
-> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-deve=
-l<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->
+> This can create a mistake in my opinion.
+
+Only if you create your own recipe that uses git.inc but doesn't set its own 
+SRC_URI; the current 1.7.7 recipe does set one.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
