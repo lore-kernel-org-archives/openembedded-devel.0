@@ -1,28 +1,32 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SUIHM-0008MR-95
+	(envelope-from <fromm@dresearch-fe.de>) id 1SUKWC-0006L8-7N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 15:59:08 +0200
-Received: from localhost (unknown [91.224.149.44])
-	by ms.seketeli.net (Postfix) with ESMTP id 4FAE7EA040;
-	Tue, 15 May 2012 16:01:22 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 035D6202FB; Tue, 15 May 2012 15:49:08 +0200 (CEST)
-Date: Tue, 15 May 2012 15:49:08 +0200
-From: Apelete Seketeli <apelete@seketeli.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120515134908.GB4846@kilowog>
-References: <CAOHjBZto_R5S777po-K8mXG-Z9XLYNVzE05-kq_TOCeo4YgyoQ@mail.gmail.com>
-	<20120515130625.GD3166@jama.jama.net>
+	Tue, 15 May 2012 18:22:36 +0200
+Received: by lags15 with SMTP id s15so4304009lag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 09:12:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=0BwlLsNkqO6L0T52XL6QBmfKlUYCAUZeguwZscLn0Yo=;
+	b=nyDM5PEAVWgd0ELcy640xHZxfg4oiBuTWcAtIRvLvvTyJ/Vdlk26ZJDOfB3MUMmP9j
+	0KxomH8ywn2y1e7kIQBYbsQ4eiEGSoamWo/bYmGaS8BBJOLAfiUVEB7eTtbXphUWG/m7
+	LtDbCJ4HR/m84NLiJnTUeh19N4Zxuidgwo0vauWi7adNee/jNduo8auswyXohtgf807X
+	0M63TDuZX6iVG257XyJCQPCwJ/8tPrRVLnHM4Yc5rFGiCSdksmF9+0cRyfKfXSAZfYy0
+	GCp0dTAneE99qd3OS57MpNNiGvOR9nfV6VA4oP4mODJQ76XCVYy3i8EAtAPLS2NY+u/y
+	SiQg==
 MIME-Version: 1.0
-In-Reply-To: <20120515130625.GD3166@jama.jama.net>
-X-Operating-System: Debian GNU/Linux 6.0
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [oe-core] Packages broken URL
+Received: by 10.152.129.74 with SMTP id nu10mr12838909lab.50.1337098355730;
+	Tue, 15 May 2012 09:12:35 -0700 (PDT)
+Received: by 10.112.10.201 with HTTP; Tue, 15 May 2012 09:12:35 -0700 (PDT)
+Date: Tue, 15 May 2012 18:12:35 +0200
+Message-ID: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmfgDwUM8xTXdCna7u3Rz7KcSlvcTfG0phmTL0nEfp1gEo1zEexf9XiwsjQEGnz7uIXk7mS
+Subject: Where do I override DISTRO_FEATURES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,46 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 13:59:08 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 May 2012 16:22:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Le 15-May-12, Martin Jansa a =E9crit:
-> On Tue, May 15, 2012 at 03:02:37PM +0200, Giuseppe Condorelli wrote:
-> > Hi All,
-> >=20
-> > there are a number of packages having a broken SRC_URI, for example g=
-it.
-> > Has someone met this issue?
-> > For sure we can correct those links adding a dedicated .bbappend file=
- for
-> > each failing package but
-> > I think we could also update the main package fixing the errors.
->=20
-> This should go to oe-core ML:
-> openembedded-core@lists.openembedded.org
->=20
-> And yes it should be fixed in original recipe.
+Hello,
 
-I have also experienced fetch issues while trying to build some
-packages lately, and I am using oe-classic (because the distribution I
-am working with is not available in oe-core yet).
+I'm trying to remove an element from DISTRO_FEATURES (specifically
+"ld-is-gold"), but I am unable to find the right spot to do it. The
+distribution we're using (Angstrom, as it happens) sets this in
+conf/distro/angstrom-v2012.x.conf. My machine configuration is the
+wrong spot to modify DISTRO_FEATURES, since it will be processed
+first. local.conf is not working, too.
 
-For instance, yesterday I submitted a patch to fix a fetch error on
-util-linux-ng in oe-classic:
+So could anybody please tell me where I need to put my
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-May/039576.h=
-tml
+DISTRO_FEATURES =3D "${@'${DISTRO_FEATURES}}'.replace('ld-is-gold',  '')}"
 
-Like you said, Martin, I am trying to fix these kind of issues
-directly in the recipe (if it hasn't been fixed in oe-core or yocto
-already, in which case I just bring the fix over to oe-classic).
+so it applies for the build?
 
-Martin, Kristoffer, can one of you review that patch by the way ?
+Regards,
+Thilo
 
-Cheers.
 --=20
-        Apelete
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
