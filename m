@@ -1,27 +1,37 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SUOO1-0002gd-Bw
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1SUPU7-0006cZ-56
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 22:30:25 +0200
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M42005MIZ55VP50@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	15 May 2012 15:20:04 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B38352010D; Tue,
-	15 May 2012 16:19:53 -0400 (EDT)
-Date: Tue, 15 May 2012 16:19:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 15 May 2012 23:40:47 +0200
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B770422325AD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 23:30:48 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 537E422325AC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 23:30:48 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g230117152.adsl.alicedsl.de
+	[92.230.117.152]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 23:30:48 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 9A7D03C4E9; Tue, 15 May 2012 23:30:46 +0200 (CEST)
+Date: Tue, 15 May 2012 23:30:46 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120515201953.GB14162@denix.org>
-References: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
-	<3578934.ouGGrvIU0p@helios>
-MIME-version: 1.0
-In-reply-to: <3578934.ouGGrvIU0p@helios>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Thilo Fromm <fromm@dresearch-fe.de>
-Subject: Re: Where do I override DISTRO_FEATURES?
+Message-ID: <20120515213046.GA24022@rhein.zuhause.netz>
+References: <CALbNGRQ-sLsjDS9VV2TJ3JOzLzFhrXfCcMH2uxVJR1JboueLAg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQ-sLsjDS9VV2TJ3JOzLzFhrXfCcMH2uxVJR1JboueLAg@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [meta-chromium] chromium build fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +45,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 20:30:25 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 15 May 2012 21:40:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, May 15, 2012 at 05:23:43PM +0100, Paul Eggleton wrote:
-> On Tuesday 15 May 2012 18:12:35 Thilo Fromm wrote:
-> > I'm trying to remove an element from DISTRO_FEATURES (specifically
-> > "ld-is-gold"), but I am unable to find the right spot to do it. The
-> > distribution we're using (Angstrom, as it happens) sets this in
-> > conf/distro/angstrom-v2012.x.conf. My machine configuration is the
-> > wrong spot to modify DISTRO_FEATURES, since it will be processed
-> > first. local.conf is not working, too.
-> > 
-> > So could anybody please tell me where I need to put my
-> > 
-> > DISTRO_FEATURES = "${@'${DISTRO_FEATURES}}'.replace('ld-is-gold',  '')}"
-> > 
-> > so it applies for the build?
-> 
-> Unfortunately such hacks only work for variables that are not set within the 
-> distro configuration, which is applied after local.conf.
+Hi,
 
-Well, while still being an ugly hack, this should still be possible using 
-local overrides... I.e. VAR_local in OE or VAR_forcevariable in OE-core/Yocto. 
-You may need to use immediate assignment to avoid circular dependency, though.
+looks like you are building on 64bit machine and you do not have installed
+the ia32 compat-dev libs. chromium builds some parts for the js engine natively
+and that needs to be 32bit.
 
--- 
-Denys
+bye Henning
 
 
