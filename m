@@ -1,28 +1,37 @@
-Received: from tritech.se ([46.59.120.190])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1SUDf3-0002F8-KB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 11:03:17 +0200
-Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id q4F8na6l010197
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SUECp-0004LF-KH for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 11:38:11 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SUE3A-0005JS-Jb for openembedded-devel@lists.openembedded.org;
+	Tue, 15 May 2012 11:28:12 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 11:28:12 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 10:49:41 +0200
-Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
-	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
-	14.02.0283.003; Tue, 15 May 2012 10:49:36 +0200
-From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: autotools + native ends up with no include in sysroots
-Thread-Index: Ac0ydoL3mlVDuEEQR+S9jkY0DWbWig==
-Date: Tue, 15 May 2012 08:49:35 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4256A4EA@post.tritech.se>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [194.132.137.38]
-MIME-Version: 1.0
-Subject: autotools + native ends up with no include in sysroots
+	Tue, 15 May 2012 11:28:12 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 15 May 2012 11:27:57 +0200
+Message-ID: <jot7j3$df9$1@dough.gmane.org>
+References: <CADZ6=auhe9BbFPd-F-QNLcTksuWzZdY8tUb31P2JVm38LDjCsw@mail.gmail.com>
+	<CAF6bG8cN5ecwtehSBxy5M1JvR+Fbo_=q7mm7O+AJcz-9ZU79yw@mail.gmail.com>
+	<CADZ6=au=JZVMD9_PNbcbSmv6JzxtZWeQD6suneG=fk9Ks4pHCg@mail.gmail.com>
+	<CAF6bG8fEnVNtkEO9iHtrpB822w-SNWzTd-4WSTr_SgNqNpHTtg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <CAF6bG8fEnVNtkEO9iHtrpB822w-SNWzTd-4WSTr_SgNqNpHTtg@mail.gmail.com>
+X-Enigmail-Version: 1.4.1
+Subject: Re: New kmod {libdir} breaks udev, systemd build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,32 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 09:03:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 May 2012 09:38:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,=0A=
-=0A=
-I'm running a project using OE-classic.=0A=
-=0A=
-I have a recipe (call it xxx) that uses autotools and builds a package succ=
-essfully for target. This recipe uses a custom do_install to extract releva=
-nt files from the source, e.g. include files for the dev package.=0A=
-=0A=
-I have now tried to build a native version by creating a new xxx-native rec=
-ipe that requires the xxx recipe and inherits native (something that have w=
-orked well for other recipes). This recipe also builds without errors and I=
- get working executables and libraries under sysroots but there are no incl=
-ude files... =0A=
-=0A=
-I have tried to decipher the log files and native and autotools classes and=
- found that my custom do_install is simply ignored when building for native=
-.=0A=
-=0A=
-Is there a way to convince the native build to use my do_install?=0A=
-Any other advice how to proceed?=0A=
-=0A=
-Thanks && BR // Mats=0A=
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 14-05-12 19:42, Marko Lindqvist schreef:
+> On 14 May 2012 20:23, Thilo Fromm <fromm@dresearch-fe.de> wrote:
+>> 
+>> openembedded-core only features udev-164 (vs. -182 in meta-oe). -164 in
+>> oe-core does not use libkmod, so there's no issue with libkmod in 
+>> oe-core. It's no surprise that it "worked for you", you were building 
+>> anicent tools.
+> 
+> I know. I were asking why versions are setup like this. If -182 makes 
+> more sensible default, why it's not one in -core. My main point was that
+> seemingly unrelated change to build xterm to my image (requiring meta-oe
+> layer) caused *default* udev version to change (I'm not setting
+> PREFERRED_VERSION anywhere).
+
+Setting preferred versions is the task of the DISTRO. If the DISTRO doesn't
+care about the udev version, it will change if you add different versions to
+your stack. If that offends you, switch to another DISTRO.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPsiGdAAoJEHZqAkdh1vT6qUIP/2l+gdBLEmcr1eNJAXa2brKf
+7EpMMNChKurwoBQHJqWUFYWGfFDpTsda02jIV3sB4dZ7DzVCrs4MQrBQYBNvoYhb
+/xrjnObNDv12mlVTmBU8mfL9BtkCGdjhEs9lq1WDGO6nTEVnlE3T8+skmoGuDfwV
+vq1HejuwMNsM5SaC8/jEHDM41YT5gqDMOViSZhwIfSvCPzJ2dc4An5yq601HEIH4
+T+SM+BpGLmUgsW0mMnTXgo61BCHc3DMtV3qVl8V/FJRm92OigWUFWihSE+lv9G6O
+URpErYOwYFaQaqZs3Ma3MpBQ3GGj1q2FC0ypJ9PsdU2W4SPZsMxJD7VDg/1HbLzn
+tsVQPB2+DILoIjUliq+YAAVERj0rAaGbHw6dvFKuaielYjBkCutj3UICG8i0tTyJ
+rtIvK7NbWm9BON3t4EHpuzsmyQ90q24glbKGYsEF1F2ckaXj4TRntDcJPu9Cha/7
+OQ3lunZINzRf2xKE/ixzmMvTlhehvhrusuV3QboRg0UBVAFlscjeTuZCf+VpX4SY
+GKPEV9GZH/0aZwwQgx3/E/+tcwac+IKc+RGk6b3jU269Dz/ShcHmXsBWlCpw2St7
+fNakj0PELguutLMqeEYTJedqUBFpfd6y7oz1upxyMF21EUkBdK9mvEF1OX9XmXhs
+tQR8lTJjm8PJZ8doKJjk
+=bXQJ
+-----END PGP SIGNATURE-----
+
 
 
