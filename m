@@ -1,36 +1,33 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SUL0l-0007uK-1b
+	(envelope-from <gizero@gmail.com>) id 1SUN9j-0003h0-5e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 18:54:11 +0200
-Received: by lags15 with SMTP id s15so4332052lag.6
+	Tue, 15 May 2012 21:11:35 +0200
+Received: by werg55 with SMTP id g55so3167687wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2012 09:44:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=Zt2WjdbfmxQFxzWOD3J16q+ZnEtmwD/IlmjpcVbUN+w=;
-	b=XB9mmadk60XqZ2FxKujJo00O3YmORbX0aaZxIwYQkOxWGGPhN9z/k8RogCVc58xcCt
-	z6vfhC6cDV22xt3y7aiDDPTDCgzMQzvvy456vyhpAEO7ICs0vQdgqMxQnXFcweIBib22
-	3kvb8g6WNA/rMKTL3/z4I2DEnXi0XzfFqnEmyqy5ngKXmqMo0Kf7LhrgdDVT+s2l68rr
-	RowzFafUeZLf/5DDjvNIjpEKeLa/T1DYoxjaJiyik+68nQ5GEcMrCYAkyIXR2Jd672LZ
-	0Xasp+QSHMjbaPOTI8xuqLE4eJMMpZ6Ndokc3KAVAmhErw5xNyttpw+uBdLKZ9I5VJWg
-	MOPg==
-MIME-Version: 1.0
-Received: by 10.152.148.199 with SMTP id tu7mr13029108lab.43.1337100250710;
-	Tue, 15 May 2012 09:44:10 -0700 (PDT)
-Received: by 10.112.10.201 with HTTP; Tue, 15 May 2012 09:44:10 -0700 (PDT)
-In-Reply-To: <3578934.ouGGrvIU0p@helios>
-References: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
-	<3578934.ouGGrvIU0p@helios>
-Date: Tue, 15 May 2012 18:44:10 +0200
-Message-ID: <CADZ6=at4UmAFwAgggrDYOs0L-rMQBNU1idmD+Eo9FGMoqnKq1g@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Gm-Message-State: ALoCoQneEU92Wom5Z879d5gbXjwnGg2eCmrtFimkPbGmLUOf8W2no//8LsbvkmR5zx+sjuZuWzmA
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Where do I override DISTRO_FEATURES?
+	Tue, 15 May 2012 12:01:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=8xaOf9x4lAU05RkDXJUAkY+58VQWUSKoS4KR7nMyf2w=;
+	b=Xo+s53i2940jjRTapwF3CgWZJ+XH5SpCsp98gwcLSROG3fVuxqNox2t5WMj68v/pNY
+	OVkxb9Nu4484av7ZwoOVUQarc71zrfjMNqEzeeAVM43+rvMaOHozqNeicOFFdzRe4h4r
+	owCIUoAfGa2ftS2qhzAa0Q3Dr3OKVBAtyEvVgb7Y2gXxPMOTXWsIFhot1cn15rr4wJIt
+	kY+r6Nr2kDYH731D4aVvjEEeQ8krw8c8QsHWgDcndwAc1eSCo4QI9mgst9ykD2kp1AtS
+	NgySeY5eigkUVmDPOFfBA6IvfN3mkLOzFJy/LPHFUrG//7UdtwxFUQ5uoSO3+gIIpL+O
+	yCIQ==
+Received: by 10.180.80.35 with SMTP id o3mr365032wix.7.1337108494446;
+	Tue, 15 May 2012 12:01:34 -0700 (PDT)
+Received: from localhost.localdomain
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
+	by mx.google.com with ESMTPS id z3sm44908250wix.0.2012.05.15.12.01.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 15 May 2012 12:01:33 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 May 2012 21:01:02 +0200
+Message-Id: <1337108462-14996-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH v3] libmodbus: ported recipe from classic and updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,63 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 16:54:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 May 2012 19:11:35 -0000
 
-Hello,
+ * based on recipe by Radoslav Kolev which was in classic
+ * updated to latest released version 3.0.2
 
->> I'm trying to remove an element from DISTRO_FEATURES (specifically
->> "ld-is-gold"), but I am unable to find the right spot to do it. The
->> distribution we're using (Angstrom, as it happens) sets this in
->> conf/distro/angstrom-v2012.x.conf. My machine configuration is the
->> wrong spot to modify DISTRO_FEATURES, since it will be processed
->> first. local.conf is not working, too.
->>
->> So could anybody please tell me where I need to put my
->>
->> DISTRO_FEATURES =3D "${@'${DISTRO_FEATURES}}'.replace('ld-is-gold', =C2=
-=A0'')}"
->>
->> so it applies for the build?
->
-> Unfortunately such hacks only work for variables that are not set within =
-the
-> distro configuration, which is applied after local.conf.
+ v2:
+ * drop git version of recipe
+ * drop no longer used PRIORITY
 
-I see. Fortunately I can require conf/distro/angstrom-v2012.x.conf in
-my own distro config file.
+ v3:
+ * drop PR = "r0"
 
-> Ultimately you shouldn't really do this. If you want to change distro pol=
-icy
-> then you really ought to have your own distro configuration, or try to wo=
-rk
-> with the existing distro to fix whatever problem exists.
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+---
+ .../recipes-extended/libmodbus/libmodbus_3.0.2.bb  |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
 
-It's a backwards compatibility thing: we're bound to gcc-4.5 (we have
-kernel build issues with newer gcc versions; we're nailed to
-linux-2.6.37 thanks to lack of support by Texas Instruments) which
-fails to detect the correct version of binutils GOLD (LD would work)
-and therefore misses critical features which break the build later on.
-I won't, however, try to convince the Angstrom guys to further support
-ancient toolchains and make gold optional again just because of TI's
-laziness.
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+new file mode 100644
+index 0000000..03b7fcc
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "A Modbus library"
++DESCRIPTION = "libmodbus is a C library designed to provide a fast and robust \
++implementation of the Modbus protocol. It runs on Linux, Mac OS X, FreeBSD, \
++QNX and Windows."
++HOMEPAGE = "http://www.libmodbus.org/"
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "http://github.com/downloads/stephane/libmodbus/libmodbus-${PV}.tar.gz"
++
++inherit autotools pkgconfig
++
++SRC_URI[md5sum] = "1aaacce9d9779d3a84f7d1a75774c943"
++SRC_URI[sha256sum] = "927ec90e0e299a7d4ec7086b1e2590566bdfc3bbc22e12204229361c029f2615"
+-- 
+1.7.5.4
 
-I'll try to set up a minimal config for a distribution based on
-Angstrom, then, so I can fix up DISTRO_FEATURES. Thanks for your help,
-Paul.
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
