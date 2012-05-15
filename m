@@ -1,27 +1,30 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1SUGxp-0003gy-8v
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SUH1V-0003nE-7v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 May 2012 14:34:53 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 15 May 2012 05:24:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="140835655"
-Received: from unknown (HELO helios.localnet) ([10.252.120.119])
-	by orsmga001.jf.intel.com with ESMTP; 15 May 2012 05:24:20 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-Date: Tue, 15 May 2012 13:24:19 +0100
-Message-ID: <53487189.7itrN9qUEW@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.2 (Linux/3.0.0-19-generic-pae; KDE/4.8.2; i686; ; )
-In-Reply-To: <4FB23F7C.1060302@gmail.com>
-References: <4FB0F450.7050404@gmail.com>
-	<CAMKF1spY7bTJYzxHhmrvpGurZTDgciQOC0vFPT5HnvbOEFOdeQ@mail.gmail.com>
-	<4FB23F7C.1060302@gmail.com>
+	Tue, 15 May 2012 14:38:41 +0200
+Received: by yhjj56 with SMTP id j56so5499688yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2012 05:28:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=6FBdjLzj/XUGolvbQYPml3pSoaXjADD3k17sUMSPcPk=;
+	b=DugBdea+EwA3fHts/Q0mFey5A3Bl4EjC/c2iU8UqROdTKX+Qr/3lBifjLv4G88t68k
+	51qwVUlRf/V7rfb9KKKs7X4lYZSDkCl/RiGksHk+A4IwmJgy71brThELdXPVr+2Xygki
+	dpfDkntpkBMBon11m4dzUlg/mkFYnyE2Sh8Vc5bjyF1iX/Ba4/qnPJZpptQtu/ixMAbi
+	LxaTG/Hoo2SLS0U5TSGvf6TfYjn2Zcnl29+Ii2LmdBs8LZO+R4pznUpmcizFQstEd6QW
+	UZCrr6++iXZ8xtstNdq/MNBMiKFjMtzg7bW4ynaBeCR1kXxKoIspiVdrrndzbNrfO7Xn
+	f7+g==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: License attributions for a system built with OpenEmbedded.
+Received: by 10.50.193.234 with SMTP id hr10mr2116422igc.14.1337084920460;
+	Tue, 15 May 2012 05:28:40 -0700 (PDT)
+Received: by 10.42.170.195 with HTTP; Tue, 15 May 2012 05:28:40 -0700 (PDT)
+Date: Tue, 15 May 2012 14:28:40 +0200
+Message-ID: <CALbNGRQ-sLsjDS9VV2TJ3JOzLzFhrXfCcMH2uxVJR1JboueLAg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-chromium] chromium build fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +38,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2012 12:34:53 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 15 May 2012 12:38:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tuesday 15 May 2012 13:35:24 Tasslehoff Kjappfot wrote:
-> I've already written that I use OpenEmbedded as a build system, and
-> included the MIT license. I also used create_manifest.sh from Arago to
-> get a list of everything included in the rootfs. What I really wonder is
-> if I must add all that information as well.
+Hi,
 
-[Disclaimer: I'm not a lawyer, this is not legal advice, etc.]
+with the latest layer master heads I get the following error on
+building chromium:
 
-Ultimately you have to comply with the terms set out in the licenses of the 
-code you're distributing. For example, if those licenses require you to 
-provide the source code (or a written offer for same) regardless of whether you 
-have changed the source or not, then that's what you have to do for the 
-software you distribute under that license.
+  g++ '-D_FILE_OFFSET_BITS=64' '-DNO_TCMALLOC' '-DDISABLE_NACL'
+'-DCHROMIUM_BUILD' '-DUSE_NSS=1' '-DTOOLKIT_USES_GTK=1'
+'-DGTK_DISABLE_SINGLE_INCLUDES=1' '-DWEBUI_TASK_MANAGER=1'
+'-DENABLE_REMOTING=1' '-DENABLE_WEBRTC=1' '-DENABLE_P2P_APIS=1'
+'-DUSE_PROPRIETARY_CODECS' '-DENABLE_CONFIGURATION_POLICY'
+'-DENABLE_INPUT_SPEECH' '-DENABLE_NOTIFICATIONS' '-DENABLE_GPU=1'
+'-DENABLE_EGLIMAGE=1' '-DUSE_SKIA=1'
+'-DENABLE_REGISTER_PROTOCOL_HANDLER=1' '-DENABLE_WEB_INTENTS=1'
+'-DENABLE_PLUGIN_INSTALLATION=1' '-DENABLE_DEBUGGER_SUPPORT'
+'-DV8_TARGET_ARCH_ARM' '-DUSE_EABI_HARDFLOAT=0' '-DNDEBUG'
+'-DNVALGRIND' '-DDYNAMIC_ANNOTATIONS_ENABLED=0' -Iv8/src  -pthread
+-fno-exceptions -fno-strict-aliasing -Wno-unused-parameter
+-Wno-missing-field-initializers -fvisibility=hidden -pipe -fPIC
+-Wno-format -Wno-unused-result -m32 -fno-ident -fdata-sections
+-ffunction-sections -fERROR: Function failed: do_compile (see
+/home/andreas/tmp/oe-core-eglibc/work/armv7a-angstrom-linux-gnueabi/chromium-19.0.1049.3-r0/temp/log.do_compile.19214
+for further information)
+data-sections -ffunction-sections -fomit-frame-pointer -O3 -fno-rtti
+-fno-threadsafe-statics -fvisibility-inlines-hidden -Wno-deprecated
+-MMD -MF out/Release/.deps/out/Release/obj.host/v8_base/v8/src/accessors.o.d.raw
+ -c -o out/Release/obj.host/v8_base/v8/src/accessors.o
+v8/src/accessors.cc
+In file included from /usr/include/features.h:387:0,
+                 from /usr/include/stdio.h:28,
+                 from v8/src/../include/v8stdint.h:34,
+                 from v8/src/../include/v8.h:41,
+                 from v8/src/v8.h:52,
+                 from v8/src/accessors.cc:28:
+/usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No such
+file or directory
+compilation terminated.
+  g++ '-D_FILE_OFFSET_BITS=64' '-DNO_TCMALLOC' '-DDISABLE_NACL'
+'-DCHROMIUM_BUILD' '-DUSE_NSS=1' '-DTOOLKIT_USES_GTK=1'
+'-DGTK_DISABLE_SINGLE_INCLUDES=1' '-DWEBUI_TASK_MANAGER=1'
+'-DENABLE_REMOTING=1' '-DENABLE_WEBRTC=1' '-DENABLE_P2P_APIS=1'
+'-DUSE_PROPRIETARY_CODECS' '-DENABLE_CONFIGURATION_POLICY'
+'-DENABLE_INPUT_SPEECH' '-DENABLE_NOTIFICATIONS' '-DENABLE_GPU=1'
+'-DENABLE_EGLIMAGE=1' '-DUSE_SKIA=1'
+'-DENABLE_REGISTER_PROTOCOL_HANDLER=1' '-DENABLE_WEB_INTENTS=1'
+'-DENABLE_PLUGIN_INSTALLATION=1' '-DENABLE_DEBUGGER_SUPPORT'
+'-DV8_TARGET_ARCH_ARM' '-DUSE_EABI_HARDFLOAT=0' '-DNDEBUG'
+'-DNVALGRIND' '-DDYNAMIC_ANNOTATIONS_ENABLED=0' -Iv8/src  -pthread
+-fno-exceptions -fno-strict-aliasing -Wno-unused-parameter
+-Wno-missing-field-initializers -fvisibility=hidden -pipe -fPIC
+-Wno-format -Wno-unused-result -m32 -fno-ident -fdata-sections
+-ffunction-sections -fdata-sections -ffunction-sections
+-fomit-frame-pointer -O3 -fno-rtti -fno-threadsafe-statics
+-fvisibility-inlines-hidden -Wno-deprecated -MMD -MF
+out/Release/.deps/out/Release/obj.host/v8_base/v8/src/allocation.o.d.raw
+ -c -o out/Release/obj.host/v8_base/v8/src/allocation.o
+v8/src/allocation.cc
+make: *** [out/Release/obj.host/v8_base/v8/src/accessors.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from /usr/include/features.h:387:0,
+                 from /usr/include/stdio.h:28,
+                 from v8/src/../include/v8stdint.h:34,
+                 from v8/src/globals.h:60,
+                 from v8/src/allocation.h:31,
+                 from v8/src/allocation.cc:28:
+/usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No such
+file or directory
+compilation terminated.
 
-At the very least you should check all of the licenses to make sure you 
-understand your obligations.
+I grepped in sysroot /usr/include: There is no hit for stubs-32.h.
+Seems there are some includes of my host to blame...
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Andreas
 
 
