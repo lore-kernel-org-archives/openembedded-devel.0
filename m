@@ -1,35 +1,34 @@
 Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SUZte-0006by-OY
+	(envelope-from <fromm@dresearch-fe.de>) id 1SUby5-0008VF-SJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 10:47:50 +0200
-Received: by lbol5 with SMTP id l5so338336lbo.6
+	Wed, 16 May 2012 13:00:33 +0200
+Received: by lbol5 with SMTP id l5so406545lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 01:37:49 -0700 (PDT)
+	Wed, 16 May 2012 03:50:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=UaSbTeuJ6f12DJ5Bmk1W1IC/Rs0s7Dt+mbsJnG6o9g8=;
-	b=QPDnBCxjLpIaTtcOalWVzDfeEjchbHWLnjd3yBRSOP1CQLUO/XGW/AJTJKAVMiZvwb
-	zV2tFL/h9Ih1bpRMvPsK0i5kxuD6IhZiGV9UUvOBM/G/OimZEeB/iqEWt3pSGzUwQitm
-	zRAUHjPrZ8w0mu6b5xYRP6Iovow0TYuh4dUSd2FgcW2tBYiqvf3KXXyVFnqAb9sfnZnf
-	r4LtJDDAsEp9I64oOxDzY6ujnOYepVfAVbUOeiaHnAhocvKrCX+8PhFRQONQFkBYQEjP
-	RfCFai28qu7zpTvfKPdwqtBNyE/uEaWJEePWMTqM0P0K15ITZ35GqsCmIVkF7dhY+RWo
-	drRw==
+	bh=r9mum1mBFIoI9+ht8srx1UjbaLNjlmOsJBNWb2rtIOk=;
+	b=KAoYNF3YHXfUM6lEDVy9hOg5fXwbHgwrNO8nGdQ8CY3qEA+l6lgsO4VWQup/y6l+HH
+	oglJTHXG6U7LgqgjMQge3B79Z2kFVzMpO5RxnO8xpP46mPprc8bcAxcm8pnMP8BNTPw4
+	K7AwTeYatrOS21mUAjyqE/FhtZhJIHQ+Q9ihfohYS/oepwpP590oELjhDswxVwFeq/p8
+	6MflOM7bYpMoRAxEfJX6JS0kF/AfLqKqPTCwwK0SAGP4D2EmSw8+cx5zICPP0eQxo779
+	B7zvNig5ciup9I2y5F+GcpStnkZvGedYHX89S1lv8R5oMgKp+doMncx1H+MRu5EUxxCX
+	LJJw==
 MIME-Version: 1.0
-Received: by 10.112.88.34 with SMTP id bd2mr612406lbb.33.1337157469649; Wed,
-	16 May 2012 01:37:49 -0700 (PDT)
-Received: by 10.112.10.201 with HTTP; Wed, 16 May 2012 01:37:49 -0700 (PDT)
-In-Reply-To: <jove3h$7qg$1@dough.gmane.org>
-References: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
-	<jove3h$7qg$1@dough.gmane.org>
-Date: Wed, 16 May 2012 10:37:49 +0200
-Message-ID: <CADZ6=auuzv9dF1p58wVXPFdckBUmgk6nmucnarWpqdxMbyHpaw@mail.gmail.com>
+Received: by 10.112.41.130 with SMTP id f2mr355959lbl.5.1337165432552; Wed, 16
+	May 2012 03:50:32 -0700 (PDT)
+Received: by 10.112.10.201 with HTTP; Wed, 16 May 2012 03:50:32 -0700 (PDT)
+In-Reply-To: <1337119302-28549-1-git-send-email-raj.khem@gmail.com>
+References: <1337119302-28549-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 16 May 2012 12:50:32 +0200
+Message-ID: <CADZ6=avUxq8fBHF3UMCZ3T6A-W+tm7ZOVR-kCa48L_4_J9+2ZA@mail.gmail.com>
 From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkHKDQJ/M1HLm8lzTtXjHbp5nGP948Fnlt/xNqtByTUel9rhiyQs3dYOsYKTTlb06lMnS3F
-Subject: Re: Where do I override DISTRO_FEATURES?
+X-Gm-Message-State: ALoCoQlOG00onh+WGDnSdJNbuDgok/pLV3FUmLhIGKEyLR7+T+MsYl28YwqMbqgfV41hOBtQOUSO
+Subject: Re: [toolchain-layer][pull-request] Remove old toolchain recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 08:47:50 -0000
+X-List-Received-Date: Wed, 16 May 2012 11:00:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello Koen,
+Hello *.*,
 
->> I'm trying to remove an element from DISTRO_FEATURES (specifically
->> "ld-is-gold"), but I am unable to find the right spot to do it. The
->> distribution we're using (Angstrom, as it happens) sets this in
->> conf/distro/angstrom-v2012.x.conf.
->
-> Why aren't you using the angstrom release? That isn't using gold.
+> Khem Raj (3):
+> =C2=A0 =C2=A0 =C2=A0eglibc-2.12: Remove
+> =C2=A0 =C2=A0 =C2=A0binutils-2.20: Remove
+> =C2=A0 =C2=A0 =C2=A0gcc-4.5: Remove
 
-We're using angstrom-v2012.x.conf from the git HEAD since we want to
-stay with latest and greatest for now. angstrom-v2012.x.conf is using
-gold. It's OK, really, I think I can handle the gcc-4.5 configure
-build problem.
+Removing gcc-4.5 would kill Texas Instruments DaVinci (dm814x, dm816x)
+support. You only get a heavily patched 2.6.37 kernel from TI for
+these (linux-ti81xx-psp_2.6.37). Unfortunately gcc >=3D 4.6 is unable to
+build a kernel which boots for these platforms. After
+
+Uncompressing linux ... booting the kernel
+
+there is silence. We can reproduce this reliably on a ti8148-evm
+development board. My best guess is it's because of an ancient kernel
+being compiled with a very recent GCC.
 
 Regards,
 Thilo
