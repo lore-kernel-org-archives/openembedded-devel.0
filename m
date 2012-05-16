@@ -1,40 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SUio4-0005CD-Tz
+	(envelope-from <otavio.salvador@gmail.com>) id 1SUir2-0007bp-0p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 20:18:40 +0200
-Received: by eekd49 with SMTP id d49so300281eek.6
+	Wed, 16 May 2012 20:21:44 +0200
+Received: by vbbfr13 with SMTP id fr13so1024178vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 11:08:38 -0700 (PDT)
+	Wed, 16 May 2012 11:11:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=XWMTSvGbCAC3TNFlD9pSWK4XU7VsUraVldns7dP/gMM=;
-	b=kZI+Yhb3q+F+9Zzquf8fcY7AP7nNckYo8oJYvtDhVh3NSH83WdXwawcVXus24tP+bc
-	ivImZAgPu8y5vWOnxSo8PAXVZUZn5HFpWXZCqfzn16CkonFTz0+ZW7uXpd43sqWLex8r
-	kfGp3B4QrtdynyzvqW7vHd2MLIx6Tm9Wag0VSRTvr7JdjQHUeYNExj4Ir2HDlG6GefNX
-	t1nLPG+pB312u3EaPbF6bUQxMXAtOqugJr1CsjS1YSXcYdcXvFUdvjsVyX8Dw6AzOchL
-	m4i+AlmEoZyMebWM6bZ2vbDxhfYe8IQrpkrTUANW665mtU48yydXBrCOY1KJ+VEyRIQL
-	T0vQ==
-Received: by 10.14.47.136 with SMTP id t8mr867307eeb.84.1337191718287; Wed, 16
-	May 2012 11:08:38 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=/asKvQI+H0j4qk0fh/io0Pp9Ldc5BFCdVvQPiIRwR2U=;
+	b=t5jQB9s5Z2TNb7Hc3iaayV5i2fZOkL6rh4fmD8WyzlTQRtAgVGu1zCXP9tCBpsL5Cw
+	An3Zyh8CAShHuaYwiqKYwecS2q7elhnhqDlLYBu2KJJ0z9E73owssb5Ror81J3JEnk8Q
+	8Q4GB3/OUF7LkrZV/yk/t5Y5eiIyOvajrNkAzVfpiF7PtalBPu63c6IDSvwHtlSJlJBu
+	ai957kfJaDnGvoNXXIjy9X701MwZUbxHaIjVKb0NHA1WeqmJvyVxNfvmkvtlX0ZgjoYU
+	3KoXRxvIZnRf5Nyo04Z9I9jp0Fz+UXCXQNN9xdHlrvdGkwm35cUY8aNfHmxzWjwMzS4o
+	c6xA==
 MIME-Version: 1.0
-Received: by 10.14.2.132 with HTTP; Wed, 16 May 2012 11:08:03 -0700 (PDT)
-In-Reply-To: <CADZ6=asQ37VTM9RE5b53KYn6-dMTgnnXCbC50=c7SdKvCrziXw@mail.gmail.com>
-References: <1337119302-28549-1-git-send-email-raj.khem@gmail.com>
-	<CADZ6=avUxq8fBHF3UMCZ3T6A-W+tm7ZOVR-kCa48L_4_J9+2ZA@mail.gmail.com>
-	<4FB388F8.2000802@mlbassoc.com>
-	<CADZ6=at=H9cGJcyMvSuwVieMzV0hAPx37TbBcUwGS3yTeTKk6g@mail.gmail.com>
-	<4FB391D1.10607@mlbassoc.com>
-	<CADZ6=av1G6NsBOZu=sCt47OoK=OPDn2MP7gZTnfD+7NdrwzG2A@mail.gmail.com>
-	<4FB3A136.8020607@mlbassoc.com>
-	<CADZ6=auEEjJn38PcJTaW=-HKwBz0sPj4OouQtNfCP_rc1x0xGA@mail.gmail.com>
-	<CAMKF1sp4c4bvh32evDREWKQr92A4q=xFGzBdqQn1ecZYBt1kQw@mail.gmail.com>
-	<CADZ6=asQ37VTM9RE5b53KYn6-dMTgnnXCbC50=c7SdKvCrziXw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 May 2012 11:08:03 -0700
-Message-ID: <CAMKF1sqJ3Bq0g0wr0i48D85n1gGGR3dtdbMUsOKnrUAr5wMvnw@mail.gmail.com>
+Received: by 10.220.141.207 with SMTP id n15mr3080951vcu.68.1337191901951;
+	Wed, 16 May 2012 11:11:41 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.152.82 with HTTP; Wed, 16 May 2012 11:11:41 -0700 (PDT)
+In-Reply-To: <1337187361-5043-1-git-send-email-obi@opendreambox.org>
+References: <1337187361-5043-1-git-send-email-obi@opendreambox.org>
+Date: Wed, 16 May 2012 15:11:41 -0300
+X-Google-Sender-Auth: cc1KgtkX3tiidQBtFdgwLMfesR0
+Message-ID: <CAP9ODKr0_Gw-bxct+8R1qQDYboqA-e2q32X9XS_mnWGHF=KAdA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [toolchain-layer][pull-request] Remove old toolchain recipes
+Subject: Re: [meta-oe][PATCH] systemd.bbclass: drop postrm, use prerm instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 18:18:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 May 2012 18:21:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 16, 2012 at 9:47 AM, Thilo Fromm <fromm@dresearch-fe.de> wrote:
+On Wed, May 16, 2012 at 1:56 PM, Andreas Oberritter
+<obi@opendreambox.org> wrote:
+> * Calling "systemctl disable" from postrm is too late and
+> =A0causes the following error:
 >
-> Actually we'd like to stay on HEAD and build our own distribution on
-> top of that. Hence I'm more interested in getting ti81xx-psp-2.6.37 to
-> work with gcc-4.7. I'll try Martin Jansa's hint
-> (-mno-unaligned-access) next.
+> | Failed to issue method call: No such file or directory
+>
+> * Messing with $D is not needed in *rm scripts.
+>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 
-then use the default gcc that angstrom head is using which is 4.7 and also be
-ready to experience some bugs as well yes -mno-unaligned-access is
-needed for kernel
-in some cases but eventually I think new kernel should be able to handle them
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
