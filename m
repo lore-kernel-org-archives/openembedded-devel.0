@@ -1,40 +1,32 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SUfum-0002Za-D7
+	(envelope-from <martin.jansa@gmail.com>) id 1SUg9J-00057q-8r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 17:13:24 +0200
-Received: by lbol5 with SMTP id l5so604228lbo.6
+	Wed, 16 May 2012 17:28:25 +0200
+Received: by eaal1 with SMTP id l1so240181eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 08:03:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=86aWPKq5+98Xr6wkHmDLC/OJAt9CJVXAwOZjyFmHMCc=;
-	b=MkqwkuE1MSsHnCFtrpc6tmcfVrBPtPytn62KL+S5II+ojJJWCPFOdJirwHP3U4Ner+
-	nKwIhRUkV6pb5LyMh0bdHUdbMsOGHt/3uMoHKxsfk+Y/AT7tbxGzhz54Rukd/kJC5dR4
-	YWHt8CNLTv8oygaquOFa81h02maILIdYPeOBMEg9YGbgrTHpM/L7/i2dWIiTJ7HQ5CI9
-	l00UTOtEIpfADD+CB0FohfnD9h4u/ZgI0SvWjpR2RmiJn6HDLuQhsFNV5/+9cEkT0yiH
-	KOUk00mkG9fKFZzvkx3gXuW/lkXC5aAQOLUFDBiOs+U1/3rJYbn3Wun8efNOUTegQe9E
-	rkzQ==
-MIME-Version: 1.0
-Received: by 10.112.88.34 with SMTP id bd2mr1154378lbb.33.1337180602853; Wed,
-	16 May 2012 08:03:22 -0700 (PDT)
-Received: by 10.112.10.201 with HTTP; Wed, 16 May 2012 08:03:22 -0700 (PDT)
-In-Reply-To: <4FB3A136.8020607@mlbassoc.com>
-References: <1337119302-28549-1-git-send-email-raj.khem@gmail.com>
-	<CADZ6=avUxq8fBHF3UMCZ3T6A-W+tm7ZOVR-kCa48L_4_J9+2ZA@mail.gmail.com>
-	<4FB388F8.2000802@mlbassoc.com>
-	<CADZ6=at=H9cGJcyMvSuwVieMzV0hAPx37TbBcUwGS3yTeTKk6g@mail.gmail.com>
-	<4FB391D1.10607@mlbassoc.com>
-	<CADZ6=av1G6NsBOZu=sCt47OoK=OPDn2MP7gZTnfD+7NdrwzG2A@mail.gmail.com>
-	<4FB3A136.8020607@mlbassoc.com>
-Date: Wed, 16 May 2012 17:03:22 +0200
-Message-ID: <CADZ6=auEEjJn38PcJTaW=-HKwBz0sPj4OouQtNfCP_rc1x0xGA@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
+	Wed, 16 May 2012 08:18:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=0CEgQGMCjQyGtWMMpBhLsYE0N55RJWCWbOubxWwgqJE=;
+	b=iDwOhiHEak8J4L5gGJfzT0PXHiM/PMqIkGBqUTp7WciQ4SrIpNU3kkx6FRD2pzhVuY
+	ks2yZyFa/ilgogY9TnIUjVqOBlNmp4quJ9iwOemdksKxfNW/rc65NlfIF5LJrO20zAm5
+	rm2RwLjop5YjdbZkLYR4hvTHfFy1xWL0iBSq6X3P37bDps3h4+OHqQwlH+cpYNJuZ3xd
+	bqQ9BJoEGhVOy0r+mCzdzB8gwLPK7xIweaIKLmoeFgwemCXFdZnFhUAYu2Q33gxSGO3v
+	L9jzb99Bd/cMHkSfoVfVrauzRh7YXPfVJ/beyQCsCm2KujjMbNRjvBOblPovAZmg1h+C
+	n8Tg==
+Received: by 10.14.22.6 with SMTP id s6mr729570ees.53.1337181504051;
+	Wed, 16 May 2012 08:18:24 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id v46sm13774796eef.11.2012.05.16.08.18.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 May 2012 08:18:23 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmLyxbnUP6XdNURoG6RAFGW8UB+Ury7Vuy06dulq569ChZJ2twipKGjzOncU/bJ2WAR/ska
-Subject: Re: [toolchain-layer][pull-request] Remove old toolchain recipes
+Date: Wed, 16 May 2012 17:18:14 +0200
+Message-Id: <1337181494-26467-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH] libnl: bump PE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,69 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 15:13:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 May 2012 15:28:25 -0000
 
-Hello Gary,
+* libnl-2 in oe-core has PE 1, so in order to have upgrade patch from libnl-2 to libnl-3 we need PE 1 here too
 
-[ ti81xx-psp-2.6.37 defconfig ]
->>> The only real differences (modulo the hardware/peripherals in use)
->>> are some of the kernel debugging settings. =C2=A0Perhaps they are causi=
-ng
->>> some problems with the newer compiler. =C2=A0The diffs between our
->>> configurations
->>> are attached.
->>
->> Thanks, but I don't think I will disable most of the debugging
->> features for now. We have e.g. memory leak reports by the kernel
->> memchecker in ext4. Given the pitiful state of linux-ti81xx-psp_2.6.37
->> in general I'm not willing to give up the little debug info I get.
->
-> BTW, do you know if TI ever plans on updating the kernel? =C2=A02.6.37 is=
- so
-> painfully old...
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/libnl/libnl_3.2.3.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-This is subject to speculation. David Illies, our TI field application
-engineer, keeps telling us that 3.2 will be supported "eventually". I
-personally don't think they ever will - the commit history in their
-public git does not look like anyone is doing any portage work. Plus
-3.2, the version they keep mentioning, is starting to smell oldish as
-well. I would very much like to see support for dm81xx in something
-_current_, but it's unrealistic given previous experiences with TI.
+diff --git a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb b/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
+index 190ea4c..38d34bf 100644
+--- a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
++++ b/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
+@@ -2,6 +2,8 @@ DESCRIPTION = "libnl is a library for applications dealing with netlink sockets.
+ HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+ SECTION = "libs/network"
+ 
++PE = "1"
++
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc"
+ 
+-- 
+1.7.8.6
 
->>> the stock one from meta-ti + some platform patches. =C2=A0Perhaps there=
-'s
->>> something else to look at.
->>> =C2=A0meta-ti/recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb
->>
->> We're almost using this recipe too. We just appended AUFS integration
->> and custom package management installer scripts for the kernel. I'll
->> look into -mno-unaligned-access w/ gcc-4.7 as Gary suggested as soon
->> as I am finished moving gcc-4.5 into HidaV so we can actually build
->> firmware again :)
->
->
-> Good luck
->
-
-Thanks, looks like I'll need it :)  By the way, we successfully pulled
-gcc-4.5 in our layer and are building with gcc-4.5 on angstrom-v2012.x
-right now. Since you're on 8148 as well, and in case you would like to
-stay up-to-date on what we're doing, just check
-https://github.com/DFE/HidaV from time to time.
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
