@@ -1,35 +1,32 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SUir2-0007bp-0p
+	(envelope-from <martin.jansa@gmail.com>) id 1SUlNE-0006rM-81
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 20:21:44 +0200
-Received: by vbbfr13 with SMTP id fr13so1024178vbb.6
+	Wed, 16 May 2012 23:03:20 +0200
+Received: by wibhm14 with SMTP id hm14so1048863wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 11:11:42 -0700 (PDT)
+	Wed, 16 May 2012 13:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=/asKvQI+H0j4qk0fh/io0Pp9Ldc5BFCdVvQPiIRwR2U=;
-	b=t5jQB9s5Z2TNb7Hc3iaayV5i2fZOkL6rh4fmD8WyzlTQRtAgVGu1zCXP9tCBpsL5Cw
-	An3Zyh8CAShHuaYwiqKYwecS2q7elhnhqDlLYBu2KJJ0z9E73owssb5Ror81J3JEnk8Q
-	8Q4GB3/OUF7LkrZV/yk/t5Y5eiIyOvajrNkAzVfpiF7PtalBPu63c6IDSvwHtlSJlJBu
-	ai957kfJaDnGvoNXXIjy9X701MwZUbxHaIjVKb0NHA1WeqmJvyVxNfvmkvtlX0ZgjoYU
-	3KoXRxvIZnRf5Nyo04Z9I9jp0Fz+UXCXQNN9xdHlrvdGkwm35cUY8aNfHmxzWjwMzS4o
-	c6xA==
-MIME-Version: 1.0
-Received: by 10.220.141.207 with SMTP id n15mr3080951vcu.68.1337191901951;
-	Wed, 16 May 2012 11:11:41 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.152.82 with HTTP; Wed, 16 May 2012 11:11:41 -0700 (PDT)
-In-Reply-To: <1337187361-5043-1-git-send-email-obi@opendreambox.org>
-References: <1337187361-5043-1-git-send-email-obi@opendreambox.org>
-Date: Wed, 16 May 2012 15:11:41 -0300
-X-Google-Sender-Auth: cc1KgtkX3tiidQBtFdgwLMfesR0
-Message-ID: <CAP9ODKr0_Gw-bxct+8R1qQDYboqA-e2q32X9XS_mnWGHF=KAdA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=w4LLSSfKB4zEpkzM8Hh/P9LL/VP/nlt7vIg6BeKQqjA=;
+	b=DUT2LtY/139tqTVsy/iaLXh3r5FqPGBxuV2yg95YagIQziifwai5bHucxjaerChCqc
+	3Wj3IYtZM1IfcH/MsBAqJGX+wHIkPEEPw9pQzZoVMs6qD+Ra2mCHQwWoXfLPudsbXQi5
+	Ec69bFDazOjJGsWYnof8KTorFR3K8+jGoxpoGtkPCpzUL1y0C3csIJvC7ZuGuSBySi3S
+	YdmuAdAHoLGsH3f0XB/vDMXOxnpzd5BtYY16rV4yeM2/oeGHMwTpXnuPN7QzQgdvDkaB
+	Q9V+r3kZww4l9XN/zsguAF4Ltv6Bl7wdHmffEdRcfhxJ6Xk38hDhIp6uSYhCikIpNFB4
+	z4HQ==
+Received: by 10.180.107.99 with SMTP id hb3mr15353910wib.0.1337201584952;
+	Wed, 16 May 2012 13:53:04 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id fl2sm12845725wib.2.2012.05.16.13.53.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 May 2012 13:53:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] systemd.bbclass: drop postrm, use prerm instead
+Date: Wed, 16 May 2012 22:53:00 +0200
+Message-Id: <1337201580-25725-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][RFC] libnl: upgrade to 3.2.9 and fix upgrade path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +40,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 18:21:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 May 2012 21:03:20 -0000
 
-On Wed, May 16, 2012 at 1:56 PM, Andreas Oberritter
-<obi@opendreambox.org> wrote:
-> * Calling "systemctl disable" from postrm is too late and
-> =A0causes the following error:
->
-> | Failed to issue method call: No such file or directory
->
-> * Messing with $D is not needed in *rm scripts.
->
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+* COPYING change is only formal from
+  http://git.infradead.org/users/tgr/libnl.git/commitdiff/c857625be074a7b9ef6adbcdde986a0b23aae901
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../libnl/{libnl_3.2.3.bb => libnl_3.2.9.bb}       |   14 +++++++++-----
+ 1 files changed, 9 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/libnl/{libnl_3.2.3.bb => libnl_3.2.9.bb} (74%)
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+diff --git a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb b/meta-oe/recipes-support/libnl/libnl_3.2.9.bb
+similarity index 74%
+rename from meta-oe/recipes-support/libnl/libnl_3.2.3.bb
+rename to meta-oe/recipes-support/libnl/libnl_3.2.9.bb
+index 38d34bf..11b901c 100644
+--- a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
++++ b/meta-oe/recipes-support/libnl/libnl_3.2.9.bb
+@@ -5,14 +5,14 @@ SECTION = "libs/network"
+ PE = "1"
+ 
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ DEPENDS = "flex-native bison-native"
+ 
+ SRC_URI = "http://www.infradead.org/~tgr/${BPN}/files/${BP}.tar.gz"
+ 
+-SRC_URI[md5sum] = "dbbb44801e833cf9ca4fdc943f2a58ee"
+-SRC_URI[sha256sum] = "69f4a360350ea61f2c988f947c251995c04093c74743eae9eeffba85846ef007"
++SRC_URI[md5sum] = "c13adec0239b266207fff07d79e5ce9e"
++SRC_URI[sha256sum] = "9f23e9460bd9bb7fbe09af5eb281e4a43a26fa245ea864ed5e28fe4e8118af63"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -32,6 +32,8 @@ do_install_append() {
+ FILES_${PN} = "${libdir}/libnl-3.so.* \
+                ${libdir}/libnl.so.* \
+                ${sysconfdir}"
++RREPLACES_${PN} = "libnl2"
++RCONFLICTS_${PN} = "libnl2"
+ FILES_${PN}-dbg += "${libdir}/libnl/cli/*/.debug"
+ FILES_${PN}-dev += "${libdir}/libnl/cli/*/*.so \
+                     ${libdir}/libnl/cli/*/*.la"
+@@ -44,5 +46,7 @@ FILES_${PN}-cli   = "${libdir}/libnl-cli-3.so.* \
+ FILES_${PN}-route = "${libdir}/libnl-route-3.so.*"
+ FILES_${PN}-nf    = "${libdir}/libnl-nf-3.so.*"
+ FILES_${PN}-genl  = "${libdir}/libnl-genl-3.so.* \
+-                     ${libdir}/libnl-genl.so.*"
+-
++                     ${libdir}/libnl-genl.so.* \
++                     ${sbindir}/genl-ctrl-list"
++RREPLACES_${PN}-genl = "libnl-genl2 libnl-genl-3-200"
++RCONFLICTS_${PN}-genl = "libnl-genl2 libnl-genl-3-200"
+-- 
+1.7.8.6
+
 
 
