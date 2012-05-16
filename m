@@ -1,36 +1,40 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SUiYK-0004Yu-Bk
+	(envelope-from <raj.khem@gmail.com>) id 1SUio4-0005CD-Tz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 20:02:24 +0200
-Received: by wgbdr1 with SMTP id dr1so899642wgb.24
+	Wed, 16 May 2012 20:18:40 +0200
+Received: by eekd49 with SMTP id d49so300281eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 10:52:23 -0700 (PDT)
+	Wed, 16 May 2012 11:08:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ho5R47C6cdK6J3XqrDBi9AoedJddcKoSwIUbaZPGgkc=;
-	b=sJb0Fs3r2TSj8g5w8TrNR6v4ODBnKE3zI2tb9Uh18nzsQ8+R9By36zZ8arFqJfkHO4
-	xUsLrWFfV5398padbGzUzbDpukSa//ISRaNZjE3TTsjPm66O5hKrxbivmKNihanv3jn1
-	sXrhmBwwn+sRUrs0pZ+QB1UBzdt4G/g4q//v4+XHZIblAe2r5YeZpryEiN6UnkdBYrEw
-	sfpVkjdhWW0a6I1oNBNDjwxOgvowkHhbGGDdxBIX+q080p06TBvIMZXUf5tkjQwq8VLE
-	Bt7JllDCCoDqeCFtVhEY4/Ozb2iMMiqI3co/D/KaerzjWiUMgd1iK+VITV9HnxYEQvHs
-	NW6Q==
-Received: by 10.180.103.42 with SMTP id ft10mr2062078wib.18.1337190742930;
-	Wed, 16 May 2012 10:52:22 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id n11sm11193922wiv.9.2012.05.16.10.52.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 16 May 2012 10:52:22 -0700 (PDT)
-Date: Wed, 16 May 2012 19:52:24 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120516175224.GE3154@jama.jama.net>
-References: <1337181494-26467-1-git-send-email-Martin.Jansa@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=XWMTSvGbCAC3TNFlD9pSWK4XU7VsUraVldns7dP/gMM=;
+	b=kZI+Yhb3q+F+9Zzquf8fcY7AP7nNckYo8oJYvtDhVh3NSH83WdXwawcVXus24tP+bc
+	ivImZAgPu8y5vWOnxSo8PAXVZUZn5HFpWXZCqfzn16CkonFTz0+ZW7uXpd43sqWLex8r
+	kfGp3B4QrtdynyzvqW7vHd2MLIx6Tm9Wag0VSRTvr7JdjQHUeYNExj4Ir2HDlG6GefNX
+	t1nLPG+pB312u3EaPbF6bUQxMXAtOqugJr1CsjS1YSXcYdcXvFUdvjsVyX8Dw6AzOchL
+	m4i+AlmEoZyMebWM6bZ2vbDxhfYe8IQrpkrTUANW665mtU48yydXBrCOY1KJ+VEyRIQL
+	T0vQ==
+Received: by 10.14.47.136 with SMTP id t8mr867307eeb.84.1337191718287; Wed, 16
+	May 2012 11:08:38 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1337181494-26467-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] libnl: bump PE
+Received: by 10.14.2.132 with HTTP; Wed, 16 May 2012 11:08:03 -0700 (PDT)
+In-Reply-To: <CADZ6=asQ37VTM9RE5b53KYn6-dMTgnnXCbC50=c7SdKvCrziXw@mail.gmail.com>
+References: <1337119302-28549-1-git-send-email-raj.khem@gmail.com>
+	<CADZ6=avUxq8fBHF3UMCZ3T6A-W+tm7ZOVR-kCa48L_4_J9+2ZA@mail.gmail.com>
+	<4FB388F8.2000802@mlbassoc.com>
+	<CADZ6=at=H9cGJcyMvSuwVieMzV0hAPx37TbBcUwGS3yTeTKk6g@mail.gmail.com>
+	<4FB391D1.10607@mlbassoc.com>
+	<CADZ6=av1G6NsBOZu=sCt47OoK=OPDn2MP7gZTnfD+7NdrwzG2A@mail.gmail.com>
+	<4FB3A136.8020607@mlbassoc.com>
+	<CADZ6=auEEjJn38PcJTaW=-HKwBz0sPj4OouQtNfCP_rc1x0xGA@mail.gmail.com>
+	<CAMKF1sp4c4bvh32evDREWKQr92A4q=xFGzBdqQn1ecZYBt1kQw@mail.gmail.com>
+	<CADZ6=asQ37VTM9RE5b53KYn6-dMTgnnXCbC50=c7SdKvCrziXw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 May 2012 11:08:03 -0700
+Message-ID: <CAMKF1sqJ3Bq0g0wr0i48D85n1gGGR3dtdbMUsOKnrUAr5wMvnw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [toolchain-layer][pull-request] Remove old toolchain recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,69 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 18:02:24 -0000
-X-Groupsio-MsgNum: 38824
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vv4Sf/kQfcwinyKX"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 May 2012 18:18:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
---vv4Sf/kQfcwinyKX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, May 16, 2012 at 9:47 AM, Thilo Fromm <fromm@dresearch-fe.de> wrote:
+>
+> Actually we'd like to stay on HEAD and build our own distribution on
+> top of that. Hence I'm more interested in getting ti81xx-psp-2.6.37 to
+> work with gcc-4.7. I'll try Martin Jansa's hint
+> (-mno-unaligned-access) next.
 
-On Wed, May 16, 2012 at 05:18:14PM +0200, Martin Jansa wrote:
-> * libnl-2 in oe-core has PE 1, so in order to have upgrade patch from lib=
-nl-2 to libnl-3 we need PE 1 here too
+then use the default gcc that angstrom head is using which is 4.7 and also be
+ready to experience some bugs as well yes -mno-unaligned-access is
+needed for kernel
+in some cases but eventually I think new kernel should be able to handle them
 
-upgrade path would be even better if someone adds RREPLACES/RCONFLICTS
-magic to resolve this:
 
- * check_data_file_clashes: Package libnl-3-200 wants to install file /etc/=
-libnl/pktloc
-   But that file is already provided by package  * libnl2
-
-Cheers,
-
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-support/libnl/libnl_3.2.3.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb b/meta-oe/recip=
-es-support/libnl/libnl_3.2.3.bb
-> index 190ea4c..38d34bf 100644
-> --- a/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
-> +++ b/meta-oe/recipes-support/libnl/libnl_3.2.3.bb
-> @@ -2,6 +2,8 @@ DESCRIPTION =3D "libnl is a library for applications deal=
-ing with netlink sockets.
->  HOMEPAGE =3D "http://www.infradead.org/~tgr/libnl/"
->  SECTION =3D "libs/network"
-> =20
-> +PE =3D "1"
-> +
->  LICENSE =3D "LGPLv2.1"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2b41e13261a330ee784153ecbb6a8=
-2bc"
-> =20
-> --=20
-> 1.7.8.6
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vv4Sf/kQfcwinyKX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+z6VgACgkQN1Ujt2V2gBzKxwCeIW4zR0lylCwHvjjHQAs4DgGA
-dN4AnjW4lNvDliBLOwc3QYo1vF5fhIpS
-=QZ67
------END PGP SIGNATURE-----
-
---vv4Sf/kQfcwinyKX--
