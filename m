@@ -1,28 +1,28 @@
 Received: from tritech.se ([46.59.120.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Mats.Karrman@tritech.se>) id 1SUdod-0000n5-Sp
+	(envelope-from <Mats.Karrman@tritech.se>) id 1SUeRN-0006w6-Pn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 May 2012 14:58:55 +0200
+	Wed, 16 May 2012 15:38:58 +0200
 Received: from post.tritech.se (post.tritech.se [10.75.60.100])
-	by tritech.se (8.14.3/8.14.3) with ESMTP id q4GCmnOl015097
+	by tritech.se (8.14.3/8.14.3) with ESMTP id q4GDSpoa015248
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 14:48:54 +0200
+	Wed, 16 May 2012 15:28:56 +0200
 Received: from POST.tritech.se ([fe80::b4fc:968e:bbef:54cb]) by
 	post.tritech.se ([fe80::b4fc:968e:bbef:54cb%10]) with mapi id
-	14.02.0283.003; Wed, 16 May 2012 14:48:49 +0200
+	14.02.0283.003; Wed, 16 May 2012 15:28:51 +0200
 From: =?iso-8859-1?Q?Mats_K=E4rrman?= <Mats.Karrman@tritech.se>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: packages built but not deployed
-Thread-Index: Ac0zX0zqdq1Y83LVSJa7iz0ZgkF3aw==
-Date: Wed, 16 May 2012 12:48:48 +0000
-Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4256D869@post.tritech.se>
+Thread-Topic: packages built but not deployed - RECALL
+Thread-Index: AQHNM2fUTrAG0gQS9kCgpto/QjX+gg==
+Date: Wed, 16 May 2012 13:28:50 +0000
+Message-ID: <ED3E0BCACD909541BA94A34C4A164D4C4256D893@post.tritech.se>
 Accept-Language: en-US, sv-SE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [194.132.137.38]
 MIME-Version: 1.0
-Subject: packages built but not deployed
+Subject: packages built but not deployed - RECALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,11 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 12:58:56 -0000
+X-List-Received-Date: Wed, 16 May 2012 13:38:58 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+Sorry, I'm too tired...=0A=
+the packages are called libcunit... and not cunit... that I was looking for=
+.=0A=
+// Mats=0A=
+________________________________________=0A=
+From: Mats K=E4rrman=0A=
+Sent: Wednesday, May 16, 2012 2:48 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: packages built but not deployed=0A=
+=0A=
 Hi,=0A=
 =0A=
 I have made an OE-classic recipe for CUnit, see below, that I'm using toget=
