@@ -1,31 +1,47 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from db3ehsobe006.messaging.microsoft.com ([213.199.154.144]
+	helo=db3outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id 1SUpW1-0002A2-GM; Thu, 17 May 2012 03:28:29 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SUpML-0004Ek-LK>; Thu, 17 May 2012 03:18:29 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69) with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SUpML-0007Pn-Io>; Thu, 17 May 2012 03:18:29 +0200
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1SUpMI-0003jS-G4; Thu, 17 May 2012 03:18:26 +0200
-Date: Thu, 17 May 2012 03:18:26 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Message-ID: <20120517011824.GA12505@mi.fu-berlin.de>
-References: <4FAC361D.60609@balister.org> <4FB2CBD7.8070700@kernelconcepts.de>
+	(envelope-from <craig.mcqueen@beamcommunications.com>)
+	id 1SUqoF-0000NA-VM for openembedded-devel@lists.openembedded.org;
+	Thu, 17 May 2012 04:51:24 +0200
+Received: from mail105-db3-R.bigfish.com (10.3.81.249) by
+	DB3EHSOBE005.bigfish.com (10.3.84.25) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 17 May 2012 01:55:49 +0000
+Received: from mail105-db3 (localhost [127.0.0.1])	by
+	mail105-db3-R.bigfish.com (Postfix) with ESMTP id 47C7C404C5	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 17 May 2012 01:55:49 +0000 (UTC)
+X-SpamScore: 0
+X-BigFish: PS0(zzzz1202hzz8275ch8275dhz2dh2a8h668h839h93fhd25h)
+X-Forefront-Antispam-Report: CIP:111.221.66.13; KIP:(null); UIP:(null); IPV:NLI;
+	H:HKNPRD0204HT004.apcprd02.prod.outlook.com; RD:none; EFVD:NLI
+Received: from mail105-db3 (localhost.localdomain [127.0.0.1]) by mail105-db3
+	(MessageSwitch) id 1337219746650436_30815;
+	Thu, 17 May 2012 01:55:46 +0000 (UTC)
+Received: from DB3EHSMHS011.bigfish.com (unknown [10.3.81.248])	by
+	mail105-db3.bigfish.com (Postfix) with ESMTP id 9A95E3600EC	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 17 May 2012 01:55:46 +0000 (UTC)
+Received: from HKNPRD0204HT004.apcprd02.prod.outlook.com (111.221.66.13) by
+	DB3EHSMHS011.bigfish.com (10.3.87.111) with Microsoft SMTP Server (TLS)
+	id 14.1.225.23; Thu, 17 May 2012 01:55:45 +0000
+Received: from HKNPRD0204MB116.apcprd02.prod.outlook.com ([169.254.12.104]) by
+	HKNPRD0204HT004.apcprd02.prod.outlook.com ([10.9.122.185]) with mapi
+	id 14.15.0074.002; Thu, 17 May 2012 01:55:49 +0000
+From: Craig McQueen <craig.mcqueen@beamcommunications.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: base-passwd URI invalid in OE classic
+Thread-Index: Ac0z0C4obFiT5HTsTbO2Eh5g3m6l4Q==
+Date: Thu, 17 May 2012 01:55:46 +0000
+Message-ID: <DB8F1B3EEF94C3439BFFE674EB05E3CC02844E@HKNPRD0204MB116.apcprd02.prod.outlook.com>
+Accept-Language: en-AU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.9.122.7]
 MIME-Version: 1.0
-In-Reply-To: <4FB2CBD7.8070700@kernelconcepts.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
-Cc: openembedded-members@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] Fwd: Linuxtag 2012
+X-OriginatorOrg: beamcommunications.com
+Subject: base-passwd URI invalid in OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 01:28:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 May 2012 02:51:24 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, May 15, 2012 at 11:34:15PM +0200, Florian Boor wrote:
-> Hi all,
-> 
-> Am 10.05.2012 23:41, schrieb Philip Balister:
-> > I encourage anyone involved in OpenEmbedded who can get to Linuxtag for
-> > even a day to help it. It is a really fun time, and Berlin is a really
-> > nice place to visit.
-> 
-> unluckily there was not much of feedback so far :-(
-> We have a deadline for ordering exhibitor passes ending tomorrow 6pm. It makes
-> sense to have a two or three of us with these in order to be able to enter the
-> buildings before the visitors.
-> 
-> > We encourage people to bring devices that are made with OpenEmbedded and
-> > related technology to show off at the stand.
-> 
-> I want to emphasize this one more time. It is very unlikely that I will be able
-> to make it there and if I do not get a few people together who will man the
-> booth I will have to cancel our presence there :-(.
-> 
-> Greetings
-> 
-> Florian
+SGVsbG8sDQoNCkknbSB0cnlpbmcgdG8gYnVpbGQgT0UgY2xhc3NpYyBmb3IgaS5NWDI4LCBmb2xs
+b3dpbmcgaW5zdHJ1Y3Rpb25zIGF0Og0KaHR0cDovL3d3dy5pbXhkZXYub3JnL3dpa2kvaW5kZXgu
+cGhwP3RpdGxlPUFsbF9Cb2FyZHNfT3BlbkVtYmVkZGVkDQoNCkknbSB0cnlpbmcgdG8gcnVuOg0K
+ICAgYml0YmFrZSBib290c3RyYXAtaW1hZ2UNCg0KQnV0IGl0J3MgYnJlYWtpbmcgb24gYmFzZS1w
+YXNzd2QsIGRvd25sb2FkaW5nIGZyb206DQpodHRwOi8vc25hcHNob3QuZGViaWFuLm5ldC9hcmNo
+aXZlL3Bvb2wvYi9iYXNlLXBhc3N3ZC9iYXNlLXBhc3N3ZF8zLjUuMjAudGFyLmd6DQp3aGljaCBm
+YWlscyBNRDUgYmVjYXVzZSBpdCBpc24ndCBhIHZhbGlkIGxpbmsuDQoNCkkgZm91bmQgdGhpcyBp
+cyB2YWxpZDoNCmh0dHA6Ly9zbmFwc2hvdC5kZWJpYW4ub3JnL2FyY2hpdmUvZGViaWFuLzIwMTIw
+MTAxVDAzMzA0MlovcG9vbC9tYWluL2IvYmFzZS1wYXNzd2QvYmFzZS1wYXNzd2RfMy41LjIwLnRh
+ci5neg0KDQpCdXQgaXMgdGhhdCBzdWl0YWJsZSB0byBwdXQgaW4gU1JDX1VSSSBpbiBiYXNlLXBh
+c3N3ZF8zLjUuMjAuYmI/DQoNCldoYXQgaXMgYSBnb29kIHdheSB0byBmaXggdGhpcyBwcm9ibGVt
+Pw0KDQpSZWdhcmRzLA0KQ3JhaWcgTWNRdWVlbg0KDQo=
 
-Hi,
-
-my second son was born today, so I can not make any promise for the linuxtag.
-So I think it is really better to cancel the whole booth. That is really sad, but maybee
-next time we should ask a lot earlier if we can really man the booth.
-
-Bye Henning
 
 
