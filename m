@@ -1,36 +1,32 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SUxjE-0004O5-Vc
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 12:14:41 +0200
-Received: by dalh21 with SMTP id h21so1975436dal.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 03:04:37 -0700 (PDT)
+	(envelope-from <otavio.salvador@gmail.com>)
+	id 1SUyZt-00013T-Vz; Thu, 17 May 2012 13:09:06 +0200
+Received: by pbbrq2 with SMTP id rq2so2141080pbb.6
+	for <multiple recipients>; Thu, 17 May 2012 03:59:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=zlNL+hGB8gfnrzprCC/MF2tjB3IW5BQZ7Lnpd0HALVc=;
-	b=LVZQDYU2Y96nhtDTeYgsgfFFoDoVa0CFWCtuk+aujt/1b1SyrUxWCb/2mLTRsJDvAV
-	vmQYKManLrTiW7E/45zLrcwLZ32YKHTAlMEwLKto3C0b/GT8zXZWn+LhFjp8mJTW+r6b
-	cmIP36uD8w4SV668gt2fgcVSuOWprDNN3TtEWceRWoU9MVYqDW9QupuoIBFqdqauQ5NS
-	YbXDTDIjJzJ+u7vXIGOqSTHp82wg3p6taaEH3G1cSOvSX3VzTYuNWAojUnFkvxp0KKKb
-	xX/AwcfGsDy5NF+7GWIP+b7KDeHNDludCy6+t0aFJpLCboJ64fbkl0zsFVuV3LWJnUGJ
-	lt1g==
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=xOjJZrAMCWs3TBx3aC5gIeR8t41SntwxoEp1d1v/0xE=;
+	b=Nkf84z1UCGbNPYMbH/v14HB5EhF0+dflpikEo39rlhejDKkuymVwcG71SE0ChyLH1w
+	6cwtUaqt6HvCGkXFyiOWqkYo36wlb6bYI03Jab9BJeveBb6c1x8Bxc25Sz9gjQMMFE1o
+	MlHyzWXEgytAbzcM4serXH+RFAjW+KRx4c1sNZM+ohDDw0qKYV5ylUzJu5tMQIzEuXUX
+	f767L6kswptfu1tCWKr+c/7Dwg8oNEme7Bdc1+edyo/1gkheVXUbPT8jG7KWu+GhLrGq
+	R1jpuJ1aQxaHNXk8kpyuAkc+v7eCCgUNFbhsXeZLLnxIMM/1P7PMJp/eIAxGgixucVN4
+	EQjg==
 MIME-Version: 1.0
-Received: by 10.68.136.65 with SMTP id py1mr26019678pbb.81.1337249077344; Thu,
-	17 May 2012 03:04:37 -0700 (PDT)
+Received: by 10.68.223.129 with SMTP id qu1mr26202768pbc.165.1337252342291;
+	Thu, 17 May 2012 03:59:02 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.68.25.42 with HTTP; Thu, 17 May 2012 03:04:37 -0700 (PDT)
-In-Reply-To: <jp2i06$mvm$1@dough.gmane.org>
-References: <1337246639-5192-1-git-send-email-Martin.Jansa@gmail.com>
-	<jp2i06$mvm$1@dough.gmane.org>
-Date: Thu, 17 May 2012 07:04:37 -0300
-X-Google-Sender-Auth: 6HCaKE06wyvxchff1ZQGVIPZs0c
-Message-ID: <CAP9ODKrHkHux0KGrKWx8FoVOdTVHwD+RujKB3F91Fxj73QPx8A@mail.gmail.com>
+Received: by 10.68.25.42 with HTTP; Thu, 17 May 2012 03:59:02 -0700 (PDT)
+Date: Thu, 17 May 2012 07:59:02 -0300
+X-Google-Sender-Auth: DGm8oC7Jp4UeYRpsz6TMUovepnI
+Message-ID: <CAP9ODKq0aRL6--FcK6o5gaBbk5hE8-Pr8B4S0+V9yN5uKZk+aw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] systemd: create /var/run/utmp
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: [ANNOUNCE] Meta-Broweser layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 10:14:41 -0000
+X-List-Received-Date: Thu, 17 May 2012 11:09:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 17, 2012 at 6:56 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 17-05-12 11:23, Martin Jansa schreef:
->> * it was created by volatiles before,
->
-> If it was done by volatiles before shouldn't it be a tmpfile.d/ snippet
-> instead of do_install_append? /var/run gets clean on boot on a lot of sys=
-tems.
+Hello,
 
-Agreed.
+Our friends at Eukrea has started working at a Chromium specific layer
+and to share work in web browser packaging we opted to merge both
+layers to host different web browser packages. After this the layer
+has been renamed to /meta-browser/.
+
+The meta-browser layer can be used by any project that needs to use
+Firefox and/or Chromium; other browsers can be add to the layer if
+need and it is open for contributions of any interested people.
+
+The layer can be download from
+https://github.com/OSSystems/meta-browser so please update your system
+to use from now on.
+
+We will REMOVE meta-mozilla and meta-chromium next week.
+
+Thanks in advance :-)
 
 --=20
 Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
