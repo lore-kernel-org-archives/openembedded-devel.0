@@ -1,39 +1,31 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SUoqr-0007go-Mx
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 02:45:57 +0200
-Received: by vbbfr13 with SMTP id fr13so1350886vbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2012 17:35:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wDUhUri4d0F9aOc569sTaUU/xS9TXwV0O/aIzpiY5+k=;
-	b=G8b57LMEUiVIfn8yPJfQByECs5iepxZCx/1WhsOPl2lIAEtwqI340cuB5wZX3PhZyk
-	7Dnffn/oLpHfWPm5aCk2VRFX/iQf9jnSTCNZLoE12GgA2UJCcl1B1h34XI/7B8XI4iPy
-	xwE2g/WXCJ3OxVLY9D7Iqcu6BNWtjz+jxkg/4vFcJeO56J9LmRMmLGdq04GpIXxEYc/3
-	C7Gaxb6yB0wrml7BN1h9GIIAEBrbPd1LIzkfZK2q5irJz9smeSVwphg2ECuw/gX1uGUf
-	x+31VdJYMDwxVCRqFSFDIIlg/SH1dZltNf5r9G1MNpogbsYQv9DOAnXyumrru/mlOTJM
-	tkGQ==
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id 1SUpW1-0002A2-GM; Thu, 17 May 2012 03:28:29 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SUpML-0004Ek-LK>; Thu, 17 May 2012 03:18:29 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SUpML-0007Pn-Io>; Thu, 17 May 2012 03:18:29 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1SUpMI-0003jS-G4; Thu, 17 May 2012 03:18:26 +0200
+Date: Thu, 17 May 2012 03:18:26 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Message-ID: <20120517011824.GA12505@mi.fu-berlin.de>
+References: <4FAC361D.60609@balister.org> <4FB2CBD7.8070700@kernelconcepts.de>
 MIME-Version: 1.0
-Received: by 10.52.99.132 with SMTP id eq4mr3178963vdb.19.1337214955353; Wed,
-	16 May 2012 17:35:55 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.152.82 with HTTP; Wed, 16 May 2012 17:35:55 -0700 (PDT)
-In-Reply-To: <CAMKF1srRxYjck6k5uTgBzvcpr7K1CqWAumqbD1vk3T20=Aa9Xg@mail.gmail.com>
-References: <CADZ6=asJ+xLvpodv=u9duDuWs=dp8mLamv=Sj6yJc6B5sjWMrw@mail.gmail.com>
-	<jove3h$7qg$1@dough.gmane.org>
-	<CADZ6=auuzv9dF1p58wVXPFdckBUmgk6nmucnarWpqdxMbyHpaw@mail.gmail.com>
-	<009001cd33a6$3cc91050$b65b30f0$@slingshot.co.nz>
-	<CAMKF1srRxYjck6k5uTgBzvcpr7K1CqWAumqbD1vk3T20=Aa9Xg@mail.gmail.com>
-Date: Wed, 16 May 2012 21:35:55 -0300
-X-Google-Sender-Auth: xzVnOiyrzEgWiXreGd4nmLjQhco
-Message-ID: <CAP9ODKqRVKEHmbDBVWF1rCt-qwH0_e45XVQOjj+bn3yPoVX+og@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Where do I override DISTRO_FEATURES?
+In-Reply-To: <4FB2CBD7.8070700@kernelconcepts.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Cc: openembedded-members@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] Fwd: Linuxtag 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 00:45:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 May 2012 01:28:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, May 16, 2012 at 6:19 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> I have had systemd work with 2.6.34 Koen has some options he mentions
-> you need to enable in kconfig
+On Tue, May 15, 2012 at 11:34:15PM +0200, Florian Boor wrote:
+> Hi all,
+> 
+> Am 10.05.2012 23:41, schrieb Philip Balister:
+> > I encourage anyone involved in OpenEmbedded who can get to Linuxtag for
+> > even a day to help it. It is a really fun time, and Berlin is a really
+> > nice place to visit.
+> 
+> unluckily there was not much of feedback so far :-(
+> We have a deadline for ordering exhibitor passes ending tomorrow 6pm. It makes
+> sense to have a two or three of us with these in order to be able to enter the
+> buildings before the visitors.
+> 
+> > We encourage people to bring devices that are made with OpenEmbedded and
+> > related technology to show off at the stand.
+> 
+> I want to emphasize this one more time. It is very unlikely that I will be able
+> to make it there and if I do not get a few people together who will man the
+> booth I will have to cancel our presence there :-(.
+> 
+> Greetings
+> 
+> Florian
 
-Which udev?
+Hi,
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+my second son was born today, so I can not make any promise for the linuxtag.
+So I think it is really better to cancel the whole booth. That is really sad, but maybee
+next time we should ask a lot earlier if we can really man the booth.
+
+Bye Henning
 
 
