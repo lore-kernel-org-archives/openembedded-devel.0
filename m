@@ -1,33 +1,35 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SUxbU-00015A-20 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 12:06:41 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SUxRm-0005CN-2b for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 11:56:38 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 11:56:38 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1SUxjE-0004O5-Vc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 May 2012 12:14:41 +0200
+Received: by dalh21 with SMTP id h21so1975436dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 11:56:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 May 2012 11:56:22 +0200
-Message-ID: <jp2i06$mvm$1@dough.gmane.org>
+	Thu, 17 May 2012 03:04:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=zlNL+hGB8gfnrzprCC/MF2tjB3IW5BQZ7Lnpd0HALVc=;
+	b=LVZQDYU2Y96nhtDTeYgsgfFFoDoVa0CFWCtuk+aujt/1b1SyrUxWCb/2mLTRsJDvAV
+	vmQYKManLrTiW7E/45zLrcwLZ32YKHTAlMEwLKto3C0b/GT8zXZWn+LhFjp8mJTW+r6b
+	cmIP36uD8w4SV668gt2fgcVSuOWprDNN3TtEWceRWoU9MVYqDW9QupuoIBFqdqauQ5NS
+	YbXDTDIjJzJ+u7vXIGOqSTHp82wg3p6taaEH3G1cSOvSX3VzTYuNWAojUnFkvxp0KKKb
+	xX/AwcfGsDy5NF+7GWIP+b7KDeHNDludCy6+t0aFJpLCboJ64fbkl0zsFVuV3LWJnUGJ
+	lt1g==
+MIME-Version: 1.0
+Received: by 10.68.136.65 with SMTP id py1mr26019678pbb.81.1337249077344; Thu,
+	17 May 2012 03:04:37 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.25.42 with HTTP; Thu, 17 May 2012 03:04:37 -0700 (PDT)
+In-Reply-To: <jp2i06$mvm$1@dough.gmane.org>
 References: <1337246639-5192-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-In-Reply-To: <1337246639-5192-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.3.4
+	<jp2i06$mvm$1@dough.gmane.org>
+Date: Thu, 17 May 2012 07:04:37 -0300
+X-Google-Sender-Auth: 6HCaKE06wyvxchff1ZQGVIPZs0c
+Message-ID: <CAP9ODKrHkHux0KGrKWx8FoVOdTVHwD+RujKB3F91Fxj73QPx8A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] systemd: create /var/run/utmp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,30 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 10:06:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 May 2012 10:14:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, May 17, 2012 at 6:56 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 17-05-12 11:23, Martin Jansa schreef:
+>> * it was created by volatiles before,
+>
+> If it was done by volatiles before shouldn't it be a tmpfile.d/ snippet
+> instead of do_install_append? /var/run gets clean on boot on a lot of sys=
+tems.
 
-Op 17-05-12 11:23, Martin Jansa schreef:
-> * it was created by volatiles before,
+Agreed.
 
-If it was done by volatiles before shouldn't it be a tmpfile.d/ snippet
-instead of do_install_append? /var/run gets clean on boot on a lot of systems.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFPtMtGMkyGM64RGpERAuSeAJoDjJkjMTgjE5nPQMrVktEOg09V9ACfWWtI
-qiRbdUTWm265EWCNd+z955Y=
-=SMCB
------END PGP SIGNATURE-----
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
