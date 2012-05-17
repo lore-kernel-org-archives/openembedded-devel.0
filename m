@@ -1,37 +1,27 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SUyfK-0002N1-9g
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 13:14:42 +0200
-Received: by werg55 with SMTP id g55so1162459wer.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 04:04:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8PWveYowDB2OMtHFYecQlVuU7CB1wvPWUz4vV1eoYfI=;
-	b=Mom8jj+JyqoG6SnvfUuYK6FuNeb2qksnrLNEG7yM9zAv535WAM2x9meYuc/yoganN7
-	W950EIyxW/YXoB/mdyuU1zreV5fimp4/SaNaHiCx7lUmlg5cIjuCdaC2bilh5vqWo9vq
-	roUm+j37KSm0HAXBsg/L1VM609mGYKkEE/5vwGG6V5hwKMSz9WLTEdIadCTiBaAJu0Dc
-	IYHdbwFzU8yNtf6v8FRCxVWSPYpG+M48odi/W2tcL/MpY5xmNGEIU4yNWDpBJWrS9Qzo
-	IiP0np50xF361pkcESPCyIQB/vh7OM1gQM+a9jw9QTnETtCIr/dTQRjV9OQw625WGgb8
-	NO0Q==
-Received: by 10.180.80.97 with SMTP id q1mr17323001wix.13.1337252680028;
-	Thu, 17 May 2012 04:04:40 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id g10sm47482914wiw.0.2012.05.17.04.04.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 17 May 2012 04:04:39 -0700 (PDT)
-Date: Thu, 17 May 2012 13:04:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120517110438.GF3164@jama.jama.net>
-References: <1337246639-5192-1-git-send-email-Martin.Jansa@gmail.com>
-	<jp2i06$mvm$1@dough.gmane.org>
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1SUyl6-0002VJ-BZ; Thu, 17 May 2012 13:20:40 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 17 May 2012 04:10:36 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="141641230"
+Received: from unknown (HELO helios.localnet) ([10.252.120.140])
+	by orsmga001.jf.intel.com with ESMTP; 17 May 2012 04:10:35 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-members@lists.openembedded.org
+Date: Thu, 17 May 2012 12:10:32 +0100
+Message-ID: <4850168.kQOm2JOBR6@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.2 (Linux/3.2.0-24-generic-pae; KDE/4.8.2; i686; ; )
+In-Reply-To: <20120517011824.GA12505@mi.fu-berlin.de>
+References: <4FAC361D.60609@balister.org> <4FB2CBD7.8070700@kernelconcepts.de>
+	<20120517011824.GA12505@mi.fu-berlin.de>
 MIME-Version: 1.0
-In-Reply-To: <jp2i06$mvm$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] systemd: create /var/run/utmp
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] Fwd: Linuxtag 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,68 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 11:14:42 -0000
-X-Groupsio-MsgNum: 38843
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="udcq9yAoWb9A4FsZ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 May 2012 11:20:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---udcq9yAoWb9A4FsZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thursday 17 May 2012 03:18:26 Henning Heinold wrote:
+> my second son was born today, so I can not make any promise for the
+> linuxtag. So I think it is really better to cancel the whole booth. That is
+> really sad, but maybee next time we should ask a lot earlier if we can
+> really man the booth.
 
-On Thu, May 17, 2012 at 11:56:22AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 17-05-12 11:23, Martin Jansa schreef:
-> > * it was created by volatiles before,
->=20
-> If it was done by volatiles before shouldn't it be a tmpfile.d/ snippet
-> instead of do_install_append? /var/run gets clean on boot on a lot of sys=
-tems.
+Congratulations Henning!
 
-Do you have symlink /var/run -> /run?
-
-Here /var/run is normal directory (without tmpfs mounted there, not cleaned=
- on boot),=20
-so it's enough to create it once.
+Unfortunately I'm unavailable during Linuxtag as well :(
 
 Cheers,
+Paul
 
->=20
-> regards,
->=20
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFPtMtGMkyGM64RGpERAuSeAJoDjJkjMTgjE5nPQMrVktEOg09V9ACfWWtI
-> qiRbdUTWm265EWCNd+z955Y=3D
-> =3DSMCB
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Paul Eggleton
+Intel Open Source Technology Centre
 
---udcq9yAoWb9A4FsZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+020YACgkQN1Ujt2V2gByq2gCfXXUS/aZIRxhBsHVXkBv28lSk
-Fd8AnizU0CvPa4q0ZnJWYiFauoVAftoJ
-=NV9J
------END PGP SIGNATURE-----
-
---udcq9yAoWb9A4FsZ--
