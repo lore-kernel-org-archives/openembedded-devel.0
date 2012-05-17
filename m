@@ -1,38 +1,32 @@
 Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SUyyo-0002rd-C5
+	(envelope-from <martin.jansa@gmail.com>) id 1SUz1Z-00030K-KL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 13:34:50 +0200
-Received: by wgbdr1 with SMTP id dr1so1487566wgb.24
+	Thu, 17 May 2012 13:37:41 +0200
+Received: by wgbdr1 with SMTP id dr1so1489963wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 04:24:48 -0700 (PDT)
+	Thu, 17 May 2012 04:27:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=DxZgzFw47YeTGLhEJMDEzHnJeye1x1p/it+zs3Ed5Fc=;
-	b=qUhVAmtSg7rmSI7LAj0q0HoTVqPge/HSkJEada7PCl+jqb7GQoj2+uo6rQgqs3518M
-	Q3Pb9GiKqzhtTJalpve3CCcD7II3t8UvHxWc8BDlAdg6M856AphJdgSq8yUlheEECtUP
-	gzkll7Kje3m3m2bbIegTfsk8+MLSGyp4r9m/QlG5uCfahydQU2z9NY72OAiObIhISmkQ
-	/hdu03796hkwCvdAuEJuKvPCfVUBx3zOmCBbSxXFDak7DiaGadYPiRZa9M6cwr8Dkmjs
-	cL69e0etHqTAVS3nsRN9fPsIWNfOTrCN1aroUdOFZ69P6ZdJFdheofz1GbpaNiB7Vutl
-	PEwg==
-Received: by 10.180.104.231 with SMTP id gh7mr17360461wib.10.1337253888073;
-	Thu, 17 May 2012 04:24:48 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/qobl+z3inw73+NtgvsW+vLAIZT+kQZ8cEgZbzjdKVE=;
+	b=y7t9ZCBumqJ900QkmVU9sykLv5mLy+nd9TZ1t774fM+2ihB89v6k2hQC38vnvEna1/
+	eBybgfHUVUFTLrIMF/IVm/nL55UAMdJSlX8wbjnm6mzQQaFluiqNPkaziQceC/zVnioz
+	WEv0B4t9iDLUujK3ywrm9UbAyuLpx2sck8F6r113wv4pMgymy8p9H4KxDSHn8nLHN5Kj
+	cm11lkVhnxNeCsoHSW7t5e4eyqlBcF51wVnHabbJKcWMCDXbGCxVu5INS9EBAyjCRCsq
+	dJwL/Ir/f3zPzj32E6R5KWZfu7RIVBzKraGgRiSbRWYVMqvI1EBrMLtyMnvgAd2xYo79
+	I7DQ==
+Received: by 10.180.109.197 with SMTP id hu5mr17357709wib.8.1337254059291;
+	Thu, 17 May 2012 04:27:39 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k8sm14866164wia.6.2012.05.17.04.24.46
+	by mx.google.com with ESMTPS id ga8sm20063901wib.5.2012.05.17.04.27.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 17 May 2012 04:24:47 -0700 (PDT)
-Date: Thu, 17 May 2012 13:24:46 +0200
+	Thu, 17 May 2012 04:27:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20120517112446.GG3164@jama.jama.net>
-References: <1337237919-17155-1-git-send-email-Martin.Jansa@gmail.com>
-	<3144141.bgKGuF394S@helios>
-MIME-Version: 1.0
-In-Reply-To: <3144141.bgKGuF394S@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] pidgin: explicitly disable nss
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 May 2012 13:27:31 +0200
+Message-Id: <1337254051-18736-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH] pidgin: fix missing quote in FILES_libgnt-dbg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 11:34:50 -0000
-X-Groupsio-MsgNum: 38846
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OFj+1YLvsEfSXdCH"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 May 2012 11:37:41 -0000
 
---OFj+1YLvsEfSXdCH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/pidgin/pidgin.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-On Thu, May 17, 2012 at 12:20:12PM +0100, Paul Eggleton wrote:
-> On Thursday 17 May 2012 08:58:39 Martin Jansa wrote:
-> > * sometimes it leaks from meta-chromium and breaks pidgin build
->=20
-> Does that mean SSL will be unavailable in pidgin after this change?
+diff --git a/meta-oe/recipes-support/pidgin/pidgin.inc b/meta-oe/recipes-support/pidgin/pidgin.inc
+index 1a35457..db4753e 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin.inc
++++ b/meta-oe/recipes-support/pidgin/pidgin.inc
+@@ -3,7 +3,7 @@ SECTION = "x11/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ inherit autotools gettext pkgconfig gconf perlnative
+ 
+@@ -43,7 +43,7 @@ FILES_libpurple-dbg += "${libdir}/.debug/libpurple* \
+                         ${libdir}/purple-2/.debug"
+ FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so" 
+ FILES_libgnt-dev     = "${libdir}/gnt/*.la" 
+-FILES_libgnt-dbg     = "${libdir}/gnt/.debug \
++FILES_libgnt-dbg     = "${libdir}/gnt/.debug"
+ FILES_finch          = "${bindir}/finch"
+ FILES_finch-dev      = "${libdir}/finch/*.la"
+ FILES_finch-dbg      = "${bindir}/.debug/finch \
+-- 
+1.7.8.6
 
-No it means that it should always detect gnutls, not nss when chromium
-was built before pidgin.
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OFj+1YLvsEfSXdCH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk+03/4ACgkQN1Ujt2V2gBwazACgjKm8FvXvO6tf0FbCoouFnyFX
-Vo0AniJhoANZoeV/SmffRtV87VGH8DEb
-=sk7s
------END PGP SIGNATURE-----
-
---OFj+1YLvsEfSXdCH--
