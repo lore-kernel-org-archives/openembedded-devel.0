@@ -1,33 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SV6jm-0001vl-H1 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 21:51:50 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SV6a3-00080E-BX for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 21:41:47 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 21:41:47 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SV7JF-0003rl-TD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 May 2012 22:28:30 +0200
+Received: by yhjj56 with SMTP id j56so2452024yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 21:41:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 May 2012 21:41:30 +0200
-Message-ID: <jp3k9b$p58$1@dough.gmane.org>
+	Thu, 17 May 2012 13:18:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=aa96rH9ikAHrorK+iUqpmN8dI3aExUVeMLsVXam2TDM=;
+	b=FuNVAnxu3HTP27dzdpdC9J/Z2njy/oFuxVtqYrJdPYbnr4Ae3o+xHM2vJsBwAOKI2l
+	a6xqvT+XLqPIqmQlvLgztwXOevWBQwPxzblezGbck1v8GeqMnK2Kv2mXORMKSamlDT8t
+	2O6EFIFV5O4g+RdPfzkOkwH3verK0aKf2js3eUrjsUyRxqSNjZMf3a9NjhlEmE+fEWLP
+	uEljkONCua+HzeO1dIpgBhfg0BX4VUhubbQeP/n3w90ZCQJ59VdncQZtoIJ1WMYo1BT1
+	Ku0QTEYrFrsd0hqRWyXUxYSlfFH6I4DYrFpT18PRBGa1tpU45SfDuBSmhpCEog/UJ+iI
+	Y/Hg==
+MIME-Version: 1.0
+Received: by 10.50.179.104 with SMTP id df8mr6853055igc.11.1337285906029; Thu,
+	17 May 2012 13:18:26 -0700 (PDT)
+Received: by 10.42.170.195 with HTTP; Thu, 17 May 2012 13:18:26 -0700 (PDT)
+In-Reply-To: <jp3k9b$p58$1@dough.gmane.org>
 References: <CALbNGRRSxKD_QqhCbLH=aRj3S0PEyTmQs9j8Lgg-5EObqMypxQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <CALbNGRRSxKD_QqhCbLH=aRj3S0PEyTmQs9j8Lgg-5EObqMypxQ@mail.gmail.com>
-X-Enigmail-Version: 1.4.1
+	<jp3k9b$p58$1@dough.gmane.org>
+Date: Thu, 17 May 2012 22:18:26 +0200
+Message-ID: <CALbNGRRGD=oykOV8mb0tTi+ZhHHTjsA7bbSTGSPr_OYUi=sPUQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,55 +42,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 19:51:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 May 2012 20:28:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, May 17, 2012 at 9:41 PM, Koen Kooi <koen@dominion.thruhere.net> wro=
+te:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 17-05-12 15:07, Andreas M=FCller schreef:
+>> Hi
+>>
+>> happy to see this happen I have few questions on what is planned.
+>>
+>> In README is written:
+>>
+>>> And we're working to break the dependency on this one:
+>>>
+>>> URI: git://git.openembedded.org/meta-openembedded
+>>
+>> Maybe it is a misunderstanding but I would expect for contents of this
+>> layer
+>>
+>> * systemd.bbclass * all from meta-oe/recipes-core/systemd * bbappends fo=
+r
+>> all recipes with systemd support.
+>>
+>> Is this correct?
+>
+> Correct. The bbappends will likely cause dependencies on non-oecore layer=
+s,
+> but so be it. We might need to set the unbreak-me flag for missing bb fil=
+es
+> that match our bbappends.
+> Unless people actually start reporting the bugs they encounter by includi=
+ng
+> meta-oe...
+Two more questions:
 
-Op 17-05-12 15:07, Andreas Müller schreef:
-> Hi
-> 
-> happy to see this happen I have few questions on what is planned.
-> 
-> In README is written:
-> 
->> And we're working to break the dependency on this one:
->> 
->> URI: git://git.openembedded.org/meta-openembedded
-> 
-> Maybe it is a misunderstanding but I would expect for contents of this
-> layer
-> 
-> * systemd.bbclass * all from meta-oe/recipes-core/systemd * bbappends for
-> all recipes with systemd support.
-> 
-> Is this correct?
+1. Has anybody patches in queue to fill meta-systemd? If not I would
+stand up to prepare some.
+2. Any complaints against the original idea to RRECOMMEND *-systemd
+package as suggested [1] to avoid *-systemd packages in tasks/images.
+AFAICR this was NAKed because a distro-var was necessary.
 
-Correct. The bbappends will likely cause dependencies on non-oecore layers,
-but so be it. We might need to set the unbreak-me flag for missing bb files
-that match our bbappends.
-Unless people actually start reporting the bugs they encounter by including
-meta-oe...
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Andreas
 
-iQIcBAEBAgAGBQJPtVRqAAoJEHZqAkdh1vT6qjkP/AhrJZpWNUqgIwQP/+lnBw8G
-jC+KbkzXePDcmHAP+Mcn5QASei2nE36yolfocKRD3BOsKz8Km4neF7S2275N691T
-0NwBygn0qA/Vb7KUs/hvmK1lQr5T71VM9in9uSGMp15Yyn7RDxfwaJRgllFxUfKC
-5z0el87MVjqvTMzgcJBF5ScTloilGUQg9PZKhV2N7JlrNtfkMKpVU/Sd9aqcxXQl
-bQPQkTZOAOTOQISpTyZJwb8UCjoQQ9V+fyhwwHbmqVtrJfjEDLUo417HBK7jKL6G
-ck1NA8Z5lhJLcPS9uv4DcIMeiG0Rx0kVZvdxhBQ/bM6zbwitps3/+OMDlKtn7DHt
-cE7uVP26lykWnQsNSjxr0Q+J0s1Z3CjAt02rSEuL8mplDHsum9ppLd6ZUCjnIxSD
-JD4e+mJbTP10GJOaK9xwxovSwwVRf2GQTisypRXxiwG8soZTvOpyTTBL+biXt7Sh
-nsabkTAKy56L0kpyyDYwksD67/+yENdfy42FsWP9A5J5EFk0xNVWLJ/1BnEIq/Ju
-exmvoLoXvN3pktzZ2cD+OovvEPcFpfzek6vQVBVqsDbYDdpPLp6qQSylhzgBMO/0
-P8PqfQr/RQ2zfOVe9s6N8GUa4RX9TCgwDJJh/501atJIHbNK9oQ682Ht5se8i51c
-3muIKSlHE1xco28BthvE
-=2YeO
------END PGP SIGNATURE-----
-
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-February/0=
+37750.html
 
 
