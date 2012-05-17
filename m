@@ -1,48 +1,36 @@
-Received: from db3ehsobe001.messaging.microsoft.com ([213.199.154.139]
-	helo=db3outboundpool.messaging.microsoft.com)
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <craig.mcqueen@beamcommunications.com>)
-	id 1SUvdo-0004zc-48 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 May 2012 10:00:56 +0200
-Received: from mail109-db3-R.bigfish.com (10.3.81.241) by
-	DB3EHSOBE006.bigfish.com (10.3.84.26) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 17 May 2012 07:35:40 +0000
-Received: from mail109-db3 (localhost [127.0.0.1])	by
-	mail109-db3-R.bigfish.com (Postfix) with ESMTP id 7C42C4073A	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 07:35:40 +0000 (UTC)
-X-SpamScore: 0
-X-BigFish: PS0(zzzz1202hzz8275dhz2dh2a8h668h839h93fhd25h)
-X-Forefront-Antispam-Report: CIP:111.221.66.13; KIP:(null); UIP:(null); IPV:NLI;
-	H:HKNPRD0204HT001.apcprd02.prod.outlook.com; RD:none; EFVD:NLI
-Received: from mail109-db3 (localhost.localdomain [127.0.0.1]) by mail109-db3
-	(MessageSwitch) id 1337240138540822_10439;
-	Thu, 17 May 2012 07:35:38 +0000 (UTC)
-Received: from DB3EHSMHS006.bigfish.com (unknown [10.3.81.240])	by
-	mail109-db3.bigfish.com (Postfix) with ESMTP id 75E4114004E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2012 07:35:38 +0000 (UTC)
-Received: from HKNPRD0204HT001.apcprd02.prod.outlook.com (111.221.66.13) by
-	DB3EHSMHS006.bigfish.com (10.3.87.106) with Microsoft SMTP Server (TLS)
-	id 14.1.225.23; Thu, 17 May 2012 07:35:38 +0000
-Received: from HKNPRD0204MB116.apcprd02.prod.outlook.com ([169.254.12.104]) by
-	HKNPRD0204HT001.apcprd02.prod.outlook.com ([10.9.122.175]) with mapi
-	id 14.15.0074.002; Thu, 17 May 2012 07:34:26 +0000
-From: Craig McQueen <craig.mcqueen@beamcommunications.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Python exception running step do_package_update_index_ipk in
-	OE classic
-Thread-Index: Ac0z/4Nh6Z8G6AS6SLGJqRwX1TV9Uw==
-Date: Thu, 17 May 2012 07:34:24 +0000
-Message-ID: <DB8F1B3EEF94C3439BFFE674EB05E3CC028713@HKNPRD0204MB116.apcprd02.prod.outlook.com>
-Accept-Language: en-AU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.9.122.7]
+	(envelope-from <martin.jansa@gmail.com>) id 1SUvl2-0005wK-Rc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 May 2012 10:08:25 +0200
+Received: by wibhm14 with SMTP id hm14so1373661wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 May 2012 00:58:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=v+3Mpq6f48s1wOGau8UGq+xWSsxKIWsCnv4UaWE2mDY=;
+	b=0Ze5op5NUCvIyDjpm5HwzWjuwJ0fuoT5nk/e1QEyQSTgcbwBO101dpPb2JO5Z3Fuhg
+	SOTRQ6dpMexmmyJUyeKIMTOLnvjsLSSYbIqgcMIeZtXI4oX8mKSlewM6L3Y18kYbRXkJ
+	ckiipmMFyIC3h1c1GOW+YMmVhJsI+dzH+kz7pkLT9bpHouZ2FJY1M34ej1j9n2GYbEv/
+	2LhHUpFll2OU9cubHlQlKbRL9vEPefDysGOONu1nD5ln4OXFZ9plQI/ndtE/FVXny5wq
+	sji+BHotaDpVHNRAQQg+aAquturM4rt6QrNvafZQrCcQD39Zwo13dCUQcGWkkXQVYp3V
+	nVOw==
+Received: by 10.180.81.234 with SMTP id d10mr15656179wiy.10.1337241502751;
+	Thu, 17 May 2012 00:58:22 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id k8sm13297038wia.6.2012.05.17.00.58.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 17 May 2012 00:58:21 -0700 (PDT)
+Date: Thu, 17 May 2012 09:58:21 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120517075820.GC3164@jama.jama.net>
+References: <DB8F1B3EEF94C3439BFFE674EB05E3CC028713@HKNPRD0204MB116.apcprd02.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: beamcommunications.com
-Subject: Python exception running step do_package_update_index_ipk in OE classic
+In-Reply-To: <DB8F1B3EEF94C3439BFFE674EB05E3CC028713@HKNPRD0204MB116.apcprd02.prod.outlook.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Python exception running step do_package_update_index_ipk in OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,55 +44,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 08:00:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 17 May 2012 08:08:25 -0000
+X-Groupsio-MsgNum: 38838
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="8X7/QrJGcKSMr1RN"
+Content-Disposition: inline
 
-SSdtIHRyeWluZyB0byBidWlsZCBPRSBjbGFzc2ljIGZvciBpLk1YMjgsIGZvbGxvd2luZyBpbnN0
-cnVjdGlvbnMgYXQ6DQpodHRwOi8vd3d3LmlteGRldi5vcmcvd2lraS9pbmRleC5waHA/dGl0bGU9
-QWxsX0JvYXJkc19PcGVuRW1iZWRkZWQNCg0KSSdtIHRyeWluZyB0byBydW46DQogIGJpdGJha2Ug
-Ym9vdHN0cmFwLWltYWdlDQoNCkl0IGlzIGZhaWxpbmcgb24gYSBzdGVwIGRvX3BhY2thZ2VfdXBk
-YXRlX2luZGV4X2lwayB3aGVuIGNhbGxpbmcgUHl0aG9uIHByb2dyYW0gb3BrZy1tYWtlLWluZGV4
-LiBTZWUgZXJyb3IgYmVsb3cuDQoNClRoZSBwcm9ibGVtIGlzIHdoZW4gaXQgY2FsbHMgc3VicHJv
-Y2Vzcy5jaGVja19vdXRwdXQoKSwgYnV0IGNoZWNrX291dHB1dCgpIGlzIG9ubHkgaW4gUHl0aG9u
-IDIuNywgYnV0IG5vdCBQeXRob24gMi42Lg0KDQpPbiBteSBtYWNoaW5lLCBQeXRob24gMi43IGlz
-IGluc3RhbGxlZCwgaG93ZXZlciBpdCBzZWVtcyB0aGF0IE9FIG11c3QgYmUgcnVubmluZyBQeXRo
-b24gMi42LiBJIHNlZSB0aGF0IE9FIGJ1aWxkcyBQeXRob24gMi42IGluIHRtcC93b3JrL2k2ODYt
-bGludXgvcHl0aG9uLW5hdGl2ZS0yLjYuNi1tbDEyLjAuDQoNCldoYXQgd291bGQgYmUgYSBnb29k
-IHdheSB0byBmaXggdGhpcz8NCg0KUmVnYXJkcywNCkNyYWlnIE1jUXVlZW4NCg0KTk9URTogUnVu
-bmluZyB0YXNrIDQwNTYgb2YgNDA2MCAoSUQ6IDE4LCAvaG9tZS9jcmFpZ20vb3BlbmVtYmVkZGVk
-L3N0dWZmL29wZW5lbWJlZGRlZC9yZWNpcGVzL2ltYWdlcy9ib290c3RyYXAtaW1hZ2UuYmIsIGRv
-X3BhY2thZ2VfdXBkYXRlX2luZGV4X2lwaykNCk5PVEU6IHBhY2thZ2UgYm9vdHN0cmFwLWltYWdl
-LTEuMC1yMDogdGFzayBkb19wYWNrYWdlX3VwZGF0ZV9pbmRleF9pcGs6IFN0YXJ0ZWQNCkVSUk9S
-OiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGluOiAvaG9tZS9jcmFpZ20vb3BlbmVtYmVkZGVk
-L3N0dWZmL3RtcC93b3JrL214MjhldmstYW5nc3Ryb20tbGludXgtZ251ZWFiaS9ib290c3RyYXAt
-aW1hZ2UtMS4wLXIwL3RlbXAvbG9nLmRvX3BhY2thZ2VfdXBkYXRlX2luZGV4X2lway4yMDA0OQ0K
-TG9nIGRhdGEgZm9sbG93czoNCnwgKyBkb19wYWNrYWdlX3VwZGF0ZV9pbmRleF9pcGsNCnwgKyBz
-ZXQgLXgNCnwgKyBpcGtnYXJjaHM9J2FsbCBhbnkgbm9hcmNoIGFybSAgYXJtdjQgYXJtdjR0IGFy
-bXY1dGUgbXgyOGV2aycNCnwgKyAnWycgJyEnIC16ICcnICddJw0KfCArIG1rZGlyIC1wIC9ob21l
-L2NyYWlnbS9vcGVuZW1iZWRkZWQvc3R1ZmYvdG1wL2RlcGxveS9lZ2xpYmMvaXBrDQp8ICsgdG91
-Y2ggL2hvbWUvY3JhaWdtL29wZW5lbWJlZGRlZC9zdHVmZi90bXAvZGVwbG95L2VnbGliYy9pcGsv
-UGFja2FnZXMNCnwgKyBvcGtnLW1ha2UtaW5kZXggLXIgL2hvbWUvY3JhaWdtL29wZW5lbWJlZGRl
-ZC9zdHVmZi90bXAvZGVwbG95L2VnbGliYy9pcGsvUGFja2FnZXMgLXAgL2hvbWUvY3JhaWdtL29w
-ZW5lbWJlZGRlZC9zdHVmZi90bXAvZGVwbG95L2VnbGliYy9pcGsvUGFja2FnZXMgLWwgL2hvbWUv
-Y3JhaWdtL29wZW5lbWJlZGRlZC9zdHVmZi90bXAvZGVwbG95L2VnbGliYy9pcGsvUGFja2FnZXMu
-ZmlsZWxpc3QgLW0gL2hvbWUvY3JhaWdtL29wZW5lbWJlZGRlZC9zdHVmZi90bXAvZGVwbG95L2Vn
-bGliYy9pcGsNCnwgVHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOg0KfCAgIEZpbGUg
-Ii9ob21lL2NyYWlnbS9vcGVuZW1iZWRkZWQvc3R1ZmYvdG1wL3N5c3Jvb3RzL2k2ODYtbGludXgv
-dXNyL2Jpbi9vcGtnLW1ha2UtaW5kZXgiLCBsaW5lIDE4OSwgaW4gPG1vZHVsZT4NCnwgICAgIHJj
-ID0gc3VicHJvY2Vzcy5jaGVja19vdXRwdXQoZ3ppcF9jbWQsIHNoZWxsPVRydWUpDQp8IEF0dHJp
-YnV0ZUVycm9yOiAnbW9kdWxlJyBvYmplY3QgaGFzIG5vIGF0dHJpYnV0ZSAnY2hlY2tfb3V0cHV0
-Jw0KTk9URTogcGFja2FnZSBib290c3RyYXAtaW1hZ2UtMS4wLXIwOiB0YXNrIGRvX3BhY2thZ2Vf
-dXBkYXRlX2luZGV4X2lwazogRmFpbGVkDQpFUlJPUjogRnVuY3Rpb24gJ2RvX3BhY2thZ2VfdXBk
-YXRlX2luZGV4X2lwaycgZmFpbGVkIChzZWUgL2hvbWUvY3JhaWdtL29wZW5lbWJlZGRlZC9zdHVm
-Zi90bXAvd29yay9teDI4ZXZrLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvYm9vdHN0cmFwLWltYWdl
-LTEuMC1yMC90ZW1wL2xvZy5kb19wYWNrYWdlX3VwZGF0ZV9pbmRleF9pcGsuMjAwNDkgZm9yIGZ1
-cnRoZXIgaW5mb3JtYXRpb24pDQpFUlJPUjogVGFzayAxOCAoL2hvbWUvY3JhaWdtL29wZW5lbWJl
-ZGRlZC9zdHVmZi9vcGVuZW1iZWRkZWQvcmVjaXBlcy9pbWFnZXMvYm9vdHN0cmFwLWltYWdlLmJi
-LCBkb19wYWNrYWdlX3VwZGF0ZV9pbmRleF9pcGspIGZhaWxlZCB3aXRoIGV4aXQgY29kZSAnMScN
-CkVSUk9SOiAnL2hvbWUvY3JhaWdtL29wZW5lbWJlZGRlZC9zdHVmZi9vcGVuZW1iZWRkZWQvcmVj
-aXBlcy9pbWFnZXMvYm9vdHN0cmFwLWltYWdlLmJiJyBmYWlsZWQNCg0K
+--8X7/QrJGcKSMr1RN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, May 17, 2012 at 07:34:24AM +0000, Craig McQueen wrote:
+> I'm trying to build OE classic for i.MX28, following instructions at:
+> http://www.imxdev.org/wiki/index.php?title=3DAll_Boards_OpenEmbedded
+>=20
+> I'm trying to run:
+>   bitbake bootstrap-image
+>=20
+> It is failing on a step do_package_update_index_ipk when calling Python p=
+rogram opkg-make-index. See error below.
+>=20
+> The problem is when it calls subprocess.check_output(), but check_output(=
+) is only in Python 2.7, but not Python 2.6.
+>=20
+> On my machine, Python 2.7 is installed, however it seems that OE must be =
+running Python 2.6. I see that OE builds Python 2.6 in tmp/work/i686-linux/=
+python-native-2.6.6-ml12.0.
+>=20
+> What would be a good way to fix this?
 
+send patch against
+http://git.yoctoproject.org/cgit/cgit.cgi/opkg-utils/
+to yocto ML
+to make it compatible with both python 2.6 and 2.7
 
+Cheers,
+>=20
+> Regards,
+> Craig McQueen
+>=20
+> NOTE: Running task 4056 of 4060 (ID: 18, /home/craigm/openembedded/stuff/=
+openembedded/recipes/images/bootstrap-image.bb, do_package_update_index_ipk)
+> NOTE: package bootstrap-image-1.0-r0: task do_package_update_index_ipk: S=
+tarted
+> ERROR: Logfile of failure stored in: /home/craigm/openembedded/stuff/tmp/=
+work/mx28evk-angstrom-linux-gnueabi/bootstrap-image-1.0-r0/temp/log.do_pack=
+age_update_index_ipk.20049
+> Log data follows:
+> | + do_package_update_index_ipk
+> | + set -x
+> | + ipkgarchs=3D'all any noarch arm  armv4 armv4t armv5te mx28evk'
+> | + '[' '!' -z '' ']'
+> | + mkdir -p /home/craigm/openembedded/stuff/tmp/deploy/eglibc/ipk
+> | + touch /home/craigm/openembedded/stuff/tmp/deploy/eglibc/ipk/Packages
+> | + opkg-make-index -r /home/craigm/openembedded/stuff/tmp/deploy/eglibc/=
+ipk/Packages -p /home/craigm/openembedded/stuff/tmp/deploy/eglibc/ipk/Packa=
+ges -l /home/craigm/openembedded/stuff/tmp/deploy/eglibc/ipk/Packages.filel=
+ist -m /home/craigm/openembedded/stuff/tmp/deploy/eglibc/ipk
+> | Traceback (most recent call last):
+> |   File "/home/craigm/openembedded/stuff/tmp/sysroots/i686-linux/usr/bin=
+/opkg-make-index", line 189, in <module>
+> |     rc =3D subprocess.check_output(gzip_cmd, shell=3DTrue)
+> | AttributeError: 'module' object has no attribute 'check_output'
+> NOTE: package bootstrap-image-1.0-r0: task do_package_update_index_ipk: F=
+ailed
+> ERROR: Function 'do_package_update_index_ipk' failed (see /home/craigm/op=
+enembedded/stuff/tmp/work/mx28evk-angstrom-linux-gnueabi/bootstrap-image-1.=
+0-r0/temp/log.do_package_update_index_ipk.20049 for further information)
+> ERROR: Task 18 (/home/craigm/openembedded/stuff/openembedded/recipes/imag=
+es/bootstrap-image.bb, do_package_update_index_ipk) failed with exit code '=
+1'
+> ERROR: '/home/craigm/openembedded/stuff/openembedded/recipes/images/boots=
+trap-image.bb' failed
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--8X7/QrJGcKSMr1RN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk+0r5wACgkQN1Ujt2V2gByBKQCfQAMOJPJfa6s3pEV/AYBN1612
+FakAn100fma0EV7zEpGRv6RULbdqGq5S
+=avjy
+-----END PGP SIGNATURE-----
+
+--8X7/QrJGcKSMr1RN--
