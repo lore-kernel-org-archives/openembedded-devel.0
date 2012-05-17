@@ -1,32 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1SUyZt-00013T-Vz; Thu, 17 May 2012 13:09:06 +0200
-Received: by pbbrq2 with SMTP id rq2so2141080pbb.6
-	for <multiple recipients>; Thu, 17 May 2012 03:59:02 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>) id 1SUyfK-0002N1-9g
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 May 2012 13:14:42 +0200
+Received: by werg55 with SMTP id g55so1162459wer.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 May 2012 04:04:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=xOjJZrAMCWs3TBx3aC5gIeR8t41SntwxoEp1d1v/0xE=;
-	b=Nkf84z1UCGbNPYMbH/v14HB5EhF0+dflpikEo39rlhejDKkuymVwcG71SE0ChyLH1w
-	6cwtUaqt6HvCGkXFyiOWqkYo36wlb6bYI03Jab9BJeveBb6c1x8Bxc25Sz9gjQMMFE1o
-	MlHyzWXEgytAbzcM4serXH+RFAjW+KRx4c1sNZM+ohDDw0qKYV5ylUzJu5tMQIzEuXUX
-	f767L6kswptfu1tCWKr+c/7Dwg8oNEme7Bdc1+edyo/1gkheVXUbPT8jG7KWu+GhLrGq
-	R1jpuJ1aQxaHNXk8kpyuAkc+v7eCCgUNFbhsXeZLLnxIMM/1P7PMJp/eIAxGgixucVN4
-	EQjg==
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=8PWveYowDB2OMtHFYecQlVuU7CB1wvPWUz4vV1eoYfI=;
+	b=Mom8jj+JyqoG6SnvfUuYK6FuNeb2qksnrLNEG7yM9zAv535WAM2x9meYuc/yoganN7
+	W950EIyxW/YXoB/mdyuU1zreV5fimp4/SaNaHiCx7lUmlg5cIjuCdaC2bilh5vqWo9vq
+	roUm+j37KSm0HAXBsg/L1VM609mGYKkEE/5vwGG6V5hwKMSz9WLTEdIadCTiBaAJu0Dc
+	IYHdbwFzU8yNtf6v8FRCxVWSPYpG+M48odi/W2tcL/MpY5xmNGEIU4yNWDpBJWrS9Qzo
+	IiP0np50xF361pkcESPCyIQB/vh7OM1gQM+a9jw9QTnETtCIr/dTQRjV9OQw625WGgb8
+	NO0Q==
+Received: by 10.180.80.97 with SMTP id q1mr17323001wix.13.1337252680028;
+	Thu, 17 May 2012 04:04:40 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id g10sm47482914wiw.0.2012.05.17.04.04.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 17 May 2012 04:04:39 -0700 (PDT)
+Date: Thu, 17 May 2012 13:04:38 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120517110438.GF3164@jama.jama.net>
+References: <1337246639-5192-1-git-send-email-Martin.Jansa@gmail.com>
+	<jp2i06$mvm$1@dough.gmane.org>
 MIME-Version: 1.0
-Received: by 10.68.223.129 with SMTP id qu1mr26202768pbc.165.1337252342291;
-	Thu, 17 May 2012 03:59:02 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.25.42 with HTTP; Thu, 17 May 2012 03:59:02 -0700 (PDT)
-Date: Thu, 17 May 2012 07:59:02 -0300
-X-Google-Sender-Auth: DGm8oC7Jp4UeYRpsz6TMUovepnI
-Message-ID: <CAP9ODKq0aRL6--FcK6o5gaBbk5hE8-Pr8B4S0+V9yN5uKZk+aw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: [ANNOUNCE] Meta-Broweser layer
+In-Reply-To: <jp2i06$mvm$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] systemd: create /var/run/utmp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +45,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2012 11:09:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 May 2012 11:14:42 -0000
+X-Groupsio-MsgNum: 38843
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="udcq9yAoWb9A4FsZ"
+Content-Disposition: inline
+
+--udcq9yAoWb9A4FsZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Thu, May 17, 2012 at 11:56:22AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 17-05-12 11:23, Martin Jansa schreef:
+> > * it was created by volatiles before,
+>=20
+> If it was done by volatiles before shouldn't it be a tmpfile.d/ snippet
+> instead of do_install_append? /var/run gets clean on boot on a lot of sys=
+tems.
 
-Our friends at Eukrea has started working at a Chromium specific layer
-and to share work in web browser packaging we opted to merge both
-layers to host different web browser packages. After this the layer
-has been renamed to /meta-browser/.
+Do you have symlink /var/run -> /run?
 
-The meta-browser layer can be used by any project that needs to use
-Firefox and/or Chromium; other browsers can be add to the layer if
-need and it is open for contributions of any interested people.
+Here /var/run is normal directory (without tmpfs mounted there, not cleaned=
+ on boot),=20
+so it's enough to create it once.
 
-The layer can be download from
-https://github.com/OSSystems/meta-browser so please update your system
-to use from now on.
+Cheers,
 
-We will REMOVE meta-mozilla and meta-chromium next week.
-
-Thanks in advance :-)
+>=20
+> regards,
+>=20
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>=20
+> iD8DBQFPtMtGMkyGM64RGpERAuSeAJoDjJkjMTgjE5nPQMrVktEOg09V9ACfWWtI
+> qiRbdUTWm265EWCNd+z955Y=3D
+> =3DSMCB
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--udcq9yAoWb9A4FsZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk+020YACgkQN1Ujt2V2gByq2gCfXXUS/aZIRxhBsHVXkBv28lSk
+Fd8AnizU0CvPa4q0ZnJWYiFauoVAftoJ
+=NV9J
+-----END PGP SIGNATURE-----
+
+--udcq9yAoWb9A4FsZ--
