@@ -1,27 +1,36 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SVExR-00062T-3U
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 May 2012 06:38:29 +0200
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4700FDEB2YR961@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	17 May 2012 23:28:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B14922010D; Fri,
-	18 May 2012 00:28:10 -0400 (EDT)
-Date: Fri, 18 May 2012 00:28:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SVGTR-00087q-GZ for openembedded-devel@lists.openembedded.org;
+	Fri, 18 May 2012 08:15:37 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SVGJd-0006ZH-5d for openembedded-devel@lists.openembedded.org;
+	Fri, 18 May 2012 08:05:29 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 May 2012 08:05:29 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 May 2012 08:05:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120518042810.GP6829@denix.org>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 18 May 2012 08:05:17 +0200
+Message-ID: <jp4oqt$dq9$1@dough.gmane.org>
 References: <CALbNGRRSxKD_QqhCbLH=aRj3S0PEyTmQs9j8Lgg-5EObqMypxQ@mail.gmail.com>
 	<jp3k9b$p58$1@dough.gmane.org>
 	<CALbNGRRGD=oykOV8mb0tTi+ZhHHTjsA7bbSTGSPr_OYUi=sPUQ@mail.gmail.com>
-	<20120517232306.GN6829@denix.org>
-MIME-version: 1.0
-In-reply-to: <20120517232306.GN6829@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20120517232306.GN6829@denix.org> <20120518042810.GP6829@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <20120518042810.GP6829@denix.org>
+X-Enigmail-Version: 1.4.1
 Subject: Re: meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,15 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 04:38:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 18 May 2012 06:15:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-> > >> happy to see this happen I have few questions on what is planned.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-BTW, http://git.yoctoproject.org/cgit/cgit.cgi/meta-systemd/
+Op 18-05-12 06:28, Denys Dmytriyenko schreef:
+>>>>> happy to see this happen I have few questions on what is 
+>>>>> planned.
+> 
+> BTW, http://git.yoctoproject.org/cgit/cgit.cgi/meta-systemd/
 
--- 
-Denys
+Yeah, the words "shameless" and "rip off" come to mind. It even violates the
+meta-oe license.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPteadAAoJEHZqAkdh1vT68uUQAJYZ8PJA1thKUIqTIYA0IG+3
+qjarIFqgHNE2bx48o7sbo4V1/M/5Ak1MN5vHI6CwlnswfubqzIAlSwbkzr0Cjs1y
+9wQER8O0rvmgS6vTCTbQEKVtmwdMjd+FSvHp2vvWUXn67pGaKLD7FET2GDec+NmQ
+6n8aK5iKmo8PrUKE3IyQl3idmwX0aoCTsDdu002+uABj61j1cwDhbkqdAs7dE5nq
+GA14ey2+/b5wKAbl1naq3E/3qJnEzKcqrFkqZPgkw17+RWKWOh5WfTQbRUMYqSwU
+FndTMR7j+BWDb383KigWbT5lQrnoyAJSB5MfBaZQ4F+Ux3jJhnLWoWmtdKZVdMDa
+2uwjSGpegEvsAh6hPlUx8pcF5JSGoiJtMxG/b6fvU/URg4DwYA48XC9lnWptTPFX
+Gm8IchZn8fXWMfqQkUY0vidQbdhrncnDv5rmT/gyneGP/qAbmRQyw3kiCBKNQL5x
+KFgG1GLyFecUnNs6ukPe1o5PBO9ytaXBxv2LYwHLsrpNNF5blZ9ZI9drpvXCxRPn
+2vL8HdaPdKrZnCVZydNNNsQ8wcECZx1cZOH41wuHZy2SZMjLUa+DDyjMmGOFeTl9
+fg8o9tSvjUM9ECHkEsobgPy9beSgHQsOUUthtiEeMrBvUVr1SA6TjJBhD38ARwZc
+eDrmQcMZxQCBbmzPCFO/
+=LIWS
+-----END PGP SIGNATURE-----
+
 
 
