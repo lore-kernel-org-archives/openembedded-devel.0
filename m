@@ -1,41 +1,36 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SVMsl-0001P3-Eo
+	(envelope-from <fromm@dresearch-fe.de>) id 1SVNYv-0007aS-Tf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 May 2012 15:06:11 +0200
-Received: by wgbdr1 with SMTP id dr1so2472815wgb.24
+	Fri, 18 May 2012 15:49:45 +0200
+Received: by lags15 with SMTP id s15so2143295lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2012 05:56:07 -0700 (PDT)
+	Fri, 18 May 2012 06:39:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=OlY1yVCRko3SF2lHdsmwSXzlsd0/JYtGz6/NFELT8rs=;
-	b=kS5YgyWSDYheGADhrZV4UvutTMY6ClVcv9VfpPE168Oeqffz27vu3U1GpNzYERDP98
-	vky/yovH2zY47dZUYsGI6mJKwwF/C2PUj9q0pVNZLnvw5y3Vawhpqc41S2iIGlN793Uw
-	nOBOJzIcFT7dPPDtWhoV1BIrpHZbh5RkfPB1o8XUTaMlj3GHPewgPwEKzi1cVPNpGVl2
-	T2vgoagug8wvJV3CiTxbI8lhQvW84MW4FA6K5Qyy7dyR56dZQOx6sZ50tb4uaeulvbn3
-	E/bJA/v6Nv+hDNdTBsUNCggVHarIVo1d45kYcUfipctZELhg9XiiuE4Yu+nI7Htc1aRM
-	66jA==
-Received: by 10.180.102.9 with SMTP id fk9mr10581312wib.1.1337345767836;
-	Fri, 18 May 2012 05:56:07 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id fm1sm824802wib.10.2012.05.18.05.56.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 May 2012 05:56:07 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-Date: Fri, 18 May 2012 14:55:56 +0200
-Message-Id: <C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=BcagSHV8Hf3tmi60tZK25jfJYli+rAudSlzhR0Ev4GE=;
+	b=Ca6N2qsXCDowPKIOuOHNK4vsO6cTHhBkZ0MJbqmp2SeLEpuiciqGYG/RU5b0KwuhVm
+	8V7WAU/0th0Rv/EUubjgdUDoiiNhjX1q4L+vDPWRoAUgwTzsRxUgH5c8mqpWU1YOF1IN
+	9U7YfyZL9C4gN7/8oPaJmzgu2M+7vnAm5u8ZeiNox93jb8EU7rQcDW+pw3RKPJf70CUa
+	6/GbW/b/TOFbRGN6V923+0YbXFMyA4l/BfSJhZ2cVrrOO2cHPxZJYLnNaOUd2F6bM1Fe
+	U5glpgEXdBsCoU6be3k8Ap+ec8YL2UrTxSsQCTEcF7PplcRVnN+B6L1eGZUpUpSaIKwa
+	ty1g==
+MIME-Version: 1.0
+Received: by 10.112.86.132 with SMTP id p4mr4793582lbz.22.1337348381813; Fri,
+	18 May 2012 06:39:41 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Fri, 18 May 2012 06:39:41 -0700 (PDT)
+In-Reply-To: <C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
 References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
 	<jp5gkp$2ip$1@dough.gmane.org>
 	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-To: Thilo Fromm <fromm@dresearch-fe.de>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQnfPUkIqS3+xEBmKyHsksHoYDxVZV7HW8vSc1i/9CAIB8rIPlSPsC9fZdQCGZ/0HwxvrgRZ
+	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
+Date: Fri, 18 May 2012 15:39:41 +0200
+Message-ID: <CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
+To: Koen Kooi <koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQm3KfqWTdEsY7PWOI8MTa8kIMit8Ta8xQC4S/F6Yh1eXfieaCP6Od0Qn0oqWWcJdVv7CYtp
 Cc: meta-ti@yoctoproject.org, openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -51,36 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 13:06:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 18 May 2012 13:49:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+Hello Koen,
 
-Op 18 mei 2012, om 14:53 heeft Thilo Fromm het volgende geschreven:
+>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think this
+>>>> affects both projects one way or the other.
+>>>>
+>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This mean=
+s
+>>>> with oe-core + meta-oe you now can choose between gcc-4.6 and gcc-4.7.
+>>>> However, both compilers break the kernel we're using
+>>>> (ti81xx-psp-linux-2.6.37).
+>>>
+>>> What happens when you disable the mailbox? AIUI you shouldn't need that=
+ on
+>>> Ne/Ce.
+>>
+>> How do I disable the mailbox?
+>
+> In the .config
 
-> Hello Koen,
->=20
->>> sorry for the cross-post (openembedded-devel, meta-ti), I think this
->>> affects both projects one way or the other.
->>>=20
->>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This =
-means
->>> with oe-core + meta-oe you now can choose between gcc-4.6 and =
-gcc-4.7.
->>> However, both compilers break the kernel we're using
->>> (ti81xx-psp-linux-2.6.37).
->>=20
->> What happens when you disable the mailbox? AIUI you shouldn't need =
-that on
->> Ne/Ce.
->=20
-> How do I disable the mailbox?
+Wait wait wait, according to drivers/staging/tidspbridge/Kconfig we
+need OMAP_MBOX_FWK (i.e. "the mailbox") in order to use the DSP
+bridge. Disabling it would mean cutting off our DSP. No way.
 
-In the .config
+>> What do you mean by Ne/Ce?
+>
+> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is callin=
+g it nowadays.
 
-> What do you mean by Ne/Ce?
+We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with a
+C674x DSP. I think the only ones left without DSPs are AM-...
+processors. So no, the DSP bridge (and therefore mailboxing) must
+stay.
 
-Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is =
-calling it nowadays.=
+Regards,
+Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
