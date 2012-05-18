@@ -1,36 +1,35 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SVMqU-0001D3-Hm
+	(envelope-from <koen@dominion.thruhere.net>) id 1SVMqc-0001GZ-BD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 May 2012 15:03:50 +0200
-Received: by lbol5 with SMTP id l5so2130601lbo.6
+	Fri, 18 May 2012 15:03:58 +0200
+Received: by wibhm14 with SMTP id hm14so129799wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2012 05:53:46 -0700 (PDT)
+	Fri, 18 May 2012 05:53:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=RhEORdNQjter+giKWX8fZoz4B/9stZlkjS8BGWolByk=;
-	b=j+q9IvdEF5bNjSzMESYYYmfEQ8PyKiiiQYahBDcTmDMhNxJwI6ZHd0r490j6J1n7st
-	zhkAbgCHyP6tAYnBgx/Xj3VV96BWB1jtUAqD245ZV23RyPf29wi3YoLeWCIgjaAxkUMV
-	y/h9EFgnPU36LLlk4JXaN2TcXiXgAYgxoCgMqwdT5fHwzd8wzpYN/Twny6u+V0Stp7tK
-	OS0tHlg2Bo7eXpswYKrWrjSmVLmPk3mlYO+O05ZVeEhzrIzORPCU6rKvCM5pPL59PNtd
-	fTKoU1DrQ/gWGB1wXiOUPO5wRgg/gmTox5pzScq748aj4ZtCtw3chEUnLx5h+XxtE8Yv
-	7/Gg==
-MIME-Version: 1.0
-Received: by 10.152.146.129 with SMTP id tc1mr10869985lab.27.1337345626589;
-	Fri, 18 May 2012 05:53:46 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Fri, 18 May 2012 05:53:46 -0700 (PDT)
-In-Reply-To: <jp5gkp$2ip$1@dough.gmane.org>
-References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
-	<jp5gkp$2ip$1@dough.gmane.org>
-Date: Fri, 18 May 2012 14:53:46 +0200
-Message-ID: <CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=9vR2iIV06DMyhTCeA64wvX5Wqwg1wcwnv115mU93r04=;
+	b=or5ivHID4wK2IvxhgZEFQaRfIOi0hE7TZeWaAwsp4AjeheJojec9M2nN0zhn8vrOLv
+	YURedTBO7SuI+CKMyEO+RhVBVHqNVJ5U6qjTXZPZl/WYYi+G3TSvPM8wD7OxfPIkQTWU
+	6sNLyDE/hTb1usNXH23/zq3e+jC+1thCNzUb7bH5tbs4uqXQfjBEOFK90/pRZFpIkaCg
+	lbFqoF0Uvxc4YWEo1YTv56sduu3pHozp6qUrMge7fD6qvK6eNOcB7mEKULgVrTpKev6b
+	9JGt0FCmxsMOuPs9VvD2cYnOI6TExzGGObqeJFAJnfC1Xh8O3NxMT0ACxFgdHKICCRg/
+	ymBw==
+Received: by 10.180.101.103 with SMTP id ff7mr1426202wib.6.1337345634567;
+	Fri, 18 May 2012 05:53:54 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id du4sm1298363wib.10.2012.05.18.05.53.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 18 May 2012 05:53:54 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnnphH4XD21LmEjuW76duw7E7/zfURBApbZ7qhMjN8SmrfUD3Cx/2Xqx9eup3Bx1bOpXave
-Cc: meta-ti@yoctoproject.org
-Subject: Re: ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+Date: Fri, 18 May 2012 14:53:48 +0200
+Message-Id: <1337345628-27090-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQl9KQy2U4ERNmq+N8cUUESyqOTmC/Sv10XL1Etx0hj6J2YEu/U59k8Y5NmMHATIOVkNJxEJ
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] fb-test: add latest git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 13:03:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 May 2012 13:03:58 -0000
 
-Hello Koen,
+This is a suite of utils to test the linux framebuffer and aid in debugging problems.
 
->> sorry for the cross-post (openembedded-devel, meta-ti), I think this
->> affects both projects one way or the other.
->>
->> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This means
->> with oe-core + meta-oe you now can choose between gcc-4.6 and gcc-4.7.
->> However, both compilers break the kernel we're using
->> (ti81xx-psp-linux-2.6.37).
->
-> What happens when you disable the mailbox? AIUI you shouldn't need that o=
-n
-> Ne/Ce.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-support/fbtest/fb-test_git.bb |   19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fbtest/fb-test_git.bb
 
-How do I disable the mailbox? What do you mean by Ne/Ce?
+diff --git a/meta-oe/recipes-support/fbtest/fb-test_git.bb b/meta-oe/recipes-support/fbtest/fb-test_git.bb
+new file mode 100644
+index 0000000..43acfd6
+--- /dev/null
++++ b/meta-oe/recipes-support/fbtest/fb-test_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Test suite for Linux framebuffer"
++
++PV = "0.0"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++
++SRCREV = "85eab266b123a08098af86afdb1599947d276e32"
++SRC_URI = "git://github.com/prpplague/fb-test-app.git"
++
++S = "${WORKDIR}/git"
++
++do_install() {
++	install -d ${D}${bindir}
++	for prog in perf rect fb-test offset ; do
++		install -m 0755 $prog ${D}${bindir}
++	done
++}
++
+-- 
+1.7.10
 
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
