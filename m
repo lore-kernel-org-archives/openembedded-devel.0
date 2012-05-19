@@ -1,20 +1,37 @@
-Received: from mazama.dcclabs.tv ([91.121.153.142])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pawelo@dcclabs.tv>) id 1SVmzR-0004mt-2a
+	(envelope-from <david.oe@pilsoft.com>) id 1SVp7r-0002ym-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 May 2012 18:58:49 +0200
-Received: from [192.168.1.1] (fish.king.net.pl [83.19.124.154])
-	by mazama.dcclabs.tv (Postfix) with ESMTPSA id 6FC30403B1
+	Sat, 19 May 2012 21:15:40 +0200
+Received: by wibhm14 with SMTP id hm14so1011552wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 May 2012 18:43:23 +0200 (CEST)
-Message-ID: <4FB7CDA6.9060507@dcclabs.tv>
-Date: Sat, 19 May 2012 18:43:18 +0200
-From: Pawel Osmialowski <pawelo@dcclabs.tv>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.4) Gecko/20120511 Thunderbird/10.0.4
-MIME-Version: 1.0
+	Sat, 19 May 2012 12:05:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:to:mime-version:x-mailer:x-gm-message-state;
+	bh=1aNDDDkHne1lNHpJOkokzcRcWjRqxUQ4Ld3OQ2aLf8o=;
+	b=CHfJrfJ2uut5QBgPTQozgygHjNARV2HEHT0YSqhK+S1RNjHsTwobcult/ARq6wj7MX
+	9BPkTp0Oxqqkq9iWITjsp+pG0uzf0U9gIEl9W4o/8LqAfrxukfh6IDxjlrmUnPt534IE
+	a3HYh5B4NCuhPQTJ9OCRuh4L/0hYOYfilxhYfwcqpe+o5DNJBUQxvDGeiQuRfyzmxN6u
+	xv05iFhFRSsaTRhbEIwkWdft0N+oXsz6XoDYLgAAar2biODQVs8YxWMpE0/AcUjd0KRI
+	zemdxphWyeOMyn4/Nj0AC49H6CbK+34CZ/96JRzZayWmYtp9tXoX8QOc0NavGQHTxUZu
+	Qzrg==
+Received: by 10.216.144.145 with SMTP id n17mr9734219wej.101.1337454334161;
+	Sat, 19 May 2012 12:05:34 -0700 (PDT)
+Received: from [192.168.33.16] (mna75-2-82-67-197-228.fbx.proxad.net.
+	[82.67.197.228])
+	by mx.google.com with ESMTPS id q6sm3453354wiy.0.2012.05.19.12.05.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 19 May 2012 12:05:33 -0700 (PDT)
+From: David Hemmo <david.oe@pilsoft.com>
+Date: Sat, 19 May 2012 21:05:30 +0200
+Message-Id: <99A56572-FA13-4165-A425-D055A777569C@pilsoft.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: tinylogin recipe
+Mime-Version: 1.0 (Apple Message framework v1278)
+X-Mailer: Apple Mail (2.1278)
+X-Gm-Message-State: ALoCoQnxpzWz1/u/ujXqGGUMtWcLNYO5khb1JSEDt0uK5RIjl32W2cOY+Lwm6SyEGR2ZK0kYEQfs
+Subject: Debian packages and angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,41 +45,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2012 16:58:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 19 May 2012 19:15:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-I've pulled OE from git 15th of May 2012, and I wasn't able to build 
-tinylogin - in facts, sources weren't even pull at all.
+When I set ANGSTROM_PKG_FORMAT =3D "deb"in my local.conf file, I get the =
+error:
 
-As it turned out, critical part of the recipe looks like this:
+These are usually caused by circular dependencies and any circular =
+dependency chains found will be printed below. Increase the debug level =
+to see a list of unbuildable tasks.
 
-#SRC_URI = "http://tinylogin.busybox.net/downloads/tinylogin-${PV}.tar.bz2 \
-SRC_URI = 
-"http://limpens.net/trac/at91-kit-trac/export/4/trunk/sources/tinylogin-${PV}.tar.bz2 
-\
-         file://cvs-20040608.patch \
-         file://add-system.patch \
-         file://adduser-empty_pwd.patch \
-         file://remove-index.patch"
+Identifying dependency loops (this may take a short while)...
 
-This '\' at the end of hashed line makes SRC_URI a perfect multiline 
-comment. Putting one line in between solves the problem:
+ERROR:=20
+Dependency loop #1 found:
+  Task 56 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_install) (dependent Tasks =
+['dpkg, do_compile'])
+  Task 57 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_populate_sysroot) (dependent =
+Tasks ['dpkg, do_install'])
+  Task 60 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_configure) (dependent Tasks =
+['autoconf, do_populate_sysroot', 'gnu-config, do_populate_sysroot', =
+'gettext, do_populate_sysroot', 'automake, do_populate_sysroot', =
+'gettext-minimal-native, do_populate_sysroot', 'dpkg, do_patch', 'dpkg, =
+do_populate_sysroot', 'libtool-native, do_populate_sysroot', 'zlib, =
+do_populate_sysroot'])
+  Task 61 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_compile) (dependent Tasks =
+['dpkg, do_configure'])
 
-#SRC_URI = "http://tinylogin.busybox.net/downloads/tinylogin-${PV}.tar.bz2 \
+Can someone help me fix this issue ?
 
-SRC_URI = 
-"http://limpens.net/trac/at91-kit-trac/export/4/trunk/sources/tinylogin-${PV}.tar.bz2 
-\
-         file://cvs-20040608.patch \
-         file://add-system.patch \
-         file://adduser-empty_pwd.patch \
-         file://remove-index.patch"
+I tried PACKAGE_CLASSES =3D "package_deb" but angstrom overrides it=20
 
-Best regards,
-Paul
+The main reason I try to compile with debian packages is because I want =
+to be able to use apt-get to add packages to my distribution (mainly =
+apt-get install ubuntu-omap4-extras). Do you know another way of doing =
+that without forcing angstrom to use debian packages ?
+
+Thanks
+
+David
 
 
 
