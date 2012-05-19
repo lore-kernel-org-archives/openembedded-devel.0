@@ -1,30 +1,23 @@
-Received: from smtp3-g21.free.fr ([212.27.42.3])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1SVf5N-0002QN-P9
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 May 2012 10:32:26 +0200
-Received: from eb-e6520 (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 6E23FA622A;
-	Sat, 19 May 2012 10:22:17 +0200 (CEST)
-Date: Sat, 19 May 2012 10:22:15 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1SVg4k-0004JE-Ix for openembedded-devel@lists.openembedded.org;
+	Sat, 19 May 2012 11:35:59 +0200
+Received: from f053035093.adsl.alicedsl.de ([78.53.35.93]
+	helo=[192.168.178.20])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1SVfVI-0000Tg-DM; Sat, 19 May 2012 08:59:12 +0000
+Message-ID: <1337417934.3976.13.camel@mattotaupa>
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120519102215.0b8edf4e@eb-e6520>
-In-Reply-To: <20120518214833.GB4208@denix.org>
-References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
-	<jp5gkp$2ip$1@dough.gmane.org>
-	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
-	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
-	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
-	<CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
-	<20120518214833.GB4208@denix.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Date: Sat, 19 May 2012 10:58:54 +0200
+In-Reply-To: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
+References: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: Evolution 3.2.2-1 
 Mime-Version: 1.0
-Cc: meta-ti@yoctoproject.org, Koen Kooi <koen@dominion.thruhere.net>,
-	Thilo Fromm <fromm@dresearch-fe.de>
-Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: Re: [2011.03-maintenance] Pull request 20120514
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2012 08:32:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 19 May 2012 09:36:05 -0000
+X-Groupsio-MsgNum: 38896
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature"; 
+	boundary="=-7S1WQltMo/9MXYwun9zg"
+
+--=-7S1WQltMo/9MXYwun9zg
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Denys,
+Dear Chase,
 
-Le Fri, 18 May 2012 17:48:33 -0400,
-Denys Dmytriyenko <denis@denix.org> a =E9crit :
-> Netra and Centaurus are internal codenames for the SoC families behind th=
-ose=20
-> part numbers Koen mentioned above. Those codenames are not publicly adver=
-tised=20
-> and Koen is just showing off after being on the inside... :) :-P
+
+Am Montag, den 14.05.2012, 13:09 -0500 schrieb Chase Maupin:
+
+> Please pull the following commits that update the LICENSE field to
+> list the actual license version for licenses like GPL and LGPL.  These
+> patches have previously been sent to the list with each patch identifying
+> where it was derived from.  I have also submitted patches for oe-core whe=
+re
+> appropriate.
 >=20
-these names were already dislosed on TI's website, for example :
-http://focus.ti.com/asia/download/1105-techday-abstracts-tw.pdf
-http://processors.wiki.ti.com/index.php/DM814x_AM387x_PSP_Flashing_Tools_Gu=
-ide
+> I'm looking for feedback on how to properly mark a package as having two
+> licenses in oe-classic since "&" causes issues.  If these patches are OK
+> then they can be pulled.  If there is a better way to mark the dual licen=
+sing
+> then I'll update them accordingly.
+>=20
+> The following changes since commit 36a56cbb69cda0c89f478e01183d61c6a66525=
+c9:
+>   Steffen Sledz (1):
+>         icedtea6-native-1.7.10: backport S7103224
+>=20
+> are available in the git repository at:
+>=20
+>   http://arago-project.org/git/projects/arago-oe-amsdk.git update-license=
+s
+>=20
+> Chase Maupin (69):
+>       gnutls: update LICENSE setting
 
-and are even in your slides where I first saw them ;-)
-https://wiki.yoctoproject.org/wiki/images/b/b3/Meta-ti.pdf
+I would have liked to have split those up. Update the license and add
+the inherit line.
 
-Eric
+>       libtasn1: update LICENSE setting
+>       bonnie: Update LICENSE field version
+
+It would have been great to have the changed license in the commit
+message also.
+
+[=E2=80=A6]
+
+>       schroedinger: Update LICENSE field version
+
+A change in `schroedinger.inc` is preferred in my opinion.
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+--=-7S1WQltMo/9MXYwun9zg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEABECAAYFAk+3YM4ACgkQPX1aK2wOHVgIfQCeKg8jgpWYwTrL2fS2JIRnaQSp
+M/8AnjyDdTt/8llLrxVr0XQy6Ktc55XO
+=AEn6
+-----END PGP SIGNATURE-----
+
+--=-7S1WQltMo/9MXYwun9zg--
