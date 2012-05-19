@@ -1,37 +1,23 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.oe@pilsoft.com>) id 1SVp7r-0002ym-Ij
+	(envelope-from <mihaix.lindner@linux.intel.com>) id 1SVtMJ-0003wG-TI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 May 2012 21:15:40 +0200
-Received: by wibhm14 with SMTP id hm14so1011552wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 May 2012 12:05:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:subject:date:message-id
-	:to:mime-version:x-mailer:x-gm-message-state;
-	bh=1aNDDDkHne1lNHpJOkokzcRcWjRqxUQ4Ld3OQ2aLf8o=;
-	b=CHfJrfJ2uut5QBgPTQozgygHjNARV2HEHT0YSqhK+S1RNjHsTwobcult/ARq6wj7MX
-	9BPkTp0Oxqqkq9iWITjsp+pG0uzf0U9gIEl9W4o/8LqAfrxukfh6IDxjlrmUnPt534IE
-	a3HYh5B4NCuhPQTJ9OCRuh4L/0hYOYfilxhYfwcqpe+o5DNJBUQxvDGeiQuRfyzmxN6u
-	xv05iFhFRSsaTRhbEIwkWdft0N+oXsz6XoDYLgAAar2biODQVs8YxWMpE0/AcUjd0KRI
-	zemdxphWyeOMyn4/Nj0AC49H6CbK+34CZ/96JRzZayWmYtp9tXoX8QOc0NavGQHTxUZu
-	Qzrg==
-Received: by 10.216.144.145 with SMTP id n17mr9734219wej.101.1337454334161;
-	Sat, 19 May 2012 12:05:34 -0700 (PDT)
-Received: from [192.168.33.16] (mna75-2-82-67-197-228.fbx.proxad.net.
-	[82.67.197.228])
-	by mx.google.com with ESMTPS id q6sm3453354wiy.0.2012.05.19.12.05.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 19 May 2012 12:05:33 -0700 (PDT)
-From: David Hemmo <david.oe@pilsoft.com>
-Date: Sat, 19 May 2012 21:05:30 +0200
-Message-Id: <99A56572-FA13-4165-A425-D055A777569C@pilsoft.com>
+	Sun, 20 May 2012 01:46:52 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 19 May 2012 16:35:36 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="145965660"
+Received: from linux.jf.intel.com (HELO linux.intel.com) ([10.23.219.25])
+	by orsmga002.jf.intel.com with ESMTP; 19 May 2012 16:35:24 -0700
+Received: from localhost.localdomain (unknown [10.237.105.40])
+	by linux.intel.com (Postfix) with ESMTP id 25EAA2C8001;
+	Sat, 19 May 2012 16:35:23 -0700 (PDT)
+From: mihai lindner <mihaix.lindner@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1278)
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQnxpzWz1/u/ujXqGGUMtWcLNYO5khb1JSEDt0uK5RIjl32W2cOY+Lwm6SyEGR2ZK0kYEQfs
-Subject: Debian packages and angstrom
+Date: Sun, 20 May 2012 02:34:11 +0300
+Message-Id: <1337470451-25226-1-git-send-email-mihaix.lindner@linux.intel.com>
+X-Mailer: git-send-email 1.7.10
+Subject: [PATCH] xf86-video-intel: recipe upgrade from 2.18 to 2.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,56 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2012 19:15:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 19 May 2012 23:46:52 -0000
 
-Hello,
+Signed-off-by: mihai lindner <mihaix.lindner@linux.intel.com>
+---
+ .../{xf86-video-intel_2.18.0.bb => xf86-video-intel_2.19.0.bb}   |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta/recipes-graphics/xorg-driver/{xf86-video-intel_2.18.0.bb => xf86-video-intel_2.19.0.bb} (82%)
 
-When I set ANGSTROM_PKG_FORMAT =3D "deb"in my local.conf file, I get the =
-error:
-
-These are usually caused by circular dependencies and any circular =
-dependency chains found will be printed below. Increase the debug level =
-to see a list of unbuildable tasks.
-
-Identifying dependency loops (this may take a short while)...
-
-ERROR:=20
-Dependency loop #1 found:
-  Task 56 =
-(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
-/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_install) (dependent Tasks =
-['dpkg, do_compile'])
-  Task 57 =
-(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
-/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_populate_sysroot) (dependent =
-Tasks ['dpkg, do_install'])
-  Task 60 =
-(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
-/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_configure) (dependent Tasks =
-['autoconf, do_populate_sysroot', 'gnu-config, do_populate_sysroot', =
-'gettext, do_populate_sysroot', 'automake, do_populate_sysroot', =
-'gettext-minimal-native, do_populate_sysroot', 'dpkg, do_patch', 'dpkg, =
-do_populate_sysroot', 'libtool-native, do_populate_sysroot', 'zlib, =
-do_populate_sysroot'])
-  Task 61 =
-(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
-/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_compile) (dependent Tasks =
-['dpkg, do_configure'])
-
-Can someone help me fix this issue ?
-
-I tried PACKAGE_CLASSES =3D "package_deb" but angstrom overrides it=20
-
-The main reason I try to compile with debian packages is because I want =
-to be able to use apt-get to add packages to my distribution (mainly =
-apt-get install ubuntu-omap4-extras). Do you know another way of doing =
-that without forcing angstrom to use debian packages ?
-
-Thanks
-
-David
+diff --git a/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb b/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
+similarity index 82%
+rename from meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb
+rename to meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
+index 637e11c..e9e43ff 100644
+--- a/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb
++++ b/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
+@@ -9,7 +9,7 @@ Infrastructure (DRI)."
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8730ad58d11c7bbad9a7066d69f7808e"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
+ 	    virtual/libgl xineramaproto xf86driproto libpciaccess"
+@@ -22,5 +22,5 @@ EXTRA_OECONF += '${@base_conditional( "ROOTLESS_X", "1", " --enable-kms-only", "
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
+-SRC_URI[md5sum] = "34f3987ffe86e30c57abc33b7f8030e9"
+-SRC_URI[sha256sum] = "dce63e33ccfada39ef1e1e6768dfd8edd4c525670dfe56d1c42b2f9570039ffc"
++SRC_URI[md5sum] = "f397bddfc88d4c9b30b56526c1e02e8e"
++SRC_URI[sha256sum] = "32133d61b14ce3b45b83a60e4ed8eb75159259d708f056144250aaeabf16e4bc"
+-- 
+1.7.10
 
 
 
