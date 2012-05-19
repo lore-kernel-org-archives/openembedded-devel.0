@@ -1,23 +1,20 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mazama.dcclabs.tv ([91.121.153.142])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1SVg4k-0004JE-Ix for openembedded-devel@lists.openembedded.org;
-	Sat, 19 May 2012 11:35:59 +0200
-Received: from f053035093.adsl.alicedsl.de ([78.53.35.93]
-	helo=[192.168.178.20])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1SVfVI-0000Tg-DM; Sat, 19 May 2012 08:59:12 +0000
-Message-ID: <1337417934.3976.13.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <pawelo@dcclabs.tv>) id 1SVmzR-0004mt-2a
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 May 2012 18:58:49 +0200
+Received: from [192.168.1.1] (fish.king.net.pl [83.19.124.154])
+	by mazama.dcclabs.tv (Postfix) with ESMTPSA id 6FC30403B1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 May 2012 18:43:23 +0200 (CEST)
+Message-ID: <4FB7CDA6.9060507@dcclabs.tv>
+Date: Sat, 19 May 2012 18:43:18 +0200
+From: Pawel Osmialowski <pawelo@dcclabs.tv>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.4) Gecko/20120511 Thunderbird/10.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 May 2012 10:58:54 +0200
-In-Reply-To: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-References: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [2011.03-maintenance] Pull request 20120514
+Subject: tinylogin recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,80 +28,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2012 09:36:05 -0000
-X-Groupsio-MsgNum: 38896
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-7S1WQltMo/9MXYwun9zg"
-
---=-7S1WQltMo/9MXYwun9zg
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear Chase,
-
-
-Am Montag, den 14.05.2012, 13:09 -0500 schrieb Chase Maupin:
-
-> Please pull the following commits that update the LICENSE field to
-> list the actual license version for licenses like GPL and LGPL.  These
-> patches have previously been sent to the list with each patch identifying
-> where it was derived from.  I have also submitted patches for oe-core whe=
-re
-> appropriate.
->=20
-> I'm looking for feedback on how to properly mark a package as having two
-> licenses in oe-classic since "&" causes issues.  If these patches are OK
-> then they can be pulled.  If there is a better way to mark the dual licen=
-sing
-> then I'll update them accordingly.
->=20
-> The following changes since commit 36a56cbb69cda0c89f478e01183d61c6a66525=
-c9:
->   Steffen Sledz (1):
->         icedtea6-native-1.7.10: backport S7103224
->=20
-> are available in the git repository at:
->=20
->   http://arago-project.org/git/projects/arago-oe-amsdk.git update-license=
-s
->=20
-> Chase Maupin (69):
->       gnutls: update LICENSE setting
-
-I would have liked to have split those up. Update the license and add
-the inherit line.
-
->       libtasn1: update LICENSE setting
->       bonnie: Update LICENSE field version
-
-It would have been great to have the changed license in the commit
-message also.
-
-[=E2=80=A6]
-
->       schroedinger: Update LICENSE field version
-
-A change in `schroedinger.inc` is preferred in my opinion.
-
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
-
---=-7S1WQltMo/9MXYwun9zg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+X-List-Received-Date: Sat, 19 May 2012 16:58:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Hello,
 
-iEYEABECAAYFAk+3YM4ACgkQPX1aK2wOHVgIfQCeKg8jgpWYwTrL2fS2JIRnaQSp
-M/8AnjyDdTt/8llLrxVr0XQy6Ktc55XO
-=AEn6
------END PGP SIGNATURE-----
+I've pulled OE from git 15th of May 2012, and I wasn't able to build 
+tinylogin - in facts, sources weren't even pull at all.
 
---=-7S1WQltMo/9MXYwun9zg--
+As it turned out, critical part of the recipe looks like this:
+
+#SRC_URI = "http://tinylogin.busybox.net/downloads/tinylogin-${PV}.tar.bz2 \
+SRC_URI = 
+"http://limpens.net/trac/at91-kit-trac/export/4/trunk/sources/tinylogin-${PV}.tar.bz2 
+\
+         file://cvs-20040608.patch \
+         file://add-system.patch \
+         file://adduser-empty_pwd.patch \
+         file://remove-index.patch"
+
+This '\' at the end of hashed line makes SRC_URI a perfect multiline 
+comment. Putting one line in between solves the problem:
+
+#SRC_URI = "http://tinylogin.busybox.net/downloads/tinylogin-${PV}.tar.bz2 \
+
+SRC_URI = 
+"http://limpens.net/trac/at91-kit-trac/export/4/trunk/sources/tinylogin-${PV}.tar.bz2 
+\
+         file://cvs-20040608.patch \
+         file://add-system.patch \
+         file://adduser-empty_pwd.patch \
+         file://remove-index.patch"
+
+Best regards,
+Paul
+
+
+
