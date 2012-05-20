@@ -1,31 +1,23 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1SWAjm-0000D7-9H
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 May 2012 20:20:14 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id q4KHsd5a007423
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 20 May 2012 19:54:40 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.76) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1SWAL0-0002Yv-8R; Sun, 20 May 2012 19:54:38 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2012 19:54:37 +0200
-Message-Id: <1337536477-7047-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.7.6
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 0.995
-X-Spam-Score: -5.3
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.73
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] libtool: fixed parallel build related race
+	(envelope-from <apelete@seketeli.net>) id 1SWCc9-0004gs-By
+	for openembedded-devel@openembedded.org; Sun, 20 May 2012 22:20:29 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 76121EA040;
+	Sun, 20 May 2012 22:21:56 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id E9C6464387; Sun, 20 May 2012 22:10:22 +0200 (CEST)
+Date: Sun, 20 May 2012 22:10:22 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@openembedded.org
+Message-ID: <20120520201022.GQ19142@hermes>
+MIME-Version: 1.0
+In-Reply-To: <1337032989-28606-2-git-send-email-apelete@seketeli.net>
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Subject: Re: [PATCH 1/1] util-linux-ng: Update SRC_URI to kernel.org valid URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2012 18:20:14 -0000
+X-List-Received-Date: Sun, 20 May 2012 20:20:29 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-While building libtool, the libtool script itself will be regenerated
-because OE modifies a dependency[1]. With -jX, this operation (-->
-removal, creation of non-x file, 'chmod a+x') can happen at a time when
-the script is going to be executed.  This can cause errors like:
+Hello,
 
-| arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
-| ...
-| /bin/sh ./config.status libtool
-| ...
-| arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
-| /bin/sh: ./arm-linux-gnueabi-libtool: Permission denied
-| make[2]: *** [libltdl/libltdl_libltdl_la-lt__alloc.lo] Error 126
+Le 15-May-12, Apelete Seketeli a =E9crit:
+> This updates SRC_URI as the former kernel.org URI was no longer valid.
+>=20
+> Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+> ---
+>  recipes/util-linux-ng/util-linux-ng.inc |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-lin=
+ux-ng/util-linux-ng.inc
+> index 9c2a5da..7d5faf0 100644
+> --- a/recipes/util-linux-ng/util-linux-ng.inc
+> +++ b/recipes/util-linux-ng/util-linux-ng.inc
+> @@ -11,7 +11,7 @@ INC_PR =3D "r36"
+>  # allows for a release candidate
+>  RC ?=3D ""
+> =20
+> -SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/utils/util-linux-ng/v${PV}/=
+util-linux-ng-${PV}${RC}.tar.bz2;name=3Darchive"
+> +SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/utils/util-linux/v${PV}/uti=
+l-linux-ng-${PV}${RC}.tar.bz2;name=3Darchive"
+> =20
+>  SRC_URI_append_chinook-compat =3D " file://chinook_libtool.patch "
+> =20
+> --=20
+> 1.7.9.5
+>=20
 
-I am not sure whether the custom do_compile_prepend() is still needed.
-For now only the issue above will be fixed by executing ./config.status
-yet again.
+I need util-linux-ng to build muffinman-image in oe-classic, can
+someone please review this patch ?
+Kristoffer, you can get it from here if needed:
 
-[1] see 648290d5bf4d6ff50d3643bb7ad902dfc23aa702
+http://patchwork.openembedded.org/patch/27737/
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- meta/recipes-devtools/libtool/libtool-2.4.2.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/meta/recipes-devtools/libtool/libtool-2.4.2.inc b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
-index 084062a..c1ef7c4 100644
---- a/meta/recipes-devtools/libtool/libtool-2.4.2.inc
-+++ b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
-@@ -8,7 +8,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-     file://libltdl/COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
- 
--INC_PR = "r2"
-+INC_PR = "r3"
- 
- SRC_URI = "${GNU_MIRROR}/libtool/libtool-${PV}.tar.gz \
-            file://trailingslash.patch \
-@@ -27,6 +27,7 @@ do_compile_prepend () {
- 	# Sometimes this file doesn't get rebuilt, force the issue
- 	rm -f ${S}/libltdl/config/ltmain.sh
- 	make libltdl/config/ltmain.sh
-+	./config.status
- }
- 
- inherit autotools
--- 
-1.7.7.6
-
+Regards.
+--=20
+        Apelete
 
 
