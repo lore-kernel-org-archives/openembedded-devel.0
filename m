@@ -1,23 +1,31 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mihaix.lindner@linux.intel.com>) id 1SW6At-0001zS-K4
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1SWAjm-0000D7-9H
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 May 2012 15:27:55 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 20 May 2012 06:16:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="154887336"
-Received: from linux.jf.intel.com (HELO linux.intel.com) ([10.23.219.25])
-	by fmsmga001.fm.intel.com with ESMTP; 20 May 2012 06:16:44 -0700
-Received: from localhost.localdomain (unknown [10.237.105.40])
-	by linux.intel.com (Postfix) with ESMTP id 5AABF2C8001;
-	Sun, 20 May 2012 06:16:44 -0700 (PDT)
-From: Mihai Lindner <mihaix.lindner@linux.intel.com>
+	Sun, 20 May 2012 20:20:14 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id q4KHsd5a007423
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 20 May 2012 19:54:40 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.76) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1SWAL0-0002Yv-8R; Sun, 20 May 2012 19:54:38 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2012 16:17:32 +0300
-Message-Id: <6b907017a92c4178980b18fbe2fef47cbd2b1a34.1337519599.git.mihaix.lindner@linux.intel.com>
-X-Mailer: git-send-email 1.7.10
-Subject: [PATCH 1/1] sudo: fixed wrong `chmod` path
+Date: Sun, 20 May 2012 19:54:37 +0200
+Message-Id: <1337536477-7047-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.7.6
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 0.995
+X-Spam-Score: -5.3
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,SPF_NEUTRAL,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.73
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH] libtool: fixed parallel build related race
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,41 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2012 13:27:55 -0000
+X-List-Received-Date: Sun, 20 May 2012 18:20:14 -0000
 
-Placed $D between braces ${D} to be correctly expanded to the
-workdir path, instead of a path relative to host rootfs.
-Currently, bitbake sudo fails on host systems where sudo is not
-installed.
+While building libtool, the libtool script itself will be regenerated
+because OE modifies a dependency[1]. With -jX, this operation (-->
+removal, creation of non-x file, 'chmod a+x') can happen at a time when
+the script is going to be executed.  This can cause errors like:
 
-Signed-off-by: Mihai Lindner <mihaix.lindner@linux.intel.com>
+| arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
+| ...
+| /bin/sh ./config.status libtool
+| ...
+| arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
+| /bin/sh: ./arm-linux-gnueabi-libtool: Permission denied
+| make[2]: *** [libltdl/libltdl_libltdl_la-lt__alloc.lo] Error 126
+
+I am not sure whether the custom do_compile_prepend() is still needed.
+For now only the issue above will be fixed by executing ./config.status
+yet again.
+
+[1] see 648290d5bf4d6ff50d3643bb7ad902dfc23aa702
+
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 ---
- meta/recipes-extended/sudo/sudo_1.8.4p4.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta/recipes-devtools/libtool/libtool-2.4.2.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/meta/recipes-extended/sudo/sudo_1.8.4p4.bb b/meta/recipes-extended/sudo/sudo_1.8.4p4.bb
-index 2315322..20c4a14 100644
---- a/meta/recipes-extended/sudo/sudo_1.8.4p4.bb
-+++ b/meta/recipes-extended/sudo/sudo_1.8.4p4.bb
-@@ -1,6 +1,6 @@
- require sudo.inc
+diff --git a/meta/recipes-devtools/libtool/libtool-2.4.2.inc b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
+index 084062a..c1ef7c4 100644
+--- a/meta/recipes-devtools/libtool/libtool-2.4.2.inc
++++ b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+     file://libltdl/COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
  
--PR = "r0"
-+PR = "r1"
+-INC_PR = "r2"
++INC_PR = "r3"
  
- SRC_URI = "http://ftp.sudo.ws/sudo/dist/sudo-${PV}.tar.gz \
-            file://libtool.patch \
-@@ -24,6 +24,6 @@ do_install_append () {
- 		fi
- 	done
- 
--	chmod 4111 $D/usr/bin/sudo
--	chmod 0440 $D/etc/sudoers
-+	chmod 4111 ${D}/usr/bin/sudo
-+	chmod 0440 ${D}/etc/sudoers
+ SRC_URI = "${GNU_MIRROR}/libtool/libtool-${PV}.tar.gz \
+            file://trailingslash.patch \
+@@ -27,6 +27,7 @@ do_compile_prepend () {
+ 	# Sometimes this file doesn't get rebuilt, force the issue
+ 	rm -f ${S}/libltdl/config/ltmain.sh
+ 	make libltdl/config/ltmain.sh
++	./config.status
  }
+ 
+ inherit autotools
 -- 
-1.7.10
+1.7.7.6
 
 
 
