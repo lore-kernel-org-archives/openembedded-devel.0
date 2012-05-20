@@ -1,18 +1,18 @@
 Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SWDyQ-0005qF-SU
+	(envelope-from <andrea.adami@gmail.com>) id 1SWDyR-0005qG-Qg
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 May 2012 23:47:34 +0200
+	Sun, 20 May 2012 23:47:35 +0200
 Received: from mizar.localdomain (87.0.30.151) by smtp209.alice.it (8.6.023.02)
-	id 4EF08A6310BC7C83; Sun, 20 May 2012 23:37:30 +0200
+	id 4EF08A6310BC7C61; Sun, 20 May 2012 23:37:29 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2012 23:37:22 +0200
-Message-Id: <1337549842-1438-3-git-send-email-andrea.adami@gmail.com>
+Date: Sun, 20 May 2012 23:37:21 +0200
+Message-Id: <1337549842-1438-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <1337549842-1438-1-git-send-email-andrea.adami@gmail.com>
 References: <1337549842-1438-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe][meta-initramfs][PATCH 3/3] ubi-utils-klibc: clean ubiformat patch
+Subject: [meta-oe][meta-initramfs][PATCH 2/3] klibc: upgrade to git tag c2c7f19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,62 +28,37 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 20 May 2012 21:47:35 -0000
 
-* fixes have been committed in klibc for stdio and the additional
-* fflush is not necessary anymore (runtime tested pressing CTRL+D)
-* bump PR
+* include last patches of may 2012
+* tracking upstream wrt forthcoming 2.0 release
+* bump INC_PR
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../mtd/ubi-utils-klibc/ubiformat.c.patch          |   16 +++-------------
- .../recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb  |    2 +-
- 2 files changed, 4 insertions(+), 14 deletions(-)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/ubiformat.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/ubiformat.c.patch
-index 7539d76..d21ed57 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/ubiformat.c.patch
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/ubiformat.c.patch
-@@ -1,25 +1,15 @@
- --- a/ubi-utils/ubiformat.c	2012-05-03 01:14:39.000000000 +0200
--+++ b/ubi-utils/ubiformat.c	2012-05-03 01:00:57.000000000 +0200
--@@ -246,7 +246,11 @@
-++++ b/ubi-utils/ubiformat.c	2012-05-20 23:11:57.000000000 +0200
-+@@ -246,7 +246,7 @@
-  
-  	while (1) {
-  		normsg_cont("continue? (yes/no)  ");
- -		if (scanf("%3s", buf) == EOF) {
--+
--+		fflush(stderr);
--+		fflush(stdout);
--+
- +		if (fgets(buf,4,stdin) == NULL) {
-  			sys_errmsg("scanf returned unexpected EOF, assume \"yes\"");
-  			return 1;
-  		}
--@@ -259,10 +263,13 @@
-- 
-- static int answer_is_yes(void)
-- {
--+	fflush(stderr);
--+	fflush(stdout);
--+
-+@@ -262,7 +262,7 @@
-  	char buf[4];
-  
-  	while (1) {
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-index 9a8987c..f975952 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 3706598..4466225 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
+ # debugsources.list: No such file or directory:
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
  
--PR = "r2"
-+PR = "r3"
+-INC_PR = "r0"
++INC_PR = "r1"
  
- inherit klibc
+ KLIBC_ARCH = '${TARGET_ARCH}'
+ KLIBC_ARCH_armeb = 'arm'
+@@ -21,7 +21,7 @@ KLIBC_ARCH_i586 = 'i386'
+ KLIBC_ARCH_i686 = 'i386'
+ KLIBC_ARCH_pentium = 'i386'
  
+-SRCREV = "f8e0ad9812f5e3fe0e7006061b1d5f9f67a80325"
++SRCREV = "c2c7f19a094bba822995f7eba8ec8dfc5cbe4fdb"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
+ 
+ SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
 -- 
 1.7.3.4
 
