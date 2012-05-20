@@ -1,23 +1,37 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mihaix.lindner@linux.intel.com>) id 1SVtMJ-0003wG-TI
+	(envelope-from <david.oe@pilsoft.com>) id 1SW0ze-0007DF-Ti
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 May 2012 01:46:52 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 19 May 2012 16:35:36 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="145965660"
-Received: from linux.jf.intel.com (HELO linux.intel.com) ([10.23.219.25])
-	by orsmga002.jf.intel.com with ESMTP; 19 May 2012 16:35:24 -0700
-Received: from localhost.localdomain (unknown [10.237.105.40])
-	by linux.intel.com (Postfix) with ESMTP id 25EAA2C8001;
-	Sat, 19 May 2012 16:35:23 -0700 (PDT)
-From: mihai lindner <mihaix.lindner@linux.intel.com>
+	Sun, 20 May 2012 09:55:58 +0200
+Received: by wgbdr1 with SMTP id dr1so3506805wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 May 2012 00:45:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:to:mime-version:x-mailer:x-gm-message-state;
+	bh=VCWCPl5tLJkZKO8ggb8ZzrVv9Y8Vp8sjw9R04aAlH6A=;
+	b=QyR3p/cKE0eQxZG0h54jqvB73MILo+jk02LhTSlpWaYBQz9wT5zsGOGm/DJ9uUJMl0
+	j18LJlFFxaTE25S0oCAZ0rEXXbaIRNC3ECvaHHPnzsr0/BOw3hpZL5/jjrE2Y9KcFMHG
+	438gh3LXObeyD69MIceIImIhgoYGjWSBm6g0kygmDMKGEfnhZMauvMaizZ9ULT1n04rR
+	io4U9fE71//l+G6x6FCNWYxxGgVDKYq96M855+dz45PlOLdqdVpRGJw6WgYVl8D0cfMx
+	Im8wkifUrDXwdmxi0uGHwdY8+5M6n/qC6d8rqEedAJy9sI4tHpwB6hh1NwVOk61UwxZE
+	xobw==
+Received: by 10.180.95.137 with SMTP id dk9mr5914494wib.1.1337499952762;
+	Sun, 20 May 2012 00:45:52 -0700 (PDT)
+Received: from [192.168.33.16] (mna75-2-82-67-197-228.fbx.proxad.net.
+	[82.67.197.228])
+	by mx.google.com with ESMTPS id fn2sm24534842wib.0.2012.05.20.00.45.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 20 May 2012 00:45:51 -0700 (PDT)
+From: David Hemmo <david.oe@pilsoft.com>
+Date: Sun, 20 May 2012 09:45:49 +0200
+Message-Id: <5BBA8501-FFFB-4A1D-A111-BC4F1665FC9E@pilsoft.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2012 02:34:11 +0300
-Message-Id: <1337470451-25226-1-git-send-email-mihaix.lindner@linux.intel.com>
-X-Mailer: git-send-email 1.7.10
-Subject: [PATCH] xf86-video-intel: recipe upgrade from 2.18 to 2.19
+Mime-Version: 1.0 (Apple Message framework v1278)
+X-Mailer: Apple Mail (2.1278)
+X-Gm-Message-State: ALoCoQneJ/VvuFWk4v3nWLMWZUmdw1BNKgUdmUuNNrMBG6DgGwV0axU2xcTX80G0eVHdV0xUy1MY
+Subject: Debian packages and angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,40 +45,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2012 23:46:52 -0000
+X-List-Received-Date: Sun, 20 May 2012 07:55:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: mihai lindner <mihaix.lindner@linux.intel.com>
----
- .../{xf86-video-intel_2.18.0.bb => xf86-video-intel_2.19.0.bb}   |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta/recipes-graphics/xorg-driver/{xf86-video-intel_2.18.0.bb => xf86-video-intel_2.19.0.bb} (82%)
+Hello,
 
-diff --git a/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb b/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
-similarity index 82%
-rename from meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb
-rename to meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
-index 637e11c..e9e43ff 100644
---- a/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.18.0.bb
-+++ b/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.19.0.bb
-@@ -9,7 +9,7 @@ Infrastructure (DRI)."
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=8730ad58d11c7bbad9a7066d69f7808e"
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
- 	    virtual/libgl xineramaproto xf86driproto libpciaccess"
-@@ -22,5 +22,5 @@ EXTRA_OECONF += '${@base_conditional( "ROOTLESS_X", "1", " --enable-kms-only", "
- 
- COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
- 
--SRC_URI[md5sum] = "34f3987ffe86e30c57abc33b7f8030e9"
--SRC_URI[sha256sum] = "dce63e33ccfada39ef1e1e6768dfd8edd4c525670dfe56d1c42b2f9570039ffc"
-+SRC_URI[md5sum] = "f397bddfc88d4c9b30b56526c1e02e8e"
-+SRC_URI[sha256sum] = "32133d61b14ce3b45b83a60e4ed8eb75159259d708f056144250aaeabf16e4bc"
--- 
-1.7.10
+When I set ANGSTROM_PKG_FORMAT =3D "deb"in my local.conf file, I get the =
+error:
 
+These are usually caused by circular dependencies and any circular =
+dependency chains found will be printed below. Increase the debug level =
+to see a list of unbuildable tasks.
+
+Identifying dependency loops (this may take a short while)...
+
+ERROR:=20
+Dependency loop #1 found:
+ Task 56 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_install) (dependent Tasks =
+['dpkg, do_compile'])
+ Task 57 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_populate_sysroot) (dependent =
+Tasks ['dpkg, do_install'])
+ Task 60 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_configure) (dependent Tasks =
+['autoconf, do_populate_sysroot', 'gnu-config, do_populate_sysroot', =
+'gettext, do_populate_sysroot', 'automake, do_populate_sysroot', =
+'gettext-minimal-native, do_populate_sysroot', 'dpkg, do_patch', 'dpkg, =
+do_populate_sysroot', 'libtool-native, do_populate_sysroot', 'zlib, =
+do_populate_sysroot'])
+ Task 61 =
+(virtual:native:/home/owner/dvt/OE/angstrom/sources/openembedded-core/meta=
+/recipes-devtools/dpkg/dpkg_1.15.8.7.bb, do_compile) (dependent Tasks =
+['dpkg, do_configure'])
+
+Can someone help me fix this issue ?
+
+I tried PACKAGE_CLASSES =3D "package_deb" but angstrom overrides it=20
+
+The main reason I try to compile with debian packages is because I want =
+to be able to use apt-get to add packages to my distribution (mainly =
+apt-get install ubuntu-omap4-extras). Do you know another way of doing =
+that without forcing angstrom to use debian packages ?
+
+Thanks
+
+David
+
+PS: I am sorry my previous post appeared as an answer to an unrelated =
+topic. I guess I did something wrong :-(=
 
 
