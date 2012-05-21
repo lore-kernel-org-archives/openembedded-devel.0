@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTiF-0004AU-GK
+	(envelope-from <chase.maupin@ti.com>) id 1SWTiH-0004J9-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:35:57 +0200
+	Mon, 21 May 2012 16:35:58 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEPj4n005807
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEPoat000461
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:25:45 -0500
-Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEPjoG031914
+	Mon, 21 May 2012 09:25:50 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEPoqi031990
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:25:45 -0500
-Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle71.ent.ti.com
-	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:25:44 -0500
+	Mon, 21 May 2012 09:25:50 -0500
+Received: from dlelxv24.itg.ti.com (172.17.1.199) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 21 May 2012 09:25:49 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENApT008382;
-	Mon, 21 May 2012 09:25:43 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENApV008382;
+	Mon, 21 May 2012 09:25:48 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:56 -0500
-Message-ID: <1337610609-1173-58-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:58 -0500
+Message-ID: <1337610609-1173-60-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 57/70] gtk-doc: Update LICENSE field version to LGPLv2
+Subject: [PATCH 59/70] libart-lgpl: Update LICENSE field version to LGPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,23 +50,26 @@ Content-Type: text/plain
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/gtk-doc/gtk-doc.bb |    4 ++--
+ recipes/gnome/libart-lgpl.inc |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/gtk-doc/gtk-doc.bb b/recipes/gtk-doc/gtk-doc.bb
-index a7ab21e..c64d5dd 100644
---- a/recipes/gtk-doc/gtk-doc.bb
-+++ b/recipes/gtk-doc/gtk-doc.bb
-@@ -1,7 +1,7 @@
- SECTION = "x11/base"
- SRC_URI = "file://gtk-doc.m4"
+diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
+index aa06237..5208275 100644
+--- a/recipes/gnome/libart-lgpl.inc
++++ b/recipes/gnome/libart-lgpl.inc
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "Library of functions for 2D graphics"
+ SECTION = "x11/gnome"
 -LICENSE = "LGPL"
--PR = "r3"
 +LICENSE = "LGPLv2"
-+PR = "r4"
  
- ALLOW_EMPTY_${PN} = "1"
+ ART_CONFIG = "${HOST_ARCH}/art_config.h"
  
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ # can't use gnome.bbclass due to _ in filename
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
 -- 
 1.7.0.4
 
