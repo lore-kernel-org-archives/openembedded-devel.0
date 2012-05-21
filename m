@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTg4-0000n4-1W
+	(envelope-from <chase.maupin@ti.com>) id 1SWTg6-0000pH-LZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:33:41 +0200
+	Mon, 21 May 2012 16:33:43 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LENWBW005368
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LENY6j009069
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:23:32 -0500
+	Mon, 21 May 2012 09:23:34 -0500
 Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENWLx029827
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENYn8029854
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:23:32 -0500
+	Mon, 21 May 2012 09:23:34 -0500
 Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle71.ent.ti.com
 	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:23:31 -0500
+	Mon, 21 May 2012 09:23:34 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAod008382;
-	Mon, 21 May 2012 09:23:30 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAoe008382;
+	Mon, 21 May 2012 09:23:33 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:06 -0500
-Message-ID: <1337610609-1173-8-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:07 -0500
+Message-ID: <1337610609-1173-9-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 07/70] gtk+: Update LICENSE field version for 2.20.1 to LGPLv2
+Subject: [PATCH 08/70] gnome-keyring: Update LICENSE field version to GPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 14:33:41 -0000
+X-List-Received-Date: Mon, 21 May 2012 14:33:43 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic LGPL to LGPLv2,
-  LGPLv2+, and LGPLv2.1 to reflect the real license version.
+* Updated LICENSE field version from generic GPL to GPLv2+,
+  LGPLv2+, and LGPLv2.1+ to reflect the real license version.
 * This change was based on setting in oe-core as well as code
   inspection
-* Verified for version 2.20.1 of gtk+
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/gtk+/gtk+_2.20.1.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/gnome/gnome-keyring_2.28.2.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
-index 9cffee1..cd3a6d2 100644
---- a/recipes/gtk+/gtk+_2.20.1.bb
-+++ b/recipes/gtk+/gtk+_2.20.1.bb
-@@ -1,5 +1,7 @@
- require gtk+.inc
+diff --git a/recipes/gnome/gnome-keyring_2.28.2.bb b/recipes/gnome/gnome-keyring_2.28.2.bb
+index dceb070..8e63e7e 100644
+--- a/recipes/gnome/gnome-keyring_2.28.2.bb
++++ b/recipes/gnome/gnome-keyring_2.28.2.bb
+@@ -1,8 +1,8 @@
+ DESCRIPTION = "GNOME security credential management"
+-LICENSE = "GPL"
++LICENSE = "GPLv2+ LGPLv2+ LGPLv2.1+"
+ SECTION = "x11/gnome"
+ DEPENDS = " gtk+-native libpam gconf gtk+ libtasn1 libtasn1-native libgcrypt"
+-PR = "r1"
++PR = "r2"
  
-+LICENSE = "LGPLv2 LGPLv2+ LGPLv2.1+"
-+
- SRC_URI_append_virtclass-native = " file://no-demos.patch \
- "
- SRC_URI_append = "file://gtk-dnd-grab-deadlock-fix.patch \
-@@ -10,7 +12,7 @@ SRC_URI_append = "file://gtk-dnd-grab-deadlock-fix.patch \
- SRC_URI[gtk.md5sum] = "53e6f3a93bd22934878fc4a4a34c68aa"
- SRC_URI[gtk.sha256sum] = "0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65"
- 
--PR = "${INC_PR}.4"
-+PR = "${INC_PR}.5"
- 
- BBCLASSEXTEND = "native"
+ inherit gnome pkgconfig
  
 -- 
 1.7.0.4
