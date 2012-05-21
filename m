@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTgI-00019V-Ob
+	(envelope-from <chase.maupin@ti.com>) id 1SWTgK-0001C1-6o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:33:55 +0200
+	Mon, 21 May 2012 16:33:57 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LENj2v005411
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LENmP7031644
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:23:45 -0500
-Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENjeL030033
+	Mon, 21 May 2012 09:23:48 -0500
+Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENmsj030072
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:23:45 -0500
-Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle71.ent.ti.com
-	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:23:45 -0500
+	Mon, 21 May 2012 09:23:48 -0500
+Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 21 May 2012 09:23:47 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAoi008382;
-	Mon, 21 May 2012 09:23:43 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAoj008382;
+	Mon, 21 May 2012 09:23:46 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:11 -0500
-Message-ID: <1337610609-1173-13-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:12 -0500
+Message-ID: <1337610609-1173-14-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 12/70] liba52: Update LICENSE field version to GPLv2
+Subject: [PATCH 13/70] atk: Update LICENSE field version to GPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 14:33:55 -0000
+X-List-Received-Date: Mon, 21 May 2012 14:33:57 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to GPLv2+ to
-  reflect the real license version.
-* This change was back-ported from oe-core
+* Update LICENSE field version from generic LGPL to GPLv2+ and
+  LGPLv2+ to reflect the real license version.
+* This change was based on setting in oe-core as well as code
+  inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/liba52/liba52_0.7.4.bb |    4 ++--
+ recipes/atk/atk_1.30.0.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/liba52/liba52_0.7.4.bb b/recipes/liba52/liba52_0.7.4.bb
-index 7cf630e..1c2168c 100644
---- a/recipes/liba52/liba52_0.7.4.bb
-+++ b/recipes/liba52/liba52_0.7.4.bb
-@@ -1,8 +1,8 @@
- DESCRIPTION = "Library for reading some sort of media format."
--LICENSE = "GPL"
-+LICENSE = "GPLv2+"
- SECTION = "libs"
+diff --git a/recipes/atk/atk_1.30.0.bb b/recipes/atk/atk_1.30.0.bb
+index b3505bf..23c6685 100644
+--- a/recipes/atk/atk_1.30.0.bb
++++ b/recipes/atk/atk_1.30.0.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "An accessibility toolkit for GNOME."
+ SECTION = "x11/libs"
  PRIORITY = "optional"
--PR = "r3"
-+PR = "r4"
+-LICENSE = "LGPL"
++LICENSE = "GPLv2+ LGPLv2+"
  
- inherit autotools
+-PR = "r1"
++PR = "r2"
+ 
+ inherit gnome
  
 -- 
 1.7.0.4
