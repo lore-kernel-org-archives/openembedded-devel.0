@@ -1,35 +1,33 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1SWUBO-0000fD-1E
+	(envelope-from <raj.khem@gmail.com>) id 1SWVOH-0004o2-Ha
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 17:06:02 +0200
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4D00A6YO4PYA11@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	21 May 2012 09:55:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D2775201AD; Mon,
-	21 May 2012 10:55:37 -0400 (EDT)
-Date: Mon, 21 May 2012 10:55:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Eric B?nard <eric@eukrea.com>
-Message-id: <20120521145537.GA12334@denix.org>
-References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
-	<jp5gkp$2ip$1@dough.gmane.org>
-	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
-	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
-	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
-	<CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
-	<20120518214833.GB4208@denix.org> <20120519102215.0b8edf4e@eb-e6520>
-MIME-version: 1.0
-In-reply-to: <20120519102215.0b8edf4e@eb-e6520>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	Thilo Fromm <fromm@dresearch-fe.de>
-Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+	Mon, 21 May 2012 18:23:25 +0200
+Received: by eekd49 with SMTP id d49so1602963eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 May 2012 09:13:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=mOekoprDYZhbJwYImVh2AuS0+ADAdCvlAkX7aPzA4PE=;
+	b=qgjVfg0Abgh1/DUZhqxg+AbFrbv87oJdwOi1/uoY1la+so6eOYvzDYzN67SRMft5l6
+	fHTmcN3Klfl+LigNdYlSMeo7ZQWsEBGhj/0UpmpcHzumyXziTwz4//6tBVvqCYDx193e
+	3YZ/aGQ1UosYK8x/HsjdWMffql6LVK1Fc/JPhn31OpDngqyxcG2HB95DXpypWg0z/PSB
+	9k06kmqDubWGpoKKbi/8xTx/wtbAhyZxVyUYlXT/L5E7ljoYpvuIuTS14qaTAf99c85c
+	SHvJ3nLCC8/obl8a7Yq/8HXMV7LzHEypl4t0GNct19Y/KcO+tuHyNCX4hgojc/wOdmVW
+	ghIg==
+MIME-Version: 1.0
+Received: by 10.213.28.195 with SMTP id n3mr1476699ebc.122.1337616798085; Mon,
+	21 May 2012 09:13:18 -0700 (PDT)
+Received: by 10.14.188.11 with HTTP; Mon, 21 May 2012 09:13:18 -0700 (PDT)
+In-Reply-To: <4FBA4C26.8070601@nedap.com>
+References: <4FBA4C26.8070601@nedap.com>
+Date: Mon, 21 May 2012 09:13:18 -0700
+Message-ID: <CAMKF1sr2SEBY0_e4nwoUYeZ-vUxZtXz4S3RHy9rgHBes4n-NAg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: update from 2010.12 to 2011.03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 15:06:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 21 May 2012 16:23:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sat, May 19, 2012 at 10:22:15AM +0200, Eric B?nard wrote:
-> Hi Denys,
-> 
-> Le Fri, 18 May 2012 17:48:33 -0400,
-> Denys Dmytriyenko <denis@denix.org> a ?crit :
-> > Netra and Centaurus are internal codenames for the SoC families behind those 
-> > part numbers Koen mentioned above. Those codenames are not publicly advertised 
-> > and Koen is just showing off after being on the inside... :) :-P
-> > 
-> these names were already dislosed on TI's website, for example :
-> http://focus.ti.com/asia/download/1105-techday-abstracts-tw.pdf
-> http://processors.wiki.ti.com/index.php/DM814x_AM387x_PSP_Flashing_Tools_Guide
-> 
-> and are even in your slides where I first saw them ;-)
-> https://wiki.yoctoproject.org/wiki/images/b/b3/Meta-ti.pdf
+On Monday, May 21, 2012, Jaap de Jong <jaap.dejong@nedap.com> wrote:
+> Hi everybody!
+> I have this device in the field with 2010.12 installed (glibc)
+> Suppose I'm going to upgrade it to 2011.03 (eglibc).
+> Is this possible at all?
+> Or should I stay with glibc based packages
 
-Good catch, but I didn't say they were secret :) I only said they were not 
-advertised or marketed as official platform names. You can always find those 
-references deep inside the code in several places...
+Glibc and eglibc are totally compatible so I don't see a reason why it
+won't work you will see ant upgrade related
+issues as you would see if you were to upgrade from say glibc 2.10 to 2.1
 
-So, it's understandable that customers may not know them, but it's fine to use 
-those references among the developers.
-
--- 
-Denys
-
+> Thanks,
+> Jaap
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
