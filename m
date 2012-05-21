@@ -1,25 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1SWTia-0004u6-Dk for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:36:17 +0200
-Received: from f053043087.adsl.alicedsl.de ([78.53.43.87]
-	helo=[192.168.178.20])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1SWTYq-0008Ia-2U for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 14:26:12 +0000
-Message-ID: <1337610364.4335.10.camel@mattotaupa>
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 May 2012 16:26:04 +0200
-In-Reply-To: <7D46E86EC0A8354091174257B2FED10138E4605C@DLEE12.ent.ti.com>
-References: <1337018980-29630-1-git-send-email-Chase.Maupin@ti.com>
-	<1337417934.3976.13.camel@mattotaupa>
-	<7D46E86EC0A8354091174257B2FED10138E4605C@DLEE12.ent.ti.com>
-X-Mailer: Evolution 3.2.2-1 
-Mime-Version: 1.0
-Subject: Re: [2011.03-maintenance] Pull request 20120514
+	(envelope-from <chase.maupin@ti.com>) id 1SWTiY-0004qZ-W7
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 May 2012 16:36:16 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEQ6Ak000555
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 May 2012 09:26:07 -0500
+Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEQ6ec032335
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 May 2012 09:26:06 -0500
+Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 21 May 2012 09:26:06 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENApb008382;
+	Mon, 21 May 2012 09:26:05 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 May 2012 09:30:04 -0500
+Message-ID: <1337610609-1173-66-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
+References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
+MIME-Version: 1.0
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH 65/70] neon: Update LICENSE field version to LGPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,67 +41,37 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 21 May 2012 14:36:18 -0000
-X-Groupsio-MsgNum: 38988
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature"; 
-	boundary="=-389jahBZL82eLR1v2Vuy"
+Content-Type: text/plain
 
---=-389jahBZL82eLR1v2Vuy
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* Updated LICENSE field version from generic LGPL to LGPLv2+ to
+  reflect the real license version.
+* This change was based on setting in oe-core as well as code
+  inspection.
 
-Am Montag, den 21.05.2012, 13:53 +0000 schrieb Maupin, Chase:
-> > -----Original Message-----
-> > From: Paul Menzel [mailto:paulepanter@users.sourceforge.net]
-> > Sent: Saturday, May 19, 2012 3:59 AM
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes/neon/neon_0.25.5.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-[=E2=80=A6]
-
-> > > Chase Maupin (69):
-> > >       gnutls: update LICENSE setting
-> >=20
-> > I would have liked to have split those up. Update the license and
-> > add the inherit line.
->=20
-> I'll split this up then and regenerate the patch set.
-
-If that patch set has already been submitted to meta-oe this way, please
-do not spent your time doing that. If it is independent from meta-oe
-please do so.
-
-> > >       libtasn1: update LICENSE setting
-> > >       bonnie: Update LICENSE field version
-> >=20
-> > It would have been great to have the changed license in the
-> > commit message also.
-> >=20
-> > [=E2=80=A6]
-> >=20
-> > >       schroedinger: Update LICENSE field version
-> >=20
-> > A change in `schroedinger.inc` is preferred in my opinion.
->=20
-> I didn't change the .inc because I did not validate all versions of schro=
-edinger.
-
-Understood.
+diff --git a/recipes/neon/neon_0.25.5.bb b/recipes/neon/neon_0.25.5.bb
+index e67132f..a2db6a6 100644
+--- a/recipes/neon/neon_0.25.5.bb
++++ b/recipes/neon/neon_0.25.5.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "neon is an HTTP and WebDAV client library, with a C interface."
+ HOMEPAGE = "http://www.webdav.org/neon"
+ SECTION = "libs"
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2+"
+ DEPENDS = "zlib libxml2 expat time gnutls"
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "http://www.webdav.org/${PN}/${P}.tar.gz \
+            file://gnutls-force-and-detect.patch \
+-- 
+1.7.0.4
 
 
-Thanks,
 
-Paul
-
---=-389jahBZL82eLR1v2Vuy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEABECAAYFAk+6UHwACgkQPX1aK2wOHVjZagCfWyNVMaKV71hoJKvlvth8Ac6i
-6yUAn0AwhAVWliItlLU0FY6jhWyShpBi
-=1P+F
------END PGP SIGNATURE-----
-
---=-389jahBZL82eLR1v2Vuy--
