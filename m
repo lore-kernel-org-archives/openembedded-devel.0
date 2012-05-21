@@ -1,32 +1,32 @@
 Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWThL-0002mO-ET
+	(envelope-from <chase.maupin@ti.com>) id 1SWThO-0002r3-SX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:34:59 +0200
+	Mon, 21 May 2012 16:35:03 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOpS4009788
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOswq009795
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:51 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOpto030969
+	Mon, 21 May 2012 09:24:54 -0500
+Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOs3A031006
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:51 -0500
-Received: from dlelxv24.itg.ti.com (172.17.1.199) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:24:51 -0500
+	Mon, 21 May 2012 09:24:54 -0500
+Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle71.ent.ti.com
+	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 21 May 2012 09:24:54 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAp9008382;
-	Mon, 21 May 2012 09:24:49 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENApA008382;
+	Mon, 21 May 2012 09:24:52 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:36 -0500
-Message-ID: <1337610609-1173-38-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:37 -0500
+Message-ID: <1337610609-1173-39-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 37/70] libsamplerate0: Update LICENSE field version to GPLv2
+Subject: [PATCH 38/70] schroedinger: Update LICENSE field version to GPLv2 and LPGLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 14:35:00 -0000
+X-List-Received-Date: Mon, 21 May 2012 14:35:03 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to GPLv2+ to
-  reflect the real license version.
-* This change was based on setting in oe-core as well as code
-  inspection.
+* Updated LICENSE field version from generic MPL/GPL/LGPL/MIT to
+  MPL-1.1 or LGPLv2 or GPLv2 or MIT to reflect the real license
+  version.
+* This change was based on code inspection
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/libsamplerate/libsamplerate0_0.1.7.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/schroedinger/schroedinger_1.0.9.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/libsamplerate/libsamplerate0_0.1.7.bb b/recipes/libsamplerate/libsamplerate0_0.1.7.bb
-index 2a81e4b..d64cfd5 100644
---- a/recipes/libsamplerate/libsamplerate0_0.1.7.bb
-+++ b/recipes/libsamplerate/libsamplerate0_0.1.7.bb
-@@ -1,8 +1,8 @@
- DESCRIPTION = "An audio Sample Rate Conversion library"
- SECTION = "libs"
--LICENSE = "GPL libsamplerate"
-+LICENSE = "GPLv2+"
+diff --git a/recipes/schroedinger/schroedinger_1.0.9.bb b/recipes/schroedinger/schroedinger_1.0.9.bb
+index 2994428..7813083 100644
+--- a/recipes/schroedinger/schroedinger_1.0.9.bb
++++ b/recipes/schroedinger/schroedinger_1.0.9.bb
+@@ -1,6 +1,8 @@
+ require schroedinger.inc
  
--PR = "r2"
-+PR = "r3"
+-PR = "${INC_PR}.0"
++LICENSE = "MPL-1.1 | LGPLv2 | GPLv2 | MIT"
++
++PR = "${INC_PR}.1"
  
- SRC_URI = "http://www.mega-nerd.com/SRC/libsamplerate-${PV}.tar.gz \
-            file://libsamplerate-0.1.7-macro-quoting.patch;striplevel=0 \
+ inherit autotools
+ 
 -- 
 1.7.0.4
 
