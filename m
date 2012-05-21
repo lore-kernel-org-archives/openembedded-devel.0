@@ -1,35 +1,35 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SWLdv-00044N-Lo
+	(envelope-from <fromm@dresearch-fe.de>) id 1SWNQS-0006UT-C9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 07:58:55 +0200
-Received: by wgbds1 with SMTP id ds1so2325893wgb.0
+	Mon, 21 May 2012 09:53:08 +0200
+Received: by lbol5 with SMTP id l5so3373221lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2012 22:48:48 -0700 (PDT)
+	Mon, 21 May 2012 00:43:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=6kQvhSTUiiHxzNDVJjG5aVIbmu8WeSw3c/EaodYU9Sk=;
-	b=GruD8/mT5Njj9F7rBcp/9jOzu5yg9MfQ94WHrdPsM6z9Oeq0azDLuEHHTMH0SqhJvB
-	IBy/rTP+sOsnTOw+xoBkpXiYsToLMxYYyl0jbSgJ69r/90GzqpgpNn7dUbqQ6rIMAihQ
-	PKTnFyQGDW1mUplf9Wh8AJNvAMeo33i9swCPNJRCzk5+F1pvg0nm+SpE6qblsmi2cj6c
-	cP23NZq0BehsqevycFDBS5j8F6onXUGdvg/2cznz49eebWswe4Ufz15X97L7tYXkhlyC
-	dYAOGgbyKhX7oBommwR3QX5UJoXLhzs9OIqA3xPZuMhl8KXcMQXTCGc7O9VQ6Zmfhl/0
-	wRdg==
-Received: by 10.216.139.73 with SMTP id b51mr12752966wej.72.1337579328619;
-	Sun, 20 May 2012 22:48:48 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id fl2sm36554873wib.2.2012.05.20.22.48.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 20 May 2012 22:48:47 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=v74gnOytRBgNaC509G+pq0iUax0xlNoMBMIIDGoC4JM=;
+	b=KaVUu33nUkWNZAkVzwr+ueSZHAoTyeXuXRWJGAhdHtBYdwwakTsrIYxNwiikmPuA0y
+	3sd7LqOIdvLd42zywTFUH9dklfXNx5FAzlqDK8zPjdtZkrtl9af3JjLFUdA+pVRqvq3f
+	5LCZYXsyHKFr3Y9nyajR4M03ZFJ0xf5ELxIBjBRBwXPP3UpuGHsciOyKUN5wIL+SVq38
+	z+ccZuyCIwFoELXA5FMw7YCBOlSuptZccrSI9/6fAHi1rmyhtHxTwM3Qfxa33Z4inSqO
+	X0W0nU2DUG4k3+6ITAzJNNg/oMzi7r/mwH8B4RmrDV3LMaxdrhzo0D0wc1SrqwjbUL+w
+	LdTA==
+MIME-Version: 1.0
+Received: by 10.112.86.132 with SMTP id p4mr8117128lbz.22.1337586180293; Mon,
+	21 May 2012 00:43:00 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Mon, 21 May 2012 00:43:00 -0700 (PDT)
+In-Reply-To: <20120518213950.GA4208@denix.org>
+References: <CADZ6=avSzGXb3h1BunDQqqojA7tv-gO2VRicC6nt9KzAuNOcUg@mail.gmail.com>
+	<20120518213950.GA4208@denix.org>
+Date: Mon, 21 May 2012 09:43:00 +0200
+Message-ID: <CADZ6=at_MQ1FWKW+m3eBpK+ysacLZPw0J8KrASRvsk11Wpwg2A@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 May 2012 07:48:36 +0200
-Message-Id: <1337579316-13833-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQkeOjG5m1cxrdCLQuZ2BPRTUxozizLX5XXjmdYjrijO29G+g0PGQWo0Mdb0eHs+bydGcuZd
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] bootchart: update to v1.16
+X-Gm-Message-State: ALoCoQkjr2+5rsF9rMLrLF2Tu7z2rd25hymlQxbq+FK7CR8Oxm5O7eBV7V7a9lQvshClvdtJaKNa
+Subject: Re: Introducing the HidaV layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,147 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 05:58:56 -0000
+X-List-Received-Date: Mon, 21 May 2012 07:53:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- ...g-add-rudimentary-support-for-ARM-cpuinfo.patch |   49 ++++++++++++++++++++
- ...c-os-release-and-use-PRETTY_NAME-for-the-.patch |   39 ++++++++++++++++
- .../recipes-devtools/bootchart/bootchart_git.bb    |   16 +++++--
- 3 files changed, 99 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
- create mode 100644 meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
+Hello Denys,
 
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch b/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
-new file mode 100644
-index 0000000..0494c4f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
-@@ -0,0 +1,49 @@
-+From 8d40b4c286e005e82fa50b66fbbbde22b7e65e15 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Sun, 20 May 2012 21:35:34 +0200
-+Subject: [PATCH 1/2] svg: add rudimentary support for ARM cpuinfo
-+
-+On ARM /proc/cpuinfo looks like this:
-+
-+root@beagleboneA3-0428:~# cat /proc/cpuinfo
-+Processor	: ARMv7 Processor rev 2 (v7l)
-+BogoMIPS	: 498.89
-+Features	: swp half thumb fastmult vfp edsp thumbee neon vfpv3 tls
-+CPU implementer	: 0x41
-+CPU architecture: 7
-+CPU variant	: 0x3
-+CPU part	: 0xc08
-+CPU revision	: 2
-+
-+Hardware	: am335xevm
-+Revision	: 0000
-+Serial		: 0000000000000000
-+
-+So no real way to get the actual SoC name, TI AM3359, but a lot better than 'Unknown'
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+
-+Upstream-status: submitted
-+
-+ svg.c |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/svg.c b/svg.c
-+index 80e0292..53724b2 100644
-+--- a/svg.c
-++++ b/svg.c
-+@@ -178,6 +178,10 @@ void svg_title(void)
-+ 				strncpy(cpu, &buf[13], 255);
-+ 				break;
-+ 			}
-++			if (strstr(buf, "Processor")) {
-++				strncpy(cpu, &buf[12], 255);
-++				break;
-++			}
-+ 		}
-+ 		fclose(f);
-+ 	}
-+-- 
-+1.7.10
-+
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch b/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
-new file mode 100644
-index 0000000..b3bda45
---- /dev/null
-+++ b/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
-@@ -0,0 +1,39 @@
-+From e3adb4c312c6ba3491b7c173559efac7a53e5abc Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Sun, 20 May 2012 22:12:29 +0200
-+Subject: [PATCH 2/2] svg: open /etc/os-release and use PRETTY_NAME for the
-+ 'Build' name
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+
-+Upstream-status: Submitted
-+
-+ svg.c |   11 +++++++++++
-+ 1 file changed, 11 insertions(+)
-+
-+diff --git a/svg.c b/svg.c
-+index 53724b2..c675d84 100644
-+--- a/svg.c
-++++ b/svg.c
-+@@ -194,6 +194,17 @@ void svg_title(void)
-+ 		fclose(f);
-+ 	}
-+ 
-++	f = fopen("/etc/os-release", "r");
-++	if(f) {
-++		while (fgets(buf, 255, f)) {
-++			if (strstr(buf, "PRETTY_NAME=")) {
-++				strncpy(build, &buf[12], 255);
-++				break;
-++			}
-++		}
-++		fclose(f);
-++	}
-++
-+ 	svg("<text class=\"t1\" x=\"0\" y=\"30\">Bootchart for %s - %s</text>\n",
-+ 	    uts.nodename, date);
-+ 	svg("<text class=\"t2\" x=\"20\" y=\"50\">System: %s %s %s %s</text>\n",
-+-- 
-+1.7.10
-+
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-index 62705f6..f5ef582 100644
---- a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-+++ b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-@@ -4,12 +4,18 @@ HOMEPAGE = "http://meego.gitorious.org/meego-developer-tools/bootchart"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fcb02dc552a041dee27e4b85c7396067"
- 
--SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git"
--SRCREV = "4420bc4318c4aada7c7d128105e56ecc8c84cb19"
-+PV = "1.16"
-+PR = "r1"
-+PE = "1"
-+
-+SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git \
-+           file://0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch \
-+           file://0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch \
-+          "
-+
-+SRCREV = "872fb107028e377eef3c0c7c8a6e0f7c32b8ebb8"
- 
- S = "${WORKDIR}/git"
- 
--do_install() {
--	oe_runmake install DESTDIR=${D}
--}
-+inherit autotools
- 
--- 
-1.7.10
+>> The code is here: <https://github.com/DFE/HidaV>
+>> Some initial documentation: <https://github.com/DFE/HidaV/wiki>
+>
+> Just couple questions - wouldn't it be better to send fixes to the underl=
+ying
+> layers that you integrate, instead of holding them in your own integratio=
+n
+> layer?
 
+In my opinion it's best to have both. We certainly plan to integrate
+our fixes and extensions with upstream layers and projects; actually,
+that's what meta-hidav/recipes-upstream/ is for. Until they're
+accepted, however, they will live in our own layer. This way we have
+better tracking of changes requested by upstream.
+
+Maintaining our own layer also allows for stunts like providing
+continued support for gcc-4.5 with the current Angstrom even though
+meta-oe/toolchain-layer deprecated and removed that version of gcc.
+
+> And if it's for your unique ti8148-based board, then it's fine, it may
+> warrant a separate BSP layer for that. But why did you chose to pre-integ=
+rate
+> other layers into yours? Although you seem to be using sub-modules, but i=
+t's
+> still pre-integration, a-la Yocto/Poky releases...
+
+It is. The point is that HidaV is actually a BSP _and_ a distribution,
+but it seems to be too small for now to be split into two separate
+layers (hidav-bsp and hidav-dist). I do second your suggestion,
+though. So the split might happen at a later point.
+
+> Ah, and BTW, I think your layer ordering and priorities[1] are slightly w=
+rong,
+> as usually BSP layers reside lower than Software layers (i.e. meta-oe), b=
+ut
+> Distro layers (i.e. angstrom) should probably be on top...
+
+You're right, it sure looks unusual. It's because of the Dist/BSP mashup.
+
+Regards,
+Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
