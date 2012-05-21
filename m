@@ -1,32 +1,32 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTgn-0001zh-1G
+	(envelope-from <chase.maupin@ti.com>) id 1SWTgs-00025B-CP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:34:25 +0200
+	Mon, 21 May 2012 16:34:31 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOHtJ009220
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOKkw005523
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:17 -0500
+	Mon, 21 May 2012 09:24:20 -0500
 Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOHED030551
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOKes030591
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:17 -0500
+	Mon, 21 May 2012 09:24:20 -0500
 Received: from dlelxv24.itg.ti.com (172.17.1.199) by DLEE74.ent.ti.com
 	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:24:17 -0500
+	Mon, 21 May 2012 09:24:19 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAou008382;
-	Mon, 21 May 2012 09:24:15 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAov008382;
+	Mon, 21 May 2012 09:24:18 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:23 -0500
-Message-ID: <1337610609-1173-25-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:24 -0500
+Message-ID: <1337610609-1173-26-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 24/70] gdbm: Update LICENSE field version to GPLv2
+Subject: [PATCH 25/70] libgpg-error: Update LICENSE field version to GPLv2 and LGPLv2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 14:34:32 -0000
+X-List-Received-Date: Mon, 21 May 2012 14:34:33 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to GPLv2+ to
-  reflect the real license version.
-* This change was back-ported from oe-core.
+* Updated LICENSE field version from generic GPL/LGPL/FDL to
+  GPLv2 and LGPLv2.1 to reflect the real license version.
+* This change was based on setting in oe-core as well as code
+  inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/gdbm/gdbm_1.8.3.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/libgpg-error/libgpg-error_1.4.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/gdbm/gdbm_1.8.3.bb b/recipes/gdbm/gdbm_1.8.3.bb
-index 24c541a..20cd441 100644
---- a/recipes/gdbm/gdbm_1.8.3.bb
-+++ b/recipes/gdbm/gdbm_1.8.3.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "GNU dbm is a set of database routines that use extensible hashing
- HOMEPAGE = "http://www.gnu.org/software/gdbm/gdbm.html"
- SECTION = "libs"
- PRIORITY = "optional"
--LICENSE = "GPL"
-+LICENSE = "GPLv2+"
+diff --git a/recipes/libgpg-error/libgpg-error_1.4.bb b/recipes/libgpg-error/libgpg-error_1.4.bb
+index 951bd28..38715aa 100644
+--- a/recipes/libgpg-error/libgpg-error_1.4.bb
++++ b/recipes/libgpg-error/libgpg-error_1.4.bb
+@@ -1,6 +1,8 @@
+ require libgpg-error.inc
  
--PR = "r5"
-+PR = "r6"
+-PR = "${INC_PR}.1"
++LICENSE = "GPLv2 LGPLv2.1"
++
++PR = "${INC_PR}.2"
  
- SRC_URI = "${GNU_MIRROR}/gdbm/gdbm-${PV}.tar.gz \
- 	   file://makefile.patch \
+ SRC_URI[md5sum] = "86e60e9a03205fb706e99be101a2387e"
+ SRC_URI[sha256sum] = "fff67ec5ffc93cf91fc62350a19a9f677c9bc6eb2730395d22f9d40c754ed619"
 -- 
 1.7.0.4
 
