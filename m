@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTgc-0001gj-Q5
+	(envelope-from <chase.maupin@ti.com>) id 1SWTgf-0001kd-68
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:34:15 +0200
+	Mon, 21 May 2012 16:34:17 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEO6bX005486
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEO9q6009197
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:06 -0500
+	Mon, 21 May 2012 09:24:09 -0500
 Received: from DFLE71.ent.ti.com (dfle71.ent.ti.com [128.247.5.62])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEO6Y4030377
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEO9Kt030428
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:06 -0500
+	Mon, 21 May 2012 09:24:09 -0500
 Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle71.ent.ti.com
 	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:24:06 -0500
+	Mon, 21 May 2012 09:24:09 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAoq008382;
-	Mon, 21 May 2012 09:24:04 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAor008382;
+	Mon, 21 May 2012 09:24:07 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:19 -0500
-Message-ID: <1337610609-1173-21-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:20 -0500
+Message-ID: <1337610609-1173-22-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 20/70] faac: Update LICENSE field version to LGPLv2
+Subject: [PATCH 21/70] faad2: Update LICENSE field version to GPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 14:34:15 -0000
+X-List-Received-Date: Mon, 21 May 2012 14:34:17 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic LGPL to LGPLv2 to
+* Updated LICENSE field version from generic LGPL to GPLv2 to
   reflect the real license version.
-* This change was based on code inspection.
+* This change was back-ported from oe-core.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/faac/faac_1.24.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/faad2/faad2_2.7.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/faac/faac_1.24.bb b/recipes/faac/faac_1.24.bb
-index b635b32..a7e548b 100644
---- a/recipes/faac/faac_1.24.bb
-+++ b/recipes/faac/faac_1.24.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "Library for reading some sort of media format."
+diff --git a/recipes/faad2/faad2_2.7.bb b/recipes/faad2/faad2_2.7.bb
+index e778432..b1cc7e3 100644
+--- a/recipes/faad2/faad2_2.7.bb
++++ b/recipes/faad2/faad2_2.7.bb
+@@ -1,8 +1,10 @@
+ DESCRIPTION = "Library for reading some sort of media format."
  SECTION = "libs"
- PRIORITY = "optional"
- DEPENDS = ""
 -LICENSE = "LGPL"
-+LICENSE = "LGPLv2 LGPLv2.1"
++LICENSE = "GPLv2"
+ PRIORITY = "optional"
  
--PR = "r1"
-+PR = "r2"
- 
++PR = "r1"
++
  inherit autotools
  
+ SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-${PV}/${PN}-${PV}.tar.bz2;name=faad2 \
 -- 
 1.7.0.4
 
