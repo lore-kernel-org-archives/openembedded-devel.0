@@ -1,32 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1SWTh2-0002JQ-VX
+	(envelope-from <chase.maupin@ti.com>) id 1SWTh8-0002Rr-9x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 May 2012 16:34:41 +0200
+	Mon, 21 May 2012 16:34:46 +0200
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOXBG005561
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4LEOcbS032235
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:33 -0500
+	Mon, 21 May 2012 09:24:38 -0500
 Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOXwt030772
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LEOc13030822
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 09:24:33 -0500
+	Mon, 21 May 2012 09:24:38 -0500
 Received: from dlelxv24.itg.ti.com (172.17.1.199) by dfle70.ent.ti.com
 	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 May 2012 09:24:33 -0500
+	Mon, 21 May 2012 09:24:38 -0500
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAp2008382;
-	Mon, 21 May 2012 09:24:31 -0500
+	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4LENAp4008382;
+	Mon, 21 May 2012 09:24:36 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 May 2012 09:29:29 -0500
-Message-ID: <1337610609-1173-31-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 21 May 2012 09:29:31 -0500
+Message-ID: <1337610609-1173-33-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 References: <1337610609-1173-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 30/70] libmodplug: Update LICENSE field version to PD
+Subject: [PATCH 32/70] mpeg2dec: Update LICENSE field version to GPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +43,32 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 X-List-Received-Date: Mon, 21 May 2012 14:34:46 -0000
 Content-Type: text/plain
 
-* Updated LICENSE field version from generic GPL to PD to
-  reflect the change from GPL to the Public Domain license.
-* This change was back-ported from oe-core.
+* Updated LICENSE field version from generic GPL to GPLv2+ to
+  reflect the real license version.
+* This change was based on setting in oe-core as well as code
+  inspection.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/libmodplug/libmodplug_0.8.7.bb |    4 ++--
+ recipes/mpeg2dec/mpeg2dec_0.4.0b.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/libmodplug/libmodplug_0.8.7.bb b/recipes/libmodplug/libmodplug_0.8.7.bb
-index 7d198a9..3df4d4c 100644
---- a/recipes/libmodplug/libmodplug_0.8.7.bb
-+++ b/recipes/libmodplug/libmodplug_0.8.7.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Library for reading mod-like audio files."
- HOMEPAGE = "http://modplug-xmms.sf.net"
+diff --git a/recipes/mpeg2dec/mpeg2dec_0.4.0b.bb b/recipes/mpeg2dec/mpeg2dec_0.4.0b.bb
+index 8b1f81b..ac55c2b 100644
+--- a/recipes/mpeg2dec/mpeg2dec_0.4.0b.bb
++++ b/recipes/mpeg2dec/mpeg2dec_0.4.0b.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "Libraries and test programs for decoding mpeg-2 and mpeg-1 video
+ HOMEPAGE = "http://libmpeg2.sourceforge.net/"
  SECTION = "libs"
+ PRIORITY = "optional"
 -LICENSE = "GPL"
-+LICENSE = "PD"
++LICENSE = "GPLv2+"
+ DEPENDS = "virtual/libsdl"
+-PR = "r5"
++PR = "r6"
  
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz"
- 
+ SRC_URI = "http://libmpeg2.sourceforge.net/files/mpeg2dec-${PV}.tar.gz"
+ S = "${WORKDIR}/mpeg2dec-0.4.0"
 -- 
 1.7.0.4
 
