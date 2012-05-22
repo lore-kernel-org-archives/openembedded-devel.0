@@ -1,33 +1,27 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SWcqT-0000ho-5R
+	(envelope-from <jaap.dejong@nedap.com>) id 1SWipG-0005d7-RG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 May 2012 02:21:01 +0200
-Received: by eaal1 with SMTP id l1so1711826eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2012 17:10:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=J53O7xopPZo/On5jVXRQvVGHFW1qgfiJ53t0xA4E8VI=;
-	b=DT3z+GDLuByIfoRVHiC6+pvb8xTTdFHzq8WRJ5XDUOMdQPB9aDfgwZyB8hTqW1kd6h
-	kK2KFJKxt9eL/iqb0uTJoPN47Upa2Oy6TdV2CTSDsOcfuWoalDZaGCrJsaPJFqiEvA2O
-	q89tg4V0HwcL/4kRqvTuJTIqQV7yzA2+nWukr4LDZYV5yPTLrFc4YzLYEBJmlJbKXi3y
-	KJPh3dpJGqQ3LvjKBYl9CwDvF9uw3XtqRiqElno45WmmbjhyLq0XSKWtDrx0ANzmgp3t
-	Gf27lC67pkOaFL1xHTNED8KbiYUMPHT1MRpVNSbu8445Se6/q0cwdq5vno0tbj1HHr3J
-	6tTg==
-Received: by 10.14.127.201 with SMTP id d49mr3928993eei.52.1337645452790; Mon,
-	21 May 2012 17:10:52 -0700 (PDT)
+	Tue, 22 May 2012 08:44:10 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Tue, 22 May 2012
+	08:34:01 +0200
+X-TM-IMSS-Message-ID: <7631a6130021eadd@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 7631a6130021eadd ;
+	Tue, 22 May 2012 08:34:05 +0200
+Message-ID: <4FBB3356.2020702@nedap.com>
+Date: Tue, 22 May 2012 08:33:58 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
 MIME-Version: 1.0
-Received: by 10.14.188.11 with HTTP; Mon, 21 May 2012 17:10:22 -0700 (PDT)
-In-Reply-To: <CAAQYJAuDLh1T6eqhWZG67ugrmBbTCBrdQq7T90Vydv-1XP-5OA@mail.gmail.com>
-References: <1337549842-1438-1-git-send-email-andrea.adami@gmail.com>
-	<CAMKF1so+__G_LDzj5DDZgQpae63EytLbaZNR5dnwTUAD+3r-3g@mail.gmail.com>
-	<CAAQYJAuDLh1T6eqhWZG67ugrmBbTCBrdQq7T90Vydv-1XP-5OA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 21 May 2012 17:10:22 -0700
-Message-ID: <CAMKF1soFNVg48R_i-jBaNpS5OtmzkiyP9op7pcQCsDCxde4nFA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-initramfs][PATCH 1/3] klibc.bbclass: use klcc as CPP
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4FBA4C26.8070601@nedap.com>
+	<CAMKF1sr2SEBY0_e4nwoUYeZ-vUxZtXz4S3RHy9rgHBes4n-NAg@mail.gmail.com>
+In-Reply-To: <CAMKF1sr2SEBY0_e4nwoUYeZ-vUxZtXz4S3RHy9rgHBes4n-NAg@mail.gmail.com>
+Subject: Re: update from 2010.12 to 2011.03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,13 +35,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2012 00:21:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 May 2012 06:44:11 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 21, 2012 at 2:33 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
->
-> This one seems already there (see full recipe below). Anything missing?
 
-nice. I dont see anything else. Looks good.
+>> I have this device in the field with 2010.12 installed (glibc)
+>> Suppose I'm going to upgrade it to 2011.03 (eglibc).
+>> Is this possible at all?
+>> Or should I stay with glibc based packages
+> Glibc and eglibc are totally compatible so I don't see a reason why it
+> won't work you will see ant upgrade related
+> issues as you would see if you were to upgrade from say glibc 2.10 to 2.1
+Well, I tried upgrading from glibc-2010.12 to eglibc-2011.03 ... and failed.
+Then I thought maybe they weren't that compatible.
+
+     ///
+     Upgrading opkg on root from 0.1.8+svnr554-r31.6 to 
+0.1.8+svnr609-r51.9...
+     Downloading 
+http://myrepository/ipk/armv5te/opkg_0.1.8+svnr609-r51.9_armv5te.ipk.
+     Upgrading libopkg0 on root from 0.1.8+svnr554-r31.6 to 
+0.1.8+svnr609-r51.9...
+     Downloading 
+http://myrepository/ipk/armv5te/libopkg0_0.1.8+svnr609-r51.9_armv5te.ipk.
+     Removing obsolete file /etc/rcS.d/S98configure.
+     Upgrading wget on root from 1.11.4-r8.05.6 to 1.11.4-r8.05.9...
+     Downloading 
+http://myrepository/ipk/armv5te/wget_1.11.4-r8.05.9_armv5te.ipk.
+     Upgrading libssl1.0.0 on root from 1.0.0b-r13.1.6 to 1.0.0e-r15.0.9...
+     Downloading 
+http://myrepository/ipk/armv5te/libssl1.0.0_1.0.0e-r15.0.9_armv5te.ipk.
+     wget: /usr/lib/libssl.so.1.0.0: version `OPENSSL_0.9.8' not found 
+(required by wget)
+     wget: /usr/lib/libcrypto.so.1.0.0: version `OPENSSL_1.0.0' not 
+found (required by /usr/lib/libssl.so.1.0.0)
+     wget: /usr/lib/libssl.so.1.0.0: version `OPENSSL_0.9.8' not found 
+(required by wget)
+     wget: /usr/lib/libcrypto.so.1.0.0: version `OPENSSL_1.0.0' not 
+found (required by /usr/lib/libssl.so.1.0.0)
+     ///
+
+So, I build glibc based repository and surprise, surprise...
+same error!
+
+     ///
+     Upgrading libopkg0 on root from 0.1.8+svnr554-r31.6 to 
+0.1.8+svnr609-r51.9...
+     Downloading 
+http://myrepository/ipk/armv5te/libopkg0_0.1.8+svnr609-r51.9_armv5te.ipk.
+     Removing obsolete file /etc/rcS.d/S98configure.
+     Upgrading wget on root from 1.11.4-r8.05.6 to 1.11.4-r8.05.9...
+     Downloading 
+http://myrepository/ipk/armv5te/wget_1.11.4-r8.05.9_armv5te.ipk.
+     Upgrading libssl1.0.0 on root from 1.0.0b-r13.1.6 to 1.0.0e-r15.0.9...
+     Downloading 
+http://myrepository/ipk/armv5te/libssl1.0.0_1.0.0e-r15.0.9_armv5te.ipk.
+     wget: /usr/lib/libssl.so.1.0.0: version `OPENSSL_0.9.8' not found 
+(required by wget)
+     wget: /usr/lib/libcrypto.so.1.0.0: version `OPENSSL_1.0.0' not 
+found (required by /usr/lib/libssl.so.1.0.0)
+     wget: /usr/lib/libssl.so.1.0.0: version `OPENSSL_0.9.8' not found 
+(required by wget)
+     wget: /usr/lib/libcrypto.so.1.0.0: version `OPENSSL_1.0.0' not 
+found (required by /usr/lib/libssl.so.1.0.0)
+     ///
+
+Any hint is appreciated!
+Jaap
+
+
 
 
