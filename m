@@ -1,32 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from dd12300.kasserver.com ([85.13.134.141])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SXDzX-00008U-Jq
+	(envelope-from <info@itPenguin.de>) id 1SXInB-0007BT-CU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 May 2012 18:00:51 +0200
-Received: by werg55 with SMTP id g55so5180266wer.6
+	Wed, 23 May 2012 23:08:25 +0200
+Received: from server.itpinguin.de (37-1-165-12.ip.skylogicnet.com
+	[37.1.165.12])
+	by dd12300.kasserver.com (Postfix) with ESMTPSA id C69FF420095
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 May 2012 08:50:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=FsS6vrYEzfHj53txzUxRm/8fGRKoJTlcmlj9mEvG7BU=;
-	b=XhYlebQbADJ6yFYlpQLqd4U3392GuLeIyh7SNSsT+MAYlmZsTuGvcFqGzKKeDn//tm
-	UMMAWVCa0yDQUKlPpnmeN9oMpYk7ujG1I12ScYcNcq4KipkGCk+fl8vvTlPZykXLuHKV
-	huwGxkNlVP6TabV0MgfP95nslrkj4oe69//s69KGwy11Jod+AiI0vvCbc0wu2x+Ats43
-	P5ErZ7LCJzVFmaa2cEGrjmDhWxY/G4II3Mx9T20hIzkn8iVTZ8nl6Gr03eR/EXb7T1YP
-	hf/RduUx0er8uMBC5VzEQD4wF3zO+sjzbpC6qWp+Zypb2M40ozaBy9CH+9zhePv2elo5
-	TWrw==
-Received: by 10.180.102.36 with SMTP id fl4mr40013554wib.2.1337788241751;
-	Wed, 23 May 2012 08:50:41 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ez4sm40788756wid.3.2012.05.23.08.50.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 May 2012 08:50:41 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 23 May 2012 22:51:37 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by server.itpinguin.de (Postfix) with ESMTP id DEB0A176009
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 May 2012 22:51:31 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at itpinguin.de
+Received: from server.itpinguin.de ([127.0.0.1])
+	by localhost (server.itpinguin.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XrrIm4yN+s4E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 May 2012 22:51:25 +0200 (CEST)
+Received: from [192.168.100.2] (troubadix.itpinguin.de [192.168.100.2])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by server.itpinguin.de (Postfix) with ESMTPS id A40B0176008
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 May 2012 22:51:25 +0200 (CEST)
+Message-ID: <4FBD4DCD.3010505@itPenguin.de>
+Date: Wed, 23 May 2012 22:51:25 +0200
+From: info <info@itPenguin.de>
+Organization: itPenguin GmbH
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 May 2012 17:50:37 +0200
-Message-Id: <1337788237-9475-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-handheld][PATCH] meta-handheld: append to BBPATH instead of prepend so order of bblayers.conf is respected
+Subject: invalid base-passwd_3.5.20.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 May 2012 16:00:52 -0000
+X-List-Received-Date: Wed, 23 May 2012 21:08:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- conf/layer.conf |   11 ++++++++---
- 1 files changed, 8 insertions(+), 3 deletions(-)
+Release 2011.3
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 7a2441b..31dcb16 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -1,13 +1,18 @@
- # Layer configuration for meta-handheld layer
- # Copyright 2011 Intel Corporation
- 
--# We have a conf and classes directory, prepend to BBPATH to prefer our versions
--BBPATH := "${LAYERDIR}:${BBPATH}"
-+# We have a conf and classes directory, append to BBPATH
-+BBPATH .= ":${LAYERDIR}"
- 
- # We have a recipes directory, add to BBFILES
--BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
-+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- 
- BBFILE_COLLECTIONS += "meta-handheld"
- BBFILE_PATTERN_meta-handheld := "^${LAYERDIR}/"
-+
-+# Define the priority for recipes (.bb files) from this layer,
-+# choosing carefully how this layer interacts with all of the
-+# other layers.
-+
- BBFILE_PRIORITY_meta-handheld = "7"
- 
--- 
-1.7.8.6
+At  ftp://ftp.debian.org/debian/pool/main/b/base-passwd/
+these version is not available, so the building of all
+images failes:
+	base-passwd_3.5.20.tar.gz
 
+verions 3.5.22 and 3.5.24 are available.
+
+Please update the recipe.
+
+Thank you, Roland
 
 
