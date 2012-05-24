@@ -1,35 +1,27 @@
-Received: from mail-gg0-f175.google.com ([209.85.161.175])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dasty82@gmail.com>) id 1SXcT0-0007Xr-Kx
+	(envelope-from <sgw@linux.intel.com>) id 1SXd1M-0003I7-6C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 May 2012 20:08:54 +0200
-Received: by ggnp4 with SMTP id p4so69062ggn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2012 10:58:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=MgHJEeqC4dDbEowv4VLgKK+zqKIqnnHHtIlb03Yvmic=;
-	b=haXVCTOCcqX08XYL9xS5MAsx9uSkR2X/ZeVv0l+aNzAkcoAiRmZZlKTFkcmlNhgPng
-	rrpoXrK+uVyTkdOK44twHvKfV2Uk8LC9Q3T4MwTxIzLGbZB5vyU2iLM5ZUIKET7T1dmG
-	8ciTenQncAtF3PG7Wjh9ZmkKKmup7ps6Axfem0JD8/44nISSSk4aIbNSEFvWraD1G0Y/
-	CpccL6892Nhg/pES6vhldrNoNinMVPLXd6eitecFyC7+gKW9v0JB3PGxnnhwMsi/xOA5
-	IIneHwSL3D/kA3lA9BENxT5R9vWYMJaMeDLK20YdYG7ltuomE8bPuBK8L6vCBZ8sSPQQ
-	KX6w==
+	Thu, 24 May 2012 20:44:24 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 24 May 2012 11:33:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="148054615"
+Received: from unknown (HELO [10.255.12.24]) ([10.255.12.24])
+	by orsmga002.jf.intel.com with ESMTP; 24 May 2012 11:33:06 -0700
+Message-ID: <4FBE7EE2.3000909@linux.intel.com>
+Date: Thu, 24 May 2012 11:33:06 -0700
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
 MIME-Version: 1.0
-Received: by 10.60.28.162 with SMTP id c2mr411267oeh.3.1337882322685; Thu, 24
-	May 2012 10:58:42 -0700 (PDT)
-Sender: dasty82@gmail.com
-Received: by 10.76.92.66 with HTTP; Thu, 24 May 2012 10:58:42 -0700 (PDT)
-In-Reply-To: <1337875543-28325-1-git-send-email-rd@radekdostal.com>
-References: <1337875543-28325-1-git-send-email-rd@radekdostal.com>
-Date: Thu, 24 May 2012 19:58:42 +0200
-X-Google-Sender-Auth: COeViSpRNs32z-FytcDPX8Bfy10
-Message-ID: <CAOpW-VCTXkNLoh=0QZ_Mz_Yn1wUkqUyzZkhseT3jFQkMSNveww@mail.gmail.com>
-From: Radek Dostal <rd@radekdostal.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] ntpd-systemd: ntpd is started with -g parameter
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+References: <1337536477-7047-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+In-Reply-To: <1337536477-7047-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] [PATCH] libtool: fixed parallel build related race
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2012 18:08:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 May 2012 18:44:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Please ignore this patch, now I understand how ntp works togehter with ntpd=
-ate.
-
-Thanks,
-Radek
-
-On Thu, May 24, 2012 at 6:05 PM, Radek Dostal <rd@radekdostal.com> wrote:
-> needed for correct functionality in systems without battery backed RTC
+On 05/20/2012 10:54 AM, Enrico Scholz wrote:
+> While building libtool, the libtool script itself will be regenerated
+> because OE modifies a dependency[1]. With -jX, this operation (-->
+> removal, creation of non-x file, 'chmod a+x') can happen at a time when
+> the script is going to be executed.  This can cause errors like:
 >
-> Signed-off-by: Radek Dostal <rd@radekdostal.com>
+> | arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
+> | ...
+> | /bin/sh ./config.status libtool
+> | ...
+> | arm-linux-gnueabi-libtool: compile:  ccache arm-linux-gnueabi-gcc ...
+> | /bin/sh: ./arm-linux-gnueabi-libtool: Permission denied
+> | make[2]: *** [libltdl/libltdl_libltdl_la-lt__alloc.lo] Error 126
+>
+> I am not sure whether the custom do_compile_prepend() is still needed.
+> For now only the issue above will be fixed by executing ./config.status
+> yet again.
+>
+> [1] see 648290d5bf4d6ff50d3643bb7ad902dfc23aa702
+>
+> Signed-off-by: Enrico Scholz<enrico.scholz@sigma-chemnitz.de>
 > ---
-> =A0meta-oe/recipes-support/ntp/files/ntpd.service | =A0 =A02 +-
-> =A0meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb =A0 =A0 | =A0 =A02 +-
-> =A02 files changed, 2 insertions(+), 2 deletions(-)
+>   meta/recipes-devtools/libtool/libtool-2.4.2.inc |    3 ++-
+>   1 files changed, 2 insertions(+), 1 deletions(-)
 >
-> diff --git a/meta-oe/recipes-support/ntp/files/ntpd.service b/meta-oe/rec=
-ipes-support/ntp/files/ntpd.service
-> index bd87b1e..0102ef0 100644
-> --- a/meta-oe/recipes-support/ntp/files/ntpd.service
-> +++ b/meta-oe/recipes-support/ntp/files/ntpd.service
-> @@ -5,7 +5,7 @@ After=3Dnetwork.target
-> =A0[Service]
-> =A0Type=3Dforking
-> =A0PIDFile=3D/run/ntpd.pid
-> -ExecStart=3D/usr/bin/ntpd -p /run/ntpd.pid
-> +ExecStart=3D/usr/bin/ntpd -g -p /run/ntpd.pid
+> diff --git a/meta/recipes-devtools/libtool/libtool-2.4.2.inc b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
+> index 084062a..c1ef7c4 100644
+> --- a/meta/recipes-devtools/libtool/libtool-2.4.2.inc
+> +++ b/meta/recipes-devtools/libtool/libtool-2.4.2.inc
+> @@ -8,7 +8,7 @@ LICENSE = "GPLv2&  LGPLv2.1"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+>       file://libltdl/COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
 >
-> =A0[Install]
-> =A0WantedBy=3Dmulti-user.target
-> diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes=
--support/ntp/ntp_4.2.6p3.bb
-> index ece8720..91d93c1 100644
-> --- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
-> +++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
-> @@ -1,6 +1,6 @@
-> =A0require ntp.inc
+> -INC_PR = "r2"
+> +INC_PR = "r3"
 >
-> -PR =3D "r5"
-> +PR =3D "r6"
+>   SRC_URI = "${GNU_MIRROR}/libtool/libtool-${PV}.tar.gz \
+>              file://trailingslash.patch \
+> @@ -27,6 +27,7 @@ do_compile_prepend () {
+>   	# Sometimes this file doesn't get rebuilt, force the issue
+>   	rm -f ${S}/libltdl/config/ltmain.sh
+>   	make libltdl/config/ltmain.sh
+> +	./config.status
+>   }
 >
-> =A0inherit systemd
->
-> --
-> 1.7.5.4
->
+>   inherit autotools
+
+Merged into OE-Core
+
+Thanks
+	Sau!
 
 
