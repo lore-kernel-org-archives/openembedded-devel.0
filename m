@@ -1,38 +1,35 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SXacM-0002bH-4h
+	(envelope-from <dasty82@gmail.com>) id 1SXai5-0002q6-8I
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 May 2012 18:10:26 +0200
-Received: by bkcjm2 with SMTP id jm2so7581948bkc.6
+	Thu, 24 May 2012 18:16:21 +0200
+Received: by wgbdr1 with SMTP id dr1so7590717wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2012 09:00:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=isV84GKnk5nAJb86tHL5zI/gIv6xAf9nnRuZyGlUisA=;
-	b=skZ+Z4KvoE6REBWb4MRbflf5GGuz5Hjb008dZdGvJ/Y2QaCPH6urEv+DhPmDAkUiwA
-	gg3Twc7BOWdXmms2ZQ7UkYqlEy74fyXOVdrrV+mGIpAs4A9NQHg76tTWIaV2k9gnNkZw
-	SjrEkfTgjDl9W6ZH3FcaX8vY6RiLYrM6D7YThHdJqfArVhJ9JeZitEQNnz4/xdwZZl4Z
-	KbubapKlUcJ1F7Wm7t3HsMofxVZvZv2ZPOTzuRB5qjysQPpMoLtd1Dswbhgp0pjiAsno
-	f7hirdBValgtBqX9GFraBK45Zj6fU0Kdbo+N1hH1ysXCmduaerq56DZ7LDrI2lR+GWrW
-	qwBQ==
-Received: by 10.204.10.70 with SMTP id o6mr13923482bko.70.1337875214730;
-	Thu, 24 May 2012 09:00:14 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
-	[95.222.156.83])
-	by mx.google.com with ESMTPS id iq16sm3448705bkc.6.2012.05.24.09.00.13
+	Thu, 24 May 2012 09:06:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=sqai2uFbseojQW1mxtisA/5cjiboiJUyd4MLkrzOnu0=;
+	b=MuNOYs+Ohxq75ylWdJlDLbUW0Cene7J+RBEWo8zzwiWRMjWS/Pu2hlNv1pYAThRalK
+	ZSXaBL/sLrjnzl/lIRtvYeBVJsEH65P61zGXCl+k3szgh699v0wVvsBNdMwOL4n9nWMZ
+	Tc/2u5ajmITVskUcGqb4L/dAnhoisV6kWJS7DrRIJ5mSV9gXMl8ddvACMwW81MZ+WqQB
+	58SwuLyFrTmtFH8YmTCvYTnli6W5zsBWy3/ShCBO4uS4keorOgd1larFXf2+NmOcQdSj
+	GIjaQI3xbDX7tCYRrV3Ix3lvmOdecwTuJIH1Ja5eO3xtX7+CYEWlrP2XOKyxWHEya4KA
+	ne6A==
+Received: by 10.180.80.97 with SMTP id q1mr68297wix.13.1337875570123;
+	Thu, 24 May 2012 09:06:10 -0700 (PDT)
+Received: from localhost.localdomain
+	(83-64-248-68.inzersdorf.xdsl-line.inode.at. [83.64.248.68])
+	by mx.google.com with ESMTPS id m1sm48209211wic.6.2012.05.24.09.06.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 May 2012 09:00:14 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 24 May 2012 09:06:09 -0700 (PDT)
+Sender: Radek Dostal <dasty82@gmail.com>
+From: Radek Dostal <rd@radekdostal.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2012 18:00:04 +0200
-Message-Id: <1337875204-19068-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1337875204-19068-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1337875204-19068-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] task-xfce-base: add xfce4-xkb-plugin
+Date: Thu, 24 May 2012 18:05:43 +0200
+Message-Id: <1337875543-28325-1-git-send-email-rd@radekdostal.com>
+X-Mailer: git-send-email 1.7.5.4
+Cc: Radek Dostal <rd@radekdostal.com>
+Subject: [PATCH] ntpd-systemd: ntpd is started with -g parameter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2012 16:10:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 24 May 2012 16:16:21 -0000
 
+needed for correct functionality in systems without battery backed RTC
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Radek Dostal <rd@radekdostal.com>
 ---
- meta-xfce/recipes-xfce/tasks/task-xfce-base.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ meta-oe/recipes-support/ntp/files/ntpd.service |    2 +-
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb     |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-index d9fcc30..7085c76 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-base.bb
-@@ -27,7 +27,8 @@ RDEPENDS_${PN} = " \
-     xfce4-panel-plugin-showdesktop \
-     xfce4-panel-plugin-systray \
-     xfce4-panel-plugin-tasklist \
--    xfce4-panel-plugin-windowmenu \   
-+    xfce4-panel-plugin-windowmenu \
-+    xfce4-xkb-plugin \
-     xfce4-settings \
-     \
-     xfce4-notifyd \
+diff --git a/meta-oe/recipes-support/ntp/files/ntpd.service b/meta-oe/recipes-support/ntp/files/ntpd.service
+index bd87b1e..0102ef0 100644
+--- a/meta-oe/recipes-support/ntp/files/ntpd.service
++++ b/meta-oe/recipes-support/ntp/files/ntpd.service
+@@ -5,7 +5,7 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/ntpd.pid
+-ExecStart=/usr/bin/ntpd -p /run/ntpd.pid
++ExecStart=/usr/bin/ntpd -g -p /run/ntpd.pid
+ 
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+index ece8720..91d93c1 100644
+--- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
++++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+@@ -1,6 +1,6 @@
+ require ntp.inc
+ 
+-PR = "r5"
++PR = "r6"
+ 
+ inherit systemd
+ 
 -- 
-1.7.6.5
+1.7.5.4
 
 
 
