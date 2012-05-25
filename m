@@ -1,38 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SXelS-0003E4-Lt
+	(envelope-from <s.stirtzel@googlemail.com>) id 1SXoUG-0001Ox-H1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 May 2012 22:36:06 +0200
-Received: by wgbdr1 with SMTP id dr1so153280wgb.24
+	Fri, 25 May 2012 08:59:00 +0200
+Received: by wibhm14 with SMTP id hm14so505772wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2012 13:25:55 -0700 (PDT)
+	Thu, 24 May 2012 23:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=2a6mCpWzGXdsyDnNFRhCipwXy8sfC1DPHwZXFWb2ZrU=;
-	b=hK1lzJkiQMxaomP6D7OttjtR9sxDFZnrEqzZO3ml/o4o2G9X9utsYj3YD+Q/xpDruP
-	0FSEcHQ4L/oG51qLgVk48/FkReHVbCiPo5Bacx6QyPSjARd8E5YGC31khmbNAJovdmkJ
-	IVU8Xnzs4Afphp6peEqFRn66xVyBNffT/KnyEqlDjjGOEcgFDNXf81aBBlhq+v06mbtk
-	aSkXAg7tDqw2XLqOIG+VfDEmNf94/RryhqeRQuzgjaSJFCD7dxGaW4OU81CA8zPWwvqz
-	uQYA2TXCVHvFbMCtRrdha5vPLLATiYn4jY9fMa0vKQtCW+xqcOy5m81NWuwYzF54+PK0
-	CjAw==
-Received: by 10.216.203.201 with SMTP id f51mr392403weo.52.1337891155196;
-	Thu, 24 May 2012 13:25:55 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF1842.dip.t-dialin.net.
-	[79.223.24.66])
-	by mx.google.com with ESMTPS id fo7sm49741778wib.9.2012.05.24.13.25.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 May 2012 13:25:54 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2012 22:29:54 +0200
-Message-Id: <1337891394-4033-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1337891394-4033-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1337891394-4033-1-git-send-email-schnitzeltony@googlemail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=3hxNEExxpnLOvnQYPsK9etL4MQ5EpooO36qSq1G12L0=;
+	b=zbh2izF5ZeGpB4hJHdUtRJeRX6wLOFKc5wNNA3l8lwWdXGw6CJiEQbqJrwlCSy3hJ8
+	MYSlVNn0zCY2AfYklT/vQwdpIbRbFRhqhkVDtpP5IRBGRv0dfDQxrif9rJVEjkx+9LLf
+	8bcnRUS+N1A92TAsy6jfh2EyjoByweaQaDID4LK2ihT3iERO1IQAH8feBZw1u/6OUF82
+	4I0XvjyRC9PTz37qElhWVPIxN34oFZ7+Is1iNdPmoafwueYlNoti9vJi3+b8RDh1X4tr
+	/jyW8p1UTU8pZyCyurIq0pV6br1Ipd5X8xwWlo6K4JV88AUQvjgYLJhdJZzeaxCgWCy/
+	lJmQ==
 MIME-Version: 1.0
-Subject: [meta-xfce,V2 2/2] task-xfce-extended: add xfce4-xkb-plugin
+Received: by 10.216.214.155 with SMTP id c27mr1155199wep.116.1337928528503;
+	Thu, 24 May 2012 23:48:48 -0700 (PDT)
+Received: by 10.223.74.16 with HTTP; Thu, 24 May 2012 23:48:48 -0700 (PDT)
+In-Reply-To: <jojofu$9ph$1@dough.gmane.org>
+References: <CAGiJk9coc2zTnkX0CoM+cM52CDMwvpSwUN4DjjYoyrHnn5jD7Q@mail.gmail.com>
+	<jojofu$9ph$1@dough.gmane.org>
+Date: Fri, 25 May 2012 08:48:48 +0200
+Message-ID: <CAGiJk9fTx-AdJ+hXc8T988_ZBhjOcdhS4JiT7at=h4aEA9erHw@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-kde] Status of the meta-kde layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2012 20:36:06 -0000
+X-List-Received-Date: Fri, 25 May 2012 06:59:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
+2012/5/11 Koen Kooi <koen@dominion.thruhere.net>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 11-05-12 12:44, Samuel Stirtzel schreef:
+>
+>> Testing meta-kde: Currently it won't work until you can provide
+>> soprano-native from your host or elsewhere. After this issue is resolved
+>> it will be easy to archive on OpenEmbedded if you use the branch
+>> sst-test-images:
+>> https://gitorious.org/openembedded-core-layers/meta-kde/trees/sst-test-images/recipes-images
+>>
+>>
+> *just talking to myself* Maybe it would be a good idea to have a git
+>> subtree providing the images, so parsing won't fail over
+>> "systemd-image.bb not found" on Poky?
+>
+> changing the 'require' to 'include' should get around that.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+Hi,
+this works good thanks for pointing that out.
+I merged the branch sst-test-images into master.
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-index 2dbd9f0..700b68a 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -33,6 +33,7 @@ RRECOMMENDS_${PN} = " \
-     xfce4-diskperf-plugin \
-     xfce4-netload-plugin \
-     xfce4-genmon-plugin \
-+    xfce4-xkb-plugin    \
-     \
-     xfce4-appfinder \
-     xfce4-screenshooter \
+The soprano-native recipe with the missing onto2vocabularyclass binary
+was added too.
+Testing this layer should be possible now.
+
 -- 
-1.7.4.4
-
+Regards
+Samuel
 
 
