@@ -1,33 +1,16 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SZOpx-0004Lq-2f
+	(envelope-from <andrea.adami@gmail.com>) id 1SZUo8-0007YJ-8u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 May 2012 17:59:57 +0200
-Received: by eaal1 with SMTP id l1so1360517eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2012 08:49:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=cnZuEHBmuLOPa3oHaDVzYWJTM6/8EnD/VV/qBAL/pr8=;
-	b=laZh4x5bUuBAEHw6mktibM8jTzpXXSgcv0SJuDOVXl36Pvu9rrqap5xBxcbI3JAxXT
-	YgvuxJyh/b6x6rYK77x/881+WajItP1Ws6Icg3/8HaH90PggSZ8oDdp8tti43Rsa3U9k
-	tq5suzXWR5sx547ngYPBVXlVuroxbyN+UI4K4IXnq/gjhR9BqCyP6q4BRgv4csvyBGcu
-	WtzdxOOQzDWQQVergXtO3tbR+FrDo6Vq5elkKbvXRDUIJxGi9NCAXxzc02SoJ0VZ82rl
-	WkmBnWvjfdRV3PrULXCTtvbDbA5uF+6u04bkek0yTL0O7i12H8fnZHfSf97t8ZSnB4sC
-	QuJw==
-Received: by 10.14.97.135 with SMTP id t7mr4099726eef.177.1338306579775; Tue,
-	29 May 2012 08:49:39 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.188.11 with HTTP; Tue, 29 May 2012 08:49:09 -0700 (PDT)
-In-Reply-To: <loom.20120529T123552-567@post.gmane.org>
-References: <CAG2TeNrp6cR1UmrPU0+UKHerR113q2_O_56HHZoBOfnGRrccTw@mail.gmail.com>
-	<loom.20120529T123552-567@post.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 May 2012 08:49:09 -0700
-Message-ID: <CAMKF1so_h2zQ1PiWrHQv==soM+FmOoakyvg8R_KC8TJTOTPzvg@mail.gmail.com>
+	Wed, 30 May 2012 00:22:28 +0200
+Received: from mizar.localdomain (87.15.248.154) by smtp209.alice.it
+	(8.6.023.02) id 4EF08A6311D68B64; Wed, 30 May 2012 00:12:10 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Compile error in openssl 1.0.0e
+Date: Wed, 30 May 2012 00:12:06 +0200
+Message-Id: <1338329527-9380-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-oe][meta-initramfs][PATCH 1/2] klibc: update to git tag 49419d2df2018fff5ae6250cf55b16fa65bdc490
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,97 +24,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2012 15:59:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 29 May 2012 22:22:28 -0000
 
-On Tue, May 29, 2012 at 3:40 AM, Chris Diamand <chris@diamand.org> wrote:
->> =C2=A0 =C2=A0if ( data->connected )
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Dwritesocket(b->num,in,inl);
->> =C2=A0 =C2=A0else
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0{
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0int peerlen =3D sizeof(data->peer);
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (data->peer.sa.sa_family =3D=3D AF_INET)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0peerlen =3D sizeof(data->peer.s=
-a_in);
->> #if OPENSSL_USE_IPV6 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /**** HERE ****/
->> =C2=A0 =C2=A0case BIO_C_FILE_TELL:
->> =C2=A0 =C2=A0case BIO_CTRL_INFO:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3D0;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
->> =C2=A0 =C2=A0case BIO_C_SET_FD:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0dgram_clear(b);
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->num=3D *((int *)ptr);
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->shutdown=3D(int)num;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->init=3D1;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
->> =C2=A0 =C2=A0case BIO_C_GET_FD:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (b->init)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ip=3D(int *)ptr;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ip !=3D NULL) *ip=3Db->num;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Db->num;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0else
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3D -1;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
->> =C2=A0 =C2=A0case BIO_CTRL_GET_CLOSE:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Db->shutdown;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
->> =C2=A0 =C2=A0case BIO_CTRL_SET_CLOSE:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->shutdown=3D(int)num;
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
->> =C2=A0 =C2=A0case BIO_CTRL_PENDING:
->> ...
->>
->> If OPENSSL_USE_IPV6 is defined it puts a random case label (sans
->> switch() ) in the middle of the function. This is clearly not going to
->> work.
->>
->> This has been fixed in the latest version, 1.0.1c, which compiles
->> without errors.
->>
->> Could the openssl recipe be updated to the latest version which actually
-> builds?
->>
->> Cheers,
->> Chris.
->>
->
-> Just looked again. The openssl source actually appears to be fine - it's =
-this
-> sed line in
-> recipes/openssl/openssl.inc:
->
-> diff --git a/recipes/openssl/openssl.inc b/recipes/openssl/openssl.inc
-> index 2aff24a..d087a8b 100644
-> --- a/recipes/openssl/openssl.inc
-> +++ b/recipes/openssl/openssl.inc
-> @@ -106,7 +106,8 @@ do_configure () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0perl ./Configure ${EXTRA_OECONF} shared --pref=
-ix=3D$useprefix --
-> openssldir=3D${libdir}/ssl $target
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0eval "${@base_contains('DISTRO_FEATURES', 'lar=
-gefile', '', 'sed -i -e
-> "/_FILE_OFFSET_BITS/,/#endif/d" ${S}/crypto/bio/bss_file.c', d)}"
-> - =C2=A0 =C2=A0 =C2=A0 eval "${@base_contains('DISTRO_FEATURES', 'ipv6', =
-'', 'sed -i -e
-> "/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
-> +
-> + =C2=A0 =C2=A0 =C2=A0 # eval "${@base_contains('DISTRO_FEATURES', 'ipv6'=
-, '', 'sed -i -e
-> "/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
-> =C2=A0}
->
-> =C2=A0do_compile () {
->
->
-> Cheers.
+* still pre-2.0
+* bump INC_PR
 
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/recipes-devtools/klibc/klibc.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-would you send it as a proper git formatted patch please
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 4466225..886b655 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
+ # debugsources.list: No such file or directory:
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ 
+-INC_PR = "r1"
++INC_PR = "r2"
+ 
+ KLIBC_ARCH = '${TARGET_ARCH}'
+ KLIBC_ARCH_armeb = 'arm'
+@@ -21,7 +21,7 @@ KLIBC_ARCH_i586 = 'i386'
+ KLIBC_ARCH_i686 = 'i386'
+ KLIBC_ARCH_pentium = 'i386'
+ 
+-SRCREV = "c2c7f19a094bba822995f7eba8ec8dfc5cbe4fdb"
++SRCREV = "49419d2df2018fff5ae6250cf55b16fa65bdc490"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
+ 
+ SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
+-- 
+1.7.3.4
+
 
 
