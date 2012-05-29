@@ -1,33 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1SZOLf-0003s2-7e
+	(envelope-from <raj.khem@gmail.com>) id 1SZOpx-0004Lq-2f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 May 2012 17:28:39 +0200
-Received: by wgbdr1 with SMTP id dr1so3646252wgb.24
+	Tue, 29 May 2012 17:59:57 +0200
+Received: by eaal1 with SMTP id l1so1360517eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2012 08:18:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	Tue, 29 May 2012 08:49:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	bh=TtoCByluxGt1ZJOYrxU9hMrde9swtJ6SyOvF49/rCj4=;
-	b=HKGv8/UI0pkBzJn27wQkifSvyWmRbJTf9q4NWUukCHNsZPgyFtZQL2whltIZMWobPt
-	eIUoguVT1nEDoLddcJGNdkgx7lxwjkzoYC7aKfGjgGwyTpeA46iyHtU96LtU+kHosD2/
-	Z/SFE1bWgx0lQJ8F+f/+Q9heiJsMe6YXkfIfW4voTlYSeTj71DF6l4IlQtzZNRqippgj
-	2T4bfzPtHGy26GtYyPy5YhaWo9Hqhkurj+6sRUlwudxn4hVzC3mLeiHAiBWEariDRS/G
-	kgA6AyBelOKdjE1NRBpVLqDgsMIxLNcRNqipD3tUE6yrPHnfWRekzo1FzvKzhvgA1VlS
-	Cv6w==
+	bh=cnZuEHBmuLOPa3oHaDVzYWJTM6/8EnD/VV/qBAL/pr8=;
+	b=laZh4x5bUuBAEHw6mktibM8jTzpXXSgcv0SJuDOVXl36Pvu9rrqap5xBxcbI3JAxXT
+	YgvuxJyh/b6x6rYK77x/881+WajItP1Ws6Icg3/8HaH90PggSZ8oDdp8tti43Rsa3U9k
+	tq5suzXWR5sx547ngYPBVXlVuroxbyN+UI4K4IXnq/gjhR9BqCyP6q4BRgv4csvyBGcu
+	WtzdxOOQzDWQQVergXtO3tbR+FrDo6Vq5elkKbvXRDUIJxGi9NCAXxzc02SoJ0VZ82rl
+	WkmBnWvjfdRV3PrULXCTtvbDbA5uF+6u04bkek0yTL0O7i12H8fnZHfSf97t8ZSnB4sC
+	QuJw==
+Received: by 10.14.97.135 with SMTP id t7mr4099726eef.177.1338306579775; Tue,
+	29 May 2012 08:49:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.193.162 with SMTP id k34mr7780164wen.54.1338304701901;
-	Tue, 29 May 2012 08:18:21 -0700 (PDT)
-Received: by 10.223.74.16 with HTTP; Tue, 29 May 2012 08:18:21 -0700 (PDT)
-In-Reply-To: <1338304125-5922-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1338304125-5922-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Tue, 29 May 2012 17:18:21 +0200
-Message-ID: <CAGiJk9e9KEVre-HFAWw9LGf5zC2p2r1pynYxkQ3xRLpe=Lo_0w@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Received: by 10.14.188.11 with HTTP; Tue, 29 May 2012 08:49:09 -0700 (PDT)
+In-Reply-To: <loom.20120529T123552-567@post.gmane.org>
+References: <CAG2TeNrp6cR1UmrPU0+UKHerR113q2_O_56HHZoBOfnGRrccTw@mail.gmail.com>
+	<loom.20120529T123552-567@post.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 May 2012 08:49:09 -0700
+Message-ID: <CAMKF1so_h2zQ1PiWrHQv==soM+FmOoakyvg8R_KC8TJTOTPzvg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-kde] [RFC] [PATCH] qt4-x11-free_4.8.0.bbappend: Fix Plasma Active by adding undocumented configure flag (--reduce-exports)
+Subject: Re: Compile error in openssl 1.0.0e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,59 +41,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2012 15:28:39 -0000
+X-List-Received-Date: Tue, 29 May 2012 15:59:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2012/5/29 Samuel Stirtzel <s.stirtzel@googlemail.com>:
-> No more "Declarative scriptengine not found" errors
+On Tue, May 29, 2012 at 3:40 AM, Chris Diamand <chris@diamand.org> wrote:
+>> =C2=A0 =C2=A0if ( data->connected )
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Dwritesocket(b->num,in,inl);
+>> =C2=A0 =C2=A0else
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0{
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0int peerlen =3D sizeof(data->peer);
+>>
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (data->peer.sa.sa_family =3D=3D AF_INET)
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0peerlen =3D sizeof(data->peer.s=
+a_in);
+>> #if OPENSSL_USE_IPV6 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /**** HERE ****/
+>> =C2=A0 =C2=A0case BIO_C_FILE_TELL:
+>> =C2=A0 =C2=A0case BIO_CTRL_INFO:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3D0;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
+>> =C2=A0 =C2=A0case BIO_C_SET_FD:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0dgram_clear(b);
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->num=3D *((int *)ptr);
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->shutdown=3D(int)num;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->init=3D1;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
+>> =C2=A0 =C2=A0case BIO_C_GET_FD:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (b->init)
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ip=3D(int *)ptr;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ip !=3D NULL) *ip=3Db->num;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Db->num;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0else
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3D -1;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
+>> =C2=A0 =C2=A0case BIO_CTRL_GET_CLOSE:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=3Db->shutdown;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
+>> =C2=A0 =C2=A0case BIO_CTRL_SET_CLOSE:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0b->shutdown=3D(int)num;
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0break;
+>> =C2=A0 =C2=A0case BIO_CTRL_PENDING:
+>> ...
+>>
+>> If OPENSSL_USE_IPV6 is defined it puts a random case label (sans
+>> switch() ) in the middle of the function. This is clearly not going to
+>> work.
+>>
+>> This has been fixed in the latest version, 1.0.1c, which compiles
+>> without errors.
+>>
+>> Could the openssl recipe be updated to the latest version which actually
+> builds?
+>>
+>> Cheers,
+>> Chris.
+>>
 >
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-> ---
-> =C2=A0recipes-misc-support/qt4-x11-free_4.8.0.bbappend | =C2=A0 =C2=A05 +=
-+++-
-> =C2=A01 files changed, 4 insertions(+), 1 deletions(-)
+> Just looked again. The openssl source actually appears to be fine - it's =
+this
+> sed line in
+> recipes/openssl/openssl.inc:
 >
-> diff --git a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend b/recipes-m=
-isc-support/qt4-x11-free_4.8.0.bbappend
-> index 4895893..beeb49f 100644
-> --- a/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
-> +++ b/recipes-misc-support/qt4-x11-free_4.8.0.bbappend
-> @@ -1,3 +1,6 @@
-> +QT_CONFIG_FLAGS_append =3D " --reduce-exports"
+> diff --git a/recipes/openssl/openssl.inc b/recipes/openssl/openssl.inc
+> index 2aff24a..d087a8b 100644
+> --- a/recipes/openssl/openssl.inc
+> +++ b/recipes/openssl/openssl.inc
+> @@ -106,7 +106,8 @@ do_configure () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0perl ./Configure ${EXTRA_OECONF} shared --pref=
+ix=3D$useprefix --
+> openssldir=3D${libdir}/ssl $target
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0eval "${@base_contains('DISTRO_FEATURES', 'lar=
+gefile', '', 'sed -i -e
+> "/_FILE_OFFSET_BITS/,/#endif/d" ${S}/crypto/bio/bss_file.c', d)}"
+> - =C2=A0 =C2=A0 =C2=A0 eval "${@base_contains('DISTRO_FEATURES', 'ipv6', =
+'', 'sed -i -e
+> "/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
 > +
-> +# Build OpenGL/ES support if available
-> =C2=A0QT_GLFLAGS_omap3 =3D "-opengl es2 "
-> =C2=A0DEPENDS_append_omap3 =3D " libgles-omap3"
-> =C2=A0DEPENDS_append_ti33x =3D " libgles-omap3"
-> @@ -5,4 +8,4 @@ DEPENDS_append_ti33x =3D " libgles-omap3"
-> =C2=A0# Needed by kdelibs
-> =C2=A0QT_DISTRO_FLAGS =3D "-accessibility -sm"
+> + =C2=A0 =C2=A0 =C2=A0 # eval "${@base_contains('DISTRO_FEATURES', 'ipv6'=
+, '', 'sed -i -e
+> "/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
+> =C2=A0}
 >
-> -PRINC :=3D "${@int(PRINC) + 2}"
-> +PRINC :=3D "${@int(PRINC) + 3}"
-> --
-> 1.7.5.4
+> =C2=A0do_compile () {
 >
-
-Hi,
-just to let you know, Qt export visibility caused Plasma Active to fail.
-This "undocumented" flag will enable KDE plugins to work again.
-
-With this patch Plasma Active is working (to some extend).
-It still has some flaws but I'm about to iron them out.
-
-However this patch might impact other applications and I'm still
-looking through my buildhistory diffs to see if anything behaves odd.
-Until now I did not meet any misbehavior of other Qt applications, but
-I'll double check to be sure.
+>
+> Cheers.
 
 
-After testing this will go to master with more descriptions / documentation=
-.
-
---=20
-Regards
-Samuel
+would you send it as a proper git formatted patch please
 
 
