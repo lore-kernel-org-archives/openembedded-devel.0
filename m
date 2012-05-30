@@ -1,18 +1,32 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SZUo9-0007YJ-7I
+	(envelope-from <martin.jansa@gmail.com>) id 1SZjwd-0000sw-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 May 2012 00:22:29 +0200
-Received: from mizar.localdomain (87.15.248.154) by smtp209.alice.it
-	(8.6.023.02) id 4EF08A6311D68B7B; Wed, 30 May 2012 00:12:13 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 30 May 2012 16:32:16 +0200
+Received: by bkcjm2 with SMTP id jm2so4321917bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 May 2012 07:21:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=VRBBc4JRF7i2y7ev/cTut8v5esloZ9yVJNt52ZkFi60=;
+	b=ELCtWmH0KgP7IeV/QVa+GiRM/nM1nPbe9LgVljbf/x7bTY7Jnop9h2tIv8lP7GX5ga
+	xJ7Pnnhsg45HWAKJL/hsCi0G8j01690VcBe2WtI8GHmZSX/dRuznKadPnhY/0r7pBhzy
+	VkC87iLtGIChJm++iALzAKp40gFuEsZ8IQU1T7XWyWb3PcESiu0e1XwJxTT0n2T13ic0
+	oqk0o8NbKKGxChCKr6gBnllgs2Q06VDTFO620aDo0/RhXc7egCsyL5FCjxPfzFD4ctQK
+	6PoKr2McUPtbAlZfseLiYpSuKon1hEaGRMBMHuTjlNnClup4ii1b140+9qJodsTAMyxa
+	GeKw==
+Received: by 10.205.120.17 with SMTP id fw17mr9602241bkc.20.1338387717402;
+	Wed, 30 May 2012 07:21:57 -0700 (PDT)
+Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
+	fu14sm22420252bkc.13.2012.05.30.07.21.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 30 May 2012 07:21:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 May 2012 00:12:07 +0200
-Message-Id: <1338329527-9380-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1338329527-9380-1-git-send-email-andrea.adami@gmail.com>
-References: <1338329527-9380-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe][meta-initramfs][PATCH 2/2] ubi-utils-klibc: more patch-cleanings
+Date: Wed, 30 May 2012 16:21:55 +0200
+Message-Id: <cover.1338386047.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][meta-efl][PATCH 0/3] small fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,163 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2012 22:22:29 -0000
+X-List-Received-Date: Wed, 30 May 2012 14:32:16 -0000
 
-* remove unnecessary patches after klibc upgrades
-* bump PR
+The following changes since commit 5b6549cd03b26c2cf300ab85ee6334f4d7389b1d:
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../mtd/ubi-utils-klibc/libiniparser.c.patch       |   24 +++++++----
- .../mtd/ubi-utils-klibc/libmtd.c.patch             |   24 -----------
- .../mtd/ubi-utils-klibc/libubi.c.patch             |   44 --------------------
- .../recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb  |    3 +-
- 4 files changed, 16 insertions(+), 79 deletions(-)
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
+  ubi-utils-klibc: clean ubiformat patch (2012-05-24 12:52:11 +0200)
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libiniparser.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libiniparser.c.patch
-index 8be8ac3..45f2439 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libiniparser.c.patch
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libiniparser.c.patch
-@@ -1,13 +1,19 @@
----- a/ubi-utils/libiniparser.c	2012-04-30 23:59:40.000000000 +0200
--+++ b/ubi-utils/libiniparser.c	2012-04-30 23:55:15.000000000 +0200
--@@ -333,7 +333,9 @@
-- 
--     str = iniparser_getstring(d, key, INI_INVALID_KEY);
-+--- a/ubi-utils/libiniparser.c	2012-05-29 23:46:08.000000000 +0200
-++++ b/ubi-utils/libiniparser.c	2012-05-29 23:45:01.000000000 +0200
-+@@ -327,6 +327,8 @@
-+   the notfound value is returned.
-+  */
-+ /*--------------------------------------------------------------------------*/
-++/* Floating-point is not supported in klibc */
-++/*
-+ double iniparser_getdouble(dictionary * d, char * key, double notfound)
-+ {
-+     char    *   str ;
-+@@ -335,6 +337,7 @@
-      if (str==INI_INVALID_KEY) return notfound ;
---    return atof(str);
--+    double value;
--+    sscanf(str,"%lf",&value);
--+    return value;
-+     return atof(str);
-  }
-++*/
-  
-  /*-------------------------------------------------------------------------*/
-+ /**
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
-deleted file mode 100644
-index f32fb70..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libmtd.c.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
----- a/lib/libmtd.c	2012-04-29 21:44:52.000000000 +0200
--+++ b/lib/libmtd.c	2012-04-29 21:43:04.000000000 +0200
--@@ -441,8 +441,8 @@
-- 		return -1;
-- 	}
-- 
---	major = major(st.st_rdev);
---	minor = minor(st.st_rdev);
--+	major = __major(st.st_rdev);
--+	minor = __minor(st.st_rdev);
-- 
-- 	if (mtd_get_info((libmtd_t *)lib, &info))
-- 		return -1;
--@@ -1381,8 +1381,8 @@
-- 		return -1;
-- 	}
-- 
---	major = major(st.st_rdev);
---	minor = minor(st.st_rdev);
--+	major = __major(st.st_rdev);
--+	minor = __minor(st.st_rdev);
-- 
-- 	if (mtd_get_info((libmtd_t *)lib, &info))
-- 		return -1;
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-index 8278a4f..db95904 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-@@ -1,27 +1,5 @@
- --- a/ubi-utils/libubi.c	2012-05-01 01:57:51.000000000 +0200
- +++ b/ubi-utils/libubi.c	2012-05-01 01:55:14.000000000 +0200
--@@ -382,8 +402,8 @@
-- 		return errmsg("\"%s\" is not a character device", node);
-- 	}
-- 
---	major = major(st.st_rdev);
---	minor = minor(st.st_rdev);
--+	major = __major(st.st_rdev);
--+	minor = __minor(st.st_rdev);
-- 
-- 	if (minor == 0) {
-- 		errno = EINVAL;
--@@ -448,8 +468,8 @@
-- 		return errmsg("\"%s\" is not a character device", node);
-- 	}
-- 
---	major = major(st.st_rdev);
---	minor = minor(st.st_rdev);
--+	major = __major(st.st_rdev);
--+	minor = __minor(st.st_rdev);
-- 
-- 	if (minor != 0) {
-- 		errno = EINVAL;
- @@ -686,7 +706,7 @@
-   * success and %-1 in case of failure. @r->ubi_num contains newly created UBI
-   * device number.
-@@ -31,25 +9,3 @@
-  {
-  	int fd, ret;
-  
--@@ -757,8 +777,8 @@
-- 				  mtd_dev_node);
-- 	}
-- 
---	major = major(sb.st_rdev);
---	minor = minor(sb.st_rdev);
--+	major = __major(sb.st_rdev);
--+	minor = __minor(sb.st_rdev);
-- 
-- 	if (major != MTD_CHAR_MAJOR) {
-- 		errno = EINVAL;
--@@ -866,8 +886,8 @@
-- 		return -1;
-- 	}
-- 
---	major = major(st.st_rdev);
---	minor = minor(st.st_rdev);
--+	major = __major(st.st_rdev);
--+	minor = __minor(st.st_rdev);
-- 
-- 	if (ubi_get_info((libubi_t *)lib, &info))
-- 		return -1;
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-index f975952..ebdd3f6 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-@@ -6,14 +6,13 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
- 
--PR = "r3"
-+PR = "r4"
- 
- inherit klibc
- 
- SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=995cfe51b0a3cf32f381c140bf72b21bf91cef1b \
-             file://Makefile.patch \
-             file://common.mk.patch \
--            file://libmtd.c.patch \
-             file://libubi.c.patch \
-             file://libiniparser.c.patch \
-             file://ubiformat.c.patch \
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+
+Martin Jansa (3):
+  gcalctool: remove older version and drop 'patch=1'
+  systemd.bbclass: fix postinst/rdepends generation for recipes with
+    SYSTEMD_SERVICE (without _PN suffix)
+  recipes: bump PR to fix -systemd postinsts where SYSTEMD_SERVICE was
+    used without PN* suffix
+
+ meta-efl/recipes-efl/efl/elsa_svn.bb               |    2 ++
+ .../recipes-gnome/gcalctool/gcalctool_5.7.32.bb    |   13 -------------
+ .../recipes-gnome/gcalctool/gcalctool_5.8.17.bb    |    2 +-
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |    2 +-
+ meta-oe/classes/systemd.bbclass                    |    3 ++-
+ meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend   |    2 +-
+ .../cherokee/cherokee_1.2.98.bb                    |    2 +-
+ .../recipes-connectivity/gateone/gateone_git.bb    |    2 +-
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
+ .../openssh/openssh_6.0p1.bbappend                 |    2 +-
+ .../systemd/systemd-machine-units_1.0.bb           |    2 ++
+ meta-oe/recipes-extended/rsyslog/rsyslog.inc       |    2 +-
+ .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |    2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb        |    2 ++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb        |    2 ++
+ meta-oe/recipes-navigation/gpsd/gpsd_git.bb        |    2 ++
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |    2 +-
+ 17 files changed, 22 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gcalctool/gcalctool_5.7.32.bb
+
 -- 
-1.7.3.4
+1.7.8.6
 
 
 
