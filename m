@@ -1,38 +1,33 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SZogK-0005SW-RB
+	(envelope-from <aalonso00@gmail.com>) id 1SZotK-0005mO-FC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 May 2012 21:35:45 +0200
-Received: by dalh21 with SMTP id h21so211274dal.6
+	Wed, 30 May 2012 21:49:10 +0200
+Received: by yenl13 with SMTP id l13so187364yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2012 12:25:25 -0700 (PDT)
+	Wed, 30 May 2012 12:38:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=GBmn158OQcp4n79+tWVR1l0JTyuhMKFUUcWh/+6i98I=;
-	b=PKO+y1H0RA13Dtmd9kEoKd2/se8RTHIZPJU7qIN0vQR1wnrFetuI6NlH9gYP52HPzo
-	IpMiIdQJ4cLE1csPVYufYGQmLNrSm1rmLFIRy6OyrsvvtiDEOWBP0+y/dBP0npXJFUXE
-	RNx1ZalkG4FyHJLemAHntVacEQkj64b++y6384JhOEVk3rqE0lTVgmvx7m4s/zK7VpTA
-	MmYU8x40dsfJ2zcYKPqO1cDxD+m2FfPxPdSaOSaDcSqW0HHIJTpj+gi6ahsuPAhrZJLA
-	2L+EtxBqZDO3LpD4WpYmJEyjmVlTDiHZI/Ddf/52+Ibp55mzO9qOtuGhPgwNWUOpjOiI
-	/QRw==
-Received: by 10.68.226.193 with SMTP id ru1mr52685773pbc.79.1338405925139;
-	Wed, 30 May 2012 12:25:25 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id vi10sm1409107pbc.4.2012.05.30.12.25.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 May 2012 12:25:23 -0700 (PDT)
-Date: Wed, 30 May 2012 12:24:52 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120530192452.GA8099@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	Elvis Dowson <elvis.dowson@gmail.com>
-References: <1338404160-6968-1-git-send-email-elvis.dowson@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=YjSqcbPtuKSvpmwPCa8VMrBD2rwq/KwqosPKeWZ951c=;
+	b=TiKCh9UhSq/EAmzZe8uZMONtt3DPK3k/vPAXgbNpUzDBEH2Je8jtijLbELnunX2tFd
+	C57RcjGo4dN6SleqMOxFBvDGsJp9zvYzYr+CCLUXyGm8p85BSGFTJzQNBZJA0sHTcnUx
+	36s1JqBdvi3TgLc+/eBqNOe719UtTRbLkycgs7toYO1anzlkmruOSALGnMgUtMHfRv0B
+	c8dok1rXKYnyLPKCP2enepUjLNHqS3kzLCPMOiAR6iNYeMzbH7sKN4OykZe/svgIOJhj
+	xsLFM26NHs+x2TQvhxeRzjKov6hlmVvLcHZNKmwa9qyKPsk6XFxz1p50XgtwdOeaxa5/
+	4tjw==
 MIME-Version: 1.0
-In-Reply-To: <1338404160-6968-1-git-send-email-elvis.dowson@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Received: by 10.42.62.195 with SMTP id z3mr10656176ich.9.1338406730820; Wed,
+	30 May 2012 12:38:50 -0700 (PDT)
+Received: by 10.64.0.77 with HTTP; Wed, 30 May 2012 12:38:50 -0700 (PDT)
+In-Reply-To: <20120530192452.GA8099@sakrah.homelinux.org>
+References: <1338404160-6968-1-git-send-email-elvis.dowson@gmail.com>
+	<20120530192452.GA8099@sakrah.homelinux.org>
+Date: Wed, 30 May 2012 14:38:50 -0500
+Message-ID: <CAAB-1yyujmBXX6ULdGVA3oX0ROUFHa77+3nfmmXyg=kED42mNA@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Elvis Dowson <elvis.dowson@gmail.com>
 Subject: Re: [meta-xilinx] tune-ppc440.inc: Add support for PowerPC 440 processor for Xilinx Virtex-5 FXT FPGA.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,55 +42,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2012 19:35:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 May 2012 19:49:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On (30/05/12 20:55), Elvis Dowson wrote:
-> This commit adds support for the PowerPC 440 processor for the Xilinx
-> Virtex-5 FXT FPGA.
-> 
+Hi Elvis,
 
+the tune file its ok, but it should be better if you rather provide a
+fix for the tune-ppc440.inc
+that is part of meta-xilinx layer;
 
-this looks ok to me
+Regards
+Adrian Alonso
 
-
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-> ---
->  meta/conf/machine/include/tune-ppc440.inc |   14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta/conf/machine/include/tune-ppc440.inc
-> 
-> diff --git a/meta/conf/machine/include/tune-ppc440.inc b/meta/conf/machine/include/tune-ppc440.inc
-> new file mode 100644
-> index 0000000..394364d
-> --- /dev/null
-> +++ b/meta/conf/machine/include/tune-ppc440.inc
-> @@ -0,0 +1,14 @@
-> +DEFAULTTUNE ?= "ppc440"
-> +
-> +require conf/machine/include/powerpc/arch-powerpc.inc
-> +
-> +TUNEVALID[ppc440] = "Enable ppc440 specific processor optimizations"
-> +TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "ppc440", "-mcpu=440", "", d)}"
-> +
-> +AVAILTUNES += "ppc440"
-> +TUNE_FEATURES_tune-ppc440 = "m32 fpu-soft ppc440"
-> +TUNE_PKGARCH_tune-ppc440 = "ppc440"
-> +PACKAGE_EXTRA_ARCHS_tune-ppc440 = "${PACKAGE_EXTRA_ARCHS_tune-powerpc-nf} ppc440"
-> +
-> +# glibc configure options to get 440 specific library (for sqrt)
-> +GLIBC_EXTRA_OECONF += "${@bb.utils.contains("TUNE_FEATURES", "ppc440", "-with-cpu=440", "", d)}"
-> -- 
-> 1.7.9.5
-> 
-> 
+On Wed, May 30, 2012 at 2:24 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On (30/05/12 20:55), Elvis Dowson wrote:
+>> This commit adds support for the PowerPC 440 processor for the Xilinx
+>> Virtex-5 FXT FPGA.
+>>
+>
+>
+> this looks ok to me
+>
+>
+>> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+>> ---
+>> =A0meta/conf/machine/include/tune-ppc440.inc | =A0 14 ++++++++++++++
+>> =A01 file changed, 14 insertions(+)
+>> =A0create mode 100644 meta/conf/machine/include/tune-ppc440.inc
+>>
+>> diff --git a/meta/conf/machine/include/tune-ppc440.inc b/meta/conf/machi=
+ne/include/tune-ppc440.inc
+>> new file mode 100644
+>> index 0000000..394364d
+>> --- /dev/null
+>> +++ b/meta/conf/machine/include/tune-ppc440.inc
+>> @@ -0,0 +1,14 @@
+>> +DEFAULTTUNE ?=3D "ppc440"
+>> +
+>> +require conf/machine/include/powerpc/arch-powerpc.inc
+>> +
+>> +TUNEVALID[ppc440] =3D "Enable ppc440 specific processor optimizations"
+>> +TUNE_CCARGS +=3D "${@bb.utils.contains("TUNE_FEATURES", "ppc440", "-mcp=
+u=3D440", "", d)}"
+>> +
+>> +AVAILTUNES +=3D "ppc440"
+>> +TUNE_FEATURES_tune-ppc440 =3D "m32 fpu-soft ppc440"
+>> +TUNE_PKGARCH_tune-ppc440 =3D "ppc440"
+>> +PACKAGE_EXTRA_ARCHS_tune-ppc440 =3D "${PACKAGE_EXTRA_ARCHS_tune-powerpc=
+-nf} ppc440"
+>> +
+>> +# glibc configure options to get 440 specific library (for sqrt)
+>> +GLIBC_EXTRA_OECONF +=3D "${@bb.utils.contains("TUNE_FEATURES", "ppc440"=
+, "-with-cpu=3D440", "", d)}"
+>> --
+>> 1.7.9.5
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> -Khem
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
--- 
--Khem
+
+
+--=20
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
 
