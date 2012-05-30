@@ -1,37 +1,35 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SZksx-0006ZB-9x
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SZkxN-0006ii-D3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 May 2012 17:32:31 +0200
-Received: by eaal1 with SMTP id l1so1804577eaa.6
+	Wed, 30 May 2012 17:37:05 +0200
+Received: by yhjj56 with SMTP id j56so3480691yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2012 08:22:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=z5aL1jRG18tAojn/7eGbUBgncYHSATk8H3lvVcLJ8jY=;
-	b=DnYn/MeIwsGKdPEotVnprbDSsg0gEPJUx6I+XV5rdwMW8OunplXueFQE/pL+Q7zUHb
-	wljC5YqOB+sasEPnDH63y/4lAhHxpAGm9+lDOiKoPu5ylHgd5/jjCCcsXcWxwdDDJKN5
-	HffCxnGPDFgvaN/NbRKXYfjD8RNgD3hmbGn0buuav0OawlbVwXb8UlntyuQ9ii3qBhFh
-	HhE73jDOLJR6+z3n5RofCH7q0gDH75lN5MLbYQrIOHuSGWvX3Wv0MvCLKsfkNtfs3y40
-	qJipGEeOsD0baSvN2DfN0Xm8KvYyE5Bgi0TGXPg2qN1N+HkBacWGDvWnmtd7Q96HRly1
-	rFyA==
-Received: by 10.14.119.80 with SMTP id m56mr7002531eeh.37.1338391332635;
-	Wed, 30 May 2012 08:22:12 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o16sm61743249eeb.13.2012.05.30.08.22.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 May 2012 08:22:11 -0700 (PDT)
-Date: Wed, 30 May 2012 17:22:20 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120530152220.GQ3138@jama.jama.net>
+	Wed, 30 May 2012 08:26:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=ShkYxSkuwKH++JqqB6iKqXU2/Zhp3JuCjVzoVy85EL4=;
+	b=LGk+agjKGWA0FjmlaErkAiaFNWqsInVM1spd69t3W6fbXjKmOdsGm3VNbo006VPmTJ
+	J1BYoGlVeriRUuf/0o491DZqO1B/QDG6xy7RFZxQEnC9W5oO43tufDclyknFrS0qjjxP
+	ljw2sxXJz21K/f72yZ/lmEcyglGA295Ms22jC9QKYfA+cbKUqXqS+P+gYitEelTGYPbC
+	n8quizhx+q8Ix6574KQcFlPoqVoI+JEwFJFi8XEKicmyS0bngvrNuYMpwN0wFJF4LAK7
+	RDhOzTDc0FcNGzPgmuexbsrjdUC3EYa0S7PAvEHLJgpYtKWt2hH45oUs7O82GrDw3qNU
+	PVng==
+MIME-Version: 1.0
+Received: by 10.50.203.98 with SMTP id kp2mr11120319igc.42.1338391606147; Wed,
+	30 May 2012 08:26:46 -0700 (PDT)
+Received: by 10.64.18.10 with HTTP; Wed, 30 May 2012 08:26:46 -0700 (PDT)
+In-Reply-To: <20120530152220.GQ3138@jama.jama.net>
 References: <cover.1338386047.git.Martin.Jansa@gmail.com>
 	<2484826dbf17baf50370f5484aa22f43200992dd.1338386047.git.Martin.Jansa@gmail.com>
 	<CALbNGRTHSa+An9tURPWUQRgzZL8dMWN2s1uYJ+WyH41W=y-98Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRTHSa+An9tURPWUQRgzZL8dMWN2s1uYJ+WyH41W=y-98Q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20120530152220.GQ3138@jama.jama.net>
+Date: Wed, 30 May 2012 17:26:46 +0200
+Message-ID: <CALbNGRS2vZ5_57H+u8O=jWkXUy1UD__-aB6KwDTgY-gyXCen4A@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][meta-efl][PATCH 2/3] systemd.bbclass: fix postinst/rdepends generation for recipes with SYSTEMD_SERVICE (without _PN suffix)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,86 +44,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2012 15:32:31 -0000
-X-Groupsio-MsgNum: 39051
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="By57YlnFViWR/M0S"
-Content-Disposition: inline
-
---By57YlnFViWR/M0S
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 May 2012 15:37:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 30, 2012 at 05:14:58PM +0200, Andreas M=FCller wrote:
-> On Wed, May 30, 2012 at 4:21 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> > =A0meta-oe/classes/systemd.bbclass | =A0 =A03 ++-
-> > =A01 files changed, 2 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.=
-bbclass
-> > index db35717..e895021 100644
-> > --- a/meta-oe/classes/systemd.bbclass
-> > +++ b/meta-oe/classes/systemd.bbclass
-> > @@ -201,7 +201,8 @@ python populate_packages_prepend () {
-> > =A0 =A0 =A0 =A0# run all modifications once when creating package
-> > =A0 =A0 =A0 =A0if os.path.exists('${D}'):
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0for pkg_systemd in d.getVar('SYSTEMD_PAC=
-KAGES', 1).split():
-> > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if d.getVar('SYSTEMD_SERV=
-ICE' + "_" + pkg_systemd, 1) and d.getVar('SYSTEMD_SERVICE' + "_" + pkg_sys=
-temd, 1).strip():
-> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 systemd_services =3D d.ge=
-tVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) or d.getVar('SYSTEMD_SERVICE=
-', 1)
-> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if systemd_services and s=
-ystemd_services.strip():
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd_=
-generate_package_scripts(pkg_systemd)
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd_=
-add_rdepends(pkg_systemd)
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd_check_services()
-> > --
-> > 1.7.8.6
-> >
-> Two questions:
->=20
-> 1. Did you see [1]?
+On Wed, May 30, 2012 at 5:22 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, May 30, 2012 at 05:14:58PM +0200, Andreas M=FCller wrote:
+>> On Wed, May 30, 2012 at 4:21 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> > ---
+>> > =A0meta-oe/classes/systemd.bbclass | =A0 =A03 ++-
+>> > =A01 files changed, 2 insertions(+), 1 deletions(-)
+>> >
+>> > diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd=
+.bbclass
+>> > index db35717..e895021 100644
+>> > --- a/meta-oe/classes/systemd.bbclass
+>> > +++ b/meta-oe/classes/systemd.bbclass
+>> > @@ -201,7 +201,8 @@ python populate_packages_prepend () {
+>> > =A0 =A0 =A0 =A0# run all modifications once when creating package
+>> > =A0 =A0 =A0 =A0if os.path.exists('${D}'):
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0for pkg_systemd in d.getVar('SYSTEMD_PA=
+CKAGES', 1).split():
+>> > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if d.getVar('SYSTEMD_SER=
+VICE' + "_" + pkg_systemd, 1) and d.getVar('SYSTEMD_SERVICE' + "_" + pkg_sy=
+stemd, 1).strip():
+>> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 systemd_services =3D d.g=
+etVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) or d.getVar('SYSTEMD_SERVIC=
+E', 1)
+>> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if systemd_services and =
+systemd_services.strip():
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd=
+_generate_package_scripts(pkg_systemd)
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd=
+_add_rdepends(pkg_systemd)
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0systemd_check_services()
+>> > --
+>> > 1.7.8.6
+>> >
+>> Two questions:
+>>
+>> 1. Did you see [1]?
+>
+> no, did you forgot to attach it? :)
+>
+>> 2. What is that strip for?
+>
+> In one .bbappend I had something like
+>
+> SERVICES =3D "foo"
+> SERVICES_bar =3D ""
+> SYSTEMD_SERVICE +=3D "${SERVICES}"
+>
+> And space was ending in SYSTEMD_SERVICE causing this to be executed
+> without any real service in it (and failing).
+>
+> I can fix it by using _append but this .strip() looked like better
+> solution for other who don't notice extra whitespace.
+>
+> Cheers,
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+Yes :)
+http://patches.openembedded.org/patch/28841/
 
-no, did you forgot to attach it? :)
 
-> 2. What is that strip for?
-
-In one .bbappend I had something like
-
-SERVICES =3D "foo"
-SERVICES_bar =3D ""
-SYSTEMD_SERVICE +=3D "${SERVICES}"
-
-And space was ending in SYSTEMD_SERVICE causing this to be executed
-without any real service in it (and failing).
-
-I can fix it by using _append but this .strip() looked like better
-solution for other who don't notice extra whitespace.
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---By57YlnFViWR/M0S
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk/GOywACgkQN1Ujt2V2gBz0eACgo0Z0VAmNSP0fzKaQbJjmSRFt
-R38An1hvr/c5VtEIDXZl1q7biYm85t2l
-=/dBi
------END PGP SIGNATURE-----
-
---By57YlnFViWR/M0S--
