@@ -1,33 +1,32 @@
-Received: from mail-gh0-f178.google.com ([209.85.160.178])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Sa4CW-0003Zc-9q
+	(envelope-from <tom.rini@gmail.com>) id 1Sa5vY-00045J-9w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 May 2012 14:10:00 +0200
-Received: by ghbf1 with SMTP id f1so902872ghb.9
+	Thu, 31 May 2012 16:00:38 +0200
+Received: by lbol5 with SMTP id l5so869431lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 04:59:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Thu, 31 May 2012 06:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=xxukl6Wy3fSFzcXHArYirxxNZ7kqSNgtpeiLYPmRyI0=;
-	b=BV6PDHIYoFE4kHLeJAbSsC1X0WqqyLjUOGs9Y2GAhR39Y7tiPM3EBOrorQ8DH2JPFt
-	rHn5IRA9XCta1hsWDoxyHFBrH7i2LP5tHaBe8fEzkR0JpUxCm+s91SLPkY+NPyGUYJ4p
-	TjncoebU3lsK0M8nA7q6QVAzq3s6/ME3+CIzdVIKWYzMIXDl0sySZIeVBlpeC73Xh6z6
-	Sxy5XiHHL6gaX5Ga4nhnkB4BurRCvfVYfenIrXppCFmJmbWcHWNC80lOKc4D8g/RsdIu
-	j2ZEMnjqeE1y3+GDroyPoAt1CDCeNBx3jQpbzgluBMNhCGLpPVb7GcHVjnqvNku1D4ul
-	FBvA==
+	bh=nBrm/wmf+BIEoGn9NMu5moOlXTyz2kTbEgbm1DmA19k=;
+	b=oPcozNinAAALpdP7PfygXbEne0Pe9rWaXq8FH1ELchvXhqEjdwxCIsxLgAHNIgZjEh
+	hWetdWMQ3FjxaeRMaFhQLeOAArV7CMSXdy0FiZ9LEuiTQdxLD0sM6O/lVzHOE6FCy6bN
+	O+qsh6Otgbr4947aWW2gxy38fGDpSQNERoEmbl+LfdVnbZMUAjT6JVEPtJd08GktgedA
+	dnvFeb4F1CFlhpIgoTa70TRnvWXerONboaq2koCcy0zxrFN2/SjhH4S/pWsPTVFqtI6s
+	XVEt9KEy5Bs55ofx3E5aqDrdMJw4AuyiboOE3PdqmFzI4ySSGbFHcuuRt91GZp36eKvm
+	UQxw==
 MIME-Version: 1.0
-Received: by 10.50.149.170 with SMTP id ub10mr13211183igb.38.1338465579647;
-	Thu, 31 May 2012 04:59:39 -0700 (PDT)
-Received: by 10.64.18.10 with HTTP; Thu, 31 May 2012 04:59:39 -0700 (PDT)
-In-Reply-To: <1337075267-9817-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1337075267-9817-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Thu, 31 May 2012 13:59:39 +0200
-Message-ID: <CALbNGRSaFZS-q8-Qm-kZFS2NQ1KVRHfucZpsdSX+AdFRniCOOg@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+Received: by 10.152.103.109 with SMTP id fv13mr2445939lab.33.1338472215082;
+	Thu, 31 May 2012 06:50:15 -0700 (PDT)
+Received: by 10.112.38.202 with HTTP; Thu, 31 May 2012 06:50:15 -0700 (PDT)
+In-Reply-To: <1338010968-11334-1-git-send-email-raj.khem@gmail.com>
+References: <1338010968-11334-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 31 May 2012 06:50:15 -0700
+Message-ID: <CA+M6bXncod0LwDyADvmv_cffDOLna5jCkUkUoe_+9JZkwFkEgQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome] gnome-settings-daemon: fix staticdev QA warnings
+Subject: Re: [2011.03-maintenance][PATCH] classes/mirrors.bbclass: update debian snapshot mirror url
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2012 12:10:00 -0000
+X-List-Received-Date: Thu, 31 May 2012 14:00:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 15, 2012 at 11:47 AM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
->
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+On Fri, May 25, 2012 at 10:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
-> =A0.../gnome-settings-daemon_2.32.1.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 =A06 ++++--
-> =A01 files changed, 4 insertions(+), 2 deletions(-)
+> =A0classes/mirrors.bbclass | =A0 =A02 +-
+> =A01 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-setting=
-s-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-s=
-ettings-daemon_2.32.1.bb
-ping?
+> diff --git a/classes/mirrors.bbclass b/classes/mirrors.bbclass
+> index 71ee5f6..bb4f1ec 100644
+> --- a/classes/mirrors.bbclass
+> +++ b/classes/mirrors.bbclass
+> @@ -1,6 +1,6 @@
+> =A0MIRRORS[func] =3D "0"
+> =A0MIRRORS () {
+> -${DEBIAN_MIRROR}/main =A0http://snapshot.debian.net/archive/pool
+> +${DEBIAN_MIRROR}/main =A0 http://snapshot.debian.org/archive/debian-arch=
+ive/20120328T092752Z/debian/pool
+> =A0${DEBIAN_MIRROR} =A0 =A0 =A0 ftp://ftp.de.debian.org/debian/pool
+> =A0${DEBIAN_MIRROR} =A0 =A0 =A0 ftp://ftp.au.debian.org/debian/pool
+> =A0${DEBIAN_MIRROR} =A0 =A0 =A0 ftp://ftp.cl.debian.org/debian/pool
+
+Sorry I missed this for a while.  This I believe is backwards.  We
+don't want to tie the default mirror to today we want to tie it back
+to the 20110331 or so snapshot we use in a few other cases.
+
+--=20
+Tom
 
 
