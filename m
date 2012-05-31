@@ -1,34 +1,36 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1Sa2FU-0002jx-M2
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Sa3Fz-0000sk-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 May 2012 12:04:56 +0200
-Received: by wgbdr1 with SMTP id dr1so635965wgb.24
+	Thu, 31 May 2012 13:09:31 +0200
+Received: by bkcjm2 with SMTP id jm2so710494bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 02:54:37 -0700 (PDT)
+	Thu, 31 May 2012 03:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=S8nFGo3EbUc9mqI4e2mo9gwp2rR7cVaZXR18kQtKM0U=;
-	b=kLlUmo5aKXwYpmBhFzW9abdVeaPpAhHyuno/Jdih4uJ+xvuVpno2Np49DImFoevunT
-	Id7lE+LilsP6wBimwsNweiKu2Bd2bveGDMR9Yl1nqBO9/7xeIPdRn3N2NL9oSxjDOLUw
-	4GNG8kN6ZXj+rPkVbXMcS60yV8Ut14N7xG8FEho71WjmHhIf+EhBOOUYWvkI9rX2NY0m
-	zEyRITj9EZLIPWjyijTOav9lM7o+QBt4iMFbGzyG+p0BT56WDp4hciwOIuJLNOaN8l9p
-	TBgNFrZQN+O4YphYq0pggV4lSGb4HK7DlLtITKuZMfH7YnMdMFkVWZ/fmwKMs+2P/H2T
-	9Osg==
-MIME-Version: 1.0
-Received: by 10.216.193.166 with SMTP id k38mr13251830wen.200.1338458076958;
-	Thu, 31 May 2012 02:54:36 -0700 (PDT)
-Received: by 10.223.74.16 with HTTP; Thu, 31 May 2012 02:54:36 -0700 (PDT)
-In-Reply-To: <CAGiJk9fTx-AdJ+hXc8T988_ZBhjOcdhS4JiT7at=h4aEA9erHw@mail.gmail.com>
-References: <CAGiJk9coc2zTnkX0CoM+cM52CDMwvpSwUN4DjjYoyrHnn5jD7Q@mail.gmail.com>
-	<jojofu$9ph$1@dough.gmane.org>
-	<CAGiJk9fTx-AdJ+hXc8T988_ZBhjOcdhS4JiT7at=h4aEA9erHw@mail.gmail.com>
-Date: Thu, 31 May 2012 11:54:36 +0200
-Message-ID: <CAGiJk9c3354PMrEO2wDEmQsmA1dNtUs7z__EOFY8=1yRHE59jQ@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Jl9Ozwr4NTHPGXROSePx98vl4CPxJ1rHrHD+s6OiMXg=;
+	b=JSG6zh4ECYe22G0wkQntGC80XQqgpvlOQj9DXTeF/1VeE2AR4YNgwbM0mcjCaeCCcP
+	B6w969Ej7Mynat30u4Uz0PgS8U/tRSs7VCEZasRMgUSV6h6wQXWkzHnE+e3qJliS1g9+
+	yyD/pdTUpr6mIhnic6izb65fWtzFKEgE1OKy839jA2CCWf2OnAulZU/yxjAOv1mUs3rq
+	VeVgAi4Wp4cR1de7PDfe3ssLjeYdJUMCSgcvVl/5+C7qcLtDljtmNE8PqjILndmtsXke
+	vA63rxvU7/veVrrVWkm5v6LbBjBaUdOqNISniYhLgTvbZO6M3zNuLFFYml/2GlaQX3f8
+	o+/Q==
+Received: by 10.204.151.82 with SMTP id b18mr11353406bkw.132.1338461951923;
+	Thu, 31 May 2012 03:59:11 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-83.unitymediagroup.de.
+	[95.222.156.83])
+	by mx.google.com with ESMTPS id ig1sm2794600bkc.4.2012.05.31.03.59.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 31 May 2012 03:59:11 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-kde] Status of the meta-kde layer
+Date: Thu, 31 May 2012 12:58:56 +0200
+Message-Id: <1338461940-3040-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-oe 0/4] systemd.bbclass fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,52 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2012 10:04:56 -0000
+X-List-Received-Date: Thu, 31 May 2012 11:09:31 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2012/5/25 Samuel Stirtzel <s.stirtzel@googlemail.com>:
-> 2012/5/11 Koen Kooi <koen@dominion.thruhere.net>:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Op 11-05-12 12:44, Samuel Stirtzel schreef:
->>
->>> Testing meta-kde: Currently it won't work until you can provide
->>> soprano-native from your host or elsewhere. After this issue is resolved
->>> it will be easy to archive on OpenEmbedded if you use the branch
->>> sst-test-images:
->>> https://gitorious.org/openembedded-core-layers/meta-kde/trees/sst-test-images/recipes-images
->>>
->>>
->> *just talking to myself* Maybe it would be a good idea to have a git
->>> subtree providing the images, so parsing won't fail over
->>> "systemd-image.bb not found" on Poky?
->>
->> changing the 'require' to 'include' should get around that.
->
-> Hi,
-> this works good thanks for pointing that out.
-> I merged the branch sst-test-images into master.
->
-> The soprano-native recipe with the missing onto2vocabularyclass binary
-> was added too.
-> Testing this layer should be possible now.
->
+This patch series superseeds [1-2]. It supersedes Martin's suggestion [3]
+and includes his PR bump [4].
 
-Some screenshots of Plasma Active (Overo Gumstix Water armv7a Cortex-A8):
+It was build tested and the results were checked with buildhistory.
 
-Plasma Active has a nice touch-interface based layout, on normal
-screens (5:4 1280x1024) it looks a bit over sized:
-https://docs.google.com/open?id=0Bx-m3uk1yDB-WnFxTkhyOVBkRU0
+[1] http://patches.openembedded.org/patch/28843/
+[2] http://patches.openembedded.org/patch/28841/
+[3] http://patches.openembedded.org/patch/28939/
+[4] http://patches.openembedded.org/patch/28943/
 
-CPU is under heavy load, but it is entirely caused by the xserver (I'm
-looking into that):
-https://docs.google.com/open?id=0Bx-m3uk1yDB-QmlKRFRuRWxZMWs
+Andreas Müller (3):
+  systemd-systemctl-native: Add additional messages for better
+    debugging
+  systemd.bbclass: remove unused code
+  systemd.bbclass: extract SYSTEMD_SERVICE properly
 
-(commits are not yet on gitorious)
+Martin Jansa (1):
+  recipes: bump PR to fix -systemd postinsts where SYSTEMD_SERVICE was
+    used without PN* suffix
 
---
-Regards
-Samuel
+ meta-efl/recipes-efl/efl/elsa_svn.bb               |    2 +
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |    2 +-
+ meta-oe/classes/systemd.bbclass                    |   27 ++++++++++++-------
+ meta-oe/recipes-bsp/keymaps/keymaps_1.0.bbappend   |    2 +-
+ .../cherokee/cherokee_1.2.98.bb                    |    2 +-
+ .../recipes-connectivity/gateone/gateone_git.bb    |    2 +-
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
+ .../openssh/openssh_6.0p1.bbappend                 |    2 +-
+ .../systemd/systemd-machine-units_1.0.bb           |    2 +
+ .../systemd/systemd-systemctl-native.bb            |    2 +-
+ .../systemd/systemd-systemctl-native/systemctl     |    5 +++
+ meta-oe/recipes-extended/rsyslog/rsyslog.inc       |    2 +-
+ .../xinput-calibrator/xinput-calibrator_0.7.5.bb   |    2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb        |    2 +
+ meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb        |    2 +
+ meta-oe/recipes-navigation/gpsd/gpsd_git.bb        |    2 +
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |    2 +-
+ 17 files changed, 42 insertions(+), 20 deletions(-)
+
+-- 
+1.7.6.5
+
 
 
