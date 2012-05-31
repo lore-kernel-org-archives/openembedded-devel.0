@@ -1,34 +1,34 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Sa0Gp-0005BL-FK
+	(envelope-from <s.stirtzel@googlemail.com>) id 1Sa2FU-0002jx-M2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 May 2012 09:58:11 +0200
-Received: by wgbds1 with SMTP id ds1so3748068wgb.0
+	Thu, 31 May 2012 12:04:56 +0200
+Received: by wgbdr1 with SMTP id dr1so635965wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 00:47:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=qBxCwfj/gExadDlopqngkGdgF/6TW1CCW2KBhVCp308=;
-	b=djy/0n6gb2DAyDRllks4m7XiACyq2hPQK5PbrBIghl6/B9aZE96B1HkI6/aaNd0DP/
-	aIqwOVs7vts0asP8hR4ZSgCa+yAT5FG+uVr9+5Ta4kaPki0jntTB4j0HiDvzJVCgQceY
-	tgSTXndev4pIE3JmCjWDyNGB+K2wHAmOlScgJLIaCovYxcgpPCfalUWoVJ6HaAy+aN6K
-	OB45Pv5SeUuReL9En/fyc4jJAmoSWyOA1pjbHKNvAsQ+xLU9+uTjps4GqoUZDpgHiwTe
-	8AESzNZjGuUmHtR2Mwg7RC98cL//McdCofAL47vLYm1BXOiY8n2gUlE9Y9uzECx9QvcO
-	LqjA==
-Received: by 10.216.217.228 with SMTP id i78mr12772711wep.126.1338450471114;
-	Thu, 31 May 2012 00:47:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(197.Red-79-150-15.dynamicIP.rima-tde.net. [79.150.15.197])
-	by mx.google.com with ESMTPS id gv7sm2265377wib.4.2012.05.31.00.47.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 May 2012 00:47:50 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
+	Thu, 31 May 2012 02:54:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=S8nFGo3EbUc9mqI4e2mo9gwp2rR7cVaZXR18kQtKM0U=;
+	b=kLlUmo5aKXwYpmBhFzW9abdVeaPpAhHyuno/Jdih4uJ+xvuVpno2Np49DImFoevunT
+	Id7lE+LilsP6wBimwsNweiKu2Bd2bveGDMR9Yl1nqBO9/7xeIPdRn3N2NL9oSxjDOLUw
+	4GNG8kN6ZXj+rPkVbXMcS60yV8Ut14N7xG8FEho71WjmHhIf+EhBOOUYWvkI9rX2NY0m
+	zEyRITj9EZLIPWjyijTOav9lM7o+QBt4iMFbGzyG+p0BT56WDp4hciwOIuJLNOaN8l9p
+	TBgNFrZQN+O4YphYq0pggV4lSGb4HK7DlLtITKuZMfH7YnMdMFkVWZ/fmwKMs+2P/H2T
+	9Osg==
+MIME-Version: 1.0
+Received: by 10.216.193.166 with SMTP id k38mr13251830wen.200.1338458076958;
+	Thu, 31 May 2012 02:54:36 -0700 (PDT)
+Received: by 10.223.74.16 with HTTP; Thu, 31 May 2012 02:54:36 -0700 (PDT)
+In-Reply-To: <CAGiJk9fTx-AdJ+hXc8T988_ZBhjOcdhS4JiT7at=h4aEA9erHw@mail.gmail.com>
+References: <CAGiJk9coc2zTnkX0CoM+cM52CDMwvpSwUN4DjjYoyrHnn5jD7Q@mail.gmail.com>
+	<jojofu$9ph$1@dough.gmane.org>
+	<CAGiJk9fTx-AdJ+hXc8T988_ZBhjOcdhS4JiT7at=h4aEA9erHw@mail.gmail.com>
+Date: Thu, 31 May 2012 11:54:36 +0200
+Message-ID: <CAGiJk9c3354PMrEO2wDEmQsmA1dNtUs7z__EOFY8=1yRHE59jQ@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 May 2012 09:47:49 +0200
-Message-Id: <1338450469-22322-1-git-send-email-elvis.dowson@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-xilinx] util-linux_2.21.bbappend: Rename to util-linux_2.21.1.bbappend.
+Subject: Re: [meta-kde] Status of the meta-kde layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +42,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2012 07:58:11 -0000
+X-List-Received-Date: Thu, 31 May 2012 10:04:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This commit renames util-linux_2.21.bbappend to util-linux_2.21.1.bbappend
-to match the corresponding change in version to the
-poky/meta/recipes-core/util-linux/util-linux_2.21.1.bb recipe.
+2012/5/25 Samuel Stirtzel <s.stirtzel@googlemail.com>:
+> 2012/5/11 Koen Kooi <koen@dominion.thruhere.net>:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 11-05-12 12:44, Samuel Stirtzel schreef:
+>>
+>>> Testing meta-kde: Currently it won't work until you can provide
+>>> soprano-native from your host or elsewhere. After this issue is resolved
+>>> it will be easy to archive on OpenEmbedded if you use the branch
+>>> sst-test-images:
+>>> https://gitorious.org/openembedded-core-layers/meta-kde/trees/sst-test-images/recipes-images
+>>>
+>>>
+>> *just talking to myself* Maybe it would be a good idea to have a git
+>>> subtree providing the images, so parsing won't fail over
+>>> "systemd-image.bb not found" on Poky?
+>>
+>> changing the 'require' to 'include' should get around that.
+>
+> Hi,
+> this works good thanks for pointing that out.
+> I merged the branch sst-test-images into master.
+>
+> The soprano-native recipe with the missing onto2vocabularyclass binary
+> was added too.
+> Testing this layer should be possible now.
+>
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
----
- recipes-core/util-linux/util-linux_2.21.1.bbappend |    3 +++
- recipes-core/util-linux/util-linux_2.21.bbappend   |    3 ---
- 2 files changed, 3 insertions(+), 3 deletions(-)
- create mode 100644 recipes-core/util-linux/util-linux_2.21.1.bbappend
- delete mode 100644 recipes-core/util-linux/util-linux_2.21.bbappend
+Some screenshots of Plasma Active (Overo Gumstix Water armv7a Cortex-A8):
 
-diff --git a/recipes-core/util-linux/util-linux_2.21.1.bbappend b/recipes-core/util-linux/util-linux_2.21.1.bbappend
-new file mode 100644
-index 0000000..5199eb2
---- /dev/null
-+++ b/recipes-core/util-linux/util-linux_2.21.1.bbappend
-@@ -0,0 +1,3 @@
-+FILESEXTRAPATHS := "${THISDIR}/${PN}"
-+# Disable microblaze ncurses support
-+EXTRA_OECONF_microblaze += " --without-ncurses "
-diff --git a/recipes-core/util-linux/util-linux_2.21.bbappend b/recipes-core/util-linux/util-linux_2.21.bbappend
-deleted file mode 100644
-index 5199eb2..0000000
---- a/recipes-core/util-linux/util-linux_2.21.bbappend
-+++ /dev/null
-@@ -1,3 +0,0 @@
--FILESEXTRAPATHS := "${THISDIR}/${PN}"
--# Disable microblaze ncurses support
--EXTRA_OECONF_microblaze += " --without-ncurses "
--- 
-1.7.9.5
+Plasma Active has a nice touch-interface based layout, on normal
+screens (5:4 1280x1024) it looks a bit over sized:
+https://docs.google.com/open?id=0Bx-m3uk1yDB-WnFxTkhyOVBkRU0
 
+CPU is under heavy load, but it is entirely caused by the xserver (I'm
+looking into that):
+https://docs.google.com/open?id=0Bx-m3uk1yDB-QmlKRFRuRWxZMWs
+
+(commits are not yet on gitorious)
+
+--
+Regards
+Samuel
 
 
