@@ -1,36 +1,39 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Sa8jq-0003bO-6F
+	(envelope-from <elvis.dowson@gmail.com>) id 1Sa8nA-0003o1-Hb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 May 2012 19:00:42 +0200
-Received: by wgbdr1 with SMTP id dr1so1019920wgb.24
+	Thu, 31 May 2012 19:04:08 +0200
+Received: by wibhm14 with SMTP id hm14so1018127wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 09:50:22 -0700 (PDT)
+	Thu, 31 May 2012 09:53:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=0ZXh1TTPbKr5YHZP+5txl8PKVSASEWhJ5nNJTKISpi8=;
-	b=IMzU2lBBrRiDE/WQhXS5rTemPJbD+g7HdWaUYVjq2Fm9OObFgID4n94+wAFGkiKpdb
-	+2H41u3Y4b8+0bw4hLSbdNjeToeRabpRz77YkqGYBTQgm2w2KDkOGqM627+iUzXTgCut
-	RXTGSXF2AFaTgJixlD5sZW3Ok802SOqOZmul5Tyt/injlyWmxHHjdEHeaG4cSIJ2S5c1
-	Cnp69rujYC4RwkhjEKeqzqhy4PMWp2+z5upN+OhjCBKws3zPr9m5dvv9g9PWweTq++/i
-	hVV7O/p2uBN2tdXhlDDInsrMecrfnc3dnaEmd/jXlUsZ0ssFHqpA5j0hB1xz6IJIIZ9p
-	CZTg==
-Received: by 10.216.193.162 with SMTP id k34mr713244wen.54.1338483022156;
-	Thu, 31 May 2012 09:50:22 -0700 (PDT)
-Received: from localhost.localdomain
-	(197.Red-79-150-15.dynamicIP.rima-tde.net. [79.150.15.197])
-	by mx.google.com with ESMTPS id ez4sm4670831wid.3.2012.05.31.09.50.20
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=CzN6sln08LQJ8xdzyLsr1ldxn9SsUQ+CHKqE65UnRlc=;
+	b=nmsvrQCLT7ABj+qBPY9ZEEYw/rQGjfvN19EVW9vGPNwRkD95cstBROCaDVDxeyXDYG
+	ZnUmc5ppvBqp/K8ZvhiN+z96kDLi6Zoy+b1UhM1hTpVscTj6fAZvRalCjOjVlagd7Kkc
+	lQKZYGOJBNsM1qOThLmGVuF3AfJyAlM4xxC7HBLje9tU6V8IouKftu2ISfXmWbjk+fHK
+	xha04o4bK29eCQNpsTsNNmygiwwzY2S7GP7hhwnTvRunArnw64NT7/huC4chQ/Vq88an
+	YH5jIYvKFA5QywNTLCChm/3XtU2sPr7Hwxnh8vFnVz3HqCI7qoUvVYu7kizDW8WTLHmv
+	S9Kg==
+Received: by 10.216.140.2 with SMTP id d2mr10142166wej.0.1338483227527;
+	Thu, 31 May 2012 09:53:47 -0700 (PDT)
+Received: from [192.168.1.35] (197.Red-79-150-15.dynamicIP.rima-tde.net.
+	[79.150.15.197])
+	by mx.google.com with ESMTPS id k8sm7923878wia.6.2012.05.31.09.53.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 May 2012 09:50:21 -0700 (PDT)
+	Thu, 31 May 2012 09:53:46 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
 From: Elvis Dowson <elvis.dowson@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 May 2012 18:50:02 +0200
-Message-Id: <1338483003-14850-2-git-send-email-elvis.dowson@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1338483003-14850-1-git-send-email-elvis.dowson@gmail.com>
-References: <1338483003-14850-1-git-send-email-elvis.dowson@gmail.com>
-Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-xilinx 2/2] tune-ppc440: Add glibc configure options.
+In-Reply-To: <CAAB-1ywGdhaePDp05Cmm90NtGVSUPbRqGtRtO2XkVMd9NnK+Gg@mail.gmail.com>
+Date: Thu, 31 May 2012 18:53:49 +0200
+Message-Id: <2729A91D-A5DA-4BD7-8F6F-64D8EFC12DE5@gmail.com>
+References: <1338445392-39723-1-git-send-email-elvis.dowson@gmail.com>
+	<CAAB-1ywGdhaePDp05Cmm90NtGVSUPbRqGtRtO2XkVMd9NnK+Gg@mail.gmail.com>
+To: Adrian Alonso <aalonso00@gmail.com>
+X-Mailer: Apple Mail (2.1278)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xilinx] tune-ppc440.inc: Update support for the PowerPC 440 processor in the Xilinx Virtex-5 FXT FPGA.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2012 17:00:42 -0000
+X-List-Received-Date: Thu, 31 May 2012 17:04:08 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 7bit
 
-* Add glibc configure options to get ppc440 specific library.
+Hi Adrian,
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
----
- conf/machine/include/tune-ppc440.inc |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On May 31, 2012, at 5:15 PM, Adrian Alonso wrote:
 
-diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/tune-ppc440.inc
-index 371fdf9..35e93e9 100644
---- a/conf/machine/include/tune-ppc440.inc
-+++ b/conf/machine/include/tune-ppc440.inc
-@@ -10,4 +10,5 @@ TUNE_FEATURES_tune-ppc440 = "m32 fpu-soft ppc440"
- TUNE_PKGARCH_tune-ppc440 = "ppc440"
- PACKAGE_EXTRA_ARCHS_tune-ppc440 = "${PACKAGE_EXTRA_ARCHS_tune-powerpc-nf} ppc440"
- 
--#MACHINEOVERRIDES .= "ppc440"
-+# glibc configure options to get ppc440 specific library (for sqrt)
-+GLIBC_EXTRA_OECONF += "${@bb.utils.contains("TUNE_FEATURES", "ppc440", "-with-cpu=440", "", d)}"
--- 
-1.7.9.5
+> Please update your meta-xilinx repo,
+> commit: 04633e44b5401288ceee2d36eb2413dfa5308a54
+> does something similar, but I fail to use "powerpc-nf"
+> 
+> I would accept a new patch for that :)
+
+Done! :-)
+
+Best regards,
+
+Elvis Dowson
 
 
 
