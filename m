@@ -1,30 +1,32 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1SaMhX-0001yA-B8
+	(envelope-from <andrea.adami@gmail.com>) id 1SaN71-0002rm-D3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 09:55:15 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SaMXY-0006LM-QC>; Fri, 01 Jun 2012 09:44:56 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69) with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SaMXY-0007JG-NS>; Fri, 01 Jun 2012 09:44:56 +0200
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1SaMXW-00026j-KN; Fri, 01 Jun 2012 09:44:54 +0200
-Date: Fri, 1 Jun 2012 09:44:54 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120601074454.GB8017@mi.fu-berlin.de>
-References: <1337075791-8745-1-git-send-email-jlu@pengutronix.de>
+	Fri, 01 Jun 2012 10:21:35 +0200
+Received: by dalh21 with SMTP id h21so2529739dal.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Jun 2012 01:11:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=47XkMg12AI5lKf2iEqRrhH4oymHdo0Xgik/XU5Rvs7M=;
+	b=q8MEcu/4wWoRt0IcnRtCRSco7QVdDxEXTIKZOJij4U6nKapuD3ZAPqFU7GnIcazpYG
+	cLofwFwvIWbbPdE2W6vO4Sfa+C5e7StzDvA+TU46QrVht4F6/ncIuoeWK0us6Ra6pPIb
+	HsTrwLSR47fxlQ3bLupsEdbprK12Uvbf6weUYEzQIHjy0AJh43B2nWxEzaN6NI9od3t6
+	35oMw/zokQDYU0BgLHro2Gj2jQ6y8SF3JjlTpWIVJqvS5QEId8DRKBhzrGEdGJ0WF5tk
+	eFy97IYl92zi2WuopucjRSmrJjL0EWrCUagfGg7oHWBMWqveLe8Z0qjnOo5ngFql+XoD
+	i+Mg==
 MIME-Version: 1.0
-In-Reply-To: <1337075791-8745-1-git-send-email-jlu@pengutronix.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
-Cc: Jan Luebbe <jlu@pengutronix.de>
-Subject: Re: [meta-java][PATCH] jamvm: work around min heap size greater than max error
+Received: by 10.68.230.105 with SMTP id sx9mr2755000pbc.114.1338538273375;
+	Fri, 01 Jun 2012 01:11:13 -0700 (PDT)
+Received: by 10.143.63.11 with HTTP; Fri, 1 Jun 2012 01:11:13 -0700 (PDT)
+In-Reply-To: <jq9qlk$qd8$1@dough.gmane.org>
+References: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
+	<jq9qlk$qd8$1@dough.gmane.org>
+Date: Fri, 1 Jun 2012 10:11:13 +0200
+Message-ID: <CAAQYJAuo1WBzJUeVDuuG8Ju=f686E9yGQT_gcZTjSLjHiMUDUg@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][meta-initramfs][PATCH] klibc: release klibc 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,67 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 07:55:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Jun 2012 08:21:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, May 15, 2012 at 11:56:31AM +0200, Jan Luebbe wrote:
-> On system with large amounts of RAM (such as 96GB), the default
-> initial heap size is larger than the max heap size specified in
-> some build commands. Set min_heap to the max_heap value in those
-> cases instead.
-> 
-> Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
-> ---
->  recipes-core/jamvm/jamvm/jamvm-minmax-heap.patch |   15 +++++++++++++++
->  recipes-core/jamvm/jamvm_git.bb                  |    3 ++-
->  2 files changed, 17 insertions(+), 1 deletion(-)
->  create mode 100644 recipes-core/jamvm/jamvm/jamvm-minmax-heap.patch
-> 
-> diff --git a/recipes-core/jamvm/jamvm/jamvm-minmax-heap.patch b/recipes-core/jamvm/jamvm/jamvm-minmax-heap.patch
-> new file mode 100644
-> index 0000000..bf0fda5
-> --- /dev/null
-> +++ b/recipes-core/jamvm/jamvm/jamvm-minmax-heap.patch
-> @@ -0,0 +1,15 @@
-> +diff --git a/src/jam.c b/src/jam.c
-> +index b76ce8b..dc5eac3 100644
-> +--- a/src/jam.c
-> ++++ b/src/jam.c
-> +@@ -133,9 +133,7 @@ int parseCommandLine(int argc, char *argv[], InitArgs *args) {
-> +     for(i = 1; i < argc; i++) {
-> +         if(*argv[i] != '-') {
-> +             if(args->min_heap > args->max_heap) {
-> +-                printf("Minimum heap size greater than max!\n");
-> +-                status = 1;
-> +-                goto exit;
-> ++                args->min_heap = args->max_heap;
-> +             }
-> + 
-> +             if(args->props_count) {
-> diff --git a/recipes-core/jamvm/jamvm_git.bb b/recipes-core/jamvm/jamvm_git.bb
-> index 2a4213b..7b28600 100644
-> --- a/recipes-core/jamvm/jamvm_git.bb
-> +++ b/recipes-core/jamvm/jamvm_git.bb
-> @@ -6,11 +6,12 @@ require jamvm.inc
->  SRCREV = "4617da717ecb05654ea5bb9572338061106a414d"
->  PV = "1.5.5+1.6.0-devel+git${SRCPV}"
->  
-> -PR = "r1"
-> +PR = "r2"
->  
->  SRC_URI = "git://git.berlios.de/jamvm;protocol=git \
->             file://jamvm-jni_h-noinst.patch \
->             file://libffi.patch \
-> +           file://jamvm-minmax-heap.patch \
->            "
->  
->  S = "${WORKDIR}/git"
-> -- 
-> 1.7.10
+On Fri, Jun 1, 2012 at 9:23 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 01-06-12 01:31, Andrea Adami schreef:
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+>
+> error: patch failed: meta-initramfs/recipes-devtools/klibc/klibc.inc:10
+> error: meta-initramfs/recipes-devtools/klibc/klibc.inc: patch does not apply
+> Patch failed at 0001 klibc: release klibc 2.0
+>
 
-Thanks for the patch, it was applied to meta-java master and jdk-7 branch.
+Hm.. something wrong... and I ever tried to rename properly with 'git -A'...
+I'll fix that in a few hours.
 
-Bye Henning
+Sorry for the noise
+
+Andrea
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.11 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iQIcBAEBAgAGBQJPyG3zAAoJEHZqAkdh1vT6rwQP/RQB+hmY/RANmjJtEeJoez/4
+> 6c36JPjGhRfdXIdtTTBlq9dZPGgt7fmpKRPaAOWPjn9/6WWUMELaTflRq1JJS3O4
+> h7itaJgPdDSw1ejOGujlECNFdFTrL3RU0xzDTTOkgMzDtTxXtOkEWzyQBY9yHSKF
+> HKzc5KRLZUEQvoMyufFUtxsm9st+zdn92hv+KkJ6iXtJWGwvb8MmVOVIrFGA6YRq
+> OCi2xOS89SDOHS1ktITvuCbx2z0ddiF0SdCa+UGFPO9zaVJUieYMsZwovWtVI7PY
+> jAOh6UbTq/zXU7rZplB98neGyAhORYElTQ56irUFC9GCJWQtEIzfV0sTnXEj+pt/
+> JQozPwP5no52Bs17rCL1Pdm8t5/CT5/bq3AfYGkZJTdJPbddfUBcodHgzTIwQJQm
+> zXZrZLY83A6rUio00gyR+s9sbvsN28PRXIjiCSiBMO/O0H4Y8+Mf/8/3n1BdmyOf
+> 7Aj2OIxNt6xO3aSFDO7fFKGot9gJyYZNZFlLZ6w4GTOf4ShjRANqVmYdZIZj2pJU
+> oLzwzaVMvngiWkx/6K3pqya2byGH1zGMQ9oyYOO31YG7DZbvwpXshTKMtzQ5o5P9
+> KRaV6Xf41JC9XmoTO8Tps+75FZFd4HgKnuC0XWO2yqzEPnAMSvpg/+aS5cmbGrxB
+> aJKU9mVafr0oudrBB8qj
+> =9IvJ
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
