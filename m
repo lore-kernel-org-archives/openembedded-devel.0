@@ -1,34 +1,31 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SaMN1-0001Wd-Od for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 09:34:03 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SaMD0-0004Wi-CR for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 09:23:42 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2012 09:23:42 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2012 09:23:42 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1SaMhB-0001tA-UP
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jun 2012 09:54:54 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SaMXD-0006GI-D7>; Fri, 01 Jun 2012 09:44:35 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SaMXD-0007GO-AY>; Fri, 01 Jun 2012 09:44:35 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1SaMXB-00026b-7y; Fri, 01 Jun 2012 09:44:33 +0200
+Date: Fri, 1 Jun 2012 09:44:33 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 01 Jun 2012 09:23:31 +0200
-Message-ID: <jq9qlk$qd8$1@dough.gmane.org>
-References: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
-X-Enigmail-Version: 1.4.1
-Subject: Re: [meta-oe][meta-initramfs][PATCH] klibc: release klibc 2.0
+Message-ID: <20120601074432.GA8017@mi.fu-berlin.de>
+References: <4FA2448C.6050401@nedap.com>
+	<1337075762-8696-1-git-send-email-jlu@pengutronix.de>
+MIME-Version: 1.0
+In-Reply-To: <1337075762-8696-1-git-send-email-jlu@pengutronix.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Cc: Jan Luebbe <jlu@pengutronix.de>
+Subject: Re: [meta-java][PATCH] llvm2.8: fix llvm compile error by including unistd.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 07:34:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Jun 2012 07:54:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, May 15, 2012 at 11:56:02AM +0200, Jan Luebbe wrote:
+> Thanks to Jaap de Jong and Khem Raj for reporing the problem and suggesting the fix.
+> 
+> Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+> ---
+>  recipes-core/llvm/llvm2.8/add-unistd.patch |   12 ++++++++++++
+>  recipes-core/llvm/llvm2.8_2.8.bb           |    3 +++
+>  2 files changed, 15 insertions(+)
+>  create mode 100644 recipes-core/llvm/llvm2.8/add-unistd.patch
+> 
+> diff --git a/recipes-core/llvm/llvm2.8/add-unistd.patch b/recipes-core/llvm/llvm2.8/add-unistd.patch
+> new file mode 100644
+> index 0000000..1c51b30
+> --- /dev/null
+> +++ b/recipes-core/llvm/llvm2.8/add-unistd.patch
+> @@ -0,0 +1,12 @@
+> +Index: llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp
+> +===================================================================
+> +--- llvm-2.8.orig/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:31:21.008318473 +0200
+> ++++ llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:32:53.523734850 +0200
+> +@@ -19,6 +19,7 @@
+> + #include "llvm/Support/ErrorHandling.h"
+> + #include "llvm/System/DynamicLibrary.h"
+> + #include "llvm/Config/config.h"
+> ++#include <unistd.h>
+> + using namespace llvm;
+> + 
+> + // AtExitHandlers - List of functions to call when the program exits,
+> diff --git a/recipes-core/llvm/llvm2.8_2.8.bb b/recipes-core/llvm/llvm2.8_2.8.bb
+> index 310e94e..3459885 100644
+> --- a/recipes-core/llvm/llvm2.8_2.8.bb
+> +++ b/recipes-core/llvm/llvm2.8_2.8.bb
+> @@ -4,9 +4,12 @@ require llvm.inc
+>  LICENSE = "NCSA"
+>  LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
+>  
+> +PR = "r1"
+> +
+>  SRC_URI += " \
+>              file://30may-llvm2.8-pr399-ppc-arm.patch \
+>              file://0019-issue6065.patch \
+> +            file://add-unistd.patch \
+>             "
+>  
+>  SRC_URI_append_arm = " file://llvm-mc_disable.patch "
+> -- 
+> 1.7.10
 
-Op 01-06-12 01:31, Andrea Adami schreef:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Thanks for the patch, it was applied to meta-java master and jdk-7 branch.
 
-error: patch failed: meta-initramfs/recipes-devtools/klibc/klibc.inc:10
-error: meta-initramfs/recipes-devtools/klibc/klibc.inc: patch does not apply
-Patch failed at 0001 klibc: release klibc 2.0
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJPyG3zAAoJEHZqAkdh1vT6rwQP/RQB+hmY/RANmjJtEeJoez/4
-6c36JPjGhRfdXIdtTTBlq9dZPGgt7fmpKRPaAOWPjn9/6WWUMELaTflRq1JJS3O4
-h7itaJgPdDSw1ejOGujlECNFdFTrL3RU0xzDTTOkgMzDtTxXtOkEWzyQBY9yHSKF
-HKzc5KRLZUEQvoMyufFUtxsm9st+zdn92hv+KkJ6iXtJWGwvb8MmVOVIrFGA6YRq
-OCi2xOS89SDOHS1ktITvuCbx2z0ddiF0SdCa+UGFPO9zaVJUieYMsZwovWtVI7PY
-jAOh6UbTq/zXU7rZplB98neGyAhORYElTQ56irUFC9GCJWQtEIzfV0sTnXEj+pt/
-JQozPwP5no52Bs17rCL1Pdm8t5/CT5/bq3AfYGkZJTdJPbddfUBcodHgzTIwQJQm
-zXZrZLY83A6rUio00gyR+s9sbvsN28PRXIjiCSiBMO/O0H4Y8+Mf/8/3n1BdmyOf
-7Aj2OIxNt6xO3aSFDO7fFKGot9gJyYZNZFlLZ6w4GTOf4ShjRANqVmYdZIZj2pJU
-oLzwzaVMvngiWkx/6K3pqya2byGH1zGMQ9oyYOO31YG7DZbvwpXshTKMtzQ5o5P9
-KRaV6Xf41JC9XmoTO8Tps+75FZFd4HgKnuC0XWO2yqzEPnAMSvpg/+aS5cmbGrxB
-aJKU9mVafr0oudrBB8qj
-=9IvJ
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
