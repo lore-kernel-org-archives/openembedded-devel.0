@@ -1,35 +1,34 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SaMGK-0001Lz-47
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 09:27:08 +0200
-Received: by yhjj56 with SMTP id j56so1430001yhj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SaMN1-0001Wd-Od for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jun 2012 09:34:03 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SaMD0-0004Wi-CR for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Jun 2012 09:23:42 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Jun 2012 09:23:42 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2012 00:16:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=5RR/5huCQOWyPHsV9LqidWYPKa+N+DiNioh55Rurj00=;
-	b=SQEfGag6nSlav2wENjDnBLD8n83ymdKs9r8nOPjyO09r3l7dKglO5KoBRTZTqLjLJl
-	Ii2e2VEiX0DLSqilUV5TJcLLiePPFNsMNy6+fJlWpiDxpqqO+ixuHWKqkbaVJrFAnJ5z
-	qnbty024f5bPWE8maJEwVsqxc1Udp9vW9sUvP0M9cvC0kKE28cJZy0KCL9AxJjGlSPwx
-	6iP10VlDQKK6EBZm1C9ml6KThzaW/83NhS+/byeipxSQkn8R9VFMoXeSuqehkoDZs8ib
-	I+0iQbCVg/hlDe6z9AsbW4Fwe+TxbMqvUrKDVYCKNOSS+mv/llWzcAcqX8iWrnKmra/i
-	/daA==
-MIME-Version: 1.0
-Received: by 10.50.178.33 with SMTP id cv1mr522259igc.1.1338535006495; Fri, 01
-	Jun 2012 00:16:46 -0700 (PDT)
-Received: by 10.64.18.10 with HTTP; Fri, 1 Jun 2012 00:16:46 -0700 (PDT)
-In-Reply-To: <20120601053614.GV3138@jama.jama.net>
-References: <1338510443-29579-1-git-send-email-schnitzeltony@googlemail.com>
-	<1338510443-29579-3-git-send-email-schnitzeltony@googlemail.com>
-	<20120601053614.GV3138@jama.jama.net>
-Date: Fri, 1 Jun 2012 09:16:46 +0200
-Message-ID: <CALbNGRSdkCb320X=zDGV3Ei6-i-w+C-GX2RPyXx2XrLYSbA7hg@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Fri, 01 Jun 2012 09:23:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe, v2 3/4] systemd.bbclass: extract SYSTEMD_SERVICE properly
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 01 Jun 2012 09:23:31 +0200
+Message-ID: <jq9qlk$qd8$1@dough.gmane.org>
+References: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
+X-Enigmail-Version: 1.4.1
+Subject: Re: [meta-oe][meta-initramfs][PATCH] klibc: release klibc 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 07:27:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Jun 2012 07:34:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 1, 2012 at 7:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D le=
-n(systemd_services.split()) =3D=3D 1
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D le=
-n(get_package_var(d, 'SYSTEMD_SERVICE', systemd_packages)) =3D=3D 1
->
-> ^ isn't split() still needed here?
-Uhh - this would have broken the /dev/null links - thanks. Hope to do
-better next time. What concerns me is that I did not see that in
-buildhistory. Will check that first before sending out V3.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Andreas
+Op 01-06-12 01:31, Andrea Adami schreef:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+error: patch failed: meta-initramfs/recipes-devtools/klibc/klibc.inc:10
+error: meta-initramfs/recipes-devtools/klibc/klibc.inc: patch does not apply
+Patch failed at 0001 klibc: release klibc 2.0
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iQIcBAEBAgAGBQJPyG3zAAoJEHZqAkdh1vT6rwQP/RQB+hmY/RANmjJtEeJoez/4
+6c36JPjGhRfdXIdtTTBlq9dZPGgt7fmpKRPaAOWPjn9/6WWUMELaTflRq1JJS3O4
+h7itaJgPdDSw1ejOGujlECNFdFTrL3RU0xzDTTOkgMzDtTxXtOkEWzyQBY9yHSKF
+HKzc5KRLZUEQvoMyufFUtxsm9st+zdn92hv+KkJ6iXtJWGwvb8MmVOVIrFGA6YRq
+OCi2xOS89SDOHS1ktITvuCbx2z0ddiF0SdCa+UGFPO9zaVJUieYMsZwovWtVI7PY
+jAOh6UbTq/zXU7rZplB98neGyAhORYElTQ56irUFC9GCJWQtEIzfV0sTnXEj+pt/
+JQozPwP5no52Bs17rCL1Pdm8t5/CT5/bq3AfYGkZJTdJPbddfUBcodHgzTIwQJQm
+zXZrZLY83A6rUio00gyR+s9sbvsN28PRXIjiCSiBMO/O0H4Y8+Mf/8/3n1BdmyOf
+7Aj2OIxNt6xO3aSFDO7fFKGot9gJyYZNZFlLZ6w4GTOf4ShjRANqVmYdZIZj2pJU
+oLzwzaVMvngiWkx/6K3pqya2byGH1zGMQ9oyYOO31YG7DZbvwpXshTKMtzQ5o5P9
+KRaV6Xf41JC9XmoTO8Tps+75FZFd4HgKnuC0XWO2yqzEPnAMSvpg/+aS5cmbGrxB
+aJKU9mVafr0oudrBB8qj
+=9IvJ
+-----END PGP SIGNATURE-----
+
 
 
