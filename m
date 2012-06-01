@@ -1,33 +1,35 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SaGux-0002IP-CJ
+	(envelope-from <aalonso00@gmail.com>) id 1SaJUA-0001yU-QT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 03:44:43 +0200
-Received: by dalh21 with SMTP id h21so2126100dal.6
+	Fri, 01 Jun 2012 06:29:14 +0200
+Received: by yenl13 with SMTP id l13so1480062yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 18:34:22 -0700 (PDT)
+	Thu, 31 May 2012 21:18:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=6yVNLwFnNXTQryEoKHUu+Ub3XWskyzymXe0mOfdLJ5s=;
-	b=DrGKONvM04od+alhjR1r8/LPfrF7SYbv0GZXelcPNyzuBjL3UnZDkidrBIcaBtWw2j
-	VjxlAdpmkQMvUlXVYcnYdVndMMA6a+SLe5AgfUORiT+pcVTU0nLHU2Oq6LMWXK5MSD6O
-	uQjWkCsS55bvouL6P8bnzJobWcSVhDB3mRjOoo3m+bY8vrEE8Xor8fjgwtiDx/htVKlS
-	fzZm2jYcc4Qv6Q23YNf6NqxV9kXVy9N8JKPpncl0euEcwEuaouKWkiiegSwxgwngxMyy
-	HXn+ypkWC5kZ0faGDMGCrINqZywBFGMNkiOmVVqSxHe7ogCsNChXjaGQNEXlWSqoSWdG
-	HFFg==
-Received: by 10.68.226.99 with SMTP id rr3mr5098383pbc.48.1338514461980;
-	Thu, 31 May 2012 18:34:21 -0700 (PDT)
-Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id ms1sm903969pbb.63.2012.05.31.18.34.20
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 May 2012 18:34:20 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 May 2012 18:33:23 -0700
-Message-Id: <1338514403-9477-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [PATCH V2] classes/mirrors.bbclass: update debian snapshot mirror url
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=zdEomI0Ch57uWekzRvH6aZ+kUjX1CUkocqG+0QLFs00=;
+	b=io4tq6e+FNT1vVIaM8anH9YtHHuRKcpupHbyWhqByI0O35AMv/RDZfXdRsLQEuLKmg
+	QxVez76mdfrDb+QxtaXBR8A39dpy/+VTcVdkOK2cOIrSugQucmo/zQnxBB6Ch6omm2s5
+	EUiG3KMwOiSMdCsZJPpq+2Xhlio8u9PGL9zLfwBmLw2RSlclsHmTEHIJXCOcCDhzO93c
+	TvQIILDXmlMoDasqIQ3fL075+KMXkuGmoSOOHthJ4ujGfLTEJTISyEYi50g4J0xKD/FO
+	rQMmmOfpbnJekQzmzx+cb7Tc6kcF8yxxpVnL1fLUqxOU3menGRMUMItXUj9JqXx0oCCv
+	EU9Q==
+MIME-Version: 1.0
+Received: by 10.42.62.195 with SMTP id z3mr645134ich.9.1338524333600; Thu, 31
+	May 2012 21:18:53 -0700 (PDT)
+Received: by 10.64.0.77 with HTTP; Thu, 31 May 2012 21:18:53 -0700 (PDT)
+In-Reply-To: <2729A91D-A5DA-4BD7-8F6F-64D8EFC12DE5@gmail.com>
+References: <1338445392-39723-1-git-send-email-elvis.dowson@gmail.com>
+	<CAAB-1ywGdhaePDp05Cmm90NtGVSUPbRqGtRtO2XkVMd9NnK+Gg@mail.gmail.com>
+	<2729A91D-A5DA-4BD7-8F6F-64D8EFC12DE5@gmail.com>
+Date: Thu, 31 May 2012 23:18:53 -0500
+Message-ID: <CAAB-1yzPJEqCUJq-MTdNvmxL1fsbqhV4NepcnszC1--u0HddLQ@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: Elvis Dowson <elvis.dowson@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xilinx] tune-ppc440.inc: Update support for the PowerPC 440 processor in the Xilinx Virtex-5 FXT FPGA.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,29 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 01:44:43 -0000
+X-List-Received-Date: Fri, 01 Jun 2012 04:29:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- classes/mirrors.bbclass |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Applied
 
-diff --git a/classes/mirrors.bbclass b/classes/mirrors.bbclass
-index 71ee5f6..1f509df 100644
---- a/classes/mirrors.bbclass
-+++ b/classes/mirrors.bbclass
-@@ -1,6 +1,8 @@
- MIRRORS[func] = "0"
- MIRRORS () {
--${DEBIAN_MIRROR}/main	http://snapshot.debian.net/archive/pool
-+${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20120328T092752Z/debian/pool
-+${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20110127T084257Z/debian/pool
-+${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20090802T004153Z/debian/pool
- ${DEBIAN_MIRROR}	ftp://ftp.de.debian.org/debian/pool
- ${DEBIAN_MIRROR}	ftp://ftp.au.debian.org/debian/pool
- ${DEBIAN_MIRROR}	ftp://ftp.cl.debian.org/debian/pool
+Thanks
+
+On Thu, May 31, 2012 at 11:53 AM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+> Hi Adrian,
+>
+> On May 31, 2012, at 5:15 PM, Adrian Alonso wrote:
+>
+>> Please update your meta-xilinx repo,
+>> commit: 04633e44b5401288ceee2d36eb2413dfa5308a54
+>> does something similar, but I fail to use "powerpc-nf"
+>>
+>> I would accept a new patch for that :)
+>
+> Done! :-)
+>
+> Best regards,
+>
+> Elvis Dowson
+>
+
+
+
 -- 
-1.7.9.5
-
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
 
