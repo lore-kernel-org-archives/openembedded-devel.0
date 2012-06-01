@@ -1,33 +1,36 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-gh0-f178.google.com ([209.85.160.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SaNTg-0003Gx-QK
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SaNi0-0003Vy-Lu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 10:45:01 +0200
-Received: by dalh21 with SMTP id h21so2554855dal.6
+	Fri, 01 Jun 2012 10:59:48 +0200
+Received: by ghbf1 with SMTP id f1so1989588ghb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2012 01:34:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Fri, 01 Jun 2012 01:49:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=oHv38zbcMBKlmEXReP8DvCO6MfIDiQSpSNFk/UXHgbM=;
-	b=s283dasYhyh1S7ljerT2o5+QBS964BRvGN2RT0gl5CcgmRMpRt6/WReSH7DmAO1WRd
-	jp9KbMfwRmGljqU8UVY1C7n6XhHKA0oaAougTZQ5If891KZZ8nZEfrct8rjZDnAe9npZ
-	Gaxvds9hPTXqheP/SDEj839kAYfFs62d0tvDPKPrqh5QqExTHkuexSC64b8LlDS7TkMQ
-	MTGRWw0cxhZ9xrLh1iJXvkgtN/oQDIxmqBvNPBZmlH2eTmH31ktFKg+tgH34S5vUEWqv
-	vsSMEnm1kt6GqdtA/qZ0aBBNCFMMNWIU0ffHw3QDsw4u5a5B2YhRfEipb0LWejfgFWql
-	X7hA==
+	:content-type:content-transfer-encoding;
+	bh=dclTREnW9v8+OoPYYWNwHkCZNVafLAyVnW9tlS6etrY=;
+	b=Fu8xpF2a2JG+GO9Gy4gbut96h7Ay1CI0E7vcf/spkPOIcUZOIl8T2+i/Id/YA58ZUe
+	Xc2yq1VOBsaSjkvZmGvhOMTRQRE/2GaW294+SdAxbXVGZ3Ay6W3w+XMft8UTdHaGW8Hf
+	CmKjTKRI1hwpM590JA9DSntX7u1RaKL/ifmcvVX+iqrl0pOWUHqwo45Pk/lYUA5JDe2h
+	jzVevRdQ/jh+dLGFVsxWHgloMw4nm5uuOFW43eBvFsXSw1o2EYC2xVDQ4/TFajh0GJp9
+	GcsbEtP6vDxSES3lDpLMsIv6zECigjM/ziHjhyA9AeYtLw0aXpC9i1jto0NsbvYUI6UK
+	5yew==
 MIME-Version: 1.0
-Received: by 10.68.191.8 with SMTP id gu8mr8555353pbc.0.1338539679281; Fri, 01
-	Jun 2012 01:34:39 -0700 (PDT)
-Received: by 10.143.63.11 with HTTP; Fri, 1 Jun 2012 01:34:38 -0700 (PDT)
-In-Reply-To: <CAAQYJAuo1WBzJUeVDuuG8Ju=f686E9yGQT_gcZTjSLjHiMUDUg@mail.gmail.com>
-References: <1338507062-24643-1-git-send-email-andrea.adami@gmail.com>
-	<jq9qlk$qd8$1@dough.gmane.org>
-	<CAAQYJAuo1WBzJUeVDuuG8Ju=f686E9yGQT_gcZTjSLjHiMUDUg@mail.gmail.com>
-Date: Fri, 1 Jun 2012 10:34:39 +0200
-Message-ID: <CAAQYJAsA89mmHR5Z+1tZ4+boPx8_JoKSrXe6t9jgsDsWJVD6xA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Received: by 10.50.104.167 with SMTP id gf7mr480472igb.38.1338540567295; Fri,
+	01 Jun 2012 01:49:27 -0700 (PDT)
+Received: by 10.64.18.10 with HTTP; Fri, 1 Jun 2012 01:49:27 -0700 (PDT)
+In-Reply-To: <CALbNGRSdkCb320X=zDGV3Ei6-i-w+C-GX2RPyXx2XrLYSbA7hg@mail.gmail.com>
+References: <1338510443-29579-1-git-send-email-schnitzeltony@googlemail.com>
+	<1338510443-29579-3-git-send-email-schnitzeltony@googlemail.com>
+	<20120601053614.GV3138@jama.jama.net>
+	<CALbNGRSdkCb320X=zDGV3Ei6-i-w+C-GX2RPyXx2XrLYSbA7hg@mail.gmail.com>
+Date: Fri, 1 Jun 2012 10:49:27 +0200
+Message-ID: <CALbNGRRsS2ENfALZcQOfp4gj4d4hinS_Z8qHY3VAC=Z1zQHM_w@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-initramfs][PATCH] klibc: release klibc 2.0
+Subject: Re: [meta-oe, v2 3/4] systemd.bbclass: extract SYSTEMD_SERVICE properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,60 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 08:45:01 -0000
+X-List-Received-Date: Fri, 01 Jun 2012 08:59:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 1, 2012 at 10:11 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> On Fri, Jun 1, 2012 at 9:23 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
+On Fri, Jun 1, 2012 at 9:16 AM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Fri, Jun 1, 2012 at 7:36 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D l=
+en(systemd_services.split()) =3D=3D 1
+>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D l=
+en(get_package_var(d, 'SYSTEMD_SERVICE', systemd_packages)) =3D=3D 1
 >>
->> Op 01-06-12 01:31, Andrea Adami schreef:
->>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->>
->> error: patch failed: meta-initramfs/recipes-devtools/klibc/klibc.inc:10
->> error: meta-initramfs/recipes-devtools/klibc/klibc.inc: patch does not apply
->> Patch failed at 0001 klibc: release klibc 2.0
->>
+>> ^ isn't split() still needed here?
+> Uhh - this would have broken the /dev/null links - thanks. Hope to do
+> better next time. What concerns me is that I did not see that in
+> buildhistory. Will check that first before sending out V3.
 >
+Just if anybody is interested (and to prove that my buildhistory tests
+were OK :) AFAICS the only recipes affected would have been dropbear
+and openssh. These have the 'Conflicts' tag in the *.socket files. The
+*.service file are still dragged in since *.socket files add *.service
+automatically - there was something mentioned in systemd docs. So time
+to have short test on V3...
 
-Please note this patch goes on the top of  patchwork's #28903 and #28905.
-
-Regards
-
-Andrea
-
-
-> Hm.. something wrong... and I ever tried to rename properly with 'git -A'...
-> I'll fix that in a few hours.
->
-> Sorry for the noise
->
-> Andrea
->
->> -----BEGIN PGP SIGNATURE-----
->> Version: GnuPG v1.4.11 (Darwin)
->> Comment: GPGTools - http://gpgtools.org
->>
->> iQIcBAEBAgAGBQJPyG3zAAoJEHZqAkdh1vT6rwQP/RQB+hmY/RANmjJtEeJoez/4
->> 6c36JPjGhRfdXIdtTTBlq9dZPGgt7fmpKRPaAOWPjn9/6WWUMELaTflRq1JJS3O4
->> h7itaJgPdDSw1ejOGujlECNFdFTrL3RU0xzDTTOkgMzDtTxXtOkEWzyQBY9yHSKF
->> HKzc5KRLZUEQvoMyufFUtxsm9st+zdn92hv+KkJ6iXtJWGwvb8MmVOVIrFGA6YRq
->> OCi2xOS89SDOHS1ktITvuCbx2z0ddiF0SdCa+UGFPO9zaVJUieYMsZwovWtVI7PY
->> jAOh6UbTq/zXU7rZplB98neGyAhORYElTQ56irUFC9GCJWQtEIzfV0sTnXEj+pt/
->> JQozPwP5no52Bs17rCL1Pdm8t5/CT5/bq3AfYGkZJTdJPbddfUBcodHgzTIwQJQm
->> zXZrZLY83A6rUio00gyR+s9sbvsN28PRXIjiCSiBMO/O0H4Y8+Mf/8/3n1BdmyOf
->> 7Aj2OIxNt6xO3aSFDO7fFKGot9gJyYZNZFlLZ6w4GTOf4ShjRANqVmYdZIZj2pJU
->> oLzwzaVMvngiWkx/6K3pqya2byGH1zGMQ9oyYOO31YG7DZbvwpXshTKMtzQ5o5P9
->> KRaV6Xf41JC9XmoTO8Tps+75FZFd4HgKnuC0XWO2yqzEPnAMSvpg/+aS5cmbGrxB
->> aJKU9mVafr0oudrBB8qj
->> =9IvJ
->> -----END PGP SIGNATURE-----
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Andreas
 
 
