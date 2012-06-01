@@ -1,36 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SaKgr-0004KJ-0o
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SaMGK-0001Lz-47
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jun 2012 07:46:28 +0200
-Received: by wibhm14 with SMTP id hm14so219039wib.6
+	Fri, 01 Jun 2012 09:27:08 +0200
+Received: by yhjj56 with SMTP id j56so1430001yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2012 22:36:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KaxshLXkzTCujlrQ8vqKKtQ/JnAwTlg6Zknr7LV/tEA=;
-	b=xqZj+0JGH4ZdJjiDImuMregIJo6YzsQ8XnOElMD343PxpujG5/Upm3lD01vxKNAUNW
-	ZpTJVs4u/Xu9iSYiTuZaE0ln85fAHI41jejR5XOf1HrrzAXJa3V6dEq0C2Vey9ay7c/L
-	U9PvKx2OyLlHPeJ5c5ibvH9w9etfhdDN7XTiHCWrELwh7afhBcj1khHCpJC043GQ0hNb
-	NdZGPQgfj9ExADZlMr1rb9ZLsmf6wBwdtcyIUP/VbcD/gHQI98DrNh9Lk4g1kLavr/nK
-	ivAMDrPyrhI0GPrFxMTIigVT7sEDLulOVGp4dNNMy9JfAgRVzmNkikBlaO2ceStpiLtI
-	ttaQ==
-Received: by 10.216.196.147 with SMTP id r19mr1207436wen.87.1338528964338;
-	Thu, 31 May 2012 22:36:04 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q6sm961353wiy.0.2012.05.31.22.36.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 31 May 2012 22:36:03 -0700 (PDT)
-Date: Fri, 1 Jun 2012 07:36:14 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120601053614.GV3138@jama.jama.net>
+	Fri, 01 Jun 2012 00:16:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=5RR/5huCQOWyPHsV9LqidWYPKa+N+DiNioh55Rurj00=;
+	b=SQEfGag6nSlav2wENjDnBLD8n83ymdKs9r8nOPjyO09r3l7dKglO5KoBRTZTqLjLJl
+	Ii2e2VEiX0DLSqilUV5TJcLLiePPFNsMNy6+fJlWpiDxpqqO+ixuHWKqkbaVJrFAnJ5z
+	qnbty024f5bPWE8maJEwVsqxc1Udp9vW9sUvP0M9cvC0kKE28cJZy0KCL9AxJjGlSPwx
+	6iP10VlDQKK6EBZm1C9ml6KThzaW/83NhS+/byeipxSQkn8R9VFMoXeSuqehkoDZs8ib
+	I+0iQbCVg/hlDe6z9AsbW4Fwe+TxbMqvUrKDVYCKNOSS+mv/llWzcAcqX8iWrnKmra/i
+	/daA==
+MIME-Version: 1.0
+Received: by 10.50.178.33 with SMTP id cv1mr522259igc.1.1338535006495; Fri, 01
+	Jun 2012 00:16:46 -0700 (PDT)
+Received: by 10.64.18.10 with HTTP; Fri, 1 Jun 2012 00:16:46 -0700 (PDT)
+In-Reply-To: <20120601053614.GV3138@jama.jama.net>
 References: <1338510443-29579-1-git-send-email-schnitzeltony@googlemail.com>
 	<1338510443-29579-3-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-In-Reply-To: <1338510443-29579-3-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20120601053614.GV3138@jama.jama.net>
+Date: Fri, 1 Jun 2012 09:16:46 +0200
+Message-ID: <CALbNGRSdkCb320X=zDGV3Ei6-i-w+C-GX2RPyXx2XrLYSbA7hg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe, v2 3/4] systemd.bbclass: extract SYSTEMD_SERVICE properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,114 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2012 05:46:29 -0000
-X-Groupsio-MsgNum: 39085
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8EXHJdkEfksMlRxO"
-Content-Disposition: inline
-
---8EXHJdkEfksMlRxO
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Jun 2012 07:27:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 01, 2012 at 02:27:22AM +0200, Andreas M=FCller wrote:
-> To set service files the following syntax is allowed:
->=20
-> SYSTEMD_SERVICE =3D <service_file>
-> or
-> SYSTEMD_SERVICE_{<systemd_package_name>} =3D <service_file>
->=20
-> A function get_package_var was introduced to handle all use-cases [1]
-> properly.
->=20
-> Build tested / buildhistory checks
->=20
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-May/0398=
-70.html
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  meta-oe/classes/systemd.bbclass |   14 +++++++++-----
->  1 files changed, 9 insertions(+), 5 deletions(-)
->=20
-> diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bb=
-class
-> index 2881abf..00e108e 100644
-> --- a/meta-oe/classes/systemd.bbclass
-> +++ b/meta-oe/classes/systemd.bbclass
-> @@ -24,6 +24,12 @@ systemd_postrm() {
->  systemctl disable ${SYSTEMD_SERVICE}
->  }
-> =20
-> +def get_package_var(d, var, pkg):
-> +	val =3D (d.getVar('%s_%s' % (var, pkg), d, 1) or "").strip()
-> +	if val =3D=3D "":
-> +		val =3D (d.getVar(var, d, 1) or "").strip()
-> +	return val
-> +
->  def systemd_after_parse(d):
->  	def systemd_check_vars():
->  		if d.getVar('BB_WORKERCONTEXT', True) is not None:
-> @@ -155,8 +161,7 @@ python populate_packages_prepend () {
->  		systemd_packages =3D d.getVar('SYSTEMD_PACKAGES', 1)
->  		has_exactly_one_service =3D len(systemd_packages.split()) =3D=3D 1
->  		if has_exactly_one_service:
-> -			systemd_services =3D d.getVar('SYSTEMD_SERVICE' + "_" + systemd_packa=
-ges, 1) or d.getVar('SYSTEMD_SERVICE', 1)
-> -			has_exactly_one_service =3D len(systemd_services.split()) =3D=3D 1
-> +			has_exactly_one_service =3D len(get_package_var(d, 'SYSTEMD_SERVICE',=
- systemd_packages)) =3D=3D 1
+On Fri, Jun 1, 2012 at 7:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D le=
+n(systemd_services.split()) =3D=3D 1
+>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 has_exactly_one_service =3D le=
+n(get_package_var(d, 'SYSTEMD_SERVICE', systemd_packages)) =3D=3D 1
+>
+> ^ isn't split() still needed here?
+Uhh - this would have broken the /dev/null links - thanks. Hope to do
+better next time. What concerns me is that I did not see that in
+buildhistory. Will check that first before sending out V3.
 
-^ isn't split() still needed here?
+Andreas
 
-> =20
->  		keys =3D 'Also' # Conflicts??
->  		if has_exactly_one_service:
-> @@ -164,8 +169,7 @@ python populate_packages_prepend () {
->  			keys =3D 'Also Conflicts'
->  		# scan for all in SYSTEMD_SERVICE[]
->  		for pkg_systemd in systemd_packages.split():
-> -			systemd_services =3D d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, =
-1) or d.getVar('SYSTEMD_SERVICE', 1)
-> -			for service in systemd_services.split():
-> +			for service in get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd).spl=
-it():
->  				path_found =3D ''
->  				for path in searchpaths.split():
->  					if os.path.exists('${D}' + path + service):
-> @@ -196,7 +200,7 @@ python populate_packages_prepend () {
->  	# run all modifications once when creating package
->  	if os.path.exists('${D}'):
->  		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
-> -			if d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) and d.getVar('S=
-YSTEMD_SERVICE' + "_" + pkg_systemd, 1).strip():
-> +			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) !=3D "":
->  				systemd_generate_package_scripts(pkg_systemd)
->  				systemd_add_rdepends(pkg_systemd)
->  		systemd_check_services()
-> --=20
-> 1.7.4.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---8EXHJdkEfksMlRxO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk/IVM4ACgkQN1Ujt2V2gBw1EQCgupPvXAmKh5KObNhmdRg0f1rL
-hBYAn0LHqERErfrAQRf5CU9OXAhROdsb
-=d+3r
------END PGP SIGNATURE-----
-
---8EXHJdkEfksMlRxO--
