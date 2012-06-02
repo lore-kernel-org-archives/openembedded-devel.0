@@ -1,38 +1,34 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SasVK-0006rk-S8
+	(envelope-from <elvis.dowson@gmail.com>) id 1Sawxw-00049x-5A
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jun 2012 19:52:47 +0200
-Received: by vbbfr13 with SMTP id fr13so2065515vbb.6
+	Sun, 03 Jun 2012 00:38:36 +0200
+Received: by wgbds1 with SMTP id ds1so1395453wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2012 10:42:24 -0700 (PDT)
+	Sat, 02 Jun 2012 15:28:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=5zEqKNmdn1+SRYWgcxbbdowzY1yMQzyXh/ZxMV0ScaU=;
-	b=xBL2HDWhV+EKnm6Gz1m/fucyBuEj9cfCs1IE7GIkm2yRhmhvPZqb6iJ3bLb0FLKslu
-	ZkC7Pi7F22HtqgdyK+lO9IAL2iWstBeT3FTiwgGM3z5qu1ctSic4GsT/7yprtTp7K92c
-	oi3lb57coFBlclR8BaHxD2fSfKhcvdOIFRR2fhx7jnqFYkNiF9LCPzr7NCRHzW/F/aYd
-	SuWJD/2p+gIxwqq8XnChXHvwjYyUaWxuO3dl9TdoJOVsN51oFXDTin/gKxmkM8SemNYM
-	YAS27eq0uQ2JahXCRVbtfUzMnK4xIfh02JJ9+y6x0PAm5mXBwhBbdRXK6Q23/g+4Wog6
-	fLcQ==
-Received: by 10.52.95.203 with SMTP id dm11mr6170314vdb.70.1338658944142;
-	Sat, 02 Jun 2012 10:42:24 -0700 (PDT)
-Received: from localhost.localdomain ([186.218.100.214])
-	by mx.google.com with ESMTPS id bj6sm8849957vdc.12.2012.06.02.10.42.22
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=R6hicAfclfoz6nY+lGmW+5BTS4KfBKLnTrWbUQcpEq8=;
+	b=UrgAwo7pYwoeV+k7W6k/Rba7F11VVARrSikUb7qj0DHqFxqWIp/rhZrk/bo+jgeYHK
+	Rle6l3IvxRJ7TsAN1U9GaVstY4Nn3OrSW6RhMGNoiA68b2hABi4TXmJi8IKb9h0gqi+O
+	66VgoJeqgkVg25lnRJbhB9j7JJxdKFM2XWEMbL3c9hwC91jiF5mFzpZ+mTZkw/zM8V0u
+	mkPziPV5pe0B/pnwKAMlITyxllPwUuNqSItLU1yqrAJtviw64G8F/8eMRoTVnqniMyIr
+	ow+nGWWXKlqOX6tmn3fVCnuOABPIkp+uAGzzEYRyxlVAyWslgZ/P0BoTk2euy5GrXfic
+	bVtA==
+Received: by 10.216.195.12 with SMTP id o12mr6392297wen.194.1338676093559;
+	Sat, 02 Jun 2012 15:28:13 -0700 (PDT)
+Received: from localhost.localdomain
+	(197.Red-79-150-15.dynamicIP.rima-tde.net. [79.150.15.197])
+	by mx.google.com with ESMTPS id d10sm12697181wiy.3.2012.06.02.15.28.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 02 Jun 2012 10:42:23 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 02 Jun 2012 15:28:12 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Jun 2012 14:42:14 -0300
-Message-Id: <a20787649045d7684ab8b36a596cc09aa43163d5.1338658900.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1338658900.git.otavio@ossystems.com.br>
-References: <cover.1338658900.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1338658900.git.otavio@ossystems.com.br>
-References: <cover.1338658900.git.otavio@ossystems.com.br>
-Subject: [PATCH][meta-oe 2/2] owfs: enable/disable modules to make build predicable
+Date: Sun,  3 Jun 2012 00:28:07 +0200
+Message-Id: <1338676087-29276-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [meta-xilinx] xilinx-boot: Change string comparision checks to use strict POSIX compliance.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jun 2012 17:52:47 -0000
+X-List-Received-Date: Sat, 02 Jun 2012 22:38:36 -0000
 
-We enforce the avaiability of w1 kernel support and owfs filesystem
-but disable Perl, Python and PHP buildings for now.
+This commit fixes an issue with string comparision checks failing because
+of not using strict POSIX compliance, therby resulting in wrong definitions
+being generated into the ${xparam} file.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- meta-oe/recipes-extended/owfs/owfs_2.8p15.bb |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+ classes/xilinx-boot.bbclass |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb b/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-index 451aaae..d7c5040 100644
---- a/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-+++ b/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+diff --git a/classes/xilinx-boot.bbclass b/classes/xilinx-boot.bbclass
+index d85ab80..a7f1f1d 100644
+--- a/classes/xilinx-boot.bbclass
++++ b/classes/xilinx-boot.bbclass
+@@ -21,10 +21,10 @@
+ do_export_xparam() {
+ bbnote "Replacing xparameters header to match hardware model"
+ xparam=$1
+-if [ "${TARGET_ARCH}" == "powerpc" ]; then
++if [ "${TARGET_ARCH}" = "powerpc" ]; then
+ 	cpu="PPC`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`"
+ else
+-	cpu=`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`
++	cpu="`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`"
+ fi
+ cp ${xparam} ${S}/board/xilinx/${XILINX_BOARD}
+ echo "/*** Cannonical definitions ***/
+@@ -39,7 +39,7 @@ echo "/*** Cannonical definitions ***/
+ do_mk_xparam() {
+ bbnote "Replacing xparameters.mk configuration file"
+ xparam=$1
+-if [ "${TARGET_ARCH}" == "powerpc" ]; then
++if [ "${TARGET_ARCH}" = "powerpc" ]; then
+     if grep -qoe XPAR_IIC_0_DEVICE_ID ${xparam}; then
+         echo -e "XPAR_IIC        := y" > ${S}/board/xilinx/${XILINX_BOARD}/xparameters.mk
+     else
+@@ -65,7 +65,7 @@ bbnote "Generate system ace image"
+ # Set Xilinx EDK tools
+ if [ -z ${XILINX_EDK} ]; then
+ 	# Get Xilinx version
+-	if [ ${BUILD_ARCH} == "x86_64" ]; then
++	if [ "${BUILD_ARCH}" = "x86_64" ]; then
+ 		EDK_SRCIPT="settings64.sh"
+ 	else
+ 		EDK_SRCIPT="settings.sh"
+@@ -98,7 +98,7 @@ if [ ! -f implementation/download.bit ]; then
+ 	make -f ${XILINX_BSP_PATH}/system.make init_bram
+ fi
  
- DEPENDS = "fuse virtual/libusb0"
- 
-+PR = "r1"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
-            file://owhttpd \
-            file://owserver "
-@@ -19,11 +21,16 @@ inherit autotools update-rc.d
- EXTRA_OECONF = " \
-                  --with-fuseinclude=${STAGING_INCDIR} \
-                  --with-fuselib=${STAGING_LIBDIR} \
-+                 --enable-owfs \
-                  --enable-owhttpd \
-                  --enable-cache \
-                  --enable-mt \
-+                 --enable-w1 \
-                  --disable-swig \
-                  --disable-owtcl \
-+                 --disable-owphp \
-+                 --disable-owpython \
-+                 --disable-owperl \
-                  "
- 
- do_install_prepend() {
+-if [ "${TARGET_ARCH}" == "powerpc" ]; then
++if [ "${TARGET_ARCH}" = "powerpc" ]; then
+ 	# Find u-boot start address
+ 	start_address=`${TARGET_PREFIX}objdump -x u-boot | grep -w "start address" | cut -d ' ' -f3`
+ 	# Generate ACE image
 -- 
-1.7.2.5
+1.7.9.5
 
 
 
