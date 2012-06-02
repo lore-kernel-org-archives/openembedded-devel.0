@@ -1,38 +1,41 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SanLg-00027y-65
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jun 2012 14:22:29 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hm14so1272860wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2012 05:12:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=rO5bOkl0g0H9NAM0xRbXYOM+RwKgXEY5ussknLNzAe0=;
-	b=ZaLuCR7yApKEcWquMUg1/jyqxtTfdgk5IBfKP2PPis70FqP3zxNQDq217zrpIuhFx0
-	JEfpbThqz6j2OdgwgS4rNcZJ94Wf7iFJ1D7v/0mW5jt/58ocMPreRgxhkWf5gEr7En7K
-	sz2TZ/wbNNU7cUCJ1KJ81BUEwGVwrjcUVzwKbp7rbSdHflbmB55cOAnhGxTlrWT69LYc
-	PrC/B9+UiNeM8Ji/SeCDX5F/q6MQefcauQwJdp8gUKuCuJvIBdDYdWIc4r09UUpK7b/L
-	Cl0RWoebXtG9qWDDl3wq064iRf6UlRvhft4Oto3hgvZtuvk03WwpFmXHZIOqcsquaHfz
-	V8Ew==
-Received: by 10.216.198.14 with SMTP id u14mr5070923wen.12.1338639127965;
-	Sat, 02 Jun 2012 05:12:07 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A09D7.dip.t-dialin.net.
-	[91.10.9.215])
-	by mx.google.com with ESMTPS id d10sm6981854wiy.3.2012.06.02.05.12.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 02 Jun 2012 05:12:07 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Jun 2012 14:16:01 +0200
-Message-Id: <1338639361-23775-16-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1338639361-23775-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1338639361-23775-1-git-send-email-schnitzeltony@googlemail.com>
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1SaqeW-0003DD-E7
+	for openembedded-devel@openembedded.org; Sat, 02 Jun 2012 17:54:08 +0200
+Received: by lbol5 with SMTP id l5so2333655lbo.6
+	for <openembedded-devel@openembedded.org>;
+	Sat, 02 Jun 2012 08:43:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=w31/8LeHS8hdFqWl5jtqd+I3dKPAWn+1Rxr7MfOw1+o=;
+	b=yq5hrwL8Trm/G6xzBJiNcotVK+wHHshltoLILpptJS0f8asuVijmgY/EUXGo3dH9xS
+	MFMsEMJ62QRwhyHDU92PgYFmwjV64oEyT69MCXW3qUeFTUguiAzpuu6SUCY7xnyWfPR2
+	JfmVkeVQc4RszQcf1IIKwJdA14NJpkq8aMuUmZNGOSa/RBA0Si07GIGvw6C0tMkX42Dh
+	WNJAlQcWj//bXastl8DN7EtB3kRRQy2hPLhIjvMrqUUJZV7+Uif7DEu7+Ku5EPuRSYpU
+	EnBEPUOXgm0fm1+px3upm86LoKQEZF3Lj5nblEU43wpbkcrkQwITx2r/UQ+7wp2/W81i
+	PHHA==
+Received: by 10.152.108.178 with SMTP id hl18mr6919571lab.11.1338651825826;
+	Sat, 02 Jun 2012 08:43:45 -0700 (PDT)
+Received: from Kristoffers-iMac.local
+	(c-34dae555.010-30-6c6b7012.cust.bredbandsbolaget.se.
+	[85.229.218.52])
+	by mx.google.com with ESMTPS id gt19sm8397538lab.17.2012.06.02.08.43.42
+	(version=SSLv3 cipher=OTHER); Sat, 02 Jun 2012 08:43:43 -0700 (PDT)
+Message-ID: <4FCA34AD.3010608@gmail.com>
+Date: Sat, 02 Jun 2012 17:43:41 +0200
+From: Kristoffer Eriksson <kristoffer.ericson@gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
 MIME-Version: 1.0
-Subject: [meta-xfce 15/15] task-xfce-extended: add panel plugins / applications
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1337120874-17531-1-git-send-email-apelete@seketeli.net>
+	<1337120874-17531-2-git-send-email-apelete@seketeli.net>
+	<20120520201339.GR19142@hermes>
+	<20120520203942.GA3166@jama.jama.net>
+In-Reply-To: <20120520203942.GA3166@jama.jama.net>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH 1/1] libecj-bootstrap: Update SRC_URI to archive.eclipse.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jun 2012 12:22:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 02 Jun 2012 15:54:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
-
-Signed-off-by: Andreas MÃ¼ller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |   11 ++++++++++-
- 1 files changed, 10 insertions(+), 1 deletions(-)
-
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-index 2dbd9f0..3c9fced 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit task
- 
-@@ -33,8 +33,17 @@ RRECOMMENDS_${PN} = " \
-     xfce4-diskperf-plugin \
-     xfce4-netload-plugin \
-     xfce4-genmon-plugin \
-+    xfce4-xkb-plugin \
-+    xfce4-wavelan-plugin \
-+    xfce4-places-plugin \
-+    xfce4-systemload-plugin \
-+    xfce4-time-out-plugin \
-+    xfce4-embed-plugin \
-+    xfce4-weather-plugin \
-     \
-     xfce4-appfinder \
-     xfce4-screenshooter \
-+    xfce4-power-manager \
-+    xfce4-mixer \
-     ristretto \
- "
--- 
-1.7.4.4
-
+Martin Jansa skrev 2012-05-20 22:39:
+> On Sun, May 20, 2012 at 10:13:39PM +0200, Apelete Seketeli wrote:
+>> Hello,
+>>
+>> Le 16-May-12, Apelete Seketeli a écrit:
+>>> This updates SRC_URI to archive.eclipse.org since mirrors.ibiblio.org
+>>> seems to be down.
+>>>
+>>> Signed-off-by: Apelete Seketeli<apelete@seketeli.net>
+>>> ---
+>>>   recipes/ecj/libecj-bootstrap_3.6.1.bb |    2 +-
+>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes/ecj/libecj-bootstrap_3.6.1.bb b/recipes/ecj/libecj-bootstrap_3.6.1.bb
+>>> index d5da24e..996ab33 100644
+>>> --- a/recipes/ecj/libecj-bootstrap_3.6.1.bb
+>>> +++ b/recipes/ecj/libecj-bootstrap_3.6.1.bb
+>>> @@ -3,7 +3,7 @@ require libecj-bootstrap.inc
+>>>   PR = "${INC_PR}.0"
+>>>
+>>>   SRC_URI = " \
+>>> -	   http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloads/drops/R-3.6.1-201009090800/ecjsrc-${PV}.zip \
+>>> +	   http://archive.eclipse.org/eclipse/downloads/drops/R-3.6.1-201009090800/ecjsrc-${PV}.zip \
+>>>
+>>>             "
+>>>
+>>> -- 
+>>> 1.7.9.5
+>>>
+>> Once again, I need libecj-bootstrap to build muffinman-image in
+>> oe-classic, can someone here please review this patch ?
+>>
+>> http://patchwork.openembedded.org/patch/27791/
+> Patch looks good, I haven't used oe-classic for some time, so I haven't
+> tested it.
+>
+> Cheers,
+>
+Applied, thanks
 
 
