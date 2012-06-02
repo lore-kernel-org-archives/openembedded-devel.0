@@ -1,38 +1,38 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SanLd-00028M-5G
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SanLe-000286-Gk
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jun 2012 14:22:25 +0200
-Received: by mail-wi0-f177.google.com with SMTP id hm14so1276602wib.6
+	Sat, 02 Jun 2012 14:22:26 +0200
+Received: by mail-we0-f175.google.com with SMTP id g55so1925828wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2012 05:12:05 -0700 (PDT)
+	Sat, 02 Jun 2012 05:12:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=2d8wAu0xLbdD00Aua9nBUTKjq1Z/Ik4mzhskqdOuXVQ=;
-	b=JtezQwnwF1YklLr4QzAFPM+MnEfEPZexdJI3U0CjjkyNxFRJzcGlYkga8tsQxIEi8A
-	ncab+eJ2ZgGYBK/HqfUnSHig/UnOKmE2e/hMNTIUgklXJeUCDk5Aj8HA00Ibyh8J9w1h
-	9A88wBcySihYpBTANIbgF34DA9OlABDS97Z5+wfCAASyKhzUKsy27qOvcWYtrYpsE8Pc
-	u4j6VDRUClKfloFzM/grzV0aZuGFeWP5HU9ICqdXKZgCVIpIEU7OKTcZJptCP+t+FK/k
-	wZQKMzuH/KTXx9za3T9un2VOWLeHmror/cdt24W7Cvm32FMFv8j0dLqN0BamT7+wBllg
-	ltGA==
-Received: by 10.216.54.206 with SMTP id i56mr4671112wec.28.1338639125265;
-	Sat, 02 Jun 2012 05:12:05 -0700 (PDT)
+	bh=kPoK9yuPhgMSVZ97PyPX7iKCj2Sjj2tiRjM6/VVa040=;
+	b=z93pXDbzjPBrsPxnPk+pbaLuOvPg5fkMBY6hmDNGkw7T30yz//LllXxMma65WoqK4C
+	OpDKEmQxlAeXKJjfjvfjIMNtl3vzBRTdt6mm3NkAL8xePIxRCgSj2ZXEaAfUg9x0XV8c
+	C1Ndv9HWfH++p+a2cRfZHUPxjeaq6zcL72afG1KKevpdx6cNp3RYw8MEwKUBnAHTiyF1
+	6yyFLB5TEhJXsKhsc/5x43e80AybnYVYVlfreb2Nhk4VwXvABzIoYIO0s0SC/LluzNhE
+	PqzQWqyVdN/ETNZyBeByYWbhQE2adL4Tujvki2gEjKEWRm6iDB3GybUbHENiXYoGrDTP
+	EN/Q==
+Received: by 10.216.213.79 with SMTP id z57mr5029577weo.27.1338639126604;
+	Sat, 02 Jun 2012 05:12:06 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A09D7.dip.t-dialin.net.
 	[91.10.9.215])
-	by mx.google.com with ESMTPS id d10sm6981854wiy.3.2012.06.02.05.12.04
+	by mx.google.com with ESMTPS id d10sm6981854wiy.3.2012.06.02.05.12.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 02 Jun 2012 05:12:04 -0700 (PDT)
+	Sat, 02 Jun 2012 05:12:05 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Jun 2012 14:15:59 +0200
-Message-Id: <1338639361-23775-14-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat,  2 Jun 2012 14:16:00 +0200
+Message-Id: <1338639361-23775-15-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1338639361-23775-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1338639361-23775-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 13/15] xfce4-weather-plugin: Make it work for a while by using different license info
+Subject: [meta-xfce 14/15] xfce4-mixer: initial add 4.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,46 +50,32 @@ X-List-Received-Date: Sat, 02 Jun 2012 12:22:26 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Grabbed from [1]
-
-This is a inztermediate solution until next version hopefully will use another weather
-data supplier. There are proceedings ongoing [2].
-
-[1] https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/xfce4-weather-plugin
-[2] http://git.xfce.org/panel-plugins/xfce4-weather-plugin/log/
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../weather/xfce4-weather-plugin_0.7.4.bb          |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
+ .../recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb  |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
-index d75d51e..202078e 100644
---- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.7.4.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "Panel plugin to display current temperature and weather condition
- HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-weather-plugin"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+PR = "r1"
- 
- inherit xfce-panel-plugin
- 
-@@ -9,4 +10,14 @@ SRC_URI += "file://port-to-libxfce4ui.patch"
- SRC_URI[md5sum] = "03c972d13eba5cd226432ff66e3ff282"
- SRC_URI[sha256sum] = "3f76207b8a845d15bfec6825bd5300aedd086c455259c4dd8670a89a3c8ab382"
- 
-+do_compile_prepend() {
-+	# Switch to a working license key
-+	# https://bugs.archlinux.org/task/26815
-+	sed -i \
-+		-e 's/^#define PARTNER_ID.*/#define PARTNER_ID "1003666583"/' \
-+		-e 's/^#define LICENSE_KEY.*/#define LICENSE_KEY "4128909340a9b2fc"/' \
-+		${S}/panel-plugin/weather.h
+diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
+new file mode 100644
+index 0000000..23a8ba5
+--- /dev/null
++++ b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "A volume control application based on GStreamer"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 +
-+}
++inherit xfce-panel-plugin
 +
- FILES_${PN} += "${datadir}/xfce4/weather"
++DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf"
++
++SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "3fa3a9973e18c04da26709a654e242ff"
++SRC_URI[sha256sum] = "9f9f48fdd0d3f6b1e46694b93a44d15b800db72a96d831b5111d9ac976970fab"
++
++RDEPENDS_${PN} = "gst-meta-audio"
 -- 
 1.7.4.4
 
