@@ -1,34 +1,34 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Sawxw-00049x-5A
+	(envelope-from <elvis.dowson@gmail.com>) id 1Sb7Ir-0008T1-Q8
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jun 2012 00:38:36 +0200
-Received: by wgbds1 with SMTP id ds1so1395453wgb.0
+	Sun, 03 Jun 2012 11:40:53 +0200
+Received: by werg55 with SMTP id g55so2260177wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2012 15:28:13 -0700 (PDT)
+	Sun, 03 Jun 2012 02:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=R6hicAfclfoz6nY+lGmW+5BTS4KfBKLnTrWbUQcpEq8=;
-	b=UrgAwo7pYwoeV+k7W6k/Rba7F11VVARrSikUb7qj0DHqFxqWIp/rhZrk/bo+jgeYHK
-	Rle6l3IvxRJ7TsAN1U9GaVstY4Nn3OrSW6RhMGNoiA68b2hABi4TXmJi8IKb9h0gqi+O
-	66VgoJeqgkVg25lnRJbhB9j7JJxdKFM2XWEMbL3c9hwC91jiF5mFzpZ+mTZkw/zM8V0u
-	mkPziPV5pe0B/pnwKAMlITyxllPwUuNqSItLU1yqrAJtviw64G8F/8eMRoTVnqniMyIr
-	ow+nGWWXKlqOX6tmn3fVCnuOABPIkp+uAGzzEYRyxlVAyWslgZ/P0BoTk2euy5GrXfic
-	bVtA==
-Received: by 10.216.195.12 with SMTP id o12mr6392297wen.194.1338676093559;
-	Sat, 02 Jun 2012 15:28:13 -0700 (PDT)
+	bh=equ+O00EPlQkQm4USI2CpKucwWAJyQI2U3t6dw8TRtE=;
+	b=wPajmf4H1XLxtDulXW8PZZAzMIqFHMtUxl7C/cVtupk57njS1+eZ5G5FiKKKBGMgnq
+	bAubuq7n5GQuke5zm6F6de6yg/7rvDatqAneDybEKy7d+lUt1dxz+fzJ9KWlaTCwsPNo
+	tjYi8rhrc2b/nyzcIvpRpU2H6EASpjAKPyhkWFvesWU6aVwxlkweLqMJMEcNfWwiDEQk
+	P0F44HIiF0nipD7R5/DTdxYilKMZ7Z6OJuGZQqmSsICkYq2N8e4pM7kxA5hOt0g1mQhm
+	gvSMCCV/l3QqeUTFekkVi95c9bHkpLcx6+4YnxHWsiD/ciPYSqw3U0DNgsJvvJJ2g7e2
+	fKYA==
+Received: by 10.216.194.137 with SMTP id m9mr7739820wen.66.1338715830665;
+	Sun, 03 Jun 2012 02:30:30 -0700 (PDT)
 Received: from localhost.localdomain
 	(197.Red-79-150-15.dynamicIP.rima-tde.net. [79.150.15.197])
-	by mx.google.com with ESMTPS id d10sm12697181wiy.3.2012.06.02.15.28.11
+	by mx.google.com with ESMTPS id f19sm18245400wiw.11.2012.06.03.02.30.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 02 Jun 2012 15:28:12 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
+	Sun, 03 Jun 2012 02:30:29 -0700 (PDT)
+From: elvis.dowson@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jun 2012 00:28:07 +0200
-Message-Id: <1338676087-29276-1-git-send-email-elvis.dowson@gmail.com>
+Date: Sun,  3 Jun 2012 11:30:20 +0200
+Message-Id: <4fcb2eb5.f34bb40a.3bbd.45cd@mx.google.com>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-xilinx] xilinx-boot: Change string comparision checks to use strict POSIX compliance.
+Subject: [meta-xilinx] u-boot-xilinx_git: Update recipe to support fetching from separate git repositories for virtex5 and microblaze.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,61 +42,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jun 2012 22:38:36 -0000
+X-List-Received-Date: Sun, 03 Jun 2012 09:40:53 -0000
 
-This commit fixes an issue with string comparision checks failing because
-of not using strict POSIX compliance, therby resulting in wrong definitions
-being generated into the ${xparam} file.
+From: Elvis Dowson <elvis.dowson@gmail.com>
+
+* virtex5: Modify SRC_URI_virtex5 to fetch u-boot from
+  git://git.denx.de/u-boot.git
+* virtex5: Update to u-boot v2012.04.01
+* microblaze: Retain SRC_URL_microblaze to fetch u-boot from
+  git://git.xilinx.com/u-boot-xlnx.git
+* microblaze: Retain u-boot v2009.11
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- classes/xilinx-boot.bbclass |   10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ recipes-bsp/u-boot/u-boot-xilinx_git.bb |   27 +++++++++++++++++----------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
-diff --git a/classes/xilinx-boot.bbclass b/classes/xilinx-boot.bbclass
-index d85ab80..a7f1f1d 100644
---- a/classes/xilinx-boot.bbclass
-+++ b/classes/xilinx-boot.bbclass
-@@ -21,10 +21,10 @@
- do_export_xparam() {
- bbnote "Replacing xparameters header to match hardware model"
- xparam=$1
--if [ "${TARGET_ARCH}" == "powerpc" ]; then
-+if [ "${TARGET_ARCH}" = "powerpc" ]; then
- 	cpu="PPC`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`"
- else
--	cpu=`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`
-+	cpu="`echo ${TARGET_CPU} | tr '[:lower:]' '[:upper:]'`"
- fi
- cp ${xparam} ${S}/board/xilinx/${XILINX_BOARD}
- echo "/*** Cannonical definitions ***/
-@@ -39,7 +39,7 @@ echo "/*** Cannonical definitions ***/
- do_mk_xparam() {
- bbnote "Replacing xparameters.mk configuration file"
- xparam=$1
--if [ "${TARGET_ARCH}" == "powerpc" ]; then
-+if [ "${TARGET_ARCH}" = "powerpc" ]; then
-     if grep -qoe XPAR_IIC_0_DEVICE_ID ${xparam}; then
-         echo -e "XPAR_IIC        := y" > ${S}/board/xilinx/${XILINX_BOARD}/xparameters.mk
-     else
-@@ -65,7 +65,7 @@ bbnote "Generate system ace image"
- # Set Xilinx EDK tools
- if [ -z ${XILINX_EDK} ]; then
- 	# Get Xilinx version
--	if [ ${BUILD_ARCH} == "x86_64" ]; then
-+	if [ "${BUILD_ARCH}" = "x86_64" ]; then
- 		EDK_SRCIPT="settings64.sh"
- 	else
- 		EDK_SRCIPT="settings.sh"
-@@ -98,7 +98,7 @@ if [ ! -f implementation/download.bit ]; then
- 	make -f ${XILINX_BSP_PATH}/system.make init_bram
- fi
+diff --git a/recipes-bsp/u-boot/u-boot-xilinx_git.bb b/recipes-bsp/u-boot/u-boot-xilinx_git.bb
+index 759539f..af9ef45 100644
+--- a/recipes-bsp/u-boot/u-boot-xilinx_git.bb
++++ b/recipes-bsp/u-boot/u-boot-xilinx_git.bb
+@@ -1,22 +1,29 @@
+ inherit xilinx-boot xilinx-utils
+ require recipes-bsp/u-boot/u-boot.inc
  
--if [ "${TARGET_ARCH}" == "powerpc" ]; then
-+if [ "${TARGET_ARCH}" = "powerpc" ]; then
- 	# Find u-boot start address
- 	start_address=`${TARGET_PREFIX}objdump -x u-boot | grep -w "start address" | cut -d ' ' -f3`
- 	# Generate ACE image
+-PR = "r15"
+-PV = "v2009.11"
++PR = "r16"
++PV_virtex5    = "v2012.04.01"
++PV_microblaze = "v2009.11"
++
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
++LIC_FILES_CHKSUM_virtex5 = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++LIC_FILES_CHKSUM_microblaze = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
++
++# Virtex-5 src location
++KBRANCH_virtex5 = "master"
++SRC_URI_virtex5 = "git://git.denx.de/u-boot.git;branch=${KBRANCH};protocol=git"
++SRCREV_${PN}_virtex5 = "415d386877df49eb051b85ef74fa59a16dc17c7d"
+ 
+-KBRANCH = "master"
+-KBRANCH_microblaze = "microblaze"
+ # Microblaze src location
+-SRC_URI = "git://git.xilinx.com/u-boot-xlnx.git;branch=${KBRANCH};protocol=git \
++KBRANCH_microblaze = "microblaze"
++SRC_URI_microblaze = "git://git.xilinx.com/u-boot-xlnx.git;branch=${KBRANCH};protocol=git \
+            file://ml405-add-uartlite-config-options.patch \
+            file://ml405-replace-hardcode-macros-for-uartns550.patch \
+            file://ml507-add-uartlite-config-options.patch \
+-           file://ml507-replace-hardcode-macros-for-uartns550.patch"
+-SRU_URI_microblaze += " file://microblaze-genric-add-spi-flash-config.patch \
+-                        file://board-microblaze-monitor-flash-len.patch \
+-                        file://cfi_flash-define-monitor_flash_len.patch"
++           file://ml507-replace-hardcode-macros-for-uartns550.patch \
++           file://microblaze-genric-add-spi-flash-config.patch \
++           file://board-microblaze-monitor-flash-len.patch \
++           file://cfi_flash-define-monitor_flash_len.patch"
+ 
+ XILINX_BOARD ?= "${@find_board(bb.data.getVar('XILINX_BSP_PATH', d, 1), d)}"
+ 
 -- 
 1.7.9.5
 
