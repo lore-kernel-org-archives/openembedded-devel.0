@@ -1,34 +1,36 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SbRJf-0007m8-SW
+	(envelope-from <elvis.dowson@gmail.com>) id 1SbTPv-0004O6-UI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jun 2012 09:03:03 +0200
-Received: by eekd49 with SMTP id d49so1404005eek.6
+	Mon, 04 Jun 2012 11:17:40 +0200
+Received: by wgbdr1 with SMTP id dr1so3515339wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jun 2012 23:52:38 -0700 (PDT)
+	Mon, 04 Jun 2012 02:07:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=LachtUkdbT7Ehf8jsXl8IM8gLFkpmk+x9QghI75MxhM=;
-	b=EWrHhP1wGBd3dW7jGlTWSG3IjYqkLVSVOKFijwpzJnbLSb2Tpu2QkSLBYvy7sa1shI
-	pkfuu46aIEuiJFph+qcq4h+gk4tApDETB3AGor94+PLbJWFzy9WrVFhywMi4ctZ4fzDB
-	T/qfjUeMOhuWCStXPdapeoAcu19kfFT1EEN+uAHo0Gt3o/q/5zKgqYu4+IrZD9cNlrtx
-	VdIAoHwq7GXO1UX7y1abDo+3P4abnEVyo2oIiCKacJrFdALF+E1mh68sWQqMbJNyBKuL
-	dAgWge2HVAP8HosT6GZsDXVSnj2turc9J1Xb4PAyhPpjvsLlKyRFUWETtrHM6aBTK8NH
-	eqZA==
-Received: by 10.14.127.198 with SMTP id d46mr4985484eei.101.1338792758249;
-	Sun, 03 Jun 2012 23:52:38 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id t3sm33669153eeb.15.2012.06.03.23.52.36
-	(version=SSLv3 cipher=OTHER); Sun, 03 Jun 2012 23:52:37 -0700 (PDT)
-Message-ID: <4FCC5A7B.8040204@gmail.com>
-Date: Mon, 04 Jun 2012 08:49:31 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:to:mime-version:x-mailer;
+	bh=oTvWUMLb0jFuh5553w7APaVJ0ge9C/mZr57gV4bSfW4=;
+	b=GM2n8szSlUpxiW9toziJLaBSZ6JrHV8tIp2sZd/tSCbQ1tgPVyUOC+QnKvuPeV1APi
+	FGeAnz4GJvbSsRi4m2hsH5Nu0PqirYjuNtbGGTNaHxIFsdVq+v8/YocW3XCLPHrCBFmF
+	RhknspglDsEsTpyNObB0uyfBgBV/p/GqLSUe3k76J5srFvJHe8SHbsNFkDlIj8K6M3eX
+	MZHfh/GlVfPgDvbn+nS/DZpNnOO1jx+54xJZBe0jrGCGx2MYgjGwueZH1mr3es1BYEcY
+	a+xqtGhSDeh1g8GrbZo0OuYtgVFAl56+u5UDi+jwNEiK5uy2hZ0Xxr6u6AB+Z+GShi78
+	e1mQ==
+Received: by 10.216.137.147 with SMTP id y19mr2878889wei.33.1338800835380;
+	Mon, 04 Jun 2012 02:07:15 -0700 (PDT)
+Received: from [192.168.1.35] (197.Red-79-150-15.dynamicIP.rima-tde.net.
+	[79.150.15.197])
+	by mx.google.com with ESMTPS id gv4sm30351691wib.8.2012.06.04.02.07.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 04 Jun 2012 02:07:14 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+Date: Mon, 4 Jun 2012 11:07:12 +0200
+Message-Id: <D40848EB-C66A-47B6-B3C0-CF743A8E032A@gmail.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Apple Message framework v1278)
+X-Mailer: Apple Mail (2.1278)
+Subject: Understanding what qemuppc emulates and getting it to emulate a ppc440 CPU
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2012 07:03:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Jun 2012 09:17:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Hi.
+Hi,
+      I'd like some help understanding what qemuppc emulates, while =
+building the using yocto core-image-sato.
 
-When trying to compile meta-toolchain, it crashes during
-gcc-cross-initial with the error:
+I've originally built my yocto images for a virtex5 machine, and would =
+like to test it on an emulator. The Virtex-5 FXT processor is an FPGA =
+which contains an embedded  PowerPC440 CPU
 
-this target does not support --with-float
-Valied --with options are: arch arch_32 arch_64 cpu cpu_32 cpu_64 tune
-tune_32 tune_64
+Now if I specify machine=3Dqemuppc, wouldn't that just be generic =
+PowerPC CPU?=20
 
-The reason for this is a commit that happened 2012-05-01 in openembedded
-core, called "gcc: Grok for callconvention-hard to enable hard float".
-Reverting this patches makes it compile, and still I get the
---mfloat-abi=hard when compiling with the resulting toolchain.
+There are so many ppc CPU variants, like ppc405, ppc440, ppc603e, etc.
 
-I'm compiling on a x64 Linux machine, with the target being a cortexa9
-processor. I have the DEFAULTTUNE set to cortexa9hf-neon. What should
-the patch do, and what will happen if I disable it?
+Can the yocto build environment be modified so that the qemuppc emulator =
+emulates at least the ppc440 CPU subset?
 
-Best regard
-Martin
+Best regards,
+
+Elvis Dowson
+
 
 
