@@ -1,37 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1Sbgze-00072D-Ee
+	(envelope-from <elvis.dowson@gmail.com>) id 1SbhJZ-0007df-04
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jun 2012 01:47:26 +0200
-Received: by pbbrq2 with SMTP id rq2so6876969pbb.6
+	Tue, 05 Jun 2012 02:08:01 +0200
+Received: by wibhm14 with SMTP id hm14so2980818wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2012 16:37:00 -0700 (PDT)
+	Mon, 04 Jun 2012 16:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=B6uh5W4aQgJIayG48Esp5W8xhYzDTPR01aCzj9bMKyo=;
-	b=JUc7xJuRAeWQ7xgwZxURfjXBfc/nfD9HLo7T8t3U/OV1s2arHK9feWiJnzD5GPDkrN
-	5O2g+irvaWRQ8OocBUsFwsSZLFkxKND7wbtjbJbTne9vLiR0G4FHcMjL9Ejy3r8TT1L2
-	+55nV84nOsH7lS2bbUDpO8tiV6DLClLtkFUt7zLvTbgmBSSrMo5lE7hvh48rIaGmqCt/
-	pY2dd8TDqoCC2SGF4x4yJocKi3/XWU9zenpx+bhuR7l8h2IYOrrW2JpNyvdJiwPy1Isu
-	6hmiFgkTRa7zjhzC/IpKPcz7pNJnucDp4KfwwBL9plt/8UB97VWyqs5zSPpLhhrEc6ux
-	KyOQ==
-Received: by 10.68.219.166 with SMTP id pp6mr43074106pbc.35.1338853020320;
-	Mon, 04 Jun 2012 16:37:00 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id kt1sm214091pbc.32.2012.06.04.16.36.58
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:to:mime-version:x-mailer;
+	bh=9YsfltVRLXi7ETwZuw7efOadayt7kZfGCahsBXisqQQ=;
+	b=yXBcamQM5eyqf/ejLl17h3IgJzKoP4zkdcoRjmPsdIJ5zbB8/U6E/dyulntjKe/64q
+	XEjevpuZChTjr4APf9ywSpyIVWjgAq3ZgG8R1JjSzcVukcmNIp7mjl6TeJTb0Rn6CgX+
+	Hf5ZIn/BoUxqoLC4ZXzMU509USYLeJxN4W/FqE7hkHWOSJKDqP8MPj3u/lFh0vZLhuxq
+	e2xf+xz3DNdCjWK1vwdeefO717IcG3+lFqzK7IHtM6IE2EOiJamlA8LnQ512p2mnHLQr
+	Wrd51N6XUfXD259xCz4FsjGyil3/r3DeD89Ne8vhwpiEbAHrnPRIrrJJSW1xG+Byal00
+	ropA==
+Received: by 10.216.228.29 with SMTP id e29mr12734903weq.153.1338854255737;
+	Mon, 04 Jun 2012 16:57:35 -0700 (PDT)
+Received: from [192.168.1.36] (1.Red-83-60-183.dynamicIP.rima-tde.net.
+	[83.60.183.1])
+	by mx.google.com with ESMTPS id j4sm23356538wiz.1.2012.06.04.16.57.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Jun 2012 16:36:59 -0700 (PDT)
-Date: Mon, 4 Jun 2012 16:37:00 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120604233700.GE19651@bill-the-cat>
-References: <1338514403-9477-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1338514403-9477-1-git-send-email-raj.khem@gmail.com>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH V2] classes/mirrors.bbclass: update debian snapshot mirror url
+	Mon, 04 Jun 2012 16:57:34 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+Date: Tue, 5 Jun 2012 01:57:32 +0200
+Message-Id: <8AB41CD7-C6F0-4CD9-812F-1E804F64BCBB@gmail.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Apple Message framework v1278)
+X-Mailer: Apple Mail (2.1278)
+Subject: How to generate vmlinux kernel image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +44,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2012 23:47:26 -0000
+X-List-Received-Date: Tue, 05 Jun 2012 00:08:01 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 31, 2012 at 06:33:23PM -0700, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  classes/mirrors.bbclass |    4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/classes/mirrors.bbclass b/classes/mirrors.bbclass
-> index 71ee5f6..1f509df 100644
-> --- a/classes/mirrors.bbclass
-> +++ b/classes/mirrors.bbclass
-> @@ -1,6 +1,8 @@
->  MIRRORS[func] = "0"
->  MIRRORS () {
-> -${DEBIAN_MIRROR}/main	http://snapshot.debian.net/archive/pool
-> +${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20120328T092752Z/debian/pool
-> +${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20110127T084257Z/debian/pool
-> +${DEBIAN_MIRROR}/main   http://snapshot.debian.org/archive/debian-archive/20090802T004153Z/debian/pool
+Hi,
+      I added the following two lines to meta-xilinx/conf/virtex5.conf =
+to try and get it to build both a uImage an a vmlinux image. The vmlinux =
+image is so that I can load the generated kernel into qemuppc emulator. =
+I also want to generate the rootfs in ext3 format.
 
-Isn't that backwards for say kernel.org mismatches?  Or am I forgetting
-that we already fixed that and switched to new checksums?
+KERNEL_IMAGETYPE =3D "uImage vmlinux"
+IMAGE_FSTYPES +=3D "ext3 tar.bz2"
 
--- 
-Tom
+However, when I run bitbake core-image-minimal, I get the following =
+errors:
+
+OTE: package =
+linux-xilinx-2.6.37.1+git1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16: =
+task do_install: Started
+ERROR: Function failed: do_install (see =
+/tool/yocto/poky/build/tmp/work/virtex5-poky-linux/linux-xilinx-2.6.37.1+g=
+it1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16/temp/log.do_install.13012=
+ for further information)
+ERROR: Logfile of failure stored in: =
+/tool/yocto/poky/build/tmp/work/virtex5-poky-linux/linux-xilinx-2.6.37.1+g=
+it1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16/temp/log.do_install.13012=
+
+Log data follows:
+| DEBUG: Executing shell function do_install
+| ERROR: Function failed: do_install (see =
+/tool/yocto/poky/build/tmp/work/virtex5-poky-linux/linux-xilinx-2.6.37.1+g=
+it1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16/temp/log.do_install.13012=
+ for further information)
+| NOTE: make -j 6 DEPMOD=3Decho =
+INSTALL_MOD_PATH=3D/tool/yocto/poky/build/tmp/work/virtex5-poky-linux/linu=
+x-xilinx-2.6.37.1+git1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16/image =
+modules_install
+|   INSTALL drivers/char/hw_random/rng-core.ko
+|   INSTALL fs/nls/nls_iso8859-1.ko
+|   INSTALL fs/nls/nls_utf8.ko
+|   INSTALL fs/nls/nls_ascii.ko
+|   INSTALL net/ipv4/netfilter/ip_tables.ko
+|   INSTALL net/ipv4/netfilter/iptable_filter.ko
+|   INSTALL net/ipv4/netfilter/iptable_mangle.ko
+|   INSTALL net/ipv4/tunnel4.ko
+|   INSTALL net/ipv6/ipv6.ko
+|   INSTALL net/ipv6/sit.ko
+|   INSTALL net/ipv6/xfrm6_mode_beet.ko
+|   INSTALL net/ipv6/xfrm6_mode_transport.ko
+|   INSTALL net/ipv6/xfrm6_mode_tunnel.ko
+|   INSTALL net/netfilter/x_tables.ko
+|   INSTALL net/netfilter/xt_tcpudp.ko
+|   DEPMOD  3.0.0-14.1-build3
+| Warning: you may need to install module-init-tools
+| See http://www.codemonkey.org.uk/docs/post-halloween-2.6.txt
+| install: target `vmlinux-3.0.0-14.1-build3' is not a directory
+NOTE: package =
+linux-xilinx-2.6.37.1+git1+86c81ccd7c8e895904bfff95bd4f87c9615f7fba-r16: =
+task do_install: Failed
+ERROR: Task 481 =
+(/tool/yocto/meta-xilinx/recipes-kernel/linux/linux-xilinx_git.bb, =
+do_install) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 2266 tasks of which 2260 didn't need to =
+be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /tool/yocto/meta-xilinx/recipes-kernel/linux/linux-xilinx_git.bb, =
+do_install
+Summary: There was 1 ERROR message shown, returning a non-zero exit =
+code.
+
+
+What should I do to get it to generate the vmlinux image and the rootfs =
+in ext3 format?
+
+Elvis Dowson=
 
 
