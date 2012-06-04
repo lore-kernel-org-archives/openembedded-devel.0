@@ -1,23 +1,35 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1SbeRJ-0003r1-W4
+	(envelope-from <raj.khem@gmail.com>) id 1SbfAA-0004jH-Ji
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jun 2012 23:04:29 +0200
-Received: (qmail 16371 invoked by uid 1003); 4 Jun 2012 20:52:47 -0000
-Received: from unknown (HELO ?192.168.1.108?) (philip@opensdr.com@71.171.27.98)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	4 Jun 2012 20:52:47 -0000
-Message-ID: <4FCD2043.7010207@balister.org>
-Date: Mon, 04 Jun 2012 16:53:23 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Mon, 04 Jun 2012 23:50:10 +0200
+Received: by eaal1 with SMTP id l1so1321036eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Jun 2012 14:39:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=6T17Xpqt12AiuY9L/Wp3UwfyPSz6NGZ9OWF7MR9DBZA=;
+	b=K3q8ioJ+Pz7LoqVYgfPk2T/NDUWP/PONKaL3YE2g2OkSi+Toadeep0v7g2CAO8TmqM
+	qZcDHewPFuyi1pAmu4rh53XMd79cpD5TVwilKd935iozMqsQ1W3FW/C+kDxG7Uap+WYi
+	80fwkTOi+FHLdwyRNCWX22cNjtNjaDkMzVb6ZgfppQW0Jk0jA2MyjrfSIPH2Wgqjz2d9
+	GplY6IPuh6OMpEsDY69PnM6ZbX+tLKf+cjuqsmAHyr9gNlXRv88iiYTAHnBu+i/POOgC
+	apTmw7sqOfQSBLSBIJuNPnD1PgJehv40vvdr/h1AmyC4zn36uziSf+p31Vg9BdG/eHyN
+	kjmQ==
+Received: by 10.14.97.135 with SMTP id t7mr5839067eef.177.1338845985490; Mon,
+	04 Jun 2012 14:39:45 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.14.188.11 with HTTP; Mon, 4 Jun 2012 14:39:14 -0700 (PDT)
+In-Reply-To: <9496B4CA-EB17-4618-8711-09ED61FF6A3D@gmail.com>
+References: <D40848EB-C66A-47B6-B3C0-CF743A8E032A@gmail.com>
+	<CAMKF1srC1uxpT1+Z_LqRUagFhxStZb30ZU10wrRtAReSSR7_zg@mail.gmail.com>
+	<77A5818E-F77E-4215-939B-882BC738EB65@gmail.com>
+	<CAMKF1spRxzbVgiSev063fjBnPfurPAs45crPXq6kogZP8QuQYQ@mail.gmail.com>
+	<9496B4CA-EB17-4618-8711-09ED61FF6A3D@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 4 Jun 2012 14:39:14 -0700
+Message-ID: <CAMKF1so-pg2FzqNOVpgUd-Jdf4SgLo5v6fUyQ_AZLk-RHoQ53A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1338831160-14023-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-In-Reply-To: <1338831160-14023-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [meta-oe][PATCH] python-numpy: Fixed numpy dependencies.
+Subject: Re: Understanding what qemuppc emulates and getting it to emulate a ppc440 CPU
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,38 +43,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2012 21:05:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Jun 2012 21:50:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Can you make the commit message something like:
+On Mon, Jun 4, 2012 at 11:55 AM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+>
+> Is it possible to use uImage-virtex5.bin for the kernel image and core-image-minimal-virtex5.tar.gz as the kernel image and rootfilesystem, instead of vmlinux-qemuppc.bin and core-image-sato-qemuppc.ext3 ?
 
-python-numpy : Add missing dependencies.
-
-Numpy was missing a number of dependencies in the .bb file without which
-it will not work.
-
-On 06/04/2012 01:32 PM, Dan McDougall wrote:
-> Numpy was missing a number of dependencies in the .bb file without which it will
-> not work.
-> 
-> Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
-> ---
->  .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> index 36ab622..bae624e 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> @@ -24,3 +24,8 @@ do_compile_prepend() {
->  
->  SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
->  SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
-> +
-> +RDEPENDS_${PN} = "python-unittest \
-> +                  python-diffutils \
-> +                  python-pprint \
-> +                 "
+it should be.
 
 
