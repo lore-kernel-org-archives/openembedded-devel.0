@@ -1,32 +1,34 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mikew@criticallink.com>) id 1SbGH0-0004QI-Fk
+	(envelope-from <martiert@gmail.com>) id 1SbRJf-0007m8-SW
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jun 2012 21:15:34 +0200
-Received: by obhx4 with SMTP id x4so7139825obh.6
+	Mon, 04 Jun 2012 09:03:03 +0200
+Received: by eekd49 with SMTP id d49so1404005eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jun 2012 12:05:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type
-	:x-gm-message-state;
-	bh=M+nK7/zE32jUrnKIVJzjwW/KhGudBXr/C3O/LdV4k1Y=;
-	b=AwMMT79k3sHGpD/m0uXGCkOP26W7otnIwSc/A8acziCpjrFl+gfOQ9b+Ze8q3i2g1i
-	ZmxNNh4nk/xkJJKF46SVCvvFjUFy9MX5tppScJRifv6TGA50HP0Yp54jt7e1BZb49U5M
-	SLklV3gITaa870MNAomCTtuJ5rYF4Lu5lhRoYdQ8JiyFb1jwaO4Oj39f5pZckY/oRzuj
-	8LvZAeXD+lNeZb+6tfePL0Ns+R7lPk9oF2xcMnMZ98HncxHvieOaqcL3O8j2bxPLmVEg
-	Qd0rBC0TtCw1Xg62fNimL5g7dlp06J3qCqR13/mPSdKkvUQLxqARYG19k5aL40rc1P7u
-	IFSQ==
-Received: by 10.182.151.113 with SMTP id up17mr9479744obb.40.1338750310031;
-	Sun, 03 Jun 2012 12:05:10 -0700 (PDT)
+	Sun, 03 Jun 2012 23:52:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=LachtUkdbT7Ehf8jsXl8IM8gLFkpmk+x9QghI75MxhM=;
+	b=EWrHhP1wGBd3dW7jGlTWSG3IjYqkLVSVOKFijwpzJnbLSb2Tpu2QkSLBYvy7sa1shI
+	pkfuu46aIEuiJFph+qcq4h+gk4tApDETB3AGor94+PLbJWFzy9WrVFhywMi4ctZ4fzDB
+	T/qfjUeMOhuWCStXPdapeoAcu19kfFT1EEN+uAHo0Gt3o/q/5zKgqYu4+IrZD9cNlrtx
+	VdIAoHwq7GXO1UX7y1abDo+3P4abnEVyo2oIiCKacJrFdALF+E1mh68sWQqMbJNyBKuL
+	dAgWge2HVAP8HosT6GZsDXVSnj2turc9J1Xb4PAyhPpjvsLlKyRFUWETtrHM6aBTK8NH
+	eqZA==
+Received: by 10.14.127.198 with SMTP id d46mr4985484eei.101.1338792758249;
+	Sun, 03 Jun 2012 23:52:38 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id t3sm33669153eeb.15.2012.06.03.23.52.36
+	(version=SSLv3 cipher=OTHER); Sun, 03 Jun 2012 23:52:37 -0700 (PDT)
+Message-ID: <4FCC5A7B.8040204@gmail.com>
+Date: Mon, 04 Jun 2012 08:49:31 +0200
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
 MIME-Version: 1.0
-Received: by 10.182.81.101 with HTTP; Sun, 3 Jun 2012 12:04:49 -0700 (PDT)
-From: Mike Williamson <michael.williamson@criticallink.com>
-Date: Sun, 3 Jun 2012 15:04:49 -0400
-Message-ID: <CAHEoWwu4p2huW-bm21TF3HgJiwrq4V8y+OzSXTcrHx=9=qLUXg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQknULKePlBoFLAnFSsKZxRXoCMBz0vqt6RdrK5wF5zHPiJwDkQDBAOY201kYU68vU6G/eCl
-Subject: canadian cross -- howto?
+Subject: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jun 2012 19:15:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Jun 2012 07:03:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi.
 
-I was wondering if there is any posted documentation (or
-example somewhere) for building a Canadian cross?
+When trying to compile meta-toolchain, it crashes during
+gcc-cross-initial with the error:
 
-I would like to migrate from a 32-bit linux build machine to
-a 64-bit linux server (ubuntu) and would like to continue
-to build SDK packages for 32-bit linux machines as well as
-64-bit linux machines.  Is this possible?
+this target does not support --with-float
+Valied --with options are: arch arch_32 arch_64 cpu cpu_32 cpu_64 tune
+tune_32 tune_64
 
-It's not completely obvious to me googling around, but I
-may not be using the right search criteria...  Most of the
-hits are fairly old (pre core vs. classic, etc.).
+The reason for this is a commit that happened 2012-05-01 in openembedded
+core, called "gcc: Grok for callconvention-hard to enable hard float".
+Reverting this patches makes it compile, and still I get the
+--mfloat-abi=hard when compiling with the resulting toolchain.
 
--Mike
+I'm compiling on a x64 Linux machine, with the target being a cortexa9
+processor. I have the DEFAULTTUNE set to cortexa9hf-neon. What should
+the patch do, and what will happen if I disable it?
+
+Best regard
+Martin
 
 
