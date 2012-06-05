@@ -1,37 +1,35 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-gg0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <daniel.mcdougall@liftoffsoftware.com>)
-	id 1SbyLg-0001Vo-Jo for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jun 2012 20:19:20 +0200
-Received: by wgbds1 with SMTP id ds1so3376305wgb.0
+	id 1SbyMG-0001Yj-10 for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Jun 2012 20:19:56 +0200
+Received: by ggnp4 with SMTP id p4so4234899ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2012 11:08:54 -0700 (PDT)
+	Tue, 05 Jun 2012 11:09:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=J/VD8hHytVx3bDcdnZ8DZp0+PLCT/W5Z/dkTYZuP4Vk=;
-	b=ewIpprblI2e2NTtfkBMQhxdR847WTy8r+NGyJeG13F6dZmd2jY8F4ljADItvJoRnwK
-	XO6cryB7F/M2fl8Wz33X9FjUNl4UjoWlY0HcakP1Dwy90WBEaI7+S5IC9oWKDKL+B+f1
-	iLm4MOM9v3QSSzzTZb8+XXhT7jSfOntrBaet7xNC1vDIkuiKjPExyP1znbtpi8v59VS5
-	iGzhJdhTam3bYLgXlSywg60lwXdCfvja7aRpmFMfXKKaIAWo+JFpFeaIgiCCvbho7l2e
-	QOdfqR6sjyweVpLZYofLlOdNKipxX9HLESIvZM6ZB3DrPYfaAxV1rNR9ODHvtInnUPHJ
-	EBVA==
-MIME-Version: 1.0
-Received: by 10.216.142.102 with SMTP id h80mr15161186wej.36.1338919734389;
-	Tue, 05 Jun 2012 11:08:54 -0700 (PDT)
-Received: by 10.223.76.200 with HTTP; Tue, 5 Jun 2012 11:08:54 -0700 (PDT)
-X-Originating-IP: [173.76.156.208]
-In-Reply-To: <4FCD2043.7010207@balister.org>
-References: <1338831160-14023-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-	<4FCD2043.7010207@balister.org>
-Date: Tue, 5 Jun 2012 14:08:54 -0400
-Message-ID: <CAG3aBq5eaz-Xt7K-cR8qPAfqgUzsKamG+wMpzSPXVy7UbH_nhg@mail.gmail.com>
-From: Daniel McDougall <daniel.mcdougall@liftoffsoftware.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=o/ZSReYzdByjHttM9SZ7YyltiBEN/a7/0WdHppzF2cE=;
+	b=pZdD7MfE+s//qsrPY1Qc+VI1xAEy6vl7/f17dKAzlM0IEPsXotlvBhULJySQd9R4hp
+	kz5UCmDVFZ83X7adarVGvpQMwMMgHQIeo462G7vipFYGp3QaZoXhV2mDgrHHAKt41gEw
+	U+eqqKh7nmcxX51mxq/trJEWqr8bWnmb9beWyQhJRgEaK6kfozBYRNe/Rp39sXATec5r
+	9rfYv0bdNtNxEFUxYX7TuWUCLqOQ5PjfBc92TCPvdgvwgG5oD1nIPD1t7Ysh5d0Y7D9Y
+	WR7/5ngAtUuYfTc1I9ho1UChxRoFZwKdkUaZSnBZ1ShsB/0Umf6ZOH4MmaPimjRC3pH4
+	41tA==
+Received: by 10.236.46.74 with SMTP id q50mr12758378yhb.30.1338919769188;
+	Tue, 05 Jun 2012 11:09:29 -0700 (PDT)
+Received: from htpc.lan (c-69-180-64-152.hsd1.fl.comcast.net. [69.180.64.152])
+	by mx.google.com with ESMTPS id
+	d10sm3135617anm.17.2012.06.05.11.09.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Jun 2012 11:09:28 -0700 (PDT)
+From: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmTsFtrLL3NiAfBgVxOzAdw4Vxt/+CBtQyM+UIGScaH2HgMkBCAQm2M+jQ3ibZ/6sSK9DvE
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] python-numpy: Fixed numpy dependencies.
+Date: Tue,  5 Jun 2012 14:09:16 -0400
+Message-Id: <1338919756-24482-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQkbORF2ssNfRkjdvyIi2Xe6ATQLEIkTFO7RJo4mD0q423rKKjY+WOFkzkTPC8SlH4am5Cey
+Subject: [meta-oe][PATCH] python-numpy : Add missing dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2012 18:19:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Jun 2012 18:19:56 -0000
 
-On Mon, Jun 4, 2012 at 4:53 PM, Philip Balister <philip@balister.org> wrote=
-:
+Numpy was missing a number of dependencies in the .bb file without which it will
+not work.
 
-> Can you make the commit message something like:
->
-> python-numpy : Add missing dependencies.
->
-> Numpy was missing a number of dependencies in the .bb file without which
-> it will not work.
->
+Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
+---
+ .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
+ 1 file changed, 5 insertions(+)
 
-No problem.  I'll re-submit the patch with that change right now.
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index 36ab622..bae624e 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -24,3 +24,8 @@ do_compile_prepend() {
+ 
+ SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
+ SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
++
++RDEPENDS_${PN} = "python-unittest \
++                  python-diffutils \
++                  python-pprint \
++                 "
+-- 
+1.7.9.5
 
---=20
-Dan McDougall - Chief Executive Officer and Developer
-Liftoff Software =E2=9C=88 Your flight to the cloud is now boarding.
-904-446-8323
+
 
