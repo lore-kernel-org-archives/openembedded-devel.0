@@ -1,35 +1,36 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <daniel.mcdougall@liftoffsoftware.com>)
-	id 1ScI8A-0002Lw-Ch for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2012 17:26:42 +0200
-Received: by wibhm14 with SMTP id hm14so4570963wib.6
+	(envelope-from <martin.jansa@gmail.com>) id 1ScIBH-0003j2-Nz
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jun 2012 17:29:56 +0200
+Received: by bkcjm2 with SMTP id jm2so5886948bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2012 08:16:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=sV4MGCuEghoi18nS0RW93WJcsxqEdnuTV45136Kshv0=;
-	b=TQnuciRIOVGHpsHOm3jK8sJmOvu702Y+iY1KalP1fWN9EcWTs8mqQkQt+T+kpFj45K
-	c7F8ad3PuqhzdVFQUTYCd2Zc1fkskHbCcFYSpwF09DuuCVB3jqUpaSbHlf7EBYqGeM9S
-	N28g4sRyDr7QB8V0BWh1UhKcfPfEko4LP6VhUtLQANMiL80+nowk3zYstjAF9ZjC5xjZ
-	VJK7miNLcBelCxPofJ1BCPGvvqq+rTJpwv5qezG/ESv17vwbZBXCII4r4XX1Zj6L7rlH
-	9mkhI/WmjsDvcXwHP84FcF4oGemwd07Y6I+xTM/XNoqcRq+bKdXaFYFwMFfp2Ew0FKlI
-	7gPA==
-MIME-Version: 1.0
-Received: by 10.216.227.154 with SMTP id d26mr17788147weq.9.1338995774890;
-	Wed, 06 Jun 2012 08:16:14 -0700 (PDT)
-Received: by 10.223.76.200 with HTTP; Wed, 6 Jun 2012 08:16:14 -0700 (PDT)
-X-Originating-IP: [69.180.64.152]
-In-Reply-To: <1338995599-32521-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-References: <1338995599-32521-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-Date: Wed, 6 Jun 2012 11:16:14 -0400
-Message-ID: <CAG3aBq4LamuK4MT3G4-+az123UCs91J1AvM2GEuK6MTWfRjpQA@mail.gmail.com>
-From: Daniel McDougall <daniel.mcdougall@liftoffsoftware.com>
+	Wed, 06 Jun 2012 08:19:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=VYZIq5o+djFyh72BW4itxc1Ipw7AjI2ekJPzioXUhCs=;
+	b=mDS9IiBc1McS0HX9bagBdtXWDwOxrLGShjRmK22pg3+8ol5o1LLA2kMcid8VxMxr74
+	4zeQ3oTge/GkToQ7XIZoTRMb03muwOCsOkbDNv94JK0EicgQG3JKpipEjr+VphTsTvu/
+	z+BhDO9PgFU9AMST/ZY+5B0HWyBC4Sug9ANH0J1vSGyE01apTk694IiIJeRWA/CgHAaw
+	1Zw5gwo2Re1HSNasA6b/t3EA/WYB6WF2QPW3n/+E8Az6yd0Q1aWdGtcibbA3vaPWCe9x
+	aLvA4NOw7sorv/NKGmMxhlDRYNSmDIoeG2zb6Rnm0lRLHCqpLs1ZHFuX+9zwlv/DeKYm
+	5xkQ==
+Received: by 10.204.151.200 with SMTP id d8mr13186362bkw.82.1338995968441;
+	Wed, 06 Jun 2012 08:19:28 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id iq16sm227922bkc.6.2012.06.06.08.19.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 06 Jun 2012 08:19:27 -0700 (PDT)
+Date: Wed, 6 Jun 2012 17:19:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQn/WZy3SWJVyFWT+epA5tyz34TRlUwSa38eiU7IX3q9z+1ZUaRD/2/9MVB+SkffxvIB1T1x
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Message-ID: <20120606151939.GC3140@jama.jama.net>
+References: <1338995599-32521-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+	<CAG3aBq4LamuK4MT3G4-+az123UCs91J1AvM2GEuK6MTWfRjpQA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAG3aBq4LamuK4MT3G4-+az123UCs91J1AvM2GEuK6MTWfRjpQA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe][PATCH v2] python-numpy : Add missing dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,48 +45,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2012 15:26:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Jun 2012 15:29:57 -0000
+X-Groupsio-MsgNum: 39160
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gr/z0/N6AeWAPJVB"
+Content-Disposition: inline
+
+--gr/z0/N6AeWAPJVB
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Ignore this.  Apparently my 'git commit --amend' didn't catch my fix.
+On Wed, Jun 06, 2012 at 11:16:14AM -0400, Daniel McDougall wrote:
+> Ignore this.  Apparently my 'git commit --amend' didn't catch my fix.
 
-On Wed, Jun 6, 2012 at 11:13 AM, Dan McDougall <
-daniel.mcdougall@liftoffsoftware.com> wrote:
+Try to catch
+http://git.openembedded.org/meta-openembedded/commit/?id=3D036eb620206041bf=
+1cf4be5a8c2a4947afb34382
+and rebase
 
-> Numpy was missing a number of dependencies in the .bb file without which
-> it will
-> not work. This v2 version of the patch fixes the difflib dependency.
->
-> Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
-> ---
->  .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bbb/meta-=
-oe/recipes-devtools/python/
-> python-numpy_1.4.1.bb
-> index 36ab622..bae624e 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> @@ -24,3 +24,8 @@ do_compile_prepend() {
->
->  SRC_URI[md5sum] =3D "5c7b5349dc3161763f7f366ceb96516b"
->  SRC_URI[sha256sum] =3D
-> "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
-> +
-> +RDEPENDS_${PN} =3D "python-unittest \
-> +                  python-diffutils \
-> +                  python-pprint \
-> +                 "
-> --
-> 1.7.9.5
->
->
+Cheers,
 
+>=20
+> On Wed, Jun 6, 2012 at 11:13 AM, Dan McDougall <
+> daniel.mcdougall@liftoffsoftware.com> wrote:
+>=20
+> > Numpy was missing a number of dependencies in the .bb file without which
+> > it will
+> > not work. This v2 version of the patch fixes the difflib dependency.
+> >
+> > Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
+> > ---
+> >  .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
+> >  1 file changed, 5 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bbb/met=
+a-oe/recipes-devtools/python/
+> > python-numpy_1.4.1.bb
+> > index 36ab622..bae624e 100644
+> > --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+> > +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+> > @@ -24,3 +24,8 @@ do_compile_prepend() {
+> >
+> >  SRC_URI[md5sum] =3D "5c7b5349dc3161763f7f366ceb96516b"
+> >  SRC_URI[sha256sum] =3D
+> > "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
+> > +
+> > +RDEPENDS_${PN} =3D "python-unittest \
+> > +                  python-diffutils \
+> > +                  python-pprint \
+> > +                 "
+> > --
+> > 1.7.9.5
+> >
+> >
+>=20
+>=20
+> --=20
+> Dan McDougall - Chief Executive Officer and Developer
+> Liftoff Software =E2=9C=88 Your flight to the cloud is now boarding.
+> 904-446-8323
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
-Dan McDougall - Chief Executive Officer and Developer
-Liftoff Software =E2=9C=88 Your flight to the cloud is now boarding.
-904-446-8323
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--gr/z0/N6AeWAPJVB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk/PdQsACgkQN1Ujt2V2gBymIACfaROqN9hf0MSLL5w4iS/Dwq3+
+VnQAmwZJgW7FjitTNWZ+Y21tCF9I6pmA
+=bPZ3
+-----END PGP SIGNATURE-----
+
+--gr/z0/N6AeWAPJVB--
