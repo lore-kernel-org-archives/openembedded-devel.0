@@ -1,23 +1,39 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Sc3q3-0004oF-T7
+	(envelope-from <martiert@gmail.com>) id 1Sc9oL-0000cl-RV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2012 02:11:04 +0200
-Received: (qmail 2050 invoked by uid 1003); 5 Jun 2012 23:59:57 -0000
-Received: from unknown (HELO ?192.168.1.108?) (philip@opensdr.com@71.171.27.98)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	5 Jun 2012 23:59:57 -0000
-Message-ID: <4FCE9DA3.9010704@balister.org>
-Date: Tue, 05 Jun 2012 20:00:35 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+	Wed, 06 Jun 2012 08:33:41 +0200
+Received: by eaal1 with SMTP id l1so1750291eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Jun 2012 23:23:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=syKeJJn7R8LQygGubswwyUoOMA9zuM167elo6giSY+0=;
+	b=LtwTWroCXSXDjpqZULCOACjakfcGkGqhUmyQ9s/PYFN+PCKpEfHdngtA6rUrSwnC+I
+	p3Vt2UyZ9kvCcRGfchpDzLl9z/rtrTClhyxFblfhsbJtjDdAk+wnsy0JiLjWUhNivxVk
+	YP9q4s6W0noOc4kXR3MCTibohW7GTiYz3asGtzkc8wze/d/JQ9KbWmGgbV4zRM6VwfZI
+	GSw2WSoRvr2Lyr7XYZM7Sk2IhPk6H1uEmCN+9E7h2zTWsod9gYDZNYd5irAvEKsV12GS
+	Rok8vXeWtfkW7y0PCY1hY48iPXUVUnnvkx0KFEsLoKeFLicmldNNNAVUDMWbfabqXCFr
+	Mdig==
+Received: by 10.14.127.198 with SMTP id d46mr8354304eei.206.1338963794816;
+	Tue, 05 Jun 2012 23:23:14 -0700 (PDT)
+Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id n52sm2554025eeh.9.2012.06.05.23.23.12
+	(version=SSLv3 cipher=OTHER); Tue, 05 Jun 2012 23:23:13 -0700 (PDT)
+Message-ID: <4FCEF69C.1070907@gmail.com>
+Date: Wed, 06 Jun 2012 08:20:12 +0200
+From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1338919756-24482-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-In-Reply-To: <1338919756-24482-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-X-Enigmail-Version: 1.1.2
-Subject: Re: [meta-oe][PATCH] python-numpy : Add missing dependencies.
+References: <4FCC5A7B.8040204@gmail.com>
+	<CAMKF1spW20v28PG+Te=5nfiGR0upuRqTRTr7G3w3SZTeR1zi7w@mail.gmail.com>
+	<4FCE2F51.3030003@gmail.com>
+	<CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
+In-Reply-To: <CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
+Subject: Re: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,34 +47,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2012 00:11:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 Jun 2012 06:33:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 06/05/2012 02:09 PM, Dan McDougall wrote:
-> Numpy was missing a number of dependencies in the .bb file without which it will
-> not work.
-> 
-> Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
+The configure log is at: http://pastebin.com/93h1rw7G
+while the compile log, which is what actually failes, is at:
+http://pastebin.com/2iXYrCDa
 
-Acked-by: Philip Balister <philip@balister.org>
+Be warned that the compile log is quite big, a little over 1700 lines,
+and do seem to actually be a configure step, not a compilation step.
+This really puzzles me.
 
-> ---
->  .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> index 36ab622..bae624e 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> @@ -24,3 +24,8 @@ do_compile_prepend() {
->  
->  SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
->  SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
-> +
-> +RDEPENDS_${PN} = "python-unittest \
-> +                  python-diffutils \
-> +                  python-pprint \
-> +                 "
+Thanks for the help
+
+- Martin
+
+On 06/05/12 22:53, Khem Raj wrote:
+> On Tuesday, June 5, 2012, Martin Ertsås <martiert@gmail.com> wrote:
+>> Sure. Will do it first thing in the morning. Think this actually happens
+> in compile though, for some reason. Do you want me to paste it and give a
+> link, or is it ok with an attachment?
+>
+> Paste in is ok
+>> - Martin
+>>
+>> On 06/04/12 18:32, Khem Raj wrote:
+>>> On Sun, Jun 3, 2012 at 11:49 PM, Martin Ertsås<martiert@gmail.com>
+>  wrote:
+>>>> Hi.
+>>>>
+>>>> When trying to compile meta-toolchain, it crashes during
+>>>> gcc-cross-initial with the error:
+>>>>
+>>>> this target does not support --with-float
+>>>> Valied --with options are: arch arch_32 arch_64 cpu cpu_32 cpu_64 tune
+>>>> tune_32 tune_64
+>>> can you post log.do_configure of this package somewhere ?
+>>>
+>>>> The reason for this is a commit that happened 2012-05-01 in openembedded
+>>>> core, called "gcc: Grok for callconvention-hard to enable hard float".
+>>>> Reverting this patches makes it compile, and still I get the
+>>>> --mfloat-abi=hard when compiling with the resulting toolchain.
+>>>>
+>>>> I'm compiling on a x64 Linux machine, with the target being a cortexa9
+>>>> processor. I have the DEFAULTTUNE set to cortexa9hf-neon. What should
+>>>> the patch do, and what will happen if I disable it?
+>>>>
+>>>> Best regard
+>>>> Martin
+>>>>
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
