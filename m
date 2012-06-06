@@ -1,39 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1Sc9oL-0000cl-RV
+	(envelope-from <chase.maupin@ti.com>) id 1ScGFx-0004IF-Oz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2012 08:33:41 +0200
-Received: by eaal1 with SMTP id l1so1750291eaa.6
+	Wed, 06 Jun 2012 15:26:38 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q56DG9SV009900
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2012 23:23:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=syKeJJn7R8LQygGubswwyUoOMA9zuM167elo6giSY+0=;
-	b=LtwTWroCXSXDjpqZULCOACjakfcGkGqhUmyQ9s/PYFN+PCKpEfHdngtA6rUrSwnC+I
-	p3Vt2UyZ9kvCcRGfchpDzLl9z/rtrTClhyxFblfhsbJtjDdAk+wnsy0JiLjWUhNivxVk
-	YP9q4s6W0noOc4kXR3MCTibohW7GTiYz3asGtzkc8wze/d/JQ9KbWmGgbV4zRM6VwfZI
-	GSw2WSoRvr2Lyr7XYZM7Sk2IhPk6H1uEmCN+9E7h2zTWsod9gYDZNYd5irAvEKsV12GS
-	Rok8vXeWtfkW7y0PCY1hY48iPXUVUnnvkx0KFEsLoKeFLicmldNNNAVUDMWbfabqXCFr
-	Mdig==
-Received: by 10.14.127.198 with SMTP id d46mr8354304eei.206.1338963794816;
-	Tue, 05 Jun 2012 23:23:14 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id n52sm2554025eeh.9.2012.06.05.23.23.12
-	(version=SSLv3 cipher=OTHER); Tue, 05 Jun 2012 23:23:13 -0700 (PDT)
-Message-ID: <4FCEF69C.1070907@gmail.com>
-Date: Wed, 06 Jun 2012 08:20:12 +0200
-From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
+	Wed, 6 Jun 2012 08:16:09 -0500
+Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q56DG9DE016152
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jun 2012 08:16:09 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Wed, 6 Jun 2012
+	08:16:09 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q56DG569031481;
+	Wed, 6 Jun 2012 08:16:07 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Jun 2012 08:29:01 -0500
+Message-ID: <1338989341-6344-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4FCC5A7B.8040204@gmail.com>
-	<CAMKF1spW20v28PG+Te=5nfiGR0upuRqTRTr7G3w3SZTeR1zi7w@mail.gmail.com>
-	<4FCE2F51.3030003@gmail.com>
-	<CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
-In-Reply-To: <CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
-Subject: Re: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] sourceipk: modify excludes to include directory names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,74 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2012 06:33:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 06 Jun 2012 13:26:38 -0000
+Content-Type: text/plain
 
-The configure log is at: http://pastebin.com/93h1rw7G
-while the compile log, which is what actually failes, is at:
-http://pastebin.com/2iXYrCDa
+* When the S variable is set to WORKDIR in the sourceipk class
+  a list of excludes is generated to prevent packaging the
+  sourceipk data along with the actual source files.  This
+  excludes list is a regular expression that currently does not
+  also cover the directory names.  For example:
+    * temp/* is excluded but the directory temp is not
+* This leads to the sourceipk still including the contents of
+  the directories to be excluded.  By removing the wildcard the
+  directory is excluded as well and the contents are not copied
+  into the sourcipk.
 
-Be warned that the compile log is quite big, a little over 1700 lines,
-and do seem to actually be a configure step, not a compilation step.
-This really puzzles me.
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ classes/sourceipk.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thanks for the help
-
-- Martin
-
-On 06/05/12 22:53, Khem Raj wrote:
-> On Tuesday, June 5, 2012, Martin Ertsås <martiert@gmail.com> wrote:
->> Sure. Will do it first thing in the morning. Think this actually happens
-> in compile though, for some reason. Do you want me to paste it and give a
-> link, or is it ok with an attachment?
->
-> Paste in is ok
->> - Martin
->>
->> On 06/04/12 18:32, Khem Raj wrote:
->>> On Sun, Jun 3, 2012 at 11:49 PM, Martin Ertsås<martiert@gmail.com>
->  wrote:
->>>> Hi.
->>>>
->>>> When trying to compile meta-toolchain, it crashes during
->>>> gcc-cross-initial with the error:
->>>>
->>>> this target does not support --with-float
->>>> Valied --with options are: arch arch_32 arch_64 cpu cpu_32 cpu_64 tune
->>>> tune_32 tune_64
->>> can you post log.do_configure of this package somewhere ?
->>>
->>>> The reason for this is a commit that happened 2012-05-01 in openembedded
->>>> core, called "gcc: Grok for callconvention-hard to enable hard float".
->>>> Reverting this patches makes it compile, and still I get the
->>>> --mfloat-abi=hard when compiling with the resulting toolchain.
->>>>
->>>> I'm compiling on a x64 Linux machine, with the target being a cortexa9
->>>> processor. I have the DEFAULTTUNE set to cortexa9hf-neon. What should
->>>> the patch do, and what will happen if I disable it?
->>>>
->>>> Best regard
->>>> Martin
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+index 546ec67..09d6eb8 100644
+--- a/classes/sourceipk.bbclass
++++ b/classes/sourceipk.bbclass
+@@ -110,7 +110,7 @@ sourceipk_do_create_srcipk() {
+         mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+         if [ -e ${S} ]; then
+ 	    if [ "${S}" = "${WORKDIR}" ]; then
+-		excludes='--exclude ./temp/\* --exclude ./sourceipk-tmp/\* --exclude ./sourceipk-data/\*'
++		excludes='--exclude ./temp --exclude ./sourceipk-tmp --exclude ./sourceipk-data'
+ 	    fi
+             tar -C ${S} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
+         fi
+-- 
+1.7.0.4
 
 
 
