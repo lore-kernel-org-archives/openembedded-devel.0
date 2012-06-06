@@ -1,35 +1,23 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Sc0vK-0008Jp-UP
+	(envelope-from <philip@balister.org>) id 1Sc3q3-0004oF-T7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jun 2012 23:04:19 +0200
-Received: by eaal1 with SMTP id l1so1686419eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2012 13:53:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=WEUeBKSCCbZFXvS4Zr1+rdWxzVEoEji9YiLZ+5ylz3E=;
-	b=UQYQTOB0qPM5nM0sxtkrX3eMR86JJWEQVaKyeZdQ4H/cr2OjUQZHx0hmSwmrb3dAOX
-	+E2G4JUGv2TNLh4vr4KGUT4qqwFk10x2a0G9wolIHvbfEU5gR+JyWmZhgeuFcvfAklYe
-	CBkaGv5/l1eylLja5FD1+JP2KZ6WRiWn2Zzdr3+zGrn8Ch2nEu8CPh6UCMWRukyZHolX
-	GBZvrhzvVrW0/VuhRwoLlW24T1ub5QoEsNPAQq09lNxng1NvUSlpKv7tU8/dXkQ9w7LT
-	6E4ovI8fjguqlHG3ANlmli7eigc2sUcu5NU+lBbVL1B2EF/PrH6FIeIhL8RfIa7XQR/m
-	1i+g==
+	Wed, 06 Jun 2012 02:11:04 +0200
+Received: (qmail 2050 invoked by uid 1003); 5 Jun 2012 23:59:57 -0000
+Received: from unknown (HELO ?192.168.1.108?) (philip@opensdr.com@71.171.27.98)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	5 Jun 2012 23:59:57 -0000
+Message-ID: <4FCE9DA3.9010704@balister.org>
+Date: Tue, 05 Jun 2012 20:00:35 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
 MIME-Version: 1.0
-Received: by 10.14.94.201 with SMTP id n49mr2384609eef.158.1338929632563; Tue,
-	05 Jun 2012 13:53:52 -0700 (PDT)
-Received: by 10.14.188.11 with HTTP; Tue, 5 Jun 2012 13:53:52 -0700 (PDT)
-In-Reply-To: <4FCE2F51.3030003@gmail.com>
-References: <4FCC5A7B.8040204@gmail.com>
-	<CAMKF1spW20v28PG+Te=5nfiGR0upuRqTRTr7G3w3SZTeR1zi7w@mail.gmail.com>
-	<4FCE2F51.3030003@gmail.com>
-Date: Tue, 5 Jun 2012 13:53:52 -0700
-Message-ID: <CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
+To: openembedded-devel@lists.openembedded.org
+References: <1338919756-24482-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+In-Reply-To: <1338919756-24482-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+X-Enigmail-Version: 1.1.2
+Subject: Re: [meta-oe][PATCH] python-numpy : Add missing dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2012 21:04:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jun 2012 00:11:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tuesday, June 5, 2012, Martin Erts=C3=A5s <martiert@gmail.com> wrote:
-> Sure. Will do it first thing in the morning. Think this actually happens
-in compile though, for some reason. Do you want me to paste it and give a
-link, or is it ok with an attachment?
+On 06/05/2012 02:09 PM, Dan McDougall wrote:
+> Numpy was missing a number of dependencies in the .bb file without which it will
+> not work.
+> 
+> Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
 
-Paste in is ok
->
-> - Martin
->
-> On 06/04/12 18:32, Khem Raj wrote:
->>
->> On Sun, Jun 3, 2012 at 11:49 PM, Martin Erts=C3=A5s<martiert@gmail.com>
- wrote:
->>>
->>> Hi.
->>>
->>> When trying to compile meta-toolchain, it crashes during
->>> gcc-cross-initial with the error:
->>>
->>> this target does not support --with-float
->>> Valied --with options are: arch arch_32 arch_64 cpu cpu_32 cpu_64 tune
->>> tune_32 tune_64
->>
->> can you post log.do_configure of this package somewhere ?
->>
->>> The reason for this is a commit that happened 2012-05-01 in openembedde=
-d
->>> core, called "gcc: Grok for callconvention-hard to enable hard float".
->>> Reverting this patches makes it compile, and still I get the
->>> --mfloat-abi=3Dhard when compiling with the resulting toolchain.
->>>
->>> I'm compiling on a x64 Linux machine, with the target being a cortexa9
->>> processor. I have the DEFAULTTUNE set to cortexa9hf-neon. What should
->>> the patch do, and what will happen if I disable it?
->>>
->>> Best regard
->>> Martin
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Acked-by: Philip Balister <philip@balister.org>
+
+> ---
+>  .../recipes-devtools/python/python-numpy_1.4.1.bb  |    5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+> index 36ab622..bae624e 100644
+> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+> @@ -24,3 +24,8 @@ do_compile_prepend() {
+>  
+>  SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
+>  SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
+> +
+> +RDEPENDS_${PN} = "python-unittest \
+> +                  python-diffutils \
+> +                  python-pprint \
+> +                 "
+
 
