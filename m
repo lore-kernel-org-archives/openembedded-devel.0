@@ -1,30 +1,30 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1ScGFx-0004IF-Oz
+	(envelope-from <schnitzeltony@googlemail.com>) id 1ScHJ4-0000yY-Tk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2012 15:26:38 +0200
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q56DG9SV009900
+	Wed, 06 Jun 2012 16:33:57 +0200
+Received: by yhjj56 with SMTP id j56so4892957yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jun 2012 08:16:09 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q56DG9DE016152
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jun 2012 08:16:09 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Wed, 6 Jun 2012
-	08:16:09 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q56DG569031481;
-	Wed, 6 Jun 2012 08:16:07 -0500
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jun 2012 08:29:01 -0500
-Message-ID: <1338989341-6344-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+	Wed, 06 Jun 2012 07:23:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=xLMAoHQW1gsh0h+ksqiR6EkmYD19Nn1AvsO84/lesIY=;
+	b=uvXuRLwYVz/NqNkQ4eZvxp8ByDSC7q8FP8uj8gqLEVEfbRYhu2LUGCZ8PJcr3aLyMz
+	G8GSixthAhetqj8kXfqvGcambhCcyQRaR1EhJVJurauL8EhY4ncv6Qz3dBOs1gxAZdJl
+	I6/ahPgvEeBUE2q4Q9ApApnrb1v7krhl39wdnSc5J7tcENX92Gk9+DS8olZJQGxFDP7m
+	puaq3pO0BVskkerctNfbr6Pwlh4dqQ2phUI8K7B5IxeSr64ge1pDWPbL1KgQg/7wu8c/
+	KdYtals9HU+SRlXwOvaNp9Rz94q76fJlKf/u5R4MCYFCxcDJiZK+jDKQvHbasDPW2aHW
+	dbmQ==
 MIME-Version: 1.0
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH] sourceipk: modify excludes to include directory names
+Received: by 10.50.203.39 with SMTP id kn7mr6649020igc.53.1338992606608; Wed,
+	06 Jun 2012 07:23:26 -0700 (PDT)
+Received: by 10.64.18.10 with HTTP; Wed, 6 Jun 2012 07:23:26 -0700 (PDT)
+Date: Wed, 6 Jun 2012 16:23:26 +0200
+Message-ID: <CALbNGRSJhn0wNvYd_ggvAgbvY6fwXLyuYS3t_GRBi4Gm4_+5Eg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: libjpeg8_8d instead of libjpeg-turbo installed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,40 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2012 13:26:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Jun 2012 14:33:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* When the S variable is set to WORKDIR in the sourceipk class
-  a list of excludes is generated to prevent packaging the
-  sourceipk data along with the actual source files.  This
-  excludes list is a regular expression that currently does not
-  also cover the directory names.  For example:
-    * temp/* is excluded but the directory temp is not
-* This leads to the sourceipk still including the contents of
-  the directories to be excluded.  By removing the wildcard the
-  directory is excluded as well and the contents are not copied
-  into the sourcipk.
+Hi
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- classes/sourceipk.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+does anybody know why libjpeg8_8d instead of libjpeg-turbo is
+installed on my image although Angstrom says
 
-diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
-index 546ec67..09d6eb8 100644
---- a/classes/sourceipk.bbclass
-+++ b/classes/sourceipk.bbclass
-@@ -110,7 +110,7 @@ sourceipk_do_create_srcipk() {
-         mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
-         if [ -e ${S} ]; then
- 	    if [ "${S}" = "${WORKDIR}" ]; then
--		excludes='--exclude ./temp/\* --exclude ./sourceipk-tmp/\* --exclude ./sourceipk-data/\*'
-+		excludes='--exclude ./temp --exclude ./sourceipk-tmp --exclude ./sourceipk-data'
- 	    fi
-             tar -C ${S} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
-         fi
--- 
-1.7.0.4
+PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
+PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
 
+Andreas
 
 
