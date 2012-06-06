@@ -1,31 +1,31 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ScILc-00080c-Vt
+	(envelope-from <martin.jansa@gmail.com>) id 1ScINh-00089r-Me
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2012 17:40:37 +0200
-Received: by bkcjm2 with SMTP id jm2so5898240bkc.6
+	Wed, 06 Jun 2012 17:42:45 +0200
+Received: by bkcjm2 with SMTP id jm2so5900763bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2012 08:30:09 -0700 (PDT)
+	Wed, 06 Jun 2012 08:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=vyymwc9vk9hjQlSRHJAFIaVRK8jZa2Hb+6LcekVHZqc=;
-	b=M/BJnuQ/zjP93IYfTU8LWPn2TSYBoHMGOqgh2btmD387ZoclUuVtfQPbGJg6lX8rSh
-	44CC1B+DNY72xMB/bA2Ku75YDM6uHuGaW4UA5bSynkzeNhzvaGJ0UWC+8NOK4PxTA6GN
-	Fjzv1P9cGdbOETxCSpsX49fMCMsmTBRcTaoYsVevHXAn4UNghCPIfEB2AYkeDFru6gXF
-	E6HojnDvVfgNe7BtODcVXdGcHVUbXJ3bPS74l5sIMVI9/OyVaKKv/QynUMob8Mu1h0hG
-	kj9QlRFoZaH6MXyWgfko+0aAz53QIcFjfOxKrA5v/ZKSQSCOKmWvnWGcV5EUsHFqytDX
-	eotA==
-Received: by 10.204.154.80 with SMTP id n16mr13211029bkw.112.1338996609750;
-	Wed, 06 Jun 2012 08:30:09 -0700 (PDT)
+	bh=DYF1elyMMDPa+EPAKZlHylEWDUZy+fU/tf9flSLieKw=;
+	b=XDPugmpltL1KLkXraS2JsqTcjstpPqbFJAj980pcGyiLjw6hLEzqzDrc4DEUzEc7cf
+	pV5HUyK2Bvz3NEznqyrqG1y4otTPXlGvP/6ABzzcN80nZPlrckik1WzW0PhOivdIWX5a
+	aOtKtqExt6Fh01wrMbvw2y9EAST3uXk5WC8mnlXdncgHtD1gumLtjgHeW+HYooXaPvNF
+	GH3b1mWk+GzhA74hmeoSIX1noMyl7SJb/1wTbjASiDt7R2soB78fjJuKcw40uxhEDp8l
+	1ZbHRmMYnfzXEaNXbRz63nJUk4yy4oSatJ556uErJRl5Yd491i0ZfS1BKJrdBgOj1vDY
+	FC0A==
+Received: by 10.204.9.216 with SMTP id m24mr12687616bkm.67.1338996738469;
+	Wed, 06 Jun 2012 08:32:18 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fu14sm253532bkc.13.2012.06.06.08.30.07
+	by mx.google.com with ESMTPS id ig1sm292744bkc.4.2012.06.06.08.32.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Jun 2012 08:30:08 -0700 (PDT)
-Date: Wed, 6 Jun 2012 17:30:21 +0200
+	Wed, 06 Jun 2012 08:32:17 -0700 (PDT)
+Date: Wed, 6 Jun 2012 17:32:32 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120606153021.GD3140@jama.jama.net>
+Message-ID: <20120606153232.GE3140@jama.jama.net>
 References: <1338996004-32583-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
 	<1338996004-32583-2-git-send-email-daniel.mcdougall@liftoffsoftware.com>
 	<4FCF76D6.4040909@mlbassoc.com>
@@ -46,13 +46,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2012 15:40:37 -0000
-X-Groupsio-MsgNum: 39165
+X-List-Received-Date: Wed, 06 Jun 2012 15:42:45 -0000
+X-Groupsio-MsgNum: 39166
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fOHHtNG4YXGJ0yqR"
+	protocol="application/pgp-signature"; boundary="u5E4XgoOPWr4PD9E"
 Content-Disposition: inline
 
---fOHHtNG4YXGJ0yqR
+--u5E4XgoOPWr4PD9E
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -85,24 +85,26 @@ b719e385c2a981d8e06"
 > Since these patches have not yet been accepted/merged, shouldn't
 > you squash them into one?
 
-Once again:
+And interestingly someone found completely different set of deps a while
+ago..
 
-http://git.openembedded.org/meta-openembedded/commit/?id=3D036eb620206041bf=
-1cf4be5a8c2a4947afb34382
+http://patchwork.openembedded.org/patch/3011/
+
+Cheers,
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---fOHHtNG4YXGJ0yqR
+--u5E4XgoOPWr4PD9E
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAk/Pd40ACgkQN1Ujt2V2gBy5AgCdEcxgzfA5Li4tSRwdz8Zx5q3u
-YiMAn3atsL6JLpW9kFQuIUx+CpaTeoB/
-=g73U
+iEYEARECAAYFAk/PeBAACgkQN1Ujt2V2gBy96QCfUxP/6e1hZEHsGwgz9/HB5l1q
+YUAAnA9IghdlczkR7hBvsQiac2NdDMRi
+=voYH
 -----END PGP SIGNATURE-----
 
---fOHHtNG4YXGJ0yqR--
+--u5E4XgoOPWr4PD9E--
