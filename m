@@ -1,41 +1,33 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <daniel.mcdougall@liftoffsoftware.com>)
-	id 1ScRoZ-0004XI-FR for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jun 2012 03:47:07 +0200
-Received: by werg55 with SMTP id g55so48303wer.6
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1ScXat-00065j-B8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jun 2012 09:57:23 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1ScXQn-0000M5-7p>; Thu, 07 Jun 2012 09:46:57 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1ScXQn-0002Y2-26>; Thu, 07 Jun 2012 09:46:57 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1ScXQl-00010g-VO
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2012 18:36:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=0L1idSdCA/V4ICGjXTqMt8zsa5Wfp7zCocJYV+zsS7E=;
-	b=RIYT1tDAZSxIHQHFxnf2QHF8eW8FGJ44yco0wJPFYag9xzj5V/vDKMMDDWEspLGp6m
-	Tx7IcWpjETd4bb54n7ZFtgY73QOoZxE5URJ/fGpPrWJe8fpl9G+4qSmM/YhrL7vbbM/E
-	yvB6qpZ50+ACyghAfIxtWwLNcUIz3Ju3lNG6yBESGD1fU2GfKZqe4o5vs/FUU6kjpgoM
-	Iij0yeme2/hQWjINuYVmhcyUan9SyI9QG4ObVQHx+4Fy3TYMni5FCOek09CeCWPO27Jf
-	/rkWh3S7dUUBTQNzo3m9GqU5P7dkJo1ZvZKrgsiEQ5eO7SymOq+x5H0Yw3vowIeYdnqa
-	Hxgg==
-MIME-Version: 1.0
-Received: by 10.216.216.95 with SMTP id f73mr227302wep.149.1339032999651; Wed,
-	06 Jun 2012 18:36:39 -0700 (PDT)
-Received: by 10.223.76.200 with HTTP; Wed, 6 Jun 2012 18:36:39 -0700 (PDT)
-X-Originating-IP: [69.180.64.152]
-In-Reply-To: <4FCFEB16.1010309@balister.org>
-References: <1338996004-32583-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-	<1338996004-32583-2-git-send-email-daniel.mcdougall@liftoffsoftware.com>
-	<4FCF76D6.4040909@mlbassoc.com>
-	<20120606153232.GE3140@jama.jama.net>
-	<CAG3aBq5_5y2QTHu94HYZ-hY+J0i23tsfiRcc58NWQYLUaJ8VkQ@mail.gmail.com>
-	<4FCFEB16.1010309@balister.org>
-Date: Wed, 6 Jun 2012 21:36:39 -0400
-Message-ID: <CAG3aBq6ouAB6O=fzLMhjZpv308cy9DR4tsx2=77Omym4u5a0AA@mail.gmail.com>
-From: Daniel McDougall <daniel.mcdougall@liftoffsoftware.com>
+	Thu, 07 Jun 2012 09:46:56 +0200
+Date: Thu, 7 Jun 2012 09:46:55 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnddVCmGA1+nK8s1caMTy+jGvKuGI9PIFiS4jNMskG8+zrDvO5LcUHk+YYcEBX1/CtMtC7U
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH v2 2/2] python-numpy : Correct difflib dependency.
+Message-ID: <20120607074655.GA3311@mi.fu-berlin.de>
+References: <CALbNGRSJhn0wNvYd_ggvAgbvY6fwXLyuYS3t_GRBi4Gm4_+5Eg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRSJhn0wNvYd_ggvAgbvY6fwXLyuYS3t_GRBi4Gm4_+5Eg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: libjpeg8_8d instead of libjpeg-turbo installed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2012 01:47:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jun 2012 07:57:23 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jun 6, 2012 at 7:43 PM, Philip Balister <philip@balister.org> wrote=
-:
->
->
-> I wonder if you take a different path through numpy, will it import some
-> additional python modules?
->
+On Wed, Jun 06, 2012 at 04:23:26PM +0200, Andreas Müller wrote:
+> Hi
+> 
+> does anybody know why libjpeg8_8d instead of libjpeg-turbo is
+> installed on my image although Angstrom says
+> 
+> PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
+> PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
+> 
+> Andreas
 
-I don't think so.  I ran through a bunch of tests with my python-numpy
-package and all went well.  I didn't encounter any errors.  Given, I didn't
-test *everything* :)
+try bitbake -DDD to see why it is choosen.
 
---=20
-Dan McDougall - Chief Executive Officer and Developer
-Liftoff Software =E2=9C=88 Your flight to the cloud is now boarding.
-904-446-8323
+Bye Henning
+
 
