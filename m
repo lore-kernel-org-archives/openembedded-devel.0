@@ -1,38 +1,38 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1ScvrT-0004PX-0K
+	(envelope-from <koen@dominion.thruhere.net>) id 1ScvrV-0004PX-0e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jun 2012 11:52:07 +0200
+	Fri, 08 Jun 2012 11:52:09 +0200
 Received: by mail-ey0-f175.google.com with SMTP id l1so982280eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jun 2012 02:41:39 -0700 (PDT)
+	Fri, 08 Jun 2012 02:41:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=o/wCudp46g10FBgWmGe4vdbNBskP622J/JvHr5g0xBY=;
-	b=aEiQmAMS+ABaMdW9zuHURGbjK7JF7nzjZg2LLDekMhmLZ2P+6kVgI1oNTpj+B2hIWG
-	uSGz79wn3eooojldCJudubLDQOaobEsNTf7P7gAgeNwihGh5SOAOpyO3u3bG+6/sWhdm
-	HOVPGmdyzBXQSh2a1wBH5warI/eSzQCuYn2EuT2ravaYTmN2+patjDVJQGd/xtsUs16C
-	39hzORfOWyTM61+ohGp6gaLQBeJMwTMb8o9YKYSe/U3Jz7hiwrMzbA/5Nmwpl2QvAFby
-	k35eCDXG9A92pzPO8j8yJdLDQsU5SnNuPtHaVRSKDtgE061UIHwuqvhn47lD7b4B8KwK
-	sHig==
-Received: by 10.14.119.197 with SMTP id n45mr3350956eeh.204.1339148499701;
-	Fri, 08 Jun 2012 02:41:39 -0700 (PDT)
+	bh=/DtJb2BIVG2uc71H3c7nwodT9GAbaDQCx/ym3o29F3A=;
+	b=gZ0b0FCN+dBuwnH0qTVoqxiDIZY2AsyjDcC2PKLK4xirabVMcg+7wJ9G9BjDqLsl4W
+	0e83a9zYfPJ0+iRqIOsZ4yVkUtsHeyQh5QMqFC3SJ4DUMGJV68rZk21okx45nMP/tq1O
+	gjmuNyXCQZSHqacIg4L0ScJxxq6i1UNE8CXy8qBk+Q2Nz2eidIY9tqovthDOHGtiGemf
+	OS6Pr9eSXe0CkJAYaY8TyKklLXWgTQW7ac+zgZCqiYMInl5j0+3mIlWICbWl6GRynx+X
+	Y+h65spaR0Q1JJRDyg1FF255wxMeb9WbzIK/YLoCjr44XKjaLx5Q0ghI3uBKWhhL+kpu
+	pQTQ==
+Received: by 10.14.119.140 with SMTP id n12mr3459779eeh.30.1339148501680;
+	Fri, 08 Jun 2012 02:41:41 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id y54sm20217236eef.10.2012.06.08.02.41.38
+	by mx.google.com with ESMTPS id h53sm20271979eea.1.2012.06.08.02.41.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 08 Jun 2012 02:41:38 -0700 (PDT)
+	Fri, 08 Jun 2012 02:41:41 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jun 2012 11:40:41 +0200
-Message-Id: <1339148443-9467-12-git-send-email-koen@dominion.thruhere.net>
+Date: Fri,  8 Jun 2012 11:40:42 +0200
+Message-Id: <1339148443-9467-13-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1339148443-9467-1-git-send-email-koen@dominion.thruhere.net>
 References: <1339148443-9467-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmrEHL15JSuxHqWh3c0SkZH098h9BMhxjhnk/K9Q0nntuWvYHGVuw69nyGdSiyGYsSI4TaF
+X-Gm-Message-State: ALoCoQl3y5Yeszc+IHoQcraf6+vnG4MvxN49IjG5M3CCQkP1nYDKXoTIF2o/9SVnOrv6hCWrSyLL
 Cc: Koen Kooi <koen@dominion.thruhere.net>, eric@eukrea.com
-Subject: [for-denzil][meta-oe][PATCH 12/14] gateone: update to 1.1
+Subject: [for-denzil][meta-oe][PATCH 13/14] gateone: add config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,86 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2012 09:52:07 -0000
+X-List-Received-Date: Fri, 08 Jun 2012 09:52:09 -0000
 
-Sort RDEPENDS alphabetically as well.
+The config file changes some options to have a lower latency for key input
 
 Based on https://github.com/liftoff/meta-oe/commit/9cb653845d7bb4416d2e8e6c5a09a54e08dd7578 by Dan McDougall
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../recipes-connectivity/gateone/gateone_git.bb    |   45 +++++++++++---------
- 1 file changed, 25 insertions(+), 20 deletions(-)
+ meta-oe/recipes-connectivity/gateone/gateone/server.conf |    5 +++++
+ meta-oe/recipes-connectivity/gateone/gateone_git.bb      |    5 ++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/gateone/gateone/server.conf
 
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone/server.conf b/meta-oe/recipes-connectivity/gateone/gateone/server.conf
+new file mode 100644
+index 0000000..988b0d0
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/gateone/gateone/server.conf
+@@ -0,0 +1,5 @@
++session_logging = False
++origins = "*"
++command = "/var/lib/gateone/plugins/ssh/scripts/ssh_connect.py -S '/tmp/gateone/%SESSION%/%SHORT_SOCKET%' --sshfp -a '-oUserKnownHostsFile=%USERDIR%/%USER%/ssh/known_hosts'"
++log_file_prefix = "/var/log/gateone.log"
++
 diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-index 983dc24..bfb3274 100644
+index bfb3274..d56c848 100644
 --- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
 +++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-@@ -2,10 +2,10 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+@@ -2,13 +2,14 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
  LICENSE = "AGPLv3"
  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
  
--PR = "r1"
-+PR = "r4"
+-PR = "r4"
++PR = "r5"
  
--PV = "1.0"
--SRCREV = "0dfa4196ca514e075199c0dbf849353c6aa2976b"
-+PV = "1.1"
-+SRCREV = "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
+ PV = "1.1"
+ SRCREV = "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
  SRC_URI = "git://github.com/liftoff/GateOne.git \
             file://gateone-avahi.service \
             file://gateone.service \
-@@ -29,28 +29,33 @@ SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE = "gateone.service"
++           file://server.conf \
+           "
  
- FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir}"
--RDEPENDS_${PN} = "python-tornado \
--                  python-datetime \
--                  python-shell \
--                  python-subprocess \
--                  python-terminal \
--                  python-io \
-+RDEPENDS_${PN} = "file \
-+                  mime-support \
-+                  openssh-ssh \
-                   python-compression \
--                  python-syslog \
--                  python-misc \
-                   python-crypt \
--                  python-netclient \
-+                  python-datetime \
-                   python-email \
-+                  python-fcntl \
-                   python-html \
--                  python-textutils \
--                  python-pyopenssl \
--                  findutils \
--                  python-simplejson \
-+                  python-imaging \
-+                  python-io \
-+                  python-json \
-+                  python-logging \
-+                  python-misc \
-                   python-multiprocessing \
-+                  python-netclient \
-                   python-pkgutil \
--                  python-imaging \
-+                  python-pyopenssl \
-+                  python-re \
-+                  python-readline \
-+                  python-shell \
-+                  python-simplejson \
-+                  python-subprocess \
-+                  python-syslog \
-+                  python-terminal \
-+                  python-textutils \
-+                  python-tornado \
-+                  python-unixadmin \
-                   python-xml \
--                  file \
--                  openssh-ssh \
--                  mime-support \
-                  "
+ S = "${WORKDIR}/git"
+@@ -22,6 +23,8 @@ do_install_append() {
+ 
+ 	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+ 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
++
++	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
+ }
+ 
+ NATIVE_SYSTEMD_SUPPORT = "1"
 -- 
 1.7.10
 
