@@ -1,32 +1,34 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Sd0P7-0001GL-1e
+	(envelope-from <elvis.dowson@gmail.com>) id 1Sd0kt-0004tW-VP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jun 2012 16:43:09 +0200
-Received: by wgbdr1 with SMTP id dr1so888139wgb.24
+	Fri, 08 Jun 2012 17:05:40 +0200
+Received: by wibhm14 with SMTP id hm14so616987wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jun 2012 07:32:39 -0700 (PDT)
+	Fri, 08 Jun 2012 07:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Ty8o03Pg0FDy1TXitF77G42yTSSu5JGGsBUN5wisKmI=;
-	b=CHaifhWpg30GK38gxaN4iuDtQt4KbUzXN6o+8mYC+JyV9bDPY/WPsMUllxaTtIFAbh
-	mxGJ5pW3tMVA03psIrxfksU5v7L+IcFvEJdW2Bw69UttUB6HN/jLUQbehsKRBJCNv242
-	WxEEKjM2Pm1FnF6aXRN6kJZ0D/48CVowxcuH4P/e21MU6ONuOWxYMyTidOe1fOJuJV5l
-	It40RJzLhE5H5rk195dva9SQAx6wpWWmkrebZUaHfSqSkru5mPsCMdiw5pINyek/VVFP
-	SzCpWtz1wV9k+U/ELg6u/6g/qYcaGB8xLroOuDxmbAQzu3e2Jp6Ey8lQ/k3fG+wn/P9F
-	Jppg==
-Received: by 10.180.78.233 with SMTP id e9mr891403wix.5.1339165959455;
-	Fri, 08 Jun 2012 07:32:39 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=uYaOQrNpCdRl2yCFPaBDmWdRy+2GMspuRnZc4J1AxmM=;
+	b=kRjmfu53McS27bE4Z8DlNQUOqo0tUNvyk7l+q3HmXOAs8f/KY9SBXD/5AyxYLA2za1
+	Q+WwRqz4tWS9VzwSCQbArko+zUP7S/F3HJi4pktMsOB/3G+PftrPIVqR/vDT3kuB/BR2
+	bHMsps867yaMNZD+6awHvb6M2SeONqiXGZyt8xuAWb7Lp3y1gjcu1U5nvnABuOqhEJNW
+	RtpPtdHq7ZaZs91LVsc5on7hYUMrmIzGnSx+HRBpil4SCTc5wjWe3kyvHtfVmUmuLhaJ
+	tkOkmMhmEtvdyDcPFHHjZFfwxFPn4OK2MEwIl56TJhFAd3NQkr8qX+fiPHomaufDzCyd
+	q63A==
+Received: by 10.216.228.224 with SMTP id f74mr1465356weq.217.1339167310207;
+	Fri, 08 Jun 2012 07:55:10 -0700 (PDT)
 Received: from localhost.localdomain (89.Red-83-42-2.dynamicIP.rima-tde.net.
 	[83.42.2.89])
-	by mx.google.com with ESMTPS id e20sm1540560wiv.7.2012.06.08.07.32.37
+	by mx.google.com with ESMTPS id d3sm2712304wiz.9.2012.06.08.07.55.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 08 Jun 2012 07:32:38 -0700 (PDT)
+	Fri, 08 Jun 2012 07:55:09 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jun 2012 16:32:21 +0200
-Message-Id: <1339165942-53107-1-git-send-email-elvis.dowson@gmail.com>
+Date: Fri,  8 Jun 2012 16:54:48 +0200
+Message-Id: <1339167288-21116-1-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <y>
+References: <y>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
 Subject: [meta-xilinx] xilinx-kernel: Change string comparision checks to use strict POSIX compliance.
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,10 +44,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2012 14:43:09 -0000
+X-List-Received-Date: Fri, 08 Jun 2012 15:05:40 -0000
 
 This commit fixes an issue with string comparision checks failing because
-of not using strict POSIX compliance, therby failing to copy the device
+of not using strict POSIX compliance, thereby failing to copy the device
 tree from the hardware model to the linux kernel device tree.
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
