@@ -1,37 +1,37 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Sdq3a-0001fg-2T
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Sdq3b-0001fb-4U
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jun 2012 23:52:22 +0200
-Received: by mail-we0-f175.google.com with SMTP id g55so1679484wer.6
+	Sun, 10 Jun 2012 23:52:23 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dr1so2267906wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2012 14:41:51 -0700 (PDT)
+	Sun, 10 Jun 2012 14:41:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=Tdhf/UtpYHSVwRdkp6zUI4Qziiv0zctZ/mWy7X7LaZE=;
-	b=MQI9N8/xEmQxMMI4Q90cMa0bQ6alzgD9CYUpPN6+4RFlgHCvG6yOvV8IA/NHjw5hpq
-	GdJ+/4q4D8h1hLl/qmS5FRNcCj7Wh9EwdwmsjNvV9aOlq9Cx6XOHGWgtip5GgdezLfF6
-	gmnzKK61sjEb9p8EwFNfEZnzh8ieA/dePe8bkLQjJHeG3SYcZgvGAxdiGCpo8khPziL7
-	fb7h9WyyuGuVAyiC4vSGrvWiJZzCVbvshq3WtkKYrwSqD8MJqG1NxcbplSAfrp29F6v5
-	ALcKsxlZ8CQM9QLg+7PaXNpGUdOPKRj6tUjsPJvfj3qbbqlbVh1JAhvvKu5nb5/BNEnm
-	0FKg==
-Received: by 10.180.102.228 with SMTP id fr4mr15711915wib.6.1339364511437;
-	Sun, 10 Jun 2012 14:41:51 -0700 (PDT)
+	bh=p1nYhR0INE1+nQyGas54SCWNhVSeZeZTZ5y2cCsLPKM=;
+	b=UM0lDOiQsR5LS9XemnldckzLoFQGV6Wiskf+9ICPYyQsPPJdRA/caFLNv0ALpaldG8
+	qpETCwnNcl3FipoadPEb5CaOpPYXr6Mi090gJJmefXpX8aSRwNsfrJOsG9FLK3mP8ZaC
+	2aG0Fl4elx6bCcvxzAvYccNJLCOt+hginPWIyoM8aoVTbfh4x2NS/EEb041+ehS5FWlt
+	FkSPYugNwPrz4uUt+m2p/dyy9uVfESlfA3fzzqnkKIL2a9odPSgE/p1QF6ajDG6Av8dI
+	M5T9AMO1X6guveXS/4ZcYGZf//okBAx2IJcmMK6oa3BKV2drEJCCpBSBPsnOVkoGKW9E
+	AvOg==
+Received: by 10.180.99.70 with SMTP id eo6mr15687422wib.17.1339364512834;
+	Sun, 10 Jun 2012 14:41:52 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A2104.dip.t-dialin.net. [91.10.33.4])
-	by mx.google.com with ESMTPS id gc6sm19758306wib.0.2012.06.10.14.41.50
+	by mx.google.com with ESMTPS id gc6sm19758306wib.0.2012.06.10.14.41.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 10 Jun 2012 14:41:50 -0700 (PDT)
+	Sun, 10 Jun 2012 14:41:52 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2012 23:46:46 +0200
-Message-Id: <1339364820-2880-14-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 10 Jun 2012 23:46:47 +0200
+Message-Id: <1339364820-2880-15-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1339364820-2880-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1339364820-2880-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [RFC, meta-oe 13/27] net-snmp: move systemd support to meta-systemd
+Subject: [RFC, meta-oe 14/27] atftp: move systemd support to meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,102 +45,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2012 21:52:22 -0000
+X-List-Received-Date: Sun, 10 Jun 2012 21:52:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |   17 ++---------------
- .../net-snmp/net-snmp}/snmpd.service               |    0
- .../net-snmp/net-snmp}/snmptrapd.service           |    0
- .../net-snmp/net-snmp}/systemd-support.patch       |    0
- .../net-snmp/net-snmp_5.7.1.bbappend               |   19 +++++++++++++++++++
- 5 files changed, 21 insertions(+), 15 deletions(-)
- rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/snmpd.service (100%)
- rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/snmptrapd.service (100%)
- rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/systemd-support.patch (100%)
- create mode 100644 meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
+ meta-oe/recipes-extended/atftp/atftp_0.7.bb        |   10 +++-------
+ .../recipes-extended/atftp/atftp}/atftpd.service   |    0
+ .../recipes-extended/atftp/atftp_0.7.bbappend      |   10 ++++++++++
+ 3 files changed, 13 insertions(+), 7 deletions(-)
+ rename {meta-oe/recipes-extended/atftp/files => meta-systemd/meta-oe/recipes-extended/atftp/atftp}/atftpd.service (100%)
+ create mode 100644 meta-systemd/meta-oe/recipes-extended/atftp/atftp_0.7.bbappend
 
-diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
-index 83df80a..f1e42b5 100644
---- a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
-+++ b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
-@@ -1,28 +1,18 @@
- require net-snmp.inc
--inherit systemd
+diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
+index 1af4b63..ff1e11d 100644
+--- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
++++ b/meta-oe/recipes-extended/atftp/atftp_0.7.bb
+@@ -3,19 +3,15 @@ SECTION = "network"
+ HOMEPAGE = "http://packages.debian.org/atftp"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+-PR = "r3"
++PR = "r4"
  
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
- LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
+ SRC_URI = "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive \
+            ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \
+-           file://atftpd.init \
+-           file://atftpd.service"
++           file://atftpd.init"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-         file://sync-with-5.7-branch.patch \
-         file://libnl-3-support.patch \
--        file://systemd-support.patch \
--        file://snmpd.service \
--        file://snmptrapd.service \
-         file://init \
-         file://snmpd.conf \
-         file://snmptrapd.conf"
+ S = "${WORKDIR}/atftp-${PV}.dfsg"
  
--EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no --with-systemd "
-+EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
- EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
- 
--SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
--                    ${PN}-server-snmptrapd-systemd"
+-inherit autotools update-rc.d systemd useradd
 -
--SYSTEMD_SERVICE_${PN}-server-snmpd-systemd = "snmpd.service"
--SYSTEMD_SERVICE_${PN}-server-snmptrapd-systemd =  "snmptrapd.service"
--
- do_configure_prepend() {
-         gnu-configize -f
-         # We better change sources and re-autoconf here, but
-@@ -37,6 +27,3 @@ CCACHE = ""
+-SYSTEMD_PACKAGES = "atftpd-systemd"
+-SYSTEMD_SERVICE_atftpd-systemd = "atftpd.service"
++inherit autotools update-rc.d useradd
  
- SRC_URI[md5sum] = "c95d08fd5d93df0c11a2e1bdf0e01e0b"
- SRC_URI[sha256sum] = "7c71c9650c65b715356547e20ca2dbe6313944278af8cc19c32a5337f46b181f"
--
--RDEPENDS_${PN}-server-snmpd-systemd = "${PN}-server-snmpd"
--RDEPENDS_${PN}-server-snmptrapd-systemd = "${PN}-server-snmptrapd"
-diff --git a/meta-oe/recipes-extended/net-snmp/files/snmpd.service b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmpd.service
+ INITSCRIPT_PACKAGES = "${PN}d"
+ INITSCRIPT_NAME_${PN}d = "atftpd"
+diff --git a/meta-oe/recipes-extended/atftp/files/atftpd.service b/meta-systemd/meta-oe/recipes-extended/atftp/atftp/atftpd.service
 similarity index 100%
-rename from meta-oe/recipes-extended/net-snmp/files/snmpd.service
-rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmpd.service
-diff --git a/meta-oe/recipes-extended/net-snmp/files/snmptrapd.service b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmptrapd.service
-similarity index 100%
-rename from meta-oe/recipes-extended/net-snmp/files/snmptrapd.service
-rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmptrapd.service
-diff --git a/meta-oe/recipes-extended/net-snmp/files/systemd-support.patch b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/net-snmp/files/systemd-support.patch
-rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
-diff --git a/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
+rename from meta-oe/recipes-extended/atftp/files/atftpd.service
+rename to meta-systemd/meta-oe/recipes-extended/atftp/atftp/atftpd.service
+diff --git a/meta-systemd/meta-oe/recipes-extended/atftp/atftp_0.7.bbappend b/meta-systemd/meta-oe/recipes-extended/atftp/atftp_0.7.bbappend
 new file mode 100644
-index 0000000..a889859
+index 0000000..a5553df
 --- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
-@@ -0,0 +1,19 @@
++++ b/meta-systemd/meta-oe/recipes-extended/atftp/atftp_0.7.bbappend
+@@ -0,0 +1,10 @@
 +FILESEXTRAPATHS := "${THISDIR}/${PN}"
 +
 +PRINC := "${@int(PRINC) + 1}"
 +
 +inherit systemd
 +
-+SRC_URI += " \
-+        file://systemd-support.patch \
-+        file://snmpd.service \
-+        file://snmptrapd.service \
-+"
++SRC_URI += "file://atftpd.service"
 +
-+EXTRA_OECONF += "--with-systemd"
-+
-+SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
-+                    ${PN}-server-snmptrapd-systemd"
-+
-+SYSTEMD_SERVICE_${PN}-server-snmpd-systemd = "snmpd.service"
-+SYSTEMD_SERVICE_${PN}-server-snmptrapd-systemd =  "snmptrapd.service"
++SYSTEMD_PACKAGES = "atftpd-systemd"
++SYSTEMD_SERVICE_atftpd-systemd = "atftpd.service"
 -- 
 1.7.4.4
 
