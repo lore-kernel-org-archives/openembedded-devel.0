@@ -1,34 +1,36 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Se7yp-0006Rq-RC for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jun 2012 19:00:39 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Se7oZ-0001eC-QI for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jun 2012 18:50:03 +0200
-Received: from adsl-68-88-77-36.dsl.rcsntx.swbell.net ([68.88.77.36])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2012 18:50:03 +0200
-Received: from koen by adsl-68-88-77-36.dsl.rcsntx.swbell.net with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1Se812-0006YC-Ed
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jun 2012 19:02:56 +0200
+Received: by vcbfl15 with SMTP id fl15so2216103vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2012 18:50:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 11 Jun 2012 11:44:52 -0500
-Message-ID: <jr57a2$tsp$2@dough.gmane.org>
+	Mon, 11 Jun 2012 09:52:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=Gs3EXer8EmZH4pJgm9yWgHh/RFrf7+UPERWU+DCdYgk=;
+	b=YwTYIVsvtRIryIdgJW1y/7JagFKJFvstrXkyRJi/cocaGkOaZD7DODz6+vJ8ID1Fi4
+	to1jTKad4Y1JCrl1cn9Z+t4aoE0EduQ3p3xQWVCAaHfW9BCpNDiohVRQy0TrBTR6jqf+
+	MDek/oKs9Orurlh7MWAVlsrbfJQBdvu9W2fhWpXs17xa/r/kV5O6t2LKBKM0ma8NO0NF
+	D2ZVacfdzU1rbcsWIXnbWz95Vl0bO7CKbN8+/6yBN0gGqSsL1Hyf4Zj9jyFmIq/BFRRY
+	Qg19qYGyCO7q617Zb/Nm/b2xLtxQWi8SImmWWS/j9Q3ZoLyLMOxvrXORIDcWW2JXvWSA
+	6cOw==
+MIME-Version: 1.0
+Received: by 10.52.33.100 with SMTP id q4mr10826349vdi.59.1339433542421; Mon,
+	11 Jun 2012 09:52:22 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.155.130 with HTTP; Mon, 11 Jun 2012 09:52:22 -0700 (PDT)
+In-Reply-To: <jr57a2$tsp$2@dough.gmane.org>
 References: <cover.1339428767.git.otavio@ossystems.com.br>
 	<35554bb06b4c779574cdb162c1701b0791afd459.1339428767.git.otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: adsl-68-88-77-36.dsl.rcsntx.swbell.net
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <35554bb06b4c779574cdb162c1701b0791afd459.1339428767.git.otavio@ossystems.com.br>
-X-Enigmail-Version: 1.4.1
+	<jr57a2$tsp$2@dough.gmane.org>
+Date: Mon, 11 Jun 2012 13:52:22 -0300
+X-Google-Sender-Auth: xe-kCSV7hXBBneLeKcjCpB-h24k
+Message-ID: <CAP9ODKo74pPDkwQB9z2DFaVX4XK+3Lb3if0bAo1Su2S94i3FZg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH][meta-oe 2/3] nodejs: force use of -mfpu-abi=soft for ARMv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,37 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2012 17:00:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Jun 2012 17:02:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Jun 11, 2012 at 1:44 PM, Koen Kooi <koen@dominion.thruhere.net>wrote:
 
-Op 11-06-12 10:34, Otavio Salvador schreef:
-> The build system defaults to 'softfp' but this use hardware instructions
-> that are not available making node to fail to run on ARMv5 based CPUs.
+> Op 11-06-12 10:34, Otavio Salvador schreef:
+> > The build system defaults to 'softfp' but this use hardware instructions
+> > that are not available making node to fail to run on ARMv5 based CPUs.
+>
+> That's not true, you are probably getting a wrong -mfpu setting. This patch
+> changes the ABI, which is the wrong thing to do, NAK.
+>
 
-That's not true, you are probably getting a wrong -mfpu setting. This patch
-changes the ABI, which is the wrong thing to do, NAK.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+This is indeed the problem but this caused by the build system and the only
+way I found to change it was this way. Can you propose another way to fix
+it?
 
-iQIcBAEBAgAGBQJP1iCEAAoJEHZqAkdh1vT60rUP/RscVAFvhgbYe5fbkvSM+MI6
-M+lWqbjSfMwrk+R4RlNQkJVWIiiWiCnsL3d5DhVa6gonvKpFVkPs73w4qZKfWV6E
-fawSkXiOMJIYnnxJ45Gcx9RwRu71lRAM+F/22OZIBdEKWreYJ7NB/ZYM/9Rglvgs
-xwaaDix0fGa5OJsgLyRXXiwQGAR8ii+nAnJ6VyvuKXevU5cVmZ42N/NpnhajtB6q
-zx1O7hleUeY96AUY09xInXi3x4XY/LxTg361dND7TZN772xHtZh1ovM3RPSaMo8Z
-enQqLfc1tOmkTva4Bs1MXVkAPPeKzGEGdeW4f+tjvQmhXOnWez6U3JoKok94mw8G
-V6rU1QH57/2hrfl9EEzXbvIBkWm9YIzjEW1EpFF3piqlEMrm1Tbmp831NDKVqfnh
-gYRP0l6fMb62GaxXqY2vyvpuYxV/qhJe739FAjmYi9NFFuaShnrDC0EyBHb32luL
-cNDHynug716QDVrv3+zsgp/5GgmpDgNfJBjnyxvnBfVrkxn223sadsi83ZWE2vOA
-4pjE11IaK3RGer9dsAzxYegZiavad8HU9DZLJR1mlzNmHoYJc/EC3euos9l/tlAE
-EJ814hogHhvSfzjgLfI6+Nom9s9I2shl1p+Osy6av3sf25v1fJPBJmd+HdrIovx5
-jR8BLzOaWBpNzVFxZgAN
-=9VGf
------END PGP SIGNATURE-----
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
