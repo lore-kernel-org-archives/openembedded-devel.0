@@ -1,41 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-gh0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1SdzkY-0007l4-Hi
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Se0Ws-0000Ou-TS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jun 2012 10:13:22 +0200
-Received: by eekd49 with SMTP id d49so1879411eek.6
+	Mon, 11 Jun 2012 11:03:20 +0200
+Received: by ghbz2 with SMTP id z2so2135087ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2012 01:02:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	bh=fMNhdanJSm0WTZIgCq7Bc3FHJzuBm5di9CXJ9kFvQus=;
-	b=rrmtRTuOu7QnH37c3gGowZL7VZE1sF7oJ1hgtJ+RSGXrBZrNhBKTr3fjUHjhiVroaU
-	BMpF44cE5FOcbvlh4VcO411XpY4WkPp4xci16zZCOdZdcdrQbWbMkA6Rn/2LskOR0BTb
-	/IZv/cARVg244PeG/QR7nZBSj/2iYEeIjmKKZ4HufW/PWjrkE+Y/nML5vVjheICDuWad
-	PU4JSYYrntBlKesHW2JwUYjxPTQdnHomanmC2KioUvsMYwAGZTPXFCdyjznMAJhIviHI
-	YYWyEa1/If8STu1NnZ1KggE4J5+E4n9fZ3xBk+WhtHVIErKs8l1LHMQX+8W9MPTo2W+b
-	clQg==
-Received: by 10.14.98.201 with SMTP id v49mr5816790eef.210.1339401769124;
-	Mon, 11 Jun 2012 01:02:49 -0700 (PDT)
-Received: from [10.54.74.16] (64-103-25-233.cisco.com. [64.103.25.233])
-	by mx.google.com with ESMTPS id e45sm49572048eeb.6.2012.06.11.01.02.47
-	(version=SSLv3 cipher=OTHER); Mon, 11 Jun 2012 01:02:47 -0700 (PDT)
-Message-ID: <4FD5A560.10707@gmail.com>
-Date: Mon, 11 Jun 2012 09:59:28 +0200
-From: =?UTF-8?B?TWFydGluIEVydHPDpXM=?= <martiert@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.4) Gecko/20120502 Thunderbird/10.0.4
+	Mon, 11 Jun 2012 01:52:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=KwstgK9MqiNfJWMpZw/czMgKx4ED903bHgKdveSSXgY=;
+	b=VMvimqkxdILrg3uMCFgmlxMR+ekttJqEqazZ0m7Eiw+0S4MPXHZXKuainlMBn6bCXi
+	JOzA26DO6v2x/p130aToo+R6tHELavgJJgGL3xYsrDLvgFX/eOvzACoY5S0s3lJb2JQS
+	gHYfA6DSnAO1DR9g1ZO5l/GwQ9tw+a8a4f4BHUgr7pwazbayuSYAScfrntVYIe+oG018
+	pRHcQNdQ3fERUN4VoZOYyeFX3IyVd5TjWkffmpX48UfBJFbQuUG9eZIsKPyZMtB9TOoe
+	49P4mWtWGymW9U1MaQ/gzuwl4yIZWwFOd9bV6MBs2d+BWyiOEqsQjApjooVhRe9EfI8o
+	GtNw==
 MIME-Version: 1.0
+Received: by 10.50.163.99 with SMTP id yh3mr5727196igb.53.1339404765103; Mon,
+	11 Jun 2012 01:52:45 -0700 (PDT)
+Received: by 10.64.18.10 with HTTP; Mon, 11 Jun 2012 01:52:45 -0700 (PDT)
+In-Reply-To: <CAMKF1sqZt_v_kJi9NDQt3LQDqMevGZP8_2hGFbRYE6k--DMbxg@mail.gmail.com>
+References: <1339364820-2880-1-git-send-email-schnitzeltony@googlemail.com>
+	<1339364820-2880-4-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1sqZt_v_kJi9NDQt3LQDqMevGZP8_2hGFbRYE6k--DMbxg@mail.gmail.com>
+Date: Mon, 11 Jun 2012 10:52:45 +0200
+Message-ID: <CALbNGRS8ghCzOE6UFW9gKk+Ry8cRiE9nHN9e4-ZuJzqKxrWgwg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4FCC5A7B.8040204@gmail.com>
-	<CAMKF1spW20v28PG+Te=5nfiGR0upuRqTRTr7G3w3SZTeR1zi7w@mail.gmail.com>
-	<4FCE2F51.3030003@gmail.com>
-	<CAMKF1sqdnyayLoU0Fdhxgy07uUdHDiB3D6pF5gpZpjb8HFFx7w@mail.gmail.com>
-	<4FCEF69C.1070907@gmail.com> <4FD3CD4D.1090909@gmail.com>
-In-Reply-To: <4FD3CD4D.1090909@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gcc-crosssdk-initial can not compile. Get message: this target does not support --with-float
+Subject: Re: [RFC, meta-oe 03/27] layer.conf/README: search directory structure for bbappends changed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2012 08:13:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 11 Jun 2012 09:03:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-This fixed it. Thanks.
+On Mon, Jun 11, 2012 at 1:12 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sun, Jun 10, 2012 at 2:46 PM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+>> -BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bb=
+append"
+>> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/*/recipes-*/*/*.=
+bbappend"
+>
+> why only for bbappends and why not for bb files as well can you explain t=
+his
+> change a bit and its usecases
+>
+I think all systemd related stuff should finally live in meta-systemd
+to make other layers independent of using systemd or not. I separated
+two types of metadata:
+1. Recipes/classes only found in this layer - like systemd itself (or
+later e.g dietsplash designed to work only with systemd)
+2. Extends of other layers (currently meta-oe/meta-gnome/meta-efl -
+and in the future e.g oe-core/meta-ti/meta-angstrom...). For this an
+additional directory hierarchy was added to give a better chance to
+BBMASK. E.g a user wants to use systemd but does not want meta-ti. The
+idea of only having bbappends was to force only appending not
+overriding recipes of other layers.
 
-- Martin
-
-On 06/10/12 00:25, Khem Raj wrote:
-> On 6/5/2012 11:20 PM, Martin Ertsås wrote:
-> > The configure log is at: http://pastebin.com/93h1rw7G while the
-> > compile log, which is what actually failes, is at:
-> > http://pastebin.com/2iXYrCDa
->
->
-> can you try this patch please
->
-> http://patchwork.openembedded.org/patch/29589/
->
-> and report if it fixes the problem.
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+Andreas
 
 
