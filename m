@@ -1,35 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SesWT-0003MR-N3
+	(envelope-from <elvis.dowson@gmail.com>) id 1SesfS-0003dn-C5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jun 2012 20:42:29 +0200
-Received: by pbbrq2 with SMTP id rq2so2576578pbb.6
+	Wed, 13 Jun 2012 20:51:46 +0200
+Received: by dalh21 with SMTP id h21so1424073dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2012 11:31:52 -0700 (PDT)
+	Wed, 13 Jun 2012 11:41:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:subject:date:message-id
-	:to:mime-version:x-mailer;
-	bh=Twj3cr2iGPkDc4fHS3/7BXs8v/p8iOtHfJzFPFBKdLk=;
-	b=YdzE4IZMvDNoLf2h9nxMhVUxXz/LIX6ph2Xth0/CNXXhddGBpk/7umNvcoz0juUemR
-	eFatkzVZYxDLJn4dFynDgwB0BmNY2lcl0BWMAAyt6Rg2MZjnB6mikXTZ7Q7kdRQk793Z
-	mCSl/cV84UqgM8PXJftNRzGECA8lDJsKB4NveUhdNrp/NCNB3AmLNnCb0Otimzqj2rmE
-	QFqr2Ls0sMSN+chskc542kwItYIxI8ZCM43uq/W0m150PXUPAp1p6tln5+6jI/BvPLe5
-	pw0MQF9HbMuINkPY0aOVLzDjFX7xOSl7N+eCB/ch88m6EwusBrwaN3PVgHewFrExO5/n
-	2efw==
-Received: by 10.68.200.102 with SMTP id jr6mr54016905pbc.0.1339612312582;
-	Wed, 13 Jun 2012 11:31:52 -0700 (PDT)
-Received: from [192.168.1.102] ([94.205.109.242])
-	by mx.google.com with ESMTPS id u5sm6529731pbu.76.2012.06.13.11.31.50
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=yPIgMkHkLCDAaYrmU8KNuqrKwwKEWppxbADj4TDddL0=;
+	b=OiOWyZdrPcn94OSkh9eyMkHXmSWyxlQJNOA83gPJ5BuprUa2yH6s+xybPGaqBn6GFs
+	7jSkwQlHiFKUC661qgQykirUphL+NB04siWah6TWap/LOv+Pa37Hq7ck6CeNqVTaXuxx
+	g83OQZ3PThTz4eZ7lRQKgZ5H9ajaUsz0ajNgsDfQrVx6RuCtifih75E5CqQuZ89E28je
+	0UgRhvkLz6cMPfVuKG6MgQG/BqTr/Vic8ftYsqjMRH2mImGqh74yXSftW+3ebivZyKvk
+	/A17MWhr+nTYdCy3T/DmmrEfr0RjMp9LDNYj2oXZ4uCJ+46haKv6spWWNCXNoYHZm3TX
+	6RHQ==
+Received: by 10.68.129.198 with SMTP id ny6mr52892579pbb.22.1339612869532;
+	Wed, 13 Jun 2012 11:41:09 -0700 (PDT)
+Received: from localhost.localdomain ([94.205.109.242])
+	by mx.google.com with ESMTPS id ku7sm6574862pbc.31.2012.06.13.11.41.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 13 Jun 2012 11:31:52 -0700 (PDT)
+	Wed, 13 Jun 2012 11:41:08 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
-Date: Wed, 13 Jun 2012 22:31:47 +0400
-Message-Id: <219B8A48-C2ED-43D4-9875-9C774D837894@gmail.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Apple Message framework v1278)
-X-Mailer: Apple Mail (2.1278)
-Subject: ERROR: No recipes available for: qt4-x11-free_4.7.4.bbappend qt4-embedded_4.7.4.bbappend
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Jun 2012 20:40:52 +0200
+Message-Id: <1339612853-24121-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [meta-openembedded] qt4: Remove qt-4.7.4 recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2012 18:42:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Jun 2012 18:51:46 -0000
 
-Hi,
-       I get the following error while building core-image-minimal, =
-after just updating all my yocto repos. It was building fine just after =
-manually fixing the yocto kernel 3.2 SRCREV typo commit that managed its =
-way to the master branch.
+This commit removes the following recipes:
+qt4-embedded_4.7.4.bbappend
+qt4-x11-free_4.7.4.bbappend
 
-Now apparently there is a new error.=20
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+---
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend |    6 ------
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend |    6 ------
+ 2 files changed, 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
 
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
+deleted file mode 100644
+index 27cac11..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bbappend
++++ /dev/null
+@@ -1,6 +0,0 @@
+-DEPENDS += "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
+-
+-PRINC := "${@int(PRINC) + 1}"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
+deleted file mode 100644
+index 27cac11..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bbappend
++++ /dev/null
+@@ -1,6 +0,0 @@
+-DEPENDS += "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
+-
+-PRINC := "${@int(PRINC) + 1}"
+-- 
+1.7.9.5
 
-ERROR: No recipes available for:
-  =
-/tool/yocto/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.7.4.bb=
-append
-  =
-/tool/yocto/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.7.4.bb=
-append
-ERROR: Command execution failed: Exited with 1
-
-
-My bblayers.conf looks like this
-
-# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
-# changes incompatibly
-LCONF_VERSION =3D "4"
-
-BBFILES ?=3D ""
-BBLAYERS ?=3D " \
-  /tool/yocto/poky/meta \
-  /tool/yocto/poky/meta-yocto \
-  /tool/yocto/meta-openembedded/meta-oe \
-  /tool/yocto/meta-xilinx \
-  "
-
-Shouldn't the Yocto build/integration/release team be testing =
-everything, before committing changes to a public repo.=20
-
-Elvis Dowson=
 
 
