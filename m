@@ -1,35 +1,40 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from softlayer.compulab.co.il ([50.23.254.55] helo=compulab.co.il)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dasty82@gmail.com>) id 1Sf80P-0002u3-3Q
+	(envelope-from <ilya@compulab.co.il>) id 1SfTv6-0006Zs-AL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jun 2012 13:14:29 +0200
-Received: by wgbdr1 with SMTP id dr1so1498282wgb.24
+	Fri, 15 Jun 2012 12:38:24 +0200
+Received: from [62.90.235.247] (port=51463 helo=zimbra-mta.compulab.co.il)
+	by softlayer.compulab.co.il with esmtp (Exim 4.77)
+	(envelope-from <ilya@compulab.co.il>) id 1SfTkp-0001ZZ-A9
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jun 2012 13:27:47 +0300
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by zimbra-mta.compulab.co.il (Postfix) with ESMTP id 9B1DD644198
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jun 2012 04:03:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Qr9EALjqEnM7gP3q6rzOYYEiKfslVmrWxBfwB/L7nCM=;
-	b=VU1vCmRQXH9efc7Klve3LdbOHTmLvXTiG38lxiYlv7Ln9vpZo8xWIaiWuu1DBIRnp/
-	IXbMUBgF/quG3XvQLdacVIYQsdHijL1fOdkSVnEG6S2jodkYOiD0yu8ROl4zcfmJpgg/
-	3b7OaZQx7S+mvnxULPyN8xz8EFFrd+6duvLZeLjHSu4eHuycI7OiYMj/g2pGY8TqF198
-	qR84M6dChHMn0gcev3DvQhVVZ9AiCkJ4XKvCN3SvYqkkeTzEju6uI7RcZtm7xckZtccb
-	nydnRyqt3nglXqw+WBCCB3jhjkseV+cOtjey53UhR05lBlYeeoVErP/pjTQbiRex+Ujw
-	6fKw==
-Received: by 10.180.7.133 with SMTP id j5mr3479125wia.14.1339671827926;
-	Thu, 14 Jun 2012 04:03:47 -0700 (PDT)
-Received: from localhost.localdomain
-	(83-64-248-68.inzersdorf.xdsl-line.inode.at. [83.64.248.68])
-	by mx.google.com with ESMTPS id gv7sm18095801wib.4.2012.06.14.04.03.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 14 Jun 2012 04:03:46 -0700 (PDT)
-Sender: Radek Dostal <dasty82@gmail.com>
-From: Radek Dostal <rd@radekdostal.com>
+	Fri, 15 Jun 2012 13:27:46 +0300 (IDT)
+X-Virus-Scanned: amavisd-new at compulab.co.il
+Received: from zimbra-mta.compulab.co.il ([127.0.0.1])
+	by localhost (zimbra-mta.compulab.co.il [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id jrTOMM3qWxu1; Fri, 15 Jun 2012 13:27:45 +0300 (IDT)
+Received: from ilya-pc (ilya-pc.compulab.local [10.1.1.23])
+	by zimbra-mta.compulab.co.il (Postfix) with ESMTPS id 87A90644192;
+	Fri, 15 Jun 2012 13:27:45 +0300 (IDT)
+Received: from ilya by ilya-pc with local (Exim 4.72)
+	(envelope-from <ilya@compulab.co.il>)
+	id 1SfTkP-0008Kg-1m; Fri, 15 Jun 2012 13:27:21 +0300
+From: Ilya Ledvich <ilya@compulab.co.il>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jun 2012 13:02:19 +0200
-Message-Id: <1339671739-23022-1-git-send-email-rd@radekdostal.com>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Radek Dostal <rd@radekdostal.com>
-Subject: [meta-oe][PATCH] libopus: add libopus_0.9.14
+Date: Fri, 15 Jun 2012 13:27:18 +0300
+Message-Id: <1339756038-32003-1-git-send-email-ilya@compulab.co.il>
+X-Mailer: git-send-email 1.7.1
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - softlayer.compulab.co.il
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - compulab.co.il
+Subject: [PATCH] libogg: add version 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jun 2012 11:14:37 -0000
+X-List-Received-Date: Fri, 15 Jun 2012 10:38:24 -0000
 
-Signed-off-by: Radek Dostal <rd@radekdostal.com>
+Signed-off-by: Ilya Ledvich <ilya@compulab.co.il>
 ---
- meta-oe/recipes-multimedia/libopus/libopus-fpu.inc |    6 ++++++
- .../recipes-multimedia/libopus/libopus_0.9.14.bb   |   20 ++++++++++++++++++++
- 2 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
- create mode 100644 meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb
+ recipes/libogg/libogg_1.3.0.bb |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libogg/libogg_1.3.0.bb
 
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc b/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
+diff --git a/recipes/libogg/libogg_1.3.0.bb b/recipes/libogg/libogg_1.3.0.bb
 new file mode 100644
-index 0000000..ed16602
+index 0000000..31079a0
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
-@@ -0,0 +1,6 @@
++++ b/recipes/libogg/libogg_1.3.0.bb
+@@ -0,0 +1,7 @@
++require libogg.inc
 +
-+def get_libopus_fpu_setting(bb, d):
-+	if d.getVar('TARGET_FPU', True) in [ 'soft' ]:
-+		return "--enable-fixed-point"
-+	return ""
++PR = "${INC_PR}.0"
 +
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb b/meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb
-new file mode 100644
-index 0000000..7eb9779
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Opus Audio Codec"
-+DESCRIPTION = "The Opus codec is designed for interactive \
-+speech and audio transmission over the Internet. It is \
-+designed by the IETF Codec Working Group and incorporates \
-+technology from Skype's SILK codec and Xiph.Org's CELT codec."
-+HOMEPAGE = "http://www.opus-codec.org/"
-+SECTION = "libs/multimedia"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6d9f9b3714db6bbcfb6e42170d9c664d"
 +
-+SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-+SRC_URI[md5sum] = "c7161b247a8437ae6b0f11dd872e69e8"
-+SRC_URI[sha256sum] = "b1cad6846a8f819a141009fe3f8f10c946e8eff7e9c2339cd517bb136cc59eae"
-+
-+S = "${WORKDIR}/opus-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+require libopus-fpu.inc
-+EXTRA_OECONF = "${@get_libopus_fpu_setting(bb, d)}"
++SRC_URI[md5sum] = "0a7eb40b86ac050db3a789ab65fe21c2"
++SRC_URI[sha256sum] = "a8de807631014615549d2356fd36641833b8288221cea214f8a72750efe93780"
 -- 
-1.7.5.4
+1.7.1
 
 
 
