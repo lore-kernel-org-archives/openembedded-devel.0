@@ -1,32 +1,32 @@
 Received: from softlayer.compulab.co.il ([50.23.254.55] helo=compulab.co.il)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ilya@compulab.co.il>) id 1SfTv6-0006Zs-AL
+	(envelope-from <ilya@compulab.co.il>) id 1SfTz6-0006i4-SD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jun 2012 12:38:24 +0200
-Received: from [62.90.235.247] (port=51463 helo=zimbra-mta.compulab.co.il)
+	Fri, 15 Jun 2012 12:42:33 +0200
+Received: from [62.90.235.247] (port=14613 helo=zimbra-mta.compulab.co.il)
 	by softlayer.compulab.co.il with esmtp (Exim 4.77)
-	(envelope-from <ilya@compulab.co.il>) id 1SfTkp-0001ZZ-A9
+	(envelope-from <ilya@compulab.co.il>) id 1SfTVW-0001FK-TY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jun 2012 13:27:47 +0300
+	Fri, 15 Jun 2012 13:11:59 +0300
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by zimbra-mta.compulab.co.il (Postfix) with ESMTP id 9B1DD644198
+	by zimbra-mta.compulab.co.il (Postfix) with ESMTP id 2F4FF644198
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2012 13:27:46 +0300 (IDT)
+	Fri, 15 Jun 2012 13:11:58 +0300 (IDT)
 X-Virus-Scanned: amavisd-new at compulab.co.il
 Received: from zimbra-mta.compulab.co.il ([127.0.0.1])
 	by localhost (zimbra-mta.compulab.co.il [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id jrTOMM3qWxu1; Fri, 15 Jun 2012 13:27:45 +0300 (IDT)
+	with ESMTP id bMr-gDJXY0TE; Fri, 15 Jun 2012 13:11:56 +0300 (IDT)
 Received: from ilya-pc (ilya-pc.compulab.local [10.1.1.23])
-	by zimbra-mta.compulab.co.il (Postfix) with ESMTPS id 87A90644192;
-	Fri, 15 Jun 2012 13:27:45 +0300 (IDT)
+	by zimbra-mta.compulab.co.il (Postfix) with ESMTPS id 4AB30644192;
+	Fri, 15 Jun 2012 13:11:56 +0300 (IDT)
 Received: from ilya by ilya-pc with local (Exim 4.72)
 	(envelope-from <ilya@compulab.co.il>)
-	id 1SfTkP-0008Kg-1m; Fri, 15 Jun 2012 13:27:21 +0300
+	id 1SfTV6-0008GU-07; Fri, 15 Jun 2012 13:11:32 +0300
 From: Ilya Ledvich <ilya@compulab.co.il>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jun 2012 13:27:18 +0300
-Message-Id: <1339756038-32003-1-git-send-email-ilya@compulab.co.il>
+Date: Fri, 15 Jun 2012 13:10:55 +0300
+Message-Id: <1339755055-31688-1-git-send-email-ilya@compulab.co.il>
 X-Mailer: git-send-email 1.7.1
 X-AntiAbuse: This header was added to track abuse,
 	please include it with any abuse report
@@ -34,7 +34,7 @@ X-AntiAbuse: Primary Hostname - softlayer.compulab.co.il
 X-AntiAbuse: Original Domain - lists.openembedded.org
 X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
 X-AntiAbuse: Sender Address Domain - compulab.co.il
-Subject: [PATCH] libogg: add version 1.3.0
+Subject: libogg: add version 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,7 +48,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2012 10:38:24 -0000
+X-List-Received-Date: Fri, 15 Jun 2012 10:42:33 -0000
 
 Signed-off-by: Ilya Ledvich <ilya@compulab.co.il>
 ---
