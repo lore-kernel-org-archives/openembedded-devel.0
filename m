@@ -1,36 +1,30 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SfnAV-0008G4-Mp
+	(envelope-from <rlimlaw@gmail.com>) id 1SfuA0-00028k-1m
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Jun 2012 09:11:35 +0200
-Received: by wibhm14 with SMTP id hm14so167717wib.6
+	Sat, 16 Jun 2012 16:39:32 +0200
+Received: by wibhm14 with SMTP id hm14so387997wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2012 00:00:56 -0700 (PDT)
+	Sat, 16 Jun 2012 07:28:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=lCRrNT6DyzY00X8ItKCSt5Icp6CrEcYIegWTFlqNWjM=;
-	b=d+UZTQUgzBDK9YStYkIQh3t8oasRLO7H19wGMmBi+fLD17ST+Jl3ep4Zp80WaVTNU6
-	HwLfV+b12zGG4dBKhnCGvaqBtREwkOTUf105MGtSjNid2gG9NWvd475soVdAgoC+yONR
-	mtLwO+gTVVKiRy82AA0CXb+pqHVsxp63eyV2OasDJEVVhzZNH3JjHcbq9NGByhcIpnSy
-	TyRGtq0F/ZhmnERta5ClD4su59DmjQ+NL0lRAMqWOFcUe9Fx/+5FdSocaofTg0GxPzEi
-	ZUOYHqzTyW/XVrSTiI6X075oVqlb68+4src5y4qo0f9xQKMMKoshiPOdqa3UrNyPwzJN
-	3XVQ==
-Received: by 10.180.103.42 with SMTP id ft10mr9664134wib.18.1339830056605;
-	Sat, 16 Jun 2012 00:00:56 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f7sm14667123wiv.2.2012.06.16.00.00.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 16 Jun 2012 00:00:55 -0700 (PDT)
-Date: Sat, 16 Jun 2012 09:01:17 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120616070117.GC3140@jama.jama.net>
-References: <1337788237-9475-1-git-send-email-Martin.Jansa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=SGf8lT2ojqBASyQf3YHOWusept8abLoSxafGGTZUwiY=;
+	b=e5ye/cPSXXnOIn6/jYuB3a2xPq+xYIBQMhaemOHau67QaJHEDGagr0MuivKw0nzfSH
+	k+DJJHD2pPP/Vf1fdhddTjxMRoL6m6YlehXjmxWTVJwyYDzzJum/Kofw3q+1SahLM0mw
+	Wr0rutPSmCNNytNfja+BRKYXYgMnQoUwr7pS6fY9JEBCzfl1XA1Nnt7JHZSILYx1cmuW
+	oUAsJWZ+7x+7RETHr9pfw7wyNMkHDVfhtRmJZYFT2mUKP/+i8WO4qZ3Wh9bwoIky/B85
+	u+Momzc1HSfskjB/+9JUhbFzJ1e4xTiNuTp82W4xIJSvovgp7oJr+sHrq0UunrcExV43
+	LCHg==
 MIME-Version: 1.0
-In-Reply-To: <1337788237-9475-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-handheld][PATCH] meta-handheld: append to BBPATH instead of prepend so order of bblayers.conf is respected
+Received: by 10.180.102.36 with SMTP id fl4mr11730783wib.2.1339856932327; Sat,
+	16 Jun 2012 07:28:52 -0700 (PDT)
+Received: by 10.216.204.201 with HTTP; Sat, 16 Jun 2012 07:28:52 -0700 (PDT)
+Date: Sat, 16 Jun 2012 10:28:52 -0400
+Message-ID: <CAGHuQYEBngbdzuvCyrpWkX793gn6BSROU-tvXh4iZ_qnBKB=sw@mail.gmail.com>
+From: Rob <rlimlaw@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: a system var for a busybox utility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,72 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jun 2012 07:11:35 -0000
-X-Groupsio-MsgNum: 39254
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nDtE8k2pYjsRXajv"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 16 Jun 2012 14:39:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---nDtE8k2pYjsRXajv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Wed, May 23, 2012 at 05:50:37PM +0200, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+I apologize if this is the wrong place for this question. Please, respond
+with the right list. I am new to this list and am not use to this type of
+forum. I have been implementing and maintaining an openembedded/bitbake
+build system, so I have knowledge in some areas and I am a noob in others.
+I have looked around the code, but have not seen a possiblility.
 
-ping
+Are there any macros/keywords in the recipes/conf files like
+IMAGE_LOGIN_MANAGER for configuring the utils in busybox? tinylogin can be
+replaced by busybox. I have some recipes that have a dependency on bzip2. I
+would like to use the busybox version without having to use
+update-alternatives. For example UTILITY_BZIP2="busybox, if such a
+mechanism exists.
 
-> ---
->  conf/layer.conf |   11 ++++++++---
->  1 files changed, 8 insertions(+), 3 deletions(-)
->=20
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 7a2441b..31dcb16 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -1,13 +1,18 @@
->  # Layer configuration for meta-handheld layer
->  # Copyright 2011 Intel Corporation
-> =20
-> -# We have a conf and classes directory, prepend to BBPATH to prefer our =
-versions
-> -BBPATH :=3D "${LAYERDIR}:${BBPATH}"
-> +# We have a conf and classes directory, append to BBPATH
-> +BBPATH .=3D ":${LAYERDIR}"
-> =20
->  # We have a recipes directory, add to BBFILES
-> -BBFILES :=3D "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipe=
-s-*/*/*.bbappend"
-> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bba=
-ppend"
-> =20
->  BBFILE_COLLECTIONS +=3D "meta-handheld"
->  BBFILE_PATTERN_meta-handheld :=3D "^${LAYERDIR}/"
-> +
-> +# Define the priority for recipes (.bb files) from this layer,
-> +# choosing carefully how this layer interacts with all of the
-> +# other layers.
-> +
->  BBFILE_PRIORITY_meta-handheld =3D "7"
-> =20
-> --=20
-> 1.7.8.6
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---nDtE8k2pYjsRXajv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk/cLzwACgkQN1Ujt2V2gBxUcACePSDwUc/auizpjyWzXSLtZJrG
-MmMAoLGo8g7XqkIHKDD988I2VieJy2Vd
-=QvJN
------END PGP SIGNATURE-----
-
---nDtE8k2pYjsRXajv--
