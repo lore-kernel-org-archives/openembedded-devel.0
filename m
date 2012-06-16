@@ -1,31 +1,31 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SfxFq-0007dT-B3
+	(envelope-from <martin.jansa@gmail.com>) id 1SfxSA-0008Uh-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Jun 2012 19:57:46 +0200
-Received: by wibhm14 with SMTP id hm14so478499wib.6
+	Sat, 16 Jun 2012 20:10:30 +0200
+Received: by wibhm14 with SMTP id hm14so485019wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2012 10:47:06 -0700 (PDT)
+	Sat, 16 Jun 2012 10:59:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=vFJZjVQbCnnbWwgyYsSzoT6pYe4vVZAGUkiGU4IPUfk=;
-	b=Nu7HePmVD4ApAAt1lP+Ah9Ko6S0/Ip50YiqjwOruOxItaJziv36EZZGv5zdvwMmPS9
-	19xKHQWCddFYTAkrP6nZ53VAUtR0UXvvunQezZE+ki4lNR10iO1ovCRVcDLUQ1TbAuyH
-	aktFrQPho6x3EfqkkLklGl4w6GuyuXJvh+6sx6708jVvuk7Ykn30QAiRFP4r+bp/tq95
-	rTXQGBeRI7MW43DJG7GBGPtX221bW0g0D/uLoT00OggWIJSEkC2Md49hyLwIta6bvTRw
-	MQ4+WnrJmfSYhandWstW9rZpsP+I3sfFEuAb1DW8IPLyehjTgsMFJA/2ZdK5unH0zAum
-	MOHA==
-Received: by 10.216.226.233 with SMTP id b83mr4964453weq.204.1339868826451;
-	Sat, 16 Jun 2012 10:47:06 -0700 (PDT)
+	bh=ne0cCtOhBAgu5pdOl8BEfifd0sxOThF2BV9Zit7VKbo=;
+	b=f+uv/e9b5oeET+kmmQ0O+hqanZI7S6orejaUgz/EDdst6+q3ZpXmY1Z2vFIfPKVsUQ
+	JFlj7fR7fpPgoq9iILFg1fI+InyWIUG+2Muz66p09sxUu2j1U8S1q9R+pob2MuO12i7r
+	YPEoW3yTNvCEdK7mw93hYGKl+dg3bGSannPALuHF89g0PCp7S3NcZ+ayBc6Xl5zFBT+p
+	cjuKWlveVbgRPHD255QP0Aa/i7txiGCL6Cnx+7rR+sHkcKEqJZlGg4eCskzjp2D9cGUr
+	OqySXxg3DLIIfPxCYySQ2O9+JlCsh9gpmhv/RppxloymaTKC07QaIqyZhrzVuCs5XqXq
+	cmUA==
+Received: by 10.180.80.97 with SMTP id q1mr12567264wix.13.1339869590739;
+	Sat, 16 Jun 2012 10:59:50 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id i10sm20963626wiy.10.2012.06.16.10.47.04
+	by mx.google.com with ESMTPS id hv7sm21125196wib.0.2012.06.16.10.59.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 16 Jun 2012 10:47:05 -0700 (PDT)
-Date: Sat, 16 Jun 2012 19:47:04 +0200
+	Sat, 16 Jun 2012 10:59:49 -0700 (PDT)
+Date: Sat, 16 Jun 2012 19:59:47 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120616174704.GC3178@jama.jama.net>
+Message-ID: <20120616175947.GD3178@jama.jama.net>
 References: <1339364820-2880-1-git-send-email-schnitzeltony@googlemail.com>
 	<20120616171651.GB3178@jama.jama.net>
 MIME-Version: 1.0
@@ -45,13 +45,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jun 2012 17:57:46 -0000
-X-Groupsio-MsgNum: 39258
+X-List-Received-Date: Sat, 16 Jun 2012 18:10:30 -0000
+X-Groupsio-MsgNum: 39259
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="c3bfwLpm8qysLVxt"
+	protocol="application/pgp-signature"; boundary="bajzpZikUji1w+G9"
 Content-Disposition: inline
 
---c3bfwLpm8qysLVxt
+--bajzpZikUji1w+G9
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -69,32 +69,17 @@ On Sat, Jun 16, 2012 at 07:16:51PM +0200, Martin Jansa wrote:
 > xserver-nodm.servicefile: file could not be found
 > but looking at elsa change I don't see where (will debug and report
 > later).
->=20
 
-/etc/default/xserver-nodm is no longer in xserver-nodm-init-systemd package:
-http://git.shr-project.org/git/?p=3Dbuildhistory.git;a=3Dcommitdiff;h=3D978=
-125eff49511e7352db20f32fedcd354eb13e9
-
--PKGSIZE =3D 228
--FILES =3D /etc/default/xserver-nodm /lib/systemd/system/xserver-nodm.servi=
-ce
--FILELIST =3D /etc/default/xserver-nodm /lib/systemd/system/xserver-nodm.se=
-rvice
-+PKGSIZE =3D 212
-+FILES =3D /lib/systemd/system/xserver-nodm.service
-+FILELIST =3D /lib/systemd/system/xserver-nodm.service
-
-causing opkg error on opkg upgrade:
- * check_data_file_clashes: Package xserver-nodm-init wants to install file=
- /etc/default/xserver-nodm
-        But that file is already provided by package  * xserver-nodm-init-s=
-ystemd
-works on second upgrade, but still the file should be in xserver-nodm-init-=
-systemd=20
-as it's used only by .service file"
+you can ignore this one, it was caused by
+meta-smartphone/meta-shr/recipes-efl/efl/elsa_svn.bbappend
+SRC_URI_append_shr =3D "file://elsa.conf"
+which worked only because of trailing space in SRC_URI, fixed in
+meta-shr..
 
 Cheers,
 
+> Cheers,
+>=20
 > >=20
 > > The following tests were performed:
 > > * build all recipes touched by this series from scratch without this se=
@@ -435,16 +420,16 @@ over-mkostemp.patch (100%)
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---c3bfwLpm8qysLVxt
+--bajzpZikUji1w+G9
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAk/cxpgACgkQN1Ujt2V2gBx3HgCgiCYJcTIq1ufSx3TlQ8ljBbDl
-gdEAoLf1nHjsImQTbPl7gE6XrQTTF0Fi
-=dWLd
+iEYEARECAAYFAk/cyZMACgkQN1Ujt2V2gBz41ACePxFUKSU/V+ta9OYD4KmfWDdf
+lM8AoIpNLwNGXPk8PTpZy0Vx/Z5EgwRO
+=jkuk
 -----END PGP SIGNATURE-----
 
---c3bfwLpm8qysLVxt--
+--bajzpZikUji1w+G9--
