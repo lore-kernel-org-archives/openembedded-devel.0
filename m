@@ -1,20 +1,19 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>) id 1SghfL-0005MZ-JL
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jun 2012 21:31:11 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 18 Jun 2012 12:19:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="157801340"
-Received: from unknown (HELO swold-mobl.bigsur.com) ([10.255.12.105])
-	by azsmga001.ch.intel.com with ESMTP; 18 Jun 2012 12:19:23 -0700
-From: Saul Wold <sgw@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Jun 2012 12:19:23 -0700
-Message-Id: <1340047163-24689-1-git-send-email-sgw@linux.intel.com>
-X-Mailer: git-send-email 1.7.7.6
-Subject: [PATCH] rfkill: use update-alternatives
+	(envelope-from <apelete@seketeli.net>) id 1SgjxB-00024w-19
+	for openembedded-devel@openembedded.org; Mon, 18 Jun 2012 23:57:45 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 7E9C8EA040;
+	Mon, 18 Jun 2012 23:54:52 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id E5BCB604DE; Mon, 18 Jun 2012 23:47:01 +0200 (CEST)
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@openembedded.org, Martin Jansa <martin.jansa@gmail.com>,
+	Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Date: Mon, 18 Jun 2012 23:46:33 +0200
+Message-Id: <1340055995-14534-1-git-send-email-apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10
+Subject: [PATCH 0/2] Update package SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,40 +27,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2012 19:31:11 -0000
+X-List-Received-Date: Mon, 18 Jun 2012 21:57:45 -0000
 
-Since oe-core added rfkill to busybox, this recipe needs to use u-a
-also.
+Hello,
 
-Signed-off-by: Saul Wold <sgw@linux.intel.com>
----
- meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+The attached patches update the SRC_UI of both acl and attr packages,
+since the mirror.its.uidaho.edu repository seems to be down.
+The patches are intended for oe-classic.
 
-diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-index 561fdc7..548990c 100644
---- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-+++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-@@ -3,6 +3,7 @@ HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
- SECTION = "base"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
-+PR = "r1"
- 
- SRC_URI = "http://wireless.kernel.org/download/${PN}/${P}.tar.bz2 \
-            file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch"
-@@ -16,3 +17,9 @@ do_compile() {
- do_install() {
-         oe_runmake DESTDIR=${D} install
- }
-+
-+inherit update-alternatives
-+
-+ALTERNATIVE_${PN} = "rfkill"
-+ALTERNATIVE_PRIORITY = "50"
-+
--- 
-1.7.7.6
+Apelete Seketeli (2):
+  acl: Updates SRC_URI to download.savannah.gnu.org
+  attr: Updates SRC_URI to download.savannah.gnu.org
+
+ acl_2.2.49.bb  |    2 +-
+ attr_2.4.44.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 
 
