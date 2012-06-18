@@ -1,29 +1,27 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dallas.a.clement@gmail.com>) id 1SgfQW-0002X3-1L
+	(envelope-from <mark.hatle@windriver.com>) id 1Sggp3-0002QB-4T
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jun 2012 19:07:44 +0200
-Received: by werg55 with SMTP id g55so3644092wer.6
+	Mon, 18 Jun 2012 20:37:09 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.3/8.14.3) with ESMTP id q5IIQPuk017170
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2012 09:57:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=TopSv/+u9eEQdEd5lTNzQGlYTZbao+hXAn95JiCYhk4=;
-	b=ziyzkdAxR8FsFsWoXOPmxLeWQwNzjYZo+GoQZjLa7RA8u1V1t5NOj8R48AGJq2nIS+
-	zLBcITH8SzNWeLwuvpNjWOAj7TdXiEFMZWpv/amJmwN0TlL2qPt4gW4TatJz1Hz4I1M5
-	g51zViUA83yFIuA0jcqVLJTGPyDENKRQ1icokz/MgrhnxgwEaSi6fQ6eQsrVp7bngtlt
-	LhKwiwUJDh0+Jg04cBBMkNz74jFsNLNZEoBB96sOpKtMbs+6+hbtEFfTZsVz/IHbJm06
-	j6SHkp/KOfHzIe1f8RGa9VzeK/j1DfTZ7wa84C5y0BjHWHoNApZj6VWaBs/2xrRaUg6Z
-	FpFg==
+	Mon, 18 Jun 2012 11:26:25 -0700 (PDT)
+Received: from msp-dhcp56.wrs.com (172.25.34.56) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.1.255.0;
+	Mon, 18 Jun 2012 11:26:25 -0700
+Message-ID: <4FDF72D0.2000008@windriver.com>
+Date: Mon, 18 Jun 2012 13:26:24 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
 MIME-Version: 1.0
-Received: by 10.180.80.35 with SMTP id o3mr2459082wix.7.1340038621750; Mon, 18
-	Jun 2012 09:57:01 -0700 (PDT)
-Received: by 10.180.14.193 with HTTP; Mon, 18 Jun 2012 09:57:01 -0700 (PDT)
-Date: Mon, 18 Jun 2012 11:57:01 -0500
-Message-ID: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
-From: Dallas Clement <dallas.a.clement@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Package selection
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
+In-Reply-To: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
+Subject: Re: Package selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,30 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2012 17:07:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Jun 2012 18:37:09 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Pardon my ignorance, I am a newb to OE / BitBake.  I've been building
-custom embedded rootfs images the old fashioned way by hand for a long
-time.
+On 6/18/12 11:57 AM, Dallas Clement wrote:
+> Pardon my ignorance, I am a newb to OE / BitBake.  I've been building
+> custom embedded rootfs images the old fashioned way by hand for a long
+> time.
+>
+> Recently I've been experimenting with OE / BitBake to determine if it
+> is suitable for my needs.  I want to be able to select exactly which
+> packages are included in my custom distro.  I tried to build the
+> "helloworld" example, and it seemed to download and build gobs of
+> packages, when all I wanted was the most rudimentary rootfs.  In fact,
+> for starters I'd like to build a rootfs that simply consists of a
+> statically built busybox and have the init process point to the ash
+> shell.  Is this even possible with OE?  Once I gain confidence with
+> something simple like this, I'd like to continue refining things by
+> adding packages that I select.
+>
+> Lastly, it is possible to avoid the repeated fetching of source
+> packages?  In other words, can the source URI's point to packages in a
+> local file system repository?
 
-Recently I've been experimenting with OE / BitBake to determine if it
-is suitable for my needs.  I want to be able to select exactly which
-packages are included in my custom distro.  I tried to build the
-"helloworld" example, and it seemed to download and build gobs of
-packages, when all I wanted was the most rudimentary rootfs.  In fact,
-for starters I'd like to build a rootfs that simply consists of a
-statically built busybox and have the init process point to the ash
-shell.  Is this even possible with OE?  Once I gain confidence with
-something simple like this, I'd like to continue refining things by
-adding packages that I select.
+if you use 'hob' you can get a graphical environment and an easy way to select 
+exactly what you want on the target rootfs.  Don't be surprised though if it 
+builds more then you think it should, as dependency resolution is complete 
+during the build process.. the image generation uses a package specific 
+resolution to get the smallest set for your image based on your requirements.
 
-Lastly, it is possible to avoid the repeated fetching of source
-packages?  In other words, can the source URI's point to packages in a
-local file system repository?
+--Mark
 
-Thanks much,
+> Thanks much,
+>
+> Dallas
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Dallas
 
 
