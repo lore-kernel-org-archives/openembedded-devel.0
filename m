@@ -1,18 +1,16 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from smtp208.alice.it ([82.57.200.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Sgl3J-0005oN-Oq
+	(envelope-from <andrea.adami@gmail.com>) id 1Sgl3z-0005yu-7O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 01:08:09 +0200
-Received: from mizar.localdomain (79.21.254.221) by smtp206.alice.it
-	(8.6.023.02) id 4F9BF1D3061152D5; Tue, 19 Jun 2012 00:57:29 +0200
+	Tue, 19 Jun 2012 01:08:51 +0200
+Received: from mizar.localdomain (79.21.254.221) by smtp208.alice.it
+	(8.6.023.02) id 4F056E8512F6CD81; Tue, 19 Jun 2012 00:58:08 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jun 2012 00:57:17 +0200
-Message-Id: <1340060237-28718-2-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 19 Jun 2012 00:58:03 +0200
+Message-Id: <1340060286-28769-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1340060237-28718-1-git-send-email-andrea.adami@gmail.com>
-References: <1340060237-28718-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/2] zaurus.inc: redefine XZ compression level
+Subject: [meta-oe][meta-initramfs][PATCH 1/4] initramfs-kexecboot images: install ubiattach for boot from UBI volumes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,28 +24,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2012 23:08:09 -0000
-
-* xz -7 makes sense if your vmlinux is much larger than 16 MiB uncompressed
+X-List-Received-Date: Mon, 18 Jun 2012 23:08:51 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/include/zaurus.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ .../images/initramfs-kexecboot-image.bb            |    2 +-
+ .../images/initramfs-kexecboot-klibc-image.bb      |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 268b9fd..45c82d3 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -38,7 +38,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
- KERNEL_IMAGETYPE ?= "zImage"
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+index f306fb5..2368699 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+@@ -9,7 +9,7 @@ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+ # avoid circular dependencies
+ EXTRA_IMAGEDEPENDS = ""
  
- # sane defaults for devices with only 32Mb RAM (see man xz)
--XZ_COMPRESSION_LEVEL = "-e -7"
-+XZ_COMPRESSION_LEVEL = "-2e"
+-IMAGE_INSTALL = "kexec kexecboot"
++IMAGE_INSTALL = "kexec kexecboot ubiattach"
  
- # kernel bootlogo
- LOGO_SIZE = '${@base_conditional("MACHINE_GUI_CLASS", "bigscreen", "vga", "qvga", d)}'
+ # Do not pollute the initrd image with rootfs features
+ IMAGE_FEATURES = ""
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+index e81f9ee..e4e52cf 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+@@ -1,5 +1,5 @@
+ require initramfs-kexecboot-image.bb
+ 
+-IMAGE_INSTALL = "kexec-klibc kexecboot-klibc"
++IMAGE_INSTALL = "kexec-klibc kexecboot-klibc ubiattach-klibc"
+ 
+ export IMAGE_BASENAME = "initramfs-kexecboot-klibc-image"
 -- 
 1.7.3.4
 
