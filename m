@@ -1,37 +1,29 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SgzzH-0000pJ-K6
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 17:04:59 +0200
-Received: by dalh21 with SMTP id h21so8138077dal.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2012 07:54:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=fdCz6LhoTv0USL36MqGWsjoEbXd/HAmJX8u8O7iIJDw=;
-	b=lxzilX4r8/K+8Qo4i+F8MlJc4D5KfJ/ZAp/QghBZOF6jODpu/kG5SJO8uJBX9RydWJ
-	kw2ok0vxaIiU7Oj4D12e55K9syrS5BNzbMFyXOvHUqA94uat2ymD4LajxBoka3Kzu/xS
-	C5BqpLSt1ZE4eo+mYtWIA4IummV/jxfJ1eNo440+SK6/w4mNcxL3YAzfthLDmU1+6ePu
-	QTddjZ+XGP+xi8niKZJ40ZGO5qNn/BeP1ADrt24MP4878HqpYcTVaUJwtV6H/7agBNcx
-	5jjD/ikqoWLFZ+pFdBA8GjBh2XRxFiAfQu8ssgIBbGqRuoDgfoffdfqROPYDlz6eOuB6
-	0zuw==
-Received: by 10.68.230.68 with SMTP id sw4mr5598581pbc.142.1340117655206;
-	Tue, 19 Jun 2012 07:54:15 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:d:eba:edf1:1f5b:c35b:5dbc])
-	by mx.google.com with ESMTPS id os1sm28138155pbb.49.2012.06.19.07.54.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 19 Jun 2012 07:54:14 -0700 (PDT)
-Date: Tue, 19 Jun 2012 07:54:13 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120619145413.GD22301@bill-the-cat>
-References: <1339553354-14747-1-git-send-email-raj.khem@gmail.com>
+	(envelope-from <apelete@seketeli.net>) id 1Sh4hT-0007gI-9g
+	for openembedded-devel@openembedded.org; Tue, 19 Jun 2012 22:06:55 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 6CEAEEA040;
+	Tue, 19 Jun 2012 22:03:54 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 42734604DE; Tue, 19 Jun 2012 21:56:11 +0200 (CEST)
+Date: Tue, 19 Jun 2012 21:56:11 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20120619195610.GC4845@hermes>
+References: <1340062930-19293-1-git-send-email-apelete@seketeli.net>
+	<1340062930-19293-2-git-send-email-apelete@seketeli.net>
+	<20120619052932.GN3178@jama.jama.net>
+	<20120619060703.GA4845@hermes>
+	<20120619063448.GO3178@jama.jama.net>
 MIME-Version: 1.0
-In-Reply-To: <1339553354-14747-1-git-send-email-raj.khem@gmail.com>
-Organization: Texas Instruments
+In-Reply-To: <20120619063448.GO3178@jama.jama.net>
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [2011.03-maintenance][PATCH 1/3] openssl-1.x.x: Backport patches from OE-Core
+Cc: openembedded-devel@openembedded.org,
+	Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Subject: Re: [PATCH 1/1] gtk+: Regenerate no-demos.patch and update recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 15:04:59 -0000
-X-Groupsio-MsgNum: 39297
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="45Z9DzgjV8m4Oswq"
-Content-Disposition: inline
-
---45Z9DzgjV8m4Oswq
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 19 Jun 2012 20:06:55 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 12, 2012 at 07:09:12PM -0700, Khem Raj wrote:
+Le 19-Jun-12, Martin Jansa a =E9crit:
+>=20
+> As you can see in
+> http://git.openembedded.org/openembedded/commit/recipes/gtk+?id=3Da3b09=
+20d0cc2cecac9eea4993ad18a64b207d7af
+> and
+> http://git.openembedded.org/openembedded/commit/recipes/gtk+?id=3Da3b09=
+20d0cc2cecac9eea4993ad18a64b207d7af
+>=20
+> no-demos.patch is intentionally applied only for gtk+-native and even
+> correctly packaged for target. So if you have issues building
+> gtk+_2.20.1.bb then rebasing gtk+-2.20.1/no-demos.patch is right, but
+> moving that patch from SRC_URI_append_virtclass-native to SRC_URI_appen=
+d
+> is wrong.
 
-> These patches are needed for getting 2011.03
-> branch building on ubuntu 12.04 LTS
+I see. I will undo the move to SRC_URI_append, keep the no-demos.patch
+rebase thing and propose another to patch to fix the build issue then.
 
-Sorry for the delay, this (along with 2 and 3) are now applied, thanks.
+> BTW: I'm not using oe-classic at all, and I'm still reading oe-devel ML=
+, please=20
+> don't put me to To: directly, Thanks.
 
+I wasn't sure if I should put you in the To: field directly or not,
+thank you for clarifying this. The next patches will be sent to the
+mailing list address only, I hope you will still take some time to
+report and advise about any issue you spot :).
+
+Regards.
 --=20
-Tom
+        Apelete
 
---45Z9DzgjV8m4Oswq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAk/gkpUACgkQdZngf2G4WwP9rwCfdsR5Kb8ob3rvabKXK38IF786
-No4An3BehW+H9PaWmJ2rMSRTxbRJLfUU
-=rxbr
------END PGP SIGNATURE-----
-
---45Z9DzgjV8m4Oswq--
