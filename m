@@ -1,18 +1,26 @@
-Received: from smtp208.alice.it ([82.57.200.104])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Sh7dv-0000My-8m
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Sh80q-0000d9-39
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2012 01:15:27 +0200
-Received: from mizar.localdomain (79.21.254.221) by smtp208.alice.it
-	(8.6.023.02) id 4F056E8513192C6D; Wed, 20 Jun 2012 01:04:43 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jun 2012 01:04:38 +0200
-Message-Id: <1340147078-27377-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <CAAQYJAsdR1_T5Kc7rsA81Nmk+JfS4=Sw0XgZ31r+ewdKB71v=w@mail.gmail.com>
-References: <CAAQYJAsdR1_T5Kc7rsA81Nmk+JfS4=Sw0XgZ31r+ewdKB71v=w@mail.gmail.com>
-Subject: [meta-oe][meta-initramfs][PATCH] ubi-utils-klibc: move to version 1.5.0
+	Wed, 20 Jun 2012 01:39:08 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 19 Jun 2012 16:28:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="113974624"
+Received: from unknown (HELO helios.localnet) ([10.252.120.138])
+	by AZSMGA002.ch.intel.com with ESMTP; 19 Jun 2012 16:28:22 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Wed, 20 Jun 2012 00:28:21 +0100
+Message-ID: <1506799.oJnv9467AL@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.3 (Linux/3.2.0-25-generic-pae; KDE/4.8.3; i686; ; )
+In-Reply-To: <1340060237-28718-2-git-send-email-andrea.adami@gmail.com>
+References: <1340060237-28718-1-git-send-email-andrea.adami@gmail.com>
+	<1340060237-28718-2-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH 2/2] zaurus.inc: redefine XZ compression level
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,128 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 23:15:27 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 23:39:08 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb  |   49 --------------------
- .../recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb  |   49 ++++++++++++++++++++
- 2 files changed, 49 insertions(+), 49 deletions(-)
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
+On Tuesday 19 June 2012 00:57:17 Andrea Adami wrote:
+> * xz -7 makes sense if your vmlinux is much larger than 16 MiB uncompressed
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  conf/machine/include/zaurus.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/machine/include/zaurus.inc
+> b/conf/machine/include/zaurus.inc index 268b9fd..45c82d3 100644
+> --- a/conf/machine/include/zaurus.inc
+> +++ b/conf/machine/include/zaurus.inc
+> @@ -38,7 +38,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
+>  KERNEL_IMAGETYPE ?= "zImage"
+> 
+>  # sane defaults for devices with only 32Mb RAM (see man xz)
+> -XZ_COMPRESSION_LEVEL = "-e -7"
+> +XZ_COMPRESSION_LEVEL = "-2e"
+> 
+>  # kernel bootlogo
+>  LOGO_SIZE = '${@base_conditional("MACHINE_GUI_CLASS", "bigscreen", "vga",
+> "qvga", d)}'
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-deleted file mode 100644
-index ebdd3f6..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.4.9.bb
-+++ /dev/null
-@@ -1,49 +0,0 @@
--DESCRIPTION = "Tools for managing memory technology devices."
--SECTION = "base"
--DEPENDS = "zlib lzo e2fsprogs util-linux"
--HOMEPAGE = "http://www.linux-mtd.infradead.org/"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
--                    file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
--
--PR = "r4"
--
--inherit klibc
--
--SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=995cfe51b0a3cf32f381c140bf72b21bf91cef1b \
--            file://Makefile.patch \
--            file://common.mk.patch \
--            file://libubi.c.patch \
--            file://libiniparser.c.patch \
--            file://ubiformat.c.patch \
--            "
--
--S = "${WORKDIR}/git/"
--
--EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -I${S}ubi-utils/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
--
--do_install () {
--
--    install -d ${D}${sbindir}
--    oe_runmake DESTDIR="${D}" install
--
--}
--
--PACKAGES = "ubi-utils-klibc-dbg"
--
--PACKAGES =+ "ubinfo-klibc ubiattach-klibc ubidetach-klibc mtdinfo-klibc ubiupdatevol-klibc \
--             ubimkvol-klibc ubirename-klibc ubirmvol-klibc ubirsvol-klibc \
--             ubinize-klibc ubiformat-klibc ubicrc32-klibc"
--
--FILES_ubinfo-klibc = "${sbindir}/ubinfo"
--FILES_ubiattach-klibc = "${sbindir}/ubiattach"
--FILES_ubidetach-klibc = "${sbindir}/ubidetach"
--FILES_mtdinfo-klibc = "${sbindir}/mtdinfo"
--FILES_ubiupdatevol-klibc = "${sbindir}/ubiupdatevol"
--FILES_ubimkvol-klibc = "${sbindir}/ubimkvol"
--FILES_ubirename-klibc = "${sbindir}/ubirename"
--FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
--FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
--FILES_ubinize-klibc = "${sbindir}/ubinize"
--FILES_ubiformat-klibc = "${sbindir}/ubiformat"
--FILES_ubicrc32-klibc = "${sbindir}/ubicrc32"
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
-new file mode 100644
-index 0000000..2095552
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
-@@ -0,0 +1,49 @@
-+DESCRIPTION = "Tools for managing memory technology devices."
-+SECTION = "base"
-+DEPENDS = "zlib lzo e2fsprogs util-linux"
-+HOMEPAGE = "http://www.linux-mtd.infradead.org/"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-+                    file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
-+
-+PR = "r0"
-+
-+inherit klibc
-+
-+SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=ca39eb1d98e736109c64ff9c1aa2a6ecca222d8f \
-+            file://Makefile.patch \
-+            file://common.mk.patch \
-+            file://libubi.c.patch \
-+            file://libiniparser.c.patch \
-+            file://ubiformat.c.patch \
-+            "
-+
-+S = "${WORKDIR}/git/"
-+
-+EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -I${S}ubi-utils/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
-+
-+do_install () {
-+
-+    install -d ${D}${sbindir}
-+    oe_runmake DESTDIR="${D}" install
-+
-+}
-+
-+PACKAGES = "ubi-utils-klibc-dbg"
-+
-+PACKAGES =+ "ubinfo-klibc ubiattach-klibc ubidetach-klibc mtdinfo-klibc ubiupdatevol-klibc \
-+             ubimkvol-klibc ubirename-klibc ubirmvol-klibc ubirsvol-klibc \
-+             ubinize-klibc ubiformat-klibc ubicrc32-klibc"
-+
-+FILES_ubinfo-klibc = "${sbindir}/ubinfo"
-+FILES_ubiattach-klibc = "${sbindir}/ubiattach"
-+FILES_ubidetach-klibc = "${sbindir}/ubidetach"
-+FILES_mtdinfo-klibc = "${sbindir}/mtdinfo"
-+FILES_ubiupdatevol-klibc = "${sbindir}/ubiupdatevol"
-+FILES_ubimkvol-klibc = "${sbindir}/ubimkvol"
-+FILES_ubirename-klibc = "${sbindir}/ubirename"
-+FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
-+FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
-+FILES_ubinize-klibc = "${sbindir}/ubinize"
-+FILES_ubiformat-klibc = "${sbindir}/ubiformat"
-+FILES_ubicrc32-klibc = "${sbindir}/ubicrc32"
+Merged both of these to meta-handheld master, thanks.
+
+Cheers,
+Paul
+
 -- 
-1.7.3.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
