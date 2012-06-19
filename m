@@ -1,44 +1,37 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1Sgzoo-0000Dl-8M
+	(envelope-from <tom.rini@gmail.com>) id 1SgzzH-0000pJ-K6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 16:54:10 +0200
-Received: by lbol5 with SMTP id l5so5590068lbo.6
+	Tue, 19 Jun 2012 17:04:59 +0200
+Received: by dalh21 with SMTP id h21so8138077dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=/peThnkzl7+mZ0PYgj4XF5iTUS9F0/+xFiyy3MOOV1k=;
-	b=BemgyHv5XI9RjGc5QzMMlSYwhLyReSJLgrneCBRxeKMnDZaw3iL3yijXveBVjA35Td
-	e0t6G001JRK63OgMCCaFdNlClDvbiC8+d4CS4DaPYj6lQ3nPQYNbfYbbcYCm/JNK2v38
-	6PhKtpPdUbV8VQNwJQc5XGFkx71iFqW/ro01MqyWPB2fma3Px5fRSuZ4jgIwrG0/DGvz
-	hFyRfjBFQRjTlK+ivli5v1c35/ScD4hYolhTGXVyBj/BZXn9IsQlxulLTssagYHSy4ML
-	LxLBJSUXh/Kd1LJrKqgZjHkb200wrlXFFvsIRXpw6qf0+zR9Fr7CtIfmpytW4WDwmcCW
-	s37w==
+	Tue, 19 Jun 2012 07:54:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=fdCz6LhoTv0USL36MqGWsjoEbXd/HAmJX8u8O7iIJDw=;
+	b=lxzilX4r8/K+8Qo4i+F8MlJc4D5KfJ/ZAp/QghBZOF6jODpu/kG5SJO8uJBX9RydWJ
+	kw2ok0vxaIiU7Oj4D12e55K9syrS5BNzbMFyXOvHUqA94uat2ymD4LajxBoka3Kzu/xS
+	C5BqpLSt1ZE4eo+mYtWIA4IummV/jxfJ1eNo440+SK6/w4mNcxL3YAzfthLDmU1+6ePu
+	QTddjZ+XGP+xi8niKZJ40ZGO5qNn/BeP1ADrt24MP4878HqpYcTVaUJwtV6H/7agBNcx
+	5jjD/ikqoWLFZ+pFdBA8GjBh2XRxFiAfQu8ssgIBbGqRuoDgfoffdfqROPYDlz6eOuB6
+	0zuw==
+Received: by 10.68.230.68 with SMTP id sw4mr5598581pbc.142.1340117655206;
+	Tue, 19 Jun 2012 07:54:15 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:d:eba:edf1:1f5b:c35b:5dbc])
+	by mx.google.com with ESMTPS id os1sm28138155pbb.49.2012.06.19.07.54.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 19 Jun 2012 07:54:14 -0700 (PDT)
+Date: Tue, 19 Jun 2012 07:54:13 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120619145413.GD22301@bill-the-cat>
+References: <1339553354-14747-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-Received: by 10.112.26.131 with SMTP id l3mr8375220lbg.80.1340117006467; Tue,
-	19 Jun 2012 07:43:26 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
-In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
-References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
-	<jp5gkp$2ip$1@dough.gmane.org>
-	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
-	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
-	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
-	<4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
-Date: Tue, 19 Jun 2012 16:43:26 +0200
-Message-ID: <CADZ6=aspkP_NQy5j7-Jdsq0rXOmROrpt4AgCkkg_HXV=0a07VA@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: "Monk, Roger" <r-monk@ti.com>
-X-Gm-Message-State: ALoCoQl04ysQ4gJwGFUcZnybqkjHXKjMAJryWl2p+UA2IsSdRhhc0Xu/7TdImqDJKav43+kVZao2
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+In-Reply-To: <1339553354-14747-1-git-send-email-raj.khem@gmail.com>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011.03-maintenance][PATCH 1/3] openssl-1.x.x: Backport patches from OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,64 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 14:54:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Jun 2012 15:04:59 -0000
+X-Groupsio-MsgNum: 39297
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="45Z9DzgjV8m4Oswq"
+Content-Disposition: inline
+
+--45Z9DzgjV8m4Oswq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hello Roger,
+On Tue, Jun 12, 2012 at 07:09:12PM -0700, Khem Raj wrote:
 
->> >>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think
->> >>>>> this affects both projects one way or the other.
->> >>>>>
->> >>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5.
->> >>>>> This means with oe-core + meta-oe you now can choose between
->> >>>>> gcc-4.6 and gcc-4.7.
->> >>>>> However, both compilers break the kernel we're using
->> >>>>> (ti81xx-psp-linux-2.6.37).
->> >>>>
->> >>>> What happens when you disable the mailbox? AIUI you shouldn't
->> >>>> need that on Ne/Ce.
->> >>>
->> >>> How do I disable the mailbox?
->> >>
->> >> In the .config
->> >
->> > Wait wait wait, according to drivers/staging/tidspbridge/Kconfig we
->> > need OMAP_MBOX_FWK (i.e. "the mailbox") in order to use the DSP
->> > bridge. Disabling it would mean cutting off our DSP. No way.
->>
->> Are you actually using dspbridge? Or are you using dsplink or syslink?
->>
->> >>> What do you mean by Ne/Ce?
->> >>
->> >> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is
->> calling it nowadays.
->> >
->> > We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with
->> > a C674x DSP.
->>
->> So a centaurus family SoC.
->
-> Can you put some printk's in omap_mbox_register (plat-omap/mailbox.c) to =
-print the list objects, in particular the mbox->name?
->
-> Would also be useful to see the same in omap_mbox_get() before the call t=
-o strcmp().
+> These patches are needed for getting 2011.03
+> branch building on ubuntu 12.04 LTS
 
-So did you put your printks in there and then run the code? Were you
-able to reproduce the issue?
-
-Regards,
-Thilo
+Sorry for the delay, this (along with 2 and 3) are now applied, thanks.
 
 --=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+Tom
 
+--45Z9DzgjV8m4Oswq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk/gkpUACgkQdZngf2G4WwP9rwCfdsR5Kb8ob3rvabKXK38IF786
+No4An3BehW+H9PaWmJ2rMSRTxbRJLfUU
+=rxbr
+-----END PGP SIGNATURE-----
+
+--45Z9DzgjV8m4Oswq--
