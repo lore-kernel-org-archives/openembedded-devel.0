@@ -1,18 +1,36 @@
-Received: from smtp208.alice.it ([82.57.200.104])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SgtK1-0005ZM-Bk
+	(envelope-from <martin.jansa@gmail.com>) id 1SgtqC-0005SK-6V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 09:57:57 +0200
-Received: from mizar.localdomain (79.21.254.221) by smtp208.alice.it
-	(8.6.023.02) id 4F056E851301BE30; Tue, 19 Jun 2012 09:47:14 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 19 Jun 2012 10:31:12 +0200
+Received: by bkcjm2 with SMTP id jm2so4632230bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jun 2012 01:20:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=aVLNJDFe2ZyWc/F1CykZghNjYRHJ1P2J2wXSJ0MgZh8=;
+	b=BhBLwkGOV5Q5Xjml8CEsj2ZykKh77+mxa3Hbf60Ku2l7hlAPJCc7S9MVWAkupwOwga
+	n0OeQhkhZyYQESeY5DTVp4ZzR8zkcXZjPUgiZHvLtH1kKGPjmDOPrWOLtSU/wSRFfERU
+	X5s3WAUeRd7cs/RsJKjFRuqAdEgm4FDit0lIqT2zodZVHF3nBxmuWQwhsXdEB6rItV9d
+	BuhuotdJbo0oAvj28yR0vzYqGxFYn5aZh+YGKYk1PyAXun6iMKuemuq7og/ORpdAQiyn
+	CLlTMO+ZfD4j7Rvm6pgJb9DeJ0ehytBVSSmJq0RqEaojCLen5227EEiCauri3gAXeTSb
+	p86Q==
+Received: by 10.205.121.130 with SMTP id gc2mr7555054bkc.10.1340094029180;
+	Tue, 19 Jun 2012 01:20:29 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e20sm21929381bkv.10.2012.06.19.01.20.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 19 Jun 2012 01:20:27 -0700 (PDT)
+Date: Tue, 19 Jun 2012 10:20:29 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jun 2012 09:47:09 +0200
-Message-Id: <1340092029-30030-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1340091036-26496-1-git-send-email-andrea.adami@gmail.com>
-References: <1340091036-26496-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe][meta-initramfs][PATCH v2] ubi-utils-klibc: catch up with struct renaming in mtd/ubi-user.h
+Message-ID: <20120619082029.GR3178@jama.jama.net>
+References: <1340047163-24689-1-git-send-email-sgw@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1340047163-24689-1-git-send-email-sgw@linux.intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] rfkill: use update-alternatives
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,44 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 07:57:57 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 08:31:12 -0000
+X-Groupsio-MsgNum: 39294
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="YttKMwf6abDJOSyE"
+Content-Disposition: inline
 
-* v2 replaces malformed v1 patch
-* fix build, broken by header upgrade
-* bump PR
+--YttKMwf6abDJOSyE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../mtd/ubi-utils-klibc/libubi.c.patch             |   17 +++++++++++++++++
- 1 files changed, 17 insertions(+), 0 deletions(-)
+On Mon, Jun 18, 2012 at 12:19:23PM -0700, Saul Wold wrote:
+> Since oe-core added rfkill to busybox, this recipe needs to use u-a
+> also.
+>=20
+> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+> ---
+>  meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb |    7 +++++++
+>  1 files changed, 7 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/=
+recipes-connectivity/rfkill/rfkill_0.4.bb
+> index 561fdc7..548990c 100644
+> --- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
+> +++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
+> @@ -3,6 +3,7 @@ HOMEPAGE =3D "http://linuxwireless.org/en/users/Documenta=
+tion/rfkill"
+>  SECTION =3D "base"
+>  LICENSE =3D "BSD"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc6036d0eb7edbfced28c4160e5d3f=
+a94"
+> +PR =3D "r1"
+> =20
+>  SRC_URI =3D "http://wireless.kernel.org/download/${PN}/${P}.tar.bz2 \
+>             file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrappe=
+r-d.patch"
+> @@ -16,3 +17,9 @@ do_compile() {
+>  do_install() {
+>          oe_runmake DESTDIR=3D${D} install
+>  }
+> +
+> +inherit update-alternatives
+> +
+> +ALTERNATIVE_${PN} =3D "rfkill"
+> +ALTERNATIVE_PRIORITY =3D "50"
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-index db95904..048e39b 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
-@@ -9,3 +9,20 @@
-  {
-  	int fd, ret;
-  
-+@@ -1352,13 +1352,13 @@
-+ 
-+ int ubi_set_property(int fd, uint8_t property, uint64_t value)
-+ {
-+-	struct ubi_set_prop_req r;
-++	struct ubi_set_vol_prop_req r;
-+ 
-+-	memset(&r, 0, sizeof(struct ubi_set_prop_req));
-++	memset(&r, 0, sizeof(struct ubi_set_vol_prop_req));
-+ 	r.property = property;
-+ 	r.value = value;
-+ 
-+-	return ioctl(fd, UBI_IOCSETPROP, &r);
-++	return ioctl(fd, UBI_IOCSETVOLPROP, &r);
-+ }
-+ 
-+ int ubi_leb_unmap(int fd, int lnum)
--- 
-1.7.3.4
+Thanks for quick reaction, but something is wrong:
 
+WARNING: rfkill: alternative target (/usr/bin/rfkill or /usr/bin/rfkill.rfk=
+ill) does not exist, skipping...
+WARNING: rfkill: NOT adding alternative provide /usr/bin/rfkill: /usr/bin/r=
+fkill.rfkill does not exist
+WARNING: alt_link =3D=3D alt_target: /usr/bin/rfkill =3D=3D /usr/bin/rfkill
 
+(it's in /usr/sbin... )
 
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--YttKMwf6abDJOSyE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk/gNk0ACgkQN1Ujt2V2gByILgCgufPvOwcqxNKDnx/Lt8Zto2W0
+TrcAn0EFENUsoJPkanmeK+r/DC2jqswU
+=Wi82
+-----END PGP SIGNATURE-----
+
+--YttKMwf6abDJOSyE--
