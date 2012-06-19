@@ -1,34 +1,44 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sgu5b-0005eo-TU
+	(envelope-from <fromm@dresearch-fe.de>) id 1Sgzoo-0000Dl-8M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 10:47:07 +0200
-Received: by bkcjm2 with SMTP id jm2so4642670bkc.6
+	Tue, 19 Jun 2012 16:54:10 +0200
+Received: by lbol5 with SMTP id l5so5590068lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2012 01:36:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=3iJV0d0g0vy1kiWpBgmZUwzOrnqU9zrfiiJQ/cnV/7I=;
-	b=VgQw5Y71LMu2rwASMUvDHVYgyw7CngfloQ4DPEd5/W2oKy234bBvVqxaty3FDUCM3B
-	csLn9ahKsad9+et2GKl+Z0JB1OUslHIaylbdtbfZyayRFkSH41GtM9GTFAhPXuwzsuRw
-	tyVkTmGijrChMK6KkBpEPUOV7Gl7l3eclIdPiTCR0eomT0uAE5vC4V/LfiWspvJAxGI7
-	shDX1bs3Fmodx2BqXGdJ9cPM3TdBzwL3JqWd7BcAjvMKQlghlqlbCgdiwgQdMvYzsdeC
-	EJZaTTOIkKBXiqaspidd+FeyspRvGHkDudlrX5jCYbuERUcEIAxgN2/QdG3q+EFTqsqs
-	sjJg==
-Received: by 10.204.156.77 with SMTP id v13mr7827989bkw.59.1340094984725;
-	Tue, 19 Jun 2012 01:36:24 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id x23sm21994233bkw.12.2012.06.19.01.36.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 19 Jun 2012 01:36:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jun 2012 10:36:19 +0200
-Message-Id: <1340094979-19283-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <20120619082029.GR3178@jama.jama.net>
-References: <20120619082029.GR3178@jama.jama.net>
-Subject: [meta-oe][PATCHv2] rfkill: use update-alternatives
+	Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=/peThnkzl7+mZ0PYgj4XF5iTUS9F0/+xFiyy3MOOV1k=;
+	b=BemgyHv5XI9RjGc5QzMMlSYwhLyReSJLgrneCBRxeKMnDZaw3iL3yijXveBVjA35Td
+	e0t6G001JRK63OgMCCaFdNlClDvbiC8+d4CS4DaPYj6lQ3nPQYNbfYbbcYCm/JNK2v38
+	6PhKtpPdUbV8VQNwJQc5XGFkx71iFqW/ro01MqyWPB2fma3Px5fRSuZ4jgIwrG0/DGvz
+	hFyRfjBFQRjTlK+ivli5v1c35/ScD4hYolhTGXVyBj/BZXn9IsQlxulLTssagYHSy4ML
+	LxLBJSUXh/Kd1LJrKqgZjHkb200wrlXFFvsIRXpw6qf0+zR9Fr7CtIfmpytW4WDwmcCW
+	s37w==
+MIME-Version: 1.0
+Received: by 10.112.26.131 with SMTP id l3mr8375220lbg.80.1340117006467; Tue,
+	19 Jun 2012 07:43:26 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
+In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
+	<jp5gkp$2ip$1@dough.gmane.org>
+	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
+	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
+	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
+	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+Date: Tue, 19 Jun 2012 16:43:26 +0200
+Message-ID: <CADZ6=aspkP_NQy5j7-Jdsq0rXOmROrpt4AgCkkg_HXV=0a07VA@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
+To: "Monk, Roger" <r-monk@ti.com>
+X-Gm-Message-State: ALoCoQl04ysQ4gJwGFUcZnybqkjHXKjMAJryWl2p+UA2IsSdRhhc0Xu/7TdImqDJKav43+kVZao2
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 08:47:08 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 14:54:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Saul Wold <sgw@linux.intel.com>
+Hello Roger,
 
-* Since oe-core added rfkill to busybox, this recipe needs to use u-a
-  also.
-* MJ: added ALERNATIVE_LINK_NAME[rfkill]
-* MJ: increased ALTERNATIVE_PRIORITY (busybox also have 50)
+>> >>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think
+>> >>>>> this affects both projects one way or the other.
+>> >>>>>
+>> >>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5.
+>> >>>>> This means with oe-core + meta-oe you now can choose between
+>> >>>>> gcc-4.6 and gcc-4.7.
+>> >>>>> However, both compilers break the kernel we're using
+>> >>>>> (ti81xx-psp-linux-2.6.37).
+>> >>>>
+>> >>>> What happens when you disable the mailbox? AIUI you shouldn't
+>> >>>> need that on Ne/Ce.
+>> >>>
+>> >>> How do I disable the mailbox?
+>> >>
+>> >> In the .config
+>> >
+>> > Wait wait wait, according to drivers/staging/tidspbridge/Kconfig we
+>> > need OMAP_MBOX_FWK (i.e. "the mailbox") in order to use the DSP
+>> > bridge. Disabling it would mean cutting off our DSP. No way.
+>>
+>> Are you actually using dspbridge? Or are you using dsplink or syslink?
+>>
+>> >>> What do you mean by Ne/Ce?
+>> >>
+>> >> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is
+>> calling it nowadays.
+>> >
+>> > We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with
+>> > a C674x DSP.
+>>
+>> So a centaurus family SoC.
+>
+> Can you put some printk's in omap_mbox_register (plat-omap/mailbox.c) to =
+print the list objects, in particular the mbox->name?
+>
+> Would also be useful to see the same in omap_mbox_get() before the call t=
+o strcmp().
 
-Signed-off-by: Saul Wold <sgw@linux.intel.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb |    8 ++++++++
- 1 files changed, 8 insertions(+), 0 deletions(-)
+So did you put your printks in there and then run the code? Were you
+able to reproduce the issue?
 
-diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-index 561fdc7..430cf65 100644
---- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-+++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-@@ -3,6 +3,7 @@ HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
- SECTION = "base"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
-+PR = "r1"
- 
- SRC_URI = "http://wireless.kernel.org/download/${PN}/${P}.tar.bz2 \
-            file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch"
-@@ -16,3 +17,10 @@ do_compile() {
- do_install() {
-         oe_runmake DESTDIR=${D} install
- }
-+
-+inherit update-alternatives
-+
-+ALTERNATIVE_${PN} = "rfkill"
-+ALTERNATIVE_PRIORITY = "60"
-+ALTERNATIVE_LINK_NAME[rfkill] = "${sbindir}/rfkill"
-+
--- 
-1.7.8.6
+Regards,
+Thilo
 
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
