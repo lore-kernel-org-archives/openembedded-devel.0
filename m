@@ -1,38 +1,38 @@
-Received: from mail-qc0-f175.google.com ([209.85.216.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vwyodapink@gmail.com>) id 1SgqVk-0007JD-2t
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 06:57:52 +0200
-Received: by qcso7 with SMTP id o7so3185769qcs.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2012 21:47:08 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>) id 1SgrAl-0000n5-CI
+	for openembedded-devel@openembedded.org; Tue, 19 Jun 2012 07:40:15 +0200
+Received: by wibhm11 with SMTP id hm11so169348wib.12
+	for <openembedded-devel@openembedded.org>;
+	Mon, 18 Jun 2012 22:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=fWnyDjOY/zvfCeS61JTn9TjUChfMzbO6RuEYLly4IdI=;
-	b=TZHUdUF46ZZUTZha6i8IYlTZ3SzhDuq74JOSTJfqZiL71Lqd276LoC2jhfCc7ZkG6S
-	GL+9qXLd4xjT3CH547262PN3Bcfl7PXFDj2wohpOc4C6b/6Pg8kc1pwYNsukvYziS5Bj
-	8g9T8BmzJNUEfr1iPy8QamHLyIOzSABJmuJa01zxkalrdaEYv1jdulVhWu3zmtppOK1F
-	JgCJgJWCnykmfOyQDf+84tip3KmmOncqbiqxpLSJ/dM0FKXBEQcjntJqGefjQn2KV+H1
-	38RTJU4lCWSkgeXfBgZMdoI5RYS7bHaujgaoF0aIIa88vUq7dDxWgr5QLSJiYE3QK0jb
-	RgJg==
-Received: by 10.229.137.145 with SMTP id w17mr398253qct.27.1340081228813;
-	Mon, 18 Jun 2012 21:47:08 -0700 (PDT)
-Received: from [192.168.1.2] (dpc693570121.direcpc.com. [69.35.70.121])
-	by mx.google.com with ESMTPS id x14sm35896231qac.1.2012.06.18.21.47.02
-	(version=SSLv3 cipher=OTHER); Mon, 18 Jun 2012 21:47:08 -0700 (PDT)
-Message-ID: <4FE00430.2070307@gmail.com>
-Date: Mon, 18 Jun 2012 21:46:40 -0700
-From: j <vwyodapink@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:13.0) Gecko/20120616 Thunderbird/13.0.1
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=CIwaGldmvAg+P9sbwY2K4z0Zj1/1IlztQSZQDXZmbx0=;
+	b=WdqxFuar0BtTKEwjLGfLCxyghg57n0h1X9vCFtyf89I0Lc5VX5IdwUm4/YrCsVMTOP
+	TFh9kxXSl25beHUys+RPODJa5gdVDupHn4G/2yRlV/C7gYkBAGstq6h0Emr3yC2qv8ZP
+	NZkKEUJk7N5hBZWTDueNLUP+C5XJlMVNFCj4kWFOuy87TNeRochozHYnjfC+SsRP1Mhi
+	JwO8RrqZvd/hrU0RNp3OI72adPfqMNscG9VHfc24wxZVTArHDRhKHZRXpaULbmgoGakn
+	R57TRXlUd44JziWymkrbl6IXRsKk3qHOtclSbZ9BTG3ZUrHX3npuclsSIxMpVyYzXTV/
+	Walw==
+Received: by 10.180.104.168 with SMTP id gf8mr164722wib.12.1340083772102;
+	Mon, 18 Jun 2012 22:29:32 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id hv7sm54553769wib.0.2012.06.18.22.29.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Jun 2012 22:29:30 -0700 (PDT)
+Date: Tue, 19 Jun 2012 07:29:32 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Apelete Seketeli <apelete@seketeli.net>
+Message-ID: <20120619052932.GN3178@jama.jama.net>
+References: <1340062930-19293-1-git-send-email-apelete@seketeli.net>
+	<1340062930-19293-2-git-send-email-apelete@seketeli.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
-	<7888297.NxAaM4fFbI@pink> <4FE00142.30908@gmail.com>
-	<CAMKF1sr6ekWbucQzJD+uM7ToH2mZfQ9yYVOPbhOKr8uLZjCTrQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sr6ekWbucQzJD+uM7ToH2mZfQ9yYVOPbhOKr8uLZjCTrQ@mail.gmail.com>
-Subject: Re: Package selection
+In-Reply-To: <1340062930-19293-2-git-send-email-apelete@seketeli.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@openembedded.org,
+	Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Subject: Re: [PATCH 1/1] gtk+: Regenerate no-demos.patch and update recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +46,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 04:57:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Jun 2012 05:40:15 -0000
+X-Groupsio-MsgNum: 39287
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4Y142/9l9nQlBiaj"
+Content-Disposition: inline
 
-On 06/18/2012 09:40 PM, Khem Raj wrote:
-> On Mon, Jun 18, 2012 at 9:34 PM, j <vwyodapink@gmail.com> wrote:
->>> Also, you need to bitbake -c cleanall <your-package> to make bitbake
->>> forget it
->>
->> Isnt bitbake -c cleansstate <your-package> a better method of cleaning a
->> build you want to do again?
->>
->> If not does anyone know what the actual difference is?
-> clean - cleans the builddir
-> cleansstate - cleans builddir as well as shared state copy of this
-> package if any
-> cleanall - clean builddir, shared state and the downloaded src tar
-> file from DL_DIR
->
-> you usually only should need clean in general. cleansstate should be seldom used
-> but its preferred to see why cleansstate is needed and if there is
-> anything wrong
-> with sstate we would like to know.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-Thanks Khem, been wondering that info just had not looked into it as of 
-yet. Makes perfect sense now.
+--4Y142/9l9nQlBiaj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Jun 19, 2012 at 01:42:10AM +0200, Apelete Seketeli wrote:
+> This fix regenerates the gtk+-2.20.1/no-demos.patch file because the
+> targeted Makefile.am file changed since gtk+-2.10.1.
+> The gtk+_2.20.1.bb recipe is also updated to fix an issue where
+> no-demos.patch was not taken into account during the do_patch() stage.
+>=20
+> Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+> ---
+>  recipes/gtk+/gtk+-2.20.1/no-demos.patch |    7 ++++---
+>  recipes/gtk+/gtk+_2.20.1.bb             |    3 +--
+>  2 files changed, 5 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/recipes/gtk+/gtk+-2.20.1/no-demos.patch b/recipes/gtk+/gtk+-=
+2.20.1/no-demos.patch
+> index 0fc4c48..ac0730d 100644
+> --- a/recipes/gtk+/gtk+-2.20.1/no-demos.patch
+> +++ b/recipes/gtk+/gtk+-2.20.1/no-demos.patch
+> @@ -1,7 +1,8 @@
+> ---- gtk+-2.10.1/Makefile.am.orig	2006-08-08 12:37:30.000000000 +0100
+> -+++ gtk+-2.10.1/Makefile.am	2006-08-08 12:37:48.000000000 +0100
+> -@@ -1,6 +1,6 @@
+> +--- gtk+-2.20.1/Makefile.am.orig	2012-06-18 22:40:19.348040648 +0200
+> ++++ gtk+-2.20.1/Makefile.am	2012-06-18 22:40:41.272149318 +0200
+> +@@ -1,7 +1,7 @@
+>   ## Makefile.am for GTK+
+> + include $(top_srcdir)/Makefile.decl
+>  =20
+>  -SRC_SUBDIRS =3D gdk-pixbuf gdk gtk modules demos tests perf contrib
+>  +SRC_SUBDIRS =3D gdk-pixbuf gdk gtk modules tests perf contrib
+> diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
+> index 9cffee1..6e3c291 100644
+> --- a/recipes/gtk+/gtk+_2.20.1.bb
+> +++ b/recipes/gtk+/gtk+_2.20.1.bb
+> @@ -1,10 +1,9 @@
+>  require gtk+.inc
+> =20
+> -SRC_URI_append_virtclass-native =3D " file://no-demos.patch \
+> -"
+>  SRC_URI_append =3D "file://gtk-dnd-grab-deadlock-fix.patch \
+>  		  file://cross-nm.patch \
+>  		  file://xkb-ifdef.patch \
+> +		  file://no-demos.patch \
 
+I guess this was because demos were working for target case and were
+intentionally disabled only for native..
 
+>  		 "
+> =20
+>  SRC_URI[gtk.md5sum] =3D "53e6f3a93bd22934878fc4a4a34c68aa"
+> --=20
+> 1.7.10
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--4Y142/9l9nQlBiaj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk/gDjwACgkQN1Ujt2V2gBzQRwCfTlJYiHRQ/7+yfFd95x+aW38x
+pLkAn0ocm9nH1GjZ4oGO5weLOXESg4gY
+=nlHf
+-----END PGP SIGNATURE-----
+
+--4Y142/9l9nQlBiaj--
