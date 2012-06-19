@@ -1,31 +1,36 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-qc0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dallas.a.clement@gmail.com>) id 1SgnHD-0000Z3-Dr
+	(envelope-from <vwyodapink@gmail.com>) id 1SgqJb-00073z-5p
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 03:30:39 +0200
-Received: by wibhi8 with SMTP id hi8so77794wib.6
+	Tue, 19 Jun 2012 06:45:19 +0200
+Received: by qcso7 with SMTP id o7so3182964qcs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2012 18:19:56 -0700 (PDT)
+	Mon, 18 Jun 2012 21:34:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=SCXSehj+SNhtW779bmf1cqoQO8FaXNGuf5Q3HyTKAZk=;
-	b=e4VJSXSBScfTX2Uh09KdS5e0dNWGbZePy8YeUTxq9wDM/MfLzEOfP2xRO1D2as4QgR
-	amaHc6wg4GLe6uATxbyRPN6YjSfUY9gU1xyxxF0keCKGm9h7/dV6MAFNAGBmJ+TDf5d3
-	jbUwioUulkoPGBgJRjrL5DfWV8AZGVx+f9dl/ZsHiksmEQwkTeL+MWChe8y26O2YE2Ag
-	6T/YbHpQ5vPmqyZFaHrUmujltvY/Uj+PzT6RdoydqA6jqPkvs0iMd4+B+ksWakb0Cwic
-	FjBL4wI35MBUMow6zg9y2dey/CRNIdxGvI1ftQBVQtARIy4E2RvZz8wVVrm3W2HU1Lco
-	txdw==
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=jStikegU9AG7soE6gfTYOyxsf4RaoPXN1os2w0w9efg=;
+	b=Rsm5de+vZqTTRerW4wyAOjyOjbhyPUyf8juKOL2EzFK/e/fIuDEe5Ov08wENrXHfCJ
+	9kxvgNgqdnEPcqsVKlA9qhXzVHiBqx2NlUEYq0YuAlLLlCLUGYk6c1KE2nWPVvsu6GoJ
+	uC+d14h9jttHFGc0oM1qB1GMTNQSebNgU2U1Qa6MGRh74QUenass9M8dDSqOK8gxb+72
+	biA/wyD7OG1U6ZLG6pSH+LH1NByfIxauRoY6lZtGXzCaZlHkTN0Z/GldMEkp/YhsgO9o
+	9EKRHC9UFK+7W7O4d4bETY7x95XKeyzygArRGDZL72vOAde5/bxdEX4VdkQEgpsdCFc5
+	yCvg==
+Received: by 10.224.184.82 with SMTP id cj18mr31503013qab.81.1340080475476;
+	Mon, 18 Jun 2012 21:34:35 -0700 (PDT)
+Received: from [192.168.1.2] (dpc693570121.direcpc.com. [69.35.70.121])
+	by mx.google.com with ESMTPS id gy9sm46062470qab.22.2012.06.18.21.34.30
+	(version=SSLv3 cipher=OTHER); Mon, 18 Jun 2012 21:34:34 -0700 (PDT)
+Message-ID: <4FE00142.30908@gmail.com>
+Date: Mon, 18 Jun 2012 21:34:10 -0700
+From: j <vwyodapink@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:13.0) Gecko/20120616 Thunderbird/13.0.1
 MIME-Version: 1.0
-Received: by 10.180.98.201 with SMTP id ek9mr28235265wib.7.1340068796671; Mon,
-	18 Jun 2012 18:19:56 -0700 (PDT)
-Received: by 10.180.14.193 with HTTP; Mon, 18 Jun 2012 18:19:56 -0700 (PDT)
-In-Reply-To: <7888297.NxAaM4fFbI@pink>
+To: openembedded-devel@lists.openembedded.org
 References: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
 	<7888297.NxAaM4fFbI@pink>
-Date: Mon, 18 Jun 2012 20:19:56 -0500
-Message-ID: <CAE9DZUTUaNOBWyEFJxfYK5YpXN_C4Zh_o=qo-Vt4XyS89_Nn_Q@mail.gmail.com>
-From: Dallas Clement <dallas.a.clement@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <7888297.NxAaM4fFbI@pink>
 Subject: Re: Package selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,11 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 01:30:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 19 Jun 2012 04:45:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thanks all for the tips!  I got quite a bit further by trying oe-core
-instead of the oe-classic I was using.  Was able to build a minimal
-system and run in qemu for x86-64.
+On 06/18/2012 05:32 PM, Ciprian Ciubotariu wrote:
+> On Monday 18 June 2012 11:57:01 Dallas Clement wrote:
+>> Lastly, it is possible to avoid the repeated fetching of source
+>> packages?  In other words, can the source URI's point to packages in a
+>> local file system repository?
+> I have extracted some minimal code from the old OE srctree.bbclass file that
+> allows us to do minimal rebuilds when developing:
+>
+> S="/path/to/your/sources/"
+> SRC_URI=""
+>
+> def remove_tasks(deltasks, d):
+>      for task in filter(lambda k: d.getVarFlag(k, "task"), d.keys()):
+>          deps = d.getVarFlag(task, "deps")
+>          for preptask in deltasks:
+>              if preptask in deps:
+>                  deps.remove(preptask)
+>          d.setVarFlag(task, "deps", deps)
+>
+> #addtask configure after do_setscene
+>
+> python () {
+>      remove_tasks(["do_patch", "do_unpack", "do_fetch"], d)
+> }
+>
+>
+> Note that setting S there makes bitbake treat this as the work folder, so
+> you'll get oe-core build artifacts there.
+>
+> Also, you need to bitbake -c cleanall <your-package> to make bitbake forget it
+
+Isnt bitbake -c cleansstate <your-package> a better method of cleaning a 
+build you want to do again?
+
+If not does anyone know what the actual difference is?
+> has already built your package, and next bitbake <your-package> to perform the
+> minimal build.
+>
+>> Thanks much,
+>>
+>> Dallas
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
