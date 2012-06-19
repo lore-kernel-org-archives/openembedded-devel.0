@@ -1,23 +1,31 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <cheepeero@gmx.net>) id 1SgmWs-00030Y-Mx
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <dallas.a.clement@gmail.com>) id 1SgnHD-0000Z3-Dr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jun 2012 02:42:46 +0200
-Received: (qmail invoked by alias); 19 Jun 2012 00:32:04 -0000
-Received: from unknown (EHLO pink.localnet) [78.96.83.205]
-	by mail.gmx.net (mp004) with SMTP; 19 Jun 2012 02:32:04 +0200
-X-Authenticated: #14774724
-X-Provags-ID: V01U2FsdGVkX1/xM4M3M93xXwG0ay6+MX4wA1ce53ysqacZdDyqkN
-	tEydjaooqaHxGg
-From: Ciprian Ciubotariu <cheepeero@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jun 2012 03:32:03 +0300
-Message-ID: <7888297.NxAaM4fFbI@pink>
-User-Agent: KMail/4.8.3 (Linux/3.2.12-gentoo; KDE/4.8.3; x86_64; ; )
-In-Reply-To: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
-References: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
+	Tue, 19 Jun 2012 03:30:39 +0200
+Received: by wibhi8 with SMTP id hi8so77794wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jun 2012 18:19:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=SCXSehj+SNhtW779bmf1cqoQO8FaXNGuf5Q3HyTKAZk=;
+	b=e4VJSXSBScfTX2Uh09KdS5e0dNWGbZePy8YeUTxq9wDM/MfLzEOfP2xRO1D2as4QgR
+	amaHc6wg4GLe6uATxbyRPN6YjSfUY9gU1xyxxF0keCKGm9h7/dV6MAFNAGBmJ+TDf5d3
+	jbUwioUulkoPGBgJRjrL5DfWV8AZGVx+f9dl/ZsHiksmEQwkTeL+MWChe8y26O2YE2Ag
+	6T/YbHpQ5vPmqyZFaHrUmujltvY/Uj+PzT6RdoydqA6jqPkvs0iMd4+B+ksWakb0Cwic
+	FjBL4wI35MBUMow6zg9y2dey/CRNIdxGvI1ftQBVQtARIy4E2RvZz8wVVrm3W2HU1Lco
+	txdw==
 MIME-Version: 1.0
-X-Y-GMX-Trusted: 0
+Received: by 10.180.98.201 with SMTP id ek9mr28235265wib.7.1340068796671; Mon,
+	18 Jun 2012 18:19:56 -0700 (PDT)
+Received: by 10.180.14.193 with HTTP; Mon, 18 Jun 2012 18:19:56 -0700 (PDT)
+In-Reply-To: <7888297.NxAaM4fFbI@pink>
+References: <CAE9DZUTckmmxoW_kdKksyT7tq86zV-AacJGwrEqpCFh+vBZYFw@mail.gmail.com>
+	<7888297.NxAaM4fFbI@pink>
+Date: Mon, 18 Jun 2012 20:19:56 -0500
+Message-ID: <CAE9DZUTUaNOBWyEFJxfYK5YpXN_C4Zh_o=qo-Vt4XyS89_Nn_Q@mail.gmail.com>
+From: Dallas Clement <dallas.a.clement@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Package selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,51 +40,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 00:42:46 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 19 Jun 2012 01:30:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 18 June 2012 11:57:01 Dallas Clement wrote:
-> Lastly, it is possible to avoid the repeated fetching of source
-> packages?  In other words, can the source URI's point to packages in a
-> local file system repository?
-
-I have extracted some minimal code from the old OE srctree.bbclass file that 
-allows us to do minimal rebuilds when developing:
-
-S="/path/to/your/sources/"
-SRC_URI=""
-
-def remove_tasks(deltasks, d):
-    for task in filter(lambda k: d.getVarFlag(k, "task"), d.keys()):
-        deps = d.getVarFlag(task, "deps")
-        for preptask in deltasks:
-            if preptask in deps:
-                deps.remove(preptask)
-        d.setVarFlag(task, "deps", deps)
-
-#addtask configure after do_setscene
-
-python () {
-    remove_tasks(["do_patch", "do_unpack", "do_fetch"], d)
-}
-
-
-Note that setting S there makes bitbake treat this as the work folder, so 
-you'll get oe-core build artifacts there.
-
-Also, you need to bitbake -c cleanall <your-package> to make bitbake forget it 
-has already built your package, and next bitbake <your-package> to perform the 
-minimal build.
-
-> 
-> Thanks much,
-> 
-> Dallas
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Thanks all for the tips!  I got quite a bit further by trying oe-core
+instead of the oe-classic I was using.  Was able to build a minimal
+system and run in qemu for x86-64.
 
 
