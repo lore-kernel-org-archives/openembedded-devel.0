@@ -1,29 +1,29 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1Sh6TC-0006hA-1V
-	for openembedded-devel@openembedded.org; Wed, 20 Jun 2012 00:00:18 +0200
+	(envelope-from <apelete@seketeli.net>) id 1Sh6WF-0007bY-JE
+	for openembedded-devel@openembedded.org; Wed, 20 Jun 2012 00:03:29 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id A40E4EA042;
-	Tue, 19 Jun 2012 23:57:16 +0200 (CEST)
+	by ms.seketeli.net (Postfix) with ESMTP id 9CE3CEA04D;
+	Wed, 20 Jun 2012 00:00:20 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 9606B604DE; Tue, 19 Jun 2012 23:49:33 +0200 (CEST)
-Date: Tue, 19 Jun 2012 23:49:33 +0200
+	id BED8D604DE; Tue, 19 Jun 2012 23:52:38 +0200 (CEST)
+Date: Tue, 19 Jun 2012 23:52:38 +0200
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@openembedded.org
-Message-ID: <20120619214933.GG4845@hermes>
+Message-ID: <20120619215238.GH4845@hermes>
 References: <1340062930-19293-1-git-send-email-apelete@seketeli.net>
 	<1340062930-19293-2-git-send-email-apelete@seketeli.net>
 	<20120619052932.GN3178@jama.jama.net>
 	<20120619060703.GA4845@hermes>
 	<20120619063448.GO3178@jama.jama.net>
-	<20120619195610.GC4845@hermes>
+	<20120619195610.GC4845@hermes> <20120619214933.GG4845@hermes>
 MIME-Version: 1.0
-In-Reply-To: <20120619195610.GC4845@hermes>
+In-Reply-To: <20120619214933.GG4845@hermes>
 X-Operating-System: Debian GNU/Linux wheezy/sid
 X-URL: http://www.seketeli.net/~apelete
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [oe-classic][gtk+][PATCH v2 0/2] gtk+: fix build issue by not building demo programs
+Subject: [oe-classic][gtk+][PATCH v2 1/2] gtk+: Rebase gtk+-2.20.1/no-demos.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,51 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 22:00:18 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 22:03:29 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+This patch rebases the recipes/gtk+/gtk+-2.20.1/no-demos.patch file
+against the version of the files of gtk+-2.20.1.
 
-Here is another attempt to fix the following build issue:
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+---
+ recipes/gtk+/gtk+-2.20.1/no-demos.patch |    7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-| Making all in demos
-| make[2]: Entering directory `/home/apelete/devel/bitbake/build/tmp/work/mipsel-oe-linux/gtk+-2.20.1-r10.4/gtk+-2.20.1/demos'
-| /usr/bin/gdk-pixbuf-csource --raw --build-list		\
-| 	        apple_red  ./apple-red.png	\
-|                 gnome_foot ./gnome-foot.png	\
-|         > test-inline-pixbufs.h				\
-| 	|| (rm -f test-inline-pixbufs.h && false)
-| failed to load "./apple-red.png": Couldn't recognize the image file format for file './apple-red.png'
-| make[2]: *** [test-inline-pixbufs.h] Error 1
-| make[2]: Leaving directory `/home/apelete/devel/bitbake/build/tmp/work/mipsel-oe-linux/gtk+-2.20.1-r10.4/gtk+-2.20.1/demos'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory `/home/apelete/devel/bitbake/build/tmp/work/mipsel-oe-linux/gtk+-2.20.1-r10.4/gtk+-2.20.1'
-| make: *** [all] Error 2
-
-As a solution, I chose to discard the build of all the demo programs
-by removing the corresponding build instructions in demos/Makefile.am
-in the source package.
-Do we really need those demo programs when building for an embedded
-target ?
-
-I also jumped on the occasion to rebase the no-demos.patch that was
-applied to gtk+-native only (patch which intentionally disable the
-demo prgrams for gtk+-native, but not for target).
-
-The two patches that come as a follow-up of this message are what it's
-all about.
-
-Apelete Seketeli (2):
-  gtk+: Rebase gtk+-2.20.1/no-demos.patch
-  gtk+: Add no-test-inline-pixbufs.patch to gtk+-2.20.1
-
- recipes/gtk+/gtk+-2.20.1/no-demos.patch            |    7 ++++---
- .../gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch  |   22 ++++++++++++++++++++
- recipes/gtk+/gtk+_2.20.1.bb                        |    1 +
- 3 files changed, 27 insertions(+), 3 deletions(-)
- create mode 100644 recipes/gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch
-
+diff --git a/recipes/gtk+/gtk+-2.20.1/no-demos.patch b/recipes/gtk+/gtk+-2.20.1/no-demos.patch
+index 0fc4c48..ac0730d 100644
+--- a/recipes/gtk+/gtk+-2.20.1/no-demos.patch
++++ b/recipes/gtk+/gtk+-2.20.1/no-demos.patch
+@@ -1,7 +1,8 @@
+---- gtk+-2.10.1/Makefile.am.orig	2006-08-08 12:37:30.000000000 +0100
+-+++ gtk+-2.10.1/Makefile.am	2006-08-08 12:37:48.000000000 +0100
+-@@ -1,6 +1,6 @@
++--- gtk+-2.20.1/Makefile.am.orig	2012-06-18 22:40:19.348040648 +0200
+++++ gtk+-2.20.1/Makefile.am	2012-06-18 22:40:41.272149318 +0200
++@@ -1,7 +1,7 @@
+  ## Makefile.am for GTK+
++ include $(top_srcdir)/Makefile.decl
+  
+ -SRC_SUBDIRS = gdk-pixbuf gdk gtk modules demos tests perf contrib
+ +SRC_SUBDIRS = gdk-pixbuf gdk gtk modules tests perf contrib
 -- 
 1.7.10
 
