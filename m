@@ -1,30 +1,44 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1Sh6Yp-0007hh-P7
-	for openembedded-devel@openembedded.org; Wed, 20 Jun 2012 00:06:07 +0200
-Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id B6E05EA040;
-	Wed, 20 Jun 2012 00:03:06 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 01D08604DE; Tue, 19 Jun 2012 23:55:19 +0200 (CEST)
-Date: Tue, 19 Jun 2012 23:55:19 +0200
-From: Apelete Seketeli <apelete@seketeli.net>
-To: openembedded-devel@openembedded.org
-Message-ID: <20120619215519.GI4845@hermes>
-References: <1340062930-19293-1-git-send-email-apelete@seketeli.net>
-	<1340062930-19293-2-git-send-email-apelete@seketeli.net>
-	<20120619052932.GN3178@jama.jama.net>
-	<20120619060703.GA4845@hermes>
-	<20120619063448.GO3178@jama.jama.net>
-	<20120619195610.GC4845@hermes> <20120619214933.GG4845@hermes>
-	<20120619215238.GH4845@hermes>
+	(envelope-from <r-monk@ti.com>) id 1Sh767-00082s-4o
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jun 2012 00:40:31 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5JMRGsM028471;
+	Tue, 19 Jun 2012 17:27:16 -0500
+Received: from DNCE71.ent.ti.com (dnce71.ent.ti.com [137.167.131.20])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5JMRF1Z025281;
+	Tue, 19 Jun 2012 17:27:16 -0500
+Received: from DNCE05.ent.ti.com ([fe80::2868:e891:b6c7:394]) by
+	DNCE71.ent.ti.com ([fe80::3dd1:4b04:86e6:bfd0%29]) with mapi id
+	14.01.0323.003; Wed, 20 Jun 2012 00:27:15 +0200
+From: "Monk, Roger" <r-monk@ti.com>
+To: Thilo Fromm <fromm@dresearch-fe.de>
+Thread-Topic: [meta-ti] [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc
+	> 4.5
+Thread-Index: AQHNTinlvsmx8iCVy0ivyQtXSa56lZcCNu4g
+Date: Tue, 19 Jun 2012 22:27:14 +0000
+Message-ID: <4C82F39BABFE6A429733A300DEBF52240B7ECAEB@DNCE05.ent.ti.com>
+References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
+	<jp5gkp$2ip$1@dough.gmane.org>
+	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
+	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
+	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
+	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+	<CADZ6=aspkP_NQy5j7-Jdsq0rXOmROrpt4AgCkkg_HXV=0a07VA@mail.gmail.com>
+In-Reply-To: <CADZ6=aspkP_NQy5j7-Jdsq0rXOmROrpt4AgCkkg_HXV=0a07VA@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-In-Reply-To: <20120619215238.GH4845@hermes>
-X-Operating-System: Debian GNU/Linux wheezy/sid
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [oe-classic][gtk+][PATCH v2 2/2] gtk+: Add no-test-inline-pixbufs.patch to gtk+-2.20.1
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-ti] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,68 +52,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 22:06:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Jun 2012 22:40:31 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This patch adds a patch to the gtk+-2.20.1 recipe that removes the
-need to build test-inline-pixbufs.h in the demos/Makefile.am file of
-the gtk+-2.20.1 upstream package.
-It also removes all the demo programs that were dependant on
-test-inline-pixbufs.h from demos/Makefile.am.
-
-Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
----
- .../gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch  |   22 ++++++++++++++++++++
- recipes/gtk+/gtk+_2.20.1.bb                        |    1 +
- 2 files changed, 23 insertions(+)
- create mode 100644 recipes/gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch
-
-diff --git a/recipes/gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch b/recipes/gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch
-new file mode 100644
-index 0000000..c1fcbd7
---- /dev/null
-+++ b/recipes/gtk+/gtk+-2.20.1/no-test-inline-pixbufs.patch
-@@ -0,0 +1,22 @@
-+--- gtk+-2.20.1/demos/Makefile.am.orig	2012-06-18 21:53:07.365997572 +0200
-++++ gtk+-2.20.1/demos/Makefile.am	2012-06-18 21:53:43.718177837 +0200
-+@@ -23,18 +23,9 @@
-+ 	$(GTK_DEP_LIBS)							\
-+ 	$(MATH_LIB)
-+ 
-+-noinst_PROGRAMS = 		\
-+-	testpixbuf-drawable 	\
-+-	testanimation 		\
-+-	testpixbuf-color	\
-+-	testpixbuf-save		\
-+-	testpixbuf-scale 	\
-+-	pixbuf-demo
-+-
-+ # Need to build test-inline-pixbufs.h for testpixbuf
-+ if HAVE_PNG
-+-noinst_PROGRAMS += testpixbuf
-+-BUILT_SOURCES = test-inline-pixbufs.h
-++BUILT_SOURCES =
-+ endif
-+ 
-+ if CROSS_COMPILING
-diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
-index 9cffee1..af73d31 100644
---- a/recipes/gtk+/gtk+_2.20.1.bb
-+++ b/recipes/gtk+/gtk+_2.20.1.bb
-@@ -5,6 +5,7 @@ SRC_URI_append_virtclass-native = " file://no-demos.patch \
- SRC_URI_append = "file://gtk-dnd-grab-deadlock-fix.patch \
- 		  file://cross-nm.patch \
- 		  file://xkb-ifdef.patch \
-+		  file://no-test-inline-pixbufs.patch \
- 		 "
- 
- SRC_URI[gtk.md5sum] = "53e6f3a93bd22934878fc4a4a34c68aa"
--- 
-1.7.10
-
-
--- 
-        Apelete
+SGVsbG8gVGhpbG8sDQoNCj4NClRleGFzIEluc3RydW1lbnRzIExpbWl0ZWQsIDgwMCBQYXZpbGlv
+biBEcml2ZSwgTm9ydGhhbXB0b24sIE5ONCA3WUwuIFJlZ2lzdGVyZWQgaW4gRW5nbGFuZCAmIFdh
+bGVzIHVuZGVyIGNvbXBhbnkgbnVtYmVyIDAwNTc0MTAyDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2Fn
+ZS0tLS0tDQo+IEZyb206IFRoaWxvIEZyb21tIFttYWlsdG86ZnJvbW1AZHJlc2VhcmNoLWZlLmRl
+XQ0KPiBTZW50OiAxOSBKdW5lIDIwMTIgMTU6NDMNCj4gVG86IE1vbmssIFJvZ2VyDQo+IENjOiBL
+b2VuIEtvb2k7IG1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZzsgb3BlbmVtYmVkZGVkLWRldmVsQGxp
+c3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFttZXRhLXRpXSBbb2VdIHRpODF4
+eC1wc3AtbGludXgtMi42LjM3OiBicm9rZW4ga2VybmVsIHdpdGggZ2NjID4gNC41DQo+DQo+IEhl
+bGxvIFJvZ2VyLA0KPg0KPiA+PiA+Pj4+PiBzb3JyeSBmb3IgdGhlIGNyb3NzLXBvc3QgKG9wZW5l
+bWJlZGRlZC1kZXZlbCwgbWV0YS10aSksIEkgdGhpbmsNCj4gPj4gPj4+Pj4gdGhpcyBhZmZlY3Rz
+IGJvdGggcHJvamVjdHMgb25lIHdheSBvciB0aGUgb3RoZXIuDQo+ID4+ID4+Pj4+DQo+ID4+ID4+
+Pj4+IFJlY2VudGx5LCBtZXRhLW9wZW5lbWJlZGRlZC90b29sY2hhaW4tbGF5ZXIgcmVtb3ZlZCBn
+Y2MtNC41Lg0KPiA+PiA+Pj4+PiBUaGlzIG1lYW5zIHdpdGggb2UtY29yZSArIG1ldGEtb2UgeW91
+IG5vdyBjYW4gY2hvb3NlIGJldHdlZW4NCj4gPj4gPj4+Pj4gZ2NjLTQuNiBhbmQgZ2NjLTQuNy4N
+Cj4gPj4gPj4+Pj4gSG93ZXZlciwgYm90aCBjb21waWxlcnMgYnJlYWsgdGhlIGtlcm5lbCB3ZSdy
+ZSB1c2luZw0KPiA+PiA+Pj4+PiAodGk4MXh4LXBzcC1saW51eC0yLjYuMzcpLg0KPiA+PiA+Pj4+
+DQo+ID4+ID4+Pj4gV2hhdCBoYXBwZW5zIHdoZW4geW91IGRpc2FibGUgdGhlIG1haWxib3g/IEFJ
+VUkgeW91IHNob3VsZG4ndA0KPiA+PiA+Pj4+IG5lZWQgdGhhdCBvbiBOZS9DZS4NCj4gPj4gPj4+
+DQo+ID4+ID4+PiBIb3cgZG8gSSBkaXNhYmxlIHRoZSBtYWlsYm94Pw0KPiA+PiA+Pg0KPiA+PiA+
+PiBJbiB0aGUgLmNvbmZpZw0KPiA+PiA+DQo+ID4+ID4gV2FpdCB3YWl0IHdhaXQsIGFjY29yZGlu
+ZyB0byBkcml2ZXJzL3N0YWdpbmcvdGlkc3BicmlkZ2UvS2NvbmZpZyB3ZQ0KPiA+PiA+IG5lZWQg
+T01BUF9NQk9YX0ZXSyAoaS5lLiAidGhlIG1haWxib3giKSBpbiBvcmRlciB0byB1c2UgdGhlIERT
+UA0KPiA+PiA+IGJyaWRnZS4gRGlzYWJsaW5nIGl0IHdvdWxkIG1lYW4gY3V0dGluZyBvZmYgb3Vy
+IERTUC4gTm8gd2F5Lg0KPiA+Pg0KPiA+PiBBcmUgeW91IGFjdHVhbGx5IHVzaW5nIGRzcGJyaWRn
+ZT8gT3IgYXJlIHlvdSB1c2luZyBkc3BsaW5rIG9yIHN5c2xpbms/DQo+ID4+DQo+ID4+ID4+PiBX
+aGF0IGRvIHlvdSBtZWFuIGJ5IE5lL0NlPw0KPiA+PiA+Pg0KPiA+PiA+PiBOZXRyYS9DZW50YXVy
+dXMsIGRtODF4eCwgYzZhODF4eCwgYW0zOHh4LCBhbTM5eHggb3Igd2hhdGV2ZXIgVEkgaXMNCj4g
+Pj4gY2FsbGluZyBpdCBub3dhZGF5cy4NCj4gPj4gPg0KPiA+PiA+IFdlJ3JlIG9uIGEgIlRJIERh
+VmluY2kgRE04MTQ4IiwgZmVhdHVyaW5nIGEgY29ydGV4LWE4IGNvbWJpbmVkIHdpdGgNCj4gPj4g
+PiBhIEM2NzR4IERTUC4NCj4gPj4NCj4gPj4gU28gYSBjZW50YXVydXMgZmFtaWx5IFNvQy4NCj4g
+Pg0KPiA+IENhbiB5b3UgcHV0IHNvbWUgcHJpbnRrJ3MgaW4gb21hcF9tYm94X3JlZ2lzdGVyIChw
+bGF0LW9tYXAvbWFpbGJveC5jKSB0byBwcmludCB0aGUgbGlzdCBvYmplY3RzLCBpbiBwYXJ0aWN1
+bGFyIHRoZSBtYm94LT5uYW1lPw0KPiA+DQo+ID4gV291bGQgYWxzbyBiZSB1c2VmdWwgdG8gc2Vl
+IHRoZSBzYW1lIGluIG9tYXBfbWJveF9nZXQoKSBiZWZvcmUgdGhlIGNhbGwgdG8gc3RyY21wKCku
+DQo+DQo+IFNvIGRpZCB5b3UgcHV0IHlvdXIgcHJpbnRrcyBpbiB0aGVyZSBhbmQgdGhlbiBydW4g
+dGhlIGNvZGU/IFdlcmUgeW91IGFibGUgdG8gcmVwcm9kdWNlIHRoZSBpc3N1ZT8NCg0KSSdtIGFm
+cmFpZCB0aGlzIGlzIG5vdCBhIHBsYXRmb3JtIHRoYXQgSSBhbSB3b3JraW5nIHdpdGggdW5mb3J0
+dW5hdGVseSwgc28gSSdtIG5vdCBhYmxlIHRvIGhlbHAgZGlyZWN0bHkgd2l0aCB0aGlzIGlzc3Vl
+LiAgTXkgcHJldmlvdXMgY29tbWVudHMgd2VyZSBpbiBhbiBhdHRlbXB0IHRvIHRyeSB0byBoZWxw
+IHlvdSAob3Igb3RoZXJzKSB0byBwcm9ncmVzcyBmdXJ0aGVyIHdpdGggdGhlIGRlYnVnIG9mIHRo
+aXMgaXNzdWUuDQoNCj4gUmVnYXJkcywNCj4gVGhpbG8NCj4gLS0NCj4gRGlwbC4tSW5nIChGSCkg
+VGhpbG8gRnJvbW0sIE1TYy4sIEVtYmVkZGVkIFN5c3RlbXMgQXJjaGl0ZWN0IERSZXNlYXJjaCBG
+YWhyemV1Z2VsZWt0cm9uaWsgR21iSCBPdHRvLVNjaG1pcmdhbC1TdHIuIDMsIEQtMTAzMTkgQmVy
+bGluLCBHZXJtYW55DQo+IFRlbDogKzQ5ICgzMCkgNTE1IDkzMiAyMjggICBtYWlsdG86ZnJvbW1A
+ZHJlc2VhcmNoLWZlLmRlDQo+IEZheDogKzQ5ICgzMCkgNTE1IDkzMiA3NyAgICBodHRwOi8vd3d3
+LmRyZXNlYXJjaC5kZQ0KPiBBbXRzZ2VyaWNodDogQmVybGluIENoYXJsb3R0ZW5idXJnLCBIUkIg
+MTMwMTIwIEIgVXN0Li1JRE5yLiBERTI3Mzk1MjA1OA0KPiBHZXNjaMOkZnRzZsO8aHJlcjogRHIu
+IE0uIFdlYmVyLCBXLiBNw7ZnbGUNCg0K
 
 
