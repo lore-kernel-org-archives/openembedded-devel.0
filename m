@@ -1,34 +1,38 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ShJNE-0001Up-9r for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2012 13:47:00 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ShJCl-00076u-Ll for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2012 13:36:11 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2012 13:36:11 +0200
-Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <schnitzeltony@googlemail.com>) id 1ShOCf-0002tW-61
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jun 2012 18:56:25 +0200
+Received: by bkcjm2 with SMTP id jm2so6219143bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2012 13:36:11 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 20 Jun 2012 09:45:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=VOvzfQHi741ZGIwondbyS+nK7Mw+Ud2NknnsQRSBEI0=;
+	b=ZE+FmuGCIMR3eBK9e9HnYuHBkTPHHk2X+YRllNxaoiUwVjrTGlci0Hs09z2Dr9kG5d
+	ZSQ/yGjiYwAVd80oEuyZXZltHTcvdZdSLd6niNWHFHzQop+7bHHgZLgNHv6i9jHjNYhz
+	1GKXOFb/b/n6ZcNF0bYAAqcmmhc9zr0jxDqlBfuJn+wnz31/v2DsHjdIwhcRk65ppNIn
+	RtCrGYciOz/mKCgu8BTAaenK6u6rsgD4lHUziEf8SttNOHxdqSiM6tIBOZH0MOcCNeyx
+	lawvQnUspBIhfiMtlVQ85zoVSdJjRGGnYi30NR5T6T2TAiDKDHPGeAXpaCGx89rYLvbv
+	+VKA==
+Received: by 10.204.130.85 with SMTP id r21mr1574361bks.53.1340210740575;
+	Wed, 20 Jun 2012 09:45:40 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
+	[95.222.160.112])
+	by mx.google.com with ESMTPS id iq16sm28603285bkc.6.2012.06.20.09.45.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 20 Jun 2012 09:45:39 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 20 Jun 2012 13:35:59 +0200
-Message-ID: <jrsciv$ro6$1@dough.gmane.org>
-References: <1339759019-3272-1-git-send-email-sbabic@denx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <1339759019-3272-1-git-send-email-sbabic@denx.de>
-X-Enigmail-Version: 1.4.1
-Subject: Re: [meta-oe][PATCH V2] Added recipe for libconfig
+Date: Wed, 20 Jun 2012 18:45:21 +0200
+Message-Id: <1340210721-21548-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [meta-xfce 2/2] task-xfce-extended: remove xfce4-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2012 11:47:00 -0000
+X-List-Received-Date: Wed, 20 Jun 2012 16:56:25 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+xfce4-icon-theme is not required by default since xfce4-settings initially
+works with gnome-icon-theme and gnome-icon-theme is pulled in by many other
+recipes anyway.
+To reduce rootfs size - especially after gtk-update-icon-cache -
+xfce4-icon-theme is removed.
 
-Op 15-06-12 13:16, Stefano Babic schreef:
-> libconfig can be used to parse a configuration file in a structured
-> language, but still compact and more suitable for embedded devices
-> compared to XML.
-> 
-> Signed-off-by: Stefano Babic <sbabic@denx.de> ---
-> 
-> - V1 was sent to oe-core, comments redirect it as right place to meta-oe 
-> - Drop PR to use the default value
-> 
-> .../recipes-support/libconfig/libconfig_1.4.8.bb   |   13 +++++++++++++ 1
-> file changed, 13 insertions(+) create mode 100644
-> meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
-> 
-> diff --git a/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
-> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb new file mode
-> 100644 index 0000000..ffde91f --- /dev/null +++
-> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb @@ -0,0 +1,13 @@ 
-> +SUMMARY = "C/C++ Configuration File Library" +DESCRIPTION = "processing
-> of structured configuration files" +SECTION = "libs" +LICENSE =
-> "LGPLv2.1" +LIC_FILES_CHKSUM =
-> "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29" + +SRC_URI =
-> "http://www.hyperrealm.com/libconfig/libconfig-1.4.8.tar.gz \
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-s/1.4.8/${PV}/
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iQIcBAEBAgAGBQJP4bWfAAoJEHZqAkdh1vT6rDIP/jM0/A8zTYwcrcZs2OIc1WSC
-l0gWcViWtL0AliDzV82Dpck7Bdwv77aPqQBO3pQS7wQ9w7I/SNqYM1Whmt5Mq+2V
-tueA4PB/MuLT5Bh63uO7Ga6OnBVY1LWSAVAqreGIKHqYfOMMvFQ9aXs73wWy0kgd
-wAeqmH8hjt9XG20KGm42FBvGXiPe0bitwg3p8m7Ox8NQ5YbKfzr8JjpbePWjNTv1
-xCZgBbTgRI6SfIkJnZA63VmMpXZJkAppL63iRhpP7P9chivA3qNzUk7zMftIgzuf
-WaXQlAefAGK/QX6vso8TuPuENbXzJvrM8iVPnBkdHFxeWTB1mgvAXS4z4nV9qV4u
-GAcGq5Zxdbx2F3uspJMi2ulntPoPabpGpc7nG46K/V5tuYXwmcyyXCcP1RgSKmkW
-2RgPrBNQahueYXtYo0EKUS50CwR8UW4gSxNM7xXtBMrn8oHi6Z5ewRoyNeLHRHEw
-MfpOykP0fr1PpwVdUQeVV9NXpumFPac54s3VcKrC1XHoW4X4mwiI8qWCdkb+JW1Z
-tgHKphARmfpPM7E4lOPyBF8DXfg5tUMsSFnVBTB6cHFa5FKBzpHbcCruc6Inrf8d
-jSpdJaFmkfG5j6BwKUjQ+CRcTlvXSrX3o6BzGxgJigPsMf11RufCP0R4mwj3NUhP
-QIiNT8fQLNdbZH/c92nq
-=1Xq9
------END PGP SIGNATURE-----
+diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
+index 3c9fced..0c13a64 100644
+--- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
+@@ -3,7 +3,7 @@ SECTION = "x11/wm"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ inherit task
+ 
+@@ -23,8 +23,6 @@ RRECOMMENDS_${PN} = " \
+     xfwm4-theme-tyrex \
+     xfwm4-theme-wallis \
+     \
+-    xfce4-icon-theme \
+-    \
+     xfce4-cpufreq-plugin \
+     xfce4-cpugraph-plugin \
+     xfce4-datetime-plugin \
+-- 
+1.7.6.5
 
 
 
