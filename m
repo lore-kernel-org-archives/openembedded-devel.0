@@ -1,38 +1,36 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1ShOCf-0002tW-61
+	(envelope-from <schnitzeltony@googlemail.com>) id 1ShOCe-0002tV-6j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jun 2012 18:56:25 +0200
-Received: by bkcjm2 with SMTP id jm2so6219143bkc.6
+	Wed, 20 Jun 2012 18:56:29 +0200
+Received: by bkcjm2 with SMTP id jm2so6219123bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2012 09:45:40 -0700 (PDT)
+	Wed, 20 Jun 2012 09:45:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=VOvzfQHi741ZGIwondbyS+nK7Mw+Ud2NknnsQRSBEI0=;
-	b=ZE+FmuGCIMR3eBK9e9HnYuHBkTPHHk2X+YRllNxaoiUwVjrTGlci0Hs09z2Dr9kG5d
-	ZSQ/yGjiYwAVd80oEuyZXZltHTcvdZdSLd6niNWHFHzQop+7bHHgZLgNHv6i9jHjNYhz
-	1GKXOFb/b/n6ZcNF0bYAAqcmmhc9zr0jxDqlBfuJn+wnz31/v2DsHjdIwhcRk65ppNIn
-	RtCrGYciOz/mKCgu8BTAaenK6u6rsgD4lHUziEf8SttNOHxdqSiM6tIBOZH0MOcCNeyx
-	lawvQnUspBIhfiMtlVQ85zoVSdJjRGGnYi30NR5T6T2TAiDKDHPGeAXpaCGx89rYLvbv
-	+VKA==
-Received: by 10.204.130.85 with SMTP id r21mr1574361bks.53.1340210740575;
-	Wed, 20 Jun 2012 09:45:40 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=AW/6KcdyjyZPJTZRSBuWxwe0Z5euUyzerhViXbAG4Ss=;
+	b=YbkJ0YymTpFXAf1QIn7P2hgsCOqfyPM608Oau4I2jcBTP6S7AhFS0cT/IhLgNOETLv
+	oM9SDrVqkzRfpDWeR0haY6QprQ0JE1BuyVZ+CEWaWyMhLCfZNO03WUx0aHNDTwFYi629
+	eWlvotAN9OkcAubeUqG6/wmllFlObqSLDhvmdsmRNH5Pr/3HtHubODoDZre8QwTX56Jp
+	qfU6zoaGRn+qMRRvq51tLM4xo7joQRXeEhRyEWg0LsppYCmxsev4rTJrKnlp76BMU6KN
+	Mcl2DRV9M8Wm/f2S1SzlzfHDTjh1ijedRlJ2xGfTfXEyCoRZq1OE+22jR6j0vLpPUNXI
+	Uwug==
+Received: by 10.204.154.18 with SMTP id m18mr10859482bkw.23.1340210739192;
+	Wed, 20 Jun 2012 09:45:39 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id iq16sm28603285bkc.6.2012.06.20.09.45.39
+	by mx.google.com with ESMTPS id iq16sm28603285bkc.6.2012.06.20.09.45.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Jun 2012 09:45:39 -0700 (PDT)
+	Wed, 20 Jun 2012 09:45:38 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jun 2012 18:45:21 +0200
-Message-Id: <1340210721-21548-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 20 Jun 2012 18:45:20 +0200
+Message-Id: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 2/2] task-xfce-extended: remove xfce4-icon-theme
+Subject: [meta-xfce 1/2] xfce4-power-manager: update to 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2012 16:56:25 -0000
+X-List-Received-Date: Wed, 20 Jun 2012 16:56:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-xfce4-icon-theme is not required by default since xfce4-settings initially
-works with gnome-icon-theme and gnome-icon-theme is pulled in by many other
-recipes anyway.
-To reduce rootfs size - especially after gtk-update-icon-cache -
-xfce4-icon-theme is removed.
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+ ...ager_1.0.10.bb => xfce4-power-manager_1.2.0.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.0.10.bb => xfce4-power-manager_1.2.0.bb} (85%)
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-index 3c9fced..0c13a64 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
+similarity index 85%
+rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb
+rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
+index 4641178..670fc25 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.0.10.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
+@@ -24,5 +24,5 @@ FILES_xfce4-brightness-plugin = " \
+     ${datadir}/xfce4/panel-plugins/xfce4-brightness-plugin.desktop \
+     "
  
--PR = "r2"
-+PR = "r3"
- 
- inherit task
- 
-@@ -23,8 +23,6 @@ RRECOMMENDS_${PN} = " \
-     xfwm4-theme-tyrex \
-     xfwm4-theme-wallis \
-     \
--    xfce4-icon-theme \
--    \
-     xfce4-cpufreq-plugin \
-     xfce4-cpugraph-plugin \
-     xfce4-datetime-plugin \
+-SRC_URI[md5sum] = "38cbd272eb30e36ae538d9f38858bd38"
+-SRC_URI[sha256sum] = "80e4bb44f81c485ec09654dde432d6e28667d49a787625632a4413aac30422f0"
++SRC_URI[md5sum] = "935599b7114b0a4b0e2c9a5d6c72524c"
++SRC_URI[sha256sum] = "d7fb98a540284b62f4201527de17d4b24123f9d26c9f49131dd497c8387184e9"
 -- 
 1.7.6.5
 
