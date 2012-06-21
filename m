@@ -1,33 +1,32 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1ShcaA-00008s-KM
+	(envelope-from <martin.jansa@gmail.com>) id 1Shclq-0000Ks-Hi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jun 2012 10:17:38 +0200
-Received: by dalh21 with SMTP id h21so513088dal.6
+	Thu, 21 Jun 2012 10:29:42 +0200
+Received: by werg55 with SMTP id g55so210783wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 01:06:52 -0700 (PDT)
+	Thu, 21 Jun 2012 01:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=FI9RgEPledeirmMpPXry/zTDKoYukJhu7uRRvyFZrhY=;
-	b=x3Ugih0ih+lUij9wdH72R73NriTaVc7RQWP2NFhLiHkCdzbAKg+N3k7n8q8KQEfz0u
-	iaEv+lwK72iq31OrJnftAtEi+QFaB1RDA0Q1rjk7wcEEDJmLz8LS/4weta0JcAr7eK/l
-	Gz4KN3VwN606MB/a109Sv8tIMxtDrGbTm2HjK0eb+hnhGH1megxbdQXoAMm03ljm0SGC
-	aPJEoTwryUHmWgmKMzxG81HtcyAVhkxGaglfCaFIZezadS1uKIH5EW9zy60ye1Nk+FKD
-	OCqevXC/pDh1o7VXEKdWjE+5ALEQWdYH4JMhnboqbodk+rRdU7vlYCmffVvwgPtaUcWD
-	OXQg==
-MIME-Version: 1.0
-Received: by 10.68.236.129 with SMTP id uu1mr40979489pbc.77.1340266011447;
-	Thu, 21 Jun 2012 01:06:51 -0700 (PDT)
-Received: by 10.142.188.4 with HTTP; Thu, 21 Jun 2012 01:06:51 -0700 (PDT)
-In-Reply-To: <20120616070059.GB3140@jama.jama.net>
-References: <1337788230-8841-1-git-send-email-Martin.Jansa@gmail.com>
-	<20120616070059.GB3140@jama.jama.net>
-Date: Thu, 21 Jun 2012 10:06:51 +0200
-Message-ID: <CAAQYJAtahm6KjMFG4UV=zmq-Nyji0m9jDzykbyitwkVRYYEbUw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=6D3HoXMe59VBY+SFw8vubSz0uJC4abIimvzyOlhB3EE=;
+	b=rw502aZJT7hWI7gprf865dAVgjB4CzJ68gg4xnj/O58qT5IVoBJpNSn17dBcYGaszf
+	8jW+5BGWN78Z4Bzo/Oin36J+gqP4o+D/oOCzxP9xDyZFZfQicO8dOAIvaKfyYkZog7/g
+	9+QPkf4Crz5KpFfNERdTL28yH1nWCsnJJIKUsvdtPIMPTTRgeMeSNIkiBO2ZPAYnvgKC
+	x6+HbW8wI0YeLT2OBgBduYWE/CpWoylvLSNIXvP+1tlD5sNx69fRbbJfjWee3ZQo7x8T
+	dI7gTuWM8qqaFQCM2t5/EZfPPQdgmlYzmGXuhSWJ+iuThs8GezlIKQVn4DIdNjTLwKik
+	Dd0w==
+Received: by 10.216.19.195 with SMTP id n45mr13727223wen.69.1340266736930;
+	Thu, 21 Jun 2012 01:18:56 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id j4sm44538307wiz.1.2012.06.21.01.18.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Jun 2012 01:18:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-initramfs][PATCH] meta-initramfs: append to BBPATH instead of prepend so order of bblayers.conf is respected
+Date: Thu, 21 Jun 2012 10:18:44 +0200
+Message-Id: <cover.1340266416.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][meta-efl][PATCH 0/5] efl upgrade, small fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,63 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 08:17:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Jun 2012 08:29:42 -0000
 
-On Sat, Jun 16, 2012 at 9:00 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Wed, May 23, 2012 at 05:50:30PM +0200, Martin Jansa wrote:
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
-> ping
->
->> ---
->> =A0meta-initramfs/conf/layer.conf | =A0 11 ++++++++---
->> =A01 files changed, 8 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.=
-conf
->> index 469cde5..cc78c1a 100644
->> --- a/meta-initramfs/conf/layer.conf
->> +++ b/meta-initramfs/conf/layer.conf
->> @@ -1,11 +1,16 @@
->> =A0# Layer configuration for meta-initramfs layer
->>
->> -# We have a conf and classes directory, prepend to BBPATH to prefer our=
- versions
->> -BBPATH :=3D "${LAYERDIR}:${BBPATH}"
->> +# We have a conf and classes directory, append to BBPATH
->> +BBPATH .=3D ":${LAYERDIR}"
->>
->> =A0# We have a recipes directory, add to BBFILES
->> -BBFILES :=3D "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recip=
-es-*/*/*.bbappend"
->> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bb=
-append"
->>
->> =A0BBFILE_COLLECTIONS +=3D "meta-initramfs"
->> =A0BBFILE_PATTERN_meta-initramfs :=3D "^${LAYERDIR}/"
->> +
->> +# Define the priority for recipes (.bb files) from this layer,
->> +# choosing carefully how this layer interacts with all of the
->> +# other layers.
->> +
->> =A0BBFILE_PRIORITY_meta-initramfs =3D "8"
->> --
->> 1.7.8.6
->>
->
-> --
-> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+The following changes since commit 7c5eded4c2223036ecd43b1eaaa72432d737fbc5:
 
-Bump?
-Acked-by: Andrea Adami <andrea.adami@gmail.com>
+  linux-kexecboot: remove all, now we use linux-yocto-tiny-kexecboot (2012-06-20 13:37:32 +0200)
+
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+
+Denis 'GNUtoo' Carikli (1):
+  gpsd: override gpsd.service to use GPS_DEVICES from /etc/default/gpsd
+
+Martin Jansa (3):
+  edje: explicitly enable libsndfile for target recipe
+  meta-efl: upgrade recipes for new EFL bugfix release cycle 1.2.1
+  libjpeg-turbo: add LEAD_SONAME to fix upgrade to 8d
+
+Simon Busch (1):
+  vala: update to 0.16.0 and restructure some stuff into vala.inc
+
+ .../efl/{ecore_1.2.0.bb => ecore_1.2.1.bb}         |    4 ++--
+ meta-efl/recipes-efl/efl/edje.inc                  |    7 ++++++-
+ .../efl/{eio_1.0.0.bb => edje_1.2.1.bb}            |    4 ++--
+ .../efl/{edje_1.2.0.bb => eet_1.6.1.bb}            |    4 ++--
+ .../efl/{eet_1.6.0.bb => eina_1.2.1.bb}            |    4 ++--
+ .../efl/{eina_1.2.0.bb => eio_1.0.1.bb}            |    4 ++--
+ meta-efl/recipes-efl/efl/elementary_1.0.0.bb       |   10 ----------
+ meta-efl/recipes-efl/efl/elementary_1.0.1.bb       |   10 ++++++++++
+ meta-efl/recipes-efl/efl/emotion_1.0.0.bb          |   10 ----------
+ meta-efl/recipes-efl/efl/emotion_1.0.1.bb          |   10 ++++++++++
+ meta-efl/recipes-efl/efl/ethumb_1.0.0.bb           |   10 ----------
+ meta-efl/recipes-efl/efl/ethumb_1.0.1.bb           |   10 ++++++++++
+ meta-efl/recipes-efl/efl/evas_1.2.0.bb             |   10 ----------
+ meta-efl/recipes-efl/efl/evas_1.2.1.bb             |   10 ++++++++++
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb     |    3 +++
+ ...-gen-don-t-append-dirty-if-we-re-not-in-g.patch |    0
+ meta-oe/recipes-devtools/vala/vala.inc             |   15 +++++----------
+ meta-oe/recipes-devtools/vala/vala_0.14.2.bb       |   14 --------------
+ meta-oe/recipes-devtools/vala/vala_0.16.0.bb       |    8 ++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service  |   10 ++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb        |    5 +++--
+ meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb        |    5 +++--
+ 22 files changed, 88 insertions(+), 79 deletions(-)
+ rename meta-efl/recipes-efl/efl/{ecore_1.2.0.bb => ecore_1.2.1.bb} (50%)
+ rename meta-efl/recipes-efl/efl/{eio_1.0.0.bb => edje_1.2.1.bb} (40%)
+ rename meta-efl/recipes-efl/efl/{edje_1.2.0.bb => eet_1.6.1.bb} (40%)
+ rename meta-efl/recipes-efl/efl/{eet_1.6.0.bb => eina_1.2.1.bb} (40%)
+ rename meta-efl/recipes-efl/efl/{eina_1.2.0.bb => eio_1.0.1.bb} (40%)
+ delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.0.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/elementary_1.0.1.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion_1.0.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/emotion_1.0.1.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/ethumb_1.0.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/ethumb_1.0.1.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas_1.2.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas_1.2.1.bb
+ rename meta-oe/recipes-devtools/vala/{vala-0.14.2 => vala-0.16.0}/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch (100%)
+ delete mode 100644 meta-oe/recipes-devtools/vala/vala_0.14.2.bb
+ create mode 100644 meta-oe/recipes-devtools/vala/vala_0.16.0.bb
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service
+
+-- 
+1.7.8.6
+
 
 
