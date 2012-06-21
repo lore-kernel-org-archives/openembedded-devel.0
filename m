@@ -1,26 +1,16 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from smtp205.alice.it ([82.57.200.101])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>)
-	id 1ShqZT-0001PA-1K; Fri, 22 Jun 2012 01:13:51 +0200
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0M5Z00HKRPBSB75C@vms173001.mailsrvcs.net>; Thu,
-	21 Jun 2012 18:02:31 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 545AF20564; Thu,
-	21 Jun 2012 19:02:16 -0400 (EDT)
-Date: Thu, 21 Jun 2012 19:02:16 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-id: <20120621230216.GD30753@denix.org>
-MIME-version: 1.0
-References: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [meta-ti] massive fallout after updates / was (no subject)
+	(envelope-from <andrea.adami@gmail.com>) id 1ShqtI-0001hZ-BK
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jun 2012 01:34:20 +0200
+Received: from mizar.localdomain (87.14.251.158) by smtp205.alice.it
+	(8.6.023.02) id 4F421F7B0E4B7BD9; Fri, 22 Jun 2012 01:23:34 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Jun 2012 01:23:31 +0200
+Message-Id: <1340321011-5631-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [meta-oe][meta-initramfs][PATCH] ubi-utils-klibc_1.5.0: fix build because of ioctl renaming
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,71 +24,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 23:13:51 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Thu, 21 Jun 2012 23:34:20 -0000
 
-On Fri, Jun 22, 2012 at 12:11:46AM +0200, Andreas M=FCller wrote:
-> On Thu, Jun 21, 2012 at 11:36 PM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> > after updating all my repos (angstrom+few extra layers) I get
->=20
-> The error seems to be caused by meta-ti. When removed, parsing work=
-s
-> as expected. By re-including I get now:
->=20
-> ERROR: ExpansionError during parsing
-> /home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-t=
-i/gstreamer-ti_svn.bb:
-> Failure expanding variable FILESPATH, expression was
-> ${@base_set_filespath([
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/gstreamer-ti-svnr962-r85+${MACHINE_KERNEL_PR}",
+* This patch follows the one in oe-core for mtd-utils_1.5.0
+* which was staging an older version of the ubi-user.h header.
+* We need to match the renaming done in kernel 3.0
+* http://lists.infradead.org/pipermail/linux-mtd/2011-March/
+* 034419.html
 
-Could be caused by MACHINE_KERNEL_PR being undefined... What machine =
-you are=20
-building for?
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../mtd/ubi-utils-klibc/libubi.c.patch             |   17 +++++++++++++++++
+ .../recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb  |    2 +-
+ 2 files changed, 18 insertions(+), 1 deletions(-)
 
---=20
-Denys
-
-
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/gstreamer-ti-svnr962",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/gstreamer-ti",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/gstreamer-ti-svnr962",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/gstreamer-ti",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti/files",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-=
-ti"
-> ], d)} which triggered exception SyntaxError: EOL while scanning
-> string literal (FILESPATH, line 1)
-> ERROR: No recipes available for:
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/rec=
-ipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/rec=
-ipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/reci=
-pes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/re=
-cipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes=
--kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest=
-/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   ......
->=20
-> Andreas
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->=20
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
+index db95904..b52e207 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/libubi.c.patch
+@@ -9,3 +9,20 @@
+  {
+  	int fd, ret;
+  
++@@ -1346,13 +1346,13 @@
++ 
++ int ubi_set_property(int fd, uint8_t property, uint64_t value)
++ {
++-	struct ubi_set_prop_req r;
+++	struct ubi_set_vol_prop_req r;
++ 
++-	memset(&r, 0, sizeof(struct ubi_set_prop_req));
+++	memset(&r, 0, sizeof(struct ubi_set_vol_prop_req));
++ 	r.property = property;
++ 	r.value = value;
++ 
++-	return ioctl(fd, UBI_IOCSETPROP, &r);
+++	return ioctl(fd, UBI_IOCSETVOLPROP, &r);
++ }
++ 
++ int ubi_leb_unmap(int fd, int lnum)
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
+index 2095552..d4d0055 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ inherit klibc
+ 
+-- 
+1.7.3.4
 
 
 
