@@ -1,36 +1,33 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Shc5t-0001LG-8R
+	(envelope-from <andrea.adami@gmail.com>) id 1ShcaA-00008s-KM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jun 2012 09:46:21 +0200
-Received: by wibhn14 with SMTP id hn14so3982330wib.0
+	Thu, 21 Jun 2012 10:17:38 +0200
+Received: by dalh21 with SMTP id h21so513088dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 00:35:35 -0700 (PDT)
+	Thu, 21 Jun 2012 01:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=v+zKHyXhrNiw67RRL6coxFuPhkX0CQTX1aH24Uzuerg=;
-	b=OlInKF/9S/WhO9QqL46sHVS1wBDeqiNRIIgSrd4ishBBpJILCmg1pLkZI6hNch3XZi
-	ybLCk6miwbo+YQ0cCBwa0hfQgj8rlbp0dXJyU5gAbW9QN0AqCiDpUXxAC0U8kW5AL5Q6
-	5CsNDcVIgEg31S/1ezI09NLMILBz6QzMvFkDozEpU7fC5nm88yBchXMbsqqdolLUCt8p
-	Enq/YaBr97RlowvW7IwtkCAiiLLlQKE3qWsOnAzAr0e1tLcokQ/M/UL5D3lOkIZZZ0/h
-	fypNl8yNaiGWOZIXugby0FS4oLrOW8Vg18GNsZ++RDO+yt/NUGcytSGDFvW9XBoVFGXw
-	GmGA==
-Received: by 10.216.50.211 with SMTP id z61mr13024277web.57.1340264135244;
-	Thu, 21 Jun 2012 00:35:35 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id dg2sm85631926wib.4.2012.06.21.00.35.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jun 2012 00:35:33 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jun 2012 09:35:26 +0200
-Message-Id: <1340264126-29651-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1339364820-2880-23-git-send-email-schnitzeltony@googlemail.com>
-References: <1339364820-2880-23-git-send-email-schnitzeltony@googlemail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=FI9RgEPledeirmMpPXry/zTDKoYukJhu7uRRvyFZrhY=;
+	b=x3Ugih0ih+lUij9wdH72R73NriTaVc7RQWP2NFhLiHkCdzbAKg+N3k7n8q8KQEfz0u
+	iaEv+lwK72iq31OrJnftAtEi+QFaB1RDA0Q1rjk7wcEEDJmLz8LS/4weta0JcAr7eK/l
+	Gz4KN3VwN606MB/a109Sv8tIMxtDrGbTm2HjK0eb+hnhGH1megxbdQXoAMm03ljm0SGC
+	aPJEoTwryUHmWgmKMzxG81HtcyAVhkxGaglfCaFIZezadS1uKIH5EW9zy60ye1Nk+FKD
+	OCqevXC/pDh1o7VXEKdWjE+5ALEQWdYH4JMhnboqbodk+rRdU7vlYCmffVvwgPtaUcWD
+	OXQg==
 MIME-Version: 1.0
-Subject: [RFC, meta-oe 22/27 v2] xserver-nodm-init: move systemd support to meta-systemd
+Received: by 10.68.236.129 with SMTP id uu1mr40979489pbc.77.1340266011447;
+	Thu, 21 Jun 2012 01:06:51 -0700 (PDT)
+Received: by 10.142.188.4 with HTTP; Thu, 21 Jun 2012 01:06:51 -0700 (PDT)
+In-Reply-To: <20120616070059.GB3140@jama.jama.net>
+References: <1337788230-8841-1-git-send-email-Martin.Jansa@gmail.com>
+	<20120616070059.GB3140@jama.jama.net>
+Date: Thu, 21 Jun 2012 10:06:51 +0200
+Message-ID: <CAAQYJAtahm6KjMFG4UV=zmq-Nyji0m9jDzykbyitwkVRYYEbUw@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-initramfs][PATCH] meta-initramfs: append to BBPATH instead of prepend so order of bblayers.conf is respected
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,151 +41,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 07:46:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 21 Jun 2012 08:17:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Andreas Müller <schnitzeltony@googlemail.com>
+On Sat, Jun 16, 2012 at 9:00 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, May 23, 2012 at 05:50:30PM +0200, Martin Jansa wrote:
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> ping
+>
+>> ---
+>> =A0meta-initramfs/conf/layer.conf | =A0 11 ++++++++---
+>> =A01 files changed, 8 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.=
+conf
+>> index 469cde5..cc78c1a 100644
+>> --- a/meta-initramfs/conf/layer.conf
+>> +++ b/meta-initramfs/conf/layer.conf
+>> @@ -1,11 +1,16 @@
+>> =A0# Layer configuration for meta-initramfs layer
+>>
+>> -# We have a conf and classes directory, prepend to BBPATH to prefer our=
+ versions
+>> -BBPATH :=3D "${LAYERDIR}:${BBPATH}"
+>> +# We have a conf and classes directory, append to BBPATH
+>> +BBPATH .=3D ":${LAYERDIR}"
+>>
+>> =A0# We have a recipes directory, add to BBFILES
+>> -BBFILES :=3D "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recip=
+es-*/*/*.bbappend"
+>> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bb=
+append"
+>>
+>> =A0BBFILE_COLLECTIONS +=3D "meta-initramfs"
+>> =A0BBFILE_PATTERN_meta-initramfs :=3D "^${LAYERDIR}/"
+>> +
+>> +# Define the priority for recipes (.bb files) from this layer,
+>> +# choosing carefully how this layer interacts with all of the
+>> +# other layers.
+>> +
+>> =A0BBFILE_PRIORITY_meta-initramfs =3D "8"
+>> --
+>> 1.7.8.6
+>>
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-contents of ${sysconfdir}/default/xserver-nodm were moved from
-FILES_${PN}-systemd to FILES_${PN}
-
-
----
-
-v2: xserver-nodm.conf was moved to meta-systemd and kept in ${PN}-systemd where it belongs
-
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../xserver-nodm-init-2.0/xserver-nodm.conf        |    1 -
- .../xserver-nodm-init-2.0/xserver-nodm.service     |    9 --------
- .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |   14 +-----------
- .../xserver-nodm-init/xserver-nodm.conf            |    1 +
- .../xserver-nodm-init/xserver-nodm.service         |    9 ++++++++
- .../xserver-nodm-init_2.0.bbappend                 |   21 ++++++++++++++++++++
- 6 files changed, 33 insertions(+), 22 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
- delete mode 100644 meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
- create mode 100644 meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.conf
- create mode 100644 meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
- create mode 100644 meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
-
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
-deleted file mode 100644
-index 3c0582a..0000000
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.conf
-+++ /dev/null
-@@ -1 +0,0 @@
--HOME=/home/root
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-deleted file mode 100644
-index c15a772..0000000
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-+++ /dev/null
-@@ -1,9 +0,0 @@
--[Unit]
--Description=Xserver startup with a display manager
--
--[Service]
--EnvironmentFile=/etc/default/xserver-nodm
--ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
--
--[Install]
--WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-index 62c33c9..e1f2a53 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-@@ -3,34 +3,24 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SECTION = "x11"
- 
--PR = "r16"
-+PR = "r17"
- 
- SRC_URI = "file://xserver-nodm \
--           file://xserver-nodm.service \
--           file://xserver-nodm.conf \
-            file://gplv2-license.patch \
- "
- S = "${WORKDIR}"
- 
- inherit allarch
- 
--inherit update-rc.d systemd
-+inherit update-rc.d
- 
- INITSCRIPT_NAME = "xserver-nodm"
- INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
- INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
- 
--SYSTEMD_PACKAGES = "${PN}-systemd"
--SYSTEMD_SERVICE_${PN}-systemd = "xserver-nodm.service"
--
- do_install() {
- 	install -d ${D}${sysconfdir}/init.d
- 	install xserver-nodm ${D}${sysconfdir}/init.d
--	install -d ${D}${sysconfdir}/default
--	install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
- }
- 
--FILES_${PN}-systemd += "${sysconfdir}/default/xserver-nodm"
--
- RDEPENDS_${PN} = "xserver-common (>= 1.30) xinit"
--RDEPENDS_${PN}-systemd += "xserver-common (>= 1.30) xinit"
-diff --git a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.conf b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.conf
-new file mode 100644
-index 0000000..3c0582a
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.conf
-@@ -0,0 +1 @@
-+HOME=/home/root
-diff --git a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
-new file mode 100644
-index 0000000..c15a772
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
-@@ -0,0 +1,9 @@
-+[Unit]
-+Description=Xserver startup with a display manager
-+
-+[Service]
-+EnvironmentFile=/etc/default/xserver-nodm
-+ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
-new file mode 100644
-index 0000000..ed35412
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
-@@ -0,0 +1,21 @@
-+FILESEXTRAPATHS := "${THISDIR}/${PN}"
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+inherit systemd
-+
-+SRC_URI += "file://xserver-nodm.service \
-+            file://xserver-nodm.conf \
-+"
-+
-+do_install_append() {
-+        install -d ${D}${sysconfdir}/default
-+        install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
-+}
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "xserver-nodm.service"
-+
-+FILES_${PN}-systemd += "${sysconfdir}/default/xserver-nodm"
-+
-+RDEPENDS_${PN}-systemd += "xserver-common (>= 1.30) xinit"
--- 
-1.7.8.6
-
+Bump?
+Acked-by: Andrea Adami <andrea.adami@gmail.com>
 
 
