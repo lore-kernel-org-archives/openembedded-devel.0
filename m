@@ -1,37 +1,29 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-qa0-f50.google.com ([209.85.216.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ShcmP-0000LW-Ez
+	(envelope-from <gizero@gmail.com>) id 1Shei9-0000ed-7x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jun 2012 10:30:17 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so295786wgb.24
+	Thu, 21 Jun 2012 12:34:01 +0200
+Received: by qafl39 with SMTP id l39so1316154qaf.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 01:19:34 -0700 (PDT)
+	Thu, 21 Jun 2012 03:23:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=KXadRtDgUeC7yRVEJ3gjButCu4rQtVCFEDXW6kEPNaM=;
-	b=xym6MOvZvMTT7mGXrF6LzR7iUiG6t881oabWiWT8B2R1ZiYLJbn9Cqt/sKSXxYUjWP
-	fJyfGMTZvvuDG5my/aBMDW3LytN9vDHCt5HI4NsKJ4QzW7iP1utUX+NaSLn8R1EhCbFq
-	IAnN/ssC4fxuPYZKq6gknGMfIt8Ch3V0VKD4jCRWYikIid/eNDwMRXOIrxFGdkenhhTJ
-	r617SauvYv1iMlswS2DoDR/LgXV2Du4m4qFHeult+p1gBAYGRSQL3x0GX9Jq/Dlr/eVr
-	YT0boH4g2K75OUYZOGAH/dvHHVmvnuIjQdwvudKqGyLIeKWzrQxVt2JiKTLO5xY69yTB
-	x+ZA==
-Received: by 10.216.228.232 with SMTP id f82mr14571130weq.211.1340266774104;
-	Thu, 21 Jun 2012 01:19:34 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gb9sm44568813wib.8.2012.06.21.01.19.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jun 2012 01:19:33 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=yhaDE1dNSagX1lB04XuVj2r24q4vGV8YJEyjHD0NOLY=;
+	b=QsaVQF5Oc+oRIRRW33YW8JkNm2xgGb3bKAju0ybX7FXUY2AnHJ9/WumoXwr0I8JwfN
+	dcmeIhnigQ7CbRhiEct2m0/ZMvr7p1RJgHFUlWpXWY7Q8Bn2iUXD5gJzRIjAtixaZaiY
+	FFQp3YlnC70rbJXASK8qPaU04/I73sI7CkdhEqiSvuFUnkFmb0VP4uOhN8kl4MXYOoRU
+	x4pDaSpPx0Q5I1Ncs+2/WffykshSmhw8lY1g0kDaoe80Pvo/hcXP3uBRZG04r6xmxQRe
+	6o6+OFdsyGBABvRZkq2kziy+4PnPa00b8CqN4EOlS1vI48Usmac1hl00GSkzbet3dKHZ
+	7Pew==
+MIME-Version: 1.0
+Received: by 10.229.111.195 with SMTP id t3mr3551962qcp.60.1340274195064; Thu,
+	21 Jun 2012 03:23:15 -0700 (PDT)
+Received: by 10.229.223.208 with HTTP; Thu, 21 Jun 2012 03:23:15 -0700 (PDT)
+Date: Thu, 21 Jun 2012 12:23:15 +0200
+Message-ID: <CAC+thW0R2ieg-q9mavCGQ2C8DgHmjh-aXVLHy4058Xcz9r9-xw@mail.gmail.com>
+From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jun 2012 10:18:49 +0200
-Message-Id: <30f95e1922a86245c607249bcc7f9fbde2b10797.1340266416.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1340266416.git.Martin.Jansa@gmail.com>
-References: <cover.1340266416.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1340266416.git.Martin.Jansa@gmail.com>
-References: <cover.1340266416.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 5/5] libjpeg-turbo: add LEAD_SONAME to fix upgrade to 8d
+Subject: maintainers tool to monitor upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 08:30:17 -0000
+X-List-Received-Date: Thu, 21 Jun 2012 10:34:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+Are you experienced recipes' maintainers using any tool to
+automatically monitor upstream projects for new releases?
+I'm not planning to become a full-time maintainer but, since I
+recently submitted a new recipe for meta-oe, I'd like to keep it as
+up-to-date as possible. I asked myself if a suitable convenience tool
+was available. After a quick search I found solutions like cnucnu
+which appear to be used by Fedora for a similar purpose. Must read
+further to see if they could fit.
+Just wanted to throw the question to "real" maintainers first.
 
-diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-index 16fb2c7..f061f41 100644
---- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-+++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe
-                     file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
- "
- PV = "8d+1.2.1"
-+PR = "r1"
- SRCREV = "837"
- SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;proto=https;module=trunk"
- 
-@@ -29,3 +30,5 @@ INSANE_SKIP_libturbojpeg = "dev-so"
- 
- BBCLASSEXTEND = "native"
- DEPENDS_virtclass-native = "nasm-native"
-+
-+LEAD_SONAME = "libjpeg.so.8"
--- 
-1.7.8.6
-
+Regards
 
 
