@@ -1,37 +1,37 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Shcly-0000L5-9f
+	(envelope-from <martin.jansa@gmail.com>) id 1Shcm5-0000LW-F6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jun 2012 10:29:50 +0200
-Received: by bkcjm2 with SMTP id jm2so249893bkc.6
+	Thu, 21 Jun 2012 10:29:57 +0200
+Received: by wgbdr1 with SMTP id dr1so295786wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 01:19:04 -0700 (PDT)
+	Thu, 21 Jun 2012 01:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=W+MuMC/XAcnDepRzvHOoF7nJkSxdHF8WoMfXPC5u10M=;
-	b=TYexE1ZoPlTSVF4qYYk2g194d42crpspW+ut2Vdne56sy7mkHOZsjJZxARaKQRi8XB
-	OuXA9oAzJCoaVi9VJ8cQUFhSliT6/QxdTsoqaIgnWpmugsr+VOSti32u66XoaRavGSL+
-	fNbNEqrLEmgNBKrMnhu6uyxVNBS7YAbJnniQejhb46kzkZYXgbokpDywfGzwQ6QsO189
-	fUuxMfcEXddD3q3Hg5tR7wnEVJtHWBzgGVAKPiR2P1lAQb78OVNA7CjChwDgTWXQ417i
-	bnKT/43O/QlOkPyuc7/fWZzV8WAI3/eTHrKWv8NyRxWa+rl6HF7qjFzUb351OzHtscFY
-	k+UA==
-Received: by 10.205.133.7 with SMTP id hw7mr11503147bkc.123.1340266744706;
-	Thu, 21 Jun 2012 01:19:04 -0700 (PDT)
-Received: from localhost ([94.230.152.246]) by mx.google.com with ESMTPS id
-	fw10sm30870991bkc.11.2012.06.21.01.19.03
+	bh=NeQ+N5+JoAeZDiW0HJXMl2AomzPYtIJnMz06UegsVq0=;
+	b=0zjOxw6j8NEstqwdSwCVGjKVZjAyT7IXmOOHi4e8h47SF/MbVELtGhg8FsZ9NVVLSf
+	QEGtrhGAEntzA5JU+0mkn1+XwVrsyPBJhjl8FHsplVwNqaIXrhjvFfvX/ynASQ+b1lbD
+	m0ceN5xyapyabYN0jq/jFf5oAN4XwL7DXQUgbKqDwsEAOIXHPaOoHAp9BaPd8EXiEX3d
+	WvdTyozG04TkD2G7towACrZLVZpjc7HNud83qhOzQjtN33YqtF9WnFS7ZQTTJMiFs86y
+	l+nyq3TjZbAasrEPX/ImZ0pEHIGEnM6T8FYwfuxyJh/YbcpibqkR6WvchgkQX6QXNlc0
+	5HhQ==
+Received: by 10.216.143.146 with SMTP id l18mr1520957wej.56.1340266751806;
+	Thu, 21 Jun 2012 01:19:11 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id dg2sm86059045wib.4.2012.06.21.01.19.10
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jun 2012 01:19:03 -0700 (PDT)
+	Thu, 21 Jun 2012 01:19:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jun 2012 10:18:45 +0200
-Message-Id: <41447e05fd0f4a1ffcba42b036928fd759116092.1340266416.git.Martin.Jansa@gmail.com>
+Date: Thu, 21 Jun 2012 10:18:46 +0200
+Message-Id: <290d03291de93c58a227640ec0e24d4a3a16a6a5.1340266416.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1340266416.git.Martin.Jansa@gmail.com>
 References: <cover.1340266416.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1340266416.git.Martin.Jansa@gmail.com>
 References: <cover.1340266416.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 1/5] gpsd: override gpsd.service to use GPS_DEVICES from /etc/default/gpsd
+Subject: [meta-oe][meta-efl][PATCH 2/5] vala: update to 0.16.0 and restructure some stuff into vala.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,102 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 08:29:50 -0000
+X-List-Received-Date: Thu, 21 Jun 2012 08:29:57 -0000
 
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+From: Simon Busch <morphis@gravedo.de>
 
-Without that fix gpsd starts without using the machine specific
-  gps serial port.
+* SRC_URI is now set initially to real upstream and not freesmartphone.org
+* reset PR and INC_PR
+* moved DEPENDS += "gtk+" to vala.inc
 
-On some devices like the GTA04, not only that makes GPS not work,
-  but that also prevent suspend because GPS has to be off in order
-  for suspend to succeed(and the program powering off the GPS
-  has to know if the GPS is on or off by using gpsd).
-
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service |   10 ++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb       |    5 +++--
- meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb       |    5 +++--
- 3 files changed, 16 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service
+ ...-gen-don-t-append-dirty-if-we-re-not-in-g.patch |    0
+ meta-oe/recipes-devtools/vala/vala.inc             |   15 +++++----------
+ meta-oe/recipes-devtools/vala/vala_0.14.2.bb       |   14 --------------
+ meta-oe/recipes-devtools/vala/vala_0.16.0.bb       |    8 ++++++++
+ 4 files changed, 13 insertions(+), 24 deletions(-)
+ rename meta-oe/recipes-devtools/vala/{vala-0.14.2 => vala-0.16.0}/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch (100%)
+ delete mode 100644 meta-oe/recipes-devtools/vala/vala_0.14.2.bb
+ create mode 100644 meta-oe/recipes-devtools/vala/vala_0.16.0.bb
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service
+diff --git a/meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch b/meta-oe/recipes-devtools/vala/vala-0.16.0/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/vala/vala-0.14.2/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
+rename to meta-oe/recipes-devtools/vala/vala-0.16.0/0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch
+diff --git a/meta-oe/recipes-devtools/vala/vala.inc b/meta-oe/recipes-devtools/vala/vala.inc
+index 0815c66..3d33953 100644
+--- a/meta-oe/recipes-devtools/vala/vala.inc
++++ b/meta-oe/recipes-devtools/vala/vala.inc
+@@ -1,25 +1,20 @@
+ DESCRIPTION = "Vala is a C#-like language dedicated to ease GObject programming. \
+ Vala compiles to plain C and has no runtime environment nor penalities whatsoever."
+ SECTION = "devel"
+-DEPENDS = "glib-2.0 dbus"
++DEPENDS = "glib-2.0 dbus gtk+"
+ BBCLASSEXTEND = "native"
+ DEPENDS_virtclass-native = "glib-2.0-native dbus-native"
+ HOMEPAGE = "http://vala-project.org"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+-#
+-# WARNING: This source release has specifically been built for OpenEmbedded.
+-# Don't update to any upstream release without consulting the recipe maintainer.
+-#
+-
+-SRC_URI = "\
+-  http://downloads.freesmartphone.org/sources/vala-${PV}.tar.bz2;name=archive \
+-"
++SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+ 
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/${BPN}/${SHRT_VER}/${BP}.tar.xz"
+ inherit autotools
+ 
+ EXTRA_OECONF = "--disable-vapigen"
+ 
+ FILES_${PN}-doc += "${datadir}/devhelp"
++FILES_${PN} += "${datadir}/${BPN}-${SHRT_VER}/vapi"
+diff --git a/meta-oe/recipes-devtools/vala/vala_0.14.2.bb b/meta-oe/recipes-devtools/vala/vala_0.14.2.bb
+deleted file mode 100644
+index 18e6346..0000000
+--- a/meta-oe/recipes-devtools/vala/vala_0.14.2.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require recipes-devtools/vala/vala.inc
+-
+-PR = "r1"
+-
+-DEPENDS += "gtk+"
+-
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/vala/0.14/vala-${PV}.tar.xz \
+-           file://0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch \
+-"
+-
+-FILES_${PN} += "${datadir}/vala-0.14/vapi"
+-
+-SRC_URI[md5sum] = "f05263a56c1e328637e4c97a61befdad"
+-SRC_URI[sha256sum] = "807e6978484f66cab3cf4fefd72f37a4293d2831d7a5fd29119bdf9d38a5b3d0"
+diff --git a/meta-oe/recipes-devtools/vala/vala_0.16.0.bb b/meta-oe/recipes-devtools/vala/vala_0.16.0.bb
 new file mode 100644
-index 0000000..7131a58
+index 0000000..1dd190f
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.service
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=GPS (Global Positioning System) Daemon
-+Requires=gpsd.socket
++++ b/meta-oe/recipes-devtools/vala/vala_0.16.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
 +
-+[Service]
-+EnvironmentFile=/etc/default/gpsd
-+ExecStart=/usr/sbin/gpsd -N $GPS_DEVICES
++PR = "${INC_PR}.0"
 +
-+[Install]
-+Also=gpsd.socket
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-index 4f00cf4..ebc4af6 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
- PROVIDES = "virtual/gpsd"
- 
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-   file://0001-SConstruct-fix-DSO-build-for-ntpshm-garmin_monitor.patch \
-@@ -15,6 +15,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-   file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-   file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
-   file://gpsd-default \
-+  file://gpsd.service \
-   file://gpsd \
-   file://60-gpsd.rules \
- "
-@@ -83,7 +84,7 @@ do_install_append() {
- 
-     #support for systemd
-     install -d ${D}${systemd_unitdir}/system/
--    install -m 0644 ${S}/systemd/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-+    install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-     install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/system/${PN}.socket
- }
- 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-index 60b30df..083163b 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
--PR = "r1"
-+PR = "r2"
- 
- DEFAULT_PREFERENCE = "-1"
- SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-@@ -16,6 +16,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-   file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-   file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
-   file://gpsd-default \
-+  file://gpsd.service \
-   file://gpsd \
-   file://60-gpsd.rules \
- "
-@@ -84,7 +85,7 @@ do_install_append() {
- 
-     #support for systemd
-     install -d ${D}${systemd_unitdir}/system/
--    install -m 0644 ${S}/systemd/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-+    install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-     install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/system/${PN}.socket
- }
- 
++SRC_URI += " file://0001-git-version-gen-don-t-append-dirty-if-we-re-not-in-g.patch"
++
++SRC_URI[md5sum] = "84b742e9cca4c90fde3026c3793c03c1"
++SRC_URI[sha256sum] = "3adb37aa2b35e2e2daed47552e85dbcbf752c0f7768b269d856993620073a657"
 -- 
 1.7.8.6
 
