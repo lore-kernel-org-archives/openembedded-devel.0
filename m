@@ -1,38 +1,26 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Si2Cw-0007AW-7I
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Si3xv-0003A9-2F
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 13:39:22 +0200
-Received: by eekd49 with SMTP id d49so542740eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2012 04:28:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=TPM0bGGRPe0upl9WHyFOwYZGAv/3GSTsWTQTBlGJlhY=;
-	b=oh1j5ubhMWzuIanGqsMGj7KZdKpaAljpdMlbJNiHcRmgfJD1FNjdmwLGyfThclqBYh
-	39aQtu29NE14PScaxvw78+2TfQuL3RJTx05AhSp30aPuSfWemy1SPqNFxKKVzpnoTiNC
-	9jPAVBNVw386rK7Km15yIWtKgb2fPl68/mBB4YaDQCLXy6sg80YbvrsVi2bmtnDperwF
-	UKfqFv9C/bpouFEemnyWUpDHJ7whOTC7YYHIkYp7aX3uQyw8HMJaaZ4D5dhTdNB/MGm6
-	K8VsyaUvYr876pIV/iJ3Qx2dtgmeUrH7BEZtITLVeALnNRTBoDnm3vdogUgHk08cZkFW
-	kJoQ==
-Received: by 10.14.100.205 with SMTP id z53mr367956eef.39.1340364515153;
-	Fri, 22 Jun 2012 04:28:35 -0700 (PDT)
-Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id t3sm111875286eeb.15.2012.06.22.04.28.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 22 Jun 2012 04:28:34 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Fri, 22 Jun 2012 15:31:59 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 22 Jun 2012 06:21:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="159568559"
+Received: from unknown (HELO helios.localnet) ([10.252.120.123])
+	by azsmga001.ch.intel.com with ESMTP; 22 Jun 2012 06:20:59 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jun 2012 13:28:28 +0200
-Message-Id: <1340364508-8832-2-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1340364508-8832-1-git-send-email-koen@dominion.thruhere.net>
-References: <1340364508-8832-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQld3JXlDbQ0FsSqNLbVxKAdpcWFNuG2WhRJei/DeS04iJJdrEO134mHpy7yQRarcRewIh62
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 2/2] cheese: add 2.30.1
+Date: Fri, 22 Jun 2012 14:20:58 +0100
+Message-ID: <3397699.t0tBfMlFki@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.3 (Linux/3.2.0-25-generic-pae; KDE/4.8.3; i686; ; )
+In-Reply-To: <CAKbR+sz=HCDU8uPx00rF1G4KXo87CXuk29uVO3rNxR_i5A4qkQ@mail.gmail.com>
+References: <CAKbR+sx-4vD69rHekVvwbDeVT5=0-Ouk0AmS6G_3JzZg_Hqa-A@mail.gmail.com>
+	<CAMKF1soiguyAXwmYo9LhHPnmQkbW7KTipDTEYXpazOFKn+dYLA@mail.gmail.com>
+	<CAKbR+sz=HCDU8uPx00rF1G4KXo87CXuk29uVO3rNxR_i5A4qkQ@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: oe-made-easy and Getting Started
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 11:39:22 -0000
+X-List-Received-Date: Fri, 22 Jun 2012 13:31:59 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb |   14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+On Saturday 12 May 2012 13:58:57 Lloyd Chang wrote:
+> Thanks! Done adding 'One-liner via oe-made-easy' to our OE wiki.
+> 
+> On Wed, May 9, 2012 at 10:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Wed, May 9, 2012 at 2:02 PM, Lloyd Chang <lloydchang@gmail.com> wrote:
+> > > Hello fellow openembedded-devel members!
+> > > 
+> > > 
+> > > I'm sharing because you may find this useful -- especially newcomers
+> > > to our OE-Core.  In my personal efforts in condensing our Getting
+> > > 
+> > > Started documentation succinctly, I codified it into one line:
+> > >    git clone git://github.com/lloydchang/oe-made-easy.git;
+> > > 
+> > > ./oe-made-easy/core-image-minimal
+> > > 
+> > > 
+> > > User interface design wise, my intent of this one liner is to allow
+> > > everyone getting started to easily bootstrap core-image-minimal onto
+> > > various computers (before diving into details).  If our community
+> > > consensus finds oe-made-easy useful, please let me know and I'll start
+> > > updating our openembedded.org wiki pages to reference this one liner
+> > > or equivalent.
+> > > 
+> > > 
+> > > And if you personally find oe-made-easy useful, feel free to test it
+> > > further, fork it and/or send me pull requests via
+> > > https://github.com/lloydchang/oe-made-easy
+> > > 
+> > > (for now, oe-made-easy is defaulting to qemux86_64, qemux86 and qemuarm
+> > 
+> > targets)
+> > 
+> > > Your feedback is greatly appreciated!
+> > 
+> > you can add this to OE wiki in some form.
 
-diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-new file mode 100644
-index 0000000..d6d61fd
---- /dev/null
-+++ b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Take photos and videos with your webcam, with fun graphical effects"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
-+
-+DEPENDS = "gtk+ gstreamer gst-plugins-base libcanberra udev librsvg gnome-desktop eds-dbus"
-+
-+inherit gnome
-+
-+SRC_URI[archive.md5sum] = "1599fded8a1797ea51fb010af4e6c45b"
-+SRC_URI[archive.sha256sum] = "48f03470c6f527caa0e3b269d3afcff86ae0939a74f66ce030d4eed3bc3cbd9a"
-+
-+FILES_${PN} += "${datadir}/dbus-1"
-+RRECOMMENDS_${PN} = "gst-plugins-good-meta gst-plugins-base-meta"
-+
+Sorry I didn't reply to this earlier. Clearly our docs still need improvement 
+here, but I'm not sure I feel comfortable with having this script right up-
+front in our getting started documentation as it is now, particularly as it's 
+not part of OE-Core itself. There is a canonical method for getting started, 
+it's a simple set of steps anyone should be able to follow; various frontend 
+scripts around but I don't think they really belong in the OE instructions in 
+this manner unless they're actually part of OE-Core.
+
+Cheers,
+Paul
+
+
 -- 
-1.7.10
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
