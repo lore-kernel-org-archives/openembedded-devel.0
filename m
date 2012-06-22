@@ -1,34 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Si0bj-0005EV-89
+	(envelope-from <koen@dominion.thruhere.net>) id 1Si2Cu-0007AV-9E
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 11:56:51 +0200
-Received: by yenl13 with SMTP id l13so1276388yen.6
+	Fri, 22 Jun 2012 13:39:20 +0200
+Received: by eekd49 with SMTP id d49so542731eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2012 02:46:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=noAVkmomnSGtfL/b6l+lXWvgogh0LTo/dXtMoO/cJ1E=;
-	b=RNLWf5/hgPYIbhVJAnozEq7KpOwkgAeXbgRx9iEioXIHV39ss0pSpB7fqVpzRBESSy
-	guLk6E7Z4dKE5kZ6Ic5aOVd8wM5ytjxm1YCKodgWsiY8nhWI+9TD+yrrjDdUhEOw/AP3
-	DOTWPWp10WSaGdqo757ePoCJ3pHT/7ooVA7W4ZOvqv0pdnlUibmsn83pqaiU9vK9GETn
-	tYx8SF/fUCdiwwykHYhsArGA3WrG9Nd8MVIrW+js4oiXmCxjcQxhoOYoWDIAinI9XHFi
-	Fb9NdsRYO+9FH6vryzt7995eaThI5PLmmUZFFyj045U+gHV2bLSOZvqaydzhpOTOzQ0S
-	nXGg==
-MIME-Version: 1.0
-Received: by 10.236.180.40 with SMTP id i28mr1707575yhm.22.1340358363814; Fri,
-	22 Jun 2012 02:46:03 -0700 (PDT)
-Received: by 10.236.161.37 with HTTP; Fri, 22 Jun 2012 02:46:03 -0700 (PDT)
-In-Reply-To: <CAC+thW3xN4uDw3V=zVeXLugO_-77c82Wk0M+wxTUMqA9pqYefA@mail.gmail.com>
-References: <1340352411-20305-1-git-send-email-gizero@gmail.com>
-	<20120622082038.GM9352@jama.jama.net>
-	<CAC+thW3xN4uDw3V=zVeXLugO_-77c82Wk0M+wxTUMqA9pqYefA@mail.gmail.com>
-Date: Fri, 22 Jun 2012 11:46:03 +0200
-Message-ID: <CA+chaQcB-vYOpP_MsJqLrJ1GDXT8VsVsZtbTj7cPmG1nPLdFXA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 22 Jun 2012 04:28:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=sIu8tAV3pfxYWIgDgEog5F57Jas6Pejj/YbrPIhTrQA=;
+	b=Qb3yNCtHF20m6ppzxJTtgDQ6W5ZaqjOK28BfpEAGklKYiloPgZK4zHwr55TTTW5cty
+	wc1NbBx1sxg9EZ6WEKM2+0Fq+//yztdQprZiq8EA0o3sYW02GoFQCHU0H6hNa9fBYTA8
+	s6qocMAT6zkApxFP/Gmpxxha+9NblE49tGTEDDJZGoud+tavGOfLJ8GHO8PXG+QxiiMT
+	ufz3NbolHdQk60DeFtoJfNDD6iJ6k/gj0vQtVRkL3Q4M8u5yoWJABUpZGWoBui31ioXK
+	oA5DSCzGRLCvmZHn0RxokF6kR5KpN15LZPeIV7HaRMph1Rc+rotkDZex+vOtR/thXL91
+	Gq4A==
+Received: by 10.14.185.137 with SMTP id u9mr354258eem.219.1340364513140;
+	Fri, 22 Jun 2012 04:28:33 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id
+	x52sm111882379eea.11.2012.06.22.04.28.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 22 Jun 2012 04:28:32 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] libmodbus: update to 3.0.3
+Date: Fri, 22 Jun 2012 13:28:27 +0200
+Message-Id: <1340364508-8832-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQmlgZ6YhAzs8kUp+P1xetoTyVwYmkXTqK3z/sylpG0EE8qGWLdIhvvlfDV8/iicOLg5ucq1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 1/2] yavta: add patch to enable streaming to stdout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,134 +44,896 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 09:56:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Jun 2012 11:39:20 -0000
 
-On Fri, Jun 22, 2012 at 11:20 AM, Andrea Galbusera <gizero@gmail.com> wrote=
-:
-> Hi Martin,
->
-> On Fri, Jun 22, 2012 at 10:20 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> On Fri, Jun 22, 2012 at 10:06:51AM +0200, Andrea Galbusera wrote:
->>> Signed-off-by: Andrea Galbusera <gizero@gmail.com>
->>> ---
->>> =C2=A0.../recipes-extended/libmodbus/libmodbus_3.0.2.bb =C2=A0| =C2=A0 =
-16 ----------------
->>> =C2=A0.../recipes-extended/libmodbus/libmodbus_3.0.3.bb =C2=A0| =C2=A0 =
-16 ++++++++++++++++
->>> =C2=A02 files changed, 16 insertions(+), 16 deletions(-)
->>> =C2=A0delete mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3=
-.0.2.bb
->>> =C2=A0create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3=
-.0.3.bb
->>
->> Please use -M when sending patches like this, so it's easier for review.
->>
->> Also when you're at it, you can simplify URL like this:
->> s%libmodbus/libmodbus-${PV}%${BPN}/${BP}%
->
-> Thank you for reviewing. I wasn't aware of -M... still a newbie of
-> patch workflow. ;-)
-> Going to update my 'oe patch howto' notes and re-submitting.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ...mode-to-allow-streaming-over-the-network-.patch |  854 ++++++++++++++++++++
+ meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb   |    5 +-
+ 2 files changed, 857 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/yavta/0001-Add-stdout-mode-to-allow-streaming-over-the-network-.patch
 
-To make your 'oe patch howto' even better add 2 more items:
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/yavta/0001-Add-stdout-mode-to-allow-streaming-over-the-network-.patch b/meta-oe/recipes-multimedia/v4l2apps/yavta/0001-Add-stdout-mode-to-allow-streaming-over-the-network-.patch
+new file mode 100644
+index 0000000..430836f
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/v4l2apps/yavta/0001-Add-stdout-mode-to-allow-streaming-over-the-network-.patch
+@@ -0,0 +1,854 @@
++From 1146a0f01fc8730d5633b46b85d00154a721abbe Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Fri, 22 Jun 2012 12:40:23 +0200
++Subject: [PATCH] Add stdout mode to allow streaming over the network with nc
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ yavta.c |  288 ++++++++++++++++++++++++++++++++++-----------------------------
++ 1 file changed, 157 insertions(+), 131 deletions(-)
++
++diff --git a/yavta.c b/yavta.c
++index f3deae0..8020209 100644
++--- a/yavta.c
+++++ b/yavta.c
++@@ -188,12 +188,12 @@ static int video_open(struct device *dev, const char *devname, int no_query)
++ 
++ 	dev->fd = open(devname, O_RDWR);
++ 	if (dev->fd < 0) {
++-		printf("Error opening device %s: %s (%d).\n", devname,
+++		fprintf(stderr, "Error opening device %s: %s (%d).\n", devname,
++ 		       strerror(errno), errno);
++ 		return dev->fd;
++ 	}
++ 
++-	printf("Device %s opened.\n", devname);
+++	fprintf(stderr, "Device %s opened.\n", devname);
++ 
++ 	if (no_query) {
++ 		/* Assume capture device. */
++@@ -211,13 +211,13 @@ static int video_open(struct device *dev, const char *devname, int no_query)
++ 	else if (cap.capabilities & V4L2_CAP_VIDEO_OUTPUT)
++ 		dev->type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
++ 	else {
++-		printf("Error opening device %s: neither video capture "
+++		fprintf(stderr, "Error opening device %s: neither video capture "
++ 			"nor video output supported.\n", devname);
++ 		close(dev->fd);
++ 		return -EINVAL;
++ 	}
++ 
++-	printf("Device `%s' on `%s' is a video %s device.\n",
+++	fprintf(stderr, "Device `%s' on `%s' is a video %s device.\n",
++ 		cap.card, cap.bus_info,
++ 		dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE ? "capture" : "output");
++ 	return 0;
++@@ -280,7 +280,7 @@ static int get_control(struct device *dev, unsigned int id, int type,
++ 		}
++ 	}
++ 
++-	printf("unable to get control 0x%8.8x: %s (%d).\n",
+++	fprintf(stderr, "unable to get control 0x%8.8x: %s (%d).\n",
++ 		id, strerror(errno), errno);
++ 	return -1;
++ }
++@@ -322,12 +322,12 @@ static void set_control(struct device *dev, unsigned int id, int type,
++ 			val = old.value;
++ 	}
++ 	if (ret == -1) {
++-		printf("unable to set control 0x%8.8x: %s (%d).\n",
+++		fprintf(stderr, "unable to set control 0x%8.8x: %s (%d).\n",
++ 			id, strerror(errno), errno);
++ 		return;
++ 	}
++ 
++-	printf("Control 0x%08x set to %" PRId64 ", is %" PRId64 "\n",
+++	fprintf(stderr, "Control 0x%08x set to %" PRId64 ", is %" PRId64 "\n",
++ 	       id, old_val, val);
++ }
++ 
++@@ -341,7 +341,7 @@ static int video_get_format(struct device *dev)
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_G_FMT, &fmt);
++ 	if (ret < 0) {
++-		printf("Unable to get format: %s (%d).\n", strerror(errno),
+++		fprintf(stderr, "Unable to get format: %s (%d).\n", strerror(errno),
++ 			errno);
++ 		return ret;
++ 	}
++@@ -351,7 +351,7 @@ static int video_get_format(struct device *dev)
++ 	dev->bytesperline = fmt.fmt.pix.bytesperline;
++ 	dev->imagesize = fmt.fmt.pix.bytesperline ? fmt.fmt.pix.sizeimage : 0;
++ 
++-	printf("Video format: %s (%08x) %ux%u (stride %u) buffer size %u\n",
+++	fprintf(stderr, "Video format: %s (%08x) %ux%u (stride %u) buffer size %u\n",
++ 		v4l2_format_name(fmt.fmt.pix.pixelformat), fmt.fmt.pix.pixelformat,
++ 		fmt.fmt.pix.width, fmt.fmt.pix.height, fmt.fmt.pix.bytesperline,
++ 		fmt.fmt.pix.sizeimage);
++@@ -374,12 +374,12 @@ static int video_set_format(struct device *dev, unsigned int w, unsigned int h,
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_S_FMT, &fmt);
++ 	if (ret < 0) {
++-		printf("Unable to set format: %s (%d).\n", strerror(errno),
+++		fprintf(stderr, "Unable to set format: %s (%d).\n", strerror(errno),
++ 			errno);
++ 		return ret;
++ 	}
++ 
++-	printf("Video format set: %s (%08x) %ux%u (stride %u) buffer size %u\n",
+++	fprintf(stderr, "Video format set: %s (%08x) %ux%u (stride %u) buffer size %u\n",
++ 		v4l2_format_name(fmt.fmt.pix.pixelformat), fmt.fmt.pix.pixelformat,
++ 		fmt.fmt.pix.width, fmt.fmt.pix.height, fmt.fmt.pix.bytesperline,
++ 		fmt.fmt.pix.sizeimage);
++@@ -396,16 +396,16 @@ static int video_set_framerate(struct device *dev, struct v4l2_fract *time_per_f
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_G_PARM, &parm);
++ 	if (ret < 0) {
++-		printf("Unable to get frame rate: %s (%d).\n",
+++		fprintf(stderr, "Unable to get frame rate: %s (%d).\n",
++ 			strerror(errno), errno);
++ 		return ret;
++ 	}
++ 
++-	printf("Current frame rate: %u/%u\n",
+++	fprintf(stderr, "Current frame rate: %u/%u\n",
++ 		parm.parm.capture.timeperframe.numerator,
++ 		parm.parm.capture.timeperframe.denominator);
++ 
++-	printf("Setting frame rate to: %u/%u\n",
+++	fprintf(stderr, "Setting frame rate to: %u/%u\n",
++ 		time_per_frame->numerator,
++ 		time_per_frame->denominator);
++ 
++@@ -414,19 +414,19 @@ static int video_set_framerate(struct device *dev, struct v4l2_fract *time_per_f
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_S_PARM, &parm);
++ 	if (ret < 0) {
++-		printf("Unable to set frame rate: %s (%d).\n", strerror(errno),
+++		fprintf(stderr, "Unable to set frame rate: %s (%d).\n", strerror(errno),
++ 			errno);
++ 		return ret;
++ 	}
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_G_PARM, &parm);
++ 	if (ret < 0) {
++-		printf("Unable to get frame rate: %s (%d).\n", strerror(errno),
+++		fprintf(stderr, "Unable to get frame rate: %s (%d).\n", strerror(errno),
++ 			errno);
++ 		return ret;
++ 	}
++ 
++-	printf("Frame rate set: %u/%u\n",
+++	fprintf(stderr, "Frame rate set: %u/%u\n",
++ 		parm.parm.capture.timeperframe.numerator,
++ 		parm.parm.capture.timeperframe.denominator);
++ 	return 0;
++@@ -449,12 +449,12 @@ static int video_alloc_buffers(struct device *dev, int nbufs,
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_REQBUFS, &rb);
++ 	if (ret < 0) {
++-		printf("Unable to request buffers: %s (%d).\n", strerror(errno),
+++		fprintf(stderr, "Unable to request buffers: %s (%d).\n", strerror(errno),
++ 			errno);
++ 		return ret;
++ 	}
++ 
++-	printf("%u buffers requested.\n", rb.count);
+++	fprintf(stderr, "%u buffers requested.\n", rb.count);
++ 
++ 	buffers = malloc(rb.count * sizeof buffers[0]);
++ 	if (buffers == NULL)
++@@ -470,35 +470,35 @@ static int video_alloc_buffers(struct device *dev, int nbufs,
++ 		buf.memory = dev->memtype;
++ 		ret = ioctl(dev->fd, VIDIOC_QUERYBUF, &buf);
++ 		if (ret < 0) {
++-			printf("Unable to query buffer %u: %s (%d).\n", i,
+++			fprintf(stderr, "Unable to query buffer %u: %s (%d).\n", i,
++ 				strerror(errno), errno);
++ 			return ret;
++ 		}
++-		printf("length: %u offset: %u\n", buf.length, buf.m.offset);
+++		fprintf(stderr, "length: %u offset: %u\n", buf.length, buf.m.offset);
++ 
++ 		switch (dev->memtype) {
++ 		case V4L2_MEMORY_MMAP:
++ 			buffers[i].mem = mmap(0, buf.length, PROT_READ | PROT_WRITE, MAP_SHARED, dev->fd, buf.m.offset);
++ 			if (buffers[i].mem == MAP_FAILED) {
++-				printf("Unable to map buffer %u: %s (%d)\n", i,
+++				fprintf(stderr, "Unable to map buffer %u: %s (%d)\n", i,
++ 					strerror(errno), errno);
++ 				return ret;
++ 			}
++ 			buffers[i].size = buf.length;
++ 			buffers[i].padding = 0;
++-			printf("Buffer %u mapped at address %p.\n", i, buffers[i].mem);
+++			fprintf(stderr, "Buffer %u mapped at address %p.\n", i, buffers[i].mem);
++ 			break;
++ 
++ 		case V4L2_MEMORY_USERPTR:
++ 			ret = posix_memalign(&buffers[i].mem, page_size, buf.length + offset + padding);
++ 			if (ret < 0) {
++-				printf("Unable to allocate buffer %u (%d)\n", i, ret);
+++				fprintf(stderr, "Unable to allocate buffer %u (%d)\n", i, ret);
++ 				return -ENOMEM;
++ 			}
++ 			buffers[i].mem += offset;
++ 			buffers[i].size = buf.length;
++ 			buffers[i].padding = padding;
++-			printf("Buffer %u allocated at address %p.\n", i, buffers[i].mem);
+++			fprintf(stderr, "Buffer %u allocated at address %p.\n", i, buffers[i].mem);
++ 			break;
++ 
++ 		default:
++@@ -525,7 +525,7 @@ static int video_free_buffers(struct device *dev)
++ 		case V4L2_MEMORY_MMAP:
++ 			ret = munmap(dev->buffers[i].mem, dev->buffers[i].size);
++ 			if (ret < 0) {
++-				printf("Unable to unmap buffer %u: %s (%d)\n", i,
+++				fprintf(stderr, "Unable to unmap buffer %u: %s (%d)\n", i,
++ 					strerror(errno), errno);
++ 				return ret;
++ 			}
++@@ -549,12 +549,12 @@ static int video_free_buffers(struct device *dev)
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_REQBUFS, &rb);
++ 	if (ret < 0) {
++-		printf("Unable to release buffers: %s (%d).\n",
+++		fprintf(stderr, "Unable to release buffers: %s (%d).\n",
++ 			strerror(errno), errno);
++ 		return ret;
++ 	}
++ 
++-	printf("%u buffers released.\n", dev->nbufs);
+++	fprintf(stderr, "%u buffers released.\n", dev->nbufs);
++ 
++ 	free(dev->buffers);
++ 	dev->nbufs = 0;
++@@ -589,7 +589,7 @@ static int video_queue_buffer(struct device *dev, int index, enum buffer_fill_mo
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_QBUF, &buf);
++ 	if (ret < 0)
++-		printf("Unable to queue buffer: %s (%d).\n",
+++		fprintf(stderr, "Unable to queue buffer: %s (%d).\n",
++ 			strerror(errno), errno);
++ 
++ 	return ret;
++@@ -602,7 +602,7 @@ static int video_enable(struct device *dev, int enable)
++ 
++ 	ret = ioctl(dev->fd, enable ? VIDIOC_STREAMON : VIDIOC_STREAMOFF, &type);
++ 	if (ret < 0) {
++-		printf("Unable to %s streaming: %s (%d).\n",
+++		fprintf(stderr, "Unable to %s streaming: %s (%d).\n",
++ 			enable ? "start" : "stop", strerror(errno), errno);
++ 		return ret;
++ 	}
++@@ -623,9 +623,9 @@ static void video_query_menu(struct device *dev, struct v4l2_queryctrl *query)
++ 			continue;
++ 
++ 		if (query->type == V4L2_CTRL_TYPE_MENU)
++-			printf("  %u: %.32s\n", menu.index, menu.name);
+++			fprintf(stderr, "  %u: %.32s\n", menu.index, menu.name);
++ 		else
++-			printf("  %u: %lld\n", menu.index, menu.value);
+++			fprintf(stderr, "  %u: %lld\n", menu.index, menu.value);
++ 	};
++ }
++ 
++@@ -655,7 +655,7 @@ static void video_list_controls(struct device *dev)
++ 			continue;
++ 
++ 		if (query.type == V4L2_CTRL_TYPE_CTRL_CLASS) {
++-			printf("--- %s (class 0x%08x) ---\n", query.name, query.id);
+++			fprintf(stderr, "--- %s (class 0x%08x) ---\n", query.name, query.id);
++ 			continue;
++ 		}
++ 
++@@ -665,7 +665,7 @@ static void video_list_controls(struct device *dev)
++ 		else
++ 			sprintf(value, "%" PRId64, val64);
++ 
++-		printf("control 0x%08x `%s' min %d max %d step %d default %d current %s.\n",
+++		fprintf(stderr, "control 0x%08x `%s' min %d max %d step %d default %d current %s.\n",
++ 			query.id, query.name, query.minimum, query.maximum,
++ 			query.step, query.default_value, value);
++ 
++@@ -677,9 +677,9 @@ static void video_list_controls(struct device *dev)
++ 	}
++ 
++ 	if (nctrls)
++-		printf("%u control%s found.\n", nctrls, nctrls > 1 ? "s" : "");
+++		fprintf(stderr, "%u control%s found.\n", nctrls, nctrls > 1 ? "s" : "");
++ 	else
++-		printf("No control found.\n");
+++		fprintf(stderr, "No control found.\n");
++ }
++ 
++ static void video_enum_frame_intervals(struct device *dev, __u32 pixelformat,
++@@ -700,30 +700,30 @@ static void video_enum_frame_intervals(struct device *dev, __u32 pixelformat,
++ 			break;
++ 
++ 		if (i != ival.index)
++-			printf("Warning: driver returned wrong ival index "
+++			fprintf(stderr, "Warning: driver returned wrong ival index "
++ 				"%u.\n", ival.index);
++ 		if (pixelformat != ival.pixel_format)
++-			printf("Warning: driver returned wrong ival pixel "
+++			fprintf(stderr, "Warning: driver returned wrong ival pixel "
++ 				"format %08x.\n", ival.pixel_format);
++ 		if (width != ival.width)
++-			printf("Warning: driver returned wrong ival width "
+++			fprintf(stderr, "Warning: driver returned wrong ival width "
++ 				"%u.\n", ival.width);
++ 		if (height != ival.height)
++-			printf("Warning: driver returned wrong ival height "
+++			fprintf(stderr, "Warning: driver returned wrong ival height "
++ 				"%u.\n", ival.height);
++ 
++ 		if (i != 0)
++-			printf(", ");
+++			fprintf(stderr, ", ");
++ 
++ 		switch (ival.type) {
++ 		case V4L2_FRMIVAL_TYPE_DISCRETE:
++-			printf("%u/%u",
+++			fprintf(stderr, "%u/%u",
++ 				ival.discrete.numerator,
++ 				ival.discrete.denominator);
++ 			break;
++ 
++ 		case V4L2_FRMIVAL_TYPE_CONTINUOUS:
++-			printf("%u/%u - %u/%u",
+++			fprintf(stderr, "%u/%u - %u/%u",
++ 				ival.stepwise.min.numerator,
++ 				ival.stepwise.min.denominator,
++ 				ival.stepwise.max.numerator,
++@@ -731,7 +731,7 @@ static void video_enum_frame_intervals(struct device *dev, __u32 pixelformat,
++ 			return;
++ 
++ 		case V4L2_FRMIVAL_TYPE_STEPWISE:
++-			printf("%u/%u - %u/%u (by %u/%u)",
+++			fprintf(stderr, "%u/%u - %u/%u (by %u/%u)",
++ 				ival.stepwise.min.numerator,
++ 				ival.stepwise.min.denominator,
++ 				ival.stepwise.max.numerator,
++@@ -761,23 +761,23 @@ static void video_enum_frame_sizes(struct device *dev, __u32 pixelformat)
++ 			break;
++ 
++ 		if (i != frame.index)
++-			printf("Warning: driver returned wrong frame index "
+++			fprintf(stderr, "Warning: driver returned wrong frame index "
++ 				"%u.\n", frame.index);
++ 		if (pixelformat != frame.pixel_format)
++-			printf("Warning: driver returned wrong frame pixel "
+++			fprintf(stderr, "Warning: driver returned wrong frame pixel "
++ 				"format %08x.\n", frame.pixel_format);
++ 
++ 		switch (frame.type) {
++ 		case V4L2_FRMSIZE_TYPE_DISCRETE:
++-			printf("\tFrame size: %ux%u (", frame.discrete.width,
+++			fprintf(stderr, "\tFrame size: %ux%u (", frame.discrete.width,
++ 				frame.discrete.height);
++ 			video_enum_frame_intervals(dev, frame.pixel_format,
++ 				frame.discrete.width, frame.discrete.height);
++-			printf(")\n");
+++			fprintf(stderr, ")\n");
++ 			break;
++ 
++ 		case V4L2_FRMSIZE_TYPE_CONTINUOUS:
++-			printf("\tFrame size: %ux%u - %ux%u (",
+++			fprintf(stderr, "\tFrame size: %ux%u - %ux%u (",
++ 				frame.stepwise.min_width,
++ 				frame.stepwise.min_height,
++ 				frame.stepwise.max_width,
++@@ -785,11 +785,11 @@ static void video_enum_frame_sizes(struct device *dev, __u32 pixelformat)
++ 			video_enum_frame_intervals(dev, frame.pixel_format,
++ 				frame.stepwise.max_width,
++ 				frame.stepwise.max_height);
++-			printf(")\n");
+++			fprintf(stderr, ")\n");
++ 			break;
++ 
++ 		case V4L2_FRMSIZE_TYPE_STEPWISE:
++-			printf("\tFrame size: %ux%u - %ux%u (by %ux%u) (\n",
+++			fprintf(stderr, "\tFrame size: %ux%u - %ux%u (by %ux%u) (\n",
++ 				frame.stepwise.min_width,
++ 				frame.stepwise.min_height,
++ 				frame.stepwise.max_width,
++@@ -799,7 +799,7 @@ static void video_enum_frame_sizes(struct device *dev, __u32 pixelformat)
++ 			video_enum_frame_intervals(dev, frame.pixel_format,
++ 				frame.stepwise.max_width,
++ 				frame.stepwise.max_height);
++-			printf(")\n");
+++			fprintf(stderr, ")\n");
++ 			break;
++ 
++ 		default:
++@@ -823,19 +823,19 @@ static void video_enum_formats(struct device *dev, enum v4l2_buf_type type)
++ 			break;
++ 
++ 		if (i != fmt.index)
++-			printf("Warning: driver returned wrong format index "
+++			fprintf(stderr, "Warning: driver returned wrong format index "
++ 				"%u.\n", fmt.index);
++ 		if (type != fmt.type)
++-			printf("Warning: driver returned wrong format type "
+++			fprintf(stderr, "Warning: driver returned wrong format type "
++ 				"%u.\n", fmt.type);
++ 
++-		printf("\tFormat %u: %s (%08x)\n", i,
+++		fprintf(stderr, "\tFormat %u: %s (%08x)\n", i,
++ 			v4l2_format_name(fmt.pixelformat), fmt.pixelformat);
++-		printf("\tType: %s (%u)\n", v4l2_buf_type_name(fmt.type),
+++		fprintf(stderr, "\tType: %s (%u)\n", v4l2_buf_type_name(fmt.type),
++ 			fmt.type);
++-		printf("\tName: %.32s\n", fmt.description);
+++		fprintf(stderr, "\tName: %.32s\n", fmt.description);
++ 		video_enum_frame_sizes(dev, fmt.pixelformat);
++-		printf("\n");
+++		fprintf(stderr, "\n");
++ 	}
++ }
++ 
++@@ -853,13 +853,13 @@ static void video_enum_inputs(struct device *dev)
++ 			break;
++ 
++ 		if (i != input.index)
++-			printf("Warning: driver returned wrong input index "
+++			fprintf(stderr, "Warning: driver returned wrong input index "
++ 				"%u.\n", input.index);
++ 
++-		printf("\tInput %u: %s.\n", i, input.name);
+++		fprintf(stderr, "\tInput %u: %s.\n", i, input.name);
++ 	}
++ 
++-	printf("\n");
+++	fprintf(stderr, "\n");
++ }
++ 
++ static int video_get_input(struct device *dev)
++@@ -869,7 +869,7 @@ static int video_get_input(struct device *dev)
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_G_INPUT, &input);
++ 	if (ret < 0) {
++-		printf("Unable to get current input: %s (%d).\n",
+++		fprintf(stderr, "Unable to get current input: %s (%d).\n",
++ 			strerror(errno), errno);
++ 		return ret;
++ 	}
++@@ -884,7 +884,7 @@ static int video_set_input(struct device *dev, unsigned int input)
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_S_INPUT, &_input);
++ 	if (ret < 0)
++-		printf("Unable to select input %u: %s (%d).\n", input,
+++		fprintf(stderr, "Unable to select input %u: %s (%d).\n", input,
++ 			strerror(errno), errno);
++ 
++ 	return ret;
++@@ -903,14 +903,14 @@ static int video_set_quality(struct device *dev, unsigned int quality)
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_S_JPEGCOMP, &jpeg);
++ 	if (ret < 0) {
++-		printf("Unable to set quality to %u: %s (%d).\n", quality,
+++		fprintf(stderr, "Unable to set quality to %u: %s (%d).\n", quality,
++ 			strerror(errno), errno);
++ 		return ret;
++ 	}
++ 
++ 	ret = ioctl(dev->fd, VIDIOC_G_JPEGCOMP, &jpeg);
++ 	if (ret >= 0)
++-		printf("Quality set to %u\n", jpeg.quality);
+++		fprintf(stderr, "Quality set to %u\n", jpeg.quality);
++ 
++ 	return 0;
++ }
++@@ -930,7 +930,7 @@ static int video_load_test_pattern(struct device *dev, const char *filename)
++ 
++ 	if (filename == NULL) {
++ 		if (dev->bytesperline == 0) {
++-			printf("Compressed format detect and no test pattern filename given.\n"
+++			fprintf(stderr, "Compressed format detect and no test pattern filename given.\n"
++ 				"The test pattern can't be generated automatically.\n");
++ 			return -EINVAL;
++ 		}
++@@ -947,7 +947,7 @@ static int video_load_test_pattern(struct device *dev, const char *filename)
++ 
++ 	fd = open(filename, O_RDONLY);
++ 	if (fd == -1) {
++-		printf("Unable to open test pattern file '%s': %s (%d).\n",
+++		fprintf(stderr, "Unable to open test pattern file '%s': %s (%d).\n",
++ 			filename, strerror(errno), errno);
++ 		return -errno;
++ 	}
++@@ -956,7 +956,7 @@ static int video_load_test_pattern(struct device *dev, const char *filename)
++ 	close(fd);
++ 
++ 	if (ret != (int)size && dev->bytesperline != 0) {
++-		printf("Test pattern file size %u doesn't match image size %u\n",
+++		fprintf(stderr, "Test pattern file size %u doesn't match image size %u\n",
++ 			ret, size);
++ 		return -EINVAL;
++ 	}
++@@ -1012,16 +1012,16 @@ static void video_verify_buffer(struct device *dev, int index)
++ 	}
++ 
++ 	if (errors) {
++-		printf("Warning: %u bytes overwritten among %u first padding bytes\n",
+++		fprintf(stderr, "Warning: %u bytes overwritten among %u first padding bytes\n",
++ 		       errors, dirty);
++ 
++ 		dirty = (dirty + 15) & ~15;
++ 		dirty = dirty > 32 ? 32 : dirty;
++ 
++ 		for (i = 0; i < dirty; ++i) {
++-			printf("%02x ", data[i]);
+++			fprintf(stderr, "%02x ", data[i]);
++ 			if (i % 16 == 15)
++-				printf("\n");
+++				fprintf(stderr, "\n");
++ 		}
++ 	}
++ }
++@@ -1061,15 +1061,29 @@ static void video_save_image(struct device *dev, struct v4l2_buffer *buf,
++ 	close(fd);
++ 
++ 	if (ret < 0)
++-		printf("write error: %s (%d)\n", strerror(errno), errno);
+++		fprintf(stderr, "write error: %s (%d)\n", strerror(errno), errno);
++ 	else if (ret != (int)buf->bytesused)
++-		printf("write error: only %d bytes written instead of %u\n",
+++		fprintf(stderr, "write error: only %d bytes written instead of %u\n",
+++		       ret, buf->bytesused);
+++}
+++
+++static void video_stdout_image(struct device *dev, struct v4l2_buffer *buf)
+++{
+++	int ret;
+++
+++	fprintf(stderr, "stdout");
+++	ret = fwrite(dev->buffers[buf->index].mem, buf->bytesused, 1, stdout);
+++
+++	if (ret < 0)
+++		fprintf(stderr, "write error: %s (%d)\n", strerror(errno), errno);
+++	else if (ret != (int)buf->bytesused)
+++		fprintf(stderr, "write error: only %d bytes written instead of %u\n",
++ 		       ret, buf->bytesused);
++ }
++ 
++ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 	unsigned int skip, unsigned int delay, const char *pattern,
++-	int do_requeue_last, enum buffer_fill_mode fill)
+++	int do_requeue_last, enum buffer_fill_mode fill, int do_stdout)
++ {
++ 	struct timespec start;
++ 	struct timeval last;
++@@ -1099,7 +1113,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 		ret = ioctl(dev->fd, VIDIOC_DQBUF, &buf);
++ 		if (ret < 0) {
++ 			if (errno != EIO) {
++-				printf("Unable to dequeue buffer: %s (%d).\n",
+++				fprintf(stderr, "Unable to dequeue buffer: %s (%d).\n",
++ 					strerror(errno), errno);
++ 				goto done;
++ 			}
++@@ -1111,7 +1125,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 
++ 		if (dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE &&
++ 		    dev->imagesize != 0	&& buf.bytesused != dev->imagesize)
++-			printf("Warning: bytes used %u != image size %u\n",
+++			fprintf(stderr, "Warning: bytes used %u != image size %u\n",
++ 			       buf.bytesused, dev->imagesize);
++ 
++ 		if (dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE)
++@@ -1124,7 +1138,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 		fps = fps ? 1000000.0 / fps : 0.0;
++ 
++ 		clock_gettime(CLOCK_MONOTONIC, &ts);
++-		printf("%u (%u) [%c] %u %u bytes %ld.%06ld %ld.%06ld %.3f fps\n", i, buf.index,
+++		fprintf(stderr, "%u (%u) [%c] %u %u bytes %ld.%06ld %ld.%06ld %.3f fps\n", i, buf.index,
++ 			(buf.flags & V4L2_BUF_FLAG_ERROR) ? 'E' : '-',
++ 			buf.sequence, buf.bytesused, buf.timestamp.tv_sec,
++ 			buf.timestamp.tv_usec, ts.tv_sec, ts.tv_nsec/1000, fps);
++@@ -1132,8 +1146,13 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 		last = buf.timestamp;
++ 
++ 		/* Save the image. */
++-		if (dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE && pattern && !skip)
+++		if (dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE && pattern && !skip) {
++ 			video_save_image(dev, &buf, pattern, i);
+++		}
+++
+++		if (dev->type == V4L2_BUF_TYPE_VIDEO_CAPTURE && do_stdout && !skip) {
+++			video_stdout_image(dev, &buf);
+++		}
++ 
++ 		if (skip)
++ 			--skip;
++@@ -1149,7 +1168,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 
++ 		ret = video_queue_buffer(dev, buf.index, fill);
++ 		if (ret < 0) {
++-			printf("Unable to requeue buffer: %s (%d).\n",
+++			fprintf(stderr, "Unable to requeue buffer: %s (%d).\n",
++ 				strerror(errno), errno);
++ 			goto done;
++ 		}
++@@ -1159,7 +1178,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 	video_enable(dev, 0);
++ 
++ 	if (nframes == 0) {
++-		printf("No frames captured.\n");
+++		fprintf(stderr, "No frames captured.\n");
++ 		goto done;
++ 	}
++ 
++@@ -1176,7 +1195,7 @@ static int video_do_capture(struct device *dev, unsigned int nframes,
++ 	bps = size/(ts.tv_nsec/1000.0+1000000.0*ts.tv_sec)*1000000.0;
++ 	fps = i/(ts.tv_nsec/1000.0+1000000.0*ts.tv_sec)*1000000.0;
++ 
++-	printf("Captured %u frames in %lu.%06lu seconds (%f fps, %f B/s).\n",
+++	fprintf(stderr, "Captured %u frames in %lu.%06lu seconds (%f fps, %f B/s).\n",
++ 		i, ts.tv_sec, ts.tv_nsec/1000, fps, bps);
++ 
++ done:
++@@ -1188,37 +1207,38 @@ done:
++ 
++ static void usage(const char *argv0)
++ {
++-	printf("Usage: %s [options] device\n", argv0);
++-	printf("Supported options:\n");
++-	printf("-c, --capture[=nframes]		Capture frames\n");
++-	printf("-C, --check-overrun		Verify dequeued frames for buffer overrun\n");
++-	printf("-d, --delay			Delay (in ms) before requeuing buffers\n");
++-	printf("-f, --format format		Set the video format\n");
++-	printf("-F, --file[=name]		Read/write frames from/to disk\n");
++-	printf("\tFor video capture devices, the first '#' character in the file name is\n");
++-	printf("\texpanded to the frame sequence number. The default file name is\n");
++-	printf("\t'frame-#.bin'.\n");
++-	printf("-h, --help			Show this help screen\n");
++-	printf("-i, --input input		Select the video input\n");
++-	printf("-I, --fill-frames		Fill frames with check pattern before queuing them\n");
++-	printf("-l, --list-controls		List available controls\n");
++-	printf("-n, --nbufs n			Set the number of video buffers\n");
++-	printf("-p, --pause			Pause before starting the video stream\n");
++-	printf("-q, --quality n			MJPEG quality (0-100)\n");
++-	printf("-r, --get-control ctrl		Get control 'ctrl'\n");
++-	printf("-R, --realtime=[priority]	Enable realtime RR scheduling\n");
++-	printf("-s, --size WxH			Set the frame size\n");
++-	printf("-t, --time-per-frame num/denom	Set the time per frame (eg. 1/25 = 25 fps)\n");
++-	printf("-u, --userptr			Use the user pointers streaming method\n");
++-	printf("-w, --set-control 'ctrl value'	Set control 'ctrl' to 'value'\n");
++-	printf("    --enum-formats		Enumerate formats\n");
++-	printf("    --enum-inputs		Enumerate inputs\n");
++-	printf("    --no-query			Don't query capabilities on open\n");
++-	printf("    --offset			User pointer buffer offset from page start\n");
++-	printf("    --requeue-last		Requeue the last buffers before streamoff\n");
++-	printf("    --skip n			Skip the first n frames\n");
++-	printf("    --sleep-forever		Sleep forever after configuring the device\n");
++-	printf("    --stride value		Line stride in bytes\n");
+++	fprintf(stderr, "Usage: %s [options] device\n", argv0);
+++	fprintf(stderr, "Supported options:\n");
+++	fprintf(stderr, "-c, --capture[=nframes]		Capture frames\n");
+++	fprintf(stderr, "-C, --check-overrun		Verify dequeued frames for buffer overrun\n");
+++	fprintf(stderr, "-d, --delay			Delay (in ms) before requeuing buffers\n");
+++	fprintf(stderr, "-f, --format format		Set the video format\n");
+++	fprintf(stderr, "-F, --file[=name]		Read/write frames from/to disk\n");
+++	fprintf(stderr, "\tFor video capture devices, the first '#' character in the file name is\n");
+++	fprintf(stderr, "\texpanded to the frame sequence number. The default file name is\n");
+++	fprintf(stderr, "\t'frame-#.bin'.\n");
+++	fprintf(stderr, "    --stdout			write frames to stdout\n");
+++	fprintf(stderr, "-h, --help			Show this help screen\n");
+++	fprintf(stderr, "-i, --input input		Select the video input\n");
+++	fprintf(stderr, "-I, --fill-frames		Fill frames with check pattern before queuing them\n");
+++	fprintf(stderr, "-l, --list-controls		List available controls\n");
+++	fprintf(stderr, "-n, --nbufs n			Set the number of video buffers\n");
+++	fprintf(stderr, "-p, --pause			Pause before starting the video stream\n");
+++	fprintf(stderr, "-q, --quality n			MJPEG quality (0-100)\n");
+++	fprintf(stderr, "-r, --get-control ctrl		Get control 'ctrl'\n");
+++	fprintf(stderr, "-R, --realtime=[priority]	Enable realtime RR scheduling\n");
+++	fprintf(stderr, "-s, --size WxH			Set the frame size\n");
+++	fprintf(stderr, "-t, --time-per-frame num/denom	Set the time per frame (eg. 1/25 = 25 fps)\n");
+++	fprintf(stderr, "-u, --userptr			Use the user pointers streaming method\n");
+++	fprintf(stderr, "-w, --set-control 'ctrl value'	Set control 'ctrl' to 'value'\n");
+++	fprintf(stderr, "    --enum-formats		Enumerate formats\n");
+++	fprintf(stderr, "    --enum-inputs		Enumerate inputs\n");
+++	fprintf(stderr, "    --no-query			Don't query capabilities on open\n");
+++	fprintf(stderr, "    --offset			User pointer buffer offset from page start\n");
+++	fprintf(stderr, "    --requeue-last		Requeue the last buffers before streamoff\n");
+++	fprintf(stderr, "    --skip n			Skip the first n frames\n");
+++	fprintf(stderr, "    --sleep-forever		Sleep forever after configuring the device\n");
+++	fprintf(stderr, "    --stride value		Line stride in bytes\n");
++ }
++ 
++ #define OPT_ENUM_FORMATS	256
++@@ -1229,6 +1249,7 @@ static void usage(const char *argv0)
++ #define OPT_USERPTR_OFFSET	261
++ #define OPT_REQUEUE_LAST	262
++ #define OPT_STRIDE		263
+++#define OPT_STDOUT		264
++ 
++ static struct option opts[] = {
++ 	{"capture", 2, 0, 'c'},
++@@ -1238,6 +1259,7 @@ static struct option opts[] = {
++ 	{"enum-inputs", 0, 0, OPT_ENUM_INPUTS},
++ 	{"file", 2, 0, 'F'},
++ 	{"fill-frames", 0, 0, 'I'},
+++	{"stdout", 0, 0, OPT_STDOUT},
++ 	{"format", 1, 0, 'f'},
++ 	{"help", 0, 0, 'h'},
++ 	{"input", 1, 0, 'i'},
++@@ -1274,7 +1296,8 @@ int main(int argc, char *argv[])
++ 	int do_list_controls = 0, do_get_control = 0, do_set_control = 0;
++ 	int do_sleep_forever = 0, do_requeue_last = 0;
++ 	int do_rt = 0;
++-	int no_query = 0;
+++	int no_query = 0; 
+++	int do_stdout = 0;
++ 	char *endptr;
++ 	int c;
++ 
++@@ -1321,7 +1344,7 @@ int main(int argc, char *argv[])
++ 			do_set_format = 1;
++ 			pixelformat = v4l2_format_code(optarg);
++ 			if (pixelformat == 0) {
++-				printf("Unsupported video format '%s'\n", optarg);
+++				fprintf(stderr, "Unsupported video format '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			break;
++@@ -1357,7 +1380,7 @@ int main(int argc, char *argv[])
++ 		case 'r':
++ 			ctrl_name = strtol(optarg, &endptr, 0);
++ 			if (*endptr != 0) {
++-				printf("Invalid control name '%s'\n", optarg);
+++				fprintf(stderr, "Invalid control name '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			do_get_control = 1;
++@@ -1371,12 +1394,12 @@ int main(int argc, char *argv[])
++ 			do_set_format = 1;
++ 			width = strtol(optarg, &endptr, 10);
++ 			if (*endptr != 'x' || endptr == optarg) {
++-				printf("Invalid size '%s'\n", optarg);
+++				fprintf(stderr, "Invalid size '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			height = strtol(endptr + 1, &endptr, 10);
++ 			if (*endptr != 0) {
++-				printf("Invalid size '%s'\n", optarg);
+++				fprintf(stderr, "Invalid size '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			break;
++@@ -1384,12 +1407,12 @@ int main(int argc, char *argv[])
++ 			do_set_time_per_frame = 1;
++ 			time_per_frame.numerator = strtol(optarg, &endptr, 10);
++ 			if (*endptr != '/' || endptr == optarg) {
++-				printf("Invalid time per frame '%s'\n", optarg);
+++				fprintf(stderr, "Invalid time per frame '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			time_per_frame.denominator = strtol(endptr + 1, &endptr, 10);
++ 			if (*endptr != 0) {
++-				printf("Invalid time per frame '%s'\n", optarg);
+++				fprintf(stderr, "Invalid time per frame '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			break;
++@@ -1399,12 +1422,12 @@ int main(int argc, char *argv[])
++ 		case 'w':
++ 			ctrl_name = strtol(optarg, &endptr, 0);
++ 			if (*endptr != ' ' || endptr == optarg) {
++-				printf("Invalid control name '%s'\n", optarg);
+++				fprintf(stderr, "Invalid control name '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			ctrl_value = strtol(endptr + 1, &endptr, 0);
++ 			if (*endptr != 0) {
++-				printf("Invalid control value '%s'\n", optarg);
+++				fprintf(stderr, "Invalid control value '%s'\n", optarg);
++ 				return 1;
++ 			}
++ 			do_set_control = 1;
++@@ -1433,15 +1456,18 @@ int main(int argc, char *argv[])
++ 		case OPT_USERPTR_OFFSET:
++ 			userptr_offset = atoi(optarg);
++ 			break;
+++		case OPT_STDOUT:
+++			do_stdout = 1;
+++			break;
++ 		default:
++-			printf("Invalid option -%c\n", c);
++-			printf("Run %s -h for help.\n", argv[0]);
+++			fprintf(stderr, "Invalid option -%c\n", c);
+++			fprintf(stderr, "Run %s -h for help.\n", argv[0]);
++ 			return 1;
++ 		}
++ 	}
++ 
++ 	if ((fill_mode & BUFFER_FILL_PADDING) && memtype != V4L2_MEMORY_USERPTR) {
++-		printf("Buffer overrun can only be checked in USERPTR mode.\n");
+++		fprintf(stderr, "Buffer overrun can only be checked in USERPTR mode.\n");
++ 		return 1;
++ 	}
++ 
++@@ -1470,7 +1496,7 @@ int main(int argc, char *argv[])
++ 		ret = get_control(&dev, ctrl_name,
++ 				  get_control_type(&dev, ctrl_name), &val);
++ 		if (ret >= 0)
++-			printf("Control 0x%08x value %" PRId64 "\n", ctrl_name, val);
+++			fprintf(stderr, "Control 0x%08x value %" PRId64 "\n", ctrl_name, val);
++ 	}
++ 
++ 	if (do_set_control)
++@@ -1481,21 +1507,21 @@ int main(int argc, char *argv[])
++ 		video_list_controls(&dev);
++ 
++ 	if (do_enum_formats) {
++-		printf("- Available formats:\n");
+++		fprintf(stderr, "- Available formats:\n");
++ 		video_enum_formats(&dev, V4L2_BUF_TYPE_VIDEO_CAPTURE);
++ 		video_enum_formats(&dev, V4L2_BUF_TYPE_VIDEO_OUTPUT);
++ 		video_enum_formats(&dev, V4L2_BUF_TYPE_VIDEO_OVERLAY);
++ 	}
++ 
++ 	if (do_enum_inputs) {
++-		printf("- Available inputs:\n");
+++		fprintf(stderr, "- Available inputs:\n");
++ 		video_enum_inputs(&dev);
++ 	}
++ 
++ 	if (do_set_input) {
++ 		video_set_input(&dev, input);
++ 		ret = video_get_input(&dev);
++-		printf("Input %d selected\n", ret);
+++		fprintf(stderr, "Input %d selected\n", ret);
++ 	}
++ 
++ 	/* Set the video format. */
++@@ -1537,7 +1563,7 @@ int main(int argc, char *argv[])
++ 	}
++ 
++ 	if (do_pause) {
++-		printf("Press enter to start capture\n");
+++		fprintf(stderr, "Press enter to start capture\n");
++ 		getchar();
++ 	}
++ 
++@@ -1546,12 +1572,12 @@ int main(int argc, char *argv[])
++ 		sched.sched_priority = rt_priority;
++ 		ret = sched_setscheduler(0, SCHED_RR, &sched);
++ 		if (ret < 0)
++-			printf("Failed to select RR scheduler: %s (%d)\n",
+++			fprintf(stderr, "Failed to select RR scheduler: %s (%d)\n",
++ 				strerror(errno), errno);
++ 	}
++ 
++ 	if (video_do_capture(&dev, nframes, skip, delay, filename,
++-			     do_requeue_last, fill_mode) < 0) {
+++			     do_requeue_last, fill_mode, do_stdout) < 0) {
++ 		video_close(&dev);
++ 		return 1;
++ 	}
++-- 
++1.7.10
++
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+index 054912d..d007bcb 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+@@ -2,11 +2,12 @@ DESCRIPTION = "Yet Another V4L2 Test Application"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI = "git://git.ideasonboard.org/yavta.git;protocol=git"
++SRC_URI = "git://git.ideasonboard.org/yavta.git;protocol=git \
++           file://0001-Add-stdout-mode-to-allow-streaming-over-the-network-.patch"
+ SRCREV = "82ff2efdb9787737b9f21b6f4759f077c827b238"
+ 
+ PV = "0.0"
+-PR = "r1"
++PR = "r2"
+ S = "${WORKDIR}/git"
+ 
+ do_install() {
+-- 
+1.7.10
 
-1) when sending v2 fill in Message-ID when git send-email asks for it:
-  Message-ID to be used as In-Reply-To for the first email?
-  in original patch you had:
-  Message-Id: <1340352411-20305-1-git-send-email-gizero@gmail.com>
-  so 1340352411-20305-1-git-send-email-gizero@gmail.com
-  this way v2 is in the same thread as original patch
-2) after sending v2 update patchwork:
-  http://patchwork.openembedded.org/project/oe/list/?q=3Dlibmodbus
-  marking v1 as supperseeded
-
-Cheers,
-
->
->>
->> Cheers,
->>
->>>
->>> diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb b/me=
-ta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
->>> deleted file mode 100644
->>> index 03b7fcc..0000000
->>> --- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.2.bb
->>> +++ /dev/null
->>> @@ -1,16 +0,0 @@
->>> -SUMMARY =3D "A Modbus library"
->>> -DESCRIPTION =3D "libmodbus is a C library designed to provide a fast a=
-nd robust \
->>> -implementation of the Modbus protocol. It runs on Linux, Mac OS X, Fre=
-eBSD, \
->>> -QNX and Windows."
->>> -HOMEPAGE =3D "http://www.libmodbus.org/"
->>> -SECTION =3D "libs"
->>> -
->>> -LICENSE =3D "LGPLv2.1+"
->>> -LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3D4fbd65380cdd25595107=
-9008b364516c"
->>> -
->>> -SRC_URI =3D "http://github.com/downloads/stephane/libmodbus/libmodbus-=
-${PV}.tar.gz"
->>> -
->>> -inherit autotools pkgconfig
->>> -
->>> -SRC_URI[md5sum] =3D "1aaacce9d9779d3a84f7d1a75774c943"
->>> -SRC_URI[sha256sum] =3D "927ec90e0e299a7d4ec7086b1e2590566bdfc3bbc22e12=
-204229361c029f2615"
->>> diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.3.bb b/me=
-ta-oe/recipes-extended/libmodbus/libmodbus_3.0.3.bb
->>> new file mode 100644
->>> index 0000000..e6dde2c
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.3.bb
->>> @@ -0,0 +1,16 @@
->>> +SUMMARY =3D "A Modbus library"
->>> +DESCRIPTION =3D "libmodbus is a C library designed to provide a fast a=
-nd robust \
->>> +implementation of the Modbus protocol. It runs on Linux, Mac OS X, Fre=
-eBSD, \
->>> +QNX and Windows."
->>> +HOMEPAGE =3D "http://www.libmodbus.org/"
->>> +SECTION =3D "libs"
->>> +
->>> +LICENSE =3D "LGPLv2.1+"
->>> +LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3D4fbd65380cdd25595107=
-9008b364516c"
->>> +
->>> +SRC_URI =3D "http://github.com/downloads/stephane/libmodbus/libmodbus-=
-${PV}.tar.gz"
->>> +
->>> +inherit autotools pkgconfig
->>> +
->>> +SRC_URI[md5sum] =3D "b5042d833c6c132e6fb2551af133a342"
->>> +SRC_URI[sha256sum] =3D "6fc7cf91f7293e522afde6ae5fc605c6cd7bdca4ee2ec9=
-53db5bb91158ab8677"
->>> --
->>> 1.7.5.4
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> --
->> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
