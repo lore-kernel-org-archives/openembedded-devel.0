@@ -1,39 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Si4oh-0004BB-9I
+	(envelope-from <elvis.dowson@gmail.com>) id 1Si51H-0004c7-Ss
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 16:26:31 +0200
-Received: by pbbrq2 with SMTP id rq2so3495799pbb.6
+	Fri, 22 Jun 2012 16:39:32 +0200
+Received: by dalh21 with SMTP id h21so2301626dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2012 07:15:43 -0700 (PDT)
+	Fri, 22 Jun 2012 07:28:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:mime-version:content-type:subject:date:in-reply-to:to
-	:references:message-id:x-mailer;
-	bh=NKEA+t83W6Fgrg5byCIYoZ6RYqmdbUSZuFVHP8ArZ74=;
-	b=N9r3fG8lenlaYcuON71dGwJOG8VORHt2Rz8jR2k7SEkNXeVHfHZhAJLrZlgdVgnCrg
-	FbToMZjkPXlu/1CzJ+XwaoiYSjmJFMBjjvy3tyVE1lc8OxptSW4cLgVyf4GrU8qJNsJ1
-	OqHRjyZoS3MAMZZso7MsKQSP0/am2QlY+ifXxYSqRPUUIEMYIG1vdZA6jyz6l7IKuLWV
-	fHt4/MRFV4jIGV9MOIm7Tl2p2FTvH4NJ56/G8eN/AlsOzMmeKJRYvwe4hyqbBR7ezNoz
-	dKQ8tJ8beHQSc/TErOMdaVKz5NeSq56MffB7hjcmcFthyPs1in74Zf27gz7x+hge1NLt
-	Ts6A==
-Received: by 10.68.194.4 with SMTP id hs4mr10170084pbc.128.1340374543286;
-	Fri, 22 Jun 2012 07:15:43 -0700 (PDT)
-Received: from [192.168.1.102] ([94.205.109.242])
-	by mx.google.com with ESMTPS id mt9sm39085310pbb.14.2012.06.22.07.15.41
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=6wyteAWgHD9x9tNZ4+sNI5ixcXW56TrD4FFyciYGkF0=;
+	b=VzhANuXQSgIWmr/QoLISgEC3KGFIzCoBvka4qW8jpywQltAMpzjNBSQK+eJMP9Ally
+	PEQKlxNXgkOEq6RHo6TKOmvurPZi2DleuRons5RF+6gMqmqWyeCNBxrpHwAFd9XeS+G3
+	OvMqaoaeWCH6KLKp6/gLzQj36ygdncG3kHOZIhW4A8uvgBXwcjcoKCeNnhZ/9YN1MsCf
+	gxnPkLVNxRL8OLSt8H6s3oDPq1YpiRsofJXlD4QSrfUV8+PbZ0La1OWzlNrVCiK1qpc1
+	8Wy8AvTKNrg/CPeprF8/F338wTt1C4MDxS7cu1uJyrf9iH4G6jGfqpFH3ay7uL1j3yvh
+	xV0Q==
+Received: by 10.68.190.40 with SMTP id gn8mr10683998pbc.118.1340375321899;
+	Fri, 22 Jun 2012 07:28:41 -0700 (PDT)
+Received: from localhost.localdomain ([94.205.109.242])
+	by mx.google.com with ESMTPS id os1sm39101988pbb.49.2012.06.22.07.28.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 22 Jun 2012 07:15:42 -0700 (PDT)
+	Fri, 22 Jun 2012 07:28:41 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
-Mime-Version: 1.0 (Apple Message framework v1278)
-Date: Fri, 22 Jun 2012 18:15:38 +0400
-In-Reply-To: <4FE3F9C9.7070806@gmail.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-References: <1340338450-23907-1-git-send-email-elvis.dowson@gmail.com>
-	<4FE3F9C9.7070806@gmail.com>
-Message-Id: <28D23521-53F5-447D-A22C-333360833CCE@gmail.com>
-X-Mailer: Apple Mail (2.1278)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-openembedded] python_numpy: Fix SRC_URI warnings.
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Jun 2012 16:28:27 +0200
+Message-Id: <1340375307-20787-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [meta-openembedded] python_numpy: Fix SRC_URI warnings.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,40 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 14:26:31 -0000
-Content-Type: text/plain;
-	charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Jun 2012 14:39:32 -0000
 
-Hi Khem,
+This commit fixes the following warnings:
+WARNING: Unable to get checksum for python-numpy SRC_URI entry config.h: file could not be found
+WARNING: Unable to get checksum for python-numpy SRC_URI entry numpyconfig.h: file could not be found
 
-On Jun 22, 2012, at 8:51 AM, Khem Raj wrote:
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+---
+ .../recipes-devtools/python/python-numpy_1.4.1.bb  |   11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-> anyway something like below is what you need.
->=20
-> SRC_URI =3D "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
->           ${CONFIGFILESURI} \
->          "
->=20
-> CONFIGFILESURI ?=3D ""
-> CONFIGFILESURI_arm =3D "file://config.h \
->                      file://numpyconfig.h \
->                      "
->=20
-> CONFIGFILESURI_mipsel =3D "file://config.h \
->                      file://numpyconfig.h \
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index a67bf8b..0ae2ca2 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -5,7 +5,16 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
+ PR = "r3"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+-	   file://config.h \
++           ${CONFIGFILESURI} \
++	  "
++
++CONFIGFILESURI ?= ""
++
++CONFIGFILESURI_arm = "file://config.h \
++	   file://numpyconfig.h \
++	  "
++
++CONFIGFILESURI_mipsel = "file://config.h \
+ 	   file://numpyconfig.h \
+ 	  "
+ 
+-- 
+1.7.9.5
 
-I made the changes as you suggested and now the SRCURI is reporting the =
-correct values:
-
-$ MACHINE=3Dqemuarm bitbake -e python-numpy | grep -i "^SRC_URI=3D"
-SRC_URI=3D"http://downloads.sourceforge.net/numpy/numpy-1.4.1.tar.gz     =
-       file://config.h 	   file://numpyconfig.h"
-
-I'll submit a patch now.
-
-Best regards,
-
-Elvis Dowson
 
 
