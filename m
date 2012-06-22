@@ -1,38 +1,36 @@
 Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Shveh-000219-5S
+	(envelope-from <elvis.dowson@gmail.com>) id 1Shvp3-00029i-Fv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 06:39:35 +0200
-Received: by dalh21 with SMTP id h21so1727971dal.6
+	Fri, 22 Jun 2012 06:50:17 +0200
+Received: by dalh21 with SMTP id h21so1736547dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 21:28:47 -0700 (PDT)
+	Thu, 21 Jun 2012 21:39:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding;
-	bh=ueXujmyFjY4kTZhiv19Edbto9rYPUou6zFqpf6Jhmt4=;
-	b=Son5NFXDc00n5bYxNpMZ5B8JwAZ8cGT1RQWcgVcYJu/tNVGOyROc7x2UQ2eoveQ8eG
-	bvpJrircj/NjxUk/fWinuKR68F4T8GbHF+GHAYTzTuMg4t0i0H/FYplhDzXVQ7xcmwh7
-	Ri4wjGx6A6soq0yOcqaR9UD/ltNS5w7WdSXfrjfX9uqE207548f4YdA8IycIOzy9CVBd
-	2HWsUhUH2Lf/6kpr2TMoSousdNOWXO1SleuX9qONZ7qXQp+ryfAzonl3rdCIstEwNFPJ
-	nMuyJpb/qjisvHHfG82arTSe8rfavYDNvXkwDJP6pQwUNVAbLHOVUXKJRp6qsUBC651B
-	qixw==
-Received: by 10.68.231.40 with SMTP id td8mr5319993pbc.150.1340339327640;
-	Thu, 21 Jun 2012 21:28:47 -0700 (PDT)
-Received: from [192.168.1.71] (99-57-140-209.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.209])
-	by mx.google.com with ESMTPS id og4sm37711569pbb.48.2012.06.21.21.28.46
-	(version=SSLv3 cipher=OTHER); Thu, 21 Jun 2012 21:28:46 -0700 (PDT)
-Message-ID: <4FE3F482.50506@gmail.com>
-Date: Thu, 21 Jun 2012 21:28:50 -0700
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:13.0) Gecko/20120614 Thunderbird/13.0.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=OqWvK3n71dEUdyXKENygF0ttcIu+8cOTomCo3Qfd5p0=;
+	b=Q7X8a+KFQ2Ejakid+h7o4siY0N0rMPoW/htdi7KLBJ77/CFVUlBddPxNeDCIBEWVyJ
+	jtnIl4A+OftNDZtxiMRkvo3Rgn6WnLQjEpr6828nNM6Jz045QVGsSb+pp5kFVYjLbwlV
+	DOkCgQtHu0bMYjyK1yA3Eyaa2GtO+TewDBwb0NUsfZiHXabtsz+y471ySoCAEzy7qR0I
+	x/t+S8NjBcWWY9RoiH77YQXzJO5mx4hMAecqCR0SPS7aRFkQJCtw/6SZK6O/eXS+35LS
+	cyVsyLTnvjrzhvrWrhGAUY9gFOBtocyByEoqQjtLEGuRv2MbvH8UMTvd95JqXBo4T4L7
+	yaPg==
+Received: by 10.68.200.104 with SMTP id jr8mr6416965pbc.9.1340339970051;
+	Thu, 21 Jun 2012 21:39:30 -0700 (PDT)
+Received: from [192.168.1.102] ([94.205.109.242])
+	by mx.google.com with ESMTPS id qm6sm37755876pbc.10.2012.06.21.21.39.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Jun 2012 21:39:28 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+In-Reply-To: <4FE3F482.50506@gmail.com>
+Date: Fri, 22 Jun 2012 08:39:24 +0400
+Message-Id: <CC9E678D-B16D-472D-9896-2DDA3E23CB19@gmail.com>
 References: <1340338450-23907-1-git-send-email-elvis.dowson@gmail.com>
-In-Reply-To: <1340338450-23907-1-git-send-email-elvis.dowson@gmail.com>
-X-Enigmail-Version: 1.4.2
+	<4FE3F482.50506@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1278)
 Subject: Re: [meta-openembedded] python_numpy: Fix SRC_URI warnings.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,56 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 04:39:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jun 2012 04:50:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Khem,
 
-On 6/21/2012 9:14 PM, Elvis Dowson wrote:
-> This commit fixes the following warnings: WARNING: Unable to get
-> checksum for python-numpy SRC_URI entry config.h: file could not be
-> found WARNING: Unable to get checksum for python-numpy SRC_URI
-> entry numpyconfig.h: file could not be found
-> 
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com> --- 
-> .../recipes-devtools/python/python-numpy_1.4.1.bb  |   12
-> +++++++++--- 1 file changed, 9 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb index
-> a67bf8b..bdcdf91 100644 ---
-> a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb +++
-> b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb @@ -2,11
-> +2,17 @@ DESCRIPTION = "A sophisticated Numeric Processing Package
-> for Python" SECTION = "devel/python" LICENSE = "PSF" 
-> LIC_FILES_CHKSUM =
-> "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa" -PR =
-> "r3" +PR = "r4"
-> 
-> SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \ -
-> file://config.h \ -	   file://numpyconfig.h \ +	  " +SRC_URI_arm +=
-> " \ +           file://arm/config.h \ +
-> file://arm/numpyconfig.h \ +	  " +SRC_URI_mipsel += " \ +
-> file://mipsel/config.h \ +           file://mipsel/numpyconfig.h \ 
-> "
-> 
+On Jun 22, 2012, at 8:28 AM, Khem Raj wrote:
 
-Did you test it on arm/mipsel and made sure that SRC_URI is correct
-after this change ?
+> Did you test it on arm/mipsel and made sure that SRC_URI is correct
+> after this change ?
 
-> S = "${WORKDIR}/numpy-${PV}"
-> 
+No, I did not. The location of the files had move to architecture =
+specific folders, but the main recipe had not been updated to reflect =
+this, so I just corrected the recipe.=20
 
+I have an armv7a board (TI OMAP3530 based Gumstix Overo Fire), but no =
+mipsel based board. At the moment, I'm focussing on the powerpc440 on my =
+virtex5 fpga board, so perhaps someone else with an arm and mipsel could =
+help test it out.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (MingW32)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Best regards,
 
-iEYEARECAAYFAk/j9IIACgkQuwUzVZGdMxRdNwCfRMpvWZtDIwMi4EkqZVhN9YbW
-WPwAn3VFiygw3k119AqPDm7gxm8UVIl2
-=NYbZ
------END PGP SIGNATURE-----
+Elvis Dowson=
 
 
