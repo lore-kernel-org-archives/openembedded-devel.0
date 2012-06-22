@@ -1,33 +1,34 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Shufj-0005Tk-Ax
+	(envelope-from <elvis.dowson@gmail.com>) id 1Shv2C-0005iN-GZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 05:36:35 +0200
-Received: by dalh21 with SMTP id h21so1676145dal.6
+	Fri, 22 Jun 2012 05:59:48 +0200
+Received: by pbbrq2 with SMTP id rq2so2899525pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 20:25:47 -0700 (PDT)
+	Thu, 21 Jun 2012 20:49:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=uPdpoGAoKBejpF2ETt0EFErjlBuph60jkafwI+kbx/w=;
-	b=KYlB+DvvmuRPwb0Cidwq20CeWGXfaLsknVzqCoYHcbDBlaeuBKKRte28Vg2S6D95t5
-	T0d/JJ1MpCpE12mAHj/fFm1o8VWg2elKe9R4pUlVWYZv9/2iJAYnDsjShFSl3hVk7nEw
-	qu4t3Qttvj7TxGScoRLGvf3tFAGHeOtyqPJFRif9HL5KM/tEGBILCZG2cIDm1kKnoNYz
-	ukno+5RDTx6GjW+cSzCGSwWx2kY1jVAM+W73wIKYIKZq89xxTI2Mu41IWZSQ3NBL2OIf
-	nsnTL0Ma8IBeTl8cf6QBknFjezSeDpJM87v9jig63vcUY5rK3aubRHEQWxY59a3+uut7
-	bWig==
-Received: by 10.68.237.106 with SMTP id vb10mr4711773pbc.148.1340335547757;
-	Thu, 21 Jun 2012 20:25:47 -0700 (PDT)
+	bh=asv5x8Q8Zo5B/UGIuocj7D9Q1/yIyvT3uIFGhWg1ETQ=;
+	b=bAoyaZhEtZ4Eqo0deubHIzxmLVDxeM1wUIjAIymkaCHbRqJS7zxAkBGFox8ZXwIClA
+	7j5SpZ4LDXowLlnfz1Nc2aw3Bg9D8t6WON4GVwhexyIj9whR3HZkXVkWJRiDeAynOKy+
+	L3t0rtmmql1EUyBYdOYM/uGzemXJ5S/RbfSkQy4pTseJwD25hwnoYqfrZnV/qYuHndlP
+	iOHtBqyZ9Z7x0ka0OItokzZzMIg4GZuX9SEq38u0QKGgnoV7T3K9LyOAIbfGICV3IU7u
+	y+lE6ykMsagUDczfuO87dPFKWpUKhMo8Xrs4r755pPvaPtWdvJr5UxeDuNwy3StFhl4i
+	1pvg==
+Received: by 10.68.220.39 with SMTP id pt7mr5905794pbc.40.1340336940980;
+	Thu, 21 Jun 2012 20:49:00 -0700 (PDT)
 Received: from localhost.localdomain ([94.205.109.242])
-	by mx.google.com with ESMTPS id qa5sm7920087pbb.19.2012.06.21.20.25.44
+	by mx.google.com with ESMTPS id
+	ny10sm37620996pbb.38.2012.06.21.20.48.56
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jun 2012 20:25:46 -0700 (PDT)
+	Thu, 21 Jun 2012 20:48:59 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jun 2012 05:25:35 +0200
-Message-Id: <1340335535-24039-1-git-send-email-elvis.dowson@gmail.com>
+Date: Fri, 22 Jun 2012 05:48:51 +0200
+Message-Id: <1340336931-7978-1-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-openembedded] connman: Update recipe name to connman_1.0.bbappend.
+Subject: [meta-openembedded] lighttpd: Set SYSTEMD_PACKAGES as lighttpd-systemd.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 03:36:35 -0000
+X-List-Received-Date: Fri, 22 Jun 2012 03:59:48 -0000
 
-This commit updates the recipe name to connman_1.0.bbappend.
+This commit fixes WARNING:
+/tool/yocto/poky/meta/recipes-extended/lighttpd/lighttpd_1.4.30.bb:
+it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- .../connman/connman_0.79.bbappend                  |    6 ------
- .../connman/connman_1.0.bbappend                   |    6 ++++++
- 2 files changed, 6 insertions(+), 6 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
- create mode 100644 meta-oe/recipes-connectivity/connman/connman_1.0.bbappend
+ .../lighttpd/lighttpd_1.4.30.bbappend              |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/connman/connman_0.79.bbappend b/meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
-deleted file mode 100644
-index 167165f..0000000
---- a/meta-oe/recipes-connectivity/connman/connman_0.79.bbappend
-+++ /dev/null
-@@ -1,6 +0,0 @@
--inherit systemd
--
--EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
--
--SYSTEMD_PACKAGES = "${PN}-systemd"
--SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
-diff --git a/meta-oe/recipes-connectivity/connman/connman_1.0.bbappend b/meta-oe/recipes-connectivity/connman/connman_1.0.bbappend
-new file mode 100644
-index 0000000..167165f
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/connman/connman_1.0.bbappend
-@@ -0,0 +1,6 @@
-+inherit systemd
-+
-+EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
-+
+diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+index 1341405..b02f35c 100644
+--- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
++++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+@@ -6,5 +6,5 @@ inherit systemd
+ 
+ SRC_URI += "file://lighttpd.service"
+ 
+-SYSTEMD_PACKAGES = "${PN}"
 +SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
+ SYSTEMD_SERVICE_${PN} = "lighttpd.service"
 -- 
 1.7.9.5
 
