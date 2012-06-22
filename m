@@ -1,33 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Shv64-0006Cp-2R
+	(envelope-from <elvis.dowson@gmail.com>) id 1ShvQh-0006Qo-87
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jun 2012 06:03:48 +0200
-Received: by pbbrq2 with SMTP id rq2so2902407pbb.6
+	Fri, 22 Jun 2012 06:25:07 +0200
+Received: by dalh21 with SMTP id h21so1715878dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jun 2012 20:53:00 -0700 (PDT)
+	Thu, 21 Jun 2012 21:14:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=9nw26SrtfVYCOSTRrX9eu9MeQUq3TqOrLdCeTVABqck=;
-	b=WKjNRrEbxwU85WagY2fKhWdBAk9Vjd7QhU7iL6am9P4qa5MQY3g+e75XcoFuTa4qf1
-	zFwRHFY3a0P5e3Tm0KijlZlQEkTj+lBhKkXxLKIw98AhGmXUKMe1YfqBqdLTrMA8Gj5z
-	MDM3MZmrzAR6Zxv4cNHHI2XoaYsKgzM/tkjP2q/b7W+sF1n+ru88gSjM/iEpksmVOxtz
-	omjr7NG1tV54CTrX1AlKsTkgsAIkWODO8bBduLugHF5NFkkq46nIbDTfuThzqSpn4zZW
-	WItpaUMnL/SQglRHyT+sJ7BGjbmKNb4EQ0en56zYumfbhYbz41xfWtq3PQY4UyW37VLC
-	jRsQ==
-Received: by 10.68.218.101 with SMTP id pf5mr4748508pbc.152.1340337180711;
-	Thu, 21 Jun 2012 20:53:00 -0700 (PDT)
+	bh=hFN/Arb7yqEmmHlgrM6wM/c50zaLDAJ2DVoOwZ4aCPo=;
+	b=HG10kVyHldCrkwepiB8qOnHtwc8EUVVbVQ7o81K/kBoigkNw7qAGVsRSXf2u1I38c7
+	kqeumLamcHXgmzZsfEsMCxhefCg31Ywd2BrA1+DLIJ9pZ7AD5Zd/0j6w29EtRQQg1NkC
+	VDdN5VPRWkH/g1oEnl5zcPUgpEOEpGVMFvM9NCrXkYYF/ziOFyaZSXHlQv3X84w9rXG1
+	wLCWUrT/A1gLk/DKKRVe1k428lnTdzrSSgVW1GKtfdwMIlPvAZyIVBvp57ra38iTRWiE
+	EqAccNvP6IbBj//YZnDFI60dlLKxtwvLxRVb5DJ4PFCH1Xi1H48mHHOnhxaUheCCDjgD
+	9sQA==
+Received: by 10.68.197.136 with SMTP id iu8mr5345865pbc.111.1340338459839;
+	Thu, 21 Jun 2012 21:14:19 -0700 (PDT)
 Received: from localhost.localdomain ([94.205.109.242])
-	by mx.google.com with ESMTPS id nv6sm37636709pbc.42.2012.06.21.20.52.57
+	by mx.google.com with ESMTPS id ql3sm37663942pbc.72.2012.06.21.21.14.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jun 2012 20:52:59 -0700 (PDT)
+	Thu, 21 Jun 2012 21:14:19 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jun 2012 05:52:51 +0200
-Message-Id: <1340337171-10384-1-git-send-email-elvis.dowson@gmail.com>
+Date: Fri, 22 Jun 2012 06:14:10 +0200
+Message-Id: <1340338450-23907-1-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-openembedded] networkmanager: Set SYSTEMD_PACKAGES as networkmanager-systemd.
+Subject: [meta-openembedded] python_numpy: Fix SRC_URI warnings.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2012 04:03:48 -0000
+X-List-Received-Date: Fri, 22 Jun 2012 04:25:07 -0000
 
-This commit fixes WARNING:
-/tool/yocto/meta-openembedded/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb:
-it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
+This commit fixes the following warnings:
+WARNING: Unable to get checksum for python-numpy SRC_URI entry config.h: file could not be found
+WARNING: Unable to get checksum for python-numpy SRC_URI entry numpyconfig.h: file could not be found
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python-numpy_1.4.1.bb  |   12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-index 221dc2c..d681e0c 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-@@ -54,7 +54,7 @@ do_install_append () {
- 	install -d ${D}/etc/NetworkManager/VPN
- }
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index a67bf8b..bdcdf91 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -2,11 +2,17 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
+-PR = "r3"
++PR = "r4"
  
--SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE = "NetworkManager.service"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+-	   file://config.h \
+-	   file://numpyconfig.h \
++	  "
++SRC_URI_arm += " \
++           file://arm/config.h \
++           file://arm/numpyconfig.h \
++	  "
++SRC_URI_mipsel += " \
++           file://mipsel/config.h \
++           file://mipsel/numpyconfig.h \
+ 	  "
  
- PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
+ S = "${WORKDIR}/numpy-${PV}"
 -- 
 1.7.9.5
 
