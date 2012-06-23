@@ -1,36 +1,22 @@
-Received: from mail-out.m-online.net ([212.18.0.10])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sbabic@denx.de>) id 1SiOko-0000lZ-2E
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jun 2012 13:43:50 +0200
-Received: from frontend1.mail.m-online.net (frontend1.mail.intern.m-online.net
-	[192.168.8.180])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3WKDpj0LGrz3hhbZ;
-	Sat, 23 Jun 2012 13:25:32 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.8.164])
-	by mail.m-online.net (Postfix) with ESMTP id 3WKDps4v5Vz4KKC1;
-	Sat, 23 Jun 2012 13:25:41 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from smtp-auth.mnet-online.de ([192.168.8.180])
-	by localhost (dynscan1.mail.m-online.net [192.168.8.164]) (amavisd-new,
-	port 10024)
-	with ESMTP id BbhkS-0vNerD; Sat, 23 Jun 2012 13:25:40 +0200 (CEST)
-Received: from [192.168.2.104] (unknown [88.149.182.160])
-	by smtp-auth.mnet-online.de (Postfix) with ESMTPA;
-	Sat, 23 Jun 2012 13:25:39 +0200 (CEST)
-Message-ID: <4FE5A7B2.5080604@denx.de>
-Date: Sat, 23 Jun 2012 13:25:38 +0200
-From: stefano babic <sbabic@denx.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
+	(envelope-from <apelete@seketeli.net>) id 1SiVzS-0001zN-E1
+	for openembedded-devel@openembedded.org; Sat, 23 Jun 2012 21:27:27 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id CC772EA042;
+	Sat, 23 Jun 2012 21:23:49 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 941CE604DE; Sat, 23 Jun 2012 21:16:36 +0200 (CEST)
+Date: Sat, 23 Jun 2012 21:16:36 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@openembedded.org
+Message-ID: <20120623191635.GN4845@hermes>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1339759019-3272-1-git-send-email-sbabic@denx.de>
-	<jrsciv$ro6$1@dough.gmane.org>
-	<20120620183655.GT3178@jama.jama.net>
-In-Reply-To: <20120620183655.GT3178@jama.jama.net>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe][PATCH V2] Added recipe for libconfig
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Subject: [oe-classic][udev][PATCH 0/5] update recipe SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jun 2012 11:43:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jun 2012 19:27:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Am 20/06/2012 20:36, schrieb Martin Jansa:
-> On Wed, Jun 20, 2012 at 01:35:59PM +0200, Koen Kooi wrote:
-> Op 15-06-12 13:16, Stefano Babic schreef:
->>>> libconfig can be used to parse a configuration file in a structured
->>>> language, but still compact and more suitable for embedded devices
->>>> compared to XML.
->>>>
->>>> Signed-off-by: Stefano Babic <sbabic@denx.de> ---
->>>>
->>>> - V1 was sent to oe-core, comments redirect it as right place to meta-oe 
->>>> - Drop PR to use the default value
->>>>
->>>> .../recipes-support/libconfig/libconfig_1.4.8.bb   |   13 +++++++++++++ 1
->>>> file changed, 13 insertions(+) create mode 100644
->>>> meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
->>>>
->>>> diff --git a/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
->>>> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb new file mode
->>>> 100644 index 0000000..ffde91f --- /dev/null +++
->>>> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb @@ -0,0 +1,13 @@ 
->>>> +SUMMARY = "C/C++ Configuration File Library" +DESCRIPTION = "processing
->>>> of structured configuration files" +SECTION = "libs" +LICENSE =
->>>> "LGPLv2.1" +LIC_FILES_CHKSUM =
->>>> "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29" + +SRC_URI =
->>>> "http://www.hyperrealm.com/libconfig/libconfig-1.4.8.tar.gz \
-> 
-> s/1.4.8/${PV}/
-> 
->> s%libconfig/libconfig-1.4.8%${BPN}/${BP}%
+Hello,
 
-Good point, thanks. I will send V3.
+Some of the udev source tarballs are no longer available on the
+kernel.org repository. As a consequence, the corresponding recipes in
+oe classic fail to build. I found a mirror where these source tarballs
+are still available, and updated the recipes in oe classic
+accordingly.
 
-Regards,
-Stefano
+The five patches that come as a follow-up of this message are what
+it's all about.
+
+Apelete Seketeli (5):
+  udev: update SRC_URI of udev-151 recipe
+  udev: update SRC_URI of udev-154 recipe
+  udev: update SRC_URI of udev-162 recipe
+  udev: update SRC_URI of udev-165 recipe
+  udev: update SRC_URI of udev-168 recipe
+
+ recipes/udev/udev_151.bb |    2 +-
+ recipes/udev/udev_154.bb |    2 +-
+ recipes/udev/udev_162.bb |    2 +-
+ recipes/udev/udev_165.bb |    2 +-
+ recipes/udev/udev_168.bb |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
 -- 
-=====================================================================
-DENX Software Engineering GmbH,     MD: Wolfgang Denk & Detlev Zundel
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-0 Fax: +49-8142-66989-80  Email: office@denx.de
-=====================================================================
+1.7.10
+
+
+-- 
+        Apelete
 
 
