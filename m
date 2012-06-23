@@ -1,22 +1,24 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SiVzS-0001zN-E1
-	for openembedded-devel@openembedded.org; Sat, 23 Jun 2012 21:27:27 +0200
+	(envelope-from <apelete@seketeli.net>) id 1SiW2i-00025W-Vm
+	for openembedded-devel@openembedded.org; Sat, 23 Jun 2012 21:30:49 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id CC772EA042;
-	Sat, 23 Jun 2012 21:23:49 +0200 (CEST)
+	by ms.seketeli.net (Postfix) with ESMTP id 2B732EA040;
+	Sat, 23 Jun 2012 21:27:10 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 941CE604DE; Sat, 23 Jun 2012 21:16:36 +0200 (CEST)
-Date: Sat, 23 Jun 2012 21:16:36 +0200
+	id DD67E604DE; Sat, 23 Jun 2012 21:19:57 +0200 (CEST)
+Date: Sat, 23 Jun 2012 21:19:57 +0200
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@openembedded.org
-Message-ID: <20120623191635.GN4845@hermes>
+Message-ID: <20120623191957.GO4845@hermes>
+References: <20120623191635.GN4845@hermes>
 MIME-Version: 1.0
+In-Reply-To: <20120623191635.GN4845@hermes>
 X-Operating-System: Debian GNU/Linux wheezy/sid
 X-URL: http://www.seketeli.net/~apelete
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [oe-classic][udev][PATCH 0/5] update recipe SRC_URI
+Subject: [oe-classic][udev][PATCH 1/5] udev: update SRC_URI of udev-151 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jun 2012 19:27:27 -0000
+X-List-Received-Date: Sat, 23 Jun 2012 19:30:49 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+This patch updates the SRC_URI of udev_151.bb to www.mirrorservice.org
+because the corresponding source package is no longer available at
+kernel.org.
 
-Some of the udev source tarballs are no longer available on the
-kernel.org repository. As a consequence, the corresponding recipes in
-oe classic fail to build. I found a mirror where these source tarballs
-are still available, and updated the recipes in oe classic
-accordingly.
-
-The five patches that come as a follow-up of this message are what
-it's all about.
-
-Apelete Seketeli (5):
-  udev: update SRC_URI of udev-151 recipe
-  udev: update SRC_URI of udev-154 recipe
-  udev: update SRC_URI of udev-162 recipe
-  udev: update SRC_URI of udev-165 recipe
-  udev: update SRC_URI of udev-168 recipe
-
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+---
  recipes/udev/udev_151.bb |    2 +-
- recipes/udev/udev_154.bb |    2 +-
- recipes/udev/udev_162.bb |    2 +-
- recipes/udev/udev_165.bb |    2 +-
- recipes/udev/udev_168.bb |    2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
+index b977b7d..2f28a1c 100644
+--- a/recipes/udev/udev_151.bb
++++ b/recipes/udev/udev_151.bb
+@@ -12,7 +12,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEPENDS = "gperf-native usbutils acl glib-2.0"
+ RDEPENDS_${PN} += "module-init-tools-depmod udev-utils"
+ 
+-SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
++SRC_URI = "http://www.mirrorservice.org/sites/ftp.kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://udev-replace-le16toh.patch \
+ 	   file://udev-replace-lutimes.patch \
+ 	   file://mount.blacklist \
 -- 
 1.7.10
-
 
 -- 
         Apelete
