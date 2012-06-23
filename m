@@ -1,32 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SiXqg-0004Is-Ua
+	(envelope-from <martin.jansa@gmail.com>) id 1SiXqs-0004JG-0V
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jun 2012 23:26:30 +0200
-Received: by wgbdr1 with SMTP id dr1so2569993wgb.24
+	Sat, 23 Jun 2012 23:26:42 +0200
+Received: by wibhm11 with SMTP id hm11so1568672wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jun 2012 14:15:42 -0700 (PDT)
+	Sat, 23 Jun 2012 14:15:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=xh3gmLrasx0AzSzHS4uQLvYbvkg4ApI4t6WNVT1fAKg=;
-	b=DlZ8Tl1udWEL9b7eYfOUGjJ6jAqIKeMdrdvecS3zHZoj0VVn8dyI96R2tNVlstLzDK
-	JDyN+bWm5//SRoKO4FDKlzL9rZrGq7GoJB0yh7A8hebPzLbi8gBbXZkMcSe3W2zBdTtc
-	HAZMSNPbGLh+OC0lW2RMUoExy9J9WAaFghJRQdEzNrwD8NcXYqB6AEyAyVnrZbzICwvD
-	2MDCaXimtnCDTG8VXNIDoN1tveV6Av3rgbqCjigJvF0aVSFVHkzx3MuepOeLl752ECy4
-	2+DOtcXUDe8zFb4iRYAktI0CyJyB7urIaapAjaf8ulR1ss2PIW0rvLvZUvUs6DTn9vyP
-	RteQ==
-Received: by 10.216.70.10 with SMTP id o10mr3712633wed.51.1340486142201;
-	Sat, 23 Jun 2012 14:15:42 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=tvPTag61mBSTfqtjOQeeE4nWcW0VkJ3bQgvtnDyaCVU=;
+	b=XJ28sy/epaqim8JazAEm0yjhcuTWR2ukoKB8rdBM32ZhyZ6Dcg8fFIM1cNRzLkRtT9
+	2sUQGAWMC2DyKpIdDPHPQJ3/+V1VwbILwBeTQc1tE4HxvKF2TIL5U/C6FXLvqlxEE5FU
+	EfJBbjGfWv3oOAe4EUUQ1R/+X2Pj7/EDF/6VB3ixIppgq+UonT0BpasQyLaKK8mFtR80
+	7CxopL2utbAHQYeeTMHzAua2Bt7qyDL4f84Hog111u3BAe1N2C9yOhqvBvjv1JReEegB
+	VDwywm/Fo1eiV4YTq39B/hdO/EDMyoRzBjTTh4zH4PKcDmoz6b1ECVo2ZdEBnf1g8gzR
+	lyCg==
+Received: by 10.216.213.28 with SMTP id z28mr3597706weo.50.1340486150899;
+	Sat, 23 Jun 2012 14:15:50 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gb9sm6081620wib.8.2012.06.23.14.15.40
+	by mx.google.com with ESMTPS id ei4sm14079104wid.5.2012.06.23.14.15.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 23 Jun 2012 14:15:41 -0700 (PDT)
+	Sat, 23 Jun 2012 14:15:48 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jun 2012 23:15:31 +0200
-Message-Id: <cover.1340486086.git.Martin.Jansa@gmail.com>
+Date: Sat, 23 Jun 2012 23:15:32 +0200
+Message-Id: <8345f986d1da664c71b0ea21597f1487c04f4301.1340486086.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][PATCH 0/5] navit, abiword fix
+In-Reply-To: <cover.1340486086.git.Martin.Jansa@gmail.com>
+References: <cover.1340486086.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1340486086.git.Martin.Jansa@gmail.com>
+References: <cover.1340486086.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/5] navit: package whole ${datadir}/icons dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jun 2012 21:26:31 -0000
+X-List-Received-Date: Sat, 23 Jun 2012 21:26:42 -0000
 
-The following changes since commit f3b72f9f147b27d2a9566cb417f7f84d746184df:
+* no need to install icon and .desktop file manually, now it's done by autotools
 
-  meta-initramfs: append to BBPATH instead of prepend so order of bblayers.conf is respected (2012-06-21 21:22:23 +0200)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-navigation/navit/navit.inc |    8 ++------
+ 1 files changed, 2 insertions(+), 6 deletions(-)
 
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (5):
-  navit: package whole ${datadir}/icons dir
-  navit: bump SRCREV and add patch from debian to fix build with
-    gcc-4.7.1
-  abiword: fix packaging after PACKAGES reorder
-  abiword: merge abiword-2.5.inc to abiword_2.8.6.bb
-  abiword: reorder and simplify
-
- meta-gnome/recipes-gnome/abiword/abiword-2.5.inc   |   66 -------------
- meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb  |   97 ++++++++++++++++----
- meta-oe/recipes-navigation/navit/navit.inc         |   10 +--
- .../navit/taking-address-of-temporary-array.patch  |   76 +++++++++++++++
- meta-oe/recipes-navigation/navit/navit_svn.bb      |    6 +-
- 5 files changed, 161 insertions(+), 94 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword-2.5.inc
- create mode 100644 meta-oe/recipes-navigation/navit/navit/taking-address-of-temporary-array.patch
-
+diff --git a/meta-oe/recipes-navigation/navit/navit.inc b/meta-oe/recipes-navigation/navit/navit.inc
+index 1baa145..b2b89e5 100644
+--- a/meta-oe/recipes-navigation/navit/navit.inc
++++ b/meta-oe/recipes-navigation/navit/navit.inc
+@@ -13,7 +13,7 @@ RRECOMMENDS_${PN} = "gpsd ${PN}-dbus ${PN}-speech-cmdline ${PN}-gui-internal ${P
+ RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-qt ${PN}-maptool"
+ 
+ PE = "1"
+-INC_PR = "r8"
++INC_PR = "r9"
+ 
+ inherit autotools gettext
+ 
+@@ -52,7 +52,7 @@ SRC_URI += "file://navit.xml \
+             file://plugins.xml \
+            "
+ 
+-FILES_${PN} += "${libdir}/${PN}/*/*.so"
++FILES_${PN} += "${libdir}/${PN}/*/*.so ${datadir}/icons"
+ FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
+ FILES_${PN}-maptool = " ${bindir}/maptool "
+ FILES_${PN}-config = " ${datadir}/navit/*.xml "
+@@ -73,10 +73,6 @@ do_configure_prepend() {
+ }
+ 
+ do_install_append() {
+-        install -d ${D}${datadir}/applications/
+-        install -m 0644 ${S}/navit/xpm/desktop_icons/navit.desktop ${D}${datadir}/applications/
+-        install -d ${D}${datadir}/pixmaps/
+-        install -m 0644 ${S}/navit/xpm/desktop_icons/128x128/navit.png ${D}${datadir}/pixmaps/
+ 	# fix QA issue
+ 	sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
+ 
 -- 
 1.7.8.6
 
