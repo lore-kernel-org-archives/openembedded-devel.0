@@ -1,25 +1,36 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-out.m-online.net ([212.18.0.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1SiNpA-0007TB-4e
+	(envelope-from <sbabic@denx.de>) id 1SiOko-0000lZ-2E
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jun 2012 12:44:16 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 23 Jun 2012 03:33:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="184010666"
-Received: from unknown (HELO helios.localnet) ([10.252.120.121])
-	by fmsmga002.fm.intel.com with ESMTP; 23 Jun 2012 03:33:22 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jun 2012 11:33:19 +0100
-Message-ID: <4127137.5Bm5xUWJxt@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.3 (Linux/3.2.0-25-generic-pae; KDE/4.8.3; i686; ; )
-In-Reply-To: <CAMKF1spLndPJgVWoHh9Tfs0SRpc=v8PaygUPsoh58ypygi8OvQ@mail.gmail.com>
-References: <4FE4DFCA.4090606@se-eng.com>
-	<CAMKF1spLndPJgVWoHh9Tfs0SRpc=v8PaygUPsoh58ypygi8OvQ@mail.gmail.com>
+	Sat, 23 Jun 2012 13:43:50 +0200
+Received: from frontend1.mail.m-online.net (frontend1.mail.intern.m-online.net
+	[192.168.8.180])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3WKDpj0LGrz3hhbZ;
+	Sat, 23 Jun 2012 13:25:32 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.8.164])
+	by mail.m-online.net (Postfix) with ESMTP id 3WKDps4v5Vz4KKC1;
+	Sat, 23 Jun 2012 13:25:41 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from smtp-auth.mnet-online.de ([192.168.8.180])
+	by localhost (dynscan1.mail.m-online.net [192.168.8.164]) (amavisd-new,
+	port 10024)
+	with ESMTP id BbhkS-0vNerD; Sat, 23 Jun 2012 13:25:40 +0200 (CEST)
+Received: from [192.168.2.104] (unknown [88.149.182.160])
+	by smtp-auth.mnet-online.de (Postfix) with ESMTPA;
+	Sat, 23 Jun 2012 13:25:39 +0200 (CEST)
+Message-ID: <4FE5A7B2.5080604@denx.de>
+Date: Sat, 23 Jun 2012 13:25:38 +0200
+From: stefano babic <sbabic@denx.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
 MIME-Version: 1.0
-Subject: Re: New meta-xen layer
+To: openembedded-devel@lists.openembedded.org
+References: <1339759019-3272-1-git-send-email-sbabic@denx.de>
+	<jrsciv$ro6$1@dough.gmane.org>
+	<20120620183655.GT3178@jama.jama.net>
+In-Reply-To: <20120620183655.GT3178@jama.jama.net>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe][PATCH V2] Added recipe for libconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,60 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jun 2012 10:44:16 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 23 Jun 2012 11:43:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Friday 22 June 2012 17:04:34 Khem Raj wrote:
-> On Fri, Jun 22, 2012 at 2:12 PM, Raymond Danks <ray.danks@se-eng.com> wrote:
-> > I have constructed a layer for the purpose of building Xen in
-> > OpenEmbedded.
-> >  Xen is a hypervisor and associated tools running on Linux available as a
-> > package in distributions such as Ubuntu and Fedora.  It is also modified
-> > and included in the rpm-based Xen Cloud Platform distribution and Citrix
-> > XenServer.
-> > 
-> > This layer currently includes recipes and recipe modifications for
-> > building
-> > xen, libvirt, and a minimal xen image that may be used for launching
-> > virtual machines via the xl command line interface.  This currently
-> > targets the x86 Xen host (OE target) architecture; development has been
-> > done entirely on x86_64.
-> > 
-> > I'm open to receiving feedback, patches and suggestions.  Also, I'm
-> > curious
-> > if this layer may be published to the OpenEmbedded layer index and by what
-> > process that should be achieved?
+Am 20/06/2012 20:36, schrieb Martin Jansa:
+> On Wed, Jun 20, 2012 at 01:35:59PM +0200, Koen Kooi wrote:
+> Op 15-06-12 13:16, Stefano Babic schreef:
+>>>> libconfig can be used to parse a configuration file in a structured
+>>>> language, but still compact and more suitable for embedded devices
+>>>> compared to XML.
+>>>>
+>>>> Signed-off-by: Stefano Babic <sbabic@denx.de> ---
+>>>>
+>>>> - V1 was sent to oe-core, comments redirect it as right place to meta-oe 
+>>>> - Drop PR to use the default value
+>>>>
+>>>> .../recipes-support/libconfig/libconfig_1.4.8.bb   |   13 +++++++++++++ 1
+>>>> file changed, 13 insertions(+) create mode 100644
+>>>> meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb
+>>>> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb new file mode
+>>>> 100644 index 0000000..ffde91f --- /dev/null +++
+>>>> b/meta-oe/recipes-support/libconfig/libconfig_1.4.8.bb @@ -0,0 +1,13 @@ 
+>>>> +SUMMARY = "C/C++ Configuration File Library" +DESCRIPTION = "processing
+>>>> of structured configuration files" +SECTION = "libs" +LICENSE =
+>>>> "LGPLv2.1" +LIC_FILES_CHKSUM =
+>>>> "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29" + +SRC_URI =
+>>>> "http://www.hyperrealm.com/libconfig/libconfig-1.4.8.tar.gz \
 > 
-> thanks for doing it and publishing it for community.
-> looks pretty good from very quick look at the content
+> s/1.4.8/${PV}/
 > 
->  recipes-core/initscripts/ has .swp file committed.
-> NATIVE_INSTALL_WORKS is probably not needed in recipes
-> use oe_runmake instead of ${MAKE}
-> in some recipes you cache ac_cv_* vars you could use
-> CACHED_CONFIGUREVARS variable to contain them all instead of putting
-> them into EXTRA_OECONF
-> 
-> One think I am not sure is of is distro/minimal.conf in there. I dont
-> know if you want to have your own distro or not if you do it would be
-> nice to separate that out that way other distros can also use this
-> layer if they want to.
+>> s%libconfig/libconfig-1.4.8%${BPN}/${BP}%
 
-FWIW, I'd agree with the suggested cleanups.
+Good point, thanks. I will send V3.
 
-> As long as you maintain the layer in good shape and in alignment with
-> other layers you depend on its should be fine and please add the entry
-> into LayerIndex on wiki
-
-I've just added the layer to the LayerIndex page. Thanks!
-
-Cheers,
-Paul
+Regards,
+Stefano
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+=====================================================================
+DENX Software Engineering GmbH,     MD: Wolfgang Denk & Detlev Zundel
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-0 Fax: +49-8142-66989-80  Email: office@denx.de
+=====================================================================
 
 
