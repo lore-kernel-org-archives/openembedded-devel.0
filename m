@@ -1,35 +1,35 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <angweiyang@gmail.com>) id 1Siyiu-00051h-MB
+	(envelope-from <koen@dominion.thruhere.net>) id 1Sj6W7-0003OZ-DK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jun 2012 04:08:16 +0200
-Received: by obcva7 with SMTP id va7so5776541obc.6
+	Mon, 25 Jun 2012 12:27:35 +0200
+Received: by eekd49 with SMTP id d49so1222920eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2012 18:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=4FA1I7s6rodUKEhQaG4iGGufJm3uWa6dDsBE9V+pBbs=;
-	b=SaMpA5Mor4aXbmE7oGQdsOldDsir6whaE2mfpl+5OhIF8lsmcmmaIqZVK02FR8QM/Q
-	UA07CZnwBX3d3KozIOxWzCdzcDP1KVsF7pi3HlAndKi1gH+gae9KC7OG3TxthED0Roov
-	UiOwwCSTXaVi4ucTrSTDohUS1wgIbuOjyC+tjpjBk1LGZX/bfV82kOYWY0P7nCRxxXSS
-	nDWTI4Jeb/f/RpH9aEy/vf7vkqM8dbx76lBkUpkD2cbu8LqGtIgA7EhKLjZZGgsPIemi
-	dobksOqWl4iAESSBd4oO6mDljSByyyFdzaAHw/e/4NXhT59vAUfklWcc9wi8VmfwNe3V
-	5dbA==
-MIME-Version: 1.0
-Received: by 10.182.52.38 with SMTP id q6mr10460875obo.8.1340589445779; Sun,
-	24 Jun 2012 18:57:25 -0700 (PDT)
-Received: by 10.182.202.66 with HTTP; Sun, 24 Jun 2012 18:57:25 -0700 (PDT)
-In-Reply-To: <CAOy7-nMFSuLONcnXRgntA7O4Nmx8Rxo4NcBq-jfhkmPZKAB++Q@mail.gmail.com>
-References: <1335951932-6143-1-git-send-email-koen@dominion.thruhere.net>
-	<1335951932-6143-3-git-send-email-koen@dominion.thruhere.net>
-	<CAOy7-nMFSuLONcnXRgntA7O4Nmx8Rxo4NcBq-jfhkmPZKAB++Q@mail.gmail.com>
-Date: Mon, 25 Jun 2012 09:57:25 +0800
-Message-ID: <CAOy7-nNm90fkOR_f3a6fZkuBgnV7PFE-E9UXUkq-AR5A-MayBA@mail.gmail.com>
-From: James <angweiyang@gmail.com>
+	Mon, 25 Jun 2012 03:16:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=3plrA1VmJ0liKQSo80YG6Zo21K9kV9F9REXSrceq5dw=;
+	b=Cvq/NaR+WJjVqpqu/C/lmBGtQ+bXx34m8MTO2d+MUP0cOi1TgXEPem+M0xwTqeFx1G
+	hML2WR6X8Kl/DJ0MUFPR/nlriFghkp4MTtdjy8lAZ7OTgZQAXaYb7pUklB28Yqxk7XDd
+	zXSksQwhLawa05rg5HgL9xnCnB753/adxY4e9do86yxKZ2+gqnOkaMMOfMTOuoUSCVzT
+	u265fQIE/kkmUD3CvDUIOpt//K64kWM5D79jiB+PhhgxpMgm4KelJjPb9lR0xfqeKm9f
+	m2LUyU31FHlDwtf8Jtaz2fX7a/yIsj0QF57zFMtKztcvDX6dZ3E1rUH1e6QIC5OlGfOF
+	lryA==
+Received: by 10.14.100.137 with SMTP id z9mr2175730eef.227.1340619404681;
+	Mon, 25 Jun 2012 03:16:44 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id p41sm137217847eef.5.2012.06.25.03.16.43
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 25 Jun 2012 03:16:44 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Jun 2012 12:16:39 +0200
+Message-Id: <1340619399-25303-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQnKM8C3ogwhBxpvCIUevl12NQbWjINplwRt4gwVch+6cfcS7n9kJBBE6zcCAEmXQ0Z3K8RT
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe/denzil][PATCH 3/6] media-ctl: update to latest git
+Subject: [meta-oe][PATCH] python-docutils: update to 0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,96 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jun 2012 02:08:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 Jun 2012 10:27:35 -0000
 
-Ping!!
+This fixes the 'no module named Roman' errors. License checksum changed due to date changes
 
-On Wed, May 9, 2012 at 12:00 PM, James <angweiyang@gmail.com> wrote:
-> Hi Koen,
->
-> On Wed, May 2, 2012 at 5:45 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
->> * split out libs
->> * media-ctl has been relicensed to LGPLv2.1+
->>
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> =A0meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb | =A0 12 +++++++=
-+----
->> =A01 file changed, 8 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb b/meta=
--oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
->> index 99ec8e2..76d811b 100644
->> --- a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
->> +++ b/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
->> @@ -1,16 +1,20 @@
->> =A0DESCRIPTION =3D "Media controller control application"
->> -LICENSE =3D "GPLv2"
->> -LIC_FILES_CHKSUM =3D "file://COPYING.GPL;md5=3D751419260aa954499f7abaab=
-aa882bbe"
->> +LICENSE =3D "LGPLv2+"
->> +LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3Dd749e86a105281d7a44c2328=
-acebc4b0"
->>
->> =A0SRC_URI =3D "git://git.ideasonboard.org/media-ctl.git;protocol=3Dgit"
->> -SRCREV =3D "a183835abdefb8e40650fc9eb22e2d291aac9883"
->> +SRCREV =3D "46bec667b675573cf1ce698c68112e3dbd31930e"
->>
->> =A0PV =3D "0.0.1"
->> +PR =3D "r1"
->> =A0S =3D "${WORKDIR}/git"
->>
->> =A0inherit autotools
->>
->> -# It needs some kernel definitions for v4l2, so it isn't machine specif=
-ic
->> +# It needs some kernel definitions only for v4l2, so it isn't machine s=
-pecific
->> =A0EXTRA_OECONF =3D "--with-kernel-headers=3D${STAGING_KERNEL_DIR}"
->>
->> +PACKAGES =3D+ "libmediactl libv4l2subdev"
->> +FILES_libmediactl =3D "${libdir}/libmediactl${SOLIBS}"
->> +FILES_libv4l2subdev =3D "${libdir}/libv4l2subdev${SOLIBS}"
->>
->> --
->> 1.7.10
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> I tried using this new recipe on OE-classic and bitbake v1.12 but the
-> do_configure failed.
->
-> A look into the configure.log shows
-> ..
-> checking linux/media.h usability ... no
-> checking linux/media.h presence ... no
-> checking for linux/media.h ... no
-> ERROR: Kernel header file not found or not usable!
-> ...
->
-> This is due to ${STAGING_KERNEL_DIR} pointing to an invalid location.
-> It's pointing to /sysroots/armv7a-angstrom-linux-gnueabi/kernel
-> instead it is located in /sysroots/${MACHINE}-angstrom-linux-gnueabi/kern=
-el
->
-> Change you please relook into this?
->
-> Thank you.
-> --
-> Regards,
-> James Ang
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../{python-docutils_0.5.bb => python-docutils_0.9.1.bb}       |    8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-docutils_0.5.bb => python-docutils_0.9.1.bb} (53%)
 
+diff --git a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb b/meta-oe/recipes-devtools/python/python-docutils_0.9.1.bb
+similarity index 53%
+rename from meta-oe/recipes-devtools/python/python-docutils_0.5.bb
+rename to meta-oe/recipes-devtools/python/python-docutils_0.9.1.bb
+index adecd8f..44d08d3 100644
+--- a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb
++++ b/meta-oe/recipes-devtools/python/python-docutils_0.9.1.bb
+@@ -2,19 +2,17 @@ DESCRIPTION = "Text processing system"
+ HOMEPAGE = "http://docutils.sourceforge.net"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=ac6ee29ac0310c091afab5ac4bea2fa3"
+-PR = "r1"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=21eae6cbbd42b24a4243269f39e5d592"
+ 
+ DEPENDS = "python"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/docutils/docutils-${PV}.tar.gz"
+-SRC_URI[md5sum] = "dd72dac92fc8e3eb0f48c3effeef80f6"
+-SRC_URI[sha256sum] = "747cf984edfca0575addbb42453274a1bdd98ec7780bd37a883dc8b2a66a610e"
++SRC_URI[md5sum] = "b0d5cd5298fedf9c62f5fd364a274d56"
++SRC_URI[sha256sum] = "e89f187dbbc6674f839239c89fec44af9f18809b66a8a55a41b57b9ee2356994"
+ 
+ S = "${WORKDIR}/docutils-${PV}"
+ 
+ inherit distutils
+ 
+-NATIVE_INSTALL_WORKS = "1"
+ BBCLASSEXTEND = "native"
+ 
+-- 
+1.7.10
 
-
---=20
-Regards,
-James
 
 
