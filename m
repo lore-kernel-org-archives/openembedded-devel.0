@@ -1,35 +1,33 @@
 Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SjYHl-0003YA-3g
+	(envelope-from <raj.khem@gmail.com>) id 1SjZS7-0006jp-7Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jun 2012 18:06:37 +0200
-Received: by dalh21 with SMTP id h21so75170dal.6
+	Tue, 26 Jun 2012 19:21:23 +0200
+Received: by dalh21 with SMTP id h21so160932dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jun 2012 08:55:44 -0700 (PDT)
+	Tue, 26 Jun 2012 10:10:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=pdXbFbOWK2W1QwTiaGPfwXi5sn8jSMw5so63+cjZ/j0=;
-	b=xXd4WOmcdtoDWVvnunMzJSC1ntYO+dEvFTknbbbZxPgc8lJJkBkqTv/+2ocxnFRbut
-	QHx1oJwalzkhysznkuEXvdxQl+PASXZTOYOE0mixhg9pIsgI/OCHL77fRiPI8BZjkRo4
-	JRL360+OSZ3ny0lG3WfkQv+9CvgilX3FL7bGXLXjq6M4HaZ8iRMRln+VLBCcHxEGiQic
-	V2ENALn4Mw95x42NQFXiFuNeYgmXFlzeSyrnCtFtPz/XP08leXuTo07XQxrjutaamswW
-	A3rSTi2xO5jI52EY/knl34HPU5bdlGyFGIYVhixgg8efdFaidmVSit+aiMSvtu6PjpJ5
-	I63w==
-Received: by 10.68.227.198 with SMTP id sc6mr53094295pbc.138.1340726144003;
-	Tue, 26 Jun 2012 08:55:44 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lDGQb0frWw+ht15L1O7mq4Aq2tJlPkgzW4AgEtkCX2Q=;
+	b=mYrFKxPLvE/dglHCODE0IHlDvlkqYSGvlin6hYtTJckDx3U3VXrEl4BIAWHjwiKrbA
+	XokTNMsWtYFiIK2k0M+fxEXEYzuPDyRCkoAdMtzuJ9IGu65PmxRpvfpi9ot8ogHop6KM
+	pebPCuLiUfYrB1tu+VXeYOkCnEhMVdOYW92CBj8Fpl1I0U1TO5J4mrV9xK8ZrQ0IyyVv
+	xxLqooV2pEULkPKKpnh6e11O45LG0xdng3g5hotBUG2K+/1+PGoJsmNgQcblYklM4TRw
+	iom6LKgLnT9Hvx5jqIeuA7WNshmVG3XTX/0neIncpdVEGWI+hJDjeMCVsMO+ZKTrGPbB
+	4jpQ==
+Received: by 10.68.125.228 with SMTP id mt4mr54240235pbb.21.1340730630066;
+	Tue, 26 Jun 2012 10:10:30 -0700 (PDT)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id wf7sm12210523pbc.34.2012.06.26.08.55.42
+	by mx.google.com with ESMTPS id iu6sm12377164pbc.35.2012.06.26.10.10.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Jun 2012 08:55:43 -0700 (PDT)
+	Tue, 26 Jun 2012 10:10:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Jun 2012 08:55:24 -0700
-Message-Id: <1340726124-30861-3-git-send-email-raj.khem@gmail.com>
+Date: Tue, 26 Jun 2012 10:10:17 -0700
+Message-Id: <1340730617-27111-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1340726124-30861-1-git-send-email-raj.khem@gmail.com>
-References: <1340726124-30861-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] mini-iconv: Add package recipe
+Subject: [meta-oe][PATCH V2 1/3] cpufrequtils: Fix build without NLS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +41,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2012 16:06:37 -0000
+X-List-Received-Date: Tue, 26 Jun 2012 17:21:23 -0000
 
-mini iconv can be used to replace GNU libiconv
-it does not do all translation but it good for small
-systems especially uclibc based
+uclibc disables NLS and we need to pass the right
+define to inform the build system about NLS support
+cpufrequtils-nls.patch is applied upstream so lets
+remove it from metadata
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/mini-iconv/mini-iconv.bb |   21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/mini-iconv/mini-iconv.bb
+ .../cpufrequtils-008/cpufrequtils-nls.patch        |   81 --------------------
+ .../cpufrequtils/cpufrequtils_008.bb               |    4 +-
+ 2 files changed, 3 insertions(+), 82 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/cpufrequtils/cpufrequtils-008/cpufrequtils-nls.patch
 
-diff --git a/meta-oe/recipes-support/mini-iconv/mini-iconv.bb b/meta-oe/recipes-support/mini-iconv/mini-iconv.bb
-new file mode 100644
-index 0000000..7d5bc68
---- /dev/null
-+++ b/meta-oe/recipes-support/mini-iconv/mini-iconv.bb
-@@ -0,0 +1,21 @@
-+# Copyright (C) 2012 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils-008/cpufrequtils-nls.patch b/meta-oe/recipes-support/cpufrequtils/cpufrequtils-008/cpufrequtils-nls.patch
+deleted file mode 100644
+index cbc8719..0000000
+--- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils-008/cpufrequtils-nls.patch
++++ /dev/null
+@@ -1,81 +0,0 @@
+-make nls/gettext support optional
+-
+-patch by Jos van der Ende <seraph@xs4all.nl>
+-
+-http://bugs.gentoo.org/205576
+-
+-Index: git/Makefile
+-===================================================================
+---- git.orig/Makefile	2011-06-30 17:50:23.000000000 -0700
+-+++ git/Makefile	2011-07-01 07:06:58.300033928 -0700
+-@@ -121,6 +121,7 @@
+- ifeq ($(strip $(NLS)),true)
+- 	INSTALL_NLS += install-gmo
+- 	COMPILE_NLS += update-gmo
+-+	CFLAGDEF += -DNLS
+- endif
+- 
+- ifeq ($(strip $(CPUFRQ_BENCH)),true)
+-Index: git/utils/info.c
+-===================================================================
+---- git.orig/utils/info.c	2011-06-30 17:50:23.000000000 -0700
+-+++ git/utils/info.c	2011-07-01 07:06:58.300033928 -0700
+-@@ -10,7 +10,6 @@
+- #include <errno.h>
+- #include <stdlib.h>
+- #include <string.h>
+--#include <libintl.h>
+- #include <locale.h>
+- 
+- #include <getopt.h>
+-@@ -18,9 +17,18 @@
+- #include "cpufreq.h"
+- 
+- 
+-+#ifdef NLS
+-+#include <libintl.h>
+- #define _(String) gettext (String)
+- #define gettext_noop(String) String
+- #define N_(String) gettext_noop (String)
+-+#else
+-+#define gettext_noop(String) String
+-+#define _(String) gettext_noop (String)
+-+#define gettext(String) gettext_noop (String)
+-+#define N_(String) gettext_noop (String)
+-+#define textdomain(String)
+-+#endif
+- 
+- #define LINE_LEN 10
+- 
+-Index: git/utils/set.c
+-===================================================================
+---- git.orig/utils/set.c	2011-06-30 17:50:23.000000000 -0700
+-+++ git/utils/set.c	2011-07-01 07:07:56.980119994 -0700
+-@@ -12,16 +12,23 @@
+- #include <limits.h>
+- #include <string.h>
+- #include <ctype.h>
+--#include <libintl.h>
+- #include <locale.h>
+- 
+- #include <getopt.h>
+- 
+- #include "cpufreq.h"
+--
+--#define _(String) gettext(String)
+-+#ifdef NLS
+-+#include <libintl.h>
+-+#define _(String) gettext (String)
+-+#define gettext_noop(String) String
+-+#define N_(String) gettext_noop (String)
+-+#else
+- #define gettext_noop(String) String
+--#define N_(String) gettext_noop(String)
+-+#define _(String) gettext_noop (String)
+-+#define gettext(String) gettext_noop (String)
+-+#define N_(String) gettext_noop (String)
+-+#define textdomain(String)
+-+#endif
+- 
+- #define NORM_FREQ_LEN 32
+- 
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+index 855b9c8..0cc3725 100644
+--- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
++++ b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+@@ -11,7 +11,9 @@ SRCREV = "a2f0c39d5f21596bb9f5223e895c0ff210b265d0"
+ SRC_URI = "git://github.com/emagii/cpufrequtils.git \
+           "
+ 
+-PR = "r3"
++CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
 +
-+DESCRIPTION = "A minimal iconv implementation w/ support for UTF-8, ASCII, ISO-8859-1"
-+HOMEPAGE = "http://tinderbox.dev.gentoo.org/portage/local/misc/mini-iconv/"
-+LICENSE = "MPL-1.1"
-+SECTION = "libs"
-+DEPENDS = ""
-+PROVIDES = "virtual/libiconv"
-+PR = "r0"
-+LIC_FILES_CHKSUM = "file://iconv.c;startline=1;endline=6;md5=35af9d9924327fe8a0a1fe3a2cb454c8"
-+SRC_URI = "http://mirror.meleeweb.net/pub/linux/gentoo/distfiles/mini-iconv.tar.bz2"
-+SRC_URI[md5sum] = "84412221e26505a2b3855d4a1cdcd0e0"
-+SRC_URI[sha256sum] = "3552262bf1bcf8e859a2a3a7adfb0367af8593383e730c492e981477aac0a0d4"
-+
-+
-+S = "${WORKDIR}/${PN}"
-+
-+do_install() {
-+	oe_runmake install DESTDIR=${D} PREFIX=${prefix} LIB=${base_libdir}
-+}
++PR = "r4"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 1.7.9.5
 
