@@ -1,24 +1,33 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SjvSU-0000jN-Kc
-	for openembedded-devel@openembedded.org; Wed, 27 Jun 2012 18:51:14 +0200
-Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id E4E29EA040;
-	Wed, 27 Jun 2012 18:47:03 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 72245604DE; Wed, 27 Jun 2012 18:40:21 +0200 (CEST)
-Date: Wed, 27 Jun 2012 18:40:21 +0200
-From: Apelete Seketeli <apelete@seketeli.net>
-To: openembedded-devel@openembedded.org
-Message-ID: <20120627164021.GF25892@hermes>
-References: <1340546103-17137-1-git-send-email-apelete@seketeli.net>
+Received: from 75-148-42-21-colorado.hfc.comcastbusiness.net ([75.148.42.21]
+	helo=judge.camp.se-eng.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ray.danks@se-eng.com>) id 1Sjwav-0007F8-Jw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Jun 2012 20:04:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by judge.camp.se-eng.com (Postfix) with ESMTP id E9A58138F37
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jun 2012 11:52:59 -0600 (MDT)
+X-Virus-Scanned: amavisd-new at camp.se-eng.com
+Received: from judge.camp.se-eng.com ([127.0.0.1])
+	by localhost (judge.camp.se-eng.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id k+jORe0oVoqX
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jun 2012 11:52:56 -0600 (MDT)
+Received: from [172.20.202.96] (beast.camp.se-eng.com [172.20.202.96])
+	by judge.camp.se-eng.com (Postfix) with ESMTPSA id D5BF0138F36
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jun 2012 11:52:55 -0600 (MDT)
+Message-ID: <4FEB48CC.6050302@se-eng.com>
+Date: Wed, 27 Jun 2012 11:54:20 -0600
+From: Raymond Danks <ray.danks@se-eng.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0) Gecko/20120129 Thunderbird/10.0
 MIME-Version: 1.0
-In-Reply-To: <1340546103-17137-1-git-send-email-apelete@seketeli.net>
-X-Operating-System: Debian GNU/Linux wheezy/sid
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: Re: [oe-classic][PATCH 0/1] base-passwd: update recipe SRC_URI
+To: openembedded-devel@lists.openembedded.org
+References: <4FE4DFCA.4090606@se-eng.com>
+	<CAMKF1spLndPJgVWoHh9Tfs0SRpc=v8PaygUPsoh58ypygi8OvQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spLndPJgVWoHh9Tfs0SRpc=v8PaygUPsoh58ypygi8OvQ@mail.gmail.com>
+Subject: Re: New meta-xen layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +41,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 16:51:14 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Jun 2012 18:04:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Thanks very much for the feedback.
 
-Le 24-Jun-12, Apelete Seketeli a =E9crit:
->=20
-> The base-passwd-3.5.20.bb SRC_URI was defined as a link relative to
-> the ${DEBIAN_MIRROR} variable. The resolution of the corresponding
-> absolute link leaded to the index page of snapshot.debian.org.
->=20
-> The patch that come as a follow-up of this message updates the SRC_URI
-> to fix this issue. It is targeting oe-classic.
->=20
-> Apelete Seketeli (1):
->   base-passwd: update SRC_URI of base-passwd-3.5.20 recipe
->=20
->  recipes/base-passwd/base-passwd_3.5.20.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> --=20
-> 1.7.10
+On 06/22/2012 06:04 PM, Khem Raj wrote:
+> On Fri, Jun 22, 2012 at 2:12 PM, Raymond Danks<ray.danks@se-eng.com>  wrote:
+>> I have constructed a layer for the purpose of building Xen in OpenEmbedded.
+>>   Xen is a hypervisor and associated tools running on Linux available as a
+>> package in distributions such as Ubuntu and Fedora.  It is also modified and
+>> included in the rpm-based Xen Cloud Platform distribution and Citrix
+>> XenServer.
+>>
+>> This layer currently includes recipes and recipe modifications for building
+>> xen, libvirt, and a minimal xen image that may be used for launching virtual
+>> machines via the xl command line interface.  This currently targets the x86
+>> Xen host (OE target) architecture; development has been done entirely on
+>> x86_64.
+>>
+>> I'm open to receiving feedback, patches and suggestions.  Also, I'm curious
+>> if this layer may be published to the OpenEmbedded layer index and by what
+>> process that should be achieved?
+> thanks for doing it and publishing it for community.
+> looks pretty good from very quick look at the content
+>
+>   recipes-core/initscripts/ has .swp file committed.
+Got it.
+> NATIVE_INSTALL_WORKS is probably not needed in recipes
+OK.  I didn't realize that was depreciated.
+> use oe_runmake instead of ${MAKE}
+Right.  Got it.
+> in some recipes you cache ac_cv_* vars you could use
+> CACHED_CONFIGUREVARS variable to contain them all instead of putting
+> them into EXTRA_OECONF
+I didn't notice this method.  Thanks for the pointer.
+>
+> One think I am not sure is of is distro/minimal.conf in there. I dont
+> know if you want to have your own distro or not if you do it would be
+> nice to separate that out that way other distros can also use this
+> layer if they want to.
+I've removed it.  I'll take a look at the other distros and see if there 
+is an appropriate place to store this configuration elsewhere.
+>
+> As long as you maintain the layer in good shape and in alignment with
+> other layers you depend on its should be fine and please add the entry
+> into LayerIndex on wiki
+Yes.  And thanks Paul for adding it.  This looks good.
+>
+>> meta-xen|Xen related software||git://git.se-eng.com/meta-xen.git|
+>> http://git.se-eng.com/gitweb/?p=meta-xen.git;a=summary|
+>>
+>> Thanks,
+>> Ray
+>>
+>> Raymond Danks
+>> Sage Electronic Engineering, LLC
+>> http://www.se-eng.com
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I need the patch for base-passwd_3.5.20 found in this thread in order
-to build muffinman-image in oe-classic (it does not build anymore in
-its current state). Can someone please review those patches ?
-
-Cheers.
---=20
-        Apelete
 
 
