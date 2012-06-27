@@ -1,37 +1,25 @@
-Received: from mail-gh0-f175.google.com ([209.85.160.175])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1Sjr2Y-00013b-2f
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Sjs2n-00021W-D4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jun 2012 14:08:10 +0200
-Received: by ghbz2 with SMTP id z2so767321ghb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2012 04:57:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=NbQZTvWPbPoIw1jekyQ9wnzztMdKcdi80rAKfMKEYPQ=;
-	b=lfZSr5bqctH7QRt5rlrzmXt+AEJNxAu1XOiOS9ytSdh7Y0SnLGA0qyhej6PwOUn+5o
-	DwsQpSzbB2ui09oVGlQOOrm48mKwkDhDgIM0Zx7D3yRA+McIHCgFmeTyvMVAxyQMM2pH
-	yBqIPWnvr15QJcN4VOmfbbQiIUHCLq7epwhdj99Obn2+WarEKHvN7wEQ+EjhAWwO5LIH
-	WZvyM2JU8tSTWu20jFcxAjJZKIF5f0d2iE/ufWj1nZvsCe8Jf1jnxgQmLRNtmI60z+uS
-	olu0Ybb6pm5QAWkcIXyO7tsiDNeHeDQFN1gICZsyVGIf2C8F51AS7TFkEGB+b3Hxk9wX
-	XjNw==
-MIME-Version: 1.0
-Received: by 10.42.244.6 with SMTP id lo6mr10486083icb.8.1340798236102; Wed,
-	27 Jun 2012 04:57:16 -0700 (PDT)
-Received: by 10.64.10.161 with HTTP; Wed, 27 Jun 2012 04:57:15 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-Received: by 10.64.10.161 with HTTP; Wed, 27 Jun 2012 04:57:15 -0700 (PDT)
-In-Reply-To: <4FEAE2BE.9010707@emagii.com>
-References: <4FEAE2BE.9010707@emagii.com>
-Date: Wed, 27 Jun 2012 14:57:15 +0300
-Message-ID: <CAK18fxGez85nNTcOdKW-j-BpTmxo-Duu0T+m1cNMwP+R3u2j5Q@mail.gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
+	Wed, 27 Jun 2012 15:12:29 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 27 Jun 2012 06:01:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="116527915"
+Received: from unknown (HELO helios.localnet) ([10.252.120.185])
+	by AZSMGA002.ch.intel.com with ESMTP; 27 Jun 2012 06:01:17 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkvCdDLBsfWqecshuk1OSbY7z6MyZ/JGRW9X62M0LvR3GSrtgJ2lZIs3olmIRBOD3M0CU8E
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Missing kernel modules in OE 2011.03
+Date: Wed, 27 Jun 2012 14:01:16 +0100
+Message-ID: <2556659.pn0cFXQTpO@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.3 (Linux/3.2.0-25-generic-pae; KDE/4.8.3; i686; ; )
+In-Reply-To: <1340315167-5855-2-git-send-email-andrea.adami@gmail.com>
+References: <1340315167-5855-1-git-send-email-andrea.adami@gmail.com>
+	<1340315167-5855-2-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH 2/2] linux_2.6.29: fix parsing warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,8 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 12:08:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 27 Jun 2012 13:12:29 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-What image are you trying to bake?
+On Thursday 21 June 2012 23:46:07 Andrea Adami wrote:
+> * declare COMPATIBLE_MACHINE to fix
+> * WARNING: Unable to get checksum for linux SRC_URI entry
+> * defconfig: file could not be found
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  recipes-kernel/linux/linux_2.6.29.bb |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux_2.6.29.bb
+> b/recipes-kernel/linux/linux_2.6.29.bb index e1da026..1886f24 100644
+> --- a/recipes-kernel/linux/linux_2.6.29.bb
+> +++ b/recipes-kernel/linux/linux_2.6.29.bb
+> @@ -6,6 +6,8 @@ PR = "r0"
+>  DEFAULT_PREFERENCE = "-1"
+>  DEFAULT_PREFERENCE_h3600 = "1"
+> 
+> +COMPATIBLE_MACHINE = "h3600"
+> +
+>  SRC_URI =
+> "${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-2.6.29.6.tar.bz2;name=kernel \
+> file://defconfig"
+
+Merged both of these to meta-handheld master, thanks.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
