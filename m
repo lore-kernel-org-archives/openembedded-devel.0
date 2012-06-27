@@ -1,35 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SjoT1-0006Uf-4i
+	(envelope-from <koen@dominion.thruhere.net>) id 1SjoUw-0006b9-8I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jun 2012 11:23:19 +0200
-Received: by eekd49 with SMTP id d49so254885eek.6
+	Wed, 27 Jun 2012 11:25:18 +0200
+Received: by eaal1 with SMTP id l1so277087eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2012 02:12:26 -0700 (PDT)
+	Wed, 27 Jun 2012 02:14:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=/QuPFN9v851bR6ND3xzfv/qlyXMaTHTk1TUlGSibmKk=;
-	b=RDPO0/f42tE5dtoJ/pCHHNSWs2Erh97PGn/w996zESiHzDNJiPraiOKhhuczyKecA6
-	RyBrrqefPfMl9T30kLpPunxg8T2UmhQMCgMOMvoBshle71V75yRh9qftLvMXcBJzGZ3m
-	86Ic4NszTFz0FyCqgJ+/wlS2LWH5sjKuoF/6IvWnOXkF73/JFq9F8c/4Iw7im6KyuJ2t
-	F4qSDx8XAjd5SeL2DGxasXuactWi2YEQjwwZsDyIjUmHIFPOKt+1jhTB3yvlfMNKs/aw
-	fjHJQ/Z4yCqs9bwEkYSBfs+0boEsE68SDGE/XB0VIc3UnnD+1jG9DQ7/9cLCWaOeDPQW
-	ThfQ==
-Received: by 10.14.37.12 with SMTP id x12mr3888746eea.161.1340788345946;
-	Wed, 27 Jun 2012 02:12:25 -0700 (PDT)
+	bh=5Ov2y7mcJE8RKFaKDs880c4lDchKNq6LMdqBsVZXz4Y=;
+	b=lX8RoWAq0q1A0wVyqI7PsTXKu8GVyCesPjBuLgHVaRCJl2gd4RJcMvwPWR/e0VFqR+
+	DH48TirQe+zsH0QG+VQtP9T/WjTdauPZbh3rDQHBQAUREQ4xVw9eVKuxIoI5Io+2/xek
+	ArIEfCK7clKV9MIn540amP1bSu6mo3gBCmHbB8isV0Hv9vPlx7sUZUPLF/JK0vbEMysG
+	zf2hyluo33k8A066Uvy5//xK0oarmPvwBcuVzjNXwwu0Flx7aJ4oEbhZQsvBvVG1dZuh
+	eN9jjbiGmkQ+TcdrGJHsm0bEAdIZ8utlSLiTvEnUYopqsE5rrwxnnQ+A4eDchWEOzSGW
+	W3yw==
+Received: by 10.14.95.201 with SMTP id p49mr3904988eef.103.1340788465195;
+	Wed, 27 Jun 2012 02:14:25 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id p41sm157044515eef.5.2012.06.27.02.12.24
+	by mx.google.com with ESMTPS id m46sm139113800eeh.9.2012.06.27.02.14.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 27 Jun 2012 02:12:24 -0700 (PDT)
+	Wed, 27 Jun 2012 02:14:24 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Jun 2012 11:12:15 +0200
-Message-Id: <1340788335-12701-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 27 Jun 2012 11:14:21 +0200
+Message-Id: <1340788461-12751-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQmIvOqOVi90fW5IHa/QtAxqX8lwqbVo69B9dMYVwvEjRND79u4REUR9nAky3A2lremZ54EF
+X-Gm-Message-State: ALoCoQnrNq2Y+E2jYQNv+vVYkE6TQh7ei8ll4vrmso115IvnIxdfizXFTu8Vr83kRLwOzMhqBQLn
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] libatasmart: update to 0.19
+Subject: [meta-oe][PATCH] ntp: unbreak fetching of ntp-ssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 09:23:19 -0000
+X-List-Received-Date: Wed, 27 Jun 2012 09:25:18 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../libatasmart/libatasmart-0.17/strpool.patch              |   11 -----------
- .../{libatasmart_0.17.bb => libatasmart_0.19.bb}            |    7 ++-----
- 2 files changed, 2 insertions(+), 16 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libatasmart/libatasmart-0.17/strpool.patch
- rename meta-oe/recipes-support/libatasmart/{libatasmart_0.17.bb => libatasmart_0.19.bb} (77%)
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libatasmart/libatasmart-0.17/strpool.patch b/meta-oe/recipes-support/libatasmart/libatasmart-0.17/strpool.patch
-deleted file mode 100644
-index e9f6ab3..0000000
---- a/meta-oe/recipes-support/libatasmart/libatasmart-0.17/strpool.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- git/Makefile.am.orig	2010-09-24 11:03:40.917602895 +0200
--+++ git/Makefile.am	2010-09-24 11:07:04.145852660 +0200
--@@ -81,5 +81,8 @@
-- BUILT_SOURCES = \
-- 	atasmart.strpool.c
-- 
--+strpool: $(strpool_SOURCES)
--+	$(BUILD_CC) -o $@ $?
--+
-- atasmart.strpool.c: atasmart.c strpool
-- 	$(top_builddir)/strpool $< $@
-diff --git a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-similarity index 77%
-rename from meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-rename to meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-index 6162b58..9e7d2fc 100644
---- a/meta-oe/recipes-support/libatasmart/libatasmart_0.17.bb
-+++ b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-@@ -2,13 +2,10 @@ DESCRIPTION = "ATA S.M.A.R.T. Reading and Parsing Library"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1"
+diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+index ece8720..a3d719e 100644
+--- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
++++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+@@ -7,7 +7,7 @@ inherit systemd
+ SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
  
--PR = "r1"
--
- DEPENDS = "udev"
- 
--SRCREV = "v${PV}"
--SRC_URI = "git://git.0pointer.de/libatasmart.git;protocol=git \
--	file://strpool.patch"
-+SRCREV = "de6258940960443038b4c1651dfda3620075e870"
-+SRC_URI = "git://git.0pointer.de/libatasmart.git;protocol=git"
- 
- S = "${WORKDIR}/git"
- 
+-SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/${P}.tar.gz \
++SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
+         file://tickadj.c.patch \
+         file://ntp-4.2.4_p6-nano.patch \
+         file://ntpd \
 -- 
 1.7.10
 
