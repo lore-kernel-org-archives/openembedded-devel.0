@@ -1,29 +1,36 @@
-Received: from mail.eads.net ([80.156.45.113])
+Received: from mail-gh0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1SjqQP-0000IA-Sf for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jun 2012 13:28:45 +0200
-Received: from gsx3072-vs5.mxchg.m.corp ([53.147.176.149])
-	by mail.eads.net (8.13.8/8.13.8/Debian-2) with ESMTP id q5RB5lUm025525
+	(envelope-from <andrei@gherzan.ro>) id 1Sjr2Y-00013b-2f
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Jun 2012 14:08:10 +0200
+Received: by ghbz2 with SMTP id z2so767321ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2012 13:05:48 +0200
-Received: from gsx300a.mxchg.m.corp ([10.43.212.131]) by
-	gsx3072-vs5.mxchg.m.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 27 Jun 2012 13:06:22 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 27 Jun 2012 04:57:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:x-gm-message-state;
+	bh=NbQZTvWPbPoIw1jekyQ9wnzztMdKcdi80rAKfMKEYPQ=;
+	b=lfZSr5bqctH7QRt5rlrzmXt+AEJNxAu1XOiOS9ytSdh7Y0SnLGA0qyhej6PwOUn+5o
+	DwsQpSzbB2ui09oVGlQOOrm48mKwkDhDgIM0Zx7D3yRA+McIHCgFmeTyvMVAxyQMM2pH
+	yBqIPWnvr15QJcN4VOmfbbQiIUHCLq7epwhdj99Obn2+WarEKHvN7wEQ+EjhAWwO5LIH
+	WZvyM2JU8tSTWu20jFcxAjJZKIF5f0d2iE/ufWj1nZvsCe8Jf1jnxgQmLRNtmI60z+uS
+	olu0Ybb6pm5QAWkcIXyO7tsiDNeHeDQFN1gICZsyVGIf2C8F51AS7TFkEGB+b3Hxk9wX
+	XjNw==
 MIME-Version: 1.0
-Date: Wed, 27 Jun 2012 13:06:22 +0200
-Message-ID: <0C757E680E33864AB113392C7E83F9100198054F@GSX300A.mxchg.m.corp>
+Received: by 10.42.244.6 with SMTP id lo6mr10486083icb.8.1340798236102; Wed,
+	27 Jun 2012 04:57:16 -0700 (PDT)
+Received: by 10.64.10.161 with HTTP; Wed, 27 Jun 2012 04:57:15 -0700 (PDT)
+X-Originating-IP: [89.121.200.106]
+Received: by 10.64.10.161 with HTTP; Wed, 27 Jun 2012 04:57:15 -0700 (PDT)
 In-Reply-To: <4FEAE2BE.9010707@emagii.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Missing kernel modules in OE 2011.03
-Thread-Index: Ac1UUZihp23Djh34TZ64/Jtfcdo77gAAui0g
 References: <4FEAE2BE.9010707@emagii.com>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 27 Jun 2012 11:06:23.0007 (UTC)
-	FILETIME=[E33DB2F0:01CD5454]
+Date: Wed, 27 Jun 2012 14:57:15 +0300
+Message-ID: <CAK18fxGez85nNTcOdKW-j-BpTmxo-Duu0T+m1cNMwP+R3u2j5Q@mail.gmail.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQkvCdDLBsfWqecshuk1OSbY7z6MyZ/JGRW9X62M0LvR3GSrtgJ2lZIs3olmIRBOD3M0CU8E
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Missing kernel modules in OE 2011.03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,21 +45,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 11:28:46 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Jun 2012 12:08:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
-
->For some reason, some kernel modules are not present in the rootfs.
->Others are present.
-
-have you added the according kernel module packages to your image to be
-installed ?
-
-Regards
-Wolfgang
-
+What image are you trying to bake?
 
