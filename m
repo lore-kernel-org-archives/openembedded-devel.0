@@ -1,23 +1,32 @@
-Received: from [78.110.170.148] (helo=tinyArch.localdomain)
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1SkAve-0001Cb-WF
+	(envelope-from <fromm@dresearch-fe.de>) id 1SkEb6-0004UD-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 11:22:23 +0200
-Received: from [192.168.0.49] (unknown [195.171.99.130])
-	by tinyArch.localdomain (Postfix) with ESMTPSA id EDF61600C2
+	Thu, 28 Jun 2012 15:17:24 +0200
+Received: by lbol5 with SMTP id l5so2981140lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 09:51:35 +0100 (BST)
-Message-ID: <4FEC1FF8.7090003@communistcode.co.uk>
-Date: Thu, 28 Jun 2012 10:12:24 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:13.0) Gecko/20120616 Thunderbird/13.0.1
+	Thu, 28 Jun 2012 06:06:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=4x9tJh6thf+oV1lLVwOBSnIOhyZaJATUce0ZJxpyX1A=;
+	b=bcCwYYTkBS/KsTrC5xquiPQQ8vObzPQ/pEhNc1xPwdy61SWyWifUIuXZ3YRBsMOFxJ
+	PXv3TY2bQKWiT/zX2Lrs0U/omh16q5EkyR4BDzMGpqNdrbCOyq5IxBA4BJTySNqyyX77
+	/Ag1TM5DIgpN2yvt7Wyh56j/qhTD3kbtk57vjBJTK0FRJm1p0p+YO4Z/vJxxf8LsxfU3
+	VbH2IHAB/i08/tcd+F139P9h60O3LtJvM0abaouXpIRhOcUb8kDdIOkXKsrYHkjFGz5O
+	WI1o4UBiimgvE79HB8R0sOj/nAiHs3rI5z0vkeSbZq2UsmIh9ilgQomgFvJ6mKD7ljQ1
+	8lOg==
 MIME-Version: 1.0
+Received: by 10.112.26.131 with SMTP id l3mr1095473lbg.80.1340888789719; Thu,
+	28 Jun 2012 06:06:29 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Thu, 28 Jun 2012 06:06:29 -0700 (PDT)
+Date: Thu, 28 Jun 2012 15:06:29 +0200
+Message-ID: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-References: <010401cd54cc$09956660$1cc03320$@slingshot.co.nz>
-	<4FEC1F70.7080901@communistcode.co.uk>
-In-Reply-To: <4FEC1F70.7080901@communistcode.co.uk>
-Subject: Re: AM3517 kernel
+X-Gm-Message-State: ALoCoQlvalBWny7eTjlAJvfITyeOtZVJ8mSSfLnBgaGvgOmtoloqZiSMPA1HDfm2Jkct4PGYObS1
+Subject: meta-oe breakage since oe-core removed gcc-4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,46 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 09:22:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jun 2012 13:17:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 28/06/12 10:10, Jack Mitchell wrote:
-> On 28/06/12 02:19, R U Local wrote:
->> Dear List,
->>
->> Does anyone know where I can get linux-2.6.39 or newer source for the TI
->> AM3517?
->>
->> The best I have found/got working is 2.6.37 but I need some newer driver
->> modules that won't build for 2.6.37.
->>
->>
->> Cheers Mike.
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> I believe this is the one used for upstream development within TI.
->
-> https://github.com/hvaibhav/am335x-linux
->
+Hi meta-openembedded maintainers,
 
-Sorry, this is irrelevant - I misread the product code.
+meta-openembedded buid is currently broken since oe-core removed
+recipes for gcc-4.6, and meta-oe has .bbappends for several gcc 4.6
+recipes now unavailable in oe-core.
 
-Sorry for the noise!
+No matter what's meta-oe's plan to handle this (i.e. move gcc-4.6 into
+meta-oe/toolchain-layer completely vs. remove gcc 4.6 .bbappends
+altogether), the current state - having the .bbappends in meta-oe and
+no original recipes anymore in oe-core - breaks the build. Is this
+going to change anytime soon? In either way?
 
--- 
+Regards,
+Thilo
 
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
-
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
