@@ -1,20 +1,22 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SkLTC-0004Pa-5x
+	(envelope-from <apelete@seketeli.net>) id 1SkLe9-0004jT-P9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 22:37:42 +0200
+	Thu, 28 Jun 2012 22:49:01 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id C59ABEA040;
-	Thu, 28 Jun 2012 22:33:14 +0200 (CEST)
+	by ms.seketeli.net (Postfix) with ESMTP id 979FFEA040
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jun 2012 22:44:40 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 5998364522; Thu, 28 Jun 2012 22:26:38 +0200 (CEST)
+	id 7A0EE603C4; Thu, 28 Jun 2012 22:26:10 +0200 (CEST)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jun 2012 22:26:37 +0200
-Message-Id: <1340915198-26932-1-git-send-email-apelete@seketeli.net>
+Date: Thu, 28 Jun 2012 22:26:09 +0200
+Message-Id: <1340915170-26873-2-git-send-email-apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [oe-classic][PATCH 0/1] xcursor-transparent-theme_0.1.1: update SRC_URI
+In-Reply-To: <1340915170-26873-1-git-send-email-apelete@seketeli.net>
+References: <1340915170-26873-1-git-send-email-apelete@seketeli.net>
+Subject: [meta-oe][PATCH 1/1] xcursor-transparent-theme_0.1.1: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,39 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 20:37:42 -0000
+X-List-Received-Date: Thu, 28 Jun 2012 20:49:01 -0000
 
-Hello,
+This patch updates the SRC_URI of xcursor-transparent-theme_0.1.1.bb
+to projects.o-hand.com since the matchbox-project.org repository seems
+to be down.
 
-The xcursor-transparent-theme_0.1.1 source package can not be fetch
-anymore because the http://matchbox-project.org/ download repository
-seems to be down. I updated the SRC_URI to fetch the package from the
-projects.o-hand.com repository instead.
-
-Please not that I submitted a similar patch to this one for the
-oe-core branch (fixing the same issue), because I couldn't rebase the
-oe-classic recipe on the oe-core one. In fact, there is a feature in
-the oe-core recipe that is not compatible with oe-classic and
-bitbake-1.12.0. I got the follwing error when I tried:
-
-ERROR: Error parsing /home/apelete/devel/openembedded/master/recipes/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb: Could not inherit file classes/allarch.bbclass
-
-For your information, the line causing the issue is the following one:
-
-inherit autotools allarch
-
-I hope I made the right choice when I consequently decided to submit a
-patch for oe-core and oe-classic separately.
-
-Anyway, the patch that comes as a follow-up of this message is what
-it's all about, and it is targeting *oe-classic*.
-
-Apelete Seketeli (1):
-  xcursor-transparent-theme_0.1.1: update SRC_URI
-
- recipes/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb |    2 +-
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+---
+ .../xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb     |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta/recipes-graphics/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb b/meta/recipes-graphics/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb
+index 824c295..0f5808c 100644
+--- a/meta/recipes-graphics/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb
++++ b/meta/recipes-graphics/xcursor-transparent-theme/xcursor-transparent-theme_0.1.1.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ SECTION = "x11/base"
+ PR = "r4"
+ 
+-SRC_URI = "http://matchbox-project.org/sources/utils/xcursor-transparent-theme-${PV}.tar.gz \
++SRC_URI = "http://projects.o-hand.com/matchbox/sources/utils/xcursor-transparent-theme-${PV}.tar.gz \
+ 	   file://use-relative-symlinks.patch \
+ 	   file://fix_watch_cursor.patch"
+ 
 -- 
 1.7.10
 
