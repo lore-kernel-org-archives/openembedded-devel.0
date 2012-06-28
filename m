@@ -1,19 +1,36 @@
-Received: from host9-119-dynamic.45-79-r.retail.telecomitalia.it
-	([79.45.119.9] helo=router.workgroup)
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@eukrea.com>) id 1SkFea-0005iN-Rc
+	(envelope-from <elvis.dowson@gmail.com>) id 1SkIOV-0001nq-QA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 16:25:05 +0200
-Received: from denis-n73sv.local ([192.168.1.117] helo=localhost.localdomain)
-	by router.workgroup with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.76) (envelope-from <denis@eukrea.com>)
-	id 1SkEwP-0003Ms-1k; Thu, 28 Jun 2012 15:39:25 +0200
-From: Denis Carikli <denis@eukrea.com>
+	Thu, 28 Jun 2012 19:20:39 +0200
+Received: by dalh21 with SMTP id h21so3044644dal.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jun 2012 10:09:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=7hTTkVcshdN4lTeSXIx3jNdwm0s11y65Vg4vWvJq3YY=;
+	b=bWI25Hil2/FYkVCK6Yy+v7I/OodfImkYLAqMocnvWjedweDnwWsM4EJsfjrcKDusxm
+	iPOsHvnING/CdFIeIxtPd/Vlr2V8EQTq3ZGflQCZnKTEaEYxk+uUcW6hZRVpkS5/2JtL
+	oGcOYJ+L7FbjYm3mPCxpdRDgczYpAi+uqKr0+wd5xR1NXYhJRBW16FNM3kF2RoQc/luq
+	y9SukvRn4+iC65HGkcZbrtD02tsenKXL4oyE6upUT5ELUeYZt9ObjGuq6O92G5EiQI7O
+	4sIjZIJ2PApDFWMDtOikPxBNHSmBDzUJ7M3UVufP3JsAKXy10YxRaRQjpXNK09aYcXgw
+	rU9Q==
+Received: by 10.68.228.136 with SMTP id si8mr9779510pbc.159.1340903384112;
+	Thu, 28 Jun 2012 10:09:44 -0700 (PDT)
+Received: from [192.168.1.102] ([94.205.109.242])
+	by mx.google.com with ESMTPS id rs4sm2652833pbc.0.2012.06.28.10.09.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 28 Jun 2012 10:09:42 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+In-Reply-To: <1340336931-7978-1-git-send-email-elvis.dowson@gmail.com>
+Date: Thu, 28 Jun 2012 21:09:37 +0400
+Message-Id: <AF874800-B131-47EF-81EF-07B7C98BCA0F@gmail.com>
+References: <1340336931-7978-1-git-send-email-elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jun 2012 15:38:20 +0200
-Message-Id: <1340890700-31781-1-git-send-email-denis@eukrea.com>
-X-Mailer: git-send-email 1.7.5.4
-Subject: [meta-oe][PATCH] xserver-common 1.34: sync /etc/X11/Xsession.d/90xXWindowManager with x11-common(oe-core)
+X-Mailer: Apple Mail (2.1278)
+Subject: Re: [meta-openembedded] lighttpd: Set SYSTEMD_PACKAGES as lighttpd-systemd.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,63 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 14:25:05 -0000
+X-List-Received-Date: Thu, 28 Jun 2012 17:20:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Without that fix environments like sato cannot start because
-  they require x-session-manager to be started instead of
-  x-window-manager.
+Hi,
+      I sent this patch a while back, and this still hasn't been =
+applied. I just did a git pull and noticed this. Its a trivial patch, so =
+would it be possible for someone to please apply it.
 
-Signed-off-by: Denis Carikli <denis@eukrea.com>
----
- ...0005-add-XWindowManager-Xsession.d-script.patch |   17 +++++++----------
- .../xserver-common/xserver-common_1.34.bb          |    2 +-
- 2 files changed, 8 insertions(+), 11 deletions(-)
+Elvis
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
-index f5c2c78..1782665 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
-@@ -9,18 +9,15 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 files changed, 6 insertions(+), 0 deletions(-)
-  create mode 100644 X11/Xsession.d/90xXWindowManager
- 
--diff --git a/X11/Xsession.d/90xXWindowManager b/X11/Xsession.d/90xXWindowManager
--new file mode 100644
--index 0000000..3df8435
----- /dev/null
--+++ b/X11/Xsession.d/90xXWindowManager
--@@ -0,0 +1,6 @@
--+#!/bin/sh
-+Index: xserver-common-1.34/X11/Xsession.d/90xXWindowManager
-+===================================================================
-+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
-++++ xserver-common-1.34/X11/Xsession.d/90xXWindowManager	2012-06-28 15:02:22.010521773 +0200
-+@@ -0,0 +1,7 @@
- +if [ -x $HOME/.Xsession ]; then
- +    exec $HOME/.Xsession
-++elif [ -x /usr/bin/x-session-manager ]; then
-++    exec /usr/bin/x-session-manager
- +else
- +    exec /usr/bin/x-window-manager
- +fi
---- 
--1.7.8.5
--
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 1147fca..a7e8191 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r6"
-+PR = "r7"
- 
- # we are using a gpe-style Makefile
- inherit gpe
--- 
-1.7.5.4
+On Jun 22, 2012, at 7:48 AM, Elvis Dowson wrote:
+
+> This commit fixes WARNING:
+> /tool/yocto/poky/meta/recipes-extended/lighttpd/lighttpd_1.4.30.bb:
+> it is recommended to set SYSTEMD_PACKAGES as =
+<existing-package>-systemd
+>=20
+> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+> ---
+> .../lighttpd/lighttpd_1.4.30.bbappend              |    2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git =
+a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend =
+b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> index 1341405..b02f35c 100644
+> --- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> +++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> @@ -6,5 +6,5 @@ inherit systemd
+>=20
+> SRC_URI +=3D "file://lighttpd.service"
+>=20
+> -SYSTEMD_PACKAGES =3D "${PN}"
+> +SYSTEMD_PACKAGES =3D "${PN}-systemd"
+> SYSTEMD_SERVICE_${PN} =3D "lighttpd.service"
+> --=20
+> 1.7.9.5
+>=20
 
 
 
