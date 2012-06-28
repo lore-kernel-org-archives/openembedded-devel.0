@@ -1,32 +1,19 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from host9-119-dynamic.45-79-r.retail.telecomitalia.it
+	([79.45.119.9] helo=router.workgroup)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fromm@dresearch-fe.de>) id 1SkEb6-0004UD-Fu
+	(envelope-from <denis@eukrea.com>) id 1SkFea-0005iN-Rc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 15:17:24 +0200
-Received: by lbol5 with SMTP id l5so2981140lbo.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 06:06:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=4x9tJh6thf+oV1lLVwOBSnIOhyZaJATUce0ZJxpyX1A=;
-	b=bcCwYYTkBS/KsTrC5xquiPQQ8vObzPQ/pEhNc1xPwdy61SWyWifUIuXZ3YRBsMOFxJ
-	PXv3TY2bQKWiT/zX2Lrs0U/omh16q5EkyR4BDzMGpqNdrbCOyq5IxBA4BJTySNqyyX77
-	/Ag1TM5DIgpN2yvt7Wyh56j/qhTD3kbtk57vjBJTK0FRJm1p0p+YO4Z/vJxxf8LsxfU3
-	VbH2IHAB/i08/tcd+F139P9h60O3LtJvM0abaouXpIRhOcUb8kDdIOkXKsrYHkjFGz5O
-	WI1o4UBiimgvE79HB8R0sOj/nAiHs3rI5z0vkeSbZq2UsmIh9ilgQomgFvJ6mKD7ljQ1
-	8lOg==
-MIME-Version: 1.0
-Received: by 10.112.26.131 with SMTP id l3mr1095473lbg.80.1340888789719; Thu,
-	28 Jun 2012 06:06:29 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Thu, 28 Jun 2012 06:06:29 -0700 (PDT)
-Date: Thu, 28 Jun 2012 15:06:29 +0200
-Message-ID: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
+	Thu, 28 Jun 2012 16:25:05 +0200
+Received: from denis-n73sv.local ([192.168.1.117] helo=localhost.localdomain)
+	by router.workgroup with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.76) (envelope-from <denis@eukrea.com>)
+	id 1SkEwP-0003Ms-1k; Thu, 28 Jun 2012 15:39:25 +0200
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlvalBWny7eTjlAJvfITyeOtZVJ8mSSfLnBgaGvgOmtoloqZiSMPA1HDfm2Jkct4PGYObS1
-Subject: meta-oe breakage since oe-core removed gcc-4.6
+Date: Thu, 28 Jun 2012 15:38:20 +0200
+Message-Id: <1340890700-31781-1-git-send-email-denis@eukrea.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] xserver-common 1.34: sync /etc/X11/Xsession.d/90xXWindowManager with x11-common(oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +27,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 13:17:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Jun 2012 14:25:05 -0000
 
-Hi meta-openembedded maintainers,
+Without that fix environments like sato cannot start because
+  they require x-session-manager to be started instead of
+  x-window-manager.
 
-meta-openembedded buid is currently broken since oe-core removed
-recipes for gcc-4.6, and meta-oe has .bbappends for several gcc 4.6
-recipes now unavailable in oe-core.
+Signed-off-by: Denis Carikli <denis@eukrea.com>
+---
+ ...0005-add-XWindowManager-Xsession.d-script.patch |   17 +++++++----------
+ .../xserver-common/xserver-common_1.34.bb          |    2 +-
+ 2 files changed, 8 insertions(+), 11 deletions(-)
 
-No matter what's meta-oe's plan to handle this (i.e. move gcc-4.6 into
-meta-oe/toolchain-layer completely vs. remove gcc 4.6 .bbappends
-altogether), the current state - having the .bbappends in meta-oe and
-no original recipes anymore in oe-core - breaks the build. Is this
-going to change anytime soon? In either way?
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
+index f5c2c78..1782665 100644
+--- a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
+@@ -9,18 +9,15 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 files changed, 6 insertions(+), 0 deletions(-)
+  create mode 100644 X11/Xsession.d/90xXWindowManager
+ 
+-diff --git a/X11/Xsession.d/90xXWindowManager b/X11/Xsession.d/90xXWindowManager
+-new file mode 100644
+-index 0000000..3df8435
+---- /dev/null
+-+++ b/X11/Xsession.d/90xXWindowManager
+-@@ -0,0 +1,6 @@
+-+#!/bin/sh
++Index: xserver-common-1.34/X11/Xsession.d/90xXWindowManager
++===================================================================
++--- /dev/null	1970-01-01 00:00:00.000000000 +0000
+++++ xserver-common-1.34/X11/Xsession.d/90xXWindowManager	2012-06-28 15:02:22.010521773 +0200
++@@ -0,0 +1,7 @@
+ +if [ -x $HOME/.Xsession ]; then
+ +    exec $HOME/.Xsession
+++elif [ -x /usr/bin/x-session-manager ]; then
+++    exec /usr/bin/x-session-manager
+ +else
+ +    exec /usr/bin/x-window-manager
+ +fi
+--- 
+-1.7.8.5
+-
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+index 1147fca..a7e8191 100644
+--- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ # we are using a gpe-style Makefile
+ inherit gpe
+-- 
+1.7.5.4
 
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
