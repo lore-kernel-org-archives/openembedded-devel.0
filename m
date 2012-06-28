@@ -1,36 +1,37 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SkIPU-0001tx-8J
+	(envelope-from <martin.jansa@gmail.com>) id 1SkImA-0002ZF-3S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 19:21:40 +0200
-Received: by dalh21 with SMTP id h21so3045695dal.6
+	Thu, 28 Jun 2012 19:45:06 +0200
+Received: by werg55 with SMTP id g55so1612649wer.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 10:10:44 -0700 (PDT)
+	Thu, 28 Jun 2012 10:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=tKiqSjk45OBEYPO+Mk66Q8FSn04J/RLeN/hwFInpvIM=;
-	b=W+SASeSCcDkpFsWI2MyTkY53WRxgVgrTLMaDl0Xq6S27Khx9++9RLqiWDoMmbxbeJ4
-	JbWhNeHHqKPS4Fj/ULoiFx8NEJyHbloo8fP8qTA6ijqfQswB9rwVZNXsHf06x1kVAG/0
-	XVnVS0YfgGkDjfqeRdx6dWFUUIZXJAG6DtIEqYic+bEltl5k1mTqoIhU5+NxDMVKavK5
-	39yI6nrofDIl3ztt/mkCJfokm65SVgEOFrbPBvNk2ZMg5CgFhntBrwjdH1YyFmmzV+/j
-	/K2xnAFwGQecowVCqZeZRtmOH6kNRHZUZAbsot2gmUKLmFeCQc8ZOkzATDD0UfAnCW7b
-	zaqA==
-Received: by 10.68.221.41 with SMTP id qb9mr9614385pbc.147.1340903444714;
-	Thu, 28 Jun 2012 10:10:44 -0700 (PDT)
-Received: from [192.168.1.102] ([94.205.109.242])
-	by mx.google.com with ESMTPS id rs4sm2652833pbc.0.2012.06.28.10.10.42
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=PqAa7aZ4neTlho23QWYOyegWP4VahYhhIg6E+QhXG5Y=;
+	b=KB+FT2FSDUHW0+8NfwCp253aiimCcbgNTpYrRDBCjzE83wfxul8787JtQEYoPWx/fB
+	5SZG9KWMNhvSY94ulYVy5qvxyKC1dzuNCjC4q1iS7LZm/fof0SuJ7/fR4JddmhNETw7C
+	93G57bbDnCsCEgLl1FyzQju7xcJuA9xT8o9POzw8LEB//v4DtyfF6qGT1x0jaooM8Pwx
+	PVFRr3RkilCOz9Fx57QyU+PTqzWWd7hm9qyCyZsa4ZGCzMGIw+Cid1pyyFAAhk8EYBts
+	+Fc0g6/T+yqQG03RJx0nmRX9841tNTEggokkc2XEtjtHMAGv5t9XE+vQVOKuj/uWqybE
+	07cw==
+Received: by 10.216.199.167 with SMTP id x39mr1585979wen.148.1340904848510;
+	Thu, 28 Jun 2012 10:34:08 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id n6sm2318442wie.7.2012.06.28.10.34.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Jun 2012 10:10:44 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <1340375307-20787-1-git-send-email-elvis.dowson@gmail.com>
-Date: Thu, 28 Jun 2012 21:10:42 +0400
-Message-Id: <6376E490-98B1-46C6-9862-F2224C49E2DE@gmail.com>
-References: <1340375307-20787-1-git-send-email-elvis.dowson@gmail.com>
+	Thu, 28 Jun 2012 10:34:07 -0700 (PDT)
+Date: Thu, 28 Jun 2012 19:34:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1278)
-Subject: Re: [meta-openembedded] python_numpy: Fix SRC_URI warnings.
+Message-ID: <20120628173400.GA24537@localhost.jama.net>
+References: <1340336931-7978-1-git-send-email-elvis.dowson@gmail.com>
+	<AF874800-B131-47EF-81EF-07B7C98BCA0F@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AF874800-B131-47EF-81EF-07B7C98BCA0F@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-openembedded] lighttpd: Set SYSTEMD_PACKAGES as lighttpd-systemd.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 17:21:40 -0000
+X-List-Received-Date: Thu, 28 Jun 2012 17:45:06 -0000
+X-Groupsio-MsgNum: 39433
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="YZ5djTAD1cGYuMQK"
+Content-Disposition: inline
+
+--YZ5djTAD1cGYuMQK
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Request to apply this patch to the meta-openembedded layer...
+On Thu, Jun 28, 2012 at 09:09:37PM +0400, Elvis Dowson wrote:
+> Hi,
+>       I sent this patch a while back, and this still hasn't been applied.=
+ I just did a git pull and noticed this. Its a trivial patch, so would it b=
+e possible for someone to please apply it.
 
-Elvis
+It's trivial but if some image or task had lighttpd in RDEPENDS then it
+got also systemd support with it.. so those images/tasks need to be
+fixed too.
 
-On Jun 22, 2012, at 6:28 PM, Elvis Dowson wrote:
+I don't have such task/image, just explaining that it's not so trivial
+as this..
 
-> This commit fixes the following warnings:
-> WARNING: Unable to get checksum for python-numpy SRC_URI entry =
-config.h: file could not be found
-> WARNING: Unable to get checksum for python-numpy SRC_URI entry =
-numpyconfig.h: file could not be found
+Cheers,
+
 >=20
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-> ---
-> .../recipes-devtools/python/python-numpy_1.4.1.bb  |   11 ++++++++++-
-> 1 file changed, 10 insertions(+), 1 deletion(-)
+> Elvis
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb =
-b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> index a67bf8b..0ae2ca2 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> @@ -5,7 +5,16 @@ LIC_FILES_CHKSUM =3D =
-"file://LICENSE.txt;md5=3D3c42211d73c3faa1026e671dd39883fa"
-> PR =3D "r3"
+> On Jun 22, 2012, at 7:48 AM, Elvis Dowson wrote:
 >=20
-> SRC_URI =3D "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
-> -	   file://config.h \
-> +           ${CONFIGFILESURI} \
-> +	  "
-> +
-> +CONFIGFILESURI ?=3D ""
-> +
-> +CONFIGFILESURI_arm =3D "file://config.h \
-> +	   file://numpyconfig.h \
-> +	  "
-> +
-> +CONFIGFILESURI_mipsel =3D "file://config.h \
-> 	   file://numpyconfig.h \
-> 	  "
+> > This commit fixes WARNING:
+> > /tool/yocto/poky/meta/recipes-extended/lighttpd/lighttpd_1.4.30.bb:
+> > it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
+> >=20
+> > Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+> > ---
+> > .../lighttpd/lighttpd_1.4.30.bbappend              |    2 +-
+> > 1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend=
+ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> > index 1341405..b02f35c 100644
+> > --- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> > +++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> > @@ -6,5 +6,5 @@ inherit systemd
+> >=20
+> > SRC_URI +=3D "file://lighttpd.service"
+> >=20
+> > -SYSTEMD_PACKAGES =3D "${PN}"
+> > +SYSTEMD_PACKAGES =3D "${PN}-systemd"
+> > SYSTEMD_SERVICE_${PN} =3D "lighttpd.service"
+> > --=20
+> > 1.7.9.5
+> >=20
 >=20
-> --=20
-> 1.7.9.5
 >=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--YZ5djTAD1cGYuMQK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk/slYgACgkQN1Ujt2V2gBwmKgCgq2ZpS09kkXasim33BYjyczkF
+A8wAn1boYmR3DvOyQC3OHYza6W+9rGXV
+=Kpp8
+-----END PGP SIGNATURE-----
+
+--YZ5djTAD1cGYuMQK--
