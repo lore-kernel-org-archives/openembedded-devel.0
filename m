@@ -1,36 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SkIsY-0002la-M0
+	(envelope-from <kergoth@gmail.com>) id 1SkJT7-0003bw-1P
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jun 2012 19:51:42 +0200
-Received: by wgbdr1 with SMTP id dr1so2247843wgb.24
+	Thu, 28 Jun 2012 20:29:29 +0200
+Received: by dalh21 with SMTP id h21so3119404dal.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 10:40:48 -0700 (PDT)
+	Thu, 28 Jun 2012 11:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tTOSgmNJtjH2ctVIeo/EL+M/bjs5ZOXM+GM+ohglR3c=;
-	b=MByTNjV625+9oRxdRtDDtiSUclwNQa4Qlh+PcQFSlmzGDz1D5R/g2bnpa3++SDll/2
-	Dxu/xkLcIPGZrkFF3ZHsl+DCfHCfNjNrYJjq5cRI3auKI1TIiamUbjDVadjQ+D1NhXvL
-	Tibo0hVzkaVzY5sLpgbNCRI+GFAE1pKUvFTMC0+7wgKE7bBSLcjcZka/GDbZqNo3WPhR
-	q2JHNCZX2+mUstezuDe4Bq2Fe05Q0ikV8mcqx4QY8j5TKDTmJbOT1ebBpuif/lw5qojd
-	Rv/QrPwXRLFxafsvVNEiWwGSzlDAtuWkQYZzBCO1MjRoadQ93z0GLuIbj1N8Clptcnyw
-	Ef2A==
-Received: by 10.216.143.213 with SMTP id l63mr1662502wej.117.1340905248007;
-	Thu, 28 Jun 2012 10:40:48 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y2sm1282730wix.7.2012.06.28.10.40.46
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=+1X6nRwy+RZprZPmQFc+B1vR1NzEjF86kv5GoTKTKrI=;
+	b=0rT7hmmjFbEmTdu+LhruHW1wdiQVLZlr9TvpEttHVvPY92XXJTVX//Qz6fYea2HYhT
+	FepYrYrpOHv3cYdXImeFx74ujelFtW7PrSwgJU/3Td1VIPLrg640byZA5uDcjOu/95zS
+	0lQvJOwO6udh5WfdcffQDjQ9hOtja79ny9qkrz1cVzCIAaZViTWJvqjpxEFidZqpe7cP
+	HLnkgcj9W4P6x+3vOtD3Zr/Bi+PK9H5NoNFMSu+yXJVzuGyn48cTIDCIL92AcJb8r1ER
+	8wUXHoRDYPRp4UUu0o6pkQIAbv8UGT0s6/XNQZAgjWSkpiTjxe0AlmSZs8ig14ZRIKG+
+	5Mdw==
+Received: by 10.68.226.99 with SMTP id rr3mr10404865pbc.48.1340907513023;
+	Thu, 28 Jun 2012 11:18:33 -0700 (PDT)
+Received: from localhost.localdomain (ip68-109-186-98.ph.ph.cox.net.
+	[68.109.186.98])
+	by mx.google.com with ESMTPS id ob9sm2795508pbb.28.2012.06.28.11.18.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Jun 2012 10:40:47 -0700 (PDT)
-Date: Thu, 28 Jun 2012 19:40:41 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 28 Jun 2012 11:18:32 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120628174041.GB24537@localhost.jama.net>
-References: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: meta-oe breakage since oe-core removed gcc-4.6
+Date: Thu, 28 Jun 2012 11:18:19 -0700
+Message-Id: <1340907500-14243-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.11
+Subject: [meta-oe] [PATCH 1/2] nano-tiny: add 'tiny' build of nano
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2012 17:51:42 -0000
-X-Groupsio-MsgNum: 39436
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="O5XBE6gyVG5Rl6Rj"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 28 Jun 2012 18:29:29 -0000
 
---O5XBE6gyVG5Rl6Rj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Builds with --enable-tiny rather than --enable-all. Binary sizes:
 
-On Thu, Jun 28, 2012 at 03:06:29PM +0200, Thilo Fromm wrote:
-> Hi meta-openembedded maintainers,
->=20
-> meta-openembedded buid is currently broken since oe-core removed
-> recipes for gcc-4.6, and meta-oe has .bbappends for several gcc 4.6
-> recipes now unavailable in oe-core.
->=20
-> No matter what's meta-oe's plan to handle this (i.e. move gcc-4.6 into
-> meta-oe/toolchain-layer completely vs. remove gcc 4.6 .bbappends
-> altogether), the current state - having the .bbappends in meta-oe and
-> no original recipes anymore in oe-core - breaks the build. Is this
-> going to change anytime soon? In either way?
+non-tiny: 166320
+tiny: 73592
 
-khem's patches which removed it from oe-core said:
-gcc-4.6: Retire into toochain-layer
+Signed-off-by: Christopher Larson <kergoth@gmail.com>
+---
+ meta-oe/recipes-support/nano/nano-tiny_2.2.5.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nano/nano-tiny_2.2.5.bb
 
-so I guess he has some patches adding whole recipes to toolchain-layer
-(I had a feeling that I've even seen them somewhere, but cannot find
-them later).=20
+diff --git a/meta-oe/recipes-support/nano/nano-tiny_2.2.5.bb b/meta-oe/recipes-support/nano/nano-tiny_2.2.5.bb
+new file mode 100644
+index 0000000..d0b2576
+--- /dev/null
++++ b/meta-oe/recipes-support/nano/nano-tiny_2.2.5.bb
+@@ -0,0 +1,6 @@
++require recipes-support/nano/nano_${PV}.bb
++
++DESCRIPTION_${PN} = "${DESCRIPTION} - tiny build"
++
++BPN = "nano"
++EXTRA_OECONF = "--enable-tiny"
+-- 
+1.7.11
 
-So for now I've removed all .bbappends as I'm using gcc-4.7.1 anyway.
 
-you can cherry-pick this one for now:
-http://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Dshr&id=3D=
-a31c882c8e336b9ffaa00c074fc24da50deb83a7
 
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---O5XBE6gyVG5Rl6Rj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAk/slxkACgkQN1Ujt2V2gByc1QCeKesJrQq6zNB+7Jzz0bBHf0nR
-FL8AmgJI1k70t+MsB2IksL7bHi8HlbC0
-=qbeU
------END PGP SIGNATURE-----
-
---O5XBE6gyVG5Rl6Rj--
