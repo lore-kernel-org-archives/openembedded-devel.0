@@ -1,37 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-gh0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SkQh1-0004WF-9M
+	(envelope-from <aalonso00@gmail.com>) id 1SkRVn-0005Y1-4v
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2012 04:12:19 +0200
-Received: by pbbrq2 with SMTP id rq2so3735157pbb.6
+	Fri, 29 Jun 2012 05:04:47 +0200
+Received: by ghbz2 with SMTP id z2so2317974ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 19:01:23 -0700 (PDT)
+	Thu, 28 Jun 2012 19:53:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=+Zl2pMW3rf66IoDNy5hS8ux2JhPK0ysdsPRJSC0Ob2Y=;
-	b=buBD0Wq4VYC8Oll5xbSrjJv/QNAufEORRNN6Rd+DypZSmP4xrGY9lsC5czYwDwAedF
-	vL8VLaK288Bj1ATPSEzdAjIcdz3JYyTe2ZbOyvaYpXH9/d/BU7jmkBQgQ1A+HgGeKq3A
-	ATwHMdnzK20E/IK1R8iGnCFS9/HIlB2W2tOkD5IBoe8mj3XEtu35BH6NWKodyC4rr3NN
-	VKhInLeK7XGWxt8TQzdCjVmGsRWGxWB7tKZz87vQ+QynYdhEg8VgXseML/iptFpenliz
-	hUFdntl4k9ei8KsOE8m7rWynPVkgYkwn0IWob1/DCP4z4u3xYl0YFq9lpEVxFqEG+aLb
-	2PPg==
-Received: by 10.68.233.132 with SMTP id tw4mr717121pbc.61.1340935283144;
-	Thu, 28 Jun 2012 19:01:23 -0700 (PDT)
-Received: from [192.168.1.102] ([94.205.109.242])
-	by mx.google.com with ESMTPS id hz10sm3834599pbc.32.2012.06.28.19.01.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Jun 2012 19:01:21 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <CAMKF1soU2SERBGQogpQb75YcEju0mYBtK0on=HMRn_Z2Mrp3jQ@mail.gmail.com>
-Date: Fri, 29 Jun 2012 06:01:18 +0400
-Message-Id: <2ABBABF5-255A-46DE-9455-69128710E79A@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=KMFLe3rigZeoacNYc9DdR5trqqy5GhQiJNQXb4mYuh4=;
+	b=RQQmv4flu6i8xdFYGcbt/77WgbMWJUTSj0YTuSP97OVXuLc9kOjhvp51V0JdVNFJRK
+	NZaDcHoAqFIgo98QztoQMPLl4HkkOEPFtml/yzbj8SbRLfttINjlZVMczufgDdviFVD9
+	qfnMN7JEUty9/JMTGHLzUxtDs0W+RQBX71Rg8f70nDy8s4fBC7W2UmbLSS61LAVkt3YV
+	GZGjqFYZ3Mx2UhkNLQmBepeJ74gLpauCvbChCcp8BUgA0ygrJ0B19QPoHw2bhCNsJh9o
+	nV5Mzh0WZTdpUYPuHIYOb9QBjXYtttmuMd8wAt8dWd9B+TX2H59NeibFNsMjh2qdd5K3
+	czRg==
+MIME-Version: 1.0
+Received: by 10.50.186.162 with SMTP id fl2mr298675igc.44.1340938430903; Thu,
+	28 Jun 2012 19:53:50 -0700 (PDT)
+Received: by 10.64.0.77 with HTTP; Thu, 28 Jun 2012 19:53:50 -0700 (PDT)
+In-Reply-To: <2ABBABF5-255A-46DE-9455-69128710E79A@gmail.com>
 References: <1340904942-41537-1-git-send-email-elvis.dowson@gmail.com>
 	<CAMKF1soU2SERBGQogpQb75YcEju0mYBtK0on=HMRn_Z2Mrp3jQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.1278)
-Cc: openembedded-devel@lists.openembedded.org
+	<2ABBABF5-255A-46DE-9455-69128710E79A@gmail.com>
+Date: Thu, 28 Jun 2012 21:53:50 -0500
+Message-ID: <CAAB-1yxaMktgywC8XrRtiRxZFiUDh086xG3mkJpAGXVPtXo9KA@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-xilinx] util-linux: rename file to util-linux_2.21.2.bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,20 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2012 02:12:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Jun 2012 03:04:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Khem,
+Thanks Elvis, Khem
 
-On Jun 29, 2012, at 4:13 AM, Khem Raj wrote:
+Patch applied.
 
-> if this is a bbappend for meta-xilinx then this is not the right list
-> for this patch
-> Read http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx/tree/README
+On Thu, Jun 28, 2012 at 9:01 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+> Hi Khem,
+>
+> On Jun 29, 2012, at 4:13 AM, Khem Raj wrote:
+>
+>> if this is a bbappend for meta-xilinx then this is not the right list
+>> for this patch
+>> Read http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx/tree/README
+>
+> I've resent the patch to the yocto discussion list.
+>
+> Elvis
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I've resent the patch to the yocto discussion list.
 
-Elvis
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
 
