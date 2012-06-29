@@ -1,32 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SkP1C-0002U4-Fp
+	(envelope-from <kergoth@gmail.com>) id 1SkP7o-0002ed-B8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2012 02:25:02 +0200
-Received: by wgbdr1 with SMTP id dr1so2510264wgb.24
+	Fri, 29 Jun 2012 02:31:52 +0200
+Received: by lbol5 with SMTP id l5so3727037lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 17:14:07 -0700 (PDT)
+	Thu, 28 Jun 2012 17:20:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=BWtNpWLOrioTZIqvWhXZeL/gVN+AgC191JnpcYaGsco=;
-	b=fOAMLUaC6da+NmxhOkvWTk7iSNUgF305GJH3kE3vvpv14WZgawvVOGKFulzIzDjkOq
-	GSe21/TUmG9eIPvyBD1rv2ZM6CFwjkB2ViSAbo3oVY9WZt1/8qv0Q8ezJenhrrVeexAN
-	ZbZuIzVVRGUzR8inbaOR14i1QK15wMpeT0klHj3ZUMtDYhqIIMqJrGcLf098AtfR6V4K
-	p/eD4ZySRycE4URL8GtKWxUCGdw1Qt64tf2tCJx1RWXoOYJuWennm0pXDevV0W7f5BJ7
-	NS6Ps5L+f7j/k1LU98L0xkUNDRdGrL3bW7JXF8tzTpmPbfuhF2bFpdMOxUijBiaM28so
-	Plgw==
-Received: by 10.216.135.146 with SMTP id u18mr2386100wei.5.1340928847451; Thu,
-	28 Jun 2012 17:14:07 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=DDzDQ2QRsO2xJZCK7favf7KiZ1s98T1NUC2d64QOPXY=;
+	b=oQ+MYlpcRgr+Zk6+Nasl5YOEsm10dcLLgxzMMavYis0jVRBDUS5Xs5CFJqTZHqr5so
+	kZ+WPPl0O6n2+Wwf+iDotnz5KqCZu/HN2LsCYotKkrFO81guKjLNNrcxWTeg9JFMgC5F
+	oZ2nvJSzNav3h7Ax4gBhqKK9rnVrQ54+CvQrg+JTbOA9Ccn9HfdZLpGcDVLnIHZzDIFp
+	ahftDacYBeqvS5KTrvf+Na35Tirg+vNaL/C9b3FKU5EB8IvL2A1FzRbS6YDPdTnQOCqz
+	Lg4XYEBDwnqXLyOzJNQNA+W3y9i8zK7dOjG7F/0F7aJwRXj9b9uPaQDYE2fmDFmNJCSR
+	kjDQ==
+Received: by 10.152.46.6 with SMTP id r6mr4347461lam.7.1340929257108; Thu, 28
+	Jun 2012 17:20:57 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.194.30.34 with HTTP; Thu, 28 Jun 2012 17:13:37 -0700 (PDT)
-In-Reply-To: <1340904942-41537-1-git-send-email-elvis.dowson@gmail.com>
-References: <1340904942-41537-1-git-send-email-elvis.dowson@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Jun 2012 17:13:37 -0700
-Message-ID: <CAMKF1soU2SERBGQogpQb75YcEju0mYBtK0on=HMRn_Z2Mrp3jQ@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.114.64.180 with HTTP; Thu, 28 Jun 2012 17:20:36 -0700 (PDT)
+In-Reply-To: <CAMKF1sq-XoYkSVU6KNd+nF-B4AYNVqmA+sDkBiwd_MGrLNzT1A@mail.gmail.com>
+References: <1340907500-14243-1-git-send-email-kergoth@gmail.com>
+	<1340907500-14243-2-git-send-email-kergoth@gmail.com>
+	<CAMKF1sq-XoYkSVU6KNd+nF-B4AYNVqmA+sDkBiwd_MGrLNzT1A@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 28 Jun 2012 17:20:36 -0700
+X-Google-Sender-Auth: OPbo6jmPykyp7XJTjtyT8v9g46I
+Message-ID: <CABcZANk1_T8Wo3O-B0NvSX+b0=U1GRyU3jRdn0eRbQANxt6Bgw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xilinx] util-linux: rename file to util-linux_2.21.2.bbappend
+Subject: Re: [meta-oe] [PATCH 2/2] nano: rreplaces/rconflicts nano-tiny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,58 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2012 00:25:02 -0000
+X-List-Received-Date: Fri, 29 Jun 2012 00:31:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-if this is a bbappend for meta-xilinx then this is not the right list
-for this patch
-Read http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx/tree/README
+On Thu, Jun 28, 2012 at 5:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Thu, Jun 28, 2012 at 11:18 AM, Christopher Larson <kergoth@gmail.com> =
+wrote:
+>> Signed-off-by: Christopher Larson <kergoth@gmail.com>
+>> ---
+>> =C2=A0meta-oe/recipes-support/nano/nano.inc | 4 +++-
+>> =C2=A01 file changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-sup=
+port/nano/nano.inc
+>> index 2d52cab..9e9cc62 100644
+>> --- a/meta-oe/recipes-support/nano/nano.inc
+>> +++ b/meta-oe/recipes-support/nano/nano.inc
+>> @@ -7,8 +7,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df27defe1e96c=
+2e1ecd4e0c9be8967949"
+>> =C2=A0SECTION =3D "console/utils"
+>> =C2=A0DEPENDS =3D "ncurses"
+>> =C2=A0RDEPENDS_${PN} =3D "ncurses-terminfo"
+>> +RREPLACES_${PN} +=3D "nano-tiny"
+>> +RCONFLICTS_${PN} +=3D "nano-tiny"
+>>
+>> -INC_PR =3D "r2"
+>> +INC_PR =3D "r3"
+>
+> I was wondering if tinyness of nano can be turned into a PACKAGECONFIG ?
 
-On Thu, Jun 28, 2012 at 10:35 AM, Elvis Dowson <elvis.dowson@gmail.com> wro=
-te:
-> * Rename util-linux bbaapend file to match recipe version provided in
-> =C2=A0poky/meta/recipes-core/util-linux
->
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-> ---
-> =C2=A0recipes-core/util-linux/util-linux_2.21.1.bbappend | =C2=A0 =C2=A03=
- ---
-> =C2=A0recipes-core/util-linux/util-linux_2.21.2.bbappend | =C2=A0 =C2=A03=
- +++
-> =C2=A02 files changed, 3 insertions(+), 3 deletions(-)
-> =C2=A0delete mode 100644 recipes-core/util-linux/util-linux_2.21.1.bbappe=
-nd
-> =C2=A0create mode 100644 recipes-core/util-linux/util-linux_2.21.2.bbappe=
-nd
->
-> diff --git a/recipes-core/util-linux/util-linux_2.21.1.bbappend b/recipes=
--core/util-linux/util-linux_2.21.1.bbappend
-> deleted file mode 100644
-> index 5199eb2..0000000
-> --- a/recipes-core/util-linux/util-linux_2.21.1.bbappend
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -FILESEXTRAPATHS :=3D "${THISDIR}/${PN}"
-> -# Disable microblaze ncurses support
-> -EXTRA_OECONF_microblaze +=3D " --without-ncurses "
-> diff --git a/recipes-core/util-linux/util-linux_2.21.2.bbappend b/recipes=
--core/util-linux/util-linux_2.21.2.bbappend
-> new file mode 100644
-> index 0000000..5199eb2
-> --- /dev/null
-> +++ b/recipes-core/util-linux/util-linux_2.21.2.bbappend
-> @@ -0,0 +1,3 @@
-> +FILESEXTRAPATHS :=3D "${THISDIR}/${PN}"
-> +# Disable microblaze ncurses support
-> +EXTRA_OECONF_microblaze +=3D " --without-ncurses "
-> --
-> 1.7.9.5
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Good point, could do it that way too. Hmm.
+--=20
+Christopher Larson
 
 
