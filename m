@@ -1,34 +1,36 @@
-Received: from mail-gh0-f175.google.com ([209.85.160.175])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <aalonso00@gmail.com>) id 1SkRVn-0005Y1-4v
+	(envelope-from <fromm@dresearch-fe.de>) id 1SkVaG-0008CN-FP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jun 2012 05:04:47 +0200
-Received: by ghbz2 with SMTP id z2so2317974ghb.6
+	Fri, 29 Jun 2012 09:25:40 +0200
+Received: by lbol5 with SMTP id l5so4090619lbo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2012 19:53:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Fri, 29 Jun 2012 00:14:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=KMFLe3rigZeoacNYc9DdR5trqqy5GhQiJNQXb4mYuh4=;
-	b=RQQmv4flu6i8xdFYGcbt/77WgbMWJUTSj0YTuSP97OVXuLc9kOjhvp51V0JdVNFJRK
-	NZaDcHoAqFIgo98QztoQMPLl4HkkOEPFtml/yzbj8SbRLfttINjlZVMczufgDdviFVD9
-	qfnMN7JEUty9/JMTGHLzUxtDs0W+RQBX71Rg8f70nDy8s4fBC7W2UmbLSS61LAVkt3YV
-	GZGjqFYZ3Mx2UhkNLQmBepeJ74gLpauCvbChCcp8BUgA0ygrJ0B19QPoHw2bhCNsJh9o
-	nV5Mzh0WZTdpUYPuHIYOb9QBjXYtttmuMd8wAt8dWd9B+TX2H59NeibFNsMjh2qdd5K3
-	czRg==
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=Rx/9BE1lBVEFGPNkGvnt77k0GUbfJMRCG6vdlKSmYR4=;
+	b=lrkRY/sYfIOW13ue81QxcjNgLsbblYRKv6M11WtGTJFFwCmrI1iN09eAhEadxMk9lG
+	8PWgoyNReRb5QrYQx3Nw7CbslmgkyKDc1NGPC1UiCyRP1Dq7lVpxRWEcCJDS/b/F9n/F
+	6QXnfrEUE4OLS68E5eyxSEPdH2qOwgfJEa3EUFAidsSYBcR6XMs+UpM1j5aQJnRN2fDA
+	1fg2iN8P/ek2KT5qDjzp7Ngay0FwTWEcQ/SunUGWBracg1LXbKE/WTiKfocevnIdAryh
+	uysO8c02rVHuyxqmUlRm0FDbmnmRF1ZexxSbEjCQaWJxgWpx87mfvw0WX35NX5CHS3vo
+	WEbg==
 MIME-Version: 1.0
-Received: by 10.50.186.162 with SMTP id fl2mr298675igc.44.1340938430903; Thu,
-	28 Jun 2012 19:53:50 -0700 (PDT)
-Received: by 10.64.0.77 with HTTP; Thu, 28 Jun 2012 19:53:50 -0700 (PDT)
-In-Reply-To: <2ABBABF5-255A-46DE-9455-69128710E79A@gmail.com>
-References: <1340904942-41537-1-git-send-email-elvis.dowson@gmail.com>
-	<CAMKF1soU2SERBGQogpQb75YcEju0mYBtK0on=HMRn_Z2Mrp3jQ@mail.gmail.com>
-	<2ABBABF5-255A-46DE-9455-69128710E79A@gmail.com>
-Date: Thu, 28 Jun 2012 21:53:50 -0500
-Message-ID: <CAAB-1yxaMktgywC8XrRtiRxZFiUDh086xG3mkJpAGXVPtXo9KA@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+Received: by 10.112.49.227 with SMTP id x3mr660208lbn.73.1340954084784; Fri,
+	29 Jun 2012 00:14:44 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Fri, 29 Jun 2012 00:14:44 -0700 (PDT)
+In-Reply-To: <CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
+References: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
+	<20120628174041.GB24537@localhost.jama.net>
+	<CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
+Date: Fri, 29 Jun 2012 09:14:44 +0200
+Message-ID: <CADZ6=au8hwxpkFfLJPiK5DO-kx9dPDvEC1XExACXxE+S8xeomQ@mail.gmail.com>
+From: Thilo Fromm <fromm@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xilinx] util-linux: rename file to util-linux_2.21.2.bbappend
+X-Gm-Message-State: ALoCoQnPrGYUbiuXiENhrarNfiyJQO+PsUgi3sFQz9RpfILMD7SwgtULuby0JlIqgAMQoJk8MRHZ
+Subject: Re: meta-oe breakage since oe-core removed gcc-4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2012 03:04:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Jun 2012 07:25:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Thanks Elvis, Khem
+Hello list,
 
-Patch applied.
-
-On Thu, Jun 28, 2012 at 9:01 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
-> Hi Khem,
+>> khem's patches which removed it from oe-core said:
+>> gcc-4.6: Retire into toochain-layer
+>>
+>> so I guess he has some patches adding whole recipes to toolchain-layer
+>> (I had a feeling that I've even seen them somewhere, but cannot find
+>> them later).
 >
-> On Jun 29, 2012, at 4:13 AM, Khem Raj wrote:
->
->> if this is a bbappend for meta-xilinx then this is not the right list
->> for this patch
->> Read http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx/tree/README
->
-> I've resent the patch to the yocto discussion list.
->
-> Elvis
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+That was my guess, too. However, if Khem would have waited for Koen to
+pull his patches for meta-oe before removing gcc-4.6 from oe-core then
+no build would have been broken, I suppose.
 
+> the patch is here
+> http://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dkraj/move-=
+gcc-4.6
+>
+> Koen
+>
+> Please pull it
+>
+> I did not post it since it would hog patchwork
+>
 
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+Thanks for those patches, Khem!
+
+Regards,
+Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
+Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB 130120 B
+Ust.-IDNr. DE273952058
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
