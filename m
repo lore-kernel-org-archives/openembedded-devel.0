@@ -1,33 +1,20 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from [78.110.170.148] (helo=tinyArch.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>)
-	id 1Slbhh-0001XQ-PL; Mon, 02 Jul 2012 10:09:54 +0200
-Received: by dalh21 with SMTP id h21so6912565dal.6
-	for <multiple recipients>; Mon, 02 Jul 2012 00:58:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=QoF4xrjjdROF4caD/1+EeEZMiGf91xVTPSJ9rbSVAbY=;
-	b=XUGesVZhiwGvc7NsTsaNeZ0lL4vjREsqk4L29c34AZXA9BCBh9gGjfp+ITdUE7jlOa
-	aanD7F2e0f7g8lj4m69s9CWINOyONz4P6G0GiuVpFQOqOXg9p7IiMtErPDPi8SoLUMiu
-	rnrHzP3XrK+cHA4TVmvo/BuEM5MZm0ClQXr6+rJ9wzNY8PJahHpFmRtkIpJxjqVbvWNY
-	4/B8bS2zDFBGTU/OphwFB+KyFdlDEwJp7TrsWIFJ8xsMwg6hlQ+TGqZ7ujllDvjnESjx
-	2MdhaWhVkzSXSaR/xOKpDLu8xsG74zL5yr6OX8o7PRPa+KOmI+DzpoxzYZG8IquO1g8z
-	vY9w==
+	(envelope-from <ml@communistcode.co.uk>) id 1Sli2H-0007Ki-F8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Jul 2012 16:55:34 +0200
+Received: from [192.168.0.41] (unknown [195.171.99.130])
+	by tinyArch.localdomain (Postfix) with ESMTPSA id 81820600CA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Jul 2012 15:38:27 +0100 (BST)
+Message-ID: <4FF1B410.30801@communistcode.co.uk>
+Date: Mon, 02 Jul 2012 15:45:36 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:13.0) Gecko/20120616 Thunderbird/13.0.1
 MIME-Version: 1.0
-Received: by 10.68.192.97 with SMTP id hf1mr27496774pbc.132.1341215932153;
-	Mon, 02 Jul 2012 00:58:52 -0700 (PDT)
-Received: by 10.68.201.4 with HTTP; Mon, 2 Jul 2012 00:58:52 -0700 (PDT)
-In-Reply-To: <CA+YB3rZjUeSyPRqJxYOYeY5cwX+RPSRUi6s5R7ndN+2y213C=A@mail.gmail.com>
-References: <CA+YB3rZjUeSyPRqJxYOYeY5cwX+RPSRUi6s5R7ndN+2y213C=A@mail.gmail.com>
-Date: Mon, 2 Jul 2012 09:58:52 +0200
-Message-ID: <CACW_hTaJOqwrYhu=iv2RVQxPYh-f7SGs2a-nkePndKX+B1+29Q@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: tsc <tsc@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Minutes: OE Technical Steering Committee 19 June 2012
+Subject: [meta-oe] net-snmp config help
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +28,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2012 08:09:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 02 Jul 2012 14:55:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
->
->  b. elections
->  -> remove from this list, put back when needed - 2 years from last
-> December
->  => Jefro to document on wiki & remind the board in October 2013
->
+Ok, so I managed to get net-snmp compiling however I now have an issue 
+where the configure stage is picking up libpci and using that to 
+configure net-snmp to look for pci devices on startup which my 
+beaglebone doesn't have
 
-This is not correct.
+    root@beaglebone:~# snmpd
+    pcilib: Cannot open /proc/bus/pci
+    pcilib: Cannot find any working access method.
+    root@beaglebone:~#
 
-From http://www.openembedded.org/wiki/TSC
+Off I went and found a solution[1] which states that I should force the 
+PCI_* defines to off *after* the configuration stage. So I go into my 
+work directory and alter includes/net-snmp/net-snmp-config.h:
 
-"Each member serves a two-year term. During election time, one member may
-stand for election every two months. The next election will be for Richard
-Purdie's seat in July, 2013."
+    /* define if you have pci_lookup_name() */
+    #undef HAVE_PCI_LOOKUP_NAME
 
-So probably this should be initiated in April or May 2013, not Oct.
+    /* Define to 1 if you have the <pci/pci.h> header file. */
+    #undef HAVE_PCI_PCI_H
 
-FM
+Then compile with:
+
+     bitbake net-snmp -c compile -f
+
+Then
+
+     bitbake core-image-minimal
+
+Which does net-snmp do_install and then builds the rootfs. However this 
+makes no difference and it still fails with the same error message on 
+start. Is my work flow for this wrong, or is it re-configuring, I'm at a 
+bit of a loss of what to do now?
+
+I suppose the correct procedure would be to find out why pcilibs is 
+being detected and configured, then fix that. Could anyone point me in 
+the right direction?
+
+Regards,
+Jack.
+
+[1] 
+http://stackoverflow.com/questions/9470494/snmpd-cannot-open-proc-bus-pci
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
+
 
