@@ -1,35 +1,33 @@
-Received: from mail-vc0-f175.google.com ([209.85.220.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SlRSv-0006iZ-2a
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Jul 2012 23:13:57 +0200
-Received: by vcbfl15 with SMTP id fl15so3155603vcb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Jul 2012 14:02:56 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>)
+	id 1Slbhh-0001XQ-PL; Mon, 02 Jul 2012 10:09:54 +0200
+Received: by dalh21 with SMTP id h21so6912565dal.6
+	for <multiple recipients>; Mon, 02 Jul 2012 00:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=X+nO3LiMCT5z/rMoPiTIeG3uHN61RMyOXKBwSEyZ7sc=;
-	b=XezIaebyczeIxCGnip0Nc1A6euGhmo79BwoxQ9EQ4gKPA3l99PjLvT7Km+nTipJMXL
-	+8MOzbHljF/b8iuCMI+4l7xFKGXVxzd2H0uazBX5J4efkXOHIz8IoV8w/jADEUVvoDgb
-	HsaSwT1ofc/+KxisjZB8z58pX44Nc9pGpzn/lbX8txNZUCIsJWs5VWd6ZowROMgzUtEi
-	hv0oItlI9zlcH6qLK2LcFMTctPITOw3iF5eIFcI20+DcdTVgpaIu4mXBMicRoS3M3ewT
-	MNTMprEkTnj7q8qdRA3fWo6oqTeu6F4cfckTFXjnN3UV7Fb7xZMso9OlaEleVl4voUz/
-	ABCg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=QoF4xrjjdROF4caD/1+EeEZMiGf91xVTPSJ9rbSVAbY=;
+	b=XUGesVZhiwGvc7NsTsaNeZ0lL4vjREsqk4L29c34AZXA9BCBh9gGjfp+ITdUE7jlOa
+	aanD7F2e0f7g8lj4m69s9CWINOyONz4P6G0GiuVpFQOqOXg9p7IiMtErPDPi8SoLUMiu
+	rnrHzP3XrK+cHA4TVmvo/BuEM5MZm0ClQXr6+rJ9wzNY8PJahHpFmRtkIpJxjqVbvWNY
+	4/B8bS2zDFBGTU/OphwFB+KyFdlDEwJp7TrsWIFJ8xsMwg6hlQ+TGqZ7ujllDvjnESjx
+	2MdhaWhVkzSXSaR/xOKpDLu8xsG74zL5yr6OX8o7PRPa+KOmI+DzpoxzYZG8IquO1g8z
+	vY9w==
 MIME-Version: 1.0
-Received: by 10.52.23.107 with SMTP id l11mr4142702vdf.6.1341176576804; Sun,
-	01 Jul 2012 14:02:56 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.220.32.9 with HTTP; Sun, 1 Jul 2012 14:02:56 -0700 (PDT)
-In-Reply-To: <9a4427b73e6410ee3c7d194a38225a54778fffae.1339428767.git.otavio@ossystems.com.br>
-References: <cover.1339428767.git.otavio@ossystems.com.br>
-	<9a4427b73e6410ee3c7d194a38225a54778fffae.1339428767.git.otavio@ossystems.com.br>
-Date: Sun, 1 Jul 2012 18:02:56 -0300
-X-Google-Sender-Auth: E4fyjtS3JjwdeyCa_WNGW8W4Qv4
-Message-ID: <CAP9ODKp9CUBC3Ef5YS0s4iQ+8ib=OkcHAM7xX3bmyckAnvwS3A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.68.192.97 with SMTP id hf1mr27496774pbc.132.1341215932153;
+	Mon, 02 Jul 2012 00:58:52 -0700 (PDT)
+Received: by 10.68.201.4 with HTTP; Mon, 2 Jul 2012 00:58:52 -0700 (PDT)
+In-Reply-To: <CA+YB3rZjUeSyPRqJxYOYeY5cwX+RPSRUi6s5R7ndN+2y213C=A@mail.gmail.com>
+References: <CA+YB3rZjUeSyPRqJxYOYeY5cwX+RPSRUi6s5R7ndN+2y213C=A@mail.gmail.com>
+Date: Mon, 2 Jul 2012 09:58:52 +0200
+Message-ID: <CACW_hTaJOqwrYhu=iv2RVQxPYh-f7SGs2a-nkePndKX+B1+29Q@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe 3/3] cpuburn-neon: fix packaging to use a date as version and valid sources
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: tsc <tsc@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Minutes: OE Technical Steering Committee 19 June 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jul 2012 21:13:57 -0000
+X-List-Received-Date: Mon, 02 Jul 2012 08:09:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Jun 11, 2012 at 12:34 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
->  * The package were not versioning the sources as the files had no
->    version on its name. We workaround it mangling the DL_DIR;
 >
->  * We now dynamically check if the machine has or not neon feature and
->    set COMPATIBLE_MACHINE.
+>  b. elections
+>  -> remove from this list, put back when needed - 2 years from last
+> December
+>  => Jefro to document on wiki & remind the board in October 2013
 >
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-Ping?
+This is not correct.
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+From http://www.openembedded.org/wiki/TSC
 
+"Each member serves a two-year term. During election time, one member may
+stand for election every two months. The next election will be for Richard
+Purdie's seat in July, 2013."
+
+So probably this should be initiated in April or May 2013, not Oct.
+
+FM
 
