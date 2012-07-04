@@ -1,36 +1,34 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SmRsG-0000MG-AW
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1SmRvm-0000UU-16
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jul 2012 17:52:16 +0200
-Received: by bkcik5 with SMTP id ik5so3430572bkc.6
+	Wed, 04 Jul 2012 17:55:54 +0200
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 58939D2380; Wed,  4 Jul 2012 17:44:53 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-144.dynamic.chello.pl
+	[87.206.60.144])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id C7B74D232B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jul 2012 08:41:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=OwOFGLfhyZNM8vWlkPDtHaQVoWrnQ33HoRA2moFStw4=;
-	b=bButgu8Od11CpLd/tr3OgDWk9Xgvi7YeQcbOf9d8ltDGUQVIA8RjJmkArqZQXPQPSh
-	gBGkO4gSWghhbk5ZGY+JySXPeLkMg+EJmKfvVqNzxXFeXGke1JtJX0o673+2vFTdRMI7
-	x7OR3CvrIDKf0zFKq1Q13Lunx/w5GNEz43r7IRkWLqvpH26i3ejr6gQ8YBzUCDkUjMhY
-	PygGiC+WeyGb/+MHKEduTJh2QTahSM7BemaWU3a7W+KLrntwZTckRuPe3PnGNHL26z3l
-	d7k6bQdUv/CR7n131VhuEbw2QX7xGJpZI1GiUc53BetxiC3+vsCfzebmTbFERjGeap/p
-	DJHQ==
-Received: by 10.204.145.76 with SMTP id c12mr1263342bkv.70.1341416473175;
-	Wed, 04 Jul 2012 08:41:13 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
-	[95.222.160.112])
-	by mx.google.com with ESMTPS id h18sm19243241bkh.8.2012.07.04.08.41.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Jul 2012 08:41:12 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jul 2012 17:40:51 +0200
-Message-Id: <1341416451-20362-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	Wed,  4 Jul 2012 17:44:32 +0200 (CEST)
+Message-ID: <4FF464DC.8000005@linaro.org>
+Date: Wed, 04 Jul 2012 17:44:28 +0200
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120620 Thunderbird/14.0
 MIME-Version: 1.0
-Subject: [PATCH] lighttpd: follow oe-core to 1.4.31
+To: openembedded-devel@lists.openembedded.org
+References: <1341416451-20362-1-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1341416451-20362-1-git-send-email-schnitzeltony@googlemail.com>
+Subject: Re: [PATCH] lighttpd: follow oe-core to 1.4.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2012 15:52:16 -0000
+X-List-Received-Date: Wed, 04 Jul 2012 15:55:54 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
+W dniu 04.07.2012 17:40, Andreas M=C3=BCller pisze:
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...pd_1.4.30.bbappend => lighttpd_1.4.31.bbappend} |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
- rename meta-oe/recipes-extended/lighttpd/{lighttpd_1.4.30.bbappend => lighttpd_1.4.31.bbappend} (84%)
+> a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
+> b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend=20
 
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-similarity index 84%
-rename from meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-rename to meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-index 1341405..df6dac7 100644
---- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-+++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-@@ -1,6 +1,6 @@
- FILESEXTRAPATHS := "${THISDIR}/${PN}"
- 
--PRINC := "${@int(PRINC) + 3}"
-+PRINC := "${@int(PRINC) + 1}"
- 
- inherit systemd
- 
--- 
-1.7.6.5
+> inherit systemd
 
+Can we finally get version without systemd? With current state of
+meta-oe I can use lighttpd 1.4.31 without systemd but this change will
+make it impossible again ;(
 
 
