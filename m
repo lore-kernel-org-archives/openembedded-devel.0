@@ -1,34 +1,29 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SlxgN-0003Pm-6j
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Jul 2012 09:37:59 +0200
-Received: by yenl13 with SMTP id l13so4690964yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jul 2012 00:26:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=2hbYM/HLTw2MnP9LsVVpHgF3lEP69fD1vn8Jb+1rtLk=;
-	b=xmfUO3xnRgkVnZrWS8EY2BuW86iLvI09oshP3e50bt1JE8cOT1TjJ+RLZLL47Uk6eQ
-	aQqfjlYW2m5XUiJOikafOID5CfPaseBFdU8+PMvxPWcbLCEAt+I6lGVV9Kds/PEC/Xwk
-	G/GZbKx76eWE7wZu+JaqQHkijvMWqGSk413a+JwLh05Xz+iVwR5OB3ciuYyyNaG2VmQl
-	FUE6XGuGGFEYYWLOQ6O+9z3wkEePxUE7UDHEkKgxmNm9YaMqzbXEs7CBqJwYWk2uH58m
-	BM7w4Rbo4NY1+I1NeuyaqFcrJUwjaiQRT82H+PSuVsEuR8gDI2qAIsP7XxCr6G1+jMnW
-	xk8A==
+	(envelope-from <raj.khem@gmail.com>)
+	id 1SmJyL-00046k-RH; Wed, 04 Jul 2012 09:26:01 +0200
+Received: by eekd49 with SMTP id d49so2763393eek.6
+	for <multiple recipients>; Wed, 04 Jul 2012 00:14:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=Y+LLB+KZ4YXJ89NJDlc/nX8V9NHX3fmLKreCYKNXNIw=;
+	b=Cwc/E8rm+4CuTKWaUo/djI/K/mLgTLRjM8etx2F7LbRylZdkWPWn8BWAKhWVWjoTaM
+	Mp8U7X25cpKhKPCYvEMsk2K1sGcqtxM902IERLdaxlinIRI8HLZwBfNe3jIPkEb9auSN
+	HaHKWTqbuEjMaPLRrs/OqZCf9r9h1wD8DolkTITftfRtW6hi3yx1jAFsRxyFbXq9b++k
+	Rfkys15FI3/FGFAFJhbCos0yInMpZ+CH6iFcYiRnZYjJmJ/p9hj3DUPrfK9qqBIcf8zG
+	BjuImBoSJ160GpkVWdDlGTdUcg7pY5zuBbCen0Wo8Lw6MYJviV3zYJ6ekBKZ1+jNO3XW
+	VogQ==
+Received: by 10.14.53.4 with SMTP id f4mr5116203eec.93.1341386099214; Wed, 04
+	Jul 2012 00:14:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.180.138 with SMTP id do10mr7565810igc.36.1341300417016;
-	Tue, 03 Jul 2012 00:26:57 -0700 (PDT)
-Received: by 10.64.9.165 with HTTP; Tue, 3 Jul 2012 00:26:56 -0700 (PDT)
-In-Reply-To: <1340210721-21548-2-git-send-email-schnitzeltony@googlemail.com>
-References: <1340210721-21548-1-git-send-email-schnitzeltony@googlemail.com>
-	<1340210721-21548-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 3 Jul 2012 09:26:56 +0200
-Message-ID: <CALbNGRRCX7Sc=t=LrsN3zpfPf_n8XL79Dvb0N1AjtscXVzsr9Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce 2/2] task-xfce-extended: remove xfce4-icon-theme
+Received: by 10.14.210.199 with HTTP; Wed, 4 Jul 2012 00:14:29 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Jul 2012 00:14:29 -0700
+Message-ID: <CAMKF1spU53TcfLHif3CUzrHKqJTT1uBqBqsZAn-zfaBOBecMtw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: eglibc 2.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jul 2012 07:37:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Jul 2012 07:26:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jun 20, 2012 at 6:45 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> xfce4-icon-theme is not required by default since xfce4-settings initiall=
-y
-> works with gnome-icon-theme and gnome-icon-theme is pulled in by many oth=
-er
-> recipes anyway.
-> To reduce rootfs size - especially after gtk-update-icon-cache -
-> xfce4-icon-theme is removed.
->
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
-ping
+Hi All,
+
+I have pushed a contrib branch with eglibc 2.16 here
+
+http://git.openembedded.org/openembedded-core-contrib kraj/eglibc-2.16
+
+and I would like some hands in testing it out. I have so far tested
+core-image-minimal and core-image-sato on all architectures
+they build and boot fine. There are changes in eglibc which may need
+tweaking some apps especially if its using gnulib. So give it shot and
+let me know if you find issues
+
+All you need is pull this branch into your sandbox and then set
+
+EGLIBCVERSION = "2.16" in your local.conf if using angstrom then add
+ANGSTROM_EGLIBC_VERSION = "2.16" to local.conf
+
+Thanks
+
+-Khem
 
 
