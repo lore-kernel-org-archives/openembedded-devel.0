@@ -1,29 +1,23 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from [78.110.170.148] (helo=tinyArch.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1SmJyL-00046k-RH; Wed, 04 Jul 2012 09:26:01 +0200
-Received: by eekd49 with SMTP id d49so2763393eek.6
-	for <multiple recipients>; Wed, 04 Jul 2012 00:14:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=Y+LLB+KZ4YXJ89NJDlc/nX8V9NHX3fmLKreCYKNXNIw=;
-	b=Cwc/E8rm+4CuTKWaUo/djI/K/mLgTLRjM8etx2F7LbRylZdkWPWn8BWAKhWVWjoTaM
-	Mp8U7X25cpKhKPCYvEMsk2K1sGcqtxM902IERLdaxlinIRI8HLZwBfNe3jIPkEb9auSN
-	HaHKWTqbuEjMaPLRrs/OqZCf9r9h1wD8DolkTITftfRtW6hi3yx1jAFsRxyFbXq9b++k
-	Rfkys15FI3/FGFAFJhbCos0yInMpZ+CH6iFcYiRnZYjJmJ/p9hj3DUPrfK9qqBIcf8zG
-	BjuImBoSJ160GpkVWdDlGTdUcg7pY5zuBbCen0Wo8Lw6MYJviV3zYJ6ekBKZ1+jNO3XW
-	VogQ==
-Received: by 10.14.53.4 with SMTP id f4mr5116203eec.93.1341386099214; Wed, 04
-	Jul 2012 00:14:59 -0700 (PDT)
+	(envelope-from <ml@communistcode.co.uk>) id 1SmL3P-0005K8-V9
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Jul 2012 10:35:20 +0200
+Received: from [192.168.0.41] (unknown [195.171.99.130])
+	by tinyArch.localdomain (Postfix) with ESMTPSA id DD165613DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Jul 2012 09:12:19 +0100 (BST)
+Message-ID: <4FF3FDF1.5010002@communistcode.co.uk>
+Date: Wed, 04 Jul 2012 09:25:21 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:13.0) Gecko/20120616 Thunderbird/13.0.1
 MIME-Version: 1.0
-Received: by 10.14.210.199 with HTTP; Wed, 4 Jul 2012 00:14:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Jul 2012 00:14:29 -0700
-Message-ID: <CAMKF1spU53TcfLHif3CUzrHKqJTT1uBqBqsZAn-zfaBOBecMtw@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: eglibc 2.16
+To: openembedded-devel@lists.openembedded.org
+References: <4FF1B410.30801@communistcode.co.uk>
+	<4FF1B901.6000306@communistcode.co.uk>
+In-Reply-To: <4FF1B901.6000306@communistcode.co.uk>
+Subject: Re: [meta-oe] net-snmp config help
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +31,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2012 07:26:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Jul 2012 08:35:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 02/07/12 16:06, Jack Mitchell wrote:
+> On 02/07/12 15:45, Jack Mitchell wrote:
+>> Ok, so I managed to get net-snmp compiling however I now have an 
+>> issue where the configure stage is picking up libpci and using that 
+>> to configure net-snmp to look for pci devices on startup which my 
+>> beaglebone doesn't have
+>>
+>>    root@beaglebone:~# snmpd
+>>    pcilib: Cannot open /proc/bus/pci
+>>    pcilib: Cannot find any working access method.
+>>    root@beaglebone:~#
+>>
+>> Off I went and found a solution[1] which states that I should force 
+>> the PCI_* defines to off *after* the configuration stage. So I go 
+>> into my work directory and alter includes/net-snmp/net-snmp-config.h:
+>>
+>>    /* define if you have pci_lookup_name() */
+>>    #undef HAVE_PCI_LOOKUP_NAME
+>>
+>>    /* Define to 1 if you have the <pci/pci.h> header file. */
+>>    #undef HAVE_PCI_PCI_H
+>>
+>> Then compile with:
+>>
+>>     bitbake net-snmp -c compile -f
+>>
+>> Then
+>>
+>>     bitbake core-image-minimal
+>>
+>> Which does net-snmp do_install and then builds the rootfs. However 
+>> this makes no difference and it still fails with the same error 
+>> message on start. Is my work flow for this wrong, or is it 
+>> re-configuring, I'm at a bit of a loss of what to do now?
+>>
+>> I suppose the correct procedure would be to find out why pcilibs is 
+>> being detected and configured, then fix that. Could anyone point me 
+>> in the right direction?
+>>
+>> Regards,
+>> Jack.
+>>
+>> [1] 
+>> http://stackoverflow.com/questions/9470494/snmpd-cannot-open-proc-bus-pci 
+>>
+>>
+>
+> It seems that udev is forcing PCI down every ones throats, is this 
+> necessary, can it be built without? There seems to be a lot of extra 
+> configuration in there to make it happen...
+>
+> Onward ho!
+>
 
-I have pushed a contrib branch with eglibc 2.16 here
+As a stop gap till I manage to get to the bottom of this properly, doing:
 
-http://git.openembedded.org/openembedded-core-contrib kraj/eglibc-2.16
+     bitbake core-image-minimal
 
-and I would like some hands in testing it out. I have so far tested
-core-image-minimal and core-image-sato on all architectures
-they build and boot fine. There are changes in eglibc which may need
-tweaking some apps especially if its using gnulib. So give it shot and
-let me know if you find issues
+to get the initial image and everything built properly
 
-All you need is pull this branch into your sandbox and then set
+     bitbake -c cleansstate pciutils
 
-EGLIBCVERSION = "2.16" in your local.conf if using angstrom then add
-ANGSTROM_EGLIBC_VERSION = "2.16" to local.conf
+To remove pci.h from the sysroot
 
-Thanks
+     bitbake -c cleansstate net-snmp
 
--Khem
+to remove the net-snmp with pci config enabled
+
+     bitbake net-snmp
+
+to rebuild net-snmp without pci config enabled (due to it not finding pci.h)
+
+     bitbake core-image-minimal
+
+pciutils gets rebuilt, net-snmp stays configured without pci and 
+everybody is happy (apart from the deterministic build goddess).
+
+Regards,
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
 
