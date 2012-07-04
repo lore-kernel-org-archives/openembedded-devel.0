@@ -1,33 +1,25 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1SmUnW-0005rh-Dr; Wed, 04 Jul 2012 20:59:34 +0200
-Received: by eaal1 with SMTP id l1so3004617eaa.6
-	for <multiple recipients>; Wed, 04 Jul 2012 11:48:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=7n8/FDP/TxmFxPdjExpgr0R7N2l3m/lDvZJV6lgfcks=;
-	b=BVhhVrbzB4AWsxVof08B+bPKPbtrb1Zx4aNTIHGY+5bulNbKZjj9Bl8tF3aDJcsEir
-	l5CmnhxXOXygi1Xm9G34TexpVqKBnUcxBUFme5jdt9L/ry2FauE0GQS250Zjv+PgjBkU
-	K2YkYWYOv/zT8qqqvjRCEal4gKzZyrb22q2wzs9KB3WY9JISzFnaci+ixrPaqXPo3dFM
-	f7L+8XXxGs8k3ZOymOIbZjLVMko6/10BCBgCFJVtsMcLwh1ggexlvUYxF52uXPs2OrqB
-	Sc/KvpaU9sntQ39iftdCHr9h1qes07WPmj7Fm5/u9E1bnqDBZmq0ZAgMmE/xjhpfetPd
-	zcGw==
-Received: by 10.14.99.201 with SMTP id x49mr4087744eef.142.1341427710831; Wed,
-	04 Jul 2012 11:48:30 -0700 (PDT)
+	(envelope-from <apelete@seketeli.net>) id 1SmXTX-0008PY-1p
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Jul 2012 23:51:07 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 5CFFBEA040;
+	Wed,  4 Jul 2012 23:45:51 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 1FDC7604B5; Wed,  4 Jul 2012 23:40:02 +0200 (CEST)
+Date: Wed, 4 Jul 2012 23:40:02 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120704214002.GA31686@hermes>
+References: <1341168983-10756-1-git-send-email-apelete@seketeli.net>
+	<4FF09F24.2080407@gmail.com>
 MIME-Version: 1.0
-Received: by 10.14.210.199 with HTTP; Wed, 4 Jul 2012 11:48:00 -0700 (PDT)
-In-Reply-To: <20120704125810.GA15100@jama.jama.net>
-References: <CAMKF1spU53TcfLHif3CUzrHKqJTT1uBqBqsZAn-zfaBOBecMtw@mail.gmail.com>
-	<20120704125810.GA15100@jama.jama.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Jul 2012 11:48:00 -0700
-Message-ID: <CAMKF1soPi+uVJ95nv-iWfqXvpGqMz9Bm3Er+B+BBE3t9-TC9nw@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] eglibc 2.16
+In-Reply-To: <4FF09F24.2080407@gmail.com>
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [oe-classic][PATCH 0/1] psplash: convert from svn.o-hand.com to git.yoctoproject.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2012 18:59:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Jul 2012 21:51:07 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 4, 2012 at 5:58 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Wed, Jul 04, 2012 at 12:14:29AM -0700, Khem Raj wrote:
->> Hi All,
->>
->> I have pushed a contrib branch with eglibc 2.16 here
->>
->> http://git.openembedded.org/openembedded-core-contrib kraj/eglibc-2.16
->>
->> and I would like some hands in testing it out. I have so far tested
->> core-image-minimal and core-image-sato on all architectures
->> they build and boot fine. There are changes in eglibc which may need
->> tweaking some apps especially if its using gnulib. So give it shot and
->> let me know if you find issues
->>
->> All you need is pull this branch into your sandbox and then set
->>
->> EGLIBCVERSION = "2.16" in your local.conf if using angstrom then add
->> ANGSTROM_EGLIBC_VERSION = "2.16" to local.conf
->
-> Buildtest still runnig (NOTE: Running task 1525 of 17969) sofar only
-> bison failed (missing gets).
->
+Hi Khem,
 
-I have already patched bison this morning so repull the branch
+Le 01-Jul-12, Khem Raj a =E9crit:
+>=20
+> Apelete
+>=20
+> Thanks for all your patches. Could you rebase all your patches against
+> 2011.03 branch and send a pull request for that maintenance branch sinc=
+e
+> it will be of interest to that branch
+>=20
+> Thx
+> - -Khem
 
-> And I belive that grub would need something like this too:
-> https://bugs.gentoo.org/show_bug.cgi?id=424703
->
+Thanks for the advice.
 
-grub too. But I see you submitted same patch there so it should be ok.
-if you can send same for OE-Core and I can update this branch
-> Cheers,
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
->
+I rebased all the patches I have sent to the mailing list,
+unfortunately I discovered new issues while doing a test bake of the
+muffinman-image all these patches were fixing.
+
+I am fixing these new issues now. I will send the appropriate patches
+as usual and then do the pull request once I succeeded in baking
+muffinman-image from 2011.03-maintenance branch, unless you think I
+should proceed otherwise.
+
+Cheers.
+--=20
+        Apelete
 
 
