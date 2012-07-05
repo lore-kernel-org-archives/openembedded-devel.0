@@ -1,35 +1,18 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from nat-lmt.mentorg.com ([139.181.28.34] helo=alm.mentorg.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Smlpv-000336-Ux for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jul 2012 15:11:11 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SmlfA-0004ci-LU for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jul 2012 15:00:04 +0200
-Received: from 188-24-212-149.rdsnet.ro ([188-24-212-149.rdsnet.ro])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2012 15:00:04 +0200
-Received: from remus.simion by 188-24-212-149.rdsnet.ro with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2012 15:00:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ciby_peuse@mentor.com>) id 1Smosd-0001vc-5N
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Jul 2012 18:26:11 +0200
+Received: from localhost.localdomain ([134.86.97.114])
+	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id q65FsxgE016094;
+	Thu, 5 Jul 2012 10:54:59 -0500
+From: Ciby Peuse <ciby_peuse@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-From: Remus Simion <remus.simion@yahoo.com>
-Date: Thu, 5 Jul 2012 12:55:13 +0000 (UTC)
-Message-ID: <loom.20120705T145329-761@post.gmane.org>
-References: <1308476190.18748.6.camel@mattotaupa>
-	<itkmk6$j7n$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 188.24.212.149 (Mozilla/5.0 (X11; U; Linux i686;
-	en-US) AppleWebKit/533.2 (KHTML, like Gecko) Chrome/5.0.342.9
-	Safari/533.2 ChromePlus)
-Subject: Re: Git server error: `fatal: read error: Connection reset by peer`
+Date: Thu,  5 Jul 2012 10:52:58 -0500
+Message-Id: <1341503578-16231-1-git-send-email-ciby_peuse@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Ciby Peuse <ciby_peuse@mentor.com>
+Subject: [meta-oe] libedit: Update LICENSE, adjust DEPENDS assignment and include PR.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,13 +26,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2012 13:11:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Jul 2012 16:26:11 -0000
 
-Thanks for the mirror...It's been 2 days since
- I've started looking for something 
-like this..Finally worked!
+Update to include SPDX license string and include a few other
+improvements to the recipe.
+Signed-off-by: Ciby Peuse <ciby_peuse@mentor.com>
+---
+ .../recipes-devtools/libedit/libedit_20110802.bb   |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb b/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
+index 2aac727..d55eaf6 100644
+--- a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
++++ b/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "BSD replacement for libreadline"
+ HOMEPAGE = "http://www.thrysoee.dk/editline/"
+ SECTION = "libs"
+-LICENSE = "BSD"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1e4228d0c5a9093b01aeaaeae6641533"
+-
+-DEPENDS = "ncurses"
++DEPENDS += "ncurses"
++PR = "r0"
+ 
+ inherit autotools
+ 
+-- 
+1.7.0.4
 
 
 
