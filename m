@@ -1,18 +1,24 @@
-Received: from nat-lmt.mentorg.com ([139.181.28.34] helo=alm.mentorg.com)
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ciby_peuse@mentor.com>) id 1Smosd-0001vc-5N
+	(envelope-from <apelete@seketeli.net>) id 1SmqCK-0003az-MU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Jul 2012 18:26:11 +0200
-Received: from localhost.localdomain ([134.86.97.114])
-	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id q65FsxgE016094;
-	Thu, 5 Jul 2012 10:54:59 -0500
-From: Ciby Peuse <ciby_peuse@mentor.com>
+	Thu, 05 Jul 2012 19:50:36 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id AEC80EA048
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Jul 2012 19:45:13 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 32B22604B5; Thu,  5 Jul 2012 19:39:33 +0200 (CEST)
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jul 2012 10:52:58 -0500
-Message-Id: <1341503578-16231-1-git-send-email-ciby_peuse@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Ciby Peuse <ciby_peuse@mentor.com>
-Subject: [meta-oe] libedit: Update LICENSE, adjust DEPENDS assignment and include PR.
+Date: Thu,  5 Jul 2012 19:39:20 +0200
+Message-Id: <f86819a528b35c48028100f719487a5727cd9e6d.1341438914.git.apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10
+In-Reply-To: <cover.1341438914.git.apelete@seketeli.net>
+References: <cover.1341438914.git.apelete@seketeli.net>
+In-Reply-To: <cover.1341438914.git.apelete@seketeli.net>
+References: <cover.1341438914.git.apelete@seketeli.net>
+Subject: [PATCH 02/14] util-linux-ng: update SRC_URI to kernel.org valid URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,35 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2012 16:26:11 -0000
+X-List-Received-Date: Thu, 05 Jul 2012 17:50:36 -0000
 
-Update to include SPDX license string and include a few other
-improvements to the recipe.
-Signed-off-by: Ciby Peuse <ciby_peuse@mentor.com>
+This updates SRC_URI as the former kernel.org URI was no longer valid.
+This commit is the result of rebasing my patch 8007a4 from master.
+
+Signed-off-by: Apelete Seketeli <apelete@seleteli.net>
+Acked-by: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 ---
- .../recipes-devtools/libedit/libedit_20110802.bb   |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes/util-linux-ng/util-linux-ng.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb b/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
-index 2aac727..d55eaf6 100644
---- a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
-+++ b/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "BSD replacement for libreadline"
- HOMEPAGE = "http://www.thrysoee.dk/editline/"
- SECTION = "libs"
--LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1e4228d0c5a9093b01aeaaeae6641533"
--
--DEPENDS = "ncurses"
-+DEPENDS += "ncurses"
-+PR = "r0"
+diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
+index 51f25b2..102c7d7 100644
+--- a/recipes/util-linux-ng/util-linux-ng.inc
++++ b/recipes/util-linux-ng/util-linux-ng.inc
+@@ -11,7 +11,7 @@ INC_PR = "r36"
+ # allows for a release candidate
+ RC ?= ""
  
- inherit autotools
+-SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/util-linux-ng/v${PV}/util-linux-ng-${PV}${RC}.tar.bz2;name=archive"
++SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/util-linux/v${PV}/util-linux-ng-${PV}${RC}.tar.bz2;name=archive"
+ 
+ SRC_URI_append_chinook-compat = " file://chinook_libtool.patch "
  
 -- 
-1.7.0.4
+1.7.10
 
 
 
