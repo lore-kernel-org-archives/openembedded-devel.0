@@ -1,45 +1,31 @@
-Received: from co1ehsobe003.messaging.microsoft.com ([216.32.180.186]
-	helo=co1outboundpool.messaging.microsoft.com)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1SnApl-0000hJ-Vy
+	(envelope-from <raj.khem@gmail.com>) id 1SnB5t-0001PO-RC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jul 2012 17:52:42 +0200
-Received: from mail169-co1-R.bigfish.com (10.243.78.234) by
-	CO1EHSOBE010.bigfish.com (10.243.66.73) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 6 Jul 2012 15:24:18 +0000
-Received: from mail169-co1 (localhost [127.0.0.1])	by
-	mail169-co1-R.bigfish.com (Postfix) with ESMTP id DC64380016B	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jul 2012 15:24:17 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 3
-X-BigFish: VS3(zzzz1202h1082kzz8275ch8275bhz2dh2a8h668h839hd24he5bhf0ah107ah)
-Received: from mail169-co1 (localhost.localdomain [127.0.0.1]) by mail169-co1
-	(MessageSwitch) id 1341588256456732_4464;
-	Fri,  6 Jul 2012 15:24:16 +0000 (UTC)
-Received: from CO1EHSMHS030.bigfish.com (unknown [10.243.78.247])	by
-	mail169-co1.bigfish.com (Postfix) with ESMTP id 641A3600044	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jul 2012 15:24:16 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS030.bigfish.com
-	(10.243.66.40) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 6 Jul 2012 15:24:16 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.2.298.5; Fri, 6 Jul 2012 10:26:23 -0500
-Received: from right.am.freescale.net (right.am.freescale.net [10.82.176.228])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	q66FQMg1029534 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 Jul 2012 08:26:22 -0700
-From: Matthew McClintock <msm@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Jul 2012 10:26:22 -0500
-Message-ID: <1341588382-17688-1-git-send-email-msm@freescale.com>
-X-Mailer: git-send-email 1.7.10
+	Fri, 06 Jul 2012 18:09:21 +0200
+Received: by eaal1 with SMTP id l1so3572795eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Jul 2012 08:58:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=JFyS8Zhscqt+kuiD/i4lYmq02B413qEBd/ZQLJT1HRw=;
+	b=fFQo0LnY6OSdIenaaRphY+iIuvjLkNTQj9zzAdUTHPFZUf7yZPX0RNyQhHU7EujhX6
+	TpINxEh1jKgTsAinO5TMw+mT1yHQCrHZ+r3h11OEvvf2GaxLiE4rL/YQ0um6KF4XuIHD
+	iKwqqr2Fgf+5qMcwxAdWDq09+CDzutzvGo17+QQ10ZmgzbJvAexS513oQRUU97wDWwqO
+	+XGgrxR2+Lv68EN8jTKmltZ7DLoubcI6Fan5/0eu33LZh07mldw12Igqg55oi2LEDZV+
+	B9wteZpS5j/7UVnfKKtw+tn0n1cTt2HqVGhAY+xY86u6AOk+8b73jsnpSUAWYltaK9He
+	znXA==
+Received: by 10.14.99.201 with SMTP id x49mr5822658eef.142.1341590296161; Fri,
+	06 Jul 2012 08:58:16 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [PATCH] cramfs_cvs.bb: fix compile step so it can be rerun without failing
+Received: by 10.14.210.199 with HTTP; Fri, 6 Jul 2012 08:57:45 -0700 (PDT)
+In-Reply-To: <1341588382-17688-1-git-send-email-msm@freescale.com>
+References: <1341588382-17688-1-git-send-email-msm@freescale.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 6 Jul 2012 08:57:45 -0700
+Message-ID: <CAMKF1sofwemm9LTT5_GW5JvuXxEvro0trn_-=EmoUwDU-ASiuw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] cramfs_cvs.bb: fix compile step so it can be rerun without failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,37 +39,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2012 15:52:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 Jul 2012 16:09:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Matthew McClintock <msm@freescale.com>
----
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |    2 ++
- 1 file changed, 2 insertions(+)
+On Fri, Jul 6, 2012 at 8:26 AM, Matthew McClintock <msm@freescale.com> wrote:
+>
+>  do_compile_prepend() {
+> +       unlink Makefile || true
+>          ln -s GNUmakefile Makefile
+>  }
 
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-index 667097c..61a3fdd 100644
---- a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-+++ b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb0
- DEPENDS = "zlib"
- SRCDATE = "20110110"
- PV = "1.1+cvs${SRCDATE}"
-+PR = "r1"
- 
- SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
- S = "${WORKDIR}/linux/scripts/cramfs"
-@@ -16,6 +17,7 @@ EXTRA_OEMAKE = "\
- 
- 
- do_compile_prepend() {
-+	unlink Makefile || true
-         ln -s GNUmakefile Makefile
- }
- 
--- 
-1.7.10
-
-
+why not just ln -sf ?
 
 
