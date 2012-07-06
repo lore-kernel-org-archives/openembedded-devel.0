@@ -1,35 +1,35 @@
 Received: from mail-gh0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Smz86-00041D-Fp
+	(envelope-from <elvis.dowson@gmail.com>) id 1Smz87-00041A-FH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jul 2012 05:22:50 +0200
-Received: by ghbz2 with SMTP id z2so7673712ghb.6
+	Fri, 06 Jul 2012 05:22:51 +0200
+Received: by ghbz2 with SMTP id z2so7673686ghb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2012 20:11:45 -0700 (PDT)
+	Thu, 05 Jul 2012 20:11:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=KXnInG+mdQ2faTrydXwcjJ/xTGuhVhF8ecedDXlRq2s=;
-	b=xWWLmbGtaMmqVLWXCbhz0F+SHNoFccGHbLWMcsq2jzltyGjei2BhcQWNcVINAG7Mm+
-	70R9qWuAmpUR033SjFIwbgBQ3BKkMVFXG4qABb3ptZXeFc05dMVgpGU0qFgzbG44n8hw
-	Oxrpkzr9fp6uQMT+U+Z4FM2mMQB7VccnJ0Jnr79fWMrQaq4Tm2LzDMlkk08ZJa1M78ll
-	U4YBPSk/p4EFT9W5uvgakta+I/tU0tk9MjdEgioenvCQn/F0vAF2q/uhgsfaflqw97CB
-	Vb6jjcuRqLSxbscOktfIHHgSUDcB0qqAEhMedYhblPsOCcfn3WpfEoQ0+dMFeQvaWd/p
-	VHvA==
-Received: by 10.66.78.9 with SMTP id x9mr41780641paw.84.1341544304668;
-	Thu, 05 Jul 2012 20:11:44 -0700 (PDT)
+	bh=9nw26SrtfVYCOSTRrX9eu9MeQUq3TqOrLdCeTVABqck=;
+	b=GOHKkIJoR2YlVIOPyLdlZLRZ34bgnFBbxt6qcN7jAHwVDq29/vJREpqENSmvRs5+GZ
+	+o+YWPb9iJEIGqbnvIIiRZYnDJXcEhz0/QSa2yZo9MPHIDYEPnamZUrYQ8CeDtgm7RWe
+	PNoZHcMG8rSmr7h76Wc3Xz9W63Hq4+iCPD13ve9zXMape/qj50COZ3kn92tkd95YQupK
+	CBaYMPnb2GEqHRbyUymo9N1rZui5T5G7bDyTNz3YHcpmr/m/YYAiXoOSk8JPo6mB79in
+	TDrYpoC20sVQO2HuSxYFXycIoHWpvfab24seV6sJS6fYbpwOumWhWUWJiyt5CrBxmyBG
+	DwwA==
+Received: by 10.66.83.226 with SMTP id t2mr41846170pay.38.1341544300622;
+	Thu, 05 Jul 2012 20:11:40 -0700 (PDT)
 Received: from localhost.localdomain ([94.205.108.162])
-	by mx.google.com with ESMTPS id rs4sm20952836pbc.0.2012.07.05.20.11.42
+	by mx.google.com with ESMTPS id rs4sm20952836pbc.0.2012.07.05.20.11.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 05 Jul 2012 20:11:44 -0700 (PDT)
+	Thu, 05 Jul 2012 20:11:40 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Jul 2012 06:52:29 +0400
-Message-Id: <1341543150-25096-3-git-send-email-elvis.dowson@gmail.com>
+Date: Fri,  6 Jul 2012 06:52:28 +0400
+Message-Id: <1341543150-25096-2-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1341543150-25096-1-git-send-email-elvis.dowson@gmail.com>
 References: <1341543150-25096-1-git-send-email-elvis.dowson@gmail.com>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-openembedded 3/4] lighttpd: Rename to lighttpd_1.4.31.bbappend.
+Subject: [meta-openembedded 2/4] networkmanager: Set SYSTEMD_PACKAGES as networkmanager-systemd.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2012 03:22:50 -0000
+X-List-Received-Date: Fri, 06 Jul 2012 03:22:51 -0000
 
-This commit renames the lighttpd bbappend file to match the recipe version
-provided in poky/meta/recipes-extended/lighttpd
+This commit fixes WARNING:
+/tool/yocto/meta-openembedded/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb:
+it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- .../lighttpd/lighttpd_1.4.30.bbappend              |   10 ----------
- .../lighttpd/lighttpd_1.4.31.bbappend              |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
- create mode 100644 meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
+ .../networkmanager/networkmanager_0.9.2.0.bb       |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-deleted file mode 100644
-index 1341405..0000000
---- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.30.bbappend
-+++ /dev/null
-@@ -1,10 +0,0 @@
--FILESEXTRAPATHS := "${THISDIR}/${PN}"
--
--PRINC := "${@int(PRINC) + 3}"
--
--inherit systemd
--
--SRC_URI += "file://lighttpd.service"
--
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+index 221dc2c..d681e0c 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+@@ -54,7 +54,7 @@ do_install_append () {
+ 	install -d ${D}/etc/NetworkManager/VPN
+ }
+ 
 -SYSTEMD_PACKAGES = "${PN}"
--SYSTEMD_SERVICE_${PN} = "lighttpd.service"
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-new file mode 100644
-index 0000000..1341405
---- /dev/null
-+++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-@@ -0,0 +1,10 @@
-+FILESEXTRAPATHS := "${THISDIR}/${PN}"
-+
-+PRINC := "${@int(PRINC) + 3}"
-+
-+inherit systemd
-+
-+SRC_URI += "file://lighttpd.service"
-+
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "lighttpd.service"
++SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE = "NetworkManager.service"
+ 
+ PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
 -- 
 1.7.9.5
 
