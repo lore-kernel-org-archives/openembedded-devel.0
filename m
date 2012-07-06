@@ -1,35 +1,39 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Smz87-00040r-Rv
+	(envelope-from <martin.jansa@gmail.com>) id 1Sn31O-0005WW-4U
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jul 2012 05:22:52 +0200
-Received: by mail-pb0-f47.google.com with SMTP id rq2so13355547pbb.6
+	Fri, 06 Jul 2012 09:32:10 +0200
+Received: by wgbdr1 with SMTP id dr1so8261478wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2012 20:11:48 -0700 (PDT)
+	Fri, 06 Jul 2012 00:21:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=AmEwWgBHT1G/vEXBtFGHGyxWoMs2zkcNolZa8ZomMiU=;
-	b=JmKzsu6t5ArGIyT5fJ2Jldz0kA2inrP93Xu5nxhMZWt4UMA16fupbZV5O6QxayAFYF
-	imwX8dnzsZKzj8+Bg5/F5f73sAc5i8RxRotCFYrclM5nUH4rxyYW2G8/i32eOxj7UTd+
-	8MpGwdmhB0zL/I8cWSWQyIZdwC3D8NKNKl2azVDnkZa3Vs23QumLl/69ZU1/0VRx+Ees
-	YrH29KfnJ0eH7O03yJ+v1eB+0N0WXoyyiqmrK14KisVyjGdw2rIh/vbzyeUnEkWbT+Oa
-	p3tnHLOSXwCL7wZuIIeO01aKPY9SPeduJTjBboi0sBpYO0fLEyTi4qUhP84YY5PXE7H2
-	Z6xQ==
-Received: by 10.68.241.228 with SMTP id wl4mr32850150pbc.51.1341544308667;
-	Thu, 05 Jul 2012 20:11:48 -0700 (PDT)
-Received: from localhost.localdomain ([94.205.108.162])
-	by mx.google.com with ESMTPS id rs4sm20952836pbc.0.2012.07.05.20.11.46
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=vNNuP4JpQnl77sK7C1blSUGqen4zK8yRB28g6Pihlow=;
+	b=NJib+vWJLapMtIaNdwjXwOU6eM6sXrNGihspXJRZL+amJgShSd/7hmxEivoMyGSQY+
+	u13eGAlmO/v6DJRUbc8BCj0enJSqvZj1RnfKTwAyCyPcAnATZGY4daxBe78ajUCsQX4A
+	zcwXPNScfnR0tvuTPRaB68iwahc+GftVBhtwmt2QjGI9aHBiguL0E3PX8y4G3WB/70pd
+	WjEPKvksj0sP+FP7V/UrfWJMzrY4nc1kGh9LMoxIUBsyxBidKc6cXS7JVEoXQPFdkGtz
+	XlXJJ1pCyn7TcUSO2iEUTeCanyLsAVEIppIU72FsiuVEAv4F+u/5rXsQww36Ci1e/k38
+	H5iA==
+Received: by 10.216.166.197 with SMTP id g47mr9005799wel.179.1341559264887;
+	Fri, 06 Jul 2012 00:21:04 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id db7sm4295702wib.6.2012.07.06.00.21.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 05 Jul 2012 20:11:48 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Jul 2012 06:52:30 +0400
-Message-Id: <1341543150-25096-4-git-send-email-elvis.dowson@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1341543150-25096-1-git-send-email-elvis.dowson@gmail.com>
-References: <1341543150-25096-1-git-send-email-elvis.dowson@gmail.com>
-Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-openembedded 4/4] lighttpd: Set SYSTEMD_PACKAGES as lighttpd-systemd.
+	Fri, 06 Jul 2012 00:21:03 -0700 (PDT)
+Date: Fri, 6 Jul 2012 09:21:02 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Elvis Dowson <elvis.dowson@gmail.com>
+Message-ID: <20120706072102.GG3708@jama.jama.net>
+References: <1341518383-20990-1-git-send-email-elvis.dowson@gmail.com>
+	<20120705201635.GC3708@jama.jama.net>
+	<80F4FA6C-14E4-4392-9796-D4D5D7090C3C@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <80F4FA6C-14E4-4392-9796-D4D5D7090C3C@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-openembedded] lighttpd: Rename to lighttpd_1.4.31.bbappend.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +47,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2012 03:22:52 -0000
+X-List-Received-Date: Fri, 06 Jul 2012 07:32:10 -0000
+X-Groupsio-MsgNum: 39502
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WkfBGePaEyrk4zXB"
+Content-Disposition: inline
 
-This commit fixes WARNING:
-/tool/yocto/poky/meta/recipes-extended/lighttpd/lighttpd_1.4.31.bb:
-it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd
+--WkfBGePaEyrk4zXB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
----
- .../lighttpd/lighttpd_1.4.31.bbappend              |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, Jul 06, 2012 at 07:00:46AM +0400, Elvis Dowson wrote:
+> Hi,
+>=20
+> On Jul 6, 2012, at 12:16 AM, Martin Jansa wrote:
+>=20
+> > On Thu, Jul 05, 2012 at 11:59:43PM +0400, Elvis Dowson wrote:
+> >> This commit renames the lighttpd bbappend file to match the recipe ver=
+sion
+> >> provided in poky/meta-oe/recipes-extended/lighttpd
+> >=20
+> > This ^ doesn't make sense to me.
+> >=20
+> > Recipes are provided by oe-core and path
+> > poky/meta-oe/recipes-extended/lighttpd doesn't exist in poky repo AFAIK.
+> >=20
+>=20
+> The comment should have read poky/meta/recipes-extended/lighttpd
+>=20
+> http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-extended=
+/lighttpd
 
-diff --git a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-index 1341405..b02f35c 100644
---- a/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-+++ b/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-@@ -6,5 +6,5 @@ inherit systemd
- 
- SRC_URI += "file://lighttpd.service"
- 
--SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE_${PN} = "lighttpd.service"
--- 
-1.7.9.5
+No, that repo from where they come is called oe-core and poky as repo is
+just mixin of other repositories.
 
+so call it oe-core and if you want to provide path then without "poky/"
+prefix.
 
+Cheers,
 
+>=20
+> I will resend the patch, after correcting the comments.
+>=20
+> Elvis Dowson
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--WkfBGePaEyrk4zXB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAk/2kd4ACgkQN1Ujt2V2gBw6YQCePAr6TUxRTkibRoSSdxcvN3vT
+/REAnRchrCi+e410io7NPQBsH1B9WITz
+=hLM3
+-----END PGP SIGNATURE-----
+
+--WkfBGePaEyrk4zXB--
