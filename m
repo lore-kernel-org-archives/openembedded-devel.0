@@ -1,39 +1,33 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1Smyxa-0003sP-4V
+	(envelope-from <elvis.dowson@gmail.com>) id 1Smz7w-00040r-8h
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Jul 2012 05:11:58 +0200
-Received: by pbbrq2 with SMTP id rq2so13343886pbb.6
+	Fri, 06 Jul 2012 05:22:40 +0200
+Received: by pbbrq2 with SMTP id rq2so13355547pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jul 2012 20:00:52 -0700 (PDT)
+	Thu, 05 Jul 2012 20:11:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=xlZkVIcqQL6dLlB9uCLU2CbAOmeXbxypbQHZxGSGoqs=;
-	b=jSCvfalruro3b7cWANr7e4ss3SN1l2Shqr+/d0/TBR5p0/MBhQAPtV9gxBYtRIiEF1
-	4Yje/WYxsJarKZdA4xNZUDc4d0bDg0G/1l2Z9/a4a3YTwdCeVyesK6rBrJ3gPBDWTiG6
-	XZTn+DeSialYCFAH41pkIu1Ncvc2ZGkkYdh9XivE1CvC1uR0WoqC1yJOfXfeyLBxzntM
-	EXJ82foOPDNop1j4r7R30o06HMAmGH1Pmi7kWAZEtKC/xeI95f+/IuyNhUih8szsWyA5
-	F1E/Y05lvQmwfPWGBxjkchg9/3+P4KB/iyUaUoWnssTBSh37ww4PkjZoA/E0s9P8eC98
-	8IHw==
-Received: by 10.68.232.201 with SMTP id tq9mr32476294pbc.70.1341543651911;
-	Thu, 05 Jul 2012 20:00:51 -0700 (PDT)
-Received: from [192.168.1.101] ([94.205.108.162])
-	by mx.google.com with ESMTPS id
-	qd10sm20922152pbb.38.2012.07.05.20.00.50
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=mTQI6fsTrOvRw0HgM9Jwc2s3x9RGgMzQ1XZnkVu5kVY=;
+	b=WP7BL9Ud+lsNFHeNYLIfd7FHECI4fTdLBbACXBCg+yfqPjXTTEJjdUoE2kW+Tx54rZ
+	f4+Jk9jLYT9BV23S7sXQyNcJ3XQEB7Uk/nYvSlwr8yDCAA2/YBGF3sbo4Dmu+Vsx3xop
+	ZdPpIyum8teFjxFnpwy+8bYIeJgye2TJaxBOwtALstJvWDMOAnJzjcHc6GtxRFBo3Q37
+	ybK1iSnsazuOqLB9eg6LY5ugTrY3xvd+6dr0gDFRmlLOhxdChzBdK+34tJATFKEWlw+R
+	wF4FBEcR0mnx8VTkiN3S+u1FKBcJAAL7ASKeP+IoWnircSU/TRRY6mcreG4fGlPALDN7
+	HJxA==
+Received: by 10.68.195.97 with SMTP id id1mr33678612pbc.91.1341544294263;
+	Thu, 05 Jul 2012 20:11:34 -0700 (PDT)
+Received: from localhost.localdomain ([94.205.108.162])
+	by mx.google.com with ESMTPS id rs4sm20952836pbc.0.2012.07.05.20.11.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 05 Jul 2012 20:00:51 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
+	Thu, 05 Jul 2012 20:11:33 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <20120705201635.GC3708@jama.jama.net>
-Date: Fri, 6 Jul 2012 07:00:46 +0400
-Message-Id: <80F4FA6C-14E4-4392-9796-D4D5D7090C3C@gmail.com>
-References: <1341518383-20990-1-git-send-email-elvis.dowson@gmail.com>
-	<20120705201635.GC3708@jama.jama.net>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1278)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-openembedded] lighttpd: Rename to lighttpd_1.4.31.bbappend.
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Jul 2012 06:52:27 +0400
+Message-Id: <1341543150-25096-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [meta-openembedded 1/4] python_numpy: Fix SRC_URI warnings.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2012 03:11:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Jul 2012 03:22:40 -0000
 
-Hi,
+This commit fixes the following warnings:
+WARNING: Unable to get checksum for python-numpy SRC_URI entry config.h: file could not be found
+WARNING: Unable to get checksum for python-numpy SRC_URI entry numpyconfig.h: file could not be found
 
-On Jul 6, 2012, at 12:16 AM, Martin Jansa wrote:
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+---
+ .../recipes-devtools/python/python-numpy_1.4.1.bb  |    9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-> On Thu, Jul 05, 2012 at 11:59:43PM +0400, Elvis Dowson wrote:
->> This commit renames the lighttpd bbappend file to match the recipe =
-version
->> provided in poky/meta-oe/recipes-extended/lighttpd
->=20
-> This ^ doesn't make sense to me.
->=20
-> Recipes are provided by oe-core and path
-> poky/meta-oe/recipes-extended/lighttpd doesn't exist in poky repo =
-AFAIK.
->=20
-
-The comment should have read poky/meta/recipes-extended/lighttpd
-
-=
-http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-extended/=
-lighttpd
-
-I will resend the patch, after correcting the comments.
-
-Elvis Dowson
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index a67bf8b..c1923f7 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -5,7 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
+ PR = "r3"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+-	   file://config.h \
++           ${CONFIGFILESURI} \
++	  "
++CONFIGFILESURI ?= ""
++
++CONFIGFILESURI_arm = "file://config.h \
++	   file://numpyconfig.h \
++	  "
++CONFIGFILESURI_mipsel = "file://config.h \
+ 	   file://numpyconfig.h \
+ 	  "
+ 
+-- 
+1.7.9.5
 
 
 
