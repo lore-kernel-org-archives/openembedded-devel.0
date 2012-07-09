@@ -1,20 +1,20 @@
 Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SoNSx-00074W-Qj
+	(envelope-from <andrea.adami@gmail.com>) id 1SoNT0-00074W-Nt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jul 2012 01:34:08 +0200
+	Tue, 10 Jul 2012 01:34:10 +0200
 Received: from mizar.localdomain (87.0.20.4) by smtp209.alice.it (8.6.023.02)
-	id 4EF08A6317B3EB21; Tue, 10 Jul 2012 01:22:59 +0200
+	id 4EF08A6317B3EB4E; Tue, 10 Jul 2012 01:23:02 +0200
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jul 2012 01:22:35 +0200
-Message-Id: <ca099046a6511e18ce4e112a2900d188ae905a1c.1341875525.git.andrea.adami@gmail.com>
+Date: Tue, 10 Jul 2012 01:22:36 +0200
+Message-Id: <3e4f1e54f5510b91b2c222df745a5d86ddc917b7.1341875525.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1341875525.git.andrea.adami@gmail.com>
 References: <cover.1341875525.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1341875525.git.andrea.adami@gmail.com>
 References: <cover.1341875525.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 1/5] linux_3.1: remove obsoleted Zaurus defconfig
+Subject: [meta-handheld][PATCH 2/5] linux_3.2: remove obsolete recipe and defconfigs (was Zaurus-only)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,33 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 23:34:08 -0000
+X-List-Received-Date: Mon, 09 Jul 2012 23:34:11 -0000
+
+* we use now linux-yocto
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
  ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 --
- recipes-kernel/linux/linux-3.1/akita/defconfig     |  379 --------------------
- recipes-kernel/linux/linux-3.1/c7x0/defconfig      |  316 ----------------
- recipes-kernel/linux/linux-3.1/collie/defconfig    |  322 -----------------
- .../linux/linux-3.1/locomo_kbd_tweak-r2.patch      |   66 ----
- recipes-kernel/linux/linux-3.1/poodle/defconfig    |  317 ----------------
- recipes-kernel/linux/linux-3.1/spitz/defconfig     |  378 -------------------
- recipes-kernel/linux/linux-3.1/tosa/defconfig      |  379 --------------------
- recipes-kernel/linux/linux_3.1.bb                  |   13 +-
- 9 files changed, 2 insertions(+), 2202 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
- delete mode 100644 recipes-kernel/linux/linux-3.1/akita/defconfig
- delete mode 100644 recipes-kernel/linux/linux-3.1/c7x0/defconfig
- delete mode 100644 recipes-kernel/linux/linux-3.1/collie/defconfig
- delete mode 100644 recipes-kernel/linux/linux-3.1/locomo_kbd_tweak-r2.patch
- delete mode 100644 recipes-kernel/linux/linux-3.1/poodle/defconfig
- delete mode 100644 recipes-kernel/linux/linux-3.1/spitz/defconfig
- delete mode 100644 recipes-kernel/linux/linux-3.1/tosa/defconfig
+ recipes-kernel/linux/linux-3.2/akita/defconfig     |  375 -------------------
+ recipes-kernel/linux/linux-3.2/c7x0/defconfig      |  312 ----------------
+ recipes-kernel/linux/linux-3.2/collie/defconfig    |  319 -----------------
+ .../linux-3.2/collie_remove_irq_to_gpio.patch      |   31 --
+ .../linux/linux-3.2/locomo_kbd_tweak-r2.patch      |   66 ----
+ recipes-kernel/linux/linux-3.2/poodle/defconfig    |  314 ----------------
+ recipes-kernel/linux/linux-3.2/spitz/defconfig     |  374 -------------------
+ recipes-kernel/linux/linux-3.2/tosa/defconfig      |  376 --------------------
+ recipes-kernel/linux/linux_3.2.bb                  |   25 --
+ 10 files changed, 0 insertions(+), 2226 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-3.2/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.2/akita/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.2/c7x0/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.2/collie/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.2/collie_remove_irq_to_gpio.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.2/locomo_kbd_tweak-r2.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.2/poodle/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.2/spitz/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.2/tosa/defconfig
+ delete mode 100644 recipes-kernel/linux/linux_3.2.bb
 
-diff --git a/recipes-kernel/linux/linux-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch b/recipes-kernel/linux/linux-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+diff --git a/recipes-kernel/linux/linux-3.2/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch b/recipes-kernel/linux/linux-3.2/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
 deleted file mode 100644
 index d86b47d..0000000
---- a/recipes-kernel/linux/linux-3.1/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+--- a/recipes-kernel/linux/linux-3.2/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
 +++ /dev/null
 @@ -1,34 +0,0 @@
 -From 31d99c4c9f14e571ca0e22c5862dd5b6a871e2dd Mon Sep 17 00:00:00 2001
@@ -91,12 +96,12 @@ index d86b47d..0000000
 --- 
 -1.7.2.5
 -
-diff --git a/recipes-kernel/linux/linux-3.1/akita/defconfig b/recipes-kernel/linux/linux-3.1/akita/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/akita/defconfig b/recipes-kernel/linux/linux-3.2/akita/defconfig
 deleted file mode 100644
-index 0f08d40..0000000
---- a/recipes-kernel/linux/linux-3.1/akita/defconfig
+index 96f0b58..0000000
+--- a/recipes-kernel/linux/linux-3.2/akita/defconfig
 +++ /dev/null
-@@ -1,379 +0,0 @@
+@@ -1,375 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -133,7 +138,7 @@ index 0f08d40..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 quiet"
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -240,13 +245,11 @@ index 0f08d40..0000000
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
 -CONFIG_TUN=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
--CONFIG_AIRO_CS=m
--CONFIG_HOSTAP=m
--CONFIG_HOSTAP_FIRMWARE=y
--CONFIG_HOSTAP_CS=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_USB_CATC=m
 -CONFIG_USB_KAWETH=m
 -CONFIG_USB_PEGASUS=m
@@ -255,12 +258,10 @@ index 0f08d40..0000000
 -CONFIG_USB_NET_DM9601=m
 -# CONFIG_USB_NET_CDC_SUBSET is not set
 -CONFIG_USB_SIERRA_NET=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
+-CONFIG_AIRO_CS=m
+-CONFIG_HOSTAP=m
+-CONFIG_HOSTAP_FIRMWARE=y
+-CONFIG_HOSTAP_CS=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
@@ -280,7 +281,6 @@ index 0f08d40..0000000
 -CONFIG_SERIAL_8250_CS=m
 -CONFIG_SERIAL_PXA=y
 -CONFIG_SERIAL_PXA_CONSOLE=y
--CONFIG_SPI=y
 -CONFIG_SPI_PXA2XX=y
 -CONFIG_GPIO_SYSFS=y
 -CONFIG_POWER_SUPPLY=y
@@ -392,12 +392,13 @@ index 0f08d40..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_PXA=m
+-CONFIG_RTC_DRV_PXA=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -476,12 +477,12 @@ index 0f08d40..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux-3.1/c7x0/defconfig b/recipes-kernel/linux/linux-3.1/c7x0/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/c7x0/defconfig b/recipes-kernel/linux/linux-3.2/c7x0/defconfig
 deleted file mode 100644
-index 1889e09..0000000
---- a/recipes-kernel/linux/linux-3.1/c7x0/defconfig
+index 92d69f4..0000000
+--- a/recipes-kernel/linux/linux-3.2/c7x0/defconfig
 +++ /dev/null
-@@ -1,316 +0,0 @@
+@@ -1,312 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -518,7 +519,7 @@ index 1889e09..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 quiet"
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -619,21 +620,17 @@ index 1889e09..0000000
 -CONFIG_PATA_PXA=y
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
--CONFIG_TUN=m
 -CONFIG_MII=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
+-CONFIG_TUN=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_AIRO_CS=m
 -CONFIG_HOSTAP=m
 -CONFIG_HOSTAP_FIRMWARE=y
 -CONFIG_HOSTAP_CS=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
@@ -655,7 +652,6 @@ index 1889e09..0000000
 -CONFIG_SERIAL_PXA_CONSOLE=y
 -CONFIG_I2C=y
 -CONFIG_I2C_PXA=y
--CONFIG_SPI=y
 -CONFIG_SPI_PXA2XX=y
 -CONFIG_GPIO_SYSFS=y
 -CONFIG_POWER_SUPPLY=y
@@ -714,12 +710,13 @@ index 1889e09..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_SA1100=m
+-CONFIG_RTC_DRV_SA1100=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -798,12 +795,12 @@ index 1889e09..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux-3.1/collie/defconfig b/recipes-kernel/linux/linux-3.1/collie/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/collie/defconfig b/recipes-kernel/linux/linux-3.2/collie/defconfig
 deleted file mode 100644
-index 1af2dc8..0000000
---- a/recipes-kernel/linux/linux-3.1/collie/defconfig
+index 3cc4642..0000000
+--- a/recipes-kernel/linux/linux-3.2/collie/defconfig
 +++ /dev/null
-@@ -1,322 +0,0 @@
+@@ -1,319 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -838,7 +835,7 @@ index 1af2dc8..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 quiet"
+-CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -948,21 +945,17 @@ index 1af2dc8..0000000
 -CONFIG_ATA=y
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
--CONFIG_TUN=m
 -CONFIG_MII=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
+-CONFIG_TUN=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_AIRO_CS=m
 -CONFIG_HOSTAP=m
 -CONFIG_HOSTAP_FIRMWARE=y
 -CONFIG_HOSTAP_CS=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
@@ -1042,12 +1035,13 @@ index 1af2dc8..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_SA1100=m
+-CONFIG_RTC_DRV_SA1100=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -1126,10 +1120,47 @@ index 1af2dc8..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux-3.1/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-3.1/locomo_kbd_tweak-r2.patch
+diff --git a/recipes-kernel/linux/linux-3.2/collie_remove_irq_to_gpio.patch b/recipes-kernel/linux/linux-3.2/collie_remove_irq_to_gpio.patch
+deleted file mode 100644
+index 0c277e0..0000000
+--- a/recipes-kernel/linux/linux-3.2/collie_remove_irq_to_gpio.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 629bcb4b72d49b3631ae3dd0fe1d345820fadfcc Mon Sep 17 00:00:00 2001
+-From: Jochen Friedrich <jochen@scram.de>
+-Date: Sat, 19 Nov 2011 19:26:37 +0100
+-Subject: [PATCH] collie_battery: Get rid of irq_to_gpio usage
+-
+-Since 9d08d5d77a355510c2f5657c86b0a4b25acfe72c, irq_to_gpio() is no
+-longer available but still in use by collie_battery.c. As it's just
+-for a debug message, just get rid of this call.
+-
+-Signed-off-by: Jochen Friedrich <jochen@scram.de>
+-Signed-off-by: Anton Vorontsov <cbouatmailru@gmail.com>
+----
+- drivers/power/collie_battery.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/drivers/power/collie_battery.c b/drivers/power/collie_battery.c
+-index 548d263..7a40fce 100644
+---- a/drivers/power/collie_battery.c
+-+++ b/drivers/power/collie_battery.c
+-@@ -146,7 +146,7 @@ static void collie_bat_external_power_changed(struct power_supply *psy)
+- 
+- static irqreturn_t collie_bat_gpio_isr(int irq, void *data)
+- {
+--	pr_info("collie_bat_gpio irq: %d\n", gpio_get_value(irq_to_gpio(irq)));
+-+	pr_info("collie_bat_gpio irq\n");
+- 	schedule_work(&bat_work);
+- 	return IRQ_HANDLED;
+- }
+--- 
+-1.7.6.5
+-
+diff --git a/recipes-kernel/linux/linux-3.2/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-3.2/locomo_kbd_tweak-r2.patch
 deleted file mode 100644
 index 0d47ade..0000000
---- a/recipes-kernel/linux/linux-3.1/locomo_kbd_tweak-r2.patch
+--- a/recipes-kernel/linux/linux-3.2/locomo_kbd_tweak-r2.patch
 +++ /dev/null
 @@ -1,66 +0,0 @@
 - drivers/input/keyboard/locomokbd.c |   61 +++++++++++++++++++++++--------------
@@ -1198,12 +1229,12 @@ index 0d47ade..0000000
 - 
 - struct locomokbd {
 - 	unsigned char keycode[LOCOMOKBD_NUMKEYS];
-diff --git a/recipes-kernel/linux/linux-3.1/poodle/defconfig b/recipes-kernel/linux/linux-3.1/poodle/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/poodle/defconfig b/recipes-kernel/linux/linux-3.2/poodle/defconfig
 deleted file mode 100644
-index 5419365..0000000
---- a/recipes-kernel/linux/linux-3.1/poodle/defconfig
+index 0b03dda..0000000
+--- a/recipes-kernel/linux/linux-3.2/poodle/defconfig
 +++ /dev/null
-@@ -1,317 +0,0 @@
+@@ -1,314 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -1238,7 +1269,7 @@ index 5419365..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 quiet"
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -1340,21 +1371,17 @@ index 5419365..0000000
 -CONFIG_PATA_PXA=y
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
--CONFIG_TUN=m
 -CONFIG_MII=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
+-CONFIG_TUN=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_AIRO_CS=m
 -CONFIG_HOSTAP=m
 -CONFIG_HOSTAP_FIRMWARE=y
 -CONFIG_HOSTAP_CS=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
@@ -1437,12 +1464,13 @@ index 5419365..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_SA1100=m
+-CONFIG_RTC_DRV_SA1100=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -1521,12 +1549,12 @@ index 5419365..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux-3.1/spitz/defconfig b/recipes-kernel/linux/linux-3.1/spitz/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/spitz/defconfig b/recipes-kernel/linux/linux-3.2/spitz/defconfig
 deleted file mode 100644
-index 4b8d8bc..0000000
---- a/recipes-kernel/linux/linux-3.1/spitz/defconfig
+index dd790e3..0000000
+--- a/recipes-kernel/linux/linux-3.2/spitz/defconfig
 +++ /dev/null
-@@ -1,378 +0,0 @@
+@@ -1,374 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -1562,7 +1590,7 @@ index 4b8d8bc..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 quiet"
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -1669,13 +1697,11 @@ index 4b8d8bc..0000000
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
 -CONFIG_TUN=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
--CONFIG_AIRO_CS=m
--CONFIG_HOSTAP=m
--CONFIG_HOSTAP_FIRMWARE=y
--CONFIG_HOSTAP_CS=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_USB_CATC=m
 -CONFIG_USB_KAWETH=m
 -CONFIG_USB_PEGASUS=m
@@ -1684,12 +1710,10 @@ index 4b8d8bc..0000000
 -CONFIG_USB_NET_DM9601=m
 -# CONFIG_USB_NET_CDC_SUBSET is not set
 -CONFIG_USB_SIERRA_NET=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
+-CONFIG_AIRO_CS=m
+-CONFIG_HOSTAP=m
+-CONFIG_HOSTAP_FIRMWARE=y
+-CONFIG_HOSTAP_CS=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
@@ -1709,7 +1733,6 @@ index 4b8d8bc..0000000
 -CONFIG_SERIAL_8250_CS=m
 -CONFIG_SERIAL_PXA=y
 -CONFIG_SERIAL_PXA_CONSOLE=y
--CONFIG_SPI=y
 -CONFIG_SPI_PXA2XX=y
 -CONFIG_GPIO_SYSFS=y
 -CONFIG_POWER_SUPPLY=y
@@ -1821,12 +1844,13 @@ index 4b8d8bc..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_PXA=m
+-CONFIG_RTC_DRV_PXA=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -1905,12 +1929,12 @@ index 4b8d8bc..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux-3.1/tosa/defconfig b/recipes-kernel/linux/linux-3.1/tosa/defconfig
+diff --git a/recipes-kernel/linux/linux-3.2/tosa/defconfig b/recipes-kernel/linux/linux-3.2/tosa/defconfig
 deleted file mode 100644
-index 9056e6d..0000000
---- a/recipes-kernel/linux/linux-3.1/tosa/defconfig
+index b01a366..0000000
+--- a/recipes-kernel/linux/linux-3.2/tosa/defconfig
 +++ /dev/null
-@@ -1,379 +0,0 @@
+@@ -1,376 +0,0 @@
 -CONFIG_EXPERIMENTAL=y
 -# CONFIG_LOCALVERSION_AUTO is not set
 -CONFIG_SYSVIPC=y
@@ -1946,7 +1970,7 @@ index 9056e6d..0000000
 -CONFIG_AEABI=y
 -CONFIG_ZBOOT_ROM_TEXT=0x0
 -CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 quiet"
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 loglevel=3"
 -CONFIG_KEXEC=y
 -# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 -CONFIG_BINFMT_AOUT=m
@@ -2055,13 +2079,11 @@ index 9056e6d..0000000
 -CONFIG_PATA_PCMCIA=y
 -CONFIG_NETDEVICES=y
 -CONFIG_TUN=m
--CONFIG_NET_ETHERNET=y
--# CONFIG_NETDEV_1000 is not set
--# CONFIG_NETDEV_10000 is not set
--CONFIG_AIRO_CS=m
--CONFIG_HOSTAP=m
--CONFIG_HOSTAP_FIRMWARE=y
--CONFIG_HOSTAP_CS=m
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
 -CONFIG_USB_CATC=m
 -CONFIG_USB_KAWETH=m
 -CONFIG_USB_PEGASUS=m
@@ -2070,12 +2092,10 @@ index 9056e6d..0000000
 -CONFIG_USB_NET_DM9601=m
 -# CONFIG_USB_NET_CDC_SUBSET is not set
 -CONFIG_USB_SIERRA_NET=m
--CONFIG_NET_PCMCIA=y
--CONFIG_PCMCIA_PCNET=m
--CONFIG_PPP=m
--CONFIG_PPP_ASYNC=m
--CONFIG_PPP_DEFLATE=m
--CONFIG_PPP_BSDCOMP=m
+-CONFIG_AIRO_CS=m
+-CONFIG_HOSTAP=m
+-CONFIG_HOSTAP_FIRMWARE=y
+-CONFIG_HOSTAP_CS=m
 -# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
 -CONFIG_INPUT_MOUSEDEV_SCREEN_X=480
 -CONFIG_INPUT_MOUSEDEV_SCREEN_Y=640
@@ -2206,12 +2226,13 @@ index 9056e6d..0000000
 -CONFIG_LEDS_TRIGGER_TIMER=y
 -CONFIG_LEDS_TRIGGER_HEARTBEAT=y
 -CONFIG_RTC_CLASS=y
--CONFIG_RTC_DRV_SA1100=m
+-CONFIG_RTC_DRV_SA1100=y
 -CONFIG_EXT2_FS=y
 -CONFIG_EXT3_FS=y
 -# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
 -# CONFIG_EXT3_FS_XATTR is not set
 -CONFIG_EXT4_FS=y
+-CONFIG_AUTOFS4_FS=y
 -CONFIG_VFAT_FS=y
 -CONFIG_TMPFS=y
 -CONFIG_TMPFS_POSIX_ACL=y
@@ -2290,36 +2311,37 @@ index 9056e6d..0000000
 -# CONFIG_CRYPTO_HW is not set
 -CONFIG_CRC_CCITT=y
 -CONFIG_LIBCRC32C=m
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index 40487d1..70e604a 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -1,7 +1,7 @@
- require linux.inc
- 
--PR = "${INC_PR}.10"
--COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz|h1940)"
-+PR = "${INC_PR}.11"
-+COMPATIBLE_MACHINE = "h1940"
- 
- SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
-            ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=stablepatch \
-@@ -9,15 +9,6 @@ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kerne
-            file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
-            "
- 
+diff --git a/recipes-kernel/linux/linux_3.2.bb b/recipes-kernel/linux/linux_3.2.bb
+deleted file mode 100644
+index eb9cc34..0000000
+--- a/recipes-kernel/linux/linux_3.2.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-require linux.inc
+-
+-PR = "${INC_PR}.5"
+-COMPATIBLE_MACHINE = "(akita|c7x0|collie|poodle|tosa|spitz)"
+-
+-SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.12.bz2;apply=yes;name=stablepatch \
+-           file://defconfig \
+-           file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 \
+-           "
+-
 -SRC_URI_append_collie = " \
 -                         file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
 -                         file://locomo_kbd_tweak-r2.patch \
+-                         file://collie_remove_irq_to_gpio.patch \
 -                         "
 -
 -SRC_URI_append_poodle = " \
 -                         file://locomo_kbd_tweak-r2.patch \
 -                         "
 -
- SRC_URI_append_h1940 = " \
-                         file://0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch \
-                         file://0002-s3cmci-minor-fixups.patch \
+-SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
+-SRC_URI[kernel.sha256sum] = "c881fc2b53cf0da7ca4538aa44623a7de043a41f76fd5d0f51a31f6ed699d463"
+-SRC_URI[stablepatch.md5sum] = "377a6d731cd246aaa0c0f6a432b7aece"
+-SRC_URI[stablepatch.sha256sum] = "c6991964901ef7797cca09ff9d1b4ed7abda27e2796ad55cad09a266eaaebb5d"
 -- 
 1.7.8.6
 
