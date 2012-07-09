@@ -1,22 +1,32 @@
-Received: from smtp203.alice.it ([82.57.200.99])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@eukrea.com>) id 1SoEeh-00049g-3V
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2012 16:09:39 +0200
-Received: from denis-n73sv.localnet (79.7.128.87) by smtp203.alice.it
-	(8.6.023.02) (authenticated as editempo@alice.it)
-	id 4ECA5E230819A552 for openembedded-devel@lists.openembedded.org;
-	Mon, 9 Jul 2012 15:52:49 +0200
-From: Denis Carikli <denis@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 09 Jul 2012 15:52:48 +0200
-Message-ID: <25319920.MRo7ttM4mH@denis-n73sv>
-Organization: Eukrea
-User-Agent: KMail/4.7.3 (Linux/3.0.0-20-generic-pae; KDE/4.7.4; i686; ; )
-In-Reply-To: <1340890700-31781-1-git-send-email-denis@eukrea.com>
-References: <1340890700-31781-1-git-send-email-denis@eukrea.com>
+	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)
+	id 1SoFSb-0005Hq-2P for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jul 2012 17:01:13 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q69EiOcq019725
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jul 2012 09:44:24 -0500
+Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q69EiOVZ025511
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Jul 2012 09:44:24 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Mon, 9 Jul 2012
+	09:44:24 -0500
+Received: from sdit-build02.dal.design.ti.com (sdit-build02.dal.design.ti.com
+	[10.247.66.5])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	q69EiOpv003107;	Mon, 9 Jul 2012 09:44:24 -0500
+Received: from a0273011 by sdit-build02.dal.design.ti.com with local (Exim
+	4.71)	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)	id
+	1SoFar-0007qP-LP; Mon, 09 Jul 2012 10:09:45 -0500
+From: Franklin S Cooper Jr <fcooper@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 9 Jul 2012 10:09:19 -0500
+Message-ID: <1341846559-30125-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] xserver-common 1.34: sync /etc/X11/Xsession.d/90xXWindowManager with x11-common(oe-core)
+Subject: [PATCH] psplash - Update to latest psplash version. LIC_CHKSUM Tweak
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,74 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 14:09:39 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 09 Jul 2012 15:01:13 -0000
+Content-Type: text/plain
 
-On Thursday, June 28, 2012 03:38:20 PM Denis Carikli wrote:
-> Without that fix environments like sato cannot start because
->   they require x-session-manager to be started instead of
->   x-window-manager.
-> 
-> Signed-off-by: Denis Carikli <denis@eukrea.com>
-> ---
->  ...0005-add-XWindowManager-Xsession.d-script.patch |   17 +++++++----------
-> .../xserver-common/xserver-common_1.34.bb          |    2 +-
->  2 files changed, 8 insertions(+), 11 deletions(-)
-> 
-> diff --git
-> a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
-> dowManager-Xsession.d-script.patch
-> b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
-> dowManager-Xsession.d-script.patch index f5c2c78..1782665 100644
-> ---
-> a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
-> dowManager-Xsession.d-script.patch +++
-> b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
-> dowManager-Xsession.d-script.patch @@ -9,18 +9,15 @@ Signed-off-by: Martin
-> Jansa <Martin.Jansa@gmail.com> 1 files changed, 6 insertions(+), 0
-> deletions(-)
->   create mode 100644 X11/Xsession.d/90xXWindowManager
-> 
-> -diff --git a/X11/Xsession.d/90xXWindowManager
-> b/X11/Xsession.d/90xXWindowManager -new file mode 100644
-> -index 0000000..3df8435
-> ---- /dev/null
-> -+++ b/X11/Xsession.d/90xXWindowManager
-> -@@ -0,0 +1,6 @@
-> -+#!/bin/sh
-> +Index: xserver-common-1.34/X11/Xsession.d/90xXWindowManager
-> +===================================================================
-> +--- /dev/null	1970-01-01 00:00:00.000000000 +0000
-> ++++ xserver-common-1.34/X11/Xsession.d/90xXWindowManager	2012-06-28
-> 15:02:22.010521773 +0200 +@@ -0,0 +1,7 @@
->  +if [ -x $HOME/.Xsession ]; then
->  +    exec $HOME/.Xsession
-> ++elif [ -x /usr/bin/x-session-manager ]; then
-> ++    exec /usr/bin/x-session-manager
->  +else
->  +    exec /usr/bin/x-window-manager
->  +fi
-> ---
-> -1.7.8.5
-> -
-> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-> b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb index
-> 1147fca..a7e8191 100644
-> --- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-> 
-> -PR = "r6"
-> +PR = "r7"
-> 
->  # we are using a gpe-style Makefile
->  inherit gpe
+* Update psplash to the latest version.
+* Change the license checksum to use the lines in the psplash.h that contains
+  license information instead of doing a checksum on the entire file.
 
-Ping.
+Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
+---
+ meta/recipes-core/psplash/psplash_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-Denis.
+diff --git a/meta/recipes-core/psplash/psplash_git.bb b/meta/recipes-core/psplash/psplash_git.bb
+index 0d88a60..f9b77de 100644
+--- a/meta/recipes-core/psplash/psplash_git.bb
++++ b/meta/recipes-core/psplash/psplash_git.bb
+@@ -3,11 +3,11 @@ DESCRIPTION = "PSplash is a userspace graphical boot splash screen for mainly em
+ HOMEPAGE = "http://git.yoctoproject.org/cgit/cgit.cgi/psplash"
+ SECTION = "base"
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://psplash.h;md5=a87c39812c1e37f3451567cc29a29c8f"
++LIC_FILES_CHKSUM = "file://psplash.h;beginline=1;endline=16;md5=840fb2356b10a85bed78dd09dc7745c6"
+ 
+-SRCREV = "e05374aae945bcfc6d962ed0d7b2774b77987e1d"
++SRCREV = "84764337a584002a92940323d374b0e417c573a6"
+ PV = "0.1+git${SRCPV}"
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "git://git.yoctoproject.org/${BPN};protocol=git \
+            file://psplash-init \
+-- 
+1.7.0.4
+
 
 
