@@ -1,36 +1,22 @@
-Received: from mail-gh0-f175.google.com ([209.85.160.175])
+Received: from smtp203.alice.it ([82.57.200.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1SoA9b-0004DG-P3
+	(envelope-from <denis@eukrea.com>) id 1SoEeh-00049g-3V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2012 11:21:15 +0200
-Received: by ghbz2 with SMTP id z2so9168626ghb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2012 02:10:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=rNYYwLbiWdJMt+GlbNIiskd/Yk8CxkuCPZszfeMdmUQ=;
-	b=dl1HG83vuAY89vlm9A3ihlFEx8Tsd/wH8p7CaCNeBjpO8k514mbtFPxuk6sX3aVAiB
-	sb5SirQjFAH1eg1dD5frqsnZdB53ESJETsg52B02DS1eW/oaA/Ugi+QGL8FjbmA67/n7
-	vKJ1vRGZOOFUY9VOwGVcQcew9bbK+zpjNui0j1YFjgLaNBTdGBy2jWBlFOtcDOo3RRif
-	X4PupjaEeDpNh2GiZBRkWCHnm4+tXNzQOkzZCFowpYRnqYPnkcIfXXYctfKWgihIKoq9
-	m+p3u6s/8rhMX11owoNBM+6QUz5zlZ/CEuxCcDS9Es8VRApN4qMYIb01GOcSSJEWNeOt
-	KEdg==
-Received: by 10.50.91.233 with SMTP id ch9mr7724663igb.8.1341825006100; Mon,
-	09 Jul 2012 02:10:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.64.98.162 with HTTP; Mon, 9 Jul 2012 02:09:45 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <1341759929-32341-1-git-send-email-apelete@seketeli.net>
-References: <1341759929-32341-1-git-send-email-apelete@seketeli.net>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Mon, 9 Jul 2012 12:09:45 +0300
-Message-ID: <CAK18fxF6azr6-4B-=AQOYTe2hkXpQ52P4D12y0O2hx8y6z5=9g@mail.gmail.com>
+	Mon, 09 Jul 2012 16:09:39 +0200
+Received: from denis-n73sv.localnet (79.7.128.87) by smtp203.alice.it
+	(8.6.023.02) (authenticated as editempo@alice.it)
+	id 4ECA5E230819A552 for openembedded-devel@lists.openembedded.org;
+	Mon, 9 Jul 2012 15:52:49 +0200
+From: Denis Carikli <denis@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkaAjqZXuWOrCMAF518krMm7YJr8C4CxKWhfSzsfGT1QK1dkT/UnltlBsNYLbBtnnJ9rUkj
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [oe-classic][PATCH] libpng: update SRC_URI
+Date: Mon, 09 Jul 2012 15:52:48 +0200
+Message-ID: <25319920.MRo7ttM4mH@denis-n73sv>
+Organization: Eukrea
+User-Agent: KMail/4.7.3 (Linux/3.0.0-20-generic-pae; KDE/4.7.4; i686; ; )
+In-Reply-To: <1340890700-31781-1-git-send-email-denis@eukrea.com>
+References: <1340890700-31781-1-git-send-email-denis@eukrea.com>
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] xserver-common 1.34: sync /etc/X11/Xsession.d/90xXWindowManager with x11-common(oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,17 +30,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 09:21:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jul 2012 14:09:39 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Sun, Jul 8, 2012 at 6:05 PM, Apelete Seketeli <apelete@seketeli.net>wrote:
+On Thursday, June 28, 2012 03:38:20 PM Denis Carikli wrote:
+> Without that fix environments like sato cannot start because
+>   they require x-session-manager to be started instead of
+>   x-window-manager.
+> 
+> Signed-off-by: Denis Carikli <denis@eukrea.com>
+> ---
+>  ...0005-add-XWindowManager-Xsession.d-script.patch |   17 +++++++----------
+> .../xserver-common/xserver-common_1.34.bb          |    2 +-
+>  2 files changed, 8 insertions(+), 11 deletions(-)
+> 
+> diff --git
+> a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
+> dowManager-Xsession.d-script.patch
+> b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
+> dowManager-Xsession.d-script.patch index f5c2c78..1782665 100644
+> ---
+> a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
+> dowManager-Xsession.d-script.patch +++
+> b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWin
+> dowManager-Xsession.d-script.patch @@ -9,18 +9,15 @@ Signed-off-by: Martin
+> Jansa <Martin.Jansa@gmail.com> 1 files changed, 6 insertions(+), 0
+> deletions(-)
+>   create mode 100644 X11/Xsession.d/90xXWindowManager
+> 
+> -diff --git a/X11/Xsession.d/90xXWindowManager
+> b/X11/Xsession.d/90xXWindowManager -new file mode 100644
+> -index 0000000..3df8435
+> ---- /dev/null
+> -+++ b/X11/Xsession.d/90xXWindowManager
+> -@@ -0,0 +1,6 @@
+> -+#!/bin/sh
+> +Index: xserver-common-1.34/X11/Xsession.d/90xXWindowManager
+> +===================================================================
+> +--- /dev/null	1970-01-01 00:00:00.000000000 +0000
+> ++++ xserver-common-1.34/X11/Xsession.d/90xXWindowManager	2012-06-28
+> 15:02:22.010521773 +0200 +@@ -0,0 +1,7 @@
+>  +if [ -x $HOME/.Xsession ]; then
+>  +    exec $HOME/.Xsession
+> ++elif [ -x /usr/bin/x-session-manager ]; then
+> ++    exec /usr/bin/x-session-manager
+>  +else
+>  +    exec /usr/bin/x-window-manager
+>  +fi
+> ---
+> -1.7.8.5
+> -
+> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb index
+> 1147fca..a7e8191 100644
+> --- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> 
+> -PR = "r6"
+> +PR = "r7"
+> 
+>  # we are using a gpe-style Makefile
+>  inherit gpe
 
-> Update the SRC_URI of libpng.inc to ftp.lfs-matrix.net since
-> ftp.simplesystems.org seems to be down.
->
->
-Now it's up and running. Could have been a temporary server problem or a
-local one.
+Ping.
 
-@g
+Denis.
+
 
