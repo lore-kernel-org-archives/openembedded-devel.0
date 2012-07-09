@@ -1,36 +1,26 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1SoGcy-0003UK-Fc
+	(envelope-from <apelete@seketeli.net>) id 1SoHVG-0005tH-8P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2012 18:16:00 +0200
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id AE03BD2326; Mon,  9 Jul 2012 18:04:54 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-144.dynamic.chello.pl
-	[87.206.60.144])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DAB0BD2323
+	Mon, 09 Jul 2012 19:12:06 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 5BE2CEA042
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2012 18:04:24 +0200 (CEST)
-Message-ID: <4FFB0104.6060702@linaro.org>
-Date: Mon, 09 Jul 2012 18:04:20 +0200
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120620 Thunderbird/14.0
-MIME-Version: 1.0
+	Mon,  9 Jul 2012 19:06:07 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 6BBC3604C9; Mon,  9 Jul 2012 19:00:52 +0200 (CEST)
+Date: Mon, 9 Jul 2012 19:00:52 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-References: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
-	<20120628174041.GB24537@localhost.jama.net>
-	<CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
-In-Reply-To: <CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
-Subject: Re: meta-oe breakage since oe-core removed gcc-4.6
+Message-ID: <20120709170052.GA6220@hermes>
+References: <1341759929-32341-1-git-send-email-apelete@seketeli.net>
+	<CAK18fxF6azr6-4B-=AQOYTe2hkXpQ52P4D12y0O2hx8y6z5=9g@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAK18fxF6azr6-4B-=AQOYTe2hkXpQ52P4D12y0O2hx8y6z5=9g@mail.gmail.com>
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [oe-classic][PATCH] libpng: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 16:16:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Jul 2012 17:12:06 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-W dniu 29.06.2012 02:24, Khem Raj pisze:
-> On Thu, Jun 28, 2012 at 10:40 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>
->> khem's patches which removed it from oe-core said:
->> gcc-4.6: Retire into toochain-layer
->>
->> so I guess he has some patches adding whole recipes to toolchain-layer
->> (I had a feeling that I've even seen them somewhere, but cannot find
->> them later).
-> 
-> the patch is here
-> http://git.openembedded.org/meta-openembedded-contrib/log/?h=kraj/move-gcc-4.6
-> 
-> Koen
-> 
-> Please pull it
+Le 09-Jul-12, Andrei Gherzan a =E9crit:
+> On Sun, Jul 8, 2012 at 6:05 PM, Apelete Seketeli <apelete@seketeli.net>=
+wrote:
+>=20
+> > Update the SRC_URI of libpng.inc to ftp.lfs-matrix.net since
+> > ftp.simplesystems.org seems to be down.
+> >
+> >
+> Now it's up and running. Could have been a temporary server problem or =
+a
+> local one.
 
-+1 from me as it makes use of meta-linaro layer much easier.
+ftp.simplesystems.org is up and running indeed, but libpng1.2.44 is no
+longer available on it. It is still available at ftp.lfs-matrix.net
+though; maybe I should have explained it better on the commit message.
+
+Cheers.
+--=20
+        Apelete
 
 
