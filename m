@@ -1,32 +1,36 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)
-	id 1SoFSb-0005Hq-2P for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jul 2012 17:01:13 +0200
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q69EiOcq019725
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1SoGcy-0003UK-Fc
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Jul 2012 18:16:00 +0200
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id AE03BD2326; Mon,  9 Jul 2012 18:04:54 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-144.dynamic.chello.pl
+	[87.206.60.144])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DAB0BD2323
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jul 2012 09:44:24 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q69EiOVZ025511
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jul 2012 09:44:24 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Mon, 9 Jul 2012
-	09:44:24 -0500
-Received: from sdit-build02.dal.design.ti.com (sdit-build02.dal.design.ti.com
-	[10.247.66.5])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	q69EiOpv003107;	Mon, 9 Jul 2012 09:44:24 -0500
-Received: from a0273011 by sdit-build02.dal.design.ti.com with local (Exim
-	4.71)	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)	id
-	1SoFar-0007qP-LP; Mon, 09 Jul 2012 10:09:45 -0500
-From: Franklin S Cooper Jr <fcooper@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 Jul 2012 10:09:19 -0500
-Message-ID: <1341846559-30125-1-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+	Mon,  9 Jul 2012 18:04:24 +0200 (CEST)
+Message-ID: <4FFB0104.6060702@linaro.org>
+Date: Mon, 09 Jul 2012 18:04:20 +0200
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120620 Thunderbird/14.0
 MIME-Version: 1.0
-Subject: [PATCH] psplash - Update to latest psplash version. LIC_CHKSUM Tweak
+To: openembedded-devel@lists.openembedded.org
+References: <CADZ6=avV5=3g9CkMMDc9cKLUpw_-Bk_q7fb5MceJmtR0gH6YvQ@mail.gmail.com>
+	<20120628174041.GB24537@localhost.jama.net>
+	<CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
+In-Reply-To: <CAMKF1spLCxsBLtUKpFzF18xM3Wa7FNTRiM8BCX-V0EmdbGUPPw@mail.gmail.com>
+Subject: Re: meta-oe breakage since oe-core removed gcc-4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 15:01:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Jul 2012 16:16:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* Update psplash to the latest version.
-* Change the license checksum to use the lines in the psplash.h that contains
-  license information instead of doing a checksum on the entire file.
+W dniu 29.06.2012 02:24, Khem Raj pisze:
+> On Thu, Jun 28, 2012 at 10:40 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>>
+>> khem's patches which removed it from oe-core said:
+>> gcc-4.6: Retire into toochain-layer
+>>
+>> so I guess he has some patches adding whole recipes to toolchain-layer
+>> (I had a feeling that I've even seen them somewhere, but cannot find
+>> them later).
+> 
+> the patch is here
+> http://git.openembedded.org/meta-openembedded-contrib/log/?h=kraj/move-gcc-4.6
+> 
+> Koen
+> 
+> Please pull it
 
-Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
----
- meta/recipes-core/psplash/psplash_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta/recipes-core/psplash/psplash_git.bb b/meta/recipes-core/psplash/psplash_git.bb
-index 0d88a60..f9b77de 100644
---- a/meta/recipes-core/psplash/psplash_git.bb
-+++ b/meta/recipes-core/psplash/psplash_git.bb
-@@ -3,11 +3,11 @@ DESCRIPTION = "PSplash is a userspace graphical boot splash screen for mainly em
- HOMEPAGE = "http://git.yoctoproject.org/cgit/cgit.cgi/psplash"
- SECTION = "base"
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://psplash.h;md5=a87c39812c1e37f3451567cc29a29c8f"
-+LIC_FILES_CHKSUM = "file://psplash.h;beginline=1;endline=16;md5=840fb2356b10a85bed78dd09dc7745c6"
- 
--SRCREV = "e05374aae945bcfc6d962ed0d7b2774b77987e1d"
-+SRCREV = "84764337a584002a92940323d374b0e417c573a6"
- PV = "0.1+git${SRCPV}"
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "git://git.yoctoproject.org/${BPN};protocol=git \
-            file://psplash-init \
--- 
-1.7.0.4
-
++1 from me as it makes use of meta-linaro layer much easier.
 
 
