@@ -1,20 +1,32 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1SoNT5-00074W-Em
+	(envelope-from <martin.jansa@gmail.com>) id 1SoWgo-0006m6-VQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Jul 2012 01:34:15 +0200
-Received: from mizar.localdomain (87.0.20.4) by smtp209.alice.it (8.6.023.02)
-	id 4EF08A6317B3EBEB; Tue, 10 Jul 2012 01:23:07 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 10 Jul 2012 11:25:03 +0200
+Received: by wgbdr1 with SMTP id dr1so11211318wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jul 2012 02:13:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=TOdlkDlVm6kfu2CMuSEdkuYseTZiUz+SF09ndzs+d50=;
+	b=TZ6z9z6ncTKdA9MZw1Qp0gNYpCXI0DE2bSZJS88LB6dtiHx4EDgefREAkaNmRS94x2
+	H/P37TSYkociu88RS0N4e+sfyxr9mPy7tyMehve8wLPdZYzUSxR5NAcUsARHGdsgRHdi
+	VwRX0dCtRP27Vf+wOBtm234pmzswOPuCO68AxKaD7Jm63ek2h/bm+hQXECGa5zB0vR2V
+	74RE2qJbabJUiHB+E7GjrSSuNt24XphtekUNuZR0A89z8XJCGCIu4Yx5NTZfbdxVgS5w
+	YFusnz9sDakEc0SbtIoHzmN+egJQQBBeRXgoKEiLbnPWT3S0qymFB5pkmr54VuTtYAs4
+	5t8A==
+Received: by 10.180.81.165 with SMTP id b5mr36455619wiy.17.1341911632729;
+	Tue, 10 Jul 2012 02:13:52 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e9sm41736540wiw.10.2012.07.10.02.13.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 Jul 2012 02:13:52 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jul 2012 01:22:39 +0200
-Message-Id: <fb967b1fb78035e47c1c169bc41cb5ebb31b8a7e.1341875525.git.andrea.adami@gmail.com>
+Date: Tue, 10 Jul 2012 11:13:47 +0200
+Message-Id: <1341911627-13511-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1341875525.git.andrea.adami@gmail.com>
-References: <cover.1341875525.git.andrea.adami@gmail.com>
-In-Reply-To: <cover.1341875525.git.andrea.adami@gmail.com>
-References: <cover.1341875525.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 5/5] linux-yocto-tiny-kexecboot: unset CONFIG_MTD_NAND_VERIFY_WRITE for Zaurus
+Subject: [meta-oe][PATCH] pixman: rename to match oe-core version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,99 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2012 23:34:15 -0000
+X-List-Received-Date: Tue, 10 Jul 2012 09:25:03 -0000
 
-* for easier UBI support whithout needing VID HDR offsets
-* (dedekind, the author, says this setting is only meant for debug)
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../akita/akita-kexecboot.cfg                      |    2 +-
- .../c7x0/c7x0-kexecboot.cfg                        |    2 +-
- .../collie/collie-kexecboot.cfg                    |    2 +-
- .../poodle/poodle-kexecboot.cfg                    |    2 +-
- .../spitz/spitz-kexecboot.cfg                      |    2 +-
- .../tosa/tosa-kexecboot.cfg                        |    2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ ...mplementation-of-pixman_blt-with-overlapp.patch |    0
+ ...xman_0.25.2.bbappend => pixman_0.26.2.bbappend} |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-lib/{pixman-0.25.2 => pixman-0.26.2}/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch (100%)
+ rename meta-oe/recipes-graphics/xorg-lib/{pixman_0.25.2.bbappend => pixman_0.26.2.bbappend} (100%)
 
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-kexecboot.cfg
-index 6ef926d..82bb479 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/akita/akita-kexecboot.cfg
-@@ -552,7 +552,7 @@ CONFIG_MTD_PHYSMAP=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-kexecboot.cfg
-index 72c2383..0ef169b 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/c7x0/c7x0-kexecboot.cfg
-@@ -552,7 +552,7 @@ CONFIG_MTD_PHYSMAP=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-kexecboot.cfg
-index 7b8321d..e01ceae 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/collie/collie-kexecboot.cfg
-@@ -530,7 +530,7 @@ CONFIG_MTD_SA1100=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-kexecboot.cfg
-index 7b3124c..04e53bd 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/poodle/poodle-kexecboot.cfg
-@@ -550,7 +550,7 @@ CONFIG_MTD_PHYSMAP=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-kexecboot.cfg
-index 3a6c16f..338209d 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/spitz/spitz-kexecboot.cfg
-@@ -552,7 +552,7 @@ CONFIG_MTD_PHYSMAP=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-kexecboot.cfg
-index 2dea434..855d70b 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-kexecboot.cfg
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot/tosa/tosa-kexecboot.cfg
-@@ -551,7 +551,7 @@ CONFIG_MTD_PHYSMAP=y
- CONFIG_MTD_NAND_ECC=y
- # CONFIG_MTD_NAND_ECC_SMC is not set
- CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_VERIFY_WRITE=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
- # CONFIG_MTD_NAND_ECC_BCH is not set
- # CONFIG_MTD_SM_COMMON is not set
- # CONFIG_MTD_NAND_MUSEUM_IDS is not set
+diff --git a/meta-oe/recipes-graphics/xorg-lib/pixman-0.25.2/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/meta-oe/recipes-graphics/xorg-lib/pixman-0.26.2/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
+similarity index 100%
+rename from meta-oe/recipes-graphics/xorg-lib/pixman-0.25.2/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
+rename to meta-oe/recipes-graphics/xorg-lib/pixman-0.26.2/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
+diff --git a/meta-oe/recipes-graphics/xorg-lib/pixman_0.25.2.bbappend b/meta-oe/recipes-graphics/xorg-lib/pixman_0.26.2.bbappend
+similarity index 100%
+rename from meta-oe/recipes-graphics/xorg-lib/pixman_0.25.2.bbappend
+rename to meta-oe/recipes-graphics/xorg-lib/pixman_0.26.2.bbappend
 -- 
 1.7.8.6
 
