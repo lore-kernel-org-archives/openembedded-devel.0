@@ -1,25 +1,35 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Sp7SY-0003iE-2s
+	(envelope-from <fahad.usman@gmail.com>) id 1SpLSu-0000XR-96
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jul 2012 02:40:46 +0200
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 11 Jul 2012 17:29:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="121372236"
-Received: from unknown (HELO helios.localnet) ([10.252.121.5])
-	by AZSMGA002.ch.intel.com with ESMTP; 11 Jul 2012 17:29:31 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Thu, 12 Jul 2012 17:38:04 +0200
+Received: by pbbrq2 with SMTP id rq2so3625127pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jul 2012 08:26:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=E8FlPY+LayyqUXVvMzHGaLYgZGuKHCvwWFr7mktamms=;
+	b=UIhSnJkebi2B7pA9pbFtIxtckGNozHeYQzmnTkXwngsagVLXhJ6YKRrHWPTvVb0FAu
+	8O4ufT0WSKHzzvsGh9+CgcloZXyoFZtfQfoegBqgWPHtLF27BTJfXNgt33BtaMG6UgnU
+	+9pTWH6vSg+eYOFn16TVgVxv5rM/gUXqPMY78ol3mc9sx+dgbA/x3RxGlubbl37JiB8f
+	SPDX3o2/Wz1jLWcFodzxtIo3ykpu3N5q34Cp2SRpwjQhvVM8gIzVfDIkG2G74G87VgmZ
+	24VhIoBblT51mLKI/fMLNk0C4X2KrGRaVjMBUrGsT5D2IVIEU+jb67H1IudN8QioDmHJ
+	8SQg==
+Received: by 10.68.223.198 with SMTP id qw6mr6359647pbc.94.1342106810123;
+	Thu, 12 Jul 2012 08:26:50 -0700 (PDT)
+Received: from localhost.localdomain ([110.93.212.98])
+	by mx.google.com with ESMTPS id oq4sm4049596pbb.21.2012.07.12.08.26.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 12 Jul 2012 08:26:49 -0700 (PDT)
+From: Fahad Usman <fahad.usman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jul 2012 01:29:30 +0100
-Message-ID: <13982356.l2K7RH0GMd@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.4 (Linux/3.2.0-26-generic-pae; KDE/4.8.4; i686; ; )
-In-Reply-To: <1342050050-8381-1-git-send-email-andrea.adami@gmail.com>
-References: <1342045981-29287-1-git-send-email-andrea.adami@gmail.com>
-	<1342050050-8381-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-initramfs][PATCH v2] formfactor: fix sed expression
+Date: Thu, 12 Jul 2012 20:25:26 +0500
+Message-Id: <1342106726-24050-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <fahad.usman@gmail.com>
+References: <fahad.usman@gmail.com>
+Cc: Fahad Usman <fahad_usman@mentor.com>
+Subject: [PATCH] wpa-supplicant: fix for dso link change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,47 +43,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2012 00:40:46 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 12 Jul 2012 15:38:04 -0000
 
-On Thursday 12 July 2012 01:40:50 Andrea Adami wrote:
-> * a last-minute check was added...with a missing '*'
-> * don't add newline so we can easily test -s
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  recipes-bsp/formfactor/formfactor_0.0.bbappend |    5 ++---
->  1 files changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/formfactor/formfactor_0.0.bbappend
-> b/recipes-bsp/formfactor/formfactor_0.0.bbappend index e888ec1..b509028
-> 100644
-> --- a/recipes-bsp/formfactor/formfactor_0.0.bbappend
-> +++ b/recipes-bsp/formfactor/formfactor_0.0.bbappend
-> @@ -1,11 +1,10 @@
-> -PRINC := "${@int(PRINC) + 2}"
-> +PRINC := "${@int(PRINC) + 3}"
-> 
->  FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-> 
->  do_install_prepend () {
->  	# provide machine-specific /etc/rotation for psplash
-> -	sed -n 's/^[ \t]DISPLAY_ORIENTATION[ \t]*//p' ${S}/machconfig | tr -dc
-> '[0-9]' > ${S}/rotation -	printf "\n" >> ${S}/rotation
-> +	sed -n 's/^[ \t]*DISPLAY_ORIENTATION[ \t]*//p' ${S}/machconfig | tr -dc
-> '[0-9]' > ${S}/rotation }
-> 
->  do_install_append () {
+* add lgpg-error to LIBS explicitly in order to to make it work with the
+updated dso linking behavior in newer versions of binutils
 
-I've now merged the v2 into meta-handheld (not meta-initramfs) master, thanks.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ .../wpa-supplicant-0.7.3/dso-link-change.patch     |   13 +++++++++++++
+ .../wpa-supplicant/wpa-supplicant-0.7.inc          |    3 ++-
+ .../wpa-supplicant/wpa-supplicant_0.7.3.bb         |    2 +-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+ create mode 100644 meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
 
-Cheers,
-Paul
-
+diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
+new file mode 100644
+index 0000000..1903d1f
+--- /dev/null
++++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
+@@ -0,0 +1,13 @@
++--- wpa_supplicant/Makefile
+++++ wpa_supplicant/Makefile
++@@ -768,8 +768,8 @@ OBJS_p += ../src/crypto/crypto_gnutls.o
++ ifdef NEED_FIPS186_2_PRF
++ OBJS += ../src/crypto/fips_prf_gnutls.o
++ endif
++-LIBS += -lgcrypt
++-LIBS_p += -lgcrypt
+++LIBS += -lgcrypt -lgpg-error
+++LIBS_p += -lgcrypt -lgpg-error
++ CONFIG_INTERNAL_SHA256=y
++ CONFIG_INTERNAL_RC4=y
++ CONFIG_INTERNAL_DH_GROUP5=y
+diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
+index 6c84202..430f7fa 100644
+--- a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
++++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
+@@ -14,7 +14,8 @@ SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
+            file://wpa-supplicant.sh \
+            file://wpa_supplicant.conf \
+            file://wpa_supplicant.conf-sane \
+-           file://99_wpa_supplicant"
++           file://99_wpa_supplicant \
++           file://dso-link-change.patch"
+ 
+ S = "${WORKDIR}/wpa_supplicant-${PV}/wpa_supplicant"
+ 
+diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
+index 6f6378b..7521bbe 100644
+--- a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
++++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
+@@ -1,6 +1,6 @@
+ require wpa-supplicant-0.7.inc
+ 
+-PR = "r12"
++PR = "r13"
+ 
+ SRC_URI[md5sum] = "f516f191384a9a546e3f5145c08addda"
+ SRC_URI[sha256sum] = "d0cd50caa85346ccc376dcda5ed3c258eef19a93b3cade39d25760118ad59443"
 -- 
+1.7.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
