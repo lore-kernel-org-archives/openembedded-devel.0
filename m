@@ -1,35 +1,20 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fahad.usman@gmail.com>) id 1SpLSu-0000XR-96
+	(envelope-from <apelete@seketeli.net>) id 1SpOX1-0001xN-UB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jul 2012 17:38:04 +0200
-Received: by pbbrq2 with SMTP id rq2so3625127pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2012 08:26:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=E8FlPY+LayyqUXVvMzHGaLYgZGuKHCvwWFr7mktamms=;
-	b=UIhSnJkebi2B7pA9pbFtIxtckGNozHeYQzmnTkXwngsagVLXhJ6YKRrHWPTvVb0FAu
-	8O4ufT0WSKHzzvsGh9+CgcloZXyoFZtfQfoegBqgWPHtLF27BTJfXNgt33BtaMG6UgnU
-	+9pTWH6vSg+eYOFn16TVgVxv5rM/gUXqPMY78ol3mc9sx+dgbA/x3RxGlubbl37JiB8f
-	SPDX3o2/Wz1jLWcFodzxtIo3ykpu3N5q34Cp2SRpwjQhvVM8gIzVfDIkG2G74G87VgmZ
-	24VhIoBblT51mLKI/fMLNk0C4X2KrGRaVjMBUrGsT5D2IVIEU+jb67H1IudN8QioDmHJ
-	8SQg==
-Received: by 10.68.223.198 with SMTP id qw6mr6359647pbc.94.1342106810123;
-	Thu, 12 Jul 2012 08:26:50 -0700 (PDT)
-Received: from localhost.localdomain ([110.93.212.98])
-	by mx.google.com with ESMTPS id oq4sm4049596pbb.21.2012.07.12.08.26.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 Jul 2012 08:26:49 -0700 (PDT)
-From: Fahad Usman <fahad.usman@gmail.com>
+	Thu, 12 Jul 2012 20:54:32 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 9828DEA040;
+	Thu, 12 Jul 2012 20:48:05 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 7380660297; Thu, 12 Jul 2012 20:43:19 +0200 (CEST)
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jul 2012 20:25:26 +0500
-Message-Id: <1342106726-24050-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <fahad.usman@gmail.com>
-References: <fahad.usman@gmail.com>
-Cc: Fahad Usman <fahad_usman@mentor.com>
-Subject: [PATCH] wpa-supplicant: fix for dso link change
+Date: Thu, 12 Jul 2012 20:43:19 +0200
+Message-Id: <1342118599-14959-1-git-send-email-apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
+Subject: [PATCH] netsurf: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,66 +28,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2012 15:38:04 -0000
+X-List-Received-Date: Thu, 12 Jul 2012 18:54:32 -0000
 
-* add lgpg-error to LIBS explicitly in order to to make it work with the
-updated dso linking behavior in newer versions of binutils
+Update the SRC_URI of the following recipes, since the NetSurf project
+has moved the download repository of its source packages:
+- hubbub_0.0.2.bb
+- libcss_0.0.2.bb
+- libnsbmp_0.0.2.bb
+- libnsgif_0.0.2.bb
+- libparserutils_0.0.2.bb
+- libwapcaplet_0.0.2.bb
+- netsurf_2.6.bb
 
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- .../wpa-supplicant-0.7.3/dso-link-change.patch     |   13 +++++++++++++
- .../wpa-supplicant/wpa-supplicant-0.7.inc          |    3 ++-
- .../wpa-supplicant/wpa-supplicant_0.7.3.bb         |    2 +-
- 3 files changed, 16 insertions(+), 2 deletions(-)
- create mode 100644 meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
+ recipes/netsurf/hubbub_0.0.2.bb         |    2 +-
+ recipes/netsurf/libcss_0.0.2.bb         |    2 +-
+ recipes/netsurf/libnsbmp_0.0.2.bb       |    2 +-
+ recipes/netsurf/libnsgif_0.0.2.bb       |    2 +-
+ recipes/netsurf/libparserutils_0.0.2.bb |    2 +-
+ recipes/netsurf/libwapcaplet_0.0.2.bb   |    2 +-
+ recipes/netsurf/netsurf_2.6.bb          |    2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
-new file mode 100644
-index 0000000..1903d1f
---- /dev/null
-+++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.3/dso-link-change.patch
-@@ -0,0 +1,13 @@
-+--- wpa_supplicant/Makefile
-++++ wpa_supplicant/Makefile
-+@@ -768,8 +768,8 @@ OBJS_p += ../src/crypto/crypto_gnutls.o
-+ ifdef NEED_FIPS186_2_PRF
-+ OBJS += ../src/crypto/fips_prf_gnutls.o
-+ endif
-+-LIBS += -lgcrypt
-+-LIBS_p += -lgcrypt
-++LIBS += -lgcrypt -lgpg-error
-++LIBS_p += -lgcrypt -lgpg-error
-+ CONFIG_INTERNAL_SHA256=y
-+ CONFIG_INTERNAL_RC4=y
-+ CONFIG_INTERNAL_DH_GROUP5=y
-diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
-index 6c84202..430f7fa 100644
---- a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
-+++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-0.7.inc
-@@ -14,7 +14,8 @@ SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
-            file://wpa-supplicant.sh \
-            file://wpa_supplicant.conf \
-            file://wpa_supplicant.conf-sane \
--           file://99_wpa_supplicant"
-+           file://99_wpa_supplicant \
-+           file://dso-link-change.patch"
+diff --git a/recipes/netsurf/hubbub_0.0.2.bb b/recipes/netsurf/hubbub_0.0.2.bb
+index 0d6b828..319fe1d 100644
+--- a/recipes/netsurf/hubbub_0.0.2.bb
++++ b/recipes/netsurf/hubbub_0.0.2.bb
+@@ -7,7 +7,7 @@ DEPENDS = "libparserutils"
  
- S = "${WORKDIR}/wpa_supplicant-${PV}/wpa_supplicant"
+ PR = "r1"
  
-diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
-index 6f6378b..7521bbe 100644
---- a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
-+++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bb
-@@ -1,6 +1,6 @@
- require wpa-supplicant-0.7.inc
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/hubbub-${PV}-src.tar.gz"
  
--PR = "r12"
-+PR = "r13"
+ inherit pkgconfig
  
- SRC_URI[md5sum] = "f516f191384a9a546e3f5145c08addda"
- SRC_URI[sha256sum] = "d0cd50caa85346ccc376dcda5ed3c258eef19a93b3cade39d25760118ad59443"
+diff --git a/recipes/netsurf/libcss_0.0.2.bb b/recipes/netsurf/libcss_0.0.2.bb
+index 42424c4..213b57e 100644
+--- a/recipes/netsurf/libcss_0.0.2.bb
++++ b/recipes/netsurf/libcss_0.0.2.bb
+@@ -7,7 +7,7 @@ DEPENDS = "libwapcaplet"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libcss-${PV}-src.tar.gz \
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libcss-${PV}-src.tar.gz \
+ 	   file://no-werror.patch"
+ 
+ inherit pkgconfig
+diff --git a/recipes/netsurf/libnsbmp_0.0.2.bb b/recipes/netsurf/libnsbmp_0.0.2.bb
+index db02c1e..56eeb81 100644
+--- a/recipes/netsurf/libnsbmp_0.0.2.bb
++++ b/recipes/netsurf/libnsbmp_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsbmp-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsbmp-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libnsgif_0.0.2.bb b/recipes/netsurf/libnsgif_0.0.2.bb
+index 5291169..57283f3 100644
+--- a/recipes/netsurf/libnsgif_0.0.2.bb
++++ b/recipes/netsurf/libnsgif_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsgif-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libparserutils_0.0.2.bb b/recipes/netsurf/libparserutils_0.0.2.bb
+index ea59272..cca2c02 100644
+--- a/recipes/netsurf/libparserutils_0.0.2.bb
++++ b/recipes/netsurf/libparserutils_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libparserutils-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libparserutils-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libwapcaplet_0.0.2.bb b/recipes/netsurf/libwapcaplet_0.0.2.bb
+index 3ef4b3c..02c1d7a 100644
+--- a/recipes/netsurf/libwapcaplet_0.0.2.bb
++++ b/recipes/netsurf/libwapcaplet_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libwapcaplet-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libwapcaplet-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/netsurf_2.6.bb b/recipes/netsurf/netsurf_2.6.bb
+index 607a18a..1e07223 100644
+--- a/recipes/netsurf/netsurf_2.6.bb
++++ b/recipes/netsurf/netsurf_2.6.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.netsurf-browser.org/"
+ SECTION = "x11/network"
+ LICENSE = "GPLv2"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/downloads/releases/netsurf-${PV}-src.tar.gz \
++SRC_URI = "http://download.netsurf-browser.org/netsurf/releases/source/netsurf-${PV}-src.tar.gz \
+ 	   file://fix_makefile.patch \
+ 	   file://debugxml_fix.patch \
+ 	   file://netsurf.png \
 -- 
-1.7.1
+1.7.10.4
 
 
 
