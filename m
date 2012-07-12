@@ -1,20 +1,22 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1SpOX1-0001xN-UB
+	(envelope-from <apelete@seketeli.net>) id 1SpOy5-0003zF-GB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Jul 2012 20:54:32 +0200
+	Thu, 12 Jul 2012 21:22:43 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 9828DEA040;
-	Thu, 12 Jul 2012 20:48:05 +0200 (CEST)
+	by ms.seketeli.net (Postfix) with ESMTP id 6A00FEA04D;
+	Thu, 12 Jul 2012 21:16:03 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 7380660297; Thu, 12 Jul 2012 20:43:19 +0200 (CEST)
+	id 7E4536029D; Thu, 12 Jul 2012 21:11:16 +0200 (CEST)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jul 2012 20:43:19 +0200
-Message-Id: <1342118599-14959-1-git-send-email-apelete@seketeli.net>
+Date: Thu, 12 Jul 2012 21:11:16 +0200
+Message-Id: <1342120276-15557-3-git-send-email-apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1342120276-15557-1-git-send-email-apelete@seketeli.net>
+References: <1342120276-15557-1-git-send-email-apelete@seketeli.net>
 Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [PATCH] netsurf: update SRC_URI
+Subject: [oe-classic][PATCH 2/2] tzdata: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,120 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2012 18:54:32 -0000
+X-List-Received-Date: Thu, 12 Jul 2012 19:22:54 -0000
+X-List-Received-Date: Thu, 12 Jul 2012 19:22:54 -0000
 
-Update the SRC_URI of the following recipes, since the NetSurf project
-has moved the download repository of its source packages:
-- hubbub_0.0.2.bb
-- libcss_0.0.2.bb
-- libnsbmp_0.0.2.bb
-- libnsgif_0.0.2.bb
-- libparserutils_0.0.2.bb
-- libwapcaplet_0.0.2.bb
-- netsurf_2.6.bb
+Update the SRC_URI of tzdata.inc to tzmirror.sunbase.org since
+elsie.nci.nih.gov seems to be down.
 
 Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- recipes/netsurf/hubbub_0.0.2.bb         |    2 +-
- recipes/netsurf/libcss_0.0.2.bb         |    2 +-
- recipes/netsurf/libnsbmp_0.0.2.bb       |    2 +-
- recipes/netsurf/libnsgif_0.0.2.bb       |    2 +-
- recipes/netsurf/libparserutils_0.0.2.bb |    2 +-
- recipes/netsurf/libwapcaplet_0.0.2.bb   |    2 +-
- recipes/netsurf/netsurf_2.6.bb          |    2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ recipes/tzdata/tzdata.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes/netsurf/hubbub_0.0.2.bb b/recipes/netsurf/hubbub_0.0.2.bb
-index 0d6b828..319fe1d 100644
---- a/recipes/netsurf/hubbub_0.0.2.bb
-+++ b/recipes/netsurf/hubbub_0.0.2.bb
-@@ -7,7 +7,7 @@ DEPENDS = "libparserutils"
+diff --git a/recipes/tzdata/tzdata.inc b/recipes/tzdata/tzdata.inc
+index dd5c2c9..c9997d3 100644
+--- a/recipes/tzdata/tzdata.inc
++++ b/recipes/tzdata/tzdata.inc
+@@ -12,7 +12,7 @@ RCONFLICTS_${PN} = "timezones timezone-africa timezone-america timezone-antarcti
+              timezone-australia timezone-europe timezone-indian \
+              timezone-iso3166.tab timezone-pacific timezone-zone.tab"
  
- PR = "r1"
+-SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz;name=tar"
++SRC_URI = "http://tzmirror.sunbase.org/tzfiles/oldtz/tzdata${PV}.tar.gz;name=tar"
  
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz"
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/hubbub-${PV}-src.tar.gz"
+ S = "${WORKDIR}"
  
- inherit pkgconfig
- 
-diff --git a/recipes/netsurf/libcss_0.0.2.bb b/recipes/netsurf/libcss_0.0.2.bb
-index 42424c4..213b57e 100644
---- a/recipes/netsurf/libcss_0.0.2.bb
-+++ b/recipes/netsurf/libcss_0.0.2.bb
-@@ -7,7 +7,7 @@ DEPENDS = "libwapcaplet"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/libcss-${PV}-src.tar.gz \
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/libcss-${PV}-src.tar.gz \
- 	   file://no-werror.patch"
- 
- inherit pkgconfig
-diff --git a/recipes/netsurf/libnsbmp_0.0.2.bb b/recipes/netsurf/libnsbmp_0.0.2.bb
-index db02c1e..56eeb81 100644
---- a/recipes/netsurf/libnsbmp_0.0.2.bb
-+++ b/recipes/netsurf/libnsbmp_0.0.2.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsbmp-${PV}-src.tar.gz"
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsbmp-${PV}-src.tar.gz"
- 
- inherit pkgconfig
- 
-diff --git a/recipes/netsurf/libnsgif_0.0.2.bb b/recipes/netsurf/libnsgif_0.0.2.bb
-index 5291169..57283f3 100644
---- a/recipes/netsurf/libnsgif_0.0.2.bb
-+++ b/recipes/netsurf/libnsgif_0.0.2.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz"
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsgif-${PV}-src.tar.gz"
- 
- inherit pkgconfig
- 
-diff --git a/recipes/netsurf/libparserutils_0.0.2.bb b/recipes/netsurf/libparserutils_0.0.2.bb
-index ea59272..cca2c02 100644
---- a/recipes/netsurf/libparserutils_0.0.2.bb
-+++ b/recipes/netsurf/libparserutils_0.0.2.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/libparserutils-${PV}-src.tar.gz"
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/libparserutils-${PV}-src.tar.gz"
- 
- inherit pkgconfig
- 
-diff --git a/recipes/netsurf/libwapcaplet_0.0.2.bb b/recipes/netsurf/libwapcaplet_0.0.2.bb
-index 3ef4b3c..02c1d7a 100644
---- a/recipes/netsurf/libwapcaplet_0.0.2.bb
-+++ b/recipes/netsurf/libwapcaplet_0.0.2.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.netsurf-browser.org/projects/releases/libwapcaplet-${PV}-src.tar.gz"
-+SRC_URI = "http://download.netsurf-browser.org/libs/releases/libwapcaplet-${PV}-src.tar.gz"
- 
- inherit pkgconfig
- 
-diff --git a/recipes/netsurf/netsurf_2.6.bb b/recipes/netsurf/netsurf_2.6.bb
-index 607a18a..1e07223 100644
---- a/recipes/netsurf/netsurf_2.6.bb
-+++ b/recipes/netsurf/netsurf_2.6.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.netsurf-browser.org/"
- SECTION = "x11/network"
- LICENSE = "GPLv2"
- 
--SRC_URI = "http://www.netsurf-browser.org/downloads/releases/netsurf-${PV}-src.tar.gz \
-+SRC_URI = "http://download.netsurf-browser.org/netsurf/releases/source/netsurf-${PV}-src.tar.gz \
- 	   file://fix_makefile.patch \
- 	   file://debugxml_fix.patch \
- 	   file://netsurf.png \
 -- 
 1.7.10.4
 
