@@ -1,38 +1,35 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Spdx4-0005Zo-Of
+	(envelope-from <elvis.dowson@gmail.com>) id 1SpfAs-0001CF-5g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 13:22:26 +0200
-Received: by bkcik5 with SMTP id ik5so2314656bkc.6
+	Fri, 13 Jul 2012 14:40:46 +0200
+Received: by pbbrq2 with SMTP id rq2so5059058pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 04:11:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=Qm9Nl2iDnBnVEaXOLIunsjE7cGDEwnyvnyLNKV2zDuI=;
-	b=CDjXmFGchac19TLXsQ3yT8Lm9uN7r5vS7dB+p/TUHO84e8jhl3pQ7zwHg6HBDUN/uG
-	yUDaSXicnBd2oyW2XimstEV0OoeT6fg1+1gG48yMonk441ib2pOCxGOqszdh9k3K3f7z
-	TjNk/JsSQk4VWp+dwctdYeKsyMWGkIRvYV7zzqHBe6nnPMxlMPr9EbjG+vGYTRixcDHo
-	An/Kl95DNZ4TtZMbNs0QBopJPuiLTprAReYxVSm4wXRkDQcDkMILyPJ3KWmNMQUmoBeL
-	t/uEyi05rZuqZ6zuEZovT8wXl6gQrzCyIAsMZeX1pQe56rGfIilZvaf757Oz3E9RgoUc
-	zVpQ==
-Received: by 10.204.129.14 with SMTP id m14mr583721bks.7.1342177872690;
-	Fri, 13 Jul 2012 04:11:12 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
-	[95.222.160.112])
-	by mx.google.com with ESMTPS id g6sm4544247bkg.2.2012.07.13.04.11.11
+	Fri, 13 Jul 2012 05:29:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:to:mime-version:x-mailer;
+	bh=A7JYGYOOjC0wLe2f0jw9AbyET2HEHH0lvfg2ANnjDxY=;
+	b=rZBkQVJ/BIxNFwqGj3wzvp+kzb+B+UCH05wtMkThXCleqtFj/h7Is7BeP7XU/LIUoC
+	HSgLMkt1p77oG7dIsaLTBP6M3Tlty6B3gnWrVzA/0ABjppPpe1M25scM210BRMW4eWUn
+	rN0e2vKdayfd1v6rzm+P47UfRLq2sOD7SPHXXscMRBnzXFCsgqwtU9u895/IonUCdkrP
+	SJbH5ap1zbxjj8whx3QRtLf0fn4LdDrZoKmGOyBjcOwShVrz83kejOdLeBvY1mp9JXWv
+	8A3i3Pko5ZnSyRgh/3ZCXb8yVCD0xGpQqGXOK1PcoU0vU67tnfxGD6NM3V/YQi/GZqJ+
+	5LCg==
+Received: by 10.68.227.198 with SMTP id sc6mr2996380pbc.138.1342182570883;
+	Fri, 13 Jul 2012 05:29:30 -0700 (PDT)
+Received: from [192.168.1.101] ([94.205.108.162])
+	by mx.google.com with ESMTPS id nv6sm5937870pbc.42.2012.07.13.05.29.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 04:11:11 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 13:10:45 +0200
-Message-Id: <1342177846-26594-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1342177846-26594-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1342177846-26594-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-system 1/2] systemd.bbclass: introduce SYSTEMD_AUTO_ENABLE variable
+	Fri, 13 Jul 2012 05:29:29 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+Date: Fri, 13 Jul 2012 16:29:24 +0400
+Message-Id: <6CA856D9-0187-4920-80E7-8F34FDBFAD9F@gmail.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Apple Message framework v1278)
+X-Mailer: Apple Mail (2.1278)
+Subject: Getting yocto to build a linux kernel uImage and zImage simultaneously
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 11:22:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 Jul 2012 12:40:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Currently all services introduced are enabled and started at installation. By
-setting SYSTEMD_AUTO_ENABLE = "disable" the default behaviour can be
-overridden.
+Hi,
+      Is simultaneous generation of both uImage and zImage supported for =
+linux kernels? I tried it a couple of weeks back, but then noticed that =
+it would build either a uImage or a zImage, alone, but failed when both =
+were specified.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-systemd/classes/systemd.bbclass |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+Best regards,
 
-diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
-index 8af0d58..38b9ed5 100644
---- a/meta-systemd/classes/systemd.bbclass
-+++ b/meta-systemd/classes/systemd.bbclass
-@@ -1,5 +1,7 @@
- DEPENDS_append = " systemd-systemctl-native"
- 
-+SYSTEMD_AUTO_ENABLE ??= "enable"
-+
- systemd_postinst() {
- OPTS=""
- 
-@@ -7,9 +9,9 @@ if [ -n "$D" ]; then
-     OPTS="--root=$D"
- fi
- 
--systemctl $OPTS enable ${SYSTEMD_SERVICE}
-+systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
- 
--if [ -z "$D" ]; then
-+if [ -z "$D" -a ${SYSTEMD_AUTO_ENABLE} = "enable" ]; then
-     systemctl start ${SYSTEMD_SERVICE}
- fi
- }
--- 
-1.7.6.5
-
+Elvis Dowson=
 
 
