@@ -1,34 +1,22 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elbrutomartin@gmail.com>) id 1SpfoH-0006aY-B1
+	(envelope-from <eric@eukrea.com>) id 1Spg4o-00009p-Fx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 15:21:29 +0200
-Received: by pbbrq2 with SMTP id rq2so5104028pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 06:10:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=06Ngu7squ/x0qcJBD6POWaYDG2hlg1IS2fUh+DLwFiU=;
-	b=VHz3LHcTSq5gen2h1EJKo+1OVZBNEdKVow8R0AdlhRQp9E1RYGHbQXfKVLaK2mLv79
-	q1t3XLNLr4wTIpApmwIWcONKziW0ZkecDehQYzFz5/WQZiFsxz8/xb42k+Na5XJQRv3k
-	zPHUhWro0/vsXZnpfXAFdKZC63AxgFWl3RgCZjMVObZrW+GnJ3y4y8/ck12kQqcXPV0p
-	MdNSdk1KvfD72ViyBo7yvhc2QbDQGuIjsJimt/TSfhANmPJppXhb+6mAAXC0Yprhsz2C
-	SgdMcKG//sHldQUoTS8bG6u9cb1yR9frlu3qVgddBViu8YeVb6uYkwZhxiDN/aOwTl4U
-	xAKw==
-MIME-Version: 1.0
-Received: by 10.68.223.198 with SMTP id qw6mr3822091pbc.94.1342185014185; Fri,
-	13 Jul 2012 06:10:14 -0700 (PDT)
-Sender: elbrutomartin@gmail.com
-Received: by 10.66.50.5 with HTTP; Fri, 13 Jul 2012 06:10:14 -0700 (PDT)
-In-Reply-To: <CACeNxvkE_E34RJWXjtJHt_TOHhXq1J4KeEOrV9v=qZs5JNygsQ@mail.gmail.com>
-References: <CACeNxvkE_E34RJWXjtJHt_TOHhXq1J4KeEOrV9v=qZs5JNygsQ@mail.gmail.com>
-Date: Fri, 13 Jul 2012 15:10:14 +0200
-X-Google-Sender-Auth: ZoMK9QLekLaYHdEKxt2UBSqIOew
-Message-ID: <CACeNxvmic5XjhkpBGcpp34m3Cq_80=QJR_4f54qbqUodYHqgNQ@mail.gmail.com>
-From: alberto Caro Martinez <alberto.caro.m@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel version for overo
+	Fri, 13 Jul 2012 15:38:34 +0200
+Received: from eb-e6520 (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id BB32E4B00A5;
+	Fri, 13 Jul 2012 15:27:17 +0200 (CEST)
+Date: Fri, 13 Jul 2012 15:27:16 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20120713152716.37c97589@eb-e6520>
+In-Reply-To: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
+References: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [for-denzil][meta-oe 01/24] rrdtool: add 1.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,16 +30,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 13:21:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 13 Jul 2012 13:38:34 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-I want a source o recipe, it's the same for me...
+Hi Koen,
 
-2012/7/13 alberto Caro Martinez <alberto.caro.m@gmail.com>:
-> Hi
-> I'm looking for a source to download a kernel version for a overo fire board.
-> But I can not find a version that works on the USB-OTG and smartreflex system.
-> But I can not find a version on that works  the USB-OTG and smartreflex system.
-> Can anybody help me to find it?
+the whole serie was pushed to denzil-next, passed a parsing test on one
+of my configuration (which is not using any of these recipes) and was
+pushed to denzil.
+
+Thanks !
+Eric
 
 
