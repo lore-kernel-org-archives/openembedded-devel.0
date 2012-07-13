@@ -1,36 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Spdx3-0005Zn-Eo
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Spdx4-0005Zn-27
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 13:22:25 +0200
-Received: by bkcik5 with SMTP id ik5so2314647bkc.6
+	Fri, 13 Jul 2012 13:22:26 +0200
+Received: by mail-bk0-f47.google.com with SMTP id ik5so2314647bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 04:11:11 -0700 (PDT)
+	Fri, 13 Jul 2012 04:11:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=DBXBChUTLF2NPKcrV4D9H491x7bGowcrwQW4KBsP0cM=;
-	b=tdcWaid0byPd6p+W8WqBXu2y5mP5wwqxQABHBnNMbT8sA8Wu9kcREALBOBpSS4cIzP
-	DYqBFgRs7bZKxrZQ6J3gO3Pbm9XfwSwyfOrQilS4iaf073IqX5cnF/aBOqAooTg7ahbF
-	MvGGXfEE/FUzCah553iBZ4bJng5IUqIbE6H5kohKf6iM0MEI9GRfwglM/BhKlkV0Q+Ad
-	wcIWYqQashywAfAmaqxBHmam6oL+QVBR1Ln2u4Gqao7eIVZVHWiiaDXYWHdMEj9fHJf2
-	FsljhiIwPESjgXGMYG1iRcMgPpJgSVIU3OTkE9+FCZbdQzgsLGFzgd7YtWo/ZnSbgiyU
-	1qOg==
-Received: by 10.204.151.81 with SMTP id b17mr529281bkw.95.1342177871201;
-	Fri, 13 Jul 2012 04:11:11 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=c0v1obPZw09nPm9c2BZjO28+hjitbtXJd1TrQTwiMhI=;
+	b=qTc45GCK2mWfx0qoa5me+BBYdSYRFTNCq7JrruAG++zwoor0eTAqhAB5ZGVRlcZOg8
+	j0B6pCZKZ0p8Q6mehsy+GB04KBnOb7NyHB+DPYChEXOw1v4nsS9TTIHYTD8E2fTAKD8i
+	yU7zC5nUdThZwrA48ohBT4CRAYrgdkDNlTCvIx41NbiTeCsagt0Q2JRLyTviBCPcmF7L
+	lI7PhtAM73iOz1G3G0PVn7ISjV+Pv/kM+Q5eOzdezXHTAZv0jFK2hCA/MK9pMx3wpgKU
+	3UpnAgM/zbo9SFeAj2a8VvVUHHYj6RALPlEbiJNfdmSFmvDsWP6jVsDaiNwMiB3UjyNc
+	sN2g==
+Received: by 10.204.128.202 with SMTP id l10mr509950bks.127.1342177874100;
+	Fri, 13 Jul 2012 04:11:14 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id g6sm4544247bkg.2.2012.07.13.04.11.09
+	by mx.google.com with ESMTPS id g6sm4544247bkg.2.2012.07.13.04.11.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 04:11:10 -0700 (PDT)
+	Fri, 13 Jul 2012 04:11:13 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 13:10:44 +0200
-Message-Id: <1342177846-26594-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Jul 2012 13:10:46 +0200
+Message-Id: <1342177846-26594-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1342177846-26594-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1342177846-26594-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-system 0/2] Introduce SYSTEMD_AUTO_ENABLE
+Subject: [meta-system 2/2] udisks: do not start daemon automatically at boot time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 11:22:25 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 11:22:26 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This patch series was created on top of the "transition" series and was pushed
-to git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded-systemd.git. It
-was build tested only assuming systemctl-native's implementation of 'disable'
-parameter works properly.
 
-Andreas Müller (2):
-  systemd.bbclass: introduce SYSTEMD_AUTO_ENABLE variable
-  udisks: do not start daemon automatically at boot time
-
- meta-systemd/classes/systemd.bbclass               |    6 ++++--
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
  .../recipes-support/udisks/udisks_1.0.4.bbappend   |    3 ++-
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
+diff --git a/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend b/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
+index f6470c9..9d0f18c 100644
+--- a/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
++++ b/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
+@@ -1,6 +1,6 @@
+ inherit systemd
+ 
+-PRINC := "${@int(PRINC) + 1}"
++PRINC := "${@int(PRINC) + 2}"
+ 
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+@@ -11,3 +11,4 @@ SRC_URI += "file://add-systemd-support.patch"
+ 
+ SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
++SYSTEMD_AUTO_ENABLE = "disable"
 -- 
 1.7.6.5
 
