@@ -1,31 +1,38 @@
-Received: from mail-wg0-f46.google.com ([74.125.82.46])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SpZuS-0001kp-Ta
+	(envelope-from <elvis.dowson@gmail.com>) id 1Spa4M-0005Gv-Ts
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 09:03:29 +0200
-Received: by wgbdq10 with SMTP id dq10so2588636wgb.3
+	Fri, 13 Jul 2012 09:13:43 +0200
+Received: by pbbrq2 with SMTP id rq2so4690465pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2012 23:52:15 -0700 (PDT)
+	Fri, 13 Jul 2012 00:02:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=v/fx6Cai+D345S/sSpezGCPvAkNxVV9bbBZmOzOSzRE=;
-	b=YGdkRZ66R3xQWRv5AJkrPk0Iz49/PC+TN/VWVKu9JIilxxbAxN1oEKqvBy09pWxHTB
-	5BFBT2jHiCOlJQ5EXCH6jWko1QGuQgLZR2OcnJkBozCfOjejMidaVzBD0ECvkCLjDmV3
-	c2qhOPWKplhQXBnwJzJAdt6m5dH7+Ouo7JpMs0KEyW12cLUN2OKWkATlabu/0wTFGPO7
-	6i1AUNCnO1533DIq5AaeDzZ1r7vxZ1IOkFO3uJOBq2JraaBDLAaYrGl/pnDfmiYc06Lf
-	VeomhuRrWn2LbH5QUluC5aR5UhbFjEgSIpeZjDwvXo0Porr9aGMd+DsmO/rf7Rp/VZPv
-	IH8w==
-Received: by 10.217.7.6 with SMTP id z6mr21123wes.5.1342162334806; Thu, 12 Jul
-	2012 23:52:14 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.30.34 with HTTP; Thu, 12 Jul 2012 23:51:44 -0700 (PDT)
-In-Reply-To: <1342156064-52888-1-git-send-email-elvis.dowson@gmail.com>
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=lwwaUvJsJPxL2r5M+EHfHSOxy7l2REOWkVMdWhGumlI=;
+	b=Ru/tuKDU3FkwhzRnTNWqNksYYuzfuHm3FFDn3XgfQtpNKvaDPoyikxP9BsDKzecuHj
+	oT8aC/LUiVGTgxzcxPpjfFHCP1/8MCzYlcuUNhSD8xqufZgcQxOvxdy/jx636W+tU9Zp
+	zxrkbR8cFfxx9F3YVg0OIfnUG1r19H4AVwSh5nGYul25QDzUrUedYIac5/QfwNF2arHD
+	BhURxvAqctgO3yD9xLn6L/0pQCwoKNy5DAXSXO1D24kuGGffa1LluvHOhNFHVbwI4tou
+	SDhhK5/FfU4RQdHxjdUrOfkie6CwcWoHfkv2q43QdZAEuyNXz91XnspCU4IB25gC+R3N
+	RNoA==
+Received: by 10.68.221.106 with SMTP id qd10mr1132422pbc.42.1342162947921;
+	Fri, 13 Jul 2012 00:02:27 -0700 (PDT)
+Received: from [192.168.1.101] ([94.205.108.162])
+	by mx.google.com with ESMTPS id tq4sm5449677pbc.11.2012.07.13.00.02.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 13 Jul 2012 00:02:27 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+In-Reply-To: <CAMKF1sp-u9FraoAbD9qkLoxWF-N6_0-_6yQOjWfpgVQ=HGivFA@mail.gmail.com>
+Date: Fri, 13 Jul 2012 11:02:21 +0400
+Message-Id: <174BA203-E567-4073-A23F-6FAC0E7FE0EE@gmail.com>
 References: <1342156064-52888-1-git-send-email-elvis.dowson@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 12 Jul 2012 23:51:44 -0700
-Message-ID: <CAMKF1sp-u9FraoAbD9qkLoxWF-N6_0-_6yQOjWfpgVQ=HGivFA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CAMKF1sp-u9FraoAbD9qkLoxWF-N6_0-_6yQOjWfpgVQ=HGivFA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.1278)
+Cc: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [poky] meta: Fix SRC_URI warnings to use "protocol" not "proto"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,180 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 07:03:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Jul 2012 07:13:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Saul already posted a patch for OE-Core there was discussion on that
-thread as well
+Hi Khem,
 
+On Jul 13, 2012, at 10:51 AM, Khem Raj wrote:
 
-On Thu, Jul 12, 2012 at 10:07 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
-> This commit updates the SRC_URI for the following recipes to use "protocol"
-> recipes-core/eglibc/cross-localedef-native_2.15.bb
-> recipes-core/eglibc/eglibc_2.15.bb
-> recipes-devtools/gcc/gcc-4.7.inc
-> recipes-devtools/installer/adt-installer_1.0.bb
-> recipes-devtools/opkg/opkg_svn.bb
-> recipes-devtools/tcf-agent/tcf-agent_git.bb
-> recipes-devtools/ubootchart/ubootchart_svn.bb
-> recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-> recipes-graphics/matchbox-wm-2/matchbox-wm-2_git.bb
-> recipes-sato/webkit/webkit-gtk_svn.bb
->
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-> ---
->  .../eglibc/cross-localedef-native_2.15.bb          |    2 +-
->  meta/recipes-core/eglibc/eglibc_2.15.bb            |    2 +-
->  meta/recipes-devtools/gcc/gcc-4.7.inc              |    2 +-
->  .../installer/adt-installer_1.0.bb                 |    2 +-
->  meta/recipes-devtools/opkg/opkg_svn.bb             |    2 +-
->  meta/recipes-devtools/tcf-agent/tcf-agent_git.bb   |    2 +-
->  meta/recipes-devtools/ubootchart/ubootchart_svn.bb |    2 +-
->  meta/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb        |    2 +-
->  .../matchbox-wm-2/matchbox-wm-2_git.bb             |    2 +-
->  meta/recipes-sato/webkit/webkit-gtk_svn.bb         |    6 +++---
->  10 files changed, 12 insertions(+), 12 deletions(-)
->
-> diff --git a/meta/recipes-core/eglibc/cross-localedef-native_2.15.bb b/meta/recipes-core/eglibc/cross-localedef-native_2.15.bb
-> index 6f311fc..493eb61 100644
-> --- a/meta/recipes-core/eglibc/cross-localedef-native_2.15.bb
-> +++ b/meta/recipes-core/eglibc/cross-localedef-native_2.15.bb
-> @@ -16,7 +16,7 @@ inherit autotools
->  PR = "r0"
->  SRCREV="15225"
->  EGLIBC_BRANCH="eglibc-2_14"
-> -SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};proto=http "
-> +SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};protocol=http "
->  S = "${WORKDIR}/${EGLIBC_BRANCH}/localedef"
->
->  do_unpack_append() {
-> diff --git a/meta/recipes-core/eglibc/eglibc_2.15.bb b/meta/recipes-core/eglibc/eglibc_2.15.bb
-> index 7dd9810..110febf 100644
-> --- a/meta/recipes-core/eglibc/eglibc_2.15.bb
-> +++ b/meta/recipes-core/eglibc/eglibc_2.15.bb
-> @@ -7,7 +7,7 @@ PR = "r12"
->  PR_append = "+svnr${SRCPV}"
->
->  EGLIBC_BRANCH="eglibc-2_15"
-> -SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};proto=http \
-> +SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};protocol=http \
->             file://eglibc-svn-arm-lowlevellock-include-tls.patch \
->             file://IO-acquire-lock-fix.patch \
->             file://mips-rld-map-check.patch \
-> diff --git a/meta/recipes-devtools/gcc/gcc-4.7.inc b/meta/recipes-devtools/gcc/gcc-4.7.inc
-> index 0e40533..a2e9ae0 100644
-> --- a/meta/recipes-devtools/gcc/gcc-4.7.inc
-> +++ b/meta/recipes-devtools/gcc/gcc-4.7.inc
-> @@ -33,7 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
->                     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
->                    file://COPYING.RUNTIME;md5=fe60d87048567d4fe8c8a0ed2448bcc8"
->
-> -SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
-> +SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};protocol=http \
->            file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
->            file://100-uclibc-conf.patch \
->             file://gcc-uclibc-locale-ctype_touplow_t.patch \
-> diff --git a/meta/recipes-devtools/installer/adt-installer_1.0.bb b/meta/recipes-devtools/installer/adt-installer_1.0.bb
-> index 5dc0896..e1edf2f 100644
-> --- a/meta/recipes-devtools/installer/adt-installer_1.0.bb
-> +++ b/meta/recipes-devtools/installer/adt-installer_1.0.bb
-> @@ -39,7 +39,7 @@ S = "${WORKDIR}/trunk"
->
->  SRCREV = "596"
->  PV = "0.1.8+svnr${SRCPV}"
-> -SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;proto=http \
-> +SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;protocol=http \
->             file://wget_cache.patch \
->             file://adt_installer \
->             file://scripts/adt_installer_internal \
-> diff --git a/meta/recipes-devtools/opkg/opkg_svn.bb b/meta/recipes-devtools/opkg/opkg_svn.bb
-> index faf0ba3..a0667ac 100644
-> --- a/meta/recipes-devtools/opkg/opkg_svn.bb
-> +++ b/meta/recipes-devtools/opkg/opkg_svn.bb
-> @@ -1,6 +1,6 @@
->  require opkg.inc
->
-> -SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;proto=http \
-> +SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;protocol=http \
->             file://add_vercmp.patch \
->             file://add_uname_support.patch \
->             file://fix_installorder.patch \
-> diff --git a/meta/recipes-devtools/tcf-agent/tcf-agent_git.bb b/meta/recipes-devtools/tcf-agent/tcf-agent_git.bb
-> index 8ac8022..25fccaf 100644
-> --- a/meta/recipes-devtools/tcf-agent/tcf-agent_git.bb
-> +++ b/meta/recipes-devtools/tcf-agent/tcf-agent_git.bb
-> @@ -10,7 +10,7 @@ SRCREV = "4ef94ecb927a8912c3d79ce137182247786cff8f"
->  PV = "0.4.0+git${SRCPV}"
->  PR = "r0"
->
-> -SRC_URI = "git://git.eclipse.org/gitroot/tcf/org.eclipse.tcf.agent.git;proto=git \
-> +SRC_URI = "git://git.eclipse.org/gitroot/tcf/org.eclipse.tcf.agent.git;protocol=git \
->             http://www.eclipse.org/legal/epl-v10.html;name=epl \
->             file://fix_ranlib.patch \
->             file://fix_tcf-agent.init.patch \
-> diff --git a/meta/recipes-devtools/ubootchart/ubootchart_svn.bb b/meta/recipes-devtools/ubootchart/ubootchart_svn.bb
-> index d8c9760..b49e94a 100644
-> --- a/meta/recipes-devtools/ubootchart/ubootchart_svn.bb
-> +++ b/meta/recipes-devtools/ubootchart/ubootchart_svn.bb
-> @@ -8,7 +8,7 @@ PR = "r5"
->
->  #RRECOMMENDS_${PN} = "acct"
->
-> -SRC_URI = "svn://ubootchart.googlecode.com/svn/;proto=http;module=trunk \
-> +SRC_URI = "svn://ubootchart.googlecode.com/svn/;protocol=http;module=trunk \
->          file://sysvinit.patch;striplevel=0 \
->          file://ubootchart-stop \
->          file://ubootchart.desktop"
-> diff --git a/meta/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb b/meta/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-> index 7635e7a..da74a82 100644
-> --- a/meta/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-> +++ b/meta/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-> @@ -8,7 +8,7 @@ SRCREV = "1161"
->  PV = "2.11.0+svnr${SRCPV}"
->  PR = "r3"
->
-> -SRC_URI = "svn://svn.gnome.org/svn/gtkhtml2/;module=trunk;proto=http \
-> +SRC_URI = "svn://svn.gnome.org/svn/gtkhtml2/;module=trunk;protocol=http \
->             http://git.yoctoproject.org/cgit/cgit.cgi/web-patches/plain/css-stylesheet-user.patch;striplevel=0;name=patch2 \
->             http://git.yoctoproject.org/cgit/cgit.cgi/web-patches/plain/css-media.patch;striplevel=0;name=patch3 \
->             http://git.yoctoproject.org/cgit/cgit.cgi/web-patches/plain/add-end-element-signal.patch;striplevel=0;name=patch4 \
-> diff --git a/meta/recipes-graphics/matchbox-wm-2/matchbox-wm-2_git.bb b/meta/recipes-graphics/matchbox-wm-2/matchbox-wm-2_git.bb
-> index 4aad3a9..8b162be 100644
-> --- a/meta/recipes-graphics/matchbox-wm-2/matchbox-wm-2_git.bb
-> +++ b/meta/recipes-graphics/matchbox-wm-2/matchbox-wm-2_git.bb
-> @@ -9,7 +9,7 @@ SRCREV = "01fa5465743c9ee43d040350f4405d35293e4869"
->  PV = "0.1+git${SRCPV}"
->  PR = "r1"
->
-> -SRC_URI = "git://git.yoctoproject.org/matchbox-window-manager-2;proto=git \
-> +SRC_URI = "git://git.yoctoproject.org/matchbox-window-manager-2;protocol=git \
->         file://fix_makefile.patch \
->           "
->
-> diff --git a/meta/recipes-sato/webkit/webkit-gtk_svn.bb b/meta/recipes-sato/webkit/webkit-gtk_svn.bb
-> index 7d0aae9..6a6839d 100644
-> --- a/meta/recipes-sato/webkit/webkit-gtk_svn.bb
-> +++ b/meta/recipes-sato/webkit/webkit-gtk_svn.bb
-> @@ -22,9 +22,9 @@ PV = "1.7.2+svnr${SRCPV}"
->  PR = "r6"
->
->  SRC_URI = "\
-> -  svn://svn.webkit.org/repository/webkit/trunk/;module=Source;proto=http;name=source \
-> -  svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;proto=http \
-> -  svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;proto=http \
-> +  svn://svn.webkit.org/repository/webkit/trunk/;module=Source;protocol=http;name=source \
-> +  svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http \
-> +  svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http \
->    file://Makefile \
->    file://Makefile.shared \
->    file://autogen.sh \
-> --
-> 1.7.9.5
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Saul already posted a patch for OE-Core there was discussion on that
+> thread as well
+
+Ok! I just noticed it after deleting everything and doing a fresh rebuild!
+
+Elvis
 
 
