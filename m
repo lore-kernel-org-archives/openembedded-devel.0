@@ -1,38 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSN-00080Q-A4
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSO-0007zx-I9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 10:42:36 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so2247528bkc.6
+	Fri, 13 Jul 2012 10:42:37 +0200
+Received: by mail-bk0-f47.google.com with SMTP id ik5so2247517bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 01:31:23 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=0F3w+wdjDc2E3m3yejWPobj47UFPE6wAlLD/U2J/FiY=;
-	b=Y+VeWQwjG4lap7X7ht9+B1c/hS9USQkCFA/nPlgfwQNhPRBMVA3CXjr5okrUtNh+5r
-	puciTes10HBRNioExUHfdK0jxOwdDYQ1LIRogWUyz/RIWayqZdvZWBdAAaZGOguhDuKl
-	ML27IW4i2G+3p1y4545SF9RSFr4x+RcYr3QZhNeszo64O5RIdlvd2sGG6Gi1rF2EvEyp
-	ejFXtKHde6s3RQR3/rPt65VN9KkWoR4mOzOl8r0UTxx8Ge8Ij2ZIHsVnBKXveysTXEuE
-	eNDecZbeNT3WA9I4DbMe19Slfmuiv0QCN5P7xsGoWsQqRJxrTRTH6bg9AmkhYTPm1WC9
-	Y6dg==
-Received: by 10.204.156.4 with SMTP id u4mr176771bkw.6.1342168283301;
-	Fri, 13 Jul 2012 01:31:23 -0700 (PDT)
+	bh=yDKZed6D2woxSt5rRTwq/HVkByYeZ7/tKozcrqnIGGA=;
+	b=gmTBCo+4uT8XtbuQLcLbOMJxXfLqv0ZySAONJbWzO2BZwwGVoPLYSm0QmaxadXYMxG
+	eoFUwuJDemFj96pD+xRlhSsxGCaNFmkmEiEAuElRL++HnLZhGAdOojM482j0iXC2lMle
+	x2oZFDElrLBEvDk3+6RZvaq42rQ+qHy2o9ntsyzGnM+CJxSwjxdft8HXIoWEKseLOwV7
+	jToeBhLYFXes6QrwIPZwGVzrspfYk3k66RHWsosmrFSlLbwTfaD8DnG0w1Xu/fuMWX4q
+	94tuivpGbXeYSc0vwpa+9BHLe2mRZgjMXpWiVPaqRoKq2FGbhf1dvQcqCzRN3Kkv9cIp
+	2L5Q==
+Received: by 10.205.139.6 with SMTP id iu6mr173292bkc.20.1342168284714;
+	Fri, 13 Jul 2012 01:31:24 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.21
+	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 01:31:22 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:23 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 10:30:19 +0200
-Message-Id: <1342168240-7760-12-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Jul 2012 10:30:20 +0200
+Message-Id: <1342168240-7760-13-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe, V2 11/32] busybox: move systemd support to meta-systemd
+Subject: [meta-oe,V2 12/32] ntp: move systemd support to meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,92 +46,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 08:42:38 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 08:42:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-core/busybox/busybox_1.19.4.bbappend   |   20 +---------------
- .../busybox/busybox/busybox-klogd.service.in       |    0
- .../busybox/busybox/busybox-syslog.service.in      |    0
- .../recipes-core/busybox/busybox_1.19.4.bbappend   |   23 ++++++++++++++++++++
- 4 files changed, 25 insertions(+), 18 deletions(-)
- rename {meta-oe => meta-systemd/meta-oe}/recipes-core/busybox/busybox/busybox-klogd.service.in (100%)
- rename {meta-oe => meta-systemd/meta-oe}/recipes-core/busybox/busybox/busybox-syslog.service.in (100%)
- create mode 100644 meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+ meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb         |   18 +-----------------
+ .../meta-oe/recipes-support/ntp/ntp}/ntpd.service  |    0
+ .../recipes-support/ntp/ntp}/ntpdate.service       |    0
+ .../recipes-support/ntp/ntp_4.2.6p3.bbappend       |   20 ++++++++++++++++++++
+ 4 files changed, 21 insertions(+), 17 deletions(-)
+ rename {meta-oe/recipes-support/ntp/files => meta-systemd/meta-oe/recipes-support/ntp/ntp}/ntpd.service (100%)
+ rename {meta-oe/recipes-support/ntp/files => meta-systemd/meta-oe/recipes-support/ntp/ntp}/ntpdate.service (100%)
+ create mode 100644 meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
 
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-index 786e1d5..e9dd4ac 100644
---- a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-+++ b/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-@@ -1,27 +1,11 @@
+diff --git a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+index a3d719e..89a272a 100644
+--- a/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
++++ b/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
+@@ -1,11 +1,6 @@
+ require ntp.inc
+ 
+-PR = "r5"
+-
 -inherit systemd
 -
--PRINC := "${@int(PRINC) + 4}"
-+PRINC := "${@int(PRINC) + 5}"
+-SYSTEMD_PACKAGES = "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
++PR = "r6"
  
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
+         file://tickadj.c.patch \
+@@ -13,8 +8,6 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+         file://ntpd \
+         file://ntp.conf \
+         file://ntpdate \
+-        file://ntpdate.service \
+-        file://ntpd.service \
+ "
  
--SRC_URI += "file://busybox-syslog.service.in \
--            file://busybox-klogd.service.in \
--            file://busybox-syslog.default"
--
--SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
--SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
-+SRC_URI += "file://busybox-syslog.default"
- 
- do_install_append() {
- 	install -d ${D}${sysconfdir}/default
- 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
+ SRC_URI[md5sum] = "59876a9009b098ff59767ee45a88ebd2"
+@@ -28,17 +21,8 @@ do_install_append() {
+ 	install -m 755 ${WORKDIR}/ntpd ${D}/${sysconfdir}/init.d
+ 	install -d ${D}/${sysconfdir}/network/if-up.d
+ 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
 -
 -	install -d ${D}${systemd_unitdir}/system
--	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
--	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
--	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
--	     > ${D}${systemd_unitdir}/system/busybox-klogd.service
--
--	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
+-	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+-	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
  }
--FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
-diff --git a/meta-oe/recipes-core/busybox/busybox/busybox-klogd.service.in b/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-klogd.service.in
+ 
+-PACKAGES =+ "${PN}-systemd"
+-
+-FILES_${PN}-systemd = "${systemd_unitdir}/system/"
+-RDEPENDS_${PN}-systemd = "${PN}"
+-
+ FILES_${PN}-bin = "${bindir}/ntp-wait ${bindir}/ntpdc ${bindir}/ntpq ${bindir}/ntptime ${bindir}/ntptrace"
+ FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd"
+ FILES_${PN}-tickadj = "${bindir}/tickadj"
+diff --git a/meta-oe/recipes-support/ntp/files/ntpd.service b/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service
 similarity index 100%
-rename from meta-oe/recipes-core/busybox/busybox/busybox-klogd.service.in
-rename to meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-klogd.service.in
-diff --git a/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in b/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
+rename from meta-oe/recipes-support/ntp/files/ntpd.service
+rename to meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service
+diff --git a/meta-oe/recipes-support/ntp/files/ntpdate.service b/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
 similarity index 100%
-rename from meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
-rename to meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
-diff --git a/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+rename from meta-oe/recipes-support/ntp/files/ntpdate.service
+rename to meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
+diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
 new file mode 100644
-index 0000000..a0ae2ce
+index 0000000..c6cd031
 --- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-@@ -0,0 +1,23 @@
++++ b/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
+@@ -0,0 +1,20 @@
 +inherit systemd
 +
 +PRINC := "${@int(PRINC) + 1}"
 +
-+# look for files in the layer first
 +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 +
-+SRC_URI += "file://busybox-syslog.service.in \
-+            file://busybox-klogd.service.in"
++SYSTEMD_PACKAGES = "${PN}-systemd ntpdate-systemd"
++SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
++SYSTEMD_SERVICE_ntpdate-systemd = "ntpdate.service"
 +
-+SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
-+SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
++SRC_URI += " \
++	file://ntpdate.service \
++        file://ntpd.service \
++"
 +
 +do_install_append() {
 +	install -d ${D}${systemd_unitdir}/system
-+	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-syslog.service.in \
-+	     > ${D}${systemd_unitdir}/system/busybox-syslog.service
-+	sed 's,@base_sbindir@,${base_sbindir},g' < ${WORKDIR}/busybox-klogd.service.in \
-+	     > ${D}${systemd_unitdir}/system/busybox-klogd.service
-+
-+	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
++	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
++	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
 +}
-+FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
 -- 
 1.7.6.5
 
