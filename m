@@ -1,22 +1,25 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Spg4o-00009p-Fx
+	(envelope-from <Morgan.Little@windriver.com>) id 1SphWV-00074k-9q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 15:38:34 +0200
-Received: from eb-e6520 (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id BB32E4B00A5;
-	Fri, 13 Jul 2012 15:27:17 +0200 (CEST)
-Date: Fri, 13 Jul 2012 15:27:16 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20120713152716.37c97589@eb-e6520>
-In-Reply-To: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
-References: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [for-denzil][meta-oe 01/24] rrdtool: add 1.4.7
+	Fri, 13 Jul 2012 17:11:15 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q6DCN8UH017657
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Jul 2012 05:23:08 -0700 (PDT)
+Received: from localhost.localdomain (128.224.147.201) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.1.255.0; Fri, 13 Jul 2012 05:23:07 -0700
+From: Morgan Little <morgan.little@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 13 Jul 2012 08:22:52 -0400
+Message-ID: <1342182175-6461-18-git-send-email-morgan.little@windriver.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1342182175-6461-1-git-send-email-morgan.little@windriver.com>
+References: <1342182175-6461-1-git-send-email-morgan.little@windriver.com>
+MIME-Version: 1.0
+Subject: [OE-core] [PATCH 17/20] xcb-proto: Update for python-native changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,17 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 13:38:34 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Jul 2012 15:11:15 -0000
+Content-Type: text/plain
 
-Hi Koen,
+Add pythonnative to the inherits list
 
-the whole serie was pushed to denzil-next, passed a parsing test on one
-of my configuration (which is not using any of these recipes) and was
-pushed to denzil.
+Signed-off-by: Morgan Little <morgan.little@windriver.com>
+---
+ meta/recipes-graphics/xcb/xcb-proto.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thanks !
-Eric
+diff --git a/meta/recipes-graphics/xcb/xcb-proto.inc b/meta/recipes-graphics/xcb/xcb-proto.inc
+index e93b1a2..feb9e4d 100644
+--- a/meta/recipes-graphics/xcb/xcb-proto.inc
++++ b/meta/recipes-graphics/xcb/xcb-proto.inc
+@@ -11,7 +11,7 @@ LICENSE = "MIT-X"
+ 
+ SRC_URI = "http://xcb.freedesktop.org/dist/xcb-proto-${PV}.tar.bz2"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig pythonnative
+ 
+ PACKAGES += "python-xcbgen"
+ 
+-- 
+1.7.0.4
+
 
 
