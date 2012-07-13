@@ -1,39 +1,38 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Spc6a-0006VU-0W
+	(envelope-from <koen@dominion.thruhere.net>) id 1Spc6d-0006Vo-0O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 11:24:08 +0200
-Received: by mail-ey0-f175.google.com with SMTP id l1so885914eaa.6
+	Fri, 13 Jul 2012 11:24:11 +0200
+Received: by mail-ee0-f47.google.com with SMTP id t10so352488eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 02:12:56 -0700 (PDT)
+	Fri, 13 Jul 2012 02:12:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=DVPLsC8ddrPfWvFlTt7RDaanjTQnnEAhF/PvR3o7WG0=;
-	b=mvCldKP+W4bSf1SZWcMP/Og5RK73No1hNiPFJgLuKyV5MuMvLc4QO5vKXPraBfooA8
-	rLhYM+nTIexgEPBgIB0bkb1RkMozapS11p4vm0FooEygf0R/S1uVdHtAU2ALhGQSCiBK
-	twlu9rAcS9y9GkshK9MvlJ7ltBEZae6oPEklEhJBfV6D4g65EsgbIlp0B5dU/azkrczp
-	H+qVATSPXSWFKg+IEpoWiblEgt8NxcZcTndFJIusFmwfnF2pdnvpfVTzy7aIaJl+fIXx
-	AFRj4UnBQ5ig8VEYveB8Ei6o6OaJOhBn00x4wz8YXq8vMYMIdSE4vTrZZCnXWLzKYFOs
-	yfiQ==
-Received: by 10.14.47.208 with SMTP id t56mr84690eeb.38.1342170775839;
-	Fri, 13 Jul 2012 02:12:55 -0700 (PDT)
+	bh=o/wCudp46g10FBgWmGe4vdbNBskP622J/JvHr5g0xBY=;
+	b=SsY7stlKLU/GKsJ21Cx/FD0KGLaKz0ojDFFJ8VeHzQFTymv4Ip8EYZYPECihe25Iz+
+	R0feGypeWt9yV6zcR/xRJIkiMYEMnp+88DElYiRF1NKICgNSaOilZtXMT4Wr8wYRyVD+
+	DqfPwpPv57aW0nUUaR12gS9NUurgz/YCXKGqG6OaxwLQPXm1sa6C3YgjF1mTE6Ql74rx
+	usw40l1n7bnPw3LZaek+pkjbJSZVRPxajx9flEzWpa48jawkjmMrpnbKhhL+na2ArniD
+	m+9vQdV81sEakFcSFiXhjhlclm7q64oQ6dFfA8lfohfOJ8b3qrEPQR5GNfTJmMX4p+Ll
+	Whfg==
+Received: by 10.14.45.10 with SMTP id o10mr77336eeb.166.1342170779071;
+	Fri, 13 Jul 2012 02:12:59 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id x52sm23162585eea.11.2012.07.13.02.12.54
+	by mx.google.com with ESMTPS id y54sm23166886eef.10.2012.07.13.02.12.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 02:12:55 -0700 (PDT)
+	Fri, 13 Jul 2012 02:12:57 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 11:11:57 +0200
-Message-Id: <1342170730-14982-11-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 13 Jul 2012 11:11:58 +0200
+Message-Id: <1342170730-14982-12-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
 References: <1342170730-14982-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkeTLgByxXqVNiLgTzxPcMEYjkBnoD3zAyZGZf/C9CyX3jNFgSEcZbGdKs8BXl4h+poiGfG
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Otavio Salvador <otavio@ossystems.com.br>, eric@eukrea.com
-Subject: [for-denzil][meta-oe 11/24] owfs: enable/disable modules to make build predicable
+X-Gm-Message-State: ALoCoQn25oAk6RH8pCUn1PElQ6C77gnsXbse+HgCfkhGhGzpoX2pE1fyoz2ppG+kCxDWHj8inA7c
+Cc: Koen Kooi <koen@dominion.thruhere.net>, eric@eukrea.com
+Subject: [for-denzil][meta-oe 12/24] gateone: update to 1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,49 +46,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 09:24:08 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 09:24:11 -0000
 
-From: Otavio Salvador <otavio@ossystems.com.br>
+Sort RDEPENDS alphabetically as well.
 
-We enforce the avaiability of w1 kernel support and owfs filesystem
-but disable Perl, Python and PHP buildings for now.
+Based on https://github.com/liftoff/meta-oe/commit/9cb653845d7bb4416d2e8e6c5a09a54e08dd7578 by Dan McDougall
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-extended/owfs/owfs_2.8p15.bb |    7 +++++++
- 1 file changed, 7 insertions(+)
+ .../recipes-connectivity/gateone/gateone_git.bb    |   45 +++++++++++---------
+ 1 file changed, 25 insertions(+), 20 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb b/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-index 451aaae..d7c5040 100644
---- a/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-+++ b/meta-oe/recipes-extended/owfs/owfs_2.8p15.bb
-@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index 983dc24..bfb3274 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+ LICENSE = "AGPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
  
- DEPENDS = "fuse virtual/libusb0"
+-PR = "r1"
++PR = "r4"
  
-+PR = "r1"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
-            file://owhttpd \
-            file://owserver "
-@@ -19,11 +21,16 @@ inherit autotools update-rc.d
- EXTRA_OECONF = " \
-                  --with-fuseinclude=${STAGING_INCDIR} \
-                  --with-fuselib=${STAGING_LIBDIR} \
-+                 --enable-owfs \
-                  --enable-owhttpd \
-                  --enable-cache \
-                  --enable-mt \
-+                 --enable-w1 \
-                  --disable-swig \
-                  --disable-owtcl \
-+                 --disable-owphp \
-+                 --disable-owpython \
-+                 --disable-owperl \
+-PV = "1.0"
+-SRCREV = "0dfa4196ca514e075199c0dbf849353c6aa2976b"
++PV = "1.1"
++SRCREV = "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
+ SRC_URI = "git://github.com/liftoff/GateOne.git \
+            file://gateone-avahi.service \
+            file://gateone.service \
+@@ -29,28 +29,33 @@ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE = "gateone.service"
+ 
+ FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir}"
+-RDEPENDS_${PN} = "python-tornado \
+-                  python-datetime \
+-                  python-shell \
+-                  python-subprocess \
+-                  python-terminal \
+-                  python-io \
++RDEPENDS_${PN} = "file \
++                  mime-support \
++                  openssh-ssh \
+                   python-compression \
+-                  python-syslog \
+-                  python-misc \
+                   python-crypt \
+-                  python-netclient \
++                  python-datetime \
+                   python-email \
++                  python-fcntl \
+                   python-html \
+-                  python-textutils \
+-                  python-pyopenssl \
+-                  findutils \
+-                  python-simplejson \
++                  python-imaging \
++                  python-io \
++                  python-json \
++                  python-logging \
++                  python-misc \
+                   python-multiprocessing \
++                  python-netclient \
+                   python-pkgutil \
+-                  python-imaging \
++                  python-pyopenssl \
++                  python-re \
++                  python-readline \
++                  python-shell \
++                  python-simplejson \
++                  python-subprocess \
++                  python-syslog \
++                  python-terminal \
++                  python-textutils \
++                  python-tornado \
++                  python-unixadmin \
+                   python-xml \
+-                  file \
+-                  openssh-ssh \
+-                  mime-support \
                   "
- 
- do_install_prepend() {
 -- 
 1.7.10
 
