@@ -1,25 +1,23 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Morgan.Little@windriver.com>) id 1SphY6-0000L3-GK
+	(envelope-from <Morgan.Little@windriver.com>) id 1SphXC-00074k-1A
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 17:12:55 +0200
+	Fri, 13 Jul 2012 17:11:58 +0200
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q6DCMv9f019242
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q6DCMuVM017630
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 05:22:57 -0700 (PDT)
+	Fri, 13 Jul 2012 05:22:56 -0700 (PDT)
 Received: from localhost.localdomain (128.224.147.201) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
 	14.1.255.0; Fri, 13 Jul 2012 05:22:56 -0700
 From: Morgan Little <morgan.little@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jul 2012 08:22:36 -0400
-Message-ID: <1342182175-6461-2-git-send-email-morgan.little@windriver.com>
+Date: Fri, 13 Jul 2012 08:22:35 -0400
+Message-ID: <1342182175-6461-1-git-send-email-morgan.little@windriver.com>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1342182175-6461-1-git-send-email-morgan.little@windriver.com>
-References: <1342182175-6461-1-git-send-email-morgan.little@windriver.com>
 MIME-Version: 1.0
-Subject: [OE-core] [PATCH 01/20] python-native: Put binaries in seperate directory
+Subject: [OE-core] [PATCH 00/20] Change python-native path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,123 +31,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 15:12:55 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 15:13:06 -0000
 Content-Type: text/plain
 
-Update python-native to install the binaries in the python-native directory,
-add pythonnative.bbclass to let recipes that need python-native use the
-binaries and update disutils access the new binaries.
+I updated python-native like it was suggest by Richard here:
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-June/024644.html
 
-Signed-off-by: Morgan Little <morgan.little@windriver.com>
----
+It is to resolve an issue that comes up when python-native is building and 
+autoconf finds the binary but not the libraries. This fix moves where the 
+binaries are installed to remove this issue and use the system's python.
+
+I have used bitbake world to build to make sure most things are build and 
+have added all of the recipes that I found were affected. I will be building 
+more to make sure I managed to get all of them.
+
+
+The following changes since commit 1b40dac2c501ae8c8d812cf2866fe7917f144a19:
+  Tom Zanussi (1):
+        perf: add perl, python to DEPENDS
+
+are available in the git repository at:
+
+  git@github.com:morganlittle/oe-core.git master
+
+Morgan Little (20):
+      python-native: Put binaries in seperate directory
+      python: Update for python-native changes
+      python-dbus: Update for python-native changes
+      python-gst: Update for python-native changes
+      python-pygobject: Update for python-native changes
+      python-pygtk: Update for python-native changes
+      python-pyrex-native:Update for python-native changes
+      python-scons-native: Update for python-native changes
+      python-setuptools: Update for python-native changes
+      telepathy-glib: Update for python-native changes
+      telepathy-python: Update for python-native changes
+      libxml2: Update for python-native changes
+      mklibs-native: Update for python-native changes
+      gnome-doc-utils: Update for python-native changes
+      mesa-common: Update for python-native changes
+      libxcb: Update for python-native changes
+      xcb-proto: Update for python-native changes
+      kernelshark: Update for python-native changes
+      trace-cmd: Update for python-native changes
+      gobject-introspection: Update for python-native changes
+
  meta/classes/distutils.bbclass                     |   14 +++++++++-----
  meta/classes/pythonnative.bbclass                  |    3 +++
+ .../telepathy/telepathy-glib_0.19.2.bb             |    4 ++--
+ .../telepathy/telepathy-python_0.15.19.bb          |    4 ++--
+ meta/recipes-core/libxml/libxml2.inc               |    2 +-
+ .../mklibs/mklibs-native_0.1.34.bb                 |    4 ++--
+ meta/recipes-devtools/python/python-dbus_1.0.0.bb  |    4 ++--
+ meta/recipes-devtools/python/python-gst_0.10.22.bb |    4 ++--
  .../recipes-devtools/python/python-native_2.7.3.bb |    9 ++++++---
- 3 files changed, 18 insertions(+), 8 deletions(-)
+ .../python/python-pygobject_2.27.91.bb             |    4 ++--
+ .../recipes-devtools/python/python-pygtk_2.17.0.bb |    4 ++--
+ .../python/python-pyrex-native_0.9.9.bb            |    4 ++--
+ .../python/python-scons-native_2.1.0.bb            |    4 ++--
+ .../python/python-setuptools_0.6c11.bb             |    4 ++--
+ meta/recipes-devtools/python/python_2.7.3.bb       |   18 +++++++++---------
+ meta/recipes-gnome/gnome/gnome-doc-utils.inc       |    2 +-
+ .../gnome/gobject-introspection_1.32.1.bb          |    2 +-
+ .../gnome/gobject-introspection_git.bb             |    2 +-
+ meta/recipes-graphics/mesa/mesa-common.inc         |    4 ++--
+ meta/recipes-graphics/xcb/libxcb.inc               |    2 +-
+ meta/recipes-graphics/xcb/xcb-proto.inc            |    2 +-
+ meta/recipes-kernel/trace-cmd/kernelshark_1.2.bb   |    4 ++--
+ meta/recipes-kernel/trace-cmd/trace-cmd_1.2.bb     |    4 ++--
+ 23 files changed, 59 insertions(+), 49 deletions(-)
  create mode 100644 meta/classes/pythonnative.bbclass
-
-diff --git a/meta/classes/distutils.bbclass b/meta/classes/distutils.bbclass
-index bcddf8d..f731257 100644
---- a/meta/classes/distutils.bbclass
-+++ b/meta/classes/distutils.bbclass
-@@ -1,4 +1,4 @@
--inherit distutils-base
-+inherit distutils-base pythonnative
- 
- DISTUTILS_BUILD_ARGS ?= ""
- DISTUTILS_STAGE_HEADERS_ARGS ?= "--install-dir=${STAGING_INCDIR}/${PYTHON_DIR}"
-@@ -11,14 +11,14 @@ distutils_do_compile() {
-          STAGING_INCDIR=${STAGING_INCDIR} \
-          STAGING_LIBDIR=${STAGING_LIBDIR} \
-          BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
--         ${STAGING_BINDIR_NATIVE}/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
-+         ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
-          bbfatal "python setup.py build_ext execution failed."
- }
- 
- distutils_stage_headers() {
-         install -d ${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
-         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
--        ${STAGING_BINDIR_NATIVE}/python setup.py install_headers ${DISTUTILS_STAGE_HEADERS_ARGS} || \
-+        ${STAGING_BINDIR_NATIVE}/python-native/python setup.py install_headers ${DISTUTILS_STAGE_HEADERS_ARGS} || \
-         bbfatal "python setup.py install_headers execution failed."
- }
- 
-@@ -28,7 +28,7 @@ distutils_stage_all() {
-         install -d ${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
-         PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR} \
-         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
--        ${STAGING_BINDIR_NATIVE}/python setup.py install ${DISTUTILS_STAGE_ALL_ARGS} || \
-+        ${STAGING_BINDIR_NATIVE}/python-native/python setup.py install ${DISTUTILS_STAGE_ALL_ARGS} || \
-         bbfatal "python setup.py install (stage) execution failed."
- }
- 
-@@ -38,7 +38,7 @@ distutils_do_install() {
-         STAGING_LIBDIR=${STAGING_LIBDIR} \
-         PYTHONPATH=${D}/${PYTHON_SITEPACKAGES_DIR} \
-         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
--        ${STAGING_BINDIR_NATIVE}/python setup.py install ${DISTUTILS_INSTALL_ARGS} || \
-+        ${STAGING_BINDIR_NATIVE}/python-native/python setup.py install ${DISTUTILS_INSTALL_ARGS} || \
-         bbfatal "python setup.py install execution failed."
- 
-         for i in `find ${D} -name "*.py"` ; do \
-@@ -65,6 +65,10 @@ distutils_do_install() {
-         if test -e ${D}${datadir}/share; then
-             mv -f ${D}${datadir}/share/* ${D}${datadir}/
-         fi
-+
-+        # These are generated files, on really slow systems the storage/speed trade off
-+        # might be worth it, but in general it isn't 
-+        find ${D}${libdir}/${PYTHON_DIR}/site-packages -iname '*.pyo' -exec rm {} \;
- }
- 
- EXPORT_FUNCTIONS do_compile do_install
-diff --git a/meta/classes/pythonnative.bbclass b/meta/classes/pythonnative.bbclass
-new file mode 100644
-index 0000000..bc346da
---- /dev/null
-+++ b/meta/classes/pythonnative.bbclass
-@@ -0,0 +1,3 @@
-+PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
-+PATH_prepend = "${STAGING_BINDIR_NATIVE}/python-native:"
-+DEPENDS += " python-native "
-diff --git a/meta/recipes-devtools/python/python-native_2.7.3.bb b/meta/recipes-devtools/python/python-native_2.7.3.bb
-index 50bf894..a4cbdcd 100644
---- a/meta/recipes-devtools/python/python-native_2.7.3.bb
-+++ b/meta/recipes-devtools/python/python-native_2.7.3.bb
-@@ -1,6 +1,6 @@
- require python.inc
- DEPENDS = "openssl-native bzip2-full-native zlib-native readline-native sqlite3-native"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += "file://04-default-is-optimized.patch \
-            file://05-enable-ctypes-cross-build.patch \
-@@ -20,6 +20,8 @@ inherit native
- 
- RPROVIDES += "python-distutils-native python-compression-native python-textutils-native python-core-native"
- 
-+EXTRA_OECONF += " --bindir=${bindir}/${PN}"
-+
- EXTRA_OEMAKE = '\
-   BUILD_SYS="" \
-   HOST_SYS="" \
-@@ -35,10 +37,11 @@ do_configure_prepend() {
- do_install() {
- 	oe_runmake 'DESTDIR=${D}' install
- 	install -d ${D}${bindir}/
--	install -m 0755 Parser/pgen ${D}${bindir}/
-+	install -d ${D}${bindir}/${PN}
-+	install -m 0755 Parser/pgen ${D}${bindir}/${PN}
- 
- 	# Make sure we use /usr/bin/env python
--	for PYTHSCRIPT in `grep -rIl ${bindir}/python ${D}${bindir}`; do
-+	for PYTHSCRIPT in `grep -rIl ${bindir}/${PN}/python ${D}${bindir}/${PN}`; do
- 		sed -i -e '1s|^#!.*|#!/usr/bin/env python|' $PYTHSCRIPT
- 	done
- }
--- 
-1.7.0.4
-
 
 
