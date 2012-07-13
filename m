@@ -1,38 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSR-0007zC-OW
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSc-00085v-41
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 10:42:51 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so2247498bkc.6
+	Fri, 13 Jul 2012 10:42:52 +0200
+Received: by bkcik5 with SMTP id ik5so2247681bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 01:31:28 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=3pqlXDtpnBV+Ldz1I90IgnfTftrobWbeZpuI931p/vU=;
-	b=dPT+2sbAb08B7Fnyh71TPdBNooGYBYrI6/2t2qwsfYpRKwmaNnLRR5nO0H5acGEi4I
-	uid75qAOfDD8WLhM8o/hfp417JGzm7qVVdGCJeSCNEIovzsL3R/Nm+yZp4ZKDn3pNY8u
-	LXFyguLmvNYCZ5AnVD7p5VXVdLVi6QnouH1jzfBWZRTL0j2B45CmVHNT0Im+JHWj1Yru
-	2Cc+A6Z7JA1WnyzzJ3fp895njbZtenJf5gr290ya592nIfwhkp+bMKnTBqpnE6KvyKLs
-	bEXLPAcQmnNqHZ2cFzRDQefUUCA7rnt5D+Ms9LPGSOcdHXDjS53lAWsIBCM+kYuEWMP+
-	o4oA==
-Received: by 10.205.133.11 with SMTP id hw11mr157974bkc.46.1342168287897;
-	Fri, 13 Jul 2012 01:31:27 -0700 (PDT)
+	bh=J6puqj7MZnHkENgbmzMPkXQECt2/uAS+GcvfbGPIVqY=;
+	b=YsSXKi8WI/m73h4fUWmRj7z8jJar6halEOJCB+HEKftAc/yHKE9eC6k7axVTLdQmC0
+	xCIJmgWcP9tTVZ0jvR4tVQ5FKwW05Cs44jUDytdN1BFe6SSONGBNY3Ce4vsJRwd8jt3v
+	95V9je/H5QTIShz9dz7dfUNBghlEuV5PgXCH6sAEU+8GBtzUpoRWL9n2yi/raFKRtkAi
+	rrnkbv2Q40nwrI3VU1jOAGd9UOSagPcT0IJUbQsEASlncZXIkb2Q3y0JbU6bGLCJM2LB
+	R4f6ngReSWIN4nkIr8Cn5Ke+I1MSVZ3Kr7iHr6jfbbRMcbxmbQYULV7UFiIbcsdvzBHa
+	EztA==
+Received: by 10.204.152.4 with SMTP id e4mr170233bkw.2.1342168293675;
+	Fri, 13 Jul 2012 01:31:33 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.26
+	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 01:31:27 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:32 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 10:30:22 +0200
-Message-Id: <1342168240-7760-15-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Jul 2012 10:30:26 +0200
+Message-Id: <1342168240-7760-19-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe, V2 14/32] udisks: move systemd support to meta-systemd
+Subject: [meta-oe, V2 18/32] net-snmp: move systemd support to meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,66 +52,96 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |   10 +++-------
- .../udisks/udisks/add-systemd-support.patch        |    0
- .../recipes-support/udisks/udisks_1.0.4.bbappend   |   13 +++++++++++++
- 3 files changed, 16 insertions(+), 7 deletions(-)
- rename {meta-oe => meta-systemd/meta-oe}/recipes-support/udisks/udisks/add-systemd-support.patch (100%)
- create mode 100644 meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
+ .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |   17 ++---------------
+ .../net-snmp/net-snmp}/snmpd.service               |    0
+ .../net-snmp/net-snmp}/snmptrapd.service           |    0
+ .../net-snmp/net-snmp}/systemd-support.patch       |    0
+ .../net-snmp/net-snmp_5.7.1.bbappend               |   19 +++++++++++++++++++
+ 5 files changed, 21 insertions(+), 15 deletions(-)
+ rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/snmpd.service (100%)
+ rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/snmptrapd.service (100%)
+ rename {meta-oe/recipes-extended/net-snmp/files => meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp}/systemd-support.patch (100%)
+ create mode 100644 meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-index 0018a5f..b6448ef 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
-@@ -2,22 +2,18 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+index 83df80a..f1e42b5 100644
+--- a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
++++ b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+@@ -1,28 +1,18 @@
+ require net-snmp.inc
+-inherit systemd
  
--DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0 systemd"
-+DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
- # optional dependencies: device-mapper parted
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
  
- SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
--           file://add-systemd-support.patch \
-            file://optional-depends.patch"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+         file://sync-with-5.7-branch.patch \
+         file://libnl-3-support.patch \
+-        file://systemd-support.patch \
+-        file://snmpd.service \
+-        file://snmptrapd.service \
+         file://init \
+         file://snmpd.conf \
+         file://snmptrapd.conf"
  
- SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
- SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
+-EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no --with-systemd "
++EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
+ EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
  
--PR = "r4"
-+PR = "r5"
- 
--inherit autotools systemd
+-SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
+-                    ${PN}-server-snmptrapd-systemd"
 -
--SYSTEMD_PACKAGES = "${PN}-systemd"
--SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
-+inherit autotools
+-SYSTEMD_SERVICE_${PN}-server-snmpd-systemd = "snmpd.service"
+-SYSTEMD_SERVICE_${PN}-server-snmptrapd-systemd =  "snmptrapd.service"
+-
+ do_configure_prepend() {
+         gnu-configize -f
+         # We better change sources and re-autoconf here, but
+@@ -37,6 +27,3 @@ CCACHE = ""
  
- EXTRA_OECONF = "--disable-man-pages"
- 
-diff --git a/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch b/meta-systemd/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
+ SRC_URI[md5sum] = "c95d08fd5d93df0c11a2e1bdf0e01e0b"
+ SRC_URI[sha256sum] = "7c71c9650c65b715356547e20ca2dbe6313944278af8cc19c32a5337f46b181f"
+-
+-RDEPENDS_${PN}-server-snmpd-systemd = "${PN}-server-snmpd"
+-RDEPENDS_${PN}-server-snmptrapd-systemd = "${PN}-server-snmptrapd"
+diff --git a/meta-oe/recipes-extended/net-snmp/files/snmpd.service b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmpd.service
 similarity index 100%
-rename from meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
-rename to meta-systemd/meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
-diff --git a/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend b/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
+rename from meta-oe/recipes-extended/net-snmp/files/snmpd.service
+rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmpd.service
+diff --git a/meta-oe/recipes-extended/net-snmp/files/snmptrapd.service b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmptrapd.service
+similarity index 100%
+rename from meta-oe/recipes-extended/net-snmp/files/snmptrapd.service
+rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/snmptrapd.service
+diff --git a/meta-oe/recipes-extended/net-snmp/files/systemd-support.patch b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/net-snmp/files/systemd-support.patch
+rename to meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
+diff --git a/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
 new file mode 100644
-index 0000000..f6470c9
+index 0000000..f221c1d
 --- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-support/udisks/udisks_1.0.4.bbappend
-@@ -0,0 +1,13 @@
-+inherit systemd
++++ b/meta-systemd/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bbappend
+@@ -0,0 +1,19 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 +
 +PRINC := "${@int(PRINC) + 1}"
 +
-+# look for files in the layer first
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
++inherit systemd
 +
-+DEPENDS += "systemd"
++SRC_URI += " \
++        file://systemd-support.patch \
++        file://snmpd.service \
++        file://snmptrapd.service \
++"
 +
-+SRC_URI += "file://add-systemd-support.patch"
++EXTRA_OECONF += "--with-systemd"
 +
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
++SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
++                    ${PN}-server-snmptrapd-systemd"
++
++SYSTEMD_SERVICE_${PN}-server-snmpd-systemd = "snmpd.service"
++SYSTEMD_SERVICE_${PN}-server-snmptrapd-systemd =  "snmptrapd.service"
 -- 
 1.7.6.5
 
