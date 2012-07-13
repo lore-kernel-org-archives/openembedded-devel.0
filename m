@@ -1,41 +1,28 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SpiVg-0008QF-IC
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Spihm-0002De-He
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 18:14:28 +0200
-Received: by wgbdr1 with SMTP id dr1so3082168wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 09:03:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=5rtL9SJhgf54QA1zAL8izJ8vk0T2wc5HU9cCNrMvcw8=;
-	b=pjb8J3vrvwaGq/2xWMBhuGZw7j+uqKXvUmh0Ic9IukXwsWo4kfn48cf79ToW144hJV
-	a8K+uCD5KlAYDEUgeiJyDEOxHEhKQZw2QY88yKvpFGn6hQneRU35twZXGEWxGwYq4ZQl
-	piD1e9iICUZhIskrkW2WxmOvXCgxkcnUnZBcY7UF3dyQcQhAwmVW1wbkx7EcHUy/sy8+
-	dNUmR7i0gQbk34DKAPADBglSb/i4d2ZSeyII5yvNIBEUs2AVwDI0L8yfO7qC6Y2hR/La
-	W9oLrniiLG/BjTtqdkAESGzW+Yfj+/A6KGCbNzus4zjHoY9jYJ/xUJ2BhESxeMPcg+V5
-	6upA==
-Received: by 10.180.78.99 with SMTP id a3mr5276888wix.15.1342195394245;
-	Fri, 13 Jul 2012 09:03:14 -0700 (PDT)
-Received: from [10.47.217.41] ([188.207.89.201])
-	by mx.google.com with ESMTPS id y2sm3980714wix.7.2012.07.13.09.03.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 09:03:13 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <38351001.3KzA0t96MO@helios>
-Date: Fri, 13 Jul 2012 18:03:08 +0200
-Message-Id: <71A2669E-47B3-4F5F-B631-014BBB23CC9F@dominion.thruhere.net>
+	Fri, 13 Jul 2012 18:26:59 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 13 Jul 2012 09:15:35 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="176988684"
+Received: from unknown (HELO helios.localnet) ([10.252.121.15])
+	by fmsmga001.fm.intel.com with ESMTP; 13 Jul 2012 09:15:34 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 13 Jul 2012 17:15:33 +0100
+Message-ID: <4236628.uxsfNWTicv@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.4 (Linux/3.2.0-26-generic-pae; KDE/4.8.4; i686; ; )
+In-Reply-To: <71A2669E-47B3-4F5F-B631-014BBB23CC9F@dominion.thruhere.net>
 References: <CANBf+V3=LvWkE28TR1qNR-NpLd60EGroEqmXQqypXAUUZ0pv-Q@mail.gmail.com>
-	<1442756.zsKFTug4Rk@helios> <20120712195752.GN3293@windriver.com>
 	<38351001.3KzA0t96MO@helios>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQmKgXlCvJF/LzrcCvUFrkIFwqJ0hGC19fz3Bi/ZBuhxzE0HDZOINPi5vz1aUe2ul/FNiGwv
-Cc: Joe MacDonald <joe.macdonald@windriver.com>
+	<71A2669E-47B3-4F5F-B631-014BBB23CC9F@dominion.thruhere.net>
+MIME-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Joe MacDonald <joe.macdonald@windriver.com>
 Subject: Re: Proposal: Creating meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,32 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 16:14:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Jul 2012 16:26:59 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+On Friday 13 July 2012 18:03:08 Koen Kooi wrote:
+> Op 13 jul. 2012, om 17:58 heeft Paul Eggleton het volgende geschreven:
+> > On Thursday 12 July 2012 15:57:52 Joe MacDonald wrote:
+> >> Just to make sure we're got it in context, though, the open points were:
+> >>   - tcpdump listed in meta-oe's recipes-core/tasks/task-cli-tools,
+> >>   
+> >>     under RDEPENDS_${PN}-debug.
+> > 
+> > Koen, any suggestions? This task has pretty random contents - some of it
+> > is even hardware-specific. Do we really need to keep this together?
+> 
+> That's an SHR recipe, you'd have to ask Martin Jansa.
 
-Op 13 jul. 2012, om 17:58 heeft Paul Eggleton het volgende geschreven:
+Ultimately we should not have anything distro-specific in meta-oe at all, which 
+means we all ought to have a say in its contents - otherwise it belongs in the 
+distro layer.
 
-> On Thursday 12 July 2012 15:57:52 Joe MacDonald wrote:
->> Just to make sure we're got it in context, though, the open points =
-were:
->>=20
->>   - tcpdump listed in meta-oe's recipes-core/tasks/task-cli-tools,
->>     under RDEPENDS_${PN}-debug.
->=20
-> Koen, any suggestions? This task has pretty random contents - some of =
-it is=20
-> even hardware-specific. Do we really need to keep this together?=20
+Martin, do you have any objection to this task recipe being reworked in the 
+face of the proposal to split tcpdump (and other networking-related recipes) 
+out to meta-networking?
 
-That's an SHR recipe, you'd have to ask Martin Jansa.
+> The biggest blocker right now is where meta-networking is going to be
+> hosted, the layers in the meta-openembedded repo can only depend on oe-core
+> and bitbake, no other external layers.
 
-The biggest blocker right now is where meta-networking is going to be =
-hosted, the layers in the meta-openembedded repo can only depend on =
-oe-core and bitbake, no other external layers.
+I'll leave this for Joe to comment on.
 
-regards,
+Cheers,
+Paul
 
-Koen=
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
