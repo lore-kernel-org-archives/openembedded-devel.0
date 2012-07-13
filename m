@@ -1,38 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSC-00080Q-LU
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SpbSE-0007zx-JI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 10:42:25 +0200
-Received: by bkcik5 with SMTP id ik5so2247528bkc.6
+	Fri, 13 Jul 2012 10:42:27 +0200
+Received: by mail-bk0-f47.google.com with SMTP id ik5so2247517bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2012 01:31:10 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=8iiDP7KqphdVoXAQ10NFuCvCTY6PPOf2dXtII0Ju2ZU=;
-	b=efKXvUQPUNYP7lU1nhcvyMU6RCmZ+et7SSoy6f1RuxFig8/IXE7XH4sg/TnBNJjqBJ
-	XT0KklpKUAIXPRTuwM68xK6RB8EX0dFfqvYzS0EBWuEZBDmdkoRlWt5JseMKT28K3vZK
-	cds8KQs1SF38LGOghbpf+NMs0MKRbHBBCzioz8FIJkwdpQFfmbFaOeliJmqm4MZakx8l
-	scvEzid5qTAYtq+Cj1QtOc6KuQpCzys4ott31RICzofyqn1mLUV05Wf3qWZfpPrBSj3p
-	Rzfr9waHQGyL6QhQfazw5720oBdQth29puUedT238ctqwi68ltQNrCIBiSFbXnlDJslX
-	G8Xg==
-Received: by 10.205.125.4 with SMTP id gq4mr114601bkc.109.1342168270560;
-	Fri, 13 Jul 2012 01:31:10 -0700 (PDT)
+	bh=W2DsZCdvL2mv3aKJg+C5g1ECMGp5sz2VNm7s6QXwWkQ=;
+	b=MDNOUQYyTESbr2KqJk8NJtuGDmgdQJl2Iad5lb3Qg59ltW1JaCnbENULoUsUGdXswm
+	YFxOZ0C8nPAKityXEOQW3iCh0K15ZXyilXU+6m0ArtAMF7tgcnsS9IR7w/0mhLL1/oUR
+	GvCWTdZ7v6ARIjHJzDOnxqjNjcEfknRDHxEGJsENgGjvPnd7KcoZ96vtslZQmUyfLCbq
+	F8scCFlfVSEhZnsWpXW97VpPkfh5C9ZYwMK1RBtN9zl3IDSYDx3wsNxaGpbS7kiAPwep
+	XNhB2n+NK80ZR1BtrlceZKro3NpQJfedlVorJcUBe4YOK4PL+/GLTwlRR2FHHF9b9FWO
+	exDA==
+Received: by 10.205.117.141 with SMTP id fm13mr105370bkc.125.1342168274776;
+	Fri, 13 Jul 2012 01:31:14 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.09
+	by mx.google.com with ESMTPS id fu8sm4214355bkc.5.2012.07.13.01.31.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 13 Jul 2012 01:31:09 -0700 (PDT)
+	Fri, 13 Jul 2012 01:31:14 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 10:30:10 +0200
-Message-Id: <1342168240-7760-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Jul 2012 10:30:13 +0200
+Message-Id: <1342168240-7760-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1342168240-7760-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe,V2 02/32] move systemd recipes to meta-systemd
+Subject: [meta-oe, V2 05/32] systemd.bbclass: add *-systemd packages to RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,93 +46,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 08:42:26 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 08:42:27 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-core/systemd/systemd-compat-units.bb   |    0
- .../systemd/systemd-compat-units/machineid.service |    0
- .../systemd-compat-units/run-postinsts.service     |    0
- .../systemd/systemd-machine-units_1.0.bb           |    0
- .../recipes-core/systemd/systemd-serialgetty.bb    |    0
- .../systemd/systemd-serialgetty/LICENSE            |    0
- .../systemd-serialgetty/serial-getty@.service      |    0
- .../recipes-core/systemd/systemd-speed-hacks.bb    |    0
- .../systemd/systemd-systemctl-native.bb            |    0
- .../systemd/systemd-systemctl-native/systemctl     |    0
- .../systemd/systemd/format-replace-m-uclibc.patch  |    0
- .../systemd/systemd/paper-over-mkostemp.patch      |    0
- .../recipes-core/systemd/systemd_git.bb            |    0
- 13 files changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-compat-units.bb (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-compat-units/machineid.service (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-compat-units/run-postinsts.service (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-machine-units_1.0.bb (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-serialgetty.bb (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-serialgetty/LICENSE (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-serialgetty/serial-getty@.service (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-speed-hacks.bb (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-systemctl-native.bb (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd-systemctl-native/systemctl (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd/format-replace-m-uclibc.patch (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd/paper-over-mkostemp.patch (100%)
- rename {meta-oe => meta-systemd}/recipes-core/systemd/systemd_git.bb (100%)
+ meta-systemd/classes/systemd.bbclass |   26 ++++++++++++++++++++++----
+ 1 files changed, 22 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units.bb b/meta-systemd/recipes-core/systemd/systemd-compat-units.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-compat-units.bb
-rename to meta-systemd/recipes-core/systemd/systemd-compat-units.bb
-diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units/machineid.service b/meta-systemd/recipes-core/systemd/systemd-compat-units/machineid.service
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-compat-units/machineid.service
-rename to meta-systemd/recipes-core/systemd/systemd-compat-units/machineid.service
-diff --git a/meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service b/meta-systemd/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-rename to meta-systemd/recipes-core/systemd/systemd-compat-units/run-postinsts.service
-diff --git a/meta-oe/recipes-core/systemd/systemd-machine-units_1.0.bb b/meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-machine-units_1.0.bb
-rename to meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty.bb b/meta-systemd/recipes-core/systemd/systemd-serialgetty.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-serialgetty.bb
-rename to meta-systemd/recipes-core/systemd/systemd-serialgetty.bb
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty/LICENSE b/meta-systemd/recipes-core/systemd/systemd-serialgetty/LICENSE
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-serialgetty/LICENSE
-rename to meta-systemd/recipes-core/systemd/systemd-serialgetty/LICENSE
-diff --git a/meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service b/meta-systemd/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-rename to meta-systemd/recipes-core/systemd/systemd-serialgetty/serial-getty@.service
-diff --git a/meta-oe/recipes-core/systemd/systemd-speed-hacks.bb b/meta-systemd/recipes-core/systemd/systemd-speed-hacks.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-speed-hacks.bb
-rename to meta-systemd/recipes-core/systemd/systemd-speed-hacks.bb
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native.bb b/meta-systemd/recipes-core/systemd/systemd-systemctl-native.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-systemctl-native.bb
-rename to meta-systemd/recipes-core/systemd/systemd-systemctl-native.bb
-diff --git a/meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl b/meta-systemd/recipes-core/systemd/systemd-systemctl-native/systemctl
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd-systemctl-native/systemctl
-rename to meta-systemd/recipes-core/systemd/systemd-systemctl-native/systemctl
-diff --git a/meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch b/meta-systemd/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-rename to meta-systemd/recipes-core/systemd/systemd/format-replace-m-uclibc.patch
-diff --git a/meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch b/meta-systemd/recipes-core/systemd/systemd/paper-over-mkostemp.patch
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd/paper-over-mkostemp.patch
-rename to meta-systemd/recipes-core/systemd/systemd/paper-over-mkostemp.patch
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-similarity index 100%
-rename from meta-oe/recipes-core/systemd/systemd_git.bb
-rename to meta-systemd/recipes-core/systemd/systemd_git.bb
+diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
+index 2e585c3..fce314d 100644
+--- a/meta-systemd/classes/systemd.bbclass
++++ b/meta-systemd/classes/systemd.bbclass
+@@ -180,8 +180,21 @@ python populate_packages_prepend () {
+ 					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entry %s does not exist" % \
+ 						(pkg_systemd, service)
+ 
+-	# *-systemd packages get RDEPENDS to systemd and their base package
+-	def systemd_add_rdepends(pkg_systemd):
++	"""     Setup rdepends / rrecommmends as:
++
++                -----------------------------
++                |  pkg_systemd_base: 'foo'  |
++                -----------------------------
++                           |    ^
++                           |    |                 --------------
++               rrecommends |    | rdepends        | 'systemd'  |
++                           |    |               ->--------------
++                           V    |              / rdepends
++                ------------------------------/
++                | pkg_systemd: 'foo-systemd' |
++                ------------------------------
++	"""
++	def systemd_add_rdepends_rrecommends(pkg_systemd):
+ 		# RDEPENDS_${pkg_systemd} += pkg_systemd_base systemd
+ 		rdepends = d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
+ 		rdepends_arr = rdepends.split()
+@@ -195,13 +208,18 @@ python populate_packages_prepend () {
+ 		if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
+ 			rdepends = '%s %s' % (rdepends, pkg_systemd_base)
+ 		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
+-
++		# RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
++		rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
++		# not rrecommending myself AND avoid double entries
++		if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
++			rrecommends = '%s %s' % (rrecommends, pkg_systemd)
++		d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
+ 
+ 	# run all modifications once when creating package
+ 	if os.path.exists('${D}'):
+ 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+ 			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) != "":
+ 				systemd_generate_package_scripts(pkg_systemd)
+-				systemd_add_rdepends(pkg_systemd)
++				systemd_add_rdepends_rrecommends(pkg_systemd)
+ 		systemd_check_services()
+ }
 -- 
 1.7.6.5
 
