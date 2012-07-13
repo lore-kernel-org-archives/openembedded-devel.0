@@ -1,31 +1,33 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SpYSA-0006cB-JX
+	(envelope-from <elvis.dowson@gmail.com>) id 1SpYXR-0006kQ-PV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Jul 2012 07:30:11 +0200
-Received: by pbbrq2 with SMTP id rq2so4563931pbb.6
+	Fri, 13 Jul 2012 07:35:38 +0200
+Received: by pbbrq2 with SMTP id rq2so4571146pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2012 22:18:56 -0700 (PDT)
+	Thu, 12 Jul 2012 22:24:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=AYJYg9djV1z4sLc6MRmbraqMR1uOJJdWaDaq5vivPs4=;
-	b=QlCju8VyItJz4C7kixF43sL9w2YCpdBn0x00NJzqijpVM/Qx8nlTFJ/IS109JPvA5U
-	2FsT3wRky9PPrOnN7c+OPB6vsBY1YupwzBheI6TIGO7akDf2QbriVSVuwau/NT/gbXlR
-	fTDv8VamreVFtDOC0U3MtEYNbHLf5Ukyp2NuWzKgEx6BHSv9l8t0NY+9TOOBaWAn2Put
-	yw/7YSfMl0fbWsuBWixH5FLBLRF/Hg6YwN2WqX0uy8ZwWmV77kMGApyfuh1e/nDd82SO
-	1kamK+5zOWVbPUvo9JY12lsM06HYCVggyRnoEeCLnb4aPOOxcvLLpgxcx985iYGg5zTu
-	J0KQ==
-Received: by 10.68.134.161 with SMTP id pl1mr500134pbb.29.1342156735886;
-	Thu, 12 Jul 2012 22:18:55 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=cmMNCoaf0EtR+N0W84nT5XVB+MDroSidM9d13XxdkUM=;
+	b=c7X1mRSE+m8C9M4BIZxIOunIAhLtpWJxQvdnJ6+ieSMNxV09C70MbIP5bVYD9kpEKd
+	ij9ys1LoeuuWPbWLkUJYZyZHmzJWnpBv2K4M5v6un+w9bMiQitTEbhb1216YU9XFhh4o
+	yqNMZ7XEgrF6sD81zXcaC11oQjNDltK3PYbVujJEjq9jNATKGoX7vMgL2MmdI8TbJLnv
+	juR7FGnuiWm8eS/picII3faxfmxnHNkoTaSSLHT57imcBlkUHkKwkEzWN765dshOwvfC
+	X3ZC/LlndQuSPwHIMbo3mk/jjiBlczhzI/AmPc6oR2C8XBM/Fyrwbvv16fiLTbrmdAwo
+	xZtw==
+Received: by 10.68.213.67 with SMTP id nq3mr515341pbc.142.1342157063071;
+	Thu, 12 Jul 2012 22:24:23 -0700 (PDT)
 Received: from localhost.localdomain ([94.205.108.162])
-	by mx.google.com with ESMTPS id pe8sm5259403pbc.76.2012.07.12.22.18.53
+	by mx.google.com with ESMTPS id ti1sm161492pbc.74.2012.07.12.22.24.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 Jul 2012 22:18:55 -0700 (PDT)
+	Thu, 12 Jul 2012 22:24:22 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jul 2012 09:18:46 +0400
-Message-Id: <1342156726-23890-1-git-send-email-elvis.dowson@gmail.com>
+Date: Fri, 13 Jul 2012 09:24:14 +0400
+Message-Id: <1342157054-30681-1-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <y>
+References: <y>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
 Subject: [meta-openembedded] meta-oe: Fix SRC_URI warnings to use "protocol" not "proto"
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,14 +43,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 05:30:11 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 05:35:38 -0000
 
 This commit updates the SRC_URI for the following recipes to use "protocol"
 meta-oe/recipes-devtools/python/python-pyyaml_svn.bb
 meta-oe/recipes-navigation/navit/navit_svn.bb
 meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb
 meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb
-#meta-oe/recipes-support/dfu-util/dfu-util_svn.bb
+meta-oe/recipes-support/dfu-util/dfu-util_svn.bb
 meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
 meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_svn.bb
 meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_svn.bb
