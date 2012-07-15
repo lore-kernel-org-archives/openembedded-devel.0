@@ -1,36 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SqMIr-0005Mb-BS for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jul 2012 12:43:53 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SqM7y-0006cx-0N for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Jul 2012 12:32:38 +0200
-Received: from 188.207.89.201 ([188.207.89.201])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jul 2012 12:32:38 +0200
-Received: from koen by 188.207.89.201 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jul 2012 12:32:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <elvis.dowson@gmail.com>) id 1SqTYM-0000eR-F6
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jul 2012 20:28:22 +0200
+Received: by pbbrq2 with SMTP id rq2so7989918pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jul 2012 11:17:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=Va8Zqd/pi0L66jTD6+PjNYnDkkeg6e2EI8ue6w0rd6g=;
+	b=A2KuRuY1KeoataBHeKd2uA2VOuT0hVT+Bv8jKO6+16oq7xGWgs4E07kaNEhPFWc7eY
+	O8Lu6lc0zmAP5Dj0lmAXr8cohESoO9m40Pv83w/duRzi31tz9cMqo6jIr2p58wZZmeIf
+	PlcewZmO/2prwatw3ldDJVEVWvmT+iOgy0uPptA0wu8FdbTYazNtdcP6qtDW0ygp9t7Y
+	saPLY4Kt+B5UMJ7Aj2RbXzIdHs+eiNvDx8KrRku/zTgcwjmEDOTH96TGVK90wMJAsU8H
+	VPjEQeFHqNlfYUQhZf4NbUwTAxcbxNpkyjgI7GXVYAla2cjwwVy3vvsRFej+MrGqrmk2
+	/RfQ==
+Received: by 10.66.73.70 with SMTP id j6mr17627681pav.5.1342376224350;
+	Sun, 15 Jul 2012 11:17:04 -0700 (PDT)
+Received: from localhost.localdomain ([94.205.108.162])
+	by mx.google.com with ESMTPS id se9sm10259892pbc.25.2012.07.15.11.17.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 15 Jul 2012 11:17:03 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 15 Jul 2012 12:32:25 +0200
-Message-ID: <jtu67p$oft$1@dough.gmane.org>
-References: <1342193205-25293-1-git-send-email-koen@dominion.thruhere.net>
-	<4461686.rdlsglFAG9@helios>
-	<3797A80A-708E-422C-B501-ADDB47AD4541@dominion.thruhere.net>
-	<1545322.vi2fespzus@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 188.207.89.201
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <1545322.vi2fespzus@helios>
-X-Enigmail-Version: 1.4.2
-Subject: Re: [meta-oe][meta-efl][PATCH] various: update ; proto= to ; protocol= in SRC_URI
+Date: Sun, 15 Jul 2012 22:16:52 +0400
+Message-Id: <1342376212-20391-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [meta-xilinx] xilinx-kernel.bbclass: Fix support for binary device tree generation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,45 +41,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jul 2012 10:43:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Jul 2012 18:28:22 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This commit fixes support for binary device tree generation, which was
+broken as a result of commit 8c904eb643ad8ca1bc29cb2d870a80b355dcb341
+in oe-core:
 
-Op 13-07-12 17:40, Paul Eggleton schreef:
-> On Friday 13 July 2012 17:37:47 Koen Kooi wrote:
->> Op 13 jul. 2012, om 17:35 heeft Paul Eggleton het volgende geschreven:
->>> On Friday 13 July 2012 17:26:45 Koen Kooi wrote:
->>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->>> 
->>> Just checking, you're aware that for the svn fetcher this will break
->>> with older versions of bitbake that don't have the recent patch
->>> applied?
->>> 
->>> If that's not a concern, no problem.
->> 
->> Not a concern for meta-oe master, only for release branches :)
-> 
-> My thinking was that at least in the OE-Classic days we didn't expect the
-> user to have bleeding edge bitbake even in master.
+linux-dtb: add multi-dtb build support
+    including following enhancement:
+    * support multi-dtb build
+    * skip dtb build and install when KERNEL_DEVICETREE is empty
+    * print a warning message when specified dts file is not available
 
-OE-core changed all that :/ I know RP avoids hard dependencies, but to avoid
-"that was fixed in bitbake master last week" type of responses the angstrom
-scripts that track oe-core master also track bitbake master.
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+---
+ classes/xilinx-kernel.bbclass |   10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQApw5MkyGM64RGpERAuCnAKCB6B5X4jcmHpbFnbRFfvzw9wZ+OgCeMZzc
-+KDiQv7qTysxp+Ryoj3Q2EM=
-=pbrL
------END PGP SIGNATURE-----
+diff --git a/classes/xilinx-kernel.bbclass b/classes/xilinx-kernel.bbclass
+index 14f4c7d..7c51b3d 100644
+--- a/classes/xilinx-kernel.bbclass
++++ b/classes/xilinx-kernel.bbclass
+@@ -22,16 +22,14 @@ def device_tree(a, d):
+ 
+     board = bb.data.getVar('XILINX_BOARD', d, 1)
+     cpu = bb.data.getVar('TARGET_CPU', d, 1)
+-
+     if re.match('powerpc', a):
+         target = cpu + '-' + board
+-        dts = 'arch/' + a + '/boot/dts/virtex' + target + '.dts'
++        dts = '${S}/arch/' + a + '/boot/dts/virtex' + target + '.dts'
+     else:
+         target = 'system'
+-        dts = 'arch/' + a + '/boot/dts/' + target + '.dts'
++        dts = '${S}/arch/' + a + '/boot/dts/' + target + '.dts'
+ 
+     bb.data.setVar('KERNEL_TARGET', target, d)
+-
+     return dts
+ 
+ 
+@@ -44,10 +42,10 @@ if [ -n "${XILINX_BSP_PATH}" ]; then
+ 		if [ -e "$dts" ]; then
+ 			bbnote "Xilinx BSP device tree located in: ${dts}"
+ 			if [ "${TARGET_ARCH}" = "powerpc" ]; then
+-				bbnote "Replacing linux kernel powerpc device tree to match located hardware model"
++				bbnote "Replacing linux kernel powerpc device tree to match located hardware model: virtex${KERNEL_TARGET}.dts"
+ 				cp -pP ${dts} ${S}/arch/powerpc/boot/dts/virtex${KERNEL_TARGET}.dts
+ 			else
+-				bbnote "Replacing linux kernel microblaze device tree to match located hardware model"
++				bbnote "Replacing linux kernel microblaze device tree to match located hardware model: ${KERNEL_TARGET}.dts"
+ 				cp -pP ${dts} ${S}/arch/microblaze/platform/generic/${KERNEL_TARGET}.dts
+ 			fi
+ 		else
+-- 
+1.7.9.5
 
 
 
