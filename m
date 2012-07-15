@@ -1,20 +1,36 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1Sq0td-0005O8-KH
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Jul 2012 13:52:25 +0200
-Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 62816EA04B;
-	Sat, 14 Jul 2012 13:45:44 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id DC04760297; Sat, 14 Jul 2012 13:41:07 +0200 (CEST)
-From: Apelete Seketeli <apelete@seketeli.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SqMIr-0005Mb-BS for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jul 2012 12:43:53 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SqM7y-0006cx-0N for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Jul 2012 12:32:38 +0200
+Received: from 188.207.89.201 ([188.207.89.201])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jul 2012 12:32:38 +0200
+Received: from koen by 188.207.89.201 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jul 2012 12:32:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Jul 2012 13:41:07 +0200
-Message-Id: <1342266067-8662-1-git-send-email-apelete@seketeli.net>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Kristoffer Ericson <kristoffer.ericson@gmail.com>
-Subject: [oe-classic][PATCH] opkg-utils: bump SRCREV to keep python2.6 compatibility
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 15 Jul 2012 12:32:25 +0200
+Message-ID: <jtu67p$oft$1@dough.gmane.org>
+References: <1342193205-25293-1-git-send-email-koen@dominion.thruhere.net>
+	<4461686.rdlsglFAG9@helios>
+	<3797A80A-708E-422C-B501-ADDB47AD4541@dominion.thruhere.net>
+	<1545322.vi2fespzus@helios>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 188.207.89.201
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <1545322.vi2fespzus@helios>
+X-Enigmail-Version: 1.4.2
+Subject: Re: [meta-oe][meta-efl][PATCH] various: update ; proto= to ; protocol= in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,35 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jul 2012 11:52:25 -0000
+X-List-Received-Date: Sun, 15 Jul 2012 10:43:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Fix an issue where opkg-utils was using a method that requires at
-least python2.7, causing compatibility issues on hosts that are still
-using python2.6.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
----
- recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Op 13-07-12 17:40, Paul Eggleton schreef:
+> On Friday 13 July 2012 17:37:47 Koen Kooi wrote:
+>> Op 13 jul. 2012, om 17:35 heeft Paul Eggleton het volgende geschreven:
+>>> On Friday 13 July 2012 17:26:45 Koen Kooi wrote:
+>>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>> 
+>>> Just checking, you're aware that for the svn fetcher this will break
+>>> with older versions of bitbake that don't have the recent patch
+>>> applied?
+>>> 
+>>> If that's not a concern, no problem.
+>> 
+>> Not a concern for meta-oe master, only for release branches :)
+> 
+> My thinking was that at least in the OE-Classic days we didn't expect the
+> user to have bleeding edge bitbake even in master.
 
-diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
-index 997b292..75a1e9a 100644
---- a/recipes/opkg-utils/opkg-utils_git.bb
-+++ b/recipes/opkg-utils/opkg-utils_git.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                      file://opkg.py;beginline=1;endline=18;md5=15917491ad6bf7acc666ca5f7cc1e083"
- RDEPENDS_${PN} = "python"
- RDEPENDS_${PN}_virtclass-native = ""
--SRCREV = "44df9dd3dc411ca1255cb4b23bde7eb71aed4778"
-+SRCREV = "423ecd36b4782327c16f516885d1248249c7724a"
- PV = "0.1.8+git${SRCPV}"
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
-            "
--- 
-1.7.10.4
+OE-core changed all that :/ I know RP avoids hard dependencies, but to avoid
+"that was fixed in bitbake master last week" type of responses the angstrom
+scripts that track oe-core master also track bitbake master.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQApw5MkyGM64RGpERAuCnAKCB6B5X4jcmHpbFnbRFfvzw9wZ+OgCeMZzc
++KDiQv7qTysxp+Ryoj3Q2EM=
+=pbrL
+-----END PGP SIGNATURE-----
 
 
 
