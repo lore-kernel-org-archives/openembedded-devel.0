@@ -1,32 +1,35 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SqhjE-0007In-Qi
+	(envelope-from <koen@dominion.thruhere.net>) id 1SqjX9-000293-6V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2012 11:36:32 +0200
-Received: by bkcik5 with SMTP id ik5so3347036bkc.6
+	Mon, 16 Jul 2012 13:32:11 +0200
+Received: by eaal1 with SMTP id l1so1387575eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 02:25:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=YXBisCqvPhZo3jVH6ogg5NnJS7xNCBmHMo15C1HW7qE=;
-	b=kieHlY3Vrgk1LjSnC3xjm6yQ1x+OAmvs2DCeZ8Uc8x0RjE5TpW3Q+zvM8Hh8sYMFzc
-	20F5yYo0d4q9gIzRyCh9imFiDhkBhaxjX06T/Csg5iuB0G5TOk1r7X0I+XDjcDqx0IWv
-	OK1y0Lb1EmXj3wSGLuNRCZn3Fx1l5XoVu80+/K95QSnPUdbgj/sux58EuWIdNnWWnbOU
-	+ccW58LBI/F/dZxKvcpaA48845/vPgiU7gcEotMI3KlwZ5wbdkXdOIRFdiMLm9NFF9MH
-	BfSav2aujZnY83M5bauaT+c01R/g9BBeQBm+w4tUuuogxsuezTkftPz4OzWlRiJMx1N+
-	Jytg==
-Received: by 10.205.128.3 with SMTP id hc3mr4510886bkc.29.1342430714950;
-	Mon, 16 Jul 2012 02:25:14 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gq2sm7568706bkc.13.2012.07.16.02.25.13
+	Mon, 16 Jul 2012 04:20:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=r3eNPwOTikQW+XmnNxvYpEFdsUatIW/LevzoWwesuU4=;
+	b=bGlbyijB3hZPhwboMfNuNqDWCLAYcCVbRqXD2igLz3v8/9X3OMAgjbHGPSf6R65sUv
+	JxGX7+Nl/HmAULFRy8WDuu0w2E4aDk9jnP4lst/uDbZMuAU6NkKgCq+2xClfJdTJvgaC
+	jwyp4qygU8ZWe8E3YVWziEKYkTmDVIFyQ0e3gLgYsqhyPZkeEEqL5+zfx0vhZPN6Zt+L
+	j5V6how9wyXe1ukC6Aur5aOstdHhA4JFZ2dG2JmlZz8wDQUUpXhH0DHMOrdDmF9g65Sm
+	zoahfBkfO9l7ImB3g6IQFyUGQaqJ+QW1CyF7BGy2vT6nJ2Uq/vUbXuw6eXcVE+gqP6l+
+	4m9A==
+Received: by 10.14.225.133 with SMTP id z5mr4732614eep.35.1342437653043;
+	Mon, 16 Jul 2012 04:20:53 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id s8sm17872400eeo.8.2012.07.16.04.20.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 02:25:14 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 16 Jul 2012 04:20:52 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2012 11:25:20 +0200
-Message-Id: <1342430720-4501-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-handheld][PATCH] recipes: svn SRC_URI s/proto=/protocol=/g
+Date: Mon, 16 Jul 2012 13:20:47 +0200
+Message-Id: <1342437647-815-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQlq3lMakczN24ELgeN6370yBDJdCUP7mhYy+Ukl3XXVLvDFhf4231rxhoCxauIbmatifwHC
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] v4l-utils 0.8.8: disable qv4l2 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +43,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 09:36:32 -0000
+X-List-Received-Date: Mon, 16 Jul 2012 11:32:11 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+It picks up host qmake and breaks the build.
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-bsp/ezx/ezx-gpiotool_svn.bb |    2 +-
- recipes-bsp/ezx/ezxd_svn.bb         |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../v4l-utils/0001-disable-qv4l2-build.patch       |   39 ++++++++++++++++++++
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb |    6 ++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
 
-diff --git a/recipes-bsp/ezx/ezx-gpiotool_svn.bb b/recipes-bsp/ezx/ezx-gpiotool_svn.bb
-index 2d403de..ed733a2 100644
---- a/recipes-bsp/ezx/ezx-gpiotool_svn.bb
-+++ b/recipes-bsp/ezx/ezx-gpiotool_svn.bb
-@@ -7,7 +7,7 @@ SRCREV = "1877"
- PV = "${SRCPV}"
- PR = "r1"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
+new file mode 100644
+index 0000000..4b11038
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
+@@ -0,0 +1,39 @@
++From 1422d4c562660407919fb753dc5f074293b395e5 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Mon, 16 Jul 2012 12:00:34 +0200
++Subject: [PATCH] disable qv4l2 build
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ utils/Makefile |   15 ---------------
++ 1 files changed, 0 insertions(+), 15 deletions(-)
++
++diff --git a/utils/Makefile b/utils/Makefile
++index 014b82d..db74851 100644
++--- a/utils/Makefile
+++++ b/utils/Makefile
++@@ -5,21 +5,6 @@ all install:
++ 		$(MAKE) -C $$i $@ || exit 1; \
++ 	done
++ 
++-	# Test whether qmake is installed, and whether it is for qt4.
++-	@if which qmake-qt4 >/dev/null 2>&1; then \
++-		QMAKE=qmake-qt4; \
++-	else \
++-		QMAKE=qmake; \
++-	fi; \
++-	if which $$QMAKE >/dev/null 2>&1; then \
++-		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
++-			if [ ! -f qv4l2/Makefile ]; then \
++-				(cd qv4l2 && $$QMAKE) || exit 1; \
++-			fi; \
++-			$(MAKE) -C qv4l2 -f Makefile.install $@; \
++-		fi \
++-	fi
++-
++ sync-with-kernel:
++ 	$(MAKE) -C keytable $@
++ 	$(MAKE) -C v4l2-dbg $@
++-- 
++1.7.7.6
++
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+index 18f361f..e5d1fc2 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+@@ -3,12 +3,16 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
+                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
  
--SRC_URI = "svn://svn.openezx.org/trunk/src/userspace;module=gpiotool;proto=http"
-+SRC_URI = "svn://svn.openezx.org/trunk/src/userspace;module=gpiotool;protocol=http"
- S = "${WORKDIR}/gpiotool"
++PR = "r1"
++
+ DEPENDS = "jpeg"
  
- do_compile() {
-diff --git a/recipes-bsp/ezx/ezxd_svn.bb b/recipes-bsp/ezx/ezxd_svn.bb
-index f738b5f..6dbcd0f 100644
---- a/recipes-bsp/ezx/ezxd_svn.bb
-+++ b/recipes-bsp/ezx/ezxd_svn.bb
-@@ -7,7 +7,7 @@ SRCREV = "2513"
- PV = "0.0+svnr${SRCPV}"
- PR = "r4"
+ # libv4l was absorbed into this, let OE know that
+ PROVIDES = "libv4l"
  
--SRC_URI = "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;proto=http \
-+SRC_URI = "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;protocol=http \
-            file://ezxd.init \
-           "
+-SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
++SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
++           file://0001-disable-qv4l2-build.patch \
++          "
+ # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
+ SRCREV = "54f16ca8183dd8ae8bf4ccc07949795aff0301f5"
  
 -- 
-1.7.8.6
+1.7.10
 
 
 
