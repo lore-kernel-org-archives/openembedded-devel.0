@@ -1,41 +1,35 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sqppc-00055Q-UR
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2012 20:15:40 +0200
-Received: by bkcik5 with SMTP id ik5so3794941bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 11:04:22 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1Sqq9w-0005c5-0f; Mon, 16 Jul 2012 20:36:40 +0200
+Received: by wibhm11 with SMTP id hm11so2649386wib.6
+	for <multiple recipients>; Mon, 16 Jul 2012 11:25:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8svgK5oi7W5nCHdpcspoN+95/vV5QonydDyKcT1zjnE=;
-	b=pKS1BtR5Dejaf1kLdTC3uTfcFx/VwOXfsR/2tQgFQejoYEJtESZh2Hq5aGTVVyrCXX
-	SX+/S+sVnqzEx3Fp+YWd+LqnL0ZAlBER9hymdlkYO/KZmE3LY1qfJNcGxrADDL9hyAOU
-	5+i9W2P87sAotUTDHrSwpTF6wraV3qBPCq5arzZ0vMayrLvHGntVAsgrQtiSe4qJkN5E
-	JjRyeqYVrvYrCICJ7/WPnh/KTvyNnfjNOY6sMaI/U1ehvh3nZ/Ml1SsevhwswW4yqS8w
-	tKmkrE/VvA+v8QRyTjP8Q3uD+8RSlDf1d+Im0I1aLuxRsbCViCkxZji7s6/iG8MsgDm8
-	rHow==
-Received: by 10.204.154.141 with SMTP id o13mr5150125bkw.72.1342461862672;
-	Mon, 16 Jul 2012 11:04:22 -0700 (PDT)
+	bh=/sBs+bbGsDv285NfIghqeF9+IH/fRwVyMtD2nY5Kqoc=;
+	b=FRKmmCROMe8DDbr4CRWdJJ1N4SFLwSfIQNLdFmuar63J2V63VydIM0LrswBK8tT9mg
+	oCzSh29m97tFdXWGxQZ9Mh0PFEBT24NXtrpMBqbS0JDxvJLqO7SgZW7vmwj3Dc8XOrLQ
+	gQC3HozYQbGL3jwhVvO7+iFQEcd0eV9j6qozIvrMFSoCALfwzhlngbpClSrhFc2zSdCW
+	YPyYL4OtizmbN8swfkgMtW7Sm2SqBVslhMa4Pig2LgMcfKFBEqXuEWKG1J2cXPpm5yR5
+	H2LdUWx7fvjJx6g4mH3zN40HRh8U7xi/+83Z2LL0kKtAfu2VGXr/aHuTOObClCKPJM/B
+	1cSA==
+Received: by 10.180.83.105 with SMTP id p9mr20130840wiy.12.1342463121653;
+	Mon, 16 Jul 2012 11:25:21 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id g6sm8657232bkg.2.2012.07.16.11.04.21
+	by mx.google.com with ESMTPS id h9sm22687889wiz.1.2012.07.16.11.25.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 11:04:21 -0700 (PDT)
-Date: Mon, 16 Jul 2012 20:04:30 +0200
+	Mon, 16 Jul 2012 11:25:19 -0700 (PDT)
+Date: Mon, 16 Jul 2012 20:25:28 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120716180430.GN3729@jama.jama.net>
-References: <1342460316-5489-1-git-send-email-raj.khem@gmail.com>
-	<1342460316-5489-3-git-send-email-raj.khem@gmail.com>
-	<20120716174642.GK3729@jama.jama.net>
-	<CAMKF1so4v-Sjm6sgHY4U_d7CwwwGp4DfQc0CSOq75n2kFwYvvA@mail.gmail.com>
-	<20120716175819.GM3729@jama.jama.net>
-	<CAMKF1sqmBCMU4WgjzVWfukUpxV4enTs_7=bSw+kFhUWUEQ+HeQ@mail.gmail.com>
+Message-ID: <20120716182528.GO3729@jama.jama.net>
+References: <20120716074256.12AC410334@opal>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqmBCMU4WgjzVWfukUpxV4enTs_7=bSw+kFhUWUEQ+HeQ@mail.gmail.com>
+In-Reply-To: <20120716074256.12AC410334@opal>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [RFC][meta-oe][PATCH 3/3] blacklist.bbclass: Move to meta-angstrom
+Cc: openembedded-commits@lists.openembedded.org
+Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBzeXN0ZW1kLmJiY2xhc3M6IGFkZCAqLXN5c3RlbWQgcGFja2FnZXMgdG8gUlJFQ09NTUVORFM=?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,46 +43,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 18:15:41 -0000
-X-Groupsio-MsgNum: 39696
+X-List-Received-Date: Mon, 16 Jul 2012 18:36:40 -0000
+X-Groupsio-MsgNum: 39697
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Rzq/nSLlHy1djmXS"
+	protocol="application/pgp-signature"; boundary="ZmZU9S7l/XJx5q9b"
 Content-Disposition: inline
 
---Rzq/nSLlHy1djmXS
-Content-Type: text/plain; charset=us-ascii
+--ZmZU9S7l/XJx5q9b
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 16, 2012 at 11:00:37AM -0700, Khem Raj wrote:
-> On Mon, Jul 16, 2012 at 10:58 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> >
-> > Yes, but that would require distro config to be updated from
-> > ANGSTROM_BLACKLIST_PN to PNBLACKLIST[pn] at the same time this class is
-> > moved or duplicate all blacklist entries now and then remove
-> > ANGSTROM_BLACKLIST_PN after it's moved..
+On Mon, Jul 16, 2012 at 07:42:56AM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 264e5a44e1111f939b43c11bb9514a0b435918db
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D264e5a44e1111f939b43c11bb9514a0b435918db
 >=20
-> synchronisation can be worked out if you are willing.
+> Author: Andreas M=FCller <schnitzeltony@googlemail.com>
+> Date:   Wed Jul 11 20:46:07 2012 +0200
+>=20
+> systemd.bbclass: add *-systemd packages to RRECOMMENDS
 
-Yes, it can and I'm willing to do it.. that's why haven't responded just
-with NACK :).
+This is a bit unfortunate e.g. when busybox is used in small chroot
+image.
+busybox pulls busybox-syslog, which now adds busybox-syslog-systemd and
+it ends with systemd/dbus/udev/shadow/pam/util-linux/kmod being added to pr=
+eviously small image, see:
+
+http://git.shr-project.org/git/?p=3Dbuildhistory.git;a=3Dblobdiff;f=3Dimage=
+s/crespo/eglibc/chroot-image/installed-package-names.txt;h=3D07187b9e51bd01=
+99910152a8019d117ed41cc2db;hp=3D8f401e657dd449e30fe8183dc86a791d09614d9f;hb=
+=3Dac04304bb15221b49e5af6838068f158e7d628ed;hpb=3D4c0555e7fa689c3c20902c7fc=
+1ec8e525769723f
+
+So it could be solved by image specific BAD_RECOMMENDATIONs or something
+like that, but by default it doesn't work very well in this use-case.
 
 Cheers,
+
+>=20
+> ---
+>=20
+>  meta-systemd/classes/systemd.bbclass |   26 ++++++++++++++++++++++----
+>  1 files changed, 22 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/=
+systemd.bbclass
+> index 2e585c3..fce314d 100644
+> --- a/meta-systemd/classes/systemd.bbclass
+> +++ b/meta-systemd/classes/systemd.bbclass
+> @@ -180,8 +180,21 @@ python populate_packages_prepend () {
+>  					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entr=
+y %s does not exist" % \
+>  						(pkg_systemd, service)
+> =20
+> -	# *-systemd packages get RDEPENDS to systemd and their base package
+> -	def systemd_add_rdepends(pkg_systemd):
+> +	"""     Setup rdepends / rrecommmends as:
+> +
+> +                -----------------------------
+> +                |  pkg_systemd_base: 'foo'  |
+> +                -----------------------------
+> +                           |    ^
+> +                           |    |                 --------------
+> +               rrecommends |    | rdepends        | 'systemd'  |
+> +                           |    |               ->--------------
+> +                           V    |              / rdepends
+> +                ------------------------------/
+> +                | pkg_systemd: 'foo-systemd' |
+> +                ------------------------------
+> +	"""
+> +	def systemd_add_rdepends_rrecommends(pkg_systemd):
+>  		# RDEPENDS_${pkg_systemd} +=3D pkg_systemd_base systemd
+>  		rdepends =3D d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
+>  		rdepends_arr =3D rdepends.split()
+> @@ -195,13 +208,18 @@ python populate_packages_prepend () {
+>  		if len(rdepends_arr) =3D=3D 0 and pkg_systemd !=3D '${PN}' and not pkg=
+_systemd_base in rdepends:
+>  			rdepends =3D '%s %s' % (rdepends, pkg_systemd_base)
+>  		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
+> -
+> +		# RRECOMMENDS_${pkg_systemd_base} +=3D pkg_systemd systemd
+> +		rrecommends =3D d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
+> +		# not rrecommending myself AND avoid double entries
+> +		if pkg_systemd !=3D pkg_systemd_base and not pkg_systemd in rrecommend=
+s.split():
+> +			rrecommends =3D '%s %s' % (rrecommends, pkg_systemd)
+> +		d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
+> =20
+>  	# run all modifications once when creating package
+>  	if os.path.exists('${D}'):
+>  		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+>  			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) !=3D "":
+>  				systemd_generate_package_scripts(pkg_systemd)
+> -				systemd_add_rdepends(pkg_systemd)
+> +				systemd_add_rdepends_rrecommends(pkg_systemd)
+>  		systemd_check_services()
+>  }
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Rzq/nSLlHy1djmXS
+--ZmZU9S7l/XJx5q9b
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlAEV64ACgkQN1Ujt2V2gBx49gCdEk6E2XuYY1rixEqmOvEAAOSU
-qrgAn3NhtWSbpxjNVV5ULeigLyJa6GGI
-=H7rA
+iEYEARECAAYFAlAEXJgACgkQN1Ujt2V2gBz1dACeM9fpLm74yiOXj5N9ERGk8P53
+S3AAoLUlF5mO74hOIAqYkEJh9MFnymUH
+=VVov
 -----END PGP SIGNATURE-----
 
---Rzq/nSLlHy1djmXS--
+--ZmZU9S7l/XJx5q9b--
