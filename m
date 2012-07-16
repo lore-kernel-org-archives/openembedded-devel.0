@@ -1,35 +1,34 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1Sqq9w-0005c5-0f; Mon, 16 Jul 2012 20:36:40 +0200
-Received: by wibhm11 with SMTP id hm11so2649386wib.6
-	for <multiple recipients>; Mon, 16 Jul 2012 11:25:21 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>) id 1SqqZr-0006gi-Ni
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Jul 2012 21:03:27 +0200
+Received: by wgbdr1 with SMTP id dr1so1878546wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Jul 2012 11:52:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/sBs+bbGsDv285NfIghqeF9+IH/fRwVyMtD2nY5Kqoc=;
-	b=FRKmmCROMe8DDbr4CRWdJJ1N4SFLwSfIQNLdFmuar63J2V63VydIM0LrswBK8tT9mg
-	oCzSh29m97tFdXWGxQZ9Mh0PFEBT24NXtrpMBqbS0JDxvJLqO7SgZW7vmwj3Dc8XOrLQ
-	gQC3HozYQbGL3jwhVvO7+iFQEcd0eV9j6qozIvrMFSoCALfwzhlngbpClSrhFc2zSdCW
-	YPyYL4OtizmbN8swfkgMtW7Sm2SqBVslhMa4Pig2LgMcfKFBEqXuEWKG1J2cXPpm5yR5
-	H2LdUWx7fvjJx6g4mH3zN40HRh8U7xi/+83Z2LL0kKtAfu2VGXr/aHuTOObClCKPJM/B
-	1cSA==
-Received: by 10.180.83.105 with SMTP id p9mr20130840wiy.12.1342463121653;
-	Mon, 16 Jul 2012 11:25:21 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=uKiu3Fjg4elMb1xyfU6gkp7MgZhz/sivDluT91yFdtc=;
+	b=NV1L4yZ9wMhj206VuaRYW2wTHkzOysb0t4VLx7nyHbDwrX3HnLGadnkPxlyoR1W2zA
+	KPVSx4I77UK7KSPOQrSyIeRXK3OIXLNUUbYdFtlS/5o8xyl5sSpW35sJh7/At15uiD64
+	yIx7rbq70NiVm/HmFXzS1RYfn1y6SygQijsAzd2mNMb2as0JTUSZwwK8bYQ7Cv2pQ023
+	7XB0mkLEJADdgc0GVVCLoHgDpVMzWrydooz9Pb2MPkA1ZRvtCn9EUhzSgVUsbzNvoJD4
+	YtxAjisBcL17YPIRe8TZGXWWb3UDvsVpTd5CWYEhM13+mNKKVwN9IHEyqcky8GZvlyDm
+	wmUg==
+Received: by 10.180.100.35 with SMTP id ev3mr20336641wib.10.1342464729424;
+	Mon, 16 Jul 2012 11:52:09 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id h9sm22687889wiz.1.2012.07.16.11.25.19
+	by mx.google.com with ESMTPS id w7sm22790933wiz.0.2012.07.16.11.52.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 11:25:19 -0700 (PDT)
-Date: Mon, 16 Jul 2012 20:25:28 +0200
+	Mon, 16 Jul 2012 11:52:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120716182528.GO3729@jama.jama.net>
-References: <20120716074256.12AC410334@opal>
-MIME-Version: 1.0
-In-Reply-To: <20120716074256.12AC410334@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBzeXN0ZW1kLmJiY2xhc3M6IGFkZCAqLXN5c3RlbWQgcGFja2FnZXMgdG8gUlJFQ09NTUVORFM=?=
+Date: Mon, 16 Jul 2012 20:52:04 +0200
+Message-Id: <1342464724-25386-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+In-Reply-To: <1342430652-15388-1-git-send-email-koen@dominion.thruhere.net>
+References: <1342430652-15388-1-git-send-email-koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] pulseaudio: add patch to fix build with new udev API provided by systemd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,125 +42,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 18:36:40 -0000
-X-Groupsio-MsgNum: 39697
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZmZU9S7l/XJx5q9b"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Jul 2012 19:03:27 -0000
 
---ZmZU9S7l/XJx5q9b
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../pulseaudio/pulseaudio-2.0-udev-symbols.patch   |   80 ++++++++++++++++++++
+ .../pulseaudio/pulseaudio_1.1.bbappend             |    5 +
+ 2 files changed, 85 insertions(+), 0 deletions(-)
+ create mode 100644 meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+ create mode 100644 meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
 
-On Mon, Jul 16, 2012 at 07:42:56AM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 264e5a44e1111f939b43c11bb9514a0b435918db
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3D264e5a44e1111f939b43c11bb9514a0b435918db
->=20
-> Author: Andreas M=FCller <schnitzeltony@googlemail.com>
-> Date:   Wed Jul 11 20:46:07 2012 +0200
->=20
-> systemd.bbclass: add *-systemd packages to RRECOMMENDS
+diff --git a/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+new file mode 100644
+index 0000000..1ad720b
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+@@ -0,0 +1,80 @@
++From 2e64edbd3e12145950ccd952bb7984a4420b8c02 Mon Sep 17 00:00:00 2001
++From: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
++Date: Thu, 17 May 2012 22:50:22 +0200
++Subject: [PATCH] udev: Don't use deprecated udev_get_*_path() functions
++
++[These symbols were removed in libudev.so.1.0.0. Replace them with
++hardcoded strings. -- heftig]
++
++Signed-off-by: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
++---
++ src/modules/module-udev-detect.c |    9 +++------
++ src/modules/udev-util.c          |    4 ++--
++ 2 files changed, 5 insertions(+), 8 deletions(-)
++
++diff --git a/src/modules/module-udev-detect.c b/src/modules/module-udev-detect.c
++index 1192194..31416bd 100644
++--- a/src/modules/module-udev-detect.c
+++++ b/src/modules/module-udev-detect.c
++@@ -123,7 +123,7 @@ static char *card_get_sysattr(const char *card_idx, const char *name) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%s", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%s", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++@@ -282,7 +282,7 @@ static void verify_access(struct userdata *u, struct device *d) {
++     pa_assert(u);
++     pa_assert(d);
++ 
++-    cd = pa_sprintf_malloc("%s/snd/controlC%s", udev_get_dev_path(u->udev), path_get_card_id(d->path));
+++    cd = pa_sprintf_malloc("/dev/snd/controlC%s", path_get_card_id(d->path));
++     accessible = access(cd, R_OK|W_OK) >= 0;
++     pa_log_debug("%s is accessible: %s", cd, pa_yes_no(accessible));
++ 
++@@ -621,7 +621,6 @@ fail:
++ }
++ 
++ static int setup_inotify(struct userdata *u) {
++-    char *dev_snd;
++     int r;
++ 
++     if (u->inotify_fd >= 0)
++@@ -632,9 +631,7 @@ static int setup_inotify(struct userdata *u) {
++         return -1;
++     }
++ 
++-    dev_snd = pa_sprintf_malloc("%s/snd", udev_get_dev_path(u->udev));
++-    r = inotify_add_watch(u->inotify_fd, dev_snd, IN_ATTRIB|IN_CLOSE_WRITE|IN_DELETE_SELF|IN_MOVE_SELF);
++-    pa_xfree(dev_snd);
+++    r = inotify_add_watch(u->inotify_fd, "/dev/snd", IN_ATTRIB|IN_CLOSE_WRITE|IN_DELETE_SELF|IN_MOVE_SELF);
++ 
++     if (r < 0) {
++         int saved_errno = errno;
++diff --git a/src/modules/udev-util.c b/src/modules/udev-util.c
++index 2f18bc4..b0bb17d 100644
++--- a/src/modules/udev-util.c
+++++ b/src/modules/udev-util.c
++@@ -180,7 +180,7 @@ int pa_udev_get_info(int card_idx, pa_proplist *p) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%i", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%i", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++@@ -277,7 +277,7 @@ char* pa_udev_get_property(int card_idx, const char *name) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%i", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%i", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++-- 
++1.7.8.6
++
+diff --git a/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
+new file mode 100644
+index 0000000..3e81365
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
+@@ -0,0 +1,5 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
++
++SRC_URI += "file://pulseaudio-2.0-udev-symbols.patch"
++
++PRINC := "${@int(PRINC) + 1}"
+-- 
+1.7.8.6
 
-This is a bit unfortunate e.g. when busybox is used in small chroot
-image.
-busybox pulls busybox-syslog, which now adds busybox-syslog-systemd and
-it ends with systemd/dbus/udev/shadow/pam/util-linux/kmod being added to pr=
-eviously small image, see:
 
-http://git.shr-project.org/git/?p=3Dbuildhistory.git;a=3Dblobdiff;f=3Dimage=
-s/crespo/eglibc/chroot-image/installed-package-names.txt;h=3D07187b9e51bd01=
-99910152a8019d117ed41cc2db;hp=3D8f401e657dd449e30fe8183dc86a791d09614d9f;hb=
-=3Dac04304bb15221b49e5af6838068f158e7d628ed;hpb=3D4c0555e7fa689c3c20902c7fc=
-1ec8e525769723f
 
-So it could be solved by image specific BAD_RECOMMENDATIONs or something
-like that, but by default it doesn't work very well in this use-case.
-
-Cheers,
-
->=20
-> ---
->=20
->  meta-systemd/classes/systemd.bbclass |   26 ++++++++++++++++++++++----
->  1 files changed, 22 insertions(+), 4 deletions(-)
->=20
-> diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/=
-systemd.bbclass
-> index 2e585c3..fce314d 100644
-> --- a/meta-systemd/classes/systemd.bbclass
-> +++ b/meta-systemd/classes/systemd.bbclass
-> @@ -180,8 +180,21 @@ python populate_packages_prepend () {
->  					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entr=
-y %s does not exist" % \
->  						(pkg_systemd, service)
-> =20
-> -	# *-systemd packages get RDEPENDS to systemd and their base package
-> -	def systemd_add_rdepends(pkg_systemd):
-> +	"""     Setup rdepends / rrecommmends as:
-> +
-> +                -----------------------------
-> +                |  pkg_systemd_base: 'foo'  |
-> +                -----------------------------
-> +                           |    ^
-> +                           |    |                 --------------
-> +               rrecommends |    | rdepends        | 'systemd'  |
-> +                           |    |               ->--------------
-> +                           V    |              / rdepends
-> +                ------------------------------/
-> +                | pkg_systemd: 'foo-systemd' |
-> +                ------------------------------
-> +	"""
-> +	def systemd_add_rdepends_rrecommends(pkg_systemd):
->  		# RDEPENDS_${pkg_systemd} +=3D pkg_systemd_base systemd
->  		rdepends =3D d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
->  		rdepends_arr =3D rdepends.split()
-> @@ -195,13 +208,18 @@ python populate_packages_prepend () {
->  		if len(rdepends_arr) =3D=3D 0 and pkg_systemd !=3D '${PN}' and not pkg=
-_systemd_base in rdepends:
->  			rdepends =3D '%s %s' % (rdepends, pkg_systemd_base)
->  		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
-> -
-> +		# RRECOMMENDS_${pkg_systemd_base} +=3D pkg_systemd systemd
-> +		rrecommends =3D d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
-> +		# not rrecommending myself AND avoid double entries
-> +		if pkg_systemd !=3D pkg_systemd_base and not pkg_systemd in rrecommend=
-s.split():
-> +			rrecommends =3D '%s %s' % (rrecommends, pkg_systemd)
-> +		d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
-> =20
->  	# run all modifications once when creating package
->  	if os.path.exists('${D}'):
->  		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
->  			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) !=3D "":
->  				systemd_generate_package_scripts(pkg_systemd)
-> -				systemd_add_rdepends(pkg_systemd)
-> +				systemd_add_rdepends_rrecommends(pkg_systemd)
->  		systemd_check_services()
->  }
->=20
->=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ZmZU9S7l/XJx5q9b
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAEXJgACgkQN1Ujt2V2gBz1dACeM9fpLm74yiOXj5N9ERGk8P53
-S3AAoLUlF5mO74hOIAqYkEJh9MFnymUH
-=VVov
------END PGP SIGNATURE-----
-
---ZmZU9S7l/XJx5q9b--
