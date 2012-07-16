@@ -1,40 +1,33 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sqn43-0005Wm-Ga
+	(envelope-from <raj.khem@gmail.com>) id 1SqpRQ-0003Ja-5z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2012 17:18:23 +0200
-Received: by bkcik5 with SMTP id ik5so3612740bkc.6
+	Mon, 16 Jul 2012 19:50:40 +0200
+Received: by pbbrq2 with SMTP id rq2so9479911pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 08:07:05 -0700 (PDT)
+	Mon, 16 Jul 2012 10:39:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JzOubkfmgEIu/FT2LPS5xPFbUJlqjm1FMjdh4g7nyaA=;
-	b=Kw+6TAZSd8sRK5wWSIx2CNQui7h8W7Rs64sIhZ+XzIogKr0aq/pjv9U4NQ+fP8OauN
-	elhWRLIKb0B/PfD55WCz323mIY7V0GvTOCOjUru0qXutNZon0ouaz3hyJmgSLILp6ZHe
-	gRdvM6XxdQRTDMfIxKsDpR0VLzdE3tnxfbwpQ6NYI4xJKofLgruznGCx0pz31h77anTx
-	JrEeAt07ko+8s07a1U/JOi03L1acvDwpHWkPvwNnkL4bRTSQ8qsrtO3J1IGts+O2bNcg
-	E/bYtRCe/AfM5Wztm38OkMOW6CgZ5MsirfpyBN1esBJ9qjqb+05zncwvHj1uOsArMUZz
-	GUQQ==
-Received: by 10.205.134.6 with SMTP id ia6mr5125107bkc.51.1342451225275;
-	Mon, 16 Jul 2012 08:07:05 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o4sm8336292bkv.15.2012.07.16.08.07.02
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=jA679Rs5ng2+rDtuydn2I0Ha6p6q0POiUu9jVMJ4Peo=;
+	b=pmqYRkTaFnAeblR6+Dw/yZTYBaROeAhYPBMyPq1i6BRlPqPsupsjsBX9r9P/rjHfit
+	RtI/06YIsBDMLnzKUes1ImM8qUb2TBN3HN3BHjtR2VMJAC3xrRGn1kOdX8xW28cevM7q
+	t3fhFt4oWL6LEUEA4L9lqLYCPb5wysA14fG81zJKgdK0sTapnwhOg0JUvPjmbOA2xBX5
+	R07jI0W27mks+MFur41BGOvzXX5KAKckvV8sIoDhHZ1/6s/GrpnN3BDt6KCnG7Russ8b
+	sBLlHqA/kk1Cit3nhFNQPS/80wxuGU3Zc0k41hjjq2ok04KOsY/y2CU3rRhdP9oAQJzH
+	L4sA==
+Received: by 10.68.231.39 with SMTP id td7mr28902412pbc.3.1342460360824;
+	Mon, 16 Jul 2012 10:39:20 -0700 (PDT)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id ms9sm9490305pbb.43.2012.07.16.10.39.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 08:07:03 -0700 (PDT)
-Date: Mon, 16 Jul 2012 17:07:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20120716150711.GG3729@jama.jama.net>
-References: <1342430652-15388-1-git-send-email-koen@dominion.thruhere.net>
-	<20120716120823.GE3729@jama.jama.net>
-	<28779B0A-D02E-42D3-A7D9-3C7438D0BF04@dominion.thruhere.net>
-	<20120716135933.GF3729@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20120716135933.GF3729@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC][meta-oe][meta-systemd][PATCH] systemd: update to 186+git
+	Mon, 16 Jul 2012 10:39:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Jul 2012 10:38:34 -0700
+Message-Id: <1342460316-5489-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [RFC][meta-oe][PATCH 1/3] kernel.bbclass: Rename to machine_kernel_pr.bbclass which provides added functionality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,144 +41,605 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 15:18:23 -0000
-X-Groupsio-MsgNum: 39686
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nhYGnrYv1PEJ5gA2"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Jul 2012 17:50:41 -0000
 
---nhYGnrYv1PEJ5gA2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Diffing with the OE-Core's kernel.bbclass only difference is setting of
+machine kernel pr. So lets convert it to a separate class which provides
+the added functionality and let everyone use kernel.bbclass from kernel
 
-On Mon, Jul 16, 2012 at 03:59:33PM +0200, Martin Jansa wrote:
-> On Mon, Jul 16, 2012 at 02:16:01PM +0200, Koen Kooi wrote:
-> >=20
-> > Op 16 jul. 2012, om 14:08 heeft Martin Jansa het volgende geschreven:
-> >=20
-> > > On Mon, Jul 16, 2012 at 11:24:12AM +0200, Koen Kooi wrote:
-> > >> This is a combined udev+systemd recipe: it will build both udev and =
-systemd in one go, but keep the old (sub)package layout:
-> > >>=20
-> > >> 	udev
-> > >> 	udev-utils
-> > >> 	udev-systemd
-> > >> 	systemd
-> > >> 	systemd-vconsole-setup
-> > >> 	systemd-analyze
-> > >> 	systemd-initramfs
-> > >>=20
-> > >> And all libraries are seperated out:
-> > >> =09
-> > >> 	libgudev-1.0-0
-> > >> 	libsystemd-daemon0
-> > >> 	libsystemd-id128-0
-> > >> 	libsystemd-journal0
-> > >> 	libsystemd-login0
-> > >> 	libudev1
-> > >>=20
-> > >> The SRCREV is 94 patches ahead of the v186 tag to drag in compile fi=
-xes for 'old' gcc versions like 4.5.x.
-> > >>=20
-> > >> Runtime tested with build from scratch and opkg upgrade with angstrom
-> > >=20
-> > > With this upgrade (opkg upgraded) I see few services failing to start.
-> > > I'll try to reproduce it on other devices (this is on qemux86-64) and
-> > > maybe it was caused by some other changes (like meta-systemd move).
-> > >=20
-> > > SHR root@qemux86-64 ~ $ systemctl status systemd-modules-load.service
-> > > systemd-modules-load.service - Load Kernel Modules
-> > >          Loaded: loaded (/lib/systemd/system/systemd-modules-load.ser=
-vice; static)
-> > >          Active: failed (Result: exit-code) since Mon, 16 Jul 2012 12=
-:03:35 +0000; 2s ago
-> > >            Docs: man:systemd-modules-load.service(8)
-> > >                  man:modules-load.d(5)
-> > >         Process: 524 ExecStart=3D/lib/systemd/systemd-modules-load (c=
-ode=3Dexited, status=3D1/FAILURE)
-> > >          CGroup: name=3Dsystemd:/system/systemd-modules-load.service
-> > >=20
-> > > Jul 16 12:03:35 qemux86-64 systemd-modules-load[524]: Failed to find =
-module '...
-> >=20
-> > can you add a '-a' to the systemctl line, that will show the actual err=
-or :)
->=20
-> Ah, much better :)
->=20
-> so this is because there is no ipv6 module in latest greatest 3.4.4-yocto=
--standard, not systemd fault
->=20
-> >=20
-> > >=20
-> > > SHR root@qemux86-64 ~ $ systemctl status busybox-syslog.service
-> > > busybox-syslog.service - System Logging Service
-> > >          Loaded: loaded (/lib/systemd/system/busybox-syslog.service; =
-enabled)
-> > >          Active: failed (Result: exit-code) since Mon, 16 Jul 2012 12=
-:03:55 +0000; 1s ago
-> > >         Process: 532 ExecStartPre=3D/bin/systemctl stop systemd-kmsg-=
-syslogd.service (code=3Dexited, status=3D1/FAILURE)
-> > >          CGroup: name=3Dsystemd:/system/busybox-syslog.service
-> > >=20
-> > > Jul 16 12:03:56 qemux86-64 systemctl[532]: Failed to issue method cal=
-l: Unit....
->=20
-> Jul 16 12:25:18 qemux86-64 systemctl[149]: Failed to issue method call:
-> Unit systemd-kmsg-syslogd.service not loaded.
->=20
-> /lib/systemd/system/busybox-syslog.service:
-> ExecStartPre=3D/bin/systemctl stop systemd-kmsg-syslogd.service
->=20
-> and systemd-kmsg-syslogd.service seems gone (for quite a while since
-> replaced by journald), maybe hit wasn't fatal before..
->=20
-> Cheers,
+It needs the dependent layers to inherit this class in addition to
+kernel.bbclass
 
-There is also libudev soname change.. so stuff depending on old libudev0
-should be PR bumped, in my image:
+It leaves up with one less conflict with OE-Core
 
- * print_dependents_warning:    libphone-ui-shr
- * print_dependents_warning:    e-wm
- * print_dependents_warning:    libemotion-backend-gstreamer
- * print_dependents_warning:    shr-e-gadgets
- * print_dependents_warning:    shr-wizard
- * print_dependents_warning:    xserver-xorg
- * print_dependents_warning:    libemotion1
- * print_dependents_warning:    ethumb
- * print_dependents_warning:    bluez4
- * print_dependents_warning:    elementary
- * print_dependents_warning:    python-elementary
- * print_dependents_warning:    eeze
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/classes/kernel.bbclass            |  559 -----------------------------
+ meta-oe/classes/machine_kernel_pr.bbclass |    7 +
+ 2 files changed, 7 insertions(+), 559 deletions(-)
+ delete mode 100644 meta-oe/classes/kernel.bbclass
+ create mode 100644 meta-oe/classes/machine_kernel_pr.bbclass
 
-I can send PR bump patch for those if you want, but not sure if oe-core wil=
-l accept more=20
-PR bumps especially when it's not their udev changing soname..
+diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
+deleted file mode 100644
+index b30ed36..0000000
+--- a/meta-oe/classes/kernel.bbclass
++++ /dev/null
+@@ -1,559 +0,0 @@
+-inherit linux-kernel-base module_strip
+-
+-PROVIDES += "virtual/kernel"
+-DEPENDS += "virtual/${TARGET_PREFIX}gcc kmod-native virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX} update-modules"
+-
+-# we include gcc above, we dont need virtual/libc
+-INHIBIT_DEFAULT_DEPS = "1"
+-
+-KERNEL_IMAGETYPE ?= "zImage"
+-INITRAMFS_IMAGE ?= ""
+-INITRAMFS_TASK ?= ""
+-
+-python __anonymous () {
+-    kerneltype = d.getVar('KERNEL_IMAGETYPE', True) or ''
+-    if kerneltype == 'uImage':
+-        depends = d.getVar("DEPENDS", True)
+-        depends = "%s u-boot-mkimage-native" % depends
+-        d.setVar("DEPENDS", depends)
+-
+-    image = d.getVar('INITRAMFS_IMAGE', True)
+-    if image:
+-        d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
+-
+-    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
+-
+-    if machine_kernel_pr:
+-        d.setVar('PR', machine_kernel_pr)
+-}
+-
+-inherit kernel-arch deploy
+-
+-PACKAGES_DYNAMIC += "kernel-module-*"
+-PACKAGES_DYNAMIC += "kernel-image-*"
+-PACKAGES_DYNAMIC += "kernel-firmware-*"
+-
+-export OS = "${TARGET_OS}"
+-export CROSS_COMPILE = "${TARGET_PREFIX}"
+-
+-KERNEL_PRIORITY ?= "${@int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[0]) * 10000 + \
+-                       int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[1]) * 100 + \
+-                       int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[-1])}"
+-
+-KERNEL_RELEASE ?= "${KERNEL_VERSION}"
+-
+-KERNEL_CCSUFFIX ?= ""
+-KERNEL_LDSUFFIX ?= ""
+-
+-# Set TARGET_??_KERNEL_ARCH in the machine .conf to set architecture
+-# specific options necessary for building the kernel and modules.
+-#FIXME: should be this: TARGET_CC_KERNEL_ARCH ?= "${TARGET_CC_ARCH}"
+-TARGET_CC_KERNEL_ARCH ?= ""
+-HOST_CC_KERNEL_ARCH ?= "${TARGET_CC_KERNEL_ARCH}"
+-TARGET_LD_KERNEL_ARCH ?= ""
+-HOST_LD_KERNEL_ARCH ?= "${TARGET_LD_KERNEL_ARCH}"
+-
+-KERNEL_CC = "${CCACHE}${HOST_PREFIX}gcc${KERNEL_CCSUFFIX} ${HOST_CC_KERNEL_ARCH}${TOOLCHAIN_OPTIONS}"
+-KERNEL_LD = "${HOST_PREFIX}ld${KERNEL_LDSUFFIX} ${HOST_LD_KERNEL_ARCH}${TOOLCHAIN_OPTIONS}"
+-
+-# Where built kernel lies in the kernel tree
+-KERNEL_OUTPUT ?= "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
+-KERNEL_IMAGEDEST = "boot"
+-
+-#
+-# configuration
+-#
+-export CMDLINE_CONSOLE = "console=${@d.getVar("KERNEL_CONSOLE",1) or "ttyS0"}"
+-
+-KERNEL_VERSION = "${@get_kernelversion('${B}')}"
+-
+-KERNEL_LOCALVERSION ?= ""
+-
+-# kernels are generally machine specific
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-# U-Boot support
+-UBOOT_ENTRYPOINT ?= "20008000"
+-UBOOT_LOADADDRESS ?= "${UBOOT_ENTRYPOINT}"
+-
+-# For the kernel, we don't want the '-e MAKEFLAGS=' in EXTRA_OEMAKE.
+-# We don't want to override kernel Makefile variables from the environment
+-EXTRA_OEMAKE = ""
+-
+-KERNEL_ALT_IMAGETYPE ??= ""
+-
+-KERNEL_IMAGETYPE_FOR_MAKE = "${@(lambda s: s[:-3] if s[-3:] == ".gz" else s)(d.getVar('KERNEL_IMAGETYPE', True))}"
+-
+-kernel_do_compile() {
+-	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+-	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+-	oe_runmake ${KERNEL_IMAGETYPE_FOR_MAKE} ${KERNEL_ALT_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+-	if test "${KERNEL_IMAGETYPE_FOR_MAKE}.gz" = "${KERNEL_IMAGETYPE}"; then
+-		gzip -9c < "${KERNEL_IMAGETYPE_FOR_MAKE}" > "${KERNEL_OUTPUT}"
+-	fi
+-}
+-
+-do_compile_kernelmodules() {
+-	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+-	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+-		oe_runmake ${PARALLEL_MAKE} modules CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+-	else
+-		bbnote "no modules to compile"
+-	fi
+-}
+-addtask compile_kernelmodules after do_compile before do_install
+-
+-kernel_do_install() {
+-	#
+-	# First install the modules
+-	#
+-	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+-	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+-		oe_runmake DEPMOD=echo INSTALL_MOD_PATH="${D}" modules_install
+-		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.order"
+-		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.builtin"
+-		rm "${D}/lib/modules/${KERNEL_VERSION}/build"
+-		rm "${D}/lib/modules/${KERNEL_VERSION}/source"
+-	else
+-		bbnote "no modules to install"
+-	fi
+-
+-	#
+-	# Install various kernel output (zImage, map file, config, module support files)
+-	#
+-	install -d ${D}/${KERNEL_IMAGEDEST}
+-	install -d ${D}/boot
+-	install -m 0644 ${KERNEL_OUTPUT} ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}
+-	install -m 0644 System.map ${D}/boot/System.map-${KERNEL_VERSION}
+-	install -m 0644 .config ${D}/boot/config-${KERNEL_VERSION}
+-	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
+-	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
+-	install -d ${D}/etc/modules-load.d
+-	install -d ${D}/etc/modprobe.d
+-
+-	#
+-	# Support for external module building - create a minimal copy of the
+-	# kernel source tree.
+-	#
+-	kerneldir=${D}/kernel
+-	install -d $kerneldir
+-
+-	#
+-	# Store the kernel version in sysroots for module-base.bbclass
+-	#
+-
+-	echo "${KERNEL_VERSION}" > $kerneldir/kernel-abiversion
+-
+-	#
+-	# Store kernel image name to allow use during image generation
+-	#
+-
+-	echo "${KERNEL_IMAGE_BASE_NAME}" >$kerneldir/kernel-image-name
+-
+-	#
+-	# Copy the entire source tree. In case an external build directory is
+-	# used, copy the build directory over first, then copy over the source
+-	# dir. This ensures the original Makefiles are used and not the
+-	# redirecting Makefiles in the build directory.
+-	#
+-	# work and sysroots can be on different partitions, so we can't rely on
+-	# hardlinking, unfortunately.
+-	#
+-	cp -fR * $kerneldir
+-	cp .config $kerneldir
+-	if [ "${S}" != "${B}" ]; then
+-		cp -fR ${S}/* $kerneldir
+-	fi
+-	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
+-	install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
+-
+-	#
+-	# Clean and remove files not needed for building modules.
+-	# Some distributions go through a lot more trouble to strip out
+-	# unecessary headers, for now, we just prune the obvious bits.
+-	#
+-	# We don't want to leave host-arch binaries in /sysroots, so
+-	# we clean the scripts dir while leaving the generated config
+-	# and include files.
+-	#
+-	oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
+-	make -C $kerneldir _mrproper_scripts
+-	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
+-	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
+-
+-	# As of Linux kernel version 3.0.1, the clean target removes
+-	# arch/powerpc/lib/crtsavres.o which is present in
+-	# KBUILD_LDFLAGS_MODULE, making it required to build external modules.
+-	if [ ${ARCH} = "powerpc" ]; then
+-		cp arch/powerpc/lib/crtsavres.o $kerneldir/arch/powerpc/lib/crtsavres.o
+-	fi
+-
+-	# Remove the following binaries which cause strip errors
+-	# during do_package for cross-compiled platforms
+-	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
+-	           arch/powerpc/boot/mktree"
+-	for entry in $bin_files; do
+-		rm -f $kerneldir/$entry
+-	done
+-}
+-
+-PACKAGE_PREPROCESS_FUNCS += "kernel_package_preprocess"
+-
+-kernel_package_preprocess () {
+-	rm -rf ${PKGD}/kernel
+-}
+-
+-sysroot_stage_all_append() {
+-	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}/kernel
+-}
+-
+-kernel_do_configure() {
+-	# fixes extra + in /lib/modules/2.6.37+
+-	# $ scripts/setlocalversion . => +
+-	# $ make kernelversion => 2.6.37
+-	# $ make kernelrelease => 2.6.37+
+-	touch ${B}/.scmversion ${S}/.scmversion
+-
+-	# Copy defconfig to .config if .config does not exist. This allows
+-	# recipes to manage the .config themselves in do_configure_prepend().
+-	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
+-		cp "${WORKDIR}/defconfig" "${B}/.config"
+-	fi
+-	yes '' | oe_runmake oldconfig
+-
+-	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
+-		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz; do
+-		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" ]; then
+-			cp "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" initramfs.$img
+-		fi
+-		done
+-	fi
+-}
+-
+-do_configure[depends] += "${INITRAMFS_TASK}"
+-
+-do_savedefconfig() {
+-	oe_runmake savedefconfig
+-}
+-do_savedefconfig[nostamp] = "1"
+-addtask savedefconfig after do_configure
+-
+-pkg_postinst_kernel-base () {
+-	cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
+-}
+-
+-pkg_postrm_kernel-base () {
+-	cd /${KERNEL_IMAGEDEST}; update-alternatives --remove ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
+-}
+-
+-inherit cml1
+-
+-EXPORT_FUNCTIONS do_compile do_install do_configure
+-
+-# kernel-base becomes kernel-${KERNEL_VERSION}
+-# kernel-image becomes kernel-image-${KERNEL_VERISON}
+-PACKAGES = "kernel kernel-base kernel-vmlinux kernel-image kernel-dev kernel-misc"
+-FILES = ""
+-FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
+-FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config*"
+-FILES_kernel-vmlinux = "/boot/vmlinux*"
+-# misc is a package to contain files we need in staging
+-FILES_kernel-misc = "/kernel/include/config /kernel/scripts /kernel/drivers/crypto /kernel/drivers/media"
+-RDEPENDS_kernel = "kernel-base"
+-# Allow machines to override this dependency if kernel image files are 
+-# not wanted in images as standard
+-RDEPENDS_kernel-base ?= "kernel-image"
+-PKG_kernel-image = "kernel-image-${@legitimize_package_name('${KERNEL_VERSION}')}"
+-PKG_kernel-base = "kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
+-ALLOW_EMPTY_kernel = "1"
+-ALLOW_EMPTY_kernel-base = "1"
+-ALLOW_EMPTY_kernel-image = "1"
+-
+-pkg_postinst_kernel-image () {
+-if [ ! -e "$D/lib/modules/${KERNEL_VERSION}" ]; then
+-	mkdir -p $D/lib/modules/${KERNEL_VERSION}
+-fi
+-if [ -n "$D" ]; then
+-	depmod -a -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
+-else
+-	depmod -a ${KERNEL_VERSION}
+-fi
+-}
+-
+-pkg_postinst_modules () {
+-if [ -z "$D" ]; then
+-	depmod -a ${KERNEL_VERSION}
+-	update-modules || true
+-fi
+-}
+-
+-pkg_postrm_modules () {
+-update-modules || true
+-}
+-
+-autoload_postinst_fragment() {
+-if [ x"$D" = "x" ]; then
+-	modprobe %s || true
+-fi
+-}
+-
+-# autoload defaults (alphabetically sorted)
+-module_autoload_hidp = "hidp"
+-module_autoload_ipv6 = "ipv6"
+-module_autoload_ipsec = "ipsec"
+-module_autoload_ircomm-tty = "ircomm-tty"
+-module_autoload_rfcomm = "rfcomm"
+-module_autoload_sa1100-rtc = "sa1100-rtc"
+-# sa1100-rtc was renamed in 2.6.23 onwards
+-module_autoload_rtc-sa1100 = "rtc-sa1100"
+-
+-# alias defaults (alphabetically sorted)
+-module_conf_af_packet = "alias net-pf-17 af_packet"
+-module_conf_bluez = "alias net-pf-31 bluez"
+-module_conf_bnep = "alias bt-proto-4 bnep"
+-module_conf_hci_uart = "alias tty-ldisc-15 hci_uart"
+-module_conf_l2cap = "alias bt-proto-0 l2cap"
+-module_conf_sco = "alias bt-proto-2 sco"
+-module_conf_rfcomm = "alias bt-proto-3 rfcomm"
+-
+-python populate_packages_prepend () {
+-	def extract_modinfo(file):
+-		import tempfile, re
+-		tempfile.tempdir = d.getVar("WORKDIR", True)
+-		tf = tempfile.mkstemp()
+-		tmpfile = tf[1]
+-		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (d.getVar("PATH", True), d.getVar("HOST_PREFIX", True) or "", file, tmpfile)
+-		os.system(cmd)
+-		f = open(tmpfile)
+-		l = f.read().split("\000")
+-		f.close()
+-		os.close(tf[0])
+-		os.unlink(tmpfile)
+-		exp = re.compile("([^=]+)=(.*)")
+-		vals = {}
+-		for i in l:
+-			m = exp.match(i)
+-			if not m:
+-				continue
+-			vals[m.group(1)] = m.group(2)
+-		return vals
+-	
+-	def parse_depmod():
+-		import re
+-
+-		dvar = d.getVar('PKGD', True)
+-		if not dvar:
+-			bb.error("PKGD not defined")
+-			return
+-
+-		kernelver = d.getVar('KERNEL_VERSION', True)
+-		kernelver_stripped = kernelver
+-		m = re.match('^(.*-hh.*)[\.\+].*$', kernelver)
+-		if m:
+-			kernelver_stripped = m.group(1)
+-		path = d.getVar("PATH", True)
+-
+-		cmd = "PATH=\"%s\" depmod -n -a -b %s -F %s/boot/System.map-%s %s" % (path, dvar, dvar, kernelver, kernelver_stripped)
+-		f = os.popen(cmd, 'r')
+-
+-		deps = {}
+-		pattern0 = "^(.*\.k?o):..*$"
+-		pattern1 = "^(.*\.k?o):\s*(.*\.k?o)\s*$"
+-		pattern2 = "^(.*\.k?o):\s*(.*\.k?o)\s*\\\$"
+-		pattern3 = "^\t(.*\.k?o)\s*\\\$"
+-		pattern4 = "^\t(.*\.k?o)\s*$"
+-
+-		line = f.readline()
+-		while line:
+-			if not re.match(pattern0, line):
+-				line = f.readline()
+-				continue
+-			m1 = re.match(pattern1, line)
+-			if m1:
+-				deps[m1.group(1)] = m1.group(2).split()
+-			else:
+-				m2 = re.match(pattern2, line)
+-				if m2:
+-					deps[m2.group(1)] = m2.group(2).split()
+-					line = f.readline()
+-					m3 = re.match(pattern3, line)
+-					while m3:
+-						deps[m2.group(1)].extend(m3.group(1).split())
+-						line = f.readline()
+-						m3 = re.match(pattern3, line)
+-					m4 = re.match(pattern4, line)
+-					deps[m2.group(1)].extend(m4.group(1).split())
+-			line = f.readline()
+-		f.close()
+-		return deps
+-	
+-	def get_dependencies(file, pattern, format):
+-		# file no longer includes PKGD
+-		file = file.replace(d.getVar('PKGD', True) or '', '', 1)
+-		# instead is prefixed with /lib/modules/${KERNEL_VERSION}
+-		file = file.replace("/lib/modules/%s/" % d.getVar('KERNEL_VERSION', True) or '', '', 1)
+-
+-		if module_deps.has_key(file):
+-			import re
+-			dependencies = []
+-			for i in module_deps[file]:
+-				m = re.match(pattern, os.path.basename(i))
+-				if not m:
+-					continue
+-				on = legitimize_package_name(m.group(1))
+-				dependency_pkg = format % on
+-				dependencies.append(dependency_pkg)
+-			return dependencies
+-		return []
+-
+-	def frob_metadata(file, pkg, pattern, format, basename):
+-		import re
+-		vals = extract_modinfo(file)
+-
+-		dvar = d.getVar('PKGD', True)
+-
+-		# If autoloading is requested, output /etc/modules-load.d/<name>.conf and append
+-		# appropriate modprobe commands to the postinst
+-		autoload = d.getVar('module_autoload_%s' % basename, True)
+-		if autoload:
+-			name = '%s/etc/modules-load.d/%s.conf' % (dvar, basename)
+-			f = open(name, 'w')
+-			for m in autoload.split():
+-				f.write('%s\n' % m)
+-			f.close()
+-			postinst = d.getVar('pkg_postinst_%s' % pkg, True)
+-			if not postinst:
+-				bb.fatal("pkg_postinst_%s not defined" % pkg)
+-			postinst += d.getVar('autoload_postinst_fragment', True) % autoload
+-			d.setVar('pkg_postinst_%s' % pkg, postinst)
+-
+-		# Write out any modconf fragment
+-		modconf = d.getVar('module_conf_%s' % basename, True)
+-		if modconf:
+-			name = '%s/etc/modprobe.d/%s.conf' % (dvar, basename)
+-			f = open(name, 'w')
+-			f.write("%s\n" % modconf)
+-			f.close()
+-
+-		files = d.getVar('FILES_%s' % pkg, True)
+-		files = "%s /etc/modules-load.d/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename)
+-		d.setVar('FILES_%s' % pkg, files)
+-
+-		if vals.has_key("description"):
+-			old_desc = d.getVar('DESCRIPTION_' + pkg, True) or ""
+-			d.setVar('DESCRIPTION_' + pkg, old_desc + "; " + vals["description"])
+-
+-		rdepends_str = d.getVar('RDEPENDS_' + pkg, True)
+-		if rdepends_str:
+-			rdepends = rdepends_str.split()
+-		else:
+-			rdepends = []
+-		rdepends.extend(get_dependencies(file, pattern, format))
+-		d.setVar('RDEPENDS_' + pkg, ' '.join(rdepends))
+-
+-	module_deps = parse_depmod()
+-	module_regex = '^(.*)\.k?o$'
+-	module_pattern = 'kernel-module-%s'
+-
+-	postinst = d.getVar('pkg_postinst_modules', True)
+-	postrm = d.getVar('pkg_postrm_modules', True)
+-	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.bin$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
+-	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.fw$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
+-	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.cis$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
+-	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % d.getVar("KERNEL_VERSION", True))
+-
+-	# If modules-load.d and modprobe.d are empty at this point, remove them to
+-	# avoid warnings. removedirs only raises an OSError if an empty
+-	# directory cannot be removed.
+-	dvar = d.getVar('PKGD', True)
+-	for dir in ["%s/etc/modprobe.d" % (dvar), "%s/etc/modules-load.d" % (dvar), "%s/etc" % (dvar)]:
+-		if len(os.listdir(dir)) == 0:
+-			os.rmdir(dir)
+-
+-	import re
+-	metapkg = "kernel-modules"
+-	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+-	d.setVar('FILES_' + metapkg, "")
+-	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
+-	for l in module_deps.values():
+-		for i in l:
+-			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
+-			blacklist.append(pkg)
+-	metapkg_rdepends = []
+-	packages = d.getVar('PACKAGES', True).split()
+-	for pkg in packages[1:]:
+-		if not pkg in blacklist and not pkg in metapkg_rdepends:
+-			metapkg_rdepends.append(pkg)
+-	d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
+-	d.setVar('DESCRIPTION_' + metapkg, 'Kernel modules meta package')
+-	packages.append(metapkg)
+-	d.setVar('PACKAGES', ' '.join(packages))
+-}
+-
+-# Support checking the kernel size since some kernels need to reside in partitions
+-# with a fixed length or there is a limit in transferring the kernel to memory
+-do_sizecheck() {
+-	if [ ! -z "${KERNEL_IMAGE_MAXSIZE}" ]; then
+-		size=`ls -l ${KERNEL_OUTPUT} | awk '{ print $5}'`
+-		if [ $size -ge ${KERNEL_IMAGE_MAXSIZE} ]; then
+-			rm ${KERNEL_OUTPUT}
+-			die "This kernel (size=$size > ${KERNEL_IMAGE_MAXSIZE}) is too big for your device. Please reduce the size of the kernel by making more of it modular."
+-		fi
+-	fi
+-}
+-
+-addtask sizecheck before do_install after do_compile
+-
+-KERNEL_IMAGE_BASE_NAME ?= "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
+-# Don't include the DATETIME variable in the sstate package signatures
+-KERNEL_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
+-KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
+-
+-do_uboot_mkimage() {
+-	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
+-		if test "x${KEEPUIMAGE}" = "x" ; then
+-			ENTRYPOINT=${UBOOT_ENTRYPOINT}
+-			if test -n "${UBOOT_ENTRYSYMBOL}"; then
+-				ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
+-					awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'`
+-			fi
+-			if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
+-				${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
+-				uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
+-				rm -f linux.bin
+-			else
+-				${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
+-				rm -f linux.bin.gz
+-				gzip -9 linux.bin
+-				uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
+-				rm -f linux.bin.gz
+-			fi
+-		fi
+-	fi
+-}
+-
+-addtask uboot_mkimage before do_install after do_compile
+-
+-kernel_do_deploy() {
+-	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOYDIR}/${KERNEL_IMAGE_BASE_NAME}.bin
+-	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+-		tar -cvzf ${DEPLOYDIR}/modules-${KERNEL_VERSION}-${PR}-${MACHINE}.tgz -C ${D} lib
+-	fi
+-
+-	cd ${DEPLOYDIR}
+-	rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+-	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+-
+-	cp ${COREBASE}/meta/files/deploydir_readme.txt ${DEPLOYDIR}/README_-_DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
+-}
+-do_deploy[dirs] = "${DEPLOYDIR} ${B}"
+-
+-addtask deploy before do_build after do_install
+-
+-EXPORT_FUNCTIONS do_deploy
+-
+-# perf must be enabled in individual kernel recipes
+-PACKAGES =+ "perf-dbg perf"
+-FILES_perf = "${bindir}/* \
+-              ${libexecdir}"
+-FILES_perf-dbg = "${FILES_${PN}-dbg}"
+diff --git a/meta-oe/classes/machine_kernel_pr.bbclass b/meta-oe/classes/machine_kernel_pr.bbclass
+new file mode 100644
+index 0000000..7f03af5
+--- /dev/null
++++ b/meta-oe/classes/machine_kernel_pr.bbclass
+@@ -0,0 +1,7 @@
++python __anonymous () {
++
++    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
++
++    if machine_kernel_pr:
++        d.setVar('PR', machine_kernel_pr)
++}
+-- 
+1.7.9.5
 
 
 
-And for some machines I got unpackaged file:
-NOTE: package systemd-git-r5: task do_package: Started
-WARNING: QA Issue: systemd: Files/directories were installed but not shipped
-  /etc/rpm
-  /etc/rpm/macros.systemd
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---nhYGnrYv1PEJ5gA2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAELh8ACgkQN1Ujt2V2gBy2wACeJ/8pSGzv/rL7FOygEfgPeVVK
-XloAn0W6hXX6H3wBjZEV7UwgG0/ROStm
-=k5Gn
------END PGP SIGNATURE-----
-
---nhYGnrYv1PEJ5gA2--
