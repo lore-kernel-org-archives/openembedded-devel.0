@@ -1,34 +1,27 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sqs2G-0000nj-4Z
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Squgn-0004XQ-8W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2012 22:36:52 +0200
-Received: by wibhq4 with SMTP id hq4so2733818wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 13:25:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=dFc4wQVHTjY8iil0N8C89FrB8uv1NqURuO3G6KxvAwg=;
-	b=mHGTljBLW+eTLsBs0A/d3gC1QfB9AnSryIDDANfoG5yvgQPWwi1t+Uxqnc7SdaK4FD
-	+lo3HYXRlNF3yCSWc1Bw6YR4DBe8JHDHTAD9/Hl+BcrHsyTyPrkVx9Nq9RCJ3ApIECN6
-	8GirWlVMJ0bT7mRZdK3HVnZUEIejYILXrXMXHmdeUzT0k6KkLzhh425zHhBxJFdvOPhW
-	LLHk13156A0ZdnbTBQB9tivL5bw3NNrGre+Jl6mxa76fuOkdK3OZyxdQ81r/gXFiAe5S
-	+eOeJcOqjPjVocCcR+B466K0lRWF+FKklV+udPGWENrYMBMnmt+SwyPzgDFF+2psnhI1
-	EMFw==
-Received: by 10.217.2.145 with SMTP id p17mr5132258wes.26.1342470333475;
-	Mon, 16 Jul 2012 13:25:33 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fu3sm34240738wib.10.2012.07.16.13.25.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 13:25:32 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2012 22:25:38 +0200
-Message-Id: <1342470338-6747-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <ju1q70$k0a$1@dough.gmane.org>
-References: <ju1q70$k0a$1@dough.gmane.org>
-Subject: [meta-browser][PATCH] chromium: use COMPATIBLE_HOST instead of COMPATIBLE_MACHINE
+	Tue, 17 Jul 2012 01:26:53 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 16 Jul 2012 16:15:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="167145827"
+Received: from unknown (HELO helios.localnet) ([10.252.121.26])
+	by orsmga001.jf.intel.com with ESMTP; 16 Jul 2012 16:15:32 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+Date: Tue, 17 Jul 2012 00:15:32 +0100
+Message-ID: <67126769.ZK6yL1tO9B@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.4 (Linux/3.2.0-26-generic-pae; KDE/4.8.4; i686; ; )
+In-Reply-To: <38351001.3KzA0t96MO@helios>
+References: <CANBf+V3=LvWkE28TR1qNR-NpLd60EGroEqmXQqypXAUUZ0pv-Q@mail.gmail.com>
+	<20120712195752.GN3293@windriver.com> <38351001.3KzA0t96MO@helios>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Proposal: Creating meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,48 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 20:36:52 -0000
+X-List-Received-Date: Mon, 16 Jul 2012 23:26:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-browser/chromium/chromium_19.0.1049.3.bb |    6 ++----
- recipes-browser/chromium/chromium_20.0.1086.0.bb |    4 +---
- 2 files changed, 3 insertions(+), 7 deletions(-)
+On Friday 13 July 2012 16:58:00 Paul Eggleton wrote:
+> On Thursday 12 July 2012 15:57:52 Joe MacDonald wrote:
+> >    - systemd
+> 
+> Despite what I said yesterday Andreas has come through with v2 of the patch
+> series this morning, so assuming that's in good shape, it looks like we
+> should be on track to do the meta-systemd split and then meta-networking
+> after that, which will save a whole lot of hassle. It probably will be
+> necessary to patch meta-systemd at the same time to move the
+> meta-networking parts into a subdirectory so they can be masked out if
+> desired, but that's a trivial exercise.
 
-diff --git a/recipes-browser/chromium/chromium_19.0.1049.3.bb b/recipes-browser/chromium/chromium_19.0.1049.3.bb
-index e657c48..97843a3 100644
---- a/recipes-browser/chromium/chromium_19.0.1049.3.bb
-+++ b/recipes-browser/chromium/chromium_19.0.1049.3.bb
-@@ -10,10 +10,8 @@ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P
- 	file://softfloat-fix.patch \
- "
- 
--# include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
--COMPATIBLE_MACHINE = "(-)"
--COMPATIBLE_MACHINE_armv6 = "(.*)"
--COMPATIBLE_MACHINE_armv7a = "(.*)"
-+# include.gypi exists only for armv6 and armv7a
-+COMPATIBLE_HOST = "(armv6|armv7).*-linux"
- 
- PR = "r1"
- 
-diff --git a/recipes-browser/chromium/chromium_20.0.1086.0.bb b/recipes-browser/chromium/chromium_20.0.1086.0.bb
-index 527f317..d1ae7e5 100644
---- a/recipes-browser/chromium/chromium_20.0.1086.0.bb
-+++ b/recipes-browser/chromium/chromium_20.0.1086.0.bb
-@@ -8,9 +8,7 @@ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P
- "
- 
- # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
--COMPATIBLE_MACHINE = "(-)"
--COMPATIBLE_MACHINE_armv6 = "(.*)"
--COMPATIBLE_MACHINE_armv7a = "(.*)"
-+COMPATIBLE_HOST = "(armv6|armv7).*-linux"
- 
- DEFAULT_PREFERENCE = "-1"
- 
+Following up, the meta-systemd split-out has now been merged, so this should 
+no longer be a blocker.
+
+Cheers,
+Paul
+
 -- 
-1.7.8.6
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
