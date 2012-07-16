@@ -1,38 +1,40 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SqlrY-00030h-41
+	(envelope-from <martin.jansa@gmail.com>) id 1Sqm0b-0003Le-7Y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Jul 2012 16:01:24 +0200
-Received: by bkcik5 with SMTP id ik5so3526168bkc.6
+	Mon, 16 Jul 2012 16:10:45 +0200
+Received: by bkcik5 with SMTP id ik5so3536919bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 06:50:06 -0700 (PDT)
+	Mon, 16 Jul 2012 06:59:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=VOvzfQHi741ZGIwondbyS+nK7Mw+Ud2NknnsQRSBEI0=;
-	b=Twd6m0hHhodzXGXmuEp2Xa8A0Ec17vzdRe1XQe5crXVlC4wCvkp6Cj1p/k5hsoSEU9
-	WzhYi5Vck5ot6KYFOgYLdudMJ+IvpFtjWWS24Blv7+moGQFbWrDrqH0OmtFAlGoj27ud
-	vHYXIW3S9IncYg89MHz6yIUyhHy05aDvxU0/xFwiitXth2ASEhKf1GpWJCDRaq2SJ4r0
-	F4Lzaz5vd4CAI54rzHdj+4R8eTvwkr/WP4j5tM4C4sMwaQ8ckQ8DaFiFMri7zW+LaRk/
-	ANw3oJ6Aw0ZRXX4z6N3WE1HKqbmGbYWIAgKaE/RQ5CL6NPKvJDveacZKS5RiQHKzDVLM
-	Yg8Q==
-Received: by 10.204.154.85 with SMTP id n21mr4776298bkw.48.1342446605990;
-	Mon, 16 Jul 2012 06:50:05 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
-	[95.222.160.112])
-	by mx.google.com with ESMTPS id hs2sm8179247bkc.1.2012.07.16.06.50.04
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=xHed2mnf6RIvGn9cKDrtw63qS/EtSa51Azjqvmbe1gc=;
+	b=o4Z0RPyR94YBsDlvBXqEVmuQop3dX4abS2ab1MXnYRG6EHaq+VcT9fpKf4dIrkMMkN
+	PDjr+/d0+uFs6AQjm+EJu17HAKeVrHH/YJ/2ZMdqNgdh/p7D8gihs7hh8XYHAbwMiwmc
+	Mf9ZPQdBVLH29Y17R0fT0M/d98W0R9Q7vUhJzPL2oHWRdiwLV5xVVg4D89Hygjs++Nwy
+	sTAsO7jI29aRde/VX/JjOng73qnCI85IY7MY69W10KWV/bUsH7+4VhWxe2fD9UScnwdG
+	G+Iy4mp26GeMshqrJgh1c4GYKXcl11Ur4ZZPLAOQUv/mfWQOxTXWBsHIUpT0xgNFhI+b
+	02LQ==
+Received: by 10.204.154.211 with SMTP id p19mr2331969bkw.12.1342447167198;
+	Mon, 16 Jul 2012 06:59:27 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z19sm4203346bkw.10.2012.07.16.06.59.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Jul 2012 06:50:05 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2012 15:49:38 +0200
-Message-Id: <1342446578-8330-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1342446578-8330-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1342446578-8330-1-git-send-email-schnitzeltony@googlemail.com>
+	Mon, 16 Jul 2012 06:59:26 -0700 (PDT)
+Date: Mon, 16 Jul 2012 15:59:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20120716135933.GF3729@jama.jama.net>
+References: <1342430652-15388-1-git-send-email-koen@dominion.thruhere.net>
+	<20120716120823.GE3729@jama.jama.net>
+	<28779B0A-D02E-42D3-A7D9-3C7438D0BF04@dominion.thruhere.net>
 MIME-Version: 1.0
-Subject: [meta-xfce, resend 2/2] task-xfce-extended: remove xfce4-icon-theme
+In-Reply-To: <28779B0A-D02E-42D3-A7D9-3C7438D0BF04@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC][meta-oe][meta-systemd][PATCH] systemd: update to 186+git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +48,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2012 14:01:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Jul 2012 14:10:45 -0000
+X-Groupsio-MsgNum: 39685
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nYySOmuH/HDX6pKp"
+Content-Disposition: inline
 
-xfce4-icon-theme is not required by default since xfce4-settings initially
-works with gnome-icon-theme and gnome-icon-theme is pulled in by many other
-recipes anyway.
-To reduce rootfs size - especially after gtk-update-icon-cache -
-xfce4-icon-theme is removed.
+--nYySOmuH/HDX6pKp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+On Mon, Jul 16, 2012 at 02:16:01PM +0200, Koen Kooi wrote:
+>=20
+> Op 16 jul. 2012, om 14:08 heeft Martin Jansa het volgende geschreven:
+>=20
+> > On Mon, Jul 16, 2012 at 11:24:12AM +0200, Koen Kooi wrote:
+> >> This is a combined udev+systemd recipe: it will build both udev and sy=
+stemd in one go, but keep the old (sub)package layout:
+> >>=20
+> >> 	udev
+> >> 	udev-utils
+> >> 	udev-systemd
+> >> 	systemd
+> >> 	systemd-vconsole-setup
+> >> 	systemd-analyze
+> >> 	systemd-initramfs
+> >>=20
+> >> And all libraries are seperated out:
+> >> =09
+> >> 	libgudev-1.0-0
+> >> 	libsystemd-daemon0
+> >> 	libsystemd-id128-0
+> >> 	libsystemd-journal0
+> >> 	libsystemd-login0
+> >> 	libudev1
+> >>=20
+> >> The SRCREV is 94 patches ahead of the v186 tag to drag in compile fixe=
+s for 'old' gcc versions like 4.5.x.
+> >>=20
+> >> Runtime tested with build from scratch and opkg upgrade with angstrom
+> >=20
+> > With this upgrade (opkg upgraded) I see few services failing to start.
+> > I'll try to reproduce it on other devices (this is on qemux86-64) and
+> > maybe it was caused by some other changes (like meta-systemd move).
+> >=20
+> > SHR root@qemux86-64 ~ $ systemctl status systemd-modules-load.service
+> > systemd-modules-load.service - Load Kernel Modules
+> >          Loaded: loaded (/lib/systemd/system/systemd-modules-load.servi=
+ce; static)
+> >          Active: failed (Result: exit-code) since Mon, 16 Jul 2012 12:0=
+3:35 +0000; 2s ago
+> >            Docs: man:systemd-modules-load.service(8)
+> >                  man:modules-load.d(5)
+> >         Process: 524 ExecStart=3D/lib/systemd/systemd-modules-load (cod=
+e=3Dexited, status=3D1/FAILURE)
+> >          CGroup: name=3Dsystemd:/system/systemd-modules-load.service
+> >=20
+> > Jul 16 12:03:35 qemux86-64 systemd-modules-load[524]: Failed to find mo=
+dule '...
+>=20
+> can you add a '-a' to the systemctl line, that will show the actual error=
+ :)
 
-diff --git a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-index 3c9fced..0c13a64 100644
---- a/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/tasks/task-xfce-extended.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
- 
--PR = "r2"
-+PR = "r3"
- 
- inherit task
- 
-@@ -23,8 +23,6 @@ RRECOMMENDS_${PN} = " \
-     xfwm4-theme-tyrex \
-     xfwm4-theme-wallis \
-     \
--    xfce4-icon-theme \
--    \
-     xfce4-cpufreq-plugin \
-     xfce4-cpugraph-plugin \
-     xfce4-datetime-plugin \
--- 
-1.7.6.5
+Ah, much better :)
 
+so this is because there is no ipv6 module in latest greatest 3.4.4-yocto-s=
+tandard, not systemd fault
 
+>=20
+> >=20
+> > SHR root@qemux86-64 ~ $ systemctl status busybox-syslog.service
+> > busybox-syslog.service - System Logging Service
+> >          Loaded: loaded (/lib/systemd/system/busybox-syslog.service; en=
+abled)
+> >          Active: failed (Result: exit-code) since Mon, 16 Jul 2012 12:0=
+3:55 +0000; 1s ago
+> >         Process: 532 ExecStartPre=3D/bin/systemctl stop systemd-kmsg-sy=
+slogd.service (code=3Dexited, status=3D1/FAILURE)
+> >          CGroup: name=3Dsystemd:/system/busybox-syslog.service
+> >=20
+> > Jul 16 12:03:56 qemux86-64 systemctl[532]: Failed to issue method call:=
+ Unit....
 
+Jul 16 12:25:18 qemux86-64 systemctl[149]: Failed to issue method call:
+Unit systemd-kmsg-syslogd.service not loaded.
+
+/lib/systemd/system/busybox-syslog.service:
+ExecStartPre=3D/bin/systemctl stop systemd-kmsg-syslogd.service
+
+and systemd-kmsg-syslogd.service seems gone (for quite a while since
+replaced by journald), maybe hit wasn't fatal before..
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--nYySOmuH/HDX6pKp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAEHkUACgkQN1Ujt2V2gBx6ogCbB2yRsAykNwvlSriYLEwLMETc
+agYAn1PhYhnvxt5rynHFupmAoTOOR8eK
+=6Xmq
+-----END PGP SIGNATURE-----
+
+--nYySOmuH/HDX6pKp--
