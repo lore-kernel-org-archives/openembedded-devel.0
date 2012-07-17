@@ -1,36 +1,36 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sr7Dp-0004nv-TK
+	(envelope-from <martin.jansa@gmail.com>) id 1Sr7Dz-0005GZ-I9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jul 2012 14:49:49 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so224907bkc.6
+	Tue, 17 Jul 2012 14:49:59 +0200
+Received: by weyr6 with SMTP id r6so223761wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 05:38:32 -0700 (PDT)
+	Tue, 17 Jul 2012 05:38:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=hL/yRUg3TZmVZ6tF0QNr2BDvXpmbKrdCinXwu7kn1aY=;
-	b=kPorq7eDbaq+96oJfET/1DtznrQsAtGLGY6Mb7tz3czGKECowa3SfUUzUjgBKgtzwe
-	qdTUGwG6n9AqUgU4d8FWQhO3tLEIlivjAPIjB1Smg+L4rW+eMu7REhpfkxuyUzWtm9wN
-	aI1XNo1IzwIKlsFA2XIWLvQzpEHVkqmfJgWbf//GoEhwvgVJc+DjCapLKLcKg3wf0BUm
-	yfy045Xw33JT0GefFcn0GvsnwAILx2cSlbixMPtYdOr2Gi0bYUWB9SERncyXF97Yu+eQ
-	fnVexLekDpnWOJt0fQ8t0y52k8KzZl8qTXd7+aizvqf7F439zMKFHAPAy2smV602pM2d
-	oIYg==
-Received: by 10.204.10.70 with SMTP id o6mr1110693bko.31.1342528712841;
-	Tue, 17 Jul 2012 05:38:32 -0700 (PDT)
+	bh=oECzaMxJ3JamGM5QTChoWbe+J8VaDKRBXcBOWgZEpXk=;
+	b=nNx73HVHD53vUmxhqJ5RvUoLt3osmy9VX19NXpVk80P9B2rhRkYQ2LdHWPNBeN/quD
+	Xd9FWS/8v/l6lxz3+G78xb/Z8AAGVfJDFsymdInctEf4+3xHp5vKrkR1jKq3YTHiugE1
+	wDZOJT9kv/KyW7ms5gthx0Eozn5muZVPRFadmhd93ezbwCpN8mvQVlep6NUjRyEONbgE
+	p4qY7bXrA/Z2mBLj8/YdUDxJlViaLLKILLswLrRBLua6d2krBa1BxGfp4brhStvvUjbW
+	YxNuuqjPPSwxzHfvPs376kLxeeTI+oTMjQ/Y3h4xEYZLoWRqZHBTBeKEUqqFRu5rqzC2
+	VQ9Q==
+Received: by 10.180.86.133 with SMTP id p5mr3963928wiz.17.1342528720354;
+	Tue, 17 Jul 2012 05:38:40 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 25sm9889704bkx.9.2012.07.17.05.38.31
+	by mx.google.com with ESMTPS id l5sm39745498wix.5.2012.07.17.05.38.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Jul 2012 05:38:31 -0700 (PDT)
+	Tue, 17 Jul 2012 05:38:39 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Jul 2012 14:37:59 +0200
-Message-Id: <1342528680-6336-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 17 Jul 2012 14:38:00 +0200
+Message-Id: <1342528680-6336-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <1342528680-6336-1-git-send-email-Martin.Jansa@gmail.com>
 References: <20120716175038.GL3729@jama.jama.net>
 	<1342528680-6336-1-git-send-email-Martin.Jansa@gmail.com>
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH 6/7] kernel.bbclass: add deploy link to KERNEL_IMAGETYPE
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [meta-oe][PATCH 7/7] kernel.bbclass: replace os.system with subprocess.call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 12:49:50 -0000
+X-List-Received-Date: Tue, 17 Jul 2012 12:49:59 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-It's common to provide a non-machine-suffixed link in DEPLOY_DIR_IMAGE, so
-let's be consistent and do so here as well.
+Replace os.system with subprocess.call since the older function would
+fail (more or less) silently if the executed program cannot be found
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+More info:
+http://docs.python.org/library/subprocess.html#subprocess-replacements
+
+[YOCTO #2454]
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/classes/kernel.bbclass |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ meta-oe/classes/kernel.bbclass |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 433dd30..248cd28 100644
+index 248cd28..810d6de 100644
 --- a/meta-oe/classes/kernel.bbclass
 +++ b/meta-oe/classes/kernel.bbclass
-@@ -541,6 +541,7 @@ kernel_do_deploy() {
- 	cd ${DEPLOYDIR}
- 	rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
- 	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
-+	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGETYPE}
+@@ -316,12 +316,12 @@ module_conf_rfcomm = "alias bt-proto-3 rfcomm"
  
- 	cp ${COREBASE}/meta/files/deploydir_readme.txt ${DEPLOYDIR}/README_-_DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
- }
+ python populate_packages_prepend () {
+ 	def extract_modinfo(file):
+-		import tempfile, re
++		import tempfile, re, subprocess
+ 		tempfile.tempdir = d.getVar("WORKDIR", True)
+ 		tf = tempfile.mkstemp()
+ 		tmpfile = tf[1]
+ 		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (d.getVar("PATH", True), d.getVar("HOST_PREFIX", True) or "", file, tmpfile)
+-		os.system(cmd)
++		subprocess.call(cmd, shell=True)
+ 		f = open(tmpfile)
+ 		l = f.read().split("\000")
+ 		f.close()
 -- 
 1.7.8.6
 
