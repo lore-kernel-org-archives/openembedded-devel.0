@@ -1,36 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sr7Dz-0005GZ-I9
+	(envelope-from <martin.jansa@gmail.com>) id 1Sr7EU-0005Lz-38
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jul 2012 14:49:59 +0200
-Received: by weyr6 with SMTP id r6so223761wey.6
+	Tue, 17 Jul 2012 14:50:30 +0200
+Received: by wibhm11 with SMTP id hm11so318668wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 05:38:40 -0700 (PDT)
+	Tue, 17 Jul 2012 05:39:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=oECzaMxJ3JamGM5QTChoWbe+J8VaDKRBXcBOWgZEpXk=;
-	b=nNx73HVHD53vUmxhqJ5RvUoLt3osmy9VX19NXpVk80P9B2rhRkYQ2LdHWPNBeN/quD
-	Xd9FWS/8v/l6lxz3+G78xb/Z8AAGVfJDFsymdInctEf4+3xHp5vKrkR1jKq3YTHiugE1
-	wDZOJT9kv/KyW7ms5gthx0Eozn5muZVPRFadmhd93ezbwCpN8mvQVlep6NUjRyEONbgE
-	p4qY7bXrA/Z2mBLj8/YdUDxJlViaLLKILLswLrRBLua6d2krBa1BxGfp4brhStvvUjbW
-	YxNuuqjPPSwxzHfvPs376kLxeeTI+oTMjQ/Y3h4xEYZLoWRqZHBTBeKEUqqFRu5rqzC2
-	VQ9Q==
-Received: by 10.180.86.133 with SMTP id p5mr3963928wiz.17.1342528720354;
-	Tue, 17 Jul 2012 05:38:40 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=jSkQ8TfheDOGIVJztOfZm/Ugr1qglElqoCbt/mXsbNA=;
+	b=Yxg0Fvy7NPbmWzjrllkfh/W4Mhr+LgyxdW4d31dfUH2Ez0dNL4dBMJsOK+FmWPLfVl
+	kWoQGGfE3BanWvFuVOS7ew1Bdj9MzaWienGaH0d+HLAZ4mfGiQlnEdfyJ/BORMWWQ4gi
+	MeBLeWhDygX3t3/SVuejlqGuVFZ6mvEjtBno5IPWIJ+EuKdlSyTSjjTnc/61CWq2+YgM
+	dfFoRydNolL18XU97bjwC+L6nN87gCwmW8VRM/RfT2Q8T1CPH+izWZ7WMUF8HZGOmwcW
+	V3y8NwSyli+5rLOMlpxPIhsaqaGA0Lo5g1RfqDKcwHW00evhdLVNN37sQKbYjh2LTFU9
+	WhKg==
+Received: by 10.180.103.136 with SMTP id fw8mr3956996wib.20.1342528750956;
+	Tue, 17 Jul 2012 05:39:10 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm39745498wix.5.2012.07.17.05.38.38
+	by mx.google.com with ESMTPS id fr4sm39759323wib.8.2012.07.17.05.39.09
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Jul 2012 05:38:39 -0700 (PDT)
+	Tue, 17 Jul 2012 05:39:10 -0700 (PDT)
+Date: Tue, 17 Jul 2012 14:39:19 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Jul 2012 14:38:00 +0200
-Message-Id: <1342528680-6336-7-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1342528680-6336-1-git-send-email-Martin.Jansa@gmail.com>
-References: <20120716175038.GL3729@jama.jama.net>
-	<1342528680-6336-1-git-send-email-Martin.Jansa@gmail.com>
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [meta-oe][PATCH 7/7] kernel.bbclass: replace os.system with subprocess.call
+Message-ID: <20120717123919.GA22569@jama.jama.net>
+References: <1342460316-5489-1-git-send-email-raj.khem@gmail.com>
+	<20120716175038.GL3729@jama.jama.net>
+	<CAMKF1srccbhEC5JztcmzpOGeosO5TSbi=EoBTqFLf2vyUnnk4w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1srccbhEC5JztcmzpOGeosO5TSbi=EoBTqFLf2vyUnnk4w@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [RFC][meta-oe][PATCH 1/3] kernel.bbclass: Rename to machine_kernel_pr.bbclass which provides added functionality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 12:49:59 -0000
+X-List-Received-Date: Tue, 17 Jul 2012 12:50:30 -0000
+X-Groupsio-MsgNum: 39723
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
+Content-Disposition: inline
 
-From: Robert Yang <liezhi.yang@windriver.com>
+--huq684BweRXVnRxX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Replace os.system with subprocess.call since the older function would
-fail (more or less) silently if the executed program cannot be found
+On Mon, Jul 16, 2012 at 10:55:44AM -0700, Khem Raj wrote:
+> On Mon, Jul 16, 2012 at 10:50 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> >
+> > There is also this change
+> > http://lists.linuxtogo.org/pipermail/openembedded-core/2012-April/02160=
+8.html
+> > which never made it to oe-core version..
+>=20
+> I missed that part. That would need an enhancement in OE-Core to
+> provide a variable to override uImage if a machine asks for.
 
-More info:
-http://docs.python.org/library/subprocess.html#subprocess-replacements
+I've sent kernel.bbclass patches from oe-core to update meta-oe copy, so
+that the diff will be smaller again.. then we can try to replace it with
+machine_kernel_pr.bbclass..
 
-[YOCTO #2454]
+Cheers,
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/classes/kernel.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index 248cd28..810d6de 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -316,12 +316,12 @@ module_conf_rfcomm = "alias bt-proto-3 rfcomm"
- 
- python populate_packages_prepend () {
- 	def extract_modinfo(file):
--		import tempfile, re
-+		import tempfile, re, subprocess
- 		tempfile.tempdir = d.getVar("WORKDIR", True)
- 		tf = tempfile.mkstemp()
- 		tmpfile = tf[1]
- 		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (d.getVar("PATH", True), d.getVar("HOST_PREFIX", True) or "", file, tmpfile)
--		os.system(cmd)
-+		subprocess.call(cmd, shell=True)
- 		f = open(tmpfile)
- 		l = f.read().split("\000")
- 		f.close()
--- 
-1.7.8.6
+--huq684BweRXVnRxX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlAFXPcACgkQN1Ujt2V2gBwunwCfXL4HyKFplLBkmOkpSFCzGWl+
+sGUAoJ2AHRPJW5cyKdes7EHIuzuYsje7
+=RkZ4
+-----END PGP SIGNATURE-----
 
+--huq684BweRXVnRxX--
