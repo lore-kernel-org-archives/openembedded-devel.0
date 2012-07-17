@@ -1,33 +1,24 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <aalonso00@gmail.com>) id 1Sqyeo-0004Q6-9s
+	(envelope-from <Song.Li@windriver.com>) id 1Sr1wI-0000ex-He
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jul 2012 05:41:06 +0200
-Received: by yhjj56 with SMTP id j56so2391518yhj.6
+	Tue, 17 Jul 2012 09:11:22 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q6H6KbMQ007865
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2012 20:29:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=L1yofHXxZF945/lEY5IZPlibk8O7EU7c/NaSM25z/0o=;
-	b=usXq1XXB9I8gQaLXDlQIYBXa5uDlncFjTjjhFjQDngQZFSuTMRGks1KsOHqI2MoLAw
-	YtYBNV3IupCIJbG/TqSgBmVVAPzW/ZstLrpSB14m4t9zSiuqsqBrQYex76jPb7dFTywl
-	0bM+y+bI0OMEgGE66gSOcuhDVo8BtkAl068P1g/KR341wX9nlHUSiXXURBIknyCZjd51
-	WQQ8XbQTDq8/ap9R+bgjyV+dciZF8w9uAeyHXJ+ncrEZz0HzKwdKBT9QzT23QQSfHJmk
-	bvyrXagUmtY2EqCN81uPQfwPTBoZPZBffltbTci8u3OqafsE46HgnKadBni+mwCsQqaE
-	lXzQ==
+	Mon, 16 Jul 2012 23:20:37 -0700 (PDT)
+Received: from localhost.localdomain (128.224.163.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.1.255.0; Mon, 16 Jul 2012 23:20:37 -0700
+From: <Song.Li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Jul 2012 14:20:28 +0800
+Message-ID: <1342506029-32113-1-git-send-email-Song.Li@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Received: by 10.50.149.167 with SMTP id ub7mr141868igb.24.1342495786692; Mon,
-	16 Jul 2012 20:29:46 -0700 (PDT)
-Received: by 10.64.0.77 with HTTP; Mon, 16 Jul 2012 20:29:46 -0700 (PDT)
-In-Reply-To: <1342376212-20391-1-git-send-email-elvis.dowson@gmail.com>
-References: <1342376212-20391-1-git-send-email-elvis.dowson@gmail.com>
-Date: Mon, 16 Jul 2012 22:29:46 -0500
-Message-ID: <CAAB-1yyZioxbguGQVfiTxwYTXKfdYH8sM4QZFwygEYHyg_J1+A@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
-To: Elvis Dowson <elvis.dowson@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xilinx] xilinx-kernel.bbclass: Fix support for binary device tree generation.
+Cc: Zhenfeng.Zhao@windriver.com
+Subject: [PATCH] sysstat:use a new way to remove -s option of LFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,74 +32,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 03:41:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 17 Jul 2012 07:11:23 -0000
+Content-Type: text/plain
 
-Applied.
+From: "Song.Li" <Song.Li@windriver.com>
 
-Thanks!
+sysstat Makefile shouldn't use -s option to strip binary
+because we need debug info for dbg package.
+The old way to remove -s option is passing LFLAGS=''
+in make command line to clean all the LFLAGS variable in Makefile.
+That will cause build failure when sensors lib is needed.
+In fact,Only the "-s" should be removed, others LFLAGS should be kept.
 
-On Sun, Jul 15, 2012 at 1:16 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
-> This commit fixes support for binary device tree generation, which was
-> broken as a result of commit 8c904eb643ad8ca1bc29cb2d870a80b355dcb341
-> in oe-core:
->
-> linux-dtb: add multi-dtb build support
->     including following enhancement:
->     * support multi-dtb build
->     * skip dtb build and install when KERNEL_DEVICETREE is empty
->     * print a warning message when specified dts file is not available
->
-> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-> ---
->  classes/xilinx-kernel.bbclass |   10 ++++------
->  1 file changed, 4 insertions(+), 6 deletions(-)
->
-> diff --git a/classes/xilinx-kernel.bbclass b/classes/xilinx-kernel.bbclass
-> index 14f4c7d..7c51b3d 100644
-> --- a/classes/xilinx-kernel.bbclass
-> +++ b/classes/xilinx-kernel.bbclass
-> @@ -22,16 +22,14 @@ def device_tree(a, d):
->
->      board = bb.data.getVar('XILINX_BOARD', d, 1)
->      cpu = bb.data.getVar('TARGET_CPU', d, 1)
-> -
->      if re.match('powerpc', a):
->          target = cpu + '-' + board
-> -        dts = 'arch/' + a + '/boot/dts/virtex' + target + '.dts'
-> +        dts = '${S}/arch/' + a + '/boot/dts/virtex' + target + '.dts'
->      else:
->          target = 'system'
-> -        dts = 'arch/' + a + '/boot/dts/' + target + '.dts'
-> +        dts = '${S}/arch/' + a + '/boot/dts/' + target + '.dts'
->
->      bb.data.setVar('KERNEL_TARGET', target, d)
-> -
->      return dts
->
->
-> @@ -44,10 +42,10 @@ if [ -n "${XILINX_BSP_PATH}" ]; then
->                 if [ -e "$dts" ]; then
->                         bbnote "Xilinx BSP device tree located in: ${dts}"
->                         if [ "${TARGET_ARCH}" = "powerpc" ]; then
-> -                               bbnote "Replacing linux kernel powerpc device tree to match located hardware model"
-> +                               bbnote "Replacing linux kernel powerpc device tree to match located hardware model: virtex${KERNEL_TARGET}.dts"
->                                 cp -pP ${dts} ${S}/arch/powerpc/boot/dts/virtex${KERNEL_TARGET}.dts
->                         else
-> -                               bbnote "Replacing linux kernel microblaze device tree to match located hardware model"
-> +                               bbnote "Replacing linux kernel microblaze device tree to match located hardware model: ${KERNEL_TARGET}.dts"
->                                 cp -pP ${dts} ${S}/arch/microblaze/platform/generic/${KERNEL_TARGET}.dts
->                         fi
->                 else
-> --
-> 1.7.9.5
->
+[YOCTO #2740]
 
+Signed-off-by: Song.Li <Song.Li@windriver.com>
+---
+ .../sysstat/files/remove-s-option-of-LFLAGS.patch  |   34 ++++++++++++++++++++
+ meta/recipes-extended/sysstat/sysstat.inc          |    5 +--
+ meta/recipes-extended/sysstat/sysstat_10.0.3.bb    |    2 +-
+ 3 files changed, 38 insertions(+), 3 deletions(-)
+ create mode 100644 meta/recipes-extended/sysstat/files/remove-s-option-of-LFLAGS.patch
 
-
+diff --git a/meta/recipes-extended/sysstat/files/remove-s-option-of-LFLAGS.patch b/meta/recipes-extended/sysstat/files/remove-s-option-of-LFLAGS.patch
+new file mode 100644
+index 0000000..5c23091
+--- /dev/null
++++ b/meta/recipes-extended/sysstat/files/remove-s-option-of-LFLAGS.patch
+@@ -0,0 +1,34 @@
++From 69f0088cbe300628f5d94b66505ac8ed07565229 Mon Sep 17 00:00:00 2001
++From: "Song.Li" <Song.Li@windriver.com>
++Date: Fri, 13 Jul 2012 13:51:13 +0800
++Subject: [PATCH] remove -s option of LFLAGS
++
++sysstat Makefile shouldn't use -s option to strip binary
++because we need debug info for dbg package.
++The old way to remove -s option is passing LFLAGS=''
++in make command line to clean all the LFLAGS variable in Makefile.
++That will cause build failure when sensors lib is needed.
++In fact,only "-s" should be removeed, others LFLAGS should be kept.
++
++[YOCTO #2740]
++
++Signed-off-by: Song.Li <Song.Li@windriver.com>
++---
++ Makefile.in |    1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index d1ea853..ee6cbc1 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -71,7 +71,6 @@ SYSCONFIG_DIR = @SYSCONFIG_DIR@
++ # Compiler flags
++ CFLAGS = @CFLAGS@ -Wall -Wstrict-prototypes -pipe -O2
++ DFLAGS = @DFLAGS@
++-LFLAGS =  -s
++ DFLAGS += -DSA_DIR=\"$(SA_DIR)\" -DSADC_PATH=\"$(SADC_PATH)\"
++ DFLAGS += $(DFSENSORS)
++ 
++-- 
++1.7.9.5
++
+diff --git a/meta/recipes-extended/sysstat/sysstat.inc b/meta/recipes-extended/sysstat/sysstat.inc
+index 9da40a7..1c98101 100644
+--- a/meta/recipes-extended/sysstat/sysstat.inc
++++ b/meta/recipes-extended/sysstat/sysstat.inc
+@@ -5,11 +5,12 @@ LICENSE = "GPLv2+"
+ SECTION = "console/utils"
+ 
+ SRC_URI = "http://pagesperso-orange.fr/sebastien.godard/sysstat-${PV}.tar.gz \
+-		   file://99_sysstat"
++		   file://99_sysstat \
++		   file://remove-s-option-of-LFLAGS.patch \
++          "
+ 
+ inherit autotools gettext
+ 
+-EXTRA_OEMAKE += 'LFLAGS=""'
+ 
+ do_install() {
+ 	autotools_do_install
+diff --git a/meta/recipes-extended/sysstat/sysstat_10.0.3.bb b/meta/recipes-extended/sysstat/sysstat_10.0.3.bb
+index 7ef6c60..93fbe21 100644
+--- a/meta/recipes-extended/sysstat/sysstat_10.0.3.bb
++++ b/meta/recipes-extended/sysstat/sysstat_10.0.3.bb
+@@ -2,7 +2,7 @@ require sysstat.inc
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI[md5sum] = "0e1ed5200f31f69a3b90ff1e81c07745"
+ SRC_URI[sha256sum] = "7c0dd172f09edaff100b33db29ef502e15e71867b505c6d519f76a24fabcc1f5"
 -- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+1.7.9.5
+
 
 
