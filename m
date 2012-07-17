@@ -1,35 +1,39 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Sr2Ra-0001dN-IM
+	(envelope-from <koen@dominion.thruhere.net>) id 1Sr2Rb-0001dN-6h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jul 2012 09:43:42 +0200
-Received: by eaal1 with SMTP id l1so24371eaa.6
+	Tue, 17 Jul 2012 09:43:43 +0200
+Received: by mail-ey0-f175.google.com with SMTP id l1so24371eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 00:32:23 -0700 (PDT)
+	Tue, 17 Jul 2012 00:32:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=EfxDmkUdyCP6F7xnaAc/bFOUjPJ+BKn2Z+bSpS7B9yA=;
-	b=NTknEv5J5vb3/lIOxehOMTmeVhN0j1h/PnrnEyO+WwYFb+F74l+iHcnnOWHmSnXzYL
-	P+XKe0IYuC6k0WF1PxIwAxDMLJn0BR2z4od9ZLYUdVvHoqQrE43scx+dhKiwsbq5AaDe
-	q+L5bWmVAwtUhmwJFoBQ+s5PL1IQx0TI31mEBToPjatet/ix15KiPs1QN3TPJ34tBY9x
-	MF2pFsI2f2gI/EtL1Z8s/wv6s1gEKILfohBPRPLlLS5jrpPv52agy2m3gPwc+z5W75hW
-	AmgNbU+ohNIGCH2TylGdmpLDs6AgpSbKE92I+qfLsjCPHB6ZkOR5UaFPsohjIjASUFNK
-	JBiA==
-Received: by 10.14.177.73 with SMTP id c49mr1551554eem.20.1342510343429;
-	Tue, 17 Jul 2012 00:32:23 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=BSvBL2chYpxfZsnBNX8oBUfY7R6PVF7tG0i2F9K2Ijw=;
+	b=XPKpBlMXicl9Hx2Whi1zTkz+6n721v3ubF3RZeov8wG2+tdbqM+j1Qxm3iNPii6ycF
+	9kVBZvMZNiXtCPtQp2oW0KzmYu4sWhjuEFFGxqNU1/aJ7vpAozg7RPDdifZmvby05ZQp
+	4ou/rRDIFE2m07n2YOPgfGEg1bfaHqB3G3tKkBU13OBmA6GiVCPfAUBQaLt3IDYIZ0S6
+	V1UUbuI2Q5OjBApMBUD1h4gTLqOfBQ0RzKJWtoVIfS4zKQBGI2j++JJ/uB23D3X2ixZt
+	vGr8ymi0j9QKehilVXXucdhTWsH4BylMIqOuasq+0sbgElExGQ4tziVJWq9zxDSNv4JF
+	qEYg==
+Received: by 10.14.200.196 with SMTP id z44mr1456072een.46.1342510346279;
+	Tue, 17 Jul 2012 00:32:26 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id d7sm25025748eep.1.2012.07.17.00.32.21
+	by mx.google.com with ESMTPS id k48sm25026635een.10.2012.07.17.00.32.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Jul 2012 00:32:22 -0700 (PDT)
+	Tue, 17 Jul 2012 00:32:25 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Jul 2012 09:32:12 +0200
-Message-Id: <1342510333-32367-1-git-send-email-koen@dominion.thruhere.net>
+Date: Tue, 17 Jul 2012 09:32:13 +0200
+Message-Id: <1342510333-32367-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQmLkHvAvZdfR4Dc+duqo0XYxrJcI2cJv0L5fcYGezk5BtZMDCWg1LfGNwG7EI6ridQYQEqL
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [RFC][meta-oe][meta-systemd][PATCH v2 1/2] systemd: update to 186+git
+In-Reply-To: <1342510333-32367-1-git-send-email-koen@dominion.thruhere.net>
+References: <1342510333-32367-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQlyGnF0VKEfFUuS+LtzeJSPQFekbiYFOi8GU1dLarB8ySGOdap/0cxmQT9YYC72M2c/bi29
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [RFC][meta-oe][meta-systemd][PATCH v2 2/2] pulseaudio: add patch to fix build with new udev API provided by systemd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,200 +47,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 07:43:42 -0000
+X-List-Received-Date: Tue, 17 Jul 2012 07:43:43 -0000
 
-This is a combined udev+systemd recipe: it will build both udev and systemd in one go, but keep the old (sub)package layout:
+From: Martin Jansa <martin.jansa@gmail.com>
 
-	udev
-	udev-utils
-	udev-systemd
-	systemd
-	systemd-vconsole-setup
-	systemd-analyze
-	systemd-initramfs
-
-And all libraries are seperated out:
-
-	libgudev-1.0-0
-	libsystemd-daemon0
-	libsystemd-id128-0
-	libsystemd-journal0
-	libsystemd-login0
-	libudev1
-
-The SRCREV is 94 patches ahead of the v186 tag to drag in compile fixes for 'old' gcc versions like 4.5.x.
-
-Runtime tested with build from scratch and opkg upgrade with angstrom
-
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-systemd/recipes-core/systemd/systemd_git.bb |   93 ++++++++++++++++++----
- 1 file changed, 79 insertions(+), 14 deletions(-)
+ .../pulseaudio/pulseaudio-2.0-udev-symbols.patch   |   80 ++++++++++++++++++++
+ .../pulseaudio/pulseaudio_1.1.bbappend             |    5 ++
+ 2 files changed, 85 insertions(+)
+ create mode 100644 meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+ create mode 100644 meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index f4ca72a..8af1aa5 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -1,9 +1,14 @@
- DESCRIPTION = "Systemd a init replacement"
- HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
-+LICENSE = "GPLv2 & LGPLv2.1 & MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://LICENSE.LGPL2.1;md5=fb919cc88dbe06ec0b0bd50e001ccf1f \
-+                    file://LICENSE.MIT;md5=544799d0b492f119fa04641d1b8868ed"
+diff --git a/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+new file mode 100644
+index 0000000..1ad720b
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio/pulseaudio-2.0-udev-symbols.patch
+@@ -0,0 +1,80 @@
++From 2e64edbd3e12145950ccd952bb7984a4420b8c02 Mon Sep 17 00:00:00 2001
++From: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
++Date: Thu, 17 May 2012 22:50:22 +0200
++Subject: [PATCH] udev: Don't use deprecated udev_get_*_path() functions
 +
-+PROVIDES = "udev"
++[These symbols were removed in libudev.so.1.0.0. Replace them with
++hardcoded strings. -- heftig]
 +
-+DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup tcp-wrappers"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
-@@ -14,20 +19,17 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r27"
-+PR = "r0"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
--SRCREV = "3eff4208ffecedd778fec260f0d4b18e94dab443"
-+SRCREV = "cd96b3b86abb4a88cac2722bdfb6e5d4413f6831"
- 
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
--           ${UCLIBCPATCHES} \
-+           file://gtk-doc.make \
-+           file://touchscreen.rules \
-+           file://modprobe.rules \
-           "
--UCLIBCPATCHES = ""
--UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
--                             file://format-replace-m-uclibc.patch \
--                            "
--
- LDFLAGS_libc-uclibc_append = " -lrt"
- 
- S = "${WORKDIR}/git"
-@@ -39,17 +41,27 @@ SYSTEMDDISTRO_angstrom = "angstrom"
- EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
-                  --with-rootprefix=${base_prefix} \
-                  --with-rootlibdir=${base_libdir} \
-+                 --sbindir=${base_sbindir} \
-+                 --libexecdir=${base_libdir} \
-                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
--                 --disable-gtk \
-                  --enable-xz \
-                  --disable-manpages \
-                  --disable-coredump \
-+                 --disable-introspection \
-+                 --with-pci-ids-path=/usr/share/misc \
-+                 ac_cv_file__usr_share_pci_ids=no \
-+                 ac_cv_file__usr_share_hwdata_pci_ids=no \
-+                 ac_cv_file__usr_share_misc_pci_ids=yes \
-+                 --disable-gtk-doc-html \ 
-+                 --disable-tcpwrap \
-                "
- 
- # There's no docbook-xsl-native, so for the xsltproc check to false
- do_configure_prepend() {
- 	sed -i /xsltproc/d configure.ac
- 
-+	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
++Signed-off-by: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
++---
++ src/modules/module-udev-detect.c |    9 +++------
++ src/modules/udev-util.c          |    4 ++--
++ 2 files changed, 5 insertions(+), 8 deletions(-)
 +
- 	# we only have /home/root, not /root
- 	sed -i -e 's:=/root:=/home/root:g' units/*.service*
- }
-@@ -68,6 +80,8 @@ do_install() {
- 	# create machine-id
- 	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
- 	touch ${D}${sysconfdir}/machine-id
++diff --git a/src/modules/module-udev-detect.c b/src/modules/module-udev-detect.c
++index 1192194..31416bd 100644
++--- a/src/modules/module-udev-detect.c
+++++ b/src/modules/module-udev-detect.c
++@@ -123,7 +123,7 @@ static char *card_get_sysattr(const char *card_idx, const char *name) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%s", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%s", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++@@ -282,7 +282,7 @@ static void verify_access(struct userdata *u, struct device *d) {
++     pa_assert(u);
++     pa_assert(d);
++ 
++-    cd = pa_sprintf_malloc("%s/snd/controlC%s", udev_get_dev_path(u->udev), path_get_card_id(d->path));
+++    cd = pa_sprintf_malloc("/dev/snd/controlC%s", path_get_card_id(d->path));
++     accessible = access(cd, R_OK|W_OK) >= 0;
++     pa_log_debug("%s is accessible: %s", cd, pa_yes_no(accessible));
++ 
++@@ -621,7 +621,6 @@ fail:
++ }
++ 
++ static int setup_inotify(struct userdata *u) {
++-    char *dev_snd;
++     int r;
++ 
++     if (u->inotify_fd >= 0)
++@@ -632,9 +631,7 @@ static int setup_inotify(struct userdata *u) {
++         return -1;
++     }
++ 
++-    dev_snd = pa_sprintf_malloc("%s/snd", udev_get_dev_path(u->udev));
++-    r = inotify_add_watch(u->inotify_fd, dev_snd, IN_ATTRIB|IN_CLOSE_WRITE|IN_DELETE_SELF|IN_MOVE_SELF);
++-    pa_xfree(dev_snd);
+++    r = inotify_add_watch(u->inotify_fd, "/dev/snd", IN_ATTRIB|IN_CLOSE_WRITE|IN_DELETE_SELF|IN_MOVE_SELF);
++ 
++     if (r < 0) {
++         int saved_errno = errno;
++diff --git a/src/modules/udev-util.c b/src/modules/udev-util.c
++index 2f18bc4..b0bb17d 100644
++--- a/src/modules/udev-util.c
+++++ b/src/modules/udev-util.c
++@@ -180,7 +180,7 @@ int pa_udev_get_info(int card_idx, pa_proplist *p) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%i", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%i", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++@@ -277,7 +277,7 @@ char* pa_udev_get_property(int card_idx, const char *name) {
++         goto finish;
++     }
++ 
++-    t = pa_sprintf_malloc("%s/class/sound/card%i", udev_get_sys_path(udev), card_idx);
+++    t = pa_sprintf_malloc("/sys/class/sound/card%i", card_idx);
++     card = udev_device_new_from_syspath(udev, t);
++     pa_xfree(t);
++ 
++-- 
++1.7.8.6
 +
-+	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
- }
- 
- python populate_packages_prepend (){
-@@ -100,10 +114,18 @@ FILES_${PN} = " ${base_bindir}/* \
-                 ${datadir}/dbus-1/system-services \
-                 ${datadir}/polkit-1 \
-                 ${datadir}/${PN} \
--                ${sysconfdir} \
-+                ${sysconfdir}/bash_completion.d/ \
-+                ${sysconfdir}/binfmt.d/ \
-+                ${sysconfdir}/dbus-1/ \
-+                ${sysconfdir}/machine-id \
-+                ${sysconfdir}/modules-load.d/ \
-+                ${sysconfdir}/sysctl.d/ \
-+                ${sysconfdir}/systemd/ \
-+                ${sysconfdir}/tmpfiles.d/ \
-+                ${sysconfdir}/xdg/ \
-                 ${systemd_unitdir}/* \
-                 ${systemd_unitdir}/system/* \
--                ${base_libdir}/udev/rules.d \
-+                ${base_libdir}/udev/rules.d/99-systemd.rules \
-                 ${base_libdir}/security/*.so \
-                 /cgroup \
-                 ${bindir}/systemd* \
-@@ -114,6 +136,10 @@ FILES_${PN} = " ${base_bindir}/* \
-                 ${libdir}/sysctl.d \
-                 ${localstatedir} \
-                 ${libexecdir} \
-+                ${base_libdir}/udev/rules.d/70-uaccess.rules \
-+                ${base_libdir}/udev/rules.d/71-seat.rules \
-+                ${base_libdir}/udev/rules.d/73-seat-late.rules \
-+                ${base_libdir}/udev/rules.d/99-systemd.rules \
-                "
- 
- FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
-@@ -136,6 +162,45 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
-                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
- "
- 
-+PACKAGES =+ "udev-dbg udev udev-consolekit udev-utils udev-systemd"
+diff --git a/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
+new file mode 100644
+index 0000000..3e81365
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-multimedia/pulseaudio/pulseaudio_1.1.bbappend
+@@ -0,0 +1,5 @@
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 +
-+FILES_udev-dbg += "${base_libdir}/udev/.debug"
++SRC_URI += "file://pulseaudio-2.0-udev-symbols.patch"
 +
-+RDEPENDS_udev += "udev-utils"
-+RPROVIDES_udev = "hotplug"
-+
-+FILES_udev += "${base_libdir}/udev/udevd \
-+               ${base_libdir}/systemd/systemd-udevd \
-+               ${base_libdir}/udev/accelerometer \
-+               ${base_libdir}/udev/ata_id \
-+               ${base_libdir}/udev/cdrom_id \
-+               ${base_libdir}/udev/collect \
-+               ${base_libdir}/udev/findkeyboards \
-+               ${base_libdir}/udev/keyboard-force-release.sh \
-+               ${base_libdir}/udev/keymap \
-+               ${base_libdir}/udev/mtd_probe \
-+               ${base_libdir}/udev/scsi_id \
-+               ${base_libdir}/udev/v4l_id \
-+               ${base_libdir}/udev/keymaps \
-+               ${base_libdir}/udev/rules.d/4*.rules \
-+               ${base_libdir}/udev/rules.d/5*.rules \
-+               ${base_libdir}/udev/rules.d/6*.rules \
-+               ${base_libdir}/udev/rules.d/70-power-switch.rules \
-+               ${base_libdir}/udev/rules.d/75*.rules \
-+               ${base_libdir}/udev/rules.d/78*.rules \
-+               ${base_libdir}/udev/rules.d/8*.rules \
-+               ${base_libdir}/udev/rules.d/95*.rules \
-+               ${sysconfdir}/udev \
-+              "
-+
-+FILES_udev-consolekit += "${libdir}/ConsoleKit"
-+RDEPENDS_udev-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
-+
-+FILES_udev-utils = "${bindir}/udevadm"
-+
-+FILES_udev-systemd = "${base_libdir}/systemd/system/*udev* ${base_libdir}/systemd/system/*.wants/*udev*"
-+RDEPENDS_udev-systemd = "udev"
-+
- # TODO:
- # u-a for runlevel and telinit
- 
++PRINC := "${@int(PRINC) + 1}"
 -- 
 1.7.10
 
