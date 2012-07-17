@@ -1,37 +1,32 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1SrEuW-0007nt-Ma
+Received: from mail-we0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1SrGet-0002i4-KX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Jul 2012 23:02:24 +0200
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 157442232033
+	Wed, 18 Jul 2012 00:54:23 +0200
+Received: by weyr6 with SMTP id r6so561965wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 22:51:07 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 995952232032
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 22:51:06 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g229047067.adsl.alicedsl.de
-	[92.229.47.67]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 22:51:06 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id BEB6F3C505; Tue, 17 Jul 2012 22:51:04 +0200 (CEST)
-Date: Tue, 17 Jul 2012 22:51:04 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 17 Jul 2012 15:43:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=79Y8FR0ewZJd9N31l/CvehcG/GhvtEYyF+jzwK6ik1w=;
+	b=Uv8AskhtHpTnKPLTy4ebZwQaEywZFaCsN7eBECp0RxXLCQeRsj+s6LDYeYspObHSF9
+	ylL3ng7AD3spSP4HIeyuIFGJzAdrdBA4jePYm+GVLmvAuE3eZv7yq86/6VPEMyirEqBb
+	4edPzrgpOiCDRssYQuDnqC/CBy7WNyVxui/35uhC2V2Hxvm40B51qfd5HQbMr8LTlxBj
+	yLNDopqvyBIbyXykwPHBPLLKXzPkJAsHO7WkVhpLOOkEktLNdLhSUWHMrqNIzJ3DsXLh
+	iiXMNsZ4lx9siMe9ioz8ydCzCyP1YlvmYnoM/3CkJH2hc0Uh0q2q9kYzdY/6lwMjYqA9
+	AUxw==
+Received: by 10.216.132.135 with SMTP id o7mr352468wei.6.1342564983977;
+	Tue, 17 Jul 2012 15:43:03 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id y5sm29365469wiw.9.2012.07.17.15.43.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 17 Jul 2012 15:43:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120717205104.GA5443@mail.adw-basketball.de>
-References: <500565FB.90406@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <500565FB.90406@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: release
+Date: Wed, 18 Jul 2012 00:43:11 +0200
+Message-Id: <1342564992-18614-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH 1/2] gnome-panel3: move as-needed.patch to gnome-panel dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,22 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 21:02:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Jul 2012 22:54:23 -0000
 
-On Tue, Jul 17, 2012 at 03:17:47PM +0200, Jaap de Jong wrote:
-> Hi All,
-> are there any plans for an oe-core release?
-> Is the software already stable enough to create one?
-> Thanks!
-> Jaap
+* there is BPN changed to gnome-panel and SRC_URI checksuming code cannot find it, causing this warning:
+  WARNING: Unable to get checksum for gnome-panel3-native SRC_URI entry as-needed.patch: file could not be found
 
-Hi Jaap,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../{gnome-panel3 => gnome-panel}/as-needed.patch  |    0
+ .../gnome-panel/gnome-panel3_3.0.2.bb              |    1 +
+ 2 files changed, 1 insertions(+), 0 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-panel/{gnome-panel3 => gnome-panel}/as-needed.patch (100%)
 
-looks like you are niot subscribed at the oe-core mailing list, otherwise
-you would know about the release in the neat future.
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3/as-needed.patch b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/as-needed.patch
+similarity index 100%
+rename from meta-gnome/recipes-gnome/gnome-panel/gnome-panel3/as-needed.patch
+rename to meta-gnome/recipes-gnome/gnome-panel/gnome-panel/as-needed.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
+index 37288e1..c7be8d0 100644
+--- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "GNOME panel"
+ LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
+ 
+ BPN = "gnome-panel"
++PR = "r1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-- 
+1.7.8.6
 
-Bye Henning
 
 
