@@ -1,44 +1,38 @@
-Received: from ch1ehsobe004.messaging.microsoft.com ([216.32.181.184]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1SrUyb-0005ce-G2
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SrVIv-00061o-9g
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jul 2012 16:11:41 +0200
-Received: from mail77-ch1-R.bigfish.com (10.43.68.238) by
-	CH1EHSOBE016.bigfish.com (10.43.70.66) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 18 Jul 2012 13:45:13 +0000
-Received: from mail77-ch1 (localhost [127.0.0.1])	by mail77-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 7BA663804D8	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2012 13:45:13 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1202hzz8275bhz2dh2a8h668h839hd24he5bhf0ah107ah)
-Received: from mail77-ch1 (localhost.localdomain [127.0.0.1]) by mail77-ch1
-	(MessageSwitch) id 1342619111148556_2096;
-	Wed, 18 Jul 2012 13:45:11 +0000 (UTC)
-Received: from CH1EHSMHS028.bigfish.com (snatpool3.int.messaging.microsoft.com
-	[10.43.68.228])	by mail77-ch1.bigfish.com (Postfix) with ESMTP id
-	0C6722A0061 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2012 13:45:11 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS028.bigfish.com
-	(10.43.70.28) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 18 Jul 2012 13:45:08 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.298.5; Wed, 18 Jul 2012 08:45:07 -0500
-Received: from right.am.freescale.net (right.am.freescale.net [10.82.176.228])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	q6IDj6bY000645; Wed, 18 Jul 2012 06:45:07 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Jul 2012 08:45:03 -0500
-Message-ID: <1342619103-12808-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
+	Wed, 18 Jul 2012 16:32:41 +0200
+Received: by yhjj56 with SMTP id j56so1484935yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Jul 2012 07:21:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=dMdIDjP8nkmaheUch78rNvRQGSr8zL+b2MKxgLI9D0o=;
+	b=PxBUv2tpDzlEJ+O5axMAcWKTzDN7EJOZtTlwLb63pvnnJ97tIBmLfWc/+g18CTaz2J
+	T0FEC7qD+eZzkpvepymfq6xQgooIMFJJwxIeA0DrQIn4TreL9fWPNmhDjam8R8SiHxKI
+	zi4UtQbVISTs7ZO8SzaOaMULaBIO4FaDy8h9KyhNpbUIxFqPWvSDS/rBO421yA9n9RC+
+	dAcvK6vvBxa/TPO0T3eAOQvEAJJKgPqO3zzqKOQyCaKnWGxIlAid16Yfir7/Krg9xPQH
+	nAZH4c0Fvedx7mEKXdBID5no0lSRAN3AUqUtMoT6g7q/yWwQRq6nyfjLcuMQWaHoyNil
+	0dxw==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe] rp-pppoe: discard use of dnl in Makefile.am
+Received: by 10.50.181.232 with SMTP id dz8mr2213292igc.36.1342621279829; Wed,
+	18 Jul 2012 07:21:19 -0700 (PDT)
+Received: by 10.64.9.165 with HTTP; Wed, 18 Jul 2012 07:21:19 -0700 (PDT)
+In-Reply-To: <20120718123125.GM22569@jama.jama.net>
+References: <20120716074256.12AC410334@opal>
+	<20120716182528.GO3729@jama.jama.net>
+	<CALbNGRRd0ndx_CLht9e-vhRizm=ERkoyCugtZ7jb58i-QW34qg@mail.gmail.com>
+	<20120717091818.GA3390@jama.jama.net>
+	<ju3auv$81f$1@dough.gmane.org>
+	<20120718123125.GM22569@jama.jama.net>
+Date: Wed, 18 Jul 2012 16:21:19 +0200
+Message-ID: <CALbNGRSEPoHdg4NfsDEOt32SqDwzmphUf1V7sQrqAQwap9tJkQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBzeXN0ZW1kLmJiY2xhc3M6IGFkZCAqLXN5c3RlbWQgcGFja2FnZXMgdG8gUlJFQ09NTUVORFM=?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,88 +46,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jul 2012 14:11:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Jul 2012 14:32:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Ting Liu <b28495@freescale.com>
+On Wed, Jul 18, 2012 at 2:31 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Tue, Jul 17, 2012 at 11:23:43AM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 17-07-12 11:18, Martin Jansa schreef:
+>> > On Tue, Jul 17, 2012 at 10:54:41AM +0200, Andreas M=FCller wrote:
+>> >> On Mon, Jul 16, 2012 at 8:25 PM, Martin Jansa <martin.jansa@gmail.com=
+>
+>> >> wrote:
+>> >>> On Mon, Jul 16, 2012 at 07:42:56AM +0000, git@git.openembedded.org
+>> >>> wrote:
+>> >>>> Module: meta-openembedded.git Branch: master Commit:
+>> >>>> 264e5a44e1111f939b43c11bb9514a0b435918db URL:
+>> >>>> http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=
+=3D264e5a44e1111f939b43c11bb9514a0b435918db
+>> >>>>
+>> >>>>
+>> >>>>
+>> Author: Andreas M=FCller <schnitzeltony@googlemail.com>
+>> >>>> Date:   Wed Jul 11 20:46:07 2012 +0200
+>> >>>>
+>> >>>> systemd.bbclass: add *-systemd packages to RRECOMMENDS
+>> >>>
+>> >>> This is a bit unfortunate e.g. when busybox is used in small chroot
+>> >>> image. busybox pulls busybox-syslog, which now adds
+>> >>> busybox-syslog-systemd and it ends with
+>> >>> systemd/dbus/udev/shadow/pam/util-linux/kmod being added to
+>> >>> previously small image, see:
+>> >>>
+>> >>> http://git.shr-project.org/git/?p=3Dbuildhistory.git;a=3Dblobdiff;f=
+=3Dimages/crespo/eglibc/chroot-image/installed-package-names.txt;h=3D07187b=
+9e51bd0199910152a8019d117ed41cc2db;hp=3D8f401e657dd449e30fe8183dc86a791d096=
+14d9f;hb=3Dac04304bb15221b49e5af6838068f158e7d628ed;hpb=3D4c0555e7fa689c3c2=
+0902c7fc1ec8e525769723f
+>> >>>
+>> >>>
+>> >>>
+>> So it could be solved by image specific BAD_RECOMMENDATIONs or something
+>> >>> like that, but by default it doesn't work very well in this
+>> >>> use-case.
+>> >>>
+>> >>> Cheers,
+>> >>>
+>> >> I think the image specific BAD_RECOMMENDATION is not that easy to
+>> >> implement and to handle by user. I am 'dreaming' of of a distro layer
+>> >> blacklist. So in your case the distro could mask out whole
+>> >> meta-systemd. Could you live with that?
+>> >
+>> > No, as the same distro is used to create full images with systemd and
+>> > this chroot-image is just small initramfs for kernel (where
+>> > systemd+friends is really not needed/expected).
+>>
+>> I think the easiest solution is to remove 'inherit systemd' from busybox=
+.
+>
+> I have similar problem with gpsd/fso-gpsd and gpsd-systemd too.. On some
+> devices I would like to include gpsd-systemd in image (e.g. with
+> systemd-machine-units or through some machine specific task), but on
+> others (e.g. om-gta02) I need only fso-gpsd.service to provide gpsd
+> (gpsd-systemd locks gpsd port).
+>
+> So maybe I didn't understand Andreas right.. I can put all *-systemd
+> packages to BAD_RECOMMENDATIONs and then include only needed in
+> tasks/images like I did before..
+>
+Martin,
 
-Since Makefile.am is not processed by m4, but by automake, 'dnl' does
-not introduce a comment.
+Correct me if I go wrong but I think you are mixing up two issues:
 
-Fix the following error: (appearred on opensuse-11.4/fedora-15, which
-shipped make with version 3.82)
-...
-NOTE: package rp-pppoe-3.8-r8: task do_compile: Started
-...
-| NOTE: make -j 3
-| Makefile:640: *** missing separator.  Stop.
-| ERROR: oe_runmake failed
-NOTE: package rp-pppoe-3.8-r8: task do_compile: Failed
+issue 1. busybox: automatic redepending drags in things you don't want.
+issue 2. gpsd: If I understand you right: there are two services
+shipped and auto-enabled and that is leading to a conflict.
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- .../discard-use-of-dnl-in-Makefile.am.patch        |   27 ++++++++++++++++++++
- .../recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb  |    3 +-
- 2 files changed, 29 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/discard-use-of-dnl-in-Makefile.am.patch
+My suggestions:
+issue 1. Similar as Koen suggested but I would add an additional
+variable - something like SYSTEMD_NO_RRECOMMENDS_{PN}. If this is set
+to "1", the automatic rrecommends are not appended.
+issue 2. The conflict could be resolved by SYSTEMD_AUTO_ENABLE =3D "disable=
+".
 
-diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/discard-use-of-dnl-in-Makefile.am.patch b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/discard-use-of-dnl-in-Makefile.am.patch
-new file mode 100644
-index 0000000..8b78864
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe-3.8/discard-use-of-dnl-in-Makefile.am.patch
-@@ -0,0 +1,27 @@
-+From 611c9fe719c5aa264a2ad2eb920cf4522ae2ddec Mon Sep 17 00:00:00 2001
-+From: Ting Liu <b28495@freescale.com>
-+Date: Tue, 12 Jun 2012 14:26:16 -0400
-+Subject: [PATCH] discard use of dnl in Makefile.am
-+
-+Since Makefile.am is not processed by m4, but by automake, 'dnl' does
-+not introduce a comment.
-+
-+Signed-off-by: Ting Liu <b28495@freescale.com>
-+---
-+ Makefile.am |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index eff6977..3091c33 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1,5 +1,5 @@
-+ PACKAGE = rp-pppoe
-+ VERSION = 3.8
-+ 
-+-dnl AM_CFLAGS = -Wall -DDEBUG
-++##dnl AM_CFLAGS = -Wall -DDEBUG
-+ SUBDIRS = src
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
-index 673633a..7deac84 100644
---- a/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
-+++ b/meta-oe/recipes-connectivity/rp-pppoe/rp-pppoe_3.8.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
- RDEPENDS_${PN} = "ppp"
- RDEPENDS_${PN}-server = "${PN}"
- RRECOMMENDS_${PN} = "ppp-oe"
--PR = "r8"
-+PR = "r9"
- 
- SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
-            file://top-autoconf.patch \
-@@ -14,6 +14,7 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
-            file://pppoe-src-restrictions.patch \
-            file://update-config.patch \
-            file://dont-swallow-errors.patch \
-+           file://discard-use-of-dnl-in-Makefile.am.patch \
-            file://use-ldflags.patch \
-            file://pppoe-server.default \
-            file://pppoe-server.init"
--- 
-1.7.3.4
-
-
+Andreas
 
 
