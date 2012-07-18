@@ -1,34 +1,34 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SrGf2-0002iO-2g
+	(envelope-from <martin.jansa@gmail.com>) id 1SrI9T-0005rB-HZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Jul 2012 00:54:32 +0200
-Received: by wgbdr1 with SMTP id dr1so758044wgb.24
+	Wed, 18 Jul 2012 02:30:03 +0200
+Received: by wibhm11 with SMTP id hm11so785455wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2012 15:43:12 -0700 (PDT)
+	Tue, 17 Jul 2012 17:18:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=uAebwqpS5UANloW3IChnW4h/xPjKQ64T240OmFd9ucA=;
-	b=PBCBW9bc1JJsOp/a8nQubKLqdb8aEjSvtELWSYcQ18g2g9BPPyUQOkOfAchGvy2/9u
-	K3AdeA0kP2HEfwgL233JoFEXsshPJDsaIaXHT3ldXb9SVxQUS/I/qnDhuesXZjfGitnk
-	QApD2GgORu1YKB7qnEgz0BDfTRlk91kUq78tInESHY5mSziwIghXUFlaKz72HQmqiPsZ
-	bSiaEdKOpqByxPPnErVoPBta5ROI6SmlBGKHYA0v4tyqxHstZ9e00g2WL/Xt+TEROqfg
-	9PPVCWUblqJRfa9hf2Ib9cUCUT4gXHhT3OkzeYw3PBs+QpdOf+GRLwL0Qrd1r7CQK8NN
-	pXhA==
-Received: by 10.216.133.130 with SMTP id q2mr392056wei.131.1342564992447;
-	Tue, 17 Jul 2012 15:43:12 -0700 (PDT)
+	bh=cKnnqxhzGX39w7c/IkWcY97FVGimpQsfqed1tDLYYWM=;
+	b=0ov8OcGwlSlwXPxhFZ3pw+5+9ybHB0oem/0puIIZen+yFS5on2LUPKFzyAZsfqW8sh
+	xQ2QbCs6LknmjgMiEaLtFF7d8SXPzbYdvhM0cB4YY8La9biZqHhKJJVA77p8bxUrMLBt
+	DC2LP+FfwVf5JhaaKKEpMwCjUri7R3VJi9j+pOmcHUOVwWFRMw2X3AKWzgecrUD67rIE
+	PaeS7+jeJ4cFPui/4U8NevRylappjTUyKy/LDvFPgkULvRYweFu4wAQt0uTunMJ2VAjr
+	B25VdzBqX3E5gtzpuddtdTI95TBqZE1mgpdcKmU1RewLDkLioR7cktgNWrS9UDZKRCAq
+	Ws8w==
+Received: by 10.216.136.227 with SMTP id w77mr458652wei.111.1342570723698;
+	Tue, 17 Jul 2012 17:18:43 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id el6sm29363958wib.8.2012.07.17.15.43.10
+	by mx.google.com with ESMTPS id cl8sm29743137wib.10.2012.07.17.17.18.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Jul 2012 15:43:10 -0700 (PDT)
+	Tue, 17 Jul 2012 17:18:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Jul 2012 00:43:12 +0200
-Message-Id: <1342564992-18614-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 18 Jul 2012 02:18:50 +0200
+Message-Id: <1342570731-8385-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1342564992-18614-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1342564992-18614-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] gsettings-desktop-schemas: add SRC_URI checksums
+In-Reply-To: <1342564992-18614-2-git-send-email-Martin.Jansa@gmail.com>
+References: <1342564992-18614-2-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-gnome][PATCH 1/2] dconf: fix unpackaged /usr/lib/gio/modules/.debug/libdconfsettings.so
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2012 22:54:32 -0000
+X-List-Received-Date: Wed, 18 Jul 2012 00:30:03 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../gsettings-desktop-schemas_3.0.1.bb             |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gsettings-desktop-schemas_3.0.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gsettings-desktop-schemas_3.0.1.bb
-index ef9bc67..a830905 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gsettings-desktop-schemas_3.0.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gsettings-desktop-schemas_3.0.1.bb
-@@ -13,3 +13,5 @@ fi
- glib-compile-schemas ${datadir}/glib-2.0/schemas
- }
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
+index 39d68cb..af9a83a 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
+@@ -12,12 +12,15 @@ DEPENDS = "glib-2.0 gtk+3"
  
-+SRC_URI[archive.md5sum] = "d42f0d79d6449a0eb1bb502eee8eb709"
-+SRC_URI[archive.sha256sum] = "6e72158a0e70ae50b8bb992e1486dd2fda43207f4ec4eb03a0d769f210363fd9"
+ inherit vala
+ 
++PR = "r1"
++
+ PACKAGES =+ "dconf-editor"
+ 
+ FILES_dconf-editor = "${bindir}/dconf-editor ${datadir}/dconf-editor/"
+ FILES_${PN} += "${datadir}/dbus-1/ \
+                 ${libdir}/gio/modules/*.so \
+                "
++FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
+ 
+ pkg_postinst_${PN} () {
+ if [ -n "$D" ]; then
 -- 
 1.7.8.6
 
