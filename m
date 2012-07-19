@@ -1,37 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Srl72-0005qy-76
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2012 09:25:28 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so1927955wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 00:14:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=Wgev5dbfsMVB9bCffKnXzldnC1/opEVSw7dc4ozkK0g=;
-	b=HnPEWAMG8umKEeGvN+yJ9LRL7h93vOk0crA1kRIOD33KzoVHOgAT98iPv68S2KzLMc
-	kN2t9Efh4WpZB6b5JMJjlfyq4FViDdCQVibaT7027N4iLD2Ukrj8/IYXuok4Id4n8/LY
-	xWPvMYaSTKn0Ou5Yb7t0fkq/zIOj43lxYlnIO69j5xu8ZVs5kIkOTd7ZPFXV3eSMIvAP
-	zoe7LcsBx4tfv1GG4sAgqhayBoFiO2arh1vFIpD2lIX7REIInbIQ5uD+YJZxdG2wtwJL
-	Sim6YM61veNnZmH8v7M/St3ajrIX6fFJfANXRDhwFE+KJCwAqSWYZseOUZ808Spqme19
-	q58A==
-Received: by 10.216.255.148 with SMTP id j20mr433496wes.106.1342682048883;
-	Thu, 19 Jul 2012 00:14:08 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id el6sm37013241wib.8.2012.07.19.00.14.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Jul 2012 00:14:07 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Srn21-0008Al-Ky for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jul 2012 11:28:25 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Srmr3-00014a-HP for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Jul 2012 11:17:05 +0200
+Received: from 92.69.204.68 ([92.69.204.68])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jul 2012 11:17:05 +0200
+Received: from koen by 92.69.204.68 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jul 2012 11:17:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 09:13:48 +0200
-Message-Id: <99ec57b17650f7451c8a16052545b358cf2920fc.1342681929.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1342681929.git.Martin.Jansa@gmail.com>
-References: <cover.1342681929.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1342681929.git.Martin.Jansa@gmail.com>
-References: <cover.1342681929.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-gnome][PATCH 4/4] python_numpy: Fix SRC_URI warnings.
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 19 Jul 2012 11:16:53 +0200
+Message-ID: <ju8ja5$832$1@dough.gmane.org>
+References: <cover.1342645937.git.Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 92.69.204.68
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <cover.1342645937.git.Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.4.2
+Subject: Re: [meta-efl][RFC 00/14] Newer EFL if someone is interested - just RFC now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 07:25:28 -0000
+X-List-Received-Date: Thu, 19 Jul 2012 09:28:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Elvis Dowson <elvis.dowson@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This commit fixes the following warnings:
-WARNING: Unable to get checksum for python-numpy SRC_URI entry config.h: file could not be found
-WARNING: Unable to get checksum for python-numpy SRC_URI entry numpyconfig.h: file could not be found
+Op 18-07-12 23:19, Martin Jansa schreef:
+> It's RFC because I've tested it only with efl-from-svn-recipes.inc in use
+>  (1.2.1 EFL isn't probably compatible with this new e-wm and stuff..)
+> and without rebuilding from scratch (will probably force me to fix some
+> other recipes too because of new automake etc.. :/)
+> 
+> Next EFL release is planed for end of July and first E17 release after
+> that so it's time for interested people to test their changes, but I'll
+> probably send final pull-request only when there are beta/rc tarballs too
+> (so that efl-from-svn-recipes.inc won't be needed).
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-devtools/python/python-numpy_1.4.1.bb  |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+Any volunteers for adding EPhysics?
 
-diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-index a67bf8b..c1923f7 100644
---- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-@@ -5,7 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
- PR = "r3"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
--	   file://config.h \
-+           ${CONFIGFILESURI} \
-+	  "
-+CONFIGFILESURI ?= ""
-+
-+CONFIGFILESURI_arm = "file://config.h \
-+	   file://numpyconfig.h \
-+	  "
-+CONFIGFILESURI_mipsel = "file://config.h \
- 	   file://numpyconfig.h \
- 	  "
- 
--- 
-1.7.8.6
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQB9CFMkyGM64RGpERAggJAJ9YKr7Hs+BHqO+VxB4F9CVJcJbICACgrdsy
+AT0bQhiNHtH0c6Am7f7iJDQ=
+=e3ll
+-----END PGP SIGNATURE-----
 
 
 
