@@ -1,34 +1,34 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SrtPb-0004Ew-Hm
+	(envelope-from <martin.jansa@gmail.com>) id 1SrtVD-0000sP-W0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2012 18:17:11 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so2153382bkc.6
+	Thu, 19 Jul 2012 18:23:00 +0200
+Received: by weyr6 with SMTP id r6so1848541wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 09:05:51 -0700 (PDT)
+	Thu, 19 Jul 2012 09:11:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
 	bh=b0affeO6Iydunn9OuRISm56zxCnxcMKXnLuHz796vhc=;
-	b=ka1GnKPqEfc7VPNYNkBhs8PMr8u8jC3pg6N6v8Xd5qjhIKrf4y90mRbEw6aPcpePxV
-	vnSwqEmvzq1thW5gXV45bfoSEIl0vPWphSikZsxaA6+HWLGPW3f6Gqi8dOKm4horHeLM
-	lcxV9Fdx56Z0qmbrh8pcf6ETOc2qnTMOEoVhnCZ886I152RonLOm1/KM5207tW3f8z19
-	wQfnLVbrs5cbYzoYGGMrgGB1HWXzngYzhGiitsqqz1hroMugNyFdCHjjqVR3IDIf8Gj0
-	yPWzMFX9zy5jJdvnvMxOlSoABWKWHvKriC4Ps1nWQPDsgSb+4K1CDN/OYM+QXKBXgbs3
-	6YUA==
-Received: by 10.204.132.80 with SMTP id a16mr1522269bkt.82.1342713951671;
-	Thu, 19 Jul 2012 09:05:51 -0700 (PDT)
+	b=d0Iwf2CRZN8r1zJgKWpbNJE24LDpVx3eKh0fDTUPAFwW+oKF+iQOZmsJgRGxzBfjqP
+	7POi1Ubh43rawDXBpV+Ty7aJGu5v34vs7VjabTu2aEDK6DtdMiDpN9HmHaS5IHEhn1FP
+	/P/8hDKGJZuAobGgdtkAmqclZNVmo8QiCKHcEh+8J4Lavu3cKwnGJqYCNt4qvgW+iM2s
+	pXJhe36Q7Nzmf4tnz2xJ7g5iLnxlJriEMo8ynIdq8w8ihNtuh6y7fH4YYgVTcV2kmBgT
+	tN5rIotUZQOSchhHV6ghe54lb/Xqp/Lp7jDKyKXrKjY4v5/TWMkgQTRc7AKswaFyBcm4
+	+ArA==
+Received: by 10.180.105.6 with SMTP id gi6mr6171260wib.4.1342714298090;
+	Thu, 19 Jul 2012 09:11:38 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 14sm1507647bkq.12.2012.07.19.09.05.50
+	by mx.google.com with ESMTPS id l5sm7082753wix.5.2012.07.19.09.11.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Jul 2012 09:05:50 -0700 (PDT)
+	Thu, 19 Jul 2012 09:11:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 18:05:53 +0200
-Message-Id: <1342713953-13000-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jul 2012 18:11:47 +0200
+Message-Id: <1342714307-24105-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1342713953-13000-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1342713953-13000-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] check: upgrade to 0.9.8 and fix build with new automake-1.12.x - WIP
+In-Reply-To: <1342713953-13000-2-git-send-email-Martin.Jansa@gmail.com>
+References: <1342713953-13000-2-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2] check: upgrade to 0.9.8 and fix build with new automake-1.12.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 16:17:11 -0000
+X-List-Received-Date: Thu, 19 Jul 2012 16:23:00 -0000
 
 * configure_fix.patch and
   check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
