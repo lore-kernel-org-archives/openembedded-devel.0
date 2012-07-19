@@ -1,24 +1,24 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1Srua2-0002bp-OK
+	(envelope-from <apelete@seketeli.net>) id 1Srua2-0002br-On
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 19 Jul 2012 19:32:02 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 98EABEA04D
+	by ms.seketeli.net (Postfix) with ESMTP id 8458BEA054
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 19 Jul 2012 19:24:34 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 7899260C20; Thu, 19 Jul 2012 19:20:41 +0200 (CEST)
+	id E438060BFC; Thu, 19 Jul 2012 19:20:40 +0200 (CEST)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 19:20:40 +0200
-Message-Id: <8a869e667867e8e7b1e82dcb53ee75dd58805e81.1342677799.git.apelete@seketeli.net>
+Date: Thu, 19 Jul 2012 19:20:36 +0200
+Message-Id: <0ac962f0656daf53869cdfa168d2ad846bab1d77.1342677799.git.apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
 References: <cover.1342677797.git.apelete@seketeli.net>
 In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
 References: <cover.1342677797.git.apelete@seketeli.net>
-Subject: [2011.03-maintenance][PATCH 9/9] opkg-utils: bump SRCREV to keep python2.6 compatibility
+Subject: [2011.03-maintenance][PATCH 5/9] netsurf: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +34,118 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jul 2012 17:32:02 -0000
 
-Fix an issue where opkg-utils was using a method that requires at
-least python2.7, causing compatibility issues on hosts that are still
-using python2.6.
+Update the SRC_URI of the following recipes, since the NetSurf project
+has moved the download repository of its source packages:
+- hubbub_0.0.2.bb
+- libcss_0.0.2.bb
+- libnsbmp_0.0.2.bb
+- libnsgif_0.0.2.bb
+- libparserutils_0.0.2.bb
+- libwapcaplet_0.0.2.bb
+- netsurf_2.6.bb
 
 Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes/netsurf/hubbub_0.0.2.bb         |    2 +-
+ recipes/netsurf/libcss_0.0.2.bb         |    2 +-
+ recipes/netsurf/libnsbmp_0.0.2.bb       |    2 +-
+ recipes/netsurf/libnsgif_0.0.2.bb       |    2 +-
+ recipes/netsurf/libparserutils_0.0.2.bb |    2 +-
+ recipes/netsurf/libwapcaplet_0.0.2.bb   |    2 +-
+ recipes/netsurf/netsurf_2.6.bb          |    2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
-index 997b292..75a1e9a 100644
---- a/recipes/opkg-utils/opkg-utils_git.bb
-+++ b/recipes/opkg-utils/opkg-utils_git.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                      file://opkg.py;beginline=1;endline=18;md5=15917491ad6bf7acc666ca5f7cc1e083"
- RDEPENDS_${PN} = "python"
- RDEPENDS_${PN}_virtclass-native = ""
--SRCREV = "44df9dd3dc411ca1255cb4b23bde7eb71aed4778"
-+SRCREV = "423ecd36b4782327c16f516885d1248249c7724a"
- PV = "0.1.8+git${SRCPV}"
--PR = "r1"
-+PR = "r2"
+diff --git a/recipes/netsurf/hubbub_0.0.2.bb b/recipes/netsurf/hubbub_0.0.2.bb
+index 0d6b828..319fe1d 100644
+--- a/recipes/netsurf/hubbub_0.0.2.bb
++++ b/recipes/netsurf/hubbub_0.0.2.bb
+@@ -7,7 +7,7 @@ DEPENDS = "libparserutils"
  
- SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
-            "
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/hubbub-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libcss_0.0.2.bb b/recipes/netsurf/libcss_0.0.2.bb
+index 42424c4..213b57e 100644
+--- a/recipes/netsurf/libcss_0.0.2.bb
++++ b/recipes/netsurf/libcss_0.0.2.bb
+@@ -7,7 +7,7 @@ DEPENDS = "libwapcaplet"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libcss-${PV}-src.tar.gz \
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libcss-${PV}-src.tar.gz \
+ 	   file://no-werror.patch"
+ 
+ inherit pkgconfig
+diff --git a/recipes/netsurf/libnsbmp_0.0.2.bb b/recipes/netsurf/libnsbmp_0.0.2.bb
+index db02c1e..56eeb81 100644
+--- a/recipes/netsurf/libnsbmp_0.0.2.bb
++++ b/recipes/netsurf/libnsbmp_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsbmp-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsbmp-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libnsgif_0.0.2.bb b/recipes/netsurf/libnsgif_0.0.2.bb
+index 5291169..57283f3 100644
+--- a/recipes/netsurf/libnsgif_0.0.2.bb
++++ b/recipes/netsurf/libnsgif_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libnsgif-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libparserutils_0.0.2.bb b/recipes/netsurf/libparserutils_0.0.2.bb
+index ea59272..cca2c02 100644
+--- a/recipes/netsurf/libparserutils_0.0.2.bb
++++ b/recipes/netsurf/libparserutils_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libparserutils-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libparserutils-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/libwapcaplet_0.0.2.bb b/recipes/netsurf/libwapcaplet_0.0.2.bb
+index 3ef4b3c..02c1d7a 100644
+--- a/recipes/netsurf/libwapcaplet_0.0.2.bb
++++ b/recipes/netsurf/libwapcaplet_0.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/projects/releases/libwapcaplet-${PV}-src.tar.gz"
++SRC_URI = "http://download.netsurf-browser.org/libs/releases/libwapcaplet-${PV}-src.tar.gz"
+ 
+ inherit pkgconfig
+ 
+diff --git a/recipes/netsurf/netsurf_2.6.bb b/recipes/netsurf/netsurf_2.6.bb
+index 607a18a..1e07223 100644
+--- a/recipes/netsurf/netsurf_2.6.bb
++++ b/recipes/netsurf/netsurf_2.6.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.netsurf-browser.org/"
+ SECTION = "x11/network"
+ LICENSE = "GPLv2"
+ 
+-SRC_URI = "http://www.netsurf-browser.org/downloads/releases/netsurf-${PV}-src.tar.gz \
++SRC_URI = "http://download.netsurf-browser.org/netsurf/releases/source/netsurf-${PV}-src.tar.gz \
+ 	   file://fix_makefile.patch \
+ 	   file://debugxml_fix.patch \
+ 	   file://netsurf.png \
 -- 
 1.7.10.4
 
