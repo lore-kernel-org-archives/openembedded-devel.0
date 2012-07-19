@@ -1,34 +1,20 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Srutu-0003jD-75
+	(envelope-from <dv@pseudoterminal.org>) id 1Srv5F-00055O-BM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2012 19:52:34 +0200
-Received: by wibhq4 with SMTP id hq4so5521524wib.6
+	Thu, 19 Jul 2012 20:04:17 +0200
+Received: from [10.1.14.186] (83-64-248-68.inzersdorf.xdsl-line.inode.at
+	[83.64.248.68]) by ptmx.org (Postfix) with ESMTPSA id 6EF9421AA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 10:41:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=TaJ+lv8cgdQJSAVAfU892zdwQJUuows4mmQUIRW5RdQ=;
-	b=P0huc8lFrTKfmMVUDJwJNhm/RqpNM9ojV3O/9SX0aDEkLq40sCZE5BqT1H4j5qLCZv
-	O9tZPVEjZYA4bDDyoTpH++oyAncgYEP0rus6mx00IKcBxTdgaFrbHkRsId8A1aB/N8w2
-	QNkCKpRLCzV3blPD9E/0VTiRUXNf689pHcG4wo30eq7dM1Np/7QMbJh7tyhoaJAPbEHp
-	ECf6s1xmDPch7lqOThuzl92rBsvOD/a5LILqm+x7OqHnfMJ+aOAPgoFeFgR9bLcJbzs0
-	b+8sgv9y0fkuFUm+6IM/rlHbio96+EeJZz1SkP3ZzWDCpo6Y1bkCkFAQd3Vcws7LIe20
-	R6zw==
-Received: by 10.216.240.79 with SMTP id d57mr1697114wer.3.1342719672320;
-	Thu, 19 Jul 2012 10:41:12 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ef5sm7653357wib.3.2012.07.19.10.41.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Jul 2012 10:41:11 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 19 Jul 2012 19:47:28 +0200 (CEST)
+Message-ID: <50084830.1060708@pseudoterminal.org>
+Date: Thu, 19 Jul 2012 19:47:28 +0200
+From: dv <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.28) Gecko/20120313 Lightning/1.0b2 Thunderbird/3.1.20
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 19:41:11 +0200
-Message-Id: <1342719671-28184-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1342719671-28184-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1342719671-28184-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] connman: rename bbappend to match new version from oe-core
+Subject: GStreamer plugins are built with Orc support disabled, why?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +28,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 17:52:34 -0000
+X-List-Received-Date: Thu, 19 Jul 2012 18:04:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../{connman_1.0.bbappend => connman_1.3.bbappend} |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/meta-oe/recipes-connectivity/connman/{connman_1.0.bbappend => connman_1.3.bbappend} (100%)
+Hello,
 
-diff --git a/meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.0.bbappend b/meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.3.bbappend
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.0.bbappend
-rename to meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.3.bbappend
--- 
-1.7.8.6
+I noticed that the GStreamer plugins from the base, good, bad, and ugly 
+packages are all built with Orc support disabled
+(the configure lines use --disable-orc). I wonder why. No Orc means that 
+the plugins are considerably slower.
+Is this related to ARM? (I noticed this when building for a Beaglebone 
+machine.) Or does Orc break something?
 
+Thanks,
+   dv
 
 
