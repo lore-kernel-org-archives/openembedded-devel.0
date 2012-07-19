@@ -1,34 +1,24 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SrtVD-0000sP-W0
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Srtcn-0006Rw-40
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2012 18:23:00 +0200
-Received: by weyr6 with SMTP id r6so1848541wey.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 09:11:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=b0affeO6Iydunn9OuRISm56zxCnxcMKXnLuHz796vhc=;
-	b=d0Iwf2CRZN8r1zJgKWpbNJE24LDpVx3eKh0fDTUPAFwW+oKF+iQOZmsJgRGxzBfjqP
-	7POi1Ubh43rawDXBpV+Ty7aJGu5v34vs7VjabTu2aEDK6DtdMiDpN9HmHaS5IHEhn1FP
-	/P/8hDKGJZuAobGgdtkAmqclZNVmo8QiCKHcEh+8J4Lavu3cKwnGJqYCNt4qvgW+iM2s
-	pXJhe36Q7Nzmf4tnz2xJ7g5iLnxlJriEMo8ynIdq8w8ihNtuh6y7fH4YYgVTcV2kmBgT
-	tN5rIotUZQOSchhHV6ghe54lb/Xqp/Lp7jDKyKXrKjY4v5/TWMkgQTRc7AKswaFyBcm4
-	+ArA==
-Received: by 10.180.105.6 with SMTP id gi6mr6171260wib.4.1342714298090;
-	Thu, 19 Jul 2012 09:11:38 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm7082753wix.5.2012.07.19.09.11.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Jul 2012 09:11:37 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 19 Jul 2012 18:30:49 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 19 Jul 2012 09:19:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="124407203"
+Received: from unknown (HELO helios.localnet) ([10.252.121.21])
+	by AZSMGA002.ch.intel.com with ESMTP; 19 Jul 2012 09:19:25 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 18:11:47 +0200
-Message-Id: <1342714307-24105-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1342713953-13000-2-git-send-email-Martin.Jansa@gmail.com>
-References: <1342713953-13000-2-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCHv2] check: upgrade to 0.9.8 and fix build with new automake-1.12.x
+Date: Thu, 19 Jul 2012 17:19:24 +0100
+Message-ID: <3279127.EVWoIJEKcV@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.4 (Linux/3.2.0-26-generic-pae; KDE/4.8.4; i686; ; )
+In-Reply-To: <1342430720-4501-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1342430720-4501-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH] recipes: svn SRC_URI s/proto=/protocol=/g
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,148 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 16:23:00 -0000
+X-List-Received-Date: Thu, 19 Jul 2012 16:30:49 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* configure_fix.patch and
-  check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
-  were already resolved upstream
+On Monday 16 July 2012 11:25:20 Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-bsp/ezx/ezx-gpiotool_svn.bb |    2 +-
+>  recipes-bsp/ezx/ezxd_svn.bb         |    2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-bsp/ezx/ezx-gpiotool_svn.bb
+> b/recipes-bsp/ezx/ezx-gpiotool_svn.bb index 2d403de..ed733a2 100644
+> --- a/recipes-bsp/ezx/ezx-gpiotool_svn.bb
+> +++ b/recipes-bsp/ezx/ezx-gpiotool_svn.bb
+> @@ -7,7 +7,7 @@ SRCREV = "1877"
+>  PV = "${SRCPV}"
+>  PR = "r1"
+> 
+> -SRC_URI =
+> "svn://svn.openezx.org/trunk/src/userspace;module=gpiotool;proto=http"
+> +SRC_URI =
+> "svn://svn.openezx.org/trunk/src/userspace;module=gpiotool;protocol=http" S
+> = "${WORKDIR}/gpiotool"
+> 
+>  do_compile() {
+> diff --git a/recipes-bsp/ezx/ezxd_svn.bb b/recipes-bsp/ezx/ezxd_svn.bb
+> index f738b5f..6dbcd0f 100644
+> --- a/recipes-bsp/ezx/ezxd_svn.bb
+> +++ b/recipes-bsp/ezx/ezxd_svn.bb
+> @@ -7,7 +7,7 @@ SRCREV = "2513"
+>  PV = "0.0+svnr${SRCPV}"
+>  PR = "r4"
+> 
+> -SRC_URI =
+> "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;proto=http \
+> +SRC_URI =
+> "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;protocol=http \
+> file://ezxd.init \
+>            "
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../check/check-0.9.8/fix.automake-1.12.x.patch    |   26 ++++++++++++++++++++
- meta-oe/recipes-support/check/check_0.9.5.bb       |   19 --------------
- meta-oe/recipes-support/check/check_0.9.8.bb       |   15 +++++++++++
- ...graphs-in-macro-names-to-unbreak-autoconf.patch |   18 -------------
- .../check/files/configure_fix.patch                |   12 ---------
- 5 files changed, 41 insertions(+), 49 deletions(-)
- create mode 100644 meta-oe/recipes-support/check/check-0.9.8/fix.automake-1.12.x.patch
- delete mode 100644 meta-oe/recipes-support/check/check_0.9.5.bb
- create mode 100644 meta-oe/recipes-support/check/check_0.9.8.bb
- delete mode 100644 meta-oe/recipes-support/check/files/check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
- delete mode 100644 meta-oe/recipes-support/check/files/configure_fix.patch
+Merged to meta-handheld master, thanks.
 
-diff --git a/meta-oe/recipes-support/check/check-0.9.8/fix.automake-1.12.x.patch b/meta-oe/recipes-support/check/check-0.9.8/fix.automake-1.12.x.patch
-new file mode 100644
-index 0000000..e11aabe
---- /dev/null
-+++ b/meta-oe/recipes-support/check/check-0.9.8/fix.automake-1.12.x.patch
-@@ -0,0 +1,26 @@
-+Fixes this error:
-+
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcompat.la': linking libtool libraries using a non-POSIX
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
-+| lib/Makefile.am:3:   while processing Libtool library 'libcompat.la'
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcheck.la': linking libtool libraries using a non-POSIX
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
-+| src/Makefile.am:3:   while processing Libtool library 'libcheck.la'
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcheckinternal.la': linking libtool libraries using a non-POSIX
-+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
-+| src/Makefile.am:4:   while processing Libtool library 'libcheckinternal.la'
-+| autoreconf: automake failed with exit status: 1
-+
-+Upstream-Status: Pending
-+
-+diff -uNr check-0.9.8.orig//configure.ac check-0.9.8/configure.ac
-+--- check-0.9.8.orig//configure.ac	2009-09-23 12:50:08.000000000 +0200
-++++ check-0.9.8/configure.ac	2012-07-19 17:43:51.000000000 +0200
-+@@ -102,6 +102,7 @@
-+ AC_PROG_INSTALL
-+ AC_PROG_LN_S
-+ AC_PROG_LIBTOOL
-++AM_PROG_AR
-+ 
-+ # add these options to CFLAGS if the compiler supports them
-+ AC_DEFUN([AX_CFLAGS_ADD],[AX_C_CHECK_FLAG($1, , , CFLAGS="$CFLAGS $1")])
-diff --git a/meta-oe/recipes-support/check/check_0.9.5.bb b/meta-oe/recipes-support/check/check_0.9.5.bb
-deleted file mode 100644
-index 2f1ae94..0000000
---- a/meta-oe/recipes-support/check/check_0.9.5.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "a unit test framework for C"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=2d5025d4aa3495befef8f17206a5b0a1"
--SECTION = "devel"
--
--PR = "r2"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/check/check-${PV}.tar.gz \
--           file://configure_fix.patch \
--           file://check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch \
--          "
--S = "${WORKDIR}/check-${PV}"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF += "--enable-plain-docdir"
--
--SRC_URI[md5sum] = "30143c7974b547a12a7da47809a90951"
--SRC_URI[sha256sum] = "961b3c66869018d02226bbbc394e79362cd898962ce810bce8417b3c497f7ad6"
-diff --git a/meta-oe/recipes-support/check/check_0.9.8.bb b/meta-oe/recipes-support/check/check_0.9.8.bb
-new file mode 100644
-index 0000000..ca79740
---- /dev/null
-+++ b/meta-oe/recipes-support/check/check_0.9.8.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "a unit test framework for C"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+SECTION = "devel"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/check/check-${PV}.tar.gz \
-+           file://fix.automake-1.12.x.patch \
-+          "
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF += "--enable-plain-docdir"
-+
-+SRC_URI[md5sum] = "5d75e9a6027cde79d2c339ef261e7470"
-+SRC_URI[sha256sum] = "82acf956bb07584ffea2bf04d5989fe939c3e74ecf93133a21037fd0f7996a7f"
-diff --git a/meta-oe/recipes-support/check/files/check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch b/meta-oe/recipes-support/check/files/check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
-deleted file mode 100644
-index 61bdf1d..0000000
---- a/meta-oe/recipes-support/check/files/check-m4-am-path-check-use-quadrigraphs-in-macro-names-to-unbreak-autoconf.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Imported from http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=395466
--
---Khem
--Index: check-0.9.5/check.m4
--===================================================================
----- check-0.9.5.orig/check.m4
--+++ check-0.9.5/check.m4
--@@ -4,8 +4,8 @@ dnl
-- 
-- AC_DEFUN([AM_PATH_CHECK],
-- [
---  AC_MSG_WARN([[AM_PATH_CHECK() is deprecated]])
---  AC_MSG_WARN([[use PKG_CHECK_MODULES([CHECK], [check >= 0.9.4]) instead]])
--+  AC_MSG_WARN([A@&t@M_PATH_CHECK() is deprecated])
--+  AC_MSG_WARN([[use P@&t@KG_CHECK_MODULES([CHECK], [check >= 0.9.4]) instead]])
--   AC_ARG_WITH([check],
--   [  --with-check=PATH       prefix where check is installed [default=auto]])
--  
-diff --git a/meta-oe/recipes-support/check/files/configure_fix.patch b/meta-oe/recipes-support/check/files/configure_fix.patch
-deleted file mode 100644
-index 3e79319..0000000
---- a/meta-oe/recipes-support/check/files/configure_fix.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--Index: check-0.9.5/configure.ac
--===================================================================
----- check-0.9.5.orig/configure.ac	2008-10-29 04:09:50.000000000 +0000
--+++ check-0.9.5/configure.ac	2008-10-29 04:10:06.000000000 +0000
--@@ -71,6 +71,7 @@
-- AC_PROG_INSTALL
-- AC_PROG_LN_S
-- AC_PROG_LIBTOOL
--+AM_PROG_CC_C_O
-- if test -n "$GCC"; then
--   CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings"
-- fi
+Cheers,
+Paul
+
 -- 
-1.7.8.6
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
