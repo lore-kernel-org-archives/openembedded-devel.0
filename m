@@ -1,24 +1,24 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1Srua2-0002bq-Os
+	(envelope-from <apelete@seketeli.net>) id 1Srua2-0002bp-OK
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 19 Jul 2012 19:32:02 +0200
 Received: from localhost (unknown [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 9A2A7EA04E
+	by ms.seketeli.net (Postfix) with ESMTP id 98EABEA04D
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 19 Jul 2012 19:24:34 +0200 (CEST)
 Received: by localhost (Postfix, from userid 1000)
-	id 66CAC60C19; Thu, 19 Jul 2012 19:20:41 +0200 (CEST)
+	id 7899260C20; Thu, 19 Jul 2012 19:20:41 +0200 (CEST)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 19:20:39 +0200
-Message-Id: <10b7974fbfa98602878c3b5acd261d4cdc6ef092.1342677799.git.apelete@seketeli.net>
+Date: Thu, 19 Jul 2012 19:20:40 +0200
+Message-Id: <8a869e667867e8e7b1e82dcb53ee75dd58805e81.1342677799.git.apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
 References: <cover.1342677797.git.apelete@seketeli.net>
 In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
 References: <cover.1342677797.git.apelete@seketeli.net>
-Subject: [2011.03-maintenance][PATCH 8/9] git: update SRC_URI
+Subject: [2011.03-maintenance][PATCH 9/9] opkg-utils: bump SRCREV to keep python2.6 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,31 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jul 2012 17:32:02 -0000
 
-Update SRC_URI to fetch git from one of the KERNELORG_MIRROR addresses
-instead of relying on a single kernel mirror.
+Fix an issue where opkg-utils was using a method that requires at
+least python2.7, causing compatibility issues on hosts that are still
+using python2.6.
 
 Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- recipes/git/git.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/git/git.inc b/recipes/git/git.inc
-index 003d7fa..eb59a2c 100644
---- a/recipes/git/git.inc
-+++ b/recipes/git/git.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "The git revision control system used by the Linux kernel develope
- SECTION = "console/utils"
- LICENSE = "GPLv2"
+diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
+index 997b292..75a1e9a 100644
+--- a/recipes/opkg-utils/opkg-utils_git.bb
++++ b/recipes/opkg-utils/opkg-utils_git.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                      file://opkg.py;beginline=1;endline=18;md5=15917491ad6bf7acc666ca5f7cc1e083"
+ RDEPENDS_${PN} = "python"
+ RDEPENDS_${PN}_virtclass-native = ""
+-SRCREV = "44df9dd3dc411ca1255cb4b23bde7eb71aed4778"
++SRCREV = "423ecd36b4782327c16f516885d1248249c7724a"
+ PV = "0.1.8+git${SRCPV}"
+-PR = "r1"
++PR = "r2"
  
--SRC_URI = "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar.bz2;name=src"
-+SRC_URI = "${KERNELORG_MIRROR}/pub/linux/software/scm/git/git-${PV}.tar.bz2;name=src"
- 
- S = "${WORKDIR}/git-${PV}"
- 
+ SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
+            "
 -- 
 1.7.10.4
 
