@@ -1,37 +1,32 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SrrXf-0006l2-Fg
+	(envelope-from <martin.jansa@gmail.com>) id 1SrtPV-0004Ew-U7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Jul 2012 16:17:23 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hq4so5288172wib.6
+	Thu, 19 Jul 2012 18:17:05 +0200
+Received: by bkcik5 with SMTP id ik5so2153382bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 07:06:03 -0700 (PDT)
+	Thu, 19 Jul 2012 09:05:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=rOobmzFx83pwZ9YznBkDuIRpSgOdYn0rvJWAZIpNKpg=;
-	b=lsZuAoqn4Rz/sdh+IPAPVWPC9BUfBw1JAfCc4ndYV3R5NXzG2ZZ42JlOuQQw9bcuDd
-	bCbxYzJNnVtXzchm84BQdFHHxaswgbKQux1+tLYPAr3VUzUEbXghwf6K9t+cQABrvB1w
-	KCYXlTqBomNSndbJzg7srFeHKIebjSWxYWSePsfPEkllbpPpymyNI/VExI4Bp0thDe4b
-	9+o2nRL3NoVP1jhPhRftSgWOpIvTsIArYLXEdnEGLaSks/UZ73DmQqWM+92mWZrBcepT
-	bbnb6v2MNCE//ia/kRiM+JsQY7+Xws6hrPj71VylFpg7VQ64JXNGRLmSU7/vnavuQism
-	Z4WA==
-Received: by 10.180.93.68 with SMTP id cs4mr16634887wib.14.1342706763735;
-	Thu, 19 Jul 2012 07:06:03 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=U8wAX3HDd8rV+coZvss1fZpRTDC4B0peg0AM5Ni2/r4=;
+	b=jhzU1fYaYzDKPJlnxRcAxKukZTkpKFC79T5lIi8XbJ3RyOW78MgjbEIb95Lh4r0Nnw
+	LHBIf82H127TY0kjzXFeaJpd/AdQoEbt6ey4FV8JQzClLdlv4a/kqE7XBX5oCRo0qZUG
+	80SOwtsHqGchzFeVoehnJYhK/7EsOk7J3qPFOrPFgJzHTba39C8AstD0hZKvCA5WPsot
+	k8mJnqC2PTM4h30VPgqS/DzltJSS+fowEDl2jnr8HNZDEg7IogwfWzB18ZAFyh2WnT4y
+	80IGeObaxdTzFrq2+JlFy9J5FddfRWCVBZVRRXKMOjzCQ6G7p09qgbZIoqvX2CYhtmzV
+	F7tA==
+Received: by 10.205.128.3 with SMTP id hc3mr1495575bkc.29.1342713943929;
+	Thu, 19 Jul 2012 09:05:43 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b7sm6339603wiz.9.2012.07.19.07.06.02
+	by mx.google.com with ESMTPS id gq2sm1506682bkc.13.2012.07.19.09.05.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Jul 2012 07:06:02 -0700 (PDT)
+	Thu, 19 Jul 2012 09:05:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 16:05:38 +0200
-Message-Id: <f84b0335cf4586262c78fcea70573ad11829af0d.1342706683.git.Martin.Jansa@gmail.com>
+Date: Thu, 19 Jul 2012 18:05:52 +0200
+Message-Id: <1342713953-13000-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1342706683.git.Martin.Jansa@gmail.com>
-References: <cover.1342706683.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1342706683.git.Martin.Jansa@gmail.com>
-References: <cover.1342706683.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] navit: use 4 spaces instead of tabs in get_navit_fpu_setting
+Subject: [meta-oe][PATCH 1/2] eina: do not remove bindir, it's not created with new automake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 14:17:23 -0000
+X-List-Received-Date: Thu, 19 Jul 2012 16:17:06 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/navit/navit-fpu.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ meta-efl/recipes-efl/efl/eina.inc |    4 ----
+ 1 files changed, 0 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/navit/navit-fpu.inc b/meta-oe/recipes-navigation/navit/navit-fpu.inc
-index d333b92..08044ad 100644
---- a/meta-oe/recipes-navigation/navit/navit-fpu.inc
-+++ b/meta-oe/recipes-navigation/navit/navit-fpu.inc
-@@ -1,6 +1,6 @@
+diff --git a/meta-efl/recipes-efl/efl/eina.inc b/meta-efl/recipes-efl/efl/eina.inc
+index 8c9a0df..4a77de3 100644
+--- a/meta-efl/recipes-efl/efl/eina.inc
++++ b/meta-efl/recipes-efl/efl/eina.inc
+@@ -11,7 +11,3 @@ inherit efl
+ AUTO_LIBNAME_PKGS = ""
  
- def get_navit_fpu_setting(bb, d):
--	if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
--		return "--enable-avoid-float"
--	return ""
-+    if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
-+        return "--enable-avoid-float"
-+    return ""
- 
+ FILES_${PN} += "${libdir}/eina"
+-
+-do_install_append() {
+-  rmdir ${D}${bindir}
+-}
 -- 
 1.7.8.6
 
