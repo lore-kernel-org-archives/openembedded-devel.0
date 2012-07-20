@@ -1,33 +1,42 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ss5nK-0005i3-7A
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2012 07:30:30 +0200
-Received: by pbbrq2 with SMTP id rq2so4953833pbb.6
+	(envelope-from <stevecgelliott@embeddedoverflow.com.au>)
+	id 1Ss6Av-0006Uo-P4 for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Jul 2012 07:54:54 +0200
+Received: by pbbrq2 with SMTP id rq2so4982587pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2012 22:19:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=inX1bZH0txY+mRfTQg0LCeVQKucL0g8OSBkd3nw7Q00=;
-	b=tTbALvMHqENLaAzSoHFFNcqZQnMe1mYRhqX51IB5EhkUz/LIhfyNwuFjfghm5e3ger
-	ez/XinIuKffLNwSJDodAgwlS6i8+31PxjDKEJrI87DDcTkAwYibLjIALRy80d3m/3Kbz
-	1ssRUqZO1iEJb/5BVIZp4LR5Jg8kIAKn9olKuWBkfoxTLznTU2RvyjyW8d1zk34z08Xq
-	XSD6c7PI6PrJp46uzunB4Ho1M3f9Q0purAepwnrHsa5Dizu9LuIFT9MlpD0AfwmZ2biV
-	u1BPLkGa2SlcNlP7FgbEw8stPpgQDu7NcQaNEiPiurhfwfBsMRRFIxNyj2NDbsmggq8m
-	R69w==
-Received: by 10.68.222.163 with SMTP id qn3mr10673519pbc.135.1342761546828;
-	Thu, 19 Jul 2012 22:19:06 -0700 (PDT)
-Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id ng8sm3217474pbc.13.2012.07.19.22.19.05
-	(version=SSLv3 cipher=OTHER); Thu, 19 Jul 2012 22:19:06 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2012 22:18:58 -0700
-Message-Id: <1342761538-19890-5-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1342761538-19890-1-git-send-email-raj.khem@gmail.com>
-References: <1342761538-19890-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-java][PATCH 5/5] log4j1.2: Upgrade recipe to 1.2.17 release
+	Thu, 19 Jul 2012 22:43:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:subject:date:organization:message-id:mime-version
+	:content-type:x-mailer:thread-index:content-language:x-vipre-scanned
+	:x-gm-message-state;
+	bh=DyhmlagGtVmQzF9YEgdpq2jMa6gpEAV0iXWhVuQXviQ=;
+	b=on2cno/7SssCwmqSYA87tZOtHsy/J9bhxPi0j1SUeJlzHYfod+eCp2GAuoeuHzanDw
+	9S3ASxLBo4Yl1+ff7HRnnmSZOTOeuqxruStbz+1skLKqwVfO6IheQ/Quz/y2HzypXG2I
+	uy2r1hhtkkJury5dYbvxiIrfRma7J6ECirEO/X2rS0WXt8jAd/uoDUGaypBOoTm2xYil
+	7cgM0IwQBBIuX8gnjmYMTHpQMYFwqOlOp0UHKP1HZznlujfCC9wYQYFHEUciFbkYuuC4
+	2Gya804j9f72Pp3n5XhyManpL9hy74XQiC1vTpfnqON4Sqq7/Na4bylMK/pN1jmEW/V5
+	kQiw==
+Received: by 10.68.237.103 with SMTP id vb7mr10853344pbc.38.1342763010350;
+	Thu, 19 Jul 2012 22:43:30 -0700 (PDT)
+Received: from Win7 (CPE-60-225-134-189.hhui5.cht.bigpond.net.au.
+	[60.225.134.189])
+	by mx.google.com with ESMTPS id qa5sm3259488pbb.19.2012.07.19.22.43.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 19 Jul 2012 22:43:29 -0700 (PDT)
+From: Steve Elliott <stevecgelliott@embeddedoverflow.com.au>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 20 Jul 2012 15:43:22 +1000
+Organization: Embedded Overflow
+Message-ID: <006b01cd663a$96601cf0$c32056d0$@EmbeddedOverflow.com.au>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: Ac1mOm4hj+FR2DKfTmWRjLrUq6ZfpA==
+x-vipre-scanned: 015149C3002FFC01514B10
+X-Gm-Message-State: ALoCoQnmF5ePd8L+Ymgkg3bn4A0w4I1n3Aq2Dnei0p8E1aRWFg7LZDEyBLtq9bpX+IfX/w5gGW0N
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Build with MACHINE=omap3evm fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,101 +50,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2012 05:30:30 -0000
+X-List-Received-Date: Fri, 20 Jul 2012 05:54:54 -0000
+Content-Language: en-au
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-core/jakarta-libs/log4j1.2_1.2.15.bb |   36 --------------------------
- recipes-core/jakarta-libs/log4j1.2_1.2.17.bb |   35 +++++++++++++++++++++++++
- 2 files changed, 35 insertions(+), 36 deletions(-)
- delete mode 100644 recipes-core/jakarta-libs/log4j1.2_1.2.15.bb
- create mode 100644 recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
+A fresh clone of setup-scripts; config of omap3evm & bitbake virtual/kernel
+fails.
 
-diff --git a/recipes-core/jakarta-libs/log4j1.2_1.2.15.bb b/recipes-core/jakarta-libs/log4j1.2_1.2.15.bb
-deleted file mode 100644
-index 6a88ab0..0000000
---- a/recipes-core/jakarta-libs/log4j1.2_1.2.15.bb
-+++ /dev/null
-@@ -1,36 +0,0 @@
--DESCRIPTION = "Java library to help the programmer output log statements to a variety of output targets"
--AUTHOR = "Apache Software Foundation"
--LICENSE = "AL2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f4ce41a6d1028498fcacde12f589bce7"
--
--SRC_URI = "http://archive.apache.org/dist/logging/log4j/${PV}/apache-log4j-${PV}.tar.gz"
--
--inherit java-library
--
--S = "${WORKDIR}/apache-log4j-${PV}"
--
--DEPENDS = "gnumail gnujaf"
--DEPENDS_virtclass-native = "gnumail-native gnujaf-native"
--
--
--JARFILENAME = "log4j-${PV}.jar"
--ALTJARFILENAMES = "log4j-1.2.jar log4j1.2.jar"
--
--do_compile() {
--  mkdir -p build
--
--  oe_makeclasspath cp -s activation gnumail
--
--  # Built everything but the JMS and JMX classes (like in Debian)
--	javac -sourcepath src/main/java -cp $cp -d build `find src/main/java -name "*.java" -and -not \( -iwholename "*jms*" -or -iwholename "*jmx*" \)`
--
--  cp -R src/main/resources/* build/
--
--  fastjar -C build -c -f ${JARFILENAME} .
--}
--
--SRC_URI[md5sum] = "10f04abe4d68d5a89e8eb167e4e45e1a"
--SRC_URI[sha256sum] = "f5d9f6aa78b9156ae2de2a32d0f26507d2e73db4993d501db2e79f0bd803ab31"
--
--BBCLASSEXTEND = "native"
--
-diff --git a/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb b/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
-new file mode 100644
-index 0000000..b37eb05
---- /dev/null
-+++ b/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
-@@ -0,0 +1,35 @@
-+DESCRIPTION = "Java library to help the programmer output log statements to a variety of output targets"
-+AUTHOR = "Apache Software Foundation"
-+LICENSE = "AL2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f4ce41a6d1028498fcacde12f589bce7"
-+
-+SRC_URI = "http://archive.apache.org/dist/logging/log4j/${PV}/log4j-${PV}.tar.gz"
-+
-+inherit java-library
-+
-+DEPENDS = "gnumail gnujaf"
-+DEPENDS_virtclass-native = "gnumail-native gnujaf-native"
-+
-+S = "${WORKDIR}/apache-log4j-${PV}"
-+
-+JARFILENAME = "log4j-${PV}.jar"
-+ALTJARFILENAMES = "log4j-1.2.jar log4j1.2.jar"
-+
-+do_compile() {
-+  mkdir -p build
-+
-+  oe_makeclasspath cp -s activation gnumail
-+
-+  # Built everything but the JMS and JMX classes (like in Debian)
-+	javac -sourcepath src/main/java -cp $cp -d build `find src/main/java -name "*.java" -and -not \( -iwholename "*jms*" -or -iwholename "*jmx*" \)`
-+
-+  cp -R src/main/resources/* build/
-+
-+  fastjar -C build -c -f ${JARFILENAME} .
-+}
-+
-+SRC_URI[md5sum] = "8218714e41ee0c6509dcfeafa2e1f53f"
-+SRC_URI[sha256sum] = "a528e3771ee6234661b5eb0fa02e14faee89dfec38de94088c163ddf2a0a8663"
-+
-+BBCLASSEXTEND = "native"
-+
--- 
-1.7.9.5
+Can anyone hint what generates the target:
 
+/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3ev
+m-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a739
+f857858ef0b98294aa155/image/lib/firmware/./
+
+Steve
+
+ 
+
+[steve@Regret OpenEmbedded]$ git clone
+git://github.com/Angstrom-distribution/setup-scripts oe2
+
+Cloning into 'oe2'...
+
+remote: Counting objects: 814, done.
+
+remote: Compressing objects: 100% (416/416), done.
+
+remote: Total 814 (delta 376), reused 758 (delta 323)
+
+Receiving objects: 100% (814/814), 101.50 KiB | 64 KiB/s, done.
+
+Resolving deltas: 100% (376/376), done.
+
+[steve@Regret OpenEmbedded]$ 
+
+[steve@Regret OpenEmbedded]$ MACHINE=omap3evm ./oebb.sh config omap3evm
+
+....
+
+[steve@Regret oe2]$ MACHINE=omap3evm ./oebb.sh bitbake virtual/kernel
+
+........
+
+|   MKDIR
+/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3ev
+m-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a739
+f857858ef0b98294aa155/image/lib/firmware/emi26/
+
+| make[1]: *** No rule to make target
+`/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3e
+vm-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a73
+9f857858ef0b98294aa155/image/lib/firmware/./', needed by
+`/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3e
+vm-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a73
+9f857858ef0b98294aa155/image/lib/firmware/ti_3410.fw'.  Stop.
+
+| make[1]: *** Waiting for unfinished jobs....
+
+|   MKDIR
+/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3ev
+m-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a7ER
+ROR: Function failed: do_install (see
+/home/steve/OpenEmbedded/oe2/build/tmp-angstrom_v2012_05-eglibc/work/omap3ev
+m-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a739
+f857858ef0b98294aa155/temp/log.do_install.15049 for further information)
+
+| 39f857858ef0b98294aa155/image/lib/firmware/emi62/
+
+| make: *** [_modinst_post] Error 2
+
+| ERROR: oe_runmake failed
+
+NOTE: package
+linux-omap-psp-2.6.32-r121c+gitr5fc29e7b2a76a64a739f857858ef0b98294aa155:
+task do_install: Failed
+
+ERROR: Task 3
+(/home/steve/OpenEmbedded/oe2/sources/meta-ti/recipes-kernel/linux/linux-oma
+p-psp_2.6.32.bb , do_install) failed with exit code '1'
+
+NOTE: Tasks Summary: Attempted 973 tasks of which 251 didn't need to be
+rerun and 1 failed.
+
+Summary: 1 task failed:
+
+ 
+/home/steve/OpenEmbedded/oe2/sources/meta-ti/recipes-kernel/linux/linux-omap
+-psp_2.6.32.bb , do_install
+
+Summary: There were 20 WARNING messages shown.
+
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+ 
+
+Steve Elliott
+
+Principal SW Engineer
+
+Embedded Overflow
+
++61 (2) 9555-1715
+
++61 (4) 1126-0812 (Mobile)
+
+4, Glassop St., Balmain  NSW  2041
+
+ 
 
 
