@@ -1,45 +1,31 @@
-Received: from ch1ehsobe001.messaging.microsoft.com ([216.32.181.181]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1SsGaK-0003nz-FR
+	(envelope-from <raj.khem@gmail.com>) id 1SsMIw-0003zu-7d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2012 19:01:48 +0200
-Received: from mail39-ch1-R.bigfish.com (10.43.68.237) by
-	CH1EHSOBE017.bigfish.com (10.43.70.67) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 20 Jul 2012 16:35:19 +0000
-Received: from mail39-ch1 (localhost [127.0.0.1])	by mail39-ch1-R.bigfish.com
-	(Postfix) with ESMTP id AD212E038C	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 16:35:18 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 3
-X-BigFish: VS3(zzzz1202h1082kzz8275ch8275bhz2dh2a8h668h839hd24he5bhf0ah107ah)
-Received: from mail39-ch1 (localhost.localdomain [127.0.0.1]) by mail39-ch1
-	(MessageSwitch) id 1342802116582435_29717;
-	Fri, 20 Jul 2012 16:35:16 +0000 (UTC)
-Received: from CH1EHSMHS022.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.250])	by mail39-ch1.bigfish.com (Postfix) with ESMTP id
-	8C1B54A0123 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 16:35:16 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS022.bigfish.com
-	(10.43.70.22) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 20 Jul 2012 16:35:15 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.2.298.5; Fri, 20 Jul 2012 11:35:13 -0500
-Received: from right.am.freescale.net (right.am.freescale.net [10.82.176.228])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	q6KGZCog004162 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 09:35:13 -0700
-From: Matthew McClintock <msm@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Jul 2012 11:35:12 -0500
-Message-ID: <1342802112-9917-1-git-send-email-msm@freescale.com>
-X-Mailer: git-send-email 1.7.10
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe] cramfs_cvs.bb: fix compile step so it can be rerun without failing
+	Sat, 21 Jul 2012 01:08:14 +0200
+Received: by pbbrq2 with SMTP id rq2so6140805pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jul 2012 15:56:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=znWlb5jpMwZVxfHWHh0KBo7HT5uDqyBbPIgaT/0j99s=;
+	b=OVNXyLmnqMHRJvrhfA6Wa2VKUk15McY9sbgQB7SpYJ9NZFJYWgUPVF0J1fEyW/awqR
+	DhP9TIEh8EFKcBaFD/XwWNZb3SM55FLpPeuxW4WWlj+OUWdjWUIqxnApipcljd1oR0Zb
+	E0BewG3H2hRdLOtqBkvnRNy45UFzmfpWZcY3o91U2NsfRD8zhPzHVAeS1tAjCMmJIhBm
+	3/3Kl6uIcbvqLIqHR9BfxDybtjglz4BmjDWBPCSiMiZ9X+Sf5qg989y6gvZno4CvxWJc
+	9I3TrKbl640xDmA79gXB8mzQkNdY6llDRIuz0e+nq1YDRZw3OIp+FpzctNgTGb/Nd20A
+	f8sQ==
+Received: by 10.68.227.163 with SMTP id sb3mr17568814pbc.74.1342825009937;
+	Fri, 20 Jul 2012 15:56:49 -0700 (PDT)
+Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id iw10sm4191416pbc.55.2012.07.20.15.56.48
+	(version=SSLv3 cipher=OTHER); Fri, 20 Jul 2012 15:56:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Jul 2012 15:56:48 -0700
+Message-Id: <1342825008-24903-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-java][PATCH] openjdk-6-common.inc: Change jdk_arch for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2012 17:01:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Jul 2012 23:08:14 -0000
 
-Signed-off-by: Matthew McClintock <msm@freescale.com>
+ppc is used in openjdk/jre but original jdk_arch
+is defined as powerpc which means we have errors
+compiling and installing openjdk for ppc platforms
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-core/openjdk/openjdk-6-common.inc |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-index 667097c..d9b6c06 100644
---- a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-+++ b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb0
- DEPENDS = "zlib"
- SRCDATE = "20110110"
- PV = "1.1+cvs${SRCDATE}"
-+PR = "r1"
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index 6e984f6..02a4cb7 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -109,6 +109,10 @@ def get_jdk_arch(d):
+     jdk_arch = bb.data.getVar('TARGET_ARCH', d, 1)
+     if jdk_arch == "x86_64":
+         jdk_arch = "amd64"
++    elif jdk_arch == "powerpc":
++        jdk_arch = "ppc"
++    elif jdk_arch == "powerpc64":
++        jdk_arch = "ppc64"
+     elif (jdk_arch == "i486" or jdk_arch == "i586" or jdk_arch == "i686"):
+         jdk_arch = "i386"
  
- SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
- S = "${WORKDIR}/linux/scripts/cramfs"
-@@ -16,7 +17,7 @@ EXTRA_OEMAKE = "\
- 
- 
- do_compile_prepend() {
--        ln -s GNUmakefile Makefile
-+        ln -sf GNUmakefile Makefile
+@@ -323,7 +327,6 @@ do_install() {
+ 		rm ${D}${JDK_HOME}/bin/$bf
+ 		ln -s ${JDK_HOME}/jre/bin/$bf ${D}${JDK_HOME}/bin/$bf
+ 	done
+-
+         install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/
  }
  
- do_install() {
 -- 
-1.7.10
-
+1.7.9.5
 
 
 
