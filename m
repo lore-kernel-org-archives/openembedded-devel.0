@@ -1,31 +1,29 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SsMIw-0003zu-7d
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jul 2012 01:08:14 +0200
-Received: by pbbrq2 with SMTP id rq2so6140805pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 15:56:50 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1SsMt0-0004US-F5; Sat, 21 Jul 2012 01:45:30 +0200
+Received: by wgbdr1 with SMTP id dr1so3868521wgb.24
+	for <multiple recipients>; Fri, 20 Jul 2012 16:34:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=znWlb5jpMwZVxfHWHh0KBo7HT5uDqyBbPIgaT/0j99s=;
-	b=OVNXyLmnqMHRJvrhfA6Wa2VKUk15McY9sbgQB7SpYJ9NZFJYWgUPVF0J1fEyW/awqR
-	DhP9TIEh8EFKcBaFD/XwWNZb3SM55FLpPeuxW4WWlj+OUWdjWUIqxnApipcljd1oR0Zb
-	E0BewG3H2hRdLOtqBkvnRNy45UFzmfpWZcY3o91U2NsfRD8zhPzHVAeS1tAjCMmJIhBm
-	3/3Kl6uIcbvqLIqHR9BfxDybtjglz4BmjDWBPCSiMiZ9X+Sf5qg989y6gvZno4CvxWJc
-	9I3TrKbl640xDmA79gXB8mzQkNdY6llDRIuz0e+nq1YDRZw3OIp+FpzctNgTGb/Nd20A
-	f8sQ==
-Received: by 10.68.227.163 with SMTP id sb3mr17568814pbc.74.1342825009937;
-	Fri, 20 Jul 2012 15:56:49 -0700 (PDT)
-Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id iw10sm4191416pbc.55.2012.07.20.15.56.48
-	(version=SSLv3 cipher=OTHER); Fri, 20 Jul 2012 15:56:49 -0700 (PDT)
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=e0a6q4+9WHZ5sBBxyaqZqHfJq3182hjMPYWNOCx5RmU=;
+	b=U3Xq9cRC8HfIiAPTTiRZVeDpCqjq+6Uu4KQ5F2rhlgd6qPYfRYHE0ZmUdngVT6K6Ej
+	vjwlJXBi9FhLumyNL+nlM7yA5SSMcr4NlzCpEBDGR2JFlAWLcerRfurJKsrZtL1vyS7K
+	u7v0orwIEedi+5bPLEzYkF7hd6O8WqDiDT/n/VGn6ZGNiXAQ7OJBc5Tdz2svsBTS+PYV
+	B/WL0uObupGM776ZWupZi+Ue5mERuyM7q1Egh8TXZ2wBfhCVlBv0DqCyXmqZZxuTuUYu
+	nZJTziRTQ3AahoCkoQJJBZsB54aKY0ACLGg32OM+mB0D2lYGGeRwespsy799VZ81VMxS
+	tdlQ==
+Received: by 10.180.96.3 with SMTP id do3mr18283727wib.5.1342827246847; Fri,
+	20 Jul 2012 16:34:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.194.18.98 with HTTP; Fri, 20 Jul 2012 16:33:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jul 2012 15:56:48 -0700
-Message-Id: <1342825008-24903-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-java][PATCH] openjdk-6-common.inc: Change jdk_arch for powerpc
+Date: Fri, 20 Jul 2012 16:33:36 -0700
+Message-ID: <CAMKF1spBY0USM6d_o=F4fLUvyK1qi5hMz9rJBSUsjFE4n3KFCw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, yocto@yoctoproject.org, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Cross referencing git commit SHA info in commit logs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,42 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2012 23:08:14 -0000
+X-List-Received-Date: Fri, 20 Jul 2012 23:45:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-ppc is used in openjdk/jre but original jdk_arch
-is defined as powerpc which means we have errors
-compiling and installing openjdk for ppc platforms
+Hello,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-core/openjdk/openjdk-6-common.inc |    5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+I have seen some commit logs referring to poky commits but are applied
+to OE-Core and there might be vice versa case too. In general I don't
+see an issue
+when there is a commit SHA id in log message but please add the
+project info to it unless so someone can go and look for it in
+particular repo
 
-diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
-index 6e984f6..02a4cb7 100644
---- a/recipes-core/openjdk/openjdk-6-common.inc
-+++ b/recipes-core/openjdk/openjdk-6-common.inc
-@@ -109,6 +109,10 @@ def get_jdk_arch(d):
-     jdk_arch = bb.data.getVar('TARGET_ARCH', d, 1)
-     if jdk_arch == "x86_64":
-         jdk_arch = "amd64"
-+    elif jdk_arch == "powerpc":
-+        jdk_arch = "ppc"
-+    elif jdk_arch == "powerpc64":
-+        jdk_arch = "ppc64"
-     elif (jdk_arch == "i486" or jdk_arch == "i586" or jdk_arch == "i686"):
-         jdk_arch = "i386"
- 
-@@ -323,7 +327,6 @@ do_install() {
- 		rm ${D}${JDK_HOME}/bin/$bf
- 		ln -s ${JDK_HOME}/jre/bin/$bf ${D}${JDK_HOME}/bin/$bf
- 	done
--
-         install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/
- }
- 
--- 
-1.7.9.5
+eg, poky/<id> OE-Core/<id> meta-oe/<id>  oe.dev/<id> would make it a bit better
 
+Thanks
+-Khem
 
 
