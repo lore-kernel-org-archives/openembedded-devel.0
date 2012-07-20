@@ -1,33 +1,27 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SsG8b-0002kc-D8 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2012 18:33:09 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SsFxY-00015O-GX for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jul 2012 18:21:44 +0200
-Received: from 92.69.199.181 ([92.69.199.181])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 18:21:44 +0200
-Received: from koen by 92.69.199.181 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 18:21:44 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 Jul 2012 18:21:29 +0200
-Message-ID: <juc0i9$1k9$1@dough.gmane.org>
-References: <50084830.1060708@pseudoterminal.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 92.69.199.181
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:13.0) Gecko/20120614 Thunderbird/13.0.1
-In-Reply-To: <50084830.1060708@pseudoterminal.org>
-X-Enigmail-Version: 1.4.2
-Subject: Re: GStreamer plugins are built with Orc support disabled, why?
+	(envelope-from <Yao.Zhao@windriver.com>) id 1SsGCW-000335-FD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Jul 2012 18:37:12 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q6KGPlma002236
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jul 2012 09:25:47 -0700 (PDT)
+Received: from [128.224.147.210] (128.224.147.210) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.1.255.0;
+	Fri, 20 Jul 2012 09:25:47 -0700
+Message-ID: <50098684.7030602@windriver.com>
+Date: Fri, 20 Jul 2012 12:25:40 -0400
+From: Yao Zhao <yao.zhao@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:13.0) Gecko/20120615 Thunderbird/13.0.1
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <5006D01E.2080409@windriver.com>
+In-Reply-To: <5006D01E.2080409@windriver.com>
+X-Originating-IP: [128.224.147.210]
+Subject: Re: bzip2-native problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +35,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2012 16:33:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Jul 2012 16:37:12 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 12-07-18 11:02 AM, Yao Zhao wrote:
+> Hi all,
+>
+> Got a problem about bzip2-native:
+>
+> The reason is that when unpacking xextproto-7.2.0.tar.bz2, 
+> bzip2-native's build is triggered too because of another package's 
+> dependency. And loader can't find libbz2.so.0 which is in sysroot(host 
+> bzip2 used libbz2.so.1 so it is sure the libbz2.so.0 in sysroot) I 
+> have searched the paths in PATH below and only find bzip2 in 2 places: 
+> host /bin/bzip2 and sysroot bzip2.
+>
+> In bzip2's Makefile, the install is make -j xxx ... although the 
+> install is first to install libbz2.so.0 then bzip2 but because of the 
+> "-j xxx" so it is possible that bzip2 is installed first but 
+> libbz2.so.0 is not ready yet(in a subshell this link is created).
+> So I have to make the install atomic or at least don't install in 
+> parallel.
+>
+> so there are a couple of workarounds:
+> 1.set PARALLEL_MAKEINST="" (one line change, and only one library, 2 
+> binaries installed(bzip2, bzip2recover) + 3 scripts + a couple of links)
+> 2.make a statically linked bzip2 and bzip2recover
+> 3.like perl or python native to make a bzip2-native subdir in sysroot 
+> then only packages explicitly inherit bzip2native which will set the 
+> path.
+>
+> I need your advice!
+>
+> thanks,
+> yao
+>
+> Here is the tail of log.do_unpack.6884:
+>  --------------------------------------------------
+> DEBUG: SITE files ['endian-big', 'bit-32', 'powerpc-common', 
+> 'common-linux', 'common-glibc', 'powerpc32-linux', 'powerpc-linux', 
+> 'common']
+> DEBUG: Executing shell function wrl_buildlink
+> DEBUG: Shell function wrl_buildlink finished
+> DEBUG: Executing python function do_unpack
+> DEBUG: Executing python function base_do_unpack
+> NOTE: Unpacking 
+> /builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/downloads/xextproto-7.2.0.tar.bz2 
+> to 
+> /builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/work/ppce500mc-wrs-linux/xextproto-1_7.2.0-r0/
+> bzip2: error while loading shared libraries: libbz2.so.0: cannot open 
+> shared object file: No such file or directory
+> tar: This does not look like a tar archive
+> tar: Exiting with failure status due to previous errors
+> DEBUG: Python function base_do_unpack finished
+> DEBUG: Python function do_unpack finished
+> ERROR: Function failed: Unpack failure for URL: 
+> 'http://xorg.freedesktop.org/releases/individual/proto/xextproto-7.2.0.tar.bz2'. 
+> Unpack command 
+> PATH="/builds-2012-07-13-001944/fsl-p4080_std_tc/layers/oe-core/scripts:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/ppce500mc-wrs-linux:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/fsl-p4080/usr/bin/crossscripts:
+> /builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/x86_64-linux/usr/sbin:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/x86_64-linux/sbin:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/tmp/sysroots/x86_64-linux//bin:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/bin:/ba2/yow 
+>
+> -blade16.2/builds-2012-07-13-001944/fsl-p4080_std_tc/layers/oe-core/scripts:/builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake/bin/:/wrlinux-x/layers/wrlinux/scripts:/builds-2012-07-13-001944/fsl-p4080_std_tc/scripts:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/builds-2012-07-13-001944/fsl-p4080_std_tc/layers/local/scripts:/wrlinux-x/layers/wrlinux/scripts:/wrlinux-x/layers/wrlcompat/sc 
+>
+> ripts" bzip2 -dc 
+> /builds-2012-07-13-001944/fsl-p4080_std_tc/bitbake_build/downloads/xextproto-7.2.0.tar.bz2 
+> | tar x --no-same-owner -f - failed with return value 2
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Any suggestion, please!
 
-Op 19-07-12 19:47, dv schreef:
-> Hello,
-> 
-> I noticed that the GStreamer plugins from the base, good, bad, and ugly 
-> packages are all built with Orc support disabled (the configure lines use
-> --disable-orc). I wonder why. No Orc means that the plugins are
-> considerably slower. Is this related to ARM? (I noticed this when
-> building for a Beaglebone machine.) Or does Orc break something?
-
-There's no ORC in oe-core, but when I enabled it my test application
-(cheese) started OOMing. I'm looking into why right now.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQCYWJMkyGM64RGpERAgWEAJ4tBkx67ue+jm48CvoFoV29pkd3YACgtavp
-4yq2oZVkDeG47hNSwTMNto4=
-=NJGL
------END PGP SIGNATURE-----
+yao
 
 
 
