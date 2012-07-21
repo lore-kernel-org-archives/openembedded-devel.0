@@ -1,29 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1SsMt0-0004US-F5; Sat, 21 Jul 2012 01:45:30 +0200
-Received: by wgbdr1 with SMTP id dr1so3868521wgb.24
-	for <multiple recipients>; Fri, 20 Jul 2012 16:34:06 -0700 (PDT)
+	(envelope-from <kergoth@gmail.com>) id 1SsOQO-0006fq-Rg
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Jul 2012 03:24:05 +0200
+Received: by obcva7 with SMTP id va7so5605770obc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jul 2012 18:12:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=e0a6q4+9WHZ5sBBxyaqZqHfJq3182hjMPYWNOCx5RmU=;
-	b=U3Xq9cRC8HfIiAPTTiRZVeDpCqjq+6Uu4KQ5F2rhlgd6qPYfRYHE0ZmUdngVT6K6Ej
-	vjwlJXBi9FhLumyNL+nlM7yA5SSMcr4NlzCpEBDGR2JFlAWLcerRfurJKsrZtL1vyS7K
-	u7v0orwIEedi+5bPLEzYkF7hd6O8WqDiDT/n/VGn6ZGNiXAQ7OJBc5Tdz2svsBTS+PYV
-	B/WL0uObupGM776ZWupZi+Ue5mERuyM7q1Egh8TXZ2wBfhCVlBv0DqCyXmqZZxuTuUYu
-	nZJTziRTQ3AahoCkoQJJBZsB54aKY0ACLGg32OM+mB0D2lYGGeRwespsy799VZ81VMxS
-	tdlQ==
-Received: by 10.180.96.3 with SMTP id do3mr18283727wib.5.1342827246847; Fri,
-	20 Jul 2012 16:34:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.18.98 with HTTP; Fri, 20 Jul 2012 16:33:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 20 Jul 2012 16:33:36 -0700
-Message-ID: <CAMKF1spBY0USM6d_o=F4fLUvyK1qi5hMz9rJBSUsjFE4n3KFCw@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, yocto@yoctoproject.org, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Cross referencing git commit SHA info in commit logs
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=1LSfWqmqjQaAKZrENDLgbNRic5Yz/KSUxYeoxI+BssU=;
+	b=NvJ2oal7TeI4YnPM7k04KeirOaexp5d+6pApPxa7DhkMC5mYuZVdWmjF53ZvlRmQr0
+	Rh/B0qdVtMLHvc2/2vXsVrAtp1G76dLGw1QmbUraFEhCXZeLVrVC+2W6B7eBw/nu1Ui9
+	65zGSXarKZgI9Vpb7G+mZrshS47tL+H3A2W/AKPJy4q5nbDeVCN2p98H6WfH+1Qbad+F
+	tP2c0QxtOiudextXYW5sp6npUj4ZKV3+UYSV7K2pXvdHH9+hri74/oJ2EioFaqpc9rR7
+	cmKnPdrAyvKugJAmnLQ1l6sZGA1PykQkdRhR6ZFnKy0rWn1rhA3DTcJ0vW3M4PtEe0B5
+	3mOA==
+Received: by 10.60.29.169 with SMTP id l9mr9952538oeh.14.1342833160553;
+	Fri, 20 Jul 2012 18:12:40 -0700 (PDT)
+Received: from precise64.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by mx.google.com with ESMTPS id s7sm3558013oec.7.2012.07.20.18.12.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 20 Jul 2012 18:12:39 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Jul 2012 18:12:31 -0700
+Message-Id: <1342833151-18755-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH] nano: add PACKAGECONFIG for 'tiny' build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2012 23:45:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 21 Jul 2012 01:24:05 -0000
 
-Hello,
+From: Christopher Larson <chris_larson@mentor.com>
 
-I have seen some commit logs referring to poky commits but are applied
-to OE-Core and there might be vice versa case too. In general I don't
-see an issue
-when there is a commit SHA id in log message but please add the
-project info to it unless so someone can go and look for it in
-particular repo
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ meta-oe/recipes-support/nano/nano.inc |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-eg, poky/<id> OE-Core/<id> meta-oe/<id>  oe.dev/<id> would make it a bit better
+diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
+index 2d52cab..68bcb2e 100644
+--- a/meta-oe/recipes-support/nano/nano.inc
++++ b/meta-oe/recipes-support/nano/nano.inc
+@@ -8,7 +8,7 @@ SECTION = "console/utils"
+ DEPENDS = "ncurses"
+ RDEPENDS_${PN} = "ncurses-terminfo"
+ 
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ PV_MAJOR = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+ 
+@@ -16,4 +16,4 @@ SRC_URI = "http://www.nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
+ 
+ inherit autotools gettext
+ 
+-EXTRA_OECONF = "--enable-all"
++PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
+-- 
+1.7.9.5
 
-Thanks
--Khem
 
 
