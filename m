@@ -1,33 +1,31 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1SsWOv-0004y5-18
+	(envelope-from <raj.khem@gmail.com>) id 1SsfjO-000738-QE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jul 2012 11:55:05 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SsWDv-0002KB-1h>; Sat, 21 Jul 2012 11:43:43 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1SsWDu-0001RT-Ul>; Sat, 21 Jul 2012 11:43:43 +0200
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1SsWDt-0000yw-SH
+	Sat, 21 Jul 2012 21:52:51 +0200
+Received: by pbbrq2 with SMTP id rq2so7421302pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jul 2012 11:43:41 +0200
-Date: Sat, 21 Jul 2012 11:43:41 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sat, 21 Jul 2012 12:41:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=CrXkxOgQYLz8B3DE352FHEZ1Na/a0Wy9pL1ZfoOzIA4=;
+	b=B2iE22/4fhaf01luETkycYI5dzl3R1M07xqriw1zEL/ZiqxCzfAF/axeVOB9qI7SZ/
+	RtMRCyyhqrDTXvcVnuFMS3i8qn7O1bSwAZrPFwJjvwp3/5os+dObRZ9ju0Hi/PQQBD0K
+	fjiu+T+dNSRUZ/tzeuFJb6oTjqIFgtpB//FugKd9Cx3qoahZE3aX22p/i268yCGxylbG
+	9ChI03sXwzdcUvTANWHE2hjz4b7Yi4Y9NDMJS4795wFRn4QS5Uayq0yNg7q0QcLVBojf
+	NKe/cXQPcVg9JdyLsr5msZ+fmtp7TD8mshcxvrWYdmsji0IC3MPO8mOdIJS/NPXeK8Ex
+	aBlg==
+Received: by 10.68.225.199 with SMTP id rm7mr427166pbc.76.1342899685260;
+	Sat, 21 Jul 2012 12:41:25 -0700 (PDT)
+Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id qr3sm6516943pbc.69.2012.07.21.12.41.23
+	(version=SSLv3 cipher=OTHER); Sat, 21 Jul 2012 12:41:24 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120721094341.GF31778@mi.fu-berlin.de>
-References: <1342825008-24903-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1342825008-24903-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
-Subject: Re: [meta-java][PATCH] openjdk-6-common.inc: Change jdk_arch for powerpc
+Date: Sat, 21 Jul 2012 12:41:24 -0700
+Message-Id: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jul 2012 09:55:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 21 Jul 2012 19:52:51 -0000
 
-On Fri, Jul 20, 2012 at 03:56:48PM -0700, Khem Raj wrote:
-> ppc is used in openjdk/jre but original jdk_arch
-> is defined as powerpc which means we have errors
-> compiling and installing openjdk for ppc platforms
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes-core/openjdk/openjdk-6-common.inc |    5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
-> index 6e984f6..02a4cb7 100644
-> --- a/recipes-core/openjdk/openjdk-6-common.inc
-> +++ b/recipes-core/openjdk/openjdk-6-common.inc
-> @@ -109,6 +109,10 @@ def get_jdk_arch(d):
->      jdk_arch = bb.data.getVar('TARGET_ARCH', d, 1)
->      if jdk_arch == "x86_64":
->          jdk_arch = "amd64"
-> +    elif jdk_arch == "powerpc":
-> +        jdk_arch = "ppc"
-> +    elif jdk_arch == "powerpc64":
-> +        jdk_arch = "ppc64"
->      elif (jdk_arch == "i486" or jdk_arch == "i586" or jdk_arch == "i686"):
->          jdk_arch = "i386"
->  
-> @@ -323,7 +327,6 @@ do_install() {
->  		rm ${D}${JDK_HOME}/bin/$bf
->  		ln -s ${JDK_HOME}/jre/bin/$bf ${D}${JDK_HOME}/bin/$bf
->  	done
-> -
->          install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/
->  }
->  
-> -- 
-> 1.7.9.5
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+In an effort to use meta-systemd without meta-oe
+layer (purely on OE-Core) I ran into these classes not being there in
+OE-Core
 
-Thanks,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-systemd/recipes-core/systemd/systemd_git.bb |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
 
-patch is applied to master.
+diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
+index 9cbdd76..6ae9abb 100644
+--- a/meta-systemd/recipes-core/systemd/systemd_git.bb
++++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
+@@ -15,13 +15,13 @@ SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+ 
+ SECTION = "base/shell"
+ 
+-inherit gitpkgv
+-PKGV = "v${GITPKGVTAG}"
++#inherit gitpkgv
++#PKGV = "v${GITPKGVTAG}"
+ 
+-PV = "git"
+-PR = "r2"
++PV = "git${SRCPV}"
++PR = "r3"
+ 
+-inherit useradd pkgconfig autotools vala perlnative
++inherit useradd pkgconfig autotools perlnative
+ 
+ SRCREV = "cd96b3b86abb4a88cac2722bdfb6e5d4413f6831"
+ 
+-- 
+1.7.5.4
 
-Bye Henning
 
 
