@@ -1,32 +1,37 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SsUrf-00035t-Dz
+	(envelope-from <martin.jansa@gmail.com>) id 1SsUrn-00036E-Ec
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jul 2012 10:16:39 +0200
-Received: by wibhq4 with SMTP id hq4so1112052wib.6
+	Sat, 21 Jul 2012 10:16:47 +0200
+Received: by wibhm11 with SMTP id hm11so1108158wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jul 2012 01:05:15 -0700 (PDT)
+	Sat, 21 Jul 2012 01:05:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=05mJNEg4K8Rixe5pPpXPq73h/VVU9haQ9TVEg8/zPn0=;
-	b=W9e/8c2Txak9kpHmC1bhJzsQ2XJIKUAS6TaN7yFHzkzp/sRl7w1CF5pIPcGLmsNUWS
-	6zSzMIxQ5INoqbJ8TfkG2OCVzKjHp3PmFSNI24dOfO9WT7t/eEWIRykZu9qRPZnLyykM
-	RO6bGfked5QZyzxo1DSbFc3G6WIJVD6jcVX/mb4HLtV3XEXOn6CtYNceSM97Sbp4S3x3
-	zlT/5apUo7eifYM7EELrpADEZlS9ThO+DHWAXeEARzs3+bblD7xlXlxU9zTt5kD722XL
-	fHL7MgMOrasV3boKsT0jj2VVLmLnYP8RkOlKldDPjnZRG4Uqzxoq8s8T0dVwl4rr/T86
-	yhzA==
-Received: by 10.180.103.4 with SMTP id fs4mr20586805wib.16.1342857915299;
-	Sat, 21 Jul 2012 01:05:15 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=RA1VzRnMiE+Rna6rAwYztFZEGFZjTz9eXFswkzLv1YE=;
+	b=tj6bzh1J5T3EFMBPrPRgFwcRlNVSfOIbX35uzT9Inx4CzsMYVZ2Tj6Ao2FV3c92Xq1
+	fEyMoV91eKYgaCRNn0gWoW9bXCxqPsvekkmK9b98mQr2p1Eh4JfYOR0h+CKjz24dUpoN
+	u9agaq1Ml6QoZjxK9QokIBL5Wp7KX3YPZk4nbnUfecj9KUre53w+85QwvupHsKGhSVsi
+	LSurhLGTvMQUtf/ya0JZ0Sgk9mrYnI8onWPgiELoH/vKaa1MQ8DR/OWvpyzdWE4IAeXi
+	Ryh6D6GXFqCiYwV2lNDTLJSVp6Of3KUoEZgEHEolYNdlzwy0y638GKu7qD2Orf38uXIG
+	ucnw==
+Received: by 10.216.132.135 with SMTP id o7mr4828685wei.6.1342857923540;
+	Sat, 21 Jul 2012 01:05:23 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id eu4sm2488798wib.2.2012.07.21.01.05.13
+	by mx.google.com with ESMTPS id y5sm2462528wiw.9.2012.07.21.01.05.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 21 Jul 2012 01:05:14 -0700 (PDT)
+	Sat, 21 Jul 2012 01:05:22 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jul 2012 10:05:04 +0200
-Message-Id: <cover.1342857860.git.Martin.Jansa@gmail.com>
+Date: Sat, 21 Jul 2012 10:05:05 +0200
+Message-Id: <cd62fa564aedf24a52cbbdfb48bdd076b8d51276.1342857860.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][meta-systemd][PATCH 0/3] Pending changes
+In-Reply-To: <cover.1342857860.git.Martin.Jansa@gmail.com>
+References: <cover.1342857860.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1342857860.git.Martin.Jansa@gmail.com>
+References: <cover.1342857860.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-systemd][PATCH 1/3] phonet-utils: package udev rules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jul 2012 08:16:39 -0000
+X-List-Received-Date: Sat, 21 Jul 2012 08:16:47 -0000
 
-The following changes since commit ec501e356f52c10967ad8185be1db7b0804a1b5b:
+* fixes:
+  WARNING: QA Issue: phonet-utils: Files/directories were installed but not shipped
+    /lib
+    /lib/udev
+    /lib/udev/rules.d
+    /lib/udev/rules.d/85-phonet-utils.rulesZZ
 
-  systemd: include /etc/rpm/macros.systemd in PN-dev (2012-07-20 13:29:48 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (3):
-  phonet-utils: package udev rules
-  udev-extra-rules: add mount.blacklist to CONFFILES
-  systemd: cleanup /var/run on boot and create /var/run/utmp
-
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  .../phonet-utils/phonet-utils_git.bb               |    3 ++-
- meta-oe/recipes-core/udev/udev-extra-rules.bb      |    5 +++--
- .../recipes-core/systemd/systemd/var-run.conf      |    4 ++++
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    5 ++++-
- 4 files changed, 13 insertions(+), 4 deletions(-)
- create mode 100644 meta-systemd/recipes-core/systemd/systemd/var-run.conf
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
+diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
+index 257f012..9a3310e 100644
+--- a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
++++ b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = ""
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master;protocol=git"
+-PR = "r0"
++PR = "r1"
+ S = "${WORKDIR}/git"
+ SRCREV = "4acfa720fd37d178a048fc2be17180137d4a70ea"
+ PV = "0.0.0+gitr${SRCPV}"
+@@ -16,3 +16,4 @@ do_install () {
+ 	DESTDIR=${D} oe_runmake install
+ }
+ 
++FILES_${PN} += "${base_libdir}/udev/rules.d/85-phonet-utils.rules"
 -- 
 1.7.8.6
 
