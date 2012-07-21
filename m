@@ -1,33 +1,32 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1SsOQO-0006fq-Rg
+	(envelope-from <martin.jansa@gmail.com>) id 1SsUrf-00035t-Dz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jul 2012 03:24:05 +0200
-Received: by obcva7 with SMTP id va7so5605770obc.6
+	Sat, 21 Jul 2012 10:16:39 +0200
+Received: by wibhq4 with SMTP id hq4so1112052wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2012 18:12:40 -0700 (PDT)
+	Sat, 21 Jul 2012 01:05:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=1LSfWqmqjQaAKZrENDLgbNRic5Yz/KSUxYeoxI+BssU=;
-	b=NvJ2oal7TeI4YnPM7k04KeirOaexp5d+6pApPxa7DhkMC5mYuZVdWmjF53ZvlRmQr0
-	Rh/B0qdVtMLHvc2/2vXsVrAtp1G76dLGw1QmbUraFEhCXZeLVrVC+2W6B7eBw/nu1Ui9
-	65zGSXarKZgI9Vpb7G+mZrshS47tL+H3A2W/AKPJy4q5nbDeVCN2p98H6WfH+1Qbad+F
-	tP2c0QxtOiudextXYW5sp6npUj4ZKV3+UYSV7K2pXvdHH9+hri74/oJ2EioFaqpc9rR7
-	cmKnPdrAyvKugJAmnLQ1l6sZGA1PykQkdRhR6ZFnKy0rWn1rhA3DTcJ0vW3M4PtEe0B5
-	3mOA==
-Received: by 10.60.29.169 with SMTP id l9mr9952538oeh.14.1342833160553;
-	Fri, 20 Jul 2012 18:12:40 -0700 (PDT)
-Received: from precise64.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPS id s7sm3558013oec.7.2012.07.20.18.12.38
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=05mJNEg4K8Rixe5pPpXPq73h/VVU9haQ9TVEg8/zPn0=;
+	b=W9e/8c2Txak9kpHmC1bhJzsQ2XJIKUAS6TaN7yFHzkzp/sRl7w1CF5pIPcGLmsNUWS
+	6zSzMIxQ5INoqbJ8TfkG2OCVzKjHp3PmFSNI24dOfO9WT7t/eEWIRykZu9qRPZnLyykM
+	RO6bGfked5QZyzxo1DSbFc3G6WIJVD6jcVX/mb4HLtV3XEXOn6CtYNceSM97Sbp4S3x3
+	zlT/5apUo7eifYM7EELrpADEZlS9ThO+DHWAXeEARzs3+bblD7xlXlxU9zTt5kD722XL
+	fHL7MgMOrasV3boKsT0jj2VVLmLnYP8RkOlKldDPjnZRG4Uqzxoq8s8T0dVwl4rr/T86
+	yhzA==
+Received: by 10.180.103.4 with SMTP id fs4mr20586805wib.16.1342857915299;
+	Sat, 21 Jul 2012 01:05:15 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id eu4sm2488798wib.2.2012.07.21.01.05.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 20 Jul 2012 18:12:39 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
+	Sat, 21 Jul 2012 01:05:14 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jul 2012 18:12:31 -0700
-Message-Id: <1342833151-18755-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [PATCH] nano: add PACKAGECONFIG for 'tiny' build
+Date: Sat, 21 Jul 2012 10:05:04 +0200
+Message-Id: <cover.1342857860.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][meta-systemd][PATCH 0/3] Pending changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jul 2012 01:24:05 -0000
+X-List-Received-Date: Sat, 21 Jul 2012 08:16:39 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
+The following changes since commit ec501e356f52c10967ad8185be1db7b0804a1b5b:
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- meta-oe/recipes-support/nano/nano.inc |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+  systemd: include /etc/rpm/macros.systemd in PN-dev (2012-07-20 13:29:48 +0200)
 
-diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
-index 2d52cab..68bcb2e 100644
---- a/meta-oe/recipes-support/nano/nano.inc
-+++ b/meta-oe/recipes-support/nano/nano.inc
-@@ -8,7 +8,7 @@ SECTION = "console/utils"
- DEPENDS = "ncurses"
- RDEPENDS_${PN} = "ncurses-terminfo"
- 
--INC_PR = "r2"
-+INC_PR = "r3"
- 
- PV_MAJOR = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
- 
-@@ -16,4 +16,4 @@ SRC_URI = "http://www.nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
- 
- inherit autotools gettext
- 
--EXTRA_OECONF = "--enable-all"
-+PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
+are available in the git repository at:
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
+
+Martin Jansa (3):
+  phonet-utils: package udev rules
+  udev-extra-rules: add mount.blacklist to CONFFILES
+  systemd: cleanup /var/run on boot and create /var/run/utmp
+
+ .../phonet-utils/phonet-utils_git.bb               |    3 ++-
+ meta-oe/recipes-core/udev/udev-extra-rules.bb      |    5 +++--
+ .../recipes-core/systemd/systemd/var-run.conf      |    4 ++++
+ meta-systemd/recipes-core/systemd/systemd_git.bb   |    5 ++++-
+ 4 files changed, 13 insertions(+), 4 deletions(-)
+ create mode 100644 meta-systemd/recipes-core/systemd/systemd/var-run.conf
+
 -- 
-1.7.9.5
+1.7.8.6
 
 
 
