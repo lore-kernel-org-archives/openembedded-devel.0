@@ -1,37 +1,33 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SsUs2-00037h-BX
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1SsWN1-0004YP-4U
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Jul 2012 10:17:02 +0200
-Received: by wibhm2 with SMTP id hm2so1167819wib.0
+	Sat, 21 Jul 2012 11:53:07 +0200
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SsWC1-0002BB-29>; Sat, 21 Jul 2012 11:41:45 +0200
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1SsWC0-0001JG-SM>; Sat, 21 Jul 2012 11:41:44 +0200
+Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
+	4.72) id 1SsWBz-0000qI-PR
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jul 2012 01:05:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=x19XgTbTLgzdl1Mq/h591iuW06yOLKV1d4qlKJsqDyU=;
-	b=xTzF1oJdqm8xL3OP1N8sj5XGq38bjd1f7TaTTddjz1lsBNjCbCE/vPiLoK5i4cdyKc
-	NDz7jbAmZv3ou7JjhdAeFPP8+WfPusKtkS69YTMXfVJYOT9IgmxzR3wrKvFqtYVJrNPU
-	JATeMemJARsuget2y4/BHvUM/L4+aOMW9TNQ7wjn/EE8N55gdSw2U/VlkdKjXpsX78W6
-	jLPZh5j13QpQ1k1sUZQ91PToKabdTBiS5awYILFCU2rWYQWGutmsBOL4PytUaMmilo+M
-	QLhlC4uhkmC8hzvwQzbFgGavmzCbBWFWvnO8iRpLdlhvUUwqaAU2IOaEGIoz5rrQRkoK
-	dMuQ==
-Received: by 10.180.93.68 with SMTP id cs4mr32166587wib.14.1342857938347;
-	Sat, 21 Jul 2012 01:05:38 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id bc2sm4147131wib.0.2012.07.21.01.05.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 21 Jul 2012 01:05:37 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 21 Jul 2012 11:41:43 +0200
+Date: Sat, 21 Jul 2012 11:41:43 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jul 2012 10:05:07 +0200
-Message-Id: <a27cd747e1e87482d4968348fd9edd64c8c80925.1342857860.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1342857860.git.Martin.Jansa@gmail.com>
-References: <cover.1342857860.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1342857860.git.Martin.Jansa@gmail.com>
-References: <cover.1342857860.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-systemd][PATCH 3/3] systemd: cleanup /var/run on boot and create /var/run/utmp
+Message-ID: <20120721094143.GA31778@mi.fu-berlin.de>
+References: <1342761538-19890-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1342761538-19890-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: [meta-java][PATCH 1/5] openjdk-6-common: Pass LD_LIBRARY_PATH to app running under qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,66 +41,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jul 2012 08:17:02 -0000
+X-List-Received-Date: Sat, 21 Jul 2012 09:53:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* Angstrom uses /var/run cleanup because:
-  Some apps (e.g. avahi-daemon) to clean up their old-style pid files and fail
-  to start every other boot. Se we let systemd clean it on boot.
-  Which seems general enough, so lets move var-run.conf from base-files.bbappend
-  to systemd recipe.
+On Thu, Jul 19, 2012 at 10:18:54PM -0700, Khem Raj wrote:
+> When target and build host are same eg. x86_64 and qemux86-64
+> then application uses the dynamic linker from OEs sysroot but
+> libc from the build host and they may have different versions
+> and end up in unpleasant results.
+> 
+> We therefore make sure that libc is also used from OEs sysroot
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-core/openjdk/openjdk-6-common.inc |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+> index d81543c..c1861b6 100644
+> --- a/recipes-core/openjdk/openjdk-6-common.inc
+> +++ b/recipes-core/openjdk/openjdk-6-common.inc
+> @@ -10,7 +10,7 @@ ICEDTEA = "NEEDS TO BE SET"
+>  S = "${WORKDIR}/${ICEDTEA}"
+>  B = "${S}/build"
+>  
+> -INC_PR = "r17"
+> +INC_PR = "r18"
+>  
+>  SRC_URI = "\
+>    ${ICEDTEA_URI} \
+> @@ -242,7 +242,7 @@ EXTRA_OEMAKE += 'OE_LAUNCHER_LDFLAGS="${OE_LAUNCHER_LDFLAGS}"'
+>  
+>  
+>  # Large stack is required at least on x86_64 host, otherwise random segfaults appear:
+> -QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 1048576 -L ${STAGING_DIR_TARGET}"
+> +QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 1048576 -L ${STAGING_DIR_TARGET} -E LD_LIBRARY_PATH=${STAGING_BASELIBDIR}"
+>  
+>  EXTRA_OEMAKE += 'QEMU="${QEMU}"'
+>  
+> -- 
+> 1.7.9.5
+> 
 
-* /var/run/utmp was created by volatiles before, but without sysvinit installed
-  systemd-update-utmp-runlevel.service fails to start without this file
+Thanks,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-core/systemd/systemd/var-run.conf      |    4 ++++
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    5 ++++-
- 2 files changed, 8 insertions(+), 1 deletions(-)
- create mode 100644 meta-systemd/recipes-core/systemd/systemd/var-run.conf
+patch is applied to master.
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd/var-run.conf b/meta-systemd/recipes-core/systemd/systemd/var-run.conf
-new file mode 100644
-index 0000000..c2c18e2
---- /dev/null
-+++ b/meta-systemd/recipes-core/systemd/systemd/var-run.conf
-@@ -0,0 +1,4 @@
-+# empty /var/run
-+R	/var/run/*	-	-	-	-	-
-+# systemd-update-utmp-runlevel.service fails to start without this
-+f /var/run/utmp 0644 root root - -
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 9cbdd76..3868438 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -19,7 +19,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r2"
-+PR = "r3"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
-@@ -29,6 +29,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-            file://gtk-doc.make \
-            file://touchscreen.rules \
-            file://modprobe.rules \
-+           file://var-run.conf \
-           "
- LDFLAGS_libc-uclibc_append = " -lrt"
- 
-@@ -82,6 +83,8 @@ do_install() {
- 	touch ${D}${sysconfdir}/machine-id
- 
- 	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
-+
-+	install -m 0644 ${WORKDIR}/var-run.conf ${D}${sysconfdir}/tmpfiles.d/
- }
- 
- python populate_packages_prepend (){
--- 
-1.7.8.6
-
+Bye Henning
 
 
