@@ -1,34 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1St0S4-0004sT-BV for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 20:00:20 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1St0Gz-00006d-Si for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 19:48:53 +0200
-Received: from 92.69.213.29 ([92.69.213.29])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 19:48:53 +0200
-Received: from koen by 92.69.213.29 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 19:48:53 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 22 Jul 2012 19:48:29 +0200
-Message-ID: <juhedn$q1a$1@dough.gmane.org>
+	(envelope-from <raj.khem@gmail.com>) id 1St1Y0-0006rN-Ka
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Jul 2012 21:10:32 +0200
+Received: by wibhq4 with SMTP id hq4so1913866wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2012 11:59:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Bp0gHk9jfXu9KIopFlRalz3+zs70WFXjTgQFwYIS6Sc=;
+	b=XUsMIBqENyGcONicmqKDTQN1b2oLIA4/9iQB4Q6GQh6gbuEZK4gN9gMwf059abPbDO
+	32LHSmqAr1JuAotJILvkePWHDYEGNQ14GqYLn3kemJ2tOr9+k++Cwg0z1G+NFqY5FRtH
+	vMsgXSOuKx0MifoipXFu+NFtlftb82bGyoH0hEh4J7fgZ4ULMw4X1f6rPQUw045YRa+f
+	5DFUi9Mur0ivOmHB2vcsAY1EBv2nwAN6PHoW0NOxB4TvBIqLl8B50OfFk6DPq3tSNzZt
+	stFaeyOqPB9GmRUmB5SUoTMcjI7jB/99vn8S0zxHtxevvVR9ANbTScoFEd4vsZP9tKoW
+	j/4Q==
+Received: by 10.216.61.83 with SMTP id v61mr5660354wec.31.1342983546560; Sun,
+	22 Jul 2012 11:59:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.194.18.98 with HTTP; Sun, 22 Jul 2012 11:58:36 -0700 (PDT)
+In-Reply-To: <juhedn$q1a$1@dough.gmane.org>
 References: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
 	<jug959$3gr$1@dough.gmane.org>
 	<CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 92.69.213.29
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:13.0) Gecko/20120614 Thunderbird/13.0.1
-In-Reply-To: <CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
-X-Enigmail-Version: 1.4.2
+	<juhedn$q1a$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 22 Jul 2012 11:58:36 -0700
+Message-ID: <CAMKF1sp0iVEFrOLFA6tFSjYYvcq61gO3zYcyJTkCPWwBVGe16Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,36 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 18:00:20 -0000
+X-List-Received-Date: Sun, 22 Jul 2012 19:10:32 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, Jul 22, 2012 at 10:48 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Right now we automatically get the proper version, removing gitpkgv would be
+> a regression. Why not symlink the class into meta-systemd?
 
-Op 22-07-12 18:35, Khem Raj schreef:
-> On Sun, Jul 22, 2012 at 12:12 AM, Koen Kooi <koen@dominion.thruhere.net>
-> wrote:
->> 
->> The vala one isn't needed anymore, the GUI bits are a seperate project
->> now, but the gitpkgv needs to stay. We can symlink the class from
->> meta-oe into meta-systemd
-> 
-> why do we need gitpkgv it creates unnecessary dependency on meta-oe it 
-> would be better to avoid it. What are downsides of not using gitpkgv ?
-
-Right now we automatically get the proper version, removing gitpkgv would be
-a regression. Why not symlink the class into meta-systemd?
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQDDztMkyGM64RGpERAvIzAJ41okNJo/onPU8pmnyBj+Rfge4KMACfUFBU
-0rD0duRR+5QpyI9094ommXc=
-=oJ9z
------END PGP SIGNATURE-----
-
+symlink would work since both layers are in same repo but logically it
+may not be right thing
+secondly if one day we would want to make systemd as default init
+system in OE-Core then
+either gitpkgv has to go into OE-Core or it be dropped. I think with
+advent of autopr these all
+may become less important in time anyway.
 
 
