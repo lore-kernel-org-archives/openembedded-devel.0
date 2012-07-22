@@ -1,33 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SsqWe-0001mz-FP for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 09:24:24 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SsqLb-0003Ir-BJ for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 09:12:59 +0200
-Received: from 92.69.213.29 ([92.69.213.29])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 09:12:59 +0200
-Received: from koen by 92.69.213.29 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 09:12:59 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <elvis.dowson@gmail.com>) id 1SswUs-0003H6-7h
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Jul 2012 15:46:58 +0200
+Received: by pbbrq2 with SMTP id rq2so8196083pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2012 06:35:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=HHEwleNezwtk0xCaZpVD/MecX2ZtU3T2eHg19hgDHcs=;
+	b=s0vcKqgeygImIf2El3V98DkhPEUbjm+WQMXK/DPVacxR22wDGcOxfg7c1BwNs6nGVH
+	IasZhcB0uFljUsGhaCZ1LYvOScZtjZE+uEIC+k5tejFCMHTCXp8+VlTYBUl1iTXIoPGJ
+	f8CuxI+839kAifZtTSisNqxFzElLB6AhbpCaAwps7LMXUsN07vZ0zp9U3Ay4uQoMGr3x
+	o+0JOJI7kUkHNDf0ZVEORkQhaY0RivgAIxChh//2qpENkB/ANLE+hbXGPx7upcSXLlm/
+	vuD61tB4HJIutz+L9dgvDs+0KE8FWXQ0DtVjwnuqTS+i1XyhqemvtYkMOwL9UjmiLWRF
+	lGhQ==
+Received: by 10.66.89.40 with SMTP id bl8mr8666908pab.18.1342964131551;
+	Sun, 22 Jul 2012 06:35:31 -0700 (PDT)
+Received: from localhost.localdomain ([94.205.108.162])
+	by mx.google.com with ESMTPS id mr1sm7932236pbb.62.2012.07.22.06.35.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 22 Jul 2012 06:35:30 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 22 Jul 2012 09:12:41 +0200
-Message-ID: <jug959$3gr$1@dough.gmane.org>
-References: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 92.69.213.29
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
-	rv:13.0) Gecko/20120614 Thunderbird/13.0.1
-In-Reply-To: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.4.2
-Subject: Re: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
+Date: Sun, 22 Jul 2012 17:35:15 +0400
+Message-Id: <1342964116-41035-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Elvis Dowson <elvis.dowson@gmail.com>
+Subject: [poky 1/2] cmake-native: Update to v2.8.8.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 07:24:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 22 Jul 2012 13:46:58 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This commit updates the cmake-native recipe to v2.8.8.
 
-Op 21-07-12 21:41, Khem Raj schreef:
-> In an effort to use meta-systemd without meta-oe layer (purely on
-> OE-Core) I ran into these classes not being there in OE-Core
+Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+---
+ meta/recipes-devtools/cmake/cmake-native_2.8.5.bb |    7 -------
+ meta/recipes-devtools/cmake/cmake-native_2.8.8.bb |    7 +++++++
+ meta/recipes-devtools/cmake/cmake.inc             |    2 +-
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta/recipes-devtools/cmake/cmake-native_2.8.5.bb
+ create mode 100644 meta/recipes-devtools/cmake/cmake-native_2.8.8.bb
 
-The vala one isn't needed anymore, the GUI bits are a seperate project now,
-but the gitpkgv needs to stay. We can symlink the class from meta-oe into
-meta-systemd
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQC6fpMkyGM64RGpERAq6pAKCr+1GPYZLT4WeM0CZP+Amt/8e1kwCeLbUO
-YgNIUkEEms/mtTUB2Qat2Sg=
-=oLXc
------END PGP SIGNATURE-----
+diff --git a/meta/recipes-devtools/cmake/cmake-native_2.8.5.bb b/meta/recipes-devtools/cmake/cmake-native_2.8.5.bb
+deleted file mode 100644
+index 3fe0c2e..0000000
+--- a/meta/recipes-devtools/cmake/cmake-native_2.8.5.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require cmake.inc
+-inherit native
+-
+-PR = "${INC_PR}.1"
+-
+-SRC_URI[md5sum] = "3c5d32cec0f4c2dc45f4c2e84f4a20c5"
+-SRC_URI[sha256sum] = "5e18bff75f01656c64f553412a8905527e1b85efaf3163c6fb81ea5aaced0b91"
+diff --git a/meta/recipes-devtools/cmake/cmake-native_2.8.8.bb b/meta/recipes-devtools/cmake/cmake-native_2.8.8.bb
+new file mode 100644
+index 0000000..3c0e524
+--- /dev/null
++++ b/meta/recipes-devtools/cmake/cmake-native_2.8.8.bb
+@@ -0,0 +1,7 @@
++require cmake.inc
++inherit native
++
++PR = "${INC_PR}.1"
++
++SRC_URI[md5sum] = "ba74b22c788a0c8547976b880cd02b17"
++SRC_URI[sha256sum] = "2b59897864d6220ff20aa8eac64cac8994e004898a1c0f899c8cb4d7b7570b46"
+diff --git a/meta/recipes-devtools/cmake/cmake.inc b/meta/recipes-devtools/cmake/cmake.inc
+index d080e50..c73fc7c 100644
+--- a/meta/recipes-devtools/cmake/cmake.inc
++++ b/meta/recipes-devtools/cmake/cmake.inc
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.cmake.org/"
+ BUGTRACKER = "http://public.kitware.com/Bug/my_view_page.php"
+ SECTION = "console/utils"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://Copyright.txt;md5=f372516292ff7c33337bf16a74a5f9a8 \
++LIC_FILES_CHKSUM = "file://Copyright.txt;md5=bb2fa3a08736b842556f6171bb9e8ae1 \
+                     file://Source/cmake.h;beginline=1;endline=10;md5=341736dae83c9e344b53eeb1bc7d7bc2"
+ 
+ INC_PR = "r2"
+-- 
+1.7.9.5
 
 
 
