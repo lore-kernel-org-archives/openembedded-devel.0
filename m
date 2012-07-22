@@ -1,31 +1,25 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SszJt-00021x-F3
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SszMG-0002BQ-H6
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 18:47:49 +0200
-Received: by wgbdr1 with SMTP id dr1so4751915wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 09:36:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=OxVl5Y5+49QT02LcYNXULfAr0L4j8+bY8D7zgYgtync=;
-	b=0Qx/vZ6QmQ9mbfo96CiUh1W4kAQVt4+JyfztDk5ZtH3eTTcDbccsodRYS6KHq4JR6l
-	V4oWfli+sQwzpedoJOwgcWIBurCpb8gNKW38ZVCIK7i9v8IC+iwObsifgwo9Cp8tYJiF
-	pxV8NwFJw/G8VuTZ/axbfknnJOEofHHXUuHPp5RHBwfnMeSXazHOf3PiB5xMbNaC64JX
-	NJhFJijo6I4gkRYcTkjTVzrzuGrrTxELsd74DidXhcmwYNynRxskdLFQ0DRnUMRehZc+
-	+ZiorAgBaAVORfxICrjtr0SRiwGI8QSqwUvY2z7iuzepejg3AMy3T6egV1AYDZeuzNFk
-	1V2Q==
-Received: by 10.216.69.196 with SMTP id n46mr1988482wed.192.1342974983630;
-	Sun, 22 Jul 2012 09:36:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.18.98 with HTTP; Sun, 22 Jul 2012 09:35:53 -0700 (PDT)
+	Sun, 22 Jul 2012 18:50:16 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 22 Jul 2012 09:38:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.71,315,1320652800"; d="scan'208";a="125455757"
+Received: from unknown (HELO helios.localnet) ([10.252.121.14])
+	by AZSMGA002.ch.intel.com with ESMTP; 22 Jul 2012 09:38:48 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 22 Jul 2012 17:38:47 +0100
+Message-ID: <1395791.kLPUUXTScb@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.8.4 (Linux/3.2.0-26-generic-pae; KDE/4.8.4; i686; ; )
 In-Reply-To: <jug959$3gr$1@dough.gmane.org>
 References: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
 	<jug959$3gr$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 22 Jul 2012 09:35:53 -0700
-Message-ID: <CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,17 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 16:47:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 22 Jul 2012 16:50:16 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Sun, Jul 22, 2012 at 12:12 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->
+On Sunday 22 July 2012 09:12:41 Koen Kooi wrote:
+> Op 21-07-12 21:41, Khem Raj schreef:
+> > In an effort to use meta-systemd without meta-oe layer (purely on
+> > OE-Core) I ran into these classes not being there in OE-Core
+> 
 > The vala one isn't needed anymore, the GUI bits are a seperate project now,
-> but the gitpkgv needs to stay. We can symlink the class from meta-oe into
-> meta-systemd
+> but the gitpkgv needs to stay. 
 
-why do we need gitpkgv it creates unnecessary dependency on meta-oe it
-would be better
-to avoid it. What are downsides of not using gitpkgv ?
+Why? I can't see how gitpkgv has anything to do with systemd...
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
