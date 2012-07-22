@@ -1,40 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1St0Qt-0004Ly-1F
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 19:59:07 +0200
-Received: by weyr6 with SMTP id r6so3572997wey.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 10:47:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=mpET81Y4lLVjKupzxaUv0UaxJT2++5Q1ykwZUzqEbSE=;
-	b=jQEbn4LPXx0Q80fB9tm1yT+jV5X4yPxlzqGSKCxKEvEJ8WTaqcUYD3lgb9bEvEFFvG
-	4kPiNQ3ORVDnkxgRKzzUc8FXUr9C7Gzsu4oG0sTxF9WpMhb34zFgbk6WzbDAkN3EbzDl
-	h/LWd4+ySsVpvk+rEZ0iAAS96PDl99N6MOvP5y0hAAkmaW7rLWFw9Gsj+yCromuhPp7x
-	9mKfNH4fpKBgDC2qoxd0dE6b6hStUvBbriASbsXaXiZ9miG4NsqmI/bQzTtbOw79ivI4
-	F5LgheXuhzpvzOwi0+q2t9IxKXmSixYUVH//9n++rQNx1CwKEVSaSriQqFI/tghqCpLl
-	FUKA==
-Received: by 10.180.84.164 with SMTP id a4mr29859454wiz.12.1342979261074;
-	Sun, 22 Jul 2012 10:47:41 -0700 (PDT)
-Received: from [10.46.148.181] ([92.69.213.29])
-	by mx.google.com with ESMTPS id o2sm18051371wiz.11.2012.07.22.10.47.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 22 Jul 2012 10:47:40 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1St0S4-0004sT-BV for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Jul 2012 20:00:20 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1St0Gz-00006d-Si for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Jul 2012 19:48:53 +0200
+Received: from 92.69.213.29 ([92.69.213.29])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2012 19:48:53 +0200
+Received: from koen by 92.69.213.29 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2012 19:48:53 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1395791.kLPUUXTScb@helios>
-Date: Sun, 22 Jul 2012 19:47:33 +0200
-Message-Id: <0F6C3E71-2229-48DF-9417-E4F798C19D64@dominion.thruhere.net>
+Date: Sun, 22 Jul 2012 19:48:29 +0200
+Message-ID: <juhedn$q1a$1@dough.gmane.org>
 References: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
-	<jug959$3gr$1@dough.gmane.org> <1395791.kLPUUXTScb@helios>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQnQyF32diL4QRj8Q+uP/kSb8+drFeYeV7+ADofNZhUwQAZkkfHvNQiZBAdHkLVJI/rXWFQ1
-Cc: openembedded-devel@lists.openembedded.org
+	<jug959$3gr$1@dough.gmane.org>
+	<CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: 92.69.213.29
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:13.0) Gecko/20120614 Thunderbird/13.0.1
+In-Reply-To: <CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
+X-Enigmail-Version: 1.4.2
 Subject: Re: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,27 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 17:59:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 22 Jul 2012 18:00:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 22-07-12 18:35, Khem Raj schreef:
+> On Sun, Jul 22, 2012 at 12:12 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>> 
+>> The vala one isn't needed anymore, the GUI bits are a seperate project
+>> now, but the gitpkgv needs to stay. We can symlink the class from
+>> meta-oe into meta-systemd
+> 
+> why do we need gitpkgv it creates unnecessary dependency on meta-oe it 
+> would be better to avoid it. What are downsides of not using gitpkgv ?
+
+Right now we automatically get the proper version, removing gitpkgv would be
+a regression. Why not symlink the class into meta-systemd?
 
 
-Op 22 jul. 2012, om 18:38 heeft Paul Eggleton het volgende geschreven:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-> On Sunday 22 July 2012 09:12:41 Koen Kooi wrote:
->> Op 21-07-12 21:41, Khem Raj schreef:
->>> In an effort to use meta-systemd without meta-oe layer (purely on
->>> OE-Core) I ran into these classes not being there in OE-Core
->>=20
->> The vala one isn't needed anymore, the GUI bits are a seperate =
-project now,
->> but the gitpkgv needs to stay.=20
->=20
-> Why? I can't see how gitpkgv has anything to do with systemd...
+iD8DBQFQDDztMkyGM64RGpERAvIzAJ41okNJo/onPU8pmnyBj+Rfge4KMACfUFBU
+0rD0duRR+5QpyI9094ommXc=
+=oJ9z
+-----END PGP SIGNATURE-----
 
-Because it's used to set PV automatically:
-
-inherit gitpkgv
-PKGV =3D "v${GITPKGVTAG}"=
 
 
