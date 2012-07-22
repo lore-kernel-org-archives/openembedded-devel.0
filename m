@@ -1,39 +1,32 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1SswXf-0003TP-Ls
+	(envelope-from <raj.khem@gmail.com>) id 1SszJt-00021x-F3
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Jul 2012 15:49:52 +0200
-Received: by pbbrq2 with SMTP id rq2so8198647pbb.6
+	Sun, 22 Jul 2012 18:47:49 +0200
+Received: by wgbdr1 with SMTP id dr1so4751915wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2012 06:38:25 -0700 (PDT)
+	Sun, 22 Jul 2012 09:36:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:mime-version:content-type:subject:date:in-reply-to:to
-	:references:message-id:x-mailer;
-	bh=a/EJ5EC/V4w7qdTqE2CwXxlelBQ2EOh5BnDD3kaM9qw=;
-	b=yyK2Qds5pTGSbmMr+dBk9p4jBou1320dVonYZmCdCtGS2OxNB4P58aMJw8pyuaGHNm
-	cFPnMLtNEkzJ82iYDYt0G0rycxV756Zz76TB0wnULX5lACHO4eNrufxelfxjsUylN7Jr
-	2+ReMbHb2K3JfMf6Mcn7vhDMpicn40GJQdZ8koh+BJFPRRr//3rrwTqgAwys9XOppPkv
-	/dYFxPNq/p4v2GycXLaYmNo7DS5MIezlLcfWDHJuxOqYriDEEKSGWK9L/4ch9J2lnboL
-	sNAaPBk+F0sLuVU3dQ0Q64C63FXFK0+QgiPoagsWB5Bg+u2CnEtKyOPDcCnoU+w+UX4i
-	/Ang==
-Received: by 10.68.217.226 with SMTP id pb2mr27770483pbc.105.1342964305358;
-	Sun, 22 Jul 2012 06:38:25 -0700 (PDT)
-Received: from [192.168.1.101] ([94.205.108.162])
-	by mx.google.com with ESMTPS id oi5sm7941189pbb.39.2012.07.22.06.38.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 22 Jul 2012 06:38:24 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-Mime-Version: 1.0 (Apple Message framework v1278)
-Date: Sun, 22 Jul 2012 17:38:19 +0400
-In-Reply-To: <6CD04095-FB33-40CA-9417-CF4208642BDC@gmail.com>
-To: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
-	OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-References: <6CD04095-FB33-40CA-9417-CF4208642BDC@gmail.com>
-Message-Id: <36A04E8C-1673-4B9A-BA52-8486937FDD5D@gmail.com>
-X-Mailer: Apple Mail (2.1278)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: cmake-native-2.8.5-r2.1 compile error
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=OxVl5Y5+49QT02LcYNXULfAr0L4j8+bY8D7zgYgtync=;
+	b=0Qx/vZ6QmQ9mbfo96CiUh1W4kAQVt4+JyfztDk5ZtH3eTTcDbccsodRYS6KHq4JR6l
+	V4oWfli+sQwzpedoJOwgcWIBurCpb8gNKW38ZVCIK7i9v8IC+iwObsifgwo9Cp8tYJiF
+	pxV8NwFJw/G8VuTZ/axbfknnJOEofHHXUuHPp5RHBwfnMeSXazHOf3PiB5xMbNaC64JX
+	NJhFJijo6I4gkRYcTkjTVzrzuGrrTxELsd74DidXhcmwYNynRxskdLFQ0DRnUMRehZc+
+	+ZiorAgBaAVORfxICrjtr0SRiwGI8QSqwUvY2z7iuzepejg3AMy3T6egV1AYDZeuzNFk
+	1V2Q==
+Received: by 10.216.69.196 with SMTP id n46mr1988482wed.192.1342974983630;
+	Sun, 22 Jul 2012 09:36:23 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.194.18.98 with HTTP; Sun, 22 Jul 2012 09:35:53 -0700 (PDT)
+In-Reply-To: <jug959$3gr$1@dough.gmane.org>
+References: <1342899684-4450-1-git-send-email-raj.khem@gmail.com>
+	<jug959$3gr$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 22 Jul 2012 09:35:53 -0700
+Message-ID: <CAMKF1soBGKfELcPqLALt2SeZzvp6keA2DwpumoCQinPqo1j=PQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-systemd][PATCH] systemd_git.bb: Dont inherit vala and gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 13:49:52 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 22 Jul 2012 16:47:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+On Sun, Jul 22, 2012 at 12:12 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>
+> The vala one isn't needed anymore, the GUI bits are a seperate project now,
+> but the gitpkgv needs to stay. We can symlink the class from meta-oe into
+> meta-systemd
 
-On Jul 22, 2012, at 6:32 AM, Elvis Dowson wrote:
+why do we need gitpkgv it creates unnecessary dependency on meta-oe it
+would be better
+to avoid it. What are downsides of not using gitpkgv ?
 
-> With the latest update to the yocto repos, as of today, I get a =
-compile error for cmake-native-2.8.5-r2.1, when trying to bitbake =
-core-image-sato.=20
->=20
-> This had also happened yesterday, when I tried to build =
-core-image-sato, from the master branch, which was updated 2 to 3 weeks =
-ago. I tried with the latest updates, and still the error persists.=20
->=20
->=20
-<snip>
-> ERROR: oe_runmake failed
-> ERROR: Function failed: do_compile (see =
-/tool/yocto/poky/build/tmp/work/x86_64-linux/cmake-native-2.8.5-r2.1/temp/=
-log.do_compile.60499 for further information)
-
-After updating the cmake and cmake-native recipes to v2.8.8, it compiles =
-cleanly on Ubuntu 12.04 LTS 64-bit. I've sent patches to the =
-openembedded developer mailing list.
-
-
-Best regards,
-
-Elvis Dowson=
 
