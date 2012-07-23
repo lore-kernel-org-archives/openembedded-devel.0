@@ -1,26 +1,37 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgw@linux.intel.com>) id 1StNYC-000684-8y
+	(envelope-from <tom.rini@gmail.com>) id 1StOn3-0008S8-1C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jul 2012 20:40:12 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 23 Jul 2012 11:28:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="170284943"
-Received: from unknown (HELO [10.255.12.231]) ([10.255.12.231])
-	by orsmga001.jf.intel.com with ESMTP; 23 Jul 2012 11:28:43 -0700
-Message-ID: <500D97DB.5050007@linux.intel.com>
-Date: Mon, 23 Jul 2012 11:28:43 -0700
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:13.0) Gecko/20120615 Thunderbird/13.0.1
-MIME-Version: 1.0
+	Mon, 23 Jul 2012 21:59:37 +0200
+Received: by yhjj56 with SMTP id j56so5450377yhj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jul 2012 12:48:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=1T5EZdjtb8kQR5JEGv91a/ZXsDYiP+7EaPRqkL3MvtQ=;
+	b=pEZ/neL+zNa15iqk/q5a7BrBK2DKomiaavt/fgEdPt5ky7LgsblEJzKmNmANDChiLy
+	+5N/c/8r6bKz8Xc1V6rJVKD0Eb0W3IVHBQQ5pOTqemISa7aLxlplTunMEE/b5ADNg/Dj
+	li0tPQ3nVIQIl92+Fb+RCTOIqIjVuXe88Pr0/UZgb/B1Dz+lomerMfXkZMR4OdDoOMgy
+	USpcA7eU1SNYBnV1FRPw7Qnm7dwx/0vd7sW+faEltFeU5tvkVwrI55vrrq3fJPdTOba2
+	oObDrGO30abGwaLXizPufa7U++SZ9491ajhJhKogWcmy8VWJyGa+DBswrKhups2mBX9I
+	nJWA==
+Received: by 10.68.229.2 with SMTP id sm2mr37922559pbc.57.1343072888718;
+	Mon, 23 Jul 2012 12:48:08 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:d:eba:3d27:bb22:b95c:5526])
+	by mx.google.com with ESMTPS id hw6sm10526515pbc.73.2012.07.23.12.48.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 Jul 2012 12:48:08 -0700 (PDT)
+Date: Mon, 23 Jul 2012 12:48:07 -0700
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <fahad.usman@gmail.com>
-	<1343037078-9760-1-git-send-email-fahad.usman@gmail.com>
-In-Reply-To: <1343037078-9760-1-git-send-email-fahad.usman@gmail.com>
-Cc: Fahad Usman <fahad_usman@mentor.com>
-Subject: Re: [OE-core] [PATCH] readline: add missing macros in acinclude.m4
+Message-ID: <20120723194807.GB8985@bill-the-cat>
+References: <cover.1342677797.git.apelete@seketeli.net>
+MIME-Version: 1.0
+In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011.03-maintenance][PATCH 0/9] Pull request 20120719
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,96 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2012 18:40:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Jul 2012 19:59:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 07/23/2012 02:51 AM, fahad.usman@gmail.com wrote:
-> From: Fahad Usman <fahad_usman@mentor.com>
->
-> some bash macros are missing from acinclude.m4 which are added up-stream. This
-> wasn't actually breaking anything but but it was causing the configure script
-> to not run all the tests it's intended to run. (by Christopher Larson)
->
-> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
-> ---
->   meta/recipes-core/readline/files/acinclude.m4 |   56 +++++++++++++++++++++++++
->   1 files changed, 56 insertions(+), 0 deletions(-)
->
-You would need a PR bump in the readline .bb files, did you test this 
-with the 5.2 version and the 6.2 version?
+On Thu, Jul 19, 2012 at 07:20:31PM +0200, Apelete Seketeli wrote:
 
-If this was pulled from the 6.2 version, then you will need to also 
-modify the 5.2 bb file to use the older version of the macro file to not 
-do any gplv3 contamination, please use caution here, we need to ensure 
-correct separation.
+> Hello,
+> 
+> The patches that come as a follow-up of this message fix issues found
+> while building muffinman-image on top of the 2011.03-maintenance
+> branch.
+> These modifications were tested by successfully building
+> muffinman-image from scratch on a Debian Squeeze host.
+> Please pull into 2011.03-maintenance branch.
+> 
+> The following changes since commit f9611c025109a3e0d6cebf12f49ae24c97759c09:
+> 
+>   psplash: convert from svn.o-hand.com to git.yoctoproject.org (2012-07-04 22:34:04 +0200)
+> 
+> are available in the git repository at:
+> 
+>   git://seketeli.net/~apelete/oe.git muffinman-image-fix
 
-Sau!
-> diff --git a/meta/recipes-core/readline/files/acinclude.m4 b/meta/recipes-core/readline/files/acinclude.m4
-> index 8a45f99..c30a7d3 100644
-> --- a/meta/recipes-core/readline/files/acinclude.m4
-> +++ b/meta/recipes-core/readline/files/acinclude.m4
-> @@ -1813,3 +1813,59 @@ AC_MSG_RESULT($ac_cv_rl_version)
->
->   fi
->   ])
-> +
-> +AC_DEFUN(BASH_FUNC_CTYPE_NONASCII,
-> +[
-> +AC_MSG_CHECKING(whether the ctype macros accept non-ascii characters)
-> +AC_CACHE_VAL(bash_cv_func_ctype_nonascii,
-> +[AC_TRY_RUN([
-> +#ifdef HAVE_LOCALE_H
-> +#include <locale.h>
-> +#endif
-> +#include <stdio.h>
-> +#include <ctype.h>
-> +
-> +main(c, v)
-> +int	c;
-> +char	*v[];
-> +{
-> +	char	*deflocale;
-> +	unsigned char x;
-> +	int	r1, r2;
-> +
-> +#ifdef HAVE_SETLOCALE
-> +	/* We take a shot here.  If that locale is not known, try the
-> +	   system default.  We try this one because '\342' (226) is
-> +	   known to be a printable character in that locale. */
-> +	deflocale = setlocale(LC_ALL, "en_US.ISO8859-1");
-> +	if (deflocale == 0)
-> +		deflocale = setlocale(LC_ALL, "");
-> +#endif
-> +
-> +	x = '\342';
-> +	r1 = isprint(x);
-> +	x -= 128;
-> +	r2 = isprint(x);
-> +	exit (r1 == 0 || r2 == 0);
-> +}
-> +], bash_cv_func_ctype_nonascii=yes, bash_cv_func_ctype_nonascii=no,
-> +   [AC_MSG_WARN(cannot check ctype macros if cross compiling -- defaulting to no)
-> +    bash_cv_func_ctype_nonascii=no]
-> +)])
-> +AC_MSG_RESULT($bash_cv_func_ctype_nonascii)
-> +if test $bash_cv_func_ctype_nonascii = yes; then
-> +AC_DEFINE(CTYPE_NON_ASCII)
-> +fi
-> +])
-> +
-> +AC_DEFUN(BASH_TYPE_SIG_ATOMIC_T,
-> +[AC_CACHE_CHECK([for sig_atomic_t in signal.h], ac_cv_have_sig_atomic_t,
-> +[AC_TRY_LINK([
-> +#include <signal.h>
-> +],[ sig_atomic_t x; ],
-> +ac_cv_have_sig_atomic_t=yes, ac_cv_have_sig_atomic_t=no)])
-> +if test "$ac_cv_have_sig_atomic_t" = "no"
-> +then
-> +    AC_CHECK_TYPE(sig_atomic_t,int)
-> +fi
-> +])
->
+I have a concern right now.  It is that 9160263 was reported to have
+changed the behavior slightly such that some SDK tasks/images now
+fail.  So..
 
+[snip]
+>   opkg-utils: bump SRCREV to keep python2.6 compatibility
+
+Is a little concerning.  Denys, can you point to an upstream task /
+image that fails currently?  Thanks!
+
+-- 
+Tom
 
 
