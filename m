@@ -1,34 +1,35 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from ams-iport-3.cisco.com ([144.254.224.146])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1StDvt-0004iq-U4
+	(envelope-from <mertsas@cisco.com>) id 1StESq-0005r5-Io
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jul 2012 10:24:02 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1StDkq-00083p-V3>; Mon, 23 Jul 2012 10:12:37 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1StDkq-0007jY-MD>; Mon, 23 Jul 2012 10:12:36 +0200
-Received: from heinold by internal andorra.imp.fu-berlin.de with local (Exim
-	4.72) id 1StDkp-0000tW-JQ
+	Mon, 23 Jul 2012 10:58:04 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=mertsas@cisco.com; l=619; q=dns/txt;
+	s=iport; t=1343033200; x=1344242800;
+	h=message-id:date:from:mime-version:to:subject:
+	content-transfer-encoding;
+	bh=H1O33vLiUGSwsnbfOVLrMjoL6rmSFYowDGv6qWaE9oo=;
+	b=Y2H/MqjRlbOEgSUqbgF1ieXs+uEtUwkZ3HUGQyxqo6+pF4isE28OR26z
+	zgxuVfYslJqnWxB/HgKz0fxVQerMSypTHomf95qMZF9SklDt2beW1S99y
+	xghnEZUdGJJuY8sPhmQ6M6pHVE5R4oUwGu5rtVvbEDPiBCDqiyL2SXZuw w=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Av0EAAkODVCQ/khM/2dsb2JhbABEuTWBB4I5AYEiNAJZCAEBHodrnR2BKJ8UjwSDHAOVSYVbiEyBZoJh
+X-IronPort-AV: E=Sophos;i="4.77,638,1336348800"; 
+   d="scan'208";a="6823140"
+Received: from ams-core-3.cisco.com ([144.254.72.76])
+	by ams-iport-3.cisco.com with ESMTP; 23 Jul 2012 08:46:37 +0000
+Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
+	by ams-core-3.cisco.com (8.14.5/8.14.5) with ESMTP id q6N8kbNs031808
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2012 10:12:35 +0200
-Date: Mon, 23 Jul 2012 10:12:35 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120723081235.GA2356@mi.fu-berlin.de>
-References: <1343001752-19708-1-git-send-email-raj.khem@gmail.com>
-	<1343001752-19708-2-git-send-email-raj.khem@gmail.com>
+	Mon, 23 Jul 2012 08:46:37 GMT
+Message-ID: <500D0F6D.70001@cisco.com>
+Date: Mon, 23 Jul 2012 10:46:37 +0200
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.5) Gecko/20120628 Thunderbird/10.0.5
 MIME-Version: 1.0
-In-Reply-To: <1343001752-19708-2-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
-Subject: Re: [meta-java][PATCH 2/2] openjdk-6: Fix cross compilation for e5500 machines
+To: openembedded-devel@lists.openembedded.org
+Subject: Moving pkg.m4 to the x86 sysroot instead of arm sysroot in toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,129 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2012 08:24:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Jul 2012 08:58:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Jul 22, 2012 at 05:02:32PM -0700, Khem Raj wrote:
-> This is only way for compile for now since qemu can not
-> run the sizers binary for e5500 machines. It segfaults
-> so we disable generating sizes and also xawt and jawt
-> which depends on sizers, this lets jre to cross compile
-> for ppc/e5500
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../icedtea-jdk-sizers-crosscompile-hack.patch     |   61 ++++++++++++++++++++
->  recipes-core/openjdk/openjdk-6-release-6b24.inc    |   13 ++++-
->  2 files changed, 73 insertions(+), 1 deletions(-)
->  create mode 100644 recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
-> 
-> diff --git a/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch b/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
-> new file mode 100644
-> index 0000000..54d6a19
-> --- /dev/null
-> +++ b/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
-> @@ -0,0 +1,61 @@
-> +Disable xawt and jawt along with sizes generation which does not work well if
-> +you cant generated sizes in cross env. So for architectures which dont have
-> +working qemu this is an option
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +Upstream-Status: Inappropriate [Cross-compile specific hack]
-> +
-> +--- openjdk/jdk/make/sun/xawt/Makefile.khem	2012-07-21 23:54:47.396405922 -0700
-> ++++ openjdk/jdk/make/sun/xawt/Makefile	2012-07-21 23:55:52.032405922 -0700
-> +@@ -245,18 +245,19 @@
-> + 	    $(SIZER_DIR) $(XLIBTYPES) "sizer" $(subst .,,$(suffix $(basename $@)))
-> + 
-> + $(SIZES): $(SIZERS)
-> +-	@if [ "$(DOHACK)$@" = "true$(PREDEFINED_SIZES)" ]; then \
-> +-	    $(ECHO) COPYING $(PREDEFINED_SIZES_TMPL) into $@; \
-> +-	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
-> +-	    $(CHMOD) +w $@;\
-> +-	else	\
-> +-	    $(ECHO) GENERATING $@; \
-> +-	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
-> +-	fi
-> +-	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
-> +-	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
-> +-	    $(DIFF) $@ $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
-> +-	fi	
-> ++	touch $(SIZES)
-> ++#	@if [ "$(DOHACK)$@" = "true$(PREDEFINED_SIZES)" ]; then \
-> ++#	    $(ECHO) COPYING $(PREDEFINED_SIZES_TMPL) into $@; \
-> ++#	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
-> ++#	    $(CHMOD) +w $@;\
-> ++#	else	\
-> ++#	    $(ECHO) GENERATING $@; \
-> ++#	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
-> ++#	fi
-> ++#	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
-> ++#	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
-> ++#	    $(DIFF) $@ $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
-> ++#	fi	
-> + 
-> + $(TEMPDIR)/.gen.wrappers: $(SIZES) $(WRAPPER_GENERATOR_CLASS) $(XLIBTYPES)
-> + 	$(BOOT_JAVA_CMD) -cp $(WRAPPER_GENERATOR_TEMPDIR) WrapperGenerator \
-> +--- openjdk/jdk/make/sun/Makefile.khem	2011-11-14 14:11:40.000000000 -0800
-> ++++ openjdk/jdk/make/sun/Makefile	2012-07-22 00:42:04.980409296 -0700
-> +@@ -50,7 +50,7 @@
-> +     MOTIF_SUBDIRS   = motif12 motif21
-> +   endif
-> +   HEADLESS_SUBDIR = headless
-> +-  XAWT_SUBDIR     = xawt
-> ++  XAWT_SUBDIR     =
-> + endif
-> + 
-> + ifndef OPENJDK
-> +@@ -65,7 +65,7 @@
-> + 	  awt splashscreen $(XAWT_SUBDIR) $(MOTIF_SUBDIRS) \
-> +           $(HEADLESS_SUBDIR) $(DGA_SUBDIR) \
-> + 	  font jpeg cmm applet rmi beans $(JDBC_SUBDIR) \
-> +-	  jawt text nio launcher management $(ORG_SUBDIR) \
-> ++	  text nio launcher management $(ORG_SUBDIR) \
-> +           native2ascii serialver tools jconsole
-> + 
-> + all build clean clobber::
-> diff --git a/recipes-core/openjdk/openjdk-6-release-6b24.inc b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-> index b867fb3..1da7ffb 100644
-> --- a/recipes-core/openjdk/openjdk-6-release-6b24.inc
-> +++ b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-> @@ -83,7 +83,12 @@ ICEDTEAPATCHES = "\
->          file://icedtea-zero-hotspotfix.patch;apply=no \
->          file://icedtea-jdk-powerpc-atomic64.patch;apply=no \
->  	"
-> -
-> +ICEDTEAPATCHES_append_e5500-64b = " \
-> +        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-> +	"
-> +ICEDTEAPATCHES_append_e5500 = " \
-> +        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-> +	"
->  ICEDTEAPATCHES_append_libc-uclibc = " \
->          file://icedtea-hotspot-isfinte.patch;apply=no \
->          file://icedtea-hotspot-glibc-version.patch;apply=no \
-> @@ -119,5 +124,11 @@ DISTRIBUTION_PATCHES_append_libc-uclibc = "\
->          patches/icedtea-jdk-unpack-uclibc.patch \
->  	patches/icedtea-hotspot-dlvsym-uclibc.patch \
->          "
-> +DISTRIBUTION_PATCHES_append_e5500-64b = " \
-> +       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-> +       "
->  
-> +DISTRIBUTION_PATCHES_append_e5500 = " \
-> +       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-> +       "
->  export DISTRIBUTION_PATCHES
-> -- 
-> 1.7.5.4
-> 
+Hi.
 
-Hi Khem,
+When building meta-toolchain, pkg.m4 is put in the arm sysroot of the
+toolchain, instead of the x86 sysroot where it belongs. pkg-config is in
+the x86 directory, and when it is in the arm directory, we need to hack
+the aclocal flags to point to it for stuff to compile.
 
-did you make a runtime test?
+I have tried a few things, like adding pkgconfig-nativesdk to the
+task-sdk-host-nativesdk and pkgconfig to task-core-standalone-sdk. From
+my understanding, the former should populate the x86 directory, but
+obviously it didn't. Any ideas to what I can do to fix this? It would be
+greatly appreciated.
 
-Bye henning
+Best regard
+Martin Ertsaas
 
 
