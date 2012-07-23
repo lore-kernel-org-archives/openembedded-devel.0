@@ -1,37 +1,35 @@
-Received: from ams-iport-4.cisco.com ([144.254.224.147])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1StFMw-0006fq-1z
+	(envelope-from <fahad.usman@gmail.com>) id 1StFW9-0007Rk-DN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Jul 2012 11:56:02 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=mertsas@cisco.com; l=1032; q=dns/txt;
-	s=iport; t=1343036677; x=1344246277;
-	h=message-id:date:from:mime-version:to:subject:references:
-	in-reply-to:content-transfer-encoding;
-	bh=kY0TRq31LoCldsdWTRKG0f1UlcF77gDoamHtTwS4sTE=;
-	b=KZBqKVqb/vFYJIeOsVQtYr7A3Awjf2FzD4UYrMm56JtXyMGKtbSA2dXB
-	CQnSc8smX17PyMElM6APpd3C2kjq5KLij1B4+SQWP/iwLtkzsSs0m0Tbn
-	fvu0bGxUAhLLwOz8DbNzS4EvT+4Pi8+btMeGXABtoehkIawkQ6+Gh+Cn3 Q=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Av8EANYbDVCQ/khL/2dsb2JhbABFuTWBB4IgAQEBBAEBAQ8BHwE7ChELGAkWDwkDAgECARUBLxMGAgEBHodrC546nx2PBIMcA5MdgiyBFIRHiEyBZoJh
-X-IronPort-AV: E=Sophos;i="4.77,638,1336348800"; 
-   d="scan'208";a="6829071"
-Received: from ams-core-2.cisco.com ([144.254.72.75])
-	by ams-iport-4.cisco.com with ESMTP; 23 Jul 2012 09:43:30 +0000
-Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-2.cisco.com (8.14.5/8.14.5) with ESMTP id q6N9hU1H026336
+	Mon, 23 Jul 2012 12:05:34 +0200
+Received: by yhjj56 with SMTP id j56so4832759yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2012 09:43:30 GMT
-Message-ID: <500D1CC2.8090502@cisco.com>
-Date: Mon, 23 Jul 2012 11:43:30 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.5) Gecko/20120628 Thunderbird/10.0.5
-MIME-Version: 1.0
+	Mon, 23 Jul 2012 02:54:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=ecJ4hZjfdbbFC1qKOtCcdLaSy+p7CEUSujICt86zdeY=;
+	b=C7lEbEcbUX8zuH4ombpqFEifv9uKzKs6i5dAuWEf3KxYK8BRMZmWMjbtp32Wqm4yAP
+	t/Iy2Hr8LGSQaBiXD2b2ONUQFRdrDGRljF+/50o3a9l6mCi3W1r5X7NUOUnIbrRdetjq
+	9OVxXeM34YdULcbIREpiYOZjTlGA2d6ndO+oyybLm4Z7+sCEViHO8FfGRj0YArFDeu/3
+	dk/jWwg92fLd9XA8NgOoK41muzg30vFssx+s+AUy4LKHcv6SoI4kGNASF576NqknwraQ
+	OmsS0L4ecuopCUBWI3DPrVSz2KtF0rPiAIr0k4BPKfLv1w7YyBOm3JBgqSkcn4dY8GME
+	gs1A==
+Received: by 10.66.75.225 with SMTP id f1mr29433980paw.35.1343037245823;
+	Mon, 23 Jul 2012 02:54:05 -0700 (PDT)
+Received: from localhost.localdomain ([110.93.212.98])
+	by mx.google.com with ESMTPS id tj4sm9664262pbc.33.2012.07.23.02.54.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 Jul 2012 02:54:04 -0700 (PDT)
+From: fahad.usman@gmail.com
 To: openembedded-devel@lists.openembedded.org
-References: <500D0F6D.70001@cisco.com>
-In-Reply-To: <500D0F6D.70001@cisco.com>
-Subject: Re: Moving pkg.m4 to the x86 sysroot instead of arm sysroot in toolchain
+Date: Mon, 23 Jul 2012 14:51:18 +0500
+Message-Id: <1343037078-9760-1-git-send-email-fahad.usman@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <fahad.usman@gmail.com>
+References: <fahad.usman@gmail.com>
+Cc: Fahad Usman <fahad_usman@mentor.com>
+Subject: [OE-core] [PATCH] readline: add missing macros in acinclude.m4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +43,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2012 09:56:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Jul 2012 10:05:34 -0000
 
-The issue was quite simple. My thoughts were correct, but should add
-pkgconfig-nativesdk-dev to task-sdk-host-nativesdk.
+From: Fahad Usman <fahad_usman@mentor.com>
 
-- Martin
+some bash macros are missing from acinclude.m4 which are added up-stream. This
+wasn't actually breaking anything but but it was causing the configure script
+to not run all the tests it's intended to run. (by Christopher Larson)
 
-On 07/23/12 10:46, Martin Ertsås wrote:
-> Hi.
->
-> When building meta-toolchain, pkg.m4 is put in the arm sysroot of the
-> toolchain, instead of the x86 sysroot where it belongs. pkg-config is in
-> the x86 directory, and when it is in the arm directory, we need to hack
-> the aclocal flags to point to it for stuff to compile.
->
-> I have tried a few things, like adding pkgconfig-nativesdk to the
-> task-sdk-host-nativesdk and pkgconfig to task-core-standalone-sdk. From
-> my understanding, the former should populate the x86 directory, but
-> obviously it didn't. Any ideas to what I can do to fix this? It would be
-> greatly appreciated.
->
-> Best regard
-> Martin Ertsaas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ meta/recipes-core/readline/files/acinclude.m4 |   56 +++++++++++++++++++++++++
+ 1 files changed, 56 insertions(+), 0 deletions(-)
+
+diff --git a/meta/recipes-core/readline/files/acinclude.m4 b/meta/recipes-core/readline/files/acinclude.m4
+index 8a45f99..c30a7d3 100644
+--- a/meta/recipes-core/readline/files/acinclude.m4
++++ b/meta/recipes-core/readline/files/acinclude.m4
+@@ -1813,3 +1813,59 @@ AC_MSG_RESULT($ac_cv_rl_version)
+ 
+ fi
+ ])
++
++AC_DEFUN(BASH_FUNC_CTYPE_NONASCII,
++[
++AC_MSG_CHECKING(whether the ctype macros accept non-ascii characters)
++AC_CACHE_VAL(bash_cv_func_ctype_nonascii,
++[AC_TRY_RUN([
++#ifdef HAVE_LOCALE_H
++#include <locale.h>
++#endif
++#include <stdio.h>
++#include <ctype.h>
++
++main(c, v)
++int	c;
++char	*v[];
++{
++	char	*deflocale;
++	unsigned char x;
++	int	r1, r2;
++
++#ifdef HAVE_SETLOCALE
++	/* We take a shot here.  If that locale is not known, try the
++	   system default.  We try this one because '\342' (226) is
++	   known to be a printable character in that locale. */
++	deflocale = setlocale(LC_ALL, "en_US.ISO8859-1");
++	if (deflocale == 0)
++		deflocale = setlocale(LC_ALL, "");
++#endif
++
++	x = '\342';
++	r1 = isprint(x);
++	x -= 128;
++	r2 = isprint(x);
++	exit (r1 == 0 || r2 == 0);
++}
++], bash_cv_func_ctype_nonascii=yes, bash_cv_func_ctype_nonascii=no,
++   [AC_MSG_WARN(cannot check ctype macros if cross compiling -- defaulting to no)
++    bash_cv_func_ctype_nonascii=no]
++)])
++AC_MSG_RESULT($bash_cv_func_ctype_nonascii)
++if test $bash_cv_func_ctype_nonascii = yes; then
++AC_DEFINE(CTYPE_NON_ASCII)
++fi
++])
++
++AC_DEFUN(BASH_TYPE_SIG_ATOMIC_T,
++[AC_CACHE_CHECK([for sig_atomic_t in signal.h], ac_cv_have_sig_atomic_t,
++[AC_TRY_LINK([
++#include <signal.h>
++],[ sig_atomic_t x; ],
++ac_cv_have_sig_atomic_t=yes, ac_cv_have_sig_atomic_t=no)])
++if test "$ac_cv_have_sig_atomic_t" = "no"
++then
++    AC_CHECK_TYPE(sig_atomic_t,int)
++fi
++])
+-- 
+1.7.1
 
 
 
