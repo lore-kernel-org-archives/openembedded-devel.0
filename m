@@ -1,32 +1,37 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1StaGA-0004CI-KM
+	(envelope-from <martin.jansa@gmail.com>) id 1StaGG-0004CI-Ao
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2012 10:14:27 +0200
-Received: by bkcik5 with SMTP id ik5so4724362bkc.6
+	Tue, 24 Jul 2012 10:14:32 +0200
+Received: by mail-bk0-f47.google.com with SMTP id ik5so4724362bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2012 01:02:58 -0700 (PDT)
+	Tue, 24 Jul 2012 01:03:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=dVb3Nun8bfHW0euvFpOlpyrbVUGXbVYpeqiBfmtcmds=;
-	b=ZGLd6b4oOByQ9nz/U3B+vQJuxZM3D3jWDE8VwAPYqZ6FIawb87wmLaklPOWI6ufr4F
-	XV9PZ9ChWeiZqBuZpMoyhz9FQucEBz5V4DlQSVtXV7s7R8LOHVkZwsUgT0SQC9OlMRHd
-	riXq4SVP3obxl/eXfyFySjHxHOncRpsxEm0JlCfzAZ2s1MlVfMqCvFEPLsf6LqqnH8lQ
-	G3CHkImnpEsboBV1cnQeKs0rRy5ypG0cdOUEJODotjBVlJjj5z9g3BkeCcmB7bYC4ojp
-	5LhQJhRWgKSrKf7DAENdYz4rOrsGVz60pGdO11m1PgeQAYwzv8cXWl/8cqyeXXDVL/X0
-	ERIQ==
-Received: by 10.205.129.10 with SMTP id hg10mr9625172bkc.78.1343116978648;
-	Tue, 24 Jul 2012 01:02:58 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=Crt+DGZdZDaJtsmBg7Z1BXJDg/8awHxFIyVnSfFRqKw=;
+	b=pyWrh1gA0V0YUQq/JumZa7oWzm0HDsVyhqFC6XWywHzH+NAZVf9f5eKftyqjzCr+2n
+	25DyDS2F8ZHqphGEjqJPLF1NGhZhTlBDgfLHtZdZdks+MxYs5rKZsSAqroaoquzoPfyI
+	wZXKVzvgBaklWoQe9KfjtwCi3AgaFwa7LQyp0UVgCu1uZSjP0oYU7J2CZyRb06rvajx5
+	Eh7+kdMhJmFnX2NENCMlLleunHcdl12YvzImD+ayKXXXkCYIAoGRN5RoKDHp27J9ukLa
+	sP69tPonFqMQKVTr4NosPiZlNr9IBeRnGUL7Dbb1eWs5623gbvM4D9bxqeVUaWrwsAUa
+	zfYQ==
+Received: by 10.204.145.90 with SMTP id c26mr9593509bkv.34.1343116986486;
+	Tue, 24 Jul 2012 01:03:06 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fu8sm9653808bkc.5.2012.07.24.01.02.56
+	by mx.google.com with ESMTPS id he8sm9654419bkc.3.2012.07.24.01.03.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 24 Jul 2012 01:02:57 -0700 (PDT)
+	Tue, 24 Jul 2012 01:03:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jul 2012 10:02:53 +0200
-Message-Id: <cover.1343116924.git.Martin.Jansa@gmail.com>
+Date: Tue, 24 Jul 2012 10:02:54 +0200
+Message-Id: <b67c23022fb257be3b7fb06c4797389ce240f841.1343116924.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][PATCH 0/5] Fixes for oe-core changes
+In-Reply-To: <cover.1343116924.git.Martin.Jansa@gmail.com>
+References: <cover.1343116924.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1343116924.git.Martin.Jansa@gmail.com>
+References: <cover.1343116924.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/5] gpsd: inherit pythonnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2012 08:14:27 -0000
+X-List-Received-Date: Tue, 24 Jul 2012 08:14:32 -0000
 
-The following changes since commit 8f0de34919eb56f0e1e8565d024729cd8d7264a5:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb |    4 ++--
+ meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb |    4 ++--
+ meta-oe/recipes-navigation/gpsd/gpsd_git.bb |    4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-  cramfs_cvs.bb: fix compile step so it can be rerun without failing (2012-07-23 12:47:11 +0200)
-
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (5):
-  gpsd: inherit pythonnative
-  webkit-efl: inherit pythonnative
-  orbit2: cleanup thanks to new gtk-doc.bbclass
-  libbonoboui: cleanup thanks to new gtk-doc.bbclass
-  libgpewidget: cleanup thanks to new gtk-doc.bbclass
-
- meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |    4 +-
- .../recipes-gnome/bonobo/libbonoboui_2.24.3.bb     |    8 +-
- .../recipes-gnome/orbit2/orbit2-2.14.17/gtk-doc.m4 |   53 ------
- .../orbit2/orbit2-2.14.17/gtk-doc.make             |  173 --------------------
- meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb  |   19 +--
- .../libgpewidget/libgpewidget_0.117.bb             |    6 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb        |    4 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb        |    4 +-
- meta-oe/recipes-navigation/gpsd/gpsd_git.bb        |    4 +-
- 9 files changed, 20 insertions(+), 255 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/orbit2/orbit2-2.14.17/gtk-doc.m4
- delete mode 100644 meta-gnome/recipes-gnome/orbit2/orbit2-2.14.17/gtk-doc.make
-
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
+index 4f3d2d7..16fa739 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+ DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
+ PROVIDES = "virtual/gpsd"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+   file://0001-SConstruct-fix-DSO-build-for-ntpshm-garmin_monitor.patch \
+@@ -21,7 +21,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+ SRC_URI[md5sum] = "c01353459faa68834309109d4e868460"
+ SRC_URI[sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
+ 
+-inherit scons update-rc.d python-dir
++inherit scons update-rc.d python-dir pythonnative
+ 
+ INITSCRIPT_NAME = "gpsd"
+ INITSCRIPT_PARAMS = "defaults 35"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
+index 3cac186..1b1809f 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+ DEPENDS = "dbus dbus-glib ncurses python libusb1"
+ PROVIDES = "virtual/gpsd"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+@@ -22,7 +22,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+ SRC_URI[md5sum] = "e96881798a0ab67aa3cd5f3249f0e536"
+ SRC_URI[sha256sum] = "5ebb0b00c49421eb8fbead81342e5ce63e82065e5ff27da586f10e342b999171"
+ 
+-inherit scons update-rc.d python-dir
++inherit scons update-rc.d python-dir pythonnative
+ 
+ INITSCRIPT_NAME = "gpsd"
+ INITSCRIPT_PARAMS = "defaults 35"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+index 1c7d76f..8404ba1 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+ DEPENDS = "dbus dbus-glib ncurses python libusb1"
+ PROVIDES = "virtual/gpsd"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
+ 
+@@ -25,7 +25,7 @@ SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
+ "
+ S = "${WORKDIR}/git"
+ 
+-inherit scons update-rc.d python-dir
++inherit scons update-rc.d python-dir pythonnative
+ 
+ INITSCRIPT_NAME = "gpsd"
+ INITSCRIPT_PARAMS = "defaults 35"
 -- 
 1.7.8.6
 
