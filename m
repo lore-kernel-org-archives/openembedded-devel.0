@@ -1,37 +1,37 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1StaGG-0004CI-Ao
+	(envelope-from <martin.jansa@gmail.com>) id 1StaGP-0004DG-SH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2012 10:14:32 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so4724362bkc.6
+	Tue, 24 Jul 2012 10:14:41 +0200
+Received: by wgbdr1 with SMTP id dr1so6145921wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2012 01:03:06 -0700 (PDT)
+	Tue, 24 Jul 2012 01:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Crt+DGZdZDaJtsmBg7Z1BXJDg/8awHxFIyVnSfFRqKw=;
-	b=pyWrh1gA0V0YUQq/JumZa7oWzm0HDsVyhqFC6XWywHzH+NAZVf9f5eKftyqjzCr+2n
-	25DyDS2F8ZHqphGEjqJPLF1NGhZhTlBDgfLHtZdZdks+MxYs5rKZsSAqroaoquzoPfyI
-	wZXKVzvgBaklWoQe9KfjtwCi3AgaFwa7LQyp0UVgCu1uZSjP0oYU7J2CZyRb06rvajx5
-	Eh7+kdMhJmFnX2NENCMlLleunHcdl12YvzImD+ayKXXXkCYIAoGRN5RoKDHp27J9ukLa
-	sP69tPonFqMQKVTr4NosPiZlNr9IBeRnGUL7Dbb1eWs5623gbvM4D9bxqeVUaWrwsAUa
-	zfYQ==
-Received: by 10.204.145.90 with SMTP id c26mr9593509bkv.34.1343116986486;
-	Tue, 24 Jul 2012 01:03:06 -0700 (PDT)
+	bh=5GgXnHhAF91rK97bLyeCZYIS4piqV1tXftvzGauXths=;
+	b=pogMN6dpV7DM/Jo7U+b4JPStQMYcZUV0ZYLkjqJ4i2eoFcTgNFGzSWCiLx+g7dMZek
+	L1zai/VEAwXhdN9TzROFb/pCcUaVYnmvNNxv8BW3s64UeoW1DL9BMVoPUYXsLXKhiyjD
+	Naq0p+rgx7jTzxHniP4E+myoLLiBql2/IDWwnUt8mM8U7Pqx9JeEl9GDqGbwOnqUz9e8
+	t0xzhWK0IknyRPpqdzkKYVyiA83es3GgAvmsjOT1evdScZxwkcQIgADfCS2zjre4giWY
+	XDOxKoyQWZYXSvvikVhqD/RuH5w7wlV3KDPhmvM158rnsvWYVhE9+t6u1b6Aqben6FcU
+	X0zw==
+Received: by 10.180.105.6 with SMTP id gi6mr4661078wib.4.1343116994156;
+	Tue, 24 Jul 2012 01:03:14 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id he8sm9654419bkc.3.2012.07.24.01.03.04
+	by mx.google.com with ESMTPS id t8sm3135979wiy.3.2012.07.24.01.03.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 24 Jul 2012 01:03:05 -0700 (PDT)
+	Tue, 24 Jul 2012 01:03:13 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jul 2012 10:02:54 +0200
-Message-Id: <b67c23022fb257be3b7fb06c4797389ce240f841.1343116924.git.Martin.Jansa@gmail.com>
+Date: Tue, 24 Jul 2012 10:02:55 +0200
+Message-Id: <0bb57f740fc362b631725dfb281f047ba982ecc5.1343116924.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1343116924.git.Martin.Jansa@gmail.com>
 References: <cover.1343116924.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1343116924.git.Martin.Jansa@gmail.com>
 References: <cover.1343116924.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/5] gpsd: inherit pythonnative
+Subject: [meta-oe][PATCH 2/5] webkit-efl: inherit pythonnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,81 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2012 08:14:32 -0000
+X-List-Received-Date: Tue, 24 Jul 2012 08:14:41 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb |    4 ++--
- meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb |    4 ++--
- meta-oe/recipes-navigation/gpsd/gpsd_git.bb |    4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-index 4f3d2d7..16fa739 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
- PROVIDES = "virtual/gpsd"
+Conflicts:
+
+	meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+---
+ meta-efl/recipes-efl/webkit/webkit-efl_svn.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+index 0c490c3..7719212 100644
+--- a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
++++ b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+@@ -11,7 +11,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
  
--PR = "r3"
-+PR = "r4"
- 
- SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-   file://0001-SConstruct-fix-DSO-build-for-ntpshm-garmin_monitor.patch \
-@@ -21,7 +21,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
- SRC_URI[md5sum] = "c01353459faa68834309109d4e868460"
- SRC_URI[sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
- 
--inherit scons update-rc.d python-dir
-+inherit scons update-rc.d python-dir pythonnative
- 
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-index 3cac186..1b1809f 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
--PR = "r3"
-+PR = "r4"
- 
- DEFAULT_PREFERENCE = "-1"
- SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-@@ -22,7 +22,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
- SRC_URI[md5sum] = "e96881798a0ab67aa3cd5f3249f0e536"
- SRC_URI[sha256sum] = "5ebb0b00c49421eb8fbead81342e5ce63e82065e5ff27da586f10e342b999171"
- 
--inherit scons update-rc.d python-dir
-+inherit scons update-rc.d python-dir pythonnative
- 
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
-index 1c7d76f..8404ba1 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
- DEPENDS = "dbus dbus-glib ncurses python libusb1"
- PROVIDES = "virtual/gpsd"
- 
+ SRCREV = "105069"
+ PV = "1.7.3+svnr${SRCPV}"
 -PR = "r2"
 +PR = "r3"
  
- SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
+ SRCREV_FORMAT = "source"
  
-@@ -25,7 +25,7 @@ SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
- "
- S = "${WORKDIR}/git"
+@@ -30,7 +30,7 @@ do_configure_prepend() {
+   cp ${WORKDIR}/CMakeLists.txt ${S};
+ }
  
--inherit scons update-rc.d python-dir
-+inherit scons update-rc.d python-dir pythonnative
+-inherit cmake lib_package pkgconfig perlnative
++inherit cmake lib_package pkgconfig perlnative pythonnative
  
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
+ ARM_INSTRUCTION_SET = "arm"
+ 
 -- 
 1.7.8.6
 
