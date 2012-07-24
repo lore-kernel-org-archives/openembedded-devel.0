@@ -1,33 +1,35 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1StjWT-0006Zt-5j
+	(envelope-from <kergoth@gmail.com>) id 1StjX6-0006f2-QA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2012 20:07:53 +0200
-Received: by obcva7 with SMTP id va7so11420115obc.6
+	Tue, 24 Jul 2012 20:08:33 +0200
+Received: by lags15 with SMTP id s15so1062163lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2012 10:56:24 -0700 (PDT)
+	Tue, 24 Jul 2012 10:57:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=1LSfWqmqjQaAKZrENDLgbNRic5Yz/KSUxYeoxI+BssU=;
-	b=xZ+OBDBjol78gvdDHbJuBeVxmqNlqFxzp4RYzG/Edg/slQ1L/O2zbQMawT/4Wts75u
-	arrcTH1vePOf/1Fuw2wnHmHTsuSLTUNXi+117sP5JvM3r70ayNrLxB2nGtNgQsaMzO4n
-	9d+WsiDJu4710cl/MHEWpkKlB7zo5T+alDyMIgXF1nXgSNIpQnq/UjQLg95/Haz7mZ2n
-	QWqqltCCSIgJOc35wGHUmmlfq9NtyESClgfOW/J9b94A1mS9FVnBfHPvbBboJoxCv0ER
-	6Sqc291OPALaKLLR8qO2NqV1SxddYI6pmlrYyelpbvkOEz37Og7czwjdU7p3F6KibD8A
-	S2SA==
-Received: by 10.182.212.70 with SMTP id ni6mr29109149obc.44.1343152584227;
-	Tue, 24 Jul 2012 10:56:24 -0700 (PDT)
-Received: from precise64.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPS id hc9sm13882949obc.15.2012.07.24.10.56.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 24 Jul 2012 10:56:23 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=xjUZWOPF4LTDAy8isSXbdoRTMFhxEq0+ADYb6T7KTsI=;
+	b=P0SX4nHeMdZtHS0G2tBSnrIFBZCOi7wW7IJfHCiglfWLSLtGoyuCeOE01m1tNujtpX
+	r015IPWlSMnpaXXkOR6II3fCUnSkSK83LXD5GJ+h9o3TWE3rqSe7HGGhmiyKn1LVRLFf
+	c0ZxdvmV50oCEUnopQjO8XfLIdPI3nR4jGgF2k3QPaFtOePNM31FUxVdoLhNpkyiQMQ/
+	8oNBrwyzufrU6ppJNyXfaidsQxSVHjAHn703qlZHhFBRyIfvATyKXEL6x3lxy05WpXR+
+	7R9rsEfScaqPaFiwKuBU64247u7su9qh3Ebw6vfkXQdUkTLoPTmJwsINOJ4vtCDz81Dr
+	87Pw==
+Received: by 10.152.148.1 with SMTP id to1mr22430776lab.34.1343152624283; Tue,
+	24 Jul 2012 10:57:04 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.114.64.180 with HTTP; Tue, 24 Jul 2012 10:56:44 -0700 (PDT)
+In-Reply-To: <1342833151-18755-1-git-send-email-kergoth@gmail.com>
+References: <1342833151-18755-1-git-send-email-kergoth@gmail.com>
+From: Christopher Larson <chris_larson@mentor.com>
+Date: Tue, 24 Jul 2012 10:56:44 -0700
+X-Google-Sender-Auth: vdyL1sdtEDFmS5LXWq9dMLcVe2c
+Message-ID: <CABcZAN=YUgR4GdFyUN5oez3VmApY-o3ev819B9FRL=wTAU4K3A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jul 2012 10:56:17 -0700
-Message-Id: <1343152577-19272-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
 Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [PATCH][meta-oe] nano: add PACKAGECONFIG for 'tiny' build
+Subject: Re: [PATCH] nano: add PACKAGECONFIG for 'tiny' build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +43,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2012 18:07:53 -0000
+X-List-Received-Date: Tue, 24 Jul 2012 18:08:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Christopher Larson <chris_larson@mentor.com>
+Ignore, resending with proper [meta-oe] prefix
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- meta-oe/recipes-support/nano/nano.inc |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
-index 2d52cab..68bcb2e 100644
---- a/meta-oe/recipes-support/nano/nano.inc
-+++ b/meta-oe/recipes-support/nano/nano.inc
-@@ -8,7 +8,7 @@ SECTION = "console/utils"
- DEPENDS = "ncurses"
- RDEPENDS_${PN} = "ncurses-terminfo"
- 
--INC_PR = "r2"
-+INC_PR = "r3"
- 
- PV_MAJOR = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
- 
-@@ -16,4 +16,4 @@ SRC_URI = "http://www.nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
- 
- inherit autotools gettext
- 
--EXTRA_OECONF = "--enable-all"
-+PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
--- 
-1.7.9.5
-
+On Fri, Jul 20, 2012 at 6:12 PM, Christopher Larson <kergoth@gmail.com> wrote:
 
 
