@@ -1,22 +1,28 @@
-Received: from 206-248-190-39.dsl.teksavvy.com ([206.248.190.39]
-	helo=yow-jmacdona-d2.wrs.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1StSs7-0001rE-PZ
+Received: from vms173011pub.verizon.net ([206.46.173.11])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <denis@denix.org>) id 1StYEb-0000RK-2A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Jul 2012 02:21:08 +0200
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
-	id 274D06A351A; Mon, 23 Jul 2012 20:09:41 -0400 (EDT)
-Date: Mon, 23 Jul 2012 20:09:41 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
+	Tue, 24 Jul 2012 08:04:41 +0200
+Received: from gandalf.denix.org ([unknown] [96.240.136.247])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M7N00AEKEW57V32@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	23 Jul 2012 23:52:58 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 1FAD32016B; Tue,
+	24 Jul 2012 00:52:53 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120724000940.GA4014@windriver.com>
-References: <500D4B57.3020800@mentor.com>
-MIME-Version: 1.0
-In-Reply-To: <500D4B57.3020800@mentor.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Proposal: Creating meta-networking
+Date: Tue, 24 Jul 2012 00:52:29 -0400
+Message-id: <d4f5768ba2b31e47973535b522cbc4e43f8170ce.1343104879.git.denys@ti.com>
+X-Mailer: git-send-email 1.7.8.6
+In-reply-to: <cover.1343104879.git.denys@ti.com>
+References: <cover.1343104879.git.denys@ti.com>
+In-reply-to: <cover.1343104879.git.denys@ti.com>
+References: <cover.1343104879.git.denys@ti.com>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [2011.03-maintenance][PATCH 1/1] opkg-utils: bump SRCREV to pick up subprocess.check_output fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,42 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2012 00:21:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Jul 2012 06:04:41 -0000
 
-[[oe]  Proposal: Creating meta-networking] On 12.07.23 (Mon 17:02) Firago Alexey wrote:
+From: Denys Dmytriyenko <denys@ti.com>
 
-> Hi all,
-> 
-> On 6/15/2012 8:15 AM, Joe MacDonald wrote:
-> >We've been talking about this on-and-off at Wind River for a while now,
-> >but it now seems like a reasonable time to bring a proposal to the OE
-> >community at large.  We're thinking about creating a new layer to house
-> >recipes, etc.  for networking packages.
-> >...
-> >So what does everyone think?  Awesome idea?  Terrible idea?  (Hopefully)
-> >something in between?  All feedback is welcome.
-> 
-> I think creating software support layer for network related packages
-> is good idea.
-> We've updated some of the recipes from OE Classic mentioned above
-> for our projects at Mentor Graphics.
-> We've been thinking to place these updated recipes in meta-oe layer.
-> But I think now that separate layer like meta-networking
-> would be much more suitable place.  Also we've created some new
-> packages like mipv6-umip or multipath-tools
-> that are good candidates for being placed in meta-networking.
-> 
-> So, I suggest Mentor Graphics would contribute to meta-networking.
+There were few breakages related to subprocess.check_output() with Python
+versions prior to 2.7 (although I had them even with 2.7.3), most notably
+in opkg-make-index:
 
-That's great to hear!  As you can probably tell there's been not much
-activity on this front for the last week or so, but I anticipate getting
-back at it in the next day or two.  I'll be sure to copy the list on
-anything of interest.
+Log data follows:
+| + do_package_update_index_ipk
+| + set -x
+| + ipkgarchs='all any noarch arm  armv4 armv4t armv5te armv6 armv7 armv7a am37x-evm'
+| + '[' '!' -z '' ']'
+| + mkdir -p /OE/deploy/glibc/ipk
+| + touch /OE/deploy/glibc/ipk/Packages
+| + opkg-make-index -r /OE/deploy/glibc/ipk/Packages -p /OE/deploy/glibc/ipk/Packages -l /OE/deploy/glibc/ipk/Packages.filelist -m /OE/deploy/glibc/ipk
+| Traceback (most recent call last):
+|   File "/OE/sysroots/x86_64-linux/usr/bin/opkg-make-index", line 189, in <module>
+|     rc = subprocess.check_output(gzip_cmd, shell=True)
+| AttributeError: 'module' object has no attribute 'check_output'
+NOTE: package my-image-1.0-r0: task do_package_update_index_ipk: Failed
 
+The following fixes are required:
+http://git.yoctoproject.org/cgit/cgit.cgi/opkg-utils/commit/?id=423ecd36b4782327c16f516885d1248249c7724a
+http://git.yoctoproject.org/cgit/cgit.cgi/opkg-utils/commit/?id=49cc783d8e0415059d126ae22c892988717ffda7
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/opkg-utils/opkg-utils_git.bb b/recipes/opkg-utils/opkg-utils_git.bb
+index 997b292..a9c9803 100644
+--- a/recipes/opkg-utils/opkg-utils_git.bb
++++ b/recipes/opkg-utils/opkg-utils_git.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                      file://opkg.py;beginline=1;endline=18;md5=15917491ad6bf7acc666ca5f7cc1e083"
+ RDEPENDS_${PN} = "python"
+ RDEPENDS_${PN}_virtclass-native = ""
+-SRCREV = "44df9dd3dc411ca1255cb4b23bde7eb71aed4778"
++SRCREV = "49cc783d8e0415059d126ae22c892988717ffda7"
+ PV = "0.1.8+git${SRCPV}"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "git://git.yoctoproject.org/opkg-utils;protocol=git \
+            "
 -- 
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind River
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
+1.7.8.6
+
 
 
