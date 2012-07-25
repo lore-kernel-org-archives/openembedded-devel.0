@@ -1,45 +1,30 @@
-Received: from ch1ehsobe004.messaging.microsoft.com ([216.32.181.184]
-	helo=ch1outboundpool.messaging.microsoft.com)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B05471@freescale.com>) id 1Su4aj-0005Rv-Qb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Jul 2012 18:37:42 +0200
-Received: from mail75-ch1-R.bigfish.com (10.43.68.225) by
-	CH1EHSOBE001.bigfish.com (10.43.70.51) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 25 Jul 2012 15:55:56 +0000
-Received: from mail75-ch1 (localhost [127.0.0.1])	by mail75-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 67D741002AD	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2012 15:55:56 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -10
-X-BigFish: VS-10(z98bRzzz1202hzz8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah107ah)
-Received: from mail75-ch1 (localhost.localdomain [127.0.0.1]) by mail75-ch1
-	(MessageSwitch) id 1343231754999478_12451;
-	Wed, 25 Jul 2012 15:55:54 +0000 (UTC)
-Received: from CH1EHSMHS023.bigfish.com (snatpool2.int.messaging.microsoft.com
-	[10.43.68.233])	by mail75-ch1.bigfish.com (Postfix) with ESMTP id
-	F0BF24800C8 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2012 15:55:54 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS023.bigfish.com
-	(10.43.70.23) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 25 Jul 2012 15:55:55 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.298.5; Wed, 25 Jul 2012 10:55:53 -0500
-Received: from localhost.localdomain ([10.171.77.122])	by
-	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	q6PFtkdn014846	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2012 08:55:52 -0700
-From: Horia Geanta <horia.geanta@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Jul 2012 21:52:56 +0300
-Message-ID: <1343242376-10509-1-git-send-email-horia.geanta@freescale.com>
-X-Mailer: git-send-email 1.7.7.6
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe][PATCH] strongswan: upgrade to version 5.0.0
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1Su9RK-0001I1-Tq
+	for openembedded-devel@openembedded.org; Wed, 25 Jul 2012 23:48:19 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q6PL9Vw2014863
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Jul 2012 22:09:31 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14132-03 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Jul 2012 22:09:27 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q6PL9MFC014857
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Jul 2012 22:09:23 +0100
+Message-ID: <1343250562.29991.0.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Wed, 25 Jul 2012 22:09:22 +0100
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: [PATCH] sstate: Add a two character subdirectory to the sstate directory layout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,43 +38,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2012 16:37:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 25 Jul 2012 21:48:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-COPYING change is trivial:
-http://git.strongswan.org/?p=strongswan.git;a=commitdiff;h=fbdef639d6ed3500bda9e330a2f57de5e833750c
+Currently all sstate files are placed into one directory. This does not scale and
+causes a variety of filesystem issues. This patch adds a two character subdirectory
+to the layout (based on the first two characters of the hash) so that files
+can be split into several directories.
 
-Signed-off-by: Horia Geanta <horia.geanta@freescale.com>
+This should help performance of sstate in most cases by avoding creating directories with 
+huge numbers of files.
+
+The SSTATE_MIRRORS syntax needs updating to account for the extra path element by
+the addition of a PATH item, for example:
+
+SSTATE_MIRRORS = "file://.* file:///some/path/to/sstate-cache/PATH"
+SSTATE_MIRRORS = "file://.* http://192.168.1.23/sstate-cache/PATH"
+
+This change also sets the scene for using things like lsb-release in
+the 
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../{strongswan_4.5.1.bb => strongswan_5.0.0.bb}   |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/strongswan/{strongswan_4.5.1.bb => strongswan_5.0.0.bb} (73%)
+diff --git a/meta/classes/sstate.bbclass b/meta/classes/sstate.bbclass
+index 570b371..d00779a 100644
+--- a/meta/classes/sstate.bbclass
++++ b/meta/classes/sstate.bbclass
+@@ -4,16 +4,21 @@ SSTATE_MANIFESTS ?= "${TMPDIR}/sstate-control"
+ SSTATE_MANFILEBASE = "${SSTATE_MANIFESTS}/manifest-${SSTATE_MANMACH}-"
+ SSTATE_MANFILEPREFIX = "${SSTATE_MANFILEBASE}${PN}"
+ 
++def generate_sstatefn(spec, hash, d):
++    if not hash:
++        hash = "INVALID"
++    return hash[:2] + "/" + spec + hash
+ 
+ SSTATE_PKGARCH    = "${PACKAGE_ARCH}"
+ SSTATE_PKGSPEC    = "sstate-${PN}-${PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}-${PV}-${PR}-${SSTATE_PKGARCH}-${SSTATE_VERSION}-"
+-SSTATE_PKGNAME    = "${SSTATE_PKGSPEC}${BB_TASKHASH}"
++SSTATE_PKGNAME    = "${@generate_sstatefn(d.getVar('SSTATE_PKGSPEC', True), d.getVar('BB_TASKHASH', True), d)}"
+ SSTATE_PKG        = "${SSTATE_DIR}/${SSTATE_PKGNAME}"
++SSTATE_PATHSPEC   = "${SSTATE_DIR}/*/${SSTATE_PKGSPEC}"
+ 
+ SSTATE_SCAN_FILES ?= "*.la *-config *_config"
+ SSTATE_SCAN_CMD ?= 'find ${SSTATE_BUILDDIR} \( -name "${@"\" -o -name \"".join(d.getVar("SSTATE_SCAN_FILES", True).split())}" \) -type f'
+ 
+-BB_HASHFILENAME = "${SSTATE_PKGNAME}"
++BB_HASHFILENAME = "${SSTATE_PKGSPEC}"
+ 
+ SSTATE_MANMACH ?= "${SSTATE_PKGARCH}"
+ 
+@@ -158,10 +163,11 @@ def sstate_installpkg(ss, d):
+         oe.path.remove(dir)
+ 
+     sstateinst = d.expand("${WORKDIR}/sstate-install-%s/" % ss['name'])
++    sstatefetch = d.getVar('SSTATE_PKGNAME', True) + '_' + ss['name'] + ".tgz"
+     sstatepkg = d.getVar('SSTATE_PKG', True) + '_' + ss['name'] + ".tgz"
+ 
+     if not os.path.exists(sstatepkg):
+-       pstaging_fetch(sstatepkg, d)
++       pstaging_fetch(sstatefetch, sstatepkg, d)
+ 
+     if not os.path.isfile(sstatepkg):
+         bb.note("Staging package %s does not exist" % sstatepkg)
+@@ -223,8 +229,7 @@ def sstate_installpkg(ss, d):
+ def sstate_clean_cachefile(ss, d):
+     import oe.path
+ 
+-    sstatepkgdir = d.getVar('SSTATE_DIR', True)
+-    sstatepkgfile = sstatepkgdir + '/' + d.getVar('SSTATE_PKGSPEC', True) + "*_" + ss['name'] + ".tgz*"
++    sstatepkgfile = d.getVar('SSTATE_PATHSPEC', True) + "*_" + ss['name'] + ".tgz*"
+     bb.note("Removing %s" % sstatepkgfile)
+     oe.path.remove(sstatepkgfile)
+ 
+@@ -417,7 +422,7 @@ def sstate_package(ss, d):
+ 
+     return
+ 
+-def pstaging_fetch(sstatepkg, d):
++def pstaging_fetch(sstatefetch, sstatepkg, d):
+     import bb.fetch2
+ 
+     # Only try and fetch if the user has configured a mirror
+@@ -430,7 +435,7 @@ def pstaging_fetch(sstatepkg, d):
+     bb.data.update_data(localdata)
+ 
+     dldir = localdata.expand("${SSTATE_DIR}")
+-    srcuri = "file://" + os.path.basename(sstatepkg)
++    srcuri = "file://" + sstatefetch
+ 
+     bb.mkdirhier(dldir)
+ 
+@@ -519,8 +524,7 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash, sq_hashfn, d):
+     }
+ 
+     for task in range(len(sq_fn)):
+-        sstatefile = d.expand("${SSTATE_DIR}/" + sq_hashfn[task] + "_" + mapping[sq_task[task]] + ".tgz")
+-        sstatefile = sstatefile.replace("${BB_TASKHASH}", sq_hash[task])
++        sstatefile = d.expand("${SSTATE_DIR}/" + generate_sstatefn(sq_hashfn[task], sq_hash[task], d) + "_" + mapping[sq_task[task]] + ".tgz")
+         if os.path.exists(sstatefile):
+             bb.debug(2, "SState: Found valid sstate file %s" % sstatefile)
+             ret.append(task)
+@@ -544,10 +548,9 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash, sq_hashfn, d):
+             if task in ret:
+                 continue
+ 
+-            sstatefile = d.expand("${SSTATE_DIR}/" + sq_hashfn[task] + "_" + mapping[sq_task[task]] + ".tgz")
+-            sstatefile = sstatefile.replace("${BB_TASKHASH}", sq_hash[task])
++            sstatefile = d.expand(generate_sstatefn(sq_hashfn[task], sq_hash[task], d) + "_" + mapping[sq_task[task]] + ".tgz")
+ 
+-            srcuri = "file://" + os.path.basename(sstatefile)
++            srcuri = "file://" + sstatefile
+             localdata.setVar('SRC_URI', srcuri)
+             bb.debug(2, "SState: Attempting to fetch %s" % srcuri)
+ 
 
-diff --git a/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb b/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
-similarity index 73%
-rename from meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
-rename to meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
-index 3276fdd..189cfa3 100644
---- a/meta-oe/recipes-support/strongswan/strongswan_4.5.1.bb
-+++ b/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
-@@ -3,12 +3,12 @@ Linux operating system."
- HOMEPAGE = "http://www.strongswan.org"
- SECTION = "console/network"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "gmp openssl flex-native flex bison-native"
- 
- SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
--SRC_URI[md5sum] = "81a4a699c4a1a49b74061dfa47b5a033"
--SRC_URI[sha256sum] = "252d7369d94aa2d79e6fad078853b07ca897ea811ab1e1a2b008bcec0d1e758a"
-+SRC_URI[md5sum] = "c8b861305def7c0abae04f7bbefec212"
-+SRC_URI[sha256sum] = "efc13c86e715b5e596d9d8535640c830f83e977fe521afd2c70d68926c4b573e"
- 
- EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \
- 		--enable-gmp --disable-mysql --disable-sqlite \
--- 
-1.7.7.6
 
 
 
