@@ -1,45 +1,19 @@
-Received: from am1ehsobe001.messaging.microsoft.com ([213.199.154.204]
-	helo=am1outboundpool.messaging.microsoft.com)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1SuSML-0006NZ-CW
+	(envelope-from <yao.zhao@windriver.com>) id 1SuSea-0006hL-Om
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jul 2012 20:00:25 +0200
-Received: from mail99-am1-R.bigfish.com (10.3.201.228) by
-	AM1EHSOBE010.bigfish.com (10.3.204.30) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 26 Jul 2012 17:48:54 +0000
-Received: from mail99-am1 (localhost [127.0.0.1])	by mail99-am1-R.bigfish.com
-	(Postfix) with ESMTP id 2E5AD4E03DF	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2012 17:48:54 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 3
-X-BigFish: VS3(zzzz1202h1082kzz8275ch8275bhz2dh2a8h668h839hd24he5bhf0ah107ah)
-Received: from mail99-am1 (localhost.localdomain [127.0.0.1]) by mail99-am1
-	(MessageSwitch) id 1343324931925176_8512;
-	Thu, 26 Jul 2012 17:48:51 +0000 (UTC)
-Received: from AM1EHSMHS002.bigfish.com (unknown [10.3.201.248])	by
-	mail99-am1.bigfish.com (Postfix) with ESMTP id DF822240052	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2012 17:48:51 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS002.bigfish.com
-	(10.3.207.102) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 26 Jul 2012 17:48:52 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.298.5; Thu, 26 Jul 2012 12:48:49 -0500
-Received: from right.am.freescale.net (right.am.freescale.net [10.82.176.228])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	q6QHmnM6025912 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2012 10:48:49 -0700
-From: Matthew McClintock <msm@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Jul 2012 12:48:48 -0500
-Message-ID: <1343324928-4354-1-git-send-email-msm@freescale.com>
-X-Mailer: git-send-email 1.7.10
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe for-denzil] cramfs_cvs.bb: fix compile step so it can be rerun without failing
+	Thu, 26 Jul 2012 20:19:17 +0200
+Received: from yzhao2-OptiPlex-990.corp.ad.wrs.com
+	(yzhao2-optiplex-990.corp.ad.wrs.com [128.224.147.210])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q6QI7iJ6017109
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2012 11:07:45 -0700 (PDT)
+From: Yao Zhao <yao.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Jul 2012 14:07:30 -0400
+Message-Id: <1343326050-29508-1-git-send-email-yao.zhao@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH v2] bzip2-native: handling native path issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +27,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2012 18:00:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Jul 2012 18:19:17 -0000
 
-Signed-off-by: Matthew McClintock <msm@freescale.com>
+follow Richard's approach, modify bzip2-native recipe to install bzip2 package
+binaries to STAGING_BINDIR_NATIVE/bzip2-native to avoid problems when other
+package is doing upack to reference bzip2. libbz2.so* still installs to
+STAGING_LIBDIR_NATIVE.
+
+add bzip2native.bbclass to let other packages to inherit and add dependency
+to bzip2-replacement-native.
+
+change python-native to inherit bzip2native class and remove the old
+bzip2-full-native dependency.
+
+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
 ---
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta/classes/bzip2native.bbclass                   |    2 ++
+ .../recipes-devtools/python/python-native_2.7.3.bb |    4 ++--
+ meta/recipes-extended/bzip2/bzip2_1.0.6.bb         |    4 +++-
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+ create mode 100644 meta/classes/bzip2native.bbclass
 
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-index 667097c..d9b6c06 100644
---- a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-+++ b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb0
- DEPENDS = "zlib"
- SRCDATE = "20110110"
- PV = "1.1+cvs${SRCDATE}"
-+PR = "r1"
+diff --git a/meta/classes/bzip2native.bbclass b/meta/classes/bzip2native.bbclass
+new file mode 100644
+index 0000000..a2a7b31
+--- /dev/null
++++ b/meta/classes/bzip2native.bbclass
+@@ -0,0 +1,2 @@
++EXTRANATIVEPATH += "bzip2-native"
++DEPENDS += "bzip2-replacement-native"
+diff --git a/meta/recipes-devtools/python/python-native_2.7.3.bb b/meta/recipes-devtools/python/python-native_2.7.3.bb
+index c89f9f9..904dc80 100644
+--- a/meta/recipes-devtools/python/python-native_2.7.3.bb
++++ b/meta/recipes-devtools/python/python-native_2.7.3.bb
+@@ -1,5 +1,5 @@
+ require python.inc
+-DEPENDS = "openssl-native bzip2-full-native zlib-native readline-native sqlite3-native"
++DEPENDS = "openssl-native zlib-native readline-native sqlite3-native"
+ PR = "${INC_PR}.1"
  
- SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
- S = "${WORKDIR}/linux/scripts/cramfs"
-@@ -16,7 +17,7 @@ EXTRA_OEMAKE = "\
+ SRC_URI += "file://04-default-is-optimized.patch \
+@@ -16,7 +16,7 @@ SRC_URI += "file://04-default-is-optimized.patch \
+            "
+ S = "${WORKDIR}/Python-${PV}"
  
+-inherit native
++inherit native bzip2native
  
- do_compile_prepend() {
--        ln -s GNUmakefile Makefile
-+        ln -sf GNUmakefile Makefile
- }
+ RPROVIDES += "python-distutils-native python-compression-native python-textutils-native python-core-native"
  
- do_install() {
+diff --git a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
+index 43b462a..e0c710b 100644
+--- a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
++++ b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
+@@ -24,6 +24,8 @@ inherit autotools update-alternatives
+ ALTERNATIVE_PRIORITY = "100"
+ ALTERNATIVE_${PN} = "bunzip2 bzcat"
+ 
++#install binaries to bzip2-native under sysroot for replacement-native
++EXTRA_OECONF_virtclass-native += "--bindir=${STAGING_BINDIR_NATIVE}/${PN}"
+ do_configure_prepend () {
+ 	cp ${WORKDIR}/configure.ac ${S}/
+ 	cp ${WORKDIR}/Makefile.am ${S}/
+@@ -40,5 +42,5 @@ FILES_libbz2-staticdev = "${libdir}/*.a"
+ SECTION_libbz2-staticdev = "devel"
+ RDEPENDS_libbz2-staticdev = "libbz2-dev (= ${EXTENDPKGV})"
+ 
+-PROVIDES_append_virtclass-native = " bzip2-full-native"
++PROVIDES_append_virtclass-native = " bzip2-replacement-native"
+ BBCLASSEXTEND = "native"
 -- 
-1.7.10
-
+1.7.9.5
 
 
 
