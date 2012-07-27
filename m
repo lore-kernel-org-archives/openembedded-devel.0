@@ -1,19 +1,32 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <yao.zhao@windriver.com>) id 1SuSea-0006hL-Om
+	(envelope-from <martin.jansa@gmail.com>) id 1Suibw-00025y-5R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Jul 2012 20:19:17 +0200
-Received: from yzhao2-OptiPlex-990.corp.ad.wrs.com
-	(yzhao2-optiplex-990.corp.ad.wrs.com [128.224.147.210])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q6QI7iJ6017109
+	Fri, 27 Jul 2012 13:21:36 +0200
+Received: by bkcik5 with SMTP id ik5so1347501bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2012 11:07:45 -0700 (PDT)
-From: Yao Zhao <yao.zhao@windriver.com>
+	Fri, 27 Jul 2012 04:10:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=bMevSISfRSOMDBJGJqPEHkQTbsd+Y+0THZDFCkP5TFY=;
+	b=f3Xb2JQ9VbKpvMmxPwLDY5zQY/YrYm1G66c9YvpOoa3PbUb+PTa58AJonNKtZJTgdv
+	bsIADKqwtvSSAk+5iF7m1By0fAnh1s9r06aGqu3O8OkKpo6Feyx8S9SkKQOcXIPemsqh
+	Dlu1ZGAj9dA60VFbe2zcKfZOBRInsBCL9W9sbkiFCiRl3POk0hzhw3wZthcCKyy7piUw
+	d5o1kOZwzQSE+0UfUnZuZJ6I0fBjpk+ljiSCcyKyGGUyTH/CEgI16O6XcHJWGW1NHUkW
+	xumGt459rGciPrUOicf3GyNzVSYGgv91Oi7tyjiq+tQvCKCwJHO30H6nccINfXzZYVRE
+	+Edw==
+Received: by 10.204.156.68 with SMTP id v4mr793744bkw.68.1343387404459;
+	Fri, 27 Jul 2012 04:10:04 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id c18sm768822bkv.8.2012.07.27.04.10.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 27 Jul 2012 04:10:02 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Jul 2012 14:07:30 -0400
-Message-Id: <1343326050-29508-1-git-send-email-yao.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH v2] bzip2-native: handling native path issue
+Date: Fri, 27 Jul 2012 13:10:07 +0200
+Message-Id: <1343387407-18340-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][RFC] tcpdump: bump PR to rebuild against libpcap1 instead libpcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,77 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2012 18:19:17 -0000
+X-List-Received-Date: Fri, 27 Jul 2012 11:21:36 -0000
 
-follow Richard's approach, modify bzip2-native recipe to install bzip2 package
-binaries to STAGING_BINDIR_NATIVE/bzip2-native to avoid problems when other
-package is doing upack to reference bzip2. libbz2.so* still installs to
-STAGING_LIBDIR_NATIVE.
-
-add bzip2native.bbclass to let other packages to inherit and add dependency
-to bzip2-replacement-native.
-
-change python-native to inherit bzip2native class and remove the old
-bzip2-full-native dependency.
-
-Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta/classes/bzip2native.bbclass                   |    2 ++
- .../recipes-devtools/python/python-native_2.7.3.bb |    4 ++--
- meta/recipes-extended/bzip2/bzip2_1.0.6.bb         |    4 +++-
- 3 files changed, 7 insertions(+), 3 deletions(-)
- create mode 100644 meta/classes/bzip2native.bbclass
+ meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta/classes/bzip2native.bbclass b/meta/classes/bzip2native.bbclass
-new file mode 100644
-index 0000000..a2a7b31
---- /dev/null
-+++ b/meta/classes/bzip2native.bbclass
-@@ -0,0 +1,2 @@
-+EXTRANATIVEPATH += "bzip2-native"
-+DEPENDS += "bzip2-replacement-native"
-diff --git a/meta/recipes-devtools/python/python-native_2.7.3.bb b/meta/recipes-devtools/python/python-native_2.7.3.bb
-index c89f9f9..904dc80 100644
---- a/meta/recipes-devtools/python/python-native_2.7.3.bb
-+++ b/meta/recipes-devtools/python/python-native_2.7.3.bb
-@@ -1,5 +1,5 @@
- require python.inc
--DEPENDS = "openssl-native bzip2-full-native zlib-native readline-native sqlite3-native"
-+DEPENDS = "openssl-native zlib-native readline-native sqlite3-native"
- PR = "${INC_PR}.1"
+diff --git a/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb b/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
+index 9fd0ac0..46b19a1 100644
+--- a/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
++++ b/meta-oe/recipes-support/tcpdump/tcpdump_4.1.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
+ SECTION = "console/network"
+ DEPENDS = "libpcap"
+-PR = "r1"
++PR = "r2"
  
- SRC_URI += "file://04-default-is-optimized.patch \
-@@ -16,7 +16,7 @@ SRC_URI += "file://04-default-is-optimized.patch \
-            "
- S = "${WORKDIR}/Python-${PV}"
- 
--inherit native
-+inherit native bzip2native
- 
- RPROVIDES += "python-distutils-native python-compression-native python-textutils-native python-core-native"
- 
-diff --git a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
-index 43b462a..e0c710b 100644
---- a/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
-+++ b/meta/recipes-extended/bzip2/bzip2_1.0.6.bb
-@@ -24,6 +24,8 @@ inherit autotools update-alternatives
- ALTERNATIVE_PRIORITY = "100"
- ALTERNATIVE_${PN} = "bunzip2 bzcat"
- 
-+#install binaries to bzip2-native under sysroot for replacement-native
-+EXTRA_OECONF_virtclass-native += "--bindir=${STAGING_BINDIR_NATIVE}/${PN}"
- do_configure_prepend () {
- 	cp ${WORKDIR}/configure.ac ${S}/
- 	cp ${WORKDIR}/Makefile.am ${S}/
-@@ -40,5 +42,5 @@ FILES_libbz2-staticdev = "${libdir}/*.a"
- SECTION_libbz2-staticdev = "devel"
- RDEPENDS_libbz2-staticdev = "libbz2-dev (= ${EXTENDPKGV})"
- 
--PROVIDES_append_virtclass-native = " bzip2-full-native"
-+PROVIDES_append_virtclass-native = " bzip2-replacement-native"
- BBCLASSEXTEND = "native"
+ SRC_URI = " \
+ 	http://www.tcpdump.org/release/tcpdump-${PV}.tar.gz \
 -- 
-1.7.9.5
+1.7.8.6
 
 
 
