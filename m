@@ -1,33 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SvG2u-0002yu-ES
+	(envelope-from <martin.jansa@gmail.com>) id 1SvRph-0004DH-HD
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jul 2012 01:03:40 +0200
-Received: by pbbrq2 with SMTP id rq2so6488706pbb.6
+	Sun, 29 Jul 2012 13:38:49 +0200
+Received: by weyr6 with SMTP id r6so2748824wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jul 2012 15:52:06 -0700 (PDT)
+	Sun, 29 Jul 2012 04:27:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=OmoPpjrzAJCp0X0Bx1m0MK0AVQDI6s79HakvyQRFMhw=;
-	b=krHplUKVP69r1o5j+8FBP7FFkoANCzwMzXx0Pmr4BYfmFKqHMeL1OW6lR4ZxnuZDcQ
-	zNSjvqrRcVA7nRY9rVAZBwryRnIbhfo+TkLwRArmPm9oeP7iIqD2J+cDEj2diUt48jbZ
-	Qki2TAB+tfo/JAoOzxBXUA/VoO/lfRL5m9p+ET/jHQ4RfkooHE/RCpn1X+wqfIOERkGb
-	aNUoYCavKk0eDjskrB1y+SPPSj+LWT8cp21xS+UDYPBLHr+79+l2bJKwBJPql5rOe4u+
-	MDDSoY0ow9R16KuJ9n9POPJyisGgDMaPovIekABTNAa04RTpFE0ZxRKycZyYQH/UMaUq
-	OyCw==
-Received: by 10.66.75.133 with SMTP id c5mr14881945paw.24.1343515925952;
-	Sat, 28 Jul 2012 15:52:05 -0700 (PDT)
-Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id qa5sm4690108pbb.19.2012.07.28.15.52.04
-	(version=SSLv3 cipher=OTHER); Sat, 28 Jul 2012 15:52:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=bvEOJhu0PJKgk7maxvI5totEGoF+M6LNNqobfJ/MVkQ=;
+	b=j1Ek8GgSrUFUdI68K53U5hlhvPpv/zQ+7TSmMCxnqftXzR2IpEpvEEUZXWv0lpTbRC
+	WnCqyYnkeKXzlXOoBt2L2fVKd6G1fqlhCUrEfjgn2XYo6hO3+o8lT0YBXzJ0iJA0LMOv
+	lrsU2JpNDVXdnPP9HHywmKr6SUq+9sB0iiZ90UnIe37/vENg9ufsqKJusAzUIVYYrzHK
+	aj7cHc4IawPDUTxLAR2zHjU8/fSS5/QdBifACxPCsAHw9ol/409EzEL/vV9eXL4f03SE
+	JvTBLWAtWRFpIF+udvcggjeC8voY5TOI3hPDOFY4Giuw4qbeQNnpBqw+Jh9Uj1GcZvKD
+	oW5Q==
+Received: by 10.180.83.106 with SMTP id p10mr34785997wiy.21.1343561235014;
+	Sun, 29 Jul 2012 04:27:15 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id t7sm14694952wix.6.2012.07.29.04.27.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 29 Jul 2012 04:27:13 -0700 (PDT)
+Date: Sun, 29 Jul 2012 13:27:08 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Jul 2012 15:51:58 -0700
-Message-Id: <1343515918-20671-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1343515918-20671-1-git-send-email-raj.khem@gmail.com>
-References: <1343515918-20671-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-systemd][PATCH 2/2] busybox: stopping systemd-kmsg-syslogd is not needed
+Message-ID: <20120729112708.GD3261@jama.jama.net>
+References: <cover.1342645937.git.Martin.Jansa@gmail.com>
+	<ju8ja5$832$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ju8ja5$832$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-efl][RFC 00/14] Newer EFL if someone is interested - just RFC now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +45,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jul 2012 23:03:40 -0000
+X-List-Received-Date: Sun, 29 Jul 2012 11:38:49 -0000
+X-Groupsio-MsgNum: 39912
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WChQLJJJfbwij+9x"
+Content-Disposition: inline
 
-systemd-kmsg-syslogd.service is discontinued in systemd so
-there is no need to stop it.
+--WChQLJJJfbwij+9x
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../busybox/busybox/busybox-syslog.service.in      |    1 -
- .../recipes-core/busybox/busybox_1.19.4.bbappend   |    2 +-
- 2 files changed, 1 insertions(+), 2 deletions(-)
+On Thu, Jul 19, 2012 at 11:16:53AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 18-07-12 23:19, Martin Jansa schreef:
+> > It's RFC because I've tested it only with efl-from-svn-recipes.inc in u=
+se
+> >  (1.2.1 EFL isn't probably compatible with this new e-wm and stuff..)
+> > and without rebuilding from scratch (will probably force me to fix some
+> > other recipes too because of new automake etc.. :/)
+> >=20
+> > Next EFL release is planed for end of July and first E17 release after
+> > that so it's time for interested people to test their changes, but I'll
+> > probably send final pull-request only when there are beta/rc tarballs t=
+oo
+> > (so that efl-from-svn-recipes.inc won't be needed).
+>=20
+> Any volunteers for adding EPhysics?
 
-diff --git a/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in b/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
-index 27b9831..c6c625e 100644
---- a/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
-+++ b/meta-systemd/meta-oe/recipes-core/busybox/busybox/busybox-syslog.service.in
-@@ -3,7 +3,6 @@ Description=System Logging Service
- Wants=busybox-klogd.service
- 
- [Service]
--ExecStartPre=/bin/systemctl stop systemd-kmsg-syslogd.service
- EnvironmentFile=-/etc/default/busybox-syslog
- ExecStart=@base_sbindir@/syslogd -n $OPTIONS
- Sockets=syslog.socket
-diff --git a/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-index a0ae2ce..915a50e 100644
---- a/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-+++ b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-@@ -1,6 +1,6 @@
- inherit systemd
- 
--PRINC := "${@int(PRINC) + 1}"
-+PRINC := "${@int(PRINC) + 2}"
- 
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--- 
-1.7.5.4
+I haven't looked into EPhysics as I don't have any use for it, but with
+last jansa/efl update, I've added evas-generic-loaders, because evas
+doesn't have native svg support anymore (as we probably won't package esvg)
 
+BTW: this branch is regulary updated (sometimes rebased) to track latest
+EFL.
 
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--WChQLJJJfbwij+9x
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAVHgwACgkQN1Ujt2V2gBygDwCfVIRLYNhhBVKYOdsU+UYFzyyQ
+XkoAniQsc8gCViLi6o2jsjzh/sTUT2zx
+=qvhk
+-----END PGP SIGNATURE-----
+
+--WChQLJJJfbwij+9x--
