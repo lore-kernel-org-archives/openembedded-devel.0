@@ -1,37 +1,36 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SvTV6-0005pw-Rs
+	(envelope-from <otavio.salvador@gmail.com>) id 1SvTX3-0005v0-7B
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jul 2012 15:25:40 +0200
-Received: by wgbds1 with SMTP id ds1so1767563wgb.0
+	Sun, 29 Jul 2012 15:27:41 +0200
+Received: by vbbfr13 with SMTP id fr13so3706684vbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2012 06:14:06 -0700 (PDT)
+	Sun, 29 Jul 2012 06:16:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=VLyQT7eHfUBQy7iGQshD+1jqZCUDPkuoBiXrTYSkw8M=;
-	b=Q2B5fHC55BpkmdAG6CVulPU6esdieGriQwe3tNYRViOfDOaUWM8W9+spjS8UidvaLD
-	NLhnwLktNiRyqmq0V87sAi9BMer+elzdcvjPILgaIW1KfXmQWRVBjKELCv6K5DE7af+H
-	LhQj+U9SQCTouVFqF7+Dve4Gsg7z9vjc4viDfjoTGYK4RZyYbPbwnmr3/H04YUPzW1kl
-	5zMnEE/r8GveR8baDnmt7h8QbuuMAWAgxu+ijHanNQoKvrmUZW/jU6GvCE3a2aP5iQ8/
-	hV1ktlcdL0E5IyMKrx62nXsXxXuceuh57VMKzWYoH25orX0kHv5YYkKJVFDjwaxBf8yH
-	Kb/A==
-Received: by 10.180.94.226 with SMTP id df2mr24725348wib.16.1343567646419;
-	Sun, 29 Jul 2012 06:14:06 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id eu4sm10495706wib.2.2012.07.29.06.14.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Jul 2012 06:14:05 -0700 (PDT)
-Date: Sun, 29 Jul 2012 15:13:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120729131359.GF3261@jama.jama.net>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=wCq0M8PDIzZXR3H0zJqFrgSeVvrBBQUgwQeLw8upK7c=;
+	b=VGJz6t4oppUTzPfDwnkQXNldLJSK0nTbNI2c3+ndsA7bUMwELOKnKDtqaSZtcAVBoZ
+	U4O377ObOd5pjuRoh3AotDSAgG0LSD9FS4Uxi4LxmCoFdSzm1WbfVBZciVcjXsZsPcHq
+	tA9iqTCt3CcNbb7xVV2S6m57nJUDJasVtamIteyG6bh5sVfSJngj1jh9oYM4/6Knebin
+	paMrnkCl6/ymBVcjVHHIH3Z9WlyH564bO2rSjGUhy4FNG7ePePs0BTYjeF3s/ipSft5e
+	3TdFIstewxr6by4OiTUUsmcnTzuYQtyWicK4sNJgguteZeGwEDzVLRfzoqdbdhgxz7tW
+	aiAg==
+MIME-Version: 1.0
+Received: by 10.52.90.52 with SMTP id bt20mr7072395vdb.42.1343567766414; Sun,
+	29 Jul 2012 06:16:06 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.220.196 with HTTP; Sun, 29 Jul 2012 06:16:06 -0700 (PDT)
+In-Reply-To: <20120729131359.GF3261@jama.jama.net>
 References: <1343515918-20671-1-git-send-email-raj.khem@gmail.com>
 	<1343515918-20671-2-git-send-email-raj.khem@gmail.com>
 	<CAP9ODKrX04zfu_wVg317WPgc=u38niLtjmfkBiNrzfkTgBCbeA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKrX04zfu_wVg317WPgc=u38niLtjmfkBiNrzfkTgBCbeA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20120729131359.GF3261@jama.jama.net>
+Date: Sun, 29 Jul 2012 10:16:06 -0300
+X-Google-Sender-Auth: 0EBdBYZns4jN-yNRIxHESTHgH_Y
+Message-ID: <CAP9ODKoQPz2p4Qc+HtsRy_4EV-JwCgzhd=oO7RUyUbH4LjiM=A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-systemd][PATCH 2/2] busybox: stopping systemd-kmsg-syslogd is not needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,44 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jul 2012 13:25:40 -0000
-X-Groupsio-MsgNum: 39914
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Il7n/DHsA0sMLmDu"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Jul 2012 13:27:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Il7n/DHsA0sMLmDu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, Jul 29, 2012 at 10:13 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, Jul 29, 2012 at 10:10:48AM -0300, Otavio Salvador wrote:
+>> On Sat, Jul 28, 2012 at 7:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> > systemd-kmsg-syslogd.service is discontinued in systemd so
+>> > there is no need to stop it.
+>>
+>> I don't see a relationship in above description :-)
+>>
+>> Or we drop it completely or it needs to be stoped ;-)
+>
+> It's not installed by current systemd, so busybox-syslogd-systemd is
+> failing (to start/stop) because it's trying to stop it.
 
-On Sun, Jul 29, 2012 at 10:10:48AM -0300, Otavio Salvador wrote:
-> On Sat, Jul 28, 2012 at 7:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > systemd-kmsg-syslogd.service is discontinued in systemd so
-> > there is no need to stop it.
->=20
-> I don't see a relationship in above description :-)
->=20
-> Or we drop it completely or it needs to be stoped ;-)
+Then the .systemd file needs to be removed, not the stop to be dropped.
 
-It's not installed by current systemd, so busybox-syslogd-systemd is
-failing (to start/stop) because it's trying to stop it.
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Il7n/DHsA0sMLmDu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAVNxcACgkQN1Ujt2V2gBzmuwCffFdwz+fI1ofDkDbP+Lt6D5y7
-cVgAn27mqI+k1FDatfPPKhio0+gLOKo7
-=aGjV
------END PGP SIGNATURE-----
-
---Il7n/DHsA0sMLmDu--
