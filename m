@@ -1,37 +1,35 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SvRph-0004DH-HD
+	(envelope-from <otavio.salvador@gmail.com>) id 1SvTRv-0005ju-Si
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jul 2012 13:38:49 +0200
-Received: by weyr6 with SMTP id r6so2748824wey.6
+	Sun, 29 Jul 2012 15:22:24 +0200
+Received: by vcbfy27 with SMTP id fy27so3621864vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2012 04:27:15 -0700 (PDT)
+	Sun, 29 Jul 2012 06:10:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bvEOJhu0PJKgk7maxvI5totEGoF+M6LNNqobfJ/MVkQ=;
-	b=j1Ek8GgSrUFUdI68K53U5hlhvPpv/zQ+7TSmMCxnqftXzR2IpEpvEEUZXWv0lpTbRC
-	WnCqyYnkeKXzlXOoBt2L2fVKd6G1fqlhCUrEfjgn2XYo6hO3+o8lT0YBXzJ0iJA0LMOv
-	lrsU2JpNDVXdnPP9HHywmKr6SUq+9sB0iiZ90UnIe37/vENg9ufsqKJusAzUIVYYrzHK
-	aj7cHc4IawPDUTxLAR2zHjU8/fSS5/QdBifACxPCsAHw9ol/409EzEL/vV9eXL4f03SE
-	JvTBLWAtWRFpIF+udvcggjeC8voY5TOI3hPDOFY4Giuw4qbeQNnpBqw+Jh9Uj1GcZvKD
-	oW5Q==
-Received: by 10.180.83.106 with SMTP id p10mr34785997wiy.21.1343561235014;
-	Sun, 29 Jul 2012 04:27:15 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t7sm14694952wix.6.2012.07.29.04.27.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Jul 2012 04:27:13 -0700 (PDT)
-Date: Sun, 29 Jul 2012 13:27:08 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120729112708.GD3261@jama.jama.net>
-References: <cover.1342645937.git.Martin.Jansa@gmail.com>
-	<ju8ja5$832$1@dough.gmane.org>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=8uTlc5KSGF9rpUJYKjb5eEQ7gAJvcCBxJ0wySNl9roc=;
+	b=C/Ewk43FtpWUoDbG009GMAAWjnpXqd314RAvFEe1cBtW9DSlJgm4E8Eyn3b+8volWE
+	AmGLgncbEr0SeqNI0GekhIynzXYJfgOVpcqgeBMrnC7xdSdtpqRRV58eGOCf+FPTNPIL
+	78rZH4K6TcbDTsMlMWkR87v2WzFwhb52NsLvjHD3OWgXwf7qZrf5qPj5K6uepdxkuksp
+	Bu+ougBR2x9Jrhwz5643cn22cg6zUBuBBg+97kxrJr0LGWm0cWtw+tObhwqwYWfs3S7j
+	GKH52mNTvQN9m4f6+ASthtpwVK0aYJKgvjAbPsTPQle9FvEu60sQ1F+McFHBM0D+3B4Y
+	2Dgg==
 MIME-Version: 1.0
-In-Reply-To: <ju8ja5$832$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][RFC 00/14] Newer EFL if someone is interested - just RFC now
+Received: by 10.220.116.79 with SMTP id l15mr7964757vcq.69.1343567448543; Sun,
+	29 Jul 2012 06:10:48 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.220.220.196 with HTTP; Sun, 29 Jul 2012 06:10:48 -0700 (PDT)
+In-Reply-To: <1343515918-20671-2-git-send-email-raj.khem@gmail.com>
+References: <1343515918-20671-1-git-send-email-raj.khem@gmail.com>
+	<1343515918-20671-2-git-send-email-raj.khem@gmail.com>
+Date: Sun, 29 Jul 2012 10:10:48 -0300
+X-Google-Sender-Auth: pfM0snPXKdcug5UTyXUM3K_HBW0
+Message-ID: <CAP9ODKrX04zfu_wVg317WPgc=u38niLtjmfkBiNrzfkTgBCbeA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-systemd][PATCH 2/2] busybox: stopping systemd-kmsg-syslogd is not needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,57 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jul 2012 11:38:49 -0000
-X-Groupsio-MsgNum: 39912
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WChQLJJJfbwij+9x"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Jul 2012 13:22:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---WChQLJJJfbwij+9x
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Jul 28, 2012 at 7:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> systemd-kmsg-syslogd.service is discontinued in systemd so
+> there is no need to stop it.
 
-On Thu, Jul 19, 2012 at 11:16:53AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 18-07-12 23:19, Martin Jansa schreef:
-> > It's RFC because I've tested it only with efl-from-svn-recipes.inc in u=
-se
-> >  (1.2.1 EFL isn't probably compatible with this new e-wm and stuff..)
-> > and without rebuilding from scratch (will probably force me to fix some
-> > other recipes too because of new automake etc.. :/)
-> >=20
-> > Next EFL release is planed for end of July and first E17 release after
-> > that so it's time for interested people to test their changes, but I'll
-> > probably send final pull-request only when there are beta/rc tarballs t=
-oo
-> > (so that efl-from-svn-recipes.inc won't be needed).
->=20
-> Any volunteers for adding EPhysics?
+I don't see a relationship in above description :-)
 
-I haven't looked into EPhysics as I don't have any use for it, but with
-last jansa/efl update, I've added evas-generic-loaders, because evas
-doesn't have native svg support anymore (as we probably won't package esvg)
+Or we drop it completely or it needs to be stoped ;-)
 
-BTW: this branch is regulary updated (sometimes rebased) to track latest
-EFL.
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---WChQLJJJfbwij+9x
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAVHgwACgkQN1Ujt2V2gBygDwCfVIRLYNhhBVKYOdsU+UYFzyyQ
-XkoAniQsc8gCViLi6o2jsjzh/sTUT2zx
-=qvhk
------END PGP SIGNATURE-----
-
---WChQLJJJfbwij+9x--
