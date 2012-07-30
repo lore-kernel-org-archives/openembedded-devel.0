@@ -1,40 +1,31 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SvTq8-00069R-RQ
+	(envelope-from <raj.khem@gmail.com>) id 1SvgEp-0004Lb-5a
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Jul 2012 15:47:24 +0200
-Received: by weyr6 with SMTP id r6so2785218wey.6
+	Mon, 30 Jul 2012 05:01:43 +0200
+Received: by pbbrq2 with SMTP id rq2so7922977pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2012 06:35:50 -0700 (PDT)
+	Sun, 29 Jul 2012 19:50:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3Mv/bba0dPkrDNBdniNg3MneiBgOHHH2VTVcW70Bh3Y=;
-	b=XCYxA/m5ld2bo/WYcJBxv5ITx/aAgHwRBsFW0HMo5TaI3zRYTL1C2GsxgJcwIC95Xh
-	ZxNeQeFnrM07cDVVtrpS5SEPu2qA3xw0jEFCw91Crpncjmeg4mzrvboBB3BUvwFPal/U
-	Tx7VF6+x/w/wrozNsC5yfsRZ6yEVAenMBGGNQn9N5Lzlgty+89LfPDiJnwPD0bBVOQUx
-	ugLFXw3WZJOvYGP00mZdKHh1JAx9SGmaYqRW9HCl5XE3EvK7klkJc3MCePQlJ5Kkyqvn
-	PbSy94pbPVWpeXyOfrhNesSywWFaOP9XH1ypcRH5SNvH5axL4KEnS67Ssbf+NFey7z24
-	LzMA==
-Received: by 10.180.86.133 with SMTP id p5mr19360966wiz.17.1343568950299;
-	Sun, 29 Jul 2012 06:35:50 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fu8sm10597721wib.5.2012.07.29.06.35.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Jul 2012 06:35:49 -0700 (PDT)
-Date: Sun, 29 Jul 2012 15:35:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lTU+V/OpvCcrXJ6ThskPv4B8rq5nP6muJ6opGeiXSMI=;
+	b=BbGt6FzxqhZ0vwNVsFcTDcVtx1kdyEfSsgaWWvZ5mirv35r/hAL4rskBvc7fYVgW9W
+	tP/hnl9Uf36MQMuGwjxvh7Fxol/HGh0tbcdhzl329640uD438lLT0yzlhBlNsEIEFSAC
+	c3rvTvzqOWrl6tIt/thi4Wn1HWICExR5SE1ON0hlg1e3em73a/cFfGYG7e/HYqhbKeOv
+	F2crvkae0AFb2y9Kyp7QjYF+IsGg2yu3HK8YqS89wc2sM9fWFz+OvSuVGH9XTPh4GPud
+	NpQT6/W7H4FzDEYx5sKdxsGSWoUKyFklcHpWgGEoXOOZRfJpSrBp/oPR6obXdZSSRbYf
+	WMpA==
+Received: by 10.68.232.197 with SMTP id tq5mr31620360pbc.53.1343616606907;
+	Sun, 29 Jul 2012 19:50:06 -0700 (PDT)
+Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id ka5sm6917633pbb.37.2012.07.29.19.50.04
+	(version=SSLv3 cipher=OTHER); Sun, 29 Jul 2012 19:50:05 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120729133543.GG3261@jama.jama.net>
-References: <1343515918-20671-1-git-send-email-raj.khem@gmail.com>
-	<1343515918-20671-2-git-send-email-raj.khem@gmail.com>
-	<CAP9ODKrX04zfu_wVg317WPgc=u38niLtjmfkBiNrzfkTgBCbeA@mail.gmail.com>
-	<20120729131359.GF3261@jama.jama.net>
-	<CAP9ODKoQPz2p4Qc+HtsRy_4EV-JwCgzhd=oO7RUyUbH4LjiM=A@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoQPz2p4Qc+HtsRy_4EV-JwCgzhd=oO7RUyUbH4LjiM=A@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-systemd][PATCH 2/2] busybox: stopping systemd-kmsg-syslogd is not needed
+Date: Sun, 29 Jul 2012 19:49:52 -0700
+Message-Id: <1343616592-11550-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-systemd][PATCH] systemd: Use cross cpp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,60 +39,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jul 2012 13:47:24 -0000
-X-Groupsio-MsgNum: 39916
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IuhbYIxU28t+Kd57"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Jul 2012 03:01:43 -0000
 
---IuhbYIxU28t+Kd57
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While building for non x86 arch (ppc) found that build
+was using host's cpp which was not generating exact
+syscall list for ppc since it was using the include files
+from host
 
-On Sun, Jul 29, 2012 at 10:16:06AM -0300, Otavio Salvador wrote:
-> On Sun, Jul 29, 2012 at 10:13 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Sun, Jul 29, 2012 at 10:10:48AM -0300, Otavio Salvador wrote:
-> >> On Sat, Jul 28, 2012 at 7:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >> > systemd-kmsg-syslogd.service is discontinued in systemd so
-> >> > there is no need to stop it.
-> >>
-> >> I don't see a relationship in above description :-)
-> >>
-> >> Or we drop it completely or it needs to be stoped ;-)
-> >
-> > It's not installed by current systemd, so busybox-syslogd-systemd is
-> > failing (to start/stop) because it's trying to stop it.
->=20
-> Then the .systemd file needs to be removed, not the stop to be dropped.
+With this patch will use $(CPP) instead of hardcoding
+cpp in makefile.am and then set CPP properly in recipe
 
-what's .systemd file?
+Fixes build failures on cross builds
 
-systemd-kmsg-syslogd.service *was* already removed in current systemd versi=
-on
-we have in meta-systemd.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../systemd/systemd/use-cross-cpp.patch            |   30 ++++++++++++++++++++
+ meta-systemd/recipes-core/systemd/systemd_187.bb   |    5 +++
+ 2 files changed, 35 insertions(+), 0 deletions(-)
+ create mode 100644 meta-systemd/recipes-core/systemd/systemd/use-cross-cpp.patch
 
-busybox-syslog.service.in can still be usefull for someone and it should
-work if=20
-ExecStartPre=3D/bin/systemctl stop systemd-kmsg-syslogd.service
-line is removed like khem did.
+diff --git a/meta-systemd/recipes-core/systemd/systemd/use-cross-cpp.patch b/meta-systemd/recipes-core/systemd/systemd/use-cross-cpp.patch
+new file mode 100644
+index 0000000..8a4371e
+--- /dev/null
++++ b/meta-systemd/recipes-core/systemd/systemd/use-cross-cpp.patch
+@@ -0,0 +1,30 @@
++hardcoding cpp does not work when cross compiling systemd.
++since it will use the include headers from host system and
++syscalls are different for different architectures.
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Upstream-Status: Pending
++
++Index: systemd-187/Makefile.am
++===================================================================
++--- systemd-187.orig/Makefile.am	2012-07-29 16:39:57.628405921 -0700
+++++ systemd-187/Makefile.am	2012-07-29 16:40:37.248405921 -0700
++@@ -1026,7 +1026,7 @@
++ 	src/core/syscall-to-name.h
++ 
++ src/core/syscall-list.txt: Makefile
++-	$(AM_V_GEN)cpp $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include sys/syscall.h < /dev/null | $(AWK) '/^#define[ \t]+__NR_[^ ]+[ \t]+[0-9]/ { sub(/__NR_/, "", $$2); print $$2; }' > $@
+++	$(AM_V_GEN)$(CPP) $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include sys/syscall.h < /dev/null | $(AWK) '/^#define[ \t]+__NR_[^ ]+[ \t]+[0-9]/ { sub(/__NR_/, "", $$2); print $$2; }' > $@
++ 
++ src/core/syscall-from-name.gperf: src/core/syscall-list.txt Makefile
++ 	$(AM_V_GEN)$(AWK) 'BEGIN{ print "struct syscall_name { const char* name; int id; };"; print "%null-strings"; print "%%";} { printf "%s, __NR_%s\n", $$1, $$1 }' < $< > $@
++@@ -2199,7 +2199,7 @@
++ 
++ src/udev/keymap/keys.txt: Makefile
++ 	$(AM_V_at)mkdir -p src/udev/keymap
++-	$(AM_V_GEN)cpp $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include linux/input.h < /dev/null | $(AWK) '/^#define[ \t]+KEY_[^ ]+[ \t]+[0-9]/ { if ($$2 != "KEY_MAX") { print $$2 } }' | sed 's/^KEY_COFFEE$$/KEY_SCREENLOCK/' > $@
+++	$(AM_V_GEN)$(CPP) $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include linux/input.h < /dev/null | $(AWK) '/^#define[ \t]+KEY_[^ ]+[ \t]+[0-9]/ { if ($$2 != "KEY_MAX") { print $$2 } }' | sed 's/^KEY_COFFEE$$/KEY_SCREENLOCK/' > $@
++ 
++ src/udev/keymap/keys-from-name.gperf: src/udev/keymap/keys.txt Makefile
++ 	$(AM_V_GEN)$(AWK) 'BEGIN{ print "struct key { const char* name; unsigned short id; };"; print "%null-strings"; print "%%";} { print $$1 ", " $$1 }' < $< > $@
+diff --git a/meta-systemd/recipes-core/systemd/systemd_187.bb b/meta-systemd/recipes-core/systemd/systemd_187.bb
+index a6f6281..a52e5a8 100644
+--- a/meta-systemd/recipes-core/systemd/systemd_187.bb
++++ b/meta-systemd/recipes-core/systemd/systemd_187.bb
+@@ -15,10 +15,14 @@ SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+ 
+ SECTION = "base/shell"
+ 
++PR = "r1"
++
++
+ inherit useradd pkgconfig autotools perlnative
+ 
+ SRC_URI = "http://www.freedesktop.org/software/systemd/${P}.tar.xz \
+            file://use-rootlibdir.patch \
++           file://use-cross-cpp.patch \
+            file://gtk-doc.make \
+            file://touchscreen.rules \
+            file://modprobe.rules \
+@@ -55,6 +59,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
+ 
+ # There's no docbook-xsl-native, so for the xsltproc check to false
+ do_configure_prepend() {
++	export CPP="${HOST_PREFIX}cpp ${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}"
+ 	sed -i /xsltproc/d configure.ac
+ 
+ 	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
+-- 
+1.7.5.4
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---IuhbYIxU28t+Kd57
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAVPC8ACgkQN1Ujt2V2gBzU2ACgie5uxHLJnTSB2NFkHAsq0dS0
-jJwAniWZxwa57Ht67f7ZOYfzQBF3nvt1
-=xCVR
------END PGP SIGNATURE-----
-
---IuhbYIxU28t+Kd57--
