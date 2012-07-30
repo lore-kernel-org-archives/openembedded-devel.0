@@ -1,38 +1,37 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Svrse-0002tu-Rg
+	(envelope-from <martin.jansa@gmail.com>) id 1SvrwN-0005zd-2e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jul 2012 17:27:36 +0200
-Received: by bkcik5 with SMTP id ik5so2201258bkc.6
+	Mon, 30 Jul 2012 17:31:27 +0200
+Received: by bkcik5 with SMTP id ik5so2202948bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2012 08:16:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=hDmz45dxud0ke4svUJDzjOCY2LGZDj/BhtrzAL71RJI=;
-	b=wUZMqF0viE1yod95bXkBTLsgBSrl68qpmxL7Cd2QsEixnZ5StbNOvOzASc0pDYzNBy
-	kJQWoSNMmMRDaXri8mGbTu+TidwYWb91DBnvVx33659NimANNcAOnIL++4Ud0WbbVRWr
-	3krWbaZ997+oi5LMDn1iOCb7AckrwCiIDlgESLMYA6erN93ORm7vSyICC8kTr7Lj79AO
-	ed1tbsp3ZfnxQmFEN6DvyVrwD6sFAN9nGrHRHkNsyYQa20k0AOOUrS1d54FUJtvILXaA
-	nTapGIQqauuAmpgcF7M7i2OZVwPa1DUNoQxXdyoJIgXU9aXvCuMm65k5qzwhMgnNbyvi
-	Ae+Q==
-Received: by 10.204.128.213 with SMTP id l21mr4018626bks.84.1343661361184;
-	Mon, 30 Jul 2012 08:16:01 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
-	[95.222.160.112])
-	by mx.google.com with ESMTPS id t23sm4009138bks.4.2012.07.30.08.15.59
+	Mon, 30 Jul 2012 08:19:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=rjtZ+tlCnVtKJ9Lhzb+zHHzMJl7dAx2gkpH5U7nmh4k=;
+	b=Da7U5Jp/pCF3gDVQq/6ZqnexkkVR8MKQxyM0fVoznKznvlHQ7fv5WFuEjxErKjEKPp
+	SDj70+0vS/l8A0Dg1yuwtvCqXALwnfD9nVP/5/7y+MA8oZTea8lipx26Y3kNQ2V50BMo
+	sxU/0qJuK/XcezX9lgTb3MK1B8O7gvsEepg1rl+yxh6aprlngGop07zcOZzD3h171/o2
+	jvAt9yb5HeAJj3e+Q93o6AhhOW9gnNWyQKzAW8/Zp3+ofcMWxiMNhOUFiF3tHL0ofTbB
+	S1PEmixE1v6ODw8f7Ujwh52ZETAIJ4qmlGxkwovmZbobNNKuO7uu/strfieO7pVqw5qw
+	ejRg==
+Received: by 10.204.152.145 with SMTP id g17mr4000759bkw.120.1343661578603;
+	Mon, 30 Jul 2012 08:19:38 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id g6sm4014040bkg.2.2012.07.30.08.19.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jul 2012 08:16:00 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 30 Jul 2012 08:19:37 -0700 (PDT)
+Date: Mon, 30 Jul 2012 17:19:32 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jul 2012 17:15:28 +0200
-Message-Id: <1343661328-26631-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1343661328-26631-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1343661328-26631-1-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20120730151932.GL3261@jama.jama.net>
+References: <1343660648-20358-1-git-send-email-gary@mlbassoc.com>
+	<1343660648-20358-2-git-send-email-gary@mlbassoc.com>
 MIME-Version: 1.0
-Subject: [meta-oe 2/2] gnome-menus: stop configure detecting host's python
+In-Reply-To: <1343660648-20358-2-git-send-email-gary@mlbassoc.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] [meta-oe] libxml++: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 15:27:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 30 Jul 2012 15:31:28 -0000
+X-Groupsio-MsgNum: 39931
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L1EIGrW/+75u5Nmw"
+Content-Disposition: inline
 
-This patch does not cause python bindings builded properly (native headers included)
+--L1EIGrW/+75u5Nmw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-error message was:
-ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
-Rerun configure task after fixing this. The path was '/home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gnome-menus-2.30.5-r0/gnome-menus-2.30.5'
-ERROR: Function failed: do_qa_configure
-ERROR: Logfile of failure stored in: /home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gnome-menus-2.30.5-r0/temp/log.do_configure.7913
-NOTE: package gnome-menus-2.30.5-r0: task do_configure: Failed
+On Mon, Jul 30, 2012 at 09:04:08AM -0600, Gary Thomas wrote:
+> Library for C++ bindings to libxml
+>=20
+> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+> ---
+>  meta-oe/recipes-core/libxml/libxml++_2.35.3.bb |   16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+>=20
+> diff --git a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb b/meta-oe/rec=
+ipes-core/libxml/libxml++_2.35.3.bb
+> new file mode 100644
+> index 0000000..ca9388c
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "C++ wrapper for libxml library"
+> +DESCRIPTION =3D "C++ wrapper for libxml library"
+> +HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
+> +BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2=
+B%2B"
+> +SECTION =3D "libs"
+> +LICENSE =3D "GPLv2"
+> +
+> +SRC_URI =3D "http://ftp.gnome.org/pub/GNOME/sources/libxml++/2.35/libxml=
+++-2.35.3.tar.xz"
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../gnome-menus/gnome-menus_2.30.5.bb              |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Use something like:
+SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',True).=
+split('.')[1]}"
+SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
 
-diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-index d4057c0..f8b2fac 100644
---- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-+++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-@@ -3,10 +3,11 @@ SECTION = "x11/gnome"
- LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-+PR = "r1"
- 
- DEPENDS = "python libxml2 gconf popt gtk+"
- 
--inherit gnome pkgconfig python-dir
-+inherit gnome pkgconfig python-dir pythonnative
- 
- SRC_URI[archive.md5sum] = "caa6772e63ed5870cf43dc3d354e0624"
- SRC_URI[archive.sha256sum] = "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61c804c0dc9bf5ea50629c4caa"
--- 
-1.7.6.5
+> +SRC_URI[md5sum] =3D "196a2dcdc84ab987fe3852b3f29cafd7"
+> +SRC_URI[sha256sum] =3D "715a4214bbff90365cc8406a28e427febd90461006d608fb=
+dcdcea7fc9891eaf"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
+e34 "
+> +
+> +DEPENDS =3D "libxml2 glibmm"
+> +
+> +inherit autotools pkgconfig
+> +
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--L1EIGrW/+75u5Nmw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAWpgQACgkQN1Ujt2V2gBwVrACeMO8MlPJh3fehv+3ymfzpNPSD
+xkAAnR90pMadmqHPIYFrBe9e39jcUk9j
+=TnJl
+-----END PGP SIGNATURE-----
+
+--L1EIGrW/+75u5Nmw--
