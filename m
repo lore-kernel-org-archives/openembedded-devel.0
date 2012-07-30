@@ -1,36 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Svrsd-0002tt-Bu
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Svrse-0002tu-Rg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jul 2012 17:27:35 +0200
-Received: by bkcik5 with SMTP id ik5so2201248bkc.6
+	Mon, 30 Jul 2012 17:27:36 +0200
+Received: by bkcik5 with SMTP id ik5so2201258bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2012 08:15:59 -0700 (PDT)
+	Mon, 30 Jul 2012 08:16:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=TcQXF00odtt2ZLrVTsZJNVtpyYcdPtpLIB/7khnbyOA=;
-	b=vSaD39+65yGiOJjVSGCc8MHE735kViByb44U9SRMlAX76igcToaIaGMo/3JLtGnHsk
-	OMvC3I3wIM8sj5MOzxsY0QoH8ZKbjp8qzzlexWgTnmb2URa2/3fVzdk43vlEWIzvDf8o
-	eK0MQ+NhOtoYmscr0j4TEfIweGAPg+t42PqJAzTUrXhWbldW13fTErvkdPcScHvkENFr
-	3NrhyuVExa25JZ1UrikAVKfvpMcfNGqqLozYPUT6bE1bD7ndrdHXgCjLfpn/GmbDGtt8
-	qo+rXXw7PGddHswiWD0MSPAnb+fHCeREyGZPE+etJ+Inp6adSYzwWiZ7/J4dshOsTg+6
-	L+pA==
-Received: by 10.204.154.73 with SMTP id n9mr4021248bkw.113.1343661359575;
-	Mon, 30 Jul 2012 08:15:59 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=hDmz45dxud0ke4svUJDzjOCY2LGZDj/BhtrzAL71RJI=;
+	b=wUZMqF0viE1yod95bXkBTLsgBSrl68qpmxL7Cd2QsEixnZ5StbNOvOzASc0pDYzNBy
+	kJQWoSNMmMRDaXri8mGbTu+TidwYWb91DBnvVx33659NimANNcAOnIL++4Ud0WbbVRWr
+	3krWbaZ997+oi5LMDn1iOCb7AckrwCiIDlgESLMYA6erN93ORm7vSyICC8kTr7Lj79AO
+	ed1tbsp3ZfnxQmFEN6DvyVrwD6sFAN9nGrHRHkNsyYQa20k0AOOUrS1d54FUJtvILXaA
+	nTapGIQqauuAmpgcF7M7i2OZVwPa1DUNoQxXdyoJIgXU9aXvCuMm65k5qzwhMgnNbyvi
+	Ae+Q==
+Received: by 10.204.128.213 with SMTP id l21mr4018626bks.84.1343661361184;
+	Mon, 30 Jul 2012 08:16:01 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id t23sm4009138bks.4.2012.07.30.08.15.58
+	by mx.google.com with ESMTPS id t23sm4009138bks.4.2012.07.30.08.15.59
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jul 2012 08:15:58 -0700 (PDT)
+	Mon, 30 Jul 2012 08:16:00 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jul 2012 17:15:27 +0200
-Message-Id: <1343661328-26631-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 30 Jul 2012 17:15:28 +0200
+Message-Id: <1343661328-26631-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1343661328-26631-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1343661328-26631-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe 1/2] exo: stop configure detecting host's python
+Subject: [meta-oe 2/2] gnome-menus: stop configure detecting host's python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 15:27:35 -0000
+X-List-Received-Date: Mon, 30 Jul 2012 15:27:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -52,40 +54,33 @@ This patch does not cause python bindings builded properly (native headers inclu
 
 error message was:
 ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
-Rerun configure task after fixing this. The path was '/home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/exo-0.6.2-r0/exo-0.6.2'
+Rerun configure task after fixing this. The path was '/home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gnome-menus-2.30.5-r0/gnome-menus-2.30.5'
 ERROR: Function failed: do_qa_configure
-ERROR: Logfile of failure stored in: /home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/exo-0.6.2-r0/temp/log.do_configure.13932
-NOTE: package exo-0.6.2-r0: task do_configure: Failed
+ERROR: Logfile of failure stored in: /home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gnome-menus-2.30.5-r0/temp/log.do_configure.7913
+NOTE: package gnome-menus-2.30.5-r0: task do_configure: Failed
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/exo/exo_0.6.2.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ .../gnome-menus/gnome-menus_2.30.5.bb              |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.6.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.6.2.bb
-index b9fc687..ad8dc59 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.6.2.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.6.2.bb
-@@ -4,9 +4,9 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- DEPENDS = "gtk+ libxfce4util virtual/libx11 perl-native cairo"
- 
--PR = "r0"
+diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
+index d4057c0..f8b2fac 100644
+--- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
+@@ -3,10 +3,11 @@ SECTION = "x11/gnome"
+ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 +PR = "r1"
  
--inherit xfce
-+inherit xfce pythonnative
+ DEPENDS = "python libxml2 gconf popt gtk+"
  
- # SRC_URI must follow inherited one
- SRC_URI += " \
-@@ -16,7 +16,6 @@ SRC_URI += " \
-     file://fix-qa-desktop-type-error.patch \
- "
+-inherit gnome pkgconfig python-dir
++inherit gnome pkgconfig python-dir pythonnative
  
--
- # see http://wiki.xfce.org/gnomemount-replacement
- do_install_append () {
- 	install -m 755 -d ${D}${bindir}/exo-mount-wrapper
+ SRC_URI[archive.md5sum] = "caa6772e63ed5870cf43dc3d354e0624"
+ SRC_URI[archive.sha256sum] = "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61c804c0dc9bf5ea50629c4caa"
 -- 
 1.7.6.5
 
