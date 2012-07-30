@@ -1,25 +1,25 @@
-Received: from vms173021pub.verizon.net ([206.46.173.21])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Svukn-0006JF-DG
+	(envelope-from <apelete@seketeli.net>) id 1SvvWA-0003C4-7r
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jul 2012 20:31:41 +0200
-Received: from gandalf.denix.org ([unknown] [96.240.136.247])
-	by vms173021.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M7Z00HQMHGNG8B9@vms173021.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	30 Jul 2012 12:19:36 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4F994201B8; Mon,
-	30 Jul 2012 13:19:34 -0400 (EDT)
-Date: Mon, 30 Jul 2012 13:19:34 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 30 Jul 2012 21:20:38 +0200
+Received: from localhost (unknown [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 9E190EA040
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jul 2012 21:29:37 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id BE329609AF; Mon, 30 Jul 2012 21:09:02 +0200 (CEST)
+Date: Mon, 30 Jul 2012 21:09:02 +0200
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20120730171934.GA11175@denix.org>
-References: <cover.1343104879.git.denys@ti.com>
-MIME-version: 1.0
-In-reply-to: <cover.1343104879.git.denys@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [2011.03-maintenance][PATCH 0/1] Pull request 20110723
+Message-ID: <20120730190902.GA5127@hermes>
+References: <cover.1342677797.git.apelete@seketeli.net>
+MIME-Version: 1.0
+In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
+X-Operating-System: Debian GNU/Linux wheezy/sid
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011.03-maintenance][PATCH 0/9] Pull request 20120719
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,40 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 18:31:41 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 30 Jul 2012 19:20:38 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ping.
-
-On Tue, Jul 24, 2012 at 12:52:28AM -0400, Denys Dmytriyenko wrote:
-> Tom,
-> 
-> Please pull this commit that fixes opkg-utils when generating pkg index
-> 
-> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
->   Branch: 2011.03-maintenance
->   Browse: http://arago-project.org/git/people/?p=denix/openembedded.git;a=shortlog;h=refs/heads/2011.03-maintenance
-> 
-> Thanks,
->     Denys Dmytriyenko <denys@ti.com>
-> ---
-> 
-> The following changes since commit f9611c025109a3e0d6cebf12f49ae24c97759c09:
-> 
->   psplash: convert from svn.o-hand.com to git.yoctoproject.org (2012-07-04 22:34:04 +0200)
-> 
+Le 19-Jul-12, Apelete Seketeli a =E9crit:
+>=20
+> The patches that come as a follow-up of this message fix issues found
+> while building muffinman-image on top of the 2011.03-maintenance
+> branch.
+> These modifications were tested by successfully building
+> muffinman-image from scratch on a Debian Squeeze host.
+> Please pull into 2011.03-maintenance branch.
+>=20
+> The following changes since commit f9611c025109a3e0d6cebf12f49ae24c9775=
+9c09:
+>=20
+>   psplash: convert from svn.o-hand.com to git.yoctoproject.org (2012-07=
+-04 22:34:04 +0200)
+>=20
 > are available in the git repository at:
->   git://arago-project.org/git/people/denix/openembedded 2011.03-maintenance
-> 
-> Denys Dmytriyenko (1):
->   opkg-utils: bump SRCREV to pick up subprocess.check_output fixes
-> 
->  recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> -- 
-> 1.7.8.6
-> 
+>=20
+>   git://seketeli.net/~apelete/oe.git muffinman-image-fix
+
+Hello,
+
+Trying to bring some attention onto this thread.
+Are there more blocking issues I should fix before getting those
+patches merged ?
+
+Cheers.
+--=20
+        Apelete
 
 
