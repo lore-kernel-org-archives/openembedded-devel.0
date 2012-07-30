@@ -1,29 +1,32 @@
-Received: from ams-iport-4.cisco.com ([144.254.224.147])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1Svmml-0006eo-5s
+	(envelope-from <martin.jansa@gmail.com>) id 1Svost-0001af-DF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jul 2012 12:01:11 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=mertsas@cisco.com; l=2066; q=dns/txt;
-	s=iport; t=1343641777; x=1344851377;
-	h=from:to:cc:subject:date:message-id;
-	bh=k6/e+Pb4H0dqUpyc7iq8wvx/ULhtemzjjxNZNfdqTcA=;
-	b=hWU7vXdTDmNri2M+ChjWiWJ0fEZn57dWghUo2rmes/BooJWvLFc0/c4+
-	ljZE8w90MuerSCHyu0NvNy7AmhMtDN1koGIhAFajB1VoLMrqSyTFLoAca
-	lucbH390xCVkccKEJ/XCURbfAjdl32yLAbhmoD5UYziui0ae4fmzkjI9y o=;
-X-IronPort-AV: E=Sophos;i="4.77,679,1336348800"; 
-   d="scan'208";a="7002046"
-Received: from ams-core-2.cisco.com ([144.254.72.75])
-	by ams-iport-4.cisco.com with ESMTP; 30 Jul 2012 09:49:35 +0000
-Received: from Lan.cisco.com (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-2.cisco.com (8.14.5/8.14.5) with ESMTP id q6U9nZsk027006;
-	Mon, 30 Jul 2012 09:49:35 GMT
-From: Martin Ertsaas <mertsas@cisco.com>
+	Mon, 30 Jul 2012 14:15:43 +0200
+Received: by wibhq4 with SMTP id hq4so1528780wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jul 2012 05:04:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=vqhMT/WJcnwVRJnGmcbMbQt82CLN0w1LW7eNLxP2r7E=;
+	b=IEqO8hRh+p7LCips/6okKu8qILwPaWdIq/GwLnwRhKwmWEFt7AZiA30RHgqnagcP+m
+	yBiHxChb7HGZFCigv0a31zksFVJPGsxgMJohzWwPgBBH8Eexdr3UjzAb7FVDXy+/Ug1q
+	MgHBFQ77380k21vgK7TrYty6TMNUQTekietQONfVrc5OsJbnid0FYoXeAcnt3oWCP2ez
+	i1cMo/JfoU1hCQ4EnCk1ZsoP120Zwrtcj26nC1Ju31pBHavqpIV1Ks4dYZryf4dF+avY
+	05aCMAdkX0a+ef1KsIGUwz5mlAQOt3yTX1UVu1UiY+0KP+CA4LHJYqJKoWwv57MU9m+G
+	IP0Q==
+Received: by 10.216.138.220 with SMTP id a70mr5641867wej.170.1343649843859;
+	Mon, 30 Jul 2012 05:04:03 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l5sm23784092wix.5.2012.07.30.05.04.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 Jul 2012 05:04:02 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jul 2012 11:49:33 +0200
-Message-Id: <1343641773-16593-1-git-send-email-mertsas@cisco.com>
+Date: Mon, 30 Jul 2012 14:03:53 +0200
+Message-Id: <1343649833-23316-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][PATCH] recipes-devtools/autoconf-archive: new recipes for autoconf-archive
+Subject: [meta-browser][PATCH] Revert "chromium: use COMPATIBLE_HOST instead of COMPATIBLE_MACHINE"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,58 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 10:01:11 -0000
+X-List-Received-Date: Mon, 30 Jul 2012 12:15:45 -0000
 
-Add a new recipes which provides autoconf-archive 2012.04.07. This gives quite a few m4 files,
-which might be useful in toolchains.
+* COMPATIBLE_HOST is not good enough for some configurations:
+  ERROR: chromium was skipped: incompatible with host arm-oe-linux-gnueabi (not in COMPATIBLE_HOST)
+
+This reverts commit 7fb308d4f8d68d19a91daab8d33418cea8dea57b.
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../autoconf-archive/autoconf-archive.inc          |   15 +++++++++++++++
- .../autoconf-archive_2012.04.07.bb                 |   14 ++++++++++++++
- 2 files changed, 29 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
- create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+ recipes-browser/chromium/chromium_19.0.1049.3.bb |    6 ++++--
+ recipes-browser/chromium/chromium_20.0.1086.0.bb |    4 +++-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-new file mode 100644
-index 0000000..e8785f4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-@@ -0,0 +1,15 @@
-+LICENSE = "GPLv3"
-+HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
-+SECTION = "devel"
-+
-+DEPENDS += "m4-native"
-+DEPENDS_virtclass-native = "m4-native gnu-config-native"
-+DEPENDS_virtclass-nativesdk = "m4-nativesdk gnu-config-nativesdk"
-+
-+RDEPENDS_${PN} = "m4 gnu-config"
-+RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native"
-+RDEPENDS_${PN}_virtclass-nativesdk = "m4-nativesdk gnu-config-nativesdk"
-+
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
-+
-+inherit autotools
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-new file mode 100644
-index 0000000..c96723f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-@@ -0,0 +1,14 @@
-+require autoconf-archive.inc
-+
-+PR = "r0"
-+
-+PARALLEL_MAKE = ""
-+
-+LICENSE = "GPLv2 & GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
-+SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
-+
-+EXTRA_OECONF += "ac_cv_path_M4=m4"
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-browser/chromium/chromium_19.0.1049.3.bb b/recipes-browser/chromium/chromium_19.0.1049.3.bb
+index 97843a3..e657c48 100644
+--- a/recipes-browser/chromium/chromium_19.0.1049.3.bb
++++ b/recipes-browser/chromium/chromium_19.0.1049.3.bb
+@@ -10,8 +10,10 @@ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P
+ 	file://softfloat-fix.patch \
+ "
+ 
+-# include.gypi exists only for armv6 and armv7a
+-COMPATIBLE_HOST = "(armv6|armv7).*-linux"
++# include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
++COMPATIBLE_MACHINE = "(-)"
++COMPATIBLE_MACHINE_armv6 = "(.*)"
++COMPATIBLE_MACHINE_armv7a = "(.*)"
+ 
+ PR = "r1"
+ 
+diff --git a/recipes-browser/chromium/chromium_20.0.1086.0.bb b/recipes-browser/chromium/chromium_20.0.1086.0.bb
+index d1ae7e5..527f317 100644
+--- a/recipes-browser/chromium/chromium_20.0.1086.0.bb
++++ b/recipes-browser/chromium/chromium_20.0.1086.0.bb
+@@ -8,7 +8,9 @@ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P
+ "
+ 
+ # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
+-COMPATIBLE_HOST = "(armv6|armv7).*-linux"
++COMPATIBLE_MACHINE = "(-)"
++COMPATIBLE_MACHINE_armv6 = "(.*)"
++COMPATIBLE_MACHINE_armv7a = "(.*)"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
 -- 
 1.7.8.6
 
