@@ -1,37 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1SvxNd-0001B2-NG
+	(envelope-from <tom.rini@gmail.com>) id 1SvxOI-0001Gx-5B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Jul 2012 23:19:57 +0200
-Received: by pbbrq2 with SMTP id rq2so9176201pbb.6
+	Mon, 30 Jul 2012 23:20:38 +0200
+Received: by yenl13 with SMTP id l13so4814668yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2012 14:08:20 -0700 (PDT)
+	Mon, 30 Jul 2012 14:09:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=57hbIteYJlF9FOT0rQD3uFioHzw/Cfhqx2gbazl05f4=;
-	b=N9vwoAJ0GAokQHn0hpqgA1PrazglYg+QhjHGrQBwNQJ0CokMuOrb4Rr/sFUlfG5JMX
-	dQBE07MlOGKroyenm+YVbiV+jZ0dr9wVgdr4sE5PToVqnBKydqqAea9ZfFqSOCWUV2kX
-	To95oDQ8AENcEI6Q2mmIGrGPVV7SZISJX/QzDLhnftMzwydRvwD9gLQ0yjN20LLFFkkR
-	9sOUiLNLD8cbnTau+dgwh5HvVCgVddjQqc98zQe2De55schzD0cSIPTtLrf51ScjOCmY
-	MtvEzPL+Jg48pQXS8ihL2x0gvrJRfybLg7XlncTAY5EFycAov13OR2tosoApyDc5GNyQ
-	gBjw==
-Received: by 10.68.239.103 with SMTP id vr7mr39252113pbc.0.1343682500642;
-	Mon, 30 Jul 2012 14:08:20 -0700 (PDT)
+	:user-agent; bh=t3x2LtBivT1Gg4n3vrKeU3+i+AyMzXSyokRd/7LLylk=;
+	b=n4cjZS5DYugB67kS8t2bwAL7PivdQsKqNEUQ4co7WCEFSHlQ4AwP/X6XOGxl2z2hH+
+	Lv8sPXJP+hfzG+HatMi+8gKWfW4Cn7hUFAzORFRgNZaoV6e1AhNG+s/Z4zOn0KGerj86
+	fP/NDEuEUBefmgkBtwTVuyz/bXe0IXmKlFgsbxnvXK77HupqjDqK8C/U/kkF9rikf5sf
+	F6WEsn1tjai/2p3w3tEnDOJvZrjVIpPk0IJSKPrOqCUZn/8BUZLVk7+SNiJUrnmAHGaW
+	fG5hK9/o41uq9Rem9YdOpAQG5PyybaWNFT97u5Lz6+60TSnLaCRO7royDAGN56Zffl3O
+	n8Iw==
+Received: by 10.68.204.129 with SMTP id ky1mr39157841pbc.32.1343682541057;
+	Mon, 30 Jul 2012 14:09:01 -0700 (PDT)
 Received: from bill-the-cat ([2001:470:d:eba:b058:e4b1:e360:44b4])
-	by mx.google.com with ESMTPS id qc5sm8600992pbb.6.2012.07.30.14.08.19
+	by mx.google.com with ESMTPS id qd10sm8594026pbb.38.2012.07.30.14.09.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jul 2012 14:08:20 -0700 (PDT)
-Date: Mon, 30 Jul 2012 14:08:27 -0700
+	Mon, 30 Jul 2012 14:09:00 -0700 (PDT)
+Date: Mon, 30 Jul 2012 14:09:07 -0700
 From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120730210827.GE9554@bill-the-cat>
-References: <cover.1342677797.git.apelete@seketeli.net>
+Message-ID: <20120730210907.GF9554@bill-the-cat>
+References: <cover.1343104879.git.denys@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <cover.1342677797.git.apelete@seketeli.net>
+In-Reply-To: <cover.1343104879.git.denys@ti.com>
 Organization: Texas Instruments
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [2011.03-maintenance][PATCH 0/9] Pull request 20120719
+Subject: Re: [2011.03-maintenance][PATCH 0/1] Pull request 20110723
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 21:19:58 -0000
-X-Groupsio-MsgNum: 39935
+X-List-Received-Date: Mon, 30 Jul 2012 21:20:38 -0000
+X-Groupsio-MsgNum: 39936
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="l76fUT7nc3MelDdI"
+	protocol="application/pgp-signature"; boundary="da4uJneut+ArUgXk"
 Content-Disposition: inline
 
---l76fUT7nc3MelDdI
+--da4uJneut+ArUgXk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 19, 2012 at 07:20:31PM +0200, Apelete Seketeli wrote:
-> Hello,
+On Tue, Jul 24, 2012 at 12:52:28AM -0400, Denys Dmytriyenko wrote:
+> Tom,
 >=20
-> The patches that come as a follow-up of this message fix issues found
-> while building muffinman-image on top of the 2011.03-maintenance
-> branch.
-> These modifications were tested by successfully building
-> muffinman-image from scratch on a Debian Squeeze host.
-> Please pull into 2011.03-maintenance branch.
+> Please pull this commit that fixes opkg-utils when generating pkg index
+>=20
+> Pull URL: git://arago-project.org/git/people/denix/openembedded.git
+>   Branch: 2011.03-maintenance
+>   Browse: http://arago-project.org/git/people/?p=3Ddenix/openembedded.git=
+;a=3Dshortlog;h=3Drefs/heads/2011.03-maintenance
+>=20
+> Thanks,
+>     Denys Dmytriyenko <denys@ti.com>
+> ---
 >=20
 > The following changes since commit f9611c025109a3e0d6cebf12f49ae24c97759c=
 09:
@@ -73,51 +77,30 @@ On Thu, Jul 19, 2012 at 07:20:31PM +0200, Apelete Seketeli wrote:
 4 22:34:04 +0200)
 >=20
 > are available in the git repository at:
+>   git://arago-project.org/git/people/denix/openembedded 2011.03-maintenan=
+ce
 >=20
->   git://seketeli.net/~apelete/oe.git muffinman-image-fix
+> Denys Dmytriyenko (1):
+>   opkg-utils: bump SRCREV to pick up subprocess.check_output fixes
 >=20
-> Apelete Seketeli (9):
->   mirrors.bbclass: add new GNU_MIRROR
->   mirrors.bbclass: add new KERNELORG_MIRROR
->   libpng: update SRC_URI
->   bluez4_4.84: update checksum values
->   netsurf: update SRC_URI
->   tzcode: update SRC_URI
->   tzdata: update SRC_URI
->   git: update SRC_URI
->   opkg-utils: bump SRCREV to keep python2.6 compatibility
->=20
->  classes/mirrors.bbclass                 |    2 ++
->  recipes/bluez/bluez4_4.84.bb            |    4 ++--
->  recipes/git/git.inc                     |    2 +-
->  recipes/libpng/libpng.inc               |    2 +-
->  recipes/netsurf/hubbub_0.0.2.bb         |    2 +-
->  recipes/netsurf/libcss_0.0.2.bb         |    2 +-
->  recipes/netsurf/libnsbmp_0.0.2.bb       |    2 +-
->  recipes/netsurf/libnsgif_0.0.2.bb       |    2 +-
->  recipes/netsurf/libparserutils_0.0.2.bb |    2 +-
->  recipes/netsurf/libwapcaplet_0.0.2.bb   |    2 +-
->  recipes/netsurf/netsurf_2.6.bb          |    2 +-
->  recipes/opkg-utils/opkg-utils_git.bb    |    4 ++--
->  recipes/tzcode/tzcode-native.inc        |    4 ++--
->  recipes/tzdata/tzdata.inc               |    2 +-
->  14 files changed, 18 insertions(+), 16 deletions(-)
+>  recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 
 Applied, thanks.
 
 --=20
 Tom
 
---l76fUT7nc3MelDdI
+--da4uJneut+ArUgXk
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlAW98sACgkQdZngf2G4WwO4rACgiGhI8ShiCKgxoOW4Q3GjmD1w
-Kf0AoIuZw5WY6yEoWYPslIhL1nBMMRwH
-=bbMp
+iEYEARECAAYFAlAW9/MACgkQdZngf2G4WwNO1gCfc2XtDUF2Hpiz9dI11iea65Tv
+aJ8An3qa4qTiRkK4MHQSD+xbJKClSsoV
+=kPtU
 -----END PGP SIGNATURE-----
 
---l76fUT7nc3MelDdI--
+--da4uJneut+ArUgXk--
