@@ -1,34 +1,23 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SwJVo-0002eR-Ev
+Received: from mx02.stofanet.dk ([212.10.10.12])
+	by linuxtogo.org with esmtp (Exim 4.72) (envelope-from <sgh@sgh.dk>)
+	id 1SwLSp-0007Fu-Sv for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Aug 2012 01:02:56 +0200
+Received: from 5634f1b4.rev.stofanet.dk ([86.52.241.180] helo=asrock)
+	by mx03.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1SwKgi-0000XL-1z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jul 2012 22:57:52 +0200
-Received: by eekb57 with SMTP id b57so1404755eek.6
+	Wed, 01 Aug 2012 00:13:12 +0200
+Received: from koontz.localnet (sgh.sgh.dk [192.168.0.23])
+	by asrock (Postfix) with ESMTPS id 281837ED62
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2012 13:46:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hPuMfbGuvMjCraj/7qNSLdMMlqSdsrKJW/xzanAu9m8=;
-	b=mO+8Iww4GPVKT4Etw9bSO2Ult91LVjwhcVUcBjTo+0oG3C8GF1lj5fmY+tax79A/WR
-	PNBEwMvj85vgYvN4DWVZabolna+Km00g2p1+dKGI5rc1Qq36xDkTfGcijqoCvKCcp4cB
-	EVSUVYtxUdIheLddqJ79yl6LUavDryur/sadBYn5Ni+QMeMDVVIUxHQwj6Yo2WxJBv2m
-	PrAYOsHVdzjDqWIQ/ejvxXMuacQwJPcCobRTNTohLb8AgKgzi4O0hEYs6J4T4PlFkgvK
-	lF0ERuF/o1PWHkW8y8h8LFiGmqmm8AQm3rgKnuxnPu3OHxWBvAWR3Jf6VtZK9w7OAyeF
-	QW0A==
-MIME-Version: 1.0
-Received: by 10.14.219.198 with SMTP id m46mr19509910eep.18.1343767575108;
-	Tue, 31 Jul 2012 13:46:15 -0700 (PDT)
-Received: by 10.14.97.141 with HTTP; Tue, 31 Jul 2012 13:46:15 -0700 (PDT)
-In-Reply-To: <20120731194351.GX3261@jama.jama.net>
-References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
-	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
-	<jv9acn$ckm$1@dough.gmane.org>
-	<20120731194351.GX3261@jama.jama.net>
-Date: Tue, 31 Jul 2012 13:46:15 -0700
-Message-ID: <CAMKF1soMHdqC2FepKCftbjyACZTnwPEJsxJ68h5s7i4tYhUDZw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Wed,  1 Aug 2012 00:13:12 +0200 (CEST)
+From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
+Date: Wed, 01 Aug 2012 00:13:11 +0200
+Message-ID: <19763872.0k6beRVpJp@koontz>
+User-Agent: KMail/4.9 beta2 (Linux/3.5.0-6-generic; KDE/4.8.90; i686; ; )
+MIME-Version: 1.0
+Subject: QA-error when compiling boost
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 20:57:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 Jul 2012 23:02:57 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-yes I think SHR was one besides angstrom and it has removed that
-dependency. We can keep it in meta-oe just rename it to something
-else.
+Hi=20
 
-On 7/31/12, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Jul 31, 2012 at 09:07:29PM +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Op 31-07-12 20:56, Khem Raj schreef:
->> > This class is angstrom specific so lets move it to more appropriate
->> > layer
->>
->> Ehm, it was put in meta-oe on request so other distros could use it.
->
-> SHR is now compatible with oe-core copy too, so fine with me.
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
+I'm having difficulties compiling boost on a 64 bit machine. I get this=
+ QA error
 
+http://pastebin.com/eDRHiXXv
 
--- 
--Khem
+The weird thing is that  my OE-core configuration is  setup by oe-init-=
+build-
+env so I would guess anyone compiling for qemux86 on a 64 bit machine w=
+ould=20
+get this error. On a 32 bit machine it would problably not fail - at le=
+ast not=20
+because of architecture.
+
+BJAM has never been a friend of mine, so I hope you can help out.
+
+--=20
+S=F8ren Holm
 
 
