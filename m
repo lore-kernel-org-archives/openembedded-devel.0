@@ -1,31 +1,33 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gg0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SwHuB-0004FY-IO
+	(envelope-from <raj.khem@gmail.com>) id 1SwHuD-0004FZ-5u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jul 2012 21:14:56 +0200
-Received: by yenl13 with SMTP id l13so5803424yen.6
+	Tue, 31 Jul 2012 21:14:57 +0200
+Received: by ggnp4 with SMTP id p4so5786914ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2012 12:03:18 -0700 (PDT)
+	Tue, 31 Jul 2012 12:03:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=aMs+FxrHEwrzbRXmPb5sKB1ns6XJsMIA9cH7mNVNs7c=;
-	b=CG2T3F/SaThLxm5n8ZW3L/fM5IvTzfRzFy7ZgSCzlfty1EDaAhAf2CAHnzZOxLx3bJ
-	VaqKjyaX3Pfgr+Ljc+VUrpNTQii9Eg4c7HGCNcz30bqpMlooDQ2+80kTBwujl+w8Rr5K
-	xSNN9UFeOyB+TISVWRy/M+1QLONlRLULXFEUYflF/+qKfXkvMzPwX6lwdmmlskV0mFGL
-	62BBLq9lMcBB1HCqo1C+rDhEvf8kG2MBRzVH0SHbw10OzddWlZHsIiGAFGXZmcHMwmrO
-	ESRB68sfRshGvv1Ji6bsXU7TbBxIaRucnVT991a3543LtUUQ51t8FyQEdeVkXiyiQHo7
-	CBIA==
-Received: by 10.66.75.104 with SMTP id b8mr34438053paw.21.1343761397633;
-	Tue, 31 Jul 2012 12:03:17 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=SMq4XuMHHqzuzkhqyQAGJRoIgrFZvR3yBv5lEzZrJ3U=;
+	b=X/W6wSOO+NosIBEsQQ34SgjUO51y4ATKeA4KHN0kNpceKE1T0hU5eAoB18Rdq3trhI
+	l6H55i8F0qh9N9sObpYcXRTDZij+M7z0GiDi9Tj1I6NOLc4vYJqdMmt1Z6AYbGhzKRyo
+	lFSQdIg6sLBuD8FuE1F8KayqlFmsBqLO0knwKbtlax4hRfU45fMVGOe48MfE6NmUlZAS
+	CCVLF+m3Cnd66wNXQ5fJUj1XUfuyS4z/6j9f39/+DS1nDqCWRHW2quYpp0SMx9hrAywU
+	/ZnYuQ5NzWucV4YJCglO7hSTK4tNcmWoEtQ2CNHhEJYCm7eLFeaziQHbcJZWCVC1UiSe
+	yfzA==
+Received: by 10.66.83.33 with SMTP id n1mr34519667pay.7.1343761399235;
+	Tue, 31 Jul 2012 12:03:19 -0700 (PDT)
 Received: from kraj-lnx.juniper.net (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id ka5sm819850pbb.37.2012.07.31.12.03.15
-	(version=SSLv3 cipher=OTHER); Tue, 31 Jul 2012 12:03:15 -0700 (PDT)
+	by mx.google.com with ESMTPS id ka5sm819850pbb.37.2012.07.31.12.03.17
+	(version=SSLv3 cipher=OTHER); Tue, 31 Jul 2012 12:03:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Jul 2012 12:03:09 -0700
-Message-Id: <1343761391-3440-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 31 Jul 2012 12:03:10 -0700
+Message-Id: <1343761391-3440-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-java][PATCH V2 1/3] llvm: Accept ppc64
+In-Reply-To: <1343761391-3440-1-git-send-email-raj.khem@gmail.com>
+References: <1343761391-3440-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-java][PATCH V2 2/3] openjdk-6: Fix cross compilation for e5500 machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +41,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 19:14:56 -0000
+X-List-Received-Date: Tue, 31 Jul 2012 19:14:57 -0000
+
+This is only way for compile for now since qemu can not
+run the sizers binary for e5500 machines. It segfaults
+so we disable generating sizes and also xawt and jawt
+which depends on sizers, this lets jre to cross compile
+for ppc/e5500
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-core/llvm/llvm.inc                |    2 +-
- recipes-core/openjdk/openjdk-6-common.inc |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../icedtea-jdk-sizers-crosscompile-hack.patch     |   61 ++++++++++++++++++++
+ recipes-core/openjdk/openjdk-6-release-6b24.inc    |   13 ++++-
+ 2 files changed, 73 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
 
-diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-index c1f7f45..0718a12 100644
---- a/recipes-core/llvm/llvm.inc
-+++ b/recipes-core/llvm/llvm.inc
-@@ -203,7 +203,7 @@ def get_llvm_arch(d):
-         arch = "ARM"
-     elif arch == "mipsel" or arch == "mips":
-         arch = "mips"
--    elif arch == "powerpc":
-+    elif arch == "powerpc" or arch == "powerpc64":
-         arch = "PowerPC"
-     else:
-         bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
-diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
-index 02a4cb7..c7693fe 100644
---- a/recipes-core/openjdk/openjdk-6-common.inc
-+++ b/recipes-core/openjdk/openjdk-6-common.inc
-@@ -151,7 +151,7 @@ def get_llvm_configure_arch(d):
-         arch = "arm"
-     elif arch == "mipsel" or arch == "mips":
-         arch = "mips"
--    elif arch == "powerpc":
-+    elif arch == "powerpc" or arch == "powerpc64":
-         arch = "powerpc"
-     else:
-         bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+diff --git a/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch b/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
+new file mode 100644
+index 0000000..54d6a19
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-6-6b24/icedtea-jdk-sizers-crosscompile-hack.patch
+@@ -0,0 +1,61 @@
++Disable xawt and jawt along with sizes generation which does not work well if
++you cant generated sizes in cross env. So for architectures which dont have
++working qemu this is an option
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Inappropriate [Cross-compile specific hack]
++
++--- openjdk/jdk/make/sun/xawt/Makefile.khem	2012-07-21 23:54:47.396405922 -0700
+++++ openjdk/jdk/make/sun/xawt/Makefile	2012-07-21 23:55:52.032405922 -0700
++@@ -245,18 +245,19 @@
++ 	    $(SIZER_DIR) $(XLIBTYPES) "sizer" $(subst .,,$(suffix $(basename $@)))
++ 
++ $(SIZES): $(SIZERS)
++-	@if [ "$(DOHACK)$@" = "true$(PREDEFINED_SIZES)" ]; then \
++-	    $(ECHO) COPYING $(PREDEFINED_SIZES_TMPL) into $@; \
++-	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
++-	    $(CHMOD) +w $@;\
++-	else	\
++-	    $(ECHO) GENERATING $@; \
++-	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
++-	fi
++-	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
++-	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
++-	    $(DIFF) $@ $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
++-	fi	
+++	touch $(SIZES)
+++#	@if [ "$(DOHACK)$@" = "true$(PREDEFINED_SIZES)" ]; then \
+++#	    $(ECHO) COPYING $(PREDEFINED_SIZES_TMPL) into $@; \
+++#	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
+++#	    $(CHMOD) +w $@;\
+++#	else	\
+++#	    $(ECHO) GENERATING $@; \
+++#	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
+++#	fi
+++#	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
+++#	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
+++#	    $(DIFF) $@ $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
+++#	fi	
++ 
++ $(TEMPDIR)/.gen.wrappers: $(SIZES) $(WRAPPER_GENERATOR_CLASS) $(XLIBTYPES)
++ 	$(BOOT_JAVA_CMD) -cp $(WRAPPER_GENERATOR_TEMPDIR) WrapperGenerator \
++--- openjdk/jdk/make/sun/Makefile.khem	2011-11-14 14:11:40.000000000 -0800
+++++ openjdk/jdk/make/sun/Makefile	2012-07-22 00:42:04.980409296 -0700
++@@ -50,7 +50,7 @@
++     MOTIF_SUBDIRS   = motif12 motif21
++   endif
++   HEADLESS_SUBDIR = headless
++-  XAWT_SUBDIR     = xawt
+++  XAWT_SUBDIR     =
++ endif
++ 
++ ifndef OPENJDK
++@@ -65,7 +65,7 @@
++ 	  awt splashscreen $(XAWT_SUBDIR) $(MOTIF_SUBDIRS) \
++           $(HEADLESS_SUBDIR) $(DGA_SUBDIR) \
++ 	  font jpeg cmm applet rmi beans $(JDBC_SUBDIR) \
++-	  jawt text nio launcher management $(ORG_SUBDIR) \
+++	  text nio launcher management $(ORG_SUBDIR) \
++           native2ascii serialver tools jconsole
++ 
++ all build clean clobber::
+diff --git a/recipes-core/openjdk/openjdk-6-release-6b24.inc b/recipes-core/openjdk/openjdk-6-release-6b24.inc
+index b867fb3..1da7ffb 100644
+--- a/recipes-core/openjdk/openjdk-6-release-6b24.inc
++++ b/recipes-core/openjdk/openjdk-6-release-6b24.inc
+@@ -83,7 +83,12 @@ ICEDTEAPATCHES = "\
+         file://icedtea-zero-hotspotfix.patch;apply=no \
+         file://icedtea-jdk-powerpc-atomic64.patch;apply=no \
+ 	"
+-
++ICEDTEAPATCHES_append_e5500-64b = " \
++        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
++	"
++ICEDTEAPATCHES_append_e5500 = " \
++        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
++	"
+ ICEDTEAPATCHES_append_libc-uclibc = " \
+         file://icedtea-hotspot-isfinte.patch;apply=no \
+         file://icedtea-hotspot-glibc-version.patch;apply=no \
+@@ -119,5 +124,11 @@ DISTRIBUTION_PATCHES_append_libc-uclibc = "\
+         patches/icedtea-jdk-unpack-uclibc.patch \
+ 	patches/icedtea-hotspot-dlvsym-uclibc.patch \
+         "
++DISTRIBUTION_PATCHES_append_e5500-64b = " \
++       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
++       "
+ 
++DISTRIBUTION_PATCHES_append_e5500 = " \
++       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
++       "
+ export DISTRIBUTION_PATCHES
 -- 
 1.7.5.4
 
