@@ -1,38 +1,38 @@
 Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Sw1vE-00074e-OK
+	(envelope-from <martin.jansa@gmail.com>) id 1Sw1vL-00074e-6l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jul 2012 04:10:56 +0200
-Received: by wibhq4 with SMTP id hq4so2102403wib.6
+	Tue, 31 Jul 2012 04:11:03 +0200
+Received: by mail-wi0-f171.google.com with SMTP id hq4so2102403wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2012 18:59:20 -0700 (PDT)
+	Mon, 30 Jul 2012 18:59:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=xxtbixaBQW6roKnuvBH2TL+YxOlTlWqKGZTdFLFR8Dw=;
-	b=yZFGJVAzEVFS4v7vMkZxi/S3CRI2hkgV2XTQq3mX5v34JpyjY8Oc3ZuKzLNt9c3q4s
-	o/A0Qu9bLOdwb3b2TWxPE9dsateTPO30lgxLez2ztPdlQNV0LfSCR86r7qWcTH/NrUGA
-	VOlxO4bDkfTC0rIc0ECVYo8p/dHdW46hovujU9DqOyvKfvKDYz7dcWjM9H9Kxo3BidHj
-	vI1tV3/8W7JG1QIW+coqzxGIkKJ7Pol69mpnhCNg0xQHRitjZW0fsRFUwbU9DbQOtLhP
-	vLM5iYRW9Q1LZ9xYU4ir61TFIFo4mqMxzoWgvFi3Ka6Y9U7XRCBk5B/Vs/ZO8tL33Ng7
-	eM7w==
-Received: by 10.216.136.227 with SMTP id w77mr6083713wei.111.1343699960557;
-	Mon, 30 Jul 2012 18:59:20 -0700 (PDT)
+	bh=Le8L1Vx1UUK1MieHNYu6MVyU//HKWFpdo2uQIy9apTs=;
+	b=Z4SrfT3i0axQ2pKFjKpXcjO7wDXhFLutwhpZ5hcAk4dCLiOsdqq3skuGydmtipwWgy
+	vYkEPCMruVE1HgSUx0KGQ4n7fdTNtemet+STHXHCU/dXKUOk8uSdN/yUmPjRXVh6nCaF
+	a4+KHH6O8/swPkmZUOGagR5vfUM3nNwTlPQwIF5dHWVvOv/Ayd47qX7ZmHhnKFmowvQz
+	CrLb6lt9Vo0m4eOiovMVNzVEn+Vy1BCpsbX9e/8ldYuY71DDPtiwSZFXx0NKVAOM2VsN
+	WO+RADbytoXqhsDMFUnVEU6tQeadMwj/FRFyYB7GwYrpJqqPS9s3+94wCdserREHxBhr
+	hdBA==
+Received: by 10.216.236.38 with SMTP id v38mr7081075weq.222.1343699968950;
+	Mon, 30 Jul 2012 18:59:28 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cl8sm19612079wib.10.2012.07.30.18.59.19
+	by mx.google.com with ESMTPS id ep14sm26305607wid.0.2012.07.30.18.59.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 30 Jul 2012 18:59:19 -0700 (PDT)
+	Mon, 30 Jul 2012 18:59:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Jul 2012 03:58:34 +0200
-Message-Id: <6f8d256ca710420553ec68ddcf2fc7d98f63aea0.1343699377.git.Martin.Jansa@gmail.com>
+Date: Tue, 31 Jul 2012 03:58:35 +0200
+Message-Id: <038f3264060fcb6d09a7b20b401772f671139cb9.1343699377.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1343699377.git.Martin.Jansa@gmail.com>
 References: <cover.1343478744.git.Martin.Jansa@gmail.com>
 	<cover.1343699377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1343699377.git.Martin.Jansa@gmail.com>
 References: <cover.1343699377.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 09/24] e-wm: use new update-alternatives syntax
+Subject: [meta-oe][PATCH 10/24] gpsd: add chrpath-native to DEPENDS otherwise it could autodetect host chrpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,39 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 02:10:56 -0000
+X-List-Received-Date: Tue, 31 Jul 2012 02:11:03 -0000
 
-* fixes warning WARNING: e-wm: Use of ALTERNATIVE_NAME is deprecated, see update-alternatives.bbclass for more info.
+* which doesn't work sometimes:
+  chrpath -d "/var/lib/jenkins/jobs/shr-core/workspace/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/gpsd-3.5-r7/image/usr/sbin/gpsd"
+  `/var/lib/jenkins/jobs/shr-core/workspace/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/gpsd-3.5-r7/image/usr/sbin/gpsd'
+  probably isn't a 64-bit LSB-first ELF file.
+  elf_open: Exec format error
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/e-wm_svn.bb |    9 ++++-----
- 1 files changed, 4 insertions(+), 5 deletions(-)
+ meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb |    4 ++--
+ meta-oe/recipes-navigation/gpsd/gpsd_git.bb |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index 852bbcc..6f5fab1 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
--PR = "r1"
-+PR = "r2"
- SRCREV = "${EFL_SRCREV}"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
+index 568d492..1e3ac0c 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.5.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+-DEPENDS = "dbus dbus-glib ncurses python libusb1"
++DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
+ PROVIDES = "virtual/gpsd"
  
- inherit e update-alternatives gettext
-@@ -182,7 +182,6 @@ FILES_${PN}-doc += "\
- CONFFILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
- CONFFILES_${PN}-sysactions = "/etc/enlightenment/sysactions.conf"
+-PR = "r4"
++PR = "r5"
  
--ALTERNATIVE_PATH = "${bindir}/enlightenment_start.oe"
--ALTERNATIVE_NAME = "x-window-manager"
--ALTERNATIVE_LINK = "${bindir}/x-window-manager"
--ALTERNATIVE_PRIORITY = "16"
-+ALTERNATIVE_${PN} = "x-window-manager"
-+ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/enlightenment_start.oe"
-+ALTERNATIVE_PRIORITY[x-window-manager] = "16"
+ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+   file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+index 8404ba1..380f3ba 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_git.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+-DEPENDS = "dbus dbus-glib ncurses python libusb1"
++DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
+ PROVIDES = "virtual/gpsd"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
+ 
 -- 
 1.7.8.6
 
