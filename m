@@ -1,36 +1,36 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Sw7hl-0002Wb-7X
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Sw8k5-0003tp-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Jul 2012 10:21:25 +0200
-Received: by bkcik5 with SMTP id ik5so2442894bkc.6
+	Tue, 31 Jul 2012 11:27:53 +0200
+Received: by bkcik5 with SMTP id ik5so2467236bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2012 01:09:48 -0700 (PDT)
+	Tue, 31 Jul 2012 02:16:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
 	:content-transfer-encoding;
-	bh=HN7FnFmOOAHyskmDdoIREEsRZWtZD+5TQfYnRJ9j+Qo=;
-	b=0kLQsAo1RpZbgCIgXxw0ORyuJYYolQdA7ntKxJM3uh1g+XPjtqapMDprFxym5THB06
-	TL81zvNgqS5DhJCpNEXwlOXKyEPO8yrBOG7PAguFABpVkDTZy6e5an2W3mdjuM3pdGq/
-	oX8M6gJTI4b+p+DUytvHF2ctj6PV5KicH5g5sgFKf96a6Vg9jHYuRRDKCb9kTaegp9pT
-	nj/v+z8B1yDMwqLMJ2plQdqbnZynSRFpDPP8k4ZCA9Q3KML6sRqq6YPv7eXPafEDPHt0
-	VidKQcwnbwooJbZcqT6tvjAls+w01a7nTRULJtTSehlTuJk0gBOtdTCZ9KoxvOSbwV2N
-	QHIw==
-Received: by 10.205.118.14 with SMTP id fo14mr5055229bkc.130.1343722188505;
-	Tue, 31 Jul 2012 01:09:48 -0700 (PDT)
+	bh=6UPss7yKaIcJakW9AZVsV56DemAh37dv+/ctYp7Z5Og=;
+	b=l8pX7bye48XPDajyufjdkEs2m1fP2rP7nBgDIIOqqKvFQWTB7QeXfMA5OgRvYAzpho
+	tO23/5Tr55i+9vUOSYbNywQ8OxK8RNsHyAnoNTTq13glA3Fw99P3eJdtII0Zh+G8Pdvv
+	T8upBcwP55JuvaH0I7OVM3ZBJ9s1PqUjB34EPCah6F0xb+74cl3tS14kTRLCRkEqY/RH
+	LPW1ZWjL8ETKN+3sntxyGh01N7UCvYVIh34TsIutZZViZeMghnPENNEiYgHplqvXOX4k
+	g78yjqP1UtgexEnpd5QZ81cdVhHFZgvpCKNdkaDBZkRNjdAcdEkFtWcfTXn7igc3k9YV
+	AChA==
+Received: by 10.204.10.92 with SMTP id o28mr5159157bko.39.1343726176795;
+	Tue, 31 Jul 2012 02:16:16 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id fu8sm4759654bkc.5.2012.07.31.01.09.47
+	by mx.google.com with ESMTPS id 14sm4887550bkq.12.2012.07.31.02.16.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 31 Jul 2012 01:09:47 -0700 (PDT)
+	Tue, 31 Jul 2012 02:16:16 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Jul 2012 10:09:18 +0200
-Message-Id: <1343722158-9303-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 31 Jul 2012 11:15:40 +0200
+Message-Id: <1343726140-27289-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-Subject: [meta-gnome] gnome-settings-daemon: remove gtk-doc from inherit to unbreak build
+Subject: [meta-gnome] gedit: unbreak build by adding pythonnative to inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,36 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 08:21:25 -0000
+X-List-Received-Date: Tue, 31 Jul 2012 09:27:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 error message was:
-gtkdocize: GTK_DOC_CHECK not called in configure.ac
+ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+Rerun configure task after fixing this. The path was '/home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gedit-2.30.4-r0/gedit-2.30.4'
+ERROR: Function failed: do_qa_configure
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../gnome-settings-daemon_2.32.1.bb                |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-index 6567080..9ea523b 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-@@ -2,11 +2,11 @@ DESCRIPTION = "GNOME settings daemon"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+index 92c6749..24ce245 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+@@ -1,12 +1,13 @@
+ DESCRIPTION = "GNOME editor"
+ SECTION = "x11/gnome"
+ LICENSE = "GPLv2+"
++PR = "r1"
  
--PR = "r6"
-+PR = "r7"
+ DEPENDS = "gvfs enchant gconf gnome-doc-utils gnome-doc-utils-native glib-2.0 gtk+ gtksourceview2 iso-codes"
  
- DEPENDS = "libsndfile1 libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--inherit gtk-doc gnome
-+inherit gnome
+-inherit gnome gettext
++inherit gnome gettext pythonnative
+ SRC_URI[archive.md5sum] = "e1eecb0a92a1a363b3d375ec5ac0fb3b"
+ SRC_URI[archive.sha256sum] = "a561fe3dd1d199baede1bd07c4ee65f06fc7c494dd4d3327117f04149a608e3c"
  
- SRC_URI = "git://git.gnome.org/gnome-settings-daemon;protocol=git;branch=gnome-2-32"
- SRCREV = "0160f6725cfb872e017f3958f108792c3b882872"
 -- 
 1.7.6.5
 
