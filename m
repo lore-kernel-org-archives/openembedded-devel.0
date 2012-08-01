@@ -1,37 +1,37 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SwhTw-00067E-0r
+	(envelope-from <martin.jansa@gmail.com>) id 1SwhU3-0006By-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2012 00:33:32 +0200
-Received: by wibhq4 with SMTP id hq4so3911624wib.6
+	Thu, 02 Aug 2012 00:33:39 +0200
+Received: by wgbdr1 with SMTP id dr1so6562891wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Aug 2012 15:21:53 -0700 (PDT)
+	Wed, 01 Aug 2012 15:22:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=mVcJu+G6Sz4CS2qqpgNVvfMvPV5NMIWBN4m2cjkQp7A=;
-	b=M4gH+6ACT0kk3ljWb0/SAz+yqlLcqvHDRj25iYBvBkPRQdxy2fyAkgHt7u6ls6Bnl/
-	DX3JYxGSOswM9HF/WuDDWADwavC54TvrRnrKoL2o22Aavr9anKjWg7ts1uD9FL+Tfe37
-	R+agbfXWyGh9riGJ3Bn2zeqgYLyPkqCU26pPLpLpJFyY+JbvRPGGrN2pV5ifrmamPp9j
-	lxFWR125ZAByJV2yuhA1hSnW6vPrT3hWrQADZstE0rXoVVM7awsmubE18W0idacaDGv4
-	stgTLlVOEF8aPUBN9Dtr/mXkH6KgCUGzD+FdZBlrLsSuVD5eyZtHjuGHCkMohXDxhhK0
-	CosA==
-Received: by 10.216.132.76 with SMTP id n54mr9294977wei.135.1343859713203;
-	Wed, 01 Aug 2012 15:21:53 -0700 (PDT)
+	bh=NxtB5jJtq3idNrGWs7tpftFfAfq5HX/Zcr4hjkM/XZk=;
+	b=0OVpLQBcmFRq6RwW4MyQGjvP4sUiZBwkQABktVeRxXg0KO7UW6BQV/xvx/j1PSaDMD
+	xJrCNF1dKd6o9qvELs8SE0sKC9O25mYLmg0UYvTWKSICTRWfy1koVD1UIuH1tj/WbpCa
+	DJeVXbx2VFjd7PQGvuklhcB7+pCeTzGqzTD8tMqLBDp619zDdo519swNPyB39KwIyfTh
+	/fj47zn0q5EJjfnDnoBudhjsGA0ycupPn88FR7V/rhEWY4icdUVQEiMkp89ttMXkKNT0
+	zIjMBUX78ig7Qu4h/Gp5JujJVTbUHHdqg2WQj7IWBslrZamMcJ2Piak1iEYhpx4qpr1n
+	xmnQ==
+Received: by 10.180.107.2 with SMTP id gy2mr15370907wib.2.1343859720677;
+	Wed, 01 Aug 2012 15:22:00 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id bc2sm12074568wib.0.2012.08.01.15.21.51
+	by mx.google.com with ESMTPS id o2sm12055456wiz.11.2012.08.01.15.21.59
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 15:21:52 -0700 (PDT)
+	Wed, 01 Aug 2012 15:21:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2012 00:21:02 +0200
-Message-Id: <4df04db5cb5fc05c1540d203aacab0dc6d976bba.1343859304.git.Martin.Jansa@gmail.com>
+Date: Thu,  2 Aug 2012 00:21:03 +0200
+Message-Id: <afb5591b8bcf46b213884b65ecf7a3ad0511e07b.1343859304.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
 References: <cover.1343859304.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
 References: <cover.1343859304.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/8] sip: import from oe-classic and upgrade to latest
+Subject: [meta-oe][PATCH 6/8] python-sip: import from oe-classic and upgrade to latest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,53 +45,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 22:33:32 -0000
+X-List-Received-Date: Wed, 01 Aug 2012 22:33:39 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/sip/sip-native_4.13.3.bb |   33 +++++++++++++++++++++
- 1 files changed, 33 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
+ meta-oe/recipes-devtools/python/python-sip.inc     |   42 ++++++++++++++++++++
+ .../recipes-devtools/python/python-sip_4.13.3.bb   |    1 +
+ 2 files changed, 43 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/python/python-sip.inc
+ create mode 100644 meta-oe/recipes-devtools/python/python-sip_4.13.3.bb
 
-diff --git a/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb b/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
+diff --git a/meta-oe/recipes-devtools/python/python-sip.inc b/meta-oe/recipes-devtools/python/python-sip.inc
 new file mode 100644
-index 0000000..2ef10bf
+index 0000000..19abbba
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "SIP is a C++/Python Wrapper Generator"
-+AUTHOR = "Phil Thompson"
++++ b/meta-oe/recipes-devtools/python/python-sip.inc
+@@ -0,0 +1,42 @@
++DESCRIPTION = "Runtime helper for sip-generated python wrapper libraries"
++SECTION = "devel/python"
 +HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
-+SECTION = "devel"
++AUTHOR = "Phil Thompson"
 +LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://sipgen.sbf;endline=15;md5=88e887a386c18a01240d8d055da4e441"
++LIC_FILES_CHKSUM = "file://siplib.sbf.in;endline=15;md5=e0e7b5d0c4656666df09826ea1d2071c"
++DEPENDS = "python"
++RDEPENDS_${PN} = "python-core"
 +
-+SRC_URI = "http://www.riverbankcomputing.co.uk/static/Downloads/sip4/sip-${PV}.tar.gz"
-+SRC_URI[md5sum] = "76192829cc42ec558db46e4f9e1d8ba9"
-+SRC_URI[sha256sum] = "ec295f71ef339c5b98db5650865f2c6c1200c4085b7a3f33f284111e1f534ac1"
-+S = "${WORKDIR}/sip-${PV}/sipgen"
++SRC_URI = "http://www.riverbankcomputing.com/static/Downloads/sip4/sip-${PV}.tar.gz"
 +
-+inherit qt4x11 native python-dir
++S = "${WORKDIR}/sip-${PV}/siplib"
 +
-+EXTRA_QMAKEVARS_POST += "DESTDIR=${S} CONFIG=console"
++inherit qt4x11 distutils-base
 +
-+export BUILD_SYS
-+export HOST_SYS
-+export STAGING_LIBDIR
-+export STAGING_INCDIR
++EXTRA_QMAKEVARS_POST += " TEMPLATE=lib \
++                         CONFIG=console \
++                         DESTDIR= \
++                         VERSION=1.0.0 \
++                         TARGET=sip \
++                         DEFINES=SIP_QT_SUPPORT \
++                         INCLUDEPATH+=. \
++                         INCLUDEPATH+=${STAGING_INCDIR}/${PYTHON_DIR} \
++                         INCLUDEPATH+=${STAGING_INCDIR}"
++
 +
 +do_configure_prepend() {
-+        cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
++	cat siplib.sbf.in | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.pro
++	cat siplib.c.in | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.c
++	cat sip.h.in | sed -e s,@CFG_MODULE_NAME@,sip,g > sip.h
 +}
++
 +do_install() {
-+        install -d ${D}${bindir}
-+        install -m 0755 sip ${D}${bindir}/sip
-+        # python-pyqt expects sip4
-+        ln -sf sip ${D}${bindir}/sip4
-+        cd ${WORKDIR}/sip-${PV} && python configure.py
-+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-+        install -m 0755 sip*.py ${D}${PYTHON_SITEPACKAGES_DIR}
++	install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/
++	install -m 0755 libsip.so.1.0.0 ${D}${libdir}/${PYTHON_DIR}/site-packages/sip.so
++	# sipconfig.py sipdistutils.py
++	install -d ${D}${includedir}
++	install -m 0644 ../siplib/sip.h ${D}${includedir}/sip.h
 +}
++
++FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages/sip.so"
++
+diff --git a/meta-oe/recipes-devtools/python/python-sip_4.13.3.bb b/meta-oe/recipes-devtools/python/python-sip_4.13.3.bb
+new file mode 100644
+index 0000000..b1bda92
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-sip_4.13.3.bb
+@@ -0,0 +1 @@
++require python-sip.inc
 -- 
 1.7.8.6
 
