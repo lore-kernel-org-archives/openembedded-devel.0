@@ -1,37 +1,37 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SwhTQ-0005jX-2y
+	(envelope-from <martin.jansa@gmail.com>) id 1SwhTZ-0005t7-Lv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2012 00:33:00 +0200
-Received: by mail-we0-f175.google.com with SMTP id r6so5030562wey.6
+	Thu, 02 Aug 2012 00:33:09 +0200
+Received: by wibhm11 with SMTP id hm11so3914952wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Aug 2012 15:21:23 -0700 (PDT)
+	Wed, 01 Aug 2012 15:21:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=WQfZ8vUppceTMPtVYovZs5qNMqGDJdHWAH4OU6KUBvU=;
-	b=rHSAcSfiCpvVP61/fmigEc2IIW+ZlZ19dmwiqgQQJBpPuCpK0vR+2SEAqYTXUFreWH
-	eNRhhIkv7ZdAqe6URP7uAJXRHa2hPLRjphxqZAkJG7Hd3GLUWTm6SEsFR3TKTcn5mFXN
-	kzC4NAdfjZe1e92uWVmjwe/dbZ/hOYcEdAwyGDf68kxQ70/8mqCh9NeWZopZvwMO6xQD
-	tOP0e/zW8W5mwl9xvMlM/KKyHxLlCRyy1zWx1HAQDocTgHELFSSVV1/2l2LZTGVRWaRQ
-	D9i1d4S15kaoVh78LvdDFiimeP/Wow2Rh7DdHRb8ou3iMnyz7m+5bji1MIvbwwI7bvSN
-	CPog==
-Received: by 10.216.68.2 with SMTP id k2mr9141433wed.69.1343859683555;
-	Wed, 01 Aug 2012 15:21:23 -0700 (PDT)
+	bh=iDRxWtZ6w/2nbvIKSpnuMwSM6quVZxWjlhX6YNS9SL8=;
+	b=yitRGUz7QY43RuLY/DxqewtNg0E34mzlrHmoB95HJufRGefhy6dvpEFhBQ+kiH8VGV
+	2K6Gcyg7zdus+jtd/hK2inLdDfbPMRqQ2wgg0+x5lSK32MKP7YSdhFo+Z5Mw9dkSYrPE
+	UfWWW3fvDT9IUGFgrE43h8WIT5zR/F4zcfamdnEV4D3pqttITZyqzic0TBcKrMYY7r15
+	Rlk7Ng0ygxXNmDPtAgr3i2vm5+eslTpOf08KulYi0Vou2e1ZNEix2pNJJt39+58x3Brd
+	Hl6HZ1hZ9BE21LDKXe/+MLUF9vjQWskElkjXxMtIWSiecfVmuszcufBQN7t0xp+3MjCY
+	ZJEw==
+Received: by 10.217.1.7 with SMTP id m7mr9588890wes.158.1343859690897;
+	Wed, 01 Aug 2012 15:21:30 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id h9sm30233846wiz.1.2012.08.01.15.21.21
+	by mx.google.com with ESMTPS id j6sm12061952wiy.4.2012.08.01.15.21.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 15:21:22 -0700 (PDT)
+	Wed, 01 Aug 2012 15:21:30 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2012 00:20:58 +0200
-Message-Id: <1df89045a5e60e8b5f53f1e59a902802fd2d9b80.1343859304.git.Martin.Jansa@gmail.com>
+Date: Thu,  2 Aug 2012 00:20:59 +0200
+Message-Id: <6acd2f1fca2ae91134888375ee86da8303a8d941.1343859304.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
 References: <cover.1343859304.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
 References: <cover.1343859304.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/8] fbreader: drop machine overrides
+Subject: [meta-oe][PATCH 2/8] emacs: rename TUTORIAL.ko to TUTORIAL.KO so it's not picked by package.bbclass for striping
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 22:33:00 -0000
+X-List-Received-Date: Wed, 01 Aug 2012 22:33:09 -0000
 
-* sorry forgot to move them to .bbappend before merging to meta-oe
+* with http://patchwork.openembedded.org/patch/33365/ it's not fatal but still anoying
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/fbreader/fbreader_0.12.10.bb   |    5 -----
- meta-oe/recipes-support/fbreader/fbreader_git.bb   |    4 ----
- 2 files changed, 0 insertions(+), 9 deletions(-)
+ meta-oe/recipes-support/emacs/emacs.inc     |    6 ++++++
+ meta-oe/recipes-support/emacs/emacs_23.4.bb |    2 ++
+ 2 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
-index 40fc631..4786846 100644
---- a/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
-+++ b/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
-@@ -15,11 +15,6 @@ READER_ARCH       ?= "desktop"
- READER_UI         ?= "gtk"
- READER_STATUS     ?= "release"
+diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
+index f6cd461..150658e 100644
+--- a/meta-oe/recipes-support/emacs/emacs.inc
++++ b/meta-oe/recipes-support/emacs/emacs.inc
+@@ -65,4 +65,10 @@ do_compile_prepend() {
+ 	fi
+ }
  
--# because of defaults overriden in machine config
--PACKAGE_ARCH_om-gta01 = "${MACHINE_ARCH}"
--PACKAGE_ARCH_om-gta02 = "${MACHINE_ARCH}"
--PACKAGE_ARCH_om-gta04 = "${MACHINE_ARCH}"
--
- FILES_${PN} += "${datadir}/FBReader ${datadir}/zlibrary ${libdir}/zlibrary"
- FILES_${PN}-dbg += "${libdir}/zlibrary/ui/.debug/"
++do_install_append() {
++	# freaks package.bbclass and whole bitbake call returns error code
++	# ERROR: runstrip: ''arm-oe-linux-gnueabi-strip'  '/var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/emacs-23.4-r0/package/usr/share/emacs/23.4/etc/tutorials/TUTORIAL.ko'' strip command failed
++	mv ${D}${datadir}/${BPN}/${PV}/etc/tutorials/TUTORIAL.ko ${D}${datadir}/${BPN}/${PV}/etc/tutorials/TUTORIAL.KO
++}
++
+ EXTRA_OEMAKE += 'QEMU="${QEMU}"'
+diff --git a/meta-oe/recipes-support/emacs/emacs_23.4.bb b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+index 625a4b9..65cc3a3 100644
+--- a/meta-oe/recipes-support/emacs/emacs_23.4.bb
++++ b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+@@ -1,5 +1,7 @@
+ require emacs.inc
  
-diff --git a/meta-oe/recipes-support/fbreader/fbreader_git.bb b/meta-oe/recipes-support/fbreader/fbreader_git.bb
-index 8baec79..937bdc8 100644
---- a/meta-oe/recipes-support/fbreader/fbreader_git.bb
-+++ b/meta-oe/recipes-support/fbreader/fbreader_git.bb
-@@ -19,10 +19,6 @@ READER_ARCH       ?= "desktop"
- READER_UI         ?= "gtk"
- READER_STATUS     ?= "release"
- 
--# because of defaults overriden in machine config
--PACKAGE_ARCH_om-gta01 = "${MACHINE_ARCH}"
--PACKAGE_ARCH_om-gta02 = "${MACHINE_ARCH}"
--
- FILES_${PN} += "${datadir}/FBReader ${datadir}/zlibrary ${libdir}/zlibrary"
- FILES_${PN}-dbg += "${libdir}/zlibrary/ui/.debug/"
- 
++PR = "r1"
++
+ SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz;name=tarball \
+            file://use-qemu.patch \
+            file://nostdlib-unwind.patch \
 -- 
 1.7.8.6
 
