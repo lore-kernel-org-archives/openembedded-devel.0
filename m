@@ -1,32 +1,37 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SwhTK-0005jX-Ca
+	(envelope-from <martin.jansa@gmail.com>) id 1SwhTQ-0005jX-2y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2012 00:32:54 +0200
-Received: by weyr6 with SMTP id r6so5030562wey.6
+	Thu, 02 Aug 2012 00:33:00 +0200
+Received: by mail-we0-f175.google.com with SMTP id r6so5030562wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Aug 2012 15:21:15 -0700 (PDT)
+	Wed, 01 Aug 2012 15:21:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=noBL71YdfolF/OVisjyZrxcxhogXhz/fUzCqLjEBghU=;
-	b=b4bflctWETLBiF+68MQBdf2z8e2M90YtsyoXMrebzepdcZJkcEaiQFwnmnMLh9NQqX
-	hfynYNJKIqMdLs2SQlhk3wWG0I9Gcf1vz2rmqUhorAbvMZnnwRODcm+lyM4fPo/dbRIf
-	YQKlDer2v4tuoUz7f/Igbuxx+YoWzCKQTeikFrzH/xEnzO04xCSWSjY2hyp4/p6NNTx3
-	2MONp8KHx0Oy2yvJUtUafXrRXMB4t4zl8MfRpyARW1ijXneegxIKawnuomm2E3LZVWyc
-	x6mL5N/2ElYAPUWSEqjtuQfhzipKAJ/2hVDqJ6gT5DpQwOjYtknwf6yl9Sk1RcTHPnIj
-	49xA==
-Received: by 10.217.1.206 with SMTP id n56mr5380777wes.151.1343859675794;
-	Wed, 01 Aug 2012 15:21:15 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=WQfZ8vUppceTMPtVYovZs5qNMqGDJdHWAH4OU6KUBvU=;
+	b=rHSAcSfiCpvVP61/fmigEc2IIW+ZlZ19dmwiqgQQJBpPuCpK0vR+2SEAqYTXUFreWH
+	eNRhhIkv7ZdAqe6URP7uAJXRHa2hPLRjphxqZAkJG7Hd3GLUWTm6SEsFR3TKTcn5mFXN
+	kzC4NAdfjZe1e92uWVmjwe/dbZ/hOYcEdAwyGDf68kxQ70/8mqCh9NeWZopZvwMO6xQD
+	tOP0e/zW8W5mwl9xvMlM/KKyHxLlCRyy1zWx1HAQDocTgHELFSSVV1/2l2LZTGVRWaRQ
+	D9i1d4S15kaoVh78LvdDFiimeP/Wow2Rh7DdHRb8ou3iMnyz7m+5bji1MIvbwwI7bvSN
+	CPog==
+Received: by 10.216.68.2 with SMTP id k2mr9141433wed.69.1343859683555;
+	Wed, 01 Aug 2012 15:21:23 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ep14sm37075036wid.0.2012.08.01.15.21.14
+	by mx.google.com with ESMTPS id h9sm30233846wiz.1.2012.08.01.15.21.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 15:21:14 -0700 (PDT)
+	Wed, 01 Aug 2012 15:21:22 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2012 00:20:57 +0200
-Message-Id: <cover.1343859304.git.Martin.Jansa@gmail.com>
+Date: Thu,  2 Aug 2012 00:20:58 +0200
+Message-Id: <1df89045a5e60e8b5f53f1e59a902802fd2d9b80.1343859304.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][PATCH 0/8] Merge some recipes from oe-classic and smaller fixes
+In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
+References: <cover.1343859304.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1343859304.git.Martin.Jansa@gmail.com>
+References: <cover.1343859304.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/8] fbreader: drop machine overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,62 +45,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 22:32:54 -0000
+X-List-Received-Date: Wed, 01 Aug 2012 22:33:00 -0000
 
-The following changes since commit 5a5198ff6eccb097b785c22a256a072a41c7f2cd:
+* sorry forgot to move them to .bbappend before merging to meta-oe
 
-  gedit: unbreak build by adding pythonnative to inherit (2012-07-31 13:22:31 +0200)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-support/fbreader/fbreader_0.12.10.bb   |    5 -----
+ meta-oe/recipes-support/fbreader/fbreader_git.bb   |    4 ----
+ 2 files changed, 0 insertions(+), 9 deletions(-)
 
-are available in the git repository at:
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (8):
-  fbreader: drop machine overrides
-  emacs: rename TUTORIAL.ko to TUTORIAL.KO so it's not picked by
-    package.bbclass for striping
-  emacs: copy only needed stuff to qemu-treedir, not whole sysroot
-  phonet-utils: simplify with inherit autotools
-  sip: import from oe-classic and upgrade to latest
-  python-sip: import from oe-classic and upgrade to latest
-  python-pyqt: import from oe-classic
-  anki: import from oe-classic and upgrade to latest
-
- .../phonet-utils/phonet-utils_git.bb               |   10 +-
- .../python-pyqt-4.8.4/assistantclient-fix.patch    |   13 +
- .../python/python-pyqt-4.8.4/fix_qthelp_ftbfs.diff |   15 ++
- .../python-pyqt-4.8.4/fix_the_QAssitant_ftbfs.diff |   29 +++
- .../python/python-pyqt-4.8.4/pyqt-generated.patch  |   24 ++
- .../python-pyqt-4.8.4/qreal_float_support.diff     |  248 ++++++++++++++++++++
- .../recipes-devtools/python/python-pyqt_4.8.4.bb   |  115 +++++++++
- meta-oe/recipes-devtools/python/python-sip.inc     |   42 ++++
- .../recipes-devtools/python/python-sip_4.13.3.bb   |    1 +
- .../no-need-for-pyqt-at-buildtime.patch            |   23 ++
- meta-oe/recipes-extended/anki/anki.inc             |   16 ++
- meta-oe/recipes-extended/anki/anki_1.2.11.bb       |    4 +
- .../no-need-for-pyqt-at-buildtime.patch            |   14 ++
- meta-oe/recipes-extended/anki/libanki_1.2.11.bb    |    6 +
- meta-oe/recipes-extended/sip/sip-native_4.13.3.bb  |   33 +++
- meta-oe/recipes-support/emacs/emacs.inc            |   80 ++++++-
- meta-oe/recipes-support/emacs/emacs_23.4.bb        |    2 +
- .../recipes-support/fbreader/fbreader_0.12.10.bb   |    5 -
- meta-oe/recipes-support/fbreader/fbreader_git.bb   |    4 -
- 19 files changed, 657 insertions(+), 27 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.8.4/assistantclient-fix.patch
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.8.4/fix_qthelp_ftbfs.diff
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.8.4/fix_the_QAssitant_ftbfs.diff
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.8.4/pyqt-generated.patch
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.8.4/qreal_float_support.diff
- create mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.8.4.bb
- create mode 100644 meta-oe/recipes-devtools/python/python-sip.inc
- create mode 100644 meta-oe/recipes-devtools/python/python-sip_4.13.3.bb
- create mode 100644 meta-oe/recipes-extended/anki/anki-1.2.11/no-need-for-pyqt-at-buildtime.patch
- create mode 100644 meta-oe/recipes-extended/anki/anki.inc
- create mode 100644 meta-oe/recipes-extended/anki/anki_1.2.11.bb
- create mode 100644 meta-oe/recipes-extended/anki/libanki-1.2.11/no-need-for-pyqt-at-buildtime.patch
- create mode 100644 meta-oe/recipes-extended/anki/libanki_1.2.11.bb
- create mode 100644 meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
-
+diff --git a/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
+index 40fc631..4786846 100644
+--- a/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-oe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -15,11 +15,6 @@ READER_ARCH       ?= "desktop"
+ READER_UI         ?= "gtk"
+ READER_STATUS     ?= "release"
+ 
+-# because of defaults overriden in machine config
+-PACKAGE_ARCH_om-gta01 = "${MACHINE_ARCH}"
+-PACKAGE_ARCH_om-gta02 = "${MACHINE_ARCH}"
+-PACKAGE_ARCH_om-gta04 = "${MACHINE_ARCH}"
+-
+ FILES_${PN} += "${datadir}/FBReader ${datadir}/zlibrary ${libdir}/zlibrary"
+ FILES_${PN}-dbg += "${libdir}/zlibrary/ui/.debug/"
+ 
+diff --git a/meta-oe/recipes-support/fbreader/fbreader_git.bb b/meta-oe/recipes-support/fbreader/fbreader_git.bb
+index 8baec79..937bdc8 100644
+--- a/meta-oe/recipes-support/fbreader/fbreader_git.bb
++++ b/meta-oe/recipes-support/fbreader/fbreader_git.bb
+@@ -19,10 +19,6 @@ READER_ARCH       ?= "desktop"
+ READER_UI         ?= "gtk"
+ READER_STATUS     ?= "release"
+ 
+-# because of defaults overriden in machine config
+-PACKAGE_ARCH_om-gta01 = "${MACHINE_ARCH}"
+-PACKAGE_ARCH_om-gta02 = "${MACHINE_ARCH}"
+-
+ FILES_${PN} += "${datadir}/FBReader ${datadir}/zlibrary ${libdir}/zlibrary"
+ FILES_${PN}-dbg += "${libdir}/zlibrary/ui/.debug/"
+ 
 -- 
 1.7.8.6
 
