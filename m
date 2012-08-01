@@ -1,22 +1,34 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1SwVFw-0003uI-IN; Wed, 01 Aug 2012 11:30:30 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 01 Aug 2012 02:18:37 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,351,1309762800"; d="scan'208";a="180174483"
-Received: from unknown (HELO helios.localnet) ([10.252.121.41])
-	by orsmga002.jf.intel.com with ESMTP; 01 Aug 2012 02:18:36 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Date: Wed, 01 Aug 2012 10:18:35 +0100
-Message-ID: <2185895.mVUSlrr6Gr@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.4 (Linux/3.2.0-27-generic-pae; KDE/4.8.4; i686; ; )
-MIME-Version: 1.0
-Subject: meta-oe and meta-systemd
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SwalX-0000z1-Ag for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Aug 2012 17:23:15 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SwaaG-0003Ig-42 for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Aug 2012 17:11:36 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Aug 2012 17:11:36 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Aug 2012 17:11:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 01 Aug 2012 17:11:49 +0200
+Message-ID: <jvbgus$ove$1@dough.gmane.org>
+References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.4.3
+Subject: Re: [meta-systemd][PATCH V2 1/7] systemd: Upgrade to 187
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,43 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 09:31:10 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 01 Aug 2012 15:23:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi folks,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-As many of you already know, a couple of weeks ago systemd support was moved 
-out of the meta-oe layer and into a new meta-systemd layer:
+Op 31-07-12 20:56, Khem Raj schreef:
+> Dont inherit vala and gitpkgv not needed anymore
+> 
+> Along with upgrade use the release tarballs instead of git
 
-http://cgit.openembedded.org/meta-openembedded/tree/meta-systemd
+For an update we need to pull in some patches from master, so a git recipe
+is still the preferred way.
 
-This means two things:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-1) meta-oe no longer imposes systemd-related changes on those who haven't 
-selected it. There are still some unrelated appends, overlayed recipes and 
-classes that we need to look at tidying up (and this is happening already), 
-but people should now be able to feel more comfortable with using meta-oe as a 
-layer if they were previously hesitant about doing so.
+iD8DBQFQGUc1MkyGM64RGpERArReAJ93fwNc/vyBp0l0r3BUegfsZ7f9cgCeIL5F
+5n7y+QcXp8vO9Mj8n/5idgM=
+=4sUO
+-----END PGP SIGNATURE-----
 
-2) Having the systemd pieces isolated in a single layer makes them easier to 
-examine in isolation and moves us closer to eventually merging systemd support 
-into OE-Core.
-
-As well as adding systemd itself, meta-systemd uses bbappends to add systemd 
-support to various recipes from different layers, and has a directory structure 
-internally that allows appends for layers that are not in use to be BBMASKed 
-out. See the meta-systemd README for details.
-
-Further work to move systemd closer to merging into OE-Core is ongoing. Thanks 
-very much to all who have contributed so far!
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
