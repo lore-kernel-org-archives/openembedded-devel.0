@@ -1,34 +1,33 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1SwyEz-0005Dx-BW; Thu, 02 Aug 2012 18:27:13 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q72GFXUM009497;
-	Thu, 2 Aug 2012 17:15:33 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09311-03; Thu,  2 Aug 2012 17:15:29 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q72GFPkk009491
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 2 Aug 2012 17:15:25 +0100
-Message-ID: <1343924127.9756.88.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Date: Thu, 02 Aug 2012 17:15:27 +0100
-In-Reply-To: <CABcZANmUVia_qXt7a3oG5ofJeJYVO29gOoLaLb7zT=64W00CxQ@mail.gmail.com>
-References: <1343250562.29991.0.camel@ted>
-	<20120802135335.GQ16306@jama.jama.net>
-	<20120802141450.GS16306@jama.jama.net> <1343922792.9756.81.camel@ted>
-	<CABcZANmUVia_qXt7a3oG5ofJeJYVO29gOoLaLb7zT=64W00CxQ@mail.gmail.com>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-core <openembedded-core@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH] sstate: Add a two character subdirectory to the sstate directory layout
+Received: from devils.ext.ti.com ([198.47.26.153])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)
+	id 1Sx0sS-0000ZX-Vz for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Aug 2012 21:16:09 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q72J4SIE016694
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Aug 2012 14:04:28 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q72J4Sf7029090
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Aug 2012 14:04:28 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 2 Aug 2012 14:04:27 -0500
+Received: from sdit-build02.dal.design.ti.com (sdit-build02.dal.design.ti.com
+	[10.247.66.5])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	q72J4Rt8032595;	Thu, 2 Aug 2012 14:04:27 -0500
+Received: from a0273011 by sdit-build02.dal.design.ti.com with local (Exim
+	4.71)	(envelope-from <a0273011@sdit-build02.dal.design.ti.com>)	id
+	1Sx0lk-0003CE-4p; Thu, 02 Aug 2012 14:09:12 -0500
+From: Franklin S Cooper Jr <fcooper@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Aug 2012 14:09:01 -0500
+Message-ID: <1343934541-12253-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: Franklin S Cooper Jr <fcooper@ti.com>
+Subject: [meta-oe][PATCH] ltrace: Fix make error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2012 16:27:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Aug 2012 19:16:09 -0000
+Content-Type: text/plain
 
-On Thu, 2012-08-02 at 08:59 -0700, Chris Larson wrote:
-> On Thu, Aug 2, 2012 at 8:53 AM, Richard Purdie
-> <richard.purdie@linuxfoundation.org> wrote:
-> > On Thu, 2012-08-02 at 16:14 +0200, Martin Jansa wrote:
-> >> 2 more ideas:
-> >>
-> >> 1) would be great to also download file.sigdata if it exists, to be able
-> >>    to compare them when they change even on machine which downloaded
-> >>    older sstate file from remote url
-> >> 2) if the reason for this patch was number of files in shared
-> >>    sstate-cache directory, then fetcher creating .done files makes
-> >>    number double too (would be fine if fetcher stores all 3 files
-> >>    (.tgz, .tgz.sigdata, .tgz.done) in right prefix, or moves them to
-> >>    right prefix instead of symlinks.
-> >
-> > I'm aware of the problem. The main issue is that we probably need to
-> > start enforcing complete paths for all downloads in DL_DIR, including
-> > http:// urls. This would resolve conflicts like:
-> >
-> > SRC_URI = "http://server1.org/somefile.patch \
-> >            http://server2.org/somefile.patch"
-> >
-> > where the two files are different. The trouble is it will pretty much
-> > break all the source mirrors :(.
-> 
-> I think we need to stop the tendency to use DL_DIR as is as a mirror,
-> and instead create a task or something to populate a mirror directory
-> from the DL_DIR. This would avoid potential issues with licensing if
-> it uses license filtering to control what gets populated, as well.
+* Fixes the make: invalid option -- '/' error
 
-I agree, there are some issues in that area and we shoudl encourage
-people to think about this.
+Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
+---
+ meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Having said that, I'm worried we are going to hit conflicts over DL_DIR
-regardless of that.
-
-Perhaps making this change might be a way to remind people of that....
-
-Cheers,
-
-Richard
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb b/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
+index 109bf82..9fd423f 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_0.5.3.bb
+@@ -5,7 +5,7 @@ DEPENDS = "elfutils binutils"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ # ltrace is not ported to sh3/sh4 targets at this time
+ COMPATIBLE_TARGET_SYS = "(?!sh[34])"
+@@ -52,7 +52,7 @@ do_compile() {
+ 		sparc*)   LTRACE_ARCH=sparc ;;
+ 		x86_64*)  LTRACE_ARCH=x86_64 ;;
+ 	esac
+-	oe_runmake LDFLAGS=${TARGET_LDFLAGS} LIBS="-lsupc++ -liberty -Wl,-Bstatic -lelf -Wl,-Bdynamic" ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH}
++	oe_runmake LDFLAGS="${TARGET_LDFLAGS}" LIBS="-lsupc++ -liberty -Wl,-Bstatic -lelf -Wl,-Bdynamic" ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH}
+ }
+ 
+ do_install() {
+-- 
+1.7.0.4
 
 
 
