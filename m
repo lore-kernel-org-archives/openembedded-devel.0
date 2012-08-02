@@ -1,37 +1,37 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SwuCs-0006jI-9N
+	(envelope-from <martin.jansa@gmail.com>) id 1Sww1e-0001MR-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2012 14:08:46 +0200
-Received: by wgbds1 with SMTP id ds1so4882334wgb.0
+	Thu, 02 Aug 2012 16:05:18 +0200
+Received: by wibhq4 with SMTP id hq4so4453122wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Aug 2012 04:57:07 -0700 (PDT)
+	Thu, 02 Aug 2012 06:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=G/g/0+yq2EIRpqtmF9jK3NL/imlP7N85j7p0nH3GorM=;
-	b=t0+bSlXDL4oI06rRq8zxLm/2SUEFpE3ukOcYRyBHDJbV1pkstFWPW/iTdfvZqNQueB
-	Lhzi6q4lzaVGDD7xqH7TdRg2Hb27EYyU0vrmyZ5BLD0s1pPbahiynRw+8ni5sAGkVh5E
-	spSi9ZcY6rPnB+1eK8kPq93T8zMkOVGpASOmqdVLdkbY+i5rsKEx4gtItGHvwQQML0YL
-	/TUWialxi28u9Uy7h1Og8uVsRnd65EqXw+BdjrzwGGDccPVIkSO/n7oE/3prIt1AaeW7
-	VWm6gYrwyHdYmd4s0xFtOU8U1pn8oEwuP3yQCsgKiU8DAmFVlqnOE0/l5NuvlowUdO+7
-	tnrQ==
-Received: by 10.217.2.133 with SMTP id p5mr10694562wes.143.1343908626904;
-	Thu, 02 Aug 2012 04:57:06 -0700 (PDT)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=4xr43J/rpTq1vZFwstGLBGFycx0+DlYep7PmMXvkIzw=;
+	b=g34aboR4w4u8Hb44dYLMckFL1dS+r13LkLiwxEEnloL0YT9mQXheaFYUm7s3mHDvt4
+	XbHikymiAZD/ITvoIeIbhpcL6hMfIGvnzJAkkazvMotepLRF4xS8U0wMhzy9Z7KVWGj3
+	PuWRom4vdbsLrU1SIQdKkhCqU8exMjYGFT8tH9qc5OuOHXqQUy3te9Z4J4HHiXQ97/lT
+	VX0dq1M53FdpE29aC9evuyl5S+zTwYGdkFpchDFT5jUWw079VU/8tmtTHzoPfS7gk7lx
+	xqwR9rUJMBve6aVR/6ve51xoLgvzUaN2P7I8oIbIH783044qARIlfzaQlFRkIwB5UUdF
+	sSQA==
+Received: by 10.180.92.9 with SMTP id ci9mr4892542wib.22.1343915618912;
+	Thu, 02 Aug 2012 06:53:38 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cl8sm33325177wib.10.2012.08.02.04.57.05
+	by mx.google.com with ESMTPS id fr4sm17411697wib.8.2012.08.02.06.53.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Aug 2012 04:57:06 -0700 (PDT)
+	Thu, 02 Aug 2012 06:53:37 -0700 (PDT)
+Date: Thu, 2 Aug 2012 15:53:35 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2012 13:57:03 +0200
-Message-Id: <15185d488aa1b910b35d66da225367883285f049.1343908599.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <297d8ce601b52a6347bf0e5a8a14b8bf809cac1a.1343859304.git.Martin.Jansa@gmail.com>
-References: <297d8ce601b52a6347bf0e5a8a14b8bf809cac1a.1343859304.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1343908599.git.Martin.Jansa@gmail.com>
-References: <cover.1343908599.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCHv2 8/8] anki: import from oe-classic
+Message-ID: <20120802135335.GQ16306@jama.jama.net>
+References: <1343250562.29991.0.camel@ted>
+MIME-Version: 1.0
+In-Reply-To: <1343250562.29991.0.camel@ted>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: [PATCH] sstate: Add a two character subdirectory to the sstate directory layout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,128 +45,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2012 12:08:46 -0000
+X-List-Received-Date: Thu, 02 Aug 2012 14:05:18 -0000
+X-Groupsio-MsgNum: 40000
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aNvCJ41Feu8IgPyB"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/anki/anki-0.4.3.inc       |    8 +++++
- meta-oe/recipes-extended/anki/anki.inc             |    9 ++++++
- .../anki/anki/no-need-for-pyqt-at-buildtime.patch  |   28 ++++++++++++++++++++
- meta-oe/recipes-extended/anki/anki_0.4.3.bb        |    4 +++
- .../libanki/no-need-for-pyqt-at-buildtime.patch    |   14 ++++++++++
- meta-oe/recipes-extended/anki/libanki_0.4.3.bb     |    3 ++
- 6 files changed, 66 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/anki/anki-0.4.3.inc
- create mode 100644 meta-oe/recipes-extended/anki/anki.inc
- create mode 100644 meta-oe/recipes-extended/anki/anki/no-need-for-pyqt-at-buildtime.patch
- create mode 100644 meta-oe/recipes-extended/anki/anki_0.4.3.bb
- create mode 100644 meta-oe/recipes-extended/anki/libanki/no-need-for-pyqt-at-buildtime.patch
- create mode 100644 meta-oe/recipes-extended/anki/libanki_0.4.3.bb
+--aNvCJ41Feu8IgPyB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-extended/anki/anki-0.4.3.inc b/meta-oe/recipes-extended/anki/anki-0.4.3.inc
-new file mode 100644
-index 0000000..072e7f1
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/anki-0.4.3.inc
-@@ -0,0 +1,8 @@
-+require anki.inc
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/anki/anki-${PV}.tgz"
-+SRC_URI[md5sum] = "90434860945de4c09d55cdb5dbe984fc"
-+SRC_URI[sha256sum] = "18a93fb46363ca34963fc2588cadf7415dd799dd647efa681859eb8b1b22f104"
-+
-+export BUILD_PV := "${PV}"
-+SRC_URI += "file://no-need-for-pyqt-at-buildtime.patch"
-diff --git a/meta-oe/recipes-extended/anki/anki.inc b/meta-oe/recipes-extended/anki/anki.inc
-new file mode 100644
-index 0000000..3092539
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/anki.inc
-@@ -0,0 +1,9 @@
-+DESCRIPTION = "Anki is a program designed to help you remember facts \
-+(such as words and phrases in a foreign language) \
-+as easily, quickly and efficiently as possible"
-+HOMEPAGE = "http://ichi2.net/anki/"
-+AUTHOR = "Damien Elmes"
-+LICENSE = "GPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
-+
-+inherit setuptools
-diff --git a/meta-oe/recipes-extended/anki/anki/no-need-for-pyqt-at-buildtime.patch b/meta-oe/recipes-extended/anki/anki/no-need-for-pyqt-at-buildtime.patch
-new file mode 100644
-index 0000000..9eac1dc
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/anki/no-need-for-pyqt-at-buildtime.patch
-@@ -0,0 +1,28 @@
-+#
-+# (C) Michael 'Mickey' Lauer <mlauer@vanille-media.de>
-+#
-+Index: anki-0.4.3/setup.py
-+===================================================================
-+--- anki-0.4.3.orig/setup.py	2008-02-12 19:17:56.000000000 +0000
-++++ anki-0.4.3/setup.py	2008-02-12 19:19:29.000000000 +0000
-+@@ -3,10 +3,8 @@
-+ from setuptools import setup, find_packages
-+ import sys, os
-+ 
-+-import ankiqt
-+-
-+ setup(name='ankiqt',
-+-      version=ankiqt.appVersion,
-++      version=os.environ["BUILD_PV"],
-+       description='An intelligent spaced-repetition memory training program',
-+       long_description="",
-+       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
-+@@ -24,7 +22,7 @@
-+       license='GPLv2',
-+       packages=find_packages(),
-+       include_package_data=True,
-+-      install_requires = 'anki >= ' + ankiqt.appVersion,
-++      install_requires = 'anki >= ' + os.environ["BUILD_PV"],
-+       zip_safe=False,
-+       package_data={'ankiqt':
-+                     ['locale/*/*/*']},
-diff --git a/meta-oe/recipes-extended/anki/anki_0.4.3.bb b/meta-oe/recipes-extended/anki/anki_0.4.3.bb
-new file mode 100644
-index 0000000..7943ce8
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/anki_0.4.3.bb
-@@ -0,0 +1,4 @@
-+require ${PN}-${PV}.inc
-+
-+RDEPENDS_${PN} = "python-pyqt python-sip libanki"
-+RRECOMMENDS_${PN} = "virtual-japanese-font"
-diff --git a/meta-oe/recipes-extended/anki/libanki/no-need-for-pyqt-at-buildtime.patch b/meta-oe/recipes-extended/anki/libanki/no-need-for-pyqt-at-buildtime.patch
-new file mode 100644
-index 0000000..92583e5
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/libanki/no-need-for-pyqt-at-buildtime.patch
-@@ -0,0 +1,14 @@
-+--- libanki.orig/setup.py	2008-01-02 13:22:22.000000000 +0100
-++++ libanki/setup.py	2012-08-02 11:39:13.604173933 +0200
-+@@ -3,10 +3,8 @@
-+ from setuptools import setup, find_packages
-+ import sys, os
-+ 
-+-import anki
-+-
-+ setup(name='anki',
-+-      version=anki.version,
-++      version=os.environ["BUILD_PV"],
-+       description='An intelligent spaced-repetition memory training library',
-+       long_description="",
-+       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
-diff --git a/meta-oe/recipes-extended/anki/libanki_0.4.3.bb b/meta-oe/recipes-extended/anki/libanki_0.4.3.bb
-new file mode 100644
-index 0000000..636932f
---- /dev/null
-+++ b/meta-oe/recipes-extended/anki/libanki_0.4.3.bb
-@@ -0,0 +1,3 @@
-+require anki-${PV}.inc
-+
-+S = "${WORKDIR}/anki-${PV}/libanki"
--- 
-1.7.8.6
+On Wed, Jul 25, 2012 at 10:09:22PM +0100, Richard Purdie wrote:
+> Currently all sstate files are placed into one directory. This does not s=
+cale and
+> causes a variety of filesystem issues. This patch adds a two character su=
+bdirectory
+> to the layout (based on the first two characters of the hash) so that fil=
+es
+> can be split into several directories.
+>=20
+> This should help performance of sstate in most cases by avoding creating =
+directories with=20
+> huge numbers of files.
+>=20
+> The SSTATE_MIRRORS syntax needs updating to account for the extra path el=
+ement by
+> the addition of a PATH item, for example:
+>=20
+> SSTATE_MIRRORS =3D "file://.* file:///some/path/to/sstate-cache/PATH"
+> SSTATE_MIRRORS =3D "file://.* http://192.168.1.23/sstate-cache/PATH"
+>=20
+> This change also sets the scene for using things like lsb-release in
+> the=20
 
+Is it possible to create 2nd level cache with this?
 
+I have some server with slow upload but fully populated sstate-cache.
 
+So on server with faster upload which could be used as offical
+SSTATE_MIRROR for SHR distro I would like to add
+
+SSTATE_MIRRORS ?=3D "file://.* http://slow-server/sstate-cache/PATH"
+
+And then sync my sstate-cache directory to public accessible web root (with=
+ rsync).
+
+Problem is that now sstate-cache has all files in slightly different=20
+layout then original sstate-cache on slow server. From what I see I guess=
+=20
+it finds URL with correct prefix "sstate-cache/Gentoo-2.1/0d" and downloads=
+ it=20
+directly to sstate-cache dir (and adds .done)
+
+OE @ ~/oe-core $ ll sstate-cache/sstate-apr-native-x86_64-linux-1.4.6-r1-x8=
+6_64-2-*populate-lic*
+-rw-r--r-- 1 bitbake bitbake 9257 Jul 30 12:31 sstate-cache/sstate-apr-nati=
+ve-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e5fe94536596e50_populate=
+-lic.tgz
+-rw-r--r-- 1 bitbake bitbake    0 Aug  2 15:40 sstate-cache/sstate-apr-nati=
+ve-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e5fe94536596e50_populate=
+-lic.tgz.done
+
+And then creates symlink in right prefix back to absolute path of sstate-ca=
+che/file:
+OE @ ~/oe-core $ ll sstate-cache/Gentoo-2.1/0d/sstate-apr-native-x86_64-lin=
+ux-1.4.6-r1-x86_64-2-*populate-lic*
+lrwxrwxrwx 1 bitbake bitbake 123 Aug  2 15:40 sstate-cache/Gentoo-2.1/0d/ss=
+tate-apr-native-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e5fe9453659=
+6e50_populate-lic.tgz ->=20
+/OE/oe-core/sstate-cache/sstate-apr-native-x86_64-linux-1.4.6-r1-x86_64-2-0=
+d2ed24b90d50bf83e5fe94536596e50_populate-lic.tgz
+
+But after sstate-cache directory is rsynced somewhere else and oe-core/ssta=
+te-cache is removed,=20
+all those symlinks point nowhere and public sstate-cache is unusable.
+
+Can we have relative paths used in symlinks or even instruct fetcher to dow=
+nload that=20
+file directly to right prefix?
+
+Cheers,
+
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> ---
+> diff --git a/meta/classes/sstate.bbclass b/meta/classes/sstate.bbclass
+> index 570b371..d00779a 100644
+> --- a/meta/classes/sstate.bbclass
+> +++ b/meta/classes/sstate.bbclass
+> @@ -4,16 +4,21 @@ SSTATE_MANIFESTS ?=3D "${TMPDIR}/sstate-control"
+>  SSTATE_MANFILEBASE =3D "${SSTATE_MANIFESTS}/manifest-${SSTATE_MANMACH}-"
+>  SSTATE_MANFILEPREFIX =3D "${SSTATE_MANFILEBASE}${PN}"
+> =20
+> +def generate_sstatefn(spec, hash, d):
+> +    if not hash:
+> +        hash =3D "INVALID"
+> +    return hash[:2] + "/" + spec + hash
+> =20
+>  SSTATE_PKGARCH    =3D "${PACKAGE_ARCH}"
+>  SSTATE_PKGSPEC    =3D "sstate-${PN}-${PACKAGE_ARCH}${TARGET_VENDOR}-${TA=
+RGET_OS}-${PV}-${PR}-${SSTATE_PKGARCH}-${SSTATE_VERSION}-"
+> -SSTATE_PKGNAME    =3D "${SSTATE_PKGSPEC}${BB_TASKHASH}"
+> +SSTATE_PKGNAME    =3D "${@generate_sstatefn(d.getVar('SSTATE_PKGSPEC', T=
+rue), d.getVar('BB_TASKHASH', True), d)}"
+>  SSTATE_PKG        =3D "${SSTATE_DIR}/${SSTATE_PKGNAME}"
+> +SSTATE_PATHSPEC   =3D "${SSTATE_DIR}/*/${SSTATE_PKGSPEC}"
+> =20
+>  SSTATE_SCAN_FILES ?=3D "*.la *-config *_config"
+>  SSTATE_SCAN_CMD ?=3D 'find ${SSTATE_BUILDDIR} \( -name "${@"\" -o -name =
+\"".join(d.getVar("SSTATE_SCAN_FILES", True).split())}" \) -type f'
+> =20
+> -BB_HASHFILENAME =3D "${SSTATE_PKGNAME}"
+> +BB_HASHFILENAME =3D "${SSTATE_PKGSPEC}"
+> =20
+>  SSTATE_MANMACH ?=3D "${SSTATE_PKGARCH}"
+> =20
+> @@ -158,10 +163,11 @@ def sstate_installpkg(ss, d):
+>          oe.path.remove(dir)
+> =20
+>      sstateinst =3D d.expand("${WORKDIR}/sstate-install-%s/" % ss['name'])
+> +    sstatefetch =3D d.getVar('SSTATE_PKGNAME', True) + '_' + ss['name'] =
++ ".tgz"
+>      sstatepkg =3D d.getVar('SSTATE_PKG', True) + '_' + ss['name'] + ".tg=
+z"
+> =20
+>      if not os.path.exists(sstatepkg):
+> -       pstaging_fetch(sstatepkg, d)
+> +       pstaging_fetch(sstatefetch, sstatepkg, d)
+> =20
+>      if not os.path.isfile(sstatepkg):
+>          bb.note("Staging package %s does not exist" % sstatepkg)
+> @@ -223,8 +229,7 @@ def sstate_installpkg(ss, d):
+>  def sstate_clean_cachefile(ss, d):
+>      import oe.path
+> =20
+> -    sstatepkgdir =3D d.getVar('SSTATE_DIR', True)
+> -    sstatepkgfile =3D sstatepkgdir + '/' + d.getVar('SSTATE_PKGSPEC', Tr=
+ue) + "*_" + ss['name'] + ".tgz*"
+> +    sstatepkgfile =3D d.getVar('SSTATE_PATHSPEC', True) + "*_" + ss['nam=
+e'] + ".tgz*"
+>      bb.note("Removing %s" % sstatepkgfile)
+>      oe.path.remove(sstatepkgfile)
+> =20
+> @@ -417,7 +422,7 @@ def sstate_package(ss, d):
+> =20
+>      return
+> =20
+> -def pstaging_fetch(sstatepkg, d):
+> +def pstaging_fetch(sstatefetch, sstatepkg, d):
+>      import bb.fetch2
+> =20
+>      # Only try and fetch if the user has configured a mirror
+> @@ -430,7 +435,7 @@ def pstaging_fetch(sstatepkg, d):
+>      bb.data.update_data(localdata)
+> =20
+>      dldir =3D localdata.expand("${SSTATE_DIR}")
+> -    srcuri =3D "file://" + os.path.basename(sstatepkg)
+> +    srcuri =3D "file://" + sstatefetch
+> =20
+>      bb.mkdirhier(dldir)
+> =20
+> @@ -519,8 +524,7 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash, sq_ha=
+shfn, d):
+>      }
+> =20
+>      for task in range(len(sq_fn)):
+> -        sstatefile =3D d.expand("${SSTATE_DIR}/" + sq_hashfn[task] + "_"=
+ + mapping[sq_task[task]] + ".tgz")
+> -        sstatefile =3D sstatefile.replace("${BB_TASKHASH}", sq_hash[task=
+])
+> +        sstatefile =3D d.expand("${SSTATE_DIR}/" + generate_sstatefn(sq_=
+hashfn[task], sq_hash[task], d) + "_" + mapping[sq_task[task]] + ".tgz")
+>          if os.path.exists(sstatefile):
+>              bb.debug(2, "SState: Found valid sstate file %s" % sstatefil=
+e)
+>              ret.append(task)
+> @@ -544,10 +548,9 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash, sq_h=
+ashfn, d):
+>              if task in ret:
+>                  continue
+> =20
+> -            sstatefile =3D d.expand("${SSTATE_DIR}/" + sq_hashfn[task] +=
+ "_" + mapping[sq_task[task]] + ".tgz")
+> -            sstatefile =3D sstatefile.replace("${BB_TASKHASH}", sq_hash[=
+task])
+> +            sstatefile =3D d.expand(generate_sstatefn(sq_hashfn[task], s=
+q_hash[task], d) + "_" + mapping[sq_task[task]] + ".tgz")
+> =20
+> -            srcuri =3D "file://" + os.path.basename(sstatefile)
+> +            srcuri =3D "file://" + sstatefile
+>              localdata.setVar('SRC_URI', srcuri)
+>              bb.debug(2, "SState: Attempting to fetch %s" % srcuri)
+> =20
+>=20
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--aNvCJ41Feu8IgPyB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAahl8ACgkQN1Ujt2V2gBzqrwCggfX5OnrO0eMRU06CRgmtLerg
+WLgAn2eLkMjsfPC9rdYicXn0ynH7eF8Z
+=YB9k
+-----END PGP SIGNATURE-----
+
+--aNvCJ41Feu8IgPyB--
