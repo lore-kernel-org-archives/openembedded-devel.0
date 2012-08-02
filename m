@@ -1,37 +1,16 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from smtp206.alice.it ([82.57.200.102])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SwpS7-0008MZ-0Z
+	(envelope-from <andrea.adami@gmail.com>) id 1Swppg-0000Kc-4x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2012 09:04:11 +0200
-Received: by wgbdr1 with SMTP id dr1so6781906wgb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Aug 2012 23:52:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yPmD0YFFH1vMsQkHng2vFFkKauyImCqLR+tmvfVZaf4=;
-	b=JWMmWLZnogne90Ej7Mto81836Cz9l6T2p8NFK2aBDEV1YnPX6NBNx92F2OsyqAPA8X
-	iCmUn9PufPCmQ52QycfeaMXrzmzx4XcJjqBY7u8A6F76kegjkNah1elNKdaJjLyn4NEB
-	cucw8SdrwK4XNiGaD2fwkSnDTUbO2M5ihj75HoIBjEL5gM3OuqDRkSKk0Uajo3wPub7f
-	9cgPUaNCLEwl90ZLLMPZlVzrz/YgBVvTkCSpLbOs3BQPubpGK2lYJJ4kMyeM9t1J0ZQa
-	98Ll197MyY2+gghZrp7qkJoHALrkbOfDI7QOeHzV0XUVzEZtvK7W7C/Lz99e4MRdIWTc
-	OBlQ==
-Received: by 10.180.97.135 with SMTP id ea7mr2090960wib.11.1343890351662;
-	Wed, 01 Aug 2012 23:52:31 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j6sm15006716wiy.4.2012.08.01.23.52.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 23:52:30 -0700 (PDT)
-Date: Thu, 2 Aug 2012 08:52:28 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 02 Aug 2012 09:28:32 +0200
+Received: from mizar.localdomain (87.0.250.46) by smtp206.alice.it (8.6.023.02)
+	id 500F3F9501DB4D84; Thu, 2 Aug 2012 09:16:52 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120802065228.GM16306@jama.jama.net>
-References: <cover.1343859304.git.Martin.Jansa@gmail.com>
-	<297d8ce601b52a6347bf0e5a8a14b8bf809cac1a.1343859304.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <297d8ce601b52a6347bf0e5a8a14b8bf809cac1a.1343859304.git.Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 8/8] anki: import from oe-classic and upgrade to latest
+Date: Thu,  2 Aug 2012 09:16:48 +0200
+Message-Id: <1343891809-3929-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-handheld][PATCH 1/2] zaurus.inc: add framework for ubifs image types
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +24,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2012 07:04:11 -0000
-X-Groupsio-MsgNum: 39995
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hnsKUeImFCk/igEn"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Aug 2012 07:28:32 -0000
 
---hnsKUeImFCk/igEn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* In preparation for the next kexecboot release.
+* tested on poodle, c7x0 and spitz 3200
+* (the different partitioning btw spitz models will be
+* detected by kexecbot)
 
-On Thu, Aug 02, 2012 at 12:21:05AM +0200, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  .../no-need-for-pyqt-at-buildtime.patch            |   23 ++++++++++++++=
-++++++
->  meta-oe/recipes-extended/anki/anki.inc             |   16 +++++++++++++
->  meta-oe/recipes-extended/anki/anki_1.2.11.bb       |    4 +++
->  .../no-need-for-pyqt-at-buildtime.patch            |   14 ++++++++++++
->  meta-oe/recipes-extended/anki/libanki_1.2.11.bb    |    6 +++++
->  5 files changed, 63 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/anki/anki-1.2.11/no-need-for=
--pyqt-at-buildtime.patch
->  create mode 100644 meta-oe/recipes-extended/anki/anki.inc
->  create mode 100644 meta-oe/recipes-extended/anki/anki_1.2.11.bb
->  create mode 100644 meta-oe/recipes-extended/anki/libanki-1.2.11/no-need-=
-for-pyqt-at-buildtime.patch
->  create mode 100644 meta-oe/recipes-extended/anki/libanki_1.2.11.bb
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ conf/machine/include/zaurus.inc |   47 ++++++++++++++++++++++++++++++++++-----
+ 1 files changed, 41 insertions(+), 6 deletions(-)
 
-Please ignore this one, it has some runtime issues.
+diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
+index 45c82d3..899664a 100644
+--- a/conf/machine/include/zaurus.inc
++++ b/conf/machine/include/zaurus.inc
+@@ -2,22 +2,57 @@
+ # Zaurus common settings
+ ########################
+ 
++IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2 ubifs"
++INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
++IMAGE_DEVICE_TABLES = ""
++
+ ERASEBLOCKSIZE = "0x4000"
+ ERASEBLOCKSIZE_akita = "0x20000"
++ERASEBLOCKSIZE_spitz = "0x20000"
+ 
+ # Warning! SL-C3000 has "0x4000" (16MiB NAND) 
+ # C3100 and C3200 have same 128MiB NAND device as akita
+-ERASEBLOCKSIZE_spitz = "0x20000"
+-
+-IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2"
+-INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
++#
++# SL-C3000 (16-7 MiB = 576 PEBs)
++# 9 x 1024 : 16 = 576 PEBs
++# MKUBIFS_ARGS_spitz = "-m 512 -e 15872 -c 576 -x zlib"
++# UBINIZE_ARGS_spitz = "-m 512 -p 16384 -s 256"
++# ERASEBLOCKSIZE_spitz = "0x4000"
++
++# UBI: max collie (14.125 = 904 PEBs)
++# 14.125 x 1024 : 16 = 904 PEBs
++MKUBIFS_ARGS_collie = "-m 512 -e 15872 -c 904 -x zlib"
++UBINIZE_ARGS_collie = "-m 512 -p 16384 -s 256"
++
++# UBI: max poodle (64-7 MiB = 3648 PEBs)
++# 57 x 1024 : 16 = 3648 PEBs
++MKUBIFS_ARGS_poodle = "-m 512 -e 15872 -c 3648 -x zlib"
++UBINIZE_ARGS_poodle = "-m 512 -p 16384 -s 256"
++
++# UBI: max c7x0 (128-7 MiB = 7744 PEBs)
++# 121 x 1024 : 16 = 7744 PEBs
++MKUBIFS_ARGS_c7x0 = "-m 512 -e 15872 -c 7744 -x zlib"
++UBINIZE_ARGS_c7x0 = "-m 512 -p 16384 -s 256"
++
++# UBI: max tosa (128-7 MiB = 7744 PEBs)
++# 121 x 1024 : 16 = 7744 PEBs
++MKUBIFS_ARGS_tosa = "-m 512 -e 15872 -c 7744 -x zlib"
++UBINIZE_ARGS_tosa = "-m 512 -p 16384 -s 256"
++
++# UBI: max akita (128-7 MiB = 968 PEBs)
++# 121 x 1024 : 128 = 968 PEBs
++MKUBIFS_ARGS_akita = "-m 2048 -e 129024 -c 968 -x zlib"
++UBINIZE_ARGS_akita = "-m 2048 -p 131072 -s 512"
++
++# UBI: max spitz (128-7 MiB = 968 PEBs)
++# 121 x 1024 : 128 = 968 PEBs
++MKUBIFS_ARGS_spitz = "-m 2048 -e 129024 -c 968 -x zlib"
++UBINIZE_ARGS_spitz = "-m 2048 -p 131072 -s 512"
+ 
+ # kernel now supports favourlzo
+ EXTRA_IMAGECMD_jffs2 = "-p -l --eraseblock=${ERASEBLOCKSIZE}"
+ EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+ 
+-IMAGE_DEVICE_TABLES = ""
+-
+ #########
+ # xserver
+ #########
+-- 
+1.7.8.6
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hnsKUeImFCk/igEn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAaI6wACgkQN1Ujt2V2gByIeQCfYUF4wT9k3A5MmhL5b1D6AePI
-4xsAoI/rpZaCDmBAm8Q6801x3DHP3UnN
-=qUMM
------END PGP SIGNATURE-----
-
---hnsKUeImFCk/igEn--
