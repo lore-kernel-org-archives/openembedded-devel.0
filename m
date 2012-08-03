@@ -1,36 +1,23 @@
-Received: from mail-gg0-f175.google.com ([209.85.161.175])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1SxLfH-0003Mb-HX
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SxMwy-0004ln-Qn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2012 19:27:55 +0200
-Received: by ggmq1 with SMTP id q1so1015778ggm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Aug 2012 10:16:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=eW6sHqHU5v3z9QK0RE17HsgSgqbvMQAzIcteTyfxc6k=;
-	b=PBESU25OoYXp62rNmy4KP7flbQVSUJ1J139h9PNEpBx7YTVIvc8PK7t52f9ncFhF2f
-	vrTVeNmEdRYferJTb8A1NCtheCEuphd7SCbQvxY16WmGuDVSBHYMWu/is3FvoQmFPSnd
-	1NsgbvsMpDnsSS+TD7r0gWJI1izdHOeeB3pXSZ90AfMdExoRZ+lmB+Mhd/Hm3RD/ITKd
-	3So4XzDFz+RdvZCPOvRf4rqiZ178HFglGLgpAHwWhdi75qQ7zCsnLfI5d7oNqt0ssRMK
-	mwK/pmphekwr8oOfWItFDoA1/8R3+5X7IG+15wcceSIYD/Tej1uUpOsIRsSql5O/H5zE
-	lP0g==
-Received: by 10.101.103.16 with SMTP id f16mr850643anm.25.1344014174199;
-	Fri, 03 Aug 2012 10:16:14 -0700 (PDT)
-Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id s12sm2250534anh.2.2012.08.03.10.16.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 03 Aug 2012 10:16:13 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 03 Aug 2012 20:50:16 +0200
+Received: from cpc8-live22-2-0-cust106.know.cable.virginmedia.com
+	([82.42.168.107] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SxMHJ-00006A-T1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Aug 2012 18:07:13 +0000
+Message-ID: <501C135F.8000303@dynamicdevices.co.uk>
+Date: Fri, 03 Aug 2012 19:07:27 +0100
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Aug 2012 14:15:57 -0300
-Message-Id: <1344014157-26570-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1344014157-26570-1-git-send-email-otavio@ossystems.com.br>
-References: <1344014157-26570-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] postgresql: Fix packaging of static libraries
+Subject: Problem building with meta-oe udev_182 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,71 +31,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2012 17:27:55 -0000
+X-List-Received-Date: Fri, 03 Aug 2012 18:50:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This patch fixes the following QA issue:
+Hi all,
 
-,----[ Fragment of build error log ]
-| ...
-| ERROR: QA Issue: non -staticdev package contains static .a library:
-|   libecpg-dev path '/work/.../packages-split/libecpg-dev/usr/lib/libpgtypes.a'
-| ...
-`----
+I'm taking a look at building a Poky DISTRO out of oe-core (met-yocto) 
+for an atom-pc
+MACHINE target.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/postgresql/postgresql.inc |   22 +++++++++++++-------
- 1 files changed, 14 insertions(+), 8 deletions(-)
+I've tried a number of image recipes, from core-image-minimal, -base, 
+-sato and so
+forth. I have the the meta-oe layer pulled in via bblayers.config.
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index 01c41c1..eeda729 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
- HOMEPAGE = "http://www.postgresql.com"
- LICENSE = "BSD"
- DEPENDS = "zlib readline tzcode-native"
--INC_PR = "r7"
-+INC_PR = "r8"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
-@@ -52,20 +52,26 @@ FILES_${PN}-doc += "${prefix}/doc/"
- FILES_${PN}-timezone = "${datadir}/${PN}/timezone"
- FILES_${PN}-server-dev = "${includedir}/${PN}/server"
- 
--FILES_libecpg = "${libdir}/libecpg*.so.*"
-+FILES_libecpg = "${libdir}/libecpg*${SOLIBS}"
- FILES_libecpg-dbg = "${libdir}/.debug/libecpg*"
--FILES_libecpg-dev = "${libdir}/libecpg*.a ${libdir}/libecpg*.so \
--                     ${libdir}/libpgtypes*.a ${libdir}/libpgtypes*.so \
-+FILES_libecpg-dev = "${libdir}/libecpg*${SOLIBSDEV} \
-+                     ${libdir}/libpgtypes*${SOLIBSDEV} \
-                      ${includedir}/ecpg*.h ${includedir}/${PN}/ecpg*.h \
-                      ${includedir}/pgtypes*.h ${includedir}/${PN}/informix \
-                      ${includedir}/sql3types.h ${includedir}/sqlca.h"
-+FILES_libecpg-staticdev = "${libdir}/libecpg*.a"
-+SECTION_libecpg-staticdev = "devel"
-+RDEPENDS_libecpg-staticdev = "libecpg-dev (= ${EXTENDPKGV})"
- 
--FILES_libpq = "${libdir}/libpq*.so.*"
-+FILES_libpq = "${libdir}/libpq*${SOLIBS}"
- FILES_libpq-dbg = "${libdir}/.debug/libpq* ${libdir}/${PN}/pgxs/src/test/regress/.debug/*"
--FILES_libpq-dev = "${libdir}/libpq*.a ${libdir}/libpq*.so ${libdir}/libpgport.a \
-+FILES_libpq-dev = "${libdir}/libpq*${SOLIBSDEV} \
-                    ${includedir}"
-+FILES_libpq-staticdev = "${libdir}/libpq*.a"
-+SECTION_libpq-staticdev = "devel"
-+RDEPENDS_libpq-staticdev = "libpq-dev (= ${EXTENDPKGV})"
- 
--FILES_libecpg-compat = "${libdir}/libecpg_compat*.so.*"
-+FILES_libecpg-compat = "${libdir}/libecpg_compat*${SOLIBS}"
- FILES_libecpg-compat-dbg = "${libdir}/.debug/libecpg_compat*"
--FILES_libpgtypes = "${libdir}/libpgtypes*.so.*"
-+FILES_libpgtypes = "${libdir}/libpgtypes*${SOLIBS}"
- FILES_libpgtypes-dbg = "${libdir}/.debug/libpgtypes*"
--- 
-1.7.2.5
+All images seem to hang on start-up, with a suspicious message about a 
+missing udevd.
+
+I've tried a range of bblayer configurations, both with and without the 
+new meta-systemd
+I've been hearing about, to no avail.
+
+Current bblayers config is simply:
+
+   /data_drive/stream/oe-core/meta \
+   /data_drive/stream/oe-core/meta-openembedded/meta-oe \
+   /data_drive/stream/oe-core/meta-yocto/meta-yocto \
+
+Having investigated a little, I see that when I build udev, meta-oe 
+provides a udev_182 which is the
+default and there are QA warnings reported when building:
+
+NOTE: package udev-182-r1: task do_package: Started
+WARNING: QA Issue: udev: Files/directories were installed but not 
+shipped  /usr/sbin
+WARNING: QA Issue: udev: /lib/libgudev-1.0.so.0.1.1, installed in the 
+base_prefix, requires a shared library under exec_prefix (/usr): 
+libgobject-2.0.so.0 => /usr/lib/libgobject-2.0.so.0 (0xdead1000)
+WARNING: QA Issue: udev: /lib/libgudev-1.0.so.0.1.1, installed in the 
+base_prefix, requires a shared library under exec_prefix (/usr): 
+libgthread-2.0.so.0 => /usr/lib/libgthread-2.0.so.0 (0xdead2000)
+WARNING: QA Issue: udev: /lib/libgudev-1.0.so.0.1.1, installed in the 
+base_prefix, requires a shared library under exec_prefix (/usr): 
+libffi.so.5 => /usr/lib/libffi.so.5 (0xdead3000)
+WARNING: QA Issue: udev: /lib/libgudev-1.0.so.0.1.1, installed in the 
+base_prefix, requires a shared library under exec_prefix (/usr): 
+libglib-2.0.so.0 => /usr/lib/libglib-2.0.so.0 (0xdead4000)
+WARNING: QA Issue: udev: /lib/udev/udevd, installed in the base_prefix, 
+requires a shared library under exec_prefix (/usr): libkmod.so.2 => 
+/usr/lib/libkmod.so.2 (0xdead3000)
+NOTE: package udev-182-r1: task do_package: Succeeded
+
+So that would seem to explain the missing udevd.
+
+I did spot some conversation about a kmod_git.bb patch, which was 
+reverted as it broke udev_182.bb, but this seems to have been reverted
+
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg25435.html
+
+I have found that setting PREFERRED_VERSION_udev = "164" in local.conf 
+and rebuilding seems
+to resolve the issue, but I'd like to understand what's going wrong 
+rather than use the old udev.
+
+Can anybody advise?
+
+Is is as simple as "don't use the meta-oe layer"?
+
+On a somewhat related note, when I add in the meta-systemd layer I get 
+warnings about multiple providers for udev.
+Should I be able simply to add in meta-systemd and define a 
+PREFERRED_PROVIDER_udev = "systemd" ?
+
+Thanks,
+
+Alex
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
