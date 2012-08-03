@@ -1,24 +1,36 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Sx3jo-0008Rx-Ge
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2012 00:19:24 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 02 Aug 2012 15:07:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.67,352,1309762800"; d="scan'208";a="174900427"
-Received: from unknown (HELO helios.localnet) ([10.252.121.55])
-	by orsmga001.jf.intel.com with ESMTP; 02 Aug 2012 15:07:41 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 02 Aug 2012 23:07:40 +0100
-Message-ID: <24002181.r1aeXagV3f@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.8.4 (Linux/3.2.0-27-generic-pae; KDE/4.8.4; i686; ; )
-In-Reply-To: <1343891809-3929-1-git-send-email-andrea.adami@gmail.com>
-References: <1343891809-3929-1-git-send-email-andrea.adami@gmail.com>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1SxCos-0008SW-CC; Fri, 03 Aug 2012 10:01:14 +0200
+Received: by weyr6 with SMTP id r6so220356wey.6
+	for <multiple recipients>; Fri, 03 Aug 2012 00:49:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=OQONEQYvO5yzaXbjmXmPGBYpc0jJqL2UegAmr/r7TGM=;
+	b=gsvksgWbT919qwx48qmwaiKwLVYwyGGNchkQYT92tlWF6kteXqvlg4CgK+Pqm2ITXb
+	c2wDwSPHfi81cv7kozeWAZeMX7V9e4erjEMQeq+IHrYFGIh+FMQfGoR9nirn3XWMDS8c
+	pCxqCYdN2Og8gh0l54POQsLzdNnRG6/KRthTbzZJmQMD+D6Kx/QiLO3K+xbT20UaGtn5
+	5bFXmIUtrCeekCYYjEEbcLMyWINhmtI/QpG71qeg73D1JiGDArT3XzWBVT5dkVZgsroy
+	07ip126eAIdZ387Mbh3OaGDLqF9MQDWmv8YleeWHcXkwQkLUNGrl59K0EZByPkK5WHFD
+	DKvQ==
+Received: by 10.216.74.21 with SMTP id w21mr439317wed.77.1343980173845;
+	Fri, 03 Aug 2012 00:49:33 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l6sm22528278wiz.4.2012.08.03.00.49.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 03 Aug 2012 00:49:32 -0700 (PDT)
+Date: Fri, 3 Aug 2012 09:49:31 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Message-ID: <20120803074931.GB30148@jama.jama.net>
+References: <CA+YB3rbdcfSNi4es51A0nXAK55rbPsbe3-dpVCjiJz4_q0AjaQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH 1/2] zaurus.inc: add framework for ubifs image types
+In-Reply-To: <CA+YB3rbdcfSNi4es51A0nXAK55rbPsbe3-dpVCjiJz4_q0AjaQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: tsc <tsc@lists.openembedded.org>, openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] Minutes: OE-TSC 31 July 2012
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,99 +44,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2012 22:19:24 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 03 Aug 2012 08:01:14 -0000
+X-Groupsio-MsgNum: 40010
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="7iMSBzlTiPOCCT2k"
+Content-Disposition: inline
 
-On Thursday 02 August 2012 09:16:48 Andrea Adami wrote:
-> * In preparation for the next kexecboot release.
-> * tested on poodle, c7x0 and spitz 3200
-> * (the different partitioning btw spitz models will be
-> * detected by kexecbot)
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  conf/machine/include/zaurus.inc |   47
-> ++++++++++++++++++++++++++++++++++----- 1 files changed, 41 insertions(+),
-> 6 deletions(-)
-> 
-> diff --git a/conf/machine/include/zaurus.inc
-> b/conf/machine/include/zaurus.inc index 45c82d3..899664a 100644
-> --- a/conf/machine/include/zaurus.inc
-> +++ b/conf/machine/include/zaurus.inc
-> @@ -2,22 +2,57 @@
->  # Zaurus common settings
->  ########################
-> 
-> +IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2 ubifs"
-> +INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
-> +IMAGE_DEVICE_TABLES = ""
-> +
->  ERASEBLOCKSIZE = "0x4000"
->  ERASEBLOCKSIZE_akita = "0x20000"
-> +ERASEBLOCKSIZE_spitz = "0x20000"
-> 
->  # Warning! SL-C3000 has "0x4000" (16MiB NAND)
->  # C3100 and C3200 have same 128MiB NAND device as akita
-> -ERASEBLOCKSIZE_spitz = "0x20000"
-> -
-> -IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2"
-> -INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
-> +#
-> +# SL-C3000 (16-7 MiB = 576 PEBs)
-> +# 9 x 1024 : 16 = 576 PEBs
-> +# MKUBIFS_ARGS_spitz = "-m 512 -e 15872 -c 576 -x zlib"
-> +# UBINIZE_ARGS_spitz = "-m 512 -p 16384 -s 256"
-> +# ERASEBLOCKSIZE_spitz = "0x4000"
-> +
-> +# UBI: max collie (14.125 = 904 PEBs)
-> +# 14.125 x 1024 : 16 = 904 PEBs
-> +MKUBIFS_ARGS_collie = "-m 512 -e 15872 -c 904 -x zlib"
-> +UBINIZE_ARGS_collie = "-m 512 -p 16384 -s 256"
-> +
-> +# UBI: max poodle (64-7 MiB = 3648 PEBs)
-> +# 57 x 1024 : 16 = 3648 PEBs
-> +MKUBIFS_ARGS_poodle = "-m 512 -e 15872 -c 3648 -x zlib"
-> +UBINIZE_ARGS_poodle = "-m 512 -p 16384 -s 256"
-> +
-> +# UBI: max c7x0 (128-7 MiB = 7744 PEBs)
-> +# 121 x 1024 : 16 = 7744 PEBs
-> +MKUBIFS_ARGS_c7x0 = "-m 512 -e 15872 -c 7744 -x zlib"
-> +UBINIZE_ARGS_c7x0 = "-m 512 -p 16384 -s 256"
-> +
-> +# UBI: max tosa (128-7 MiB = 7744 PEBs)
-> +# 121 x 1024 : 16 = 7744 PEBs
-> +MKUBIFS_ARGS_tosa = "-m 512 -e 15872 -c 7744 -x zlib"
-> +UBINIZE_ARGS_tosa = "-m 512 -p 16384 -s 256"
-> +
-> +# UBI: max akita (128-7 MiB = 968 PEBs)
-> +# 121 x 1024 : 128 = 968 PEBs
-> +MKUBIFS_ARGS_akita = "-m 2048 -e 129024 -c 968 -x zlib"
-> +UBINIZE_ARGS_akita = "-m 2048 -p 131072 -s 512"
-> +
-> +# UBI: max spitz (128-7 MiB = 968 PEBs)
-> +# 121 x 1024 : 128 = 968 PEBs
-> +MKUBIFS_ARGS_spitz = "-m 2048 -e 129024 -c 968 -x zlib"
-> +UBINIZE_ARGS_spitz = "-m 2048 -p 131072 -s 512"
-> 
->  # kernel now supports favourlzo
->  EXTRA_IMAGECMD_jffs2 = "-p -l --eraseblock=${ERASEBLOCKSIZE}"
->  EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
-> 
-> -IMAGE_DEVICE_TABLES = ""
-> -
->  #########
->  # xserver
->  #########
+--7iMSBzlTiPOCCT2k
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged these two to meta-handheld master (with typo kexecbot -> kexecboot in 
-commit message fixed), thanks.
+On Wed, Aug 01, 2012 at 03:18:26PM -0700, Jeff Osier-Mixon wrote:
+> OpenEmbedded Technical Steering Committee
+> 31 July 2012
+>=20
+> Attendees: Mark, Koen, Richard, Paul
+> Apologies: Khem
+>=20
+> ________________________________________________________________
+> Agenda & Results
+>=20
+> 1. pick a chair - bluelightning
+>=20
+>  d. package.bbclass whitespace
+>  tabs resulting in warnings, seems better in general
+>  some fallout, some positive comments
+
+> [17:25] <bluelightning> on to 3d: package.bbclass whitespace
+> [17:25] <bluelightning> presumably this is now sorted?
+> [17:25] <fray> I've seen some fallout on that, but in generate is seems
+> much better
+> [17:26] <bluelightning> yeah, we expected some
+> [17:26] <bluelightning> I don't have a handle on how much grief we caused
+> for other layers
+> [17:26] <fray> I don't think it was bad
+> [17:27] <fray> I figure in a few weeks as more layers roll forward, we
+> might get some more stuff..
+> [17:27] <RP__> It resulted in warnings, not errors so it shouldn't have
+> been too bad
+> [17:27] <bluelightning> it sounds like the fallout was less than expected
+> [17:27] <fray> the biggest thing I heard about was 3 vs 4 character
+> whitespace in things like package.bbclass..
+> [17:27] <fray> bluelightning certainly less then I expected
+
+
+I was expecting some discussion about=20
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/026176.html
+
+Can this be discussed on next TSC meeting?
 
 Cheers,
-Paul
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--7iMSBzlTiPOCCT2k
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAbgosACgkQN1Ujt2V2gBxTMgCfWKwt6d3hnrI3sLGKpJ3Qyqc0
+GFwAoKeSNhhgrJrYw7hgU3cBhK9t9IDC
+=pTNQ
+-----END PGP SIGNATURE-----
+
+--7iMSBzlTiPOCCT2k--
