@@ -1,36 +1,38 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SxHD7-0001Kb-PK
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Aug 2012 14:42:33 +0200
-Received: by bkcik5 with SMTP id ik5so200271bkc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SxHKH-0001Ut-6z for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Aug 2012 14:49:57 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SxH8y-00086W-S4 for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Aug 2012 14:38:16 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Aug 2012 14:38:16 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Aug 2012 05:30:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=knYwN3DhVpT90DM7o6vbM1MK04Bog/3vnH+Nty8TaH4=;
-	b=GNWUmqF3IVuDClcVm2ZP5iV8lam9sYLELXEk80SEHdrFFwEnrnhwn22aWEGq8bae4b
-	2Y5acXL1duvWyArE/LdDY8qAobnv/DHYKubJIiJDzL7RYcmLpEoIPDVcVx6fz/eMgnrn
-	v8nMdTPpB8sUYcOaP0Tu//0nPvSggaJzg3YRp/IwODK7MLncS/yoOWbBiefB0CXcYuPf
-	dHHRKBmf+Xc8ZI8Ps1gT32N1V/16IBLHiDrOHW8/d+j+DWUv8sI/UIUeIqeUxKvAr+09
-	eVM+BmJ7fZnh0SKAtUvfX7ry7wGyCADYPiIVNKiLxCd3d/PEAKNpZaQ+GYGHSDP1pr6S
-	K/5w==
-Received: by 10.205.137.8 with SMTP id im8mr534658bkc.135.1343997052912;
-	Fri, 03 Aug 2012 05:30:52 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
-	[95.222.160.112])
-	by mx.google.com with ESMTPS id t23sm4762427bks.4.2012.08.03.05.30.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 03 Aug 2012 05:30:51 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 03 Aug 2012 14:38:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Aug 2012 14:30:20 +0200
-Message-Id: <1343997020-11559-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-MIME-Version: 1.0
-Subject: [meta-systemd] gdm: replace 'WantedBy=graphical.target' by 'Alias=display-manager.service'
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 03 Aug 2012 14:38:18 +0200
+Message-ID: <jvggnd$naj$1@dough.gmane.org>
+References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
+	<jvbgus$ove$1@dough.gmane.org>
+	<BCFACC99-6EAF-4C57-B8E2-18DA0E62BAB3@gmail.com>
+	<671950423.c3foblMkXu@helios>
+	<6602C8C9-45EA-47B9-B446-C96264B142B7@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <6602C8C9-45EA-47B9-B446-C96264B142B7@gmail.com>
+X-Enigmail-Version: 1.4.3
+Subject: Re: [meta-systemd][PATCH V2 1/7] systemd: Upgrade to 187
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,48 +46,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2012 12:42:33 -0000
+X-List-Received-Date: Fri, 03 Aug 2012 12:49:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Found at lxdm. Error message was there
-| systemd[1]: Cannot add dependency job for unit display-manager.service ...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Inspired by [1]
+Op 03-08-12 12:32, Khem Raj schreef:
+> 
+> On Aug 2, 2012, at 1:11 AM, Paul Eggleton <paul.eggleton@linux.intel.com>
+> wrote:
+> 
+>> On Wednesday 01 August 2012 15:56:34 Khem Raj wrote:
+>>> On Aug 1, 2012, at 8:11 AM, Koen Kooi <koen@dominion.thruhere.net>
+>>> wrote:
+>>>>> Along with upgrade use the release tarballs instead of git
+>>>> 
+>>>> For an update we need to pull in some patches from master, so a git
+>>>> recipe is still the preferred way.
+>>> 
+>>> OK, you know more about it then me but do you know how many those
+>>> will be ? in other words does systemd releases mean much for
+>>> stability yet or still its a project moving at so fast pace ?
+>>> 
+>>> I see that releases are rolled out almost every month, that sort of
+>>> could mean either way, we wait until the next release or just take
+>>> from a commit upstream
+>>> 
+>>> I feel like staying with a release+patches could be one way if we are
+>>> not importing pathes too often. but I don't know how often that would
+>>> be. For the testing I did release worked well for those platforms
+>>> x86, ppc and arm
+>> 
+>> One might suggest, if stable releases are working and you want to live
+>> on the bleeding edge in your distro, you can easily do so there…
+> 
+> This is moving forward from where we were so it includes all the git
+> commits that were there until cd96b3b86abb4a88cac2722bdfb6e5d4413f6831
+> commit so this update is inclusive.
+> 
+> we can also think of having a stable recipe and a git recipe but systemd
+> releases are almost a month apart it would be more or less covered if we
+> moved from release to release with some patches if needed.
 
-[1] https://bbs.archlinux.org/viewtopic.php?pid=1131267
+If you look at the fedora and debian packages you'll see that they also pull
+in a fair number of patches, so it's not uncommon to do what we're doing.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../meta-gnome/recipes-gnome/gdm/gdm/gdm.service   |    2 +-
- .../recipes-gnome/gdm/gdm_2.32.2.bbappend          |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+regards,
 
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-index 72a56f9..adfc565 100644
---- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-+++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-@@ -8,4 +8,4 @@ ExecStart=/usr/sbin/gdm -nodaemon
- StandardOutput=syslog
- 
- [Install]
--WantedBy=graphical.target
-+Alias=display-manager.service
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-index 7308346..963e3e8 100644
---- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-+++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-@@ -1,7 +1,7 @@
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
--PRINC := "${@int(PRINC) + 1}"
-+PRINC := "${@int(PRINC) + 2}"
- 
- inherit systemd
- 
--- 
-1.7.6.5
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQG8Y6MkyGM64RGpERAjOXAJ4mDqgr4BngOrGZk9drnilAvprDygCcCnW7
+yiaKvRITgm6shVyoul4z3a0=
+=bngc
+-----END PGP SIGNATURE-----
 
 
 
