@@ -1,33 +1,40 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SxlS8-0007g2-BQ
+	(envelope-from <raj.khem@gmail.com>) id 1SxlUf-00087y-Px
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Aug 2012 23:00:04 +0200
-Received: by eekb57 with SMTP id b57so491196eek.6
+	Sat, 04 Aug 2012 23:02:41 +0200
+Received: by eaad12 with SMTP id d12so488485eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Aug 2012 13:48:22 -0700 (PDT)
+	Sat, 04 Aug 2012 13:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=sB3RQKWhzWrdbnwo190EPgVOfz0Ia/RpfMKrDu9l0gE=;
-	b=rPxcydgtd0cC7qWqANIT0iIHwpKSNuW+x9kUIWGTSrWX/4VcTst1N5zh2wKhZKEUQd
-	PDQ8wRy6nxgKceGVMHO7TEgzqzcxLgGoODHp/KSx0rwD7VMdMyjVF574P5J7+Jn/7XPG
-	fQXcJMirDH/NNWB7lyf9mm5zWICOkYDkQQBPI0/pf5YqAFNRNMUJE928CdCwgCztl4em
-	FdFkV1eDWAerA3BWiS5WKp1TW7M58U47NcSx0otyh+RO1QPuHhI4oV1W77/0AJ6WySV1
-	80CMiVEbfFU1O0fhAEe69S1Ha16DtSWJ469YQIYiSL1DlIiOWDxL8Y4uiSfo2A9s19RV
-	0Qiw==
-Received: by 10.14.214.197 with SMTP id c45mr7182914eep.37.1344113302081; Sat,
-	04 Aug 2012 13:48:22 -0700 (PDT)
+	:content-type; bh=clU59DiTKX/Tfj0LZCvlAyxHPKsj3y+CceoJtf2pcfA=;
+	b=x9wum7fxc9/c86Dw4eJlXALvdkc7aa02GB0NJn3HHGJTV9gYTRDfsQBlYZr3cqIjHj
+	P3E8Ei+gSgIItvf/K5+6GmvEpJjVm9c1h3FFQzHJASYHzCJg1PrNUP0I/XRYWkhK5vAf
+	jnbcFOEx4udT3yu1kXdoWFppqJclGTDO6jt4XBkdwlTlCbEYf+Ft+/P0YWK6sxUQKPz2
+	xYEWQ1O2KvjJIyMND/eSHZpF76IHU/WP4ysaJRhO2sJQUrlO8YWul5Yk1mWM2UePCP0T
+	qLU2Al5NC4BwXgT7+zhq+p/KngYQTlST79erCRTRXpiFicBLM1+AvET6/Ft8+u36upQt
+	FILg==
+Received: by 10.14.214.197 with SMTP id c45mr7189193eep.37.1344113459423; Sat,
+	04 Aug 2012 13:50:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.97.141 with HTTP; Sat, 4 Aug 2012 13:47:51 -0700 (PDT)
-In-Reply-To: <jvk13l$nh$2@dough.gmane.org>
+Received: by 10.14.97.141 with HTTP; Sat, 4 Aug 2012 13:50:29 -0700 (PDT)
+In-Reply-To: <jvk125$nh$1@dough.gmane.org>
 References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
-	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
-	<jvk13l$nh$2@dough.gmane.org>
+	<jvbgus$ove$1@dough.gmane.org>
+	<BCFACC99-6EAF-4C57-B8E2-18DA0E62BAB3@gmail.com>
+	<671950423.c3foblMkXu@helios>
+	<6602C8C9-45EA-47B9-B446-C96264B142B7@gmail.com>
+	<jvggnd$naj$1@dough.gmane.org>
+	<CAMKF1sqqyahA8QXH2eOo0SPM-vRtygE1iiyOWMLanV=mGxLfNg@mail.gmail.com>
+	<jvgr60$ig7$1@dough.gmane.org>
+	<CAMKF1spLej1gvXiSYX_OfqhaFK0D2bLZ-hi-8HGHiTUVG9V29w@mail.gmail.com>
+	<jvk125$nh$1@dough.gmane.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 4 Aug 2012 13:47:51 -0700
-Message-ID: <CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
+Date: Sat, 4 Aug 2012 13:50:29 -0700
+Message-ID: <CAMKF1srqhPKJfmGG+5uvkHnv18U9Ye5TM56V1C3tWKHwKHhWbA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
+Subject: Re: [meta-systemd][PATCH V2 1/7] systemd: Upgrade to 187
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2012 21:00:04 -0000
+X-List-Received-Date: Sat, 04 Aug 2012 21:02:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Aug 4, 2012 at 1:36 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+On Sat, Aug 4, 2012 at 1:35 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> On Fri, Aug 3, 2012 at 8:36 AM, Koen Kooi <koen@dominion.thruhere.net>
+>> wrote:
+>>> Move gitpkgv into oe-core
+>>
+>> OK until I fight moving it into OE-Core :) , I have sent a V4 of patchset
+>> which creates a copy of gitpkgv.bbclass in meta-systemd. I believe it
+>> will be short lived. Please take a look at them and install if ok
 >
-> As said before, this class isn't angstrom specific and it won't move back to
-> angstrom.
+> Can't you just symlink it from meta-oe? It will be in the same git repo
+> anyway. That would avoid having 2 copies
 
-koen no one else is using it other than angstrom. but it interferes
-with similar class from OE-Core
-so essentially you want to keep a feature thats just used by angstrom
-in a non angstrom layer?
-doent sound logical to me. Would it be acceptable if angstrom used
-this feature from OE-Core as well ?
-then it will remove the usecase completely.
+we dont have synlinks in repo I didnt want to create first one and its
+reaching across layers
+moreover this calss seldom changes. If you prefer symlink I can redo that bit
 
 
