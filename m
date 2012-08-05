@@ -1,34 +1,37 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SxutX-0007Ky-9Z
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Aug 2012 09:05:01 +0200
-Received: by obc16 with SMTP id 16so426927obc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SxzOg-00032j-1g for openembedded-devel@lists.openembedded.org;
+	Sun, 05 Aug 2012 13:53:26 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SxzDK-0001MD-Vi for openembedded-devel@lists.openembedded.org;
+	Sun, 05 Aug 2012 13:41:42 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Aug 2012 13:41:42 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Aug 2012 23:53:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=sbp4oFJW8oyOyEOBUXFmE7SVMJjqJP2zIDQXXOV8up4=;
-	b=hEm8YnWZVaaQAE5vZwdVdMXgdI1/tBOMoqJNshq3tgNE/iYY8yy5OvBLEM/P/11Cla
-	pObUeNMGZ3FtpF4Wx47ou4CwD/P3J4EIBlkVfC5od618vVJVObst3CkHK9QN5myHscLS
-	4L2kMwRo8K5j7tPdDAqYtyGsRZX1zZo8GNWS6VOHWDuJ2w3N+XK94Ehs30oVdGnDYPf7
-	mKlvi/nCBtacjeoooaRiqTHglSkX6PzqLpU08P4q5sjEJGJa28MTjjjsrUQYV2uCiXG1
-	RfjXyZM/UoAIhbNgjCawsfSQKMEvx1NN9mXK5+S0XIiLlNSTVuly1e2dj5NHWmsZPNKO
-	twvQ==
-MIME-Version: 1.0
-Received: by 10.50.156.201 with SMTP id wg9mr2528349igb.45.1344149595312; Sat,
-	04 Aug 2012 23:53:15 -0700 (PDT)
-Received: by 10.64.142.201 with HTTP; Sat, 4 Aug 2012 23:53:15 -0700 (PDT)
-In-Reply-To: <501DDDC4.9040301@balister.org>
-References: <1344126001-19256-1-git-send-email-schnitzeltony@googlemail.com>
-	<501DDDC4.9040301@balister.org>
-Date: Sun, 5 Aug 2012 08:53:15 +0200
-Message-ID: <CALbNGRSToYmnu-2nj82cucV5FiGMeYaechEJ+X4dyqdUg=N+iA@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Sun, 05 Aug 2012 13:41:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-angstrom 00/16] split tasks into recipes to reduce number of build tasks
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 05 Aug 2012 13:41:33 +0200
+Message-ID: <jvlm56$r75$1@dough.gmane.org>
+References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
+	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
+	<jvk13l$nh$2@dough.gmane.org>
+	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
+X-Enigmail-Version: 1.4.3
+Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,86 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 07:05:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 05 Aug 2012 11:53:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sun, Aug 5, 2012 at 4:43 AM, Philip Balister <philip@balister.org> wrote=
-:
-> Shouldn't this patch go to the Angstrom list?
-You are right but from my experience the response on angstrom list is
-weak and as far as I know there is no patchwork for angstrom.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Andreas
->
-> Philip
->
-> PS: I am guessing and am to lazy to check the README before I go to bed :=
-)
->
->
-> On 08/04/2012 08:19 PM, Andreas M=FCller wrote:
->>
->> There are image recipes around requiring only a subset of what is found =
-in
->> angstrom-task-gnome(3) e.g. meta-ettus-images, angstrom images and mine
->> [1].
->> Unfortunately all recipes touched by angstrom-task-gnome(3) are build
->> without
->> being required/packed in the images. For xfce-nm-image this patch series
->> reduces
->> the number of task more than 700.
->>
->> [1]
->> http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipe=
-s-image/xfce-base-image.bb
->>
->> Andreas M=FCller (16):
->>    angstrom-task-gnome: split out task-gnome-apps
->>    angstrom-task-gnome: split out task-gnome-fonts
->>    angstrom-task-gnome: split out task-gnome
->>    angstrom-task-gnome: split out task-gnome-gstreamer
->>    angstrom-task-gnome: split out task-gnome-perl
->>    angstrom-task-gnome: remove unused packages
->>    angstrom-task-gnome: split out task-gnome-themes
->>    angstrom-task-gnome: split out task-gnome-xserver-base
->>    angstrom-task-gnome3: split out task-gnome3-apps
->>    angstrom-task-gnome3: split out task-gnome3-fonts
->>    angstrom-task-gnome3: split out task-gnome3
->>    angstrom-task-gnome3: split out task-gnome3-gstreamer
->>    angstrom-task-gnome3: split out task-gnome3-perl
->>    angstrom-task-gnome3: remove unused packages
->>    angstrom-task-gnome3: split out task-gnome3-themes
->>    angstrom-task-gnome3: split out task-gnome3-xserver-base
->>
->>   recipes-angstrom/tasks/angstrom-task-gnome.bb     |  100
->> +--------------------
->>   recipes-angstrom/tasks/angstrom-task-gnome3.bb    |   94
->> +-------------------
->>   recipes-angstrom/tasks/task-gnome-apps.bb         |   14 +++
->>   recipes-angstrom/tasks/task-gnome-fonts.bb        |   17 ++++
->>   recipes-angstrom/tasks/task-gnome-gstreamer.bb    |   22 +++++
->>   recipes-angstrom/tasks/task-gnome-perl.bb         |   15 +++
->>   recipes-angstrom/tasks/task-gnome-themes.bb       |   35 +++++++
->>   recipes-angstrom/tasks/task-gnome-xserver-base.bb |   25 +++++
->>   recipes-angstrom/tasks/task-gnome.bb              |   26 ++++++
->>   recipes-angstrom/tasks/task-gnome3-apps.bb        |   13 +++
->>   recipes-angstrom/tasks/task-gnome3.bb             |   23 +++++
->>   11 files changed, 193 insertions(+), 191 deletions(-)
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-apps.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-fonts.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-gstreamer.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-perl.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-themes.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome-xserver-base.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome3-apps.bb
->>   create mode 100644 recipes-angstrom/tasks/task-gnome3.bb
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Op 04-08-12 22:47, Khem Raj schreef:
+> On Sat, Aug 4, 2012 at 1:36 PM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>> 
+>> As said before, this class isn't angstrom specific and it won't move
+>> back to angstrom.
+> 
+> koen no one else is using it other than angstrom. but it interferes with
+> similar class from OE-Core
+
+I guess oe-core people need to be less anti-social with other layers then
+and provide migration patches.
+
+> so essentially you want to keep a feature thats just used by angstrom in
+> a non angstrom layer?
+
+No, I want the class deleted. But as I keep saying, the class was moved to
+meta-oe on request because is was most certainly not angstrom specific. And
+as angstrom maintainer I have no intent to add it back to the angstrom
+layer. So your commit message is entirely wrong.
+
+> doent sound logical to me. Would it be acceptable if angstrom used this
+> feature from OE-Core as well ? then it will remove the usecase
+> completely.
+
+I keep waiting on the person that pushed it to oe-core to provide patches
+for distro layers using the old functionality, see above.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQHlvtMkyGM64RGpERAlM+AJ0QIjUUJazAAA39xptb5OTVbU7GkQCgumJT
+FFtbzZWd8sI4w3gPZJTLeho=
+=mlaZ
+-----END PGP SIGNATURE-----
+
 
 
