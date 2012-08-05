@@ -1,33 +1,36 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Sy6wN-0004FY-A6
+	(envelope-from <kergoth@gmail.com>) id 1Sy8hI-00071A-L5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Aug 2012 21:56:43 +0200
-Received: by eaad12 with SMTP id d12so644412eaa.6
+	Sun, 05 Aug 2012 23:49:16 +0200
+Received: by lagv3 with SMTP id v3so771546lag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2012 12:44:59 -0700 (PDT)
+	Sun, 05 Aug 2012 14:37:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=DuqOMAHEMojvwVgqOZGYBu3zciakjxcvFob7xiyRUdM=;
-	b=t5AoUkr8FN5HRLuALIhcxYinn7V9x3FGMlt2Vhb4Qsotyh3s4c81U2TIVOc0MFvFxN
-	Gu79+AhGUOIUXKELmzTNbKKsytyZ1XzNpUIDJz2nIt8/v/GYcw2f84IEHchg3NRgg4zp
-	Sceoklq4qeaSg9mwex4RMNEwc/2JOJXyt/BVxMIZhOvmTm8flpWktFhBxvohPHYp8S5s
-	FDfXh1oTh62tspYY2O48Uiy7nITtoLm63kxuBZQYjmD6w44iq9XQKQJQm0j8XxW7UZqa
-	mbrEwvvfpHwwrtWffIxfX0UDD7bnyyiEHid/5B37b3xJIz2HaprRxKebSF9vGsIq3upc
-	JhAg==
-Received: by 10.14.219.198 with SMTP id m46mr9981823eep.18.1344195899888; Sun,
-	05 Aug 2012 12:44:59 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=c2twAVGjWgNqJiulwDimL4IwIVpcLSvrFzpnON7Lxy8=;
+	b=qzR5TOun/0q1Ki0B/TR/XiDjsdy9YyIJ3/SKG6gvibgmHFHMIxYf1V5TVUZ/muxQA7
+	VDohdbDEv/D57Lxntw8u2tTAVIdjEKa1TcLopJ134kJzRjN+zwLk75GA0dp8Y9HwuH+T
+	YljgQ1d23doTdkNOmUDzuOXUBdVu0Km14y63Ai0SljwGgeSsaqQHY5ngm8KyjgnfBjd2
+	jTqwVXYazy+DJ/EWrsLfO38g4LGoxsE28L9U66Lu0RCYagf/yq/uWnSoBDfa7hi0gTi2
+	H6vYu4WJCFWGSHfUI1BxWXPRGVQxzCKCY26fiMPm/Lsjq5Iayx99tHoj+YzLR7KYhbUR
+	4F0w==
+Received: by 10.112.30.41 with SMTP id p9mr3788131lbh.26.1344202652845; Sun,
+	05 Aug 2012 14:37:32 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.97.141 with HTTP; Sun, 5 Aug 2012 12:44:29 -0700 (PDT)
+Sender: kergoth@gmail.com
+Received: by 10.114.64.209 with HTTP; Sun, 5 Aug 2012 14:37:12 -0700 (PDT)
 In-Reply-To: <jvlm56$r75$1@dough.gmane.org>
 References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
 	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
 	<jvk13l$nh$2@dough.gmane.org>
 	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
 	<jvlm56$r75$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Aug 2012 12:44:29 -0700
-Message-ID: <CAMKF1sq4FTsgzkn+z36bHOWVbOgg94gebGLe+Fxkok15aQTq3g@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 5 Aug 2012 14:37:12 -0700
+X-Google-Sender-Auth: 9O8NX8KjOzIgJ7LGGI7AZuoCUNk
+Message-ID: <CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,19 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 19:56:43 -0000
+X-List-Received-Date: Sun, 05 Aug 2012 21:49:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Sun, Aug 5, 2012 at 4:41 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> No, I want the class deleted. But as I keep saying, the class was moved to
-> meta-oe on request because is was most certainly not angstrom specific. And
-> as angstrom maintainer I have no intent to add it back to the angstrom
-> layer. So your commit message is entirely wrong.
+>> doent sound logical to me. Would it be acceptable if angstrom used this
+>> feature from OE-Core as well ? then it will remove the usecase
+>> completely.
+>
+> I keep waiting on the person that pushed it to oe-core to provide patches
+> for distro layers using the old functionality, see above.
 
-OK I can change the commit message. I will also work on getting angstrom to use
-this from OE-Core so even angstrom wont need this feature.  I agree that when
-similar features from other layers are added  to OE-Core then all
-distros should be informed and helped
-out to adopt one good case where it happened nicely is buildhistory
+This doesn't make much sense to me. It's impossible to know what all
+layers use a given piece of functionality, particularly ones that
+aren't published in public places, so expecting every person changing
+something in oe-core will go and submit changes to every layer that
+exists is entirely unreasonable. If you maintain a layer, it's your
+responsibility to make sure your layer retains compatibility with
+upstream. It's not upstream's responsibility to make sure everyone
+using their functionality stays compatible.
+-- 
+Christopher Larson
 
 
