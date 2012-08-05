@@ -1,38 +1,22 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Sxoea-00039L-RE
+	(envelope-from <philip@balister.org>) id 1Sxqzd-0006TR-1v
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Aug 2012 02:25:09 +0200
-Received: by wibhm11 with SMTP id hm11so570600wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Aug 2012 17:13:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=27ZNI0ByQDlOFcJ8FLzJx2KCPJ66XkTKOb6UzqACGCM=;
-	b=s0Vi8InnHJLTLZyJg6Mcr4L0o4CUB+89fpCeqp3GuJ+G4QLhaw22mLdgzl/qUUPEer
-	k+1yczOiutVsR7f0E3ULHMgWER0zl3G4FnWOKETSQacGd/aRTH3OjwWzJt6whgl2WKVh
-	XM8NGkgipKYuv7/ory0DJdg0g6m1ihiHo1K/rJY+t1MGJHHjWahe5qWTL1rB3anhc5Gr
-	ksk/QeaomtES15lTnqn14HsVJFtjne+S+s2yT6rNZCANG9zBHdtIJXgjO7JaXftmH4H8
-	5ohGxzyIfGnHLNO1uxGzGV1nEYjIy+HWKdZiC5jbCDmX+xznmlsBgd8VU+ZGtXQzdJQ/
-	BQSw==
-Received: by 10.216.237.149 with SMTP id y21mr3347958weq.102.1344125606417;
-	Sat, 04 Aug 2012 17:13:26 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A0E34.dip.t-dialin.net.
-	[91.10.14.52])
-	by mx.google.com with ESMTPS id l6sm6430551wiz.4.2012.08.04.17.13.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 04 Aug 2012 17:13:25 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Aug 2012 02:20:01 +0200
-Message-Id: <1344126001-19256-17-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1344126001-19256-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1344126001-19256-1-git-send-email-schnitzeltony@googlemail.com>
+	Sun, 05 Aug 2012 04:55:01 +0200
+Received: (qmail 30773 invoked by uid 1003); 5 Aug 2012 02:43:17 -0000
+Received: from unknown (HELO ?192.168.1.105?) (philip@opensdr.com@71.171.25.17)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	5 Aug 2012 02:43:17 -0000
+Message-ID: <501DDDC4.9040301@balister.org>
+Date: Sat, 04 Aug 2012 22:43:16 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120717 Thunderbird/14.0
 MIME-Version: 1.0
-Subject: [meta-angstrom 16/16] angstrom-task-gnome3: split out task-gnome3-xserver-base
+To: openembedded-devel@lists.openembedded.org
+References: <1344126001-19256-1-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1344126001-19256-1-git-send-email-schnitzeltony@googlemail.com>
+Subject: Re: [meta-angstrom 00/16] split tasks into recipes to reduce number of build tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,63 +30,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 00:25:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 05 Aug 2012 02:55:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-angstrom/tasks/angstrom-task-gnome3.bb    |   20 --------------------
- recipes-angstrom/tasks/task-gnome-xserver-base.bb |    3 +++
- 2 files changed, 3 insertions(+), 20 deletions(-)
+Shouldn't this patch go to the Angstrom list?
 
-diff --git a/recipes-angstrom/tasks/angstrom-task-gnome3.bb b/recipes-angstrom/tasks/angstrom-task-gnome3.bb
-index 7a4fabd..ec25c3e 100644
---- a/recipes-angstrom/tasks/angstrom-task-gnome3.bb
-+++ b/recipes-angstrom/tasks/angstrom-task-gnome3.bb
-@@ -6,26 +6,6 @@ PR = "r6"
- 
- inherit task
- 
--# Most of these tasks are arch independant
--PACKAGE_ARCH = "all"
--
--PACKAGES += "task-gnome3-xserver-base "
--
--RDEPENDS_task-gnome3-xserver-base = " \
--  dbus-x11 \
--  iso-codes \
--  mime-support \
--  xauth \
--  xdg-utils \
--  xhost \
--  xinetd \
--  xinit \
--  xrandr \
--  xrdb \
--  xset \
--  xvinfo \
-- "
--
- RDEPENDS_${PN} = " \
-   task-gnome3-fonts \
-   task-gnome3 \
-diff --git a/recipes-angstrom/tasks/task-gnome-xserver-base.bb b/recipes-angstrom/tasks/task-gnome-xserver-base.bb
-index e43cfb9..1b3a070 100644
---- a/recipes-angstrom/tasks/task-gnome-xserver-base.bb
-+++ b/recipes-angstrom/tasks/task-gnome-xserver-base.bb
-@@ -6,6 +6,9 @@ PR = "r13"
- 
- inherit task
- 
-+# for backwards compatibility
-+RPROVIDES_${PN} += "task-gnome3-xserver-base"
-+
- RDEPENDS_${PN} = " \
-   dbus-x11 \
-   iso-codes \
--- 
-1.7.4.4
+Philip
 
+PS: I am guessing and am to lazy to check the README before I go to bed :)
+
+On 08/04/2012 08:19 PM, Andreas Müller wrote:
+> There are image recipes around requiring only a subset of what is found in
+> angstrom-task-gnome(3) e.g. meta-ettus-images, angstrom images and mine [1].
+> Unfortunately all recipes touched by angstrom-task-gnome(3) are build without
+> being required/packed in the images. For xfce-nm-image this patch series reduces
+> the number of task more than 700.
+>
+> [1] http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-image/xfce-base-image.bb
+>
+> Andreas Müller (16):
+>    angstrom-task-gnome: split out task-gnome-apps
+>    angstrom-task-gnome: split out task-gnome-fonts
+>    angstrom-task-gnome: split out task-gnome
+>    angstrom-task-gnome: split out task-gnome-gstreamer
+>    angstrom-task-gnome: split out task-gnome-perl
+>    angstrom-task-gnome: remove unused packages
+>    angstrom-task-gnome: split out task-gnome-themes
+>    angstrom-task-gnome: split out task-gnome-xserver-base
+>    angstrom-task-gnome3: split out task-gnome3-apps
+>    angstrom-task-gnome3: split out task-gnome3-fonts
+>    angstrom-task-gnome3: split out task-gnome3
+>    angstrom-task-gnome3: split out task-gnome3-gstreamer
+>    angstrom-task-gnome3: split out task-gnome3-perl
+>    angstrom-task-gnome3: remove unused packages
+>    angstrom-task-gnome3: split out task-gnome3-themes
+>    angstrom-task-gnome3: split out task-gnome3-xserver-base
+>
+>   recipes-angstrom/tasks/angstrom-task-gnome.bb     |  100 +--------------------
+>   recipes-angstrom/tasks/angstrom-task-gnome3.bb    |   94 +-------------------
+>   recipes-angstrom/tasks/task-gnome-apps.bb         |   14 +++
+>   recipes-angstrom/tasks/task-gnome-fonts.bb        |   17 ++++
+>   recipes-angstrom/tasks/task-gnome-gstreamer.bb    |   22 +++++
+>   recipes-angstrom/tasks/task-gnome-perl.bb         |   15 +++
+>   recipes-angstrom/tasks/task-gnome-themes.bb       |   35 +++++++
+>   recipes-angstrom/tasks/task-gnome-xserver-base.bb |   25 +++++
+>   recipes-angstrom/tasks/task-gnome.bb              |   26 ++++++
+>   recipes-angstrom/tasks/task-gnome3-apps.bb        |   13 +++
+>   recipes-angstrom/tasks/task-gnome3.bb             |   23 +++++
+>   11 files changed, 193 insertions(+), 191 deletions(-)
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-apps.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-fonts.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-gstreamer.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-perl.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-themes.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome-xserver-base.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome3-apps.bb
+>   create mode 100644 recipes-angstrom/tasks/task-gnome3.bb
+>
 
 
