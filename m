@@ -1,19 +1,25 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1SxzZg-0003qZ-CD
+	(envelope-from <raj.khem@gmail.com>) id 1Sy6se-00048t-Jr
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Aug 2012 14:04:48 +0200
-Received: (qmail 29983 invoked by uid 1003); 5 Aug 2012 11:53:04 -0000
-Received: from unknown (HELO ?192.168.1.105?) (philip@opensdr.com@71.171.25.17)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	5 Aug 2012 11:53:04 -0000
-Message-ID: <501E5E9F.4010005@balister.org>
-Date: Sun, 05 Aug 2012 07:53:03 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120717 Thunderbird/14.0
+	Sun, 05 Aug 2012 21:52:52 +0200
+Received: by eaad12 with SMTP id d12so643902eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Aug 2012 12:41:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=GO4Abv5lzJT5LFn//EqtrnGhZDk0bvGUHkTpiMqTyOQ=;
+	b=trSM7BvnTGZfkUq6FPOKQHCrXQgDLG8FMg94GBBm0110HIWLl4qNedWt/yWriEr6HY
+	iU05PyBxErXrUFdV4nFvIrENEyW6g2ttbyXqum43onfMIoQBeik8OiAitseSB1JLjNWr
+	4AHNc0BAwhSd/4Vq1RfXQyll863ZdjxzZPtGdbOYUsUtEWAKGfepAYgtFVOpQTdJeVZi
+	5YAHxl3pV9exbnG4kIPAWbpUDEtVbnJeZ0YcBUWtGW3qoCgUJeDQ3Qwb+m3GP0aPjoLB
+	Ljk/j3yB89Fq7WYm7j7g0Ma7n0EHYIFkM4QvacXBgv9ajYSaiJGkJHmxSm67w/tXfzZK
+	sPQQ==
+Received: by 10.14.173.71 with SMTP id u47mr10110403eel.22.1344195669125; Sun,
+	05 Aug 2012 12:41:09 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.14.97.141 with HTTP; Sun, 5 Aug 2012 12:40:38 -0700 (PDT)
+In-Reply-To: <501E5E9F.4010005@balister.org>
 References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
 	<jvbgus$ove$1@dough.gmane.org>
 	<BCFACC99-6EAF-4C57-B8E2-18DA0E62BAB3@gmail.com>
@@ -25,8 +31,11 @@ References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
 	<CAMKF1spLej1gvXiSYX_OfqhaFK0D2bLZ-hi-8HGHiTUVG9V29w@mail.gmail.com>
 	<jvk125$nh$1@dough.gmane.org>
 	<CAMKF1srqhPKJfmGG+5uvkHnv18U9Ye5TM56V1C3tWKHwKHhWbA@mail.gmail.com>
-	<jvlm7n$r75$2@dough.gmane.org>
-In-Reply-To: <jvlm7n$r75$2@dough.gmane.org>
+	<jvlm7n$r75$2@dough.gmane.org> <501E5E9F.4010005@balister.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 5 Aug 2012 12:40:38 -0700
+Message-ID: <CAMKF1spBFAEww0=kDJDpRk7_Fk9se2xZS4wXqVj8E1H9xk_gCA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-systemd][PATCH V2 1/7] systemd: Upgrade to 187
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,63 +50,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 12:04:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 05 Aug 2012 19:52:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 08/05/2012 07:42 AM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 04-08-12 22:50, Khem Raj schreef:
->> On Sat, Aug 4, 2012 at 1:35 PM, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>>> On Fri, Aug 3, 2012 at 8:36 AM, Koen Kooi
->>>> <koen@dominion.thruhere.net> wrote:
->>>>> Move gitpkgv into oe-core
->>>>
->>>> OK until I fight moving it into OE-Core :) , I have sent a V4 of
->>>> patchset which creates a copy of gitpkgv.bbclass in meta-systemd. I
->>>> believe it will be short lived. Please take a look at them and
->>>> install if ok
->>>
->>> Can't you just symlink it from meta-oe? It will be in the same git
->>> repo anyway. That would avoid having 2 copies
->>
->> we dont have synlinks in repo I didnt want to create first one and its
->> reaching across layers moreover this calss seldom changes. If you prefer
->> symlink I can redo that bit
->
-> Please use a symlink. Whenever there is manual synchronization needed people
-> *will* screw up, just look at kernel.bbclass in meta-oe :)
+On Sun, Aug 5, 2012 at 4:53 AM, Philip Balister <philip@balister.org> wrote:
+> Can someone provide a clear explanation of exactly what the gitpkgv class
+> does and why it is needed? Furthermore, does oe-core provide something that
+> could be used? It is clear that ther eis a desire for something like this in
+> two layers, and that makes it a candidate for oe-core.
 
-Can someone provide a clear explanation of exactly what the gitpkgv 
-class does and why it is needed? Furthermore, does oe-core provide 
-something that could be used? It is clear that ther eis a desire for 
-something like this in two layers, and that makes it a candidate for 
-oe-core.
+well oe-core does not have this functionality and it works in most
+cases and 'most cases' is a problem
+to get it accepted in oe-core. Its a good feature where it provides a
+good incremental version from the maze of
+git SHA ids. That part is good however there is another variable it
+provides which is GITPKGVTAG
+that relies on the tags to be incrementally sortable which is broken
+since tags are arbitrary
+and systemd uses GITPKGVTAG
 
-Symlinking stuff across layers is just wrong. The underlying issue has 
-to be resolved.
-
-Philip
+I think I can defend GITPKGV but GITPKGVTAG will have unanswered
+questions. ideally bitbake fetcher
+should provide this functionality
 
 >
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFQHlw/MkyGM64RGpERAsFEAJ9GGd0Q8NjGqRGUxLxBTMe/modZ0ACbB2we
-> FCmtXTuVV0fgxg8lUi+Zpbw=
-> =WDO3
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+> Symlinking stuff across layers is just wrong. The underlying issue has to be
+> resolved.
+
+I am in agreement. here its deemed to be a short term solution so lets
+live with it
 
 
