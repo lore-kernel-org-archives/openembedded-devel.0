@@ -1,42 +1,35 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Sy6se-00048t-Jr
+	(envelope-from <raj.khem@gmail.com>) id 1Sy6wN-0004FY-A6
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Aug 2012 21:52:52 +0200
-Received: by eaad12 with SMTP id d12so643902eaa.6
+	Sun, 05 Aug 2012 21:56:43 +0200
+Received: by eaad12 with SMTP id d12so644412eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2012 12:41:09 -0700 (PDT)
+	Sun, 05 Aug 2012 12:44:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=GO4Abv5lzJT5LFn//EqtrnGhZDk0bvGUHkTpiMqTyOQ=;
-	b=trSM7BvnTGZfkUq6FPOKQHCrXQgDLG8FMg94GBBm0110HIWLl4qNedWt/yWriEr6HY
-	iU05PyBxErXrUFdV4nFvIrENEyW6g2ttbyXqum43onfMIoQBeik8OiAitseSB1JLjNWr
-	4AHNc0BAwhSd/4Vq1RfXQyll863ZdjxzZPtGdbOYUsUtEWAKGfepAYgtFVOpQTdJeVZi
-	5YAHxl3pV9exbnG4kIPAWbpUDEtVbnJeZ0YcBUWtGW3qoCgUJeDQ3Qwb+m3GP0aPjoLB
-	Ljk/j3yB89Fq7WYm7j7g0Ma7n0EHYIFkM4QvacXBgv9ajYSaiJGkJHmxSm67w/tXfzZK
-	sPQQ==
-Received: by 10.14.173.71 with SMTP id u47mr10110403eel.22.1344195669125; Sun,
-	05 Aug 2012 12:41:09 -0700 (PDT)
+	:content-type; bh=DuqOMAHEMojvwVgqOZGYBu3zciakjxcvFob7xiyRUdM=;
+	b=t5AoUkr8FN5HRLuALIhcxYinn7V9x3FGMlt2Vhb4Qsotyh3s4c81U2TIVOc0MFvFxN
+	Gu79+AhGUOIUXKELmzTNbKKsytyZ1XzNpUIDJz2nIt8/v/GYcw2f84IEHchg3NRgg4zp
+	Sceoklq4qeaSg9mwex4RMNEwc/2JOJXyt/BVxMIZhOvmTm8flpWktFhBxvohPHYp8S5s
+	FDfXh1oTh62tspYY2O48Uiy7nITtoLm63kxuBZQYjmD6w44iq9XQKQJQm0j8XxW7UZqa
+	mbrEwvvfpHwwrtWffIxfX0UDD7bnyyiEHid/5B37b3xJIz2HaprRxKebSF9vGsIq3upc
+	JhAg==
+Received: by 10.14.219.198 with SMTP id m46mr9981823eep.18.1344195899888; Sun,
+	05 Aug 2012 12:44:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.97.141 with HTTP; Sun, 5 Aug 2012 12:40:38 -0700 (PDT)
-In-Reply-To: <501E5E9F.4010005@balister.org>
+Received: by 10.14.97.141 with HTTP; Sun, 5 Aug 2012 12:44:29 -0700 (PDT)
+In-Reply-To: <jvlm56$r75$1@dough.gmane.org>
 References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
-	<jvbgus$ove$1@dough.gmane.org>
-	<BCFACC99-6EAF-4C57-B8E2-18DA0E62BAB3@gmail.com>
-	<671950423.c3foblMkXu@helios>
-	<6602C8C9-45EA-47B9-B446-C96264B142B7@gmail.com>
-	<jvggnd$naj$1@dough.gmane.org>
-	<CAMKF1sqqyahA8QXH2eOo0SPM-vRtygE1iiyOWMLanV=mGxLfNg@mail.gmail.com>
-	<jvgr60$ig7$1@dough.gmane.org>
-	<CAMKF1spLej1gvXiSYX_OfqhaFK0D2bLZ-hi-8HGHiTUVG9V29w@mail.gmail.com>
-	<jvk125$nh$1@dough.gmane.org>
-	<CAMKF1srqhPKJfmGG+5uvkHnv18U9Ye5TM56V1C3tWKHwKHhWbA@mail.gmail.com>
-	<jvlm7n$r75$2@dough.gmane.org> <501E5E9F.4010005@balister.org>
+	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
+	<jvk13l$nh$2@dough.gmane.org>
+	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
+	<jvlm56$r75$1@dough.gmane.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Aug 2012 12:40:38 -0700
-Message-ID: <CAMKF1spBFAEww0=kDJDpRk7_Fk9se2xZS4wXqVj8E1H9xk_gCA@mail.gmail.com>
+Date: Sun, 5 Aug 2012 12:44:29 -0700
+Message-ID: <CAMKF1sq4FTsgzkn+z36bHOWVbOgg94gebGLe+Fxkok15aQTq3g@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-systemd][PATCH V2 1/7] systemd: Upgrade to 187
+Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 19:52:52 -0000
+X-List-Received-Date: Sun, 05 Aug 2012 19:56:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sun, Aug 5, 2012 at 4:53 AM, Philip Balister <philip@balister.org> wrote:
-> Can someone provide a clear explanation of exactly what the gitpkgv class
-> does and why it is needed? Furthermore, does oe-core provide something that
-> could be used? It is clear that ther eis a desire for something like this in
-> two layers, and that makes it a candidate for oe-core.
+On Sun, Aug 5, 2012 at 4:41 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> No, I want the class deleted. But as I keep saying, the class was moved to
+> meta-oe on request because is was most certainly not angstrom specific. And
+> as angstrom maintainer I have no intent to add it back to the angstrom
+> layer. So your commit message is entirely wrong.
 
-well oe-core does not have this functionality and it works in most
-cases and 'most cases' is a problem
-to get it accepted in oe-core. Its a good feature where it provides a
-good incremental version from the maze of
-git SHA ids. That part is good however there is another variable it
-provides which is GITPKGVTAG
-that relies on the tags to be incrementally sortable which is broken
-since tags are arbitrary
-and systemd uses GITPKGVTAG
-
-I think I can defend GITPKGV but GITPKGVTAG will have unanswered
-questions. ideally bitbake fetcher
-should provide this functionality
-
->
-> Symlinking stuff across layers is just wrong. The underlying issue has to be
-> resolved.
-
-I am in agreement. here its deemed to be a short term solution so lets
-live with it
+OK I can change the commit message. I will also work on getting angstrom to use
+this from OE-Core so even angstrom wont need this feature.  I agree that when
+similar features from other layers are added  to OE-Core then all
+distros should be informed and helped
+out to adopt one good case where it happened nicely is buildhistory
 
 
