@@ -1,38 +1,33 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SyK0G-0000zA-Iv
+	(envelope-from <schnitzeltony@googlemail.com>) id 1SyKpH-0006xF-Dj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2012 11:53:36 +0200
-Received: by weyr6 with SMTP id r6so1708591wey.6
+	Mon, 06 Aug 2012 12:46:19 +0200
+Received: by yenm12 with SMTP id m12so528796yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Aug 2012 02:41:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=D4k7v1dVRvxSIP8h+jeIFcPbWRSiDKBFuTZv6NO+8k4=;
-	b=dKM6XMXkJcsHvwz4/+aCxMOeo0a9OYC48kSe8yk1wRNZ6tNaNqOYhAumwh7fU0ygff
-	sMvBO/LMSr1lPXi5FS49dI+negVMWTe20RN8WyOgI0eRjW9o+4OdqgAA3oz+prOjY+v2
-	mq4RT5QDiFm5ZnOzL0L5jN4V0Ch3zR6FpM3ooz4OY9WnUJm0Cf17IPXdEuxH6m119r2B
-	96tnNBmfiqSUaEyTZtPk0M7wtJyY9sF190TwmASlXO3ke/r6FFKQpwu3EoMKLn2kuYUa
-	1hcMqz0XUlMQ+trRE9IIhwf7fxGqbzNJ8+jL/jkLGotWkRH6AXiNmjo02gGKV+iEAekH
-	N4dA==
-Received: by 10.180.107.103 with SMTP id hb7mr16917133wib.3.1344246112302;
-	Mon, 06 Aug 2012 02:41:52 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o2sm21698873wiz.11.2012.08.06.02.41.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 06 Aug 2012 02:41:50 -0700 (PDT)
-Date: Mon, 6 Aug 2012 11:41:46 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120806094146.GI3267@jama.jama.net>
-References: <1343649833-23316-1-git-send-email-Martin.Jansa@gmail.com>
+	Mon, 06 Aug 2012 03:34:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=vv6KcwXc2ZQHvE+Q5LcQNUklOloyA11kFXhP3NSUpaM=;
+	b=hUhsfW2KAM+9R5s80X7FOpof0anErA7N8I2NdGDLjV8wQkOXXkL3og2sozZAkJcPmI
+	Hz73sROM5fCVqb9JGEsRfdJQYG/bvm4hjlqJ22EbcVfWZnkpYA7IYNXQNIyXYQjrKe/J
+	j5VPTLSnjIa92HiX5Di8wt5RnKKWB6to8B2rYoJ7n8qhiZ+9+KNBAhV9jSK+MCynGCP/
+	2KFZjSVOByICMcNQoiv3eEAttmwNKCIS6LtdXsp4z8ciHIucc0R6RoHaNRaNe/Q4J5jg
+	7wH+64Mw+rdDkl6p2Z/E5It62NeaSp/LfxTwOwXwUPcAiY3xcBlekDRjTG7TR+IA6FS7
+	3V4Q==
 MIME-Version: 1.0
-In-Reply-To: <1343649833-23316-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] Revert "chromium: use COMPATIBLE_HOST instead of COMPATIBLE_MACHINE"
+Received: by 10.50.191.227 with SMTP id hb3mr4936257igc.45.1344249274275; Mon,
+	06 Aug 2012 03:34:34 -0700 (PDT)
+Received: by 10.64.142.201 with HTTP; Mon, 6 Aug 2012 03:34:34 -0700 (PDT)
+In-Reply-To: <1343997020-11559-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1343997020-11559-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 6 Aug 2012 12:34:34 +0200
+Message-ID: <CALbNGRQZaD7JURQi9uTm9KNFv92K_Ap54pPr-iOw6a7b+6WpYA@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-systemd] gdm: replace 'WantedBy=graphical.target' by 'Alias=display-manager.service'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,88 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2012 09:53:36 -0000
-X-Groupsio-MsgNum: 40074
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="J+eNKFoVC4T1DV3f"
-Content-Disposition: inline
-
---J+eNKFoVC4T1DV3f
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 06 Aug 2012 10:46:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 30, 2012 at 02:03:53PM +0200, Martin Jansa wrote:
-> * COMPATIBLE_HOST is not good enough for some configurations:
->   ERROR: chromium was skipped: incompatible with host arm-oe-linux-gnueab=
-i (not in COMPATIBLE_HOST)
->=20
-
-ping
-
-> This reverts commit 7fb308d4f8d68d19a91daab8d33418cea8dea57b.
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On Fri, Aug 3, 2012 at 2:30 PM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> Found at lxdm. Error message was there
+> | systemd[1]: Cannot add dependency job for unit display-manager.service =
+...
+>
+> Inspired by [1]
+>
+> [1] https://bbs.archlinux.org/viewtopic.php?pid=3D1131267
+>
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
->  recipes-browser/chromium/chromium_19.0.1049.3.bb |    6 ++++--
->  recipes-browser/chromium/chromium_20.0.1086.0.bb |    4 +++-
->  2 files changed, 7 insertions(+), 3 deletions(-)
->=20
-> diff --git a/recipes-browser/chromium/chromium_19.0.1049.3.bb b/recipes-b=
-rowser/chromium/chromium_19.0.1049.3.bb
-> index 97843a3..e657c48 100644
-> --- a/recipes-browser/chromium/chromium_19.0.1049.3.bb
-> +++ b/recipes-browser/chromium/chromium_19.0.1049.3.bb
-> @@ -10,8 +10,10 @@ SRC_URI =3D "http://commondatastorage.googleapis.com/c=
-hromium-browser-official/${P
->  	file://softfloat-fix.patch \
->  "
-> =20
-> -# include.gypi exists only for armv6 and armv7a
-> -COMPATIBLE_HOST =3D "(armv6|armv7).*-linux"
-> +# include.gypi exists only for armv6 and armv7a and there isn't somethin=
-g like COMPATIBLE_ARCH afaik
-> +COMPATIBLE_MACHINE =3D "(-)"
-> +COMPATIBLE_MACHINE_armv6 =3D "(.*)"
-> +COMPATIBLE_MACHINE_armv7a =3D "(.*)"
-> =20
->  PR =3D "r1"
-> =20
-> diff --git a/recipes-browser/chromium/chromium_20.0.1086.0.bb b/recipes-b=
-rowser/chromium/chromium_20.0.1086.0.bb
-> index d1ae7e5..527f317 100644
-> --- a/recipes-browser/chromium/chromium_20.0.1086.0.bb
-> +++ b/recipes-browser/chromium/chromium_20.0.1086.0.bb
-> @@ -8,7 +8,9 @@ SRC_URI =3D "http://commondatastorage.googleapis.com/chro=
-mium-browser-official/${P
->  "
-> =20
->  # include.gypi exists only for armv6 and armv7a and there isn't somethin=
-g like COMPATIBLE_ARCH afaik
-> -COMPATIBLE_HOST =3D "(armv6|armv7).*-linux"
-> +COMPATIBLE_MACHINE =3D "(-)"
-> +COMPATIBLE_MACHINE_armv6 =3D "(.*)"
-> +COMPATIBLE_MACHINE_armv7a =3D "(.*)"
-> =20
->  DEFAULT_PREFERENCE =3D "-1"
-> =20
-> --=20
-> 1.7.8.6
->=20
+>  .../meta-gnome/recipes-gnome/gdm/gdm/gdm.service   |    2 +-
+>  .../recipes-gnome/gdm/gdm_2.32.2.bbappend          |    2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service b/=
+meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
+> index 72a56f9..adfc565 100644
+> --- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
+> +++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
+> @@ -8,4 +8,4 @@ ExecStart=3D/usr/sbin/gdm -nodaemon
+>  StandardOutput=3Dsyslog
+>
+>  [Install]
+> -WantedBy=3Dgraphical.target
+> +Alias=3Ddisplay-manager.service
+> diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappen=
+d b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+> index 7308346..963e3e8 100644
+> --- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+> +++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+> @@ -1,7 +1,7 @@
+>  # look for files in the layer first
+>  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
+>
+> -PRINC :=3D "${@int(PRINC) + 1}"
+> +PRINC :=3D "${@int(PRINC) + 2}"
+>
+>  inherit systemd
+>
+> --
+> 1.7.6.5
+>
+Please ignore this patch. It needs some rework on systemctl-native.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas
 
---J+eNKFoVC4T1DV3f
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAfkVoACgkQN1Ujt2V2gBznWQCfRhAh7hkpw4RGLOXvh4UL3gQ3
-hWsAoJkXsexGa0qjTSIo6WQiVENJ8Joz
-=nstq
------END PGP SIGNATURE-----
-
---J+eNKFoVC4T1DV3f--
