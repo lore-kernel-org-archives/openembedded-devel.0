@@ -1,42 +1,40 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1SyHcz-0006XF-9n; Mon, 06 Aug 2012 09:21:25 +0200
-Received: by wibhq4 with SMTP id hq4so1241473wib.6
-	for <multiple recipients>; Mon, 06 Aug 2012 00:09:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yiLkQW5bc6G7Z3o/BhFI2jluAvn8TFFV+HZsJfet6Pg=;
-	b=EZkHH3grY9/pfImfN7yHdhQ/qrn/kF786P8UpNrGKhxwgUlsPaJF8dH/6/Or/5O8HP
-	TgUFAndbhMoVhGCSQAipy7rfPAcISU2Yc62W8bZM6x/81OPaGekxXwO+i32pJmiR6dfM
-	jYODF36Kyo8MVFpi231r6UxaM3B8ZtVMjsLcXIUwvdhK5Ce8IMLKIlAJpv4LsPQ8w10p
-	vxa0kDr4PwMgz58u/tTQio5dvPcUgiFHDbSptOa4tkUe4PwMaIw79QMEYLZSsSEPTR7R
-	6u0sJyg6n0lOuj1n9Bg+/WInc5IijCK/JOMQ1e8DwxvgA9eht2xrOWFURl4X3IXXufhG
-	qjKA==
-Received: by 10.180.91.1 with SMTP id ca1mr15931866wib.8.1344236981153;
-	Mon, 06 Aug 2012 00:09:41 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t7sm20803883wix.6.2012.08.06.00.09.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 06 Aug 2012 00:09:39 -0700 (PDT)
-Date: Mon, 6 Aug 2012 09:09:34 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Message-ID: <20120806070934.GE3267@jama.jama.net>
-References: <1343250562.29991.0.camel@ted>
-	<20120802135335.GQ16306@jama.jama.net>
-	<20120802141450.GS16306@jama.jama.net>
-	<1343922792.9756.81.camel@ted>
-	<20120802194051.GA16306@jama.jama.net>
-	<1343937470.9756.95.camel@ted>
-MIME-Version: 1.0
-In-Reply-To: <1343937470.9756.95.camel@ted>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-core <openembedded-core@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH] sstate: Add a two character subdirectory to the sstate directory layout
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SyI9i-000752-II for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Aug 2012 09:55:14 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1SyHyM-0006vy-Ly for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Aug 2012 09:43:30 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Aug 2012 09:43:30 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Aug 2012 09:43:30 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 06 Aug 2012 09:43:51 +0200
+Message-ID: <jvnsim$5e9$1@dough.gmane.org>
+References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
+	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
+	<jvk13l$nh$2@dough.gmane.org>
+	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
+	<jvlm56$r75$1@dough.gmane.org>
+	<CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
+X-Enigmail-Version: 1.4.3
+X-Enigmail-Draft-Status: 513
+Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,188 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2012 07:21:25 -0000
-X-Groupsio-MsgNum: 40070
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZInfyf7laFu/Kiw7"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 06 Aug 2012 07:55:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---ZInfyf7laFu/Kiw7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Aug 02, 2012 at 08:57:50PM +0100, Richard Purdie wrote:
-> On Thu, 2012-08-02 at 21:40 +0200, Martin Jansa wrote:
-> > On Thu, Aug 02, 2012 at 04:53:12PM +0100, Richard Purdie wrote:
-> > > On Thu, 2012-08-02 at 16:14 +0200, Martin Jansa wrote:
-> > > > On Thu, Aug 02, 2012 at 03:53:35PM +0200, Martin Jansa wrote:
-> > > > > On Wed, Jul 25, 2012 at 10:09:22PM +0100, Richard Purdie wrote:
-> > > > > > Currently all sstate files are placed into one directory. This =
-does not scale and
-> > > > > > causes a variety of filesystem issues. This patch adds a two ch=
-aracter subdirectory
-> > > > > > to the layout (based on the first two characters of the hash) s=
-o that files
-> > > > > > can be split into several directories.
-> > > > > >=20
-> > > > > > This should help performance of sstate in most cases by avoding=
- creating directories with=20
-> > > > > > huge numbers of files.
-> > > > > >=20
-> > > > > > The SSTATE_MIRRORS syntax needs updating to account for the ext=
-ra path element by
-> > > > > > the addition of a PATH item, for example:
-> > > > > >=20
-> > > > > > SSTATE_MIRRORS =3D "file://.* file:///some/path/to/sstate-cache=
-/PATH"
-> > > > > > SSTATE_MIRRORS =3D "file://.* http://192.168.1.23/sstate-cache/=
-PATH"
-> > > > > >=20
-> > > > > > This change also sets the scene for using things like lsb-relea=
-se in
-> > > > > > the=20
-> > > > >=20
-> > > > > Is it possible to create 2nd level cache with this?
-> > > > >=20
-> > > > > I have some server with slow upload but fully populated sstate-ca=
-che.
-> > > > >=20
-> > > > > So on server with faster upload which could be used as offical
-> > > > > SSTATE_MIRROR for SHR distro I would like to add
-> > > > >=20
-> > > > > SSTATE_MIRRORS ?=3D "file://.* http://slow-server/sstate-cache/PA=
-TH"
-> > > > >=20
-> > > > > And then sync my sstate-cache directory to public accessible web =
-root (with rsync).
-> > > > >=20
-> > > > > Problem is that now sstate-cache has all files in slightly differ=
-ent=20
-> > > > > layout then original sstate-cache on slow server. From what I see=
- I guess=20
-> > > > > it finds URL with correct prefix "sstate-cache/Gentoo-2.1/0d" and=
- downloads it=20
-> > > > > directly to sstate-cache dir (and adds .done)
-> > > > >=20
-> > > > > OE @ ~/oe-core $ ll sstate-cache/sstate-apr-native-x86_64-linux-1=
-=2E4.6-r1-x86_64-2-*populate-lic*
-> > > > > -rw-r--r-- 1 bitbake bitbake 9257 Jul 30 12:31 sstate-cache/sstat=
-e-apr-native-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e5fe94536596e5=
-0_populate-lic.tgz
-> > > > > -rw-r--r-- 1 bitbake bitbake    0 Aug  2 15:40 sstate-cache/sstat=
-e-apr-native-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e5fe94536596e5=
-0_populate-lic.tgz.done
-> > > > >=20
-> > > > > And then creates symlink in right prefix back to absolute path of=
- sstate-cache/file:
-> > > > > OE @ ~/oe-core $ ll sstate-cache/Gentoo-2.1/0d/sstate-apr-native-=
-x86_64-linux-1.4.6-r1-x86_64-2-*populate-lic*
-> > > > > lrwxrwxrwx 1 bitbake bitbake 123 Aug  2 15:40 sstate-cache/Gentoo=
--2.1/0d/sstate-apr-native-x86_64-linux-1.4.6-r1-x86_64-2-0d2ed24b90d50bf83e=
-5fe94536596e50_populate-lic.tgz ->=20
-> > > > > /OE/oe-core/sstate-cache/sstate-apr-native-x86_64-linux-1.4.6-r1-=
-x86_64-2-0d2ed24b90d50bf83e5fe94536596e50_populate-lic.tgz
-> > > > >=20
-> > > > > But after sstate-cache directory is rsynced somewhere else and oe=
--core/sstate-cache is removed,=20
-> > > > > all those symlinks point nowhere and public sstate-cache is unusa=
-ble.
-> > > > >=20
-> > > > > Can we have relative paths used in symlinks or even instruct fetc=
-her to download that=20
-> > > > > file directly to right prefix?
-> > > >=20
-> > > > 2 more ideas:
-> > > >=20
-> > > > 1) would be great to also download file.sigdata if it exists, to be=
- able
-> > > >    to compare them when they change even on machine which downloaded
-> > > >    older sstate file from remote url
-> > > > 2) if the reason for this patch was number of files in shared
-> > > >    sstate-cache directory, then fetcher creating .done files makes
-> > > >    number double too (would be fine if fetcher stores all 3 files
-> > > >    (.tgz, .tgz.sigdata, .tgz.done) in right prefix, or moves them to
-> > > >    right prefix instead of symlinks.
-> > >=20
-> > > I'm aware of the problem. The main issue is that we probably need to
-> >=20
-> > And what about .sigdata files?
+Op 05-08-12 23:37, Chris Larson schreef:
+> On Sun, Aug 5, 2012 at 4:41 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+>>> doent sound logical to me. Would it be acceptable if angstrom used
+>>> this feature from OE-Core as well ? then it will remove the usecase 
+>>> completely.
+>> 
+>> I keep waiting on the person that pushed it to oe-core to provide
+>> patches for distro layers using the old functionality, see above.
+> 
+> This doesn't make much sense to me. It's impossible to know what all 
+> layers use a given piece of functionality, particularly ones that aren't
+> published in public places, so expecting every person changing something
+> in oe-core will go and submit changes to every layer that exists is
+> entirely unreasonable. If you maintain a layer, it's your responsibility
+> to make sure your layer retains compatibility with upstream. It's not
+> upstream's responsibility to make sure everyone using their functionality
+> stays compatible.
 
-Added
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D2898
+In this specific instance the class was moved from meta-angstrom to meta-oe
+as is and then moved to oe-core and changed to make it "less angstrom
+specific".
+I don't see how you can  argue that the person making that change was/is
+unaware of the existence of the angstrom layer. Or of the SHR usage of that
+class.
 
-> > I have sort shell script to replace symlinks with real files in prefixed
-> > dirs, would it be worth it integrating to=20
-> > openembedded-core/scripts/sstate-cache-management.sh
-> > which doesn't work with new layout anyway?
+But yes, some people don't know that layers exist, there was a nice example
+last week when I asked if someone checked *all* the layers out there on the
+impact of the patch in question and the response was "Yes, I checked both
+oe-core and meta-intel".
 
-Added
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D2897
+I agree with your generic point that changes in oe-core can not and should
+not require updating of all layers by the submitter. On the other hand: if
+you know you're moving functionality between layers while breaking it in the
+process it is anti-social to not fix up the user(s) of that functionality
+that you know of.
 
-> > > start enforcing complete paths for all downloads in DL_DIR, including
-> > > http:// urls. This would resolve conflicts like:
-> > >=20
-> > > SRC_URI =3D "http://server1.org/somefile.patch \
-> > >            http://server2.org/somefile.patch"
-> >=20
-> > In two separate recipes right?
-> >=20
-> > > where the two files are different. The trouble is it will pretty much
-> > > break all the source mirrors :(.
-> >=20
-> > So you would store them in DL_DIR/server1.org/somefile.patch path?
->=20
-> I've wondered about:
->=20
-> DL_DIR/server1.org/somepath/somefile.patch
->=20
-> > That would make oposite scenario where the BIG.tgz is available=20
-> > (or even requested by different recipes) from different location less
-> > efficient.
->=20
-> Not necessarily with the right mirror/premirror configuration.
->=20
-> > And not creating .done files for local files fetched from file:// whould
-> > also help for:
-> >=20
-> > foo.bb: SRC_URI =3D "file://somefile.patch"
-> > bar.bb: SRC_URI =3D "http://server2.org/somefile.patch"=20
-> >=20
-> > Which now ignores checksums for samefile.patch downloaded for bar.bb if
-> > foo.bb was built before.
->=20
-> That is a pain but we've basically always assumed no namespace
-> collision. I'm not saying that is a good thing, just the way it is.
->=20
-> Not creating done files for local urls causes a variety of problems, not
-> least that you then have to special case local urls in the generic
-> fetcher code, it also hits performance. I've been trying to get the
-> fetcher away from a set of special cases...
->=20
-> Cheers,
->=20
-> Richard
->=20
->=20
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ZInfyf7laFu/Kiw7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+This is similar to asking a oe-core patch to be held back for a few days
+because a number of layers have a matching bbappend that will need updating.
+Especially if those layers have maintainers where the patch review latency
+is measured in days instead of hours (e.g. me with non-denzil based stuff).
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlAfba4ACgkQN1Ujt2V2gBzeMQCfQ4oS6ToiVEKiy6nWPWj3SSEp
-CDgAnRRp5svb0f3oBR7XNVexE14u/NvF
-=DLYL
+iD8DBQFQH3W3MkyGM64RGpERAlbgAKCBvZTQD38H44mB+JzjQ2t92ttMzQCfVxeJ
+nX2o+AfM7mrFEZnBT7YAV5s=
+=v8kK
 -----END PGP SIGNATURE-----
 
---ZInfyf7laFu/Kiw7--
+
+
