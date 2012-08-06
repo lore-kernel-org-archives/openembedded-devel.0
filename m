@@ -1,36 +1,20 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mx1.bticino.it ([91.208.195.90] helo=bticino.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Sy99Z-0007jw-AP
+	(envelope-from <simone.agresta@bticino.it>) id 1SyDAu-0003Hv-8z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2012 00:18:29 +0200
-Received: by eekb57 with SMTP id b57so665152eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2012 15:06:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=qbxqjqw0dHscVvZUCU2JPpMOfhsI4XDDF4u6FGlXFEc=;
-	b=SlKKDlZJtVUG50pW9v2lfIQXXTVkFzwbFFIsDatSDQZc/IKTQcI+ZRq9lxq/Tnpxl2
-	FDCXZPGDahFpgfsnHYmeMRIWRwEZWdMX2x7cuaV4mI0hIsd5DXtsaDpf+OvQxPEW4zAK
-	RRIbVMGEsCesOfA5KHcDay/HJLyssEQkNZdypiKIkoQZ9jFAmcO/vHGm0GOO7t1DgCRf
-	31MS0K7VWtF66AKZy28q6FdKZRkImSeEPmM81Pv2oShrKOiawsORNZNACB9+Cbu1r4yS
-	L191qc6OEs4Fb/bC5tjGHxFzxHwahkRRBxeWzlrAczw5FqYjWq+52euazzTVqxXFswqg
-	4Nsg==
-Received: by 10.14.219.198 with SMTP id m46mr10387606eep.18.1344204405459;
-	Sun, 05 Aug 2012 15:06:45 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.97.141 with HTTP; Sun, 5 Aug 2012 15:06:15 -0700 (PDT)
-In-Reply-To: <CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
-References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
-	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
-	<jvk13l$nh$2@dough.gmane.org>
-	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
-	<jvlm56$r75$1@dough.gmane.org>
-	<CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Aug 2012 15:06:15 -0700
-Message-ID: <CAMKF1sr8cKuU79Fc9=uXUo0-u8V0vhOg9PGOqb7m8jeBDR4bNw@mail.gmail.com>
+	Mon, 06 Aug 2012 04:36:08 +0200
+Received: from ([10.31.15.91])
+	by smtp1.bticino.it with ESMTP  id 5RSHRF1.79492314;
+	Mon, 06 Aug 2012 04:09:17 +0200
+Auto-Submitted: auto-generated
+From: simone.agresta@bticino.it
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
+Message-ID: <OF95C427CE.795BEA9F-ONC1257A52.000BD5E4-C1257A52.000BD5E4@grpleg.it>
+Date: Mon, 6 Aug 2012 04:09:16 +0200
+X-MIMETrack: Serialize by Router on IT-VAR-HUB-01/SRV/GRPLEG(Release
+	8.5.3FP1|March 07, 2012) at 06/08/2012 04.09.16
+MIME-Version: 1.0
+Subject: =?UTF-8?B?QVVUTzogU2ltb25lIEFncmVzdGEvQlRJQ0lOTy9JVCDDqCBhc3NlbnRlIGRhbGwndWZmaWNpby4gKHRvcm5lcsOgIGlsIDI3LzA4LzIwMTIp?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2012 22:18:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Aug 2012 02:36:08 -0000
+Content-transfer-encoding: quoted-printable
+Content-Type: text/plain;
+	charset="ISO-8859-1"
 
-On Sun, Aug 5, 2012 at 2:37 PM, Chris Larson <clarson@kergoth.com> wrote:
->
-> This doesn't make much sense to me. It's impossible to know what all
-> layers use a given piece of functionality, particularly ones that
-> aren't published in public places, so expecting every person changing
-> something in oe-core will go and submit changes to every layer that
-> exists is entirely unreasonable. If you maintain a layer, it's your
-> responsibility to make sure your layer retains compatibility with
-> upstream. It's not upstream's responsibility to make sure everyone
-> using their functionality stays compatible.
-
-I would agree in general. In this given case this feature was taken
-from meta-oe to begin with
-so my point is if you moved it from meta-oe then make sure that its
-removed from meta-oe
+=0D=0ASono fuori dall'ufficio fino a 27/08/2012=0D=0A=0D=0ARisponder=F2 al =
+messaggio al mio ritorno=2E=0D=0A=0D=0A=0D=0ANota: Questa =E8 una risposta =
+automatizzata al messaggio  "Openembedded-devel=0D=0ADigest, Vol 73, Issue =
+18" inviata il 8/6/2012 12:18:30 AM=2E=0D=0A=0D=0AQuesta =E8 l'unica notifi=
+ca che verr=E0 ricevuta mentre la persona =E8 assente=2E=0D=0A=0D=0ACe mess=
+age, ainsi que tous les fichiers joints =E0 ce message,=0D=0Apeuvent conten=
+ir des informations sensibles et/ ou confidentielles=0D=0Ane devant pas =EA=
+tre divulgu=E9es=2E Si vous n'=EAtes pas le destinataire=0D=0Ade ce message=
+ (ou que vous recevez ce message par erreur), nous=0D=0Avous remercions de =
+le notifier imm=E9diatement =E0 son exp=E9diteur, et=0D=0Ade d=E9truire ce =
+message=2E Toute copie, divulgation, modification,=0D=0Autilisation ou diff=
+usion, non autoris=E9e, directe ou indirecte, de=0D=0Atout ou partie de ce =
+message, est strictement interdite=2E=0D=0A=0D=0AThis e-mail, and any docum=
+ent attached hereby, may contain=0D=0Aconfidential and/or privileged inform=
+ation=2E If you are not the=0D=0Aintended recipient (or have received this =
+e-mail in error) please=0D=0Anotify the sender immediately and destroy this=
+ e-mail=2E Any=0D=0Aunauthorized, direct or indirect, copying, disclosure, =
+distribution=0D=0Aor other use of the material or parts thereof is strictly=
+=0D=0Aforbidden=2E
 
 
