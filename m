@@ -1,35 +1,34 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SyIFQ-0007dk-9b for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2012 10:01:08 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1SyI43-0002Dx-BE for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Aug 2012 09:49:23 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Aug 2012 09:49:23 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1SyJzF-0000a3-Eo
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Aug 2012 11:52:33 +0200
+Received: by bkcik5 with SMTP id ik5so825193bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Aug 2012 09:49:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 06 Aug 2012 02:40:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=FhNVpaETzqTum4Fb85rd4joG8FX1npVr3p+BSbBu4PU=;
+	b=vQa0XTh8zurNQdEiRbqdy2Xvz01h+sthqsOumnq4lj2rmR6iZsyz4LmscWcJ4Mf57d
+	hi25TNdOYTq/oY0GRSOC9W1QWv00Dh+zB+hxozlKxnnBLJkgpMwo+MpF/TWSgjMhMUbc
+	Hoe9v9zAA4LasPkXfpj9sNu+2rQsQ4octstkSbfwt0xET+Gm2LNoTh0pwgjCeo9zmwC0
+	YNEviWne0srvCZ0w1e2nwP/HoB+LCh4JJY0x44eqRZLaLjWDojo+PKe0WBoYFRX/7RM4
+	4rGAKmKBDbGI14aKCNldJbrM7FoPOMa3jJ6EDSUhnRgQJt+i0ZZ+BSnPwzbsaoah9vFo
+	4oDg==
+Received: by 10.205.134.139 with SMTP id ic11mr3940273bkc.40.1344246049011;
+	Mon, 06 Aug 2012 02:40:49 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id t23sm7051563bks.4.2012.08.06.02.40.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 06 Aug 2012 02:40:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 06 Aug 2012 09:49:46 +0200
-Message-ID: <jvnsto$81o$1@dough.gmane.org>
-References: <1343934541-12253-1-git-send-email-fcooper@ti.com>
-	<8F29D6B095ED194EA1980491A5E029710C2801F0@DFLE30.ent.ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2801F0@DFLE30.ent.ti.com>
-X-Enigmail-Version: 1.4.3
-Subject: Re: [meta-oe][PATCH] ltrace: Fix make error
+Date: Mon,  6 Aug 2012 11:40:42 +0200
+Message-Id: <1344246042-26714-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Cc: , Otavio Salvador <otavio@ossystems.com.br>,
+	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH] chromium-20: add unistd.patch which was used in 19*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2012 08:01:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Aug 2012 09:52:33 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* it fails to build later, but this is needed for sure
 
-Op 02-08-12 21:06, Cooper Jr., Franklin schreef:
-> Please pull this patch into the denzil branch also.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-browser/chromium/chromium_20.0.1086.0.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-That's not how it works and you know that.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQH3caMkyGM64RGpERAl0AAKCd+e2WfQHvcytpHz0lkD0CnXvAsQCfQ45z
-28MExzNf2K/dXhlbvO99Ymg=
-=Cgdo
------END PGP SIGNATURE-----
+diff --git a/recipes-browser/chromium/chromium_20.0.1086.0.bb b/recipes-browser/chromium/chromium_20.0.1086.0.bb
+index 527f317..50fad5c 100644
+--- a/recipes-browser/chromium/chromium_20.0.1086.0.bb
++++ b/recipes-browser/chromium/chromium_20.0.1086.0.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0750f191c9bbf46869b70508e7eb455b"
+ DEPENDS = "xextproto cairo nss gtk+-native zlib-native libav libxi libgnome-keyring libxss cups"
+ 
+ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.bz2 \
+-	file://include.gypi \
++        file://include.gypi \
++        file://unistd.patch \
+ "
+ 
+ # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
+-- 
+1.7.8.6
 
 
 
