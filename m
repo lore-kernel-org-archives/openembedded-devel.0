@@ -1,34 +1,16 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=zeus)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1SyhZg-0001CO-W2
+	(envelope-from <gthomas@zeus>) id 1Syhkk-0001OC-He
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2012 13:03:45 +0200
-Received: by yenm1 with SMTP id m1so163244yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2012 03:51:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=fuLUv7OGhM0u/StuqlStYwNwn8V60r58t68gJ1oRONA=;
-	b=1JftM+/Ko99Fo5DAeztW8ZZIyItIH+np4P90HjtmeD3UkVpRNO3+w2ltBc19Fqt5sY
-	oHf3nOhKeQ+NiTXr164RfHIOhs6ZX2gY1HwQcFMifMcM9KZTnyBe8p/c0YfGqacCCOJe
-	6fWC8l5ZCHnXLhPKqzCVqhAEcxPusyHf2keAGEEPORNyiR5MkhFskzNnWlXZccs8EyzQ
-	kM2BfMyCJ5h6h+LYBhq8r6QkWG3UBxdU/ZBk6/ocnaH4UMOj6ygXkNYri9WGwu8+iwfX
-	OgMnOxvRe4xlvvqxNmRvPEE6cdNysSy62uye/FC3u7jy7knNHARhCjMzPsZpuvWsKInt
-	yGeg==
-MIME-Version: 1.0
-Received: by 10.43.124.201 with SMTP id gp9mr11075224icc.47.1344336718464;
-	Tue, 07 Aug 2012 03:51:58 -0700 (PDT)
-Received: by 10.64.142.201 with HTTP; Tue, 7 Aug 2012 03:51:58 -0700 (PDT)
-In-Reply-To: <jvqqs2$tn3$1@dough.gmane.org>
-References: <jvqqs2$tn3$1@dough.gmane.org>
-Date: Tue, 7 Aug 2012 12:51:58 +0200
-Message-ID: <CALbNGRRmpfhF15Uqkoz80Gdr-pKANeubnnnXx7dRE8cwgEcx1w@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Tue, 07 Aug 2012 13:15:10 +0200
+Received: by zeus (Postfix, from userid 996)
+	id 54575520F80; Tue,  7 Aug 2012 05:03:30 -0600 (MDT)
+From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: martin.jansa@gmail.com
-Subject: Re: meta-openembedded patch queue
+Date: Tue,  7 Aug 2012 05:03:29 -0600
+Message-Id: <1344337409-22390-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH v2] libxml++: New recipe - C++ bindings for libxml
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +24,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2012 11:03:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Aug 2012 11:15:10 -0000
 
-On Tue, Aug 7, 2012 at 12:32 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> I've applied a bunch of patches and hopefully commented on all the ones I
-> didn't apply. I also cleared the meta-oe patchwork so it's nice and empty
-> now: http://patchwork.openembedded.org/project/oe/list/?q=meta-oe
->
-> If your patch hasn't been applied yet into meta-openembedded master and is
-> lacking comments, please resubmit it as [meta-oe][PATCH v(N+1)] (substitute
-> N please).
->
-> There are a few big deadlines coming up at work, so everything will have a
-> few days of delay but if you haven't seen any feedback after a week and the
-> patch is still sitting in patchwork, please send a reminder. Replying to the
-> patch with 'ping' is usually enough and most people know where to find me on
-> IRC.
->
-> Koen
-Two comments/questions:
-1. Koen: what about the fuse 2.9.x patch [1]?
-2. Martin: right now I am testing your latest systemctl mask patches.
-After that I want to add a patch for systemctl-native to take care of
-'Alias' tag and put [2] ontop. If you agree I will create a pull
-request including your patches - so no need for you to resend. Agreed?
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+---
+ meta-oe/recipes-core/libxml/libxml++_2.35.3.bb |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
 
-Andreas
+diff --git a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb b/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+new file mode 100644
+index 0000000..9a33baa
+--- /dev/null
++++ b/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "C++ wrapper for libxml library"
++DESCRIPTION = "C++ wrapper for libxml library"
++HOMEPAGE = "http://libxmlplusplus.sourceforge.net"
++BUGTRACKER = "http://bugzilla.gnome.org/buglist.cgi?product=libxml%2B%2B"
++SECTION = "libs"
++LICENSE = "GPLv2"
++
++SHRT_VER = "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',True).split('.')[1]}"
++SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
++
++SRC_URI[md5sum] = "196a2dcdc84ab987fe3852b3f29cafd7"
++SRC_URI[sha256sum] = "715a4214bbff90365cc8406a28e427febd90461006d608fbdcdcea7fc9891eaf"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34 "
++
++DEPENDS = "libxml2 glibmm"
++
++inherit autotools pkgconfig
++
+-- 
+1.7.9.5
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-July/040782.html
-[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-August/040836.html
 
 
