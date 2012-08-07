@@ -1,38 +1,35 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Syf6f-0000Rc-T6
+	(envelope-from <koen@dominion.thruhere.net>) id 1Syf8Z-0000Yd-6I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2012 10:25:37 +0200
-Received: by wibhm11 with SMTP id hm11so2260769wib.6
+	Tue, 07 Aug 2012 10:27:35 +0200
+Received: by eaad12 with SMTP id d12so1124534eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2012 01:13:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9QR5qJ4DeFIeMKwtsqW3af/GxDvzIJSInfb8FQyPaYM=;
-	b=ZEmN0Cl1tFWvHacA1Yg7VKLrLDwvUMbN70Pi2Vit8hTJLaGMWH75bN3PksXBCP0Tiq
-	oQ+FO1PexDqv+DX9o7pIpy1REt9M+PzlGR0y/oBKT334D8y+YrDJuR7HgLS3XUnNomaP
-	Egh8e0lrMFWj+oxcJw87I8rs4/r0cDOWLmPoCHq+6xAzn10qBKTFXJS2cQNMVfTn/qB0
-	UtUeD+661hV/GrrkyePL7smuUcZNscxBHQDKuGTG+D/v6L+XYLqQGfTwYcfGgJKY7Wxh
-	VYnM2vYsBggnaAwIFESJUsCbmx26ePCpVdsqtOWzEJTfjOfDT//EG1oliYTnhmPzE8sr
-	nl7g==
-Received: by 10.180.104.197 with SMTP id gg5mr25367051wib.9.1344327232194;
-	Tue, 07 Aug 2012 01:13:52 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w7sm20100313wiz.0.2012.08.07.01.13.50
+	Tue, 07 Aug 2012 01:15:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=0mX+/wHflPdoPFyhCUY8mKtZNHBn6Dt/H8btGJCj1LM=;
+	b=ZOGQCoVQJqW+SVritg5AkIVugM8EOrmhPbh3gohehQplbre7b9Lt43SQ7m4+Zn3dXK
+	d2a5xRHRiaro+/JTYlXGDmLOrLN5/QyO2Ph2/pUZYyZThSTq049fVnxwz5h39gUvw0PO
+	atJvabjNVcGUKFQf4sD3L0u5CntbUdfsZ257o7cj8Q+4SUek3HezgHkObgdcSHA6YBly
+	KYQdEYTHZaZPZlZ9pxciU/7BW9njEHtn0T2VD6nDdeY8lFuJLLb41XbmtQ6DOxnoSr36
+	dzGWu6Ioa2okPtYJj76H1IoBZKtrmU+rs0U4zhXidcnvG0/rUuW9bXDRYNsV5VQHiXzI
+	OxyA==
+Received: by 10.14.204.72 with SMTP id g48mr16650426eeo.45.1344327349694;
+	Tue, 07 Aug 2012 01:15:49 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id a41sm39826524eep.7.2012.08.07.01.15.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Aug 2012 01:13:50 -0700 (PDT)
-Date: Tue, 7 Aug 2012 10:13:47 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 07 Aug 2012 01:15:48 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120807081347.GP3267@jama.jama.net>
-References: <1344325650-21076-1-git-send-email-koen@dominion.thruhere.net>
-	<1344325650-21076-2-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1344325650-21076-2-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Date: Tue,  7 Aug 2012 10:15:41 +0200
+Message-Id: <1344327342-24437-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQlnMaHPHdIZEya3S1r4SAsBHssyjl3W+W/pnG4NF2tLpPEQCoWaNCIO1HMV4pDVb3ePH2WX
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH 2/2] nodejs: update to 0.6.20
+Subject: [meta-oe][PATCH v2 1/2] orc: update to 0.4.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,203 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2012 08:25:38 -0000
-X-Groupsio-MsgNum: 40094
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oDto3OTLsk6uOlQH"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Aug 2012 08:27:35 -0000
 
---oDto3OTLsk6uOlQH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-devtools/orc/orc_0.4.14.bb |    6 ------
+ meta-oe/recipes-devtools/orc/orc_0.4.16.bb |    6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.14.bb
+ create mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.16.bb
 
-On Tue, Aug 07, 2012 at 09:47:30AM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb |   65 ----------------=
-------
->  meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb |   64 ++++++++++++++++=
-+++++
->  2 files changed, 64 insertions(+), 65 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb
->  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.14.bb b/meta-oe/recipes-devtools/orc/orc_0.4.14.bb
+deleted file mode 100644
+index 639fd4f..0000000
+--- a/meta-oe/recipes-devtools/orc/orc_0.4.14.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require orc.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[orc.md5sum] = "6b3ff209e9763ebe40e152538884bd71"
+-SRC_URI[orc.sha256sum] = "6b0c536984871954364976516ea0328e2dcd856111726a23e609504ba2b12313"
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb b/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+new file mode 100644
+index 0000000..bb193ab
+--- /dev/null
++++ b/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+@@ -0,0 +1,6 @@
++require orc.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI[orc.md5sum] = "e482932e544c847761449b106ecbc483"
++SRC_URI[orc.sha256sum] = "700e4edba20a0ed42164b645da26ce515b883d4c4633b222302f1e541f2a58ab"
+-- 
+1.7.10
 
-Can you resend with -M (if it wasn't already) ?
 
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb b/meta-oe/r=
-ecipes-devtools/nodejs/nodejs_0.6.18.bb
-> deleted file mode 100644
-> index 7136ffc..0000000
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb
-> +++ /dev/null
-> @@ -1,65 +0,0 @@
-> -DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
-> -HOMEPAGE =3D "http://nodejs.org"
-> -LICENSE =3D "MIT & BSD"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D914812f2875eef849b5c509cc25dc=
-b4f"
-> -
-> -DEPENDS =3D "openssl"
-> -
-> -SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-> -           file://fix-hardfloat-detection.patch"
-> -
-> -SRC_URI[md5sum] =3D "4a3d3123ccc7b9b21c1990fe074e3d14"
-> -SRC_URI[sha256sum] =3D "6cf4311ecbc1700e88f4382a31b3a7017c1572cd641fd06e=
-653fc1692c2cffff"
-> -
-> -S =3D "${WORKDIR}/node-v${PV}"
-> -
-> -# v8 errors out if you have set CCACHE
-> -CCACHE =3D ""
-> -
-> -do_configure_virtclass-native () {
-> -  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
-> -  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
-> -
-> -  ./configure --prefix=3D${prefix} --without-snapshot
-> -}
-> -
-> -# Node is way too cool to use proper autotools, so we install two wrappe=
-rs to forcefully inject proper arch cflags to workaround waf+scons
-> -do_configure () {
-> -  echo '#!/bin/sh' > ${WORKDIR}/gcc
-> -  echo '${CC} $@' >> ${WORKDIR}/gcc
-> -
-> -  echo '#!/bin/sh' > ${WORKDIR}/g++
-> -  echo '${CXX} $@'>> ${WORKDIR}/g++
-> -
-> -  chmod +x ${WORKDIR}/gcc ${WORKDIR}/g++
-> -
-> -  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
-> -  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
-> -
-> -  export PATH=3D${WORKDIR}:${PATH}
-> -  export CC=3Dgcc
-> -  export CXX=3Dg++
-> -
-> -  ./configure --prefix=3D${prefix} --without-snapshot
-> -}
-> -
-> -do_compile_virtclass-native () {
-> -  make BUILDTYPE=3DRelease
-> -}
-> -
-> -do_compile () {
-> -  export PATH=3D${WORKDIR}:${PATH}
-> -  export CC=3Dgcc
-> -  export CXX=3Dg++
-> -  make BUILDTYPE=3DRelease
-> -}
-> -
-> -do_install () {
-> -  DESTDIR=3D${D} oe_runmake install
-> -}
-> -
-> -RDEPENDS_${PN} =3D "curl python-shell python-datetime python-subprocess =
-python-crypt python-textutils python-netclient "
-> -RDEPENDS_${PN}_virtclass-native =3D "curl-native python-native"
-> -
-> -FILES_${PN} +=3D "${libdir}/node/wafadmin ${libdir}/node_modules"
-> -BBCLASSEXTEND =3D "native"
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb b/meta-oe/r=
-ecipes-devtools/nodejs/nodejs_0.6.20.bb
-> new file mode 100644
-> index 0000000..77ed388
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb
-> @@ -0,0 +1,64 @@
-> +DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
-> +HOMEPAGE =3D "http://nodejs.org"
-> +LICENSE =3D "MIT & BSD"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D914812f2875eef849b5c509cc25dc=
-b4f"
-> +
-> +DEPENDS =3D "openssl"
-> +
-> +SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-> +           file://fix-hardfloat-detection.patch"
-> +SRC_URI[md5sum] =3D "fcf8e0f2981f9dd66606a2162a2df55d"
-> +SRC_URI[sha256sum] =3D "b7bf4cf143ddf46ba5e975761b98a38dd3d72b176fd5d4bb=
-2f9c9e7bbe6c4b15"
-> +
-> +S =3D "${WORKDIR}/node-v${PV}"
-> +
-> +# v8 errors out if you have set CCACHE
-> +CCACHE =3D ""
-> +
-> +do_configure_virtclass-native () {
-> +  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
-> +  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
-> +
-> +  ./configure --prefix=3D${prefix} --without-snapshot
-> +}
-> +
-> +# Node is way too cool to use proper autotools, so we install two wrappe=
-rs to forcefully inject proper arch cflags to workaround waf+scons
-> +do_configure () {
-> +  echo '#!/bin/sh' > ${WORKDIR}/gcc
-> +  echo '${CC} $@' >> ${WORKDIR}/gcc
-> +
-> +  echo '#!/bin/sh' > ${WORKDIR}/g++
-> +  echo '${CXX} $@'>> ${WORKDIR}/g++
-> +
-> +  chmod +x ${WORKDIR}/gcc ${WORKDIR}/g++
-> +
-> +  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
-> +  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
-> +
-> +  export PATH=3D${WORKDIR}:${PATH}
-> +  export CC=3Dgcc
-> +  export CXX=3Dg++
-> +
-> +  ./configure --prefix=3D${prefix} --without-snapshot
-> +}
-> +
-> +do_compile_virtclass-native () {
-> +  make BUILDTYPE=3DRelease
-> +}
-> +
-> +do_compile () {
-> +  export PATH=3D${WORKDIR}:${PATH}
-> +  export CC=3Dgcc
-> +  export CXX=3Dg++
-> +  make BUILDTYPE=3DRelease
-> +}
-> +
-> +do_install () {
-> +  DESTDIR=3D${D} oe_runmake install
-> +}
-> +
-> +RDEPENDS_${PN} =3D "curl python-shell python-datetime python-subprocess =
-python-crypt python-textutils python-netclient "
-> +RDEPENDS_${PN}_virtclass-native =3D "curl-native python-native"
-> +
-> +FILES_${PN} +=3D "${libdir}/node/wafadmin ${libdir}/node_modules"
-> +BBCLASSEXTEND =3D "native"
-> --=20
-> 1.7.10
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oDto3OTLsk6uOlQH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAgzjsACgkQN1Ujt2V2gBzLmwCcDHQMrswu7pFIPNm8gV5i+hRx
-xlcAoK7reRjtez71CyiaZ2s85bL0zHq7
-=YMU2
------END PGP SIGNATURE-----
-
---oDto3OTLsk6uOlQH--
