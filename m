@@ -1,36 +1,38 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1SyeiU-000077-5J
+	(envelope-from <martin.jansa@gmail.com>) id 1Syf6f-0000Rc-T6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2012 10:00:38 +0200
-Received: by eaad12 with SMTP id d12so1115575eaa.6
+	Tue, 07 Aug 2012 10:25:37 +0200
+Received: by wibhm11 with SMTP id hm11so2260769wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2012 00:48:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=7kYAsTb/TQe/BxKB4q8vW2ahIbg+ed6hOzYTBBzbD+A=;
-	b=QgwNmAmICcgMrHT0LErl4URzHM0DyEl2BfscEFFX5Faca4Vv6YwE0uG/Jmxn6DGCG3
-	+auqbU7/BmRwY3Fu6fmFa65JklTO/ionuGa9Jh2Jbd9a6SRzKv0EOB+CBYCb3y3wGaIT
-	vYWg4HvCVttkRqkFRJOuqvaaSUJaLqCQ6S5S81EFxHaXqKUScKzzCRQjnxUQnAigrAQK
-	q2M6FzUQXzv3U8o2iuiWahMGScRePGFdf7MqvekcJ4Xa6CBiGNkW33q0iMYb3WCieE5Q
-	QoCsa4e2kEHLNRP1toJXVxzQmqI+GUVxp+uiPH50pFv67ai6ECYnt8Xe5zQG9yvPhX1e
-	brKg==
-Received: by 10.14.211.196 with SMTP id w44mr16372132eeo.19.1344325732637;
-	Tue, 07 Aug 2012 00:48:52 -0700 (PDT)
-Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id a41sm39637780eep.7.2012.08.07.00.48.50
+	Tue, 07 Aug 2012 01:13:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=9QR5qJ4DeFIeMKwtsqW3af/GxDvzIJSInfb8FQyPaYM=;
+	b=ZEmN0Cl1tFWvHacA1Yg7VKLrLDwvUMbN70Pi2Vit8hTJLaGMWH75bN3PksXBCP0Tiq
+	oQ+FO1PexDqv+DX9o7pIpy1REt9M+PzlGR0y/oBKT334D8y+YrDJuR7HgLS3XUnNomaP
+	Egh8e0lrMFWj+oxcJw87I8rs4/r0cDOWLmPoCHq+6xAzn10qBKTFXJS2cQNMVfTn/qB0
+	UtUeD+661hV/GrrkyePL7smuUcZNscxBHQDKuGTG+D/v6L+XYLqQGfTwYcfGgJKY7Wxh
+	VYnM2vYsBggnaAwIFESJUsCbmx26ePCpVdsqtOWzEJTfjOfDT//EG1oliYTnhmPzE8sr
+	nl7g==
+Received: by 10.180.104.197 with SMTP id gg5mr25367051wib.9.1344327232194;
+	Tue, 07 Aug 2012 01:13:52 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id w7sm20100313wiz.0.2012.08.07.01.13.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Aug 2012 00:48:51 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Tue, 07 Aug 2012 01:13:50 -0700 (PDT)
+Date: Tue, 7 Aug 2012 10:13:47 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Aug 2012 09:48:44 +0200
-Message-Id: <1344325724-21149-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQmPU2L2unaDKKlvg9sVUFdDqlGnYFTe/dH4nORX6FfsUvAOG2gtBz7s0FxiGqnAd1VODfVZ
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [for-denzil][meta-oe][PATCH] systemd: cleanup /var/run on boot and create /var/run/utmp
+Message-ID: <20120807081347.GP3267@jama.jama.net>
+References: <1344325650-21076-1-git-send-email-koen@dominion.thruhere.net>
+	<1344325650-21076-2-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1344325650-21076-2-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH 2/2] nodejs: update to 0.6.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,68 +46,203 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2012 08:00:38 -0000
+X-List-Received-Date: Tue, 07 Aug 2012 08:25:38 -0000
+X-Groupsio-MsgNum: 40094
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="oDto3OTLsk6uOlQH"
+Content-Disposition: inline
 
-From: Martin Jansa <martin.jansa@gmail.com>
+--oDto3OTLsk6uOlQH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* Angstrom uses /var/run cleanup because:
-  Some apps (e.g. avahi-daemon) to clean up their old-style pid files and fail
-  to start every other boot. Se we let systemd clean it on boot.
-  Which seems general enough, so lets move var-run.conf from base-files.bbappend
-  to systemd recipe.
+On Tue, Aug 07, 2012 at 09:47:30AM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb |   65 ----------------=
+------
+>  meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb |   64 ++++++++++++++++=
++++++
+>  2 files changed, 64 insertions(+), 65 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb
+>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb
 
-* /var/run/utmp was created by volatiles before, but without sysvinit installed
-  systemd-update-utmp-runlevel.service fails to start without this file
+Can you resend with -M (if it wasn't already) ?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/systemd/systemd/var-run.conf |    4 ++++
- meta-oe/recipes-core/systemd/systemd_git.bb       |    5 ++++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-core/systemd/systemd/var-run.conf
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb b/meta-oe/r=
+ecipes-devtools/nodejs/nodejs_0.6.18.bb
+> deleted file mode 100644
+> index 7136ffc..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.18.bb
+> +++ /dev/null
+> @@ -1,65 +0,0 @@
+> -DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+> -HOMEPAGE =3D "http://nodejs.org"
+> -LICENSE =3D "MIT & BSD"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D914812f2875eef849b5c509cc25dc=
+b4f"
+> -
+> -DEPENDS =3D "openssl"
+> -
+> -SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+> -           file://fix-hardfloat-detection.patch"
+> -
+> -SRC_URI[md5sum] =3D "4a3d3123ccc7b9b21c1990fe074e3d14"
+> -SRC_URI[sha256sum] =3D "6cf4311ecbc1700e88f4382a31b3a7017c1572cd641fd06e=
+653fc1692c2cffff"
+> -
+> -S =3D "${WORKDIR}/node-v${PV}"
+> -
+> -# v8 errors out if you have set CCACHE
+> -CCACHE =3D ""
+> -
+> -do_configure_virtclass-native () {
+> -  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
+> -  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
+> -
+> -  ./configure --prefix=3D${prefix} --without-snapshot
+> -}
+> -
+> -# Node is way too cool to use proper autotools, so we install two wrappe=
+rs to forcefully inject proper arch cflags to workaround waf+scons
+> -do_configure () {
+> -  echo '#!/bin/sh' > ${WORKDIR}/gcc
+> -  echo '${CC} $@' >> ${WORKDIR}/gcc
+> -
+> -  echo '#!/bin/sh' > ${WORKDIR}/g++
+> -  echo '${CXX} $@'>> ${WORKDIR}/g++
+> -
+> -  chmod +x ${WORKDIR}/gcc ${WORKDIR}/g++
+> -
+> -  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
+> -  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
+> -
+> -  export PATH=3D${WORKDIR}:${PATH}
+> -  export CC=3Dgcc
+> -  export CXX=3Dg++
+> -
+> -  ./configure --prefix=3D${prefix} --without-snapshot
+> -}
+> -
+> -do_compile_virtclass-native () {
+> -  make BUILDTYPE=3DRelease
+> -}
+> -
+> -do_compile () {
+> -  export PATH=3D${WORKDIR}:${PATH}
+> -  export CC=3Dgcc
+> -  export CXX=3Dg++
+> -  make BUILDTYPE=3DRelease
+> -}
+> -
+> -do_install () {
+> -  DESTDIR=3D${D} oe_runmake install
+> -}
+> -
+> -RDEPENDS_${PN} =3D "curl python-shell python-datetime python-subprocess =
+python-crypt python-textutils python-netclient "
+> -RDEPENDS_${PN}_virtclass-native =3D "curl-native python-native"
+> -
+> -FILES_${PN} +=3D "${libdir}/node/wafadmin ${libdir}/node_modules"
+> -BBCLASSEXTEND =3D "native"
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb b/meta-oe/r=
+ecipes-devtools/nodejs/nodejs_0.6.20.bb
+> new file mode 100644
+> index 0000000..77ed388
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.20.bb
+> @@ -0,0 +1,64 @@
+> +DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+> +HOMEPAGE =3D "http://nodejs.org"
+> +LICENSE =3D "MIT & BSD"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D914812f2875eef849b5c509cc25dc=
+b4f"
+> +
+> +DEPENDS =3D "openssl"
+> +
+> +SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+> +           file://fix-hardfloat-detection.patch"
+> +SRC_URI[md5sum] =3D "fcf8e0f2981f9dd66606a2162a2df55d"
+> +SRC_URI[sha256sum] =3D "b7bf4cf143ddf46ba5e975761b98a38dd3d72b176fd5d4bb=
+2f9c9e7bbe6c4b15"
+> +
+> +S =3D "${WORKDIR}/node-v${PV}"
+> +
+> +# v8 errors out if you have set CCACHE
+> +CCACHE =3D ""
+> +
+> +do_configure_virtclass-native () {
+> +  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
+> +  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
+> +
+> +  ./configure --prefix=3D${prefix} --without-snapshot
+> +}
+> +
+> +# Node is way too cool to use proper autotools, so we install two wrappe=
+rs to forcefully inject proper arch cflags to workaround waf+scons
+> +do_configure () {
+> +  echo '#!/bin/sh' > ${WORKDIR}/gcc
+> +  echo '${CC} $@' >> ${WORKDIR}/gcc
+> +
+> +  echo '#!/bin/sh' > ${WORKDIR}/g++
+> +  echo '${CXX} $@'>> ${WORKDIR}/g++
+> +
+> +  chmod +x ${WORKDIR}/gcc ${WORKDIR}/g++
+> +
+> +  sed -i -e s:\'/usr/lib:\'${STAGING_LIBDIR}:g wscript
+> +  sed -i -e s:\'/usr/local/lib:\'${STAGING_LIBDIR}:g wscript
+> +
+> +  export PATH=3D${WORKDIR}:${PATH}
+> +  export CC=3Dgcc
+> +  export CXX=3Dg++
+> +
+> +  ./configure --prefix=3D${prefix} --without-snapshot
+> +}
+> +
+> +do_compile_virtclass-native () {
+> +  make BUILDTYPE=3DRelease
+> +}
+> +
+> +do_compile () {
+> +  export PATH=3D${WORKDIR}:${PATH}
+> +  export CC=3Dgcc
+> +  export CXX=3Dg++
+> +  make BUILDTYPE=3DRelease
+> +}
+> +
+> +do_install () {
+> +  DESTDIR=3D${D} oe_runmake install
+> +}
+> +
+> +RDEPENDS_${PN} =3D "curl python-shell python-datetime python-subprocess =
+python-crypt python-textutils python-netclient "
+> +RDEPENDS_${PN}_virtclass-native =3D "curl-native python-native"
+> +
+> +FILES_${PN} +=3D "${libdir}/node/wafadmin ${libdir}/node_modules"
+> +BBCLASSEXTEND =3D "native"
+> --=20
+> 1.7.10
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-oe/recipes-core/systemd/systemd/var-run.conf b/meta-oe/recipes-core/systemd/systemd/var-run.conf
-new file mode 100644
-index 0000000..c2c18e2
---- /dev/null
-+++ b/meta-oe/recipes-core/systemd/systemd/var-run.conf
-@@ -0,0 +1,4 @@
-+# empty /var/run
-+R	/var/run/*	-	-	-	-	-
-+# systemd-update-utmp-runlevel.service fails to start without this
-+f /var/run/utmp 0644 root root - -
-diff --git a/meta-oe/recipes-core/systemd/systemd_git.bb b/meta-oe/recipes-core/systemd/systemd_git.bb
-index f4ca72a..b9c8a19 100644
---- a/meta-oe/recipes-core/systemd/systemd_git.bb
-+++ b/meta-oe/recipes-core/systemd/systemd_git.bb
-@@ -14,7 +14,7 @@ inherit gitpkgv
- PKGV = "v${GITPKGVTAG}"
- 
- PV = "git"
--PR = "r27"
-+PR = "r28"
- 
- inherit useradd pkgconfig autotools vala perlnative
- 
-@@ -22,6 +22,7 @@ SRCREV = "3eff4208ffecedd778fec260f0d4b18e94dab443"
- 
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-            ${UCLIBCPATCHES} \
-+           file://var-run.conf \
-           "
- UCLIBCPATCHES = ""
- UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
-@@ -68,6 +69,8 @@ do_install() {
- 	# create machine-id
- 	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
- 	touch ${D}${sysconfdir}/machine-id
-+
-+	install -m 0644 ${WORKDIR}/var-run.conf ${D}${sysconfdir}/tmpfiles.d/
- }
- 
- python populate_packages_prepend (){
--- 
-1.7.10
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--oDto3OTLsk6uOlQH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlAgzjsACgkQN1Ujt2V2gBzLmwCcDHQMrswu7pFIPNm8gV5i+hRx
+xlcAoK7reRjtez71CyiaZ2s85bL0zHq7
+=YMU2
+-----END PGP SIGNATURE-----
+
+--oDto3OTLsk6uOlQH--
