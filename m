@@ -1,37 +1,35 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1SyZsp-0007jG-Ty
+	(envelope-from <koen@dominion.thruhere.net>) id 1SyehH-00080k-UK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Aug 2012 04:50:59 +0200
-Received: by eekb57 with SMTP id b57so1072079eek.6
+	Tue, 07 Aug 2012 09:59:23 +0200
+Received: by eekb57 with SMTP id b57so1125055eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Aug 2012 19:39:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=lM9gjgTJlVFYZ87ynxqXXKfF2dvc/QDzB00v+MJvea4=;
-	b=ePBF1V8N3i6eRB49bWNOMc07hPMbGVVopbAdOaRgQf28FF62X9C3rAXOenQIeufysi
-	omfyGCjTGARvOswcOe/AHOX0irPdIxFIp0cxB0ZSdjMaTPTgbMc3r6KblISd0yIZvcGh
-	XznkVuMfH/0nNiSyOuKn7yMPg/9oyc9yH2xnS1Eo93GpVrLIpj/xbgtAiYaGlE6T2/9i
-	VotwblJNfX6H+dNh6BoLsEFHtvB85Xybz7nowMkMegKxeWF7qdLZAbiw9cVpw8MAF7NU
-	0+MU3BNVeI0RZJFf6bgkvd+ahQaVkOiOw9OQLymBALr+/qhfQuReJbo1URZBJ7H4slHa
-	AvgQ==
-Received: by 10.14.213.137 with SMTP id a9mr15669490eep.38.1344307154684; Mon,
-	06 Aug 2012 19:39:14 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.97.141 with HTTP; Mon, 6 Aug 2012 19:38:44 -0700 (PDT)
-In-Reply-To: <jvnsim$5e9$1@dough.gmane.org>
-References: <1343760977-3290-1-git-send-email-raj.khem@gmail.com>
-	<1343760977-3290-6-git-send-email-raj.khem@gmail.com>
-	<jvk13l$nh$2@dough.gmane.org>
-	<CAMKF1sqBGOR=f-e+D8zrguifFbsRzkVLtLsOCf4rxaGKiwPK2Q@mail.gmail.com>
-	<jvlm56$r75$1@dough.gmane.org>
-	<CABcZANnEmASgH3wrk7TZOpe3BaK+o6oRPyvAo6SadtybgqDWJg@mail.gmail.com>
-	<jvnsim$5e9$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Aug 2012 19:38:44 -0700
-Message-ID: <CAMKF1spB+9Y4HpzYrYag-UCAcBw2TTEKz34vvstJd_7f1bV_ng@mail.gmail.com>
+	Tue, 07 Aug 2012 00:47:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=0mX+/wHflPdoPFyhCUY8mKtZNHBn6Dt/H8btGJCj1LM=;
+	b=CuNc6f9yDQ3Q6YzRmWgqryNDYG1+CRm+xVIPcYNRbxtdHxpkcU4W3LZrTj2XeqGtL0
+	Fdtb7qUDHVlFOihaQjDQMD7dZWWRMEKKeaCHivhOZRfFVxGtlNHIDO3u6iCqJI+zcSKL
+	DKHHcqWGDAdWSaQuOkG5Cy/H9x/1AzEYkXUUGUCS2aJu9nupUcAIIE9hhRE9o7TMFAv8
+	ZxqPbUCavj1jbj/M3nSRsMdRG5T9ZFOXgssUTBzTmRp9/ulwRDOzVBro2WHlRZ/yiK9/
+	gsrNN9NH1Lqf8cfGHrtRVnV9zTvvRxupgqycqmGizh83x3WGbV1XDvl6VwHSqI8rcwUM
+	5iuw==
+Received: by 10.14.215.197 with SMTP id e45mr16433227eep.36.1344325658551;
+	Tue, 07 Aug 2012 00:47:38 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id g46sm53450022eep.15.2012.08.07.00.47.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 07 Aug 2012 00:47:36 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2 6/7] blacklist.bbclass: Move to meta-angstrom
+Date: Tue,  7 Aug 2012 09:47:29 +0200
+Message-Id: <1344325650-21076-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkbFx9s/XpAprHVTUgvp97CjW+qD37RpPSbLtzl4GVIJr2MA5oG86IyaaLebMU1riDncaAD
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 1/2] orc: update to 0.4.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,15 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2012 02:51:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Aug 2012 07:59:24 -0000
 
-Koen,
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-devtools/orc/orc_0.4.14.bb |    6 ------
+ meta-oe/recipes-devtools/orc/orc_0.4.16.bb |    6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.14.bb
+ create mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.16.bb
 
-Besides this patch are rest of patches acceptable?
-while I work on making blacklist class acceptable in all use case
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.14.bb b/meta-oe/recipes-devtools/orc/orc_0.4.14.bb
+deleted file mode 100644
+index 639fd4f..0000000
+--- a/meta-oe/recipes-devtools/orc/orc_0.4.14.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require orc.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[orc.md5sum] = "6b3ff209e9763ebe40e152538884bd71"
+-SRC_URI[orc.sha256sum] = "6b0c536984871954364976516ea0328e2dcd856111726a23e609504ba2b12313"
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb b/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+new file mode 100644
+index 0000000..bb193ab
+--- /dev/null
++++ b/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+@@ -0,0 +1,6 @@
++require orc.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI[orc.md5sum] = "e482932e544c847761449b106ecbc483"
++SRC_URI[orc.sha256sum] = "700e4edba20a0ed42164b645da26ce515b883d4c4633b222302f1e541f2a58ab"
+-- 
+1.7.10
 
-On Mon, Aug 6, 2012 at 12:43 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> updating of all layers by the submitter. On the other hand: if
 
 
