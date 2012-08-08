@@ -1,33 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Syy0R-0007DS-AN
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2012 06:36:27 +0200
-Received: by pbcwy7 with SMTP id wy7so721788pbc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Sz0VK-0007zi-7k for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Aug 2012 09:16:30 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Sz0Ju-0002p3-89 for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Aug 2012 09:04:42 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Aug 2012 09:04:42 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2012 21:24:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=w+nyznAvUWFGMwbEJfArnbAqXBnfqGhmDkIROrCjyo4=;
-	b=Q+NVVkR2C3wApL7ky7kmVqTKFKn2JYjbts8PDxRl54PcYo3ruiM6TZ9MM3bqwRHprJ
-	yuK/L6/3jRqBc2/KZag3FW+P0tWMyDjyXrc4S1dsdTf5+hvkMZbvLo1EVVINJYkauu4K
-	7ZjKLHTzqJz73ouVVPwr5bEJ/uSfW0f600KtUepAu0BrtcmBzVsgnAhka9XDPiMxbozy
-	W4zTnuHH7sMrPV8Qufz2YLZw9hXZVDZRlc43tpxxHAB1rGpSlAC/5UBwjW1OYrqOwbzR
-	AaM/bburqxHNeNUec9P/DomsJQn6gJwTHZuq812KpLGBkOKN/rO+/SdlvR7gc2WTvfzs
-	YX1Q==
-Received: by 10.68.196.225 with SMTP id ip1mr32968150pbc.6.1344399879568;
-	Tue, 07 Aug 2012 21:24:39 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id pa6sm9102305pbc.47.2012.08.07.21.24.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Aug 2012 21:24:38 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 08 Aug 2012 09:04:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Aug 2012 21:24:29 -0700
-Message-Id: <1344399869-3759-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-systemd][PATCH V2] meta-systemd: Create a hard link to gitpkgv.bbclass
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 08 Aug 2012 09:04:49 +0200
+Message-ID: <jvt31p$dms$1@dough.gmane.org>
+References: <jvqqs2$tn3$1@dough.gmane.org>
+	<20120807110710.GS3267@jama.jama.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <20120807110710.GS3267@jama.jama.net>
+X-Enigmail-Version: 1.4.3
+Subject: Re: meta-openembedded patch queue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,126 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2012 04:36:27 -0000
+X-List-Received-Date: Wed, 08 Aug 2012 07:16:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-git is not handling soft links
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-systemd/classes/gitpkgv.bbclass |   96 +++++++++++++++++++++++++++++++++-
- 1 file changed, 95 insertions(+), 1 deletion(-)
- mode change 120000 => 100644 meta-systemd/classes/gitpkgv.bbclass
+Op 07-08-12 13:07, Martin Jansa schreef:
+> On Tue, Aug 07, 2012 at 12:32:51PM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE----- Hash: SHA1
+>> 
+>> Hi,
+>> 
+>> I've applied a bunch of patches and hopefully commented on all the ones
+>> I didn't apply. I also cleared the meta-oe patchwork so it's nice and
+>> empty now:
+>> http://patchwork.openembedded.org/project/oe/list/?q=meta-oe
+>> 
+>> If your patch hasn't been applied yet into meta-openembedded master and
+>> is lacking comments, please resubmit it as [meta-oe][PATCH v(N+1)]
+>> (substitute N please).
+>> 
+>> There are a few big deadlines coming up at work, so everything will
+>> have a few days of delay but if you haven't seen any feedback after a
+>> week and the patch is still sitting in patchwork, please send a
+>> reminder. Replying to the patch with 'ping' is usually enough and most
+>> people know where to find me on IRC.
+> 
+> There are few pending patches IMHO worth including, I can resend them in 
+> some consolidated pull request (all pushed to jansa/pull already), but 
+> listing pw ids is maybe easier for you to apply them:
+> 
+> systemctl mask (sorry I forgot to include meta-oe prefix): 33997 33999
+> 
+> patches from khem wit meta-systemd prefix: 33795 33793 33791 33789	33787
 
-diff --git a/meta-systemd/classes/gitpkgv.bbclass b/meta-systemd/classes/gitpkgv.bbclass
-deleted file mode 120000
-index 8205151..0000000
---- a/meta-systemd/classes/gitpkgv.bbclass
-+++ /dev/null
-@@ -1 +0,0 @@
--../../meta-oe/classes/gitpkgv.bbclass
-diff --git a/meta-systemd/classes/gitpkgv.bbclass b/meta-systemd/classes/gitpkgv.bbclass
-new file mode 100644
-index 0000000..238b0d2
---- /dev/null
-+++ b/meta-systemd/classes/gitpkgv.bbclass
-@@ -0,0 +1,95 @@
-+# gitpkgv.bbclass provides a GITPKGV and GITPKGVTAG variables to be
-+# used in PKGV, as described bellow:
-+#
-+# - GITPKGV which is a sortable version with the format NN+GITHASH, to
-+#   be used in PKGV, where
-+#
-+#   NN equals the total number of revs up to SRCREV
-+#   GITHASH is SRCREV's (full) hash
-+#
-+# - GITPKGVTAG which is the output of 'git describe' allowing for
-+#   automatic versioning
-+#
-+# gitpkgv.bbclass assumes the git repository has been cloned, and
-+# contains SRCREV. So ${GITPKGV} and ${GITPKGVTAG} should never be
-+# used in PV, only in PKGV.  It can handle SRCREV = ${AUTOREV}, as
-+# well as SRCREV = "<some fixed git hash>".
-+#
-+# WARNING: if upstream repository is always using consistent and
-+# sortable tag name scheme you can get sortable version including tag
-+# name with ${GITPKGVTAG}, but be aware that ie tag sequence "v1.0,
-+# v1.2, xtest, v2.0" will force you to increment PE to get upgradeable
-+# path to v2.0 revisions
-+#
-+# use example:
-+#
-+# inherit gitpkgv
-+#
-+# PV = "1.0+gitr${SRCPV}"      # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-+# PKGV = "1.0+gitr${GITPKGV}"  # expands also to something like 1.0+gitr31337+4c1c21d7d
-+#
-+# or
-+#
-+# inherit gitpkgv
-+#
-+# PV = "1.0+gitr${SRCPV}" # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-+# PKGV = "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
-+#                           if there is tag v1.0 before this revision or
-+#                           ver1.0-31337+g4c1c21d if there is tag ver1.0
-+
-+GITPKGV = "${@get_git_pkgv(d, False)}"
-+GITPKGVTAG = "${@get_git_pkgv(d, True)}"
-+
-+def gitpkgv_drop_tag_prefix(version):
-+    import re
-+    if re.match("v\d", version):
-+        return version[1:]
-+    else:
-+        return version
-+
-+def get_git_pkgv(d, use_tags):
-+    import os
-+    import bb
-+
-+    src_uri = bb.data.getVar('SRC_URI', d, 1).split()
-+    fetcher = bb.fetch2.Fetch(src_uri, d)
-+    ud = fetcher.ud
-+
-+    #
-+    # If SRCREV_FORMAT is set respect it for tags
-+    #
-+    format = bb.data.getVar('SRCREV_FORMAT', d, True)
-+    if not format:
-+        format = 'default'
-+
-+    found = False
-+    for url in ud.values():
-+        if url.type == 'git':
-+            for name, rev in url.revisions.items():
-+                if not os.path.exists(url.localpath):
-+                    return None
-+
-+                found = True
-+
-+                cwd = os.getcwd()
-+                os.chdir(url.localpath)
-+
-+                commits = bb.fetch2.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True).strip()
-+
-+                if use_tags:
-+                    try:
-+                        output = bb.fetch2.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip()
-+                        ver = gitpkgv_drop_tag_prefix(output)
-+                    except Exception:
-+                        ver = "0.0-%s-g%s" % (commits, rev[:7])
-+                else:
-+                    ver = "%s+%s" % (commits, rev[:7])
-+
-+                os.chdir(cwd)
-+
-+                format = format.replace(name, ver)
-+
-+    if found:
-+        return format
-+
-+    return '0+0'
--- 
-1.7.9.5
+I didn't apply 33787, that needs coordination with other layers to prevent
+breakage. I think doing a copy + delete a few days later is a better
+migration path.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQIg+RMkyGM64RGpERAtaoAKCor8oB+MKfZoTcBlRh4WRhxiWaYACdH7jq
+MQKEHA00lFfiBeOSKT6p83c=
+=ulLp
+-----END PGP SIGNATURE-----
 
 
 
