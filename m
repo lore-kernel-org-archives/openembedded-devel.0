@@ -1,38 +1,33 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Systi-0004q7-SK
+	(envelope-from <raj.khem@gmail.com>) id 1Syxrd-00074R-4S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Aug 2012 01:09:10 +0200
-Received: by wgbdr1 with SMTP id dr1so101291wgb.24
+	Wed, 08 Aug 2012 06:27:21 +0200
+Received: by yenm1 with SMTP id m1so337129yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2012 15:57:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=GmWUGS977zBsoB60SeD/e/59lwD+5UDUybqbuKrjRQQ=;
-	b=P7H/iF5i7pu9lZfquJlx0BU8ArhQkvy+PczjtC8tl1DwxUv1Lbx25DsGtLT98enbN2
-	4Q3eX92FjWJupU9oaMLz/nlcPqclmVqpiFDzTggRW1TeqRI/b/n33vZ3yk/PUOPeBaMh
-	h1ZSZFprJvnBjnXP7PIixdkNaY3REiCKxxU67IV0Ms/fLI5iJ3GP4jIQY3Qgq1CZoYBk
-	aD8CElkBKVrCdTkn/qTa/S2zgCFfqdLnH8aWzgj6YQxzTZuhHQsTTmWzmndFlj5LhB4f
-	4ejJU+krvjmjQbmrbB0kNGgl5fbc+Z9mnfq9fB7IB/jHnw2NX3ST+dNSTydGXwbrLITP
-	t1oQ==
-Received: by 10.180.103.4 with SMTP id fs4mr550480wib.16.1344380244551;
-	Tue, 07 Aug 2012 15:57:24 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A309E.dip.t-dialin.net.
-	[91.10.48.158])
-	by mx.google.com with ESMTPS id l6sm1882009wiz.4.2012.08.07.15.57.23
+	Tue, 07 Aug 2012 21:15:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=aT/IcsUt7CN55Sq3y030texxBOl7t7JL1U56trrA7C8=;
+	b=oRjscifb+XwaSEQkjre1caJIh0VY8l1GMZIV/GJzL6H3DcXsfVA8rHrjo8K+lfsIiD
+	7OG0DYXo4n5LpxA/O6EzCpmRBYYeNxjQS/F1REfiUik5XrbZsbKHwULO/FGeWZ2OsFz0
+	oTu+e+a1DYLR7xTRmEOdnA9LBsNlC+9mbzVZfbW+sCUpzJ33MnBc6NsgCdfgsNYkSTmC
+	Nw1u5GlhNb6Ib/l4M3ZCktrw+GwkGeQHQwwEdiGqWYtZgY2bA6OzxTMB7iW86/ki8ppo
+	XOk02RnL/k2ajevzCCmYjhSiaeljr+LPNAvM/rtWAXom4kbRT1cgVpBqk4Zkfy3Jc9rR
+	LJyg==
+Received: by 10.66.80.165 with SMTP id s5mr30747213pax.41.1344399333609;
+	Tue, 07 Aug 2012 21:15:33 -0700 (PDT)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id jv6sm12506552pbc.40.2012.08.07.21.15.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Aug 2012 15:57:23 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Tue, 07 Aug 2012 21:15:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Aug 2012 01:04:25 +0200
-Message-Id: <1344380665-3759-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1344380665-3759-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1344380665-3759-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-systemd 2/2] gdm: replace 'WantedBy=graphical.target' by 'Alias=display-manager.service'
+Date: Tue,  7 Aug 2012 21:15:14 -0700
+Message-Id: <1344399314-2557-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-systemd][PATCH] meta-systemd: Fix corrupted symlink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2012 23:09:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Aug 2012 04:27:21 -0000
 
-Found at lxdm. Error message was there
-| systemd[1]: Cannot add dependency job for unit display-manager.service ...
+The symlink seems to be corrupt somehow
 
-Inspired by [1]
-
-[1] https://bbs.archlinux.org/viewtopic.php?pid=1131267
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../meta-gnome/recipes-gnome/gdm/gdm/gdm.service   |    2 +-
- .../recipes-gnome/gdm/gdm_2.32.2.bbappend          |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-systemd/classes/gitpkgv.bbclass |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-index 72a56f9..adfc565 100644
---- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-+++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
-@@ -8,4 +8,4 @@ ExecStart=/usr/sbin/gdm -nodaemon
- StandardOutput=syslog
- 
- [Install]
--WantedBy=graphical.target
-+Alias=display-manager.service
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-index 7308346..963e3e8 100644
---- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-+++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
-@@ -1,7 +1,7 @@
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
--PRINC := "${@int(PRINC) + 1}"
-+PRINC := "${@int(PRINC) + 2}"
- 
- inherit systemd
- 
+diff --git a/meta-systemd/classes/gitpkgv.bbclass b/meta-systemd/classes/gitpkgv.bbclass
+index 8205151..f3f13d1 120000
+--- a/meta-systemd/classes/gitpkgv.bbclass
++++ b/meta-systemd/classes/gitpkgv.bbclass
+@@ -1 +1 @@
+-../../meta-oe/classes/gitpkgv.bbclass
++../../meta-oe/classes/gitpkgv.bbclass
+\ No newline at end of file
 -- 
-1.7.4.4
+1.7.9.5
 
 
 
