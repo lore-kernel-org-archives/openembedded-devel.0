@@ -1,23 +1,25 @@
-Received: from www.dynamicdevices.co.uk ([89.200.136.37])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1Szn2Q-0006nb-4u
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1SznES-0006yE-S6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 13:05:54 +0200
-Received: from cpc8-live22-2-0-cust106.know.cable.virginmedia.com
-	([82.42.168.107] helo=[127.0.0.1])
-	by www.dynamicdevices.co.uk with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SzmqN-0002ul-Gm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 10:53:27 +0000
-Message-ID: <5024E843.2050709@dynamicdevices.co.uk>
-Date: Fri, 10 Aug 2012 11:53:55 +0100
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
+	Fri, 10 Aug 2012 13:18:21 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 10 Aug 2012 04:06:30 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.77,745,1336374000"; d="scan'208";a="178740155"
+Received: from unknown (HELO helios.localnet) ([10.252.121.78])
+	by orsmga001.jf.intel.com with ESMTP; 10 Aug 2012 04:06:29 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+Date: Fri, 10 Aug 2012 12:06:28 +0100
+Message-ID: <1717286.mDh904HIi2@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-27-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <5024E843.2050709@dynamicdevices.co.uk>
+References: <5024E843.2050709@dynamicdevices.co.uk>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: Best practise using .bbappend
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Best practise using .bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 11:05:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Aug 2012 11:18:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi,
+Hi Alex,
 
-I'm trying to create a layer, overriding certain defaults with use of 
-.bbappends.
+On Friday 10 August 2012 11:53:55 Alex J Lennon wrote:
+> I'm trying to create a layer, overriding certain defaults with use of
+> .bbappends.
+> 
+> e.g. Changing a Grub configuration with a
+> meta-foo/recipes-bsp/grub/grub_1.99.bbappend
+> 
+> I'm wondering what happens when somebody updates the grub recipe in meta
+> to a new version, e.g. 2.00 and I then do a git pull?
+> 
+> As I understand it the environment will automatically pick up the new
+> recipe, and presumably my .bbappend to 1.99 will no longer be pulled in?
 
-e.g. Changing a Grub configuration with a 
-meta-foo/recipes-bsp/grub/grub_1.99.bbappend
+That's correct. We assume that the contents is often going to be version-
+specific and therefore a bbappend needs to be created for each version. There 
+have been discussions about adding wildcarding for bbappends, but so far I can 
+only assume it hasn't been a serious enough problem for people - at least 
+responses to the suggestion have been fairly muted.
+ 
+> Should I be setting a PREFERRED_VERSION_bar somewhere, say in the conf
+> for my new layer, on any recipe that I add a .bbppends to, or what's best
+> practise for dealing with this?
 
-I'm wondering what happens when somebody updates the grub recipe in meta 
-to a
-new version, e.g. 2.00 and I then do a git pull?
+Setting a PREFERRED_VERSION_ for each bbappended recipe is a reasonable 
+approach assuming this is a layer intended to apply some policy (i.e. a distro 
+layer).
 
-As I understand it the environment will automatically pick up the new 
-recipe, and
-presumably my .bbappend to 1.99 will no longer be pulled in?
+In practice this is unlikely to come up too often - in OE-Core we usually 
+delete the old recipe when upgrading to a new version, and thus if you have a 
+bbappend for the old version in your layer you will get an error after parsing 
+indicating the bbappend had no matching recipe.
 
-Should I be setting a PREFERRED_VERSION_bar somewhere, say in the conf 
-for my
-new layer, on any recipe that I add a .bbppends to, or what's best 
-practise for dealing
-with this?
+Cheers,
+Paul
 
-Thanks,
+-- 
 
-Alex
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
