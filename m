@@ -1,23 +1,23 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from www.dynamicdevices.co.uk ([89.200.136.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1SznJR-00075D-NM
+	(envelope-from <ajlennon@dynamicdevices.co.uk>) id 1SznL8-0007Am-19
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 13:23:29 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 10 Aug 2012 04:11:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.77,745,1336374000"; d="scan'208";a="196634598"
-Received: from unknown (HELO helios.localnet) ([10.252.121.78])
-	by fmsmga001.fm.intel.com with ESMTP; 10 Aug 2012 04:11:38 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-Date: Fri, 10 Aug 2012 12:11:37 +0100
-Message-ID: <1660331.qcC0NDgy9m@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9 (Linux/3.2.0-27-generic-pae; KDE/4.9.0; i686; ; )
-In-Reply-To: <1717286.mDh904HIi2@helios>
-References: <5024E843.2050709@dynamicdevices.co.uk> <1717286.mDh904HIi2@helios>
+	Fri, 10 Aug 2012 13:25:14 +0200
+Received: from cpc8-live22-2-0-cust106.know.cable.virginmedia.com
+	([82.42.168.107] helo=[127.0.0.1])
+	by www.dynamicdevices.co.uk with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <ajlennon@dynamicdevices.co.uk>)
+	id 1Szn95-0002vQ-7W; Fri, 10 Aug 2012 11:12:47 +0000
+Message-ID: <5024ECCB.5@dynamicdevices.co.uk>
+Date: Fri, 10 Aug 2012 12:13:15 +0100
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
 MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <5024E843.2050709@dynamicdevices.co.uk> <1717286.mDh904HIi2@helios>
+In-Reply-To: <1717286.mDh904HIi2@helios>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Best practise using .bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -33,38 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 11:23:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 10 Aug 2012 11:25:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Friday 10 August 2012 12:06:28 Paul Eggleton wrote:
-> > Should I be setting a PREFERRED_VERSION_bar somewhere, say in the conf
-> > for my new layer, on any recipe that I add a .bbppends to, or what's best
-> > practise for dealing with this?
-> 
-> Setting a PREFERRED_VERSION_ for each bbappended recipe is a reasonable
-> approach assuming this is a layer intended to apply some policy (i.e. a
-> distro layer).
-> 
-> In practice this is unlikely to come up too often - in OE-Core we usually
-> delete the old recipe when upgrading to a new version, and thus if you have
-> a bbappend for the old version in your layer you will get an error after
-> parsing indicating the bbappend had no matching recipe.
+Hi Paul,
 
-I forgot to mention, "bitbake-layers show-appends" will warn if there is a 
-bbappend for one version of a particular PN but none for the current preferred 
-version; thus it can be used to catch where this situation has occurred, the 
-old recipe was not deleted and no PREFERRED_VERSION_ has been set.
+ >approach assuming this is a layer intended to apply some policy (i.e. 
+a distro layer).
 
-In general bitbake-layers is quite a useful utility for querying layer 
-configuration and interaction.
+Good to know. I'm currently working with most of this in local.conf but
+my plan is to migrate it to a distro configuration when I've figured out 
+what I'm
+doing, yes.
 
-Cheers,
-Paul
+ >In practice this is unlikely to come up too often - in OE-Core we 
+usually delete the old recipe when upgrading to a new version, and thus 
+if you have a bbappend for the old version in your layer you will get an 
+error after parsing indicating the bbappend had no matching recipe.
 
--- 
+Ah very good. So if I update from the git repo and a recipe I've 
+extended has changed
+I would get a build error rather than it silently dropping my changes. 
+Good :)
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Many thanks,
+
+Alex
+
 
 
