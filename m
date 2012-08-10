@@ -1,38 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Szpjx-0003Mh-45
+	(envelope-from <martin.jansa@gmail.com>) id 1Szpk5-0003Pl-CJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 15:59:01 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so1221497wgb.24
+	Fri, 10 Aug 2012 15:59:09 +0200
+Received: by mail-we0-f175.google.com with SMTP id r6so928736wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2012 06:47:13 -0700 (PDT)
+	Fri, 10 Aug 2012 06:47:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=dsK3j1/vYHBAyR/7FiJL7fjTi8STjX/jOl+WEsQ7UE4=;
-	b=JblfFt4+QXNk3evANjmkUQHg83+asAFwi6LWamnoV7AihMJ/gMmV7wniIzeRUoeV8c
-	ZlbXJ54UJQz0zeZdY67oUB80YBhaSDA6/14tW8g51/tuQkZBx2mc8zV8W7eUe4Q/5xvo
-	XETG99qCdxnYC06I87xSPpqJ5JEJdMRQMd6WmDvdzPmWR/E2ALhVFLfHSVdQKXLoE4EZ
-	Q15cNKtJdVH7zSePbxN3iAdhARjfZG4rZz/mvGu5B/yZM0SfIfW5T3qiqnOJhAQXUjgj
-	S4l2BqTN8QcXH8u3CThG+gPDJm8MdXMKYw7lY9d4vwNfVQJBHm3qWENaePF7GtdQFxTM
-	uftw==
-Received: by 10.180.82.39 with SMTP id f7mr6308048wiy.2.1344606433743;
-	Fri, 10 Aug 2012 06:47:13 -0700 (PDT)
+	bh=hG8RY+yBmE+J4rgI/3I3SS79tE4CK7XMvLhu7WJhvuE=;
+	b=0/rjGUs7d2I+xOlCa0BRh7JsYRo+plW21kZyAsp/uCeU9dZjzs70sZclWkbOfrhQEM
+	+XpppA/2net4dXzBga0kOVvVmpDktuIlU4ZOQm4xS10Ag5Ae0Z5NtN8DqIGFslXedMXH
+	YBal1Y6xNKI2lKRGLAPiUqXKpbaR81gRazFcniTnKxwNU3og/9GIPHXOl3TmzxotGMF+
+	1Xd+AGznIum29DjGVu/6JmBu4aXWPiARdJ74X/OVCVd+6xydPNPs3wC8Y9x7P6caZXto
+	TG2UMsqCw3r6fzlWhcnY3clfCbfm2dnbIcvMUBenacB5+70WgU4adxJ+XahCx8XLdrGn
+	SwZA==
+Received: by 10.180.81.165 with SMTP id b5mr6148185wiy.17.1344606441978;
+	Fri, 10 Aug 2012 06:47:21 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cl8sm7834945wib.10.2012.08.10.06.47.12
+	by mx.google.com with ESMTPS id k20sm7841827wiv.11.2012.08.10.06.47.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Aug 2012 06:47:12 -0700 (PDT)
+	Fri, 10 Aug 2012 06:47:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Aug 2012 15:43:20 +0200
-Message-Id: <8fb25e52e1df4d2627cd9dd85f5212e2e0ec2db9.1344601517.git.Martin.Jansa@gmail.com>
+Date: Fri, 10 Aug 2012 15:43:21 +0200
+Message-Id: <ea81302f48fb139f390c76b5ae80aaec7fe816c5.1344601517.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1342645937.git.Martin.Jansa@gmail.com>
 	<cover.1344601517.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1344601517.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 25/46] edje: add unpackaged /usr/share/mime/packages/edje.xml to PN
+Subject: [meta-oe][meta-efl][PATCH 26/46] edbus: option to disable performance-test was renamed and package logo.png in PN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 13:59:01 -0000
+X-List-Received-Date: Fri, 10 Aug 2012 13:59:09 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/edje_svn.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ meta-efl/recipes-efl/efl/edbus_svn.bb |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/edje_svn.bb b/meta-efl/recipes-efl/efl/edje_svn.bb
-index 720703e..ffc8cf7 100644
---- a/meta-efl/recipes-efl/efl/edje_svn.bb
-+++ b/meta-efl/recipes-efl/efl/edje_svn.bb
-@@ -9,3 +9,5 @@ SRC_URI = "\
+diff --git a/meta-efl/recipes-efl/efl/edbus_svn.bb b/meta-efl/recipes-efl/efl/edbus_svn.bb
+index d40deb2..b99f79d 100644
+--- a/meta-efl/recipes-efl/efl/edbus_svn.bb
++++ b/meta-efl/recipes-efl/efl/edbus_svn.bb
+@@ -5,8 +5,12 @@ PV = "1.2.1+svnr${SRCPV}"
+ PR = "${INC_PR}.0"
+ DEFAULT_PREFERENCE = "-1"
+ 
+-EXTRA_OECONF += "--disable-performance_test"
++# it needs to be disabled, because creates circular dependency on elementary
++EXTRA_OECONF += "--disable-edbus-performance-test"
++
+ SRC_URI = "\
    ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
  "
  S = "${WORKDIR}/${SRCNAME}"
 +
-+FILES_${PN} += "${datadir}/mime/packages/edje.xml"
++FILES_${PN} += "${datadir}/e_dbus/logo.png"
 -- 
 1.7.8.6
 
