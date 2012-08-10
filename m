@@ -1,38 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1SzphK-0001GZ-OM
+	(envelope-from <martin.jansa@gmail.com>) id 1SzphT-0001uj-F3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 15:56:18 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dr1so1218754wgb.24
+	Fri, 10 Aug 2012 15:56:27 +0200
+Received: by mail-wi0-f177.google.com with SMTP id hn17so398297wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2012 06:44:31 -0700 (PDT)
+	Fri, 10 Aug 2012 06:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=oUee9bzMc69ycFzXzySagYb+IsgibX4t0tq3ulD8D+E=;
-	b=xCaXCgWuv4VflqSeEs6CfKWKEJEb2I4ChnRCBxp30pSkofiOl6pIATbfwqz8ASOpk2
-	4zE8KMnlVl1ut04BjPT73z4TDWbuPY7BjhR2v43uHkYLthqS/SBfoRjf0qirAavDO7nq
-	3Ouxd7kDkWNn0fZevDpGHIwzPHHRBWT4mSXFn74S0yXy+8j14+GceI5Na2owuVCF/Nqe
-	XmxFeh6eIr+lHVpml2B2mTzmFGzg6uduywHIt369jlnGsUP80Dmn6ZEljHjCtB1Ayy3P
-	nkK4fHvH6pw3GJRcalIckSh8ZsYSgY4O/gAKaqX/chtzu+0yHzb/sbhOXOPL4W+XBkpj
-	eroQ==
-Received: by 10.180.85.167 with SMTP id i7mr6157451wiz.8.1344606271330;
-	Fri, 10 Aug 2012 06:44:31 -0700 (PDT)
+	bh=YFwbJtCCIn9kyKlQJR3dirtlBnDoZqG0SYMy7OTHjq0=;
+	b=eL1jebvKz4TNDw9JIpFia93g/FuS1eJ3FNJCi/QYnQkLe1ZxMcaxZZdmSOeBRhbsAd
+	xL3/ElOSKxqoL5xhblcGEL9itWFOjZf7yWIvc55ddzZ9YwDd9B09QX5H4SLX//D7IE8B
+	fZssbX4K7iGt4mwFyBYhcdP3yhkWeGqMXZsCbhA8N8nIlGyctL+jbWE53oM/gETrK2XQ
+	3uqOzU6xr/s+iv/i6uCgtHXAoyR70HBHBwb4JsfNgSWjMkznGjfLEJO9cj4w643lxwOE
+	Z+JN+sL5ufqrzl5LTciy3gO9R0zw7hSaBM+mRMWp1LLqHgx5DbrPp2go7ZPFzNtZQCDO
+	srEg==
+Received: by 10.180.20.204 with SMTP id p12mr6269086wie.7.1344606279949;
+	Fri, 10 Aug 2012 06:44:39 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ef5sm11624869wib.3.2012.08.10.06.44.30
+	by mx.google.com with ESMTPS id ex20sm11619391wid.7.2012.08.10.06.44.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Aug 2012 06:44:30 -0700 (PDT)
+	Fri, 10 Aug 2012 06:44:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Aug 2012 15:43:01 +0200
-Message-Id: <c0e8670a50fd4bfbc3c900feb4509f1a1a915f76.1344601517.git.Martin.Jansa@gmail.com>
+Date: Fri, 10 Aug 2012 15:43:02 +0200
+Message-Id: <7e4a68be76504fe6aff13a96fcb13a64879832a8.1344601517.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1342645937.git.Martin.Jansa@gmail.com>
 	<cover.1344601517.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1344601517.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 06/46] terminology: add recipe for terminal emulator
+Subject: [meta-oe][meta-efl][PATCH 07/46] evas: package cserve2 and its loaders
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,39 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 13:56:18 -0000
+X-List-Received-Date: Fri, 10 Aug 2012 13:56:27 -0000
+
+* cserve2 introduced in http://www.mail-archive.com/enlightenment-devel@lists.sourceforge.net/msg40703.html
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/terminology_svn.bb |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/terminology_svn.bb
+ meta-efl/recipes-efl/efl/evas.inc |   17 ++++++++++++++---
+ 1 files changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/e17/terminology_svn.bb b/meta-efl/recipes-efl/e17/terminology_svn.bb
-new file mode 100644
-index 0000000..2bb4f7c
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/terminology_svn.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Enlightenment Terminal Emulator"
-+LICENSE = "MIT BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=03f6c2cf2bef233fadf7d0769f5bfda7"
-+DEPENDS = "evas ecore edje elementary eina eet emotion"
+diff --git a/meta-efl/recipes-efl/efl/evas.inc b/meta-efl/recipes-efl/efl/evas.inc
+index b0a42ea..5254ee4 100644
+--- a/meta-efl/recipes-efl/efl/evas.inc
++++ b/meta-efl/recipes-efl/efl/evas.inc
+@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
+ inherit efl
+ 
+ BBCLASSEXTEND = "native"
+-INC_PR = "r0"
++INC_PR = "r1"
+ FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+ 
+ python populate_packages_prepend () {
+@@ -20,6 +20,15 @@ python populate_packages_prepend () {
+         output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
+         description = 'Evas module %s',
+         allow_dirs=True, recursive=False, extra_depends="" )
++        
++        plugin_type = "cserve2"
++        bb.note( "splitting packages for evas %s..." % plugin_type )
++        basedir = bb.data.expand( '${libdir}/evas/%s/loaders' % plugin_type, d )
 +
-+PV = "0.1.0+svnr${SRCPV}"
-+SRCREV = "${EFL_SRCREV}"
-+
-+inherit e gettext
-+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-+S = "${WORKDIR}/${SRCNAME}"
-+
-+EXTRA_OECONF = "\
-+  --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-+"
-+
-+FILES_${PN} += "\
-+        ${datadir}/icons/terminology.png \
-+"
++        do_split_packages(d, basedir, '^(.*)',
++        output_pattern = 'evas-' + plugin_type + "-%s",
++        description = 'Evas csever2 loader module %s',
++        allow_dirs=True, recursive=False, extra_depends="" )
+ }
+ 
+ do_install_append() {
+@@ -27,9 +36,11 @@ do_install_append() {
+ }
+ 
+ FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
+-FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
++FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/ ${libdir}/evas/cserve2/loaders/*/*/.debug/"
++FILES_${PN}-cserve2 += "${libexecdir}/evas_cserve2* ${libexecdir}/dummy_slave"
+ 
+-PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
++PACKAGES += "${PN}-cserve2"
++PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-* evas-cserve2-*"
+ 
+ RRECOMMENDS_${PN} = " \
+   evas-engine-fb \
 -- 
 1.7.8.6
 
