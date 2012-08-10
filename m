@@ -1,38 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Szpiw-0002eM-4e
+	(envelope-from <martin.jansa@gmail.com>) id 1Szpj6-00034F-Lf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 15:57:58 +0200
-Received: by mail-we0-f175.google.com with SMTP id r6so927806wey.6
+	Fri, 10 Aug 2012 15:58:08 +0200
+Received: by wibhm2 with SMTP id hm2so1141007wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2012 06:46:10 -0700 (PDT)
+	Fri, 10 Aug 2012 06:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=/rJIzIyPEcPBAg/7WlMcNWEERzUxyUyRB6hchBiVm54=;
-	b=zjo9k7VUydINrZVSGGCzObCB1suOda1OOrwQzbnvVcU7WEd8y3y2nLNZHf4h+QgIxM
-	Uy3gMHHAPSzbwZwrmR1EB+CDv8uMO3kkn9+f160r107b1+KfWkUVvCkOHA4dw59wTr9I
-	CWa2I1ZZTItZbzMdRzLdP12sfc8V6Y8+l+Nc7r260bH0dYy7afBJJoKUSJ7bCUzpG9t/
-	vTjd25i0tc2XNGAH+bjggmwT3urkWDR1EPTDxrGGhvkQB6+emUnWGB0PpWfTrHSpC2rY
-	FMcWHtx08qlCxP5GIK2+ZClLIom3cbToCSPMUWTNqmowBQrC+i7Z0Im1DJ2wssb7J/ci
-	+Zpw==
-Received: by 10.216.241.198 with SMTP id g48mr1735438wer.153.1344606370641;
-	Fri, 10 Aug 2012 06:46:10 -0700 (PDT)
+	bh=jpVXfNBobTWQBYF90qgQW3GkoG3rDzWZihXiBLpbxzI=;
+	b=M3WPq9Qr0wx2gUXtAGatXsr1Or4RaE6FQPYruKrJ5AKowoU6xru4R8VcgyGpni3sAl
+	jaavHDa7+gXBaRoJSxDtM7cs/Pk9j6DKmjncPsQu5ryyq+l75wQNgMsDppSYOsn74dgB
+	takFNGQSO7MsV/O+p8LP9BwF9ZxUSSeQxmN23vOy6YPryw4DN2JZOQuDw6i0XtzzERd/
+	WYxJjuwtqqgQcI1von33rHJlkTXFpmNgN1vGe5AbsjQQ8ygtccM3e5oV6oeGfoZmoM1J
+	AC9eYp7wEFdoCsLTqc/1yrqHtRNzuiMTzoE/39v/TfLNl7dbesZcvIusE/zbF8NhjOtU
+	+u/A==
+Received: by 10.180.78.5 with SMTP id x5mr6043512wiw.13.1344606378118;
+	Fri, 10 Aug 2012 06:46:18 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z11sm11632654wiv.10.2012.08.10.06.46.09
+	by mx.google.com with ESMTPS id cl8sm7830400wib.10.2012.08.10.06.46.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Aug 2012 06:46:09 -0700 (PDT)
+	Fri, 10 Aug 2012 06:46:17 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Aug 2012 15:43:14 +0200
-Message-Id: <f03a6c3243d696428fd9969c2d966dee22dc1fd2.1344601517.git.Martin.Jansa@gmail.com>
+Date: Fri, 10 Aug 2012 15:43:15 +0200
+Message-Id: <3ec435a5bcaf15922da54e252cb9b698a42d1ba2.1344601517.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1342645937.git.Martin.Jansa@gmail.com>
 	<cover.1344601517.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1344601517.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 19/46] e-base: bump EFL_SRCREV
+Subject: [meta-oe][meta-efl][PATCH 20/46] elementary: add eio to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 13:57:58 -0000
+X-List-Received-Date: Fri, 10 Aug 2012 13:58:09 -0000
+
+* fixes:
+| /bin/grep: /OE/shr-core/tmp-eglibc/sysroots/spitz/usr/lib/libeio.la: No such file or directory
+| /bin/sed: can't read /OE/shr-core/tmp-eglibc/sysroots/spitz/usr/lib/libeio.la: No such file or directory
+| arm-oe-linux-gnueabi-libtool: link: `/OE/shr-core/tmp-eglibc/sysroots/spitz/usr/lib/libeio.la' is not a valid libtool archive
+| make[3]: *** [module.la] Error 1
+| make[3]: Leaving directory `/OE/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/elementary-2_1.0.1+svnr74527-r1.0/elementary/src/edje_externals'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/classes/e-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-efl/recipes-efl/efl/elementary_svn.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index d52b4dc..4a06d4a 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -1,6 +1,6 @@
- HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
+diff --git a/meta-efl/recipes-efl/efl/elementary_svn.bb b/meta-efl/recipes-efl/efl/elementary_svn.bb
+index eb28d9a..fa8a8e8 100644
+--- a/meta-efl/recipes-efl/efl/elementary_svn.bb
++++ b/meta-efl/recipes-efl/efl/elementary_svn.bb
+@@ -4,6 +4,7 @@ SRCREV = "${EFL_SRCREV}"
+ PV = "1.0.1+svnr${SRCPV}"
+ PR = "${INC_PR}.0"
+ DEFAULT_PREFERENCE = "-1"
++DEPENDS += "eio"
  
--EFL_SRCREV ?= "74419"
-+EFL_SRCREV ?= "74527"
- 
- ARM_INSTRUCTION_SET = "arm"
+ SRC_URI = "\
+   ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
 -- 
 1.7.8.6
 
