@@ -1,38 +1,38 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Szpm2-0005H1-20
+	(envelope-from <martin.jansa@gmail.com>) id 1Szpm9-0005H1-Jw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Aug 2012 16:01:10 +0200
+	Fri, 10 Aug 2012 16:01:17 +0200
 Received: by mail-we0-f175.google.com with SMTP id r6so930135wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2012 06:49:22 -0700 (PDT)
+	Fri, 10 Aug 2012 06:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=vBneyVdiS42C+U3NKOVgGtrJNw2BItGs6S6qUalHV90=;
-	b=V2qqTPsNmR+NH5FN0Dj52Le9bYFMlsZ7eJU3LjF5kaPj5U0aZT0nBgsREV7/kjgf2Q
-	sgBzuQ3GKcs5Mb8nWyloeD9/zhRR41+AccmJssyhYYG3N5OBLvRcTohL/plAwzA/j31i
-	SBOw3fgFB8GQivbXL5LU6ZTO7N/Q2IsknSs/ru5T7vzJg9VOE8W4TxUkAWPkv4bKHa6k
-	ec91hzqAuocafx2ygpzqBMiHmYz1g4PwNhEil3kZKhTw4kF0s5PghOl+2TMIiTnU5Q02
-	JdRO2QywI9pyG4zLfCjsG5Ltf7WXj7HOPgvblqZaRRrKTS+Bfx+qiu1gmAvCOda6To/O
-	GZlw==
-Received: by 10.216.123.130 with SMTP id v2mr1667490weh.117.1344606562629;
-	Fri, 10 Aug 2012 06:49:22 -0700 (PDT)
+	bh=y07GaWn5iAwACup7B5oZLgZxFrW7RRtmcRTbAy5YD5Q=;
+	b=fGclL2wMPPOq07jUUeMA5okdsrcniHPy4x5Of4qscjaOxreSDcsSAfI6IeTg03aQVD
+	NlZN5yfDfjbNEfejPwgnyNUtgzyk5vpBJKL8GYyZFAnaFRUQ8YRA4layLkpI2pn8opOr
+	cW2/D2zu3OgUAChirjDjEBrMsH7eLQOcNkZNnYzQ/eaq4t3hTJKENqi1JbmqI4LumDLS
+	pHIL24HmJix8Dld/0pfPvxS3UuYx0c0HnMmT0kfZ8t31L+e5MozRMBbXxPQMhqLqtOZG
+	CIENkF2VQeRK+7HwOLfN/+l4DW345J67Cra/R2Q6NPg5eaFL84SdwvlIaTQdtb4q+uRj
+	onZA==
+Received: by 10.216.123.130 with SMTP id v2mr1667639weh.117.1344606570218;
+	Fri, 10 Aug 2012 06:49:30 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j6sm11651712wiy.4.2012.08.10.06.49.21
+	by mx.google.com with ESMTPS id ex20sm11651256wid.7.2012.08.10.06.49.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 10 Aug 2012 06:49:21 -0700 (PDT)
+	Fri, 10 Aug 2012 06:49:29 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Aug 2012 15:43:37 +0200
-Message-Id: <207251ca2c28f25a241b036433172fb48be89751.1344601517.git.Martin.Jansa@gmail.com>
+Date: Fri, 10 Aug 2012 15:43:38 +0200
+Message-Id: <b385e10e57f6283edd0a31cd6adc7d7122d49b1a.1344601517.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1342645937.git.Martin.Jansa@gmail.com>
 	<cover.1344601517.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
 References: <cover.1344601517.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 42/46] elsa: rename to entrance
+Subject: [meta-oe][meta-efl][PATCH 43/46] meta-systemd: elsa: rename to entrance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,85 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2012 14:01:10 -0000
+X-List-Received-Date: Fri, 10 Aug 2012 14:01:17 -0000
 
 * elsa was killed in r75060 and reintroduced in r75061 with old name - entrance
+* also use Alias=display-manager.service like gdm does now
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...am-use-common-auth-instead-of-system-auth.patch |   19 ++++++++-----------
- .../efl/{elsa_svn.bb => entrance_svn.bb}           |    4 +---
- 2 files changed, 9 insertions(+), 14 deletions(-)
- rename meta-efl/recipes-efl/efl/{elsa => entrance}/0001-pam-use-common-auth-instead-of-system-auth.patch (64%)
- rename meta-efl/recipes-efl/efl/{elsa_svn.bb => entrance_svn.bb} (92%)
+ .../efl/{elsa => entrance}/xserver-nodm.service    |    4 ++--
+ .../{elsa_svn.bbappend => entrance_svn.bbappend}   |    0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-systemd/meta-efl/recipes-efl/efl/{elsa => entrance}/xserver-nodm.service (55%)
+ rename meta-systemd/meta-efl/recipes-efl/efl/{elsa_svn.bbappend => entrance_svn.bbappend} (100%)
 
-diff --git a/meta-efl/recipes-efl/efl/elsa/0001-pam-use-common-auth-instead-of-system-auth.patch b/meta-efl/recipes-efl/efl/entrance/0001-pam-use-common-auth-instead-of-system-auth.patch
-similarity index 64%
-rename from meta-efl/recipes-efl/efl/elsa/0001-pam-use-common-auth-instead-of-system-auth.patch
-rename to meta-efl/recipes-efl/efl/entrance/0001-pam-use-common-auth-instead-of-system-auth.patch
-index a9beea0..a82d1ed 100644
---- a/meta-efl/recipes-efl/efl/elsa/0001-pam-use-common-auth-instead-of-system-auth.patch
-+++ b/meta-efl/recipes-efl/efl/entrance/0001-pam-use-common-auth-instead-of-system-auth.patch
-@@ -1,21 +1,18 @@
--From 27dc9147a822d69be90edd0d137b80c0c609d5d2 Mon Sep 17 00:00:00 2001
-+From 14396c52a2556b1ab778a310a318ec19c2829735 Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Thu, 24 Nov 2011 13:25:33 +0100
- Subject: [PATCH] pam: use common-auth instead of system-auth
+diff --git a/meta-systemd/meta-efl/recipes-efl/efl/elsa/xserver-nodm.service b/meta-systemd/meta-efl/recipes-efl/efl/entrance/xserver-nodm.service
+similarity index 55%
+rename from meta-systemd/meta-efl/recipes-efl/efl/elsa/xserver-nodm.service
+rename to meta-systemd/meta-efl/recipes-efl/efl/entrance/xserver-nodm.service
+index 0b9c0f5..4828686 100644
+--- a/meta-systemd/meta-efl/recipes-efl/efl/elsa/xserver-nodm.service
++++ b/meta-systemd/meta-efl/recipes-efl/efl/entrance/xserver-nodm.service
+@@ -2,7 +2,7 @@
+ Description=Login manager for Enlightenment
  
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
- ---
-- PROTO/elsa/data/elsa |    8 ++++----
-+ PROTO/entrance/data/entrance |    8 ++++----
-  1 files changed, 4 insertions(+), 4 deletions(-)
+ [Service]
+-ExecStart=/usr/sbin/elsa
++ExecStart=/usr/sbin/entrance
  
--diff --git a/data/elsa b/data/elsa
--index 3476d55..47d29222 100644
----- a/data/elsa
--+++ b/data/elsa
--@@ -1,7 +1,7 @@
-- # File autogenerated by pamd_mimic in pam eclass
-- 
-- 
-+diff --git a/data/entrance b/data/entrance
-+index 872c83d..2b98c3a 100644
-+--- a/data/entrance
-++++ b/data/entrance
-+@@ -1,4 +1,4 @@
- -auth	include		system-auth
- -account	include		system-auth
- -password	include		system-auth
-@@ -25,5 +22,5 @@ index 3476d55..47d29222 100644
- +password	include		common-password
- +session	include		common-session
- -- 
--1.7.8.rc3
-+1.7.8.6
- 
-diff --git a/meta-efl/recipes-efl/efl/elsa_svn.bb b/meta-efl/recipes-efl/efl/entrance_svn.bb
-similarity index 92%
-rename from meta-efl/recipes-efl/efl/elsa_svn.bb
-rename to meta-efl/recipes-efl/efl/entrance_svn.bb
-index e23a694..585d552 100644
---- a/meta-efl/recipes-efl/efl/elsa_svn.bb
-+++ b/meta-efl/recipes-efl/efl/entrance_svn.bb
-@@ -4,8 +4,6 @@ LICENSE = "GPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SECTION = "e/apps"
- 
--PR = "r2"
--
- inherit e gettext
- SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
-   file://0001-pam-use-common-auth-instead-of-system-auth.patch \
-@@ -18,6 +16,6 @@ PV = "0.0.4+svnr${SRCPV}"
- SRCREV = "${EFL_SRCREV}"
- 
- RDEPENDS_${PN} += "${PN}-themes sessreg xauth"
--CONFFILES_${PN} += "${sysconfdir}/elsa.conf"
-+CONFFILES_${PN} += "${sysconfdir}/entrance.conf"
- RCONFLICTS_${PN} += "xserver-nodm-init"
- RREPLACES_${PN} += "xserver-nodm-init"
+ [Install]
+-WantedBy=multi-user.target
++Alias=display-manager.service
+diff --git a/meta-systemd/meta-efl/recipes-efl/efl/elsa_svn.bbappend b/meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend
+similarity index 100%
+rename from meta-systemd/meta-efl/recipes-efl/efl/elsa_svn.bbappend
+rename to meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend
 -- 
 1.7.8.6
 
