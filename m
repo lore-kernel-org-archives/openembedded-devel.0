@@ -1,20 +1,32 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-wg0-f49.google.com ([74.125.82.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1T0XIh-0002lP-H0
+	(envelope-from <andrea.adami@gmail.com>) id 1T0fl8-00035S-LX
 	for openembedded-devel@lists.linuxtogo.org;
-	Sun, 12 Aug 2012 14:29:47 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 12 Aug 2012 05:16:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.77,754,1336374000"; d="scan'208";a="179535384"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.121.82])
-	by orsmga001.jf.intel.com with ESMTP; 12 Aug 2012 05:16:33 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Sun, 12 Aug 2012 23:31:42 +0200
+Received: by wgbez12 with SMTP id ez12so2805432wgb.6
+	for <openembedded-devel@lists.linuxtogo.org>;
+	Sun, 12 Aug 2012 14:19:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=AInGZSSCMxe8y5OxF4JXU2lbISCm62wMaT4gVYXyKbY=;
+	b=yR+PZEbyo8PhUCqABiSBJSU9AbChfatU5TUODb1TvpMo7/Vvqc6YTDA/YOwUONdSQ6
+	I3f3hn4MEvToPuL6YbCH4PxTgl1kZSZus4MyUBbP8xLyqXW4wf8UKCB211UsIVPexsDT
+	cPci9mSIpQg7x0c0UiP8sDTsqlPedRczJdtbXwhQJ6C30gVYY9Be6hUCEkVYP++lgJ56
+	sgy+6ZVDBO/QvSyjdl0F5/iiAeRYa+QTeZbBnvT2tQ4gfPs47s3ZHdD1EzAiobqUQrc8
+	L5ZQ9SoG4pZbJbouUp4qaPdHZoatFLj4e2G/bNPc3m46IDlXagHrrKqPMYMoTy128An9
+	u/kA==
+Received: by 10.216.242.204 with SMTP id i54mr5445036wer.114.1344806390199;
+	Sun, 12 Aug 2012 14:19:50 -0700 (PDT)
+Received: from mizar.localdomain
+	(host84-251-dynamic.9-87-r.retail.telecomitalia.it. [87.9.251.84])
+	by mx.google.com with ESMTPS id ef5sm18324104wib.3.2012.08.12.14.19.48
+	(version=SSLv3 cipher=OTHER); Sun, 12 Aug 2012 14:19:49 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.linuxtogo.org
-Date: Sun, 12 Aug 2012 13:16:23 +0100
-Message-Id: <1344773783-17934-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-handheld][PATCH] zaurusd: remove dependency on procps
+Date: Sun, 12 Aug 2012 23:19:44 +0200
+Message-Id: <1344806385-16888-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][meta-initramfs][PATCH 1/2] klibc: fix runtime dependencies for shared utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,135 +40,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Aug 2012 12:29:47 -0000
+X-List-Received-Date: Sun, 12 Aug 2012 21:31:42 -0000
 
-With a little tweaking we don't need procps; we can rely on what busybox
-provides. If nothing else requires procps this saves some space on the
-target.
+* and remove bogus dependencies for the static utils
+* introduced by do_split_packages
+* bump INC_PR
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch    |   33 ++++++++++++++++++++
- recipes-bsp/zaurusd/zaurusd/zaurus-hinge.in        |   11 ++++---
- .../zaurusd/zaurusd/zaurus-hinge.matchbox-portrait |    4 +--
- recipes-bsp/zaurusd/zaurusd_git.bb                 |    4 +--
- 4 files changed, 43 insertions(+), 9 deletions(-)
- create mode 100644 recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
+ .../recipes-devtools/klibc/klibc-utils.inc         |   42 +++++++++++++++++++-
+ meta-initramfs/recipes-devtools/klibc/klibc.inc    |    4 +-
+ 2 files changed, 43 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch b/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
-new file mode 100644
-index 0000000..9eed68f
---- /dev/null
-+++ b/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
-@@ -0,0 +1,33 @@
-+From f271fa43ec63ed5650296a393403318ab0e553d4 Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 5 Aug 2012 01:41:16 +0100
-+Subject: [PATCH] scripts/zaurusd: use pidof instead of mangling output of ps
-+
-+busybox provides working pidof if sysvinit doesn't, so use that.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+---
-+ scripts/zaurusd.in |    5 +----
-+ 1 files changed, 1 insertions(+), 4 deletions(-)
-+
-+diff --git a/scripts/zaurusd.in b/scripts/zaurusd.in
-+index ad896aa..acb5158 100755
-+--- a/scripts/zaurusd.in
-++++ b/scripts/zaurusd.in
-+@@ -1,10 +1,7 @@
-+ #!/bin/sh
-+ 
-+ killproc() {            # kill the named process(es)
-+-        pid=`/bin/ps -e x |
-+-             /bin/grep $1 |
-+-             /bin/grep -v grep |
-+-             /bin/sed -e 's/^  *//' -e 's/ .*//'`
-++        pid=`/bin/pidof $1`
-+         [ "$pid" != "" ] && kill $pid
-+ }
-+ 
-+-- 
-+1.7.1
-+
-diff --git a/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.in b/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.in
-index 0fcad38..660e6cc 100644
---- a/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.in
-+++ b/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.in
-@@ -4,10 +4,7 @@
- #
- 
- killproc() {            # kill the named process(es)
--        pid=`/bin/ps -e x |
--             /bin/grep $1 |
--             /bin/grep -v grep |
--             /bin/sed -e 's/^  *//' -e 's/ .*//'`
-+        pid=`/bin/pidof $1`
-         [ "$pid" != "" ] && kill $pid
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
+index 8ce3d77..c7e36e3 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
+@@ -58,13 +58,51 @@ do_install_append() {
+         ln -s gzip ${D}${base_bindir}/zcat
  }
  
-@@ -19,7 +16,11 @@ if [ -z "$1" ]; then
-    exit 1
- fi
++RDEPENDS_klibc-utils-cat = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-chroot = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-cpio = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-dd = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-dmesg = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-false = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-fstype = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-gzip = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-halt = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-ipconfig = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-kill = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-kinit.shared = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-ln = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-losetup = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-ls = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-minips = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-mkdir = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-mkfifo = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-mknod = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-modprobe = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-mount = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-mv = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-nfsmount = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-nuke = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-pivot-root = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-poweroff = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-readlink = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-reboot = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-resume = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-run-init = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-sh.shared = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-sleep = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-sync = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-true = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-umount = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-uname = "${THIS_LIBKLIBC}"
++RDEPENDS_klibc-utils-wc = "${THIS_LIBKLIBC}"
++
+ PACKAGES_DYNAMIC = "${KLIBC_UTILS_PKGNAME}-*"
  
--panel_user="`ps aux|grep matchbox-panel|grep -v grep | awk '{print $1}'`"
-+if [ ps aux > /dev/null 2>&1 ] ; then
-+	panel_user="`ps aux|grep matchbox-panel|grep -v grep | awk '{print $1}'`"
-+else
-+	panel_user="`ps|grep matchbox-panel|grep -v grep | awk '{print $2}'`"
-+fi
+ python populate_packages_prepend () {
  
- STATE=$1
+     base_bin_dir = bb.data.expand('${base_bindir}', d)
+-    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_links=True, allow_dirs=True)
++    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_links=True, allow_dirs=True)
  
-diff --git a/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.matchbox-portrait b/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.matchbox-portrait
-index e540e66..bce305d 100644
---- a/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.matchbox-portrait
-+++ b/recipes-bsp/zaurusd/zaurusd/zaurus-hinge.matchbox-portrait
-@@ -21,9 +21,9 @@
-   if test -n "$panel_user"
-   then
-     echo "Running panel as user [$panel_user]"
--    ps aux | grep "$panel_user" | grep -q "mbinputmgr " || su $panel_user -c ${ZD_BINDIR}/mbinputmgr &
-+    ps aux 2>/dev/null || ps | grep "$panel_user" | grep -q "mbinputmgr " || su $panel_user -c ${ZD_BINDIR}/mbinputmgr &
-   else
-      # A failsafe can't hurt
-      echo "Warning: Running mbinputmgr as root!"
--     ps aux | grep -q "mbinputmgr " || ${ZD_BINDIR}/mbinputmgr &
-+     ps aux 2>/dev/null || ps | grep -q "mbinputmgr " || ${ZD_BINDIR}/mbinputmgr &
-   fi
-diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
-index db24c7b..821dbec 100644
---- a/recipes-bsp/zaurusd/zaurusd_git.bb
-+++ b/recipes-bsp/zaurusd/zaurusd_git.bb
-@@ -6,7 +6,7 @@ DEPENDS = "tslib"
+     base_sbin_dir = bb.data.expand('${base_sbindir}', d)
+-    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_dirs=True)
++    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_dirs=True)
+ }
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 7741a58..4963a29 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
+ # debugsources.list: No such file or directory:
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
  
- PE = "1"
- PV = "0.0+gitr${SRCPV}"
--PR = "r25"
-+PR = "r26"
+-INC_PR = "r0"
++INC_PR = "r1"
  
- SRCREV = "82b30c7865f007fff81372c3cdc71b2ff6843ccc"
- SRC_URI = "git://git.yoctoproject.org/zaurusd;protocol=git \
-@@ -17,6 +17,7 @@ SRC_URI = "git://git.yoctoproject.org/zaurusd;protocol=git \
- 	   file://disable-alsa-handling.patch \
- 	   file://avoid-rotated-server.patch \
- 	   file://new-make.patch \
-+	   file://scripts_pidof.patch \
- 	   file://zaurus-hinge.matchbox-portrait \
- 	   file://zaurus-hinge.matchbox-landscape \
- 	   file://zaurus-hinge.bl-on \
-@@ -57,6 +58,5 @@ inherit autotools pkgconfig update-rc.d
- INITSCRIPT_NAME = "zaurusd"
- INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
+ KLIBC_ARCH = '${TARGET_ARCH}'
+ KLIBC_ARCH_armeb = 'arm'
+@@ -47,3 +47,5 @@ do_configure () {
  
--RDEPENDS_${PN} = "procps"
- RRECOMMENDS_${PN} += "kernel-module-uinput"
- 
+         ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
+ }
++
++THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
 -- 
-1.7.9.5
+1.7.8.6
 
 
 
