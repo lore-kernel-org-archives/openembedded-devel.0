@@ -1,39 +1,33 @@
-Received: from mail-gh0-f175.google.com ([209.85.160.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1T1Gje-0003z2-0K
+	(envelope-from <mcrapet@gmail.com>) id 1T1Gl9-00046u-Js
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Aug 2012 15:00:38 +0200
-Received: by ghbz2 with SMTP id z2so401348ghb.6
+	Tue, 14 Aug 2012 15:02:11 +0200
+Received: by weyr6 with SMTP id r6so221695wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2012 05:48:43 -0700 (PDT)
+	Tue, 14 Aug 2012 05:50:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=yDPRLQWvyLeh/197OHCp6occnHEuSUn+L+6tOrD3sac=;
-	b=euv/8VxgiCUJtmspf1Kh48hXCiBH8eQJsmb1ZHLvKPl0pxA2Z8QQ0PIm6uBkyLIrCg
-	35t7qefqw2m2clIMf9jPHzC49yuqe199pax83W8mR0mRhbGzy2AGFglQo1cyUNbLo9gv
-	4W1VLGVcjvAQXx8ka1Zovn7frKVHaU4o/Ck8DmH1PazsxRbhGOjYGj0Wbgv5XQVUKQUC
-	dMlPbp9nc05no7BAcvQtQfQFvc+0pikJUybw8oK4pDcHUais2RbVZahkK7UnPBJ9ZiGe
-	IRieRyY8Dv5Bld5StyN+kM6c6LV+eOS/zwz/uDH2ZcitEWatfaqhvUdowuJjjoipmgxe
-	kA6w==
-Received: by 10.68.136.138 with SMTP id qa10mr30728122pbb.103.1344948522703;
-	Tue, 14 Aug 2012 05:48:42 -0700 (PDT)
-Received: from [192.168.1.101] ([94.205.108.162])
-	by mx.google.com with ESMTPS id sj5sm755857pbc.30.2012.08.14.05.48.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 14 Aug 2012 05:48:42 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <k0deme$loo$1@dough.gmane.org>
-Date: Tue, 14 Aug 2012 16:48:36 +0400
-Message-Id: <3E30F641-ACE9-41DA-BD4D-5467D0C6E081@gmail.com>
-References: <B39AAE57-63B2-4EFA-A037-4F225E1CB21B@gmail.com>
-	<k0d7ai$odu$1@dough.gmane.org>
-	<11ACFBF2-567C-4A7C-85B8-620806B8DF07@gmail.com>
-	<k0deme$loo$1@dough.gmane.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=eVKikkpiAL9sIPbSgMEObS4YuerdNcFwefIOXon/AQU=;
+	b=E/+kan5hligaSn3/ZSbA2J8UgMG95InCtsxAJdgkVQErUw4mA/QBFC6hYQRXo8HE7q
+	uCvOtxZOFuSoRbpFFvGf5Zbs6whdB1jo51/rsSQ5ermfPdu6h8wyIifx0ZuyElFDXtGK
+	EXvYG0HMaylvlnrVYQStHTFePRoqJhfofWMKaZeznhyLjZI3zwypDwNGUh8+WZ56+9/Q
+	cTFcVBda+UPVRSe5qq57uDKxfLJ101kFRk3Z3dXDFemS8qP0Is5d/Adj/kBC2pBwqV5Q
+	kOrpXgpOjZBPjy12526HcGUlnXveaeISfAIBAf0Gr706BxqdeJ/aHju3xzhsaOZuCZLP
+	W2qg==
+MIME-Version: 1.0
+Received: by 10.180.76.36 with SMTP id h4mr27694148wiw.13.1344948616900; Tue,
+	14 Aug 2012 05:50:16 -0700 (PDT)
+Received: by 10.194.22.5 with HTTP; Tue, 14 Aug 2012 05:50:16 -0700 (PDT)
+In-Reply-To: <k0d7ds$odu$2@dough.gmane.org>
+References: <CAL2sKTn13OQ4edHfMwEVzLrpEO1prWGJ_V-1ueZj4KH4BBTDtA@mail.gmail.com>
+	<k0d7ds$odu$2@dough.gmane.org>
+Date: Tue, 14 Aug 2012 14:50:16 +0200
+Message-ID: <CAL2sKTm8xG5o7MfWiALcXrzTsvqk-vR0VmkJbC4Wt4ecCZVxPQ@mail.gmail.com>
+From: Matthieu <mcrapet@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1278)
-Subject: Re: [meta-openembedded/toolchain-layer] Adding retired toolchain support for gcc-4.5.1 and eglibc-2.13
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [RFC][PATCH v2] plowshare: Add Git version (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +41,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2012 13:00:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Aug 2012 13:02:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Add recipe for plowshare (git repository).
 
-On Aug 14, 2012, at 4:01 PM, Koen Kooi wrote:
+v2:
+- fix big mistake DEPENDS => RDEPENDS
+- set SRCREV to empty string
+- keep PE=1 to respect upstream scheme
 
->> The gcc-4.5 recipe was adapted from the gcc-4.5.1 recipe from the =
-denzil
->> branch.
->=20
-> The meta-toolchain denzil branch had 4.5.4
+Signed-off-by: Matthieu Crapet <mcrapet@gmail.com>
+---
+ meta/recipes-support/plowshare/plowshare_git.bb |   27
++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta/recipes-support/plowshare/plowshare_git.bb
 
-Yes, you're right. I intentionally dropped it to 4.5.1, but I'll update =
-the existing
-recipes 4.5.4.
-
-Elvis Dowson=
-
+diff --git a/meta/recipes-support/plowshare/plowshare_git.bbb/meta/recipes-support/plowshare/
+plowshare_git.bb
+new file mode 100644
+index 0000000..f819255
+--- /dev/null
++++ b/meta/recipes-support/plowshare/plowshare_git.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "Command-line download/upload tool for file sharing hosters"
++HOMEPAGE = "http://code.google.com/p/plowshare/"
++SECTION = "console/utils"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++# Follow uptream (debian) naming convention,
++# for example: plowshare_1~git20120807-1_all.deb
++PV = "gitr${SRCPV}"
++PE = "1"
++SRCREV = ""
++
++RDEPENDS_${PN} = "bash curl"
++SRC_URI = "git://
+code.google.com/p/plowshare.git;protocol=http;branch=master"
++S = "${WORKDIR}/git"
++
++inherit allarch
++
++# Nothing to compile, it's scripts!
++do_compile() {
++ :
++}
++
++do_install() {
++ oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
++}
+--
+1.7.9.5
 
