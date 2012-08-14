@@ -1,39 +1,29 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1T17xb-0003Nh-6E
+	(envelope-from <mcrapet@gmail.com>) id 1T1Dv4-0005yy-MR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Aug 2012 05:38:27 +0200
-Received: by yenm1 with SMTP id m1so3908020yen.6
+	Tue, 14 Aug 2012 12:00:14 +0200
+Received: by wgbds1 with SMTP id ds1so3600249wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2012 20:26:32 -0700 (PDT)
+	Tue, 14 Aug 2012 02:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=DHWlZlBmzsQzE/CaLP88k8ArNOZgu0pauPt2LwHhAtY=;
-	b=Qd+7cNhUy/nVSMSBdYxV7y4tyABAe9E+6bx+5qtiQMKR4ruz5TGm5MZgAkMl5PcICX
-	BqJPrZ0j5x5qSD7NAzq3C6iqlXcvllI/oKZLyEh50EYIq4tYJrcNng+Kq+dp/ZovuS+F
-	7G0GGh9yZtnIVaw3QG9NrX9phj/GtLK8QAy6Iqmhr5XvB4tTx4svVTJrixvrdy1LuhyD
-	yqXAkQVfSaKPtHryLP0gFvhj1KgnwrAlizMwRLT3+maNgjV56bWPUk/Fzmy+3yDvUS1Q
-	62p9MaScNGsPbzfP4bUnyV68lM91NbSLtu/BvBjBxLCDTeqaJfwmWPbipExGuZ/5BJNM
-	enBA==
-Received: by 10.66.87.66 with SMTP id v2mr27174727paz.71.1344914792123;
-	Mon, 13 Aug 2012 20:26:32 -0700 (PDT)
-Received: from [192.168.1.101] ([94.205.108.162])
-	by mx.google.com with ESMTPS id nq6sm401194pbc.56.2012.08.13.20.26.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Aug 2012 20:26:31 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <CAMKF1sqqVTdy4ZT8p-Z7n=KjpSos1xBOKr6Y_7NFiQ=X7E7ybg@mail.gmail.com>
-Date: Tue, 14 Aug 2012 07:26:26 +0400
-Message-Id: <613645AA-807B-4575-BFDC-846EFA97B664@gmail.com>
-References: <B39AAE57-63B2-4EFA-A037-4F225E1CB21B@gmail.com>
-	<CAMKF1sqqVTdy4ZT8p-Z7n=KjpSos1xBOKr6Y_7NFiQ=X7E7ybg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.1278)
-Cc: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-openembedded/toolchain-layer] Adding retired toolchain support for gcc-4.5.1 and eglibc-2.13
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=r/Isb9zBtWxHlioKMi9vfPpS1Gp1dEeC2tqTxRXoUTI=;
+	b=r1yTThaeYkdthuuqccigbit8Hjo71ogiDZAoXxhHTAh768b9A8r5cmYLV+hk+TRTC1
+	V0ycNUb3J5ntW1EtHanqf9SAwCa3O2ZqGl2uPqKszxBgO++2JHjBMPS4GHMN+1lBv52F
+	SOCqHs8+K27E4oX/LTP49kEjG7ptKSnmwqUhmX3jmNhRDzw0/cTHtAnGR1UIyRi3H3SQ
+	g4FzuR3WeWZxE4PsfCHIqbiXpAQqE+sutbZX8QaNfN39E2Hnl+5G5BWbcKvvLBzrbuRI
+	VMHVNgOCW1ijh6YwG+4aTYG6zZ38ZAkZOTcybIvLFBA4R8uPqIsAKFhRyYDEwh4vmi+T
+	TI+w==
+MIME-Version: 1.0
+Received: by 10.216.135.148 with SMTP id u20mr7679554wei.137.1344937700338;
+	Tue, 14 Aug 2012 02:48:20 -0700 (PDT)
+Received: by 10.194.22.5 with HTTP; Tue, 14 Aug 2012 02:48:20 -0700 (PDT)
+Date: Tue, 14 Aug 2012 11:48:20 +0200
+Message-ID: <CAL2sKTn13OQ4edHfMwEVzLrpEO1prWGJ_V-1ueZj4KH4BBTDtA@mail.gmail.com>
+From: Matthieu <mcrapet@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [RFC][PATCH] plowshare: Add Git version (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2012 03:38:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Aug 2012 10:00:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Add recipe for plowshare (git repository).
 
-On Aug 14, 2012, at 4:15 AM, Khem Raj wrote:
+Signed-off-by: Matthieu Crapet <mcrapet@gmail.com>
+---
+ plowshare_git.bb |   25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 plowshare_git.bb
 
-> Were you able to build eglibc 2.13 with gcc 4.7
-> And run it
-
-The gcc-4.7 and eglibc-2.13 combination doesn't work, i.e. no
-login or bash prompt.
-
-I will try with gcc-4.6 and eglibc-2.13, since that combo is
-know to work, since the Denx ELDK 5.2.1 released based
-off yocto/denzil branch uses it.
-
-Will let you know how it goes.
-
-Best regards,
-
-Elvis Dowson
+diff --git a/plowshare_git.bb b/plowshare_git.bb
+new file mode 100644
+index 0000000..ec33bff
+--- /dev/null
++++ b/plowshare_git.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Command-line download/upload tool for file sharing hosters"
++HOMEPAGE = "http://code.google.com/p/plowshare/"
++SECTION = "console/utils"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++PV = "gitr${SRCPV}"
++PE = "1"
++SRCREV = "${AUTOREV}"
++DEPENDS = "bash curl"
++
++SRC_URI = "git://code.google.com/p/plowshare.git;protocol=http;branch=master"
++S = "${WORKDIR}/git"
++
++inherit allarch
++
++# Nothing to compile, it's scripts!
++do_compile() {
++	:
++}
++
++do_install() {
++	oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
++}
+--
+1.7.9.5
 
 
