@@ -1,35 +1,36 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1T11Qj-0003sJ-FN
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T14nf-0000fI-Aa
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Aug 2012 22:40:05 +0200
-Received: by yhjj56 with SMTP id j56so3497329yhj.6
+	Tue, 14 Aug 2012 02:15:59 +0200
+Received: by wgbdr1 with SMTP id dr1so3401230wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2012 13:28:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:subject:date:message-id
-	:cc:to:mime-version:x-mailer;
-	bh=ZFBtqXYp/lTW27Fe8aJS0ngzhmT+iQ9FAbDfFXu5CrM=;
-	b=H0TxlmnWtAF09P2yXr80ZkX11t9a9o4+PdiUWJkhYBOWTsdf8aJMAj/SbMaclz+TIB
-	KcWj/hCDjNegHn1A226ItbXU3MiD6K1I2v4XnZ8V90naJwJVHFOqY/JVATeS5ZglRChs
-	DkNMJt851imOsq2GMlyvYecEGmT7zMWAr/6uxH5dQU1FGdVrzhjeRys4oGoaSCrlGq2B
-	aGOv0m3qi+zw9DwY6IWMgFh4+ChnbqCYN9EY0PD8Yt9u49rfmpghlwQxfAeSq65W4tLf
-	ba63ciuE8/0qPAhrA/tKpOsSFZD+Ocq51I6ZMSrWZFRRiKD0pIx1mvulnvvZ9X0LDBNr
-	fAPw==
-Received: by 10.68.228.231 with SMTP id sl7mr20901405pbc.45.1344889691008;
-	Mon, 13 Aug 2012 13:28:11 -0700 (PDT)
-Received: from [192.168.1.101] ([94.205.108.162])
-	by mx.google.com with ESMTPS id rd7sm144833pbc.70.2012.08.13.13.28.08
+	Mon, 13 Aug 2012 17:04:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=TSbzPiA6pf4g/jGbTzY9wbOLIIhXiVCjKJE245kvny0=;
+	b=Jvv+YQvBcWyPlaZ6q3rp7EVD+jIYbbb+Fif6ZY0Ecz+2fdHH5OLT68e+1GUHaVMEZO
+	0076kHeRW6zU2DhQp2lhWZWOFkwd3AS+xJq6lCzEgi1tu+pa1J90xLri0APdsiaASWJt
+	UNWlO7QvGgxE2VlWPaZV0mdDnYu+tV/sqGa7DxkHRNlM8lNZ6PUh82Kvod6WqY+cF9Ya
+	omLs+T6bn63+ToVpUq+M+UrZyqm70j5YGCaDbXMFdTTsZX79spqGOXR/rU6iUm45n621
+	SOop6oxLRKxMRVCrjyQrwYXxwC3OAw0DGpAciqo99J8PkON1jaz9A9EzoaMZRNp1CppM
+	cx5w==
+Received: by 10.180.19.169 with SMTP id g9mr22558914wie.9.1344902645083;
+	Mon, 13 Aug 2012 17:04:05 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3A26.dip.t-dialin.net.
+	[91.10.58.38])
+	by mx.google.com with ESMTPS id el6sm19297370wib.8.2012.08.13.17.04.03
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Aug 2012 13:28:10 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
-Date: Tue, 14 Aug 2012 00:28:05 +0400
-Message-Id: <B39AAE57-63B2-4EFA-A037-4F225E1CB21B@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>, OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Apple Message framework v1278)
-X-Mailer: Apple Mail (2.1278)
-Subject: [meta-openembedded/toolchain-layer] Adding retired toolchain support for gcc-4.5.1 and eglibc-2.13
+	Mon, 13 Aug 2012 17:04:04 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Aug 2012 02:10:48 +0200
+Message-Id: <1344903048-2800-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-systemd,v2] wpa-supplicant: add systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2012 20:40:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Aug 2012 00:15:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
-      I've created a set of patches to add retired toolchain support for =
-gcc-4.5.1, to the meta-openembedded/toolchain-layer.=20
+* native systemd support came in with v1.0 [1]
+* needs [2] to work properly
+* mends my wlan under control of networkmanager
 
-I've also included a patch for eglibc-2.13. Builds for PowerPC 440 =
-processors soft-float don't work with eglibc-2.15 and 2.16.
+[1] http://hostap.epitest.fi/gitweb/gitweb.cgi?p=hostap-1.git;a=blob_plain;f=wpa_supplicant/ChangeLog
+[2] http://patches.openembedded.org/patch/34335/
 
-I could add it to the meta-xilinx layer, but I prefer to put retired =
-toolchain support into the toolchain layer, so that it is generally =
-available across all layers, in case someone needs it.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../wpa-supplicant/wpa-supplicant_1.0.bbappend     |    3 ---
+ .../wpa-supplicant/wpa-supplicant_1.0.bbappend     |   14 ++++++++++++++
+ 2 files changed, 14 insertions(+), 3 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+ create mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
 
-Do let me know if it is okay to go ahead and submit these patches for =
-inclusion into the meta-openembedded/toolchain-layer!
+diff --git a/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend b/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+deleted file mode 100644
+index 54da0ff..0000000
+--- a/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
++++ /dev/null
+@@ -1,3 +0,0 @@
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+- 
+-PRINC = "1"
+diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+new file mode 100644
+index 0000000..6f62cd8
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+@@ -0,0 +1,14 @@
++PRINC = "2"
++
++inherit systemd
++
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE = "wpa_supplicant.service"
++
++do_install_append () {
++    install -d ${D}${systemd_unitdir}/system
++    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
++}
++
++# systemd.bbclass does not catch all multiple-instance-service-files
++FILES_${PN}-systemd += "${systemd_unitdir}/system/"
+-- 
+1.7.4.4
 
-Best regards,
-
-Elvis Dowson=
 
 
