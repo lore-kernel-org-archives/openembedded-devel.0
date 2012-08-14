@@ -1,32 +1,36 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T14z3-0000r3-1N
+	(envelope-from <elvis.dowson@gmail.com>) id 1T17xb-0003Nh-6E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Aug 2012 02:27:45 +0200
-Received: by eekb57 with SMTP id b57so936935eek.6
+	Tue, 14 Aug 2012 05:38:27 +0200
+Received: by yenm1 with SMTP id m1so3908020yen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2012 17:15:51 -0700 (PDT)
+	Mon, 13 Aug 2012 20:26:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=H+eDE4nNwy504S9enbYj8l4HauSBAOZwBV68/6xnsUA=;
-	b=w0p/kUDf5dksCi1BtTG01DLbbrUeRSw5ITS+pb99NMHrZXtajwVlmVdBMoPQmJkdDw
-	QzlA6N6tA+mYCCvJe2PPJvWbSxdu0KUfwxV63K3NaJlt8w9moUuTu8DaiU2kIiinbLkb
-	FRslj5WDAs0rIjnQbiq+3DyolyuZUl6Nwr76rXhuPaR5pR+I17rqFTlbtRmZjAYn6/f+
-	C+FbYNJj4fwQJw95qjMiGycYBThPewBqYO1zrhkxng3ceXdNrl8BmGlqrHTo32ZTQGNa
-	4yEeOsvZOxtAZWvSBEPnSE/ctXCZI4glqzKZVSexjfa7kqI1SBDVYudLm8SvdJupTCaK
-	40oQ==
-MIME-Version: 1.0
-Received: by 10.14.203.69 with SMTP id e45mr16536353eeo.23.1344903350977; Mon,
-	13 Aug 2012 17:15:50 -0700 (PDT)
-Received: by 10.14.225.6 with HTTP; Mon, 13 Aug 2012 17:15:50 -0700 (PDT)
-In-Reply-To: <B39AAE57-63B2-4EFA-A037-4F225E1CB21B@gmail.com>
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=DHWlZlBmzsQzE/CaLP88k8ArNOZgu0pauPt2LwHhAtY=;
+	b=Qd+7cNhUy/nVSMSBdYxV7y4tyABAe9E+6bx+5qtiQMKR4ruz5TGm5MZgAkMl5PcICX
+	BqJPrZ0j5x5qSD7NAzq3C6iqlXcvllI/oKZLyEh50EYIq4tYJrcNng+Kq+dp/ZovuS+F
+	7G0GGh9yZtnIVaw3QG9NrX9phj/GtLK8QAy6Iqmhr5XvB4tTx4svVTJrixvrdy1LuhyD
+	yqXAkQVfSaKPtHryLP0gFvhj1KgnwrAlizMwRLT3+maNgjV56bWPUk/Fzmy+3yDvUS1Q
+	62p9MaScNGsPbzfP4bUnyV68lM91NbSLtu/BvBjBxLCDTeqaJfwmWPbipExGuZ/5BJNM
+	enBA==
+Received: by 10.66.87.66 with SMTP id v2mr27174727paz.71.1344914792123;
+	Mon, 13 Aug 2012 20:26:32 -0700 (PDT)
+Received: from [192.168.1.101] ([94.205.108.162])
+	by mx.google.com with ESMTPS id nq6sm401194pbc.56.2012.08.13.20.26.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 13 Aug 2012 20:26:31 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+In-Reply-To: <CAMKF1sqqVTdy4ZT8p-Z7n=KjpSos1xBOKr6Y_7NFiQ=X7E7ybg@mail.gmail.com>
+Date: Tue, 14 Aug 2012 07:26:26 +0400
+Message-Id: <613645AA-807B-4575-BFDC-846EFA97B664@gmail.com>
 References: <B39AAE57-63B2-4EFA-A037-4F225E1CB21B@gmail.com>
-Date: Mon, 13 Aug 2012 17:15:50 -0700
-Message-ID: <CAMKF1sqqVTdy4ZT8p-Z7n=KjpSos1xBOKr6Y_7NFiQ=X7E7ybg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Elvis Dowson <elvis.dowson@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAMKF1sqqVTdy4ZT8p-Z7n=KjpSos1xBOKr6Y_7NFiQ=X7E7ybg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.1278)
 Cc: OpenEmbedded Developer Mailing List
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-openembedded/toolchain-layer] Adding retired toolchain support for gcc-4.5.1 and eglibc-2.13
@@ -43,29 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2012 00:27:45 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Were you able to build eglibc 2.13 with gcc 4.7
-And run it
+X-List-Received-Date: Tue, 14 Aug 2012 03:38:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
 
-On Monday, August 13, 2012, Elvis Dowson <elvis.dowson@gmail.com> wrote:
-> Hi,
->       I've created a set of patches to add retired toolchain support for
-gcc-4.5.1, to the meta-openembedded/toolchain-layer.
->
-> I've also included a patch for eglibc-2.13. Builds for PowerPC 440
-processors soft-float don't work with eglibc-2.15 and 2.16.
->
-> I could add it to the meta-xilinx layer, but I prefer to put retired
-toolchain support into the toolchain layer, so that it is generally
-available across all layers, in case someone needs it.
->
-> Do let me know if it is okay to go ahead and submit these patches for
-inclusion into the meta-openembedded/toolchain-layer!
->
-> Best regards,
->
-> Elvis Dowson
+On Aug 14, 2012, at 4:15 AM, Khem Raj wrote:
+
+> Were you able to build eglibc 2.13 with gcc 4.7
+> And run it
+
+The gcc-4.7 and eglibc-2.13 combination doesn't work, i.e. no
+login or bash prompt.
+
+I will try with gcc-4.6 and eglibc-2.13, since that combo is
+know to work, since the Denx ELDK 5.2.1 released based
+off yocto/denzil branch uses it.
+
+Will let you know how it goes.
+
+Best regards,
+
+Elvis Dowson
+
 
