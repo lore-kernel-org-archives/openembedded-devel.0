@@ -1,35 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1T1hsv-0004PR-SI
-	for openembedded-devel@lists.linuxtogo.org;
-	Wed, 15 Aug 2012 20:00:02 +0200
-Received: by pbcwy7 with SMTP id wy7so158188pbc.6
-	for <openembedded-devel@lists.linuxtogo.org>;
-	Wed, 15 Aug 2012 10:48:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=Bl0rkJnLiz+zmlbp+34phQyPgio9tRBmJla708RycEM=;
-	b=PUwrl61EZBNoNaFtb+y0fgNtM5jeGJi66IJesGOcZ61uwoEldFt39dN9bVVJFm0zEs
-	XDfsZ53rLnkvpjqVN7Z4FVVMt0qt31tz9xhucyiFX1aFhuqnr6TaE3V5P8U1L0n2Jyxy
-	utXzyRncNADCX7rkL+n8eNxbKE+Lim2jUp/YgvQXl4b0s83YcyVbIEuxl3GVSDW8HJSz
-	iCoeEuA/oyepH0nJPgYQI+6lsfXEkjyKZZfsRgSbWx7fUUZ98ufwjxV9Qy4R921feZoW
-	HezJPixm8TvRB/5T6t7BEH4VkvXVoGxmJbZ7Usk1RFo7998H0slOI+/aGv5K54Y6WmWm
-	SY2Q==
-MIME-Version: 1.0
-Received: by 10.68.213.5 with SMTP id no5mr27732174pbc.24.1345052884685; Wed,
-	15 Aug 2012 10:48:04 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.36.105 with HTTP; Wed, 15 Aug 2012 10:48:04 -0700 (PDT)
-In-Reply-To: <1345031739-8374-1-git-send-email-paul.eggleton@linux.intel.com>
-References: <1345031739-8374-1-git-send-email-paul.eggleton@linux.intel.com>
-Date: Wed, 15 Aug 2012 14:48:04 -0300
-X-Google-Sender-Auth: gAS6bYc9-cywZzB31u-uxkvq8l4
-Message-ID: <CAP9ODKpUziM4W+UiK=da9UkO+UMA-wErx3QQCVM-Rbr7zx-XJQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <ross.burton@intel.com>) id 1T1ixl-0006E3-0t
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Aug 2012 21:09:05 +0200
+Received: from mail-we0-f180.google.com ([74.125.82.180])
+	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 15 Aug 2012 11:56:01 -0700
+Received: by weyt11 with SMTP id t11so1119845wey.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Aug 2012 11:56:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=Yi9SyS1d8luc39dM85p+Qp2JhFfjmRKaYK0mUjThbAg=;
+	b=bD3+hmWpCPHMc7JwBIRY9N+Yc3N95eH65mhUgRaDM7Yidrc6ObG68I3Jdp84jG1Rna
+	/a6lk6clyAHrpUMRwneM0DXitp+1k28Nl4xG1RnBZlTwj5UE0rQhVJ34NVgqGGguLY9v
+	vHNEZer8ogBD3W9/O4WV90YnvufeSpeMFIKNRBnjmy/epkjqgIvf2TcPMnK94hRR+Y//
+	XyIWTRC3YlGGH8a9LLYq1nhF6XVzuSSbURU9EL39e/nFs4mbHJ1bBxV0QzXlWiEgGAAm
+	SYSrVw+w7I6cYTH0NPw5im2HLv6uM6mBAad+tDjnrwv6fY1EZme1Z10ZpmjT46naZuXT
+	OJLQ==
+Received: by 10.216.153.207 with SMTP id f57mr11037927wek.196.1345056960018;
+	Wed, 15 Aug 2012 11:56:00 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35])
+	by mx.google.com with ESMTPS id el6sm30288572wib.8.2012.08.15.11.55.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 15 Aug 2012 11:55:59 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@lists.linuxtogo.org
-Subject: Re: [meta-oe][PATCH] freerdp-extension-xpunlimited: inherit gitpkgv
+Date: Wed, 15 Aug 2012 19:55:49 +0100
+Message-Id: <1345056951-14036-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+X-Gm-Message-State: ALoCoQkYPtgsrEhTjUbmSBKlkKFwllsXW8EtkrLnXFPizsVdE51LaD41RrDWbd4+vg5C/0nFLiN5
+Subject: [PATCH 0/2] Add evolution-data-server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2012 18:00:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Aug 2012 19:09:05 -0000
 
-On Wed, Aug 15, 2012 at 8:55 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> If you refer to GITPKGVTAG you need to inherit gitpkgv or the result is
-> a parsing error.
->
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+As part of pruning Sato in oe-core, move libical and evolution-data-server to
+meta-gnome.
 
-Acked-by: 	Otavio Salvador <otavio@ossystems.com.br>
+Ross Burton (2):
+  meta-gnome: add libical
+  meta-gnome: add evolution-data-server
+
+ .../avoid_automake_errors.patch                    |   83 ++++++++
+ .../eds/evolution-data-server/depbuildfix.patch    |   78 ++++++++
+ .../fix_for_automake-1.12.x.patch                  |   28 +++
+ .../eds/evolution-data-server/iconv-detect.h       |    5 +
+ .../evolution-data-server/new-contact-fix.patch    |   23 +++
+ .../eds/evolution-data-server/nossl.patch          |   70 +++++++
+ .../eds/evolution-data-server/oh-contact.patch     |  203 ++++++++++++++++++++
+ .../eds/evolution-data-server/old-gdk-api.patch    |   19 ++
+ .../optional_imapx_provider.patch                  |   64 ++++++
+ .../recipes-gnome/eds/evolution-data-server_git.bb |  111 +++++++++++
+ .../libical/files/pthread-fix.patch                |   52 +++++
+ meta-gnome/recipes-support/libical/libical_0.48.bb |   17 ++
+ 12 files changed, 753 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/avoid_automake_errors.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/depbuildfix.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/fix_for_automake-1.12.x.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/iconv-detect.h
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/new-contact-fix.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/nossl.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/oh-contact.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/old-gdk-api.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/optional_imapx_provider.patch
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+ create mode 100644 meta-gnome/recipes-support/libical/files/pthread-fix.patch
+ create mode 100644 meta-gnome/recipes-support/libical/libical_0.48.bb
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.10.4
+
 
 
