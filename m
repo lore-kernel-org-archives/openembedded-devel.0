@@ -1,35 +1,34 @@
-Received: from mail-gg0-f175.google.com ([209.85.161.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1T1mMF-0002Yn-A5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Aug 2012 00:46:35 +0200
-Received: by ggmq1 with SMTP id q1so2547915ggm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Aug 2012 15:34:38 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1T1rai-0000AI-EY
+	for openembedded-devel@lists.linuxtogo.org;
+	Thu, 16 Aug 2012 06:21:52 +0200
+Received: by eekb57 with SMTP id b57so540299eek.6
+	for <openembedded-devel@lists.linuxtogo.org>;
+	Wed, 15 Aug 2012 21:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=ihdUJ041QkdqHGHs0z7+S1qm9GzN+tmNUYZwhP9bJqQ=;
-	b=MA6Pz03MpryE/mx7dtzlaXrpgoZ0b910XXkccH82dfMo+0sH+tptMAU+lq2TFpIyFS
-	d+TItQoTcWaHNNGL8s4P17YQT7ORFab/pbdw70KhxeHbG5q1+Ffrv2RNhP/Hy0NdfW4S
-	5jW1Dz3Q+1Vi/DC0Tn+UkQtJMUt1TnxnQaGoGDjIL41PSzRdIauvivpgkXT5Nn8c8BuZ
-	8C4HLkbIrLmrttBh1JY21oxWsWeuNn9u5ZofxeT+UfYdyy4f4LBxf8COs+gKwgmliovX
-	2ojOt1aPVMzlISWvXqGfzakGPB16gT2NmL+NsUIjB7LbLDFGZstrFH/jecid+CPyDF2K
-	d5ow==
-Received: by 10.236.165.35 with SMTP id d23mr21067164yhl.127.1345070078318;
-	Wed, 15 Aug 2012 15:34:38 -0700 (PDT)
-Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id d66sm5196971yhe.1.2012.08.15.15.34.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 15 Aug 2012 15:34:36 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=MKb1Rm1DcEpDpO0hJ3qMa5g7iMMG5qFch8+m2+iNKpk=;
+	b=amA3EjjpRHIevPNHbgfHSQhavSfYPGjCSrvSySFBDvRPaSmQVHuDAk74aYKRq5muRl
+	PuNbYEnYSY0FMHK8vNMGfbRmaN6fXOfVarZ5bhfho4FryYDpt/NXuQ4IkOWq/jv7n/vI
+	M0CImULzq/ukH8BvqQrqHeezXd7/fwuwHsZzDlnAafUg55s0h8UYcYlODQqkJHqCh55K
+	Zqfp0LVpz7RFXJYN3r36oV9kzANiYtb/ONrrea6wdFmtTgdHZZKr1Pz3tJAjBmMUPc0j
+	fTGWdpw/2s5Vt6Uoae3bmUV7y03lFjw3wXmpP7M98oiVwmwGPDXqUG/GomEvSizGDkoN
+	EfVw==
+Received: by 10.14.215.197 with SMTP id e45mr27087700eep.36.1345090195770;
+	Wed, 15 Aug 2012 21:09:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.14.225.6 with HTTP; Wed, 15 Aug 2012 21:09:25 -0700 (PDT)
+In-Reply-To: <CAP9ODKpUziM4W+UiK=da9UkO+UMA-wErx3QQCVM-Rbr7zx-XJQ@mail.gmail.com>
+References: <1345031739-8374-1-git-send-email-paul.eggleton@linux.intel.com>
+	<CAP9ODKpUziM4W+UiK=da9UkO+UMA-wErx3QQCVM-Rbr7zx-XJQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 15 Aug 2012 21:09:25 -0700
+Message-ID: <CAMKF1srS0y-TDqYJHq3jzoaz0nDmn-OP_F9R_bh5FptOzXCEvg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Aug 2012 19:34:19 -0300
-Message-Id: <1345070059-29702-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][for-denzil][PATCH] libxaw: Fix libxaw-dev to not depends on non-existent libxaw package
+Cc: openembedded-devel@lists.linuxtogo.org
+Subject: Re: [meta-oe][PATCH] freerdp-extension-xpunlimited: inherit gitpkgv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2012 22:46:35 -0000
+X-List-Received-Date: Thu, 16 Aug 2012 04:21:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The libxaw recipe generate a binary package for each soname of libxaw
-(currently libxaw6-6 and libxaw-7-7) but no libxaw so libxaw-dev
-cannot depends on it.
+On Wed, Aug 15, 2012 at 10:48 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Wed, Aug 15, 2012 at 8:55 AM, Paul Eggleton
+> <paul.eggleton@linux.intel.com> wrote:
+>> If you refer to GITPKGVTAG you need to inherit gitpkgv or the result is
+>> a parsing error.
 
-Reported-by: Daiane Angolini <daiane.angolini@freescale.com>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+since its not working and therefore carries no baggage lets try not
+use GITPKGVTAG if possible ?
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
-index 89338d9..88863a7 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
-@@ -5,6 +5,7 @@ DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp pr
- LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
- 
- PE = "1"
-+PR = "r1"
- 
- SRC_URI[md5sum] = "f1ea52debce7a18cc26b21647a00ad8b"
- SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239ee1bdd"
-@@ -24,4 +25,7 @@ FILES_libxaw6 = "${libdir}/libXaw*.so.6*"
- FILES_libxaw7 = "${libdir}/libXaw*.so.7*"
- FILES_libxaw8 = "${libdir}/libXaw8.so.8*"
- 
-+# Avoid dependency on libxaw as it is not build
-+RDEPENDS_${PN}-dev = ""
-+
- XORG_PN = "libXaw"
--- 
-1.7.2.5
 
+>>
+>> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>
+> Acked-by:       Otavio Salvador <otavio@ossystems.com.br>
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
