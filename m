@@ -1,31 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T1rai-0000AI-EY
-	for openembedded-devel@lists.linuxtogo.org;
-	Thu, 16 Aug 2012 06:21:52 +0200
-Received: by eekb57 with SMTP id b57so540299eek.6
-	for <openembedded-devel@lists.linuxtogo.org>;
-	Wed, 15 Aug 2012 21:09:55 -0700 (PDT)
+	(envelope-from <otavio.salvador@gmail.com>) id 1T1ycF-0003uc-EG
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Aug 2012 13:51:55 +0200
+Received: by pbcwy7 with SMTP id wy7so1744329pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Aug 2012 04:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=MKb1Rm1DcEpDpO0hJ3qMa5g7iMMG5qFch8+m2+iNKpk=;
-	b=amA3EjjpRHIevPNHbgfHSQhavSfYPGjCSrvSySFBDvRPaSmQVHuDAk74aYKRq5muRl
-	PuNbYEnYSY0FMHK8vNMGfbRmaN6fXOfVarZ5bhfho4FryYDpt/NXuQ4IkOWq/jv7n/vI
-	M0CImULzq/ukH8BvqQrqHeezXd7/fwuwHsZzDlnAafUg55s0h8UYcYlODQqkJHqCh55K
-	Zqfp0LVpz7RFXJYN3r36oV9kzANiYtb/ONrrea6wdFmtTgdHZZKr1Pz3tJAjBmMUPc0j
-	fTGWdpw/2s5Vt6Uoae3bmUV7y03lFjw3wXmpP7M98oiVwmwGPDXqUG/GomEvSizGDkoN
-	EfVw==
-Received: by 10.14.215.197 with SMTP id e45mr27087700eep.36.1345090195770;
-	Wed, 15 Aug 2012 21:09:55 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=2H5kF7y5OTa4L8KuuIdztpDNKoKhjXLe5TTvCPqCx4w=;
+	b=nO4/bCdZxR3bSiQCcE+H4oCKvzbyqiwpWWQBOFYKgLsG4Zr6Fc5NMPAFTNlgxyvrCH
+	popkLd4wBMgafa6E99i/EyAybqYxml2BttnBq8qmifw/ZfJi6pNd+9A48P5xSXI/8fZJ
+	twdqwvrMngGaJ6ePXrmLf/zOlSyGQg09H0Z2yO/A914/DAUb+RBjTGgV+rVN6nyjwKk3
+	ebaiJZAXifJSDt2QS//DXVYP0io9zvsQz07j7wOMiTgRRmfKu3Ta4C5P+PxH6sshVi8h
+	xEI/f5D4xbnWut3mJbTu844WSdAMtPZD6atUsmop3VsPAg5N2xNyF6RTLM7ZpKv2mE+2
+	qJDg==
 MIME-Version: 1.0
-Received: by 10.14.225.6 with HTTP; Wed, 15 Aug 2012 21:09:25 -0700 (PDT)
-In-Reply-To: <CAP9ODKpUziM4W+UiK=da9UkO+UMA-wErx3QQCVM-Rbr7zx-XJQ@mail.gmail.com>
+Received: by 10.66.76.196 with SMTP id m4mr1703364paw.61.1345117197334; Thu,
+	16 Aug 2012 04:39:57 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.36.105 with HTTP; Thu, 16 Aug 2012 04:39:57 -0700 (PDT)
+In-Reply-To: <CAMKF1srS0y-TDqYJHq3jzoaz0nDmn-OP_F9R_bh5FptOzXCEvg@mail.gmail.com>
 References: <1345031739-8374-1-git-send-email-paul.eggleton@linux.intel.com>
 	<CAP9ODKpUziM4W+UiK=da9UkO+UMA-wErx3QQCVM-Rbr7zx-XJQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 15 Aug 2012 21:09:25 -0700
-Message-ID: <CAMKF1srS0y-TDqYJHq3jzoaz0nDmn-OP_F9R_bh5FptOzXCEvg@mail.gmail.com>
+	<CAMKF1srS0y-TDqYJHq3jzoaz0nDmn-OP_F9R_bh5FptOzXCEvg@mail.gmail.com>
+Date: Thu, 16 Aug 2012 08:39:57 -0300
+X-Google-Sender-Auth: 8eWQDKCi2XwNpzJ-99wW_bzttlQ
+Message-ID: <CAP9ODKrDoKKc9hU4bdRr2SeqD6w92bfsyKe_vgf6vrBJ7FKmBg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: openembedded-devel@lists.linuxtogo.org
 Subject: Re: [meta-oe][PATCH] freerdp-extension-xpunlimited: inherit gitpkgv
@@ -42,33 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2012 04:21:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 16 Aug 2012 11:51:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 15, 2012 at 10:48 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Wed, Aug 15, 2012 at 8:55 AM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
->> If you refer to GITPKGVTAG you need to inherit gitpkgv or the result is
->> a parsing error.
-
-since its not working and therefore carries no baggage lets try not
-use GITPKGVTAG if possible ?
-
-
->>
->> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+On Thu, Aug 16, 2012 at 1:09 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Aug 15, 2012 at 10:48 AM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> On Wed, Aug 15, 2012 at 8:55 AM, Paul Eggleton
+>> <paul.eggleton@linux.intel.com> wrote:
+>>> If you refer to GITPKGVTAG you need to inherit gitpkgv or the result is
+>>> a parsing error.
 >
-> Acked-by:       Otavio Salvador <otavio@ossystems.com.br>
->
-> --
-> Otavio Salvador                             O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> since its not working and therefore carries no baggage lets try not
+> use GITPKGVTAG if possible ?
+
+Why it is not working? I've been using it internally a lot and it
+works fine for me.
+
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
