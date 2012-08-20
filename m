@@ -1,37 +1,38 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T3NAB-0000TQ-2u
+	(envelope-from <martin.jansa@gmail.com>) id 1T3NAL-0000WA-4W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 10:16:44 +0200
-Received: by wgbdr1 with SMTP id dr1so4519280wgb.24
+	Mon, 20 Aug 2012 10:16:53 +0200
+Received: by weyr6 with SMTP id r6so3979076wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 01:04:41 -0700 (PDT)
+	Mon, 20 Aug 2012 01:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=iQIRdeo+E+mavhOJ0WLfrmjTx8+QxRRsCeiMgpui5oA=;
-	b=ihx0n0J+LVJu1ntqjBG8WIE51usqIuyqV7GRU/DbX8ozpADXEgb/6lbVDkSu78qttZ
-	cjnPu08a8+kQ/18Bo6MgPgSDFPegVkkQ0MMTqcHcjNE9gZjQsanWnU2GMXaI3GHu553T
-	npYsNn8DZ92F4dHD/tnib5p5Q4d9f73mivTa9jpT732RIfqtO1pI6I9nPBGgnDqq4fFk
-	hIXKihSwYvq8Yz0KSaxsg8bxmgL3MPrsSyVOypfmxq7E+ZZ4rz+1/tmH/MBj7Vwhxxeu
-	MxzKILGCfxqDjywDmAqhbrqlOw9+9JCVj//Iy5fADzCufI+SlV0XT3W1h2hb9DcKalNa
-	p/Sw==
-Received: by 10.216.137.32 with SMTP id x32mr6455061wei.95.1345449881161;
-	Mon, 20 Aug 2012 01:04:41 -0700 (PDT)
+	bh=kuqD5AbRHjOAg7QhONAnj5KTEVgll5kRvU/wcvwwQDY=;
+	b=KGOCuaO/YX3feAIEz+eEv5xSl2tZMPBIqcVvTfqflzXkvkPoDcw4nAJ/TdvFtDd+lf
+	EBYwm5vcIpaGHEoVo144pjvD/IpFISgJU62S2sI39MDpX+SntmAig30BeOkNCNrawNvj
+	W0rNkVJnwxQjZjxbwRXIHDUjruzTlFZkZCICN/lKNmIC6VVJahUmQiW540ZwCVEzggqL
+	wc5AENgNRxPLZ1P5ts0Qvt9pu3s5iWhIh3D95WAlwvscdyY8sihUTfP+EUF/2+XIaQNw
+	Y3bKvmkVAg+kEqGHueYyNaaPG5FSWxYp1hlvdxv2JG7KMJKZdw95NvAKWciYXG0tgkcW
+	/UCQ==
+Received: by 10.180.109.129 with SMTP id hs1mr26917393wib.0.1345449891254;
+	Mon, 20 Aug 2012 01:04:51 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o2sm39883780wiz.11.2012.08.20.01.04.39
+	by mx.google.com with ESMTPS id b7sm39835528wiz.9.2012.08.20.01.04.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 01:04:40 -0700 (PDT)
+	Mon, 20 Aug 2012 01:04:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 10:04:39 +0200
-Message-Id: <695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
+Date: Mon, 20 Aug 2012 10:04:40 +0200
+Message-Id: <e008cc8688504687b1e3a62a149a78d3da1375e7.1345449825.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <cover.1344599409.git.Martin.Jansa@gmail.com>
+In-Reply-To: <695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
 References: <cover.1344599409.git.Martin.Jansa@gmail.com>
+	<695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1345449825.git.Martin.Jansa@gmail.com>
 References: <cover.1345449825.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/6] xf86-video-glamo: disable KMS, fix build with KMS disabled
+Subject: [meta-oe][PATCH 5/6] systemd.bbclass: add option to disable automatic RRECOMMENDS pkg-systemd_base -> pkg-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,77 +46,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 08:16:44 -0000
-
-* RDEPENDS are not needed without KMS
-* libdrm in meta-openmoko doesn't provide support for glamo, so not it would fail to build with KMS enabled
+X-List-Received-Date: Mon, 20 Aug 2012 08:16:53 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../0001-fix-build-with-KMS-disabled.patch         |   29 ++++++++++++++++++++
- .../xorg-driver/xf86-video-glamo_git.bb            |    6 ++--
- 2 files changed, 32 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-fix-build-with-KMS-disabled.patch
+ meta-systemd/classes/systemd.bbclass |   16 ++++++++++------
+ 1 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-fix-build-with-KMS-disabled.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-fix-build-with-KMS-disabled.patch
-new file mode 100644
-index 0000000..25e8320
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-fix-build-with-KMS-disabled.patch
-@@ -0,0 +1,29 @@
-+From f485e878bc8bb0e381a38a30009308c82fa8d672 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Thu, 16 Aug 2012 08:18:56 +0200
-+Subject: [PATCH] fix build with KMS disabled
+diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
+index 4036f91..96d7f8f 100644
+--- a/meta-systemd/classes/systemd.bbclass
++++ b/meta-systemd/classes/systemd.bbclass
+@@ -2,6 +2,8 @@ DEPENDS_append = " systemd-systemctl-native"
+ 
+ SYSTEMD_AUTO_ENABLE ??= "enable"
+ 
++SYSTEMD_AUTO_RRECOMMENDS ??= "enable"
 +
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/glamo.h |    3 +++
-+ 1 files changed, 3 insertions(+), 0 deletions(-)
-+
-+diff --git a/src/glamo.h b/src/glamo.h
-+index d4a2f19..5fd5c04 100644
-+--- a/src/glamo.h
-++++ b/src/glamo.h
-+@@ -37,8 +37,11 @@
-+ #include "xf86.h"
-+ #include "exa.h"
-+ #include <linux/fb.h>
-++
-++#ifdef HAVE_KMS
-+ #include <libdrm/drm.h>
-+ #include <libdrm/glamo_bo.h>
-++#endif
-+ 
-+ #define GLAMO_REG_BASE(c)		((c)->attr.address[0])
-+ #define GLAMO_REG_SIZE(c)		(0x2400)
-+-- 
-+1.7.8.6
-+
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-index 5d752db..6fb78ab 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-@@ -4,16 +4,16 @@ DEPENDS += "libdrm"
+ systemd_postinst() {
+ OPTS=""
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=d8cbd99fff773f92e844948f74ef0df8"
+@@ -208,12 +210,14 @@ python populate_packages_prepend () {
+         if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
+             rdepends = '%s %s' % (rdepends, pkg_systemd_base)
+         d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
+-        # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
+-        rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
+-        # not rrecommending myself AND avoid double entries
+-        if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
+-            rrecommends = '%s %s' % (rrecommends, pkg_systemd)
+-        d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
++        auto_rrecommends = d.getVar('SYSTEMD_AUTO_RRECOMMENDS', 1) or 'enable'
++        if auto_rrecommends == 'enable':
++            # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
++            rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
++            # not rrecommending myself AND avoid double entries
++            if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
++                rrecommends = '%s %s' % (rrecommends, pkg_systemd)
++            d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
  
--RDEPENDS_${PN} = "xserver-xorg-extension-dri xserver-xorg-extension-dri2 xserver-xorg-extension-glx"
- PE = "2"
- PV = "1.0.0+gitr${SRCPV}"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=master \
-            file://0001-glamo-kms-driver-drop-unused-xf86_config.patch \
-+           file://0001-fix-build-with-KMS-disabled.patch \
-           "
- 
- S = "${WORKDIR}/git"
- SRCREV = "cb9ed17035a79e49dde26a1e7e2bc5f10fd8144b"
- 
--EXTRA_OECONF = " --enable-kms "
-+EXTRA_OECONF = " --disable-kms "
+     # run all modifications once when creating package
+     if os.path.exists('${D}'):
 -- 
 1.7.8.6
 
