@@ -1,37 +1,39 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T3ZDH-0006ex-Nc
+	(envelope-from <martin.jansa@gmail.com>) id 1T3ZDN-0006ex-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 23:08:43 +0200
-Received: by weyr6 with SMTP id r6so4416325wey.6
+	Mon, 20 Aug 2012 23:08:49 +0200
+Received: by mail-we0-f175.google.com with SMTP id r6so4416325wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 13:56:41 -0700 (PDT)
+	Mon, 20 Aug 2012 13:56:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=mYG1rB+vK5Avc4xCiH1Rz6yjXRGWTPn9oao368AXwwI=;
-	b=mBZ4HvTBCkCVLWlpuvAVI2XlznKB4wY9Id1lydom19LBs2zg1W32Wvb11ZFPPzIq/T
-	iRsStjsgpwhl5PkFXMAtkhcJGP++CsEOKz63Ucaf6a8amuMUKgXPED3+V28hl1hCKnZv
-	1zKhSjm6wjEe7fDwqKlTCivWEPnzgwvJciukxa1gUiX1v6gKD6dQqUdN6suCSLQp4T6w
-	HYKTApxYmIcqcCLTpehof9CTZjo8wuExNrLrO1UpvL7leKEwKTA2CnXpP5RFCAjQhvpj
-	Ao36+LoHa56X8aiNfJrr08LFGxhBWXSoG2IwRccTptW2ByBbWXyOM6nZ9BcxxTbZWcZ+
-	Lo8w==
-Received: by 10.180.86.106 with SMTP id o10mr31810185wiz.22.1345496201091;
-	Mon, 20 Aug 2012 13:56:41 -0700 (PDT)
+	:in-reply-to:references:mime-version:content-type
+	:content-transfer-encoding;
+	bh=vWWAu3RgzlT+vhQOd+3/rhkNDMYTPhXEHvFyqIhqFf8=;
+	b=fa0oihbJ5HgSK23L5A4OS17Ln77evjdvIAPE6r5psnjuGpf8/i3Yb0g7Qz21GxuYZB
+	eOySO8WWDjWIHb6Vrv5x0I0dPiCy5PD6kLCQlsp2bfeGynMh6U0QlBCxZdAC0itMyEQz
+	WGoL2DTHPqnXMYWZpCV93rmL6w6MyI2/X+nsfj27lYa6RYe1x+9pw4dui9uUB4TTieLq
+	O4uUmVPoBdkG+AKS7Ngz5FvaVSoJjkDKEAbbRKyPIVKpxRwozh/avBA499t77LhXY1hy
+	5r4Su412QmYKuV5QtitNxttPThevbNwU9b8E6JGQrXETuinqoYNWqmWKI2EfDPVwVuY8
+	R+0g==
+Received: by 10.216.68.2 with SMTP id k2mr7718079wed.69.1345496209384;
+	Mon, 20 Aug 2012 13:56:49 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t7sm44375991wix.6.2012.08.20.13.56.39
+	by mx.google.com with ESMTPS id h9sm29945096wiz.1.2012.08.20.13.56.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 13:56:39 -0700 (PDT)
+	Mon, 20 Aug 2012 13:56:47 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 22:56:28 +0200
-Message-Id: <d94c80615c39f707373978b4df5df423d9781051.1345496053.git.Martin.Jansa@gmail.com>
+Date: Mon, 20 Aug 2012 22:56:29 +0200
+Message-Id: <72f8ed45570c55c7dc293996ef793253ab8510a8.1345496053.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <cover.1345496053.git.Martin.Jansa@gmail.com>
 References: <cover.1345496053.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1345496053.git.Martin.Jansa@gmail.com>
 References: <cover.1345496053.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/8] machine_kernel_pr.bbclass: provides MACHINE_KERNEL_PR functionality
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 2/8] pango: remove and use oe-core version 1.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 21:08:43 -0000
+X-List-Received-Date: Mon, 20 Aug 2012 21:08:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Andreas Müller <schnitzeltony@googlemail.com>
 
-Diffing with the OE-Core's kernel.bbclass only difference is setting of
-machine kernel pr. So lets convert it to a separate class which provides
-the added functionality and let everyone use kernel.bbclass from kernel
-
-It needs the dependent layers to inherit this class in addition to
-kernel.bbclass.
-
-After dependent layers are updated we can remove meta-oe copy of
-kernel.bbclass, it leaves up with one less conflict with OE-Core.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/classes/machine_kernel_pr.bbclass |    8 ++++++++
- 1 files changed, 8 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/classes/machine_kernel_pr.bbclass
+ .../pango/pango-1.29.4/no-tests.patch              |   11 -----------
+ meta-oe/recipes-graphics/pango/pango_1.29.4.bb     |   10 ----------
+ 2 files changed, 0 insertions(+), 21 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
+ delete mode 100644 meta-oe/recipes-graphics/pango/pango_1.29.4.bb
 
-diff --git a/meta-oe/classes/machine_kernel_pr.bbclass b/meta-oe/classes/machine_kernel_pr.bbclass
-new file mode 100644
-index 0000000..463b64d
---- /dev/null
-+++ b/meta-oe/classes/machine_kernel_pr.bbclass
-@@ -0,0 +1,8 @@
-+python __anonymous () {
-+
-+    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
-+
-+    if machine_kernel_pr:
-+        d.setVar('PR', machine_kernel_pr)
-+}
-+
+diff --git a/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch b/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
+deleted file mode 100644
+index ce64db1..0000000
+--- a/meta-oe/recipes-graphics/pango/pango-1.29.4/no-tests.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+-diff -uNr pango-1.29.4.orig/Makefile.am pango-1.29.4/Makefile.am
+---- pango-1.29.4.orig/Makefile.am	2011-08-16 03:11:08.000000000 +0200
+-+++ pango-1.29.4/Makefile.am	2011-09-30 16:11:53.792567952 +0200
+-@@ -1,6 +1,6 @@
+- ## Process this file with automake to create Makefile.in.
+- 
+--SUBDIRS= pango modules pango-view examples docs tools tests build
+-+SUBDIRS= pango modules pango-view examples docs tools build
+- 
+- EXTRA_DIST = 			\
+- 	autogen.sh		\
+diff --git a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb b/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
+deleted file mode 100644
+index ea79a63..0000000
+--- a/meta-oe/recipes-graphics/pango/pango_1.29.4.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require recipes-graphics/pango/pango.inc
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+-
+-SRC_URI[archive.md5sum] = "a5ee785f4f31d6bdd8625a09ea3f8b4b"
+-SRC_URI[archive.sha256sum] = "f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a5afd750747ff2b"
+-
+-SRC_URI += "file://no-tests.patch"
+-
+-PR = "r4"
 -- 
 1.7.8.6
 
