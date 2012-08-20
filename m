@@ -1,38 +1,38 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T3NAL-0000WA-4W
+	(envelope-from <martin.jansa@gmail.com>) id 1T3NAS-0000ck-MI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 10:16:53 +0200
-Received: by weyr6 with SMTP id r6so3979076wey.6
+	Mon, 20 Aug 2012 10:17:00 +0200
+Received: by wibhn17 with SMTP id hn17so3069734wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 01:04:51 -0700 (PDT)
+	Mon, 20 Aug 2012 01:04:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=kuqD5AbRHjOAg7QhONAnj5KTEVgll5kRvU/wcvwwQDY=;
-	b=KGOCuaO/YX3feAIEz+eEv5xSl2tZMPBIqcVvTfqflzXkvkPoDcw4nAJ/TdvFtDd+lf
-	EBYwm5vcIpaGHEoVo144pjvD/IpFISgJU62S2sI39MDpX+SntmAig30BeOkNCNrawNvj
-	W0rNkVJnwxQjZjxbwRXIHDUjruzTlFZkZCICN/lKNmIC6VVJahUmQiW540ZwCVEzggqL
-	wc5AENgNRxPLZ1P5ts0Qvt9pu3s5iWhIh3D95WAlwvscdyY8sihUTfP+EUF/2+XIaQNw
-	Y3bKvmkVAg+kEqGHueYyNaaPG5FSWxYp1hlvdxv2JG7KMJKZdw95NvAKWciYXG0tgkcW
-	/UCQ==
-Received: by 10.180.109.129 with SMTP id hs1mr26917393wib.0.1345449891254;
-	Mon, 20 Aug 2012 01:04:51 -0700 (PDT)
+	bh=4RoqQUTF42RpNO19pQ+bjS8a/8Ez4TTbnMqb/0DSigk=;
+	b=dnp5K81GfaCei7uzHj+SWHg2d7jK7UBpwYdUsJj2d2Omkt8g8ejrmuajsQXbE19VGY
+	6QwC0pTq7rMbqHkjdcqGyWlwhHJF/+K27Ktg8xrIVfOSrKztQyxp28CLLazUOqzoh1Nm
+	/rDdnmT830dAhk5e+ECIqhkZMXc/qOAuGCCc0pbFWhZ6diAYPpjW2TSD0tieg0WT7c0z
+	ISkcB/e2B2N2r8Cr8WmpD4Z6cCX9zODnE5bxhz9zsOgNFzyukmFvtZxW8ddWLyYRbsZ9
+	vZuPHL+gQRE9n5JcYW5brtN1FDe/w7sM5BBSYIjm2RJ42wyDFQB92dE6NEZmhOVbiB0K
+	VKPA==
+Received: by 10.180.97.106 with SMTP id dz10mr26763819wib.21.1345449898729;
+	Mon, 20 Aug 2012 01:04:58 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b7sm39835528wiz.9.2012.08.20.01.04.49
+	by mx.google.com with ESMTPS id h9sm26838970wiz.1.2012.08.20.01.04.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 01:04:50 -0700 (PDT)
+	Mon, 20 Aug 2012 01:04:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 10:04:40 +0200
-Message-Id: <e008cc8688504687b1e3a62a149a78d3da1375e7.1345449825.git.Martin.Jansa@gmail.com>
+Date: Mon, 20 Aug 2012 10:04:41 +0200
+Message-Id: <f1b3d559f7fda42a2aaeee8bc277e03d00f138a9.1345449825.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
 References: <cover.1344599409.git.Martin.Jansa@gmail.com>
 	<695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1345449825.git.Martin.Jansa@gmail.com>
 References: <cover.1345449825.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/6] systemd.bbclass: add option to disable automatic RRECOMMENDS pkg-systemd_base -> pkg-systemd
+Subject: [meta-oe][PATCH 6/6] xserver-common: add support for tuna
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +46,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 08:16:53 -0000
+X-List-Received-Date: Mon, 20 Aug 2012 08:17:00 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-systemd/classes/systemd.bbclass |   16 ++++++++++------
- 1 files changed, 10 insertions(+), 6 deletions(-)
+ ...mon-add-support-for-tuna-alias-Galaxy-Nex.patch |   33 ++++++++++++++++++++
+ .../xserver-common/xserver-common_1.34.bb          |    3 +-
+ 2 files changed, 35 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
 
-diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
-index 4036f91..96d7f8f 100644
---- a/meta-systemd/classes/systemd.bbclass
-+++ b/meta-systemd/classes/systemd.bbclass
-@@ -2,6 +2,8 @@ DEPENDS_append = " systemd-systemctl-native"
- 
- SYSTEMD_AUTO_ENABLE ??= "enable"
- 
-+SYSTEMD_AUTO_RRECOMMENDS ??= "enable"
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
+new file mode 100644
+index 0000000..49321eb
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
+@@ -0,0 +1,33 @@
++From 176c3bd3d86c223fd44b0f15b62d38526bb3b0d2 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Fri, 17 Aug 2012 13:00:56 +0200
++Subject: [PATCH 13/13] xserver-common: add support for tuna alias Galaxy
++ Nexus
 +
- systemd_postinst() {
- OPTS=""
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ X11/xserver-common |    8 ++++++++
++ 1 files changed, 8 insertions(+), 0 deletions(-)
++
++diff --git a/X11/xserver-common b/X11/xserver-common
++index d9325dd..017e5ae 100644
++--- a/X11/xserver-common
+++++ b/X11/xserver-common
++@@ -169,6 +169,14 @@ else
++                 ARGS="$ARGS -dpi ${DPI} -nocursor"
++             fi
++             ;;
+++        "tuna")
+++            DPI="316"
+++            if [ "$XSERVER" != "Xorg" ] ; then
+++                ARGS="$ARGS -screen ${SCREEN_SIZE}"
+++            else
+++                ARGS="$ARGS -dpi ${DPI} -nocursor"
+++            fi
+++            ;;
++         "motorola_ezx_platform")
++             ARGS="$ARGS -screen 240x320"
++             DPI="170" ;;
++-- 
++1.7.8.6
++
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+index a7e8191..f307419 100644
+--- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
-@@ -208,12 +210,14 @@ python populate_packages_prepend () {
-         if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
-             rdepends = '%s %s' % (rdepends, pkg_systemd_base)
-         d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
--        # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
--        rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
--        # not rrecommending myself AND avoid double entries
--        if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
--            rrecommends = '%s %s' % (rrecommends, pkg_systemd)
--        d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
-+        auto_rrecommends = d.getVar('SYSTEMD_AUTO_RRECOMMENDS', 1) or 'enable'
-+        if auto_rrecommends == 'enable':
-+            # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
-+            rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
-+            # not rrecommending myself AND avoid double entries
-+            if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
-+                rrecommends = '%s %s' % (rrecommends, pkg_systemd)
-+            d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
+-PR = "r7"
++PR = "r8"
  
-     # run all modifications once when creating package
-     if os.path.exists('${D}'):
+ # we are using a gpe-style Makefile
+ inherit gpe
+@@ -22,6 +22,7 @@ SRC_URI_append = " \
+   file://0010-xserver-common-add-support-for-nexus-S-alias-herring.patch \
+   file://0011-xserver-common-add-support-for-nexus-one-alias-mahim.patch \
+   file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
++  file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
+ "
+ 
+ do_install_append() {
 -- 
 1.7.8.6
 
