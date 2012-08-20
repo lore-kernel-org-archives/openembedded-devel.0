@@ -1,38 +1,36 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T3NAS-0000ck-MI
+	(envelope-from <martin.jansa@gmail.com>) id 1T3NOX-0000qT-M9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 10:17:00 +0200
-Received: by wibhn17 with SMTP id hn17so3069734wib.6
+	Mon, 20 Aug 2012 10:31:33 +0200
+Received: by weyr6 with SMTP id r6so3985729wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 01:04:58 -0700 (PDT)
+	Mon, 20 Aug 2012 01:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=4RoqQUTF42RpNO19pQ+bjS8a/8Ez4TTbnMqb/0DSigk=;
-	b=dnp5K81GfaCei7uzHj+SWHg2d7jK7UBpwYdUsJj2d2Omkt8g8ejrmuajsQXbE19VGY
-	6QwC0pTq7rMbqHkjdcqGyWlwhHJF/+K27Ktg8xrIVfOSrKztQyxp28CLLazUOqzoh1Nm
-	/rDdnmT830dAhk5e+ECIqhkZMXc/qOAuGCCc0pbFWhZ6diAYPpjW2TSD0tieg0WT7c0z
-	ISkcB/e2B2N2r8Cr8WmpD4Z6cCX9zODnE5bxhz9zsOgNFzyukmFvtZxW8ddWLyYRbsZ9
-	vZuPHL+gQRE9n5JcYW5brtN1FDe/w7sM5BBSYIjm2RJ42wyDFQB92dE6NEZmhOVbiB0K
-	VKPA==
-Received: by 10.180.97.106 with SMTP id dz10mr26763819wib.21.1345449898729;
-	Mon, 20 Aug 2012 01:04:58 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=RjzbujmJxdANusUJc6rj743TPD/FPpiM+Jm1Zm8YsBk=;
+	b=qsu8EHMxm8zcLVGX9WpcO9UHNwQ4SnL0QN2ovb7vCWaAZTk9GILvryvamOT1NMmrvR
+	dBg3ClMn3zIfujvtHMGiAMtIivlJuiGXMBt4iQlwO0pR2dwhHIZ+NCPGhKy6eq0rJjvr
+	1o8dAGUPpn4W5S5d7HEbWqkzlKyDC9S1V1xIvUVzEINaR4YW6gJsUqccQTU69sNfy8Md
+	GjtP1gdZ+v1XOWRR1CVLaVJefBq6fLV1/eYefOTUbZlSgI/vPmbMwFBVLRfceJH0Ovbe
+	LdhycD1Q8b4MOx4P7a4mUIsx4tz6SXg++OHgB+ZbzBEB5RWuqcGDX2bAYRk6fQE0kPem
+	wkGA==
+Received: by 10.216.244.203 with SMTP id m53mr7369510wer.46.1345450771769;
+	Mon, 20 Aug 2012 01:19:31 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id h9sm26838970wiz.1.2012.08.20.01.04.57
+	by mx.google.com with ESMTPS id fr4sm39912871wib.8.2012.08.20.01.19.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 01:04:57 -0700 (PDT)
+	Mon, 20 Aug 2012 01:19:30 -0700 (PDT)
+Date: Mon, 20 Aug 2012 10:19:33 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 10:04:41 +0200
-Message-Id: <f1b3d559f7fda42a2aaeee8bc277e03d00f138a9.1345449825.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
-References: <cover.1344599409.git.Martin.Jansa@gmail.com>
-	<695786ad0fac01f3dff2232a187e95ab7ef864b0.1345449825.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1345449825.git.Martin.Jansa@gmail.com>
-References: <cover.1345449825.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] xserver-common: add support for tuna
+Message-ID: <20120820081933.GB3063@jama.jama.net>
+References: <1345373533-14583-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1345373533-14583-1-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-systemd 1/2] connman: follow oe-core to 1.4 and move to oe-core subfolder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,77 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 08:17:00 -0000
+X-List-Received-Date: Mon, 20 Aug 2012 08:31:33 -0000
+X-Groupsio-MsgNum: 40261
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="E39vaYmALEf/7YXx"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...mon-add-support-for-tuna-alias-Galaxy-Nex.patch |   33 ++++++++++++++++++++
- .../xserver-common/xserver-common_1.34.bb          |    3 +-
- 2 files changed, 35 insertions(+), 1 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
+--E39vaYmALEf/7YXx
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
-new file mode 100644
-index 0000000..49321eb
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch
-@@ -0,0 +1,33 @@
-+From 176c3bd3d86c223fd44b0f15b62d38526bb3b0d2 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Fri, 17 Aug 2012 13:00:56 +0200
-+Subject: [PATCH 13/13] xserver-common: add support for tuna alias Galaxy
-+ Nexus
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ X11/xserver-common |    8 ++++++++
-+ 1 files changed, 8 insertions(+), 0 deletions(-)
-+
-+diff --git a/X11/xserver-common b/X11/xserver-common
-+index d9325dd..017e5ae 100644
-+--- a/X11/xserver-common
-++++ b/X11/xserver-common
-+@@ -169,6 +169,14 @@ else
-+                 ARGS="$ARGS -dpi ${DPI} -nocursor"
-+             fi
-+             ;;
-++        "tuna")
-++            DPI="316"
-++            if [ "$XSERVER" != "Xorg" ] ; then
-++                ARGS="$ARGS -screen ${SCREEN_SIZE}"
-++            else
-++                ARGS="$ARGS -dpi ${DPI} -nocursor"
-++            fi
-++            ;;
-+         "motorola_ezx_platform")
-+             ARGS="$ARGS -screen 240x320"
-+             DPI="170" ;;
-+-- 
-+1.7.8.6
-+
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index a7e8191..f307419 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r7"
-+PR = "r8"
- 
- # we are using a gpe-style Makefile
- inherit gpe
-@@ -22,6 +22,7 @@ SRC_URI_append = " \
-   file://0010-xserver-common-add-support-for-nexus-S-alias-herring.patch \
-   file://0011-xserver-common-add-support-for-nexus-one-alias-mahim.patch \
-   file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
-+  file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
- "
- 
- do_install_append() {
--- 
-1.7.8.6
+On Sun, Aug 19, 2012 at 12:52:12PM +0200, Andreas M=FCller wrote:
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  .../connman/connman_1.4.bbappend}                  |    0
+>  1 files changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-systemd/{meta-oe/recipes-connectivity/connman/connman_1.3.bb=
+append =3D> oe-core/recipes-connectivity/connman/connman_1.4.bbappend} (100=
+%)
+>=20
+> diff --git a/meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.=
+3.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.4.=
+bbappend
+> similarity index 100%
+> rename from meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.3=
+=2Ebbappend
+> rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.4.b=
+bappend
 
+weird, this patch didn't make it to patchwork
 
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> --=20
+> 1.7.4.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--E39vaYmALEf/7YXx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAx8xUACgkQN1Ujt2V2gByOoQCeLWZQ4YJEv8w5s3tHDQqA10xs
+PKYAn3Vzsoszcf65SlfDKSbvjkhXr8q5
+=pKlL
+-----END PGP SIGNATURE-----
+
+--E39vaYmALEf/7YXx--
