@@ -1,36 +1,36 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T3V7p-0003Tb-60
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T3VIU-0008PN-5d
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 18:46:49 +0200
-Received: by bkcik5 with SMTP id ik5so3063033bkc.6
+	Mon, 20 Aug 2012 18:57:50 +0200
+Received: by bkcik5 with SMTP id ik5so3067326bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 09:34:46 -0700 (PDT)
+	Mon, 20 Aug 2012 09:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
 	:content-transfer-encoding;
-	bh=r/ABP/0/9EVZ8SE22nrvxGZMH060zn61Ad4ptouanyk=;
-	b=vCyE4b4bbzwP808Pefq084tlg3sNJDMtXcrDrj+Dl/mI0GPsmZ08DgxWIem28r+h/t
-	NTH6EWeBDRCDPYSzfbddKELT8tlaqiPbhdN6QmD8Pew/7VfrhIIdftzoVkr21h9s+a1b
-	p3rbnsMR0dcY2dxuwXlwqfOmlA9swnJ2E3oSpo/LC5ITJWuuGyYJfLln+1z3T8WlhY0D
-	JtIFw8WZMFcuH/OKp8ok31N/27DSArliEYE3wd49Udazm3li+T5ngWuZ7rx5RBpkGTVv
-	n0wklPvdywnKugArPhCkAOlPzC+Ri5zgh3zuTfAOUtdN3Nd//N1U0ZeVoUOjz49FXDnj
-	HMWg==
-Received: by 10.205.118.5 with SMTP id fo5mr4648939bkc.124.1345480486270;
-	Mon, 20 Aug 2012 09:34:46 -0700 (PDT)
+	bh=lQTQ1g/iohDVql5LbBgQfX/L5KPVnihDMZO1ATmb9RQ=;
+	b=DHqE/TK7zN5ENki/0YssbFrBdeM/L8KBCfnMyV9cKjnHDUJ+QEv+Z8kgXXvSAe23Wr
+	C+dP8T43oX7K0VSRk/5CAwQxvHWY9deYD9DoOt8udGPOufbXTe354XVDmOWAs+jg1D8R
+	XQRaVpN0VDXWT/GpATQorktZJzQ1nsRv9VSv+ChFdMstpOCqzm4nvpJ9KeZ46zJGCl3Y
+	Hn6RRAmlzfKaq/XVUo9ybc2pxf/nCPinrOydFaQ/JUMBPVcv23ZB8OZRYkGHBDSifOlc
+	8/sFBZnBAg1z8TwzhuxlgNGpd8D7B/hgnpomvDB7JusuhDJEgpqaoMTQBRjFAO94XKfJ
+	pFXQ==
+Received: by 10.205.119.210 with SMTP id fv18mr4542610bkc.10.1345481147651;
+	Mon, 20 Aug 2012 09:45:47 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id he8sm6500240bkc.3.2012.08.20.09.34.44
+	by mx.google.com with ESMTPS id m9sm6509817bkm.10.2012.08.20.09.45.46
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 09:34:45 -0700 (PDT)
+	Mon, 20 Aug 2012 09:45:46 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 18:34:05 +0200
-Message-Id: <1345480445-16994-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 20 Aug 2012 18:45:06 +0200
+Message-Id: <1345481106-17503-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-Subject: [meta-system] systemd-compat-units: ensure /tmp is mounted when starting run-postinsts
+Subject: [meta-systemd, v2] systemd-compat-units: ensure /tmp is mounted when starting run-postinsts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 16:46:49 -0000
+X-List-Received-Date: Mon, 20 Aug 2012 16:57:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -53,6 +53,8 @@ Aug 20 16:59:33 overo S98run-postinsts[68]: * opkg_prep_intercepts: Failed to ma
 Aug 20 16:59:33 overo S98run-postinsts[68]: * rm_r: Failed to open dir /tmp/opkg-07xOYO: No such file or directory.
 
 This bug left postints unfinished e.g. pango-module-* [1].
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-August/041096.html
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
