@@ -1,39 +1,37 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T3BTH-00084r-0J
+	(envelope-from <martin.jansa@gmail.com>) id 1T3N6Y-0008P5-Ld
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Aug 2012 21:47:39 +0200
-Received: by wibhq4 with SMTP id hq4so2802146wib.6
+	Mon, 20 Aug 2012 10:12:58 +0200
+Received: by weyr6 with SMTP id r6so3977251wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Aug 2012 12:35:37 -0700 (PDT)
+	Mon, 20 Aug 2012 01:00:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=w1T2zoZFXv63jAPpVljkUx9xWOtiPcWhFl63zGh3aMc=;
-	b=KsXuUKghoIsqvyY7Zymi2ropU+LB1qhiO36J5OKExN1RrotYigPyI5/3J7PAUE+Y8n
-	VDssWMAlyOd060t3c3Eo2H3EqpP+QNAbm/6qETtHbI/MFWqZrcdj6rfHiK8OMYuqc3/5
-	JeGl1sJPGFtwjaSNS6OAnCM7gTL+3LINxOdZ0MD/qr5wWaL7S7/mbYazCja2qnraJltC
-	zESMceqPgLMy5DyD/SySS0Cw555uzku7fzo33ejXyEohVI3w4hAQfGxEym511IQhg5wT
-	B6hDHQs4/AxQuo5koe+Ab1GBwf1A5xnM2nDqPPXcOWOkZgOyZ6eTpxgJH0aM4gCmw0Zd
-	7BSg==
-Received: by 10.180.105.163 with SMTP id gn3mr22705739wib.2.1345404937558;
-	Sun, 19 Aug 2012 12:35:37 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=B1yRIRigfk/ROo7g+Ggthi9lXIK+jlYcu+g1XkjZ6DA=;
+	b=oXl0zmn4iSO1//SzkiIEpJrmHyBdQz7JINHC7oHsMVUpjWlR7njRFIg/kVjRt0e/Wv
+	FhMVSW1z01HrqoTAlO1ofGCOQxc2DuocrFZgkktTIXP7EYQSxDQ2IDDg4xWpU0pX5vTa
+	QIYkGFL/ZtIPV7fGcVBtM8iUz7jd6nF+E93albNXCrTXUy42XVYxJikj6FP2MPiEV/kh
+	PXpUyevusiLuJlVxzs9JCgmnJGD6j8C8NhEMDZeBeKDFzx8VybtJyEPehabOe0RiE35O
+	IwZQ5drbisDwUN1rAlzHT7VKjlsHpx6Ztg0bqmw2+z09tWoJuHqqpkTeWyNDCIexceBs
+	YtNA==
+Received: by 10.180.97.135 with SMTP id ea7mr25727112wib.11.1345449656547;
+	Mon, 20 Aug 2012 01:00:56 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ck9sm35387039wib.2.2012.08.19.12.35.35
+	by mx.google.com with ESMTPS id el6sm26821636wib.8.2012.08.20.01.00.54
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 19 Aug 2012 12:35:36 -0700 (PDT)
-Date: Sun, 19 Aug 2012 21:35:38 +0200
+	Mon, 20 Aug 2012 01:00:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120819193538.GA3063@jama.jama.net>
-References: <1345056951-14036-1-git-send-email-ross.burton@intel.com>
-	<1345056951-14036-3-git-send-email-ross.burton@intel.com>
-	<20120817115300.GF3625@jama.jama.net>
-	<CAJTo0LZdQ_fNkxZ0CthJHKS4ciVr7wRGw1UCYUedKoAuTR4bKg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LZdQ_fNkxZ0CthJHKS4ciVr7wRGw1UCYUedKoAuTR4bKg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH 2/2] meta-gnome: add evolution-data-server
+Date: Mon, 20 Aug 2012 10:00:50 +0200
+Message-Id: <7c28fa0c71de1b487d05695b8401333140bc76b5.1345449578.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+In-Reply-To: <cover.1344601517.git.Martin.Jansa@gmail.com>
+References: <cover.1344601517.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1345449578.git.Martin.Jansa@gmail.com>
+References: <cover.1345449578.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][meta-efl][PATCH 47/52] python-efl: bump PV and reset PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,55 +45,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Aug 2012 19:47:39 -0000
-X-Groupsio-MsgNum: 40251
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OXfL5xGRrasGEqWY"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Aug 2012 08:12:58 -0000
 
---OXfL5xGRrasGEqWY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-devtools/python/python-ecore_svn.bb    |    2 +-
+ .../recipes-devtools/python/python-edbus_svn.bb    |    2 +-
+ .../recipes-devtools/python/python-edje_svn.bb     |    2 +-
+ meta-efl/recipes-devtools/python/python-efl.inc    |    4 ++--
+ .../python/python-elementary_svn.bb                |    2 +-
+ .../recipes-devtools/python/python-emotion_svn.bb  |    2 +-
+ .../recipes-devtools/python/python-evas_svn.bb     |    2 +-
+ 7 files changed, 8 insertions(+), 8 deletions(-)
 
-On Sun, Aug 19, 2012 at 08:26:49PM +0100, Burton, Ross wrote:
-> On 17 August 2012 12:53, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > On Wed, Aug 15, 2012 at 07:55:51PM +0100, Ross Burton wrote:
-> >> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> >
-> > Can you add dates too?
-> >
-> > Some users are still using that here.
->=20
-> Really?  Can you ask them to fix the bugs then?  Your users must be
-> very forgiving!
+diff --git a/meta-efl/recipes-devtools/python/python-ecore_svn.bb b/meta-efl/recipes-devtools/python/python-ecore_svn.bb
+index 2edf864..a6ec5e6 100644
+--- a/meta-efl/recipes-devtools/python/python-ecore_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-ecore_svn.bb
+@@ -1,7 +1,7 @@
+ require python-efl.inc
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "python-evas ecore"
+ RDEPENDS_${PN} += "python-evas"
+diff --git a/meta-efl/recipes-devtools/python/python-edbus_svn.bb b/meta-efl/recipes-devtools/python/python-edbus_svn.bb
+index 256a52a..518f7c2 100644
+--- a/meta-efl/recipes-devtools/python/python-edbus_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-edbus_svn.bb
+@@ -1,7 +1,7 @@
+ require python-efl.inc
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "edbus python-dbus"
+ RDEPENDS_${PN} += "python-dbus"
+diff --git a/meta-efl/recipes-devtools/python/python-edje_svn.bb b/meta-efl/recipes-devtools/python/python-edje_svn.bb
+index f527959..a6b376c 100644
+--- a/meta-efl/recipes-devtools/python/python-edje_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-edje_svn.bb
+@@ -1,7 +1,7 @@
+ require python-efl.inc
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "edje python-evas evas"
+ RDEPENDS_${PN} += "python-evas"
+diff --git a/meta-efl/recipes-devtools/python/python-efl.inc b/meta-efl/recipes-devtools/python/python-efl.inc
+index a4df6a6..498c3be 100644
+--- a/meta-efl/recipes-devtools/python/python-efl.inc
++++ b/meta-efl/recipes-devtools/python/python-efl.inc
+@@ -6,8 +6,8 @@ AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
+ # the extension modules.
+ DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
+ RDEPENDS_${PN} += "python-lang"
+-PV = "0.7.3+svnr${SRCPV}"
+-INC_PR = "r2"
++PV = "1.6.99+svnr${SRCPV}"
++INC_PR = "r0"
+ 
+ # necessary to let the call for python-config succeed
+ export BUILD_SYS
+diff --git a/meta-efl/recipes-devtools/python/python-elementary_svn.bb b/meta-efl/recipes-devtools/python/python-elementary_svn.bb
+index 911ed6f..ffb6d5e 100644
+--- a/meta-efl/recipes-devtools/python/python-elementary_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-elementary_svn.bb
+@@ -1,7 +1,7 @@
+ require python-efl.inc
+ LICENSE = "LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+-PR = "${INC_PR}.6"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "elementary python-evas"
+ RDEPENDS_${PN} += "python-evas python-ecore python-edje" 
+diff --git a/meta-efl/recipes-devtools/python/python-emotion_svn.bb b/meta-efl/recipes-devtools/python/python-emotion_svn.bb
+index a39c0c8..89002c3 100644
+--- a/meta-efl/recipes-devtools/python/python-emotion_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-emotion_svn.bb
+@@ -1,7 +1,7 @@
+ require python-efl.inc
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "emotion python-evas"
+ RDEPENDS_${PN} += "python-ecore"
+diff --git a/meta-efl/recipes-devtools/python/python-evas_svn.bb b/meta-efl/recipes-devtools/python/python-evas_svn.bb
+index 8d719ce..79844be 100644
+--- a/meta-efl/recipes-devtools/python/python-evas_svn.bb
++++ b/meta-efl/recipes-devtools/python/python-evas_svn.bb
+@@ -1,6 +1,6 @@
+ require python-efl.inc
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.0"
+ SRCREV = "${EFL_SRCREV}"
+ DEPENDS += "evas"
+-- 
+1.7.8.6
 
-I can, but usually they ask me to fix them in the end .. :)
 
-> (yes, I can)
 
-Please do, so this bug doesn't became valid again :)
-http://www.shr-project.org/trac/ticket/2052
-
-It can be without those poky overrides and at least it can be used to
-demonstrate how bad upstream version is (I never used it), but it
-probably doesn't have any good alternatives at least in OE metadata.
-
-Thanks,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OXfL5xGRrasGEqWY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAxQAoACgkQN1Ujt2V2gBxo5ACfZkT4ld9h9dLEG0Dv3eGTMUOK
-ltEAoLGjmnvsdeiMUSOxPKXSjC5xTHNr
-=RDG6
------END PGP SIGNATURE-----
-
---OXfL5xGRrasGEqWY--
