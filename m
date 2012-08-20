@@ -1,35 +1,24 @@
-Received: from mail-lpp01m010-f47.google.com ([209.85.215.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1T3QTY-0002FK-0d
+Received: from rrcs-98-100-91-244.central.biz.rr.com ([98.100.91.244]
+	helo=pluto.melinkcorp.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <bevenson@melinkcorp.com>) id 1T3S7l-0007Rb-74
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Aug 2012 13:48:56 +0200
-Received: by lagv3 with SMTP id v3so2953413lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 04:36:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=TWFjhQwdjj/Xi8sGnaG+jRtPYc34NML+TSdCnUMTe18=;
-	b=UpkM8dBIU/W3GdWIEBHbKT+q1ghtqEy1W1sFgD2Dyvp9dOhFUjvHH60aMBhsdkd5vn
-	drkMseo6jSd+utDEXbA1HhnBYsJv/rXy4dhOYCkKjf2Zn9sFTwm+O6hlPwX7ivQPOTl0
-	VCYWGZ8uC3AsUtKNdY6KS1kgxCAXuxgCBHV1DkaSl38i8g2qx5qS4CKhlrEirGS5pEdn
-	nwHFx2VzvrN2SdVsyMlwNtmxFMFfMhLViWwEkn23kCjLiodeuVTR8Yzfdjj6FxqrSj0n
-	dC88wdADTkg8f/ml9IKXKmZFkk6X+0maHPL+Kw13HtSO58J0PDrtRgnccqYGWiVNpf+1
-	0RuQ==
+	Mon, 20 Aug 2012 15:34:33 +0200
+Received: from pluto.melinkcorp.local ([10.0.2.4]) by pluto.melinkcorp.local
+	([10.0.2.4]) with mapi; Mon, 20 Aug 2012 09:21:23 -0400
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Aug 2012 09:21:23 -0400
+Thread-Topic: Cron job additions from image and package update
+Thread-Index: Ac1+1rGBsCY21SNyQj2/xTxJglY20w==
+Message-ID: <91586D499ADFD74FBCFB8425266A5DE4012C6BAE354C@pluto.melinkcorp.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 02DA088700319E02DA09D4
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.112.88.73 with SMTP id be9mr6205389lbb.72.1345462613531; Mon,
-	20 Aug 2012 04:36:53 -0700 (PDT)
-Received: by 10.112.85.196 with HTTP; Mon, 20 Aug 2012 04:36:53 -0700 (PDT)
-In-Reply-To: <16213085.OYMN3cpiun@helios>
-References: <1345460745657.3fc83336@Nodemailer>
-	<16213085.OYMN3cpiun@helios>
-Date: Mon, 20 Aug 2012 07:36:53 -0400
-Message-ID: <CAOd_LFyqWeiOi15Uitw2obWNTbfJJtgEOFCZ3KPnZ9nunwKvhQ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: OE Changelog since 2012-08-12 until 2012-08-19
+Subject: Cron job additions from image and package update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 11:48:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 20 Aug 2012 13:34:33 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 20, 2012 at 7:14 AM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
+I am on the 2011.03-maintenance branch of OpenEmbedded.  I have a few cron =
+jobs that I want my device to run, but I am having issues getting updated i=
+mages to apply the new cron job list.  I would like the cron jobs to be ins=
+talled for root in the built image and I would also like to be able to upda=
+te the cron job list through an appropriate package.  I am having problems =
+with both tasks.
 
-> On Monday 20 August 2012 11:05:45 cliff.brake@gmail.com wrote:
-> > Changelog since 2012-08-12 until 2012-08-19.  Projects included in this
-> > report:
-> >
-> >...
-> > meta-yocto: git://git.yoctoproject.org/poky
->
-> FYI meta-yocto is now its own layer - this should cut down the duplicates
-> in
-> the report if nothing else:
->
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/
-> git://git.yoctoproject.org/meta-yocto
->
->
-Thanks, I've made the change and re-run the report.  I also removed
-meta-eldk -- it seems this is mostly a copy of poky and not really a true
-meta layer.
+First, I have a customized image for my system.  In the image recipe, I am =
+using an addition to the ROOTFS_POSTPROCESS_COMMAND to add my cron job list=
+.  This is what I am doing so far inside my image's Bitbake recipe related =
+to cron:
 
-Cliff
+rootfs_postprocess() {
+	# cron: Add cron jobs for our image
+	cd ${IMAGE_ROOTFS}
+	cd etc
+	echo '<text for job 1>' > temp_cron.txt
+	echo '<text for job 2>' >> temp_cron.txt
+    	echo '<text for job 3>' >> temp_cron.txt
+	crontab temp_cron.txt
+}
 
--- 
-=================
-http://bec-systems.com
+ROOTFS_POSTPROCESS_COMMAND +=3D " rootfs_postprocess; "
+
+When I bitbake my image and look at the resulting filesystem, I see that /e=
+tc/temp_cron.txt exists but there are no entries under /var/cron/tabs.  If =
+I burn my new image onto a board, login as root and then call "crontab /etc=
+/temp_cron.txt", then the cron jobs are installed as expected.  I've also t=
+ried changing the last line of the rootfs_postprocess function to "crontab =
+-u root temp_cron.txt", but then I get then following error during the imag=
+e build:
+
+| ERROR: ld.so: object 'libfakeroot.so' from LD_PRELOAD cannot be preloaded=
+: ignored.
+| must be privileged to use -u
+
+I assume this is all related to some intricacies of using crontab under fak=
+eroot but I haven't yet found a solution.  Anyone else successfully install=
+ing cron jobs on their image?
+
+Also, this would then install the cron jobs on the image but there is no op=
+kg package created that contains the updated cron job list.  I would like t=
+o be able to perform an opkg install or upgrade to apply new system setting=
+s like this.  Do I need to create a separate recipe so that these system fi=
+les are included in a package, or is there a ways to do this from my existi=
+ng image recipe?
+
+Thanks,
+Bryan Evenson
+
+
 
