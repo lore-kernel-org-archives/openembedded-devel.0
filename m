@@ -1,35 +1,26 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from sanddollar.geekisp.com ([216.168.135.167])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1T3sFZ-0001tB-Hd; Tue, 21 Aug 2012 19:28:21 +0200
-Received: by eaad12 with SMTP id d12so14792eaa.6
-	for <multiple recipients>; Tue, 21 Aug 2012 10:16:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=w6m27nsCkJosSpk7LDidn3IjjFcYK3dPQxshN7ptDy8=;
-	b=tI0DJVP2mFirCTOYP6SKCoCFiMDA5EmCOfOxPc8J53cTR4ZBpCvNtXdhjojh50OIE/
-	ggLCcXTQReLvK+LYzLmtjEBineI6jQjRce46LNbnNKkTFykCDcTO+aLbmvoCQa5RGbpp
-	hPfv7goRD4MVubGZONqgLGbv0z9x2ATnNPEgEY78wRd7PyaEc/DJQb6WKxPFdlrCuTVY
-	CYGHoe1MiqZwa3tX1LM7KMU+G0JxV21YLSsc4pOnWW6ZBTbOPmL5vV+CZRPbDjbrI1lJ
-	YhSanBaGDvuICYhnM2C7nZc5LW4DcbCd4CyW0S040bdNs4aowcvssTTOaLhumPFIuAU1
-	IgVg==
-Received: by 10.14.202.131 with SMTP id d3mr14648842eeo.32.1345569377849; Tue,
-	21 Aug 2012 10:16:17 -0700 (PDT)
+	(envelope-from <philip@balister.org>) id 1T3sX5-0002M3-7H
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Aug 2012 19:46:27 +0200
+Received: (qmail 24597 invoked by uid 1003); 21 Aug 2012 17:34:21 -0000
+Received: from unknown (HELO ?10.16.24.71?) (philip@opensdr.com@157.22.28.10)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	21 Aug 2012 17:34:21 -0000
+Message-ID: <5033C69A.9030206@balister.org>
+Date: Tue, 21 Aug 2012 10:34:18 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120717 Thunderbird/14.0
 MIME-Version: 1.0
-Received: by 10.14.2.5 with HTTP; Tue, 21 Aug 2012 10:15:47 -0700 (PDT)
-In-Reply-To: <20120821121850.GD3029@jama.jama.net>
-References: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
-	<20120821121850.GD3029@jama.jama.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Aug 2012 10:15:47 -0700
-Message-ID: <CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: yocto@yoctoproject.org,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <2404459.dJBf5OQotX@helios> <5032A1D3.8090600@windriver.com>
+	<1570865.4gpYqKP9pu@helios>
+In-Reply-To: <1570865.4gpYqKP9pu@helios>
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] Toolchain rework, call for testing
+Subject: Re: [OE-core] [yocto] RFC: OE-Core task rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,17 +34,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 17:28:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Aug 2012 17:46:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 21, 2012 at 5:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+On 08/21/2012 01:49 AM, Paul Eggleton wrote:
+> On Monday 20 August 2012 15:45:07 Mark Hatle wrote:
+...
+
+>>
+>> Yup, there is a logical grouping for the lsb specific tasks, as for others.
+>> The naming needs to be made clear as to why it's there, and what it
+>> represents. Same with the summary and descriptions -- they should list the
+>> functionality provided by this group of components.
 >
-> Maybe it's because
-> http://git.openembedded.org/openembedded-core/commit/?id=30617bde61a3b0a0944b49a0c9fb7159dacbb19f
-> is missing PR bump and gcc wasn't rebuilt before eglibc upgrade (OEBasic not OEBasicHash here).
+> The main concern with LSB is that we have something called task-basic, which
+> seems to be intended for LSB but does not state as much, and I know at least
+> one person has tried to use it and then been a little puzzled as to why rpm
+> has been pulled in when ipk packaging has been selected. Just naming some of
+> these tasks more appropriately would help avoid such situations. In the
+> specific case of task-basic there may be a case for creating a similar but not
+> LSB-focused task that pulls in real shell utilities in preference to the light
+> versions provided by busybox.
 
-yes seems so. I have stopped using OEBasic long ago, you should stop
-using it too.
-But feel free to send a PR bump patchlet.
+I was seriously stumped by the presence of rpm in what I felt should 
+have been a very basic image. If a task/group is targeted at lsb, it 
+needs to have lsb plastered all over the name so the rest of us can 
+avoid it :)
+
+Philip
+
+>
+>>> 4) Consider the usefulness of the existing PACKAGE_GROUP_ structure which
+>>> converts some IMAGE_FEATURES into the addition of tasks to be installed
+>>> (see classes/core-image.bbclass). At the very least we should probably
+>>> rename this if we rename tasks to package groups, and there's a question
+>>> as to how IMAGE_FEATURES scales - should every task be represented in
+>>> there or only a select list? Would we be better off not trying to bring
+>>> any tasks in via IMAGE_FEATURES at all and mostly leave that to control
+>>> post-processing (e.g. package-management, debug-tweaks, etc.)?
+>>
+>> I'd certainly prefer that images were limited to selecting software from
+>> task (group) recipes only, and not providing their own.  An image should be
+>> able to change the selection based on an "image feature" or similar
+>> configuration, but the underlying tasks/groups, recipes, etc should all be
+>> 'generic' to a given distribution configuration.
+>
+> The first part seems reasonable to me; but I'm still short of an answer as to
+> what to do with the existing IMAGE_FEATURES code as mentioned above. At the
+> moment aside from the special features such as debug-tweaks, these are just a
+> thin layer on top of task recipes which doesn't add very much at all other
+> than extra maintenance.
+>
+>> I think if you go through the images today, a lot of that stuff is either
+>> old, or could be simplified by creating appropriate tasks/groups.
+>
+> OK, that's a good point. I have another task on my list to clean up our image
+> recipes and that would be a good segue into that.
+>
+> Cheers,
+> Paul
+>
 
 
