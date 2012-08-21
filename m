@@ -1,34 +1,26 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T3i1I-0005UH-UK
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2012 08:32:57 +0200
-Received: by iaky10 with SMTP id y10so3342659iak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 23:20:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=P8D2p+NAfe0aa4RWz/DUPlmAqmqQ3B+geFznmM44Rzk=;
-	b=lIkvxmz9u2XOwnOT6IiTJOadaWS8gMmDjRWTlHE+zATgZXVjYSWN7VEHr2fh0GgZSX
-	kOI0iSciCni8MlD2qpEoRYdiLRIKNaAGAwEMdS3IC4nXP8JQ/pLgQarrkj5Lh4QCdFTx
-	TRuqWBHGvuVazsP0Ug+MByTW14Jghk+R+AVF9Uit199iJuB3pUjyzpHHE+ic/k7IaPFY
-	S5wDGOuI11os9zHkADPev6+W4gwjq25MVGIh6sS68UcuQc92xN5fs362QF3TBDEY4023
-	qcOcn7E7OOED68mkCphdOgy4eedzTX3JynXs905v+MxT0OGi5YV4xqpFkZiZlLVyL4KC
-	9a/Q==
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1T3kLH-0000bW-TD; Tue, 21 Aug 2012 11:01:44 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 21 Aug 2012 01:49:39 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.77,801,1336374000"; d="scan'208";a="189159378"
+Received: from unknown (HELO helios.localnet) ([10.252.121.105])
+	by orsmga002.jf.intel.com with ESMTP; 21 Aug 2012 01:49:38 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: yocto@yoctoproject.org
+Date: Tue, 21 Aug 2012 09:49:37 +0100
+Message-ID: <1570865.4gpYqKP9pu@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <5032A1D3.8090600@windriver.com>
+References: <2404459.dJBf5OQotX@helios> <5032A1D3.8090600@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.154.132 with SMTP id vo4mr12426057igb.31.1345530052884;
-	Mon, 20 Aug 2012 23:20:52 -0700 (PDT)
-Received: by 10.64.18.13 with HTTP; Mon, 20 Aug 2012 23:20:52 -0700 (PDT)
-In-Reply-To: <1345189700-26130-2-git-send-email-schnitzeltony@googlemail.com>
-References: <1345189700-26130-1-git-send-email-schnitzeltony@googlemail.com>
-	<1345189700-26130-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 21 Aug 2012 08:20:52 +0200
-Message-ID: <CALbNGRR9hF-2W2e2+xcfo7X5iDpFPa0nTcVL=sT_XL00-TBGJw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-systemd,V3] wpa-supplicant: add systemd support
+Cc: openembedded-devel@lists.openembedded.org,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] RFC: OE-Core task rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +34,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 06:32:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Aug 2012 09:01:44 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, Aug 17, 2012 at 9:48 AM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> * native systemd support came in with v1.0 [1]
-> * needs [2] to work properly
-> * mends my wlan under control of networkmanager
->
-> [1] http://hostap.epitest.fi/gitweb/gitweb.cgi?p=3Dhostap-1.git;a=3Dblob_=
-plain;f=3Dwpa_supplicant/ChangeLog
-> [2] http://patches.openembedded.org/patch/34335/
->
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
-> v1->v2: chenge recipe's location
-> v2->v3: add SYSTEMD_AUTO_ENABLE =3D "disable"
->  .../wpa-supplicant/wpa-supplicant_1.0.bbappend     |    3 ---
->  .../wpa-supplicant/wpa-supplicant_1.0.bbappend     |   15 ++++++++++++++=
-+
->  2 files changed, 15 insertions(+), 3 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/wpa-supplicant/wpa-suppl=
-icant_1.0.bbappend
->  create mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplic=
-ant/wpa-supplicant_1.0.bbappend
->
-> diff --git a/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1=
-.0.bbappend b/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.=
-0.bbappend
-> deleted file mode 100644
-> index 54da0ff..0000000
-> --- a/meta-oe/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbap=
-pend
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
-> -
-> -PRINC =3D "1"
-> diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa=
--supplicant_1.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-su=
-pplicant/wpa-supplicant_1.0.bbappend
-> new file mode 100644
-> index 0000000..a4dceb4
-> --- /dev/null
-> +++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-suppli=
-cant_1.0.bbappend
-> @@ -0,0 +1,15 @@
-> +PRINC =3D "2"
-> +
-> +inherit systemd
-> +
-> +SYSTEMD_PACKAGES =3D "${PN}-systemd"
-> +SYSTEMD_SERVICE =3D "wpa_supplicant.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +
-> +do_install_append () {
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
-> +}
-> +
-> +# systemd.bbclass does not catch all multiple-instance-service-files
-> +FILES_${PN}-systemd +=3D "${systemd_unitdir}/system/"
-> --
-> 1.7.4.4
->
-A bit inpatient but: ping
+On Monday 20 August 2012 15:45:07 Mark Hatle wrote:
+> > 1) Do we rename "task" to something a little more understandable to the
+> > uninitiated, such as "package group"? The word "task" is already used in a
+> > much more natural sense within bitbake as a unit of work. Historically I
+> > believe we picked up this term from Debian but I'm not aware of
+> > significant use by other mainstream distributions.
+> 
+> "group" or "packagegroup" or "package-group" is my suggestion for the
+> existing 'task' recipes.  From what I've seen, it should be a rename
+> opportunity -- we can even provide/rprovide the old names....
+
+Indeed, and I think we would for compatibility purposes.
+ 
+> > 2) Look at the existing tasks and:
+> >   * evaluate their usefulness
+> >   * remove any that are obsolete
+> >   * adjust existing contents if needed
+> >   * look for useful groups of packages that might be added
+> >   
+> >   We need to pay particular attention to task-core-boot and task-base as
+> >   these> 
+> > are pulled in by default in any image that inherits from
+> > core-image.bbclass - if these are not generally working for people that
+> > are creating their own images, we need to change them such that they are.
+> 
+> During the pre-oe-core Yocto Project development, a design was generated to
+> roughly group the packages into functional areas.  For the most part, this
+> design (as well as legacy elements) still exist.
+> 
+> I think the boot, base and others need to be evaluated for usefulness... but
+> my feeling is most of them are close to being correct.
+
+I think so as well. We may be pulling in one or two packages unconditionally 
+where they should be optional (e.g. modutils-initscripts?) but most of it is 
+pretty sensible.
+ 
+> >   *  Try to make each task have a reasonable name - there are some current
+> >   uses of "core" and "base" that don't actually convey any meaning; LSB
+> >   specific tasks should be named as such, etc.
+> 
+> Yup, there is a logical grouping for the lsb specific tasks, as for others. 
+> The naming needs to be made clear as to why it's there, and what it
+> represents. Same with the summary and descriptions -- they should list the
+> functionality provided by this group of components.
+
+The main concern with LSB is that we have something called task-basic, which 
+seems to be intended for LSB but does not state as much, and I know at least 
+one person has tried to use it and then been a little puzzled as to why rpm 
+has been pulled in when ipk packaging has been selected. Just naming some of 
+these tasks more appropriately would help avoid such situations. In the 
+specific case of task-basic there may be a case for creating a similar but not 
+LSB-focused task that pulls in real shell utilities in preference to the light 
+versions provided by busybox.
+
+> > 4) Consider the usefulness of the existing PACKAGE_GROUP_ structure which
+> > converts some IMAGE_FEATURES into the addition of tasks to be installed
+> > (see classes/core-image.bbclass). At the very least we should probably
+> > rename this if we rename tasks to package groups, and there's a question
+> > as to how IMAGE_FEATURES scales - should every task be represented in
+> > there or only a select list? Would we be better off not trying to bring
+> > any tasks in via IMAGE_FEATURES at all and mostly leave that to control
+> > post-processing (e.g. package-management, debug-tweaks, etc.)?
+> 
+> I'd certainly prefer that images were limited to selecting software from
+> task (group) recipes only, and not providing their own.  An image should be
+> able to change the selection based on an "image feature" or similar
+> configuration, but the underlying tasks/groups, recipes, etc should all be
+> 'generic' to a given distribution configuration.
+
+The first part seems reasonable to me; but I'm still short of an answer as to 
+what to do with the existing IMAGE_FEATURES code as mentioned above. At the 
+moment aside from the special features such as debug-tweaks, these are just a 
+thin layer on top of task recipes which doesn't add very much at all other 
+than extra maintenance.
+
+> I think if you go through the images today, a lot of that stuff is either
+> old, or could be simplified by creating appropriate tasks/groups.
+
+OK, that's a good point. I have another task on my list to clean up our image 
+recipes and that would be a good segue into that.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
