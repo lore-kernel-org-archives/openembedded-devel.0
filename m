@@ -1,40 +1,33 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1T3tN8-0003lp-J2; Tue, 21 Aug 2012 20:40:14 +0200
-Received: by weyr6 with SMTP id r6so73191wey.6
-	for <multiple recipients>; Tue, 21 Aug 2012 11:28:10 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1T3tSC-00046M-8w
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Aug 2012 20:45:28 +0200
+Received: by pbcwy7 with SMTP id wy7so293070pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Aug 2012 11:33:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Dnrp3aaTTz3F0TYZp3Ldu4oi0QWPVTLqX4bYUDpolgc=;
-	b=rEJX5lcPuM8tSwyPnGy9mAcCzKh+nU8HWOyZ+42q26CD+GfV1Hj/MqOPbPWPa2ko0a
-	2hf+kCyIgYU/UZcJChHCjwXqDz+lVpYyK7j6JTPabldCXDpENT4K097aGw+7v8cZjNpY
-	K6vq0h8ddF8AX+1QFBolGFX5G8vd+GGc1IuYGifA0Vl6dmPA+IfklK0pIO/xcddUnrtE
-	EmU5tBoxs+nEIlIPYrK5HbM16sA9AtAUzH+vfsyR7GqglGRVoa2rkXFdczbt5mj4TF7v
-	01Npt7pmcPY3wov/cJsivX4WyFH1F+TFSPTDO1LHnB71RY29rPu7r/alx3xDtXLuQHaV
-	IkRw==
-Received: by 10.180.96.3 with SMTP id do3mr41140989wib.5.1345573690613;
-	Tue, 21 Aug 2012 11:28:10 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l5sm5947764wix.5.2012.08.21.11.28.07
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=29B08hA/2qtvVmnIU3zB6AoQ3ChhiTfePsCMpDzL3kA=;
+	b=FgjVZ6deU0nL3vPsvCE70F0P0/AunxREyXjqYjpVVqmDuprpYsoMpo9YBEGmTIk4gT
+	yByS7noN4CJl3UV0bNynHJLBR6CfbvJx4cy0JDww6AMhKSAId0sQTlsXhzRwNPxiFVI1
+	gs2QkVmHLe5AvOxUHp0/31q1rXQEAvSLPAusQcKjyYay3wVkBCR8pc6phjv8bdaQJ+PL
+	FyJYfOIMOSClsVbPx/CV3KEKhzuBqUTBq+SVYkuad8QlrjsZpFFYmn6Uq8ZbKxbL+2ry
+	A3R3j4q4GhQpjy+uRIoPucOcW+kjUInt48qwv4xoslG0D332etSbIBVyJyevHTjwU6vL
+	Wjag==
+Received: by 10.68.229.228 with SMTP id st4mr38735109pbc.106.1345574003502;
+	Tue, 21 Aug 2012 11:33:23 -0700 (PDT)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id kt8sm1952661pbc.1.2012.08.21.11.33.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Aug 2012 11:28:08 -0700 (PDT)
-Date: Tue, 21 Aug 2012 20:28:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20120821182813.GF3029@jama.jama.net>
-References: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
-	<20120821121850.GD3029@jama.jama.net>
-	<CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: yocto@yoctoproject.org,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] Toolchain rework, call for testing
+	Tue, 21 Aug 2012 11:33:22 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Aug 2012 11:32:49 -0700
+Message-Id: <1345573969-6069-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [toolchain-layer][PATCH] gcc: Delete gcc intermediate recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,48 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 18:40:14 -0000
-X-Groupsio-MsgNum: 40306
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TU+u6i6jrDPzmlWF"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Aug 2012 18:45:28 -0000
 
---TU+u6i6jrDPzmlWF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Not needed after toolchain rework
 
-On Tue, Aug 21, 2012 at 10:15:47AM -0700, Khem Raj wrote:
-> On Tue, Aug 21, 2012 at 5:18 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> >
-> > Maybe it's because
-> > http://git.openembedded.org/openembedded-core/commit/?id=3D30617bde61a3=
-b0a0944b49a0c9fb7159dacbb19f
-> > is missing PR bump and gcc wasn't rebuilt before eglibc upgrade (OEBasi=
-c not OEBasicHash here).
->=20
-> yes seems so. I have stopped using OEBasic long ago, you should stop
-> using it too.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../gcc/gcc-cross-intermediate_4.6.bb              |    3 ---
+ .../gcc/gcc-crosssdk-intermediate_4.6.bb           |    3 ---
+ 2 files changed, 6 deletions(-)
+ delete mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bb
+ delete mode 100644 toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bb
 
-I'm using OEBasicHash on one jenkins setup, but that one is still
-building changes from 2 days ago.. (building 24/7.. )
+diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bb
+deleted file mode 100644
+index 8892288..0000000
+--- a/toolchain-layer/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bb
++++ /dev/null
+@@ -1,3 +0,0 @@
+-require recipes-devtools/gcc/gcc-cross_${PV}.bb
+-require recipes-devtools/gcc/gcc-cross-intermediate.inc
+-
+diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bb
+deleted file mode 100644
+index 61a0dfb..0000000
+--- a/toolchain-layer/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bb
++++ /dev/null
+@@ -1,3 +0,0 @@
+-require recipes-devtools/gcc/gcc-cross-intermediate_${PV}.bb
+-require recipes-devtools/gcc/gcc-crosssdk-intermediate.inc
+-EXTRA_OECONF += " --with-headers=${STAGING_DIR_TCBOOTSTRAP}${SYSTEMHEADERS} "
+-- 
+1.7.9.5
 
-> But feel free to send a PR bump patchlet.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---TU+u6i6jrDPzmlWF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAz0z0ACgkQN1Ujt2V2gByr1QCgqAdGqRvm6A1h1bp3OoHSpsXk
-4l0AnR74WsFFVNl66jvfm58umvk0bWeG
-=x8AF
------END PGP SIGNATURE-----
-
---TU+u6i6jrDPzmlWF--
