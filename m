@@ -1,38 +1,33 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1T3nbr-0004Ia-2Z; Tue, 21 Aug 2012 14:31:03 +0200
-Received: by wgbds1 with SMTP id ds1so3835303wgb.0
-	for <multiple recipients>; Tue, 21 Aug 2012 05:18:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KvLdf2MMaueYdjFfH4mQ9gd65huGNziMcpjwocqn4aU=;
-	b=kjJZ4OjgW/b60dX6xO6beHGekbEp3ZKmOwrA/TYCzMWuJZAx+AI/Rotws6qUeKXExi
-	NaieYvUYcW2CuXBwrPscsYYWCPdZX1VbXlL/A2eZWtFkyplz6ZZftlUfThF6d1sB/wUe
-	OavaxpnvXx4bAasGM4VkodKnf1kLzmbw3FMWv/Q6ZexF3DtB67ZiQCOXfFUSgTyu7bs/
-	P5vX5g5tP1Ij9hwtpA+LSa9fSOWrh3OK6dj1I16EunUzFXrnJnBL1CalnOrHu9J6iGIj
-	5y4B4t3BT39Io0cSF7QcId1zhvZQ84FOiGR2TlWYBcRpwv8Srbwpj3uaZpgYJMkj7RI7
-	uUnA==
-Received: by 10.180.83.66 with SMTP id o2mr37557541wiy.14.1345551539291;
-	Tue, 21 Aug 2012 05:18:59 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w7sm33368718wiz.0.2012.08.21.05.18.44
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Aug 2012 05:18:57 -0700 (PDT)
-Date: Tue, 21 Aug 2012 14:18:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20120821121850.GD3029@jama.jama.net>
-References: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T3rNA-0000WN-TX
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Aug 2012 18:32:09 +0200
+Received: by yenm1 with SMTP id m1so6500760yen.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Aug 2012 09:20:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=LxRlW5rmiE6SC81EHKAaqixEZbO5pgZTlUTmx+6sC3k=;
+	b=a4VIZapEtlrjNKNNySaiypfp52zuO5CKkyOuglwzNTwsZRy+ZaQXXFFWsaP1vY37Hy
+	r1sde6FpFGbJQOo2jnIfGCoChCqEknLSe3kywYzShn+f6RM/mbQhXNkd6OxSIA4Pd/8e
+	uzdZi+ZpiqvIpeaxKW+JsJBoD95ExsZ3X4ATFB67Azvmj22G6fvAaFw3yTUQ/d/1HJs3
+	58U6gmPINgzYEQsLVAOHb+ZM52cpnixj1whC5gKn/mkyoAe4lB5gZcRxiLjSUzYRhIuA
+	Bmv28FqGPVxT6pOktR2n38BUD9/J6AKKJj5cehCIAAjmFJ6/d1Dbees89QsdNjhpvbq0
+	Sinw==
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: yocto@yoctoproject.org,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] Toolchain rework, call for testing
+Received: by 10.50.34.131 with SMTP id z3mr14273758igi.45.1345565998023; Tue,
+	21 Aug 2012 09:19:58 -0700 (PDT)
+Received: by 10.64.18.13 with HTTP; Tue, 21 Aug 2012 09:19:57 -0700 (PDT)
+In-Reply-To: <20120821120021.GB3029@jama.jama.net>
+References: <1345386709-19033-1-git-send-email-schnitzeltony@googlemail.com>
+	<20120821120021.GB3029@jama.jama.net>
+Date: Tue, 21 Aug 2012 18:19:57 +0200
+Message-ID: <CALbNGRScGweVhd_yS++X1sceqy1kPqQEXJp=qLmjiae4yXpy8Q@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] pixman: remove append from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,91 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 12:31:03 -0000
-X-Groupsio-MsgNum: 40302
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hxkXGo8AKqTJ+9QI"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Aug 2012 16:32:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---hxkXGo8AKqTJ+9QI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Aug 21, 2012 at 2:00 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Sorry I haven't noticed/tested it before merging your updated patches to
+> meta-oe (before [1] is applied), but your updated patch
+> 0001-ARM-qemu-related-workarounds-in-cpu-features-detecti.patch
+>
+> does not work and emacs is failing again:
+> | LC_ALL=C qemu-arm -cpu cortex-a8 -s 1048576 -L
+> /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/emacs-23.4-r1/qemu-treedir
+> temacs -batch -l loadup dump
+> | qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+> | Segmentation fault (core dumped)
+>
+> Cheers,
+>
+My fault - sorry for that. Will try to take care tomorrow.
 
-On Thu, Aug 16, 2012 at 09:47:37PM -0700, Khem Raj wrote:
-> Hi All
->=20
-> Recently glibc build has been simplified upstream. It has dropped the
-> dependency on libgcc_s and libgcc_eh for building glibc itself.
-> This means that we can simplify our toolchain bootstrap a bit by
-> dropping 1 of the 3 cross gcc build stages. We do not need
-> gcc-cross-intermediate
-> anymore. This should bring some build time reduction and simplify the
-> bootstrap. I have a series of patches which I have tested
-> by building core-image-minimal and meta-toolchain for all supported
-> qemu architectures and also uclibc/eglibc both
-> but it needs a lot more testing therefore I am calling out wider
-> audience for help in testing it out.
->=20
-> The branch is
->=20
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/toolc=
-hain-rework
+Andreas
 
-eglibc fails to build in incremental build
 
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv4t -marm -mthumb-interwork -mtune=
-=3Darm920t --sysroot=3D/OE/shr-core/tmp-eglibc/sysroots/om-gta02-tcbootstra=
-p   -nostdlib -nostartfiles -r -o /OE/shr-core/tmp-eglibc/work/armv4t-oe-li=
-nux-gnueabi/eglibc-2.16-r6+svnr19922/build-arm-oe-linux-gnueabi/libc_pic.os=
- \
-|  -Wl,-d -Wl,--whole-archive /OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-=
-gnueabi/eglibc-2.16-r6+svnr19922/build-arm-oe-linux-gnueabi/libc_pic.a -o /=
-OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/eglibc-2.16-r6+svnr1992=
-2/build-arm-oe-linux-gnueabi/libc_pic.os
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv4t -marm -mthumb-interwork -mtune=
-=3Darm920t --sysroot=3D/OE/shr-core/tmp-eglibc/sysroots/om-gta02-tcbootstra=
-p   -nostdlib -nostartfiles -r -o /OE/shr-core/tmp-eglibc/work/armv4t-oe-li=
-nux-gnueabi/eglibc-2.16-r6+svnr19922/build-arm-oe-linux-gnueabi/elf/librtld=
-=2Emap.o '-Wl,-(' /OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/egli=
-bc-2.16-r6+svnr19922/build-arm-oe-linux-gnueabi/elf/dl-allobjs.os /OE/shr-c=
-ore/tmp-eglibc/work/armv4t-oe-linux-gnueabi/eglibc-2.16-r6+svnr19922/build-=
-arm-oe-linux-gnueabi/libc_pic.a -lgcc '-Wl,-)' -Wl,-Map,/OE/shr-core/tmp-eg=
-libc/work/armv4t-oe-linux-gnueabi/eglibc-2.16-r6+svnr19922/build-arm-oe-lin=
-ux-gnueabi/elf/librtld.mapT
-| /OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv4t-oe-linux=
--gnueabi.gcc-cross-initial/gcc/arm-oe-linux-gnueabi/4.7.2/ld: cannot find -=
-lgcc
-| collect2: error: ld returned 1 exit status
-| make[2]: *** [/OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/eglibc=
--2.16-r6+svnr19922/build-arm-oe-linux-gnueabi/elf/librtld.map] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[2]: Leaving directory `/OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-=
-gnueabi/eglibc-2.16-r6+svnr19922/eglibc-2_16/libc/elf'
-| make[1]: *** [elf/subdir_lib] Error 2
-| make[1]: Leaving directory `/OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-=
-gnueabi/eglibc-2.16-r6+svnr19922/eglibc-2_16/libc'
-
-Maybe it's because=20
-http://git.openembedded.org/openembedded-core/commit/?id=3D30617bde61a3b0a0=
-944b49a0c9fb7159dacbb19f
-is missing PR bump and gcc wasn't rebuilt before eglibc upgrade (OEBasic no=
-t OEBasicHash here).
-
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---hxkXGo8AKqTJ+9QI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlAzfKoACgkQN1Ujt2V2gBy7rgCfebGuwBtEy+P3c8r6lGv9OYw/
-Fl0Anj/SCIIYEOOuXTR3jbHdTOTL5kVs
-=BZfg
------END PGP SIGNATURE-----
-
---hxkXGo8AKqTJ+9QI--
