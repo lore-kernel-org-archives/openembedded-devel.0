@@ -1,35 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T3ft4-0007Bh-AZ
+	(envelope-from <raj.khem@gmail.com>) id 1T3ft5-0007BR-SP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2012 06:16:18 +0200
-Received: by mail-pb0-f47.google.com with SMTP id wy7so8917811pbc.6
+	Tue, 21 Aug 2012 06:16:20 +0200
+Received: by mail-pz0-f51.google.com with SMTP id t11so2243525daj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2012 21:04:17 -0700 (PDT)
+	Mon, 20 Aug 2012 21:04:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=jwKKcJa+4WZvTLnK3vZmBBnOSOC5qto6jEi30GbgAsA=;
-	b=LIAUEqD5ra5Gofu31vc4whM1cjaEqyttbsH9avi4MjAkdIjlSwq2yUL+LfXBaitb+I
-	TAjLxvfivLyXpwkGmXultnriuXVMF2ghjXYKefPjoPPzStlFbU81i8uGT1FZK3QJb78T
-	0V70oq1x3UEKuZQssBNrrnxgBeJWm8dy/DzWivYOiqf+QD7YrfDAIMRfse2k+eL9xA+2
-	Uk1bcUREoQPbTBKIuhGmDSnkUuW4ohksTu9KeFFcCSIlquHiAdcf2kU5teI0/wmk4d9F
-	ZEQh+dxnIjAstkB641jlvtCO/BZitpfx3Y/i+3d8HxZ1dm//fmtx628D53bx8+bm9ub6
-	rTFw==
-Received: by 10.68.235.68 with SMTP id uk4mr40047817pbc.52.1345521856944;
-	Mon, 20 Aug 2012 21:04:16 -0700 (PDT)
+	bh=/01gAnXTNCMu5Q/ubbp4ps1Fm+Swqz6dP+tJxplAtG4=;
+	b=WmiG6GOABRdkYm61M8fB05NGrX0eB0Np2x0sFbXr/oV0+9VKrka4Z/dsv55zwer3bB
+	nxDBopSAXV//C9rp7GkHk6diwxBTNG9EgQYO1N1oILaFe3FU0YyDGAqbk1WssrBpVJFv
+	WcOPfrqa2PmGkiAxteNOP9fWydlMJoKQ08U0GIUFoMQIb/tNr9GrJScfBjWlF1898NXS
+	BdyqG5KESQF9WbjoET2B2LGnIhhjUOP/R1CV7HcMlKGEfSmfV57jaChqNYKwDmAOLrSa
+	Di6cXHdSGTgc7HpuLVYB9x2jXs8tqrbu4PuYmpFgt9P9rbJprUdJTHJrstfdbNqeKsPU
+	LP/Q==
+Received: by 10.68.193.137 with SMTP id ho9mr40768844pbc.93.1345521858460;
+	Mon, 20 Aug 2012 21:04:18 -0700 (PDT)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id uj3sm526674pbc.39.2012.08.20.21.04.15
+	by mx.google.com with ESMTPS id uj3sm526674pbc.39.2012.08.20.21.04.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Aug 2012 21:04:16 -0700 (PDT)
+	Mon, 20 Aug 2012 21:04:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2012 21:03:35 -0700
-Message-Id: <1345521816-2364-6-git-send-email-raj.khem@gmail.com>
+Date: Mon, 20 Aug 2012 21:03:36 -0700
+Message-Id: <1345521816-2364-7-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1345521816-2364-1-git-send-email-raj.khem@gmail.com>
 References: <1345521816-2364-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-java/openjdk-7.0][PATCH 6/7] icedtea-native: Remove 2.1 recipes and fix python spacing
+Subject: [meta-java/openjdk-7.0][PATCH 7/7] openjdk-7: Fix various issues in openjdk7 builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +43,195 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 04:16:18 -0000
+X-List-Received-Date: Tue, 21 Aug 2012 04:16:20 -0000
 
-Also fix the LICENSE when here
-Moved to icedtea 2.1.1
+Fix parallel build.
+Fixed build on ppc/ppc64
+Define WITH_ADDITIONAL_VMS variable so
+it can be overridden from bbappend
+Correct LICENSE
+Fixed packaging errors and warnings
+Fix python indentation
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc           |   62 ++++++++------------
- recipes-core/icedtea/icedtea7-native_2.1.bb        |    8 ---
- .../icedtea-remove_sparc_compiler_option.patch     |   13 ----
- recipes-core/icedtea/openjdk-7-release-03b147.inc  |   20 +++----
- 4 files changed, 35 insertions(+), 68 deletions(-)
- delete mode 100644 recipes-core/icedtea/icedtea7-native_2.1.bb
- delete mode 100644 recipes-core/icedtea/openjdk-7-03b147/icedtea-remove_sparc_compiler_option.patch
+ .../icedtea-jdk-nio-use-host-cc.patch              |   89 +++++++++++++++++
+ .../icedtea-jdk-ppc64-jvm-cfg.patch                |   41 ++++++++
+ recipes-core/openjdk/openjdk-7-common.inc          |  100 ++++++++++----------
+ recipes-core/openjdk/openjdk-7-release-03b21.inc   |   17 +++-
+ 4 files changed, 195 insertions(+), 52 deletions(-)
+ create mode 100644 recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-nio-use-host-cc.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-ppc64-jvm-cfg.patch
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 75075d1..e209a68 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
+diff --git a/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-nio-use-host-cc.patch b/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-nio-use-host-cc.patch
+new file mode 100644
+index 0000000..6b14673
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-nio-use-host-cc.patch
+@@ -0,0 +1,89 @@
++diff --git openjdk/jdk/make/java/nio/Makefile openjdk/jdk/make/java/nio/Makefile
++index 7906531..afa5d46 100644
++--- openjdk/jdk/make/java/nio/Makefile
+++++ openjdk/jdk/make/java/nio/Makefile
++@@ -823,7 +823,7 @@ $(TEMPDIR)/$(GENSOR_SRC) : $(GENSOR_SRC)
++ 
++ $(GENSOR_EXE) : $(TEMPDIR)/$(GENSOR_SRC)
++ 	$(prep-target)
++-	($(CD) $(TEMPDIR); $(CC) $(CPPFLAGS) $(LDDFLAGS) \
+++	($(CD) $(TEMPDIR); $(CC_FOR_BUILD) $(CPPFLAGS) $(LDDFLAGS) \
++ 	   -o genSocketOptionRegistry$(EXE_SUFFIX) $(GENSOR_SRC))
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++@@ -834,12 +834,8 @@ else
++ $(SCH_GEN)/SocketOptionRegistry.java: $(GENSOR_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(SOR_COPYRIGHT_YEARS)" > $@
++-ifdef CROSS_COMPILE_ARCH
++-	$(QEMU) $(GENSOR_EXE) >> $@
++-else
++ 	$(GENSOR_EXE) >> $@
++ endif
++-endif
++ #
++ # Generated sun.nio.cs SingleByte classes
++ #
++@@ -863,7 +859,7 @@ GENUC_COPYRIGHT_YEARS = $(shell $(CAT) $(GENUC_SRC) | \
++ 
++ $(GENUC_EXE) : $(GENUC_SRC)
++ 	$(prep-target)
++-	$(CC) $(CPPFLAGS) -o $@ $(GENUC_SRC)
+++	$(CC_FOR_BUILD) $(CPPFLAGS) -o $@ $(GENUC_SRC)
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++ $(SFS_GEN)/UnixConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/UnixConstants-$(PLATFORM)-$(ARCH).java
++@@ -873,12 +869,8 @@ else
++ $(SFS_GEN)/UnixConstants.java: $(GENUC_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENUC_COPYRIGHT_YEARS)" > $@
++-ifdef CROSS_COMPILE_ARCH
++-	$(QEMU) $(GENUC_EXE) >> $@
++-else
++ 	$(GENUC_EXE) >> $@
++ endif
++-endif
++ 
++ GENSC_SRC = $(PLATFORM_SRC)/native/sun/nio/fs/genSolarisConstants.c
++ 
++@@ -889,7 +881,7 @@ GENSC_COPYRIGHT_YEARS = $(shell $(CAT) $(GENSC_SRC) | \
++ 
++ $(GENSC_EXE) : $(GENSC_SRC)
++ 	$(prep-target)
++-	$(CC) $(CPPFLAGS) -o $@ $(GENSC_SRC)
+++	$(CC_FOR_BUILD) $(CPPFLAGS) -o $@ $(GENSC_SRC)
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++ $(SFS_GEN)/SolarisConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/SolarisConstants-$(PLATFORM)-$(ARCH).java
++@@ -899,11 +891,7 @@ else
++ $(SFS_GEN)/SolarisConstants.java: $(GENSC_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENSC_COPYRIGHT_YEARS)" > $@
++-ifdef CROSS_COMPILE_ARCH
++-	$(QEMU) $(GENSC_EXE) >> $@
++-else
++ 	$(GENSC_EXE) >> $@
++ endif
++-endif
++ 
++ .PHONY: sources 
++--- openjdk/jdk/make/sun/Makefile.khem	2012-08-10 19:32:40.695550897 -0700
+++++ openjdk/jdk/make/sun/Makefile	2012-08-10 19:33:39.195550853 -0700
++@@ -55,7 +55,7 @@ ifneq ($(PLATFORM), windows)
++     endif
++   endif
++   HEADLESS_SUBDIR = headless
++-  XAWT_SUBDIR     = xawt
+++  XAWT_SUBDIR     =
++ endif
++ 
++ ifndef OPENJDK
++@@ -79,7 +79,7 @@ else
++ endif
++ SUBDIRS_desktop    = audio $(RENDER_SUBDIR) image \
++                      $(DISPLAY_LIBS) $(DGA_SUBDIR) \
++-                     jawt font jpeg cmm $(DISPLAY_TOOLS) beans
+++                     font jpeg cmm $(DISPLAY_TOOLS) beans
++ SUBDIRS_management = management
++ SUBDIRS_misc       = $(ORG_SUBDIR) rmi $(JDBC_SUBDIR) tracing
++ SUBDIRS_tools      = native2ascii serialver tools jconsole
+diff --git a/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-ppc64-jvm-cfg.patch b/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-ppc64-jvm-cfg.patch
+new file mode 100644
+index 0000000..5bb7604
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-7-03b21/icedtea-jdk-ppc64-jvm-cfg.patch
+@@ -0,0 +1,41 @@
++--- /dev/null	2012-07-25 13:25:05.651551001 -0700
+++++ openjdk/jdk/src/solaris/bin/ppc64/jvm.cfg	2012-08-10 23:59:02.651551157 -0700
++@@ -0,0 +1,38 @@
+++# Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
+++# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+++#
+++# This code is free software; you can redistribute it and/or modify it
+++# under the terms of the GNU General Public License version 2 only, as
+++# published by the Free Software Foundation.  Oracle designates this
+++# particular file as subject to the "Classpath" exception as provided
+++# by Oracle in the LICENSE file that accompanied this code.
+++#
+++# This code is distributed in the hope that it will be useful, but WITHOUT
+++# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++# version 2 for more details (a copy is included in the LICENSE file that
+++# accompanied this code).
+++#
+++# You should have received a copy of the GNU General Public License version
+++# 2 along with this work; if not, write to the Free Software Foundation,
+++# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+++#
+++# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+++# or visit www.oracle.com if you need additional information or have any
+++# questions.
+++#
+++# List of JVMs that can be used as an option to java, javac, etc.
+++# Order is important -- first in this list is the default JVM.
+++# NOTE that this both this file and its format are UNSUPPORTED and
+++# WILL GO AWAY in a future release.
+++#
+++# You may also select a JVM in an arbitrary location with the
+++# "-XXaltjvm=<jvm_dir>" option, but that too is unsupported
+++# and may not be available in a future release.
+++#
+++-client KNOWN
+++-server KNOWN
+++-hotspot ERROR
+++-classic WARN
+++-native ERROR
+++-green ERROR
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index 1752973..eb0a817 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
 @@ -1,6 +1,6 @@
- DESCRIPTION = "Harness to build the source code from OpenJDK using Free Software build tools"
+ DESCRIPTION = "Java runtime based upon the OpenJDK- and Icedtea Project"
  HOMEPAGE = "http://icedtea.classpath.org"
 -LICENSE  = "GPL with Classpath Exception"
 +LICENSE  = "GPL-2.0-with-classpath-exception"
- INC_PR = "r0"
+ PRIORITY = "optional"
+ SECTION  = "libs"
  
- DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
-@@ -8,11 +8,13 @@ DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
-            libx11-native xproto-native libxt-native libxext-native libxrender-native \
-            giflib-native jpeg-native libpng-native \
-            glib-2.0-native freetype-native zlib-native \
--           fontconfig-native zip-native \
-+           fontconfig-native zip-native alsa-lib-native \
-           "
+@@ -89,41 +89,30 @@ export CACAO_CONFIGURE_ARGS = " \
  
- inherit native java autotools
+ JAVA_HOME[unexport] = "1"
  
-+JAVA_HOME[unexport] = "1"
-+
- SRC_URI = " \
-   ${ICEDTEA_URI} \
-   ${OPENJDK_URI} \
-@@ -36,33 +38,21 @@ export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
+-WITH_ADDITIONAL_VMS = "shark,cacao,jamvm"
++WITH_ADDITIONAL_VMS ?= "--with-additional-vms=shark,cacao,jamvm"
+ 
+-WITH_ADDITIONAL_VMS_arm = "cacao,jamvm"
++WITH_ADDITIONAL_VMS_arm = "--with-additional-vms=cacao,jamvm"
+ 
  # OpenJDK supports parallel compilation but uses a plain number for this.
  # In OE we have PARALLEL_MAKE which is the actual option passed to make,
  # e.g. "-j 4".
--
--def set_jdk7_native_jobs(d):
+ 
+-def set_jdk7_jobs(d):
 -        import bb
 -
 -        pm  = bb.data.getVar('PARALLEL_MAKE', d, 1)
@@ -99,193 +240,182 @@ index 75075d1..e209a68 100644
 -        if not pmi:
 -                pm = pm.split("j");
 -                if (len(pm) == 2):
--                    bb.data.setVar('PARALLEL_MAKE_ICEDTEA', pm[1], d)
+-                        bb.data.setVar('PARALLEL_MAKE_ICEDTEA', pm[1], d)
 -        return
 -
--PARALLEL = "${@set_jdk7_native_jobs(d)}"
 -
-+ICEDTEA_PARALLEL_MAKE := "${PARALLEL_MAKE}"
-+PARALLEL_MAKE = ""
- def get_jdk7_native_jobs(d):
+-PARALLEL = "${@set_jdk7_jobs(d)}"
++OPENJDK_PARALLEL_MAKE := "${PARALLEL_MAKE}"
++PARALLEL_MAKE =  ""
+ 
+ def get_jdk7_jobs(d):
 -        import bb
 +    import bb
 +
-+    pm = bb.data.getVar('ICEDTEA_PARALLEL_MAKE', d, 1);
++    pm = bb.data.getVar('OPENJDK_PARALLEL_MAKE', d, 1);
 +    if not pm:
 +        return "1"
  
 -        ret = 1
 -        pmoo = bb.data.getVar('PARALLEL_MAKE', d, 1)
 -        if pmoo:
--               bb.data.setVar('PARALLEL_MAKE', "", d)
+-                bb.data.setVar('PARALLEL_MAKE', "", d)
 +    pm = pm.split("j");
 +    if (len(pm) == 2):
 +        return pm[1].strip()
  
 -        pm = bb.data.getVar('PARALLEL_MAKE_ICEDTEA', d, 1)
 -        if pm:
--              ret = pm
+-                ret = pm
 -        return ret
 +    # Whatever found in PARALLEL_MAKE was not suitable.
 +    return "1"
  
- JDK_JOBS = "${@get_jdk7_native_jobs(d)}"
+ JDK_JOBS = "${@get_jdk7_jobs(d)}"
  
-@@ -97,10 +87,10 @@ JDK_DIR = "icedtea7-native"
- JDK_INSTALL_DIR = "${D}/${libdir_jvm}/${JDK_DIR}"
+@@ -157,21 +146,24 @@ EXTRA_OECONF = " \
+ 	\
+ 	--with-pkgversion=${PV} \
+ 	--with-cc-for-build=${BUILD_CC} \
+-        --with-additional-vms=${WITH_ADDITIONAL_VMS} \
+        "
+ 
+ # OpenJDK uses slightly different names for certain arches. We need to know
+ #	this to create some files which are expected by the build.
+ def get_jdk_arch(d):
+-  import bb
++    import bb
+ 
+-  jdk_arch = bb.data.getVar('TARGET_ARCH', d, 1)
+-  if jdk_arch == "x86_64":
+-    jdk_arch = "amd64"
+-  elif (jdk_arch == "i486" or jdk_arch == "i586" or jdk_arch == "i686"):
+-    jdk_arch = "i386"
++    jdk_arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    if jdk_arch == "x86-64":
++        jdk_arch = "amd64"
++    elif jdk_arch == "powerpc":
++        jdk_arch = "ppc"
++    elif jdk_arch == "powerpc64":
++        jdk_arch = "ppc64"
++    elif (jdk_arch == "i486" or jdk_arch == "i586" or jdk_arch == "i686"):
++        jdk_arch = "i386"
+ 
+-  return jdk_arch
++    return jdk_arch
+ 
+ JDK_ARCH = "${@get_jdk_arch(d)}"
+ JDK_HOME = "${libdir_jvm}/${JDK_DIR}"
+@@ -179,24 +171,24 @@ JDK_FAKE = "${WORKDIR}/fake-jdk"
+ 
+ # A function that is needed in the Shark builds.
+ def get_llvm_configure_arch(d):
+-  import bb;
+-
+-  arch = bb.data.getVar('TARGET_ARCH', d, 1)
+-  if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
+-    arch = "x86"
+-  elif arch == "arm":
+-    arch = "arm"
+-  elif arch == "mipsel" or arch == "mips":
+-    arch = "mips"
+-  elif arch == "powerpc":
+-    arch = "powerpc"
+-  else:
+-    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+-
+-  return arch
++    import bb;
++
++    arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    if arch == "x86-64" or arch == "i486" or arch == "i586" or arch == "i686":
++        arch = "x86"
++    elif arch == "arm":
++        arch = "arm"
++    elif arch == "mipsel" or arch == "mips":
++        arch = "mips"
++    elif arch == "powerpc" or arch == "powerpc64":
++        arch = "powerpc"
++    else:
++        bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
++
++    return arch
  
  do_configure_prepend() {
--        echo "Configure with parallel-jobs: ${PARALLEL}"
-+        echo "Configure with parallel-jobs: ${JDK_JOBS}"
+-  echo "Configure with parallel-jobs: ${PARALLEL}"
++  echo "Configure with parallel-jobs: ${JDK_JOBS}"
  
--        case "${TARGET_ARCH}" in
--                x86_64)
-+        case "${TRANSLATED_TARGET_ARCH}" in
-+                x86-64)
-                         libarch=amd64
-                 ;;
-                 i386|i486|i586|i686)
-@@ -160,7 +150,7 @@ do_configure_append() {
- }
+   # Automatically copy everything that starts with "icedtea" (or "cacao") and ends with
+   # ".patch" into the patches directory.
+@@ -224,6 +216,7 @@ EXTRA_OEMAKE += ' \
+                 OE_LDFLAGS="${TARGET_LDFLAGS}" \
+                 ZIPEXE="${STAGING_BINDIR_NATIVE}/zip" \
+ 		CROSS_COMPILE_ARCH="${JDK_ARCH}" \
++		REQUIRED_ALSA_VERSION="" \
+                '
  
- EXTRA_OEMAKE = ' \
--		OE_CFLAGS="${CFLAGS}" \
-+                OE_CFLAGS="${CFLAGS}" \
-                 OE_CPPFLAGS="${CPPFLAGS}" \
-                 OE_CXXFLAGS="${CXXFLAGS}" \
-                 OE_LDFLAGS="${LDFLAGS}" \
-@@ -170,8 +160,8 @@ EXTRA_OEMAKE = ' \
- do_compile() {
- 	# OpenJDK uses slightly different names for certain arches. We need to know
- 	#	this to create some files which are expected by the build.
--	case "${TARGET_ARCH}" in
--		x86_64)
-+	case "${TRANSLATED_TARGET_ARCH}" in
-+		x86-64)
- 			arch=amd64
- 			libarch=amd64
- 		;;
-@@ -213,18 +203,18 @@ do_compile() {
- def jdk_arch(d):
-         import bb
+ # Puts an OE specific string into the binary making it possible for the user
+@@ -247,7 +240,7 @@ OE_LAUNCHER_LDFLAGS_arm = ""
+ EXTRA_OEMAKE += 'OE_LAUNCHER_LDFLAGS="${OE_LAUNCHER_LDFLAGS}"'
  
--        target_arch = bb.data.getVar('TARGET_ARCH', d, 1)
-+        target_arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
+ # Large stack is required at least on x86_64 host, otherwise random segfaults appear:
+-QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 2097152 -L ${STAGING_DIR_TARGET}"
++QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 2097152 -L ${STAGING_DIR_TARGET} -E LD_LIBRARY_PATH=${STAGING_BASELIBDIR}"
  
-         if target_arch in ['i386', 'i486', 'i586', 'i686']:
-             return "x86"
--        elif target_arch in ['x86_64']:
-+        elif target_arch in ['x86-64']:
-             return "amd64"
+ EXTRA_OEMAKE += 'QEMU="${QEMU}"'
  
-         return target_arch
+@@ -295,6 +288,7 @@ do_install() {
+ # 3) All other packages, including -jdk, are optional and not needed for normal Java apps.
+ PACKAGES = " \
+             ${JDKPN}-jre \
++	    ${JDKPN}-jre-dbg \
+             ${JDKPN}-dbg \
+             ${JDKPN}-demo-dbg \
+             ${JDKPN}-demo \
+@@ -352,6 +346,10 @@ FILES_${JDKPN}-vm-jamvm = "${JDK_HOME}/jre/lib/${JDK_ARCH}/jamvm/"
+ FILES_${JDKPN}-common = "${JDK_HOME}/jre/ASSEMBLY_EXCEPTION \
+                           ${JDK_HOME}/jre/THIRD_PARTY_README \
+                           ${JDK_HOME}/jre/LICENSE \
++                          ${JDK_HOME}/ASSEMBLY_EXCEPTION \
++                          ${JDK_HOME}/THIRD_PARTY_README \
++                          ${JDK_HOME}/LICENSE \
++                          ${JDK_HOME}/release \
+                           ${JDK_HOME}/jre/lib \
+                          "
  
- do_install() {
--	case "${TARGET_ARCH}" in
--		x86_64)
-+	case "${TRANSLATED_TARGET_ARCH}" in
-+		x86-64)
- 			JDK_ARCH=amd64
- 		;;
- 		i386|i486|i586|i686)
-diff --git a/recipes-core/icedtea/icedtea7-native_2.1.bb b/recipes-core/icedtea/icedtea7-native_2.1.bb
-deleted file mode 100644
-index 97e35d6..0000000
---- a/recipes-core/icedtea/icedtea7-native_2.1.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require openjdk-7-release-03b147.inc
+diff --git a/recipes-core/openjdk/openjdk-7-release-03b21.inc b/recipes-core/openjdk/openjdk-7-release-03b21.inc
+index 5147d76..40c1cf6 100644
+--- a/recipes-core/openjdk/openjdk-7-release-03b21.inc
++++ b/recipes-core/openjdk/openjdk-7-release-03b21.inc
+@@ -93,7 +93,14 @@ ICEDTEAPATCHES = "\
+ 	file://icedtea-corba-parallel-make.patch;apply=no \
+         file://icedtea-zero-hotspotfix.patch;apply=no \
+ 	"
 -
--PR = "${INC_PR}.1"
--
--ICEDTEA = "icedtea-2.1"
--
--SRC_URI[iced.md5sum] = "60395bbd1e2820c4a35e61c80330df14"
--SRC_URI[iced.sha256sum] = "8492920dccae8b76bcb41f91f8d98b2dc619380531a679f1f9ea4e166ad02ec6"
-diff --git a/recipes-core/icedtea/openjdk-7-03b147/icedtea-remove_sparc_compiler_option.patch b/recipes-core/icedtea/openjdk-7-03b147/icedtea-remove_sparc_compiler_option.patch
-deleted file mode 100644
-index be5ad85..0000000
---- a/recipes-core/icedtea/openjdk-7-03b147/icedtea-remove_sparc_compiler_option.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: openjdk/jdk/make/common/shared/Compiler-gcc.gmk
--===================================================================
----- openjdk/jdk/make/common/shared/Compiler-gcc.gmk	2012-05-26 14:43:49.342875981 +0200
--+++ openjdk/jdk/make/common/shared/Compiler-gcc.gmk	2012-05-26 15:21:25.514903711 +0200
--@@ -133,7 +133,7 @@
--     REQUIRED_GCC_VER = 4.0.*
--   endif
--   # Option used to create a shared library
---  SHARED_LIBRARY_FLAG = -shared -mimpure-text
--+  SHARED_LIBRARY_FLAG = -shared
--   SUN_COMP_VER := $(shell $(CC) --verbose 2>&1 )
-- 
-- endif
-diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-index e021ffc..0932e22 100644
---- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-+++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-@@ -18,11 +18,11 @@ OPENJDK_URI = "${ICEDTEA_HG_URL}/archive/${OPENJDK_FILE};name=openjdk;unpack=fal
- SRC_URI[openjdk.md5sum] = "f98b0f7a69f9427a5b3775dddddc89cb"
- SRC_URI[openjdk.sha256sum] = "758227833982371e3a94def84226a947f8dbbd176517f313b8cb96840bdea41e"
- 
--HOTSPOT_CHANGESET = "0e651e004747"
-+HOTSPOT_CHANGESET = "8b7c4c5f6ba9"
- HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.gz"
- HOTSPOT_URI = "${ICEDTEA_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
--SRC_URI[hotspot.md5sum] = "edd627c8781161eb33006ed668d833e0"
--SRC_URI[hotspot.sha256sum] = "d68455e5cdb14280cd61155a4e9d531e90b073607f4367e93ead0fcf34476ae1"
-+SRC_URI[hotspot.md5sum] = "cb45a8f19d77acc1f4f48e75e36a27fe"
-+SRC_URI[hotspot.sha256sum] = "22866990d143e76ced94b76defa3051e5e5d9a51fd272d63daa0df272d6406a2"
- 
- CORBA_CHANGESET = "5617f6c5cc94"
- CORBA_FILE = "${CORBA_CHANGESET}.tar.gz"
-@@ -30,11 +30,11 @@ CORBA_URI = "${ICEDTEA_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=fal
- SRC_URI[corba.md5sum] = "920f1a788a7fdef29a5cd70892331251"
- SRC_URI[corba.sha256sum] = "963915483530f311ff313635f79ed11ea7ce5a1c0dbee5d1acb1994132857fa3"
- 
--JAXP_CHANGESET = "1cf75c0e2c96"
-+JAXP_CHANGESET = "7a8825b15df6"
- JAXP_FILE = "${JAXP_CHANGESET}.tar.gz"
- JAXP_URI = "${ICEDTEA_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
--SRC_URI[jaxp.md5sum] = "56e609548b322149cb84604f232a4602"
--SRC_URI[jaxp.sha256sum] = "8ce48c704f38285207ee6dc56c45b2d214083b4d4d36be02901401b594ce701e"
-+SRC_URI[jaxp.md5sum] = "a0982b6df79739127871e355a40ca5a6"
-+SRC_URI[jaxp.sha256sum] = "297c8dbeed5afa5395b6be06b17282d53f8a888c2909074dfc1605afc0daf1c2"
- 
- JAXWS_CHANGESET = "7edfbfe974f2"
- JAXWS_FILE = "${JAXWS_CHANGESET}.tar.gz"
-@@ -42,11 +42,11 @@ JAXWS_URI = "${ICEDTEA_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=fal
- SRC_URI[jaxws.md5sum] = "2deecec809ea8e38835678889c2bc3ac"
- SRC_URI[jaxws.sha256sum] = "823ca6b8fd780bf1b1565a90cfc8ec6f0ee422a5d25ffb20b1ce0272dc4955aa"
- 
--JDK_CHANGESET = "50f6f276a06c"
-+JDK_CHANGESET = "d5ddeffc4651"
- JDK_FILE = "${JDK_CHANGESET}.tar.gz"
- JDK_URI = "${ICEDTEA_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
--SRC_URI[jdk.md5sum] = "7ee77eeeff600c5a4763b4ac76fd62bc"
--SRC_URI[jdk.sha256sum] = "5f8b5edbebb358730425e64a31eaa11c346467ba10ffe1848f2d2ad2ea53bc3d"
-+SRC_URI[jdk.md5sum] = "27c28d6be213df818490e69f12efe475"
-+SRC_URI[jdk.sha256sum] = "e83e6234842376147a4c32451f23d629ba107e908ebdb0f367657f9cc6c1be98"
- 
- LANGTOOLS_CHANGESET = "b534c4c6cd9b"
- LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.gz"
-@@ -81,7 +81,6 @@ OPENJDK_PATCHES = " \
-         file://icedtea-hotspot-make-arch-sane-for-x86.patch;apply=no \
-         file://icedtea-jdk-sane-x86-arch.patch;apply=no \
- 	file://icedtea-flags.patch;apply=no \
--        file://icedtea-remove_sparc_compiler_option.patch;apply=no \
++ICEDTEAPATCHES_append_powerpc = " \
++	file://icedtea-jdk-nio-use-host-cc.patch;apply=no \
++	file://icedtea-jdk-ppc64-jvm-cfg.patch;apply=no \
++        "
++ICEDTEAPATCHES_append_powerpc64 = " \
++	file://icedtea-jdk-nio-use-host-cc.patch;apply=no \
++	file://icedtea-jdk-ppc64-jvm-cfg.patch;apply=no \
++        "
+ ICEDTEAPATCHES_append_libc-uclibc = " \
+         file://icedtea-hotspot-isfinte.patch;apply=no \
+         file://icedtea-hotspot-glibc-version.patch;apply=no \
+@@ -129,4 +136,12 @@ DISTRIBUTION_PATCHES_append_libc-uclibc = "\
+ 	patches/icedtea-hotspot-dlvsym-uclibc.patch \
          "
  
- #	file://icedtea-disable-desktop-dirs.patch;apply=no \
-@@ -94,7 +93,6 @@ export DISTRIBUTION_PATCHES = " \
-         patches/icedtea-hotspot-make-arch-sane-for-x86.patch \
-         patches/icedtea-jdk-sane-x86-arch.patch \
- 	patches/icedtea-flags.patch \
--        patches/icedtea-remove_sparc_compiler_option.patch \
-         "
- 
- #	patches/icedtea-disable-desktop-dirs.patch \
++DISTRIBUTION_PATCHES_append_powerpc = " \
++	patches/icedtea-jdk-nio-use-host-cc.patch \
++	patches/icedtea-jdk-ppc64-jvm-cfg.patch \
++        "
++DISTRIBUTION_PATCHES_append_powerpc64 = " \
++	patches/icedtea-jdk-nio-use-host-cc.patch \
++	patches/icedtea-jdk-ppc64-jvm-cfg.patch \
++        "
+ export DISTRIBUTION_PATCHES
 -- 
 1.7.9.5
 
