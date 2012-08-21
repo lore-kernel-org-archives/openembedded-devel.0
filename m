@@ -1,35 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1T3yIE-0008S5-0i
+	(envelope-from <elvis.dowson@gmail.com>) id 1T3yIK-0008Sy-GH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2012 01:55:30 +0200
-Received: by mail-pb0-f47.google.com with SMTP id wy7so591581pbc.6
+	Wed, 22 Aug 2012 01:55:37 +0200
+Received: by daks35 with SMTP id s35so241038dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2012 16:43:27 -0700 (PDT)
+	Tue, 21 Aug 2012 16:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=RjZMPD09AII12or8gxvuF+vuvk/0weq0HJ666AQxQUU=;
-	b=dAUYO3sTxPIpRcySxxQZKS/o1x0p3hHeadlp0M0NbseiuUP+KZ0E/pR3+tvzOu5LLU
-	WELKA4EH/abNq7a4wqYv3mdxIo/htgwMplVaGRta/6VL1yUwYbZx7ZTpOKT67yTGQ/Zy
-	OwqGCd664g886BDkteEwjoJ/MovSKWN/0ga9EJFZk3tkKGNytR0d500vLs0EewepSdVm
-	nHKaZ31x2SEVqGHljY0cx7A9Qg8cEauRIiXGsRW0H93AHvsBHt6sIbLWs9/F0TRb+UsJ
-	DZbzWJNDdkak430EpLmyeIKfKkmgeoV5XMBzvqkcEyaUZWYSQwJDDg+oop3y6Kd+okO7
-	894Q==
-Received: by 10.68.228.1 with SMTP id se1mr47948500pbc.110.1345592607436;
-	Tue, 21 Aug 2012 16:43:27 -0700 (PDT)
+	bh=RtCsu/+85NFEyTLxmGBVr/SyylEs6ODVj5J8YjinJWg=;
+	b=qI3QjlZ+R9KSdBMdtDzVSjLeKHv0rXdldRAk6Cyishvurt5yycaixQUqAsIuWOSfGt
+	TK4tdLRhiDiAwg5a/7xVMERc0czR/pz+CYRhjK7RdgcUTdvoaGxvEOR1nLEIKKmoCEnh
+	D2yc0MdhDHEb/WwkTn80pjrEDBfSUOmemQG5szu2E0EtfFR7GmWUdqfe5DRhcPuma0rx
+	LpSryB6vULBqdasbqBIn3sO+jpn5hMMw7WWteb+xKoHuUreCep2EmHhq908M5MJ198gf
+	vFDG7OtExs8rbff+ZsJ+TY3kMeqXJ2irVo5My/tvP+v594U+Bjm/adCnvNv3xMaAFAG+
+	+ADg==
+Received: by 10.66.84.6 with SMTP id u6mr41460673pay.75.1345592611236;
+	Tue, 21 Aug 2012 16:43:31 -0700 (PDT)
 Received: from eos.du.ae ([94.205.108.162])
-	by mx.google.com with ESMTPS id ko8sm2387620pbc.40.2012.08.21.16.43.23
+	by mx.google.com with ESMTPS id ko8sm2387620pbc.40.2012.08.21.16.43.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Aug 2012 16:43:26 -0700 (PDT)
+	Tue, 21 Aug 2012 16:43:30 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2012 03:43:10 +0400
-Message-Id: <1345592591-20385-2-git-send-email-elvis.dowson@gmail.com>
+Date: Wed, 22 Aug 2012 03:43:11 +0400
+Message-Id: <1345592591-20385-3-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1345592591-20385-1-git-send-email-elvis.dowson@gmail.com>
 References: <1345592591-20385-1-git-send-email-elvis.dowson@gmail.com>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-xilinx 2/3] linux-xilinx-3.0: Add new recipe for linux-xilinx v3.0.0 kernel.
+Subject: [meta-xilinx 3/3] linux-xilinx-3.3: Add new recipe for linux-xilinx v3.3.0 kernel.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +43,275 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 23:55:30 -0000
+X-List-Received-Date: Tue, 21 Aug 2012 23:55:37 -0000
 
-This commit adds a new recipe for the linux-xilinx v3.0.0 kernel, and
+This commit adds a new recipe for the linux-xilinx v3.3.0 kernel, and
 includes the following features:
 * support for Xilinx ML507 development board
 * support for Xilinx Virtex 5 PowerPC440 processor
 * support for console output on a LCD display using the DVI port
 * support for using a ramdisk and booting to a bash prompt
-* support for xps-uartlite-1.01.a, ttyUL0
+* support for xps-uart16550-2.00.a, ttyS0
 * support for xps-ethernetlite-4.00.a, 10/100 Mbps ethernet interface
 
 The ramdisk size has been set to 32768 kilobytes. This value can be
-changed by modifying the supplied kernel deconfig_3.0.0
+changed by modifying the supplied kernel deconfig_3.3.0
 
-The linux-xilinx v3.0.0 kernel has been tested using a hardware project
-created using Xilinx EDK 13.1.
+The linux-xilinx v3.3.0 kernel has been tested using a hardware project
+created using Xilinx EDK 14.2.
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- ...l507.dts-Update-device-tree-to-version-ge.patch |  828 ++++++++++
- ...l507.dts-Update-bootargs-to-use-ramdisk-a.patch |   73 +
- .../linux/linux-xilinx-3.0/virtex5/defconfig_3.0.0 | 1652 ++++++++++++++++++++
- recipes-kernel/linux/linux-xilinx_3.0.bb           |   25 +
- 4 files changed, 2578 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-xilinx-3.0/virtex5/0001-virtex440-ml507.dts-Update-device-tree-to-version-ge.patch
- create mode 100644 recipes-kernel/linux/linux-xilinx-3.0/virtex5/0002-virtex440-ml507.dts-Update-bootargs-to-use-ramdisk-a.patch
- create mode 100644 recipes-kernel/linux/linux-xilinx-3.0/virtex5/defconfig_3.0.0
- create mode 100644 recipes-kernel/linux/linux-xilinx_3.0.bb
+ ...pdate-IP-Core-support-for-Xilinx-ISE-14.1.patch |  149 ++
+ ...l507.dts-Update-device-tree-file-using-Xi.patch |  875 ++++++++++
+ ...x-regression-in-call-to-XPS-TFT-controlle.patch |   32 +
+ .../linux/linux-xilinx-3.3/virtex5/defconfig_3.3.0 | 1704 ++++++++++++++++++++
+ recipes-kernel/linux/linux-xilinx_3.3.bb           |   26 +
+ 5 files changed, 2786 insertions(+)
+ create mode 100644 recipes-kernel/linux/linux-xilinx-3.3/virtex5/0001-Xilinx-Update-IP-Core-support-for-Xilinx-ISE-14.1.patch
+ create mode 100644 recipes-kernel/linux/linux-xilinx-3.3/virtex5/0002-virtex440-ml507.dts-Update-device-tree-file-using-Xi.patch
+ create mode 100644 recipes-kernel/linux/linux-xilinx-3.3/virtex5/0003-xilinxfb-Fix-regression-in-call-to-XPS-TFT-controlle.patch
+ create mode 100644 recipes-kernel/linux/linux-xilinx-3.3/virtex5/defconfig_3.3.0
+ create mode 100644 recipes-kernel/linux/linux-xilinx_3.3.bb
 
-diff --git a/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0001-virtex440-ml507.dts-Update-device-tree-to-version-ge.patch b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0001-virtex440-ml507.dts-Update-device-tree-to-version-ge.patch
+diff --git a/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0001-Xilinx-Update-IP-Core-support-for-Xilinx-ISE-14.1.patch b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0001-Xilinx-Update-IP-Core-support-for-Xilinx-ISE-14.1.patch
 new file mode 100644
-index 0000000..0710f6c
+index 0000000..321f64d
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0001-virtex440-ml507.dts-Update-device-tree-to-version-ge.patch
-@@ -0,0 +1,828 @@
-+From d543cb700dc4c29369095b6099f6c0c416092e1c Mon Sep 17 00:00:00 2001
++++ b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0001-Xilinx-Update-IP-Core-support-for-Xilinx-ISE-14.1.patch
+@@ -0,0 +1,149 @@
++From 8a353689559cd864647d39a05ef449e423a07fdd Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Tue, 21 Aug 2012 18:56:18 +0400
-+Subject: [PATCH 1/2] virtex440-ml507.dts: Update device tree to version
-+ generated by Xilinx EDK 13.1.
++Date: Wed, 22 Aug 2012 01:38:03 +0400
++Subject: [PATCH 1/3] Xilinx: Update IP Core support for Xilinx ISE 14.1.
 +
-+This commit updates the virtex-ml507.dts device tree file version
-+automatically generated by Xilinx EDK 13.1.
++This commit updates linux kernel support for the following IP Cores
++shipped with Xilinx ISE 14.1:
++xlnx,xps-sysace-1.01.a
++xlnx,xps-iic-2.02.a
++xlnx,xps-ethernetlite-4.00.a
++xlnx,xps-ll-temac-2.03.a
++xlnx,xps-uartlite-1.02.a
 +
-+The bootargs are set as follows:
-+console=ttyS0,115200 ip=on root=/dev/xsa2 rw
++This commit also updates PowerPC support for the following IP Cores
++shipped with Xilinx ISE 14.1:
++xps-uartlite-1.02.a
++xlnx,plb-v46-1.05.a
++xlnx,xps-intc-2.01.a
 +
 +Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 +---
-+ arch/powerpc/boot/dts/virtex440-ml507.dts |  796 +++++++++++++++--------------
-+ 1 file changed, 416 insertions(+), 380 deletions(-)
++ arch/powerpc/boot/serial.c                         |    4 +++-
++ arch/powerpc/platforms/44x/virtex.c                |    3 +++
++ arch/powerpc/sysdev/xilinx_intc.c                  |    2 ++
++ drivers/block/xsysace.c                            |    1 +
++ drivers/i2c/algos/xilinx_iic/i2c-algo-xilinx.c     |    2 ++
++ drivers/net/ethernet/xilinx/xilinx_emaclite.c      |    2 ++
++ .../ethernet/xilinx/xilinx_lltemac/xlltemac_main.c |    4 ++++
++ drivers/tty/serial/uartlite.c                      |    2 ++
++ 8 files changed, 19 insertions(+), 1 deletion(-)
++
++diff --git a/arch/powerpc/boot/serial.c b/arch/powerpc/boot/serial.c
++index f2156f0..6f901dc 100644
++--- a/arch/powerpc/boot/serial.c
+++++ b/arch/powerpc/boot/serial.c
++@@ -130,7 +130,9 @@ int serial_console_init(void)
++ 	else if (dt_is_compatible(devp, "fsl,mpc5200-psc-uart"))
++ 		rc = mpc5200_psc_console_init(devp, &serial_cd);
++ 	else if (dt_is_compatible(devp, "xlnx,opb-uartlite-1.00.b") ||
++-		 dt_is_compatible(devp, "xlnx,xps-uartlite-1.00.a"))
+++		dt_is_compatible(devp, "xlnx,xps-uartlite-1.00.a") ||
+++		dt_is_compatible(devp, "xlnx,xps-uartlite-1.01.a") ||
+++		dt_is_compatible(devp, "xlnx,xps-uartlite-1.02.a"))
++ 		rc = uartlite_console_init(devp, &serial_cd);
++ 
++ 	/* Add other serial console driver calls here */
++diff --git a/arch/powerpc/platforms/44x/virtex.c b/arch/powerpc/platforms/44x/virtex.c
++index cf96cca..eb208d3 100644
++--- a/arch/powerpc/platforms/44x/virtex.c
+++++ b/arch/powerpc/platforms/44x/virtex.c
++@@ -25,6 +25,9 @@ static struct of_device_id xilinx_of_bus_ids[] __initdata = {
++ 	{ .compatible = "simple-bus", },
++ 	{ .compatible = "xlnx,plb-v46-1.00.a", },
++ 	{ .compatible = "xlnx,plb-v46-1.02.a", },
+++	{ .compatible = "xlnx,plb-v46-1.03.a", },
+++	{ .compatible = "xlnx,plb-v46-1.04.a", },
+++	{ .compatible = "xlnx,plb-v46-1.05.a", },
++ 	{ .compatible = "xlnx,plb-v34-1.01.a", },
++ 	{ .compatible = "xlnx,plb-v34-1.02.a", },
++ 	{ .compatible = "xlnx,opb-v20-1.10.c", },
++diff --git a/arch/powerpc/sysdev/xilinx_intc.c b/arch/powerpc/sysdev/xilinx_intc.c
++index 6183799..a115a20 100644
++--- a/arch/powerpc/sysdev/xilinx_intc.c
+++++ b/arch/powerpc/sysdev/xilinx_intc.c
++@@ -267,6 +267,8 @@ static inline void xilinx_i8259_setup_cascade(void) { return; }
++ static struct of_device_id xilinx_intc_match[] __initconst = {
++ 	{ .compatible = "xlnx,opb-intc-1.00.c", },
++ 	{ .compatible = "xlnx,xps-intc-1.00.a", },
+++	{ .compatible = "xlnx,xps-intc-2.00.a", },
+++	{ .compatible = "xlnx,xps-intc-2.01.a", },
++ 	{}
++ };
++ 
++diff --git a/drivers/block/xsysace.c b/drivers/block/xsysace.c
++index 6e9a86b..8b2ee12 100644
++--- a/drivers/block/xsysace.c
+++++ b/drivers/block/xsysace.c
++@@ -1194,6 +1194,7 @@ static const struct of_device_id ace_of_match[] __devinitconst = {
++ 	{ .compatible = "xlnx,opb-sysace-1.00.b", },
++ 	{ .compatible = "xlnx,opb-sysace-1.00.c", },
++ 	{ .compatible = "xlnx,xps-sysace-1.00.a", },
+++	{ .compatible = "xlnx,xps-sysace-1.01.a", },
++ 	{ .compatible = "xlnx,sysace", },
++ 	{},
++ };
++diff --git a/drivers/i2c/algos/xilinx_iic/i2c-algo-xilinx.c b/drivers/i2c/algos/xilinx_iic/i2c-algo-xilinx.c
++index 4f3c599..c59b6d0 100644
++--- a/drivers/i2c/algos/xilinx_iic/i2c-algo-xilinx.c
+++++ b/drivers/i2c/algos/xilinx_iic/i2c-algo-xilinx.c
++@@ -554,6 +554,8 @@ static int __devinit xilinx_iic_setup(
++ /* Match table for of_platform binding */
++ static struct of_device_id __devinitdata xilinx_iic_of_match[] = {
++ 	{ .compatible = "xlnx,xps-iic-2.00.a", },
+++	{ .compatible = "xlnx,xps-iic-2.01.a", },
+++	{ .compatible = "xlnx,xps-iic-2.02.a", },
++ 	{},
++ };
++ MODULE_DEVICE_TABLE(of, xilinx_iic_of_match);
++diff --git a/drivers/net/ethernet/xilinx/xilinx_emaclite.c b/drivers/net/ethernet/xilinx/xilinx_emaclite.c
++index 79013e5..91fb8e0 100644
++--- a/drivers/net/ethernet/xilinx/xilinx_emaclite.c
+++++ b/drivers/net/ethernet/xilinx/xilinx_emaclite.c
++@@ -1289,6 +1289,8 @@ static struct of_device_id xemaclite_of_match[] __devinitdata = {
++ 	{ .compatible = "xlnx,xps-ethernetlite-2.00.a", },
++ 	{ .compatible = "xlnx,xps-ethernetlite-2.01.a", },
++ 	{ .compatible = "xlnx,xps-ethernetlite-3.00.a", },
+++	{ .compatible = "xlnx,xps-ethernetlite-3.01.a", },
+++	{ .compatible = "xlnx,xps-ethernetlite-4.00.a", },
++ 	{ /* end of list */ },
++ };
++ MODULE_DEVICE_TABLE(of, xemaclite_of_match);
++diff --git a/drivers/net/ethernet/xilinx/xilinx_lltemac/xlltemac_main.c b/drivers/net/ethernet/xilinx/xilinx_lltemac/xlltemac_main.c
++index e008795..b05e996 100644
++--- a/drivers/net/ethernet/xilinx/xilinx_lltemac/xlltemac_main.c
+++++ b/drivers/net/ethernet/xilinx/xilinx_lltemac/xlltemac_main.c
++@@ -3595,6 +3595,7 @@ static struct of_device_id xtenet_fifo_of_match[] = {
++ 	{ .compatible = "xlnx,xps-ll-fifo-1.00.a", },
++ 	{ .compatible = "xlnx,xps-ll-fifo-1.00.b", },
++ 	{ .compatible = "xlnx,xps-ll-fifo-1.01.a", },
+++	{ .compatible = "xlnx,xps-ll-fifo-1.02.a", },
++ 	{ /* end of list */ },
++ };
++ 
++@@ -3746,6 +3747,9 @@ static struct of_device_id xtenet_of_match[] = {
++ 	{ .compatible = "xlnx,xps-ll-temac-1.00.b", },
++ 	{ .compatible = "xlnx,xps-ll-temac-1.01.a", },
++ 	{ .compatible = "xlnx,xps-ll-temac-1.01.b", },
+++	{ .compatible = "xlnx,xps-ll-temac-2.00.a", },
+++	{ .compatible = "xlnx,xps-ll-temac-2.02.a", },
+++	{ .compatible = "xlnx,xps-ll-temac-2.03.a", },
++ 	{ /* end of list */ },
++ };
++ 
++diff --git a/drivers/tty/serial/uartlite.c b/drivers/tty/serial/uartlite.c
++index 6cd4143..dd0664d 100644
++--- a/drivers/tty/serial/uartlite.c
+++++ b/drivers/tty/serial/uartlite.c
++@@ -566,6 +566,8 @@ static int __devexit ulite_release(struct device *dev)
++ static struct of_device_id ulite_of_match[] __devinitdata = {
++ 	{ .compatible = "xlnx,opb-uartlite-1.00.b", },
++ 	{ .compatible = "xlnx,xps-uartlite-1.00.a", },
+++	{ .compatible = "xlnx,xps-uartlite-1.01.a", },
+++	{ .compatible = "xlnx,xps-uartlite-1.02.a", },
++ 	{}
++ };
++ MODULE_DEVICE_TABLE(of, ulite_of_match);
++-- 
++1.7.9.5
++
+diff --git a/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0002-virtex440-ml507.dts-Update-device-tree-file-using-Xi.patch b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0002-virtex440-ml507.dts-Update-device-tree-file-using-Xi.patch
+new file mode 100644
+index 0000000..8f8439a
+--- /dev/null
++++ b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0002-virtex440-ml507.dts-Update-device-tree-file-using-Xi.patch
+@@ -0,0 +1,875 @@
++From 5c1fb2211db810f46aeb42c5741e6427a1443305 Mon Sep 17 00:00:00 2001
++From: Elvis Dowson <elvis.dowson@gmail.com>
++Date: Wed, 22 Aug 2012 03:13:47 +0400
++Subject: [PATCH 2/3] virtex440-ml507.dts: Update device tree file using
++ Xilinx ISE 14.2.
++
++This commit updates the device tree to one generated automatically by
++Xilinx ISE 14.2.
++
++The bootargs are set as follows:
++console=tty0 ip=on root=/dev/ram rw rootwait init=/bin/sh
++
++The bootargs are set to boot using tty0, which corresponds to an LCD
++display monitor connected to the DVI port, as the serial console output.
++
++This configuration is intended to be used with an initrd.image.gz
++ramdisk file for the initial boot process. The size of the ramdisk file
++is set to 32768 kilobytes, and is specified in the kernel defconfig file.
++
++The device tree is intended to be used with a hardware bitstream that
++specifies ttyS0 (xps-uart16550), instead of ttyUL0 (xps-uartlite),
++as the serial console output device.
++
++To display console output using ttyS0, modify the bootargs as follows:
++console=ttyS0,115200n8 ip=on root=/dev/ram rw rootwait init=/bin/sh
++
++The entries for xps-ethernetlite have had to be manually modified to add
++missing phy-handle and mdio entries, based on a device tree generated
++using Xilinx XPS 13.1.
++
++Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
++---
++ arch/powerpc/boot/dts/virtex440-ml507.dts |  820 +++++++++++++++--------------
++ 1 file changed, 433 insertions(+), 387 deletions(-)
 +
 +diff --git a/arch/powerpc/boot/dts/virtex440-ml507.dts b/arch/powerpc/boot/dts/virtex440-ml507.dts
-+index 9cf6081..1d60466 100644
++index 9cf6081..b42a442 100644
 +--- a/arch/powerpc/boot/dts/virtex440-ml507.dts
 ++++ b/arch/powerpc/boot/dts/virtex440-ml507.dts
-+@@ -13,387 +13,423 @@
-+  * Device Tree Generator version: 1.1
++@@ -1,399 +1,445 @@
++ /*
++- * This file supports the Xilinx ML507 board with the 507 processor.
++- * A reference design for the FPGA is provided at http://www.xilinx.com.
+++ * Device Tree Generator version: 1.3
++  *
++- * (C) Copyright 2008 Xilinx, Inc.
+++ * (C) Copyright 2007-2008 Xilinx, Inc.
+++ * (C) Copyright 2007-2009 Michal Simek
++  *
++- * This file is licensed under the terms of the GNU General Public License
++- * version 2. This program is licensed "as is" without any warranty of any
++- * kind, whether express or implied.
+++ * Michal SIMEK <monstr@monstr.eu>
++  *
++- * ---
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
++  *
++- * Device Tree Generator version: 1.1
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
 +  *
 +  * CAUTION: This file is automatically generated by libgen.
 +- * Version: Xilinx EDK 10.1.03 EDK_K_SP3.6
-++ * Version: Xilinx EDK 13.1 EDK_O.40d
+++ * Version: Xilinx EDK 14.2 EDK_P.28xd
 +  *
-+  * XPS project directory: ml507_ppc440_emb_ref
++- * XPS project directory: ml507_ppc440_emb_ref
+++ * XPS project directory: linux_2_6_bsp_0
 +  */
 +-
 +-/dts-v1/;
@@ -122,7 +327,21 @@ index 0000000..0710f6c
 +-	} ;
 +-	chosen {
 +-		bootargs = "console=ttyS0 ip=on root=/dev/ram";
-+-		linux,stdout-path = "/plb@0/serial@83e00000";
+++
+++/dts-v1/;
+++/ {
+++	#address-cells = <1>;
+++	#size-cells = <1>;
+++	compatible = "xlnx,virtex440", "xlnx,virtex";
+++	dcr-parent = <&ppc440_0>;
+++	model = "testing";
+++	aliases {
+++		ethernet0 = &ethernet_mac;
+++		serial0 = &rs232_uart_1;
+++	} ;
+++	chosen {
+++		bootargs = "console=tty0 ip=on root=/dev/ram rw rootwait init=/bin/sh";
++ 		linux,stdout-path = "/plb@0/serial@83e00000";
 +-	} ;
 +-	cpus {
 +-		#address-cells = <1>;
@@ -142,25 +361,6 @@ index 0000000..0710f6c
 +-			i-cache-size = <0x8000>;
 +-			model = "PowerPC,440";
 +-			reg = <0>;
-++
-++/dts-v1/;
-++/ {
-++	#address-cells = <1>;
-++	#size-cells = <1>;
-++	compatible = "xlnx,virtex440", "xlnx,virtex";
-++	dcr-parent = <&ppc440_0>;
-++	model = "testing";
-++	DDR2_SDRAM: memory@0 {
-++		device_type = "memory";
-++		reg = < 0x0 0x10000000 >;
-++	} ;
-++	aliases {
-++		ethernet0 = &Ethernet_MAC;
-++		serial0 = &RS232_Uart_1;
-++	} ;
-++	chosen {
-++		bootargs = "console=ttyS0,115200 ip=on root=/dev/xsa2 rw";
-++		linux,stdout-path = "/plb@0/serial@84000000";
 ++	} ;
 ++	cpus {
 ++		#address-cells = <1>;
@@ -525,7 +725,6 @@ index 0000000..0710f6c
 +-			xlnx,trig1-assert = <0x1>;
 +-		} ;
 +-	} ;
-+-}  ;
 ++			xlnx,apu-control = <0x2000>;
 ++			xlnx,apu-udi-0 = <0x0>;
 ++			xlnx,apu-udi-1 = <0x0>;
@@ -618,11 +817,16 @@ index 0000000..0710f6c
 ++			xlnx,user-reset = <0x0>;
 ++		} ;
 ++	} ;
+++	ddr2_sdram: memory@0 {
+++		device_type = "memory";
+++		reg = < 0x0 0x10000000 >;
+++	} ;
 ++	plb_v46_0: plb@0 {
 ++		#address-cells = <1>;
 ++		#size-cells = <1>;
 ++		compatible = "xlnx,plb-v46-1.05.a", "xlnx,plb-v46-1.00.a", "simple-bus";
-++		DIP_Switches_8Bit: gpio@81460000 {
+++		ranges ;
+++		dip_switches_8bit: gpio@81460000 {
 ++			compatible = "xlnx,xps-gpio-2.00.a", "xlnx,xps-gpio-1.00.a";
 ++			interrupt-parent = <&xps_intc_0>;
 ++			interrupts = < 10 2 >;
@@ -639,12 +843,12 @@ index 0000000..0710f6c
 ++			xlnx,tri-default = <0xffffffff>;
 ++			xlnx,tri-default-2 = <0xffffffff>;
 ++		} ;
-++		Ethernet_MAC: ethernet@81000000 {
+++		ethernet_mac: ethernet@81000000 {
 ++			compatible = "xlnx,xps-ethernetlite-4.00.a", "xlnx,xps-ethernetlite-1.00.a";
 ++			device_type = "network";
 ++			interrupt-parent = <&xps_intc_0>;
 ++			interrupts = < 5 0 >;
-++			local-mac-address = [ 00 0a 35 01 a5 00 ];
+++			local-mac-address = [ 00 0a 35 b7 78 00 ];
 ++			phy-handle = <&phy0>;
 ++			reg = < 0x81000000 0x10000 >;
 ++			xlnx,duplex = <0x1>;
@@ -664,7 +868,7 @@ index 0000000..0710f6c
 ++				} ;
 ++			} ;
 ++		} ;
-++		FLASH: flash@8c000000 {
+++		flash: flash@8c000000 {
 ++			bank-width = <2>;
 ++			compatible = "xlnx,xps-mch-emc-3.01.a", "cfi-flash";
 ++			reg = < 0x8c000000 0x2000000 >;
@@ -752,7 +956,7 @@ index 0000000..0710f6c
 ++			xlnx,xcl3-linesize = <0x4>;
 ++			xlnx,xcl3-writexfer = <0x1>;
 ++		} ;
-++		IIC_EEPROM: i2c@81600000 {
+++		iic_eeprom: i2c@81600000 {
 ++			compatible = "xlnx,xps-iic-2.03.a", "xlnx,xps-iic-2.00.a";
 ++			interrupt-parent = <&xps_intc_0>;
 ++			interrupts = < 7 2 >;
@@ -765,7 +969,7 @@ index 0000000..0710f6c
 ++			xlnx,sda-inertial-delay = <0x5>;
 ++			xlnx,ten-bit-adr = <0x0>;
 ++		} ;
-++		LEDs_8Bit: gpio@81440000 {
+++		leds_8bit: gpio@81440000 {
 ++			compatible = "xlnx,xps-gpio-2.00.a", "xlnx,xps-gpio-1.00.a";
 ++			reg = < 0x81440000 0x10000 >;
 ++			xlnx,all-inputs = <0x0>;
@@ -780,7 +984,7 @@ index 0000000..0710f6c
 ++			xlnx,tri-default = <0xffffffff>;
 ++			xlnx,tri-default-2 = <0xffffffff>;
 ++		} ;
-++		LEDs_Positions: gpio@81420000 {
+++		leds_positions: gpio@81420000 {
 ++			compatible = "xlnx,xps-gpio-2.00.a", "xlnx,xps-gpio-1.00.a";
 ++			reg = < 0x81420000 0x10000 >;
 ++			xlnx,all-inputs = <0x0>;
@@ -795,7 +999,7 @@ index 0000000..0710f6c
 ++			xlnx,tri-default = <0xffffffff>;
 ++			xlnx,tri-default-2 = <0xffffffff>;
 ++		} ;
-++		Push_Buttons_5Bit: gpio@81400000 {
+++		push_buttons_5bit: gpio@81400000 {
 ++			compatible = "xlnx,xps-gpio-2.00.a", "xlnx,xps-gpio-1.00.a";
 ++			interrupt-parent = <&xps_intc_0>;
 ++			interrupts = < 11 2 >;
@@ -812,22 +1016,22 @@ index 0000000..0710f6c
 ++			xlnx,tri-default = <0xffffffff>;
 ++			xlnx,tri-default-2 = <0xffffffff>;
 ++		} ;
-++		RS232_Uart_1: serial@84000000 {
+++		rs232_uart_1: serial@83e00000 {
 ++			clock-frequency = <100000000>;
-++			compatible = "xlnx,xps-uartlite-1.01.a", "xlnx,xps-uartlite-1.00.a";
-++			current-speed = <115200>;
+++			compatible = "xlnx,xps-uart16550-3.00.a", "ns16550";
+++			current-speed = <9600>;
 ++			device_type = "serial";
 ++			interrupt-parent = <&xps_intc_0>;
-++			interrupts = < 12 0 >;
-++			port-number = <0>;
-++			reg = < 0x84000000 0x10000 >;
-++			xlnx,baudrate = <0x1c200>;
-++			xlnx,data-bits = <0x8>;
+++			interrupts = < 12 2 >;
+++			reg = < 0x83e00000 0x10000 >;
+++			reg-offset = <0x1003>;
+++			reg-shift = <2>;
 ++			xlnx,family = "virtex5";
-++			xlnx,odd-parity = <0x0>;
-++			xlnx,use-parity = <0x0>;
+++			xlnx,has-external-rclk = <0x0>;
+++			xlnx,has-external-xin = <0x0>;
+++			xlnx,is-a-16550 = <0x1>;
 ++		} ;
-++		SysACE_CompactFlash: sysace@83600000 {
+++		sysace_compactflash: sysace@83600000 {
 ++			compatible = "xlnx,xps-sysace-1.01.a", "xlnx,xps-sysace-1.00.a";
 ++			interrupt-parent = <&xps_intc_0>;
 ++			interrupts = < 4 2 >;
@@ -845,7 +1049,7 @@ index 0000000..0710f6c
 ++			compatible = "xlnx,xps-intc-2.01.a", "xlnx,xps-intc-1.00.a";
 ++			interrupt-controller ;
 ++			reg = < 0x81800000 0x10000 >;
-++			xlnx,kind-of-intr = <0x106a>;
+++			xlnx,kind-of-intr = <0x6a>;
 ++			xlnx,num-intr-inputs = <0xd>;
 ++		} ;
 ++		xps_ps2_0: xps-ps2@81480000 {
@@ -867,7 +1071,7 @@ index 0000000..0710f6c
 ++			} ;
 ++		} ;
 ++		xps_tft_0: tft@86e00000 {
-++			compatible = "xlnx,xps-tft-2.01.a";
+++			compatible = "xlnx,xps-tft-2.01.a", "xlnx,xps-tft-1.00.a";
 ++			reg = < 0x86e00000 0x10000 >;
 ++			xlnx,dcr-splb-slave-if = <0x1>;
 ++			xlnx,default-tft-base-addr = <0x0>;
@@ -902,98 +1106,57 @@ index 0000000..0710f6c
 ++			xlnx,trig1-assert = <0x1>;
 ++		} ;
 ++	} ;
-++} ;
++ }  ;
 +-- 
 +1.7.9.5
 +
-diff --git a/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0002-virtex440-ml507.dts-Update-bootargs-to-use-ramdisk-a.patch b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0002-virtex440-ml507.dts-Update-bootargs-to-use-ramdisk-a.patch
+diff --git a/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0003-xilinxfb-Fix-regression-in-call-to-XPS-TFT-controlle.patch b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0003-xilinxfb-Fix-regression-in-call-to-XPS-TFT-controlle.patch
 new file mode 100644
-index 0000000..3b7b635
+index 0000000..2ebc0eb
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/0002-virtex440-ml507.dts-Update-bootargs-to-use-ramdisk-a.patch
-@@ -0,0 +1,73 @@
-+From 4f13e61872e224eaa509a61eca31c9baa7694d94 Mon Sep 17 00:00:00 2001
++++ b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/0003-xilinxfb-Fix-regression-in-call-to-XPS-TFT-controlle.patch
+@@ -0,0 +1,32 @@
++From a77debe1e3b3823e18d8ef021b694c42b1515dda Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Tue, 21 Aug 2012 18:59:41 +0400
-+Subject: [PATCH 2/2] virtex440-ml507.dts: Update bootargs to use ramdisk and
-+ boot to a bash prompt.
++Date: Wed, 22 Aug 2012 03:22:42 +0400
++Subject: [PATCH 3/3] xilinxfb: Fix regression in call to XPS TFT controller
++ write API.
 +
-+This commit updates the device tree bootargs to use the ramdisk and boot
-+to a bash prompt.
++This commit fixes a regression in xilinx_fb_out_be32(), where an incorrect
++call to the XPS TFT controller's write API, caused the display not to work.
 +
-+The bootargs are set as follows:
-+console=tty0,9600 ip=on root=/dev/ram rw rootdelay=1 init=/bin/sh
++This fix has been adapted from linux-xilinx-3.0.0.
 +
 +Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 +---
-+ arch/powerpc/boot/dts/virtex440-ml507.dts |   29 +++++++++++++++++++----------
-+ 1 file changed, 19 insertions(+), 10 deletions(-)
++ drivers/video/xilinxfb.c |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/arch/powerpc/boot/dts/virtex440-ml507.dts b/arch/powerpc/boot/dts/virtex440-ml507.dts
-+index 1d60466..70f9da2 100644
-+--- a/arch/powerpc/boot/dts/virtex440-ml507.dts
-++++ b/arch/powerpc/boot/dts/virtex440-ml507.dts
-+@@ -1,21 +1,30 @@
-+ /*
-+- * This file supports the Xilinx ML507 board with the 507 processor.
-+- * A reference design for the FPGA is provided at http://www.xilinx.com.
-++ * Device Tree Generator version: 1.3
-+  *
-+- * (C) Copyright 2008 Xilinx, Inc.
-++ * (C) Copyright 2007-2008 Xilinx, Inc.
-++ * (C) Copyright 2007-2009 Michal Simek
-+  *
-+- * This file is licensed under the terms of the GNU General Public License
-+- * version 2. This program is licensed "as is" without any warranty of any
-+- * kind, whether express or implied.
-++ * Michal SIMEK <monstr@monstr.eu>
-+  *
-+- * ---
-++ * This program is free software; you can redistribute it and/or
-++ * modify it under the terms of the GNU General Public License as
-++ * published by the Free Software Foundation; either version 2 of
-++ * the License, or (at your option) any later version.
-+  *
-+- * Device Tree Generator version: 1.1
-++ * This program is distributed in the hope that it will be useful,
-++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-++ * GNU General Public License for more details.
-++ *
-++ * You should have received a copy of the GNU General Public License
-++ * along with this program; if not, write to the Free Software
-++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-++ * MA 02111-1307 USA
-+  *
-+  * CAUTION: This file is automatically generated by libgen.
-+  * Version: Xilinx EDK 13.1 EDK_O.40d
-+  *
-+- * XPS project directory: ml507_ppc440_emb_ref
-++ * XPS project directory: device-tree_bsp_0
-+  */
-+ 
-+ /dts-v1/;
-+@@ -34,7 +43,7 @@
-+ 		serial0 = &RS232_Uart_1;
-+ 	} ;
-+ 	chosen {
-+-		bootargs = "console=ttyS0,115200 ip=on root=/dev/xsa2 rw";
-++		bootargs = "console=tty0,9600 ip=on root=/dev/ram rw rootdelay=1 init=/bin/sh";
-+ 		linux,stdout-path = "/plb@0/serial@84000000";
-+ 	} ;
-+ 	cpus {
++diff --git a/drivers/video/xilinxfb.c b/drivers/video/xilinxfb.c
++index b800c9c..1808452 100644
++--- a/drivers/video/xilinxfb.c
+++++ b/drivers/video/xilinxfb.c
++@@ -154,7 +154,7 @@ static void xilinx_fb_out_be32(struct xilinxfb_drvdata *drvdata, u32 offset,
++ 				u32 val)
++ {
++ 	if (drvdata->flags & PLB_ACCESS_FLAG)
++-		iowrite32(val, drvdata->regs + (offset << 2));
+++		out_be32(drvdata->regs + (offset << 2), val);
++ #ifdef CONFIG_PPC_DCR
++ 	else
++ 		dcr_write(drvdata->dcr_host, offset, val);
 +-- 
 +1.7.9.5
 +
-diff --git a/recipes-kernel/linux/linux-xilinx-3.0/virtex5/defconfig_3.0.0 b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/defconfig_3.0.0
+diff --git a/recipes-kernel/linux/linux-xilinx-3.3/virtex5/defconfig_3.3.0 b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/defconfig_3.3.0
 new file mode 100644
-index 0000000..f4fa575
+index 0000000..536e7c6
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-xilinx-3.0/virtex5/defconfig_3.0.0
-@@ -0,0 +1,1652 @@
++++ b/recipes-kernel/linux/linux-xilinx-3.3/virtex5/defconfig_3.3.0
+@@ -0,0 +1,1704 @@
 +#
-+# Automatically generated make config: don't edit
-+# Linux/powerpc 3.0.0 Kernel Configuration
++# Automatically generated file; DO NOT EDIT.
++# Linux/powerpc 3.3.0-14.2-build1 Kernel Configuration
 +#
 +# CONFIG_PPC64 is not set
 +
@@ -1012,7 +1175,6 @@ index 0000000..f4fa575
 +CONFIG_PTE_64BIT=y
 +CONFIG_PHYS_64BIT=y
 +CONFIG_PPC_MMU_NOHASH=y
-+CONFIG_PPC_MMU_NOHASH_32=y
 +# CONFIG_PPC_MM_SLICES is not set
 +CONFIG_NOT_COHERENT_CACHE=y
 +CONFIG_PPC32=y
@@ -1033,6 +1195,7 @@ index 0000000..f4fa575
 +CONFIG_LOCKDEP_SUPPORT=y
 +CONFIG_RWSEM_XCHGADD_ALGORITHM=y
 +CONFIG_ARCH_HAS_ILOG2_U32=y
++CONFIG_ARCH_HAS_CPU_IDLE_WAIT=y
 +CONFIG_GENERIC_HWEIGHT=y
 +CONFIG_GENERIC_GPIO=y
 +# CONFIG_ARCH_NO_VIRT_TO_BUS is not set
@@ -1090,24 +1253,22 @@ index 0000000..f4fa575
 +CONFIG_HAVE_SPARSE_IRQ=y
 +CONFIG_GENERIC_IRQ_SHOW=y
 +CONFIG_GENERIC_IRQ_SHOW_LEVEL=y
++CONFIG_IRQ_FORCED_THREADING=y
 +CONFIG_SPARSE_IRQ=y
 +
 +#
 +# RCU Subsystem
 +#
-+CONFIG_TREE_PREEMPT_RCU=y
-+# CONFIG_TINY_RCU is not set
-+# CONFIG_TINY_PREEMPT_RCU is not set
++CONFIG_TINY_PREEMPT_RCU=y
 +CONFIG_PREEMPT_RCU=y
 +# CONFIG_RCU_TRACE is not set
-+CONFIG_RCU_FANOUT=32
-+# CONFIG_RCU_FANOUT_EXACT is not set
 +# CONFIG_TREE_RCU_TRACE is not set
 +# CONFIG_RCU_BOOST is not set
 +CONFIG_IKCONFIG=y
 +CONFIG_IKCONFIG_PROC=y
 +CONFIG_LOG_BUF_SHIFT=14
 +# CONFIG_CGROUPS is not set
++# CONFIG_CHECKPOINT_RESTORE is not set
 +CONFIG_NAMESPACES=y
 +# CONFIG_UTS_NS is not set
 +# CONFIG_IPC_NS is not set
@@ -1128,7 +1289,7 @@ index 0000000..f4fa575
 +CONFIG_SYSCTL=y
 +CONFIG_ANON_INODES=y
 +# CONFIG_EXPERT is not set
-+CONFIG_SYSCTL_SYSCALL=y
++# CONFIG_SYSCTL_SYSCALL is not set
 +CONFIG_KALLSYMS=y
 +# CONFIG_KALLSYMS_ALL is not set
 +CONFIG_HOTPLUG=y
@@ -1159,6 +1320,7 @@ index 0000000..f4fa575
 +# CONFIG_PROFILING is not set
 +CONFIG_HAVE_OPROFILE=y
 +# CONFIG_KPROBES is not set
++# CONFIG_JUMP_LABEL is not set
 +CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS=y
 +CONFIG_HAVE_IOREMAP_PROT=y
 +CONFIG_HAVE_KPROBES=y
@@ -1167,6 +1329,8 @@ index 0000000..f4fa575
 +CONFIG_HAVE_DMA_ATTRS=y
 +CONFIG_HAVE_REGS_AND_STACK_ACCESS_API=y
 +CONFIG_HAVE_DMA_API_DEBUG=y
++CONFIG_HAVE_ARCH_JUMP_LABEL=y
++CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG=y
 +
 +#
 +# GCOV-based kernel profiling
@@ -1184,7 +1348,14 @@ index 0000000..f4fa575
 +CONFIG_BLOCK=y
 +CONFIG_LBDAF=y
 +CONFIG_BLK_DEV_BSG=y
++# CONFIG_BLK_DEV_BSGLIB is not set
 +# CONFIG_BLK_DEV_INTEGRITY is not set
++
++#
++# Partition Types
++#
++# CONFIG_PARTITION_ADVANCED is not set
++CONFIG_MSDOS_PARTITION=y
 +
 +#
 +# IO Schedulers
@@ -1266,6 +1437,7 @@ index 0000000..f4fa575
 +CONFIG_KVM_GUEST=y
 +# CONFIG_IPIC is not set
 +# CONFIG_MPIC is not set
++# CONFIG_PPC_EPAPR_HV_PIC is not set
 +# CONFIG_MPIC_WEIRD is not set
 +# CONFIG_PPC_I8259 is not set
 +# CONFIG_PPC_RTAS is not set
@@ -1279,6 +1451,11 @@ index 0000000..f4fa575
 +# CPU Frequency scaling
 +#
 +# CONFIG_CPU_FREQ is not set
++
++#
++# CPUIdle driver
++#
++# CONFIG_CPU_IDLE is not set
 +# CONFIG_FSL_ULI1575 is not set
 +# CONFIG_SIMPLE_GPIO is not set
 +# CONFIG_XILINX_PCI is not set
@@ -1299,6 +1476,7 @@ index 0000000..f4fa575
 +# CONFIG_PREEMPT_NONE is not set
 +# CONFIG_PREEMPT_VOLUNTARY is not set
 +CONFIG_PREEMPT=y
++CONFIG_PREEMPT_COUNT=y
 +CONFIG_BINFMT_ELF=y
 +# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
 +# CONFIG_HAVE_AOUT is not set
@@ -1309,14 +1487,16 @@ index 0000000..f4fa575
 +CONFIG_ARCH_ENABLE_MEMORY_HOTPLUG=y
 +CONFIG_ARCH_HAS_WALK_MEMORY=y
 +CONFIG_ARCH_ENABLE_MEMORY_HOTREMOVE=y
++# CONFIG_KEXEC is not set
++# CONFIG_CRASH_DUMP is not set
 +CONFIG_MAX_ACTIVE_REGIONS=32
 +CONFIG_ARCH_FLATMEM_ENABLE=y
-+CONFIG_ARCH_POPULATES_NODE_MAP=y
 +CONFIG_SELECT_MEMORY_MODEL=y
 +CONFIG_FLATMEM_MANUAL=y
 +CONFIG_FLATMEM=y
 +CONFIG_FLAT_NODE_MEM_MAP=y
 +CONFIG_HAVE_MEMBLOCK=y
++CONFIG_HAVE_MEMBLOCK_NODE_MAP=y
 +CONFIG_PAGEFLAGS_EXTENDED=y
 +CONFIG_SPLIT_PTLOCK_CPUS=4
 +# CONFIG_COMPACTION is not set
@@ -1368,10 +1548,13 @@ index 0000000..f4fa575
 +# CONFIG_PCI_DEBUG is not set
 +# CONFIG_PCI_STUB is not set
 +# CONFIG_PCI_IOV is not set
++# CONFIG_PCI_PRI is not set
++# CONFIG_PCI_PASID is not set
 +# CONFIG_PCCARD is not set
 +# CONFIG_HOTPLUG_PCI is not set
 +# CONFIG_HAS_RAPIDIO is not set
 +# CONFIG_RAPIDIO is not set
++# CONFIG_NONSTATIC_KERNEL is not set
 +
 +#
 +# Advanced setup
@@ -1394,6 +1577,7 @@ index 0000000..f4fa575
 +#
 +CONFIG_PACKET=y
 +CONFIG_UNIX=y
++# CONFIG_UNIX_DIAG is not set
 +CONFIG_XFRM=y
 +# CONFIG_XFRM_USER is not set
 +# CONFIG_XFRM_SUB_POLICY is not set
@@ -1423,6 +1607,7 @@ index 0000000..f4fa575
 +# CONFIG_INET_LRO is not set
 +CONFIG_INET_DIAG=y
 +CONFIG_INET_TCP_DIAG=y
++# CONFIG_INET_UDP_DIAG is not set
 +# CONFIG_TCP_CONG_ADVANCED is not set
 +CONFIG_TCP_CONG_CUBIC=y
 +CONFIG_DEFAULT_TCP_CONG="cubic"
@@ -1456,6 +1641,7 @@ index 0000000..f4fa575
 +#
 +# Core Netfilter Configuration
 +#
++# CONFIG_NETFILTER_NETLINK_ACCT is not set
 +# CONFIG_NETFILTER_NETLINK_QUEUE is not set
 +# CONFIG_NETFILTER_NETLINK_LOG is not set
 +# CONFIG_NF_CONNTRACK is not set
@@ -1492,6 +1678,7 @@ index 0000000..f4fa575
 +# CONFIG_NETFILTER_XT_MATCH_DCCP is not set
 +# CONFIG_NETFILTER_XT_MATCH_DEVGROUP is not set
 +# CONFIG_NETFILTER_XT_MATCH_DSCP is not set
++# CONFIG_NETFILTER_XT_MATCH_ECN is not set
 +# CONFIG_NETFILTER_XT_MATCH_ESP is not set
 +# CONFIG_NETFILTER_XT_MATCH_HASHLIMIT is not set
 +# CONFIG_NETFILTER_XT_MATCH_HL is not set
@@ -1501,6 +1688,7 @@ index 0000000..f4fa575
 +# CONFIG_NETFILTER_XT_MATCH_MAC is not set
 +# CONFIG_NETFILTER_XT_MATCH_MARK is not set
 +# CONFIG_NETFILTER_XT_MATCH_MULTIPORT is not set
++# CONFIG_NETFILTER_XT_MATCH_NFACCT is not set
 +# CONFIG_NETFILTER_XT_MATCH_OWNER is not set
 +# CONFIG_NETFILTER_XT_MATCH_POLICY is not set
 +# CONFIG_NETFILTER_XT_MATCH_PKTTYPE is not set
@@ -1524,6 +1712,7 @@ index 0000000..f4fa575
 +CONFIG_IP_NF_IPTABLES=m
 +# CONFIG_IP_NF_MATCH_AH is not set
 +# CONFIG_IP_NF_MATCH_ECN is not set
++# CONFIG_IP_NF_MATCH_RPFILTER is not set
 +# CONFIG_IP_NF_MATCH_TTL is not set
 +CONFIG_IP_NF_FILTER=m
 +# CONFIG_IP_NF_TARGET_REJECT is not set
@@ -1563,6 +1752,8 @@ index 0000000..f4fa575
 +# CONFIG_NET_SCHED is not set
 +# CONFIG_DCB is not set
 +# CONFIG_BATMAN_ADV is not set
++# CONFIG_OPENVSWITCH is not set
++CONFIG_BQL=y
 +
 +#
 +# Network testing
@@ -1585,6 +1776,7 @@ index 0000000..f4fa575
 +# CONFIG_NET_9P is not set
 +# CONFIG_CAIF is not set
 +# CONFIG_CEPH_LIB is not set
++# CONFIG_NFC is not set
 +
 +#
 +# Device Drivers
@@ -1604,9 +1796,10 @@ index 0000000..f4fa575
 +# CONFIG_DEBUG_DRIVER is not set
 +# CONFIG_DEBUG_DEVRES is not set
 +# CONFIG_SYS_HYPERVISOR is not set
++# CONFIG_GENERIC_CPU_DEVICES is not set
++# CONFIG_DMA_SHARED_BUFFER is not set
 +# CONFIG_CONNECTOR is not set
 +CONFIG_MTD=y
-+# CONFIG_MTD_DEBUG is not set
 +# CONFIG_MTD_TESTS is not set
 +# CONFIG_MTD_REDBOOT_PARTS is not set
 +CONFIG_MTD_CMDLINE_PARTS=y
@@ -1677,9 +1870,7 @@ index 0000000..f4fa575
 +#
 +# Disk-On-Chip Device Drivers
 +#
-+# CONFIG_MTD_DOC2000 is not set
-+# CONFIG_MTD_DOC2001 is not set
-+# CONFIG_MTD_DOC2001PLUS is not set
++# CONFIG_MTD_DOCG3 is not set
 +# CONFIG_MTD_NAND is not set
 +# CONFIG_MTD_ONENAND is not set
 +
@@ -1695,6 +1886,7 @@ index 0000000..f4fa575
 +# Device Tree and Open Firmware support
 +#
 +CONFIG_PROC_DEVICETREE=y
++# CONFIG_OF_SELFTEST is not set
 +CONFIG_OF_FLATTREE=y
 +CONFIG_OF_EARLY_FLATTREE=y
 +CONFIG_OF_DYNAMIC=y
@@ -1706,6 +1898,7 @@ index 0000000..f4fa575
 +CONFIG_OF_SPI=y
 +CONFIG_OF_MDIO=y
 +CONFIG_OF_PCI=y
++CONFIG_OF_PCI_IRQ=y
 +# CONFIG_PARPORT is not set
 +CONFIG_BLK_DEV=y
 +# CONFIG_BLK_DEV_FD is not set
@@ -1715,12 +1908,14 @@ index 0000000..f4fa575
 +# CONFIG_BLK_DEV_UMEM is not set
 +# CONFIG_BLK_DEV_COW_COMMON is not set
 +CONFIG_BLK_DEV_LOOP=y
++CONFIG_BLK_DEV_LOOP_MIN_COUNT=8
 +# CONFIG_BLK_DEV_CRYPTOLOOP is not set
 +
 +#
 +# DRBD disabled because PROC_FS, INET or CONNECTOR not selected
 +#
 +# CONFIG_BLK_DEV_NBD is not set
++# CONFIG_BLK_DEV_NVME is not set
 +# CONFIG_BLK_DEV_SX8 is not set
 +CONFIG_BLK_DEV_RAM=y
 +CONFIG_BLK_DEV_RAM_COUNT=1
@@ -1731,8 +1926,11 @@ index 0000000..f4fa575
 +CONFIG_XILINX_SYSACE=y
 +# CONFIG_BLK_DEV_HD is not set
 +# CONFIG_BLK_DEV_RBD is not set
++
++#
++# Misc devices
++#
 +# CONFIG_SENSORS_LIS3LV02D is not set
-+CONFIG_MISC_DEVICES=y
 +# CONFIG_AD525X_DPOT is not set
 +# CONFIG_PHANTOM is not set
 +# CONFIG_INTEL_MID_PTI is not set
@@ -1749,6 +1947,7 @@ index 0000000..f4fa575
 +#
 +# CONFIG_EEPROM_AT25 is not set
 +# CONFIG_EEPROM_93CX6 is not set
++# CONFIG_EEPROM_93XX46 is not set
 +# CONFIG_CB710_CORE is not set
 +
 +#
@@ -1756,8 +1955,11 @@ index 0000000..f4fa575
 +#
 +# CONFIG_TI_ST is not set
 +# CONFIG_SENSORS_LIS3_SPI is not set
++
++#
++# Altera FPGA firmware download module
++#
 +CONFIG_XILINX_DRIVERS=y
-+CONFIG_NEED_XILINX_LLDMA=y
 +CONFIG_HAVE_IDE=y
 +# CONFIG_IDE is not set
 +
@@ -1781,14 +1983,73 @@ index 0000000..f4fa575
 +# CONFIG_I2O is not set
 +# CONFIG_MACINTOSH_DRIVERS is not set
 +CONFIG_NETDEVICES=y
-+# CONFIG_DUMMY is not set
++CONFIG_NET_CORE=y
 +# CONFIG_BONDING is not set
-+# CONFIG_MACVLAN is not set
++# CONFIG_DUMMY is not set
 +# CONFIG_EQUALIZER is not set
++CONFIG_MII=y
++# CONFIG_NET_TEAM is not set
++# CONFIG_MACVLAN is not set
++# CONFIG_NETCONSOLE is not set
++# CONFIG_NETPOLL is not set
++# CONFIG_NET_POLL_CONTROLLER is not set
 +# CONFIG_TUN is not set
 +# CONFIG_VETH is not set
 +# CONFIG_ARCNET is not set
-+CONFIG_MII=y
++
++#
++# CAIF transport drivers
++#
++CONFIG_ETHERNET=y
++# CONFIG_NET_VENDOR_3COM is not set
++# CONFIG_NET_VENDOR_ADAPTEC is not set
++# CONFIG_NET_VENDOR_ALTEON is not set
++# CONFIG_NET_VENDOR_AMD is not set
++# CONFIG_NET_VENDOR_ATHEROS is not set
++# CONFIG_NET_VENDOR_BROADCOM is not set
++# CONFIG_NET_VENDOR_BROCADE is not set
++# CONFIG_NET_CALXEDA_XGMAC is not set
++# CONFIG_NET_VENDOR_CHELSIO is not set
++# CONFIG_NET_VENDOR_CISCO is not set
++# CONFIG_DNET is not set
++# CONFIG_NET_VENDOR_DEC is not set
++# CONFIG_NET_VENDOR_DLINK is not set
++# CONFIG_NET_VENDOR_EMULEX is not set
++# CONFIG_NET_VENDOR_EXAR is not set
++# CONFIG_NET_VENDOR_HP is not set
++# CONFIG_NET_VENDOR_IBM is not set
++# CONFIG_NET_VENDOR_INTEL is not set
++# CONFIG_IP1000 is not set
++# CONFIG_JME is not set
++# CONFIG_NET_VENDOR_MARVELL is not set
++# CONFIG_NET_VENDOR_MELLANOX is not set
++# CONFIG_NET_VENDOR_MICREL is not set
++# CONFIG_NET_VENDOR_MICROCHIP is not set
++# CONFIG_NET_VENDOR_MYRI is not set
++# CONFIG_FEALNX is not set
++# CONFIG_NET_VENDOR_NATSEMI is not set
++# CONFIG_NET_VENDOR_NVIDIA is not set
++# CONFIG_NET_VENDOR_OKI is not set
++# CONFIG_ETHOC is not set
++# CONFIG_NET_PACKET_ENGINE is not set
++# CONFIG_NET_VENDOR_QLOGIC is not set
++# CONFIG_NET_VENDOR_REALTEK is not set
++# CONFIG_NET_VENDOR_RDC is not set
++# CONFIG_NET_VENDOR_SEEQ is not set
++# CONFIG_NET_VENDOR_SILAN is not set
++# CONFIG_NET_VENDOR_SIS is not set
++# CONFIG_SFC is not set
++# CONFIG_NET_VENDOR_SMSC is not set
++# CONFIG_NET_VENDOR_STMICRO is not set
++# CONFIG_NET_VENDOR_SUN is not set
++# CONFIG_NET_VENDOR_TEHUTI is not set
++# CONFIG_NET_VENDOR_TI is not set
++# CONFIG_NET_VENDOR_VIA is not set
++CONFIG_NET_VENDOR_XILINX=y
++CONFIG_XILINX_EMACLITE=y
++# CONFIG_XILINX_LL_TEMAC is not set
++# CONFIG_FDDI is not set
++# CONFIG_HIPPI is not set
 +CONFIG_PHYLIB=y
 +
 +#
@@ -1810,66 +2071,9 @@ index 0000000..f4fa575
 +# CONFIG_MICREL_PHY is not set
 +# CONFIG_FIXED_PHY is not set
 +# CONFIG_MDIO_BITBANG is not set
-+CONFIG_NET_ETHERNET=y
-+# CONFIG_HAPPYMEAL is not set
-+# CONFIG_SUNGEM is not set
-+# CONFIG_CASSINI is not set
-+# CONFIG_NET_VENDOR_3COM is not set
-+# CONFIG_ENC28J60 is not set
-+# CONFIG_ETHOC is not set
-+# CONFIG_DNET is not set
-+# CONFIG_NET_TULIP is not set
-+# CONFIG_HP100 is not set
-+# CONFIG_IBM_NEW_EMAC is not set
-+# CONFIG_IBM_NEW_EMAC_ZMII is not set
-+# CONFIG_IBM_NEW_EMAC_RGMII is not set
-+# CONFIG_IBM_NEW_EMAC_TAH is not set
-+# CONFIG_IBM_NEW_EMAC_EMAC4 is not set
-+# CONFIG_IBM_NEW_EMAC_NO_FLOW_CTRL is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_CLR_ICINTSTAT is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_COMMON_ERR is not set
-+# CONFIG_NET_PCI is not set
-+# CONFIG_B44 is not set
-+# CONFIG_KS8851 is not set
-+# CONFIG_KS8851_MLL is not set
-+# CONFIG_XILINX_EMAC is not set
-+# CONFIG_ATL2 is not set
-+CONFIG_XILINX_EMACLITE=y
-+CONFIG_NETDEV_1000=y
-+# CONFIG_ACENIC is not set
-+# CONFIG_DL2K is not set
-+# CONFIG_E1000 is not set
-+# CONFIG_E1000E is not set
-+# CONFIG_IP1000 is not set
-+# CONFIG_IGB is not set
-+# CONFIG_IGBVF is not set
-+# CONFIG_NS83820 is not set
-+# CONFIG_HAMACHI is not set
-+# CONFIG_YELLOWFIN is not set
-+# CONFIG_R8169 is not set
-+# CONFIG_SIS190 is not set
-+# CONFIG_SKGE is not set
-+# CONFIG_SKY2 is not set
-+# CONFIG_VIA_VELOCITY is not set
-+# CONFIG_TIGON3 is not set
-+# CONFIG_BNX2 is not set
-+# CONFIG_CNIC is not set
-+# CONFIG_MV643XX_ETH is not set
-+# CONFIG_XILINX_LL_TEMAC is not set
-+# CONFIG_QLA3XXX is not set
-+# CONFIG_ATL1 is not set
-+# CONFIG_XILINX_TEMAC is not set
-+# CONFIG_ATL1E is not set
-+CONFIG_XILINX_LLTEMAC=y
-+# CONFIG_XILINX_LLTEMAC_MARVELL_88E1111_RGMII is not set
-+CONFIG_XILINX_LLTEMAC_MARVELL_88E1111_GMII=y
-+# CONFIG_XILINX_LLTEMAC_MARVELL_88E1111_MII is not set
-+# CONFIG_XILINX_LLTEMAC_NATIONAL_DP83865_GMII is not set
-+# CONFIG_ATL1C is not set
-+# CONFIG_JME is not set
-+# CONFIG_STMMAC_ETH is not set
-+# CONFIG_PCH_GBE is not set
-+# CONFIG_NETDEV_10000 is not set
++# CONFIG_MICREL_KS8995MA is not set
++# CONFIG_PPP is not set
++# CONFIG_SLIP is not set
 +# CONFIG_TR is not set
 +CONFIG_WLAN=y
 +# CONFIG_AIRO is not set
@@ -1881,17 +2085,6 @@ index 0000000..f4fa575
 +# Enable WiMAX (Networking options) to see the WiMAX drivers
 +#
 +# CONFIG_WAN is not set
-+
-+#
-+# CAIF transport drivers
-+#
-+# CONFIG_FDDI is not set
-+# CONFIG_HIPPI is not set
-+# CONFIG_PPP is not set
-+# CONFIG_SLIP is not set
-+# CONFIG_NETCONSOLE is not set
-+# CONFIG_NETPOLL is not set
-+# CONFIG_NET_POLL_CONTROLLER is not set
 +# CONFIG_VMXNET3 is not set
 +# CONFIG_ISDN is not set
 +# CONFIG_PHONE is not set
@@ -1967,6 +2160,7 @@ index 0000000..f4fa575
 +CONFIG_VT=y
 +CONFIG_CONSOLE_TRANSLATIONS=y
 +CONFIG_VT_CONSOLE=y
++CONFIG_VT_CONSOLE_SLEEP=y
 +CONFIG_HW_CONSOLE=y
 +# CONFIG_VT_HW_CONSOLE_BINDING is not set
 +CONFIG_UNIX98_PTYS=y
@@ -1977,6 +2171,7 @@ index 0000000..f4fa575
 +# CONFIG_NOZOMI is not set
 +# CONFIG_N_GSM is not set
 +# CONFIG_TRACE_SINK is not set
++# CONFIG_PPC_EPAPR_HV_BYTECHAN is not set
 +CONFIG_DEVKMEM=y
 +
 +#
@@ -1988,6 +2183,8 @@ index 0000000..f4fa575
 +CONFIG_SERIAL_8250_NR_UARTS=4
 +CONFIG_SERIAL_8250_RUNTIME_UARTS=4
 +# CONFIG_SERIAL_8250_EXTENDED is not set
++CONFIG_SERIAL_8250_FSL=y
++# CONFIG_SERIAL_8250_DW is not set
 +
 +#
 +# Non-8250 serial port support
@@ -2012,9 +2209,11 @@ index 0000000..f4fa575
 +# CONFIG_IPMI_HANDLER is not set
 +CONFIG_HW_RANDOM=m
 +# CONFIG_HW_RANDOM_TIMERIOMEM is not set
++# CONFIG_HW_RANDOM_PPC4XX is not set
 +# CONFIG_NVRAM is not set
 +# CONFIG_GEN_RTC is not set
 +CONFIG_XILINX_HWICAP=y
++# CONFIG_XILINX_DEVCFG is not set
 +# CONFIG_R3964 is not set
 +# CONFIG_APPLICOM is not set
 +# CONFIG_RAW_DRIVER is not set
@@ -2037,6 +2236,8 @@ index 0000000..f4fa575
 +# CONFIG_SPI_PXA2XX_PCI is not set
 +# CONFIG_SPI_TOPCLIFF_PCH is not set
 +CONFIG_SPI_XILINX=y
++# CONFIG_SPI_XILINX_PS_QSPI is not set
++# CONFIG_SPI_XILINX_PS_SPI is not set
 +# CONFIG_SPI_DESIGNWARE is not set
 +
 +#
@@ -2069,8 +2270,7 @@ index 0000000..f4fa575
 +#
 +# Memory mapped GPIO drivers:
 +#
-+# CONFIG_GPIO_BASIC_MMIO is not set
-+# CONFIG_GPIO_IT8761E is not set
++# CONFIG_GPIO_GENERIC_PLATFORM is not set
 +CONFIG_GPIO_XILINX=y
 +# CONFIG_GPIO_VX855 is not set
 +
@@ -2117,11 +2317,17 @@ index 0000000..f4fa575
 +# Broadcom specific AMBA
 +#
 +# CONFIG_BCMA is not set
-+CONFIG_MFD_SUPPORT=y
++
++#
++# Multifunction device drivers
++#
 +# CONFIG_MFD_CORE is not set
 +# CONFIG_MFD_SM501 is not set
 +# CONFIG_HTC_PASIC3 is not set
++# CONFIG_MFD_TPS65912_SPI is not set
++# CONFIG_MFD_STMPE is not set
 +# CONFIG_MFD_TMIO is not set
++# CONFIG_MFD_DA9052_SPI is not set
 +# CONFIG_MFD_WM831X_SPI is not set
 +# CONFIG_MFD_MC13XXX is not set
 +# CONFIG_ABX500_CORE is not set
@@ -2200,12 +2406,8 @@ index 0000000..f4fa575
 +# CONFIG_FB_METRONOME is not set
 +# CONFIG_FB_MB862XX is not set
 +# CONFIG_FB_BROADSHEET is not set
++# CONFIG_FB_XYLON is not set
 +# CONFIG_BACKLIGHT_LCD_SUPPORT is not set
-+
-+#
-+# Display device support
-+#
-+# CONFIG_DISPLAY_SUPPORT is not set
 +
 +#
 +# Console display driver support
@@ -2236,7 +2438,6 @@ index 0000000..f4fa575
 +# CONFIG_MMC is not set
 +# CONFIG_MEMSTICK is not set
 +# CONFIG_NEW_LEDS is not set
-+# CONFIG_NFC_DEVICES is not set
 +# CONFIG_ACCESSIBILITY is not set
 +# CONFIG_INFINIBAND is not set
 +# CONFIG_EDAC is not set
@@ -2244,9 +2445,26 @@ index 0000000..f4fa575
 +# CONFIG_DMADEVICES is not set
 +# CONFIG_AUXDISPLAY is not set
 +CONFIG_XILINX_EDK=y
-+CONFIG_XILINX_LLDMA_USE_DCR=y
 +# CONFIG_UIO is not set
++
++#
++# Virtio drivers
++#
++# CONFIG_VIRTIO_PCI is not set
++# CONFIG_VIRTIO_BALLOON is not set
++# CONFIG_VIRTIO_MMIO is not set
++
++#
++# Microsoft Hyper-V guest support
++#
 +# CONFIG_STAGING is not set
++
++#
++# Hardware Spinlock drivers
++#
++CONFIG_IOMMU_SUPPORT=y
++# CONFIG_VIRT_DRIVERS is not set
++# CONFIG_PM_DEVFREQ is not set
 +
 +#
 +# File systems
@@ -2362,12 +2580,6 @@ index 0000000..f4fa575
 +# CONFIG_NCP_FS is not set
 +# CONFIG_CODA_FS is not set
 +# CONFIG_AFS_FS is not set
-+
-+#
-+# Partition Types
-+#
-+# CONFIG_PARTITION_ADVANCED is not set
-+CONFIG_MSDOS_PARTITION=y
 +CONFIG_NLS=y
 +CONFIG_NLS_DEFAULT="iso8859-1"
 +CONFIG_NLS_CODEPAGE_437=y
@@ -2414,6 +2626,7 @@ index 0000000..f4fa575
 +# Library routines
 +#
 +CONFIG_BITREVERSE=y
++CONFIG_GENERIC_PCI_IOMAP=y
 +CONFIG_CRC_CCITT=y
 +# CONFIG_CRC16 is not set
 +# CONFIG_CRC_T10DIF is not set
@@ -2421,6 +2634,7 @@ index 0000000..f4fa575
 +CONFIG_CRC32=y
 +# CONFIG_CRC7 is not set
 +# CONFIG_LIBCRC32C is not set
++# CONFIG_CRC8 is not set
 +CONFIG_ZLIB_INFLATE=y
 +CONFIG_LZO_DECOMPRESS=y
 +CONFIG_XZ_DEC=y
@@ -2440,9 +2654,11 @@ index 0000000..f4fa575
 +CONFIG_HAS_IOMEM=y
 +CONFIG_HAS_IOPORT=y
 +CONFIG_HAS_DMA=y
++CONFIG_DQL=y
 +CONFIG_NLATTR=y
 +CONFIG_GENERIC_ATOMIC64=y
 +# CONFIG_AVERAGE is not set
++# CONFIG_CORDIC is not set
 +
 +#
 +# Kernel hacking
@@ -2481,7 +2697,7 @@ index 0000000..f4fa575
 +# CONFIG_PROVE_LOCKING is not set
 +# CONFIG_SPARSE_RCU_POINTER is not set
 +# CONFIG_LOCK_STAT is not set
-+# CONFIG_DEBUG_SPINLOCK_SLEEP is not set
++# CONFIG_DEBUG_ATOMIC_SLEEP is not set
 +# CONFIG_DEBUG_LOCKING_API_SELFTESTS is not set
 +# CONFIG_DEBUG_STACK_USAGE is not set
 +# CONFIG_DEBUG_KOBJECT is not set
@@ -2497,8 +2713,6 @@ index 0000000..f4fa575
 +# CONFIG_DEBUG_NOTIFIERS is not set
 +# CONFIG_DEBUG_CREDENTIALS is not set
 +# CONFIG_RCU_TORTURE_TEST is not set
-+CONFIG_RCU_CPU_STALL_TIMEOUT=60
-+CONFIG_RCU_CPU_STALL_VERBOSE=y
 +# CONFIG_BACKTRACE_SELF_TEST is not set
 +# CONFIG_DEBUG_BLOCK_EXT_DEVT is not set
 +# CONFIG_DEBUG_FORCE_WEAK_PER_CPU is not set
@@ -2540,6 +2754,7 @@ index 0000000..f4fa575
 +# CONFIG_XMON is not set
 +# CONFIG_BDI_SWITCH is not set
 +# CONFIG_PPC_EARLY_DEBUG is not set
++CONFIG_STRICT_DEVMEM=y
 +
 +#
 +# Security options
@@ -2557,6 +2772,7 @@ index 0000000..f4fa575
 +#
 +# CONFIG_CRYPTO_MANAGER is not set
 +# CONFIG_CRYPTO_MANAGER2 is not set
++# CONFIG_CRYPTO_USER is not set
 +# CONFIG_CRYPTO_GF128MUL is not set
 +# CONFIG_CRYPTO_NULL is not set
 +# CONFIG_CRYPTO_CRYPTD is not set
@@ -2639,34 +2855,34 @@ index 0000000..f4fa575
 +# CONFIG_CRYPTO_USER_API_HASH is not set
 +# CONFIG_CRYPTO_USER_API_SKCIPHER is not set
 +CONFIG_CRYPTO_HW=y
-+# CONFIG_CRYPTO_DEV_HIFN_795X is not set
 +# CONFIG_CRYPTO_DEV_PPC4XX is not set
 +# CONFIG_PPC_CLOCK is not set
 +# CONFIG_VIRTUALIZATION is not set
-diff --git a/recipes-kernel/linux/linux-xilinx_3.0.bb b/recipes-kernel/linux/linux-xilinx_3.0.bb
+diff --git a/recipes-kernel/linux/linux-xilinx_3.3.bb b/recipes-kernel/linux/linux-xilinx_3.3.bb
 new file mode 100644
-index 0000000..5028160
+index 0000000..e236387
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-xilinx_3.0.bb
-@@ -0,0 +1,25 @@
++++ b/recipes-kernel/linux/linux-xilinx_3.3.bb
+@@ -0,0 +1,26 @@
 +inherit kernel xilinx-kernel xilinx-utils
 +require recipes-kernel/linux/linux-xilinx.inc
 +
-+DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE = "1"
 +
 +KBRANCH = "master"
 +
-+LINUX_VERSION ?= "3.0.0"
-+SRCREV_pn-${PN} = "92ddb93ba1cc62fe73429819164c18094e673669"
-+FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/linux-xilinx-3.0' ], d)}"
++LINUX_VERSION ?= "3.3.0"
++SRCREV_pn-${PN} = "1e92da8e3a66b051766b1be57be67e2bff11e19d"
++FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/linux-xilinx-3.3' ], d)}"
 +
 +PR = "r00"
 +PV = "${LINUX_VERSION}"
 +
 +SRC_URI = "git://git.xilinx.com/linux-xlnx.git;protocol=git;branch=${KBRANCH} \
-+           file://0001-virtex440-ml507.dts-Update-device-tree-to-version-ge.patch \
-+           file://0002-virtex440-ml507.dts-Update-bootargs-to-use-ramdisk-a.patch \
-+           file://defconfig_3.0.0"
++           file://0001-Xilinx-Update-IP-Core-support-for-Xilinx-ISE-14.1.patch \
++           file://0002-virtex440-ml507.dts-Update-device-tree-file-using-Xi.patch \
++           file://0003-xilinxfb-Fix-regression-in-call-to-XPS-TFT-controlle.patch \
++           file://defconfig_3.3.0"
 +
 +# Support for binary device tree generation
 +XILINX_BOARD ?= "${@find_board(bb.data.getVar('XILINX_BSP_PATH', d, 1), d)}"
