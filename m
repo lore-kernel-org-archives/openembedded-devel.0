@@ -1,33 +1,35 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T3rNA-0000WN-TX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2012 18:32:09 +0200
-Received: by yenm1 with SMTP id m1so6500760yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2012 09:20:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=LxRlW5rmiE6SC81EHKAaqixEZbO5pgZTlUTmx+6sC3k=;
-	b=a4VIZapEtlrjNKNNySaiypfp52zuO5CKkyOuglwzNTwsZRy+ZaQXXFFWsaP1vY37Hy
-	r1sde6FpFGbJQOo2jnIfGCoChCqEknLSe3kywYzShn+f6RM/mbQhXNkd6OxSIA4Pd/8e
-	uzdZi+ZpiqvIpeaxKW+JsJBoD95ExsZ3X4ATFB67Azvmj22G6fvAaFw3yTUQ/d/1HJs3
-	58U6gmPINgzYEQsLVAOHb+ZM52cpnixj1whC5gKn/mkyoAe4lB5gZcRxiLjSUzYRhIuA
-	Bmv28FqGPVxT6pOktR2n38BUD9/J6AKKJj5cehCIAAjmFJ6/d1Dbees89QsdNjhpvbq0
-	Sinw==
+	(envelope-from <raj.khem@gmail.com>)
+	id 1T3sFZ-0001tB-Hd; Tue, 21 Aug 2012 19:28:21 +0200
+Received: by eaad12 with SMTP id d12so14792eaa.6
+	for <multiple recipients>; Tue, 21 Aug 2012 10:16:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=w6m27nsCkJosSpk7LDidn3IjjFcYK3dPQxshN7ptDy8=;
+	b=tI0DJVP2mFirCTOYP6SKCoCFiMDA5EmCOfOxPc8J53cTR4ZBpCvNtXdhjojh50OIE/
+	ggLCcXTQReLvK+LYzLmtjEBineI6jQjRce46LNbnNKkTFykCDcTO+aLbmvoCQa5RGbpp
+	hPfv7goRD4MVubGZONqgLGbv0z9x2ATnNPEgEY78wRd7PyaEc/DJQb6WKxPFdlrCuTVY
+	CYGHoe1MiqZwa3tX1LM7KMU+G0JxV21YLSsc4pOnWW6ZBTbOPmL5vV+CZRPbDjbrI1lJ
+	YhSanBaGDvuICYhnM2C7nZc5LW4DcbCd4CyW0S040bdNs4aowcvssTTOaLhumPFIuAU1
+	IgVg==
+Received: by 10.14.202.131 with SMTP id d3mr14648842eeo.32.1345569377849; Tue,
+	21 Aug 2012 10:16:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.34.131 with SMTP id z3mr14273758igi.45.1345565998023; Tue,
-	21 Aug 2012 09:19:58 -0700 (PDT)
-Received: by 10.64.18.13 with HTTP; Tue, 21 Aug 2012 09:19:57 -0700 (PDT)
-In-Reply-To: <20120821120021.GB3029@jama.jama.net>
-References: <1345386709-19033-1-git-send-email-schnitzeltony@googlemail.com>
-	<20120821120021.GB3029@jama.jama.net>
-Date: Tue, 21 Aug 2012 18:19:57 +0200
-Message-ID: <CALbNGRScGweVhd_yS++X1sceqy1kPqQEXJp=qLmjiae4yXpy8Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] pixman: remove append from meta-oe
+Received: by 10.14.2.5 with HTTP; Tue, 21 Aug 2012 10:15:47 -0700 (PDT)
+In-Reply-To: <20120821121850.GD3029@jama.jama.net>
+References: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
+	<20120821121850.GD3029@jama.jama.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Aug 2012 10:15:47 -0700
+Message-ID: <CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: yocto@yoctoproject.org,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] Toolchain rework, call for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +43,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 16:32:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Aug 2012 17:28:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, Aug 21, 2012 at 2:00 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Sorry I haven't noticed/tested it before merging your updated patches to
-> meta-oe (before [1] is applied), but your updated patch
-> 0001-ARM-qemu-related-workarounds-in-cpu-features-detecti.patch
+On Tue, Aug 21, 2012 at 5:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> does not work and emacs is failing again:
-> | LC_ALL=C qemu-arm -cpu cortex-a8 -s 1048576 -L
-> /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/emacs-23.4-r1/qemu-treedir
-> temacs -batch -l loadup dump
-> | qemu: uncaught target signal 11 (Segmentation fault) - core dumped
-> | Segmentation fault (core dumped)
->
-> Cheers,
->
-My fault - sorry for that. Will try to take care tomorrow.
+> Maybe it's because
+> http://git.openembedded.org/openembedded-core/commit/?id=30617bde61a3b0a0944b49a0c9fb7159dacbb19f
+> is missing PR bump and gcc wasn't rebuilt before eglibc upgrade (OEBasic not OEBasicHash here).
 
-Andreas
+yes seems so. I have stopped using OEBasic long ago, you should stop
+using it too.
+But feel free to send a PR bump patchlet.
 
 
