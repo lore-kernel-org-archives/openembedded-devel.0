@@ -1,26 +1,40 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1T3sX5-0002M3-7H
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Aug 2012 19:46:27 +0200
-Received: (qmail 24597 invoked by uid 1003); 21 Aug 2012 17:34:21 -0000
-Received: from unknown (HELO ?10.16.24.71?) (philip@opensdr.com@157.22.28.10)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	21 Aug 2012 17:34:21 -0000
-Message-ID: <5033C69A.9030206@balister.org>
-Date: Tue, 21 Aug 2012 10:34:18 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120717 Thunderbird/14.0
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1T3tN8-0003lp-J2; Tue, 21 Aug 2012 20:40:14 +0200
+Received: by weyr6 with SMTP id r6so73191wey.6
+	for <multiple recipients>; Tue, 21 Aug 2012 11:28:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Dnrp3aaTTz3F0TYZp3Ldu4oi0QWPVTLqX4bYUDpolgc=;
+	b=rEJX5lcPuM8tSwyPnGy9mAcCzKh+nU8HWOyZ+42q26CD+GfV1Hj/MqOPbPWPa2ko0a
+	2hf+kCyIgYU/UZcJChHCjwXqDz+lVpYyK7j6JTPabldCXDpENT4K097aGw+7v8cZjNpY
+	K6vq0h8ddF8AX+1QFBolGFX5G8vd+GGc1IuYGifA0Vl6dmPA+IfklK0pIO/xcddUnrtE
+	EmU5tBoxs+nEIlIPYrK5HbM16sA9AtAUzH+vfsyR7GqglGRVoa2rkXFdczbt5mj4TF7v
+	01Npt7pmcPY3wov/cJsivX4WyFH1F+TFSPTDO1LHnB71RY29rPu7r/alx3xDtXLuQHaV
+	IkRw==
+Received: by 10.180.96.3 with SMTP id do3mr41140989wib.5.1345573690613;
+	Tue, 21 Aug 2012 11:28:10 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l5sm5947764wix.5.2012.08.21.11.28.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 21 Aug 2012 11:28:08 -0700 (PDT)
+Date: Tue, 21 Aug 2012 20:28:13 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20120821182813.GF3029@jama.jama.net>
+References: <CAMKF1srjqDsesRcWP7oGzouPj9aOt_Ln0aOWE9cEQwpUQ7Unuw@mail.gmail.com>
+	<20120821121850.GD3029@jama.jama.net>
+	<CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <2404459.dJBf5OQotX@helios> <5032A1D3.8090600@windriver.com>
-	<1570865.4gpYqKP9pu@helios>
-In-Reply-To: <1570865.4gpYqKP9pu@helios>
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
+In-Reply-To: <CAMKF1spWTYExCcvQ9Uqo-470Qxb2NTwB_xYHhU7RzFOuiYP_VA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: yocto@yoctoproject.org,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] RFC: OE-Core task rework
+Subject: Re: [yocto] Toolchain rework, call for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,66 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2012 17:46:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Aug 2012 18:40:14 -0000
+X-Groupsio-MsgNum: 40306
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="TU+u6i6jrDPzmlWF"
+Content-Disposition: inline
 
-On 08/21/2012 01:49 AM, Paul Eggleton wrote:
-> On Monday 20 August 2012 15:45:07 Mark Hatle wrote:
-...
+--TU+u6i6jrDPzmlWF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->>
->> Yup, there is a logical grouping for the lsb specific tasks, as for others.
->> The naming needs to be made clear as to why it's there, and what it
->> represents. Same with the summary and descriptions -- they should list the
->> functionality provided by this group of components.
->
-> The main concern with LSB is that we have something called task-basic, which
-> seems to be intended for LSB but does not state as much, and I know at least
-> one person has tried to use it and then been a little puzzled as to why rpm
-> has been pulled in when ipk packaging has been selected. Just naming some of
-> these tasks more appropriately would help avoid such situations. In the
-> specific case of task-basic there may be a case for creating a similar but not
-> LSB-focused task that pulls in real shell utilities in preference to the light
-> versions provided by busybox.
+On Tue, Aug 21, 2012 at 10:15:47AM -0700, Khem Raj wrote:
+> On Tue, Aug 21, 2012 at 5:18 AM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+> >
+> > Maybe it's because
+> > http://git.openembedded.org/openembedded-core/commit/?id=3D30617bde61a3=
+b0a0944b49a0c9fb7159dacbb19f
+> > is missing PR bump and gcc wasn't rebuilt before eglibc upgrade (OEBasi=
+c not OEBasicHash here).
+>=20
+> yes seems so. I have stopped using OEBasic long ago, you should stop
+> using it too.
 
-I was seriously stumped by the presence of rpm in what I felt should 
-have been a very basic image. If a task/group is targeted at lsb, it 
-needs to have lsb plastered all over the name so the rest of us can 
-avoid it :)
+I'm using OEBasicHash on one jenkins setup, but that one is still
+building changes from 2 days ago.. (building 24/7.. )
 
-Philip
+> But feel free to send a PR bump patchlet.
 
->
->>> 4) Consider the usefulness of the existing PACKAGE_GROUP_ structure which
->>> converts some IMAGE_FEATURES into the addition of tasks to be installed
->>> (see classes/core-image.bbclass). At the very least we should probably
->>> rename this if we rename tasks to package groups, and there's a question
->>> as to how IMAGE_FEATURES scales - should every task be represented in
->>> there or only a select list? Would we be better off not trying to bring
->>> any tasks in via IMAGE_FEATURES at all and mostly leave that to control
->>> post-processing (e.g. package-management, debug-tweaks, etc.)?
->>
->> I'd certainly prefer that images were limited to selecting software from
->> task (group) recipes only, and not providing their own.  An image should be
->> able to change the selection based on an "image feature" or similar
->> configuration, but the underlying tasks/groups, recipes, etc should all be
->> 'generic' to a given distribution configuration.
->
-> The first part seems reasonable to me; but I'm still short of an answer as to
-> what to do with the existing IMAGE_FEATURES code as mentioned above. At the
-> moment aside from the special features such as debug-tweaks, these are just a
-> thin layer on top of task recipes which doesn't add very much at all other
-> than extra maintenance.
->
->> I think if you go through the images today, a lot of that stuff is either
->> old, or could be simplified by creating appropriate tasks/groups.
->
-> OK, that's a good point. I have another task on my list to clean up our image
-> recipes and that would be a good segue into that.
->
-> Cheers,
-> Paul
->
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--TU+u6i6jrDPzmlWF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlAz0z0ACgkQN1Ujt2V2gByr1QCgqAdGqRvm6A1h1bp3OoHSpsXk
+4l0AnR74WsFFVNl66jvfm58umvk0bWeG
+=x8AF
+-----END PGP SIGNATURE-----
+
+--TU+u6i6jrDPzmlWF--
