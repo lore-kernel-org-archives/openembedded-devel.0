@@ -1,39 +1,26 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1T4EBQ-0001vr-JF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2012 18:53:32 +0200
-Received: from mail-ob0-f180.google.com ([209.85.214.180])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 22 Aug 2012 09:40:08 -0700
-Received: by obceq6 with SMTP id eq6so1391057obc.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2012 09:40:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=hv3Tod0HSzaM/p8NvYFKtQAuvpkqfv6MVIeqwpKfojE=;
-	b=hJH1K0gtzWtQvXKw74Zx1iEN/SIOV5okmzAc06J/YVmL0ngNJNQW+oOtwfriOJEJlb
-	9InbZx9Psv7v5u/ukPz+R1IuG+mkdWicOmvDVPBQf8xBXyIx5V7l4b+VBSxUO2Us+slT
-	1BRuUwoV2BrjPXTF8e6/mn5XGkYHaG3PBFPTvdBxiR03UJjFUsj0XCOzzx8b6t3HoRCi
-	NFBKPY8EeHnUoyB3jKcRExgx3S78Q8G4t/IvIZcZjHuoshOIsu6Mz0u3QZUyTUmiyIpg
-	BLas7SDnqgvyKbogTJ314bdP7IPBbREOt+e8cM//K6s7xZefwm5Cxa/EnaAwsS37rtc3
-	Fhww==
-Received: by 10.182.193.105 with SMTP id hn9mr15959828obc.11.1345653606816;
-	Wed, 22 Aug 2012 09:40:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.182.158.3 with HTTP; Wed, 22 Aug 2012 09:39:45 -0700 (PDT)
-In-Reply-To: <CAJTo0LYvK_Nbj-ThQRNGQxh6P1wZqzPmm0pGNYNGnTucQEV1ng@mail.gmail.com>
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1T4EGQ-0002BO-2d; Wed, 22 Aug 2012 18:58:42 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 22 Aug 2012 09:46:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.77,809,1336374000"; d="scan'208";a="189952817"
+Received: from unknown (HELO helios.localnet) ([10.252.121.122])
+	by orsmga002.jf.intel.com with ESMTP; 22 Aug 2012 09:45:37 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 22 Aug 2012 17:45:36 +0100
+Message-ID: <2181864.aYcJgUzL39@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <CAJTo0Lbhir=VLZZfeqn4UakxTkiFyeXK+zKfCtH2GMgrZ5aBpw@mail.gmail.com>
 References: <CAJTo0LZpSd6LB+9W2kUcxfeU4GOVO5VOnLHMbHYT+1W6iVzcBQ@mail.gmail.com>
-	<CAJTo0LarhQSinwUHXuruO-OiCBOw4j89ko2n4RvctREApS5NZA@mail.gmail.com>
-	<CAJTo0LbJaRyPCexNT8nVhY-qvh19UxH9WSf22==GF8kjWuFaAg@mail.gmail.com>
 	<CAJTo0LYvK_Nbj-ThQRNGQxh6P1wZqzPmm0pGNYNGnTucQEV1ng@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 22 Aug 2012 17:39:45 +0100
-Message-ID: <CAJTo0Lbhir=VLZZfeqn4UakxTkiFyeXK+zKfCtH2GMgrZ5aBpw@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQk4B+VUs9+I7RiXs2GlC6RdQlbdwiuK6ZKH4Ntlx+TAGNPvbrCIzp2lt13BzDWuMVQU03YI
+	<CAJTo0Lbhir=VLZZfeqn4UakxTkiFyeXK+zKfCtH2GMgrZ5aBpw@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	OE-core <openembedded-core@lists.openembedded.org>
 Subject: Re: RFC: One X Server To Rule Them All
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,21 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2012 16:53:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Aug 2012 16:58:42 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 22 August 2012 17:18, Burton, Ross <ross.burton@intel.com> wrote:
-> -9892 ./usr/lib/libts-1.0.so.0.0.0
-> +8344 ./usr/lib/libts-1.0.so.0.0.0
->
-> Now *this* is weird.
+On Wednesday 22 August 2012 17:39:45 Burton, Ross wrote:
+> On 22 August 2012 17:18, Burton, Ross <ross.burton@intel.com> wrote:
+> > -9892 ./usr/lib/libts-1.0.so.0.0.0
+> > +8344 ./usr/lib/libts-1.0.so.0.0.0
+> > 
+> > Now *this* is weird.
 
-Any ideas as to why this happened are greatly welcomed...
+Nothing off the top of my head, but is there any difference in the tslib 
+configure/compile logs?
 
-> +19532 ./usr/lib/xorg/modules/extensions/libdbe.so
+Cheers,
+Paul
 
-Confirmed that this is 1990s HP legacy.  Gone.
+-- 
 
-Ross
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
