@@ -1,35 +1,32 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1T4Gfg-0000hv-FJ
+	(envelope-from <andrea.adami@gmail.com>) id 1T4IyY-000694-3x
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2012 21:32:56 +0200
-Received: by mail-pz0-f47.google.com with SMTP id s35so1005222dak.6
+	Thu, 23 Aug 2012 00:00:34 +0200
+Received: by wibhq4 with SMTP id hq4so184014wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2012 12:20:53 -0700 (PDT)
+	Wed, 22 Aug 2012 14:48:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=bYfGjEhk6goCtMv0s0TJxLso7E3XjVTHVuVbl6ffA98=;
-	b=qWlH9hTrp7Vmi98j9PJSPOjs6wsjnMK71YMO5awN9UDy+XgBeh2hzYbjuNT8EyOF8V
-	cBuLBAJrdHIkUbsr/QgpXC/tFkcUn0XkQT87MGmjgb0huTug58xehHptDA+Jl7bGk/+Q
-	EeCqZqlq/SqL7jDKZIfZmwG8+3IO0vMDwOoyOrB8Yl1nkYPytmWSI7rs805GcrkD/Qbx
-	Dzv7RpVcMc7M2RgyrBm+6TlI2y0DMZujYhQKW+pJvZ/h/2CMqyi0RbT3I2DRyWslNRNO
-	K6fYjTsfhfYcC1+rredkAwYFeUVX3QBzH5iOQEEC5uwqbVMJ5qjXnrwj9P6hwryoihtO
-	IJjA==
-Received: by 10.68.132.41 with SMTP id or9mr55216430pbb.115.1345663253031;
-	Wed, 22 Aug 2012 12:20:53 -0700 (PDT)
-Received: from eos.du.ae ([94.205.108.162])
-	by mx.google.com with ESMTPS id oj8sm4254996pbb.54.2012.08.22.12.20.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Aug 2012 12:20:52 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=RWORQ/EcxE4JIhS/7iGSHbNjiuAl45PcTxWkuQgQPb4=;
+	b=ngl2/asfFcUs5GlDWVMHo9JCWCnoE3QZgj2rgaSapBo0Jd4KSffBDnl8Ivi1AESc6e
+	6ItPNK6NKvUh5Wd51w1tci3pI1TnZa4IinxhQqoo0KIa/oz4u8YMQSyMGILGUEqBBHgC
+	sfI4jVPE81T5dXFwQRpw+81IS8sS7MoC61J/Jctj/lgdPqxq1Zv802gbpUt6MqEyULB9
+	1CjaVUkeyEoUJpCgj8v7HeMi3DIkcIvGUmjiGkBlAzoC4Zletynhpb1oy/Y6zSwrMP8c
+	ACdOIDcqi/PuVPIktoCk+ZDV14xjEuLfOwtlKNdvE/yh0Hhc6f8zpsxLSJaZ9Wd51iDl
+	hjkA==
+Received: by 10.180.97.106 with SMTP id dz10mr9042120wib.21.1345672108781;
+	Wed, 22 Aug 2012 14:48:28 -0700 (PDT)
+Received: from mizar.localdomain
+	(host178-223-dynamic.7-79-r.retail.telecomitalia.it. [79.7.223.178])
+	by mx.google.com with ESMTPS id ef5sm15654210wib.3.2012.08.22.14.48.24
+	(version=SSLv3 cipher=OTHER); Wed, 22 Aug 2012 14:48:27 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2012 23:20:24 +0400
-Message-Id: <1345663224-42350-7-git-send-email-elvis.dowson@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1345663224-42350-1-git-send-email-elvis.dowson@gmail.com>
-References: <1345663224-42350-1-git-send-email-elvis.dowson@gmail.com>
-Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-xilinx 7/7] conf: Add local.conf sample configuration file.
+Date: Wed, 22 Aug 2012 23:48:20 +0200
+Message-Id: <1345672100-4366-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: zap LDCONFIGDEPEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,327 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2012 19:32:56 -0000
+X-List-Received-Date: Wed, 22 Aug 2012 22:00:34 -0000
 
-* Add local.conf sample configuration file to build meta-xilinx
-  using gcc-4.5 and eglibc-2.13 retired toolchain recipes from
-  the meta-openembedded/toolchain-layer, for the Xilinx ML507 development
-  board using the Virtex-5 PowerPC 440 processor.
+* Override the settings of image.bbclass:
+* we don't need ld.so.cache in our minimal image.
+* While there, remove now unused ONLINE_PACKAGE_MANAGEMENT var.
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/local.conf.sample |  300 ++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 300 insertions(+)
- create mode 100644 conf/local.conf.sample
+ .../images/initramfs-kexecboot-image.bb            |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/local.conf.sample b/conf/local.conf.sample
-new file mode 100644
-index 0000000..6c4ed95
---- /dev/null
-+++ b/conf/local.conf.sample
-@@ -0,0 +1,300 @@
-+#
-+# This file is your local configuration file and is where all local user settings
-+# are placed. The comments in this file give some guide to the options a new user
-+# to the system might want to change but pretty much any configuration option can
-+# be set in this file. More adventurous users can look at local.conf.extended 
-+# which contains other examples of configuration which can be placed in this file
-+# but new users likely won't need any of them initially.
-+#
-+# Lines starting with the '#' character are commented out and in some cases the 
-+# default values are provided as comments to show people example syntax. Enabling
-+# the option is a question of removing the # character and making any change to the
-+# variable as required.
-+
-+#
-+# Parallelism Options
-+#
-+# These two options control how much parallelism BitBake should use. The first 
-+# option determines how many tasks bitbake should run in parallel:
-+#
-+BB_NUMBER_THREADS = "8"
-+# 
-+# The second option controls how many processes make should run in parallel when
-+# running compile tasks:
-+#
-+PARALLEL_MAKE = "-j 8"
-+#
-+# For a quad-core machine, BB_NUMBER_THREADS = "4", PARALLEL_MAKE = "-j 4" would
-+# be appropriate for example.
-+
-+#
-+# Machine Selection
-+#
-+# You need to select a specific machine to target the build with. There are a selection
-+# of emulated machines available which can boot and run in the QEMU emulator:
-+#
-+#MACHINE ?= "qemuarm"
-+#MACHINE ?= "qemumips"
-+#MACHINE ?= "qemuppc"
-+#MACHINE ?= "qemux86"
-+#MACHINE ?= "qemux86-64"
-+#
-+# There are also the following hardware board target machines included for 
-+# demonstration purposes:
-+#
-+#MACHINE ?= "atom-pc"
-+#MACHINE ?= "beagleboard"
-+#MACHINE ?= "mpc8315e-rdb"
-+#MACHINE ?= "routerstationpro"
-+#MACHINE ?= "overo-fire-chestnut43"
-+#
-+#
-+# This sets the default machine to be qemux86 if no other machine is selected:
-+# MACHINE ??= "qemux86"
-+
-+#
-+# Where to place downloads
-+#
-+# During a first build the system will download many different source code tarballs
-+# from various upstream projects. This can take a while, particularly if your network
-+# connection is slow. These are all stored in DL_DIR. When wiping and rebuilding you
-+# can preserve this directory to speed up this part of subsequent builds. This directory
-+# is safe to share between multiple builds on the same machine too.
-+#
-+# The default is a downloads directory under TOPDIR which is the build directory.
-+#
-+DL_DIR ?= "${TOPDIR}/downloads"
-+
-+#
-+# Where to place shared-state files
-+#
-+# BitBake has the capability to accelerate builds based on previously built output.
-+# This is done using "shared state" files which can be thought of as cache objects
-+# and this option determines where those files are placed.
-+#
-+# You can wipe out TMPDIR leaving this directory intact and the build would regenerate
-+# from these files if no changes were made to the configuration. If changes were made
-+# to the configuration, only shared state files where the state was still valid would
-+# be used (done using checksums).
-+#
-+# The default is a sstate-cache directory under TOPDIR.
-+#
-+SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
-+
-+#
-+# Where to place the build output
-+#
-+# This option specifies where the bulk of the building work should be done and
-+# where BitBake should place its temporary files and output. Keep in mind that
-+# this includes the extraction and compilation of many applications and the toolchain
-+# which can use Gigabytes of hard disk space.
-+#
-+# The default is a tmp directory under TOPDIR.
-+#
-+TMPDIR = "${TOPDIR}/tmp"
-+
-+#
-+# Default policy config
-+#
-+# The distribution setting controls which policy settings are used as defaults.
-+# The default value is fine for general Yocto project use, at least initially.
-+# Ultimately when creating custom policy, people will likely end up subclassing 
-+# these defaults.
-+#
-+DISTRO ?= "poky"
-+# As an example of a subclass there is a "bleeding" edge policy configuration
-+# where many versions are set to the absolute latest code from the upstream 
-+# source control systems. This is just mentioned here as an example, its not
-+# useful to most new users.
-+# DISTRO ?= "poky-bleeding"
-+
-+#
-+# Package Management configuration
-+#
-+# This variable lists which packaging formats to enable. Multiple package backends 
-+# can be enabled at once and the first item listed in the variable will be used 
-+# to generate the root filesystems.
-+# Options are:
-+#  - 'package_deb' for debian style deb files
-+#  - 'package_ipk' for ipk files are used by opkg (a debian style embedded package manager)
-+#  - 'package_rpm' for rpm style packages
-+# E.g.: PACKAGE_CLASSES ?= "package_rpm package_deb package_ipk"
-+# We default to ipk for embedded targets:
-+PACKAGE_CLASSES ?= "package_ipk"
-+
-+#
-+# SDK/ADT target architecture
-+#
-+# This variable specified the architecture to build SDK/ADT items for and means
-+# you can build the SDK packages for architectures other than the machine you are 
-+# running the build on (i.e. building i686 packages on an x86_64 host._
-+# Supported values are i686 and x86_64
-+#SDKMACHINE ?= "i686"
-+
-+#
-+# Extra image configuration defaults
-+#
-+# The EXTRA_IMAGE_FEATURES variable allows extra packages to be added to the generated 
-+# images. Some of these options are added to certain image types automatically. The
-+# variable can contain the following options:
-+#  "dbg-pkgs"       - add -dbg packages for all installed packages
-+#                     (adds symbol information for debugging/profiling)
-+#  "dev-pkgs"       - add -dev packages for all installed packages
-+#                     (useful if you want to develop against libs in the image)
-+#  "tools-sdk"      - add development tools (gcc, make, pkgconfig etc.)
-+#  "tools-debug"    - add debugging tools (gdb, strace)
-+#  "tools-profile"  - add profiling tools (oprofile, exmap, lttng valgrind (x86 only))
-+#  "tools-testapps" - add useful testing tools (ts_print, aplay, arecord etc.)
-+#  "debug-tweaks"   - make an image suitable for development
-+#                     e.g. ssh root access has a blank password
-+# There are other application targets that can be used here too, see
-+# meta/classes/image.bbclass and meta/classes/core-image.bbclass for more details.
-+# We default to enabling the debugging tweaks.
-+EXTRA_IMAGE_FEATURES = "debug-tweaks"
-+
-+#
-+# Additional image features
-+#
-+# The following is a list of additional classes to use when building images which
-+# enable extra features. Some available options which can be included in this variable 
-+# are:
-+#   - 'buildstats' collect build statistics
-+#   - 'image-mklibs' to reduce shared library files size for an image
-+#   - 'image-prelink' in order to prelink the filesystem image
-+#   - 'image-swab' to perform host system intrusion detection
-+# NOTE: if listing mklibs & prelink both, then make sure mklibs is before prelink
-+# NOTE: mklibs also needs to be explicitly enabled for a given image, see local.conf.extended
-+#USER_CLASSES ?= "buildstats image-mklibs image-prelink"
-+# Add image-mklibs image-prelink for PowerPC 32-bit and 64-bit targets.
-+USER_CLASSES ?= "buildstats image-mklibs image-prelink"
-+
-+#
-+# Runtime testing of images
-+#
-+# The build system can test booting virtual machine images under qemu (an emulator)
-+# after any root filesystems are created and run tests against those images. To
-+# enable this uncomment this line
-+#IMAGETEST = "qemu"
-+#
-+# This variable controls which tests are run against virtual images if enabled
-+# above. The following would enable bat, boot the test case under the sanity suite
-+# and perform toolchain tests
-+#TEST_SCEN = "sanity bat sanity:boot toolchain"
-+#
-+# Because of the QEMU booting slowness issue (see bug #646 and #618), the
-+# autobuilder may suffer a timeout issue when running sanity tests. We introduce
-+# the variable TEST_SERIALIZE here to reduce the time taken by the sanity tests.
-+# It is set to 1 by default, which will boot the image and run cases in the same
-+# image without rebooting or killing the machine instance. If it is set to 0, the
-+# image will be copied and tested for each case, which will take longer but be
-+# more precise.
-+#TEST_SERIALIZE = "1"
-+
-+#
-+# Interactive shell configuration
-+#
-+# Under certain circumstances the system may need input from you and to do this it 
-+# can launch an interactive shell. It needs to do this since the build is 
-+# multithreaded and needs to be able to handle the case where more than one parallel
-+# process may require the user's attention. The default is iterate over the available
-+# terminal types to find one that works.
-+#
-+# Examples of the occasions this may happen are when resolving patches which cannot
-+# be applied, to use the devshell or the kernel menuconfig
-+#
-+# Supported values are auto, gnome, xfce, rxvt, screen, konsole (KDE 3.x only), none
-+# Note: currently, Konsole support only works for KDE 3.x due to the way
-+# newer Konsole versions behave
-+#OE_TERMINAL = "auto"
-+# By default disable interactive patch resolution (tasks will just fail instead):
-+PATCHRESOLVE = "noop"
-+
-+#
-+# Shared-state files from other locations
-+#
-+# As mentioned above, shared state files are prebuilt cache data objects which can 
-+# used to accelerate build time. This variable can be used to configure the system
-+# to search other mirror locations for these objects before it builds the data itself.
-+#
-+# This can be a filesystem directory, or a remote url such as http or ftp. These
-+# would contain the sstate-cache results from previous builds (possibly from other 
-+# machines). This variable works like fetcher MIRRORS/PREMIRRORS and points to the 
-+# cache locations to check for the shared objects.
-+#SSTATE_MIRRORS ?= "\
-+#file://.* http://someserver.tld/share/sstate/ \n \
-+#file://.* file:///some/local/dir/sstate/"
-+
-+# CONF_VERSION is increased each time build/conf/ changes incompatibly and is used to
-+# track the version of this file when it was generated. This can safely be ignored if
-+# this doesn't mean anything to you.
-+CONF_VERSION = "1"
-+
-+#
-+# MIRRORS/PREMIRRORS locations.
-+#
-+# Add the PREMIRRORS statement to the configuration file, so that local directories
-+# are first checked for existing tarballs before running out to the net.
-+#PREMIRRORS_prepend = "\
-+#     git://.*/.* file:///pub/scm/repositories/ \n \
-+#     git://.*/.* file:///pub/scm/repositories/kernel \n \
-+#     "
-+
-+# Set the external toolchain.
-+#TCMODE = "external-sourcery-rebuild-libc"
-+#EXTERNAL_TOOLCHAIN = "/tool/mentor/csl-2012.03.71"
-+#NO32LIBS = "0"
-+#CSL_VER_MAIN_powerpc = "2012.03-71"
-+#CSL_TARGET_SYS_powerpc = "powerpc-mentor-linux-gnu"
-+
-+#PREFERRED_PROVIDER_linux-libc-headers = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}compilerlibs = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_libgcc = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_eglibc = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/libc = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/libintl = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/libiconv = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_gdbserver = "external-sourcery-toolchain"
-+#PREFERRED_PROVIDER_virtual/gettext = "gettext"
-+
-+# Set the gcc toolchain version.
-+# Use wildcards %, to match the actual versions.
-+GCCVERSION = "4.5%"
-+SDKGCCVERSION = "${GCCVERSION}"
-+BINUVERSION = "2.22"
-+EGLIBCVERSION = "2.13"
-+UCLIBCVERSION = "0.9.33"
-+LINUXLIBCVERSION = "3.3"
-+
-+# Set the default serial console
-+KERNEL_CONSOLE = "ttyS0"
-+SERIAL_CONSOLE = "115200 ttyS0"
-+
-+#
-+# Xilinx ISE Design Tools
-+#
-+# Set Xilinx tools installation path
-+XILINX_LOC ?= "/tool/xilinx/14.2/ISE_DS"
-+# Set Xilinx EDK installation path
-+#XILINX_EDK ?= "${XILINX_LOC}/EDK"
-+
-+#
-+# Xilinx target board configuration.
-+# 
-+# Set the target machine details
-+MACHINE ?= "virtex5"
-+#MACHINE ?= "qemuppc"
-+# Set the target board details
-+XILINX_BOARD ?= "ml507"
-+
-+#
-+# Set Xilinx Platform Studio hardware project path
-+#
-+# Set Xilinx BSP path
-+XILINX_BSP_PATH ?= "/project/xilinx-ml507-xps-14.2-aalonso"
-+
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+index 33ceca4..7e617ad 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+@@ -25,6 +25,6 @@ IMAGE_INITSCRIPTS = ""
+ IMAGE_DEV_MANAGER = ""
+ 
+ FEED_DEPLOYDIR_BASE_URI = ""
+-ONLINE_PACKAGE_MANAGEMENT = "none"
++LDCONFIGDEPEND = ""
+ 
+ inherit image
 -- 
-1.7.9.5
+1.7.8.6
 
 
 
