@@ -1,33 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1T4CdC-00073L-DL
+	(envelope-from <ross.burton@intel.com>) id 1T4Cry-00057l-0R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2012 17:14:06 +0200
-Received: by pbcwy7 with SMTP id wy7so1530473pbc.6
+	Wed, 22 Aug 2012 17:29:23 +0200
+Received: from mail-ob0-f180.google.com ([209.85.214.180])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 22 Aug 2012 08:16:10 -0700
+Received: by obceq6 with SMTP id eq6so1311209obc.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2012 08:02:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=QtGzPwownLcSuCQtsOd9IK8N+yFoZzmWz2FUbLsdFWE=;
-	b=lQISfo8OCbVYbH30JZ90E+egfRRzd0q2Q/x/XBP8C+z2XJwIkzZmHaI2iZF5+Um4xA
-	y161AwwWrMm2mcSUFdHTB1HcGOqVS0IhFUCztZgwvQmfyyaG6fmInqImVbBK0jSe2spD
-	wJZr3TeKiNaxoN2UAGLWTxQAs5J5e3s2O1+9tcRq+tr9YL7dLf8RKVNjrWkAiJ4Cn7Ok
-	DO6GjIMUu38EU8wAvWWZstQ3GIRhHOwm2/9sExmipqooz+a00+m823WxDSRoxqoJySPc
-	ok+viDTuDVYa5INjJZQccLz+D+LRbB4n48R13Idc2ZgiBpP5RiNEXVzkmAsaef7iT3zO
-	WKqA==
-Received: by 10.68.238.166 with SMTP id vl6mr52997359pbc.96.1345647720605;
-	Wed, 22 Aug 2012 08:02:00 -0700 (PDT)
-Received: from precise64.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPS id qp6sm3866364pbc.55.2012.08.22.08.01.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Aug 2012 08:01:59 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2012 08:02:19 -0700
-Message-Id: <1345647739-14002-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [PATCH][meta-oe] ipsec-tools: use a correct LIC_FILES_CHKSUM
+	Wed, 22 Aug 2012 08:16:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=15dsZuag1mFEozRdgwJrY+pgbyLJEZzvgz/QlyH+tE4=;
+	b=NUQW2aytRLNtf31zet7DXgFWk2XlYrrTRH842j3BtlhDWqHluwMAHl0rh3oBxL7FNu
+	j6kUjJ/LbnTqN9KNl2/Ij9fekNOTINiD4U0Z84dHWjkfyGM0YMH/LDUfC2Pdi4xOEfJC
+	SK5FJOcZ5vTNtO8R2/tgGDAyDJ8tRcVYSlbWg4GUV+lf4tZ7irIE1NSnpuTjpejlRBu5
+	bGAry/7SfYm/oLrHP/MOOSKQ4GcPPWjKVs1hwn4iUIelhFLo3nO8leg+JK7yyU6AXVdr
+	Jt/RqMmZk8K2OmEhbRiMInHPf2jWn/uQHM9aCJ/SD54V/ZNPB2LbnjdmAK1KYLyu6ZFl
+	g6Tw==
+Received: by 10.182.50.68 with SMTP id a4mr16170901obo.59.1345648569346; Wed,
+	22 Aug 2012 08:16:09 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.182.158.3 with HTTP; Wed, 22 Aug 2012 08:15:47 -0700 (PDT)
+In-Reply-To: <CAJTo0LZpSd6LB+9W2kUcxfeU4GOVO5VOnLHMbHYT+1W6iVzcBQ@mail.gmail.com>
+References: <CAJTo0LZpSd6LB+9W2kUcxfeU4GOVO5VOnLHMbHYT+1W6iVzcBQ@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 22 Aug 2012 16:15:47 +0100
+Message-ID: <CAJTo0LarhQSinwUHXuruO-OiCBOw4j89ko2n4RvctREApS5NZA@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQnoaO6l8ihJ83TE5+KO4Y3cIA+P+hly+Z7TeHN27A81/SbMXxof8VKtjfz1pK8fa5AS8e//
+Subject: Re: RFC: One X Server To Rule Them All
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,34 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2012 15:14:06 -0000
+X-List-Received-Date: Wed, 22 Aug 2012 15:29:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Christopher Larson <chris_larson@mentor.com>
+On 17 August 2012 13:12, Burton, Ross <ross.burton@intel.com> wrote:
+> 1) Investigate differences between xorg/xorg-lite/kdrive, producing a
+> feature matrix and binary size comparison
 
-The current LIC_FILES_CHKSUM checks the FSF copyright/license from the
-*generated* Makefile.in, which has nothing at all to do with the licensing of
-ipsec-tools. This is about as wrong as it's possible for LIC_FILES_CHKSUM to
-be. This fixes it to use one of the headers from libipsec instead.
+Some rough numbers: a core-image-sato rootfs for RouterStation Pro
+using kdrive is 25959477 bytes.  Change kdrive to Xorg (Xfbdev and a
+few important modules) and it grows to 26342094 bytes, approximately
+380kb growth.
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- .../ipsec-tools/ipsec-tools_0.7.2.bb               |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It appears that we're also shipping libexa in the core server package,
+when I think that can be split into a separate package as fbdev isn't
+using it.  That will give us another 90kb back.
 
-diff --git a/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
-index 270d77e..255246e 100644
---- a/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
-+++ b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
-@@ -1,6 +1,6 @@
- require ipsec-tools.inc
- 
--LIC_FILES_CHKSUM = "file://Makefile.in;endline=14;md5=c73d05590728997bfbab5c671ed38366"
-+LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
- 
- SRC_URI += "file://ipsec-tools-install.patch"
- SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
--- 
-1.7.9.5
+I'm happy with this size increase as a trade-off for using an X server
+that is actually maintained.
 
+Ross
 
 
