@@ -1,33 +1,33 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T4CVg-0006uI-GL
+	(envelope-from <kergoth@gmail.com>) id 1T4CdC-00073L-DL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Aug 2012 17:06:21 +0200
-Received: by daks35 with SMTP id s35so806409dak.6
+	Wed, 22 Aug 2012 17:14:06 +0200
+Received: by pbcwy7 with SMTP id wy7so1530473pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2012 07:54:14 -0700 (PDT)
+	Wed, 22 Aug 2012 08:02:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=RdKhVxme70xH8cmQ0c1pKzXduMHsuqyIC62p4FS4oNs=;
-	b=0FjHcmpT3Xumb3gFJfwfJ54d4dmLwvLmUK1+fhT6uYfIe+CK2f2WF8lsYRfxal5Zh9
-	xfXIk+Y83ZHdHgoas4sNHwaJ/C8mowpGjCo+GZ5i8qKu3jj7QHnArfHMXDDQBqpbb6nL
-	QKntaa7dHNNRVZg+mF4AwNcvbviQhD+LmffyTJYnM8zLomKf7b89g7t/opUNrDAw5OIH
-	wDPiqaudIBOAdMUzUmc8zowDL6BM3bVxYbEOu2rpvoAquS0m94Qfc/owRxF8mSS/vX7m
-	EzbFAMjPSDe880bzpPIjOZCRo+VaqdIE3cXfJoKbEI8OpAgL74lypma24cXGEz5yc6Sf
-	gSTA==
-Received: by 10.68.220.201 with SMTP id py9mr53290778pbc.137.1345647254472;
-	Wed, 22 Aug 2012 07:54:14 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id ox5sm3844742pbc.75.2012.08.22.07.54.12
+	bh=QtGzPwownLcSuCQtsOd9IK8N+yFoZzmWz2FUbLsdFWE=;
+	b=lQISfo8OCbVYbH30JZ90E+egfRRzd0q2Q/x/XBP8C+z2XJwIkzZmHaI2iZF5+Um4xA
+	y161AwwWrMm2mcSUFdHTB1HcGOqVS0IhFUCztZgwvQmfyyaG6fmInqImVbBK0jSe2spD
+	wJZr3TeKiNaxoN2UAGLWTxQAs5J5e3s2O1+9tcRq+tr9YL7dLf8RKVNjrWkAiJ4Cn7Ok
+	DO6GjIMUu38EU8wAvWWZstQ3GIRhHOwm2/9sExmipqooz+a00+m823WxDSRoxqoJySPc
+	ok+viDTuDVYa5INjJZQccLz+D+LRbB4n48R13Idc2ZgiBpP5RiNEXVzkmAsaef7iT3zO
+	WKqA==
+Received: by 10.68.238.166 with SMTP id vl6mr52997359pbc.96.1345647720605;
+	Wed, 22 Aug 2012 08:02:00 -0700 (PDT)
+Received: from precise64.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by mx.google.com with ESMTPS id qp6sm3866364pbc.55.2012.08.22.08.01.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Aug 2012 07:54:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 22 Aug 2012 08:01:59 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2012 07:53:43 -0700
-Message-Id: <1345647223-12473-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 22 Aug 2012 08:02:19 -0700
+Message-Id: <1345647739-14002-1-git-send-email-kergoth@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-java][PATCH] classpath-0.99: Remove unused automake.patch
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH][meta-oe] ipsec-tools: use a correct LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,150 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2012 15:06:21 -0000
+X-List-Received-Date: Wed, 22 Aug 2012 15:14:06 -0000
 
-This was meant for 0.98 which has been removed
-0.99 was not using it at all
+From: Christopher Larson <chris_larson@mentor.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The current LIC_FILES_CHKSUM checks the FSF copyright/license from the
+*generated* Makefile.in, which has nothing at all to do with the licensing of
+ipsec-tools. This is about as wrong as it's possible for LIC_FILES_CHKSUM to
+be. This fixes it to use one of the headers from libipsec instead.
+
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 ---
- .../classpath/classpath-0.98/automake.patch        |  100 --------------------
- recipes-core/classpath/classpath.inc               |    2 +-
- recipes-core/classpath/classpath_0.99.bb           |    1 -
- 3 files changed, 1 insertion(+), 102 deletions(-)
- delete mode 100644 recipes-core/classpath/classpath-0.98/automake.patch
+ .../ipsec-tools/ipsec-tools_0.7.2.bb               |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/classpath/classpath-0.98/automake.patch b/recipes-core/classpath/classpath-0.98/automake.patch
-deleted file mode 100644
-index da86300..0000000
---- a/recipes-core/classpath/classpath-0.98/automake.patch
-+++ /dev/null
-@@ -1,100 +0,0 @@
--Fix build with automake 1.12
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: classpath-0.98/examples/Makefile.am
--===================================================================
----- classpath-0.98.orig/examples/Makefile.am	2012-07-17 17:35:05.428405912 -0700
--+++ classpath-0.98/examples/Makefile.am	2012-07-17 17:36:28.008405840 -0700
--@@ -96,9 +96,9 @@
-- endif
-- 
-- $(EXAMPLE_ZIP): $(EXAMPLE_JAVA_FILES)
---	@mkdir_p@ classes/gnu/classpath/examples/icons
--+	@MKDIR_P@ classes/gnu/classpath/examples/icons
-- 	cp $(EXAMPLE_ICONS) classes/gnu/classpath/examples/icons
---	@mkdir_p@ classes/gnu/classpath/examples/swing
--+	@MKDIR_P@ classes/gnu/classpath/examples/swing
-- 	cp $(EXAMPLE_HTML) classes/gnu/classpath/examples/swing
-- 	$(JCOMPILER) -d classes $(EXAMPLE_JAVA_FILES) 
-- 	(cd classes; \
--Index: classpath-0.98/lib/Makefile.am
--===================================================================
----- classpath-0.98.orig/lib/Makefile.am	2012-07-17 17:35:05.448405923 -0700
--+++ classpath-0.98/lib/Makefile.am	2012-07-17 17:36:44.728405932 -0700
--@@ -83,18 +83,18 @@
-- resources: copy-vmresources.sh
-- 	@list=`cd $(top_srcdir)/resource && $(FIND) gnu java javax org -name \*\.properties -print -o -name \*\.css -print`; for p in $$list; do \
--           dirname=`dirname $$p`; \
---          if ! test -d "$$dirname"; then @mkdir_p@ "$$dirname"; fi; \
--+          if ! test -d "$$dirname"; then @MKDIR_P@ "$$dirname"; fi; \
-- 	  cp $(top_srcdir)/resource/$$p $$p; \
-- 	done
-- 	@list=`cd $(top_srcdir)/resource && $(FIND) META-INF -name CVS -prune -o -name .svn -prune -o -name \*\.in -prune -o -type f -print`; for p in $$list; do \
--           dirname=`dirname $$p`; \
---          if ! test -d "$$dirname"; then @mkdir_p@ "$$dirname"; fi; \
--+          if ! test -d "$$dirname"; then @MKDIR_P@ "$$dirname"; fi; \
-- 	  cp $(top_srcdir)/resource/$$p $$p; \
-- 	done
-- 	@$(SHELL) ./copy-vmresources.sh
-- 	@list=`cd $(top_srcdir) && $(FIND) gnu/javax/swing/plaf/gtk/icons -name *.png -type f -print`; for p in $$list; do \
--           dirname=`dirname $$p`; \
---          if ! test -d "$$dirname"; then @mkdir_p@ "$$dirname"; fi; \
--+          if ! test -d "$$dirname"; then @MKDIR_P@ "$$dirname"; fi; \
-- 	  cp $(top_srcdir)/$$p $$p; \
-- 	done
-- 	touch resources
--@@ -102,7 +102,7 @@
-- classes: genclasses
-- 
-- $(top_builddir)/gnu/java/locale/LocaleData.java: $(top_srcdir)/scripts/generate-locale-list.sh 
---	@mkdir_p@ $(top_builddir)/gnu/java/locale
--+	@MKDIR_P@ $(top_builddir)/gnu/java/locale
-- 	$(top_srcdir)/scripts/generate-locale-list.sh > $(top_builddir)/gnu/java/locale/LocaleData.java
-- 
-- genclasses: gen-classlist.sh standard.omit $(top_builddir)/gnu/java/locale/LocaleData.java gen-xpath-parser
--@@ -160,7 +160,7 @@
-- 	-rm -rf lists
-- 
-- dist-hook:
---	@mkdir_p@ $(distdir)
--+	@MKDIR_P@ $(distdir)
-- 	cp -pdfR $(top_srcdir)/gnu $(top_srcdir)/java $(top_srcdir)/javax $(top_srcdir)/org $(top_srcdir)/sun $(top_srcdir)/vm $(top_srcdir)/resource $(distdir)/..
-- # Delete not wanted files.
-- 	$(FIND) $(distdir)/../gnu $(distdir)/../java $(distdir)/../javax $(distdir)/../org $(distdir)/../sun $(distdir)/../vm $(distdir)/../resource -name CVS -print | xargs rm -fr
--Index: classpath-0.98/tools/Makefile.am
--===================================================================
----- classpath-0.98.orig/tools/Makefile.am	2012-07-17 17:35:05.456405922 -0700
--+++ classpath-0.98/tools/Makefile.am	2012-07-17 17:37:00.828405721 -0700
--@@ -312,11 +312,11 @@
-- # so they get also included.
-- $(TOOLS_ZIP): $(ALL_TOOLS_FILES)
-- 	@rm -rf classes asm
---	@mkdir_p@ classes asm 
--+	@MKDIR_P@ classes asm 
-- if CREATE_GJDOC
-- if CREATE_GJDOC_PARSER
-- ## Generate antlr sources.
---	@mkdir_p@ $(gjdoc_gendir)/gnu/classpath/tools/gjdoc/expr
--+	@MKDIR_P@ $(gjdoc_gendir)/gnu/classpath/tools/gjdoc/expr
-- 	$(ANTLR) -o $(gjdoc_gendir)/gnu/classpath/tools/gjdoc/expr/ \
-- 	  $(srcdir)/gnu/classpath/tools/gjdoc/expr/java-expression.g
-- endif
--@@ -346,7 +346,7 @@
-- 	       sun/rmi/rmic $(GJDOC_EX) -name \*.properties -print -o -name \*.jav -print`; \
-- 	for p in $$list; do \
-- 	  dirname=classes/`dirname $$p`; \
---	  if ! test -d "$$dirname"; then @mkdir_p@ "$$dirname"; fi; \
--+	  if ! test -d "$$dirname"; then @MKDIR_P@ "$$dirname"; fi; \
-- 	  echo "  cp $(srcdir)/resource/$$p classes/$$p"; \
-- 	  cp $(srcdir)/resource/$$p classes/$$p; \
-- 	done
--@@ -354,7 +354,7 @@
-- ## Copy over gjdoc resource files.
-- 	for res in $(gjdoc_resources); do \
-- 	  dir=classes/`dirname $$res`; \
---	  if ! test -d "$$dir"; then @mkdir_p@ "$$dir"; fi; \
--+	  if ! test -d "$$dir"; then @MKDIR_P@ "$$dir"; fi; \
-- 	  echo "  cp $(srcdir)/resource/gnu/classpath/tools/gjdoc/$$res classes/$$res"; \
-- 	  cp $(srcdir)/resource/gnu/classpath/tools/gjdoc/$$res classes/$$res; \
-- 	done 
-diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
-index 4c3174b..df23b4b 100644
---- a/recipes-core/classpath/classpath.inc
-+++ b/recipes-core/classpath/classpath.inc
-@@ -21,7 +21,7 @@ RPROVIDES_${PN} = "${PBN}"
- RPROVIDES_${PN}-common = "${PBN}-common"
- RPROVIDES_${PN}-gtk = "${PBN}-awt"
+diff --git a/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
+index 270d77e..255246e 100644
+--- a/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
++++ b/meta-oe/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb
+@@ -1,6 +1,6 @@
+ require ipsec-tools.inc
  
--PR = "r0"
-+PR = "r1"
+-LIC_FILES_CHKSUM = "file://Makefile.in;endline=14;md5=c73d05590728997bfbab5c671ed38366"
++LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
  
- SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
- 
-diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
-index b1e4089..ee38992 100644
---- a/recipes-core/classpath/classpath_0.99.bb
-+++ b/recipes-core/classpath/classpath_0.99.bb
-@@ -8,7 +8,6 @@ SRC_URI += " \
-             file://autotools.patch \
-             file://miscompilation.patch \
-             file://toolwrapper-exithook.patch \
--            file://automake.patch \
-            "
- 
- SRC_URI[md5sum] = "0ae1571249172acd82488724a3b8acb4"
+ SRC_URI += "file://ipsec-tools-install.patch"
+ SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
 -- 
 1.7.9.5
 
