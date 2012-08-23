@@ -1,32 +1,30 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1T4IyY-000694-3x
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T4Tnm-0005L2-63
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Aug 2012 00:00:34 +0200
-Received: by wibhq4 with SMTP id hq4so184014wib.6
+	Thu, 23 Aug 2012 11:34:10 +0200
+Received: by iaky10 with SMTP id y10so933834iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2012 14:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=RWORQ/EcxE4JIhS/7iGSHbNjiuAl45PcTxWkuQgQPb4=;
-	b=ngl2/asfFcUs5GlDWVMHo9JCWCnoE3QZgj2rgaSapBo0Jd4KSffBDnl8Ivi1AESc6e
-	6ItPNK6NKvUh5Wd51w1tci3pI1TnZa4IinxhQqoo0KIa/oz4u8YMQSyMGILGUEqBBHgC
-	sfI4jVPE81T5dXFwQRpw+81IS8sS7MoC61J/Jctj/lgdPqxq1Zv802gbpUt6MqEyULB9
-	1CjaVUkeyEoUJpCgj8v7HeMi3DIkcIvGUmjiGkBlAzoC4Zletynhpb1oy/Y6zSwrMP8c
-	ACdOIDcqi/PuVPIktoCk+ZDV14xjEuLfOwtlKNdvE/yh0Hhc6f8zpsxLSJaZ9Wd51iDl
-	hjkA==
-Received: by 10.180.97.106 with SMTP id dz10mr9042120wib.21.1345672108781;
-	Wed, 22 Aug 2012 14:48:28 -0700 (PDT)
-Received: from mizar.localdomain
-	(host178-223-dynamic.7-79-r.retail.telecomitalia.it. [79.7.223.178])
-	by mx.google.com with ESMTPS id ef5sm15654210wib.3.2012.08.22.14.48.24
-	(version=SSLv3 cipher=OTHER); Wed, 22 Aug 2012 14:48:27 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 23 Aug 2012 02:22:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=/HIyD8gnNWqiXDvJs+2QNYe5EUUtmx245m3LPwLEs64=;
+	b=l+dnzau6eqryav72F1Ho9/8KuA6uuCL295Iyew24d1IVfhO0yznik40etCx+R96L/z
+	mjCARui4xFr+oVfRHd2sooKr+eoy6egHLhQE972dcZlUn7nbVF6XxAjX1mQKKD1I8q0W
+	JMARAw8/OFma9fXwN1F1VmPRSCgqDaUiG6JTRPnaQCg1QPi9u8/XLvAboMCbyar2ESb3
+	A4ANAVg8mY4ZnP3BRfItlO7zYEAJEZo4ngrjUKq+maylzAU/uynxhzAvoEcV5Y3YVodv
+	6pMNmUqG6C5B1KpwyrK2OzcjqPVOaxU5MV6FSJKjwh6dV6U9dn31vLV7c48BgwfJfq2S
+	boQg==
+MIME-Version: 1.0
+Received: by 10.50.88.195 with SMTP id bi3mr5148676igb.50.1345713723490; Thu,
+	23 Aug 2012 02:22:03 -0700 (PDT)
+Received: by 10.64.18.13 with HTTP; Thu, 23 Aug 2012 02:22:03 -0700 (PDT)
+Date: Thu, 23 Aug 2012 11:22:03 +0200
+Message-ID: <CALbNGRTC=AL5g+CPvHQzVijDf9AJj3dHmxs7H7MeY4y5VygYKQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Aug 2012 23:48:20 +0200
-Message-Id: <1345672100-4366-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: zap LDCONFIGDEPEND
+Subject: gnome.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2012 22:00:34 -0000
+X-List-Received-Date: Thu, 23 Aug 2012 09:34:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Override the settings of image.bbclass:
-* we don't need ld.so.cache in our minimal image.
-* While there, remove now unused ONLINE_PACKAGE_MANAGEMENT var.
+Hi,
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../images/initramfs-kexecboot-image.bb            |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+we have gnome.bbclass in oe-core and meta-oe. The only difference I
+see is meta-oe extends
 
-diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-index 33ceca4..7e617ad 100644
---- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-+++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-@@ -25,6 +25,6 @@ IMAGE_INITSCRIPTS = ""
- IMAGE_DEV_MANAGER = ""
- 
- FEED_DEPLOYDIR_BASE_URI = ""
--ONLINE_PACKAGE_MANAGEMENT = "none"
-+LDCONFIGDEPEND = ""
- 
- inherit image
--- 
-1.7.8.6
+BBCLASSEXTEND += "native"
 
+Could somebody help me why we need to build all gnome recipes native?
+
+Andreas
 
 
