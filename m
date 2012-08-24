@@ -1,35 +1,35 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T4n5F-0003jH-Nu
+	(envelope-from <raj.khem@gmail.com>) id 1T4n5G-0003j4-Sp
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 08:09:29 +0200
-Received: by daks35 with SMTP id s35so788486dak.6
+	Fri, 24 Aug 2012 08:09:31 +0200
+Received: by mail-pb0-f47.google.com with SMTP id wy7so2828031pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2012 22:57:21 -0700 (PDT)
+	Thu, 23 Aug 2012 22:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=RAq2iwcXgx+sWWlfeMMm+KhXFAZx3Z60OV3vpeKzeo4=;
-	b=vMHwB6ayFSczqIRE14lpbRy1yuLB2qHHkBvyF/fHWxvp3A2GGkQbLio1Q58p0cWFlL
-	rNej/4f0TtgalYZCl7vYU0tFycPUemAFNQW+L8hSu0p2TcMAC9Fe9zxH/cQv5CAI1tdi
-	BLi5s3HUxMEHLJKTEWQBIvM6R5IzLaMlCqHR+kRh2q940KXaUAN5msO4Nbk9sg+bFM7p
-	ArHUlhB51cNk7eIxcuionBJG8LOpUV1ljWr6tcglZpU/2buQ+StzOInW1jyJbOLWMQS+
-	oBdUS6xSqus14ztH+ZKb7K9haCOK/Vmqr4PNaGiiGy6x2WuhImZ661O90SbesNsProkH
-	In9Q==
-Received: by 10.68.191.8 with SMTP id gu8mr10280228pbc.5.1345787841871;
-	Thu, 23 Aug 2012 22:57:21 -0700 (PDT)
+	bh=cCd/cVECL0W7NDzn6qGGIB6mTfi72LdSBlXAwlbxx8s=;
+	b=U7PcsNI99B0ws0/h7ZnVa9nX1hUxPHnbYDTdqe7tByF5o+kPewUtn49QuehpjUW4FJ
+	38Tg1sINrlaWwmmHLdhHiDZ1cpkuM1lqem92Ga7Udb6ZvTjqlOvKTdW375IruBWLTuJt
+	ReHFZjdDPzUUCwUgDnRnA7hDKYmXG5X8VXsukg0+53iMzVVKewOSmTqMF4mEJuKfw3xY
+	21RQizZ1ah7sGjUFxs5AQd5CXxllD+uLUK6/O/pD1v5HIzhj5c9kcs5wjqaXz2IoiILr
+	ddNnqx3sKt+ePNL6DalZnve/gSYPz3sbY6uMil6SwYFZUNWWYXNi7oPId0YwctxRF6zV
+	JBWA==
+Received: by 10.66.83.129 with SMTP id q1mr8501289pay.4.1345787845537;
+	Thu, 23 Aug 2012 22:57:25 -0700 (PDT)
 Received: from leo.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id hr9sm7594293pbc.36.2012.08.23.22.57.20
+	by mx.google.com with ESMTPS id hr9sm7594293pbc.36.2012.08.23.22.57.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Aug 2012 22:57:21 -0700 (PDT)
+	Thu, 23 Aug 2012 22:57:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2012 22:57:03 -0700
-Message-Id: <1345787825-9950-3-git-send-email-raj.khem@gmail.com>
+Date: Thu, 23 Aug 2012 22:57:05 -0700
+Message-Id: <1345787825-9950-5-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
 References: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
-Subject: [2011.03-maintenance][PATCH 3/5] orc: Add recipe for 0.4.16
+Subject: [2011.03-maintenance][PATCH 5/5] binutils-2.20.1: Fix SRC_URI checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 06:09:30 -0000
+X-List-Received-Date: Fri, 24 Aug 2012 06:09:31 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/orc/orc_0.4.16.bb |    3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 recipes/orc/orc_0.4.16.bb
+ recipes/binutils/binutils_2.20.1.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/orc/orc_0.4.16.bb b/recipes/orc/orc_0.4.16.bb
-new file mode 100644
-index 0000000..efef664
---- /dev/null
-+++ b/recipes/orc/orc_0.4.16.bb
-@@ -0,0 +1,3 @@
-+require orc.inc
-+SRC_URI[orc.md5sum] = "e482932e544c847761449b106ecbc483"
-+SRC_URI[orc.sha256sum] = "700e4edba20a0ed42164b645da26ce515b883d4c4633b222302f1e541f2a58ab"
+diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
+index 5154e2d..f40b676 100644
+--- a/recipes/binutils/binutils_2.20.1.bb
++++ b/recipes/binutils/binutils_2.20.1.bb
+@@ -24,8 +24,8 @@ SRC_URI_append_nios2 =" \
+ 	file://binutils-nios2.patch \
+ 	"
+ 
+-SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
+-SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
++SRC_URI[tarball.sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
++SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+ 
+ # powerpc patches
+ SRC_URI += "\
 -- 
 1.7.9.5
 
