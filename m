@@ -1,19 +1,38 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joe.macdonald@windriver.com>) id 1T4yYC-0002FA-4E
+	(envelope-from <andrei@gherzan.ro>) id 1T51PD-0006qK-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 20:24:08 +0200
-Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
-	[128.224.147.66])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q7OIBw9O010156
+	Fri, 24 Aug 2012 23:27:03 +0200
+Received: by iaky10 with SMTP id y10so4188669iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 11:11:59 -0700 (PDT)
-From: Joe MacDonald <joe.macdonald@windriver.com>
+	Fri, 24 Aug 2012 14:14:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=6g6vEy5og9n4d3pdeBUZ4BJFH+0UUnw8aHCIZIARZ7Q=;
+	b=QmMo6YsXRdQV1606VKaOdTRt7FEkvPpB2Bp8EaJDi4pZjiwlcw+VjjlTRTETvEYQrJ
+	8w3ewBnt8aLPW6FJjn663NGj6Zkanp4bqJ84QXfet8VE3pDrroyVdFwImXlnkW6Gn5YD
+	Xhz+acpyvTbTcKtZyFVTwN7tL6bBPYKWb4TpJSG3T38ICyDtS8/uLrQGaDqDONGUKdyM
+	uKjMnWJJyHL7SiAj7D1O0ZoUWLKtX/x+RhIlGNAjYj23aRrltx0bfL1wXgKSAJ+DyrKQ
+	AAi3m1Kc84Yyrb+EkILkStHTvWAHWxVmh40mrzr6T16KIVlvI9P1ztlz4Ap5ScskNAAl
+	PR1Q==
+Received: by 10.42.97.70 with SMTP id m6mr5577791icn.27.1345842895056; Fri, 24
+	Aug 2012 14:14:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.64.63.50 with HTTP; Fri, 24 Aug 2012 14:14:34 -0700 (PDT)
+X-Originating-IP: [79.118.181.96]
+In-Reply-To: <CAFpD06RReUM1sQjHrsyuJrmg1-dkbVVMFBfbvoy+OSKpcCX-ew@mail.gmail.com>
+References: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
+	<50374DAF.8070500@cisco.com>
+	<CAFpD06RReUM1sQjHrsyuJrmg1-dkbVVMFBfbvoy+OSKpcCX-ew@mail.gmail.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Sat, 25 Aug 2012 00:14:34 +0300
+Message-ID: <CAK18fxGRSUbTtLAkY615fePhZoKL5MQ00s-_HoN4N5zTbCKDbw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Aug 2012 14:11:58 -0400
-Message-Id: <1345831918-15547-1-git-send-email-joe.macdonald@windriver.com>
-X-Mailer: git-send-email 1.7.11.3
-Subject: [meta-oe][PATCH v2] meta-networking: add layer
+X-Gm-Message-State: ALoCoQl2vfpwlxxmo+JBFb8JzhlS18d0xtEykWcB2mYiKMwwEtYJT00r1Vhgqq86Q9fy/dVXbV1R
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Hello
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,124 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 18:24:08 -0000
+X-List-Received-Date: Fri, 24 Aug 2012 21:27:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-A home for networking-related packages.  This includes protocol support,
-servers / daemons and utilities.
+On Fri, Aug 24, 2012 at 8:12 PM, Giuseppe Longo <giuseppelng@gmail.com>wrote:
 
-Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
----
- meta-networking/COPYING.MIT     | 17 +++++++++++++++++
- meta-networking/MAINTAINERS     | 31 +++++++++++++++++++++++++++++++
- meta-networking/README          | 16 ++++++++++++++++
- meta-networking/conf/layer.conf | 11 +++++++++++
- 4 files changed, 75 insertions(+)
- create mode 100644 meta-networking/COPYING.MIT
- create mode 100644 meta-networking/MAINTAINERS
- create mode 100644 meta-networking/README
- create mode 100644 meta-networking/conf/layer.conf
+> Hello Martin,
+> thanks for the reply.
+>
+> I have only one question: what embedded device can i use?
+>
+>
+Welcome!
 
-diff --git a/meta-networking/COPYING.MIT b/meta-networking/COPYING.MIT
-new file mode 100644
-index 0000000..fb950dc
---- /dev/null
-+++ b/meta-networking/COPYING.MIT
-@@ -0,0 +1,17 @@
-+Permission is hereby granted, free of charge, to any person obtaining a copy 
-+of this software and associated documentation files (the "Software"), to deal 
-+in the Software without restriction, including without limitation the rights 
-+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-+copies of the Software, and to permit persons to whom the Software is 
-+furnished to do so, subject to the following conditions:
-+
-+The above copyright notice and this permission notice shall be included in 
-+all copies or substantial portions of the Software.
-+
-+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
-+THE SOFTWARE.
-diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
-new file mode 100644
-index 0000000..5e825f0
---- /dev/null
-+++ b/meta-networking/MAINTAINERS
-@@ -0,0 +1,31 @@
-+This file contains a list of maintainers for the meta-networking layer.
-+
-+Please submit any patches against meta-networking to the OpenEmbedded
-+development mailing list (openembedded-devel@lists.openembedded.org) with
-+'[meta-networking]' in the subject.
-+
-+When sending single patches, please use something like:
-+
-+   git send-email -1 \
-+        --to openembedded-devel@lists.openembedded.org \
-+        --subject-prefix=meta-networking][PATCH
-+
-+You may also contact the maintainers directly.
-+
-+Descriptions of section entries:
-+
-+        M: Mail patches to: FullName <address@domain>
-+        F: Files and directories with wildcard patterns.
-+           A trailing slash includes all files and subdirectory files.
-+           F:   recipes-devtools/       all files in and below meta-devtools
-+           F:   recipes-selinux/*       all files in meta-selinux, but not below
-+           One pattern per line.  Multiple F: lines acceptable.
-+
-+Please keep this list in alphabetical order.
-+
-+Maintainers List (try to look for most precise areas first)
-+
-+COMMON
-+M:      Joe MacDonald <joe.macdonald@windriver.com>
-+F:      conf
-+F:      recipes-*
-diff --git a/meta-networking/README b/meta-networking/README
-new file mode 100644
-index 0000000..3ac7269
---- /dev/null
-+++ b/meta-networking/README
-@@ -0,0 +1,16 @@
-+meta-networking
-+===============
-+
-+This layer is intended to be a central point for networking-related
-+packages and configuration.  It should be useful directly on top of
-+oe-core and compliments meta-openembedded.  It should be primarily useful
-+to the following groups:
-+
-+      - Anyone building a small networking device (eg. a home router /
-+        bridge / switch).
-+
-+      - Anyone wanting to add network services to their device (eg.
-+        anything that might benefit from a small ftp/tftp server)
-+
-+Please see the MAINTAINERS file for information on contacting the
-+maintainers of this layer, as well as instructions for submitting patches. 
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-new file mode 100644
-index 0000000..f26a172
---- /dev/null
-+++ b/meta-networking/conf/layer.conf
-@@ -0,0 +1,11 @@
-+# We have a conf and classes directory, add to BBPATH
-+BBPATH := "${BBPATH}:${LAYERDIR}"
-+
-+# We have a packages directory, add to BBFILES
-+BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb \
-+ ${LAYERDIR}/recipes-*/*/*.bbappend"
-+
-+BBFILE_COLLECTIONS += "networking"
-+BBFILE_PATTERN_networking := "^${LAYERDIR}/"
-+BBFILE_PRIORITY_networking = "5"
-+
--- 
-1.7.11.3
+You want to create a bsp for a new board or use something that is already
+in?
 
-
+ag
 
