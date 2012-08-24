@@ -1,26 +1,23 @@
-Received: from mga14.intel.com ([143.182.124.37])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1T63SH-0007M0-1U
+Received: from 206-248-190-39.dsl.teksavvy.com ([206.248.190.39]
+	helo=yow-jmacdona-d2.wrs.com) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1T65LX-0006We-U1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Aug 2012 19:50:31 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 27 Aug 2012 10:38:16 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,321,1344236400"; d="scan'208";a="185431067"
-Received: from unknown (HELO helios.localnet) ([10.252.121.136])
-	by azsmga001.ch.intel.com with ESMTP; 27 Aug 2012 10:38:04 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Simon Busch <morphis@gravedo.de>
-Date: Mon, 27 Aug 2012 18:38:03 +0100
-Message-ID: <2154638.Zymf6iV0YH@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
-In-Reply-To: <CAMKF1sotij-SktKtd27iE+rNjU09XZYBQzNMssRpBZVK1myrOw@mail.gmail.com>
-References: <503B8DC7.3050909@gravedo.de>
-	<CAMKF1sotij-SktKtd27iE+rNjU09XZYBQzNMssRpBZVK1myrOw@mail.gmail.com>
+	Mon, 27 Aug 2012 21:51:40 +0200
+Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
+	id 0D9606A7AD2; Fri, 24 Aug 2012 14:11:40 -0400 (EDT)
+Date: Fri, 24 Aug 2012 14:11:39 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120824181139.GL3391@windriver.com>
+References: <1345812827-14588-1-git-send-email-joe.macdonald@windriver.com>
+	<k186lk$64e$1@ger.gmane.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] udev without initscript
+In-Reply-To: <k186lk$64e$1@ger.gmane.org>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] meta-networking: add layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2012 17:50:31 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 27 Aug 2012 19:51:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Monday 27 August 2012 10:31:30 Khem Raj wrote:
-> On Mon, Aug 27, 2012 at 8:09 AM, Simon Busch <morphis@gravedo.de> wrote:
-> > recently I discovered that the udev version provided by meta-oe doesn't
-> > ship an initscript for sysvinit anymore where oe-core's version of udev
-> > still does. Is there a specific cause for this or is it just as
-> > everybody uses systemd theses days with meta-oe instead of sysvinit?
+[Re: [oe] [meta-oe][PATCH] meta-networking: add layer] On 12.08.24 (Fri 17:30) Koen Kooi wrote:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> I guess people just use systemd since it was entwined in meta-oe before it
-> spun into its own layer.
+> Op 24-08-12 14:53, Joe MacDonald schreef:
+> > A home for networking-related packages.  This includes protocol support, 
+> > servers / daemons and utilities.
+> > 
+> > Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com> --- 
+> > meta-networking/COPYING.MIT                      | 17 +++++++++++++ 
+> > meta-networking/MAINTAINERS                      | 31
+> > ++++++++++++++++++++++++ meta-networking/README
+> > | 16 ++++++++++++ meta-networking/conf/distro/oe-networking.conf   |  2
+> > ++ meta-networking/conf/distro/poky-networking.conf |  4 +++
+> 
+> Drop the distro stuff, those don't belong in a meta-oe sublayer
 
-Sounds like something that ought to be fixed. FYI however I believe there is a 
-plan to update udev in OE-Core pretty soon, which will definitely include an 
-init script if appropriate - not sure what the status of that is though.
+Right, I should've caught that.  Sorry.
 
-Cheers,
-Paul
+Updated patch enroute.
+
+-J.
+
+> 
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+> 
+> iD8DBQFQN534MkyGM64RGpERAhTqAJ9bBbe3PPvdxY8vNUbI9vMVOybW8ACgrgXK
+> No2VBmX+kP3EyBuxhBiI2d8=
+> =eAFB
+> -----END PGP SIGNATURE-----
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind River
+direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
 
 
