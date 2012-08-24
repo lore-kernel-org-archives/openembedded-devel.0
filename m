@@ -1,32 +1,36 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1T4rn3-0005O5-MV
+	(envelope-from <s.stirtzel@googlemail.com>) id 1T4rnQ-0005St-Dq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 13:11:01 +0200
-Received: by iaky10 with SMTP id y10so3116688iak.6
+	Fri, 24 Aug 2012 13:11:24 +0200
+Received: by wgbdr1 with SMTP id dr1so1123560wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 03:58:53 -0700 (PDT)
+	Fri, 24 Aug 2012 03:59:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=4Loc5NDGtx+jGd+3LlR0bhC+X/EBtkUuAW2BHg/A1ZA=;
-	b=rZZX6cp1kUEZYkqm7DoHif73LRp5nVgTp5MFRK29Dzyzpc67G6IqTjsclBW0UGJhsa
-	vsujr0NCrfa1y3rG7L0Di+zgi7LqooV1bO61qSC3dKbTsvBm+OCtiGYATLkK69DRJzpy
-	uabxCO3eU01X8+2Axmf5KXipV+PIqEeTd1RdpK+Vmm3KCIlztdl3qmSDlKPYdp0I339h
-	hWzRNQ3+dBOa7I4vMaAWahq7nAcIRlf11wGTZd8jZ1Fgg8leHFtaLBjlDiuJVR8sWEWs
-	EIBHsrpANET9LshzqIb2Ig56dsrDMf09tw7pZ9aWjLeWOaGORH5aOLMw4fV58yN/bb44
-	KMTA==
-MIME-Version: 1.0
-Received: by 10.50.189.134 with SMTP id gi6mr1630961igc.55.1345805933785; Fri,
-	24 Aug 2012 03:58:53 -0700 (PDT)
-Received: by 10.64.49.45 with HTTP; Fri, 24 Aug 2012 03:58:53 -0700 (PDT)
-In-Reply-To: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Fri, 24 Aug 2012 12:58:53 +0200
-Message-ID: <CAGiJk9dMmqnSSXoy-Nx8P11YW41qze5amHubbLgMeQsqHvGyRA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=l2eixNJfM1+HqRDuD7orjoGizlScRKMhGTR/+C/jXDE=;
+	b=Xnrk//WEaWohu3Xv3dDyjGgr3czriHPBgATk8QJfpcHm1FQAe9RV4caUhVbP4Tr/KL
+	ikK0UftY1wRl2hIduzV4UQ4iYCRgmvKxjWtR7U/gAjo37I6TL58DQZbw7RFeMV5w6krL
+	0xQ+VdzkUeuSWzT2bYj7yVhM1ohffW6c63R/5LC8cF9Hutn6k8gw+2suSz6UhyGJPOFt
+	VWEhYk4f3IWpkJ8GCxvj9UVyuSU78DXZDc4HQGvJK3EkVyIpEyyvCKUSgHJWYcRl1C/I
+	ShkveUVa7VHSJFf1g9qLrHLojwXvbEMAtokN5I6LzcQRGIoeAutwKCXx7zRIfRMvDpFX
+	rYRw==
+Received: by 10.216.143.158 with SMTP id l30mr2601985wej.113.1345805957209;
+	Fri, 24 Aug 2012 03:59:17 -0700 (PDT)
+Received: from s-stirtzel-linux.zera.local
+	(ip-95-222-156-96.unitymediagroup.de. [95.222.156.96])
+	by mx.google.com with ESMTPS id dv1sm5712174wib.10.2012.08.24.03.59.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 24 Aug 2012 03:59:16 -0700 (PDT)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg
+Date: Fri, 24 Aug 2012 12:56:27 +0200
+Message-Id: <1345805787-6819-2-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
+References: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
+Subject: [meta-oe][PATCH] libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 11:11:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 24 Aug 2012 11:11:24 -0000
 
-2012/8/24 Samuel Stirtzel <s.stirtzel@googlemail.com>:
-> This fixes "ERROR: Multiple .bb files are due to be built which each provide jpeg"
->
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-> ---
->  meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> index dd81606..ec25874 100644
-> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> @@ -15,6 +15,7 @@ S = "${WORKDIR}/trunk"
->
->  # Drop-in replacement for jpeg
->  PROVIDES = "jpeg"
-> +RPROVIDES_${PN} = "jpeg"
->
->  inherit autotools pkgconfig
->
-> --
-> 1.7.9.5
->
+This fixes "ERROR: Multiple .bb files are due to be built which each provide jpeg"
 
-Seems like the meta-oe prefix got lost...? Will resend it.
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+index dd81606..ec25874 100644
+--- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
++++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+@@ -15,6 +15,7 @@ S = "${WORKDIR}/trunk"
+ 
+ # Drop-in replacement for jpeg
+ PROVIDES = "jpeg"
++RPROVIDES_${PN} = "jpeg"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
-Regards
-Samuel
+1.7.9.5
+
 
 
