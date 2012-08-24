@@ -1,35 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T4n5G-0003j4-Sp
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T4oRQ-0001GJ-CW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 08:09:31 +0200
-Received: by mail-pb0-f47.google.com with SMTP id wy7so2828031pbc.6
+	Fri, 24 Aug 2012 09:36:28 +0200
+Received: by wibhn17 with SMTP id hn17so434816wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2012 22:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=cCd/cVECL0W7NDzn6qGGIB6mTfi72LdSBlXAwlbxx8s=;
-	b=U7PcsNI99B0ws0/h7ZnVa9nX1hUxPHnbYDTdqe7tByF5o+kPewUtn49QuehpjUW4FJ
-	38Tg1sINrlaWwmmHLdhHiDZ1cpkuM1lqem92Ga7Udb6ZvTjqlOvKTdW375IruBWLTuJt
-	ReHFZjdDPzUUCwUgDnRnA7hDKYmXG5X8VXsukg0+53iMzVVKewOSmTqMF4mEJuKfw3xY
-	21RQizZ1ah7sGjUFxs5AQd5CXxllD+uLUK6/O/pD1v5HIzhj5c9kcs5wjqaXz2IoiILr
-	ddNnqx3sKt+ePNL6DalZnve/gSYPz3sbY6uMil6SwYFZUNWWYXNi7oPId0YwctxRF6zV
-	JBWA==
-Received: by 10.66.83.129 with SMTP id q1mr8501289pay.4.1345787845537;
-	Thu, 23 Aug 2012 22:57:25 -0700 (PDT)
-Received: from leo.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id hr9sm7594293pbc.36.2012.08.23.22.57.23
+	Fri, 24 Aug 2012 00:24:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=FnQODp5JnqZB13KY2r49icjY2nnR4jiuMrkPdklbbVg=;
+	b=Pa/UAbxWMA9XgV5POXy5xCFtjtZ5UflUCA/IB86yTcz8GFlay0VoEP7gHrUK4VgreL
+	1nEHu9NBE1rKic6EGb/1e9RpVb/vi3dR7NaG1f84DYqbQIJGI4LAWjQ+SUNrwjU81ZCY
+	PTVeAt3v9DqmZAsc1DgGCOEowXrmv4RZIwbIPJMAtD1p5gNzzOZlc5lROP1qqDwTZECP
+	p8K4MFOoQsqCGz3CAv403Ftl+WVq+VxjlBb93e0JHx87Z3JpNXSJTHgOTQVBVx1XAqcC
+	NNxT3gFxAuRh03sAAtMtm/1msbtfh62gdRPmY1wCWKhKVutom2VEnP+lS1tfyh+lrNLa
+	toQA==
+Received: by 10.180.81.193 with SMTP id c1mr3233033wiy.12.1345793061099;
+	Fri, 24 Aug 2012 00:24:21 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
+	[95.222.156.96])
+	by mx.google.com with ESMTPS id dv1sm4462286wib.10.2012.08.24.00.24.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 23 Aug 2012 22:57:24 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 24 Aug 2012 00:24:19 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2012 22:57:05 -0700
-Message-Id: <1345787825-9950-5-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
-References: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
-Subject: [2011.03-maintenance][PATCH 5/5] binutils-2.20.1: Fix SRC_URI checksums
+Date: Fri, 24 Aug 2012 09:23:36 +0200
+Message-Id: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [PATCH 1/3] gnome.bbclass: remove to use oe-core's version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 06:09:31 -0000
+X-List-Received-Date: Fri, 24 Aug 2012 07:36:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* suggested in [1]
+* build tested from scratch with my working image [2]
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-August/041157.html
+[2] http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-image/xfce-full-image.bb
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes/binutils/binutils_2.20.1.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/classes/gnome.bbclass |    4 ----
+ 1 files changed, 0 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-oe/classes/gnome.bbclass
 
-diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
-index 5154e2d..f40b676 100644
---- a/recipes/binutils/binutils_2.20.1.bb
-+++ b/recipes/binutils/binutils_2.20.1.bb
-@@ -24,8 +24,8 @@ SRC_URI_append_nios2 =" \
- 	file://binutils-nios2.patch \
- 	"
- 
--SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
--SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
-+SRC_URI[tarball.sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
-+SRC_URI[tarball.md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
- 
- # powerpc patches
- SRC_URI += "\
+diff --git a/meta-oe/classes/gnome.bbclass b/meta-oe/classes/gnome.bbclass
+deleted file mode 100644
+index 0a32a77..0000000
+--- a/meta-oe/classes/gnome.bbclass
++++ /dev/null
+@@ -1,4 +0,0 @@
+-inherit gnomebase gtk-icon-cache gconf mime
+-
+-EXTRA_OECONF += "--enable-introspection=no"
+-BBCLASSEXTEND += "native"
 -- 
-1.7.9.5
+1.7.6.5
 
 
 
