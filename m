@@ -1,35 +1,36 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from ams-iport-2.cisco.com ([144.254.224.141])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1T4qEk-0006Dt-8I
+	(envelope-from <mertsas@cisco.com>) id 1T4qjN-0002TU-6I
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 11:31:30 +0200
-Received: by iaky10 with SMTP id y10so2971874iak.6
+	Fri, 24 Aug 2012 12:03:09 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=mertsas@cisco.com; l=1114; q=dns/txt;
+	s=iport; t=1345801864; x=1347011464;
+	h=message-id:date:from:mime-version:to:subject:references:
+	in-reply-to:content-transfer-encoding;
+	bh=T6y9dUF5Vw73MCr62xTIzvJowbyGZokYSRuFNdH4YWM=;
+	b=KkNOaXL/5YDS3oCTAJ5wmCs9latGr1I30BbLCJF2A7l1wagJXAI95thx
+	G4qVSI4d3HCD+/kqP7ijMOuMpZmifmyUCKLcMw1iNjQK9fBx9LTzjTGDk
+	Bp96SCZunIt8pAKgir8F9WNQFhr/JTyPv61OtxiFWXUxEmoiXkH3et2hN 8=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Av8EAOtNN1CQ/khN/2dsb2JhbABFulSBB4IgAQEBBAEBAQ8BWwoRCxgJFg8JAwIBAgEVAS8TBgIBAR6HawuZJqAVjn2DHAOTKYIrgRSESIhRgWeCZQ
+X-IronPort-AV: E=Sophos;i="4.80,302,1344211200"; d="scan'208";a="76216636"
+Received: from ams-core-4.cisco.com ([144.254.72.77])
+	by ams-iport-2.cisco.com with ESMTP; 24 Aug 2012 09:51:01 +0000
+Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
+	by ams-core-4.cisco.com (8.14.5/8.14.5) with ESMTP id q7O9p19a016504
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 02:19:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=XIpVmNJWSgurs2N/nxNbUan/cPfqG9xttur0pJhPawI=;
-	b=zBjJUp5K6ppWOxfgC5H28q2FqzHjHF1R4X88DT726tc5vQw6y6mx++1ouuzAXrwPyb
-	RPn4wzR0cVs7MrnDQAtGpP5Gvf9tVWdvTZE/fSPgVBhJfRIeu+9NC/3L3ITceIeW13D2
-	C89J4Np8EO1zYU1uRynhToAL0eeLn44pY9bJWY6WRyy5itpqgmvv094rpqHTJrDPcdc+
-	AdSL2nWtRZiGQucLqyB3Hcbm8NlGyIt6buL4tUHdN1VFZr/13SBjAedPlIYgjaiai/JB
-	ar0oufDqDipeRdmGLpp6+yJLT6FI+tXVXNMP19PbUnlnkdEJxl3NMAJx5QLA7/CKkalj
-	D6Og==
+	Fri, 24 Aug 2012 09:51:01 GMT
+Message-ID: <50374DAF.8070500@cisco.com>
+Date: Fri, 24 Aug 2012 11:47:27 +0200
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.6esrpre) Gecko/20120730 Thunderbird/10.0.6
 MIME-Version: 1.0
-Received: by 10.50.242.71 with SMTP id wo7mr1365894igc.55.1345799962329; Fri,
-	24 Aug 2012 02:19:22 -0700 (PDT)
-Received: by 10.64.49.45 with HTTP; Fri, 24 Aug 2012 02:19:22 -0700 (PDT)
-In-Reply-To: <k17eda$nmn$1@ger.gmane.org>
-References: <CALbNGRTC=AL5g+CPvHQzVijDf9AJj3dHmxs7H7MeY4y5VygYKQ@mail.gmail.com>
-	<20120823093511.GM3029@jama.jama.net>
-	<CAJTo0LbmhE+cLgJn2nxcdbj1dVH+5Y8xaT1tgP7FPtBspmLFtg@mail.gmail.com>
-	<k17eda$nmn$1@ger.gmane.org>
-Date: Fri, 24 Aug 2012 11:19:22 +0200
-Message-ID: <CAGiJk9cXbriDJ0oqPKcC-v0wbB2dMP9uJ=sTuc3L+WekYYtf6Q@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: gnome.bbclass
+References: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
+In-Reply-To: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
+Subject: Re: Hello
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 09:31:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 24 Aug 2012 10:03:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2012/8/24 Koen Kooi <koen@dominion.thruhere.net>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 23-08-12 23:32, Burton, Ross schreef:
->> On 23 August 2012 10:35, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> git log says it was because of 'hicolor-icon-theme-native' and
->>> 'gnome-common-native'
->>
->> Isn't that quite a sledgehammer approach, why couldn't BBCLASSEXTEND +=
->> "native" be added to just those two recipes?
->
-> With the current tiny set of gnome recipes, only those 2 needed it. In
-> OE-classic with a lot more gnome a lot more was needed. Over time the gnome
-> cleaned up their act as well.
->
-> KDE on the other hand....
+Hi, and welcome.
 
-I Don't know what you intend to say, but KDE is a BBOM with lots of
-magical glue code ;)
-My workarounds increase the "zero support for cross compiling" to
-"somewhat more than zero support" that is all.
+The way we started was by looking at the angstrom distribution. That is
+available as a oe-core layer, and you can easily start by compiling that
+one.
+After that, we started taking stuff from angstrom, into our own
+repository. Starting with configurations, and changing them as we
+wanted. And when we had our own, angstrom based, distro up and running,
+we started adding what we needed. But start looking at angstrom, and
+understand how oe works, at least that is my tip.
 
--- 
-Regards
-Samuel
+- Martin
+
+On 08/24/12 11:14, Giuseppe Longo wrote:
+> Hello everyone,
+> i'm a new member of this list.
+>
+> Although i have no experience, i would like to learn howto create
+> linux distro for embedded systems.
+>
+> I would like to ask some basic questions:
+> - where do you start to create a linux distro?
+> - i need an embedded device without any os or firmware?
+>
+> Thanks,
+> Best regards.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
