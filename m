@@ -1,34 +1,29 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T4q3q-0005uJ-1Z for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 11:20:14 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T4ps5-0003Fl-PU for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 11:08:05 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 11:08:05 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <giuseppelng@gmail.com>) id 1T4q9y-000611-I4
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Aug 2012 11:26:34 +0200
+Received: by weyr6 with SMTP id r6so877862wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 11:08:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 24 Aug 2012 02:14:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=X2ZkKQDqgvb9M79i2hVSi4fmRENCsa1vLkI9sKZQaD8=;
+	b=Jx6nl/pM51EhkCPHUuBau16vpRUVjtE4I8K6IMtiju1fUx0cQ88g/sb8igihYtCz18
+	hRzX6Mdu4xoF1E43aae55aqDfSLe+KWi6Q7CZIfHHkO48FvzYWVKqn4xU/35oGBrpbDN
+	PFxCyO6bsyK6yk41vWMQPbEQGd/Yeqc0c6wANi2+qBsFfJoBVaoJ/dL+7zUSPmDamaiQ
+	cPX5zoUkqvhaJdJK+RGhO38g39/ZtSz3puYGTKfInu4kBlQg4oH3urgUc6CqDmZck0xO
+	ZkXfLsHPrQ1fVsqQFmV3D04AbrgZU8Qa2h/RFC2F1301wku213FiYDmbB9C6JkNZ3UAc
+	dQQQ==
+MIME-Version: 1.0
+Received: by 10.180.86.3 with SMTP id l3mr3949406wiz.16.1345799667419; Fri, 24
+	Aug 2012 02:14:27 -0700 (PDT)
+Received: by 10.194.93.73 with HTTP; Fri, 24 Aug 2012 02:14:27 -0700 (PDT)
+Date: Fri, 24 Aug 2012 11:14:27 +0200
+Message-ID: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
+From: Giuseppe Longo <giuseppelng@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 24 Aug 2012 11:07:55 +0200
-Message-ID: <k17g98$6vq$1@ger.gmane.org>
-References: <1345787215-11917-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <1345787215-11917-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.4.3
-Subject: Re: [meta-systemd][PATCH] systemd: Refresh the uclibc specific patches
+Subject: Hello
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 09:20:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Aug 2012 09:26:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello everyone,
+i'm a new member of this list.
 
-Op 24-08-12 07:46, Khem Raj schreef:
-> Make sure that patches apply on top of latest systemd some source files
-> have moved around.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Although i have no experience, i would like to learn howto create
+linux distro for embedded systems.
 
-2012-08-24 11:06:17 URL:http://patches.openembedded.org/patch/35259/mbox/
-[2218] -> "pw-am-35259.patch" [1]
-Applying: systemd: Refresh the uclibc specific patches
-error: patch failed: meta-systemd/recipes-core/systemd/systemd_git.bb:32
-error: meta-systemd/recipes-core/systemd/systemd_git.bb: patch does not apply
-Patch failed at 0001 systemd: Refresh the uclibc specific patches
-When you have resolved this problem run "git am --resolved".
-If you would prefer to skip this patch, instead run "git am --skip".
-To restore the original branch and stop patching run "git am --abort".
+I would like to ask some basic questions:
+- where do you start to create a linux distro?
+- i need an embedded device without any os or firmware?
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQN0RrMkyGM64RGpERAkBhAJ4lPzPStp+i0zXlb94MLULzn1PK2wCeKlFP
-BnXF/w6qYbHzCN9rNy2ON8o=
-=dlGq
------END PGP SIGNATURE-----
-
+Thanks,
+Best regards.
 
 
