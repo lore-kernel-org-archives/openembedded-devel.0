@@ -1,38 +1,36 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T4oRS-0001GS-Nr
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 09:36:30 +0200
-Received: by wgbdr1 with SMTP id dr1so1000902wgb.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T4pYx-0003Yp-Sy for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Aug 2012 10:48:19 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T4pNC-0000TX-7l for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Aug 2012 10:36:10 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Aug 2012 10:36:10 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 00:24:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=FAcUkUB3goIH6/xiqkLzo4sE1sAYFDs0zWQAKVyob5A=;
-	b=nthvsiub/Ir4HAkzNFEBAGpnD/ZUGhBWkV/l53N8t3duJCFdV7JGvPSvSVO01EvY5j
-	VES/WCyJK9rMVVJoLXUKAEVjeyGD6BVsgK5BGgyvyw2RTfLyEsSMsS3HJw8pSKjaaTF6
-	5+AY8Bu2w5tly7KisOhT9XnbR0trUzSuJkyv6xwtJATc1o3KPJcpNMOMyfhlVq0iCSWd
-	/eeTvoiovdGRgsF4uoQpEdTpB6vuEX/7c8R7kOkj/hhbZCXgVD3XKO5CiAydySocDImw
-	Mvn0V97LnyEBL1ZuSqDrzIr3kagymgy3pEdlmuERBcaWZSo4KiDxPDFboIhJWcIh2Pnn
-	uUBA==
-Received: by 10.180.104.197 with SMTP id gg5mr3255645wib.9.1345793063715;
-	Fri, 24 Aug 2012 00:24:23 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
-	[95.222.156.96])
-	by mx.google.com with ESMTPS id dv1sm4462286wib.10.2012.08.24.00.24.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Aug 2012 00:24:23 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 24 Aug 2012 10:36:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Aug 2012 09:23:38 +0200
-Message-Id: <1345793018-4843-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] busybox/meta-systemd: follow oe-core to 1.20.2
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 24 Aug 2012 10:35:57 +0200
+Message-ID: <k17eda$nmn$1@ger.gmane.org>
+References: <CALbNGRTC=AL5g+CPvHQzVijDf9AJj3dHmxs7H7MeY4y5VygYKQ@mail.gmail.com>
+	<20120823093511.GM3029@jama.jama.net>
+	<CAJTo0LbmhE+cLgJn2nxcdbj1dVH+5Y8xaT1tgP7FPtBspmLFtg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <CAJTo0LbmhE+cLgJn2nxcdbj1dVH+5Y8xaT1tgP7FPtBspmLFtg@mail.gmail.com>
+X-Enigmail-Version: 1.4.3
+Subject: Re: gnome.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 07:36:30 -0000
+X-List-Received-Date: Fri, 24 Aug 2012 08:48:20 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...box_1.19.4.bbappend => busybox_1.20.2.bbappend} |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
- rename meta-systemd/meta-oe/recipes-core/busybox/{busybox_1.19.4.bbappend => busybox_1.20.2.bbappend} (96%)
+Op 23-08-12 23:32, Burton, Ross schreef:
+> On 23 August 2012 10:35, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> git log says it was because of 'hicolor-icon-theme-native' and
+>> 'gnome-common-native'
+> 
+> Isn't that quite a sledgehammer approach, why couldn't BBCLASSEXTEND +=
+> "native" be added to just those two recipes?
 
-diff --git a/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-similarity index 96%
-rename from meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-rename to meta-systemd/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-index bb11550..a0ae2ce 100644
---- a/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
-+++ b/meta-systemd/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-@@ -1,6 +1,6 @@
- inherit systemd
- 
--PRINC := "${@int(PRINC) + 3}"
-+PRINC := "${@int(PRINC) + 1}"
- 
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--- 
-1.7.6.5
+With the current tiny set of gnome recipes, only those 2 needed it. In
+OE-classic with a lot more gnome a lot more was needed. Over time the gnome
+cleaned up their act as well.
+
+KDE on the other hand....
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQNzzsMkyGM64RGpERArH0AJ4jfChjl+AYJtk+F3dkzIp7yhY9RgCeIWN0
+xtyRNgSW6v8z0jkm43GKbYA=
+=ozoX
+-----END PGP SIGNATURE-----
 
 
 
