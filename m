@@ -1,34 +1,32 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T4w1V-0005RS-Q8 for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 17:42:13 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T4vpn-0002NH-6N for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 17:30:07 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 17:30:07 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <giuseppelng@gmail.com>) id 1T4xch-0000yy-5A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Aug 2012 19:24:43 +0200
+Received: by weyr6 with SMTP id r6so1121707wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 17:30:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 24 Aug 2012 10:12:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=TqHWhGcqQNV0E3UgKj81N/JHBgO0Enpp5HrNguaq9f4=;
+	b=GSWozv4eH0tjouGCGuuhrnZcZs7JI6E4yN0ZueFzTdmCj9v/gNbxb8Srm5yDTOTO7V
+	X+8Nzui74S/7LpWUXw7KYGUYu43zhUqKY7QC0Wm8LWrUyV/WyyHOlpORnWSytIOgQyvf
+	kbOuheOR98xoucWOw+MO9dVjuUpSCEE+cE/vMl/WXIkRV1NF3fnCbYQ1/h41r2x2+Bu0
+	v7oXznV3In8xbu6Xqit9r0IsRJB78tI0Yehhs7eiFdIGrhQs9Hlr5GVCK7I5aqV2tWeV
+	4PeHgn5Nzd33lDYahInBxWqDgiTsTPaJoTTWFqnDytI94gYfPyrgzAHoUuT+3n7G0rdw
+	qeQw==
+MIME-Version: 1.0
+Received: by 10.180.8.41 with SMTP id o9mr4715423wia.3.1345828355313; Fri, 24
+	Aug 2012 10:12:35 -0700 (PDT)
+Received: by 10.194.93.73 with HTTP; Fri, 24 Aug 2012 10:12:35 -0700 (PDT)
+In-Reply-To: <50374DAF.8070500@cisco.com>
+References: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
+	<50374DAF.8070500@cisco.com>
+Date: Fri, 24 Aug 2012 19:12:35 +0200
+Message-ID: <CAFpD06RReUM1sQjHrsyuJrmg1-dkbVVMFBfbvoy+OSKpcCX-ew@mail.gmail.com>
+From: Giuseppe Longo <giuseppelng@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 24 Aug 2012 17:30:00 +0200
-Message-ID: <k186lk$64e$1@ger.gmane.org>
-References: <1345812827-14588-1-git-send-email-joe.macdonald@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <1345812827-14588-1-git-send-email-joe.macdonald@windriver.com>
-X-Enigmail-Version: 1.4.3
-Subject: Re: [meta-oe][PATCH] meta-networking: add layer
+Subject: Re: Hello
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 15:42:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Aug 2012 17:24:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Martin,
+thanks for the reply.
 
-Op 24-08-12 14:53, Joe MacDonald schreef:
-> A home for networking-related packages.  This includes protocol support, 
-> servers / daemons and utilities.
-> 
-> Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com> --- 
-> meta-networking/COPYING.MIT                      | 17 +++++++++++++ 
-> meta-networking/MAINTAINERS                      | 31
-> ++++++++++++++++++++++++ meta-networking/README
-> | 16 ++++++++++++ meta-networking/conf/distro/oe-networking.conf   |  2
-> ++ meta-networking/conf/distro/poky-networking.conf |  4 +++
+I have only one question: what embedded device can i use?
 
-Drop the distro stuff, those don't belong in a meta-oe sublayer
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQN534MkyGM64RGpERAhTqAJ9bBbe3PPvdxY8vNUbI9vMVOybW8ACgrgXK
-No2VBmX+kP3EyBuxhBiI2d8=
-=eAFB
------END PGP SIGNATURE-----
-
+Thanks,
+Regards.
 
 
