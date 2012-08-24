@@ -1,36 +1,38 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T4oRQ-0001GJ-CW
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T4oRR-0001GL-FF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 09:36:28 +0200
-Received: by wibhn17 with SMTP id hn17so434816wib.6
+	Fri, 24 Aug 2012 09:36:29 +0200
+Received: by weyr6 with SMTP id r6so832838wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 00:24:21 -0700 (PDT)
+	Fri, 24 Aug 2012 00:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=FnQODp5JnqZB13KY2r49icjY2nnR4jiuMrkPdklbbVg=;
-	b=Pa/UAbxWMA9XgV5POXy5xCFtjtZ5UflUCA/IB86yTcz8GFlay0VoEP7gHrUK4VgreL
-	1nEHu9NBE1rKic6EGb/1e9RpVb/vi3dR7NaG1f84DYqbQIJGI4LAWjQ+SUNrwjU81ZCY
-	PTVeAt3v9DqmZAsc1DgGCOEowXrmv4RZIwbIPJMAtD1p5gNzzOZlc5lROP1qqDwTZECP
-	p8K4MFOoQsqCGz3CAv403Ftl+WVq+VxjlBb93e0JHx87Z3JpNXSJTHgOTQVBVx1XAqcC
-	NNxT3gFxAuRh03sAAtMtm/1msbtfh62gdRPmY1wCWKhKVutom2VEnP+lS1tfyh+lrNLa
-	toQA==
-Received: by 10.180.81.193 with SMTP id c1mr3233033wiy.12.1345793061099;
-	Fri, 24 Aug 2012 00:24:21 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=Z31dqDi+ugffrZW/7Oqzyda27w8WVKH/MPVrdhpJyHQ=;
+	b=ZY4orRw2xvUQicNYTEief/BqP1qmx5YzCKn6P8Kd1QtNCUtpP1oRxKWP5DnDyIp5vU
+	7DBOS36ZBlDanxPQVAa5RrsF2Glia6PBxjGg0mj46njjo7RI2V2DiTigcjBnrZMxlknP
+	ntAoxv6X9XmqpFjvSKyz9xDN942KKo80VskUcwqLu9DizJMi8L2G6XMaEbW1FYf21FmA
+	XCdDKADQoDdYNQDgHxiNCzWk5ZJcJjKgGZY/bNTinZ+egmYsGrysAyYxJeylycxphUH6
+	mH/38I2UuclsUTgX8uaQJouzKk+WSI/Ga92kvAK+/WKQzvAX2ZWK4bX4votTY99zlpIP
+	rxAA==
+Received: by 10.180.96.199 with SMTP id du7mr3177574wib.21.1345793062412;
+	Fri, 24 Aug 2012 00:24:22 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
 	[95.222.156.96])
-	by mx.google.com with ESMTPS id dv1sm4462286wib.10.2012.08.24.00.24.19
+	by mx.google.com with ESMTPS id dv1sm4462286wib.10.2012.08.24.00.24.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 24 Aug 2012 00:24:19 -0700 (PDT)
+	Fri, 24 Aug 2012 00:24:21 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Aug 2012 09:23:36 +0200
-Message-Id: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 24 Aug 2012 09:23:37 +0200
+Message-Id: <1345793018-4843-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1345793018-4843-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] gnome.bbclass: remove to use oe-core's version
+Subject: [PATCH 2/3] busybox/meta-oe: follow oe-core to 1.20.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,32 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 07:36:28 -0000
+X-List-Received-Date: Fri, 24 Aug 2012 07:36:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* suggested in [1]
-* build tested from scratch with my working image [2]
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-August/041157.html
-[2] http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-image/xfce-full-image.bb
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/classes/gnome.bbclass |    4 ----
- 1 files changed, 0 insertions(+), 4 deletions(-)
- delete mode 100644 meta-oe/classes/gnome.bbclass
+ ...box_1.19.4.bbappend => busybox_1.20.2.bbappend} |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename meta-oe/recipes-core/busybox/{busybox_1.19.4.bbappend => busybox_1.20.2.bbappend} (90%)
 
-diff --git a/meta-oe/classes/gnome.bbclass b/meta-oe/classes/gnome.bbclass
-deleted file mode 100644
-index 0a32a77..0000000
---- a/meta-oe/classes/gnome.bbclass
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit gnomebase gtk-icon-cache gconf mime
--
--EXTRA_OECONF += "--enable-introspection=no"
--BBCLASSEXTEND += "native"
+diff --git a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend b/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+similarity index 90%
+rename from meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
+rename to meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+index e9dd4ac..0741b76 100644
+--- a/meta-oe/recipes-core/busybox/busybox_1.19.4.bbappend
++++ b/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+@@ -1,4 +1,4 @@
+-PRINC := "${@int(PRINC) + 5}"
++PRINC := "${@int(PRINC) + 1}"
+ 
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 -- 
 1.7.6.5
 
