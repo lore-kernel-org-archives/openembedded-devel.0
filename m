@@ -1,36 +1,34 @@
-Received: from ams-iport-2.cisco.com ([144.254.224.141])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1T4qjN-0002TU-6I
+	(envelope-from <s.stirtzel@googlemail.com>) id 1T4rl5-0005IQ-8K
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 12:03:09 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=mertsas@cisco.com; l=1114; q=dns/txt;
-	s=iport; t=1345801864; x=1347011464;
-	h=message-id:date:from:mime-version:to:subject:references:
-	in-reply-to:content-transfer-encoding;
-	bh=T6y9dUF5Vw73MCr62xTIzvJowbyGZokYSRuFNdH4YWM=;
-	b=KkNOaXL/5YDS3oCTAJ5wmCs9latGr1I30BbLCJF2A7l1wagJXAI95thx
-	G4qVSI4d3HCD+/kqP7ijMOuMpZmifmyUCKLcMw1iNjQK9fBx9LTzjTGDk
-	Bp96SCZunIt8pAKgir8F9WNQFhr/JTyPv61OtxiFWXUxEmoiXkH3et2hN 8=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Av8EAOtNN1CQ/khN/2dsb2JhbABFulSBB4IgAQEBBAEBAQ8BWwoRCxgJFg8JAwIBAgEVAS8TBgIBAR6HawuZJqAVjn2DHAOTKYIrgRSESIhRgWeCZQ
-X-IronPort-AV: E=Sophos;i="4.80,302,1344211200"; d="scan'208";a="76216636"
-Received: from ams-core-4.cisco.com ([144.254.72.77])
-	by ams-iport-2.cisco.com with ESMTP; 24 Aug 2012 09:51:01 +0000
-Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-4.cisco.com (8.14.5/8.14.5) with ESMTP id q7O9p19a016504
+	Fri, 24 Aug 2012 13:08:59 +0200
+Received: by weyr6 with SMTP id r6so923332wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 09:51:01 GMT
-Message-ID: <50374DAF.8070500@cisco.com>
-Date: Fri, 24 Aug 2012 11:47:27 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.6esrpre) Gecko/20120730 Thunderbird/10.0.6
-MIME-Version: 1.0
+	Fri, 24 Aug 2012 03:56:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=l2eixNJfM1+HqRDuD7orjoGizlScRKMhGTR/+C/jXDE=;
+	b=zzw6i5mepsI/0VqfKAYplnaE0ahVQMtZY3VDrHWpIfUq8GUPHVa9HFXPU1NNPqo9bQ
+	0EpRcu9I7F9IacjsCADSYTUTLAT8pS2GG8nGjBrdMQul1Y1edkwCttMXWBybmb+nrhJ7
+	rux6s+Zz+MSMUwZeEV/vqdfEozvYfz5petk7l8TphOJJLp5xgPFX3LoqMcUw6PEbTLN7
+	Lknop0GFOExWPpd6/pw/GYXjaaxVfvxRw/K/UjIVtqYZiGzQ97gZife94IeKGbGjzsxB
+	gKslRrnvIbmWQ5o0Cva0fzhw6xXiGqOb59j4TM51J6W7jTZVh+FslX5Gq/0rmDYRQlrn
+	MT/w==
+Received: by 10.180.78.4 with SMTP id x4mr4605530wiw.19.1345805811660;
+	Fri, 24 Aug 2012 03:56:51 -0700 (PDT)
+Received: from s-stirtzel-linux.zera.local
+	(ip-95-222-156-96.unitymediagroup.de. [95.222.156.96])
+	by mx.google.com with ESMTPS id dv1sm5712174wib.10.2012.08.24.03.56.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 24 Aug 2012 03:56:50 -0700 (PDT)
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
-In-Reply-To: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
-Subject: Re: Hello
+Date: Fri, 24 Aug 2012 12:56:26 +0200
+Message-Id: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH] libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 10:03:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Aug 2012 11:08:59 -0000
 
-Hi, and welcome.
+This fixes "ERROR: Multiple .bb files are due to be built which each provide jpeg"
 
-The way we started was by looking at the angstrom distribution. That is
-available as a oe-core layer, and you can easily start by compiling that
-one.
-After that, we started taking stuff from angstrom, into our own
-repository. Starting with configurations, and changing them as we
-wanted. And when we had our own, angstrom based, distro up and running,
-we started adding what we needed. But start looking at angstrom, and
-understand how oe works, at least that is my tip.
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
-- Martin
-
-On 08/24/12 11:14, Giuseppe Longo wrote:
-> Hello everyone,
-> i'm a new member of this list.
->
-> Although i have no experience, i would like to learn howto create
-> linux distro for embedded systems.
->
-> I would like to ask some basic questions:
-> - where do you start to create a linux distro?
-> - i need an embedded device without any os or firmware?
->
-> Thanks,
-> Best regards.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+index dd81606..ec25874 100644
+--- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
++++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+@@ -15,6 +15,7 @@ S = "${WORKDIR}/trunk"
+ 
+ # Drop-in replacement for jpeg
+ PROVIDES = "jpeg"
++RPROVIDES_${PN} = "jpeg"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+1.7.9.5
 
 
 
