@@ -1,38 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1T51PD-0006qK-Jm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Aug 2012 23:27:03 +0200
-Received: by iaky10 with SMTP id y10so4188669iak.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T5Ae1-0003Mg-4Y for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Aug 2012 09:18:57 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T5ASH-0001WL-6q for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Aug 2012 09:06:49 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Aug 2012 09:06:49 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2012 14:14:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=6g6vEy5og9n4d3pdeBUZ4BJFH+0UUnw8aHCIZIARZ7Q=;
-	b=QmMo6YsXRdQV1606VKaOdTRt7FEkvPpB2Bp8EaJDi4pZjiwlcw+VjjlTRTETvEYQrJ
-	8w3ewBnt8aLPW6FJjn663NGj6Zkanp4bqJ84QXfet8VE3pDrroyVdFwImXlnkW6Gn5YD
-	Xhz+acpyvTbTcKtZyFVTwN7tL6bBPYKWb4TpJSG3T38ICyDtS8/uLrQGaDqDONGUKdyM
-	uKjMnWJJyHL7SiAj7D1O0ZoUWLKtX/x+RhIlGNAjYj23aRrltx0bfL1wXgKSAJ+DyrKQ
-	AAi3m1Kc84Yyrb+EkILkStHTvWAHWxVmh40mrzr6T16KIVlvI9P1ztlz4Ap5ScskNAAl
-	PR1Q==
-Received: by 10.42.97.70 with SMTP id m6mr5577791icn.27.1345842895056; Fri, 24
-	Aug 2012 14:14:55 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.64.63.50 with HTTP; Fri, 24 Aug 2012 14:14:34 -0700 (PDT)
-X-Originating-IP: [79.118.181.96]
-In-Reply-To: <CAFpD06RReUM1sQjHrsyuJrmg1-dkbVVMFBfbvoy+OSKpcCX-ew@mail.gmail.com>
-References: <CAFpD06TQ1AXs+09BEpCqB26jPsDjw7mkEYkSmm6wO1QyP3-WTA@mail.gmail.com>
-	<50374DAF.8070500@cisco.com>
-	<CAFpD06RReUM1sQjHrsyuJrmg1-dkbVVMFBfbvoy+OSKpcCX-ew@mail.gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Sat, 25 Aug 2012 00:14:34 +0300
-Message-ID: <CAK18fxGRSUbTtLAkY615fePhZoKL5MQ00s-_HoN4N5zTbCKDbw@mail.gmail.com>
+	Sat, 25 Aug 2012 09:06:49 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQl2vfpwlxxmo+JBFb8JzhlS18d0xtEykWcB2mYiKMwwEtYJT00r1Vhgqq86Q9fy/dVXbV1R
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Hello
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 25 Aug 2012 09:06:35 +0200
+Message-ID: <k19thr$cur$1@ger.gmane.org>
+References: <1345831918-15547-1-git-send-email-joe.macdonald@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1345831918-15547-1-git-send-email-joe.macdonald@windriver.com>
+X-Enigmail-Version: 1.4.3
+Subject: Re: [meta-oe][PATCH v2] meta-networking: add layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2012 21:27:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 25 Aug 2012 07:18:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 24, 2012 at 8:12 PM, Giuseppe Longo <giuseppelng@gmail.com>wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Hello Martin,
-> thanks for the reply.
->
-> I have only one question: what embedded device can i use?
->
->
-Welcome!
+Op 24-08-12 20:11, Joe MacDonald schreef:
+> A home for networking-related packages.  This includes protocol support, 
+> servers / daemons and utilities.
+> 
+> Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com> ---
 
-You want to create a bsp for a new board or use something that is already
-in?
+> --- /dev/null +++ b/meta-networking/README @@ -0,0 +1,16 @@ 
+> +meta-networking +=============== + +This layer is intended to be a
+> central point for networking-related +packages and configuration.  It
+> should be useful directly on top of +oe-core and compliments
+> meta-openembedded.  It should be primarily useful +to the following
+> groups: + +      - Anyone building a small networking device (eg. a home
+> router / +        bridge / switch). + +      - Anyone wanting to add
+> network services to their device (eg. +        anything that might
+> benefit from a small ftp/tftp server) + +Please see the MAINTAINERS file
+> for information on contacting the +maintainers of this layer, as well as
+> instructions for submitting patches.
 
-ag
+This is missing the dependency info, e.g.
+
+This layer depends on:
+
+URI: git://git.openembedded.org/openembedded-core
+branch: master
+revision: HEAD
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQOHl7MkyGM64RGpERAnR4AKCNIGWmim0yh0aPwUv0bF7yy4LRrgCdHvGi
+Z0LeQSFZXzfX6wchkLC8zHY=
+=thVi
+-----END PGP SIGNATURE-----
+
+
 
