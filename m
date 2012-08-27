@@ -1,38 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1T5v11-0002WF-OD
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T5v12-0002WG-Ko
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Aug 2012 10:49:47 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so1161743bkc.6
+	Mon, 27 Aug 2012 10:49:48 +0200
+Received: by bkcik5 with SMTP id ik5so1161751bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2012 01:37:38 -0700 (PDT)
+	Mon, 27 Aug 2012 01:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=DhyphHBXkJSHsjESfi1sdOKui1moDhIZAUZWSLDzQoE=;
-	b=CRlY4vExmS+pptmFfTs7pKhS5thxUPmiMVDYt6bj2dnGYSMMCdFc/pZEAqcL32yflT
-	2vrGvtqqeHtbZPPorYGELQLYkWkH2BJ2QKZdIwAzY9JrIgb7S6rnmPFYQqHZ7hnMCjC9
-	+edb9+fkr6RTCowgAUnC94BfHCx/Al/ba+y+d557mvrbsxWNU8v+ljb3eOrXNFH57BOy
-	6Z3MWLJPSruRkiCyu/cMMMZkL19v5osIxzmbl1NqU8KmL//zSCpW4ZUKrCGOSjBaqA3L
-	23IZssWKRifmDT6dO/LHEdirZ4UQis5ORv0v+pPASykOWYZptaIiO9/91md5NNDyByss
-	x88Q==
-Received: by 10.204.4.130 with SMTP id 2mr3499819bkr.37.1346056658829;
-	Mon, 27 Aug 2012 01:37:38 -0700 (PDT)
+	bh=UKpFe1TGMT+BTGgJ21e0HrCAAZMGz8TooJCo94lnm7Y=;
+	b=XTnefsy1DkFNfG2UykRSOKUOggzDVZ/k2lB14KhJ+hL9QsRrC4KwaCcDNeacklJpXN
+	JGPFTvfbZVM7UZhLmH04qtgBvfLt7PfkYDtMM9jR9pRe6WuXY15PMLknxqcjsSnRifP6
+	KjanMGIbwv/VWssRu4/WymvOSqDrrmOeCZ0z5qbOha2Tsf58AzezaxwOG6Yhcu9yzGwu
+	F85+UFZ7/D61CXxnswtOLDV9MvvlEb30g/i0eURCMyVzC5m2qDpqW83/gQDUzBnvO/6t
+	DGR/vprfWzn1ng5DYhynkPTyEQOF0iogehurj57zBNn3TF7AX67kd31fpeOAtMmL0u2c
+	xzAA==
+Received: by 10.204.136.215 with SMTP id s23mr3510454bkt.32.1346056657461;
+	Mon, 27 Aug 2012 01:37:37 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
 	[95.222.156.96])
-	by mx.google.com with ESMTPS id m9sm9940391bkm.10.2012.08.27.01.37.37
+	by mx.google.com with ESMTPS id m9sm9940391bkm.10.2012.08.27.01.37.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Aug 2012 01:37:38 -0700 (PDT)
+	Mon, 27 Aug 2012 01:37:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2012 10:36:51 +0200
-Message-Id: <1346056611-31432-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 27 Aug 2012 10:36:50 +0200
+Message-Id: <1346056611-31432-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1346056611-31432-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1346056611-31432-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-systemd 2/2] libxfce4ui: fix xfwm4 crash (no window borders) on first start
+Subject: [meta-systemd 1/2] xfwm4: cleanup update-alternatives deprecated code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,72 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2012 08:49:47 -0000
+X-List-Received-Date: Mon, 27 Aug 2012 08:49:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...-private-xfce4-keyboard-shortcuts.xml-fix.patch |   31 ++++++++++++++++++++
- .../recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb    |    3 ++
- 2 files changed, 34 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+ meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.3.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
-new file mode 100644
-index 0000000..b8c9178
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
-@@ -0,0 +1,31 @@
-+From 708e59caaf1c0c271a96a4d1fe46b122aff45e34 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Mon, 27 Aug 2012 09:16:29 +0200
-+Subject: [PATCH] libxfce4kbd-private/xfce4-keyboard-shortcuts.xml: fix xfwm4
-+ crash on first start
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Pending
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ libxfce4kbd-private/xfce4-keyboard-shortcuts.xml |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+
-+diff --git a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
-+index 723a10d..e6502f3 100644
-+--- a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
-++++ b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
-+@@ -66,4 +66,8 @@
-+       <property name="&lt;Control&gt;F12" type="string" value="workspace_12_key"/>
-+     </property>
-+   </property>
-++  <property name="providers" type="array">
-++    <value type="string" value="commands"/>
-++    <value type="string" value="xfwm4"/>
-++  </property>
-+ </channel>
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-index ae9dddf..e2bc81e 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.8.1.bb
-@@ -3,9 +3,12 @@ SECTION = "x11/libs"
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.3.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.3.bb
+index 299c7ad..304ff66 100644
+--- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.3.bb
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.8.3.bb
+@@ -3,6 +3,7 @@ SECTION = "x11/wm"
  LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
- DEPENDS = "gtk+ intltool libxfce4util startup-notification xfconf"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
+ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification"
 +PR = "r1"
  
- inherit xfce
+ inherit xfce update-alternatives
  
-+SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
-+
- FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
+@@ -18,10 +19,9 @@ python populate_packages_prepend () {
  
- SRC_URI[md5sum] = "30bd432dd0f19305e846a122d4c7c6fe"
+ PACKAGES_DYNAMIC += "xfwm4-theme-*"
+ 
+-ALTERNATIVE_NAME = "x-window-manager"
+-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
+-ALTERNATIVE_PATH = "${bindir}/xfce4-session"
+-ALTERNATIVE_PRIORITY = "30"
++ALTERNATIVE_${PN} = "x-window-manager"
++ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/xfwm4"
++ALTERNATIVE_PRIORITY[x-window-manager] = "30"
+ 
+ RDEPENDS_${PN} = "xfwm4-theme-default"
+ FILES_${PN} += "${libdir}/xfce4/xfwm4/helper-dialog \
 -- 
 1.7.6.5
 
