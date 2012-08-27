@@ -1,23 +1,37 @@
-Received: from 206-248-190-39.dsl.teksavvy.com ([206.248.190.39]
-	helo=yow-jmacdona-d2.wrs.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1T65LX-0006We-U1
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <tom.rini@gmail.com>) id 1T689q-0002uH-K1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Aug 2012 21:51:40 +0200
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
-	id 0D9606A7AD2; Fri, 24 Aug 2012 14:11:40 -0400 (EDT)
-Date: Fri, 24 Aug 2012 14:11:39 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
+	Tue, 28 Aug 2012 00:51:46 +0200
+Received: by daks35 with SMTP id s35so3069398dak.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Aug 2012 15:39:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=FYrQo2sdh74dtxamrxzFA+h3DhTXS7bJRTgfzsiFYoU=;
+	b=SiauYfIB7r1cE5P9IabHT9cZhKSDeu1ZlUOAGi5t6OHASnboeCkxr8KnL14KRXsiG3
+	lzhWXUZwlxj1a5oeKjy0zxnUfDGSKmoiHae4W1qMlNg+BZSyXQLqX9woEyjQNl8QJis0
+	w7wkbPdAOefzFXbYFghm9iKpL5Gp3Le+SEArU2baJ8LiQdlWs+j2uCs7qwXx+wwJ8IJp
+	UeX1EyQF0WKxFD9KU5nVu6e5Wa2KDxg3EGPM2h+wEDa7chdtQA+rG2H6c2EA4/ePKxlP
+	SXY3DcFLwA6M0qFUjbRSuIsVXAJIsiYehBNuzbHgDmh3c52dz2RVhkUY7ZWB9ezi+1Lp
+	zRFQ==
+Received: by 10.66.88.198 with SMTP id bi6mr33320004pab.23.1346107173760;
+	Mon, 27 Aug 2012 15:39:33 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:d:eba:b13c:8d38:d301:48e3])
+	by mx.google.com with ESMTPS id st6sm15557147pbc.58.2012.08.27.15.39.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 27 Aug 2012 15:39:33 -0700 (PDT)
+Date: Mon, 27 Aug 2012 15:39:35 -0700
+From: Tom Rini <tom.rini@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120824181139.GL3391@windriver.com>
-References: <1345812827-14588-1-git-send-email-joe.macdonald@windriver.com>
-	<k186lk$64e$1@ger.gmane.org>
+Message-ID: <20120827223935.GK24666@bill-the-cat>
+References: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <k186lk$64e$1@ger.gmane.org>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
+In-Reply-To: <1345787825-9950-1-git-send-email-raj.khem@gmail.com>
+Organization: Texas Instruments
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] meta-networking: add layer
+Subject: Re: [2011.03-maintenance][PATCH 1/5] libwnck: Fix build without needing introspection-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,52 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2012 19:51:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 27 Aug 2012 22:51:46 -0000
+X-Groupsio-MsgNum: 40376
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dc+cDN39EJAMEtIO"
 Content-Disposition: inline
 
-[Re: [oe] [meta-oe][PATCH] meta-networking: add layer] On 12.08.24 (Fri 17:30) Koen Kooi wrote:
+--dc+cDN39EJAMEtIO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Op 24-08-12 14:53, Joe MacDonald schreef:
-> > A home for networking-related packages.  This includes protocol support, 
-> > servers / daemons and utilities.
-> > 
-> > Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com> --- 
-> > meta-networking/COPYING.MIT                      | 17 +++++++++++++ 
-> > meta-networking/MAINTAINERS                      | 31
-> > ++++++++++++++++++++++++ meta-networking/README
-> > | 16 ++++++++++++ meta-networking/conf/distro/oe-networking.conf   |  2
-> > ++ meta-networking/conf/distro/poky-networking.conf |  4 +++
-> 
-> Drop the distro stuff, those don't belong in a meta-oe sublayer
+On Thu, Aug 23, 2012 at 10:57:01PM -0700, Khem Raj wrote:
 
-Right, I should've caught that.  Sorry.
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Updated patch enroute.
+Along with the rest of the series, applied, thanks.
 
--J.
+--=20
+Tom
 
-> 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
-> 
-> iD8DBQFQN534MkyGM64RGpERAhTqAJ9bBbe3PPvdxY8vNUbI9vMVOybW8ACgrgXK
-> No2VBmX+kP3EyBuxhBiI2d8=
-> =eAFB
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--dc+cDN39EJAMEtIO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--- 
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind River
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
+iEYEARECAAYFAlA79ycACgkQdZngf2G4WwMNggCgkCQ1ETpHxAySbxZfeOduKBpz
+wlwAnRv0tlX8KUQEpPQY3cSQefAwVIy4
+=PUS8
+-----END PGP SIGNATURE-----
 
+--dc+cDN39EJAMEtIO--
