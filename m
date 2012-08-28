@@ -1,39 +1,25 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1T6FRQ-0005cL-LP
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Aug 2012 08:38:24 +0200
-Received: by mail-ey0-f175.google.com with SMTP id d12so1154438eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2012 23:26:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=i+Frn5m2CZI5Q6RBySOooOxrNUQNSMPwtLy2wuuIgs4=;
-	b=CqGWkPNlVPSG9G8TrkYgAjDZX+/7GUEGeQIGEGADikL9kOamCKI52OjCgNvz7IVYd4
-	rX97dyHW56iP3FjcESRT4U/rlIkKYSFSoR/zYhOqqYElH2rKJ3JYtWF7Qr9ZvZIYOfPr
-	321Rp7oupi68yYZAecLgAmeA7tpTLE+0wiv+yua9P27WiWRhOMyc70HbJ98EZc2rDqMT
-	EpO4nV9oAPBQYWrVaTImLmY2zB6+u2YTODVoSgL9GS2fVaUUO7hmnnatBf/Rd9oVo35I
-	TsXjAuDVnBaTG7X35yDZBFeSN/ibX0VgoZUBqmSNQY1QMYPbo9IAi6ACbCtQabchA//l
-	njdw==
-Received: by 10.14.203.73 with SMTP id e49mr20613906eeo.27.1346135174570;
-	Mon, 27 Aug 2012 23:26:14 -0700 (PDT)
-Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id u8sm58133021eel.11.2012.08.27.23.26.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Aug 2012 23:26:13 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Aug 2012 08:25:49 +0200
-Message-Id: <1346135149-11256-7-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1346135149-11256-1-git-send-email-koen@dominion.thruhere.net>
-References: <1346135149-11256-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnJpcqQSGg3FK3KGPm3HCE7MzIxxGqG8yrnExl1hCQXpohc6RH5jDPRgQx/szeGdzTAY331
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [for-denzil][meta-oe][PATCH 7/7] sox: add 14.4.0
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1T6G37-0006ET-Ac
+	for openembedded-devel@lists.linuxtogo.org;
+	Tue, 28 Aug 2012 09:17:21 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 28 Aug 2012 00:05:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,325,1344236400"; d="scan'208";a="192167854"
+Received: from unknown (HELO helios.localnet) ([10.252.121.139])
+	by orsmga002.jf.intel.com with ESMTP; 28 Aug 2012 00:05:05 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.linuxtogo.org
+Date: Tue, 28 Aug 2012 08:05:03 +0100
+Message-ID: <2381126.z6HOKOkkxB@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <2404459.dJBf5OQotX@helios>
+References: <2404459.dJBf5OQotX@helios>
+MIME-Version: 1.0
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.linuxtogo.org
+Subject: Re: [OE-core] RFC: OE-Core task rework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +33,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2012 06:38:24 -0000
+X-List-Received-Date: Tue, 28 Aug 2012 07:17:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-multimedia/sox/sox_14.4.0.bb           |   26 ++++++++++++++++++++
- 1 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
+On Wednesday 15 August 2012 10:46:49 Paul Eggleton wrote:
+> Hi all,
+> 
+> There have been a few requests to review the task recipes (i.e. package
+> groups) provided by OE-Core, and indeed these have not really been looked at
+> seriously since OE-Core was created. Ideally I think we want them to be
+> useful to a wide audience and provide useful units of functionality that
+> can be added to an image without the person doing the selection having to
+> manually select too many individual packages. Imagine presenting the list
+> of tasks to someone in a UI for assembling images (such as Hob or
+> Narcissus) and you can start to see that we have some work to do in this
+> area.
+> 
+> I know various distros and users of OE-Core have created their own tasks or
+> resurrected tasks from OE-Classic, and this is an opportunity to perhaps
+> look at bringing some of these (or at least, parts of them) into the core.
+> It is true that tasks will often be an expression of distro policy, and we
+> also can't have any tasks in OE-Core that refer to packages that don't
+> exist in OE- Core; thus distros will always be extending the base tasks or
+> adding their own - and that's fine. However, with some thought I believe we
+> can come up with a set of tasks that are generally useful to most people
+> using OE-Core.
+> 
+> For reference, I've compiled a list on the wiki of the current tasks in OE-
+> Core with links to the recipes and some notes:
+> 
+>   http://www.openembedded.org/wiki/OE-Core_Task_Rework
+> 
+> Some of the things I think we ought to consider/address as part of this
+> exercise:
+> 
+> 1) Do we rename "task" to something a little more understandable to the
+> uninitiated, such as "package group"? The word "task" is already used in a
+> much more natural sense within bitbake as a unit of work. Historically I
+> believe we picked up this term from Debian but I'm not aware of significant
+> use by other mainstream distributions.
+> 
+> 2) Look at the existing tasks and:
+>  * evaluate their usefulness
+>  * remove any that are obsolete
+>  * adjust existing contents if needed
+>  * look for useful groups of packages that might be added
+> 
+>  We need to pay particular attention to task-core-boot and task-base as
+> these are pulled in by default in any image that inherits from
+> core-image.bbclass - if these are not generally working for people that are
+> creating their own images, we need to change them such that they are.
+> 
+> 3) Ensure all task recipes follow reasonable patterns:
+>  *  Fix recipe DESCRIPTIONs to make sense (and not contain Poky references)
+>  *  Ensure all individual packages have a decent SUMMARY/DESCRIPTION
+>  *  Try to make each task have a reasonable name - there are some current
+> uses of "core" and "base" that don't actually convey any meaning; LSB
+> specific tasks should be named as such, etc.
+>  *  Make all tasks inherit task.bbclass so that they get proper dbg/dev
+> packages and any other common task functionality
+> 
+> 4) Consider the usefulness of the existing PACKAGE_GROUP_ structure which
+> converts some IMAGE_FEATURES into the addition of tasks to be installed (see
+> classes/core-image.bbclass). At the very least we should probably rename
+> this if we rename tasks to package groups, and there's a question as to how
+> IMAGE_FEATURES scales - should every task be represented in there or only a
+> select list? Would we be better off not trying to bring any tasks in via
+> IMAGE_FEATURES at all and mostly leave that to control post-processing
+> (e.g. package-management, debug-tweaks, etc.)?
+> 
+> Please reply with your thoughts. Once we've come to a consensus on the
+> things we want to do (allowing plenty of time for discussion), I'll look at
+> putting together a set of patches that makes the appropriate changes.
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-new file mode 100644
-index 0000000..f7ec1ee
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION="SoX is the Swiss Army knife of sound processing tools. \
-+It converts audio files among various standard audio file formats \
-+and can apply different effects and filters to the audio data."
-+HOMEPAGE = "http://sox.sourceforge.net"
-+SECTION = "audio"
-+
-+DEPENDS = "libpng libav libsndfile1"
-+
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
-+                   ${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
-+                  "
-+PACKAGECONFIG[pulseaudio] = "--with-pulseaudio=dyn,--with-pulseaudio=no,pulseaudio,"
-+PACKAGECONFIG[alsa] = "--with-alsa=dyn,--with-alsa=no,alsa-lib,"
-+
-+LICENSE = "GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz"
-+SRC_URI[md5sum] = "b0c15cff7a4ba0ec17fdc74e6a1f9cf1"
-+SRC_URI[sha256sum] = "3ee34b14dd267de378e8a117aae81ec4cae330772342e6a55bbf6520a0a88aa3"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND = "native"
-+
+So, any further thoughts on this one?
+
+Cheers,
+Paul
+
 -- 
-1.7.7.6
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
