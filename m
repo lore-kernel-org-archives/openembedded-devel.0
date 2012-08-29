@@ -1,38 +1,39 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1T6o2H-0006gH-SI
+	(envelope-from <martin.jansa@gmail.com>) id 1T6pdC-00036I-7d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Aug 2012 21:34:46 +0200
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 29 Aug 2012 12:22:30 -0700
-Received: by obblz20 with SMTP id lz20so1816936obb.6
+	Wed, 29 Aug 2012 23:16:59 +0200
+Received: by wgbdr1 with SMTP id dr1so707681wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2012 12:22:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=JEdzIkAHQhYzVMXszVy+hXrTbabD6ML4hNEGUwbtyQE=;
-	b=cyJVwzA9SVVT+6pXZeVNaquerK0uy+Qos5s4GeCf10nhh6s48r2kXTO7v+hPgmmVHe
-	ovcOc5rbj6mIRMssH1jOaeVi6RobV03Ja8+01c9MelSQuorht1RscU23f4MIMg+i+T3W
-	eQdSDx+tlC/pgD21VIa/67EWUgt/dgaPZTFG2Pljn1r5ZRVdAsXePCPMdgSq1GoXpjg1
-	UG6wrJqi7AThvp7TLldik8Q+izUTJFdXCHp2wTEWkuEfYtcE7vPvTS9YqxJRv+N4VFS0
-	5W8EyLfp5k8nDI4RfC47kmCJsRg8ocV1bunzsGErX0lM6yc3aA51UsNGXVA2qpPpwed5
-	Yx7A==
-Received: by 10.60.19.195 with SMTP id h3mr2242199oee.102.1346268149324; Wed,
-	29 Aug 2012 12:22:29 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.182.79.105 with HTTP; Wed, 29 Aug 2012 12:22:08 -0700 (PDT)
-In-Reply-To: <CAMKF1srEAmTthOBC6D23uCfO6YW=ZD-BW+mF4UZYwdFbXyKrjg@mail.gmail.com>
+	Wed, 29 Aug 2012 14:04:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=FQ+nUIXjv+zin+eXfcfi6lyVf1q/3l8vrwXRv27I4xo=;
+	b=SnXnKQpVhBAGbBdYIj3GfQ0PiDzOx4XSstNXwAD5X2qyahb2xhxkU74GkIeGCfj/1e
+	ruFuakAvgpI0fm495hkGE++9mX5uxS6bxUqDunYb6BPaLkwp/CHayaKZb6tYvBgFQC4P
+	Aht+DFhChIVCV0uVyxkI8Qj3uzEbjK1WV5EjpKM4BrpjKml+bDnRwjHK1GX7Je77Wnsw
+	V6uIerTVMMKWsD5NBlRlcn5MFag9KVibTrWJBz+fXvoyEuhXdyMWEQf9Db7AgDATmIgT
+	yCtV/Bu4E35NyvS4hyhsipNuR/j+VI3H0naTk6Ofg71B3Xkkv+0ABSi4LC2rU8tkztIR
+	zNQw==
+Received: by 10.216.241.198 with SMTP id g48mr1694295wer.153.1346274283738;
+	Wed, 29 Aug 2012 14:04:43 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id cl8sm12067776wib.10.2012.08.29.14.04.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 29 Aug 2012 14:04:40 -0700 (PDT)
+Date: Wed, 29 Aug 2012 23:04:56 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120829210456.GC3287@jama.jama.net>
 References: <1346247150-17236-1-git-send-email-ross.burton@intel.com>
 	<3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
 	<CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
 	<CAMKF1srEAmTthOBC6D23uCfO6YW=ZD-BW+mF4UZYwdFbXyKrjg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 29 Aug 2012 20:22:08 +0100
-Message-ID: <CAJTo0LZbKRBWdASi54gO7NvemP_Y3vzvk+w8KD+gVFqFadwwgA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmUOYbeH+7vRY8oOabowOduYD6ff4U9SHDeHf0AiY4Rslf1A6DlCvdLYLqfijR9WiXNxE1u
+	<CAJTo0LZbKRBWdASi54gO7NvemP_Y3vzvk+w8KD+gVFqFadwwgA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LZbKRBWdASi54gO7NvemP_Y3vzvk+w8KD+gVFqFadwwgA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [PATCH] pimlico: remove Poky overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,19 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2012 19:34:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 29 Aug 2012 21:17:00 -0000
+X-Groupsio-MsgNum: 40400
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="MnLPg7ZWsaic7Fhd"
+Content-Disposition: inline
 
-On 29 August 2012 18:34, Khem Raj <raj.khem@gmail.com> wrote:
-> Patch is fine.
-> it should go into meta-yocto which is integration layer for poky distro
-> so you patch to delete is fine. may be convert it to some sort of PACKAGECONFIG
-> which distros can use.
+--MnLPg7ZWsaic7Fhd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I don't want them in Poky. :)  I started by simply deleting them, but
-Martin insisted that he still has users.  They are not using Poky, I
-presume.
+On Wed, Aug 29, 2012 at 08:22:08PM +0100, Burton, Ross wrote:
+> On 29 August 2012 18:34, Khem Raj <raj.khem@gmail.com> wrote:
+> > Patch is fine.
+> > it should go into meta-yocto which is integration layer for poky distro
+> > so you patch to delete is fine. may be convert it to some sort of PACKA=
+GECONFIG
+> > which distros can use.
+>=20
+> I don't want them in Poky. :)  I started by simply deleting them, but
+> Martin insisted that he still has users.  They are not using Poky, I
+> presume.
 
-Ross
+No, they are not using Poky, so I'm fine with removing all poky
+overrides and poky-only patches from meta-oe.
 
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--MnLPg7ZWsaic7Fhd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlA+g/gACgkQN1Ujt2V2gBwLuACgppclJ2nSZiCKMaYpNLJAigjT
+6F8AnRhg0B+aSpcS5Z8dzecS3PoNmIuZ
+=ga/w
+-----END PGP SIGNATURE-----
+
+--MnLPg7ZWsaic7Fhd--
