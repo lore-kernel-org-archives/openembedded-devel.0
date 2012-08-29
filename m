@@ -1,39 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T6jH1-0006vJ-AP
+	(envelope-from <ross.burton@intel.com>) id 1T6kQv-0000n6-Q9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Aug 2012 16:29:39 +0200
-Received: by pbcwy7 with SMTP id wy7so1369639pbc.6
+	Wed, 29 Aug 2012 17:43:57 +0200
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 29 Aug 2012 08:31:42 -0700
+Received: by obblz20 with SMTP id lz20so1239635obb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2012 07:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=references:in-reply-to:mime-version:content-transfer-encoding
-	:content-type:message-id:cc:x-mailer:from:subject:date:to;
-	bh=BOmW72bdDvynhDqgnGcD5GNjMaeD9NOctLYW7qCY1P0=;
-	b=QG6CwjxdIt/KxzhfMEGYy4ZFv7vvV7v8t9KA4XV8lLC9STsex/6SD0i1UpO3bQNWLc
-	ulY/96ergcIJlknHIUVG4lg2PTCufiTThxTf7T5Pdq/ff3gJ+Kn/B9g5NfDiMEWDGIVL
-	4XXPe7o4fVVOz7/6QZButuYhmaukT2NMdiHl+g9SO1epFthgQxvnpQxTpBvg6W2aKcG+
-	MJZVH9wiAZm4L92j7PlGMgA4pWmwVUF+WL7oRaJvjsYTB8yllW5fK58mjJWWpga0L4Ok
-	Qv7hkbP0ejIB+Cn/sdvACCQCy9lMIWOzAK2hYKsOeoa7lcT0QCLOGYyesp7av81s1l5J
-	PNew==
-Received: by 10.68.227.165 with SMTP id sb5mr5214086pbc.82.1346249844392;
-	Wed, 29 Aug 2012 07:17:24 -0700 (PDT)
-Received: from [192.168.1.66] (99-57-140-209.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.209])
-	by mx.google.com with ESMTPS id qb6sm19442696pbb.18.2012.08.29.07.17.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 29 Aug 2012 07:17:22 -0700 (PDT)
+	Wed, 29 Aug 2012 08:31:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=v1UnAOWCDjJlsptDuJVTqHri1Hn0uxATzBW4C7RnAQo=;
+	b=lNYbLd5tAOB1N8Gn8xz/cRkEdVMYUsQd+yi9R0H3pNNyFyzOWosP8GcqJh7O+kNhxR
+	qy7GV4zKCoXzDpW3fd2UPFWffIQXVP08B3MwgRhwWQg3dS6X8jNvGthcV+9P47wIEsft
+	4Us0r0qsL44QVP8Qb0BoyDrqVW4gzaiSwZkm/CRLf7BJSgfMYbpqTSDINzFBsNicuWFt
+	fSXQ1km2v7FaDXMimXcU2a483q/xzFq6yyJT3edlaKV3kBVWWnzTZeIEAU1aEUi2vNeb
+	tQnOLGuFlW1w3rogUsGbgWUTrl5D6zTSx5gvC0722dwenUB5vNLuk4Wbxkqb9+O4QC9w
+	iOUA==
+Received: by 10.182.108.71 with SMTP id hi7mr1667193obb.21.1346254301895; Wed,
+	29 Aug 2012 08:31:41 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.182.79.105 with HTTP; Wed, 29 Aug 2012 08:31:08 -0700 (PDT)
+In-Reply-To: <3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
 References: <1346247150-17236-1-git-send-email-ross.burton@intel.com>
-In-Reply-To: <1346247150-17236-1-git-send-email-ross.burton@intel.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: iPad Mail (9B206)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Aug 2012 07:17:21 -0700
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 29 Aug 2012 16:31:08 +0100
+Message-ID: <CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmjKun7aVg0p14wTcNF14ltW5ygZa4R2RtV18x8nuBTGplJoCc3P/hpjMweIl75u2sX4p7r
 Subject: Re: [PATCH] pimlico: remove Poky overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,93 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2012 14:29:39 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Wed, 29 Aug 2012 15:43:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-A bit explanation as to why it's done will be nice.=20
-Why comment out instead delete =20
-Is this window menu patch needed somewhere else
-If not it must go as well=20
+On 29 August 2012 15:17, Khem Raj <raj.khem@gmail.com> wrote:
+> A bit explanation as to why it's done will be nice.
+> Why comment out instead delete
+> Is this window menu patch needed somewhere else
+> If not it must go as well
 
-On Aug 29, 2012, at 6:32 AM, Ross Burton <ross.burton@intel.com> wrote:
+Thinking about it, I'd like to retract this patch and leave the Poky
+distro overrides in that file.  If someone wants dates/contacts/tasks
+on Poky then they'll get the extra integration, and it serves as an
+example/reminder of the functionality it brings (makes the menu bar a
+dropdown from the window title).
 
-> ---
-> meta-gnome/recipes-gnome/pimlico/contacts.inc |    4 +---
-> meta-gnome/recipes-gnome/pimlico/dates.inc    |    4 +---
-> meta-gnome/recipes-gnome/pimlico/tasks.inc    |    2 --
-> 3 files changed, 2 insertions(+), 8 deletions(-)
->=20
-> diff --git a/meta-gnome/recipes-gnome/pimlico/contacts.inc b/meta-gnome/re=
-cipes-gnome/pimlico/contacts.inc
-> index 9798985..04de63c 100644
-> --- a/meta-gnome/recipes-gnome/pimlico/contacts.inc
-> +++ b/meta-gnome/recipes-gnome/pimlico/contacts.inc
-> @@ -5,13 +5,11 @@ BUGTRACKER =3D "https://bugzilla.gnome.org/"
-> LICENSE =3D "GPLv2 & GPLv2+ & GPLv3+ "
-> SECTION =3D "x11"
-> DEPENDS =3D "glib-2.0 gtk+ evolution-data-server"
-> -DEPENDS_append_poky =3D " libowl"
-> RDEPENDS_${PN} =3D "libedata-book"
->=20
-> inherit autotools pkgconfig
->=20
-> OWL =3D "--disable-owl"
-> -OWL_poky =3D "--enable-owl"
->=20
-> EXTRA_OECONF +=3D "--disable-gnome-vfs ${OWL}"
-> EXTRA_OEMAKE +=3D "GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=3D1"
-> @@ -31,4 +29,4 @@ SRC_URI =3D "file://stock_contact.png \
->            file://contacts-conditionally-install-schema.patch \
->           "
->=20
-> -SRC_URI_append_poky =3D " file://contacts-owl-window-menu.patch;apply=3Dy=
-es "
-> +#SRC_URI_append_poky =3D " file://contacts-owl-window-menu.patch;apply=3D=
-yes "
-> diff --git a/meta-gnome/recipes-gnome/pimlico/dates.inc b/meta-gnome/recip=
-es-gnome/pimlico/dates.inc
-> index 9b338fd..3c4a048 100644
-> --- a/meta-gnome/recipes-gnome/pimlico/dates.inc
-> +++ b/meta-gnome/recipes-gnome/pimlico/dates.inc
-> @@ -12,9 +12,7 @@ inherit autotools gettext pkgconfig gtk-icon-cache
->=20
-> # Poky/Sato specific enhancements
-> OWL =3D "--disable-owl"
-> -OWL_poky =3D "--enable-owl --disable-dnd"
->=20
-> EXTRA_OECONF +=3D "${OWL}"
-> -DEPENDS_append_poky =3D " libowl"
-> -SRC_URI_append_poky =3D " file://dates-owl-window-menu.patch;apply=3Dyes "=
-
-> +#SRC_URI_append_poky =3D " file://dates-owl-window-menu.patch;apply=3Dyes=
- "
->=20
-> diff --git a/meta-gnome/recipes-gnome/pimlico/tasks.inc b/meta-gnome/recip=
-es-gnome/pimlico/tasks.inc
-> index 9cd5259..a952153 100644
-> --- a/meta-gnome/recipes-gnome/pimlico/tasks.inc
-> +++ b/meta-gnome/recipes-gnome/pimlico/tasks.inc
-> @@ -6,11 +6,9 @@ LICENSE =3D "GPLv2 & GPLv2+"
->=20
-> SECTION =3D "x11"
-> DEPENDS =3D "glib-2.0 gtk+ evolution-data-server"
-> -DEPENDS_append_poky =3D " libowl"
->=20
-> inherit autotools pkgconfig gtk-icon-cache
->=20
-> OWL ?=3D "--disable-owl"
-> -OWL_poky ?=3D "--enable-owl"
->=20
-> EXTRA_OECONF +=3D "${OWL}"
-> --=20
-> 1.7.10
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Ross
 
 
