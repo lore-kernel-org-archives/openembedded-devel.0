@@ -1,35 +1,38 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T6lhk-0002Lt-Df for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Aug 2012 19:05:24 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T6lVx-0001Pw-MY for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Aug 2012 18:53:13 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2012 18:53:13 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ross.burton@intel.com>) id 1T6lnp-0002bL-WA
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Aug 2012 19:11:42 +0200
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 29 Aug 2012 09:59:27 -0700
+Received: by obblz20 with SMTP id lz20so1471193obb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2012 18:53:13 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 29 Aug 2012 18:53:04 +0200
-Message-ID: <k1lhde$fdj$1@ger.gmane.org>
+	Wed, 29 Aug 2012 09:59:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=PohQwsI0sv/FepykYcY8OI0N0MnQ94fWO0NpSD3vOUM=;
+	b=LWV1QyTO0L1mhJBmNirXRxriIejxFG7wTpwebQNDLrE00Gh1jPH3gpP2y22uoUZwNg
+	y01P86zQNczFeGd1+N97qmeYxB7E6iMeckpqFYz+o3Jfra54PDV/VHDdbBmgtlEq7LrH
+	2JPrmpYfOlpkyAfyyMvM8xsMWDV5GdGQqZTxZ7kUyp64KLlpm49OTtEcAsrjw76ixY2Z
+	NNk7r8d0jz0N0KjKysrP3VTwUxcZkeJ/n2lpdbkOj/DVlDmRQHe5nL1Gcc4lilCgPiSt
+	ArzOakKhhBdOGkXc3Si2Dl+919HxhOeqkvaSuNQygr8GEl1pydv8p92zjqAKIhuHgWjT
+	WNig==
+Received: by 10.60.29.229 with SMTP id n5mr1878054oeh.103.1346259566417; Wed,
+	29 Aug 2012 09:59:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.182.79.105 with HTTP; Wed, 29 Aug 2012 09:59:06 -0700 (PDT)
+In-Reply-To: <k1lhde$fdj$1@ger.gmane.org>
 References: <1346247150-17236-1-git-send-email-ross.burton@intel.com>
 	<3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
 	<CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
-X-Enigmail-Version: 1.4.4
+	<k1lhde$fdj$1@ger.gmane.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 29 Aug 2012 17:59:06 +0100
+Message-ID: <CAJTo0LbHYmWbomXPCWoc_q-Z+m0WvWZ6Aq1my190P7qdx=GPOg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnzJOxqA5Zc+xUBq9DzyAX/G2hX0E3a43Y9blwpPnaBfSlltWwzUnHo4gqE0KN3L9OqZH+s
 Subject: Re: [PATCH] pimlico: remove Poky overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,36 +47,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2012 17:05:24 -0000
+X-List-Received-Date: Wed, 29 Aug 2012 17:11:42 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 29 August 2012 17:53, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Either take the distro stuff out or take the recipes out. Meta-openembedded
+> is supposed to be a shining example of layer correctness.
 
-Op 29-08-12 17:31, Burton, Ross schreef:
-> On 29 August 2012 15:17, Khem Raj <raj.khem@gmail.com> wrote:
->> A bit explanation as to why it's done will be nice. Why comment out
->> instead delete Is this window menu patch needed somewhere else If not
->> it must go as well
-> 
-> Thinking about it, I'd like to retract this patch and leave the Poky 
-> distro overrides in that file.  If someone wants dates/contacts/tasks on
-> Poky then they'll get the extra integration, and it serves as an 
-> example/reminder of the functionality it brings (makes the menu bar a 
-> dropdown from the window title).
+I don't particularly want to maintain bbappends in meta-yocto for
+these as I'd prefer to see the recipes (well, contacts and dates, I
+still "maintain" tasks) gone.
 
-Either take the distro stuff out or take the recipes out. Meta-openembedded
-is supposed to be a shining example of layer correctness.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQPkjwMkyGM64RGpERAsu9AJ92ZNXlSRYyHdWkXRbOdr/STaFdawCgo6+T
-7n5Du6jUwDYmd0JvJs9o+7s=
-=losa
------END PGP SIGNATURE-----
-
+Ross
 
 
