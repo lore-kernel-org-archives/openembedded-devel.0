@@ -1,20 +1,33 @@
-Received: from aek116.rev.netart.pl ([77.55.114.116])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mateusz.nowaczyk@wisene.pl>) id 1T6mJg-0003Da-UU
+	(envelope-from <raj.khem@gmail.com>) id 1T6mM1-0003Yv-Jk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Aug 2012 19:44:38 +0200
-Received: from [192.168.0.4] (unknown [79.191.180.77])
-	by wisene.nazwa.pl (Postfix) with ESMTP id 514A42A28365
+	Wed, 29 Aug 2012 19:47:01 +0200
+Received: by eaad12 with SMTP id d12so227890eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2012 19:25:03 +0200 (CEST)
-Message-ID: <503E506E.2010002@wisene.pl>
-Date: Wed, 29 Aug 2012 19:25:02 +0200
-From: Mateusz Nowaczyk <mateusz.nowaczyk@wisene.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120714 Thunderbird/14.0
+	Wed, 29 Aug 2012 10:34:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=6tRUGpb/U7mr3RBl2meDC5IH+McxhCa5VpD5uKLzgXE=;
+	b=RhkJJAN6h038JlKg7m7RawZqFfC7/LUstqVt1n42/wkeTgKxu79rNvSkqZpOu9u4u7
+	fGJ9lwciRM1FyO+ebq8iXhKBg8USrkRS6If9iJfy8dGnC24xa2Mg09rPHanDilcsRCFC
+	cSPjyGg+AG7gKiviM/fip4m1Usar49M/Acqf4jLq3eSZ3ssvn3jr2C0gMXD6Wtf9rkhj
+	V/deW9M3cEhQ0WNgYFNdOJiAc93ZXNI4Vdr5tnhuMcq3UxfpkOWdaOrtjoFdE+UYPfqL
+	4PgIYpMrPYihu9uS/eYYi9go5luQB81O5sn86/SQqnBRtHB8UVcAt3xn8Ndbo2kaY70B
+	5VOg==
+Received: by 10.14.5.67 with SMTP id 43mr2974137eek.15.1346261687400; Wed, 29
+	Aug 2012 10:34:47 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.14.2.5 with HTTP; Wed, 29 Aug 2012 10:34:17 -0700 (PDT)
+In-Reply-To: <CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
+References: <1346247150-17236-1-git-send-email-ross.burton@intel.com>
+	<3DA568F2-7691-4344-904C-7DB6FFBF90B9@gmail.com>
+	<CAJTo0LYGOrwT1BwB8gDmGwMr67v8Mhtci8MK_QdHm9AW7EeDFA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 Aug 2012 10:34:17 -0700
+Message-ID: <CAMKF1srEAmTthOBC6D23uCfO6YW=ZD-BW+mF4UZYwdFbXyKrjg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Newbie question: Angstrom on at91sam9g20
+Subject: Re: [PATCH] pimlico: remove Poky overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,22 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2012 17:44:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Aug 2012 17:47:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
-I've been using Angstrom 2011.03 (oe-classic) on a modified 
-at91sam9g20ek board. Unfortunately, it seems that it is no longer 
-updated - it contains obsolete version of dropbear (0.52) ect.
-I tried switching to the new oe-core based version, but it lacks 
-adequate bsp layer.
-I also tried manually changing the opkg.conf and installing packages 
-from 
-http://www.angstrom-distribution.org/feeds/v2012.05/ipk/eglibc/armv5te/base/ 
-but it only caused more problems (can't login at all).
-How can i get an up-to-date Angstrom for this architecture? Should I 
-stick to the classic OE and manually update recipies, or rather create a 
-bsp layer?
+On Wed, Aug 29, 2012 at 8:31 AM, Burton, Ross <ross.burton@intel.com> wrote:
+>
+> Thinking about it, I'd like to retract this patch and leave the Poky
+> distro overrides in that file.  If someone wants dates/contacts/tasks
+> on Poky then they'll get the extra integration, and it serves as an
+> example/reminder of the functionality it brings (makes the menu bar a
+> dropdown from the window title).
+
+Patch is fine.
+it should go into meta-yocto which is integration layer for poky distro
+so you patch to delete is fine. may be convert it to some sort of PACKAGECONFIG
+which distros can use.
 
 
