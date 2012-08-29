@@ -1,25 +1,30 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1T6G37-0006ET-Ac
-	for openembedded-devel@lists.linuxtogo.org;
-	Tue, 28 Aug 2012 09:17:21 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 28 Aug 2012 00:05:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,325,1344236400"; d="scan'208";a="192167854"
-Received: from unknown (HELO helios.localnet) ([10.252.121.139])
-	by orsmga002.jf.intel.com with ESMTP; 28 Aug 2012 00:05:05 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.linuxtogo.org
-Date: Tue, 28 Aug 2012 08:05:03 +0100
-Message-ID: <2381126.z6HOKOkkxB@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
-In-Reply-To: <2404459.dJBf5OQotX@helios>
-References: <2404459.dJBf5OQotX@helios>
+	(envelope-from <fredrik.markstrom@gmail.com>) id 1T6hj8-0000sI-FR
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Aug 2012 14:50:34 +0200
+Received: by vcbfy27 with SMTP id fy27so495603vcb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Aug 2012 05:38:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=EUIhndJ+Pw9NcZnunToFoCL+2Uqqa3JuI5QT26t6Jko=;
+	b=YyjlVZMEHDVtiPg8jzvturVfHdVODkSh24/mLxC0VI5EibQuHnLWjAvo3NEGHgGd09
+	BI/GRsNhsEW/xOBshx7MqIFUYHER6AtPIJoEFvbm6ALr5qrQF4V2XXQuF/HrUirypNpx
+	+CRmh2j3v1s/b7n9+7Xqb0L8m68k4BthMYOl0WRdftPXKeXszgL/EqdFhb/qe4yd4Hud
+	IXiIiqnbEyxTj4hSqpr50C5ZmYhBK8Wn9v9lmD8011qnkVTqQrDxObN28zA4mCPi4QM9
+	wPgvxlwOM7Yz3uEqRhZKQEgGOhXciP4JRlGghvl96v7Hkgpif+CVgqQv9r11N7oHCpu/
+	AQPw==
+Received: by 10.58.74.71 with SMTP id r7mr1068496vev.44.1346243900056; Wed, 29
+	Aug 2012 05:38:20 -0700 (PDT)
 MIME-Version: 1.0
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.linuxtogo.org
-Subject: Re: [OE-core] RFC: OE-Core task rework
+Received: by 10.58.91.171 with HTTP; Wed, 29 Aug 2012 05:37:49 -0700 (PDT)
+From: =?ISO-8859-1?Q?Fredrik_Markstr=F6m?= <fredrik.markstrom@gmail.com>
+Date: Wed, 29 Aug 2012 14:37:49 +0200
+Message-ID: <CAKdL+dQ5wf+wC_J42CYcjVGu_t4PBpENWwXKHFrOOCd=nYnXZg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Generate a collection of rpm:s
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,88 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2012 07:17:21 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 29 Aug 2012 12:50:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wednesday 15 August 2012 10:46:49 Paul Eggleton wrote:
-> Hi all,
-> 
-> There have been a few requests to review the task recipes (i.e. package
-> groups) provided by OE-Core, and indeed these have not really been looked at
-> seriously since OE-Core was created. Ideally I think we want them to be
-> useful to a wide audience and provide useful units of functionality that
-> can be added to an image without the person doing the selection having to
-> manually select too many individual packages. Imagine presenting the list
-> of tasks to someone in a UI for assembling images (such as Hob or
-> Narcissus) and you can start to see that we have some work to do in this
-> area.
-> 
-> I know various distros and users of OE-Core have created their own tasks or
-> resurrected tasks from OE-Classic, and this is an opportunity to perhaps
-> look at bringing some of these (or at least, parts of them) into the core.
-> It is true that tasks will often be an expression of distro policy, and we
-> also can't have any tasks in OE-Core that refer to packages that don't
-> exist in OE- Core; thus distros will always be extending the base tasks or
-> adding their own - and that's fine. However, with some thought I believe we
-> can come up with a set of tasks that are generally useful to most people
-> using OE-Core.
-> 
-> For reference, I've compiled a list on the wiki of the current tasks in OE-
-> Core with links to the recipes and some notes:
-> 
->   http://www.openembedded.org/wiki/OE-Core_Task_Rework
-> 
-> Some of the things I think we ought to consider/address as part of this
-> exercise:
-> 
-> 1) Do we rename "task" to something a little more understandable to the
-> uninitiated, such as "package group"? The word "task" is already used in a
-> much more natural sense within bitbake as a unit of work. Historically I
-> believe we picked up this term from Debian but I'm not aware of significant
-> use by other mainstream distributions.
-> 
-> 2) Look at the existing tasks and:
->  * evaluate their usefulness
->  * remove any that are obsolete
->  * adjust existing contents if needed
->  * look for useful groups of packages that might be added
-> 
->  We need to pay particular attention to task-core-boot and task-base as
-> these are pulled in by default in any image that inherits from
-> core-image.bbclass - if these are not generally working for people that are
-> creating their own images, we need to change them such that they are.
-> 
-> 3) Ensure all task recipes follow reasonable patterns:
->  *  Fix recipe DESCRIPTIONs to make sense (and not contain Poky references)
->  *  Ensure all individual packages have a decent SUMMARY/DESCRIPTION
->  *  Try to make each task have a reasonable name - there are some current
-> uses of "core" and "base" that don't actually convey any meaning; LSB
-> specific tasks should be named as such, etc.
->  *  Make all tasks inherit task.bbclass so that they get proper dbg/dev
-> packages and any other common task functionality
-> 
-> 4) Consider the usefulness of the existing PACKAGE_GROUP_ structure which
-> converts some IMAGE_FEATURES into the addition of tasks to be installed (see
-> classes/core-image.bbclass). At the very least we should probably rename
-> this if we rename tasks to package groups, and there's a question as to how
-> IMAGE_FEATURES scales - should every task be represented in there or only a
-> select list? Would we be better off not trying to bring any tasks in via
-> IMAGE_FEATURES at all and mostly leave that to control post-processing
-> (e.g. package-management, debug-tweaks, etc.)?
-> 
-> Please reply with your thoughts. Once we've come to a consensus on the
-> things we want to do (allowing plenty of time for discussion), I'll look at
-> putting together a set of patches that makes the appropriate changes.
+Hello all,
 
-So, any further thoughts on this one?
+I'd like to generate a tar.gz with a collection of rpm:s dependent on by a
+root task. Looking at the existing image bbclass:es it seems that they use
+the package tool rpm/opkg etc. To automatically resolve dependencies.
 
-Cheers,
-Paul
+My question is:
 
--- 
+Can I find out what package/runtime-dependencies a package has trough
+bitbake-metadata has and then apply this recursively to get a
+complete collection of rpm:s ? Are there any recipes doing something like
+this I can use as a reference ?
 
-Paul Eggleton
-Intel Open Source Technology Centre
+What I envision is a bbclass that let me do something like this:
 
+rpmcollection-mainfs.bb
+----------------- 8< ---------------------------
+#
+# This will build an tar-ball containing all packages (rpm:s) that
+task-mainfs depends on both directly and indirectly.
+#
+inherit rpmcollection.bb
+
+RPMCOLLECTION = ${SOMEDIR}/${PN}-${PV}.tar.gz
+RDEPENDS = "task-mainfs"
+----------------- 8< ---------------------------
+
+/Fredrik
 
