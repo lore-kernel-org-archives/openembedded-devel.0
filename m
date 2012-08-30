@@ -1,22 +1,35 @@
-Received: from aek116.rev.netart.pl ([77.55.114.116])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mateusz.nowaczyk@wisene.pl>) id 1T75ps-0004np-SA
+	(envelope-from <koen@dominion.thruhere.net>) id 1T75ti-0005LC-ST
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Aug 2012 16:35:08 +0200
-Received: from [192.168.0.4] (unknown [79.191.173.144])
-	by wisene.nazwa.pl (Postfix) with ESMTP id 62EA01158168
+	Thu, 30 Aug 2012 16:39:06 +0200
+Received: by eekb57 with SMTP id b57so642284eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2012 16:22:55 +0200 (CEST)
-Message-ID: <503F773F.6020409@wisene.pl>
-Date: Thu, 30 Aug 2012 16:22:55 +0200
-From: Mateusz Nowaczyk <mateusz.nowaczyk@wisene.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120714 Thunderbird/14.0
-MIME-Version: 1.0
+	Thu, 30 Aug 2012 07:26:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=Giu11QZWTM7BKbp10Swv0ubvwpphSZ4Q0CCowGnzkmQ=;
+	b=e23WFPr4ATAEcCmBxhvPkf4Vv2G6J/wf/dA967otgHYyxprhVEnyF0mBBS3C/tHdO2
+	RCHTrlk600Ux5n6Oph5Nw+8WdhluUQCeYW+nUumlEWjGVgCapp4FWlhXnt/CByD6Xn8w
+	0R3dNGrhiBwF4bHM/ZFbw73xoK31NtN+ou7HocOAXI1d48zXSsWfuDIztXre79AAhPGu
+	VEVnfXCcopzxL4nDghJYyh5S9f5NlnPnJkKFS2/9FqWAWW6E9edMMDgUvx56uIgCZkRi
+	KHyte1oeIVmVs0K6oM3EetcqRjXVGDdVMIABPX+GMGecukOKYOe3/eONGCUbMKeGuN6z
+	Lg4g==
+Received: by 10.14.184.133 with SMTP id s5mr6842896eem.31.1346336811694;
+	Thu, 30 Aug 2012 07:26:51 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id r45sm5395495eem.6.2012.08.30.07.26.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 30 Aug 2012 07:26:50 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-References: <503E506E.2010002@wisene.pl> <k1n6oh$8ve$1@ger.gmane.org>
-In-Reply-To: <k1n6oh$8ve$1@ger.gmane.org>
-Subject: Re: Newbie question: Angstrom on at91sam9g20
+Date: Thu, 30 Aug 2012 16:26:45 +0200
+Message-Id: <1346336805-10333-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQlpbSxSz0S0vFqX/HQhDdXwOcs46snnWvd0qJilDBAsnz0URvFh0OM+CJ1NErMjta0ZxnXA
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] usbmuxd 1.08: add recipe to talk to iDevices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,43 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 14:35:09 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Aug 2012 14:39:07 -0000
 
-On 30.08.2012 10:03, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 29-08-12 19:25, Mateusz Nowaczyk schreef:
->> Hi, I've been using Angstrom 2011.03 (oe-classic) on a modified
->> at91sam9g20ek board. Unfortunately, it seems that it is no longer updated
->> - it contains obsolete version of dropbear (0.52) ect. I tried switching
->> to the new oe-core based version, but it lacks adequate bsp layer. I also
->> tried manually changing the opkg.conf and installing packages from
->> http://www.angstrom-distribution.org/feeds/v2012.05/ipk/eglibc/armv5te/base/
->>
->>
-> but it only caused more problems (can't login at all).
->> How can i get an up-to-date Angstrom for this architecture? Should I
->> stick to the classic OE and manually update recipies, or rather create a
->> bsp layer?
->
-> Create a bsp layer
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb |   19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
 
-OK, I found the meta-atmel layer here:
-https://github.com/rascalmicro/meta-atmel
+diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+new file mode 100644
+index 0000000..bb92941
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "This daemon is in charge of multiplexing connections over USB to an iPhone or iPod touch."
++LICENSE = "GPLv3 & GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
++                    file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://COPYING.LGPLv2.1;md5=6ab17b41640564434dda85c06b7124f7"
++
++DEPENDS = "udev libusb1"
++
++inherit cmake pkgconfig gitpkgv
++
++PKGV = "${GITPKGVTAG}"
++
++SRCREV = "919587580c5e77f3936f3432115d2e10c7bac7c5"
++SRC_URI = "git://git.sukimashita.com/usbmuxd.git;protocol=http"
++
++S = "${WORKDIR}/git"
++
++FILES_${PN} += "${base_libdir}/udev/rules.d/"
++
+-- 
+1.7.10
 
-I got the following error:
-
-~/angstrom/setup-scripts$ MACHINE=at91sam9g20ek bitbake console-image
-
-Pseudo is not present but is required, building this first before the 
-main build
-ERROR: ParseError at 
-/home/mn/angstrom/setup-scripts/sources/meta-atmel/recipes-bsp/u-boot/u-boot.inc:62: 
-unparsed line: 'INSANE_SKIP_${PN} = True':  --:--:--
-ERROR: Command execution failed: Exited with 1
-Is there any way to fix it?
 
 
