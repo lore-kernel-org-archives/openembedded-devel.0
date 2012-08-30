@@ -1,35 +1,26 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1T75ti-0005LC-ST
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1T75vv-0005Qm-Ju
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Aug 2012 16:39:06 +0200
-Received: by eekb57 with SMTP id b57so642284eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2012 07:26:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=Giu11QZWTM7BKbp10Swv0ubvwpphSZ4Q0CCowGnzkmQ=;
-	b=e23WFPr4ATAEcCmBxhvPkf4Vv2G6J/wf/dA967otgHYyxprhVEnyF0mBBS3C/tHdO2
-	RCHTrlk600Ux5n6Oph5Nw+8WdhluUQCeYW+nUumlEWjGVgCapp4FWlhXnt/CByD6Xn8w
-	0R3dNGrhiBwF4bHM/ZFbw73xoK31NtN+ou7HocOAXI1d48zXSsWfuDIztXre79AAhPGu
-	VEVnfXCcopzxL4nDghJYyh5S9f5NlnPnJkKFS2/9FqWAWW6E9edMMDgUvx56uIgCZkRi
-	KHyte1oeIVmVs0K6oM3EetcqRjXVGDdVMIABPX+GMGecukOKYOe3/eONGCUbMKeGuN6z
-	Lg4g==
-Received: by 10.14.184.133 with SMTP id s5mr6842896eem.31.1346336811694;
-	Thu, 30 Aug 2012 07:26:51 -0700 (PDT)
-Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id r45sm5395495eem.6.2012.08.30.07.26.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 30 Aug 2012 07:26:50 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Aug 2012 16:26:45 +0200
-Message-Id: <1346336805-10333-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQlpbSxSz0S0vFqX/HQhDdXwOcs46snnWvd0qJilDBAsnz0URvFh0OM+CJ1NErMjta0ZxnXA
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] usbmuxd 1.08: add recipe to talk to iDevices
+	Thu, 30 Aug 2012 16:41:24 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 30 Aug 2012 07:29:04 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,341,1344236400"; d="scan'208";a="187171424"
+Received: from unknown (HELO helios.localnet) ([10.252.121.146])
+	by orsmga001.jf.intel.com with ESMTP; 30 Aug 2012 07:29:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Mateusz Nowaczyk <mateusz.nowaczyk@wisene.pl>
+Date: Thu, 30 Aug 2012 15:29:05 +0100
+Message-ID: <1354802.G46xZeSRAF@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <503F773F.6020409@wisene.pl>
+References: <503E506E.2010002@wisene.pl> <k1n6oh$8ve$1@ger.gmane.org>
+	<503F773F.6020409@wisene.pl>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Newbie question: Angstrom on at91sam9g20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 14:39:07 -0000
+X-List-Received-Date: Thu, 30 Aug 2012 14:41:24 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb |   19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+On Thursday 30 August 2012 16:22:55 Mateusz Nowaczyk wrote:
+> Pseudo is not present but is required, building this first before the
+> main build
+> ERROR: ParseError at
+> /home/mn/angstrom/setup-scripts/sources/meta-atmel/recipes-bsp/u-boot/u-boot
+> .inc:62: unparsed line: 'INSANE_SKIP_${PN} = True':  --:--:--
+> ERROR: Command execution failed: Exited with 1
+> Is there any way to fix it?
 
-diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-new file mode 100644
-index 0000000..bb92941
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "This daemon is in charge of multiplexing connections over USB to an iPhone or iPod touch."
-+LICENSE = "GPLv3 & GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
-+                    file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.LGPLv2.1;md5=6ab17b41640564434dda85c06b7124f7"
-+
-+DEPENDS = "udev libusb1"
-+
-+inherit cmake pkgconfig gitpkgv
-+
-+PKGV = "${GITPKGVTAG}"
-+
-+SRCREV = "919587580c5e77f3936f3432115d2e10c7bac7c5"
-+SRC_URI = "git://git.sukimashita.com/usbmuxd.git;protocol=http"
-+
-+S = "${WORKDIR}/git"
-+
-+FILES_${PN} += "${base_libdir}/udev/rules.d/"
-+
+Whoever maintains the meta-atmel layer needs to fix it up to use quotes around 
+that value - also True is probably no longer an appropriate value for 
+INSANE_SKIP_. 
+
+It sounds like meta-atmel is somewhat out of date with respect to master since 
+the quoting change went in a few months ago.
+
+Cheers,
+Paul
+
 -- 
-1.7.10
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
