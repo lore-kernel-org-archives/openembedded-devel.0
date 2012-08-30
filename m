@@ -1,24 +1,20 @@
-Received: from aek116.rev.netart.pl ([77.55.114.116])
+Received: from banjo.bearstech.com ([78.40.125.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mateusz.nowaczyk@wisene.pl>) id 1T791Y-0005e4-CU
+	(envelope-from <bpratz@bearstech.com>) id 1T79R8-0006Wq-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Aug 2012 19:59:24 +0200
-Received: from [192.168.0.4] (unknown [79.191.173.144])
-	by wisene.nazwa.pl (Postfix) with ESMTP id 96F77294886A
+	Thu, 30 Aug 2012 20:25:50 +0200
+Received: from barney.bearstech.com (barney.bearstech.lan [10.20.125.20])
+	by banjo.bearstech.com (Postfix) with ESMTP id 23B00E012B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2012 19:47:10 +0200 (CEST)
-Message-ID: <503FA71E.8000003@wisene.pl>
-Date: Thu, 30 Aug 2012 19:47:10 +0200
-From: Mateusz Nowaczyk <mateusz.nowaczyk@wisene.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120714 Thunderbird/14.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <503E506E.2010002@wisene.pl> <k1n6oh$8ve$1@ger.gmane.org>
-	<503F773F.6020409@wisene.pl> <1354802.G46xZeSRAF@helios>
-	<503F7C92.9000701@wisene.pl>
-In-Reply-To: <503F7C92.9000701@wisene.pl>
-Subject: Re: Newbie question: Angstrom on at91sam9g20
+	Thu, 30 Aug 2012 20:13:37 +0200 (CEST)
+Received: by barney.bearstech.com (Postfix, from userid 1001)
+	id E875790271; Thu, 30 Aug 2012 20:13:36 +0200 (CEST)
+From: Guyzmo <guyzmo+openembedded@hackable-devices.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 30 Aug 2012 20:13:36 +0200
+Message-Id: <1346348639-sup-4216@barney.bearstech.com>
+User-Agent: Sup/git
+Subject: [PATCH] zsh: updated recipe's version to v5.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,51 +28,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 17:59:24 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Aug 2012 18:25:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Now I get the following error:
+* 4.3.17 has moved to old/ in zsh ftp and 5.0.0 is stable
+* changed name of the recipe
+* changed the hashes in the recipe
 
+Signed-off-by: Guyzmo <guyzmo+openembedded@hackable-devices.org>
+---
+ meta-oe/recipes-extended/zsh/zsh_4.3.17.bb |   51 ----------------------=
+------
+ meta-oe/recipes-extended/zsh/zsh_5.0.0.bb  |   51 ++++++++++++++++++++++=
+++++++
+ 2 files changed, 51 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+ create mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
 
-ERROR: Function failed: Fetcher failure for URL: 'file://defconfig'. 
-Unable to fetch URL from any source.
-ERROR: Logfile of failure stored in: 
-/home/mn/angstrom/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/at91sam9g20ek-angstrom-linux-gnueabi/linux-3.0.1-r0/temp/log.do_fetch.30370
-Log data follows:
-| DEBUG: Trying PREMIRRORS
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['cvs', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['svn', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['git', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['hg', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['bzr', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['osc', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['p4', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: For url ['file', '', 'defconfig', '', '', {}] comparing ['svk', 
-'.*', '/.*', '', '', {}] to ['http', 
-'sources.angstrom-distribution.org', '/', '', '', {}]
-| DEBUG: Trying Upstream
-| ERROR: Function failed: Fetcher failure for URL: 'file://defconfig'. 
-Unable to fetch URL from any source.
-NOTE: package linux-3.0.1-r0: task do_fetch: Failed
-ERROR: Task 607 
-(/home/mn/angstrom/setup-scripts/sources/meta-handheld/recipes-kernel/linux/linux_3.0.1.bb, 
-do_fetch) failed with exit code '1'
-
-Any ideas? And why does it try to build the 3.0.1 kernel instead of 2.6.30?
+diff --git a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb b/meta-oe/recipes=
+-extended/zsh/zsh_4.3.17.bb
+deleted file mode 100644
+index 9192f20..0000000
+--- a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
++++ /dev/null
+@@ -1,51 +0,0 @@
+-DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
+-HOMEPAGE=3D"http://www.zsh.org"
+-SECTION =3D "base/shell"
+-
+-LICENSE =3D "ZSH"
+-LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb=
+341"
+-
+-DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
+-
+-SRC_URI =3D "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
+-SRC_URI[md5sum] =3D "8258967060b2654f30001a011946ac6a"
+-SRC_URI[sha256sum] =3D "054e0452afd9c742c9f1489465175e1d4d7db50d88b602d1=
+32551d850cf7a704"
+-
+-FILES_${PN}-dbg +=3D "\
+-    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
+-    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
+-    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
+-    "
+-
+-inherit autotools
+-
+-EXTRA_OECONF =3D " \
+-    --bindir=3D${base_bindir} \
+-    --enable-etcdir=3D${sysconfdir} \
+-    --enable-fndir=3D${datadir}/${PN}/${PV}/functions \
+-    --enable-site-fndir=3D${datadir}/${PN}/site-functions \
+-    --enable-function-subdirs \
+-    --with-term-lib=3D'ncursesw ncurses' \
+-    --with-tcsetpgrp \
+-    --enable-pcre \
+-    --enable-cap \
+-    --enable-multibyte \
+-    --enable-gdbm \
+-    --enable-dynamic \
+-    zsh_cv_shared_environ=3Dyes \
+-    "
+-
+-do_configure () {
+-    oe_runconf
+-}
+-
+-pkg_postinst_${PN} () {
+-    touch $D${sysconfdir}/shells
+-    grep -q "bin/zsh" $D${sysconfdir}/shells || echo "/bin/zsh" >> $D${s=
+ysconfdir}/shells
+-}
+-
+-pkg_postrm_${PN} () {
+-    if [ -e $D${sysconfdir}/shells ]; then
+-        sed -i -e '/\/bin\/zsh/d' $D${sysconfdir}/shells
+-    fi
+-}
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb b/meta-oe/recipes-=
+extended/zsh/zsh_5.0.0.bb
+new file mode 100644
+index 0000000..f499be7
+--- /dev/null
++++ b/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
+@@ -0,0 +1,51 @@
++DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
++HOMEPAGE=3D"http://www.zsh.org"
++SECTION =3D "base/shell"
++
++LICENSE =3D "ZSH"
++LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb=
+341"
++
++DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
++
++SRC_URI =3D "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
++SRC_URI[md5sum] =3D "e8484468925cec8d9a84b8b04797e764"
++SRC_URI[sha256sum] =3D "cd014a8e09a3607c68369d1615db96d0fbb7279a125950b3=
+2032fd448c44a888"
++
++FILES_${PN}-dbg +=3D "\
++    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
++    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
++    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
++    "
++
++inherit autotools
++
++EXTRA_OECONF =3D " \
++    --bindir=3D${base_bindir} \
++    --enable-etcdir=3D${sysconfdir} \
++    --enable-fndir=3D${datadir}/${PN}/${PV}/functions \
++    --enable-site-fndir=3D${datadir}/${PN}/site-functions \
++    --enable-function-subdirs \
++    --with-term-lib=3D'ncursesw ncurses' \
++    --with-tcsetpgrp \
++    --enable-pcre \
++    --enable-cap \
++    --enable-multibyte \
++    --enable-gdbm \
++    --enable-dynamic \
++    zsh_cv_shared_environ=3Dyes \
++    "
++
++do_configure () {
++    oe_runconf
++}
++
++pkg_postinst_${PN} () {
++    touch $D${sysconfdir}/shells
++    grep -q "bin/zsh" $D${sysconfdir}/shells || echo "/bin/zsh" >> $D${s=
+ysconfdir}/shells
++}
++
++pkg_postrm_${PN} () {
++    if [ -e $D${sysconfdir}/shells ]; then
++        sed -i -e '/\/bin\/zsh/d' $D${sysconfdir}/shells
++    fi
++}
+--=20
+1.7.2.5
 
 
