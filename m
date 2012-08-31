@@ -1,37 +1,33 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1T7YdE-00021o-Ib
+	(envelope-from <ml@communistcode.co.uk>) id 1T7ZMQ-00038S-E2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Aug 2012 23:20:00 +0200
-Received: by daks35 with SMTP id s35so2183513dak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2012 14:07:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=I89e4h0lY1HeWZjZsuB2vdKriRUDOIdFk9s/j47Ocmg=;
-	b=ZPhx29DSnyTMFlhczxuKZFf9d/R621RRQHkYvXMxbtVrZzTGT/leJ0HYBqlUaCC2X5
-	4EnaUZ2zwb9KWd3DwGJJYYvnr5PJgBU85XhpW+6Kto7CKIpiCxr8RL+H0WQ4Gusm6VUx
-	upmhsdF+4lwdqlIUsl3ezA4O1hXgiv/c0NEid7OqLqQsEY9PsIbBKgIAxV6pMrI2gmtW
-	ULF1ez+F3QTOeeAsyKebdbjbn9sLK2kr/0yTgN+21/nNnB/GheHcA2Gh02hy71yekABk
-	sVtZxh9k8glNHPkTeQ6/hLKpJD4vgpGFkG3aMozksaGCRLBF98mjK3hbi8qhPX5tBv+y
-	P0Ng==
-Received: by 10.68.224.5 with SMTP id qy5mr20153258pbc.4.1346447262927;
-	Fri, 31 Aug 2012 14:07:42 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:d:eba:c836:ce4f:cdcf:1baa])
-	by mx.google.com with ESMTPS id st6sm4146000pbc.58.2012.08.31.14.07.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 31 Aug 2012 14:07:41 -0700 (PDT)
-Date: Fri, 31 Aug 2012 14:07:38 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120831210738.GB9235@bill-the-cat>
-References: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
+	Sat, 01 Sep 2012 00:06:42 +0200
+Received: from localhost ([127.0.0.1]:51499 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T7ZAX-000455-7a
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 31 Aug 2012 21:54:25 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:content-type
+	:content-transfer-encoding; s=default; bh=2qj0IHb5w5eKpCizXOvoz+
+	gSkn8=; b=mtMZBvwoGRS1+jB/QV6CX6YV3L0IuvswYntx3DK848SPjwvAGyhJ6Y
+	veBwg6v3O0Y4O0fnR33wnoWRzKSErGgQ+/F864ATENW4lPo+c4mYgSNjH/nawlLv
+	mSqjIi9QCtznqnpQ0jdI81Jw+qbd9uMlojdnwgcdHT5A/yGCG8SBk=
+Received: from cpc2-cmbg15-2-0-cust171.5-4.cable.virginmedia.com
+	([86.26.12.172]:46783 helo=[192.168.1.125])
+	by eumx.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <ml@communistcode.co.uk>)
+	id 1T7ZAX-000451-4t for openembedded-devel@lists.openembedded.org;
+	Fri, 31 Aug 2012 21:54:25 +0000
+Message-ID: <504131A2.4010004@communistcode.co.uk>
+Date: Fri, 31 Aug 2012 22:50:26 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120717 Thunderbird/14.0
 MIME-Version: 1.0
-In-Reply-To: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [2011.03-maintenance][PATCH] gtk+_2.20.1: Depend on gdk-pixbuf-native
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: WebOS OpenEmbedded Layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2012 21:20:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 31 Aug 2012 22:06:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 27, 2012 at 03:50:54PM -0700, Khem Raj wrote:
+Well, it's been a long time coming and I'm sure most of you have heard 
+about this already - but I thought I would drop it in for those who have 
+missed the news.
 
-> also BBCLASSEXTEND gdk-pixbuf recipes to provide
-> native version
-> 
-> Newer distros which ship glib-2.0 version 2.32+
-> there are some missing symbols that gtk+ 2.20
-> will complain about. So we create own gdk-pixbuf
-> so it does not link to library from host system
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+https://github.com/openwebos/build-webos
 
-Applied to 2011.03-maintenance branch.
+I haven't had time to pick through it properly yet but hopefully there 
+might be some interesting ideas we could use/upstream.
 
--- 
-Tom
+Has anyone seen anything interesting, I brefily noticed some upstart 
+stuff which I remember was brought up as a possible "todo" on the list.
+
+Cheers,
+
 
 
