@@ -1,20 +1,31 @@
-Received: from banjo.bearstech.com ([78.40.125.52])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bpratz@bearstech.com>) id 1T79R8-0006Wq-Ja
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Aug 2012 20:25:50 +0200
-Received: from barney.bearstech.com (barney.bearstech.lan [10.20.125.20])
-	by banjo.bearstech.com (Postfix) with ESMTP id 23B00E012B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2012 20:13:37 +0200 (CEST)
-Received: by barney.bearstech.com (Postfix, from userid 1001)
-	id E875790271; Thu, 30 Aug 2012 20:13:36 +0200 (CEST)
-From: Guyzmo <guyzmo+openembedded@hackable-devices.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Aug 2012 20:13:36 +0200
-Message-Id: <1346348639-sup-4216@barney.bearstech.com>
-User-Agent: Sup/git
-Subject: [PATCH] zsh: updated recipe's version to v5.0.0
+	(envelope-from <jefro.net@gmail.com>)
+	id 1T7WAS-0007G7-6U; Fri, 31 Aug 2012 20:42:08 +0200
+Received: by iaky10 with SMTP id y10so5599609iak.6
+	for <multiple recipients>; Fri, 31 Aug 2012 11:29:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=RgCNqgdLhX0nqPPvzFAdo1RzQS5OdlVvHwhc9hKXlN8=;
+	b=xcvkNET8KFzRo6bYLPQPMeRtNuTBLJbKLlTruHiGdKa4ICiblKWuFPJI+H7ZJrQc5J
+	8tAaS4LyuyZk4haUDsmzlon7Gh2uuPoKWEj39ruLTIA87G+l9rQTw6Dxy1T3Ehk75lU3
+	vZDR9SCRdIbLZGzqx85u8epIBt1A+g+EGF5iDt8k5zBC73UT6DtOoliOPm0StRScL+s0
+	pcc+C9G3DS8X2utP0UXRqPwzhsoZKR17B6dvuAMFWSQRm4KaBfnSNUF1b/rUq5nW6gZf
+	HZcZJZ9qCnoQavE/e0WykhIyMwzfV8h5bqKFaxwH2LDoJz/Urem86zakz+Tfea/H1udd
+	S8NQ==
+MIME-Version: 1.0
+Received: by 10.50.237.66 with SMTP id va2mr3967369igc.65.1346437790203; Fri,
+	31 Aug 2012 11:29:50 -0700 (PDT)
+Sender: jefro.net@gmail.com
+Received: by 10.64.50.231 with HTTP; Fri, 31 Aug 2012 11:29:50 -0700 (PDT)
+Date: Fri, 31 Aug 2012 11:29:50 -0700
+X-Google-Sender-Auth: B84emdRGz9EXKqu5rvi-pQD1bG4
+Message-ID: <CA+YB3rb2JtnpeuWecqun_C__hinSLpyvXeYu_wsxvNEXniiw4g@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+Subject: Yocto Project Developer Day
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,147 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 18:25:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 31 Aug 2012 18:42:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* 4.3.17 has moved to old/ in zsh ftp and 5.0.0 is stable
-* changed name of the recipe
-* changed the hashes in the recipe
+Hi all - I want to announce the Yocto Project Dev Day on November 8 in
+Barcelona, Spain, co-located with the Embedded Linux Conference Europe
+and LinuxCon Europe
+(http://events.linuxfoundation.org/events/embedded-linux-conference-europe).
+This Developer Day includes presentations taught by Yocto Project
+developers as well as hands-on labs with real hardware. The day is
+organized into two tracks, one for new users and one for advanced
+users who are already using the Yocto Project.
 
-Signed-off-by: Guyzmo <guyzmo+openembedded@hackable-devices.org>
----
- meta-oe/recipes-extended/zsh/zsh_4.3.17.bb |   51 ----------------------=
-------
- meta-oe/recipes-extended/zsh/zsh_5.0.0.bb  |   51 ++++++++++++++++++++++=
-++++++
- 2 files changed, 51 insertions(+), 51 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
- create mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
+You can register for Dev Day along with ELCE and/or LinuxCon EU here:
 
-diff --git a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb b/meta-oe/recipes=
--extended/zsh/zsh_4.3.17.bb
-deleted file mode 100644
-index 9192f20..0000000
---- a/meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
-+++ /dev/null
-@@ -1,51 +0,0 @@
--DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
--HOMEPAGE=3D"http://www.zsh.org"
--SECTION =3D "base/shell"
--
--LICENSE =3D "ZSH"
--LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb=
-341"
--
--DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
--
--SRC_URI =3D "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
--SRC_URI[md5sum] =3D "8258967060b2654f30001a011946ac6a"
--SRC_URI[sha256sum] =3D "054e0452afd9c742c9f1489465175e1d4d7db50d88b602d1=
-32551d850cf7a704"
--
--FILES_${PN}-dbg +=3D "\
--    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
--    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
--    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
--    "
--
--inherit autotools
--
--EXTRA_OECONF =3D " \
--    --bindir=3D${base_bindir} \
--    --enable-etcdir=3D${sysconfdir} \
--    --enable-fndir=3D${datadir}/${PN}/${PV}/functions \
--    --enable-site-fndir=3D${datadir}/${PN}/site-functions \
--    --enable-function-subdirs \
--    --with-term-lib=3D'ncursesw ncurses' \
--    --with-tcsetpgrp \
--    --enable-pcre \
--    --enable-cap \
--    --enable-multibyte \
--    --enable-gdbm \
--    --enable-dynamic \
--    zsh_cv_shared_environ=3Dyes \
--    "
--
--do_configure () {
--    oe_runconf
--}
--
--pkg_postinst_${PN} () {
--    touch $D${sysconfdir}/shells
--    grep -q "bin/zsh" $D${sysconfdir}/shells || echo "/bin/zsh" >> $D${s=
-ysconfdir}/shells
--}
--
--pkg_postrm_${PN} () {
--    if [ -e $D${sysconfdir}/shells ]; then
--        sed -i -e '/\/bin\/zsh/d' $D${sysconfdir}/shells
--    fi
--}
-diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb b/meta-oe/recipes-=
-extended/zsh/zsh_5.0.0.bb
-new file mode 100644
-index 0000000..f499be7
---- /dev/null
-+++ b/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
-@@ -0,0 +1,51 @@
-+DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
-+HOMEPAGE=3D"http://www.zsh.org"
-+SECTION =3D "base/shell"
-+
-+LICENSE =3D "ZSH"
-+LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb=
-341"
-+
-+DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
-+
-+SRC_URI =3D "ftp://ftp.zsh.org/pub/${P}.tar.bz2"
-+SRC_URI[md5sum] =3D "e8484468925cec8d9a84b8b04797e764"
-+SRC_URI[sha256sum] =3D "cd014a8e09a3607c68369d1615db96d0fbb7279a125950b3=
-2032fd448c44a888"
-+
-+FILES_${PN}-dbg +=3D "\
-+    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
-+    "
-+
-+inherit autotools
-+
-+EXTRA_OECONF =3D " \
-+    --bindir=3D${base_bindir} \
-+    --enable-etcdir=3D${sysconfdir} \
-+    --enable-fndir=3D${datadir}/${PN}/${PV}/functions \
-+    --enable-site-fndir=3D${datadir}/${PN}/site-functions \
-+    --enable-function-subdirs \
-+    --with-term-lib=3D'ncursesw ncurses' \
-+    --with-tcsetpgrp \
-+    --enable-pcre \
-+    --enable-cap \
-+    --enable-multibyte \
-+    --enable-gdbm \
-+    --enable-dynamic \
-+    zsh_cv_shared_environ=3Dyes \
-+    "
-+
-+do_configure () {
-+    oe_runconf
-+}
-+
-+pkg_postinst_${PN} () {
-+    touch $D${sysconfdir}/shells
-+    grep -q "bin/zsh" $D${sysconfdir}/shells || echo "/bin/zsh" >> $D${s=
-ysconfdir}/shells
-+}
-+
-+pkg_postrm_${PN} () {
-+    if [ -e $D${sysconfdir}/shells ]; then
-+        sed -i -e '/\/bin\/zsh/d' $D${sysconfdir}/shells
-+    fi
-+}
---=20
-1.7.2.5
+http://events.linuxfoundation.org/events/embedded-linux-conference-europe/register
+
+Of course I highly recommend attending ELCE as well, but if you can
+only make Dev Day, you can register separately for it here:
+
+http://www.regonline.com/Register/Checkin.aspx?EventID=1115598
+
+-- 
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
 
