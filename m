@@ -1,33 +1,34 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T7ZMQ-00038S-E2
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Sep 2012 00:06:42 +0200
-Received: from localhost ([127.0.0.1]:51499 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T7ZAX-000455-7a
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Aug 2012 21:54:25 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:content-type
-	:content-transfer-encoding; s=default; bh=2qj0IHb5w5eKpCizXOvoz+
-	gSkn8=; b=mtMZBvwoGRS1+jB/QV6CX6YV3L0IuvswYntx3DK848SPjwvAGyhJ6Y
-	veBwg6v3O0Y4O0fnR33wnoWRzKSErGgQ+/F864ATENW4lPo+c4mYgSNjH/nawlLv
-	mSqjIi9QCtznqnpQ0jdI81Jw+qbd9uMlojdnwgcdHT5A/yGCG8SBk=
-Received: from cpc2-cmbg15-2-0-cust171.5-4.cable.virginmedia.com
-	([86.26.12.172]:46783 helo=[192.168.1.125])
-	by eumx.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <ml@communistcode.co.uk>)
-	id 1T7ZAX-000451-4t for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Aug 2012 21:54:25 +0000
-Message-ID: <504131A2.4010004@communistcode.co.uk>
-Date: Fri, 31 Aug 2012 22:50:26 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120717 Thunderbird/14.0
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: WebOS OpenEmbedded Layers
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T7hfD-0001GV-Nw for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Sep 2012 08:58:40 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T7hTM-0001qg-A7 for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Sep 2012 08:46:24 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Sep 2012 08:46:24 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Sep 2012 08:46:24 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 01 Sep 2012 08:46:08 +0200
+Message-ID: <k1savh$7ds$1@ger.gmane.org>
+References: <504131A2.4010004@communistcode.co.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <504131A2.4010004@communistcode.co.uk>
+X-Enigmail-Version: 1.4.4
+Subject: Re: WebOS OpenEmbedded Layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2012 22:06:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 01 Sep 2012 06:58:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Well, it's been a long time coming and I'm sure most of you have heard 
-about this already - but I thought I would drop it in for those who have 
-missed the news.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-https://github.com/openwebos/build-webos
+Op 31-08-12 23:50, Jack Mitchell schreef:
+> Well, it's been a long time coming and I'm sure most of you have heard
+> about this already - but I thought I would drop it in for those who have
+> missed the news.
+> 
+> https://github.com/openwebos/build-webos
+> 
+> I haven't had time to pick through it properly yet but hopefully there
+> might be some interesting ideas we could use/upstream.
 
-I haven't had time to pick through it properly yet but hopefully there 
-might be some interesting ideas we could use/upstream.
+Yeah, the idea of combining a BSP layer, a DISTRO layer and a regular layer
+into one layer is a great idea. Oh wait, it's not.
 
-Has anyone seen anything interesting, I brefily noticed some upstart 
-stuff which I remember was brought up as a possible "todo" on the list.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Cheers,
+iD8DBQFQQa8wMkyGM64RGpERAu/vAJ91o0z0FSg1q7Y13ALGG9qrh6QhugCeONzo
+h6s+UzUCeEyNz/475yw417w=
+=K1/2
+-----END PGP SIGNATURE-----
 
 
 
