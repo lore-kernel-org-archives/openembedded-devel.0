@@ -1,35 +1,36 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T8Q3A-0003eU-6a for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Sep 2012 08:22:20 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T8PrI-0001OE-9u for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Sep 2012 08:10:04 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Sep 2012 08:10:04 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <schnitzeltony@googlemail.com>) id 1T8QdE-0000Ug-Ig
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Sep 2012 08:59:44 +0200
+Received: by wibhn17 with SMTP id hn17so3018564wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Sep 2012 08:10:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 02 Sep 2012 23:47:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=GhLZqty+QrFYE1u5bqpu4vx8v3tTiPb6A6UsyqjDvo4=;
+	b=qXgwJqxuCF8okRJLq3+kzIuJ8aaFkNhX2XkHZjH9mqzbkRNh/cqmFmUMWmAIZ5wYdk
+	yBU3LNzavqIy3HQouJIEnoBp9AAKceKU8p3lPhZN0/zMd9bJdpgakF1FRE+HpRf+1EKO
+	/n8StqukNa38+gKkjLewIIVnm2VOgNeYHyhkvBo6GDWF2pgwZLaaDjKm0jNLDWP5fdOD
+	OZupS5ZslAQfwe7d9GamJ3Ssb5tz7W0iZ03zjvSBO1CM2cq1wib3EAWFhuaw6VWlLAZf
+	RgWYEb+WZ+KmW88q+Z6tBRpIFVWF0VCb3dKcVetAhB62BLAjZV3MWVy/uAJ3hlsuMVQC
+	+gag==
+Received: by 10.216.49.6 with SMTP id w6mr9261906web.207.1346654836411;
+	Sun, 02 Sep 2012 23:47:16 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A2A7E.dip.t-dialin.net.
+	[91.10.42.126])
+	by mx.google.com with ESMTPS id l5sm25820387wix.5.2012.09.02.23.47.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 02 Sep 2012 23:47:14 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 03 Sep 2012 08:09:42 +0200
-Message-ID: <k21hj7$npr$2@ger.gmane.org>
-References: <1346633420-10990-1-git-send-email-joe.macdonald@windriver.com>
-	<1346633420-10990-2-git-send-email-joe.macdonald@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <1346633420-10990-2-git-send-email-joe.macdonald@windriver.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-oe][PATCH 1/2] meta-networking: Migrate dnsmasq into meta-networking
+Date: Mon,  3 Sep 2012 08:54:36 +0200
+Message-Id: <1346655278-3462-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [PATCH 1/3] gdm: do not rely on dev-tty7.device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,71 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2012 06:22:20 -0000
+X-List-Received-Date: Mon, 03 Sep 2012 06:59:49 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Error message was:
 
-Op 03-09-12 02:50, Joe MacDonald schreef:
-> Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com> --- 
-> .../recipes-daemons/dnsmasq/dnsmasq-dbus_2.55.bb   |  13 + 
-> .../recipes-daemons/dnsmasq/dnsmasq.inc            |  29 ++ 
-> .../recipes-daemons/dnsmasq/dnsmasq_2.55.bb        |   4 + 
-> .../recipes-daemons/dnsmasq/files/dnsmasq.conf     | 293
-> +++++++++++++++++++++ meta-networking/recipes-daemons/dnsmasq/files/init
-> |  52 ++++ .../dnsmasq/dnsmasq-dbus_2.55.bb                   |  13 - 
-> meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc   |  29 -- 
-> .../recipes-connectivity/dnsmasq/dnsmasq_2.55.bb   |   4 - 
-> .../dnsmasq/files/dnsmasq.conf                     | 293
-> --------------------- meta-oe/recipes-connectivity/dnsmasq/files/init
-> |  52 ---- 10 files changed, 391 insertions(+), 391 deletions(-) create
-> mode 100644 meta-networking/recipes-daemons/dnsmasq/dnsmasq-dbus_2.55.bb 
-> create mode 100644 meta-networking/recipes-daemons/dnsmasq/dnsmasq.inc 
-> create mode 100644
-> meta-networking/recipes-daemons/dnsmasq/dnsmasq_2.55.bb create mode
-> 100755 meta-networking/recipes-daemons/dnsmasq/files/dnsmasq.conf create
-> mode 100644 meta-networking/recipes-daemons/dnsmasq/files/init delete
-> mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq-dbus_2.55.bb 
-> delete mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc 
-> delete mode 100644 meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb 
-> delete mode 100755
-> meta-oe/recipes-connectivity/dnsmasq/files/dnsmasq.conf delete mode
-> 100644 meta-oe/recipes-connectivity/dnsmasq/files/init
-> 
+[ TIME ] Timed out waiting for device dev-tty7.device.
+[DEPEND] Dependency failed for Gnome Display Manager.
 
-> diff --git a/meta-networking/recipes-daemons/dnsmasq/files/init
-> b/meta-networking/recipes-daemons/dnsmasq/files/init new file mode
-> 100644 index 0000000..d1aa9e5 --- /dev/null +++
-> b/meta-networking/recipes-daemons/dnsmasq/files/init @@ -0,0 +1,52 @@ 
-> +#!/bin/sh +DAEMON=/usr/bin/dnsmasq +NAME=dnsmasq +DESC="DNS forwarder
-> and DHCP server" +ARGS="-7 /etc/dnsmasq.d" + +test -f $DAEMON || exit 0 
-> + +set -e + +case "$1" in +    start) +        echo -n "starting $DESC:
-> $NAME... " +	test -d /var/lib/misc/ || mkdir /var/lib/misc/ +
-> start-stop-daemon -S -x $DAEMON -- $ARGS +	echo "done." +	;; +    stop) +
-> echo -n "stopping $DESC: $NAME... " +	start-stop-daemon -K -x $DAEMON +
-> echo "done." +	;; +    status) +	echo -n "dnsmasq " +	start-stop-daemon
-> -q -K -t -x $DAEMON +	RET=$? +	if [ "$RET" = "0" ]; then +		PID=`cat
-> /var/run/dnsmasq.pid` +		echo "($PID) is running" +	else +		echo "is not
-> running" +		exit $RET +	fi +	;; +    restart) +        echo "restarting
-> $DESC: $NAME... " + 	$0 stop +	$0 start +	echo "done." +	;; +    reload) 
-> +    	echo -n "reloading $DESC: $NAME... " +    	killall -HUP $(basename
-> ${DAEMON}) +	echo "done." +	;; +    *) +	echo "Usage: $0
-> {start|stop|status|restart|reload}" +	exit 1 +	;; +esac + +exit 0
+run tested on overo/xfce
 
-Can this be made LSB compliant? Or better, does dnsmasq ship with its own
-initscript we can use?
-Another nit, the initscript and conffile hardcode /etc and /var, while the
-recipe allows changing them.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../meta-gnome/recipes-gnome/gdm/gdm/gdm.service   |    3 +--
+ .../recipes-gnome/gdm/gdm_2.32.2.bbappend          |    2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-iD8DBQFQREmmMkyGM64RGpERApmoAJ9jBM4+/H1EiY4yHPmWUUq3Q8p7hQCgnlx4
-i+OCPKb2ao1egXP88MOKCVA=
-=AhXV
------END PGP SIGNATURE-----
+diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
+index adfc565..0f94e0c 100644
+--- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
++++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service
+@@ -1,7 +1,6 @@
+ [Unit]
+ Description=Gnome Display Manager
+-Requires=dev-tty7.device
+-After=dev-tty7.device systemd-user-sessions.service
++After=systemd-user-sessions.service
+ 
+ [Service]
+ ExecStart=/usr/sbin/gdm -nodaemon
+diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+index 963e3e8..496a276 100644
+--- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
++++ b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+@@ -1,7 +1,7 @@
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+-PRINC := "${@int(PRINC) + 2}"
++PRINC := "${@int(PRINC) + 3}"
+ 
+ inherit systemd
+ 
+-- 
+1.7.4.4
 
 
 
