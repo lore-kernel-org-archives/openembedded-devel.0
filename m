@@ -1,33 +1,25 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1T8lC3-00052y-7A
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1T8oln-0001M9-I8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Sep 2012 06:56:55 +0200
-Received: by pbcwy7 with SMTP id wy7so9286795pbc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Sep 2012 21:44:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=hAoGPtoNHFyaFysw9fCxrILGHnCudb38oc+6QJtg8/c=;
-	b=HsP0GTii+wlyTb+CuFiZroCNqxNpHh/1cwOJXYy7FNPYZJxyk2BXEN4ip8jI//OCjP
-	CqniRp9UDcHc0MNs3XgGbj+xWyonjGW67hZBp4DVNMSpshyt781Y1UcRSIFMpSFOCkUe
-	JLibRsOkjUL5F+1ZDnhzlSNhy44/mM6qXidn3cRMWxqGgxW2/ozloe0zKOdmJBKeu55k
-	otPCz5UmmKlTG9he4tluD49OfnWVe5gjBArV5FHdluH/83YwwnMkC5d1N+QOn+25V7o5
-	jMi4e3O+Uk2X7k3RDg3hsothA8lKfd7eHzeXO3ILKs7HLf5To+MG/46L+u6bf9Wye/Z6
-	KUmA==
-Received: by 10.66.85.71 with SMTP id f7mr38628496paz.5.1346733873044;
-	Mon, 03 Sep 2012 21:44:33 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id ty1sm11333316pbc.76.2012.09.03.21.44.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Sep 2012 21:44:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Sep 2012 21:43:33 -0700
-Message-Id: <1346733813-30069-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-opie][PATCH] task-opie: Adjust for nativesdk renaming
+	Tue, 04 Sep 2012 10:46:03 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 04 Sep 2012 01:33:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,366,1344236400"; d="scan'208";a="188635097"
+Received: from unknown (HELO helios.localnet) ([10.252.121.161])
+	by orsmga001.jf.intel.com with ESMTP; 04 Sep 2012 01:33:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 04 Sep 2012 09:33:39 +0100
+Message-ID: <4375313.se78X6u4nf@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-29-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <1346733813-30069-1-git-send-email-raj.khem@gmail.com>
+References: <1346733813-30069-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-opie][PATCH] task-opie: Adjust for nativesdk renaming
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2012 04:56:55 -0000
+X-List-Received-Date: Tue, 04 Sep 2012 08:46:03 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../tasks/task-opie-toolchain-host-nativesdk.bb    |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Monday 03 September 2012 21:43:33 Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../tasks/task-opie-toolchain-host-nativesdk.bb    |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+> b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb index
+> 5ca80e6..42138f1 100644
+> --- a/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+> +++ b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
+> @@ -1,8 +1,8 @@
+> -require recipes-core/tasks/task-sdk-host-nativesdk.bb
+> +require recipes-core/tasks/nativesdk-task-sdk-host.bb
+> 
+>  DESCRIPTION = "Host packages for Opie SDK"
+>  PR = "r2"
+>  LICENSE = "MIT"
+>  ALLOW_EMPTY = "1"
+> 
+> -RDEPENDS_${PN} += "qmake-nativesdk uicmoc-nativesdk"
+> +RDEPENDS_${PN} += "nativesdk-qmake nativesdk-uicmoc"
 
-diff --git a/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
-index 5ca80e6..42138f1 100644
---- a/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
-+++ b/recipes-opie/tasks/task-opie-toolchain-host-nativesdk.bb
-@@ -1,8 +1,8 @@
--require recipes-core/tasks/task-sdk-host-nativesdk.bb
-+require recipes-core/tasks/nativesdk-task-sdk-host.bb
- 
- DESCRIPTION = "Host packages for Opie SDK"
- PR = "r2"
- LICENSE = "MIT"
- ALLOW_EMPTY = "1"
- 
--RDEPENDS_${PN} += "qmake-nativesdk uicmoc-nativesdk"
-+RDEPENDS_${PN} += "nativesdk-qmake nativesdk-uicmoc"
+Merged to meta-opie master with a PR bump, thanks.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
