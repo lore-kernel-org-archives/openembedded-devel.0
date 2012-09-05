@@ -1,20 +1,18 @@
 Received: from [78.110.170.148] (helo=tinyArch.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9Haz-0001aq-LD
+	(envelope-from <ml@communistcode.co.uk>) id 1T9Haz-0001ao-K7
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 05 Sep 2012 17:32:49 +0200
 Received: from archHP.dbnet.local (unknown [195.171.99.130])
-	by tinyArch.localdomain (Postfix) with ESMTPSA id 6FD514ED98;
+	by tinyArch.localdomain (Postfix) with ESMTPSA id 3CA6C4ED96;
 	Wed,  5 Sep 2012 12:50:29 +0100 (BST)
 From: ml@communistcode.co.uk
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2012 16:21:34 +0100
-Message-Id: <1346858494-4849-3-git-send-email-ml@communistcode.co.uk>
+Date: Wed,  5 Sep 2012 16:21:32 +0100
+Message-Id: <1346858494-4849-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.7.12
-In-Reply-To: <1346858494-4849-1-git-send-email-ml@communistcode.co.uk>
-References: <1346858494-4849-1-git-send-email-ml@communistcode.co.uk>
 Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [PATCHv4 3/3] libcec: update libcec to latest version (1.8.1) as to include RasPi support
+Subject: [PATCHv4 1/3] libplist: add upstream patch to fix parallel make issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +30,56 @@ X-List-Received-Date: Wed, 05 Sep 2012 15:32:49 -0000
 
 From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-V2
-
-- Change package version to 1.8.1
-
-V1
-
-- Now depends on liblockdev
-- Slight licence change - new md5sum
-
 Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 ---
- meta-oe/recipes-extended/libcec/libcec_git.bb | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ .../libimobiledevice/files/fix-parallel-make.patch  | 21 +++++++++++++++++++++
+ .../libimobiledevice/libplist_1.8.bb                |  5 ++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
 
-diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
-index 142b2e2..81b518a 100644
---- a/meta-oe/recipes-extended/libcec/libcec_git.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
-@@ -1,14 +1,13 @@
- DESCRIPTION = "USB CEC Adaptor communication Library"
- HOMEPAGE = "http://libcec.pulse-eight.com/"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch b/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
+new file mode 100644
+index 0000000..f6ef6f4
+--- /dev/null
++++ b/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
+@@ -0,0 +1,21 @@
++From 335b25febd4c864ad0ac08479f5cd43fc21b7d73 Mon Sep 17 00:00:00 2001
++From: Nikias Bassen
++Date: Mon, 09 Jul 2012 21:17:15 +0000
++Subject: Fix building with parallel build makeopts
++
++---
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 0bad840..155994e 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -57,6 +57,8 @@ ADD_SUBDIRECTORY( plutil )
++ ADD_SUBDIRECTORY( include )
++ ADD_SUBDIRECTORY( test )
++ 
+++ADD_DEPENDENCIES( plist libcnary )
+++
++ IF ( SWIG_FOUND AND PYTHONLIBS_FOUND AND PYTHONINTERP_FOUND )
++ 	ADD_SUBDIRECTORY( swig )
++ ENDIF ( SWIG_FOUND AND PYTHONLIBS_FOUND AND PYTHONINTERP_FOUND )
++--
++cgit v0.9.0.2
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+index 9c218fb..2da8058 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+@@ -8,7 +8,10 @@ DEPENDS = "libxml2 glib-2.0 swig python"
  
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=185ead350fec5fc223da0f65f9a802af"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
+ inherit cmake pkgconfig
  
--DEPENDS = "udev"
-+DEPENDS = "udev liblockdev"
+-SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2"
++SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
++           file://fix-parallel-make.patch \
++"
++
+ SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
+ SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
  
--PR = "r1"
--PV = "1.4.0"
--SRCREV = "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
-+PV = "1.8.1"
-+SRCREV = "34a9cecdd92f6b2844f9c4054da202b152ab2217"
- SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
- 
- S = "${WORKDIR}/git"
 -- 
 1.7.12
 
