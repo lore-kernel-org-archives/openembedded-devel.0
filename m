@@ -1,20 +1,34 @@
-Received: from [78.110.170.148] (helo=tinyArch.localdomain)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9Gpt-0008K8-8c
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 16:44:09 +0200
-Received: from archHP.dbnet.local (unknown [195.171.99.130])
-	by tinyArch.localdomain (Postfix) with ESMTPSA id 6A9984ED5E;
-	Wed,  5 Sep 2012 12:01:56 +0100 (BST)
-From: ml@communistcode.co.uk
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9GyQ-0000JO-MV for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 16:52:58 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9GmS-0000Do-Tm for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 16:40:36 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Sep 2012 16:40:36 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Sep 2012 16:40:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2012 15:32:54 +0100
-Message-Id: <1346855574-1528-3-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.7.12
-In-Reply-To: <1346855574-1528-1-git-send-email-ml@communistcode.co.uk>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 05 Sep 2012 16:40:41 +0200
+Message-ID: <k27o8p$c19$1@ger.gmane.org>
 References: <1346855574-1528-1-git-send-email-ml@communistcode.co.uk>
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [PATCH v2 3/3] libcec: update libcec to latest version (1.8.1) as to include RasPi support
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1346855574-1528-1-git-send-email-ml@communistcode.co.uk>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [PATCH v2 1/3] libplist: issues with parallel make so disable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,50 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 14:44:09 -0000
+X-List-Received-Date: Wed, 05 Sep 2012 14:52:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-V2
+Op 05-09-12 16:32, ml@communistcode.co.uk schreef:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> 
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk> --- 
+> meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb | 2 ++ 1 file
+> changed, 2 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+> b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb index
+> 9c218fb..5356431 100644 ---
+> a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb +++
+> b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb @@ -6,6 +6,8
+> @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
+> 
+> DEPENDS = "libxml2 glib-2.0 swig python"
+> 
+> +PARALLEL_MAKE = ""
 
-- Change package version to 1.8.1
+FWIW, there's a one-liner commit in upstream git to fix the libcnary problem
 
-V1
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-- Now depends on liblockdev
-- Slight licence change - new md5sum
-
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
- meta-oe/recipes-extended/libcec/libcec_git.bb | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
-index 142b2e2..81b518a 100644
---- a/meta-oe/recipes-extended/libcec/libcec_git.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
-@@ -1,14 +1,13 @@
- DESCRIPTION = "USB CEC Adaptor communication Library"
- HOMEPAGE = "http://libcec.pulse-eight.com/"
- 
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=185ead350fec5fc223da0f65f9a802af"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
- 
--DEPENDS = "udev"
-+DEPENDS = "udev liblockdev"
- 
--PR = "r1"
--PV = "1.4.0"
--SRCREV = "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
-+PV = "1.8.1"
-+SRCREV = "34a9cecdd92f6b2844f9c4054da202b152ab2217"
- SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.12
+iD8DBQFQR2RpMkyGM64RGpERAj9fAJ4rqWHvYnNibjNuve9c0saIxDQswQCgswm/
+/7MxaXHJvjEnjLxcsoSJRS4=
+=aHz3
+-----END PGP SIGNATURE-----
 
 
 
