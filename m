@@ -1,18 +1,38 @@
-Received: from [78.110.170.148] (helo=tinyArch.localdomain)
+Received: from outrightsolutions.nl ([194.145.201.26]
+	helo=mail.outrightsolutions.nl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9Haz-0001ao-K7
+	(envelope-from <sander@outrightsolutions.nl>) id 1T9HkZ-0001tf-AY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 17:32:49 +0200
-Received: from archHP.dbnet.local (unknown [195.171.99.130])
-	by tinyArch.localdomain (Postfix) with ESMTPSA id 3CA6C4ED96;
-	Wed,  5 Sep 2012 12:50:29 +0100 (BST)
-From: ml@communistcode.co.uk
+	Wed, 05 Sep 2012 17:42:43 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.outrightsolutions.nl (Postfix) with ESMTP id 9E6FD5BC388
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Sep 2012 17:30:21 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at outrightsolutions.nl
+Received: from mail.outrightsolutions.nl ([127.0.0.1])
+	by localhost (hydrogen.outrightsolutions.nl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id DmLesejg7xDr
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Sep 2012 17:30:18 +0200 (CEST)
+Received: from [IPv6:2a02:2308::1ab:f800:2] (unknown
+	[IPv6:2a02:2308::1ab:f800:2])
+	by mail.outrightsolutions.nl (Postfix) with ESMTPSA id C778B5BC332
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Sep 2012 17:30:18 +0200 (CEST)
+Message-ID: <50476FFC.1030206@outrightsolutions.nl>
+Date: Wed, 05 Sep 2012 17:30:04 +0200
+From: Sander van Grieken <sander@outrightsolutions.nl>
+Organization: Outright Solutions
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120827 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2012 16:21:32 +0100
-Message-Id: <1346858494-4849-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.7.12
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [PATCHv4 1/3] libplist: add upstream patch to fix parallel make issue
+References: <1346852108-16462-1-git-send-email-sander@outrightsolutions.nl>
+	<1346852108-16462-2-git-send-email-sander@outrightsolutions.nl>
+	<k27l12$e10$2@ger.gmane.org>
+In-Reply-To: <k27l12$e10$2@ger.gmane.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH 2/2] ifuse: add recipe to expose files on Apple devices via fuse
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,62 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 15:32:49 -0000
+X-List-Received-Date: Wed, 05 Sep 2012 15:42:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+On 09/05/2012 03:45 PM, Koen Kooi wrote:
+> Op 05-09-12 15:35, Sander van Grieken schreef:
+> > Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl> ---
+> > meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb |   16
+> > ++++++++++++++++ 1 file changed, 16 insertions(+) create mode 100644
+> > meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
+>
+> > diff --git a/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
+> > b/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb new file mode 100644
+> > index 0000000..07131d6 --- /dev/null +++
+> > b/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb @@ -0,0 +1,16 @@
+>
+> Missing DESCRIPTION
+>
+> > +LICENSE = "LGPLv2.1" +LIC_FILES_CHKSUM =
+> > "file://COPYING;md5=6ab17b41640564434dda85c06b7124f7" +HOMEPAGE
+> > ="http://www.libimobiledevice.org/" + +DEPENDS = "fuse libimobiledevice"
+> > + +PR = "r0"
+>
+> Default, drop that
+>
+> > + +SRC_URI = " \ +
+> > http://www.libimobiledevice.org/downloads/ifuse-${PV}.tar.bz2 \ +    " +
+> > +SRC_URI[md5sum] = "4152526b2ac3c505cb41797d997be14d"
+> +SRC_URI[sha256sum]
+> > = "47835c8afb72588b3202fe0b206d7ea37a68663d9aa4eaf73f0a4bcb6215fc05" +
+> > +inherit autotools pkgconfig
+>
+> And I suspect you need to add:
+>
+> RRECOMMENDS_${PN} =+ "kernel-module-fuse"
+>
+Isn't that done by 'fuse' ?
 
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
- .../libimobiledevice/files/fix-parallel-make.patch  | 21 +++++++++++++++++++++
- .../libimobiledevice/libplist_1.8.bb                |  5 ++++-
- 2 files changed, 25 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
-
-diff --git a/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch b/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
-new file mode 100644
-index 0000000..f6ef6f4
---- /dev/null
-+++ b/meta-oe/recipes-extended/libimobiledevice/files/fix-parallel-make.patch
-@@ -0,0 +1,21 @@
-+From 335b25febd4c864ad0ac08479f5cd43fc21b7d73 Mon Sep 17 00:00:00 2001
-+From: Nikias Bassen
-+Date: Mon, 09 Jul 2012 21:17:15 +0000
-+Subject: Fix building with parallel build makeopts
-+
-+---
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 0bad840..155994e 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -57,6 +57,8 @@ ADD_SUBDIRECTORY( plutil )
-+ ADD_SUBDIRECTORY( include )
-+ ADD_SUBDIRECTORY( test )
-+ 
-++ADD_DEPENDENCIES( plist libcnary )
-++
-+ IF ( SWIG_FOUND AND PYTHONLIBS_FOUND AND PYTHONINTERP_FOUND )
-+ 	ADD_SUBDIRECTORY( swig )
-+ ENDIF ( SWIG_FOUND AND PYTHONLIBS_FOUND AND PYTHONINTERP_FOUND )
-+--
-+cgit v0.9.0.2
-diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-index 9c218fb..2da8058 100644
---- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-+++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-@@ -8,7 +8,10 @@ DEPENDS = "libxml2 glib-2.0 swig python"
- 
- inherit cmake pkgconfig
- 
--SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2"
-+SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
-+           file://fix-parallel-make.patch \
-+"
-+
- SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
- SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
- 
--- 
-1.7.12
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
