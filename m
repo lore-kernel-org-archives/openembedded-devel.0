@@ -1,37 +1,32 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T9Lyz-0003Yl-63
+	(envelope-from <martin.jansa@gmail.com>) id 1T9Mle-0007h6-Hr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 22:13:53 +0200
-Received: by wgbdr1 with SMTP id dr1so808783wgb.24
+	Wed, 05 Sep 2012 23:04:10 +0200
+Received: by wgbds1 with SMTP id ds1so4011275wgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Sep 2012 13:01:30 -0700 (PDT)
+	Wed, 05 Sep 2012 13:51:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=B/gaw8kL5oTGwDRMFCUQEXutMplH72kDy1fvgG4qBVE=;
-	b=blMTL8rJVGt0quTR7hGwDyIrO+ceBjC0ESu7mXzo3hhNW5hpPux9nZXEkfy4D1eE19
-	B6PtMblClF19wKHcXDabT+e5OY9xh5ggPI+R5eUPLAMMQeel5KasvFpGgCaV/+Zw3xp7
-	LBQciZsZ90H4/08ZMqVrdyvHTHKcpoqQAqn97LVfSEB0iQgur6l1aZhVpSMr+fDS/j8p
-	PwivebFbe8779iRunNCTkOP+sxscJgQrltqL387iceANMnNjgvdvRXXR69XMpyYlNCKc
-	KQMfmPjYjCPjAO7eddwiQpI09ww8L/64kRZbLZgiLEd1eQuqDPjjHnEGIp7VANdDceuU
-	PQgQ==
-Received: by 10.180.106.137 with SMTP id gu9mr40388052wib.20.1346875289944;
-	Wed, 05 Sep 2012 13:01:29 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/6lNV6E+YHOMTb5YnPWqa58pjAfdoMeDqifnYQkRFzc=;
+	b=Ctod2f/H8zw9e7ke/9skqxJcuU5SOCyNJAEKDf1tlqzlfjqIggSjfrWWP5f1nqlw78
+	pp9gxRZULbkVBMWDTN4SWkoyO/U6Nc1Rq1IATYrVMocwc/xUczrEkWTOvchVgTrOxij0
+	J4m1Z/PDKRGlzp+Ne2BYGwgyezaA7CaYEehOBYNWgKmT2QjOckdcV11Kfkoa2EfAer/G
+	ONwldxwwA47PFUrDe0C+cc+QQQnJKlkT+mFydRrEnQxm+i3rfT1F1ITv984h7033Dp73
+	lcZLZe7sqZXT3i2A2f46UPTUUP6R1nCCp6FjiU3e+s9IDNxaUr3GwNvgpgoHep3DnDGq
+	jtiA==
+Received: by 10.216.207.167 with SMTP id n39mr15307717weo.23.1346878307040;
+	Wed, 05 Sep 2012 13:51:47 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k20sm273024wiv.11.2012.09.05.13.01.28
+	by mx.google.com with ESMTPS id hv8sm454550wib.0.2012.09.05.13.51.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Sep 2012 13:01:29 -0700 (PDT)
+	Wed, 05 Sep 2012 13:51:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2012 22:01:38 +0200
-Message-Id: <9a8a4fbead0160d4a3bd1e2d01844de18cf198c6.1346875241.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Sep 2012 22:52:14 +0200
+Message-Id: <1346878334-31980-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
-In-Reply-To: <cover.1346875241.git.Martin.Jansa@gmail.com>
-References: <cover.1346875241.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1346875241.git.Martin.Jansa@gmail.com>
-References: <cover.1346875241.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 2/2] task-x11-illume: rename to packagegroup-x11-illume
+Subject: [meta-oe][PATCH] foxtrotgps: upgrade to 1.1.1 and fix build with new automake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 20:13:53 -0000
+X-List-Received-Date: Wed, 05 Sep 2012 21:04:10 -0000
 
-* add RPROVIDES/RREPLACES/RCONFLICTS task-x11-illume for upgrade path
-* RDEPEND on packagegroup-core-x11* from oe-core now with task-x11-*
-  gone from meta-oe
+* It was failing like this
+  | automake: warnings are treated as errors
+  | automake: warning: autoconf input should be named 'configure.ac', not 'configure.in'
+  | autoreconf: automake failed with exit status: 1
+  after automake was upgraded to 1.12.3
+  http://lists.linuxtogo.org/pipermail/openembedded-core/2012-September/029108.html
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../packagegroup-x11-illume.bb}                               | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
- rename meta-efl/recipes-efl/{tasks/task-x11-illume.bb => packagegroups/packagegroup-x11-illume.bb} (67%)
+ .../foxtrotgps/{foxtrotgps_1.1.0.bb => foxtrotgps_1.1.1.bb}       | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-navigation/foxtrotgps/{foxtrotgps_1.1.0.bb => foxtrotgps_1.1.1.bb} (69%)
 
-diff --git a/meta-efl/recipes-efl/tasks/task-x11-illume.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-similarity index 67%
-rename from meta-efl/recipes-efl/tasks/task-x11-illume.bb
-rename to meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-index eb628b7..11b01f6 100644
---- a/meta-efl/recipes-efl/tasks/task-x11-illume.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-@@ -3,17 +3,20 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${TOPDIR}/meta-openembedded/meta-efl/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- PV = "1.0"
--PR = "r3"
-+PR = "r5"
+diff --git a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.0.bb b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+similarity index 69%
+rename from meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.0.bb
+rename to meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+index 2580abc..4572b8f 100644
+--- a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.0.bb
++++ b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+@@ -7,9 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ DEPENDS = "curl gtk+ gconf libglade sqlite3 libexif gpsd"
  
--inherit task allarch
-+inherit packagegroup allarch
+ SRC_URI = "http://www.foxtrotgps.org/releases/${P}.tar.gz"
+-SRC_URI[md5sum] = "1585d332ae546a0f84e8327ac21b27b9"
+-SRC_URI[sha256sum] = "2d0d66d3e6d3c6ca1c8e5d82129182a49691b9622067b7c5edf82d808ebf1a77"
++SRC_URI[md5sum] = "6777d448ee9d3ba195f9d26ea90e3163"
++SRC_URI[sha256sum] = "ae9706285510554cc0813ac92522e0d1672b0ddb065307bfacfcff3c328f6adb"
  
- # Default theme and config
- ETHEME ?= "e-wm-theme-default"
- ECONFIG ?= "e-wm-config-mobile"
+ inherit autotools pkgconfig perlnative
  
-+RPROVIDES_${PN} += "task-x11-illume"
-+RREPLACES_${PN} += "task-x11-illume"
-+RCONFLICTS_${PN} += "task-x11-illume"
- RDEPENDS_${PN} = "\
--  task-x11-server \
--  task-x11-utils \
-+  packagegroup-core-x11-xserver \
-+  packagegroup-core-x11-utils \
-   \
-   e-wm \
-   ${ECONFIG} \
++do_configure_prepend() {
++  mv ${S}/configure.in ${S}/configure.ac
++}
++
+ RRECOMMENDS_${PN} = "gpsd"
 -- 
 1.7.12
 
