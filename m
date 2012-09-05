@@ -1,39 +1,38 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1T9I49-00035a-DW
+	(envelope-from <martin.jansa@gmail.com>) id 1T9LSQ-0007XO-Rq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 18:02:57 +0200
-Received: by obblz20 with SMTP id lz20so506644obb.6
+	Wed, 05 Sep 2012 21:40:14 +0200
+Received: by weyr6 with SMTP id r6so716275wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Sep 2012 08:50:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=YB5wg40cLBfhVc403hOOAgPyFfLQ10zOwQOScr3Bzgk=;
-	b=C8uuUk0Cuc4uKsr77tXriHWfSDFsJ8oA5Ix2fMtjIz62ZAsglh0dPK/008DxBe5goO
-	D7otcAawmevdzsT+AtJDIwkrJO+T2tPrZOhvCiDgPZyzaKOefhAWxbuuRUtDUzJzqFjV
-	1R+pmho2haNdeejVbvbeUiv+xZoJSpG2EYjlIxpj2qrdXzsSit/+PlmcqxdgdTH12t5d
-	y5O7e3QYQbiICNx0Puyb4Y2C65BoHCgsVn/AmOMIl0nhbw3jA5mT93en1MjD+GKeJKJK
-	pdCFjRkFfpmY43oo1o/7fIPts2f2ZWIJAoRSGAhD6tI7n4W8z0za5Tas85mGD24RCWgk
-	YHKw==
-Received: by 10.60.13.226 with SMTP id k2mr17459826oec.14.1346860233621; Wed,
-	05 Sep 2012 08:50:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.93.35 with HTTP; Wed, 5 Sep 2012 08:50:13 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <50477479.70400@communistcode.co.uk>
-References: <1346858494-4849-1-git-send-email-ml@communistcode.co.uk>
-	<1346858494-4849-2-git-send-email-ml@communistcode.co.uk>
-	<CAK18fxG8PpuVYW0UXZwRKghn1duy2FwhL2RWt_cP82XX33srcA@mail.gmail.com>
-	<50477479.70400@communistcode.co.uk>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Wed, 5 Sep 2012 18:50:13 +0300
-Message-ID: <CAK18fxHcOd+iC13o6E_3sH2ujShxQD8Cg6scq-h+6Uzs-4RmBg@mail.gmail.com>
+	Wed, 05 Sep 2012 12:27:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=3Tvn+vDIXAce4G/EPCgZGq35Vy7zQIRUL/hUFZX1O7c=;
+	b=X0p0k2bRVp7OmdQWUMVSkDyb9BZ28WgtgGuzdYp+WfN3ZM2sbl12Mt4DKoo0IyrQJE
+	dhmZ2yoqJuoAoulCkvxTkJjYaW8XccvKYgCH/0t2pR7wAh75q09d7d2KEGUugjU5C4oQ
+	vKDO0r3ntKPIRt79RLGynvze8PfIV3FmiCGe7FqoJQtNBX+DYAD9o6BAe6nrMY9CAleq
+	sXb2ujXG2j8IWf5J0VHwO9QcII3UvpJdudGYDsB1OTWt9ywsLulBf6folYS1gBn6bDfT
+	S9NWy5gWr5uDTEifCWH7e9TcwExBco0NU1AQ+o7ZA8trWhTwOJvNL+FYX5qBAumksTR8
+	qy+Q==
+Received: by 10.180.109.166 with SMTP id ht6mr40262355wib.11.1346873271389;
+	Wed, 05 Sep 2012 12:27:51 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id k20sm141510wiv.11.2012.09.05.12.27.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 05 Sep 2012 12:27:48 -0700 (PDT)
+Date: Wed, 5 Sep 2012 21:28:18 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlZK4FA4+dBrvs0DKq5NsdofQ5xBU1JrsUNC2XGj84PU40EEYFj2MuyjO1REpxCflRwhyLn
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCHv4 2/3] liblockdev: new recipe, new version of libcec requires it
+Message-ID: <20120905192818.GR3372@jama.jama.net>
+References: <1346853750-503-1-git-send-email-ml@communistcode.co.uk>
+	<1346853750-503-3-git-send-email-ml@communistcode.co.uk>
+	<4375690.RKMBt9Sfd5@helios>
+MIME-Version: 1.0
+In-Reply-To: <4375690.RKMBt9Sfd5@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 3/3] libcec: update libcec to latest version (1.8.2) as to include RasPi support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,106 +46,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 16:02:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Sep 2012 19:40:15 -0000
+X-Groupsio-MsgNum: 40498
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BZziOT8Kz25R/m/E"
+Content-Disposition: inline
 
-On Wed, Sep 5, 2012 at 6:49 PM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+--BZziOT8Kz25R/m/E
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On 05/09/12 16:41, Andrei Gherzan wrote:
->
->> On Wed, Sep 5, 2012 at 6:21 PM, <ml@communistcode.co.uk> wrote:
->>
->>  From: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
->>> >
->>>
->>> V4
->>>
->>> - Remove debian packaging patch, it is not needed
->>>
->>>
->>>  What means it is not needed anymore? Included in upstream? Fixed in
->> yocto?
->>
->>
->>  Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
->>> >
->>> ---
->>>   .../liblockdev/liblockdev_1.0.**3.bb <http://liblockdev_1.0.3.bb>
->>>             | 26
->>> ++++++++++++++++++++++
->>>   1 file changed, 26 insertions(+)
->>>   create mode 100644 meta-oe/recipes-extended/**liblockdev/
->>> liblockdev_1.0.3.bb
->>>
->>>
->>>  Where is the removed patch?
->>
->>
->>  diff --git a/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.**
->>> bbb/meta-oe/recipes-extended/**liblockdev/
->>> liblockdev_1.0.3.bb
->>> new file mode 100644
->>> index 0000000..be5ce44
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.bb
->>> @@ -0,0 +1,26 @@
->>> +DESCRIPTION = "Manage character and block device lockfiles."
->>> +HOMEPAGE = "
->>> http://anonscm.debian.org/**gitweb/?p=lockdev/lockdev.git;**a=summary<http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary>
->>> "
->>> +
->>> +LICENSE = "LGPLv2.1"
->>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=**d8045f3b8f929c1cb29a1e3fd737b4
->>> **99"
->>> +
->>> +PV = "1.0.3"
->>> +
->>> +SRC_URI = "
->>> http://ftp.de.debian.org/**debian/pool/main/l/lockdev/**
->>> lockdev_${PV}.orig.tar.gz<http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_$%7BPV%7D.orig.tar.gz>
->>> "
->>> +
->>> +SRC_URI[md5sum] = "**64b9c1b87b125fc348e892e2462552**4a"
->>> +SRC_URI[sha256sum] =
->>> "**ccae635d7ac3fdd50897eceb250872**b3d9a191d298f213e7f0c836910d86**9f82"
->>> +
->>> +S = "${WORKDIR}/lockdev-${PV}"
->>> +
->>> +do_compile() {
->>> +  oe_runmake CC="${CC}" LD="${LD}" shared
->>> +}
->>> +
->>> +do_install() {
->>> +  oe_runmake basedir="${D}" incdir="${D}${includedir}"
->>> libdir="${D}${libdir}" install_dev
->>> +}
->>> +
->>> +FILES_{PN} = "${includedir}/* \
->>> +              ${libdir}/* \
->>> +"
->>> --
->>> 1.7.12
->>>
->>>
->>> ______________________________**_________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
->>> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**
->>> openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->>>
->>>  ______________________________**_________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
->> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**
->> openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->>
->
-> Sorry, this has been confusing!
->
-> I had erroneously added a patch in my V1 git send-patch for building
-> liblockdev which wasn't required so I removed it and rebased my patches
-> without it.
->
->
-Got it now.
+On Wed, Sep 05, 2012 at 03:16:10PM +0100, Paul Eggleton wrote:
+> On Wednesday 05 September 2012 15:02:30 ml@communistcode.co.uk wrote:
+> > From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> >=20
+> > - Now depends on liblockdev
+> > - Slight licence change - new md5sum
+> >=20
+> > Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> > ---
+> >  meta-oe/recipes-extended/libcec/libcec_git.bb | 10 +++++-----
+> >  1 file changed, 5 insertions(+), 5 deletions(-)
+> >=20
+> > diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb
+> > b/meta-oe/recipes-extended/libcec/libcec_git.bb index 142b2e2..f3cb39e
+> > 100644
+> > --- a/meta-oe/recipes-extended/libcec/libcec_git.bb
+> > +++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
+> > @@ -1,14 +1,14 @@
+> >  DESCRIPTION =3D "USB CEC Adaptor communication Library"
+> >  HOMEPAGE =3D "http://libcec.pulse-eight.com/"
+> >=20
+> > -LICENSE =3D "GPLv2+"
+> > -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D185ead350fec5fc223da0f65f9a=
+802af"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5e8e16396992369f73f3d28875f=
+846da"
+> >=20
+> > -DEPENDS =3D "udev"
+> > +DEPENDS =3D "udev liblockdev"
+> >=20
+> >  PR =3D "r1"
+> > -PV =3D "1.4.0"
+> > -SRCREV =3D "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
+> > +PV =3D "1.8.2"
+> > +SRCREV =3D "34a9cecdd92f6b2844f9c4054da202b152ab2217"
+> >  SRC_URI =3D "git://github.com/Pulse-Eight/libcec.git"
+> >=20
+> >  S =3D "${WORKDIR}/git"
+>=20
+> It's not totally clear but it doesn't look like 1.8.2 has been released y=
+et=20
+> judging from their website; if that's the case then PV should be set to=
+=20
+> "1.8.1+git${SRCPV}".
 
+Or rather
+"1.8.1+gitr${SRCPV}"
+like most meta-* recipes
+
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--BZziOT8Kz25R/m/E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlBHp9IACgkQN1Ujt2V2gBx68wCgjwPYV+KVd+9ygrnX6/zVKq7W
+OqMAn2eAmkWBNod+2fXZ2Yw6SXj6FOTq
+=arX4
+-----END PGP SIGNATURE-----
+
+--BZziOT8Kz25R/m/E--
