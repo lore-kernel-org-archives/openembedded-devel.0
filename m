@@ -1,37 +1,32 @@
-Received: from ams-iport-4.cisco.com ([144.254.224.147])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1T9C8R-0001ja-Bx
+	(envelope-from <ml@communistcode.co.uk>) id 1T9Drp-00047G-PT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 11:42:59 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=mertsas@cisco.com; l=12958; q=dns/txt;
-	s=iport; t=1346837438; x=1348047038;
-	h=message-id:date:from:mime-version:to:subject:references:
-	in-reply-to; bh=bHO/F3tttm4hcTL/0u/NQxQ9LwuqNtHNZdmHlfJ9Ew8=;
-	b=T+u17oPvMxpvRnjH49CacDb7D6exHcF90OFycS4/0AF/UOHiQg4Xz92j
-	CmY5ZD8F8DnV3z4RT2I0CM8uhw5pY6PnMSuToxyPKLpLWYj4YTSFkIGYH
-	q1Sw6IGBxV6IHOPMkdug3NiHOEvYjphRqAWrdbHlify/hjyLWu9LeRnMA s=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AgsFAF8bR1CQ/khR/2dsb2JhbABFi2SvOIEHgiABAQEDAQEBAQ8BOAEiChELGAkWDwkDAgECARUBLxMGAgEBHodlBguaEZFTAY5RixGHAgOTLYIsgRSES4hUgWeCZQ
-X-IronPort-AV: E=Sophos;i="4.80,372,1344211200"; d="scan'208,217";a="7817967"
-Received: from ams-core-1.cisco.com ([144.254.72.81])
-	by ams-iport-4.cisco.com with ESMTP; 05 Sep 2012 09:30:36 +0000
-Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-1.cisco.com (8.14.5/8.14.5) with ESMTP id q859UaRj013745
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Sep 2012 09:30:36 GMT
-Message-ID: <50471BBC.4080306@cisco.com>
-Date: Wed, 05 Sep 2012 11:30:36 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
+	Wed, 05 Sep 2012 13:33:57 +0200
+Received: from localhost ([127.0.0.1]:59909 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9Dfq-00015c-6C
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 11:21:34 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:content-type
+	:content-transfer-encoding; s=default; bh=FH2iXQ/r08kSNfeYIe+i9Y
+	CiiaU=; b=C6FiF5WYlAWJ5eCgK5cE61mTXi2UNSX7MTuygsP2Fcnz4LneMVJWHB
+	cWHQ9Bzr4I3xAY2MLVT7O87SIQNB2GUUsPg95jt91c1UQ61Cu/xcQm8zJOoypeo4
+	/YPsv9DmS0ks396fX7qfSAfFe6xGAyRCvps0VtpA/jeudqyq2/OUM=
+Received: from [195.171.99.130] (port=35314 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9Dfq-00015Q-2P
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 11:21:34 +0000
+Message-ID: <50473603.4030708@communistcode.co.uk>
+Date: Wed, 05 Sep 2012 12:22:43 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.6esrpre) Gecko/20120730 Thunderbird/10.0.6
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1346836952-1804-1-git-send-email-mertsas@cisco.com>
-	<20120905092549.GO3372@jama.jama.net>
-In-Reply-To: <20120905092549.GO3372@jama.jama.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] task-x11*: Rename to packagegroup to match oe-core.
+Subject: Struggling with creating recipe liblockdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,182 +40,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 09:42:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Sep 2012 11:33:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Ok. Nice. Did not see your patches there.
+I am really struggling with making a new recipe for a library called 
+lockdev. It is fairly old and fairly basic but I am failling at the 
+initial hurdles!
 
-- Martin
+So far I have:
 
-On 09/05/12 11:25, Martin Jansa wrote:
-> On Wed, Sep 05, 2012 at 11:22:32AM +0200, Martin Ertsaas wrote:
->> ---
->>  .../packagegroups/packagegroup-x11-server_1.0.bb   |   23 +++++++++++++++
->>  .../packagegroups/packagegroup-x11_1.0.bb          |   30 ++++++++++++++++++++
->>  meta-oe/recipes-core/tasks/task-x11-server_1.0.bb  |   23 ---------------
->>  meta-oe/recipes-core/tasks/task-x11_1.0.bb         |   30 --------------------
->>  4 files changed, 53 insertions(+), 53 deletions(-)
->>  create mode 100644 meta-oe/recipes-core/packagegroups/packagegroup-x11-server_1.0.bb
->>  create mode 100644 meta-oe/recipes-core/packagegroups/packagegroup-x11_1.0.bb
->>  delete mode 100644 meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
->>  delete mode 100644 meta-oe/recipes-core/tasks/task-x11_1.0.bb
-> NACK
->
-> see my previous patches (and cover of last pull request).
->
-> http://git.openembedded.org/meta-openembedded-contrib/log/?h=jansa/packagegroup
->
-> after
-> http://patchwork.openembedded.org/patch/35839/
-> http://patchwork.openembedded.org/patch/35841/
-> are applied in oe-core
->
-> Cheers,
->
->> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-x11-server_1.0.bb b/meta-oe/recipes-core/packagegroups/packagegroup-x11-server_1.0.bb
->> new file mode 100644
->> index 0000000..7e43d55
->> --- /dev/null
->> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-x11-server_1.0.bb
->> @@ -0,0 +1,23 @@
->> +DESCRIPTION = "Task for an image with Xserver"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
->> +PR = "r9"
->> +
->> +inherit task
->> +
->> +# for backwards compatibility
->> +RPROVIDES_${PN} += "task-xserver"
->> +
->> +XSERVER ?= "xserver-xorg \
->> +           xf86-input-evdev \
->> +           xf86-input-mouse \
->> +           xf86-video-fbdev \
->> +           xf86-input-keyboard \
->> +"
->> +
->> +
->> +RDEPENDS_${PN} = " \
->> +  ${XSERVER} \
->> +"
->> +
->> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-x11_1.0.bb b/meta-oe/recipes-core/packagegroups/packagegroup-x11_1.0.bb
->> new file mode 100644
->> index 0000000..326e09f
->> --- /dev/null
->> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-x11_1.0.bb
->> @@ -0,0 +1,30 @@
->> +DESCRIPTION = "The X Window System -- install this task to get a client/server based display multiplexer."
->> +SECTION = "x11/server"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
->> +PR = "r11"
->> +
->> +inherit task allarch
->> +
->> +PACKAGES += "${PN}-utils"
->> +
->> +RRECOMMENDS_${PN} = "\
->> +  ${PN}-server \
->> +  ${PN}-utils \
->> +"
->> +
->> +# xserver-common, x11-common
->> +VIRTUAL-RUNTIME_xserver_common ?= "xserver-common"
->> +
->> +# elsa or xserver-nodm-init(-systemd)
->> +VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init"
->> +
->> +RDEPENDS_${PN}-utils = "\
->> +  ${VIRTUAL-RUNTIME_xserver_common} \
->> +  ${VIRTUAL-RUNTIME_graphical_init_manager} \
->> +  xauth \
->> +  xhost \
->> +  xset \
->> +  xrandr \
->> +"
->> +
->> diff --git a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb b/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
->> deleted file mode 100644
->> index 7e43d55..0000000
->> --- a/meta-oe/recipes-core/tasks/task-x11-server_1.0.bb
->> +++ /dev/null
->> @@ -1,23 +0,0 @@
->> -DESCRIPTION = "Task for an image with Xserver"
->> -LICENSE = "MIT"
->> -LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
->> -PR = "r9"
->> -
->> -inherit task
->> -
->> -# for backwards compatibility
->> -RPROVIDES_${PN} += "task-xserver"
->> -
->> -XSERVER ?= "xserver-xorg \
->> -           xf86-input-evdev \
->> -           xf86-input-mouse \
->> -           xf86-video-fbdev \
->> -           xf86-input-keyboard \
->> -"
->> -
->> -
->> -RDEPENDS_${PN} = " \
->> -  ${XSERVER} \
->> -"
->> -
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> diff --git a/meta-oe/recipes-core/tasks/task-x11_1.0.bb b/meta-oe/recipes-core/tasks/task-x11_1.0.bb
->> deleted file mode 100644
->> index 326e09f..0000000
->> --- a/meta-oe/recipes-core/tasks/task-x11_1.0.bb
->> +++ /dev/null
->> @@ -1,30 +0,0 @@
->> -DESCRIPTION = "The X Window System -- install this task to get a client/server based display multiplexer."
->> -SECTION = "x11/server"
->> -LICENSE = "MIT"
->> -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
->> -PR = "r11"
->> -
->> -inherit task allarch
->> -
->> -PACKAGES += "${PN}-utils"
->> -
->> -RRECOMMENDS_${PN} = "\
->> -  ${PN}-server \
->> -  ${PN}-utils \
->> -"
->> -
->> -# xserver-common, x11-common
->> -VIRTUAL-RUNTIME_xserver_common ?= "xserver-common"
->> -
->> -# elsa or xserver-nodm-init(-systemd)
->> -VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init"
->> -
->> -RDEPENDS_${PN}-utils = "\
->> -  ${VIRTUAL-RUNTIME_xserver_common} \
->> -  ${VIRTUAL-RUNTIME_graphical_init_manager} \
->> -  xauth \
->> -  xhost \
->> -  xset \
->> -  xrandr \
->> -"
->> -
->> -- 
->> 1.7.8.6
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+DESCRIPTION = "Manage character and block device lockfiles."
+HOMEPAGE = 
+"http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary"
+
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+
+PR = "r1.4"
+PV = "1.0.3"
+
+SRC_URI = 
+"http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_${PV}.orig.tar.gz 
+\
+            file://lockdev_1.0.3-1.4.patch \
+"
+
+SRC_URI[md5sum] = "64b9c1b87b125fc348e892e24625524a"
+SRC_URI[sha256sum] = 
+"ccae635d7ac3fdd50897eceb250872b3d9a191d298f213e7f0c836910d869f82"
+
+Which gives me the error:NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: Function failed: liblockdev: LIC_FILES_CHKSUM points to an 
+invalid file: 
+/home/jack/Projects/poky-rasp/raspberry/tmp/work/armv6-vfp-poky-linux-gnueabi/liblockdev-1.0.3-r1.4/liblockdev-1.0.3/LICENSE
+ERROR: Logfile of failure stored in: 
+/home/jack/Projects/poky-rasp/raspberry/tmp/work/armv6-vfp-poky-linux-gnueabi/liblockdev-1.0.3-r1.4/temp/log.do_configure.29246
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: Executing shell function do_configure
+| DEBUG: Shell function do_configure finished
+| DEBUG: Executing python function do_qa_configure
+| NOTE: Checking autotools environment for common misconfiguration
+| DEBUG: Python function do_qa_configure finished
+| ERROR: Function failed: liblockdev: LIC_FILES_CHKSUM points to an 
+invalid file: 
+/home/jack/Projects/poky-rasp/raspberry/tmp/work/armv6-vfp-poky-linux-gnueabi/liblockdev-1.0.3-r1.4/liblockdev-1.0.3/LICENSE
+ERROR: Task 5 
+(/home/jack/Projects/poky-rasp/meta-oe/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb, 
+do_configure) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 798 tasks of which 797 didn't need to be 
+rerun and 1 failed.
+
+Summary: 1 task failed:
+/home/jack/Projects/poky-rasp/meta-oe/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb, 
+do_configure
+Summary: There was 1 WARNING message shown.
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+When I enter a devshell, the LICENSE file is there but in the directory 
+../liblockdev-1.0.3 not the directory I am dropped in. Where am I going 
+wrong?
+
+[jack@archHP liblockdev-1.0.3]$ pwd
+
+/home/jack/Projects/poky-rasp/raspberry/tmp/work/armv6-vfp-poky-linux-gnueabi/liblockdev-1.0.3-r1.4/liblockdev-1.0.3
+
+[jack@archHP liblockdev-1.0.3]$ cd ..
+
+[jack@archHP liblockdev-1.0.3-r1.4]$ tree
+.
+|-- liblockdev-1.0.3
+|   |-- debian
+|   |   |-- NEWS
+|   |   |-- changelog
+|   |   |-- compat
+|   |   |-- control
+|   |   |-- copyright
+|   |   |-- liblockdev1-dbg.dirs
+|   |   |-- liblockdev1-dbg.docs
+|   |   |-- liblockdev1-dev.dirs
+|   |   |-- liblockdev1-dev.manpages
+|   |   |-- liblockdev1-perl.dirs
+|   |   |-- liblockdev1.postinst
+|   |   `-- rules
+|   `-- patches
+|       |-- lockdev_1.0.3-1.4.patch -> 
+/home/jack/Projects/poky-rasp/meta-oe/meta-oe/recipes-extended/liblockdev/files/lockdev_1.0.3-1.4.patch
+|       `-- series
+|-- license-destdir
+|   `-- liblockdev
+|       `-- generic_LGPLv2.1
+|-- lockdev-1.0.3
+|   |-- AUTHORS
+|   |-- ChangeLog
+|   |-- ChangeLog.old
+|   |-- LICENSE
+|   |-- LockDev
+|   |   |-- Changes
+|   |   |-- LockDev.pm
+|   |   |-- LockDev.xs
+|   |   |-- MANIFEST
+|   |   |-- Makefile.PL
+|   |   |-- test.pl
+|   |   `-- typemap
+|   |-- Makefile
+|   |-- README.debug
+|   |-- Rules.mk
+|   |-- debian
+|   |   `-- foo
+|   |-- docs
+|   |   |-- LSB.991201
+|   |   `-- lockdev.3
+|   `-- src
+|       |-- lockdev.c
+|       |-- lockdev.h
+|       |-- sample.c
+|       `-- ttylock.h
+|-- lockdev_1.0.3-1.4.patch
+`-- temp
+     |-- log.do_configure -> log.do_configure.29246
+     |-- log.do_configure.29088
+     |-- log.do_configure.29246
+     |-- log.do_devshell -> log.do_devshell.29318
+     |-- log.do_devshell.29150
+     |-- log.do_devshell.29318
+     |-- log.do_fetch -> log.do_fetch.29023
+     |-- log.do_fetch.29023
+     |-- log.do_patch -> log.do_patch.29028
+     |-- log.do_patch.29028
+     |-- log.do_populate_lic_setscene -> log.do_populate_lic_setscene.29015
+     |-- log.do_populate_lic_setscene.29015
+     |-- log.do_unpack -> log.do_unpack.29024
+     |-- log.do_unpack.29024
+     |-- log.task_order
+     |-- run.base_do_fetch.29023
+     |-- run.base_do_patch.29028
+     |-- run.base_do_unpack.29024
+     |-- run.do_configure.29088
+     |-- run.do_configure.29246
+     |-- run.do_devshell.29150
+     |-- run.do_devshell.29318
+     |-- run.do_fetch.29023
+     |-- run.do_patch.29028
+     |-- run.do_populate_lic_setscene.29015
+     |-- run.do_qa_configure.29088
+     |-- run.do_qa_configure.29246
+     |-- run.do_unpack.29024
+     |-- run.patch_do_patch.29028
+     |-- run.sstate_unpack_package.29015
+     |-- run.sysroot_cleansstate.29088
+     `-- run.sysroot_cleansstate.29246
+
+11 directories, 69 files
+[jack@archHP liblockdev-1.0.3-r1.4]$
+
+
+Thanks for any help in advance!
+
+Regards,
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
 
