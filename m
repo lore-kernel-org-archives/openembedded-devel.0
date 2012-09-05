@@ -1,28 +1,34 @@
-Received: from outrightsolutions.nl ([194.145.201.26]
-	helo=mail.outrightsolutions.nl)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sander@outrightsolutions.nl>) id 1T9Fxj-0006Qo-UY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Sep 2012 15:48:11 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.outrightsolutions.nl (Postfix) with ESMTP id 2296E5BC388;
-	Wed,  5 Sep 2012 15:35:51 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at outrightsolutions.nl
-Received: from mail.outrightsolutions.nl ([127.0.0.1])
-	by localhost (hydrogen.outrightsolutions.nl [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id yq7zFLO-+QqE; Wed,  5 Sep 2012 15:35:50 +0200 (CEST)
-Received: from haze.lan (unknown [IPv6:2a02:2308::1ab:f800:2])
-	by mail.outrightsolutions.nl (Postfix) with ESMTPSA id 453025BC332;
-	Wed,  5 Sep 2012 15:35:50 +0200 (CEST)
-From: Sander van Grieken <sander@outrightsolutions.nl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9G66-0006gh-BU for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 15:56:50 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9FuB-0005eF-6b for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Sep 2012 15:44:31 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Sep 2012 15:44:31 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Sep 2012 15:44:31 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2012 15:35:08 +0200
-Message-Id: <1346852108-16462-2-git-send-email-sander@outrightsolutions.nl>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1346852108-16462-1-git-send-email-sander@outrightsolutions.nl>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 05 Sep 2012 15:44:28 +0200
+Message-ID: <k27kvd$e10$1@ger.gmane.org>
 References: <1346852108-16462-1-git-send-email-sander@outrightsolutions.nl>
-Subject: [meta-oe][PATCH 2/2] ifuse: add recipe to expose files on Apple devices via fuse
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1346852108-16462-1-git-send-email-sander@outrightsolutions.nl>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-oe][PATCH 1/2] libimobiledevice: add recipe for Apple products protocol support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2012 13:48:12 -0000
+X-List-Received-Date: Wed, 05 Sep 2012 13:56:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
----
- meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb |   16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb b/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
+Op 05-09-12 15:35, Sander van Grieken schreef:
+> Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl> --- 
+> .../libimobiledevice/libimobiledevice_1.1.4.bb     |   22
+> ++++++++++++++++++++ 1 file changed, 22 insertions(+) create mode 100644
+> meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+> 
+> diff --git
+> a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+> b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+>
+> 
 new file mode 100644
-index 0000000..07131d6
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
-@@ -0,0 +1,16 @@
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6ab17b41640564434dda85c06b7124f7"
-+HOMEPAGE ="http://www.libimobiledevice.org/"
-+
-+DEPENDS = "fuse libimobiledevice"
-+
-+PR = "r0"
-+
-+SRC_URI = " \
-+    http://www.libimobiledevice.org/downloads/ifuse-${PV}.tar.bz2 \
-+    "
-+
-+SRC_URI[md5sum] = "4152526b2ac3c505cb41797d997be14d"
-+SRC_URI[sha256sum] = "47835c8afb72588b3202fe0b206d7ea37a68663d9aa4eaf73f0a4bcb6215fc05"
-+
-+inherit autotools pkgconfig
--- 
-1.7.9.5
+> index 0000000..a4ebeab --- /dev/null +++
+> b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+>
+> 
+@@ -0,0 +1,22 @@
+> +LICENSE = "GPLv2 & LGPLv2.1" +LIC_FILES_CHKSUM = "\ +
+> file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \ +
+> file://COPYING.LESSER;md5=6ab17b41640564434dda85c06b7124f7 \ +    " + 
+> +HOMEPAGE ="http://www.libimobiledevice.org/" + +DEPENDS = "libplist
+> usbmuxd libtasn1 gnutls libgcrypt" + +PR = "r0"
+
+Default, drop that
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQR1c8MkyGM64RGpERAhWWAJ0dsNi3Z8i4/NMhyefM0SaLiKn9ggCgugwU
+N/t44VZZoKGrAwCkxGP8kls=
+=clsZ
+-----END PGP SIGNATURE-----
 
 
 
