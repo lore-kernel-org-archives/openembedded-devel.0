@@ -1,25 +1,37 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1T9XfU-0001d8-8q
+	(envelope-from <andrei@gherzan.ro>) id 1T9Xmt-0001lu-RV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 10:42:32 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 06 Sep 2012 01:30:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,377,1344236400"; d="scan'208";a="218478395"
-Received: from unknown (HELO helios.localnet) ([10.252.121.173])
-	by fmsmga002.fm.intel.com with ESMTP; 06 Sep 2012 01:30:06 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jack Mitchell <ml@communistcode.co.uk>
-Date: Thu, 06 Sep 2012 09:30:05 +0100
-Message-ID: <1477981.pb89MerWOV@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9 (Linux/3.2.0-30-generic-pae; KDE/4.9.0; i686; ; )
+	Thu, 06 Sep 2012 10:50:12 +0200
+Received: by iebc11 with SMTP id c11so2676124ieb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Sep 2012 01:37:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=76h8EIOGehw1Tr+V0l8TAcAZig8mwuj1/wPK7VRek1c=;
+	b=NTX7APWArege4jtor4bffrN5Uq9Zuz3vFJidRl7xtSgONXhcIFWmNX/r7oF092W8I8
+	LwdqoEGssUOHX8IF6SzJ9l3H3dk22/mAOwA2tWhsKarax20IAAytXwYW6je6p4Wa/Y/I
+	dktHPsTygQrhsW0Bs0rCVZVJSNkfEkGv+pAdvrHUL2wp0y6w0irDpTs51SaTjLS39oS+
+	jzU2RbwxeOvFnJoXU/FO/wUEMAVbd4Lvg/k0ZjiLlJ5IowPtk/+DCNuAyiKTn8CUICPV
+	zNt+lw/h2oSgPhZ2DhPAobc4JjMWWCKhmI/cD2Zu6h4OHx09xJHmuAt1sKpPF1rY8XOl
+	xt4g==
+Received: by 10.42.39.197 with SMTP id i5mr1270840ice.27.1346920667020; Thu,
+	06 Sep 2012 01:37:47 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.64.129.232 with HTTP; Thu, 6 Sep 2012 01:37:26 -0700 (PDT)
+X-Originating-IP: [89.121.200.106]
 In-Reply-To: <50485B04.4030002@communistcode.co.uk>
 References: <1346853750-503-1-git-send-email-ml@communistcode.co.uk>
+	<4375690.RKMBt9Sfd5@helios> <20120905192818.GR3372@jama.jama.net>
 	<1718555.hFmUFu8O5x@helios> <50485B04.4030002@communistcode.co.uk>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Thu, 6 Sep 2012 11:37:26 +0300
+Message-ID: <CAK18fxG+1gL2q4DL=3=wBQhyga70fONp-7uNhPiutqAUTMCMXg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnCNaY6nRH63VjML69qs9A57uuT9X+r+qzjzey+l3t3tzej+njhVfLtOMvxRZHmyQeKgwyx
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH 3/3] libcec: update libcec to latest version (1.8.2) as to include RasPi support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,42 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 08:42:32 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 06 Sep 2012 08:50:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 06 September 2012 09:12:52 Jack Mitchell wrote:
+On Thu, Sep 6, 2012 at 11:12 AM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+
 > On 05/09/12 22:32, Paul Eggleton wrote:
-> > On Wednesday 05 September 2012 21:28:18 Martin Jansa wrote:
-> >> On Wed, Sep 05, 2012 at 03:16:10PM +0100, Paul Eggleton wrote:
-> >>> It's not totally clear but it doesn't look like 1.8.2 has been released
-> >>> yet judging from their website; if that's the case then PV should be set
-> >>> to "1.8.1+git${SRCPV}".
-> >> 
-> >> Or rather
-> >> "1.8.1+gitr${SRCPV}"
-> >> like most meta-* recipes
-> > 
-> > This was discussed not that long ago IIRC - the r is superfluous for git.
-> > In fact if you look at most OE-Core recipes that use SRCPV they do not
-> > precede it with r.
-> > 
-> > Cheers,
-> > Paul
-> 
+>
+>> On Wednesday 05 September 2012 21:28:18 Martin Jansa wrote:
+>>
+>>> On Wed, Sep 05, 2012 at 03:16:10PM +0100, Paul Eggleton wrote:
+>>>
+>>>> It's not totally clear but it doesn't look like 1.8.2 has been released
+>>>> yet judging from their website; if that's the case then PV should be set
+>>>> to "1.8.1+git${SRCPV}".
+>>>>
+>>> Or rather
+>>> "1.8.1+gitr${SRCPV}"
+>>> like most meta-* recipes
+>>>
+>> This was discussed not that long ago IIRC - the r is superfluous for git.
+>> In
+>> fact if you look at most OE-Core recipes that use SRCPV they do not
+>> precede it
+>> with r.
+>>
+>> Cheers,
+>> Paul
+>>
+>>
 > So even though it is the 1.8.1 release commit it should still be tagged
 > with the git SRCPV?
+>
+>
+No. The SRCPV should be there to indicate that your version is something in
+between 2 official versions. In your case as there is not
+1.8.2 officially you state that this package is 1.8.1 but at a
+later SRCPV commit.
 
-Well, I don't personally think so - if it really is 1.8.1 (and it's pointing 
-at the same revision as the "1.8.1" tag, so it ought to be) then I don't think 
-it should be needed.
+You need v1.8.2? There is no rpi support in 1.8.1? Why don't you update to
+that version?
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Andrei
 
