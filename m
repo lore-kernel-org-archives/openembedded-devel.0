@@ -1,37 +1,40 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1T9aNJ-0002Pq-Ln
+	(envelope-from <koen@dominion.thruhere.net>) id 1T9aNL-0002Pu-6f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:35:57 +0200
-Received: by wibhn17 with SMTP id hn17so1115105wib.6
+	Thu, 06 Sep 2012 13:35:59 +0200
+Received: by wibhq4 with SMTP id hq4so5499674wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2012 04:23:33 -0700 (PDT)
+	Thu, 06 Sep 2012 04:23:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=8NPO9YN682qBmwD/TL+LY4yUJ/08jlZLyvgQLwgLQO4=;
-	b=btmbw+5oq/dXNzYivh6m52o/Tu02K/3+5Sct4GYzeC3/aPiAREu5phk1Ary3R302BV
-	Ni76Ob/bYs1Uj3UYQkQXouO//81Z99EI9ZjbdmMmOoVbVZ6+RYdRm+QZnZONCNJVNRlz
-	75F/cpkfBCY8I+01E59BjQL8cIxKjdRZaJq2eejoWW5g2ndm/LmFwmC8bDZ1njyQmee1
-	aRqwnP8Z41S6qINPnKD9jJ93TeuI4XHiVrDQDDqNNIcHnsgNCYIYn+5LuCh9TneJXqlB
-	wVUQqiXD7t9yZM2LLiOzIOwMVTTYR9l4LKYhKNQqKG/iwQWD6FeJmq1hlVzK9wtHLq5i
-	0eqQ==
-Received: by 10.180.77.34 with SMTP id p2mr45179264wiw.0.1346930613533;
-	Thu, 06 Sep 2012 04:23:33 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=NFxdjq7x65xGN2ep7EO4Eu2fnoFLu5b8kAm83jkJA/k=;
+	b=NEKtCuljIeZYs2Bgu0/lVeza59xYs7fVkj6CZl9J5mJqY6B7d8BTwJlCarna/hckGc
+	TlKM87wBHL0RyFRMKpYLXnmVcuBi4pREXxz0l5CYGMktpENGaHyLmRdydB67UbvsrZ+A
+	A+bGXntpuTo0J/yf0NHEZljQD01nkqc9GdWPSwI5GC9ef3ubn5GGjRGaJaGZjg9HR6O5
+	5RVXnYMAn6SU5/4Msc1w3Cr7iTqKJy2fHNiE3FjdaESBikYWyZVxKB7NBSUbGfBNz1Jf
+	Ic+nh8NVHIAfPLN5T6eql1eH8WMZpzNIXBa1eSnSP6gpAiHDvaXcSC/hrQF9LDAajEee
+	fmyg==
+Received: by 10.180.97.106 with SMTP id dz10mr4169383wib.21.1346930615195;
+	Thu, 06 Sep 2012 04:23:35 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id hv8sm3682950wib.0.2012.09.06.04.23.31
+	by mx.google.com with ESMTPS id hv8sm3682950wib.0.2012.09.06.04.23.33
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 06 Sep 2012 04:23:32 -0700 (PDT)
+	Thu, 06 Sep 2012 04:23:34 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2012 13:23:23 +0200
-Message-Id: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+Date: Thu,  6 Sep 2012 13:23:24 +0200
+Message-Id: <1346930610-2977-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.7.6
-X-Gm-Message-State: ALoCoQmLBHYwnnFZmIo02uuFjnWfTj3lNMOTMRrDZHFxQ0Ml3bu6HUuAggd6Y4ZnaXyQxRaZpsC+
+In-Reply-To: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQkMzC28Yqx1F/gGFrwW2Z3ns9J+aYXB4A1KJZxGG3jd9FwQabUvbI1pL6nMtiy9bfrFZS7b
 Cc: Koen Kooi <koen@dominion.thruhere.net>,
 	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
+Subject: [meta-oe][for-denzil][PATCH 2/8] recipes-kernel: make perf a standalone package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 11:35:57 -0000
+X-List-Received-Date: Thu, 06 Sep 2012 11:35:59 -0000
 
-From: Bruce Ashfield <bruce.ashfield@windriver.com>
+From: Liang Li <liang.li@windriver.com>
 
-The kernel source tree in the sysroot has all unecessary source
-code removed. The existing use case is to support module building
-out of the sysroot, but as more toolsa are moved into the kernel
-tree itself there are new use cases for the kernel sysroot source.
+perf has been coupled to the kernel packages via kernel.bbclass.
+While maintaining the build of perf out of the kernel source tree
+is desired the package coupling has proved to be awkward in
+several situations such as:
 
-To avoid putting dependencies on the kernel, and to be able to
-individually build and package these tools out of the source tree,
-we can save $kerndir/tools and $kernddir/lib from being removed.
-This enables tools like perf to be built our of the kernel source
-in the sysroot, without significantly increasing the amount of
-source in the sysroot.
+  - when a kernel recipe doesn't want to build/provide perf
+  - when licensing of dependencies would prohibit perf and hence
+    the kernel from being built.
 
+To solve some of these problems, this recipe is the extraction of
+the linux-tools.inc provided perf compilation into a standalone
+perf recipe that builds out of the kernel source, but is otherwise
+independent.
+
+No new functionality is provided above what the linux-tools.inc
+variant provided, but the separate recipe provides baseline for
+adding new functionality.
+
+Signed-off-by: Liang Li <liang.li@windriver.com>
 Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/classes/kernel.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ meta-oe/classes/kernel.bbclass |    7 +------
+ 1 files changed, 1 insertions(+), 6 deletions(-)
 
 diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index ce82351..c44a2f5 100644
+index c44a2f5..6f1b6a4 100644
 --- a/meta-oe/classes/kernel.bbclass
 +++ b/meta-oe/classes/kernel.bbclass
-@@ -178,7 +178,7 @@ kernel_do_install() {
- 	#
- 	oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
- 	make -C $kerneldir _mrproper_scripts
--	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
-+	find $kerneldir -path $kerneldir/lib -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
- 	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
+@@ -475,7 +475,7 @@ python populate_packages_prepend () {
+ 	metapkg = "kernel-modules"
+ 	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+ 	d.setVar('FILES_' + metapkg, "")
+-	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
++	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'kernel-misc' ]
+ 	for l in module_deps.values():
+ 		for i in l:
+ 			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
+@@ -553,8 +553,3 @@ addtask deploy before do_build after do_install
  
- 	# As of Linux kernel version 3.0.1, the clean target removes
+ EXPORT_FUNCTIONS do_deploy
+ 
+-# perf must be enabled in individual kernel recipes
+-PACKAGES =+ "perf-dbg perf"
+-FILES_perf = "${bindir}/* \
+-              ${libexecdir}"
+-FILES_perf-dbg = "${FILES_${PN}-dbg}"
 -- 
 1.7.7.6
 
