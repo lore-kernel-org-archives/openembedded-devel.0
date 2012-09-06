@@ -1,26 +1,39 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1T9e1G-0004KQ-Am
+	(envelope-from <ml@communistcode.co.uk>) id 1T9e2d-0004QJ-QY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 17:29:26 +0200
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1T9dpI-0005Xm-2e
+	Thu, 06 Sep 2012 17:30:51 +0200
+Received: from localhost ([127.0.0.1]:54794 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9dqd-0002tI-87
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 17:17:04 +0200
-From: Phil Blundell <philb@gnu.org>
+	Thu, 06 Sep 2012 15:18:27 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=h3vH2gw2qcw8ZZgPNWP/4nAxVQA=; b=AVAk/8C7qK8zmyAE/haMewMMs1jq
+	pZPDAy50YA1xuTqZ4PXTezrY5I1FFGXXClA6qkxmFF2Xe4jwKb26KKeMb5v+ZqYl
+	0g5QvAqkZDkAoJ6tEAxn+nb3qE5V1wVPRKmMKZBiixWG3n2t6qdsBCjgP7AsUKMJ
+	zxiPo+gROFiYick=
+Received: from [195.171.99.130] (port=57263 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9dqd-0002tF-37
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 15:18:27 +0000
+Message-ID: <5048BF04.2000904@communistcode.co.uk>
+Date: Thu, 06 Sep 2012 16:19:32 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 06 Sep 2012 16:16:58 +0100
-In-Reply-To: <5048BE25.2070004@communistcode.co.uk>
 References: <5048B901.3060103@communistcode.co.uk>
 	<1346943545.2673.198.camel@phil-desktop>
 	<5048BC6D.8080904@communistcode.co.uk>
 	<1346944157.2673.199.camel@phil-desktop>
 	<5048BE25.2070004@communistcode.co.uk>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1346944624.2673.200.camel@phil-desktop>
-Mime-Version: 1.0
+	<1346944624.2673.200.camel@phil-desktop>
+In-Reply-To: <1346944624.2673.200.camel@phil-desktop>
 Subject: Re: Issues building tinyXML
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,28 +48,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 15:29:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Sep 2012 15:30:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2012-09-06 at 16:15 +0100, Jack Mitchell wrote:
-> On 06/09/12 16:09, Phil Blundell wrote:
-> > On Thu, 2012-09-06 at 16:08 +0100, Jack Mitchell wrote:
-> >> So, would the best way to fix it be something like:
-> >>
-> >> do_compile() {
-> >>       run_oemake LD="${CCLD}"
-> >> }
-> > Yes, probably.  Or I guess you can just do:
-> >
-> > LD = "${CCLD}"
-> >
-> > somewhere else in your .bb file.
+On 06/09/12 16:16, Phil Blundell wrote:
+> On Thu, 2012-09-06 at 16:15 +0100, Jack Mitchell wrote:
+>> On 06/09/12 16:09, Phil Blundell wrote:
+>>> On Thu, 2012-09-06 at 16:08 +0100, Jack Mitchell wrote:
+>>>> So, would the best way to fix it be something like:
+>>>>
+>>>> do_compile() {
+>>>>        run_oemake LD="${CCLD}"
+>>>> }
+>>> Yes, probably.  Or I guess you can just do:
+>>>
+>>> LD = "${CCLD}"
+>>>
+>>> somewhere else in your .bb file.
+> Oh, right.  It's a C++ program so what you actually need is LD="${CXX}".
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Oh, right.  It's a C++ program so what you actually need is LD="${CXX}".
+Perfect, I had CC=${CXX} so I was almost there!! : P
 
-p.
+Thanks for the help!
 
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
 
