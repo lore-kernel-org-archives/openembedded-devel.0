@@ -1,20 +1,35 @@
-Received: from [78.110.170.148] (helo=tinyArch.localdomain)
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9aYE-0003Dy-3O
+	(envelope-from <ml@communistcode.co.uk>) id 1T9aa6-0003Of-DA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:47:14 +0200
-Received: from archHP.dbnet.local (unknown [195.171.99.130])
-	by tinyArch.localdomain (Postfix) with ESMTPSA id CDD6C4840E;
-	Thu,  6 Sep 2012 09:01:45 +0100 (BST)
-From: ml@communistcode.co.uk
+	Thu, 06 Sep 2012 13:49:10 +0200
+Received: from localhost ([127.0.0.1]:46750 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9aO6-0003MR-B2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 11:36:46 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=6JwzxffVO7DIWJkGDaCexnTXnJI=; b=j+f2Q/6gxIHcVd/mYq+v2X2eh+/7
+	MkpGs6SPSHYieJgxwC6pMfPBlAEivfTNw+EpQl/F/+04FhIqGGq0yD1YXKdnqyId
+	ml7A3ph09L4KxYq1mQLXYt42RIhrTkpwuv3C9EU3QjUEZ1tIqAJwiS061KZAOaoi
+	ahj30+xyusr5j/Q=
+Received: from [195.171.99.130] (port=10373 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9aO6-0003MK-8z
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 11:36:46 +0000
+Message-ID: <50488B0F.30407@communistcode.co.uk>
+Date: Thu, 06 Sep 2012 12:37:51 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2012 12:35:47 +0100
-Message-Id: <1346931347-8672-2-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.7.12
-In-Reply-To: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
 References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [PATCHv5][meta-oe 2/2] libcec: update libcec to latest version (1.8.1) as to include RasPi support
+In-Reply-To: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
+Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,50 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 11:47:14 -0000
+X-List-Received-Date: Thu, 06 Sep 2012 11:49:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+On 06/09/12 12:35, ml@communistcode.co.uk wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>
+> V5
+>
+> - FILES_{PN} no loger required now libdir and includedir are passed to
+> oe_runmake
+>
+> V4
+>
+> - Remove debian packaging patch, it is not needed
+>
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>   .../recipes-extended/liblockdev/liblockdev_1.0.3.bb  | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
+>   create mode 100644 meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
+>
+> diff --git a/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb b/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
+> new file mode 100644
+> index 0000000..210a47b
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
+> @@ -0,0 +1,20 @@
+> +DESCRIPTION = "Manage character and block device lockfiles."
+> +HOMEPAGE = "http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary"
+> +
+> +LICENSE = "LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+> +
+> +SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_${PV}.orig.tar.gz"
+> +
+> +SRC_URI[md5sum] = "64b9c1b87b125fc348e892e24625524a"
+> +SRC_URI[sha256sum] = "ccae635d7ac3fdd50897eceb250872b3d9a191d298f213e7f0c836910d869f82"
+> +
+> +S = "${WORKDIR}/lockdev-${PV}"
+> +
+> +do_compile() {
+> +  oe_runmake CC="${CC}" LD="${LD}" shared
+> +}
+> +
+> +do_install() {
+> +  oe_runmake basedir="${D}" incdir="${D}${includedir}" libdir="${D}${libdir}" install_dev
+> +}
+Sorry Koen,
 
-V2
+I messed up the meta-oe bit but patchwork seems to have caught it anyway!
 
-- Change package version to 1.8.1
+Cheers,
 
-V1
-
-- Now depends on liblockdev
-- Slight licence change - new md5sum
-
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
- meta-oe/recipes-extended/libcec/libcec_git.bb | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
-index 142b2e2..81b518a 100644
---- a/meta-oe/recipes-extended/libcec/libcec_git.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
-@@ -1,14 +1,13 @@
- DESCRIPTION = "USB CEC Adaptor communication Library"
- HOMEPAGE = "http://libcec.pulse-eight.com/"
- 
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=185ead350fec5fc223da0f65f9a802af"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
- 
--DEPENDS = "udev"
-+DEPENDS = "udev liblockdev"
- 
--PR = "r1"
--PV = "1.4.0"
--SRCREV = "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
-+PV = "1.8.1"
-+SRCREV = "34a9cecdd92f6b2844f9c4054da202b152ab2217"
- SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
- 
- S = "${WORKDIR}/git"
 -- 
-1.7.12
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
 
