@@ -1,35 +1,34 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9aa6-0003Of-DA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:49:10 +0200
-Received: from localhost ([127.0.0.1]:46750 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9aO6-0003MR-B2
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 11:36:46 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding; s=default;
-	bh=6JwzxffVO7DIWJkGDaCexnTXnJI=; b=j+f2Q/6gxIHcVd/mYq+v2X2eh+/7
-	MkpGs6SPSHYieJgxwC6pMfPBlAEivfTNw+EpQl/F/+04FhIqGGq0yD1YXKdnqyId
-	ml7A3ph09L4KxYq1mQLXYt42RIhrTkpwuv3C9EU3QjUEZ1tIqAJwiS061KZAOaoi
-	ahj30+xyusr5j/Q=
-Received: from [195.171.99.130] (port=10373 helo=[192.168.0.33])
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9aO6-0003MK-8z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 11:36:46 +0000
-Message-ID: <50488B0F.30407@communistcode.co.uk>
-Date: Thu, 06 Sep 2012 12:37:51 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120828 Thunderbird/15.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9afI-0003Wt-Lj for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 13:54:33 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1T9aTK-0008B3-Pf for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 13:42:10 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Sep 2012 13:42:10 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Sep 2012 13:42:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
-In-Reply-To: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
-Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 06 Sep 2012 13:41:57 +0200
+Message-ID: <k2a264$d2a$1@ger.gmane.org>
+References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,67 +42,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 11:49:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 06 Sep 2012 11:54:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 06/09/12 12:35, ml@communistcode.co.uk wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->
-> V5
->
-> - FILES_{PN} no loger required now libdir and includedir are passed to
-> oe_runmake
->
-> V4
->
-> - Remove debian packaging patch, it is not needed
->
-> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> ---
->   .../recipes-extended/liblockdev/liblockdev_1.0.3.bb  | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
->   create mode 100644 meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
->
-> diff --git a/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb b/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
-> new file mode 100644
-> index 0000000..210a47b
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
-> @@ -0,0 +1,20 @@
-> +DESCRIPTION = "Manage character and block device lockfiles."
-> +HOMEPAGE = "http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary"
-> +
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d8045f3b8f929c1cb29a1e3fd737b499"
-> +
-> +SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_${PV}.orig.tar.gz"
-> +
-> +SRC_URI[md5sum] = "64b9c1b87b125fc348e892e24625524a"
-> +SRC_URI[sha256sum] = "ccae635d7ac3fdd50897eceb250872b3d9a191d298f213e7f0c836910d869f82"
-> +
-> +S = "${WORKDIR}/lockdev-${PV}"
-> +
-> +do_compile() {
-> +  oe_runmake CC="${CC}" LD="${LD}" shared
-> +}
-> +
-> +do_install() {
-> +  oe_runmake basedir="${D}" incdir="${D}${includedir}" libdir="${D}${libdir}" install_dev
-> +}
-Sorry Koen,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I messed up the meta-oe bit but patchwork seems to have caught it anyway!
+One day I will figure out how to write a cover letter :)
 
-Cheers,
+The matching OE-core patchset is in denzil-next for testing and will
+hopefully get merged soon (provided it passes the testsuite).
 
--- 
+My main objective is to support on-target builds of external kernel-modules
+and initial reports are that it is working as expected.
 
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
+Since there's a bitbake.conf change needed the matching oe-core set needs to
+go in first and ideally this goes in right after that (provided this passes
+the testsuite as well).
 
---
+As you can imagine, this kind of inter-layer dependency sucks, but I don't
+see a way around it in this case with the bitbake.conf change.
+
+Op 06-09-12 13:23, Koen Kooi schreef:
+> From: Bruce Ashfield <bruce.ashfield@windriver.com>
+> 
+> The kernel source tree in the sysroot has all unecessary source code
+> removed. The existing use case is to support module building out of the
+> sysroot, but as more toolsa are moved into the kernel tree itself there
+> are new use cases for the kernel sysroot source.
+> 
+> To avoid putting dependencies on the kernel, and to be able to 
+> individually build and package these tools out of the source tree, we can
+> save $kerndir/tools and $kernddir/lib from being removed. This enables
+> tools like perf to be built our of the kernel source in the sysroot,
+> without significantly increasing the amount of source in the sysroot.
+> 
+> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com> 
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> Signed-off-by: Koen
+> Kooi <koen@dominion.thruhere.net> --- meta-oe/classes/kernel.bbclass |
+> 2 +- 1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/meta-oe/classes/kernel.bbclass
+> b/meta-oe/classes/kernel.bbclass index ce82351..c44a2f5 100644 ---
+> a/meta-oe/classes/kernel.bbclass +++ b/meta-oe/classes/kernel.bbclass @@
+> -178,7 +178,7 @@ kernel_do_install() { # oe_runmake -C $kerneldir
+> CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean make -C $kerneldir
+> _mrproper_scripts -	find $kerneldir -path $kerneldir/scripts -prune -o
+> -name "*.[csS]" -exec rm '{}' \; +	find $kerneldir -path $kerneldir/lib
+> -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts
+> -prune -o -name "*.[csS]" -exec rm '{}' \; find $kerneldir/Documentation
+> -name "*.txt" -exec rm '{}' \;
+> 
+> # As of Linux kernel version 3.0.1, the clean target removes
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQSIwFMkyGM64RGpERAjCgAJ9PFqqoYUsY+deeN9gVy89hod+TqACeJFO3
+hJ8tR0ZLZeookvwClEGnpD8=
+=CRRt
+-----END PGP SIGNATURE-----
 
 
 
