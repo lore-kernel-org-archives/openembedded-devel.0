@@ -1,48 +1,35 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1T9iFJ-0004sd-Ie
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 22:00:13 +0200
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 06 Sep 2012 12:47:47 -0700
-Received: by obblz20 with SMTP id lz20so3453148obb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2012 12:47:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=1ZqB7L8p8tmqB4cYMyMW9aheyOHc7MZFMJ3tY4JfD58=;
-	b=P3YDX5KsDRmp30OEG/RS/hj7xbFkcKEHv9zJ0KdRwjtowZUdObUbkK3zC1ttcaDHcO
-	UndtT+8valVHF7/iP5ra+5a3Yk46az+U0EDz09YJvIUYo26WZUG3xEhIvmIxxqPlKcaI
-	2yvWl0r8QMHDXgoEBDH92ry0VWjKUN5mczN9zPA3VBQNS1NPNCM7xr9jYrgN09LUV4D9
-	70FS+9TQvUDWO8J6u/nWv4BJ1D1Ngpwb6LhQDnVR6rcCQsgzD1u/eKmF5X6DjEp3Dlvz
-	3QIdGQqEcpShvG+dT3lW9Ao7sSVTEe4dlP/j6M9EUU5gUbugZpOR/aSJqQRSItUNRMk5
-	ijkQ==
-Received: by 10.60.171.174 with SMTP id av14mr3675237oec.61.1346960866894;
-	Thu, 06 Sep 2012 12:47:46 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.182.79.105 with HTTP; Thu, 6 Sep 2012 12:47:26 -0700 (PDT)
-In-Reply-To: <1346949867.2673.204.camel@phil-desktop>
-References: <5048B901.3060103@communistcode.co.uk>
-	<1346943545.2673.198.camel@phil-desktop>
-	<5048BC6D.8080904@communistcode.co.uk>
-	<1346944157.2673.199.camel@phil-desktop>
-	<5048BE25.2070004@communistcode.co.uk>
-	<1346944624.2673.200.camel@phil-desktop>
-	<5048BF04.2000904@communistcode.co.uk>
-	<5048C7D5.70301@communistcode.co.uk>
-	<1346947708.2673.201.camel@phil-desktop>
-	<5048CC32.30705@communistcode.co.uk>
-	<1346948364.2673.203.camel@phil-desktop>
-	<5048D11C.9050108@communistcode.co.uk>
-	<1346949867.2673.204.camel@phil-desktop>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 6 Sep 2012 20:47:26 +0100
-Message-ID: <CAJTo0La26CyvfEmmwWHfJZVNtZ-DxkFejv9tvScqYwb-3n0bzA@mail.gmail.com>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1T9lpc-0005Ji-M1; Fri, 07 Sep 2012 01:49:56 +0200
+Received: by wibhq4 with SMTP id hq4so6208604wib.6
+	for <multiple recipients>; Thu, 06 Sep 2012 16:37:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=r678nnjgtusrukQHvcYKc/RslqIcMK5hedw/69/wJ6w=;
+	b=rFz4U1zOhwTO4ThkN9gg1DseJLhqHHkFat7/FHPRCdOiJPU2/BsjMQhFMM5cDn1uJL
+	XRtchp4E/QPY33ReA2VWjhTydArlwx2iaz6pNkZFXO8/+xTBqh38VL0WZm8IjN4AgOTT
+	zE1YUarxKZqJBf/xtzwUzAz0o40luVNDLrdbMYQ4ah1iYosvPhL2A6gJ8AVLQ0J/Zpo7
+	WvwwWX/oH9fxOnOSkIODfWqHwEbnsezJ+0pdWob0n5yPSAxid8vJ/JawL5QlsF12/Wc0
+	yqrpv4lgKzrKK29q+DtpkFK/7RCMDU3Y3WGkHbGN75M4nZZsaH/dJFR+elrvNWLnfVX4
+	Ycew==
+Received: by 10.216.243.74 with SMTP id j52mr1926519wer.108.1346974651950;
+	Thu, 06 Sep 2012 16:37:31 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id l6sm6636366wiz.4.2012.09.06.16.37.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 06 Sep 2012 16:37:31 -0700 (PDT)
+Date: Fri, 7 Sep 2012 01:38:03 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnb+giYxedRTKRUsU3e69IOJZMiE2KNpK35GSuMdM7Kuj2XRaKS9esqFAMTCQxjVN3FSsQf
-Subject: Re: Issues building tinyXML
+Message-ID: <20120906233803.GC3487@jama.jama.net>
+References: <20120906231235.2BFB3103D3@opal>
+MIME-Version: 1.0
+In-Reply-To: <20120906231235.2BFB3103D3@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Richard Purdie : gcc-cross-initial: Reinstate limits.h generation fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,20 +43,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 20:00:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 06 Sep 2012 23:49:56 -0000
+X-Groupsio-MsgNum: 40552
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aT9PWwzfKXlsBJM1"
+Content-Disposition: inline
 
-On 6 September 2012 17:44, Phil Blundell <philb@gnu.org> wrote:
-> On Thu, 2012-09-06 at 17:36 +0100, Jack Mitchell wrote:
->> One last thing though, should the libtinyxml.so be in the -dbg package?
->
-> No, -dev is correct.
->
-> I think you're still missing -fpic in C(XX)FLAGS.
+--aT9PWwzfKXlsBJM1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-And people wonder why I give disapproving looks at people who say that
-automake is too complex and they prefer to roll their own makefiles...
+On Thu, Sep 06, 2012 at 11:12:35PM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: 71854f5c8c6850ed37777cad21acc92fdbea32fc
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3D71854f5c8c6850ed37777cad21acc92fdbea32fc
+>=20
+> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Date:   Thu Sep  6 16:50:10 2012 +0100
+>=20
+> gcc-cross-initial: Reinstate limits.h generation fix
+>=20
+> The removal of gcc-cross-intermediate inadvertently reintroduced a
+> problem with the limits.h file being incorrectly/inconsistently
+> generated.
+>=20
+> http://git.yoctoproject.org/cgit.cgi/poky/commit/?id=3Db0faebd1f07e161600=
+4bd19664395932e7c2c48f
+> reverted part of:
+> http://git.yoctoproject.org/cgit.cgi/poky/commit/?id=3Dc8815d2f21849deb93=
+59706f54dc71490773415e
+>=20
+> This reintroduces the protected sysroot ensuring the limits.h file is
+> always correctly generated. To reproduce the bug, build gcc-cross, then
+> rebuild gcc-cross-initial and it will reference the limits.h file from
+> gcc-cross in the sysroot.
+>=20
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-Ross
+Not sure if PR bump would help for gcc-cross-initial, but now incremental=
+=20
+build fails with:=20
 
+| Configuring in arm-oe-linux-gnueabi/libgcc
+| configure: loading cache ./config.cache
+| configure: error: `CC' has changed since the previous run:
+| configure:   former value:  ` /OE/build/tmp-eglibc/work/armv7a-vfp-neon-o=
+e-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795=
+349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./g=
+cc/xgcc -B/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/gcc-cr=
+oss-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5dede-r11/gcc-4=
+_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./gcc/ -march=3Darmv7-a -=
+fno-tree-vectorize     -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon =
+-mtune=3Dcortex-a8 -isystem/OE/build/tmp-eglibc/sysroots/tuna/usr/include -=
+B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/bin/ -=
+B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/lib/ -=
+isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi=
+/include -isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-lin=
+ux-gnueabi/sys-include --sysroot=3D/OE/build/tmp-eglibc/sysroots/tuna  '
+| configure:   current value: ` /OE/build/tmp-eglibc/work/armv7a-vfp-neon-o=
+e-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795=
+349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./g=
+cc/xgcc -B/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/gcc-cr=
+oss-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5dede-r11/gcc-4=
+_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./gcc/ -march=3Darmv7-a -=
+fno-tree-vectorize     -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon =
+-mtune=3Dcortex-a8 -isystem/OE/build/tmp-eglibc/sysroots/tuna/usr/include -=
+B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/bin/ -=
+B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/lib/ -=
+isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi=
+/include -isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-lin=
+ux-gnueabi/sys-include --sysroot=3D/OE/build/tmp-eglibc/work/armv7a-vfp-neo=
+n-oe-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838=
+795349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/=
+tmpsysroot  '
+| configure: error: in `/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-=
+gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5=
+dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/arm-oe-linu=
+x-gnueabi/libgcc':
+| configure: error: changes in the environment can compromise the build
+| configure: error: run `make distclean' and/or `rm ./config.cache' and sta=
+rt over
+| make: *** [configure-target-libgcc] Error 1
+| ERROR: oe_runmake failed
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--aT9PWwzfKXlsBJM1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlBJM9sACgkQN1Ujt2V2gBzuSACfeGmdNR92W1cv6GbNVnv0lEQm
+7JsAmwWZgBKxMBsbZY6rURePDj4Qe8Yf
+=KfEH
+-----END PGP SIGNATURE-----
+
+--aT9PWwzfKXlsBJM1--
