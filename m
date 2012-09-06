@@ -1,34 +1,45 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1T9fPd-0006pb-VD
+	(envelope-from <koen@dominion.thruhere.net>) id 1T9fQP-0006ul-4m
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 18:58:41 +0200
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1T9fDf-0005Zo-M6
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 18:46:19 +0200
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 06 Sep 2012 17:46:18 +0100
-In-Reply-To: <5048D11C.9050108@communistcode.co.uk>
-References: <5048B901.3060103@communistcode.co.uk>
-	<1346943545.2673.198.camel@phil-desktop>
-	<5048BC6D.8080904@communistcode.co.uk>
-	<1346944157.2673.199.camel@phil-desktop>
-	<5048BE25.2070004@communistcode.co.uk>
-	<1346944624.2673.200.camel@phil-desktop>
-	<5048BF04.2000904@communistcode.co.uk>
-	<5048C7D5.70301@communistcode.co.uk>
-	<1346947708.2673.201.camel@phil-desktop>
-	<5048CC32.30705@communistcode.co.uk>
-	<1346948364.2673.203.camel@phil-desktop>
-	<5048D11C.9050108@communistcode.co.uk>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1346949979.2673.206.camel@phil-desktop>
-Mime-Version: 1.0
-Subject: Re: Issues building tinyXML
+	Thu, 06 Sep 2012 18:59:29 +0200
+Received: by wgbdr1 with SMTP id dr1so1494886wgb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Sep 2012 09:47:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=WJwDu7EvQrbe8vNFscb8lR/JSoDs8V6sBjTFn+n/dko=;
+	b=Zg9qugFyz9egden1DsAvzlwQjQvqUgQO3OCXpBCO2C48nqX8Zo6cgEGrbJbELT8dt/
+	4OL3AqMq4beAe9CVUqCu2ERau9vt4Lmt+1E/CMGwG7NXF7nDEnZyq3X2l+6KnFWdTgCs
+	WAYqNYbF5IFT4QNBEaux1J8zsmvP88nkrda1zoOmIfjFZx+4U3Ai6/0PREHDDP2EycN0
+	wVVYcnNLh9GPCiSsEWMufEWKibXWgoqTk5+nIcmMbxAjLBOrYY7jjJEk1RNx3Z35489w
+	UcNpUtiFlt0gNXRw5ri2tbGYUFkCDq7DJ9syyJF8nVIJXLEGFXQ3ZZUtgJbmX0OKTAz4
+	WMGw==
+Received: by 10.180.80.134 with SMTP id r6mr6142572wix.1.1346950023885;
+	Thu, 06 Sep 2012 09:47:03 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::4908:ca0a:f01a:394b?
+	([2001:610:612:0:4908:ca0a:f01a:394b])
+	by mx.google.com with ESMTPS id eu4sm4908876wib.2.2012.09.06.09.47.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 06 Sep 2012 09:47:02 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <70CC66F5C30A414DADDA6973E4CA391A657F94@039-SN1MPN1-003.039d.mgd.msft.net>
+Date: Thu, 6 Sep 2012 18:47:01 +0200
+Message-Id: <BE26FFE4-B5E9-4C9C-9398-4A164C12BB88@dominion.thruhere.net>
+References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+	<1346930610-2977-3-git-send-email-koen@dominion.thruhere.net>
+	<70CC66F5C30A414DADDA6973E4CA391A657F94@039-SN1MPN1-003.039d.mgd.msft.net>
+To: McClintock Matthew-B29882 <B29882@freescale.com>
+X-Mailer: Apple Mail (2.1486)
+X-Gm-Message-State: ALoCoQnE64n92X5xcU7Hgc6eH3wQF0wkGXaSpFViM84XVoZh17tJ5f2pzrpoogsMKDsKFQVO7yGp
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	=?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: Re: [meta-oe][for-denzil][PATCH 3/8] kernel: Add kernel headers to kernel-dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +53,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 16:58:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 Sep 2012 16:59:29 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2012-09-06 at 17:36 +0100, Jack Mitchell wrote:
->    install -d -m 0755 ${D}/usr/{lib,include}
 
-That should be ${prefix} not "/usr", otherwise you will lose if the
-distro sets a different prefix (micro does). 
+Op 6 sep. 2012, om 18:43 heeft McClintock Matthew-B29882 =
+<B29882@freescale.com> het volgende geschreven:
 
-> FILES_${PN}-dbg = "/usr/src/debug \
->                     ${libdir}/.debug \
-> "
+> On Thu, Sep 6, 2012 at 6:23 AM, Koen Kooi <koen@dominion.thruhere.net> =
+wrote:
+>> From: Darren Hart <dvhart@linux.intel.com>
+>>=20
+>> [YOCTO #1614]
+>>=20
+>> Add the kernel headers to the kernel-dev package. This packages what =
+was
+>> already built and kept in sysroots for building modules with bitbake.
+>> Making this available on the target requires removing some additional
+>> host binaries.
+>>=20
+>> Move the location to /usr/src/kernel
+>>=20
+>> Before use on the target, the user will need to:
+>>=20
+>>    # cd /usr/src/kernel
+>>    # make scripts
+>>=20
+>> This renders the kernel-misc recipe empty, so remove it.
+>>=20
+>> As we use /usr/src/kernel in several places (and I missed one in the
+>> previous version), add a KERNEL_SRC_DIR variable and use that =
+throughout
+>> the class to avoid update errors in the future.
+>>=20
+>> Now that we package the kernel headers, drop the
+>> kernel_package_preprocess function which removed them from PKGD.
+>>=20
+>> All *-sdk image recipes include dev-pkgs, so the kernel-dev package =
+will
+>> be installed by default on all such images.
+>>=20
+>> Signed-off-by: Darren Hart <dvhart@linux.intel.com>
+>> CC: Bruce Ashfield <bruce.ashfield@windriver.com>
+>> CC: Tom Zanussi <tom.zanussi@intel.com>
+>> CC: Khem Raj <raj.khem@gmail.com>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>=20
+> Why did you resent this? Are there changes or by accident? Just asking
+> before I make a patch for denzil with my previous fix.
 
-Do you need that?  I would have thought the default would work.
-
-p.
-
+This is for the meta-oe kernel.bbclass, not the oe-core one :)=
 
 
