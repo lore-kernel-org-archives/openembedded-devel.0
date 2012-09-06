@@ -1,40 +1,40 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1T9aNL-0002Pu-6f
+	(envelope-from <koen@dominion.thruhere.net>) id 1T9aNM-0002Q6-TK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:35:59 +0200
-Received: by wibhq4 with SMTP id hq4so5499674wib.6
+	Thu, 06 Sep 2012 13:36:01 +0200
+Received: by weyr6 with SMTP id r6so1143176wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2012 04:23:35 -0700 (PDT)
+	Thu, 06 Sep 2012 04:23:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=NFxdjq7x65xGN2ep7EO4Eu2fnoFLu5b8kAm83jkJA/k=;
-	b=NEKtCuljIeZYs2Bgu0/lVeza59xYs7fVkj6CZl9J5mJqY6B7d8BTwJlCarna/hckGc
-	TlKM87wBHL0RyFRMKpYLXnmVcuBi4pREXxz0l5CYGMktpENGaHyLmRdydB67UbvsrZ+A
-	A+bGXntpuTo0J/yf0NHEZljQD01nkqc9GdWPSwI5GC9ef3ubn5GGjRGaJaGZjg9HR6O5
-	5RVXnYMAn6SU5/4Msc1w3Cr7iTqKJy2fHNiE3FjdaESBikYWyZVxKB7NBSUbGfBNz1Jf
-	Ic+nh8NVHIAfPLN5T6eql1eH8WMZpzNIXBa1eSnSP6gpAiHDvaXcSC/hrQF9LDAajEee
-	fmyg==
-Received: by 10.180.97.106 with SMTP id dz10mr4169383wib.21.1346930615195;
-	Thu, 06 Sep 2012 04:23:35 -0700 (PDT)
+	bh=rYxhjw3gjk2JHtMHYH82VFFftgSoP+ENC8BOTrYA8hY=;
+	b=oQ0mxGl61cpVdFGUXnM4hcNdolMKFIswp7cj+Q4VI86BBZsNe2JXsgFu0ZAjG5cZcK
+	C58XejoH3+dxLVlNeThCLuFh8qVkbM/+t9gwYhwzs2z+zXck385rD+INGzMPcnYqv6hl
+	ej3dKIgx+dYeQ65qpK0ayiYiY6VUrbXakcKMaY2KeYbkS4KgRPxBCIuACBxd68FSLJFw
+	0w/Uq1VQMM1teqlMo7eOH2kPRLQKR0rRu2KY4yEChylQELgGJfiMJnV7ii5r9UGPQpdP
+	g00d/xG9kDwW6SsNRUTNW05K88L9+A0ITSBQvucoZEl3SSgAEKG8B8t/TpAgEe4H3hOS
+	puZA==
+Received: by 10.180.74.33 with SMTP id q1mr45141668wiv.4.1346930616809;
+	Thu, 06 Sep 2012 04:23:36 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id hv8sm3682950wib.0.2012.09.06.04.23.33
+	by mx.google.com with ESMTPS id hv8sm3682950wib.0.2012.09.06.04.23.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 06 Sep 2012 04:23:34 -0700 (PDT)
+	Thu, 06 Sep 2012 04:23:35 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2012 13:23:24 +0200
-Message-Id: <1346930610-2977-2-git-send-email-koen@dominion.thruhere.net>
+Date: Thu,  6 Sep 2012 13:23:25 +0200
+Message-Id: <1346930610-2977-3-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.7.6
 In-Reply-To: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
 References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkMzC28Yqx1F/gGFrwW2Z3ns9J+aYXB4A1KJZxGG3jd9FwQabUvbI1pL6nMtiy9bfrFZS7b
+X-Gm-Message-State: ALoCoQny5PN6cgnfFK6o8Fv4E+VblsWuGzmHH1Vn8DDeEjuxXSOnBzUjY0+NrrAJmaR6jxYdSMFJ
 Cc: Koen Kooi <koen@dominion.thruhere.net>,
 	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][for-denzil][PATCH 2/8] recipes-kernel: make perf a standalone package
+Subject: [meta-oe][for-denzil][PATCH 3/8] kernel: Add kernel headers to kernel-dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,59 +48,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 11:35:59 -0000
+X-List-Received-Date: Thu, 06 Sep 2012 11:36:01 -0000
 
-From: Liang Li <liang.li@windriver.com>
+From: Darren Hart <dvhart@linux.intel.com>
 
-perf has been coupled to the kernel packages via kernel.bbclass.
-While maintaining the build of perf out of the kernel source tree
-is desired the package coupling has proved to be awkward in
-several situations such as:
+[YOCTO #1614]
 
-  - when a kernel recipe doesn't want to build/provide perf
-  - when licensing of dependencies would prohibit perf and hence
-    the kernel from being built.
+Add the kernel headers to the kernel-dev package. This packages what was
+already built and kept in sysroots for building modules with bitbake.
+Making this available on the target requires removing some additional
+host binaries.
 
-To solve some of these problems, this recipe is the extraction of
-the linux-tools.inc provided perf compilation into a standalone
-perf recipe that builds out of the kernel source, but is otherwise
-independent.
+Move the location to /usr/src/kernel
 
-No new functionality is provided above what the linux-tools.inc
-variant provided, but the separate recipe provides baseline for
-adding new functionality.
+Before use on the target, the user will need to:
 
-Signed-off-by: Liang Li <liang.li@windriver.com>
-Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+    # cd /usr/src/kernel
+    # make scripts
+
+This renders the kernel-misc recipe empty, so remove it.
+
+As we use /usr/src/kernel in several places (and I missed one in the
+previous version), add a KERNEL_SRC_DIR variable and use that throughout
+the class to avoid update errors in the future.
+
+Now that we package the kernel headers, drop the
+kernel_package_preprocess function which removed them from PKGD.
+
+All *-sdk image recipes include dev-pkgs, so the kernel-dev package will
+be installed by default on all such images.
+
+Signed-off-by: Darren Hart <dvhart@linux.intel.com>
+CC: Bruce Ashfield <bruce.ashfield@windriver.com>
+CC: Tom Zanussi <tom.zanussi@intel.com>
+CC: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/classes/kernel.bbclass |    7 +------
- 1 files changed, 1 insertions(+), 6 deletions(-)
+ meta-oe/classes/kernel.bbclass |   27 ++++++++++++---------------
+ 1 files changed, 12 insertions(+), 15 deletions(-)
 
 diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index c44a2f5..6f1b6a4 100644
+index 6f1b6a4..d7e42f6 100644
 --- a/meta-oe/classes/kernel.bbclass
 +++ b/meta-oe/classes/kernel.bbclass
-@@ -475,7 +475,7 @@ python populate_packages_prepend () {
+@@ -82,6 +82,10 @@ EXTRA_OEMAKE = ""
+ 
+ KERNEL_ALT_IMAGETYPE ??= ""
+ 
++# Define where the kernel headers are installed on the target as well as where
++# they are staged.
++KERNEL_SRC_PATH = "/usr/src/kernel"
++
+ KERNEL_IMAGETYPE_FOR_MAKE = "${@(lambda s: s[:-3] if s[-3:] == ".gz" else s)(d.getVar('KERNEL_IMAGETYPE', True))}"
+ 
+ kernel_do_compile() {
+@@ -135,7 +139,7 @@ kernel_do_install() {
+ 	# Support for external module building - create a minimal copy of the
+ 	# kernel source tree.
+ 	#
+-	kerneldir=${D}/kernel
++	kerneldir=${D}${KERNEL_SRC_PATH}
+ 	install -d $kerneldir
+ 
+ 	#
+@@ -188,23 +192,18 @@ kernel_do_install() {
+ 		cp arch/powerpc/lib/crtsavres.o $kerneldir/arch/powerpc/lib/crtsavres.o
+ 	fi
+ 
+-	# Remove the following binaries which cause strip errors
++	# Remove the following binaries which cause strip or arch QA errors
+ 	# during do_package for cross-compiled platforms
+ 	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
+-	           arch/powerpc/boot/mktree"
++	           arch/powerpc/boot/mktree scripts/kconfig/zconf.tab.o \
++		   scripts/kconfig/conf.o"
+ 	for entry in $bin_files; do
+ 		rm -f $kerneldir/$entry
+ 	done
+ }
+ 
+-PACKAGE_PREPROCESS_FUNCS += "kernel_package_preprocess"
+-
+-kernel_package_preprocess () {
+-	rm -rf ${PKGD}/kernel
+-}
+-
+ sysroot_stage_all_append() {
+-	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}/kernel
++	sysroot_stage_dir ${D}${KERNEL_SRC_PATH} ${SYSROOT_DESTDIR}${KERNEL_SRC_PATH}
+ }
+ 
+ kernel_do_configure() {
+@@ -252,13 +251,11 @@ EXPORT_FUNCTIONS do_compile do_install do_configure
+ 
+ # kernel-base becomes kernel-${KERNEL_VERSION}
+ # kernel-image becomes kernel-image-${KERNEL_VERISON}
+-PACKAGES = "kernel kernel-base kernel-vmlinux kernel-image kernel-dev kernel-misc"
++PACKAGES = "kernel kernel-base kernel-vmlinux kernel-image kernel-dev"
+ FILES = ""
+ FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
+-FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config*"
++FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config* ${KERNEL_SRC_PATH}"
+ FILES_kernel-vmlinux = "/boot/vmlinux*"
+-# misc is a package to contain files we need in staging
+-FILES_kernel-misc = "/kernel/include/config /kernel/scripts /kernel/drivers/crypto /kernel/drivers/media"
+ RDEPENDS_kernel = "kernel-base"
+ # Allow machines to override this dependency if kernel image files are 
+ # not wanted in images as standard
+@@ -475,7 +472,7 @@ python populate_packages_prepend () {
  	metapkg = "kernel-modules"
  	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
  	d.setVar('FILES_' + metapkg, "")
--	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
-+	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'kernel-misc' ]
+-	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'kernel-misc' ]
++	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux' ]
  	for l in module_deps.values():
  		for i in l:
  			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
-@@ -553,8 +553,3 @@ addtask deploy before do_build after do_install
- 
- EXPORT_FUNCTIONS do_deploy
- 
--# perf must be enabled in individual kernel recipes
--PACKAGES =+ "perf-dbg perf"
--FILES_perf = "${bindir}/* \
--              ${libexecdir}"
--FILES_perf-dbg = "${FILES_${PN}-dbg}"
 -- 
 1.7.7.6
 
