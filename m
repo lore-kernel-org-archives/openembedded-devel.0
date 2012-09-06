@@ -1,24 +1,37 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>) id 1T9dtk-00010B-5B
+	(envelope-from <ml@communistcode.co.uk>) id 1T9dz2-0004ED-Od
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 17:21:40 +0200
-Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
-	helo=[172.30.1.145])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1T9dhl-0005Xd-ST
+	Thu, 06 Sep 2012 17:27:08 +0200
+Received: from localhost ([127.0.0.1]:47456 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9dn2-0002il-9f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 17:09:18 +0200
-From: Phil Blundell <philb@gnu.org>
+	Thu, 06 Sep 2012 15:14:44 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=DoVzbrAW/rg59gstg9Gh58hXhLY=; b=R1KE/dI0F5uWx3ZDcZws1plfLrFa
+	zvkP76YRbzjqf2ivsK792iNmtpsL5jrv7kY+Px6FxLbGBop3dKL2nJsdWexoBXUL
+	eOxsDTDtRIPEDLB1mPA9X2SXbdhg7CeBzW07FbA10qtBAp1cSxSRssbgCK7f0NmQ
+	1ZzO2ucz3Zm/BuI=
+Received: from [195.171.99.130] (port=42459 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9dn2-0002ih-28
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 15:14:44 +0000
+Message-ID: <5048BE25.2070004@communistcode.co.uk>
+Date: Thu, 06 Sep 2012 16:15:49 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 06 Sep 2012 16:09:16 +0100
-In-Reply-To: <5048BC6D.8080904@communistcode.co.uk>
 References: <5048B901.3060103@communistcode.co.uk>
 	<1346943545.2673.198.camel@phil-desktop>
 	<5048BC6D.8080904@communistcode.co.uk>
-X-Mailer: Evolution 3.0.2- 
-Message-ID: <1346944157.2673.199.camel@phil-desktop>
-Mime-Version: 1.0
+	<1346944157.2673.199.camel@phil-desktop>
+In-Reply-To: <1346944157.2673.199.camel@phil-desktop>
 Subject: Re: Issues building tinyXML
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,25 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 15:21:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Sep 2012 15:27:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2012-09-06 at 16:08 +0100, Jack Mitchell wrote:
-> So, would the best way to fix it be something like:
-> 
-> do_compile() {
->      run_oemake LD="${CCLD}"
-> }
+On 06/09/12 16:09, Phil Blundell wrote:
+> On Thu, 2012-09-06 at 16:08 +0100, Jack Mitchell wrote:
+>> So, would the best way to fix it be something like:
+>>
+>> do_compile() {
+>>       run_oemake LD="${CCLD}"
+>> }
+> Yes, probably.  Or I guess you can just do:
+>
+> LD = "${CCLD}"
+>
+> somewhere else in your .bb file.
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Yes, probably.  Or I guess you can just do:
+Urgh, that gets me past that error message but it seems to make it worse!
 
-LD = "${CCLD}"
+http://pastebin.com/AUVFKBTs
 
-somewhere else in your .bb file.
+Does that mean that it's not linking the files properly, which is why it 
+can't find the functions?
 
-p.
+-- 
 
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
 
