@@ -1,34 +1,41 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T9afI-0003Wt-Lj for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:54:33 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1T9aTK-0008B3-Pf for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2012 13:42:10 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2012 13:42:10 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch-fe.de>) id 1T9bDF-0004XW-0u
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2012 14:29:37 +0200
+Received: by bkcik5 with SMTP id ik5so906781bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2012 13:42:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 06 Sep 2012 05:17:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=9+OoBd+nEsGC6B3+U6ygckMnIgMPNwnHMcFBa7bVI24=;
+	b=n6xhBf2C1Al72d+RvX7a3aWL42hLVe+bISqGSZRZkv1S6UWlBcurwqK4n+cOYBNAUW
+	bDcdYnC+SsrDAXPGtwi44gt/dHP9PlSPqBtj/HeBtnBuhBBcE/IUmbT2Up+hv7bBY/R2
+	V4xOzYheFpvp5R81RvD0JohQosaCo45bSLXUCq5RiwBEFOil+8SIIS4Tnl2cEm4U9aqC
+	f3FNtWpCLavX+X8gSkdi3KGDhSrSbl6upgPw+SkvUIBU+KOE5xeXryZjfU0RbpuIWpm9
+	6Vm2nDvs4rFlXh+0AgRWan+YLV32/ODzQUtbYNCMelVwSk5frTBNZm/YEbhkt+fZIp6N
+	23fA==
+Received: by 10.205.127.77 with SMTP id gz13mr805136bkc.17.1346933832447;
+	Thu, 06 Sep 2012 05:17:12 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id hg13sm1107393bkc.7.2012.09.06.05.17.10
+	(version=SSLv3 cipher=OTHER); Thu, 06 Sep 2012 05:17:11 -0700 (PDT)
+Message-ID: <50489445.3020100@dresearch-fe.de>
+Date: Thu, 06 Sep 2012 14:17:09 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120825 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 06 Sep 2012 13:41:57 +0200
-Message-ID: <k2a264$d2a$1@ger.gmane.org>
-References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+References: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
 X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
+X-Gm-Message-State: ALoCoQmBiNpYiH+hcHDyoN/RZBv8AOgzuY0kAj5VziYy7sJEoU6Ppx5ymWHJhH+NuD213c2z7zB9
+Subject: Re: [2011.03-maintenance][PATCH] gtk+_2.20.1: Depend on gdk-pixbuf-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,70 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 11:54:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 Sep 2012 12:29:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-One day I will figure out how to write a cover letter :)
-
-The matching OE-core patchset is in denzil-next for testing and will
-hopefully get merged soon (provided it passes the testsuite).
-
-My main objective is to support on-target builds of external kernel-modules
-and initial reports are that it is working as expected.
-
-Since there's a bitbake.conf change needed the matching oe-core set needs to
-go in first and ideally this goes in right after that (provided this passes
-the testsuite as well).
-
-As you can imagine, this kind of inter-layer dependency sucks, but I don't
-see a way around it in this case with the bitbake.conf change.
-
-Op 06-09-12 13:23, Koen Kooi schreef:
-> From: Bruce Ashfield <bruce.ashfield@windriver.com>
+On 28.08.2012 00:50, Khem Raj wrote:
+> also BBCLASSEXTEND gdk-pixbuf recipes to provide
+> native version
 > 
-> The kernel source tree in the sysroot has all unecessary source code
-> removed. The existing use case is to support module building out of the
-> sysroot, but as more toolsa are moved into the kernel tree itself there
-> are new use cases for the kernel sysroot source.
-> 
-> To avoid putting dependencies on the kernel, and to be able to 
-> individually build and package these tools out of the source tree, we can
-> save $kerndir/tools and $kernddir/lib from being removed. This enables
-> tools like perf to be built our of the kernel source in the sysroot,
-> without significantly increasing the amount of source in the sysroot.
-> 
-> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com> 
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> Signed-off-by: Koen
-> Kooi <koen@dominion.thruhere.net> --- meta-oe/classes/kernel.bbclass |
-> 2 +- 1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/meta-oe/classes/kernel.bbclass
-> b/meta-oe/classes/kernel.bbclass index ce82351..c44a2f5 100644 ---
-> a/meta-oe/classes/kernel.bbclass +++ b/meta-oe/classes/kernel.bbclass @@
-> -178,7 +178,7 @@ kernel_do_install() { # oe_runmake -C $kerneldir
-> CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean make -C $kerneldir
-> _mrproper_scripts -	find $kerneldir -path $kerneldir/scripts -prune -o
-> -name "*.[csS]" -exec rm '{}' \; +	find $kerneldir -path $kerneldir/lib
-> -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts
-> -prune -o -name "*.[csS]" -exec rm '{}' \; find $kerneldir/Documentation
-> -name "*.txt" -exec rm '{}' \;
-> 
-> # As of Linux kernel version 3.0.1, the clean target removes
-> 
+> Newer distros which ship glib-2.0 version 2.32+
+> there are some missing symbols that gtk+ 2.20
+> will complain about. So we create own gdk-pixbuf
+> so it does not link to library from host system
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+It seems that the dependencies are incomplete.
 
-iD8DBQFQSIwFMkyGM64RGpERAjCgAJ9PFqqoYUsY+deeN9gVy89hod+TqACeJFO3
-hJ8tR0ZLZeookvwClEGnpD8=
-=CRRt
------END PGP SIGNATURE-----
+-----------> snip <-----------
+...
+| checking for BASE_DEPENDENCIES... configure: error: Package requirements (glib-2.0 >= 2.12.0    atk >= 1.9.0    pango >= 1.12.0    cairo >= 1.2.0) were not met:
+|
+| No package 'atk' found
+| No package 'pango' found
+| No package 'cairo' found
+|
+| Consider adjusting the PKG_CONFIG_PATH environment variable if you
+| installed software in a non-standard prefix.
+|
+| Alternatively, you may set the environment variables BASE_DEPENDENCIES_CFLAGS
+| and BASE_DEPENDENCIES_LIBS to avoid the need to call pkg-config.
+| See the pkg-config man page for more details.
+|
+NOTE: package gdk-pixbuf-native-2.10.14-r2: task do_configure: Failed
+-----------> snip <-----------
 
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
