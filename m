@@ -1,28 +1,30 @@
-Received: from outrightsolutions.nl ([194.145.201.26]
-	helo=mail.outrightsolutions.nl)
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sander@outrightsolutions.nl>) id 1T9wVU-0003Ys-JA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1T9wvA-0003xq-GP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 13:13:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.outrightsolutions.nl (Postfix) with ESMTP id 5A2745BCA11;
-	Fri,  7 Sep 2012 13:01:29 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at outrightsolutions.nl
-Received: from mail.outrightsolutions.nl ([127.0.0.1])
-	by localhost (hydrogen.outrightsolutions.nl [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id oAqZAh7SWFPi; Fri,  7 Sep 2012 13:01:28 +0200 (CEST)
-Received: from haze.lan (unknown [IPv6:2a02:2308::1ab:f800:2])
-	by mail.outrightsolutions.nl (Postfix) with ESMTPSA id 737765BCA10;
-	Fri,  7 Sep 2012 13:01:28 +0200 (CEST)
-From: Sander van Grieken <sander@outrightsolutions.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2012 13:01:17 +0200
-Message-Id: <1347015677-28209-1-git-send-email-sander@outrightsolutions.nl>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1347015293-28038-1-git-send-email-sander@outrightsolutions.nl>
-References: <1347015293-28038-1-git-send-email-sander@outrightsolutions.nl>
-Subject: [meta-oe][meta-systemd][PATCH v3] dnsmasq: add systemd service scripts for dnsmasq
+	Fri, 07 Sep 2012 13:40:24 +0200
+Received: by pbcwy7 with SMTP id wy7so4244621pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Sep 2012 04:27:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=/YWhcWhw36jjL4Dhu7CKpyWpnTFYZR8fukWxiOXKtnw=;
+	b=xPfVkOq3NECR/4t5aLMpIpHyW2hmAdeVC8f/c6/e+r+40EEFiU4l0T0KBBL5SubGSV
+	YEZe5WMSGy197fCnT701JRv9seJy6QFBWi8uxXAnfyK+2XMwm+G66w0jFTaLfdK3lRs5
+	6a09Me+XnVsgjPIbD52IS1pczIV4ym1z0uP+MqkMRw3BeOxrJLJj4n3wHJdDCzmoVn6m
+	5zIYqXULUxHOed9dDbG9FGnLC5JFXpvGNhnhIHHSjjgfM0QXLPa/r36qVNLDHlUd7yr3
+	HK42ErTl+utXNb7pvXcTzryxrvvRMSM55y1y2JbyWiuDrTRutGr8tp6kbC8ewHqS9dDU
+	H4Cg==
+MIME-Version: 1.0
+Received: by 10.68.203.200 with SMTP id ks8mr9630943pbc.142.1347017278186;
+	Fri, 07 Sep 2012 04:27:58 -0700 (PDT)
+Received: by 10.68.14.201 with HTTP; Fri, 7 Sep 2012 04:27:58 -0700 (PDT)
+Date: Fri, 7 Sep 2012 13:27:58 +0200
+Message-ID: <CACW_hTYFeqSYx5R9rgf9vV0GG-iTcnjKx+czrVXX=rUTx2z_xw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: oe classic: eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,53 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 11:13:52 -0000
+X-List-Received-Date: Fri, 07 Sep 2012 11:40:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
----
- .../dnsmasq/dnsmasq/dnsmasq.service                |   13 +++++++++++++
- .../dnsmasq/dnsmasq_2.55.bbappend                  |   10 ++++++++++
- 2 files changed, 23 insertions(+)
- create mode 100644 meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service
- create mode 100644 meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bbappend
+Not sure if anyone is still interested in oe classic, but while rebuilding
+some sw using oe classic I noticed the eglibc recipes did not build any
+more as upstream changed things in the repo.
+I've locally fixed this by changing SRC_URI from
+SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+into
+SRC_URI = "svn://
+www.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
 
-diff --git a/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service b/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service
-new file mode 100644
-index 0000000..549e15e
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service
-@@ -0,0 +1,13 @@
-+[Unit]
-+Description=DNS forwarder and DHCP server
-+After=network.target
-+
-+[Service]
-+Type=forking
-+PIDFile=/run/dnsmasq.pid
-+ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
-+ExecReload=/bin/kill -HUP $(/bin/cat /run/dnsmasq.pid)
-+
-+[Install]
-+WantedBy=multi-user.target
-+
-diff --git a/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bbappend b/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bbappend
-new file mode 100644
-index 0000000..0a9c77e
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bbappend
-@@ -0,0 +1,10 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+inherit systemd
-+
-+SRC_URI += "file://dnsmasq.service"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE = "dnsmasq.service"
--- 
-1.7.9.5
+builds and tests fine. If anyone is tempted, feel free to author a patch.
 
-
+Frans
 
