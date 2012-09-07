@@ -1,21 +1,32 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1T9xnl-0005Xw-1q
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1T9xy7-0005tE-0f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 14:36:49 +0200
-Received: from granit.localdomain (e182221015.adsl.alicedsl.de [85.182.221.15])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 6C3FD584076
+	Fri, 07 Sep 2012 14:47:31 +0200
+Received: by pbcwy7 with SMTP id wy7so4313367pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2012 15:22:16 +0200 (CEST)
-Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <CACW_hTYFeqSYx5R9rgf9vV0GG-iTcnjKx+czrVXX=rUTx2z_xw@mail.gmail.com>
-Date: Fri, 7 Sep 2012 14:16:03 +0200
-Message-Id: <C719E0F2-0095-4A37-83E7-A65E065E880B@vanille-media.de>
+	Fri, 07 Sep 2012 05:35:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=vJCFSkNP26Je4qwqlLGZTckJlWVPM2NTRAA67teeUDo=;
+	b=MuS5OBNN0sWUxiOwuYwfwH06iSBHEisjjrXiJGNz/jV+mu613DzPhKLl0XyDo9eZYb
+	5PcjCZi9VBcaRPxWgNi4VyJCR8Uzvbswng0Gz6Gz9kIw8rOdi5gCPm0qY2I9W/bIXPiY
+	BFRgt9uHMLz3JGflfLHbavDrGoZ0ZQjSKizcF3+e9zHk4TbCTWn01z5o5LZ5duwBozGe
+	88KdcFGW0aWUqPIe8pjnQYxDl5qJpXDFxxxh/U7k9vvo6UvdSF3c7tU6u/Msx0ASIp//
+	mLqxD8tp03CIwhq3l09svpJMG0cGKWqyKqveAkWmE9rieSLapa4XGeOpbIfjLXYiqVoP
+	V01A==
+MIME-Version: 1.0
+Received: by 10.68.218.166 with SMTP id ph6mr9657732pbc.132.1347021304740;
+	Fri, 07 Sep 2012 05:35:04 -0700 (PDT)
+Received: by 10.68.14.201 with HTTP; Fri, 7 Sep 2012 05:35:04 -0700 (PDT)
+In-Reply-To: <96FA1660-A208-41E4-806A-B0C80C9D1D11@gmail.com>
 References: <CACW_hTYFeqSYx5R9rgf9vV0GG-iTcnjKx+czrVXX=rUTx2z_xw@mail.gmail.com>
+	<96FA1660-A208-41E4-806A-B0C80C9D1D11@gmail.com>
+Date: Fri, 7 Sep 2012 14:35:04 +0200
+Message-ID: <CACW_hTa-2VzonFFthdE279_kYPz9mz7P3=f+ZBmT1HPBufXeow@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1486)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: oe classic: eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,29 +41,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 12:36:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Sep 2012 12:47:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am 07.09.2012 um 13:27 schrieb Frans Meulenbroeks =
-<fransmeulenbroeks@gmail.com>:
-> Not sure if anyone is still interested in oe classic, but while =
-rebuilding
-> some sw using oe classic I noticed the eglibc recipes did not build =
-any
-> more as upstream changed things in the repo.
-> I've locally fixed this by changing SRC_URI from
-> SRC_URI =3D =
-"svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH};proto=3Dsvn \
-> into
-> SRC_URI =3D "svn://
-> www.eglibc.org/svn/branches;module=3D${EGLIBC_BRANCH};proto=3Dhttp \
->=20
-> builds and tests fine. If anyone is tempted, feel free to author a =
-patch.
+2012/9/7 Khem Raj <raj.khem@gmail.com>
 
-Thanks!
+>
+>
+> -Khem
+>
+> On Sep 7, 2012, at 4:27 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
+>
+> > Not sure if anyone is still interested in oe classic, but while
+> rebuilding
+> > some sw using oe classic I noticed the eglibc recipes did not build any
+> > more as upstream changed things in the repo.
+>
+> Probably your IT blocked Svn
+>
 
-:M:=
+Hm. This used to work.
+I figured eglibc changed things (see also the addition of /svn after
+www.eglibc.org
 
+dived a little bit deeper into it.
+oldest oe-core version I could find is
+http://cgit.openembedded.org/openembedded-core/diff/meta/recipes-core/eglibc/eglibc_2.12.bb?id=29d6678fd546377459ef75cf54abeef5b969b5cf
+this one is from aug 2010.
+it  already uses proto=http:
+
+The latest classic version is
+http://cgit.openembedded.org/openembedded/tree/recipes/eglibc/eglibc_2.12.bb
+this one is form may 2010 and uses proto=svn:
+
+no idea why/how this is changed.
+anyway the proto=http works for me so if someone encounters this problem
+maybe google will present this solution/alternative.
+
+Best regards, Frans
+
+
+>
+> > I've locally fixed this by changing SRC_URI from
+> > SRC_URI = "svn://
+> svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+> > into
+> > SRC_URI = "svn://
+> > www.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
+> >
+> > builds and tests fine. If anyone is tempted, feel free to author a patch.
+> >
+> > Frans
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://l.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
