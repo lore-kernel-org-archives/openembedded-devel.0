@@ -1,35 +1,46 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1T9lpc-0005Ji-M1; Fri, 07 Sep 2012 01:49:56 +0200
-Received: by wibhq4 with SMTP id hq4so6208604wib.6
-	for <multiple recipients>; Thu, 06 Sep 2012 16:37:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=r678nnjgtusrukQHvcYKc/RslqIcMK5hedw/69/wJ6w=;
-	b=rFz4U1zOhwTO4ThkN9gg1DseJLhqHHkFat7/FHPRCdOiJPU2/BsjMQhFMM5cDn1uJL
-	XRtchp4E/QPY33ReA2VWjhTydArlwx2iaz6pNkZFXO8/+xTBqh38VL0WZm8IjN4AgOTT
-	zE1YUarxKZqJBf/xtzwUzAz0o40luVNDLrdbMYQ4ah1iYosvPhL2A6gJ8AVLQ0J/Zpo7
-	WvwwWX/oH9fxOnOSkIODfWqHwEbnsezJ+0pdWob0n5yPSAxid8vJ/JawL5QlsF12/Wc0
-	yqrpv4lgKzrKK29q+DtpkFK/7RCMDU3Y3WGkHbGN75M4nZZsaH/dJFR+elrvNWLnfVX4
-	Ycew==
-Received: by 10.216.243.74 with SMTP id j52mr1926519wer.108.1346974651950;
-	Thu, 06 Sep 2012 16:37:31 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id l6sm6636366wiz.4.2012.09.06.16.37.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 06 Sep 2012 16:37:31 -0700 (PDT)
-Date: Fri, 7 Sep 2012 01:38:03 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120906233803.GC3487@jama.jama.net>
-References: <20120906231235.2BFB3103D3@opal>
+	(envelope-from <ml@communistcode.co.uk>) id 1T9tuk-0004c5-1H
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Sep 2012 10:27:46 +0200
+Received: from localhost ([127.0.0.1]:44822 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9tii-0000y7-8f
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Sep 2012 08:15:20 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=YXg+ylYhU6JZUpAW/QslPiRaEYQ=; b=Fp7TYfgwrc62kw5cAM5I/DI/8hv3
+	684vdm3MYwVnyoobaRFx35n6GGOtjHq8ONB/W04Lstyahxc7xwjjvNSLNHe+MhY5
+	9bJktuk1Kh6s/ce4PK8RmYN5NeCDEJJzWnslqKimDH7Bz4nDtA2C7BfKyoURgINg
+	nz6cVwUXwDZajx0=
+Received: from [195.171.99.130] (port=21405 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9tii-0000y3-6T
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Sep 2012 08:15:20 +0000
+Message-ID: <5049AD56.8010808@communistcode.co.uk>
+Date: Fri, 07 Sep 2012 09:16:22 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
 MIME-Version: 1.0
-In-Reply-To: <20120906231235.2BFB3103D3@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Richard Purdie : gcc-cross-initial: Reinstate limits.h generation fix
+To: openembedded-devel@lists.openembedded.org
+References: <5048B901.3060103@communistcode.co.uk>
+	<1346943545.2673.198.camel@phil-desktop>
+	<5048BC6D.8080904@communistcode.co.uk>
+	<1346944157.2673.199.camel@phil-desktop>
+	<5048BE25.2070004@communistcode.co.uk>
+	<1346944624.2673.200.camel@phil-desktop>
+	<5048BF04.2000904@communistcode.co.uk>
+	<5048C7D5.70301@communistcode.co.uk>
+	<1346947708.2673.201.camel@phil-desktop>
+	<5048CC32.30705@communistcode.co.uk>
+	<1346948364.2673.203.camel@phil-desktop>
+	<5048D11C.9050108@communistcode.co.uk>
+In-Reply-To: <5048D11C.9050108@communistcode.co.uk>
+Subject: Re: Issues building tinyXML
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,105 +54,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2012 23:49:56 -0000
-X-Groupsio-MsgNum: 40552
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aT9PWwzfKXlsBJM1"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Sep 2012 08:27:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---aT9PWwzfKXlsBJM1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I think this has it cracked now.Phil, note the -fpic, is that in the 
+right place?
 
-On Thu, Sep 06, 2012 at 11:12:35PM +0000, git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: 71854f5c8c6850ed37777cad21acc92fdbea32fc
-> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
-;h=3D71854f5c8c6850ed37777cad21acc92fdbea32fc
->=20
-> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-> Date:   Thu Sep  6 16:50:10 2012 +0100
->=20
-> gcc-cross-initial: Reinstate limits.h generation fix
->=20
-> The removal of gcc-cross-intermediate inadvertently reintroduced a
-> problem with the limits.h file being incorrectly/inconsistently
-> generated.
->=20
-> http://git.yoctoproject.org/cgit.cgi/poky/commit/?id=3Db0faebd1f07e161600=
-4bd19664395932e7c2c48f
-> reverted part of:
-> http://git.yoctoproject.org/cgit.cgi/poky/commit/?id=3Dc8815d2f21849deb93=
-59706f54dc71490773415e
->=20
-> This reintroduces the protected sysroot ensuring the limits.h file is
-> always correctly generated. To reproduce the bug, build gcc-cross, then
-> rebuild gcc-cross-initial and it will reference the limits.h file from
-> gcc-cross in the sysroot.
->=20
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+DESCRIPTION = "A simple, small, C++ XML parser that can be easily 
+integrated into other programs"
 
-Not sure if PR bump would help for gcc-cross-initial, but now incremental=
-=20
-build fails with:=20
+LICENSE = "zlib"
+LIC_FILES_CHKSUM = 
+"file://tinyxml.cpp;endline=23;md5=b97285d8fafcc49b761ca785816cc397"
 
-| Configuring in arm-oe-linux-gnueabi/libgcc
-| configure: loading cache ./config.cache
-| configure: error: `CC' has changed since the previous run:
-| configure:   former value:  ` /OE/build/tmp-eglibc/work/armv7a-vfp-neon-o=
-e-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795=
-349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./g=
-cc/xgcc -B/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/gcc-cr=
-oss-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5dede-r11/gcc-4=
-_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./gcc/ -march=3Darmv7-a -=
-fno-tree-vectorize     -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon =
--mtune=3Dcortex-a8 -isystem/OE/build/tmp-eglibc/sysroots/tuna/usr/include -=
-B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/bin/ -=
-B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/lib/ -=
-isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi=
-/include -isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-lin=
-ux-gnueabi/sys-include --sysroot=3D/OE/build/tmp-eglibc/sysroots/tuna  '
-| configure:   current value: ` /OE/build/tmp-eglibc/work/armv7a-vfp-neon-o=
-e-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795=
-349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./g=
-cc/xgcc -B/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/gcc-cr=
-oss-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5dede-r11/gcc-4=
-_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/./gcc/ -march=3Darmv7-a -=
-fno-tree-vectorize     -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon =
--mtune=3Dcortex-a8 -isystem/OE/build/tmp-eglibc/sysroots/tuna/usr/include -=
-B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/bin/ -=
-B/OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/lib/ -=
-isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi=
-/include -isystem /OE/build/tmp-eglibc/sysroots/x86_64-linux/usr/arm-oe-lin=
-ux-gnueabi/sys-include --sysroot=3D/OE/build/tmp-eglibc/work/armv7a-vfp-neo=
-n-oe-linux-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838=
-795349faab5dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/=
-tmpsysroot  '
-| configure: error: in `/OE/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-=
-gnueabi/gcc-cross-initial-4.7.1.0+git1+d07e24f4ab59f264d68d21838795349faab5=
-dede-r11/gcc-4_7-branch/build.x86_64-linux.arm-oe-linux-gnueabi/arm-oe-linu=
-x-gnueabi/libgcc':
-| configure: error: changes in the environment can compromise the build
-| configure: error: run `make distclean' and/or `rm ./config.cache' and sta=
-rt over
-| make: *** [configure-target-libgcc] Error 1
-| ERROR: oe_runmake failed
+SRC_URI = 
+"http://ftp.debian.org/debian/pool/main/t/tinyxml/${PN}_${PV}.orig.tar.gz"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+SRC_URI[md5sum] = "c1b864c96804a10526540c664ade67f0"
+SRC_URI[sha256sum] = 
+"15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
 
---aT9PWwzfKXlsBJM1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+S = "${WORKDIR}/tinyxml"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+TINYXML_USE_STL = "YES"
 
-iEYEARECAAYFAlBJM9sACgkQN1Ujt2V2gBzuSACfeGmdNR92W1cv6GbNVnv0lEQm
-7JsAmwWZgBKxMBsbZY6rURePDj4Qe8Yf
-=KfEH
------END PGP SIGNATURE-----
+do_compile() {
+   oe_runmake LD="${CXX}"
 
---aT9PWwzfKXlsBJM1--
+   ${CXX} -fpic -shared -o lib${PN}.so.0.${PV} \
+     -Wl,-soname,lib${PN}.so.0 $(ls *.o | grep -v xmltest)
+
+}
+
+do_install() {
+
+   install -d -m 0755 ${D}${libdir}
+   install -d -m 0755 ${D}${includedir}
+   install -m 0755 lib${PN}.so.0.${PV} ${D}${libdir}
+   install -m 0644 ${PN}.h tinystr.h ${D}${includedir}
+
+   (cd ${D}${libdir}
+     ln -s lib${PN}.so.0.${PV} lib${PN}.so.0
+     ln -s lib${PN}.so.0.${PV} lib${PN}.so
+   )
+
+}
+
+
+[jack@archHP packages-split]$ tree
+.
+|-- tinyxml
+|   `-- usr
+|       `-- lib
+|           |-- libtinyxml.so.0 -> libtinyxml.so.0.2.6.2
+|           `-- libtinyxml.so.0.2.6.2
+|-- tinyxml-dbg
+|   `-- usr
+|       |-- lib
+|       `-- src
+|           `-- debug
+|               `-- tinyxml-2.6.2-r0
+|                   `-- tinyxml
+|                       |-- tinystr.cpp
+|                       |-- tinystr.h
+|                       |-- tinyxml.cpp
+|                       |-- tinyxmlerror.cpp
+|                       |-- tinyxml.h
+|                       `-- tinyxmlparser.cpp
+|-- tinyxml-dev
+|   `-- usr
+|       |-- include
+|       |   |-- tinystr.h
+|       |   `-- tinyxml.h
+|       `-- lib
+|           `-- libtinyxml.so -> libtinyxml.so.0.2.6.2
+|-- tinyxml-doc
+|-- tinyxml-locale
+|-- tinyxml.shlibdeps
+`-- tinyxml-staticdev
+
+17 directories, 12 files
+
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
+
+
