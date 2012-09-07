@@ -1,37 +1,32 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9un1-0005wy-2u
+	(envelope-from <martin.jansa@gmail.com>) id 1T9uut-0006BO-BM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 11:23:51 +0200
-Received: from localhost ([127.0.0.1]:48864 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9uaz-0002WP-HD
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 09:11:25 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding; s=default;
-	bh=5cqcQ3kSo4tS6LMJNS7BCcqYrN4=; b=O2+pTL4lPZAv+IH+fatVobhHXBi6
-	1TTfshmnDJoRJcdZUEG3IkvdsH1KRidiCz+u3ncE4S+n4lAUHr9dhRFfEpmoKbt9
-	tl0qcK1A2/CSWMP1y7Vmba1HFh30C24buSZ2trxFO2PlpegWZWFiZIkvJfIKnQoN
-	uqYB3e85+SvdqgA=
-Received: from [195.171.99.130] (port=43147 helo=[192.168.0.33])
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1T9uaz-0002WM-F1
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 09:11:25 +0000
-Message-ID: <5049BA7B.1000605@communistcode.co.uk>
-Date: Fri, 07 Sep 2012 10:12:27 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120828 Thunderbird/15.0
-MIME-Version: 1.0
+	Fri, 07 Sep 2012 11:31:59 +0200
+Received: by bkcik5 with SMTP id ik5so1437097bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Sep 2012 02:19:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=2epAHappd2at/iApZhqFRVZby/pYLjolhBzIokyk2Fg=;
+	b=oF8nqIDUywtj7FkMIZUGss6ArPRlda7H/J9HLknv6FQXG+hv5d+k0dQxMetwoJ9/Vm
+	dgB6xQSrG7N4TIFf/d92ubLSuHc7XBGrzStUh8o7F/VElcJl4+87YQlyI6tFcPAygARI
+	n5h682oiMcHQ7U0wb1D+VwD6ZlAniTA2gABrk/fWizDU2cyMvAeeTkEzAlGNLz1Sye+p
+	jF6iL1vv+5gqRWgyBPLCn5dIkO6WwHrZe3AiYpcaasEqLAe321Hg1LywAczllk/Fw3ML
+	rzoELFWV8OQ5zqUmtMCXjlW+O3kuddDYQZ4GUf/hazeUiCMTLp3V0wTa889aZl5L/FPZ
+	uNxg==
+Received: by 10.205.129.17 with SMTP id hg17mr2291927bkc.88.1347009574067;
+	Fri, 07 Sep 2012 02:19:34 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id j9sm2876080bkv.0.2012.09.07.02.19.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 07 Sep 2012 02:19:33 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <50476BCC.1090801@communistcode.co.uk>
-	<5049B4DF.7060806@communistcode.co.uk>
-	<20120907090243.GA22658@mi.fu-berlin.de>
-In-Reply-To: <20120907090243.GA22658@mi.fu-berlin.de>
-Subject: Re: XBMC build for Raspberry Pi
+Date: Fri,  7 Sep 2012 11:20:02 +0200
+Message-Id: <1347009602-10055-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12
+Subject: [meta-oe][PATCH] libjpeg: use nasm-native also for target DEPENDS, it's needed for targets with SIMD support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 09:23:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Sep 2012 09:31:59 -0000
 
-On 07/09/12 10:02, Henning Heinold wrote:
-> On Fri, Sep 07, 2012 at 09:48:31AM +0100, Jack Mitchell wrote:
->> Some more on this is that it seems to be picking up the host paths,
->> rather than OE's.
->>
->> My config.log is here: http://pastebin.com/7Um2J1kv
->>
->> as you can see the PYTHON variables are all wrong. I tried adding:
->>
->> PYTHON = "${libdir}${PYTHON_DIR}"
->> PYTHON_SITE_PACKAGE= "${PYTHON_SITEPACKAGES_DIR}"
->> PYTHON_LDFLAGS = "-L${libdir} -l${PYTHON_DIR}"
->>
->> To the recipe but it didn't help. Has anyone any experience in this?
->>
->> Cheers,
-> Did you inherit the right python class?
->
-> Bye Henning
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+* configure checks that the same as in native case
+| configure:13139: checking if we have SIMD optimisations for cpu type
+| configure:13143: result: yes (x86_64)
+| configure:13151: checking for nasm
+| configure:13181: result: no
+| configure:13151: checking for nasmw
+| configure:13181: result: no
+| configure:13151: checking for yasm
+| configure:13181: result: no
+| configure:13189: error: no nasm (Netwide Assembler) found
 
-The recipe is the one currently in 
-meta-oe/meta-multimedia/recipe-multimedia/xbmc, it inherits python-dir, 
-is that the right class?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Regards,
-
+diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+index dd81606..2aefe1f 100644
+--- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
++++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+@@ -29,6 +29,6 @@ FILES_libturbojpeg = "${libdir}/libturbojpeg.so"
+ INSANE_SKIP_libturbojpeg = "dev-so"
+ 
+ BBCLASSEXTEND = "native"
+-DEPENDS_virtclass-native = "nasm-native"
++DEPENDS = "nasm-native"
+ 
+ LEAD_SONAME = "libjpeg.so.8"
 -- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
+1.7.12
 
 
 
