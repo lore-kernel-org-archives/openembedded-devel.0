@@ -1,24 +1,35 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from outrightsolutions.nl ([194.145.201.26]
+	helo=mail.outrightsolutions.nl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1T9z9r-0007xZ-O8
+	(envelope-from <sander@outrightsolutions.nl>) id 1T9zUd-0008K8-SZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 16:03:43 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 07 Sep 2012 06:51:11 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,385,1344236400"; d="scan'208";a="198930464"
-Received: from unknown (HELO helios.localnet) ([10.252.121.175])
-	by orsmga002.jf.intel.com with ESMTP; 07 Sep 2012 06:51:16 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Sander van Grieken <sander@outrightsolutions.nl>
-Date: Fri, 07 Sep 2012 14:51:15 +0100
-Message-ID: <4376304.LnqHmfQDzp@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9 (Linux/3.2.0-30-generic-pae; KDE/4.9.0; i686; ; )
-In-Reply-To: <5049BEFD.9040003@outrightsolutions.nl>
-References: <5049BEFD.9040003@outrightsolutions.nl>
+	Fri, 07 Sep 2012 16:25:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.outrightsolutions.nl (Postfix) with ESMTP id 0DB125BC4B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2012 16:12:48 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at outrightsolutions.nl
+Received: from mail.outrightsolutions.nl ([127.0.0.1])
+	by localhost (hydrogen.outrightsolutions.nl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id o45ymF2QeSy6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2012 16:12:46 +0200 (CEST)
+Received: from [IPv6:2a02:2308::1ab:f800:2] (unknown
+	[IPv6:2a02:2308::1ab:f800:2])
+	by mail.outrightsolutions.nl (Postfix) with ESMTPSA id AA20C5BC3A4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2012 16:12:46 +0200 (CEST)
+Message-ID: <504A00D7.3030305@outrightsolutions.nl>
+Date: Fri, 07 Sep 2012 16:12:39 +0200
+From: Sander van Grieken <sander@outrightsolutions.nl>
+Organization: Outright Solutions
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120827 Thunderbird/15.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <5049BEFD.9040003@outrightsolutions.nl>
+	<20120907134455.GA21660@mi.fu-berlin.de>
+In-Reply-To: <20120907134455.GA21660@mi.fu-berlin.de>
 Subject: Re: linux-firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,33 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 14:03:44 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 07 Sep 2012 14:25:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Friday 07 September 2012 11:31:41 Sander van Grieken wrote:
-> Currently, linux-firmware produces one big package with all binary
-> firmware files installed. It would be benificial , especially for
-> devices with a very small rootfs, to install only a subset of the entire
-> collection. Some effort has been done to split off separate packages,
-> but it's not clear what the preferred naming should be.
-> 
-> - Should it follow the kernel-module-* naming, e.g.
-> kernel-module-ath9k-htc would need linux-firmware-ath9k-htc?
-> - Or should it follow the firmware file naming, e.g. linux-firmware-htc-7010
-> - Or maybe have a bit larger packages and simply split by vendor, e.g.
-> linux-firmware-atheros
-> - How and if to package the license file
+On 09/07/2012 03:44 PM, Henning Heinold wrote:
+> On Fri, Sep 07, 2012 at 11:31:41AM +0200, Sander van Grieken wrote:
+>> Hi,
+>>
+>> Currently, linux-firmware produces one big package with all binary
+>> firmware files installed. It would be benificial , especially for
+>> devices with a very small rootfs, to install only a subset of the entire
+>> collection. Some effort has been done to split off separate packages,
+>> but it's not clear what the preferred naming should be.
+>>
+>> - Should it follow the kernel-module-* naming, e.g.
+>> kernel-module-ath9k-htc would need linux-firmware-ath9k-htc?
+>> - Or should it follow the firmware file naming, e.g. linux-firmware-htc-7010
+>> - Or maybe have a bit larger packages and simply split by vendor, e.g.
+>> linux-firmware-atheros
+>> - How and if to package the license file
+>>
+>> Thoughts?
+> Because we even split all kernel modules into seperate packages we should do it for firmware files
+> too. But that is a lot of monkey work, you need to check for all firmware files and make the right packages.
+Yes, that's why I ask. It would be helpful if there's a comment in the
+bb explaining this is wanted, and how to name the package. Then devs
+working with certain hardware can define a specific package and test
+with their hardware locally. This way it can be incrementally done.
 
-It looks like in OE-Core we have some code to do firmware splitting in 
-kernel.bbclass - Sander, is it OE-Core you are using or OE-Classic?
+> The scheme of the package names seems fine to me.
+What scheme?
 
-Cheers,
-Paul
+rtl8192cu follows kernel module naming, firmware is rtl8192cufw, and
+includes license file
+rtl8192ce follows kernel module naming, doesn't include license file
+sd8686 follows firmware naming, includes license file
+wl12xx follows 'firmware' naming (actually is vendor scope), doesn't
+include license file
 
--- 
+grtz,
+Sander
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
