@@ -1,33 +1,36 @@
-Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1T9uea-0005jB-0K
+	(envelope-from <ml@communistcode.co.uk>) id 1T9un1-0005wy-2u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 11:15:08 +0200
-Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
-	by outpost1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1T9uSa-0005fo-LE>; Fri, 07 Sep 2012 11:02:44 +0200
-Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
-	by relay1.zedat.fu-berlin.de (Exim 4.69)
-	for openembedded-devel@lists.openembedded.org with esmtp
-	(envelope-from <heinold@mi.fu-berlin.de>)
-	id <1T9uSa-0004hw-II>; Fri, 07 Sep 2012 11:02:44 +0200
-Received: from heinold by andorra.imp.fu-berlin.de with local (internal Exim
-	4.72) id 1T9uSZ-0006gF-FP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2012 11:02:43 +0200
-Date: Fri, 7 Sep 2012 11:02:43 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 07 Sep 2012 11:23:51 +0200
+Received: from localhost ([127.0.0.1]:48864 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9uaz-0002WP-HD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Sep 2012 09:11:25 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=5cqcQ3kSo4tS6LMJNS7BCcqYrN4=; b=O2+pTL4lPZAv+IH+fatVobhHXBi6
+	1TTfshmnDJoRJcdZUEG3IkvdsH1KRidiCz+u3ncE4S+n4lAUHr9dhRFfEpmoKbt9
+	tl0qcK1A2/CSWMP1y7Vmba1HFh30C24buSZ2trxFO2PlpegWZWFiZIkvJfIKnQoN
+	uqYB3e85+SvdqgA=
+Received: from [195.171.99.130] (port=43147 helo=[192.168.0.33])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1T9uaz-0002WM-F1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Sep 2012 09:11:25 +0000
+Message-ID: <5049BA7B.1000605@communistcode.co.uk>
+Date: Fri, 07 Sep 2012 10:12:27 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120907090243.GA22658@mi.fu-berlin.de>
 References: <50476BCC.1090801@communistcode.co.uk>
 	<5049B4DF.7060806@communistcode.co.uk>
-MIME-Version: 1.0
-In-Reply-To: <5049B4DF.7060806@communistcode.co.uk>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-Originating-IP: 160.45.42.84
+	<20120907090243.GA22658@mi.fu-berlin.de>
+In-Reply-To: <20120907090243.GA22658@mi.fu-berlin.de>
 Subject: Re: XBMC build for Raspberry Pi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,28 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 09:15:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Sep 2012 09:23:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Sep 07, 2012 at 09:48:31AM +0100, Jack Mitchell wrote:
-> Some more on this is that it seems to be picking up the host paths,
-> rather than OE's.
-> 
-> My config.log is here: http://pastebin.com/7Um2J1kv
-> 
-> as you can see the PYTHON variables are all wrong. I tried adding:
-> 
-> PYTHON = "${libdir}${PYTHON_DIR}"
-> PYTHON_SITE_PACKAGE= "${PYTHON_SITEPACKAGES_DIR}"
-> PYTHON_LDFLAGS = "-L${libdir} -l${PYTHON_DIR}"
-> 
-> To the recipe but it didn't help. Has anyone any experience in this?
-> 
-> Cheers,
+On 07/09/12 10:02, Henning Heinold wrote:
+> On Fri, Sep 07, 2012 at 09:48:31AM +0100, Jack Mitchell wrote:
+>> Some more on this is that it seems to be picking up the host paths,
+>> rather than OE's.
+>>
+>> My config.log is here: http://pastebin.com/7Um2J1kv
+>>
+>> as you can see the PYTHON variables are all wrong. I tried adding:
+>>
+>> PYTHON = "${libdir}${PYTHON_DIR}"
+>> PYTHON_SITE_PACKAGE= "${PYTHON_SITEPACKAGES_DIR}"
+>> PYTHON_LDFLAGS = "-L${libdir} -l${PYTHON_DIR}"
+>>
+>> To the recipe but it didn't help. Has anyone any experience in this?
+>>
+>> Cheers,
+> Did you inherit the right python class?
+>
+> Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Did you inherit the right python class?
+The recipe is the one currently in 
+meta-oe/meta-multimedia/recipe-multimedia/xbmc, it inherits python-dir, 
+is that the right class?
 
-Bye Henning
+Regards,
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
 
