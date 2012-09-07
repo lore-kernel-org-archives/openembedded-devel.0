@@ -1,32 +1,33 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from outrightsolutions.nl ([194.145.201.26]
+	helo=mail.outrightsolutions.nl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1T9uut-0006BO-BM
+	(envelope-from <sander@outrightsolutions.nl>) id 1T9v6i-0006SS-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Sep 2012 11:31:59 +0200
-Received: by bkcik5 with SMTP id ik5so1437097bkc.6
+	Fri, 07 Sep 2012 11:44:12 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.outrightsolutions.nl (Postfix) with ESMTP id 6D68F5BCA11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2012 02:19:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=2epAHappd2at/iApZhqFRVZby/pYLjolhBzIokyk2Fg=;
-	b=oF8nqIDUywtj7FkMIZUGss6ArPRlda7H/J9HLknv6FQXG+hv5d+k0dQxMetwoJ9/Vm
-	dgB6xQSrG7N4TIFf/d92ubLSuHc7XBGrzStUh8o7F/VElcJl4+87YQlyI6tFcPAygARI
-	n5h682oiMcHQ7U0wb1D+VwD6ZlAniTA2gABrk/fWizDU2cyMvAeeTkEzAlGNLz1Sye+p
-	jF6iL1vv+5gqRWgyBPLCn5dIkO6WwHrZe3AiYpcaasEqLAe321Hg1LywAczllk/Fw3ML
-	rzoELFWV8OQ5zqUmtMCXjlW+O3kuddDYQZ4GUf/hazeUiCMTLp3V0wTa889aZl5L/FPZ
-	uNxg==
-Received: by 10.205.129.17 with SMTP id hg17mr2291927bkc.88.1347009574067;
-	Fri, 07 Sep 2012 02:19:34 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j9sm2876080bkv.0.2012.09.07.02.19.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 07 Sep 2012 02:19:33 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri,  7 Sep 2012 11:31:49 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at outrightsolutions.nl
+Received: from mail.outrightsolutions.nl ([127.0.0.1])
+	by localhost (hydrogen.outrightsolutions.nl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id i+O3lN86pVea
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2012 11:31:48 +0200 (CEST)
+Received: from [IPv6:2a02:2308::1ab:f800:2] (unknown
+	[IPv6:2a02:2308::1ab:f800:2])
+	by mail.outrightsolutions.nl (Postfix) with ESMTPSA id D2E915BCA10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2012 11:31:48 +0200 (CEST)
+Message-ID: <5049BEFD.9040003@outrightsolutions.nl>
+Date: Fri, 07 Sep 2012 11:31:41 +0200
+From: Sander van Grieken <sander@outrightsolutions.nl>
+Organization: Outright Solutions
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120827 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2012 11:20:02 +0200
-Message-Id: <1347009602-10055-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12
-Subject: [meta-oe][PATCH] libjpeg: use nasm-native also for target DEPENDS, it's needed for targets with SIMD support
+Subject: linux-firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2012 09:31:59 -0000
+X-List-Received-Date: Fri, 07 Sep 2012 09:44:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* configure checks that the same as in native case
-| configure:13139: checking if we have SIMD optimisations for cpu type
-| configure:13143: result: yes (x86_64)
-| configure:13151: checking for nasm
-| configure:13181: result: no
-| configure:13151: checking for nasmw
-| configure:13181: result: no
-| configure:13151: checking for yasm
-| configure:13181: result: no
-| configure:13189: error: no nasm (Netwide Assembler) found
+Hi,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Currently, linux-firmware produces one big package with all binary
+firmware files installed. It would be benificial , especially for
+devices with a very small rootfs, to install only a subset of the entire
+collection. Some effort has been done to split off separate packages,
+but it's not clear what the preferred naming should be.
 
-diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-index dd81606..2aefe1f 100644
---- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-+++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-@@ -29,6 +29,6 @@ FILES_libturbojpeg = "${libdir}/libturbojpeg.so"
- INSANE_SKIP_libturbojpeg = "dev-so"
- 
- BBCLASSEXTEND = "native"
--DEPENDS_virtclass-native = "nasm-native"
-+DEPENDS = "nasm-native"
- 
- LEAD_SONAME = "libjpeg.so.8"
--- 
-1.7.12
+- Should it follow the kernel-module-* naming, e.g.
+kernel-module-ath9k-htc would need linux-firmware-ath9k-htc?
+- Or should it follow the firmware file naming, e.g. linux-firmware-htc-7010
+- Or maybe have a bit larger packages and simply split by vendor, e.g.
+linux-firmware-atheros
+- How and if to package the license file
+
+Thoughts?
 
 
 
