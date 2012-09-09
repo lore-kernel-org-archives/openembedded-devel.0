@@ -1,34 +1,33 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TAjlx-0007nR-9b
+	(envelope-from <raj.khem@gmail.com>) id 1TAlH8-00016T-A7
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Sep 2012 17:50:09 +0200
-Received: by eekb57 with SMTP id b57so546469eek.6
+	Sun, 09 Sep 2012 19:26:26 +0200
+Received: by daks35 with SMTP id s35so922956dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2012 08:37:41 -0700 (PDT)
+	Sun, 09 Sep 2012 10:13:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=KrfpxVmebdG4nINHcYRdjxOej2/ugQfu03RncRkP2+Y=;
-	b=dteSXG+61BzcJ1yAXWt+oe1fDxdQ5uTf0svBRRMiEG87rJQE1jlptHUdq/0AZgQoz3
-	y6vALbLfZYPY+PO1h8mT+SaN9XhYc6FkgaRz49NHTENV/cYCUIFGKQwHDMSwQ2RqS0z9
-	VnTZyRWdJUXs/gHnetr0xMXqMCch+QE8gxFSdGc2sWTQKwCvCif7qzJiyYGBTS42u8TM
-	rlg5VByT1Y/Y0/9xqD8STT+/hjlnIe5G1ofdvKZuCyWsHDT64geuMx9X+Cx3JlpHCEUg
-	1kJKJyKQ2zLw8QGjGHjGO3Q1nhCO8MBgz1dO/F4e5u/fzOfMywQjEeX3datgHK/IcrZ7
-	dLmQ==
-Received: by 10.14.202.66 with SMTP id c42mr15855198eeo.35.1347205061179; Sun,
-	09 Sep 2012 08:37:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.2.5 with HTTP; Sun, 9 Sep 2012 08:37:11 -0700 (PDT)
-In-Reply-To: <1468786.iJbNk0O7Nh@helios>
-References: <1347204678-22970-1-git-send-email-raj.khem@gmail.com>
-	<1468786.iJbNk0O7Nh@helios>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=NgDukkUQTNrqv3ythK83mAs68gL+/qbEn8btJfnEryU=;
+	b=A10+b77wQdz9vET2RFsIQHsJKyM6rUwaJO3F/r5IYbAyZAwMYwB3YMel2RwnO7H2U5
+	sE9EAlQq5JcXJXgnv8FhQu/zk4f3uwgfsykvBn3Ut07kUtM4fokkAD9Dpet/H7E7xSlm
+	abbxX5pNG+1zBtIdV6zugavStvCwemg+/eK+sYC31hqNj80KUJR1JX7b8TK31SUuM3yf
+	7loqEI7mOvFG5BLpEj3IkVBt4/uVCNRW8yCAUeP7sy/WQEZ0tdaz4A7U4ee8dwV6K6Me
+	Z2hWt07i47zcKyAlxT0e+7PzTxxZrL6EQ6mYB9GRNqwUxTkG6npor/PAMP2EJyg5GszQ
+	y7FQ==
+Received: by 10.68.226.132 with SMTP id rs4mr1088286pbc.75.1347210836944;
+	Sun, 09 Sep 2012 10:13:56 -0700 (PDT)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id nt7sm343471pbb.33.2012.09.09.10.13.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 09 Sep 2012 10:13:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 9 Sep 2012 08:37:11 -0700
-Message-ID: <CAMKF1spHFqDXtLx72XE5M6ePTVZ3RBD0YGbUpet_Pm0mBjkVEw@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] recipes: inherit packagegroup instead of obsoleted task bbclass
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Sep 2012 10:12:59 -0700
+Message-Id: <1347210779-20115-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-smartphone][PATCH] task-base.bbappend: Rename to packagegroup-base.bbappend to match OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2012 15:50:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 09 Sep 2012 17:26:26 -0000
 
-On Sun, Sep 9, 2012 at 8:35 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Sunday 09 September 2012 08:31:18 Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  recipes-opie/tasks/task-opie-16mb.bb   |    2 +-
->>  recipes-opie/tasks/task-opie-all.bb    |    2 +-
->>  recipes-opie/tasks/task-opie-apps.bb   |    2 +-
->>  recipes-opie/tasks/task-opie-games.bb  |    2 +-
->>  recipes-opie/tasks/task-opie.bb        |    2 +-
->>  recipes-opie/tasks/task-xqtlauncher.bb |    2 +-
->>  recipes-qtopia/tasks/task-qpe.bb       |    2 +-
->>  7 files changed, 7 insertions(+), 7 deletions(-)
->
-> Coincidentally I just pushed my patch series which obsoletes this one. Thanks
-> for prompting me to do this earlier though.
->
+Fixes
+WARNING: No recipes available for:
+  meta-smartphone/meta-openmoko/recipes-core/tasks/task-base.bbappend
 
-cool thanks.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../packagegroup-base.bbappend}                    |    0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-openmoko/recipes-core/{tasks/task-base.bbappend => packagegroups/packagegroup-base.bbappend} (100%)
 
+diff --git a/meta-openmoko/recipes-core/tasks/task-base.bbappend b/meta-openmoko/recipes-core/packagegroups/packagegroup-base.bbappend
+similarity index 100%
+rename from meta-openmoko/recipes-core/tasks/task-base.bbappend
+rename to meta-openmoko/recipes-core/packagegroups/packagegroup-base.bbappend
+-- 
+1.7.9.5
 
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
 
 
