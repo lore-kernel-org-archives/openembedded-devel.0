@@ -1,38 +1,21 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TAmW4-0002gK-8P
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TAolf-00065G-Fi
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Sep 2012 20:45:56 +0200
-Received: by daks35 with SMTP id s35so951029dak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2012 11:33:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=Uvs2CuUIK3ek3MaVNMhVnnOeYcTY74ERFIRKw5hTKUA=;
-	b=pUHIi9zIzJVWfk0pzrQACuMXR4U7PMVpjhuMjQ/BEB+V3Yz04Q+KUqWZ2cvqFagc5l
-	TZNwA54ajpH+p8LksBO83x8zxbaK46bI8jAE3VBj+PBdvkeh3ATuZ3ZuUQOUIY9LklpS
-	XszTigjofzSRiX76s9qh3T3d9633kbRw0bjPEkWL8NHtdoU1FH8eTNWaGBR6rRSlOZ4D
-	B+LKqAvMAwoZamS/2ycFGFwQYDwjf9LpaeInlksfcE6d3A+AtdpEVC77P1sxEncbk9+i
-	OxHkOopGqB6b683OsM+oe2qTzjbL0x8W7KUY5gauie6a6foiq+Syrmr0Yy3ckgQ/FJXq
-	PDBg==
-Received: by 10.66.76.130 with SMTP id k2mr17613327paw.19.1347215607018;
-	Sun, 09 Sep 2012 11:33:27 -0700 (PDT)
-Received: from sakrah.homelinux.org
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id uu6sm6619148pbc.70.2012.09.09.11.33.25
-	(version=SSLv3 cipher=OTHER); Sun, 09 Sep 2012 11:33:26 -0700 (PDT)
-Date: Sun, 9 Sep 2012 11:32:47 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 09 Sep 2012 23:10:11 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 09 Sep 2012 13:57:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,126,1344236400"; d="scan'208";a="143145325"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.121.165])
+	by AZSMGA002.ch.intel.com with ESMTP; 09 Sep 2012 13:57:16 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120909183245.GB14698@sakrah.homelinux.org>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1347210779-20115-1-git-send-email-raj.khem@gmail.com>
-	<20120909173353.GA3647@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20120909173353.GA3647@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-smartphone][PATCH] task-base.bbappend: Rename to packagegroup-base.bbappend to match OE-Core
+Date: Sun,  9 Sep 2012 21:56:57 +0100
+Message-Id: <1347224217-2829-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Joe MacDonald <joe.macdonald@windriver.com>
+Subject: [meta-networking][PATCH] zeroconf: add from OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,62 +29,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2012 18:45:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 09 Sep 2012 21:10:11 -0000
 
-On (09/09/12 19:33), Martin Jansa wrote:
-> On Sun, Sep 09, 2012 at 10:12:59AM -0700, Khem Raj wrote:
-> > Fixes
-> > WARNING: No recipes available for:
-> >   meta-smartphone/meta-openmoko/recipes-core/tasks/task-base.bbappend
-> 
-> Thanks for reminder, I've merged shr branch (where it was fixed for a
-> while) to master.
-> 
+This is about to be removed from OE-Core, so add it here for those that
+still want it.
 
-good. Thanks
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ .../zeroconf/zeroconf/compilefix.patch             |   19 ++++++++
+ .../recipes-misc/zeroconf/zeroconf/debian-zeroconf |   51 ++++++++++++++++++++
+ .../zeroconf/zeroconf/zeroconf-default             |   17 +++++++
+ .../recipes-misc/zeroconf/zeroconf_0.9.bb          |   34 +++++++++++++
+ 4 files changed, 121 insertions(+)
+ create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
+ create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
+ create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
+ create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
 
-> I was waiting for
-> http://patchwork.openembedded.org/patch/35989/
-> in meta-oe (because I've removed PRINC for foxtrotgps in meta-shr with
-> it), but nobody cares about upgrade path of foxtrotgps with meta-shr I
-> guess (except me, but I have shr branches for that).
-> 
-> Cheers,
-> 
-> > 
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  .../packagegroup-base.bbappend}                    |    0
-> >  1 file changed, 0 insertions(+), 0 deletions(-)
-> >  rename meta-openmoko/recipes-core/{tasks/task-base.bbappend => packagegroups/packagegroup-base.bbappend} (100%)
-> > 
-> > diff --git a/meta-openmoko/recipes-core/tasks/task-base.bbappend b/meta-openmoko/recipes-core/packagegroups/packagegroup-base.bbappend
-> > similarity index 100%
-> > rename from meta-openmoko/recipes-core/tasks/task-base.bbappend
-> > rename to meta-openmoko/recipes-core/packagegroups/packagegroup-base.bbappend
-> > -- 
-> > 1.7.9.5
-> > 
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
+new file mode 100644
+index 0000000..328e574
+--- /dev/null
++++ b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
+@@ -0,0 +1,19 @@
++| zeroconf.c: In function 'main':
++| zeroconf.c:145: error: 'PATH_MAX' undeclared (first use in this function)
++
++RP - 4/9/09
++
++Upstream-Status: Pending
++
++Index: zeroconf-0.9/zeroconf.c
++===================================================================
++--- zeroconf-0.9.orig/zeroconf.c	2009-09-04 10:05:25.000000000 +0100
+++++ zeroconf-0.9/zeroconf.c	2009-09-04 10:05:42.000000000 +0100
++@@ -33,6 +33,7 @@
++ #include <net/if_arp.h>
++ #include <sys/time.h>
++ #include <signal.h>
+++#include <limits.h>
++ 
++ #include "delay.h"
++ 
+diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
+new file mode 100644
+index 0000000..c3705d2
+--- /dev/null
++++ b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
+@@ -0,0 +1,51 @@
++#!/bin/sh
++
++if [ ! -x /usr/sbin/zeroconf ]; then
++    exit 0
++fi
++
++# IPv4 link-local addresses (zeroconf) are
++# only applicable on the 'inet' address family
++[ "X$ADDRFAM" != "Xinet" ] && exit 0
++
++# However there are some methods where it doesn't
++# make any sense to configure an IPv4LL address
++
++# not on loopback
++[ "X$METHOD" = "Xloopback" ] && exit 0
++
++# not on ppp or wvdial either
++[ "X$METHOD" = "Xppp" ] && exit 0
++[ "X$METHOD" = "Xwvdial" ] && exit 0
++
++# The administrator may have blacklisted interfaces
++# or only want zeroconf in a fallback situation
++[ -f /etc/default/zeroconf ] &&
++    . /etc/default/zeroconf
++
++[ -n "$DISABLE" ] && exit 0
++
++for BLACK in $IFBLACKLIST; do
++    case $IFACE in
++	$BLACK)
++	exit 0
++	;;
++    esac
++done
++
++# should we only allocate an address if we do not already have one?
++if [ -n "$FALLBACK" ]; then
++    /bin/ip addr show $IFACE scope global | grep -q "inet"
++    IP=$?
++    if [ $IP -eq 0 ]; then
++        /bin/ip route add 169.254.0.0/16 dev $IFACE
++        exit 0
++    fi
++fi
++
++# otherwise, run if we aren't already going
++if [ ! -r /var/run/zeroconf.$IFACE.pid ]; then
++	/usr/sbin/zeroconf -i $IFACE
++fi
++
++exit 0
+diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
+new file mode 100644
+index 0000000..cc07b27
+--- /dev/null
++++ b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
+@@ -0,0 +1,17 @@
++# Default for zeroconf
++
++# disable zeroconf
++# If you want to disable zeroconf completely, uncomment the following line
++# this may be useful if you are debugging zeroconf or starting it manually
++#DISABLE=yes
++
++# black-listed interfaces
++# Interfaces which you never wish to have zeroconf run on should
++# be listed here. e.g. "eth2 wlan1" in a space seperated string
++IFBLACKLIST=""
++
++# fallback only
++# If you would only like a link-local address if you were unable to
++# obtain an address via DHCP then uncomment the following line
++#FALLBACK=yes
++
+diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
+new file mode 100644
+index 0000000..f755940
+--- /dev/null
++++ b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "IPv4 link-local address allocator"
++DESCRIPTION = "Zeroconf is a program that is used to claim IPv4 \
++link-local addresses. IPv4 link-local addresses are useful when setting \
++up ad-hoc networking between devices without the involvement of a either \
++a DHCP server or network administrator. \
++These addresses are allocated from the 169.254.0.0/16 address range and \
++are normally attached to each Ethernet device in your computer. \
++Addresses are assigned randomly by each host and, in case of collision, \
++both hosts (are supposed to) renumber."
++AUTHOR = "Anand Kumria <wildfire@progsoc.uts.edu.au>"
++HOMEPAGE = "http://www.progsoc.org/~wildfire/zeroconf/"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
++                    file://zeroconf.c;beginline=1;endline=13;md5=a5bada96e1e34b08eb7446b28e2630b2"
++SECTION = "net"
++
++PR = "r1"
++
++SRC_URI = "http://www.progsoc.org/~wildfire/zeroconf/download/${BPN}-${PV}.tar.gz \
++           file://compilefix.patch \
++           file://zeroconf-default \
++           file://debian-zeroconf"
++
++SRC_URI[md5sum] = "bdafb16b008ebb5633e4e581f77821d2"
++SRC_URI[sha256sum] = "a8c74df127753e2310fa1e072f3c9ca44a404bb0bbce9cfec7a84c6dff8bec7b"
++
++do_install () {
++	install -d ${D}${sbindir}
++	install -d ${D}${sysconfdir}/network/if-up.d
++	install -d ${D}${sysconfdir}/default
++	install -c -m 755 ${S}/zeroconf ${D}${sbindir}/zeroconf
++	install -c -m 755 ${WORKDIR}/debian-zeroconf ${D}${sysconfdir}/network/if-up.d/zeroconf
++	install -c ${WORKDIR}/zeroconf-default ${D}${sysconfdir}/default/zeroconf
++}
 -- 
--Khem
+1.7.9.5
+
 
 
