@@ -1,21 +1,42 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TAolf-00065G-Fi
+	(envelope-from <sledz@dresearch-fe.de>) id 1TAxEu-0001yG-Cr
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Sep 2012 23:10:11 +0200
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 09 Sep 2012 13:57:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,126,1344236400"; d="scan'208";a="143145325"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.121.165])
-	by AZSMGA002.ch.intel.com with ESMTP; 09 Sep 2012 13:57:16 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Mon, 10 Sep 2012 08:12:56 +0200
+Received: by eekb57 with SMTP id b57so724753eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Sep 2012 23:00:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=OZ8eiOrzzyPiCex5LM43JVd9eC3cPE1uPwryfMS+3xA=;
+	b=EJn+OHLcpuHZVOaZIiIQSgzHRjLeOPt1iPyKtgXrNfql9KNdFF6XmGeq46H6ZaNYLB
+	GqvrsttmmZ0CuCrU/U3D+LX+ERswXsuvki+hVaj17qlGASyfynowVa5oyIZtT12vhPMu
+	dNtmklBV4u+vHl0WFJ35WTssnqkth9mpp4PGJZ10WyIHQjjD6fTU+oYSJZFxnozY2Br7
+	eNg7i78g+SaIeK3I2heDF1unMp7h2quJtI/UVw1QqVhyvb8ZJy/8V+9KOEgcOt58OKg2
+	yXXVme+YNHtyb5nTSBrJxRPVGTo/h5W/YsKTu7+cgdI7C1f5eq/p6PGi9sGQY9Gblr+0
+	EGBQ==
+Received: by 10.204.154.73 with SMTP id n9mr3400896bkw.113.1347256826887;
+	Sun, 09 Sep 2012 23:00:26 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id 14sm5909111bkq.12.2012.09.09.23.00.25
+	(version=SSLv3 cipher=OTHER); Sun, 09 Sep 2012 23:00:26 -0700 (PDT)
+Message-ID: <504D81F8.9020702@dresearch-fe.de>
+Date: Mon, 10 Sep 2012 08:00:24 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120825 Thunderbird/15.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Sep 2012 21:56:57 +0100
-Message-Id: <1347224217-2829-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Joe MacDonald <joe.macdonald@windriver.com>
-Subject: [meta-networking][PATCH] zeroconf: add from OE-Core
+References: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
+	<50489445.3020100@dresearch-fe.de>
+In-Reply-To: <50489445.3020100@dresearch-fe.de>
+X-Enigmail-Version: 1.4.4
+X-Gm-Message-State: ALoCoQnZ8uCBkakYDPLFC1TFmk9m2Q4rqM6A/52AE6vynYmwjNAFEUf0eK1nTrY9u6tpLgVnbadR
+Subject: Re: [2011.03-maintenance][PATCH] gtk+_2.20.1: Depend on gdk-pixbuf-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,170 +50,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2012 21:10:11 -0000
+X-List-Received-Date: Mon, 10 Sep 2012 06:12:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-This is about to be removed from OE-Core, so add it here for those that
-still want it.
+On 06.09.2012 14:17, Steffen Sledz wrote:
+> On 28.08.2012 00:50, Khem Raj wrote:
+>> also BBCLASSEXTEND gdk-pixbuf recipes to provide
+>> native version
+>>
+>> Newer distros which ship glib-2.0 version 2.32+
+>> there are some missing symbols that gtk+ 2.20
+>> will complain about. So we create own gdk-pixbuf
+>> so it does not link to library from host system
+> 
+> It seems that the dependencies are incomplete.
+> 
+> -----------> snip <-----------
+> ...
+> | checking for BASE_DEPENDENCIES... configure: error: Package requirements (glib-2.0 >= 2.12.0    atk >= 1.9.0    pango >= 1.12.0    cairo >= 1.2.0) were not met:
+> |
+> | No package 'atk' found
+> | No package 'pango' found
+> | No package 'cairo' found
+> |
+> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> | installed software in a non-standard prefix.
+> |
+> | Alternatively, you may set the environment variables BASE_DEPENDENCIES_CFLAGS
+> | and BASE_DEPENDENCIES_LIBS to avoid the need to call pkg-config.
+> | See the pkg-config man page for more details.
+> |
+> NOTE: package gdk-pixbuf-native-2.10.14-r2: task do_configure: Failed
+> -----------> snip <-----------
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../zeroconf/zeroconf/compilefix.patch             |   19 ++++++++
- .../recipes-misc/zeroconf/zeroconf/debian-zeroconf |   51 ++++++++++++++++++++
- .../zeroconf/zeroconf/zeroconf-default             |   17 +++++++
- .../recipes-misc/zeroconf/zeroconf_0.9.bb          |   34 +++++++++++++
- 4 files changed, 121 insertions(+)
- create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
- create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
- create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
- create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
+Ping!
 
-diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
-new file mode 100644
-index 0000000..328e574
---- /dev/null
-+++ b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
-@@ -0,0 +1,19 @@
-+| zeroconf.c: In function 'main':
-+| zeroconf.c:145: error: 'PATH_MAX' undeclared (first use in this function)
-+
-+RP - 4/9/09
-+
-+Upstream-Status: Pending
-+
-+Index: zeroconf-0.9/zeroconf.c
-+===================================================================
-+--- zeroconf-0.9.orig/zeroconf.c	2009-09-04 10:05:25.000000000 +0100
-++++ zeroconf-0.9/zeroconf.c	2009-09-04 10:05:42.000000000 +0100
-+@@ -33,6 +33,7 @@
-+ #include <net/if_arp.h>
-+ #include <sys/time.h>
-+ #include <signal.h>
-++#include <limits.h>
-+ 
-+ #include "delay.h"
-+ 
-diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
-new file mode 100644
-index 0000000..c3705d2
---- /dev/null
-+++ b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
-@@ -0,0 +1,51 @@
-+#!/bin/sh
-+
-+if [ ! -x /usr/sbin/zeroconf ]; then
-+    exit 0
-+fi
-+
-+# IPv4 link-local addresses (zeroconf) are
-+# only applicable on the 'inet' address family
-+[ "X$ADDRFAM" != "Xinet" ] && exit 0
-+
-+# However there are some methods where it doesn't
-+# make any sense to configure an IPv4LL address
-+
-+# not on loopback
-+[ "X$METHOD" = "Xloopback" ] && exit 0
-+
-+# not on ppp or wvdial either
-+[ "X$METHOD" = "Xppp" ] && exit 0
-+[ "X$METHOD" = "Xwvdial" ] && exit 0
-+
-+# The administrator may have blacklisted interfaces
-+# or only want zeroconf in a fallback situation
-+[ -f /etc/default/zeroconf ] &&
-+    . /etc/default/zeroconf
-+
-+[ -n "$DISABLE" ] && exit 0
-+
-+for BLACK in $IFBLACKLIST; do
-+    case $IFACE in
-+	$BLACK)
-+	exit 0
-+	;;
-+    esac
-+done
-+
-+# should we only allocate an address if we do not already have one?
-+if [ -n "$FALLBACK" ]; then
-+    /bin/ip addr show $IFACE scope global | grep -q "inet"
-+    IP=$?
-+    if [ $IP -eq 0 ]; then
-+        /bin/ip route add 169.254.0.0/16 dev $IFACE
-+        exit 0
-+    fi
-+fi
-+
-+# otherwise, run if we aren't already going
-+if [ ! -r /var/run/zeroconf.$IFACE.pid ]; then
-+	/usr/sbin/zeroconf -i $IFACE
-+fi
-+
-+exit 0
-diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
-new file mode 100644
-index 0000000..cc07b27
---- /dev/null
-+++ b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
-@@ -0,0 +1,17 @@
-+# Default for zeroconf
-+
-+# disable zeroconf
-+# If you want to disable zeroconf completely, uncomment the following line
-+# this may be useful if you are debugging zeroconf or starting it manually
-+#DISABLE=yes
-+
-+# black-listed interfaces
-+# Interfaces which you never wish to have zeroconf run on should
-+# be listed here. e.g. "eth2 wlan1" in a space seperated string
-+IFBLACKLIST=""
-+
-+# fallback only
-+# If you would only like a link-local address if you were unable to
-+# obtain an address via DHCP then uncomment the following line
-+#FALLBACK=yes
-+
-diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
-new file mode 100644
-index 0000000..f755940
---- /dev/null
-+++ b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "IPv4 link-local address allocator"
-+DESCRIPTION = "Zeroconf is a program that is used to claim IPv4 \
-+link-local addresses. IPv4 link-local addresses are useful when setting \
-+up ad-hoc networking between devices without the involvement of a either \
-+a DHCP server or network administrator. \
-+These addresses are allocated from the 169.254.0.0/16 address range and \
-+are normally attached to each Ethernet device in your computer. \
-+Addresses are assigned randomly by each host and, in case of collision, \
-+both hosts (are supposed to) renumber."
-+AUTHOR = "Anand Kumria <wildfire@progsoc.uts.edu.au>"
-+HOMEPAGE = "http://www.progsoc.org/~wildfire/zeroconf/"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
-+                    file://zeroconf.c;beginline=1;endline=13;md5=a5bada96e1e34b08eb7446b28e2630b2"
-+SECTION = "net"
-+
-+PR = "r1"
-+
-+SRC_URI = "http://www.progsoc.org/~wildfire/zeroconf/download/${BPN}-${PV}.tar.gz \
-+           file://compilefix.patch \
-+           file://zeroconf-default \
-+           file://debian-zeroconf"
-+
-+SRC_URI[md5sum] = "bdafb16b008ebb5633e4e581f77821d2"
-+SRC_URI[sha256sum] = "a8c74df127753e2310fa1e072f3c9ca44a404bb0bbce9cfec7a84c6dff8bec7b"
-+
-+do_install () {
-+	install -d ${D}${sbindir}
-+	install -d ${D}${sysconfdir}/network/if-up.d
-+	install -d ${D}${sysconfdir}/default
-+	install -c -m 755 ${S}/zeroconf ${D}${sbindir}/zeroconf
-+	install -c -m 755 ${WORKDIR}/debian-zeroconf ${D}${sysconfdir}/network/if-up.d/zeroconf
-+	install -c ${WORKDIR}/zeroconf-default ${D}${sysconfdir}/default/zeroconf
-+}
 -- 
-1.7.9.5
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
