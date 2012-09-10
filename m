@@ -1,26 +1,24 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TB2SN-0000Nv-Mg
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TB2qm-0001CR-Ub
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2012 13:47:12 +0200
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q8ABYdWL026973
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 10 Sep 2012 04:34:40 -0700 (PDT)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
-	id 69E436A348D; Mon, 10 Sep 2012 07:34:39 -0400 (EDT)
-Date: Mon, 10 Sep 2012 07:34:39 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20120910113439.GA24943@windriver.com>
+	Mon, 10 Sep 2012 14:12:25 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 10 Sep 2012 04:59:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,396,1344236400"; d="scan'208";a="200729997"
+Received: from unknown (HELO helios.localnet) ([10.252.121.193])
+	by orsmga002.jf.intel.com with ESMTP; 10 Sep 2012 04:59:53 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+Date: Mon, 10 Sep 2012 12:59:51 +0100
+Message-ID: <9232516.1xch2uBtF4@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-30-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <20120910113439.GA24943@windriver.com>
 References: <1347224217-2829-1-git-send-email-paul.eggleton@linux.intel.com>
+	<20120910113439.GA24943@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1347224217-2829-1-git-send-email-paul.eggleton@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-networking][PATCH] zeroconf: add from OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,183 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2012 11:47:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 Sep 2012 12:12:25 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-[[meta-networking][PATCH] zeroconf: add from OE-Core] On 12.09.09 (Sun 21:56) Paul Eggleton wrote:
-
-> This is about to be removed from OE-Core, so add it here for those that
-> still want it.
->
-
-I've wondered about this, considering how long ago my original proposal
-was and we haven't really gotten into the bulk of the migrations I'd
-planned on but if there's no objection to the original recipe directory
-structure I'd originally proposed, I think this would make sense to live
-in recipes-protocols/.
-
--J.
-
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  .../zeroconf/zeroconf/compilefix.patch             |   19 ++++++++
->  .../recipes-misc/zeroconf/zeroconf/debian-zeroconf |   51 ++++++++++++++++++++
->  .../zeroconf/zeroconf/zeroconf-default             |   17 +++++++
->  .../recipes-misc/zeroconf/zeroconf_0.9.bb          |   34 +++++++++++++
->  4 files changed, 121 insertions(+)
->  create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
->  create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
->  create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
->  create mode 100644 meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
+On Monday 10 September 2012 07:34:39 Joe MacDonald wrote:
+> [[meta-networking][PATCH] zeroconf: add from OE-Core] On 12.09.09 (Sun 
+21:56) Paul Eggleton wrote:
+> > This is about to be removed from OE-Core, so add it here for those that
+> > still want it.
 > 
-> diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
-> new file mode 100644
-> index 0000000..328e574
-> --- /dev/null
-> +++ b/meta-networking/recipes-misc/zeroconf/zeroconf/compilefix.patch
-> @@ -0,0 +1,19 @@
-> +| zeroconf.c: In function 'main':
-> +| zeroconf.c:145: error: 'PATH_MAX' undeclared (first use in this function)
-> +
-> +RP - 4/9/09
-> +
-> +Upstream-Status: Pending
-> +
-> +Index: zeroconf-0.9/zeroconf.c
-> +===================================================================
-> +--- zeroconf-0.9.orig/zeroconf.c	2009-09-04 10:05:25.000000000 +0100
-> ++++ zeroconf-0.9/zeroconf.c	2009-09-04 10:05:42.000000000 +0100
-> +@@ -33,6 +33,7 @@
-> + #include <net/if_arp.h>
-> + #include <sys/time.h>
-> + #include <signal.h>
-> ++#include <limits.h>
-> + 
-> + #include "delay.h"
-> + 
-> diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
-> new file mode 100644
-> index 0000000..c3705d2
-> --- /dev/null
-> +++ b/meta-networking/recipes-misc/zeroconf/zeroconf/debian-zeroconf
-> @@ -0,0 +1,51 @@
-> +#!/bin/sh
-> +
-> +if [ ! -x /usr/sbin/zeroconf ]; then
-> +    exit 0
-> +fi
-> +
-> +# IPv4 link-local addresses (zeroconf) are
-> +# only applicable on the 'inet' address family
-> +[ "X$ADDRFAM" != "Xinet" ] && exit 0
-> +
-> +# However there are some methods where it doesn't
-> +# make any sense to configure an IPv4LL address
-> +
-> +# not on loopback
-> +[ "X$METHOD" = "Xloopback" ] && exit 0
-> +
-> +# not on ppp or wvdial either
-> +[ "X$METHOD" = "Xppp" ] && exit 0
-> +[ "X$METHOD" = "Xwvdial" ] && exit 0
-> +
-> +# The administrator may have blacklisted interfaces
-> +# or only want zeroconf in a fallback situation
-> +[ -f /etc/default/zeroconf ] &&
-> +    . /etc/default/zeroconf
-> +
-> +[ -n "$DISABLE" ] && exit 0
-> +
-> +for BLACK in $IFBLACKLIST; do
-> +    case $IFACE in
-> +	$BLACK)
-> +	exit 0
-> +	;;
-> +    esac
-> +done
-> +
-> +# should we only allocate an address if we do not already have one?
-> +if [ -n "$FALLBACK" ]; then
-> +    /bin/ip addr show $IFACE scope global | grep -q "inet"
-> +    IP=$?
-> +    if [ $IP -eq 0 ]; then
-> +        /bin/ip route add 169.254.0.0/16 dev $IFACE
-> +        exit 0
-> +    fi
-> +fi
-> +
-> +# otherwise, run if we aren't already going
-> +if [ ! -r /var/run/zeroconf.$IFACE.pid ]; then
-> +	/usr/sbin/zeroconf -i $IFACE
-> +fi
-> +
-> +exit 0
-> diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
-> new file mode 100644
-> index 0000000..cc07b27
-> --- /dev/null
-> +++ b/meta-networking/recipes-misc/zeroconf/zeroconf/zeroconf-default
-> @@ -0,0 +1,17 @@
-> +# Default for zeroconf
-> +
-> +# disable zeroconf
-> +# If you want to disable zeroconf completely, uncomment the following line
-> +# this may be useful if you are debugging zeroconf or starting it manually
-> +#DISABLE=yes
-> +
-> +# black-listed interfaces
-> +# Interfaces which you never wish to have zeroconf run on should
-> +# be listed here. e.g. "eth2 wlan1" in a space seperated string
-> +IFBLACKLIST=""
-> +
-> +# fallback only
-> +# If you would only like a link-local address if you were unable to
-> +# obtain an address via DHCP then uncomment the following line
-> +#FALLBACK=yes
-> +
-> diff --git a/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
-> new file mode 100644
-> index 0000000..f755940
-> --- /dev/null
-> +++ b/meta-networking/recipes-misc/zeroconf/zeroconf_0.9.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY = "IPv4 link-local address allocator"
-> +DESCRIPTION = "Zeroconf is a program that is used to claim IPv4 \
-> +link-local addresses. IPv4 link-local addresses are useful when setting \
-> +up ad-hoc networking between devices without the involvement of a either \
-> +a DHCP server or network administrator. \
-> +These addresses are allocated from the 169.254.0.0/16 address range and \
-> +are normally attached to each Ethernet device in your computer. \
-> +Addresses are assigned randomly by each host and, in case of collision, \
-> +both hosts (are supposed to) renumber."
-> +AUTHOR = "Anand Kumria <wildfire@progsoc.uts.edu.au>"
-> +HOMEPAGE = "http://www.progsoc.org/~wildfire/zeroconf/"
-> +LICENSE = "GPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
-> +                    file://zeroconf.c;beginline=1;endline=13;md5=a5bada96e1e34b08eb7446b28e2630b2"
-> +SECTION = "net"
-> +
-> +PR = "r1"
-> +
-> +SRC_URI = "http://www.progsoc.org/~wildfire/zeroconf/download/${BPN}-${PV}.tar.gz \
-> +           file://compilefix.patch \
-> +           file://zeroconf-default \
-> +           file://debian-zeroconf"
-> +
-> +SRC_URI[md5sum] = "bdafb16b008ebb5633e4e581f77821d2"
-> +SRC_URI[sha256sum] = "a8c74df127753e2310fa1e072f3c9ca44a404bb0bbce9cfec7a84c6dff8bec7b"
-> +
-> +do_install () {
-> +	install -d ${D}${sbindir}
-> +	install -d ${D}${sysconfdir}/network/if-up.d
-> +	install -d ${D}${sysconfdir}/default
-> +	install -c -m 755 ${S}/zeroconf ${D}${sbindir}/zeroconf
-> +	install -c -m 755 ${WORKDIR}/debian-zeroconf ${D}${sysconfdir}/network/if-up.d/zeroconf
-> +	install -c ${WORKDIR}/zeroconf-default ${D}${sysconfdir}/default/zeroconf
-> +}
+> I've wondered about this, considering how long ago my original proposal
+> was and we haven't really gotten into the bulk of the migrations I'd
+> planned on but if there's no objection to the original recipe directory
+> structure I'd originally proposed, I think this would make sense to live
+> in recipes-protocols/.
+
+Sounds reasonable; I'll sent a v2.
+
+Cheers,
+Paul
+
 -- 
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind River
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
