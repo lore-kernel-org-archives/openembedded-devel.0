@@ -1,38 +1,31 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from gnukia.org ([85.214.67.64] helo=cbs.gnukia.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TB5Co-0007Qe-VZ
+	(envelope-from <tilman@baumann.name>) id 1TB7sE-0003Pw-LG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2012 16:43:19 +0200
-Received: from localhost ([127.0.0.1]:33653 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TB50j-0004r6-G3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2012 14:30:49 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding; s=default;
-	bh=dswnh2Xh/TtUU1UPJnSCNplh9PM=; b=uZpXlp9Yx/pKuTwuLZ6xxuC0esA+
-	uPvm0WC6Zx88zxqo6uXrDn2DcGo8N1MOZ6i2eIxAeem+LmZiqCrP5CEBUAcefYIo
-	1iJb4IJHQQAgW6kb4CIejd8QgAlgjrqC8l4uKDPdnfs8T9qPESgetGVSyfzQxtY1
-	MYTkvavPEMqXsgk=
-Received: from [195.171.99.130] (port=15071 helo=[192.168.0.40])
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TB50j-0004r3-Dy
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2012 14:30:49 +0000
-Message-ID: <504DF9FA.8020204@communistcode.co.uk>
-Date: Mon, 10 Sep 2012 15:32:26 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120828 Thunderbird/15.0
+	Mon, 10 Sep 2012 19:34:14 +0200
+Received: from cbs.gnukia.org (cbs.gnukia.org [127.0.0.1])
+	by localhost (Postfix) with ESMTP id A3701EC4003
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Sep 2012 19:06:42 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on cbs.gnukia.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=8.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.0.21] (mail.grandeye.com [82.16.22.188])
+	by cbs.gnukia.org (Postfix) with ESMTPSA id 78A80EC4002
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Sep 2012 19:06:42 +0200 (CEST)
+Date: Mon, 10 Sep 2012 18:12:52 +0100
+From: Tilman Baumann <tilman@baumann.name>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:15.0) Gecko/20120824 Thunderbird/15.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <504DE45C.2010202@communistcode.co.uk>
-	<1347282537.2673.239.camel@phil-desktop>
-	<504DF65B.4080805@communistcode.co.uk>
-	<1347286924.2673.250.camel@phil-desktop>
-In-Reply-To: <1347286924.2673.250.camel@phil-desktop>
-Subject: Re: Couple of autotools configure problems
+X-Filtered: By ProxSMTP
+Message-ID: <504E1F94.9000606@baumann.name>
+X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.42/RELEASE,
+	bases: 20111108 #5646748, check: 20120910 clean
+Subject: minimal template layer for new machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2012 14:43:19 -0000
+X-List-Received-Date: Mon, 10 Sep 2012 17:34:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 10/09/12 15:22, Phil Blundell wrote:
-> On Mon, 2012-09-10 at 15:16 +0100, Jack Mitchell wrote:
->> Ok, re-building now - will let you know how it goes. I removed the -Wall
->> flag. It makes no sense at all as the -Wall flag is passed using the :=
->> operator, is that not a contradiction in itself?!
-> Sounds like you might be looking at the wrong -Wall.  The one that
-> matters here is the one in AM_INIT_AUTOMAKE(), not to be confused with
-> the compiler option of the same name which gets set in CFLAGS.
->
-> p.
->
->
+Hi,
 
-Ok, that makes more sense!
+I'm working on a TI DM812x support overlay.
+I guess what it comes down to is a new kernel recipe (based on TI's 
+sources) and this funny two stage u-boot.
+I think I can write the recipes. But what I don't quite see is how I 
+would add a new supported machine in the first place?
+I was trying to orient myself on a few existing machine support layers. 
+But I think I'm still missing the point.
+What are the minimal basics to implement? Where should I start?
 
-Thanks,
+Thanks for any help.
 
--- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
-
+Cheers
+  Tilman
 
 
