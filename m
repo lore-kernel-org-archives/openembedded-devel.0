@@ -1,42 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1TAxEu-0001yG-Cr
+	(envelope-from <martin.jansa@gmail.com>) id 1TB02C-0005c6-AU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Sep 2012 08:12:56 +0200
-Received: by eekb57 with SMTP id b57so724753eek.6
+	Mon, 10 Sep 2012 11:12:00 +0200
+Received: by eaad12 with SMTP id d12so681471eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2012 23:00:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=OZ8eiOrzzyPiCex5LM43JVd9eC3cPE1uPwryfMS+3xA=;
-	b=EJn+OHLcpuHZVOaZIiIQSgzHRjLeOPt1iPyKtgXrNfql9KNdFF6XmGeq46H6ZaNYLB
-	GqvrsttmmZ0CuCrU/U3D+LX+ERswXsuvki+hVaj17qlGASyfynowVa5oyIZtT12vhPMu
-	dNtmklBV4u+vHl0WFJ35WTssnqkth9mpp4PGJZ10WyIHQjjD6fTU+oYSJZFxnozY2Br7
-	eNg7i78g+SaIeK3I2heDF1unMp7h2quJtI/UVw1QqVhyvb8ZJy/8V+9KOEgcOt58OKg2
-	yXXVme+YNHtyb5nTSBrJxRPVGTo/h5W/YsKTu7+cgdI7C1f5eq/p6PGi9sGQY9Gblr+0
-	EGBQ==
-Received: by 10.204.154.73 with SMTP id n9mr3400896bkw.113.1347256826887;
-	Sun, 09 Sep 2012 23:00:26 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
-	[217.92.177.116])
-	by mx.google.com with ESMTPS id 14sm5909111bkq.12.2012.09.09.23.00.25
-	(version=SSLv3 cipher=OTHER); Sun, 09 Sep 2012 23:00:26 -0700 (PDT)
-Message-ID: <504D81F8.9020702@dresearch-fe.de>
-Date: Mon, 10 Sep 2012 08:00:24 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120825 Thunderbird/15.0
-MIME-Version: 1.0
+	Mon, 10 Sep 2012 01:59:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=tdYx+igMiJUf1ch1ck074zy7nHoS/1U0qQ9BF05wdus=;
+	b=q59O+8Rk0uOwZ6JIlBKDs0JumKtmdROxKwuPPNdVrby6I3tZOZyHn1WgWD24E4VMoh
+	YOUnE3WPNtyO/hS701IH+vMC2a1kaJGVd1AQr32SWCjq+WInDjkT6QEYJ22a9QrMU2TQ
+	W024gQ+YLX1BCj1P74GXF6d8GexiFyU5WsdL2kDAghWkXTTglMAuDnfzbSePdM0DZuC2
+	xDiDk5hnpf5WmbS0g2KhzKKLqeyDrkcwgGdI6itlkd1tIa55PJ2aiMgC0jcpI7sgNuP/
+	NR6+BUJ0FfTQRnlAZeo8Y0Wtjes1YDKDq+VVFZBg9Zv+8z/+zZJPQu2Ojxn//FWacRpf
+	7nXQ==
+Received: by 10.204.129.4 with SMTP id m4mr3423563bks.55.1347267570882;
+	Mon, 10 Sep 2012 01:59:30 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id he8sm6295346bkc.3.2012.09.10.01.59.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 10 Sep 2012 01:59:29 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1346107854-28927-1-git-send-email-raj.khem@gmail.com>
-	<50489445.3020100@dresearch-fe.de>
-In-Reply-To: <50489445.3020100@dresearch-fe.de>
-X-Enigmail-Version: 1.4.4
-X-Gm-Message-State: ALoCoQnZ8uCBkakYDPLFC1TFmk9m2Q4rqM6A/52AE6vynYmwjNAFEUf0eK1nTrY9u6tpLgVnbadR
-Subject: Re: [2011.03-maintenance][PATCH] gtk+_2.20.1: Depend on gdk-pixbuf-native
+Date: Mon, 10 Sep 2012 10:59:24 +0200
+Message-Id: <1347267564-25036-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12
+Subject: [meta-oe][meta-efl][PATCH] meta-efl: enjoy: Fix SHR bug #2058
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +40,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2012 06:12:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 10 Sep 2012 09:12:00 -0000
 
-On 06.09.2012 14:17, Steffen Sledz wrote:
-> On 28.08.2012 00:50, Khem Raj wrote:
->> also BBCLASSEXTEND gdk-pixbuf recipes to provide
->> native version
->>
->> Newer distros which ship glib-2.0 version 2.32+
->> there are some missing symbols that gtk+ 2.20
->> will complain about. So we create own gdk-pixbuf
->> so it does not link to library from host system
-> 
-> It seems that the dependencies are incomplete.
-> 
-> -----------> snip <-----------
-> ...
-> | checking for BASE_DEPENDENCIES... configure: error: Package requirements (glib-2.0 >= 2.12.0    atk >= 1.9.0    pango >= 1.12.0    cairo >= 1.2.0) were not met:
-> |
-> | No package 'atk' found
-> | No package 'pango' found
-> | No package 'cairo' found
-> |
-> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> | installed software in a non-standard prefix.
-> |
-> | Alternatively, you may set the environment variables BASE_DEPENDENCIES_CFLAGS
-> | and BASE_DEPENDENCIES_LIBS to avoid the need to call pkg-config.
-> | See the pkg-config man page for more details.
-> |
-> NOTE: package gdk-pixbuf-native-2.10.14-r2: task do_configure: Failed
-> -----------> snip <-----------
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
-Ping!
+The bug is located here:
+  http://www.shr-project.org/trac/ticket/2058
 
+The patch will probably be sent upstream by its author.
+
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ ...position-as-percent-and-define-a-1-second.patch | 133 +++++++++++++++++++++
+ meta-efl/recipes-efl/e17/enjoy_svn.bb              |   7 +-
+ 2 files changed, 139 insertions(+), 1 deletion(-)
+ create mode 100644 meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+
+diff --git a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+new file mode 100644
+index 0000000..45f02b7
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+@@ -0,0 +1,133 @@
++From ac4c8a57e8a042acd4b8ff803d3d3574b0e7a7fb Mon Sep 17 00:00:00 2001
++From: Alban Browaeys <prahal@yahoo.com>
++Date: Wed, 5 Sep 2012 02:58:26 +0000
++Subject: [PATCH] always use position as percent and define a 1 seconds
++ tolerance.
++
++Fix "reverb" effect: ie loop between setting the slider to match
++the position and handling slider to position (seek).
++---
++ data/themes/default.edc |    8 +++-----
++ src/bin/win.c           |   28 ++++++++++++++++++++++------
++ 2 files changed, 25 insertions(+), 11 deletions(-)
++
++diff --git a/data/themes/default.edc b/data/themes/default.edc
++index 65efddf..27bb9e4 100644
++--- a/data/themes/default.edc
+++++ b/data/themes/default.edc
++@@ -186,7 +186,6 @@ collections {
++    group {
++       name: "nowplaying";
++       script {
++-         public cur_length;
++          public mute;
++ 
++          public get_time_str(Float:time, time_str[6])
++@@ -201,16 +200,15 @@ collections {
++                new Float:position = getfarg(2);
++                new Float:length = getfarg(3);
++                if (length > 0)
++-                  external_param_set_float(PART:"progress.slider", "value", position / length * 100);
+++                  external_param_set_float(PART:"progress.slider", "value", position * 100);
++                else
++                   external_param_set_float(PART:"progress.slider", "value", 0);
++ 
++                new time_str[6];
++-               get_time_str(position, time_str);
+++               get_time_str(position * length, time_str);
++                set_text(PART:"ejy.text.current_time", time_str);
++                get_time_str(length, time_str);
++                set_text(PART:"ejy.text.total_time", time_str);
++-               set_float(cur_length, length);
++             } else if (type == MSG_INT && id == MSG_SHUFFLE) {
++                external_param_set_bool(PART:"buttons.shuffle", "state", getarg(2));
++             } else if (type == MSG_INT && id == MSG_LOOP) {
++@@ -687,7 +685,7 @@ collections {
++             source: "progress.slider";
++             signal: "changed";
++             script {
++-               send_message(MSG_FLOAT, MSG_POSITION, (external_param_get_float(PART:"progress.slider", "value") * get_float(cur_length) / 100));
+++               send_message(MSG_FLOAT, MSG_POSITION, (external_param_get_float(PART:"progress.slider", "value") / 100));
++             }
++          }
++          program {
++diff --git a/src/bin/win.c b/src/bin/win.c
++index 63951db..ad93ab5 100644
++--- a/src/bin/win.c
+++++ b/src/bin/win.c
++@@ -194,8 +194,8 @@ _win_play_eval(Win *w)
++ {
++    Edje_Message_Float_Set *mf;
++ 
++-   w->play.position = emotion_object_position_get(w->emotion);
++    w->play.length = emotion_object_play_length_get(w->emotion);
+++   w->play.position = emotion_object_position_get(w->emotion) / w->play.length;
++ 
++    if ((w->song) && (w->song->length != (int)w->play.length))
++       db_song_length_set(w->db, w->song, w->play.length);
++@@ -542,8 +542,14 @@ _win_edje_msg(void *data, Evas_Object *o __UNUSED__, Edje_Message_Type type, int
++          else
++            {
++               Edje_Message_Float *m = msg;
+++
+++              if ((((m->val - w->play.position) * w->play.length) < 1.0)
+++                  && (((w->play.position - m->val) * w->play.length) < 1.0))
+++                  return;
+++
++               w->play.position = m->val;
++-              emotion_object_position_set(w->emotion, w->play.position);
+++              emotion_object_position_set(w->emotion, w->play.position
+++                                                            * w->play.length);
++               ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
++            }
++         break;
++@@ -617,16 +623,21 @@ enjoy_control_seek(uint64_t position)
++ {
++    Win *w = &_win;
++    double seek_to;
+++   double new_pos = w->play.length / ((double)position / 1e6);
++ 
++    if (!w->db) return;
++-   seek_to = w->play.position + w->play.length / ((double)position / 1e6);
+++
+++   if ((((new_pos - w->play.position) * w->play.length) < 1.0)
+++       && (((w->play.position - new_pos) * w->play.length) < 1.0)) return;
+++
+++   seek_to = w->play.position + new_pos;
++    if (seek_to <= 0.0)
++      seek_to = 0.0;
++    else if (seek_to >= 1.0)
++      seek_to = 1.0;
++ 
++    w->play.position = seek_to;
++-   emotion_object_position_set(w->emotion, w->play.position);
+++   emotion_object_position_set(w->emotion, w->play.position * w->play.length);
++    ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
++ }
++ 
++@@ -692,15 +703,20 @@ EAPI void
++ enjoy_position_set(int32_t position)
++ {
++    Win *w = &_win;
+++   double new_pos = w->play.length / ((double)position / 1e6);
++ 
++    if (!w->db) return;
++-   w->play.position = w->play.length / ((double)position / 1e6);
+++
+++   if ((((new_pos - w->play.position) * w->play.length) < 1.0)
+++       && (((w->play.position - new_pos) * w->play.length) < 1.0)) return;
+++
+++   w->play.position = new_pos;
++    if (w->play.position < 0.0)
++      w->play.position = 0.0;
++    else if (w->play.position > 1.0)
++      w->play.position = 1.0;
++ 
++-   emotion_object_position_set(w->emotion, w->play.position);
+++   emotion_object_position_set(w->emotion, w->play.position * w->play.length);
++    ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
++ }
++ 
++-- 
++1.7.7
++
+diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
+index 06998cf..cfeb001 100644
+--- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
++++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
+@@ -21,9 +21,14 @@ RDEPENDS += "\
+        "
+ 
+ inherit e gettext
+-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
++SRC_URI = " \
++  ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
++  file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
++"
+ S = "${WORKDIR}/${SRCNAME}"
+ 
++PR = "r1"
++
+ FILES_${PN} += "${datadir}/icons/"
+ 
+ EXTRA_OECONF = "\
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.12
+
 
 
