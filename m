@@ -1,22 +1,37 @@
-Received: from zk223.dresearch-fe.de ([217.92.177.116])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
-	id 1TBQ07-00009Z-Eg for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 14:55:35 +0200
-Received: from fensuse.internal.dresearch-fe.de
-	(fensuse.internal.dresearch-fe.de [172.29.23.6])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id 1B5D1E00C1;
-	Tue, 11 Sep 2012 12:43:04 +0000 (UTC)
-Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id 2FAE0701EF1; Tue, 11 Sep 2012 14:43:02 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch-fe.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2012 14:42:54 +0200
-Message-Id: <1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <504D81F8.9020702@dresearch-fe.de>
+	(envelope-from <ross.burton@intel.com>) id 1TBQGE-0003F4-9h
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Sep 2012 15:12:14 +0200
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 11 Sep 2012 05:59:42 -0700
+Received: by obblz20 with SMTP id lz20so655432obb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Sep 2012 05:59:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=W3WCtB71q8GbX1/VVABZapgbYVdfKOM+jW9ySCVSTfQ=;
+	b=asT8fCaFIvb6Qcs9nRyWbIEqEWK2OqwuVIP1M20sH3fWoQ/NoV44PVnhZYhQid4VF4
+	mNEuWHUPl1wLlApVEZit1YRcT01GaLNceZQ76e9SFBf0k48af9OJMe5it5r4qZokQwC5
+	J4IF2HSjxoiFPins7AHtMNhZ+dEa+ekzawPfwSZVgX9hGuoIzkaVYHA00T8VfyYbnHGu
+	udvR1uvKlXzbXMNhlhDu2oueejOAQnFZeOmVqLqxOrYEO42h72baKgdIV9LADh1ORUvl
+	yYgCBDfGSm5OJrIEq85/+6kXM13iSU8wjj9ZAGjgpyZI/+ar7UU0RV5PAbLlB6BC9XKz
+	7U8A==
+Received: by 10.60.171.174 with SMTP id av14mr18325443oec.61.1347368381423;
+	Tue, 11 Sep 2012 05:59:41 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.182.79.105 with HTTP; Tue, 11 Sep 2012 05:59:21 -0700 (PDT)
+In-Reply-To: <1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
 References: <504D81F8.9020702@dresearch-fe.de>
-Subject: [2011.03-maintenance][PATCH] gdk-pixbuf: add missing dependencies
+	<1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 11 Sep 2012 13:59:21 +0100
+Message-ID: <CAJTo0Lahx_1K64aBhag10RN=jSE+fz=APC9HnCwp-zxyb0-qgw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQkJph3OiNrrmKUGS+jfKd6E5PISNytqR3tAQZwGQIuomyvU59kkX+aMxpXX0JWK1b9eSgUb
+Subject: Re: [2011.03-maintenance][PATCH] gdk-pixbuf: add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,36 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 12:55:35 -0000
+X-List-Received-Date: Tue, 11 Sep 2012 13:12:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This fixes an error in do_configure step for target and native build.
+On 11 September 2012 13:42, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+> | No package 'atk' found
+> | No package 'pango' found
+> | No package 'cairo' found
 
-| checking for BASE_DEPENDENCIES... configure: error: Package requirements (glib-2.0 >= 2.12.0    atk >= 1.9.0    pango >= 1.12.0    cairo >= 1.2.0) were not met:
-|
-| No package 'atk' found
-| No package 'pango' found
-| No package 'cairo' found
+Those are spurious dependencies in a very old version of gdk-pixbuf.
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- recipes/gtk+/gdk-pixbuf_2.10.14.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+oe-core master has 2.24.1 at the moment, is there a good reason why
+meta-oe is hanging onto 2.10.14?
 
-diff --git a/recipes/gtk+/gdk-pixbuf_2.10.14.bb b/recipes/gtk+/gdk-pixbuf_2.10.14.bb
-index c41a2be..e9493f9 100644
---- a/recipes/gtk+/gdk-pixbuf_2.10.14.bb
-+++ b/recipes/gtk+/gdk-pixbuf_2.10.14.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.gtk.org/"
- SECTION = "libs"
- LICENSE = "LGPL"
- PRIORITY = "optional"
--DEPENDS = "libpng gettext glib-2.0"
-+DEPENDS = "libpng gettext glib-2.0 atk pango cairo"
- PR = "r2"
- 
- S = "${WORKDIR}/gtk+-${PV}"
--- 
-1.7.10.4
-
+Ross
 
 
