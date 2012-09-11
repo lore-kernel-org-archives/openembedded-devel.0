@@ -1,37 +1,37 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TBRVb-0006s5-33
+	(envelope-from <martin.jansa@gmail.com>) id 1TBRVd-0006s5-3K
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 16:32:11 +0200
-Received: by eaad12 with SMTP id d12so272023eaa.6
+	Tue, 11 Sep 2012 16:32:18 +0200
+Received: by mail-ey0-f175.google.com with SMTP id d12so272023eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2012 07:19:37 -0700 (PDT)
+	Tue, 11 Sep 2012 07:19:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=kUfUGjKcemBU2CEbkAxGNo52M9xwqfftN8ogTBJvNFs=;
-	b=eLiXGVNLyvgL5Kta151qR62YqPLE26I98scBoDlDR/PeJ3pKEBGPjnmyp30HVmrGKE
-	vZZZWmnCT0TgBX3O/g3pXVSyRddNqSdTDTvZKSmbP5Gf41zu+m6K/VbLqaM9oetqgPts
-	z1XgdrqpPe5whB15hIR+4btxJjvnzrxmPcK12yZ13NkCLvSKbzk5jUYVBcZ3Afl9ANGE
-	nrD+tQEn5fXhZYqO7p+BxyCZRHmM9RVKUN+WmJGB7wn4+3xg+tyKr3SHK7rTYAb6YwP+
-	fSfNKMNREyzk3wonW62Dw+m00x/otyZps6vjJOHY/AYaXGzAtsdZLi/fWlVxlMhoODYJ
-	kD9w==
-Received: by 10.205.126.13 with SMTP id gu13mr4772752bkc.79.1347373177001;
-	Tue, 11 Sep 2012 07:19:37 -0700 (PDT)
+	bh=a4QdQbo5Q/N8qW6YPBDnxHDG1RxUCdKVxULD/BA0aZw=;
+	b=CAdvlEBpByKOSRX4O8vu+u4/ZkijV8a2/rIp3eS7ocP6mYMHhuVLD1Rkl4azpCLSzm
+	LQXVlRjKEXsLTs6730i4sW3vVUY18ZGJBeaD1gFvf2cgOo9Sk/UlqQRcc2/UsEV/i925
+	T61SBDqyAJ/SJHQqxc3qiorHr5A994OcgBH7w8OkocmpOQ4VD2A0qpfG75+A6ZCLbBdF
+	1aYTpDvy9OtfLWhs9FaAKdab4Glo7LHknTlmMOQgw9AcAUb4+eQg2oNpDgNdErGt86Dt
+	mayXRqVfvOQB4uShpnBMA/JmyoFIjjkAKxK+/88GG+K1v9c+LnK7LkLGAoGMEG76IoRz
+	UxuQ==
+Received: by 10.204.157.18 with SMTP id z18mr4965930bkw.16.1347373184409;
+	Tue, 11 Sep 2012 07:19:44 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id hs2sm9792082bkc.1.2012.09.11.07.19.35
+	by mx.google.com with ESMTPS id n5sm9797118bkv.14.2012.09.11.07.19.43
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Sep 2012 07:19:36 -0700 (PDT)
+	Tue, 11 Sep 2012 07:19:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2012 16:19:02 +0200
-Message-Id: <fac9e9c8b523ae617f348a0a3c8a9e31f55a1c0d.1347363666.git.Martin.Jansa@gmail.com>
+Date: Tue, 11 Sep 2012 16:19:03 +0200
+Message-Id: <85d9bb493173a0c534cd2753f38a7b06f3f03ae2.1347363666.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
 In-Reply-To: <cover.1347363666.git.Martin.Jansa@gmail.com>
 References: <cover.1347363666.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1347363666.git.Martin.Jansa@gmail.com>
 References: <cover.1347363666.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 4/5] meta-efl: enjoy: fix scrolling
+Subject: [meta-oe][meta-efl][PATCH 5/5] mcnavi: add also target edje to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,180 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 14:32:11 -0000
+X-List-Received-Date: Tue, 11 Sep 2012 14:32:18 -0000
 
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+* configure checks for that
+  | configure:17465: error: Package requirements (ecore ecore-evas evas edje imlib2 libgps) were not met:
+  |
+  | No package 'edje' found
 
-* [SHR bug #2058] http://www.shr-project.org/trac/ticket/2058
-* [EFL bug #1477] http://trac.enlightenment.org/e/ticket/1477
-
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...position-as-percent-and-define-a-1-second.patch | 133 +++++++++++++++++++++
- meta-efl/recipes-efl/e17/enjoy_svn.bb              |   7 +-
- 2 files changed, 139 insertions(+), 1 deletion(-)
- create mode 100644 meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+ meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
-new file mode 100644
-index 0000000..45f02b7
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
-@@ -0,0 +1,133 @@
-+From ac4c8a57e8a042acd4b8ff803d3d3574b0e7a7fb Mon Sep 17 00:00:00 2001
-+From: Alban Browaeys <prahal@yahoo.com>
-+Date: Wed, 5 Sep 2012 02:58:26 +0000
-+Subject: [PATCH] always use position as percent and define a 1 seconds
-+ tolerance.
-+
-+Fix "reverb" effect: ie loop between setting the slider to match
-+the position and handling slider to position (seek).
-+---
-+ data/themes/default.edc |    8 +++-----
-+ src/bin/win.c           |   28 ++++++++++++++++++++++------
-+ 2 files changed, 25 insertions(+), 11 deletions(-)
-+
-+diff --git a/data/themes/default.edc b/data/themes/default.edc
-+index 65efddf..27bb9e4 100644
-+--- a/data/themes/default.edc
-++++ b/data/themes/default.edc
-+@@ -186,7 +186,6 @@ collections {
-+    group {
-+       name: "nowplaying";
-+       script {
-+-         public cur_length;
-+          public mute;
-+ 
-+          public get_time_str(Float:time, time_str[6])
-+@@ -201,16 +200,15 @@ collections {
-+                new Float:position = getfarg(2);
-+                new Float:length = getfarg(3);
-+                if (length > 0)
-+-                  external_param_set_float(PART:"progress.slider", "value", position / length * 100);
-++                  external_param_set_float(PART:"progress.slider", "value", position * 100);
-+                else
-+                   external_param_set_float(PART:"progress.slider", "value", 0);
-+ 
-+                new time_str[6];
-+-               get_time_str(position, time_str);
-++               get_time_str(position * length, time_str);
-+                set_text(PART:"ejy.text.current_time", time_str);
-+                get_time_str(length, time_str);
-+                set_text(PART:"ejy.text.total_time", time_str);
-+-               set_float(cur_length, length);
-+             } else if (type == MSG_INT && id == MSG_SHUFFLE) {
-+                external_param_set_bool(PART:"buttons.shuffle", "state", getarg(2));
-+             } else if (type == MSG_INT && id == MSG_LOOP) {
-+@@ -687,7 +685,7 @@ collections {
-+             source: "progress.slider";
-+             signal: "changed";
-+             script {
-+-               send_message(MSG_FLOAT, MSG_POSITION, (external_param_get_float(PART:"progress.slider", "value") * get_float(cur_length) / 100));
-++               send_message(MSG_FLOAT, MSG_POSITION, (external_param_get_float(PART:"progress.slider", "value") / 100));
-+             }
-+          }
-+          program {
-+diff --git a/src/bin/win.c b/src/bin/win.c
-+index 63951db..ad93ab5 100644
-+--- a/src/bin/win.c
-++++ b/src/bin/win.c
-+@@ -194,8 +194,8 @@ _win_play_eval(Win *w)
-+ {
-+    Edje_Message_Float_Set *mf;
-+ 
-+-   w->play.position = emotion_object_position_get(w->emotion);
-+    w->play.length = emotion_object_play_length_get(w->emotion);
-++   w->play.position = emotion_object_position_get(w->emotion) / w->play.length;
-+ 
-+    if ((w->song) && (w->song->length != (int)w->play.length))
-+       db_song_length_set(w->db, w->song, w->play.length);
-+@@ -542,8 +542,14 @@ _win_edje_msg(void *data, Evas_Object *o __UNUSED__, Edje_Message_Type type, int
-+          else
-+            {
-+               Edje_Message_Float *m = msg;
-++
-++              if ((((m->val - w->play.position) * w->play.length) < 1.0)
-++                  && (((w->play.position - m->val) * w->play.length) < 1.0))
-++                  return;
-++
-+               w->play.position = m->val;
-+-              emotion_object_position_set(w->emotion, w->play.position);
-++              emotion_object_position_set(w->emotion, w->play.position
-++                                                            * w->play.length);
-+               ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
-+            }
-+         break;
-+@@ -617,16 +623,21 @@ enjoy_control_seek(uint64_t position)
-+ {
-+    Win *w = &_win;
-+    double seek_to;
-++   double new_pos = w->play.length / ((double)position / 1e6);
-+ 
-+    if (!w->db) return;
-+-   seek_to = w->play.position + w->play.length / ((double)position / 1e6);
-++
-++   if ((((new_pos - w->play.position) * w->play.length) < 1.0)
-++       && (((w->play.position - new_pos) * w->play.length) < 1.0)) return;
-++
-++   seek_to = w->play.position + new_pos;
-+    if (seek_to <= 0.0)
-+      seek_to = 0.0;
-+    else if (seek_to >= 1.0)
-+      seek_to = 1.0;
-+ 
-+    w->play.position = seek_to;
-+-   emotion_object_position_set(w->emotion, w->play.position);
-++   emotion_object_position_set(w->emotion, w->play.position * w->play.length);
-+    ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
-+ }
-+ 
-+@@ -692,15 +703,20 @@ EAPI void
-+ enjoy_position_set(int32_t position)
-+ {
-+    Win *w = &_win;
-++   double new_pos = w->play.length / ((double)position / 1e6);
-+ 
-+    if (!w->db) return;
-+-   w->play.position = w->play.length / ((double)position / 1e6);
-++
-++   if ((((new_pos - w->play.position) * w->play.length) < 1.0)
-++       && (((w->play.position - new_pos) * w->play.length) < 1.0)) return;
-++
-++   w->play.position = new_pos;
-+    if (w->play.position < 0.0)
-+      w->play.position = 0.0;
-+    else if (w->play.position > 1.0)
-+      w->play.position = 1.0;
-+ 
-+-   emotion_object_position_set(w->emotion, w->play.position);
-++   emotion_object_position_set(w->emotion, w->play.position * w->play.length);
-+    ecore_event_add(ENJOY_EVENT_POSITION_CHANGE, NULL, NULL, NULL);
-+ }
-+ 
-+-- 
-+1.7.7
-+
-diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-index 06998cf..cfeb001 100644
---- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
-+++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-@@ -21,9 +21,14 @@ RDEPENDS += "\
-        "
+diff --git a/meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb b/meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
+index 9c7f3f2..f4d594f 100644
+--- a/meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
++++ b/meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Free GPS navigation for car and outdoor with OpenStreetMap maps"
+ HOMEPAGE = "http://www.gps-routes.info/index.php?name=Content&pa=showpage&pid=1"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+-DEPENDS = "ecore evas imlib2 gpsd edje-native mysql5"
++DEPENDS = "ecore evas imlib2 gpsd edje edje-native mysql5"
  
- inherit e gettext
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-+SRC_URI = " \
-+  ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
-+  file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
-+"
- S = "${WORKDIR}/${SRCNAME}"
- 
-+PR = "r1"
-+
- FILES_${PN} += "${datadir}/icons/"
- 
- EXTRA_OECONF = "\
+ SRC_URI = "http://www.gps-routes.info/debian/pool/main/m/mcnavi/mcnavi_${PV}.tar.gz"
+ SRC_URI[md5sum] = "acc07debcdb3ef448b95e6a6cfcf53d8"
 -- 
 1.7.12
 
