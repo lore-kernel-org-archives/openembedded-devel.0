@@ -1,36 +1,34 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from gnukia.org ([85.214.67.64] helo=cbs.gnukia.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TBLhq-000467-Lm
+	(envelope-from <tilman@baumann.name>) id 1TBMbh-0005ZX-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 10:20:26 +0200
-Received: from localhost ([127.0.0.1]:34556 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TBLVk-0003om-44
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 08:07:56 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding; s=default;
-	bh=LMTnX95+VAqrA/bd7gBFYaWP+us=; b=jM8y5EuDjN0Sv5Hi3ZnzxpLxUu3h
-	FwFkR6Mav1s9xlpK3ByGAzBnTYKkfPRFcZ/eVibyRicyji1tyOt9uKWTvRf8iiHI
-	p2BblRo8OjUW/zQk27+DizpJIeaSzSJ29cHLN3Boeb1FY5ZEADd866F7FpgV7lzv
-	KaYVk0uH+Yd1wHg=
-Received: from [195.171.99.130] (port=54449 helo=[192.168.0.40])
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TBLVk-0003oj-1l
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 08:07:56 +0000
-Message-ID: <504EF1BA.3070509@communistcode.co.uk>
-Date: Tue, 11 Sep 2012 09:09:30 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120828 Thunderbird/15.0
+	Tue, 11 Sep 2012 11:18:09 +0200
+Received: from cbs.gnukia.org (cbs.gnukia.org [127.0.0.1])
+	by localhost (Postfix) with ESMTP id 3154BEC4003
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Sep 2012 10:59:27 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on cbs.gnukia.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=8.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.0.21] (mail.grandeye.com [82.16.22.188])
+	by cbs.gnukia.org (Postfix) with ESMTPSA id F2533EC4002
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Sep 2012 10:59:26 +0200 (CEST)
+Date: Tue, 11 Sep 2012 10:05:37 +0100
+From: Tilman Baumann <tilman@baumann.name>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:15.0) Gecko/20120824 Thunderbird/15.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
-	<CAK18fxE277_zyJF=Xv955KusWwAcyD=ve09w3Cj35Xm0tU-5tw@mail.gmail.com>
-In-Reply-To: <CAK18fxE277_zyJF=Xv955KusWwAcyD=ve09w3Cj35Xm0tU-5tw@mail.gmail.com>
-Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
+References: <504E1F94.9000606@baumann.name>
+	<20120911044922.GD2980@sakrah.homelinux.org>
+In-Reply-To: <20120911044922.GD2980@sakrah.homelinux.org>
+X-Filtered: By ProxSMTP
+Message-ID: <504EFEE1.3040000@baumann.name>
+X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.42/RELEASE,
+	bases: 20111108 #5646748, check: 20120911 clean
+Subject: Re: minimal template layer for new machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,87 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 08:20:26 -0000
+X-List-Received-Date: Tue, 11 Sep 2012 09:18:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 10/09/12 21:13, Andrei Gherzan wrote:
-> On Thu, Sep 6, 2012 at 2:35 PM, <ml@communistcode.co.uk> wrote:
+On 11/09/12 05:49, Khem Raj wrote:
+> On (10/09/12 18:12), Tilman Baumann wrote:
+>> Hi,
+>>
+>> I'm working on a TI DM812x support overlay.
+>> I guess what it comes down to is a new kernel recipe (based on TI's
+>> sources) and this funny two stage u-boot.
+>> I think I can write the recipes. But what I don't quite see is how I
+>> would add a new supported machine in the first place?
+>> I was trying to orient myself on a few existing machine support
+>> layers. But I think I'm still missing the point.
+>> What are the minimal basics to implement? Where should I start?
+> check meta-ti
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/
 >
->> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->>
->> V5
->>
->> - FILES_{PN} no loger required now libdir and includedir are passed to
->> oe_runmake
->>
->> V4
->>
->> - Remove debian packaging patch, it is not needed
->>
->> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->> ---
->>   .../recipes-extended/liblockdev/liblockdev_1.0.3.bb  | 20
->> ++++++++++++++++++++
->>   1 file changed, 20 insertions(+)
->>   create mode 100644 meta-oe/recipes-extended/liblockdev/
->> liblockdev_1.0.3.bb
->>
->> diff --git a/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bbb/meta-oe/recipes-extended/liblockdev/
->> liblockdev_1.0.3.bb
->> new file mode 100644
->> index 0000000..210a47b
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/liblockdev/liblockdev_1.0.3.bb
->> @@ -0,0 +1,20 @@
->> +DESCRIPTION = "Manage character and block device lockfiles."
->> +HOMEPAGE = "
->> http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary"
->> +
->> +LICENSE = "LGPLv2.1"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d8045f3b8f929c1cb29a1e3fd737b499"
->> +
->> +SRC_URI = "
->> http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_${PV}.orig.tar.gz
->> "
->> +
->> +SRC_URI[md5sum] = "64b9c1b87b125fc348e892e24625524a"
->> +SRC_URI[sha256sum] =
->> "ccae635d7ac3fdd50897eceb250872b3d9a191d298f213e7f0c836910d869f82"
->> +
->> +S = "${WORKDIR}/lockdev-${PV}"
->> +
->> +do_compile() {
->> +  oe_runmake CC="${CC}" LD="${LD}" shared
->> +}
->> +
->> +do_install() {
->> +  oe_runmake basedir="${D}" incdir="${D}${includedir}"
->> libdir="${D}${libdir}" install_dev
->> +}
->>
-> Why install only _dev? Why don't you use make install? It makes no sense to
-> compile shared and not install it... I just tested your recipe.
+> may be there is a BSP already or something similar you can start off.
 >
-> ag
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+Oh, great. I think I can work with that.
+I only knew the Arago project, but that is not based on oe-core.
 
-Ah, well spotted I had -dev as that was what I needed to get libcec to 
-link - did you have to change anything other than install_dev to install?
-
-Cheers,
-
-
--- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
-
+Thanks
 
 
