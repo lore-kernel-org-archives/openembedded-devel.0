@@ -1,37 +1,35 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TBUMU-0003Ob-Ki
+	(envelope-from <martin.jansa@gmail.com>) id 1TBUNN-0003Ta-Ib
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 19:34:58 +0200
-Received: by wibhn17 with SMTP id hn17so807845wib.6
+	Tue, 11 Sep 2012 19:35:54 +0200
+Received: by weyr6 with SMTP id r6so440289wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2012 10:22:27 -0700 (PDT)
+	Tue, 11 Sep 2012 10:23:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
 	bh=9uGjo2c3vwGnnxU0amKLdqGwuF0LiURvhqw2ivXw1Qs=;
-	b=IT2D6iaQGl/8wVi+O0QSksl4XePWLWQEv7H21+6YAGChqE6BgyHqFKzH4K3yg25EDU
-	XUB/s/BC2saDpk2+l2ke8MXVhz2o01iC/z1vu8dLwn6ffWbu0jmgiKOAXlthu+rhbn5V
-	PNTPEWj5ykfC2haqJzg2iwPZA4Q+4q0uK+tPjyT1bBkpaZ7xBUE2UibsTtO3cRzO52sV
-	U8JdrBGnPw47CearWf7wXaVqj0WN0Oj/CD8kD7gIILshvcmE52O9WWQJ0/pu+bO479tv
-	+biBbdeilUqSMmB0v94vFxMPc+9cDj6kMrlFQiNvqGyQJFqfo/EhSUBUDvwa/yt2o0md
-	RxWg==
-Received: by 10.217.2.146 with SMTP id p18mr10634113wes.198.1347384147501;
-	Tue, 11 Sep 2012 10:22:27 -0700 (PDT)
+	b=pVvtwgxDj4wvCSVPBCjaHy1iatXh4ekHRRn6llEjge4Zt/5kVUOSWr/qi8kM1+SP2i
+	pQlHGzLfAoV2d4SCsCx34Qyu2rLyK4z3redP/Kwr4ezyvBbCx2GTVuWgSEfclLv06KJp
+	K9Z5lL1JkPx68AWYlOb1Sys4Unki1EMDfxajMWCxO4EjKwHh0Q1gYG6GKgdYZTOmOCr5
+	KMyKkgX08/tjylYDB5MPqFw0MmJpCQ8zE2RE4Y/DRGIhWyE2+R0zTuwS+0kawDKM6fWh
+	wfQAH000U+IXi8Il3uNSYszgD/WBXxi7DWOWdXAm/IdCbqpWgjgLgSwBjf/h6qxcFXTX
+	GPrA==
+Received: by 10.180.97.135 with SMTP id ea7mr26536221wib.11.1347384202527;
+	Tue, 11 Sep 2012 10:23:22 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id fr4sm5267883wib.8.2012.09.11.10.22.25
+	by mx.google.com with ESMTPS id o2sm5265406wiz.11.2012.09.11.10.23.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Sep 2012 10:22:26 -0700 (PDT)
+	Tue, 11 Sep 2012 10:23:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2012 19:22:24 +0200
-Message-Id: <d010c0650b8331d97e5cf5681930f73da7de2d29.1347384123.git.Martin.Jansa@gmail.com>
+Date: Tue, 11 Sep 2012 19:22:25 +0200
+Message-Id: <1347384154-17149-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
-In-Reply-To: <cover.1347363666.git.Martin.Jansa@gmail.com>
+In-Reply-To: <d010c0650b8331d97e5cf5681930f73da7de2d29.1347384123.git.Martin.Jansa@gmail.com>
 References: <cover.1347363666.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1347384123.git.Martin.Jansa@gmail.com>
-References: <cover.1347384123.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 6/6] mcnavi: fix do_configure_prepend to be reentrant
+	<d010c0650b8331d97e5cf5681930f73da7de2d29.1347384123.git.Martin.Jansa@gmail.com>
+Subject: [PATCH] mcnavi: fix do_configure_prepend to be reentrant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 17:34:58 -0000
+X-List-Received-Date: Tue, 11 Sep 2012 17:35:54 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
