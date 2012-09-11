@@ -1,30 +1,38 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kg4ysn@gmail.com>) id 1TBGYT-0001MN-S3
+	(envelope-from <raj.khem@gmail.com>) id 1TBIbn-0007mY-Uc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 04:50:25 +0200
-Received: by lban1 with SMTP id n1so56773lba.6
+	Tue, 11 Sep 2012 07:02:00 +0200
+Received: by iaky10 with SMTP id y10so89198iak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2012 19:37:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=VeIbO8d7GVeduAjPJBPGbNAhsICGrgX3i55NteU47Vc=;
-	b=Nb2rnqfm9DuOeprnnvIkuLHd+KaljamFjqQF91WIcPc66Fbhchx4STKaJ2xxABCJp8
-	67+nfBwG7Y+M+J3XjNHtk590Rv0IdO9OrAlJ06+jqaact+iHH0U1jlcNctjF0tqjt88z
-	fOhwr7kcp2uyPI9EPvNp1PpOiPHW3dHGD5a3XqVHzKCWDiPFuw7foaufqH1vO+qxnKJJ
-	HM6dx+dSOANnFJdeM0SR6MUxWOQI5Oj/MbBv15VXZ8h9DljdW4wyKx3HIVq0nQD4C+Za
-	8INLCd2QltvLRWcvyA/0OcJY593OC9szggaRyiRQE8YTWgDAWEzXs0skEALVamDx6sKL
-	XXtQ==
-MIME-Version: 1.0
-Received: by 10.152.114.3 with SMTP id jc3mr14374786lab.11.1347331075336; Mon,
-	10 Sep 2012 19:37:55 -0700 (PDT)
-Received: by 10.114.24.65 with HTTP; Mon, 10 Sep 2012 19:37:55 -0700 (PDT)
-Date: Mon, 10 Sep 2012 19:37:55 -0700
-Message-ID: <CAG4_upS_8o4j4EhL4mvaGY--kwnYh3SgwnyHPfc_yFjo-3k6Hg@mail.gmail.com>
-From: Chris Verges <kg4ysn@gmail.com>
+	Mon, 10 Sep 2012 21:49:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=CbVmYKrrGgl8di33LfqV5bsQGGzNma9y6PLfGCc23U8=;
+	b=GrRCyEochTPjRn+rHcpqIkDpIG0ScFlYFl7j+2Zu6B9+tH+mkYEe/8hfJXG0My3mk0
+	JMI9+IUlWH7v7FmI9J/JMFMGJNIK1hcilENja+3i4YbgBEigXapbeVMAawDufPw0Qk5t
+	6UHwcdiN6vp/fUxvREe5aTACza3xyOaFficnQ4bw7+xT2RziF1DvcytxB3J8K/CuEO5R
+	JA7sUozp4jDMClPVQTt/pg3oksgYep75mzTBNxoP/eLK2tdk4PMaoVfO4zypxa0Hx+Hf
+	fRhjNBrYfMuY012wLHwRFCWtvCEozV3f60Lwvg/PCuxd20sry1jWOE1O6wSAxSUfRjLw
+	3vTQ==
+Received: by 10.50.160.228 with SMTP id xn4mr19599156igb.1.1347338968991;
+	Mon, 10 Sep 2012 21:49:28 -0700 (PDT)
+Received: from sakrah.homelinux.org
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id nh1sm613370igc.11.2012.09.10.21.49.27
+	(version=SSLv3 cipher=OTHER); Mon, 10 Sep 2012 21:49:28 -0700 (PDT)
+Date: Mon, 10 Sep 2012 21:49:24 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: at91bootstrap and gcc 4.6+
+Message-ID: <20120911044922.GD2980@sakrah.homelinux.org>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <504E1F94.9000606@baumann.name>
+MIME-Version: 1.0
+In-Reply-To: <504E1F94.9000606@baumann.name>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: minimal template layer for new machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 02:50:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Sep 2012 05:02:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi all,
+On (10/09/12 18:12), Tilman Baumann wrote:
+> Hi,
+> 
+> I'm working on a TI DM812x support overlay.
+> I guess what it comes down to is a new kernel recipe (based on TI's
+> sources) and this funny two stage u-boot.
+> I think I can write the recipes. But what I don't quite see is how I
+> would add a new supported machine in the first place?
+> I was trying to orient myself on a few existing machine support
+> layers. But I think I'm still missing the point.
+> What are the minimal basics to implement? Where should I start?
 
-For anyone doing development on the AT91-based platforms, there is a known
-issue with at91bootstrap and gcc 4.6 (and later) where the
-linker erroneously causes an overlap between sections.  There is a known
-fix here, just needs to be turned into a patch file for OE:
+check meta-ti
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/
 
-http://www.at91.com/forum/viewtopic.php/f,12/t,20624/
+may be there is a BSP already or something similar you can start off.
 
-Chris
+> 
+> Thanks for any help.
+> 
+> Cheers
+>  Tilman
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+-Khem
+
 
