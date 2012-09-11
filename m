@@ -1,36 +1,37 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TBQGE-0003F4-9h
+	(envelope-from <martin.jansa@gmail.com>) id 1TBQJ4-0003Md-Ve
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Sep 2012 15:12:14 +0200
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 11 Sep 2012 05:59:42 -0700
-Received: by obblz20 with SMTP id lz20so655432obb.6
+	Tue, 11 Sep 2012 15:15:11 +0200
+Received: by eaad12 with SMTP id d12so231167eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2012 05:59:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=W3WCtB71q8GbX1/VVABZapgbYVdfKOM+jW9ySCVSTfQ=;
-	b=asT8fCaFIvb6Qcs9nRyWbIEqEWK2OqwuVIP1M20sH3fWoQ/NoV44PVnhZYhQid4VF4
-	mNEuWHUPl1wLlApVEZit1YRcT01GaLNceZQ76e9SFBf0k48af9OJMe5it5r4qZokQwC5
-	J4IF2HSjxoiFPins7AHtMNhZ+dEa+ekzawPfwSZVgX9hGuoIzkaVYHA00T8VfyYbnHGu
-	udvR1uvKlXzbXMNhlhDu2oueejOAQnFZeOmVqLqxOrYEO42h72baKgdIV9LADh1ORUvl
-	yYgCBDfGSm5OJrIEq85/+6kXM13iSU8wjj9ZAGjgpyZI/+ar7UU0RV5PAbLlB6BC9XKz
-	7U8A==
-Received: by 10.60.171.174 with SMTP id av14mr18325443oec.61.1347368381423;
-	Tue, 11 Sep 2012 05:59:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.182.79.105 with HTTP; Tue, 11 Sep 2012 05:59:21 -0700 (PDT)
-In-Reply-To: <1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
+	Tue, 11 Sep 2012 06:02:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=i3E821RlOjOcfkdL6neQP/C+u6PuA2DfARpFJCpg7iw=;
+	b=BLK9ubIOoNZFKWDJmWeupsbLJrT2KWxduizQhfgKlFAe6AuihsFxQ65xhW/srhfPhP
+	N3NUrzoChm0nSBHd6tqN4jecRnvzhASbsBlzIJh+kCMTH39y6PAVFjnvH1NC6MICygFD
+	7nGeb/1sJ+nFcgg27dIAtHkz+HVR/h0dzzbBvHvYVyglN/iSxbQ1yje2Ijjhn3orj1U7
+	e/V5JqcbfaJx3v6pjQoIiQJvd/JasnW8UQ82LhP7KM0c9Xgxd9TTNNrhw28tQdsBnU6t
+	mkS/i4mUoxQyKjBP8uUeRtDhVHA7hyDvYpUdqn7R7pmm/O/XufYHVesorVumQdf8LDfd
+	xrDw==
+Received: by 10.205.117.4 with SMTP id fk4mr1614305bkc.64.1347368560330;
+	Tue, 11 Sep 2012 06:02:40 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id he8sm9533776bkc.3.2012.09.11.06.02.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 11 Sep 2012 06:02:39 -0700 (PDT)
+Date: Tue, 11 Sep 2012 15:02:39 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20120911130239.GD14077@jama.jama.net>
 References: <504D81F8.9020702@dresearch-fe.de>
 	<1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 11 Sep 2012 13:59:21 +0100
-Message-ID: <CAJTo0Lahx_1K64aBhag10RN=jSE+fz=APC9HnCwp-zxyb0-qgw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkJph3OiNrrmKUGS+jfKd6E5PISNytqR3tAQZwGQIuomyvU59kkX+aMxpXX0JWK1b9eSgUb
+	<CAJTo0Lahx_1K64aBhag10RN=jSE+fz=APC9HnCwp-zxyb0-qgw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0Lahx_1K64aBhag10RN=jSE+fz=APC9HnCwp-zxyb0-qgw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [2011.03-maintenance][PATCH] gdk-pixbuf: add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,19 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 13:12:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Sep 2012 13:15:11 -0000
+X-Groupsio-MsgNum: 40610
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kvUQC+jR9YzypDnK"
+Content-Disposition: inline
 
-On 11 September 2012 13:42, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> | No package 'atk' found
-> | No package 'pango' found
-> | No package 'cairo' found
+--kvUQC+jR9YzypDnK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Those are spurious dependencies in a very old version of gdk-pixbuf.
+On Tue, Sep 11, 2012 at 01:59:21PM +0100, Burton, Ross wrote:
+> On 11 September 2012 13:42, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+> > | No package 'atk' found
+> > | No package 'pango' found
+> > | No package 'cairo' found
+>=20
+> Those are spurious dependencies in a very old version of gdk-pixbuf.
+>=20
+> oe-core master has 2.24.1 at the moment, is there a good reason why
+> meta-oe is hanging onto 2.10.14?
 
-oe-core master has 2.24.1 at the moment, is there a good reason why
-meta-oe is hanging onto 2.10.14?
+2011.03-maintenance !=3D meta-oe
 
-Ross
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--kvUQC+jR9YzypDnK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlBPNm8ACgkQN1Ujt2V2gBzCBwCfdZUEP5x4/jDb9ART0zVy1s/l
+KcQAoIrlh3VIAH7p8tzSeJ7wwh3IOa7n
+=mZ1d
+-----END PGP SIGNATURE-----
+
+--kvUQC+jR9YzypDnK--
