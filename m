@@ -1,39 +1,36 @@
-Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
+Received: from gnukia.org ([85.214.67.64] helo=cbs.gnukia.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TBolq-0000Ac-LD
+	(envelope-from <tilman@baumann.name>) id 1TBpYY-0000wd-Eb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2012 17:22:30 +0200
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
-	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 12 Sep 2012 08:09:56 -0700
-Received: by obblz20 with SMTP id lz20so2811562obb.6
+	Wed, 12 Sep 2012 18:12:50 +0200
+Received: from cbs.gnukia.org (cbs.gnukia.org [127.0.0.1])
+	by localhost (Postfix) with ESMTP id 12050EC4003
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2012 08:09:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:x-gm-message-state;
-	bh=G6ILZftlh8dwnCfkjArm1xo6q3wmx2/nlLRygIx7FwM=;
-	b=Dlqosn0DZHmn8dgx31ftLomjluSqfROh6apMH6kiP37eZz76qhZsNAGkH2cqxJz/7p
-	BgL7xiQ533A5qNnBsEmKzt4mlkOh7nAbqjxmb7nlr+xHBKSN4XvFvpaBdCObnqCHKPQG
-	iDNsnF3BDgmRJb9e09PJ1aGavWY0i/VjDKWTe3J0w0JevJJimUgDUP2TZH3wXjY5xunA
-	J9xjNvmn1rQDOpQIQQPtwK0B+IIvQljJFe4FmPH0Cib/ay31bOvZtIgNVXamU5TdTkHU
-	+4Ej7KuJpUI+jV1MoIPUyjJqiTtMrQUCO5W31jTjkGnzK3LsJdHNIQyTUzQHe+nCkg9G
-	3idg==
-Received: by 10.60.12.106 with SMTP id x10mr1802804oeb.103.1347462596199; Wed,
-	12 Sep 2012 08:09:56 -0700 (PDT)
+	Wed, 12 Sep 2012 17:54:05 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on cbs.gnukia.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=8.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from [192.168.0.21] (mail.grandeye.com [82.16.22.188])
+	by cbs.gnukia.org (Postfix) with ESMTPSA id D76E8EC4002
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Sep 2012 17:54:04 +0200 (CEST)
+Date: Wed, 12 Sep 2012 17:00:16 +0100
+From: Tilman Baumann <tilman@baumann.name>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
 MIME-Version: 1.0
-Received: by 10.182.79.105 with HTTP; Wed, 12 Sep 2012 08:09:33 -0700 (PDT)
-In-Reply-To: <1347459798.11710.27.camel@ted>
-References: <CAJTo0LbTipjuhpvyxgL1Z=WTn0yHNcLB4tQqcQeXCUth8ygWkA@mail.gmail.com>
-	<1347459798.11710.27.camel@ted>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 12 Sep 2012 16:09:33 +0100
-Message-ID: <CAJTo0LbNPMkSZ7ftDkyKsbxbL50o7St5rj-FZaeiYuYDOv7Wbw@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Gm-Message-State: ALoCoQlC+/QMTs+GA30R7NFd30hPsU0ZZxTvuyp0vjP2IO7ajixdZ5TJp28FQOolOzUPMKRrzcdi
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: libx11-diet removal
+To: openembedded-devel@lists.openembedded.org
+References: <504E1F94.9000606@baumann.name>
+	<20120911044922.GD2980@sakrah.homelinux.org>
+	<504EFEE1.3040000@baumann.name>
+	<CAC+thW1XEngvZiUssM2s4L93ebc1pxy1ibA5zuZmDQL-3aoHTQ@mail.gmail.com>
+In-Reply-To: <CAC+thW1XEngvZiUssM2s4L93ebc1pxy1ibA5zuZmDQL-3aoHTQ@mail.gmail.com>
+X-Filtered: By ProxSMTP
+Message-ID: <5050B190.2080409@baumann.name>
+X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.42/RELEASE,
+	bases: 20111108 #5646748, check: 20120912 clean
+Subject: Re: minimal template layer for new machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2012 15:22:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 12 Sep 2012 16:12:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 12 September 2012 15:23, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> Is there any way to add in enough functionality that gtk/qt would work
-> but still save some space?
+On 11/09/12 14:48, Andrea Galbusera wrote:
+> Hi Tilman,
+>
+> On Tue, Sep 11, 2012 at 11:05 AM, Tilman Baumann <tilman@baumann.name> wrote:
+>> On 11/09/12 05:49, Khem Raj wrote:
+>>> On (10/09/12 18:12), Tilman Baumann wrote:
+>>>> Hi,
+>>>>
+>>>> I'm working on a TI DM812x support overlay.
+>>>> I guess what it comes down to is a new kernel recipe (based on TI's
+>>>> sources) and this funny two stage u-boot.
+>>>> I think I can write the recipes. But what I don't quite see is how I
+>>>> would add a new supported machine in the first place?
+>>>> I was trying to orient myself on a few existing machine support
+>>>> layers. But I think I'm still missing the point.
+>>>> What are the minimal basics to implement? Where should I start?
+>>> check meta-ti
+>>> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/
+>>>
+>>> may be there is a BSP already or something similar you can start off.
+>>>
+>>>
+>> Oh, great. I think I can work with that.
+>> I only knew the Arago project, but that is not based on oe-core.
+> As far as I know, there also exists an effort by the meta-ti people to
+> port the original Arago distro to the new layered architecture over
+> oe-core: this is called meta-arago
+> (http://arago-project.org/git/?p=meta-arago.git;a=summary).
+> You'd better ask on the meta-ti list what the state of the art is for
+> this project, but I think it is supposed to work with meta-ti and
+> provide an alternative distro layer to Angstrom.
+>
+It seems to be lacking the board support for dm813x-evm.
+I will ask the arago guys about it.
 
-The big piece that gets removed in diet is the Xlocale functionality -
-this is what brings the size and the compatibility problems.
+But really, since I still have to do kernel and u-boot from scratch, I 
+don't think I gain much. (I can't use the original TI stuff.)
+I guess if I would grokk how a basic hardware enablement layer is done, 
+I would be better off.
 
-libX11 as it stands now is actually smaller than the old libX11-trim,
-as some optional features in libX11 (Xcms, BigFont) are disabled by
-default (packageconfig to turn them back on).
-
-The important distinction is that libX11 is (practically) unpatched,
-where as -diet is chopped up.
-
-Ross
+Thanks
+  TIlman
 
 
