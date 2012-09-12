@@ -1,36 +1,36 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TBvFw-0007tr-NQ
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TBvIY-00083I-9B
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2012 00:18:00 +0200
-Received: by wgbdr1 with SMTP id dr1so1535057wgb.24
+	Thu, 13 Sep 2012 00:20:42 +0200
+Received: by wibhm2 with SMTP id hm2so167109wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2012 15:05:28 -0700 (PDT)
+	Wed, 12 Sep 2012 15:08:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
 	:content-transfer-encoding;
 	bh=ImNpJFUVWrWWtWchgOqXN5PK2IAIpoXoRjZiAc0YUUs=;
-	b=u6oZ9eRAmxe441rsr5zcck41Z24E2iGyxGyFvpeayAnqdmgOxhtMsD46mNYOZZqAxH
-	GTQSyYT73fLmgOxXNtCuUjiDoHlNrnEVteJpcCb/caBORXT1lQNYNgMSqooK2YL0VTCT
-	xxKqbITqeEk7WfR5iaI8sg8iMxFeUeu37rPhgiHMOA/TE5Ri42s8pk2N3ky1i34EejGx
-	PSRKSmnKu4lj12iqp3WQ2/6OIQUhfoJsn/Q6grMVxiip00mabAB3rn7NTsWl8huFyQEh
-	DS9gESEEHunbSCF8jXuDAUf92dcITyjpt/1ajhUctWAPWVDXFKI1ycFNdc7jHOBhE8Yd
-	IKYQ==
-Received: by 10.216.220.89 with SMTP id n67mr14002349wep.73.1347487528095;
-	Wed, 12 Sep 2012 15:05:28 -0700 (PDT)
+	b=qT/gGeBnqEzDaB8gkv6k0CDNMw2db08TCJhG6VuYd6W6iCcbml7W+QYcjbCSOvaGSU
+	Oo1wRwMNDB4UvK7ox0n1D7CNPucxdihrAgqGRoJQdBwoBy7QxU2lsI8B8y9uiR1tHjHW
+	PBGYYM5N7vHNzlX3Hy+7UcZJZGx0aTlaSUzLK4ZJB2ZKtF5jg1GiGzXYyVey585IQvhb
+	Hz3GD2JOvASYytBCAZPAEQbfZVIs46dfup9nGipBy93XqZPWEpy6BrZgSdJnjT/J080a
+	ObW6amhFJzXDVYBcqQU/j+hpp6Zs98Y8YRWBxz5ZOlhNeF/SxOVs8q1s+siVhwU+onpb
+	ahVA==
+Received: by 10.216.238.134 with SMTP id a6mr2065257wer.172.1347487689660;
+	Wed, 12 Sep 2012 15:08:09 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3A61.dip.t-dialin.net.
 	[91.10.58.97])
-	by mx.google.com with ESMTPS id w7sm10117889wiz.0.2012.09.12.15.05.26
+	by mx.google.com with ESMTPS id ct3sm10117315wib.5.2012.09.12.15.08.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 12 Sep 2012 15:05:27 -0700 (PDT)
+	Wed, 12 Sep 2012 15:08:08 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Sep 2012 00:13:04 +0200
-Message-Id: <1347487984-3356-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 13 Sep 2012 00:15:47 +0200
+Message-Id: <1347488147-3404-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-Subject: [PATCH] xfce4-session: Don't loose xfwm4 when closing session with multiple windows waiting for user input
+Subject: [meta-oe, V2] xfce4-session: Don't loose xfwm4 when closing session with multiple windows waiting for user input
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2012 22:18:00 -0000
+X-List-Received-Date: Wed, 12 Sep 2012 22:20:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
