@@ -1,36 +1,31 @@
-Received: from gnukia.org ([85.214.67.64] helo=cbs.gnukia.org)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tilman@baumann.name>) id 1TBpYY-0000wd-Eb
+	(envelope-from <raj.khem@gmail.com>) id 1TBs3o-0005X2-AM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2012 18:12:50 +0200
-Received: from cbs.gnukia.org (cbs.gnukia.org [127.0.0.1])
-	by localhost (Postfix) with ESMTP id 12050EC4003
+	Wed, 12 Sep 2012 20:53:16 +0200
+Received: by eaad12 with SMTP id d12so880268eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2012 17:54:05 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on cbs.gnukia.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=8.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from [192.168.0.21] (mail.grandeye.com [82.16.22.188])
-	by cbs.gnukia.org (Postfix) with ESMTPSA id D76E8EC4002
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2012 17:54:04 +0200 (CEST)
-Date: Wed, 12 Sep 2012 17:00:16 +0100
-From: Tilman Baumann <tilman@baumann.name>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+	Wed, 12 Sep 2012 11:40:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=RRQGWszPCnpXy4K0wN2LC7D7eO0bb3/YaJq4YKvKNho=;
+	b=Et2FGYzLFpoQociqf3qJhnhefdmP9qNAcLzQ5Ycqqq12H3E2U4YXdz0qjcaSaFzP95
+	ST2yfHgLBjoJMBK8ZjMPYNO4JXjAi5p2Eh2rDr9we5x5zenXIvNViOP5C56bwRtRlLQ9
+	pUBjiTPSmiaQmKdpVqw/h3ELDuGH6S4JXyEEEzaVFc9paChVO2Dj5b1EZ7mAEFTX9QI+
+	DENiM6NbQFlxBQeUPbf8kV/S3AIX7g0fX7Usf51JbFGINPahcrjvh+IGxNePw60MTNds
+	wuY+EEiDVG1kyxWGNZ8bEoZJhYxL69YQrav0/lUfhId2wkOTBg1MSU5J/HwoWjoOxMXA
+	3j/g==
+Received: by 10.14.211.3 with SMTP id v3mr32434721eeo.43.1347475243856; Wed,
+	12 Sep 2012 11:40:43 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.14.2.5 with HTTP; Wed, 12 Sep 2012 11:40:13 -0700 (PDT)
+In-Reply-To: <50504801.8020006@oneaccess-net.com>
+References: <50504801.8020006@oneaccess-net.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 12 Sep 2012 11:40:13 -0700
+Message-ID: <CAMKF1sphEUhsD45FLesA1+Qu-bQLq7sqqnjLCwLoGr64PzJwAA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <504E1F94.9000606@baumann.name>
-	<20120911044922.GD2980@sakrah.homelinux.org>
-	<504EFEE1.3040000@baumann.name>
-	<CAC+thW1XEngvZiUssM2s4L93ebc1pxy1ibA5zuZmDQL-3aoHTQ@mail.gmail.com>
-In-Reply-To: <CAC+thW1XEngvZiUssM2s4L93ebc1pxy1ibA5zuZmDQL-3aoHTQ@mail.gmail.com>
-X-Filtered: By ProxSMTP
-Message-ID: <5050B190.2080409@baumann.name>
-X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.42/RELEASE,
-	bases: 20111108 #5646748, check: 20120912 clean
-Subject: Re: minimal template layer for new machine support
+Subject: Re: [recipe]variable shared
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,51 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2012 16:12:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Sep 2012 18:53:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/09/12 14:48, Andrea Galbusera wrote:
-> Hi Tilman,
+On Wed, Sep 12, 2012 at 1:29 AM, Sophie Bonnouvrier
+<sophie.bonnouvrier-ext@oneaccess-net.com> wrote:
 >
-> On Tue, Sep 11, 2012 at 11:05 AM, Tilman Baumann <tilman@baumann.name> wrote:
->> On 11/09/12 05:49, Khem Raj wrote:
->>> On (10/09/12 18:12), Tilman Baumann wrote:
->>>> Hi,
->>>>
->>>> I'm working on a TI DM812x support overlay.
->>>> I guess what it comes down to is a new kernel recipe (based on TI's
->>>> sources) and this funny two stage u-boot.
->>>> I think I can write the recipes. But what I don't quite see is how I
->>>> would add a new supported machine in the first place?
->>>> I was trying to orient myself on a few existing machine support
->>>> layers. But I think I'm still missing the point.
->>>> What are the minimal basics to implement? Where should I start?
->>> check meta-ti
->>> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/
->>>
->>> may be there is a BSP already or something similar you can start off.
->>>
->>>
->> Oh, great. I think I can work with that.
->> I only knew the Arago project, but that is not based on oe-core.
-> As far as I know, there also exists an effort by the meta-ti people to
-> port the original Arago distro to the new layered architecture over
-> oe-core: this is called meta-arago
-> (http://arago-project.org/git/?p=meta-arago.git;a=summary).
-> You'd better ask on the meta-ti list what the state of the art is for
-> this project, but I think it is supposed to work with meta-ti and
-> provide an alternative distro layer to Angstrom.
 >
-It seems to be lacking the board support for dm813x-evm.
-I will ask the arago guys about it.
+> I would like to set a variable in a recipe and used it in another one.
+> but when I get the variable in the second recipe the value is none.
+> How can I shared variable ?
 
-But really, since I still have to do kernel and u-boot from scratch, I 
-don't think I gain much. (I can't use the original TI stuff.)
-I guess if I would grokk how a basic hardware enablement layer is done, 
-I would be better off.
+you have to define such variables in global metadata. any metadata
+defined in recipe is recipe specific
+may be add it to configuration metadata or some sort of abstracted out class.
 
-Thanks
-  TIlman
+>
+> Sophie
+>
+>
+> recipe 1:
+> export XENO_DIR = "${@get_xenomai_dir(bb, d)} "
+> export XENO_PV   = "${@get_xenomai_pv(bb, d)} "
+>
+> recipe 2:
+>   xeno_dir = bb.data.getVar('XENO_DIR',d,1)
+>   xeno_pv  = bb.data.getVar('XENO_PV',d,1)
 
 
