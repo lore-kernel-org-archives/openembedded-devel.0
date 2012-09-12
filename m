@@ -1,34 +1,36 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1TBttv-0005sm-Dc
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TBvFw-0007tr-NQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Sep 2012 22:51:11 +0200
-Received: by bkcik5 with SMTP id ik5so132752bkc.6
+	Thu, 13 Sep 2012 00:18:00 +0200
+Received: by wgbdr1 with SMTP id dr1so1535057wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2012 13:38:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=0SUfHiVF7cnNOxodxHhw3TwsOoQWmvaBTjqo56hJHOc=;
-	b=hU+eMkaIELSQ6hEGsdrWH20xslzGvN3DBB/knpf+v9avyBm715QOo18bofV8YR25ig
-	idTv5i/6BF5EcrqK0xdLUU/ytc0Zcq/JsjJwI8+6czaabhBceD60lrQLTuT9MK+perNd
-	JDrT2lMxOeABm19VZ3HSKkmGt8cPNuVg9YZCHxpKWNQmZZxKFE9KO2ARW6FyX59XoEzT
-	KAK4ZWyeX1ZbLaXrMsf7rZGa8DiUv0kGX0CItPSXVfymoJhZUIeMalK444xUyurJ7YHd
-	kA4YBXPN6CnNCxHoDfHXStC+b1alGJ2fetExy0GWYCQS6EhyQZKLxQVyWQoZM/rZ2o8P
-	gjlQ==
-Received: by 10.204.147.65 with SMTP id k1mr6664581bkv.29.1347482318986;
-	Wed, 12 Sep 2012 13:38:38 -0700 (PDT)
-Received: from mizar.localdomain
-	(host43-254-dynamic.30-79-r.retail.telecomitalia.it. [79.30.254.43])
-	by mx.google.com with ESMTPS id j9sm12959797bkv.0.2012.09.12.13.38.36
-	(version=SSLv3 cipher=OTHER); Wed, 12 Sep 2012 13:38:37 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 12 Sep 2012 15:05:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=ImNpJFUVWrWWtWchgOqXN5PK2IAIpoXoRjZiAc0YUUs=;
+	b=u6oZ9eRAmxe441rsr5zcck41Z24E2iGyxGyFvpeayAnqdmgOxhtMsD46mNYOZZqAxH
+	GTQSyYT73fLmgOxXNtCuUjiDoHlNrnEVteJpcCb/caBORXT1lQNYNgMSqooK2YL0VTCT
+	xxKqbITqeEk7WfR5iaI8sg8iMxFeUeu37rPhgiHMOA/TE5Ri42s8pk2N3ky1i34EejGx
+	PSRKSmnKu4lj12iqp3WQ2/6OIQUhfoJsn/Q6grMVxiip00mabAB3rn7NTsWl8huFyQEh
+	DS9gESEEHunbSCF8jXuDAUf92dcITyjpt/1ajhUctWAPWVDXFKI1ycFNdc7jHOBhE8Yd
+	IKYQ==
+Received: by 10.216.220.89 with SMTP id n67mr14002349wep.73.1347487528095;
+	Wed, 12 Sep 2012 15:05:28 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3A61.dip.t-dialin.net.
+	[91.10.58.97])
+	by mx.google.com with ESMTPS id w7sm10117889wiz.0.2012.09.12.15.05.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 12 Sep 2012 15:05:27 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Sep 2012 22:38:31 +0200
-Message-Id: <1347482311-7068-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1347481415-4249-1-git-send-email-andrea.adami@gmail.com>
-References: <1347481415-4249-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH v2] zaurus.inc: fix xserver/mesa virtual providers
+Date: Thu, 13 Sep 2012 00:13:04 +0200
+Message-Id: <1347487984-3356-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [PATCH] xfce4-session: Don't loose xfwm4 when closing session with multiple windows waiting for user input
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +44,212 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2012 20:51:11 -0000
+X-List-Received-Date: Wed, 12 Sep 2012 22:18:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* xserver-xorg-lite has been removed with commit 5868358
-* mesa-xlib has been removed with commit 7a815ca
-*
-* default-providers.inc gives following settings:
-* PREFERRED_PROVIDER_virtual/xserver ?=  "xserver-xorg"
-* PREFERRED_PROVIDER_virtual/xserver-xf86 ?= "xserver-xorg"
-* PREFERRED_PROVIDER_virtual/libgl ?= "mesa-dri"
-* PREFERRED_PROVIDER_virtual/libgles1 ?= "mesa-dri"
-* PREFERRED_PROVIDER_virtual/libgles2 ?= "mesa-dri"
-* PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- conf/machine/include/zaurus.inc |    7 +++----
- 1 files changed, 3 insertions(+), 4 deletions(-)
+ ...-xfwm4-when-closing-session-with-multiple.patch |  169 ++++++++++++++++++++
+ .../xfce4-session/xfce4-session_4.8.3.bb           |    4 +-
+ 2 files changed, 172 insertions(+), 1 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-session/files/0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 3f5c642..99fd7bd 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -60,10 +60,9 @@ EXTRA_IMAGECMD_sum.jffs2_collie = "--pad -l --eraseblock=0x20000 -n"
- # xserver
- #########
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch b/meta-xfce/recipes-xfce/xfce4-session/files/0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch
+new file mode 100644
+index 0000000..50bade8
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfce4-session/files/0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch
+@@ -0,0 +1,169 @@
++From 64c0acb072057023870881f9fbac29ce08d357db Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Wed, 5 Sep 2012 20:14:09 +0200
++Subject: [PATCH] Don't loose xfwm4 when closing session with multiple windows
++ waiting for user input
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++When closing a session with more than one window open and waiting for unsaved
++data to be closed, at the next session xfwm4 was not started properly.
++
++The bug(fix) could be reproduced by
++
++* opening gedit
++* entering some text
++* opening terminal
++* closing session (no YNC-dialog / wait ~1min to close session)
++* reopen session
++
++Bugreport with this patch is found at [1] further discussion at [2].
++
++Upstream-Status: Pending
++
++[1] https://bugzilla.xfce.org/show_bug.cgi?id=5379
++[2] http://mail.xfce.org/pipermail/xfce/2012-August/031174.html
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ xfce4-session/xfsm-manager.c |   81 ++++++++++++++++++++++++-----------------
++ 1 files changed, 47 insertions(+), 34 deletions(-)
++
++diff --git a/xfce4-session/xfsm-manager.c b/xfce4-session/xfsm-manager.c
++index 3078d6a..3cc4c89 100644
++--- a/xfce4-session/xfsm-manager.c
+++++ b/xfce4-session/xfsm-manager.c
++@@ -96,6 +96,7 @@ struct _XfsmManager
++ 
++   XfsmManagerState state;
++   XfsmShutdownType shutdown_type;
+++  gboolean         save_session;
++ 
++   gboolean         session_chooser;
++   gchar           *session_name;
++@@ -225,6 +226,7 @@ xfsm_manager_init (XfsmManager *manager)
++   manager->session_chooser = FALSE;
++   manager->failsafe_mode = TRUE;
++   manager->shutdown_type = XFSM_SHUTDOWN_LOGOUT;
+++  manager->save_session = TRUE;
++ 
++   manager->pending_properties = g_queue_new ();
++   manager->starting_properties = g_queue_new ();
++@@ -981,7 +983,9 @@ xfsm_manager_interact (XfsmManager *manager,
++           XfsmClient *cl = lp->data;
++           if (xfsm_client_get_state (cl) == XFSM_CLIENT_INTERACTING)
++             {
++-              xfsm_client_set_state (cl, XFSM_CLIENT_WAITFORINTERACT);
+++              /* a client is already interacting, so new client has to wait */
+++              xfsm_client_set_state (client, XFSM_CLIENT_WAITFORINTERACT);
+++              xfsm_manager_cancel_client_save_timeout(manager, client);
++               return;
++             }
++         }
++@@ -1158,44 +1162,47 @@ xfsm_manager_save_yourself_global (XfsmManager     *manager,
++     }
++ #endif
++ 
++-  if (!shutdown || shutdown_save)
+++  /* don't save the session if shutting down without save */
+++  manager->save_session = !shutdown || shutdown_save;
+++
+++  if (save_type == SmSaveBoth && !manager->save_session)
++     {
++-      xfsm_manager_set_state (manager,
++-                              shutdown
++-                              ? XFSM_MANAGER_SHUTDOWN
++-                              : XFSM_MANAGER_CHECKPOINT);
+++      /* saving the session, so clients should
+++       * (prompt to) save the user data only */
+++      save_type = SmSaveGlobal;
+++    }
++ 
++-      /* handle legacy applications first! */
++-      xfsm_legacy_perform_session_save ();
+++  xfsm_manager_set_state (manager,
+++                          shutdown
+++                          ? XFSM_MANAGER_SHUTDOWN
+++                          : XFSM_MANAGER_CHECKPOINT);
++ 
++-      for (lp = g_queue_peek_nth_link (manager->running_clients, 0);
++-           lp;
++-           lp = lp->next)
++-        {
++-          XfsmClient *client = lp->data;
++-          XfsmProperties *properties = xfsm_client_get_properties (client);
++-          const gchar *program;
+++  /* handle legacy applications first! */
+++  if (manager->save_session)
+++      xfsm_legacy_perform_session_save ();
++ 
++-          /* xterm's session management is broken, so we won't
++-           * send a SAVE YOURSELF to xterms */
++-          program = xfsm_properties_get_string (properties, SmProgram);
++-          if (program != NULL && strcasecmp (program, "xterm") == 0)
++-            continue;
+++  for (lp = g_queue_peek_nth_link (manager->running_clients, 0);
+++       lp;
+++       lp = lp->next)
+++    {
+++      XfsmClient *client = lp->data;
+++      XfsmProperties *properties = xfsm_client_get_properties (client);
+++      const gchar *program;
++ 
++-          if (xfsm_client_get_state (client) != XFSM_CLIENT_SAVINGLOCAL)
++-            {
++-              SmsSaveYourself (xfsm_client_get_sms_connection (client), save_type, shutdown,
++-                               interact_style, fast);
++-            }
+++      /* xterm's session management is broken, so we won't
+++       * send a SAVE YOURSELF to xterms */
+++      program = xfsm_properties_get_string (properties, SmProgram);
+++      if (program != NULL && strcasecmp (program, "xterm") == 0)
+++        continue;
++ 
++-          xfsm_client_set_state (client, XFSM_CLIENT_SAVING);
++-          xfsm_manager_start_client_save_timeout (manager, client);
+++      if (xfsm_client_get_state (client) != XFSM_CLIENT_SAVINGLOCAL)
+++        {
+++          SmsSaveYourself (xfsm_client_get_sms_connection (client), save_type, shutdown,
+++                           interact_style, fast);
++         }
++-    }
++-  else
++-    {
++-      /* shutdown session without saving */
++-      xfsm_manager_perform_shutdown (manager);
+++
+++      xfsm_client_set_state (client, XFSM_CLIENT_SAVING);
+++      xfsm_manager_start_client_save_timeout (manager, client);
++     }
++ }
++ 
++@@ -1267,7 +1274,12 @@ xfsm_manager_save_yourself_done (XfsmManager *manager,
++                                  XfsmClient  *client,
++                                  gboolean     success)
++ {
++-  if (xfsm_client_get_state (client) != XFSM_CLIENT_SAVING && xfsm_client_get_state (client) != XFSM_CLIENT_SAVINGLOCAL)
+++  /* In xfsm_manager_interact_done we send SmsShutdownCancelled to clients in
+++     XFSM_CLIENT_WAITFORINTERACT state. They respond with SmcSaveYourselfDone
+++     (xsmp_shutdown_cancelled in libxfce4ui library) so we allow it here. */
+++  if (xfsm_client_get_state (client) != XFSM_CLIENT_SAVING &&
+++      xfsm_client_get_state (client) != XFSM_CLIENT_SAVINGLOCAL &&
+++      xfsm_client_get_state (client) != XFSM_CLIENT_WAITFORINTERACT)
++     {
++       xfsm_verbose ("Client Id = %s send SAVE YOURSELF DONE, while not being "
++                     "in save mode. Prepare to be nuked!\n",
++@@ -1539,7 +1551,8 @@ xfsm_manager_complete_saveyourself (XfsmManager *manager)
++   xfsm_verbose ("Manager finished SAVE YOURSELF, session data will be stored now.\n\n");
++ 
++   /* all clients done, store session data */
++-  xfsm_manager_store_session (manager);
+++  if (manager->save_session)
+++    xfsm_manager_store_session (manager);
++ 
++   if (manager->state == XFSM_MANAGER_CHECKPOINT)
++     {
++-- 
++1.7.6.5
++
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
+index 3c84a72..4b9b32e 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.8.3.bb
+@@ -4,10 +4,12 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+ DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
+ RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit"
+-PR = "r1"
++PR = "r2"
  
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg-lite"
--PREFERRED_PROVIDER_virtual/xserver-xf86 = "xserver-xorg-lite"
--XSERVER = "xserver-xorg-lite xf86-video-fbdev xf86-input-keyboard xf86-input-mouse xf86-input-evdev"
--PREFERRED_PROVIDER_virtual/libgl = "mesa-xlib"
-+# Zaurus gets preferred providers settings
-+# from distro/include/default-providers.inc
-+XSERVER = "xserver-xorg xf86-video-fbdev xf86-input-keyboard xf86-input-mouse xf86-input-evdev"
+ inherit xfce
  
- ########
- # kernel
++SRC_URI += "file://0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch"
++
+ # protect from frightening message that xfce might not work correctly
+ pkg_postinst_${PN} () {
+     echo 127.0.0.1    ${MACHINE} >> /etc/hosts
 -- 
-1.7.8.6
+1.7.4.4
 
 
 
