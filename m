@@ -1,51 +1,38 @@
-Received: from co1ehsobe006.messaging.microsoft.com ([216.32.180.189]
-	helo=co1outboundpool.messaging.microsoft.com)
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1TCEsk-0004mE-Ql
+	(envelope-from <andrei@gherzan.ro>) id 1TCHYv-0007iA-PT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2012 21:15:23 +0200
-Received: from mail189-co1-R.bigfish.com (10.243.78.250) by
-	CO1EHSOBE005.bigfish.com (10.243.66.68) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 13 Sep 2012 18:01:52 +0000
-Received: from mail189-co1 (localhost [127.0.0.1])	by
-	mail189-co1-R.bigfish.com (Postfix) with ESMTP id 9004C1E01C9	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 18:01:52 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -10
-X-BigFish: VS-10(zz98dI154cP9371I936eI1432Id6f1izz1202h1d1ah1d2ahzz8275ch17326ah8275bh8275dhz2dh2a8h668h839h8e2h8e3hd25hf0ah107ah10d2h1288h12a5h12a9h12bdh1307hbe9i1155h)
-Received: from mail189-co1 (localhost.localdomain [127.0.0.1]) by mail189-co1
-	(MessageSwitch) id 1347559311485059_25661;
-	Thu, 13 Sep 2012 18:01:51 +0000 (UTC)
-Received: from CO1EHSMHS019.bigfish.com (unknown [10.243.78.231])	by
-	mail189-co1.bigfish.com (Postfix) with ESMTP id 6D0CE680048	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 18:01:51 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS019.bigfish.com
-	(10.243.66.29) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 13 Sep 2012 18:01:49 +0000
-Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.124]) by
-	039-SN1MMR1-005.039d.mgd.msft.net ([::1]) with mapi id 14.02.0309.003;
-	Thu, 13 Sep 2012 13:01:48 -0500
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][for-denzil][PATCH] systemd.bbclass: use system
-	variables instead of hardcoded paths
-Thread-Index: AQHNkYKkNDIzEsbOYUuVM4Radgddzg==
-Date: Thu, 13 Sep 2012 18:01:48 +0000
-Message-ID: <70CC66F5C30A414DADDA6973E4CA391A67942F@039-SN1MPN1-001.039d.mgd.msft.net>
-References: <1347521638-3093-1-git-send-email-b28495@freescale.com>
-	<k2stiv$jb7$1@ger.gmane.org>
-In-Reply-To: <k2stiv$jb7$1@ger.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [70.112.201.132]
+	Fri, 14 Sep 2012 00:07:06 +0200
+Received: by iaky10 with SMTP id y10so2649327iak.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Sep 2012 14:54:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=uc8ylQ91z5znbBEmHISJblGVjDclsAhlmfi0Oj2FV1Y=;
+	b=PVBUjBVSnrrD9wY0SHw59CZVyOBaFbcCaoXgIshXgquMTQsNd4eNGNL/DL0jH62nSh
+	E8NrbqyUS2hRqGwYHrzXcA7+ApCwD2UoBj/EWJsicpILLSGnBAi8a8RKMYZOHAbOa1i9
+	WoIHDohqE/ds4oxH3TmKjogJ3A0J7Unjddv5FOF4+0cl3jhxb4nyPLOlYUzzc32/JElZ
+	zCLn66HY8eOXcA8Dg3bbf6PZ82s1FegRJN/mXTpap7/cCwWHaYkKwpab1/VdO3WyiGvO
+	9Rk7mDkpr2DcnGfZx/jq2w3yC8gm8MiWwjWbul9EWp8kr/BBdfZGxb68MJDBom+lpCvS
+	vyDA==
+Received: by 10.50.95.233 with SMTP id dn9mr657618igb.63.1347573271244; Thu,
+	13 Sep 2012 14:54:31 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][for-denzil][PATCH] systemd.bbclass: use system variables instead of hardcoded paths
+Received: by 10.64.129.232 with HTTP; Thu, 13 Sep 2012 14:54:10 -0700 (PDT)
+X-Originating-IP: [89.121.200.106]
+In-Reply-To: <504EF1BA.3070509@communistcode.co.uk>
+References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
+	<CAK18fxE277_zyJF=Xv955KusWwAcyD=ve09w3Cj35Xm0tU-5tw@mail.gmail.com>
+	<504EF1BA.3070509@communistcode.co.uk>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Fri, 14 Sep 2012 00:54:10 +0300
+Message-ID: <CAK18fxHzsBhpqEimD6+RfGn2eo24nqU5Zx_DGUiXSorUDYjLFQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnrpzI16HDN8DaIchAOoDeueLibqh5JAGVK5BzLWeLveF/PMy+PJn28MPPC5xTH/bg0BbXL
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,56 +46,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2012 19:15:23 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <1D9DBF7759E95A449A9D47F2749CE6B2@mgd.freescale.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Sep 2012 22:07:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Sep 13, 2012 at 10:20 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Tue, Sep 11, 2012 at 11:09 AM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+
+> On 10/09/12 21:13, Andrei Gherzan wrote:
 >
-> Op 13-09-12 09:33, b28495@freescale.com schreef:
->> From: Ting Liu <b28495@freescale.com>
+>> On Thu, Sep 6, 2012 at 2:35 PM, <ml@communistcode.co.uk> wrote:
 >>
->> Fix below issue when check service-files for 64bit target: | DEBUG:
->> adding systemd calls to postinst/postrm for busybox-syslog-systemd |
->> ERROR: Function failed: | | For package busybox-syslog-systemd
->> SYSTEMD_SERVICE-entry busybox-syslog.service does not exist NOTE: packag=
-e
->> busybox-1.19.4-r6+fsl.0: task do_package: Failed
+>>  From: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
+>>> >
+>>>
+>>> V5
+>>>
+>>> - FILES_{PN} no loger required now libdir and includedir are passed to
+>>> oe_runmake
+>>>
+>>> V4
+>>>
+>>> - Remove debian packaging patch, it is not needed
+>>>
+>>> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
+>>> >
+>>> ---
+>>>   .../recipes-extended/**liblockdev/liblockdev_1.0.3.bb  | 20
+>>> ++++++++++++++++++++
+>>>   1 file changed, 20 insertions(+)
+>>>   create mode 100644 meta-oe/recipes-extended/**liblockdev/
+>>> liblockdev_1.0.3.bb
+>>>
+>>> diff --git a/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.**
+>>> bbb/meta-oe/recipes-extended/**liblockdev/
+>>> liblockdev_1.0.3.bb
+>>> new file mode 100644
+>>> index 0000000..210a47b
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.bb
+>>> @@ -0,0 +1,20 @@
+>>> +DESCRIPTION = "Manage character and block device lockfiles."
+>>> +HOMEPAGE = "
+>>> http://anonscm.debian.org/**gitweb/?p=lockdev/lockdev.git;**a=summary<http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary>
+>>> "
+>>> +
+>>> +LICENSE = "LGPLv2.1"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=**d8045f3b8f929c1cb29a1e3fd737b4
+>>> **99"
+>>> +
+>>> +SRC_URI = "
+>>> http://ftp.de.debian.org/**debian/pool/main/l/lockdev/**
+>>> lockdev_${PV}.orig.tar.gz<http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_$%7BPV%7D.orig.tar.gz>
+>>> "
+>>> +
+>>> +SRC_URI[md5sum] = "**64b9c1b87b125fc348e892e2462552**4a"
+>>> +SRC_URI[sha256sum] =
+>>> "**ccae635d7ac3fdd50897eceb250872**b3d9a191d298f213e7f0c836910d86**9f82"
+>>> +
+>>> +S = "${WORKDIR}/lockdev-${PV}"
+>>> +
+>>> +do_compile() {
+>>> +  oe_runmake CC="${CC}" LD="${LD}" shared
+>>> +}
+>>> +
+>>> +do_install() {
+>>> +  oe_runmake basedir="${D}" incdir="${D}${includedir}"
+>>> libdir="${D}${libdir}" install_dev
+>>> +}
+>>>
+>>>  Why install only _dev? Why don't you use make install? It makes no
+>> sense to
+>> compile shared and not install it... I just tested your recipe.
 >>
->> Signed-off-by: Ting Liu <b28495@freescale.com>
->
-> Since when do changes go into denzil without going through master first?
+>>
+I cleaned a little your recipe and sent a pull request (added you as Signed
+of by).
+https://github.com/openembedded/meta-oe/pull/10
 
-This looks to be already fixed in master...
-
-Ting,
-
-Next time you should add a blurb in the commit message so you looked
-at master and it does not have this problem / already fixed,
-especially in the case you are not cherry-picking an upstream commit.
-
--M
-
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFQUfmgMkyGM64RGpERAssbAKCXR2IvkFpaaj9XHgJBhnitDRRbpgCfauG8
-> IpN4oLULM7EGk/mmU0UJNF0=3D
-> =3DZEJH
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
+ag
 
