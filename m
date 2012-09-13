@@ -1,48 +1,51 @@
-Received: from mail-ob0-f175.google.com ([209.85.214.175])
+Received: from co1ehsobe006.messaging.microsoft.com ([216.32.180.189]
+	helo=co1outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TCDvi-0003hn-Kl
+	(envelope-from <B29882@freescale.com>) id 1TCEsk-0004mE-Ql
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2012 20:14:22 +0200
-Received: by obblz20 with SMTP id lz20so5095631obb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 11:01:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=8TOpGI5MDwNZu6AZCxgXNU6Ra8yfidqIr+y0gyVt2rc=;
-	b=CQ+PcXb6vdNbmoVspWVxXPaBLyZSn72VtMfA81l/848LB8Scjv5TakHTo5HRTnLb9l
-	HE+Lyp1h3+QGOSX3bfk/E1VD8DnqKrXsSMzbhmyKMw1vXcrbq7vA5bnxLPDXP2+xhJtA
-	Hqj1TGduZlVfbURVV9FnwRZhitJgsI/oveliwUD8KVYRuaW2vGNFfumjTgyKmI4EKrkU
-	lG6lN5rxqpDA91OJ0J2f4da3SED5f7WiPu9Wl+NXyrIv2aRzdHyLva7bBtc6XhBSnc5+
-	tE9yTXmEoUqQD+OcoXxqnvSimwpdOVbgNVAhsa6mTpNhnk4iJ6AeqMZYigTgfW69PejH
-	nWJg==
-Received: by 10.60.13.226 with SMTP id k2mr117824oec.14.1347559299251; Thu, 13
-	Sep 2012 11:01:39 -0700 (PDT)
+	Thu, 13 Sep 2012 21:15:23 +0200
+Received: from mail189-co1-R.bigfish.com (10.243.78.250) by
+	CO1EHSOBE005.bigfish.com (10.243.66.68) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 13 Sep 2012 18:01:52 +0000
+Received: from mail189-co1 (localhost [127.0.0.1])	by
+	mail189-co1-R.bigfish.com (Postfix) with ESMTP id 9004C1E01C9	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Sep 2012 18:01:52 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -10
+X-BigFish: VS-10(zz98dI154cP9371I936eI1432Id6f1izz1202h1d1ah1d2ahzz8275ch17326ah8275bh8275dhz2dh2a8h668h839h8e2h8e3hd25hf0ah107ah10d2h1288h12a5h12a9h12bdh1307hbe9i1155h)
+Received: from mail189-co1 (localhost.localdomain [127.0.0.1]) by mail189-co1
+	(MessageSwitch) id 1347559311485059_25661;
+	Thu, 13 Sep 2012 18:01:51 +0000 (UTC)
+Received: from CO1EHSMHS019.bigfish.com (unknown [10.243.78.231])	by
+	mail189-co1.bigfish.com (Postfix) with ESMTP id 6D0CE680048	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Sep 2012 18:01:51 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS019.bigfish.com
+	(10.243.66.29) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Thu, 13 Sep 2012 18:01:49 +0000
+Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.124]) by
+	039-SN1MMR1-005.039d.mgd.msft.net ([::1]) with mapi id 14.02.0309.003;
+	Thu, 13 Sep 2012 13:01:48 -0500
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][for-denzil][PATCH] systemd.bbclass: use system
+	variables instead of hardcoded paths
+Thread-Index: AQHNkYKkNDIzEsbOYUuVM4Radgddzg==
+Date: Thu, 13 Sep 2012 18:01:48 +0000
+Message-ID: <70CC66F5C30A414DADDA6973E4CA391A67942F@039-SN1MPN1-001.039d.mgd.msft.net>
+References: <1347521638-3093-1-git-send-email-b28495@freescale.com>
+	<k2stiv$jb7$1@ger.gmane.org>
+In-Reply-To: <k2stiv$jb7$1@ger.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [70.112.201.132]
 MIME-Version: 1.0
-Received: by 10.76.93.35 with HTTP; Thu, 13 Sep 2012 11:01:17 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <5049AD56.8010808@communistcode.co.uk>
-References: <5048B901.3060103@communistcode.co.uk>
-	<1346943545.2673.198.camel@phil-desktop>
-	<5048BC6D.8080904@communistcode.co.uk>
-	<1346944157.2673.199.camel@phil-desktop>
-	<5048BE25.2070004@communistcode.co.uk>
-	<1346944624.2673.200.camel@phil-desktop>
-	<5048BF04.2000904@communistcode.co.uk>
-	<5048C7D5.70301@communistcode.co.uk>
-	<1346947708.2673.201.camel@phil-desktop>
-	<5048CC32.30705@communistcode.co.uk>
-	<1346948364.2673.203.camel@phil-desktop>
-	<5048D11C.9050108@communistcode.co.uk>
-	<5049AD56.8010808@communistcode.co.uk>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Thu, 13 Sep 2012 21:01:17 +0300
-Message-ID: <CAK18fxE_rZFLr7qRKtrvye-ScChCD5htfGBaF4XRtuxufpEwdA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlsMB9geTsR+CVAZO5R7QPXwGvgwY9Z9GYpDLvV3pOrSolxxY3AQO/QiAFlSSJKDyDVF077
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Issues building tinyXML
+X-OriginatorOrg: freescale.com
+Subject: Re: [meta-oe][for-denzil][PATCH] systemd.bbclass: use system variables instead of hardcoded paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,67 +59,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2012 18:14:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 Sep 2012 19:15:23 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <1D9DBF7759E95A449A9D47F2749CE6B2@mgd.freescale.com>
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 7, 2012 at 11:16 AM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+On Thu, Sep 13, 2012 at 10:20 AM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 13-09-12 09:33, b28495@freescale.com schreef:
+>> From: Ting Liu <b28495@freescale.com>
+>>
+>> Fix below issue when check service-files for 64bit target: | DEBUG:
+>> adding systemd calls to postinst/postrm for busybox-syslog-systemd |
+>> ERROR: Function failed: | | For package busybox-syslog-systemd
+>> SYSTEMD_SERVICE-entry busybox-syslog.service does not exist NOTE: packag=
+e
+>> busybox-1.19.4-r6+fsl.0: task do_package: Failed
+>>
+>> Signed-off-by: Ting Liu <b28495@freescale.com>
+>
+> Since when do changes go into denzil without going through master first?
 
-> I think this has it cracked now.Phil, note the -fpic, is that in the right
-> place?
->
->
-> DESCRIPTION = "A simple, small, C++ XML parser that can be easily
-> integrated into other programs"
->
-> LICENSE = "zlib"
-> LIC_FILES_CHKSUM = "file://tinyxml.cpp;endline=**23;md5=**
-> b97285d8fafcc49b761ca785816cc3**97"
->
-> SRC_URI = "http://ftp.debian.org/debian/**pool/main/t/tinyxml/${PN}_${**
-> PV}.orig.tar.gz<http://ftp.debian.org/debian/pool/main/t/tinyxml/$%7BPN%7D_$%7BPV%7D.orig.tar.gz>
-> "
->
-> SRC_URI[md5sum] = "**c1b864c96804a10526540c664ade67**f0"
-> SRC_URI[sha256sum] = "**15bdfdcec58a7da30adc87ac2b078e**
-> 4417dbe5392f3afb719f9ba6d06264**5593"
->
-> S = "${WORKDIR}/tinyxml"
->
-> TINYXML_USE_STL = "YES"
->
-> do_compile() {
->   oe_runmake LD="${CXX}"
->
->   ${CXX} -fpic -shared -o lib${PN}.so.0.${PV} \
->     -Wl,-soname,lib${PN}.so.0 $(ls *.o | grep -v xmltest)
->
-> }
->
+This looks to be already fixed in master...
 
-I would define:
-LD = "${CXX}"
-And then use a append not overwrite the whole compile rule.
+Ting,
 
+Next time you should add a blurb in the commit message so you looked
+at master and it does not have this problem / already fixed,
+especially in the case you are not cherry-picking an upstream commit.
 
-> do_install() {
->
->   install -d -m 0755 ${D}${libdir}
->   install -d -m 0755 ${D}${includedir}
->
->   install -m 0755 lib${PN}.so.0.${PV} ${D}${libdir}
->   install -m 0644 ${PN}.h tinystr.h ${D}${includedir}
->
->   (cd ${D}${libdir}
->
->     ln -s lib${PN}.so.0.${PV} lib${PN}.so.0
->     ln -s lib${PN}.so.0.${PV} lib${PN}.so
->   )
->
-What are these parentheses for?
+-M
 
 >
-> }
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFQUfmgMkyGM64RGpERAssbAKCXR2IvkFpaaj9XHgJBhnitDRRbpgCfauG8
+> IpN4oLULM7EGk/mmU0UJNF0=3D
+> =3DZEJH
+> -----END PGP SIGNATURE-----
 >
 >
-ag
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
 
