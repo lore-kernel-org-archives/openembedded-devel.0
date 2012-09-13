@@ -1,46 +1,31 @@
-Received: from co1ehsobe005.messaging.microsoft.com ([216.32.180.188]
-	helo=co1outboundpool.messaging.microsoft.com)
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1TC0eD-0007UF-1R
+	(envelope-from <raj.khem@gmail.com>) id 1TC21K-0004Qp-93
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2012 06:03:26 +0200
-Received: from mail45-co1-R.bigfish.com (10.243.78.234) by
-	CO1EHSOBE014.bigfish.com (10.243.66.77) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 13 Sep 2012 02:50:20 +0000
-Received: from mail45-co1 (localhost [127.0.0.1])	by mail45-co1-R.bigfish.com
-	(Postfix) with ESMTP id 9613E280158	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 02:50:20 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1202h1d1ah1d2ahzz17326ah8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah107ah1288h12a5h12bdh12e5h1155h)
-Received: from mail45-co1 (localhost.localdomain [127.0.0.1]) by mail45-co1
-	(MessageSwitch) id 1347504618575862_2798;
-	Thu, 13 Sep 2012 02:50:18 +0000 (UTC)
-Received: from CO1EHSMHS029.bigfish.com (unknown [10.243.78.232])	by
-	mail45-co1.bigfish.com (Postfix) with ESMTP id 87BEEE0046	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 02:50:18 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS029.bigfish.com
-	(10.243.66.39) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 13 Sep 2012 02:50:16 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.2.309.3; Wed, 12 Sep 2012 21:50:06 -0500
-Received: from bjsimics-desktop.ap.freescale.net
-	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
-	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id q8D2o4WD014541;
-	Wed, 12 Sep 2012 19:50:05 -0700
-From: <b19537@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Sep 2012 11:07:07 +0800
-Message-ID: <1347505627-17550-1-git-send-email-b19537@freescale.com>
-X-Mailer: git-send-email 1.7.9.5
+	Thu, 13 Sep 2012 07:31:22 +0200
+Received: by eekb57 with SMTP id b57so1523615eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Sep 2012 22:18:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=mT5xiVsIirsbtboLnJ+fLRrUuzL6ferzH/yX2W3NHxA=;
+	b=U150a/oY0koUVMrp6OEUnzeMJLVK1h/NPIHujlcUiCWqgmYSh/Q98Bz+XgFXgygU2v
+	/8u95WuCZpNhddU+2ox7HaqqoNNTCZQrPRpARRkBp0RKD+OJz+d4R03r74659joSuzVG
+	ZRUKdTTIMXRV2LH6Sg194SC9kSqCevoWvkFXHL40/YJ/RErYQSIw0x6WZnLohkUmeaix
+	6pB7fCSwvZbn4LRbZDFQze3L2h1wGa65+BZjFrBqz4IprzxvlXMHgPfZVuiEaTDqW9t4
+	iT2KFyNVUgIv/rc/TB++WpbycIJq7nFZngN9TDcTv8dPMla4fKhzc3Ir98F4T+hueSUn
+	Uo7A==
+Received: by 10.14.202.66 with SMTP id c42mr950193eeo.35.1347513529073; Wed,
+	12 Sep 2012 22:18:49 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: msm@freescale.com
-Subject: [meta-oe] libnfnetlink: use a correct LIC_FILES_CHKSUM
+Received: by 10.14.2.5 with HTTP; Wed, 12 Sep 2012 22:18:18 -0700 (PDT)
+In-Reply-To: <CAG4_upS_8o4j4EhL4mvaGY--kwnYh3SgwnyHPfc_yFjo-3k6Hg@mail.gmail.com>
+References: <CAG4_upS_8o4j4EhL4mvaGY--kwnYh3SgwnyHPfc_yFjo-3k6Hg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 12 Sep 2012 22:18:18 -0700
+Message-ID: <CAMKF1srdrMSTv03-AiubgPZd5Hv8-nwbdBUuQAS=aeZHojdQxg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: at91bootstrap and gcc 4.6+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,39 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2012 04:03:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 13 Sep 2012 05:31:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Zhenhua Luo <b19537@freescale.com>
+On Mon, Sep 10, 2012 at 7:37 PM, Chris Verges <kg4ysn@gmail.com> wrote:
+> Hi all,
+>
+> For anyone doing development on the AT91-based platforms, there is a known
+> issue with at91bootstrap and gcc 4.6 (and later) where the
+> linker erroneously causes an overlap between sections.  There is a known
+> fix here, just needs to be turned into a patch file for OE:
+>
+> http://www.at91.com/forum/viewtopic.php/f,12/t,20624/
 
-    The current LIC_FILES_CHKSUM checks the copyright/license from the
-    generated Makefile.in, this is not correct.
-    Since there is no seperated license/copying file, this fixes it to 
-    use license content in src/libnfnetlink.c instead.
+I dont see the full linker script but may be using OVERLAY
+would be nicer in that
 
-Signed-off-by: Zhenhua Luo <b19537@freescale.com>
----
- .../libnfnetlink/libnfnetlink_1.0.0.bb             |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
-index 1ce5912..f4a65f0 100644
---- a/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
-+++ b/meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb
-@@ -7,7 +7,9 @@ HOMEPAGE = "http://www.netfilter.org/projects/libnfnetlink/index.html"
- SECTION = "devel/libs"
- LICENSE = "GPLv2+"
- 
--LIC_FILES_CHKSUM = "file://Makefile.in;endline=13;md5=a44bb8f4c22793d55c5e879eec256702"
-+PR = "r1"
-+
-+LIC_FILES_CHKSUM = "file://src/libnfnetlink.c;beginline=3;endline=11;md5=28bd3bf7f60a78101491eef6b9bb9eba"
- 
- SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=libnfnetlink-${PV}"
- SRC_URI[libnfnetlink-1.0.0.md5sum] = "016fdec8389242615024c529acc1adb8"
--- 
-1.7.9.5
-
-
+>
+> Chris
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
