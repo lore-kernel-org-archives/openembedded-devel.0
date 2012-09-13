@@ -1,45 +1,23 @@
-Received: from db3ehsobe002.messaging.microsoft.com ([213.199.154.140]
-	helo=db3outboundpool.messaging.microsoft.com)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1TC4tQ-0007Rl-Gs
+	(envelope-from <Song.Li@windriver.com>) id 1TC5wk-000058-Jg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Sep 2012 10:35:24 +0200
-Received: from mail42-db3-R.bigfish.com (10.3.81.228) by
-	DB3EHSOBE010.bigfish.com (10.3.84.30) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 13 Sep 2012 07:37:38 +0000
-Received: from mail42-db3 (localhost [127.0.0.1])	by mail42-db3-R.bigfish.com
-	(Postfix) with ESMTP id 4735DA00AE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 07:37:38 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 1
-X-BigFish: VS1(zzd6f1izz1202h1d1ah1d2ahzz8275bhz2dh2a8h668h839hd24he5bhf0ah107ah1288h12a5h12bdh12e5h1155h)
-Received: from mail42-db3 (localhost.localdomain [127.0.0.1]) by mail42-db3
-	(MessageSwitch) id 1347521856672742_2580;
-	Thu, 13 Sep 2012 07:37:36 +0000 (UTC)
-Received: from DB3EHSMHS016.bigfish.com (unknown [10.3.81.235])	by
-	mail42-db3.bigfish.com (Postfix) with ESMTP id A0F13140047	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Sep 2012 07:37:36 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB3EHSMHS016.bigfish.com
-	(10.3.87.116) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 13 Sep 2012 07:37:36 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.2.309.3; Thu, 13 Sep 2012 02:37:34 -0500
-Received: from sbuilder136.ap.freescale.net ([10.192.208.136])	by
-	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id q8D7bWiN006424;
-	Thu, 13 Sep 2012 00:37:33 -0700
-From: <b28495@freescale.com>
+	Thu, 13 Sep 2012 11:42:54 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca [147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q8D9UKR9002108
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Sep 2012 02:30:20 -0700 (PDT)
+Received: from localhost.localdomain (128.224.163.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.309.2; Thu, 13 Sep 2012 02:30:19 -0700
+From: <Song.Li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Sep 2012 15:33:58 +0800
-Message-ID: <1347521638-3093-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+Date: Thu, 13 Sep 2012 17:29:26 +0800
+Message-ID: <1347528566-20039-1-git-send-email-Song.Li@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: b29882@freescale.com
-Subject: [meta-oe][for-denzil][PATCH] systemd.bbclass: use system variables instead of hardcoded paths
+Subject: [PATCH] python-pygtk:add gtk-types.defs into gdk.c dependence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,55 +31,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2012 08:35:24 -0000
+X-List-Received-Date: Thu, 13 Sep 2012 09:42:55 -0000
 Content-Type: text/plain
 
-From: Ting Liu <b28495@freescale.com>
+From: "Song.Li" <Song.Li@windriver.com>
 
-Fix below issue when check service-files for 64bit target:
-| DEBUG: adding systemd calls to postinst/postrm for busybox-syslog-systemd
-| ERROR: Function failed:
-|
-| For package busybox-syslog-systemd SYSTEMD_SERVICE-entry busybox-syslog.service does not exist
-NOTE: package busybox-1.19.4-r6+fsl.0: task do_package: Failed
+gdk.c depends on gtk-types.defs but
+gdk/Makefile.am miss this.This will cause
+build error sometimes when built
+with multi-jobbing,so add gtk-types.defs into
+gdk.c dependence.
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
+[YOCTO #3103]
+
+Signed-off-by: Song.Li <Song.Li@windriver.com>
 ---
- meta-oe/classes/systemd.bbclass |   11 +++++++----
- 1 files changed, 7 insertions(+), 4 deletions(-)
+ .../add-gtk-types.defs-into-gdk.c-dependence.patch |   34 ++++++++++++++++++++
+ .../recipes-devtools/python/python-pygtk_2.24.0.bb |    6 +++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 meta/recipes-devtools/python/python-pygtk/add-gtk-types.defs-into-gdk.c-dependence.patch
 
-diff --git a/meta-oe/classes/systemd.bbclass b/meta-oe/classes/systemd.bbclass
-index a2c8ddf..9690c18 100644
---- a/meta-oe/classes/systemd.bbclass
-+++ b/meta-oe/classes/systemd.bbclass
-@@ -154,7 +154,10 @@ python populate_packages_prepend () {
+diff --git a/meta/recipes-devtools/python/python-pygtk/add-gtk-types.defs-into-gdk.c-dependence.patch b/meta/recipes-devtools/python/python-pygtk/add-gtk-types.defs-into-gdk.c-dependence.patch
+new file mode 100644
+index 0000000..9c42ef5
+--- /dev/null
++++ b/meta/recipes-devtools/python/python-pygtk/add-gtk-types.defs-into-gdk.c-dependence.patch
+@@ -0,0 +1,34 @@
++From 5892e2f02a00a21aa905809741f66647d1ed659e Mon Sep 17 00:00:00 2001
++From: "Song.Li" <Song.Li@windriver.com>
++Date: Tue, 11 Sep 2012 16:15:46 +0800
++Subject: [PATCH] add gtk-types.defs into gdk.c dependence
++
++gdk.c depends on gtk-types.defs but
++gdk/Makefile.am miss this.This will cause
++build error sometimes when built
++with multi-jobbing,so add gtk-types.defs into
++gdk.c dependence.
++
++Upstream-Status:Pending
++
++Signed-off-by: Song.Li <Song.Li@windriver.com>
++---
++ gtk/Makefile.am |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/gtk/Makefile.am b/gtk/Makefile.am
++index c02a0e2..28332f7 100644
++--- a/gtk/Makefile.am
+++++ b/gtk/Makefile.am
++@@ -177,7 +177,7 @@ gtkunixprint.defs: $(GTKUNIXPRINT_DEFS) Makefile
++ gtkunixprint-types.defs: $(GTKUNIXPRINT_TYPES_DEFS) Makefile
++ 	$(CREATEDEFS) $@ $(GTKUNIXPRINT_TYPES_DEFS)
++ 
++-gdk.c: gdk-types.defs gdk.defs $(GDK_OVERRIDES)
+++gdk.c: gdk-types.defs gtk-types.defs gdk.defs $(GDK_OVERRIDES)
++ gtk.c: gdk-types.defs gtk-types.defs gtk.defs gdk-types.defs $(GTK_OVERRIDES)
++ _gtk_la_CFLAGS = $(PYCAIRO_CFLAGS) $(GTK_CFLAGS)
++ _gtk_la_LDFLAGS = $(common_ldflags) -export-symbols-regex init_gtk
++-- 
++1.7.9.5
++
+diff --git a/meta/recipes-devtools/python/python-pygtk_2.24.0.bb b/meta/recipes-devtools/python/python-pygtk_2.24.0.bb
+index 20d54a3..f7e52bc 100644
+--- a/meta/recipes-devtools/python/python-pygtk_2.24.0.bb
++++ b/meta/recipes-devtools/python/python-pygtk_2.24.0.bb
+@@ -8,11 +8,15 @@ SRCNAME = "pygtk"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
  
- 	# check service-files and call systemd_add_files_and_parse for each entry
- 	def systemd_check_services():
--		searchpaths = '/etc/systemd/system/ /lib/systemd/system/ /usr/lib/systemd/system/'
-+		searchpaths = []
-+		searchpaths.append(d.getVar('sysconfdir', True))
-+		searchpaths.append(d.getVar('libdir', True))
-+		searchpaths.append(d.getVar('base_libdir', True))
- 		systemd_packages = d.getVar('SYSTEMD_PACKAGES', 1)
- 		has_exactly_one_service = len(systemd_packages.split()) == 1
- 		if has_exactly_one_service:
-@@ -168,9 +171,9 @@ python populate_packages_prepend () {
- 		for pkg_systemd in systemd_packages.split():
- 			for service in get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd).split():
- 				path_found = ''
--				for path in searchpaths.split():
--					if os.path.exists('${D}' + path + service):
--						path_found = path
-+				for path in searchpaths:
-+					if os.path.exists('${D}' + path + '/systemd/system/' + service):
-+						path_found = path + '/systemd/system/'
- 				if path_found != '':
- 					systemd_add_files_and_parse(pkg_systemd, path_found, service, keys)
- 				else:
++PR = "r1"
++
+ SRC_URI = "ftp://ftp.gnome.org/pub/gnome/sources/pygtk/2.24/${SRCNAME}-${PV}.tar.bz2 \
+            file://fix-gtkunixprint.patch \
+            file://prevent_to_get_display_during_import.patch \
+            file://nodocs.patch \
+-           file://acinclude.m4"
++           file://acinclude.m4 \
++           file://add-gtk-types.defs-into-gdk.c-dependence.patch \
++           "
+ 
+ SRC_URI[md5sum] = "a1051d5794fd7696d3c1af6422d17a49"
+ SRC_URI[sha256sum] = "cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912"
 -- 
-1.7.5.4
-
+1.7.9.5
 
 
 
