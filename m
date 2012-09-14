@@ -1,40 +1,23 @@
-Received: from 11.mo5.mail-out.ovh.net ([46.105.47.167]
-	helo=mo5.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TCZ1C-0007BI-NB
+Received: from sysmocom.de ([78.46.147.233] helo=mail.sysmocom.de)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <holger+oe@freyther.de>) id 1TCZRR-0008Ez-PI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Sep 2012 18:45:26 +0200
-Received: from mail624.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo5.mail-out.ovh.net (Postfix) with SMTP id A9814FFAFA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2012 15:00:38 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 14 Sep 2012 14:57:03 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 14 Sep 2012 14:57:01 +0200
-Date: Fri, 14 Sep 2012 14:54:57 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: otavio@ossystems.com.br
-X-Ovh-Mailout: 178.32.228.5 (mo5.mail-out.ovh.net)
-Message-ID: <20120914145457.2a3c9a76@eb-e6520>
-In-Reply-To: <1347455128-14588-1-git-send-email-otavio@ossystems.com.br>
-References: <1347455128-14588-1-git-send-email-otavio@ossystems.com.br>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 2998271453266947401
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehtddrieegucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
-X-Spam-Check: DONE|U 0.500061/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehtddrieegucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][for-denzil][PATCH] libxaw: Fix libxaw-dev to not depends on non-existent libxaw package
+	Fri, 14 Sep 2012 19:12:33 +0200
+Received: from sangmingze-mail.local (91-66-230-199-dynip.superkabel.de
+	[91.66.230.199])
+	by mail.sysmocom.de (Postfix) with ESMTPSA id CA9EF2543428;
+	Fri, 14 Sep 2012 17:03:27 +0000 (UTC)
+Received: from localhost.lan ([127.0.0.1] helo=sanmingze.lan)
+	by sangmingze-mail.local with esmtp (Exim 4.80)
+	(envelope-from <holger+oe@freyther.de>)
+	id 1TCZF8-0001J6-3r; Fri, 14 Sep 2012 18:59:50 +0200
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Sep 2012 18:59:33 +0200
+Message-Id: <1347641974-4993-1-git-send-email-holger+oe@freyther.de>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Holger Hans Peter Freyther <zecke@selfish.org>
+Subject: [PATCH] meta-systemd: Introduce a create-volatile to create tmp directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +31,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 16:45:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 Sep 2012 17:12:33 -0000
 
-Hi Otavio,
+From: Holger Hans Peter Freyther <zecke@selfish.org>
 
-Le Wed, 12 Sep 2012 10:05:28 -0300,
-Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
+The base-files create symlinks from /var/{log,tmp,lock,cache,run} to
+the /var/volatile. The directories are created by sysv initscripts.
+Use the systemd-tmpfiles to create the directories. One needs to be
+careful with the naming of the file as systemd first collects all
+*.conf files, sorts them by name and is parsing them then. Make sure
+the new file is parsed before the systemd.conf.
+---
+ .../systemd/systemd/create-volatile.conf           |   11 +++++++++++
+ meta-systemd/recipes-core/systemd/systemd_git.bb   |    4 +++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+ create mode 100644 meta-systemd/recipes-core/systemd/systemd/create-volatile.conf
 
-> The libxaw recipe generate a binary package for each soname of libxaw
-> (currently libxaw6-6 and libxaw-7-7) but no libxaw so libxaw-dev
-> cannot depends on it.
->=20
-> Reported-by: Daiane Angolini <daiane.angolini@freescale.com>
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+diff --git a/meta-systemd/recipes-core/systemd/systemd/create-volatile.conf b/meta-systemd/recipes-core/systemd/systemd/create-volatile.conf
+new file mode 100644
+index 0000000..afcf8c3
+--- /dev/null
++++ b/meta-systemd/recipes-core/systemd/systemd/create-volatile.conf
+@@ -0,0 +1,11 @@
++# This goes hand-in-hand with the base-files of OE-Core. The file must
++# be sorted before 'systemd.conf' becuase this attempts to create a file
++# inside /var/log.
++
++
++d   /var/volatile/cache -   -   -   -
++d   /var/volatile/log   -   -   -   -
++d   /var/volatile/lock  -   -   -   -
++d   /var/volatile/run   -   -   -   -
++d   /var/volatile/tmp   -   -   -   -
++
+diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
+index 09bc635..2b245c0 100644
+--- a/meta-systemd/recipes-core/systemd/systemd_git.bb
++++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
+@@ -19,7 +19,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r6"
++PR = "r7"
+ 
+ inherit useradd pkgconfig autotools perlnative
+ 
+@@ -31,6 +31,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
+            file://touchscreen.rules \
+            file://modprobe.rules \
+            file://var-run.conf \
++           file://create-volatile.conf \
+            ${UCLIBCPATCHES} \
+           "
+ UCLIBCPATCHES = ""
+@@ -97,6 +98,7 @@ do_install() {
+ 	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
+ 
+ 	install -m 0644 ${WORKDIR}/var-run.conf ${D}${sysconfdir}/tmpfiles.d/
++	install -m 0644 ${WORKDIR}/create-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+ }
+ 
+ python populate_packages_prepend (){
+-- 
+1.7.9.5
 
-applied to denzil-next & denzil, please put me in cc of patches for
-meta-oe/denzil else I don't always see them.
-
-best regards,
-Eric
 
 
