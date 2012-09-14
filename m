@@ -1,24 +1,38 @@
-Received: from sysmocom.de ([78.46.147.233] helo=mail.sysmocom.de)
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1TCRP8-0006oa-70
+	(envelope-from <ml@communistcode.co.uk>) id 1TCRgI-0007Ad-5D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Sep 2012 10:37:38 +0200
-Received: from sangmingze-mail.local (91-66-230-199-dynip.superkabel.de
-	[91.66.230.199])
-	by mail.sysmocom.de (Postfix) with ESMTPSA id 49C9525434E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2012 08:20:14 +0000 (UTC)
-Received: from ich by sangmingze-mail.local with local (Exim 4.80)
-	(envelope-from <holger+oe@freyther.de>) id 1TCR4u-0006JU-Hu
+	Fri, 14 Sep 2012 10:55:22 +0200
+Received: from localhost ([127.0.0.1]:55002 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TCRU4-0007xy-AX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Sep 2012 10:16:44 +0200
-Date: Fri, 14 Sep 2012 10:16:44 +0200
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120914081644.GC22757@localhost>
+	Fri, 14 Sep 2012 08:42:44 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=r9lA+y9TeXHGVoLJ/PQq1NeZOaA=; b=doLRcfeE99UXIFwXgc9NwIB2fG0j
+	PqRQwEeT9ufPhIsGxwSQjVf48l++29T7cRUE35H1S9scsbSH62r0xjBhx47BSLBa
+	aOFynR3HqZj7sOjMvQ0Gccx5ukvo2fhYWEGmmOdQw8EmVCAZnHnot5f0boScDf/c
+	/U+mdhqeNWk7Kxc=
+Received: from [195.171.99.130] (port=49975 helo=[192.168.0.40])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TCRU4-0007xv-8B
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Sep 2012 08:42:44 +0000
+Message-ID: <5052EE59.4060409@communistcode.co.uk>
+Date: Fri, 14 Sep 2012 09:44:09 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120828 Thunderbird/15.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-systemd] base-files and systemd services
+To: openembedded-devel@lists.openembedded.org
+References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
+	<CAK18fxE277_zyJF=Xv955KusWwAcyD=ve09w3Cj35Xm0tU-5tw@mail.gmail.com>
+	<504EF1BA.3070509@communistcode.co.uk>
+	<CAK18fxHzsBhpqEimD6+RfGn2eo24nqU5Zx_DGUiXSorUDYjLFQ@mail.gmail.com>
+In-Reply-To: <CAK18fxHzsBhpqEimD6+RfGn2eo24nqU5Zx_DGUiXSorUDYjLFQ@mail.gmail.com>
+Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,32 +46,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 08:37:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Sep 2012 08:55:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Good Morning,
+On 13/09/12 22:54, Andrei Gherzan wrote:
+> On Tue, Sep 11, 2012 at 11:09 AM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+>
+>> On 10/09/12 21:13, Andrei Gherzan wrote:
+>>
+>>> On Thu, Sep 6, 2012 at 2:35 PM, <ml@communistcode.co.uk> wrote:
+>>>
+>>>   From: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
+>>>> V5
+>>>>
+>>>> - FILES_{PN} no loger required now libdir and includedir are passed to
+>>>> oe_runmake
+>>>>
+>>>> V4
+>>>>
+>>>> - Remove debian packaging patch, it is not needed
+>>>>
+>>>> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.**uk<jack.mitchell@dbbroadcast.co.uk>
+>>>> ---
+>>>>    .../recipes-extended/**liblockdev/liblockdev_1.0.3.bb  | 20
+>>>> ++++++++++++++++++++
+>>>>    1 file changed, 20 insertions(+)
+>>>>    create mode 100644 meta-oe/recipes-extended/**liblockdev/
+>>>> liblockdev_1.0.3.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.**
+>>>> bbb/meta-oe/recipes-extended/**liblockdev/
+>>>> liblockdev_1.0.3.bb
+>>>> new file mode 100644
+>>>> index 0000000..210a47b
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-extended/**liblockdev/liblockdev_1.0.3.bb
+>>>> @@ -0,0 +1,20 @@
+>>>> +DESCRIPTION = "Manage character and block device lockfiles."
+>>>> +HOMEPAGE = "
+>>>> http://anonscm.debian.org/**gitweb/?p=lockdev/lockdev.git;**a=summary<http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary>
+>>>> "
+>>>> +
+>>>> +LICENSE = "LGPLv2.1"
+>>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=**d8045f3b8f929c1cb29a1e3fd737b4
+>>>> **99"
+>>>> +
+>>>> +SRC_URI = "
+>>>> http://ftp.de.debian.org/**debian/pool/main/l/lockdev/**
+>>>> lockdev_${PV}.orig.tar.gz<http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_$%7BPV%7D.orig.tar.gz>
+>>>> "
+>>>> +
+>>>> +SRC_URI[md5sum] = "**64b9c1b87b125fc348e892e2462552**4a"
+>>>> +SRC_URI[sha256sum] =
+>>>> "**ccae635d7ac3fdd50897eceb250872**b3d9a191d298f213e7f0c836910d86**9f82"
+>>>> +
+>>>> +S = "${WORKDIR}/lockdev-${PV}"
+>>>> +
+>>>> +do_compile() {
+>>>> +  oe_runmake CC="${CC}" LD="${LD}" shared
+>>>> +}
+>>>> +
+>>>> +do_install() {
+>>>> +  oe_runmake basedir="${D}" incdir="${D}${includedir}"
+>>>> libdir="${D}${libdir}" install_dev
+>>>> +}
+>>>>
+>>>>   Why install only _dev? Why don't you use make install? It makes no
+>>> sense to
+>>> compile shared and not install it... I just tested your recipe.
+>>>
+>>>
+> I cleaned a little your recipe and sent a pull request (added you as Signed
+> of by).
+> https://github.com/openembedded/meta-oe/pull/10
+>
+> ag
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I am playing with meta-oe's meta-systemd and have one issue with the
-base-files provided by Poky. networking.service and syslog (busybox)
-fail to run as directories like /var/log and /var/run do not exist. In
-my images/packagegroup-core-boot I am not installing the the "initscripts"
-so I have no LSB service to initialize these directories.
+Looks good, my only gripe is that you have listed basedir twice in the 
+EXTRA_OEMAKE.
 
-Taking a look at meta-angstrom I found a base-files.bbappend that removes
-the "log lock tmp..." symlinks and instead just mounts /var/tmp and /var/run
-as tmpfs. In "recent" Poky/OE-Core the syslogd service started to write to
-/var/log under the assumption that this is a volatile directory...
+Cheers,
 
-I wonder how I should move forward:
+-- 
 
-a.) Use a tempfiles.d/volatile.conf to create these directories?
-b.) Install initscripts in my systemd image?
-c.) ???
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
 
+--
 
-comments/ideas?
-
-holger
 
 
