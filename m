@@ -1,29 +1,38 @@
-Received: from ams-iport-3.cisco.com ([144.254.224.146])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1TCVgq-0005Py-Lm
+	(envelope-from <otavio.salvador@gmail.com>) id 1TCVle-0005aA-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Sep 2012 15:12:12 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=2882; q=dns/txt; s=iport;
-	t=1347627580; x=1348837180;
-	h=from:to:cc:subject:date:message-id;
-	bh=np9IiHG1OXlfl7KkIfIFRkmp9F3vcgNRx4ULF2hp/Ao=;
-	b=AU/KHGH6+TvudwmnvSUvHjUOk8+ctZzjafMNJGB0XtvgL6pI8lLWCa5K
-	Bay4uKJgUtEwTwkwzQZAkni77D8zfKBsVtgNzs2qFgVEazIULVlBEe1Ml
-	Y7Exa6a69ITjQ4wuPS9lnNnmvic2X/f2mS9X8gD9THrmBZpnpmgn2ngsb g=;
-X-IronPort-AV: E=Sophos;i="4.80,422,1344211200"; 
-   d="scan'208";a="8038742"
-Received: from ams-core-1.cisco.com ([144.254.72.81])
-	by ams-iport-3.cisco.com with ESMTP; 14 Sep 2012 12:59:37 +0000
-Received: from Lan.cisco.com (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-1.cisco.com (8.14.5/8.14.5) with ESMTP id q8ECxbnU021112;
-	Fri, 14 Sep 2012 12:59:37 GMT
-From: Martin Ertsaas <mertsas@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Sep 2012 14:54:18 +0200
-Message-Id: <1347627258-5952-1-git-send-email-mertsas@cisco.com>
-X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-systemd][PATCH] systemd: Add patch so we can compile without xz.
+	Fri, 14 Sep 2012 15:17:10 +0200
+Received: by daks35 with SMTP id s35so2284813dak.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2012 06:04:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=DnzXdzLQQsjGcZmcyj3euxllPYjhm6c2Wp42uJeoM84=;
+	b=bqpS4XSIdNAKSO7boI7JL9Yz9jGya9y1MsWObswVHgClmNn/bfwzTKhNXOSyRIUXdh
+	YnqDCpBOGDHn4GB7aMDaJNtbC9VSphbtnhp5VY7pK9sfqUQigk/JJuTQAhJ7gHLdPqaN
+	BiFDYeo+85xI9U55us+FZF8alsy0dVVrCSNP+G63skl5SXpNadsMxOmt24GAT3CBc5jr
+	gMTbEYajcwfekig84tCySSaGxGBTQ02KbLhnIyk9w9MrQfZDQ1mrBx1B5q5MUzMG5Pbt
+	CpslXlMUy3RxRS1J+R8yWxiKb760odve0nFxY5jaJMsX+7EzvCXvjzz7qrgh+HOiqMeF
+	HlVA==
+MIME-Version: 1.0
+Received: by 10.68.197.70 with SMTP id is6mr5083975pbc.64.1347627874591; Fri,
+	14 Sep 2012 06:04:34 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.36.105 with HTTP; Fri, 14 Sep 2012 06:04:34 -0700 (PDT)
+In-Reply-To: <20120914145457.2a3c9a76@eb-e6520>
+References: <1347455128-14588-1-git-send-email-otavio@ossystems.com.br>
+	<20120914145457.2a3c9a76@eb-e6520>
+Date: Fri, 14 Sep 2012 10:04:34 -0300
+X-Google-Sender-Auth: GdTWkAVbiBQY_wHP7aYB981rKpA
+Message-ID: <CAP9ODKpDf8Thhmw4yuphXn2XzNaxNydiRVZ-izDfTWB-yoSmtQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][for-denzil][PATCH] libxaw: Fix libxaw-dev to not depends on non-existent libxaw package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,70 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 13:12:12 -0000
+X-List-Received-Date: Fri, 14 Sep 2012 13:17:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-A compilation bug in systemd is fixed by this patch. journal-verify.c calls uncompress_blob, in
-uncompress.c. uncompress.c is, however, not compiled if you don't compile with xz support. To avoid
-GPLv3, one have to turn of this support in systemd, which in turn will cause systemd to fail during linking,
-as there is no definition of compress_blob.
----
- .../add-HAVE_XZ-check-to-avoid-build-failure.patch |   32 ++++++++++++++++++++
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    1 +
- 2 files changed, 33 insertions(+), 0 deletions(-)
- create mode 100644 meta-systemd/recipes-core/systemd/systemd/add-HAVE_XZ-check-to-avoid-build-failure.patch
+On Fri, Sep 14, 2012 at 9:54 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Hi Otavio,
+>
+> Le Wed, 12 Sep 2012 10:05:28 -0300,
+> Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
+>
+>> The libxaw recipe generate a binary package for each soname of libxaw
+>> (currently libxaw6-6 and libxaw-7-7) but no libxaw so libxaw-dev
+>> cannot depends on it.
+>>
+>> Reported-by: Daiane Angolini <daiane.angolini@freescale.com>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>
+> applied to denzil-next & denzil, please put me in cc of patches for
+> meta-oe/denzil else I don't always see them.
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd/add-HAVE_XZ-check-to-avoid-build-failure.patch b/meta-systemd/recipes-core/systemd/systemd/add-HAVE_XZ-check-to-avoid-build-failure.patch
-new file mode 100644
-index 0000000..8e0bd45
---- /dev/null
-+++ b/meta-systemd/recipes-core/systemd/systemd/add-HAVE_XZ-check-to-avoid-build-failure.patch
-@@ -0,0 +1,32 @@
-+commit 70f09301d5d47577cfa4fe70c7b3cba336529cdf
-+Author: Yin Kangkai <kangkai.yin@intel.com>
-+Date:   Fri Aug 24 16:52:58 2012 +0800
-+
-+    journal: add HAVE_XZ check to avoid build failure
-+    
-+    Without this, build fail with --disable-xz or xz not installed.
-+
-+    status: Applied upstream
-+
-+diff --git a/src/journal/journal-verify.c b/src/journal/journal-verify.c
-+index 2401293..5d134bd 100644
-+--- a/src/journal/journal-verify.c
-++++ b/src/journal/journal-verify.c
-+@@ -63,6 +63,7 @@ static int journal_file_object_verify(JournalFile *f, Object *o) {
-+                 h1 = le64toh(o->data.hash);
-+ 
-+                 if (o->object.flags & OBJECT_COMPRESSED) {
-++#ifdef HAVE_XZ
-+                         void *b = NULL;
-+                         uint64_t alloc = 0, b_size;
-+ 
-+@@ -73,6 +74,9 @@ static int journal_file_object_verify(JournalFile *f, Object *o) {
-+ 
-+                         h2 = hash64(b, b_size);
-+                         free(b);
-++#else
-++                        return -EPROTONOSUPPORT;
-++#endif
-+                 } else
-+                         h2 = hash64(o->data.payload, le64toh(o->object.size) - offsetof(Object, data.payload));
-+ 
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 09bc635..95f4eee 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -27,6 +27,7 @@ SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
- 
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-            file://use-rootlibdir.patch \
-+           file://add-HAVE_XZ-check-to-avoid-build-failure.patch \
-            file://gtk-doc.make \
-            file://touchscreen.rules \
-            file://modprobe.rules \
--- 
-1.7.8.6
+Thanks a lot; will do next time.
 
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
