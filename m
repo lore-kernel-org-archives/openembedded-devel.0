@@ -1,40 +1,52 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from am1ehsobe003.messaging.microsoft.com ([213.199.154.206]
+	helo=am1outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TCSgQ-0000XV-ET
+	(envelope-from <B28495@freescale.com>) id 1TCThb-00025R-F6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Sep 2012 11:59:34 +0200
-Received: by iebc11 with SMTP id c11so6767047ieb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2012 02:46:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:x-gm-message-state;
-	bh=ecJ/NKkSVGLF3PQKwYI1DE1mGcTQ8jX/jxCSRZQKrdc=;
-	b=OZyeXjGouuLWx+Ompvh3FWm62C/C5Ezi/1eO9bgudG+HVvsgRuC7rQaAh9Wyv38pgq
-	6Z0hETIHuRVE2g0T0B2DtYe7YYx0/xE83+5MTNTAToBSFlvQQD3+xzDB3StmzbxmRSon
-	f0cOfI+1S5o/SQpwwuAmsCAmgCHMXeRP9f8W4+FMgCAe0LJGRPSB0uep/5zzqkZD9Mlb
-	u8mTsRD1L6rzcujDqiqaQuMm+eVS5v5+QePOH2Gqftb8dGTfQXc7nlbCorh6FbOyasd/
-	YeSiWcqdz0MZ07/nnrOrgH1BpWZjLi5FNIRLCWIAF7d3ksFLOxO0pgQEt/F6BCbH006T
-	pxcQ==
-Received: by 10.50.159.201 with SMTP id xe9mr2444692igb.63.1347616019236; Fri,
-	14 Sep 2012 02:46:59 -0700 (PDT)
+	Fri, 14 Sep 2012 13:04:51 +0200
+Received: from mail8-am1-R.bigfish.com (10.3.201.243) by
+	AM1EHSOBE009.bigfish.com (10.3.204.29) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 14 Sep 2012 10:22:09 +0000
+Received: from mail8-am1 (localhost [127.0.0.1])	by mail8-am1-R.bigfish.com
+	(Postfix) with ESMTP id 09D151C00CD	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2012 10:22:09 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -8
+X-BigFish: VS-8(zz98dI9371I542M1432I62a3Izz1202h1d1ah1d2ahzz17326ah8275bh8275dhz2dh2a8h668h839h8e2h8e3h944hd25hf0ah107ah1220h1288h12a5h12a9h12bdh1315hbe9i1155h)
+Received: from mail8-am1 (localhost.localdomain [127.0.0.1]) by mail8-am1
+	(MessageSwitch) id 1347618126138818_16230;
+	Fri, 14 Sep 2012 10:22:06 +0000 (UTC)
+Received: from AM1EHSMHS007.bigfish.com (unknown [10.3.201.232])	by
+	mail8-am1.bigfish.com (Postfix) with ESMTP id 15A962C0105	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Sep 2012 10:22:06 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS007.bigfish.com
+	(10.3.207.107) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 14 Sep 2012 10:22:05 +0000
+Received: from 039-SN2MPN1-021.039d.mgd.msft.net ([169.254.1.100]) by
+	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
+	14.02.0309.003; Fri, 14 Sep 2012 05:22:03 -0500
+From: Liu Ting-B28495 <B28495@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][for-denzil][PATCH] systemd.bbclass: use system
+	variables instead of hardcoded paths
+Thread-Index: AQHNkYKkAG26oiqZBkyP925AWNkyvZeIkUwAgACja4A=
+Date: Fri, 14 Sep 2012 10:22:03 +0000
+Message-ID: <AF604684617F454390621992F367F169011FE018@039-SN2MPN1-021.039d.mgd.msft.net>
+References: <1347521638-3093-1-git-send-email-b28495@freescale.com>
+	<CAP9ODKoByUb=F+8O60w7juvDJ4tVcU2BG=m3kFbGBgASCJrbvA@mail.gmail.com>
+In-Reply-To: <CAP9ODKoByUb=F+8O60w7juvDJ4tVcU2BG=m3kFbGBgASCJrbvA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.106]
 MIME-Version: 1.0
-Received: by 10.64.129.232 with HTTP; Fri, 14 Sep 2012 02:46:39 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <5052EE59.4060409@communistcode.co.uk>
-References: <1346931347-8672-1-git-send-email-ml@communistcode.co.uk>
-	<CAK18fxE277_zyJF=Xv955KusWwAcyD=ve09w3Cj35Xm0tU-5tw@mail.gmail.com>
-	<504EF1BA.3070509@communistcode.co.uk>
-	<CAK18fxHzsBhpqEimD6+RfGn2eo24nqU5Zx_DGUiXSorUDYjLFQ@mail.gmail.com>
-	<5052EE59.4060409@communistcode.co.uk>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 14 Sep 2012 12:46:39 +0300
-Message-ID: <CAK18fxGWDZqrYtO9gRsXgwEbh1DMksQp9Xhbs8-J2WNPF1ifdA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnrdnosRsbQVRdv1oOtfSdEHasw0H6kF4/YPhUTMHniksOuXB7GXBJry8CyTtUcyVNBH4x8
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCHv5][meta-oe 1/2] liblockdev: new recipe, new version of libcec requires it
+X-OriginatorOrg: freescale.com
+Cc: McClintock Matthew-B29882 <B29882@freescale.com>
+Subject: Re: [meta-oe][for-denzil][PATCH] systemd.bbclass: use system variables instead of hardcoded paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,109 +60,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 09:59:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 Sep 2012 11:04:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 14, 2012 at 11:44 AM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Otavio Salvador
+> Sent: Thursday, September 13, 2012 9:04 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: McClintock Matthew-B29882
+> Subject: Re: [oe] [meta-oe][for-denzil][PATCH] systemd.bbclass: use
+> system variables instead of hardcoded paths
+>=20
+> On Thu, Sep 13, 2012 at 4:33 AM,  <b28495@freescale.com> wrote:
+> > diff --git a/meta-oe/classes/systemd.bbclass
+> > b/meta-oe/classes/systemd.bbclass index a2c8ddf..9690c18 100644
+> > --- a/meta-oe/classes/systemd.bbclass
+> > +++ b/meta-oe/classes/systemd.bbclass
+> > @@ -154,7 +154,10 @@ python populate_packages_prepend () {
+> >
+> >         # check service-files and call systemd_add_files_and_parse for
+> each entry
+> >         def systemd_check_services():
+> > -               searchpaths =3D '/etc/systemd/system/
+> /lib/systemd/system/ /usr/lib/systemd/system/'
+> > +               searchpaths =3D []
+> > +               searchpaths.append(d.getVar('sysconfdir', True))
+> > +               searchpaths.append(d.getVar('libdir', True))
+> > +               searchpaths.append(d.getVar('base_libdir', True))
+> >                 systemd_packages =3D d.getVar('SYSTEMD_PACKAGES', 1)
+> >                 has_exactly_one_service =3D len(systemd_packages.split(=
+))
+> =3D=3D 1
+> >                 if has_exactly_one_service:
+> > @@ -168,9 +171,9 @@ python populate_packages_prepend () {
+> >                 for pkg_systemd in systemd_packages.split():
+> >                         for service in get_package_var(d,
+> 'SYSTEMD_SERVICE', pkg_systemd).split():
+> >                                 path_found =3D ''
+> > -                               for path in searchpaths.split():
+> > -                                       if os.path.exists('${D}' + path
+> + service):
+> > -                                               path_found =3D path
+> > +                               for path in searchpaths:
+> > +                                       if os.path.exists('${D}' + path
+> + '/systemd/system/' + service):
+> > +                                               path_found =3D path +
+> '/systemd/system/'
+> >                                 if path_found !=3D '':
+> >
+> systemd_add_files_and_parse(pkg_systemd, path_found, service, keys)
+> >                                 else:
+>=20
+> Please check if a similar change is need on master (inside meta-systemd).
+>=20
 
-> On 13/09/12 22:54, Andrei Gherzan wrote:
->
->> On Tue, Sep 11, 2012 at 11:09 AM, Jack Mitchell <ml@communistcode.co.uk
->> >wrote:
->>
->>  On 10/09/12 21:13, Andrei Gherzan wrote:
->>>
->>>  On Thu, Sep 6, 2012 at 2:35 PM, <ml@communistcode.co.uk> wrote:
->>>>
->>>>   From: Jack Mitchell <jack.mitchell@dbbroadcast.co.****uk<
->>>> jack.mitchell@**dbbroadcast.co.uk <jack.mitchell@dbbroadcast.co.uk>>
->>>>
->>>>> V5
->>>>>
->>>>> - FILES_{PN} no loger required now libdir and includedir are passed to
->>>>> oe_runmake
->>>>>
->>>>> V4
->>>>>
->>>>> - Remove debian packaging patch, it is not needed
->>>>>
->>>>> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.****uk<
->>>>> jack.mitchell@**dbbroadcast.co.uk <jack.mitchell@dbbroadcast.co.uk>>
->>>>> ---
->>>>>    .../recipes-extended/****liblockdev/liblockdev_1.0.3.bb  | 20
->>>>> ++++++++++++++++++++
->>>>>    1 file changed, 20 insertions(+)
->>>>>    create mode 100644 meta-oe/recipes-extended/****liblockdev/
->>>>> liblockdev_1.0.3.bb
->>>>>
->>>>> diff --git a/meta-oe/recipes-extended/****
->>>>> liblockdev/liblockdev_1.0.3.**
->>>>> bbb/meta-oe/recipes-extended/****liblockdev/
->>>>> liblockdev_1.0.3.bb
->>>>> new file mode 100644
->>>>> index 0000000..210a47b
->>>>> --- /dev/null
->>>>> +++ b/meta-oe/recipes-extended/****liblockdev/liblockdev_1.0.3.bb
->>>>> @@ -0,0 +1,20 @@
->>>>> +DESCRIPTION = "Manage character and block device lockfiles."
->>>>> +HOMEPAGE = "
->>>>> http://anonscm.debian.org/****gitweb/?p=lockdev/lockdev.git;**
->>>>> **a=summary<http://anonscm.debian.org/**gitweb/?p=lockdev/lockdev.git;**a=summary>
->>>>> <http://anonscm.**debian.org/gitweb/?p=lockdev/**lockdev.git;a=summary<http://anonscm.debian.org/gitweb/?p=lockdev/lockdev.git;a=summary>
->>>>> >
->>>>> "
->>>>> +
->>>>> +LICENSE = "LGPLv2.1"
->>>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=****
->>>>> d8045f3b8f929c1cb29a1e3fd737b4
->>>>> **99"
->>>>> +
->>>>> +SRC_URI = "
->>>>> http://ftp.de.debian.org/****debian/pool/main/l/lockdev/**<http://ftp.de.debian.org/**debian/pool/main/l/lockdev/**>
->>>>> lockdev_${PV}.orig.tar.gz<http**://ftp.de.debian.org/debian/**
->>>>> pool/main/l/lockdev/lockdev_$%**7BPV%7D.orig.tar.gz<http://ftp.de.debian.org/debian/pool/main/l/lockdev/lockdev_$%7BPV%7D.orig.tar.gz>
->>>>> >
->>>>> "
->>>>> +
->>>>> +SRC_URI[md5sum] = "****64b9c1b87b125fc348e892e2462552****4a"
->>>>> +SRC_URI[sha256sum] =
->>>>> "****ccae635d7ac3fdd50897eceb250872******
->>>>> b3d9a191d298f213e7f0c836910d86****9f82"
->>>>> +
->>>>> +S = "${WORKDIR}/lockdev-${PV}"
->>>>> +
->>>>> +do_compile() {
->>>>> +  oe_runmake CC="${CC}" LD="${LD}" shared
->>>>> +}
->>>>> +
->>>>> +do_install() {
->>>>> +  oe_runmake basedir="${D}" incdir="${D}${includedir}"
->>>>> libdir="${D}${libdir}" install_dev
->>>>> +}
->>>>>
->>>>>   Why install only _dev? Why don't you use make install? It makes no
->>>>>
->>>> sense to
->>>> compile shared and not install it... I just tested your recipe.
->>>>
->>>>
->>>>  I cleaned a little your recipe and sent a pull request (added you as
->> Signed
->> of by).
->> https://github.com/**openembedded/meta-oe/pull/10<https://github.com/openembedded/meta-oe/pull/10>
->>
->> ag
->> ______________________________**_________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
->> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**
->> openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->>
->
-> Looks good, my only gripe is that you have listed basedir twice in the
-> EXTRA_OEMAKE.
->
-> Don't ask. :) Amended. Thanks.
+[Liu Ting-B28495] the issue was fixed in master.
+commit 980b338fb5100ff4c779335a86f3d9450ea8c54a
+systemd: Upgrade to 187 tag
 
-ag
+a new path has been sent out for denzil.
+
+> --
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
 
