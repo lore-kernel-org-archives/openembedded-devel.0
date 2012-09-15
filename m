@@ -1,25 +1,24 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TCzUc-0000bp-4a
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TCzUq-0000dw-7M
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Sep 2012 23:01:34 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2012 13:48:56 -0700
+	Sat, 15 Sep 2012 23:01:48 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 15 Sep 2012 13:49:11 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,428,1344236400"; d="scan'208";a="222511573"
+X-IronPort-AV: E=Sophos;i="4.80,428,1344236400"; d="scan'208";a="204871871"
 Received: from unknown (HELO helios.localnet) ([10.252.121.222])
-	by fmsmga002.fm.intel.com with ESMTP; 15 Sep 2012 13:48:55 -0700
+	by orsmga002.jf.intel.com with ESMTP; 15 Sep 2012 13:49:10 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Sep 2012 21:48:54 +0100
-Message-ID: <1690224.cSoWkHg7G9@helios>
+Date: Sat, 15 Sep 2012 21:49:09 +0100
+Message-ID: <8481912.4eYpRluVRs@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.9 (Linux/3.2.0-30-generic-pae; KDE/4.9.0; i686; ; )
-In-Reply-To: <1347482311-7068-1-git-send-email-andrea.adami@gmail.com>
-References: <1347481415-4249-1-git-send-email-andrea.adami@gmail.com>
-	<1347482311-7068-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1347741104-18615-1-git-send-email-andrea.adami@gmail.com>
+References: <1347741104-18615-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH v2] zaurus.inc: fix xserver/mesa virtual providers
+Subject: Re: [meta-handheld][PATCH] linux-yocto: slob breaks usb networking, use slab
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,47 +32,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Sep 2012 21:01:34 -0000
+X-List-Received-Date: Sat, 15 Sep 2012 21:01:48 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Wednesday 12 September 2012 22:38:31 Andrea Adami wrote:
-> * xserver-xorg-lite has been removed with commit 5868358
-> * mesa-xlib has been removed with commit 7a815ca
-> *
-> * default-providers.inc gives following settings:
-> * PREFERRED_PROVIDER_virtual/xserver ?=  "xserver-xorg"
-> * PREFERRED_PROVIDER_virtual/xserver-xf86 ?= "xserver-xorg"
-> * PREFERRED_PROVIDER_virtual/libgl ?= "mesa-dri"
-> * PREFERRED_PROVIDER_virtual/libgles1 ?= "mesa-dri"
-> * PREFERRED_PROVIDER_virtual/libgles2 ?= "mesa-dri"
-> * PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
-> 
+On Saturday 15 September 2012 22:31:44 Andrea Adami wrote:
 > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 > ---
->  conf/machine/include/zaurus.inc |    7 +++----
->  1 files changed, 3 insertions(+), 4 deletions(-)
+>  recipes-kernel/linux/linux-yocto/akita/akita.cfg   |    4 ++--
+>  recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg     |    4 ++--
+>  recipes-kernel/linux/linux-yocto/collie/collie.cfg |    4 ++--
+>  recipes-kernel/linux/linux-yocto/poodle/poodle.cfg |    4 ++--
+>  recipes-kernel/linux/linux-yocto/spitz/spitz.cfg   |    4 ++--
+>  recipes-kernel/linux/linux-yocto/tosa/tosa.cfg     |    4 ++--
+>  6 files changed, 12 insertions(+), 12 deletions(-)
 > 
-> diff --git a/conf/machine/include/zaurus.inc
-> b/conf/machine/include/zaurus.inc index 3f5c642..99fd7bd 100644
-> --- a/conf/machine/include/zaurus.inc
-> +++ b/conf/machine/include/zaurus.inc
-> @@ -60,10 +60,9 @@ EXTRA_IMAGECMD_sum.jffs2_collie = "--pad -l
-> --eraseblock=0x20000 -n" # xserver
->  #########
-> 
-> -PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg-lite"
-> -PREFERRED_PROVIDER_virtual/xserver-xf86 = "xserver-xorg-lite"
-> -XSERVER = "xserver-xorg-lite xf86-video-fbdev xf86-input-keyboard
-> xf86-input-mouse xf86-input-evdev" -PREFERRED_PROVIDER_virtual/libgl =
-> "mesa-xlib"
-> +# Zaurus gets preferred providers settings
-> +# from distro/include/default-providers.inc
-> +XSERVER = "xserver-xorg xf86-video-fbdev xf86-input-keyboard
-> xf86-input-mouse xf86-input-evdev"
-> 
->  ########
->  # kernel
+> diff --git a/recipes-kernel/linux/linux-yocto/akita/akita.cfg
+> b/recipes-kernel/linux/linux-yocto/akita/akita.cfg index 6f0db54..e7ecdde
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/akita/akita.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/akita/akita.cfg
+> @@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
+> diff --git a/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+> b/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg index 5655f0d..f8d3f4d
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+> @@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
+> diff --git a/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> b/recipes-kernel/linux/linux-yocto/collie/collie.cfg index 4cc5f56..2f5ead7
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> @@ -129,9 +129,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
+> diff --git a/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+> b/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg index c20557e..644ff69
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+> @@ -129,9 +129,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
+> diff --git a/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+> b/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg index f3f6561..6a26182
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+> @@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
+> diff --git a/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+> b/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg index 31c6da3..013112f
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+> @@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+>  # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+>  CONFIG_VM_EVENT_COUNTERS=y
+>  CONFIG_COMPAT_BRK=y
+> -# CONFIG_SLAB is not set
+> +CONFIG_SLAB=y
+>  # CONFIG_SLUB is not set
+> -CONFIG_SLOB=y
+> +# CONFIG_SLOB is not set
+>  CONFIG_PROFILING=y
+>  CONFIG_OPROFILE=m
+>  CONFIG_HAVE_OPROFILE=y
 
 Merged to meta-handheld master, thanks.
 
