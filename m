@@ -1,39 +1,34 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1TCeEs-0005oU-Q0
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Sep 2012 00:19:54 +0200
-Received: by daks35 with SMTP id s35so2540394dak.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TCoqS-0003Hu-6T for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Sep 2012 11:39:24 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TCoeJ-0005uT-U7 for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Sep 2012 11:26:51 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Sep 2012 11:26:51 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2012 15:07:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=rQdIpDCxmqOU06hhAmjRwtQD4zQMxRloeS5He1hper8=;
-	b=qZKhDBoIQgmM7PSxs2w0q7HWFSSPMpuu4FXCk6rRDK134TdYboiFE850sTVHU5jwCY
-	jQe6XWIh7j7s6M7R4Mu9lW/5C0LglynX7jUqNTVUVvno7enBJXtkm4hCKp2yYKpT3aGF
-	QdVwV3OAY60uHkswNu/fe7uxX1JqR1GLIcu+Ve0sR5YtT38v/b2t847CuF9p6AYOaBYV
-	FBdK8cYBMYcPhBSBaerWcIBMcN8b5MQh4VH0uBukCLsT5mJ/xnP+52WCxAn0vCeThuAn
-	DU5L2OYh1MvszioJ6u/F4BFiqDpxRM9roCaEJ39WVY0FbxHGZpWQ7/6bT2tUMKpLbCNu
-	GSWQ==
-Received: by 10.68.134.97 with SMTP id pj1mr6880171pbb.55.1347660438953;
-	Fri, 14 Sep 2012 15:07:18 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:d:eba:e81d:b69a:2f88:8c48])
-	by mx.google.com with ESMTPS id pq7sm1663680pbb.25.2012.09.14.15.07.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 14 Sep 2012 15:07:17 -0700 (PDT)
-Date: Fri, 14 Sep 2012 15:07:24 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20120914220724.GR22028@bill-the-cat>
-References: <504D81F8.9020702@dresearch-fe.de>
-	<1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <1347367374-10517-1-git-send-email-sledz@dresearch-fe.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance][PATCH] gdk-pixbuf: add missing dependencies
+	Sat, 15 Sep 2012 11:26:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 15 Sep 2012 11:26:35 +0200
+Message-ID: <k31hk6$es6$1@ger.gmane.org>
+References: <1347641974-4993-1-git-send-email-holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1347641974-4993-1-git-send-email-holger+oe@freyther.de>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [PATCH] meta-systemd: Introduce a create-volatile to create tmp directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 22:19:55 -0000
-X-Groupsio-MsgNum: 40671
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6yHiY5vv/BiPjcMt"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 15 Sep 2012 09:39:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---6yHiY5vv/BiPjcMt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, Sep 11, 2012 at 02:42:54PM +0200, Steffen Sledz wrote:
+Op 14-09-12 18:59, Holger Hans Peter Freyther schreef:
+> From: Holger Hans Peter Freyther <zecke@selfish.org>
+> 
+> The base-files create symlinks from /var/{log,tmp,lock,cache,run} to the
+> /var/volatile. The directories are created by sysv initscripts. Use the
+> systemd-tmpfiles to create the directories. One needs to be careful with
+> the naming of the file as systemd first collects all *.conf files, sorts
+> them by name and is parsing them then. Make sure the new file is parsed
+> before the systemd.conf.
 
-> This fixes an error in do_configure step for target and native build.
->=20
-> | checking for BASE_DEPENDENCIES... configure: error: Package requirement=
-s (glib-2.0 >=3D 2.12.0    atk >=3D 1.9.0    pango >=3D 1.12.0    cairo >=
-=3D 1.2.0) were not met:
-> |
-> | No package 'atk' found
-> | No package 'pango' found
-> | No package 'cairo' found
->=20
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-
-Applied, thanks!
-
---=20
-Tom
-
---6yHiY5vv/BiPjcMt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+I'm not sure this is the right place to fix it, I'd prefer a base files
+bbappend and an fs-perms.txt for this. You know, like angstrom does :)
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlBTqpwACgkQdZngf2G4WwPpbQCfe4/x9rJzlLU4TwVs3fdY1fD+
-HJIAnR0dD9qsyV0d2ygE3eYkOVg8lsUR
-=fuoL
+iD8DBQFQVEnLMkyGM64RGpERAnhuAJ9jXlRDx9WddJ1zMaByOElCh2dUPQCgqedT
+E1bm2zqcw4woino/cCXtQfM=
+=CAHE
 -----END PGP SIGNATURE-----
 
---6yHiY5vv/BiPjcMt--
+
+
