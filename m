@@ -1,27 +1,24 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>)
-	id 1TCzNg-0008UI-6d; Sat, 15 Sep 2012 22:54:24 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.6])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>)
-	id 1TCzBV-00053W-11; Sat, 15 Sep 2012 22:41:49 +0200
-Message-ID: <1347741572.4444.54.camel@x121e.pbcl.net>
-From: Phil Blundell <philb@gnu.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 15 Sep 2012 21:39:32 +0100
-In-Reply-To: <20120915172816.GC11051@jama.jama.net>
-References: <20120914085706.2CBFC103C3@opal>
-	<20120915162051.GA11051@jama.jama.net>
-	<1347729817.4444.52.camel@x121e.pbcl.net>
-	<20120915172816.GC11051@jama.jama.net>
-X-Mailer: Evolution 3.4.3-1 
-Mime-Version: 1.0
-Cc: openembedded-commits@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [oe-commits] Andrei Dinu : libffi upgrade to 3.0.11
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TCzUP-0000bU-UE
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Sep 2012 23:01:22 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 15 Sep 2012 13:48:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,428,1344236400"; d="scan'208";a="204871600"
+Received: from unknown (HELO helios.localnet) ([10.252.121.222])
+	by orsmga002.jf.intel.com with ESMTP; 15 Sep 2012 13:48:44 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 15 Sep 2012 21:48:42 +0100
+Message-ID: <5574729.T6NjLU12IF@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9 (Linux/3.2.0-30-generic-pae; KDE/4.9.0; i686; ; )
+In-Reply-To: <1345242628-5064-1-git-send-email-andrea.adami@gmail.com>
+References: <1345242628-5064-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld][PATCH] linux-yocto: use LZMA for Zaurus collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Sep 2012 20:54:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 15 Sep 2012 21:01:22 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Sat, 2012-09-15 at 19:28 +0200, Martin Jansa wrote:
-> On Sat, Sep 15, 2012 at 06:23:37PM +0100, Phil Blundell wrote:
-> > On Sat, 2012-09-15 at 18:20 +0200, Martin Jansa wrote:
-> > > This changes .so name from libffi5 to libffi6, breaking every recipe
-> > > depending on libffi when someone is using debian.bbclass.
-> > 
-> > How exactly do the recipes break?  The whole point of debian.bbclass is
-> > to avoid breakage when this happens by making libffi5 and libffi6
-> > parallel installable.  If that isn't working then there is clearly a bug
-> > somewhere and we should fix that.
+On Saturday 18 August 2012 00:30:28 Andrea Adami wrote:
+> * this way we save more than 500KiB, important when you have just 14MiB !
 > 
-> libffi5 is no longer in feed, so if you try to install something from
-> feed which still has libffi5 in depends it will fail.
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  recipes-kernel/linux/linux-yocto/collie/collie.cfg |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> b/recipes-kernel/linux/linux-yocto/collie/collie.cfg index ad709c5..4cc5f56
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> +++ b/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+> @@ -43,8 +43,8 @@ CONFIG_LOCALVERSION=""
+>  CONFIG_HAVE_KERNEL_GZIP=y
+>  CONFIG_HAVE_KERNEL_LZMA=y
+>  CONFIG_HAVE_KERNEL_LZO=y
+> -CONFIG_KERNEL_GZIP=y
+> -# CONFIG_KERNEL_LZMA is not set
+> +# CONFIG_KERNEL_GZIP is not set
+> +CONFIG_KERNEL_LZMA=y
+>  # CONFIG_KERNEL_LZO is not set
+>  CONFIG_DEFAULT_HOSTNAME="(none)"
+>  CONFIG_SWAP=y
 
-Ah, right.  So it's not actually the recipes which are broken, it's just
-that something is wrong with whatever maintains the feed and the old
-binaries are no longer installable.  I guess you need to figure out why
-libffi5 is being removed and prevent that from happening.
+Merged to meta-handheld master, thanks.
 
-p.
+Cheers,
+Paul
 
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
