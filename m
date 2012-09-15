@@ -1,40 +1,32 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1TCwWn-0005Mn-Sn; Sat, 15 Sep 2012 19:51:37 +0200
-Received: by wgbds1 with SMTP id ds1so1682191wgb.0
-	for <multiple recipients>; Sat, 15 Sep 2012 10:39:01 -0700 (PDT)
+	(envelope-from <andrea.adami@gmail.com>) id 1TCyGI-00079E-2J
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Sep 2012 21:42:42 +0200
+Received: by bkcik5 with SMTP id ik5so1688715bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Sep 2012 12:30:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8WL43TMVMW0aQVdIkjgMN8f5juCXtVUUhtTbTdXplRQ=;
-	b=u5qEuQ05qWa/MExTPPf8ooK4XLkmP2cFsHdPUvE+04HNzgOLQTyhe7dg0xOjc/V1aC
-	TL3MiOHDWIiGp0PMA9yTKCQ53W3vHSQevCabXkidodjFXCVRCO4UXr7VrY9BPGJcYT3U
-	g9YCuyigj+6EngwboJIXaApuzXxLlheCMhxBUR29dEvLWOATIURgYb4HZJsCMqzBIjQH
-	Ka3c9/PLY9YfotuPKfqd6BgQiIu7aXF1lkCxn6eyKSa1b3l6M1BrY+FDu3+SnWgM3tv2
-	+HyxNPWSocTt+aWc3Wd9cpCiuKcrTuB+SQ5UVkxXIc+qeIaIHRhQccNBB6JiQ7ea99Mc
-	irAg==
-Received: by 10.216.139.95 with SMTP id b73mr3192432wej.191.1347730741633;
-	Sat, 15 Sep 2012 10:39:01 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cu1sm6389592wib.6.2012.09.15.10.39.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 15 Sep 2012 10:39:00 -0700 (PDT)
-Date: Sat, 15 Sep 2012 19:39:05 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Phil Blundell <philb@gnu.org>
-Message-ID: <20120915173905.GD11051@jama.jama.net>
-References: <20120914085706.2CBFC103C3@opal>
-	<20120915162051.GA11051@jama.jama.net>
-	<1347729817.4444.52.camel@x121e.pbcl.net>
-	<20120915172816.GC11051@jama.jama.net>
-MIME-Version: 1.0
-In-Reply-To: <20120915172816.GC11051@jama.jama.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: andrei.adrianx.dinu@intel.com, openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-commits@lists.openembedded.org
-Subject: Re: [OE-core] [oe-commits] Andrei Dinu : libffi upgrade to 3.0.11
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=tgqq8UYGmImG6HTxOA18BG7scV4NEDmjdjUcJA1IMeA=;
+	b=AmusNOmmgXpa79USD+IgcvH+ykBtUOnoGGiC02FM0ce5UKWm9yc/nQeQGxRNii4Rzj
+	BYszmewtMFIYXqshkvzbchbb+JNMlNcDpYXtBluKAqaX++7xdrZoRVvqjuELRzYDnOE1
+	0JnaeVFmItNAPcnNfdayJIzzgsuDMqOQ+rgHEDABL3Ft2fj0849XeUkA6iTgxF3EnF4w
+	GaUZKpGkm5dvwe2RtCRZdh77RxwC021kIzHQNa9sm0FxH9HnOHjq7APiSfHGeGadDnxi
+	VAPnLiHcvT/evCuwICXgZiEGqjaEa5NY50XSu5wgqpwDgVXSSHHKJGZZAbt7KMA0o02T
+	6qZQ==
+Received: by 10.204.156.73 with SMTP id v9mr2941932bkw.116.1347737405615;
+	Sat, 15 Sep 2012 12:30:05 -0700 (PDT)
+Received: from mizar.localdomain
+	(host43-254-dynamic.30-79-r.retail.telecomitalia.it. [79.30.254.43])
+	by mx.google.com with ESMTPS id y20sm2946727bkv.11.2012.09.15.12.30.02
+	(version=SSLv3 cipher=OTHER); Sat, 15 Sep 2012 12:30:04 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 15 Sep 2012 21:29:50 +0200
+Message-Id: <1347737390-21615-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-initramfs][PATCH] linux-yocto: slob breaks usb networking, use slab
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,65 +40,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Sep 2012 17:51:38 -0000
-X-Groupsio-MsgNum: 40679
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="n/aVsWSeQ4JHkrmm"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 15 Sep 2012 19:42:43 -0000
 
---n/aVsWSeQ4JHkrmm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-yocto/akita/akita.cfg   |    4 ++--
+ recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg     |    4 ++--
+ recipes-kernel/linux/linux-yocto/collie/collie.cfg |    4 ++--
+ recipes-kernel/linux/linux-yocto/poodle/poodle.cfg |    4 ++--
+ recipes-kernel/linux/linux-yocto/spitz/spitz.cfg   |    4 ++--
+ recipes-kernel/linux/linux-yocto/tosa/tosa.cfg     |    4 ++--
+ 6 files changed, 12 insertions(+), 12 deletions(-)
 
-On Sat, Sep 15, 2012 at 07:28:16PM +0200, Martin Jansa wrote:
-> On Sat, Sep 15, 2012 at 06:23:37PM +0100, Phil Blundell wrote:
-> > On Sat, 2012-09-15 at 18:20 +0200, Martin Jansa wrote:
-> > > This changes .so name from libffi5 to libffi6, breaking every recipe
-> > > depending on libffi when someone is using debian.bbclass.
-> >=20
-> > How exactly do the recipes break?  The whole point of debian.bbclass is
-> > to avoid breakage when this happens by making libffi5 and libffi6
-> > parallel installable.  If that isn't working then there is clearly a bug
-> > somewhere and we should fix that.
->=20
-> libffi5 is no longer in feed, so if you try to install something from
-> feed which still has libffi5 in depends it will fail.
->=20
-> Cheers,
+diff --git a/recipes-kernel/linux/linux-yocto/akita/akita.cfg b/recipes-kernel/linux/linux-yocto/akita/akita.cfg
+index 6f0db54..e7ecdde 100644
+--- a/recipes-kernel/linux/linux-yocto/akita/akita.cfg
++++ b/recipes-kernel/linux/linux-yocto/akita/akita.cfg
+@@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+diff --git a/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg b/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+index 5655f0d..f8d3f4d 100644
+--- a/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
++++ b/recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg
+@@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+diff --git a/recipes-kernel/linux/linux-yocto/collie/collie.cfg b/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+index 4cc5f56..2f5ead7 100644
+--- a/recipes-kernel/linux/linux-yocto/collie/collie.cfg
++++ b/recipes-kernel/linux/linux-yocto/collie/collie.cfg
+@@ -129,9 +129,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+diff --git a/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg b/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+index c20557e..644ff69 100644
+--- a/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
++++ b/recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+@@ -129,9 +129,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+diff --git a/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg b/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+index f3f6561..6a26182 100644
+--- a/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
++++ b/recipes-kernel/linux/linux-yocto/spitz/spitz.cfg
+@@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+diff --git a/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg b/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+index 31c6da3..013112f 100644
+--- a/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
++++ b/recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
+@@ -128,9 +128,9 @@ CONFIG_PERF_EVENTS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
++CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+-CONFIG_SLOB=y
++# CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+-- 
+1.7.8.6
 
-also e.g. navit is using librsvg-native to create .png from .svg and
-fails now
-|
-SRCDIR=3D/OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/navit-1_0.2.0=
-+svnr5159-r11.3/navit/navit/xpm
-BUILDDIR=3D/OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/navit-1_0.2=
-=2E0+svnr5159-r11.3/navit/navit/xpm
-=2E/navit_svg2png
-"/OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/rsvg-convert"
-"nav_destination_wh_96_96.png"
-| /OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/rsvg-convert:
-error while loading shared libraries: libffi.so.5: cannot open shared
-object file: No such file or directory
 
-Fortunately navit.do_install finds that some mandatory .png files are
-missing and fails too (before creating invalid .ipk in feed).
 
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---n/aVsWSeQ4JHkrmm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlBUvTkACgkQN1Ujt2V2gByMcgCff4ac/MLiHudsQTaLKy3jDokV
-bRgAoJbjkYjiudv7FWK5ft+xGiQF9mTn
-=4ZnQ
------END PGP SIGNATURE-----
-
---n/aVsWSeQ4JHkrmm--
