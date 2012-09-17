@@ -1,34 +1,34 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TDaNl-0003hU-Jb for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Sep 2012 14:24:57 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TDaBb-0002LL-Op for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Sep 2012 14:12:23 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 14:12:23 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1TDbL9-0005Cu-WA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Sep 2012 15:26:20 +0200
+Received: by pbcwy7 with SMTP id wy7so8808813pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 14:12:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 17 Sep 2012 06:13:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=CQHcId2sSI4eY6YNyLcO+F0j1JHRapYRTrrSJCMywok=;
+	b=NXIH5R6N8gRDLNkrEW92J3pSdYVSUOgyH/v9g2S/6UgtN4E/D7TBn/NXcpHJC3aRG6
+	4OpV4jvY/oAh6S9Bj2H4RtUhsB0i1dgDNjqZ4aiROF0REb1TKFywRmf5hRURB/dyEG7T
+	UgAVr+DqTO2jW5chITg92wbCa6DMrtnAyQioy+ytZbpVIk8/qmZIyCOe3Z0HAs4QiWYo
+	/QWeXvCqAc6OHNukzzjMwpw2tOShKveC1eT1USSbUE5iAj7E8BhGQFTo7Idwz1/mMTdX
+	hVrrg50YJjEpv5+xvWUMP37UwUKRtcKbsWCTnsJI05SEFhifFjfkuCSkhn4ge4EbwoFi
+	A8XQ==
+MIME-Version: 1.0
+Received: by 10.68.218.72 with SMTP id pe8mr23070701pbc.33.1347887620305; Mon,
+	17 Sep 2012 06:13:40 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.36.105 with HTTP; Mon, 17 Sep 2012 06:13:40 -0700 (PDT)
+In-Reply-To: <1347879491-2425-1-git-send-email-koen@dominion.thruhere.net>
+References: <1347879491-2425-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 17 Sep 2012 10:13:40 -0300
+X-Google-Sender-Auth: 3ycg4ZgKlgY7Wd2BxBp0AF7-WdA
+Message-ID: <CAP9ODKr6hWv7ED5YWxX1vbouE3C-NSySoKxi=7FOW_J-xoFS_g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Sep 2012 14:12:10 +0200
-Message-ID: <k3742l$fi2$1@ger.gmane.org>
-References: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:14.0) Gecko/20120713 Thunderbird/14.0
-In-Reply-To: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: xfce update question
+Subject: Re: [for-denzil][systemd update 0/6] Systemd updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 12:24:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 17 Sep 2012 13:26:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Sep 17, 2012 at 7:58 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> A big update to systemd v189. Runtime tested on angstrom.
+>
+> This patchset depends on the bluez updates sent to the oe-core list since bluez uses a deprecated udev API that went away somewhere in between 182 and 189.
 
-Op 17-09-12 13:14, Andreas Müller schreef:
-> Hi,
-> 
-> I have a huge patch series for xfce 4.10 + plugins under test. Is there a
-> chance getting applied these days? I am asking because oe-core is in
-> release-freeze and I don't know if meta-openembedded does same.
+This is a too big update for a stable branch in my point of view.
 
-I personally don't see a problem with such a patchset at this time.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQVxOaMkyGM64RGpERArekAJ9+QhngR8CEH49UmBleMds+W3YZewCdEsd6
-zK/RfcFdZFbi7G24WOTZpRo=
-=CDEa
------END PGP SIGNATURE-----
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
