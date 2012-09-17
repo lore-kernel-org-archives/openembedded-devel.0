@@ -1,38 +1,34 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TDWZN-0005IT-2T
+	(envelope-from <martin.jansa@gmail.com>) id 1TDZAX-0000iU-4r
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Sep 2012 10:20:41 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so2156742bkc.6
+	Mon, 17 Sep 2012 13:07:13 +0200
+Received: by bkcik5 with SMTP id ik5so2250964bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 01:08:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=WKgCVV3dv6zqc7L7IzvphlBuXYjsSZ8EqjvnE2SC4UU=;
-	b=GZeqQkS87Tueh1t6TmvhVpzut/FBjdZrAKUY6adxKx3/m2v2kzj5lvuNq76LIG2kxI
-	2G1hrjSDy/PHX3GRuBXLwIf9iwC2QwRoWskUFe1uXb+HS+DND5ZrLQ1pJBkXZM3iBkpL
-	27JtBm5CJp5PGl66MaEQovev/Wqk/22VLY+aAzRJD4kWWT2ymkh+kXONEHjWEA2vA57m
-	YgPPULq6P/t+db8nj8npjg6bxI4MhLfjKNJz89lj3mt7TAiDqf3+BkKDsslIPn9o4Stc
-	QJ2GespiH6viZqVuC3d9kE5bHbpH/CWgG7r5uSnf5JJjTldJuxnDfZRMwKYQqpx8PtCG
-	xelQ==
-Received: by 10.204.129.208 with SMTP id p16mr3834090bks.129.1347869284908;
-	Mon, 17 Sep 2012 01:08:04 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF1A7D.dip.t-dialin.net.
-	[79.223.26.125])
-	by mx.google.com with ESMTPS id a17sm1387041bkw.5.2012.09.17.01.08.03
+	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=4BJTHwic61n2HAC5bC2TABXfaBBRP1U1Gndc5Tq3nH8=;
+	b=blAxzEEoWCAz6r2aEhF6E8sR4HXyerHFLkZn5RWKIeOjG60J8Il1wFFEcF7T7INlI4
+	YyNDqJj007R5TUP/yw84puj+kxeM0sVJrh0DCJzzzm2gFhomGAVBwt1pFuQ+wTlDe7IS
+	o8qiw+OzQtzV23WpW5NrWZwexi6T57f/8wPVTsLvtpZpO92ojklSvCPPFExU+TxtO4+9
+	MG37OXXIKEOxAp3y1aXoArQcd2pQvrP8NhmorM6dO5AiaMfDWL9xTgn1mnKtgOEM2uRw
+	DqQDZibyKxQI32Jp1ic9soHKZaAGBzO/PSBi9q9q4NPTfPQiZyKAmhkw+p4mN84sbrih
+	pzMg==
+Received: by 10.204.7.91 with SMTP id c27mr4107600bkc.17.1347879274776;
+	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id m9sm5061677bkm.10.2012.09.17.03.54.33
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 17 Sep 2012 01:08:04 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Sep 2012 10:15:47 +0200
-Message-Id: <1347869747-14271-8-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1347869747-14271-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1347869747-14271-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe/meta-xfce 7/7] lxdm: initial add 1.22_git
+Date: Mon, 17 Sep 2012 12:54:39 +0200
+Message-Id: <1347879279-17253-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12
+In-Reply-To: <1347821293-13320-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1347821293-13320-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] recipes: few more PR bumps to rebuild after libffi5 -> libffi6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,224 +42,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 08:20:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 17 Sep 2012 11:07:13 -0000
 
-* use git version since 1.21 missing escape button and bugfixes
-* no init-scripts (I am working with systemd -> testing causes huge efforts ->
-  subsequent patches)
-* run tested on overo/xfce
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...conf.in-blacklist-root-for-release-images.patch |   29 +++++++++
- meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam        |   13 ++++
- meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam-debug  |   13 ++++
- meta-oe/recipes-graphics/lxdm/lxdm/lxdm.conf       |    4 +
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |   62 ++++++++++++++++++++
- .../recipes-graphics/lxdm/lxdm/lxdm.service.in     |   10 +++
- .../recipes-graphics/lxdm/lxdm_git.bbappend        |   16 +++++
- 7 files changed, 147 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/0001-lxdm.conf.in-blacklist-root-for-release-images.patch
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam-debug
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/lxdm.conf
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm_git.bb
- create mode 100644 meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.service.in
- create mode 100644 meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm_git.bbappend
+ meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb | 2 +-
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb              | 2 +-
+ meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb              | 2 +-
+ meta-gnome/recipes-gnome/wv/wv_1.2.0.bb                        | 2 +-
+ meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb       | 2 +-
+ meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb                     | 2 +-
+ meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb               | 2 +-
+ meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb       | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/0001-lxdm.conf.in-blacklist-root-for-release-images.patch b/meta-oe/recipes-graphics/lxdm/lxdm/0001-lxdm.conf.in-blacklist-root-for-release-images.patch
-new file mode 100644
-index 0000000..49ecdb8
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/0001-lxdm.conf.in-blacklist-root-for-release-images.patch
-@@ -0,0 +1,29 @@
-+From 5038c49c0b61e057dec44c932f02c4bf99cee96e Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Mon, 3 Sep 2012 10:02:51 +0200
-+Subject: [PATCH] lxdm.conf.in: blacklist root for release images
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ data/lxdm.conf.in |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/data/lxdm.conf.in b/data/lxdm.conf.in
-+index defc082..759e6e5 100644
-+--- a/data/lxdm.conf.in
-++++ b/data/lxdm.conf.in
-+@@ -58,5 +58,5 @@ disable=0
-+ white=
-+ 
-+ ## blacklist user
-+-black=
-++black=root
-+ 
-+-- 
-+1.7.4.4
-+
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam
-new file mode 100644
-index 0000000..486621f
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam
-@@ -0,0 +1,13 @@
-+#%PAM-1.0
-+# taken from http://aur.archlinux.org/packages/lx/lxdm-git/lxdm-git.tar.gz
-+# further info https://wiki.archlinux.org/index.php/LXDM
-+auth            requisite       pam_nologin.so
-+auth            required        pam_env.so
-+auth            required        pam_unix.so
-+# To allow passwordless login comment previous line and uncomment next line
-+#auth            required        pam_unix.so nullok
-+account         required        pam_unix.so
-+session         required        pam_limits.so
-+session         required        pam_unix.so
-+password        required        pam_unix.so
-+-session optional pam_systemd.so
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam-debug b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam-debug
-new file mode 100644
-index 0000000..734949f
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm-pam-debug
-@@ -0,0 +1,13 @@
-+#%PAM-1.0
-+# taken from http://aur.archlinux.org/packages/lx/lxdm-git/lxdm-git.tar.gz
-+# further info https://wiki.archlinux.org/index.php/LXDM
-+auth            requisite       pam_nologin.so
-+auth            required        pam_env.so
-+#auth            required        pam_unix.so
-+# To deny passwordless login comment next line and uncomment previous line
-+auth            required        pam_unix.so nullok
-+account         required        pam_unix.so
-+session         required        pam_limits.so
-+session         required        pam_unix.so
-+password        required        pam_unix.so
-+-session optional pam_systemd.so
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.conf b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.conf
-new file mode 100644
-index 0000000..0a6e672
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.conf
-@@ -0,0 +1,4 @@
-+[base]
-+last_session=
-+last_lang=
-+last_langs=
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-new file mode 100644
-index 0000000..fd28c41
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-@@ -0,0 +1,62 @@
-+DESCRIPTION = "LXDM is the lightweight display manager"
-+HOMEPAGE = "http://blog.lxde.org/?p=531"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+SRC_URI = " \
-+	git://lxde.git.sourceforge.net/gitroot/lxde/${BPN};protocol=git;branch=master \
-+	file://lxdm.conf \
-+	file://lxdm-pam \
-+	file://lxdm-pam-debug \
-+	${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
-+"
-+
-+LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)}"
-+
-+SRCREV = "d681bc90b62ec2e13ed62fc30cdaf5dbbba23cdc"
-+PV = "0.4.2+git${SRCPV}"
-+
-+DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
-+
-+# combine oe-core way with angstrom DISTRO_TYPE
-+DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
-+
-+inherit autotools gettext
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile_append() {
-+	# default background configured not available / no password field available
-+	sed -i 	-e 's,bg=,# bg=,g' \
-+		-e 's,# skip_password=,skip_password=,g' \
-+		${S}/data/lxdm.conf.in
-+	# add default configuration
-+	oe_runmake -C ${S}/data lxdm.conf
-+}
-+
-+do_install_append() {
-+	install -d ${D}${localstatedir}/lib/lxdm
-+	install -m 644 ${WORKDIR}/lxdm.conf ${D}${localstatedir}/lib/lxdm
-+	# ArchLinux version of pam config has the following advantages:
-+	# * simple setup of passwordless login
-+	# * in XFCE powerdown/restart enabled in logoff dialog
-+	install -m 644 ${WORKDIR}/${LXDM_PAM} ${D}${sysconfdir}/pam.d/lxdm
-+}
-+
-+# make installed languages choosable
-+pkg_postinst_${PN} () {
-+if [ "x$D" != "x" ]; then
-+    exit 1
-+fi
-+langs=""
-+for lang in `find ${libdir}/locale -maxdepth 1 | grep _ | sort`; do
-+    lang=`basename $lang`
-+    if [ "x$langs" = "x" ]; then
-+        langs="$lang"
-+    else
-+        langs="$langs $lang"
-+    fi
-+done
-+sed -i "s:last_langs=.*$:last_langs=$langs:g" ${localstatedir}/lib/lxdm/lxdm.conf
-+}
-+
-+RDEPENDS_${PN} = "pam-plugin-loginuid"
-diff --git a/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.service.in b/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.service.in
-new file mode 100644
-index 0000000..0bc6774
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.service.in
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=LXDE Display Manager
-+After=systemd-user-sessions.service
-+
-+[Service]
-+ExecStart=%sbindir%/lxdm
-+StandardOutput=syslog
-+
-+[Install]
-+Alias=display-manager.service
-diff --git a/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm_git.bbappend b/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm_git.bbappend
-new file mode 100644
-index 0000000..e4cf44d
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm_git.bbappend
-@@ -0,0 +1,16 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+PRINC := "${@int(PRINC) + 1}"
-+
-+inherit systemd
-+
-+SRC_URI += "file://lxdm.service.in"
-+
-+do_install_append() {
-+	install -d ${D}${systemd_unitdir}/system
-+	sed -e 's,%sbindir%,${sbindir},g' \
-+		< ${WORKDIR}/lxdm.service.in \
-+		> ${D}${systemd_unitdir}/system/lxdm.service
-+}
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE = "lxdm.service"
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+index 4aad4a8..44e0171 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ inherit gnome pkgconfig
+ 
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+index 20331bd..a4f1ec2 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
+                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SECTION = "libs"
+ 
+diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
+index 8f3e4e1..169dac5 100644
+--- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
++++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
+@@ -10,7 +10,7 @@ SRC_URI = "${GNOME_MIRROR}/${SRC_NAME}/${SHRT_VER}/${SRC_NAME}-${PV}.tar.bz2 \
+ SRC_URI[md5sum] = "10bfb957fa4a8935a0b4afaee7d71df7"
+ SRC_URI[sha256sum] = "62bfce3f678f9347a19c766944e8aef7b89bc32b25ac23eb3e4c25929ce8974c"
+ 
+-PR = "r3"
++PR = "r4"
+ BBCLASSEXTEND = "native"
+ 
+ IDL_COMPILER_DEPENDS = "orbit2-native"
+diff --git a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
+index 58fdbfa..3ac40aa 100644
+--- a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
++++ b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6cbca01f1c9178aca280e8ff64d85b2f"
+ 
+ DEPENDS = "libgsf glib-2.0"
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/wv-${PV}.tar.gz \
+            file://pkgconfig.patch"
+diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+index 67cb325..a80447f 100644
+--- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
++++ b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+@@ -4,7 +4,7 @@ DEPENDS = "t1lib gtk+ popt libxslt libxml2"
+ LICENSE = "LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
+            file://mathview-gcc43x.diff \
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
+index 69fa95f..05d7108 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
+@@ -1,6 +1,6 @@
+ require gtkmm.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI[archive.md5sum] = "c0cb0ea5bc1ab511d9b2461083f0445f"
+ SRC_URI[archive.sha256sum] = "c1199bbee423d6f0ef9b5e88973c5620a1e1c52f9f1298dffcfa36284a7fd91a"
+diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+index 44dcbd3..2007e9c 100644
+--- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
++++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
+                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ DEPENDS = "mm-common cairomm glibmm"
+ 
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+index b0af84b..625a57e 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
+ # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ PATCHSET = "6"
+ SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
 -- 
-1.7.4.4
+1.7.12
 
 
 
