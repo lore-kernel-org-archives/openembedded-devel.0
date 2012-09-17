@@ -1,30 +1,34 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TDZTR-0001rk-Fs
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Sep 2012 13:26:45 +0200
-Received: by iebc11 with SMTP id c11so9704045ieb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TDaNl-0003hU-Jb for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Sep 2012 14:24:57 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TDaBb-0002LL-Op for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Sep 2012 14:12:23 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Sep 2012 14:12:23 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 04:14:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=H4UjqG5TovaruvHd1XA777NuVblIrpJ2VG4LBrMtSmI=;
-	b=FS2Fx862YFutkK/ufsljskcF0ZNS+ZrxG+Ios6REXgP7GKosg6fBSiWciazwxHYgAp
-	KMiKdH/zNlCX6eVcoLSKJJPeke5MssZYDMGHR/xGZ8HcRUrcaXEhDcyaawBsVMs6vm/Q
-	/Fl07HR/sraN9XqD4IeQ6baaPKhCBJUgkWdDA1lgL1tBQX05xxCnjO0fhs+rdL3doAy0
-	p/1lo/PeBPBaK/7gT6zN7YMxeuASNOZrH4EXA56mrUM3lXgKmfcOAPh2fQus1F577Qna
-	j2NxxmYsWXC/c6AXx9FdsUSAAxu7xjyN5cvrkGqSdV4LtfZlvc5Id3csNKcrRlOu7PCT
-	yHDw==
-MIME-Version: 1.0
-Received: by 10.50.5.180 with SMTP id t20mr6424421igt.31.1347880446371; Mon,
-	17 Sep 2012 04:14:06 -0700 (PDT)
-Received: by 10.64.18.13 with HTTP; Mon, 17 Sep 2012 04:14:06 -0700 (PDT)
-Date: Mon, 17 Sep 2012 13:14:06 +0200
-Message-ID: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+	Mon, 17 Sep 2012 14:12:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: xfce update question
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 17 Sep 2012 14:12:10 +0200
+Message-ID: <k3742l$fi2$1@ger.gmane.org>
+References: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: xfce update question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,15 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 11:26:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 Sep 2012 12:24:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have a huge patch series for xfce 4.10 + plugins under test. Is
-there a chance getting applied these days? I am asking because oe-core
-is in release-freeze and I don't know if meta-openembedded does same.
+Op 17-09-12 13:14, Andreas Müller schreef:
+> Hi,
+> 
+> I have a huge patch series for xfce 4.10 + plugins under test. Is there a
+> chance getting applied these days? I am asking because oe-core is in
+> release-freeze and I don't know if meta-openembedded does same.
 
-Andreas
+I personally don't see a problem with such a patchset at this time.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQVxOaMkyGM64RGpERArekAJ9+QhngR8CEH49UmBleMds+W3YZewCdEsd6
+zK/RfcFdZFbi7G24WOTZpRo=
+=CDEa
+-----END PGP SIGNATURE-----
+
 
 
