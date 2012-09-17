@@ -1,34 +1,40 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TDZAX-0000iU-4r
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Sep 2012 13:07:13 +0200
-Received: by bkcik5 with SMTP id ik5so2250964bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1TDZDe-0000q5-3r; Mon, 17 Sep 2012 13:10:26 +0200
+Received: by wibhn17 with SMTP id hn17so1829804wib.6
+	for <multiple recipients>; Mon, 17 Sep 2012 03:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=4BJTHwic61n2HAC5bC2TABXfaBBRP1U1Gndc5Tq3nH8=;
-	b=blAxzEEoWCAz6r2aEhF6E8sR4HXyerHFLkZn5RWKIeOjG60J8Il1wFFEcF7T7INlI4
-	YyNDqJj007R5TUP/yw84puj+kxeM0sVJrh0DCJzzzm2gFhomGAVBwt1pFuQ+wTlDe7IS
-	o8qiw+OzQtzV23WpW5NrWZwexi6T57f/8wPVTsLvtpZpO92ojklSvCPPFExU+TxtO4+9
-	MG37OXXIKEOxAp3y1aXoArQcd2pQvrP8NhmorM6dO5AiaMfDWL9xTgn1mnKtgOEM2uRw
-	DqQDZibyKxQI32Jp1ic9soHKZaAGBzO/PSBi9q9q4NPTfPQiZyKAmhkw+p4mN84sbrih
-	pzMg==
-Received: by 10.204.7.91 with SMTP id c27mr4107600bkc.17.1347879274776;
-	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=R+MEII3qpJ5ZmaZPQZZV74fgsStXvYd/jic8U+rnsVc=;
+	b=Pr1gl9KH8fuD24LcJxHR3aBaPGe+9VzVQmYiOyuKPAPXr4Cl1oqnW2R/1UwydlCUZb
+	QXbZQ1UqN1jCNQSIixVZ174902P25B6LvGfARbpsMVYnhlIydue+F8wkmMWtIpurRGRZ
+	XbdnnwLEDRVMUFyZPi0d3y+cr5w4GwEJgqb3qMX5+w1F1P3vN7/G4y5UHba6Ym5xHZUS
+	x/XX+C06+pUq+/p4rt9ejGQ7BPZfjMY6Ib1O70Qb4nScCCfG99zNMtBGWNh4ORPTQV/m
+	elh5H8JeQToKNc8o2J9qQtpMGXAVmrdSLDTWr5Fj5gF0qurOSr3cP/2bniD3bTITo9vG
+	gyKg==
+Received: by 10.216.242.196 with SMTP id i46mr5592350wer.123.1347879467633;
+	Mon, 17 Sep 2012 03:57:47 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id m9sm5061677bkm.10.2012.09.17.03.54.33
+	by mx.google.com with ESMTPS id dp8sm25116617wib.3.2012.09.17.03.57.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 17 Sep 2012 03:54:34 -0700 (PDT)
+	Mon, 17 Sep 2012 03:57:45 -0700 (PDT)
+Date: Mon, 17 Sep 2012 12:57:52 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Sep 2012 12:54:39 +0200
-Message-Id: <1347879279-17253-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12
-In-Reply-To: <1347821293-13320-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1347821293-13320-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] recipes: few more PR bumps to rebuild after libffi5 -> libffi6
+To: Andrei Gherzan <andrei@gherzan.ro>
+Message-ID: <20120917105752.GD3628@jama.jama.net>
+References: <20120914085706.2CBFC103C3@opal>
+	<20120915162051.GA11051@jama.jama.net>
+	<CAK18fxGHn8aMu9Y926M2r9RQULR2VTOciBJkVD5S9awBV_j7-Q@mail.gmail.com>
+	<20120915163739.GB11051@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20120915163739.GB11051@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: andrei.adrianx.dinu@intel.com, openembedded-commits@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [O-core] [oe-commits] Andrei Dinu : libffi upgrade to 3.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,125 +48,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 11:07:13 -0000
+X-List-Received-Date: Mon, 17 Sep 2012 11:10:26 -0000
+X-Groupsio-MsgNum: 40699
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="pZs/OQEoSSbxGlYw"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb | 2 +-
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb              | 2 +-
- meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb              | 2 +-
- meta-gnome/recipes-gnome/wv/wv_1.2.0.bb                        | 2 +-
- meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb       | 2 +-
- meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb                     | 2 +-
- meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb               | 2 +-
- meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb       | 2 +-
- 8 files changed, 8 insertions(+), 8 deletions(-)
+--pZs/OQEoSSbxGlYw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index 4aad4a8..44e0171 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
--PR = "r4"
-+PR = "r5"
- 
- inherit gnome pkgconfig
- 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-index 20331bd..a4f1ec2 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
-                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
- 
--PR = "r3"
-+PR = "r4"
- 
- SECTION = "libs"
- 
-diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-index 8f3e4e1..169dac5 100644
---- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-+++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.17.bb
-@@ -10,7 +10,7 @@ SRC_URI = "${GNOME_MIRROR}/${SRC_NAME}/${SHRT_VER}/${SRC_NAME}-${PV}.tar.bz2 \
- SRC_URI[md5sum] = "10bfb957fa4a8935a0b4afaee7d71df7"
- SRC_URI[sha256sum] = "62bfce3f678f9347a19c766944e8aef7b89bc32b25ac23eb3e4c25929ce8974c"
- 
--PR = "r3"
-+PR = "r4"
- BBCLASSEXTEND = "native"
- 
- IDL_COMPILER_DEPENDS = "orbit2-native"
-diff --git a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
-index 58fdbfa..3ac40aa 100644
---- a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
-+++ b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6cbca01f1c9178aca280e8ff64d85b2f"
- 
- DEPENDS = "libgsf glib-2.0"
--PR = "r4"
-+PR = "r5"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/wv-${PV}.tar.gz \
-            file://pkgconfig.patch"
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-index 67cb325..a80447f 100644
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-+++ b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-@@ -4,7 +4,7 @@ DEPENDS = "t1lib gtk+ popt libxslt libxml2"
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- 
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
-            file://mathview-gcc43x.diff \
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
-index 69fa95f..05d7108 100644
---- a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
-+++ b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
-@@ -1,6 +1,6 @@
- require gtkmm.inc
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- SRC_URI[archive.md5sum] = "c0cb0ea5bc1ab511d9b2461083f0445f"
- SRC_URI[archive.sha256sum] = "c1199bbee423d6f0ef9b5e88973c5620a1e1c52f9f1298dffcfa36284a7fd91a"
-diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-index 44dcbd3..2007e9c 100644
---- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-+++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1 & GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
-                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r1"
-+PR = "r2"
- 
- DEPENDS = "mm-common cairomm glibmm"
- 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-index b0af84b..625a57e 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
- 
--PR = "r2"
-+PR = "r3"
- 
- PATCHSET = "6"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
--- 
-1.7.12
+On Sat, Sep 15, 2012 at 06:37:39PM +0200, Martin Jansa wrote:
+> On Sat, Sep 15, 2012 at 07:22:43PM +0300, Andrei Gherzan wrote:
+> > On Sat, Sep 15, 2012 at 7:20 PM, Martin Jansa <martin.jansa@gmail.com>w=
+rote:
+> >=20
+> > > On Fri, Sep 14, 2012 at 08:57:06AM +0000, git@git.openembedded.org wr=
+ote:
+> > > > Module: openembedded-core.git
+> > > > Branch: master
+> > > > Commit: 3e40136e8bd13b17b6d88b6acfb5ed162bb8d96a
+> > > > URL:
+> > > http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit;h=
+=3D3e40136e8bd13b17b6d88b6acfb5ed162bb8d96a
+> > > >
+> > > > Author: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+> > > > Date:   Thu Sep 13 11:26:45 2012 +0300
+> > > >
+> > > > libffi upgrade to 3.0.11
+> > >
+> > > This changes .so name from libffi5 to libffi6, breaking every recipe
+> > > depending on libffi when someone is using debian.bbclass.
+> > >
+> > > This list of 374 packages is probably not complete, just what I have
+> > > built before.
+> > >
+> > > http://build.shr-project.org/tests/jama/libffi5.pkgs
+> >=20
+> >=20
+> > Confirmed. Just ran into this with glib-2.0.
+>=20
+> Something like:
+> | /OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/x86_64-oe-lin=
+ux/gcc/x86_64-oe-linux/4.7.2/ld: warning: libffi.so.5, needed by /OE/shr-co=
+re/tmp-eglibc/sysroots/q
+> emux86-64/usr/lib/libgobject-2.0.so, not found (try using -rpath or -rpat=
+h-link)
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_void'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_double'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_prep_cif'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_sint32'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_float'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_uint64'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_sint64'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_pointer'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_type_uint32'
+> | /OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libgobject-2.0.so: =
+undefined reference to `ffi_call'
+>=20
+> That's easy to fix by manual rebuild, but for runtime packages we need th=
+ose PR bumps :/.
+>=20
+> I'll PR bump recipes (from my list) in meta-oe and meta-smartphone layers=
+,=20
+> but leave oe-core for someone else.
 
+PR bumps for recipes from my list sent to oe-core too, but again it's
+probably not complete (only stuff included in one of images I build).
 
+Someone should build world-image to test the rest..
 
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--pZs/OQEoSSbxGlYw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlBXAjAACgkQN1Ujt2V2gBwGjwCgprv377w8jXMzrk26oYqfbcvn
+SPcAni4ZRXKauAfzimjF3SFqeZMBnJp6
+=iSzh
+-----END PGP SIGNATURE-----
+
+--pZs/OQEoSSbxGlYw--
