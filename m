@@ -1,40 +1,35 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TE01l-00020B-LS
+	(envelope-from <joe@deserted.net>) id 1TE05k-00027g-GI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 17:47:57 +0200
-Received: by wgbds1 with SMTP id ds1so3398954wgb.0
+	Tue, 18 Sep 2012 17:52:06 +0200
+Received: by wibhq4 with SMTP id hq4so3540199wib.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 08:35:17 -0700 (PDT)
+	Tue, 18 Sep 2012 08:39:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=hB3cztbdKJrzw414p3SJSrZ4tm0jnq4+m/kSfUtecj0=;
-	b=bVHd8muT4x2PdslStQwLl1HyVw/7dz8eZM9uIN3ISxcz70G2+QjpcFz57V/whBmNR9
-	nHbLyX2brEay+QOb0zrPkyOq3FqL1MEPLqGS4MH6jaQFdBH5y6SzgtCc/SvjZ21/Zg0H
-	eYulXGR+e0EVNVYlfOFTEjhnaI8q4ujRUUMQb1SJQ6rAR8/WRFpZFxFejrnRYtgcalqO
-	8wPTA+iw8kx3LUhDeMMuIgzbbrWUh45PtxAl5CjT8EKhAwfPSk4pZKpRqxb6ePrTpDc/
-	+AQkARUYn0denhfIHMMZfOJ9q2v42CMwzL7cPExdDW1GmAe8W44aw60t6g5mRfnXephF
-	O74Q==
-Received: by 10.216.211.158 with SMTP id w30mr116435weo.55.1347982517677;
-	Tue, 18 Sep 2012 08:35:17 -0700 (PDT)
-Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id k20sm23277413wiv.11.2012.09.18.08.35.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Sep 2012 08:35:16 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAK18fxHzC+3nrhVbsntm+3DbF=pzwtZoF8R0EcZ33z3G4uv9Mg@mail.gmail.com>
-Date: Tue, 18 Sep 2012 17:35:18 +0200
-Message-Id: <E5E9389A-9AA7-4BE9-85A7-BD6D5DDC9A88@dominion.thruhere.net>
-References: <CAK18fxHzC+3nrhVbsntm+3DbF=pzwtZoF8R0EcZ33z3G4uv9Mg@mail.gmail.com>
-To: Andrei Gherzan <andrei@gherzan.ro>
-X-Mailer: Apple Mail (2.1486)
-X-Gm-Message-State: ALoCoQmbK1ovobca6l1VRdPiyqZCcftSGpz8Cv6ZSBzv5VeX7vo6ufmJ3/0HcUREq4z1GEUqYSjj
-Cc: openembedded <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] zram service in meta-systemd
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:x-gm-message-state;
+	bh=c+vV3ZJvdF0cHU8jmarj6mymshoTKS/1eDLSCvjMvz0=;
+	b=kYbDRWCqCjRV2sqvxRgZEOotHz5eNqwI+hPChQ9OlrOSJoKNXmSswDxNzEQkDmUwk5
+	waimtb9NlVHJ1sMzxTbsqkid9t1xnWG3t4UuwWCrsg6aQjLZYlOZDEF5dkwgy7g92L1A
+	di+tTQ+QdswsxuB8d9LDbvjihAkIq6FLDSm86k/Z7cMz24Q7mRBZz9MtWSE55+oJqnle
+	qmb0ybmWYz+oWoFsTkeWpKlvt0XOQq+xeJL/j+cYEPqfI0nG0htIOeC5os5mBOcNlTrn
+	KKpORokS/auGDInZVspkIprIHVOkTjPTHgQSte4vEHQHNszkXDscFN0+dmxhF3yzOASs
+	mw+A==
+MIME-Version: 1.0
+Received: by 10.217.1.7 with SMTP id m7mr89584wes.158.1347982764622; Tue, 18
+	Sep 2012 08:39:24 -0700 (PDT)
+Received: by 10.223.204.7 with HTTP; Tue, 18 Sep 2012 08:39:24 -0700 (PDT)
+In-Reply-To: <k39bug$tlg$1@ger.gmane.org>
+References: <1347905904-814-1-git-send-email-fcooper@ti.com>
+	<k39bug$tlg$1@ger.gmane.org>
+Date: Tue, 18 Sep 2012 11:39:24 -0400
+Message-ID: <CANBf+V0uVAWNCt_E+MD42MxFjsu5XOkuaaOyx7Fy3xbBcMXFWg@mail.gmail.com>
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnYQejUsdE0GdWfXsfIZAsBFOK5kR3xNyd3B1fRD2QfotrqE7x5lHTpeXKeTEJj1oqnfLWi
+Subject: Re: [meta-oe][PATCH] thttpd: Port thttpd from oe-classic.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 15:47:57 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Sep 2012 15:52:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+On Tue, Sep 18, 2012 at 4:38 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 17-09-12 20:18, Franklin S. Cooper Jr schreef:
+>> * Port thttpd recipe from oe-classic to meta-oe.
+>
+> It should go into meta-networking
+
+Agreed.  Once it's been LSB'd, please put the recipe in
+meta-networking/recipes-daemons/
+
+Thanks,
+-J.
+
+>
+>> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com> ---
+>
+>> diff --git a/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init
+>> b/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init new file mode 100644
+>> index 0000000..df6d648 --- /dev/null +++
+>> b/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init @@ -0,0 +1,47 @@ +#!
+>> /bin/sh +# +# This is an init script for openembedded +# Copy it to
+>> /etc/init.d/thttpd and type +# > update-rc.d thttpd defaults 60 +# + +
+>> +thttpd=/usr/sbin/thttpd +test -x "$thttpd" || exit 0 + + +case "$1" in +
+>> start) +    echo -n "Starting thttpd" +    start-stop-daemon --start
+>> --quiet --exec $thttpd -- -d @@SRVDIR +    echo "." +    ;; +  stop) +
+>> echo -n "Stopping thttpd" +    start-stop-daemon --stop --quiet --exec
+>> $thttpd +    echo "." +    ;; +  reload|force-reload) +
+>> start-stop-daemon --stop --quiet --signal 1 --exec $thttpd +    ;; +
+>> restart) +    echo -n "Stopping thttpd" +    start-stop-daemon --stop
+>> --quiet --exec $thttpd -- -d @@SRVDIR +    echo "." +    echo -n "Waiting
+>> for thttpd to die off" +    for i in 1 2 3 ; +    do +        sleep 1 +
+>> echo -n "." +    done +    echo "" +    echo -n "Starting thttpd" +
+>> start-stop-daemon --start --quiet --exec $thttpd -- -d @@SRVDIR +    echo
+>> "." +    ;; +  *) +    echo "Usage: /etc/init.d/thttpd
+>> {start|stop|reload|restart|force-reload}" +    exit 1 +esac + +exit 0
+>
+> And that's not LSB compliant.
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFQWDMXMkyGM64RGpERAuzAAJ44UYtqHx35wKF9m0vy6rDY1d67zwCfbYyv
+> dqzWiGMeiAdkWYrHLR9EAt4=
+> =hJhu
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-Op 18 sep. 2012, om 16:58 heeft Andrei Gherzan <andrei@gherzan.ro> het =
-volgende geschreven:
 
-> Hello,
->=20
-> I would like to move the zram service from meta-raspberrypi to =
-meta-systemd. This is not specific to raspberrypi and can be used by =
-others as well.=20
-> Koen, what do you think about this move? And if so, what recipes =
-directory should i use? recipes-extended?
-
-What other machines use zram as well?=
+-- 
+Joe MacDonald
+:wq
 
 
