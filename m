@@ -1,38 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TDylg-0001lE-3R
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TDylh-0001l8-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 16:27:16 +0200
-Received: by mail-bk0-f47.google.com with SMTP id ik5so2999370bkc.6
+	Tue, 18 Sep 2012 16:27:17 +0200
+Received: by mail-bk0-f47.google.com with SMTP id ik5so2999326bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 07:14:38 -0700 (PDT)
+	Tue, 18 Sep 2012 07:14:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=YDBty3SJG1DPQKBKKXODZhtjh+eOSWNtNEqOVon+aCw=;
-	b=zo1jcH4GCgOxpwSt2qAMdGVHHcgNjFXJz6jxvYJDWI3VVYFKQlRn7zskRXqvWUUxJs
-	xniopAzzLicosOOBtKq64IocDWOCa/r6EQiXwrZUV/UskOj8/Xnu8Hy3XWdGc9bi2weT
-	BKm2FjJl20gvLzA5yr0JMieoKi3FC/vOZ+RZeMeTa+o5ooZSPdsb7HPfkFZ4FpjNdOgR
-	lskyZbuftb6ZvartmsGGQ2fpoR4QzC5U9DnlfCymt6kJN5WOH3kiVmyNrSf0HLDX3gTp
-	Vdowbhkp9P2ct2THEb2BosMrcHY/CNlrVGfJqfUa2wADFJhjmNnWqS60wCGvNVU4XYEZ
-	FZ7A==
-Received: by 10.204.147.65 with SMTP id k1mr10914bkv.29.1347977678151;
-	Tue, 18 Sep 2012 07:14:38 -0700 (PDT)
+	bh=78MLyDno/+splnP/wGRfpilKDT8i3sT2JRSYKwVdyiI=;
+	b=xkootaAYBtjxVZ9F7Xvus2Tp6cSZvGx24JsvUQpUk01ewAtwL3smFaSueBknlmRTgD
+	WrVcOeDW3YmqIhYaFiSfjlvbE0tQ6Sld+EB2Ziiv1CL2KWoIVJ8X8IL+2mWciIqguaut
+	fx2BKyW+djDrlQg5qwbwAWqQkKPUS0O4dHpiecHxEdmQA6QsnqdhsGtxVS7QJHbMGvyr
+	qQAJFqFy5zu+XdaouO6nEmLb6+ii39uzg43ld+qeRAIl6mbZx5BihKUdkYWkJ/vJYIVP
+	pQYdKNqTff21BVfl9FTchkeRchTXlcKuo5wvvCbL9OssQzO2ua6i1VIX0vsGLbuPefke
+	GRrg==
+Received: by 10.204.10.92 with SMTP id o28mr4119bko.39.1347977679473;
+	Tue, 18 Sep 2012 07:14:39 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
 	[95.222.156.96])
-	by mx.google.com with ESMTPS id y20sm8006887bkv.11.2012.09.18.07.14.36
+	by mx.google.com with ESMTPS id y20sm8006887bkv.11.2012.09.18.07.14.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Sep 2012 07:14:37 -0700 (PDT)
+	Tue, 18 Sep 2012 07:14:38 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2012 16:12:57 +0200
-Message-Id: <1347977601-28665-17-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 18 Sep 2012 16:12:58 +0200
+Message-Id: <1347977601-28665-18-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1347977601-28665-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1347977601-28665-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/-oe/-multimedia 16/40] xfce4-panel: update to 4.10.0
+Subject: [meta-xfce/-oe/-multimedia 17/40] thunar: update to 1.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,53 +46,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 14:27:16 -0000
+X-List-Received-Date: Tue, 18 Sep 2012 14:27:17 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...{xfce4-panel_4.8.6.bb => xfce4-panel_4.10.0.bb} |   10 +++-------
+ .../thunar/{thunar_1.2.3.bb => thunar_1.4.0.bb}    |   10 +++-------
  1 files changed, 3 insertions(+), 7 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.8.6.bb => xfce4-panel_4.10.0.bb} (81%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.2.3.bb => thunar_1.4.0.bb} (71%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.10.0.bb
-similarity index 81%
-rename from meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-rename to meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.10.0.bb
-index b59fde0..5d03425 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.8.6.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.10.0.bb
-@@ -4,10 +4,11 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
- DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
- 
--PR = "r3"
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.2.3.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
+similarity index 71%
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.2.3.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
+index 86fcc79..39b1254 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.2.3.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
+@@ -2,13 +2,12 @@ DESCRIPTION = "File manager for the Xfce Desktop Environment"
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS = "exo gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify"
 -
+-PR = "r1"
++DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify"
+ 
  inherit xfce
  
-+SRC_URI[md5sum] = "cf7351a4b952dbe3fc5ff509c68def33"
-+SRC_URI[sha256sum] = "3321f998af2bbd14ba68654a8881774f6ea2ec4f1a3544598e7f47d3ed0009b9"
-+
- python populate_packages_prepend() {
-     plugin_dir = bb.data.expand('${libdir}/xfce4/panel/plugins/', d)
-     plugin_name = bb.data.expand('${PN}-plugin-%s', d)
-@@ -18,9 +19,6 @@ python populate_packages_prepend() {
-                                          '${datadir}/icons/hicolor/48x48/apps/*-%s.png',
-                                          '${bindir}/*%s*'])
- }
--do_install_append () {
--    find "${D}/${libdir}/xfce4/panel/plugins" -name '*.a' -exec rm -f {} +
--}
+-# SRC_URI must follow inherited one
++SRC_URI[md5sum] = "737ad2c36ed36b10fef82e860b9e990a"
++SRC_URI[sha256sum] = "2c11a19e64cef708a264fb4d5d933389899c3d132fe7b1e313dd6e37bfe4c8ba"
+ SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
  
- PACKAGES_DYNAMIC = "${PN}-plugin-*"
- 
-@@ -29,5 +27,3 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
- 
- FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
- 		   "
--SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
--SRC_URI[sha256sum] = "66f1266a1242ee5ecada995a4a584dd9802aa24456759b40b0c29227c39bed03"
+ S = "${WORKDIR}/Thunar-${PV}/"
+@@ -23,6 +22,3 @@ FILES_${PN} += "${libdir}/thunarx-2/* \
+ FILES_${PN}-dbg += "${libdir}/thunarx-2/.debug/ \
+                     ${libdir}/xfce4/panel/plugins/.debug/ \
+                     ${libdir}/Thunar/.debug/"
+-
+-SRC_URI[md5sum] = "0a2c36cdd3cb3a2ab52cbf6055415b85"
+-SRC_URI[sha256sum] = "e66aa9ad61a9202e15cc7c5fffc7b961da9ab3b4428f874c1ec8e46eb4ffaca6"
 -- 
 1.7.6.5
 
