@@ -1,32 +1,30 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from sysmocom.de ([78.46.147.233] helo=mail.sysmocom.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TDmbP-0006WX-2D
+	(envelope-from <holger+oe@freyther.de>) id 1TDraM-0007bt-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 03:27:51 +0200
-Received: by eaad12 with SMTP id d12so2226362eaa.6
+	Tue, 18 Sep 2012 08:47:06 +0200
+Received: from sangmingze-mail.local (91-66-230-199-dynip.superkabel.de
+	[91.66.230.199])
+	by mail.sysmocom.de (Postfix) with ESMTPSA id 8ADEC254346B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2012 18:15:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=Fp1cfH0al2xV8PtSrfERVTnMcZCr+1rMIY/G5jjS/C0=;
-	b=nCiY0y0QzqriP+S197cFuRzlK7Y0dFOU7vn2BeoCZZyEVuzsH8QMYY59V1g8aAgvdM
-	AkidwxanEZk6kr6piIy5R14wlBaW9rY39uvZGsAc1zxHOhsYRkg3KXjJFD4vFAK/z4mJ
-	j6tJblVomeMAmFHHz8Yn/iayHSizQ7MyeRvlD8A3eKiIiVWv4NBMCzPELsa6sfDNZV7F
-	xGgqYW/Q5MXcSyjrXj0HMoeqqY0TCgrvXer0YRU+vGHOmDM6wJN65Utc43YKTfb6RZoE
-	cHYjbd23kYEDA+Th4VJCCz3UfDlD2PqDy+yu23axoQ9eMGeVldYksHAeDIgFfJBjrm/k
-	nvFA==
-Received: by 10.14.4.201 with SMTP id 49mr15716413eej.0.1347930911730; Mon, 17
-	Sep 2012 18:15:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.2.5 with HTTP; Mon, 17 Sep 2012 18:14:41 -0700 (PDT)
-In-Reply-To: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
-References: <CALbNGRSJPF_ecKSaeM4+URRuHBgPXhUJavqHuciq+Q1SOoO9+Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 17 Sep 2012 18:14:41 -0700
-Message-ID: <CAMKF1sopUyOMofpj2o5+ysoH0EvOOKGaqQOJUsRxZ6X0H3+Ecg@mail.gmail.com>
+	Tue, 18 Sep 2012 06:38:13 +0000 (UTC)
+Received: from ich by sangmingze-mail.local with local (Exim 4.80)
+	(envelope-from <holger+oe@freyther.de>) id 1TDrO6-0001k5-Mg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Sep 2012 08:34:26 +0200
+Date: Tue, 18 Sep 2012 08:34:26 +0200
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: xfce update question
+Message-ID: <20120918063426.GC1258@localhost>
+References: <1347879491-2425-1-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKr6hWv7ED5YWxX1vbouE3C-NSySoKxi=7FOW_J-xoFS_g@mail.gmail.com>
+	<k378fh$nm6$1@ger.gmane.org>
+	<CAP9ODKqURDO6Am2mkBH8OdEQL=6JhZLga_-zgV7CX=GdDm6vmw@mail.gmail.com>
+	<k37lgg$ihf$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <k37lgg$ihf$1@ger.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [for-denzil][systemd update 0/6] Systemd updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 01:27:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Sep 2012 06:47:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Sep 17, 2012 at 4:14 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Hi,
->
-> I have a huge patch series for xfce 4.10 + plugins under test. Is
-> there a chance getting applied these days? I am asking because oe-core
-> is in release-freeze and I don't know if meta-openembedded does same.
->
+On Mon, Sep 17, 2012 at 07:09:38PM +0200, Koen Kooi wrote:
+> 
+> > how you tested it against regressions?
+> 
+> By running the same production tests as always. Bootup, shutdown, GUI,
+> adding services, removing them, inspecting the logs, things like that.
 
-usually it gets tagged after oe-core is released so it should be OK atm
+One word of warning. I am using meta-oe's version of systemd (v189) and
+the journald process easily grows to 189MB virtual size within seconds
+on my system. I only see VSZ as busybox's top does not show RSS.
 
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+holger
 
 
