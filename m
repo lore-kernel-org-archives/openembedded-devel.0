@@ -1,30 +1,34 @@
-Received: from sysmocom.de ([78.46.147.233] helo=mail.sysmocom.de)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1TDraM-0007bt-Nr
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 08:47:06 +0200
-Received: from sangmingze-mail.local (91-66-230-199-dynip.superkabel.de
-	[91.66.230.199])
-	by mail.sysmocom.de (Postfix) with ESMTPSA id 8ADEC254346B
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TDtWk-00026U-GX for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Sep 2012 10:51:30 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TDtKa-0008Uh-5n for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Sep 2012 10:38:56 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Sep 2012 10:38:56 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 06:38:13 +0000 (UTC)
-Received: from ich by sangmingze-mail.local with local (Exim 4.80)
-	(envelope-from <holger+oe@freyther.de>) id 1TDrO6-0001k5-Mg
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 08:34:26 +0200
-Date: Tue, 18 Sep 2012 08:34:26 +0200
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 18 Sep 2012 10:38:56 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120918063426.GC1258@localhost>
-References: <1347879491-2425-1-git-send-email-koen@dominion.thruhere.net>
-	<CAP9ODKr6hWv7ED5YWxX1vbouE3C-NSySoKxi=7FOW_J-xoFS_g@mail.gmail.com>
-	<k378fh$nm6$1@ger.gmane.org>
-	<CAP9ODKqURDO6Am2mkBH8OdEQL=6JhZLga_-zgV7CX=GdDm6vmw@mail.gmail.com>
-	<k37lgg$ihf$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <k37lgg$ihf$1@ger.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [for-denzil][systemd update 0/6] Systemd updates
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 18 Sep 2012 10:38:47 +0200
+Message-ID: <k39bug$tlg$1@ger.gmane.org>
+References: <1347905904-814-1-git-send-email-fcooper@ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1347905904-814-1-git-send-email-fcooper@ti.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-oe][PATCH] thttpd: Port thttpd from oe-classic.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 06:47:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Sep 2012 08:51:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 17, 2012 at 07:09:38PM +0200, Koen Kooi wrote:
-> 
-> > how you tested it against regressions?
-> 
-> By running the same production tests as always. Bootup, shutdown, GUI,
-> adding services, removing them, inspecting the logs, things like that.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-One word of warning. I am using meta-oe's version of systemd (v189) and
-the journald process easily grows to 189MB virtual size within seconds
-on my system. I only see VSZ as busybox's top does not show RSS.
+Op 17-09-12 20:18, Franklin S. Cooper Jr schreef:
+> * Port thttpd recipe from oe-classic to meta-oe.
 
-holger
+It should go into meta-networking
+
+> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com> ---
+
+> diff --git a/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init
+> b/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init new file mode 100644 
+> index 0000000..df6d648 --- /dev/null +++
+> b/meta-oe/recipes-extended/thttpd/thttpd-2.25b/init @@ -0,0 +1,47 @@ +#!
+> /bin/sh +# +# This is an init script for openembedded +# Copy it to
+> /etc/init.d/thttpd and type +# > update-rc.d thttpd defaults 60 +# + + 
+> +thttpd=/usr/sbin/thttpd +test -x "$thttpd" || exit 0 + + +case "$1" in +
+> start) +    echo -n "Starting thttpd" +    start-stop-daemon --start
+> --quiet --exec $thttpd -- -d @@SRVDIR +    echo "." +    ;; +  stop) +
+> echo -n "Stopping thttpd" +    start-stop-daemon --stop --quiet --exec
+> $thttpd +    echo "." +    ;; +  reload|force-reload) +
+> start-stop-daemon --stop --quiet --signal 1 --exec $thttpd +    ;; +
+> restart) +    echo -n "Stopping thttpd" +    start-stop-daemon --stop
+> --quiet --exec $thttpd -- -d @@SRVDIR +    echo "." +    echo -n "Waiting
+> for thttpd to die off" +    for i in 1 2 3 ; +    do +        sleep 1 +
+> echo -n "." +    done +    echo "" +    echo -n "Starting thttpd" +
+> start-stop-daemon --start --quiet --exec $thttpd -- -d @@SRVDIR +    echo
+> "." +    ;; +  *) +    echo "Usage: /etc/init.d/thttpd
+> {start|stop|reload|restart|force-reload}" +    exit 1 +esac + +exit 0
+
+And that's not LSB compliant.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQWDMXMkyGM64RGpERAuzAAJ44UYtqHx35wKF9m0vy6rDY1d67zwCfbYyv
+dqzWiGMeiAdkWYrHLR9EAt4=
+=hJhu
+-----END PGP SIGNATURE-----
+
 
 
