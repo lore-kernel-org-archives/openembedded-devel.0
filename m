@@ -1,34 +1,33 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TE3mE-0000pb-LN
+	(envelope-from <raj.khem@gmail.com>) id 1TECLZ-0004qz-9d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Sep 2012 21:48:10 +0200
-Received: by mail-pb0-f47.google.com with SMTP id wy7so639231pbc.6
+	Wed, 19 Sep 2012 06:57:13 +0200
+Received: by pbcwy7 with SMTP id wy7so1474662pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 12:35:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=1vUbADm3Q3mTMmfXZkBfDhmSOJB1hLlucZqbc6JecjU=;
-	b=B/L3x/Y/Fxt9pJcdrpLwm0zfn8m2V/3Ni3QKFNXZM8g25wDowO9qTj3KkOMT4lBlAM
-	/RnCXnPdYyjEm4KLgpEQce0AayGoSnUSIH0T9pqwtpDFbjPtRV8joV3AJsygjD+rDIKS
-	d51sgJp4jzewKUON17jYR6doMgR7vTHggh+f3oBoMiqBOBFV8j6zsZDbRT34t9VZqHsK
-	7LDXYd4pcjgkzZuR0iGoniydIeBc9zJv0VedhlkUw7bpI7dJ9oPUNqoUxVQlw+hiHAZz
-	CAwSMFDupGnfJdWHv4fiCjlSMzszxN0XYAh36fuwfBRviT5VSgWXRwwU3iEJqYVTUKyk
-	gURg==
-Received: by 10.66.82.3 with SMTP id e3mr1235448pay.56.1347996932119;
-	Tue, 18 Sep 2012 12:35:32 -0700 (PDT)
-Received: from otp-agherzan-l1.corp.ad.wrs.com ([89.121.200.106])
-	by mx.google.com with ESMTPS id to6sm443409pbc.12.2012.09.18.12.35.30
+	Tue, 18 Sep 2012 21:44:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=ImW3t6vdviPIZaVrWsulX91n5RQraa0+OjtJJ/B+Ozs=;
+	b=J38UiAbFmPd1HHvxpLz29uLamoEbxp6ZQLXO38PD7a8QHfEuJRy4qM2NXZA1U4lHi8
+	DIcwT2+JMzJvZJdqVx2YxDX/1VTnZwY74QzEIJ5yKLRMrP0yeBm77/GhggePOhx9aJDg
+	JQSRJZXqbCjLeEktAtUcgActUMWMJht8dmMborTzXoo8Mnc8gk2s/81IW4hHQLnHAwEo
+	GefS3EgH3jtPUw+hfnHp86x7XotXs8cQ7lEOH5ZP5SdVS6/w9Shxr6WOcBUijjYPjMSa
+	4dVo99PkquvjTsLRZdjkLas6kseqW5g7/bf8V6qXsiL9EGF81w9vyQqCzyvSQPB3ipfw
+	QBeg==
+Received: by 10.66.81.66 with SMTP id y2mr3872036pax.62.1348029871863;
+	Tue, 18 Sep 2012 21:44:31 -0700 (PDT)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id bn5sm455788pab.12.2012.09.18.21.44.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Sep 2012 12:35:31 -0700 (PDT)
-From: Andrei Gherzan <andrei@gherzan.ro>
+	Tue, 18 Sep 2012 21:44:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2012 22:35:24 +0300
-Message-Id: <1347996924-23109-1-git-send-email-andrei@gherzan.ro>
+Date: Tue, 18 Sep 2012 21:43:19 -0700
+Message-Id: <1348029799-31922-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-X-Gm-Message-State: ALoCoQkqGwrOSvLabjIvlUXG58E1LrhZ5+Su2ge2TTlEwLJ2YGQG+8E5ErOe1lfMGAG+1Fs2RQaT
-Subject: [meta-oe][meta-systemd][PATCH] zram: Add systemd service for zram
+Subject: [meta-oe][PATCH] sg3-utils: Correct typo in checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,52 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 19:48:10 -0000
+X-List-Received-Date: Wed, 19 Sep 2012 04:57:13 -0000
 
-Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-extended/zram/zram/zram.service        |   12 ++++++++++++
- .../recipes-extended/zram/zram_0.1.bbappend        |   12 ++++++++++++
- 2 files changed, 24 insertions(+)
- create mode 100644 meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service
- create mode 100644 meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
+ .../recipes-support/sg3-utils/sg3-utils_1.31.bb    |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service b/meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service
-new file mode 100644
-index 0000000..4a19367
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+Description=Enable zram compressed in-memory swap.
-+After=multi-user.target
-+
-+[Service]
-+RemainAfterExit=yes
-+ExecStart=/usr/bin/zram-load.sh --load
-+ExecStop=/usr/bin/zram-load.sh --unload
-+Type=oneshot
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend b/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
-new file mode 100644
-index 0000000..cc98fe1
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
-@@ -0,0 +1,12 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+inherit systemd
-+
-+SRC_URI += " \
-+        file://zram.service \
-+"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "zram.service"
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+index 5fa0765..8b0b76a 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1cc481c050dc92e12db9c8145043d5dc"
+ PR = "r1"
+ 
+ SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+-RC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
++SRC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
+ SRC_URI[sha256sum] = "d84b38b61f0ca3941eb1c48a5858f93d1d1b70a623e579f5ecce2440e18410a4"
+ 
+ inherit autotools
 -- 
 1.7.9.5
 
