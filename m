@@ -1,33 +1,33 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TECLZ-0004qz-9d
+	(envelope-from <raj.khem@gmail.com>) id 1TED1L-0005hC-4Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Sep 2012 06:57:13 +0200
-Received: by pbcwy7 with SMTP id wy7so1474662pbc.6
+	Wed, 19 Sep 2012 07:40:23 +0200
+Received: by pbcwy7 with SMTP id wy7so1544994pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 21:44:31 -0700 (PDT)
+	Tue, 18 Sep 2012 22:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=ImW3t6vdviPIZaVrWsulX91n5RQraa0+OjtJJ/B+Ozs=;
-	b=J38UiAbFmPd1HHvxpLz29uLamoEbxp6ZQLXO38PD7a8QHfEuJRy4qM2NXZA1U4lHi8
-	DIcwT2+JMzJvZJdqVx2YxDX/1VTnZwY74QzEIJ5yKLRMrP0yeBm77/GhggePOhx9aJDg
-	JQSRJZXqbCjLeEktAtUcgActUMWMJht8dmMborTzXoo8Mnc8gk2s/81IW4hHQLnHAwEo
-	GefS3EgH3jtPUw+hfnHp86x7XotXs8cQ7lEOH5ZP5SdVS6/w9Shxr6WOcBUijjYPjMSa
-	4dVo99PkquvjTsLRZdjkLas6kseqW5g7/bf8V6qXsiL9EGF81w9vyQqCzyvSQPB3ipfw
-	QBeg==
-Received: by 10.66.81.66 with SMTP id y2mr3872036pax.62.1348029871863;
-	Tue, 18 Sep 2012 21:44:31 -0700 (PDT)
+	bh=YKBKtvnga2AbHqAWxpfSjapJk5xSC4C8v8+VzOEza5w=;
+	b=HjrKyiaqXokoVVQCsjC4We5iXLyId+447+Eyj8QPJqwMooLF7JwRofqcy1nKpdjoGo
+	urjJqmejsApftuN/9DBDatV/Bk10xA9kR+m2RrA8C2XTemxoEPzu2pGYttsEQm4SbRQ6
+	wfPvfTWeI/LW55OudDjgrJHdGVeZd0vydugxT4tDcycvoQl7VKQegtX3OJo4hvzescOJ
+	sUZLE1FbeZl8QUVItK3YIHQW7DbO2hVbasgeI6FAXfPpia6yYJUEMuHaG9xWzGu8OVmw
+	f7fZfmI1P/9+Af2IyH2w+p9YJ810ycto/y7Kjd0z9bMmZe14oE0EMun6FNlx5ascs8LN
+	iNjg==
+Received: by 10.66.81.231 with SMTP id d7mr4118252pay.50.1348032461533;
+	Tue, 18 Sep 2012 22:27:41 -0700 (PDT)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id bn5sm455788pab.12.2012.09.18.21.44.30
+	by mx.google.com with ESMTPS id lb1sm1208780pbc.47.2012.09.18.22.27.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Sep 2012 21:44:30 -0700 (PDT)
+	Tue, 18 Sep 2012 22:27:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2012 21:43:19 -0700
-Message-Id: <1348029799-31922-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 18 Sep 2012 22:26:28 -0700
+Message-Id: <1348032388-11021-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] sg3-utils: Correct typo in checksums
+Subject: [meta-gnome][PATCH] gnome-themes: inherit perlnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2012 04:57:13 -0000
+X-List-Received-Date: Wed, 19 Sep 2012 05:40:23 -0000
+
+It needs perl module libxml-simple-perl for icon-name-mapping
+secondly inherit perlnative since it may not be available on build host
+
+Fixes errors like below
+
+| Can't locate XML/Simple.pm in @INC (@INC contains: /etc/perl
+/usr/local/lib/perl/5.14.2 /usr/local/share/perl/5.14.2 /usr/lib/perl5
+/usr/share/perl5 /usr/lib/perl/5.14 /usr/share/perl/5.14
+/usr/local/lib/site_perl .) at
+/home/kraj/work/angstrom/build/tmp-angstrom_next-eglibc/sysroots/x86_64-linux/usr/libexec/icon-name-mapping
+line 12.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/sg3-utils/sg3-utils_1.31.bb    |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-index 5fa0765..8b0b76a 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1cc481c050dc92e12db9c8145043d5dc"
- PR = "r1"
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index f40d355..9cc091f 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -2,15 +2,15 @@ DESCRIPTION = "GNOME themes"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2b543dc97eb7594d026af39d9b54204b"
  
- SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
--RC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
-+SRC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
- SRC_URI[sha256sum] = "d84b38b61f0ca3941eb1c48a5858f93d1d1b70a623e579f5ecce2440e18410a4"
+-PR = "r1"
++PR = "r2"
  
- inherit autotools
+ SECTION = "x11/gnome"
+-DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native"
++DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
+ RDEPENDS_${PN} = "gnome-icon-theme"
+ 
+ EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
+ 
+-inherit gnome
++inherit gnome perlnative
+ 
+ do_configure_prepend() {
+ 	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libexecdir}:g' configure.in
 -- 
 1.7.9.5
 
