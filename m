@@ -1,33 +1,20 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TED1L-0005hC-4Z
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TEMyE-0001F6-6r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Sep 2012 07:40:23 +0200
-Received: by pbcwy7 with SMTP id wy7so1544994pbc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2012 22:27:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=YKBKtvnga2AbHqAWxpfSjapJk5xSC4C8v8+VzOEza5w=;
-	b=HjrKyiaqXokoVVQCsjC4We5iXLyId+447+Eyj8QPJqwMooLF7JwRofqcy1nKpdjoGo
-	urjJqmejsApftuN/9DBDatV/Bk10xA9kR+m2RrA8C2XTemxoEPzu2pGYttsEQm4SbRQ6
-	wfPvfTWeI/LW55OudDjgrJHdGVeZd0vydugxT4tDcycvoQl7VKQegtX3OJo4hvzescOJ
-	sUZLE1FbeZl8QUVItK3YIHQW7DbO2hVbasgeI6FAXfPpia6yYJUEMuHaG9xWzGu8OVmw
-	f7fZfmI1P/9+Af2IyH2w+p9YJ810ycto/y7Kjd0z9bMmZe14oE0EMun6FNlx5ascs8LN
-	iNjg==
-Received: by 10.66.81.231 with SMTP id d7mr4118252pay.50.1348032461533;
-	Tue, 18 Sep 2012 22:27:41 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id lb1sm1208780pbc.47.2012.09.18.22.27.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Sep 2012 22:27:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 19 Sep 2012 18:17:50 +0200
+Received: from puchatek.dom (84-10-244-25.dynamic.chello.pl [84.10.244.25])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 2E73CD22DB;
+	Wed, 19 Sep 2012 17:57:37 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2012 22:26:28 -0700
-Message-Id: <1348032388-11021-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH] gnome-themes: inherit perlnative
+Date: Wed, 19 Sep 2012 17:57:28 +0200
+Message-Id: <1348070248-11775-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH] lzip: update to 1.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2012 05:40:23 -0000
+X-List-Received-Date: Wed, 19 Sep 2012 16:17:50 -0000
 
-It needs perl module libxml-simple-perl for icon-name-mapping
-secondly inherit perlnative since it may not be available on build host
-
-Fixes errors like below
-
-| Can't locate XML/Simple.pm in @INC (@INC contains: /etc/perl
-/usr/local/lib/perl/5.14.2 /usr/local/share/perl/5.14.2 /usr/lib/perl5
-/usr/share/perl5 /usr/lib/perl/5.14 /usr/share/perl/5.14
-/usr/local/lib/site_perl .) at
-/home/kraj/work/angstrom/build/tmp-angstrom_next-eglibc/sysroots/x86_64-linux/usr/libexec/icon-name-mapping
-line 12.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} (85%)
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index f40d355..9cc091f 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -2,15 +2,15 @@ DESCRIPTION = "GNOME themes"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2b543dc97eb7594d026af39d9b54204b"
+diff --git a/meta-oe/recipes-support/lzip/lzip_1.12.bb b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+similarity index 85%
+rename from meta-oe/recipes-support/lzip/lzip_1.12.bb
+rename to meta-oe/recipes-support/lzip/lzip_1.13.bb
+index 68f9d0d..e04b6dc 100644
+--- a/meta-oe/recipes-support/lzip/lzip_1.12.bb
++++ b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
  
--PR = "r1"
-+PR = "r2"
+ SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
  
- SECTION = "x11/gnome"
--DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native"
-+DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
- RDEPENDS_${PN} = "gnome-icon-theme"
+-SRC_URI[md5sum] = "69a40172db5ce896b58d862c50fcd517"
+-SRC_URI[sha256sum] = "eabc590d02d404dc1a1cc8e2777ed398370174b68edb22043c8ca0b209dfcd27"
++SRC_URI[md5sum] = "2f401e995c36cca05bd1805aa9c28231"
++SRC_URI[sha256sum] = "c73d36c0a926b71d484eacc192262a1d209674e3f903016f2c74a2bcbc5c28ac"
  
- EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
- 
--inherit gnome
-+inherit gnome perlnative
- 
- do_configure_prepend() {
- 	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libexecdir}:g' configure.in
+ CONFIGUREOPTS = "\
+     '--srcdir=${S}' \
 -- 
-1.7.9.5
+1.7.10.4
 
 
 
