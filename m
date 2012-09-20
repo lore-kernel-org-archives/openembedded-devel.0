@@ -1,36 +1,34 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TEbkN-00046J-57
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Sep 2012 10:04:31 +0200
-Received: by bkvi18 with SMTP id i18so614216bkv.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TEbuR-0004FW-KW for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Sep 2012 10:14:55 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TEbiD-0006W8-L1 for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Sep 2012 10:02:17 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Sep 2012 10:02:17 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Sep 2012 00:51:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=W0D3jmA3WVSFyEnt4bOcXnUe2X5yRRSHXiGoNObTx2E=;
-	b=tSYE4qwfsv+gwGnLctUt0ZJwbK/y+5q9ybyaGASmCFH5h0mEfN5vQxY/e8oIKd9pe/
-	FhFrQalVs3cpid+CsD3anGoJruzAIAfjUIRo24ZeVFua0KWEOGouSOvIVmbOFN8bmvBS
-	DmtrtxAoRLhKbB+lGST6Kk/L0vI/wa3dnqFkFuw6H9ybcqC5U37qSJZ0VvbvVH1jVm5v
-	6j1oMx7SHzzL8tm+z6/N0tWVeJBxYKwxr51eHcm3lYxgThgRiT9uEkAKi/a3wZespwmO
-	+MllWqwWsbDpZ4LIEO3GXkYo9TcFlmkK4uhGu19VAnMU6nTWF/eiyt41X3zJvsywbl5s
-	a2Hg==
-Received: by 10.204.156.208 with SMTP id y16mr251467bkw.76.1348127509074;
-	Thu, 20 Sep 2012 00:51:49 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-156-96.unitymediagroup.de.
-	[95.222.156.96])
-	by mx.google.com with ESMTPS id x13sm2544686bkv.16.2012.09.20.00.51.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Sep 2012 00:51:48 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 20 Sep 2012 10:02:17 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Sep 2012 09:50:59 +0200
-Message-Id: <1348127459-8538-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-MIME-Version: 1.0
-Subject: [PATCH] lighttpd: move systemd appends since recipe is in oe-core
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 20 Sep 2012 10:02:08 +0200
+Message-ID: <k3eihr$mre$1@ger.gmane.org>
+References: <1348124504-4764-1-git-send-email-mertsas@cisco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:14.0) Gecko/20120713 Thunderbird/14.0
+In-Reply-To: <1348124504-4764-1-git-send-email-mertsas@cisco.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-oe][PATCH] zsh: Change from 4.3.17 to 5.0.0, which is the latest stable release. Also change the mirror from the zsh ftp server, which is really slow and unstable, to a sourceforce mirror.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,29 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Sep 2012 08:04:31 -0000
+X-List-Received-Date: Thu, 20 Sep 2012 08:14:55 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../lighttpd/lighttpd/lighttpd.service             |    0
- .../lighttpd/lighttpd_1.4.31.bbappend              |    0
- 2 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/{meta-oe => oe-core}/recipes-extended/lighttpd/lighttpd/lighttpd.service (100%)
- rename meta-systemd/{meta-oe => oe-core}/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend (100%)
+Op 20-09-12 09:01, Martin Ertsaas schreef:
+> The reason for removing the 4.3.17 recipe is that it used the ftp
+> mirror, which has removed the 4.3.17 tarbal used.
+> 
+> Signed-off-by: Martin Ertsaas <mertsas@cisco.com> --- 
+> meta-oe/recipes-extended/zsh/zsh.inc       |   55 
+> ++++++++++++++++++++++++++++ meta-oe/recipes-extended/zsh/zsh_4.3.17.bb
+> | 51 --------------------------
+> meta-oe/recipes-extended/zsh/zsh_5.0.0.bb |    5 +++ 3 files changed, 60
+> insertions(+), 51 deletions(-) create mode 100644
+> meta-oe/recipes-extended/zsh/zsh.inc delete mode 100644 
+> meta-oe/recipes-extended/zsh/zsh_4.3.17.bb create mode 100644 
+> meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
+> 
+> diff --git a/meta-oe/recipes-extended/zsh/zsh.inc 
+> b/meta-oe/recipes-extended/zsh/zsh.inc new file mode 100644 index 
+> 0000000..cacce91 --- /dev/null +++ b/meta-oe/recipes-extended/zsh/zsh.inc
+> @@ -0,0 +1,55 @@
 
-diff --git a/meta-systemd/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd/lighttpd.service
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-extended/lighttpd/lighttpd/lighttpd.service
-rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd/lighttpd.service
-diff --git a/meta-systemd/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
--- 
-1.7.6.5
+> +PR = "r0"
+
+remove that
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQWs2AMkyGM64RGpERArFPAJ0biDw7Kxf7+0i9a74s+Hnig3BodACfdoJx
+LwMFvzB+RmMZ3JoIpuKhoxw=
+=r2qF
+-----END PGP SIGNATURE-----
 
 
 
