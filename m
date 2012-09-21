@@ -1,21 +1,20 @@
-Received: from mx194.callplus.net.nz ([202.180.66.194]
-	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roystonvasey@slingshot.co.nz>) id 1TEq1j-0004zk-RR
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TEzU8-00029I-2s
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Sep 2012 01:19:24 +0200
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AuQEAHygW1DLYgoS/2dsb2JhbABFhSIjRrhHgicIAhkFXgUGHQImAhs/AQQeBYdymEWGUIdzkwMUgQ2NHYIOgRIDnxmGbIJ8
-X-IronPort-AV: E=Sophos;i="4.80,457,1344168000"; d="scan'208";a="298204040"
-Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
-	by ismtp2.tranzpeer.net with ESMTP; 21 Sep 2012 11:05:36 +1200
-From: "R U Local" <roystonvasey@slingshot.co.nz>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Sep 2012 11:05:29 +1200
-Message-ID: <003f01cd9784$6dc9a060$495ce120$@slingshot.co.nz>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Ac2Xgrs7r/T+42xjQw+PjdBaOs2I5A==
-Subject: Error: min. I/O unit was not specified (use -h for help) during do_rootfs
+	Fri, 21 Sep 2012 11:25:20 +0200
+Received: from puchatek.dom (84-10-244-25.dynamic.chello.pl [84.10.244.25])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 2AFD9D22D6;
+	Fri, 21 Sep 2012 11:12:40 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Sep 2012 11:12:35 +0200
+Message-Id: <1348218755-6185-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH] orrery: added missing dependency on gtk+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,33 +28,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Sep 2012 23:19:24 -0000
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-nz
+X-List-Received-Date: Fri, 21 Sep 2012 09:25:20 -0000
 
-Dear List,
-I'm working on a Pandaboard using oe-core as my build system which was =
-setup from Angstrom scripts.
-The last full image build I made was a few months ago. Since then I've =
-just been working on application code and building packages.
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-navigation/orrery/orrery_2.7.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
-I'm now trying to rebuild an image and am getting an error that I need =
-help with.
-I've cleared out the build directory and re-built everything from =
-scratch but still get the error during do_rootfs.
-
-| ./boot/uImage
-| Error: min. I/O unit was not specified (use -h for help)=20
-
-I wound everything back to just build the console-image.
-I get the same error regardless of which image I build.
-I think something has changed during the one of the updates.
-
-I'd appreciate any help or pointers to track down the problem.
-
-Cheers Mike.
+diff --git a/meta-oe/recipes-navigation/orrery/orrery_2.7.bb b/meta-oe/recipes-navigation/orrery/orrery_2.7.bb
+index 1e41f5b..c216f29 100644
+--- a/meta-oe/recipes-navigation/orrery/orrery_2.7.bb
++++ b/meta-oe/recipes-navigation/orrery/orrery_2.7.bb
+@@ -3,6 +3,7 @@ HOMEPAGE    = "http://projects.openmoko.org/projects/orrery/"
+ SECTION = "x11/scientific"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://orrery.c;endline=25;md5=d792bdf2b591972da175aecc38d88cfe"
++DEPENDS = "gtk+"
+ 
+ inherit autotools
+ 
+-- 
+1.7.10.4
 
 
 
