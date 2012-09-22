@@ -1,32 +1,37 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TFRVN-0008RB-AS
+	(envelope-from <martin.jansa@gmail.com>) id 1TFRVU-0008RU-GT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Sep 2012 17:20:29 +0200
-Received: by wibhn17 with SMTP id hn17so2665757wib.6
+	Sat, 22 Sep 2012 17:20:36 +0200
+Received: by wgbdq11 with SMTP id dq11so2990637wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Sep 2012 08:07:44 -0700 (PDT)
+	Sat, 22 Sep 2012 08:07:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=zCuJ+FJWndWOVpoXTkaaxu1LiKH9SEapgeUWN75ZOao=;
-	b=JCiAXQK7I30D4VG11Mf4lRf7VnstKJGsn3eMgLR3CEP6C2+xcfMLcqfnhGjaX7p31b
-	QN8+IAToNgkL3ys1DRh7xgCkt2c+5osqsoc7K/cMmh6VkW08hUqvXXvJf5MQbysfK0Sd
-	y464LSYhDfd8Azl2w2uDvpTBBABy4FNvufWcKWKJhgkVEQ+LX/oXpD5lmwrK3Hq5hSLH
-	tAJ6ZPTUSR+PPQlrd6tSqBGZGsYBWK+4OCJv06Am9DyPFeGXS6+99mk7Q7T/jcic7JMp
-	mODizHesO3ZCakWDrSTZ/vkRfBC+x/YckwtLIAOXxzNCNfHlrIFKotsDjEvHMuMZY8/4
-	edGg==
-Received: by 10.216.30.20 with SMTP id j20mr4625999wea.78.1348326463965;
-	Sat, 22 Sep 2012 08:07:43 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=gWkuSMoGMWWpKYKRDlF1JpUQJK8PYCNWYL9yU894l/0=;
+	b=VXEDSC2H+JDqcFn1V5GRqr8/+n8i1XKmneIbsd/a9f/H5WG+N9A2tUI/3dGaoLdCUq
+	MXKHsm0PAZF9Ycb2killlRfCh86ZVO8XM1Kz9KccekMy+vWAcqnzWQpqyRYwfHtVMyZf
+	FOpDEDfUk5nEbhhF8TnrQawxmkRPJMvQhhlRgjgbnYBXV8fVfGfD2uMhJkVJgmIF4t7x
+	T8EAcZZDcrFwZMGGmkztHIZHOC33lZrt/8lJxYbDn6VFyOlV5I2z7b/T7HZXCIOUKFJ4
+	4lQcPVXC76dfS90p/WDGTJsP8Go8NgLE48r17A8WPi4ON3M0HS8rwu6x7fV6xxaWj6lZ
+	M9IQ==
+Received: by 10.180.91.169 with SMTP id cf9mr3776577wib.1.1348326471434;
+	Sat, 22 Sep 2012 08:07:51 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t7sm4608302wix.6.2012.09.22.08.07.42
+	by mx.google.com with ESMTPS id l5sm4612467wix.5.2012.09.22.08.07.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 22 Sep 2012 08:07:42 -0700 (PDT)
+	Sat, 22 Sep 2012 08:07:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Sep 2012 17:07:39 +0200
-Message-Id: <cover.1348320947.git.Martin.Jansa@gmail.com>
+Date: Sat, 22 Sep 2012 17:07:40 +0200
+Message-Id: <64a25e7e3213f86dbc1a4c7ca833058e04c38389.1348320947.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
-Subject: [meta-oe][PATCH 0/3] Smaller fixes
+In-Reply-To: <cover.1348320947.git.Martin.Jansa@gmail.com>
+References: <cover.1348320947.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1348320947.git.Martin.Jansa@gmail.com>
+References: <cover.1348320947.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/3] gtk+: drop .bbappend with native BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Sep 2012 15:20:29 -0000
+X-List-Received-Date: Sat, 22 Sep 2012 15:20:36 -0000
 
-The following changes since commit b232837c402cdbc5f2f1bd2afee5200df1383373:
+* it's in oe-core now
 
-  gnome-themes: inherit perlnative (2012-09-20 10:05:54 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (3):
-  gtk+: drop .bbappend with native BBCLASSEXTEND
-  lzma: replace oe.process.run with subprocess.call in do_unpack, drop
-    NATIVE_INSTALL_WORKS
-  emacs: fix X11DEPENDS and build without x11 enabled at all
-
- meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend |   3 -
- meta-oe/recipes-support/emacs/emacs.inc            | 114 ++++++++++++---------
- meta-oe/recipes-support/emacs/emacs_23.4.bb        |   2 +-
- meta-oe/recipes-support/lzma/lzma.inc              |   9 +-
- 4 files changed, 68 insertions(+), 60 deletions(-)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend | 3 ---
+ 1 file changed, 3 deletions(-)
  delete mode 100644 meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend
 
+diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend b/meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend
+deleted file mode 100644
+index 7df58c3..0000000
+--- a/meta-gnome/recipes-gnome/gtk+/gtk+_2.24.8.bbappend
++++ /dev/null
+@@ -1,3 +0,0 @@
+-BBCLASSEXTEND = "native"
+-RRECOMMENDS_${PN}_virtclass-native = ""
+-EXTRA_OECONF_virtclass-native += "--disable-introspection"
 -- 
 1.7.12
 
