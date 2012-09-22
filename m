@@ -1,37 +1,37 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TFRVc-0008Rz-4p
+	(envelope-from <martin.jansa@gmail.com>) id 1TFRVk-0008SN-0U
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Sep 2012 17:20:44 +0200
-Received: by wibhq4 with SMTP id hq4so2741160wib.6
+	Sat, 22 Sep 2012 17:20:52 +0200
+Received: by weyt44 with SMTP id t44so1272295wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Sep 2012 08:07:59 -0700 (PDT)
+	Sat, 22 Sep 2012 08:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=+OWnbxlGLdhhCJH6EKDVyvAc5bdXvk/yBtvJvFQvkfM=;
-	b=Dne6zpDl/7N/iua0pWeahzxA1NNaaG4cyWs3f0O8JwfNHQOU9qSY7Xb+I/TpTE7gOw
-	8GBLnM9DyXCbk5zjfRs/hWHvEQxF4DjKpdHYINMGzLuoL21tio30PUdTokOL2ZryUdui
-	xz34lBRidXmEW4TQPLMa7kmf6ClrpLYCh8b3yAS6VBLF1eo6e5X9BVyLxlWxk9B+w7f1
-	dszf+D2iyVv7ANrPyLjo2wgA77JaGNSpllS4BwdCdh7ldMtcgLwb7DzVMn12t1aPIR3F
-	lYFUdxp4WA1E/EI2Edqqf1+6vYLXtai+N+DqWUmpEouL5AxXJUlw4vhWaq0qz+KBLpcl
-	oDaw==
-Received: by 10.180.84.104 with SMTP id x8mr3484419wiy.20.1348326479084;
-	Sat, 22 Sep 2012 08:07:59 -0700 (PDT)
+	bh=CqVWUiheIxzJD7ezeBQpiClsvG9PWCw53TOKR/kJpjE=;
+	b=w6alUQMbg5QS9j8O7Sz7e+5rTHRgIujqtYnBfSEE/qXaHgiDA4/plfO0Knpb91NKuU
+	gWTxS3sjA3gmg/kdr+minDB2VeRs9QC41StOqe4IQDxU9QdxBzJeiYf7fY/Vlr066A5K
+	qb7Usx5sjbN0VoLGcsEa2Ohw+5J+r02soz4fm2kvNKwX2hWCnnG/7BkAZoXRI8hcKecQ
+	n5JCZ3JOQBvy/UwfPB+YXgBygxO6xY3dSwU73T2Tn99ZmLhAucLhKqCs9x4g0bgdIiHY
+	WKDbUvhCJEqpKdhNL0sEG4pp6JucpmuPG+MNNfqQ1C6eiZb18HYnLg6VuL+Utr3SXny+
+	xGLg==
+Received: by 10.180.84.169 with SMTP id a9mr3543465wiz.8.1348326486952;
+	Sat, 22 Sep 2012 08:08:06 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w7sm4049705wiz.0.2012.09.22.08.07.57
+	by mx.google.com with ESMTPS id k2sm4607788wiz.7.2012.09.22.08.08.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 22 Sep 2012 08:07:58 -0700 (PDT)
+	Sat, 22 Sep 2012 08:08:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Sep 2012 17:07:41 +0200
-Message-Id: <ac89f82dc84c9222318642f6b75d5a3dad324594.1348320947.git.Martin.Jansa@gmail.com>
+Date: Sat, 22 Sep 2012 17:07:42 +0200
+Message-Id: <c988ce5518967d3acd0edd5d71a44963f08dae7a.1348320947.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
 In-Reply-To: <cover.1348320947.git.Martin.Jansa@gmail.com>
 References: <cover.1348320947.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1348320947.git.Martin.Jansa@gmail.com>
 References: <cover.1348320947.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/3] lzma: replace oe.process.run with subprocess.call in do_unpack, drop NATIVE_INSTALL_WORKS
+Subject: [meta-oe][PATCH 3/3] emacs: fix X11DEPENDS and build without x11 enabled at all
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +45,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Sep 2012 15:20:44 -0000
+X-List-Received-Date: Sat, 22 Sep 2012 15:20:52 -0000
 
-* oe.process was removed in
-  http://git.openembedded.org/openembedded-core/commit/meta/lib/oe?id=d56062cbf92ef206bf06c767befacb66927a9a36
+* also added copy for libcroco
+  librsvg is linked to it by default after
+  http://git.openembedded.org/openembedded-core/commit/?id=e177f1475c55c7d0bf3e2752e6502a7e8577a075
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/lzma/lzma.inc | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ meta-oe/recipes-support/emacs/emacs.inc     | 114 +++++++++++++++-------------
+ meta-oe/recipes-support/emacs/emacs_23.4.bb |   2 +-
+ 2 files changed, 64 insertions(+), 52 deletions(-)
 
-diff --git a/meta-oe/recipes-support/lzma/lzma.inc b/meta-oe/recipes-support/lzma/lzma.inc
-index 9718600..457d7f4 100644
---- a/meta-oe/recipes-support/lzma/lzma.inc
-+++ b/meta-oe/recipes-support/lzma/lzma.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "LZMA is a general compression method. LZMA provides high compress
- HOMEPAGE = "http://www.7-zip.org/"
- LICENSE = "LGPL"
- LIC_FILES_CHKSUM = "file://lzma.txt;md5=20251cdc2e3793cceab11878d0aa11b1"
--INC_PR = "r6"
-+INC_PR = "r7"
+diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
+index 61761e8..b7a7b75 100644
+--- a/meta-oe/recipes-support/emacs/emacs.inc
++++ b/meta-oe/recipes-support/emacs/emacs.inc
+@@ -8,7 +8,13 @@ DEPENDS += "qemu-native"
  
- SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',d,1).replace('.','')}.tar.bz2;subdir=${BPN}-${PV} \
-            file://001-large_files.patch \
-@@ -14,10 +14,10 @@ SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',
- EXTRA_OEMAKE = "-f makefile.gcc"
+ DEPENDS +=" liblockfile"
  
- do_unpack_append() {
--    import oe.process
-+    import subprocess
-     # Replace MS-DOS line-endings with Unix style line-endings
--    oe.process.run("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
--               cwd=d.getVar("S", True))
-+    subprocess.call("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
-+                     cwd=d.getVar("S", True), shell=True)
+-X11DEPENDS = "gtk+ libungif dbus"
++X11DEPENDS = " \
++  libice libsm atk cairo dbus expat libffi fontconfig freetype gconf giflib \
++  jpeg xz pixman libpng librsvg tiff libcroco \
++  libx11 libxau libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes \
++  libxft libxpm libxrandr libxrender \
++  gdk-pixbuf glib-2.0 gtk+ pango libxcb \
++" 
+ 
+ EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
+ 
+@@ -50,11 +56,24 @@ do_compile_prepend() {
+ 	if [ -e $treedir ];then
+ 		rm -rf $treedir
+ 	fi
++	
++	mkdir -p $treedir/${base_libdir}
++
++	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so ]; then
++		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so $treedir/${base_libdir}
++	fi
++	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* ]; then
++		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* $treedir/${base_libdir}
++	fi
++	# stupid hack, but without it, it tries to use /usr/lib/libc.so from host and fails
++	# temacs: error while loading shared libraries: /usr/lib/libc.so: ELF file version does not match current one
++	if [ ! -f $treedir/${base_libdir}/libc.so ]; then
++		ln -s libc.so.6 $treedir/${base_libdir}/libc.so
++	fi
+ 
+ 	# copy only as much stuff as we need
+ 	# before: 5.5G   ../../qemu-treedir/
+-	# after:   86M   ../../qemu-treedir/
+-	mkdir -p $treedir/${base_libdir}
++	# after:   17M   ../../qemu-treedir/
+ 	cp -pPR \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/ld-* \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/libc.* \
+@@ -65,57 +84,50 @@ do_compile_prepend() {
+ 	${STAGING_DIR_TARGET}/${base_libdir}/libresolv* \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/libdl* \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/librt* \
+-	${STAGING_DIR_TARGET}/${base_libdir}/libresolv* \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
+-	${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
+ 	${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
+ 
+-	cp -pPR \
+-	${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libcairo.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libdbus-1.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libdbus-glib-1.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libexpat.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libffi.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libfontconfig.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libfreetype.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libgconf-2.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libgif.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libjpeg.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/liblzma.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libpixman-1.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libpng12.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/librsvg-2.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libstdc++.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libxml2.so.* \
+-	${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
+-
+-	# X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
+-	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
+-
+-	# gdk-x11 gdk_pixbuf gio glib gmodule gobject gthread gtk-x11
+-	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libg*-2.0.so.* $treedir/${base_libdir}/
+-
+-	# pango pangocairo pangoft2
+-	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libpango*-1.0.so.* $treedir/${base_libdir}/
+-
+-	# xcb-render xcb-shm xcb
+-	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libxcb*.so.* $treedir/${base_libdir}/
+-
+-	#cp -pPR ${STAGING_DIR_TARGET}/* $treedir
+-	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so ]; then
+-		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so $treedir/lib
+-	fi
+-	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* ]; then
+-		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* $treedir/lib
+-	fi
+-	# stupid hack, but without it, it tries to use /usr/lib/libc.so from host and fails
+-	# temacs: error while loading shared libraries: /usr/lib/libc.so: ELF file version does not match current one
+-	if [ ! -f $treedir/${base_libdir}/libc.so ]; then
+-		ln -s libc.so.6 $treedir/${base_libdir}/libc.so
++	if [ ! -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ] ; then
++		echo "X11 build enabled"
++		# copy only as much stuff as we need
++		# before: 5.5G   ../../qemu-treedir/
++		# after:   86M   ../../qemu-treedir/
++		cp -pPR \
++		${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libcairo.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libdbus-1.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libdbus-glib-1.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libexpat.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libffi.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libfontconfig.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libfreetype.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libgconf-2.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libgif.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libjpeg.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/liblzma.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libpixman-1.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libpng12.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/librsvg-2.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libstdc++.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libxml2.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libcroco-0.6.so.* \
++		${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
++
++		# X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
++		cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
++
++		# gdk-x11 gdk_pixbuf gio glib gmodule gobject gthread gtk-x11
++		cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libg*-2.0.so.* $treedir/${base_libdir}/
++
++		# pango pangocairo pangoft2
++		cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libpango*-1.0.so.* $treedir/${base_libdir}/
++
++		# xcb-render xcb-shm xcb
++		cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libxcb*.so.* $treedir/${base_libdir}/
+ 	fi
  }
  
- do_compile() {
-@@ -32,5 +32,4 @@ do_install() {
-         oe_libinstall -a -C C/LzmaUtil liblzma ${D}${libdir}
- }
+diff --git a/meta-oe/recipes-support/emacs/emacs_23.4.bb b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+index 65cc3a3..5ad5644 100644
+--- a/meta-oe/recipes-support/emacs/emacs_23.4.bb
++++ b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+@@ -1,6 +1,6 @@
+ require emacs.inc
  
--NATIVE_INSTALL_WORKS = "1"
- BBCLASSEXTEND = "native"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz;name=tarball \
+            file://use-qemu.patch \
 -- 
 1.7.12
 
