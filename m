@@ -1,23 +1,21 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TGS0m-00067s-QD
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TGSN6-0006tC-8M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Sep 2012 12:05:04 +0200
-Received: from localhost.localdomain (public-gprs371602.centertel.pl
-	[37.47.82.211])
+	Tue, 25 Sep 2012 12:28:08 +0200
+Received: from localhost.localdomain (public-gprs372485.centertel.pl
+	[37.47.86.70])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 3DB80D22DB;
-	Tue, 25 Sep 2012 11:52:20 +0200 (CEST)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 83F7BD22DB;
+	Tue, 25 Sep 2012 12:15:24 +0200 (CEST)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Sep 2012 11:52:03 +0200
-Message-Id: <1348566723-29065-5-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Tue, 25 Sep 2012 12:15:16 +0200
+Message-Id: <1348568116-11529-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1348566723-29065-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <1348566723-29065-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Subject: [PATCH 5/5] ttf-ubuntu-font-family: added license stuff and updated to 0.80 version
+Subject: [PATCH] libedit: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,68 +29,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2012 10:05:04 -0000
-
-Dropped Serif handling code - there is no Ubuntu Serif.
+X-List-Received-Date: Tue, 25 Sep 2012 10:28:08 -0000
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../ttf-fonts/ttf-ubuntu-font-family_0.69.bb       |   18 ------------------
- .../ttf-fonts/ttf-ubuntu-font-family_0.80.bb       |   20 ++++++++++++++++++++
- 2 files changed, 20 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
+ .../libedit/{libedit_20110802.bb => libedit_20120601.bb}           |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/libedit/{libedit_20110802.bb => libedit_20120601.bb} (70%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
-deleted file mode 100644
-index 22a7aec..0000000
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.69.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--require ttf.inc
--
--DESCRIPTION = "Ubuntu Font Family - TTF Version"
--HOMEPAGE = "http://font.ubuntu.com"
--LICENSE = "UFL"
--PR = "r2"
--
--SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}+ufl.zip"
--SRC_URI[md5sum] = "2c3287ea72f81ce025095f7a6d68af28"
--SRC_URI[sha256sum] = "23206a306d92ec57404ab3bc75610b6d8cfed0b8ddcfbe51b99fb48519a4855b"
--S = "${WORKDIR}/ubuntu-font-family-0.69+ufl"
--
--PACKAGES = "${PN}-dbg ttf-ubuntu-mono ttf-ubuntu-sans ttf-ubuntu-serif"
--RRECOMMENDS_${PN}-dbg = ""
--
--FILES_ttf-ubuntu-mono  = "${datadir}/fonts/truetype/*Mono*"
--FILES_ttf-ubuntu-sans  = "${datadir}/fonts/truetype/Ubuntu-*"
--FILES_ttf-ubuntu-serif = "${datadir}/fonts/truetype/*Serif*"
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
-new file mode 100644
-index 0000000..08d79a1
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
-@@ -0,0 +1,20 @@
-+require ttf.inc
-+
-+DESCRIPTION = "Ubuntu Font Family - TTF Version"
-+HOMEPAGE = "http://font.ubuntu.com"
-+LICENSE = "UFL"
-+LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=325a1a9029112a2405e743c7f816427b"
-+PR = "r0"
-+
-+SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}.zip"
-+
-+SRC_URI[md5sum] = "a1fc70f5a5b1d096ab8310886cddaa1c"
-+SRC_URI[sha256sum] = "107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c"
-+
-+S = "${WORKDIR}/ubuntu-font-family-${PV}"
-+
-+PACKAGES = "${PN}-dbg ttf-ubuntu-mono ttf-ubuntu-sans"
-+RRECOMMENDS_${PN}-dbg = ""
-+
-+FILES_ttf-ubuntu-mono  = "${datadir}/fonts/truetype/*Mono*"
-+FILES_ttf-ubuntu-sans  = "${datadir}/fonts/truetype/Ubuntu-*"
+diff --git a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb b/meta-oe/recipes-devtools/libedit/libedit_20120601.bb
+similarity index 70%
+rename from meta-oe/recipes-devtools/libedit/libedit_20110802.bb
+rename to meta-oe/recipes-devtools/libedit/libedit_20120601.bb
+index 2aac727..1be967d 100644
+--- a/meta-oe/recipes-devtools/libedit/libedit_20110802.bb
++++ b/meta-oe/recipes-devtools/libedit/libedit_20120601.bb
+@@ -12,5 +12,5 @@ SRC_URI = "http://www.thrysoee.dk/editline/${PN}-${PV}-3.0.tar.gz"
+ 
+ S = "${WORKDIR}/${PN}-${PV}-3.0"
+ 
+-SRC_URI[md5sum] = "0ea42e2c794da8ed32f6307b427f6590"
+-SRC_URI[sha256sum] = "0b5ec9aa41faff761cda7819add93e9d8cb9c0bad85e65a686475e8375ac8a71"
++SRC_URI[md5sum] = "e50f6a7afb4de00c81650f7b1a0f5aea"
++SRC_URI[sha256sum] = "51f0f4b4a97b7ebab26e7b5c2564c47628cdb3042fd8ba8d0605c719d2541918"
 -- 
 1.7.10.4
 
